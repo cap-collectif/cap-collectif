@@ -30,7 +30,7 @@
                         </a>
                     </h2>
                 {% endif %}
-                {% if proposal.isTrashed and proposal.enabled == true %}
+                {% if proposal.isTrashed() and proposal.enabled == true %}
                     <p class="excerpt">
                         {{ proposal.summary }}
                     </p>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             {% endif %}
-            {% if proposal.isTrashed %}
+            {% if proposal.isTrashed() %}
                 <div class="{{ 'proposal__status status--default' }}">
                     {% if proposal.enabled == true %}
                         {{ 'proposal.show.trashed.reason.moderated' | trans({}, 'CapcoAppBundle') }}

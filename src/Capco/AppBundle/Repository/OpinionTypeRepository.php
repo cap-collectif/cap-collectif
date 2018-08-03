@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\OpinionType;
@@ -26,35 +25,27 @@ class OpinionTypeRepository extends EntityRepository
     public function getAsArrayById(string $id)
     {
         $qb = $this->createQueryBuilder('ot')
-          ->where('ot.id = :id')
-          ->setParameter('id', $id)
-    ;
-
+            ->where('ot.id = :id')
+            ->setParameter('id', $id);
         return $qb->getQuery()->getSingleResult(Query::HYDRATE_ARRAY);
     }
 
     public function getChildren(OpinionType $parent)
     {
         $qb = $this->createQueryBuilder('ot')
-          ->andWhere('ot.parent = :parent')
-          ->orderBy('ot.position', 'ASC')
-          ->setParameter('parent', $parent)
-    ;
-
+            ->andWhere('ot.parent = :parent')
+            ->orderBy('ot.position', 'ASC')
+            ->setParameter('parent', $parent);
         return $qb->getQuery()->getArrayResult();
     }
 
     public function getOrderedRootNodesQuery(ConsultationStepType $stepType = null)
     {
         $qb = $this->createQueryBuilder('ot')
-              ->andWhere('ot.parent is NULL')
-              ->orderBy('ot.position', 'ASC')
-        ;
-
+            ->andWhere('ot.parent is NULL')
+            ->orderBy('ot.position', 'ASC');
         if ($stepType) {
-            $qb
-                ->andWhere('ot.consultationStepType = :ct')
-                ->setParameter('ct', $stepType);
+            $qb->andWhere('ot.consultationStepType = :ct')->setParameter('ct', $stepType);
         } else {
             $qb->andWhere('ot.consultationStepType IS NULL');
         }
@@ -86,9 +77,7 @@ class OpinionTypeRepository extends EntityRepository
             ->orderBy('ot.position', 'ASC')
             ->addOrderBy('o.createdAt', 'DESC');
 
-        return $qb
-            ->getQuery()
-            ->getResult();
+        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -116,9 +105,7 @@ class OpinionTypeRepository extends EntityRepository
             ->orderBy('ot.position', 'ASC')
             ->addOrderBy('o.createdAt', 'DESC');
 
-        return $qb
-            ->getQuery()
-            ->getScalarResult();
+        return $qb->getQuery()->getScalarResult();
     }
 
     /**
@@ -132,20 +119,28 @@ class OpinionTypeRepository extends EntityRepository
     public function getAllowedTypesWithOpinionCount(ConsultationStep $step, $allowedTypes)
     {
         $qb = $this->createQueryBuilder('ot')
-            ->select('ot.id', 'ot.title', 'ot.color', 'ot.isEnabled', 'ot.slug', 'ot.defaultFilter', 'count(o.id) as total_opinions_count')
-            ->leftJoin('ot.Opinions', 'o', 'WITH', 'o.isEnabled = :enabled AND o.step = :step AND o.isTrashed = :notTrashed')
+            ->select(
+                'ot.id',
+                'ot.title',
+                'ot.color',
+                'ot.isEnabled',
+                'ot.slug',
+                'ot.defaultFilter',
+                'count(o.id) as total_opinions_count'
+            )
+            ->leftJoin(
+                'ot.Opinions',
+                'o',
+                'WITH',
+                'o.isEnabled = :enabled AND o.step = :step AND o.trashedAt IS NULL'
+            )
             ->andWhere('ot IN (:allowedTypes)')
             ->setParameter('step', $step)
             ->setParameter('enabled', true)
-            ->setParameter('notTrashed', false)
             ->setParameter('allowedTypes', $allowedTypes)
             ->addGroupBy('ot')
-            ->orderBy('ot.position', 'ASC')
-        ;
-
-        return $qb
-            ->getQuery()
-            ->getArrayResult();
+            ->orderBy('ot.position', 'ASC');
+        return $qb->getQuery()->getArrayResult();
     }
 
     /**
@@ -155,26 +150,22 @@ class OpinionTypeRepository extends EntityRepository
      */
     public function getOrderedByPosition()
     {
-        $qb = $this->createQueryBuilder('ot')
-            ->orderBy('ot.position', 'ASC');
+        $qb = $this->createQueryBuilder('ot')->orderBy('ot.position', 'ASC');
 
-        return $qb
-            ->getQuery()
-            ->getResult();
+        return $qb->getQuery()->getResult();
     }
 
     public function getRootOpinionTypes()
     {
         $qb = $this->createQueryBuilder('ot')
             ->where('ot.parent IS NULL')
-            ->orderBy('ot.position', 'ASC')
-        ;
-
+            ->orderBy('ot.position', 'ASC');
         return $qb->getQuery()->getResult();
     }
 
-    public function getLinkableOpinionTypesForConsultationStepType(ConsultationStepType $consultationStepType)
-    {
+    public function getLinkableOpinionTypesForConsultationStepType(
+        ConsultationStepType $consultationStepType
+    ) {
         $qb = $this->createQueryBuilder('ot')
             ->addSelect('otat', 'at')
             ->leftJoin('ot.appendixTypes', 'otat')
@@ -184,9 +175,7 @@ class OpinionTypeRepository extends EntityRepository
             ->andWhere('ot.consultationStepType = :type')
             ->setParameter('enabled', true)
             ->setParameter('linkable', true)
-            ->setParameter('type', $consultationStepType)
-        ;
-
+            ->setParameter('type', $consultationStepType);
         return $qb->getQuery()->getResult();
     }
 }

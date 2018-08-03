@@ -14,7 +14,7 @@
             <p>{{ 'source.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_project_show_opinion', {'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug}) }}">{{ opinion.title }}</a></p>
         {% endif %}
         <p>
-            {% if source.isTrashed %}
+            {% if source.isTrashed() %}
                 <span class="label label-default" style="position: static; margin-right: 5px;">
                     {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
                 </span>

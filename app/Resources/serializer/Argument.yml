@@ -32,10 +32,6 @@ Capco\AppBundle\Entity\Argument:
       type: Capco\UserBundle\Entity\User
       serialized_name: author
       groups: [Opinions, OpinionVersions, UserMedias]
-    isTrashed:
-      expose: true
-      type: boolean
-      groups: [Opinions, OpinionVersions]
     isEnabled:
       expose: true
       type: boolean

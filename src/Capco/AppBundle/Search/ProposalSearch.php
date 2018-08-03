@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Entity\Proposal;
@@ -34,16 +33,25 @@ class ProposalSearch extends Search
         $this->type = 'proposal';
     }
 
-    public function searchProposals(int $offset, int $limit, string $order = null, $terms, array $providedFilters, string $seed): array
-    {
+    public function searchProposals(
+        int $offset,
+        int $limit,
+        string $order = null,
+        $terms,
+        array $providedFilters,
+        string $seed
+    ): array {
         $boolQuery = new Query\BoolQuery();
-        $boolQuery = $this->searchTermsInMultipleFields($boolQuery, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
+        $boolQuery = $this->searchTermsInMultipleFields(
+            $boolQuery,
+            self::SEARCH_FIELDS,
+            $terms,
+            'phrase_prefix'
+        );
 
         $filters = $this->getFilters($providedFilters);
         foreach ($filters as $key => $value) {
-            $boolQuery->addMust(new Term([
-                $key => ['value' => $value],
-            ]));
+            $boolQuery->addMust(new Term([$key => ['value' => $value]]));
         }
         $boolQuery->addMust(new Exists('id'));
 
@@ -52,19 +60,26 @@ class ProposalSearch extends Search
         } else {
             $query = new Query($boolQuery);
             if ($order) {
-                $query->setSort($this->getSort($order, $providedFilters['collectStep'] ?? $providedFilters['selectionStep']));
+                $query->setSort(
+                    $this->getSort(
+                        $order,
+                        $providedFilters['collectStep'] ?? $providedFilters['selectionStep']
+                    )
+                );
             }
         }
         $query
             ->setSource(['id'])
             ->setFrom($offset)
-            ->setSize($limit)
-        ;
-
+            ->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
 
         return [
-            'proposals' => $this->getHydratedResults(array_map(function (Result $result) { return $result->getData()['id']; }, $resultSet->getResults())),
+            'proposals' => $this->getHydratedResults(
+                array_map(function (Result $result) {
+                    return $result->getData()['id'];
+                }, $resultSet->getResults())
+            ),
             'count' => $resultSet->getTotalHits(),
             'order' => $order,
         ];
@@ -74,64 +89,65 @@ class ProposalSearch extends Search
     {
         // We can't use findById because we would lost the correct order of ids
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        return array_values(array_filter(array_map(function (string $id) {
-            return $this->proposalRepo->findOneBy(['id' => $id, 'deletedAt' => null]);
-        }, $ids), function (?Proposal $proposal) {return null !== $proposal; }));
+        return array_values(
+            array_filter(
+                array_map(function (string $id) {
+                    return $this->proposalRepo->findOneBy(['id' => $id, 'deletedAt' => null]);
+                }, $ids),
+                function (?Proposal $proposal) {
+                    return null !== $proposal;
+                }
+            )
+        );
     }
 
     private function getSort(string $order, string $stepId): array
     {
         switch ($order) {
-          case 'old':
-              $sortField = 'createdAt';
-              $sortOrder = 'asc';
-              break;
-          case 'last':
-              $sortField = 'createdAt';
-              $sortOrder = 'desc';
-              break;
-          case 'votes':
-              return [
-                'votesCountByStep.count' => [
-                  'order' => 'desc',
-                  'nested_path' => 'votesCountByStep',
-                  'nested_filter' => [
-                      'term' => ['votesCountByStep.step.id' => $stepId],
-                  ],
-                ],
-              ];
-              break;
-          case 'least-votes':
-              return [
-                'votesCountByStep.count' => [
-                  'order' => 'asc',
-                  'nested_path' => 'votesCountByStep',
-                  'nested_filter' => [
-                      'term' => ['votesCountByStep.step.id' => $stepId],
-                  ],
-                ],
-              ];
-              break;
-          case 'comments':
-              $sortField = 'commentsCount';
-              $sortOrder = 'desc';
-              break;
-          case 'expensive':
-              $sortField = 'estimation';
-              $sortOrder = 'desc';
-              break;
-          case 'cheap':
-              $sortField = 'estimation';
-              $sortOrder = 'asc';
-              break;
-          default:
-              throw new \RuntimeException('Unknow order: ' . $order);
-              break;
-      }
+            case 'old':
+                $sortField = 'createdAt';
+                $sortOrder = 'asc';
+                break;
+            case 'last':
+                $sortField = 'createdAt';
+                $sortOrder = 'desc';
+                break;
+            case 'votes':
+                return [
+                    'votesCountByStep.count' => [
+                        'order' => 'desc',
+                        'nested_path' => 'votesCountByStep',
+                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
+                    ],
+                ];
+                break;
+            case 'least-votes':
+                return [
+                    'votesCountByStep.count' => [
+                        'order' => 'asc',
+                        'nested_path' => 'votesCountByStep',
+                        'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
+                    ],
+                ];
+                break;
+            case 'comments':
+                $sortField = 'commentsCount';
+                $sortOrder = 'desc';
+                break;
+            case 'expensive':
+                $sortField = 'estimation';
+                $sortOrder = 'desc';
+                break;
+            case 'cheap':
+                $sortField = 'estimation';
+                $sortOrder = 'asc';
+                break;
+            default:
+                throw new \RuntimeException('Unknow order: ' . $order);
+                break;
+        }
 
-        return [
-          $sortField => ['order' => $sortOrder],
-      ];
+        return [$sortField => ['order' => $sortOrder]];
     }
 
     private function getFilters(array $providedFilters): array
@@ -140,7 +156,7 @@ class ProposalSearch extends Search
 
         // Trashed proposals are indexed
         // but most of the time we don't want to see them
-        $filters['isTrashed'] = false;
+        $filters['trashed'] = false;
 
         if (array_key_exists('selectionStep', $providedFilters)) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];

@@ -23,7 +23,7 @@
 
         <p class="opinion__text {% if comment.body | length > 500 %} more {% endif %}">
             {% spaceless %}
-                {% if comment.isTrashed %}<span class="label label-default" style="position: static">{{ 'comment.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
+                {% if comment.isTrashed() %}<span class="label label-default" style="position: static">{{ 'comment.trashed.label'|trans({}, 'CapcoAppBundle') }}</span> {% endif %}
                 {{ comment.body }}
             {% endspaceless %}
         </p>

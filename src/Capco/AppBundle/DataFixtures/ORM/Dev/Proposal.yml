@@ -5,7 +5,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user502'
     proposalForm: '@proposalform1'
     theme: '@theme2'
@@ -25,7 +24,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user502'
     proposalForm: '@proposalform1'
     theme: '@theme2'
@@ -48,7 +46,6 @@ Capco\AppBundle\Entity\Proposal:
     enabled: true
     rating: 4
     annotation: Lancer l'appel d'offre
-    isTrashed: false
     author: '@user5'
     proposalForm: '@proposalform1'
     theme: '@theme3'
@@ -71,7 +68,6 @@ Capco\AppBundle\Entity\Proposal:
     enabled: true
     rating: 3
     annotation: Vérifier les normes de sécurité
-    isTrashed: false
     author: '@user502'
     proposalForm: '@proposalform1'
     theme: '@theme2'
@@ -92,7 +88,6 @@ Capco\AppBundle\Entity\Proposal:
     enabled: true
     rating: 1
     annotation: Renvoyer l'idée à l'église
-    isTrashed: false
     author: '@user7'
     proposalForm: '@proposalform1'
     theme: '@theme2'
@@ -107,7 +102,7 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: true
+    trashedStatus: 'visible'
     rating: 1
     author: '@user7'
     publishedAt: <(new \DateTime('2015-03-01'))>
@@ -123,7 +118,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: false
-    isTrashed: false
     rating: 3
     author: '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>
@@ -138,7 +132,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: false
     rating: 3
     author: '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>
@@ -155,7 +148,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: false
     rating: 3
     likers: ['@user1', '@user2', '@user3']
     author: '@user4'
@@ -174,7 +166,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: false
     rating: 3
     author: '@user4'
     proposalForm: '@proposalform3'
@@ -190,7 +181,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: false
     rating: 3
     author: '@user4'
     proposalForm: '@proposalform1'
@@ -206,7 +196,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: false
     rating: 3
     author: '@user4'
     proposalForm: '@proposalform1'
@@ -222,7 +211,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: false
     rating: 3
     author: '@user5'
     proposalForm: '@proposalform4'
@@ -238,7 +226,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: false
     rating: 3
     author: '@user5'
     proposalForm: '@proposalform4'
@@ -254,7 +241,6 @@ Capco\AppBundle\Entity\Proposal:
     body: |
       <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform5'
     theme: '@theme2'
@@ -268,7 +254,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition 15
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform6'
     reference: 1
@@ -278,7 +263,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition 16
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform6'
     reference: 2
@@ -288,7 +272,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition 17
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user5'
     proposalForm: '@proposalform7'
     reference: 1
@@ -298,7 +281,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition 18
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform7'
     reference: 2
@@ -308,7 +290,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition brouillon 1
     body: <p><text(100)></p>
     enabled: false
-    isTrashed: false
     draft: true
     author: '@user501'
     proposalForm: '@proposalform1'
@@ -321,7 +302,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition brouillon 2
     body: <p><text(100)></p>
     enabled: false
-    isTrashed: false
     draft: true
     author: '@user1'
     proposalForm: '@proposalform1'
@@ -334,7 +314,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition brouillon 3
     body: <p><text(100)></p>
     enabled: false
-    isTrashed: false
     draft: true
     author: '@user4'
     proposalForm: '@proposalform1'
@@ -347,7 +326,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition vraiment intéressante
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 666
@@ -357,7 +335,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition vraiment intéressante 2
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 667
@@ -367,7 +344,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition 1
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 1
@@ -377,7 +353,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition 2
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 2
@@ -387,7 +362,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition 3
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 3

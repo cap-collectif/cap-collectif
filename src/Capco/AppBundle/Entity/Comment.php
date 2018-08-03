@@ -12,6 +12,7 @@ use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -40,6 +41,7 @@ abstract class Comment implements Publishable, Contribution, VotableInterface, H
     use UuidTrait;
     use TextableTrait;
     use TimestampableTrait;
+    use TrashableTrait;
     use PublishableTrait;
 
     public static $sortCriterias = [
@@ -107,27 +109,6 @@ abstract class Comment implements Publishable, Contribution, VotableInterface, H
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Comment", cascade={"persist", "remove"})
      */
     protected $Reports;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_trashed", type="boolean")
-     */
-    protected $isTrashed = false;
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"isTrashed"})
-     * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
-     */
-    protected $trashedAt = null;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="trashed_reason", type="text", nullable=true)
-     */
-    protected $trashedReason = null;
 
     public function __construct()
     {
@@ -362,63 +343,6 @@ abstract class Comment implements Publishable, Contribution, VotableInterface, H
         return $this;
     }
 
-    /**
-     * Get isTrashed.
-     *
-     * @return bool
-     */
-    public function getIsTrashed()
-    {
-        return $this->isTrashed;
-    }
-
-    public function setIsTrashed(bool $isTrashed = null): self
-    {
-        if ($isTrashed !== $this->isTrashed) {
-            if (!$isTrashed) {
-                $this->trashedReason = null;
-                $this->trashedAt = null;
-            }
-        }
-        $this->isTrashed = $isTrashed;
-
-        return $this;
-    }
-
-    /**
-     * Get trashedAt.
-     *
-     * @return \DateTime
-     */
-    public function getTrashedAt()
-    {
-        return $this->trashedAt;
-    }
-
-    public function setTrashedAt($trashedAt): self
-    {
-        $this->trashedAt = $trashedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get trashedReason.
-     *
-     * @return string
-     */
-    public function getTrashedReason()
-    {
-        return $this->trashedReason;
-    }
-
-    public function setTrashedReason($trashedReason): self
-    {
-        $this->trashedReason = $trashedReason;
-
-        return $this;
-    }
-
     // ************************ Custom methods *********************************
 
     /**
@@ -447,17 +371,14 @@ abstract class Comment implements Publishable, Contribution, VotableInterface, H
         return $this->isEnabled && $this->canDisplayRelatedObject();
     }
 
-    /**
-     * @return bool
-     */
-    public function canContribute()
+    public function canContribute(): bool
     {
-        return $this->isEnabled && !$this->isTrashed && $this->canContributeToRelatedObject();
+        return $this->isEnabled && !$this->isTrashed() && $this->canContributeToRelatedObject();
     }
 
-    public function canVote()
+    public function canVote(): bool
     {
-        return $this->isEnabled && !$this->isTrashed;
+        return $this->isEnabled && !$this->isTrashed();
     }
 
     public function removeCommentFromRelatedObject()

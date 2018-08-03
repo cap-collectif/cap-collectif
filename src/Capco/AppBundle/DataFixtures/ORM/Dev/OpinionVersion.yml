@@ -8,7 +8,6 @@ Capco\AppBundle\Entity\OpinionVersion:
       <p><text(100)></p>
       <p><text(300)></p>
     enabled: true
-    isTrashed: false
     author: '@user5'
     parent: '@opinion57'
     comment: bououh
@@ -24,7 +23,6 @@ Capco\AppBundle\Entity\OpinionVersion:
       <p><text(100)></p>
       <p><text(300)></p>
     enabled: true
-    isTrashed: false
     author: '@user2'
     parent: '@opinion57'
     comment: bououh
@@ -38,7 +36,6 @@ Capco\AppBundle\Entity\OpinionVersion:
       <p><text(100)></p>
       <p><text(300)></p>
     enabled: true
-    isTrashed: false
     author: '@user2'
     parent: '@opinion57'
     comment: bououh
@@ -51,7 +48,7 @@ Capco\AppBundle\Entity\OpinionVersion:
       <p><text(100)></p>
       <p><text(300)></p>
     enabled: true
-    isTrashed: true
+    trashedStatus: 'visible'
     author: '@user2'
     parent: '@opinion<numberBetween(57,59)>'
     comment: Coeur avec les doigts !
@@ -64,6 +61,5 @@ Capco\AppBundle\Entity\OpinionVersion:
       <p><text(100)></p>
       <p><text(300)></p>
     enabled: true
-    isTrashed: false
     author: '@user5'
     parent: '@opinion51'

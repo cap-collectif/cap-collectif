@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -19,16 +18,18 @@ class EventCommentRepository extends EntityRepository
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.Event', 'e')
-            ->leftJoin('c.answers', 'ans', 'WITH', 'ans.isEnabled = :enabled AND ans.isTrashed = :notTrashed')
+            ->leftJoin(
+                'c.answers',
+                'ans',
+                'WITH',
+                'ans.isEnabled = :enabled AND ans.trashedAt IS NULL'
+            )
             ->andWhere('c.Event = :event')
             ->andWhere('c.parent is NULL')
-            ->andWhere('c.isTrashed = :notTrashed')
+            ->andWhere('c.trashedAt IS NOT NULL')
             ->setParameter('event', $event)
             ->setParameter('enabled', true)
-            ->setParameter('notTrashed', false)
-            ->orderBy('c.pinned', 'DESC')
-        ;
-
+            ->orderBy('c.pinned', 'DESC');
         if ('old' === $filter) {
             $qb->addOrderBy('c.createdAt', 'ASC');
         }
@@ -41,9 +42,7 @@ class EventCommentRepository extends EntityRepository
             $qb->addOrderBy('c.votesCount', 'DESC');
         }
 
-        $qb
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
+        $qb->setFirstResult($offset)->setMaxResults($limit);
 
         return new Paginator($qb);
     }
@@ -51,12 +50,10 @@ class EventCommentRepository extends EntityRepository
     public function countCommentsAndAnswersEnabledByEvent($event)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-                   ->select('count(c.id)')
-                   ->andWhere('c.Event = :event')
-                   ->andWhere('c.isTrashed = false')
-                   ->setParameter('event', $event)
-                ;
-
+            ->select('count(c.id)')
+            ->andWhere('c.Event = :event')
+            ->andWhere('c.trashedAt IS NULL')
+            ->setParameter('event', $event);
         return $qb->getQuery()->getSingleScalarResult();
     }
 

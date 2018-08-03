@@ -487,7 +487,7 @@ class Proposal
 
     public function canDisplay(): bool
     {
-        return $this->enabled && !$this->isTrashed && $this->getStep()->canDisplay();
+        return $this->enabled && !$this->isTrashed() && $this->getStep()->canDisplay();
     }
 
     public function isPrivate(): bool
@@ -513,7 +513,7 @@ class Proposal
     {
         return (
             ($this->enabled || $this->isDraft()) &&
-            !$this->isTrashed &&
+            !$this->isTrashed() &&
             $this->getStep() &&
             $this->getStep()->canContribute()
         );
@@ -523,7 +523,7 @@ class Proposal
     {
         return (
             $this->enabled &&
-            !$this->isTrashed &&
+            !$this->isTrashed() &&
             $this->proposalForm &&
             $this->proposalForm->isCommentable() &&
             $this->getIsCommentable()
@@ -576,7 +576,7 @@ class Proposal
 
     public function isPublished(): bool
     {
-        return $this->enabled && !$this->isTrashed;
+        return $this->enabled && !$this->isTrashed();
     }
 
     public function getSelectionSteps(): array

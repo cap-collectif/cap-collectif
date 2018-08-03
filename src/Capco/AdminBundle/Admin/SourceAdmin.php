@@ -31,7 +31,7 @@ class SourceAdmin extends Admin
             ->add('updatedAt', null, ['label' => 'admin.fields.source.updated_at'])
             ->add('createdAt', null, ['label' => 'admin.fields.source.created_at'])
             ->add('isEnabled', null, ['label' => 'admin.fields.source.is_enabled'])
-            ->add('isTrashed', null, ['label' => 'admin.fields.source.is_trashed'])
+            ->add('trashedStatus', null, ['label' => 'admin.fields.source.is_trashed'])
             ->add('expired', null, ['label' => 'admin.global.expired']);
     }
 
@@ -49,7 +49,7 @@ class SourceAdmin extends Admin
                 'editable' => true,
                 'label' => 'admin.fields.source.is_enabled',
             ])
-            ->add('isTrashed', null, [
+            ->add('trashedStatus', null, [
                 'editable' => true,
                 'label' => 'admin.fields.source.is_trashed',
             ])
@@ -85,13 +85,12 @@ class SourceAdmin extends Admin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
-                'attr' =>
-                    [
-                        'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                        'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                    ],
+                'attr' => [
+                    'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
+                    'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
+                ],
             ])
-            ->add('isTrashed', null, [
+            ->add('trashedStatus', null, [
                 'label' => 'admin.fields.source.is_trashed',
                 'required' => false,
             ])
@@ -115,7 +114,7 @@ class SourceAdmin extends Admin
             ->add('isEnabled', null, ['label' => 'admin.fields.source.is_enabled'])
             ->add('createdAt', null, ['label' => 'admin.fields.source.created_at'])
             ->add('updatedAt', null, ['label' => 'admin.fields.source.updated_at'])
-            ->add('isTrashed', null, ['label' => 'admin.fields.source.is_trashed']);
+            ->add('trashedStatus', null, ['label' => 'admin.fields.source.is_trashed']);
         if ($subject->getIsTrashed()) {
             $showMapper
                 ->add('trashedAt', null, ['label' => 'admin.fields.source.trashed_at'])
@@ -125,6 +124,5 @@ class SourceAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-
     }
 }

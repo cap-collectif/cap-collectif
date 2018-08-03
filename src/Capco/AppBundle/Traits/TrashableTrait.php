@@ -1,19 +1,17 @@
 <?php
-
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 trait TrashableTrait
 {
     /**
-     * @ORM\Column(name="trashed", type="boolean")
+     * @ORM\Column(name="trashed_status", type="string", nullable=true, columnDefinition="ENUM('visible', 'invisible')")
      */
-    private $isTrashed = false;
+    private $trashedStatus;
 
     /**
-     * @Gedmo\Timestampable(on="change", field={"isTrashed"})
      * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
      */
     private $trashedAt = null;
@@ -23,66 +21,41 @@ trait TrashableTrait
      */
     private $trashedReason = null;
 
-    /**
-     * @return bool
-     */
-    public function getIsTrashed()
+    public function isTrashed(): bool
     {
-        return $this->isTrashed;
+        return $this->trashedStatus !== null;
     }
 
-    public function isTrashed()
+    public function setTrashed(?string $status)
     {
-        return $this->isTrashed;
-    }
-
-    public function setTrashed($isTrashed)
-    {
-        if (!$isTrashed) {
+        if (!$status) {
+            $this->trashedStatus = null;
             $this->trashedReason = null;
             $this->trashedAt = null;
+            return $this;
         }
-        $this->isTrashed = $isTrashed;
+
+        if (
+            !in_array($status, array(
+                TrashableInterface::STATUS_VISIBLE,
+                TrashableInterface::STATUS_INVISIBLE,
+            ))
+        ) {
+            throw new \InvalidArgumentException("Invalid status");
+        }
+
+        $this->trashedStatus = $status;
+        $this->trashedAt = new \DateTime();
 
         return $this;
     }
 
-    /**
-     * @param bool $isTrashed
-     */
-    public function setIsTrashed($isTrashed)
-    {
-        if (!$isTrashed) {
-            $this->trashedReason = null;
-            $this->trashedAt = null;
-        }
-        $this->isTrashed = $isTrashed;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getTrashedAt()
+    public function getTrashedAt(): ?\DateTime
     {
         return $this->trashedAt;
     }
 
-    /**
-     * @param \DateTime $trashedAt
-     */
-    public function setTrashedAt($trashedAt)
-    {
-        $this->trashedAt = $trashedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTrashedReason()
+    public function getTrashedReason(): ?string
     {
         return $this->trashedReason;
     }

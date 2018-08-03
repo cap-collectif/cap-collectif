@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Post;
@@ -20,16 +19,18 @@ class PostCommentRepository extends EntityRepository
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.post', 'p')
-            ->leftJoin('c.answers', 'ans', 'WITH', 'ans.isEnabled = :enabled AND ans.isTrashed = :notTrashed')
+            ->leftJoin(
+                'c.answers',
+                'ans',
+                'WITH',
+                'ans.isEnabled = :enabled AND ans.trashedAt IS NULL'
+            )
             ->andWhere('c.post = :post')
             ->andWhere('c.parent is NULL')
-            ->andWhere('c.isTrashed = :notTrashed')
+            ->andWhere('c.trashedAt IS NULL')
             ->setParameter('enabled', true)
-            ->setParameter('notTrashed', false)
             ->setParameter('post', $post)
-            ->orderBy('c.pinned', 'DESC')
-        ;
-
+            ->orderBy('c.pinned', 'DESC');
         if ('old' === $filter) {
             $qb->addOrderBy('c.updatedAt', 'ASC');
         }
@@ -42,22 +43,23 @@ class PostCommentRepository extends EntityRepository
             $qb->addOrderBy('c.votesCount', 'DESC');
         }
 
-        $qb
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
+        $qb->setFirstResult($offset)->setMaxResults($limit);
 
         return new Paginator($qb);
     }
 
-    public function getAllByPost(Post $post, ?int $limit = null, string $field, int $offset = 0, string $direction = 'ASC'): Paginator
-    {
+    public function getAllByPost(
+        Post $post,
+        ?int $limit = null,
+        string $field,
+        int $offset = 0,
+        string $direction = 'ASC'
+    ): Paginator {
         $qb = $this->createQueryBuilder('c')
             ->andWhere('c.post = :post')
             ->andWhere('c.parent is NULL')
             ->setParameter('post', $post)
-            ->orderBy('c.pinned', 'DESC')
-        ;
-
+            ->orderBy('c.pinned', 'DESC');
         if ('CREATED_AT' === $field) {
             $qb->addOrderBy('c.createdAt', $direction);
         }
@@ -70,9 +72,7 @@ class PostCommentRepository extends EntityRepository
             $qb->addOrderBy('c.votesCount', $direction);
         }
 
-        $qb
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
+        $qb->setFirstResult($offset)->setMaxResults($limit);
 
         return new Paginator($qb);
     }
@@ -80,12 +80,10 @@ class PostCommentRepository extends EntityRepository
     public function countCommentsAndAnswersEnabledByPost($post)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-                   ->select('count(c.id)')
-                   ->andWhere('c.post = :post')
-                   ->andWhere('c.isTrashed = false')
-                   ->setParameter('post', $post)
-                ;
-
+            ->select('count(c.id)')
+            ->andWhere('c.post = :post')
+            ->andWhere('c.trashedStatus IS NULL')
+            ->setParameter('post', $post);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -94,9 +92,7 @@ class PostCommentRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('count(c.id)')
             ->andWhere('c.post = :post')
-            ->setParameter('post', $post)
-        ;
-
+            ->setParameter('post', $post);
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -104,7 +100,6 @@ class PostCommentRepository extends EntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.isEnabled = true')
-            ->andWhere('c.expired = false')
-          ;
+            ->andWhere('c.expired = false');
     }
 }

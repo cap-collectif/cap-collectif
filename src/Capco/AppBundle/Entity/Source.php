@@ -14,6 +14,7 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Model\Publishable;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -33,6 +34,7 @@ class Source implements Contribution, TrashableInterface, VotableInterface, Publ
     use ExpirableTrait;
     use TextableTrait;
     use PublishableTrait;
+    use TrashableTrait;
 
     const TYPE_FOR = 1;
     const LINK = 0;
@@ -121,22 +123,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, Publ
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Source", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $reports;
-
-    /**
-     * @ORM\Column(name="is_trashed", type="boolean")
-     */
-    private $isTrashed = false;
-
-    /**
-     * @Gedmo\Timestampable(on="change", field={"isTrashed"})
-     * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
-     */
-    private $trashedAt = null;
-
-    /**
-     * @ORM\Column(name="trashed_reason", type="text", nullable=true)
-     */
-    private $trashedReason = null;
 
     public function __construct()
     {
@@ -331,53 +317,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, Publ
         return $this;
     }
 
-    public function getIsTrashed(): bool
-    {
-        return $this->isTrashed;
-    }
-
-    public function isTrashed(): bool
-    {
-        return $this->isTrashed;
-    }
-
-    public function setIsTrashed(bool $isTrashed): self
-    {
-        if ($isTrashed !== $this->isTrashed) {
-            if (false === $this->isTrashed) {
-                $this->trashedReason = null;
-                $this->trashedAt = null;
-            }
-        }
-        $this->isTrashed = $isTrashed;
-
-        return $this;
-    }
-
-    public function getTrashedAt(): ?\DateTime
-    {
-        return $this->trashedAt;
-    }
-
-    public function setTrashedAt(?\DateTime $trashedAt): self
-    {
-        $this->trashedAt = $trashedAt;
-
-        return $this;
-    }
-
-    public function getTrashedReason(): ?string
-    {
-        return $this->trashedReason;
-    }
-
-    public function setTrashedReason(?string $trashedReason): self
-    {
-        $this->trashedReason = $trashedReason;
-
-        return $this;
-    }
-
     // *************************** custom methods *******************************
 
     public function getLinkedOpinion(): Opinion
@@ -418,12 +357,12 @@ class Source implements Contribution, TrashableInterface, VotableInterface, Publ
 
     public function canContribute(): bool
     {
-        return $this->isEnabled && !$this->isTrashed && $this->getParent()->canContribute();
+        return $this->isEnabled && !$this->isTrashed() && $this->getParent()->canContribute();
     }
 
     public function isPublished(): bool
     {
-        return $this->isEnabled && !$this->isTrashed && $this->getParent()->isPublished();
+        return $this->isEnabled && !$this->isTrashed() && $this->getParent()->isPublished();
     }
 
     // ******************** Lifecycle ************************************

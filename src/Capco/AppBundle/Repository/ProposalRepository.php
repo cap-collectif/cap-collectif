@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\District;
@@ -65,15 +64,15 @@ class ProposalRepository extends EntityRepository
     public function countProposalsByFormAndEvaluer(ProposalForm $form, User $user): int
     {
         return $this->qbProposalsByFormAndEvaluer($form, $user)
-                  ->select('COUNT(proposal.id)')
-                  ->getQuery()
-                  ->getSingleScalarResult()
-        ;
+            ->select('COUNT(proposal.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     public function isViewerAnEvaluer(Proposal $proposal, User $user): bool
     {
-        return $this->createQueryBuilder('proposal')
+        return (
+            $this->createQueryBuilder('proposal')
                 ->select('COUNT(proposal.id)')
                 ->leftJoin('proposal.evaluers', 'group')
                 ->leftJoin('group.userGroups', 'userGroup')
@@ -82,27 +81,35 @@ class ProposalRepository extends EntityRepository
                 ->setParameter('id', $proposal->getId())
                 ->setParameter('user', $user)
                 ->getQuery()
-                ->getSingleScalarResult() > 0;
+                ->getSingleScalarResult() > 0
+        );
     }
 
     public function isViewerAnEvaluerOfAProposalOnForm(ProposalForm $form, User $user): bool
     {
-        return $this->createQueryBuilder('proposal')
-              ->select('COUNT(proposal.id)')
-              ->leftJoin('proposal.evaluers', 'group')
-              ->leftJoin('group.userGroups', 'userGroup')
-              ->andWhere('proposal.proposalForm = :form')
-              ->andWhere('userGroup.user = :user')
-              ->setParameter('form', $form)
-              ->setParameter('user', $user)
-              ->getQuery()
-              ->getSingleScalarResult() > 0;
+        return (
+            $this->createQueryBuilder('proposal')
+                ->select('COUNT(proposal.id)')
+                ->leftJoin('proposal.evaluers', 'group')
+                ->leftJoin('group.userGroups', 'userGroup')
+                ->andWhere('proposal.proposalForm = :form')
+                ->andWhere('userGroup.user = :user')
+                ->setParameter('form', $form)
+                ->setParameter('user', $user)
+                ->getQuery()
+                ->getSingleScalarResult() > 0
+        );
     }
 
-    public function getProposalsByFormAndEvaluer(ProposalForm $form, User $user, int $first, int $offset, string $field, string $direction = 'DESC'): Paginator
-    {
-        $qb = $this
-            ->qbProposalsByFormAndEvaluer($form, $user)
+    public function getProposalsByFormAndEvaluer(
+        ProposalForm $form,
+        User $user,
+        int $first,
+        int $offset,
+        string $field,
+        string $direction = 'DESC'
+    ): Paginator {
+        $qb = $this->qbProposalsByFormAndEvaluer($form, $user)
             ->setFirstResult($first)
             ->setMaxResults($offset);
 
@@ -140,9 +147,7 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.author = :author')
             ->setParameter('author', $user);
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     public function countAllByAuthor(User $user): int
@@ -151,18 +156,14 @@ class ProposalRepository extends EntityRepository
         $qb
             ->select('count(DISTINCT p)')
             ->andWhere('p.author = :author')
-            ->setParameter('author', $user)
-        ;
-
+            ->setParameter('author', $user);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('p');
-        $qb
-            ->andWhere('p.author = :author')
-            ->setParameter('author', $user);
+        $qb->andWhere('p.author = :author')->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -190,23 +191,19 @@ class ProposalRepository extends EntityRepository
             ->setParameter('stepId', $step->getId());
 
         if ($theme) {
-            $qb->andWhere('proposal.theme = :theme')
-                ->setParameter('theme', $theme);
+            $qb->andWhere('proposal.theme = :theme')->setParameter('theme', $theme);
         }
 
         if ($status) {
-            $qb->andWhere('proposal.status = :status')
-                ->setParameter('status', $status);
+            $qb->andWhere('proposal.status = :status')->setParameter('status', $status);
         }
 
         if ($district) {
-            $qb->andWhere('proposal.district = :district')
-                ->setParameter('district', $district);
+            $qb->andWhere('proposal.district = :district')->setParameter('district', $district);
         }
 
         if ($type) {
-            $qb->andWhere('author.userType = :type')
-                ->setParameter('type', $type);
+            $qb->andWhere('author.userType = :type')->setParameter('type', $type);
         }
 
         if ('old' === $order) {
@@ -226,17 +223,14 @@ class ProposalRepository extends EntityRepository
             $qb->addOrderBy('proposal.commentsCount', 'DESC');
         }
 
-        $qb
-            ->setFirstResult($first)
-            ->setMaxResults($offset);
+        $qb->setFirstResult($first)->setMaxResults($offset);
 
         return new Paginator($qb);
     }
 
     public function countPublishedForForm(ProposalForm $form): int
     {
-        $qb = $this
-            ->getIsEnabledQueryBuilder()
+        $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(proposal.id) as proposalsCount')
             ->andWhere('proposal.proposalForm = :proposalForm')
             ->setParameter('proposalForm', $form);
@@ -272,7 +266,7 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.theme', 'theme')
             ->leftJoin('proposal.status', 'status')
             ->leftJoin('proposal.district', 'district')
-            ->andWhere('proposal.isTrashed = false')
+            ->andWhere('proposal.trashedStatus IS NULL')
             ->orderBy('proposal.commentsCount', 'DESC')
             ->addOrderBy('proposal.createdAt', 'DESC')
             ->addGroupBy('proposal.id');
@@ -282,9 +276,7 @@ class ProposalRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     /**
@@ -312,38 +304,35 @@ class ProposalRepository extends EntityRepository
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     public function countByAuthorAndProject(User $author, Project $project): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
-          ->select('COUNT(DISTINCT proposal)')
-          ->leftJoin('proposal.proposalForm', 'form')
-          ->andWhere('form.step IN (:steps)')
-          ->setParameter('steps', array_map(function ($step) {
-              return $step;
-          }, $project->getRealSteps()))
-          ->andWhere('proposal.author = :author')
-          ->setParameter('author', $author)
-        ;
-
+            ->select('COUNT(DISTINCT proposal)')
+            ->leftJoin('proposal.proposalForm', 'form')
+            ->andWhere('form.step IN (:steps)')
+            ->setParameter(
+                'steps',
+                array_map(function ($step) {
+                    return $step;
+                }, $project->getRealSteps())
+            )
+            ->andWhere('proposal.author = :author')
+            ->setParameter('author', $author);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $author, CollectStep $step): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
-          ->select('COUNT(DISTINCT proposal)')
-          ->leftJoin('proposal.proposalForm', 'f')
-          ->andWhere('proposal.author = :author')
-          ->andWhere('f.step =:step')
-          ->setParameter('step', $step)
-          ->setParameter('author', $author)
-      ;
-
+            ->select('COUNT(DISTINCT proposal)')
+            ->leftJoin('proposal.proposalForm', 'f')
+            ->andWhere('proposal.author = :author')
+            ->andWhere('f.step =:step')
+            ->setParameter('step', $step)
+            ->setParameter('author', $author);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -360,7 +349,7 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('f.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->andWhere('pas.project = :project')
-            ->andWhere('p.isTrashed = true')
+            ->andWhere('p.trashedAt IS NOT NULL')
             ->setParameter('project', $project)
             ->orderBy('p.trashedAt', 'DESC');
 
@@ -370,7 +359,21 @@ class ProposalRepository extends EntityRepository
     public function getByProposalForm(ProposalForm $proposalForm, bool $asArray = false)
     {
         $qb = $this->createQueryBuilder('proposal')
-            ->addSelect('author', 'ut', 'amedia', 'category', 'theme', 'status', 'district', 'responses', 'questions', 'selectionVotes', 'votesaut', 'votesautut', 'proposalEvaluation')
+            ->addSelect(
+                'author',
+                'ut',
+                'amedia',
+                'category',
+                'theme',
+                'status',
+                'district',
+                'responses',
+                'questions',
+                'selectionVotes',
+                'votesaut',
+                'votesautut',
+                'proposalEvaluation'
+            )
             ->leftJoin('proposal.author', 'author')
             ->leftJoin('author.userType', 'ut')
             ->leftJoin('author.media', 'amedia')
@@ -432,18 +435,25 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, $limit = null, $themeId = null, $districtId = null, $categoryId = null): array
-    {
+    public function getProposalsWithVotesCountForSelectionStep(
+        SelectionStep $step,
+        $limit = null,
+        $themeId = null,
+        $districtId = null,
+        $categoryId = null
+    ): array {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('proposal.title as name')
-            ->addSelect('(
+            ->addSelect(
+                '(
                 SELECT COUNT(pv.id) as pvCount
                 FROM CapcoAppBundle:ProposalSelectionVote pv
                 LEFT JOIN pv.proposal as pvp
                 LEFT JOIN pv.selectionStep ss
                 WHERE ss.id = :stepId
                 AND pvp.id = proposal.id
-            ) as value')
+            ) as value'
+            )
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('selections.selectionStep', 'selectionStep')
             ->andWhere('selectionStep.id = :stepId')
@@ -489,8 +499,12 @@ class ProposalRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null, $categoryId = null): int
-    {
+    public function countForSelectionStep(
+        SelectionStep $step,
+        $themeId = null,
+        $districtId = null,
+        $categoryId = null
+    ): int {
         $qb = $this->getIsEnabledQueryBuilder('p')
             ->select('COUNT(p.id)')
             ->leftJoin('p.selections', 'selections')
@@ -522,10 +536,11 @@ class ProposalRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getWithFilledAddressQueryBuilder(QueryBuilder $queryBuilder, string $alias = 'proposal'): QueryBuilder
-    {
-        return $queryBuilder
-            ->andWhere($alias . '.address IS NOT NULL');
+    public function getWithFilledAddressQueryBuilder(
+        QueryBuilder $queryBuilder,
+        string $alias = 'proposal'
+    ): QueryBuilder {
+        return $queryBuilder->andWhere($alias . '.address IS NOT NULL');
     }
 
     public function findFollowingProposalByUser(User $user, $first = 0, $offset = 100): Paginator
@@ -543,7 +558,8 @@ class ProposalRepository extends EntityRepository
     public function countFollowingProposalByUser(User $user): int
     {
         $query = $this->createQueryBuilder('p');
-        $query->select('COUNT(p.id)')
+        $query
+            ->select('COUNT(p.id)')
             ->leftJoin('p.followers', 'f')
             ->where('f.user = :user')
             ->setParameter('user', $user);
@@ -551,90 +567,58 @@ class ProposalRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
-    public function countProposalVotesCreatedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
-    {
+    public function countProposalVotesCreatedBetween(
+        \DateTime $from,
+        \DateTime $to,
+        string $proposalId
+    ): array {
         $qb = $this->createQueryBuilder('proposal');
-        $qb->select('proposal.id')
-        ->addSelect('COUNT(selectionVotes.id) as sVotes,COUNT(collectVotes.id) as cVotes')
-        ->leftJoin('proposal.collectVotes', 'collectVotes')
-        ->leftJoin('proposal.selectionVotes', 'selectionVotes')
-        ->andWhere(
-            $qb->expr()->between(
-                'selectionVotes.createdAt',
-                ':from',
-                ':to'
-            ))
-            ->orWhere(
-                $qb->expr()->between(
-                    'collectVotes.createdAt',
-                    ':from',
-                    ':to'
-                ))
-            ->andWhere(
-                $qb->expr()->eq(
-                    'proposal.id',
-                    ':id'
-                ))
-            ->setParameters([
-                'from' => $from,
-                'to' => $to,
-                'id' => $proposalId,
-            ]);
+        $qb
+            ->select('proposal.id')
+            ->addSelect('COUNT(selectionVotes.id) as sVotes,COUNT(collectVotes.id) as cVotes')
+            ->leftJoin('proposal.collectVotes', 'collectVotes')
+            ->leftJoin('proposal.selectionVotes', 'selectionVotes')
+            ->andWhere($qb->expr()->between('selectionVotes.createdAt', ':from', ':to'))
+            ->orWhere($qb->expr()->between('collectVotes.createdAt', ':from', ':to'))
+            ->andWhere($qb->expr()->eq('proposal.id', ':id'))
+            ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId]);
 
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function countProposalCommentsCreatedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
-    {
+    public function countProposalCommentsCreatedBetween(
+        \DateTime $from,
+        \DateTime $to,
+        string $proposalId
+    ): array {
         $qb = $this->createQueryBuilder('proposal');
         $qb->select('proposal.id');
-        $qb->addSelect('COUNT(comments.id) as countComment')
+        $qb
+            ->addSelect('COUNT(comments.id) as countComment')
             ->leftJoin('proposal.comments', 'comments')
-            ->andWhere(
-                $qb->expr()->between(
-                    'comments.createdAt',
-                    ':from',
-                    ':to'
-                ))
-            ->andWhere(
-                $qb->expr()->eq(
-                    'proposal.id',
-                    ':id'
-                ))
-            ->setParameters([
-                'from' => $from,
-                'to' => $to,
-                'id' => $proposalId,
-            ]);
+            ->andWhere($qb->expr()->between('comments.createdAt', ':from', ':to'))
+            ->andWhere($qb->expr()->eq('proposal.id', ':id'))
+            ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId]);
 
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function proposalStepChangedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
-    {
+    public function proposalStepChangedBetween(
+        \DateTime $from,
+        \DateTime $to,
+        string $proposalId
+    ): array {
         $qb = $this->createQueryBuilder('proposal');
-        $qb->select('proposal.id')
+        $qb
+            ->select('proposal.id')
             ->addSelect('sStep.title as titleStep', 'selections.createdAt', 'status.name as sName')
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('selections.selectionStep', 'sStep')
             ->leftJoin('selections.status', 'status')
-            ->andWhere(
-                $qb->expr()->between(
-                    'selections.createdAt',
-                    ':from',
-                    ':to'
-                ))
-            ->andWhere(
-                $qb->expr()->eq(
-                    'proposal.id',
-                    ':id'
-                ))
+            ->andWhere($qb->expr()->between('selections.createdAt', ':from', ':to'))
+            ->andWhere($qb->expr()->eq('proposal.id', ':id'))
             ->orderBy('selections.createdAt', 'DESC')
-            ->setParameters([
-                'from' => $from,
-                'to' => $to,
-                'id' => $proposalId,
-            ]);
+            ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId]);
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -644,7 +628,7 @@ class ProposalRepository extends EntityRepository
         return $this->createQueryBuilder($alias)
             ->andWhere($alias . '.expired = false')
             ->andWhere($alias . '.draft = false')
-            ->andWhere($alias . '.isTrashed = false')
+            ->andWhere($alias . '.trashedAt IS NULL')
             ->andWhere($alias . '.deletedAt IS NULL')
             ->andWhere($alias . '.enabled = true');
     }

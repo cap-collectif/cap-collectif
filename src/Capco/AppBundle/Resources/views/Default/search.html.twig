@@ -82,7 +82,7 @@
                             {% endif %}
                             <li>
                                 <h4 class="h4 search-result__title">
-                                    {% if attribute(result.transformed, 'isTrashed') is defined and result.transformed.isTrashed == true %}
+                                    {% if attribute(result.transformed, 'isTrashed') is defined and result.transformed.isTrashed() == true %}
                                         <span
                                             class="label label-default">{{ 'comment.trashed.label' | trans({}, 'CapcoAppBundle') }}</span>
                                     {% endif %}

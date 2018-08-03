@@ -8,7 +8,6 @@ Capco\AppBundle\Entity\Argument:
     body: Coucou, je suis un bel argument !
     publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
-    isTrashed: false
     moderationToken: 'argument1ModerationToken'
   argument2:
     id: 'argument2'
@@ -18,7 +17,6 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
-    isTrashed: false
 
   argument{3..100}:
     id: 'argument<current()>'
@@ -28,7 +26,6 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
-    isTrashed: false
 
   argument{101..150}:
     id: 'argument<current()>'
@@ -38,7 +35,7 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
-    isTrashed: true
+    trashedStatus: 'visible'
 
   argument{151..175}:
     id: 'argument<current()>'
@@ -48,7 +45,7 @@ Capco\AppBundle\Entity\Argument:
     publishedAt: <(new \DateTime('2015-01-01'))>
     body: <text(300)>
     isEnabled: false
-    isTrashed: true
+    trashedStatus: 'invisible'
 
   argument{176..200}:
     id: 'argument<current()>'
@@ -58,7 +55,6 @@ Capco\AppBundle\Entity\Argument:
     publishedAt: <(new \DateTime('2015-01-01'))>
     body: <text(300)>
     isEnabled: false
-    isTrashed: false
 
   argument201:
     id: 'argument201'
@@ -68,7 +64,6 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
-    isTrashed: false
   argument202:
     id: 'argument202'
     Opinion: '@opinion51'
@@ -77,7 +72,6 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
-    isTrashed: false
 
   argument203:
     id: 'argument203'
@@ -87,7 +81,6 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
-    isTrashed: false
 
   # Argument on versions
   argument204:
@@ -98,7 +91,6 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
-    isTrashed: false
   argument205:
     id: 'argument205'
     opinionVersion: '@version1'
@@ -107,7 +99,6 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
-    isTrashed: false
 
   argument206:
     id: 'argument206'
@@ -116,7 +107,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user1'
     body: 'Que la force soit avec toi.'
     isEnabled: true
-    isTrashed: false
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
     moderationToken: 'argument206ModerationToken'
@@ -140,7 +130,7 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user1'
     body: 'Le spam c cool'
     isEnabled: true
-    isTrashed: true
+    trashedStatus: 'visible'
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
     trashedAt: <(new \DateTime('2017-03-01'))>
@@ -154,7 +144,6 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2016-03-01'))>
     isEnabled: true
-    isTrashed: false
 
   argument211:
     id: 'argument211'
@@ -164,7 +153,6 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2016-03-01'))>
     isEnabled: true
-    isTrashed: false
 
   argument212:
     id: 'argument212'
@@ -174,4 +162,3 @@ Capco\AppBundle\Entity\Argument:
     publishedAt: <(new \DateTime('2016-03-01'))>
     body: <text(300)>
     isEnabled: true
-    isTrashed: false

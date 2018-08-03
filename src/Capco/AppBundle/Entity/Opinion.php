@@ -536,7 +536,7 @@ class Opinion implements OpinionContributionInterface
 
     public function isPublished(): bool
     {
-        return $this->isEnabled && !$this->isTrashed;
+        return $this->isEnabled && !$this->isTrashed();
     }
 
     public function getSortedAppendices()

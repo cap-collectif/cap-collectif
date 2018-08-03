@@ -41,7 +41,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Opinion o set o.versionsCount = (
             select count(DISTINCT ov.id)
             from CapcoAppBundle:OpinionVersion ov
-            where ov.enabled = 1 AND ov.isTrashed = 0 AND ov.expired = 0 AND ov.parent = o
+            where ov.enabled = 1 AND ov.trashedAt IS NULL AND ov.expired = 0 AND ov.parent = o
         )'
         );
 
@@ -49,7 +49,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Opinion o set o.argumentsCount = (
           select count(DISTINCT a.id)
           from CapcoAppBundle:Argument a
-          WHERE a.isEnabled = 1 AND a.isTrashed = 0 AND a.expired = 0 AND a.opinion = o
+          WHERE a.isEnabled = 1 AND a.trashedAt IS NULL AND a.expired = 0 AND a.opinion = o
         )'
         );
 
@@ -57,7 +57,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Opinion o set o.sourcesCount = (
           select count(DISTINCT s.id)
           from CapcoAppBundle:Source s
-          WHERE s.isEnabled = 1 AND s.isTrashed = 0 AND s.expired = 0 AND s.opinion = o
+          WHERE s.isEnabled = 1 AND s.trashedAt IS NULL AND s.expired = 0 AND s.opinion = o
         )'
         );
 
@@ -107,7 +107,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:OpinionVersion ov set ov.argumentsCount = (
           select count(DISTINCT a.id)
           from CapcoAppBundle:Argument a
-          WHERE a.isEnabled = 1 AND a.isTrashed = 0 AND a.expired = 0 AND a.opinionVersion = ov
+          WHERE a.isEnabled = 1 AND a.trashedAt IS NULL AND a.expired = 0 AND a.opinionVersion = ov
         )'
         );
 
@@ -115,7 +115,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:OpinionVersion ov set ov.sourcesCount = (
           select count(DISTINCT s.id)
           from CapcoAppBundle:Source s
-          WHERE s.isEnabled = 1 AND s.isTrashed = 0 AND s.expired = 0 AND s.opinionVersion = ov
+          WHERE s.isEnabled = 1 AND s.trashedAt IS NULL AND s.expired = 0 AND s.opinionVersion = ov
         )'
         );
 
@@ -175,7 +175,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Post p set p.commentsCount = (
           select count(DISTINCT pc.id)
           from CapcoAppBundle:PostComment pc
-          where pc.post = p AND pc.isEnabled = 1 AND pc.isTrashed = 0 AND pc.expired = 0 GROUP BY pc.post
+          where pc.post = p AND pc.isEnabled = 1 AND pc.trashedAt IS NULL AND pc.expired = 0 GROUP BY pc.post
         )'
         );
 
@@ -183,7 +183,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Event e set e.commentsCount = (
           select count(DISTINCT ec.id)
           from CapcoAppBundle:EventComment ec
-          where ec.Event = e AND ec.isEnabled = 1 AND ec.isTrashed = 0 AND ec.expired = 0 GROUP BY ec.Event
+          where ec.Event = e AND ec.isEnabled = 1 AND ec.trashedAt IS NULL AND ec.expired = 0 GROUP BY ec.Event
         )'
         );
 
@@ -191,7 +191,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Proposal p set p.commentsCount = (
           select count(DISTINCT pc.id)
           from CapcoAppBundle:ProposalComment pc
-          where pc.proposal = p AND pc.isEnabled = 1 AND pc.isTrashed = 0 AND pc.expired = 0 GROUP BY pc.proposal
+          where pc.proposal = p AND pc.isEnabled = 1 AND pc.trashedAt IS NULL AND pc.expired = 0 GROUP BY pc.proposal
         )'
         );
 
@@ -201,7 +201,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionCount = (
           select count(DISTINCT o.id)
           from CapcoAppBundle:Opinion o
-          where o.step = cs AND o.isEnabled = 1 AND o.isTrashed = 0 AND o.expired = 0 group by o.step
+          where o.step = cs AND o.isEnabled = 1 AND o.trashedAt IS NULL AND o.expired = 0 group by o.step
         )'
         );
 
@@ -209,7 +209,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.opinionVersionsCount = (
           select count(DISTINCT ov.id)
           from CapcoAppBundle:OpinionVersion ov INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
-          where o.step = cs AND ov.enabled = 1 AND ov.isTrashed = 0 AND o.isEnabled = 1 AND o.isTrashed = 0 group by o.step
+          where o.step = cs AND ov.enabled = 1 AND ov.trashedAt IS NULL AND o.isEnabled = 1 AND o.trashedAt IS NULL group by o.step
         )'
         );
 
@@ -217,7 +217,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedOpinionCount = (
           select count(DISTINCT o.id)
           from CapcoAppBundle:Opinion o
-          where o.step = cs AND o.isEnabled = 1 AND o.isTrashed = 1 AND o.expired = 0 group by o.step
+          where o.step = cs AND o.isEnabled = 1 AND o.trashedAt IS NOT NULL AND o.expired = 0 group by o.step
         )'
         );
 
@@ -225,7 +225,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\ConsultationStep cs set cs.trashedOpinionVersionsCount = (
           select count(DISTINCT ov.id)
           from CapcoAppBundle:OpinionVersion ov INNER JOIN CapcoAppBundle:Opinion o WITH ov.parent = o
-          where o.step = cs AND ov.enabled = 1 AND ov.isTrashed = 1 AND o.isEnabled = 1 AND o.expired = 0 group by o.step
+          where o.step = cs AND ov.enabled = 1 AND ov.trashedAt IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 group by o.step
         )'
         );
 
@@ -236,7 +236,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE a.isEnabled = 1 AND a.isTrashed = 0 AND a.expired = 0 AND (
+          WHERE a.isEnabled = 1 AND a.trashedAt IS NULL AND a.expired = 0 AND (
             (a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs)
             OR
             (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = cs)
@@ -251,7 +251,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH a.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE a.isEnabled = 1 AND a.isTrashed = 1 AND (
+          WHERE a.isEnabled = 1 AND a.trashedAt IS NOT NULL AND (
             (a.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs)
             OR
             (a.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = cs)
@@ -266,7 +266,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE s.isEnabled = 1 AND s.isTrashed = 0 AND s.expired = 0 AND (
+          WHERE s.isEnabled = 1 AND s.trashedAt IS NULL AND s.expired = 0 AND (
             (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs)
             OR
             (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = cs)
@@ -281,7 +281,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
           LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
-          WHERE s.isEnabled = 1 AND s.isTrashed = 1 AND o.expired = 0 AND (
+          WHERE s.isEnabled = 1 AND s.trashedAt IS NOT NULL AND o.expired = 0 AND (
             (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs)
             OR
             (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = cs)
@@ -322,7 +322,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           select count(DISTINCT p.id)
           from CapcoAppBundle:Proposal p
           INNER JOIN CapcoAppBundle:ProposalForm pf WITH p.proposalForm = pf
-          where pf.step = cs AND p.expired = 0 AND p.draft = 0 AND p.isTrashed = 0 AND p.deletedAt IS NULL AND p.enabled = 1
+          where pf.step = cs AND p.expired = 0 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.enabled = 1
           group by pf.step
         )'
         );
@@ -353,9 +353,9 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )'
         );
 
-        $questionnaireSteps = $this->entityManager
-            ->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')
-            ->findAll();
+        $questionnaireSteps = $this->entityManager->getRepository(
+            'CapcoAppBundle:Steps\QuestionnaireStep'
+        )->findAll();
         foreach ($questionnaireSteps as $qs) {
             if ($qs->isOpen() || $this->force) {
                 $participants = $contributionResolver->countStepContributors($qs);
@@ -376,7 +376,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\SelectionStep ss set ss.votesCount = (
           select count(DISTINCT pv.id)
           from CapcoAppBundle:ProposalSelectionVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
-          where pv.selectionStep = ss AND pv.expired = 0 AND p.expired = 0 AND p.draft = 0 AND p.isTrashed = 0 AND p.deletedAt IS NULL AND p.enabled = 1
+          where pv.selectionStep = ss AND pv.expired = 0 AND p.expired = 0 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.enabled = 1
           group by pv.selectionStep
         )'
         );

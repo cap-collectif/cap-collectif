@@ -27,7 +27,7 @@ class SourceRepository extends EntityRepository
                 'a.username as author',
                 'ut.name as userType',
                 's.isEnabled as published',
-                's.isTrashed as trashed'
+                's.trashedAt as trashed'
             )
             ->leftJoin('s.author', 'a')
             ->leftJoin('a.userType', 'ut');
@@ -78,32 +78,6 @@ class SourceRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function getAllByOpinion(string $opinionId, $asArray = false)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'ut', 'cat', 'media')
-            ->leftJoin('s.author', 'aut')
-            ->leftJoin('aut.userType', 'ut')
-            ->leftJoin('s.category', 'cat')
-            ->leftJoin('s.media', 'media')
-            ->andWhere('s.opinion = :opinion')
-            ->setParameter('opinion', $opinionId);
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
-    }
-
-    public function getAllByVersion(string $versionId, $asArray = false)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('aut', 'ut', 'cat', 'media')
-            ->leftJoin('s.author', 'aut')
-            ->leftJoin('aut.userType', 'ut')
-            ->leftJoin('s.category', 'cat')
-            ->leftJoin('s.media', 'media')
-            ->andWhere('s.opinionVersion = :version')
-            ->setParameter('version', $versionId);
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
-    }
-
     public function getArrayById(string $id)
     {
         $qb = $this->createQueryBuilder('s')
@@ -114,93 +88,13 @@ class SourceRepository extends EntityRepository
                 's.updatedAt',
                 'a.username as author',
                 's.isEnabled as published',
-                's.isTrashed as trashed',
+                's.trashedAt as trashed',
                 's.body as body'
             )
             ->leftJoin('s.author', 'a')
             ->where('s.id = :id')
             ->setParameter('id', $id);
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
-    }
-
-    public function getByOpinion(Opinion $opinion, $offset, $limit, $filter, $trashed = false)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ca', 'o', 'aut', 'm', 'media')
-            ->leftJoin('s.category', 'ca')
-            ->leftJoin('s.media', 'media')
-            ->leftJoin('s.opinion', 'o')
-            ->leftJoin('s.author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->andWhere('s.isTrashed = :trashed')
-            ->andWhere('s.opinion = :opinion')
-            ->setParameter('opinion', $opinion)
-            ->setParameter('trashed', $trashed);
-        if ('old' === $filter) {
-            $qb->addOrderBy('s.updatedAt', 'ASC');
-        }
-
-        if ('last' === $filter) {
-            $qb->addOrderBy('s.updatedAt', 'DESC');
-        }
-
-        if ('popular' === $filter) {
-            $qb->addOrderBy('s.votesCount', 'DESC');
-            $qb->addOrderBy('s.updatedAt', 'DESC');
-        }
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function getByOpinionVersion(
-        OpinionVersion $version,
-        $offset,
-        $limit,
-        $filter,
-        $trashed = false
-    ) {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ca', 'o', 'aut', 'm', 'media')
-            ->leftJoin('s.category', 'ca')
-            ->leftJoin('s.media', 'media')
-            ->leftJoin('s.opinion', 'o')
-            ->leftJoin('s.author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->andWhere('s.isTrashed = :trashed')
-            ->andWhere('s.opinionVersion = :version')
-            ->setParameter('version', $version)
-            ->setParameter('trashed', $trashed);
-        if ('old' === $filter) {
-            $qb->addOrderBy('s.updatedAt', 'ASC');
-        }
-
-        if ('last' === $filter) {
-            $qb->addOrderBy('s.updatedAt', 'DESC');
-        }
-
-        if ('popular' === $filter) {
-            $qb->addOrderBy('s.votesCount', 'DESC');
-            $qb->addOrderBy('s.updatedAt', 'DESC');
-        }
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function getOneBySlug(string $slug)
-    {
-        return $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'v', 'o', 'cat', 'media')
-            ->leftJoin('s.author', 'a')
-            ->leftJoin('s.media', 'media')
-            ->leftJoin('s.category', 'cat')
-            ->leftJoin('a.media', 'm')
-            ->leftJoin('s.votes', 'v')
-            ->leftJoin('s.opinion', 'o')
-            ->andWhere('s.slug = :slug')
-            ->setParameter('slug', $slug)
-
-            ->getQuery()
-            ->getOneOrNullResult();
     }
 
     public function countByAuthorAndProject(User $author, Project $project): int
@@ -233,88 +127,6 @@ class SourceRepository extends EntityRepository
             ->setParameter('step', $step)
             ->setParameter('author', $author);
         return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    /**
-     * Get all trashed or unpublished sources for project.
-     */
-    public function getTrashedOrUnpublishedByProject(Project $project)
-    {
-        $qb = $this->createQueryBuilder('s')
-            ->addSelect('ca', 'o', 'aut', 'm', 'media')
-            ->leftJoin('s.category', 'ca')
-            ->leftJoin('s.media', 'media')
-            ->leftJoin('s.author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->leftJoin('s.opinion', 'o')
-            ->leftJoin('s.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->leftJoin('o.step', 'ostep')
-            ->leftJoin('ovo.step', 'ovostep')
-            ->leftJoin('ostep.projectAbstractStep', 'opas')
-            ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
-            ->andWhere('opas.project = :project OR ovopas.project = :project')
-            ->andWhere('s.isTrashed = :trashed OR s.isEnabled = :disabled')
-            ->setParameter('project', $project)
-            ->setParameter('trashed', true)
-            ->setParameter('disabled', false)
-            ->orderBy('s.trashedAt', 'DESC');
-
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * Get sources by opinion with user reports.
-     */
-    public function getByOpinionJoinUserReports($opinion, $user = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ca', 'o', 'aut', 'm', 'media', 'r')
-            ->leftJoin('s.category', 'ca')
-            ->leftJoin('s.media', 'media')
-            ->leftJoin('s.opinion', 'o')
-            ->leftJoin('s.author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->leftJoin('s.reports', 'r', 'WITH', 'r.Reporter =  :user')
-            ->andWhere('s.isTrashed = :notTrashed')
-            ->andWhere('s.opinion = :opinion')
-            ->setParameter('notTrashed', false)
-            ->setParameter('opinion', $opinion)
-            ->setParameter('user', $user)
-            ->orderBy('s.updatedAt', 'DESC');
-
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * Get enabled sources by project step.
-     *
-     * @param $step
-     * @param mixed $asArray
-     *
-     * @return mixed
-     */
-    public function getEnabledByConsultationStep(ConsultationStep $step, $asArray = false)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ca', 'o', 'ov', 'aut', 'votes')
-            ->leftJoin('s.category', 'ca')
-            ->leftJoin('s.author', 'aut')
-            ->leftJoin('s.votes', 'votes')
-            ->leftJoin('s.opinion', 'o')
-            ->leftJoin('s.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->andWhere(
-                '
-                (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step)
-                OR
-                (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step)
-            '
-            )
-            ->setParameter('step', $step)
-            ->orderBy('s.updatedAt', 'DESC');
-
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     public function countAllByAuthor(User $user): int
@@ -359,27 +171,6 @@ class SourceRepository extends EntityRepository
             ->orderBy('s.createdAt', 'DESC');
 
         return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * Count by user.
-     */
-    public function countByUser($user)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(s) as TotalSources')
-            ->leftJoin('s.opinion', 'o')
-            ->leftJoin('o.step', 'cs')
-            ->leftJoin('cs.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
-            ->andWhere('o.isEnabled = :enabled')
-            ->andWhere('cs.isEnabled = :enabled')
-            ->andWhere('c.isEnabled = :enabled')
-            ->andWhere('s.author = :author')
-            ->setParameter('enabled', true)
-            ->setParameter('author', $user);
-
-        return $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder()

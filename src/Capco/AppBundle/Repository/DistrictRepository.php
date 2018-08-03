@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -11,7 +10,8 @@ class DistrictRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('d')
             ->select('d.name as name')
-            ->addSelect('(
+            ->addSelect(
+                '(
                 SELECT COUNT(p.id) as pCount
                 FROM CapcoAppBundle:Proposal p
                 LEFT JOIN p.proposalForm pf
@@ -19,13 +19,12 @@ class DistrictRepository extends EntityRepository
                 WHERE pf.step = :step
                 AND p.enabled = true
                 AND pd.id = d.id
-                AND p.isTrashed = false
+                AND p.trashedStatus IS NULL
                 AND p.draft = false
-            ) as value')
+            ) as value'
+            )
             ->setParameter('step', $step)
-            ->orderBy('value', 'DESC')
-        ;
-
+            ->orderBy('value', 'DESC');
         if ($limit) {
             $qb->setMaxResults($limit);
         }
@@ -35,10 +34,7 @@ class DistrictRepository extends EntityRepository
 
     public function countAll(): int
     {
-        $qb = $this->createQueryBuilder('d')
-            ->select('COUNT(d.id)')
-        ;
-
+        $qb = $this->createQueryBuilder('d')->select('COUNT(d.id)');
         return $qb->getQuery()->getSingleScalarResult();
     }
 }

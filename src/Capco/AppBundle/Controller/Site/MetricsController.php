@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,7 +17,9 @@ class MetricsController extends Controller
         $registry = $this->get(CollectorRegistry::class);
         $formatter = new TextFormatter();
 
-        $registeredContributorCount = $this->get('capco.user.repository')->getRegisteredContributorCount();
+        $registeredContributorCount = $this->get(
+            'capco.user.repository'
+        )->getRegisteredContributorCount();
         $registeredCount = $this->get('capco.user.repository')->getRegisteredCount();
 
         $anonymousComments = $this->get('capco.comment.repository')->getAnonymousCount();
@@ -33,30 +34,44 @@ class MetricsController extends Controller
         $proposalCount = $this->get('capco.proposal.repository')->getCount();
         $replyCount = $this->get('capco.reply.repository')->getCount();
 
-        $contributionCount = $opinionCount + $versionCount + $argumentCount + $sourceCount + $proposalCount + $replyCount;
+        $contributionCount =
+            $opinionCount +
+            $versionCount +
+            $argumentCount +
+            $sourceCount +
+            $proposalCount +
+            $replyCount;
 
         $contributionTrashedCount = 0;
-        $contributionTrashedCount += $this->get('capco.opinion.repository')->countTrashed('isTrashed');
-        $contributionTrashedCount += $this->get('capco.opinion_version.repository')->countTrashed('isTrashed');
-        $contributionTrashedCount += $this->get('capco.argument.repository')->countTrashed('isTrashed');
-        $contributionTrashedCount += $this->get('capco.source.repository')->countTrashed('isTrashed');
-        $contributionTrashedCount += $this->get('capco.proposal.repository')->countTrashed('isTrashed');
+        $contributionTrashedCount += $this->get('capco.opinion.repository')->countTrashed();
+        $contributionTrashedCount += $this->get('capco.opinion_version.repository')->countTrashed();
+        $contributionTrashedCount += $this->get('capco.argument.repository')->countTrashed();
+        $contributionTrashedCount += $this->get('capco.source.repository')->countTrashed();
+        $contributionTrashedCount += $this->get('capco.proposal.repository')->countTrashed();
 
-        $projectCount = \count($this->get('capco.project.repository')->findBy(['isEnabled' => true]));
+        $projectCount = \count(
+            $this->get('capco.project.repository')->findBy(['isEnabled' => true])
+        );
         $steps = $this->get('capco.abstract_step.repository')->findAll();
-        $contribuableStepsCount = \count(array_reduce($steps, function ($step) {
-            return $step && $step->canContribute();
-        }));
+        $contribuableStepsCount = \count(
+            array_reduce($steps, function ($step) {
+                return $step && $step->canContribute();
+            })
+        );
 
         $reportCount = \count($this->get('capco.reporting.repository')->findAll());
         // Traité ou non ?
-        $reportArchivedCount = \count($this->get('capco.reporting.repository')->findBy(['isArchived' => true]));
+        $reportArchivedCount = \count(
+            $this->get('capco.reporting.repository')->findBy(['isArchived' => true])
+        );
 
         // Followers
         $followerCount = \count($this->get('capco.follower.repository')->findAll());
 
         // Newsletter inscription
-        $newsletterSubscriptionCount = \count($this->get('capco.newsletter_subscription.repository')->findAll());
+        $newsletterSubscriptionCount = \count(
+            $this->get('capco.newsletter_subscription.repository')->findAll()
+        );
 
         // Theme
         // Blog

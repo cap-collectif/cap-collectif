@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\ProposalForm;
@@ -20,32 +19,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ProjectDownloadResolver
 {
-    protected static $collectHeaders = [
-        'reference',
-        'title',
-        'summary',
-        'author',
-        'author_id',
-        'user_type',
-        'created',
-        'updated',
-        'expired',
-        'trashed',
-        'trashed_date',
-        'trashed_reason',
-        'link',
-        'status',
-        'estimation',
-        'likers',
-        'category',
-        'theme',
-        'address',
-        'district',
-        'content',
-        'media',
-        'vote_position',
-    ];
-
     protected $em;
     protected $translator;
     protected $urlArrayResolver;
@@ -100,38 +73,15 @@ class ProjectDownloadResolver
         return $headers;
     }
 
-    public function getContent(AbstractStep $step, bool $withVote = false): \PHPExcel_Writer_IWriter
-    {
+    public function getContent(
+        AbstractStep $step,
+        bool $withVote = false
+    ): \PHPExcel_Writer_IWriter {
         if (!$step) {
             throw new NotFoundHttpException('Step not found');
         }
 
-        if ($step instanceof CollectStep) {
-            $this->withVote = $withVote;
-
-            if (
-                ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName)
-                && !\in_array('servicePilote', self::$collectHeaders, true)
-            ) {
-                array_push(
-                    self::$collectHeaders,
-                    'servicePilote',
-                    'domaniality',
-                    'compatibility',
-                    'environmentalImpact',
-                    'dimension',
-                    'functioningImpact',
-                    'evaluation',
-                    'delay',
-                    'proposedAnswer'
-                );
-            }
-            $this->headers = self::$collectHeaders;
-            if (null !== $step->getProposalForm()) {
-                $this->initCustomFieldsInHeader($step->getProposalForm());
-            }
-            $data = $this->getCollectStepData($step);
-        } elseif ($step instanceof QuestionnaireStep) {
+        if ($step instanceof QuestionnaireStep) {
             $this->headers = $this->getQuestionnaireStepHeaders($step);
             $data = $this->getQuestionnaireStepData($step);
         } else {
@@ -157,65 +107,6 @@ class ProjectDownloadResolver
         $this->data[] = $item;
     }
 
-    // ********************************** Generate data items **************************************
-
-    public function getCollectStepData(CollectStep $collectStep): array
-    {
-        if (!$collectStep->getProposalForm()) {
-            return [];
-        }
-
-        $this->data = [];
-
-        $proposals = $this->em
-            ->getRepository('CapcoAppBundle:Proposal')
-            ->getByProposalForm($collectStep->getProposalForm(), true);
-        foreach ($proposals as &$proposal) {
-            $proposal['Step'] = $collectStep;
-            $proposal['entity_type'] = 'proposal';
-            $entity = $this->em
-                ->getRepository('CapcoAppBundle:Proposal')
-                ->find($proposal['id']);
-            $selectionVotesCount = $this->em
-                ->getRepository('CapcoAppBundle:ProposalSelectionVote')
-                ->getCountsByProposalGroupedByStepsTitle($entity);
-            $collectVotesCount = $this->em
-                ->getRepository('CapcoAppBundle:ProposalCollectVote')
-                ->getCountsByProposalGroupedByStepsTitle($entity);
-
-            $str = '';
-            $loop = 1;
-            $nbVotes = \count($selectionVotesCount) + \count($collectVotesCount);
-            foreach ($selectionVotesCount as $step => $value) {
-                $str .= $step . ' : ' . $value;
-                $str .= $loop < $nbVotes ? ', ' : '';
-                ++$loop;
-            }
-
-            foreach ($collectVotesCount as $step => $value) {
-                $str .= $step . ' : ' . $value;
-                $str .= $loop < $nbVotes ? ', ' : '';
-                ++$loop;
-            }
-
-            $proposal['status'] = null !== $entity->lastStatus() ? $entity->lastStatus()->getName() : '';
-            $proposal['reference'] = $entity->getFullReference();
-            $proposal['media'] = $entity->getMedia();
-
-            $proposal['likers'] = '';
-            foreach ($entity->getLikers() as $liker) {
-                $separator = '' === $proposal['likers'] ? '' : ', ';
-                $proposal['likers'] = $proposal['likers'] . $separator . $liker->getDisplayName();
-            }
-        }
-
-        unset($proposal);
-
-        $this->getProposalsData($proposals);
-
-        return $this->data;
-    }
-
     public function getQuestionnaireStepData(QuestionnaireStep $questionnaireStep): array
     {
         $this->data = [];
@@ -223,11 +114,9 @@ class ProjectDownloadResolver
 
         if ($questionnaireStep->getQuestionnaire()) {
             // Replies
-            $replies = $this->em
-                ->getRepository('CapcoAppBundle:Reply')
-                ->getEnabledByQuestionnaireAsArray(
-                    $questionnaireStep->getQuestionnaire()
-                );
+            $replies = $this->em->getRepository(
+                'CapcoAppBundle:Reply'
+            )->getEnabledByQuestionnaireAsArray($questionnaireStep->getQuestionnaire());
         }
 
         $this->getRepliesData($replies);
@@ -241,162 +130,19 @@ class ProjectDownloadResolver
         return $this->data;
     }
 
-    public function getProposalsData($proposals)
-    {
-        foreach ($proposals as $proposal) {
-            if ($proposal['enabled']) {
-                $this->addItemToData($this->getProposalItem($proposal));
-                if ($this->withVote) {
-                    $this->getProposalVotesData($proposal['selectionVotes'], $proposal);
-                }
-            }
-        }
-    }
-
-    public function getProposalVotesData($votes, $proposal)
-    {
-        foreach ($votes as $vote) {
-            $this->addItemToData($this->getProposalVoteItem($vote, $proposal));
-        }
-    }
-
     public function getRepliesData($replies)
     {
         foreach ($replies as $reply) {
             if ($reply['enabled']) {
-                $responses = $this->em
-                    ->getRepository('CapcoAppBundle:Responses\AbstractResponse')
-                    ->getByReplyAsArray($reply['id']);
+                $responses = $this->em->getRepository(
+                    'CapcoAppBundle:Responses\AbstractResponse'
+                )->getByReplyAsArray($reply['id']);
                 $this->addItemToData($this->getReplyItem($reply, $responses));
             }
         }
     }
 
     // *************************** Generate items *******************************************
-
-    private function getProposalItem(array $proposal): array
-    {
-        $na = $this->translator->trans('global.non_applicable', [], 'CapcoAppBundle');
-        $author = $proposal['author'];
-        $authorName = $author ? $author['username'] : $this->translator->trans(
-            'project_download.values.user_removed',
-            [],
-            'CapcoAppBundle'
-        );
-        $authorId = $author ? $author['id'] : $na;
-        $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
-
-        $media = '';
-        if ($proposal['media']) {
-            $media = $this->httpFoundExtension->generateAbsoluteUrl($this->mediaExtension->path($proposal['media'], 'proposal'));
-        }
-
-        $expired = $proposal['expired'] ? 'yes' : 'no';
-
-        $item = [
-            'reference' => $proposal['reference'],
-            'title' => $proposal['title'],
-            'summary' => $proposal['summary'] ?: '',
-            'author' => $authorName,
-            'author_id' => $authorId,
-            'user_type' => $authorType,
-            'category' => $proposal['category'] ? $proposal['category']['name'] : '',
-            'content' => $this->getProposalContent($proposal),
-            'link' => $this->urlArrayResolver->getRoute($proposal),
-            'created' => $this->dateToString($proposal['createdAt']),
-            'updated' => $proposal['updatedAt'] !== $proposal['createdAt'] ? $this->dateToString(
-                $proposal['updatedAt']
-            ) : null,
-            'media' => $media,
-            'trashed' => $this->booleanToString(!$proposal['enabled'] || $proposal['isTrashed']),
-            'trashed_date' => $this->dateToString($proposal['trashedAt']),
-            'trashed_reason' => $proposal['trashedReason'],
-            'theme' => $proposal['theme'] ? $proposal['theme']['title'] : '',
-            'address' => $proposal['address'] ? Map::decodeAddressFromJson($proposal['address']) : '',
-            'district' => $proposal['district'] ? $proposal['district']['name'] : '',
-            'status' => $proposal['status'],
-            'estimation' => $proposal['estimation'] ? $proposal['estimation'] . ' €' : '',
-            'likers' => $proposal['likers'],
-            'expired' => $this->translator->trans('global.' . $expired, [], 'CapcoAppBundle'),
-            'vote_position' => $na,
-        ];
-
-        $item = $this->addCustomsFieldForProposal($proposal, $item);
-        $item = $this->addEvaluationsFieldsForProposal($proposal, $item);
-
-        if ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName) {
-            $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
-            $item['domaniality'] = $proposal['domaniality'] ? $this->formatText(html_entity_decode($proposal['domaniality'])) : '';
-            $item['compatibility'] = $proposal['compatibility'] ? $this->formatText(html_entity_decode($proposal['compatibility'])) : '';
-            $item['environmentalImpact'] = $proposal['environmentalImpact'] ? $this->formatText(html_entity_decode($proposal['environmentalImpact'])) : '';
-            $item['dimension'] = $proposal['dimension'] ? $this->formatText(html_entity_decode($proposal['dimension'])) : '';
-            $item['functioningImpact'] = $proposal['functioningImpact'] ? $this->formatText(html_entity_decode($proposal['functioningImpact'])) : '';
-            $item['evaluation'] = $proposal['evaluation'] ? $this->formatText(html_entity_decode($proposal['evaluation'])) : '';
-            $item['delay'] = $proposal['delay'] ? $this->formatText(html_entity_decode($proposal['delay'])) : '';
-            $item['proposedAnswer'] = $proposal['proposedAnswer'] ? $this->formatText(html_entity_decode($proposal['proposedAnswer'])) : '';
-        }
-
-        return $item;
-    }
-
-    private function getProposalVoteItem(array $vote, array $proposal): array
-    {
-        $na = $this->translator->trans('global.non_applicable', [], 'CapcoAppBundle');
-        $author = $vote['user'];
-        $authorName = $author ? $author['username'] : $vote['username'];
-        $authorId = $author ? $author['id'] : $na;
-        $authorType = $author && $author['userType'] ? $author['userType']['name'] : $na;
-
-        $media = '';
-        if ($proposal['media']) {
-            $media = $this->httpFoundExtension->generateAbsoluteUrl($this->mediaExtension->path($proposal['media'], 'proposal'));
-        }
-
-        $expired = $proposal['expired'] ? 'yes' : 'no';
-
-        $item = [
-            'reference' => $vote['id'],
-            'title' => $proposal['title'],
-            'summary' => $proposal['summary'] ?: '',
-            'content' => $na,
-            'category' => $proposal['category'] ? $proposal['category']['name'] : '',
-            'link' => $na,
-            'created' => $this->dateToString($vote['createdAt']),
-            'updated' => $na,
-            'media' => $media,
-            'author' => $authorName,
-            'author_id' => $authorId,
-            'user_type' => $authorType,
-            'trashed' => $this->booleanToString(!$proposal['enabled'] || $proposal['isTrashed']),
-            'trashed_date' => $na,
-            'trashed_reason' => $na,
-            'theme' => $proposal['theme'] ? $proposal['theme']['title'] : '',
-            'address' => $proposal['address'] ? Map::decodeAddressFromJson($proposal['address']) : '',
-            'district' => $proposal['district'] ? $proposal['district']['name'] : '',
-            'status' => $na,
-            'estimation' => $na,
-            'likers' => $proposal['likers'],
-            'expired' => $this->translator->trans('global.' . $expired, [], 'CapcoAppBundle'),
-            'vote_position' => $vote['position'],
-        ];
-
-        $item = $this->addCustomsFieldForProposal($proposal, $item);
-        $item = $this->addEvaluationsFieldsForProposal($proposal, $item);
-
-        if ('rennes' === $this->instanceName || 'rennespreprod' === $this->instanceName) {
-            $item['servicePilote'] = $proposal['servicePilote'] ? $this->formatText(html_entity_decode($proposal['servicePilote'])) : '';
-            $item['domaniality'] = $proposal['domaniality'] ? $this->formatText(html_entity_decode($proposal['domaniality'])) : '';
-            $item['compatibility'] = $proposal['compatibility'] ? $this->formatText(html_entity_decode($proposal['compatibility'])) : '';
-            $item['environmentalImpact'] = $proposal['environmentalImpact'] ? $this->formatText(html_entity_decode($proposal['environmentalImpact'])) : '';
-            $item['dimension'] = $proposal['dimension'] ? $this->formatText(html_entity_decode($proposal['dimension'])) : '';
-            $item['functioningImpact'] = $proposal['functioningImpact'] ? $this->formatText(html_entity_decode($proposal['functioningImpact'])) : '';
-            $item['evaluation'] = $proposal['evaluation'] ? $this->formatText(html_entity_decode($proposal['evaluation'])) : '';
-            $item['delay'] = $proposal['delay'] ? $this->formatText(html_entity_decode($proposal['delay'])) : '';
-            $item['proposedAnswer'] = $proposal['proposedAnswer'] ? $this->formatText(html_entity_decode($proposal['proposedAnswer'])) : '';
-        }
-
-        return $item;
-    }
 
     private function getReplyItem(array $reply, array $responses): array
     {
@@ -440,19 +186,15 @@ class ProjectDownloadResolver
         return $originalValue;
     }
 
-    private function getProposalContent(array $proposal)
-    {
-        return $this->formatText(html_entity_decode($proposal['body']));
-    }
-
     private function getWriterFromData($data, $headers, $title): \PHPExcel_Writer_IWriter
     {
         $phpExcelObject = $this->phpexcel->createPHPExcelObject();
-        $phpExcelObject->getProperties()
-            ->setTitle($title);
+        $phpExcelObject->getProperties()->setTitle($title);
         $phpExcelObject->setActiveSheetIndex();
         $sheet = $phpExcelObject->getActiveSheet();
-        $sheet->setTitle($this->translator->trans('project_download.sheet.title', [], 'CapcoAppBundle'));
+        $sheet->setTitle(
+            $this->translator->trans('project_download.sheet.title', [], 'CapcoAppBundle')
+        );
         \PHPExcel_Settings::setCacheStorageMethod(
             \PHPExcel_CachedObjectStorageFactory::cache_in_memory,
             ['memoryCacheSize' => '512M']
@@ -465,7 +207,11 @@ class ProjectDownloadResolver
             if (\is_array($header)) {
                 $header = $header['label'];
             } elseif (!\in_array($header, $this->customFields, true)) {
-                $header = $this->translator->trans('project_download.label.' . $header, [], 'CapcoAppBundle');
+                $header = $this->translator->trans(
+                    'project_download.label.' . $header,
+                    [],
+                    'CapcoAppBundle'
+                );
             }
             $sheet->setCellValueExplicit($currentColumn . $startRow, $header);
             ++$currentColumn;
@@ -502,53 +248,6 @@ class ProjectDownloadResolver
         }
 
         $this->headers = array_merge($this->headers, $this->customFields);
-    }
-
-    private function addCustomsFieldForProposal(array $proposal, array $item): array
-    {
-        foreach ($this->customFields as $customField) {
-            $item[$customField] = '';
-        }
-
-        foreach ($proposal['responses'] as $response) {
-            if (\in_array($response['question']['title'], $this->customFields, true)) {
-                $item[$response['question']['title']] = (string) $response['value'];
-            }
-        }
-
-        return $item;
-    }
-
-    private function addEvaluationsFieldsForProposal(array $proposal, array $item): array
-    {
-        if (null !== $proposal['proposalEvaluation']) {
-            $evaluation = $this->em->getRepository('CapcoAppBundle:ProposalEvaluation')->find($proposal['proposalEvaluation']['id']);
-            foreach ($evaluation->getResponses() as $response) {
-                $item[$response->getQuestion()->getTitle()] = $this->getEvaluationResponseValue($response);
-            }
-        }
-
-        return $item;
-    }
-
-    private function getEvaluationResponseValue($response)
-    {
-        if ($response instanceof ValueResponse) {
-            $r = $response->getValue();
-
-            return isset($r['labels']) ? implode(';', $r['labels']) : $r;
-        }
-
-        if ($response instanceof MediaResponse) {
-            $filenames = [];
-            foreach ($response->getMedias() as $media) {
-                $filenames[] = $this->httpFoundExtension->generateAbsoluteUrl($this->mediaExtension->path($media, 'proposal'));
-            }
-
-            return implode(';', $filenames);
-        }
-
-        return 'unknown';
     }
 
     private function booleanToString($boolean): string

@@ -37,10 +37,6 @@ Capco\AppBundle\Entity\Comment:
       expose: true
       type: string
       groups: [Comments]
-    isTrashed:
-      expose: true
-      type: boolean
-      groups: [Comments]
     answers:
       expose: true
       groups: [Comments, UserMedias]
@@ -53,3 +49,8 @@ Capco\AppBundle\Entity\Comment:
       serialized_name: canContribute
       type: boolean
       groups: [Comments]
+    isTrashed:
+      expose: true
+      type: boolean
+      groups: [Comments]
+      serialized_name: trashed

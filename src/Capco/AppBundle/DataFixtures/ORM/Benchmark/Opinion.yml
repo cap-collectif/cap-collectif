@@ -7,10 +7,8 @@ Capco\AppBundle\Entity\Opinion:
              <p><text(100)></p>
              <p><text(300)></p>
         isEnabled: true
-        isTrashed: false
         Author: '@user<numberBetween(1, 100)>'
         OpinionType: '@opinionType1'
-        step: '@cstep1'
     opinion{2001..10000}:
         id: opinion<current()>
         step: '@cstep1'
@@ -19,7 +17,5 @@ Capco\AppBundle\Entity\Opinion:
              <p><text(100)></p>
              <p><text(300)></p>
         isEnabled: true
-        isTrashed: false
         Author: '@user<numberBetween(1, 100)>'
         OpinionType: '@opinionType<numberBetween(2, 5)>'
-        step: '@cstep1'

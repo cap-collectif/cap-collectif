@@ -614,7 +614,7 @@ class UserRepository extends EntityRepository
                 'u.proposals',
                 'proposals',
                 'WITH',
-                'proposals.expired = 0 AND proposals.draft = 0 AND proposals.isTrashed = 0 AND proposals.deletedAt IS NULL AND proposals.enabled = 1'
+                'proposals.expired = 0 AND proposals.draft = 0 AND proposals.trashedAt IS NULL AND proposals.deletedAt IS NULL AND proposals.enabled = 1'
             )
             ->leftJoin('proposals.proposalForm', 'proposalForm')
             ->where('proposalForm.step = :step')
@@ -800,7 +800,7 @@ class UserRepository extends EntityRepository
             ->andWhere('proposal_selection_vote.expired = 0')
             ->andWhere('proposal.expired = 0')
             ->andWhere('proposal.draft = 0')
-            ->andWhere('proposal.isTrashed = 0')
+            ->andWhere('proposal.trashedAt IS NULL')
             ->andWhere('proposal.enabled = 1')
             ->andWhere('proposal.deletedAt IS NULL')
             ->andWhere('proposal_selection_vote.selectionStep = :step');

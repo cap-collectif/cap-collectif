@@ -380,7 +380,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function canContribute(): bool
     {
-        return $this->enabled && !$this->isTrashed && $this->getParent()->canContribute();
+        return $this->enabled && !$this->isTrashed() && $this->getParent()->canContribute();
     }
 
     public function canBeDeleted(): bool
@@ -390,7 +390,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function isPublished(): bool
     {
-        return $this->enabled && !$this->isTrashed && $this->parent->isPublished();
+        return $this->enabled && !$this->isTrashed() && $this->parent->isPublished();
     }
 
     public function increaseArgumentsCount()

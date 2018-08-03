@@ -35,7 +35,7 @@ Scenario: API client wants to list comments of an event
         "answers": [],
         "authorEmail": @null@,
         "authorName": @null@,
-        "isTrashed": @boolean@,
+        "trashed": @boolean@,
         "_links": {
           "edit": @string@
         },
@@ -69,7 +69,7 @@ Scenario: API client wants to find the first comment of an event
         "answers": @...@,
         "authorEmail": @null@,
         "authorName": @null@,
-        "isTrashed": @boolean@,
+        "trashed": @boolean@,
         "_links": @...@,
         "hasUserReported": @boolean@,
         "hasUserVoted": @boolean@,

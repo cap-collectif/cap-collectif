@@ -26,7 +26,7 @@ class ArgumentRepository extends EntityRepository
                 'aut.username as author',
                 'ut.name as userType',
                 'a.isEnabled as published',
-                'a.isTrashed as trashed',
+                'a.trashedAt as trashed',
                 'c.title as project'
             )
             ->leftJoin('a.Author', 'aut')
@@ -47,7 +47,7 @@ class ArgumentRepository extends EntityRepository
                 'a.updatedAt',
                 'aut.username as author',
                 'a.isEnabled as published',
-                'a.isTrashed as trashed',
+                'a.trashedAt as trashed',
                 'a.body as body',
                 'c.title as project'
             )
@@ -128,9 +128,8 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('ovos.projectAbstractStep', 'ovopas')
             ->leftJoin('os.projectAbstractStep', 'opas')
             ->andWhere('opas.project = :project OR ovopas.project = :project')
-            ->andWhere('a.isTrashed = :trashed OR a.isEnabled = :disabled')
+            ->andWhere('a.trashedAt IS NOT NULL OR a.isEnabled = :disabled')
             ->setParameter('project', $project)
-            ->setParameter('trashed', true)
             ->setParameter('disabled', false)
             ->orderBy('a.trashedAt', 'DESC')
             ->getQuery()
@@ -253,7 +252,7 @@ class ArgumentRepository extends EntityRepository
 
     private function getByContributionQB(Argumentable $contribution)
     {
-        $qb = $this->getIsEnabledQueryBuilder()->andWhere('a.isTrashed = false');
+        $qb = $this->getIsEnabledQueryBuilder()->andWhere('a.trashedAt IS NULL');
         if ($contribution instanceof Opinion) {
             $qb->andWhere('a.opinion = :opinion')->setParameter('opinion', $contribution);
         }

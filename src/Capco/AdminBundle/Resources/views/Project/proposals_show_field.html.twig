@@ -22,8 +22,8 @@
                     </label>
                 </td>
                 <td>
-                    <label class="label label{% if proposal.isTrashed %}-success{% else %}-danger{% endif %}">
-                        {% if proposal.isTrashed %}
+                    <label class="label label{% if proposal.isTrashed() %}-success{% else %}-danger{% endif %}">
+                        {% if proposal.isTrashed() %}
                             {{ 'admin.fields.project.proposals_table.yes'|trans({}, 'CapcoAppBundle') }}
                         {% else %}
                             {{ 'admin.fields.project.proposals_table.no'|trans({}, 'CapcoAppBundle') }}

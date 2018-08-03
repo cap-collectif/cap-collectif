@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\UserBundle\Entity\User;
@@ -30,6 +31,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
     use TextableTrait;
     use ModerableTrait;
     use PublishableTrait;
+    use TrashableTrait;
 
     const TYPE_AGAINST = 0;
     const TYPE_FOR = 1;
@@ -69,22 +71,6 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
      * @Assert\Choice(choices={0, 1})
      */
     private $type = 1;
-
-    /**
-     * @ORM\Column(name="is_trashed", type="boolean")
-     */
-    private $isTrashed = false;
-
-    /**
-     * @Gedmo\Timestampable(on="change", field={"isTrashed"})
-     * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
-     */
-    private $trashedAt = null;
-
-    /**
-     * @ORM\Column(name="trashed_reason", type="text", nullable=true)
-     */
-    private $trashedReason = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="arguments")
@@ -193,54 +179,6 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
     public function setType(int $type)
     {
         $this->type = $type;
-    }
-
-    public function getIsTrashed(): bool
-    {
-        return $this->isTrashed;
-    }
-
-    public function isTrashed(): bool
-    {
-        return $this->isTrashed;
-    }
-
-    public function setIsTrashed(bool $isTrashed): self
-    {
-        $this->isTrashed = $isTrashed;
-
-        return $this;
-    }
-
-    public function getTrashedAt(): ?\DateTime
-    {
-        return $this->trashedAt;
-    }
-
-    public function setTrashed(bool $trashed): self
-    {
-        $this->isTrashed = $trashed;
-
-        return $this;
-    }
-
-    public function setTrashedAt(\DateTime $trashedAt = null): self
-    {
-        $this->trashedAt = $trashedAt;
-
-        return $this;
-    }
-
-    public function getTrashedReason(): ?string
-    {
-        return $this->trashedReason;
-    }
-
-    public function setTrashedReason(string $trashedReason = null): self
-    {
-        $this->trashedReason = $trashedReason;
-
-        return $this;
     }
 
     public function getAuthor()

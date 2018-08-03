@@ -33,7 +33,7 @@
                 <span class="label label-default" style="position: static; margin-right: 5px">
                     {{ 'opinion.show.disabled.label'|trans({}, 'CapcoAppBundle') }}
                 </span>
-            {% elseif argument.isTrashed %}
+            {% elseif argument.isTrashed() %}
                 <span class="label label-default" style="position: static; margin-right: 5px">
                     {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
                 </span>

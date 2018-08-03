@@ -25,7 +25,7 @@ class OpinionRepository extends EntityRepository
                 'o.updatedAt',
                 'a.username as author',
                 'o.isEnabled as published',
-                'o.isTrashed as trashed',
+                'o.trashedAt as trashed',
                 'c.title as project'
             )
             ->leftJoin('o.Author', 'a')
@@ -45,7 +45,7 @@ class OpinionRepository extends EntityRepository
                 'o.updatedAt',
                 'a.username as author',
                 'o.isEnabled as published',
-                'o.isTrashed as trashed',
+                'o.trashedAt as trashed',
                 'o.body as body',
                 'c.title as project'
             )
@@ -120,9 +120,8 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->andWhere('cas.project = :project')
-            ->andWhere('o.isTrashed = :trashed')
-            ->setParameter('project', $project)
-            ->setParameter('trashed', false);
+            ->andWhere('o.trashedAt IS NULL')
+            ->setParameter('project', $project);
         if (null !== $excludedAuthor) {
             $qb->andWhere('aut.id != :author')->setParameter('author', $excludedAuthor);
         }
@@ -150,10 +149,6 @@ class OpinionRepository extends EntityRepository
 
     /**
      * Get all trashed or unpublished opinions.
-     *
-     * @param $project
-     *
-     * @return array
      */
     public function getTrashedOrUnpublishedByProject(Project $project)
     {
@@ -165,7 +160,7 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->andWhere('pas.project = :project')
-            ->andWhere('o.isTrashed = true')
+            ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('project', $project)
             ->orderBy('o.trashedAt', 'DESC');
 
@@ -268,7 +263,7 @@ class OpinionRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
-            ->andWhere('o.isTrashed = false')
+            ->andWhere('o.trashedAt IS NULL')
             ->andWhere('o.OpinionType = :opinionTypeId')
             ->setParameter('opinionTypeId', $opinionTypeId);
 
@@ -301,7 +296,11 @@ class OpinionRepository extends EntityRepository
         }
 
         if (isset($criteria['trashed'])) {
-            $qb->andWhere('o.isTrashed = :trashed')->setParameter('trashed', $criteria['trashed']);
+            if ($criteria['trashed']) {
+                $qb->andWhere('o.trashedAt IS NOT NULL');
+            } else {
+                $qb->andWhere('o.trashedAt IS NULL');
+            }
         }
 
         $sortField = array_keys($orderBy)[0];
@@ -380,7 +379,7 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.media', 'm')
             ->andWhere('ot.id = :opinionType')
-            ->andWhere('o.isTrashed = false')
+            ->andWhere('o.trashedAt IS NULL')
             ->setParameter('opinionType', $opinionTypeId)
             ->addOrderBy('o.pinned', 'DESC');
         if ($opinionsSort) {
@@ -434,7 +433,7 @@ class OpinionRepository extends EntityRepository
             ->innerJoin('o.step', 's')
             ->innerJoin('s.projectAbstractStep', 'cas')
             ->innerJoin('cas.project', 'c')
-            ->andWhere('o.isTrashed = false')
+            ->andWhere('o.trashedAt IS NULL')
             ->andWhere('cas.project = :project')
             ->setParameter('project', $project);
         if (null !== $excludedAuthor) {

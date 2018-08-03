@@ -136,7 +136,7 @@ mappings:
       createdAt: { type: date }
       updatedAt: { type: date }
       deletedAt: { type: date }
-      isTrashed: { type: boolean }
+      trashed: { type: boolean }
       commentsCount: { type: long }
       estimation: { type: float }
       district:

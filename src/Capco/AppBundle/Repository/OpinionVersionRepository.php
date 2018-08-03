@@ -26,8 +26,8 @@ class OpinionVersionRepository extends EntityRepository
             ->addSelect('a', 'm', 'argument', 'source')
             ->leftJoin('o.author', 'a')
             ->leftJoin('a.media', 'm')
-            ->leftJoin('o.arguments', 'argument', 'WITH', 'argument.isTrashed = false')
-            ->leftJoin('o.sources', 'source', 'WITH', 'source.isTrashed = false')
+            ->leftJoin('o.arguments', 'argument', 'WITH', 'argument.trashedStatus IS NULL')
+            ->leftJoin('o.sources', 'source', 'WITH', 'source.trashedStatus IS NULL')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id);
         return $qb->getQuery()->getOneOrNullResult();
@@ -43,7 +43,7 @@ class OpinionVersionRepository extends EntityRepository
                 'o.updatedAt',
                 'a.username as author',
                 'o.enabled as published',
-                'o.isTrashed as trashed',
+                'o.trashedAt as trashed',
                 'c.title as project'
             )
             ->leftJoin('o.author', 'a')
@@ -64,7 +64,7 @@ class OpinionVersionRepository extends EntityRepository
                 'o.updatedAt',
                 'a.username as author',
                 'o.enabled as published',
-                'o.isTrashed as trashed',
+                'o.trashedAt as trashed',
                 'CONCAT(CONCAT(o.comment, \'<hr>\'), o.body) as body',
                 'c.title as project'
             )
@@ -92,9 +92,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('op.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->andWhere('pas.project = :project')
-            ->andWhere('o.isTrashed = :trashed OR o.enabled = :disabled')
+            ->andWhere('o.trashedAt IS NOT NULL OR o.enabled = :disabled')
             ->setParameter('project', $project)
-            ->setParameter('trashed', true)
             ->setParameter('disabled', false)
             ->orderBy('o.trashedAt', 'DESC');
 
@@ -106,9 +105,8 @@ class OpinionVersionRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('o', '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
             ->andWhere('o.parent = :opinion')
-            ->andWhere('o.isTrashed = :trashed')
-            ->setParameter('opinion', $opinion)
-            ->setParameter('trashed', false);
+            ->andWhere('o.trashedAt IS NULL')
+            ->setParameter('opinion', $opinion);
         return $qb;
     }
 
@@ -241,9 +239,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->andWhere('cas.project = :project')
-            ->andWhere('ov.isTrashed = :trashed')
-            ->setParameter('project', $project)
-            ->setParameter('trashed', false);
+            ->andWhere('ov.trashedAt IS NULL')
+            ->setParameter('project', $project);
         if (null !== $excludedAuthor) {
             $qb->andWhere('aut.id != :author')->setParameter('author', $excludedAuthor);
         }
@@ -284,9 +281,8 @@ class OpinionVersionRepository extends EntityRepository
             ->innerJoin('o.step', 's')
             ->innerJoin('s.projectAbstractStep', 'cas')
             ->innerJoin('cas.project', 'c')
-            ->andWhere('ov.isTrashed = :trashed')
+            ->andWhere('ov.trashedAt IS NULL')
             ->andWhere('cas.project = :project')
-            ->setParameter('trashed', false)
             ->setParameter('project', $project);
         if (null !== $excludedAuthor) {
             $qb

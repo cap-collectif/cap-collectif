@@ -34,7 +34,7 @@ Scenario: API client wants to list comments of a blogpost
         "answers": @...@,
         "authorEmail": @null@,
         "authorName": @null@,
-        "isTrashed": @boolean@,
+        "trashed": @boolean@,
         "_links": {
           "vote": @string@,
           "edit": @string@
@@ -69,7 +69,7 @@ Scenario: API client wants to find the first comment of a blogpost
         "answers": @...@,
         "authorEmail": @null@,
         "authorName": @null@,
-        "isTrashed": @boolean@,
+        "trashed": @boolean@,
         "_links": @...@,
         "hasUserReported": @boolean@,
         "hasUserVoted": @boolean@,

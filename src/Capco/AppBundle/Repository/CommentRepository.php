@@ -32,7 +32,7 @@ class CommentRepository extends EntityRepository
                 'c.updatedAt',
                 'a.username as author',
                 'c.isEnabled as published',
-                'c.isTrashed as trashed'
+                'c.trashedAt as trashed'
             )
             ->leftJoin('c.Author', 'a');
         return $qb->getQuery()->getArrayResult();
@@ -47,7 +47,7 @@ class CommentRepository extends EntityRepository
                 'c.updatedAt',
                 'a.username as author',
                 'c.isEnabled as published',
-                'c.isTrashed as trashed',
+                'c.trashedAt as trashed',
                 'c.body as body'
             )
             ->leftJoin('c.Author', 'a')

@@ -76,31 +76,30 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         );
 
         // Recalculate admin projects count
-        $this->em
-            ->createQuery(
-                'UPDATE CapcoUserBundle:User u SET u.projectsCount = (
+        $this->em->createQuery(
+            'UPDATE CapcoUserBundle:User u SET u.projectsCount = (
             SELECT count(p.id) FROM CapcoAppBundle:Project p
             WHERE p.Author = u AND p.isEnabled = 1
             GROUP BY p.Author
             )
             WHERE u.roles like :role
           '
-            )
+        )
             ->setParameter('role', '%"ROLE_SUPER_ADMIN"%')
             ->execute();
         $this->compute(
             'UPDATE CapcoUserBundle:User u set u.proposalsCount = (
           SELECT count(p.id) FROM CapcoAppBundle:Proposal p
-          WHERE p.author = u AND p.enabled = 1 AND p.expired = 0 AND p.draft = 0 AND p.isTrashed = 0 AND p.deletedAt IS NULL
+          WHERE p.author = u AND p.enabled = 1 AND p.expired = 0 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL
           GROUP BY p.author
         )'
         );
 
         if (
             $this->force ||
-            $this->em
-                ->createQuery('SELECT COUNT(opinion.id) FROM CapcoAppBundle:Opinion opinion')
-                ->getSingleScalarResult() >
+            $this->em->createQuery(
+                'SELECT COUNT(opinion.id) FROM CapcoAppBundle:Opinion opinion'
+            )->getSingleScalarResult() >
                 0
         ) {
             $query = $this->em->createQuery(
@@ -160,95 +159,83 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
 
         if (
             $this->force ||
-            $this->em
-                ->createQuery('SELECT COUNT(comment.id) FROM CapcoAppBundle:PostComment comment')
-                ->getSingleScalarResult() >
+            $this->em->createQuery(
+                'SELECT COUNT(comment.id) FROM CapcoAppBundle:PostComment comment'
+            )->getSingleScalarResult() >
                 0
         ) {
-            $this->em
-                ->createQuery(
-                    'UPDATE CapcoUserBundle:User u set u.postCommentsCount = (
+            $this->em->createQuery(
+                'UPDATE CapcoUserBundle:User u set u.postCommentsCount = (
                 SELECT count(pc.id) from CapcoAppBundle:PostComment pc
                 INNER JOIN CapcoAppBundle:Post p WITH pc.post = p
                 WHERE pc.Author = u AND pc.isEnabled = 1 AND p.isPublished = 1 GROUP BY pc.Author
               )'
-                )
-                ->execute();
+            )->execute();
         }
 
         if (
             $this->force ||
-            $this->em
-                ->createQuery('SELECT COUNT(comment.id) FROM CapcoAppBundle:EventComment comment')
-                ->getSingleScalarResult() >
+            $this->em->createQuery(
+                'SELECT COUNT(comment.id) FROM CapcoAppBundle:EventComment comment'
+            )->getSingleScalarResult() >
                 0
         ) {
-            $this->em
-                ->createQuery(
-                    'UPDATE CapcoUserBundle:User u set u.eventCommentsCount = (
+            $this->em->createQuery(
+                'UPDATE CapcoUserBundle:User u set u.eventCommentsCount = (
                 SELECT count(ec.id) from CapcoAppBundle:EventComment ec
                 INNER JOIN CapcoAppBundle:Event e WITH ec.Event = e
                 WHERE ec.Author = u AND ec.isEnabled = 1 AND e.isEnabled = 1 GROUP BY ec.Author
               )'
-                )
-                ->execute();
+            )->execute();
         }
 
         if (
             $this->force ||
-            $this->em
-                ->createQuery(
-                    'SELECT COUNT(comment.id) FROM CapcoAppBundle:ProposalComment comment'
-                )
-                ->getSingleScalarResult() >
+            $this->em->createQuery(
+                'SELECT COUNT(comment.id) FROM CapcoAppBundle:ProposalComment comment'
+            )->getSingleScalarResult() >
                 0
         ) {
-            $this->em
-                ->createQuery(
-                    'UPDATE CapcoUserBundle:User u set u.proposalCommentsCount = (
+            $this->em->createQuery(
+                'UPDATE CapcoUserBundle:User u set u.proposalCommentsCount = (
                 SELECT count(pc.id) from CapcoAppBundle:ProposalComment pc
                 INNER JOIN CapcoAppBundle:Proposal p WITH pc.proposal = p
                 WHERE pc.Author = u AND pc.isEnabled = 1 GROUP BY pc.Author
               )'
-                )
-                ->execute();
+            )->execute();
         }
 
         if (
             $this->force ||
-            $this->em
-                ->createQuery('SELECT COUNT(vote.id) FROM CapcoAppBundle:CommentVote vote')
-                ->getSingleScalarResult() >
+            $this->em->createQuery(
+                'SELECT COUNT(vote.id) FROM CapcoAppBundle:CommentVote vote'
+            )->getSingleScalarResult() >
                 0
         ) {
-            $this->em
-                ->createQuery(
-                    'UPDATE CapcoUserBundle:User u set u.commentVotesCount = (
+            $this->em->createQuery(
+                'UPDATE CapcoUserBundle:User u set u.commentVotesCount = (
                 SELECT count(cv.id) from CapcoAppBundle:CommentVote cv
                 INNER JOIN CapcoAppBundle:Comment c WITH cv.comment = c
                 WHERE cv.user = u AND cv.expired = 0 AND c.isEnabled = 1 GROUP BY cv.user
               )'
-                )
-                ->execute();
+            )->execute();
         }
 
         if (
             $this->force ||
-            $this->em
-                ->createQuery('SELECT COUNT(vote.id) FROM CapcoAppBundle:OpinionVote vote')
-                ->getSingleScalarResult() >
+            $this->em->createQuery(
+                'SELECT COUNT(vote.id) FROM CapcoAppBundle:OpinionVote vote'
+            )->getSingleScalarResult() >
                 0
         ) {
-            $this->em
-                ->createQuery(
-                    'UPDATE CapcoUserBundle:User u set u.opinionVotesCount = (
+            $this->em->createQuery(
+                'UPDATE CapcoUserBundle:User u set u.opinionVotesCount = (
                 SELECT count(ov.id) from CapcoAppBundle:OpinionVote ov
                 INNER JOIN CapcoAppBundle:Opinion o WITH ov.opinion = o
                 INNER JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH o.step = cs
                 WHERE ov.user = u AND ov.expired = 0 AND o.isEnabled = 1 AND cs.isEnabled = 1 GROUP BY ov.user
               )'
-                )
-                ->execute();
+            )->execute();
         }
 
         $this->compute(
@@ -266,7 +253,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             'UPDATE fos_user u set u.proposal_votes_count = (
           SELECT count(pv.id) from votes pv
           INNER JOIN proposal p ON pv.proposal_id = p.id
-          WHERE pv.voter_id = u.id AND pv.expired = 0 AND pv.private = 0 AND p.enabled = 1 AND p.expired = 0 AND p.is_draft = 0 AND p.trashed = 0 AND p.deleted_at IS NULL
+          WHERE pv.voter_id = u.id AND pv.expired = 0 AND pv.private = 0 AND p.enabled = 1 AND p.expired = 0 AND p.is_draft = 0 AND p.trashed_at IS NULL AND p.deleted_at IS NULL
           GROUP BY pv.voter_id
         )',
             true

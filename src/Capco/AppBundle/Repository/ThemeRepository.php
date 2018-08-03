@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -17,9 +16,7 @@ class ThemeRepository extends EntityRepository
             ->addSelect('c')
             ->leftJoin('t.projects', 'c')
             ->addOrderBy('t.position', 'ASC')
-            ->addOrderBy('t.updatedAt', 'DESC')
-        ;
-
+            ->addOrderBy('t.updatedAt', 'DESC');
         $query = $qb->getQuery();
 
         if ($limit) {
@@ -33,39 +30,33 @@ class ThemeRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function getSearchResultsWithCounters(int $nbByPage = 8, int $page = 1, ?string $term = null): Paginator
-    {
+    public function getSearchResultsWithCounters(
+        int $nbByPage = 8,
+        int $page = 1,
+        ?string $term = null
+    ): Paginator {
         if ($page < 1) {
-            throw new \InvalidArgumentException(sprintf(
-                'The argument "page" cannot be lower than 1 (current value: "%s")',
-                $page
-            ));
+            throw new \InvalidArgumentException(
+                sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
+            );
         }
 
         $qb = $this->getIsEnabledQueryBuilder();
-        $qb->addSelect('c')
+        $qb
+            ->addSelect('c')
             ->leftJoin('t.projects', 'c')
             ->leftJoin('t.events', 'events')
             ->leftJoin('t.posts', 'posts')
-            ->addOrderBy('t.position', 'ASC')
-        ;
-
-        $qb
-            ->addOrderBy('t.position', 'ASC')
-            ->addOrderBy('t.updatedAt', 'DESC')
-        ;
-
+            ->addOrderBy('t.position', 'ASC');
+        $qb->addOrderBy('t.position', 'ASC')->addOrderBy('t.updatedAt', 'DESC');
         if (null !== $term) {
-            $qb->andWhere('t.title LIKE :term')
-                ->setParameter('term', '%' . $term . '%')
-            ;
+            $qb->andWhere('t.title LIKE :term')->setParameter('term', '%' . $term . '%');
         }
 
         $query = $qb->getQuery();
 
         if ($nbByPage > 0) {
-            $query->setFirstResult(($page - 1) * $nbByPage)
-                ->setMaxResults($nbByPage);
+            $query->setFirstResult(($page - 1) * $nbByPage)->setMaxResults($nbByPage);
         }
 
         return new Paginator($query);
@@ -89,9 +80,7 @@ class ThemeRepository extends EntityRepository
             ->andWhere('t.slug = :slug')
             ->setParameter('enabled', true)
             ->setParameter('slug', $slug)
-            ->orderBy('t.updatedAt', 'DESC')
-        ;
-
+            ->orderBy('t.updatedAt', 'DESC');
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -99,7 +88,8 @@ class ThemeRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('t.title as name')
-            ->addSelect('(
+            ->addSelect(
+                '(
                 SELECT COUNT(p.id) as pCount
                 FROM CapcoAppBundle:Proposal p
                 LEFT JOIN p.proposalForm pf
@@ -108,13 +98,12 @@ class ThemeRepository extends EntityRepository
                 AND pt.id = t.id
                 AND p.draft = false
                 AND p.expired = false
-                AND p.isTrashed = false
+                AND p.trashedStatus IS NULL
                 AND p.deletedAt IS NULL
-            ) as value')
+            ) as value'
+            )
             ->setParameter('step', $step)
-            ->orderBy('value', 'DESC')
-        ;
-
+            ->orderBy('value', 'DESC');
         if ($limit) {
             $qb->setMaxResults($limit);
         }
@@ -124,10 +113,7 @@ class ThemeRepository extends EntityRepository
 
     public function countAll()
     {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(t.id)')
-        ;
-
+        $qb = $this->getIsEnabledQueryBuilder()->select('COUNT(t.id)');
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
