@@ -158,9 +158,16 @@ type AppendixType {
 }
 
 # An argument
-type Argument implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
-  # The ID of an object
-type Argument implements Node & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Argument implements Node & Publishable & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
 
@@ -193,36 +200,6 @@ type Argument implements Node & Contribution & Reportable & TrashableContributio
 
   # Url of the contribution
   url: URI!
-
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # The author of the contribution.
-  author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -609,7 +586,16 @@ type CollectStep implements Node & Step & ProposalStep {
 }
 
 # A comment
-type Comment implements Node & Contribution {
+type Comment implements Node & Publishable & Contribution {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # The id of the contribution.
   id: ID!
 
@@ -624,27 +610,6 @@ type Comment implements Node & Contribution {
 
   # Url of the contribution
   url: URI!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
   body: String
   createdAt: DateTime!
   updatedAt: DateTime
@@ -1489,7 +1454,15 @@ type NotificationsConfiguration {
 type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & Trashable & ContributionWithAuthor & EditableContribution {
   # The ID of an object
 type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
-type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
 
@@ -1541,27 +1514,6 @@ type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribu
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -1832,9 +1784,16 @@ enum ProjectVisibility {
 }
 
 # A budget contribution
-type Proposal implements Node & Contribution & Publishable & Reportable & Trashable {
-  # The ID of an object
-type Proposal implements Node & Contribution & Reportable {
+type Proposal implements Node & Contribution & Publishable & Reportable {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
 
@@ -1852,30 +1811,6 @@ type Proposal implements Node & Contribution & Reportable {
 
   # Url of the contribution
   url: URI!
-
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
 
   # The admin url for this contribution.
   adminUrl: URI!
@@ -2553,7 +2488,16 @@ type RemoveProposalVotePayload {
 }
 
 # A Reply
-type Reply implements Node & Contribution {
+type Reply implements Node & Publishable & Contribution {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # The id of the contribution.
   id: ID!
 
@@ -2568,15 +2512,6 @@ type Reply implements Node & Contribution {
 
   # Url of the contribution
   url: URI!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
   enabled: Boolean!
   private: Boolean!
   createdAt: DateTime!
