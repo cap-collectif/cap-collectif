@@ -3,7 +3,7 @@ namespace Capco\AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class TrashedStatusType extends AbstractType
@@ -15,8 +15,8 @@ class TrashedStatusType extends AbstractType
             'required' => false,
             'placeholder' => 'synthesis.source_types.none',
             'choices' => [
-                'trashed-visible-content' => TrashableInterface::STATUS_VISIBLE,
-                'trashed-hidden-content' => TrashableInterface::STATUS_INVISIBLE,
+                'trashed-visible-content' => Trashable::STATUS_VISIBLE,
+                'trashed-hidden-content' => Trashable::STATUS_INVISIBLE,
             ],
         ]);
     }

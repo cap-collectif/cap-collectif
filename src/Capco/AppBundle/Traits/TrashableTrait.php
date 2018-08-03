@@ -1,7 +1,7 @@
 <?php
 namespace Capco\AppBundle\Traits;
 
-use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Doctrine\ORM\Mapping as ORM;
 
 trait TrashableTrait
@@ -41,12 +41,7 @@ trait TrashableTrait
             return $this;
         }
 
-        if (
-            !in_array($status, array(
-                TrashableInterface::STATUS_VISIBLE,
-                TrashableInterface::STATUS_INVISIBLE,
-            ))
-        ) {
+        if (!in_array($status, array(Trashable::STATUS_VISIBLE, Trashable::STATUS_INVISIBLE))) {
             throw new \InvalidArgumentException("Invalid status");
         }
 

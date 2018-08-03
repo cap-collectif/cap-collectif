@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
-use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\OpinionVersionVote;
@@ -253,7 +253,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return null;
     }
 
-    public function resolveTrashedAt(TrashableInterface $object)
+    public function resolveTrashedAt(Trashable $object)
     {
         return $object->getTrashedAt() ? $object->getTrashedAt()->format(\DateTime::ATOM) : null;
     }

@@ -1,7 +1,7 @@
 <?php
 namespace Capco\AppBundle\Entity\Interfaces;
 
-interface TrashableInterface
+interface Trashable
 {
     public const STATUS_VISIBLE = 'visible';
     public const STATUS_INVISIBLE = 'invisible';

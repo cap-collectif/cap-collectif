@@ -1,10 +1,9 @@
 <?php
-
 namespace Capco\AppBundle\Model;
 
-use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 
-interface ModerableInterface extends TrashableInterface
+interface ModerableInterface extends Trashable
 {
     public function getModerationToken(): string;
 }

@@ -19,14 +19,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Model\Publishable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 /**
  * @ORM\Table(name="source")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Source implements Contribution, TrashableInterface, VotableInterface, Publishable
+class Source implements Contribution, Trashable, VotableInterface, Publishable
 {
     use UuidTrait;
 
