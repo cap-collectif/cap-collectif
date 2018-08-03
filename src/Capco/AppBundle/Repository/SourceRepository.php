@@ -173,6 +173,32 @@ class SourceRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Get all trashed or unpublished sources for project.
+     */
+    public function getTrashedOrUnpublishedByProject(Project $project)
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->addSelect('ca', 'o', 'aut', 'm', 'media')
+            ->leftJoin('s.category', 'ca')
+            ->leftJoin('s.media', 'media')
+            ->leftJoin('s.author', 'aut')
+            ->leftJoin('aut.media', 'm')
+            ->leftJoin('s.opinion', 'o')
+            ->leftJoin('s.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('o.step', 'ostep')
+            ->leftJoin('ovo.step', 'ovostep')
+            ->leftJoin('ostep.projectAbstractStep', 'opas')
+            ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
+            ->andWhere('opas.project = :project OR ovopas.project = :project')
+            ->andWhere('s.trashedAt IS NOT NULL OR s.isEnabled = :disabled')
+            ->setParameter('project', $project)
+            ->setParameter('disabled', false)
+            ->orderBy('s.trashedAt', 'DESC');
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('s')
