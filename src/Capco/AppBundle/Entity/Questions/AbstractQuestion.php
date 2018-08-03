@@ -2,10 +2,12 @@
 namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\LogicJump;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableUpdatableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -68,10 +70,20 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
      */
     protected $questionnaireAbstractQuestion;
 
+    public function __construct()
+    {
+        $this->jumps = new ArrayCollection();
+    }
+
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true)
+     */
+    protected $jumps;
 
     /**
      * @Assert\NotNull()
@@ -112,6 +124,37 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         }
 
         return 'New Question';
+    }
+
+    /**
+     * @return Collection|LogicJump[]
+     */
+    public function getJumps(): Collection
+    {
+        return $this->jumps;
+    }
+
+    public function addJump(LogicJump $jump): self
+    {
+        if (!$this->jumps->contains($jump)) {
+            $this->jumps[] = $jump;
+            $jump->setOrigin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJump(LogicJump $jump): self
+    {
+        if ($this->jumps->contains($jump)) {
+            $this->jumps->removeElement($jump);
+            // set the owning side to null (unless already changed)
+            if ($jump->getOrigin() === $this) {
+                $jump->setOrigin(null);
+            }
+        }
+
+        return $this;
     }
 
     public function __clone()

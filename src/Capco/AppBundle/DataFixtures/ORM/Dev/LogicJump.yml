@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\LogicJump:
+  logicjump1:
+    id: logicjump1
+    origin: '@multiplequestionHapNoel'
+    destination: '@multiplequestionHapCreation'
+    conditions: ['@ljconditionHap']
+  logicjump2:
+    id: logicjump2
+    origin: '@multiplequestionHapNoel'
+    destination: '@multiplequestionNoelFete'
+    conditions: ['@ljconditionNoel']

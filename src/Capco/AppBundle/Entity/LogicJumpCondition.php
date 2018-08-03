@@ -20,7 +20,7 @@ class LogicJumpCondition
     protected $operator;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $question;

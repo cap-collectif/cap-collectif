@@ -109,5 +109,6 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionNoelHatColor:
     id: 28
     title: De quelle couleur est le chapeau de Noël ?
-    questionChoices: ['@questionchoiceNoelRedHat', '@questionchoiceNoelGreenHat', '@questionchoiceNoelBlueHat']
+    questionChoices:
+      ['@questionchoiceNoelRedHat', '@questionchoiceNoelGreenHat', '@questionchoiceNoelBlueHat']
     type: 4

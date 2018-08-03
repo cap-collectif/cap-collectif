@@ -1,0 +1,11 @@
+LogicJumpConditionOperator:
+  type: enum
+  config:
+    description: 'Possible operator for a logic jump condition'
+    values:
+      IS:
+        value: 'is'
+        description: 'Allows to test an equality.'
+      IS_NOT:
+        value: 'is_not'
+        description: 'Allows to test the opposite of an equality test.'

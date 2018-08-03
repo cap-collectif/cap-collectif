@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\LogicJumpCondition:
+  ljconditionHap:
+    operator: is
+    question: '@multiplequestionHapNoel'
+    value: '@questionchoiceHap'
+  ljconditionNoel:
+    operator: is
+    question: '@multiplequestionHapNoel'
+    value: '@questionchoiceNoel'

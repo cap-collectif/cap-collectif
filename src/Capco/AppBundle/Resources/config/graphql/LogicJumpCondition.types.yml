@@ -1,0 +1,17 @@
+LogicJumpCondition:
+  type: object
+  config:
+    description: 'A particular condition in a logic jump.'
+    fields:
+      id:
+        type: 'ID!'
+      operator:
+        description: 'Return the operator for this condition.'
+        type: 'LogicJumpConditionOperator!'
+      question:
+        description: 'Return the question which is going to be tested against the condition.'
+        type: 'Question!'
+      value:
+        description:
+          'The value that the condition should meet to be fullfiled (depending on the operator).'
+        type: 'QuestionChoice'

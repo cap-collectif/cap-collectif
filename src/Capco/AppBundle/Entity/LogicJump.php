@@ -1,7 +1,7 @@
 <?php
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,13 +16,13 @@ class LogicJump
     use UuidTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion", inversedBy="jumps")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="jumps")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $origin;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion")
      */
     protected $destination;
 
@@ -36,24 +36,24 @@ class LogicJump
         $this->conditions = new ArrayCollection();
     }
 
-    public function getOrigin(): ?MultipleChoiceQuestion
+    public function getOrigin(): ?AbstractQuestion
     {
         return $this->origin;
     }
 
-    public function setOrigin(?MultipleChoiceQuestion $origin): self
+    public function setOrigin(?AbstractQuestion $origin): self
     {
         $this->origin = $origin;
 
         return $this;
     }
 
-    public function getDestination(): ?MultipleChoiceQuestion
+    public function getDestination(): ?AbstractQuestion
     {
         return $this->destination;
     }
 
-    public function setDestination(?MultipleChoiceQuestion $destination): self
+    public function setDestination(?AbstractQuestion $destination): self
     {
         $this->destination = $destination;
 
