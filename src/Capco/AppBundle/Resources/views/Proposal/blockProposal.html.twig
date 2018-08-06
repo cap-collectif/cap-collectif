@@ -19,7 +19,7 @@
             </div>
             <hr>
             <div class="proposal__body" >
-                {% if proposal.enabled == false %}
+                {% if proposal.getTrashedStatus() == 'invisible' %}
                     <h4>
                         {{ 'proposal.show.trashed.contentDeleted'|trans({}, 'CapcoAppBundle') }}
                     </h4>
@@ -30,7 +30,7 @@
                         </a>
                     </h2>
                 {% endif %}
-                {% if proposal.isTrashed() and proposal.enabled == true %}
+                {% if proposal.isTrashed() and proposal.getTrashedStatus() == 'visible' %}
                     <p class="excerpt">
                         {{ proposal.summary }}
                     </p>
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="proposal__footer">
-            {% if proposal.isTrashed and proposal.trashedReason is not null %}
+            {% if proposal.isTrashed() and proposal.trashedReason is not null %}
                 <div class="proposal__trashed-reason">
                     <p class="px-15">
                         {{ 'proposal.show.trashed.shortReason'|trans({}, 'CapcoAppBundle') }}
@@ -61,7 +61,7 @@
                     </p>
                 </div>
             {% endif %}
-            {% if not proposal.isTrashed %}
+            {% if not proposal.isTrashed() %}
                 <div class="proposal__counters">
                     <div class="proposal__counter">
                         <div class="proposal__counter__value" >
@@ -77,7 +77,7 @@
             {% endif %}
             {% if proposal.isTrashed() %}
                 <div class="{{ 'proposal__status status--default' }}">
-                    {% if proposal.enabled == true %}
+                    {% if proposal.getTrashedStatus() == 'visible' %}
                         {{ 'proposal.show.trashed.reason.moderated' | trans({}, 'CapcoAppBundle') }}
                     {% else %}
                         {{ 'proposal.show.trashed.reason.deleted' | trans({}, 'CapcoAppBundle') }}

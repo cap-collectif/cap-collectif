@@ -2,3 +2,4 @@ flow-typed/npm
 __generated__
 package.json
 app/config/config.yml
+src/Capco/AppBundle/Resources/config/services/graphql_resolvers.yml

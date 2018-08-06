@@ -1,4 +1,3 @@
-{% set tokenSource = csrf_token('source_vote') %}
 <li class="opinion opinion--source media box {% if source.author.isVip %}bg-vip{% endif %}" id="source{{ source.id }}">
     {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': source.Author, 'link_classes': 'pull-left media-middle', format: 'avatar_source'} only %}
     <div class="media-body">
@@ -18,17 +17,14 @@
                 <span class="label label-default" style="position: static; margin-right: 5px;">
                     {{ 'opinion.show.trashed.label'|trans({}, 'CapcoAppBundle') }}
                 </span>
-            {% endif %}
-            {% if source.isEnabled == false %}
-                <span class="label label-default" style="position: static; margin-right: 5px;">
-                    {{ 'opinion.show.disabled.label'|trans({}, 'CapcoAppBundle') }}
-                </span>
+                {% if source.getTrashedStatus() == 'visible' %}
+                    {{ source.body|raw }}
+                {% endif %}
             {% else %}
                 {{ source.body|raw }}
             {% endif %}
         </p>
-
-        {% if trashed is not defined %}
+        {% if not source.isTrashed() %}
             <button disabled="disabled" class="btn  btn-dark-gray  btn-xs"><i class="cap cap-hand-like-2"></i> {{ 'source.vote.submit'|trans({}, 'CapcoAppBundle') }}</button>
             <span class="nb-votes">{{ source.votesCount }}</span>
         {% else %}

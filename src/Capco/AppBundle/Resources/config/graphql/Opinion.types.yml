@@ -1,79 +1,105 @@
 Opinion:
-    type: object
-    inherits: [Node, Publishable, Argumentable, Sourceable, Reportable, Contribution, Trashable, ContributionWithAuthor, EditableContribution]
-    config:
-        description: "A contribution"
-        interfaces: [Node, Publishable, Argumentable, Sourceable, Reportable, Contribution, Trashable, ContributionWithAuthor, EditableContribution]
-        fields:
-            createdAt:
-                type: "DateTime!"
-                description: "Identifies the date and time when the object was created."
-            show_url:
-                resolve: "@=resolver('proposition_url', [value])"
-            url:
-                resolve: "@=resolver('proposition_url', [value])"
-            pinned:
-                type: "Boolean!"
-                description: "true if the contribution is pinned."
-            expired:
-                type: "Boolean!"
-                description: "true if the contribution is expired."
-            published:
-                type: "Boolean!"
-            viewerHasReport:
-                resolve: '@=value.userHasReport(getUser())'
-            step:
-                type: "Consultation!"
-            viewerVote:
-                type: "OpinionVote"
-                description: "The viewer vote."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVoteResolver", [value, getUser()])'
-            votes:
-                type: "YesNoPairedVoteConnection!"
-                argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", [value, args])'
-                args:
-                    orderBy:
-                        type: "ProposalVotesOrder"
-                        defaultValue: { field: CREATED_AT, direction: DESC }
-                    value:
-                        type: "YesNoPairedVoteValue"
-                        description: "Filters vote by value"
-            title:
-                type: "String!"
-                description: "Identifies the contribution title."
-            body:
-                type: "HTML!"
-                description: "Identifies the body of the contribution."
-            bodyText:
-                type: "String!"
-                description: "Identifies the body of the contribution rendered to text."
-            arguments:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'
-            versions:
-                type: "VersionConnection!"
-                argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", [value, args])'
-                description: "The versions related to the contribution."
-                args:
-                    orderBy:
-                        type: "VersionOrder"
-                        defaultValue: { field: CREATED_AT, direction: DESC }
-            section:
-                type: "Section!"
-                description: "Where the proposition has been placed."
-                resolve: "@=resolver('proposition_section', [value])"
-            reportings:
-                type: "[Reporting]"
-                resolve: "@=resolver('proposition_reportings', [value])"
-            contribuable:
-                resolve: "@=value.canContribute()"
-            answer:
-                type: "Answer"
-                resolve: "@=value.getAnswer()"
-            ranking:
-                type: "Int"
-            modals:
-                type: "[OpinionModal]"
-            appendices:
-                type: "[Appendix]"
+  type: object
+  inherits:
+    [
+      Node,
+      Publishable,
+      Argumentable,
+      Sourceable,
+      Reportable,
+      Contribution,
+      Trashable,
+      ContributionWithAuthor,
+      EditableContribution,
+    ]
+  config:
+    description: 'A contribution'
+    interfaces:
+      [
+        Node,
+        Publishable,
+        Argumentable,
+        Sourceable,
+        Reportable,
+        Contribution,
+        Trashable,
+        ContributionWithAuthor,
+        EditableContribution,
+      ]
+    fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      show_url:
+        resolve: "@=resolver('proposition_url', [value])"
+      url:
+        resolve: "@=resolver('proposition_url', [value])"
+      pinned:
+        type: 'Boolean!'
+        description: 'true if the contribution is pinned.'
+      expired:
+        type: 'Boolean!'
+        description: 'true if the contribution is expired.'
+      published:
+        type: 'Boolean!'
+      viewerHasReport:
+        resolve: '@=value.userHasReport(getUser())'
+      step:
+        type: 'Consultation!'
+      viewerVote:
+        type: 'OpinionVote'
+        description: 'The viewer vote.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVoteResolver", [value, getUser()])'
+      votes:
+        type: 'YesNoPairedVoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", [value, args])'
+        args:
+          orderBy:
+            type: 'ProposalVotesOrder'
+            defaultValue: { field: CREATED_AT, direction: DESC }
+          value:
+            type: 'YesNoPairedVoteValue'
+            description: 'Filters vote by value'
+      title:
+        type: 'String!'
+        description: 'Identifies the contribution title.'
+      body:
+        type: 'HTML!'
+        description: 'Identifies the body of the contribution.'
+      bodyText:
+        type: 'String!'
+        description: 'Identifies the body of the contribution rendered to text.'
+      arguments:
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'
+      versions:
+        type: 'VersionConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", [value, args])'
+        description: 'The versions related to the contribution.'
+        args:
+          orderBy:
+            type: 'VersionOrder'
+            defaultValue: { field: CREATED_AT, direction: DESC }
+      section:
+        type: 'Section!'
+        description: 'Where the proposition has been placed.'
+        resolve: "@=resolver('proposition_section', [value])"
+      reportings:
+        type: '[Reporting]'
+        resolve: "@=resolver('proposition_reportings', [value])"
+      contribuable:
+        resolve: '@=value.canContribute()'
+      answer:
+        type: 'Answer'
+        resolve: '@=value.getAnswer()'
+      ranking:
+        type: 'Int'
+      modals:
+        type: '[OpinionModal]'
+      appendices:
+        type: '[Appendix]'

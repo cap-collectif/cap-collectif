@@ -9,6 +9,8 @@ describe('<ProposalStatus />', () => {
   const proposal = {
     $refType,
     id: '1',
+    trashed: false,
+    trashedStatus: null,
     status: {
       name: 'Coucou',
       color: 'success',

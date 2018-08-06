@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import CardStatus from '../../Ui/Card/CardStatus';
 import type { ProposalStatus_proposal } from './__generated__/ProposalStatus_proposal.graphql';
@@ -11,7 +12,22 @@ type Props = {
 
 export class ProposalStatus extends React.Component<Props> {
   render() {
-    const status = this.props.proposal.status;
+    const { proposal } = this.props;
+    let status = proposal.status;
+    if (proposal.trashed) {
+      status = {
+        color: 'default',
+        name: (
+          <FormattedMessage
+            id={
+              proposal.trashedStatus === 'VISIBLE'
+                ? 'proposal.show.trashed.reason.moderated'
+                : 'proposal.show.trashed.reason.deleted'
+            }
+          />
+        ),
+      };
+    }
     if (!status) {
       return null;
     }
@@ -30,6 +46,8 @@ export default createFragmentContainer(ProposalStatus, {
         isProfileView: { type: "Boolean", defaultValue: false }
       ) {
       id
+      trashed
+      trashedStatus
       status(step: $stepId) @skip(if: $isProfileView) {
         name
         color

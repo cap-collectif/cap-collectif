@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import Truncate from 'react-truncate';
+import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
@@ -29,12 +30,20 @@ export class ProposalPreviewBody extends React.Component<Props> {
     return (
       <div className="card__body">
         <div className="card__body__infos">
-          <a href={proposal.show_url}>
-            <h2 className="card__title">
-              <Truncate lines={3}>{proposal.title}</Truncate>
-            </h2>
-          </a>
-          <div className="excerpt small">{proposal.summaryOrBodyExcerpt}</div>
+          {proposal.trashed && proposal.trashedStatus === 'INVISIBLE' ? (
+            <h4>
+              <FormattedMessage id="proposal.show.trashed.contentDeleted" />
+            </h4>
+          ) : (
+            <React.Fragment>
+              <a href={proposal.show_url}>
+                <h2 className="card__title">
+                  <Truncate lines={3}>{proposal.title}</Truncate>
+                </h2>
+              </a>
+              <div className="excerpt small">{proposal.summaryOrBodyExcerpt}</div>
+            </React.Fragment>
+          )}
           <TagsList>
             {features.themes &&
               showThemes &&
@@ -111,6 +120,8 @@ export default createFragmentContainer(container, {
       ) {
       id
       title
+      trashed
+      trashedStatus
       show_url
       summaryOrBodyExcerpt
       commentsCount

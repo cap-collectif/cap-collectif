@@ -7,7 +7,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user5'
     body: Coucou, je suis un bel argument !
     publishedAt: <(new \DateTime('2015-01-01'))>
-    isEnabled: true
     moderationToken: 'argument1ModerationToken'
   argument2:
     id: 'argument2'
@@ -16,7 +15,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user4'
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
-    isEnabled: true
 
   argument{3..100}:
     id: 'argument<current()>'
@@ -25,7 +23,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
-    isEnabled: true
 
   argument{101..150}:
     id: 'argument<current()>'
@@ -34,7 +31,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
-    isEnabled: true
     trashedStatus: 'visible'
 
   argument{151..175}:
@@ -44,7 +40,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user<numberBetween(1, 5)>'
     publishedAt: <(new \DateTime('2015-01-01'))>
     body: <text(300)>
-    isEnabled: false
     trashedStatus: 'invisible'
 
   argument{176..200}:
@@ -54,7 +49,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user<numberBetween(1, 5)>'
     publishedAt: <(new \DateTime('2015-01-01'))>
     body: <text(300)>
-    isEnabled: false
 
   argument201:
     id: 'argument201'
@@ -63,7 +57,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user1'
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
-    isEnabled: true
   argument202:
     id: 'argument202'
     Opinion: '@opinion51'
@@ -71,7 +64,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user2'
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
-    isEnabled: true
 
   argument203:
     id: 'argument203'
@@ -80,7 +72,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
-    isEnabled: true
 
   # Argument on versions
   argument204:
@@ -90,7 +81,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user5'
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
-    isEnabled: true
   argument205:
     id: 'argument205'
     opinionVersion: '@version1'
@@ -98,7 +88,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
-    isEnabled: true
 
   argument206:
     id: 'argument206'
@@ -106,7 +95,6 @@ Capco\AppBundle\Entity\Argument:
     type: 1
     Author: '@user1'
     body: 'Que la force soit avec toi.'
-    isEnabled: true
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
     moderationToken: 'argument206ModerationToken'
@@ -117,7 +105,6 @@ Capco\AppBundle\Entity\Argument:
     type: 1
     Author: '@user1'
     body: 'Que la force soit avec toi et avec Yoda.'
-    isEnabled: true
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
@@ -129,7 +116,6 @@ Capco\AppBundle\Entity\Argument:
     type: 1
     Author: '@user1'
     body: 'Le spam c cool'
-    isEnabled: true
     trashedStatus: 'visible'
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
@@ -143,7 +129,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
     publishedAt: <(new \DateTime('2016-03-01'))>
-    isEnabled: true
 
   argument211:
     id: 'argument211'
@@ -152,7 +137,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user1'
     body: <text(300)>
     publishedAt: <(new \DateTime('2016-03-01'))>
-    isEnabled: true
 
   argument212:
     id: 'argument212'
@@ -161,4 +145,3 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user1'
     publishedAt: <(new \DateTime('2016-03-01'))>
     body: <text(300)>
-    isEnabled: true

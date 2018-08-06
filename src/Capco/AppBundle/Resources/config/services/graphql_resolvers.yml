@@ -473,16 +473,12 @@ services:
       - { name: overblog_graphql.resolver }
 
   Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantConnectionEdgeRegisteredAtResolver:
-    class:
-      Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantConnectionEdgeRegisteredAtResolver
     arguments:
       - '@capco.event_registration.repository'
     tags:
       - { name: overblog_graphql.resolver }
 
   Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantConnectionEdgeRegisteredAnonymouslyResolver:
-    class:
-      Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantConnectionEdgeRegisteredAnonymouslyResolver
     arguments:
       - '@capco.event_registration.repository'
     tags:
@@ -597,4 +593,3 @@ services:
       - '@overblog_graphql.type_resolver'
     tags:
       - { name: overblog_graphql.resolver }
-

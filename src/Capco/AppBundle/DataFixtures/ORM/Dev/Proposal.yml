@@ -98,7 +98,7 @@ Capco\AppBundle\Entity\Proposal:
     reference: 4
   proposal5:
     id: proposal5
-    title: Proposition à la corbeille
+    title: Proposition à la corbeille (visible)
     body: |
       <p><text(100)></p>
     enabled: true
@@ -114,7 +114,9 @@ Capco\AppBundle\Entity\Proposal:
     reference: 5
   proposal6:
     id: proposal6
-    title: Proposition dépubliée
+    title: Proposition à la corbeille (invisible)
+    trashedStatus: invisible
+    trashedReason: Raciste
     body: |
       <p><text(100)></p>
     enabled: false
