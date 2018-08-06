@@ -980,7 +980,10 @@ class Proposal
             return self::STATE_DELETED;
         }
 
-        if (!$this->isEnabled() && $this->isTrashed()) {
+        if ($this->isTrashed()) {
+            if ($this->getTrashedStatus() === Trashable::STATUS_VISIBLE) {
+                return self::STATE_TRASHED;
+            }
             return self::STATE_HIDDEN_CONTENT;
         }
 
@@ -990,10 +993,6 @@ class Proposal
 
         if ($this->isExpired()) {
             return self::STATE_EXPIRED;
-        }
-
-        if ($this->isTrashed()) {
-            return self::STATE_TRASHED;
         }
 
         if ($this->isDraft()) {

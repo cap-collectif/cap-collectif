@@ -1,25 +1,25 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Entity\Follower;
-use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Selection;
-use Capco\AppBundle\Form\ProposalAdminType;
-use Capco\AppBundle\Form\ProposalEvaluersType;
-use Capco\AppBundle\Form\ProposalNotationType;
-use Capco\AppBundle\Form\ProposalProgressStepType;
-use Capco\AppBundle\Form\ProposalType;
+use Swarrot\Broker\Message;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Selection;
+use Capco\AppBundle\Form\ProposalType;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Form\ProposalAdminType;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserErrors;
-use Swarrot\Broker\Message;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Capco\AppBundle\Form\ProposalEvaluersType;
+use Capco\AppBundle\Form\ProposalNotationType;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Form\ProposalProgressStepType;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 class ProposalMutation implements ContainerAwareInterface
 {
@@ -131,8 +131,11 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeSelectionStatus(string $proposalId, string $stepId, string $statusId = null): array
-    {
+    public function changeSelectionStatus(
+        string $proposalId,
+        string $stepId,
+        string $statusId = null
+    ): array {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
         $selection = $this->container->get('capco.selection.repository')->findOneBy([
@@ -165,8 +168,10 @@ class ProposalMutation implements ContainerAwareInterface
     public function unselectProposal(string $proposalId, string $stepId): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $selection = $this->container->get('capco.selection.repository')
-            ->findOneBy(['proposal' => $proposalId, 'selectionStep' => $stepId]);
+        $selection = $this->container->get('capco.selection.repository')->findOneBy([
+            'proposal' => $proposalId,
+            'selectionStep' => $stepId,
+        ]);
 
         if (!$selection) {
             throw new UserError('Cant find the selection');
@@ -184,12 +189,17 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function selectProposal(string $proposalId, string $stepId, string $statusId = null): array
-    {
+    public function selectProposal(
+        string $proposalId,
+        string $stepId,
+        string $statusId = null
+    ): array {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
-        $selection = $this->container->get('capco.selection.repository')
-            ->findOneBy(['proposal' => $proposalId, 'selectionStep' => $stepId]);
+        $selection = $this->container->get('capco.selection.repository')->findOneBy([
+            'proposal' => $proposalId,
+            'selectionStep' => $stepId,
+        ]);
         if ($selection) {
             throw new UserError('Already selected');
         }
@@ -197,8 +207,7 @@ class ProposalMutation implements ContainerAwareInterface
         $selectionStatus = null;
 
         if ($statusId) {
-            $selectionStatus = $this->container->get('capco.status.repository')
-                ->find($statusId);
+            $selectionStatus = $this->container->get('capco.status.repository')->find($statusId);
         }
 
         $proposal = $this->getProposal($proposalId);
@@ -237,10 +246,7 @@ class ProposalMutation implements ContainerAwareInterface
         switch ($values['publicationStatus']) {
             case 'TRASHED':
                 $proposal
-                    ->setExpired(false)
-                    ->setEnabled(true)
-                    ->setDraft(false)
-                    ->setTrashed(true)
+                    ->setTrashedStatus(Trashable::STATUS_VISIBLE)
                     ->setTrashedReason($values['trashedReason'])
                     ->setDeletedAt(null);
                 break;
@@ -254,10 +260,7 @@ class ProposalMutation implements ContainerAwareInterface
                 break;
             case 'TRASHED_NOT_VISIBLE':
                 $proposal
-                    ->setExpired(false)
-                    ->setEnabled(false)
-                    ->setTrashed(true)
-                    ->setDraft(false)
+                    ->setTrashedStatus(Trashable::STATUS_INVISIBLE)
                     ->setTrashedReason($values['trashedReason'])
                     ->setDeletedAt(null);
                 break;
@@ -321,10 +324,11 @@ class ProposalMutation implements ContainerAwareInterface
             ->setAuthor($user)
             ->setProposalForm($proposalForm)
             ->setEnabled($draft ? false : true)
-            ->addFollower($follower)
-        ;
-
-        if ($proposalForm->getStep() && $defaultStatus = $proposalForm->getStep()->getDefaultStatus()) {
+            ->addFollower($follower);
+        if (
+            $proposalForm->getStep() &&
+            $defaultStatus = $proposalForm->getStep()->getDefaultStatus()
+        ) {
             $proposal->setStatus($defaultStatus);
         }
 
@@ -351,11 +355,10 @@ class ProposalMutation implements ContainerAwareInterface
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
 
-        $this->container->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::PROPOSAL_CREATE, new Message(
-            json_encode([
-                'proposalId' => $proposal->getId(),
-            ])
-        ));
+        $this->container->get('swarrot.publisher')->publish(
+            CapcoAppBundleMessagesTypes::PROPOSAL_CREATE,
+            new Message(json_encode(['proposalId' => $proposal->getId()]))
+        );
 
         return ['proposal' => $proposal];
     }
@@ -398,9 +401,7 @@ class ProposalMutation implements ContainerAwareInterface
             unset($values['draft']);
         }
 
-        $proposal
-            ->setDraft($draft)
-            ->setEnabled($draft ? false : true);
+        $proposal->setDraft($draft)->setEnabled($draft ? false : true);
 
         $values = $this->fixValues($values, $proposalForm);
 
@@ -429,11 +430,10 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setUpdateAuthor($user);
         $em->flush();
 
-        $this->container->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE, new Message(
-            json_encode([
-                'proposalId' => $proposal->getId(),
-            ])
-        ));
+        $this->container->get('swarrot.publisher')->publish(
+            CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE,
+            new Message(json_encode(['proposalId' => $proposal->getId()]))
+        );
 
         // Synchronously index draft proposals being publish
         $indexer = $this->container->get('capco.elasticsearch.indexer');
@@ -447,7 +447,10 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $toggleManager = $this->container->get('capco.toggle.manager');
 
-        if ((!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes()) && array_key_exists('theme', $values)) {
+        if (
+            (!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes()) &&
+            array_key_exists('theme', $values)
+        ) {
             unset($values['theme']);
         }
 
@@ -455,7 +458,10 @@ class ProposalMutation implements ContainerAwareInterface
             unset($values['category']);
         }
 
-        if ((!$toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict()) && array_key_exists('district', $values)) {
+        if (
+            (!$toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict()) &&
+            array_key_exists('district', $values)
+        ) {
             unset($values['district']);
         }
 
@@ -464,7 +470,9 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         if (isset($values['responses'])) {
-            $values['responses'] = $this->container->get('responses.formatter')->format($values['responses']);
+            $values['responses'] = $this->container->get('responses.formatter')->format(
+                $values['responses']
+            );
         }
 
         return $values;
