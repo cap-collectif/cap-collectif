@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 
 class ProposalFormAdmin extends CapcoAdmin
 {
@@ -98,10 +99,12 @@ class ProposalFormAdmin extends CapcoAdmin
                     ->expr()
                     ->andX(
                         $query->expr()->eq('p.Author', ':author'),
-                        $query->expr()->eq('p.visibility', 0)
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );
-        $query->orWhere($query->expr()->gte('p.visibility', 1));
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
         $query->setParameter('author', $user);
 
         return $query;

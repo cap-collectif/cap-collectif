@@ -1,8 +1,12 @@
 <?php
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Doctrine\DBAL\Query\QueryBuilder;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -160,10 +164,12 @@ class OpinionVersionAdmin extends AbstractAdmin
                     ->expr()
                     ->andX(
                         $query->expr()->eq('p.Author', ':author'),
-                        $query->expr()->eq('p.visibility', 0)
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );
-        $query->orWhere($query->expr()->gte('p.visibility', 1));
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
         $query->setParameter('author', $user);
 
         return $query;

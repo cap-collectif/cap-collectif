@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 
 class QuestionnaireAdmin extends CapcoAdmin
 {
@@ -142,10 +143,12 @@ class QuestionnaireAdmin extends CapcoAdmin
                     ->expr()
                     ->andX(
                         $query->expr()->eq('p.Author', ':author'),
-                        $query->expr()->eq('p.visibility', 0)
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );
-        $query->orWhere($query->expr()->gte('p.visibility', 1));
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
         $query->setParameter('author', $user);
 
         return $query;

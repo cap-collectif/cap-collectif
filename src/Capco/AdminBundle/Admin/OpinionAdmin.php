@@ -5,6 +5,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\ORM\QueryBuilder;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 
 class OpinionAdmin extends CapcoAdmin
 {
@@ -260,10 +261,12 @@ class OpinionAdmin extends CapcoAdmin
                     ->expr()
                     ->andX(
                         $query->expr()->eq('p.Author', ':author'),
-                        $query->expr()->eq('p.visibility', 0)
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );
-        $query->orWhere($query->expr()->gte('p.visibility', 1));
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
         $query->setParameter('author', $user);
 
         return $query;
