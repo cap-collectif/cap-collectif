@@ -361,18 +361,6 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Identifies the date and time when the object was created.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'pinned' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
                     'description' => 'true if the contribution is pinned.',
                     'deprecationReason' => null,
                     'complexity' => null,
@@ -386,6 +374,18 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     ],
                     'resolve' => null,
                     'description' => 'true if the contribution is expired.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

@@ -1551,15 +1551,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
 
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
-
   # Array of users following proposal.
   followers(
     # Ordering options for followers returning from the connection
@@ -1617,6 +1608,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # true if the contribution is expired.
   expired: Boolean!
+  published: Boolean!
   step: Consultation!
 
   # The viewer vote.
@@ -2341,15 +2333,14 @@ enum ProposalSubscriptionTypeValue {
 
 # Entities that can be published.
 type ProposalVote implements Publishable {
-    # `true` if the object is published.
-    published: Boolean!
+  # `true` if the object is published.
+  published: Boolean!
 
-    # Identifies when the entity was published at.
-    publishedAt: DateTime
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
 
-    # Reason that the entity was not published.
-    notPublishedReason: NotPublishedReason
-
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
   id: ID!
 
   # The author of the contribution. If null, the vote is anonymous.
