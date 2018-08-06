@@ -14,7 +14,7 @@ type Props = {
 export class ProposalAdminFollowers extends React.Component<Props> {
   render() {
     const { proposal, intl } = this.props;
-    const totalCount = proposal.allFollowers.totalCount;
+    const totalCount = proposal.allFollowers ? proposal.allFollowers.totalCount : 0;
     const isAdmin = true;
     return (
       <div className="box box-primary container-fluid">

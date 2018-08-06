@@ -152,14 +152,7 @@ Scenario: GraphQL client tries to access to the followers of an opinion inside a
     "data": {
       "opinion": {
         "id": "opinion57",
-        "followers": {
-          "edges": [],
-          "pageInfo": {
-            "hasNextPage": false,
-            "endCursor": null
-          },
-          "totalCount": 0
-        }
+        "followers": null
       }
     }
   }

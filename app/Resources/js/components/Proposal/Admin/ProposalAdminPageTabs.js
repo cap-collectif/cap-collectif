@@ -42,7 +42,9 @@ export class ProposalAdminPageTabs extends Component<Props> {
             title={
               <div>
                 <FormattedMessage id="proposal.tabs.followers" />
-                <span className="badge ml-10">{proposal.allFollowers.totalCount}</span>
+                <span className="badge ml-10">
+                  {proposal.allFollowers ? proposal.allFollowers.totalCount : 0}
+                </span>
               </div>
             }>
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}

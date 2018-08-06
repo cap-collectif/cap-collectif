@@ -23,7 +23,7 @@ class OpinionFollowersConnection implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Opinion $opinion, Arg $args): Connection
+    public function __invoke(Opinion $opinion, Arg $args): ?Connection
     {
         $paginator = new Paginator(function ($offset, $limit) use ($opinion, $args) {
             $field = $args->offsetGet('orderBy')['field'];

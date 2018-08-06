@@ -1562,7 +1562,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
     # Returns the last n elements from the list.
     last: Int
-  ): FollowerConnection!
+  ): FollowerConnection
 
   # Kind of follow
   viewerFollowingConfiguration: SubscriptionTypeValue
@@ -1885,7 +1885,7 @@ type Proposal implements Node & Contribution & Publishable & Reportable & Trasha
 
     # Returns the last n elements from the list.
     last: Int
-  ): FollowerConnection!
+  ): FollowerConnection
 
   # Kind of follow
   viewerFollowingConfiguration: SubscriptionTypeValue

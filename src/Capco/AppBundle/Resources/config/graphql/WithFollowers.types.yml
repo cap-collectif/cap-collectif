@@ -4,7 +4,7 @@ WithFollowers:
   config:
     fields:
       followers:
-        type: 'FollowerConnection!'
+        type: 'FollowerConnection'
         args:
           after:
             type: 'String'

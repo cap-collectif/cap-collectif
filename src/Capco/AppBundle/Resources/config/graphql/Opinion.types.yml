@@ -108,7 +108,7 @@ Opinion:
         type: '[Appendix]'
       followers:
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionFollowerConnection", [value, args])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionFollowersConnection", [value, args])'
       viewerFollowingConfiguration:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionResolver", [value, getUser()])'

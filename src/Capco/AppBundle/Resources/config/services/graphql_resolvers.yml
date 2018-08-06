@@ -568,16 +568,14 @@ services:
     tags:
       - { name: overblog_graphql.resolver }
 
-  Capco\AppBundle\GraphQL\Resolver\ViewerFollowerOpinionResolver:
-    class: Capco\AppBundle\GraphQL\Resolver\ViewerFollowerOpinionResolver
+  Capco\AppBundle\GraphQL\Resolver\ViewerFollowingConfigurationOpinionResolver:
     arguments:
       - '@capco.follower.repository'
       - '@logger'
     tags:
       - { name: overblog_graphql.resolver }
 
-  Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionFollowerConnection:
-    class: Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionFollowerConnection
+  Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionFollowersConnection:
     arguments:
       - '@capco.user.repository'
       - '@logger'

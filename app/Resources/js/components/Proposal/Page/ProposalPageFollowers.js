@@ -17,7 +17,7 @@ type Props = {
 export class ProposalPageFollowers extends React.Component<Props> {
   render() {
     const { proposal, relay, pageAdmin } = this.props;
-    if (!proposal.followers.edges) {
+    if (!proposal.followers || !proposal.followers.edges) {
       return graphqlError;
     }
     return (
