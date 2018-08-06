@@ -1,9 +1,9 @@
 Version:
     type: object
-    inherits: [Contribution, Sourceable, Reportable, Argumentable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+    inherits: [Contribution, Sourceable, Reportable, Argumentable, Trashable, ContributionWithAuthor, EditableContribution]
     config:
         description: "A version of contribution"
-        interfaces: [Node, Contribution, Sourceable, Reportable, Argumentable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node, Contribution, Sourceable, Reportable, Argumentable, Trashable, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "DateTime!"

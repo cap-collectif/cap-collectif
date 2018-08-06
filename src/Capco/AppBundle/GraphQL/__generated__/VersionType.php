@@ -23,44 +23,6 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
             'description' => 'A version of contribution',
             'fields' => function () use ($globalVariable) {
                 return [
-                'trashed' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'True if the contribution is trashed.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'trashedAt' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposition_trashedAt", array(0 => $value)]);
-                    },
-                    'description' => 'The moment the moderator trashed the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'trashedReason' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The reason the moderator trashed the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'id' => [
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
@@ -272,6 +234,54 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableAvailableCategoriesResolver", array()]);
                     },
                     'description' => 'The available sources categories of to the sourceable.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashed' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => '`true` if the contribution is trashed.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashedStatus' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The status.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The moment the moderator trashed the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashedReason' => [
+                    'type' => Type::string(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The reason the moderator trashed the contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -490,7 +500,7 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('Sourceable'), $globalVariable->get('typeResolver')->resolve('Reportable'), $globalVariable->get('typeResolver')->resolve('Argumentable'), $globalVariable->get('typeResolver')->resolve('TrashableContribution'), $globalVariable->get('typeResolver')->resolve('ContributionWithAuthor'), $globalVariable->get('typeResolver')->resolve('EditableContribution')];
+                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('Sourceable'), $globalVariable->get('typeResolver')->resolve('Reportable'), $globalVariable->get('typeResolver')->resolve('Argumentable'), $globalVariable->get('typeResolver')->resolve('Trashable'), $globalVariable->get('typeResolver')->resolve('ContributionWithAuthor'), $globalVariable->get('typeResolver')->resolve('EditableContribution')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

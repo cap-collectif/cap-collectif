@@ -1,9 +1,9 @@
 Proposal:
     type: object
-    inherits: [Node, Contribution, Publishable, Reportable]
+    inherits: [Node, Contribution, Publishable, Reportable, Trashable]
     config:
         description: "A budget contribution"
-        interfaces: [Node, Contribution, Publishable, Reportable]
+        interfaces: [Node, Contribution, Publishable, Reportable, Trashable]
         fields:
             show_url:
                 resolve: "@=resolver('proposal_show_url', [value])"
@@ -95,10 +95,6 @@ Proposal:
                 type: "ProposalPublicationStatus!"
                 description: "The publication status for this proposal."
                 resolve: "@=resolver('proposal_publicationStatus', [value])"
-            trashedReason:
-                type: "String"
-            trashedAt:
-                type: "DateTime"
             expired:
                 type: "Boolean"
             reference:

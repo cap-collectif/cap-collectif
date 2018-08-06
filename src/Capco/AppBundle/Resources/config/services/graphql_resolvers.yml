@@ -233,11 +233,6 @@ services:
           alias: 'proposition_updatedAt',
           method: 'resolveUpdatedAt',
         }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_trashedAt',
-          method: 'resolveTrashedAt',
-        }
       - { name: overblog_graphql.resolver, alias: 'argument_url', method: 'resolveArgumentUrl' }
       - {
           name: overblog_graphql.resolver,

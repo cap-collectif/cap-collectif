@@ -35,18 +35,6 @@ final class QuestionChoiceRankingType extends ObjectType implements GeneratedTyp
                     'public' => null,
                     'access' => null,
                 ],
-                'answerCount' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Return the number of responses of the choice at the given position',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'responses' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ResponseConnection')),
                     'args' => [

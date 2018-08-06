@@ -1,9 +1,9 @@
 Argument:
     type: object
-    inherits: [Node, Publishable, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+    inherits: [Node, Publishable, Contribution, Reportable, Trashable, ContributionWithAuthor, EditableContribution]
     config:
         description: "An argument"
-        interfaces: [Node, Publishable, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node, Publishable, Contribution, Reportable, Trashable, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "DateTime!"

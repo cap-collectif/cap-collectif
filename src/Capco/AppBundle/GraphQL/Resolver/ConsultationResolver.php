@@ -253,11 +253,6 @@ class ConsultationResolver implements ContainerAwareInterface
         return null;
     }
 
-    public function resolveTrashedAt(Trashable $object)
-    {
-        return $object->getTrashedAt() ? $object->getTrashedAt()->format(\DateTime::ATOM) : null;
-    }
-
     public function resolveReportingType(Reporting $reporting): int
     {
         return $reporting->getStatus();

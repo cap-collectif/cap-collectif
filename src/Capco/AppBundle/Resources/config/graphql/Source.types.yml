@@ -1,9 +1,9 @@
 Source:
     type: object
-    inherits: [Node, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+    inherits: [Node, Contribution, Reportable, Trashable, ContributionWithAuthor, EditableContribution]
     config:
         description: "A source"
-        interfaces: [Node, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node, Contribution, Reportable, Trashable, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "DateTime!"

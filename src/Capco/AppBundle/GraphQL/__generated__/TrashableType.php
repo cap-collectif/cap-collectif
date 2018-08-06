@@ -12,14 +12,14 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class TrashableContributionType extends InterfaceType implements GeneratedTypeInterface
+final class TrashableType extends InterfaceType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'TrashableContribution',
+            'name' => 'Trashable',
             'description' => 'A trashable contribution',
             'fields' => function () use ($globalVariable) {
                 return [
@@ -28,7 +28,19 @@ final class TrashableContributionType extends InterfaceType implements Generated
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'True if the contribution is trashed.',
+                    'description' => '`true` if the contribution is trashed.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashedStatus' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The status.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -36,12 +48,10 @@ final class TrashableContributionType extends InterfaceType implements Generated
                     'access' => null,
                 ],
                 'trashedAt' => [
-                    'type' => Type::string(),
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposition_trashedAt", array(0 => $value)]);
-                    },
+                    'resolve' => null,
                     'description' => 'The moment the moderator trashed the contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,

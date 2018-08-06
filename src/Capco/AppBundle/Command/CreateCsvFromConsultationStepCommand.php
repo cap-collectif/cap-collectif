@@ -57,7 +57,7 @@ fragment voteInfos on YesNoPairedVote {
 EOF;
 
     protected const TRASHABLE_CONTRIBUTION_FRAGMENT = <<<'EOF'
-fragment trashableInfos on TrashableContribution {
+fragment trashableInfos on Trashable {
   trashed
   trashedAt
   trashedReason

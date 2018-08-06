@@ -158,16 +158,7 @@ type AppendixType {
 }
 
 # An argument
-type Argument implements Node & Publishable & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
-  # True if the contribution is trashed.
-  trashed: Boolean!
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: String
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
+type Argument implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
   # The ID of an object
   id: ID!
 
@@ -200,6 +191,18 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
 
   # Reason that the entity was not published.
   notPublishedReason: NotPublishedReason
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -609,6 +612,18 @@ type Comment implements Node & Publishable & Contribution {
 
   # Reason that the entity was not published.
   notPublishedReason: NotPublishedReason
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
   body: String
   createdAt: DateTime!
   updatedAt: DateTime
@@ -622,7 +637,6 @@ type Comment implements Node & Publishable & Contribution {
   publicationStatus: CommentPublicationStatus!
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection!
-  trashedReason: String
 }
 
 # A connection to a list of items.
@@ -1451,16 +1465,7 @@ type NotificationsConfiguration {
 }
 
 # A contribution
-type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
-  # True if the contribution is trashed.
-  trashed: Boolean!
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: String
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
+type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & Trashable & ContributionWithAuthor & EditableContribution {
   # The ID of an object
   id: ID!
   contribuable: Boolean!
@@ -1512,6 +1517,18 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # Reason that the entity was not published.
   notPublishedReason: NotPublishedReason
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -1771,7 +1788,7 @@ type Project implements Node {
 }
 
 # A budget contribution
-type Proposal implements Node & Contribution & Publishable & Reportable {
+type Proposal implements Node & Contribution & Publishable & Reportable & Trashable {
   # The ID of an object
   id: ID!
 
@@ -1798,6 +1815,18 @@ type Proposal implements Node & Contribution & Publishable & Reportable {
 
   # Reason that the entity was not published.
   notPublishedReason: NotPublishedReason
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
 
   # The admin url for this contribution.
   adminUrl: URI!
@@ -1839,8 +1868,6 @@ type Proposal implements Node & Contribution & Publishable & Reportable {
 
   # The publication status for this proposal.
   publicationStatus: ProposalPublicationStatus!
-  trashedReason: String
-  trashedAt: DateTime
   expired: Boolean
 
   # The unique reference of proposal
@@ -2354,9 +2381,6 @@ type QuestionChoice {
 type QuestionChoiceRanking {
   # Return the position of the choice
   position: Int!
-
-  # Return the number of responses of the choice at the given position
-  answerCount: Int!
 
   # Select the responses of the c
   responses(after: String, first: Int, before: String, last: Int): ResponseConnection!
@@ -2886,16 +2910,7 @@ type SimpleQuestion implements Question {
 }
 
 # A source
-type Source implements Node & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
-  # True if the contribution is trashed.
-  trashed: Boolean!
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: String
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
+type Source implements Node & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
   # The ID of an object
   id: ID!
 
@@ -2919,6 +2934,18 @@ type Source implements Node & Contribution & Reportable & TrashableContribution 
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -3027,15 +3054,27 @@ type Theme {
 }
 
 # A trashable contribution
-interface TrashableContribution {
-  # True if the contribution is trashed.
+interface Trashable {
+  # `true` if the contribution is trashed.
   trashed: Boolean!
 
+  # The status.
+  trashedStatus: TrashableStatus
+
   # The moment the moderator trashed the contribution.
-  trashedAt: String
+  trashedAt: DateTime
 
   # The reason the moderator trashed the contribution.
   trashedReason: String
+}
+
+# Different trashable status.
+enum TrashableStatus {
+  # Content is visible.
+  VISIBLE
+
+  # Content is not visible.
+  INVISIBLE
 }
 
 scalar URI
@@ -3579,16 +3618,7 @@ type ValueResponse implements Response {
 }
 
 # A version of contribution
-type Version implements Node & Contribution & Sourceable & Reportable & Argumentable & TrashableContribution & ContributionWithAuthor & EditableContribution {
-  # True if the contribution is trashed.
-  trashed: Boolean!
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: String
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
+type Version implements Node & Contribution & Sourceable & Reportable & Argumentable & Trashable & ContributionWithAuthor & EditableContribution {
   # The id of the contribution.
   id: ID!
   contribuable: Boolean!
@@ -3631,6 +3661,18 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!

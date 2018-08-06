@@ -64,10 +64,6 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       serialized_name: isDraft
       groups: [Proposals]
-    trashedReason:
-      expose: true
-      serialized_name: trashedReason
-      groups: [Proposals, Elasticsearch]
     enabled:
       expose: true
       groups: [Proposals]
