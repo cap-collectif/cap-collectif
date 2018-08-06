@@ -145,5 +145,5 @@ Scenario: Project trash display correct numbers of elements
     | stepSlug    | collecte-des-avis                |
   When I should see "project.show.trashed.short_name" in the "#main" element
   When I click the "#trash-link" element
-  Then I should see 100 ".opinion__list .opinion" elements
-  And I should see "100 project.show.meta.total_count" in the "h3" element
+  Then I should see 75 ".opinion__list .opinion" elements
+  And I should see "75 project.show.meta.total_count" in the "h3" element

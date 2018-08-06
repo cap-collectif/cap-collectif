@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
@@ -21,8 +20,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class EventsController extends FOSRestController
 {
     /**
-     * Get event comments.
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get event comments",
@@ -45,18 +42,20 @@ class EventsController extends FOSRestController
         $limit = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
 
-        $paginator = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:EventComment')
-                    ->getEnabledByEvent($event, $offset, $limit, $filter);
+        $paginator = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:EventComment')
+            ->getEnabledByEvent($event, $offset, $limit, $filter);
 
         $comments = [];
         foreach ($paginator as $comment) {
             $comments[] = $comment;
         }
 
-        $countWithAnswers = $this->getDoctrine()->getManager()
-                      ->getRepository('CapcoAppBundle:EventComment')
-                      ->countCommentsAndAnswersEnabledByEvent($event);
+        $countWithAnswers = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:EventComment')
+            ->countCommentsAndAnswersEnabledByEvent($event);
 
         return [
             'commentsAndAnswersCount' => (int) $countWithAnswers,
@@ -88,10 +87,7 @@ class EventsController extends FOSRestController
         $comment = (new EventComment())
             ->setAuthorIp($request->getClientIp())
             ->setAuthor($user)
-            ->setEvent($event)
-            ->setIsEnabled(true)
-        ;
-
+            ->setEvent($event);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
@@ -102,7 +98,9 @@ class EventsController extends FOSRestController
         $parent = $comment->getParent();
         if ($parent) {
             if (!$parent instanceof EventComment || $event !== $parent->getEvent()) {
-                throw $this->createNotFoundException('This parent comment is not linked to this event');
+                throw $this->createNotFoundException(
+                    'This parent comment is not linked to this event'
+                );
             }
             if (null !== $parent->getParent()) {
                 throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
@@ -110,9 +108,17 @@ class EventsController extends FOSRestController
         }
 
         $event->setCommentsCount($event->getCommentsCount() + 1);
-        $this->getDoctrine()->getManager()->persist($comment);
-        $this->getDoctrine()->getManager()->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($user);
+        $this->getDoctrine()
+            ->getManager()
+            ->persist($comment);
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
+
+        if ($user) {
+            $this->get('redis_storage.helper')->recomputeUserCounters($user);
+        }
+
         $this->get('event_dispatcher')->dispatch(
             CapcoAppBundleEvents::COMMENT_CHANGED,
             new CommentChangedEvent($comment, 'add')

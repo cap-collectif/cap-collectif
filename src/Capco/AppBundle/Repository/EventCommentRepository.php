@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Event;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -15,10 +16,10 @@ class EventCommentRepository extends EntityRepository
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.Event', 'e')
-            ->leftJoin('c.answers', 'ans', 'WITH', 'ans.isEnabled = true AND ans.trashedAt IS NULL')
+            ->leftJoin('c.answers', 'ans', 'WITH', 'ans.trashedAt IS NULL')
             ->andWhere('c.Event = :event')
             ->andWhere('c.parent is NULL')
-            ->andWhere('c.trashedAt IS NOT NULL')
+            ->andWhere('c.trashedAt IS NULL')
             ->setParameter('event', $event)
             ->orderBy('c.pinned', 'DESC');
         if ('old' === $filter) {
@@ -38,7 +39,7 @@ class EventCommentRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function countCommentsAndAnswersEnabledByEvent($event)
+    public function countCommentsAndAnswersEnabledByEvent(Event $event): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('count(c.id)')

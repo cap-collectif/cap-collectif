@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\SiteParameter\Resolver;
@@ -16,7 +15,10 @@ class LocaleListener
 
     public function onKernelRequest(GetResponseEvent $event): void
     {
-        if (date_default_timezone_get() !== $this->resolver->getValue('global.timezone')) {
+        if (
+            $this->resolver->getValue('global.timezone') &&
+            date_default_timezone_get() !== $this->resolver->getValue('global.timezone')
+        ) {
             date_default_timezone_set($this->resolver->getValue('global.timezone'));
         }
 
