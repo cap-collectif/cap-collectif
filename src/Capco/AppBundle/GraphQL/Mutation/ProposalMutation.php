@@ -255,7 +255,7 @@ class ProposalMutation implements ContainerAwareInterface
                     ->setExpired(false)
                     ->setEnabled(true)
                     ->setDraft(false)
-                    ->setTrashed(false)
+                    ->setTrashedStatus(null)
                     ->setDeletedAt(null);
                 break;
             case 'TRASHED_NOT_VISIBLE':
@@ -267,9 +267,8 @@ class ProposalMutation implements ContainerAwareInterface
             case 'DRAFT':
                 $proposal
                     ->setDraft(true)
-                    ->setExpired(false)
                     ->setEnabled(false)
-                    ->setTrashed(false)
+                    ->setTrashedStatus(null)
                     ->setDeletedAt(null);
                 break;
             default:
