@@ -32,6 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Steps\CollectStep as StepsCollectStep;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 /**
  * @ORM\Table(name="proposal", uniqueConstraints={
@@ -50,6 +51,7 @@ class Proposal
     implements
         Publishable,
         Contribution,
+        Trashable,
         CommentableInterface,
         SelfLinkableInterface,
         SoftDeleteable

@@ -17,13 +17,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 /**
  * @ORM\Table(name="argument")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements Contribution, VotableInterface, Publishable, ModerableInterface
+class Argument implements Contribution, VotableInterface, Trashable, Publishable, ModerableInterface
 {
     use UuidTrait;
     use VotableOkTrait;

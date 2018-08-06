@@ -19,6 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
@@ -33,7 +34,8 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * })
  * @CapcoAssert\HasAuthor
  */
-abstract class Comment implements Publishable, Contribution, VotableInterface, HasAuthorInterface
+abstract class Comment
+    implements Publishable, Trashable, Contribution, VotableInterface, HasAuthorInterface
 {
     use VotableOkTrait;
     use PinnableTrait;

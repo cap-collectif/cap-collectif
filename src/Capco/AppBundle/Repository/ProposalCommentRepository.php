@@ -5,9 +5,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-/**
- * ProposalRepository.
- */
 class ProposalCommentRepository extends EntityRepository
 {
     public function getEnabledByProposal(
