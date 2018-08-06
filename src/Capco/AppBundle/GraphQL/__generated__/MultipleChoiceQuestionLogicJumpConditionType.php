@@ -12,15 +12,15 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class LogicJumpType extends ObjectType implements GeneratedTypeInterface
+final class MultipleChoiceQuestionLogicJumpConditionType extends ObjectType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'LogicJump',
-            'description' => 'A logic jump in a question.',
+            'name' => 'MultipleChoiceQuestionLogicJumpCondition',
+            'description' => 'A particular condition in a logic jump in a multiple choice question.',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [
@@ -37,36 +37,36 @@ final class LogicJumpType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'origin' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Question')),
+                'operator' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('LogicJumpConditionOperator')),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Return the question that trigger this logic jump.',
+                    'description' => 'Return the operator for this condition.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'destination' => [
+                'question' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Question')),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Return the question which this logic jump leads to.',
+                    'description' => 'Return the question which is going to be tested against the condition.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'conditions' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('LogicJumpCondition')),
+                'value' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('QuestionChoice'),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Return the necessited conditions that needs to be fullfiled to trigger this logic jump.',
+                    'description' => 'The value that the condition should meet to be fullfiled (depending on the operator).',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -76,7 +76,7 @@ final class LogicJumpType extends ObjectType implements GeneratedTypeInterface
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [];
+                return [$globalVariable->get('typeResolver')->resolve('LogicJumpCondition')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

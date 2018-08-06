@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180803132631 extends AbstractMigration
+final class Version20180806143600 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -22,7 +22,7 @@ final class Version20180803132631 extends AbstractMigration
             'CREATE TABLE logic_jump (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', origin_id INT NOT NULL, destination_id INT DEFAULT NULL, INDEX IDX_DD5F9E8D56A273CC (origin_id), INDEX IDX_DD5F9E8D816C6140 (destination_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
         );
         $this->addSql(
-            'CREATE TABLE logic_jump_condition (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', question_id INT NOT NULL, value_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', jump_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', operator VARCHAR(10) NOT NULL, INDEX IDX_A7F4B1AC1E27F6BF (question_id), INDEX IDX_A7F4B1ACF920BBA2 (value_id), INDEX IDX_A7F4B1AC7AD85FE5 (jump_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
+            'CREATE TABLE logic_jump_condition (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', question_id INT NOT NULL, jump_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', value_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', operator VARCHAR(10) NOT NULL, condition_type VARCHAR(255) NOT NULL, INDEX IDX_A7F4B1AC1E27F6BF (question_id), INDEX IDX_A7F4B1AC7AD85FE5 (jump_id), INDEX IDX_A7F4B1ACF920BBA2 (value_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
         );
         $this->addSql(
             'ALTER TABLE logic_jump ADD CONSTRAINT FK_DD5F9E8D56A273CC FOREIGN KEY (origin_id) REFERENCES question (id)'
@@ -34,10 +34,10 @@ final class Version20180803132631 extends AbstractMigration
             'ALTER TABLE logic_jump_condition ADD CONSTRAINT FK_A7F4B1AC1E27F6BF FOREIGN KEY (question_id) REFERENCES question (id)'
         );
         $this->addSql(
-            'ALTER TABLE logic_jump_condition ADD CONSTRAINT FK_A7F4B1ACF920BBA2 FOREIGN KEY (value_id) REFERENCES question_choice (id)'
+            'ALTER TABLE logic_jump_condition ADD CONSTRAINT FK_A7F4B1AC7AD85FE5 FOREIGN KEY (jump_id) REFERENCES logic_jump (id)'
         );
         $this->addSql(
-            'ALTER TABLE logic_jump_condition ADD CONSTRAINT FK_A7F4B1AC7AD85FE5 FOREIGN KEY (jump_id) REFERENCES logic_jump (id)'
+            'ALTER TABLE logic_jump_condition ADD CONSTRAINT FK_A7F4B1ACF920BBA2 FOREIGN KEY (value_id) REFERENCES question_choice (id)'
         );
     }
 

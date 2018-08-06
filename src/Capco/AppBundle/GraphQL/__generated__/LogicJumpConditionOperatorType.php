@@ -21,13 +21,13 @@ final class LogicJumpConditionOperatorType extends EnumType implements Generated
             'values' => [
                 'IS' => [
                     'name' => 'IS',
-                    'value' => 'is',
+                    'value' => 'IS',
                     'deprecationReason' => null,
                     'description' => 'Allows to test an equality.',
                 ],
                 'IS_NOT' => [
                     'name' => 'IS_NOT',
-                    'value' => 'is_not',
+                    'value' => 'IS_NOT',
                     'deprecationReason' => null,
                     'description' => 'Allows to test the opposite of an equality test.',
                 ],

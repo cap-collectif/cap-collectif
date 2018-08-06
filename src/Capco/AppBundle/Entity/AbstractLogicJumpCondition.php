@@ -8,9 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="logic_jump_condition")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\LogicJumpConditionRepository")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractLogicJumpConditionRepository")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name = "condition_type", type = "string")
+ * @ORM\DiscriminatorMap({
+ *      "multiple_choice" = "MultipleChoiceQuestionLogicJumpCondition",
+ * })
  */
-class LogicJumpCondition
+abstract class AbstractLogicJumpCondition
 {
     use UuidTrait;
 
@@ -24,11 +29,6 @@ class LogicJumpCondition
      * @ORM\JoinColumn(nullable=false)
      */
     protected $question;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\QuestionChoice")
-     */
-    protected $value;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\LogicJump", inversedBy="conditions")
@@ -75,15 +75,5 @@ class LogicJumpCondition
         return $this;
     }
 
-    public function getValue(): ?QuestionChoice
-    {
-        return $this->value;
-    }
-
-    public function setValue(?QuestionChoice $value): self
-    {
-        $this->value = $value;
-
-        return $this;
-    }
+    abstract public function getConditionType(): string;
 }

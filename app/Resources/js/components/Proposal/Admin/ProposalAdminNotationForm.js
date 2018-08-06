@@ -348,9 +348,11 @@ export default createFragmentContainer(
                   id
                   title
                 }
-                value {
-                  id
-                  title
+                ... on MultipleChoiceQuestionLogicJumpCondition {
+                  value {
+                    id
+                    title
+                  }
                 }
               }
             }

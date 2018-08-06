@@ -4,7 +4,7 @@ LogicJump:
     description: 'A logic jump in a question.'
     fields:
       id:
-        type: 'ID!'
+        builder: "Relay::GlobalId"
       origin:
         description: 'Return the question that trigger this logic jump.'
         type: 'Question!'

@@ -27,7 +27,7 @@ class LogicJump
     protected $destination;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJumpCondition", mappedBy="jump")
+     * @ORM\OneToMany(targetEntity="AbstractLogicJumpCondition", mappedBy="jump")
      */
     protected $conditions;
 
@@ -61,14 +61,14 @@ class LogicJump
     }
 
     /**
-     * @return Collection|LogicJumpCondition[]
+     * @return Collection|AbstractLogicJumpCondition[]
      */
     public function getConditions(): Collection
     {
         return $this->conditions;
     }
 
-    public function addCondition(LogicJumpCondition $condition): self
+    public function addCondition(AbstractLogicJumpCondition $condition): self
     {
         if (!$this->conditions->contains($condition)) {
             $this->conditions[] = $condition;
@@ -78,7 +78,7 @@ class LogicJump
         return $this;
     }
 
-    public function removeCondition(LogicJumpCondition $condition): self
+    public function removeCondition(AbstractLogicJumpCondition $condition): self
     {
         if ($this->conditions->contains($condition)) {
             $this->conditions->removeElement($condition);
