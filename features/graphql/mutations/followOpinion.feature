@@ -148,6 +148,18 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
               "node": {
                 "id": "opinion10"
               }
+            },
+            {
+              "cursor": @string@,
+              "node": {
+                "id": "opinion6"
+              }
+            },
+            {
+              "cursor": @string@,
+              "node": {
+                "id": "opinion7"
+              }
             }
           ]
         }
@@ -160,7 +172,7 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
   {
     "query": "mutation ($input: UnfollowOpinionInput!) {
       unfollowOpinion(input: $input) {
-        proposal {
+        opinion {
           id
         }
       }
@@ -210,8 +222,21 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
   {
     "data": {
       "viewer": {
-        "followingProposals": {
-          "edges": []
+        "followingOpinions": {
+          "edges": [
+            {
+              "cursor": @string@,
+              "node": {
+                "id": "opinion6"
+              }
+            },
+            {
+              "cursor": @string@,
+              "node": {
+                "id": "opinion7"
+              }
+            }
+          ]
         }
       }
     }

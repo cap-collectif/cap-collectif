@@ -221,4 +221,54 @@ Scenario: I'm on qqa opinion and I want to load 20 followers from a cursor
       }
     }
   }
-"""
+  """
+
+Scenario: GraphQL client tries to access to the followers of an opinion inside a non-followable project
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "query ($opinionId: ID!, $count: Int, $cursor: String) {
+      opinion: node(id: $opinionId) {
+        id
+        ... on Opinion {
+          followerConnection(first: $count, after: $cursor) {
+            edges {
+              cursor
+              node {
+                id
+              }
+            }
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            totalCount
+          }
+        }
+      }
+    }",
+    "variables": {
+      "opinionId": "opinion57",
+      "count": 20
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "opinion": {
+        "id": "opinion57",
+        "followerConnection": {
+          "edges": [],
+          "pageInfo": {
+            "hasNextPage": false,
+            "endCursor": null
+          },
+          "totalCount": 0
+        }
+      }
+    }
+  }
+  """
