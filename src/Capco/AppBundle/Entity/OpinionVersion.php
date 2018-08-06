@@ -6,8 +6,6 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\HasDiffInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\DiffableTrait;
-use Capco\AppBundle\Traits\EnableTrait;
-use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -30,13 +28,11 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 {
     use UuidTrait;
     use TrashableTrait;
-    use EnableTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
     use VotableOkNokMitigeTrait;
     use AnswerableTrait;
     use DiffableTrait;
-    use ExpirableTrait;
     use TextableTrait;
     use ModerableTrait;
     use PublishableTrait;
@@ -375,22 +371,17 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function canDisplay($user = null): bool
     {
-        return $this->enabled && $this->getParent()->canDisplay($user);
+        return $this->isPublished() && $this->getParent()->canDisplay($user);
     }
 
     public function canContribute(): bool
     {
-        return $this->enabled && !$this->isTrashed() && $this->getParent()->canContribute();
+        return $this->isPublished() && !$this->isTrashed() && $this->getParent()->canContribute();
     }
 
     public function canBeDeleted(): bool
     {
-        return $this->isEnabled() && !$this->isTrashed() && $this->getParent()->canBeDeleted();
-    }
-
-    public function isPublished(): bool
-    {
-        return $this->enabled && !$this->isTrashed() && $this->parent->isPublished();
+        return $this->isPublished() && !$this->isTrashed() && $this->getParent()->canBeDeleted();
     }
 
     public function increaseArgumentsCount()
@@ -409,7 +400,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function isIndexable(): bool
     {
-        return $this->isEnabled() && !$this->isExpired() && $this->getProject()->isIndexable();
+        return $this->isPublished() && $this->getProject()->isIndexable();
     }
 
     public static function getElasticsearchTypeName(): string

@@ -1,8 +1,7 @@
 <?php
-
 namespace Capco\AppBundle\Model;
 
-interface VoteContribution extends CreatableInterface, ExpirableInterface
+interface VoteContribution extends CreatableInterface
 {
     public function getKind(): string;
 

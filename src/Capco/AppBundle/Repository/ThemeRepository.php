@@ -97,7 +97,7 @@ class ThemeRepository extends EntityRepository
                 WHERE pf.step = :step
                 AND pt.id = t.id
                 AND p.draft = false
-                AND p.expired = false
+                AND p.published = true
                 AND p.trashedStatus IS NULL
                 AND p.deletedAt IS NULL
             ) as value'

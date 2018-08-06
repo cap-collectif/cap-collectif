@@ -17,7 +17,7 @@ class OpinionVoteRepository extends EntityRepository
             ->select('COUNT (DISTINCT v)')
             ->leftJoin('v.opinion', 'o')
             ->andWhere('o.step IN (:steps)')
-            ->andWhere('o.isEnabled = 1')
+            ->andWhere('o.published = 1')
             ->andWhere('v.user = :author')
             ->setParameter(
                 'steps',
@@ -45,7 +45,7 @@ class OpinionVoteRepository extends EntityRepository
             ->select('COUNT (DISTINCT v)')
             ->leftJoin('v.opinion', 'o')
             ->andWhere('o.step = :step')
-            ->andWhere('o.isEnabled = 1')
+            ->andWhere('o.published = 1')
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
@@ -60,7 +60,7 @@ class OpinionVoteRepository extends EntityRepository
             ->leftJoin('u.userType', 'ut')
             ->leftJoin('v.opinion', 'o')
             ->andWhere('o.step = :step')
-            ->andWhere('o.isEnabled = 1')
+            ->andWhere('o.published = 1')
             ->setParameter('step', $step)
             ->orderBy('v.updatedAt', 'ASC');
 
@@ -173,6 +173,6 @@ class OpinionVoteRepository extends EntityRepository
 
     protected function getQueryBuilder()
     {
-        return $this->createQueryBuilder('v')->andWhere('v.expired = false');
+        return $this->createQueryBuilder('v')->andWhere('v.published = true');
     }
 }

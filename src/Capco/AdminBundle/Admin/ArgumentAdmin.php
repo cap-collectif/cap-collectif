@@ -44,9 +44,8 @@ class ArgumentAdmin extends AbstractAdmin
             )
             ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
             ->add('updatedAt', null, ['label' => 'admin.fields.argument.updated_at'])
-            ->add('isEnabled', null, ['label' => 'admin.fields.argument.is_enabled'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.argument.is_trashed'])
-            ->add('expired', null, ['label' => 'admin.global.expired']);
+            ->add('published', null, ['label' => 'admin.fields.argument.is_enabled'])
+            ->add('trashedStatus', null, ['label' => 'admin.fields.argument.is_trashed']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -66,7 +65,7 @@ class ArgumentAdmin extends AbstractAdmin
             ->add('opinion', 'sonata_type_model', ['label' => 'admin.fields.argument.opinion'])
             ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.argument.author'])
             ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
-            ->add('isEnabled', null, [
+            ->add('published', null, [
                 'editable' => true,
                 'label' => 'admin.fields.argument.is_enabled',
             ])
@@ -93,7 +92,7 @@ class ArgumentAdmin extends AbstractAdmin
                 'choices' => Argument::$argumentTypesLabels,
                 'translation_domain' => 'CapcoAppBundle',
             ])
-            ->add('isEnabled', null, [
+            ->add('published', null, [
                 'label' => 'admin.fields.argument.is_enabled',
                 'required' => false,
             ])
@@ -106,13 +105,6 @@ class ArgumentAdmin extends AbstractAdmin
                 'property' => 'username',
             ])
             ->add('body', null, ['label' => 'admin.fields.argument.body', 'attr' => ['rows' => 10]])
-            ->add('expired', null, [
-                'label' => 'admin.global.expired',
-                'attr' => [
-                    'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                    'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                ],
-            ])
             ->add('trashedStatus', TrashedStatusType::class, [
                 'label' => 'admin.fields.opinion.is_trashed',
             ])

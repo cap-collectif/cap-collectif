@@ -76,13 +76,12 @@ class OpinionAdmin extends CapcoAdmin
             )
             ->add('step', null, ['label' => 'admin.fields.opinion.step'])
             ->add('OpinionType', null, ['label' => 'admin.fields.opinion.opinion_type'])
-            ->add('isEnabled', null, ['label' => 'admin.fields.opinion.is_enabled'])
+            ->add('published', null, ['label' => 'admin.fields.opinion.is_enabled'])
             ->add('pinned', null, ['label' => 'admin.fields.opinion.pinned_long'])
             ->add('trashedStatus', null, ['label' => 'admin.fields.opinion.is_trashed'])
             ->add('updatedAt', null, ['label' => 'admin.fields.opinion.updated_at'])
             ->add('argumentsCount', null, ['label' => 'admin.fields.opinion.argument_count'])
-            ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count'])
-            ->add('expired', null, ['label' => 'admin.global.expired']);
+            ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -103,7 +102,7 @@ class OpinionAdmin extends CapcoAdmin
             ->add('position', null, ['label' => 'admin.fields.opinion.position'])
             ->add('argumentsCount', null, ['label' => 'admin.fields.opinion.argument_count'])
             ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count'])
-            ->add('isEnabled', null, [
+            ->add('published', null, [
                 'editable' => true,
                 'label' => 'admin.fields.opinion.is_enabled',
             ])
@@ -179,20 +178,13 @@ class OpinionAdmin extends CapcoAdmin
             ])
             ->end()
             ->with('admin.fields.opinion.group_publication')
-            ->add('isEnabled', null, [
+            ->add('published', null, [
                 'label' => 'admin.fields.opinion.is_enabled',
                 'required' => false,
             ])
             ->add('pinned', null, [
                 'label' => 'admin.fields.opinion.pinned_long',
                 'required' => false,
-            ])
-            ->add('expired', null, [
-                'label' => 'admin.global.expired',
-                'attr' => [
-                    'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                    'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                ],
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
                 'label' => 'admin.fields.opinion.is_trashed',

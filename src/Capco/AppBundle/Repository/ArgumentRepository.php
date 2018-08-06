@@ -25,7 +25,7 @@ class ArgumentRepository extends EntityRepository
                 'a.updatedAt',
                 'aut.username as author',
                 'ut.name as userType',
-                'a.isEnabled as published',
+                'a.published as published',
                 'a.trashedAt as trashed',
                 'c.title as project'
             )
@@ -46,7 +46,7 @@ class ArgumentRepository extends EntityRepository
                 'a.createdAt',
                 'a.updatedAt',
                 'aut.username as author',
-                'a.isEnabled as published',
+                'a.published as published',
                 'a.trashedAt as trashed',
                 'a.body as body',
                 'c.title as project'
@@ -165,7 +165,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->andWhere('a.Author = :author')
-            ->andWhere('o.isEnabled = true')
+            ->andWhere('o.published = true')
             ->andWhere('s.isEnabled = true')
             ->andWhere('c.isEnabled = true')
             ->setParameter('author', $user);
@@ -230,7 +230,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.votes', 'v')
             ->addSelect('v')
             ->andWhere('a.Author = :author')
-            ->andWhere('o.isEnabled = true')
+            ->andWhere('o.published = true')
             ->andWhere('s.isEnabled = true')
             ->setParameter('author', $user)
             ->getQuery()
@@ -239,9 +239,7 @@ class ArgumentRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.isEnabled = true')
-            ->andWhere('a.expired = false');
+        return $this->createQueryBuilder('a')->andWhere('a.published = true');
     }
 
     private function getByContributionQB(Argumentable $contribution)

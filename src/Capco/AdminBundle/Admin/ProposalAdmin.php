@@ -123,7 +123,6 @@ class ProposalAdmin extends AbstractAdmin
             ->add('proposalForm.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.proposal.project',
             ])
-            ->add('expired', null, ['label' => 'admin.global.expired'])
             ->add('evaluers', null, ['label' => 'admin.global.evaluers']);
     }
 

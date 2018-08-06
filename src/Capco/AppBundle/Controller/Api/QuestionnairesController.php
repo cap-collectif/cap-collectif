@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Questionnaire;
@@ -47,23 +46,27 @@ class QuestionnairesController extends FOSRestController
                 $type = $question->getInputType();
                 if ('ranking' === $type) {
                     $questionChoices = $question->getQuestionChoices();
-                    $choices = $questionChoices->map(function ($choice) {
-                        return $choice->getTitle();
-                    })->toArray();
-                    $scores = array_combine($choices, array_map(function ($h) {
-                        return 0;
-                    }, $choices));
+                    $choices = $questionChoices
+                        ->map(function ($choice) {
+                            return $choice->getTitle();
+                        })
+                        ->toArray();
+                    $scores = array_combine(
+                        $choices,
+                        array_map(function ($h) {
+                            return 0;
+                        }, $choices)
+                    );
                     foreach ($question->getResponses() as $response) {
                         $reply = $response->getReply();
                         $responseValue = $response->getValue();
-                        if ($reply && $responseValue && $reply->isEnabled() && !$reply->isExpired()) {
+                        if ($reply && $responseValue && $reply->isPublished()) {
                             // The score is the maximum number of choices for the question
                             // 4 replies gives 4 3 2 1 points
                             // 2 replies with maximum 4 gives 4 3 points
                             $score = $question->getValidationRule()
-                          ? $question->getValidationRule()->getNumber()
-                          : $question->getQuestionChoices()->count()
-                        ;
+                                ? $question->getValidationRule()->getNumber()
+                                : $question->getQuestionChoices()->count();
                             foreach ($responseValue['labels'] as $label) {
                                 $scores[$label] += $score;
                                 --$score;
@@ -72,16 +75,22 @@ class QuestionnairesController extends FOSRestController
                     }
                 }
                 if ('radio' === $type || 'select' === $type || 'checkbox' === $type) {
-                    $choices = $question->getQuestionChoices()->map(function ($choice) {
-                        return $choice->getTitle();
-                    })->toArray();
-                    $scores = array_combine($choices, array_map(function ($h) {
-                        return 0;
-                    }, $choices));
+                    $choices = $question
+                        ->getQuestionChoices()
+                        ->map(function ($choice) {
+                            return $choice->getTitle();
+                        })
+                        ->toArray();
+                    $scores = array_combine(
+                        $choices,
+                        array_map(function ($h) {
+                            return 0;
+                        }, $choices)
+                    );
                     foreach ($question->getResponses() as $response) {
                         $reply = $response->getReply();
                         $responseValue = $response->getValue();
-                        if ($reply && $responseValue && $reply->isEnabled() && !$reply->isExpired()) {
+                        if ($reply && $responseValue && $reply->isPublished()) {
                             if (\is_string($responseValue)) {
                                 ++$scores[$responseValue];
                             } else {
@@ -93,9 +102,9 @@ class QuestionnairesController extends FOSRestController
                     }
                 }
                 $data = [
-                  'question_title' => $question->getTitle(),
-                  'question_id' => $question->getId(),
-                  'question_type' => $question->getInputType(),
+                    'question_title' => $question->getTitle(),
+                    'question_id' => $question->getId(),
+                    'question_type' => $question->getInputType(),
                 ];
                 if (\count($scores) > 0) {
                     $data['scores'] = $scores;
@@ -103,9 +112,9 @@ class QuestionnairesController extends FOSRestController
                 $questionsResults[] = $data;
             }
             $results[] = [
-              'questionnaire_id' => $questionnaire->getId(),
-              'questionnaire_title' => $questionnaire->getTitle(),
-              'questions' => $questionsResults,
+                'questionnaire_id' => $questionnaire->getId(),
+                'questionnaire_title' => $questionnaire->getTitle(),
+                'questions' => $questionsResults,
             ];
         }
 

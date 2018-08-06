@@ -5,8 +5,6 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\VoteContribution;
-use Capco\AppBundle\Traits\EnableTrait;
-use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
@@ -30,9 +28,7 @@ class Reply implements Publishable, Contribution, VoteContribution
 {
     use UuidTrait;
     use TimestampableTrait;
-    use EnableTrait;
     use PrivatableTrait;
-    use ExpirableTrait;
     use HasResponsesTrait;
     use PublishableTrait;
 

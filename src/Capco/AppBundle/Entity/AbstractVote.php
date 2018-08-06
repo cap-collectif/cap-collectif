@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Model\Publishable;
-use Capco\AppBundle\Traits\ExpirableTrait;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\PublishableTrait;
@@ -67,7 +66,6 @@ use Capco\AppBundle\Traits\TimestampableTrait;
  */
 abstract class AbstractVote implements Publishable, VoteContribution, HasAuthorInterface
 {
-    use ExpirableTrait;
     use TimestampableTrait;
     use IdTrait;
     use PublishableTrait;
@@ -90,7 +88,7 @@ abstract class AbstractVote implements Publishable, VoteContribution, HasAuthorI
 
     public function isIndexable(): bool
     {
-        return !$this->isExpired();
+        return $this->isPublished();
     }
 
     public function getUser(): ?User

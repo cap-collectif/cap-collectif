@@ -10,8 +10,6 @@ Source:
       createdAt:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
-      expired:
-        type: 'Boolean!'
       viewerHasReport:
         resolve: '@=value.userHasReport(getUser())'
       published:

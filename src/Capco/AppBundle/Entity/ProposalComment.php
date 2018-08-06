@@ -38,7 +38,7 @@ class ProposalComment extends Comment
     {
         try {
             return (
-                $this->getIsEnabled() &&
+                $this->isPublished() &&
                 !$this->getRelatedObject()->isDeleted() &&
                 $this->getProposal()
                     ->getProject()

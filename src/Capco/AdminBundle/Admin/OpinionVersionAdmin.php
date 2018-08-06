@@ -45,10 +45,9 @@ class OpinionVersionAdmin extends AbstractAdmin
                 ['property' => 'username']
             )
             ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
-            ->add('enabled', null, ['label' => 'admin.fields.opinion_version.is_enabled'])
+            ->add('published', null, ['label' => 'admin.fields.opinion_version.is_enabled'])
             ->add('trashedStatus', null, ['label' => 'admin.fields.opinion_version.is_trashed'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.opinion_version.updated_at'])
-            ->add('expired', null, ['label' => 'admin.global.expired']);
+            ->add('updatedAt', null, ['label' => 'admin.fields.opinion_version.updated_at']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -61,7 +60,7 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->add('comment', null, ['label' => 'admin.fields.opinion_version.comment'])
             ->add('author', null, ['label' => 'admin.fields.opinion_version.author'])
             ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
-            ->add('enabled', null, [
+            ->add('published', null, [
                 'label' => 'admin.fields.opinion_version.is_enabled',
                 'editable' => true,
             ])
@@ -107,16 +106,9 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->end()
 
             ->with('admin.fields.opinion_version.group_publication')
-            ->add('enabled', null, [
+            ->add('published', null, [
                 'label' => 'admin.fields.opinion_version.is_enabled',
                 'required' => false,
-            ])
-            ->add('expired', null, [
-                'label' => 'admin.global.expired',
-                'attr' => [
-                    'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                    'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                ],
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
                 'label' => 'admin.fields.opinion.is_trashed',

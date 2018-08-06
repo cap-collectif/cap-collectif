@@ -38,11 +38,6 @@ Opinion:
       pinned:
         type: 'Boolean!'
         description: 'true if the contribution is pinned.'
-      expired:
-        type: 'Boolean!'
-        description: 'true if the contribution is expired.'
-      published:
-        type: 'Boolean!'
       viewerHasReport:
         resolve: '@=value.userHasReport(getUser())'
       step:

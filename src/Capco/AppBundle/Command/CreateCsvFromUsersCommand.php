@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\GraphQL\GraphQLToCsv;
@@ -12,9 +11,9 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
 {
     protected function configure(): void
     {
-        $this
-            ->setName('capco:export:users')
-            ->setDescription('Create csv file from consultation step data');
+        $this->setName('capco:export:users')->setDescription(
+            'Create csv file from consultation step data'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -25,15 +24,15 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         }
         $csvGenerator = $this->getContainer()->get(GraphQLToCsv::class);
         $fileName = 'users.csv';
-        $writer = Writer::createFromPath($container->getParameter('kernel.root_dir') . '/../web/export/' . $fileName, 'w');
+        $writer = Writer::createFromPath(
+            $container->getParameter('kernel.root_dir') . '/../web/export/' . $fileName,
+            'w'
+        );
         $writer->setDelimiter(',');
         $writer->setNewline("\r\n");
         $writer->setOutputBOM(Writer::BOM_UTF8);
         $requestString = $this->getUsersGraphQLQuery();
-        $csvGenerator->generate(
-            $requestString,
-            $writer
-        );
+        $csvGenerator->generate($requestString, $writer);
         $output->writeln('The export file "' . $fileName . '" has been created.');
     }
 
@@ -51,7 +50,6 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         rolesText
         enabled
         locked
-        expired
         phoneConfirmed
         phoneConfirmationSentAt
         userType { name }

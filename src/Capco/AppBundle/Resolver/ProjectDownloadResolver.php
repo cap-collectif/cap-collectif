@@ -55,7 +55,7 @@ class ProjectDownloadResolver
     {
         $headers = [
             'id',
-            'expired',
+            'published',
             'author',
             'author_id',
             'author_email',
@@ -133,7 +133,7 @@ class ProjectDownloadResolver
     public function getRepliesData($replies)
     {
         foreach ($replies as $reply) {
-            if ($reply['enabled']) {
+            if ($reply['published']) {
                 $responses = $this->em->getRepository(
                     'CapcoAppBundle:Responses\AbstractResponse'
                 )->getByReplyAsArray($reply['id']);
@@ -148,7 +148,7 @@ class ProjectDownloadResolver
     {
         $item = [
             'id' => $reply['id'],
-            'expired' => $reply['expired'],
+            'published' => $reply['published'],
             'author' => $reply['author']['username'],
             'author_id' => $reply['author']['id'],
             'author_email' => $reply['author']['email'],

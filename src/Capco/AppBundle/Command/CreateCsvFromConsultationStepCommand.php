@@ -30,7 +30,6 @@ fragment argumentInfos on Argument {
   createdAt
   updatedAt
   url
-  expired
   published
   ...trashableInfos
   votesCount
@@ -52,7 +51,6 @@ fragment voteInfos on YesNoPairedVote {
  ...authorInfos
  value
  createdAt  
- expired
 }
 EOF;
 
@@ -91,7 +89,6 @@ fragment sourceInfos on Source {
   body
   createdAt
   updatedAt
-  expired
   published
   ...trashableInfos
   votesCount
@@ -109,7 +106,6 @@ EOF;
         'contributions_sources_body' => 'body',
         'contributions_sources_createdAt' => 'createdAt',
         'contributions_sources_updatedAt' => 'updatedAt',
-        'contributions_sources_expired' => 'expired',
         'contributions_sources_published' => 'published',
         'contributions_sources_votesCount' => 'votesCount',
     ];
@@ -119,7 +115,6 @@ EOF;
         'contributions_votes_author_id' => 'author.id',
         'contributions_votes_value' => 'value',
         'contributions_votes_createdAt' => 'createdAt',
-        'contributions_votes_expired' => 'expired',
     ];
 
     protected const SHEET_HEADER = [
@@ -198,7 +193,6 @@ EOF;
         'contributions_arguments_createdAt' => 'createdAt',
         'contributions_arguments_updatedAt' => 'updatedAt',
         'contributions_arguments_url' => 'url',
-        'contributions_arguments_expired' => 'expired',
         'contributions_arguments_published' => 'published',
         'contributions_arguments_trashed' => 'trashed',
         'contributions_arguments_trashedAt' => 'trashedAt',
@@ -215,7 +209,6 @@ EOF;
         'contributions_createdAt' => 'createdAt',
         'contributions_updatedAt' => 'updatedAt',
         'contributions_url' => 'url',
-        'contributions_expired' => 'expired',
         'contributions_published' => 'published',
         'contributions_trashed' => 'trashed',
         'contributions_trashedAt' => 'trashedAt',
@@ -238,7 +231,6 @@ EOF;
         'contributions_arguments_createdAt' => 'createdAt',
         'contributions_arguments_updatedAt' => 'updatedAt',
         'contributions_arguments_url' => 'url',
-        'contributions_arguments_expired' => 'expired',
         'contributions_arguments_published' => 'published',
         'contributions_arguments_trashed' => 'trashed',
         'contributions_arguments_trashedAt' => 'trashedAt',
@@ -248,7 +240,6 @@ EOF;
         'contributions_votes_author_id' => 'votes.author.id',
         'contributions_votes_value' => 'votes.value',
         'contributions_votes_createdAt' => 'votes.createdAt',
-        'contributions_votes_expired' => 'votes.expired',
         'contributions_reportings_related_id' => 'reportings.related.id',
         'contributions_reportings_related_kind' => 'reportings.related.kind',
         'contributions_reportings_id' => 'reportings.id',
@@ -402,7 +393,6 @@ ${sourceFragment}
             createdAt
             updatedAt
             url
-            expired
             published
             ...trashableInfos
             votesOk: votes(first: 0, value: YES) {
@@ -476,7 +466,6 @@ ${sourceFragment}
                         createdAt
                         updatedAt
                         url
-                        expired
                         published
                         ...trashableInfos
                         votesOk: votes(first: 0, value: YES) {

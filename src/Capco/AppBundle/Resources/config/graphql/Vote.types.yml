@@ -7,9 +7,6 @@ Vote:
       createdAt:
         type: 'DateTime!'
         description: 'Date of vote.'
-      expired:
-        type: 'Boolean!'
-        description: "If vote is expired, it exists but doesn't count."
       kind:
         type: 'String!'
         description: 'Returns Type of vote'

@@ -9,7 +9,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
@@ -39,7 +38,6 @@ abstract class Comment
 {
     use VotableOkTrait;
     use PinnableTrait;
-    use ExpirableTrait;
     use UuidTrait;
     use TextableTrait;
     use TimestampableTrait;
@@ -57,13 +55,6 @@ abstract class Comment
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_enabled", type="boolean")
-     */
-    protected $isEnabled = true;
 
     /**
      * @var User
@@ -174,21 +165,6 @@ abstract class Comment
         return $this;
     }
 
-    public function getIsEnabled(): bool
-    {
-        return $this->isEnabled;
-    }
-
-    public function setIsEnabled(bool $isEnabled = null): self
-    {
-        $this->isEnabled = $isEnabled;
-
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
     public function getAuthor()
     {
         return $this->Author;
@@ -367,17 +343,17 @@ abstract class Comment
 
     public function canDisplay($user = null): bool
     {
-        return $this->isEnabled && $this->canDisplayRelatedObject();
+        return $this->isPublished() && $this->canDisplayRelatedObject($user);
     }
 
     public function canContribute(): bool
     {
-        return $this->isEnabled && !$this->isTrashed() && $this->canContributeToRelatedObject();
+        return $this->isPublished() && !$this->isTrashed() && $this->canContributeToRelatedObject();
     }
 
     public function canVote(): bool
     {
-        return $this->isEnabled && !$this->isTrashed();
+        return $this->isPublished() && !$this->isTrashed();
     }
 
     public function removeCommentFromRelatedObject()
@@ -428,7 +404,7 @@ abstract class Comment
 
     public function isIndexable(): bool
     {
-        return $this->getIsEnabled();
+        return $this->isPublished();
     }
 
     public static function getElasticsearchTypeName(): string

@@ -30,8 +30,6 @@ Version:
       url:
         description: 'The url of version.'
         resolve: "@=resolver('version_url', [value])"
-      expired:
-        type: 'Boolean!'
       published:
         type: 'Boolean!'
       viewerHasReport:

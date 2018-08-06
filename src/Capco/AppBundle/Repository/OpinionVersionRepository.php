@@ -42,7 +42,7 @@ class OpinionVersionRepository extends EntityRepository
                 'o.createdAt',
                 'o.updatedAt',
                 'a.username as author',
-                'o.enabled as published',
+                'o.published as published',
                 'o.trashedAt as trashed',
                 'c.title as project'
             )
@@ -63,7 +63,7 @@ class OpinionVersionRepository extends EntityRepository
                 'o.createdAt',
                 'o.updatedAt',
                 'a.username as author',
-                'o.enabled as published',
+                'o.published as published',
                 'o.trashedAt as trashed',
                 'CONCAT(CONCAT(o.comment, \'<hr>\'), o.body) as body',
                 'c.title as project'
@@ -296,8 +296,6 @@ class OpinionVersionRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
-        return $this->createQueryBuilder($alias)
-            ->andWhere($alias . '.enabled = true')
-            ->andWhere($alias . '.expired = false');
+        return $this->createQueryBuilder($alias)->andWhere($alias . '.published = true');
     }
 }

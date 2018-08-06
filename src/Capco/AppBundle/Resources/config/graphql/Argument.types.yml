@@ -30,8 +30,6 @@ Argument:
         resolve: "@=resolver('argument_url', [value])"
       url:
         resolve: "@=resolver('argument_url', [value])"
-      expired:
-        type: 'Boolean!'
       type:
         type: 'ArgumentValue!'
         description: 'The type.'

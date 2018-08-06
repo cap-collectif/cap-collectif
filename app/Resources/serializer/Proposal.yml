@@ -64,9 +64,6 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       serialized_name: isDraft
       groups: [Proposals]
-    enabled:
-      expose: true
-      groups: [Proposals]
     proposalForm:
       expose: true
       groups: [Proposals, Elasticsearch]

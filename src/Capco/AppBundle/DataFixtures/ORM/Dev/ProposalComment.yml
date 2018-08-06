@@ -4,7 +4,6 @@ Capco\AppBundle\Entity\ProposalComment:
     proposal: '@proposal1'
     Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
-    isEnabled: true
     createdAt: '<dateTimeBetween("-2 days", "now")>'
     publishedAt: '<dateTimeBetween("-2 days", "now")>'
   propComment5:
@@ -13,7 +12,6 @@ Capco\AppBundle\Entity\ProposalComment:
     parent: '@propComment1'
     Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
-    isEnabled: true
     createdAt: '<dateTimeBetween("-2 days", "now")>'
     publishedAt: '<dateTimeBetween("-2 days", "now")>'
   anonComment1:
@@ -23,7 +21,6 @@ Capco\AppBundle\Entity\ProposalComment:
     author_email: enjoyphoenix@gmail.com
     author_ip: 192.168.1.1
     body: <text(300)>
-    isEnabled: true
     createdAt: '<dateTimeBetween("-2 days", "now")>'
     publishedAt: '<dateTimeBetween("-2 days", "now")>'
   propComment{7..20}:
@@ -31,7 +28,6 @@ Capco\AppBundle\Entity\ProposalComment:
     proposal: '@proposal1'
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    isEnabled: true
     createdAt: '<dateTimeBetween("-2 days", "now")>'
     publishedAt: '<dateTimeBetween("-2 days", "now")>'
   propComment{21..27}:

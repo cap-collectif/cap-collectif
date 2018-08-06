@@ -55,13 +55,12 @@ class CommentAdmin extends AbstractAdmin
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
             ->add('votesCount', null, ['label' => 'admin.fields.comment.vote_count'])
             ->add('updatedAt', null, ['label' => 'admin.fields.comment.updated_at'])
-            ->add('isEnabled', null, ['label' => 'admin.fields.comment.is_enabled'])
+            ->add('published', null, ['label' => 'admin.fields.comment.is_enabled'])
             ->add('trashedStatus', null, ['label' => 'admin.fields.comment.is_trashed'])
             ->add('type', 'doctrine_orm_class', [
                 'label' => 'admin.fields.comment.type',
                 'sub_classes' => $this->getSubClasses(),
-            ])
-            ->add('expired', null, ['label' => 'admin.global.expired']);
+            ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -84,7 +83,7 @@ class CommentAdmin extends AbstractAdmin
                 'mapped' => false,
             ])
             ->add('votesCount', null, ['label' => 'admin.fields.comment.vote_count'])
-            ->add('isEnabled', null, [
+            ->add('published', null, [
                 'editable' => true,
                 'label' => 'admin.fields.comment.is_enabled',
             ])
@@ -127,7 +126,7 @@ class CommentAdmin extends AbstractAdmin
             ])
             ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
-            ->add('isEnabled', null, [
+            ->add('published', null, [
                 'label' => 'admin.fields.comment.is_enabled',
                 'required' => false,
             ])

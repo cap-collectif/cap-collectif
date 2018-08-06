@@ -69,7 +69,7 @@ class OpinionTypeRepository extends EntityRepository
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
             ->andWhere('s.isEnabled = :enabled')
-            ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('o.published = :enabled')
             ->andWhere('o.Author = :author')
             ->setParameter('enabled', true)
             ->setParameter('author', $user)
@@ -96,7 +96,7 @@ class OpinionTypeRepository extends EntityRepository
             ->leftJoin('pas.project', 'p')
             ->addGroupBy('ot.id')
             ->andWhere('o.Author = :author')
-            ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('o.published = :enabled')
             ->andWhere('s.isEnabled = :enabled')
             ->setParameter('enabled', true)
             ->setParameter('author', $user)
@@ -130,7 +130,7 @@ class OpinionTypeRepository extends EntityRepository
                 'ot.Opinions',
                 'o',
                 'WITH',
-                'o.isEnabled = :enabled AND o.step = :step AND o.trashedAt IS NULL'
+                'o.published = :enabled AND o.step = :step AND o.trashedAt IS NULL'
             )
             ->andWhere('ot IN (:allowedTypes)')
             ->setParameter('step', $step)

@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\ModerableInterface;
-use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -18,18 +17,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 /**
  * @ORM\Table(name="argument")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements Contribution, VotableInterface, Trashable, Publishable, ModerableInterface
+class Argument implements Contribution, VotableInterface, Publishable, ModerableInterface
 {
     use UuidTrait;
     use VotableOkTrait;
-    use ExpirableTrait;
     use TextableTrait;
     use ModerableTrait;
     use PublishableTrait;
@@ -62,11 +59,6 @@ class Argument implements Contribution, VotableInterface, Trashable, Publishable
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
-
-    /**
-     * @ORM\Column(name="is_enabled", type="boolean")
-     */
-    private $isEnabled = true;
 
     /**
      * @ORM\Column(name="type", type="integer")
@@ -140,25 +132,6 @@ class Argument implements Contribution, VotableInterface, Trashable, Publishable
     public function setUpdatedAt(\DateTime $date): self
     {
         $this->updatedAt = $date;
-
-        return $this;
-    }
-
-    public function getIsEnabled(): bool
-    {
-        return $this->isEnabled;
-    }
-
-    public function setIsEnabled(bool $isEnabled): self
-    {
-        $this->isEnabled = $isEnabled;
-
-        return $this;
-    }
-
-    public function setEnabled(bool $enabled): self
-    {
-        $this->isEnabled = $enabled;
 
         return $this;
     }
@@ -264,22 +237,17 @@ class Argument implements Contribution, VotableInterface, Trashable, Publishable
 
     public function canDisplay($user = null): bool
     {
-        return $this->getIsEnabled() && $this->getParent()->canDisplay($user);
+        return $this->isPublished() && $this->getParent()->canDisplay($user);
     }
 
     public function canContribute(): bool
     {
-        return $this->getIsEnabled() && !$this->isTrashed() && $this->getParent()->canContribute();
-    }
-
-    public function isPublished(): bool
-    {
-        return $this->getIsEnabled() && !$this->isTrashed() && $this->getParent()->isPublished();
+        return $this->isPublished() && !$this->isTrashed() && $this->getParent()->canContribute();
     }
 
     public function canBeDeleted(): bool
     {
-        return $this->getIsEnabled() && !$this->isTrashed() && $this->getParent()->canBeDeleted();
+        return $this->isPublished() && !$this->isTrashed() && $this->getParent()->canBeDeleted();
     }
 
     public function getParent()
@@ -318,7 +286,7 @@ class Argument implements Contribution, VotableInterface, Trashable, Publishable
 
     public function isIndexable(): bool
     {
-        return $this->getIsEnabled() && $this->getProject()->isIndexable();
+        return $this->isPublished() && $this->getProject()->isIndexable();
     }
 
     public static function getElasticsearchTypeName(): string

@@ -629,11 +629,10 @@ class ProposalRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
-            ->andWhere($alias . '.expired = false')
             ->andWhere($alias . '.draft = false')
             ->andWhere($alias . '.trashedAt IS NULL')
             ->andWhere($alias . '.deletedAt IS NULL')
-            ->andWhere($alias . '.enabled = true');
+            ->andWhere($alias . '.published = true');
     }
 
     private function qbProposalsByFormAndEvaluer(ProposalForm $form, User $user): QueryBuilder

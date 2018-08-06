@@ -26,7 +26,7 @@ class SourceRepository extends EntityRepository
                 's.updatedAt',
                 'a.username as author',
                 'ut.name as userType',
-                's.isEnabled as published',
+                's.published as published',
                 's.trashedAt as trashed'
             )
             ->leftJoin('s.author', 'a')
@@ -87,7 +87,7 @@ class SourceRepository extends EntityRepository
                 's.createdAt',
                 's.updatedAt',
                 'a.username as author',
-                's.isEnabled as published',
+                's.published as published',
                 's.trashedAt as trashed',
                 's.body as body'
             )
@@ -163,8 +163,9 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.author', 'aut')
             ->leftJoin('aut.media', 'm')
             ->andWhere('s.author = :author')
-            ->andWhere('o.isEnabled = :enabled')
+            ->andWhere('o.published = :enabled')
             ->andWhere('cs.isEnabled = :enabled')
+            ->andWhere('c.published = :enabled')
             ->setParameter('author', $user)
             ->setParameter('enabled', true)
             ->orderBy('s.createdAt', 'DESC');
@@ -199,8 +200,6 @@ class SourceRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.isEnabled = true')
-            ->andWhere('s.expired = false');
+        return $this->createQueryBuilder('s')->andWhere('s.published = true');
     }
 }

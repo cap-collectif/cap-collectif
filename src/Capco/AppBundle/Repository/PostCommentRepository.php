@@ -5,9 +5,6 @@ use Capco\AppBundle\Entity\Post;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-/**
- * PostCommentRepository.
- */
 class PostCommentRepository extends EntityRepository
 {
     public function getEnabledByPost($post, $offset = 0, $limit = 10, $filter = 'last')
@@ -19,16 +16,10 @@ class PostCommentRepository extends EntityRepository
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.post', 'p')
-            ->leftJoin(
-                'c.answers',
-                'ans',
-                'WITH',
-                'ans.isEnabled = :enabled AND ans.trashedAt IS NULL'
-            )
+            ->leftJoin('c.answers', 'ans', 'WITH', 'ans.published = true AND ans.trashedAt IS NULL')
             ->andWhere('c.post = :post')
             ->andWhere('c.parent is NULL')
             ->andWhere('c.trashedAt IS NULL')
-            ->setParameter('enabled', true)
             ->setParameter('post', $post)
             ->orderBy('c.pinned', 'DESC');
         if ('old' === $filter) {
@@ -98,8 +89,6 @@ class PostCommentRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.isEnabled = true')
-            ->andWhere('c.expired = false');
+        return $this->createQueryBuilder('c')->andWhere('c.published = true');
     }
 }

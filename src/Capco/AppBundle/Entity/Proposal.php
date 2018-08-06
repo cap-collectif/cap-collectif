@@ -9,9 +9,7 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Publishable;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\DraftableTrait;
-use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
@@ -61,10 +59,8 @@ class Proposal
     use ReferenceTrait;
     use CommentableTrait;
     use TimestampableTrait;
-    use EnableTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
-    use ExpirableTrait;
     use SelfLinkableTrait;
     use SoftDeleteTrait;
     use NullableTextableTrait;
@@ -491,7 +487,7 @@ class Proposal
 
     public function canDisplay($user = null): bool
     {
-        if ($this->enabled && !$this->isTrashed()) {
+        if ($this->isPublished() && !$this->isTrashed()) {
             return $this->getStep() ? $this->getStep()->canDisplay($user) : false;
         }
 
@@ -520,7 +516,7 @@ class Proposal
     public function canContribute(): bool
     {
         return (
-            ($this->enabled || $this->isDraft()) &&
+            ($this->isPublished() || $this->isDraft()) &&
             !$this->isTrashed() &&
             $this->getStep() &&
             $this->getStep()->canContribute()
@@ -530,7 +526,7 @@ class Proposal
     public function canComment(): bool
     {
         return (
-            $this->enabled &&
+            $this->isPublished() &&
             !$this->isTrashed() &&
             $this->proposalForm &&
             $this->proposalForm->isCommentable() &&
@@ -580,11 +576,6 @@ class Proposal
         $this->likers->removeElement($liker);
 
         return $this;
-    }
-
-    public function isPublished(): bool
-    {
-        return $this->enabled && !$this->isTrashed();
     }
 
     public function getSelectionSteps(): array
@@ -993,19 +984,15 @@ class Proposal
             return self::STATE_HIDDEN_CONTENT;
         }
 
-        if (!$this->isEnabled() && !$this->isDraft()) {
+        if (!$this->isPublished() && !$this->isDraft()) {
             return self::STATE_DISABlED;
-        }
-
-        if ($this->isExpired()) {
-            return self::STATE_EXPIRED;
         }
 
         if ($this->isDraft()) {
             return self::STATE_DRAFT;
         }
 
-        if ($this->isEnabled()) {
+        if ($this->isPublished()) {
             return self::STATE_ENABLED;
         }
 
@@ -1056,7 +1043,7 @@ class Proposal
 
     public function isIndexable(): bool
     {
-        return $this->enabled && !$this->expired && !$this->isDraft() && !$this->isDeleted();
+        return $this->isPublished() && !$this->isDraft() && !$this->isDeleted();
     }
 
     public static function getElasticsearchTypeName(): string

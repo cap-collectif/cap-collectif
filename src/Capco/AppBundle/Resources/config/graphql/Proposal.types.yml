@@ -101,8 +101,6 @@ Proposal:
         type: 'ProposalPublicationStatus!'
         description: 'The publication status for this proposal.'
         resolve: "@=resolver('proposal_publicationStatus', [value])"
-      expired:
-        type: 'Boolean'
       reference:
         type: 'String!'
         description: 'The unique reference of proposal'

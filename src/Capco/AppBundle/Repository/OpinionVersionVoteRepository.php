@@ -85,8 +85,8 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->leftJoin('v.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'o')
             ->andWhere('o.step IN (:steps)')
-            ->andWhere('ov.enabled = 1')
-            ->andWhere('o.isEnabled = 1')
+            ->andWhere('ov.published = 1')
+            ->andWhere('o.published = 1')
             ->andWhere('v.user = :author')
             ->setParameter(
                 'steps',
@@ -105,8 +105,8 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->leftJoin('v.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'o')
             ->andWhere('o.step = :step')
-            ->andWhere('ov.enabled = true')
-            ->andWhere('o.isEnabled = true')
+            ->andWhere('ov.published = true')
+            ->andWhere('o.published = true')
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
@@ -114,7 +114,7 @@ class OpinionVersionVoteRepository extends EntityRepository
     }
 
     /**
-     * Get enabled by consultation step.
+     * Get published by consultation step.
      *
      * @param mixed $asArray
      */
@@ -127,8 +127,8 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->leftJoin('v.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'o')
             ->andWhere('o.step = :step')
-            ->andWhere('ov.enabled = 1')
-            ->andWhere('o.isEnabled = 1')
+            ->andWhere('ov.published = 1')
+            ->andWhere('o.published = 1')
             ->setParameter('step', $step)
             ->orderBy('v.updatedAt', 'ASC');
 
@@ -190,6 +190,6 @@ class OpinionVersionVoteRepository extends EntityRepository
 
     protected function getQueryBuilder()
     {
-        return $this->createQueryBuilder('v')->andWhere('v.expired = false');
+        return $this->createQueryBuilder('v')->andWhere('v.published = true');
     }
 }

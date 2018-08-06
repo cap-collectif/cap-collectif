@@ -206,7 +206,6 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  expired: Boolean!
 
   # The type.
   type: ArgumentValue!
@@ -692,9 +691,6 @@ type CommentVote {
 
   # Date of vote.
   createdAt: DateTime
-
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
 
   # The author of the contribution.
   author: User!
@@ -1560,9 +1556,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # true if the contribution is pinned.
   pinned: Boolean!
-
-  # true if the contribution is expired.
-  expired: Boolean!
   step: Consultation!
 
   # The viewer vote.
@@ -1652,9 +1645,6 @@ type OpinionVote implements Publishable & YesNoPairedVote {
   # The author of the contribution. If null, account has been deleted.
   author: User
   value: YesNoPairedVoteValue!
-
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
 
   # Date of vote.
   createdAt: DateTime!
@@ -1941,7 +1931,6 @@ type Proposal implements Node & Contribution & Publishable & Reportable & Trasha
 
   # The publication status for this proposal.
   publicationStatus: ProposalPublicationStatus!
-  expired: Boolean
 
   # The unique reference of proposal
   reference: String!
@@ -2278,9 +2267,6 @@ type ProposalVote implements Publishable {
   # Is the vote anonymous ?
   anonymous: Boolean!
 
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
-
   # Date of vote.
   createdAt: DateTime!
 
@@ -2559,7 +2545,6 @@ type Reply implements Node & Publishable & Contribution {
 
   # Reason that the entity was not published.
   notPublishedReason: NotPublishedReason
-  enabled: Boolean!
   private: Boolean!
   createdAt: DateTime!
   responses: [Response]!
@@ -2569,7 +2554,6 @@ type Reply implements Node & Publishable & Contribution {
 
   # The updated date.
   updatedAt: DateTime
-  expired: Boolean!
 
   # Identifies the form where the contribution was submitted.
   questionnaire: Questionnaire!
@@ -2984,7 +2968,6 @@ type Source implements Node & Contribution & Reportable & Trashable & Contributi
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  expired: Boolean!
   published: Boolean!
   votesCount: Int!
   contribuable: Boolean!
@@ -3744,7 +3727,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  expired: Boolean!
   published: Boolean!
 
   # Explenation.
@@ -3846,9 +3828,6 @@ type VersionVote implements Publishable & YesNoPairedVote {
   author: User
   value: YesNoPairedVoteValue!
 
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
-
   # Date of vote.
   createdAt: DateTime!
 
@@ -3864,9 +3843,6 @@ type Vote {
 
   # Date of vote.
   createdAt: DateTime!
-
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
 
   # Returns Type of vote
   kind: String!
@@ -3937,9 +3913,6 @@ interface YesNoPairedVote {
   # The author of the contribution.
   author: User
   value: YesNoPairedVoteValue!
-
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
 
   # Date of vote.
   createdAt: DateTime!

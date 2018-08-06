@@ -35,7 +35,7 @@
                         {{ proposal.summary }}
                     </p>
                 {% endif %}
-                {% if proposal.enabled == true %}
+                {% if proposal.isPublished() == true %}
                     <div class="proposal__infos">
                         {% if proposal.theme is not null %}
                             <div class="proposal__info">

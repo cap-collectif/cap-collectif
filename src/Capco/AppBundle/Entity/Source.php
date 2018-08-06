@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
@@ -28,7 +28,6 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
     use UuidTrait;
 
     use VotableOkTrait;
-    use ExpirableTrait;
     use TextableTrait;
     use PublishableTrait;
     use TrashableTrait;
@@ -72,11 +71,6 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
-
-    /**
-     * @ORM\Column(name="is_enabled", type="boolean")
-     */
-    private $isEnabled = true;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="sources")
@@ -202,18 +196,6 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
     public function setUpdatedAt(?\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getIsEnabled(): bool
-    {
-        return $this->isEnabled;
-    }
-
-    public function setIsEnabled(bool $isEnabled): self
-    {
-        $this->isEnabled = $isEnabled;
 
         return $this;
     }
@@ -349,17 +331,12 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
 
     public function canDisplay($user = null): bool
     {
-        return $this->isEnabled && $this->getParent()->canDisplay($user);
+        return $this->isPublished() && $this->getParent()->canDisplay($user);
     }
 
     public function canContribute(): bool
     {
-        return $this->isEnabled && !$this->isTrashed() && $this->getParent()->canContribute();
-    }
-
-    public function isPublished(): bool
-    {
-        return $this->isEnabled && !$this->isTrashed() && $this->getParent()->isPublished();
+        return $this->isPublished() && !$this->isTrashed() && $this->getParent()->canContribute();
     }
 
     // ******************** Lifecycle ************************************
@@ -382,7 +359,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
 
     public function isIndexable(): bool
     {
-        return $this->getIsEnabled() && !$this->isExpired();
+        return $this->isPublished();
     }
 
     public static function getElasticsearchTypeName(): string

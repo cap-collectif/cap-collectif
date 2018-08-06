@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -10,10 +9,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class ArgumentVoteAdmin extends Admin
 {
-    protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'argument.title',
-    ];
+    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'argument.title'];
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -21,19 +17,15 @@ class ArgumentVoteAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('createdAt', null, [
-                'label' => 'admin.fields.opinion_vote.created_at',
-            ])
-            ->add('argument', null, [
-                'label' => 'admin.fields.argument_vote.argument',
-            ])
-            ->add('user', 'doctrine_orm_model_autocomplete', [
-                'label' => 'admin.fields.argument_vote.voter',
-            ], null, [
-                'property' => 'username',
-            ])
-            ->add('expired', null, ['label' => 'admin.global.expired'])
-        ;
+            ->add('createdAt', null, ['label' => 'admin.fields.opinion_vote.created_at'])
+            ->add('argument', null, ['label' => 'admin.fields.argument_vote.argument'])
+            ->add(
+                'user',
+                'doctrine_orm_model_autocomplete',
+                ['label' => 'admin.fields.argument_vote.voter'],
+                null,
+                ['property' => 'username']
+            );
     }
 
     /**
@@ -47,41 +39,24 @@ class ArgumentVoteAdmin extends Admin
             ->add('argument', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.argument',
             ])
-            ->add('user', 'sonata_type_model', [
-                'label' => 'admin.fields.argument_vote.voter',
-            ])
-            ->add('createdAt', null, [
-                'label' => 'admin.fields.opinion_vote.created_at',
-            ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show' => [],
-                ],
-            ])
-        ;
+            ->add('user', 'sonata_type_model', ['label' => 'admin.fields.argument_vote.voter'])
+            ->add('createdAt', null, ['label' => 'admin.fields.opinion_vote.created_at'])
+            ->add('_action', 'actions', ['actions' => ['show' => []]]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $currentUser = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('security.token_storage')
+            ->getToken()
+            ->getUser();
         $showMapper
             ->add('argument', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.argument',
             ])
-            ->add('user', 'sonata_type_model', [
-                'label' => 'admin.fields.argument_vote.voter',
-            ])
-            ->add('expired', null, [
-                'label' => 'admin.global.expired',
-                'attr' => [
-                  'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                  'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                ],
-            ])
-            ->add('createdAt', null, [
-                'label' => 'admin.fields.argument_vote.created_at',
-            ])
-        ;
+            ->add('user', 'sonata_type_model', ['label' => 'admin.fields.argument_vote.voter'])
+            ->add('createdAt', null, ['label' => 'admin.fields.argument_vote.created_at']);
     }
 
     protected function configureRoutes(RouteCollection $collection)

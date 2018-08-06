@@ -7,7 +7,7 @@
             <span class="small excerpt">{{ block.subtitle }}</span>
         </p>
 
-        {% if block.total_opinions_count > 0 or (block.isEnabled == true and currentStep.canContribute) %}
+        {% if block.total_opinions_count > 0 or (block.isPublished() == true and currentStep.canContribute) %}
             <div id="opinions--{{ block.slug }}" class="anchor-offset block  block--bordered">
                 {% include 'CapcoAppBundle:Project:list_header.html.twig' with {
                     'project': project,

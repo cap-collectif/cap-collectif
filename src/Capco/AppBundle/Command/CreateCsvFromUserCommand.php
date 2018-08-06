@@ -337,7 +337,6 @@ class CreateCsvFromUserCommand extends Command
       }
       createdAt
       updatedAt
-      expired
       lastLogin
       rolesText
       consentExternalCommunication
@@ -401,7 +400,6 @@ EOF;
               createdAt
               updatedAt
               url
-              expired
               published
               trashed
               trashedAt
@@ -448,7 +446,6 @@ EOF;
               createdAt
               updatedAt
               url
-              expired
               published
               trashed
               trashedAt
@@ -491,7 +488,6 @@ EOF;
               createdAt
               updatedAt
               url
-              expired
               published
               trashed
               trashedAt
@@ -525,7 +521,6 @@ EOF;
               body
               createdAt
               updatedAt
-              expired
               published
               trashed
               trashedAt
@@ -555,7 +550,6 @@ EOF;
               kind
               url
             }
-            expired
             createdAt
             private
           }
@@ -583,7 +577,6 @@ EOF;
               }
               url
               updatedAt
-              expired
               responses {
                 question {
                   title
@@ -735,7 +728,6 @@ EOF;
               formattedAddress
               createdAt
               updatedAt
-              expired
               trashedAt
               trashedReason            
             }

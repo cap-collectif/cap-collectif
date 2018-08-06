@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
+    publishedAt: <datetime()>
     Author: '@user<numberBetween(1, 100)>'
     OpinionType: '@opinionType1'
   opinion{2001..10000}:
@@ -16,6 +16,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
+    publishedAt: <datetime()>
     Author: '@user<numberBetween(1, 100)>'
     OpinionType: '@opinionType<numberBetween(2, 5)>'

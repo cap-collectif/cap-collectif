@@ -103,7 +103,6 @@ EOF;
 fragment voteInfos on ProposalVote{
   id
   createdAt
-  expired
   anonymous
   author {
     ... authorInfos
@@ -114,7 +113,6 @@ EOF;
 fragment voteInfos on CommentVote{
   id
   createdAt
-  expired
   author {
     ... authorInfos
   }
@@ -150,7 +148,6 @@ EOF;
 fragment commentVoteInfos on CommentVote {
   id
   createdAt
-  expired
   kind
   author {
     ... authorInfos
@@ -260,7 +257,6 @@ EOF;
     protected const PROPOSAL_NEWS_COMMENT_REPORTING_HEADER_MAP = [
         'proposal_news_comments_reportings_id' => 'id',
         'proposal_news_comments_reportings_createdAt' => 'createdAt',
-        'proposal_news_comments_reportings_expired' => 'expired',
         'proposal_news_comments_reportings_author_id' => 'author.id',
         'proposal_news_comments_reportings_author_username' => 'author.username',
         'proposal_news_comments_reportings_author_userType_id' => 'author.userType.id',
@@ -313,7 +309,6 @@ EOF;
     protected const PROPOSAL_NEWS_COMMENT_VOTE_HEADER_MAP = [
         'proposal_news_comments_vote_id' => 'id',
         'proposal_news_comments_vote_createdAt' => 'createdAt',
-        'proposal_news_comments_vote_expired' => 'expired',
         'proposal_news_comments_vote_author_id' => 'author.id',
         'proposal_news_comments_vote_author_username' => 'author.username',
         'proposal_news_comments_vote_author_userType_id' => 'author.userType.id',
@@ -323,7 +318,6 @@ EOF;
     protected const PROPOSAL_VOTE_HEADER_MAP = [
         'proposal_votes_id' => 'id',
         'proposal_votes_createdAt' => 'createdAt',
-        'proposal_votes_expired' => 'expired',
         'proposal_votes_anonymous' => 'anonymous',
         'proposal_votes_author_id' => 'author.id',
         'proposal_votes_author_username' => 'author.username',
@@ -334,7 +328,6 @@ EOF;
     protected const PROPOSAL_COMMENT_VOTE_HEADER_MAP = [
         'proposal_comments_vote_id' => 'id',
         'proposal_comments_vote_createdAt' => 'createdAt',
-        'proposal_comments_vote_expired' => 'expired',
         'proposal_comments_vote_author_id' => 'author.id',
         'proposal_comments_vote_author_username' => 'author.username',
         'proposal_comments_vote_author_userType_id' => 'author.userType.id',

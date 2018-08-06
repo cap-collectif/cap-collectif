@@ -24,7 +24,7 @@ class OpinionRepository extends EntityRepository
                 'o.createdAt',
                 'o.updatedAt',
                 'a.username as author',
-                'o.isEnabled as published',
+                'o.published',
                 'o.trashedAt as trashed',
                 'c.title as project'
             )
@@ -44,7 +44,7 @@ class OpinionRepository extends EntityRepository
                 'o.createdAt',
                 'o.updatedAt',
                 'a.username as author',
-                'o.isEnabled as published',
+                'o.published',
                 'o.trashedAt as trashed',
                 'o.body as body',
                 'c.title as project'
@@ -252,7 +252,7 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('s.project', 'c')
             ->andWhere('s.isEnabled = true')
             ->andWhere('c.isEnabled = true')
-            ->andWhere('o.isEnabled = true')
+            ->andWhere('o.published = true')
             ->andWhere('o.Author = :author')
             ->setParameter('author', $user);
 
@@ -449,9 +449,7 @@ class OpinionRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
-        return $this->createQueryBuilder($alias)
-            ->andWhere($alias . '.isEnabled = true')
-            ->andWhere($alias . '.expired = false');
+        return $this->createQueryBuilder($alias)->andWhere($alias . '.published = true');
     }
 
     public function findFollowingOpinionByUser(

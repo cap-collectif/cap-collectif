@@ -38,8 +38,7 @@ class ReplyAdmin extends AbstractAdmin
             ->add('questionnaire.step', null, ['label' => 'admin.fields.reply.questionnaire_step'])
             ->add('questionnaire.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.reply.project',
-            ])
-            ->add('expired', null, ['label' => 'admin.global.expired']);
+            ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -49,7 +48,7 @@ class ReplyAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', 'sonata_type_model', ['label' => 'admin.fields.reply.author'])
-            ->add('enabled', null, ['label' => 'admin.fields.reply.enabled'])
+            ->add('published', null, ['label' => 'admin.fields.reply.enabled'])
             ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at'])
             ->add('_action', 'actions', [
                 'actions' => [

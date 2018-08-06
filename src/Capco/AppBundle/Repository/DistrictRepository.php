@@ -17,7 +17,7 @@ class DistrictRepository extends EntityRepository
                 LEFT JOIN p.proposalForm pf
                 LEFT JOIN p.district pd
                 WHERE pf.step = :step
-                AND p.enabled = true
+                AND p.published = true
                 AND pd.id = d.id
                 AND p.trashedStatus IS NULL
                 AND p.draft = false

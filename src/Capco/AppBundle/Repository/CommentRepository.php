@@ -11,7 +11,7 @@ class CommentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')
             ->select('count(DISTINCT c.id)')
-            ->where('c.expired = false');
+            ->where('c.published = true');
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -31,7 +31,7 @@ class CommentRepository extends EntityRepository
                 'c.createdAt',
                 'c.updatedAt',
                 'a.username as author',
-                'c.isEnabled as published',
+                'c.published',
                 'c.trashedAt as trashed'
             )
             ->leftJoin('c.Author', 'a');
@@ -46,7 +46,7 @@ class CommentRepository extends EntityRepository
                 'c.createdAt',
                 'c.updatedAt',
                 'a.username as author',
-                'c.isEnabled as published',
+                'c.published',
                 'c.trashedAt as trashed',
                 'c.body as body'
             )
@@ -126,8 +126,6 @@ class CommentRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.isEnabled = true')
-            ->andWhere('c.expired = false');
+        return $this->createQueryBuilder('c')->andWhere('c.published = true');
     }
 }

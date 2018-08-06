@@ -14,7 +14,7 @@ class AbstractVoteRepository extends EntityRepository
     {
         return $this->createQueryBuilder('v')
             ->select('COUNT(DISTINCT v.id)')
-            ->andWhere('v.expired = false')
+            ->andWhere('v.published = true')
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -48,7 +48,7 @@ class AbstractVoteRepository extends EntityRepository
         $qb = $this->getEntityManager()
             ->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
-            ->andWhere('v.expired = false')
+            ->andWhere('v.published = true')
             ->addOrderBy('v.createdAt', 'ASC');
         if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {
             $qb
@@ -138,7 +138,7 @@ class AbstractVoteRepository extends EntityRepository
         $qb = $this->getEntityManager()
             ->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
-            ->andWhere('v.expired = false');
+            ->andWhere('v.published = true');
         if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {
             $qb
                 ->addSelect('v.value')
@@ -155,6 +155,6 @@ class AbstractVoteRepository extends EntityRepository
 
     protected function getQueryBuilder()
     {
-        return $this->createQueryBuilder('v')->andWhere('v.expired = false');
+        return $this->createQueryBuilder('v')->andWhere('v.published = true');
     }
 }

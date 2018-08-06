@@ -46,18 +46,6 @@ final class CommentVoteType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'expired' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'If vote is expired, it exists but doesn\'t count.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'author' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
                     'args' => [

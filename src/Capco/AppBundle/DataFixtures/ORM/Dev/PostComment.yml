@@ -4,12 +4,10 @@ Capco\AppBundle\Entity\PostComment:
     post: '@post3'
     Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
-    isEnabled: true
     publishedAt: <(new \DateTime('yesterday'))>
   pComment{6..50}:
     id: 'postComment<current()>'
     post: '@post1'
     Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
-    isEnabled: <boolean()>
     publishedAt: <(new \DateTime('yesterday'))>

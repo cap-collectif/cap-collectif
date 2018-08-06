@@ -6,7 +6,6 @@ Capco\AppBundle\Entity\Opinion:
     title: Opinion 1
     publishedAt: <dateTimeBetween("-2 days", "now")>
     body: On va bientôt me mettre à la corbeille
-    isEnabled: true
     Author: '@user1'
     OpinionType: '@opinionType8'
     moderationToken: 'opinion1ModerationToken'
@@ -17,7 +16,6 @@ Capco\AppBundle\Entity\Opinion:
     publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>
-    isEnabled: true
     Author: '@user1'
     OpinionType: '@opinionType9'
   opinion3:
@@ -28,7 +26,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user5'
     OpinionType: '@opinionType10'
   opinion4:
@@ -39,7 +36,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user2'
     OpinionType: '@opinionType10'
   opinion5:
@@ -50,7 +46,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user3'
     OpinionType: '@opinionType9'
   opinion{6..40}:
@@ -61,7 +56,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: <boolean()>
     pinned: <boolean()>
     Author: '@user<current()>'
     OpinionType: '@opinionType<numberBetween(9, 10)>'
@@ -73,7 +67,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     pinned: <boolean()>
     Author: '@user_not_confirmed_with_contributions_to_be_expired'
     OpinionType: '@opinionType<numberBetween(9, 10)>'
@@ -86,7 +79,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user5'
     OpinionType: '@opinionType12'
 
@@ -96,7 +88,6 @@ Capco\AppBundle\Entity\Opinion:
     publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 52
     body: Contenu de ma super opinion !
-    isEnabled: true
     Author: '@user4'
     OpinionType: '@opinionType11'
     updatedAt: <dateTimeBetween('+40 days', '+60 days')>
@@ -109,7 +100,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user2'
     OpinionType: '@opinionType12'
 
@@ -121,7 +111,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user5'
     OpinionType: '@opinionType8'
 
@@ -133,7 +122,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user4'
     OpinionType: '@opinionType9'
   opinion56:
@@ -144,7 +132,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user2'
     OpinionType: '@opinionType10'
 
@@ -158,7 +145,6 @@ Capco\AppBundle\Entity\Opinion:
       <p><text(300)></p>
     OpinionType: '@opinionType5'
     position: 1
-    isEnabled: true
     Author: '@user2'
 
   opinion58:
@@ -169,7 +155,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user5'
     OpinionType: '@opinionType5'
     position: 3
@@ -182,7 +167,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user2'
     OpinionType: '@opinionType5'
     position: 2
@@ -195,7 +179,6 @@ Capco\AppBundle\Entity\Opinion:
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
     body: Super opinion de malade
-    isEnabled: true
     Author: '@user2'
     OpinionType: '@opinionType6'
     position: 1
@@ -210,7 +193,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user2'
     OpinionType: '@opinionType6'
     position: 1
@@ -224,7 +206,6 @@ Capco\AppBundle\Entity\Opinion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    isEnabled: true
     Author: '@user2'
     OpinionType: '@opinionType6'
     position: 1
@@ -236,7 +217,6 @@ Capco\AppBundle\Entity\Opinion:
     createdAt: <(new \DateTime('2016-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
     body: Je suis du spam
-    isEnabled: true
     trashedStatus: 'visible'
     trashedReason: reporting.status.spam
     trashedAt: <(new \DateTime('2017-03-01'))>

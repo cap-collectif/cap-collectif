@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Post;
@@ -42,12 +41,18 @@ class ProposalResolver implements ContainerAwareInterface
         return $project->getRealSteps();
     }
 
-    public function resolveShowUrlBySlug(string $projectSlug, string $stepSlug, string $proposalSlug)
-    {
+    public function resolveShowUrlBySlug(
+        string $projectSlug,
+        string $stepSlug,
+        string $proposalSlug
+    ) {
         $router = $this->container->get('router');
 
-        return $router->generate('app_project_show_proposal', compact('projectSlug', 'stepSlug', 'proposalSlug'),
-            UrlGeneratorInterface::ABSOLUTE_URL);
+        return $router->generate(
+            'app_project_show_proposal',
+            compact('projectSlug', 'stepSlug', 'proposalSlug'),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
     public function resolvePostAbstract(Post $post): string
@@ -114,9 +119,6 @@ class ProposalResolver implements ContainerAwareInterface
         if ($proposal->isDeleted()) {
             return 'DELETED';
         }
-        if ($proposal->isExpired()) {
-            return 'EXPIRED';
-        }
 
         if ($proposal->isTrashed()) {
             if ($proposal->isEnabled()) {
@@ -137,21 +139,23 @@ class ProposalResolver implements ContainerAwareInterface
             return '';
         }
 
-        return $this->container->get('router')->generate('app_project_show_proposal',
+        return $this->container->get('router')->generate(
+            'app_project_show_proposal',
             [
                 'proposalSlug' => $proposal->getSlug(),
                 'projectSlug' => $project->getSlug(),
                 'stepSlug' => $step->getSlug(),
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
     public function resolveAdminUrl(Proposal $proposal): string
     {
         return $this->container->get('router')->generate(
             'admin_capco_app_proposal_edit',
-            [
-                'id' => $proposal->getId(),
-            ], UrlGeneratorInterface::ABSOLUTE_URL
+            ['id' => $proposal->getId()],
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
     }
 
@@ -165,8 +169,11 @@ class ProposalResolver implements ContainerAwareInterface
         return $proposal->getProposalEvaluation();
     }
 
-    public function resolveDraftProposalsForUserInStep(CollectStep $step, User $user, Argument $args): Connection
-    {
+    public function resolveDraftProposalsForUserInStep(
+        CollectStep $step,
+        User $user,
+        Argument $args
+    ): Connection {
         $proposalRep = $this->container->get('capco.proposal.repository');
         $proposalForm = $this->container->get('capco.proposal_form.repository')->findOneBy([
             'step' => $step->getId(),
@@ -191,13 +198,18 @@ class ProposalResolver implements ContainerAwareInterface
 
     public function resolvePostsCount(Proposal $proposal): int
     {
-        return $this->container->get('capco.blog.post.repository')->countPublishedPostsByProposal($proposal);
+        return $this->container->get('capco.blog.post.repository')->countPublishedPostsByProposal(
+            $proposal
+        );
     }
 
     public function resolveViewerCanSeeEvaluation(Proposal $proposal, $user): bool
     {
         $evalForm = $proposal->getProposalForm()->getEvaluationForm();
 
-        return null !== $evalForm && (!$evalForm->isFullyPrivate() || $this->resolveViewerIsEvaluer($proposal, $user));
+        return (
+            null !== $evalForm &&
+            (!$evalForm->isFullyPrivate() || $this->resolveViewerIsEvaluer($proposal, $user))
+        );
     }
 }

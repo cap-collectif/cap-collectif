@@ -23,9 +23,6 @@ Capco\AppBundle\Entity\Reply:
       type: DateTime
       groups: [Replies]
       serialized_name: updatedAt
-    enabled:
-      expose: true
-      groups: [Replies]
     private:
       expose: true
       groups: [Replies]

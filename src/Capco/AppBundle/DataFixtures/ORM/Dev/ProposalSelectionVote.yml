@@ -54,4 +54,3 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     user: '@user4'
     createdAt: <(new \DateTime('yesterday'))>
     published: false
-    expired: true

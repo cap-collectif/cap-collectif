@@ -32,7 +32,3 @@ Capco\AppBundle\Entity\Argument:
       type: Capco\UserBundle\Entity\User
       serialized_name: author
       groups: [Opinions, OpinionVersions, UserMedias]
-    isEnabled:
-      expose: true
-      type: boolean
-      groups: [Opinions, OpinionVersions]

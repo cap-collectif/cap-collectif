@@ -38,9 +38,9 @@ class SourceVoteRepository extends EntityRepository
             ->leftJoin('ov.parent', 'ovo')
             ->andWhere(
                 '
-            (source.opinion IS NOT NULL AND o.step = :step AND o.isEnabled = 1)
+            (source.opinion IS NOT NULL AND o.step = :step AND o.published = 1)
             OR
-            (source.opinionVersion IS NOT NULL AND ovo.step = :step AND ov.enabled = 1 AND ovo.isEnabled = 1)'
+            (source.opinionVersion IS NOT NULL AND ovo.step = :step AND ov.published = 1 AND ovo.published = 1)'
             )
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
@@ -63,9 +63,9 @@ class SourceVoteRepository extends EntityRepository
             ->leftJoin('ov.parent', 'ovo')
             ->andWhere(
                 '
-                (source.opinion IS NOT NULL AND o.step = :step AND o.isEnabled = 1)
+                (source.opinion IS NOT NULL AND o.step = :step AND o.published = 1)
                 OR
-                (source.opinionVersion IS NOT NULL AND ovo.step = :step AND ov.enabled = 1 AND ovo.isEnabled = 1)'
+                (source.opinionVersion IS NOT NULL AND ovo.step = :step AND ov.published = 1 AND ovo.published = 1)'
             )
             ->setParameter('step', $step);
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
@@ -93,6 +93,6 @@ class SourceVoteRepository extends EntityRepository
 
     protected function getQueryBuilder()
     {
-        return $this->createQueryBuilder('v')->andWhere('v.expired = false');
+        return $this->createQueryBuilder('v')->andWhere('v.published = true');
     }
 }

@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\AnswerableTrait;
-use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
@@ -23,7 +22,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="opinion", indexes={@ORM\Index(name="idx_enabled", columns={"id", "enabled"})})
+ * @ORM\Table(name="opinion", indexes={@ORM\Index(name="idx_enabled", columns={"id", "published"})})
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\AppendicesCorrespondToOpinionType()
@@ -36,7 +35,6 @@ class Opinion implements OpinionContributionInterface
     use VotableOkNokMitigeTrait;
     use AnswerableTrait;
     use PinnableTrait;
-    use ExpirableTrait;
     use TextableTrait;
     use ModerableTrait;
     use FollowableTrait;
@@ -51,11 +49,6 @@ class Opinion implements OpinionContributionInterface
         'opinion.sort.votes' => 'votes',
         'opinion.sort.comments' => 'comments',
     ];
-
-    /**
-     * @ORM\Column(name="enabled", type="boolean")
-     */
-    protected $isEnabled = true;
 
     /**
      * @ORM\Column(name="created_at", type="datetime")
@@ -189,25 +182,6 @@ class Opinion implements OpinionContributionInterface
     public function setPosition(int $position = null): self
     {
         $this->position = $position;
-
-        return $this;
-    }
-
-    public function getIsEnabled(): bool
-    {
-        return $this->isEnabled;
-    }
-
-    public function setEnabled(bool $isEnabled): self
-    {
-        $this->isEnabled = $isEnabled;
-
-        return $this;
-    }
-
-    public function setIsEnabled(bool $isEnabled): self
-    {
-        $this->isEnabled = $isEnabled;
 
         return $this;
     }
@@ -524,7 +498,7 @@ class Opinion implements OpinionContributionInterface
 
     public function canDisplay($user = null): bool
     {
-        return $this->getIsEnabled() && $this->getStep() && $this->getStep()->canDisplay($user);
+        return $this->isPublished() && $this->getStep() && $this->getStep()->canDisplay($user);
     }
 
     public function canContribute(): bool
@@ -534,17 +508,12 @@ class Opinion implements OpinionContributionInterface
 
     public function isActive(): bool
     {
-        return $this->getIsEnabled() && !$this->isTrashed();
+        return $this->isPublished() && !$this->isTrashed();
     }
 
     public function canBeDeleted(): bool
     {
         return $this->isActive() && $this->getStep()->isActive();
-    }
-
-    public function isPublished(): bool
-    {
-        return $this->isEnabled && !$this->isTrashed();
     }
 
     public function getSortedAppendices()
@@ -636,7 +605,7 @@ class Opinion implements OpinionContributionInterface
 
     public function isIndexable(): bool
     {
-        return $this->getIsEnabled() && !$this->isExpired() && $this->getProject()->isPublic();
+        return $this->isPublished() && $this->getProject()->isPublic();
     }
 
     public static function getElasticsearchTypeName(): string

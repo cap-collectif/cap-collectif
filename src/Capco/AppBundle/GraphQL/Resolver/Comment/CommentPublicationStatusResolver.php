@@ -8,10 +8,6 @@ class CommentPublicationStatusResolver
 {
     public function __invoke(Comment $comment): string
     {
-        if ($comment->isExpired()) {
-            return 'EXPIRED';
-        }
-
         if ($comment->isTrashed()) {
             if ($comment->getTrashedStatus() === Trashable::STATUS_VISIBLE) {
                 return 'TRASHED';

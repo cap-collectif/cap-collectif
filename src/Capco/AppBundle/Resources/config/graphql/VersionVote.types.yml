@@ -15,9 +15,6 @@ VersionVote:
         resolve: "@=resolver('proposition_vote_author', [value])"
       value:
         type: 'YesNoPairedVoteValue!'
-      expired:
-        type: 'Boolean!'
-        description: "If vote is expired, it exists but doesn't count."
       createdAt:
         type: 'DateTime!'
         description: 'Date of vote.'

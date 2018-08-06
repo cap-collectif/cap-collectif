@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
@@ -19,30 +18,35 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $this->createQueryBuilder('pv')
             ->select('COUNT(DISTINCT pv)')
             ->andWhere('pv.user = :author')
-            ->andWhere('pv.expired = false')
+            ->andWhere('pv.published = true')
             ->leftJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
             ->andWhere('pv.selectionStep IN (:steps)')
-            ->setParameter('steps', array_map(function ($step) {
-                return $step;
-            }, $project->getRealSteps()))
+            ->setParameter(
+                'steps',
+                array_map(function ($step) {
+                    return $step;
+                }, $project->getRealSteps())
+            )
             ->setParameter('author', $author)
             ->getQuery()
-            ->getSingleScalarResult()
-            ;
+            ->getSingleScalarResult();
     }
 
-    public function getByProposalAndStepAndUser(Proposal $proposal, SelectionStep $step, User $author): array
-    {
+    public function getByProposalAndStepAndUser(
+        Proposal $proposal,
+        SelectionStep $step,
+        User $author
+    ): array {
         return $this->createQueryBuilder('pv')
-          ->andWhere('pv.user = :author')
-          ->andWhere('pv.selectionStep = :step')
-          ->andWhere('pv.proposal = :proposal')
-          ->setParameter('author', $author)
-          ->setParameter('step', $step)
-          ->setParameter('proposal', $proposal)
-          ->getQuery()
-          ->getResult();
+            ->andWhere('pv.user = :author')
+            ->andWhere('pv.selectionStep = :step')
+            ->andWhere('pv.proposal = :proposal')
+            ->setParameter('author', $author)
+            ->setParameter('step', $step)
+            ->setParameter('proposal', $proposal)
+            ->getQuery()
+            ->getResult();
     }
 
     public function countByAuthorAndStep(User $author, SelectionStep $step): int
@@ -51,27 +55,32 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->select('COUNT(DISTINCT pv)')
             ->andWhere('pv.selectionStep = :step')
             ->andWhere('pv.user = :author')
-            ->andWhere('pv.expired = false')
+            ->andWhere('pv.published = true')
             ->leftJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
             ->setParameter('author', $author)
             ->setParameter('step', $step)
             ->getQuery()
-            ->getSingleScalarResult()
-            ;
+            ->getSingleScalarResult();
     }
 
-    public function getByAuthorAndStep(User $author, SelectionStep $step, int $limit, int $offset, string $field = null, string $direction = null): Paginator
-    {
+    public function getByAuthorAndStep(
+        User $author,
+        SelectionStep $step,
+        int $limit,
+        int $offset,
+        string $field = null,
+        string $direction = null
+    ): Paginator {
         $qb = $this->createQueryBuilder('pv')
-          ->andWhere('pv.selectionStep = :step')
-          ->andWhere('pv.user = :author')
-          ->andWhere('pv.expired = false')
-          ->leftJoin('pv.proposal', 'proposal')
-          ->andWhere('proposal.id IS NOT NULL')
-          ->andWhere('proposal.deletedAt IS NULL')
-          ->setParameter('step', $step)
-          ->setParameter('author', $author);
+            ->andWhere('pv.selectionStep = :step')
+            ->andWhere('pv.user = :author')
+            ->andWhere('pv.published = true')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.id IS NOT NULL')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->setParameter('step', $step)
+            ->setParameter('author', $author);
 
         if ($field && $direction) {
             if ('CREATED_AT' === $field) {
@@ -83,8 +92,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         }
 
         if ($limit > 0) {
-            $qb
-          ->setMaxResults($limit);
+            $qb->setMaxResults($limit);
         }
         $qb->setFirstResult($offset);
 
@@ -95,35 +103,35 @@ class ProposalSelectionVoteRepository extends EntityRepository
     public function getVotesByStepAndUser(SelectionStep $step, User $user): array
     {
         return $this->createQueryBuilder('pv')
-          ->select('pv', 'proposal')
-          ->andWhere('pv.selectionStep = :step')
-          ->andWhere('pv.user = :user')
-          ->andWhere('pv.expired = 0')
-          ->leftJoin('pv.proposal', 'proposal')
-          ->andWhere('proposal.id IS NOT NULL')
-          ->andWhere('proposal.deletedAt IS NULL')
-          ->setParameter('user', $user)
-          ->setParameter('step', $step)
-          ->getQuery()
-          ->getResult()
-        ;
+            ->select('pv', 'proposal')
+            ->andWhere('pv.selectionStep = :step')
+            ->andWhere('pv.user = :user')
+            ->andWhere('pv.published = true')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.id IS NOT NULL')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->setParameter('user', $user)
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getResult();
     }
 
-    public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null): array
-    {
+    public function getUserVotesGroupedByStepIds(
+        array $selectionStepsIds,
+        User $user = null
+    ): array {
         $userVotes = [];
         if ($user) {
             foreach ($selectionStepsIds as $id) {
                 $qb = $this->createQueryBuilder('pv')
-              ->select('proposal.id')
-              ->andWhere('pv.selectionStep = :id')
-              ->andWhere('pv.user = :user')
-              ->andWhere('pv.expired = 0')
-              ->leftJoin('pv.proposal', 'proposal')
-              ->andWhere('proposal.deletedAt IS NULL')
-              ->setParameter('user', $user)
-              ->setParameter('id', $id)
-              ;
+                    ->select('proposal.id')
+                    ->andWhere('pv.selectionStep = :id')
+                    ->andWhere('pv.user = :user')
+                    ->andWhere('pv.published = true')
+                    ->leftJoin('pv.proposal', 'proposal')
+                    ->andWhere('proposal.deletedAt IS NULL')
+                    ->setParameter('user', $user)
+                    ->setParameter('id', $id);
                 $results = $qb->getQuery()->getScalarResult();
                 $userVotes[$id] = array_map(function ($id) {
                     return $id;
@@ -143,15 +151,14 @@ class ProposalSelectionVoteRepository extends EntityRepository
     public function countVotesByStepAndUser(SelectionStep $step, User $user): int
     {
         return $this->createQueryBuilder('pv')
-          ->select('COUNT(pv.id)')
-          ->andWhere('pv.selectionStep = :selectionStep')
-          ->andWhere('pv.user = :user')
-          ->andWhere('pv.expired = 0')
-          ->setParameter('selectionStep', $step)
-          ->setParameter('user', $user)
-          ->getQuery()
-          ->getSingleScalarResult()
-      ;
+            ->select('COUNT(pv.id)')
+            ->andWhere('pv.selectionStep = :selectionStep')
+            ->andWhere('pv.user = :user')
+            ->andWhere('pv.published = true')
+            ->setParameter('selectionStep', $step)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     public function getCountsByProposalGroupedByStepsId(Proposal $proposal): array
@@ -164,13 +171,16 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $this->getCountsByProposalGroupedBySteps($proposal, true);
     }
 
-    public function getVotesForProposal(Proposal $proposal, ?int $limit = null, string $field, int $offset = 0, string $direction = 'ASC'): Paginator
-    {
+    public function getVotesForProposal(
+        Proposal $proposal,
+        ?int $limit = null,
+        string $field,
+        int $offset = 0,
+        string $direction = 'ASC'
+    ): Paginator {
         $query = $this->createQueryBuilder('pv')
             ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal)
-        ;
-
+            ->setParameter('proposal', $proposal);
         if ('CREATED_AT' === $field) {
             $query->addOrderBy('pv.createdAt', $direction);
         }
@@ -191,14 +201,21 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('proposal', $proposal);
 
         if (!$includeExpired) {
-            $qb->andWhere('pv.expired = false');
+            $qb->andWhere('pv.published = true');
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getByProposalAndStep(Proposal $proposal, SelectionStep $step, int $litmit, int $offset, string $field, string $direction, bool $includeExpired): Paginator
-    {
+    public function getByProposalAndStep(
+        Proposal $proposal,
+        SelectionStep $step,
+        int $litmit,
+        int $offset,
+        string $field,
+        string $direction,
+        bool $includeExpired
+    ): Paginator {
         $qb = $this->createQueryBuilder('pv')
             ->andWhere('pv.selectionStep = :step')
             ->andWhere('pv.proposal = :proposal')
@@ -206,21 +223,23 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('proposal', $proposal);
 
         if (!$includeExpired) {
-            $qb->andWhere('pv.expired = false');
+            $qb->andWhere('pv.published = true');
         }
 
         if ('CREATED_AT' === $field) {
             $qb->addOrderBy('pv.createdAt', $direction);
         }
 
-        $qb->setMaxResults($litmit)
-            ->setFirstResult($offset);
+        $qb->setMaxResults($litmit)->setFirstResult($offset);
 
         return new Paginator($qb);
     }
 
-    public function countVotesByProposalAndStep(Proposal $proposal, SelectionStep $step, bool $includeExpired): int
-    {
+    public function countVotesByProposalAndStep(
+        Proposal $proposal,
+        SelectionStep $step,
+        bool $includeExpired
+    ): int {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->andWhere('pv.selectionStep = :step')
@@ -229,24 +248,26 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('step', $step);
 
         if (!$includeExpired) {
-            $qb->andWhere('pv.expired = false');
+            $qb->andWhere('pv.published = true');
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0): array
-    {
+    public function getVotesForProposalByStepId(
+        Proposal $proposal,
+        string $stepId,
+        $limit = null,
+        $offset = 0
+    ): array {
         $qb = $this->createQueryBuilder('pv')
             ->leftJoin('pv.selectionStep', 'ss')
             ->where('pv.proposal = :proposal')
-            ->andWhere('pv.expired = false')
+            ->andWhere('pv.published = true')
             ->setParameter('proposal', $proposal)
             ->andWhere('ss.id = :stepId')
             ->setParameter('stepId', $stepId)
-            ->addOrderBy('pv.createdAt', 'DESC')
-        ;
-
+            ->addOrderBy('pv.createdAt', 'DESC');
         if ($limit) {
             $qb->setMaxResults($limit);
             $qb->setFirstResult($offset);
@@ -255,37 +276,36 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null, $categoryId = null)
-    {
+    public function getVotesCountForSelectionStep(
+        SelectionStep $step,
+        $themeId = null,
+        $districtId = null,
+        $categoryId = null
+    ) {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->leftJoin('pv.proposal', 'p')
             ->andWhere('pv.selectionStep = :step')
-            ->setParameter('step', $step)
-        ;
-
+            ->setParameter('step', $step);
         if ($themeId) {
             $qb
                 ->leftJoin('p.theme', 't')
                 ->andWhere('t.id = :themeId')
-                ->setParameter('themeId', $themeId)
-            ;
+                ->setParameter('themeId', $themeId);
         }
 
         if ($districtId) {
             $qb
                 ->leftJoin('p.district', 'd')
                 ->andWhere('d.id = :districtId')
-                ->setParameter('districtId', $districtId)
-            ;
+                ->setParameter('districtId', $districtId);
         }
 
         if ($categoryId) {
             $qb
                 ->leftJoin('p.category', 'category')
                 ->andWhere('category.id = :categoryId')
-                ->setParameter('categoryId', $categoryId)
-            ;
+                ->setParameter('categoryId', $categoryId);
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
@@ -297,9 +317,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->select('COUNT(pv.id)')
             ->andWhere('pv.private = true')
             ->andWhere('pv.selectionStep = :selectionStep')
-            ->setParameter('selectionStep', $selectionStep)
-        ;
-
+            ->setParameter('selectionStep', $selectionStep);
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -320,7 +338,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         $qb
             ->leftJoin('pv.selectionStep', 'ss')
             ->andWhere('pv.proposal = :proposal')
-            ->andWhere('pv.expired = false')
+            ->andWhere('pv.published = true')
             ->setParameter('proposal', $proposal)
             ->groupBy('pv.selectionStep');
 

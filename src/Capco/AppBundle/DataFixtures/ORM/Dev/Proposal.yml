@@ -4,7 +4,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Ravalement de la façade de la bibliothèque municipale
     body: |
       <p><text(100)></p>
-    enabled: true
     author: '@user502'
     proposalForm: '@proposalform1'
     theme: '@theme2'
@@ -23,7 +22,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Hélas j'étais trop violent pour être en ligne
     body: |
       <p><text(100)></p>
-    enabled: true
     author: '@user502'
     proposalForm: '@proposalform1'
     theme: '@theme2'
@@ -43,7 +41,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Rénovation du gymnase
     body: |
       <p><text(100)></p>
-    enabled: true
     rating: 4
     annotation: Lancer l'appel d'offre
     author: '@user5'
@@ -65,7 +62,6 @@ Capco\AppBundle\Entity\Proposal:
     summary: Un beau résumé
     body: |
       <p>On va en faire un beau gymnase, promis :)</p>
-    enabled: true
     rating: 3
     annotation: Vérifier les normes de sécurité
     author: '@user502'
@@ -85,7 +81,6 @@ Capco\AppBundle\Entity\Proposal:
       Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
     body: |
       <p><text(100)></p>
-    enabled: true
     rating: 1
     annotation: Renvoyer l'idée à l'église
     author: '@user7'
@@ -101,7 +96,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition à la corbeille (visible)
     body: |
       <p><text(100)></p>
-    enabled: true
     trashedStatus: 'visible'
     rating: 1
     author: '@user7'
@@ -119,7 +113,6 @@ Capco\AppBundle\Entity\Proposal:
     trashedReason: Raciste
     body: |
       <p><text(100)></p>
-    enabled: false
     rating: 3
     author: '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>
@@ -133,7 +126,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition très chère
     body: |
       <p><text(100)></p>
-    enabled: true
     rating: 3
     author: '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>
@@ -149,7 +141,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition pas chère
     body: |
       <p><text(100)></p>
-    enabled: true
     rating: 3
     likers: ['@user1', '@user2', '@user3']
     author: '@user4'
@@ -167,7 +158,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition gratuite
     body: |
       <p><text(100)></p>
-    enabled: true
     rating: 3
     author: '@user4'
     proposalForm: '@proposalform3'
@@ -182,7 +172,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition pas encore votable
     body: |
       <p><text(100)></p>
-    enabled: true
     rating: 3
     author: '@user4'
     proposalForm: '@proposalform1'
@@ -197,7 +186,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition plus votable
     body: |
       <p><text(100)></p>
-    enabled: true
     rating: 3
     author: '@user4'
     proposalForm: '@proposalform1'
@@ -212,7 +200,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition plus votable
     body: |
       <p><text(100)></p>
-    enabled: true
     rating: 3
     author: '@user5'
     proposalForm: '@proposalform4'
@@ -227,7 +214,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Proposition plus votable 2
     body: |
       <p><text(100)></p>
-    enabled: true
     rating: 3
     author: '@user5'
     proposalForm: '@proposalform4'
@@ -242,7 +228,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Mon super projet
     body: |
       <p><text(100)></p>
-    enabled: true
     author: '@user1'
     proposalForm: '@proposalform5'
     theme: '@theme2'
@@ -255,7 +240,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal15
     title: Proposition 15
     body: <p><text(100)></p>
-    enabled: true
     author: '@user1'
     proposalForm: '@proposalform6'
     reference: 1
@@ -264,7 +248,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal16
     title: Proposition 16
     body: <p><text(100)></p>
-    enabled: true
     author: '@user1'
     proposalForm: '@proposalform6'
     reference: 2
@@ -273,7 +256,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal17
     title: Proposition 17
     body: <p><text(100)></p>
-    enabled: true
     author: '@user5'
     proposalForm: '@proposalform7'
     reference: 1
@@ -282,7 +264,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal18
     title: Proposition 18
     body: <p><text(100)></p>
-    enabled: true
     author: '@user1'
     proposalForm: '@proposalform7'
     reference: 2
@@ -291,7 +272,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal19
     title: Proposition brouillon 1
     body: <p><text(100)></p>
-    enabled: false
     draft: true
     author: '@user501'
     proposalForm: '@proposalform1'
@@ -303,7 +283,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal20
     title: Proposition brouillon 2
     body: <p><text(100)></p>
-    enabled: false
     draft: true
     author: '@user1'
     proposalForm: '@proposalform1'
@@ -315,7 +294,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal21
     title: Proposition brouillon 3
     body: <p><text(100)></p>
-    enabled: false
     draft: true
     author: '@user4'
     proposalForm: '@proposalform1'
@@ -327,7 +305,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal22
     title: Proposition vraiment intéressante
     body: <p><text(100)></p>
-    enabled: true
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 666
@@ -336,7 +313,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal23
     title: Proposition vraiment intéressante 2
     body: <p><text(100)></p>
-    enabled: true
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 667
@@ -345,7 +321,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal24
     title: Proposition 1
     body: <p><text(100)></p>
-    enabled: true
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 1
@@ -354,7 +329,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal25
     title: Proposition 2
     body: <p><text(100)></p>
-    enabled: true
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 2
@@ -363,7 +337,6 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal26
     title: Proposition 3
     body: <p><text(100)></p>
-    enabled: true
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 3

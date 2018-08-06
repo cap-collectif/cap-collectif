@@ -7,7 +7,6 @@ Capco\AppBundle\Entity\OpinionVersion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    enabled: true
     author: '@user5'
     parent: '@opinion57'
     comment: bououh
@@ -22,7 +21,6 @@ Capco\AppBundle\Entity\OpinionVersion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    enabled: true
     author: '@user2'
     parent: '@opinion57'
     comment: bououh
@@ -35,7 +33,6 @@ Capco\AppBundle\Entity\OpinionVersion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    enabled: true
     author: '@user2'
     parent: '@opinion57'
     comment: bououh
@@ -47,7 +44,6 @@ Capco\AppBundle\Entity\OpinionVersion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    enabled: true
     trashedStatus: 'visible'
     author: '@user2'
     parent: '@opinion<numberBetween(57,59)>'
@@ -60,6 +56,5 @@ Capco\AppBundle\Entity\OpinionVersion:
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
-    enabled: true
     author: '@user5'
     parent: '@opinion51'

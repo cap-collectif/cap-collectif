@@ -51,6 +51,6 @@ class EventCommentRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder('c')->andWhere('c.isEnabled = true');
+        return $this->createQueryBuilder('c')->andWhere('c.published = true');
     }
 }
