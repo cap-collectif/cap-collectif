@@ -27,7 +27,7 @@ final class FollowOpinionInputType extends InputObjectType implements GeneratedT
                     'description' => 'The opinion id',
                 ],
                 'notifiedOf' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('ProposalSubscriptionTypeValue'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('SubscriptionTypeValue'),
                     'description' => 'The type of notification',
                 ],
                 'clientMutationId' => [

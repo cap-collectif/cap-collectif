@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class OpinionFollowerConnection implements ResolverInterface
+class OpinionFollowersConnection implements ResolverInterface
 {
     use ProjectOpinionSubscriptionGuard;
 

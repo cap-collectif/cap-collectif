@@ -59,7 +59,7 @@ final class FollowProposalPayloadType extends ObjectType implements GeneratedTyp
                     'access' => null,
                 ],
                 'value' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalSubscriptionTypeValue')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SubscriptionTypeValue')),
                     'args' => [
                     ],
                     'resolve' => null,

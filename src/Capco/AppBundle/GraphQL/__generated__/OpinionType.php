@@ -228,11 +228,6 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
                         [
-                            'name' => 'orderBy',
-                            'type' => Type::string(),
-                            'description' => 'Ordering options for followers returning from the connection',
-                        ],
-                        [
                             'name' => 'after',
                             'type' => Type::string(),
                             'description' => 'Returns the elements in the list that come after the specified global ID.',
@@ -272,7 +267,9 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
                 'show_url' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),

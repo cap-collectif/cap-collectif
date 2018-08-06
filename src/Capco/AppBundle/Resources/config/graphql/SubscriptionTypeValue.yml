@@ -1,11 +1,11 @@
 SubscriptionTypeValue:
   type: enum
   config:
-    description: '3 possible values for a subscription of an opinion'
+    description: '3 possible values for a subscription.'
     values:
-      DEFAULT:
-        value: '1'
-      DEFAULT_AND_COMMENTS:
-        value: '2'
+      MINIMAL:
+        value: 'MINIMAL'
+      ESSENTIAL:
+        value: 'ESSENTIAL'
       ALL:
-        value: '3'
+        value: 'ALL'

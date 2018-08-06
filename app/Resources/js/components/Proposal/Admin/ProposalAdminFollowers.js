@@ -90,7 +90,7 @@ export default createFragmentContainer(
     fragment ProposalAdminFollowers_proposal on Proposal {
       ...ProposalPageFollowers_proposal @arguments(count: $count, cursor: $cursor)
       id
-      allFollowers: followerConnection(first: 0) {
+      allFollowers: followers(first: 0) {
         totalCount
       }
     }

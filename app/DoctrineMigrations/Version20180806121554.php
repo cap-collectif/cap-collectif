@@ -2,6 +2,7 @@
 
 namespace Application\Migrations;
 
+use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -44,5 +45,51 @@ final class Version20180806121554 extends AbstractMigration
         $this->addSql('ALTER TABLE user_following RENAME TO user_following_proposal');
         $this->addSql('ALTER TABLE user_following_proposal DROP opinion_id');
         $this->addSql('ALTER TABLE project DROP opinion_can_be_followed');
+    }
+
+    public function postUp(Schema $schema)
+    {
+        $this->write('--> Migrating subscription type 1 to MINIMAL');
+        $followers = $this->connection->fetchAll(
+            'SELECT id from user_following WHERE notified_of = 1'
+        );
+        foreach ($followers as $follower) {
+            $this->connection->update(
+                'user_following',
+                ['notified_of' => FollowerNotifiedOfInterface::MINIMAL],
+                ['id' => $follower['id']]
+            );
+        }
+        $this->write('--> Migrated successfully subscription type 1 to MINIMAL!');
+
+        $this->write('--> Migrating subscription type 2 to ESSENTIAL');
+        $followers = $this->connection->fetchAll(
+            'SELECT id from user_following WHERE notified_of = 2'
+        );
+        foreach ($followers as $follower) {
+            $this->connection->update(
+                'user_following',
+                ['notified_of' => FollowerNotifiedOfInterface::ESSENTIAL],
+                ['id' => $follower['id']]
+            );
+        }
+        $this->write('--> Migrated successfully subscription type 2 to ESSENTIAL!');
+
+        $this->write('--> Migrating subscription type 3 to ALL');
+        $followers = $this->connection->fetchAll(
+            'SELECT id from user_following WHERE notified_of = 3'
+        );
+        foreach ($followers as $follower) {
+            $this->connection->update(
+                'user_following',
+                ['notified_of' => FollowerNotifiedOfInterface::ALL],
+                ['id' => $follower['id']]
+            );
+        }
+        $this->write('--> Migrated successfully subscription type 3 to ALL!');
+
+        $this->addSql(
+            'ALTER TABLE user_following CHANGE notified_of notified_of ENUM(\'MINIMAL\', \'ESSENTIAL\', \'ALL\')'
+        );
     }
 }

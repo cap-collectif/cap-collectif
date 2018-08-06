@@ -2,13 +2,13 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Follower;
-use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
 
-class ViewerFollowerOpinionResolver implements ResolverInterface
+class ViewerFollowingConfigurationProposalResolver implements ResolverInterface
 {
     private $followerRepository;
     private $logger;
@@ -19,13 +19,21 @@ class ViewerFollowerOpinionResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Opinion $opinion, User $viewer): ?Follower
+    public function __invoke(Proposal $proposal, User $viewer): ?Follower
     {
         try {
-            return $this->followerRepository->findOneBy(['opinion' => $opinion, 'user' => $viewer]);
+            $follower = $this->followerRepository->findOneBy([
+                'proposal' => $proposal,
+                'user' => $viewer,
+            ]);
+            if ($follower && isset($follower)) {
+                return $follower->getNotifiedOf();
+            }
+
+            return null;
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-            throw new \RuntimeException('Find following opinion by user failed');
+            throw new \RuntimeException('Find following proposal by user failed');
         }
     }
 }

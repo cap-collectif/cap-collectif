@@ -219,7 +219,7 @@ export default createFragmentContainer(ProposalPageTabs, {
         title
       }
       viewerCanSeeEvaluation
-      allFollowers: followerConnection(first: 0) {
+      allFollowers: followers(first: 0) {
         totalCount
       }
     }

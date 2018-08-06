@@ -74,7 +74,7 @@ export default createFragmentContainer(
       ...ProposalAdminNotationForm_proposal
       ...ProposalAdminNewsForm_proposal
       ...ProposalAdminFollowers_proposal
-      allFollowers: followerConnection(first: 0) {
+      allFollowers: followers(first: 0) {
         totalCount
       }
     }

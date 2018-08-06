@@ -46,7 +46,8 @@ class Follower
     protected $opinion;
 
     /**
-     * @ORM\Column(name="notified_of", type="string", nullable=false)
+     * @ORM\Column(name="notified_of", columnDefinition="ENUM('MINIMAL', 'ESSENTIAL', 'ALL')", nullable=true)
+     * @Assert\Choice(choices = {"MINIMAL", "ESSENTIAL", "ALL"})
      */
     protected $notifiedOf;
 

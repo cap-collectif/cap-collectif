@@ -127,9 +127,9 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                     checked="checked"
                     className="proposal__follow__advancement"
                     disabled={false}
-                    id="proposal-follow-btn-default-proposal1"
+                    id="proposal-follow-btn-minimal-proposal1"
                     inline={true}
-                    name="default"
+                    name="minimal"
                     onClick={[Function]}
                     title=""
                   >
@@ -154,11 +154,11 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                   <Radio
                     bsClass="radio"
                     checked=""
-                    className="proposal__follow__default_and_comments"
+                    className="proposal__follow__essential "
                     disabled={false}
-                    id="proposal-follow-btn-default_and_comments-proposal1"
+                    id="proposal-follow-btn-essential-proposal1"
                     inline={false}
-                    name="default_and_comments"
+                    name="essential"
                     onClick={[Function]}
                     title=""
                   >

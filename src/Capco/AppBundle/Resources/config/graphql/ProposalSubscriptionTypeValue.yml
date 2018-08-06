@@ -1,3 +1,0 @@
-ProposalSubscriptionTypeValue:
-  type: enum
-  inherits: [SubscriptionTypeValue]

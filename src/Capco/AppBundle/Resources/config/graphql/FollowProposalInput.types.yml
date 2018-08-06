@@ -6,5 +6,5 @@ FollowProposalInput:
         type: 'ID!'
         description: 'The proposal id'
       notifiedOf:
-        type: 'ProposalSubscriptionTypeValue'
+        type: 'SubscriptionTypeValue'
         description: 'The type of notification'

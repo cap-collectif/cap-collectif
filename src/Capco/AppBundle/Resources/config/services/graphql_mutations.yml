@@ -339,15 +339,3 @@ services:
       - '@redis_storage.helper'
     tags:
       - { name: overblog_graphql.mutation }
-
-  Capco\AppBundle\GraphQL\Mutation\FollowOpinionMutation:
-    autowire: true
-    autoconfigure: true
-    tags:
-      - { name: overblog_graphql.mutation }
-
-  Capco\AppBundle\GraphQL\Mutation\UnfollowOpinionMutation:
-    autowire: true
-    autoconfigure: true
-    tags:
-      - { name: overblog_graphql.mutation }

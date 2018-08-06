@@ -13,7 +13,7 @@ const mutation = graphql`
       proposal {
         id
         ...ProposalFollowButton_proposal
-        followerConnection {
+        followers {
           totalCount
         }
       }
@@ -44,7 +44,7 @@ const commit = (variables: UpdateFollowProposalMutationVariables): Promise<Respo
         parentID: variables.input.proposalId,
         connectionInfo: [
           {
-            key: 'ProposalPageFollowers_followerConnection',
+            key: 'ProposalPageFollowers_followers',
             rangeBehavior: 'append',
           },
         ],
@@ -62,7 +62,7 @@ const commit = (variables: UpdateFollowProposalMutationVariables): Promise<Respo
     //
     //     const conn = ConnectionHandler.getConnection(
     //         proposalProxy,
-    //         'ProposalPageFollowers_followerConnection', // This is the connection identifier, defined here: https://github.com/relayjs/relay-examples/blob/master/todo/js/components/TodoList.js#L68
+    //         'ProposalPageFollowers_followers', // This is the connection identifier, defined here: https://github.com/relayjs/relay-examples/blob/master/todo/js/components/TodoList.js#L68
     //     );
     //     console.log(variables);
     //     const follower = payload.getLinkedRecord('follower');

@@ -9,9 +9,10 @@ use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class UnfollowOpinionMutation
+class UnfollowOpinionMutation implements MutationInterface
 {
     use ProjectOpinionSubscriptionGuard;
 

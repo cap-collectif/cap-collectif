@@ -4,31 +4,8 @@ WithFollowers:
   config:
     fields:
       followers:
-        type: 'UserConnection!'
-        args:
-          orderBy:
-            type: 'String'
-            description: 'Ordering options for followers returning from the connection'
-          after:
-            type: 'String'
-            description: 'Returns the elements in the list that come after the specified global ID.'
-          first:
-            type: 'Int'
-            defaultValue: 32
-            description: 'Returns the first n elements from the list.'
-          before:
-            type: 'String'
-            description:
-              'Returns the elements in the list that come before the specified global ID.'
-          last:
-            type: 'Int'
-            description: 'Returns the last n elements from the list.'
-      followerConnection:
         type: 'FollowerConnection!'
         args:
-          orderBy:
-            type: 'String'
-            description: 'Ordering options for followers returning from the connection'
           after:
             type: 'String'
             description: 'Returns the elements in the list that come after the specified global ID.'
@@ -43,7 +20,10 @@ WithFollowers:
           last:
             type: 'Int'
             description: 'Returns the last n elements from the list.'
-      followerConfiguration:
+      viewerFollowingConfiguration:
         access: "@=hasRole('ROLE_USER')"
-        type: 'Follower'
+        type: 'SubscriptionTypeValue'
         description: 'Kind of follow'
+      viewerIsFollowing:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'Boolean!'

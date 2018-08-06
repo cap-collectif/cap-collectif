@@ -9,4 +9,4 @@ FollowProposalPayload:
       followerEdge:
         type: 'FollowerEdge'
       value:
-        type: 'ProposalSubscriptionTypeValue!'
+        type: 'SubscriptionTypeValue!'
