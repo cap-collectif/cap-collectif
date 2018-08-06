@@ -3,6 +3,7 @@ import * as React from 'react';
 import { type IntlShape, FormattedMessage } from 'react-intl';
 import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
+import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
@@ -10,13 +11,32 @@ import { checkOnlyNumbers } from '../services/Validator';
 
 import component from '../components/Form/Field';
 
-type Questions = $ReadOnlyArray<{|
+type Question = {|
   +id: string,
   +title: string,
   +private: boolean,
   +required: boolean,
   +helpText: ?string,
   +description: ?string,
+  +jumps: ?$ReadOnlyArray<?{|
+    +id: string,
+    +destination: {|
+      +id: string,
+      +title: string,
+    |},
+    +conditions: ?$ReadOnlyArray<?{|
+      +id: string,
+      +operator: LogicJumpConditionOperator,
+      +question: {|
+        +id: string,
+        +title: string,
+      |},
+      +value: ?{|
+        +id: string,
+        +title: string,
+      |},
+    |}>,
+  |}>,
   +type: QuestionTypeValue,
   +isOtherAllowed?: boolean,
   +validationRule?: ?{|
@@ -30,7 +50,9 @@ type Questions = $ReadOnlyArray<{|
     +color: ?string,
     +image: ?Object,
   |}>,
-|}>;
+|};
+
+type Questions = $ReadOnlyArray<Question>;
 
 type ResponsesFromAPI = $ReadOnlyArray<?{|
   +question: {|

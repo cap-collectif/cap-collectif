@@ -268,6 +268,25 @@ export default createFragmentContainer(container, {
         required
         description
         helpText
+        jumps {
+          id
+          destination {
+            id
+            title
+          }
+          conditions {
+            id
+            operator
+            question {
+              id
+              title
+            }
+            value {
+              id
+              title
+            }
+          }
+        }
         type
         ... on MultipleChoiceQuestion {
           isOtherAllowed

@@ -155,6 +155,25 @@ export default createFragmentContainer(
             private
             required
             helpText
+            jumps {
+              id
+              destination {
+                id
+                title
+              }
+              conditions {
+                id
+                operator
+                question {
+                  id
+                  title
+                }
+                value {
+                  id
+                  title
+                }
+              }
+            }
             description
             type
             ... on MultipleChoiceQuestion {
