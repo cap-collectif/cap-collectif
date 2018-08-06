@@ -19,7 +19,7 @@ class ViewerFollowingConfigurationOpinionResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Opinion $opinion, User $viewer): ?Follower
+    public function __invoke(Opinion $opinion, User $viewer): ?string
     {
         try {
             $follower = $this->followerRepository->findOneBy([

@@ -11,16 +11,14 @@ Scenario: GraphQL client wants to follow an opinion with current user and check 
       followOpinion(input: $input) {
         opinion {
           id
-          followerConfiguration{
-            notifiedOf
-          }
+          viewerFollowingConfiguration
         }
       }
     }",
     "variables": {
       "input": {
         "opinionId": "opinion7",
-        "notifiedOf": "DEFAULT"
+        "notifiedOf": "MINIMAL"
       }
     }
   }
@@ -32,9 +30,7 @@ Scenario: GraphQL client wants to follow an opinion with current user and check 
       "followOpinion": {
         "opinion": {
           "id": "opinion7",
-          "followerConfiguration":{
-            "notifiedOf":"DEFAULT"
-          }
+          "viewerFollowingConfiguration": "MINIMAL"
         }
       }
     }
@@ -98,7 +94,7 @@ Scenario: GraphQL client wants to follow then unfollow an opinion with current u
     "variables": {
       "input": {
         "opinionId": "opinion10",
-        "notifiedOf": "DEFAULT"
+        "notifiedOf": "MINIMAL"
       }
     }
   }

@@ -113,7 +113,7 @@ Scenario: I'm on a opinion and GraphQL want to know the total number of opinion'
       opinion: node(id: $opinionId) {
         id
         ... on Opinion {
-          followerConnection(first: $count, after: $cursor) {
+          followers(first: $count, after: $cursor) {
             edges {
               cursor
               node {
@@ -142,7 +142,7 @@ Scenario: I'm on a opinion and GraphQL want to know the total number of opinion'
     "data": {
       "opinion": {
         "id": "opinion6",
-        "followerConnection": {
+        "followers": {
           "edges": [
             {
               "cursor": @string@,
@@ -173,7 +173,7 @@ Scenario: I'm on qqa opinion and I want to load 20 followers from a cursor
       opinion: node(id: $opinionId) {
         id
         ... on Opinion {
-          followerConnection(first: $count, after: $cursor) {
+          followers(first: $count, after: $cursor) {
             edges {
               cursor
               node {
@@ -232,7 +232,7 @@ Scenario: GraphQL client tries to access to the followers of an opinion inside a
       opinion: node(id: $opinionId) {
         id
         ... on Opinion {
-          followerConnection(first: $count, after: $cursor) {
+          followers(first: $count, after: $cursor) {
             edges {
               cursor
               node {
@@ -260,7 +260,7 @@ Scenario: GraphQL client tries to access to the followers of an opinion inside a
     "data": {
       "opinion": {
         "id": "opinion57",
-        "followerConnection": {
+        "followers": {
           "edges": [],
           "pageInfo": {
             "hasNextPage": false,

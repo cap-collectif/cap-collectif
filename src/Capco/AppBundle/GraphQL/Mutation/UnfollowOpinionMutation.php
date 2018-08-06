@@ -53,7 +53,7 @@ class UnfollowOpinionMutation implements MutationInterface
     protected function unfollow(Opinion $opinion, User $user): void
     {
         /** @var Follower $follower */
-        $follower = $this->followerRepository->findBy(['user' => $user, 'opinion' => $opinion]);
+        $follower = $this->followerRepository->findOneBy(['user' => $user, 'opinion' => $opinion]);
 
         if (!$follower) {
             throw new UserError('Can\'t find the opinion.');

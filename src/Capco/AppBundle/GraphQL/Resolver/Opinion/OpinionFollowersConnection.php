@@ -30,6 +30,8 @@ class OpinionFollowersConnection implements ResolverInterface
             $direction = $args->offsetGet('orderBy')['direction'];
             $orderBy = [$field => $direction];
             $criteria = ['opinion' => $opinion];
+
+            // prevent useless queries.
             if (!$this->canBeFollowed($opinion)) {
                 return [];
             }
@@ -51,10 +53,8 @@ class OpinionFollowersConnection implements ResolverInterface
             return $followers;
         });
 
-        $totalCount = $this->canBeFollowed($opinion)
-            ? $this->userRepository->countFollowerForOpinion($opinion)
-            : 0;
+        $totalCount = $this->userRepository->countFollowerForOpinion($opinion);
 
-        return $paginator->auto($args, $totalCount);
+        return $this->canBeFollowed($opinion) ? $paginator->auto($args, $totalCount) : null;
     }
 }

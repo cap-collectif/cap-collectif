@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Follower;
@@ -18,8 +17,11 @@ final class UpdateFollowProposalMutation
     private $proposalRepository;
     private $followerRepository;
 
-    public function __construct(EntityManagerInterface $em, ProposalRepository $proposalRepository, FollowerRepository $followerRepository)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        ProposalRepository $proposalRepository,
+        FollowerRepository $followerRepository
+    ) {
         $this->em = $em;
         $this->proposalRepository = $proposalRepository;
         $this->followerRepository = $followerRepository;
@@ -41,7 +43,10 @@ final class UpdateFollowProposalMutation
         }
 
         /** @var Follower $follower */
-        $follower = $this->followerRepository->findBy(['user' => $user, 'proposal' => $proposal]);
+        $follower = $this->followerRepository->findOneBy([
+            'user' => $user,
+            'proposal' => $proposal,
+        ]);
 
         if (!$follower) {
             throw new UserError('Can\'t find the follower');

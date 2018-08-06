@@ -131,8 +131,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                           <Radio
                             name="essential"
                             id={`proposal-follow-btn-essential-${proposal.id}`}
-                            className="proposal__follow__essential
-                            "
+                            className="proposal__follow__essential"
                             checked={
                               proposal.viewerFollowingConfiguration === 'ESSENTIAL' ? 'checked' : ''
                             }
