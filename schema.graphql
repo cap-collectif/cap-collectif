@@ -1608,7 +1608,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # true if the contribution is expired.
   expired: Boolean!
-  published: Boolean!
   step: Consultation!
 
   # The viewer vote.

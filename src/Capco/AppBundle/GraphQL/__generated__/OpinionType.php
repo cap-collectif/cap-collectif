@@ -368,24 +368,24 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'expired' => [
+                'pinned' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'true if the contribution is expired.',
+                    'description' => 'true if the contribution is pinned.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'published' => [
+                'expired' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'true if the contribution is expired.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
