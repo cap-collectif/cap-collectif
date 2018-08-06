@@ -150,7 +150,7 @@ class OpinionRepository extends EntityRepository
     /**
      * Get all trashed or unpublished opinions.
      */
-    public function getTrashedOrUnpublishedByProject(Project $project)
+    public function getTrashedByProject(Project $project)
     {
         $qb = $this->createQueryBuilder('o')
             ->addSelect('ot', 's', 'aut', 'm')

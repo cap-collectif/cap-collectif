@@ -23,18 +23,10 @@ class ProposalCommentRepository extends EntityRepository
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.proposal', 'i')
-            ->setParameter('notTrashed', false)
-            ->setParameter('notTrashed', false)
-            ->leftJoin(
-                'c.answers',
-                'ans',
-                'WITH',
-                'ans.isEnabled = :enabled AND ans.trashedAt IS NULL'
-            )
+            ->leftJoin('c.answers', 'ans', 'WITH', 'ans.isEnabled = true AND ans.trashedAt IS NULL')
             ->andWhere('c.proposal = :proposal')
             ->andWhere('c.parent is NULL')
             ->andWhere('c.trashedAt IS NULL')
-            ->setParameter('enabled', true)
             ->setParameter('proposal', $proposal)
             ->orderBy('c.pinned', 'DESC');
 

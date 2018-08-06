@@ -1,11 +1,12 @@
 <?php
 namespace Capco\AdminBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class RecentContributionsController extends Controller
 {
@@ -83,9 +84,6 @@ class RecentContributionsController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}/unpublish", name="capco_admin_contributions_unpublish")
-     *
-     * @param mixed $type
-     * @param mixed $id
      */
     public function unpublishAction(Request $request, $type, $id)
     {
@@ -99,10 +97,8 @@ class RecentContributionsController extends Controller
 
         if ('POST' === $request->getMethod()) {
             $motives = $request->get('motives');
-            $contribution->setIsEnabled(false);
-            $contribution->setIsTrashed(true);
+            $contribution->setTrashedStatus(Trashable::STATUS_INVISIBLE);
             $contribution->setTrashedReason($motives);
-            $contribution->setTrashedAt(new \DateTime());
             $em->flush();
             $this->get('capco.contribution_notifier')->onModeration($contribution);
 
@@ -146,9 +142,8 @@ class RecentContributionsController extends Controller
 
         if ('POST' === $request->getMethod()) {
             $motives = $request->get('motives');
-            $contribution->setIsTrashed(true);
+            $contribution->setTrashedStatus(Trashable::STATUS_VISIBLE);
             $contribution->setTrashedReason($motives);
-            $contribution->setTrashedAt(new \DateTime());
             $em->flush();
             $this->get('capco.contribution_notifier')->onModeration($contribution);
 

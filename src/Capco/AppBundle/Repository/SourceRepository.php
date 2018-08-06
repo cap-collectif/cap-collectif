@@ -176,7 +176,7 @@ class SourceRepository extends EntityRepository
     /**
      * Get all trashed or unpublished sources for project.
      */
-    public function getTrashedOrUnpublishedByProject(Project $project)
+    public function getTrashedByProject(Project $project)
     {
         $qb = $this->createQueryBuilder('s')
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
@@ -192,9 +192,8 @@ class SourceRepository extends EntityRepository
             ->leftJoin('ostep.projectAbstractStep', 'opas')
             ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
             ->andWhere('opas.project = :project OR ovopas.project = :project')
-            ->andWhere('s.trashedAt IS NOT NULL OR s.isEnabled = :disabled')
+            ->andWhere('s.trashedAt IS NOT NULL')
             ->setParameter('project', $project)
-            ->setParameter('disabled', false)
             ->orderBy('s.trashedAt', 'DESC');
         return $qb->getQuery()->getResult();
     }

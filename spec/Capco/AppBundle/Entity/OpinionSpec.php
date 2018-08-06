@@ -3,6 +3,7 @@ namespace spec\Capco\AppBundle\Entity;
 
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Model\Publishable;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 class OpinionSpec extends ObjectBehavior
 {
@@ -16,12 +17,8 @@ class OpinionSpec extends ObjectBehavior
         $this->shouldImplement(Publishable::class);
     }
 
-    function it_can_be_unstrashed()
+    function it_is_a_trashable()
     {
-        $this->setIsTrashed(false);
-
-        $this->getIsTrashed()->shouldReturn(false);
-        $this->getTrashedReason()->shouldReturn(null);
-        $this->getTrashedAt()->shouldReturn(null);
+        $this->shouldImplement(Trashable::class);
     }
 }

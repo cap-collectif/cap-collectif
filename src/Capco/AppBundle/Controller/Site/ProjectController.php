@@ -29,11 +29,10 @@ class ProjectController extends Controller
     {
         $props = $this->get('jms_serializer')->serialize(
             [
-                'projects' =>
-                    $this->getDoctrine()
-                        ->getManager()
-                        ->getRepository('CapcoAppBundle:Project')
-                        ->getLastPublished($max, $offset),
+                'projects' => $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('CapcoAppBundle:Project')
+                    ->getLastPublished($max, $offset),
             ],
             'json',
             SerializationContext::create()->setGroups([
@@ -110,22 +109,14 @@ class ProjectController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $opinions = $em
-            ->getRepository('CapcoAppBundle:Opinion')
-            ->getTrashedOrUnpublishedByProject($project);
+        $opinions = $em->getRepository('CapcoAppBundle:Opinion')->getTrashedByProject($project);
         $versions = $em
             ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getTrashedOrUnpublishedByProject($project);
-        $arguments = $em
-            ->getRepository('CapcoAppBundle:Argument')
-            ->getTrashedOrUnpublishedByProject($project);
-        $sources = $em
-            ->getRepository('CapcoAppBundle:Source')
-            ->getTrashedOrUnpublishedByProject($project);
+            ->getTrashedByProject($project);
+        $arguments = $em->getRepository('CapcoAppBundle:Argument')->getTrashedByProject($project);
+        $sources = $em->getRepository('CapcoAppBundle:Source')->getTrashedByProject($project);
 
-        $proposals = $em
-            ->getRepository('CapcoAppBundle:Proposal')
-            ->getTrashedOrUnpublishedByProject($project);
+        $proposals = $em->getRepository('CapcoAppBundle:Proposal')->getTrashedByProject($project);
 
         return [
             'project' => $project,

@@ -108,12 +108,8 @@ class ArgumentRepository extends EntityRepository
 
     /**
      * Get all trashed or unpublished arguments for project.
-     *
-     * @param mixed $project
-     *
-     * @return mixed
      */
-    public function getTrashedOrUnpublishedByProject($project)
+    public function getTrashedByProject(Project $project)
     {
         return $this->createQueryBuilder('a')
             ->addSelect('o', 'ov', 'v', 'aut', 'm')
@@ -128,9 +124,8 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('ovos.projectAbstractStep', 'ovopas')
             ->leftJoin('os.projectAbstractStep', 'opas')
             ->andWhere('opas.project = :project OR ovopas.project = :project')
-            ->andWhere('a.trashedAt IS NOT NULL OR a.isEnabled = :disabled')
+            ->andWhere('a.trashedAt IS NOT NULL')
             ->setParameter('project', $project)
-            ->setParameter('disabled', false)
             ->orderBy('a.trashedAt', 'DESC')
             ->getQuery()
             ->getResult();

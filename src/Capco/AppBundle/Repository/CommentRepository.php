@@ -56,15 +56,6 @@ class CommentRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
-    /**
-     * Get one comment by id.
-     *
-     * @param $comment
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     *
-     * @return mixed
-     */
     public function getOneById($comment)
     {
         return $this->getIsEnabledQueryBuilder()
@@ -79,14 +70,7 @@ class CommentRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
-    /**
-     * Count all comments by user.
-     *
-     * @param $user
-     *
-     * @return mixed
-     */
-    public function countAllByAuthor(User $user)
+    public function countAllByAuthor(User $user): int
     {
         return $this->getIsEnabledQueryBuilder()
             ->select('COUNT(c)')

@@ -81,7 +81,7 @@ class OpinionVersionRepository extends EntityRepository
     /**
      * Get trashed or unpublished versions by project.
      */
-    public function getTrashedOrUnpublishedByProject($project)
+    public function getTrashedByProject(Project $project)
     {
         $qb = $this->createQueryBuilder('o')
             ->addSelect('op', 's', 'aut', 'm')
@@ -92,9 +92,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('op.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pas')
             ->andWhere('pas.project = :project')
-            ->andWhere('o.trashedAt IS NOT NULL OR o.enabled = :disabled')
+            ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('project', $project)
-            ->setParameter('disabled', false)
             ->orderBy('o.trashedAt', 'DESC');
 
         return $qb->getQuery()->getResult();

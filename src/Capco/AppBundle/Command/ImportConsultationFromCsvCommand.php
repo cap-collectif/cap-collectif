@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -14,19 +13,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 {
-    const HEADERS = [
-      'titre',
-      'type',
-      'contenu',
-    ];
+    const HEADERS = ['titre', 'type', 'contenu'];
     private $filePath;
     private $delimiter;
 
     protected function configure()
     {
-        $this
-            ->setName('capco:import:consultation-from-csv')
-            ->setDescription('Import consultation from CSV file with specified author and consultation step')
+        $this->setName('capco:import:consultation-from-csv')
+            ->setDescription(
+                'Import consultation from CSV file with specified author and consultation step'
+            )
             ->addArgument(
                 'filePath',
                 InputArgument::REQUIRED,
@@ -42,18 +38,13 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 InputArgument::REQUIRED,
                 'Please provide the slug of the consultation step you want to use'
             )
-            ->addArgument(
-                'delimiter',
-                InputArgument::OPTIONAL,
-                ', or ;'
-            )
+            ->addArgument('delimiter', InputArgument::OPTIONAL, ', or ;')
             ->addOption(
                 'force',
                 'f',
                 InputOption::VALUE_NONE,
                 'Set this option to force data import even if opinion with same title are found.'
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -68,24 +59,22 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         $userEmail = $input->getArgument('user');
         $consultationStepSlug = $input->getArgument('step');
 
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em = $this->getContainer()
+            ->get('doctrine')
+            ->getManager();
 
-        $user = $this
-            ->getContainer()
+        $user = $this->getContainer()
             ->get('fos_user.user_manager')
-            ->findUserByEmail($userEmail)
-        ;
-
+            ->findUserByEmail($userEmail);
         $consultationStep = $em
             ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
-            ->findOneBy(['slug' => $consultationStepSlug])
-        ;
-
+            ->findOneBy(['slug' => $consultationStepSlug]);
         if (!$user) {
             $output->writeln(
-                '<error>Unknown user'
-                . $userEmail .
-                '. Please provide an existing user email.</error>');
+                '<error>Unknown user' .
+                    $userEmail .
+                    '. Please provide an existing user email.</error>'
+            );
             $output->writeln('<error>Import cancelled. No opinion created.</error>');
 
             return 1;
@@ -93,9 +82,10 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
         if (!$consultationStep) {
             $output->writeln(
-                '<error>Unknown consultation step'
-                . $consultationStepSlug .
-                '. Please provide an existing consultation step slug.</error>');
+                '<error>Unknown consultation step' .
+                    $consultationStepSlug .
+                    '. Please provide an existing consultation step slug.</error>'
+            );
             $output->writeln('<error>Import cancelled. No opinion created.</error>');
 
             return 1;
@@ -103,9 +93,10 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
         if (!$consultationStep->getConsultationStepType()) {
             $output->writeln(
-                '<error>Consultation step'
-                . $consultationStepSlug .
-                ' does not have a consultation step type associated Please create it then try importing data again.</error>');
+                '<error>Consultation step' .
+                    $consultationStepSlug .
+                    ' does not have a consultation step type associated Please create it then try importing data again.</error>'
+            );
             $output->writeln('<error>Import cancelled. No opinion created.</error>');
 
             return 1;
@@ -140,24 +131,22 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                             'title' => $ot,
                             'parent' => null,
                             'consultationStepType' => $consultationStep->getConsultationStepType(),
-                    ]);
+                        ]);
                 } else {
                     $opinionType = $em
                         ->getRepository('CapcoAppBundle:OpinionType')
-                        ->findOneBy([
-                            'title' => $ot,
-                            'parent' => $opinionType,
-                        ]);
+                        ->findOneBy(['title' => $ot, 'parent' => $opinionType]);
                 }
             }
 
             if (!$opinionType) {
                 $output->writeln(
-                    '<error>Opinion type with path '
-                    . $row[1] .
-                    ' does not exist for this consultation step (specified for opinion '
-                    . $row[0] .
-                    ').</error>');
+                    '<error>Opinion type with path ' .
+                        $row[1] .
+                        ' does not exist for this consultation step (specified for opinion ' .
+                        $row[0] .
+                        ').</error>'
+                );
                 $output->writeln('<error>Import cancelled. No opinion created.</error>');
 
                 return 1;
@@ -165,17 +154,12 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
             $opinion = $em
                 ->getRepository('CapcoAppBundle:Opinion')
-                ->findOneBy([
-                    'title' => $row[0],
-                    'step' => $consultationStep,
-                ])
-            ;
-
+                ->findOneBy(['title' => $row[0], 'step' => $consultationStep]);
             if (\is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(
-                    '<error>Opinion with title "'
-                    . $row[0] .
-                    '" already exists in this consultation step. Please change the title or specify the force option to import it anyway.</error>'
+                    '<error>Opinion with title "' .
+                        $row[0] .
+                        '" already exists in this consultation step. Please change the title or specify the force option to import it anyway.</error>'
                 );
                 $output->writeln('<error>Import cancelled. No opinion created.</error>');
 
@@ -194,7 +178,6 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             $opinion->setAuthor($user);
             $opinion->setPosition($i);
             $opinion->setIsEnabled(true);
-            $opinion->setIsTrashed(false);
             ++$i;
 
             $em->persist($opinion);
@@ -233,9 +216,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         $progress->finish();
 
         $output->writeln(
-            '<info>'
-            . \count($opinions) - 1 .
-            ' opinions successfully created.</info>'
+            '<info>' . \count($opinions) - 1 . ' opinions successfully created.</info>'
         );
 
         return 0;

@@ -336,7 +336,7 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getTrashedOrUnpublishedByProject(Project $project)
+    public function getTrashedByProject(Project $project)
     {
         $qb = $this->createQueryBuilder('p')
             ->addSelect('f', 's', 'aut', 'm', 'theme', 'status', 'district')

@@ -51,7 +51,7 @@ class ReportingController extends Controller
         $related = $object->getRelatedObject();
 
         if ($related) {
-            $related->setIsTrashed(true);
+            $related->setTrashedStatus('visible');
             $this->get('capco.contribution_notifier')->onModeration($related);
         }
 
