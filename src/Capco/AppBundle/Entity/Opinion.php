@@ -159,8 +159,6 @@ class Opinion implements OpinionContributionInterface
         $this->versions = new ArrayCollection();
         $this->appendices = new ArrayCollection();
         $this->followers = new ArrayCollection();
-
-        $this->updatedAt = new \Datetime();
         $this->createdAt = new \Datetime();
     }
 

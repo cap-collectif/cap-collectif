@@ -897,7 +897,7 @@ class UserRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function findUsersFollowingAOpinion(
+    public function findUsersFollowingAnOpinion(
         Opinion $opinion,
         $first = 0,
         $offset = 100

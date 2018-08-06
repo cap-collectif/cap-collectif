@@ -31,7 +31,7 @@ class OpinionFollowersResolver implements ResolverInterface
             }
 
             try {
-                $users = $this->userRepository->findUsersFollowingAOpinion(
+                $users = $this->userRepository->findUsersFollowingAnOpinion(
                     $opinion,
                     $offset,
                     $limit
