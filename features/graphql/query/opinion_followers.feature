@@ -17,6 +17,7 @@ Scenario: GraphQL client wants to get list of users who following an opinion
                 id
               }
             }
+            totalCount
           }
         }
       }
@@ -46,66 +47,7 @@ Scenario: GraphQL client wants to get list of users who following an opinion
                 "id": "user11"
               }
             }
-          ]
-        }
-      }
-    }
-  }
-  """
-
-@database
-Scenario: I'm on a opinion and GraphQL want to know the total number of opinion's followers
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "query ($opinionId: ID!, $count: Int, $cursor: String) {
-      opinion: node(id: $opinionId) {
-        id
-        ... on Opinion {
-          followers(first: $count, after: $cursor) {
-            edges {
-              cursor
-              node {
-                id
-              }
-            }
-            pageInfo {
-              hasNextPage
-              endCursor
-            }
-            totalCount
-          }
-        }
-      }
-    }",
-    "variables": {
-      "opinionId": "opinion6",
-      "count": 5,
-      "cursor": null
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "opinion": {
-        "id": "opinion6",
-        "followers": {
-          "edges": [
-            {
-              "cursor": @string@,
-              "node": {
-                "id": @string@
-              }
-            },
-            @...@
           ],
-          "pageInfo": {
-            "hasNextPage": true,
-            "endCursor": @string@
-          },
           "totalCount": 37
         }
       }
