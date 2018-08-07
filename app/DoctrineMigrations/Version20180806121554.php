@@ -32,6 +32,31 @@ final class Version20180806121554 extends AbstractMigration
         $this->addSql(
             'ALTER TABLE project ADD opinion_can_be_followed TINYINT(1) DEFAULT \'0\' NOT NULL'
         );
+        $this->addSql('ALTER TABLE user_following DROP FOREIGN KEY FK_715F000751885A6A');
+        $this->addSql('ALTER TABLE user_following DROP FOREIGN KEY FK_E0A7FBE1A76ED395');
+        $this->addSql('ALTER TABLE user_following DROP FOREIGN KEY FK_E0A7FBE1F4792058');
+        $this->addSql(
+            'CREATE UNIQUE INDEX follower_unique_opinion ON user_following (user_id, opinion_id)'
+        );
+        $this->addSql('DROP INDEX idx_e0a7fbe1a76ed395 ON user_following');
+        $this->addSql('CREATE INDEX IDX_715F0007A76ED395 ON user_following (user_id)');
+        $this->addSql('DROP INDEX idx_e0a7fbe1f4792058 ON user_following');
+        $this->addSql('CREATE INDEX IDX_715F0007F4792058 ON user_following (proposal_id)');
+        $this->addSql('DROP INDEX fk_715f000751885a6a ON user_following');
+        $this->addSql('CREATE INDEX IDX_715F000751885A6A ON user_following (opinion_id)');
+        $this->addSql('DROP INDEX follower_unique ON user_following');
+        $this->addSql(
+            'CREATE UNIQUE INDEX follower_unique_proposal ON user_following (user_id, proposal_id)'
+        );
+        $this->addSql(
+            'ALTER TABLE user_following ADD CONSTRAINT FK_715F000751885A6A FOREIGN KEY (opinion_id) REFERENCES opinion (id) ON DELETE CASCADE'
+        );
+        $this->addSql(
+            'ALTER TABLE user_following ADD CONSTRAINT FK_E0A7FBE1A76ED395 FOREIGN KEY (user_id) REFERENCES fos_user (id) ON DELETE CASCADE'
+        );
+        $this->addSql(
+            'ALTER TABLE user_following ADD CONSTRAINT FK_E0A7FBE1F4792058 FOREIGN KEY (proposal_id) REFERENCES proposal (id) ON DELETE CASCADE'
+        );
     }
 
     public function down(Schema $schema): void
@@ -42,6 +67,32 @@ final class Version20180806121554 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
+        $this->addSql('DROP INDEX follower_unique_opinion ON user_following');
+        $this->addSql('ALTER TABLE user_following DROP FOREIGN KEY FK_715F0007A76ED395');
+        $this->addSql('ALTER TABLE user_following DROP FOREIGN KEY FK_715F0007F4792058');
+        $this->addSql('ALTER TABLE user_following DROP FOREIGN KEY FK_715F000751885A6A');
+        $this->addSql(
+            'ALTER TABLE user_following CHANGE notified_of notified_of VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci'
+        );
+        $this->addSql('DROP INDEX follower_unique_proposal ON user_following');
+        $this->addSql(
+            'CREATE UNIQUE INDEX follower_unique ON user_following (user_id, proposal_id)'
+        );
+        $this->addSql('DROP INDEX idx_715f0007a76ed395 ON user_following');
+        $this->addSql('CREATE INDEX IDX_E0A7FBE1A76ED395 ON user_following (user_id)');
+        $this->addSql('DROP INDEX idx_715f0007f4792058 ON user_following');
+        $this->addSql('CREATE INDEX IDX_E0A7FBE1F4792058 ON user_following (proposal_id)');
+        $this->addSql('DROP INDEX idx_715f000751885a6a ON user_following');
+        $this->addSql('CREATE INDEX FK_715F000751885A6A ON user_following (opinion_id)');
+        $this->addSql(
+            'ALTER TABLE user_following ADD CONSTRAINT FK_715F0007A76ED395 FOREIGN KEY (user_id) REFERENCES fos_user (id) ON DELETE CASCADE'
+        );
+        $this->addSql(
+            'ALTER TABLE user_following ADD CONSTRAINT FK_715F0007F4792058 FOREIGN KEY (proposal_id) REFERENCES proposal (id) ON DELETE CASCADE'
+        );
+        $this->addSql(
+            'ALTER TABLE user_following ADD CONSTRAINT FK_715F000751885A6A FOREIGN KEY (opinion_id) REFERENCES opinion (id) ON DELETE CASCADE'
+        );
         $this->addSql('ALTER TABLE user_following RENAME TO user_following_proposal');
         $this->addSql('ALTER TABLE user_following_proposal DROP opinion_id');
         $this->addSql('ALTER TABLE project DROP opinion_can_be_followed');
@@ -86,6 +137,10 @@ final class Version20180806121554 extends AbstractMigration
                 ['id' => $follower['id']]
             );
         }
+
+        $this->addSql(
+            'ALTER TABLE user_following CHANGE notified_of notified_of ENUM(\'MINIMAL\', \'ESSENTIAL\', \'ALL\')'
+        );
         $this->write('--> Migrated successfully subscription type 3 to ALL!');
     }
 }
