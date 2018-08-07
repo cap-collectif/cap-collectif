@@ -79,6 +79,7 @@ export default createFragmentContainer(ReplyModalLink, {
   reply: graphql`
     fragment ReplyModalLink_reply on Reply {
       createdAt
+      publishedAt
       id
       private
       ...ShowReplyModal_reply

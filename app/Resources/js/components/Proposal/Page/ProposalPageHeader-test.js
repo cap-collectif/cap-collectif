@@ -11,16 +11,9 @@ describe('<ProposalPageHeader />', () => {
     $fragmentRefs,
     id: '1',
     title: 'titre',
-    theme: {
-      title: 'titre du theme',
-    },
-    author: {
-      username: 'userAdmin',
-      displayName: 'userAdmin',
-      media: {
-        url: 'http://media.url',
-      },
-    },
+    theme: { title: 'titre du theme' },
+    author: { username: 'userAdmin', displayName: 'userAdmin', media: { url: 'http://media.url' } },
+    publishedAt: '2015-01-01 00:00:00',
     createdAt: '2015-01-01 00:00:00',
     updatedAt: '2015-01-05 00:00:00',
     publicationStatus: 'PUBLISHED',
@@ -33,14 +26,9 @@ describe('<ProposalPageHeader />', () => {
     id: '1',
     title: 'titre',
     theme: null,
-    author: {
-      username: 'userAdmin',
-      displayName: 'userAdmin',
-      media: {
-        url: 'http://media.url',
-      },
-    },
+    author: { username: 'userAdmin', displayName: 'userAdmin', media: { url: 'http://media.url' } },
     createdAt: '2015-01-01 00:00:00',
+    publishedAt: '2015-01-01 00:00:00',
     updatedAt: '2015-01-05 00:00:00',
     publicationStatus: 'PUBLISHED',
     show_url: 'true',

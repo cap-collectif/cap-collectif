@@ -15,7 +15,7 @@
                     {{ comment.authorName }}
                 {% endif %}
             </p>
-            <p class="excerpt  opinion__date">{{ comment.createdAt | localizeddate('long', 'short', app.request.locale) }}</p>
+            <p class="excerpt  opinion__date">{{ comment.publishedAt | localizeddate('long', 'short', app.request.locale) }}</p>
         </div>
         {% if profile is defined %}
             <p>{{ 'comment.linked_object' | trans({}, 'CapcoAppBundle') }} <a href="{{ capco_comment_object_url(comment) }}">{{ capco_comment_object(comment) }}</a></p>

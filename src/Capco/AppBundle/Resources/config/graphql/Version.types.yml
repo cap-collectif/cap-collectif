@@ -7,6 +7,7 @@ Version:
       Reportable,
       Argumentable,
       Trashable,
+      Publishable,
       ContributionWithAuthor,
       EditableContribution,
     ]
@@ -18,6 +19,7 @@ Version:
         Contribution,
         Sourceable,
         Reportable,
+        Publishable,
         Argumentable,
         Trashable,
         ContributionWithAuthor,
@@ -30,8 +32,6 @@ Version:
       url:
         description: 'The url of version.'
         resolve: "@=resolver('version_url', [value])"
-      published:
-        type: 'Boolean!'
       viewerHasReport:
         resolve: '@=value.userHasReport(getUser())'
       comment:

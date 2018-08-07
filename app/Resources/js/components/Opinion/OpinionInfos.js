@@ -19,11 +19,15 @@ class OpinionInfos extends React.Component<Props> {
     if (!Modernizr.intl || !opinion.createdAt) {
       return null;
     }
+    const date = opinion.publishedAt ? opinion.publishedAt : opinion.createdAt;
+    if (!date) {
+      return null;
+    }
     return (
       <span className="excerpt">
         {' • '}
         <FormattedDate
-          value={moment(opinion.createdAt).toDate()}
+          value={moment(date).toDate()}
           day="numeric"
           month="long"
           year="numeric"
@@ -36,7 +40,7 @@ class OpinionInfos extends React.Component<Props> {
 
   renderEditionDate = () => {
     const { opinion } = this.props;
-    if (!Modernizr.intl || !opinion.updatedAt || !opinion.createdAt) {
+    if (!Modernizr.intl || !opinion.updatedAt) {
       return null;
     }
 
@@ -122,6 +126,7 @@ export default createFragmentContainer(OpinionInfos, {
       ... on Opinion {
         __typename
         createdAt
+        publishedAt
         updatedAt
         pinned
         ranking
@@ -137,6 +142,7 @@ export default createFragmentContainer(OpinionInfos, {
           url
         }
         createdAt
+        publishedAt
         updatedAt
       }
       ... on Source {
@@ -146,6 +152,7 @@ export default createFragmentContainer(OpinionInfos, {
           url
         }
         createdAt
+        publishedAt
         updatedAt
       }
     }

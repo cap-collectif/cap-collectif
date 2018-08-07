@@ -23,7 +23,7 @@
                     </span>
                 {% endif %}
             </p>
-            <p class="excerpt  opinion__date">{{ argument.createdAt | localizeddate('long', 'short', app.request.locale) }}</p>
+            <p class="excerpt  opinion__date">{{ argument.publishedAt | localizeddate('long', 'short', app.request.locale) }}</p>
             {% if profile is defined %}
                 <p>{{ 'argument.trashed.linked_proposition' | trans({}, 'CapcoAppBundle') }} <a href="{{ path('app_project_show_opinion', {'projectSlug': project.slug, 'stepSlug': opinion.step.slug, 'opinionTypeSlug': argument.Opinion.OpinionType.slug, 'opinionSlug': argument.Opinion.slug}) }}">{{ argument.Opinion.title }}</a></p>
             {% endif %}

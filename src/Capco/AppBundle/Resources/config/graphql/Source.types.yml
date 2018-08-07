@@ -1,19 +1,17 @@
 Source:
   type: object
   inherits:
-    [Node, Contribution, Reportable, Trashable, ContributionWithAuthor, EditableContribution]
+    [Node,  Publishable, Contribution, Reportable, Trashable, ContributionWithAuthor, EditableContribution]
   config:
     description: 'A source'
     interfaces:
-      [Node, Contribution, Reportable, Trashable, ContributionWithAuthor, EditableContribution]
+      [Node, Publishable, Contribution, Reportable, Trashable, ContributionWithAuthor, EditableContribution]
     fields:
       createdAt:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
       viewerHasReport:
         resolve: '@=value.userHasReport(getUser())'
-      published:
-        type: 'Boolean!'
       votesCount:
         type: 'Int!'
       contribuable:

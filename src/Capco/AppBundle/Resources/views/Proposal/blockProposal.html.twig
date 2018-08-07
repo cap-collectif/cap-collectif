@@ -13,7 +13,7 @@
                         {{ proposal.Author.username }}
                     {% endif %}
                     <p class="excerpt proposal__date">
-                        {{ proposal.createdAt | localizeddate('long', 'none') }}
+                        {{ proposal.publishedAt | localizeddate('long', 'none') }}
                     </p>
                 </div>
             </div>

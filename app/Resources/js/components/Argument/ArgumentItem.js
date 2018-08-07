@@ -24,7 +24,7 @@ class ArgumentItem extends React.Component<Props> {
     return (
       <p className="excerpt opinion__date">
         <FormattedDate
-          value={moment(argument.createdAt)}
+          value={moment(argument.publishedAt ? argument.publishedAt : argument.createdAt)}
           day="numeric"
           month="long"
           year="numeric"
@@ -76,6 +76,7 @@ export default createFragmentContainer(
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       createdAt
+      publishedAt
       ...ArgumentButtons_argument @arguments(isAuthenticated: $isAuthenticated)
       author {
         id

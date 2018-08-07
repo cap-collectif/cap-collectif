@@ -30,9 +30,10 @@ export class ProposalPageHeader extends React.Component<Props> {
 
   render() {
     const { step, viewer, proposal, className, referer } = this.props;
+    const date = proposal.publishedAt ? proposal.publishedAt : proposal.createdAt;
     const createdDate = (
       <FormattedDate
-        value={moment(proposal.createdAt)}
+        value={moment(date)}
         day="numeric"
         month="long"
         year="numeric"
@@ -156,6 +157,7 @@ export default createFragmentContainer(container, {
         }
       }
       createdAt
+      publishedAt
       updatedAt
       publicationStatus
       show_url

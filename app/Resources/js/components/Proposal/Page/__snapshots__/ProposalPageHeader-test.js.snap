@@ -116,6 +116,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
           "createdAt": "2015-01-01 00:00:00",
           "id": "1",
           "publicationStatus": "PUBLISHED",
+          "publishedAt": "2015-01-01 00:00:00",
           "show_url": "true",
           "theme": null,
           "title": "titre",
@@ -243,6 +244,7 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
           "createdAt": "2015-01-01 00:00:00",
           "id": "1",
           "publicationStatus": "PUBLISHED",
+          "publishedAt": "2015-01-01 00:00:00",
           "show_url": "true",
           "theme": Object {
             "title": "titre du theme",

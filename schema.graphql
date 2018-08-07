@@ -2926,7 +2926,7 @@ type SimpleQuestion implements Question {
 }
 
 # A source
-type Source implements Node & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
+type Source implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
   # The ID of an object
   id: ID!
 
@@ -2951,6 +2951,15 @@ type Source implements Node & Contribution & Reportable & Trashable & Contributi
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
 
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
@@ -2965,7 +2974,6 @@ type Source implements Node & Contribution & Reportable & Trashable & Contributi
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  published: Boolean!
   votesCount: Int!
   contribuable: Boolean!
   viewerHasVote: Boolean!
@@ -3664,7 +3672,7 @@ type ValueResponse implements Response {
 }
 
 # A version of contribution
-type Version implements Node & Contribution & Sourceable & Reportable & Argumentable & Trashable & ContributionWithAuthor & EditableContribution {
+type Version implements Node & Contribution & Sourceable & Reportable & Publishable & Argumentable & Trashable & ContributionWithAuthor & EditableContribution {
   # The id of the contribution.
   id: ID!
   contribuable: Boolean!
@@ -3708,6 +3716,15 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
 
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
@@ -3722,7 +3739,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  published: Boolean!
 
   # Explenation.
   comment: String

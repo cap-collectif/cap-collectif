@@ -8,8 +8,8 @@
             {% else %}
                 {{ opinion.Author.username }}
             {% endif %}
-            • {{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}
-            {% if opinion.createdAt != opinion.updatedAt %}
+            • {{ opinion.publishedAt | localizeddate('medium', 'none', app.request.locale) }}
+            {% if opinion.updatedAt is not null and opinion.publishedAt != opinion.updatedAt %}
                 • {{ 'global.edited'|trans({}, 'CapcoAppBundle') }} {{ date }}
             {% endif %}
 
