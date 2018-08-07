@@ -317,6 +317,168 @@ export const renderResponses = ({
   disabled: boolean,
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
+  const hasLogicJumps = questions.reduce((acc, question) => {
+    return acc || (question && question.jumps && question.jumps.length > 0);
+  }, false);
+
+  if (hasLogicJumps) {
+    return (
+      <div>
+        {fields.map((member, index) => {
+          const field = questions[index];
+          let response = responses ? responses[index] : null;
+          if (response && field.jumps.length > 0 && response.value) {
+            console.log('y a des logics jumps ici pour la question ', field);
+            field.jumps.some(jump => {
+              const conditions = jump.conditions.map(condition => {
+                console.log(
+                  `CONDITION : ${condition.question.title} ${condition.operator} ${
+                    condition.value.title
+                  }`,
+                );
+                const search = responses
+                  .filter(Boolean)
+                  .find(
+                    r => condition && condition.question && r.question === condition.question.id,
+                  );
+                const userResponse = search && search.value;
+                console.log('USER RESPONSE : ', userResponse);
+                return condition.operator === 'IS'
+                  ? condition.value.title === userResponse
+                  : condition.value.title !== userResponse;
+              });
+              const conditionResult = conditions.every(condition => condition === true);
+              if (conditionResult) {
+                console.log(
+                  `Tu as satisfait la/les condition(s), tu dois désormais te tp à la question ${
+                    jump.destination.title
+                  } (${jump.destination.id})`,
+                );
+              }
+              return conditionResult;
+            });
+          }
+          const inputType = field.type || 'text';
+          const isOtherAllowed = field.isOtherAllowed;
+
+          const labelAppend = field.required
+            ? strategy === 'minority_required'
+              ? ` <span class="warning small"> ${intl.formatMessage({
+                  id: 'global.mandatory',
+                })}</span>`
+              : ''
+            : strategy === 'majority_required' || strategy === 'half_required'
+              ? ` <span class="excerpt small"> ${intl.formatMessage({
+                  id: 'global.optional',
+                })}</span>`
+              : '';
+
+          const labelMessage = field.title + labelAppend;
+
+          const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
+
+          switch (inputType) {
+            case 'medias': {
+              return (
+                <ProposalPrivateField key={field.id} show={field.private}>
+                  <Field
+                    name={`${member}.value`}
+                    id={member}
+                    type="medias"
+                    component={component}
+                    help={field.helpText}
+                    description={field.description}
+                    placeholder="reply.your_response"
+                    label={label}
+                    disabled={disabled}
+                  />
+                </ProposalPrivateField>
+              );
+            }
+            case 'select': {
+              return (
+                <ProposalPrivateField key={field.id} show={field.private}>
+                  <Field
+                    name={`${member}.value`}
+                    id={member}
+                    type={inputType}
+                    component={component}
+                    help={field.helpText}
+                    isOtherAllowed={isOtherAllowed}
+                    description={field.description}
+                    placeholder="reply.your_response"
+                    label={label}
+                    disabled={disabled}>
+                    <option value="" disabled>
+                      {<FormattedMessage id="global.select" />}
+                    </option>
+                    {field.choices.map(choice => (
+                      <option key={choice.id} value={choice.title}>
+                        {choice.title}
+                      </option>
+                    ))}
+                  </Field>
+                </ProposalPrivateField>
+              );
+            }
+            default: {
+              if (responses) {
+                response = responses[index].value;
+              }
+
+              let choices = [];
+              if (
+                inputType === 'ranking' ||
+                inputType === 'radio' ||
+                inputType === 'checkbox' ||
+                inputType === 'button'
+              ) {
+                choices = formattedChoicesInField(field);
+                if (inputType === 'radio') {
+                  return (
+                    <ProposalPrivateField key={field.id} show={field.private}>
+                      <div key={`${member}-container`}>
+                        <MultipleChoiceRadio
+                          id={member}
+                          name={member}
+                          description={field.description}
+                          helpText={field.helpText}
+                          isOtherAllowed={isOtherAllowed}
+                          label={label}
+                          change={change}
+                          choices={choices}
+                          value={response}
+                          disabled={disabled}
+                        />
+                      </div>
+                    </ProposalPrivateField>
+                  );
+                }
+              }
+
+              return (
+                <ProposalPrivateField key={field.id} show={field.private}>
+                  <Field
+                    name={`${member}.value`}
+                    id={member}
+                    type={inputType}
+                    component={component}
+                    description={field.description}
+                    help={field.helpText}
+                    isOtherAllowed={isOtherAllowed}
+                    placeholder="reply.your_response"
+                    choices={choices}
+                    label={label}
+                    disabled={disabled}
+                  />
+                </ProposalPrivateField>
+              );
+            }
+          }
+        })}
+      </div>
+    );
+  }
   return (
     <div>
       {fields.map((member, index) => {
