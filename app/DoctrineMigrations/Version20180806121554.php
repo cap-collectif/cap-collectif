@@ -87,9 +87,5 @@ final class Version20180806121554 extends AbstractMigration
             );
         }
         $this->write('--> Migrated successfully subscription type 3 to ALL!');
-
-        $this->addSql(
-            'ALTER TABLE user_following CHANGE notified_of notified_of ENUM(\'MINIMAL\', \'ESSENTIAL\', \'ALL\')'
-        );
     }
 }
