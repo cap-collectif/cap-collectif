@@ -40,7 +40,6 @@ Capco\AppBundle\Entity\ProposalComment:
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
     isEnabled: true
-    isTrashed: false
     createdAt: <dateTimeBetween('-50 days', '-1 days')>
   propComment{28..32}:
     id: 'proposalComment<current()>'
@@ -48,7 +47,6 @@ Capco\AppBundle\Entity\ProposalComment:
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
     isEnabled: true
-    isTrashed: false
     createdAt: <dateTimeBetween('-50 days', '-1 days')>
   propComment{33..37}:
     id: 'proposalComment<current()>'
@@ -56,7 +54,6 @@ Capco\AppBundle\Entity\ProposalComment:
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
     isEnabled: true
-    isTrashed: false
     createdAt: <dateTimeBetween('-50 days', '-1 days')>
   propComment{37..42}:
     id: 'proposalComment<current()>'
@@ -64,5 +61,4 @@ Capco\AppBundle\Entity\ProposalComment:
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
     isEnabled: true
-    isTrashed: false
     createdAt: <dateTimeBetween('-50 days', '-1 days')>

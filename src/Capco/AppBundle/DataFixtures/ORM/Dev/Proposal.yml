@@ -373,7 +373,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Operation génétique pour avoir la force
     body: <p><text(100)></p>
     enabled: false
-    isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform9'
     reference: 10
@@ -382,7 +381,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Transfusion de midi-chloriens
     body: <p><text(100)></p>
     enabled: false
-    isTrashed: false
     draft: true
     author: '@user4'
     proposalForm: '@proposalform9'
@@ -392,7 +390,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Annuler les prochains Star-Wars
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 666
@@ -401,7 +398,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Trouver un anti dote à la force
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 667
@@ -410,7 +406,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Minus et Cortex
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user5'
     proposalForm: '@proposalform10'
     reference: 42
@@ -419,7 +414,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Les chats
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user2'
     proposalForm: '@proposalform10'
     reference: 44
@@ -428,7 +422,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Batman
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user4'
     proposalForm: '@proposalform10'
     reference: 43
@@ -437,7 +430,6 @@ Capco\AppBundle\Entity\Proposal:
     title: Quel type de bière ?
     body: <p><text(100)></p>
     enabled: true
-    isTrashed: false
     author: '@user1'
     proposalForm: '@proposalform11'
     reference: 45

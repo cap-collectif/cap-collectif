@@ -2,10 +2,15 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class OpinionAdmin extends CapcoAdmin
 {
@@ -23,6 +28,7 @@ class OpinionAdmin extends CapcoAdmin
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
     }
+
     public function getPersistentParameters()
     {
         $subject = $this->getSubject();
@@ -49,7 +55,7 @@ class OpinionAdmin extends CapcoAdmin
             return 'CapcoAdminBundle:Opinion:delete.html.twig';
         }
 
-        return parent::getTemplate($name);
+        return $this->getTemplateRegistry()->getTemplate($name);
     }
 
     public function getBatchActions()
@@ -60,8 +66,8 @@ class OpinionAdmin extends CapcoAdmin
     {
         $datagridMapper
             ->add('id', null, ['label' => 'admin.fields.opinion.id'])
-            ->add(
             ->add('title', null, ['label' => 'admin.fields.opinion.title'])
+            ->add(
                 'Author',
                 'doctrine_orm_model_autocomplete',
                 ['label' => 'admin.fields.opinion.author'],
@@ -74,9 +80,9 @@ class OpinionAdmin extends CapcoAdmin
             ->add('pinned', null, ['label' => 'admin.fields.opinion.pinned_long'])
             ->add('trashedStatus', null, ['label' => 'admin.fields.opinion.is_trashed'])
             ->add('updatedAt', null, ['label' => 'admin.fields.opinion.updated_at'])
+            ->add('argumentsCount', null, ['label' => 'admin.fields.opinion.argument_count'])
             ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count'])
             ->add('expired', null, ['label' => 'admin.global.expired']);
-            ->add('argumentsCount', null, ['label' => 'admin.fields.opinion.argument_count'])
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -172,7 +178,6 @@ class OpinionAdmin extends CapcoAdmin
                 'attr' => ['class' => $classname],
             ])
             ->end()
-
             ->with('admin.fields.opinion.group_publication')
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.opinion.is_enabled',
@@ -184,9 +189,9 @@ class OpinionAdmin extends CapcoAdmin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
+                'attr' => [
                     'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                'attr' => [
                 ],
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
@@ -200,10 +205,8 @@ class OpinionAdmin extends CapcoAdmin
                 'btn_list' => false,
                 'label' => 'admin.fields.opinion.answer',
                 'required' => false,
-            ->end();
             ])
-    }
-
+            ->end();
     }
 
     protected function configureRoutes(RouteCollection $collection)

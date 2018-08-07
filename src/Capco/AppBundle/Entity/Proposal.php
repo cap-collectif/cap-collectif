@@ -489,7 +489,7 @@ class Proposal
 
     public function canDisplay($user = null): bool
     {
-        if ($this->enabled && !$this->isTrashed) {
+        if ($this->enabled && !$this->isTrashed()) {
             return $this->getStep() ? $this->getStep()->canDisplay($user) : false;
         }
 
@@ -1082,7 +1082,7 @@ class Proposal
 
     public function isIndexable(): bool
     {
-        return ($this->enabled && !$this->expired && !$this->isDraft() && !$this->isDeleted());
+        return $this->enabled && !$this->expired && !$this->isDraft() && !$this->isDeleted();
     }
 
     public static function getElasticsearchTypeName(): string

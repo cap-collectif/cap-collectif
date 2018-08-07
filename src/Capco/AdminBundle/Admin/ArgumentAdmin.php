@@ -2,11 +2,13 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -43,7 +45,7 @@ class ArgumentAdmin extends AbstractAdmin
             ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
             ->add('updatedAt', null, ['label' => 'admin.fields.argument.updated_at'])
             ->add('isEnabled', null, ['label' => 'admin.fields.argument.is_enabled'])
-            ->add('isTrashed', null, ['label' => 'admin.fields.argument.is_trashed'])
+            ->add('trashedStatus', null, ['label' => 'admin.fields.argument.is_trashed'])
             ->add('expired', null, ['label' => 'admin.global.expired']);
     }
 
@@ -118,34 +120,6 @@ class ArgumentAdmin extends AbstractAdmin
                 'label' => 'admin.fields.argument.trashed_reason',
                 'required' => false,
             ]);
-    }
-
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $subject = $this->getSubject();
-
-        $showMapper
-            ->add('body', null, ['label' => 'admin.fields.argument.body'])
-            ->add('type', null, [
-                'label' => 'admin.fields.argument.type',
-                'template' => 'CapcoAdminBundle:Argument:type_show_field.html.twig',
-                'typesLabels' => Argument::$argumentTypesLabels,
-            ])
-            ->add('opinion', null, ['label' => 'admin.fields.argument.opinion'])
-            ->add('Author', null, ['label' => 'admin.fields.argument.author'])
-            ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
-            ->add('createdAt', null, ['label' => 'admin.fields.argument.created_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.argument.updated_at'])
-            ->add('isEnabled', null, ['label' => 'admin.fields.argument.is_enabled'])
-            ->add('isTrashed', null, ['label' => 'admin.fields.argument.is_trashed']);
-        if ($subject->getIsTrashed()) {
-            $showMapper
-                ->add('trashedAt', null, ['label' => 'admin.fields.argument.trashed_at'])
-                ->add('trashedReason', null, ['label' => 'admin.fields.argument.trashed_reason']);
-        }
     }
 
     protected function configureRoutes(RouteCollection $collection)

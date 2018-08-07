@@ -8,19 +8,15 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class OpinionVersionAdmin extends AbstractAdmin
 {
-
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
     private $tokenStorage;
-  
+
     public function __construct(
         string $code,
         string $class,

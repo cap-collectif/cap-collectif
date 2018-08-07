@@ -6,7 +6,6 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Traits\UuidTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\TextableTrait;
@@ -17,7 +16,6 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Model\Publishable;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 /**
