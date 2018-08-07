@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UnpublishedLabel /> renders when not published because author confirmed his account too late 1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={
+    <Popover
+      bsClass="popover"
+      id="publishable-id1-not-accounted-popover"
+      placement="right"
+      title="AUTHOR_CONFIRMED_TOO_LATE"
+    >
+      AUTHOR_CONFIRMED_TOO_LATE
+    </Popover>
+  }
+  placement="top"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <Label
+    bsClass="label"
+    bsStyle="danger"
+  >
+    <Glyphicon
+      bsClass="glyphicon"
+      glyph="star"
+    />
+    <FormattedMessage
+      id="not-accounted"
+      values={Object {}}
+    />
+  </Label>
+</OverlayTrigger>
+`;
+
+exports[`<UnpublishedLabel /> renders when not published because author is not confirmed 1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={
+    <Popover
+      bsClass="popover"
+      id="publishable-id1-not-accounted-popover"
+      placement="right"
+      title="AUTHOR_NOT_CONFIRMED"
+    >
+      AUTHOR_NOT_CONFIRMED
+    </Popover>
+  }
+  placement="top"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <Label
+    bsClass="label"
+    bsStyle="danger"
+  >
+    <Glyphicon
+      bsClass="glyphicon"
+      glyph="star"
+    />
+    <FormattedMessage
+      id="not-accounted"
+      values={Object {}}
+    />
+  </Label>
+</OverlayTrigger>
+`;
+
+exports[`<UnpublishedLabel /> renders when not published because author must confirm 1`] = `
+<OverlayTrigger
+  defaultOverlayShown={false}
+  overlay={
+    <Popover
+      bsClass="popover"
+      id="publishable-id1-not-accounted-popover"
+      placement="right"
+      title="WAITING_AUTHOR_CONFIRMATION"
+    >
+      WAITING_AUTHOR_CONFIRMATION
+    </Popover>
+  }
+  placement="top"
+  trigger={
+    Array [
+      "hover",
+      "focus",
+    ]
+  }
+>
+  <Label
+    bsClass="label"
+    bsStyle="danger"
+  >
+    <Glyphicon
+      bsClass="glyphicon"
+      glyph="star"
+    />
+    <FormattedMessage
+      id="not-accounted"
+      values={Object {}}
+    />
+  </Label>
+</OverlayTrigger>
+`;
+
+exports[`<UnpublishedLabel /> renders when published 1`] = `""`;
