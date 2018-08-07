@@ -76,7 +76,7 @@ class Proposal
     const STATE_HIDDEN_CONTENT = 'hidden_content';
     const STATE_DISABlED = 'unpublished';
     const STATE_DELETED = 'deleted';
-    const STATE_EXPIRED = 'expired';
+    const NOT_PUBLISHED = 'NOT_PUBLISHED';
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -969,36 +969,6 @@ class Proposal
         }
 
         return $this->getStatus();
-    }
-
-    public function state(): string
-    {
-        if (null !== $this->getDeletedAt()) {
-            return self::STATE_DELETED;
-        }
-
-        if ($this->isTrashed()) {
-            if ($this->getTrashedStatus() === Trashable::STATUS_VISIBLE) {
-                return self::STATE_TRASHED;
-            }
-            return self::STATE_HIDDEN_CONTENT;
-        }
-
-        if (!$this->isPublished() && !$this->isDraft()) {
-            return self::STATE_DISABlED;
-        }
-
-        if ($this->isDraft()) {
-            return self::STATE_DRAFT;
-        }
-
-        if ($this->isPublished()) {
-            return self::STATE_ENABLED;
-        }
-
-        throw new \Exception(
-            sprintf('no current state was found for this proposition %s', $this->getId())
-        );
     }
 
     public function getProposalEvaluation()

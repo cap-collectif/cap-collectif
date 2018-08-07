@@ -673,8 +673,8 @@ enum CommentOrderField {
 
 # Available statuses
 enum CommentPublicationStatus {
-  # Was publicly visible, but has expired.
-  EXPIRED
+  # Visible by author only.
+  NOT_PUBLISHED
 
   # Normal status, Publicly visible
   PUBLISHED
@@ -2153,9 +2153,6 @@ enum ProposalOrderField {
 
 # Available statuses
 enum ProposalPublicationStatus {
-  # Was publicly visible, but has expired.
-  EXPIRED
-
   # Normal status, Publicly visible
   PUBLISHED
 
@@ -2171,8 +2168,8 @@ enum ProposalPublicationStatus {
   # Draft, not publicly visible, only showed for his author.
   DRAFT
 
-  # Visible only by the author, he is not yet confirmed !
-  NOT_ACCOUNTED
+  # Visible by author only.
+  UNPUBLISHED
 }
 
 # A proposal step
@@ -3445,7 +3442,6 @@ type User implements Node {
   notificationsConfiguration: UserNotificationsConfiguration!
   locked: Boolean!
   phoneConfirmed: Boolean!
-  expiresAt: DateTime
   phoneConfirmationSentAt: String
   gender: GenderValue
   firstname: String
@@ -3531,7 +3527,6 @@ type User implements Node {
 
   # Total of contributions count
   contributionsCount: Int!
-  expired: Boolean!
 
   # Your facebook url
   facebookUrl: String

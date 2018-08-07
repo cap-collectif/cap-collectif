@@ -4,16 +4,16 @@ Capco\AppBundle\Entity\EventComment:
     Event: '@event2'
     Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
-    publishedAt: <datetime()>
+    publishedAt: <dateTime()>
   evComment{2..49}:
     id: 'eventComment<current()>'
     Event: '@event<numberBetween(1, 3)>'
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    publishedAt: <datetime()>
+    publishedAt: <dateTime()>
   evComment50:
     id: 'eventComment50'
     Event: '@event1'
     Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
-    publishedAt: <datetime()>
+    publishedAt: <dateTime()>

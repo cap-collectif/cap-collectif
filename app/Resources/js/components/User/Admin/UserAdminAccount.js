@@ -127,18 +127,6 @@ export class UserAdminAccount extends React.Component<Props, State> {
               id="locked"
               children={<FormattedMessage id="form.label_locked" />}
             />
-            <Field
-              name="expired"
-              component={component}
-              type="checkbox"
-              disabled={!isViewerOrSuperAdmin}
-              id="expired"
-              children={
-                <div>
-                  <FormattedMessage id="form.label_expired" />{' '}
-                </div>
-              }
-            />
             <div className="box-header">
               <h3 className="box-title">
                 <FormattedMessage id="form.label_real_roles" />
@@ -221,7 +209,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, { user }:
     enabled: user.enabled,
     locked: user.locked,
     roles: { labels: user.roles, other: null },
-    expired: user.expired,
     newsletter: user.isSubscribedToNewsLetter,
   },
   isViewerOrSuperAdmin:
@@ -240,7 +227,6 @@ export default createFragmentContainer(
       locked
       vip
       enabled
-      expired
       isSubscribedToNewsLetter
       subscribedToNewsLetterAt
       isViewer

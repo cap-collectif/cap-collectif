@@ -69,7 +69,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             FROM opinion p
             LEFT JOIN opinion_relation r
             ON r.opinion_source = p.id OR r.opinion_target = p.id
-            WHERE p.published = 1 AND p.trashed = 0 AND p.expired = 0
+            WHERE p.published = 1 AND p.trashedAt IS NULL
             GROUP BY p.id
           ) AS g
           ON g.id = o.id
@@ -123,7 +123,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:OpinionVersion ov set ov.votesCountOk = (
           select count(DISTINCT ovv.id)
           from CapcoAppBundle:OpinionVersionVote ovv
-          where ovv.opinionVersion = ov AND ovv.expired = 0 AND ovv.value = 1 group by ovv.opinionVersion
+          where ovv.opinionVersion = ov AND ovv.published = 1 AND ovv.value = 1 group by ovv.opinionVersion
         )'
         );
 
@@ -131,7 +131,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:OpinionVersion ov set ov.votesCountMitige = (
           select count(DISTINCT ovv.id)
           from CapcoAppBundle:OpinionVersionVote ovv
-          where ovv.opinionVersion = ov AND ovv.expired = 0 AND ovv.value = 0 group by ovv.opinionVersion
+          where ovv.opinionVersion = ov AND ovv.published = 1 AND ovv.value = 0 group by ovv.opinionVersion
         )'
         );
 
@@ -139,7 +139,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:OpinionVersion ov set ov.votesCountNok = (
           select count(DISTINCT ovv.id)
           from CapcoAppBundle:OpinionVersionVote ovv
-          where ovv.opinionVersion = ov AND ovv.expired = 0 AND ovv.value = -1 group by ovv.opinionVersion
+          where ovv.opinionVersion = ov AND ovv.published = 1 AND ovv.value = -1 group by ovv.opinionVersion
         )'
         );
 
@@ -183,7 +183,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Event e set e.commentsCount = (
           select count(DISTINCT ec.id)
           from CapcoAppBundle:EventComment ec
-          where ec.Event = e AND ec.published = 1 AND ec.trashedAt IS NULL AND ec.expired = 0 GROUP BY ec.Event
+          where ec.Event = e AND ec.published = 1 AND ec.trashedAt IS NULL AND ec.published = 1 GROUP BY ec.Event
         )'
         );
 
@@ -322,7 +322,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           select count(DISTINCT p.id)
           from CapcoAppBundle:Proposal p
           INNER JOIN CapcoAppBundle:ProposalForm pf WITH p.proposalForm = pf
-          where pf.step = cs AND p.expired = 0 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.published = 1
+          where pf.step = cs AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.published = 1
           group by pf.step
         )'
         );

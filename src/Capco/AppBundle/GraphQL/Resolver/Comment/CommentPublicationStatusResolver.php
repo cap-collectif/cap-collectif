@@ -16,6 +16,10 @@ class CommentPublicationStatusResolver
             return 'TRASHED_NOT_VISIBLE';
         }
 
+        if (!$comment->isPublished()) {
+            return 'NOT_PUBLISHED';
+        }
+
         return 'PUBLISHED';
     }
 }

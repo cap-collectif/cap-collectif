@@ -45,7 +45,6 @@ export default createFragmentContainer(ProposalStatus, {
         stepId: { type: "ID", nonNull: true }
         isProfileView: { type: "Boolean", defaultValue: false }
       ) {
-      id
       trashed
       trashedStatus
       status(step: $stepId) @skip(if: $isProfileView) {

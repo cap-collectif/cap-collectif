@@ -67,8 +67,6 @@ User:
         type: 'Boolean!'
         access:
           '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
-      expiresAt:
-        type: 'DateTime'
       phoneConfirmationSentAt:
         type: 'String'
         resolve: "@=resolver('user_phoneConfirmationSentAt', [value])"
@@ -232,8 +230,6 @@ User:
       contributionsCount:
         type: 'Int!'
         description: 'Total of contributions count'
-      expired:
-        type: 'Boolean!'
       facebookUrl:
         type: 'String'
         description: 'Your facebook url'

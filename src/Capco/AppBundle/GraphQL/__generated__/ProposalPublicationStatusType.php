@@ -19,12 +19,6 @@ final class ProposalPublicationStatusType extends EnumType implements GeneratedT
             return [
             'name' => 'ProposalPublicationStatus',
             'values' => [
-                'EXPIRED' => [
-                    'name' => 'EXPIRED',
-                    'value' => 'EXPIRED',
-                    'deprecationReason' => null,
-                    'description' => 'Was publicly visible, but has expired.',
-                ],
                 'PUBLISHED' => [
                     'name' => 'PUBLISHED',
                     'value' => 'PUBLISHED',
@@ -55,11 +49,11 @@ final class ProposalPublicationStatusType extends EnumType implements GeneratedT
                     'deprecationReason' => null,
                     'description' => 'Draft, not publicly visible, only showed for his author.',
                 ],
-                'NOT_ACCOUNTED' => [
-                    'name' => 'NOT_ACCOUNTED',
-                    'value' => 'NOT_ACCOUNTED',
+                'UNPUBLISHED' => [
+                    'name' => 'UNPUBLISHED',
+                    'value' => 'UNPUBLISHED',
                     'deprecationReason' => null,
-                    'description' => 'Visible only by the author, he is not yet confirmed !',
+                    'description' => 'Visible by author only.',
                 ],
             ],
             'description' => 'Available statuses',

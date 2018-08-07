@@ -91,7 +91,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
         </div>
         <div className="box-content box-content__status-form">
           <form onSubmit={handleSubmit}>
-            {proposal.author.expiresAt && (
+            {!proposal.author.isEmailConfirmed && (
               <p>Adresse email de l'auteur en attente de confirmation: {proposal.author.email}</p>
             )}
             <Field
@@ -217,7 +217,7 @@ export default createFragmentContainer(
       deletedAt
       author {
         id
-        expiresAt
+        isEmailConfirmed
         email
       }
     }

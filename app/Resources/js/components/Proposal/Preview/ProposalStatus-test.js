@@ -8,7 +8,6 @@ import { $refType } from '../../../mocks';
 describe('<ProposalStatus />', () => {
   const proposal = {
     $refType,
-    id: '1',
     trashed: false,
     trashedStatus: null,
     status: {

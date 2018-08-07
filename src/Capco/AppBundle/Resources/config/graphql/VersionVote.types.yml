@@ -6,7 +6,7 @@ VersionVote:
     interfaces: [Publishable, YesNoPairedVote]
     fields:
       id:
-        builder: "Relay::GlobalId"
+        builder: 'Relay::GlobalId'
         builderConfig:
           typeName: VersionVote
       author:

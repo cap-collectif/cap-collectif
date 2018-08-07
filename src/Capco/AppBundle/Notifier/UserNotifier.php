@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Project;
@@ -47,10 +46,7 @@ final class UserNotifier extends BaseNotifier
             )
         );
         $this->mailer->sendMessage(
-            UserConfirmEmailChangedMessage::create(
-                $user,
-                $user->getEmail()
-            )
+            UserConfirmEmailChangedMessage::create($user, $user->getEmail())
         );
     }
 
@@ -63,29 +59,5 @@ final class UserNotifier extends BaseNotifier
                 $user->getNewEmailToConfirm()
             )
         );
-    }
-
-    public function expired(User $user, bool $contributionDeleted): void
-    {
-        $adminEmail = $this->siteParams->getValue('admin.mail.notifications.receive_address');
-        if ($contributionDeleted) {
-            $this->mailer->sendMessage(
-                UserExpiredWithContributionsMessage::create(
-                    $user,
-                    $this->userResolver->resolveRegistrationConfirmationUrl($user),
-                    $adminEmail,
-                    $user->getEmail()
-                )
-            );
-        } else {
-            $this->mailer->sendMessage(
-                UserExpiredWithNoContributionsMessage::create(
-                    $user,
-                    $this->userResolver->resolveRegistrationConfirmationUrl($user),
-                    $adminEmail,
-                    $user->getEmail()
-                )
-            );
-        }
     }
 }

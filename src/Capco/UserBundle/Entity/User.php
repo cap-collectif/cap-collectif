@@ -72,9 +72,6 @@ class User extends BaseUser
 
     protected $linkedInUrl;
 
-    protected $expiresAt;
-    protected $expired = false;
-
     protected $credentialsExpireAt;
     protected $credentialsExpired = false;
 
@@ -408,18 +405,6 @@ class User extends BaseUser
     public function setLocked(bool $value): self
     {
         $this->locked = $value;
-
-        return $this;
-    }
-
-    public function getExpiresAt(): ?\DateTime
-    {
-        return $this->expiresAt;
-    }
-
-    public function setExpiresAt(?\DateTime $value = null): self
-    {
-        $this->expiresAt = $value;
 
         return $this;
     }
@@ -1295,18 +1280,6 @@ class User extends BaseUser
     public function getUsername(): ?string
     {
         return $this->username;
-    }
-
-    public function isExpired(): bool
-    {
-        return $this->expired;
-    }
-
-    public function setExpired(bool $value): self
-    {
-        $this->expired = $value;
-
-        return $this;
     }
 
     public function isCredentialsExpired(): bool

@@ -3,12 +3,12 @@ OpinionVote:
   inherits:
     - Publishable
   config:
-    interfaces: 
+    interfaces:
       - Publishable
       - YesNoPairedVote
     fields:
       id:
-        builder: "Relay::GlobalId"
+        builder: 'Relay::GlobalId'
       author:
         type: 'User'
         description: 'The author of the contribution. If null, account has been deleted.'

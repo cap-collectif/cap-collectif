@@ -25,7 +25,7 @@ trait ContributionRepositoryTrait
     public function getCount(): int
     {
         $qb = $this->createQueryBuilder('o');
-        $qb->select('count(DISTINCT o.id)')->andWhere('o.expired = false');
+        $qb->select('count(DISTINCT o.id)')->andWhere('o.published = true');
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -33,10 +33,7 @@ trait ContributionRepositoryTrait
     public function countTrashed(): int
     {
         $qb = $this->createQueryBuilder('o');
-        $qb
-            ->select('count(DISTINCT o.id)')
-            ->andWhere('o.expired = false')
-            ->andWhere('o.trashedAt IS NOT NULL');
+        $qb->select('count(DISTINCT o.id)')->andWhere('o.trashedAt IS NOT NULL');
         return $qb->getQuery()->getSingleScalarResult();
     }
 }

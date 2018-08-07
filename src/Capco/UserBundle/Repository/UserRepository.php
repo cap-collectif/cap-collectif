@@ -201,31 +201,6 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function findUsersThatJustExpired(): array
-    {
-        $qb = $this->createQueryBuilder('u');
-        $qb
-            ->andWhere('u.expired = false')
-            ->andWhere('u.expiresAt IS NOT NULL')
-            ->andWhere('u.expiresAt < :now')
-            ->setParameter('now', new \DateTime());
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function findUsersThatWillExpireIn24Hours(): array
-    {
-        $qb = $this->createQueryBuilder('u');
-        $qb
-            ->andWhere('u.expired = false')
-            ->andWhere('u.expiresAt IS NOT NULL')
-            ->andWhere('u.expiresAt < :tomorrow')
-            ->andWhere('u.alertExpirationSent = false')
-            ->setParameter('tomorrow', new \DateTime('+1 day'));
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function findProjectOpinionContributorsWithCount(Project $project): array
     {
         $qb = $this->createQueryBuilder('u')

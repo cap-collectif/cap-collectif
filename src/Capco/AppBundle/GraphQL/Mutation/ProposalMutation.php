@@ -252,8 +252,7 @@ class ProposalMutation implements ContainerAwareInterface
                 break;
             case 'PUBLISHED':
                 $proposal
-                    ->setExpired(false)
-                    ->setEnabled(true)
+                    ->setPublishedAt(new \DateTime())
                     ->setDraft(false)
                     ->setTrashedStatus(null)
                     ->setDeletedAt(null);
@@ -267,7 +266,6 @@ class ProposalMutation implements ContainerAwareInterface
             case 'DRAFT':
                 $proposal
                     ->setDraft(true)
-                    ->setEnabled(false)
                     ->setTrashedStatus(null)
                     ->setDeletedAt(null);
                 break;
@@ -322,7 +320,6 @@ class ProposalMutation implements ContainerAwareInterface
             ->setDraft($draft)
             ->setAuthor($user)
             ->setProposalForm($proposalForm)
-            ->setEnabled($draft ? false : true)
             ->addFollower($follower);
         if (
             $proposalForm->getStep() &&
@@ -400,7 +397,7 @@ class ProposalMutation implements ContainerAwareInterface
             unset($values['draft']);
         }
 
-        $proposal->setDraft($draft)->setEnabled($draft ? false : true);
+        $proposal->setDraft($draft);
 
         $values = $this->fixValues($values, $proposalForm);
 

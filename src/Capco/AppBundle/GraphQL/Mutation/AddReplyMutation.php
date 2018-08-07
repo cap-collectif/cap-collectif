@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Reply;
@@ -30,14 +29,14 @@ class AddReplyMutation
     private $userNotifier;
 
     public function __construct(
-      EntityManagerInterface $em,
-      FormFactory $formFactory,
-      ReplyRepository $replyRepo,
-      QuestionnaireRepository $questionnaireRepo,
-      RedisStorageHelper $redisStorageHelper,
-      ResponsesFormatter $responsesFormatter,
-      LoggerInterface $logger,
-      UserNotifier $userNotifier
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        ReplyRepository $replyRepo,
+        QuestionnaireRepository $questionnaireRepo,
+        RedisStorageHelper $redisStorageHelper,
+        ResponsesFormatter $responsesFormatter,
+        LoggerInterface $logger,
+        UserNotifier $userNotifier
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -71,15 +70,12 @@ class AddReplyMutation
             throw new UserError('You must confirm your account via sms to post a reply.');
         }
 
-        $reply = (new Reply())
-          ->setAuthor($user)
-          ->setQuestionnaire($questionnaire)
-          ->setEnabled(true)
-        ;
-
+        $reply = (new Reply())->setAuthor($user)->setQuestionnaire($questionnaire);
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 
-        $form = $this->formFactory->create(ReplyType::class, $reply, ['anonymousAllowed' => $questionnaire->isAnonymousAllowed()]);
+        $form = $this->formFactory->create(ReplyType::class, $reply, [
+            'anonymousAllowed' => $questionnaire->isAnonymousAllowed(),
+        ]);
         $form->submit($values, false);
 
         if (!$form->isValid()) {

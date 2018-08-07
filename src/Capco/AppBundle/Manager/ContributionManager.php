@@ -6,12 +6,10 @@ use Capco\AppBundle\Model\Publishable;
 
 class ContributionManager
 {
-    // This will be renamed `publishContributions`
-    public function republishContributions(User $user): bool
+    public function publishContributions(User $user): bool
     {
         $republishedCount = 0;
         foreach ($user->getContributions() as $contribution) {
-            $contribution->setExpired(false);
             if ($contribution instanceof Publishable) {
                 $step = $contribution->getStep();
                 // We only publish comments (no step)
@@ -19,22 +17,10 @@ class ContributionManager
                 if (!$step || $step->isOpen()) {
                     $contribution->setPublishedAt(new \DateTime());
                 }
+                ++$republishedCount;
             }
-            ++$republishedCount;
         }
 
         return $republishedCount > 0;
-    }
-
-    // This will be deleted
-    public function depublishContributions(User $user): bool
-    {
-        $expiredCount = 0;
-        foreach ($user->getContributions() as $contribution) {
-            $contribution->setExpired(true);
-            ++$expiredCount;
-        }
-
-        return $expiredCount > 0;
     }
 }

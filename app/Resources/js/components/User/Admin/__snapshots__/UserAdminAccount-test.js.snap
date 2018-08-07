@@ -67,21 +67,6 @@ exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
           values={Object {}}
         />
       </Field>
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="expired"
-        name="expired"
-        type="checkbox"
-      >
-        <div>
-          <FormattedMessage
-            id="form.label_expired"
-            values={Object {}}
-          />
-           
-        </div>
-      </Field>
       <div
         className="box-header"
       >
@@ -257,21 +242,6 @@ exports[`<UserAdminAccount/> should render when user is not admin or viewer 1`] 
           id="form.label_locked"
           values={Object {}}
         />
-      </Field>
-      <Field
-        component={[Function]}
-        disabled={true}
-        id="expired"
-        name="expired"
-        type="checkbox"
-      >
-        <div>
-          <FormattedMessage
-            id="form.label_expired"
-            values={Object {}}
-          />
-           
-        </div>
       </Field>
       <div
         className="box-header"

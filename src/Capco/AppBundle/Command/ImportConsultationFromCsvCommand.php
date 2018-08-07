@@ -177,7 +177,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             $opinion->setOpinionType($opinionType);
             $opinion->setAuthor($user);
             $opinion->setPosition($i);
-            $opinion->setIsEnabled(true);
+            $opinion->setPublishedAt(new \DateTime());
             ++$i;
 
             $em->persist($opinion);

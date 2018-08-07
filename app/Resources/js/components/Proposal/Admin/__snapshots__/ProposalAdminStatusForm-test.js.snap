@@ -1,126 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
-<div
-  className="box box-primary container-fluid"
->
-  <div
-    className="box-header"
-  >
-    <h3
-      className="box-title"
-    >
-      <FormattedMessage
-        id="proposal.admin.state"
-        values={Object {}}
-      />
-    </h3>
-    <a
-      className="pull-right link"
-      href="admin.help.link.proposal.state"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <i
-        className="fa fa-info-circle"
-      />
-       Aide
-    </a>
-  </div>
-  <div
-    className="box-content box-content__status-form"
-  >
-    <form
-      onSubmit={[MockFunction]}
-    >
-      <Field
-        component={[Function]}
-        disabled={false}
-        id="publicationStatus"
-        name="publicationStatus"
-        type="radio-buttons"
-      >
-        <ToggleButton
-          onClick={[Function]}
-          value="PUBLISHED"
-        >
-          <FormattedMessage
-            id="proposal.state.published"
-            values={Object {}}
-          />
-        </ToggleButton>
-        <ToggleButton
-          onClick={[Function]}
-          value="TRASHED"
-        >
-          <FormattedMessage
-            id="proposal.state.trashed"
-            values={Object {}}
-          />
-        </ToggleButton>
-        <ToggleButton
-          onClick={[Function]}
-          value="TRASHED_NOT_VISIBLE"
-        >
-          <FormattedMessage
-            id="proposal.state.hidden_content"
-            values={Object {}}
-          />
-        </ToggleButton>
-        <ToggleButton
-          onClick={[Function]}
-          value="EXPIRED"
-        >
-          <FormattedMessage
-            id="proposal.state.expired"
-            values={Object {}}
-          />
-        </ToggleButton>
-      </Field>
-      <ButtonToolbar
-        bsClass="btn-toolbar"
-        className="box-content__toolbar"
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={true}
-          type="submit"
-        >
-          <FormattedMessage
-            id="global.save"
-            values={Object {}}
-          />
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="danger"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <FormattedMessage
-            id="global.delete"
-            values={Object {}}
-          />
-        </Button>
-        <AlertForm
-          invalid={false}
-          submitFailed={false}
-          submitSucceeded={false}
-          submitting={false}
-          valid={false}
-        />
-      </ButtonToolbar>
-    </form>
-  </div>
-</div>
-`;
-
-exports[`<ProposalAdminStatusForm /> render correctly if published and user is confirmed 1`] = `
+exports[`<ProposalAdminStatusForm /> render correctly if published 1`] = `
 <div
   className="box box-primary container-fluid"
 >
@@ -231,7 +111,7 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
 </div>
 `;
 
-exports[`<ProposalAdminStatusForm /> render correctly if published but user can soon expire 1`] = `
+exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
 <div
   className="box box-primary container-fluid"
 >

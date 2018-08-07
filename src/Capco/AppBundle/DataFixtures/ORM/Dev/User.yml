@@ -5,13 +5,11 @@ Capco\UserBundle\Entity\User:
     firstname: Laurent
     lastname: Brunet
     email: lbrunet@jolicode.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: toto
     roles:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser2'
-    confirmationToken: ~
 
   user2:
     id: 'user2'
@@ -19,7 +17,6 @@ Capco\UserBundle\Entity\User:
     firstname: Suzanne
     lastname: Favot
     email: sfavot@jolicode.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: toto
     roles:
@@ -31,7 +28,6 @@ Capco\UserBundle\Entity\User:
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
     vip: true
     phone: '+3300000000'
-    confirmationToken: ~
     phoneConfirmed: true
 
   user3:
@@ -40,13 +36,11 @@ Capco\UserBundle\Entity\User:
     firstname: Xavier
     lastname: Lacot
     email: xlacot@jolicode.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: toto
     roles:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser3'
-    confirmationToken: ~
 
   user4:
     id: 'userAdmin'
@@ -54,14 +48,12 @@ Capco\UserBundle\Entity\User:
     firstname: Administrateur
     lastname: authentifier
     email: admin@test.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: admin
     media: null
     roles:
       - 'ROLE_ADMIN'
     vip: true
-    confirmationToken: ~
     phoneConfirmed: true
     phone: '+33675492871'
 
@@ -71,14 +63,12 @@ Capco\UserBundle\Entity\User:
     firstname: Administrateur
     lastname: authentifier
     email: admin@cap-collectif.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: admin
     media: null
     roles:
       - 'ROLE_ADMIN'
     vip: true
-    confirmationToken: ~
     phoneConfirmed: true
     phone: '+33675492871'
 
@@ -88,7 +78,6 @@ Capco\UserBundle\Entity\User:
     firstname: Utilisateur
     lastname: authentifier
     email: user@test.com
-    enabled: true
     notificationsConfiguration: '@allDisabledUserNotifications'
     userType: '@UserType1'
     media: null
@@ -100,7 +89,6 @@ Capco\UserBundle\Entity\User:
     city: 'Paris'
     roles:
       - 'ROLE_USER'
-    confirmationToken: ~
     phoneConfirmed: true
     phone: '+33635492871'
     gender: 'f'
@@ -113,9 +101,7 @@ Capco\UserBundle\Entity\User:
     firstname: toto
     lastname: toto
     email: drupal@gmail.com
-    enabled: true
     password: $S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU
-    confirmationToken: ~
 
   user{6..200}:
     id: 'user<current()>'
@@ -123,12 +109,10 @@ Capco\UserBundle\Entity\User:
     firstname: <firstname()>
     lastname: <lastname()>
     email (unique): <email()>
-    enabled: true
     userType: '@UserType1'
     password: <password()>
     roles:
       - 'ROLE_USER'
-    confirmationToken: ~
 
   user501:
     id: 'user501'
@@ -136,14 +120,12 @@ Capco\UserBundle\Entity\User:
     firstname: Aurélien
     lastname: David
     email: aurelien@cap-collectif.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: toto
     roles:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser4'
     vip: true
-    confirmationToken: ~
 
   user502:
     id: 'user502'
@@ -151,14 +133,12 @@ Capco\UserBundle\Entity\User:
     firstname: Mathieu
     lastname: Santostefano
     email: msantostefano@jolicode.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: capco
     roles:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser5'
     vip: true
-    confirmationToken: ~
 
   user503:
     id: 'user503'
@@ -173,7 +153,6 @@ Capco\UserBundle\Entity\User:
       - 'ROLE_USER'
     media: '@MediaUser1'
     vip: false
-    confirmationToken: ~
 
   user504:
     id: 'user504'
@@ -181,14 +160,12 @@ Capco\UserBundle\Entity\User:
     firstname: prenom
     lastname: nom
     email: conseilregional@test.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: monsupermotdepassetropsafe
     roles:
       - 'ROLE_USER'
     media: null
     vip: true
-    confirmationToken: ~
 
   user505:
     id: 'user505'
@@ -196,14 +173,12 @@ Capco\UserBundle\Entity\User:
     firstname: Pierre
     lastname: Tondereau
     email: pierre@cap-collectif.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: toto
     roles:
       - 'ROLE_USER'
     media: '@MediaUser5'
     vip: true
-    confirmationToken: ~
 
   user_not_confirmed:
     id: 'user506'
@@ -211,7 +186,6 @@ Capco\UserBundle\Entity\User:
     firstname: user_not_confirmed
     lastname: user_not_confirmed
     email: user_not_confirmed@test.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: user_not_confirmed
     roles:
@@ -219,69 +193,18 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: azertyuiop
 
-  user_not_confirmed_to_be_expired:
-    id: 'user507'
-    username: user_not_confirmed_to_be_expired
-    firstname: user_not_confirmed_to_be_expired
-    lastname: user_not_confirmed_to_be_expired
-    email: user_not_confirmed_to_be_expired@test.com
-    enabled: true
-    expired: false
-    expiresAt: <date('now')>
-    userType: '@UserType1'
-    plainPassword: user_not_confirmed_to_be_expired
-    roles:
-      - 'ROLE_USER'
-    media: null
-    confirmationToken: qsdfghjklm
-
-  user_not_confirmed_with_contributions_to_be_expired:
+  user_not_confirmed_with_contributions:
     id: 'user508'
-    username: user_not_confirmed_with_contributions_to_be_expired
-    firstname: user_not_confirmed_with_contributions_to_be_expired
-    lastname: user_not_confirmed_with_contributions_to_be_expired
-    email: user_not_confirmed_with_contributions_to_be_expired@test.com
-    enabled: true
-    expired: false
-    expiresAt: <dateTimeBetween('-10 days', '-2 days')>
+    username: user_not_confirmed_with_contributions
+    firstname: user_not_confirmed_with_contributions
+    lastname: user_not_confirmed_with_contributions
+    email: user_not_confirmed_with_contributions@test.com
     userType: '@UserType1'
-    plainPassword: user_not_confirmed_with_contributions_to_be_expired
+    plainPassword: user_not_confirmed_with_contributions
     roles:
       - 'ROLE_USER'
     media: null
     confirmationToken: oklmoklm
-
-  user_not_confirmed_to_be_expired_in_24_hours:
-    id: 'user509'
-    username: user_not_confirmed_to_be_expired_in_24_hours
-    firstname: user_not_confirmed_to_be_expired_in_24_hours
-    lastname: user_not_confirmed_to_be_expired_in_24_hours
-    email: user_not_confirmed_to_be_expired_in_24_hours@test.com
-    enabled: true
-    expired: false
-    expiresAt: <dateTimeBetween('+1 days', '+1 days')>
-    userType: '@UserType1'
-    plainPassword: user_not_confirmed_to_be_expired_in_24_hours
-    roles:
-      - 'ROLE_USER'
-    media: null
-    confirmationToken: qsdfgsqdqsdsqdsqdhjkldsqdsqdsqdqsdm
-
-  user_expired:
-    id: 'user510'
-    username: user_expired
-    firstname: user_expired
-    lastname: user_expired
-    email: user_expired@test.com
-    enabled: false
-    expired: true
-    expiresAt: ~
-    userType: '@UserType1'
-    plainPassword: user_expired
-    roles:
-      - 'ROLE_USER'
-    media: null
-    confirmationToken: wxcvbn
 
   user_without_phone:
     id: 'user511'
@@ -289,15 +212,11 @@ Capco\UserBundle\Entity\User:
     firstname: user_without_phone
     lastname: user_without_phone
     email: user_without_phone@test.com
-    enabled: true
-    expired: false
-    expiresAt: ~
     userType: '@UserType1'
     plainPassword: user_without_phone
     roles:
       - 'ROLE_USER'
     media: null
-    confirmationToken: ~
 
   user_with_phone_not_phone_confirmed:
     id: 'user512'
@@ -305,15 +224,11 @@ Capco\UserBundle\Entity\User:
     firstname: user_with_phone_not_phone_confirmed
     lastname: user_with_phone_not_phone_confirmed
     email: user_with_phone_not_phone_confirmed@test.com
-    enabled: true
-    expired: false
-    expiresAt: ~
     userType: '@UserType1'
     plainPassword: user_with_phone_not_phone_confirmed
     roles:
       - 'ROLE_USER'
     media: null
-    confirmationToken: ~
     phone: '+33628353289'
 
   user_with_code_not_phone_confirmed:
@@ -322,15 +237,11 @@ Capco\UserBundle\Entity\User:
     firstname: user_with_code_not_phone_confirmed
     lastname: user_with_code_not_phone_confirmed
     email: user_with_code_not_phone_confirmed@test.com
-    enabled: true
-    expired: false
-    expiresAt: ~
     userType: '@UserType1'
     plainPassword: user_with_code_not_phone_confirmed
     roles:
       - 'ROLE_USER'
     media: null
-    confirmationToken: ~
     phone: '+33628232323'
     smsConfirmationCode: 123456
 
@@ -341,8 +252,6 @@ Capco\UserBundle\Entity\User:
     lastname: admin_without_password
     email: admin_without_password@test.com
     enabled: false
-    expired: false
-    expiresAt: ~
     userType: '@UserType1'
     roles:
       - 'ROLE_ADMIN'
@@ -355,9 +264,6 @@ Capco\UserBundle\Entity\User:
     firstname: user_updating_email
     lastname: user_updating_email
     email: user_updating_email@test.com
-    enabled: true
-    expired: false
-    expiresAt: ~
     userType: '@UserType1'
     roles:
       - 'ROLE_USER'
@@ -371,14 +277,12 @@ Capco\UserBundle\Entity\User:
     firstname: Maxime
     lastname: AURIAU
     email: maxime.auriau@cap-collectif.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: toto
     roles:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser5'
     vip: true
-    confirmationToken: ~
     emailConfirmationSentAt: '2018-06-06 13:37:00'
 
   user517:
@@ -387,7 +291,6 @@ Capco\UserBundle\Entity\User:
     firstname: Pierre
     lastname: Bellenger
     email: pierre.bellenger@cap-collectif.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: azerty
     roles:
@@ -399,14 +302,12 @@ Capco\UserBundle\Entity\User:
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
     vip: true
     phone: '+3300000000'
-    confirmationToken: ~
     phoneConfirmed: true
 
-  user518:
+  user_without_username:
     id: 'user518'
     username: null
     email: no_name@cap-collectif.com
-    enabled: true
     userType: '@UserType1'
     plainPassword: no_name
     roles:

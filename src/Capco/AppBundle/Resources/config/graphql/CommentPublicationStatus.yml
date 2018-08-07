@@ -3,9 +3,9 @@ CommentPublicationStatus:
   config:
     description: 'Available statuses'
     values:
-      EXPIRED:
-        value: 'EXPIRED'
-        description: 'Was publicly visible, but has expired.'
+      NOT_PUBLISHED:
+        value: 'NOT_PUBLISHED'
+        description: 'Visible by author only.'
       PUBLISHED:
         value: 'PUBLISHED'
         description: 'Normal status, Publicly visible'

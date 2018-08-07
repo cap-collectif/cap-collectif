@@ -3,9 +3,6 @@ ProposalPublicationStatus:
   config:
     description: 'Available statuses'
     values:
-      EXPIRED: # TODO KILL THIS
-        value: 'EXPIRED'
-        description: 'Was publicly visible, but has expired.'
       PUBLISHED:
         value: 'PUBLISHED'
         description: 'Normal status, Publicly visible'
@@ -21,6 +18,6 @@ ProposalPublicationStatus:
       DRAFT:
         value: 'DRAFT'
         description: 'Draft, not publicly visible, only showed for his author.'
-      NOT_ACCOUNTED: ## TODO MAKE THIS WORK
-        value: 'NOT_ACCOUNTED'
-        description: 'Visible only by the author, he is not yet confirmed !'
+      UNPUBLISHED:
+        value: 'UNPUBLISHED'
+        description: 'Visible by author only.'

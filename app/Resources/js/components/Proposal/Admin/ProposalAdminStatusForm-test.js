@@ -3,25 +3,21 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminStatusForm } from './ProposalAdminStatusForm';
-import { intlMock } from '../../../mocks';
+import { intlMock, $refType } from '../../../mocks';
 
 describe('<ProposalAdminStatusForm />', () => {
-  it('render correctly if published but user can soon expire', () => {
-    // $FlowFixMe $refType
-    const proposalToBeExpired = {
-      id: '1',
+  it('render correctly if unpublished', () => {
+    const proposalUnpulished = {
+      id: 'proposal1',
+      $refType,
       trashedReason: null,
-      author: {
-        id: 'author1',
-        expiresAt: 'Soon',
-        email: 'soon@yopmail.com',
-      },
+      author: { id: 'author1', isEmailConfirmed: false, email: 'soon@yopmail.com' },
       deletedAt: null,
-      publicationStatus: 'PUBLISHED',
+      publicationStatus: 'UNPUBLISHED',
     };
     const wrapper = shallow(
       <ProposalAdminStatusForm
-        publicationStatus="PUBLISHED"
+        publicationStatus="UNPUBLISHED"
         isSuperAdmin
         isAuthor={false}
         pristine
@@ -32,7 +28,7 @@ describe('<ProposalAdminStatusForm />', () => {
         submitting={false}
         relay={{}}
         dispatch={jest.fn()}
-        proposal={proposalToBeExpired}
+        proposal={proposalUnpulished}
         handleSubmit={jest.fn()}
         intl={intlMock}
       />,
@@ -40,47 +36,13 @@ describe('<ProposalAdminStatusForm />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('render correctly if expired', () => {
-    // $FlowFixMe $refType
-    const proposalExpired = {
-      id: '1',
-      trashedReason: null,
-      publicationStatus: 'EXPIRED',
+  it('render correctly if published', () => {
+    const proposalPubblished = {
+      id: 'proposal1',
+      $refType,
       author: {
         id: 'author1',
-        expiresAt: null,
-        email: 'osef@yopmail.com',
-      },
-      deletedAt: null,
-    };
-    const wrapper = shallow(
-      <ProposalAdminStatusForm
-        publicationStatus="EXPIRED"
-        relay={{}}
-        isSuperAdmin
-        isAuthor={false}
-        pristine
-        invalid={false}
-        valid={false}
-        submitSucceeded={false}
-        submitFailed={false}
-        submitting={false}
-        dispatch={jest.fn()}
-        proposal={proposalExpired}
-        handleSubmit={jest.fn()}
-        intl={intlMock}
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('render correctly if published and user is confirmed', () => {
-    // $FlowFixMe $refType
-    const proposalConfirmed = {
-      id: '1',
-      author: {
-        id: 'author1',
-        expiresAt: null,
+        isEmailConfirmed: true,
         email: 'soon@yopmail.com',
       },
       trashedReason: null,
@@ -100,7 +62,7 @@ describe('<ProposalAdminStatusForm />', () => {
         submitFailed={false}
         submitting={false}
         dispatch={jest.fn()}
-        proposal={proposalConfirmed}
+        proposal={proposalPubblished}
         handleSubmit={jest.fn()}
         intl={intlMock}
       />,

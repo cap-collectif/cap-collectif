@@ -2,28 +2,29 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Post;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Entity\Responses\MediaResponse;
-use Capco\AppBundle\Entity\Responses\ValueResponse;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class ProposalResolver implements ContainerAwareInterface
 {
@@ -121,14 +122,34 @@ class ProposalResolver implements ContainerAwareInterface
         }
 
         if ($proposal->isTrashed()) {
-            if ($proposal->isEnabled()) {
+            if ($proposal->getTrashedStatus() === Trashable::STATUS_VISIBLE) {
                 return 'TRASHED';
             }
-
             return 'TRASHED_NOT_VISIBLE';
         }
 
         return 'PUBLISHED';
+
+        // if (null !== $this->getDeletedAt()) {
+        //     return self::STATE_DELETED;
+        // }
+
+        // if (!$this->isPublished()) {
+        //     return self::NOT_PUBLISHED;
+        // }
+
+        // if ($this->isTrashed()) {
+        //     if ($this->getTrashedStatus() === Trashable::STATUS_VISIBLE) {
+        //         return self::STATE_TRASHED;
+        //     }
+        //     return self::STATE_HIDDEN_CONTENT;
+        // }
+
+        // if ($this->isDraft()) {
+        //     return self::STATE_DRAFT;
+        // }
+
+        // return self::STATE_ENABLED;
     }
 
     public function resolveShowUrl(Proposal $proposal): string

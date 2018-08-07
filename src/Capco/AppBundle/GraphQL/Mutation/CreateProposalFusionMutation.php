@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
@@ -19,8 +18,12 @@ class CreateProposalFusionMutation
     private $proposalRepo;
     private $translator;
 
-    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, ProposalRepository $proposalRepo, TranslatorInterface $translator)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        ProposalRepository $proposalRepo,
+        TranslatorInterface $translator
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->proposalRepo = $proposalRepo;
@@ -50,20 +53,22 @@ class CreateProposalFusionMutation
         }
 
         $proposal = (new Proposal())
-              ->setAuthor($author)
-              ->setEnabled(true)
-              ->setTitle($title)
-              ->setProposalForm($proposalForm)
-          ;
-
-        $form = $this->formFactory->create(ProposalFusionType::class, $proposal, ['proposalForm' => $proposalForm]);
+            ->setAuthor($author)
+            ->setTitle($title)
+            ->setProposalForm($proposalForm);
+        $form = $this->formFactory->create(ProposalFusionType::class, $proposal, [
+            'proposalForm' => $proposalForm,
+        ]);
         $form->submit(['childConnections' => $proposalIds], false);
 
         if (!$form->isValid()) {
             throw new UserError('Invalid data.');
         }
 
-        if ($proposalForm->getStep() && $defaultStatus = $proposalForm->getStep()->getDefaultStatus()) {
+        if (
+            $proposalForm->getStep() &&
+            $defaultStatus = $proposalForm->getStep()->getDefaultStatus()
+        ) {
             $proposal->setStatus($defaultStatus);
         }
 

@@ -19,11 +19,11 @@ final class CommentPublicationStatusType extends EnumType implements GeneratedTy
             return [
             'name' => 'CommentPublicationStatus',
             'values' => [
-                'EXPIRED' => [
-                    'name' => 'EXPIRED',
-                    'value' => 'EXPIRED',
+                'NOT_PUBLISHED' => [
+                    'name' => 'NOT_PUBLISHED',
+                    'value' => 'NOT_PUBLISHED',
                     'deprecationReason' => null,
-                    'description' => 'Was publicly visible, but has expired.',
+                    'description' => 'Visible by author only.',
                 ],
                 'PUBLISHED' => [
                     'name' => 'PUBLISHED',

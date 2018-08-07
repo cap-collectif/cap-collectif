@@ -124,7 +124,6 @@ export default createFragmentContainer(container, {
       trashedStatus
       show_url
       summaryOrBodyExcerpt
-      commentsCount
       district {
         name
       }
