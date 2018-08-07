@@ -938,6 +938,11 @@ class UserRepository extends EntityRepository
         return $this->countFollowerForProposalAndUser($proposal, $viewer) > 0;
     }
 
+    public function isViewerFollowingOpinion(Opinion $opinion, User $viewer): bool
+    {
+        return $this->countFollowerForOpinionAndUser($opinion, $viewer) > 0;
+    }
+
     public function getByCriteriaOrdered(
         array $criteria,
         array $orderBy,
@@ -1021,7 +1026,21 @@ class UserRepository extends EntityRepository
             ->setParameter('proposalId', $proposal->getId())
             ->setParameter('userId', $user->getId());
 
-        return $query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countFollowerForOpinionAndUser(Opinion $opinion, User $user): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->join('u.followingContributions', 'f')
+            ->join('f.opinion', 'o')
+            ->andWhere('o.id = :opinionId')
+            ->andWhere('u.id = :userId')
+            ->setParameter('opinionId', $opinion->getId())
+            ->setParameter('userId', $user->getId());
+
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function findUsersFollowingProposal()

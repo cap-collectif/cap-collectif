@@ -201,7 +201,7 @@ Proposal:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowerConnection", [value, args])'
       viewerIsFollowing:
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationProposalResolver", [value, getUser()])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, getUser()])'
         description: 'View follow current proposal'
       viewerFollowingConfiguration:
         resolve:

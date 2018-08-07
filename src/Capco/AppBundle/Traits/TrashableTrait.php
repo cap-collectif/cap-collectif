@@ -14,12 +14,12 @@ trait TrashableTrait
     /**
      * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
      */
-    private $trashedAt = null;
+    private $trashedAt;
 
     /**
      * @ORM\Column(name="trashed_reason", type="text", nullable=true)
      */
-    private $trashedReason = null;
+    private $trashedReason;
 
     public function isTrashed(): bool
     {
@@ -41,8 +41,10 @@ trait TrashableTrait
             return $this;
         }
 
-        if (!in_array($status, array(Trashable::STATUS_VISIBLE, Trashable::STATUS_INVISIBLE))) {
-            throw new \InvalidArgumentException("Invalid status");
+        if (
+            !\in_array($status, array(Trashable::STATUS_VISIBLE, Trashable::STATUS_INVISIBLE), true)
+        ) {
+            throw new \InvalidArgumentException('Invalid status');
         }
 
         $this->trashedStatus = $status;

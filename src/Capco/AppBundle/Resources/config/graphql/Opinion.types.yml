@@ -112,4 +112,4 @@ Opinion:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionResolver", [value, getUser()])'
       viewerIsFollowing:
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionResolver", [value, getUser()])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowOpinionResolver", [value, getUser()])'

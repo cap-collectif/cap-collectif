@@ -729,9 +729,9 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I go to a project with requirement condition to vote and classement
+     * @When I go to a project with requirement condition to vote and ranking
      */
-    public function iGoBPWithVoteClassementPage()
+    public function iGoBPWithVoteRankingPage()
     {
         $this->visitPageWithParams('collect page', self::$bpVoteClassement);
         $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
@@ -1386,37 +1386,37 @@ trait ProposalStepsTrait
 
     protected function openCollectStepIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('collect page')
-            ->isOpen(self::$collectStepOpenParams);
+        return $this->navigationContext->getPage('collect page')->isOpen(
+            self::$collectStepOpenParams
+        );
     }
 
     protected function closedCollectStepIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('collect page')
-            ->isOpen(self::$collectStepClosedParams);
+        return $this->navigationContext->getPage('collect page')->isOpen(
+            self::$collectStepClosedParams
+        );
     }
 
     protected function proposalPageIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('proposal page')
-            ->isOpen(self::$proposalWithSimpleVoteParams);
+        return $this->navigationContext->getPage('proposal page')->isOpen(
+            self::$proposalWithSimpleVoteParams
+        );
     }
 
     protected function proposalNotYetVotablePageIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('proposal page')
-            ->isOpen(self::$proposalNotYetVotable);
+        return $this->navigationContext->getPage('proposal page')->isOpen(
+            self::$proposalNotYetVotable
+        );
     }
 
     protected function proposalNotVotableAnymoreIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('proposal page')
-            ->isOpen(self::$proposalNotVotableAnymore);
+        return $this->navigationContext->getPage('proposal page')->isOpen(
+            self::$proposalNotVotableAnymore
+        );
     }
 
     protected function proposalBeforeProposal($proposal1, $proposal2)
@@ -1474,37 +1474,37 @@ trait ProposalStepsTrait
 
     protected function selectionStepWithSimpleVoteIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('selection page')
-            ->isOpen(self::$selectionStepWithSimpleVoteParams);
+        return $this->navigationContext->getPage('selection page')->isOpen(
+            self::$selectionStepWithSimpleVoteParams
+        );
     }
 
     protected function selectionStepWithBudgetVoteIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('selection page')
-            ->isOpen(self::$selectionStepWithBudgetVoteParams);
+        return $this->navigationContext->getPage('selection page')->isOpen(
+            self::$selectionStepWithBudgetVoteParams
+        );
     }
 
     protected function selectionStepNotYetOpenIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('selection page')
-            ->isOpen(self::$selectionStepNotYetOpen);
+        return $this->navigationContext->getPage('selection page')->isOpen(
+            self::$selectionStepNotYetOpen
+        );
     }
 
     protected function selectionStepClosedIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('selection page')
-            ->isOpen(self::$selectionStepClosed);
+        return $this->navigationContext->getPage('selection page')->isOpen(
+            self::$selectionStepClosed
+        );
     }
 
     protected function proposalPageWithBudgetVoteIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('proposal page')
-            ->isOpen(self::$proposalWithBudgetVoteParams);
+        return $this->navigationContext->getPage('proposal page')->isOpen(
+            self::$proposalWithBudgetVoteParams
+        );
     }
 
     protected function getProposalId(): string
@@ -1544,42 +1544,42 @@ trait ProposalStepsTrait
 
     protected function assertProposalCommentsContains($text)
     {
-        $firstVoteSelector = $this->navigationContext
-            ->getPage('proposal page')
-            ->getCommentsListSelector();
+        $firstVoteSelector = $this->navigationContext->getPage(
+            'proposal page'
+        )->getCommentsListSelector();
         $this->assertElementContainsText($firstVoteSelector, $text);
     }
 
     protected function assertFirstProposalVoteContains($text)
     {
-        $firstVoteSelector = $this->navigationContext
-            ->getPage('proposal page')
-            ->getFirstVoteSelector();
+        $firstVoteSelector = $this->navigationContext->getPage(
+            'proposal page'
+        )->getFirstVoteSelector();
         $this->assertElementContainsText($firstVoteSelector, $text);
     }
 
     // TODO : refactor all assert proposal in one more scalable function ?
     protected function assertFirstProposalFollowerContains($text)
     {
-        $lastFollowerSelector = $this->navigationContext
-            ->getPage('proposal page')
-            ->getLastSelector('follower');
+        $lastFollowerSelector = $this->navigationContext->getPage('proposal page')->getLastSelector(
+            'follower'
+        );
         $this->assertElementContainsText($lastFollowerSelector, $text);
     }
 
     protected function assertFirstProposalVoteNotContains($text)
     {
-        $firstVoteSelector = $this->navigationContext
-            ->getPage('proposal page')
-            ->getFirstVoteSelector();
+        $firstVoteSelector = $this->navigationContext->getPage(
+            'proposal page'
+        )->getFirstVoteSelector();
         $this->assertElementNotContainsText($firstVoteSelector, $text);
     }
 
     protected function assertFirstProposalFollowerNotContains(string $text)
     {
-        $lastFollowerSelector = $this->navigationContext
-            ->getPage('proposal page')
-            ->getLastSelector('follower');
+        $lastFollowerSelector = $this->navigationContext->getPage('proposal page')->getLastSelector(
+            'follower'
+        );
         if ('null' === $text) {
             $this->assertElementNotOnPage($lastFollowerSelector);
         } else {
@@ -1589,9 +1589,9 @@ trait ProposalStepsTrait
 
     protected function assertFirstProposalFollowerNotOnPage()
     {
-        $lastFollowerSelector = $this->navigationContext
-            ->getPage('proposal page')
-            ->getLastSelector('follower');
+        $lastFollowerSelector = $this->navigationContext->getPage('proposal page')->getLastSelector(
+            'follower'
+        );
         $this->assertElementNotOnPage($lastFollowerSelector);
     }
 }
