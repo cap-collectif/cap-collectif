@@ -63,7 +63,6 @@ class UnfollowOpinionMutation implements MutationInterface
             throw new UserError('Can\'t unsubscribe from this opinion.');
         }
 
-        $follower = $follower[0];
         $this->em->remove($follower);
     }
 }

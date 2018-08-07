@@ -39,12 +39,12 @@ Scenario: GraphQL client wants to get list of users who following an opinion
             {
               "cursor": @string@,
               "node": {
-                "id": "user10"
+                "id": "user45"
               }
             },{
               "cursor": @string@,
               "node": {
-                "id": "user11"
+                "id": "user34"
               }
             }
           ],
@@ -94,7 +94,7 @@ Scenario: I'm on qqa opinion and I want to load 20 followers from a cursor
     "data": {
       "opinion": {
         "id": "opinion6",
-        "followerConnection": {
+        "followers": {
           "edges": [
             {
               "cursor": @string@,

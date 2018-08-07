@@ -28,7 +28,7 @@ class ViewerFollowingConfigurationOpinionResolver implements ResolverInterface
             ]);
 
             if ($follower) {
-                $follower->getNotifiedOf();
+                return $follower->getNotifiedOf();
             }
 
             return null;

@@ -19,14 +19,15 @@ class ViewerFollowingConfigurationProposalResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Proposal $proposal, User $viewer): ?Follower
+    public function __invoke(Proposal $proposal, User $viewer): ?string
     {
         try {
             $follower = $this->followerRepository->findOneBy([
                 'proposal' => $proposal,
                 'user' => $viewer,
             ]);
-            if ($follower && isset($follower)) {
+
+            if ($follower) {
                 return $follower->getNotifiedOf();
             }
 

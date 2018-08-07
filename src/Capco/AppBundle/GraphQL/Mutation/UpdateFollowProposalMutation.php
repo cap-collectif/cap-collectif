@@ -27,9 +27,6 @@ final class UpdateFollowProposalMutation
         $this->followerRepository = $followerRepository;
     }
 
-    /**
-     * @throws UserError
-     */
     public function __invoke(string $proposalId, string $notifiedOf, User $user): array
     {
         /** @var Proposal $proposal */
@@ -51,7 +48,6 @@ final class UpdateFollowProposalMutation
         if (!$follower) {
             throw new UserError('Can\'t find the follower');
         }
-        $follower = $follower[0];
 
         if ($notifiedOf) {
             $follower->setNotifiedOf($notifiedOf);
