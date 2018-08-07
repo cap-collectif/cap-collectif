@@ -1,9 +1,10 @@
 <?php
 namespace Capco\AdminBundle\Controller;
 
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sonata\AdminBundle\Controller\CRUDController as Controller;
 
 class ReportingController extends Controller
 {
@@ -51,7 +52,7 @@ class ReportingController extends Controller
         $related = $object->getRelatedObject();
 
         if ($related) {
-            $related->setTrashedStatus('visible');
+            $related->setTrashedStatus(Trashable::STATUS_VISIBLE);
             $this->get('capco.contribution_notifier')->onModeration($related);
         }
 

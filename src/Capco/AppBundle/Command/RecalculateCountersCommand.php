@@ -69,7 +69,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             FROM opinion p
             LEFT JOIN opinion_relation r
             ON r.opinion_source = p.id OR r.opinion_target = p.id
-            WHERE p.enabled = 1 AND p.trashed = 0 AND p.expired = 0
+            WHERE p.enabled = 1 AND p.trashedAt IS NULL AND p.expired = 0
             GROUP BY p.id
           ) AS g
           ON g.id = o.id

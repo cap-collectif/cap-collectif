@@ -75,9 +75,6 @@ class OpinionVersionAdmin extends Admin
             ->with('admin.fields.opinion_version.group_answer', ['class' => 'col-md-12'])
             ->end()
             ->end();
-        // Content
-        // Publication
-        // Answer
         $formMapper
             ->with('admin.fields.opinion_version.group_content')
             ->add('title', null, ['label' => 'admin.fields.opinion_version.title'])
