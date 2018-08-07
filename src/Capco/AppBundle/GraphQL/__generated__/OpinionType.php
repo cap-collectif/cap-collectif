@@ -358,7 +358,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'true if the contribution is pinned.',
+                    'description' => 'Identifies the date and time when the object was created.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

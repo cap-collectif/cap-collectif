@@ -12,7 +12,6 @@ Opinion:
       ContributionWithAuthor,
       EditableContribution,
       WithFollowers,
-      Publishable,
     ]
   config:
     description: 'A contribution'
@@ -27,7 +26,6 @@ Opinion:
         Trashable,
         ContributionWithAuthor,
         EditableContribution,
-        Publishable,
       ]
     fields:
       createdAt:

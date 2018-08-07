@@ -1,6 +1,6 @@
 Proposal:
   type: object
-  inherits: [Node, Contribution, Publishable, Reportable, Trashable]
+  inherits: [Node, Contribution, Publishable, Reportable, Trashable, WithFollowers]
   config:
     description: 'A budget contribution'
     interfaces: [Node, Contribution, Publishable, Reportable, Trashable]
