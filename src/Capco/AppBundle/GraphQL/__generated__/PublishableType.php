@@ -23,6 +23,18 @@ final class PublishableType extends InterfaceType implements GeneratedTypeInterf
             'description' => 'Entities that can be published.',
             'fields' => function () use ($globalVariable) {
                 return [
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'published' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [

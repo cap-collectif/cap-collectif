@@ -1,11 +1,27 @@
 Source:
   type: object
   inherits:
-    [Node,  Publishable, Contribution, Reportable, Trashable, ContributionWithAuthor, EditableContribution]
+    [
+      Node,
+      Publishable,
+      Contribution,
+      Reportable,
+      Trashable,
+      ContributionWithAuthor,
+      EditableContribution,
+    ]
   config:
     description: 'A source'
     interfaces:
-      [Node, Publishable, Contribution, Reportable, Trashable, ContributionWithAuthor, EditableContribution]
+      [
+        Node,
+        Publishable,
+        Contribution,
+        Reportable,
+        Trashable,
+        ContributionWithAuthor,
+        EditableContribution,
+      ]
     fields:
       createdAt:
         type: 'DateTime!'

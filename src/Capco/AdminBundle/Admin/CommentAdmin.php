@@ -130,13 +130,6 @@ class CommentAdmin extends AbstractAdmin
                 'label' => 'admin.fields.comment.is_enabled',
                 'required' => false,
             ])
-            ->add('expired', null, [
-                'label' => 'admin.global.expired',
-                'attr' => [
-                    'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                    'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                ],
-            ])
             ->add('trashedStatus', TrashedStatusType::class, [
                 'label' => 'admin.fields.opinion.is_trashed',
             ])

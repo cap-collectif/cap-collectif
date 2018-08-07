@@ -5,6 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import UserLink from '../User/UserLink';
 import PinnedLabel from '../Utils/PinnedLabel';
+import UnpublishedLabel from '../Publishable/UnpublishedLabel';
 import type { OpinionInfos_opinion } from './__generated__/OpinionInfos_opinion.graphql';
 
 type Props = {
@@ -115,6 +116,8 @@ class OpinionInfos extends React.Component<Props> {
         {this.renderEditionDate()}
         <PinnedLabel show={opinion.pinned || false} type="opinion" />
         {this.renderRankingLabel()}
+        {/* $FlowFixMe */}
+        <UnpublishedLabel publishable={opinion} />
       </p>
     );
   }
@@ -123,6 +126,7 @@ class OpinionInfos extends React.Component<Props> {
 export default createFragmentContainer(OpinionInfos, {
   opinion: graphql`
     fragment OpinionInfos_opinion on Contribution {
+      ...UnpublishedLabel_publishable
       ... on Opinion {
         __typename
         createdAt
