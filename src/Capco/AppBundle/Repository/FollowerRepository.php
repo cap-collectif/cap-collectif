@@ -75,7 +75,8 @@ class FollowerRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('f')
             ->leftJoin('f.proposal', 'p')
-            ->andWhere('p.deletedAt IS NULL');
+            ->andWhere('p.deletedAt IS NULL')
+            ->andWhere('f.proposal IS NOT NULL');
 
         return $qb->getQuery()->getResult();
     }
