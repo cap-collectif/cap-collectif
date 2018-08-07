@@ -112,7 +112,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                           <Radio
                             id={`proposal-follow-btn-minimal-${proposal.id}`}
                             name="minimal"
-                            className="proposal__follow__advancement"
+                            className="proposal__follow__minimal"
                             checked={
                               proposal.viewerFollowingConfiguration === 'MINIMAL' ? 'checked' : ''
                             }
