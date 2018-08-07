@@ -1234,21 +1234,21 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I should see advancement checked on :proposalId
+     * @When I should see minimal checked on :proposalId
      */
     public function iShouldSeeAdvancementCheckedOnProposal(string $proposalid)
     {
         $page = $this->getCurrentPage();
-        $page->followAdvancementIsChecked($proposalid);
+        $page->followMinimalIsChecked($proposalid);
     }
 
     /**
-     * @When I should see follow advancement and comment checked on :proposalId
+     * @When I should see follow essential checked on :proposalId
      */
     public function iShouldSeeFollowAdvancementAndCommentCheckedOnProposal(string $proposalid)
     {
         $page = $this->getCurrentPage();
-        $page->followAdvancementAndCommentIsChecked($proposalid);
+        $page->followEssentialIsChecked($proposalid);
     }
 
     /**

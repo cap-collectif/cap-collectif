@@ -10,10 +10,10 @@ Scenario: Logged, I want to follow a proposal and change the type of following
   Then I should see a "#proposal-follow-btn-proposal2" element
   And I should see a ".dropdown-menu" element
   And I wait 2 seconds
-  And I should see advancement checked on "proposal2"
+  And I should see minimal checked on "proposal2"
   And I wait 2 seconds
   Then I click on "proposal follow essential" choice on "proposal2"
-  And I should see follow advancement and comment checked on "proposal2"
+  And I should see follow essential checked on "proposal2"
   And I wait 2 seconds
   Then I click on "proposal follow all" choice on "proposal2"
   And I should see follow all activities checked on "proposal2"
