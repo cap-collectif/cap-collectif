@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UnpublishedTooltip /> renders when not published because author confirmed his account too late 1`] = `
+<Overlay
+  animation={[Function]}
+  container={[Function]}
+  placement="top"
+  rootClose={false}
+  show={true}
+  target={[MockFunction]}
+>
+  <Tooltip
+    bsClass="tooltip"
+    id="UnpublishedTooltip"
+    placement="right"
+  >
+    <FormattedMessage
+      id="unpublished-Vote"
+      values={Object {}}
+    />
+  </Tooltip>
+</Overlay>
+`;
+
+exports[`<UnpublishedTooltip /> renders when not published because author is not confirmed 1`] = `
+<Overlay
+  animation={[Function]}
+  container={[Function]}
+  placement="top"
+  rootClose={false}
+  show={true}
+  target={[MockFunction]}
+>
+  <Tooltip
+    bsClass="tooltip"
+    id="UnpublishedTooltip"
+    placement="right"
+  >
+    <FormattedMessage
+      id="unpublished-Vote"
+      values={Object {}}
+    />
+  </Tooltip>
+</Overlay>
+`;
+
+exports[`<UnpublishedTooltip /> renders when not published because author must confirm 1`] = `
+<Overlay
+  animation={[Function]}
+  container={[Function]}
+  placement="top"
+  rootClose={false}
+  show={true}
+  target={[MockFunction]}
+>
+  <Tooltip
+    bsClass="tooltip"
+    id="UnpublishedTooltip"
+    placement="right"
+  >
+    <FormattedMessage
+      id="voting-pending-publication"
+      values={Object {}}
+    />
+  </Tooltip>
+</Overlay>
+`;
+
+exports[`<UnpublishedTooltip /> renders when published 1`] = `
+<Overlay
+  animation={[Function]}
+  container={[Function]}
+  placement="top"
+  rootClose={false}
+  show={false}
+  target={[MockFunction]}
+>
+  <Tooltip
+    bsClass="tooltip"
+    id="UnpublishedTooltip"
+    placement="right"
+  />
+</Overlay>
+`;

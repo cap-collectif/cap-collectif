@@ -1,9 +1,11 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
+import ReactDOM from 'react-dom';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
+import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 import { VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import AddOpinionVoteMutation from '../../../mutations/AddOpinionVoteMutation';
@@ -45,9 +47,8 @@ type Props = {
 } & RelayProps;
 
 export class OpinionVotesButton extends React.Component<Props> {
-  static defaultProps = {
-    style: {},
-  };
+  static defaultProps = { style: {} };
+  target: null;
 
   vote = () => {
     const { opinion, value } = this.props;
@@ -139,6 +140,9 @@ export class OpinionVotesButton extends React.Component<Props> {
     return (
       <LoginOverlay>
         <Button
+          ref={button => {
+            this.target = button;
+          }}
           style={style}
           bsStyle={data.style}
           className="btn--outline"
@@ -150,6 +154,13 @@ export class OpinionVotesButton extends React.Component<Props> {
             />
           }
           disabled={disabled}>
+          {active && (
+            /* $FlowFixMe */
+            <UnpublishedTooltip
+              target={() => ReactDOM.findDOMNode(this.target)}
+              publishable={opinion.viewerVote}
+            />
+          )}
           <i className={data.icon} /> <FormattedMessage id={`vote.${data.str}`} />
         </Button>
       </LoginOverlay>
@@ -170,6 +181,7 @@ export default createFragmentContainer(OpinionVotesButton, {
         viewerVote {
           id
           value
+          ...UnpublishedTooltip_publishable
         }
       }
       ... on Version {
@@ -181,6 +193,7 @@ export default createFragmentContainer(OpinionVotesButton, {
         viewerVote {
           id
           value
+          ...UnpublishedTooltip_publishable
         }
         parent {
           id
