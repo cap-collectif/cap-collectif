@@ -150,7 +150,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     type: 4
   multiplequestionMarvelThorLike:
     id: 37
-    title: T'aimes bien Luke Cage ?
+    title: T'aimes bien Thor ?
     questionChoices:
       ['@questionchoiceMarvelThorYes', '@questionchoiceMarvelThorNo']
     type: 4
