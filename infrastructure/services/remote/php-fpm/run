@@ -12,13 +12,9 @@ done
 echo "[PHP-FPM] Created var/ files!"
 
 
-echo "[$(date -u)][PHP-FPM] Setting permissions to web/, cache/ and logs/..."
-chmod -R 777 web/media
-chmod -R 777 var/logs
-rm -rf var/cache/prod/*
-chown -R capco:capco var/cache
-chown -R capco:capco var/logs
-echo "[$(date -u)][PHP-FPM] Permissions gived to web/, cache/ and logs/!"
+echo "[$(date -u)][PHP-FPM] Setting permissions to web/ and cache/ ..."
+chmod -R 777 web/media && chown -R capco:capco var && rm -rf var/cache/prod
+echo "[$(date -u)][PHP-FPM] Permissions gived to web/ and cache/!"
 
 echo "[$(date -u)][PHP-FPM] Waiting for MySQL..."
 while ! (mysqladmin ping --host=127.0.0.1)
