@@ -20,7 +20,7 @@ const mutation = graphql`
   }
 `;
 
-const decrementFollowerCount = (proposalId: string, store: Object) => {
+const decrementFollowerCount = (proposalId: string, store: RecordSourceSelectorProxy) => {
   const proposalProxy = store.get(proposalId);
   if (!proposalProxy) return;
   const allFollowersProxy = proposalProxy.getLinkedRecord('followers', { first: 0 });

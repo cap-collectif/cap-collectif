@@ -1,5 +1,5 @@
 // @flow
-import { graphql } from 'react-relay';
+import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import commitMutation from './commitMutation';
 import environnement from '../createRelayEnvironment';
@@ -48,7 +48,7 @@ const commit = (variables: FollowProposalMutationVariables): Promise<Response> =
         edgeName: 'followerEdge',
       },
     ],
-    updater: store => {
+    updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('followProposal');
       if (!payload || !payload.getLinkedRecord('followerEdge')) {
         return;
