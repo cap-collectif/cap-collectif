@@ -14,7 +14,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class ProjectController extends Controller
@@ -30,11 +32,9 @@ class ProjectController extends Controller
     {
         $props = $this->get('jms_serializer')->serialize(
             [
-                'projects' =>
-                    $this->get('Capco\AppBundle\Repository\ProjectRepository')->getLastPublished(
-                        $max,
-                        $offset
-                    ),
+                'projects' => $this->get(
+                    'Capco\AppBundle\Repository\ProjectRepository'
+                )->getLastPublished($max, $offset),
             ],
             'json',
             SerializationContext::create()->setGroups([
@@ -319,5 +319,18 @@ class ProjectController extends Controller
         )->findAll();
 
         return ['params' => $parameters];
+    }
+
+    /**
+     * @Route("/admin/capco/app/project/{projectId}/preview", name="capco_admin_project_preview")
+     * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
+     */
+    public function previewAction(Request $request, Project $project): Response
+    {
+        $projectUrlResolver = $this->container->get(
+            'Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver'
+        );
+
+        return new RedirectResponse($projectUrlResolver->__invoke($project));
     }
 }
