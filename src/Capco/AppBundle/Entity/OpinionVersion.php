@@ -112,7 +112,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return 'version';
     }
 
-    public function getProject()
+    public function getProject(): ?Project
     {
         return $this->getParent()
             ->getStep()
@@ -409,7 +409,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function isIndexable(): bool
     {
-        return $this->isEnabled() && !$this->isExpired();
+        return $this->isEnabled() && !$this->isExpired() && $this->getProject()->isIndexable();
     }
 
     public static function getElasticsearchTypeName(): string

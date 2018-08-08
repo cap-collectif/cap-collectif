@@ -40,7 +40,9 @@ class ProposalComment extends Comment
             return (
                 $this->getIsEnabled() &&
                 !$this->getRelatedObject()->isDeleted() &&
-                $this->getProposal()->isIndexable()
+                $this->getProposal()
+                    ->getProject()
+                    ->isIndexable()
             );
         } catch (EntityNotFoundException $e) {
             return false;
