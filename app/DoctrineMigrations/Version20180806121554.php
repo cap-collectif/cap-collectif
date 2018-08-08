@@ -137,10 +137,6 @@ final class Version20180806121554 extends AbstractMigration
                 ['id' => $follower['id']]
             );
         }
-
-        $this->addSql(
-            'ALTER TABLE user_following CHANGE notified_of notified_of ENUM(\'MINIMAL\', \'ESSENTIAL\', \'ALL\')'
-        );
         $this->write('--> Migrated successfully subscription type 3 to ALL!');
     }
 }
