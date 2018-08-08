@@ -9,4 +9,4 @@ FollowOpinionPayload:
       followerEdge:
         type: 'FollowerEdge'
       value:
-        type: 'SubscriptionTypeValue!'
+        type: 'SubscriptionTypeValue'

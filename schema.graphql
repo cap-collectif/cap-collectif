@@ -1186,7 +1186,7 @@ type FollowOpinionPayload {
   opinion: Opinion
   follower: User
   followerEdge: FollowerEdge
-  value: SubscriptionTypeValue!
+  value: SubscriptionTypeValue
   clientMutationId: String
 }
 
@@ -1203,7 +1203,7 @@ type FollowProposalPayload {
   proposal: Proposal
   follower: User
   followerEdge: FollowerEdge
-  value: SubscriptionTypeValue!
+  value: SubscriptionTypeValue
   clientMutationId: String
 }
 
