@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
@@ -50,7 +49,9 @@ class ProposalsController extends FOSRestController
      */
     public function postProposalAction(Request $request, ProposalForm $proposalForm)
     {
-        throw new BadRequestHttpException('Not supported anymore, use GraphQL mutation "createProposal" instead.');
+        throw new BadRequestHttpException(
+            'Not supported anymore, use GraphQL mutation "createProposal" instead.'
+        );
     }
 
     /**
@@ -62,24 +63,29 @@ class ProposalsController extends FOSRestController
      * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
      * @View(serializerGroups={"Comments", "UsersInfos"})
      */
-    public function getProposalCommentsAction(ProposalForm $form, Proposal $proposal, ParamFetcherInterface $paramFetcher)
-    {
+    public function getProposalCommentsAction(
+        ProposalForm $form,
+        Proposal $proposal,
+        ParamFetcherInterface $paramFetcher
+    ) {
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
 
-        $paginator = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:ProposalComment')
-                    ->getEnabledByProposal($proposal, $offset, $limit, $filter);
+        $paginator = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:ProposalComment')
+            ->getEnabledByProposal($proposal, $offset, $limit, $filter);
 
         $comments = [];
         foreach ($paginator as $comment) {
             $comments[] = $comment;
         }
 
-        $countWithAnswers = $this->getDoctrine()->getManager()
-                      ->getRepository('CapcoAppBundle:ProposalComment')
-                      ->countCommentsAndAnswersEnabledByProposal($proposal);
+        $countWithAnswers = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:ProposalComment')
+            ->countCommentsAndAnswersEnabledByProposal($proposal);
 
         return [
             'commentsAndAnswersCount' => (int) $countWithAnswers,
@@ -94,8 +100,11 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
      * @View(statusCode=201, serializerGroups={"Comments", "UsersInfos"})
      */
-    public function postProposalCommentsAction(Request $request, ProposalForm $form, Proposal $proposal)
-    {
+    public function postProposalCommentsAction(
+        Request $request,
+        ProposalForm $form,
+        Proposal $proposal
+    ) {
         if (!$proposal->canComment()) {
             throw new BadRequestHttpException('You can not comment this proposal.');
         }
@@ -105,10 +114,7 @@ class ProposalsController extends FOSRestController
         $comment = (new ProposalComment())
             ->setAuthorIp($request->getClientIp())
             ->setAuthor($user)
-            ->setProposal($proposal)
-            ->setIsEnabled(true)
-        ;
-
+            ->setProposal($proposal);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
@@ -120,7 +126,9 @@ class ProposalsController extends FOSRestController
 
         if ($parent) {
             if (!$parent instanceof ProposalComment || $proposal !== $parent->getProposal()) {
-                throw $this->createNotFoundException('This parent comment is not linked to this proposal');
+                throw $this->createNotFoundException(
+                    'This parent comment is not linked to this proposal'
+                );
             }
 
             if ($parent->getParent()) {
@@ -146,9 +154,14 @@ class ProposalsController extends FOSRestController
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=200)
      */
-    public function putProposalAction(Request $request, ProposalForm $proposalForm, Proposal $proposal)
-    {
-        throw new BadRequestHttpException('Not supported anymore, use GraphQL mutation "changeProposalContent" instead.');
+    public function putProposalAction(
+        Request $request,
+        ProposalForm $proposalForm,
+        Proposal $proposal
+    ) {
+        throw new BadRequestHttpException(
+            'Not supported anymore, use GraphQL mutation "changeProposalContent" instead.'
+        );
     }
 
     /**
@@ -163,11 +176,7 @@ class ProposalsController extends FOSRestController
             throw $this->createAccessDeniedException();
         }
 
-        $report = (new Reporting())
-            ->setReporter($this->getUser())
-            ->setProposal($proposal)
-        ;
-
+        $report = (new Reporting())->setReporter($this->getUser())->setProposal($proposal);
         $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 
@@ -175,8 +184,12 @@ class ProposalsController extends FOSRestController
             return $form;
         }
 
-        $this->getDoctrine()->getManager()->persist($report);
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->persist($report);
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
         $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;

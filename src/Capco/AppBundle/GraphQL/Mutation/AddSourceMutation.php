@@ -82,10 +82,7 @@ class AddSourceMutation implements MutationInterface
             return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
         }
 
-        $source = (new Source())
-            ->setType(Source::LINK)
-            ->setIsEnabled(true)
-            ->setAuthor($viewer);
+        $source = (new Source())->setType(Source::LINK)->setAuthor($viewer);
         if ($sourceable instanceof Opinion) {
             $source->setOpinion($sourceable);
         }
