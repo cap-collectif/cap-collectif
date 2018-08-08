@@ -91,55 +91,75 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaire4'
     question: '@multiplequestion11'
     position: 6
-  qaq25:
-    questionnaire: '@questionnaire1'
-    question: '@sectionquestion1'
-    position: 1
-  qaq26:
-    questionnaire: '@questionnaire1'
-    question: '@sectionquestion2'
-    position: 3
-  qaq27:
-    proposalForm: '@proposalform1'
-    question: '@sectionquestion3'
-    position: 1
-  qaq28:
-    questionnaire: '@questionnaire2'
-    question: '@simplequestion11'
-    position: 2
-  qaq29:
-    questionnaire: '@questionnaire2'
-    question: '@simplequestion12'
-    position: 3
-  qaq30:
+  qaq24:
     questionnaire: '@questionnaireWithJumps'
     question: '@multiplequestionHapNoel'
     position: 1
-  qaq31:
+  qaq25:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionFavoriteFleuve'
+    position: 2
+  qaq26:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionHapGange'
+    position: 3
+  qaq27:
     questionnaire: '@questionnaireWithJumps'
     question: '@multiplequestionHapCreation'
-    position: 2
-  qaq32:
+    position: 4
+  qaq28:
     questionnaire: '@questionnaireWithJumps'
     question: '@multiplequestionIsHapGood'
-    position: 3
-  qaq33:
+    position: 5
+  qaq29:
     questionnaire: '@questionnaireWithJumps'
     question: '@multiplequestionNoelFete'
-    position: 4
-  qaq34:
+    position: 6
+  qaq30:
     questionnaire: '@questionnaireWithJumps'
     question: '@multiplequestionNoelHatColor'
-    position: 5
+    position: 7
+  qaq31:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionMarvelOrDc'
+    position: 8
+  qaq32:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionDcSupermanLike'
+    position: 9
+  qaq33:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionDcBatmanLike'
+    position: 10
+  qaq34:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionDcSupergirlLike'
+    position: 11
   qaq35:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionMarvelIronManLike'
+    position: 12
+  qaq36:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionMarvelLukeCageLike'
+    position: 13
+  qaq37:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionMarvelThorLike'
+    position: 14
+  qaq38:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionEndConditionel'
+    position: 15
+  qaq39:
     questionnaire: '@questionnaire1'
     question: '@sectionquestion1'
     position: 1
-  qaq36:
+  qaq40:
     questionnaire: '@questionnaire1'
     question: '@sectionquestion2'
     position: 3
-  qaq37:
+  qaq41:
     proposalForm: '@proposalform1'
     question: '@sectionquestion3'
     position: 1

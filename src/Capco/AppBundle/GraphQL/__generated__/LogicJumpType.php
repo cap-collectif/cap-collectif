@@ -37,6 +37,18 @@ final class LogicJumpType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+                'always' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'If true, the logic jump will always be triggered, ',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'origin' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Question')),
                     'args' => [

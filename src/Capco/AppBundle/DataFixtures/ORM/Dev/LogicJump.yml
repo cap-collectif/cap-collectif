@@ -1,11 +1,36 @@
 Capco\AppBundle\Entity\LogicJump:
   logicjump1:
     id: logicjump1
+    always: false
     origin: '@multiplequestionHapNoel'
     destination: '@multiplequestionHapCreation'
     conditions: ['@ljconditionHap']
   logicjump2:
     id: logicjump2
+    always: false
     origin: '@multiplequestionHapNoel'
     destination: '@multiplequestionNoelFete'
     conditions: ['@ljconditionNoel']
+  logicjump3:
+    id: logicjump3
+    always: false
+    origin: '@multiplequestionFavoriteFleuve'
+    destination: '@multiplequestionHapGange'
+    conditions: ['@ljconditionFleuveHap', '@ljconditionFleuveGange']
+  logicjump4:
+    id: logicjump4
+    always: false
+    origin: '@multiplequestionMarvelOrDc'
+    destination: '@multiplequestionMarvelIronManLike'
+    conditions: ['@ljconditionMarvel']
+  logicjump5:
+    id: logicjump5
+    always: false
+    origin: '@multiplequestionMarvelOrDc'
+    destination: '@multiplequestionDcSupermanLike'
+    conditions: ['@ljconditionDc']
+  logicjump6:
+    id: logicjump6
+    always: true
+    origin: '@multiplequestionDcSupergirlLike'
+    destination: '@multiplequestionEndConditionel'

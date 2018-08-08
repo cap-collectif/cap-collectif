@@ -7,3 +7,23 @@ Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition:
     operator: IS
     question: '@multiplequestionHapNoel'
     value: '@questionchoiceNoel'
+  ljconditionFleuveHap:
+    id: ljconditionFleuveHap
+    operator: IS
+    question: '@multiplequestionHapNoel'
+    value: '@questionchoiceHap'
+  ljconditionFleuveGange:
+    id: ljconditionFleuveGange
+    operator: IS
+    question: '@multiplequestionFavoriteFleuve'
+    value: '@questionchoiceLeGange'
+  ljconditionMarvel:
+    id: ljconditionMarvel
+    operator: IS
+    question: '@multiplequestionMarvelOrDc'
+    value: '@questionchoiceMarvelOrDcMarvel'
+  ljconditionDc:
+    id: ljconditionDc
+    operator: IS
+    question: '@multiplequestionMarvelOrDc'
+    value: '@questionchoiceMarvelOrDcDc'

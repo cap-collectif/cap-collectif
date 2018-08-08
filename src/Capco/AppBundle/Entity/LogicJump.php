@@ -27,6 +27,11 @@ class LogicJump
     protected $destination;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $always;
+
+    /**
      * @ORM\OneToMany(targetEntity="AbstractLogicJumpCondition", mappedBy="jump")
      */
     protected $conditions;
@@ -87,6 +92,18 @@ class LogicJump
                 $condition->setJump(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isAlways(): ?bool
+    {
+        return $this->always;
+    }
+
+    public function setAlways(bool $always): self
+    {
+        $this->always = $always;
 
         return $this;
     }

@@ -112,3 +112,51 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     questionChoices:
       ['@questionchoiceNoelRedHat', '@questionchoiceNoelGreenHat', '@questionchoiceNoelBlueHat']
     type: 4
+  multiplequestionMarvelOrDc:
+    id: 31
+    title: Plutôt Marvel ou DC ?
+    questionChoices:
+      ['@questionchoiceMarvelOrDcMarvel', '@questionchoiceMarvelOrDcDc']
+    type: 4
+  multiplequestionDcSupermanLike:
+    id: 32
+    title: T'aimes bien Superman ?
+    questionChoices:
+      ['@questionchoiceDcSupermanYes', '@questionchoiceDcSupermanNo']
+    type: 4
+  multiplequestionDcBatmanLike:
+    id: 33
+    title: T'aimes bien Batman ?
+    questionChoices:
+      ['@questionchoiceDcBatmanYes', '@questionchoiceDcBatmanYes2']
+    type: 4
+  multiplequestionDcSupergirlLike:
+    id: 34
+    title: T'aimes bien Supergirl ?
+    questionChoices:
+      ['@questionchoiceDcSupergirlYes', '@questionchoiceDcSupergirlNo']
+    type: 4
+  multiplequestionMarvelIronManLike:
+    id: 35
+    title: T'aimes bien Iron Man ?
+    questionChoices:
+      ['@questionchoiceMarvelIronManYes', '@questionchoiceMarvelIronManNo']
+    type: 4
+  multiplequestionMarvelLukeCageLike:
+    id: 36
+    title: T'aimes bien Luke Cage ?
+    questionChoices:
+      ['@questionchoiceMarvelLukeCageYes', '@questionchoiceMarvelLukeCageYes2', '@questionchoiceMarvelLukeCageYes3']
+    type: 4
+  multiplequestionMarvelThorLike:
+    id: 37
+    title: T'aimes bien Luke Cage ?
+    questionChoices:
+      ['@questionchoiceMarvelThorYes', '@questionchoiceMarvelThorNo']
+    type: 4
+  multiplequestionEndConditionel:
+    id: 38
+    title: C'est la fin mais j'affiche quand même des choix
+    questionChoices:
+      ['@questionchoiceEndConditionOk', '@questionchoiceEndConditionOk2']
+    type: 4

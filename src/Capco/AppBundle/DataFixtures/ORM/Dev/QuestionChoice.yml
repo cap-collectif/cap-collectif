@@ -244,3 +244,71 @@ Capco\AppBundle\Entity\QuestionChoice:
     id: questionchoiceNoelBlueHat
     title: Bleu
     position: 3
+  questionchoiceMarvelOrDcMarvel:
+    id: questionchoiceMarvelOrDcMarvel
+    title: Marvel
+    position: 1
+  questionchoiceMarvelOrDcDc:
+    id: questionchoiceMarvelOrDcDc
+    title: DC
+    position: 2
+  questionchoiceDcSupermanYes:
+    id: questionchoiceDcSupermanYes
+    title: Oui
+    position: 1
+  questionchoiceDcSupermanNo:
+    id: questionchoiceDcSupermanNo
+    title: Non
+    position: 2
+  questionchoiceDcBatmanYes:
+    id: questionchoiceDcBatmanYes
+    title: Oui
+    position: 1
+  questionchoiceDcBatmanYes2:
+    id: questionchoiceDcBatmanYes2
+    title: Oui
+    position: 2
+  questionchoiceDcSupergirlYes:
+    id: questionchoiceDcSupergirlYes
+    title: Oui
+    position: 1
+  questionchoiceDcSupergirlNo:
+    id: questionchoiceDcSupergirlNo
+    title: Non
+    position: 2
+  questionchoiceMarvelIronManYes:
+    id: questionchoiceMarvelIronManYes
+    title: Oui
+    position: 1
+  questionchoiceMarvelIronManNo:
+    id: questionchoiceMarvelIronManNo
+    title: Non
+    position: 2
+  questionchoiceMarvelLukeCageYes:
+    id: questionchoiceMarvelLukeCageYes
+    title: Oui c un bo chauve ténébreux
+    position: 1
+  questionchoiceMarvelLukeCageYes2:
+    id: questionchoiceMarvelLukeCageYes2
+    title: Oui
+    position: 2
+  questionchoiceMarvelLukeCageYes3:
+    id: questionchoiceMarvelLukeCageYes3
+    title: OUI
+    position: 3
+  questionchoiceMarvelThorYes:
+    id: questionchoiceMarvelThorYes
+    title: ui
+    position: 1
+  questionchoiceMarvelThorNo:
+    id: questionchoiceMarvelThorNo
+    title: nn
+    position: 2
+  questionchoiceEndConditionOk:
+    id: questionchoiceEndConditionOk
+    title: Oki
+    position: 1
+  questionchoiceEndConditionOk2:
+    id: questionchoiceEndConditionOk2
+    title: Doki
+    position: 2
