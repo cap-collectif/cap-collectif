@@ -16,6 +16,7 @@ const mutation = graphql`
           id
           url
           ...OpinionVersion_version
+          ...UnpublishedLabel_publishable
         }
       }
       userErrors {

@@ -1,16 +1,18 @@
 <?php
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Source;
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\SourceVote;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 class SourceVoteRepository extends EntityRepository
 {
     public function countByAuthorAndProject(User $author, Project $project): int
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT (DISTINCT v)')
             ->leftJoin('v.source', 'source')
             ->leftJoin('source.opinion', 'o')
@@ -30,7 +32,7 @@ class SourceVoteRepository extends EntityRepository
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT (DISTINCT v)')
             ->leftJoin('v.source', 'source')
             ->leftJoin('source.opinion', 'o')
@@ -53,7 +55,7 @@ class SourceVoteRepository extends EntityRepository
      */
     public function getEnabledByConsultationStep(ConsultationStep $step, bool $asArray = false)
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
@@ -81,7 +83,7 @@ class SourceVoteRepository extends EntityRepository
      */
     public function getAllBySource($sourceId, $asArray = false)
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
@@ -91,7 +93,17 @@ class SourceVoteRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    protected function getQueryBuilder()
+    public function getBySourceAndUser(Source $source, User $author): ?SourceVote
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->andWhere('v.source = :source')
+            ->andWhere('v.user = :author')
+            ->setParameter('source', $source)
+            ->setParameter('author', $author);
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('v')->andWhere('v.published = true');
     }

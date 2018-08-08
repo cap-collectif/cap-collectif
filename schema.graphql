@@ -3010,6 +3010,7 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
   votesCount: Int!
   contribuable: Boolean!
   viewerHasVote: Boolean!
+  viewerVote: SourceVote
   category: SourceCategory
 
   # The link of the source.
@@ -3064,6 +3065,33 @@ enum SourceOrderField {
 
   # Allows ordering a list of sources by the number of votes it have.
   VOTES
+}
+
+# Entities that can be published.
+type SourceVote implements Publishable {
+  # The ID of an object
+  id: ID!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
+  # The author of the contribution. If null, account has been deleted.
+  author: User
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Source
+
+  # Returns 'sourceVote'.
+  kind: String!
 }
 
 # A sourceable

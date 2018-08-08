@@ -35,8 +35,14 @@ Source:
         resolve: '@=value.canContribute()'
       viewerHasVote:
         type: 'Boolean!'
-        resolve: false
         access: "@=hasRole('ROLE_USER')"
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerHasVoteResolver", [value, getUser()])'
+      viewerVote:
+        type: 'SourceVote'
+        access: "@=hasRole('ROLE_USER')"
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerVoteResolver", [value, getUser()])'
       category:
         type: SourceCategory
       link:

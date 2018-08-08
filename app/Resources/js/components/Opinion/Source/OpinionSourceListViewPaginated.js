@@ -45,7 +45,7 @@ export default createPaginationContainer(
     sourceable: graphql`
       fragment OpinionSourceListViewPaginated_sourceable on Sourceable
         @argumentDefinitions(
-          isAuthenticated: { type: "Boolean", defaultValue: true }
+          isAuthenticated: { type: "Boolean!", defaultValue: true }
           count: { type: "Int!" }
           cursor: { type: "String" }
           orderBy: { type: "SourceOrder!", nonNull: true }

@@ -47,7 +47,7 @@ export class OpinionSource extends React.Component<Props> {
 export default createFragmentContainer(OpinionSource, {
   source: graphql`
     fragment OpinionSource_source on Source
-      @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       ...OpinionInfos_opinion
       ...OpinionSourceTitle_source

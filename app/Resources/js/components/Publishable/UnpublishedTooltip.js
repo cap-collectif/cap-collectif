@@ -7,7 +7,7 @@ import type { UnpublishedTooltip_publishable } from './__generated__/Unpublished
 
 type Props = {
   publishable: ?UnpublishedTooltip_publishable,
-  target: Function,
+  target: () => null | Element | Text,
 };
 
 export class UnpublishedTooltip extends React.Component<Props> {

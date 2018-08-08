@@ -39,6 +39,7 @@ class OpinionSourceButtons extends React.Component<Props, State> {
     const { source, sourceable, dispatch } = this.props;
     return (
       <div>
+        {/* $FlowFixMe */}
         <OpinionSourceVoteBox source={source} />
         <OpinionSourceReportButton sourceable={sourceable} source={source} />
         <EditButton
@@ -70,7 +71,7 @@ const container = connect()(OpinionSourceButtons);
 export default createFragmentContainer(container, {
   source: graphql`
     fragment OpinionSourceButtons_source on Source
-      @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       author {
         id

@@ -1,16 +1,13 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import SourceActions from '../../../actions/SourceActions';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
-import type { GlobalState } from '../../../types';
 import type { OpinionSourceVoteBox_source } from './__generated__/OpinionSourceVoteBox_source.graphql';
 
 type Props = {
   source: OpinionSourceVoteBox_source,
-  user?: Object,
 };
 
 type State = {
@@ -34,22 +31,16 @@ class OpinionSourceVoteBox extends React.Component<Props, State> {
     SourceActions.deleteVote(source.id);
   };
 
-  isTheUserTheAuthor = () => {
-    const { source, user } = this.props;
-    if (source.author === null || !user) {
-      return false;
-    }
-    return user.uniqueId === source.author.slug;
-  };
-
   render() {
     const { source } = this.props;
     const { hasVoted } = this.state;
     return (
       <span>
         <form style={{ display: 'inline-block' }}>
+          {/* $FlowFixMe */}
           <OpinionSourceVoteButton
-            disabled={!source.contribuable || this.isTheUserTheAuthor()}
+            source={source}
+            disabled={!source.contribuable || source.author.isViewer}
             hasVoted={source.viewerHasVote || hasVoted}
             onClick={source.viewerHasVote || hasVoted ? this.deleteVote : this.vote}
           />
@@ -62,26 +53,21 @@ class OpinionSourceVoteBox extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => {
-  return {
-    user: state.user.user,
-  };
-};
-
-const container = connect(mapStateToProps)(OpinionSourceVoteBox);
 export default createFragmentContainer(
-  container,
+  OpinionSourceVoteBox,
   graphql`
     fragment OpinionSourceVoteBox_source on Source
-      @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       author {
         id
         slug
+        isViewer @include(if: $isAuthenticated)
       }
       contribuable
       votesCount
       viewerHasVote @include(if: $isAuthenticated)
+      ...OpinionSourceVoteButton_source @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 );

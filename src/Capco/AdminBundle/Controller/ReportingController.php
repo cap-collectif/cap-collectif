@@ -22,9 +22,6 @@ class ReportingController extends Controller
         $related = $object->getRelatedObject();
 
         if ($related) {
-            method_exists($related, 'setEnabled')
-                ? $related->setEnabled(false)
-                : $related->setIsEnabled(false);
             $this->get('capco.contribution_notifier')->onModeration($related);
         }
 

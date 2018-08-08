@@ -15,6 +15,7 @@ const mutation = graphql`
         node {
           id
           ...OpinionSource_source
+          ...UnpublishedLabel_publishable
         }
       }
       userErrors {
