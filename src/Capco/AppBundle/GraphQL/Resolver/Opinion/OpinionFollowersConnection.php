@@ -33,7 +33,7 @@ class OpinionFollowersConnection implements ResolverInterface
 
             // prevent useless queries.
             if (!$this->canBeFollowed($opinion)) {
-                return [];
+                return null;
             }
 
             try {
