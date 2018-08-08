@@ -216,6 +216,7 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   # The content of the argument.
   body: String!
   viewerHasVote: Boolean!
+  viewerVote: ArgumentVote
   contribuable: Boolean!
 }
 
@@ -261,6 +262,33 @@ enum ArgumentOrderField {
 enum ArgumentValue {
   AGAINST
   FOR
+}
+
+# Entities that can be published.
+type ArgumentVote implements Publishable {
+  # The ID of an object
+  id: ID!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
+  # The author of the contribution. If null, account has been deleted.
+  author: User
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Argument
+
+  # Returns 'argumentVote'.
+  kind: String!
 }
 
 # An argumentable

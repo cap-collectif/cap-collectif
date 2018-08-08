@@ -5,9 +5,9 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Entity\ArgumentVote;
 
-class ArgumentViewerHasVoteResolver implements ResolverInterface
+class ArgumentViewerVoteResolver implements ResolverInterface
 {
     private $argumentVoteRepository;
 
@@ -16,8 +16,8 @@ class ArgumentViewerHasVoteResolver implements ResolverInterface
         $this->argumentVoteRepository = $argumentVoteRepository;
     }
 
-    public function __invoke(Argument $argument, User $user): bool
+    public function __invoke(Argument $argument, User $user): ?ArgumentVote
     {
-        return $this->argumentVoteRepository->getByArgumentAndUser($argument, $user) !== null;
+        return $this->argumentVoteRepository->getByArgumentAndUser($argument, $user);
     }
 }

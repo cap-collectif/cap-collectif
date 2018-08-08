@@ -6,7 +6,7 @@ import { Overlay, Tooltip } from 'react-bootstrap';
 import type { UnpublishedTooltip_publishable } from './__generated__/UnpublishedTooltip_publishable.graphql';
 
 type Props = {
-  publishable: UnpublishedTooltip_publishable,
+  publishable: ?UnpublishedTooltip_publishable,
   target: Function,
 };
 
@@ -15,18 +15,18 @@ export class UnpublishedTooltip extends React.Component<Props> {
     const { publishable, target } = this.props;
     return (
       <Overlay
-        show={!publishable.published}
+        show={publishable && !publishable.published}
         container={() => document.querySelector('body')}
         target={target}
         placement="top">
         <Tooltip id="UnpublishedTooltip">
-          {publishable.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION' ? (
+          {publishable && publishable.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION' ? (
             <FormattedMessage id="voting-pending-publication" />
           ) : null}
-          {publishable.notPublishedReason === 'AUTHOR_NOT_CONFIRMED' ? (
+          {publishable && publishable.notPublishedReason === 'AUTHOR_NOT_CONFIRMED' ? (
             <FormattedMessage id="unpublished-Vote" />
           ) : null}
-          {publishable.notPublishedReason === 'AUTHOR_CONFIRMED_TOO_LATE' ? (
+          {publishable && publishable.notPublishedReason === 'AUTHOR_CONFIRMED_TOO_LATE' ? (
             <FormattedMessage id="unpublished-Vote" />
           ) : null}
         </Tooltip>

@@ -16,6 +16,7 @@ const mutation = graphql`
         node {
           id
           ...OpinionUserVote_vote
+          ...UnpublishedTooltip_publishable
           related {
             id
             ... on Opinion {

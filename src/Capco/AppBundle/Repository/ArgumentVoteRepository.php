@@ -6,12 +6,13 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\ArgumentVote;
 
 class ArgumentVoteRepository extends EntityRepository
 {
     public function countByAuthorAndProject(User $author, Project $project): int
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT (DISTINCT v)')
             ->leftJoin('v.argument', 'argument')
             ->leftJoin('argument.opinion', 'o')
@@ -31,7 +32,7 @@ class ArgumentVoteRepository extends EntityRepository
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT (DISTINCT v)')
             ->leftJoin('v.argument', 'argument')
             ->leftJoin('argument.opinion', 'o')
@@ -54,7 +55,7 @@ class ArgumentVoteRepository extends EntityRepository
      */
     public function getEnabledByConsultationStep(ConsultationStep $step, bool $asArray = false)
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
@@ -72,15 +73,14 @@ class ArgumentVoteRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    public function getByArgumentAndUser(Argument $argument, User $author): array
+    public function getByArgumentAndUser(Argument $argument, User $author): ?ArgumentVote
     {
-        $qb = $this->getQueryBuilder()
-            ->andWhere('v.published = true')
+        $qb = $this->createQueryBuilder('v')
             ->andWhere('v.argument = :argument')
             ->andWhere('v.user = :author')
             ->setParameter('argument', $argument)
             ->setParameter('author', $author);
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -88,7 +88,7 @@ class ArgumentVoteRepository extends EntityRepository
      */
     public function getAllByArgument(string $argumentId, bool $asArray = false)
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->addSelect('u', 'ut')
             ->leftJoin('v.user', 'u')
             ->leftJoin('u.userType', 'ut')
@@ -98,7 +98,7 @@ class ArgumentVoteRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    protected function getQueryBuilder()
+    protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('v')->andWhere('v.published = true');
     }
