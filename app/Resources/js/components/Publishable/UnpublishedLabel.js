@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { OverlayTrigger, Glyphicon, Label, Popover } from 'react-bootstrap';
+import { OverlayTrigger, Label, Popover } from 'react-bootstrap';
 import type { UnpublishedLabel_publishable } from './__generated__/UnpublishedLabel_publishable.graphql';
 
 type Props = {
@@ -64,7 +64,7 @@ export class UnpublishedLabel extends React.Component<Props> {
     return (
       <OverlayTrigger placement="top" overlay={overlay}>
         <Label bsStyle="danger">
-          <Glyphicon glyph="delete-2" />
+          <i className="cap cap-delete-2" />{' '}
           <FormattedMessage
             id={
               publishable.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION'

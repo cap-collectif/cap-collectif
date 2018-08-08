@@ -33,10 +33,10 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
     bsClass="label"
     bsStyle="danger"
   >
-    <Glyphicon
-      bsClass="glyphicon"
-      glyph="delete-2"
+    <i
+      className="cap cap-delete-2"
     />
+     
     <FormattedMessage
       id="not-accounted"
       values={Object {}}
@@ -78,10 +78,10 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
     bsClass="label"
     bsStyle="danger"
   >
-    <Glyphicon
-      bsClass="glyphicon"
-      glyph="delete-2"
+    <i
+      className="cap cap-delete-2"
     />
+     
     <FormattedMessage
       id="not-accounted"
       values={Object {}}
@@ -130,10 +130,10 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
     bsClass="label"
     bsStyle="danger"
   >
-    <Glyphicon
-      bsClass="glyphicon"
-      glyph="delete-2"
+    <i
+      className="cap cap-delete-2"
     />
+     
     <FormattedMessage
       id="awaiting-publication"
       values={Object {}}

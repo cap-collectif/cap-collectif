@@ -14,6 +14,10 @@ exports[`<UnpublishedTooltip /> renders when not published because author confir
     id="UnpublishedTooltip"
     placement="right"
   >
+    <i
+      className="cap cap-delete-2"
+    />
+     
     <FormattedMessage
       id="unpublished-Vote"
       values={Object {}}
@@ -36,6 +40,10 @@ exports[`<UnpublishedTooltip /> renders when not published because author is not
     id="UnpublishedTooltip"
     placement="right"
   >
+    <i
+      className="cap cap-delete-2"
+    />
+     
     <FormattedMessage
       id="unpublished-Vote"
       values={Object {}}
@@ -58,6 +66,10 @@ exports[`<UnpublishedTooltip /> renders when not published because author must c
     id="UnpublishedTooltip"
     placement="right"
   >
+    <i
+      className="cap cap-delete-2"
+    />
+     
     <FormattedMessage
       id="voting-pending-publication"
       values={Object {}}
@@ -79,6 +91,11 @@ exports[`<UnpublishedTooltip /> renders when published 1`] = `
     bsClass="tooltip"
     id="UnpublishedTooltip"
     placement="right"
-  />
+  >
+    <i
+      className="cap cap-delete-2"
+    />
+     
+  </Tooltip>
 </Overlay>
 `;
