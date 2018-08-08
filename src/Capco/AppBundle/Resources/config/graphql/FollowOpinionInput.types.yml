@@ -6,5 +6,5 @@ FollowOpinionInput:
         type: 'ID!'
         description: 'The opinion id'
       notifiedOf:
-        type: 'SubscriptionTypeValue'
+        type: 'SubscriptionTypeValue!'
         description: 'The type of notification'

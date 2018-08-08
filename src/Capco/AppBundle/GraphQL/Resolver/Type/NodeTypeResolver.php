@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Type;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
@@ -120,6 +121,9 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof Reply) {
             return $this->typeResolver->resolve('Reply');
+        }
+        if ($node instanceof Follower) {
+            return $this->typeResolver->resolve('Follower');
         }
         if ($node instanceof Requirement) {
             return $this->requirementTypeResolver->__invoke($node);
