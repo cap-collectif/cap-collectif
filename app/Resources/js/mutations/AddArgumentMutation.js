@@ -16,7 +16,6 @@ const mutation = graphql`
         node {
           id
           ...ArgumentItem_argument
-          ...UnpublishedLabel_publishable
         }
       }
       userErrors {

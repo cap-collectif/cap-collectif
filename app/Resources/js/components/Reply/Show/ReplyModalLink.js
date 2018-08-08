@@ -6,6 +6,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
 import type { ReplyModalLink_reply } from './__generated__/ReplyModalLink_reply.graphql';
 import ShowReplyModal from './ShowReplyModal';
+import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 
 type Props = {
   reply: ReplyModalLink_reply,
@@ -44,13 +45,12 @@ export class ReplyModalLink extends React.Component<Props, State> {
             values={{
               date: (
                 <FormattedDate
-                  value={moment(reply.createdAt)}
+                  value={moment(reply.publishedAt ? reply.publishedAt : reply.createdAt)}
                   day="numeric"
                   month="long"
                   year="numeric"
                 />
               ),
-
               time: (
                 <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />
               ),
@@ -62,6 +62,8 @@ export class ReplyModalLink extends React.Component<Props, State> {
               <FormattedMessage id="reply.private" />
             </span>
           )}
+          {/* $FlowFixMe $refType */}
+          <UnpublishedLabel publishable={reply} />
         </ListGroupItem>
         {/* $FlowFixMe $refType */}
         <ShowReplyModal
@@ -83,6 +85,7 @@ export default createFragmentContainer(ReplyModalLink, {
       id
       private
       ...ShowReplyModal_reply
+      ...UnpublishedLabel_publishable
     }
   `,
 });

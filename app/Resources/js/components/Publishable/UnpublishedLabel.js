@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
 import { OverlayTrigger, Glyphicon, Label, Popover } from 'react-bootstrap';
 import type { UnpublishedLabel_publishable } from './__generated__/UnpublishedLabel_publishable.graphql';
 
@@ -15,19 +16,62 @@ export class UnpublishedLabel extends React.Component<Props> {
     if (publishable.published) {
       return null;
     }
-    const overlay = (
-      <Popover
-        id={`publishable-${publishable.id}-not-accounted-popover`}
-        title={publishable.notPublishedReason}>
-        {publishable.notPublishedReason}
-      </Popover>
-    );
+    let overlay = null;
+    if (publishable.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION') {
+      overlay = (
+        <Popover
+          id={`publishable-${publishable.id}-not-accounted-popover`}
+          title={<FormattedMessage id="account-pending-confirmation" />}>
+          <p>
+            <FormattedMessage
+              id="account-pending-confirmation-message"
+              values={{ emailAddress: 'toto@gmail.com', contentType: 'contribution' }}
+            />
+          </p>
+          {publishable.publishableUntil && (
+            <p>
+              <FormattedMessage
+                id="remaining-time"
+                values={{
+                  remainingTime: moment(publishable.publishableUntil).toNow(true),
+                  contentType: 'contribution',
+                }}
+              />
+            </p>
+          )}
+        </Popover>
+      );
+    }
+    if (publishable.notPublishedReason === 'AUTHOR_NOT_CONFIRMED') {
+      overlay = (
+        <Popover
+          id={`publishable-${publishable.id}-not-accounted-popover`}
+          title={<FormattedMessage id="account-not-confirmed-in-time" />}>
+          <FormattedMessage id="account-not-confirmed-in-time-message" />
+        </Popover>
+      );
+    }
+    if (publishable.notPublishedReason === 'AUTHOR_CONFIRMED_TOO_LATE') {
+      overlay = (
+        <Popover
+          id={`publishable-${publishable.id}-not-accounted-popover`}
+          title={<FormattedMessage id="account-confirmed-too-late" />}>
+          <FormattedMessage id="account-confirmed-too-late-message" />
+        </Popover>
+      );
+    }
 
     return (
       <OverlayTrigger placement="top" overlay={overlay}>
         <Label bsStyle="danger">
-          <Glyphicon glyph="star" />
-          <FormattedMessage id="not-accounted" />
+          <Glyphicon glyph="delete-2" />
+          <FormattedMessage
+            id={
+              publishable.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION'
+                ? 'awaiting-publication'
+                : 'not-accounted'
+            }
+          />
         </Label>
       </OverlayTrigger>
     );
@@ -40,6 +84,7 @@ export default createFragmentContainer(UnpublishedLabel, {
       id
       published
       notPublishedReason
+      publishableUntil
     }
   `,
 });

@@ -7,7 +7,13 @@ import { $refType } from '../../mocks';
 
 describe('<UnpublishedLabel />', () => {
   it('renders when published', () => {
-    const publishablePublished = { $refType, id: 'id1', published: true, notPublishedReason: null };
+    const publishablePublished = {
+      $refType,
+      id: 'id1',
+      published: true,
+      publishableUntil: null,
+      notPublishedReason: null,
+    };
     const wrapper = shallow(<UnpublishedLabel publishable={publishablePublished} />);
     expect(wrapper).toMatchSnapshot();
   });
@@ -17,6 +23,7 @@ describe('<UnpublishedLabel />', () => {
       $refType,
       id: 'id1',
       published: false,
+      publishableUntil: null,
       notPublishedReason: 'WAITING_AUTHOR_CONFIRMATION',
     };
     const wrapper = shallow(<UnpublishedLabel publishable={publishableUnublishedWaiting} />);
@@ -28,6 +35,7 @@ describe('<UnpublishedLabel />', () => {
       $refType,
       id: 'id1',
       published: false,
+      publishableUntil: null,
       notPublishedReason: 'AUTHOR_NOT_CONFIRMED',
     };
     const wrapper = shallow(<UnpublishedLabel publishable={publishableUnublishedNotConfirmed} />);
@@ -39,6 +47,7 @@ describe('<UnpublishedLabel />', () => {
       $refType,
       id: 'id1',
       published: false,
+      publishableUntil: null,
       notPublishedReason: 'AUTHOR_CONFIRMED_TOO_LATE',
     };
     const wrapper = shallow(<UnpublishedLabel publishable={publishableUnublishedTooLate} />);

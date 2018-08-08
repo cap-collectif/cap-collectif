@@ -10,6 +10,8 @@ interface Publishable
     public function getPublishedAt(): ?\DateTime;
     public function setPublishedAt(\DateTime $date);
 
+    public function getPublishableUntil(): ?\DateTime;
+
     // A publishable must have an author
     public function getAuthor();
 

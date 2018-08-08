@@ -33,4 +33,9 @@ trait PublishableTrait
     {
         return $this->publishedAt;
     }
+
+    public function getPublishableUntil(): ?\DateTime
+    {
+        return $this->getStep() ? $this->getStep()->getEndAt() : null;
+    }
 }

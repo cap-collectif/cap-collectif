@@ -9,6 +9,7 @@ import { ListGroupItem } from 'react-bootstrap';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
+import UnpublishedLabel from '../Publishable/UnpublishedLabel';
 import type { ArgumentItem_argument } from './__generated__/ArgumentItem_argument.graphql';
 
 type Props = {
@@ -51,6 +52,8 @@ class ArgumentItem extends React.Component<Props> {
               <UserLink user={argument.author} />
             </p>
             {this.renderDate()}
+            {/* $FlowFixMe */}
+            <UnpublishedLabel publishable={argument} />
           </div>
           <p
             className="opinion__text"
@@ -74,6 +77,7 @@ export default createFragmentContainer(
   graphql`
     fragment ArgumentItem_argument on Argument
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+      ...UnpublishedLabel_publishable
       id
       createdAt
       publishedAt

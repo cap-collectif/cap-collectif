@@ -51,6 +51,20 @@ final class ArgumentVoteType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
+                'publishableUntil' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishableUntil();
+                    },
+                    'description' => 'Identifies when the entity can no more be published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'publishedAt' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
@@ -72,7 +86,7 @@ final class ArgumentVoteType extends ObjectType implements GeneratedTypeInterfac
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
                     },
-                    'description' => 'Reason that the entity was not published.',
+                    'description' => 'Reason that the entity is not published.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

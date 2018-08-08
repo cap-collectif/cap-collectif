@@ -186,10 +186,13 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # `true` if the contribution is trashed.
@@ -272,10 +275,13 @@ type ArgumentVote implements Publishable {
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # The author of the contribution. If null, account has been deleted.
@@ -634,10 +640,13 @@ type Comment implements Node & Publishable & Contribution {
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # `true` if the contribution is trashed.
@@ -1561,10 +1570,13 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # `true` if the contribution is trashed.
@@ -1664,10 +1676,13 @@ type OpinionVote implements Publishable & YesNoPairedVote {
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # The author of the contribution. If null, account has been deleted.
@@ -1901,10 +1916,13 @@ type Proposal implements Node & Contribution & Publishable & Reportable & Trasha
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # `true` if the contribution is trashed.
@@ -2282,10 +2300,13 @@ type ProposalVote implements Publishable {
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # The author of the contribution. If null, the vote is anonymous.
@@ -2346,10 +2367,13 @@ interface Publishable {
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 }
 
@@ -2570,10 +2594,13 @@ type Reply implements Node & Publishable & Contribution {
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
   private: Boolean!
   createdAt: DateTime!
@@ -2987,10 +3014,13 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # `true` if the contribution is trashed.
@@ -3075,10 +3105,13 @@ type SourceVote implements Publishable {
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # The author of the contribution. If null, account has been deleted.
@@ -3780,10 +3813,13 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # `true` if the contribution is trashed.
@@ -3890,10 +3926,13 @@ type VersionVote implements Publishable & YesNoPairedVote {
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # The author of the contribution.
@@ -3978,10 +4017,13 @@ interface YesNoPairedVote {
   # `true` if the object is published.
   published: Boolean!
 
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
   # Identifies when the entity was published at.
   publishedAt: DateTime
 
-  # Reason that the entity was not published.
+  # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
   # The author of the contribution.

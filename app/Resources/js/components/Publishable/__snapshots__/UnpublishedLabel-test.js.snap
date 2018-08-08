@@ -8,9 +8,17 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
       bsClass="popover"
       id="publishable-id1-not-accounted-popover"
       placement="right"
-      title="AUTHOR_CONFIRMED_TOO_LATE"
+      title={
+        <FormattedMessage
+          id="account-confirmed-too-late"
+          values={Object {}}
+        />
+      }
     >
-      AUTHOR_CONFIRMED_TOO_LATE
+      <FormattedMessage
+        id="account-confirmed-too-late-message"
+        values={Object {}}
+      />
     </Popover>
   }
   placement="top"
@@ -27,7 +35,7 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
   >
     <Glyphicon
       bsClass="glyphicon"
-      glyph="star"
+      glyph="delete-2"
     />
     <FormattedMessage
       id="not-accounted"
@@ -45,9 +53,17 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
       bsClass="popover"
       id="publishable-id1-not-accounted-popover"
       placement="right"
-      title="AUTHOR_NOT_CONFIRMED"
+      title={
+        <FormattedMessage
+          id="account-not-confirmed-in-time"
+          values={Object {}}
+        />
+      }
     >
-      AUTHOR_NOT_CONFIRMED
+      <FormattedMessage
+        id="account-not-confirmed-in-time-message"
+        values={Object {}}
+      />
     </Popover>
   }
   placement="top"
@@ -64,7 +80,7 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
   >
     <Glyphicon
       bsClass="glyphicon"
-      glyph="star"
+      glyph="delete-2"
     />
     <FormattedMessage
       id="not-accounted"
@@ -82,9 +98,24 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
       bsClass="popover"
       id="publishable-id1-not-accounted-popover"
       placement="right"
-      title="WAITING_AUTHOR_CONFIRMATION"
+      title={
+        <FormattedMessage
+          id="account-pending-confirmation"
+          values={Object {}}
+        />
+      }
     >
-      WAITING_AUTHOR_CONFIRMATION
+      <p>
+        <FormattedMessage
+          id="account-pending-confirmation-message"
+          values={
+            Object {
+              "contentType": "contribution",
+              "emailAddress": "toto@gmail.com",
+            }
+          }
+        />
+      </p>
     </Popover>
   }
   placement="top"
@@ -101,10 +132,10 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
   >
     <Glyphicon
       bsClass="glyphicon"
-      glyph="star"
+      glyph="delete-2"
     />
     <FormattedMessage
-      id="not-accounted"
+      id="awaiting-publication"
       values={Object {}}
     />
   </Label>
