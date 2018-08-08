@@ -4,9 +4,5 @@ FollowProposalPayload:
     fields:
       proposal:
         type: 'Proposal'
-      follower:
-        type: 'User'
       followerEdge:
         type: 'FollowerEdge'
-      value:
-        type: 'SubscriptionTypeValue'

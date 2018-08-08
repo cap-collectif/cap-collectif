@@ -1184,9 +1184,7 @@ input FollowOpinionInput {
 
 type FollowOpinionPayload {
   opinion: Opinion
-  follower: User
   followerEdge: FollowerEdge
-  value: SubscriptionTypeValue
   clientMutationId: String
 }
 
@@ -1201,9 +1199,7 @@ input FollowProposalInput {
 
 type FollowProposalPayload {
   proposal: Proposal
-  follower: User
   followerEdge: FollowerEdge
-  value: SubscriptionTypeValue
   clientMutationId: String
 }
 
