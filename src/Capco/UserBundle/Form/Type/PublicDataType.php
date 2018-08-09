@@ -32,7 +32,7 @@ class PublicDataType extends AbstractType
             ->add('website', 'url')
             ->add('biography', 'textarea');
         if ($this->toggleManager->isActive('user_type')) {
-            $builder->add('userType', null, ['empty_data' => 'user.profile.edit.no_user_type']);
+            $builder->add('userType', null, ['empty_data' => null, 'required' => false]);
         }
     }
 

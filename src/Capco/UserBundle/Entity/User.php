@@ -1123,7 +1123,7 @@ class User extends BaseUser
         return $this->userType;
     }
 
-    public function setUserType(UserType $userType): self
+    public function setUserType(?UserType $userType = null): self
     {
         $this->userType = $userType;
 
