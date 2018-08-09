@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, FormattedMessage } from 'react-intl';
-import { type FieldArrayProps, Field } from 'redux-form';
-import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
-import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
+import {type IntlShape, FormattedMessage} from 'react-intl';
+import {type FieldArrayProps, Field} from 'redux-form';
+import type {QuestionTypeValue} from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
+import type {LogicJumpConditionOperator} from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
@@ -20,6 +20,7 @@ type Question = {|
   +description: ?string,
   +jumps: ?$ReadOnlyArray<?{|
     +id: string,
+    +always: boolean,
     +destination: {|
       +id: string,
       +title: string,
@@ -100,42 +101,139 @@ type SubmitResponses = $ReadOnlyArray<{
   medias?: ?$ReadOnlyArray<string>,
 }>;
 
+const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
+
+  const firstLogicQuestion = questions.find(question => question.jumps.length > 0 && question.position >= afterQuestion.position);
+  let firstQuestionsIds = [];
+  if (firstLogicQuestion) {
+    const filteredIds = questions.filter(question => (question.required) || (question.jumps.length === 0 &&
+      question.position > afterQuestion.position &&
+      question.position < firstLogicQuestion.position)
+    )
+      .map(question => question.id);
+    firstLogicQuestion.jumps.some(jump => {
+      if (jump.always) {
+        filteredIds.push(jump.destination.id)
+      }
+      return jump.always
+    })
+    firstQuestionsIds = [firstLogicQuestion.id, ...filteredIds];
+  } else {
+    firstQuestionsIds = questions.filter(question => (question.position > afterQuestion.position)).map(question => question.id);
+  }
+  const questionsWithJumpsIds = [];
+  if (responses) {
+    responses.forEach(response => {
+      if (response.value) {
+        const question = questions.find(q => q.id === response.question)
+        if (question.jumps.length > 0) {
+          question.jumps.some(jump => {
+            const conditions = jump.conditions.map(condition => {
+              const search = responses
+                .filter(Boolean)
+                .find(
+                  r => condition && condition.question && r.question === condition.question.id,
+                );
+              const userResponse = search && search.value;
+              return condition.operator === 'IS'
+                ? condition.value.title === userResponse
+                : condition.value.title !== userResponse;
+            });
+            const conditionResult = jump.always || conditions.every(condition => condition === true);
+            if (conditionResult) {
+              const questionWithJump = questions.find(q => q.id === jump.destination.id)
+              questionsWithJumpsIds.push(questionWithJump.id)
+            }
+            return conditionResult;
+          })
+        }
+      }
+    })
+  }
+
+  return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
+
+}
+
+const getAvailableQuestionsIds = (questions, responses) => {
+
+  const firstLogicQuestion = questions.find(question => question.jumps.length > 0);
+  const firstLogicQuestionId = firstLogicQuestion.id;
+  const filteredIds = questions.filter(question => (question.required) || (question.jumps.length === 0 && question.position < firstLogicQuestion.position)).map(question => question.id);
+  const firstQuestionsIds = [firstLogicQuestionId, ...filteredIds];
+  const questionsWithJumpsIds = [];
+
+  if (responses) {
+    responses.forEach(response => {
+      if (response.value) {
+        const question = questions.find(q => q.id === response.question)
+        if (question.jumps.length > 0) {
+          question.jumps.some(jump => {
+            const conditions = jump.conditions.map(condition => {
+              const search = responses
+                .filter(Boolean)
+                .find(
+                  r => condition && condition.question && r.question === condition.question.id,
+                );
+              const userResponse = search && search.value;
+              return condition.operator === 'IS'
+                ? condition.value.title === userResponse
+                : condition.value.title !== userResponse;
+            });
+            const conditionResult = jump.always || conditions.every(condition => condition === true);
+            if (conditionResult) {
+              const questionWithJump = questions.find(q => q.id === jump.destination.id)
+              questionsWithJumpsIds.push(
+                ...getAvailableQuestionsIdsAfter(questionWithJump, questions, responses)
+              )
+            }
+            return conditionResult;
+          })
+        }
+      }
+    })
+  }
+
+  return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
+}
+
+
 export const formatSubmitResponses = (
   responses: ?ResponsesInReduxForm,
   questions: Questions,
 ): SubmitResponses => {
   if (!responses) return [];
+  const answeredQuestionsIds = getAvailableQuestionsIds(questions, responses);
   return responses.map(res => {
-    const { type: questionType } = questions.filter(q => res.questionId === q.id)[0];
-    const question = res.questionId;
+    const question = questions.filter(q => res.question === q.id)[0];
+    const { type: questionType } = question;
+
     if (questionType === 'medias') {
+      const medias = answeredQuestionsIds.includes(question.id) ? Array.isArray(res.value) ? res.value.map(value => value.id) : [] : null
       return {
-        question,
-        medias: Array.isArray(res.value) ? res.value.map(value => value.id) : [],
+        question: res.question,
+        medias
       };
     }
-
+    let value = res.value;
     if (questionType === 'ranking' || questionType === 'button') {
-      const value = JSON.stringify({
-        labels: Array.isArray(res.value) ? res.value : [res.value],
-        other: null,
-      });
-      return {
-        question,
-        value,
-      };
+      value = answeredQuestionsIds.includes(question.id) ? JSON.stringify({
+          labels: Array.isArray(res.value) ? res.value : [res.value],
+          other: null,
+        }) : null
     } else if (questionType === 'checkbox' || questionType === 'radio') {
-      return {
-        question,
-        value: JSON.stringify(res.value),
-      };
+      value = answeredQuestionsIds.includes(question.id) ? JSON.stringify(res.value) : null;
     } else if (questionType === 'number') {
       return {
-        question,
+        question: res.question,
         value: res.value,
       };
     }
-    return { value: res.value, question };
+    if (typeof value === 'string') {
+      value = answeredQuestionsIds.includes(question.id) ? value : null
+      return {value, question: res.question};
+    }
+    return {value: null, question: res.question};
   });
 };
 
@@ -322,41 +420,13 @@ export const renderResponses = ({
   }, false);
 
   if (hasLogicJumps) {
+    const final = getAvailableQuestionsIds(questions, responses)
     return (
       <div>
         {fields.map((member, index) => {
           const field = questions[index];
-          let response = responses ? responses[index] : null;
-          if (response && field.jumps.length > 0 && response.value) {
-            console.log('y a des logics jumps ici pour la question ', field);
-            field.jumps.some(jump => {
-              const conditions = jump.conditions.map(condition => {
-                console.log(
-                  `CONDITION : ${condition.question.title} ${condition.operator} ${
-                    condition.value.title
-                  }`,
-                );
-                const search = responses
-                  .filter(Boolean)
-                  .find(
-                    r => condition && condition.question && r.question === condition.question.id,
-                  );
-                const userResponse = search && search.value;
-                console.log('USER RESPONSE : ', userResponse);
-                return condition.operator === 'IS'
-                  ? condition.value.title === userResponse
-                  : condition.value.title !== userResponse;
-              });
-              const conditionResult = conditions.every(condition => condition === true);
-              if (conditionResult) {
-                console.log(
-                  `Tu as satisfait la/les condition(s), tu dois désormais te tp à la question ${
-                    jump.destination.title
-                  } (${jump.destination.id})`,
-                );
-              }
-              return conditionResult;
-            });
+          if (!final.includes(field.id)) {
+            return;
           }
           const inputType = field.type || 'text';
           const isOtherAllowed = field.isOtherAllowed;
@@ -364,18 +434,18 @@ export const renderResponses = ({
           const labelAppend = field.required
             ? strategy === 'minority_required'
               ? ` <span class="warning small"> ${intl.formatMessage({
-                  id: 'global.mandatory',
-                })}</span>`
+                id: 'global.mandatory',
+              })}</span>`
               : ''
             : strategy === 'majority_required' || strategy === 'half_required'
               ? ` <span class="excerpt small"> ${intl.formatMessage({
-                  id: 'global.optional',
-                })}</span>`
+                id: 'global.optional',
+              })}</span>`
               : '';
 
           const labelMessage = field.title + labelAppend;
 
-          const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
+          const label = <span dangerouslySetInnerHTML={{__html: labelMessage}}/>;
 
           switch (inputType) {
             case 'medias': {
@@ -410,7 +480,7 @@ export const renderResponses = ({
                     label={label}
                     disabled={disabled}>
                     <option value="" disabled>
-                      {<FormattedMessage id="global.select" />}
+                      {<FormattedMessage id="global.select"/>}
                     </option>
                     {field.choices.map(choice => (
                       <option key={choice.id} value={choice.title}>
@@ -491,18 +561,18 @@ export const renderResponses = ({
         const labelAppend = field.required
           ? strategy === 'minority_required'
             ? ` <span class="warning small"> ${intl.formatMessage({
-                id: 'global.mandatory',
-              })}</span>`
+              id: 'global.mandatory',
+            })}</span>`
             : ''
           : strategy === 'majority_required' || strategy === 'half_required'
             ? ` <span class="excerpt small"> ${intl.formatMessage({
-                id: 'global.optional',
-              })}</span>`
+              id: 'global.optional',
+            })}</span>`
             : '';
 
         const labelMessage = field.title + labelAppend;
 
-        const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
+        const label = <span dangerouslySetInnerHTML={{__html: labelMessage}}/>;
 
         switch (inputType) {
           case 'section': {
@@ -545,7 +615,7 @@ export const renderResponses = ({
                   label={label}
                   disabled={disabled}>
                   <option value="" disabled>
-                    {<FormattedMessage id="global.select" />}
+                    {<FormattedMessage id="global.select"/>}
                   </option>
                   {field.choices.map(choice => (
                     <option key={choice.id} value={choice.title}>
