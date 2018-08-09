@@ -345,64 +345,64 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal27
     title: Operation génétique pour avoir la force
     body: <p><text(100)></p>
-    enabled: false
     author: '@user1'
     proposalForm: '@proposalform9'
     reference: 10
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
   proposal28:
     id: proposal28
     title: Transfusion de midi-chloriens
     body: <p><text(100)></p>
-    enabled: false
     draft: true
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 11
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
   proposal29:
     id: proposal29
     title: Annuler les prochains Star-Wars
     body: <p><text(100)></p>
-    enabled: true
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 666
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
   proposal30:
     id: proposal30
     title: Trouver un anti dote à la force
     body: <p><text(100)></p>
-    enabled: true
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 667
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
   proposal31:
     id: proposal31
     title: Minus et Cortex
     body: <p><text(100)></p>
-    enabled: true
     author: '@user5'
     proposalForm: '@proposalform10'
     reference: 42
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
   proposal32:
     id: proposal32
     title: Les chats
     body: <p><text(100)></p>
-    enabled: true
     author: '@user2'
     proposalForm: '@proposalform10'
     reference: 44
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
   proposal33:
     id: proposal33
     title: Batman
     body: <p><text(100)></p>
-    enabled: true
     author: '@user4'
     proposalForm: '@proposalform10'
     reference: 43
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
   proposal34:
     id: proposal34
     title: Quel type de bière ?
     body: <p><text(100)></p>
-    enabled: true
     author: '@user1'
     proposalForm: '@proposalform11'
     reference: 45
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'

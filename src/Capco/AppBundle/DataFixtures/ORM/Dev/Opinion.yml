@@ -4,6 +4,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion1'
     step: '@cstep1'
     title: Opinion 1
+    createdAt: <dateTimeBetween("-2 days", "now")>
     publishedAt: <dateTimeBetween("-2 days", "now")>
     body: On va bientôt me mettre à la corbeille
     Author: '@user1'
@@ -13,6 +14,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion2'
     step: '@cstep1'
     title: Opinion 2
+    createdAt: <dateTimeBetween("-2 days", "now")>
     publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>
@@ -68,7 +70,7 @@ Capco\AppBundle\Entity\Opinion:
       <p><text(100)></p>
       <p><text(300)></p>
     pinned: <boolean()>
-    Author: '@user_not_confirmed_with_contributions_to_be_expired'
+    Author: '@user_not_confirmed_with_contributions'
     OpinionType: '@opinionType<numberBetween(9, 10)>'
 
   opinion51:
