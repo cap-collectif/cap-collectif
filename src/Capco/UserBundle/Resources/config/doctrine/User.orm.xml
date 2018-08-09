@@ -149,7 +149,7 @@
         <one-to-many target-entity="Capco\AppBundle\Entity\Proposal" mapped-by="author" field="proposals">
 
         </one-to-many>
-        <one-to-many target-entity="Capco\AppBundle\Entity\Follower" mapped-by="user" field="followingContributions">
+        <one-to-many target-entity="Capco\AppBundle\Entity\Follower" mapped-by="user" field="followingProposals">
             <cascade>
                 <cascade-persist/>
                 <cascade-remove/>

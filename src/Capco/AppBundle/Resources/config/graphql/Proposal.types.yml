@@ -1,6 +1,6 @@
 Proposal:
   type: object
-  inherits: [Node, Contribution, Publishable, Reportable, Trashable, WithFollowers]
+  inherits: [Node, Contribution, Publishable, Reportable, Trashable]
   config:
     description: 'A budget contribution'
     interfaces: [Node, Contribution, Publishable, Reportable, Trashable]
@@ -198,14 +198,42 @@ Proposal:
             type: 'Int'
             description: 'Returns the last n elements from the list.'
         resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowersResolver", [value, args])'
+        description: 'Array of users following proposal.'
+      followerConnection:
+        type: 'FollowerConnection!'
+        args:
+          orderBy:
+            type: 'String'
+            description: 'Ordering options for followers returning from the connection'
+          after:
+            type: 'String'
+            description: 'Returns the elements in the list that come after the specified global ID.'
+          first:
+            type: 'Int'
+            defaultValue: 32
+            description: 'Returns the first n elements from the list.'
+          before:
+            type: 'String'
+            description:
+              'Returns the elements in the list that come before the specified global ID.'
+          last:
+            type: 'Int'
+            description: 'Returns the last n elements from the list.'
+        resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowerConnection", [value, args])'
       viewerIsFollowing:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'Boolean!'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, getUser()])'
         description: 'View follow current proposal'
-      viewerFollowingConfiguration:
+      followerConfiguration:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'Follower'
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationProposalResolver", [value, getUser()])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowerProposalResolver", [value, getUser()])'
+        description: 'Kind of follow'
       postsCount:
         type: 'Int!'
         resolve: "@=resolver('proposal_posts_count', [value])"

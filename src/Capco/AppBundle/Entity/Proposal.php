@@ -17,7 +17,6 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Traits\CommentableTrait;
-use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
@@ -72,7 +71,6 @@ class Proposal
     use DraftableTrait;
     use HasResponsesTrait;
     use PublishableTrait;
-    use FollowableTrait;
 
     const STATE_DRAFT = 'draft';
     const STATE_ENABLED = 'published';
@@ -1054,6 +1052,34 @@ class Proposal
         return $this;
     }
 
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(Follower $follower): self
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers[] = $follower;
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(Follower $follower): self
+    {
+        $this->followers->removeElement($follower);
+
+        return $this;
+    }
+
+    public function setFollowers(Collection $followers): self
+    {
+        $this->followers = $followers;
+
+        return $this;
+    }
+
     public function isIndexable(): bool
     {
         return $this->enabled && !$this->expired && !$this->isDraft() && !$this->isDeleted();
@@ -1067,5 +1093,15 @@ class Proposal
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch'];
+    }
+
+    public function hasFollowers(): bool
+    {
+        return \count($this->followers) > 0;
+    }
+
+    public function countFollowers(): int
+    {
+        return \count($this->followers);
     }
 }

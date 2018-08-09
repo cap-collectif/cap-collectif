@@ -14,7 +14,7 @@ type Props = {
 export class ProposalAdminFollowers extends React.Component<Props> {
   render() {
     const { proposal, intl } = this.props;
-    const totalCount = proposal.allFollowers ? proposal.allFollowers.totalCount : 0;
+    const totalCount = proposal.allFollowers.totalCount;
     const isAdmin = true;
     return (
       <div className="box box-primary container-fluid">
@@ -90,7 +90,7 @@ export default createFragmentContainer(
     fragment ProposalAdminFollowers_proposal on Proposal {
       ...ProposalPageFollowers_proposal @arguments(count: $count, cursor: $cursor)
       id
-      allFollowers: followers(first: 0) {
+      allFollowers: followerConnection(first: 0) {
         totalCount
       }
     }

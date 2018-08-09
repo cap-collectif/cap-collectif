@@ -28,17 +28,17 @@ class Project implements IndexableInterface
 {
     use UuidTrait, MetaDescriptionCustomCodeTrait, ProjectVisibilityTrait;
 
-    public const FILTER_ALL = 'all';
+    const FILTER_ALL = 'all';
 
-    public const SORT_ORDER_PUBLISHED_AT = 0;
-    public const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
+    const SORT_ORDER_PUBLISHED_AT = 0;
+    const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
-    public const OPENING_STATUS_FUTURE = 0;
-    public const OPENING_STATUS_OPENED = 1;
-    public const OPENING_STATUS_ENDED = 2;
+    const OPENING_STATUS_FUTURE = 0;
+    const OPENING_STATUS_OPENED = 1;
+    const OPENING_STATUS_ENDED = 2;
 
-    public const OPINION_TERM_OPINION = 0;
-    public const OPINION_TERM_ARTICLE = 1;
+    const OPINION_TERM_OPINION = 0;
+    const OPINION_TERM_ARTICLE = 1;
 
     public static $sortOrder = [
         'date' => self::SORT_ORDER_PUBLISHED_AT,
@@ -143,7 +143,7 @@ class Project implements IndexableInterface
     /**
      * @ORM\Column(name="video", type="string", nullable = true)
      */
-    private $video;
+    private $video = null;
 
     /**
      * @var
@@ -183,14 +183,14 @@ class Project implements IndexableInterface
      *
      * @ORM\Column(name="opinions_ranking_threshold", type="integer", nullable=true)
      */
-    private $opinionsRankingThreshold;
+    private $opinionsRankingThreshold = null;
 
     /**
      * @var int
      *
      * @ORM\Column(name="versions_ranking_threshold", type="integer", nullable=true)
      */
-    private $versionsRankingThreshold;
+    private $versionsRankingThreshold = null;
 
     /**
      * @ORM\Column(name="include_author_in_ranking", type="boolean")
@@ -214,10 +214,8 @@ class Project implements IndexableInterface
     private $visibility = ProjectVisibilityMode::VISIBILITY_ME;
 
     /**
-     * @ORM\Column(name="opinion_can_be_followed", type="boolean", nullable=false, options={"default": false})
+     * Constructor.
      */
-    private $opinionCanBeFollowed = false;
-
     public function __construct()
     {
         $this->themes = new ArrayCollection();
@@ -970,17 +968,5 @@ class Project implements IndexableInterface
     public function isPublic(): bool
     {
         return ProjectVisibilityMode::VISIBILITY_PUBLIC === $this->getVisibility();
-    }
-
-    public function isOpinionCanBeFollowed(): bool
-    {
-        return $this->opinionCanBeFollowed;
-    }
-
-    public function setOpinionCanBeFollowed(bool $opinionCanBeFollowed = false): self
-    {
-        $this->opinionCanBeFollowed = $opinionCanBeFollowed;
-
-        return $this;
     }
 }

@@ -227,6 +227,11 @@ services:
       - { name: overblog_graphql.mutation, alias: 'updateProposalForm', method: 'update' }
       - {
           name: overblog_graphql.mutation,
+          alias: 'changeProposalFormParameters',
+          method: 'changeParameters',
+        }
+      - {
+          name: overblog_graphql.mutation,
           alias: 'updateProposalFormNotificationsConfiguration',
           method: 'updateNotificationsConfiguration',
         }

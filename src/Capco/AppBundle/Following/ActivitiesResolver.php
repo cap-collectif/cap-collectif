@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Following;
 
 use Capco\AppBundle\Entity\Follower;
@@ -60,11 +61,7 @@ class ActivitiesResolver
             }
             if (!filter_var($user->getEmailCanonical(), FILTER_VALIDATE_EMAIL)) {
                 $this->logger->error(
-                    sprintf(
-                        '%s doesn\'t have a valid email %s',
-                        $user->getUsername(),
-                        $user->getEmailCanonical()
-                    )
+                    sprintf('%s doesn\'t have a valid email %s', $user->getUsername(), $user->getEmailCanonical())
                 );
                 continue;
             }
@@ -86,10 +83,7 @@ class ActivitiesResolver
                 $followersWithActivities[$userId] = $userActivity;
                 continue;
             }
-            $followersWithActivities[$userId]->addUserProposal(
-                $proposalId,
-                $follower->getNotifiedOf()
-            );
+            $followersWithActivities[$userId]->addUserProposal($proposalId, $follower->getNotifiedOf());
         }
 
         return $followersWithActivities;
@@ -132,21 +126,14 @@ class ActivitiesResolver
                     $proposalId
                 );
                 $currentProposal['title'] = $proposal->getTitle();
-                $currentProposal['link'] = $proposal->getProject()
-                    ? $this->router->generate(
-                        'app_project_show_proposal',
-                        [
-                            'projectSlug' => $proposal->getProject()->getSlug(),
-                            'stepSlug' => $proposal->getStep()->getSlug(),
-                            'proposalSlug' => $proposal->getSlug(),
-                        ],
-                        UrlGeneratorInterface::ABSOLUTE_URL
-                    )
-                    : $this->router->generate(
-                        'app_homepage',
-                        [],
-                        UrlGeneratorInterface::ABSOLUTE_URL
-                    );
+                $currentProposal['link'] = $proposal->getProject() ? $this->router->generate(
+                    'app_project_show_proposal', [
+                        'projectSlug' => $proposal->getProject()->getSlug(),
+                        'stepSlug' => $proposal->getStep()->getSlug(),
+                        'proposalSlug' => $proposal->getSlug(),
+                    ],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                ) : $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
                 $currentProposal['isUpdated'] = $proposal->isUpdatedInLastInterval(
                     $yesterdayLasTime,
                     $twentyFourHoursInterval
@@ -156,15 +143,10 @@ class ActivitiesResolver
                     $twentyFourHoursInterval
                 );
                 $currentProposal['comments'] = (int) $proposalCommentYesterdays[0]['countComment'];
-                $currentProposal['votes'] =
-                    $proposalVotesInYesterday[0]['sVotes'] + $proposalVotesInYesterday[0]['cVotes'];
-                $currentProposal['lastStep'] = !empty($proposalStepInYesterday)
-                    ? $proposalStepInYesterday[0]
-                    : false;
+                $currentProposal['votes'] = $proposalVotesInYesterday[0]['sVotes'] + $proposalVotesInYesterday[0]['cVotes'];
+                $currentProposal['lastStep'] = !empty($proposalStepInYesterday) ? $proposalStepInYesterday[0] : false;
                 $currentProposal['projectId'] = $proposal->getProject()->getId();
-                $currentProposal['countActivities'] = $this->countProposalActivities(
-                    $currentProposal
-                );
+                $currentProposal['countActivities'] = $this->countProposalActivities($currentProposal);
                 if (0 === $currentProposal['countActivities']) {
                     unset($currentProposal);
                 } else {
@@ -178,10 +160,8 @@ class ActivitiesResolver
         return $proposalActivities;
     }
 
-    public function getMatchingActivitiesByUserId(
-        array $activitiesByUserId,
-        array $proposalActivities
-    ): array {
+    public function getMatchingActivitiesByUserId(array $activitiesByUserId, array $proposalActivities): array
+    {
         /** @var UserActivity $userActivity * */
         foreach ($activitiesByUserId as $userId => $userActivity) {
             if (!$userActivity->hasProposal()) {
@@ -197,11 +177,11 @@ class ActivitiesResolver
                     }
                     $project = $this->projectRepository->find($proposal['projectId']);
                     if ($project) {
-                        if (FollowerNotifiedOfInterface::MINIMAL === $notifiedOf) {
+                        if (FollowerNotifiedOfInterface::DEFAULT === $notifiedOf) {
                             $proposal['comments'] = self::NOT_FOLLOWED;
                             $proposal['votes'] = self::NOT_FOLLOWED;
                         }
-                        if (FollowerNotifiedOfInterface::ESSENTIAL === $notifiedOf) {
+                        if (FollowerNotifiedOfInterface::DEFAULT_AND_COMMENTS === $notifiedOf) {
                             $proposal['votes'] = self::NOT_FOLLOWED;
                         }
 

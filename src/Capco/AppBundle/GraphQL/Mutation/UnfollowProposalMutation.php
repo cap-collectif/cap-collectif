@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Follower;
@@ -16,11 +17,8 @@ class UnfollowProposalMutation
     private $proposalRepository;
     private $followerRepository;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        ProposalRepository $proposalRepository,
-        FollowerRepository $followerRepository
-    ) {
+    public function __construct(EntityManagerInterface $em, ProposalRepository $proposalRepository, FollowerRepository $followerRepository)
+    {
         $this->em = $em;
         $this->proposalRepository = $proposalRepository;
         $this->followerRepository = $followerRepository;
@@ -51,15 +49,12 @@ class UnfollowProposalMutation
     protected function unfollowAProposal(Proposal $proposal, User $user)
     {
         /** @var Follower $follower */
-        $follower = $this->followerRepository->findOneBy([
-            'user' => $user,
-            'proposal' => $proposal,
-        ]);
+        $follower = $this->followerRepository->findBy(['user' => $user, 'proposal' => $proposal]);
 
         if (!$follower) {
             throw new UserError('Cant find the follower');
         }
-
+        $follower = $follower[0];
         $this->em->remove($follower);
     }
 }

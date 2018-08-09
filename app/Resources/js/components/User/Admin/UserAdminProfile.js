@@ -60,10 +60,11 @@ const validate = (values: Object) => {
     'username',
   ];
   fields.forEach(value => {
-    if (value === 'username') {
-      if (!values[value] || values[value].length === 0) {
-        errors[value] = 'fill-field';
-      }
+    if ((value === 'username' && !values[value]) || values[value].length === 0) {
+      errors[value] = 'fill-field';
+    }
+    if ((value === 'userType' && !values[value]) || values[value].length === 0) {
+      values[value] = null;
     }
     if (values[value] && values[value].length <= 2) {
       errors[value] = 'two-characters-minimum-required';
@@ -87,6 +88,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     ...values,
     media,
     userId,
+    userType: values.userType || null,
   };
 
   return UpdateProfilePublicDataMutation.commit({ input })

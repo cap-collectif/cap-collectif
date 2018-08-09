@@ -11,14 +11,16 @@ Scenario: GraphQL client wants to update follow a proposal with current user
       updateFollowProposal(input: $input) {
         proposal {
           id
-          viewerFollowingConfiguration
+          followerConfiguration{
+            notifiedOf
+          }
         }
       }
     }",
     "variables": {
       "input": {
         "proposalId": "proposal1",
-        "notifiedOf": "MINIMAL"
+        "notifiedOf": "DEFAULT"
       }
     }
   }
@@ -30,7 +32,9 @@ Scenario: GraphQL client wants to update follow a proposal with current user
       "updateFollowProposal": {
         "proposal": {
           "id": "proposal1",
-          "viewerFollowingConfiguration": "MINIMAL"
+          "followerConfiguration":{
+            "notifiedOf":"DEFAULT"
+          }
         }
       }
     }

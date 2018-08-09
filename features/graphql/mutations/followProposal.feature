@@ -11,14 +11,16 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
       followProposal(input: $input) {
         proposal {
           id
-          viewerFollowingConfiguration
+          followerConfiguration{
+            notifiedOf
+          }
         }
       }
     }",
     "variables": {
       "input": {
         "proposalId": "proposal8",
-        "notifiedOf": "MINIMAL"
+        "notifiedOf": "DEFAULT"
       }
     }
   }
@@ -30,7 +32,9 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
       "followProposal": {
         "proposal": {
           "id": "proposal8",
-          "viewerFollowingConfiguration": "MINIMAL"
+          "followerConfiguration":{
+            "notifiedOf":"DEFAULT"
+          }
         }
       }
     }
@@ -94,7 +98,7 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
     "variables": {
       "input": {
         "proposalId": "proposal8",
-        "notifiedOf": "MINIMAL"
+        "notifiedOf": "DEFAULT"
       }
     }
   }

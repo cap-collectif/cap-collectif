@@ -12,7 +12,6 @@ Capco\AppBundle\Entity\Project:
     opinionsRankingThreshold: 60
     versionsRankingThreshold: 20
     visibility: 2
-    opinionCanBeFollowed: true
   p2:
     id: 'project2'
     title: Stratégie technologique de l'Etat et services publics

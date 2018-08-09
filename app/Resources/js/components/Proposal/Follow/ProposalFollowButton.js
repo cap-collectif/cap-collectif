@@ -41,8 +41,8 @@ export class ProposalFollowButton extends React.Component<Props, State> {
   changeFollowType(proposal: ProposalFollowButton_proposal, type: string) {
     if (
       proposal.viewerIsFollowing &&
-      proposal.viewerFollowingConfiguration !== null &&
-      typeof proposal.viewerFollowingConfiguration !== 'undefined'
+      proposal.followerConfiguration !== null &&
+      typeof proposal.followerConfiguration !== 'undefined'
     ) {
       return UpdateFollowProposalMutation.commit({
         input: {
@@ -63,7 +63,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
             className="btn btn-default proposal__button__follow"
             onClick={() => {
               return FollowProposalMutation.commit({
-                input: { proposalId: proposal.id, notifiedOf: 'MINIMAL' },
+                input: { proposalId: proposal.id, notifiedOf: 'DEFAULT' },
               }).then(() => {
                 this.setState({
                   isJustFollowed: true,
@@ -78,8 +78,8 @@ export class ProposalFollowButton extends React.Component<Props, State> {
       );
     }
     if (
-      proposal.viewerFollowingConfiguration !== null &&
-      typeof proposal.viewerFollowingConfiguration !== 'undefined'
+      proposal.followerConfiguration !== null &&
+      typeof proposal.followerConfiguration !== 'undefined'
     ) {
       return (
         <LoginOverlay>
@@ -110,15 +110,17 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                       <ListGroup className="mb-0">
                         <ListGroupItem>
                           <Radio
-                            id={`proposal-follow-btn-minimal-${proposal.id}`}
-                            name="minimal"
-                            className="proposal__follow__minimal"
+                            id={`proposal-follow-btn-default-${proposal.id}`}
+                            name="default"
+                            className="proposal__follow__advancement"
                             checked={
-                              proposal.viewerFollowingConfiguration === 'MINIMAL' ? 'checked' : ''
+                              proposal.followerConfiguration.notifiedOf === 'DEFAULT'
+                                ? 'checked'
+                                : ''
                             }
                             inline
                             onClick={() => {
-                              return this.changeFollowType(proposal, 'MINIMAL');
+                              return this.changeFollowType(proposal, 'DEFAULT');
                             }}>
                             <b>
                               <FormattedMessage id="the-progress" />
@@ -129,14 +131,16 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                         </ListGroupItem>
                         <ListGroupItem>
                           <Radio
-                            name="essential"
-                            id={`proposal-follow-btn-essential-${proposal.id}`}
-                            className="proposal__follow__essential"
+                            name="default_and_comments"
+                            id={`proposal-follow-btn-default_and_comments-${proposal.id}`}
+                            className="proposal__follow__default_and_comments"
                             checked={
-                              proposal.viewerFollowingConfiguration === 'ESSENTIAL' ? 'checked' : ''
+                              proposal.followerConfiguration.notifiedOf === 'DEFAULT_AND_COMMENTS'
+                                ? 'checked'
+                                : ''
                             }
                             onClick={() => {
-                              return this.changeFollowType(proposal, 'ESSENTIAL');
+                              return this.changeFollowType(proposal, 'DEFAULT_AND_COMMENTS');
                             }}>
                             <b>
                               <FormattedMessage id="progress-and-comments" />
@@ -149,7 +153,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             id={`proposal-follow-btn-all-${proposal.id}`}
                             className="proposal__follow__all"
                             checked={
-                              proposal.viewerFollowingConfiguration === 'ALL' ? 'checked' : ''
+                              proposal.followerConfiguration.notifiedOf === 'ALL' ? 'checked' : ''
                             }
                             onClick={() => {
                               return this.changeFollowType(proposal, 'ALL');
@@ -198,7 +202,9 @@ export default createFragmentContainer(
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
       viewerIsFollowing @include(if: $isAuthenticated)
-      viewerFollowingConfiguration @include(if: $isAuthenticated)
+      followerConfiguration @include(if: $isAuthenticated) {
+        notifiedOf
+      }
     }
   `,
 );

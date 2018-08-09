@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Follower;
@@ -8,7 +9,7 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
 
-class ViewerFollowingConfigurationProposalResolver implements ResolverInterface
+class ViewerFollowerProposalResolver implements ResolverInterface
 {
     private $followerRepository;
     private $logger;
@@ -19,16 +20,12 @@ class ViewerFollowingConfigurationProposalResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Proposal $proposal, User $viewer): ?string
+    public function __invoke(Proposal $proposal, User $viewer): ?Follower
     {
         try {
-            $follower = $this->followerRepository->findOneBy([
-                'proposal' => $proposal,
-                'user' => $viewer,
-            ]);
-
-            if ($follower) {
-                return $follower->getNotifiedOf();
+            $follower = $this->followerRepository->findOneBy(['proposal' => $proposal, 'user' => $viewer]);
+            if ($follower && isset($follower)) {
+                return $follower;
             }
 
             return null;

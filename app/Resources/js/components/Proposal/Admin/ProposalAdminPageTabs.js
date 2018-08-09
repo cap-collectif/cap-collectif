@@ -42,9 +42,7 @@ export class ProposalAdminPageTabs extends Component<Props> {
             title={
               <div>
                 <FormattedMessage id="proposal.tabs.followers" />
-                <span className="badge ml-10">
-                  {proposal.allFollowers ? proposal.allFollowers.totalCount : 0}
-                </span>
+                <span className="badge ml-10">{proposal.allFollowers.totalCount}</span>
               </div>
             }>
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
@@ -76,7 +74,7 @@ export default createFragmentContainer(
       ...ProposalAdminNotationForm_proposal
       ...ProposalAdminNewsForm_proposal
       ...ProposalAdminFollowers_proposal
-      allFollowers: followers(first: 0) {
+      allFollowers: followerConnection(first: 0) {
         totalCount
       }
     }

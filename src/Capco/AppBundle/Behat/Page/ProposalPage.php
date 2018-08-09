@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
@@ -33,8 +34,8 @@ class ProposalPage extends Page
         'votes tab' => '#proposal-page-tabs-tab-votes',
         'followers tab' => '#proposal-page-tabs-tab-followers',
         'comments tab' => '#proposal-page-tabs-tab-comments',
-        'proposal follow minimal' => '#proposal-follow-btn-minimal',
-        'proposal follow essential' => '#proposal-follow-btn-essential',
+        'proposal follow default' => '#proposal-follow-btn-default',
+        'proposal follow advancement and comment' => '#proposal-follow-btn-default_and_comments',
         'proposal follow all' => '#proposal-follow-btn-all',
     ];
 
@@ -180,16 +181,16 @@ class ProposalPage extends Page
         $this->getElement('comments tab')->click();
     }
 
-    public function followMinimalIsChecked(string $proposalId)
+    public function followAdvancementIsChecked(string $proposalId)
     {
-        $element = $this->elements['proposal follow minimal'] . "-$proposalId";
+        $element = $this->elements['proposal follow default'] . "-$proposalId";
 
         return $this->find('css', $element)->isChecked();
     }
 
-    public function followEssentialIsChecked(string $proposalId)
+    public function followAdvancementAndCommentIsChecked(string $proposalId)
     {
-        $element = $this->elements['proposal follow essential'] . "-$proposalId";
+        $element = $this->elements['proposal follow advancement and comment'] . "-$proposalId";
 
         return $this->find('css', $element)->isChecked();
     }

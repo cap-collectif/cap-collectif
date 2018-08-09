@@ -245,7 +245,7 @@ class User extends BaseUser
 
     protected $alertExpirationSent = false;
 
-    protected $followingContributions;
+    protected $followingProposals;
 
     protected $notificationsConfiguration;
 
@@ -280,7 +280,7 @@ class User extends BaseUser
         $this->proposals = new ArrayCollection();
         $this->replies = new ArrayCollection();
         $this->userGroups = new ArrayCollection();
-        $this->followingContributions = new ArrayCollection();
+        $this->followingProposals = new ArrayCollection();
         $this->notificationsConfiguration = new UserNotificationsConfiguration();
         $this->archives = new ArrayCollection();
     }
@@ -1123,7 +1123,7 @@ class User extends BaseUser
         return $this->userType;
     }
 
-    public function setUserType(UserType $userType): self
+    public function setUserType(?UserType $userType = null): self
     {
         $this->userType = $userType;
 
@@ -1434,30 +1434,30 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getFollowingContributions(): Collection
+    public function getFollowingProposals(): Collection
     {
-        return $this->followingContributions;
+        return $this->followingProposals;
     }
 
-    public function addFollowingContribution(Follower $followingContribution): self
+    public function addFollowingProposal(Follower $followingProposal): self
     {
-        if (!$this->followingContributions->contains($followingContribution)) {
-            $this->followingContributions->add($followingContribution);
+        if (!$this->followingProposals->contains($followingProposal)) {
+            $this->followingProposals->add($followingProposal);
         }
 
         return $this;
     }
 
-    public function removeFollowingContribution(Follower $followingContribution): self
+    public function removeFollowingProposal(Follower $followingProposal): self
     {
-        $this->followingContributions->removeElement($followingContribution);
+        $this->followingProposals->removeElement($followingProposal);
 
         return $this;
     }
 
-    public function setFollowingContributions(Collection $followingContributions): self
+    public function setFollowingProposals(Collection $followingProposals): self
     {
-        $this->followingContributions = $followingContributions;
+        $this->followingProposals = $followingProposals;
 
         return $this;
     }

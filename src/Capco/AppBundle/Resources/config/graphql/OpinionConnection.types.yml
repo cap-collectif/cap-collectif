@@ -1,7 +1,0 @@
-OpinionConnection:
-  type: relay-connection
-  config:
-    nodeType: Opinion!
-    connectionFields:
-      totalCount:
-        type: Int!

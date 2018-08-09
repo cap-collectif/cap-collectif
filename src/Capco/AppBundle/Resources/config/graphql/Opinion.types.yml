@@ -11,7 +11,6 @@ Opinion:
       Trashable,
       ContributionWithAuthor,
       EditableContribution,
-      WithFollowers,
     ]
   config:
     description: 'A contribution'
@@ -104,12 +103,3 @@ Opinion:
         type: '[OpinionModal]'
       appendices:
         type: '[Appendix]'
-      followers:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionFollowersConnection", [value, args])'
-      viewerFollowingConfiguration:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionResolver", [value, getUser()])'
-      viewerIsFollowing:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowOpinionResolver", [value, getUser()])'

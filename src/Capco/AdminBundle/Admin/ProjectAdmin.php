@@ -152,13 +152,6 @@ class ProjectAdmin extends CapcoAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
-
-        // Content
         $formMapper
             ->with('admin.fields.project.group_content', ['class' => 'col-md-12'])
             ->end()
@@ -171,9 +164,8 @@ class ProjectAdmin extends CapcoAdmin
             ->with('project-access', ['class' => 'col-md-6'])
             ->end()
             ->with('admin.fields.project.advanced', ['class' => 'col-md-6'])
-            ->end()
-            ->with('group.admin.parameters', ['class' => 'col-md-6'])
             ->end();
+
         // Content
         $formMapper
             ->with('admin.fields.project.group_content')
@@ -217,6 +209,10 @@ class ProjectAdmin extends CapcoAdmin
         $formMapper
             ->end()
             ->with('admin.fields.project.group_meta')
+            ->add('exportable', null, [
+                'label' => 'admin.fields.project.exportable',
+                'required' => false,
+            ])
             ->add('publishedAt', 'sonata_type_datetime_picker', [
                 'label' => 'admin.fields.project.published_at',
                 'required' => true,
@@ -265,7 +261,6 @@ class ProjectAdmin extends CapcoAdmin
                 ['link_parameters' => ['context' => 'project']]
             )
             ->end()
-
             ->with('admin.fields.project.group_ranking')
             ->add('opinionsRankingThreshold', null, [
                 'label' => 'admin.fields.project.ranking.opinions_threshold',
@@ -280,7 +275,6 @@ class ProjectAdmin extends CapcoAdmin
                 'required' => false,
             ])
             ->end()
-
             ->with('admin.fields.project.group_steps')
             ->add(
                 'steps',
@@ -313,19 +307,6 @@ class ProjectAdmin extends CapcoAdmin
                 'help' => 'admin.help.metadescription',
             ])
             ->end();
-
-        $formMapper->with('group.admin.parameters');
-        if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-            $formMapper->add('opinionCanBeFollowed', null, [
-                'label' => 'enable-proposal-tracking',
-                'required' => false,
-            ]);
-        }
-        $formMapper->add('exportable', null, [
-            'label' => 'admin.fields.project.exportable',
-            'required' => false,
-        ]);
-        $formMapper->end();
     }
 
     /**

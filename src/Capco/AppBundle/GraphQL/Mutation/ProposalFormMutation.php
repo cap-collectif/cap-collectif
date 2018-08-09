@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ProposalForm;
@@ -43,9 +44,7 @@ class ProposalFormMutation implements ContainerAwareInterface
         $proposalForm = $proposalFormRepository->find($id);
 
         if (!$proposalForm) {
-            throw new UserError(
-                sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId'])
-            );
+            throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
         }
 
         $formFactory = $this->container->get('form.factory');
@@ -57,9 +56,7 @@ class ProposalFormMutation implements ContainerAwareInterface
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
-            $logger->error(
-                \get_class($this) . ' update: ' . (string) $form->getErrors(true, false)
-            );
+            $logger->error(\get_class($this) . ' update: ' . (string) $form->getErrors(true, false));
             throw new UserError('Can\'t update this proposal form!');
         }
 
@@ -73,33 +70,22 @@ class ProposalFormMutation implements ContainerAwareInterface
     public function updateNotificationsConfiguration(Argument $input)
     {
         $arguments = $input->getRawArguments();
-        $proposalForm = $this->container->get('capco.proposal_form.repository')->find(
-            $arguments['proposalFormId']
-        );
+        $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);
 
         if (!$proposalForm) {
-            throw new UserError(
-                sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId'])
-            );
+            throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
         }
 
         $formFactory = $this->container->get('form.factory');
         $logger = $this->container->get('logger');
         unset($arguments['proposalFormId']);
 
-        $form = $formFactory->create(
-            ProposalFormNotificationsConfigurationType::class,
-            $proposalForm->getNotificationsConfiguration()
-        );
+        $form = $formFactory->create(ProposalFormNotificationsConfigurationType::class, $proposalForm->getNotificationsConfiguration());
 
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
-            $logger->error(
-                \get_class($this) .
-                    ' updateNotificationsConfiguration: ' .
-                    (string) $form->getErrors(true, false)
-            );
+            $logger->error(\get_class($this) . ' updateNotificationsConfiguration: ' . (string) $form->getErrors(true, false));
             throw new UserError('Can\'t change the notification config!');
         }
 
@@ -111,24 +97,20 @@ class ProposalFormMutation implements ContainerAwareInterface
     public function setEvaluationForm(Argument $input): array
     {
         $arguments = $input->getRawArguments();
-        $proposalForm = $this->container->get('capco.proposal_form.repository')->find(
-            $arguments['proposalFormId']
-        );
+        $proposalForm = $this->container->get('capco.proposal_form.repository')->find($arguments['proposalFormId']);
 
         if (!$proposalForm) {
-            throw new UserError(
-                sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId'])
-            );
+            throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
         }
 
-        $evaluationForm = $this->container->get('capco.questionnaire.repository')->find(
-            $arguments['evaluationFormId']
-        );
+        $evaluationForm = $this->container->get('capco.questionnaire.repository')->find($arguments['evaluationFormId']);
 
         $proposalForm->setEvaluationForm($evaluationForm);
 
         $this->container->get('doctrine.orm.default_entity_manager')->flush();
 
-        return ['proposalForm' => $proposalForm];
+        return [
+            'proposalForm' => $proposalForm,
+        ];
     }
 }

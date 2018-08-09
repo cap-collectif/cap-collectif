@@ -17,7 +17,7 @@ type Props = {
 export class ProposalPageFollowers extends React.Component<Props> {
   render() {
     const { proposal, relay, pageAdmin } = this.props;
-    if (!proposal.followers || !proposal.followers.edges) {
+    if (!proposal.followerConnection.edges) {
       return graphqlError;
     }
     return (
@@ -26,7 +26,7 @@ export class ProposalPageFollowers extends React.Component<Props> {
           <div className="box-header">
             <h3 className="box-title">
               <FormattedMessage
-                values={{ num: proposal.followers.totalCount }}
+                values={{ num: proposal.followerConnection.totalCount }}
                 id="proposal.follower.count"
               />{' '}
             </h3>
@@ -35,11 +35,13 @@ export class ProposalPageFollowers extends React.Component<Props> {
           ''
         )}
 
-        {proposal.followers.edges.length !== 0 ? (
+        {proposal.followerConnection.edges.length !== 0 ? (
           <Row>
-            {proposal.followers.edges.filter(Boolean).map((edge, key) => (
-              <UserBox key={key} user={edge.node} className="proposal__follower" />
-            ))}
+            {proposal.followerConnection.edges
+              .filter(Boolean)
+              .map((edge, key) => (
+                <UserBox key={key} user={edge.node} className="proposal__follower" />
+              ))}
           </Row>
         ) : (
           <div className="well well-lg text-center">
@@ -72,7 +74,8 @@ export default createPaginationContainer(
         cursor: { type: "String", defaultValue: null }
       ) {
       id
-      followers(first: $count, after: $cursor) @connection(key: "ProposalPageFollowers_followers") {
+      followerConnection(first: $count, after: $cursor)
+        @connection(key: "ProposalPageFollowers_followerConnection") {
         edges {
           cursor
           node {
@@ -97,7 +100,7 @@ export default createPaginationContainer(
   {
     direction: 'forward',
     getConnectionFromProps(props) {
-      return props.proposal && props.proposal.followers;
+      return props.proposal && props.proposal.followerConnection;
     },
     getFragmentVariables(prevVars, totalCount) {
       return {
