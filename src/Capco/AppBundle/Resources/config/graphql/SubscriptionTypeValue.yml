@@ -1,0 +1,11 @@
+SubscriptionTypeValue:
+  type: enum
+  config:
+    description: '3 possible values for a subscription.'
+    values:
+      MINIMAL:
+        value: 'MINIMAL'
+      ESSENTIAL:
+        value: 'ESSENTIAL'
+      ALL:
+        value: 'ALL'

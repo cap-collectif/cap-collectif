@@ -23,7 +23,19 @@ final class FollowerType extends ObjectType implements GeneratedTypeInterface
             'fields' => function () use ($globalVariable) {
                 return [
                 'proposal' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Proposal')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('Proposal'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'opinion' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('Opinion'),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -47,7 +59,7 @@ final class FollowerType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'notifiedOf' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('PickFollowTypeValue'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('SubscriptionTypeValue'),
                     'args' => [
                     ],
                     'resolve' => null,

@@ -219,6 +219,16 @@ User:
           last:
             type: 'Int'
             description: 'Returns the last n elements from the list.'
+      followingOpinions:
+        type: 'OpinionConnection!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionsFollowedByUserResolver", [value, args])'
+        description: 'Array of opinions followed by current user.'
+        argsBuilder: 'Relay::Connection'
+        args:
+          orderBy:
+            type: 'String'
+            description: 'Ordering options for followers returning from the connection'
       contributionsCount:
         type: 'Int!'
         description: 'Total of contributions count'

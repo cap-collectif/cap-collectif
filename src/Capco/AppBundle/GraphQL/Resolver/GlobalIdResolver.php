@@ -106,6 +106,9 @@ class GlobalIdResolver
         if (!$node) {
             $node = $this->container->get('capco.requirement.repository')->find($uuid);
         }
+        if (!$node) {
+            $node = $this->container->get('capco.follower.repository')->find($uuid);
+        }
 
         if (!$node) {
             $error = 'Could not resolve node with id ' . $uuid;

@@ -1,5 +1,6 @@
 // @flow
-import { graphql } from 'react-relay';
+import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
+import { ConnectionHandler } from 'relay-runtime';
 import commitMutation from './commitMutation';
 import environnement from '../createRelayEnvironment';
 import type {
@@ -13,7 +14,6 @@ const mutation = graphql`
       proposal {
         id
         ...ProposalFollowButton_proposal
-        ...ProposalPageFollowers_proposal
       }
       followerEdge {
         node {
@@ -31,7 +31,6 @@ const mutation = graphql`
   }
 `;
 
-// we can add totalCount+1 https://facebook.github.io/relay/docs/en/mutations.html#using-updater-and-optimisticupdater
 const commit = (variables: FollowProposalMutationVariables): Promise<Response> =>
   commitMutation(environnement, {
     mutation,
@@ -42,35 +41,31 @@ const commit = (variables: FollowProposalMutationVariables): Promise<Response> =
         parentID: variables.input.proposalId,
         connectionInfo: [
           {
-            key: 'ProposalPageFollowers_followerConnection',
+            key: 'ProposalPageFollowers_followers',
             rangeBehavior: 'append',
           },
         ],
         edgeName: 'followerEdge',
       },
     ],
-    // updater: (store) => {
-    //     // Get the payload returned from the server
-    //     const payload = store.getRootField('followProposal');
-    //     const proposal = payload.getLinkedRecord('proposal');
-    //     console.log(proposal);
-    //
-    //     const proposalProxy = store.get(variables.input.proposalId);
-    //     console.info(proposalProxy);
-    //
-    //     const conn = ConnectionHandler.getConnection(
-    //         proposalProxy,
-    //         'ProposalPageFollowers_followerConnection', // This is the connection identifier, defined here: https://github.com/relayjs/relay-examples/blob/master/todo/js/components/TodoList.js#L68
-    //     );
-    //     console.log(variables);
-    //     const follower = payload.getLinkedRecord('follower');
-    //     // const followerProxy = store.get(follower.id);
-    //     // Insert the new todo into the Todo List connection
-    //     const newEdge = ConnectionHandler.createEdge(store, conn, follower, 'User');
-    //
-    //     // Add it to the user's todo list
-    //     ConnectionHandler.insertEdgeAfter(conn, newEdge);
-    // },
+    updater: (store: RecordSourceSelectorProxy) => {
+      const payload = store.getRootField('followProposal');
+      if (!payload || !payload.getLinkedRecord('followerEdge')) {
+        return;
+      }
+      const proposalProxy = store.get(variables.input.proposalId);
+      if (!proposalProxy) return;
+      const allFollowersProxy = proposalProxy.getLinkedRecord('followers', { first: 0 });
+      if (!allFollowersProxy) return;
+      const previousValue = parseInt(allFollowersProxy.getValue('totalCount'), 10);
+      allFollowersProxy.setValue(previousValue + 1, 'totalCount');
+
+      const connection = ConnectionHandler.getConnection(
+        proposalProxy,
+        'ProposalPageFollowers_followers',
+      );
+      connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+    },
   });
 
 export default { commit };

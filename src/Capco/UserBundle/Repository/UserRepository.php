@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Repository;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -885,11 +886,27 @@ class UserRepository extends EntityRepository
         $offset = 100
     ): Paginator {
         $query = $this->createQueryBuilder('u')
-            ->join('u.followingProposals', 'f')
+            ->join('u.followingContributions', 'f')
             ->join('f.proposal', 'p')
-            ->where('f.proposal = :propsoal')
+            ->where('f.proposal = :proposal')
             ->andWhere('p.deletedAt IS NULL')
-            ->setParameter('propsoal', $proposal)
+            ->setParameter('proposal', $proposal)
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
+
+        return new Paginator($query);
+    }
+
+    public function findUsersFollowingAnOpinion(
+        Opinion $opinion,
+        $first = 0,
+        $offset = 100
+    ): Paginator {
+        $query = $this->createQueryBuilder('u')
+            ->join('u.followingContributions', 'f')
+            ->join('f.opinion', 'o')
+            ->andWhere('f.opinion = :opinion')
+            ->setParameter('opinion', $opinion)
             ->setMaxResults($offset)
             ->setFirstResult($first);
 
@@ -905,10 +922,10 @@ class UserRepository extends EntityRepository
             ->select(['u.id, u.email, u.username, u.firstname, u.lastname, u.slug'])
             ->from('CapcoUserBundle:User', 'u')
             ->addSelect(' f.followedAt, ut.name as userTypeName, p.slug as proposalSlug')
-            ->join('u.followingProposals', 'f')
+            ->join('u.followingContributions', 'f')
             ->join('f.proposal', 'p')
             ->join('u.userType', 'ut')
-            ->where('p.id = :proposalId')
+            ->andWhere('p.id = :proposalId')
             ->andWhere('p.deletedAt IS NULL')
             ->orderBy('f.followedAt', 'ASC')
             ->setParameter('proposalId', $proposalId);
@@ -921,21 +938,32 @@ class UserRepository extends EntityRepository
         return $this->countFollowerForProposalAndUser($proposal, $viewer) > 0;
     }
 
+    public function isViewerFollowingOpinion(Opinion $opinion, User $viewer): bool
+    {
+        return $this->countFollowerForOpinionAndUser($opinion, $viewer) > 0;
+    }
+
     public function getByCriteriaOrdered(
         array $criteria,
         array $orderBy,
         $limit = 32,
         $offset = 0
     ): Paginator {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->join('u.followingProposals', 'f')
-            ->join('f.proposal', 'p')
-            ->andWhere('p.deletedAt IS NULL');
+        $qb = $this->getIsEnabledQueryBuilder()->join('u.followingContributions', 'f');
 
         if (isset($criteria['proposal'])) {
             $qb
+                ->join('f.proposal', 'p')
+                ->andWhere('p.deletedAt IS NULL')
                 ->andWhere('p.id = :proposalId')
                 ->setParameter('proposalId', $criteria['proposal']->getId());
+        }
+
+        if (isset($criteria['opinion'])) {
+            $qb
+                ->join('f.opinion', 'o')
+                ->andWhere('o.id = :opinionId')
+                ->setParameter('opinionId', $criteria['opinion']->getId());
         }
 
         $sortField = array_keys($orderBy)[0];
@@ -965,7 +993,7 @@ class UserRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('u')
             ->select('count(u.id)')
-            ->join('u.followingProposals', 'f')
+            ->join('u.followingContributions', 'f')
             ->join('f.proposal', 'p')
             ->andWhere('f.proposal = :proposal')
             ->andWhere('p.deletedAt IS NULL')
@@ -974,11 +1002,23 @@ class UserRepository extends EntityRepository
         return (int) $query->getQuery()->getSingleScalarResult();
     }
 
+    public function countFollowerForOpinion(Opinion $opinion): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->join('u.followingContributions', 'f')
+            ->join('f.opinion', 'p')
+            ->andWhere('f.opinion = :opinion')
+            ->setParameter('opinion', $opinion);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
     public function countFollowerForProposalAndUser(Proposal $proposal, User $user): int
     {
         $query = $this->createQueryBuilder('u')
             ->select('count(u.id)')
-            ->join('u.followingProposals', 'f')
+            ->join('u.followingContributions', 'f')
             ->join('f.proposal', 'p')
             ->andWhere('p.id = :proposalId')
             ->andWhere('p.deletedAt IS NULL')
@@ -986,7 +1026,21 @@ class UserRepository extends EntityRepository
             ->setParameter('proposalId', $proposal->getId())
             ->setParameter('userId', $user->getId());
 
-        return $query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countFollowerForOpinionAndUser(Opinion $opinion, User $user): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->join('u.followingContributions', 'f')
+            ->join('f.opinion', 'o')
+            ->andWhere('o.id = :opinionId')
+            ->andWhere('u.id = :userId')
+            ->setParameter('opinionId', $opinion->getId())
+            ->setParameter('userId', $user->getId());
+
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function findUsersFollowingProposal()
@@ -995,9 +1049,10 @@ class UserRepository extends EntityRepository
         $followerQuery = $followerQuery->createQueryBuilder('f2')->select('f2.user');
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('u, p, f1')
-            ->join('u.followingProposals', 'f1')
+            ->join('u.followingContributions', 'f1')
             ->join('f1.proposal', 'p')
-            ->andWhere('p.deletedAt IS NULL');
+            ->andWhere('p.deletedAt IS NULL')
+            ->andWhere('p IS NOT NULL');
         $qb->where($qb->expr()->in('u.id', $followerQuery->getDQL()));
 
         return $qb->getQuery()->getResult();
@@ -1007,9 +1062,10 @@ class UserRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('u')
             ->select('count(f.id)')
-            ->join('u.followingProposals', 'f')
+            ->join('u.followingContributions', 'f')
             ->join('f.proposal', 'p')
             ->andWhere('f.user = :user')
+            ->andWhere('f.proposal IS NOT NULL')
             ->andWhere('p.deletedAt IS NULL')
 
             ->setParameter('user', $user);

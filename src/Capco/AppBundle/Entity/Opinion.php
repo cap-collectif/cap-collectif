@@ -5,6 +5,7 @@ use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -38,6 +39,7 @@ class Opinion implements OpinionContributionInterface
     use ExpirableTrait;
     use TextableTrait;
     use ModerableTrait;
+    use FollowableTrait;
     use PublishableTrait;
 
     public static $sortCriterias = [
@@ -122,7 +124,7 @@ class Opinion implements OpinionContributionInterface
     /**
      * @ORM\Column(name="ranking", type="integer", nullable=true)
      */
-    protected $ranking = null;
+    protected $ranking;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="Opinions", cascade={"persist"})
@@ -143,6 +145,11 @@ class Opinion implements OpinionContributionInterface
      */
     private $versions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Follower", mappedBy="opinion", cascade={"persist"})
+     */
+    private $followers;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -151,6 +158,7 @@ class Opinion implements OpinionContributionInterface
         $this->sources = new ArrayCollection();
         $this->versions = new ArrayCollection();
         $this->appendices = new ArrayCollection();
+        $this->followers = new ArrayCollection();
         $this->createdAt = new \Datetime();
     }
 

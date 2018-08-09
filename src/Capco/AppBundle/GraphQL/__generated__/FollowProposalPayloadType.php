@@ -34,32 +34,8 @@ final class FollowProposalPayloadType extends ObjectType implements GeneratedTyp
                     'public' => null,
                     'access' => null,
                 ],
-                'follower' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('User'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'followerEdge' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('FollowerEdge'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'value' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('PickFollowTypeValue')),
                     'args' => [
                     ],
                     'resolve' => null,

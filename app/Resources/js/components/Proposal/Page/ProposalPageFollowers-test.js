@@ -10,7 +10,7 @@ describe('<ProposalPageFollowers />', () => {
   // $FlowFixMe $refType
   const proposalWithUsers = {
     id: 'proposal1',
-    followerConnection: {
+    followers: {
       edges: [
         {
           cursor: 'YXJyYXljb25uZWN0aW9uOjA=',
@@ -63,7 +63,7 @@ describe('<ProposalPageFollowers />', () => {
   // $FlowFixMe $refType
   const proposalWithoutUsers = {
     id: 'proposal1',
-    followerConnection: {
+    followers: {
       edges: [],
       pageInfo: {
         hasNextPage: false,

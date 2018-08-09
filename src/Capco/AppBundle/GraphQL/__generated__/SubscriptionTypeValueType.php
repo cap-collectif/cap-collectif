@@ -10,35 +10,35 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class PickFollowTypeValueType extends EnumType implements GeneratedTypeInterface
+final class SubscriptionTypeValueType extends EnumType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'PickFollowTypeValue',
+            'name' => 'SubscriptionTypeValue',
             'values' => [
-                'DEFAULT' => [
-                    'name' => 'DEFAULT',
-                    'value' => '1',
+                'MINIMAL' => [
+                    'name' => 'MINIMAL',
+                    'value' => 'MINIMAL',
                     'deprecationReason' => null,
                     'description' => null,
                 ],
-                'DEFAULT_AND_COMMENTS' => [
-                    'name' => 'DEFAULT_AND_COMMENTS',
-                    'value' => '2',
+                'ESSENTIAL' => [
+                    'name' => 'ESSENTIAL',
+                    'value' => 'ESSENTIAL',
                     'deprecationReason' => null,
                     'description' => null,
                 ],
                 'ALL' => [
                     'name' => 'ALL',
-                    'value' => '3',
+                    'value' => 'ALL',
                     'deprecationReason' => null,
                     'description' => null,
                 ],
             ],
-            'description' => '3 possible values',
+            'description' => '3 possible values for a subscription.',
         ];
         };
         $config = $configProcessor->process(LazyConfig::create($configLoader, $globalVariables))->load();

@@ -113,7 +113,7 @@ Scenario: I'm on a proposal and GraphQL want to know the total number of proposa
       proposal: node(id: $proposalId) {
         id
         ... on Proposal {
-          followerConnection(first: $count, after: $cursor) {
+          followers(first: $count, after: $cursor) {
             edges {
               cursor
               node {
@@ -142,7 +142,7 @@ Scenario: I'm on a proposal and GraphQL want to know the total number of proposa
     "data": {
       "proposal": {
         "id": "proposal1",
-        "followerConnection": {
+        "followers": {
           "edges": [
             {
               "cursor": @string@,
@@ -173,7 +173,7 @@ Scenario: I'm on qqa proposal and I want to load 32 followers from a cursor
       proposal: node(id: $proposalId) {
         id
         ... on Proposal {
-          followerConnection(first: $count, after: $cursor) {
+          followers(first: $count, after: $cursor) {
             edges {
               cursor
               node {
@@ -202,7 +202,7 @@ Scenario: I'm on qqa proposal and I want to load 32 followers from a cursor
     "data": {
       "proposal": {
         "id": "proposal1",
-        "followerConnection": {
+        "followers": {
           "edges": [
             {
               "cursor": @string@,

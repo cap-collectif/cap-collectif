@@ -590,6 +590,27 @@ final class MutationType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
                 ],
+                'followOpinion' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('FollowOpinionPayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('FollowOpinionInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\FollowOpinionMutation", array(0 => $value["opinionId"], 1 => $value["notifiedOf"], 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
                 'updateFollowProposal' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('UpdateFollowProposalPayload'),
                     'args' => [
@@ -622,6 +643,27 @@ final class MutationType extends ObjectType implements GeneratedTypeInterface
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\UnfollowProposalMutation", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
+                'unfollowOpinion' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('UnfollowOpinionPayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('UnfollowOpinionInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\UnfollowOpinionMutation", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
                     },
                     'description' => null,
                     'deprecationReason' => null,

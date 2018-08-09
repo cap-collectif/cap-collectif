@@ -9,22 +9,20 @@ describe('<ProposalFollowButton />', () => {
   const proposalViewIsFollowing = {
     id: 'proposal1',
     viewerIsFollowing: true,
-    followerConfiguration: {
-      notifiedOf: 'DEFAULT',
-    },
+    viewerFollowingConfiguration: 'MINIMAL',
   };
   // $FlowFixMe $refType
   const proposalViewIsNotFollowing = {
     id: 'proposal1',
     viewerIsFollowing: false,
-    followerConfiguration: null,
+    viewerFollowingConfiguration: null,
   };
 
   // $FlowFixMe $refType
   const proposalViewIsNotConnected = {
     id: 'proposal1',
     viewerIsFollowing: false,
-    followerConfiguration: null,
+    viewerFollowingConfiguration: null,
   };
   // $FlowFixMe $refType
   const props = {

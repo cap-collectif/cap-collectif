@@ -453,4 +453,41 @@ class OpinionRepository extends EntityRepository
             ->andWhere($alias . '.isEnabled = true')
             ->andWhere($alias . '.expired = false');
     }
+
+    public function findFollowingOpinionByUser(
+        User $user,
+        int $first = 0,
+        int $offset = 100
+    ): Paginator {
+        $query = $this->createQueryBuilder('o')
+            ->leftJoin('o.followers', 'f')
+            ->leftJoin('o.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'project_abstract_step')
+            ->leftJoin('project_abstract_step.project', 'project')
+            ->andWhere('f.user = :user')
+            ->andWhere('f.opinion IS NOT NULL')
+            ->andWhere('project.opinionCanBeFollowed = true')
+            ->setParameter('user', $user)
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
+
+        return new Paginator($query);
+    }
+
+    public function countFollowingOpinionByUser(User $user): int
+    {
+        $query = $this->createQueryBuilder('o');
+        $query
+            ->select('COUNT(o.id)')
+            ->leftJoin('o.followers', 'f')
+            ->leftJoin('o.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'project_abstract_step')
+            ->leftJoin('project_abstract_step.project', 'project')
+            ->andWhere('f.user = :user')
+            ->andWhere('f.opinion IS NOT NULL')
+            ->andWhere('project.opinionCanBeFollowed = true')
+            ->setParameter('user', $user);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
 }

@@ -4,8 +4,10 @@ Follower:
     description: 'A follower'
     fields:
       proposal:
-        type: 'Proposal!'
+        type: 'Proposal'
+      opinion:
+        type: 'Opinion'
       user:
         type: 'User!'
       notifiedOf:
-        type: 'PickFollowTypeValue'
+        type: 'SubscriptionTypeValue'
