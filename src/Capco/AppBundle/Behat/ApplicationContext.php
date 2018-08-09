@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
@@ -9,7 +8,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
-use Capco\AppBundle\Behat\Page\HomePage;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
 use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
@@ -71,7 +69,11 @@ class ApplicationContext extends UserContext
             foreach ($messagesTypes as $messageType) {
                 $this->queues[] = $messageType['routing_key'];
             }
-            $jobs[] = new Process('php bin/rabbit vhost:mapping:create --password=' . $this->getParameter('rabbitmq_password') . ' --erase-vhost app/config/rabbitmq.yml');
+            $jobs[] = new Process(
+                'php bin/rabbit vhost:mapping:create --password=' .
+                    $this->getParameter('rabbitmq_password') .
+                    ' --erase-vhost app/config/rabbitmq.yml'
+            );
             $this->purgeRabbitMqQueues();
         }
 
@@ -80,7 +82,9 @@ class ApplicationContext extends UserContext
         // It launch a complete reinit. Use it carefully !
         if ($scenario->hasTag('media')) {
             $jobs[] = new Process('rm -rf web/media/*');
-            $jobs[] = new Process('php -d memory_limit=-1 bin/console capco:reinit --force --env=test');
+            $jobs[] = new Process(
+                'php -d memory_limit=-1 bin/console capco:reinit --force --env=test'
+            );
         }
         foreach ($jobs as $job) {
             echo $job->getCommandLine() . PHP_EOL;
@@ -98,9 +102,12 @@ class ApplicationContext extends UserContext
             echo 'No ElasticSearch snapshot detected.' . PHP_EOL;
         }
         echo 'Writing ElasticSearch snapshot.' . PHP_EOL;
-        $this->snapshot->createSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [
-          'indices' => $this->indexManager->getLiveSearchIndexName(),
-        ], true);
+        $this->snapshot->createSnapshot(
+            REPOSITORY_NAME,
+            SNAPSHOT_NAME,
+            ['indices' => $this->indexManager->getLiveSearchIndexName()],
+            true
+        );
         $this->cookieConsented = !$scenario->hasTag('javascript');
     }
 
@@ -174,7 +181,9 @@ class ApplicationContext extends UserContext
      */
     public function maximizeWindow()
     {
-        $this->getSession()->getDriver()->maximizeWindow();
+        $this->getSession()
+            ->getDriver()
+            ->maximizeWindow();
     }
 
     /**
@@ -205,7 +214,9 @@ class ApplicationContext extends UserContext
         $this->getSession()->reload();
 
         // https://stackoverflow.com/questions/39646444/how-to-handle-a-javascript-alert-window-using-php-behat-mink-selenium2-chrome-we
-        $session = $this->getSession()->getDriver()->getWebDriverSession();
+        $session = $this->getSession()
+            ->getDriver()
+            ->getWebDriverSession();
         // See message with $session->getAlert_text()
         $session->accept_alert();
     }
@@ -242,8 +253,12 @@ class ApplicationContext extends UserContext
      */
     public function clearLocalStorage()
     {
-        $this->getSession()->getDriver()->evaluateScript('window.sessionStorage.clear();');
-        $this->getSession()->getDriver()->evaluateScript('window.localStorage.clear();');
+        $this->getSession()
+            ->getDriver()
+            ->evaluateScript('window.sessionStorage.clear();');
+        $this->getSession()
+            ->getDriver()
+            ->evaluateScript('window.localStorage.clear();');
     }
 
     /**
@@ -258,15 +273,25 @@ class ApplicationContext extends UserContext
             if (TestResult::PASSED === $resultCode) {
                 $notification
                     ->setTitle('Behat suite ended successfully')
-                    ->setBody('Suite "' . $suiteName . '" has ended without errors (for once). Congrats !');
+                    ->setBody(
+                        'Suite "' . $suiteName . '" has ended without errors (for once). Congrats !'
+                    );
             } elseif (TestResult::SKIPPED === $resultCode) {
                 $notification
                     ->setTitle('Behat suite ended with skipped steps')
-                    ->setBody('Suite "' . $suiteName . '" has ended successfully but some steps have been skipped.');
+                    ->setBody(
+                        'Suite "' .
+                            $suiteName .
+                            '" has ended successfully but some steps have been skipped.'
+                    );
             } else {
                 $notification
                     ->setTitle('Behat suite ended with errors')
-                    ->setBody('Suite "' . $suiteName . '" has ended with errors. Go check it out you moron !');
+                    ->setBody(
+                        'Suite "' .
+                            $suiteName .
+                            '" has ended with errors. Go check it out you moron !'
+                    );
             }
             $notifier->send($notification);
         }
@@ -347,7 +372,9 @@ class ApplicationContext extends UserContext
      */
     public function printHtml()
     {
-        echo $this->getSession()->getPage()->getHtml();
+        echo $this->getSession()
+            ->getPage()
+            ->getHtml();
     }
 
     /**
@@ -381,7 +408,13 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeNbElementOnPage(int $nb, string $element)
     {
-        expect(\count($this->getSession()->getPage()->find('css', $element)))->toBe($nb);
+        expect(
+            \count(
+                $this->getSession()
+                    ->getPage()
+                    ->find('css', $element)
+            )
+        )->toBe($nb);
     }
 
     /**
@@ -396,7 +429,9 @@ class ApplicationContext extends UserContext
             function ($element) {
                 return $element->getText();
             },
-            $this->getSession()->getPage()->findAll('css', $cssQuery)
+            $this->getSession()
+                ->getPage()
+                ->findAll('css', $cssQuery)
         );
         if (!\in_array($first, $items, true)) {
             throw new ElementNotFoundException($this->getSession(), 'Element "' . $first . '"');
@@ -404,7 +439,9 @@ class ApplicationContext extends UserContext
         if (!\in_array($second, $items, true)) {
             throw new ElementNotFoundException($this->getSession(), 'Element "' . $second . '"');
         }
-        \PHPUnit_Framework_TestCase::assertTrue(array_search($first, $items, true) < array_search($second, $items, true));
+        \PHPUnit_Framework_TestCase::assertTrue(
+            array_search($first, $items, true) < array_search($second, $items, true)
+        );
     }
 
     /**
@@ -412,7 +449,9 @@ class ApplicationContext extends UserContext
      */
     public function iClickElement(string $selector)
     {
-        $element = $this->getSession()->getPage()->find('css', $selector);
+        $element = $this->getSession()
+            ->getPage()
+            ->find('css', $selector);
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
         }
@@ -424,7 +463,9 @@ class ApplicationContext extends UserContext
      */
     public function iHoverOverTheElement(string $selector)
     {
-        $element = $this->getSession()->getPage()->find('css', $selector);
+        $element = $this->getSession()
+            ->getPage()
+            ->find('css', $selector);
 
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
@@ -438,7 +479,9 @@ class ApplicationContext extends UserContext
      */
     public function iFocusTheElement(string $selector)
     {
-        $element = $this->getSession()->getPage()->find('css', $selector);
+        $element = $this->getSession()
+            ->getPage()
+            ->find('css', $selector);
 
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
@@ -452,7 +495,9 @@ class ApplicationContext extends UserContext
      **/
     public function ifillElementWithEmptyValue(string $element)
     {
-        $element = $this->getSession()->getPage()->find('css', $element);
+        $element = $this->getSession()
+            ->getPage()
+            ->find('css', $element);
 
         $element->setValue('');
     }
@@ -462,7 +507,9 @@ class ApplicationContext extends UserContext
      **/
     public function ifillElementWithValue(string $element, string $value)
     {
-        $element = $this->getSession()->getPage()->find('css', $element);
+        $element = $this->getSession()
+            ->getPage()
+            ->find('css', $element);
 
         $element->setValue($value);
     }
@@ -479,11 +526,15 @@ class ApplicationContext extends UserContext
         $field = $this->fixStepArgument($field);
         $value = $this->fixStepArgument($value);
         try {
-            $this->getSession()->getPage()->fillField($field, $value);
+            $this->getSession()
+                ->getPage()
+                ->fillField($field, $value);
         } catch (ElementNotFoundException $e) {
             // Try to get corresponding wysiwyg field
             // Works only with quill editor for now
-            $wrapper = $this->getSession()->getPage()->find('named', ['id_or_name', $field]);
+            $wrapper = $this->getSession()
+                ->getPage()
+                ->find('named', ['id_or_name', $field]);
             if (!$wrapper || !$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor')) {
                 throw $e;
             }
@@ -491,13 +542,23 @@ class ApplicationContext extends UserContext
             $field->setValue($value);
         } catch (ElementNotVisible $e) {
             // Ckeditor case
-            $wrapper = $this->getSession()->getPage()->find('named', ['id_or_name', 'cke_' . $field]);
+            $wrapper = $this->getSession()
+                ->getPage()
+                ->find('named', ['id_or_name', 'cke_' . $field]);
             if (!$wrapper || !$wrapper->hasClass('cke')) {
                 throw $e;
             }
-            $this->getSession()->getDriver()->executeScript('
-                CKEDITOR.instances["' . $field . '"].setData("' . $value . '");
-            ');
+            $this->getSession()
+                ->getDriver()
+                ->executeScript(
+                    '
+                CKEDITOR.instances["' .
+                        $field .
+                        '"].setData("' .
+                        $value .
+                        '");
+            '
+                );
         }
     }
 
@@ -538,7 +599,13 @@ class ApplicationContext extends UserContext
     {
         $responseStatusCode = $this->getSession()->getStatusCode();
         if (!$responseStatusCode === (int) $statusCode) {
-            throw new \Exception(sprintf('Did not see response status code %s, but %s.', $statusCode, $responseStatusCode));
+            throw new \Exception(
+                sprintf(
+                    'Did not see response status code %s, but %s.',
+                    $statusCode,
+                    $responseStatusCode
+                )
+            );
         }
     }
 
@@ -547,7 +614,10 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeInTheHeader(string $header)
     {
-        \assert(\in_array($header, $this->headers, true), "Did not see \"$header\" in the headers.");
+        \assert(
+            \in_array($header, $this->headers, true),
+            "Did not see \"$header\" in the headers."
+        );
     }
 
     /**
@@ -590,10 +660,17 @@ class ApplicationContext extends UserContext
     public function buttonShouldBeDisabled(string $locator)
     {
         $locator = $this->fixStepArgument($locator);
-        $button = $this->getSession()->getPage()->findButton($locator);
+        $button = $this->getSession()
+            ->getPage()
+            ->findButton($locator);
 
         if (null === $button) {
-            throw new ElementNotFoundException($this->getSession(), 'button', 'id|name|title|alt|value', $locator);
+            throw new ElementNotFoundException(
+                $this->getSession(),
+                'button',
+                'id|name|title|alt|value',
+                $locator
+            );
         }
 
         \PHPUnit_Framework_TestCase::assertTrue($button->hasAttribute('disabled'));
@@ -605,10 +682,17 @@ class ApplicationContext extends UserContext
     public function buttonShouldNotBeDisabled(string $locator)
     {
         $locator = $this->fixStepArgument($locator);
-        $button = $this->getSession()->getPage()->findButton($locator);
+        $button = $this->getSession()
+            ->getPage()
+            ->findButton($locator);
 
         if (null === $button) {
-            throw new ElementNotFoundException($this->getSession(), 'button', 'id|name|title|alt|value', $locator);
+            throw new ElementNotFoundException(
+                $this->getSession(),
+                'button',
+                'id|name|title|alt|value',
+                $locator
+            );
         }
 
         \PHPUnit_Framework_TestCase::assertFalse($button->hasAttribute('disabled'));
@@ -624,7 +708,9 @@ class ApplicationContext extends UserContext
      */
     public function theElementHasAttribute($selector, $attribute)
     {
-        $element = $this->getSession()->getPage()->find('css', $selector);
+        $element = $this->getSession()
+            ->getPage()
+            ->find('css', $selector);
 
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
@@ -645,22 +731,38 @@ class ApplicationContext extends UserContext
      */
     public function optionIsSelectedInSelect($option, $select)
     {
-        $selectField = $this->getSession()->getPage()->findField($select);
+        $selectField = $this->getSession()
+            ->getPage()
+            ->findField($select);
         if (null === $selectField) {
-            throw new ElementNotFoundException($this->getSession(), 'select field', 'id|name|label|value', $select);
+            throw new ElementNotFoundException(
+                $this->getSession(),
+                'select field',
+                'id|name|label|value',
+                $select
+            );
         }
 
-        $optionField = $selectField->find('named', [
-            'option',
-            $option,
-        ]);
+        $optionField = $selectField->find('named', ['option', $option]);
 
         if (null === $optionField) {
-            throw new ElementNotFoundException($this->getSession(), 'select option field', 'id|name|label|value', $option);
+            throw new ElementNotFoundException(
+                $this->getSession(),
+                'select option field',
+                'id|name|label|value',
+                $option
+            );
         }
 
         if (!$optionField->isSelected()) {
-            throw new ExpectationException('Select option field with value|text "' . $option . '" is not selected in the select "' . $select . '"', $this->getSession());
+            throw new ExpectationException(
+                'Select option field with value|text "' .
+                    $option .
+                    '" is not selected in the select "' .
+                    $select .
+                    '"',
+                $this->getSession()
+            );
         }
     }
 
@@ -678,13 +780,18 @@ class ApplicationContext extends UserContext
         if ($this->cookieConsented) {
             return;
         }
-        $isPresent = $this->getSession()->wait(2000, "document.getElementById('cookie-banner') != null");
+        $isPresent = $this->getSession()->wait(
+            2000,
+            "document.getElementById('cookie-banner') != null"
+        );
         if (!$isPresent) {
             echo 'No cookie banner is present.';
 
             return;
         }
-        $isBannerVisible = $this->getSession()->evaluateScript("document.getElementById('cookie-banner').classList.contains('active')");
+        $isBannerVisible = $this->getSession()->evaluateScript(
+            "document.getElementById('cookie-banner').classList.contains('active')"
+        );
         if ($isBannerVisible) {
             $this->iClickElement('#cookie-consent');
         }
@@ -698,7 +805,9 @@ class ApplicationContext extends UserContext
      */
     public function theElementShouldBeDisabled($element)
     {
-        $input = $this->getSession()->getPage()->find('css', $element);
+        $input = $this->getSession()
+            ->getPage()
+            ->find('css', $element);
 
         \PHPUnit_Framework_TestCase::assertTrue($input->hasAttribute('disabled'));
     }

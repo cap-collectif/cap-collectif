@@ -8,7 +8,7 @@ if [ "$PRODUCTION" ]; then
   # We install vendors with composer
   # We don't use `--no-scripts` or `--no-plugins` because a script in a composer plugin
   # will generate the file vendor/ocramius/package-versions/src/PackageVersions/Versions.php
-  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress
+  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress --apcu-autoloader
 
   echo "Configure simplesamlphp library"
   rm -rf vendor/simplesamlphp/simplesamlphp/config/*
@@ -36,7 +36,7 @@ else
   echo "Building for development/testing"
   # Symfony deps
   if [ -n "CI" ]; then
-      composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress
+      composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress --apcu-autoloader
   else
       composer install --prefer-dist --no-interaction --ignore-platform-reqs
   fi

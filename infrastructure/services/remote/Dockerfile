@@ -230,7 +230,7 @@ RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$
 
 # Download PHP dependencies
 COPY composer.json composer.lock /var/www/
-RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress
+RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress --apcu-autoloader
 
 # Then add source code, build autoloader and initialize Symfony (including creating bootstrap.php.cache).
 COPY . /var/www

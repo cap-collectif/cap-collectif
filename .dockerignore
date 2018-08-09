@@ -33,6 +33,8 @@ app/config/parameters.yml
 translations/*
 app/config/parameters.ini
 app/config/parameters/*
+/web/app_dev.php
+/web/app_test.php
 
 # infra
 infrastructure/environments/current.yml

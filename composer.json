@@ -149,7 +149,8 @@
         "symfony/polyfill-php55": "^1.7.0",
         "sentry/sentry-symfony": "^2.0",
         "tweedegolf/prometheus-bundle": "dev-master",
-        "overblog/dataloader-bundle": "^0.4.1"
+        "overblog/dataloader-bundle": "^0.4.1",
+        "zendframework/zend-diactoros": "^1.8"
     },
     "require-dev": {
         "behat/behat": "^3.3",
