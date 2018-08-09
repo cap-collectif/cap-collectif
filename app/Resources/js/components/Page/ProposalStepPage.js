@@ -130,8 +130,8 @@ export class ProposalStepPage extends React.Component<Props> {
                   {isAuthenticated &&
                     // $FlowFixMe
                     props.step.kind === 'collect' && <DraftProposalList step={props.step} />}
-                  {// $FlowFixMe
-                  isAuthenticated && (
+                  {isAuthenticated && (
+                    // $FlowFixMe
                     <UnpublishedProposalListView step={props.step} viewer={props.viewer} />
                   )}
                   {/* $FlowFixMe */}
