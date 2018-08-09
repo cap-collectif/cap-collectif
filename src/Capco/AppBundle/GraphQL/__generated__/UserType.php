@@ -787,30 +787,29 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('OpinionConnection')),
                     'args' => [
                         [
-                            'name' => 'orderBy',
-                            'type' => Type::string(),
-                            'description' => 'Ordering options for followers returning from the connection',
-                        ],
-                        [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified global ID.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => 'Returns the first n elements from the list.',
-                            'defaultValue' => 32,
+                            'description' => null,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified global ID.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last n elements from the list.',
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => Type::string(),
+                            'description' => 'Ordering options for followers returning from the connection',
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

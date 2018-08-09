@@ -5,25 +5,13 @@ WithFollowers:
     fields:
       followers:
         type: 'FollowerConnection'
-        args:
-          after:
-            type: 'String'
-            description: 'Returns the elements in the list that come after the specified global ID.'
-          first:
-            type: 'Int'
-            defaultValue: 32
-            description: 'Returns the first n elements from the list.'
-          before:
-            type: 'String'
-            description:
-              'Returns the elements in the list that come before the specified global ID.'
-          last:
-            type: 'Int'
-            description: 'Returns the last n elements from the list.'
+        argsBuilder: 'Relay::Connection'
+        description: 'Followers connection'
       viewerFollowingConfiguration:
         access: "@=hasRole('ROLE_USER')"
         type: 'SubscriptionTypeValue'
-        description: 'Kind of follow'
+        description: 'Identifies the viewer following configuration on the entity.'
       viewerIsFollowing:
         access: "@=hasRole('ROLE_USER')"
         type: 'Boolean!'
+        description: 'Identifies if the viewer is following the entity.'

@@ -162,11 +162,13 @@ class ProjectAdmin extends CapcoAdmin
         $formMapper
             ->with('admin.fields.project.group_content', ['class' => 'col-md-12'])
             ->end()
+            ->with('admin.fields.project.group_meta', ['class' => 'col-md-6'])
+            ->end()
             ->with('admin.fields.project.group_ranking', ['class' => 'col-md-6'])
             ->end()
             ->with('admin.fields.project.group_steps', ['class' => 'col-md-12'])
             ->end()
-            ->with('admin.fields.project.group_meta', ['class' => 'col-md-6'])
+            ->with('project-access', ['class' => 'col-md-6'])
             ->end()
             ->with('admin.fields.project.advanced', ['class' => 'col-md-6'])
             ->end()
@@ -215,10 +217,6 @@ class ProjectAdmin extends CapcoAdmin
         $formMapper
             ->end()
             ->with('admin.fields.project.group_meta')
-            ->add('isEnabled', null, [
-                'label' => 'admin.fields.project.is_enabled',
-                'required' => false,
-            ])
             ->add('publishedAt', 'sonata_type_datetime_picker', [
                 'label' => 'admin.fields.project.published_at',
                 'required' => true,
