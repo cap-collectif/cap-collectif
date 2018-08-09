@@ -10,7 +10,7 @@ describe('<ArgumentCreate />', () => {
     ...formMock,
     type: 'FOR',
     argumentable: { id: 'opinion1', $refType, contribuable: true },
-    user: { id: 'user1' },
+    user: { id: 'user1', isEmailConfirmed: true },
     submitting: false,
     form: 'create-argument',
     dispatch: jest.fn(),

@@ -24,51 +24,90 @@ const mutation = graphql`
   }
 `;
 
-const commit = (variables: AddSourceMutationVariables): Promise<AddSourceMutationResponse> =>
-  commitMutation(environment, {
-    mutation,
-    variables,
-    configs: [
+const getConfigs = (variables: AddSourceMutationVariables, viewerIsConfirmed: boolean) => {
+  if (!viewerIsConfirmed) {
+    return [
       {
         type: 'RANGE_ADD',
+        edgeName: 'sourceEdge',
         parentID: variables.input.sourceableId,
         connectionInfo: [
           {
-            key: 'OpinionSourceListViewPaginated_sources',
+            key: 'OpinionSourceBox_viewerUnpublishedSources',
             rangeBehavior: 'prepend',
             filters: {
-              orderBy: { direction: 'DESC', field: 'CREATED_AT' },
-            },
-          },
-          {
-            key: 'OpinionSourceListViewPaginated_sources',
-            rangeBehavior: 'append',
-            filters: {
-              orderBy: { direction: 'ASC', field: 'CREATED_AT' },
-            },
-          },
-          {
-            key: 'OpinionSourceListViewPaginated_sources',
-            rangeBehavior: 'append',
-            filters: {
-              orderBy: { direction: 'DESC', field: 'VOTES' },
+              viewerUnpublishedOnly: true,
             },
           },
         ],
-        edgeName: 'sourceEdge',
       },
-    ],
+    ];
+  }
+
+  return [
+    {
+      type: 'RANGE_ADD',
+      parentID: variables.input.sourceableId,
+      edgeName: 'sourceEdge',
+      connectionInfo: [
+        {
+          key: 'OpinionSourceListViewPaginated_sources',
+          rangeBehavior: 'prepend',
+          filters: {
+            orderBy: { direction: 'DESC', field: 'CREATED_AT' },
+          },
+        },
+        {
+          key: 'OpinionSourceListViewPaginated_sources',
+          rangeBehavior: 'append',
+          filters: {
+            orderBy: { direction: 'ASC', field: 'CREATED_AT' },
+          },
+        },
+        {
+          key: 'OpinionSourceListViewPaginated_sources',
+          rangeBehavior: 'append',
+          filters: {
+            orderBy: { direction: 'DESC', field: 'VOTES' },
+          },
+        },
+      ],
+    },
+  ];
+};
+
+const commit = (
+  variables: AddSourceMutationVariables,
+  viewerIsConfirmed: boolean,
+): Promise<AddSourceMutationResponse> =>
+  commitMutation(environment, {
+    mutation,
+    variables,
+    configs: getConfigs(variables, viewerIsConfirmed),
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('addSource');
       if (!payload || !payload.getLinkedRecord('sourceEdge')) {
         // Mutation failed
+        return;
       }
+
       const sourceableProxy = store.get(variables.input.sourceableId);
       if (!sourceableProxy) return;
-      const allSourcesProxy = sourceableProxy.getLinkedRecord('sources', { first: 0 });
-      if (!allSourcesProxy) return;
-      const previousValue = parseInt(allSourcesProxy.getValue('totalCount'), 10);
-      allSourcesProxy.setValue(previousValue + 1, 'totalCount');
+
+      if (viewerIsConfirmed) {
+        const allSourcesProxy = sourceableProxy.getLinkedRecord('sources', { first: 0 });
+        if (!allSourcesProxy) return;
+        const previousValue = parseInt(allSourcesProxy.getValue('totalCount'), 10);
+        allSourcesProxy.setValue(previousValue + 1, 'totalCount');
+      } else {
+        const unpublishedSourcesProxy = sourceableProxy.getLinkedRecord('sources', {
+          viewerUnpublishedOnly: true,
+          first: 100,
+        });
+        if (!unpublishedSourcesProxy) return;
+        const previousValue = parseInt(unpublishedSourcesProxy.getValue('totalCount'), 10);
+        unpublishedSourcesProxy.setValue(previousValue + 1, 'totalCount');
+      }
     },
   });
 

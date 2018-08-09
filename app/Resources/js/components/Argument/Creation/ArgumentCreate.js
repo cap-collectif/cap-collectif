@@ -24,7 +24,7 @@ type FormValidValues = { body: string };
 type Props = FormProps & {
   type: 'FOR' | 'AGAINST' | 'SIMPLE',
   argumentable: ArgumentCreate_argumentable,
-  user: { id: string },
+  user: { id: string, isEmailConfirmed: boolean },
   submitting: boolean,
   form: string,
   dispatch: Dispatch,
@@ -33,7 +33,7 @@ type Props = FormProps & {
 const onSubmit = (
   values: FormValidValues,
   dispatch: Dispatch,
-  { argumentable, type, reset }: Props,
+  { argumentable, type, reset, user }: Props,
 ) => {
   const input = {
     argumentableId: argumentable.id,
@@ -41,7 +41,7 @@ const onSubmit = (
     type: type === 'FOR' || type === 'SIMPLE' ? 'FOR' : 'AGAINST',
   };
 
-  return AddArgumentMutation.commit({ input })
+  return AddArgumentMutation.commit({ input }, user.isEmailConfirmed)
     .then(res => {
       if (res.addArgument && res.addArgument.userErrors.length === 0) {
         AppDispatcher.dispatch({

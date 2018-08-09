@@ -65,7 +65,7 @@ class ReplyRepository extends EntityRepository
         Questionnaire $questionnaire,
         User $user
     ): Collection {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->createQueryBuilder('reply')
             ->andWhere('reply.questionnaire = :questionnaire')
             ->andWhere('reply.author = :user')
             ->setParameter('questionnaire', $questionnaire)

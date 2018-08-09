@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { Panel, ListGroup } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import ArgumentItem from './ArgumentItem';
@@ -63,21 +63,20 @@ export class UnpublishedUnpublishedArgumentList extends React.Component<Props> {
               if (!argumentable || !argumentable.viewerUnpublishedArguments) {
                 return graphqlError;
               }
-              const totalCount = argumentable.viewerUnpublishedArguments.totalCount;
               if (argumentable.viewerUnpublishedArguments.totalCount === 0) {
                 return null;
               }
               return (
                 <Panel bsStyle="danger">
                   <Panel.Heading>
-                    <Panel.Title componentClass="h4" className="opinion__header__title d-flex">
-                      {type === 'SIMPLE' ? (
-                        <FormattedMessage id="argument.simple.list" values={{ num: totalCount }} />
-                      ) : type === 'FOR' ? (
-                        <FormattedMessage id="argument.yes.list" values={{ num: totalCount }} />
-                      ) : (
-                        <FormattedMessage id="argument.no.list" values={{ num: totalCount }} />
-                      )}
+                    <Panel.Title componentClass="h4">
+                      <strong>
+                        <FormattedMessage
+                          id="count-arguments"
+                          values={{ num: argumentable.viewerUnpublishedArguments.totalCount }}
+                        />
+                      </strong>{' '}
+                      <FormattedMessage id="awaiting-publication-lowercase" />
                     </Panel.Title>
                   </Panel.Heading>
                   <ListGroup>

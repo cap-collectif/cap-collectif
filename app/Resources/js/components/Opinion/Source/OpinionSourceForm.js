@@ -31,7 +31,7 @@ type RelayProps = {
   source: OpinionSourceForm_source,
   sourceable: OpinionSourceForm_sourceable,
 };
-type Props = RelayProps & FormProps;
+type Props = RelayProps & FormProps & { user: { isEmailConfirmed: boolean } };
 
 const validate = ({ title, body, category, link, check }: FormValues) => {
   const errors = {};
@@ -54,7 +54,7 @@ const validate = ({ title, body, category, link, check }: FormValues) => {
 };
 
 const onSubmit = (values: FormValidValues, dispatch, props: Props) => {
-  const { sourceable, source } = props;
+  const { sourceable, source, user } = props;
   if (!source) {
     const input = {
       sourceableId: sourceable.id,
@@ -63,17 +63,17 @@ const onSubmit = (values: FormValidValues, dispatch, props: Props) => {
       category: values.category,
       link: values.link,
     };
-    return AddSourceMutation.commit({ input }).then(res => {
+    return AddSourceMutation.commit({ input }, user.isEmailConfirmed).then(res => {
       if (!res.addSource || !res.addSource.sourceEdge) {
         FluxDispatcher.dispatch({
-          actionType: "UPDATE_ALERT",
+          actionType: 'UPDATE_ALERT',
           alert: { bsStyle: 'danger', content: 'alert.danger.add.source' },
         });
         throw new SubmissionError({ _error: 'global.error.server.form' });
       }
       FluxDispatcher.dispatch({
-         actionType: "UPDATE_ALERT",	
-          alert: { bsStyle: 'success', content: 'alert.success.add.source' },	
+        actionType: 'UPDATE_ALERT',
+        alert: { bsStyle: 'success', content: 'alert.success.add.source' },
       });
       dispatch(hideSourceCreateModal());
     });
@@ -87,16 +87,16 @@ const onSubmit = (values: FormValidValues, dispatch, props: Props) => {
   };
   return ChangeSourceMutation.commit({ input }).then(res => {
     if (!res.changeSource || !res.changeSource.source) {
-        FluxDispatcher.dispatch({
-          actionType: "UPDATE_ALERT",
-          alert: { bsStyle: 'danger', content: 'alert.danger.update.source' },
-        });
+      FluxDispatcher.dispatch({
+        actionType: 'UPDATE_ALERT',
+        alert: { bsStyle: 'danger', content: 'alert.danger.update.source' },
+      });
       throw new SubmissionError({ _error: 'global.error.server.form' });
     }
-          FluxDispatcher.dispatch({
-         actionType: "UPDATE_ALERT",	
-          alert: { bsStyle: 'success', content: 'alert.success.update.source' },	
-      });
+    FluxDispatcher.dispatch({
+      actionType: 'UPDATE_ALERT',
+      alert: { bsStyle: 'success', content: 'alert.success.update.source' },
+    });
     dispatch(hideSourceEditModal());
   });
 };
@@ -187,6 +187,7 @@ class OpinionSourceForm extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state, { source }) => ({
+  user: state.user.user,
   initialValues: {
     link: source ? source.link : '',
     title: source ? source.title : '',

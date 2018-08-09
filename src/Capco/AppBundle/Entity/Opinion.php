@@ -498,7 +498,10 @@ class Opinion implements OpinionContributionInterface
 
     public function canDisplay($user = null): bool
     {
-        return $this->isPublished() && $this->getStep() && $this->getStep()->canDisplay($user);
+        return (
+            ($this->isPublished() && $this->getStep() && $this->getStep()->canDisplay($user)) ||
+            $this->getAuthor() === $user
+        );
     }
 
     public function canContribute(): bool

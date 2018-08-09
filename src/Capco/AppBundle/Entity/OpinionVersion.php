@@ -371,7 +371,10 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function canDisplay($user = null): bool
     {
-        return $this->isPublished() && $this->getParent()->canDisplay($user);
+        return (
+            ($this->isPublished() && $this->getParent()->canDisplay($user)) ||
+            $this->getAuthor() === $user
+        );
     }
 
     public function canContribute(): bool

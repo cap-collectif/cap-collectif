@@ -1,5 +1,5 @@
 // @flow
-import { graphql } from 'react-relay';
+import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
@@ -25,47 +25,72 @@ const mutation = graphql`
   }
 `;
 
-const commit = (variables: AddArgumentMutationVariables): Promise<AddArgumentMutationResponse> =>
-  commitMutation(environment, {
-    mutation,
-    variables,
-    configs: [
+const getConfigs = (variables: AddArgumentMutationVariables, viewerIsConfirmed: boolean) => {
+  if (!viewerIsConfirmed) {
+    return [
       {
         type: 'RANGE_ADD',
         parentID: variables.input.argumentableId,
+        edgeName: 'argumentEdge',
         connectionInfo: [
-          // We add the new argument in the last arguments corresponding row
           {
-            key: 'ArgumentListViewPaginated_arguments',
+            key: 'UnpublishedUnpublishedArgumentList_viewerUnpublishedArguments',
             rangeBehavior: 'prepend',
             filters: {
               type: variables.input.type,
-              orderBy: { direction: 'DESC', field: 'CREATED_AT' },
-            },
-          },
-          // We add the new argument in the old arguments corresponding row
-          {
-            key: 'ArgumentListViewPaginated_arguments',
-            rangeBehavior: 'append',
-            filters: {
-              type: variables.input.type,
-              orderBy: { direction: 'ASC', field: 'CREATED_AT' },
-            },
-          },
-          // We add the new argument in the popular arguments corresponding row
-          {
-            key: 'ArgumentListViewPaginated_arguments',
-            rangeBehavior: 'append',
-            filters: {
-              type: variables.input.type,
-              orderBy: { direction: 'DESC', field: 'VOTES' },
             },
           },
         ],
-        edgeName: 'argumentEdge',
       },
-    ],
-    updater: store => {
+    ];
+  }
+  return [
+    {
+      type: 'RANGE_ADD',
+      parentID: variables.input.argumentableId,
+      connectionInfo: [
+        // We add the new argument in the last arguments corresponding row
+        {
+          key: 'ArgumentListViewPaginated_arguments',
+          rangeBehavior: 'prepend',
+          filters: {
+            type: variables.input.type,
+            orderBy: { direction: 'DESC', field: 'CREATED_AT' },
+          },
+        },
+        // We add the new argument in the old arguments corresponding row
+        {
+          key: 'ArgumentListViewPaginated_arguments',
+          rangeBehavior: 'append',
+          filters: {
+            type: variables.input.type,
+            orderBy: { direction: 'ASC', field: 'CREATED_AT' },
+          },
+        },
+        // We add the new argument in the popular arguments corresponding row
+        {
+          key: 'ArgumentListViewPaginated_arguments',
+          rangeBehavior: 'append',
+          filters: {
+            type: variables.input.type,
+            orderBy: { direction: 'DESC', field: 'VOTES' },
+          },
+        },
+      ],
+      edgeName: 'argumentEdge',
+    },
+  ];
+};
+
+const commit = (
+  variables: AddArgumentMutationVariables,
+  viewerIsConfirmed: boolean,
+): Promise<AddArgumentMutationResponse> =>
+  commitMutation(environment, {
+    mutation,
+    variables,
+    configs: getConfigs(variables, viewerIsConfirmed),
+    updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('addArgument');
       if (!payload.getLinkedRecord('argumentEdge')) {
         // Mutation failed
@@ -75,19 +100,20 @@ const commit = (variables: AddArgumentMutationVariables): Promise<AddArgumentMut
       // We update the "FOR" or "AGAINST" row arguments totalCount
       const argumentableProxy = store.get(variables.input.argumentableId);
       if (!argumentableProxy) return;
-      const connection = ConnectionHandler.getConnection(
-        argumentableProxy,
-        'ArgumentList_allArguments',
-        {
-          type: variables.input.type,
-        },
-      );
+      const connectionKey = viewerIsConfirmed
+        ? 'ArgumentList_allArguments'
+        : 'UnpublishedUnpublishedArgumentList_viewerUnpublishedArguments';
+      const connection = ConnectionHandler.getConnection(argumentableProxy, connectionKey, {
+        type: variables.input.type,
+      });
       connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
 
-      const allArgumentsProxy = argumentableProxy.getLinkedRecord('arguments', { first: 0 });
-      if (!allArgumentsProxy) return;
-      const previousValue = parseInt(allArgumentsProxy.getValue('totalCount'), 10);
-      allArgumentsProxy.setValue(previousValue + 1, 'totalCount');
+      if (viewerIsConfirmed) {
+        const allArgumentsProxy = argumentableProxy.getLinkedRecord('arguments', { first: 0 });
+        if (!allArgumentsProxy) return;
+        const previousValue = parseInt(allArgumentsProxy.getValue('totalCount'), 10);
+        allArgumentsProxy.setValue(previousValue + 1, 'totalCount');
+      }
     },
   });
 

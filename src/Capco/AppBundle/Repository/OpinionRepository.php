@@ -447,6 +447,20 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getUnpublishedByConsultationAndAuthor(
+        ConsultationStep $step,
+        User $author
+    ): array {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.published = false')
+            ->andWhere('o.Author = :author')
+            ->andWhere('o.step = :step')
+            ->setParameter('author', $author)
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
         return $this->createQueryBuilder($alias)->andWhere($alias . '.published = true');

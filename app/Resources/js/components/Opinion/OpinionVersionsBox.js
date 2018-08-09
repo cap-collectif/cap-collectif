@@ -83,7 +83,15 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
         {opinion.viewerUnpublishedVersions && opinion.viewerUnpublishedVersions.totalCount > 0 ? (
           <Panel bsStyle="danger">
             <Panel.Heading>
-              <Panel.Title>{opinion.viewerUnpublishedVersions.totalCount} Non publiées</Panel.Title>
+              <Panel.Title>
+                <strong>
+                  <FormattedMessage
+                    id="count-amendments"
+                    values={{ num: opinion.viewerUnpublishedVersions.totalCount }}
+                  />
+                </strong>{' '}
+                <FormattedMessage id="awaiting-publication-lowercase" />
+              </Panel.Title>
             </Panel.Heading>
             <ListGroup className="list-group-custom">
               {opinion.viewerUnpublishedVersions.edges &&

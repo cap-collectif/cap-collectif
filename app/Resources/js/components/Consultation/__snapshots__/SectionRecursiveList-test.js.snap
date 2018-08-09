@@ -2,6 +2,24 @@
 
 exports[`<SectionRecursiveList /> renders correcty 1`] = `
 <div>
+  <Relay(UnpublishedOpinionList)
+    consultation={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "sections": Array [
+          Object {
+            "$fragmentRefs": null,
+            "sections": Array [],
+          },
+          Object {
+            "$fragmentRefs": null,
+            "sections": Array [],
+          },
+        ],
+      }
+    }
+  />
   <SectionList
     consultation={
       Object {

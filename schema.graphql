@@ -797,6 +797,7 @@ type Consultation implements Node & Step {
 
   # A list of contributor associated with the consultation.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+  viewerUnpublishedOpinions(after: String, first: Int, before: String, last: Int): ContributionConnection
   contributionConnection(
     # Ordering options for contributions returned from the connection.
     orderBy: ContributionOrder

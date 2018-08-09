@@ -10,7 +10,7 @@ Consultation:
       id:
         description: 'The id of the consultation.'
       opinionCountShownBySection:
-        type: "Int"
+        type: 'Int'
       project:
         type: 'Project!'
         description: 'The project'
@@ -41,6 +41,11 @@ Consultation:
         argsBuilder: 'Relay::Connection'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+      viewerUnpublishedOpinions:
+        type: 'ContributionConnection'
+        argsBuilder: 'Relay::Connection'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerUnpublishedOpinionsResolver", [value, args, getUser()])'
       contributionConnection:
         type: 'ContributionConnection'
         args:

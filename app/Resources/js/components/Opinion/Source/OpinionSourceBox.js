@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Panel, Row, Col, ListGroup } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type {
@@ -45,7 +46,13 @@ class OpinionSourceBox extends React.Component<Props, State> {
           <Panel bsStyle="danger">
             <Panel.Heading>
               <Panel.Title>
-                {sourceable.viewerUnpublishedSources.totalCount} Non publiées
+                <strong>
+                  <FormattedMessage
+                    id="count-sources"
+                    values={{ num: sourceable.viewerUnpublishedSources.totalCount }}
+                  />
+                </strong>{' '}
+                <FormattedMessage id="awaiting-publication-lowercase" />
               </Panel.Title>
             </Panel.Heading>
             <ListGroup className="list-group-custom">
@@ -137,7 +144,11 @@ export default createFragmentContainer(OpinionSourceBox, {
       allSources: sources(first: 0) {
         totalCount
       }
-      viewerUnpublishedSources: sources(viewerUnpublishedOnly: true) {
+      viewerUnpublishedSources: sources(viewerUnpublishedOnly: true, first: 100)
+        @connection(
+          key: "OpinionSourceBox_viewerUnpublishedSources"
+          filters: ["viewerUnpublishedOnly"]
+        ) {
         totalCount
         edges {
           node {

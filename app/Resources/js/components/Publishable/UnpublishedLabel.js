@@ -74,18 +74,21 @@ export class UnpublishedLabel extends React.Component<Props> {
     }
 
     return (
-      <OverlayTrigger placement="top" overlay={overlay}>
-        <Label bsStyle="danger">
-          <i className="cap cap-delete-2" />{' '}
-          <FormattedMessage
-            id={
-              publishable.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION'
-                ? 'awaiting-publication'
-                : 'not-accounted'
-            }
-          />
-        </Label>
-      </OverlayTrigger>
+      <span>
+        {' '}
+        <OverlayTrigger placement="top" overlay={overlay}>
+          <Label bsStyle="danger">
+            <i className="cap cap-delete-2" />{' '}
+            <FormattedMessage
+              id={
+                publishable.notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION'
+                  ? 'awaiting-publication'
+                  : 'not-accounted'
+              }
+            />
+          </Label>
+        </OverlayTrigger>
+      </span>
     );
   }
 }

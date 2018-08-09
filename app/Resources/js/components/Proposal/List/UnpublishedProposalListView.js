@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Panel } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import type { UnpublishedProposalListView_step } from './__generated__/UnpublishedProposalListView_step.graphql';
 import type { UnpublishedProposalListView_viewer } from './__generated__/UnpublishedProposalListView_viewer.graphql';
 import ProposalList from './ProposalList';
@@ -21,7 +22,13 @@ export class UnpublishedProposalListView extends React.Component<Props> {
       <Panel bsStyle="danger">
         <Panel.Heading>
           <Panel.Title componentClass="h3">
-            {step.viewerUnpublishedProposals.totalCount} Non publiés
+            <strong>
+              <FormattedMessage
+                id="count-proposal"
+                values={{ num: step.viewerUnpublishedProposals.totalCount }}
+              />
+            </strong>{' '}
+            <FormattedMessage id="awaiting-publication-lowercase" />
           </Panel.Title>
         </Panel.Heading>
         <Panel.Body>

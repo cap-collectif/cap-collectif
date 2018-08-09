@@ -5,6 +5,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ResponseValue from './ResponseValue';
+import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 import { type ShowReplyModal_reply } from './__generated__/ShowReplyModal_reply.graphql';
 import ReplyModalButtons from './ReplyModalButtons';
 import CloseButton from '../../Form/CloseButton';
@@ -50,6 +51,8 @@ export class ShowReplyModal extends React.Component<Props> {
                 ),
               }}
             />
+            {/* $FlowFixMe */}
+            <UnpublishedLabel publishable={reply} />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -76,6 +79,8 @@ export class ShowReplyModal extends React.Component<Props> {
 export default createFragmentContainer(ShowReplyModal, {
   reply: graphql`
     fragment ShowReplyModal_reply on Reply {
+      ...ReplyModalButtons_reply
+      ...UnpublishedLabel_publishable
       id
       createdAt
       responses {
@@ -85,7 +90,6 @@ export default createFragmentContainer(ShowReplyModal, {
         }
         ...ResponseValue_response
       }
-      ...ReplyModalButtons_reply
     }
   `,
 });

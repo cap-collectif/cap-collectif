@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import SectionList from './SectionList';
+import UnpublishedOpinionList from './UnpublishedOpinionList';
 import type { SectionRecursiveList_consultation } from './__generated__/SectionRecursiveList_consultation.graphql';
 
 type Props = {
@@ -13,6 +14,8 @@ export class SectionRecursiveList extends React.Component<Props> {
     const { consultation } = this.props;
     return (
       <div>
+        {/* $FlowFixMe */}
+        <UnpublishedOpinionList consultation={consultation} />
         {consultation.sections &&
           consultation.sections
             .filter(Boolean)
@@ -28,6 +31,7 @@ export default createFragmentContainer(
   SectionRecursiveList,
   graphql`
     fragment SectionRecursiveList_consultation on Consultation {
+      ...UnpublishedOpinionList_consultation
       ...Section_consultation
       sections {
         ...Section_section
