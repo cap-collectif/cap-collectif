@@ -594,6 +594,9 @@ type CollectStep implements Node & Step & ProposalStep {
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
+
+    # If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.
+    includeUnpublishedOnly: Boolean = false
   ): ProposalConnection!
 
   # The requirements to vote on this step.
@@ -2124,6 +2127,9 @@ type ProposalForm implements Node {
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
+
+    # If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.
+    includeUnpublishedOnly: Boolean = false
   ): ProposalConnection!
   reference: String!
   description: String
@@ -2266,6 +2272,9 @@ interface ProposalStep {
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
+
+    # If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.
+    includeUnpublishedOnly: Boolean = false
   ): ProposalConnection!
 
   # The requirements to vote on this step.
@@ -2929,6 +2938,9 @@ type SelectionStep implements Node & Step & ProposalStep {
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
+
+    # If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.
+    includeUnpublishedOnly: Boolean = false
   ): ProposalConnection!
 
   # The requirements to vote on this step.

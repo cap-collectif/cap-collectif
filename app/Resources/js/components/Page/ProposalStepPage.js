@@ -4,6 +4,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql } from 'react-relay';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
+import UnpublishedProposalListView from '../Proposal/List/UnpublishedProposalListView';
 import DraftProposalList from '../Proposal/List/DraftProposalList';
 import Loader from '../Ui/Loader';
 import ProposalStepPageHeader from './ProposalStepPageHeader';
@@ -84,10 +85,12 @@ export class ProposalStepPage extends React.Component<Props> {
             ) {
               viewer @include(if: $isAuthenticated) {
                 ...ProposalListView_viewer
+                ...UnpublishedProposalListView_viewer
               }
               step: node(id: $stepId) {
                 id
                 ...ProposalListView_step @arguments(count: $count)
+                ...UnpublishedProposalListView_step
                 ...ProposalStepPageHeader_step
                 ... on Step {
                   kind
@@ -127,6 +130,10 @@ export class ProposalStepPage extends React.Component<Props> {
                   {isAuthenticated &&
                     // $FlowFixMe
                     props.step.kind === 'collect' && <DraftProposalList step={props.step} />}
+                  {// $FlowFixMe
+                  isAuthenticated && (
+                    <UnpublishedProposalListView step={props.step} viewer={props.viewer} />
+                  )}
                   {/* $FlowFixMe */}
                   <ProposalStepPageHeader step={props.step} />
                   <ProposalListFilters

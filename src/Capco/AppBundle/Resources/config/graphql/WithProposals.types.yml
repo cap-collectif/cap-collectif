@@ -5,7 +5,7 @@ WithProposals:
     fields:
       proposals:
         type: 'ProposalConnection!'
-        argsBuilder: "Relay::Connection"
+        argsBuilder: 'Relay::Connection'
         args:
           district:
             type: 'ID'
@@ -35,3 +35,8 @@ WithProposals:
           affiliations:
             type: '[ProposalAffiliation]'
             description: 'Affiliation options for proposals returned from the connection.'
+          includeUnpublishedOnly:
+            type: 'Boolean'
+            description:
+              'If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.'
+            defaultValue: false

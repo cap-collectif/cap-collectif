@@ -158,6 +158,12 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                             'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('ProposalAffiliation')),
                             'description' => 'Affiliation options for proposals returned from the connection.',
                         ],
+                        [
+                            'name' => 'includeUnpublishedOnly',
+                            'type' => Type::boolean(),
+                            'description' => 'If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.',
+                            'defaultValue' => false,
+                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Step\\CollectStepProposalResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), 3 => $globalVariable->get('container')->get("request_stack"))]);
