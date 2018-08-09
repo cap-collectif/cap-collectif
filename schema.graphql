@@ -159,38 +159,8 @@ type AppendixType {
 
 # An argument
 type Argument implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
-
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
-
-  # The author of the contribution.
-  author: User!
 
   # The kind of contribution (argument).
   kind: String!
@@ -203,6 +173,36 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
 
   # Url of the contribution
   url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -513,8 +513,22 @@ type CheckboxRequirement implements Node & Requirement {
   label: String!
 }
 
-# A step in a project
+# A proposal step
 type CollectStep implements Node & Step & ProposalStep {
+  # The ID of the step
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use url instead of show_url")
+
+  # The url of the step
+  url: String!
   proposals(
     after: String
     first: Int
@@ -549,21 +563,6 @@ type CollectStep implements Node & Step & ProposalStep {
     affiliations: [ProposalAffiliation]
   ): ProposalConnection!
 
-  # The ID of the step
-  id: ID!
-
-  # The kind of the step
-  kind: String!
-
-  # The title of the step
-  title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
-
   # The requirements to vote on this step.
   requirements: RequirementConnection!
   project: Project
@@ -590,6 +589,21 @@ type CollectStep implements Node & Step & ProposalStep {
 
 # A comment
 type Comment implements Node & Publishable & Contribution {
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+
+  # Url of the contribution
+  url: URI!
+
   # `true` if the object is published.
   published: Boolean!
 
@@ -610,21 +624,6 @@ type Comment implements Node & Publishable & Contribution {
 
   # The reason the moderator trashed the contribution.
   trashedReason: String
-
-  # The id of the contribution.
-  id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
-
-  # Url of the contribution
-  url: URI!
   body: String
   createdAt: DateTime!
   updatedAt: DateTime
@@ -1483,34 +1482,7 @@ type NotificationsConfiguration {
 
 # A contribution
 type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & Trashable & ContributionWithAuthor & EditableContribution {
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
-
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
   contribuable: Boolean!
 
@@ -1526,9 +1498,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     type: ArgumentValue
   ): ArgumentConnection!
 
-  # The author of the contribution.
-  author: User!
-
   # The kind of contribution.
   kind: String!
 
@@ -1540,6 +1509,15 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # Url of the contribution
   url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # The sources related to the sourceable.
   sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
@@ -1868,16 +1846,23 @@ enum ProjectVisibility {
 
 # A budget contribution
 type Proposal implements Node & Contribution & Publishable & Reportable & Trashable {
-  # `true` if the object is published.
-  published: Boolean!
+  # The ID of an object
+  id: ID!
 
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
+  # The kind of contribution.
+  kind: String!
 
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
 
-  # Array of users following proposal.
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+
+  # Url of the contribution
+  url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
   followers(
     # Returns the elements in the list that come after the specified global ID.
     after: String
@@ -1898,8 +1883,8 @@ type Proposal implements Node & Contribution & Publishable & Reportable & Trasha
   # Kind of follow
   viewerFollowingConfiguration: SubscriptionTypeValue
 
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
+  # View follow current proposal
+  viewerIsFollowing: Boolean!
 
   # `true` if the object is published.
   published: Boolean!
@@ -1921,21 +1906,6 @@ type Proposal implements Node & Contribution & Publishable & Reportable & Trasha
 
   # The reason the moderator trashed the contribution.
   trashedReason: String
-
-  # The id of the contribution.
-  id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
-
-  # Url of the contribution
-  url: URI!
 
   # The admin url for this contribution.
   adminUrl: URI!
@@ -2091,6 +2061,8 @@ type ProposalEvaluation {
 
 # A budget form
 type ProposalForm implements Node {
+  # The ID of an object
+  id: ID!
   proposals(
     after: String
     first: Int
@@ -2124,9 +2096,6 @@ type ProposalForm implements Node {
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
   ): ProposalConnection!
-
-  # The ID of an object
-  id: ID!
   reference: String!
   description: String
   summaryHelpText: String
@@ -2225,6 +2194,20 @@ enum ProposalPublicationStatus {
 
 # A proposal step
 interface ProposalStep {
+  # The ID of the step
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use url instead of show_url")
+
+  # The url of the step
+  url: String!
   proposals(
     after: String
     first: Int
@@ -2258,21 +2241,6 @@ interface ProposalStep {
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
   ): ProposalConnection!
-
-  # The ID of the step
-  id: ID!
-
-  # The kind of the step
-  kind: String!
-
-  # The title of the step
-  title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -2574,16 +2542,7 @@ type RemoveProposalVotePayload {
 
 # A Reply
 type Reply implements Node & Publishable & Contribution {
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
-
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
 
   # The kind of contribution.
@@ -2597,6 +2556,15 @@ type Reply implements Node & Publishable & Contribution {
 
   # Url of the contribution
   url: URI!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
   enabled: Boolean!
   private: Boolean!
   createdAt: DateTime!
@@ -2642,9 +2610,6 @@ interface Reportable {
 
 # A report
 type Reporting implements Contribution & ContributionWithAuthor {
-  # The author of the contribution.
-  author: User!
-
   # The id of the contribution.
   id: ID!
 
@@ -2659,6 +2624,9 @@ type Reporting implements Contribution & ContributionWithAuthor {
 
   # Url of the contribution
   url: URI!
+
+  # The author of the contribution.
+  author: User!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -2880,6 +2848,20 @@ type Selection {
 
 # A budget contribution
 type SelectionStep implements Node & Step & ProposalStep {
+  # The ID of the step
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use url instead of show_url")
+
+  # The url of the step
+  url: String!
   proposals(
     after: String
     first: Int
@@ -2913,21 +2895,6 @@ type SelectionStep implements Node & Step & ProposalStep {
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
   ): ProposalConnection!
-
-  # The ID of the step
-  id: ID!
-
-  # The kind of the step
-  kind: String!
-
-  # The title of the step
-  title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -2985,29 +2952,8 @@ type SimpleQuestion implements Question {
 
 # A source
 type Source implements Node & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
-
-  # The author of the contribution.
-  author: User!
 
   # The kind of contribution.
   kind: String!
@@ -3020,6 +2966,27 @@ type Source implements Node & Contribution & Reportable & Trashable & Contributi
 
   # Url of the contribution
   url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -3733,24 +3700,6 @@ type ValueResponse implements Response {
 
 # A version of contribution
 type Version implements Node & Contribution & Sourceable & Reportable & Argumentable & Trashable & ContributionWithAuthor & EditableContribution {
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
   # The id of the contribution.
   id: ID!
   contribuable: Boolean!
@@ -3767,9 +3716,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
     type: ArgumentValue
   ): ArgumentConnection!
 
-  # The author of the contribution.
-  author: User!
-
   # The kind of contribution.
   kind: String!
 
@@ -3782,11 +3728,32 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
   # The url of version.
   url: URI!
 
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
   # The sources related to the sourceable.
   sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
