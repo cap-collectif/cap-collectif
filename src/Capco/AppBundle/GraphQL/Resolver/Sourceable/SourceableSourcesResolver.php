@@ -1,12 +1,14 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\Sourceable;
 
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Model\Sourceable;
-use Capco\AppBundle\Repository\SourceRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\AppBundle\Repository\SourceRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class SourceableSourcesResolver implements ResolverInterface
 {
@@ -17,17 +19,28 @@ class SourceableSourcesResolver implements ResolverInterface
         $this->sourceRepository = $sourceRepository;
     }
 
-    public function __invoke(Sourceable $sourceable, Argument $args): Connection
+    public function __invoke(Sourceable $sourceable, Argument $args, $viewer): Connection
     {
-        $type = $args->offsetGet('type');
-        $field = $args->offsetGet('orderBy')['field'];
-        $direction = $args->offsetGet('orderBy')['direction'];
+        // Viewer is asking for his unpublished
+        if ($args->offsetGet('viewerUnpublishedOnly') === true) {
+            if (!$viewer instanceof User) {
+                $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
+                $emptyConnection->totalCount = 0;
+                return $emptyConnection;
+            }
+            $unpublished = $this->sourceRepository->getUnpublishedByContributionAndAuthor(
+                $sourceable,
+                $viewer
+            );
+            $connection = ConnectionBuilder::connectionFromArray($unpublished, $args);
+            $connection->totalCount = \count($unpublished);
+            return $connection;
+        }
 
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
-            $sourceable,
-            $field,
-            $direction
-        ) {
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($sourceable, $args) {
+            $field = $args->offsetGet('orderBy')['field'];
+            $direction = $args->offsetGet('orderBy')['direction'];
+
             return $this->sourceRepository->getByContribution(
                 $sourceable,
                 $limit,

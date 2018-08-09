@@ -6,6 +6,7 @@ import { FormattedDate } from 'react-intl';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 import { CardUser } from '../../Ui/Card/CardUser';
+import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 import type { ProposalPreviewHeader_proposal } from './__generated__/ProposalPreviewHeader_proposal.graphql';
 
 type Props = { proposal: ProposalPreviewHeader_proposal };
@@ -13,6 +14,7 @@ type Props = { proposal: ProposalPreviewHeader_proposal };
 export class ProposalPreviewHeader extends React.Component<Props> {
   render() {
     const proposal = this.props.proposal;
+    const date = proposal.publishedAt ? proposal.publishedAt : proposal.createdAt;
     return (
       <CardUser>
         <div className="card__user__avatar">
@@ -21,13 +23,10 @@ export class ProposalPreviewHeader extends React.Component<Props> {
         <div className="ellipsis">
           <UserLink user={proposal.author} />
           <p className="excerpt small">
-            <FormattedDate
-              value={moment(proposal.createdAt)}
-              day="numeric"
-              month="long"
-              year="numeric"
-            />
+            <FormattedDate value={moment(date)} day="numeric" month="long" year="numeric" />
           </p>
+          {/* $FlowFixMe */}
+          <UnpublishedLabel publishable={proposal} />
         </div>
         <hr />
       </CardUser>
@@ -38,6 +37,8 @@ export class ProposalPreviewHeader extends React.Component<Props> {
 export default createFragmentContainer(ProposalPreviewHeader, {
   proposal: graphql`
     fragment ProposalPreviewHeader_proposal on Proposal {
+      ...UnpublishedLabel_publishable
+      publishedAt
       createdAt
       author {
         id

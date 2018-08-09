@@ -1,37 +1,65 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
-use Capco\AppBundle\Search\ProposalSearch;
-use Capco\AppBundle\Utils\Text;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Utils\Text;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Search\ProposalSearch;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
 
 class SelectionStepProposalResolver
 {
     private $logger;
     private $proposalSearch;
+    private $proposalRepo;
 
-    public function __construct(ProposalSearch $proposalSearch, LoggerInterface $logger)
-    {
+    public function __construct(
+        ProposalRepository $proposalRepo,
+        ProposalSearch $proposalSearch,
+        LoggerInterface $logger
+    ) {
         $this->logger = $logger;
         $this->proposalSearch = $proposalSearch;
+        $this->proposalRepo = $proposalRepo;
     }
 
-    public function __invoke(SelectionStep $selectionStep, Argument $args, $user, RequestStack $request): Connection
-    {
+    public function __invoke(
+        SelectionStep $selectionStep,
+        Argument $args,
+        $viewer,
+        RequestStack $request
+    ): Connection {
+        // Viewer is asking for unpublished proposals
+        if (
+            $args->offsetExists('includeUnpublishedOnly') &&
+            $args->offsetGet('includeUnpublishedOnly') === true
+        ) {
+            $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
+            $emptyConnection->totalCount = 0;
+            $emptyConnection->{'fusionCount'} = 0;
+            return $emptyConnection;
+        }
         $totalCount = 0;
         $term = null;
         if ($args->offsetExists('term')) {
             $term = $args->offsetGet('term');
         }
         try {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($selectionStep, $args, $term, $user, $request, &$totalCount) {
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $selectionStep,
+                $args,
+                $term,
+                $viewer,
+                $request,
+                &$totalCount
+            ) {
                 $field = $args->offsetGet('orderBy')['field'];
                 $direction = $args->offsetGet('orderBy')['direction'];
                 $filters = [];
@@ -51,11 +79,14 @@ class SelectionStepProposalResolver
                     $filters['statuses'] = $args->offsetGet('status');
                 }
 
-                $order = ProposalFormProposalsResolver::findOrderFromFieldAndDirection($field, $direction);
+                $order = ProposalFormProposalsResolver::findOrderFromFieldAndDirection(
+                    $field,
+                    $direction
+                );
                 $filters['selectionStep'] = $selectionStep->getId();
 
-                if (method_exists($user, 'getId')) {
-                    $seed = $user->getId();
+                if (method_exists($viewer, 'getId')) {
+                    $seed = $viewer->getId();
                 } elseif ($request->getCurrentRequest()) {
                     $seed = $request->getCurrentRequest()->getClientIp();
                 } else {

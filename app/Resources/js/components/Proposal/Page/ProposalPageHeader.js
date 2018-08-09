@@ -7,6 +7,7 @@ import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
+import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
@@ -87,6 +88,8 @@ export class ProposalPageHeader extends React.Component<Props> {
                   />
                 </span>
               )}
+              {/* $FlowFixMe */}
+              <UnpublishedLabel publishable={proposal} />
             </p>
           </div>
         </div>
@@ -141,6 +144,7 @@ export default createFragmentContainer(container, {
     fragment ProposalPageHeader_proposal on Proposal
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
+      ...UnpublishedLabel_publishable
       ...ProposalVoteButtonWrapperFragment_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       ...ProposalVoteModal_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)

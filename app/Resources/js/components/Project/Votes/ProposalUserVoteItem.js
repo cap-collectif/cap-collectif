@@ -12,6 +12,7 @@ import { Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import moment from 'moment';
 import toggle from '../../Form/Toggle';
+import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 import ProposalDetailEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
 import type { ProposalUserVoteItem_vote } from './__generated__/ProposalUserVoteItem_vote.graphql';
 import type { ProposalUserVoteItem_step } from './__generated__/ProposalUserVoteItem_step.graphql';
@@ -185,6 +186,12 @@ export class ProposalUserVoteItem extends React.Component<Props> {
             </div>
           </Col>
         )}
+        {!vote.published && (
+          <Col md={2} sm={12} xs={12}>
+            {/* $FlowFixMe */}
+            <UnpublishedLabel publishable={vote} />
+          </Col>
+        )}
         {onDelete && (
           <Col className="proposals-user-votes__col proposal-vote-col__delete" md={1}>
             <OverlayTrigger
@@ -219,6 +226,8 @@ const container = injectIntl(ProposalUserVoteItem);
 export default createFragmentContainer(container, {
   vote: graphql`
     fragment ProposalUserVoteItem_vote on ProposalVote {
+      ...UnpublishedLabel_publishable
+      published
       createdAt
       proposal {
         id

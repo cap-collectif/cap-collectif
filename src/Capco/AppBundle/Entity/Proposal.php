@@ -491,7 +491,7 @@ class Proposal
             return $this->getStep() ? $this->getStep()->canDisplay($user) : false;
         }
 
-        return false;
+        return $this->getAuthor() === $user;
     }
 
     public function isPrivate(): bool

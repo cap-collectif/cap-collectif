@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { Panel } from 'react-bootstrap';
 import type { UnpublishedProposalListView_step } from './__generated__/UnpublishedProposalListView_step.graphql';
 import type { UnpublishedProposalListView_viewer } from './__generated__/UnpublishedProposalListView_viewer.graphql';
 import ProposalList from './ProposalList';
@@ -17,15 +18,22 @@ export class UnpublishedProposalListView extends React.Component<Props> {
       return null;
     }
     return (
-      <div>
-        {/* $FlowFixMe */}
-        <ProposalList
-          step={step}
-          proposals={step.viewerUnpublishedProposals}
-          viewer={viewer}
-          id="proposals-unpublished-list"
-        />
-      </div>
+      <Panel bsStyle="danger">
+        <Panel.Heading>
+          <Panel.Title componentClass="h3">
+            {step.viewerUnpublishedProposals.totalCount} Non publiés
+          </Panel.Title>
+        </Panel.Heading>
+        <Panel.Body>
+          {/* $FlowFixMe */}
+          <ProposalList
+            step={step}
+            proposals={step.viewerUnpublishedProposals}
+            viewer={viewer}
+            id="proposals-unpublished-list"
+          />
+        </Panel.Body>
+      </Panel>
     );
   }
 }

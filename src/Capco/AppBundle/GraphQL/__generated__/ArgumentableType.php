@@ -71,6 +71,12 @@ final class ArgumentableType extends InterfaceType implements GeneratedTypeInter
                             'description' => null,
                         ],
                         [
+                            'name' => 'viewerUnpublishedOnly',
+                            'type' => Type::boolean(),
+                            'description' => null,
+                            'defaultValue' => false,
+                        ],
+                        [
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('ArgumentOrder'),
                             'description' => null,
@@ -79,7 +85,7 @@ final class ArgumentableType extends InterfaceType implements GeneratedTypeInter
                         [
                             'name' => 'type',
                             'type' => $globalVariable->get('typeResolver')->resolve('ArgumentValue'),
-                            'description' => 'If omitted, returns all arguments. If provided, returns the arguments of this particular type.',
+                            'description' => 'If provided, returns the arguments of this particular type.',
                         ],
                     ],
                     'resolve' => null,

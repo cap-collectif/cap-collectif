@@ -21,7 +21,11 @@ export class UnpublishedLabel extends React.Component<Props> {
       overlay = (
         <Popover
           id={`publishable-${publishable.id}-not-accounted-popover`}
-          title={<FormattedMessage id="account-pending-confirmation" />}>
+          title={
+            <strong>
+              <FormattedMessage id="account-pending-confirmation" />
+            </strong>
+          }>
           <p>
             <FormattedMessage
               id="account-pending-confirmation-message"
@@ -46,7 +50,11 @@ export class UnpublishedLabel extends React.Component<Props> {
       overlay = (
         <Popover
           id={`publishable-${publishable.id}-not-accounted-popover`}
-          title={<FormattedMessage id="account-not-confirmed-in-time" />}>
+          title={
+            <strong>
+              <FormattedMessage id="account-not-confirmed-in-time" />
+            </strong>
+          }>
           <FormattedMessage id="account-not-confirmed-in-time-message" />
         </Popover>
       );
@@ -55,7 +63,11 @@ export class UnpublishedLabel extends React.Component<Props> {
       overlay = (
         <Popover
           id={`publishable-${publishable.id}-not-accounted-popover`}
-          title={<FormattedMessage id="account-confirmed-too-late" />}>
+          title={
+            <strong>
+              <FormattedMessage id="account-confirmed-too-late" />
+            </strong>
+          }>
           <FormattedMessage id="account-confirmed-too-late-message" />
         </Popover>
       );

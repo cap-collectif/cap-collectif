@@ -70,14 +70,17 @@ Opinion:
         description: 'Identifies the body of the contribution rendered to text.'
       arguments:
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args, getUser()])'
       versions:
         type: 'VersionConnection!'
         argsBuilder: 'Relay::Connection'
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", [value, args])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", [value, args, getUser()])'
         description: 'The versions related to the contribution.'
         args:
+          viewerUnpublishedOnly:
+            type: 'Boolean'
+            defaultValue: false
           orderBy:
             type: 'VersionOrder'
             defaultValue: { field: CREATED_AT, direction: DESC }

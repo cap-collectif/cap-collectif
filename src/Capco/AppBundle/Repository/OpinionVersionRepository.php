@@ -116,6 +116,18 @@ class OpinionVersionRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getUnpublishedByContributionAndAuthor(Opinion $opinion, User $author): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.parent = :opinion')
+            ->andWhere('o.author = :author')
+            ->andWhere('o.published = false')
+            ->setParameter('author', $author)
+            ->setParameter('opinion', $opinion)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getByContribution(
         Opinion $opinion,
         ?int $limit,

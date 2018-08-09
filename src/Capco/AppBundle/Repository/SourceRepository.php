@@ -57,6 +57,24 @@ class SourceRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getUnpublishedByContributionAndAuthor(
+        Sourceable $sourceable,
+        User $author
+    ): array {
+        $qb = $this->createQueryBuilder('s')
+            ->andWhere('s.published = false')
+            ->andWhere('s.author = :author')
+            ->setParameter('author', $author);
+        if ($sourceable instanceof Opinion) {
+            $qb->andWhere('s.opinion = :opinion')->setParameter('opinion', $sourceable);
+        }
+        if ($sourceable instanceof OpinionVersion) {
+            $qb->andWhere('s.opinionVersion = :version')->setParameter('version', $sourceable);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getByContribution(
         Sourceable $sourceable,
         ?int $limit,

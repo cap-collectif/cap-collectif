@@ -8,6 +8,8 @@ import { $refType, $fragmentRefs, intlMock } from '../../../mocks';
 describe('<ProposalUserVoteItem />', () => {
   const vote = {
     $refType,
+    $fragmentRefs,
+    published: true,
     createdAt: '2015-01-01 00:00:00',
     proposal: {
       id: '1',

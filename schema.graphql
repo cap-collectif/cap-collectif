@@ -308,9 +308,10 @@ interface Argumentable {
     first: Int
     before: String
     last: Int
+    viewerUnpublishedOnly: Boolean = false
     orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
 
-    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
+    # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection!
 }
@@ -1528,9 +1529,10 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     first: Int
     before: String
     last: Int
+    viewerUnpublishedOnly: Boolean = false
     orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
 
-    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
+    # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection!
 
@@ -1556,7 +1558,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   updatedAt: DateTime
 
   # The sources related to the sourceable.
-  sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
+  sources(after: String, first: Int, before: String, last: Int, viewerUnpublishedOnly: Boolean = false, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
@@ -1624,7 +1626,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   bodyText: String!
 
   # The versions related to the contribution.
-  versions(after: String, first: Int, before: String, last: Int, orderBy: VersionOrder = {field: CREATED_AT, direction: DESC}): VersionConnection!
+  versions(after: String, first: Int, before: String, last: Int, viewerUnpublishedOnly: Boolean = false, orderBy: VersionOrder = {field: CREATED_AT, direction: DESC}): VersionConnection!
 
   # Where the proposition has been placed.
   section: Section!
@@ -3145,7 +3147,7 @@ interface Sourceable {
   contribuable: Boolean!
 
   # The sources related to the sourceable.
-  sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
+  sources(after: String, first: Int, before: String, last: Int, viewerUnpublishedOnly: Boolean = false, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
@@ -3789,9 +3791,10 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
     first: Int
     before: String
     last: Int
+    viewerUnpublishedOnly: Boolean = false
     orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
 
-    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
+    # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection!
 
@@ -3817,7 +3820,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   updatedAt: DateTime
 
   # The sources related to the sourceable.
-  sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
+  sources(after: String, first: Int, before: String, last: Int, viewerUnpublishedOnly: Boolean = false, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]

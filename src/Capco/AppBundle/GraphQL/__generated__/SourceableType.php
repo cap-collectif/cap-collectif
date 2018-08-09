@@ -71,6 +71,12 @@ final class SourceableType extends InterfaceType implements GeneratedTypeInterfa
                             'description' => null,
                         ],
                         [
+                            'name' => 'viewerUnpublishedOnly',
+                            'type' => Type::boolean(),
+                            'description' => null,
+                            'defaultValue' => false,
+                        ],
+                        [
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('SourceOrder'),
                             'description' => null,
@@ -78,7 +84,7 @@ final class SourceableType extends InterfaceType implements GeneratedTypeInterfa
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
                     },
                     'description' => 'The sources related to the sourceable.',
                     'deprecationReason' => null,

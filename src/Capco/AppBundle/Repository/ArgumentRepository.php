@@ -61,6 +61,30 @@ class ArgumentRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
+    public function getUnpublishedByContributionAndTypeAndAuthor(
+        Argumentable $contribution,
+        int $type = null,
+        User $author
+    ): array {
+        $qb = $this->createQueryBuilder('a')
+            ->andWhere('a.published = false')
+            ->andWhere('a.Author = :author')
+            ->setParameter('author', $author);
+        if (null !== $type) {
+            $qb->andWhere('a.type = :type')->setParameter('type', $type);
+        }
+        if ($contribution instanceof Opinion) {
+            $qb->andWhere('a.opinion = :opinion')->setParameter('opinion', $contribution);
+        }
+        if ($contribution instanceof OpinionVersion) {
+            $qb
+                ->andWhere('a.opinionVersion = :opinionVersion')
+                ->setParameter('opinionVersion', $contribution);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getByContributionAndType(
         Argumentable $contribution,
         ?int $type = null,

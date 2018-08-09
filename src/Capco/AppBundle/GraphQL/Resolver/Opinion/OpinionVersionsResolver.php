@@ -1,13 +1,15 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Opinion;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class OpinionVersionsResolver implements ResolverInterface
 {
@@ -22,8 +24,23 @@ class OpinionVersionsResolver implements ResolverInterface
         $this->versionRepository = $versionRepository;
     }
 
-    public function __invoke(Opinion $opinion, Argument $args): Connection
+    public function __invoke(Opinion $opinion, Argument $args, $viewer): Connection
     {
+        // Viewer is asking for his unpublished
+        if ($args->offsetGet('viewerUnpublishedOnly') === true) {
+            if (!$viewer instanceof User) {
+                $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
+                $emptyConnection->totalCount = 0;
+                return $emptyConnection;
+            }
+            $unpublished = $this->versionRepository->getUnpublishedByContributionAndAuthor(
+                $opinion,
+                $viewer
+            );
+            $connection = ConnectionBuilder::connectionFromArray($unpublished, $args);
+            $connection->totalCount = \count($unpublished);
+            return $connection;
+        }
         $paginator = new Paginator(function (?int $offset, ?int $limit) use ($opinion, $args) {
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];

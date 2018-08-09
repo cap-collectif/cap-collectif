@@ -9,10 +9,12 @@ exports[`<UnpublishedLabel /> renders when not published because author confirme
       id="publishable-id1-not-accounted-popover"
       placement="right"
       title={
-        <FormattedMessage
-          id="account-confirmed-too-late"
-          values={Object {}}
-        />
+        <strong>
+          <FormattedMessage
+            id="account-confirmed-too-late"
+            values={Object {}}
+          />
+        </strong>
       }
     >
       <FormattedMessage
@@ -54,10 +56,12 @@ exports[`<UnpublishedLabel /> renders when not published because author is not c
       id="publishable-id1-not-accounted-popover"
       placement="right"
       title={
-        <FormattedMessage
-          id="account-not-confirmed-in-time"
-          values={Object {}}
-        />
+        <strong>
+          <FormattedMessage
+            id="account-not-confirmed-in-time"
+            values={Object {}}
+          />
+        </strong>
       }
     >
       <FormattedMessage
@@ -99,10 +103,12 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
       id="publishable-id1-not-accounted-popover"
       placement="right"
       title={
-        <FormattedMessage
-          id="account-pending-confirmation"
-          values={Object {}}
-        />
+        <strong>
+          <FormattedMessage
+            id="account-pending-confirmation"
+            values={Object {}}
+          />
+        </strong>
       }
     >
       <p>

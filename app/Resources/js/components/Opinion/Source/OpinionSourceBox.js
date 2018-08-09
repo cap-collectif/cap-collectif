@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Panel, Row, Col } from 'react-bootstrap';
+import { Panel, Row, Col, ListGroup } from 'react-bootstrap';
 import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type {
@@ -9,6 +9,7 @@ import type {
 } from './__generated__/OpinionSourceBoxQuery.graphql';
 import OpinionSourceListView from './OpinionSourceListView';
 import OpinionSourceAdd from './OpinionSourceAdd';
+import OpinionSource from './OpinionSource';
 import Loader from '../../Ui/Loader';
 import Filter from '../../Utils/Filter';
 import type { OpinionSourceBox_sourceable } from './__generated__/OpinionSourceBox_sourceable.graphql';
@@ -38,66 +39,91 @@ class OpinionSourceBox extends React.Component<Props, State> {
     const { order } = this.state;
     const totalCount = sourceable.allSources.totalCount;
     return (
-      <Panel>
-        <Panel.Heading>
-          <Row>
-            <Col xs={12} sm={6} md={6}>
-              <OpinionSourceAdd sourceable={sourceable} />
-            </Col>
-            {totalCount > 1 && (
+      <div>
+        {sourceable.viewerUnpublishedSources &&
+        sourceable.viewerUnpublishedSources.totalCount > 0 ? (
+          <Panel bsStyle="danger">
+            <Panel.Heading>
+              <Panel.Title>
+                {sourceable.viewerUnpublishedSources.totalCount} Non publiées
+              </Panel.Title>
+            </Panel.Heading>
+            <ListGroup className="list-group-custom">
+              {sourceable.viewerUnpublishedSources.edges &&
+                sourceable.viewerUnpublishedSources.edges
+                  .filter(Boolean)
+                  .map(edge => edge.node)
+                  .filter(Boolean)
+                  .map(source => {
+                    return (
+                      // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
+                      <OpinionSource key={source.id} source={source} sourceable={sourceable} />
+                    );
+                  })}
+            </ListGroup>
+          </Panel>
+        ) : null}
+        <Panel>
+          <Panel.Heading>
+            <Row>
               <Col xs={12} sm={6} md={6}>
-                <Filter show value={order} onChange={this.handleFilterChange} />
+                <OpinionSourceAdd sourceable={sourceable} />
               </Col>
-            )}
-          </Row>
-        </Panel.Heading>
-        <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query OpinionSourceBoxQuery(
-              $sourceableId: ID!
-              $isAuthenticated: Boolean!
-              $count: Int!
-              $cursor: String
-              $orderBy: SourceOrder!
-            ) {
-              sourceable: node(id: $sourceableId) {
-                ...OpinionSourceListView_sourceable
-                  @arguments(
-                    cursor: $cursor
-                    orderBy: $orderBy
-                    count: $count
-                    isAuthenticated: $isAuthenticated
-                  )
+              {totalCount > 1 && (
+                <Col xs={12} sm={6} md={6}>
+                  <Filter show value={order} onChange={this.handleFilterChange} />
+                </Col>
+              )}
+            </Row>
+          </Panel.Heading>
+          <QueryRenderer
+            environment={environment}
+            query={graphql`
+              query OpinionSourceBoxQuery(
+                $sourceableId: ID!
+                $isAuthenticated: Boolean!
+                $count: Int!
+                $cursor: String
+                $orderBy: SourceOrder!
+              ) {
+                sourceable: node(id: $sourceableId) {
+                  ...OpinionSourceListView_sourceable
+                    @arguments(
+                      cursor: $cursor
+                      orderBy: $orderBy
+                      count: $count
+                      isAuthenticated: $isAuthenticated
+                    )
+                }
               }
+            `}
+            variables={
+              ({
+                isAuthenticated,
+                cursor: null,
+                count: 25,
+                sourceableId: sourceable.id,
+                orderBy: { field: 'CREATED_AT', direction: 'DESC' },
+              }: OpinionSourceBoxQueryVariables)
             }
-          `}
-          variables={
-            ({
-              isAuthenticated,
-              cursor: null,
-              count: 25,
-              sourceableId: sourceable.id,
-              orderBy: { field: 'CREATED_AT', direction: 'DESC' },
-            }: OpinionSourceBoxQueryVariables)
-          }
-          render={({ error, props }: ReadyState & { props?: ?OpinionSourceBoxQueryResponse }) => {
-            if (error) {
-              return graphqlError;
-            }
-            if (props) {
-              if (!props.sourceable) {
+            render={({ error, props }: ReadyState & { props?: ?OpinionSourceBoxQueryResponse }) => {
+              if (error) {
                 return graphqlError;
               }
-              return (
-                // $FlowFixMe
-                <OpinionSourceListView order={order} sourceable={props.sourceable} />
-              );
-            }
-            return <Loader />;
-          }}
-        />
-      </Panel>
+              if (props) {
+                if (!props.sourceable) {
+                  return graphqlError;
+                }
+                return (
+                  // $FlowFixMe
+                  <OpinionSourceListView order={order} sourceable={props.sourceable} />
+                );
+              }
+              return <Loader />;
+            }}
+          />
+        </Panel>
+      </div>
     );
   }
 }
@@ -107,8 +133,18 @@ export default createFragmentContainer(OpinionSourceBox, {
     fragment OpinionSourceBox_sourceable on Sourceable {
       id
       ...OpinionSourceAdd_sourceable
+      ...OpinionSource_sourceable
       allSources: sources(first: 0) {
         totalCount
+      }
+      viewerUnpublishedSources: sources(viewerUnpublishedOnly: true) {
+        totalCount
+        edges {
+          node {
+            id
+            ...OpinionSource_source
+          }
+        }
       }
     }
   `,
