@@ -70,14 +70,6 @@ class Proposal
     use PublishableTrait;
     use FollowableTrait;
 
-    const STATE_DRAFT = 'draft';
-    const STATE_ENABLED = 'published';
-    const STATE_TRASHED = 'trashed';
-    const STATE_HIDDEN_CONTENT = 'hidden_content';
-    const STATE_DISABlED = 'unpublished';
-    const STATE_DELETED = 'deleted';
-    const NOT_PUBLISHED = 'NOT_PUBLISHED';
-
     public static $ratings = [1, 2, 3, 4, 5];
 
     /**

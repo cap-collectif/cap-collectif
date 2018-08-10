@@ -103,7 +103,7 @@ class OpinionAdmin extends CapcoAdmin
             ->add('argumentsCount', null, ['label' => 'admin.fields.opinion.argument_count'])
             ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count'])
             ->add('published', null, [
-                'editable' => true,
+                'editable' => false,
                 'label' => 'admin.fields.opinion.is_enabled',
             ])
             ->add('pinned', null, ['editable' => true, 'label' => 'admin.fields.opinion.pinned'])
@@ -180,7 +180,8 @@ class OpinionAdmin extends CapcoAdmin
             ->with('admin.fields.opinion.group_publication')
             ->add('published', null, [
                 'label' => 'admin.fields.opinion.is_enabled',
-                'required' => false,
+                'disabled' => true,
+                'attr' => ['readonly' => true],
             ])
             ->add('pinned', null, [
                 'label' => 'admin.fields.opinion.pinned_long',
@@ -192,7 +193,6 @@ class OpinionAdmin extends CapcoAdmin
             ->add('trashedReason', null, ['label' => 'admin.fields.opinion.trashed_reason'])
             ->end()
             ->with('admin.fields.opinion.group_answer')
-
             ->add('answer', 'sonata_type_model_list', [
                 'btn_list' => false,
                 'label' => 'admin.fields.opinion.answer',

@@ -100,7 +100,8 @@ Proposal:
       publicationStatus:
         type: 'ProposalPublicationStatus!'
         description: 'The publication status for this proposal.'
-        resolve: "@=resolver('proposal_publicationStatus', [value])"
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPublicationStatusResolver", [value])'
       reference:
         type: 'String!'
         description: 'The unique reference of proposal'

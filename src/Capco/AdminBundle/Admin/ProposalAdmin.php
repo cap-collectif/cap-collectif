@@ -64,6 +64,7 @@ class ProposalAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig',
             ])
             ->add('state', null, [
+                'mapped' => false,
                 'label' => 'admin.fields.proposal.state.label',
                 'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig',
             ])
@@ -87,7 +88,7 @@ class ProposalAdmin extends AbstractAdmin
         $datagridMapper
             ->add('title', null, ['label' => 'admin.fields.proposal.title'])
             ->add('reference', null, ['label' => 'admin.fields.proposal.reference_of_proposal'])
-            ->add('enabled', null, ['label' => 'admin.fields.proposal.enabled'])
+            ->add('published', null, ['label' => 'admin.fields.proposal.enabled'])
             ->add('createdAt', null, ['label' => 'admin.fields.proposal.created_at'])
             ->add('trashedStatus', null, ['label' => 'admin.fields.proposal.is_trashed'])
             ->add('draft', null, ['label' => 'admin.fields.proposal.draft'])

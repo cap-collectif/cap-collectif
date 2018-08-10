@@ -4,20 +4,20 @@ ProposalPublicationStatus:
     description: 'Available statuses'
     values:
       PUBLISHED:
-        value: 'PUBLISHED'
-        description: 'Normal status, Publicly visible'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::PUBLISHED")'
+        description: 'Publicly visible'
       TRASHED:
-        value: 'TRASHED'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::TRASHED")'
         description: 'Publicly visible in the trash bin'
       TRASHED_NOT_VISIBLE:
-        value: 'TRASHED_NOT_VISIBLE'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::TRASHED_NOT_VISIBLE")'
         description: 'In the trash bin, content not visible'
       DELETED:
-        value: 'DELETED'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::DELETED")'
         description: 'Not publicly visible, deleted by author'
       DRAFT:
-        value: 'DRAFT'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::DRAFT")'
         description: 'Draft, not publicly visible, only showed for his author.'
       UNPUBLISHED:
-        value: 'UNPUBLISHED'
+        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::UNPUBLISHED")'
         description: 'Visible by author only.'

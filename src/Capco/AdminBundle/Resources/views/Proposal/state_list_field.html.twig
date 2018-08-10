@@ -2,23 +2,19 @@
 
 {% block field %}
     {% spaceless %}
-        {% if value %}
-            {% set trans_state = ('admin.fields.proposal.state.choices.'~value)|trans({}, 'SonataAdminBundle') %}
-            {% if value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_DELETED') %}
-                <span class="label label-danger">{{ trans_state }}</span>
-            {% elseif value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_DISABlED') %}
-                <span class="label label-default">{{ trans_state }}</span>
-            {% elseif value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_DRAFT') %}
-                <span class="label label-info">{{ trans_state }}</span>
-            {% elseif value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_ENABLED') %}
-                <span class="label label-success">{{ trans_state }}</span>
-            {% elseif value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_EXPIRED') %}
-                <span class="label label-danger">{{ trans_state }}</span>
-            {% elseif value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_HIDDEN_CONTENT') %}
-                <span class="label label-danger">{{ trans_state }}</span>
-            {% elseif value == constant('Capco\\AppBundle\\Entity\\Proposal::STATE_TRASHED') %}
-                <span class="label label-danger">{{ trans_state }}</span>
+            {% set value = proposalPublicationResolver.__invoke(object) %}
+            {% if value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::DELETED') %}
+                <span class="label label-danger">{{ 'admin.fields.proposal.state.choices.deleted'|trans }}</span>
+            {% elseif value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::UNPUBLISHED') %}
+                <span class="label label-default">{{ 'admin.fields.proposal.state.choices.unpublished'|trans }}</span>
+            {% elseif value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::DRAFT') %}
+                <span class="label label-info">{{ 'admin.fields.proposal.state.choices.draft'|trans }}</span>
+            {% elseif value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::PUBLISHED') %}
+                <span class="label label-success">{{ 'admin.fields.proposal.state.choices.published'|trans }}</span>
+            {% elseif value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::TRASHED_NOT_VISIBLE') %}
+                <span class="label label-danger">{{ 'admin.fields.proposal.state.choices.hidden_content'|trans }}</span>
+            {% elseif value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::TRASHED') %}
+                <span class="label label-danger">{{ 'admin.fields.proposal.state.choices.trashed'|trans }}</span>
             {% endif %}
-        {% endif %}
     {% endspaceless %}
 {% endblock %}

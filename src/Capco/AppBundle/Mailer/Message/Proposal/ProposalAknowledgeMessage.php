@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
@@ -50,13 +49,20 @@ final class ProposalAknowledgeMessage extends Message
         string $typeOfMail
     ): array {
         return [
-            'projectTitle' => self::escape($proposal->getStep()->getProject()->getTitle()),
+            'projectTitle' => self::escape(
+                $proposal
+                    ->getStep()
+                    ->getProject()
+                    ->getTitle()
+            ),
             'projectLink' => $stepLink,
             'proposalLink' => $proposalLink,
+            'proposalPulished' => $proposal->isPublished(),
             'proposalName' => $proposal->getTitle(),
             'homepageUrl' => $homepageUrl,
             'typeOfMail' => $typeOfMail,
-            'sendAt' => ('create' === $typeOfMail) ? $proposal->getCreatedAt() : $proposal->getUpdatedAt(),
+            'sendAt' =>
+                ('create' === $typeOfMail) ? $proposal->getCreatedAt() : $proposal->getUpdatedAt(),
             'endAt' => $proposal->getStep()->getEndAt(),
             'to' => self::escape($recipentEmail),
             'username' => $proposal->getAuthor()->getDisplayName(),

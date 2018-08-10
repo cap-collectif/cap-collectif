@@ -101,11 +101,6 @@ services:
       - { name: overblog_graphql.resolver, alias: 'project_steps', method: 'resolveProjectSteps' }
       - { name: overblog_graphql.resolver, alias: 'step_type', method: 'resolveStepType' }
       - { name: overblog_graphql.resolver, alias: 'response_type', method: 'resolveResponseType' }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposal_publicationStatus',
-          method: 'resolveProposalPublicationStatus',
-        }
       - { name: overblog_graphql.resolver, alias: 'proposal_reference', method: 'resolveReference' }
       - {
           name: overblog_graphql.resolver,
@@ -360,11 +355,6 @@ services:
       - '@router'
     tags:
       - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Step\SelectionStepProposalResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@capco.search.proposal_search', '@logger']
 
   Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalCommentsResolver:
     tags:

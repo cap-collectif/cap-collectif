@@ -66,7 +66,7 @@ class ArgumentAdmin extends AbstractAdmin
             ->add('Author', 'sonata_type_model', ['label' => 'admin.fields.argument.author'])
             ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
             ->add('published', null, [
-                'editable' => true,
+                'editable' => false,
                 'label' => 'admin.fields.argument.is_enabled',
             ])
             ->add('trashedStatus', null, [
@@ -94,7 +94,8 @@ class ArgumentAdmin extends AbstractAdmin
             ])
             ->add('published', null, [
                 'label' => 'admin.fields.argument.is_enabled',
-                'required' => false,
+                'disabled' => true,
+                'attr' => ['readonly' => true],
             ])
             ->add('opinion', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.argument.opinion',

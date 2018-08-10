@@ -639,7 +639,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposal_publicationStatus", array(0 => $value)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPublicationStatusResolver", array(0 => $value)]);
                     },
                     'description' => 'The publication status for this proposal.',
                     'deprecationReason' => null,

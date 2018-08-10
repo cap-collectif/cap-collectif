@@ -2208,7 +2208,7 @@ enum ProposalOrderField {
 
 # Available statuses
 enum ProposalPublicationStatus {
-  # Normal status, Publicly visible
+  # Publicly visible
   PUBLISHED
 
   # Publicly visible in the trash bin

@@ -11,23 +11,19 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
 
-class SelectionStepProposalResolver
+class SelectionStepProposalResolver implements ResolverInterface
 {
     private $logger;
     private $proposalSearch;
-    private $proposalRepo;
 
-    public function __construct(
-        ProposalRepository $proposalRepo,
-        ProposalSearch $proposalSearch,
-        LoggerInterface $logger
-    ) {
+    public function __construct(ProposalSearch $proposalSearch, LoggerInterface $logger)
+    {
         $this->logger = $logger;
         $this->proposalSearch = $proposalSearch;
-        $this->proposalRepo = $proposalRepo;
     }
 
     public function __invoke(

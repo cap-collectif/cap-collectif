@@ -33,6 +33,10 @@
         {% if typeOfMail == 'create' %}
             {{ 'your-proposal-has-been-registered'|trans({'{proposalTitle}': proposalName,'{proposalLink}': proposalLink},'CapcoAppBundle')|raw }}
             {{ 'on-date-at-time'|trans({'{date}':proposalDate, '{heure}': proposalHour},'CapcoAppBundle')|raw }}.
+
+            {% if not proposalPublished %} 
+                {{ 'unpublished-contribution-help-text'|trans({},'CapcoAppBundle')|raw }}
+            {% endif %} 
         {% else %}
             {{ 'you-have-modified-your-proposal'|trans({
                 '{proposalTitle}': proposalName,

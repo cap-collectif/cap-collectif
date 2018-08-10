@@ -264,7 +264,6 @@ class User extends BaseUser
     public function __construct($encoder = null)
     {
         parent::__construct();
-
         $this->encoder = $encoder;
         $this->roles = ['ROLE_USER'];
         $this->opinions = new ArrayCollection();

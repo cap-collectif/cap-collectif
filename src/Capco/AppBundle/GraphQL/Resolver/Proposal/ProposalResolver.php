@@ -112,46 +112,6 @@ class ProposalResolver implements ContainerAwareInterface
         throw new UserError('Could not resolve type of Response.');
     }
 
-    public function resolveProposalPublicationStatus(Proposal $proposal): string
-    {
-        if ($proposal->isDraft()) {
-            return 'DRAFT';
-        }
-        if ($proposal->isDeleted()) {
-            return 'DELETED';
-        }
-
-        if ($proposal->isTrashed()) {
-            if ($proposal->getTrashedStatus() === Trashable::STATUS_VISIBLE) {
-                return 'TRASHED';
-            }
-            return 'TRASHED_NOT_VISIBLE';
-        }
-
-        return 'PUBLISHED';
-
-        // if (null !== $this->getDeletedAt()) {
-        //     return self::STATE_DELETED;
-        // }
-
-        // if (!$this->isPublished()) {
-        //     return self::NOT_PUBLISHED;
-        // }
-
-        // if ($this->isTrashed()) {
-        //     if ($this->getTrashedStatus() === Trashable::STATUS_VISIBLE) {
-        //         return self::STATE_TRASHED;
-        //     }
-        //     return self::STATE_HIDDEN_CONTENT;
-        // }
-
-        // if ($this->isDraft()) {
-        //     return self::STATE_DRAFT;
-        // }
-
-        // return self::STATE_ENABLED;
-    }
-
     public function resolveShowUrl(Proposal $proposal): string
     {
         $step = $proposal->getStep();

@@ -84,7 +84,7 @@ class CommentAdmin extends AbstractAdmin
             ])
             ->add('votesCount', null, ['label' => 'admin.fields.comment.vote_count'])
             ->add('published', null, [
-                'editable' => true,
+                'editable' => false,
                 'label' => 'admin.fields.comment.is_enabled',
             ])
             ->add('trashedStatus', null, [
@@ -128,7 +128,8 @@ class CommentAdmin extends AbstractAdmin
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
             ->add('published', null, [
                 'label' => 'admin.fields.comment.is_enabled',
-                'required' => false,
+                'disabled' => true,
+                'attr' => ['readonly' => true],
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
                 'label' => 'admin.fields.opinion.is_trashed',

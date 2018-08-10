@@ -60,7 +60,7 @@ class SourceAdmin extends AbstractAdmin
             ->add('category', 'sonata_type_model', ['label' => 'admin.fields.source.category'])
             ->add('votesCount', null, ['label' => 'admin.fields.source.vote_count_source'])
             ->add('published', null, [
-                'editable' => true,
+                'editable' => false,
                 'label' => 'admin.fields.source.is_enabled',
             ])
             ->add('trashedStatus', null, [
@@ -82,7 +82,8 @@ class SourceAdmin extends AbstractAdmin
             ->add('title', null, ['label' => 'admin.fields.source.title'])
             ->add('published', null, [
                 'label' => 'admin.fields.source.is_enabled',
-                'required' => false,
+                'disabled' => true,
+                'attr' => ['readonly' => true],
             ])
             ->add('body', null, ['label' => 'admin.fields.source.body'])
             ->add('author', 'sonata_type_model_autocomplete', [

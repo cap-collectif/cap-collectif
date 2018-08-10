@@ -62,7 +62,7 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
             ->add('published', null, [
                 'label' => 'admin.fields.opinion_version.is_enabled',
-                'editable' => true,
+                'editable' => false,
             ])
             ->add('trashedStatus', null, [
                 'label' => 'admin.fields.opinion_version.is_trashed',
@@ -108,7 +108,8 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->with('admin.fields.opinion_version.group_publication')
             ->add('published', null, [
                 'label' => 'admin.fields.opinion_version.is_enabled',
-                'required' => false,
+                'disabled' => true,
+                'attr' => ['readonly' => true],
             ])
             ->add('trashedStatus', TrashedStatusType::class, [
                 'label' => 'admin.fields.opinion.is_trashed',
