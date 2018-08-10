@@ -20,14 +20,22 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
       }
     >
       <FormattedHTMLMessage
-        id="user.confirm.email"
+        id="email-address-confirmation-banner-message"
         values={
           Object {
-            "email": undefined,
-            "link": "http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique",
+            "emailAddress": undefined,
           }
         }
       />
+       
+      <a
+        href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+      >
+        <FormattedMessage
+          id="cnil.learn"
+          values={Object {}}
+        />
+      </a>
     </div>
     <div
       className="col-md-5"
@@ -94,14 +102,22 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
       }
     >
       <FormattedHTMLMessage
-        id="user.confirm.email"
+        id="email-address-confirmation-banner-message"
         values={
           Object {
-            "email": undefined,
-            "link": "http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique",
+            "emailAddress": undefined,
           }
         }
       />
+       
+      <a
+        href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+      >
+        <FormattedMessage
+          id="cnil.learn"
+          values={Object {}}
+        />
+      </a>
     </div>
     <div
       className="col-md-5"
@@ -168,14 +184,22 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
       }
     >
       <FormattedHTMLMessage
-        id="user.confirm.email"
+        id="email-address-confirmation-banner-message"
         values={
           Object {
-            "email": undefined,
-            "link": "http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique",
+            "emailAddress": undefined,
           }
         }
       />
+       
+      <a
+        href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+      >
+        <FormattedMessage
+          id="cnil.learn"
+          values={Object {}}
+        />
+      </a>
     </div>
     <div
       className="col-md-5"

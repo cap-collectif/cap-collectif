@@ -56,13 +56,14 @@ export class EmailNotConfirmedAlert extends React.Component<Props, State> {
         <div className="container">
           <div className="col-md-7" style={{ marginBottom: 5 }}>
             <FormattedHTMLMessage
-              id="user.confirm.email"
+              id="email-address-confirmation-banner-message"
               values={{
-                email: user.email,
-                link:
-                  'http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique',
+                emailAddress: user.email,
               }}
-            />
+            />{' '}
+            <a href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique">
+              <FormattedMessage id="cnil.learn" />
+            </a>
           </div>
           <div className="col-md-5">
             {confirmationSent ? (
