@@ -390,16 +390,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "d2c0a83b7533d6912e8d516756ebd34f893e9169"
+                "reference": "46afded9720f40b9dc63542af4e3e43a1177acb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/d2c0a83b7533d6912e8d516756ebd34f893e9169",
-                "reference": "d2c0a83b7533d6912e8d516756ebd34f893e9169",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/46afded9720f40b9dc63542af4e3e43a1177acb0",
+                "reference": "46afded9720f40b9dc63542af4e3e43a1177acb0",
                 "shasum": ""
             },
             "require": {
@@ -442,7 +442,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2018-03-29T19:57:20+00:00"
+            "time": "2018-08-08T08:57:40+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -798,28 +798,31 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.7.1",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "11037b4352c008373561dc6fc836834eed80c3b5"
+                "reference": "5140a64c08b4b607b9bedaae0cedd26f04a0e621"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/11037b4352c008373561dc6fc836834eed80c3b5",
-                "reference": "11037b4352c008373561dc6fc836834eed80c3b5",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/5140a64c08b4b607b9bedaae0cedd26f04a0e621",
+                "reference": "5140a64c08b4b607b9bedaae0cedd26f04a0e621",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "^2.7.1",
+                "doctrine/cache": "^1.0",
+                "doctrine/event-manager": "^1.0",
                 "ext-pdo": "*",
                 "php": "^7.1"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^4.0",
-                "phpunit/phpunit": "^7.0",
+                "jetbrains/phpstorm-stubs": "^2018.1.2",
+                "phpstan/phpstan": "^0.10.1",
+                "phpunit/phpunit": "^7.1.2",
                 "phpunit/phpunit-mock-objects": "!=3.2.4,!=3.2.5",
-                "symfony/console": "^2.0.5||^3.0",
+                "symfony/console": "^2.0.5|^3.0|^4.0",
                 "symfony/phpunit-bridge": "^3.4.5|^4.0.5"
             },
             "suggest": {
@@ -831,7 +834,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7.x-dev"
+                    "dev-master": "2.8.x-dev",
+                    "dev-develop": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -869,7 +873,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2018-04-07T18:44:18+00:00"
+            "time": "2018-07-13T03:16:35+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1487,16 +1491,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.6.1",
+            "version": "v2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "87ee409783a4a322b5597ebaae558661404055a7"
+                "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/87ee409783a4a322b5597ebaae558661404055a7",
-                "reference": "87ee409783a4a322b5597ebaae558661404055a7",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
+                "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "shasum": ""
             },
             "require": {
@@ -1565,7 +1569,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2018-02-27T07:30:56+00:00"
+            "time": "2018-07-12T20:47:13+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -2387,16 +2391,16 @@
         },
         {
             "name": "friendsofsymfony/http-cache",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSHttpCache.git",
-                "reference": "804723f9e12fa1c7323f1aa676e129bbd9f82de2"
+                "reference": "508d2322c031a8c2cc9f2043bd5618ab83db8f9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCache/zipball/804723f9e12fa1c7323f1aa676e129bbd9f82de2",
-                "reference": "804723f9e12fa1c7323f1aa676e129bbd9f82de2",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCache/zipball/508d2322c031a8c2cc9f2043bd5618ab83db8f9a",
+                "reference": "508d2322c031a8c2cc9f2043bd5618ab83db8f9a",
                 "shasum": ""
             },
             "require": {
@@ -2424,7 +2428,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "2.4.x-dev"
                 }
             },
             "autoload": {
@@ -2461,7 +2465,7 @@
                 "purge",
                 "varnish"
             ],
-            "time": "2018-04-24T09:14:46+00:00"
+            "time": "2018-07-30T11:46:53+00:00"
         },
         {
             "name": "friendsofsymfony/http-cache-bundle",
@@ -2733,16 +2737,16 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.7.1",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
+                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
-                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f72816b43e74063c8b10357394b6bba8cb1c10de",
+                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de",
                 "shasum": ""
             },
             "require": {
@@ -2750,7 +2754,7 @@
             },
             "require-dev": {
                 "ext-intl": "*",
-                "phpunit/phpunit": "^4.0 || ^5.0",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
                 "squizlabs/php_codesniffer": "^1.5"
             },
             "type": "library",
@@ -2779,20 +2783,20 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-08-15T16:48:10+00:00"
+            "time": "2018-07-12T10:23:15+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
-            "version": "v2.4.35",
+            "version": "v2.4.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
-                "reference": "1e400fbd05b7e5f912f55fe95805450f7d3bed60"
+                "reference": "87c78ff9fd4b90460386f753d95622f6fbbfcb27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/1e400fbd05b7e5f912f55fe95805450f7d3bed60",
-                "reference": "1e400fbd05b7e5f912f55fe95805450f7d3bed60",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/87c78ff9fd4b90460386f753d95622f6fbbfcb27",
+                "reference": "87c78ff9fd4b90460386f753d95622f6fbbfcb27",
                 "shasum": ""
             },
             "require": {
@@ -2860,7 +2864,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2018-05-08T12:28:40+00:00"
+            "time": "2018-07-26T12:16:35+00:00"
         },
         {
             "name": "gettext/gettext",
@@ -2924,16 +2928,16 @@
         },
         {
             "name": "gettext/languages",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mlocati/cldr-to-gettext-plural-rules.git",
-                "reference": "49c39e51569963cc917a924b489e7025bfb9d8c7"
+                "reference": "1b74377bd0c4cd87e8d72b948f5d8867e23505a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mlocati/cldr-to-gettext-plural-rules/zipball/49c39e51569963cc917a924b489e7025bfb9d8c7",
-                "reference": "49c39e51569963cc917a924b489e7025bfb9d8c7",
+                "url": "https://api.github.com/repos/mlocati/cldr-to-gettext-plural-rules/zipball/1b74377bd0c4cd87e8d72b948f5d8867e23505a5",
+                "reference": "1b74377bd0c4cd87e8d72b948f5d8867e23505a5",
                 "shasum": ""
             },
             "require": {
@@ -2981,7 +2985,7 @@
                 "translations",
                 "unicode"
             ],
-            "time": "2017-03-23T17:02:28+00:00"
+            "time": "2018-06-21T15:58:36+00:00"
         },
         {
             "name": "gfreeau/get-jwt-bundle",
@@ -3038,16 +3042,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.9.8",
+            "version": "8.9.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "420621360d56499ac1b0e6293561ed8661017c6b"
+                "reference": "2a6b6661f42644941e4c8e895518f27c99587a68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/420621360d56499ac1b0e6293561ed8661017c6b",
-                "reference": "420621360d56499ac1b0e6293561ed8661017c6b",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/2a6b6661f42644941e4c8e895518f27c99587a68",
+                "reference": "2a6b6661f42644941e4c8e895518f27c99587a68",
                 "shasum": ""
             },
             "require": {
@@ -3060,8 +3064,8 @@
                 "pear/pear_exception": "^1.0",
                 "pear/versioncontrol_git": "^0.5",
                 "phing/phing": "^2.7",
+                "php-coveralls/php-coveralls": "^1.0|^2.0",
                 "phpunit/phpunit": "^4.8|^5.0",
-                "satooshi/php-coveralls": "^1.0|^2.0",
                 "symfony/console": "^2.8|^3.0"
             },
             "type": "library",
@@ -3102,7 +3106,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2018-06-14T11:25:48+00:00"
+            "time": "2018-07-26T10:50:48+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -3155,28 +3159,30 @@
         },
         {
             "name": "google/recaptcha",
-            "version": "1.1.3",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/recaptcha.git",
-                "reference": "5a56d15ca10a7b75158178752b2ad8f755eb4f78"
+                "reference": "e7add3be59211482ecdb942288f52da64a35f61a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/recaptcha/zipball/5a56d15ca10a7b75158178752b2ad8f755eb4f78",
-                "reference": "5a56d15ca10a7b75158178752b2ad8f755eb4f78",
+                "url": "https://api.github.com/repos/google/recaptcha/zipball/e7add3be59211482ecdb942288f52da64a35f61a",
+                "reference": "e7add3be59211482ecdb942288f52da64a35f61a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8"
+                "friendsofphp/php-cs-fixer": "^2.2.20|^2.12",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^4.8.36|^5.7.27|^6.59|^7"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -3188,15 +3194,15 @@
             "license": [
                 "BSD-3-Clause"
             ],
-            "description": "Client library for reCAPTCHA, a free service that protect websites from spam and abuse.",
-            "homepage": "http://www.google.com/recaptcha/",
+            "description": "Client library for reCAPTCHA, a free service that protects websites from spam and abuse.",
+            "homepage": "https://www.google.com/recaptcha/",
             "keywords": [
                 "Abuse",
                 "captcha",
                 "recaptcha",
                 "spam"
             ],
-            "time": "2017-03-09T18:44:34+00:00"
+            "time": "2018-08-05T09:31:53+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -3381,16 +3387,16 @@
         },
         {
             "name": "guzzlehttp/ringphp",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/RingPHP.git",
-                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b"
+                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
-                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
+                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/5e2a174052995663dd68e6b5ad838afd47dd615b",
+                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b",
                 "shasum": ""
             },
             "require": {
@@ -3428,7 +3434,7 @@
                 }
             ],
             "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
-            "time": "2015-05-20T03:37:09+00:00"
+            "time": "2018-07-31T13:22:33+00:00"
         },
         {
             "name": "guzzlehttp/streams",
@@ -3603,16 +3609,16 @@
         },
         {
             "name": "hwi/oauth-bundle",
-            "version": "0.6.2",
+            "version": "0.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "d94181ac3d90509a557e3ea2bf6a85fcc8cd67b6"
+                "reference": "0963709b04d8ac0d6d6c0c78787f6f59bd0d9a01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/d94181ac3d90509a557e3ea2bf6a85fcc8cd67b6",
-                "reference": "d94181ac3d90509a557e3ea2bf6a85fcc8cd67b6",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/0963709b04d8ac0d6d6c0c78787f6f59bd0d9a01",
+                "reference": "0963709b04d8ac0d6d6c0c78787f6f59bd0d9a01",
                 "shasum": ""
             },
             "require": {
@@ -3757,7 +3763,7 @@
                 "yandex",
                 "youtube"
             ],
-            "time": "2018-03-28T16:21:10+00:00"
+            "time": "2018-07-31T10:19:28+00:00"
         },
         {
             "name": "igorw/get-in",
@@ -4694,6 +4700,64 @@
             "time": "2018-03-19T10:34:40+00:00"
         },
         {
+            "name": "lcobucci/jwt",
+            "version": "3.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lcobucci/jwt.git",
+                "reference": "c9704b751315d21735dc98d78d4f37bd73596da7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/c9704b751315d21735dc98d78d4f37bd73596da7",
+                "reference": "c9704b751315d21735dc98d78d4f37bd73596da7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "mdanter/ecc": "~0.3.1",
+                "mikey179/vfsstream": "~1.5",
+                "phpmd/phpmd": "~2.2",
+                "phpunit/php-invoker": "~1.1",
+                "phpunit/phpunit": "~4.5",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "suggest": {
+                "mdanter/ecc": "Required to use Elliptic Curves based algorithms."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lcobucci\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Luís Otávio Cobucci Oblonczyk",
+                    "email": "lcobucci@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to work with JSON Web Token and JSON Web Signature",
+            "keywords": [
+                "JWS",
+                "jwt"
+            ],
+            "time": "2018-08-03T11:23:50+00:00"
+        },
+        {
             "name": "league/csv",
             "version": "8.2.3",
             "source": {
@@ -4752,36 +4816,36 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.4.4",
+            "version": "v2.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "bcb8e2a658cc0ca3cc6949edf1c9b84ed4aa1277"
+                "reference": "f1c8c9a33c55eeb6105de5a2aedb9ba44a6efbed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/bcb8e2a658cc0ca3cc6949edf1c9b84ed4aa1277",
-                "reference": "bcb8e2a658cc0ca3cc6949edf1c9b84ed4aa1277",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/f1c8c9a33c55eeb6105de5a2aedb9ba44a6efbed",
+                "reference": "f1c8c9a33c55eeb6105de5a2aedb9ba44a6efbed",
                 "shasum": ""
             },
             "require": {
+                "lcobucci/jwt": "^3.2",
                 "namshi/jose": "^7.2",
                 "php": "^5.5|^7.0",
-                "symfony/console": "^2.8|^3.0|^4.0",
-                "symfony/framework-bundle": "^2.8|^3.0|^4.0",
-                "symfony/security-bundle": "^2.8|^3.0|^4.0"
+                "symfony/framework-bundle": "^3.4|^4.0",
+                "symfony/security-bundle": "^3.4|^4.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^1.1|^2.8@dev",
-                "lcobucci/jwt": "~3.2",
-                "symfony/browser-kit": "^2.8|^3.0|^4.0",
-                "symfony/dom-crawler": "^2.8|^3.0|^4.0",
-                "symfony/phpunit-bridge": "~3.3",
-                "symfony/yaml": "^2.8|^3.0|^4.0"
+                "friendsofphp/php-cs-fixer": "^1.1|^2.8",
+                "symfony/browser-kit": "^3.4|^4.0",
+                "symfony/console": "^3.4|^4.0",
+                "symfony/dom-crawler": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/var-dumper": "^3.4|^4.0",
+                "symfony/yaml": "^3.4|^4.0"
             },
             "suggest": {
                 "gesdinet/jwt-refresh-token-bundle": "Implements a refresh token system over Json Web Tokens in Symfony",
-                "lcobucci/jwt": "For using the LcobucciJWTEncoder",
                 "spomky-labs/lexik-jose-bridge": "Provides a JWT Token encoder with encryption support"
             },
             "type": "symfony-bundle",
@@ -4844,7 +4908,7 @@
                 "rest",
                 "symfony"
             ],
-            "time": "2018-03-06T12:23:17+00:00"
+            "time": "2018-08-02T19:32:29+00:00"
         },
         {
             "name": "liip/imagine-bundle",
@@ -6025,16 +6089,16 @@
         },
         {
             "name": "overblog/graphql-bundle",
-            "version": "v0.11.2",
+            "version": "v0.11.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/GraphQLBundle.git",
-                "reference": "878ab23bfeca6b669611023c3581d3477f13355d"
+                "reference": "3117b60e0212443210d291a9ec7d8c929fb56bb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/878ab23bfeca6b669611023c3581d3477f13355d",
-                "reference": "878ab23bfeca6b669611023c3581d3477f13355d",
+                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/3117b60e0212443210d291a9ec7d8c929fb56bb3",
+                "reference": "3117b60e0212443210d291a9ec7d8c929fb56bb3",
                 "shasum": ""
             },
             "require": {
@@ -6099,7 +6163,7 @@
                 "Relay",
                 "graphql"
             ],
-            "time": "2018-07-13T05:39:57+00:00"
+            "time": "2018-07-18T07:53:01+00:00"
         },
         {
             "name": "overblog/graphql-php-generator",
@@ -6661,16 +6725,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "c91eef51db2c2b778946c1dd931e9aa87ac6b1e4"
+                "reference": "9fed9ddee92ee20cc39050749f2fb9b6cec3f83d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/c91eef51db2c2b778946c1dd931e9aa87ac6b1e4",
-                "reference": "c91eef51db2c2b778946c1dd931e9aa87ac6b1e4",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/9fed9ddee92ee20cc39050749f2fb9b6cec3f83d",
+                "reference": "9fed9ddee92ee20cc39050749f2fb9b6cec3f83d",
                 "shasum": ""
             },
             "require": {
@@ -6723,7 +6787,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.10-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -6757,7 +6821,7 @@
                 "message",
                 "php-http"
             ],
-            "time": "2018-03-27T07:08:16+00:00"
+            "time": "2018-07-07T09:19:05+00:00"
         },
         {
             "name": "php-http/logger-plugin",
@@ -7191,16 +7255,16 @@
         },
         {
             "name": "php-translation/extractor",
-            "version": "1.5.2",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-translation/extractor.git",
-                "reference": "90df9692d1e60b3968fcf71cc6af12ec6f48a3ca"
+                "reference": "82fc51a07fb626c0bfb31fb3f041baa88fee6acb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-translation/extractor/zipball/90df9692d1e60b3968fcf71cc6af12ec6f48a3ca",
-                "reference": "90df9692d1e60b3968fcf71cc6af12ec6f48a3ca",
+                "url": "https://api.github.com/repos/php-translation/extractor/zipball/82fc51a07fb626c0bfb31fb3f041baa88fee6acb",
+                "reference": "82fc51a07fb626c0bfb31fb3f041baa88fee6acb",
                 "shasum": ""
             },
             "require": {
@@ -7238,7 +7302,7 @@
                 }
             ],
             "description": "Extract translations form the source code",
-            "time": "2018-04-18T08:37:51+00:00"
+            "time": "2018-07-09T17:05:17+00:00"
         },
         {
             "name": "php-translation/loco-adapter",
@@ -8706,16 +8770,16 @@
         },
         {
             "name": "snc/redis-bundle",
-            "version": "2.1.3",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/snc/SncRedisBundle.git",
-                "reference": "5d8169e961901fdc652e00bcbb1974cc966aef8b"
+                "reference": "fd24b115b35d54ec2f0f356e36e793933ee57bb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/5d8169e961901fdc652e00bcbb1974cc966aef8b",
-                "reference": "5d8169e961901fdc652e00bcbb1974cc966aef8b",
+                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/fd24b115b35d54ec2f0f356e36e793933ee57bb8",
+                "reference": "fd24b115b35d54ec2f0f356e36e793933ee57bb8",
                 "shasum": ""
             },
             "require": {
@@ -8733,7 +8797,8 @@
             "suggest": {
                 "monolog/monolog": "If you want to use the monolog redis handler.",
                 "predis/predis": "If you want to use predis.",
-                "symfony/console": "If you want to use commands to interact with the redis database"
+                "symfony/console": "If you want to use commands to interact with the redis database",
+                "symfony/proxy-manager-bridge": "If you want to lazy-load some services"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -8767,20 +8832,20 @@
                 "redis",
                 "symfony"
             ],
-            "time": "2018-05-09T08:08:39+00:00"
+            "time": "2018-07-31T08:05:28+00:00"
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "3.35.2",
+            "version": "3.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "dfd5110350d9cd4424c2eb3ccffcfcc248e70062"
+                "reference": "3f4ae4285f277251adad9bf8e47ff74ff9600aae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/dfd5110350d9cd4424c2eb3ccffcfcc248e70062",
-                "reference": "dfd5110350d9cd4424c2eb3ccffcfcc248e70062",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/3f4ae4285f277251adad9bf8e47ff74ff9600aae",
+                "reference": "3f4ae4285f277251adad9bf8e47ff74ff9600aae",
                 "shasum": ""
             },
             "require": {
@@ -8872,7 +8937,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2018-05-05T16:59:10+00:00"
+            "time": "2018-07-26T19:29:16+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -9031,16 +9096,16 @@
         },
         {
             "name": "sonata-project/classification-bundle",
-            "version": "3.7.0",
+            "version": "3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataClassificationBundle.git",
-                "reference": "535acadad64ad1c6f6e9dca0e8102539a09a9858"
+                "reference": "822ededa21587b3b47f618ad5e6c111496915adc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/535acadad64ad1c6f6e9dca0e8102539a09a9858",
-                "reference": "535acadad64ad1c6f6e9dca0e8102539a09a9858",
+                "url": "https://api.github.com/repos/sonata-project/SonataClassificationBundle/zipball/822ededa21587b3b47f618ad5e6c111496915adc",
+                "reference": "822ededa21587b3b47f618ad5e6c111496915adc",
                 "shasum": ""
             },
             "require": {
@@ -9110,7 +9175,7 @@
                 "tag",
                 "taxonomy"
             ],
-            "time": "2018-05-22T07:34:03+00:00"
+            "time": "2018-06-18T19:44:06+00:00"
         },
         {
             "name": "sonata-project/core-bundle",
@@ -10149,16 +10214,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v6.0.2",
+            "version": "v6.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "412333372fb6c8ffb65496a2bbd7321af75733fc"
+                "reference": "7d760881d266d63c5e7a1155cbcf2ac656a31ca8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/412333372fb6c8ffb65496a2bbd7321af75733fc",
-                "reference": "412333372fb6c8ffb65496a2bbd7321af75733fc",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/7d760881d266d63c5e7a1155cbcf2ac656a31ca8",
+                "reference": "7d760881d266d63c5e7a1155cbcf2ac656a31ca8",
                 "shasum": ""
             },
             "require": {
@@ -10169,10 +10234,14 @@
                 "mockery/mockery": "~0.9.1",
                 "symfony/phpunit-bridge": "~3.3@dev"
             },
+            "suggest": {
+                "ext-intl": "Needed to support internationalized email addresses",
+                "true/punycode": "Needed to support internationalized email addresses, if ext-intl is not installed"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -10194,13 +10263,13 @@
                 }
             ],
             "description": "Swiftmailer, free feature-rich PHP mailer",
-            "homepage": "http://swiftmailer.symfony.com",
+            "homepage": "https://swiftmailer.symfony.com",
             "keywords": [
                 "email",
                 "mail",
                 "mailer"
             ],
-            "time": "2017-09-30T22:39:41+00:00"
+            "time": "2018-07-13T07:04:35+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -10264,16 +10333,16 @@
         },
         {
             "name": "symfony/polyfill-apcu",
-            "version": "v1.8.0",
+            "version": "v1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-apcu.git",
-                "reference": "9b83bd010112ec196410849e840d9b9fefcb15ad"
+                "reference": "19e1b73bf255265ad0b568f81766ae2a3266d8d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/9b83bd010112ec196410849e840d9b9fefcb15ad",
-                "reference": "9b83bd010112ec196410849e840d9b9fefcb15ad",
+                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/19e1b73bf255265ad0b568f81766ae2a3266d8d2",
+                "reference": "19e1b73bf255265ad0b568f81766ae2a3266d8d2",
                 "shasum": ""
             },
             "require": {
@@ -10282,7 +10351,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -10316,7 +10385,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-04-26T10:06:28+00:00"
+            "time": "2018-08-06T14:22:27+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -10495,16 +10564,16 @@
         },
         {
             "name": "symfony/polyfill-php55",
-            "version": "v1.8.0",
+            "version": "v1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php55.git",
-                "reference": "a39456128377a85f2c5707fcae458678560cba46"
+                "reference": "578b8528da843de0fc65ec395900fa3181f2ead7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php55/zipball/a39456128377a85f2c5707fcae458678560cba46",
-                "reference": "a39456128377a85f2c5707fcae458678560cba46",
+                "url": "https://api.github.com/repos/symfony/polyfill-php55/zipball/578b8528da843de0fc65ec395900fa3181f2ead7",
+                "reference": "578b8528da843de0fc65ec395900fa3181f2ead7",
                 "shasum": ""
             },
             "require": {
@@ -10514,7 +10583,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
@@ -10547,7 +10616,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-04-26T10:06:28+00:00"
+            "time": "2018-08-06T14:22:27+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -11134,24 +11203,24 @@
         },
         {
             "name": "twig/extensions",
-            "version": "v1.5.1",
+            "version": "v1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig-extensions.git",
-                "reference": "d188c76168b853481cc75879ea045bf93d718e9c"
+                "reference": "2c1a86526d0044065220d1b51ac08348bea5ca82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/d188c76168b853481cc75879ea045bf93d718e9c",
-                "reference": "d188c76168b853481cc75879ea045bf93d718e9c",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/2c1a86526d0044065220d1b51ac08348bea5ca82",
+                "reference": "2c1a86526d0044065220d1b51ac08348bea5ca82",
                 "shasum": ""
             },
             "require": {
-                "twig/twig": "~1.27|~2.0"
+                "twig/twig": "^1.27|^2.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "~3.3@dev",
-                "symfony/translation": "~2.3|~3.0"
+                "symfony/phpunit-bridge": "^3.4",
+                "symfony/translation": "^2.7|^3.4"
             },
             "suggest": {
                 "symfony/translation": "Allow the time_diff output to be translated"
@@ -11181,12 +11250,11 @@
                 }
             ],
             "description": "Common additional features for Twig that do not directly belong in core",
-            "homepage": "http://twig.sensiolabs.org/doc/extensions/index.html",
             "keywords": [
                 "i18n",
                 "text"
             ],
-            "time": "2017-06-08T18:19:53+00:00"
+            "time": "2018-05-22T13:26:07+00:00"
         },
         {
             "name": "twig/twig",
@@ -11306,16 +11374,16 @@
         },
         {
             "name": "webfactory/icu-translation-bundle",
-            "version": "0.6.1",
+            "version": "0.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webfactory/WebfactoryIcuTranslationBundle.git",
-                "reference": "026a44956e129b22e43bab926f5a68fb591c7aa6"
+                "reference": "ad1074eb87fa0b8a223c9e72f38d9c2484860ca0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webfactory/WebfactoryIcuTranslationBundle/zipball/026a44956e129b22e43bab926f5a68fb591c7aa6",
-                "reference": "026a44956e129b22e43bab926f5a68fb591c7aa6",
+                "url": "https://api.github.com/repos/webfactory/WebfactoryIcuTranslationBundle/zipball/ad1074eb87fa0b8a223c9e72f38d9c2484860ca0",
+                "reference": "ad1074eb87fa0b8a223c9e72f38d9c2484860ca0",
                 "shasum": ""
             },
             "require": {
@@ -11366,7 +11434,7 @@
                 "translation",
                 "translator"
             ],
-            "time": "2016-11-09T12:12:49+00:00"
+            "time": "2018-07-03T14:47:15+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -11960,37 +12028,37 @@
         },
         {
             "name": "zendframework/zenddiagnostics",
-            "version": "v1.1.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/ZendDiagnostics.git",
-                "reference": "d27aa064c5185c5830e917ffe48284b0995eed13"
+                "url": "https://github.com/zendframework/zend-diagnostics.git",
+                "reference": "6dd4a159a1bd6fcc8f14f2eda195b5caebabc414"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendDiagnostics/zipball/d27aa064c5185c5830e917ffe48284b0995eed13",
-                "reference": "d27aa064c5185c5830e917ffe48284b0995eed13",
+                "url": "https://api.github.com/repos/zendframework/zend-diagnostics/zipball/6dd4a159a1bd6fcc8f14f2eda195b5caebabc414",
+                "reference": "6dd4a159a1bd6fcc8f14f2eda195b5caebabc414",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6|^7.0"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
                 "doctrine/migrations": "^1.0",
-                "guzzle/http": "^3.0",
-                "guzzle/plugin-mock": "^3.0",
+                "guzzlehttp/guzzle": "^5.3.2 || ^6.3.3",
                 "mikey179/vfsstream": "^1.6",
                 "php-amqplib/php-amqplib": "^2.0",
-                "phpunit/phpunit": "^4.7|^5.0",
+                "phpunit/phpunit": "^5.7.27 || 6.5.8 || ^7.1.2",
                 "predis/predis": "^1.0",
                 "sensiolabs/security-checker": "^1.3",
-                "symfony/yaml": "^2.7|^3.0|^4.0",
+                "symfony/yaml": "^2.7 || ^3.0 || ^4.0",
+                "zendframework/zend-coding-standard": "~1.0.0",
                 "zendframework/zend-loader": "^2.0"
             },
             "suggest": {
                 "doctrine/migrations": "Required by Check\\DoctrineMigration",
                 "ext-bcmath": "Required by Check\\CpuPerformance",
-                "guzzle/http": "Required by Check\\GuzzleHttpService",
+                "guzzlehttp/guzzle": "Required by Check\\GuzzleHttpService",
                 "predis/predis": "Required by Check\\Redis",
                 "sensiolabs/security-checker": "Required by Check\\SecurityAdvisory",
                 "symfony/yaml": "Required by Check\\YamlFile",
@@ -11999,13 +12067,13 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.3.x-dev",
+                    "dev-develop": "1.4.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "ZendDiagnostics\\": "src/",
-                    "ZendDiagnosticsTest\\": "tests/"
+                "psr-4": {
+                    "ZendDiagnostics\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -12013,13 +12081,15 @@
                 "BSD-3-Clause"
             ],
             "description": "A set of components for performing diagnostic tests in PHP applications",
-            "homepage": "https://github.com/zendframework/ZendDiagnostics",
+            "homepage": "https://github.com/zendframework/zend-diagnostics",
             "keywords": [
+                "ZendFramework",
                 "diagnostics",
                 "php",
-                "test"
+                "test",
+                "zf"
             ],
-            "time": "2017-12-13T08:36:13+00:00"
+            "time": "2018-07-30T20:31:14+00:00"
         }
     ],
     "packages-dev": [
@@ -13084,16 +13154,16 @@
         },
         {
             "name": "nette/di",
-            "version": "v2.4.12",
+            "version": "v2.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/di.git",
-                "reference": "8e717aed2d182a26763be58c220eebaaa32917df"
+                "reference": "3f8f212b02d5c17feb97a7e0a39ab306f40c06ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/di/zipball/8e717aed2d182a26763be58c220eebaaa32917df",
-                "reference": "8e717aed2d182a26763be58c220eebaaa32917df",
+                "url": "https://api.github.com/repos/nette/di/zipball/3f8f212b02d5c17feb97a7e0a39ab306f40c06ca",
+                "reference": "3f8f212b02d5c17feb97a7e0a39ab306f40c06ca",
                 "shasum": ""
             },
             "require": {
@@ -13149,31 +13219,31 @@
                 "nette",
                 "static"
             ],
-            "time": "2018-04-26T09:18:42+00:00"
+            "time": "2018-06-11T08:46:01+00:00"
         },
         {
             "name": "nette/finder",
-            "version": "v2.4.1",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/finder.git",
-                "reference": "4d43a66d072c57d585bf08a3ef68d3587f7e9547"
+                "reference": "ee951a656cb8ac622e5dd33474a01fd2470505a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/finder/zipball/4d43a66d072c57d585bf08a3ef68d3587f7e9547",
-                "reference": "4d43a66d072c57d585bf08a3ef68d3587f7e9547",
+                "url": "https://api.github.com/repos/nette/finder/zipball/ee951a656cb8ac622e5dd33474a01fd2470505a0",
+                "reference": "ee951a656cb8ac622e5dd33474a01fd2470505a0",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^2.4 || ~3.0.0",
+                "nette/utils": "~2.4",
                 "php": ">=5.6.0"
             },
             "conflict": {
                 "nette/nette": "<2.2"
             },
             "require-dev": {
-                "nette/tester": "^2.0",
+                "nette/tester": "~2.0",
                 "tracy/tracy": "^2.3"
             },
             "type": "library",
@@ -13203,22 +13273,28 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "Nette Finder: Files Searching",
+            "description": "🔍 Nette Finder: find files and directories with an intuitive API.",
             "homepage": "https://nette.org",
-            "time": "2017-07-10T23:47:08+00:00"
+            "keywords": [
+                "filesystem",
+                "glob",
+                "iterator",
+                "nette"
+            ],
+            "time": "2018-06-28T11:49:23+00:00"
         },
         {
             "name": "nette/neon",
-            "version": "v2.4.2",
+            "version": "v2.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/neon.git",
-                "reference": "9eacd50553b26b53a3977bfb2fea2166d4331622"
+                "reference": "5e72b1dd3e2d34f0863c5561139a19df6a1ef398"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/neon/zipball/9eacd50553b26b53a3977bfb2fea2166d4331622",
-                "reference": "9eacd50553b26b53a3977bfb2fea2166d4331622",
+                "url": "https://api.github.com/repos/nette/neon/zipball/5e72b1dd3e2d34f0863c5561139a19df6a1ef398",
+                "reference": "5e72b1dd3e2d34f0863c5561139a19df6a1ef398",
                 "shasum": ""
             },
             "require": {
@@ -13257,22 +13333,29 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "Nette NEON: parser & generator for Nette Object Notation",
+            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
-            "time": "2017-07-11T18:29:08+00:00"
+            "keywords": [
+                "export",
+                "import",
+                "neon",
+                "nette",
+                "yaml"
+            ],
+            "time": "2018-03-21T12:12:21+00:00"
         },
         {
             "name": "nette/php-generator",
-            "version": "v3.0.4",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/php-generator.git",
-                "reference": "b381ecacbf5a0b5f99cc0b303d5b0578d409f446"
+                "reference": "ea90209c2e8a7cd087b2742ca553c047a8df5eff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/php-generator/zipball/b381ecacbf5a0b5f99cc0b303d5b0578d409f446",
-                "reference": "b381ecacbf5a0b5f99cc0b303d5b0578d409f446",
+                "url": "https://api.github.com/repos/nette/php-generator/zipball/ea90209c2e8a7cd087b2742ca553c047a8df5eff",
+                "reference": "ea90209c2e8a7cd087b2742ca553c047a8df5eff",
                 "shasum": ""
             },
             "require": {
@@ -13321,20 +13404,20 @@
                 "php",
                 "scaffolding"
             ],
-            "time": "2018-04-26T16:48:20+00:00"
+            "time": "2018-08-09T14:32:27+00:00"
         },
         {
             "name": "nette/robot-loader",
-            "version": "v3.0.3",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/robot-loader.git",
-                "reference": "92d4b40b49d5e2d9e37fc736bbcebe6da55fa44a"
+                "reference": "3cf88781a05e0bf4618ae605361afcbaa4d5b392"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/92d4b40b49d5e2d9e37fc736bbcebe6da55fa44a",
-                "reference": "92d4b40b49d5e2d9e37fc736bbcebe6da55fa44a",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/3cf88781a05e0bf4618ae605361afcbaa4d5b392",
+                "reference": "3cf88781a05e0bf4618ae605361afcbaa4d5b392",
                 "shasum": ""
             },
             "require": {
@@ -13386,7 +13469,7 @@
                 "nette",
                 "trait"
             ],
-            "time": "2017-09-26T13:42:21+00:00"
+            "time": "2018-06-22T09:34:04+00:00"
         },
         {
             "name": "nette/utils",
@@ -13861,16 +13944,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.7.6",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "33a7e3c4fda54e912ff6338c48823bd5c0f0b712"
+                "reference": "4ba436b55987b4bf311cb7c6ba82aa528aac0a06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/33a7e3c4fda54e912ff6338c48823bd5c0f0b712",
-                "reference": "33a7e3c4fda54e912ff6338c48823bd5c0f0b712",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/4ba436b55987b4bf311cb7c6ba82aa528aac0a06",
+                "reference": "4ba436b55987b4bf311cb7c6ba82aa528aac0a06",
                 "shasum": ""
             },
             "require": {
@@ -13882,12 +13965,12 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^2.5|^3.2",
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5"
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5 || ^7.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7.x-dev"
+                    "dev-master": "1.8.x-dev"
                 }
             },
             "autoload": {
@@ -13920,7 +14003,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2018-04-18T13:57:24+00:00"
+            "time": "2018-08-05T17:53:17+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -15093,16 +15176,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v4.1.0",
+            "version": "v4.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "b3451fc442baaf9169e50491a059ef17582c4424"
+                "reference": "3c30714807f34b7de710cc33eb612cd42cf683b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/b3451fc442baaf9169e50491a059ef17582c4424",
-                "reference": "b3451fc442baaf9169e50491a059ef17582c4424",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/3c30714807f34b7de710cc33eb612cd42cf683b0",
+                "reference": "3c30714807f34b7de710cc33eb612cd42cf683b0",
                 "shasum": ""
             },
             "require": {
@@ -15155,7 +15238,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2018-05-25T14:55:38+00:00"
+            "time": "2018-07-26T08:55:25+00:00"
         },
         {
             "name": "tonicforhealth/behat-parallel-scenario",

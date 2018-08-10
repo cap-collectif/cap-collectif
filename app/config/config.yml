@@ -552,8 +552,8 @@ fos_rest:
       'Symfony\Component\Security\Core\Exception\AuthenticationException': true
 
 lexik_jwt_authentication:
-  private_key_path: '%kernel.root_dir%/var/jwt/private.pem'
-  public_key_path: '%kernel.root_dir%/var/jwt/public.pem'
+  secret_key: '%kernel.root_dir%/var/jwt/private.pem'
+  public_key: '%kernel.root_dir%/var/jwt/public.pem'
   pass_phrase: iamapassphrase
   token_ttl: '%jwt_token_ttl%'
   user_identity_field: email

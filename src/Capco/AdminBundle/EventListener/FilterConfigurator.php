@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AdminBundle\EventListener;
 
 use Doctrine\Orm\EntityManager;
@@ -18,7 +17,7 @@ class FilterConfigurator
     public function onKernelController(FilterControllerEvent $event)
     {
         $controller = $event->getController();
-        $controllerClass = $controller[0];
+        $controllerClass = \is_array($controller) ? $controller[0] : $controller;
 
         if ($controllerClass instanceof CRUDController) {
             $filters = $this->em->getFilters();

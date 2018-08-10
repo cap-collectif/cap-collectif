@@ -271,7 +271,7 @@ class PostAdmin extends CapcoAdmin
     }
 
     /**
-     * if user is supper admin return all else return only what I can see
+     * if user is not super admin return only what he can see.
      */
     public function createQuery($context = 'list')
     {
@@ -283,7 +283,7 @@ class PostAdmin extends CapcoAdmin
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
         $query
-            ->leftJoin($query->getRootAliases()[0] . '.project', 'p')
+            ->leftJoin($query->getRootAliases()[0] . '.projects', 'p')
             ->andWhere(
                 $query
                     ->expr()
