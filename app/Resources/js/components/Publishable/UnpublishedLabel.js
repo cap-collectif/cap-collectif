@@ -1,18 +1,21 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { OverlayTrigger, Label, Popover } from 'react-bootstrap';
 import type { UnpublishedLabel_publishable } from './__generated__/UnpublishedLabel_publishable.graphql';
+import type { GlobalState } from '../../types';
 
 type Props = {
   publishable: UnpublishedLabel_publishable,
+  viewer: { email: string },
 };
 
 export class UnpublishedLabel extends React.Component<Props> {
   render() {
-    const { publishable } = this.props;
+    const { publishable, viewer } = this.props;
     if (publishable.published) {
       return null;
     }
@@ -29,7 +32,7 @@ export class UnpublishedLabel extends React.Component<Props> {
           <p>
             <FormattedMessage
               id="account-pending-confirmation-message"
-              values={{ emailAddress: 'toto@gmail.com', contentType: 'contribution' }}
+              values={{ contentType: 'contribution', emailAddress: viewer.email }}
             />
           </p>
           {publishable.publishableUntil && (
@@ -93,7 +96,13 @@ export class UnpublishedLabel extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(UnpublishedLabel, {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+  viewer: state.user.user,
+});
+
+const container = connect(mapStateToProps)(UnpublishedLabel);
+
+export default createFragmentContainer(container, {
   publishable: graphql`
     fragment UnpublishedLabel_publishable on Publishable {
       id

@@ -6,6 +6,9 @@ import { UnpublishedLabel } from './UnpublishedLabel';
 import { $refType } from '../../mocks';
 
 describe('<UnpublishedLabel />', () => {
+  const viewer = {
+    email: 'unconfirmed-email@gmail.com',
+  };
   it('renders when published', () => {
     const publishablePublished = {
       $refType,
@@ -14,7 +17,9 @@ describe('<UnpublishedLabel />', () => {
       publishableUntil: null,
       notPublishedReason: null,
     };
-    const wrapper = shallow(<UnpublishedLabel publishable={publishablePublished} />);
+    const wrapper = shallow(
+      <UnpublishedLabel publishable={publishablePublished} viewer={viewer} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -26,7 +31,9 @@ describe('<UnpublishedLabel />', () => {
       publishableUntil: null,
       notPublishedReason: 'WAITING_AUTHOR_CONFIRMATION',
     };
-    const wrapper = shallow(<UnpublishedLabel publishable={publishableUnublishedWaiting} />);
+    const wrapper = shallow(
+      <UnpublishedLabel publishable={publishableUnublishedWaiting} viewer={viewer} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -38,7 +45,9 @@ describe('<UnpublishedLabel />', () => {
       publishableUntil: null,
       notPublishedReason: 'AUTHOR_NOT_CONFIRMED',
     };
-    const wrapper = shallow(<UnpublishedLabel publishable={publishableUnublishedNotConfirmed} />);
+    const wrapper = shallow(
+      <UnpublishedLabel publishable={publishableUnublishedNotConfirmed} viewer={viewer} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -50,7 +59,9 @@ describe('<UnpublishedLabel />', () => {
       publishableUntil: null,
       notPublishedReason: 'AUTHOR_CONFIRMED_TOO_LATE',
     };
-    const wrapper = shallow(<UnpublishedLabel publishable={publishableUnublishedTooLate} />);
+    const wrapper = shallow(
+      <UnpublishedLabel publishable={publishableUnublishedTooLate} viewer={viewer} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

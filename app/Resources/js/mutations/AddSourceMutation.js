@@ -1,5 +1,6 @@
 // @flow
 import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
+import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
@@ -100,13 +101,14 @@ const commit = (
         const previousValue = parseInt(allSourcesProxy.getValue('totalCount'), 10);
         allSourcesProxy.setValue(previousValue + 1, 'totalCount');
       } else {
-        const unpublishedSourcesProxy = sourceableProxy.getLinkedRecord('sources', {
-          viewerUnpublishedOnly: true,
-          first: 100,
-        });
-        if (!unpublishedSourcesProxy) return;
-        const previousValue = parseInt(unpublishedSourcesProxy.getValue('totalCount'), 10);
-        unpublishedSourcesProxy.setValue(previousValue + 1, 'totalCount');
+        const connection = ConnectionHandler.getConnection(
+          sourceableProxy,
+          'OpinionSourceBox_viewerUnpublishedSources',
+          {
+            viewerUnpublishedOnly: true,
+          },
+        );
+        connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
       }
     },
   });

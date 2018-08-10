@@ -36,7 +36,7 @@ export class UnpublishedUnpublishedArgumentList extends React.Component<Props> {
                     type: $type
                   )
                     @connection(
-                      key: "UnpublishedUnpublishedArgumentList_viewerUnpublishedArguments"
+                      key: "UnpublishedArgumentList_viewerUnpublishedArguments"
                       filters: ["type"]
                     ) {
                     totalCount
@@ -69,10 +69,10 @@ export class UnpublishedUnpublishedArgumentList extends React.Component<Props> {
               return (
                 <Panel bsStyle="danger">
                   <Panel.Heading>
-                    <Panel.Title componentClass="h4">
+                    <Panel.Title>
                       <strong>
                         <FormattedMessage
-                          id="count-arguments"
+                          id={`count-arguments-${type === 'AGAINST' ? 'against' : 'for'}`}
                           values={{ num: argumentable.viewerUnpublishedArguments.totalCount }}
                         />
                       </strong>{' '}

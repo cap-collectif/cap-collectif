@@ -125,7 +125,7 @@ exports[`<UnpublishedLabel /> renders when not published because author must con
             values={
               Object {
                 "contentType": "contribution",
-                "emailAddress": "toto@gmail.com",
+                "emailAddress": "unconfirmed-email@gmail.com",
               }
             }
           />

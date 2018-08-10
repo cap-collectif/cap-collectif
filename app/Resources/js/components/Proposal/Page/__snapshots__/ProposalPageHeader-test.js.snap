@@ -94,7 +94,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
             }
           />
         </span>
-        <Relay(UnpublishedLabel)
+        <Relay(Connect(UnpublishedLabel))
           publishable={
             Object {
               "$fragmentRefs": null,
@@ -245,7 +245,7 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
             }
           />
         </span>
-        <Relay(UnpublishedLabel)
+        <Relay(Connect(UnpublishedLabel))
           publishable={
             Object {
               "$fragmentRefs": null,

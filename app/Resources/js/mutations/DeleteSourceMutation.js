@@ -19,34 +19,19 @@ const mutation = graphql`
   }
 `;
 
-function sharedUpdater(store, sourceableID, deletedID) {
-  const sourceableProxy = store.get(sourceableID);
-  if (!sourceableProxy) {
-    return;
-  }
-  const allOrderBy = [
-    { direction: 'DESC', field: 'CREATED_AT' },
-    { direction: 'ASC', field: 'CREATED_AT' },
-    { direction: 'DESC', field: 'VOTES' },
-  ];
-  for (const orderBy of allOrderBy) {
-    const connection = ConnectionHandler.getConnection(
-      sourceableProxy,
-      'OpinionSourceListViewPaginated_sources',
-      {
-        orderBy,
-      },
-    );
-    if (connection) {
-      ConnectionHandler.deleteNode(connection, deletedID);
-    }
-  }
-}
-
-const commit = (variables: DeleteSourceMutationVariables): Promise<DeleteSourceMutationResponse> =>
+const commit = (
+  variables: DeleteSourceMutationVariables,
+  sourceIsPublished: boolean,
+): Promise<DeleteSourceMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
+    configs: [
+      {
+        type: 'NODE_DELETE',
+        deletedIDFieldName: 'deletedSourceId',
+      },
+    ],
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('deleteSource');
       if (!payload) {
@@ -62,12 +47,21 @@ const commit = (variables: DeleteSourceMutationVariables): Promise<DeleteSourceM
         return;
       }
 
-      sharedUpdater(store, id, payload.getValue('deletedSourceId'));
-
-      const allSourcesProxy = sourceable.getLinkedRecord('sources', { first: 0 });
-      if (!allSourcesProxy) return;
-      const previousValue = parseInt(allSourcesProxy.getValue('totalCount'), 10);
-      allSourcesProxy.setValue(previousValue - 1, 'totalCount');
+      if (sourceIsPublished) {
+        const allSourcesProxy = sourceable.getLinkedRecord('sources', { first: 0 });
+        if (!allSourcesProxy) return;
+        const previousValue = parseInt(allSourcesProxy.getValue('totalCount'), 10);
+        allSourcesProxy.setValue(previousValue - 1, 'totalCount');
+      } else {
+        const connection = ConnectionHandler.getConnection(
+          sourceable,
+          'OpinionSourceBox_viewerUnpublishedSources',
+          {
+            viewerUnpublishedOnly: true,
+          },
+        );
+        connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
+      }
     },
   });
 

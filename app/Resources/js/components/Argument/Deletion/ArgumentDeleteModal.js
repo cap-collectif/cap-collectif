@@ -28,13 +28,19 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
     const { argument, onClose } = this.props;
     this.setState({ isSubmitting: true });
 
-    return DeleteArgumentMutation.commit({ input: { argumentId: argument.id } }, argument.type)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: { bsStyle: 'success', content: 'alert.success.delete.argument' },
-        });
-        onClose();
+    return DeleteArgumentMutation.commit(
+      { input: { argumentId: argument.id } },
+      argument.type,
+      argument.published,
+    )
+      .then(response => {
+        if (response.deleteArgument && response.deleteArgument.deletedArgumentId) {
+          AppDispatcher.dispatch({
+            actionType: 'UPDATE_ALERT',
+            alert: { bsStyle: 'success', content: 'alert.success.delete.argument' },
+          });
+          onClose();
+        }
         this.setState({ isSubmitting: false });
       })
       .catch(() => {
@@ -83,6 +89,7 @@ export default createFragmentContainer(
     fragment ArgumentDeleteModal_argument on Argument {
       id
       type
+      published
     }
   `,
 );

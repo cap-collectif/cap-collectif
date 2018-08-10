@@ -30,13 +30,13 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
     const input = {
       sourceId: source.id,
     };
-    DeleteSourceMutation.commit({ input })
+    DeleteSourceMutation.commit({ input }, source.published)
       .then(res => {
         if (res.deleteSource && res.deleteSource.deletedSourceId) {
-          FluxDispatcher.dispatch({	
-        actionType: "UPDATE_ALERT",	
-        alert: { bsStyle: 'success', content: 'alert.success.delete.source' },	
-        });
+          FluxDispatcher.dispatch({
+            actionType: 'UPDATE_ALERT',
+            alert: { bsStyle: 'success', content: 'alert.success.delete.source' },
+          });
           onClose();
         }
         this.setState({ isSubmitting: false });
@@ -90,6 +90,7 @@ export default createFragmentContainer(OpinionSourceDeleteModal, {
   source: graphql`
     fragment OpinionSourceDeleteModal_source on Source {
       id
+      published
     }
   `,
 });

@@ -34,7 +34,7 @@ const getConfigs = (variables: AddArgumentMutationVariables, viewerIsConfirmed: 
         edgeName: 'argumentEdge',
         connectionInfo: [
           {
-            key: 'UnpublishedUnpublishedArgumentList_viewerUnpublishedArguments',
+            key: 'UnpublishedArgumentList_viewerUnpublishedArguments',
             rangeBehavior: 'prepend',
             filters: {
               type: variables.input.type,
@@ -92,7 +92,7 @@ const commit = (
     configs: getConfigs(variables, viewerIsConfirmed),
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('addArgument');
-      if (!payload.getLinkedRecord('argumentEdge')) {
+      if (!payload || !payload.getLinkedRecord('argumentEdge')) {
         // Mutation failed
         return;
       }
@@ -100,9 +100,10 @@ const commit = (
       // We update the "FOR" or "AGAINST" row arguments totalCount
       const argumentableProxy = store.get(variables.input.argumentableId);
       if (!argumentableProxy) return;
+
       const connectionKey = viewerIsConfirmed
         ? 'ArgumentList_allArguments'
-        : 'UnpublishedUnpublishedArgumentList_viewerUnpublishedArguments';
+        : 'UnpublishedArgumentList_viewerUnpublishedArguments';
       const connection = ConnectionHandler.getConnection(argumentableProxy, connectionKey, {
         type: variables.input.type,
       });
