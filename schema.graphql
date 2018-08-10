@@ -715,7 +715,7 @@ enum CommentOrderField {
 # Available statuses
 enum CommentPublicationStatus {
   # Visible by author only.
-  NOT_PUBLISHED
+  UNPUBLISHED
 
   # Normal status, Publicly visible
   PUBLISHED

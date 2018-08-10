@@ -3,8 +3,8 @@ CommentPublicationStatus:
   config:
     description: 'Available statuses'
     values:
-      NOT_PUBLISHED:
-        value: 'NOT_PUBLISHED'
+      UNPUBLISHED:
+        value: 'UNPUBLISHED'
         description: 'Visible by author only.'
       PUBLISHED:
         value: 'PUBLISHED'

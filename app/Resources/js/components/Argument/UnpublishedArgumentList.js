@@ -19,7 +19,7 @@ export class UnpublishedUnpublishedArgumentList extends React.Component<Props> {
   render() {
     const { type, isAuthenticated } = this.props;
     return (
-      <div id={`opinion__arguments--${type}`} className="block--tablet">
+      <div id={`opinion__unpublished--arguments--${type}`} className="block--tablet">
         <QueryRenderer
           environment={environment}
           query={graphql`

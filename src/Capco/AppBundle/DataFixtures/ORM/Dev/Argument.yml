@@ -18,7 +18,7 @@ Capco\AppBundle\Entity\Argument:
 
   argument{3..100}:
     id: 'argument<current()>'
-    Opinion: '@opinion<numberBetween(3, 50)>'
+    Opinion: '@opinion3'
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
@@ -26,7 +26,7 @@ Capco\AppBundle\Entity\Argument:
 
   argument{101..150}:
     id: 'argument<current()>'
-    Opinion: '@opinion<numberBetween(3, 50)>'
+    Opinion: '@opinion<numberBetween(4, 50)>'
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>

@@ -38,16 +38,11 @@ Scenario: User want to see unpublished votes on proposals
               "edges":[
                  {
                     "node":{
-                       "id":"1054",
-                       "published":false
+                       "id": @string@,
+                       "published": @boolean@
                     }
                  },
-                 {
-                    "node":{
-                       "id":"1055",
-                       "published":false
-                    }
-                 }
+                @...@
               ]
            }
         }

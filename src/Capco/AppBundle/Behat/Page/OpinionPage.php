@@ -24,6 +24,7 @@ class OpinionPage extends Page
         'argument no field' => '#argument-form--AGAINST textarea',
         'argument no button' => '#argument-form--AGAINST button',
         'arguments yes box' => '#opinion__arguments--FOR',
+        'unpublished arguments yes box' => '#opinion__unpublished--arguments--FOR',
         'arguments no box' => '#opinion__arguments--AGAINST',
         'argument edit button' => '#arg-argument1 .argument__btn--edit',
         'argument edit body field' => '#argument-form #argument-body',
@@ -105,6 +106,11 @@ class OpinionPage extends Page
     public function getArgumentsYesBoxSelector()
     {
         return $this->getSelector('arguments yes box');
+    }
+
+    public function getUnpublishedArgumentsYesBoxSelector()
+    {
+        return $this->getSelector('unpublished arguments yes box');
     }
 
     public function getArgumentsNoBoxSelector()

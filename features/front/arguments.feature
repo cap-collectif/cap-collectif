@@ -6,26 +6,20 @@ Feature: Arguments
 ## Create in opinion
 
 @database @javascript
-Scenario: Can create an argument in contribuable opinion
+Scenario: A confirmed user can create an argument in a contribuable opinion
   Given I am logged in as user
   And I go to an opinion
   When I submit an argument
   Then I should see "alert.success.add.argument" in the "#global-alert-box" element
-  And I should see my new argument
+  And I should see my new published argument
 
-@javascript @security
-Scenario: Argument in opinion must be at least 3 chars long
-  Given I am logged in as user
+@database @javascript
+Scenario: An unconfirmed user can create an argument in a contribuable opinion
+  Given I am logged in as user_not_confirmed
   And I go to an opinion
-  When I submit a too short argument
-  Then I should see "argument.constraints.min" in the "#main" element
-
-@javascript @security
-Scenario: Argument in opinion must be at most 2000 chars long
-  Given I am logged in as user
-  And I go to an opinion
-  When I submit a too long argument
-  Then I should see "argument.constraints.max" in the "#main" element
+  When I submit an argument
+  Then I should see "alert.success.add.argument" in the "#global-alert-box" element
+  And I should see my new unpublished argument
 
 @javascript @security
 Scenario: Can not create an argument in opinion when step is closed
@@ -36,26 +30,20 @@ Scenario: Can not create an argument in opinion when step is closed
 ## Create in version
 
 @database @javascript
-Scenario: Can create an argument in contribuable version
+Scenario: A confirmed user can create an argument in a contribuable version
   Given I am logged in as user
   And I go to a version
   When I submit an argument
   Then I should see "alert.success.add.argument" in the "#global-alert-box" element
-  And I should see my new argument
+  And I should see my new published argument
 
-@javascript @security
-Scenario: Argument in a version must be at least 3 chars long
-  Given I am logged in as user
+@database @javascript
+Scenario: An unconfirmed user can create an argument in a contribuable version
+  Given I am logged in as user_not_confirmed
   And I go to a version
-  When I submit a too short argument
-  Then I should see "argument.constraints.min" in the "#main" element
-
-@javascript @security
-Scenario: Argument in a version must be at most 2000 chars long
-  Given I am logged in as user
-  And I go to a version
-  When I submit a too long argument
-  Then I should see "argument.constraints.max" in the "#main" element
+  When I submit an argument
+  Then I should see "alert.success.add.argument" in the "#global-alert-box" element
+  And I should see my new unpublished argument
 
 @javascript @security
 Scenario: Can not create an argument in a version when step is closed
