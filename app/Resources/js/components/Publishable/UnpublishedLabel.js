@@ -37,13 +37,15 @@ export class UnpublishedLabel extends React.Component<Props> {
           </p>
           {publishable.publishableUntil && (
             <p>
-              <FormattedMessage
-                id="remaining-time"
-                values={{
-                  remainingTime: moment(publishable.publishableUntil).toNow(true),
-                  contentType: 'contribution',
-                }}
-              />
+              <strong>
+                <FormattedMessage
+                  id="remaining-time"
+                  values={{
+                    remainingTime: moment(publishable.publishableUntil).toNow(true),
+                    contentType: 'contribution',
+                  }}
+                />
+              </strong>
             </p>
           )}
         </Popover>
