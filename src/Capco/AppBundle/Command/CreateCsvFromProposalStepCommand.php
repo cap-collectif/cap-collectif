@@ -1182,7 +1182,7 @@ ${AUTHOR_INFOS_FRAGMENT}
 {
   node(id: "${proposalId}") {
     ... on Proposal {
-      votes(includeExpired: true, stepId: "${stepId}", first: ${VOTES_PER_PAGE}${votesAfter}) {
+      votes(includeUnpublished: true, stepId: "${stepId}", first: ${VOTES_PER_PAGE}${votesAfter}) {
         totalCount
         pageInfo {
           startCursor

@@ -2,6 +2,10 @@
 
 {% block field %}
     {%  if object is not null and object.isTrashed() %}
-        <span>{{ 'trashed-' ~ object.getTrashedStatus() ~ '-content'| trans({}, 'CapcoAppBundle') }}</span>
+        {% if object.getTrashedStatus() == 'invisible' %}
+            <span class="label label-danger">{{ 'admin.fields.proposal.state.choices.hidden_content'|trans }}</span>
+        {% else %}
+            <span class="label label-danger">{{ 'admin.fields.proposal.state.choices.trashed'|trans }}</span>
+        {% endif %}
     {%  endif %}
 {% endblock %}

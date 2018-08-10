@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
@@ -45,18 +44,20 @@ class PostsController extends FOSRestController
         $limit = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
 
-        $paginator = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:PostComment')
-                    ->getEnabledByPost($post, $offset, $limit, $filter);
+        $paginator = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:PostComment')
+            ->getEnabledByPost($post, $offset, $limit, $filter);
 
         $comments = [];
         foreach ($paginator as $comment) {
             $comments[] = $comment;
         }
 
-        $countWithAnswers = $this->getDoctrine()->getManager()
-                      ->getRepository('CapcoAppBundle:PostComment')
-                      ->countCommentsAndAnswersEnabledByPost($post);
+        $countWithAnswers = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:PostComment')
+            ->countCommentsAndAnswersEnabledByPost($post);
 
         return [
             'commentsAndAnswersCount' => (int) $countWithAnswers,
@@ -86,12 +87,9 @@ class PostsController extends FOSRestController
         $user = $this->getUser();
 
         $comment = (new PostComment())
-                    ->setAuthorIp($request->getClientIp())
-                    ->setAuthor($user)
-                    ->setPost($post)
-                    ->setIsEnabled(true)
-                ;
-
+            ->setAuthorIp($request->getClientIp())
+            ->setAuthor($user)
+            ->setPost($post);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
@@ -102,7 +100,9 @@ class PostsController extends FOSRestController
         $parent = $comment->getParent();
         if ($parent) {
             if (!$parent instanceof PostComment || $post !== $parent->getPost()) {
-                throw $this->createNotFoundException('This parent comment is not linked to this post');
+                throw $this->createNotFoundException(
+                    'This parent comment is not linked to this post'
+                );
             }
             if (null !== $parent->getParent()) {
                 throw new BadRequestHttpException('You can\'t answer the answer of a comment.');
@@ -110,8 +110,12 @@ class PostsController extends FOSRestController
         }
 
         $post->setCommentsCount($post->getCommentsCount() + 1);
-        $this->getDoctrine()->getManager()->persist($comment);
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->persist($comment);
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($user);
         $this->get('event_dispatcher')->dispatch(
             CapcoAppBundleEvents::COMMENT_CHANGED,

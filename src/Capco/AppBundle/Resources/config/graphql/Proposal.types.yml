@@ -161,9 +161,9 @@ Proposal:
           stepId:
             type: 'ID'
             description: 'If provided, retrieve only in this step.'
-          includeExpired:
+          includeUnpublished:
             type: 'Boolean'
-            description: '(ROLE_SUPER_ADMIN only) Select also expired votes.'
+            description: '(ROLE_SUPER_ADMIN only) Select also unpublished votes.'
             defaultValue: false
       createdAt:
         type: 'DateTime!'

@@ -26,8 +26,8 @@ class ProposalVotesResolver implements ResolverInterface
 
     public function __invoke(Proposal $proposal, Argument $args, \ArrayObject $context)
     {
-        $includeExpired =
-            true === $args->offsetGet('includeExpired') &&
+        $includeUnpublished =
+            true === $args->offsetGet('includeUnpublished') &&
             $context->offsetExists('disable_acl') &&
             true === $context->offsetGet('disable_acl');
         if ($args->offsetExists('stepId')) {
@@ -35,7 +35,7 @@ class ProposalVotesResolver implements ResolverInterface
                 $step = $this->abstractStepRepository->find($args->offsetGet('stepId'));
 
                 return $this->proposalVotesDataLoader->load(
-                    compact('proposal', 'step', 'args', 'includeExpired')
+                    compact('proposal', 'step', 'args', 'includeUnpublished')
                 );
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
@@ -43,6 +43,8 @@ class ProposalVotesResolver implements ResolverInterface
             }
         }
 
-        return $this->proposalVotesDataLoader->load(compact('proposal', 'args', 'includeExpired'));
+        return $this->proposalVotesDataLoader->load(
+            compact('proposal', 'args', 'includeUnpublished')
+        );
     }
 }

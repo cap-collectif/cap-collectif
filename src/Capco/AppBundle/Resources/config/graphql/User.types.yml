@@ -263,9 +263,9 @@ User:
             defaultValue: { field: CREATED_AT, direction: DESC }
           stepId:
             type: 'ID'
-          includeExpired:
+          includeUnpublished:
             type: 'Boolean'
-            description: '(ROLE_SUPER_ADMIN only) Select also expired votes.'
+            description: '(ROLE_SUPER_ADMIN only) Select also unpublished votes.'
             defaultValue: false
       deletedAccountAt:
         type: 'DateTime'

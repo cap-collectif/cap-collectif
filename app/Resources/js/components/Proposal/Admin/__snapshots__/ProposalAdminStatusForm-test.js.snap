@@ -182,6 +182,14 @@ exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
             values={Object {}}
           />
         </ToggleButton>
+        <ToggleButton
+          value="UNPUBLISHED"
+        >
+          <FormattedMessage
+            id="proposal.state.unpublished"
+            values={Object {}}
+          />
+        </ToggleButton>
       </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"

@@ -1,20 +1,20 @@
-@proposals
+@proposals @proposalVotes
 Feature: proposal votes connection
 
 @database
-Scenario: User want to see expired votes on proposals
+Scenario: User want to see unpublished votes on proposals
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
   """
   {
-    "query": "query node ($proposalId: ID!, $first: Int, $stepId: ID!, $includeExpired: Boolean){
+    "query": "query node ($proposalId: ID!, $first: Int, $stepId: ID!, $includeUnpublished: Boolean){
       proposal: node(id: $proposalId) {
         ... on Proposal {
-          votes(first: $first, stepId: $stepId, includeExpired: $includeExpired ) {
+          votes(first: $first, stepId: $stepId, includeUnpublished: $includeUnpublished ) {
             edges {
               node {
                 id
-                expired
+                published
               }
             }
           }
@@ -25,7 +25,7 @@ Scenario: User want to see expired votes on proposals
       "proposalId": "proposal1",
       "stepId": "selectionstep8",
       "first": 50,
-      "includeExpired": true
+      "includeUnpublished": true
     }
   }
   """
@@ -39,13 +39,13 @@ Scenario: User want to see expired votes on proposals
                  {
                     "node":{
                        "id":"1054",
-                       "expired":false
+                       "published":false
                     }
                  },
                  {
                     "node":{
                        "id":"1055",
-                       "expired":false
+                       "published":false
                     }
                  }
               ]

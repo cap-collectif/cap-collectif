@@ -849,9 +849,9 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                             'description' => 'If provided, retrieve only in this step.',
                         ],
                         [
-                            'name' => 'includeExpired',
+                            'name' => 'includeUnpublished',
                             'type' => Type::boolean(),
-                            'description' => '(ROLE_SUPER_ADMIN only) Select also expired votes.',
+                            'description' => '(ROLE_SUPER_ADMIN only) Select also unpublished votes.',
                             'defaultValue' => false,
                         ],
                     ],

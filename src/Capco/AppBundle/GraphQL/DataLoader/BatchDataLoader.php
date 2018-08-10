@@ -75,7 +75,7 @@ abstract class BatchDataLoader extends DataLoader
     /**
      * The serializeKey function is used to serialize into the cache the array of parameters.
      *
-     * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeExpired" => false]) or a keyName
+     * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
      * @return array|string
      */
     abstract protected function serializeKey($key);
@@ -86,7 +86,7 @@ abstract class BatchDataLoader extends DataLoader
      * the batch function. If promise is already in cache, create an already fulfilled promise with value
      * from cache to immediatly get it.
      *
-     * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeExpired" => false]) or a keyName
+     * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
      * @return mixed
      *
      * @see DataLoader

@@ -41,11 +41,6 @@ Scenario: User has lost password and email should be sent
   And I open mail with subject "email-subject-resetting-password"
   And I should see "email-content-resetting-password" in mail
 
-@javascript
-Scenario: Expired user can not login
-  Given I want to login as expired_user
-  Then I should see "global.login_failed"
-
 @javascript @database
 Scenario: Admin wants to set his password
   Given features "registration", "profiles" are enabled

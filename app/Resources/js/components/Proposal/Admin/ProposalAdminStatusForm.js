@@ -101,7 +101,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
               component={component}
               disabled={
                 !isSuperAdmin &&
-                (publicationStatus === 'DELETED' || publicationStatus === 'EXPIRED')
+                (publicationStatus === 'DELETED' || publicationStatus === 'UNPUBLISHED')
               }>
               {isAuthor && (
                 <ToggleButton
@@ -127,11 +127,9 @@ export class ProposalAdminStatusForm extends Component<Props> {
                 value="TRASHED_NOT_VISIBLE">
                 <FormattedMessage id="proposal.state.hidden_content" />
               </ToggleButton>
-              {publicationStatus === 'EXPIRED' && (
-                <ToggleButton
-                  onClick={() => dispatch(change(formName, 'publicationStatus', 'EXPIRED'))}
-                  value="EXPIRED">
-                  <FormattedMessage id="proposal.state.expired" />
+              {publicationStatus === 'UNPUBLISHED' && (
+                <ToggleButton value="UNPUBLISHED">
+                  <FormattedMessage id="proposal.state.unpublished" />
                 </ToggleButton>
               )}
               {publicationStatus === 'DELETED' && (

@@ -23,7 +23,6 @@ const USER_FRAGMENT = '
   }
   createdAt
   updatedAt
-  expired
   lastLogin
   rolesText
   consentExternalCommunication
@@ -48,7 +47,6 @@ const USER_HEADERS = [
     'user_TypeName',
     'user_createdAt',
     'user_updatedAt',
-    'user_expired',
     'user_lastLogin',
     'user_rolesText',
     'user_consentExternalCommunication',
@@ -134,7 +132,6 @@ query {
                 'event_privateRegistration',
                 'user_createdAt',
                 'user_updatedAt',
-                'user_expired',
                 'user_lastLogin',
                 'user_rolesText',
                 'user_consentExternalCommunication',
@@ -163,7 +160,6 @@ query {
                         $edge['registeredAnonymously'] ? 'yes' : 'no',
                         $participant['createdAt'],
                         $participant['updatedAt'],
-                        $participant['expired'],
                         $participant['lastLogin'],
                         $participant['rolesText'],
                         $participant['consentExternalCommunication'],
@@ -272,7 +268,6 @@ query {
                     $contributor['userType'] ? $contributor['userType']['name'] : null,
                     $contributor['createdAt'],
                     $contributor['updatedAt'],
-                    $contributor['expired'],
                     $contributor['lastLogin'],
                     $contributor['rolesText'],
                     $contributor['consentExternalCommunication'],
@@ -386,7 +381,6 @@ query {
                     $contributor['userType'] ? $contributor['userType']['name'] : null,
                     $contributor['createdAt'],
                     $contributor['updatedAt'],
-                    $contributor['expired'],
                     $contributor['lastLogin'],
                     $contributor['rolesText'],
                     $contributor['consentExternalCommunication'],

@@ -922,9 +922,9 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                             'description' => null,
                         ],
                         [
-                            'name' => 'includeExpired',
+                            'name' => 'includeUnpublished',
                             'type' => Type::boolean(),
-                            'description' => '(ROLE_SUPER_ADMIN only) Select also expired votes.',
+                            'description' => '(ROLE_SUPER_ADMIN only) Select also unpublished votes.',
                             'defaultValue' => false,
                         ],
                     ],

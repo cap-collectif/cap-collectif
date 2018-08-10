@@ -2024,8 +2024,8 @@ type Proposal implements Node & Contribution & Publishable & Reportable & Trasha
     # If provided, retrieve only in this step.
     stepId: ID
 
-    # (ROLE_SUPER_ADMIN only) Select also expired votes.
-    includeExpired: Boolean = false
+    # (ROLE_SUPER_ADMIN only) Select also unpublished votes.
+    includeUnpublished: Boolean = false
   ): ProposalVoteConnection!
 
   # Identifies the date and time when the object was created.
@@ -3667,8 +3667,8 @@ type User implements Node {
     orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
     stepId: ID
 
-    # (ROLE_SUPER_ADMIN only) Select also expired votes.
-    includeExpired: Boolean = false
+    # (ROLE_SUPER_ADMIN only) Select also unpublished votes.
+    includeUnpublished: Boolean = false
   ): ProposalVoteConnection!
   deletedAccountAt: DateTime
 

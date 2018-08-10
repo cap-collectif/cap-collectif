@@ -57,7 +57,7 @@ final class ProposalAknowledgeMessage extends Message
             ),
             'projectLink' => $stepLink,
             'proposalLink' => $proposalLink,
-            'proposalPulished' => $proposal->isPublished(),
+            'proposalPublished' => $proposal->isPublished(),
             'proposalName' => $proposal->getTitle(),
             'homepageUrl' => $homepageUrl,
             'typeOfMail' => $typeOfMail,

@@ -43,7 +43,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         int $offset,
         string $field,
         string $direction,
-        bool $includeExpired
+        bool $includeUnpublished
     ): Paginator {
         $qb = $this->createQueryBuilder('pv')
             ->andWhere('pv.collectStep = :step')
@@ -51,7 +51,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->setParameter('step', $step)
             ->setParameter('proposal', $proposal);
 
-        if (!$includeExpired) {
+        if (!$includeUnpublished) {
             $qb->andWhere('pv.published = true');
         }
 
@@ -199,7 +199,7 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function countVotesByProposalAndStep(
         Proposal $proposal,
         CollectStep $step,
-        bool $includeExpired
+        bool $includeUnpublished
     ): int {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
@@ -208,21 +208,21 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->setParameter('proposal', $proposal)
             ->setParameter('step', $step);
 
-        if (!$includeExpired) {
+        if (!$includeUnpublished) {
             $qb->andWhere('pv.published = true');
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countVotesByProposal(Proposal $proposal, bool $includeExpired): int
+    public function countVotesByProposal(Proposal $proposal, bool $includeUnpublished): int
     {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal);
 
-        if (!$includeExpired) {
+        if (!$includeUnpublished) {
             $qb->andWhere('pv.published = true');
         }
 

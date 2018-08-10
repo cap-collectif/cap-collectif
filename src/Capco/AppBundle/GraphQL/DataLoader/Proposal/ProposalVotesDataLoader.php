@@ -62,14 +62,14 @@ class ProposalVotesDataLoader extends BatchDataLoader
             'proposalId' => $key['proposal']->getId(),
             'stepId' => isset($key['step']) ? $key['step']->getId() : null,
             'args' => $key['args'],
-            'includeExpired' => $key['includeExpired'],
+            'includeUnpublished' => $key['includeUnpublished'],
         ];
     }
 
     private function resolve(
         Proposal $proposal,
         Argument $args,
-        bool $includeExpired,
+        bool $includeUnpublished,
         ?AbstractStep $step = null
     ) {
         $field = $args->offsetGet('orderBy')['field'];
@@ -81,7 +81,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                     $field,
                     $proposal,
                     $step,
-                    $includeExpired,
+                    $includeUnpublished,
                     $direction
                 ) {
                     return $this->proposalSelectionVoteRepository->getByProposalAndStep(
@@ -91,7 +91,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                         $offset,
                         $field,
                         $direction,
-                        $includeExpired
+                        $includeUnpublished
                     )
                         ->getIterator()
                         ->getArrayCopy();
@@ -100,7 +100,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                 $totalCount = $this->proposalSelectionVoteRepository->countVotesByProposalAndStep(
                     $proposal,
                     $step,
-                    $includeExpired
+                    $includeUnpublished
                 );
 
                 return $paginator->auto($args, $totalCount);
@@ -110,7 +110,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                     $field,
                     $proposal,
                     $step,
-                    $includeExpired,
+                    $includeUnpublished,
                     $direction
                 ) {
                     return $this->proposalCollectVoteRepository->getByProposalAndStep(
@@ -120,7 +120,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                         $offset,
                         $field,
                         $direction,
-                        $includeExpired
+                        $includeUnpublished
                     )
                         ->getIterator()
                         ->getArrayCopy();
@@ -129,7 +129,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                 $totalCount = $this->proposalCollectVoteRepository->countVotesByProposalAndStep(
                     $proposal,
                     $step,
-                    $includeExpired
+                    $includeUnpublished
                 );
 
                 return $paginator->auto($args, $totalCount);
@@ -143,11 +143,11 @@ class ProposalVotesDataLoader extends BatchDataLoader
         $totalCount = 0;
         $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
             $proposal,
-            $includeExpired
+            $includeUnpublished
         );
         $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal(
             $proposal,
-            $includeExpired
+            $includeUnpublished
         );
         return $paginator->auto($args, $totalCount);
     }
@@ -164,7 +164,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
             $connections[] = $this->resolve(
                 $key['proposal'],
                 $key['args'],
-                $key['includeExpired'],
+                $key['includeUnpublished'],
                 $key['step'] ?? null
             );
         }
