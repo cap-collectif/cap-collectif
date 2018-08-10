@@ -113,53 +113,57 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     position: 5
   qaq29:
     questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionNoelFete'
+    question: '@multiplequestionHapNotGoodHowDareYou'
     position: 6
   qaq30:
     questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionNoelHatColor'
+    question: '@multiplequestionNoelFete'
     position: 7
   qaq31:
     questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionMarvelOrDc'
+    question: '@multiplequestionNoelHatColor'
     position: 8
   qaq32:
     questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionDcSupermanLike'
+    question: '@multiplequestionMarvelOrDc'
     position: 9
   qaq33:
     questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionDcBatmanLike'
+    question: '@multiplequestionDcSupermanLike'
     position: 10
   qaq34:
     questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionDcSupergirlLike'
+    question: '@multiplequestionDcBatmanLike'
     position: 11
   qaq35:
     questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionMarvelIronManLike'
+    question: '@multiplequestionDcSupergirlLike'
     position: 12
   qaq36:
     questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionMarvelLukeCageLike'
+    question: '@multiplequestionMarvelIronManLike'
     position: 13
   qaq37:
     questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionMarvelThorLike'
+    question: '@multiplequestionMarvelLukeCageLike'
     position: 14
   qaq38:
     questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionEndConditionel'
+    question: '@multiplequestionMarvelThorLike'
     position: 15
   qaq39:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionEndConditionel'
+    position: 16
+  qaq40:
     questionnaire: '@questionnaire1'
     question: '@sectionquestion1'
     position: 1
-  qaq40:
+  qaq41:
     questionnaire: '@questionnaire1'
     question: '@sectionquestion2'
     position: 3
-  qaq41:
+  qaq42:
     proposalForm: '@proposalform1'
     question: '@sectionquestion3'
     position: 1

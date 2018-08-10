@@ -5,6 +5,27 @@ Capco\AppBundle\Entity\LogicJump:
     origin: '@multiplequestionHapNoel'
     destination: '@multiplequestionHapCreation'
     conditions: ['@ljconditionHap']
+  logicjump8:
+    id: logicjump8
+    always: true
+    origin: '@multiplequestionIsHapGood'
+    destination: '@multiplequestionMarvelOrDc'
+  logicjump10:
+    id: logicjump10
+    always: false
+    origin: '@multiplequestionIsHapGood'
+    destination: '@multiplequestionHapNotGoodHowDareYou'
+    conditions: ['@ljconditionHapGood']
+  logicjump11:
+    id: logicjump11
+    always: true
+    origin: '@multiplequestionHapNotGoodHowDareYou'
+    destination: '@multiplequestionMarvelOrDc'
+  logicjump9:
+    id: logicjump9
+    always: true
+    origin: '@multiplequestionNoelHatColor'
+    destination: '@multiplequestionMarvelOrDc'
   logicjump2:
     id: logicjump2
     always: false
@@ -33,4 +54,9 @@ Capco\AppBundle\Entity\LogicJump:
     id: logicjump6
     always: true
     origin: '@multiplequestionDcSupergirlLike'
+    destination: '@multiplequestionEndConditionel'
+  logicjump7:
+    id: logicjump7
+    always: true
+    origin: '@multiplequestionMarvelThorLike'
     destination: '@multiplequestionEndConditionel'

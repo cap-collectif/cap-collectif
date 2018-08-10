@@ -312,3 +312,11 @@ Capco\AppBundle\Entity\QuestionChoice:
     id: questionchoiceEndConditionOk2
     title: Doki
     position: 2
+  questionchoiceHapNotGoodHowDareYouOki:
+    id: questionchoiceHapNotGoodHowDareYouOki
+    title: Oki
+    position: 1
+  questionchoiceHapNotGoodHowDareYouGpaslu:
+    id: questionchoiceHapNotGoodHowDareYouGpaslu
+    title: mdr g pas lu
+    position: 2

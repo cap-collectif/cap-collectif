@@ -3,6 +3,11 @@ Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition:
     operator: IS
     question: '@multiplequestionHapNoel'
     value: '@questionchoiceHap'
+  ljconditionHapGood:
+    id: ljconditionHapGood
+    operator: IS
+    question: '@multiplequestionIsHapGood'
+    value: '@questionchoiceHapBonNon'
   ljconditionNoel:
     operator: IS
     question: '@multiplequestionHapNoel'

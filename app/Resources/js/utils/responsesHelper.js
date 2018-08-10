@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import {type IntlShape, FormattedMessage} from 'react-intl';
-import {type FieldArrayProps, Field} from 'redux-form';
-import type {QuestionTypeValue} from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
-import type {LogicJumpConditionOperator} from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
+import { type IntlShape, FormattedMessage } from 'react-intl';
+import { type FieldArrayProps, Field } from 'redux-form';
+import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
+import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
@@ -69,7 +69,7 @@ type ResponsesFromAPI = $ReadOnlyArray<?{|
 |}>;
 
 export type ResponsesInReduxForm = $ReadOnlyArray<{|
-  questionId: string,
+  question: string,
   // eslint-disable-next-line flowtype/space-after-type-colon
   value:
     | ?string
@@ -101,102 +101,120 @@ type SubmitResponses = $ReadOnlyArray<{
   medias?: ?$ReadOnlyArray<string>,
 }>;
 
-const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
+const getConditionsResultForJump = (jump, responses) => {
+  const conditions =
+    jump &&
+    jump.conditions &&
+    jump.conditions.filter(Boolean).map(condition => {
+      const search = responses
+        .filter(Boolean)
+        .find(r => condition && condition.question && r.question === condition.question.id);
+      const userResponse = search && search.value;
+      return condition.operator === 'IS'
+        ? condition && condition.value && condition.value.title === userResponse
+        : condition && condition.value && condition.value.title !== userResponse;
+    });
+  return (
+    (jump && jump.always) ||
+    (conditions && conditions.filter(Boolean).every(condition => condition === true))
+  );
+};
 
-  const firstLogicQuestion = questions.find(question => question.jumps.length > 0 && question.position >= afterQuestion.position);
+const populateQuestionsJump = (responses, questions, callback) => {
+  const questionsWithJumpsIds = [];
+
+  if (responses) {
+    responses.forEach(response => {
+      if (response.value) {
+        const question = questions.find(q => q.id === response.question);
+        if (question && question.jumps && question.jumps.length > 0) {
+          question.jumps.some(jump => {
+            const conditionsResult = getConditionsResultForJump(jump, responses);
+            if (conditionsResult) {
+              const questionWithJump = questions.find(
+                q => q.id === (jump && jump.destination && jump.destination.id),
+              );
+              questionsWithJumpsIds.push(...callback(questionWithJump));
+            }
+            return conditionsResult;
+          });
+        }
+      }
+    });
+  }
+
+  return questionsWithJumpsIds;
+};
+
+const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
+  const firstLogicQuestion = questions
+    .filter(Boolean)
+    .find(
+      question =>
+        question.jumps &&
+        question.jumps.length > 0 &&
+        afterQuestion &&
+        question.position >= afterQuestion.position,
+    );
+  console.log(firstLogicQuestion);
   let firstQuestionsIds = [];
   if (firstLogicQuestion) {
-    const filteredIds = questions.filter(question => (question.required) || (question.jumps.length === 0 &&
-      question.position > afterQuestion.position &&
-      question.position < firstLogicQuestion.position)
-    )
+    const filteredIds = questions
+      .filter(
+        question =>
+          question.required ||
+          (question.jumps &&
+            question.jumps.length === 0 &&
+            afterQuestion &&
+            question.position > afterQuestion.position &&
+            question.position < firstLogicQuestion.position),
+      )
       .map(question => question.id);
-    firstLogicQuestion.jumps.some(jump => {
-      if (jump.always) {
-        filteredIds.push(jump.destination.id)
-      }
-      return jump.always
-    })
+    if (firstLogicQuestion && firstLogicQuestion.jumps) {
+      firstLogicQuestion.jumps.some(jump => {
+        if (jump && jump.always && jump.destination) {
+          filteredIds.push(jump.destination.id);
+        }
+        return jump && jump.always;
+      });
+    }
     firstQuestionsIds = [firstLogicQuestion.id, ...filteredIds];
   } else {
-    firstQuestionsIds = questions.filter(question => (question.position > afterQuestion.position)).map(question => question.id);
+    firstQuestionsIds = questions
+      .filter(question => afterQuestion && question.position > afterQuestion.position)
+      .map(question => question.id);
   }
-  const questionsWithJumpsIds = [];
-  if (responses) {
-    responses.forEach(response => {
-      if (response.value) {
-        const question = questions.find(q => q.id === response.question)
-        if (question.jumps.length > 0) {
-          question.jumps.some(jump => {
-            const conditions = jump.conditions.map(condition => {
-              const search = responses
-                .filter(Boolean)
-                .find(
-                  r => condition && condition.question && r.question === condition.question.id,
-                );
-              const userResponse = search && search.value;
-              return condition.operator === 'IS'
-                ? condition.value.title === userResponse
-                : condition.value.title !== userResponse;
-            });
-            const conditionResult = jump.always || conditions.every(condition => condition === true);
-            if (conditionResult) {
-              const questionWithJump = questions.find(q => q.id === jump.destination.id)
-              questionsWithJumpsIds.push(questionWithJump.id)
-            }
-            return conditionResult;
-          })
-        }
-      }
-    })
-  }
+  const questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump => {
+    return questionWithJump ? [questionWithJump.id] : [];
+  });
+
+  console.log(questionsWithJumpsIds, firstQuestionsIds);
 
   return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
-
-}
+};
 
 const getAvailableQuestionsIds = (questions, responses) => {
-
-  const firstLogicQuestion = questions.find(question => question.jumps.length > 0);
-  const firstLogicQuestionId = firstLogicQuestion.id;
-  const filteredIds = questions.filter(question => (question.required) || (question.jumps.length === 0 && question.position < firstLogicQuestion.position)).map(question => question.id);
+  const firstLogicQuestion = questions.find(
+    question => question.jumps && question.jumps.length > 0,
+  );
+  const firstLogicQuestionId = firstLogicQuestion ? firstLogicQuestion.id : null;
+  const filteredIds = questions
+    .filter(
+      question =>
+        question.required ||
+        (question.jumps &&
+          question.jumps.length === 0 &&
+          firstLogicQuestion &&
+          question.position < firstLogicQuestion.position),
+    )
+    .map(question => question.id);
   const firstQuestionsIds = [firstLogicQuestionId, ...filteredIds];
-  const questionsWithJumpsIds = [];
-
-  if (responses) {
-    responses.forEach(response => {
-      if (response.value) {
-        const question = questions.find(q => q.id === response.question)
-        if (question.jumps.length > 0) {
-          question.jumps.some(jump => {
-            const conditions = jump.conditions.map(condition => {
-              const search = responses
-                .filter(Boolean)
-                .find(
-                  r => condition && condition.question && r.question === condition.question.id,
-                );
-              const userResponse = search && search.value;
-              return condition.operator === 'IS'
-                ? condition.value.title === userResponse
-                : condition.value.title !== userResponse;
-            });
-            const conditionResult = jump.always || conditions.every(condition => condition === true);
-            if (conditionResult) {
-              const questionWithJump = questions.find(q => q.id === jump.destination.id)
-              questionsWithJumpsIds.push(
-                ...getAvailableQuestionsIdsAfter(questionWithJump, questions, responses)
-              )
-            }
-            return conditionResult;
-          })
-        }
-      }
-    })
-  }
+  const questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump => {
+    return getAvailableQuestionsIdsAfter(questionWithJump, questions, responses);
+  });
 
   return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
-}
-
+};
 
 export const formatSubmitResponses = (
   responses: ?ResponsesInReduxForm,
@@ -209,7 +227,11 @@ export const formatSubmitResponses = (
     const { type: questionType } = question;
 
     if (questionType === 'medias') {
-      const medias = answeredQuestionsIds.includes(question.id) ? Array.isArray(res.value) ? res.value.map(value => value.id) : [] : null
+      const medias = answeredQuestionsIds.includes(question.id)
+        ? Array.isArray(res.value)
+          ? res.value.map(value => value.id)
+          : []
+        : null;
       return {
         question: res.question,
         medias
@@ -217,10 +239,12 @@ export const formatSubmitResponses = (
     }
     let value = res.value;
     if (questionType === 'ranking' || questionType === 'button') {
-      value = answeredQuestionsIds.includes(question.id) ? JSON.stringify({
+      value = answeredQuestionsIds.includes(question.id)
+        ? JSON.stringify({
           labels: Array.isArray(res.value) ? res.value : [res.value],
           other: null,
-        }) : null
+        })
+        : null;
     } else if (questionType === 'checkbox' || questionType === 'radio') {
       value = answeredQuestionsIds.includes(question.id) ? JSON.stringify(res.value) : null;
     } else if (questionType === 'number') {
@@ -230,10 +254,10 @@ export const formatSubmitResponses = (
       };
     }
     if (typeof value === 'string') {
-      value = answeredQuestionsIds.includes(question.id) ? value : null
-      return {value, question: res.question};
+      value = answeredQuestionsIds.includes(question.id) ? value : null;
+      return { value, question: res.question };
     }
-    return {value: null, question: res.question};
+    return { value: null, question: res.question };
   });
 };
 
@@ -420,7 +444,7 @@ export const renderResponses = ({
   }, false);
 
   if (hasLogicJumps) {
-    const final = getAvailableQuestionsIds(questions, responses)
+    const final = getAvailableQuestionsIds(questions, responses);
     return (
       <div>
         {fields.map((member, index) => {
@@ -434,18 +458,18 @@ export const renderResponses = ({
           const labelAppend = field.required
             ? strategy === 'minority_required'
               ? ` <span class="warning small"> ${intl.formatMessage({
-                id: 'global.mandatory',
-              })}</span>`
+                  id: 'global.mandatory',
+                })}</span>`
               : ''
             : strategy === 'majority_required' || strategy === 'half_required'
               ? ` <span class="excerpt small"> ${intl.formatMessage({
-                id: 'global.optional',
-              })}</span>`
+                  id: 'global.optional',
+                })}</span>`
               : '';
 
           const labelMessage = field.title + labelAppend;
 
-          const label = <span dangerouslySetInnerHTML={{__html: labelMessage}}/>;
+          const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
           switch (inputType) {
             case 'medias': {
@@ -480,7 +504,7 @@ export const renderResponses = ({
                     label={label}
                     disabled={disabled}>
                     <option value="" disabled>
-                      {<FormattedMessage id="global.select"/>}
+                      {<FormattedMessage id="global.select" />}
                     </option>
                     {field.choices.map(choice => (
                       <option key={choice.id} value={choice.title}>
@@ -492,6 +516,7 @@ export const renderResponses = ({
               );
             }
             default: {
+              let response;
               if (responses) {
                 response = responses[index].value;
               }
@@ -561,18 +586,18 @@ export const renderResponses = ({
         const labelAppend = field.required
           ? strategy === 'minority_required'
             ? ` <span class="warning small"> ${intl.formatMessage({
-              id: 'global.mandatory',
-            })}</span>`
+                id: 'global.mandatory',
+              })}</span>`
             : ''
           : strategy === 'majority_required' || strategy === 'half_required'
             ? ` <span class="excerpt small"> ${intl.formatMessage({
-              id: 'global.optional',
-            })}</span>`
+                id: 'global.optional',
+              })}</span>`
             : '';
 
         const labelMessage = field.title + labelAppend;
 
-        const label = <span dangerouslySetInnerHTML={{__html: labelMessage}}/>;
+        const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
         switch (inputType) {
           case 'section': {
@@ -615,7 +640,7 @@ export const renderResponses = ({
                   label={label}
                   disabled={disabled}>
                   <option value="" disabled>
-                    {<FormattedMessage id="global.select"/>}
+                    {<FormattedMessage id="global.select" />}
                   </option>
                   {field.choices.map(choice => (
                     <option key={choice.id} value={choice.title}>

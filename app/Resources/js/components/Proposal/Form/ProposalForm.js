@@ -642,6 +642,7 @@ export default createFragmentContainer(container, {
         helpText
         jumps {
           id
+          always
           destination {
             id
             title

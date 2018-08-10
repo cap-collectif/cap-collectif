@@ -160,3 +160,9 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     questionChoices:
       ['@questionchoiceEndConditionOk', '@questionchoiceEndConditionOk2']
     type: 4
+  multiplequestionHapNotGoodHowDareYou:
+    id: 39
+    title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
+    questionChoices:
+      ['@questionchoiceHapNotGoodHowDareYouOki', '@questionchoiceHapNotGoodHowDareYouGpaslu']
+    type: 4
