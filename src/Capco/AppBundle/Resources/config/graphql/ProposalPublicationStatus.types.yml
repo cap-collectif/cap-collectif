@@ -10,7 +10,8 @@ ProposalPublicationStatus:
         value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::TRASHED")'
         description: 'Publicly visible in the trash bin'
       TRASHED_NOT_VISIBLE:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::TRASHED_NOT_VISIBLE")'
+        value:
+          '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::TRASHED_NOT_VISIBLE")'
         description: 'In the trash bin, content not visible'
       DELETED:
         value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::DELETED")'

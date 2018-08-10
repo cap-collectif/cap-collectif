@@ -1205,7 +1205,7 @@ class User extends BaseUser
 
     // ************************* Custom methods *********************************
 
-    public function isEmailConfirmed()
+    public function isEmailConfirmed(): bool
     {
         return null === $this->confirmationToken;
     }

@@ -128,12 +128,13 @@ class UsersController extends FOSRestController
             return $form;
         }
 
+        $userManager->updatePassword($user);
+
+        // This allow the user to login
+        $user->setEnabled(true);
+
         // We generate a confirmation token to validate email
         $token = $this->get('fos_user.util.token_generator')->generateToken();
-
-        $userManager->updatePassword($user);
-        $user->setEnabled(true); // the user can use the website but...
-        $user->setExpiresAt((new \DateTime())->modify('+ 12 hours')); // the account expires in 12 hours (if not confirmed)
         $user->setConfirmationToken($token);
 
         if ($creatingAnAdmin) {
