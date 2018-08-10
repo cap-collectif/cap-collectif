@@ -30,23 +30,12 @@ class ConfirmationController extends Controller
         }
 
         $user->setEnabled(true);
-        $user->setExpired(false);
-        $user->setExpiresAt(null);
         $user->setLastLogin(new \DateTime());
 
-        $instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-        if (
-            'preprod' === $instanceName ||
-            'rennes' === $instanceName ||
-            'rennespreprod' === $instanceName ||
-            'montreuil' === $instanceName
-        ) {
-            $hasRepublishedContributions = false;
-        } else {
-            $hasRepublishedContributions = $this->get(
-                'capco.contribution.manager'
-            )->republishContributions($user);
-        }
+        $hasPulishedContributions = $this->get('capco.contribution.manager')->publishContributions(
+            $user
+        );
+
         // if user has been created via API he has no password yet.
         // That's why we create a reset password request to let him chose a password
         if (null === $user->getPassword()) {
@@ -67,7 +56,7 @@ class ConfirmationController extends Controller
             $response
         );
 
-        if ($hasRepublishedContributions) {
+        if ($hasPulishedContributions) {
             $session
                 ->getFlashBag()
                 ->set('sonata_user_success', 'global.alert.email_confirmed_with_republish');
@@ -89,9 +78,9 @@ class ConfirmationController extends Controller
         $redirectResponse = new RedirectResponse(
             $this->container->get('router')->generate('app_homepage')
         );
-        $user = $this->container
-            ->get('capco.user.repository')
-            ->findUserByNewEmailConfirmationToken($token);
+        $user = $this->container->get('capco.user.repository')->findUserByNewEmailConfirmationToken(
+            $token
+        );
         if (!$user) {
             return $redirectResponse;
         }
