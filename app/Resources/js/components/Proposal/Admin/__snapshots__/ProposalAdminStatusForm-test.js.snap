@@ -24,7 +24,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if published 1`] = `
       <i
         className="fa fa-info-circle"
       />
-       Aide
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
     </a>
   </div>
   <div
@@ -135,7 +139,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
       <i
         className="fa fa-info-circle"
       />
-       Aide
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
     </a>
   </div>
   <div
@@ -145,8 +153,14 @@ exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
       onSubmit={[MockFunction]}
     >
       <p>
-        Adresse email de l'auteur en attente de confirmation: 
-        soon@yopmail.com
+        <FormattedMessage
+          id="author-email-waiting-confirmation"
+          values={
+            Object {
+              "email": "soon@yopmail.com",
+            }
+          }
+        />
       </p>
       <Field
         component={[Function]}

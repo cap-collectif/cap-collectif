@@ -10,7 +10,10 @@ import AlertForm from '../../Alert/AlertForm';
 import component from '../../Form/Field';
 import ChangeProposalPublicationStatusMutation from '../../../mutations/ChangeProposalPublicationStatusMutation';
 import DeleteProposalMutation from '../../../mutations/DeleteProposalMutation';
-import type { ProposalAdminStatusForm_proposal } from './__generated__/ProposalAdminStatusForm_proposal.graphql';
+import type {
+  ProposalPublicationStatus,
+  ProposalAdminStatusForm_proposal,
+} from './__generated__/ProposalAdminStatusForm_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
 
 type DefaultProps = void;
@@ -30,7 +33,7 @@ type Props = RelayProps & {
   intl: IntlShape,
 };
 type FormValues = {
-  publicationStatus: 'PUBLISHED' | 'TRASHED' | 'TRASHED_NOT_VISIBLE' | 'DRAFT',
+  publicationStatus: ProposalPublicationStatus,
   trashedReason: ?string,
 };
 
@@ -86,13 +89,18 @@ export class ProposalAdminStatusForm extends Component<Props> {
             target="_blank"
             rel="noopener noreferrer"
             href={intl.formatMessage({ id: 'admin.help.link.proposal.state' })}>
-            <i className="fa fa-info-circle" /> Aide
+            <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
           </a>
         </div>
         <div className="box-content box-content__status-form">
           <form onSubmit={handleSubmit}>
             {!proposal.author.isEmailConfirmed && (
-              <p>Adresse email de l'auteur en attente de confirmation: {proposal.author.email}</p>
+              <p>
+                <FormattedMessage
+                  id="author-email-waiting-confirmation"
+                  values={{ email: proposal.author.email }}
+                />
+              </p>
             )}
             <Field
               type="radio-buttons"
