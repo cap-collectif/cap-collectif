@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionRow /> should render opinion displayed 1`] = `
+<Collapse
+  appear={false}
+  dimension="height"
+  getDimensionValue={[Function]}
+  id="collapse-proposal-opinion1"
+  in={true}
+  mountOnEnter={false}
+  timeout={300}
+  unmountOnExit={false}
+>
+  <ListGroupItem
+    bsClass="list-group-item"
+    id="item-opinion-opinion1"
+    listItem={false}
+  >
+    <h4>
+      <a
+        className="profile__opinion__open__link"
+        href="http://perdu.com"
+        id="item-opinion-link-opinion1"
+        title="perdu sur internet ?"
+      >
+        perdu sur internet ?
+      </a>
+    </h4>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      id="profile-opinion-unfollow-button-opinion1"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="unfollow"
+        values={Object {}}
+      />
+    </Button>
+  </ListGroupItem>
+</Collapse>
+`;
+
+exports[`<OpinionRow /> should render opinion hidden 1`] = `
+<Collapse
+  appear={false}
+  dimension="height"
+  getDimensionValue={[Function]}
+  id="collapse-proposal-opinion1"
+  in={false}
+  mountOnEnter={false}
+  timeout={300}
+  unmountOnExit={false}
+>
+  <ListGroupItem
+    bsClass="list-group-item"
+    id="item-opinion-opinion1"
+    listItem={false}
+  >
+    <h4>
+      <a
+        className="profile__opinion__open__link"
+        href="http://perdu.com"
+        id="item-opinion-link-opinion1"
+        title="perdu sur internet ?"
+      >
+        perdu sur internet ?
+      </a>
+    </h4>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      id="profile-opinion-unfollow-button-opinion1"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="unfollow"
+        values={Object {}}
+      />
+    </Button>
+  </ListGroupItem>
+</Collapse>
+`;
