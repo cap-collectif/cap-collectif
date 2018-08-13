@@ -26,7 +26,7 @@ export class ToggleMapButton extends React.Component<Props> {
   render() {
     const { mode, showMapButton } = this.props;
 
-    console.log(this.props.step.allowingProgressSteps);
+    // console.warn(this.props.step.allowingProgressSteps);
 
     return (
       <div

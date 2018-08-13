@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { createFragmentContainer } from 'react-relay';
-import { Label, ListGroup, ListGroupItem, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import moment from 'moment';
 import * as graphql from 'graphql';
 import type { ProposalListTable_proposals } from './__generated__/ProposalListTable_proposals.graphql';
 import type { ProposalListTable_step } from './__generated__/ProposalListTable_step.graphql';
-import ProgressList from '../../Ui/List/ProgressList';
 import ReactBootstrapTable from '../../Ui/ReactBootstrapTable';
+import ProposalListTableMobile from "./ProposalListTableMobile";
 
 type Props = {
   proposals: ProposalListTable_proposals,
@@ -137,78 +136,7 @@ export class ProposalListTable extends React.Component<Props, State> {
     });
 
     if (windowWidth < 992) {
-      return (
-        <ListGroup className="list-group-custom">
-          {this.getData().map(item => {
-            const list =
-              item.implementationPhase.value &&
-              item.implementationPhase.value.list.map(e => {
-                let isActive = false;
-
-                if (moment().isAfter(e.endAt)) {
-                  isActive = true;
-                }
-
-                return {
-                  title: e.title,
-                  isActive,
-                };
-              });
-
-            const getProposalTitle =
-              item.title.value.displayTitle.length > 45
-                ? `${item.title.value.displayTitle.substring(0, 45)}...`
-                : item.title.value.displayTitle;
-
-            const getStatus = () => {
-              if (item.status.value && item.status.value.name.length > 9) {
-                const tooltip = (
-                  <Tooltip placement="top" id="tooltip">
-                    {item.status.value.name}
-                  </Tooltip>
-                );
-
-                return (
-                  <OverlayTrigger overlay={tooltip} placement="top">
-                    <Label bsStyle={item.status.value.color} className="badge-pill">
-                      {item.status.value.name.substring(0, 9)}...
-                    </Label>
-                  </OverlayTrigger>
-                );
-              }
-
-              if (item.status.value) {
-                return (
-                  <Label bsStyle={item.status.value.color} className="badge-pill">
-                    {item.status.value.name}
-                  </Label>
-                );
-              }
-            };
-
-            return (
-              <ListGroupItem>
-                <div>
-                  <div className="d-flex justify-content-between">
-                    {item.title.value && <a href={item.title.value.url}>{getProposalTitle}</a>}
-                    {item.status.value && <div className="ml-5">{getStatus()}</div>}
-                  </div>
-                  {item.implementationPhase.value && (
-                    <div className="m-auto">
-                      {this.getPhaseTitle(item.implementationPhase.value.list) && (
-                        <div className="mb-5 mt-10">
-                          <span>{this.getPhaseTitle(item.implementationPhase.value.list)}</span>
-                        </div>
-                      )}
-                      <ProgressList progressListItem={list} />
-                    </div>
-                  )}
-                </div>
-              </ListGroupItem>
-            );
-          })}
-        </ListGroup>
-      );
+      return <ProposalListTableMobile data={this.getData()}/>;
     }
 
     return <ReactBootstrapTable data={this.getData()} />;
