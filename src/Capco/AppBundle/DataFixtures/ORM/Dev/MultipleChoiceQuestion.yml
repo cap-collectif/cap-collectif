@@ -115,50 +115,47 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestionMarvelOrDc:
     id: 31
     title: Plutôt Marvel ou DC ?
-    questionChoices:
-      ['@questionchoiceMarvelOrDcMarvel', '@questionchoiceMarvelOrDcDc']
+    questionChoices: ['@questionchoiceMarvelOrDcMarvel', '@questionchoiceMarvelOrDcDc']
     type: 4
   multiplequestionDcSupermanLike:
     id: 32
     title: T'aimes bien Superman ?
-    questionChoices:
-      ['@questionchoiceDcSupermanYes', '@questionchoiceDcSupermanNo']
+    questionChoices: ['@questionchoiceDcSupermanYes', '@questionchoiceDcSupermanNo']
     type: 4
   multiplequestionDcBatmanLike:
     id: 33
     title: T'aimes bien Batman ?
-    questionChoices:
-      ['@questionchoiceDcBatmanYes', '@questionchoiceDcBatmanYes2']
+    questionChoices: ['@questionchoiceDcBatmanYes', '@questionchoiceDcBatmanYes2']
     type: 4
   multiplequestionDcSupergirlLike:
     id: 34
     title: T'aimes bien Supergirl ?
-    questionChoices:
-      ['@questionchoiceDcSupergirlYes', '@questionchoiceDcSupergirlNo']
+    questionChoices: ['@questionchoiceDcSupergirlYes', '@questionchoiceDcSupergirlNo']
     type: 4
   multiplequestionMarvelIronManLike:
     id: 35
     title: T'aimes bien Iron Man ?
-    questionChoices:
-      ['@questionchoiceMarvelIronManYes', '@questionchoiceMarvelIronManNo']
+    questionChoices: ['@questionchoiceMarvelIronManYes', '@questionchoiceMarvelIronManNo']
     type: 4
   multiplequestionMarvelLukeCageLike:
     id: 36
     title: T'aimes bien Luke Cage ?
     questionChoices:
-      ['@questionchoiceMarvelLukeCageYes', '@questionchoiceMarvelLukeCageYes2', '@questionchoiceMarvelLukeCageYes3']
+      [
+        '@questionchoiceMarvelLukeCageYes',
+        '@questionchoiceMarvelLukeCageYes2',
+        '@questionchoiceMarvelLukeCageYes3',
+      ]
     type: 4
   multiplequestionMarvelThorLike:
     id: 37
     title: T'aimes bien Thor ?
-    questionChoices:
-      ['@questionchoiceMarvelThorYes', '@questionchoiceMarvelThorNo']
+    questionChoices: ['@questionchoiceMarvelThorYes', '@questionchoiceMarvelThorNo']
     type: 4
   multiplequestionEndConditionel:
     id: 38
     title: C'est la fin mais j'affiche quand même des choix
-    questionChoices:
-      ['@questionchoiceEndConditionOk', '@questionchoiceEndConditionOk2']
+    questionChoices: ['@questionchoiceEndConditionOk', '@questionchoiceEndConditionOk2']
     type: 4
   multiplequestionHapNotGoodHowDareYou:
     id: 39

@@ -114,10 +114,7 @@ const getConditionsResultForJump = (jump, responses) => {
         ? condition && condition.value && condition.value.title === userResponse
         : condition && condition.value && condition.value.title !== userResponse;
     });
-  return (
-    (jump && jump.always) ||
-    (conditions && conditions.filter(Boolean).every(condition => condition === true))
-  );
+  return (jump && jump.always) || (conditions && conditions.every(condition => condition === true));
 };
 
 const populateQuestionsJump = (responses, questions, callback) => {
@@ -142,7 +139,6 @@ const populateQuestionsJump = (responses, questions, callback) => {
       }
     });
   }
-
   return questionsWithJumpsIds;
 };
 
