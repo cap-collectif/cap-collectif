@@ -1432,6 +1432,7 @@ type Mutation {
   followProposal(input: FollowProposalInput!): FollowProposalPayload
   followOpinion(input: FollowOpinionInput!): FollowOpinionPayload
   updateFollowProposal(input: UpdateFollowProposalInput!): UpdateFollowProposalPayload
+  updateFollowOpinion(input: UpdateFollowOpinionInput!): UpdateFollowOpinionPayload
   unfollowProposal(input: UnfollowProposalInput!): UnfollowProposalPayload
   unfollowOpinion(input: UnfollowOpinionInput!): UnfollowOpinionPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
@@ -1866,6 +1867,9 @@ type Project implements Node {
   # The visibility of project
   visibility: ProjectVisibility!
   adminUrl: URI
+
+  # State of activation of Opinion subscription.
+  opinionCanBeFollowed: Boolean!
 }
 
 # 3 possible values
@@ -3259,6 +3263,20 @@ input UnselectProposalInput {
 
 type UnselectProposalPayload {
   proposal: Proposal!
+  clientMutationId: String
+}
+
+input UpdateFollowOpinionInput {
+  # The opinion id
+  opinionId: ID!
+  notifiedOf: SubscriptionTypeValue!
+  clientMutationId: String
+}
+
+type UpdateFollowOpinionPayload {
+  follower: Follower
+  followerEdge: FollowerEdge
+  opinion: Opinion
   clientMutationId: String
 }
 

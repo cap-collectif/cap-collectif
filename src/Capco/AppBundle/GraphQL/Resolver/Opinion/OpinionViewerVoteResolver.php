@@ -27,8 +27,14 @@ class OpinionViewerVoteResolver implements ResolverInterface
         $this->versionVoteRepository = $versionVoteRepository;
     }
 
-    public function __invoke(OpinionContributionInterface $contribution, User $user): ?AbstractVote
-    {
+    public function __invoke(
+        OpinionContributionInterface $contribution,
+        ?User $user
+    ): ?AbstractVote {
+        if (!$user) {
+            return null;
+        }
+
         try {
             if ($contribution instanceof Opinion) {
                 return $this->opinionVoteRepository->getByAuthorAndOpinion($user, $contribution);

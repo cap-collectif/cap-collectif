@@ -81,14 +81,14 @@ export class OpinionBox extends React.Component<Props> {
           </p>
           {/* $FlowFixMe */}
           <OpinionBody opinion={opinion} />
+          {/* $FlowFixMe */}
+          <OpinionVotesBox opinion={opinion} />
           <div
             className="opinion__buttons"
             style={{ marginTop: '15px', marginBottom: '15px' }}
             aria-label={<FormattedMessage id="vote.form" />}>
             <OpinionButtons opinion={opinion} />
           </div>
-          {/* $FlowFixMe */}
-          <OpinionVotesBox opinion={opinion} />
         </div>
         {/* $FlowFixMe */}
         <OpinionAnswer opinion={opinion} />

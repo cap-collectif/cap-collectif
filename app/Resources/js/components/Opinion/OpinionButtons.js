@@ -11,6 +11,7 @@ import OpinionDelete from './Delete/OpinionDelete';
 import OpinionEditButton from './OpinionEditButton';
 import type { State } from '../../types';
 import type { OpinionButtons_opinion } from './__generated__/OpinionButtons_opinion.graphql';
+import OpinionFollowButton from './Follow/OpinionFollowButton';
 
 type Props = {
   opinion: OpinionButtons_opinion,
@@ -37,13 +38,13 @@ class OpinionButtons extends React.Component<Props> {
         return (
           <React.Fragment>
             <OpinionVersionEditModal version={opinion} />
-            <OpinionVersionEditButton className="pull-right" style={{ marginLeft: '5px' }} />
+            <OpinionVersionEditButton style={{ marginLeft: '5px' }} />
           </React.Fragment>
         );
       }
       return (
         <OpinionEditButton
-          className="opinion__action--edit pull-right btn--outline btn-dark-gray"
+          className="opinion__action--edit btn--outline btn-dark-gray"
           opinion={opinion}
         />
       );
@@ -59,13 +60,16 @@ class OpinionButtons extends React.Component<Props> {
       <ButtonToolbar>
         <OpinionDelete opinion={opinion} />
         {this.renderEditButton()}
+        {/* $FlowFixMe $fragmentRefs is missing */}
+        {opinion.step &&
+          opinion.step.project.opinionCanBeFollowed && <OpinionFollowButton opinion={opinion} />}
         <OpinionReportButton opinion={opinion} />
         {opinion.title &&
           opinion.section &&
           opinion.section.url && (
             <ShareButtonDropdown
               id="opinion-share-button"
-              className="pull-right"
+              style={{ marginLeft: '5px' }}
               title={opinion.title}
               url={opinion.section.url}
             />
@@ -88,6 +92,7 @@ export default createFragmentContainer(container, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...OpinionDelete_opinion
       ...OpinionReportButton_opinion @arguments(isAuthenticated: $isAuthenticated)
+      ...OpinionFollowButton_opinion @arguments(isAuthenticated: $isAuthenticated)
       ... on Opinion {
         ...OpinionEditButton_opinion
         __typename
@@ -95,6 +100,11 @@ export default createFragmentContainer(container, {
         title
         section {
           url
+        }
+        step {
+          project {
+            opinionCanBeFollowed
+          }
         }
         author {
           slug

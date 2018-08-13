@@ -131,6 +131,21 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         }
       }
     />
+    <Relay(OpinionVotesBox)
+      opinion={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "__typename": "Opinion",
+          "section": Object {
+            "color": "info",
+            "title": "sectionTitle",
+            "url": "#",
+          },
+          "title": "title",
+        }
+      }
+    />
     <div
       aria-label={
         <FormattedMessage

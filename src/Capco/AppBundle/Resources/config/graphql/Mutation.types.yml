@@ -233,6 +233,14 @@ Mutation:
           payloadType: UpdateFollowProposalPayload
           mutateAndGetPayload:
             '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFollowProposalMutation", [value["proposalId"], value["notifiedOf"], getUser()])'
+      updateFollowOpinion:
+        access: "@=hasRole('ROLE_USER')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: UpdateFollowOpinionInput
+          payloadType: UpdateFollowOpinionPayload
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFollowOpinionMutation", [value["opinionId"], value["notifiedOf"], getUser()])'
       unfollowProposal:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'

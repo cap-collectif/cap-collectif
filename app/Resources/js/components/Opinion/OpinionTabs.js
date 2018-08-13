@@ -12,6 +12,7 @@ import OpinionSourceBox from './Source/OpinionSourceBox';
 import type { State } from '../../types';
 import { scrollToAnchor } from '../../services/ScrollToAnchor';
 import type { OpinionTabs_opinion } from './__generated__/OpinionTabs_opinion.graphql';
+import OpinionFollowersBox from './OpinionFollowersBox';
 
 type RelayProps = {
   opinion: OpinionTabs_opinion,
@@ -38,6 +39,9 @@ class OpinionTabs extends React.Component<Props> {
     }
     if (hash.indexOf('votesevolution') !== -1) {
       key = 'votesevolution';
+    }
+    if (hash.indexOf('followers') !== -1) {
+      key = 'followers';
     }
     return key;
   };
@@ -72,6 +76,10 @@ class OpinionTabs extends React.Component<Props> {
     return this.props.opinion.section && this.props.opinion.section.sourceable;
   };
 
+  isFollowable = () => {
+    return this.props.opinion.step && this.props.opinion.step.project.opinionCanBeFollowed;
+  };
+
   isCommentable = () => {
     return (
       this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE ||
@@ -92,7 +100,10 @@ class OpinionTabs extends React.Component<Props> {
   render() {
     const { opinion, isAuthenticated } = this.props;
 
-    if (this.isSourceable() + this.isCommentable() + this.isVersionable() > 1) {
+    if (
+      this.isSourceable() + this.isCommentable() + this.isVersionable() + this.isFollowable() >
+      1
+    ) {
       // at least two tabs
 
       const marginTop = { marginTop: '20px' };
@@ -125,6 +136,14 @@ class OpinionTabs extends React.Component<Props> {
                   />
                 </NavItem>
               )}
+              {this.isFollowable() && (
+                <NavItem className="opinion-tabs" eventKey="followers">
+                  <FormattedMessage
+                    id="count-followers"
+                    values={{ count: opinion.allFollowers ? opinion.allFollowers.totalCount : 0 }}
+                  />
+                </NavItem>
+              )}
               {/* {this.hasStatistics() && (
                 <NavItem className="opinion-tabs" eventKey="votesevolution">
                   <FormattedMessage id="vote.evolution.tab" />
@@ -148,6 +167,12 @@ class OpinionTabs extends React.Component<Props> {
                 <Tab.Pane eventKey="sources" style={marginTop}>
                   {/* $FlowFixMe */}
                   <OpinionSourceBox isAuthenticated={isAuthenticated} sourceable={opinion} />
+                </Tab.Pane>
+              )}
+              {this.isFollowable() && (
+                <Tab.Pane eventKey="followers" style={marginTop}>
+                  {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                  <OpinionFollowersBox opinion={opinion} pageAdmin={false} />
                 </Tab.Pane>
               )}
               {/* {this.hasStatistics() && (
@@ -177,6 +202,10 @@ class OpinionTabs extends React.Component<Props> {
     if (this.isCommentable()) {
       /* $FlowFixMe */
       return <ArgumentsBox opinion={opinion} />;
+    }
+    if (this.isFollowable()) {
+      /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
+      return <OpinionFollowersBox opinion={opinion} pageAdmin={false} />;
     }
     // if (this.hasStatistics()) {
     //   return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;
@@ -213,6 +242,15 @@ export default createFragmentContainer(container, {
           sourceable
           commentSystem
         }
+        step {
+          project {
+            opinionCanBeFollowed
+          }
+        }
+        allFollowers: followers(first: 0) {
+          totalCount
+        }
+        ...OpinionFollowersBox_opinion
       }
       ... on Version {
         __typename
