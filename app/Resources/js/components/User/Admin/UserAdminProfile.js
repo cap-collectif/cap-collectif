@@ -60,10 +60,10 @@ const validate = (values: Object) => {
     'username',
   ];
   fields.forEach(value => {
-    if ((value === 'username' && !values[value]) || values[value].length === 0) {
+    if ((value === 'username' && !values[value]) || (values[value] && values[value].length === 0)) {
       errors[value] = 'fill-field';
     }
-    if ((value === 'userType' && !values[value]) || values[value].length === 0) {
+    if ((value === 'userType' && !values[value]) || (values[value] && values[value].length === 0)) {
       values[value] = null;
     }
     if (values[value] && values[value].length <= 2) {

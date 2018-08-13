@@ -27,7 +27,7 @@ class UserTypeRepository extends EntityRepository
                 LEFT JOIN p.author pa
                 LEFT JOIN pa.userType paut
                 WHERE pf.step = :step
-                AND p.enabled = true
+                AND p.published = true
                 AND paut.id = ut.id
                 AND p.trashedStatus IS NULL
             ) as value'

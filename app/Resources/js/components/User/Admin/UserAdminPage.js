@@ -8,7 +8,10 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import UserAdminPageTabs from './UserAdminPageTabs';
 import Loader from '../../Ui/Loader';
 import type { State } from '../../../types';
-import type UserAdminPageQuery from './__generated__/UserAdminPageQuery.graphql';
+import type {
+  UserAdminPageQueryResponse,
+  UserAdminPageQueryVariables,
+} from './__generated__/UserAdminPageQuery.graphql';
 
 type Props = { userId: string, dirty: boolean };
 
@@ -16,7 +19,7 @@ const onUnload = e => {
   e.returnValue = true;
 };
 
-const component = ({ error, props }: ReadyState & { props?: UserAdminPageQuery }) => {
+const component = ({ error, props }: ReadyState & { props?: ?UserAdminPageQueryResponse }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
@@ -57,9 +60,11 @@ export class UserAdminPage extends React.Component<Props> {
               }
             }
           `}
-          variables={{
-            id: this.props.userId,
-          }}
+          variables={
+            ({
+              id: this.props.userId,
+            }: UserAdminPageQueryVariables)
+          }
           render={component}
         />
       </div>

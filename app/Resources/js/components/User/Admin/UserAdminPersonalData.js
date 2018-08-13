@@ -40,7 +40,7 @@ const formName = 'user-admin-edit-personal-data';
 
 const validate = (values: Object) => {
   const errors = {};
-  const addressFields = [
+  const fields = [
     'address',
     'address2',
     'city',
@@ -50,7 +50,7 @@ const validate = (values: Object) => {
     'phone',
     'email',
   ];
-  addressFields.forEach(value => {
+  fields.forEach(value => {
     if (values[value] && values[value].length <= 2) {
       errors[value] = 'two-characters-minimum-required';
     }
@@ -131,7 +131,8 @@ export class UserAdminPersonalData extends React.Component<Props> {
               divClassName="col-sm-4"
               children={
                 <div>
-                  <FormattedMessage id="confirmed-by-email" />&nbsp;
+                  <FormattedMessage id="confirmed-by-email" />
+                  &nbsp;
                   <DatesInterval startAt={user.emailConfirmationSentAt} />
                 </div>
               }
