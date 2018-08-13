@@ -17,6 +17,7 @@ describe('<ToggleMapButton />', () => {
     const wrapper = shallow(
       <ToggleMapButton
         onChange={onChange}
+        showMapButton
         mode={mode.mosaic}
         step={{ allowingProgressSteps: true, id: 'id', $refType }}
       />,
@@ -28,6 +29,19 @@ describe('<ToggleMapButton />', () => {
     const wrapper = shallow(
       <ToggleMapButton
         onChange={onChange}
+        showMapButton
+        mode={mode.map}
+        step={{ allowingProgressSteps: false, id: 'id', $refType }}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a toggle button without map', () => {
+    const wrapper = shallow(
+      <ToggleMapButton
+        onChange={onChange}
+        showMapButton={false}
         mode={mode.map}
         step={{ allowingProgressSteps: false, id: 'id', $refType }}
       />,

@@ -58,6 +58,29 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected and
       values={Object {}}
     />
   </Button>
+  <Button
+    active={true}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "flex": "1 0 auto",
+      }
+    }
+  >
+    <i
+      className="cap cap-map-location"
+      onClick={[Function]}
+    />
+     
+    <FormattedMessage
+      id="proposal.map.map"
+      values={Object {}}
+    />
+  </Button>
 </div>
 `;
 
@@ -98,6 +121,90 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
   </Button>
   <Button
     active={true}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "flex": "1 0 auto",
+      }
+    }
+  >
+    <i
+      className="cap cap-th-large"
+      onClick={[Function]}
+    />
+     
+    <FormattedMessage
+      id="grid"
+      values={Object {}}
+    />
+  </Button>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "flex": "1 0 auto",
+      }
+    }
+  >
+    <i
+      className="cap cap-map-location"
+      onClick={[Function]}
+    />
+     
+    <FormattedMessage
+      id="proposal.map.map"
+      values={Object {}}
+    />
+  </Button>
+</div>
+`;
+
+exports[`<ToggleMapButton /> should render a toggle button without map 1`] = `
+<div
+  aria-label="Step view"
+  className="btn-group d-flex"
+  id="step-view-toggle"
+  role="group"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "flex": "1 0 auto",
+      }
+    }
+  >
+    <i
+      className="cap cap-android-menu"
+      onClick={[Function]}
+    />
+     
+    <FormattedMessage
+      id="list-view"
+      values={Object {}}
+    />
+  </Button>
+  <Button
+    active={false}
     block={false}
     bsClass="btn"
     bsStyle="default"

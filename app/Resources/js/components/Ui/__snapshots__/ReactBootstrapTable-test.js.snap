@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalCollectStatus /> renders table with all type of data 1`] = `
+<ReactBootstrapTable__Container
+  width="0"
+>
+  <BootstrapTableContainer
+    columns={Array []}
+    data={
+      Array [
+        Object {},
+      ]
+    }
+    keyField="title"
+  />
+</ReactBootstrapTable__Container>
+`;
