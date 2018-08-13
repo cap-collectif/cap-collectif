@@ -14,7 +14,7 @@ type Props = { proposal: ProposalPreviewHeader_proposal };
 export class ProposalPreviewHeader extends React.Component<Props> {
   render() {
     const proposal = this.props.proposal;
-    const date = proposal.publishedAt ? proposal.publishedAt : proposal.createdAt;
+    const date = proposal.publishedAt || proposal.createdAt;
     return (
       <CardUser>
         <div className="card__user__avatar">

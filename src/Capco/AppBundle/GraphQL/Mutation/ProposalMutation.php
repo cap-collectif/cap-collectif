@@ -17,6 +17,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Form\ProposalProgressStepType;
+use Capco\AppBundle\Enum\ProposalPublicationStatus;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -244,26 +245,26 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         switch ($values['publicationStatus']) {
-            case 'TRASHED':
+            case ProposalPublicationStatus::TRASHED:
                 $proposal
                     ->setTrashedStatus(Trashable::STATUS_VISIBLE)
                     ->setTrashedReason($values['trashedReason'])
                     ->setDeletedAt(null);
                 break;
-            case 'PUBLISHED':
+            case ProposalPublicationStatus::PUBLISHED:
                 $proposal
                     ->setPublishedAt(new \DateTime())
                     ->setDraft(false)
                     ->setTrashedStatus(null)
                     ->setDeletedAt(null);
                 break;
-            case 'TRASHED_NOT_VISIBLE':
+            case ProposalPublicationStatus::TRASHED_NOT_VISIBLE:
                 $proposal
                     ->setTrashedStatus(Trashable::STATUS_INVISIBLE)
                     ->setTrashedReason($values['trashedReason'])
                     ->setDeletedAt(null);
                 break;
-            case 'DRAFT':
+            case ProposalPublicationStatus::DRAFT:
                 $proposal
                     ->setDraft(true)
                     ->setTrashedStatus(null)

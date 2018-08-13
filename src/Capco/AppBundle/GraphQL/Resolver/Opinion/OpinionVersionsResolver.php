@@ -24,13 +24,14 @@ class OpinionVersionsResolver implements ResolverInterface
         $this->versionRepository = $versionRepository;
     }
 
-    public function __invoke(Opinion $opinion, Argument $args, $viewer): Connection
+    public function __invoke(Opinion $opinion, Argument $args, /*string|User*/ $viewer): Connection
     {
         // Viewer is asking for his unpublished
-        if ($args->offsetGet('viewerUnpublishedOnly') === true) {
+        if (true === $args->offsetGet('viewerUnpublishedOnly')) {
             if (!$viewer instanceof User) {
                 $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
                 $emptyConnection->totalCount = 0;
+
                 return $emptyConnection;
             }
             $unpublished = $this->versionRepository->getUnpublishedByContributionAndAuthor(
@@ -39,6 +40,7 @@ class OpinionVersionsResolver implements ResolverInterface
             );
             $connection = ConnectionBuilder::connectionFromArray($unpublished, $args);
             $connection->totalCount = \count($unpublished);
+
             return $connection;
         }
         $paginator = new Paginator(function (?int $offset, ?int $limit) use ($opinion, $args) {

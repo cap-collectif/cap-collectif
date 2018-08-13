@@ -16,7 +16,7 @@ class ReplyRepository extends EntityRepository
 
     public function countPublishedForQuestionnaire(Questionnaire $questionnaire)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT(reply.id) as repliesCount')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.id = :questionnaireId')
@@ -26,7 +26,7 @@ class ReplyRepository extends EntityRepository
 
     public function getOneForUserAndQuestionnaire(Questionnaire $questionnaire, User $user)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->andWhere('reply.questionnaire = :questionnaire')
             ->andWhere('reply.author = :user')
             ->setParameter('questionnaire', $questionnaire)
@@ -36,7 +36,7 @@ class ReplyRepository extends EntityRepository
 
     public function getByUser(User $user): array
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->andWhere('reply.author = :author')
             ->setParameter('author', $user);
 
@@ -86,7 +86,7 @@ class ReplyRepository extends EntityRepository
 
     public function countByAuthorAndProject(User $author, Project $project): int
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT(DISTINCT reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step IN (:steps)')
@@ -103,7 +103,7 @@ class ReplyRepository extends EntityRepository
 
     public function countByAuthorAndStep(User $author, QuestionnaireStep $step): int
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT(DISTINCT reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step = :step')
@@ -113,7 +113,7 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    protected function getIsEnabledQueryBuilder()
+    protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('reply')->andWhere('reply.published = true');
     }

@@ -36,7 +36,7 @@ class SourceRepository extends EntityRepository
 
     public function getByContributionQB(Sourceable $sourceable)
     {
-        $qb = $this->getIsEnabledQueryBuilder();
+        $qb = $this->getPublishedQueryBuilder();
 
         if ($sourceable instanceof Opinion) {
             $qb->andWhere('s.opinion = :opinion')->setParameter('opinion', $sourceable->getId());
@@ -117,7 +117,7 @@ class SourceRepository extends EntityRepository
 
     public function countByAuthorAndProject(User $author, Project $project): int
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT(DISTINCT s)')
             ->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
@@ -135,7 +135,7 @@ class SourceRepository extends EntityRepository
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT(DISTINCT s)')
             ->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
@@ -170,7 +170,7 @@ class SourceRepository extends EntityRepository
      */
     public function getByUser($user)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->addSelect('ca', 'o', 'cs', 'cas', 'c', 'aut', 'm', 'media')
             ->leftJoin('s.category', 'ca')
             ->leftJoin('s.media', 'media')
@@ -216,7 +216,7 @@ class SourceRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    protected function getIsEnabledQueryBuilder()
+    protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('s')->andWhere('s.published = true');
     }
