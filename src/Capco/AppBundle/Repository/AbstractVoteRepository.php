@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 
 class AbstractVoteRepository extends EntityRepository
 {
-    public function countNotExpired(): int
+    public function countPublished(): int
     {
         return $this->createQueryBuilder('v')
             ->select('COUNT(DISTINCT v.id)')

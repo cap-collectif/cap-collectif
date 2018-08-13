@@ -1,15 +1,16 @@
 <?php
 namespace Capco\AppBundle\Notifier;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
+use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserExpiredWithContributionsMessage;
 use Capco\AppBundle\Mailer\Message\User\UserExpiredWithNoContributionsMessage;
-use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
+use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 
 final class UserNotifier extends BaseNotifier
 {
@@ -57,6 +58,17 @@ final class UserNotifier extends BaseNotifier
                 $user,
                 $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $user->getNewEmailToConfirm()
+            )
+        );
+    }
+
+    public function remingAccountConfirmation(User $user): void
+    {
+        $this->mailer->sendMessage(
+            UserAccountConfirmationReminderMessage::create(
+                $user,
+                $this->userResolver->resolveRegistrationConfirmationUrl($user),
+                $user->getEmail()
             )
         );
     }

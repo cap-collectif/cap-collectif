@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Comment;
@@ -43,13 +42,12 @@ class CommentsController extends FOSRestController
         $from = $paramFetcher->get('from');
         $to = $paramFetcher->get('to');
 
-        $comments = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:Comment')
-                    ->getEnabledWith($from, $to);
+        $comments = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:Comment')
+            ->getPublishedWith($from, $to);
 
-        return [
-            'count' => \count($comments),
-        ];
+        return ['count' => \count($comments)];
     }
 
     /**
@@ -81,14 +79,12 @@ class CommentsController extends FOSRestController
         }
 
         if (!$comment->canVote()) {
-            throw new AccessDeniedHttpException($this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
+            throw new AccessDeniedHttpException(
+                $this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle')
+            );
         }
 
-        $vote = (new CommentVote())
-            ->setComment($comment)
-            ->setUser($user)
-        ;
-
+        $vote = (new CommentVote())->setComment($comment)->setUser($user);
         $comment->incrementVotesCount();
         $em->persist($vote);
         $em->flush();
@@ -140,11 +136,7 @@ class CommentsController extends FOSRestController
             throw new AccessDeniedHttpException();
         }
 
-        $report = (new Reporting())
-            ->setReporter($this->getUser())
-            ->setComment($comment)
-        ;
-
+        $report = (new Reporting())->setReporter($this->getUser())->setComment($comment);
         $form = $this->createForm(ReportingType::class, $report);
         $form->submit($request->request->all(), false);
 

@@ -23,8 +23,8 @@ class MetricsController extends Controller
         )->getRegisteredContributorCount();
         $registeredCount = $this->get('capco.user.repository')->getRegisteredCount();
 
-        $commentCount = $this->get('capco.comment.repository')->countNotExpired();
-        $voteCount = $this->get('capco.abstract_vote.repository')->countNotExpired();
+        $commentCount = $this->get('capco.comment.repository')->countPublished();
+        $voteCount = $this->get('capco.abstract_vote.repository')->countPublished();
 
         $opinionCount = $this->get('capco.opinion.repository')->getCount();
         $versionCount = $this->get('capco.opinion_version.repository')->getCount();

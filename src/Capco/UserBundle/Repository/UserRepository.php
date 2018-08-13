@@ -446,7 +446,7 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getEnabledWith($type = null, $from = null, $to = null): array
+    public function getPublishedWith($type = null, $from = null, $to = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder();
 
@@ -974,6 +974,17 @@ class UserRepository extends EntityRepository
             ->setParameter('user', $user);
 
         return $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function findNotEmailConfirmedUsersSince24Hours(): array
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb
+            ->andWhere('u.enabled = false')
+            ->andWhere('u.createdAt > :now')
+            ->andWhere('u.remindAccountConfirmation = false')
+            ->setParameter('now', new \DateTime('-1 day'));
+        return $qb->getQuery()->getResult();
     }
 
     /**

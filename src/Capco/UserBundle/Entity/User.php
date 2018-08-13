@@ -240,7 +240,7 @@ class User extends BaseUser
     protected $smsConfirmationCode = null;
     protected $phoneConfirmed = false;
 
-    protected $alertExpirationSent = false;
+    protected $remindAccountConfirmation = false;
 
     protected $followingContributions;
 
@@ -1131,18 +1131,6 @@ class User extends BaseUser
         return $this;
     }
 
-    public function isAlertExpirationSent()
-    {
-        return $this->alertExpirationSent;
-    }
-
-    public function setAlertExpirationSent($alertExpirationSent)
-    {
-        $this->alertExpirationSent = $alertExpirationSent;
-
-        return $this;
-    }
-
     public function getEmailConfirmationSentAt()
     {
         return $this->emailConfirmationSentAt;
@@ -1475,6 +1463,18 @@ class User extends BaseUser
     public function removeArchive(UserArchive $archive): self
     {
         $this->archives->removeElement($archive);
+
+        return $this;
+    }
+
+    public function getRemindAccountConfirmation(): bool
+    {
+        return $this->remindAccountConfirmation;
+    }
+
+    public function setRemindAccountConfirmation(bool $remindAccountConfirmation): self
+    {
+        $this->remindAccountConfirmation = $remindAccountConfirmation;
 
         return $this;
     }

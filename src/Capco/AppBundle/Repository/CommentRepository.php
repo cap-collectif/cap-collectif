@@ -7,7 +7,7 @@ use Doctrine\ORM\Query;
 
 class CommentRepository extends EntityRepository
 {
-    public function countNotExpired(): int
+    public function countPublished(): int
     {
         $qb = $this->createQueryBuilder('c')
             ->select('count(DISTINCT c.id)')
@@ -58,7 +58,7 @@ class CommentRepository extends EntityRepository
 
     public function getOneById($comment)
     {
-        return $this->getIsEnabledQueryBuilder()
+        return $this->getPublishedQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'r')
             ->leftJoin('c.Author', 'aut')
             ->leftJoin('aut.media', 'm')
@@ -72,7 +72,7 @@ class CommentRepository extends EntityRepository
 
     public function countAllByAuthor(User $user): int
     {
-        return $this->getIsEnabledQueryBuilder()
+        return $this->getPublishedQueryBuilder()
             ->select('COUNT(c)')
             ->andWhere('c.Author = :author')
             ->setParameter('author', $user)
@@ -98,7 +98,7 @@ class CommentRepository extends EntityRepository
      */
     public function getByUser($user)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->addSelect('a', 'm')
             ->leftJoin('c.Author', 'a')
             ->leftJoin('a.media', 'm')
@@ -109,9 +109,9 @@ class CommentRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
-    public function getEnabledWith($from = null, $to = null)
+    public function getPublishedWith($from = null, $to = null)
     {
-        $qb = $this->getIsEnabledQueryBuilder();
+        $qb = $this->getPublishedQueryBuilder();
 
         if ($from) {
             $qb->andWhere('c.createdAt >= :from')->setParameter('from', $from);
@@ -124,7 +124,7 @@ class CommentRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    protected function getIsEnabledQueryBuilder()
+    protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('c')->andWhere('c.published = true');
     }

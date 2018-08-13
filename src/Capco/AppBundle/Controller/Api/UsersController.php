@@ -87,7 +87,7 @@ class UsersController extends FOSRestController
         if ($email) {
             $users = $this->container->get('capco.user.repository')->findBy(['email' => $email]);
         } else {
-            $users = $this->container->get('capco.user.repository')->getEnabledWith(
+            $users = $this->container->get('capco.user.repository')->getPublishedWith(
                 $userType,
                 $from,
                 $to

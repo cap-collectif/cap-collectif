@@ -120,7 +120,7 @@
         <field name="opinionVersionsCount" column="opinion_versions_count" type="integer" nullable="false" />
         <field name="deletedAccountAt" column="deleted_account_at" type="datetime" nullable="true" />
 
-        <field name="alertExpirationSent" column="alert_expiration_sent" type="boolean" nullable="false" />
+        <field name="remindAccountConfirmation" column="remind_account_confirmation" type="boolean" nullable="false" />
 
         <many-to-one field="userType" target-entity="Capco\UserBundle\Entity\UserType">
             <cascade>
