@@ -12,7 +12,7 @@ describe('<FollowingsOpinions />', () => {
         {
           node: {
             show_url: 'http://carte.perdu.com',
-            id: 'proposal1',
+            id: 'opinion1',
             title: "Une carte de l'internet",
             project: {
               id: 'project1',
@@ -22,7 +22,7 @@ describe('<FollowingsOpinions />', () => {
         {
           node: {
             show_url: 'http://gps.perdu.com',
-            id: 'proposal2',
+            id: 'opinion2',
             title: "Un GPS de l'internet",
             project: {
               id: 'project1',
@@ -32,7 +32,7 @@ describe('<FollowingsOpinions />', () => {
         {
           node: {
             show_url: 'https://randomstreetview.com/',
-            id: 'proposal3',
+            id: 'opinion3',
             title: 'Go  nowhere',
             project: {
               id: 'project2',

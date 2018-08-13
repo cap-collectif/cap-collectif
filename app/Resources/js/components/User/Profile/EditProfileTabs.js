@@ -7,7 +7,7 @@ import { Row, Col, Tab, Nav, NavItem, Panel, ListGroup, ListGroupItem } from 're
 import AccountBox from './AccountBox';
 import type { State, FeatureToggles } from '../../../types';
 import NotificationsForm from './NotificationsForm';
-import FollowingsProposals from '../Following/FollowingsProposals';
+import FollowingsTab from '../Following/FollowingsTab';
 import type EditProfileTabs_viewer from './__generated__/EditProfileTabs_viewer.graphql';
 import UserAvatar from '../UserAvatar';
 import UserLink from '../UserLink';
@@ -132,7 +132,7 @@ export class EditProfileTabs extends Component<Props> {
                 <NotificationsForm viewer={viewer} />
               </Tab.Pane>
               <Tab.Pane eventKey="followings">
-                <FollowingsProposals viewer={viewer} />
+                <FollowingsTab viewer={viewer} />
               </Tab.Pane>
             </Tab.Content>
           </Col>
@@ -152,7 +152,7 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment EditProfileTabs_viewer on User {
-      ...FollowingsProposals_viewer
+      ...FollowingsTab_viewer
       ...NotificationsForm_viewer
       ...PersonalData_viewer
       ...Profile_viewer

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
+exports[`<FollowingsTab /> should render a list of contribution 1`] = `
 <div>
   <h2
     className="page-header"
@@ -13,7 +13,7 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
       appear={false}
       dimension="height"
       getDimensionValue={[Function]}
-      in={false}
+      in={true}
       mountOnEnter={false}
       style={
         Object {
@@ -44,7 +44,7 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
       appear={false}
       dimension="height"
       getDimensionValue={[Function]}
-      in={false}
+      in={true}
       mountOnEnter={false}
       timeout={300}
       unmountOnExit={false}
@@ -52,7 +52,7 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
       <div
         id="all-projects"
       >
-        <OpinionProjectRow
+        <ProposalProjectRow
           key="0"
           project={
             Object {
@@ -95,10 +95,44 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
                   },
                 ],
               },
+              "followingProposals": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "proposal1",
+                      "project": Object {
+                        "id": "project1",
+                      },
+                      "show_url": "http://carte.perdu.com",
+                      "title": "Une carte de l'internet",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "proposal2",
+                      "project": Object {
+                        "id": "project1",
+                      },
+                      "show_url": "http://gps.perdu.com",
+                      "title": "Un GPS de l'internet",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "proposal3",
+                      "project": Object {
+                        "id": "project2",
+                      },
+                      "show_url": "https://randomstreetview.com/",
+                      "title": "Go  nowhere",
+                    },
+                  },
+                ],
+              },
             }
           }
         />
-        <OpinionProjectRow
+        <ProposalProjectRow
           key="1"
           project={
             Object {
@@ -141,6 +175,40 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
                   },
                 ],
               },
+              "followingProposals": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "proposal1",
+                      "project": Object {
+                        "id": "project1",
+                      },
+                      "show_url": "http://carte.perdu.com",
+                      "title": "Une carte de l'internet",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "proposal2",
+                      "project": Object {
+                        "id": "project1",
+                      },
+                      "show_url": "http://gps.perdu.com",
+                      "title": "Un GPS de l'internet",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "proposal3",
+                      "project": Object {
+                        "id": "project2",
+                      },
+                      "show_url": "https://randomstreetview.com/",
+                      "title": "Go  nowhere",
+                    },
+                  },
+                ],
+              },
             }
           }
         />
@@ -152,7 +220,7 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
       appear={false}
       dimension="height"
       getDimensionValue={[Function]}
-      in={true}
+      in={false}
       mountOnEnter={false}
       timeout={300}
       unmountOnExit={false}
@@ -168,7 +236,7 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
 </div>
 `;
 
-exports[`<FollowingsOpinions /> should render following opinion open 1`] = `
+exports[`<FollowingsTab /> should render an empty list 1`] = `
 <div>
   <h2
     className="page-header"
@@ -177,150 +245,21 @@ exports[`<FollowingsOpinions /> should render following opinion open 1`] = `
       id="followings"
       values={Object {}}
     />
-    <Collapse
-      appear={false}
-      dimension="height"
-      getDimensionValue={[Function]}
-      in={true}
-      mountOnEnter={false}
-      style={
-        Object {
-          "float": "right",
-        }
-      }
-      timeout={300}
-      unmountOnExit={false}
-    >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="default"
-        disabled={false}
-        id="unfollow-all"
-        onClick={[Function]}
-      >
-        <FormattedMessage
-          id="unfollow-all"
-          values={Object {}}
-        />
-      </Button>
-    </Collapse>
   </h2>
   <div>
-    <Collapse
-      appear={false}
-      dimension="height"
-      getDimensionValue={[Function]}
-      in={true}
-      mountOnEnter={false}
-      timeout={300}
-      unmountOnExit={false}
-    >
-      <div
-        id="all-projects"
-      >
-        <OpinionProjectRow
-          key="0"
-          project={
-            Object {
-              "id": "project1",
-            }
-          }
-          viewer={
-            Object {
-              "followingOpinions": Object {
-                "edges": Array [
-                  Object {
-                    "node": Object {
-                      "id": "opinion1",
-                      "project": Object {
-                        "id": "project1",
-                      },
-                      "show_url": "http://carte.perdu.com",
-                      "title": "Une carte de l'internet",
-                    },
-                  },
-                  Object {
-                    "node": Object {
-                      "id": "opinion2",
-                      "project": Object {
-                        "id": "project1",
-                      },
-                      "show_url": "http://gps.perdu.com",
-                      "title": "Un GPS de l'internet",
-                    },
-                  },
-                  Object {
-                    "node": Object {
-                      "id": "opinion3",
-                      "project": Object {
-                        "id": "project2",
-                      },
-                      "show_url": "https://randomstreetview.com/",
-                      "title": "Go  nowhere",
-                    },
-                  },
-                ],
-              },
-            }
-          }
-        />
-        <OpinionProjectRow
-          key="1"
-          project={
-            Object {
-              "id": "project2",
-            }
-          }
-          viewer={
-            Object {
-              "followingOpinions": Object {
-                "edges": Array [
-                  Object {
-                    "node": Object {
-                      "id": "opinion1",
-                      "project": Object {
-                        "id": "project1",
-                      },
-                      "show_url": "http://carte.perdu.com",
-                      "title": "Une carte de l'internet",
-                    },
-                  },
-                  Object {
-                    "node": Object {
-                      "id": "opinion2",
-                      "project": Object {
-                        "id": "project1",
-                      },
-                      "show_url": "http://gps.perdu.com",
-                      "title": "Un GPS de l'internet",
-                    },
-                  },
-                  Object {
-                    "node": Object {
-                      "id": "opinion3",
-                      "project": Object {
-                        "id": "project2",
-                      },
-                      "show_url": "https://randomstreetview.com/",
-                      "title": "Go  nowhere",
-                    },
-                  },
-                ],
-              },
-            }
-          }
-        />
-      </div>
-    </Collapse>
+    <div>
+      <FormattedMessage
+        id="no-following"
+        values={Object {}}
+      />
+    </div>
   </div>
   <div>
     <Collapse
       appear={false}
       dimension="height"
       getDimensionValue={[Function]}
-      in={false}
+      in={true}
       mountOnEnter={false}
       timeout={300}
       unmountOnExit={false}
