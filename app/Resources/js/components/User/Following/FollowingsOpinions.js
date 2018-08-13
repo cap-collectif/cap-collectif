@@ -5,30 +5,30 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type FollowingsProposals_viewer from './__generated__/FollowingsProposals_viewer.graphql';
-import ProposalProjectRow from './ProposalProjectRow';
-import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
+import type FollowingsOpinions_viewer from './__generated__/FollowingsOpinions_viewer.graphql';
+import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
+import OpinionProjectRow from './OpinionProjectRow';
 
 type Props = {
-  viewer: FollowingsProposals_viewer,
+  viewer: FollowingsOpinions_viewer,
 };
 type State = {
   open: boolean,
 };
 
-export class FollowingsProposals extends Component<Props, State> {
+export class FollowingsOpinions extends Component<Props, State> {
   state = {
     open: true,
   };
 
   onUnfollowAll() {
     const { viewer } = this.props;
-    const ids = viewer.followingProposals.edges.map(edge => {
+    const ids = viewer.followingOpinions.edges.map(edge => {
       return edge.node.id;
     });
 
     this.setState({ open: !this.state.open }, () => {
-      UnfollowProposalMutation.commit({
+      UnfollowOpinionMutation.commit({
         input: { ids },
       });
     });
@@ -37,7 +37,7 @@ export class FollowingsProposals extends Component<Props, State> {
   render() {
     const { viewer } = this.props;
     const projectsById = {};
-    viewer.followingProposals.edges.map(edge => {
+    viewer.followingOpinions.edges.map(edge => {
       projectsById[edge.node.project.id] = edge.node.project;
     });
     return (
@@ -64,7 +64,7 @@ export class FollowingsProposals extends Component<Props, State> {
               <div id="all-projects">
                 {Object.keys(projectsById).map((project, id) => {
                   return (
-                    <ProposalProjectRow key={id} project={projectsById[project]} viewer={viewer} />
+                    <OpinionProjectRow key={id} project={projectsById[project]} viewer={viewer} />
                   );
                 })}
               </div>
@@ -88,14 +88,14 @@ export class FollowingsProposals extends Component<Props, State> {
 }
 
 export default createFragmentContainer(
-  FollowingsProposals,
+  FollowingsOpinions,
   graphql`
-    fragment FollowingsProposals_viewer on User
+    fragment FollowingsOpinions_viewer on User
       @argumentDefinitions(
         count: { type: "Int", defaultValue: 1000 }
         cursor: { type: "String", defaultValue: null }
       ) {
-      followingProposals(first: $count, after: $cursor) {
+      followingOpinions(first: $count, after: $cursor) {
         totalCount
         edges {
           node {

@@ -6,11 +6,13 @@ import { QueryRenderer, graphql } from 'react-relay';
 import Loader from '../../Ui/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import FollowingsProposals from './FollowingsProposals';
+import FollowingsOpinions from './FollowingsOpinions';
 
 const query = graphql`
   query FollowingsBoxQuery {
     viewer {
       ...FollowingsProposals_viewer
+      ...FollowingsOpinions_viewer
     }
   }
 `;
@@ -19,13 +21,18 @@ type Props = {};
 
 export class FollowingsBox extends Component<Props> {
   render() {
-    const renderFollowingProjectProposal = ({ props, error }) => {
+    const renderFollowingProject = ({ props, error }) => {
       if (error) {
         console.log(error); // eslint-disable-line no-console
         return graphqlError;
       }
       if (props) {
-        return <FollowingsProposals viewer={props.viewer} />;
+        return (
+          <React.Fragment>
+            <FollowingsProposals viewer={props.viewer} />
+            <FollowingsOpinions viewer={props.viewer} />
+          </React.Fragment>
+        );
       }
       return <Loader />;
     };
@@ -35,7 +42,7 @@ export class FollowingsBox extends Component<Props> {
           variables={{}}
           environment={environment}
           query={query}
-          render={renderFollowingProjectProposal}
+          render={renderFollowingProject}
         />
       </div>
     );

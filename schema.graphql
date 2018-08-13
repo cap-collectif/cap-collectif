@@ -1637,6 +1637,9 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   ranking: Int
   modals: [OpinionModal]
   appendices: [Appendix]
+
+  # The related project.
+  project: Project!
 }
 
 # A connection to a list of items.
@@ -3902,6 +3905,9 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   # The viewer vote.
   viewerVote: OpinionVote
   diff: HTML
+
+  # The related project.
+  project: Project
 }
 
 # A connection to a list of items.

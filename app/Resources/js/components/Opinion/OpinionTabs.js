@@ -77,7 +77,7 @@ class OpinionTabs extends React.Component<Props> {
   };
 
   isFollowable = () => {
-    return this.props.opinion.step && this.props.opinion.step.project.opinionCanBeFollowed;
+    return this.props.opinion.project && this.props.opinion.project.opinionCanBeFollowed;
   };
 
   isCommentable = () => {
@@ -242,10 +242,8 @@ export default createFragmentContainer(container, {
           sourceable
           commentSystem
         }
-        step {
-          project {
-            opinionCanBeFollowed
-          }
+        project {
+          opinionCanBeFollowed
         }
         allFollowers: followers(first: 0) {
           totalCount
@@ -265,6 +263,9 @@ export default createFragmentContainer(container, {
           versionable
           sourceable
           commentSystem
+        }
+        project {
+          opinionCanBeFollowed
         }
       }
       ...OpinionSourceBox_sourceable

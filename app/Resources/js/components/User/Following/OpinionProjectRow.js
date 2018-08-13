@@ -4,21 +4,21 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse, Panel, ListGroup } from 'react-bootstrap';
-import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
-import type FollowingsProposals_viewer from './__generated__/FollowingsProposals_viewer.graphql';
-import ProposalRow from './ProposalRow';
+import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
+import type FollowingsOpinions_viewer from './__generated__/FollowingsOpinions_viewer.graphql';
+import OpinionRow from './OpinionRow';
 import type { Uuid } from '../../../types';
 
 type Props = {
   project: { id: Uuid, url: string, title: string },
-  viewer: FollowingsProposals_viewer,
+  viewer: FollowingsOpinions_viewer,
 };
 
 type State = {
   open: boolean,
 };
 
-export class ProjectRow extends Component<Props, State> {
+export class OpinionProjectRow extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -29,14 +29,14 @@ export class ProjectRow extends Component<Props, State> {
 
   onUnfollowCurrentProject() {
     const { project, viewer } = this.props;
-    const ids = viewer.followingProposals.edges
+    const ids = viewer.followingOpinions.edges
       .filter(edge => edge.node.project.id === project.id)
       .map(edge => {
         return edge.node.id;
       });
 
     this.setState({ open: !this.state.open }, () => {
-      UnfollowProposalMutation.commit({
+      UnfollowOpinionMutation.commit({
         input: { ids },
       }).then(() => {
         return true;
@@ -64,12 +64,12 @@ export class ProjectRow extends Component<Props, State> {
             </Button>
           </Panel.Heading>
           <ListGroup className="list-group-custom">
-            {viewer.followingProposals.edges &&
-              viewer.followingProposals.edges
+            {viewer.followingOpinions.edges &&
+              viewer.followingOpinions.edges
                 .filter(Boolean)
                 .filter(edge => edge.node.project.id === project.id)
                 .map((edge, key) => {
-                  return <ProposalRow key={key} proposal={edge.node} />;
+                  return <OpinionRow key={key} opinion={edge.node} />;
                 })}
           </ListGroup>
         </Panel>
@@ -77,4 +77,4 @@ export class ProjectRow extends Component<Props, State> {
     );
   }
 }
-export default ProjectRow;
+export default OpinionProjectRow;

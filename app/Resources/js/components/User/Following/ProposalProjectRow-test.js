@@ -2,9 +2,9 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import ProjectRow from './ProjectRow';
+import ProposalProjectRow from './ProposalProjectRow';
 
-describe('<ProjectRow />', () => {
+describe('<ProposalProjectRow />', () => {
   const project1 = {
     title: 'Perdu sur internet ?',
     url: 'http://perdu.com',
@@ -58,20 +58,20 @@ describe('<ProjectRow />', () => {
   };
 
   it('should render the project 1 with his proposal displayed', () => {
-    const wrapper = shallow(<ProjectRow viewer={viewer} project={project1} />);
+    const wrapper = shallow(<ProposalProjectRow viewer={viewer} project={project1} />);
     wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render the project 2 with his proposal displayed', () => {
-    const wrapper = shallow(<ProjectRow viewer={viewer} project={project2} />);
+    const wrapper = shallow(<ProposalProjectRow viewer={viewer} project={project2} />);
     wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render close collapse', () => {
     const wrapper = shallow(
-      <ProjectRow viewer={viewerWithoutProjectProposal} project={project1} />,
+      <ProposalProjectRow viewer={viewerWithoutProjectProposal} project={project1} />,
     );
     wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();

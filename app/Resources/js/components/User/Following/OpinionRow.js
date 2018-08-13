@@ -1,0 +1,63 @@
+/**
+ * @flow
+ */
+import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Button, Collapse, ListGroupItem } from 'react-bootstrap';
+import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
+
+type Props = {
+  opinion: Object,
+};
+
+type State = {
+  open: boolean,
+};
+export class OpinionRow extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      open: true,
+    };
+  }
+
+  onUnfollowCurrentOpinion(opinionId: string) {
+    this.setState({ open: !this.state.open }, () => {
+      UnfollowOpinionMutation.commit({
+        input: {
+          opinionId,
+        },
+      }).then(() => {
+        return true;
+      });
+    });
+  }
+
+  render() {
+    const { opinion } = this.props;
+    return (
+      <Collapse in={this.state.open} id={`collapse-proposal-${opinion.id}`}>
+        <ListGroupItem id={`item-opinion-${opinion.id}`}>
+          <h4>
+            <a
+              href={opinion.show_url}
+              title={opinion.title}
+              id={`item-opinion-link-${opinion.id}`}
+              className="profile__opinion__open__link">
+              {opinion.title}
+            </a>
+          </h4>
+          <Button
+            id={`profile-opinion-unfollow-button-${opinion.id}`}
+            onClick={() => {
+              this.onUnfollowCurrentOpinion(opinion.id);
+            }}>
+            <FormattedMessage id="unfollow" />
+          </Button>
+        </ListGroupItem>
+      </Collapse>
+    );
+  }
+}
+export default OpinionRow;

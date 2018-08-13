@@ -541,6 +541,18 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+                'project' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('Project'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The related project.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
             ];
             },
             'interfaces' => function () use ($globalVariable) {

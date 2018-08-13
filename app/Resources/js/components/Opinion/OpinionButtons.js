@@ -61,8 +61,7 @@ class OpinionButtons extends React.Component<Props> {
         <OpinionDelete opinion={opinion} />
         {this.renderEditButton()}
         {/* $FlowFixMe $fragmentRefs is missing */}
-        {opinion.step &&
-          opinion.step.project.opinionCanBeFollowed && <OpinionFollowButton opinion={opinion} />}
+        {opinion.project.opinionCanBeFollowed && <OpinionFollowButton opinion={opinion} />}
         <OpinionReportButton opinion={opinion} />
         {opinion.title &&
           opinion.section &&
@@ -101,10 +100,8 @@ export default createFragmentContainer(container, {
         section {
           url
         }
-        step {
-          project {
-            opinionCanBeFollowed
-          }
+        project {
+          opinionCanBeFollowed
         }
         author {
           slug
