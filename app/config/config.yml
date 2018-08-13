@@ -122,6 +122,7 @@ twig:
   globals:
     facebook_app_id: '%facebook_app_id%'
     google_maps_key: '%google_maps_key%'
+    # Register here any services accessibles in templates
     proposalPublicationResolver: '@Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalPublicationStatusResolver'
   paths:
     '%kernel.root_dir%/../src/Capco/AppBundle/Mailer/templates': CapcoMail
