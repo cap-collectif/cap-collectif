@@ -50,16 +50,10 @@ export class ProposalVotes extends React.Component<Props, State> {
               />
             </h2>
             <Row>
-              {proposal.votes.edges
-                .filter(Boolean)
-                .map((edge, key) => (
-                  <UserBox
-                    key={key}
-                    user={edge.node.author}
-                    username={edge.node.author ? edge.node.author.displayName : 'ANONYMOUS'}
-                    className="proposal__vote"
-                  />
-                ))}
+              {proposal.votes.edges.filter(Boolean).map((edge, key) => (
+                // $FlowFixMe $refType
+                <UserBox key={key} user={edge.node.author} className="proposal__vote" />
+              ))}
             </Row>
           </div>
         ) : (
@@ -103,13 +97,7 @@ export default createPaginationContainer(
           node {
             author {
               id
-              show_url
-              displayName
-              username
-              contributionsCount
-              media {
-                url
-              }
+              ...UserBox_user
             }
           }
           cursor

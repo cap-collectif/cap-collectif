@@ -19,39 +19,25 @@ exports[`<ProposalVotes /> should render correctly proposal votes 1`] = `
       bsClass="row"
       componentClass="div"
     >
-      <UserBox
+      <Relay(UserBox)
         className="proposal__vote"
         key="0"
         user={
           Object {
-            "contributionsCount": 3,
-            "displayName": "Admin",
+            "$fragmentRefs": null,
             "id": "userAdmin",
-            "media": Object {
-              "url": "google.com/lorem.jpg",
-            },
-            "show_url": "",
-            "username": "A",
           }
         }
-        username="Admin"
       />
-      <UserBox
+      <Relay(UserBox)
         className="proposal__vote"
         key="1"
         user={
           Object {
-            "contributionsCount": 3,
-            "displayName": "Jean",
+            "$fragmentRefs": null,
             "id": "userJean",
-            "media": Object {
-              "url": "google.com/lorem.jpg",
-            },
-            "show_url": "",
-            "username": "J",
           }
         }
-        username="Jean"
       />
     </Row>
   </div>

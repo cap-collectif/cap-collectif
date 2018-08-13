@@ -73,8 +73,8 @@ class OpinionVotesModal extends React.Component<Props, State> {
                   .map(vote => vote.author)
                   .filter(Boolean)
                   .map((author, index) => {
-                    /* $FlowFixMe */
                     return (
+                      /* $FlowFixMe */
                       <UserBox key={index} user={author} className="opinion__votes__userbox" />
                     );
                   })}
@@ -124,13 +124,7 @@ export default createPaginationContainer(
             node {
               author {
                 id
-                show_url
-                displayName
-                username
-                contributionsCount
-                media {
-                  url
-                }
+                ...UserBox_user
               }
             }
           }

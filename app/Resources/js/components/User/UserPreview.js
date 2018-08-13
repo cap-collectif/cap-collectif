@@ -1,62 +1,43 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import UserAvatar from './UserAvatar';
 import UserLink from './UserLink';
 import { CardContainer } from '../Ui/Card/CardContainer';
 import { CardUser } from '../Ui/Card/CardUser';
+import type { UserPreview_user } from './__generated__/UserPreview_user.graphql';
 
 type Props = {
-  user: ?Object,
-  username: ?string,
-  className: string,
-  style: ?Object,
+  user: ?UserPreview_user,
 };
 
 export class UserPreview extends React.Component<Props> {
-  static defaultProps = {
-    user: null,
-    username: null,
-    className: '',
-    style: {},
-  };
-
   render() {
-    const { className, style } = this.props;
     const user = this.props.user;
-    const username =
-      this.props.username === 'ANONYMOUS' ? (
-        <FormattedMessage id="global.anonymous" />
-      ) : (
-        this.props.username
-      );
-    if (!user && !username) {
-      return null;
-    }
     const contributionsCount = user && user.contributionsCount ? user.contributionsCount : 0;
     const classes = {
       'pb-10': true,
-      [className]: true,
     };
 
     return (
-      <CardContainer className={classNames(classes)} style={style}>
+      <CardContainer className={classNames(classes)}>
         <CardUser>
           <div className="card__user__avatar">
             <UserAvatar user={user} />
           </div>
           <div className="ellipsis">
-            {user ? <UserLink user={user} /> : <span>{username}</span>}
+            {user ? <UserLink user={user} /> : <FormattedMessage id="global.anonymous" />}
             <p className="excerpt small">
-              {contributionsCount === false ? null : (
+              {user ? (
                 <span>
                   <FormattedMessage
                     id="global.counters.contributions"
                     values={{ num: contributionsCount }}
                   />
                 </span>
-              )}
+              ) : null}
             </p>
           </div>
         </CardUser>
@@ -65,4 +46,16 @@ export class UserPreview extends React.Component<Props> {
   }
 }
 
-export default UserPreview;
+export default createFragmentContainer(UserPreview, {
+  user: graphql`
+    fragment UserPreview_user on User {
+      show_url
+      displayName
+      username
+      contributionsCount
+      media {
+        url
+      }
+    }
+  `,
+});

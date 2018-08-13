@@ -38,6 +38,7 @@ export class ProposalPageFollowers extends React.Component<Props> {
         {proposal.followers.edges.length !== 0 ? (
           <Row>
             {proposal.followers.edges.filter(Boolean).map((edge, key) => (
+              // $FlowFixMe
               <UserBox key={key} user={edge.node} className="proposal__follower" />
             ))}
           </Row>
@@ -77,13 +78,7 @@ export default createPaginationContainer(
           cursor
           node {
             id
-            show_url
-            displayName
-            username
-            contributionsCount
-            media {
-              url
-            }
+            ...UserBox_user
           }
         }
         pageInfo {

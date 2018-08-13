@@ -23,56 +23,35 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
     bsClass="row"
     componentClass="div"
   >
-    <UserBox
+    <Relay(UserBox)
       className="proposal__follower"
       key="0"
       user={
         Object {
-          "contributionsCount": 0,
-          "displayName": "myname",
+          "$fragmentRefs": null,
           "id": "userAdmin",
-          "media": Object {
-            "url": "http://capco.dev",
-          },
-          "show_url": true,
-          "username": "admin",
         }
       }
-      username={null}
     />
-    <UserBox
+    <Relay(UserBox)
       className="proposal__follower"
       key="1"
       user={
         Object {
-          "contributionsCount": 55,
-          "displayName": "akovacek",
+          "$fragmentRefs": null,
           "id": "user137",
-          "media": Object {
-            "url": "http://capco.dev",
-          },
-          "show_url": true,
-          "username": "akovacek",
         }
       }
-      username={null}
     />
-    <UserBox
+    <Relay(UserBox)
       className="proposal__follower"
       key="2"
       user={
         Object {
-          "contributionsCount": 44,
-          "displayName": "alva44",
+          "$fragmentRefs": null,
           "id": "user70",
-          "media": Object {
-            "url": "http://capco.dev",
-          },
-          "show_url": true,
-          "username": "alva44",
         }
       }
-      username={null}
     />
   </Row>
   <div
@@ -114,56 +93,35 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with u
     bsClass="row"
     componentClass="div"
   >
-    <UserBox
+    <Relay(UserBox)
       className="proposal__follower"
       key="0"
       user={
         Object {
-          "contributionsCount": 0,
-          "displayName": "myname",
+          "$fragmentRefs": null,
           "id": "userAdmin",
-          "media": Object {
-            "url": "http://capco.dev",
-          },
-          "show_url": true,
-          "username": "admin",
         }
       }
-      username={null}
     />
-    <UserBox
+    <Relay(UserBox)
       className="proposal__follower"
       key="1"
       user={
         Object {
-          "contributionsCount": 55,
-          "displayName": "akovacek",
+          "$fragmentRefs": null,
           "id": "user137",
-          "media": Object {
-            "url": "http://capco.dev",
-          },
-          "show_url": true,
-          "username": "akovacek",
         }
       }
-      username={null}
     />
-    <UserBox
+    <Relay(UserBox)
       className="proposal__follower"
       key="2"
       user={
         Object {
-          "contributionsCount": 44,
-          "displayName": "alva44",
+          "$fragmentRefs": null,
           "id": "user70",
-          "media": Object {
-            "url": "http://capco.dev",
-          },
-          "show_url": true,
-          "username": "alva44",
         }
       }
-      username={null}
     />
   </Row>
 </div>

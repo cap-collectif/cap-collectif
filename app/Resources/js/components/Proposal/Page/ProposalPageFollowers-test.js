@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageFollowers } from './ProposalPageFollowers';
-import { relayPaginationMock } from '../../../mocks';
+import { $fragmentRefs, relayPaginationMock } from '../../../mocks';
 
 describe('<ProposalPageFollowers />', () => {
   const pageAdmin = false;
@@ -12,51 +12,11 @@ describe('<ProposalPageFollowers />', () => {
     id: 'proposal1',
     followers: {
       edges: [
-        {
-          cursor: 'YXJyYXljb25uZWN0aW9uOjA=',
-          node: {
-            id: 'userAdmin',
-            username: 'admin',
-            displayName: 'myname',
-            contributionsCount: 0,
-            show_url: true,
-            media: {
-              url: 'http://capco.dev',
-            },
-          },
-        },
-        {
-          cursor: 'YXJyYXljb25uZWN0aW9uOjE=',
-          node: {
-            id: 'user137',
-            username: 'akovacek',
-            displayName: 'akovacek',
-            contributionsCount: 55,
-            show_url: true,
-            media: {
-              url: 'http://capco.dev',
-            },
-          },
-        },
-        {
-          cursor: 'YXJyYXljb25uZWN0aW9uOjI=',
-          node: {
-            id: 'user70',
-            username: 'alva44',
-            displayName: 'alva44',
-            contributionsCount: 44,
-            show_url: true,
-            media: {
-              url: 'http://capco.dev',
-            },
-          },
-        },
+        { cursor: 'YXJyYXljb25uZWN0aW9uOjA=', node: { id: 'userAdmin', $fragmentRefs } },
+        { cursor: 'YXJyYXljb25uZWN0aW9uOjE=', node: { id: 'user137', $fragmentRefs } },
+        { cursor: 'YXJyYXljb25uZWN0aW9uOjI=', node: { id: 'user70', $fragmentRefs } },
       ],
-      pageInfo: {
-        hasNextPage: true,
-        endCursor: 'YXJyYXljb25uZWN0aW9uOjI=',
-      },
-
+      pageInfo: { hasNextPage: true, endCursor: 'YXJyYXljb25uZWN0aW9uOjI=' },
       totalCount: 3,
     },
   };
