@@ -56,8 +56,9 @@ class OpinionVotesBox extends React.Component<Props> {
 
 export default createFragmentContainer(OpinionVotesBox, {
   opinion: graphql`
-    fragment OpinionVotesBox_opinion on OpinionOrVersion {
-      ...OpinionVotesButtons_opinion
+    fragment OpinionVotesBox_opinion on OpinionOrVersion
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      ...OpinionVotesButtons_opinion @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionVotesBar_opinion
       ... on Opinion {
         votes(first: 0) {

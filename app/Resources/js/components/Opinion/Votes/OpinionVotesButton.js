@@ -170,7 +170,8 @@ export class OpinionVotesButton extends React.Component<Props> {
 
 export default createFragmentContainer(OpinionVotesButton, {
   opinion: graphql`
-    fragment OpinionVotesButton_opinion on OpinionOrVersion {
+    fragment OpinionVotesButton_opinion on OpinionOrVersion
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       __typename
       ... on Opinion {
         id
@@ -178,7 +179,7 @@ export default createFragmentContainer(OpinionVotesButton, {
         section {
           voteWidgetType
         }
-        viewerVote {
+        viewerVote @include(if: $isAuthenticated) {
           id
           value
           ...UnpublishedTooltip_publishable
@@ -190,7 +191,7 @@ export default createFragmentContainer(OpinionVotesButton, {
         section {
           voteWidgetType
         }
-        viewerVote {
+        viewerVote @include(if: $isAuthenticated) {
           id
           value
           ...UnpublishedTooltip_publishable

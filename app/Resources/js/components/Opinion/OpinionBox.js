@@ -103,7 +103,7 @@ export default createFragmentContainer(OpinionBox, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...OpinionPreview_opinion
       ...OpinionAnswer_opinion
-      ...OpinionVotesBox_opinion
+      ...OpinionVotesBox_opinion @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionButtons_opinion @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionBody_opinion
       ...OpinionAppendices_opinion
