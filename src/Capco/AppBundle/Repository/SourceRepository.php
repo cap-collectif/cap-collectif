@@ -181,11 +181,9 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.author', 'aut')
             ->leftJoin('aut.media', 'm')
             ->andWhere('s.author = :author')
-            ->andWhere('o.published = :enabled')
-            ->andWhere('cs.isEnabled = :enabled')
-            ->andWhere('c.published = :enabled')
+            ->andWhere('o.published = true')
+            ->andWhere('cs.isEnabled = true')
             ->setParameter('author', $user)
-            ->setParameter('enabled', true)
             ->orderBy('s.createdAt', 'DESC');
 
         return $qb->getQuery()->getResult();

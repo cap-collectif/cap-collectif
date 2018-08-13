@@ -980,16 +980,14 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u');
         $qb
-            ->andWhere('u.enabled = false')
-            ->andWhere('u.createdAt > :now')
-            ->andWhere('u.remindAccountConfirmation = false')
-            ->setParameter('now', new \DateTime('-1 day'));
+            ->andWhere('u.confirmationToken IS NOT NULL')
+            ->andWhere('u.createdAt < :oneDayAgo AND u.createdAt > :oneWeekAgo')
+            ->andWhere('u.remindedAccountConfirmationAfter24Hours = false')
+            ->setParameter('oneDayAgo', new \DateTime('-1 day'))
+            ->setParameter('oneWeekAgo', new \DateTime('-7 day'));
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * @return \Doctrine\ORM\QueryBuilder
-     */
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');

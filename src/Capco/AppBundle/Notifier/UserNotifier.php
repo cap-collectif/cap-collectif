@@ -68,7 +68,7 @@ final class UserNotifier extends BaseNotifier
             UserAccountConfirmationReminderMessage::create(
                 $user,
                 $this->userResolver->resolveRegistrationConfirmationUrl($user),
-                $user->getEmail()
+                $this->siteParams->getValue('global.site.fullname')
             )
         );
     }

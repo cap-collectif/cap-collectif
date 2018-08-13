@@ -135,20 +135,20 @@ type Answer {
   createdAt: DateTime!
 
   # Identifies the contribution title.
-  title: String!
+  title: String
 
   # Identifies the body of the contribution.
-  body: HTML!
+  body: HTML
   author: User
 }
 
 # A contribution
 type Appendix {
   # Identifies the body of the contribution.
-  body: HTML!
+  body: HTML
 
   # Identifies the body of the contribution rendered to text.
-  bodyText: String!
+  bodyText: String
   appendixType: AppendixType!
 }
 

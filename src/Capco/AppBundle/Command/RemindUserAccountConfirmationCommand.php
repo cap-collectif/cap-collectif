@@ -21,8 +21,6 @@ class RemindUserAccountConfirmationCommand extends ContainerAwareCommand
         $notifier = $container->get('capco.user_notifier');
         $logger = $container->get('logger');
 
-        //        $manager = $container->get('capco.contribution.manager');
-
         $users = $container->get('capco.user.repository')->findNotEmailConfirmedUsersSince24Hours();
 
         foreach ($users as $user) {
@@ -36,7 +34,7 @@ class RemindUserAccountConfirmationCommand extends ContainerAwareCommand
             }
 
             // We make sure that we don't spam the user with another reminder
-            $user->setRemindAccountConfirmation(true);
+            $user->setRemindedAccountConfirmationAfter24Hours(true);
             $em->flush();
         }
 

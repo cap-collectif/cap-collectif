@@ -55,6 +55,11 @@
         </field>
 
         <attribute-overrides>
+
+            <attribute-override name="updatedAt">
+                <field name="updatedAt" column="updated_at" type="datetime" nullable="true" />
+            </attribute-override>
+
             <attribute-override name="usernameCanonical">
                 <field column="username_canonical" type="string" length="255" unique="false" nullable="true"/>
             </attribute-override>
@@ -120,7 +125,7 @@
         <field name="opinionVersionsCount" column="opinion_versions_count" type="integer" nullable="false" />
         <field name="deletedAccountAt" column="deleted_account_at" type="datetime" nullable="true" />
 
-        <field name="remindAccountConfirmation" column="remind_account_confirmation" type="boolean" nullable="false" />
+        <field name="remindedAccountConfirmationAfter24Hours" column="remind_account_confirmation" type="boolean" nullable="false" />
 
         <many-to-one field="userType" target-entity="Capco\UserBundle\Entity\UserType">
             <cascade>

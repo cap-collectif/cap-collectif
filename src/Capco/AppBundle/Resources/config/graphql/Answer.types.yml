@@ -7,10 +7,10 @@ Answer:
                 type: "DateTime!"
                 description: "Identifies the date and time when the object was created."
             title:
-                type: "String!"
+                type: "String"
                 description: "Identifies the contribution title."
             body:
-                type: "HTML!"
+                type: "HTML"
                 description: "Identifies the body of the contribution."
             author:
                 type: "User"

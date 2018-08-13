@@ -6,19 +6,15 @@ use Capco\UserBundle\Entity\User;
 
 final class UserAccountConfirmationReminderMessage extends ExternalMessage
 {
-    public static function create(
-        User $user,
-        string $confirmationUrl,
-        string $recipentEmail,
-        string $recipientName = null
-    ): self {
+    public static function create(User $user, string $confirmationUrl, string $siteName): self
+    {
         return new self(
-            $recipentEmail,
-            $recipientName,
-            'confirm-TODO-maxime',
+            $user->getEmail(),
+            $user->getUsername(),
+            'email.alert_expire_user.subject',
             static::getMySubjectVars(),
-            'confirm-conent-TODO-maxime',
-            static::getMyTemplateVars($user, $confirmationUrl)
+            '@CapcoMail/remindUserAccountConfirmation.html.twig',
+            static::getMyTemplateVars($user, $confirmationUrl, $siteName)
         );
     }
 
@@ -26,8 +22,13 @@ final class UserAccountConfirmationReminderMessage extends ExternalMessage
     {
         return [];
     }
-    private static function getMyTemplateVars($user, $confirmationUrl): array
+    private static function getMyTemplateVars($user, $confirmationUrl, $siteName): array
     {
-        return ['{username}' => $user->getUsername(), '{confirmationUrl}' => $confirmationUrl];
+        return [
+            'username' => $user->getUsername(),
+            'emailAddress' => $user->getEmail(),
+            'siteName' => $siteName,
+            'confirmationUrl' => $confirmationUrl,
+        ];
     }
 }

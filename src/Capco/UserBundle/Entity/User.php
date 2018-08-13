@@ -240,7 +240,7 @@ class User extends BaseUser
     protected $smsConfirmationCode = null;
     protected $phoneConfirmed = false;
 
-    protected $remindAccountConfirmation = false;
+    protected $remindedAccountConfirmationAfter24Hours = false;
 
     protected $followingContributions;
 
@@ -594,34 +594,19 @@ class User extends BaseUser
         $this->twitterUrl = $twitterUrl;
     }
 
-    /**
-     * Set media.
-     *
-     * @param Media $media
-     *
-     * @return User
-     */
-    public function setMedia(Media $media = null)
+    public function setMedia(Media $media = null): self
     {
         $this->media = $media;
 
         return $this;
     }
 
-    /**
-     * Get media.
-     *
-     * @return \Capco\MediaBundle\Entity\Media
-     */
-    public function getMedia()
+    public function getMedia(): ?Media
     {
         return $this->media;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddress()
+    public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -652,7 +637,7 @@ class User extends BaseUser
     /**
      * @return int
      */
-    public function getZipCode()
+    public function getZipCode(): ?int
     {
         return $this->zipCode;
     }
@@ -1114,17 +1099,12 @@ class User extends BaseUser
         return $this;
     }
 
-    public function isVip()
+    public function isVip(): bool
     {
         return $this->vip;
     }
 
-    /**
-     * @param mixed $vip
-     *
-     * @return $this
-     */
-    public function setVip($vip)
+    public function setVip(bool $vip): self
     {
         $this->vip = $vip;
 
@@ -1305,17 +1285,15 @@ class User extends BaseUser
         return $this->username ?: 'Utilisateur sans nom';
     }
 
-    public function isSuperAdmin()
+    public function isSuperAdmin(): bool
     {
         return $this->hasRole('ROLE_SUPER_ADMIN');
     }
 
     /**
      * Tell if user has role admin or super admin.
-     *
-     * @return bool
      */
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->hasRole('ROLE_ADMIN') || $this->hasRole('ROLE_SUPER_ADMIN');
     }
@@ -1467,15 +1445,28 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getRemindAccountConfirmation(): bool
+    public function getRemindedAccountConfirmationAfter24Hours(): bool
     {
-        return $this->remindAccountConfirmation;
+        return $this->remindedAccountConfirmationAfter24Hours;
     }
 
-    public function setRemindAccountConfirmation(bool $remindAccountConfirmation): self
-    {
-        $this->remindAccountConfirmation = $remindAccountConfirmation;
+    public function setRemindedAccountConfirmationAfter24Hours(
+        bool $remindedAccountConfirmationAfter24Hours
+    ): self {
+        $this->remindedAccountConfirmationAfter24Hours = $remindedAccountConfirmationAfter24Hours;
 
         return $this;
+    }
+
+    /**
+     * We overide sonata's BaseUser hook
+     *
+     * Hook on pre-persist operations.
+     */
+    public function prePersist(): void
+    {
+        if (!$this->createdAt) {
+            $this->createdAt = new \DateTime();
+        }
     }
 }

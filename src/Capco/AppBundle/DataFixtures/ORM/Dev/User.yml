@@ -205,6 +205,7 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: azertyuiop
     enabled: true
+    createdAt: '<dateTimeBetween("-3 days", "-1 days")>'
 
   user_not_confirmed_with_contributions:
     id: 'user508'
@@ -219,6 +220,7 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: oklmoklm
     enabled: true
+    createdAt: '<dateTimeBetween("-3 days", "-1 days")>'
 
   user_without_phone:
     id: 'user511'
@@ -274,6 +276,7 @@ Capco\UserBundle\Entity\User:
       - 'ROLE_ADMIN'
     media: null
     confirmationToken: check-my-email-token
+    createdAt: '<dateTimeBetween("-3 days", "-1 days")>'
 
   user_updating_email:
     id: 'user515'

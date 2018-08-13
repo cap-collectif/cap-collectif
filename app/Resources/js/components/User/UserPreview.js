@@ -8,6 +8,7 @@ import UserLink from './UserLink';
 import { CardContainer } from '../Ui/Card/CardContainer';
 import { CardUser } from '../Ui/Card/CardUser';
 import type { UserPreview_user } from './__generated__/UserPreview_user.graphql';
+import UserNotConfirmedLabel from './UserNotConfirmedLabel';
 
 type Props = {
   user: ?UserPreview_user,
@@ -39,6 +40,8 @@ export class UserPreview extends React.Component<Props> {
                 </span>
               ) : null}
             </p>
+            {/* $FlowFixMe */}
+            <UserNotConfirmedLabel user={user} />
           </div>
         </CardUser>
       </CardContainer>
@@ -49,6 +52,7 @@ export class UserPreview extends React.Component<Props> {
 export default createFragmentContainer(UserPreview, {
   user: graphql`
     fragment UserPreview_user on User {
+      ...UserNotConfirmedLabel_user
       show_url
       displayName
       username

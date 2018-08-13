@@ -24,7 +24,7 @@ final class AppendixType extends ObjectType implements GeneratedTypeInterface
             'fields' => function () use ($globalVariable) {
                 return [
                 'body' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('HTML')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('HTML'),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -36,7 +36,7 @@ final class AppendixType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'bodyText' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => Type::string(),
                     'args' => [
                     ],
                     'resolve' => null,

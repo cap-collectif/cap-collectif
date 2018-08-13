@@ -35,7 +35,7 @@ final class AnswerType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'title' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => Type::string(),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -47,7 +47,7 @@ final class AnswerType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'body' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('HTML')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('HTML'),
                     'args' => [
                     ],
                     'resolve' => null,

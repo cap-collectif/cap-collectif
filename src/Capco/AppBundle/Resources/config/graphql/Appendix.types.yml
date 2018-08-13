@@ -4,10 +4,10 @@ Appendix:
         description: "A contribution"
         fields:
             body:
-                type: "HTML!"
+                type: "HTML"
                 description: "Identifies the body of the contribution."
             bodyText:
-                type: "String!"
+                type: "String"
                 description: "Identifies the body of the contribution rendered to text."
             appendixType:
                 type: "AppendixType!"
