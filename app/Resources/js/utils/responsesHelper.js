@@ -228,7 +228,7 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
   return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
 };
 
-const getAvailableQuestionsIds = (questions, responses) => {
+export const getAvailableQuestionsIds = (questions: Questions, responses: ResponsesInReduxForm) => {
   const firstLogicQuestion = questions.find(
     question => question.jumps && question.jumps.length > 0,
   );
@@ -248,6 +248,7 @@ const getAvailableQuestionsIds = (questions, responses) => {
     return getAvailableQuestionsIdsAfter(questionWithJump, questions, responses);
   });
 
+  // $FlowFixMe
   return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
 };
 
