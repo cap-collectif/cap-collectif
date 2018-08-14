@@ -5,18 +5,18 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type FollowingsOpinions_viewer from './__generated__/FollowingsOpinions_viewer.graphql';
+import type UserFollowingsOpinions_viewer from './__generated__/UserFollowingsOpinions_viewer.graphql';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
 import OpinionProjectRow from './OpinionProjectRow';
 
 type Props = {
-  viewer: FollowingsOpinions_viewer,
+  viewer: UserFollowingsOpinions_viewer,
 };
 type State = {
   open: boolean,
 };
 
-export class FollowingsOpinions extends Component<Props, State> {
+export class UserFollowingsOpinions extends Component<Props, State> {
   state = {
     open: true,
   };
@@ -88,9 +88,9 @@ export class FollowingsOpinions extends Component<Props, State> {
 }
 
 export default createFragmentContainer(
-  FollowingsOpinions,
+  UserFollowingsOpinions,
   graphql`
-    fragment FollowingsOpinions_viewer on User
+    fragment UserFollowingsOpinions_viewer on User
       @argumentDefinitions(
         count: { type: "Int", defaultValue: 1000 }
         cursor: { type: "String", defaultValue: null }

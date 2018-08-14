@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
+exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = `
 <div>
   <h2
     className="page-header"
@@ -170,7 +170,7 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
 </div>
 `;
 
-exports[`<FollowingsOpinions /> should render following opinion open 1`] = `
+exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
 <div>
   <h2
     className="page-header"

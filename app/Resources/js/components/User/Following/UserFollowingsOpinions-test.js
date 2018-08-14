@@ -2,10 +2,10 @@
 // @flow
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FollowingsOpinions } from './FollowingsOpinions';
+import { UserFollowingsOpinions } from './UserFollowingsOpinions';
 import { $refType } from '../../../mocks';
 
-describe('<FollowingsOpinions />', () => {
+describe('<UserFollowingsOpinions />', () => {
   const viewer = {
     $refType,
     followingOpinions: {
@@ -45,12 +45,12 @@ describe('<FollowingsOpinions />', () => {
   };
 
   it('should render following opinion open', () => {
-    const wrapper = shallow(<FollowingsOpinions viewer={viewer} />);
+    const wrapper = shallow(<UserFollowingsOpinions viewer={viewer} />);
     wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();
   });
   it('should render following opinion close', () => {
-    const wrapper = shallow(<FollowingsOpinions viewer={viewer} />);
+    const wrapper = shallow(<UserFollowingsOpinions viewer={viewer} />);
     wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();
   });
