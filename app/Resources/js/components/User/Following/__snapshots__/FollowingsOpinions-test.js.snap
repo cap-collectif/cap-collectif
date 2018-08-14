@@ -61,6 +61,7 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
           }
           viewer={
             Object {
+              "$refType": null,
               "followingOpinions": Object {
                 "edges": Array [
                   Object {
@@ -107,6 +108,7 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
           }
           viewer={
             Object {
+              "$refType": null,
               "followingOpinions": Object {
                 "edges": Array [
                   Object {
@@ -229,6 +231,7 @@ exports[`<FollowingsOpinions /> should render following opinion open 1`] = `
           }
           viewer={
             Object {
+              "$refType": null,
               "followingOpinions": Object {
                 "edges": Array [
                   Object {
@@ -275,6 +278,7 @@ exports[`<FollowingsOpinions /> should render following opinion open 1`] = `
           }
           viewer={
             Object {
+              "$refType": null,
               "followingOpinions": Object {
                 "edges": Array [
                   Object {

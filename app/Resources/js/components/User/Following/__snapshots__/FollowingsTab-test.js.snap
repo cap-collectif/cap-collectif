@@ -61,6 +61,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
           }
           viewer={
             Object {
+              "$refType": null,
               "followingOpinions": Object {
                 "edges": Array [
                   Object {
@@ -141,6 +142,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
           }
           viewer={
             Object {
+              "$refType": null,
               "followingOpinions": Object {
                 "edges": Array [
                   Object {

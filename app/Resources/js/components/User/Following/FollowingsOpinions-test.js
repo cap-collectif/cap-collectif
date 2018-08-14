@@ -3,10 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { FollowingsOpinions } from './FollowingsOpinions';
+import { $refType } from '../../../mocks';
 
 describe('<FollowingsOpinions />', () => {
-  // $FlowFixMe $refType
   const viewer = {
+    $refType,
     followingOpinions: {
       edges: [
         {
