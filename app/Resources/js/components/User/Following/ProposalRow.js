@@ -2,12 +2,14 @@
  * @flow
  */
 import React, { Component } from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse, ListGroupItem } from 'react-bootstrap';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
+import type ProposalRow_proposal from './__generated__/ProposalRow_proposal.graphql';
 
 type Props = {
-  proposal: Object,
+  proposal: ProposalRow_proposal,
 };
 
 type State = {
@@ -60,4 +62,13 @@ export class ProposalRow extends Component<Props, State> {
     );
   }
 }
-export default ProposalRow;
+export default createFragmentContainer(
+  ProposalRow,
+  graphql`
+    fragment ProposalRow_proposal on Proposal {
+      id
+      title
+      show_url
+    }
+  `,
+);

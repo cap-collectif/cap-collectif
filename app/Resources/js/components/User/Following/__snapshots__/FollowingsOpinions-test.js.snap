@@ -52,7 +52,7 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
       <div
         id="all-projects"
       >
-        <OpinionProjectRow
+        <Relay(OpinionProjectRow)
           key="0"
           project={
             Object {
@@ -99,7 +99,7 @@ exports[`<FollowingsOpinions /> should render following opinion close 1`] = `
             }
           }
         />
-        <OpinionProjectRow
+        <Relay(OpinionProjectRow)
           key="1"
           project={
             Object {
@@ -222,7 +222,7 @@ exports[`<FollowingsOpinions /> should render following opinion open 1`] = `
       <div
         id="all-projects"
       >
-        <OpinionProjectRow
+        <Relay(OpinionProjectRow)
           key="0"
           project={
             Object {
@@ -269,7 +269,7 @@ exports[`<FollowingsOpinions /> should render following opinion open 1`] = `
             }
           }
         />
-        <OpinionProjectRow
+        <Relay(OpinionProjectRow)
           key="1"
           project={
             Object {

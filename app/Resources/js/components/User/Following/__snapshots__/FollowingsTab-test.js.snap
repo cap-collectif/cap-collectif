@@ -52,7 +52,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
       <div
         id="all-projects"
       >
-        <ProposalProjectRow
+        <Relay(ProposalProjectRow)
           key="0"
           project={
             Object {
@@ -133,7 +133,7 @@ exports[`<FollowingsTab /> should render a list of contribution 1`] = `
             }
           }
         />
-        <ProposalProjectRow
+        <Relay(ProposalProjectRow)
           key="1"
           project={
             Object {

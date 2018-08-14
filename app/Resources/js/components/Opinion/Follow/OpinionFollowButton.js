@@ -64,11 +64,6 @@ export class OpinionFollowButton extends React.Component<Props, State> {
             onClick={() => {
               return FollowOpinionMutation.commit({
                 input: { opinionId: opinion.id, notifiedOf: 'MINIMAL' },
-              }).then(() => {
-                this.setState({
-                  isJustFollowed: true,
-                });
-                return true;
               });
             }}
             id={`opinion-follow-btn-${opinion.id}`}>

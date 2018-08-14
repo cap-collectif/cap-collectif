@@ -120,41 +120,9 @@ export class FollowingsTab extends Component<Props, State> {
 export default createFragmentContainer(
   FollowingsTab,
   graphql`
-    fragment FollowingsTab_viewer on User
-      @argumentDefinitions(
-        count: { type: "Int", defaultValue: 1000 }
-        cursor: { type: "String", defaultValue: null }
-      ) {
-      followingOpinions(first: $count, after: $cursor) {
-        totalCount
-        edges {
-          node {
-            id
-            title
-            show_url
-            project {
-              id
-              title
-              url
-            }
-          }
-        }
-      }
-      followingProposals(first: $count, after: $cursor) {
-        totalCount
-        edges {
-          node {
-            id
-            title
-            show_url
-            project {
-              id
-              title
-              url
-            }
-          }
-        }
-      }
+    fragment FollowingsTab_viewer on User {
+      ...ProposalProjectRow_viewer
+      ...OpinionProjectRow_viewer
     }
   `,
 );

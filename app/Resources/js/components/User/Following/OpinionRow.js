@@ -2,12 +2,14 @@
  * @flow
  */
 import React, { Component } from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse, ListGroupItem } from 'react-bootstrap';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
+import type OpinionRow_opinion from './__generated__/OpinionRow_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionRow_opinion,
 };
 
 type State = {
@@ -60,4 +62,14 @@ export class OpinionRow extends Component<Props, State> {
     );
   }
 }
-export default OpinionRow;
+
+export default createFragmentContainer(
+  OpinionRow,
+  graphql`
+    fragment OpinionRow_opinion on Opinion {
+      id
+      title
+      show_url
+    }
+  `,
+);

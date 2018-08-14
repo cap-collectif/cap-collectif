@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import ProposalProjectRow from './ProposalProjectRow';
+import { ProposalProjectRow } from './ProposalProjectRow';
 
 describe('<ProposalProjectRow />', () => {
   const project1 = {

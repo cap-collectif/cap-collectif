@@ -3,15 +3,16 @@
  */
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, Collapse, Panel, ListGroup } from 'react-bootstrap';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
-import type FollowingsProposals_viewer from './__generated__/FollowingsProposals_viewer.graphql';
+import type ProposalProjectRow_viewer from './__generated__/ProposalProjectRow_viewer.graphql';
 import ProposalRow from './ProposalRow';
 import type { Uuid } from '../../../types';
 
 type Props = {
   project: { id: Uuid, url: string, title: string },
-  viewer: FollowingsProposals_viewer,
+  viewer: ProposalProjectRow_viewer,
 };
 
 type State = {
@@ -77,4 +78,28 @@ export class ProposalProjectRow extends Component<Props, State> {
     );
   }
 }
-export default ProposalProjectRow;
+
+export default createFragmentContainer(
+  ProposalProjectRow,
+  graphql`
+    fragment ProposalProjectRow_viewer on User
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 1000 }
+        cursor: { type: "String", defaultValue: null }
+      ) {
+      followingProposals(first: $count, after: $cursor) {
+        totalCount
+        edges {
+          node {
+            ...ProposalRow_proposal
+            project {
+              id
+              title
+              url
+            }
+          }
+        }
+      }
+    }
+  `,
+);

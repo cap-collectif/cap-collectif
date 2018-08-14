@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import OpinionRow from './OpinionRow';
+import { OpinionRow } from './OpinionRow';
 
 describe('<OpinionRow />', () => {
   const opinion = {

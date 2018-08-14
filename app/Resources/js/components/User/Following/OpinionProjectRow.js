@@ -2,16 +2,17 @@
  * @flow
  */
 import React, { Component } from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse, Panel, ListGroup } from 'react-bootstrap';
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation';
-import type FollowingsOpinions_viewer from './__generated__/FollowingsOpinions_viewer.graphql';
+import type OpinionProjectRow_viewer from './__generated__/OpinionProjectRow_viewer.graphql';
 import OpinionRow from './OpinionRow';
 import type { Uuid } from '../../../types';
 
 type Props = {
   project: { id: Uuid, url: string, title: string },
-  viewer: FollowingsOpinions_viewer,
+  viewer: OpinionProjectRow_viewer,
 };
 
 type State = {
@@ -77,4 +78,27 @@ export class OpinionProjectRow extends Component<Props, State> {
     );
   }
 }
-export default OpinionProjectRow;
+export default createFragmentContainer(
+  OpinionProjectRow,
+  graphql`
+    fragment OpinionProjectRow_viewer on User
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 1000 }
+        cursor: { type: "String", defaultValue: null }
+      ) {
+      followingOpinions(first: $count, after: $cursor) {
+        totalCount
+        edges {
+          node {
+            ...OpinionRow_opinion
+            project {
+              id
+              title
+              url
+            }
+          }
+        }
+      }
+    }
+  `,
+);
