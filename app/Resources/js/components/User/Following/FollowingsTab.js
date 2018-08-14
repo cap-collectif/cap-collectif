@@ -45,18 +45,25 @@ export class FollowingsTab extends Component<Props, State> {
   render() {
     const { viewer } = this.props;
     const projectsById = {};
-    viewer.followingOpinions.edges.map(edge => {
-      projectsById[edge.node.project.id] = {
-        type: 'opinionProject',
-        object: edge.node.project,
-      };
-    });
-    viewer.followingProposals.edges.map(edge => {
-      projectsById[edge.node.project.id] = {
-        type: 'proposalProject',
-        object: edge.node.project,
-      };
-    });
+
+    if (viewer.followingOpinions) {
+      viewer.followingOpinions.edges.map(edge => {
+        projectsById[edge.node.project.id] = {
+          type: 'opinionProject',
+          object: edge.node.project,
+        };
+      });
+    }
+
+    if (viewer.followingProposals) {
+      viewer.followingProposals.edges.map(edge => {
+        projectsById[edge.node.project.id] = {
+          type: 'proposalProject',
+          object: edge.node.project,
+        };
+      });
+    }
+
     return (
       <div>
         <h2 className="page-header">
