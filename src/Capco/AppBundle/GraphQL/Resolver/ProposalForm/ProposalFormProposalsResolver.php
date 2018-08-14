@@ -45,22 +45,6 @@ class ProposalFormProposalsResolver implements ResolverInterface
             return $emptyConnection;
         }
 
-        // Viewer is asking for unpublished proposals
-        if (
-            $args->offsetExists('includeUnpublishedOnly') &&
-            $args->offsetGet('includeUnpublishedOnly') === true
-        ) {
-            if (!$viewer instanceof User) {
-                return $emptyConnection;
-            }
-            $proposals = $this->proposalRepo->getUnpublishedByFormAndAuthor($form, $viewer);
-
-            $connection = ConnectionBuilder::connectionFromArray($proposals, $args);
-            $connection->totalCount = \count($proposals);
-
-            return $connection;
-        }
-
         if ($form->getStep()->isPrivate()) {
             // The step is private
             // only an author or an admin can see proposals

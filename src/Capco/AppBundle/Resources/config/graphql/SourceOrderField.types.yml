@@ -5,10 +5,7 @@ SourceOrderField:
     values:
       PUBLISHED_AT:
         value: 'PUBLISHED_AT'
-        description: 'Allows ordering a list of sources by when they were created.'
+        description: 'Allows ordering a list of sources by when they were published.'
       VOTES:
         value: 'VOTES'
         description: 'Allows ordering a list of sources by the number of votes it have.'
-# RANDOM:
-#     value: "RANDOM"
-#     description: "Allows randomizing a list of proposals."

@@ -31,6 +31,7 @@ export class UnpublishedUnpublishedArgumentList extends React.Component<Props> {
               argumentable: node(id: $argumentableId) {
                 ... on Argumentable {
                   viewerArgumentsUnpublished(first: 100, type: $type)
+                    @include(if: $isAuthenticated)
                     @connection(
                       key: "UnpublishedArgumentList_viewerArgumentsUnpublished"
                       filters: ["type"]

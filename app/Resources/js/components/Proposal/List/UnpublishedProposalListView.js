@@ -15,7 +15,7 @@ type Props = {
 export class UnpublishedProposalListView extends React.Component<Props> {
   render() {
     const { step, viewer } = this.props;
-    if (step.viewerUnpublishedProposals.totalCount === 0) {
+    if (!step.viewerProposalsUnpublished || step.viewerProposalsUnpublished.totalCount === 0) {
       return null;
     }
     return (
@@ -25,7 +25,7 @@ export class UnpublishedProposalListView extends React.Component<Props> {
             <strong>
               <FormattedMessage
                 id="count-proposal"
-                values={{ num: step.viewerUnpublishedProposals.totalCount }}
+                values={{ num: step.viewerProposalsUnpublished.totalCount }}
               />
             </strong>{' '}
             <FormattedMessage id="awaiting-publication-lowercase" />
@@ -35,7 +35,7 @@ export class UnpublishedProposalListView extends React.Component<Props> {
           {/* $FlowFixMe */}
           <ProposalList
             step={step}
-            proposals={step.viewerUnpublishedProposals}
+            proposals={step.viewerProposalsUnpublished}
             viewer={viewer}
             id="proposals-unpublished-list"
           />
@@ -52,11 +52,13 @@ export default createFragmentContainer(UnpublishedProposalListView, {
     }
   `,
   step: graphql`
-    fragment UnpublishedProposalListView_step on ProposalStep {
+    fragment UnpublishedProposalListView_step on ProposalStep
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       ...ProposalList_step
-      viewerUnpublishedProposals: proposals(includeUnpublishedOnly: true, first: 100)
-        @connection(key: "UnpublishedProposalListView_viewerUnpublishedProposals", filters: []) {
+      viewerProposalsUnpublished(first: 100)
+        @include(if: $isAuthenticated)
+        @connection(key: "UnpublishedProposalListView_viewerProposalsUnpublished", filters: []) {
         totalCount
         ...ProposalList_proposals
         edges {

@@ -224,7 +224,8 @@ const container = connector(OpinionTabs);
 
 export default createFragmentContainer(container, {
   opinion: graphql`
-    fragment OpinionTabs_opinion on OpinionOrVersion {
+    fragment OpinionTabs_opinion on OpinionOrVersion
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ... on Opinion {
         __typename
         id
@@ -268,8 +269,8 @@ export default createFragmentContainer(container, {
           opinionCanBeFollowed
         }
       }
-      ...OpinionSourceBox_sourceable
-      ...OpinionVersionsBox_opinion
+      ...OpinionSourceBox_sourceable @arguments(isAuthenticated: $isAuthenticated)
+      ...OpinionVersionsBox_opinion @arguments(isAuthenticated: $isAuthenticated)
       ...ArgumentsBox_opinion
     }
   `,

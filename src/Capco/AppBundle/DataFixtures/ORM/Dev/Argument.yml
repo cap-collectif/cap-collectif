@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
 
-  argument{3..100}:
+  argument{3..95}:
     id: 'argument<current()>'
     Opinion: '@opinion3'
     type: <numberBetween(0, 1)>
@@ -24,6 +24,20 @@ Capco\AppBundle\Entity\Argument:
     body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
 
+  argument{96..99}:
+    id: 'argument<current()>'
+    Opinion: '@opinion3'
+    type: 0
+    Author: '@user_not_confirmed_with_contributions'
+    body: <text(300)>
+
+  argument100:
+    id: 'argument100'
+    Opinion: '@opinion3'
+    type: 1
+    Author: '@user_not_confirmed_with_contributions'
+    body: <text(300)>
+    
   argument{101..150}:
     id: 'argument<current()>'
     Opinion: '@opinion<numberBetween(4, 50)>'

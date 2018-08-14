@@ -23,7 +23,7 @@ final class SourceOrderFieldType extends EnumType implements GeneratedTypeInterf
                     'name' => 'PUBLISHED_AT',
                     'value' => 'PUBLISHED_AT',
                     'deprecationReason' => null,
-                    'description' => 'Allows ordering a list of sources by when they were created.',
+                    'description' => 'Allows ordering a list of sources by when they were published.',
                 ],
                 'VOTES' => [
                     'name' => 'VOTES',

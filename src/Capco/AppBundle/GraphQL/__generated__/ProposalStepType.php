@@ -190,12 +190,14 @@ final class ProposalStepType extends InterfaceType implements GeneratedTypeInter
                         ],
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'The viewer unpublished proposals (only visible by viewer).',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
                 'requirements' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('RequirementConnection')),

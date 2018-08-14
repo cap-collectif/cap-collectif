@@ -43,7 +43,7 @@ export class OpinionPage extends React.Component<Props> {
                   trashedReason
                 }
                 ...OpinionBox_opinion @arguments(isAuthenticated: $isAuthenticated)
-                ...OpinionTabs_opinion
+                ...OpinionTabs_opinion @arguments(isAuthenticated: $isAuthenticated)
               }
             }
           `}

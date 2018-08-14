@@ -90,7 +90,7 @@ export class ProposalStepPage extends React.Component<Props> {
               step: node(id: $stepId) {
                 id
                 ...ProposalListView_step @arguments(count: $count)
-                ...UnpublishedProposalListView_step
+                ...UnpublishedProposalListView_step @arguments(isAuthenticated: $isAuthenticated)
                 ...ProposalStepPageHeader_step
                 ... on Step {
                   kind

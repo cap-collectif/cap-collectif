@@ -607,6 +607,8 @@ type CollectStep implements Node & Step & ProposalStep {
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
   ): ProposalConnection!
+
+  # The viewer unpublished proposals (only visible by viewer).
   viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection!
 
   # The requirements to vote on this step.
@@ -2154,6 +2156,8 @@ type ProposalForm implements Node {
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
   ): ProposalConnection!
+
+  # The viewer unpublished proposals (only visible by viewer).
   viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection!
   reference: String!
   description: String
@@ -2297,6 +2301,8 @@ interface ProposalStep {
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
   ): ProposalConnection!
+
+  # The viewer unpublished proposals (only visible by viewer).
   viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection!
 
   # The requirements to vote on this step.
@@ -2962,6 +2968,8 @@ type SelectionStep implements Node & Step & ProposalStep {
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
   ): ProposalConnection!
+
+  # The viewer unpublished proposals (only visible by viewer).
   viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection!
 
   # The requirements to vote on this step.
@@ -3123,7 +3131,7 @@ input SourceOrder {
 
 # Properties by which source connections can be ordered
 enum SourceOrderField {
-  # Allows ordering a list of sources by when they were created.
+  # Allows ordering a list of sources by when they were published.
   PUBLISHED_AT
 
   # Allows ordering a list of sources by the number of votes it have.
@@ -3970,7 +3978,7 @@ input VersionOrder {
 
 # Properties by which version connections can be ordered
 enum VersionOrderField {
-  # Allows ordering a list of versions by when they were created.
+  # Allows ordering a list of versions by when they were published.
   PUBLISHED_AT
 
   # Allows ordering a list of versions by the number of votes it have.

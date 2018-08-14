@@ -5,7 +5,7 @@ VersionOrderField:
     values:
       PUBLISHED_AT:
         value: 'PUBLISHED_AT'
-        description: 'Allows ordering a list of versions by when they were created.'
+        description: 'Allows ordering a list of versions by when they were published.'
       VOTES:
         value: 'VOTES'
         description: 'Allows ordering a list of versions by the number of votes it have.'

@@ -137,7 +137,8 @@ class OpinionSourceBox extends React.Component<Props, State> {
 
 export default createFragmentContainer(OpinionSourceBox, {
   sourceable: graphql`
-    fragment OpinionSourceBox_sourceable on Sourceable {
+    fragment OpinionSourceBox_sourceable on Sourceable
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       ...OpinionSourceAdd_sourceable
       ...OpinionSource_sourceable
@@ -145,6 +146,7 @@ export default createFragmentContainer(OpinionSourceBox, {
         totalCount
       }
       viewerSourcesUnpublished(first: 100)
+        @include(if: $isAuthenticated)
         @connection(key: "OpinionSourceBox_viewerSourcesUnpublished") {
         totalCount
         edges {

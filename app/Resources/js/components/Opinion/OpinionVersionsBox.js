@@ -175,14 +175,15 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
 
 export default createFragmentContainer(OpinionVersionsBox, {
   opinion: graphql`
-    fragment OpinionVersionsBox_opinion on Opinion {
+    fragment OpinionVersionsBox_opinion on Opinion
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       ...OpinionVersionCreateModal_opinion
       ...OpinionVersionCreateButton_opinion
       allVersions: versions(first: 0) {
         totalCount
       }
-      viewerVersionsUnpublished(first: 100) {
+      viewerVersionsUnpublished(first: 100) @include(if: $isAuthenticated) {
         totalCount
         edges {
           node {

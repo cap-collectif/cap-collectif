@@ -1,158 +1,21 @@
-@argumentable
+@argumentable_viewerArgumentsUnpublished
 Feature: Unpublished arguments of an argumentable
 
 @read-only
-Scenario: Anonymous wants to get arguments for an opinion
-  Given I send a GraphQL POST request:
-  """
-  {
-    "query": "query ($opinionId: ID!) {
-      opinion: node(id: $opinionId) {
-          ... on Argumentable {
-              arguments(first: 5) {
-                  totalCount
-                  edges {
-                      node {
-                          id
-                          type
-                      }
-                  }
-              }
-          }
-      }
-    }",
-    "variables": {
-      "opinionId": "opinion2"
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-        "opinion": {
-            "arguments": {
-              "totalCount": 2,
-              "edges": [
-                {
-                  "node": {
-                    "id": @string@,
-                    "type": @string@
-                  }
-                },
-                @...@
-              ]
-            }
-        }
-    }
-  }
-  """
-
-@read-only
-Scenario: Anonymous wants to get arguments for a version
-  Given I send a GraphQL POST request:
-  """
-  {
-    "query": "query ($versionId: ID!) {
-      version: node(id: $versionId) {
-          ... on Argumentable {
-              arguments(first: 5) {
-                  totalCount
-                  edges {
-                      node {
-                          id
-                          type
-                      }
-                  }
-              }
-          }
-      }
-    }",
-    "variables": {
-      "versionId": "version1"
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-        "version": {
-            "arguments": {
-              "totalCount": 3,
-              "edges": [
-                {
-                  "node": {
-                    "id": @string@,
-                    "type": @string@
-                  }
-                },
-                @...@
-              ]
-            }
-        }
-    }
-  }
-  """
-
-@read-only
-Scenario: Anonymous wants to get arguments filtered by type for an opinion
-  Given I send a GraphQL POST request:
-  """
-  {
-    "query": "query ($opinionId: ID!) {
-      opinion: node(id: $opinionId) {
-          ... on Argumentable {
-              arguments(first: 5, type: FOR) {
-                  totalCount
-                  edges {
-                      node {
-                          id
-                          type
-                      }
-                  }
-              }
-          }
-      }
-    }",
-    "variables": {
-      "opinionId": "opinion3"
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-        "opinion": {
-            "arguments": {
-              "totalCount": @integer@,
-              "edges": [
-                {
-                  "node": {
-                    "id": @string@,
-                    "type": "FOR"
-                  }
-                },
-                @...@
-              ]
-            }
-        }
-    }
-  }
-  """
+Scenario: User wants to get arguments for an opinion
+  Given I am logged in to graphql as user_not_confirmed_with_contributions
   And I send a GraphQL POST request:
   """
   {
     "query": "query ($opinionId: ID!) {
       opinion: node(id: $opinionId) {
           ... on Argumentable {
-              arguments(first: 5, type: AGAINST) {
+              viewerArgumentsUnpublished(first: 5) {
                   totalCount
                   edges {
                       node {
                           id
-                          type
+                          published
                       }
                   }
               }
@@ -169,13 +32,13 @@ Scenario: Anonymous wants to get arguments filtered by type for an opinion
   {
     "data": {
         "opinion": {
-            "arguments": {
-              "totalCount": @integer@,
+            "viewerArgumentsUnpublished": {
+              "totalCount": 4,
               "edges": [
                 {
                   "node": {
                     "id": @string@,
-                    "type": "AGAINST"
+                    "published": false
                   }
                 },
                 @...@

@@ -22,6 +22,8 @@ ProposalForm:
       proposals:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, getUser(), serv("request_stack")])'
+      viewerProposalsUnpublished:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerProposalsUnpublishedResolver", [value, args, getUser()])'
       categories:
         type: '[ProposalCategory!]!'
         resolve:
