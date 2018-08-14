@@ -7,8 +7,8 @@ ContributionOrderField:
         value: 'POSITION'
       RANDOM:
         value: 'RANDOM'
-      CREATED_AT:
-        value: 'CREATED_AT'
+      PUBLISHED_AT:
+        value: 'PUBLISHED_AT'
       POPULAR:
         value: 'POPULAR'
       COMMENT_COUNT:

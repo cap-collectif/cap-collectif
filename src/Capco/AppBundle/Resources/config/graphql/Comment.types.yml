@@ -56,6 +56,6 @@ Comment:
             defaultValue: 30
           orderBy:
             type: 'VoteOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'

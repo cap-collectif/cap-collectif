@@ -15,6 +15,7 @@ type Props = {
   fields: { length: number, map: Function, remove: Function },
   districts: Array<Object>,
 };
+
 type State = { editIndex: ?number };
 
 export class ProposalFormAdminDistricts extends React.Component<Props, State> {

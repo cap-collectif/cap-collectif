@@ -31,11 +31,11 @@ export const queryVariables = (filters: Filters, order: ?string) => {
       break;
     case 'old':
       direction = 'ASC';
-      field = 'CREATED_AT';
+      field = 'PUBLISHED_AT';
       break;
     case 'last':
       direction = 'DESC';
-      field = 'CREATED_AT';
+      field = 'PUBLISHED_AT';
       break;
     case 'comments':
       direction = 'ASC';

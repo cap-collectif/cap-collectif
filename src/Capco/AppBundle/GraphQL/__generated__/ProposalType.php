@@ -375,7 +375,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('ProposalOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -800,7 +800,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('CommentOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -841,7 +841,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('ProposalVotesOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                         ],
                         [
                             'name' => 'stepId',

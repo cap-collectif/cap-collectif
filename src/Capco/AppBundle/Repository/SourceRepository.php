@@ -84,7 +84,7 @@ class SourceRepository extends EntityRepository
     ): Paginator {
         $qb = $this->getByContributionQB($sourceable);
 
-        if ('CREATED_AT' === $field) {
+        if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('s.createdAt', $direction);
         }
 

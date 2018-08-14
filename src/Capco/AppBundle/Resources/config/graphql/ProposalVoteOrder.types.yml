@@ -5,7 +5,7 @@ ProposalVoteOrder:
     fields:
       field:
         type: 'ProposalVoteOrderField!'
-        defaultValue: 'CREATED_AT'
+        defaultValue: 'PUBLISHED_AT'
       direction:
         type: 'OrderDirection!'
         defaultValue: 'DESC'

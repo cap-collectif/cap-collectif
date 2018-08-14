@@ -31,12 +31,10 @@ WithProposals:
           orderBy:
             type: 'ProposalOrder'
             description: 'Ordering options for proposals returned from the connection.'
-            defaultValue: { field: 'CREATED_AT', direction: 'ASC' }
+            defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
           affiliations:
             type: '[ProposalAffiliation]'
             description: 'Affiliation options for proposals returned from the connection.'
-          includeUnpublishedOnly:
-            type: 'Boolean'
-            description:
-              'If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.'
-            defaultValue: false
+      viewerProposalsUnpublished:
+        type: 'ProposalConnection!'
+        argsBuilder: 'Relay::Connection'

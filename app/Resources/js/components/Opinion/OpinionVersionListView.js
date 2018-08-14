@@ -32,7 +32,7 @@ export class OpinionVersionListView extends React.Component<Props, State> {
     this.setState({ isRefetching: true });
 
     let direction = 'DESC';
-    let field = 'CREATED_AT';
+    let field = 'PUBLISHED_AT';
     switch (newOrder) {
       case 'old':
         break;

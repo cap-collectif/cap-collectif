@@ -36,7 +36,7 @@ Proposal:
             defaultValue: 30
           orderBy:
             type: 'ProposalOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
       reportings:
         type: 'ReportingConnection!'
         argsBuilder: 'Relay::Connection'
@@ -145,7 +145,7 @@ Proposal:
             defaultValue: 30
           orderBy:
             type: 'CommentOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
       votes:
         type: 'ProposalVoteConnection!'
         argsBuilder: 'Relay::Connection'
@@ -157,7 +157,7 @@ Proposal:
             defaultValue: 30
           orderBy:
             type: 'ProposalVotesOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
           stepId:
             type: 'ID'
             description: 'If provided, retrieve only in this step.'

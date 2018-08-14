@@ -23,18 +23,6 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
             'description' => 'A version of contribution',
             'fields' => function () use ($globalVariable) {
                 return [
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'contribuable' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
@@ -73,16 +61,10 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                             'description' => null,
                         ],
                         [
-                            'name' => 'viewerUnpublishedOnly',
-                            'type' => Type::boolean(),
-                            'description' => null,
-                            'defaultValue' => false,
-                        ],
-                        [
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('ArgumentOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                         ],
                         [
                             'name' => 'type',
@@ -91,9 +73,62 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Argumentable\\ArgumentableArgumentsResolver", array(0 => $value, 1 => $args)]);
                     },
                     'description' => 'The arguments related to the argumentable.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'viewerArgumentsUnpublished' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ArgumentConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'type',
+                            'type' => $globalVariable->get('typeResolver')->resolve('ArgumentValue'),
+                            'description' => 'If provided, returns the arguments of this particular type.',
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Argumentable\\ArgumentableViewerArgumentsUnpublishedResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'The unpublished arguments of to the viewer.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -216,20 +251,14 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                             'description' => null,
                         ],
                         [
-                            'name' => 'viewerUnpublishedOnly',
-                            'type' => Type::boolean(),
-                            'description' => null,
-                            'defaultValue' => false,
-                        ],
-                        [
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('SourceOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args)]);
                     },
                     'description' => 'The sources related to the sourceable.',
                     'deprecationReason' => null,
@@ -237,6 +266,42 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
+                ],
+                'viewerSourcesUnpublished' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableViewerSourcesUnpublishedResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'The viewer unpublished sources related to the sourceable (only visible by viewer).',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
                 'availableSourceCategories' => [
                     'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('SourceCategory')),
@@ -407,7 +472,7 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('ProposalVotesOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                         ],
                         [
                             'name' => 'value',

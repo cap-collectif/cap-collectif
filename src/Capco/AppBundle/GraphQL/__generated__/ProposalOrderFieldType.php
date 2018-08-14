@@ -19,9 +19,9 @@ final class ProposalOrderFieldType extends EnumType implements GeneratedTypeInte
             return [
             'name' => 'ProposalOrderField',
             'values' => [
-                'CREATED_AT' => [
-                    'name' => 'CREATED_AT',
-                    'value' => 'CREATED_AT',
+                'PUBLISHED_AT' => [
+                    'name' => 'PUBLISHED_AT',
+                    'value' => 'PUBLISHED_AT',
                     'deprecationReason' => null,
                     'description' => 'Allows ordering a list of proposals by when they were created.',
                 ],

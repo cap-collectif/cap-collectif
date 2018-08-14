@@ -34,11 +34,8 @@ const getConfigs = (variables: AddSourceMutationVariables, viewerIsConfirmed: bo
         parentID: variables.input.sourceableId,
         connectionInfo: [
           {
-            key: 'OpinionSourceBox_viewerUnpublishedSources',
+            key: 'OpinionSourceBox_viewerSourcesUnpublished',
             rangeBehavior: 'prepend',
-            filters: {
-              viewerUnpublishedOnly: true,
-            },
           },
         ],
       },
@@ -55,14 +52,14 @@ const getConfigs = (variables: AddSourceMutationVariables, viewerIsConfirmed: bo
           key: 'OpinionSourceListViewPaginated_sources',
           rangeBehavior: 'prepend',
           filters: {
-            orderBy: { direction: 'DESC', field: 'CREATED_AT' },
+            orderBy: { direction: 'DESC', field: 'PUBLISHED_AT' },
           },
         },
         {
           key: 'OpinionSourceListViewPaginated_sources',
           rangeBehavior: 'append',
           filters: {
-            orderBy: { direction: 'ASC', field: 'CREATED_AT' },
+            orderBy: { direction: 'ASC', field: 'PUBLISHED_AT' },
           },
         },
         {
@@ -103,10 +100,7 @@ const commit = (
       } else {
         const connection = ConnectionHandler.getConnection(
           sourceableProxy,
-          'OpinionSourceBox_viewerUnpublishedSources',
-          {
-            viewerUnpublishedOnly: true,
-          },
+          'OpinionSourceBox_viewerSourcesUnpublished',
         );
         connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
       }

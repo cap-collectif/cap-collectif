@@ -39,7 +39,7 @@ Post:
             defaultValue: 30
           orderBy:
             type: 'CommentOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
       abstract:
         type: 'String!'
         resolve: "@=resolver('post_abstract', [value])"

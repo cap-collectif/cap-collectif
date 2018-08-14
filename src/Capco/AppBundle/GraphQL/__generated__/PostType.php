@@ -177,7 +177,7 @@ final class PostType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('CommentOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

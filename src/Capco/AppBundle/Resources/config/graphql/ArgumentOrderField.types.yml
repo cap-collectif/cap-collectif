@@ -3,12 +3,9 @@ ArgumentOrderField:
   config:
     description: 'Properties by which argument connections can be ordered'
     values:
-      CREATED_AT:
-        value: 'CREATED_AT'
-        description: 'Allows ordering a list of arguments by when they were created.'
+      PUBLISHED_AT:
+        value: 'PUBLISHED_AT'
+        description: 'Allows ordering a list of arguments by when they were published.'
       VOTES:
         value: 'VOTES'
         description: 'Allows ordering a list of arguments by the number of votes it have.'
-# RANDOM:
-#     value: "RANDOM"
-#     description: "Allows randomizing a list of proposals."

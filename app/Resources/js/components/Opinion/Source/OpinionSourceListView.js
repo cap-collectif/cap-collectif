@@ -32,7 +32,7 @@ export class OpinionSourceListView extends React.Component<Props, State> {
     this.setState({ isRefetching: true });
 
     const direction = newOrder === 'old' ? 'ASC' : 'DESC';
-    const field = newOrder === 'popular' ? 'VOTES' : 'CREATED_AT';
+    const field = newOrder === 'popular' ? 'VOTES' : 'PUBLISHED_AT';
 
     const orderBy = {
       direction,

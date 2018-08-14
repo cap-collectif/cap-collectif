@@ -125,8 +125,8 @@ class ProposalRepository extends EntityRepository
             ->setFirstResult($first)
             ->setMaxResults($offset);
 
-        if ('CREATED_AT' === $field) {
-            $qb->addOrderBy('proposal.createdAt', $direction);
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('proposal.publishedAt', $direction);
         }
 
         return new Paginator($qb);
@@ -178,76 +178,6 @@ class ProposalRepository extends EntityRepository
         $qb->andWhere('p.author = :author')->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
-    }
-
-    public function getPublishedBySelectionStep(
-        SelectionStep $step,
-        int $first = 0,
-        int $offset = 100,
-        string $order = 'last',
-        Theme $theme = null,
-        Status $status = null,
-        District $district = null,
-        UserType $type = null
-    ) {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('author', 'amedia', 'theme', 'status', 'district')
-            ->leftJoin('proposal.author', 'author')
-            ->leftJoin('author.media', 'amedia')
-            ->leftJoin('proposal.theme', 'theme')
-            ->leftJoin('proposal.district', 'district')
-            ->leftJoin('proposal.status', 'status')
-            ->leftJoin('proposal.selections', 'selections')
-            ->leftJoin('selections.selectionStep', 'selectionStep')
-            ->andWhere('selectionStep.id = :stepId')
-            ->setParameter('stepId', $step->getId());
-
-        if ($theme) {
-            $qb->andWhere('proposal.theme = :theme')->setParameter('theme', $theme);
-        }
-
-        if ($status) {
-            $qb->andWhere('proposal.status = :status')->setParameter('status', $status);
-        }
-
-        if ($district) {
-            $qb->andWhere('proposal.district = :district')->setParameter('district', $district);
-        }
-
-        if ($type) {
-            $qb->andWhere('author.userType = :type')->setParameter('type', $type);
-        }
-
-        if ('old' === $order) {
-            $qb->addOrderBy('proposal.createdAt', 'ASC');
-        }
-
-        if ('last' === $order) {
-            $qb->addOrderBy('proposal.createdAt', 'DESC');
-        }
-
-        // Let's see what we do there
-        // if ($order === 'popular') {
-        //     $qb->addOrderBy('proposal.votesCount', 'DESC');
-        // }
-
-        if ('comments' === $order) {
-            $qb->addOrderBy('proposal.commentsCount', 'DESC');
-        }
-
-        $qb->setFirstResult($first)->setMaxResults($offset);
-
-        return new Paginator($qb);
-    }
-
-    public function countPublishedForForm(ProposalForm $form): int
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(proposal.id) as proposalsCount')
-            ->andWhere('proposal.proposalForm = :proposalForm')
-            ->setParameter('proposalForm', $form);
-
-        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getOne(string $slug)
@@ -366,43 +296,6 @@ class ProposalRepository extends EntityRepository
             ->orderBy('p.trashedAt', 'DESC');
 
         return $qb->getQuery()->getResult();
-    }
-
-    public function getByProposalForm(ProposalForm $proposalForm, bool $asArray = false)
-    {
-        $qb = $this->createQueryBuilder('proposal')
-            ->addSelect(
-                'author',
-                'ut',
-                'amedia',
-                'category',
-                'theme',
-                'status',
-                'district',
-                'responses',
-                'questions',
-                'selectionVotes',
-                'votesaut',
-                'votesautut',
-                'proposalEvaluation'
-            )
-            ->leftJoin('proposal.author', 'author')
-            ->leftJoin('author.userType', 'ut')
-            ->leftJoin('author.media', 'amedia')
-            ->leftJoin('proposal.theme', 'theme')
-            ->leftJoin('proposal.district', 'district')
-            ->leftJoin('proposal.category', 'category')
-            ->leftJoin('proposal.status', 'status')
-            ->leftJoin('proposal.responses', 'responses')
-            ->leftJoin('responses.question', 'questions')
-            ->leftJoin('proposal.proposalEvaluation', 'proposalEvaluation')
-            ->leftJoin('proposal.selectionVotes', 'selectionVotes')
-            ->leftJoin('selectionVotes.user', 'votesaut')
-            ->leftJoin('votesaut.userType', 'votesautut')
-            ->andWhere('proposal.proposalForm = :proposalForm')
-            ->setParameter('proposalForm', $proposalForm);
-
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     public function getProposalMarkersForCollectStep(CollectStep $step): array

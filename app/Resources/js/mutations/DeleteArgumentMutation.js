@@ -67,7 +67,7 @@ const commit = (
       if (!published) {
         const connection = ConnectionHandler.getConnection(
           argumentableProxy,
-          'UnpublishedArgumentList_viewerUnpublishedArguments',
+          'UnpublishedArgumentList_viewerArgumentsUnpublished',
           {
             type,
           },

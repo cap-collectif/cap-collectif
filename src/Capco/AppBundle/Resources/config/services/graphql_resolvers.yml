@@ -166,11 +166,6 @@ services:
       - { name: overblog_graphql.resolver, alias: 'consultation', method: 'resolve' }
       - {
           name: overblog_graphql.resolver,
-          alias: 'consultation_contributions',
-          method: 'resolveContributions',
-        }
-      - {
-          name: overblog_graphql.resolver,
           alias: 'proposition_section',
           method: 'resolvePropositionSection',
         }

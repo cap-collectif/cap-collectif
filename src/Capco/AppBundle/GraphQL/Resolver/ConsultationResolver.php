@@ -323,11 +323,4 @@ class ConsultationResolver implements ContainerAwareInterface
             'step' => $argument->offsetGet('consultation'),
         ]);
     }
-
-    public function resolveContributions(ConsultationStep $consultation)
-    {
-        return $this->container->get('capco.opinion.repository')->findBy([
-            'step' => $consultation->getId(),
-        ]);
-    }
 }

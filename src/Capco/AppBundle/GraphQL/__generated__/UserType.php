@@ -914,7 +914,7 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('ProposalVotesOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                         ],
                         [
                             'name' => 'stepId',

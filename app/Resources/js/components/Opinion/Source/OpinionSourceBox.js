@@ -41,23 +41,23 @@ class OpinionSourceBox extends React.Component<Props, State> {
     const totalCount = sourceable.allSources.totalCount;
     return (
       <div>
-        {sourceable.viewerUnpublishedSources &&
-        sourceable.viewerUnpublishedSources.totalCount > 0 ? (
+        {sourceable.viewerSourcesUnpublished &&
+        sourceable.viewerSourcesUnpublished.totalCount > 0 ? (
           <Panel bsStyle="danger">
             <Panel.Heading>
               <Panel.Title>
                 <strong>
                   <FormattedMessage
                     id="count-sources"
-                    values={{ num: sourceable.viewerUnpublishedSources.totalCount }}
+                    values={{ num: sourceable.viewerSourcesUnpublished.totalCount }}
                   />
                 </strong>{' '}
                 <FormattedMessage id="awaiting-publication-lowercase" />
               </Panel.Title>
             </Panel.Heading>
             <ListGroup className="list-group-custom">
-              {sourceable.viewerUnpublishedSources.edges &&
-                sourceable.viewerUnpublishedSources.edges
+              {sourceable.viewerSourcesUnpublished.edges &&
+                sourceable.viewerSourcesUnpublished.edges
                   .filter(Boolean)
                   .map(edge => edge.node)
                   .filter(Boolean)
@@ -110,7 +110,7 @@ class OpinionSourceBox extends React.Component<Props, State> {
                 cursor: null,
                 count: 25,
                 sourceableId: sourceable.id,
-                orderBy: { field: 'CREATED_AT', direction: 'DESC' },
+                orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
               }: OpinionSourceBoxQueryVariables)
             }
             render={({ error, props }: ReadyState & { props?: ?OpinionSourceBoxQueryResponse }) => {
@@ -144,11 +144,8 @@ export default createFragmentContainer(OpinionSourceBox, {
       allSources: sources(first: 0) {
         totalCount
       }
-      viewerUnpublishedSources: sources(viewerUnpublishedOnly: true, first: 100)
-        @connection(
-          key: "OpinionSourceBox_viewerUnpublishedSources"
-          filters: ["viewerUnpublishedOnly"]
-        ) {
+      viewerSourcesUnpublished(first: 100)
+        @connection(key: "OpinionSourceBox_viewerSourcesUnpublished") {
         totalCount
         edges {
           node {

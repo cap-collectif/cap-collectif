@@ -99,7 +99,7 @@ class ArgumentRepository extends EntityRepository
             $qb->andWhere('a.type = :type')->setParameter('type', $type);
         }
 
-        if ('CREATED_AT' === $field) {
+        if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('a.createdAt', $direction);
         }
 

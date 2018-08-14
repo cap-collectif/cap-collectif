@@ -19,11 +19,11 @@ final class ArgumentOrderFieldType extends EnumType implements GeneratedTypeInte
             return [
             'name' => 'ArgumentOrderField',
             'values' => [
-                'CREATED_AT' => [
-                    'name' => 'CREATED_AT',
-                    'value' => 'CREATED_AT',
+                'PUBLISHED_AT' => [
+                    'name' => 'PUBLISHED_AT',
+                    'value' => 'PUBLISHED_AT',
                     'deprecationReason' => null,
-                    'description' => 'Allows ordering a list of arguments by when they were created.',
+                    'description' => 'Allows ordering a list of arguments by when they were published.',
                 ],
                 'VOTES' => [
                     'name' => 'VOTES',

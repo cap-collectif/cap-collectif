@@ -97,23 +97,49 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('ProposalOrder'),
                             'description' => 'Ordering options for proposals returned from the connection.',
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'ASC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'ASC'],
                         ],
                         [
                             'name' => 'affiliations',
                             'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('ProposalAffiliation')),
                             'description' => 'Affiliation options for proposals returned from the connection.',
                         ],
-                        [
-                            'name' => 'includeUnpublishedOnly',
-                            'type' => Type::boolean(),
-                            'description' => 'If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.',
-                            'defaultValue' => false,
-                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), 3 => $globalVariable->get('container')->get("request_stack"))]);
                     },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'viewerProposalsUnpublished' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => null,
                     'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,

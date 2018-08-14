@@ -19,11 +19,11 @@ final class ProposalVoteOrderFieldType extends EnumType implements GeneratedType
             return [
             'name' => 'ProposalVoteOrderField',
             'values' => [
-                'CREATED_AT' => [
-                    'name' => 'CREATED_AT',
-                    'value' => 'CREATED_AT',
+                'PUBLISHED_AT' => [
+                    'name' => 'PUBLISHED_AT',
+                    'value' => 'PUBLISHED_AT',
                     'deprecationReason' => null,
-                    'description' => null,
+                    'description' => 'Allows ordering a list of vote by when they were published.',
                 ],
             ],
             'description' => 'Ordering options for proposals votes connections.',

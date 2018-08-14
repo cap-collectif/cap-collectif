@@ -1,16 +1,17 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
-use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Search\ProposalSearch;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Search\ProposalSearch;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class ProposalFormProposalsResolver implements ResolverInterface
 {
@@ -184,14 +185,14 @@ class ProposalFormProposalsResolver implements ResolverInterface
 
         switch ($field) {
             case 'VOTES':
-                if ('ASC' === $direction) {
+                if (OrderDirection::ASC === $direction) {
                     $order = 'least-votes';
                 } else {
                     $order = 'votes';
                 }
                 break;
-            case 'CREATED_AT':
-                if ('ASC' === $direction) {
+            case 'PUBLISHED_AT':
+                if (OrderDirection::ASC === $direction) {
                     $order = 'old';
                 } else {
                     $order = 'last';
@@ -201,7 +202,7 @@ class ProposalFormProposalsResolver implements ResolverInterface
                 $order = 'comments';
                 break;
             case 'COST':
-                if ('ASC' === $direction) {
+                if (OrderDirection::ASC === $direction) {
                     $order = 'cheap';
                 } else {
                     $order = 'expensive';

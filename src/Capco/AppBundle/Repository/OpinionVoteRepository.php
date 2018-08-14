@@ -109,8 +109,8 @@ class OpinionVoteRepository extends EntityRepository
     ): Paginator {
         $qb = $this->getByContributionAndValueQB($votable, $value);
 
-        if ('CREATED_AT' === $field) {
-            $qb->addOrderBy('v.createdAt', $direction);
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('v.publishedAt', $direction);
         }
 
         $qb->setFirstResult($first)->setMaxResults($limit);
@@ -126,8 +126,8 @@ class OpinionVoteRepository extends EntityRepository
     ): Paginator {
         $qb = $this->getByContributionQB($votable);
 
-        if ('CREATED_AT' === $field) {
-            $qb->addOrderBy('v.createdAt', $direction);
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('v.publishedAt', $direction);
         }
 
         $qb->setFirstResult($first)->setMaxResults($limit);

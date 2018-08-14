@@ -394,7 +394,7 @@ final class CommentType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('VoteOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

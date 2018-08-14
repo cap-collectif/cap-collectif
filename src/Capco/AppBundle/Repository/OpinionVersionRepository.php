@@ -137,8 +137,8 @@ class OpinionVersionRepository extends EntityRepository
     ) {
         $qb = $this->getByContributionQB($opinion);
 
-        if ('CREATED_AT' === $field) {
-            $qb->addOrderBy('o.createdAt', $direction);
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('o.publishedAt', $direction);
         }
 
         if ('VOTES' === $field) {

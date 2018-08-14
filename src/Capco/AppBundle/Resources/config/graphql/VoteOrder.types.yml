@@ -5,7 +5,7 @@ VoteOrder:
     fields:
       field:
         type: 'VoteOrderField!'
-        defaultValue: 'CREATED_AT'
+        defaultValue: 'PUBLISHED_AT'
       direction:
         type: 'OrderDirection!'
         defaultValue: 'DESC'

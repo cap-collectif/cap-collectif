@@ -19,9 +19,9 @@ final class VoteOrderFieldType extends EnumType implements GeneratedTypeInterfac
             return [
             'name' => 'VoteOrderField',
             'values' => [
-                'CREATED_AT' => [
-                    'name' => 'CREATED_AT',
-                    'value' => 'CREATED_AT',
+                'PUBLISHED_AT' => [
+                    'name' => 'PUBLISHED_AT',
+                    'value' => 'PUBLISHED_AT',
                     'deprecationReason' => null,
                     'description' => null,
                 ],

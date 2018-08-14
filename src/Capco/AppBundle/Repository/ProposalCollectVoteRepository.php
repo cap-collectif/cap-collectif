@@ -55,8 +55,8 @@ class ProposalCollectVoteRepository extends EntityRepository
             $qb->andWhere('pv.published = true');
         }
 
-        if ('CREATED_AT' === $field) {
-            $qb->addOrderBy('pv.createdAt', $direction);
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('pv.publishedAt', $direction);
         }
 
         if ($limit > 0) {
@@ -121,8 +121,8 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->setParameter('author', $author);
 
         if ($field && $direction) {
-            if ('CREATED_AT' === $field) {
-                $qb->addOrderBy('pv.createdAt', $direction);
+            if ('PUBLISHED_AT' === $field) {
+                $qb->addOrderBy('pv.publishedAt', $direction);
             }
             if ('POSITION' === $field) {
                 $qb->addOrderBy('pv.position', $direction);
@@ -301,8 +301,8 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal);
 
-        if ('CREATED_AT' === $field) {
-            $query->addOrderBy('pv.createdAt', $direction);
+        if ('PUBLISHED_AT' === $field) {
+            $query->addOrderBy('pv.publishedAt', $direction);
         }
 
         if ($limit) {

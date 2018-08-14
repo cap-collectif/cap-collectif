@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Comment;
@@ -10,16 +9,22 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ReportingRepository extends EntityRepository
 {
-    public function getByProposal(Proposal $proposal, int $offset, int $limit, string $field, string $direction): Paginator
-    {
+    public function getByProposal(
+        Proposal $proposal,
+        int $offset,
+        int $limit,
+        string $field,
+        string $direction
+    ): Paginator {
         $qb = $this->createQueryBuilder('r');
 
-        $qb->andWhere('r.proposal = :proposal')
+        $qb
+            ->andWhere('r.proposal = :proposal')
             ->setParameter('proposal', $proposal)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 
-        if ('CREATED_AT' === $field) {
+        if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('r.createdAt', $direction);
         }
 
@@ -32,18 +37,14 @@ class ReportingRepository extends EntityRepository
         $qb
             ->select('count(DISTINCT r)')
             ->andWhere('r.Reporter = :user')
-            ->setParameter('user', $user)
-        ;
-
+            ->setParameter('user', $user);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function findAllByUser(User $user): array
     {
         $qb = $this->createQueryBuilder('r');
-        $qb
-            ->andWhere('r.Reporter = :user')
-            ->setParameter('user', $user);
+        $qb->andWhere('r.Reporter = :user')->setParameter('user', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -68,16 +69,22 @@ class ReportingRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getByComment(Comment $comment, int $offset, int $limit, string $field, string $direction): Paginator
-    {
+    public function getByComment(
+        Comment $comment,
+        int $offset,
+        int $limit,
+        string $field,
+        string $direction
+    ): Paginator {
         $qb = $this->createQueryBuilder('r');
 
-        $qb->andWhere('r.Comment = :comment')
+        $qb
+            ->andWhere('r.Comment = :comment')
             ->setParameter('comment', $comment)
             ->setFirstResult($offset)
             ->setMaxResults($limit);
 
-        if ('CREATED_AT' === $field) {
+        if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('r.createdAt', $direction);
         }
 
@@ -95,11 +102,7 @@ class ReportingRepository extends EntityRepository
             ->leftJoin('r.Argument', 'a')
             ->leftJoin('r.Comment', 'c')
             ->leftJoin('r.proposal', 'p')
-            ->addOrderBy('r.createdAt', 'DESC')
-        ;
-
-        return $qb->getQuery()
-            ->execute()
-            ;
+            ->addOrderBy('r.createdAt', 'DESC');
+        return $qb->getQuery()->execute();
     }
 }

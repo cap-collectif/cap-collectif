@@ -7,8 +7,6 @@ Consultation:
     fields:
       kind:
         resolve: 'consultation'
-      id:
-        description: 'The id of the consultation.'
       opinionCountShownBySection:
         type: 'Int'
       project:
@@ -27,10 +25,6 @@ Consultation:
         type: 'Boolean!'
         description: 'Contributions are allowed right now.'
         resolve: '@=value.canContribute()'
-      contributions:
-        type: '[Opinion]'
-        description: 'List of contributions from any sections.'
-        resolve: "@=resolver('consultation_contributions', [value])"
       sections:
         type: '[Section]'
         description: 'List of sections.'
@@ -42,28 +36,17 @@ Consultation:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
       viewerUnpublishedOpinions:
-        type: 'ContributionConnection'
+        access: "@=hasRole('ROLE_USER')"
+        type: 'OpinionConnection'
         argsBuilder: 'Relay::Connection'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerUnpublishedOpinionsResolver", [value, args, getUser()])'
       contributionConnection:
         type: 'ContributionConnection'
+        argsBuilder: 'Relay::Connection'
         args:
           orderBy:
             type: 'ContributionOrder'
             description: 'Ordering options for contributions returned from the connection.'
-          # defaultValue: { field: POSITION, direction: DESC }
-          after:
-            type: 'String'
-            description: 'Returns the elements in the list that come after the specified global ID.'
-          first:
-            type: 'Int'
-            description: 'Returns the first n elements from the list.'
-          before:
-            type: 'String'
-            description:
-              'Returns the elements in the list that come before the specified global ID.'
-          last:
-            type: 'Int'
-            description: 'Returns the last n elements from the list.'
+            defaultValue: { field: POSITION, direction: DESC }
         resolve: '@=resolver("consultationContributionsRelay", [value, args])'

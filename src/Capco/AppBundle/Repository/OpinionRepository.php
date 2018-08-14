@@ -306,8 +306,8 @@ class OpinionRepository extends EntityRepository
         $sortField = array_keys($orderBy)[0];
         $direction = $orderBy[$sortField];
 
-        if ('CREATED_AT' === $sortField) {
-            $qb->addOrderBy('o.createdAt', $direction)->addOrderBy('o.votesCountOk', 'DESC');
+        if ('PUBLISHED_AT' === $sortField) {
+            $qb->addOrderBy('o.publishedAt', $direction)->addOrderBy('o.votesCountOk', 'DESC');
         }
         if ('POPULAR' === $sortField) {
             if ('DESC' === $direction) {

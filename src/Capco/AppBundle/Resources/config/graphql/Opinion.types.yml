@@ -55,7 +55,7 @@ Opinion:
         args:
           orderBy:
             type: 'ProposalVotesOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
           value:
             type: 'YesNoPairedVoteValue'
             description: 'Filters vote by value'
@@ -68,9 +68,6 @@ Opinion:
       bodyText:
         type: 'String!'
         description: 'Identifies the body of the contribution rendered to text.'
-      arguments:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args, getUser()])'
       versions:
         type: 'VersionConnection!'
         argsBuilder: 'Relay::Connection'
@@ -78,12 +75,19 @@ Opinion:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", [value, args, getUser()])'
         description: 'The versions related to the contribution.'
         args:
-          viewerUnpublishedOnly:
-            type: 'Boolean'
-            defaultValue: false
           orderBy:
             type: 'VersionOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+      viewerVersionsUnpublished:
+        type: 'VersionConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVersionsUnpublishedResolver", [value, args, getUser()])'
+        description: 'The viewer versions related to the contribution.'
+        args:
+          orderBy:
+            type: 'VersionOrder'
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
       section:
         type: 'Section!'
         description: 'Where the proposition has been placed.'

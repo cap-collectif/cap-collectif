@@ -34,7 +34,7 @@ const getConfigs = (variables: AddArgumentMutationVariables, viewerIsConfirmed: 
         edgeName: 'argumentEdge',
         connectionInfo: [
           {
-            key: 'UnpublishedArgumentList_viewerUnpublishedArguments',
+            key: 'UnpublishedArgumentList_viewerArgumentsUnpublished',
             rangeBehavior: 'prepend',
             filters: {
               type: variables.input.type,
@@ -55,7 +55,7 @@ const getConfigs = (variables: AddArgumentMutationVariables, viewerIsConfirmed: 
           rangeBehavior: 'prepend',
           filters: {
             type: variables.input.type,
-            orderBy: { direction: 'DESC', field: 'CREATED_AT' },
+            orderBy: { direction: 'DESC', field: 'PUBLISHED_AT' },
           },
         },
         // We add the new argument in the old arguments corresponding row
@@ -64,7 +64,7 @@ const getConfigs = (variables: AddArgumentMutationVariables, viewerIsConfirmed: 
           rangeBehavior: 'append',
           filters: {
             type: variables.input.type,
-            orderBy: { direction: 'ASC', field: 'CREATED_AT' },
+            orderBy: { direction: 'ASC', field: 'PUBLISHED_AT' },
           },
         },
         // We add the new argument in the popular arguments corresponding row
@@ -103,7 +103,7 @@ const commit = (
 
       const connectionKey = viewerIsConfirmed
         ? 'ArgumentList_allArguments'
-        : 'UnpublishedArgumentList_viewerUnpublishedArguments';
+        : 'UnpublishedArgumentList_viewerArgumentsUnpublished';
       const connection = ConnectionHandler.getConnection(argumentableProxy, connectionKey, {
         type: variables.input.type,
       });

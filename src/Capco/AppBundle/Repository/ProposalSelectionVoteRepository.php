@@ -83,8 +83,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('author', $author);
 
         if ($field && $direction) {
-            if ('CREATED_AT' === $field) {
-                $qb->addOrderBy('pv.createdAt', $direction);
+            if ('PUBLISHED_AT' === $field) {
+                $qb->addOrderBy('pv.publishedAt', $direction);
             }
             if ('POSITION' === $field) {
                 $qb->addOrderBy('pv.position', $direction);
@@ -181,8 +181,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
         $query = $this->createQueryBuilder('pv')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal);
-        if ('CREATED_AT' === $field) {
-            $query->addOrderBy('pv.createdAt', $direction);
+        if ('PUBLISHED_AT' === $field) {
+            $query->addOrderBy('pv.publishedAt', $direction);
         }
 
         if ($limit) {
@@ -226,8 +226,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             $qb->andWhere('pv.published = true');
         }
 
-        if ('CREATED_AT' === $field) {
-            $qb->addOrderBy('pv.createdAt', $direction);
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('pv.publishedAt', $direction);
         }
 
         $qb->setMaxResults($litmit)->setFirstResult($offset);

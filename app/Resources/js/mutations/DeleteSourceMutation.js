@@ -55,10 +55,7 @@ const commit = (
       } else {
         const connection = ConnectionHandler.getConnection(
           sourceable,
-          'OpinionSourceBox_viewerUnpublishedSources',
-          {
-            viewerUnpublishedOnly: true,
-          },
+          'OpinionSourceBox_viewerSourcesUnpublished',
         );
         connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
       }

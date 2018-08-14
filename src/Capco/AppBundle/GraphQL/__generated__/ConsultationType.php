@@ -28,7 +28,7 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The id of the consultation.',
+                    'description' => 'The ID of the step',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -163,20 +163,6 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
-                'contributions' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('Opinion')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["consultation_contributions", array(0 => $value)]);
-                    },
-                    'description' => 'List of contributions from any sections.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'sections' => [
                     'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('Section')),
                     'args' => [
@@ -226,7 +212,7 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     'access' => null,
                 ],
                 'viewerUnpublishedOpinions' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('ContributionConnection'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('OpinionConnection'),
                     'args' => [
                         [
                             'name' => 'after',
@@ -257,35 +243,38 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
                 'contributionConnection' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('ContributionConnection'),
                     'args' => [
                         [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('ContributionOrder'),
-                            'description' => 'Ordering options for contributions returned from the connection.',
-                        ],
-                        [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified global ID.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => 'Returns the first n elements from the list.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified global ID.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last n elements from the list.',
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('ContributionOrder'),
+                            'description' => 'Ordering options for contributions returned from the connection.',
+                            'defaultValue' => ['field' => 'POSITION', 'direction' => 'DESC'],
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

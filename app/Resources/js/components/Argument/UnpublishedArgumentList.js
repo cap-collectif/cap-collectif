@@ -30,13 +30,9 @@ export class UnpublishedUnpublishedArgumentList extends React.Component<Props> {
             ) {
               argumentable: node(id: $argumentableId) {
                 ... on Argumentable {
-                  viewerUnpublishedArguments: arguments(
-                    viewerUnpublishedOnly: true
-                    first: 100
-                    type: $type
-                  )
+                  viewerArgumentsUnpublished(first: 100, type: $type)
                     @connection(
-                      key: "UnpublishedArgumentList_viewerUnpublishedArguments"
+                      key: "UnpublishedArgumentList_viewerArgumentsUnpublished"
                       filters: ["type"]
                     ) {
                     totalCount
@@ -60,10 +56,10 @@ export class UnpublishedUnpublishedArgumentList extends React.Component<Props> {
           render={({ props }: ReadyState & { props?: ?UnpublishedArgumentListQueryResponse }) => {
             if (props) {
               const argumentable = props.argumentable;
-              if (!argumentable || !argumentable.viewerUnpublishedArguments) {
+              if (!argumentable || !argumentable.viewerArgumentsUnpublished) {
                 return graphqlError;
               }
-              if (argumentable.viewerUnpublishedArguments.totalCount === 0) {
+              if (argumentable.viewerArgumentsUnpublished.totalCount === 0) {
                 return null;
               }
               return (
@@ -73,14 +69,14 @@ export class UnpublishedUnpublishedArgumentList extends React.Component<Props> {
                       <strong>
                         <FormattedMessage
                           id={`count-arguments-${type === 'AGAINST' ? 'against' : 'for'}`}
-                          values={{ num: argumentable.viewerUnpublishedArguments.totalCount }}
+                          values={{ num: argumentable.viewerArgumentsUnpublished.totalCount }}
                         />
                       </strong>{' '}
                       <FormattedMessage id="awaiting-publication-lowercase" />
                     </Panel.Title>
                   </Panel.Heading>
                   <ListGroup>
-                    {argumentable.viewerUnpublishedArguments.edges
+                    {argumentable.viewerArgumentsUnpublished.edges
                       .filter(Boolean)
                       .map(edge => edge.node)
                       .filter(Boolean)

@@ -80,22 +80,22 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
     const { isAuthenticated, opinion } = this.props;
     return (
       <div>
-        {opinion.viewerUnpublishedVersions && opinion.viewerUnpublishedVersions.totalCount > 0 ? (
+        {opinion.viewerVersionsUnpublished && opinion.viewerVersionsUnpublished.totalCount > 0 ? (
           <Panel bsStyle="danger">
             <Panel.Heading>
               <Panel.Title>
                 <strong>
                   <FormattedMessage
                     id="count-amendments"
-                    values={{ num: opinion.viewerUnpublishedVersions.totalCount }}
+                    values={{ num: opinion.viewerVersionsUnpublished.totalCount }}
                   />
                 </strong>{' '}
                 <FormattedMessage id="awaiting-publication-lowercase" />
               </Panel.Title>
             </Panel.Heading>
             <ListGroup className="list-group-custom">
-              {opinion.viewerUnpublishedVersions.edges &&
-                opinion.viewerUnpublishedVersions.edges
+              {opinion.viewerVersionsUnpublished.edges &&
+                opinion.viewerVersionsUnpublished.edges
                   .filter(Boolean)
                   .map(edge => edge.node)
                   .filter(Boolean)
@@ -145,7 +145,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
                 cursor: null,
                 count: 25,
                 opinionId: opinion.id,
-                orderBy: { field: 'CREATED_AT', direction: 'DESC' },
+                orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
               }: OpinionVersionsBoxQueryVariables)
             }
             render={({
@@ -182,7 +182,7 @@ export default createFragmentContainer(OpinionVersionsBox, {
       allVersions: versions(first: 0) {
         totalCount
       }
-      viewerUnpublishedVersions: versions(viewerUnpublishedOnly: true) {
+      viewerVersionsUnpublished(first: 100) {
         totalCount
         edges {
           node {

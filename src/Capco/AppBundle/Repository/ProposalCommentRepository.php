@@ -65,8 +65,8 @@ class ProposalCommentRepository extends EntityRepository
             ->setParameter('proposal', $proposal)
             ->addOrderBy('c.pinned', $direction);
 
-        if ('CREATED_AT' === $field) {
-            $qb->addOrderBy('c.createdAt', $direction);
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('c.publishedAt', $direction);
         }
 
         if ('UPDATED_AT' === $field) {

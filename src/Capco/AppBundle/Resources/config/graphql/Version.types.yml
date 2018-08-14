@@ -45,7 +45,7 @@ Version:
         args:
           orderBy:
             type: 'ProposalVotesOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
           value:
             type: 'YesNoPairedVoteValue'
             description: 'Filters vote by value'
@@ -63,9 +63,6 @@ Version:
       reportings:
         type: '[Reporting]'
         resolve: "@=resolver('version_reportings', [value])"
-      arguments:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args, getUser()])'
       section:
         type: 'Section!'
         description: 'The section of the parent opinion.'

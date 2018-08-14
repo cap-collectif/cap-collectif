@@ -51,8 +51,8 @@ class PostCommentRepository extends EntityRepository
             ->andWhere('c.parent is NULL')
             ->setParameter('post', $post)
             ->orderBy('c.pinned', 'DESC');
-        if ('CREATED_AT' === $field) {
-            $qb->addOrderBy('c.createdAt', $direction);
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('c.publishedAt', $direction);
         }
 
         if ('UPDATED_AT' === $field) {

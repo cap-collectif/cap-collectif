@@ -3,7 +3,7 @@ VoteOrderField:
   config:
     description: 'Ordering options for votes.'
     values:
-      CREATED_AT:
-        value: 'CREATED_AT'
+      PUBLISHED_AT:
+        value: 'PUBLISHED_AT'
       POSITION:
         value: 'POSITION'

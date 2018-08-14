@@ -40,7 +40,7 @@ const commit = (variables: AddVersionMutationVariables): Promise<AddVersionMutat
             key: 'VersionListViewPaginated_versions',
             rangeBehavior: 'prepend',
             filters: {
-              orderBy: { direction: 'DESC', field: 'CREATED_AT' },
+              orderBy: { direction: 'DESC', field: 'PUBLISHED_AT' },
             },
           },
           // We add the new version in the old versions corresponding row
@@ -48,7 +48,7 @@ const commit = (variables: AddVersionMutationVariables): Promise<AddVersionMutat
             key: 'VersionListViewPaginated_versions',
             rangeBehavior: 'append',
             filters: {
-              orderBy: { direction: 'ASC', field: 'CREATED_AT' },
+              orderBy: { direction: 'ASC', field: 'PUBLISHED_AT' },
             },
           },
           // We add the new version in the popular versions corresponding row

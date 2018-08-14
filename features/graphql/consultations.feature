@@ -12,9 +12,6 @@ Scenario: GraphQL client wants to list consultations
        sections {
          title
        }
-       contributions {
-         id
-       }
      }
   }
   """
@@ -30,12 +27,6 @@ Scenario: GraphQL client wants to list consultations
           "sections": [
             {
               "title": @string@
-            },
-            @...@
-          ],
-          "contributions": [
-            {
-              "id": @string@
             },
             @...@
           ]

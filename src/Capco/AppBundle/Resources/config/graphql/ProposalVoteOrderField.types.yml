@@ -3,5 +3,6 @@ ProposalVoteOrderField:
   config:
     description: 'Ordering options for proposals votes connections.'
     values:
-      CREATED_AT:
-        value: 'CREATED_AT'
+      PUBLISHED_AT:
+        value: 'PUBLISHED_AT'
+        description: 'Allows ordering a list of vote by when they were published.'

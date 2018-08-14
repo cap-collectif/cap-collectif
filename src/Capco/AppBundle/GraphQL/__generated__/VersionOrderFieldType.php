@@ -19,9 +19,9 @@ final class VersionOrderFieldType extends EnumType implements GeneratedTypeInter
             return [
             'name' => 'VersionOrderField',
             'values' => [
-                'CREATED_AT' => [
-                    'name' => 'CREATED_AT',
-                    'value' => 'CREATED_AT',
+                'PUBLISHED_AT' => [
+                    'name' => 'PUBLISHED_AT',
+                    'value' => 'PUBLISHED_AT',
                     'deprecationReason' => null,
                     'description' => 'Allows ordering a list of versions by when they were created.',
                 ],

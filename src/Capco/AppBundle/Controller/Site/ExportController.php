@@ -27,6 +27,7 @@ const USER_FRAGMENT = '
   rolesText
   consentExternalCommunication
   enabled
+  isEmailConfirmed
   locked
   phoneConfirmed
   gender
@@ -51,6 +52,7 @@ const USER_HEADERS = [
     'user_rolesText',
     'user_consentExternalCommunication',
     'user_enabled',
+    'user_isEmailConfirmed',
     'user_locked',
     'user_phoneConfirmed',
     'user_gender',
@@ -136,6 +138,7 @@ query {
                 'user_rolesText',
                 'user_consentExternalCommunication',
                 'user_enabled',
+                'user_isEmailConfirmed',
                 'user_locked',
                 'user_phoneConfirmed',
                 'user_gender',
@@ -164,6 +167,7 @@ query {
                         $participant['rolesText'],
                         $participant['consentExternalCommunication'],
                         $participant['enabled'],
+                        $participant['isEmailConfirmed'],
                         $participant['locked'],
                         $participant['phoneConfirmed'],
                         $participant['gender'],
@@ -272,6 +276,7 @@ query {
                     $contributor['rolesText'],
                     $contributor['consentExternalCommunication'],
                     $contributor['enabled'],
+                    $contributor['isEmailConfirmed'],
                     $contributor['locked'],
                     $contributor['phoneConfirmed'],
                     $contributor['gender'],
@@ -385,6 +390,7 @@ query {
                     $contributor['rolesText'],
                     $contributor['consentExternalCommunication'],
                     $contributor['enabled'],
+                    $contributor['isEmailConfirmed'],
                     $contributor['locked'],
                     $contributor['phoneConfirmed'],
                     $contributor['gender'],

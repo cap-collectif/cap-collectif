@@ -71,20 +71,14 @@ final class SourceableType extends InterfaceType implements GeneratedTypeInterfa
                             'description' => null,
                         ],
                         [
-                            'name' => 'viewerUnpublishedOnly',
-                            'type' => Type::boolean(),
-                            'description' => null,
-                            'defaultValue' => false,
-                        ],
-                        [
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('SourceOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args)]);
                     },
                     'description' => 'The sources related to the sourceable.',
                     'deprecationReason' => null,
@@ -92,6 +86,42 @@ final class SourceableType extends InterfaceType implements GeneratedTypeInterfa
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
+                ],
+                'viewerSourcesUnpublished' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableViewerSourcesUnpublishedResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'The viewer unpublished sources related to the sourceable (only visible by viewer).',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
                 'availableSourceCategories' => [
                     'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('SourceCategory')),

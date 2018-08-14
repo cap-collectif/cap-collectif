@@ -32,7 +32,7 @@ export class ArgumentListView extends React.Component<Props, State> {
     this.setState({ isRefetching: true });
 
     const direction = newOrder === 'old' ? 'ASC' : 'DESC';
-    const field = newOrder === 'popular' ? 'VOTES' : 'CREATED_AT';
+    const field = newOrder === 'popular' ? 'VOTES' : 'PUBLISHED_AT';
 
     const orderBy = {
       direction,
@@ -78,7 +78,7 @@ export default createRefetchContainer(
           count: { type: "Int!", defaultValue: 25 }
           cursor: { type: "String", defaultValue: null }
           type: { type: "ArgumentValue!", nonNull: true }
-          orderBy: { type: "ArgumentOrder", defaultValue: { field: CREATED_AT, direction: DESC } }
+          orderBy: { type: "ArgumentOrder", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
         ) {
         id
         ...ArgumentListViewPaginated_argumentable

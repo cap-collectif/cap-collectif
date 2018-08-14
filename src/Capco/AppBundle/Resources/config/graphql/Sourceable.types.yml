@@ -12,15 +12,19 @@ Sourceable:
         description: 'The sources related to the sourceable.'
         type: 'SourceConnection!'
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", [value, args, getUser()])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", [value, args])'
         argsBuilder: 'Relay::Connection'
         args:
-          viewerUnpublishedOnly:
-            type: 'Boolean'
-            defaultValue: false
           orderBy:
             type: 'SourceOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+      viewerSourcesUnpublished:
+        access: "@=hasRole('ROLE_USER')"
+        description: 'The viewer unpublished sources related to the sourceable (only visible by viewer).'
+        type: 'SourceConnection!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableViewerSourcesUnpublishedResolver", [value, args, getUser()])'
+        argsBuilder: 'Relay::Connection'
       availableSourceCategories:
         description: 'The available sources categories of to the sourceable.'
         type: '[SourceCategory]'

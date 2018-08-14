@@ -3,8 +3,8 @@ CommentOrderField:
   config:
     description: 'Ordering options for comments.'
     values:
-      CREATED_AT:
-        value: 'CREATED_AT'
+      PUBLISHED_AT:
+        value: 'PUBLISHED_AT'
       UPDATED_AT:
         value: 'UPDATED_AT'
       POPULARITY:

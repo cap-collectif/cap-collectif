@@ -23,10 +23,10 @@ final class ReportingOrderFieldType extends EnumType implements GeneratedTypeInt
                     'name' => 'CREATED_AT',
                     'value' => 'CREATED_AT',
                     'deprecationReason' => null,
-                    'description' => null,
+                    'description' => 'Allows ordering a list of reports by when they were created.',
                 ],
             ],
-            'description' => 'Ordering options for reporting.',
+            'description' => 'Properties by which report connections can be ordered',
         ];
         };
         $config = $configProcessor->process(LazyConfig::create($configLoader, $globalVariables))->load();

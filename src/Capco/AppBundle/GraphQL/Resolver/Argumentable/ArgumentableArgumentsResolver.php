@@ -1,5 +1,5 @@
 <?php
-namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
+namespace Capco\AppBundle\GraphQL\Resolver\Argumentable;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Model\Argumentable;
@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
-class OpinionArgumentsResolver implements ResolverInterface
+class ArgumentableArgumentsResolver implements ResolverInterface
 {
     private $argumentRepository;
 
@@ -19,26 +19,9 @@ class OpinionArgumentsResolver implements ResolverInterface
         $this->argumentRepository = $argumentRepository;
     }
 
-    public function __invoke(Argumentable $argumentable, Argument $args, $viewer): Connection
+    public function __invoke(Argumentable $argumentable, Argument $args): Connection
     {
         $type = $args->offsetGet('type');
-
-        // Viewer is asking for his unpublished arguments
-        if ($args->offsetGet('viewerUnpublishedOnly') === true) {
-            if (!$viewer instanceof User) {
-                $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
-                $emptyConnection->totalCount = 0;
-                return $emptyConnection;
-            }
-            $unpublishedArguments = $this->argumentRepository->getUnpublishedByContributionAndTypeAndAuthor(
-                $argumentable,
-                $type,
-                $viewer
-            );
-            $connection = ConnectionBuilder::connectionFromArray($unpublishedArguments, $args);
-            $connection->totalCount = \count($unpublishedArguments);
-            return $connection;
-        }
 
         $paginator = new Paginator(function (?int $offset, ?int $limit) use (
             $argumentable,

@@ -31,9 +31,9 @@ final class ContributionOrderFieldType extends EnumType implements GeneratedType
                     'deprecationReason' => null,
                     'description' => null,
                 ],
-                'CREATED_AT' => [
-                    'name' => 'CREATED_AT',
-                    'value' => 'CREATED_AT',
+                'PUBLISHED_AT' => [
+                    'name' => 'PUBLISHED_AT',
+                    'value' => 'PUBLISHED_AT',
                     'deprecationReason' => null,
                     'description' => null,
                 ],

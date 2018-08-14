@@ -25,7 +25,7 @@ final class CommentOrderType extends InputObjectType implements GeneratedTypeInt
                 'field' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CommentOrderField')),
                     'description' => null,
-                    'defaultValue' => 'CREATED_AT',
+                    'defaultValue' => 'PUBLISHED_AT',
                 ],
                 'direction' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('OrderDirection')),

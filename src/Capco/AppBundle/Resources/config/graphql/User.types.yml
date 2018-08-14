@@ -260,7 +260,7 @@ User:
             defaultValue: 100000
           orderBy:
             type: 'ProposalVotesOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
           stepId:
             type: 'ID'
           includeUnpublished:

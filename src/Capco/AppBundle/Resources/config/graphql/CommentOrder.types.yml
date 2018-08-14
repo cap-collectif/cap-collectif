@@ -5,7 +5,7 @@ CommentOrder:
     fields:
       field:
         type: 'CommentOrderField!'
-        defaultValue: 'CREATED_AT'
+        defaultValue: 'PUBLISHED_AT'
       direction:
         type: 'OrderDirection!'
         defaultValue: 'DESC'

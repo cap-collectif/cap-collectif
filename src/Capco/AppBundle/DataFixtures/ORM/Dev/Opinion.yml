@@ -65,7 +65,6 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion<current()>'
     step: '@cstep1'
     title: Opinion <current()>
-    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
