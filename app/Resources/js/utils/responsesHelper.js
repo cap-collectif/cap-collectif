@@ -114,6 +114,7 @@ const getConditionsResultForJump = (jump, responses) => {
         ? condition && condition.value && condition.value.title === userResponse
         : condition && condition.value && condition.value.title !== userResponse;
     });
+
   return (jump && jump.always) || (conditions && conditions.every(condition => condition === true));
 };
 
@@ -142,6 +143,41 @@ const populateQuestionsJump = (responses, questions, callback) => {
   return questionsWithJumpsIds;
 };
 
+const filterQuestions = (questions, questionsWithJumps, otherQuestions) => {
+  const tree = {};
+  questionsWithJumps.forEach(questionId => {
+    tree[questionId] = questions.filter(q => {
+      return (
+        q &&
+        q.jumps &&
+        q.jumps.some(j => {
+          return j && j.destination && j.destination.id === questionId;
+        })
+      );
+    });
+  });
+
+  let questionsJumps = questionsWithJumps;
+  let questionsOther = otherQuestions;
+
+  Object.keys(tree).forEach(questionId => {
+    tree[questionId].forEach(question => {
+      if (!questionsWithJumps.includes(question.id) && !otherQuestions.includes(question.id)) {
+        questionsJumps = questionsWithJumps.filter(qId => qId !== questionId);
+        questionsOther = otherQuestions.filter(qId => qId !== questionId);
+        questionsJumps.push(
+          ...question.jumps.filter(jump => jump.always).map(jump => jump.destination.id),
+        );
+        questionsOther.push(
+          ...question.jumps.filter(jump => jump.always).map(jump => jump.destination.id),
+        );
+      }
+    });
+  });
+
+  return [questionsJumps, questionsOther];
+};
+
 const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
   const firstLogicQuestion = questions
     .filter(Boolean)
@@ -152,7 +188,6 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
         afterQuestion &&
         question.position >= afterQuestion.position,
     );
-  console.log(firstLogicQuestion);
   let firstQuestionsIds = [];
   if (firstLogicQuestion) {
     const filteredIds = questions
@@ -180,11 +215,15 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
       .filter(question => afterQuestion && question.position > afterQuestion.position)
       .map(question => question.id);
   }
-  const questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump => {
+  let questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump => {
     return questionWithJump ? [questionWithJump.id] : [];
   });
 
-  console.log(questionsWithJumpsIds, firstQuestionsIds);
+  [questionsWithJumpsIds, firstQuestionsIds] = filterQuestions(
+    questions,
+    questionsWithJumpsIds,
+    firstQuestionsIds,
+  );
 
   return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
 };
@@ -440,12 +479,12 @@ export const renderResponses = ({
   }, false);
 
   if (hasLogicJumps) {
-    const final = getAvailableQuestionsIds(questions, responses);
+    const availableQuestions = getAvailableQuestionsIds(questions, responses);
     return (
       <div>
         {fields.map((member, index) => {
           const field = questions[index];
-          if (!final.includes(field.id)) {
+          if (!availableQuestions.includes(field.id)) {
             return;
           }
           const inputType = field.type || 'text';
