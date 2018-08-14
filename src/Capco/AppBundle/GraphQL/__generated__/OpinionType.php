@@ -678,7 +678,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'project' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Project')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('Project'),
                     'args' => [
                     ],
                     'resolve' => null,

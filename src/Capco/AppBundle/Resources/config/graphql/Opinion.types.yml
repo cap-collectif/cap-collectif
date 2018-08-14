@@ -112,5 +112,5 @@ Opinion:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowOpinionResolver", [value, getUser()])'
       project:
-        type: 'Project!'
+        type: 'Project'
         description: 'The related project.'

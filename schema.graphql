@@ -1639,7 +1639,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   appendices: [Appendix]
 
   # The related project.
-  project: Project!
+  project: Project
 }
 
 # A connection to a list of items.
