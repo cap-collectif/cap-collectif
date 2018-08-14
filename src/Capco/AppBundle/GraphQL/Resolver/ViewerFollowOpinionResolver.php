@@ -18,12 +18,8 @@ class ViewerFollowOpinionResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Opinion $opinion, ?User $viewer): bool
+    public function __invoke(Opinion $opinion, User $viewer): bool
     {
-        if (!$viewer) {
-            return false;
-        }
-
         try {
             return $this->userRepository->isViewerFollowingOpinion($opinion, $viewer);
         } catch (\RuntimeException $exception) {
