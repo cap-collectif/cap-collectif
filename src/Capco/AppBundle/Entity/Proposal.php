@@ -74,7 +74,7 @@ class Proposal
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
 
@@ -265,7 +265,6 @@ class Proposal
         $this->comments = new ArrayCollection();
         $this->responses = new ArrayCollection();
         $this->commentsCount = 0;
-        $this->updatedAt = new \Datetime();
         $this->selections = new ArrayCollection();
         $this->likers = new ArrayCollection();
         $this->evaluers = new ArrayCollection();

@@ -8,11 +8,11 @@ type Props = {
 };
 
 export class ProposalListTableMobile extends React.Component<Props> {
-
-  getPhaseTitle = (phase: Array<Object>): string => {
-    const openPhase = phase.filter(e => moment().isBetween(e.startAt, e.endAt));
-    const toComePhase = phase.filter(e => moment().isBefore(e.startAt));
-    const endPhase = phase[phase.length - 1];
+  // à mettre dans un composant
+  getPhaseTitle = (phases: Array<Object>): string => {
+    const openPhase = phases.filter(e => moment().isBetween(e.startAt, e.endAt));
+    const toComePhase = phases.filter(e => moment().isBefore(e.startAt));
+    const endPhase = phases[phases.length - 1];
 
     if (openPhase.length > 0) {
       return openPhase[0].title;
@@ -53,6 +53,7 @@ export class ProposalListTableMobile extends React.Component<Props> {
               ? `${item.title.value.displayTitle.substring(0, 45)}...`
               : item.title.value.displayTitle;
 
+          // à mettre dans un composant
           const getStatus = () => {
             if (item.status.value && item.status.value.name.length > 9) {
               const tooltip = (
@@ -64,7 +65,8 @@ export class ProposalListTableMobile extends React.Component<Props> {
               return (
                 <OverlayTrigger overlay={tooltip} placement="top">
                   <Label bsStyle={item.status.value.color} className="badge-pill">
-                    {item.status.value.name.substring(0, 9)}...
+                    {item.status.value.name.substring(0, 9)}
+                    ...
                   </Label>
                 </OverlayTrigger>
               );
@@ -81,7 +83,7 @@ export class ProposalListTableMobile extends React.Component<Props> {
 
           return (
             <ListGroupItem>
-              <div>
+              <div className="w-100">
                 <div className="d-flex justify-content-between">
                   {item.title.value && <a href={item.title.value.url}>{getProposalTitle}</a>}
                   {item.status.value && <div className="ml-5">{getStatus()}</div>}
@@ -101,7 +103,7 @@ export class ProposalListTableMobile extends React.Component<Props> {
           );
         })}
       </ListGroup>
-    )
+    );
   }
 }
 

@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
-// import BootstrapTable from 'react-bootstrap-table-next';
-import {Label, Table} from 'react-bootstrap';
+import { Label, Table } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import ProgressList from './List/ProgressList';
@@ -15,26 +14,19 @@ type Props = {
 
 export const Container = styled.div`
   color: #333333;
-  overflow-x: scroll;
+  overflow-x: auto;
   border: 1px solid #e3e3e3;
   margin-bottom: 20px;
 
   .table {
-    max-width: none;
+    table-layout: fixed;
     margin-bottom: 0;
     border: none;
-    width: ${props => props.width}px;
   }
 
   thead > tr > th {
-    word-break: keep-all;
-    vertical-align: middle;
     background-color: #f6f6f6;
     border-bottom-width: 1px;
-
-    &:hover {
-      background-color: #dddddd;
-    }
   }
 
   tbody > tr:last-child td {
@@ -70,60 +62,85 @@ export const Container = styled.div`
   }
 `;
 
-// type Cell = {
-//   text: string,
-//   value: ?any,
-//   width?: string,
-//   hidden?: boolean,
-// };
-//
-// type Row = {};
+type Column = {
+  style: Object,
+  hidden: ?boolean,
+  text: string,
+  key: number,
+};
+
+type Cell = {
+  text: string,
+  value: any,
+  width?: string,
+};
 
 export class ReactBootstrapTable extends React.Component<Props> {
-
-  getColumns = () => {
+  getColumns = (): Array<Column> => {
     const { data } = this.props;
 
     const columnsName = Object.keys(data[0]);
     const firstData = data[0];
 
-    const isHidden = element => {
+    const isHidden = cellName => {
       return (
         data &&
-        data.filter(
-          e => (Array.isArray(e[element].value) ? e[element].value.length !== 0 : e[element].value),
-        ).length === 0
+        data.filter(row => {
+          if (cellName === 'implementationPhase') {
+            return row[cellName].value.list
+              ? row[cellName].value.list.length !== 0
+              : row[cellName].value;
+          }
+          if (cellName === 'lastActivity') {
+            return row[cellName].value.date;
+          }
+          return Array.isArray(row[cellName] && row[cellName].value)
+            ? row[cellName].value.length !== 0
+            : row[cellName] && row[cellName].value;
+        }).length === 0
       );
     };
 
-    const column: Array<Object> = columnsName.map(columnName => {
+    const column = columnsName.map((columnName, key) => {
       return {
-        style: { width: firstData[columnName].width ? firstData[columnName].width : '200px' },
-        hidden: firstData[columnName].hidden ? firstData[columnName].hidden : isHidden(columnName),
-        dataField: columnName,
+        style: {
+          width:
+            firstData[columnName] && firstData[columnName].width
+              ? firstData[columnName].width
+              : '200px',
+        },
+        hidden:
+          firstData[columnName] && firstData[columnName].hidden
+            ? firstData[columnName].hidden
+            : isHidden(columnName),
         text: firstData[columnName] && firstData[columnName].text,
-        formatter: this.getFormatter,
-        formatExtraData: columnName,
-        headerFormatter: this.columnTitleFormatter,
+        key,
       };
     });
 
     return column;
   };
 
-  getCell = (rows) => {
+  getCell = (rows: { [string]: Cell }) => {
+    const columns = this.getColumns();
+
+    const hiddenColumnKey = columns
+      .filter(column => column.hidden === true)
+      .reduce((prev, curr) => [...prev, curr.key], []);
 
     return Object.entries(rows).map(([keyName, cell], key) => {
-      console.warn(keyName, cell);
+      const value = cell && cell.value;
 
-      const value = cell.value;
+      if (hiddenColumnKey.includes(key)) {
+        return null;
+      }
 
       if (keyName === 'title' && value) {
         return (
-          <td>
+          <td key={key}>
             <a href={value.url}>{value.displayTitle}</a>
           </td>
-        )
+        );
       }
 
       if (keyName === 'implementationPhase' && value) {
@@ -143,7 +160,7 @@ export class ReactBootstrapTable extends React.Component<Props> {
           });
 
         return (
-          <td className="m-auto">
+          <td className="m-auto" key={key}>
             <div className="mb-10">
               <span>{value.title}</span>
             </div>
@@ -154,7 +171,7 @@ export class ReactBootstrapTable extends React.Component<Props> {
 
       if (keyName === 'status' && value) {
         return (
-          <td>
+          <td key={key}>
             <Label bsStyle={value.color} className="badge-pill">
               {value.name}
             </Label>
@@ -164,60 +181,74 @@ export class ReactBootstrapTable extends React.Component<Props> {
 
       if (keyName === 'author' && value) {
         return (
-          <td className="d-flex align-items-baseline">
-            <UserAvatar
-              user={{ username: value.displayName, media: value.media, _links: {} }}
-              defaultAvatar={null}
-            />
-            {value.url ? (
-              <a href={value.url}>{value.displayName}</a>
-            ) : (
-              <span>{value.displayName}</span>
-            )}
+          <td key={key}>
+            <div className="d-flex align-items-center">
+              <UserAvatar
+                user={{ username: value.displayName, media: value.media, _links: {} }}
+                defaultAvatar={null}
+              />
+              {value.url ? (
+                <a href={value.url}>{value.displayName}</a>
+              ) : (
+                <span>{value.displayName}</span>
+              )}
+            </div>
           </td>
         );
       }
 
       if (keyName === 'priceEstimation' && value) {
-        return <td>{value} €</td>;
+        return <td key={key}>{value} €</td>;
       }
 
       if (keyName === 'lastActivity' && value) {
-        if (value.user) {
+        if (value.date) {
+          if (value.user) {
+            return (
+              <td key={key}>
+                <FormattedMessage
+                  id="last-activity-date"
+                  values={{
+                    date: <FormattedDate value={moment(value.date).toDate()} />,
+                    user: value.user,
+                  }}
+                />
+              </td>
+            );
+          }
+
           return (
-            <td>
-              <FormattedMessage
-                id="last-activity-date"
-                values={{
-                  date: <FormattedDate value={moment(value.date).toDate()} />,
-                  user: value.user,
-                }}
-              />
+            <td key={key}>
+              <FormattedDate value={moment(value.date).toDate()} />
             </td>
           );
         }
 
-        return <FormattedDate value={moment(value.date).toDate()} />;
+        return <td key={key} />;
       }
 
       if (keyName === 'likers' && value) {
         return (
-          <td>
+          <td key={key}>
             <InlineList className="mb-0">
-              {value.map((user, i) => <li key={i}>{user.displayName}</li>)}
+              {value.map((user, i) => (
+                <li key={i}>{user.displayName}</li>
+              ))}
             </InlineList>
           </td>
         );
       }
 
       if (keyName === 'publishedOn' && value) {
-        return <td><FormattedDate value={moment(value).toDate()} /></td>;
+        return (
+          <td key={key}>
+            <FormattedDate value={moment(value).toDate()} />
+          </td>
+        );
       }
 
-      return <td>{value}</td>;
-    })
-
-    // return <td>ici ma variable</td>
+      return <td key={key}>{value}</td>;
+    });
   };
 
   render() {
@@ -229,19 +260,22 @@ export class ReactBootstrapTable extends React.Component<Props> {
         <Table bordered hover>
           <thead>
             <tr>
-              {columns.map(column => (
-                <th style={{ width: column.width ? column.width : '200px' }}><FormattedMessage id={column.text} /></th>
+              {columns.map((column, key) => (
+                <th
+                  style={{
+                    width: column.style.width ? column.style.width : '200px',
+                    display: column.hidden === true ? 'none' : 'table-cell',
+                  }}
+                  key={key}>
+                  <FormattedMessage id={column.text || 'global.non_applicable'} />
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
-          {data.map((rows) => {
-            return (
-              <tr>
-                {this.getCell(rows)}
-              </tr>
-            );
-          })}
+            {data.map((rows, key) => {
+              return <tr key={key}>{this.getCell(rows)}</tr>;
+            })}
           </tbody>
         </Table>
       </Container>

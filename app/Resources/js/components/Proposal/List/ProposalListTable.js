@@ -5,7 +5,7 @@ import * as graphql from 'graphql';
 import type { ProposalListTable_proposals } from './__generated__/ProposalListTable_proposals.graphql';
 import type { ProposalListTable_step } from './__generated__/ProposalListTable_step.graphql';
 import ReactBootstrapTable from '../../Ui/ReactBootstrapTable';
-import ProposalListTableMobile from "./ProposalListTableMobile";
+import ProposalListTableMobile from './ProposalListTableMobile';
 
 type Props = {
   proposals: ProposalListTable_proposals,
@@ -32,10 +32,11 @@ export class ProposalListTable extends React.Component<Props, State> {
     });
   }
 
-  getPhaseTitle = (data: Array<Object>): string => {
-    const openPhase = data.filter(e => moment().isBetween(e.startAt, e.endAt));
-    const toComePhase = data.filter(e => moment().isBefore(e.startAt));
-    const endPhase = data[data.length - 1];
+  // à mettre dans un composant
+  getPhaseTitle = (phases: Array<Object>): string => {
+    const openPhase = phases.filter(e => moment().isBetween(e.startAt, e.endAt));
+    const toComePhase = phases.filter(e => moment().isBefore(e.startAt));
+    const endPhase = phases[phases.length - 1];
 
     if (openPhase.length > 0) {
       return openPhase[0].title;
@@ -50,7 +51,7 @@ export class ProposalListTable extends React.Component<Props, State> {
     }
   };
 
-  getData = () => {
+  getFormattedData = () => {
     const { proposals, step } = this.props;
 
     return (
@@ -62,6 +63,8 @@ export class ProposalListTable extends React.Component<Props, State> {
         .map(node => {
           const getProposalTitle =
             node.title.length > 55 ? `${node.title.substring(0, 55)}...` : node.title;
+
+          console.log(node.updatedAt);
 
           return {
             title: {
@@ -76,10 +79,13 @@ export class ProposalListTable extends React.Component<Props, State> {
                 title: this.getPhaseTitle(node.progressSteps),
               },
               width: '250px',
-              hidden: !(node.progressSteps && node.progressSteps.length > 0),
             },
             status: { text: 'admin.fields.theme.status', value: node.status && node.status },
-            author: { text: 'project_download.label.author', value: node.author && node.author },
+            author: {
+              text: 'project_download.label.author',
+              value: node.author && node.author,
+              width: '250px',
+            },
             ref: {
               text: 'proposal.admin.reference',
               value: node.reference && node.reference,
@@ -112,7 +118,7 @@ export class ProposalListTable extends React.Component<Props, State> {
             lastActivity: {
               text: 'last-activity',
               value: {
-                date: node.updatedAt && node.updatedAt,
+                date: node.updatedAt,
                 user: node.updatedBy && node.updatedBy.displayName,
               },
             },
@@ -136,10 +142,10 @@ export class ProposalListTable extends React.Component<Props, State> {
     });
 
     if (windowWidth < 992) {
-      return <ProposalListTableMobile data={this.getData()}/>;
+      return <ProposalListTableMobile data={this.getFormattedData()} />;
     }
 
-    return <ReactBootstrapTable data={this.getData()} />;
+    return <ReactBootstrapTable data={this.getFormattedData()} />;
   };
 
   render() {

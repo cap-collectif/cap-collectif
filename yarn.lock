@@ -2507,10 +2507,6 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
-
 classnames@^2.2.3, classnames@^2.2.4, classnames@^2.2.5:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
@@ -8677,12 +8673,6 @@ react-beautiful-dnd@^8.0.2:
     react-redux "^5.0.7"
     redux "^4.0.0"
     tiny-invariant "^0.0.3"
-
-react-bootstrap-table-next@^0.1.14:
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-table-next/-/react-bootstrap-table-next-0.1.14.tgz#5f40f0f88d33a6325a1191aaa7853a2198c2c3b8"
-  dependencies:
-    classnames "2.2.5"
 
 react-bootstrap@^0.32.1:
   version "0.32.1"

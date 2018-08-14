@@ -1,17 +1,288 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalCollectStatus /> renders table with all type of data 1`] = `
-<ReactBootstrapTable__Container
-  width="0"
->
-  <BootstrapTableContainer
-    columns={Array []}
-    data={
-      Array [
-        Object {},
-      ]
-    }
-    keyField="title"
-  />
+exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
+<ReactBootstrapTable__Container>
+  <Table
+    bordered={true}
+    bsClass="table"
+    condensed={false}
+    hover={true}
+    responsive={false}
+    striped={false}
+  >
+    <thead>
+      <tr>
+        <th
+          key="0"
+          style={
+            Object {
+              "display": "none",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="global.non_applicable"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="1"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "100px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="Title"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="2"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "250px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="implementation-phase"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="3"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="admin.fields.theme.status"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="4"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="project_download.label.author"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="5"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="proposal.admin.reference"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="6"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="proposal.estimation"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="7"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="project_download.label.likers"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="8"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="last-activity"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="9"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="published-on"
+            values={Object {}}
+          />
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        key="0"
+      >
+        <td
+          key="1"
+        >
+          <a
+            href="http://google.com"
+          >
+            Jean
+          </a>
+        </td>
+        <td
+          className="m-auto"
+          key="2"
+        >
+          <div
+            className="mb-10"
+          >
+            <span>
+              In progress
+            </span>
+          </div>
+          <ProgressList
+            className="mt-10"
+            progressListItem={
+              Array [
+                Object {
+                  "isActive": true,
+                  "title": "Before",
+                },
+                Object {
+                  "isActive": false,
+                  "title": "In progress",
+                },
+                Object {
+                  "isActive": false,
+                  "title": "After",
+                },
+              ]
+            }
+          />
+        </td>
+        <td
+          key="3"
+        >
+          <Label
+            bsClass="label"
+            bsStyle="default"
+            className="badge-pill"
+          />
+        </td>
+        <td
+          key="4"
+        >
+          <div
+            className="d-flex align-items-center"
+          >
+            <Connect(UserAvatar)
+              defaultAvatar={null}
+              user={
+                Object {
+                  "_links": Object {},
+                  "media": null,
+                  "username": "Jean",
+                }
+              }
+            />
+            <a
+              href="http://google.com"
+            >
+              Jean
+            </a>
+          </div>
+        </td>
+        <td
+          key="5"
+        >
+          89789
+        </td>
+        <td
+          key="6"
+        >
+          347280
+           €
+        </td>
+        <td
+          key="7"
+        >
+          <InlineList
+            className="mb-0"
+          >
+            <li
+              key="0"
+            >
+              Maude
+            </li>
+            <li
+              key="1"
+            >
+              Marie
+            </li>
+          </InlineList>
+        </td>
+        <td
+          key="8"
+        >
+          <FormattedMessage
+            id="last-activity-date"
+            values={
+              Object {
+                "date": <FormattedDate
+                  value={2018-07-26T22:00:00.000Z}
+                />,
+                "user": "admin",
+              }
+            }
+          />
+        </td>
+        <td
+          key="9"
+        >
+          <FormattedDate
+            value={2018-06-26T22:00:00.000Z}
+          />
+        </td>
+      </tr>
+    </tbody>
+  </Table>
 </ReactBootstrapTable__Container>
 `;
