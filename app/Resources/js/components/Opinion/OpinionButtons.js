@@ -118,6 +118,9 @@ export default createFragmentContainer(container, {
         author {
           slug
         }
+        project {
+          opinionCanBeFollowed
+        }
       }
     }
   `,
