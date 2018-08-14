@@ -41,7 +41,7 @@ export class UserPreview extends React.Component<Props> {
               ) : null}
             </p>
             {/* $FlowFixMe */}
-            <UserNotConfirmedLabel user={user} />
+            {user ? <UserNotConfirmedLabel user={user} /> : null}
           </div>
         </CardUser>
       </CardContainer>

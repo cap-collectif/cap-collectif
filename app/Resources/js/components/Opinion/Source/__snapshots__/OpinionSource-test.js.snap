@@ -22,7 +22,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
       }
     />
     <div>
-      <Relay(OpinionInfos)
+      <ForwardRef(Relay(OpinionInfos))
         opinion={
           Object {
             "$fragmentRefs": null,
@@ -39,7 +39,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
         }
         rankingThreshold={null}
       />
-      <Relay(OpinionSourceTitle)
+      <ForwardRef(Relay(OpinionSourceTitle))
         source={
           Object {
             "$fragmentRefs": null,
@@ -55,7 +55,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
           }
         }
       />
-      <Relay(OpinionSourceContent)
+      <ForwardRef(Relay(OpinionSourceContent))
         source={
           Object {
             "$fragmentRefs": null,
@@ -74,7 +74,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
       <div
         className="actions small"
       >
-        <Relay(Connect(OpinionSourceButtons))
+        <ForwardRef(Relay(Connect(OpinionSourceButtons)))
           source={
             Object {
               "$fragmentRefs": null,
@@ -125,7 +125,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
       }
     />
     <div>
-      <Relay(OpinionInfos)
+      <ForwardRef(Relay(OpinionInfos))
         opinion={
           Object {
             "$fragmentRefs": null,
@@ -142,7 +142,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
         }
         rankingThreshold={null}
       />
-      <Relay(OpinionSourceTitle)
+      <ForwardRef(Relay(OpinionSourceTitle))
         source={
           Object {
             "$fragmentRefs": null,
@@ -158,7 +158,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
           }
         }
       />
-      <Relay(OpinionSourceContent)
+      <ForwardRef(Relay(OpinionSourceContent))
         source={
           Object {
             "$fragmentRefs": null,
@@ -177,7 +177,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
       <div
         className="actions small"
       >
-        <Relay(Connect(OpinionSourceButtons))
+        <ForwardRef(Relay(Connect(OpinionSourceButtons)))
           source={
             Object {
               "$fragmentRefs": null,

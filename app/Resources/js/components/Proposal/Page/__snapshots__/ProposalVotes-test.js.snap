@@ -19,7 +19,7 @@ exports[`<ProposalVotes /> should render correctly proposal votes 1`] = `
       bsClass="row"
       componentClass="div"
     >
-      <Relay(UserBox)
+      <ForwardRef(Relay(UserBox))
         className="proposal__vote"
         key="0"
         user={
@@ -29,7 +29,7 @@ exports[`<ProposalVotes /> should render correctly proposal votes 1`] = `
           }
         }
       />
-      <Relay(UserBox)
+      <ForwardRef(Relay(UserBox))
         className="proposal__vote"
         key="1"
         user={

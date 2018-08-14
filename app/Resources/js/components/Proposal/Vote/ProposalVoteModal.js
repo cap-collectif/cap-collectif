@@ -84,6 +84,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
       if (!newNode) {
         newNode = store.create(dataID, 'ProposalVote');
       }
+      newNode.setValue(true, 'published');
       newNode.setValue(false, 'anonymous');
       newNode.setValue(null, 'id'); // This will be used to know that this is the tmp vote
       newNode.setLinkedRecord(store.get(this.props.proposal.id), 'proposal');

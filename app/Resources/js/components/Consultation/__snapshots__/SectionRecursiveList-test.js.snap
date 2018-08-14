@@ -2,7 +2,7 @@
 
 exports[`<SectionRecursiveList /> renders correcty 1`] = `
 <div>
-  <Relay(UnpublishedOpinionList)
+  <ForwardRef(Relay(UnpublishedOpinionList))
     consultation={
       Object {
         "$fragmentRefs": null,

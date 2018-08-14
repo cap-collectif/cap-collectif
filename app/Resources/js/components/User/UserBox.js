@@ -29,7 +29,6 @@ class UserBox extends React.Component<Props> {
 export default createFragmentContainer(UserBox, {
   user: graphql`
     fragment UserBox_user on User {
-      id
       ...UserPreview_user
     }
   `,

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AccountBox /> should render a disabled button when the form is invalid 1`] = `
-<React.Fragment>
+<Fragment>
   <Uncontrolled(Panel)>
     <PanelHeading
       bsClass="panel"
@@ -85,7 +85,7 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
       </div>
     </PanelFooter>
   </Uncontrolled(Panel)>
-  <Relay(DeleteAccountModal)
+  <ForwardRef(Relay(DeleteAccountModal))
     handleClose={[Function]}
     show={false}
     viewer={
@@ -95,11 +95,11 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
       }
     }
   />
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`<AccountBox /> should render a disabled button when the form is submitting 1`] = `
-<React.Fragment>
+<Fragment>
   <Uncontrolled(Panel)>
     <PanelHeading
       bsClass="panel"
@@ -183,7 +183,7 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
       </div>
     </PanelFooter>
   </Uncontrolled(Panel)>
-  <Relay(DeleteAccountModal)
+  <ForwardRef(Relay(DeleteAccountModal))
     handleClose={[Function]}
     show={false}
     viewer={
@@ -193,11 +193,11 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
       }
     }
   />
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`<AccountBox /> should render and enabled button when the form is valid 1`] = `
-<React.Fragment>
+<Fragment>
   <Uncontrolled(Panel)>
     <PanelHeading
       bsClass="panel"
@@ -281,7 +281,7 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
       </div>
     </PanelFooter>
   </Uncontrolled(Panel)>
-  <Relay(DeleteAccountModal)
+  <ForwardRef(Relay(DeleteAccountModal))
     handleClose={[Function]}
     show={false}
     viewer={
@@ -291,5 +291,5 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
       }
     }
   />
-</React.Fragment>
+</Fragment>
 `;
