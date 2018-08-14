@@ -2,32 +2,34 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
+import { $refType } from '../../../mocks';
 import { OpinionFollowButton } from './OpinionFollowButton';
 
 describe('<OpinionFollowButton />', () => {
-  // $FlowFixMe $refType
   const opinionViewIsFollowing = {
     id: 'opinion1',
     viewerIsFollowing: true,
     viewerFollowingConfiguration: 'MINIMAL',
+    $refType,
   };
-  // $FlowFixMe $refType
   const opinionViewIsNotFollowing = {
     id: 'opinion1',
     viewerIsFollowing: false,
     viewerFollowingConfiguration: null,
+    $refType,
   };
 
-  // $FlowFixMe $refType
   const opinionViewIsNotConnected = {
     id: 'opinion1',
     viewerIsFollowing: false,
     viewerFollowingConfiguration: null,
+    $refType,
   };
-  // $FlowFixMe $refType
+
   const props = {
     className: '',
     referer: 'http://capco.test',
+    $refType,
   };
 
   it('should render a button to follow a opinion', () => {
@@ -44,10 +46,7 @@ describe('<OpinionFollowButton />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should render a button to follow a opinion and user is not connected', () => {
-    const wrapper = shallow(
-      // $FlowFixMe $refType isAuthenticated false
-      <OpinionFollowButton opinion={opinionViewIsNotConnected} {...props} />,
-    );
+    const wrapper = shallow(<OpinionFollowButton opinion={opinionViewIsNotConnected} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
