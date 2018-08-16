@@ -1,0 +1,297 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalListTable /> renders mobile version with formatted data & hidden values 1`] = `
+<ProposalListTableMobile
+  data={
+    Array [
+      Object {
+        "author": Object {
+          "text": "project_download.label.author",
+          "value": undefined,
+          "width": "250px",
+        },
+        "category": Object {
+          "hidden": true,
+          "text": "proposal.category",
+          "value": undefined,
+        },
+        "district": Object {
+          "hidden": true,
+          "text": "proposal.district",
+          "value": undefined,
+        },
+        "implementationPhase": Object {
+          "text": "implementation-phase",
+          "value": Object {
+            "list": undefined,
+            "title": undefined,
+          },
+          "width": "250px",
+        },
+        "lastActivity": Object {
+          "text": "last-activity",
+          "value": Object {
+            "date": undefined,
+            "user": undefined,
+          },
+        },
+        "likers": Object {
+          "text": "project_download.label.likers",
+          "value": undefined,
+          "width": "250px",
+        },
+        "priceEstimation": Object {
+          "text": "proposal.estimation",
+          "value": undefined,
+        },
+        "publishedOn": Object {
+          "text": "published-on",
+          "value": "2018-08-16 15:15:39",
+          "width": "150px",
+        },
+        "ref": Object {
+          "text": "proposal.admin.reference",
+          "value": "1-3",
+          "width": "150px",
+        },
+        "status": Object {
+          "text": "admin.fields.theme.status",
+          "value": undefined,
+        },
+        "theme": Object {
+          "hidden": true,
+          "text": "proposal.theme",
+          "value": "Justice",
+        },
+        "title": Object {
+          "text": "admin.fields.selection.proposal",
+          "value": Object {
+            "displayTitle": "Installation de bancs",
+            "url": undefined,
+          },
+          "width": "250px",
+        },
+      },
+      Object {
+        "author": Object {
+          "text": "project_download.label.author",
+          "value": undefined,
+          "width": "250px",
+        },
+        "category": Object {
+          "hidden": true,
+          "text": "proposal.category",
+          "value": undefined,
+        },
+        "district": Object {
+          "hidden": true,
+          "text": "proposal.district",
+          "value": undefined,
+        },
+        "implementationPhase": Object {
+          "text": "implementation-phase",
+          "value": Object {
+            "list": undefined,
+            "title": undefined,
+          },
+          "width": "250px",
+        },
+        "lastActivity": Object {
+          "text": "last-activity",
+          "value": Object {
+            "date": undefined,
+            "user": undefined,
+          },
+        },
+        "likers": Object {
+          "text": "project_download.label.likers",
+          "value": undefined,
+          "width": "250px",
+        },
+        "priceEstimation": Object {
+          "text": "proposal.estimation",
+          "value": undefined,
+        },
+        "publishedOn": Object {
+          "text": "published-on",
+          "value": "2018-09-17 16:15:39",
+          "width": "150px",
+        },
+        "ref": Object {
+          "text": "proposal.admin.reference",
+          "value": "1-2",
+          "width": "150px",
+        },
+        "status": Object {
+          "text": "admin.fields.theme.status",
+          "value": Object {
+            "color": "info",
+            "name": "En cours",
+          },
+        },
+        "theme": Object {
+          "hidden": true,
+          "text": "proposal.theme",
+          "value": undefined,
+        },
+        "title": Object {
+          "text": "admin.fields.selection.proposal",
+          "value": Object {
+            "displayTitle": "Proposition plus votable",
+            "url": undefined,
+          },
+          "width": "250px",
+        },
+      },
+    ]
+  }
+/>
+`;
+
+exports[`<ProposalListTable /> renders table with formatted data 1`] = `
+<ReactBootstrapTable
+  data={
+    Array [
+      Object {
+        "author": Object {
+          "text": "project_download.label.author",
+          "value": undefined,
+          "width": "250px",
+        },
+        "category": Object {
+          "hidden": false,
+          "text": "proposal.category",
+          "value": undefined,
+        },
+        "district": Object {
+          "hidden": false,
+          "text": "proposal.district",
+          "value": undefined,
+        },
+        "implementationPhase": Object {
+          "text": "implementation-phase",
+          "value": Object {
+            "list": undefined,
+            "title": undefined,
+          },
+          "width": "250px",
+        },
+        "lastActivity": Object {
+          "text": "last-activity",
+          "value": Object {
+            "date": undefined,
+            "user": undefined,
+          },
+        },
+        "likers": Object {
+          "text": "project_download.label.likers",
+          "value": undefined,
+          "width": "250px",
+        },
+        "priceEstimation": Object {
+          "text": "proposal.estimation",
+          "value": undefined,
+        },
+        "publishedOn": Object {
+          "text": "published-on",
+          "value": "2018-08-16 15:15:39",
+          "width": "150px",
+        },
+        "ref": Object {
+          "text": "proposal.admin.reference",
+          "value": "1-3",
+          "width": "150px",
+        },
+        "status": Object {
+          "text": "admin.fields.theme.status",
+          "value": undefined,
+        },
+        "theme": Object {
+          "hidden": false,
+          "text": "proposal.theme",
+          "value": "Justice",
+        },
+        "title": Object {
+          "text": "admin.fields.selection.proposal",
+          "value": Object {
+            "displayTitle": "Installation de bancs",
+            "url": undefined,
+          },
+          "width": "250px",
+        },
+      },
+      Object {
+        "author": Object {
+          "text": "project_download.label.author",
+          "value": undefined,
+          "width": "250px",
+        },
+        "category": Object {
+          "hidden": false,
+          "text": "proposal.category",
+          "value": undefined,
+        },
+        "district": Object {
+          "hidden": false,
+          "text": "proposal.district",
+          "value": undefined,
+        },
+        "implementationPhase": Object {
+          "text": "implementation-phase",
+          "value": Object {
+            "list": undefined,
+            "title": undefined,
+          },
+          "width": "250px",
+        },
+        "lastActivity": Object {
+          "text": "last-activity",
+          "value": Object {
+            "date": undefined,
+            "user": undefined,
+          },
+        },
+        "likers": Object {
+          "text": "project_download.label.likers",
+          "value": undefined,
+          "width": "250px",
+        },
+        "priceEstimation": Object {
+          "text": "proposal.estimation",
+          "value": undefined,
+        },
+        "publishedOn": Object {
+          "text": "published-on",
+          "value": "2018-09-17 16:15:39",
+          "width": "150px",
+        },
+        "ref": Object {
+          "text": "proposal.admin.reference",
+          "value": "1-2",
+          "width": "150px",
+        },
+        "status": Object {
+          "text": "admin.fields.theme.status",
+          "value": Object {
+            "color": "info",
+            "name": "En cours",
+          },
+        },
+        "theme": Object {
+          "hidden": false,
+          "text": "proposal.theme",
+          "value": undefined,
+        },
+        "title": Object {
+          "text": "admin.fields.selection.proposal",
+          "value": Object {
+            "displayTitle": "Proposition plus votable",
+            "url": undefined,
+          },
+          "width": "250px",
+        },
+      },
+    ]
+  }
+/>
+`;

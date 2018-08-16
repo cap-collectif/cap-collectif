@@ -19,7 +19,7 @@ export class ProposalListTableMobile extends React.Component<Props> {
 
     return (
       <ListGroup className="list-group-custom">
-        {data.map(item => {
+        {data.map((item, key) => {
           const list =
             item.implementationPhase.value &&
             item.implementationPhase.value.list.map(e => {
@@ -41,7 +41,7 @@ export class ProposalListTableMobile extends React.Component<Props> {
               : item.title.value.displayTitle;
 
           return (
-            <ListGroupItem>
+            <ListGroupItem key={key}>
               <div className="w-100">
                 <div className="d-flex justify-content-between">
                   {item.title.value && <a href={item.title.value.url}>{getProposalTitle}</a>}
@@ -51,16 +51,15 @@ export class ProposalListTableMobile extends React.Component<Props> {
                     </div>
                   )}
                 </div>
-                {item.implementationPhase.value && (
-                  <div className="m-auto">
-                    {item.implementationPhase.value.list.length > 0 && (
+                {item.implementationPhase.value &&
+                  item.implementationPhase.value.list.length > 0 && (
+                    <div className="m-auto">
                       <div className="mb-5 mt-10">
                         <span>{this.getPhaseTitle(item.implementationPhase.value.list)}</span>
                       </div>
-                    )}
-                    <ProgressList progressListItem={list} />
-                  </div>
-                )}
+                      <ProgressList progressListItem={list} />
+                    </div>
+                  )}
               </div>
             </ListGroupItem>
           );

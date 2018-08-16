@@ -58,8 +58,11 @@ export class ProposalListTable extends React.Component<Props, State> {
             implementationPhase: {
               text: 'implementation-phase',
               value: {
-                list: node.progressSteps && node.progressSteps,
-                title: node.progressSteps.length > 0 && this.getPhaseTitle(node.progressSteps),
+                list: node.progressSteps,
+                title:
+                  node.progressSteps &&
+                  node.progressSteps.length > 0 &&
+                  this.getPhaseTitle(node.progressSteps),
               },
               width: '250px',
             },
@@ -77,17 +80,17 @@ export class ProposalListTable extends React.Component<Props, State> {
             district: {
               text: 'proposal.district',
               value: node.district && node.district.name,
-              hidden: step && !step.form.usingDistrict,
+              hidden: step && step.form && !step.form.usingDistrict,
             },
             category: {
               text: 'proposal.category',
               value: node.category && node.category.name,
-              hidden: step && !step.form.usingCategories,
+              hidden: step && step.form && !step.form.usingCategories,
             },
             theme: {
               text: 'proposal.theme',
               value: node.theme && node.theme.title,
-              hidden: step && !step.form.usingThemes,
+              hidden: step && step.form && !step.form.usingThemes,
             },
             priceEstimation: {
               text: 'proposal.estimation',
@@ -124,11 +127,13 @@ export class ProposalListTable extends React.Component<Props, State> {
       });
     });
 
+    const data = this.getFormattedData();
+
     if (windowWidth < 992) {
-      return <ProposalListTableMobile data={this.getFormattedData()} />;
+      return <ProposalListTableMobile data={data} />;
     }
 
-    return <ReactBootstrapTable data={this.getFormattedData()} />;
+    return <ReactBootstrapTable data={data} />;
   };
 
   render() {
