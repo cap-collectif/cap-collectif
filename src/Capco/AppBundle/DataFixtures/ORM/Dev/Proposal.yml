@@ -431,4 +431,3 @@ Capco\AppBundle\Entity\Proposal:
     createdAt: <dateTimeBetween('-30 days', '-29 days')>
     category: '@pCategory1'
     reference: 36
-    published: false
