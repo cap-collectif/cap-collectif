@@ -25,11 +25,7 @@ export class FollowingsBox extends Component<Props> {
         return graphqlError;
       }
       if (props) {
-        return (
-          <React.Fragment>
-            <FollowingsProposals viewer={props.viewer} />
-          </React.Fragment>
-        );
+        return <FollowingsProposals viewer={props.viewer} />;
       }
       return <Loader />;
     };
