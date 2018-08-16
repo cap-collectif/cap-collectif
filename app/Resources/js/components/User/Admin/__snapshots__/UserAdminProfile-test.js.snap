@@ -77,9 +77,7 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
         <FormattedMessage
           id="registration.select.type"
           values={Object {}}
-        >
-          <Component />
-        </FormattedMessage>
+        />
         <option
           key="1"
           value={1}

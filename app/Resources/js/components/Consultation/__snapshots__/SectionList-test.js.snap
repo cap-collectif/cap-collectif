@@ -2,7 +2,7 @@
 
 exports[`<SectionList /> renders correcty 1`] = `
 <div>
-  <ForwardRef(Relay(Section))
+  <Relay(Section)
     consultation={Object {}}
     level={0}
     section={Object {}}

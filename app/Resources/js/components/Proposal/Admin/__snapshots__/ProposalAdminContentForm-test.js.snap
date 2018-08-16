@@ -4,7 +4,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
 <div
   className="box box-primary container-fluid"
 >
-  <ForwardRef(Relay(Connect(ProposalFusionEditModal)))
+  <Relay(Connect(ProposalFusionEditModal))
     onClose={[Function]}
     proposal={
       Object {
@@ -280,9 +280,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         <FormattedMessage
           id="proposal.select.category"
           values={Object {}}
-        >
-          <Component />
-        </FormattedMessage>
+        />
         <option
           key="1"
           value="1"

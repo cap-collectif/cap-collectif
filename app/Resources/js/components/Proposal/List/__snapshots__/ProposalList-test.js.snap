@@ -24,7 +24,7 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
   <ul
     className="media-list proposal-preview-list opinion__list"
   >
-    <ForwardRef(Relay(ProposalPreview))
+    <Relay(ProposalPreview)
       key="0"
       proposal={
         Object {
@@ -41,7 +41,7 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
       }
       viewer={null}
     />
-    <ForwardRef(Relay(ProposalPreview))
+    <Relay(ProposalPreview)
       key="1"
       proposal={
         Object {
@@ -70,7 +70,7 @@ exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
   <ul
     className="media-list proposal-preview-list opinion__list"
   >
-    <ForwardRef(Relay(ProposalPreview))
+    <Relay(ProposalPreview)
       key="0"
       proposal={
         Object {
@@ -87,7 +87,7 @@ exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
       }
       viewer={null}
     />
-    <ForwardRef(Relay(ProposalPreview))
+    <Relay(ProposalPreview)
       key="1"
       proposal={
         Object {

@@ -2,7 +2,7 @@
 
 exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
 <span>
-  <ForwardRef(Relay(ProposalVoteButtonWrapperFragment))
+  <Relay(ProposalVoteButtonWrapperFragment)
     className="proposal__preview__vote mr-15"
     id="proposal-vote-btn-1"
     proposal={

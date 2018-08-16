@@ -496,9 +496,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                   <FormattedMessage
                     id="proposal_form.select.zoom"
                     values={Object {}}
-                  >
-                    <Component />
-                  </FormattedMessage>
+                  />
                   <option
                     key="1"
                     value={1}

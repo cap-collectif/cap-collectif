@@ -30,8 +30,6 @@ export class OpinionRow extends Component<Props, State> {
         input: {
           opinionId,
         },
-      }).then(() => {
-        return true;
       });
     });
   }

@@ -714,7 +714,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
         <div
           className="col-sm-9"
         >
-          <ForwardRef(Relay(UserArchiveRequestButton))
+          <Relay(UserArchiveRequestButton)
             viewer={
               Object {
                 "dateOfBirth": "29-02-1990",
@@ -1279,7 +1279,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
         <div
           className="col-sm-9"
         >
-          <ForwardRef(Relay(UserArchiveRequestButton))
+          <Relay(UserArchiveRequestButton)
             viewer={
               Object {
                 "address": "12 rue des boulets",
@@ -2200,7 +2200,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
         <div
           className="col-sm-9"
         >
-          <ForwardRef(Relay(UserArchiveRequestButton))
+          <Relay(UserArchiveRequestButton)
             viewer={
               Object {
                 "address": "12 rue des boulets",

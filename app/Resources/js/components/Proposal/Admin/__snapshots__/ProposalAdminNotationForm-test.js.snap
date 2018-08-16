@@ -8,7 +8,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
     className="box-content box-content__notation-form"
   >
     <div>
-      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+      <Relay(Connect(InjectIntl(ReduxForm)))
         proposal={
           Object {
             "estimation": 1000,

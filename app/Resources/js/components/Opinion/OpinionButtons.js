@@ -38,7 +38,7 @@ class OpinionButtons extends React.Component<Props> {
         return (
           <React.Fragment>
             <OpinionVersionEditModal version={opinion} />
-            <OpinionVersionEditButton style={{ marginLeft: '5px' }} />
+            <OpinionVersionEditButton className="ml-5" />
           </React.Fragment>
         );
       }
@@ -68,7 +68,7 @@ class OpinionButtons extends React.Component<Props> {
           opinion.section.url && (
             <ShareButtonDropdown
               id="opinion-share-button"
-              style={{ marginLeft: '5px' }}
+              className="ml-5"
               title={opinion.title}
               url={opinion.section.url}
             />

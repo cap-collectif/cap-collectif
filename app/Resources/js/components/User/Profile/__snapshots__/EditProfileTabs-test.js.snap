@@ -201,7 +201,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="profile"
         >
-          <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+          <Relay(Connect(InjectIntl(ReduxForm)))
             viewer={
               Object {
                 "displayName": "iAmAUser",
@@ -218,7 +218,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="account"
         >
-          <ForwardRef(Relay(Connect(AccountBox)))
+          <Relay(Connect(AccountBox))
             viewer={
               Object {
                 "displayName": "iAmAUser",
@@ -235,7 +235,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="personal-data"
         >
-          <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+          <Relay(Connect(InjectIntl(ReduxForm)))
             viewer={
               Object {
                 "displayName": "iAmAUser",
@@ -258,7 +258,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="notifications"
         >
-          <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+          <Relay(Connect(InjectIntl(ReduxForm)))
             viewer={
               Object {
                 "displayName": "iAmAUser",
@@ -275,7 +275,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="followings"
         >
-          <ForwardRef(Relay(FollowingsProposals))
+          <Relay(FollowingsTab)
             viewer={
               Object {
                 "displayName": "iAmAUser",
@@ -446,7 +446,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="personal-data"
         >
-          <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+          <Relay(Connect(InjectIntl(ReduxForm)))
             viewer={
               Object {
                 "displayName": "iAmAUser",
@@ -467,7 +467,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="notifications"
         >
-          <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+          <Relay(Connect(InjectIntl(ReduxForm)))
             viewer={
               Object {
                 "displayName": "iAmAUser",
@@ -484,7 +484,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="tab-pane"
           eventKey="followings"
         >
-          <ForwardRef(Relay(FollowingsProposals))
+          <Relay(FollowingsTab)
             viewer={
               Object {
                 "displayName": "iAmAUser",

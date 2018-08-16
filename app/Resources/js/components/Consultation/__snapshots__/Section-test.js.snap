@@ -19,7 +19,7 @@ exports[`<Section /> renders correcty 1`] = `
       }
     }
   >
-    <ForwardRef(Relay(InjectIntl(OpinionList)))
+    <Relay(InjectIntl(OpinionList))
       consultation={
         Object {
           "$fragmentRefs": null,

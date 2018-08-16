@@ -58,7 +58,7 @@ exports[`<OpinionCreateModal /> renders correctly 1`] = `
         />
       </p>
     </div>
-    <ForwardRef(Relay(ReduxForm))
+    <Relay(ReduxForm)
       consultation={
         Object {
           "$fragmentRefs": null,

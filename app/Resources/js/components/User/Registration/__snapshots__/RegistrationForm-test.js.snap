@@ -319,9 +319,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     <FormattedMessage
       id="registration.select.type"
       values={Object {}}
-    >
-      <Component />
-    </FormattedMessage>
+    />
     <option
       key="1"
       value={1}

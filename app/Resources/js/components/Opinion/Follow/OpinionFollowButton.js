@@ -172,10 +172,6 @@ export class OpinionFollowButton extends React.Component<Props, State> {
                     if (opinion.viewerIsFollowing) {
                       return UnfollowOpinionMutation.commit({
                         input: { opinionId: opinion.id },
-                      }).then(() => {
-                        this.setState({
-                          isJustFollowed: false,
-                        });
                       });
                     }
                   }}>

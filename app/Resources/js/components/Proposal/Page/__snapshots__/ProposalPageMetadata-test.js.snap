@@ -24,7 +24,7 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
         />
         Nom du quartier
       </div>
-      <ForwardRef(Relay(ProposalDetailEstimation))
+      <Relay(ProposalDetailEstimation)
         proposal={
           Object {
             "$refType": null,
@@ -43,7 +43,7 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
         }
         showNullEstimation={true}
       />
-      <ForwardRef(Relay(ProposalDetailLikers))
+      <Relay(ProposalDetailLikers)
         componentClass="div"
         proposal={
           Object {

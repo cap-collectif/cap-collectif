@@ -133,9 +133,7 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     <FormattedMessage
       id="proposal.select.theme"
       values={Object {}}
-    >
-      <Component />
-    </FormattedMessage>
+    />
     <option
       key="theme1"
       value="theme1"
@@ -161,9 +159,7 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     <FormattedMessage
       id="proposal.select.category"
       values={Object {}}
-    >
-      <Component />
-    </FormattedMessage>
+    />
     <option
       key="category1"
       value="category1"
@@ -210,9 +206,7 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     <FormattedMessage
       id="proposal.select.district"
       values={Object {}}
-    >
-      <Component />
-    </FormattedMessage>
+    />
     <option
       key="district1"
       value="district1"
@@ -435,9 +429,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     <FormattedMessage
       id="proposal.select.theme"
       values={Object {}}
-    >
-      <Component />
-    </FormattedMessage>
+    />
     <option
       key="theme1"
       value="theme1"
@@ -463,9 +455,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     <FormattedMessage
       id="proposal.select.category"
       values={Object {}}
-    >
-      <Component />
-    </FormattedMessage>
+    />
     <option
       key="category1"
       value="category1"
@@ -512,9 +502,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     <FormattedMessage
       id="proposal.select.district"
       values={Object {}}
-    >
-      <Component />
-    </FormattedMessage>
+    />
     <option
       key="district1"
       value="district1"

@@ -14,7 +14,7 @@ exports[`<ProposalDetailLikers /> should render a <OverlayTrigger /> with <Toolt
         id="proposal-1-likers-tooltip-"
         placement="right"
       >
-        <ForwardRef(Relay(ProposalDetailLikersTooltipLabel))
+        <Relay(ProposalDetailLikersTooltipLabel)
           proposal={
             Object {
               "$fragmentRefs": null,
@@ -38,7 +38,7 @@ exports[`<ProposalDetailLikers /> should render a <OverlayTrigger /> with <Toolt
       ]
     }
   >
-    <ForwardRef(Relay(ProposalDetailLikersLabel))
+    <Relay(ProposalDetailLikersLabel)
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -68,7 +68,7 @@ exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
         id="proposal-1-likers-tooltip-"
         placement="right"
       >
-        <ForwardRef(Relay(ProposalDetailLikersTooltipLabel))
+        <Relay(ProposalDetailLikersTooltipLabel)
           proposal={
             Object {
               "$fragmentRefs": null,
@@ -92,7 +92,7 @@ exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
       ]
     }
   >
-    <ForwardRef(Relay(ProposalDetailLikersLabel))
+    <Relay(ProposalDetailLikersLabel)
       proposal={
         Object {
           "$fragmentRefs": null,

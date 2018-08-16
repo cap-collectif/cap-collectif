@@ -9,7 +9,7 @@ exports[`<Opinion /> renders correcty 1`] = `
   <div
     className="left-block"
   >
-    <ForwardRef(Relay(OpinionPreview))
+    <Relay(OpinionPreview)
       opinion={
         Object {
           "$fragmentRefs": null,

@@ -9,7 +9,7 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
       eventKey={1}
       title="group.admin.users"
     >
-      <ForwardRef(Relay(Connect(InjectIntl(GroupAdminUsers))))
+      <Relay(Connect(InjectIntl(GroupAdminUsers)))
         group={Object {}}
       />
     </Tab>
@@ -17,7 +17,7 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
       eventKey={2}
       title="group.admin.parameters"
     >
-      <ForwardRef(Relay(Connect(ReduxForm)))
+      <Relay(Connect(ReduxForm))
         group={Object {}}
       />
     </Tab>

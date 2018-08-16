@@ -45,7 +45,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
         title="Titre proposition"
         url={true}
       />
-      <ForwardRef(Relay(Connect(ProposalReportButton)))
+      <Relay(Connect(ProposalReportButton))
         proposal={
           Object {
             "$fragmentRefs": null,
@@ -74,7 +74,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
       />
     </div>
   </div>
-  <ForwardRef(Relay(Connect(InjectIntl(ProposalEditModal))))
+  <Relay(Connect(InjectIntl(ProposalEditModal)))
     proposal={
       Object {
         "$fragmentRefs": null,
@@ -101,7 +101,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(Connect(ProposalDeleteModal)))
+  <Relay(Connect(ProposalDeleteModal))
     proposal={
       Object {
         "$fragmentRefs": null,
@@ -128,7 +128,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
       }
     }
   />
-  <ForwardRef(Relay(ProposalPageComments))
+  <Relay(ProposalPageComments)
     proposal={
       Object {
         "$fragmentRefs": null,

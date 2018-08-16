@@ -13,23 +13,17 @@ exports[`<ProposalListOrderSorting /> should render the list order sorting compo
       id="global.filter_f_random"
       key="random"
       values={Object {}}
-    >
-      <Component />
-    </FormattedMessage>
+    />
     <FormattedMessage
       id="global.filter_f_last"
       key="last"
       values={Object {}}
-    >
-      <Component />
-    </FormattedMessage>
+    />
     <FormattedMessage
       id="global.filter_f_old"
       key="old"
       values={Object {}}
-    >
-      <Component />
-    </FormattedMessage>
+    />
     ) }
   </InjectIntl(ReactBootstrapInput)>
 </div>
