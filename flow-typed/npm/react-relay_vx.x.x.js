@@ -1128,11 +1128,11 @@ declare module "react-relay" {
     config: MutationConfig<T>
   ): Disposable;
 
-  declare export type ReadyState = {
+  declare export type ReadyState = {|
     error: ?Error,
     props: ?Object,
     retry: ?() => void
-  };
+  |};
 
   /**
    * Classic environment below here

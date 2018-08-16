@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { EvaluationsIndexPage, render } from './EvaluationsIndexPage';
+import { $fragmentRefs } from '../../mocks';
 
 describe('<EvaluationsIndexPage />', () => {
   const props = {};
@@ -14,7 +15,7 @@ describe('<EvaluationsIndexPage />', () => {
 
   it('render function renders correctly', () => {
     const component = render({
-      props: { proposalForms: [{ id: '1' }, { id: '2' }] },
+      props: { proposalForms: [{ id: '1', $fragmentRefs }, { id: '2', $fragmentRefs }] },
       error: null,
       retry: jest.fn(),
     });

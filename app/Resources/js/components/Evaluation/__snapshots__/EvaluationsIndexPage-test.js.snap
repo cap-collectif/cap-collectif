@@ -6,6 +6,7 @@ exports[`<EvaluationsIndexPage /> render function renders correctly 1`] = `
     key="1"
     proposalForm={
       Object {
+        "$fragmentRefs": null,
         "id": "1",
       }
     }
@@ -14,6 +15,7 @@ exports[`<EvaluationsIndexPage /> render function renders correctly 1`] = `
     key="2"
     proposalForm={
       Object {
+        "$fragmentRefs": null,
         "id": "2",
       }
     }

@@ -70,7 +70,7 @@ export class ArgumentList extends React.Component<Props, State> {
             argumentableId: this.props.argumentable.id,
             type: type === 'SIMPLE' ? 'FOR' : type,
           }}
-          render={({ error, props }: ReadyState & { props?: ?ArgumentListQueryResponse }) => {
+          render={({ error, props }: { props?: ?ArgumentListQueryResponse } & ReadyState) => {
             if (error) {
               return graphqlError;
             }

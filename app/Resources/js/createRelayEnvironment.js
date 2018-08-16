@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import type { Environment as TEnvironment } from 'react-relay';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import RelayNetworkLogger from 'relay-runtime/lib/RelayNetworkLogger';
 import executeFunction from './network/executeFunction';
@@ -15,7 +16,7 @@ const network = Network.create(
     : executeFunction,
 );
 
-export default new Environment({
+export default (new Environment({
   network,
   store,
-});
+}): TEnvironment);

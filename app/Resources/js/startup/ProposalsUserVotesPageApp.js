@@ -35,7 +35,7 @@ const mainNode = (data: { projectId: string }) => {
           render={({
             error,
             props,
-          }: ReadyState & { props: ?ProposalsUserVotesPageAppQueryResponse }) => {
+          }: { props: ?ProposalsUserVotesPageAppQueryResponse } & ReadyState) => {
             if (error) {
               return graphqlError;
             }

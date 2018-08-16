@@ -8,6 +8,7 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 import ArgumentItem from './ArgumentItem';
 import type { UnpublishedArgumentListQueryResponse } from './__generated__/UnpublishedArgumentListQuery.graphql';
 import type { ArgumentList_argumentable } from './__generated__/ArgumentList_argumentable.graphql';
+import type { State } from '../../types';
 
 type Props = {
   argumentable: ArgumentList_argumentable,
@@ -54,13 +55,16 @@ export class UnpublishedUnpublishedArgumentList extends React.Component<Props> {
             argumentableId: this.props.argumentable.id,
             type: type === 'SIMPLE' ? 'FOR' : type,
           }}
-          render={({ props }: ReadyState & { props?: ?UnpublishedArgumentListQueryResponse }) => {
+          render={({ props }: { props: ?UnpublishedArgumentListQueryResponse } & ReadyState) => {
             if (props) {
               const argumentable = props.argumentable;
               if (!argumentable || !argumentable.viewerArgumentsUnpublished) {
                 return graphqlError;
               }
-              if (argumentable.viewerArgumentsUnpublished.totalCount === 0) {
+              if (
+                argumentable.viewerArgumentsUnpublished.totalCount === 0 ||
+                !argumentable.viewerArgumentsUnpublished.edges
+              ) {
                 return null;
               }
               return (
@@ -97,7 +101,7 @@ export class UnpublishedUnpublishedArgumentList extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   isAuthenticated: !!state.user.user,
 });
 const container = connect(mapStateToProps)(UnpublishedUnpublishedArgumentList);

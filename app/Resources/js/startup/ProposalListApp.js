@@ -36,7 +36,7 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
             }
           }
         `}
-        render={({ error, props }: ReadyState & { props: ?ProposalListAppQueryResponse }) => {
+        render={({ error, props }: { props: ?ProposalListAppQueryResponse } & ReadyState) => {
           if (error) {
             return graphqlError;
           }
@@ -44,16 +44,20 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
             if (props.proposalForms) {
               return (
                 <div>
-                  {props.proposalForms.filter(p => p.proposals.totalCount > 0).map(proposalForm => (
-                    <div key={proposalForm.id}>
-                      <h3>{proposalForm.step.title}</h3>
-                      <ProposalList
-                        step={null}
-                        proposals={proposalForm.proposals}
-                        viewer={props.viewer || null}
-                      />
-                    </div>
-                  ))}
+                  {props.proposalForms
+                    .filter(p => p && p.proposals.totalCount > 0)
+                    .filter(Boolean)
+                    .map(proposalForm => (
+                      <div key={proposalForm.id}>
+                        {proposalForm.step ? <h3>{proposalForm.step.title}</h3> : null}
+                        {/* $FlowFixMe */}
+                        <ProposalList
+                          step={null}
+                          proposals={proposalForm.proposals}
+                          viewer={props.viewer || null}
+                        />
+                      </div>
+                    ))}
                 </div>
               );
             }

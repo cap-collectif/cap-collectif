@@ -113,7 +113,7 @@ class OpinionSourceBox extends React.Component<Props, State> {
                 orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
               }: OpinionSourceBoxQueryVariables)
             }
-            render={({ error, props }: ReadyState & { props?: ?OpinionSourceBoxQueryResponse }) => {
+            render={({ error, props }: { props?: ?OpinionSourceBoxQueryResponse } & ReadyState) => {
               if (error) {
                 return graphqlError;
               }

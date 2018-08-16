@@ -12,9 +12,9 @@ type Props = { proposalFormId: Uuid };
 const component = ({
   error,
   props,
-}: ReadyState & {
+}: {
   props: ?ProposalFormAdminPageQueryResponse,
-}) => {
+} & ReadyState) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
