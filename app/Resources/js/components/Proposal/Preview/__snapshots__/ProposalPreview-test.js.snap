@@ -13,7 +13,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
     className="proposal-preview"
     id="proposal-1"
   >
-    <Relay(ProposalPreviewHeader)
+    <ForwardRef(Relay(ProposalPreviewHeader))
       proposal={
         Object {
           "$refType": null,
@@ -24,7 +24,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
         }
       }
     />
-    <Relay(Connect(ProposalPreviewBody))
+    <ForwardRef(Relay(Connect(ProposalPreviewBody)))
       proposal={
         Object {
           "$refType": null,
@@ -41,7 +41,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
       }
       viewer={null}
     />
-    <Relay(ProposalPreviewFooter)
+    <ForwardRef(Relay(ProposalPreviewFooter))
       proposal={
         Object {
           "$refType": null,
@@ -52,7 +52,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
         }
       }
     />
-    <Relay(ProposalStatus)
+    <ForwardRef(Relay(ProposalStatus))
       proposal={
         Object {
           "$refType": null,
@@ -80,7 +80,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
     className="bg-vip proposal-preview"
     id="proposal-1"
   >
-    <Relay(ProposalPreviewHeader)
+    <ForwardRef(Relay(ProposalPreviewHeader))
       proposal={
         Object {
           "$refType": null,
@@ -91,7 +91,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
         }
       }
     />
-    <Relay(Connect(ProposalPreviewBody))
+    <ForwardRef(Relay(Connect(ProposalPreviewBody)))
       proposal={
         Object {
           "$refType": null,
@@ -108,7 +108,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
       }
       viewer={null}
     />
-    <Relay(ProposalPreviewFooter)
+    <ForwardRef(Relay(ProposalPreviewFooter))
       proposal={
         Object {
           "$refType": null,
@@ -119,7 +119,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
         }
       }
     />
-    <Relay(ProposalStatus)
+    <ForwardRef(Relay(ProposalStatus))
       proposal={
         Object {
           "$refType": null,

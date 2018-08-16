@@ -33,7 +33,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       eventKey={1}
       title="proposal_form.admin.configuration"
     >
-      <Relay(InjectIntl(Connect(ReduxForm)))
+      <ForwardRef(Relay(InjectIntl(Connect(ReduxForm))))
         proposalForm={
           Object {
             "reference": "2",
@@ -46,7 +46,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       eventKey={2}
       title="proposal_form.admin.evaluation"
     >
-      <Relay(InjectIntl(Connect(ReduxForm)))
+      <ForwardRef(Relay(InjectIntl(Connect(ReduxForm))))
         proposalForm={
           Object {
             "reference": "2",
@@ -59,7 +59,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       eventKey={3}
       title="proposal_form.admin.notification"
     >
-      <Relay(InjectIntl(Connect(ReduxForm)))
+      <ForwardRef(Relay(InjectIntl(Connect(ReduxForm))))
         proposalForm={
           Object {
             "reference": "2",
@@ -72,7 +72,7 @@ exports[`<ProposalFormAdminPageTabs /> render correctly 1`] = `
       eventKey={4}
       title="proposal_form.admin.settings"
     >
-      <Relay(InjectIntl(Connect(ReduxForm)))
+      <ForwardRef(Relay(InjectIntl(Connect(ReduxForm))))
         proposalForm={
           Object {
             "reference": "2",

@@ -94,7 +94,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
             }
           />
         </span>
-        <Relay(Connect(UnpublishedLabel))
+        <ForwardRef(Relay(Connect(UnpublishedLabel)))
           publishable={
             Object {
               "$fragmentRefs": null,
@@ -123,7 +123,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
   <div
     className="proposal__buttons"
   >
-    <Relay(ProposalFollowButton)
+    <ForwardRef(Relay(ProposalFollowButton))
       isAuthenticated={false}
       proposal={
         Object {
@@ -245,7 +245,7 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
             }
           />
         </span>
-        <Relay(Connect(UnpublishedLabel))
+        <ForwardRef(Relay(Connect(UnpublishedLabel)))
           publishable={
             Object {
               "$fragmentRefs": null,
@@ -276,7 +276,7 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
   <div
     className="proposal__buttons"
   >
-    <Relay(ProposalFollowButton)
+    <ForwardRef(Relay(ProposalFollowButton))
       isAuthenticated={false}
       proposal={
         Object {

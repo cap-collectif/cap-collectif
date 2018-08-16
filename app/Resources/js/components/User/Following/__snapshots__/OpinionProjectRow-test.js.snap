@@ -96,7 +96,7 @@ exports[`<OpinionProjectRow /> should render the project 1 with its proposal dis
       bsClass="list-group"
       className="list-group-custom"
     >
-      <Relay(OpinionRow)
+      <ForwardRef(Relay(OpinionRow))
         key="0"
         opinion={
           Object {
@@ -109,7 +109,7 @@ exports[`<OpinionProjectRow /> should render the project 1 with its proposal dis
           }
         }
       />
-      <Relay(OpinionRow)
+      <ForwardRef(Relay(OpinionRow))
         key="1"
         opinion={
           Object {
@@ -173,7 +173,7 @@ exports[`<OpinionProjectRow /> should render the project 2 with its proposal dis
       bsClass="list-group"
       className="list-group-custom"
     >
-      <Relay(OpinionRow)
+      <ForwardRef(Relay(OpinionRow))
         key="0"
         opinion={
           Object {

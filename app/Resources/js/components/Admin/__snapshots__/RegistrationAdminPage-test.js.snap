@@ -296,7 +296,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
             Object {
               "link": <a
                 className="external-link"
-                href="about:///admin/settings/settings.global/list"
+                href="http://localhost/admin/settings/settings.global/list"
               >
                 <FormattedMessage
                   id="proposal.admin.general"
@@ -647,7 +647,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
             Object {
               "link": <a
                 className="external-link"
-                href="about:///admin/settings/settings.global/list"
+                href="http://localhost/admin/settings/settings.global/list"
               >
                 <FormattedMessage
                   id="proposal.admin.general"

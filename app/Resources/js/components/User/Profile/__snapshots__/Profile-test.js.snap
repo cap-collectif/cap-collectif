@@ -158,7 +158,9 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
             <FormattedMessage
               id="registration.select.type"
               values={Object {}}
-            />
+            >
+              <Component />
+            </FormattedMessage>
             <option
               key="1"
               value={1}

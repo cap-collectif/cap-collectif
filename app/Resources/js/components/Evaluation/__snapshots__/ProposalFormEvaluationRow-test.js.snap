@@ -13,7 +13,7 @@ exports[`<ProposalFormEvaluationRow /> renders correcty 1`] = `
     </a>
   </td>
   <td>
-    <Relay(ProposalCollectStatus)
+    <ForwardRef(Relay(ProposalCollectStatus))
       proposal={
         Object {
           "reference": "1-1",
@@ -24,7 +24,7 @@ exports[`<ProposalFormEvaluationRow /> renders correcty 1`] = `
     />
   </td>
   <td>
-    <Relay(ProposalLastUpdateInfo)
+    <ForwardRef(Relay(ProposalLastUpdateInfo))
       proposal={
         Object {
           "reference": "1-1",

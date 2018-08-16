@@ -103,7 +103,7 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower with 
     <div
       className="clearfix"
     />
-    <Relay(ProposalPageFollowers)
+    <ForwardRef(Relay(ProposalPageFollowers))
       pageAdmin={true}
       proposal={
         Object {
@@ -183,7 +183,7 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower witho
     <div
       className="clearfix"
     />
-    <Relay(ProposalPageFollowers)
+    <ForwardRef(Relay(ProposalPageFollowers))
       pageAdmin={true}
       proposal={
         Object {

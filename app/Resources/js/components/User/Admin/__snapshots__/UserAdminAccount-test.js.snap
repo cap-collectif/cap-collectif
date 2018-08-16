@@ -159,7 +159,7 @@ exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
           valid={true}
         />
       </ButtonToolbar>
-      <Relay(DeleteAccountModal)
+      <ForwardRef(Relay(DeleteAccountModal))
         handleClose={[Function]}
         redirectToAdminUrl={true}
         show={false}

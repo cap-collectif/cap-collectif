@@ -64,6 +64,8 @@ export class FollowingsTab extends Component<Props, State> {
       });
     }
 
+    console.log(Object.keys(projectsById).length, projectsById);
+
     return (
       <div>
         <h2 className="page-header">
@@ -127,9 +129,39 @@ export class FollowingsTab extends Component<Props, State> {
 export default createFragmentContainer(
   FollowingsTab,
   graphql`
-    fragment FollowingsTab_viewer on User {
+    fragment FollowingsTab_viewer on User
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 1000 }
+        cursor: { type: "String", defaultValue: null }
+      ) {
       ...ProposalProjectRow_viewer
       ...OpinionProjectRow_viewer
+      followingProposals(first: $count, after: $cursor) {
+        totalCount
+        edges {
+          node {
+            ...ProposalRow_proposal
+            project {
+              id
+              title
+              url
+            }
+          }
+        }
+      }
+      followingOpinions(first: $count, after: $cursor) {
+        totalCount
+        edges {
+          node {
+            ...OpinionRow_opinion
+            project {
+              id
+              title
+              url
+            }
+          }
+        }
+      }
     }
   `,
 );

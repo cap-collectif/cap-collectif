@@ -2,7 +2,7 @@
 
 exports[`<EvaluationsIndexPage /> render function renders correctly 1`] = `
 <div>
-  <Relay(ProposalFormEvaluationList)
+  <ForwardRef(Relay(ProposalFormEvaluationList))
     key="1"
     proposalForm={
       Object {
@@ -10,7 +10,7 @@ exports[`<EvaluationsIndexPage /> render function renders correctly 1`] = `
       }
     }
   />
-  <Relay(ProposalFormEvaluationList)
+  <ForwardRef(Relay(ProposalFormEvaluationList))
     key="2"
     proposalForm={
       Object {

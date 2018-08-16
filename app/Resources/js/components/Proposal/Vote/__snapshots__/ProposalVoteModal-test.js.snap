@@ -70,7 +70,7 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
         <p>
           We need to collect
         </p>
-        <Relay(Connect(ReduxForm))
+        <ForwardRef(Relay(Connect(ReduxForm)))
           step={
             Object {
               "$fragmentRefs": null,
@@ -113,7 +113,7 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
         }
       />
     </h4>
-    <Relay(Connect(InjectIntl(ReduxForm)))
+    <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
       activeKeyboard={[Function]}
       disabledKeyboard={[Function]}
       onSubmit={[Function]}

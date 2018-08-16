@@ -66,7 +66,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         <div
           className="left-block"
         >
-          <Relay(OpinionPreview)
+          <ForwardRef(Relay(OpinionPreview))
             link={false}
             opinion={
               Object {
@@ -88,7 +88,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
       </ListGroupItem>
     </ListGroup>
   </div>
-  <Relay(OpinionAppendices)
+  <ForwardRef(Relay(OpinionAppendices))
     opinion={
       Object {
         "$fragmentRefs": null,
@@ -116,7 +116,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
     >
       title
     </p>
-    <Relay(OpinionBody)
+    <ForwardRef(Relay(OpinionBody))
       opinion={
         Object {
           "$fragmentRefs": null,
@@ -131,7 +131,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         }
       }
     />
-    <Relay(OpinionVotesBox)
+    <ForwardRef(Relay(OpinionVotesBox))
       opinion={
         Object {
           "$fragmentRefs": null,
@@ -161,7 +161,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         }
       }
     >
-      <Relay(Connect(OpinionButtons))
+      <ForwardRef(Relay(Connect(OpinionButtons)))
         opinion={
           Object {
             "$fragmentRefs": null,
@@ -178,7 +178,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
       />
     </div>
   </div>
-  <Relay(OpinionAnswer)
+  <ForwardRef(Relay(OpinionAnswer))
     opinion={
       Object {
         "$fragmentRefs": null,
