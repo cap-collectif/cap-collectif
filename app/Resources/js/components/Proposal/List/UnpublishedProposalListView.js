@@ -15,9 +15,15 @@ type Props = {
 export class UnpublishedProposalListView extends React.Component<Props> {
   render() {
     const { step, viewer } = this.props;
-    if (!step.viewerProposalsUnpublished || step.viewerProposalsUnpublished.totalCount === 0) {
+    if (
+      !step.viewerProposalsUnpublished ||
+      step.viewerProposalsUnpublished.totalCount === 0 ||
+      !step.viewerProposalsUnpublished.edges ||
+      !step.viewerProposalsUnpublished.edges[0]
+    ) {
       return null;
     }
+    const notPublishedReason = step.viewerProposalsUnpublished.edges[0].node.notPublishedReason;
     return (
       <Panel bsStyle="danger">
         <Panel.Heading>
@@ -28,7 +34,14 @@ export class UnpublishedProposalListView extends React.Component<Props> {
                 values={{ num: step.viewerProposalsUnpublished.totalCount }}
               />
             </strong>{' '}
-            <FormattedMessage id="awaiting-publication-lowercase" />
+            <FormattedMessage
+              id={
+                notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION'
+                  ? 'awaiting-publication-lowercase'
+                  : 'unpublished-lowercase'
+              }
+              values={{ num: step.viewerProposalsUnpublished.totalCount }}
+            />
           </Panel.Title>
         </Panel.Heading>
         <Panel.Body>
@@ -64,6 +77,7 @@ export default createFragmentContainer(UnpublishedProposalListView, {
         edges {
           node {
             id
+            notPublishedReason
           }
         }
       }

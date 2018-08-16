@@ -101,12 +101,13 @@ class ProposalRepository extends EntityRepository
         );
     }
 
-    public function getUnpublishedByFormAndAuthor(ProposalForm $form, User $author)
+    public function getUnpublishedByFormAndAuthor(ProposalForm $form, User $author): array
     {
         return $this->createQueryBuilder('proposal')
             ->andWhere('proposal.proposalForm = :form')
             ->andWhere('proposal.author = :author')
             ->andWhere('proposal.published = false')
+            ->andWhere('proposal.draft = false')
             ->setParameter('form', $form)
             ->setParameter('author', $author)
             ->getQuery()

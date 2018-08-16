@@ -20,7 +20,7 @@ describe('<UnpublishedProposalListView />', () => {
       viewerProposalsUnpublished: {
         $fragmentRefs,
         totalCount: 1,
-        edges: [{ node: { id: 'proposal1' } }],
+        edges: [{ node: { id: 'proposal1', notPublishedReason: 'WAITING_AUTHOR_CONFIRMATION' } }],
       },
     };
     const wrapper = shallow(<UnpublishedProposalListView viewer={viewer} step={step} />);

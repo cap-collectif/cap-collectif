@@ -26,7 +26,11 @@ exports[`<UnpublishedOpinionList /> renders correcty 1`] = `
        
       <FormattedMessage
         id="awaiting-publication-lowercase"
-        values={Object {}}
+        values={
+          Object {
+            "num": 1,
+          }
+        }
       />
     </PanelTitle>
   </PanelHeading>
@@ -40,6 +44,7 @@ exports[`<UnpublishedOpinionList /> renders correcty 1`] = `
         Object {
           "$fragmentRefs": null,
           "id": "opinion1",
+          "notPublishedReason": "WAITING_AUTHOR_CONFIRMATION",
         }
       }
     />

@@ -25,7 +25,11 @@ exports[`<UnpublishedProposalListView /> renders correcty 1`] = `
        
       <FormattedMessage
         id="awaiting-publication-lowercase"
-        values={Object {}}
+        values={
+          Object {
+            "num": 1,
+          }
+        }
       />
     </PanelTitle>
   </PanelHeading>
@@ -42,6 +46,7 @@ exports[`<UnpublishedProposalListView /> renders correcty 1`] = `
             Object {
               "node": Object {
                 "id": "proposal1",
+                "notPublishedReason": "WAITING_AUTHOR_CONFIRMATION",
               },
             },
           ],
@@ -59,6 +64,7 @@ exports[`<UnpublishedProposalListView /> renders correcty 1`] = `
               Object {
                 "node": Object {
                   "id": "proposal1",
+                  "notPublishedReason": "WAITING_AUTHOR_CONFIRMATION",
                 },
               },
             ],

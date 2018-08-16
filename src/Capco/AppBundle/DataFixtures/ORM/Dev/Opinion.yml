@@ -224,3 +224,15 @@ Capco\AppBundle\Entity\Opinion:
     Author: '@user2'
     OpinionType: '@opinionType6'
     position: 1
+
+  opinion{64..67}:
+    id: 'opinion<current()>'
+    step: '@cstep2'
+    createdAt: <dateTimeBetween("-50 days", "-40 days")>
+    title: Opinion <current()> non publié à temps
+    body: |
+      <p><text(100)></p>
+      <p><text(300)></p>
+    Author: '@user5'
+    OpinionType: '@opinionType12'
+  

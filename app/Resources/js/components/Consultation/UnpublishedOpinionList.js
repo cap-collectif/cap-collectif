@@ -15,10 +15,15 @@ export class UnpublishedOpinionList extends React.Component<Props> {
     const { consultation } = this.props;
     if (
       !consultation.viewerOpinionsUnpublished ||
-      consultation.viewerOpinionsUnpublished.totalCount === 0
+      consultation.viewerOpinionsUnpublished.totalCount === 0 ||
+      !consultation.viewerOpinionsUnpublished.edges ||
+      !consultation.viewerOpinionsUnpublished.edges[0] ||
+      !consultation.viewerOpinionsUnpublished.edges[0].node
     ) {
       return null;
     }
+    const notPublishedReason =
+      consultation.viewerOpinionsUnpublished.edges[0].node.notPublishedReason;
     return (
       <Panel bsStyle="danger" className="panel-custom">
         <Panel.Heading>
@@ -29,7 +34,14 @@ export class UnpublishedOpinionList extends React.Component<Props> {
                 values={{ num: consultation.viewerOpinionsUnpublished.totalCount }}
               />
             </strong>{' '}
-            <FormattedMessage id="awaiting-publication-lowercase" />
+            <FormattedMessage
+              id={
+                notPublishedReason === 'WAITING_AUTHOR_CONFIRMATION'
+                  ? 'awaiting-publication-lowercase'
+                  : 'unpublished-lowercase'
+              }
+              values={{ num: consultation.viewerOpinionsUnpublished.totalCount }}
+            />
           </Panel.Title>
         </Panel.Heading>
         <ListGroup className="list-group-custom">
@@ -58,6 +70,7 @@ export default createFragmentContainer(
         edges {
           node {
             id
+            notPublishedReason
             ...Opinion_opinion
           }
         }

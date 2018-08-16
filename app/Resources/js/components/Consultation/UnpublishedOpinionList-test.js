@@ -16,7 +16,15 @@ describe('<UnpublishedOpinionList />', () => {
       $refType,
       viewerOpinionsUnpublished: {
         totalCount: 1,
-        edges: [{ node: { id: 'opinion1', $fragmentRefs } }],
+        edges: [
+          {
+            node: {
+              id: 'opinion1',
+              $fragmentRefs,
+              notPublishedReason: 'WAITING_AUTHOR_CONFIRMATION',
+            },
+          },
+        ],
       },
     };
     const wrapper = shallow(<UnpublishedOpinionList consultation={consultation} />);
