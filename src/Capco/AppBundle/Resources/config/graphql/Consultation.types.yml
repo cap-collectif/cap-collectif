@@ -35,12 +35,12 @@ Consultation:
         argsBuilder: 'Relay::Connection'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
-      viewerUnpublishedOpinions:
+      viewerOpinionsUnpublished:
         access: "@=hasRole('ROLE_USER')"
         type: 'OpinionConnection'
         argsBuilder: 'Relay::Connection'
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerUnpublishedOpinionsResolver", [value, args, getUser()])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", [value, args, getUser()])'
       contributionConnection:
         type: 'ContributionConnection'
         argsBuilder: 'Relay::Connection'

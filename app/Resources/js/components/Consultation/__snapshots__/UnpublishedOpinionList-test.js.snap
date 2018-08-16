@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UnpublishedOpinionList /> renders correcty 1`] = `
+<Uncontrolled(Panel)
+  bsStyle="danger"
+  className="panel-custom"
+>
+  <PanelHeading
+    bsClass="panel"
+    componentClass="div"
+  >
+    <PanelTitle
+      bsClass="panel"
+      componentClass="div"
+    >
+      <strong>
+        <FormattedMessage
+          id="count-proposal"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </strong>
+       
+      <FormattedMessage
+        id="awaiting-publication-lowercase"
+        values={Object {}}
+      />
+    </PanelTitle>
+  </PanelHeading>
+  <ListGroup
+    bsClass="list-group"
+    className="list-group-custom"
+  >
+    <ForwardRef(Relay(Opinion))
+      key="0"
+      opinion={
+        Object {
+          "$fragmentRefs": null,
+          "id": "opinion1",
+        }
+      }
+    />
+  </ListGroup>
+</Uncontrolled(Panel)>
+`;
+
+exports[`<UnpublishedOpinionList /> renders nothing when empty 1`] = `""`;

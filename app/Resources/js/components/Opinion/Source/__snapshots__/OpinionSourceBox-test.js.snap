@@ -1,0 +1,246 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionSourceBox /> renders correcty 1`] = `
+<div>
+  <Uncontrolled(Panel)
+    bsStyle="danger"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <PanelTitle
+        bsClass="panel"
+        componentClass="div"
+      >
+        <strong>
+          <FormattedMessage
+            id="count-sources"
+            values={
+              Object {
+                "num": 2,
+              }
+            }
+          />
+        </strong>
+         
+        <FormattedMessage
+          id="awaiting-publication-lowercase"
+          values={Object {}}
+        />
+      </PanelTitle>
+    </PanelHeading>
+    <ListGroup
+      bsClass="list-group"
+      className="list-group-custom"
+    >
+      <ForwardRef(Relay(OpinionSource))
+        key="source1"
+        source={
+          Object {
+            "$fragmentRefs": null,
+            "id": "source1",
+          }
+        }
+        sourceable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "allSources": Object {
+              "totalCount": 5,
+            },
+            "id": "opinion1",
+            "viewerSourcesUnpublished": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "$fragmentRefs": null,
+                    "id": "source1",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "$fragmentRefs": null,
+                    "id": "source2",
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+          }
+        }
+      />
+      <ForwardRef(Relay(OpinionSource))
+        key="source2"
+        source={
+          Object {
+            "$fragmentRefs": null,
+            "id": "source2",
+          }
+        }
+        sourceable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "allSources": Object {
+              "totalCount": 5,
+            },
+            "id": "opinion1",
+            "viewerSourcesUnpublished": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "$fragmentRefs": null,
+                    "id": "source1",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "$fragmentRefs": null,
+                    "id": "source2",
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+          }
+        }
+      />
+    </ListGroup>
+  </Uncontrolled(Panel)>
+  <Uncontrolled(Panel)>
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <Row
+        bsClass="row"
+        componentClass="div"
+      >
+        <Col
+          bsClass="col"
+          componentClass="div"
+          md={6}
+          sm={6}
+          xs={12}
+        >
+          <ForwardRef(Relay(Connect(OpinionSourceAdd)))
+            sourceable={
+              Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "allSources": Object {
+                  "totalCount": 5,
+                },
+                "id": "opinion1",
+                "viewerSourcesUnpublished": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "$fragmentRefs": null,
+                        "id": "source1",
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "$fragmentRefs": null,
+                        "id": "source2",
+                      },
+                    },
+                  ],
+                  "totalCount": 2,
+                },
+              }
+            }
+          />
+        </Col>
+        <Col
+          bsClass="col"
+          componentClass="div"
+          md={6}
+          sm={6}
+          xs={12}
+        >
+          <Filter
+            onChange={[Function]}
+            show={true}
+            value="last"
+            values={
+              Array [
+                "popular",
+                "last",
+                "old",
+              ]
+            }
+          />
+        </Col>
+      </Row>
+    </PanelHeading>
+    <ReactRelayQueryRenderer
+      environment={
+        RelayModernEnvironment {
+          "__setNet": [Function],
+          "_deferrableSelections": Array [],
+          "_network": Object {
+            "execute": [Function],
+          },
+          "_publishQueue": RelayPublishQueue {
+            "_appliedOptimisticUpdates": Array [],
+            "_backup": Object {},
+            "_handlerProvider": [Function],
+            "_pendingBackupRebase": false,
+            "_pendingData": Array [],
+            "_pendingOptimisticUpdates": Array [],
+            "_pendingUpdaters": Array [],
+            "_store": RelayMarkSweepStore {
+              "_gcEnabled": true,
+              "_hasScheduledGC": false,
+              "_index": 0,
+              "_recordSource": Object {},
+              "_roots": Array [],
+              "_subscriptions": Array [],
+              "_updatedRecordIDs": Object {},
+            },
+          },
+          "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
+            "_hasScheduledGC": false,
+            "_index": 0,
+            "_recordSource": Object {},
+            "_roots": Array [],
+            "_subscriptions": Array [],
+            "_updatedRecordIDs": Object {},
+          },
+          "configName": undefined,
+          "unstable_internal": Object {
+            "areEqualSelectors": [Function],
+            "createFragmentSpecResolver": [Function],
+            "createOperationSelector": [Function],
+            "getDataIDsFromObject": [Function],
+            "getFragment": [Function],
+            "getRequest": [Function],
+            "getSelector": [Function],
+            "getSelectorList": [Function],
+            "getSelectorsFromObject": [Function],
+            "getVariablesFromObject": [Function],
+          },
+        }
+      }
+      query={[Function]}
+      render={[Function]}
+      variables={
+        Object {
+          "count": 25,
+          "cursor": null,
+          "isAuthenticated": true,
+          "orderBy": Object {
+            "direction": "DESC",
+            "field": "PUBLISHED_AT",
+          },
+          "sourceableId": "opinion1",
+        }
+      }
+    />
+  </Uncontrolled(Panel)>
+</div>
+`;

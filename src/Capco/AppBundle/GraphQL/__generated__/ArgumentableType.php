@@ -93,7 +93,7 @@ final class ArgumentableType extends InterfaceType implements GeneratedTypeInter
                     'access' => null,
                 ],
                 'viewerArgumentsUnpublished' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ArgumentConnection')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('ArgumentConnection'),
                     'args' => [
                         [
                             'name' => 'after',

@@ -24,7 +24,7 @@ Argumentable:
       viewerArgumentsUnpublished:
         access: "@=hasRole('ROLE_USER')"
         description: 'The unpublished arguments of to the viewer.'
-        type: 'ArgumentConnection!'
+        type: 'ArgumentConnection'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argumentable\\ArgumentableViewerArgumentsUnpublishedResolver", [value, args, getUser()])'
         argsBuilder: 'Relay::Connection'

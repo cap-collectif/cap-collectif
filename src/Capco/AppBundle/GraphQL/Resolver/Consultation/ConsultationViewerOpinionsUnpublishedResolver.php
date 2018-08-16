@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
-class ConsultationViewerUnpublishedOpinionsResolver implements ResolverInterface
+class ConsultationViewerOpinionsUnpublishedResolver implements ResolverInterface
 {
     private $opinionRepo;
 

@@ -14,8 +14,8 @@ export class UnpublishedOpinionList extends React.Component<Props> {
   render() {
     const { consultation } = this.props;
     if (
-      !consultation.viewerUnpublishedOpinions ||
-      consultation.viewerUnpublishedOpinions.totalCount === 0
+      !consultation.viewerOpinionsUnpublished ||
+      consultation.viewerOpinionsUnpublished.totalCount === 0
     ) {
       return null;
     }
@@ -26,16 +26,16 @@ export class UnpublishedOpinionList extends React.Component<Props> {
             <strong>
               <FormattedMessage
                 id="count-proposal"
-                values={{ num: consultation.viewerUnpublishedOpinions.totalCount }}
+                values={{ num: consultation.viewerOpinionsUnpublished.totalCount }}
               />
             </strong>{' '}
             <FormattedMessage id="awaiting-publication-lowercase" />
           </Panel.Title>
         </Panel.Heading>
         <ListGroup className="list-group-custom">
-          {consultation.viewerUnpublishedOpinions &&
-            consultation.viewerUnpublishedOpinions.edges &&
-            consultation.viewerUnpublishedOpinions.edges
+          {consultation.viewerOpinionsUnpublished &&
+            consultation.viewerOpinionsUnpublished.edges &&
+            consultation.viewerOpinionsUnpublished.edges
               .filter(Boolean)
               .map(edge => edge.node)
               .filter(Boolean)
@@ -53,7 +53,7 @@ export default createFragmentContainer(
   UnpublishedOpinionList,
   graphql`
     fragment UnpublishedOpinionList_consultation on Consultation {
-      viewerUnpublishedOpinions(first: 100) {
+      viewerOpinionsUnpublished(first: 100) {
         totalCount
         edges {
           node {

@@ -167,7 +167,7 @@ final class ProposalStepType extends InterfaceType implements GeneratedTypeInter
                     'access' => null,
                 ],
                 'viewerProposalsUnpublished' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('ProposalConnection'),
                     'args' => [
                         [
                             'name' => 'after',

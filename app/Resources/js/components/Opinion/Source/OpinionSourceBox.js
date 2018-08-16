@@ -24,7 +24,7 @@ type State = {
   order: 'old' | 'last' | 'popular',
 };
 
-class OpinionSourceBox extends React.Component<Props, State> {
+export class OpinionSourceBox extends React.Component<Props, State> {
   state = {
     order: 'last',
   };

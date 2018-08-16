@@ -211,7 +211,7 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
-                'viewerUnpublishedOpinions' => [
+                'viewerOpinionsUnpublished' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('OpinionConnection'),
                     'args' => [
                         [
@@ -236,7 +236,7 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerUnpublishedOpinionsResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
                     },
                     'description' => null,
                     'deprecationReason' => null,

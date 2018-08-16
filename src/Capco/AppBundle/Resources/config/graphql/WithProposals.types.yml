@@ -40,6 +40,6 @@ WithProposals:
             description: 'Affiliation options for proposals returned from the connection.'
       viewerProposalsUnpublished:
         access: "@=hasRole('ROLE_USER')"
-        type: 'ProposalConnection!'
+        type: 'ProposalConnection'
         argsBuilder: 'Relay::Connection'
         description: 'The viewer unpublished proposals (only visible by viewer).'

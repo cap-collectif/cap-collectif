@@ -1,4 +1,4 @@
-@consultation_viewerUnpublishedOpinions
+@consultation_viewerOpinionsUnpublished
 Feature: Unpublished opinions of a consultation
 
 @read-only
@@ -10,7 +10,7 @@ Scenario: Viewer wants to get his unpublished opinions
     "query": "query ($consultationId: ID!) {
       consultation: node(id: $consultationId) {
           ... on Consultation {
-              viewerUnpublishedOpinions {
+              viewerOpinionsUnpublished {
                   totalCount
                   edges {
                       node {
@@ -33,7 +33,7 @@ Scenario: Viewer wants to get his unpublished opinions
   {
     "data": {
         "consultation": {
-            "viewerUnpublishedOpinions": {
+            "viewerOpinionsUnpublished": {
               "totalCount": 10,
               "edges": [
                 {

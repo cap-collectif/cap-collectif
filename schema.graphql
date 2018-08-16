@@ -324,7 +324,7 @@ interface Argumentable {
 
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
-  ): ArgumentConnection!
+  ): ArgumentConnection
 }
 
 input ChangeArgumentInput {
@@ -609,7 +609,7 @@ type CollectStep implements Node & Step & ProposalStep {
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
-  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection!
+  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -805,7 +805,7 @@ type Consultation implements Node & Step {
 
   # A list of contributor associated with the consultation.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  viewerUnpublishedOpinions(after: String, first: Int, before: String, last: Int): OpinionConnection
+  viewerOpinionsUnpublished(after: String, first: Int, before: String, last: Int): OpinionConnection
   contributionConnection(
     after: String
     first: Int
@@ -1545,7 +1545,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
-  ): ArgumentConnection!
+  ): ArgumentConnection
 
   # The ID of an object
   id: ID!
@@ -2158,7 +2158,7 @@ type ProposalForm implements Node {
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
-  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection!
+  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
   reference: String!
   description: String
   summaryHelpText: String
@@ -2303,7 +2303,7 @@ interface ProposalStep {
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
-  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection!
+  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -2970,7 +2970,7 @@ type SelectionStep implements Node & Step & ProposalStep {
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
-  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection!
+  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -3848,7 +3848,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
-  ): ArgumentConnection!
+  ): ArgumentConnection
 
   # The ID of an object
   id: ID!

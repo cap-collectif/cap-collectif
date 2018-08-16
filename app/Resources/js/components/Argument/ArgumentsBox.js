@@ -3,7 +3,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
-import UnpublishedArgumentList from './UnpublishedArgumentList';
+import UnpublishedArgumentListRenderer from './UnpublishedArgumentListRenderer';
 import ArgumentList from './ArgumentList';
 import ArgumentCreate from './Creation/ArgumentCreate';
 import type { ArgumentsBox_opinion } from './__generated__/ArgumentsBox_opinion.graphql';
@@ -24,7 +24,7 @@ class ArgumentsBox extends React.Component<Props> {
             argumentable={argumentable}
           />
         </div>
-        <UnpublishedArgumentList type={type} argumentable={argumentable} />
+        <UnpublishedArgumentListRenderer type={type} argumentable={argumentable} />
         <ArgumentList type={type} argumentable={argumentable} />
       </div>
     );
@@ -62,7 +62,7 @@ export default createFragmentContainer(ArgumentsBox, {
     fragment ArgumentsBox_opinion on OpinionOrVersion {
       ...ArgumentCreate_argumentable
       ...ArgumentList_argumentable
-      ...UnpublishedArgumentList_argumentable
+      ...UnpublishedArgumentListRenderer_argumentable
       ... on Opinion {
         section {
           commentSystem

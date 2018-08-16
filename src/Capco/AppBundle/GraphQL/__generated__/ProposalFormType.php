@@ -117,7 +117,7 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'access' => null,
                 ],
                 'viewerProposalsUnpublished' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('ProposalConnection'),
                     'args' => [
                         [
                             'name' => 'after',

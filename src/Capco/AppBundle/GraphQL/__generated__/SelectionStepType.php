@@ -171,7 +171,7 @@ final class SelectionStepType extends ObjectType implements GeneratedTypeInterfa
                     'access' => null,
                 ],
                 'viewerProposalsUnpublished' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('ProposalConnection'),
                     'args' => [
                         [
                             'name' => 'after',

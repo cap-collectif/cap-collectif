@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UnpublishedArgumentList /> renders correcty 1`] = `
+<Uncontrolled(Panel)
+  bsStyle="danger"
+>
+  <PanelHeading
+    bsClass="panel"
+    componentClass="div"
+  >
+    <PanelTitle
+      bsClass="panel"
+      componentClass="div"
+    >
+      <strong>
+        <FormattedMessage
+          id="count-arguments-for"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </strong>
+       
+      <FormattedMessage
+        id="awaiting-publication-lowercase"
+        values={Object {}}
+      />
+    </PanelTitle>
+  </PanelHeading>
+  <ListGroup
+    bsClass="list-group"
+  >
+    <ForwardRef(Relay(ArgumentItem))
+      argument={
+        Object {
+          "$fragmentRefs": null,
+          "id": "argument1",
+        }
+      }
+      key="argument1"
+    />
+  </ListGroup>
+</Uncontrolled(Panel)>
+`;
+
+exports[`<UnpublishedArgumentList /> renders nothing when empty 1`] = `""`;
