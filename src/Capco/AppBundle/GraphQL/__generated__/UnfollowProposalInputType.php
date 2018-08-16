@@ -26,7 +26,7 @@ final class UnfollowProposalInputType extends InputObjectType implements Generat
                     'type' => Type::id(),
                     'description' => 'The proposal id',
                 ],
-                'ids' => [
+                'idsProposal' => [
                     'type' => Type::listOf(Type::nonNull(Type::id())),
                     'description' => 'Array of proposal id',
                 ],

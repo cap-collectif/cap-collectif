@@ -35,8 +35,8 @@ class UnfollowProposalMutation
             $this->unfollowAProposal($proposal, $user);
         }
 
-        if (isset($args['ids'])) {
-            foreach ($args['ids'] as $proposalId) {
+        if (isset($args['idsProposal'])) {
+            foreach ($args['idsProposal'] as $proposalId) {
                 /** @var Proposal $proposal */
                 $proposal = $this->proposalRepository->find($proposalId);
                 $this->unfollowAProposal($proposal, $user);

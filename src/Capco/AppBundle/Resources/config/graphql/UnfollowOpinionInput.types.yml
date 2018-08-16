@@ -5,6 +5,6 @@ UnfollowOpinionInput:
       opinionId:
         type: 'ID'
         description: 'The opinion id'
-      ids:
+      idsOpinion:
         type: '[ID!]'
         description: 'Array of opinion id'

@@ -3230,7 +3230,7 @@ input UnfollowOpinionInput {
   opinionId: ID
 
   # Array of opinion id
-  ids: [ID!]
+  idsOpinion: [ID!]
   clientMutationId: String
 }
 
@@ -3245,7 +3245,7 @@ input UnfollowProposalInput {
   proposalId: ID
 
   # Array of proposal id
-  ids: [ID!]
+  idsProposal: [ID!]
   clientMutationId: String
 }
 

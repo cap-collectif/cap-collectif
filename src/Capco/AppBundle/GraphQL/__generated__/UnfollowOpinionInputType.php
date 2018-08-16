@@ -26,7 +26,7 @@ final class UnfollowOpinionInputType extends InputObjectType implements Generate
                     'type' => Type::id(),
                     'description' => 'The opinion id',
                 ],
-                'ids' => [
+                'idsOpinion' => [
                     'type' => Type::listOf(Type::nonNull(Type::id())),
                     'description' => 'Array of opinion id',
                 ],

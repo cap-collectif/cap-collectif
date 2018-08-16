@@ -5,6 +5,6 @@ UnfollowProposalInput:
       proposalId:
         type: 'ID'
         description: 'The proposal id'
-      ids:
+      idsProposal:
         type: '[ID!]'
         description: 'Array of proposal id'

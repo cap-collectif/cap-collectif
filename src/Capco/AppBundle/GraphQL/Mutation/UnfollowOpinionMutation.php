@@ -38,8 +38,8 @@ class UnfollowOpinionMutation implements MutationInterface
             $this->unfollow($opinion, $user);
         }
 
-        if (isset($args['ids'])) {
-            foreach ($args['ids'] as $opinionId) {
+        if (isset($args['idsOpinion'])) {
+            foreach ($args['idsOpinion'] as $opinionId) {
                 $opinion = $this->opinionRepository->find($opinionId);
                 $this->unfollow($opinion, $user);
             }

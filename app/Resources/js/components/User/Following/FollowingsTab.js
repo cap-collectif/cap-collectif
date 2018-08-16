@@ -25,20 +25,31 @@ export class FollowingsTab extends Component<Props, State> {
 
   onUnfollowAll() {
     const { viewer } = this.props;
-    const idsProposal = viewer.followingProposals.edges.map(edge => {
-      return edge.node.id;
-    });
-    const idsOpinions = viewer.followingOpinions.edges.map(edge => {
-      return edge.node.id;
-    });
+
+    const idsProposal =
+      viewer.followingProposals && viewer.followingProposals.edges.length > 0
+        ? viewer.followingProposals.edges.map(edge => {
+            return edge.node.id;
+          })
+        : null;
+    const idsOpinion =
+      viewer.followingOpinions && viewer.followingOpinions.edges.length > 0
+        ? viewer.followingOpinions.edges.map(edge => {
+            return edge.node.id;
+          })
+        : null;
 
     this.setState({ open: !this.state.open }, () => {
-      UnfollowOpinionMutation.commit({
-        input: { idsOpinions },
-      });
-      UnfollowProposalMutation.commit({
-        input: { idsProposal },
-      });
+      if (idsOpinion) {
+        UnfollowOpinionMutation.commit({
+          input: { idsOpinion },
+        });
+      }
+      if (idsProposal) {
+        UnfollowProposalMutation.commit({
+          input: { idsProposal },
+        });
+      }
     });
   }
 
@@ -63,8 +74,6 @@ export class FollowingsTab extends Component<Props, State> {
         };
       });
     }
-
-    console.log(Object.keys(projectsById).length, projectsById);
 
     return (
       <div>
@@ -140,6 +149,7 @@ export default createFragmentContainer(
         totalCount
         edges {
           node {
+            id
             ...ProposalRow_proposal
             project {
               id
@@ -153,6 +163,7 @@ export default createFragmentContainer(
         totalCount
         edges {
           node {
+            id
             ...OpinionRow_opinion
             project {
               id

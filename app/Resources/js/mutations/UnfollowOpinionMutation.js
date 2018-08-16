@@ -50,8 +50,8 @@ const commit = (
         return;
       }
 
-      if (Array.isArray(variables.input.ids)) {
-        variables.input.ids.map((id: string) => {
+      if (Array.isArray(variables.input.idsOpinion)) {
+        variables.input.idsOpinion.map((id: string) => {
           decrementFollowerCount(id, store);
         });
       }
