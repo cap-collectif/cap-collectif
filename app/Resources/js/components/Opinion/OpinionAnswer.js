@@ -40,6 +40,11 @@ export default createFragmentContainer(OpinionAnswer, {
           title
           author {
             vip
+            displayName
+            media {
+              url
+            }
+            show_url
           }
         }
       }
@@ -48,6 +53,11 @@ export default createFragmentContainer(OpinionAnswer, {
           title
           author {
             vip
+            displayName
+            media {
+              url
+            }
+            show_url
           }
         }
       }
