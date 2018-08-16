@@ -259,10 +259,16 @@ tweede_golf_prometheus:
   collectors:
     registered:
       gauge:
-        help: Number of registrations
+        help: Number of users
+    registeredNotVerifiedByEmail:
+      gauge:
+        help: Number of users who have not validated their email
     registeredContributors:
       gauge:
-        help: Number of registered contributors
+        help: Number of contributors
+    registeredContributorsNotVerifiedByEmail:
+      gauge:
+        help: Number of contributors who have not validated their email
     projectCount:
       gauge:
         help: Number of projects
@@ -271,13 +277,13 @@ tweede_golf_prometheus:
         help: Number of contribuable steps
     voteCount:
       gauge:
-        help: Number of votes
+        help: Number of published votes
     commentCount:
       gauge:
         help: Number of comments
     contributionCount:
       gauge:
-        help: Number of contributions
+        help: Number of published contributions
     opinionCount:
       gauge:
         help: Number of opinions

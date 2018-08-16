@@ -649,7 +649,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", array(0 => $value, 1 => $args)]);
                     },
                     'description' => 'The versions related to the contribution.',
                     'deprecationReason' => null,
@@ -696,7 +696,9 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
                 'section' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Section')),

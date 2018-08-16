@@ -22,6 +22,9 @@ class MetricsController extends Controller
             'capco.user.repository'
         )->getRegisteredContributorCount();
         $registeredCount = $this->get('capco.user.repository')->getRegisteredCount();
+        $registeredNotVerifiedByEmailCount = $this->get(
+            'capco.user.repository'
+        )->getRegisteredNotVerifiedByEmailCount();
 
         $commentCount = $this->get('capco.comment.repository')->countPublished();
         $voteCount = $this->get('capco.abstract_vote.repository')->countPublished();
@@ -82,6 +85,9 @@ class MetricsController extends Controller
         // District ?
 
         $registry->getGauge('registered')->set($registeredCount);
+        $registry
+            ->getGauge('registeredNotVerifiedByEmail')
+            ->set($registeredNotVerifiedByEmailCount);
         $registry->getGauge('registeredContributors')->set($registeredContributorCount);
         $registry->getGauge('projectCount')->set($projectCount);
         $registry->getGauge('contribuableStepsCount')->set($contribuableStepsCount);

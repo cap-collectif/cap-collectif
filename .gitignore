@@ -11,6 +11,9 @@
 translations/*
 !translations/README.md
 
+flow-coverage/*
+!flow-coverage/flow-coverage-badge.svg
+
 coverage/
 
 /var

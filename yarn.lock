@@ -74,9 +74,9 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
-"@prettier/plugin-php@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@prettier/plugin-php/-/plugin-php-0.4.0.tgz#6ec4887e6b127d625592f4844c6a3efd06d8a46e"
+"@prettier/plugin-php@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@prettier/plugin-php/-/plugin-php-0.6.0.tgz#bc3458168dec217fc869db7b0950eb7da8cb0ec1"
   dependencies:
     mem "^3.0.1"
     php-parser "3.0.0-alpha2"

@@ -71,6 +71,18 @@ class UserRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function getRegisteredNotVerifiedByEmailCount(): int
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('count(DISTINCT u.id)');
+        $qb->andWhere('u.confirmationToken IS NOT NULL');
+
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getSingleScalarResult();
+    }
+
     public function getRegisteredContributorCount(): int
     {
         $qb = $this->createQueryBuilder('u');

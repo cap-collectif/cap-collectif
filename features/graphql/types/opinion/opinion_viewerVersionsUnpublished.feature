@@ -3,7 +3,8 @@ Feature: Versions of an opinion
 
 @read-only
 Scenario: Anonymous wants to get viewerVersionsUnpublished for an opinion
-  Given I send a GraphQL POST request:
+  Given I am logged in to graphql as user_not_confirmed_with_contributions
+  And I send a GraphQL POST request:
   """
   {
     "query": "query ($opinionId: ID!) {
@@ -32,7 +33,7 @@ Scenario: Anonymous wants to get viewerVersionsUnpublished for an opinion
     "data": {
         "opinion": {
             "viewerVersionsUnpublished": {
-              "totalCount": 3,
+              "totalCount": 4,
               "edges": [
                 {
                   "node": {

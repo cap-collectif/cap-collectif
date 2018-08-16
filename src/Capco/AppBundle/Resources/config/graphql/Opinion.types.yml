@@ -72,13 +72,14 @@ Opinion:
         type: 'VersionConnection!'
         argsBuilder: 'Relay::Connection'
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", [value, args, getUser()])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", [value, args])'
         description: 'The versions related to the contribution.'
         args:
           orderBy:
             type: 'VersionOrder'
             defaultValue: { field: PUBLISHED_AT, direction: DESC }
       viewerVersionsUnpublished:
+        access: '@=hasRole("ROLE_USER")'
         type: 'VersionConnection!'
         argsBuilder: 'Relay::Connection'
         resolve:
