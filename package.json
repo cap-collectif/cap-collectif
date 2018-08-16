@@ -68,7 +68,7 @@
     },
     {
       "path": "./web/js/app.js",
-      "maxSize": "290 KB"
+      "maxSize": "300 KB"
     },
     {
       "path": "./web/js/vendor.js",
