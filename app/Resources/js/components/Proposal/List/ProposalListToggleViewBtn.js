@@ -1,17 +1,14 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { State } from '../../../types';
 import config from '../../../config';
-import type { ProposalListToggleViewBtn_step } from './__generated__/ProposalListToggleViewBtn_step.graphql';
 
 type Props = {
   onChange: Function,
   mode: string,
-  step: ProposalListToggleViewBtn_step,
   showMapButton: boolean,
 };
 
@@ -69,15 +66,4 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   mode: state.proposal.selectedViewByStep || 'mosaic',
 });
 
-const container = connect(mapStateToProps)(ProposalListToggleViewBtn);
-
-export default createFragmentContainer(container, {
-  step: graphql`
-    fragment ProposalListToggleViewBtn_step on ProposalStep {
-      id
-      ... on SelectionStep {
-        allowingProgressSteps
-      }
-    }
-  `,
-});
+export default connect(mapStateToProps)(ProposalListToggleViewBtn);

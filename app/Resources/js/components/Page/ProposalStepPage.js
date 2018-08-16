@@ -90,7 +90,6 @@ export class ProposalStepPage extends React.Component<Props> {
               }
               step: node(id: $stepId) {
                 id
-                ...ProposalListFilters_step
                 ...ProposalListView_step @arguments(count: $count)
                 ...UnpublishedProposalListView_step @arguments(isAuthenticated: $isAuthenticated)
                 ...ProposalStepPageHeader_step
@@ -139,7 +138,6 @@ export class ProposalStepPage extends React.Component<Props> {
                   {/* $FlowFixMe */}
                   <ProposalStepPageHeader step={props.step} />
                   <ProposalListFilters
-                    step={props.step}
                     statuses={statuses}
                     categories={categories}
                     districts={form.districts}
