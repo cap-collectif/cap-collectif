@@ -19,6 +19,15 @@ class AbstractVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function countUnpublished(): int
+    {
+        return $this->createQueryBuilder('v')
+            ->select('COUNT(DISTINCT v.id)')
+            ->andWhere('v.published = false')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function countAllByAuthor(User $user): int
     {
         $qb = $this->createQueryBuilder('v');

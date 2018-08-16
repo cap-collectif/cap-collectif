@@ -64,6 +64,7 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u');
         $qb->select('count(DISTINCT u.id)');
+        $qb->andWhere('u.confirmationToken IS NULL');
 
         return $qb
             ->getQuery()
@@ -71,7 +72,7 @@ class UserRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getRegisteredNotVerifiedByEmailCount(): int
+    public function getRegisteredNotConfirmedByEmailCount(): int
     {
         $qb = $this->createQueryBuilder('u');
         $qb->select('count(DISTINCT u.id)');
@@ -125,7 +126,12 @@ class UserRepository extends EntityRepository
         $qbProposal = $this->createQueryBuilder('userProposal');
         $qbProposal
             ->select('userProposal.id')
-            ->innerJoin('userProposal.proposals', 'proposal', 'WITH', 'proposal.published = true');
+            ->innerJoin(
+                'userProposal.proposals',
+                'proposal',
+                'WITH',
+                'proposal.published = true AND proposal.draft = false'
+            );
 
         $qbReply = $this->createQueryBuilder('userReply');
         $qbReply

@@ -257,18 +257,15 @@ tweede_golf_prometheus:
   storage_adapter_service: 'redis_adapter'
   register_defaults: false
   collectors:
-    registered:
+    registeredConfirmedByEmail:
       gauge:
-        help: Number of users
-    registeredNotVerifiedByEmail:
+        help: Number of registered users who have validated their email
+    registeredNotConfirmedByEmail:
       gauge:
-        help: Number of users who have not validated their email
+        help: Number of registered users who have not validated their email
     registeredContributors:
       gauge:
-        help: Number of contributors
-    registeredContributorsNotVerifiedByEmail:
-      gauge:
-        help: Number of contributors who have not validated their email
+        help: Number of registered users who have published a contribution, vote or comment
     projectCount:
       gauge:
         help: Number of projects
@@ -278,12 +275,18 @@ tweede_golf_prometheus:
     voteCount:
       gauge:
         help: Number of published votes
+    voteUnpublishedCount:
+      gauge:
+        help: Number of unpublished votes
     commentCount:
       gauge:
         help: Number of comments
     contributionCount:
       gauge:
         help: Number of published contributions
+    contributionUnpublishedCount:
+      gauge:
+        help: Number of unpublished contributions
     opinionCount:
       gauge:
         help: Number of opinions

@@ -27,6 +27,7 @@ type Props = ParentProps & {
   showModal: boolean,
   isSubmitting: boolean,
   invalid: boolean,
+  viewerIsConfirmedByEmail: boolean,
 };
 
 type State = {
@@ -84,9 +85,14 @@ export class ProposalVoteModal extends React.Component<Props, State> {
       if (!newNode) {
         newNode = store.create(dataID, 'ProposalVote');
       }
-      newNode.setValue(true, 'published');
+      newNode.setValue(this.props.viewerIsConfirmedByEmail, 'published');
+      if (!this.props.viewerIsConfirmedByEmail) {
+        newNode.setValue('WAITING_AUTHOR_CONFIRMATION', 'notPublishedReason');
+      }
       newNode.setValue(false, 'anonymous');
       newNode.setValue(null, 'id'); // This will be used to know that this is the tmp vote
+
+      // $FlowFixMe Cannot call newNode.setLinkedRecord with store.get(...) bound to record
       newNode.setLinkedRecord(store.get(this.props.proposal.id), 'proposal');
 
       // Create a new edge
@@ -98,11 +104,13 @@ export class ProposalVoteModal extends React.Component<Props, State> {
       newEdge.setLinkedRecord(newNode, 'node');
 
       const stepProxy = store.get(this.props.step.id);
+      if (!stepProxy) return;
       const connection = stepProxy.getLinkedRecord('viewerVotes', {
         orderBy: { field: 'POSITION', direction: 'ASC' },
       });
       ConnectionHandler.insertEdgeAfter(connection, newEdge);
-      connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+      const totalCount = parseInt(connection.getValue('totalCount'), 10);
+      connection.setValue(totalCount + 1, 'totalCount');
     });
   };
 
@@ -110,11 +118,13 @@ export class ProposalVoteModal extends React.Component<Props, State> {
     commitLocalUpdate(environment, store => {
       const dataID = `client:newTmpVote:${this.props.proposal.id}`;
       const stepProxy = store.get(this.props.step.id);
+      if (!stepProxy) return;
       const connection = stepProxy.getLinkedRecord('viewerVotes', {
         orderBy: { field: 'POSITION', direction: 'ASC' },
       });
       ConnectionHandler.deleteNode(connection, dataID);
-      connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
+      const totalCount = parseInt(connection.getValue('totalCount'), 10);
+      connection.setValue(totalCount - 1, 'totalCount');
       store.delete(dataID);
     });
   };
@@ -226,6 +236,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Pa
     ),
     isSubmitting: !!state.proposal.isVoting,
     invalid: isInvalid(formName)(state),
+    viewerIsConfirmedByEmail: state.user.user && state.user.user.isEmailConfirmed,
   };
 };
 

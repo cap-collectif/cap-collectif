@@ -33,6 +33,7 @@ describe('<ProposalVoteModal />', () => {
     const wrapper = shallow(
       <ProposalVoteModal
         showModal
+        viewerIsConfirmedByEmail
         isSubmitting={false}
         invalid={false}
         proposal={proposal}

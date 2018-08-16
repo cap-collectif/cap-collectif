@@ -302,11 +302,6 @@ declare module "react-relay" {
 
   declare export type GeneratedNodeMap = { [key: string]: GraphQLTaggedNode };
 
-  declare export function commitLocalUpdate<TEnvironment>(
-    environment: TEnvironment,
-    proxy: any
-  ): any;
-
   declare export function fetchQuery(environment: any, query: any, variables: any): any;
 
   declare export function createFragmentContainer<
@@ -1348,6 +1343,11 @@ declare module "react-relay" {
     force?: boolean,
     rerunParamExperimental?: RerunParam
   };
+
+declare export function commitLocalUpdate<TEnvironment>(
+  environment: TEnvironment,
+  proxy: StoreUpdater
+): void;
 }
 
 declare module "react-relay/compat" {

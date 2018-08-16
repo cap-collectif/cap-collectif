@@ -22,10 +22,17 @@ trait ContributionRepositoryTrait
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getCount(): int
+    public function countPublished(): int
     {
         $qb = $this->createQueryBuilder('o');
         $qb->select('count(DISTINCT o.id)')->andWhere('o.published = true');
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countUnpublished(): int
+    {
+        $qb = $this->createQueryBuilder('o');
+        $qb->select('count(DISTINCT o.id)')->andWhere('o.published = false');
         return $qb->getQuery()->getSingleScalarResult();
     }
 
