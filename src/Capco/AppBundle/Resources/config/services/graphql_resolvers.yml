@@ -176,23 +176,8 @@ services:
         }
       - {
           name: overblog_graphql.resolver,
-          alias: 'proposition_arguments',
-          method: 'resolvePropositionArguments',
-        }
-      - {
-          name: overblog_graphql.resolver,
           alias: 'proposition_url',
           method: 'resolvePropositionUrl',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_votes',
-          method: 'resolvePropositionVotes',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_vote_proposition',
-          method: 'resolvePropositionVoteProposition',
         }
       - {
           name: overblog_graphql.resolver,
@@ -208,11 +193,6 @@ services:
           name: overblog_graphql.resolver,
           alias: 'consultation_contribuable',
           method: 'resolveConsultationIsContribuable',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'contributions',
-          method: 'resolveContributionsByConsultation',
         }
       - {
           name: overblog_graphql.resolver,
@@ -282,13 +262,6 @@ services:
   Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalsFollowedByUserResolver:
     arguments:
       - '@capco.proposal.repository'
-      - '@logger'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\ViewerFollowerProposalResolver:
-    arguments:
-      - '@capco.follower.repository'
       - '@logger'
     tags:
       - { name: overblog_graphql.resolver }
@@ -446,29 +419,14 @@ services:
     tags:
       - { name: overblog_graphql.resolver }
 
+  # This is not a resolver but a voter, rename and move this elsewhere
   Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:
     arguments: ['@security.token_storage', '@logger']
-
-  Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotableStepsResolver:
-    arguments:
-      - '@capco.selection_step.repository'
-      - '@capco.collect_step.repository'
 
     Capco\AppBundle\GraphQL\Resolver\Project\ProjectAllowedViewersResolver:
         autowire: true
         tags:
           - { name: overblog_graphql.resolver }
-
-    Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver:
-        tags:
-            - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\ViewerStepVotesResolver:
-    autowire: true
-
-  Capco\AppBundle\GraphQL\Resolver\Reply\ReplyResponsesResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
 
   Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireViewerRepliesResolver:
     arguments:

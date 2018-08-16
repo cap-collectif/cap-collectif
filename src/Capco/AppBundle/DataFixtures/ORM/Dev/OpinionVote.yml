@@ -29,3 +29,7 @@ Capco\AppBundle\Entity\OpinionVote:
     value: <numberBetween(-1, 1)>
     user (unique): '@user<current()>'
     publishedAt: <(new \DateTime('2015-03-01'))>
+  opinionVote51:
+    Opinion: '@opinion59'
+    value: <numberBetween(-1, 1)>
+    user: '@user_not_confirmed_with_contributions'

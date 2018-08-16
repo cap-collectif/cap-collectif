@@ -58,3 +58,12 @@ Capco\AppBundle\Entity\OpinionVersion:
       <p><text(300)></p>
     author: '@user5'
     parent: '@opinion51'
+
+  version{12..15}:
+    id: 'version<current()>'
+    title: Version non publiée n°<current()>
+    body: |
+      <p><text(100)></p>
+      <p><text(300)></p>
+    author: '@user_not_confirmed_with_contributions'
+    parent: '@opinion57'

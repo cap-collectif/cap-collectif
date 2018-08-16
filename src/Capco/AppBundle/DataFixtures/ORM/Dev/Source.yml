@@ -95,3 +95,12 @@ Capco\AppBundle\Entity\Source:
     category: '@Category2'
     publishedAt: <(new \DateTime('2016-03-01'))>
     link: http://www.bing.com
+
+  source{37..40}:
+    id: 'source<current()>'
+    title: Source non publiée n°<current()>
+    body: blablablabla-blablablabla
+    link: http://www.bing.com
+    author: '@user_not_confirmed_with_contributions'
+    opinion: '@opinion3'
+    category: '@Category2'

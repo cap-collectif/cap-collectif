@@ -576,7 +576,7 @@ type CollectStep implements Node & Step & ProposalStep {
   url: String!
   proposals(
     after: String
-    first: Int
+    first: Int = 100
     before: String
     last: Int
 
@@ -2125,7 +2125,7 @@ type ProposalForm implements Node {
   id: ID!
   proposals(
     after: String
-    first: Int
+    first: Int = 100
     before: String
     last: Int
 
@@ -2270,7 +2270,7 @@ interface ProposalStep {
   url: String!
   proposals(
     after: String
-    first: Int
+    first: Int = 100
     before: String
     last: Int
 
@@ -2937,7 +2937,7 @@ type SelectionStep implements Node & Step & ProposalStep {
   url: String!
   proposals(
     after: String
-    first: Int
+    first: Int = 100
     before: String
     last: Int
 

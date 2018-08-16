@@ -15,6 +15,7 @@ Scenario: Anonymous wants to get arguments for an opinion
                       node {
                           id
                           type
+                          published
                       }
                   }
               }
@@ -37,7 +38,8 @@ Scenario: Anonymous wants to get arguments for an opinion
                 {
                   "node": {
                     "id": @string@,
-                    "type": @string@
+                    "type": @string@,
+                    "published": true
                   }
                 },
                 @...@

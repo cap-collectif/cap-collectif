@@ -99,6 +99,7 @@ final class ProposalStepType extends InterfaceType implements GeneratedTypeInter
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
+                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',

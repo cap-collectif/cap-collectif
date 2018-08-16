@@ -101,6 +101,7 @@ final class SelectionStepType extends ObjectType implements GeneratedTypeInterfa
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
+                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',

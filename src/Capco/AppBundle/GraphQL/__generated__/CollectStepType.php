@@ -101,6 +101,7 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
+                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',

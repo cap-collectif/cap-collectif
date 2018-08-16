@@ -7,6 +7,9 @@ WithProposals:
         type: 'ProposalConnection!'
         argsBuilder: 'Relay::Connection'
         args:
+          first:
+            type: 'Int'
+            defaultValue: 100
           district:
             type: 'ID'
             description: 'If non-null, filters proposals with the given district.'

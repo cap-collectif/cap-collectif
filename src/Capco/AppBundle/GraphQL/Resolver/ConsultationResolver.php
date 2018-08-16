@@ -244,15 +244,6 @@ class ConsultationResolver implements ContainerAwareInterface
         return $vote->getUser();
     }
 
-    public function resolvePropositionVoteProposition(AbstractVote $vote)
-    {
-        if (isset($vote['opinion'])) {
-            return $this->container->get('capco.opinion.repository')->find($vote['opinion']);
-        }
-
-        return null;
-    }
-
     public function resolveReportingType(Reporting $reporting): int
     {
         return $reporting->getStatus();
@@ -315,12 +306,5 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolveUpdatedAt($object): string
     {
         return $object->getUpdatedAt()->format(\DateTime::ATOM);
-    }
-
-    public function resolveContributionsByConsultation(Arg $argument)
-    {
-        return $this->container->get('capco.opinion.repository')->findBy([
-            'step' => $argument->offsetGet('consultation'),
-        ]);
     }
 }

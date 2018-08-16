@@ -1,16 +1,16 @@
-@argumentable_viewerArgumentsUnpublished
-Feature: Unpublished arguments of an argumentable
+@sourceable_sources
+Feature: Sources of an sourceable
 
 @read-only
-Scenario: User wants to get arguments for an opinion
-  Given I am logged in to graphql as user_not_confirmed_with_contributions
+Scenario: User wants to get sources for an opinion
+  Given I am logged in to graphql as user
   And I send a GraphQL POST request:
   """
   {
     "query": "query ($opinionId: ID!) {
       opinion: node(id: $opinionId) {
-          ... on Argumentable {
-              viewerArgumentsUnpublished(first: 100) {
+          ... on Sourceable {
+              sources(first: 100) {
                   totalCount
                   edges {
                       node {
@@ -32,13 +32,13 @@ Scenario: User wants to get arguments for an opinion
   {
     "data": {
         "opinion": {
-            "viewerArgumentsUnpublished": {
-              "totalCount": 5,
+            "sources": {
+              "totalCount": 6,
               "edges": [
                 {
                   "node": {
                     "id": @string@,
-                    "published": false
+                    "published": true
                   }
                 },
                 @...@

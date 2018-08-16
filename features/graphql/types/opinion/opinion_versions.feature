@@ -1,16 +1,15 @@
-@argumentable_viewerArgumentsUnpublished
-Feature: Unpublished arguments of an argumentable
+@opinion_versions
+Feature: Versions of an opinion
 
 @read-only
-Scenario: User wants to get arguments for an opinion
-  Given I am logged in to graphql as user_not_confirmed_with_contributions
-  And I send a GraphQL POST request:
+Scenario: Anonymous wants to get versions for an opinion
+  Given I send a GraphQL POST request:
   """
   {
     "query": "query ($opinionId: ID!) {
       opinion: node(id: $opinionId) {
-          ... on Argumentable {
-              viewerArgumentsUnpublished(first: 100) {
+          ... on Opinion {
+              versions(first: 5) {
                   totalCount
                   edges {
                       node {
@@ -23,7 +22,7 @@ Scenario: User wants to get arguments for an opinion
       }
     }",
     "variables": {
-      "opinionId": "opinion3"
+      "opinionId": "opinion57"
     }
   }
   """
@@ -32,13 +31,13 @@ Scenario: User wants to get arguments for an opinion
   {
     "data": {
         "opinion": {
-            "viewerArgumentsUnpublished": {
-              "totalCount": 5,
+            "versions": {
+              "totalCount": 3,
               "edges": [
                 {
                   "node": {
                     "id": @string@,
-                    "published": false
+                    "published": true
                   }
                 },
                 @...@

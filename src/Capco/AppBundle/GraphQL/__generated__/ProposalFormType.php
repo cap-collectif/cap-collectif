@@ -47,6 +47,7 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
+                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',
