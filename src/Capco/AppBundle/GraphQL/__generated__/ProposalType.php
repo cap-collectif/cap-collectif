@@ -173,6 +173,20 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+                'publishableUntil' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishableUntil();
+                    },
+                    'description' => 'Identifies when the entity can no more be published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'publishedAt' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
@@ -194,7 +208,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
                     },
-                    'description' => 'Reason that the entity was not published.',
+                    'description' => 'Reason that the entity is not published.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -625,21 +639,9 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposal_publicationStatus", array(0 => $value)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalPublicationStatusResolver", array(0 => $value)]);
                     },
                     'description' => 'The publication status for this proposal.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'expired' => [
-                    'type' => Type::boolean(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -847,9 +849,9 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                             'description' => 'If provided, retrieve only in this step.',
                         ],
                         [
-                            'name' => 'includeExpired',
+                            'name' => 'includeUnpublished',
                             'type' => Type::boolean(),
-                            'description' => '(ROLE_SUPER_ADMIN only) Select also expired votes.',
+                            'description' => '(ROLE_SUPER_ADMIN only) Select also unpublished votes.',
                             'defaultValue' => false,
                         ],
                     ],

@@ -187,6 +187,12 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                             'description' => null,
                         ],
                         [
+                            'name' => 'viewerUnpublishedOnly',
+                            'type' => Type::boolean(),
+                            'description' => null,
+                            'defaultValue' => false,
+                        ],
+                        [
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('SourceOrder'),
                             'description' => null,
@@ -194,7 +200,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
                     },
                     'description' => 'The sources related to the sourceable.',
                     'deprecationReason' => null,
@@ -247,6 +253,20 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+                'publishableUntil' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishableUntil();
+                    },
+                    'description' => 'Identifies when the entity can no more be published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'publishedAt' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
@@ -268,7 +288,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
                     },
-                    'description' => 'Reason that the entity was not published.',
+                    'description' => 'Reason that the entity is not published.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -375,6 +395,12 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                             'description' => null,
                         ],
                         [
+                            'name' => 'viewerUnpublishedOnly',
+                            'type' => Type::boolean(),
+                            'description' => null,
+                            'defaultValue' => false,
+                        ],
+                        [
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('ArgumentOrder'),
                             'description' => null,
@@ -383,11 +409,11 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'type',
                             'type' => $globalVariable->get('typeResolver')->resolve('ArgumentValue'),
-                            'description' => 'If omitted, returns all arguments. If provided, returns the arguments of this particular type.',
+                            'description' => 'If provided, returns the arguments of this particular type.',
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", array(0 => $value, 1 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
                     },
                     'description' => 'The arguments related to the argumentable.',
                     'deprecationReason' => null,
@@ -414,18 +440,6 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     ],
                     'resolve' => null,
                     'description' => 'true if the contribution is pinned.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'expired' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'true if the contribution is expired.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -563,6 +577,12 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                             'description' => null,
                         ],
                         [
+                            'name' => 'viewerUnpublishedOnly',
+                            'type' => Type::boolean(),
+                            'description' => null,
+                            'defaultValue' => false,
+                        ],
+                        [
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('VersionOrder'),
                             'description' => null,
@@ -570,7 +590,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", array(0 => $value, 1 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
                     },
                     'description' => 'The versions related to the contribution.',
                     'deprecationReason' => null,
