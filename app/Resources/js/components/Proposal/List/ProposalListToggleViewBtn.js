@@ -6,16 +6,16 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { State } from '../../../types';
 import config from '../../../config';
-import type { ToggleMapButton_step } from './__generated__/ToggleMapButton_step.graphql';
+import type { ProposalListToggleViewBtn_step } from './__generated__/ProposalListToggleViewBtn_step.graphql';
 
 type Props = {
   onChange: Function,
   mode: string,
-  step: ToggleMapButton_step,
-  showMapButton: boolean
+  step: ProposalListToggleViewBtn_step,
+  showMapButton: boolean,
 };
 
-export class ToggleMapButton extends React.Component<Props> {
+export class ProposalListToggleViewBtn extends React.Component<Props> {
   handleClick = (chooseMode: $FlowFixMe) => {
     const { onChange, mode } = this.props;
     if (chooseMode && chooseMode !== mode) {
@@ -26,12 +26,10 @@ export class ToggleMapButton extends React.Component<Props> {
   render() {
     const { mode, showMapButton } = this.props;
 
-    // console.warn(this.props.step.allowingProgressSteps);
-
     return (
       <div
         id="step-view-toggle"
-        className="btn-group d-flex"
+        className="btn-group d-flex mb-15"
         style={{ width: '100%' }}
         role="group"
         aria-label="Step view">
@@ -51,16 +49,17 @@ export class ToggleMapButton extends React.Component<Props> {
           <i className="cap cap-th-large" onClick={this.handleClick.bind(this, 'mosaic')} />{' '}
           {<FormattedMessage id="grid" />}
         </Button>
-        {!config.isMobile && showMapButton && (
-          <Button
-            bsStyle="default"
-            style={{ flex: '1 0 auto' }}
-            active={mode === 'map'}
-            onClick={this.handleClick.bind(this, 'map')}>
-            <i className="cap cap-map-location" onClick={this.handleClick.bind(this, 'map')} />{' '}
-            {<FormattedMessage id="proposal.map.map" />}
-          </Button>
-        )}
+        {!config.isMobile &&
+          showMapButton && (
+            <Button
+              bsStyle="default"
+              style={{ flex: '1 0 auto' }}
+              active={mode === 'map'}
+              onClick={this.handleClick.bind(this, 'map')}>
+              <i className="cap cap-map-location" onClick={this.handleClick.bind(this, 'map')} />{' '}
+              {<FormattedMessage id="proposal.map.map" />}
+            </Button>
+          )}
       </div>
     );
   }
@@ -70,11 +69,11 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   mode: state.proposal.selectedViewByStep || 'mosaic',
 });
 
-const container = connect(mapStateToProps)(ToggleMapButton);
+const container = connect(mapStateToProps)(ProposalListToggleViewBtn);
 
 export default createFragmentContainer(container, {
   step: graphql`
-    fragment ToggleMapButton_step on ProposalStep {
+    fragment ProposalListToggleViewBtn_step on ProposalStep {
       id
       ... on SelectionStep {
         allowingProgressSteps

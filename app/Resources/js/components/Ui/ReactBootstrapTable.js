@@ -247,6 +247,10 @@ export class ReactBootstrapTable extends React.Component<Props> {
         );
       }
 
+      if (!value) {
+        return <td key={key} />;
+      }
+
       return <td key={key}>{value}</td>;
     });
   };

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { createFragmentContainer } from 'react-relay';
-import moment from 'moment';
 import * as graphql from 'graphql';
 import type { ProposalListTable_proposals } from './__generated__/ProposalListTable_proposals.graphql';
 import type { ProposalListTable_step } from './__generated__/ProposalListTable_step.graphql';
 import ReactBootstrapTable from '../../Ui/ReactBootstrapTable';
 import ProposalListTableMobile from './ProposalListTableMobile';
+import ImplementationPhaseTitle from '../ImplementationPhaseTitle';
 
 type Props = {
   proposals: ProposalListTable_proposals,
@@ -32,23 +32,8 @@ export class ProposalListTable extends React.Component<Props, State> {
     });
   }
 
-  // à mettre dans un composant
   getPhaseTitle = (phases: Array<Object>): string => {
-    const openPhase = phases.filter(e => moment().isBetween(e.startAt, e.endAt));
-    const toComePhase = phases.filter(e => moment().isBefore(e.startAt));
-    const endPhase = phases[phases.length - 1];
-
-    if (openPhase.length > 0) {
-      return openPhase[0].title;
-    }
-
-    if (toComePhase.length > 0) {
-      return toComePhase[0].title;
-    }
-
-    if (endPhase) {
-      return endPhase.title;
-    }
+    return <ImplementationPhaseTitle phases={phases} />;
   };
 
   getFormattedData = () => {
@@ -64,8 +49,6 @@ export class ProposalListTable extends React.Component<Props, State> {
           const getProposalTitle =
             node.title.length > 55 ? `${node.title.substring(0, 55)}...` : node.title;
 
-          console.log(node.updatedAt);
-
           return {
             title: {
               text: 'admin.fields.selection.proposal',
@@ -76,7 +59,7 @@ export class ProposalListTable extends React.Component<Props, State> {
               text: 'implementation-phase',
               value: {
                 list: node.progressSteps && node.progressSteps,
-                title: this.getPhaseTitle(node.progressSteps),
+                title: node.progressSteps.length > 0 && this.getPhaseTitle(node.progressSteps),
               },
               width: '250px',
             },
@@ -124,7 +107,7 @@ export class ProposalListTable extends React.Component<Props, State> {
             },
             publishedOn: {
               text: 'published-on',
-              value: node.createdAt && node.createdAt,
+              value: node.publishedAt && node.publishedAt,
               width: '150px',
             },
           };
@@ -208,7 +191,7 @@ export default createFragmentContainer(ProposalListTable, {
           updatedBy {
             displayName
           }
-          createdAt
+          publishedAt
         }
       }
     }

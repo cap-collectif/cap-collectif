@@ -9,7 +9,7 @@ import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
 import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';
-import ToggleMapButton from './../Map/ToggleMapButton';
+import ProposalListToggleViewBtn from './ProposalListToggleViewBtn';
 import type { ProposalListFilters_step } from './__generated__/ProposalListFilters_step.graphql';
 
 type Props = {
@@ -95,7 +95,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
       <div className="mb-15 mt-30">
         <Row>
           <Col xs={12} sm={6} md={4} lg={3}>
-            <ToggleMapButton
+            <ProposalListToggleViewBtn
               step={step}
               showMapButton={showMapButton}
               onChange={mode => {
@@ -161,7 +161,7 @@ export default createFragmentContainer(connector, {
   step: graphql`
     fragment ProposalListFilters_step on ProposalStep {
       id
-      ...ToggleMapButton_step
+      ...ProposalListToggleViewBtn_step
     }
   `,
 });

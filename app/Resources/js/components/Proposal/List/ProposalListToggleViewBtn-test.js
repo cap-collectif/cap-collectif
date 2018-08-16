@@ -4,9 +4,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { $refType } from '../../../mocks';
 
-import { ToggleMapButton } from './ToggleMapButton';
+import { ProposalListToggleViewBtn } from './ProposalListToggleViewBtn';
 
-describe('<ToggleMapButton />', () => {
+describe('<ProposalListToggleViewBtn />', () => {
   const onChange = () => {};
   const mode = {
     mosaic: 'mosaic',
@@ -15,7 +15,7 @@ describe('<ToggleMapButton />', () => {
 
   it('should render a toggle button with mosaic selected', () => {
     const wrapper = shallow(
-      <ToggleMapButton
+      <ProposalListToggleViewBtn
         onChange={onChange}
         showMapButton
         mode={mode.mosaic}
@@ -27,7 +27,7 @@ describe('<ToggleMapButton />', () => {
 
   it('should render a toggle button with map selected and without table list', () => {
     const wrapper = shallow(
-      <ToggleMapButton
+      <ProposalListToggleViewBtn
         onChange={onChange}
         showMapButton
         mode={mode.map}
@@ -39,7 +39,7 @@ describe('<ToggleMapButton />', () => {
 
   it('should render a toggle button without map', () => {
     const wrapper = shallow(
-      <ToggleMapButton
+      <ProposalListToggleViewBtn
         onChange={onChange}
         showMapButton={false}
         mode={mode.map}

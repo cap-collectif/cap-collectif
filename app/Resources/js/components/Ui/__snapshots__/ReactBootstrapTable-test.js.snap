@@ -16,20 +16,6 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           key="0"
           style={
             Object {
-              "display": "none",
-              "width": "200px",
-            }
-          }
-        >
-          <FormattedMessage
-            id="global.non_applicable"
-            values={Object {}}
-          />
-        </th>
-        <th
-          key="1"
-          style={
-            Object {
               "display": "table-cell",
               "width": "100px",
             }
@@ -41,7 +27,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </th>
         <th
-          key="2"
+          key="1"
           style={
             Object {
               "display": "table-cell",
@@ -55,7 +41,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </th>
         <th
-          key="3"
+          key="2"
           style={
             Object {
               "display": "table-cell",
@@ -69,7 +55,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </th>
         <th
-          key="4"
+          key="3"
           style={
             Object {
               "display": "table-cell",
@@ -83,7 +69,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </th>
         <th
-          key="5"
+          key="4"
           style={
             Object {
               "display": "table-cell",
@@ -97,7 +83,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </th>
         <th
-          key="6"
+          key="5"
           style={
             Object {
               "display": "table-cell",
@@ -111,7 +97,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </th>
         <th
-          key="7"
+          key="6"
           style={
             Object {
               "display": "table-cell",
@@ -125,7 +111,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </th>
         <th
-          key="8"
+          key="7"
           style={
             Object {
               "display": "table-cell",
@@ -139,7 +125,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </th>
         <th
-          key="9"
+          key="8"
           style={
             Object {
               "display": "table-cell",
@@ -159,17 +145,17 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
         key="0"
       >
         <td
-          key="1"
+          key="0"
         >
           <a
             href="http://google.com"
           >
-            Jean
+            Ravalement de la façade de la bibliothèque municipale
           </a>
         </td>
         <td
           className="m-auto"
-          key="2"
+          key="1"
         >
           <div
             className="mb-10"
@@ -199,7 +185,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </td>
         <td
-          key="3"
+          key="2"
         >
           <Label
             bsClass="label"
@@ -208,7 +194,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </td>
         <td
-          key="4"
+          key="3"
         >
           <div
             className="d-flex align-items-center"
@@ -231,18 +217,18 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           </div>
         </td>
         <td
-          key="5"
+          key="4"
         >
           89789
         </td>
         <td
-          key="6"
+          key="5"
         >
           347280
            €
         </td>
         <td
-          key="7"
+          key="6"
         >
           <InlineList
             className="mb-0"
@@ -260,7 +246,7 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           </InlineList>
         </td>
         <td
-          key="8"
+          key="7"
         >
           <FormattedMessage
             id="last-activity-date"
@@ -275,7 +261,231 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
           />
         </td>
         <td
-          key="9"
+          key="8"
+        >
+          <FormattedDate
+            value={2018-06-26T22:00:00.000Z}
+          />
+        </td>
+      </tr>
+      <tr
+        key="1"
+      >
+        <td
+          key="0"
+        >
+          <a
+            href="http://google.com"
+          >
+            Installation de bancs sur la place de la mairie
+          </a>
+        </td>
+        <td
+          className="m-auto"
+          key="1"
+        >
+          <div
+            className="mb-10"
+          >
+            <span />
+          </div>
+          <ProgressList
+            className="mt-10"
+            progressListItem={Array []}
+          />
+        </td>
+        <td
+          key="2"
+        />
+        <td
+          key="3"
+        />
+        <td
+          key="4"
+        />
+        <td
+          key="5"
+        />
+        <td
+          key="6"
+        />
+        <td
+          key="7"
+        />
+        <td
+          key="8"
+        >
+          <FormattedDate
+            value={2018-06-28T22:00:00.000Z}
+          />
+        </td>
+      </tr>
+    </tbody>
+  </Table>
+</ReactBootstrapTable__Container>
+`;
+
+exports[`<ReactBootstrapTable /> renders table with hidden columns & N/A th for ref 1`] = `
+<ReactBootstrapTable__Container>
+  <Table
+    bordered={true}
+    bsClass="table"
+    condensed={false}
+    hover={true}
+    responsive={false}
+    striped={false}
+  >
+    <thead>
+      <tr>
+        <th
+          key="0"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="Title"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="1"
+          style={
+            Object {
+              "display": "none",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="implementation-phase"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="2"
+          style={
+            Object {
+              "display": "none",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="admin.fields.theme.status"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="3"
+          style={
+            Object {
+              "display": "none",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="global.non_applicable"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="4"
+          style={
+            Object {
+              "display": "none",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="proposal.estimation"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="5"
+          style={
+            Object {
+              "display": "none",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="project_download.label.likers"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="6"
+          style={
+            Object {
+              "display": "none",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="last-activity"
+            values={Object {}}
+          />
+        </th>
+        <th
+          key="7"
+          style={
+            Object {
+              "display": "table-cell",
+              "width": "200px",
+            }
+          }
+        >
+          <FormattedMessage
+            id="published-on"
+            values={Object {}}
+          />
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        key="0"
+      >
+        <td
+          key="0"
+        >
+          <a
+            href="http://google.com"
+          >
+            Plantation de tulipes dans les jardinière du parking de saint jean
+          </a>
+        </td>
+        <td
+          key="7"
+        >
+          <FormattedDate
+            value={2018-06-28T22:00:00.000Z}
+          />
+        </td>
+      </tr>
+      <tr
+        key="1"
+      >
+        <td
+          key="0"
+        >
+          <a
+            href="http://google.com"
+          >
+            Marc
+          </a>
+        </td>
+        <td
+          key="7"
         >
           <FormattedDate
             value={2018-06-26T22:00:00.000Z}

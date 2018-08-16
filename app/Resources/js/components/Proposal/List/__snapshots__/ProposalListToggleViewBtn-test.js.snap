@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ToggleMapButton /> should render a toggle button with map selected and without table list 1`] = `
+exports[`<ProposalListToggleViewBtn /> should render a toggle button with map selected and without table list 1`] = `
 <div
   aria-label="Step view"
-  className="btn-group d-flex"
+  className="btn-group d-flex mb-15"
   id="step-view-toggle"
   role="group"
   style={
@@ -84,10 +84,10 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected and
 </div>
 `;
 
-exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 1`] = `
+exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic selected 1`] = `
 <div
   aria-label="Step view"
-  className="btn-group d-flex"
+  className="btn-group d-flex mb-15"
   id="step-view-toggle"
   role="group"
   style={
@@ -168,10 +168,10 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
 </div>
 `;
 
-exports[`<ToggleMapButton /> should render a toggle button without map 1`] = `
+exports[`<ProposalListToggleViewBtn /> should render a toggle button without map 1`] = `
 <div
   aria-label="Step view"
-  className="btn-group d-flex"
+  className="btn-group d-flex mb-15"
   id="step-view-toggle"
   role="group"
   style={

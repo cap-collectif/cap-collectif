@@ -2,16 +2,18 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { $refType } from '../../mocks';
+// import { $refType } from '../../mocks';
 import { ReactBootstrapTable } from './ReactBootstrapTable';
 
 describe('<ReactBootstrapTable />', () => {
   const data = [
     {
-      $refType,
       title: {
         text: 'Title',
-        value: { displayTitle: 'Jean', url: 'http://google.com' },
+        value: {
+          displayTitle: 'Ravalement de la façade de la bibliothèque municipale',
+          url: 'http://google.com',
+        },
         width: '100px',
       },
       implementationPhase: {
@@ -55,10 +57,139 @@ describe('<ReactBootstrapTable />', () => {
         value: '2018-06-27 00:00:00',
       },
     },
+    {
+      title: {
+        text: 'Title',
+        value: {
+          displayTitle: 'Installation de bancs sur la place de la mairie',
+          url: 'http://google.com',
+        },
+      },
+      implementationPhase: {
+        text: 'implementation-phase',
+        value: {
+          list: [],
+          title: null,
+        },
+      },
+      status: { text: 'admin.fields.theme.status', value: null },
+      author: {
+        text: 'project_download.label.author',
+        value: null,
+      },
+      ref: {
+        text: 'proposal.admin.reference',
+        value: null,
+      },
+      priceEstimation: {
+        text: 'proposal.estimation',
+        value: null,
+      },
+      likers: {
+        text: 'project_download.label.likers',
+        value: null,
+      },
+      lastActivity: {
+        text: 'last-activity',
+        value: {
+          date: null,
+          user: null,
+        },
+      },
+      publishedOn: {
+        text: 'published-on',
+        value: '2018-06-29 00:00:00',
+      },
+    },
+  ];
+
+  const dataHiddenColumns = [
+    {
+      title: {
+        text: 'Title',
+        value: {
+          displayTitle: 'Plantation de tulipes dans les jardinière du parking de saint jean',
+          url: 'http://google.com',
+        },
+      },
+      implementationPhase: {
+        text: 'implementation-phase',
+        value: {
+          list: [],
+          title: null,
+        },
+      },
+      status: { text: 'admin.fields.theme.status', value: null },
+      ref: {
+        text: null,
+        value: null,
+      },
+      priceEstimation: {
+        text: 'proposal.estimation',
+        value: null,
+      },
+      likers: {
+        text: 'project_download.label.likers',
+        value: null,
+      },
+      lastActivity: {
+        text: 'last-activity',
+        value: {
+          date: null,
+          user: null,
+        },
+      },
+      publishedOn: {
+        text: 'published-on',
+        value: '2018-06-29 00:00:00',
+      },
+    },
+    {
+      title: {
+        text: 'Rénovation du gymnase',
+        value: { displayTitle: 'Marc', url: 'http://google.com' },
+      },
+      implementationPhase: {
+        text: 'implementation-phase',
+        value: {
+          list: [],
+          title: null,
+        },
+      },
+      status: { text: 'admin.fields.theme.status', value: null },
+      ref: {
+        text: 'proposal.admin.reference',
+        value: null,
+      },
+      priceEstimation: {
+        text: 'proposal.estimation',
+        value: null,
+      },
+      likers: {
+        text: 'project_download.label.likers',
+        value: null,
+      },
+      lastActivity: {
+        text: 'last-activity',
+        value: {
+          date: null,
+          user: null,
+        },
+      },
+      publishedOn: {
+        text: 'published-on',
+        value: '2018-06-27 00:00:00',
+      },
+    },
   ];
 
   it('renders table with all type of data', () => {
     const wrapper = shallow(<ReactBootstrapTable data={data} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders table with hidden columns & N/A th for ref', () => {
+    const wrapper = shallow(<ReactBootstrapTable data={dataHiddenColumns} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
