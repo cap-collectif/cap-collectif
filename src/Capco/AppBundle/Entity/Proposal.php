@@ -74,7 +74,7 @@ class Proposal
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
 

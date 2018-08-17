@@ -25,6 +25,7 @@ import SixteenNineMedia from '../components/Ui/SixteenNineMedia';
 import { Loader } from '../components/Ui/Loader';
 import ProgressList from '../components/Ui/List/ProgressList';
 import { UserAvatar } from '../components/User/UserAvatar';
+import ProgressListItem from '../components/Ui/List/ProgressListItem';
 
 const openProject = {
   step: {
@@ -255,31 +256,26 @@ storiesOf('Components', module)
           <h3>Tags list</h3>
           <TagsList className="mb-30">
             <div className="tags-list__tag">
-              <i className="cap cap-marker-1-1 icon--blue" />
-              5 projets
+              <i className="cap cap-marker-1-1 icon--blue" />5 projets
             </div>
             <div className="tags-list__tag">
               <i className="cap cap-tag-1-1 icon--blue" />
               10 articles
             </div>
             <div className="tags-list__tag">
-              <i className="cap cap-tag-1-1 icon--blue" />
-              2 évènements
+              <i className="cap cap-tag-1-1 icon--blue" />2 évènements
             </div>
             <div className="tags-list__tag">
-              <i className="cap cap-marker-1-1 icon--blue" />
-              4 idées
+              <i className="cap cap-marker-1-1 icon--blue" />4 idées
             </div>
           </TagsList>
           <h3>Progress list</h3>
           <div style={{ width: '200px' }} className="mt-15 mb-15">
-            <ProgressList
-              progressListItem={[
-                { title: 'step 1', isActive: true },
-                { title: 'step 2', isActive: false },
-                { title: 'step 3', isActive: false },
-              ]}
-            />
+            <ProgressList>
+              <ProgressListItem item={{ title: 'step 1', isActive: true }} />
+              <ProgressListItem item={{ title: 'step 2', isActive: false }} />
+              <ProgressListItem item={{ title: 'step 3', isActive: false }} />
+            </ProgressList>
           </div>
         </div>
       );

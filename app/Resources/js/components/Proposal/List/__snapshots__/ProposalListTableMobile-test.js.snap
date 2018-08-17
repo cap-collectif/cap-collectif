@@ -39,7 +39,7 @@ exports[`<ProposalListTableMobile /> renders correctly 1`] = `
         >
           <span>
             <ForwardRef(Relay(ImplementationStepTitle))
-              phases={
+              progressSteps={
                 Array [
                   Object {
                     "endAt": "2018-06-27 00:00:00",
@@ -61,24 +61,35 @@ exports[`<ProposalListTableMobile /> renders correctly 1`] = `
             />
           </span>
         </div>
-        <ProgressList
-          progressListItem={
-            Array [
+        <ProgressList>
+          <ProgressListItem
+            item={
               Object {
                 "isActive": true,
                 "title": "Before",
-              },
+              }
+            }
+            key="0"
+          />
+          <ProgressListItem
+            item={
               Object {
                 "isActive": false,
                 "title": "In progress",
-              },
+              }
+            }
+            key="1"
+          />
+          <ProgressListItem
+            item={
               Object {
                 "isActive": false,
                 "title": "After",
-              },
-            ]
-          }
-        />
+              }
+            }
+            key="2"
+          />
+        </ProgressList>
       </div>
     </div>
   </ListGroupItem>

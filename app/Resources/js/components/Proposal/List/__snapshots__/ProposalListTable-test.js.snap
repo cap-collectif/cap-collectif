@@ -293,5 +293,252 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       },
     ]
   }
-/>
+>
+  <th
+    key="0"
+    style={
+      Object {
+        "display": "table-cell",
+        "width": "250px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="admin.fields.selection.proposal"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="1"
+    style={
+      Object {
+        "display": "table-cell",
+        "width": "250px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="implementation-phase"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="2"
+    style={
+      Object {
+        "display": "table-cell",
+        "width": "200px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="admin.fields.theme.status"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="3"
+    style={
+      Object {
+        "display": "none",
+        "width": "250px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="project_download.label.author"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="4"
+    style={
+      Object {
+        "display": "table-cell",
+        "width": "150px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="proposal.admin.reference"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="5"
+    style={
+      Object {
+        "display": "none",
+        "width": "200px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="proposal.district"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="6"
+    style={
+      Object {
+        "display": "none",
+        "width": "200px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="proposal.category"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="7"
+    style={
+      Object {
+        "display": "table-cell",
+        "width": "200px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="proposal.theme"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="8"
+    style={
+      Object {
+        "display": "none",
+        "width": "200px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="proposal.estimation"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="9"
+    style={
+      Object {
+        "display": "none",
+        "width": "250px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="project_download.label.likers"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="10"
+    style={
+      Object {
+        "display": "none",
+        "width": "200px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="last-activity"
+      values={Object {}}
+    />
+  </th>
+  <th
+    key="11"
+    style={
+      Object {
+        "display": "table-cell",
+        "width": "150px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="published-on"
+      values={Object {}}
+    />
+  </th>
+  <tr
+    key="0"
+  >
+    <td
+      key="0"
+    >
+      <a>
+        Installation de bancs
+      </a>
+    </td>
+    <td
+      key="1"
+    >
+      <Component />
+    </td>
+    <td
+      key="2"
+    />
+    <td
+      key="4"
+    >
+      1-3
+    </td>
+    <td
+      key="7"
+    >
+      Justice
+    </td>
+    <td
+      key="11"
+    >
+      <FormattedDate
+        value={2018-08-16T13:15:39.000Z}
+      />
+    </td>
+  </tr>
+  <tr
+    key="1"
+  >
+    <td
+      key="0"
+    >
+      <a>
+        Proposition plus votable
+      </a>
+    </td>
+    <td
+      key="1"
+    >
+      <Component />
+    </td>
+    <td
+      key="2"
+    >
+      <Label
+        bsClass="label"
+        bsStyle="info"
+        className="badge-pill"
+      >
+        En cours
+      </Label>
+    </td>
+    <td
+      key="4"
+    >
+      1-2
+    </td>
+    <td
+      key="7"
+    />
+    <td
+      key="11"
+    >
+      <FormattedDate
+        value={2018-09-17T14:15:39.000Z}
+      />
+    </td>
+  </tr>
+</ReactBootstrapTable>
 `;

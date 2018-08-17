@@ -4,14 +4,16 @@ import moment from 'moment';
 import ProgressList from '../../Ui/List/ProgressList';
 import CroppedLabel from '../../Ui/CroppedLabel';
 import ImplementationStepTitle from '../ImplementationStepTitle';
+import ProgressListItem from '../../Ui/List/ProgressListItem';
+import type { ImplementationStepTitle_progressSteps } from '../__generated__/ImplementationStepTitle_progressSteps.graphql';
 
 type Props = {
   data: Array<Object>,
 };
 
 export class ProposalListTableMobile extends React.Component<Props> {
-  getPhaseTitle = (phases: Array<Object>): string => {
-    return <ImplementationStepTitle phases={phases} />;
+  getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps): string => {
+    return <ImplementationStepTitle progressSteps={progressSteps} />;
   };
 
   render() {
@@ -20,17 +22,34 @@ export class ProposalListTableMobile extends React.Component<Props> {
     return (
       <ListGroup className="list-group-custom">
         {data.map((item, key) => {
+          const value = item.implementationPhase.value;
+          const openSteps = value.list.filter(step => moment().isBetween(step.startAt, step.endAt));
+          const openTimelessSteps = value.list.filter(
+            step => !step.endAt && moment().isAfter(step.startAt),
+          );
+
           const list =
             item.implementationPhase.value &&
-            item.implementationPhase.value.list.map(e => {
+            item.implementationPhase.value.list.map(step => {
               let isActive = false;
 
-              if (moment().isAfter(e.endAt)) {
+              if (moment().isAfter(step.endAt)) {
+                isActive = true;
+              }
+
+              if (
+                !step.endAt &&
+                moment().isAfter(step.startAt) &&
+                (openSteps.length !== 0 ||
+                  (openSteps.length === 0 &&
+                    openTimelessSteps.length > 1 &&
+                    openTimelessSteps[openTimelessSteps.length - 1].title !== step.title))
+              ) {
                 isActive = true;
               }
 
               return {
-                title: e.title,
+                title: step.title,
                 isActive,
               };
             });
@@ -57,7 +76,11 @@ export class ProposalListTableMobile extends React.Component<Props> {
                       <div className="mb-5 mt-10">
                         <span>{this.getPhaseTitle(item.implementationPhase.value.list)}</span>
                       </div>
-                      <ProgressList progressListItem={list} />
+                      <ProgressList>
+                        {list.map((element, liKey) => (
+                          <ProgressListItem key={liKey} item={element} />
+                        ))}
+                      </ProgressList>
                     </div>
                   )}
               </div>
