@@ -2,6 +2,8 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -83,6 +85,14 @@ class OpinionsController extends FOSRestController
 
         if (!$form->isValid()) {
             return $form;
+        }
+
+        if ($project->isOpinionCanBeFollowed()) {
+            $follower = new Follower();
+            $follower->setUser($author);
+            $follower->setOpinion($opinion);
+            $follower->setNotifiedOf(FollowerNotifiedOfInterface::ALL);
+            $opinion->addFollower($follower);
         }
 
         $em = $this->getDoctrine()->getManager();

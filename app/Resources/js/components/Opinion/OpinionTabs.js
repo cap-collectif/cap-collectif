@@ -139,8 +139,8 @@ class OpinionTabs extends React.Component<Props> {
               {this.isFollowable() && (
                 <NavItem className="opinion-tabs" eventKey="followers">
                   <FormattedMessage
-                    id="count-followers"
-                    values={{ count: opinion.allFollowers ? opinion.allFollowers.totalCount : 0 }}
+                    id="proposal.follower.count"
+                    values={{ num: opinion.allFollowers ? opinion.allFollowers.totalCount : 0 }}
                   />
                 </NavItem>
               )}
