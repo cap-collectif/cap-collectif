@@ -144,12 +144,26 @@ export class ReactBootstrapTable extends React.Component<Props> {
       }
 
       if (keyName === 'implementationPhase' && value) {
+        const openSteps = value.list.filter(e => moment().isBetween(e.startAt, e.endAt));
+        const openTimelessSteps = value.list.filter(e => !e.endAt && moment().isAfter(e.startAt));
+
         const list =
           value &&
           value.list.map(e => {
             let isActive = false;
 
             if (e.endAt && moment().isAfter(e.endAt)) {
+              isActive = true;
+            }
+
+            if (
+              !e.endAt &&
+              moment().isAfter(e.startAt) &&
+              (openSteps.length !== 0 ||
+                (openSteps.length === 0 &&
+                  openTimelessSteps.length > 1 &&
+                  openTimelessSteps[openTimelessSteps.length - 1].title !== e.title))
+            ) {
               isActive = true;
             }
 

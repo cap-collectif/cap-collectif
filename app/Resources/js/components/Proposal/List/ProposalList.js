@@ -15,7 +15,7 @@ type Props = {
   step: ?ProposalList_step,
   proposals: ProposalList_proposals,
   viewer: ?ProposalList_viewer,
-  view?: string,
+  view?: 'mosaic' | 'table',
 };
 
 const classes = classNames({
@@ -46,7 +46,9 @@ const renderProposals = (proposals, step, viewer) => (
   </Row>
 );
 
-const renderProposalListTableView = (proposals, step) => <ProposalListTable step={step} proposals={proposals} />;
+const renderProposalListTableView = (proposals, step) => (
+  <ProposalListTable step={step} proposals={proposals} />
+);
 
 export class ProposalList extends React.Component<Props> {
   render() {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalListToggleViewBtn /> should render a toggle button with map selected and without table list 1`] = `
+exports[`<ProposalListToggleViewBtn /> should render a toggle button with map selected 1`] = `
 <div
   aria-label="Step view"
   className="btn-group d-flex mb-15"
@@ -168,7 +168,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
 </div>
 `;
 
-exports[`<ProposalListToggleViewBtn /> should render a toggle button without map 1`] = `
+exports[`<ProposalListToggleViewBtn /> should render a toggle button without map & with table selected 1`] = `
 <div
   aria-label="Step view"
   className="btn-group d-flex mb-15"
@@ -181,7 +181,7 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button without map
   }
 >
   <Button
-    active={false}
+    active={true}
     block={false}
     bsClass="btn"
     bsStyle="default"

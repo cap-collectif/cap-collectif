@@ -3,7 +3,7 @@ import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
 import ProgressList from '../../Ui/List/ProgressList';
 import CroppedLabel from '../../Ui/CroppedLabel';
-import ImplementationPhaseTitle from '../ImplementationPhaseTitle';
+import ImplementationStepTitle from '../ImplementationStepTitle';
 
 type Props = {
   data: Array<Object>,
@@ -11,7 +11,7 @@ type Props = {
 
 export class ProposalListTableMobile extends React.Component<Props> {
   getPhaseTitle = (phases: Array<Object>): string => {
-    return <ImplementationPhaseTitle phases={phases} />;
+    return <ImplementationStepTitle phases={phases} />;
   };
 
   render() {

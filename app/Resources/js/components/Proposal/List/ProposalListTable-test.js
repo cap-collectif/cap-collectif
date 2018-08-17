@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalListTable } from './ProposalListTable';
+import { $refType } from '../../../mocks';
 
 describe('<ProposalListTable />', () => {
   const step = {
@@ -11,6 +12,7 @@ describe('<ProposalListTable />', () => {
       usingDistrict: true,
       usingCategories: true,
     },
+    $refType,
   };
 
   const stepFalseValues = {
@@ -19,6 +21,7 @@ describe('<ProposalListTable />', () => {
       usingDistrict: false,
       usingCategories: false,
     },
+    $refType,
   };
 
   const proposals = {
@@ -42,6 +45,7 @@ describe('<ProposalListTable />', () => {
         },
       },
     ],
+    $refType,
   };
 
   it('renders table with formatted data', () => {

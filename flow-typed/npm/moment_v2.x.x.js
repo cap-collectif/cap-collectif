@@ -207,7 +207,7 @@ declare class moment$Moment {
   toJSON(): string;
   toISOString(): string;
   toObject(): moment$MomentObject;
-  isBetween(from: moment$Moment|string|number|Date|Array<number>, to: moment$Moment|string|number|Date|Array<number>, units?: string, inclusivity?: moment$Inclusivity): bool;
+  isBetween(from: moment$Moment|string|number|Date|Array<number>, to: any|moment$Moment|string|number|Date|Array<number>, units?: string, inclusivity?: moment$Inclusivity): bool;
   isBefore(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isSame(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isAfter(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;

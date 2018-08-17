@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { createFragmentContainer } from 'react-relay';
-import * as graphql from 'graphql';
+import { graphql, createFragmentContainer } from 'react-relay';
 import type { ProposalListTable_proposals } from './__generated__/ProposalListTable_proposals.graphql';
 import type { ProposalListTable_step } from './__generated__/ProposalListTable_step.graphql';
+import type { ImplementationStepTitle_progressSteps } from '../__generated__/ImplementationStepTitle_progressSteps.graphql';
 import ReactBootstrapTable from '../../Ui/ReactBootstrapTable';
 import ProposalListTableMobile from './ProposalListTableMobile';
-import ImplementationPhaseTitle from '../ImplementationPhaseTitle';
+import ImplementationStepTitle from '../ImplementationStepTitle';
 
 type Props = {
   proposals: ProposalListTable_proposals,
@@ -30,13 +30,19 @@ export class ProposalListTable extends React.Component<Props, State> {
     this.setState({
       windowWidth: window.innerWidth,
     });
+
+    window.addEventListener('resize', () => {
+      this.setState({
+        windowWidth: window.innerWidth,
+      });
+    });
   }
 
-  getPhaseTitle = (phases: Array<Object>): string => {
-    return <ImplementationPhaseTitle phases={phases} />;
+  getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps) => {
+    return <ImplementationStepTitle progressSteps={progressSteps} />;
   };
 
-  getFormattedData = () => {
+  getFormattedData = (): Array<Object> => {
     const { proposals, step } = this.props;
 
     return (
@@ -47,7 +53,7 @@ export class ProposalListTable extends React.Component<Props, State> {
         .filter(Boolean)
         .map(node => {
           const getProposalTitle =
-            node.title.length > 55 ? `${node.title.substring(0, 55)}...` : node.title;
+            node.title.length > 55 ? `${node.title.substring(0, 55)}…` : node.title;
 
           return {
             title: {
@@ -118,14 +124,8 @@ export class ProposalListTable extends React.Component<Props, State> {
     );
   };
 
-  getTable = () => {
+  render() {
     const { windowWidth } = this.state;
-
-    window.addEventListener('resize', () => {
-      this.setState({
-        windowWidth: window.innerWidth,
-      });
-    });
 
     const data = this.getFormattedData();
 
@@ -134,10 +134,6 @@ export class ProposalListTable extends React.Component<Props, State> {
     }
 
     return <ReactBootstrapTable data={data} />;
-  };
-
-  render() {
-    return this.getTable();
   }
 }
 
@@ -163,6 +159,7 @@ export default createFragmentContainer(ProposalListTable, {
             title
             startAt
             endAt
+            ...ImplementationStepTitle_progressSteps
           }
           currentVotableStep {
             title

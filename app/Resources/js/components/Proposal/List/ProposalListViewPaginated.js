@@ -13,7 +13,7 @@ type Props = {
   order: string,
   relay: RelayPaginationProp,
   step: ProposalListViewPaginated_step,
-  view: string,
+  view: 'mosaic' | 'table',
   viewer: ?ProposalListViewPaginated_viewer,
 };
 type State = {

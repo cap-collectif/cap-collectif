@@ -82,7 +82,7 @@ type Props = {
   step: ProposalListView_step,
   viewer: ?ProposalListView_viewer,
   visible: boolean,
-  view: string,
+  view: 'mosaic' | 'table',
 };
 type State = {
   isRefetching: boolean,

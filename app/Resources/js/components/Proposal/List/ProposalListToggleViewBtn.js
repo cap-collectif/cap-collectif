@@ -8,7 +8,7 @@ import config from '../../../config';
 
 type Props = {
   onChange: Function,
-  mode: string,
+  mode?: 'mosaic' | 'map' | 'table',
   showMapButton: boolean,
 };
 

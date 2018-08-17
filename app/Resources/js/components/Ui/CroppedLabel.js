@@ -31,8 +31,7 @@ export class CroppedLabel extends React.Component<Props> {
       return (
         <OverlayTrigger overlay={tooltip} placement="top">
           <Label bsStyle={label.color} className={className}>
-            {label.name.substring(0, 9)}
-            ...
+            {label.name.substring(0, 9)}…
           </Label>
         </OverlayTrigger>
       );
