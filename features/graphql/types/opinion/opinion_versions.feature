@@ -47,3 +47,4 @@ Scenario: Anonymous wants to get versions for an opinion
     }
   }
   """
+  
