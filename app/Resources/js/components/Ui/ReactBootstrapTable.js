@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Table } from 'react-bootstrap';
 
 type Props = {
-  children: Object,
+  children: Array<?React.Node>,
 };
 
 export const Container = styled.div`

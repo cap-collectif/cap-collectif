@@ -47,6 +47,7 @@ const renderProposals = (proposals, step, viewer) => (
 );
 
 const renderProposalListTableView = (proposals, step) => (
+  // $FlowFixMe
   <ProposalListTable step={step} proposals={proposals} />
 );
 

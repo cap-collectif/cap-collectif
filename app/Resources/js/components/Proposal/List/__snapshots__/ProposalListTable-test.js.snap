@@ -7,42 +7,46 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
       Object {
         "author": Object {
           "text": "project_download.label.author",
-          "value": undefined,
+          "value": Object {
+            "displayName": "admin",
+            "media": null,
+            "url": "google.com",
+          },
           "width": "250px",
         },
         "category": Object {
           "hidden": true,
           "text": "proposal.category",
-          "value": undefined,
+          "value": null,
         },
         "district": Object {
           "hidden": true,
           "text": "proposal.district",
-          "value": undefined,
+          "value": null,
         },
         "implementationPhase": Object {
           "text": "implementation-phase",
           "value": Object {
-            "list": undefined,
-            "title": undefined,
+            "list": Array [],
+            "title": false,
           },
           "width": "250px",
         },
         "lastActivity": Object {
           "text": "last-activity",
           "value": Object {
-            "date": undefined,
-            "user": undefined,
+            "date": null,
+            "user": null,
           },
         },
         "likers": Object {
           "text": "project_download.label.likers",
-          "value": undefined,
+          "value": Array [],
           "width": "250px",
         },
         "priceEstimation": Object {
           "text": "proposal.estimation",
-          "value": undefined,
+          "value": null,
         },
         "publishedOn": Object {
           "text": "published-on",
@@ -56,7 +60,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
         },
         "status": Object {
           "text": "admin.fields.theme.status",
-          "value": undefined,
+          "value": null,
         },
         "theme": Object {
           "hidden": true,
@@ -67,7 +71,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
           "text": "admin.fields.selection.proposal",
           "value": Object {
             "displayTitle": "Installation de bancs",
-            "url": undefined,
+            "url": null,
           },
           "width": "250px",
         },
@@ -75,42 +79,46 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
       Object {
         "author": Object {
           "text": "project_download.label.author",
-          "value": undefined,
+          "value": Object {
+            "displayName": "admin2",
+            "media": null,
+            "url": "google.com",
+          },
           "width": "250px",
         },
         "category": Object {
           "hidden": true,
           "text": "proposal.category",
-          "value": undefined,
+          "value": null,
         },
         "district": Object {
           "hidden": true,
           "text": "proposal.district",
-          "value": undefined,
+          "value": null,
         },
         "implementationPhase": Object {
           "text": "implementation-phase",
           "value": Object {
-            "list": undefined,
-            "title": undefined,
+            "list": Array [],
+            "title": false,
           },
           "width": "250px",
         },
         "lastActivity": Object {
           "text": "last-activity",
           "value": Object {
-            "date": undefined,
-            "user": undefined,
+            "date": null,
+            "user": null,
           },
         },
         "likers": Object {
           "text": "project_download.label.likers",
-          "value": undefined,
+          "value": Array [],
           "width": "250px",
         },
         "priceEstimation": Object {
           "text": "proposal.estimation",
-          "value": undefined,
+          "value": null,
         },
         "publishedOn": Object {
           "text": "published-on",
@@ -132,13 +140,13 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
         "theme": Object {
           "hidden": true,
           "text": "proposal.theme",
-          "value": undefined,
+          "value": "Justice",
         },
         "title": Object {
           "text": "admin.fields.selection.proposal",
           "value": Object {
             "displayTitle": "Proposition plus votable",
-            "url": undefined,
+            "url": null,
           },
           "width": "250px",
         },
@@ -155,42 +163,46 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       Object {
         "author": Object {
           "text": "project_download.label.author",
-          "value": undefined,
+          "value": Object {
+            "displayName": "admin",
+            "media": null,
+            "url": "google.com",
+          },
           "width": "250px",
         },
         "category": Object {
           "hidden": false,
           "text": "proposal.category",
-          "value": undefined,
+          "value": null,
         },
         "district": Object {
           "hidden": false,
           "text": "proposal.district",
-          "value": undefined,
+          "value": null,
         },
         "implementationPhase": Object {
           "text": "implementation-phase",
           "value": Object {
-            "list": undefined,
-            "title": undefined,
+            "list": Array [],
+            "title": false,
           },
           "width": "250px",
         },
         "lastActivity": Object {
           "text": "last-activity",
           "value": Object {
-            "date": undefined,
-            "user": undefined,
+            "date": null,
+            "user": null,
           },
         },
         "likers": Object {
           "text": "project_download.label.likers",
-          "value": undefined,
+          "value": Array [],
           "width": "250px",
         },
         "priceEstimation": Object {
           "text": "proposal.estimation",
-          "value": undefined,
+          "value": null,
         },
         "publishedOn": Object {
           "text": "published-on",
@@ -204,7 +216,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         },
         "status": Object {
           "text": "admin.fields.theme.status",
-          "value": undefined,
+          "value": null,
         },
         "theme": Object {
           "hidden": false,
@@ -215,7 +227,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
           "text": "admin.fields.selection.proposal",
           "value": Object {
             "displayTitle": "Installation de bancs",
-            "url": undefined,
+            "url": null,
           },
           "width": "250px",
         },
@@ -223,42 +235,46 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       Object {
         "author": Object {
           "text": "project_download.label.author",
-          "value": undefined,
+          "value": Object {
+            "displayName": "admin2",
+            "media": null,
+            "url": "google.com",
+          },
           "width": "250px",
         },
         "category": Object {
           "hidden": false,
           "text": "proposal.category",
-          "value": undefined,
+          "value": null,
         },
         "district": Object {
           "hidden": false,
           "text": "proposal.district",
-          "value": undefined,
+          "value": null,
         },
         "implementationPhase": Object {
           "text": "implementation-phase",
           "value": Object {
-            "list": undefined,
-            "title": undefined,
+            "list": Array [],
+            "title": false,
           },
           "width": "250px",
         },
         "lastActivity": Object {
           "text": "last-activity",
           "value": Object {
-            "date": undefined,
-            "user": undefined,
+            "date": null,
+            "user": null,
           },
         },
         "likers": Object {
           "text": "project_download.label.likers",
-          "value": undefined,
+          "value": Array [],
           "width": "250px",
         },
         "priceEstimation": Object {
           "text": "proposal.estimation",
-          "value": undefined,
+          "value": null,
         },
         "publishedOn": Object {
           "text": "published-on",
@@ -280,13 +296,13 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         "theme": Object {
           "hidden": false,
           "text": "proposal.theme",
-          "value": undefined,
+          "value": "Justice",
         },
         "title": Object {
           "text": "admin.fields.selection.proposal",
           "value": Object {
             "displayTitle": "Proposition plus votable",
-            "url": undefined,
+            "url": null,
           },
           "width": "250px",
         },
@@ -312,7 +328,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
     key="1"
     style={
       Object {
-        "display": "table-cell",
+        "display": "none",
         "width": "250px",
       }
     }
@@ -340,7 +356,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
     key="3"
     style={
       Object {
-        "display": "none",
+        "display": "table-cell",
         "width": "250px",
       }
     }
@@ -468,18 +484,38 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
     <td
       key="0"
     >
-      <a>
+      <a
+        href={null}
+      >
         Installation de bancs
       </a>
     </td>
     <td
-      key="1"
-    >
-      <Component />
-    </td>
-    <td
       key="2"
     />
+    <td
+      key="3"
+    >
+      <div
+        className="d-flex align-items-center"
+      >
+        <Connect(UserAvatar)
+          defaultAvatar={null}
+          user={
+            Object {
+              "_links": Object {},
+              "media": null,
+              "username": "admin",
+            }
+          }
+        />
+        <a
+          href="google.com"
+        >
+          admin
+        </a>
+      </div>
+    </td>
     <td
       key="4"
     >
@@ -504,14 +540,11 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
     <td
       key="0"
     >
-      <a>
+      <a
+        href={null}
+      >
         Proposition plus votable
       </a>
-    </td>
-    <td
-      key="1"
-    >
-      <Component />
     </td>
     <td
       key="2"
@@ -525,13 +558,38 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
       </Label>
     </td>
     <td
+      key="3"
+    >
+      <div
+        className="d-flex align-items-center"
+      >
+        <Connect(UserAvatar)
+          defaultAvatar={null}
+          user={
+            Object {
+              "_links": Object {},
+              "media": null,
+              "username": "admin2",
+            }
+          }
+        />
+        <a
+          href="google.com"
+        >
+          admin2
+        </a>
+      </div>
+    </td>
+    <td
       key="4"
     >
       1-2
     </td>
     <td
       key="7"
-    />
+    >
+      Justice
+    </td>
     <td
       key="11"
     >

@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment';
@@ -62,10 +63,11 @@ export class ProposalListTable extends React.Component<Props, State> {
     return <ImplementationStepTitle progressSteps={progressSteps} />;
   };
 
-  getFormattedData = (): Array<Object> => {
+  getFormattedData = (): ?Array<Object> => {
     const { proposals, step } = this.props;
 
     return (
+      proposals &&
       proposals.edges &&
       proposals.edges
         .filter(Boolean)
@@ -88,6 +90,7 @@ export class ProposalListTable extends React.Component<Props, State> {
                 title:
                   node.progressSteps &&
                   node.progressSteps.length > 0 &&
+                  // $FlowFixMe
                   this.getPhaseTitle(node.progressSteps),
               },
               width: '250px',
@@ -147,6 +150,7 @@ export class ProposalListTable extends React.Component<Props, State> {
   getColumns = (): Array<Column> => {
     const data = this.getFormattedData();
 
+    if (!data) return [];
     const columnsName = Object.keys(data[0]);
     const firstData = data[0];
 
@@ -347,6 +351,7 @@ export class ProposalListTable extends React.Component<Props, State> {
     const { windowWidth } = this.state;
 
     const data = this.getFormattedData();
+    if (!data) return null;
     const columns = this.getColumns();
 
     if (windowWidth < 992) {

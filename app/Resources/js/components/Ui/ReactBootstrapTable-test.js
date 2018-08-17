@@ -190,6 +190,16 @@ describe('<ReactBootstrapTable />', () => {
           <th>Titre</th>
           <th>Valeur</th>
         </React.Fragment>
+        <React.Fragment>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+          </tr>
+        </React.Fragment>
       </ReactBootstrapTable>,
     );
     expect(wrapper).toMatchSnapshot();

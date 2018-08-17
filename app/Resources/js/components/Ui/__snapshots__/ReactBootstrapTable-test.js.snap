@@ -11,9 +11,33 @@ exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
     striped={false}
   >
     <thead>
-      <tr />
+      <tr>
+        <th>
+          Titre
+        </th>
+        <th>
+          Valeur
+        </th>
+      </tr>
     </thead>
-    <tbody />
+    <tbody>
+      <tr>
+        <td>
+          1
+        </td>
+        <td>
+          2
+        </td>
+      </tr>
+      <tr>
+        <td>
+          1
+        </td>
+        <td>
+          2
+        </td>
+      </tr>
+    </tbody>
   </Table>
 </ReactBootstrapTable__Container>
 `;
