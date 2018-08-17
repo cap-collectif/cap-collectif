@@ -11,7 +11,6 @@ import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../constants/ProposalConstants';
 type Props = {
   opinion: OpinionFollowersBox_opinion,
   relay: RelayPaginationProp,
-  pageAdmin: boolean,
 };
 
 export class OpinionFollowersBox extends React.Component<Props> {

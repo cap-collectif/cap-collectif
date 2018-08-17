@@ -80,7 +80,6 @@ describe('<FollowingsTab />', () => {
 
   it('should render a list of contribution', () => {
     const wrapper = shallow(<FollowingsTab viewer={viewer} />);
-    wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();
   });
   it('should render an empty list', () => {
@@ -89,7 +88,6 @@ describe('<FollowingsTab />', () => {
         viewer={{ followingOpinions: { edges: [] }, followingProposals: { edges: [] } }}
       />,
     );
-    wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();
   });
 });
