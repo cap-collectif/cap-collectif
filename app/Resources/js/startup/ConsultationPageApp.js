@@ -7,9 +7,7 @@ import ConsultationPropositionBox from '../components/Consultation/ConsultationP
 export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <div>
         <ConsultationPropositionBox {...props} />
-      </div>
     </IntlProvider>
   </Provider>
 );

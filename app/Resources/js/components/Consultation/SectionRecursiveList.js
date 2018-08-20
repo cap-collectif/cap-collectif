@@ -12,6 +12,7 @@ type Props = {
 export class SectionRecursiveList extends React.Component<Props> {
   render() {
     const { consultation } = this.props;
+
     return (
       <div>
         {/* $FlowFixMe */}

@@ -133,6 +133,7 @@ class SectionAdmin extends AbstractAdmin
         if ($fields['title']) {
             $formMapper->add('title', null, [
                 'label' => 'admin.fields.section.title',
+                'help' => 'Soyez concis, 1 ou 2 mots' // Todo trad
             ]);
         } else {
             $formMapper->add('title', null, [
@@ -153,6 +154,7 @@ class SectionAdmin extends AbstractAdmin
             $formMapper->add('teaser', null, [
                 'label' => 'admin.fields.section.teaser',
                 'required' => false,
+                'help' => 'Étayez votre titre' // Todo trad
             ]);
         }
 
