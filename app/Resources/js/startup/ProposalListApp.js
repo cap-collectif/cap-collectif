@@ -55,6 +55,7 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
                           step={null}
                           proposals={proposalForm.proposals}
                           viewer={props.viewer || null}
+                          view="mosaic"
                         />
                       </div>
                     ))}
