@@ -85,6 +85,7 @@ class AppKernel extends Kernel
             // PolyCollection support.
             new \Infinite\FormBundle\InfiniteFormBundle(),
             new Overblog\DataLoaderBundle\OverblogDataLoaderBundle(),
+            new Overblog\GraphiQLBundle\OverblogGraphiQLBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -92,7 +93,6 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-            $bundles[] = new \Overblog\GraphiQLBundle\OverblogGraphiQLBundle();
         }
 
         if (in_array($this->getEnvironment(), ['dev', 'prod'], true)) {
