@@ -11,6 +11,7 @@ import RemainingTime from './../Utils/RemainingTime';
 import DatesInterval from './../Utils/DatesInterval';
 import StepInfos from '../../components/Steps/Page/StepInfos';
 import type { ConsultationPropositionBoxQueryResponse } from './__generated__/ConsultationPropositionBoxQuery.graphql';
+import ConsultationPlan from './ConsultationPlan';
 
 type Step = {
   id: string,
@@ -51,24 +52,7 @@ export class ConsultationPropositionBox extends React.Component<Props> {
 
     return (
       <div className="row">
-        <div className="col-sm-3">
-          <nav className="navbar navbar-light bg-light flex-column">
-            <a className="navbar-brand" href="#">Navbar</a>
-            <nav className="nav nav-pills flex-column">
-              <a className="nav-link" href="#item-1">Item 1</a>
-              <nav className="nav nav-pills flex-column">
-                <a className="nav-link ml-3 my-1" href="#item-1-1">Item 1-1</a>
-                <a className="nav-link ml-3 my-1" href="#item-1-2">Item 1-2</a>
-              </nav>
-              <a className="nav-link" href="#item-2">Item 2</a>
-              <a className="nav-link" href="#item-3">Item 3</a>
-              <nav className="nav nav-pills flex-column">
-                <a className="nav-link ml-3 my-1" href="#item-3-1">Item 3-1</a>
-                <a className="nav-link ml-3 my-1" href="#item-3-2">Item 3-2</a>
-              </nav>
-            </nav>
-          </nav>
-        </div>
+        <ConsultationPlan step={step} />
         <div className="col-sm-9">
           {/* <Panel>
             <span>
@@ -88,23 +72,23 @@ export class ConsultationPropositionBox extends React.Component<Props> {
               </div>
             )}
             {step.endAt &&
-            step.status === 'open' &&
-            !step.timeless && (
-              <div className="mr-15 d-ib">
-                <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
-              </div>
-            )}
+              step.status === 'open' &&
+              !step.timeless && (
+                <div className="mr-15 d-ib">
+                  <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
+                </div>
+              )}
           </div>
           <StepInfos step={step} />
           <QueryRenderer
             environment={environment}
             query={graphql`
-            query ConsultationPropositionBoxQuery($consultationId: ID!) {
-              consultation: node(id: $consultationId) {
-                ...SectionRecursiveList_consultation
+              query ConsultationPropositionBoxQuery($consultationId: ID!) {
+                consultation: node(id: $consultationId) {
+                  ...SectionRecursiveList_consultation
+                }
               }
-            }
-          `}
+            `}
             variables={{
               consultationId: step.id,
             }}

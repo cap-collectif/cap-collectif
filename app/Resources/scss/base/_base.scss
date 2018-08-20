@@ -138,6 +138,7 @@
 
     &__opinion {
       font-size: 16px;
+      background-color: $white;
 
       .left-block {
         display: flex;
@@ -307,4 +308,57 @@ svg.avatar-group {
   box-shadow: 0 0 5px 1.5px rgba(8, 121, 180, 0.46);
   border-radius: 4px;
   padding: 5px;
+}
+
+/* ======================= Consult plan ============================*/
+
+.consult-plan {
+    .nav.nav-pills {
+        li {
+            border: 1px solid $page-bgc;
+
+            a {
+                color: $black;
+            }
+
+            &.active a, &:hover a {
+                color: $black;
+                background-color: transparent;
+                // background-color: $white;
+                // border: 1px solid $border-color;
+            }
+
+            &.active, &:hover {
+                background-color: $white;
+                border: 1px solid $border-color;
+            }
+        }
+
+        .level {
+            &--0 {
+                font-weight: 600;
+            }
+
+            &--1 {
+                padding-left: 20px;
+                font-weight: 500;
+            }
+
+            &--2 {
+                padding-left: 40px;
+                font-weight: 400;
+            }
+
+            &--3 {
+                padding-left: 60px;
+                font-weight: 300;
+            }
+
+            &--4 {
+                padding-left: 80px;
+                font-weight: 300;
+            }
+        }
+
+    }
 }
