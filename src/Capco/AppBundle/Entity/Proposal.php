@@ -265,6 +265,7 @@ class Proposal
         $this->comments = new ArrayCollection();
         $this->responses = new ArrayCollection();
         $this->commentsCount = 0;
+        $this->updatedAt = new \Datetime();
         $this->selections = new ArrayCollection();
         $this->likers = new ArrayCollection();
         $this->evaluers = new ArrayCollection();
