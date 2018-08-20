@@ -9,7 +9,7 @@ const InlineList = styled.ul.attrs({
   margin: 0;
 
   li {
-    display: inline-block;
+    display: inline;
 
     &::after {
       content: '•';

@@ -34,7 +34,6 @@ describe('<ProposalList />', () => {
   const proposalsList = {
     totalCount: 2,
     $refType,
-    $fragmentRefs,
     edges: [{ node: { id: '1', $fragmentRefs } }, { node: { id: '2', $fragmentRefs } }],
   };
 

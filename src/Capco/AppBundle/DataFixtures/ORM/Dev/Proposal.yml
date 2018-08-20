@@ -48,8 +48,6 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme3'
     district: '@district2'
     status: '@status2'
-    updatedAt: <(new \DateTime('2016-12-05'))>
-    updateAuthor: '@user5'
     publishedAt: <(new \DateTime('2015-02-01'))>
     createdAt: <(new \DateTime('2015-02-01'))>
     likers: ['@user504']
@@ -183,7 +181,6 @@ Capco\AppBundle\Entity\Proposal:
     estimation: 100
     reference: 7
     publishedAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-09-20'))>
   proposal11:
     id: proposal11
     title: Proposition plus votable

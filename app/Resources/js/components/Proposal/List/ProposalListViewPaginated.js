@@ -13,7 +13,6 @@ type Props = {
   order: string,
   relay: RelayPaginationProp,
   step: ProposalListViewPaginated_step,
-  view: 'mosaic' | 'table',
   viewer: ?ProposalListViewPaginated_viewer,
 };
 type State = {
@@ -26,7 +25,7 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
   };
 
   render() {
-    const { step, viewer, relay, view } = this.props;
+    const { step, viewer, relay } = this.props;
     return (
       <div>
         <VisibilityBox enabled={step.private || false}>
@@ -35,11 +34,10 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
             step={step}
             proposals={step.proposals}
             viewer={viewer}
-            view={view}
             id="proposals-list"
           />
         </VisibilityBox>
-        <div id="proposal-list-pagination-footer" className="text-center">
+        <div id="proposal-list-pagination-footer">
           {relay.hasMore() && (
             <Button
               disabled={this.state.loading}
