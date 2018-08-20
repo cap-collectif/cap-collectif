@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
@@ -12,7 +13,7 @@ type Props = {
 };
 
 export class ProposalListTableMobile extends React.Component<Props> {
-  getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps): string => {
+  getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps) => {
     return <ImplementationStepTitle progressSteps={progressSteps} />;
   };
 
