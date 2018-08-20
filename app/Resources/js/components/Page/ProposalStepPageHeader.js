@@ -19,45 +19,42 @@ export class ProposalStepPageHeader extends React.Component<Props> {
     const fusionCount = step.allProposals.fusionCount;
 
     return (
-      <React.Fragment>
-        <h3 className="h3 d-ib" style={{ marginBottom: '15px' }}>
-          {total !== queryCount ? (
-            <FormattedMessage
-              id="proposal.count_with_total"
-              values={{
-                num: queryCount,
-                total,
-              }}
-            />
-          ) : (
-            <FormattedMessage
-              id="proposal.count"
-              values={{
-                num: total,
-              }}
-            />
-          )}
-          {step.form &&
-            step.kind === 'collect' &&
-            fusionCount > 0 && (
-              <span style={{ color: '#999', fontWeight: 300 }}>
-                {' '}
-                <FormattedMessage
-                  id="proposal.count_fusions"
-                  values={{
-                    num: fusionCount,
-                  }}
-                />
-              </span>
-            )}
-        </h3>
+      <h3 className="h3" style={{ marginBottom: '15px' }}>
+        {total !== queryCount ? (
+          <FormattedMessage
+            id="proposal.count_with_total"
+            values={{
+              num: queryCount,
+              total,
+            }}
+          />
+        ) : (
+          <FormattedMessage
+            id="proposal.count"
+            values={{
+              num: total,
+            }}
+          />
+        )}
         {step.form &&
           step.kind === 'collect' && (
-            <span className="pull-right mb-20 mt-20">
-              <ProposalCreate proposalForm={step.form} />
+            <span>
+              {fusionCount > 0 && (
+                <span style={{ color: '#999', fontWeight: 300 }}>
+                  <FormattedMessage
+                    id="proposal.count_fusions"
+                    values={{
+                      num: fusionCount,
+                    }}
+                  />
+                </span>
+              )}
+              <span className="pull-right">
+                <ProposalCreate proposalForm={step.form} />
+              </span>
             </span>
           )}
-      </React.Fragment>
+      </h3>
     );
   }
 }

@@ -17,15 +17,8 @@ export class CarouselContainer extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      windowWidth: 0,
-    };
-  }
-
-  componentDidMount() {
-    // eslint-disable-next-line
-    this.setState({
       windowWidth: window.innerWidth,
-    });
+    };
   }
 
   getCarousel = () => {
