@@ -43,7 +43,7 @@ def static_analysis():
 @task(environments=['local', 'ci'])
 def phpspec():
     "Run PHP Unit Tests"
-    env.service_command('./bin/phpspec run --no-code-generation', 'application', env.www_app)
+    env.service_command('php -d memory_limit=-1 bin/phpspec run --no-code-generation', 'application', env.www_app)
 
 
 @task(environments=['local', 'ci'])
