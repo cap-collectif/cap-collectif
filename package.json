@@ -33,7 +33,7 @@
   "pre-commit": "precommit",
   "flow-coverage-report": {
     "threshold": 70,
-    "output": "coverage/flow/",
+    "outputDir": "coverage/flow/",
     "includeGlob": [
       "app/Resources/js/**/*.js"
     ],
