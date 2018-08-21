@@ -13,10 +13,16 @@ coverage:
         target: 89%
         flags: frontend
       backend:
-        target: 50%
+        target: 1%
         flags: backend
+      graphql:
+        target: 50%
+        flags: graphql
 
 flags:
+  graphql:
+    paths:
+      - src/Capco/AppBundle/GraphQL
   backend:
     paths:
       - src/
