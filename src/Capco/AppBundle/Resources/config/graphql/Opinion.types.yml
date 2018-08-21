@@ -32,9 +32,9 @@ Opinion:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
       show_url:
-        resolve: "@=resolver('proposition_url', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'
       url:
-        resolve: "@=resolver('proposition_url', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'
       pinned:
         type: 'Boolean!'
         description: 'true if the contribution is pinned.'

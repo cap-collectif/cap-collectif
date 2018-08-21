@@ -179,6 +179,11 @@ services:
           alias: 'proposition_url',
           method: 'resolvePropositionUrl',
         }
+          name: overblog_graphql.resolver,
+          alias: 'proposition_arguments',
+          method: 'resolvePropositionArguments',
+        }
+
       - {
           name: overblog_graphql.resolver,
           alias: 'proposition_vote_author',
@@ -502,3 +507,6 @@ services:
       - '@overblog_graphql.type_resolver'
     tags:
       - { name: overblog_graphql.resolver }
+
+  Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver:
+    autowire: true
