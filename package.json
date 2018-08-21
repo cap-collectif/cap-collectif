@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "test": "jest --notify",
-    "test:ci": "jest --coverage --ci --runInBand",
+    "test:ci": "jest --coverage --ci --forceExit --runInBand",
     "test:watch": "jest --watchAll",
     "flow": "flow",
     "flow:coverage": "flow-coverage-report --type html --threshold 70 -i 'app/Resources/js/**/*.js'",
@@ -84,6 +84,8 @@
     "printWidth": 100
   },
   "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
     "coverageReporters": [
       "json-summary"
     ],
@@ -132,6 +134,7 @@
     "bundlesize": "^0.15.3",
     "classnames": "^2.2.3",
     "clean-css-brunch": "^2.10.0",
+    "codecov": "^3.0.4",
     "copycat-brunch": "^1.1.0",
     "create-react-class": "^15.6.3",
     "diff": "^3.3.0",
