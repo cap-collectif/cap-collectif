@@ -6,7 +6,7 @@
     "test:ci": "jest --coverage --ci --runInBand",
     "test:watch": "jest --watchAll",
     "flow": "flow",
-    "flow:coverage": "flow-coverage-report",
+    "flow:coverage": "flow-coverage-report --type html --threshold 70 -i 'app/Resources/js/**/*.js'",
     "build": "NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
     "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build -p",
@@ -31,18 +31,6 @@
     "precommit": "flow status && lint-staged"
   },
   "pre-commit": "precommit",
-  "flow-coverage-report": {
-    "threshold": 70,
-    "outputDir": "coverage/flow/",
-    "includeGlob": [
-      "app/Resources/js/**/*.js"
-    ],
-    "type": [
-      "text",
-      "html",
-      "json"
-    ]
-  },
   "lint-staged": {
     "app/Resources/js/**/*.js": [
       "eslint --fix",
@@ -96,11 +84,8 @@
     "printWidth": 100
   },
   "jest": {
-    "coverageDirectory": "./coverage/js",
-    "collectCoverage": true,
     "coverageReporters": [
-      "json-summary",
-      "lcov"
+      "json-summary"
     ],
     "roots": [
       "app/Resources/js"
@@ -147,7 +132,6 @@
     "bundlesize": "^0.15.3",
     "classnames": "^2.2.3",
     "clean-css-brunch": "^2.10.0",
-    "codecov": "^3.0.4",
     "copycat-brunch": "^1.1.0",
     "create-react-class": "^15.6.3",
     "diff": "^3.3.0",

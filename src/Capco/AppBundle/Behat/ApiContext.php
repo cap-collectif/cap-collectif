@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
-use PHPUnit\Framework\Assert;
+use PHPUnit_Framework_Assert as PHPUnit;
 
 class ApiContext extends ApplicationContext
 {
@@ -157,10 +157,11 @@ EOF;
     public function iSendARequest($method, $url)
     {
         $this->response = $this->client->request($method, $url, [
-            'headers' => [
-                'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
-            ],
+            'headers' =>
+                [
+                    'Authorization' => sprintf('Bearer %s', $this->token),
+                    'Content-Type' => 'application/json',
+                ],
             'exceptions' => false,
         ]);
     }
@@ -191,10 +192,11 @@ EOF;
         $this->response = $this->client->request($method, $url, [
             'json' => json_decode($string->getRaw(), true),
             'exceptions' => false,
-            'headers' => [
-                'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
-            ],
+            'headers' =>
+                [
+                    'Authorization' => sprintf('Bearer %s', $this->token),
+                    'Content-Type' => 'application/json',
+                ],
         ]);
     }
 
@@ -255,7 +257,7 @@ EOF;
      */
     public function theJsonResponseStatusCodeShouldBe(int $code)
     {
-        Assert::assertSame(
+        PHPUnit::assertSame(
             (int) $code,
             (int) $this->response->getStatusCode(),
             (string) $this->response->getBody()
@@ -270,7 +272,7 @@ EOF;
         $body = (string) $this->response->getBody();
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
-        Assert::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());
+        PHPUnit::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());
     }
 
     /**
@@ -398,7 +400,7 @@ EOF;
             }
         }
 
-        Assert::assertTrue($logExists);
+        PHPUnit::assertTrue($logExists);
     }
 
     /**
@@ -460,7 +462,7 @@ EOF;
                 $max = 100000;
                 $pinned = false;
             }
-            Assert::assertGreaterThanOrEqual($comment['votesCount'], $max);
+            PHPUnit::assertGreaterThanOrEqual($comment['votesCount'], $max);
             $max = $comment['votesCount'];
         }
     }
@@ -486,7 +488,7 @@ EOF;
         $em->getFilters()->disable('softdeleted');
         $proposal = $em->getRepository('CapcoAppBundle:Proposal')->find($id);
 
-        Assert::assertTrue($proposal->isDeleted());
+        PHPUnit::assertTrue($proposal->isDeleted());
     }
 
     /**
@@ -509,11 +511,12 @@ EOF;
         $this->response = $this->client->request($method, $url, [
             'json' => json_decode($body, true),
             'exceptions' => false,
-            'headers' => [
-                'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ],
+            'headers' =>
+                [
+                    'Authorization' => sprintf('Bearer %s', $this->token),
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ],
         ]);
     }
 

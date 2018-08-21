@@ -23,13 +23,8 @@ use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
 
 class ConsultationStepExtractorSpec extends ObjectBehavior
 {
-    function let(
-        EntityManager $em,
-        TranslatorInterface $translator,
-        Router $router,
-        OpinionTypesResolver $opinionTypesResolver,
-        UrlResolver $urlResolver
-    ) {
+    function let(EntityManager $em, TranslatorInterface $translator, Router $router, OpinionTypesResolver $opinionTypesResolver, UrlResolver $urlResolver)
+    {
         $this->beConstructedWith($em, $translator, $router, $opinionTypesResolver, $urlResolver);
     }
 
@@ -38,10 +33,8 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $this->shouldHaveType(ConsultationStepExtractor::class);
     }
 
-    function it_can_create_or_update_elements_from_consultation_step(
-        Synthesis $synthesis,
-        ConsultationStep $consultationStep
-    ) {
+    function it_can_create_or_update_elements_from_consultation_step(Synthesis $synthesis, ConsultationStep $consultationStep)
+    {
         // Objects can not be mocked because we need to call get_class() method on them
 
         $opinionType = new OpinionType();
@@ -96,21 +89,16 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
 
         $currentElements = new ArrayCollection([$element0, $element1, $element2, $element3]);
 
-        $synthesis
-            ->getElements()
-            ->willReturn($currentElements)
-            ->shouldBeCalled();
+        $synthesis->getElements()->willReturn($currentElements)->shouldBeCalled();
         $consultationStepType = new ConsultationStepType();
         $consultationStep->getIsEnabled()->willReturn(true);
-        $consultationStep
-            ->getConsultationStepType()
-            ->willReturn($consultationStepType)
-            ->shouldBeCalled();
+        $consultationStep->getConsultationStepType()->willReturn($consultationStepType)->shouldBeCalled();
 
-        $updatedSynthesis = $this->createOrUpdateElementsFromConsultationStep(
-            $synthesis,
-            $consultationStep
-        )->shouldReturnAnInstanceOf(Synthesis::class);
+        $updatedSynthesis = $this
+          ->createOrUpdateElementsFromConsultationStep($synthesis, $consultationStep)
+          ->shouldReturnAnInstanceOf(Synthesis::class)
+        ;
+        expect(count($updatedSynthesis->getElements()))->toBe(count($currentElements));
     }
 
     function it_can_tell_if_element_is_related_to_object(SynthesisElement $element)
@@ -120,47 +108,23 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $opinion->setId(42);
 
         // Related element (same class, same id)
-        $element
-            ->getLinkedDataClass()
-            ->willReturn(Opinion::class)
-            ->shouldBeCalled();
-        $element
-            ->getLinkedDataId()
-            ->willReturn(42)
-            ->shouldBeCalled();
+        $element->getLinkedDataClass()->willReturn(Opinion::class)->shouldBeCalled();
+        $element->getLinkedDataId()->willReturn(42)->shouldBeCalled();
         $this->isElementExisting($element, $opinion)->shouldReturn(true);
 
         // Not related (different id)
-        $element
-            ->getLinkedDataClass()
-            ->willReturn(Opinion::class)
-            ->shouldBeCalled();
-        $element
-            ->getLinkedDataId()
-            ->willReturn(51)
-            ->shouldBeCalled();
+        $element->getLinkedDataClass()->willReturn(Opinion::class)->shouldBeCalled();
+        $element->getLinkedDataId()->willReturn(51)->shouldBeCalled();
         $this->isElementExisting($element, $opinion)->shouldReturn(false);
 
         // Not related (different class)
-        $element
-            ->getLinkedDataClass()
-            ->willReturn('Capco\AppBundle\Entity\Synthesis\Test')
-            ->shouldBeCalled();
-        $element
-            ->getLinkedDataId()
-            ->willReturn(42)
-            ->shouldBeCalled();
+        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Synthesis\Test')->shouldBeCalled();
+        $element->getLinkedDataId()->willReturn(42)->shouldBeCalled();
         $this->isElementExisting($element, $opinion)->shouldReturn(false);
 
         // Not related (both different)
-        $element
-            ->getLinkedDataClass()
-            ->willReturn('Capco\AppBundle\Entity\Synthesis\Test')
-            ->shouldBeCalled();
-        $element
-            ->getLinkedDataId()
-            ->willReturn(51)
-            ->shouldBeCalled();
+        $element->getLinkedDataClass()->willReturn('Capco\AppBundle\Entity\Synthesis\Test')->shouldBeCalled();
+        $element->getLinkedDataId()->willReturn(51)->shouldBeCalled();
         $this->isElementExisting($element, $opinion)->shouldReturn(false);
     }
 
@@ -170,80 +134,35 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $before = (new \DateTime())->modify('-10 days');
 
         // Element before object (element outdated)
-        $element
-            ->getLinkedDataLastUpdate()
-            ->willReturn($before)
-            ->shouldBeCalled();
-        $opinion
-            ->getUpdatedAt()
-            ->willReturn($now)
-            ->shouldBeCalled();
+        $element->getLinkedDataLastUpdate()->willReturn($before)->shouldBeCalled();
+        $opinion->getUpdatedAt()->willReturn($now)->shouldBeCalled();
         $this->isElementOutdated($element, $opinion)->shouldReturn(true);
 
         // Object before element
-        $element
-            ->getLinkedDataLastUpdate()
-            ->willReturn($now)
-            ->shouldBeCalled();
-        $opinion
-            ->getUpdatedAt()
-            ->willReturn($before)
-            ->shouldBeCalled();
+        $element->getLinkedDataLastUpdate()->willReturn($now)->shouldBeCalled();
+        $opinion->getUpdatedAt()->willReturn($before)->shouldBeCalled();
         $this->isElementOutdated($element, $opinion)->shouldReturn(false);
 
         // Same dates
-        $element
-            ->getLinkedDataLastUpdate()
-            ->willReturn($now)
-            ->shouldBeCalled();
-        $opinion
-            ->getUpdatedAt()
-            ->willReturn($now)
-            ->shouldBeCalled();
+        $element->getLinkedDataLastUpdate()->willReturn($now)->shouldBeCalled();
+        $opinion->getUpdatedAt()->willReturn($now)->shouldBeCalled();
         $this->isElementOutdated($element, $opinion)->shouldReturn(false);
     }
 
-    function it_can_update_an_element_from_an_object(
-        SynthesisElement $element,
-        User $author,
-        Opinion $object
-    ) {
+    function it_can_update_an_element_from_an_object(SynthesisElement $element, User $author, Opinion $object)
+    {
         $date = new \DateTime();
-        $object
-            ->getTitle()
-            ->willReturn('test')
-            ->shouldBeCalled();
-        $object
-            ->getBody()
-            ->willReturn('blabla')
-            ->shouldBeCalled();
-        $object
-            ->getAuthor()
-            ->willReturn($author)
-            ->shouldBeCalled();
+        $object->getTitle()->willReturn('test')->shouldBeCalled();
+        $object->getBody()->willReturn('blabla')->shouldBeCalled();
+        $object->getAuthor()->willReturn($author)->shouldBeCalled();
         $object->getAppendices()->willReturn(new ArrayCollection([]));
-        $object
-            ->getUpdatedAt()
-            ->willReturn($date)
-            ->shouldBeCalled();
-        $object
-            ->getVotesCountOk()
-            ->willReturn(25)
-            ->shouldBeCalled();
-        $object
-            ->getVotesCountNok()
-            ->willReturn(25)
-            ->shouldBeCalled();
-        $object
-            ->getVotesCountMitige()
-            ->willReturn(25)
-            ->shouldBeCalled();
+        $object->getUpdatedAt()->willReturn($date)->shouldBeCalled();
+        $object->getVotesCountOk()->willReturn(25)->shouldBeCalled();
+        $object->getVotesCountNok()->willReturn(25)->shouldBeCalled();
+        $object->getVotesCountMitige()->willReturn(25)->shouldBeCalled();
 
         $element->setLinkedDataLastUpdate($date)->shouldBeCalled();
-        $element
-            ->getOriginalDivision()
-            ->willReturn(null)
-            ->shouldBeCalled();
+        $element->getOriginalDivision()->willReturn(null)->shouldBeCalled();
         $element->setDeletedAt(null)->shouldBeCalled();
         $element->setArchived(false)->shouldBeCalled();
         $element->setPublished(false)->shouldBeCalled();
@@ -253,8 +172,6 @@ class ConsultationStepExtractorSpec extends ObjectBehavior
         $element->setBody('blabla')->shouldBeCalled();
         $element->setVotes([-1 => 25, 0 => 25, 1 => 25])->shouldBeCalled();
 
-        $this->updateElementFrom($element, $object)->shouldReturnAnInstanceOf(
-            SynthesisElement::class
-        );
+        $this->updateElementFrom($element, $object)->shouldReturnAnInstanceOf(SynthesisElement::class);
     }
 }
