@@ -36,7 +36,7 @@
         </section>
     {% endif %}
 
-    <section>
+    <section class="section--alt">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12" id="details">
@@ -49,7 +49,7 @@
     </section>
 
     {% if showTrash %}
-        <section class="section--alt">
+        <section>
             {{ react_render_component('ProjectTrashButtonApp', {
                 'props': {
                     'link': path('app_project_show_trashed', {'projectSlug': project.slug })

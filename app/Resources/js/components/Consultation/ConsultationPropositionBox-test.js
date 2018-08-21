@@ -14,6 +14,7 @@ describe('<ConsultationPropositionBox />', () => {
       timeless: false,
       status: 'open',
     },
+    showConsultationPlan: true
   };
 
   it('renders correcty', () => {

@@ -11,8 +11,6 @@ type Props = {
 export class SectionList extends React.Component<Props> {
   render() {
     const { consultation, section, level } = this.props;
-    console.log(consultation);
-    console.warn(section);
 
     return (
       <div>

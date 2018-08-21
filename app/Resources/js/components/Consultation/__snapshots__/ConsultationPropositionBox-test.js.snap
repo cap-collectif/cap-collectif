@@ -4,18 +4,22 @@ exports[`<ConsultationPropositionBox /> renders correcty 1`] = `
 <div
   className="row"
 >
-  <ConsultationPlan
-    step={
-      Object {
-        "endAt": "2014-09-27T00:00:00+0200",
-        "id": "stepId",
-        "startAt": "2014-08-14T00:00:00+0200",
-        "status": "open",
-        "timeless": false,
-        "title": "stepTitle",
+  <div
+    className="consultation-plan col-sm-3"
+  >
+    <ConsultationPlan
+      step={
+        Object {
+          "endAt": "2014-09-27T00:00:00+0200",
+          "id": "stepId",
+          "startAt": "2014-08-14T00:00:00+0200",
+          "status": "open",
+          "timeless": false,
+          "title": "stepTitle",
+        }
       }
-    }
-  />
+    />
+  </div>
   <div
     className="col-sm-9"
   >

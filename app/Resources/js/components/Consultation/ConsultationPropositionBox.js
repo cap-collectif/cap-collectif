@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
+import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import type { GlobalState } from '../../types';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 // import ConsultationFilterForm from './ConsultationFilterForm';
 // import ConsultationContributionFiltered
@@ -24,11 +26,12 @@ type Step = {
 
 type Props = {
   step: Step,
+  showConsultationPlan: boolean,
 };
 
 export class ConsultationPropositionBox extends React.Component<Props> {
   render() {
-    const { step } = this.props;
+    const { step, showConsultationPlan } = this.props;
 
     const renderSectionRecursiveList = ({
       error,
@@ -52,8 +55,10 @@ export class ConsultationPropositionBox extends React.Component<Props> {
 
     return (
       <div className="row">
-        <ConsultationPlan step={step} />
-        <div className="col-sm-9">
+        <div className={showConsultationPlan ? 'consultation-plan col-sm-3' : 'consultation-plan'}>
+          <ConsultationPlan step={step} />
+        </div>
+        <div className={showConsultationPlan ? 'col-sm-9' : 'col-md-10 col-md-offset-1'}>
           {/* <Panel>
             <span>
               Filtres de recherche
@@ -100,4 +105,8 @@ export class ConsultationPropositionBox extends React.Component<Props> {
   }
 }
 
-export default ConsultationPropositionBox;
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+  showConsultationPlan: state.project.showConsultationPlan,
+});
+
+export default connect(mapStateToProps)(ConsultationPropositionBox);

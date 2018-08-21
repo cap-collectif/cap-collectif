@@ -8,6 +8,7 @@ export type State = {
   +currentProjectStepById: ?Uuid,
   +currentProjectById: ?Uuid,
   +visibleProjects: Array<Uuid>,
+  showConsultationPlan: boolean,
   +projectsById: { [id: Uuid]: Object },
   +projectTypes: Array<Object>,
   +page: number,
@@ -25,6 +26,7 @@ export type State = {
 const initialState: State = {
   currentProjectStepById: null,
   currentProjectById: null,
+  showConsultationPlan: true,
   visibleProjects: [],
   projectsById: {},
   projectTypes: [],
@@ -58,6 +60,14 @@ type ReceivedProjectSucceedAction = {
   type: 'project/PROJECTS_FETCH_SUCCEEDED',
   project: Object,
 };
+type CloseConsultationPlanAction = {
+  type: 'project/CLOSE_CONSULTATION_PLAN',
+  id: string,
+};
+type OpenConsultationPlanAction = {
+  type: 'project/OPEN_CONSULTATION_PLAN',
+  id: string,
+};
 
 export type ProjectAction =
   | RequestFetchProjectsAction
@@ -67,6 +77,8 @@ export type ProjectAction =
   | ChangeProjectTermAction
   | ChangeProjectThemeAction
   | ReceivedProjectSucceedAction
+  | CloseConsultationPlanAction
+  | OpenConsultationPlanAction
   | { type: 'project/PROJECTS_FETCH_FAILED', error: Object }
   | { type: 'project/CHANGE_FILTER', filter: string, value: string };
 
@@ -92,6 +104,16 @@ export const changeTerm = (term: ?string): ChangeProjectTermAction => ({
 export const changeTheme = (theme: ?string): ChangeProjectThemeAction => ({
   type: 'project/CHANGE_THEME',
   theme,
+});
+
+export const closeConsultationPlan = (id: string): CloseConsultationPlanAction => ({
+  type: 'project/CLOSE_CONSULTATION_PLAN',
+  id,
+});
+
+export const openConsultationPlan = (id: string): OpenConsultationPlanAction => ({
+  type: 'project/OPEN_CONSULTATION_PLAN',
+  id,
 });
 
 export function* fetchProjectsSaga(): Generator<*, *, *> {
@@ -151,6 +173,10 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, theme: action.theme };
     case 'project/CHANGE_PAGE':
       return { ...state, page: action.page };
+    case 'project/OPEN_CONSULTATION_PLAN':
+      return { ...state, showConsultationPlan: true };
+    case 'project/CLOSE_CONSULTATION_PLAN':
+      return { ...state, showConsultationPlan: false };
     default:
       return state;
   }

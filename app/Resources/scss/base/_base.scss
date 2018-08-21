@@ -312,7 +312,54 @@ svg.avatar-group {
 
 /* ======================= Consult plan ============================*/
 
-.consult-plan {
+.consultation-plan {
+    &_open {
+        color: $dark-gray;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $border-color;
+
+        .cap-android-menu {
+            top: 5px;
+        }
+
+        a {
+            color: $dark-gray;
+        }
+    }
+
+    &_close {
+        position: absolute;
+        left: 15px;
+        padding: 7px 15px;
+        border: 1px solid $primary-color;
+        text-align: center;
+        color: $primary-color;
+        border-radius: 4px;
+        line-height: 19px;
+
+        .cap-android-menu {
+            right: 0;
+        }
+
+        a {
+            color: $primary-color;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .cap-android-menu {
+        font-size: 21px;
+    }
+
+    .cap-delete-1 {
+        font-size: 12px;
+    }
+
     .nav.nav-pills {
         li {
             border: 1px solid $page-bgc;
@@ -321,11 +368,9 @@ svg.avatar-group {
                 color: $black;
             }
 
-            &.active a, &:hover a {
+            &.active a, &:hover a, a:focus {
                 color: $black;
                 background-color: transparent;
-                // background-color: $white;
-                // border: 1px solid $border-color;
             }
 
             &.active, &:hover {

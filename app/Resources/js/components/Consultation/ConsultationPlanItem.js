@@ -3,6 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { NavItem } from 'react-bootstrap';
 import type { ConsultationPlanItem_section } from './__generated__/ConsultationPlanItem_section.graphql';
+import config from "../../config";
 
 type Props = {
   section: ConsultationPlanItem_section,
@@ -12,12 +13,24 @@ type Props = {
 export class ConsultationPlanItem extends React.Component<Props> {
   render() {
     const { section, level } = this.props;
+
     return (
-      <NavItem id={`opinion-type--${section.slug}`} className={`level--${level}`}>
+      <NavItem
+        className={`level--${level}`}
+        onClick={() => {
+          if(config.canUseDOM) {
+            const anchor = document.getElementById(`opinion-type--${section.slug}`);
+
+            if(anchor) {
+              anchor.scrollIntoView({ alignWithTop: true, behavior: 'smooth' });
+            }
+          }
+        }}
+      >
         {section.title}
       </NavItem>
     );
-  }
+  };
 }
 
 export default createFragmentContainer(ConsultationPlanItem, {
