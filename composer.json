@@ -176,7 +176,8 @@
         "alexandresalome/mailcatcher": "dev-master#e5bff236a6560d5314ea9bba32bcea6e3588b40d",
         "lookyman/phpstan-symfony": "^0.4.1",
         "phpspec/phpspec": "^5.0",
-        "leanphp/phpspec-code-coverage": "dev-patch-1"
+        "leanphp/phpspec-code-coverage": "dev-patch-1",
+        "bossa/phpspec2-expect": "@dev"
     },
     "scripts": {
         "post-install-cmd":[

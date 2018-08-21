@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "891b55a4cce233f11d57251028fb242d",
+    "content-hash": "aeaae7e36b98577b60fa3e9275fa98e4",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -12692,6 +12692,55 @@
             "time": "2018-04-20T15:48:23+00:00"
         },
         {
+            "name": "bossa/phpspec2-expect",
+            "version": "3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BossaConsulting/phpspec2-expect.git",
+                "reference": "ad9e2f5edff07ba2f98cb3ccc3efa8fced8d9c1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BossaConsulting/phpspec2-expect/zipball/ad9e2f5edff07ba2f98cb3ccc3efa8fced8d9c1c",
+                "reference": "ad9e2f5edff07ba2f98cb3ccc3efa8fced8d9c1c",
+                "shasum": ""
+            },
+            "require": {
+                "phpspec/phpspec": "^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.6|^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "expect.php"
+                ],
+                "psr-0": {
+                    "Bossa\\PhpSpec\\Expect\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcello Duarte",
+                    "homepage": "http://marcelloduarte.net/"
+                }
+            ],
+            "description": "Helper that decorates any SUS with a phpspec lazy object wrapper",
+            "keywords": [
+                "BDD",
+                "SpecBDD",
+                "TDD",
+                "spec",
+                "specification"
+            ],
+            "time": "2018-07-19T14:28:13+00:00"
+        },
+        {
             "name": "coduo/php-matcher",
             "version": "2.4.0",
             "source": {
@@ -14983,7 +15032,8 @@
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "alexandresalome/mailcatcher": 20,
-        "leanphp/phpspec-code-coverage": 20
+        "leanphp/phpspec-code-coverage": 20,
+        "bossa/phpspec2-expect": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
