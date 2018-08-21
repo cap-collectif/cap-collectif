@@ -26,6 +26,7 @@ use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
 use Symfony\Component\Process\Process;
 use WebDriver\Exception\ElementNotVisible;
+use PHPUnit\Framework\Assert;
 
 const REPOSITORY_NAME = 'repository_qa';
 const SNAPSHOT_NAME = 'snap_qa';
@@ -203,7 +204,7 @@ class ApplicationContext extends UserContext
         // Make sure we are not using virtual file system, because here we want to see real files in path
         $directory = str_replace('vfs://', '', rtrim($directory, '/\\'));
         $filename = str_replace('vfs://', '', $filename);
-        \PHPUnit_Framework_Assert::assertFileExists("$directory/$filename");
+        Assert::assertFileExists("$directory/$filename");
     }
 
     /**
