@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
+use PHPUnit\Framework\Assert;
 
 class CommandContext implements KernelAwareContext
 {
@@ -35,7 +36,14 @@ class CommandContext implements KernelAwareContext
      */
     public function iConsume(string $queue, $maxMessage = 1)
     {
-        $this->run('swarrot:consume:' . $queue . ' ' . $queue . ' --env=test --max-execution-time=10 --max-messages=' . $maxMessage);
+        $this->run(
+            'swarrot:consume:' .
+                $queue .
+                ' ' .
+                $queue .
+                ' --env=test --max-execution-time=10 --max-messages=' .
+                $maxMessage
+        );
     }
 
     /**
@@ -48,9 +56,7 @@ class CommandContext implements KernelAwareContext
         $commandParameters = json_decode($parameters, true);
 
         if (null === $commandParameters) {
-            throw new \InvalidArgumentException(
-                'PyStringNode could not be converted to json.'
-            );
+            throw new \InvalidArgumentException('PyStringNode could not be converted to json.');
         }
 
         $this->run($command, $commandParameters);
@@ -63,10 +69,7 @@ class CommandContext implements KernelAwareContext
      */
     public function exitCodeShouldBe($code)
     {
-        \PHPUnit_Framework_Assert::assertEquals(
-            (int) $code,
-            $this->statusCode
-        );
+        Assert::assertEquals((int) $code, $this->statusCode);
     }
 
     /**
@@ -76,16 +79,17 @@ class CommandContext implements KernelAwareContext
      */
     public function iShouldSee($content)
     {
-        \PHPUnit_Framework_Assert::assertContains(
-            $content,
-            $this->output
-        );
+        Assert::assertContains($content, $this->output);
     }
 
     private function run($command, $parameters = [])
     {
         $application = new Application($this->kernel);
-        $application->getKernel()->getContainer()->get('overblog_graphql.cache_compiler')->loadClasses(true);
+        $application
+            ->getKernel()
+            ->getContainer()
+            ->get('overblog_graphql.cache_compiler')
+            ->loadClasses(true);
         if (\count($parameters) > 0) {
             $arguments = array_merge(['command' => $command], $parameters);
             $input = new ArrayInput($arguments);

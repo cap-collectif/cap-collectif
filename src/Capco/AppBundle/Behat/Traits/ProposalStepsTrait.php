@@ -3,6 +3,7 @@ namespace Capco\AppBundle\Behat\Traits;
 
 use Behat\Gherkin\Node\TableNode;
 use FilesystemIterator;
+use PHPUnit\Framework\Assert;
 
 trait ProposalStepsTrait
 {
@@ -353,7 +354,7 @@ trait ProposalStepsTrait
     public function proposalsShouldBeOrderedByDate()
     {
         $option = $this->getCurrentPage()->getSelectedSortingOption();
-        \PHPUnit_Framework_Assert::assertEquals('last', $option);
+        Assert::assertEquals('last', $option);
         $this->proposalBeforeProposal(
             'Rénovation du gymnase',
             'Ravalement de la façade de la bibliothèque municipale'
@@ -366,7 +367,7 @@ trait ProposalStepsTrait
     public function proposalsShouldBeOrderedRandomly()
     {
         $option = $this->getCurrentPage()->getSelectedSortingOption();
-        \PHPUnit_Framework_Assert::assertEquals('random', $option);
+        Assert::assertEquals('random', $option);
     }
 
     /**
@@ -375,7 +376,7 @@ trait ProposalStepsTrait
     public function proposalsShouldBeOrderedByComments()
     {
         $option = $this->getCurrentPage()->getSelectedSortingOption();
-        \PHPUnit_Framework_Assert::assertEquals('comments', $option);
+        Assert::assertEquals('comments', $option);
         $this->proposalBeforeProposal(
             'Ravalement de la façade de la bibliothèque municipale',
             'Rénovation du gymnase'
@@ -405,7 +406,7 @@ trait ProposalStepsTrait
     public function proposalsShouldBeFilteredByThemeAndTermsAndSortedByComments()
     {
         $option = $this->getCurrentPage()->getSelectedSortingOption();
-        \PHPUnit_Framework_Assert::assertEquals('comments', $option);
+        Assert::assertEquals('comments', $option);
         $this->assertPageContainsText('Proposition pas encore votable');
         $this->assertPageContainsText('Proposition plus votable');
         $this->proposalBeforeProposal('Proposition pas encore votable', 'Proposition plus votable');
@@ -531,7 +532,7 @@ trait ProposalStepsTrait
     public function theCreateProposalButtonShouldBeDisabled()
     {
         $button = $this->navigationContext->getPage('collect page')->getCreateProposalButton();
-        \PHPUnit_Framework_Assert::assertTrue($button->hasAttribute('disabled'));
+        Assert::assertTrue($button->hasAttribute('disabled'));
     }
 
     /**
@@ -848,7 +849,7 @@ trait ProposalStepsTrait
     {
         $this->iWait(2);
         $votesCount = $this->getCurrentPage()->getVotesCount($this->getProposalId());
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             $nb,
             $votesCount,
             'Incorrect votes number ' . $votesCount . ' for proposal.'
@@ -862,7 +863,7 @@ trait ProposalStepsTrait
     public function theProposalShouldHaveNbComments(int $nb)
     {
         $commentsCount = $this->getCurrentPage()->getCommentsCount($this->getProposalId());
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             $nb,
             $commentsCount,
             'Incorrect comments number ' . $commentsCount . ' for proposal.'
@@ -1057,7 +1058,7 @@ trait ProposalStepsTrait
         $step = $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->findOneBySlug(
             $stepSlug
         );
-        \PHPUnit_Framework_Assert::assertNotNull(
+        Assert::assertNotNull(
             $this->getRepository('CapcoAppBundle:ProposalSelectionVote')->findOneBy([
                 'user' => $user,
                 'proposal' => $proposal,
@@ -1074,7 +1075,7 @@ trait ProposalStepsTrait
     {
         $id = $id ?: $this->getProposalId();
         $button = $this->getCurrentPage()->getVoteButton($id);
-        \PHPUnit_Framework_Assert::assertTrue(
+        Assert::assertTrue(
             $button->hasClass('disabled') || $button->hasAttribute('disabled'),
             'The proposal vote button is not disabled neither it has class "disabled".'
         );
@@ -1093,7 +1094,7 @@ trait ProposalStepsTrait
         try {
             $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
         } catch (\Exception $e) {
-            \PHPUnit_Framework_Assert::assertSame($execpetionMessage, $e->getMessage());
+            Assert::assertSame($execpetionMessage, $e->getMessage());
         }
     }
 
@@ -1296,7 +1297,7 @@ trait ProposalStepsTrait
                 FilesystemIterator::SKIP_DOTS
             )
         );
-        \PHPUnit_Framework_Assert::assertSame($filesNumber, $filesCount);
+        Assert::assertSame($filesNumber, $filesCount);
     }
 
     /**
@@ -1333,7 +1334,7 @@ trait ProposalStepsTrait
                 ->findAll('css', $selector)
         );
 
-        \PHPUnit_Framework_Assert::assertSame($savedSteps, $items);
+        Assert::assertSame($savedSteps, $items);
     }
 
     /**
@@ -1353,7 +1354,7 @@ trait ProposalStepsTrait
                 ->findAll('css', $selector)
         );
 
-        \PHPUnit_Framework_Assert::assertNotSame($savedSteps, $items);
+        Assert::assertNotSame($savedSteps, $items);
     }
 
     /**
@@ -1370,7 +1371,7 @@ trait ProposalStepsTrait
     public function iShouldHaveXFilesInSourceMediaFolder(int $filesNumber)
     {
         if (!is_dir('/var/www/web/media/sources/0001/01')) {
-            \PHPUnit_Framework_Assert::assertSame($filesNumber, 0);
+            Assert::assertSame($filesNumber, 0);
 
             return;
         }
@@ -1381,7 +1382,7 @@ trait ProposalStepsTrait
                 FilesystemIterator::SKIP_DOTS
             )
         );
-        \PHPUnit_Framework_Assert::assertSame($filesNumber, $filesCount);
+        Assert::assertSame($filesNumber, $filesCount);
     }
 
     protected function openCollectStepIsOpen()
@@ -1533,7 +1534,7 @@ trait ProposalStepsTrait
         $page = $this->getCurrentPage();
         $proposalId = $id ?: $this->getProposalId();
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             $label,
             $buttonLabel,
             'Incorrect button label ' . $buttonLabel . ' on proposal vote button.'

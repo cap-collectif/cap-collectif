@@ -28,7 +28,7 @@ class RequirementAdmin extends CapcoAdmin
                 'label' => 'admin.fields.step.position',
             ])
             ->add('type', ChoiceType::class, [
-                'choices' => array_flip(Requirement::$requirementsLabels),
+                'choices' => Requirement::$requirementsLabels,
                 'label' => 'group.title',
                 'required' => true,
                 'translation_domain' => 'CapcoAppBundle',

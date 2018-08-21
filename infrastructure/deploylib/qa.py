@@ -43,7 +43,7 @@ def static_analysis():
 @task(environments=['local', 'ci'])
 def phpspec():
     "Run PHP Unit Tests"
-    env.service_command('./bin/phpspec run --no-code-generation', 'application', env.www_app)
+    env.service_command('php -d memory_limit=-1 bin/phpspec run --no-code-generation', 'application', env.www_app)
 
 
 @task(environments=['local', 'ci'])
@@ -56,6 +56,12 @@ def jest():
 def perf():
     "Run perf Tests"
     env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run bundlesize')
+
+
+@task(environments=['ci'])
+def codecov():
+    "Upload code coverage"
+    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov')
 
 
 @task(environments=['local', 'ci'])

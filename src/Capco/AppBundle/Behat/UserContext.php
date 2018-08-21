@@ -2,7 +2,7 @@
 namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Entity\EventRegistration;
-use PHPUnit_Framework_Assert as PHPUnit;
+use Assert\Framework\Assert;
 
 class UserContext extends DefaultContext
 {
@@ -195,7 +195,7 @@ class UserContext extends DefaultContext
     public function phoneNumberShouldBe($username, $phone)
     {
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
-        PHPUnit::assertSame($user->getPhone(), $phone);
+        Assert::assertSame($user->getPhone(), $phone);
     }
 
     /**
@@ -217,7 +217,7 @@ class UserContext extends DefaultContext
     public function phoneConfirmedShouldBeFalse($username)
     {
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
-        PHPUnit::assertFalse($user->isPhoneConfirmed());
+        Assert::assertFalse($user->isPhoneConfirmed());
     }
 
     /**
@@ -228,9 +228,9 @@ class UserContext extends DefaultContext
     public function shouldHaveAnSmsCodeToConfirm($username)
     {
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
-        PHPUnit::assertNotNull($user->getSmsConfirmationCode());
-        PHPUnit::assertTrue(\is_int($user->getSmsConfirmationCode()));
-        PHPUnit::assertEquals(\strlen((string) $user->getSmsConfirmationCode()), 6);
+        Assert::assertNotNull($user->getSmsConfirmationCode());
+        Assert::assertTrue(\is_int($user->getSmsConfirmationCode()));
+        Assert::assertEquals(\strlen((string) $user->getSmsConfirmationCode()), 6);
     }
 
     /**
@@ -241,7 +241,7 @@ class UserContext extends DefaultContext
     public function shouldBePhoneConfirmed($username)
     {
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
-        PHPUnit::assertTrue($user->isPhoneConfirmed());
+        Assert::assertTrue($user->isPhoneConfirmed());
     }
 
     /**
