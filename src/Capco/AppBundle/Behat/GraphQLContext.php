@@ -5,7 +5,7 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use GuzzleHttp\Client;
-use PHPUnit_Framework_Assert as PHPUnit;
+use PHPUnit\Framework\Assert;
 
 class GraphQLContext implements Context
 {
@@ -84,9 +84,9 @@ class GraphQLContext implements Context
                 'Content-Type' => 'application/graphql',
             ],
         ]);
-        PHPUnit::assertSame(200, (int) $response->getStatusCode());
+        Assert::assertSame(200, (int) $response->getStatusCode());
         $this->response = (string) $response->getBody();
-        PHPUnit::assertFalse(
+        Assert::assertFalse(
             array_key_exists('errors', json_decode($this->response, true)),
             $this->response
         );
@@ -108,7 +108,7 @@ class GraphQLContext implements Context
         $body = $this->response;
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
-        PHPUnit::assertNotTrue($matcher->match($body, $this->resultChecker), $matcher->getError());
+        Assert::assertNotTrue($matcher->match($body, $this->resultChecker), $matcher->getError());
     }
 
     /**
@@ -135,7 +135,7 @@ class GraphQLContext implements Context
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
         $matcher = (new SimpleFactory())->createMatcher();
-        PHPUnit::assertTrue(
+        Assert::assertTrue(
             $matcher->match($this->response, $pattern->getRaw()),
             $matcher->getError() . ' ' . $this->response
         );

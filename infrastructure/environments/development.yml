@@ -8,7 +8,6 @@ application:
         BLACKFIRE_CLIENT_ID: ***REMOVED***
         BLACKFIRE_CLIENT_TOKEN: ***REMOVED***
         SYMFONY_INSTANCE_NAME: dev
-        PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
         XDEBUG_CONFIG: "remote_host=192.168.74.67"
     volumes:
         - ../../:/var/www

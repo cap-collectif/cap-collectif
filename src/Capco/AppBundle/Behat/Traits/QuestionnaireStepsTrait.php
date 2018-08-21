@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Behat\Traits;
 
+use PHPUnit\Framework\Assert;
+
 trait QuestionnaireStepsTrait
 {
     protected static $questionnaireStepParams = [
@@ -38,7 +40,10 @@ trait QuestionnaireStepsTrait
      */
     public function iGoToAQuestionnaireStepWithNoMultipleRepliesAllowed()
     {
-        $this->visitPageWithParams('questionnaire page', self::$questionnaireStepWithNoMultipleReplies);
+        $this->visitPageWithParams(
+            'questionnaire page',
+            self::$questionnaireStepWithNoMultipleReplies
+        );
     }
 
     /**
@@ -46,7 +51,10 @@ trait QuestionnaireStepsTrait
      */
     public function iGoToAQuestionnaireStepWithNoEditionAllowed()
     {
-        $this->visitPageWithParams('questionnaire page', self::$questionnaireStepWithNoMultipleReplies);
+        $this->visitPageWithParams(
+            'questionnaire page',
+            self::$questionnaireStepWithNoMultipleReplies
+        );
     }
 
     // ************************************************** Creation ***********************************************************
@@ -73,7 +81,10 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
     {
-        $this->fillField('responses[0]', 'Je pense que c\'est la ville parfaite pour organiser les JO');
+        $this->fillField(
+            'responses[0]',
+            'Je pense que c\'est la ville parfaite pour organiser les JO'
+        );
         $this->checkOption('responses[1]_choice-questionchoice1');
         $this->checkOption('responses[1]_choice-questionchoice3');
     }
@@ -109,15 +120,22 @@ trait QuestionnaireStepsTrait
      */
     public function theQuestionnaireFormShouldBeDisabled()
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', 'input');
+        $inputs = $this->getSession()
+            ->getPage()
+            ->findAll('css', 'input');
         foreach ($inputs as $input) {
-            \PHPUnit_Framework_TestCase::assertTrue($input->hasAttribute('disabled'));
+            Assert::assertTrue($input->hasAttribute('disabled'));
         }
-        $textareas = $this->getSession()->getPage()->findAll('css', 'textarea');
+        $textareas = $this->getSession()
+            ->getPage()
+            ->findAll('css', 'textarea');
         foreach ($textareas as $textarea) {
-            \PHPUnit_Framework_TestCase::assertTrue($textarea->hasAttribute('disabled'));
+            Assert::assertTrue($textarea->hasAttribute('disabled'));
         }
-        $this->theElementHasAttribute($this->getCurrentPage()->getSubmitReplyButtonSelector(), 'disabled');
+        $this->theElementHasAttribute(
+            $this->getCurrentPage()->getSubmitReplyButtonSelector(),
+            'disabled'
+        );
     }
 
     /**
@@ -126,7 +144,9 @@ trait QuestionnaireStepsTrait
     public function iShouldSeeMyReply()
     {
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
-        $userReplySelector = $this->navigationContext->getPage('questionnaire page')->getSelectorForUserReply();
+        $userReplySelector = $this->navigationContext->getPage(
+            'questionnaire page'
+        )->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
         $this->assertElementNotContainsText($userReplySelector, 'reply.private');
     }
@@ -137,7 +157,9 @@ trait QuestionnaireStepsTrait
     public function iShouldSeeMyAnonymousReply()
     {
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
-        $userReplySelector = $this->navigationContext->getPage('questionnaire page')->getSelectorForUserReply();
+        $userReplySelector = $this->navigationContext->getPage(
+            'questionnaire page'
+        )->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
         $this->assertElementContainsText($userReplySelector, 'reply.private');
     }
@@ -147,7 +169,9 @@ trait QuestionnaireStepsTrait
      */
     public function iShouldNotSeeMyReplyAnymore()
     {
-        $userReplySelector = $this->navigationContext->getPage('questionnaire page')->getSelectorForUserReply();
+        $userReplySelector = $this->navigationContext->getPage(
+            'questionnaire page'
+        )->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(0, $userReplySelector);
     }
 
@@ -156,7 +180,9 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOneRankingChoiceRightArrow()
     {
-        $this->navigationContext->getPage('questionnaire page')->clickFirstRankingChoiceRightArrow();
+        $this->navigationContext->getPage(
+            'questionnaire page'
+        )->clickFirstRankingChoiceRightArrow();
         $this->iWait(1);
     }
 
@@ -193,7 +219,9 @@ trait QuestionnaireStepsTrait
      */
     public function iShouldNotSeeTheDeleteReplyButton()
     {
-        $deleteButtonSelector = $this->navigationContext->getPage('questionnaire page')->getDeleteReplyButtonSelector();
+        $deleteButtonSelector = $this->navigationContext->getPage(
+            'questionnaire page'
+        )->getDeleteReplyButtonSelector();
         $this->assertElementNotOnPage($deleteButtonSelector);
     }
 
@@ -211,7 +239,9 @@ trait QuestionnaireStepsTrait
      */
     public function iShouldSeeMyFirstReply()
     {
-        $replyModalSelector = $this->navigationContext->getPage('questionnaire page')->getReplyModalSelector();
+        $replyModalSelector = $this->navigationContext->getPage(
+            'questionnaire page'
+        )->getReplyModalSelector();
         $this->assertElementOnPage($replyModalSelector);
         $this->assertElementContainsText($replyModalSelector, 'reply.show.link');
     }
@@ -220,7 +250,10 @@ trait QuestionnaireStepsTrait
     {
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
         if (!$edition) {
-            $this->fillField('responses[0]', 'Je pense que c\'est la ville parfaite pour organiser les JO');
+            $this->fillField(
+                'responses[0]',
+                'Je pense que c\'est la ville parfaite pour organiser les JO'
+            );
             $this->checkOption('responses[1]_choice-questionchoice1');
             $this->checkOption('responses[1]_choice-questionchoice2');
             $this->checkOption('responses[1]_choice-questionchoice3');
