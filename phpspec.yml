@@ -4,4 +4,3 @@ extensions:
     output:
       clover: coverage/php/clover.xml
       html: coverage/php/html
-

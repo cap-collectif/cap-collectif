@@ -58,6 +58,12 @@ def perf():
     env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run bundlesize')
 
 
+@task(environments=['ci'])
+def codecov():
+    "Upload code coverage"
+    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov')
+
+
 @task(environments=['local', 'ci'])
 def behat(fast_failure='true', profile=False, tags='false', feature='false', parallel='false'):
     "Run Gerhkin Tests"

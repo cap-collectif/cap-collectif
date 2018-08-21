@@ -22,6 +22,7 @@ builder:
 qarunner:
     build: ../services/qa-runner
     environment:
+      CODECOV_TOKEN: 7287ae95-8901-4d53-b0ea-24afcce999bf
       BUNDLESIZE_GITHUB_TOKEN: feca92cec5b5d9f99cdfae51b7ebd086ead41e48
     volumes:
       - ../../:/var/www
