@@ -3,10 +3,10 @@
   "private": true,
   "scripts": {
     "test": "jest --notify",
-    "test:ci": "jest --coverage --ci --forceExit --runInBand",
+    "test:ci": "jest --coverage --ci --runInBand",
     "test:watch": "jest --watchAll",
     "flow": "flow",
-    "flow:coverage": "flow-coverage-report --type html --threshold 70 -i 'app/Resources/js/**/*.js'",
+    "flow:coverage": "flow-coverage-report --type json -o coverage/flow/ --threshold 70 -i 'app/Resources/js/**/*.js'",
     "build": "NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
     "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build -p",
@@ -84,7 +84,7 @@
     "printWidth": 100
   },
   "jest": {
-    "coverageDirectory": "./coverage/",
+    "coverageDirectory": "./coverage/js",
     "collectCoverage": true,
     "coverageReporters": [
       "json-summary"
