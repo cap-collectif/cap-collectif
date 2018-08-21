@@ -1,25 +1,31 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
 class ConsultationStepRepository extends EntityRepository
 {
+    public function getAll()
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('pas')
+            ->leftJoin('cs.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->andWhere('pas.project IS NOT NULL');
+
+        return $qb->getQuery()->execute();
+    }
+
     public function getByOpinionId(string $opinionId)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-          ->addSelect('p', 'pas')
-          ->leftJoin('cs.projectAbstractStep', 'pas')
-          ->leftJoin('pas.project', 'p')
-          ->innerJoin('cs.opinions', 'opinions')
-          ->andWhere('opinions.id = :opinionId')
-          ->setParameter('opinionId', $opinionId)
-      ;
-
-        return $qb
-          ->getQuery()
-          ->getOneOrNullResult();
+            ->addSelect('p', 'pas')
+            ->leftJoin('cs.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->innerJoin('cs.opinions', 'opinions')
+            ->andWhere('opinions.id = :opinionId')
+            ->setParameter('opinionId', $opinionId);
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -51,9 +57,7 @@ class ConsultationStepRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     /**
@@ -85,9 +89,7 @@ class ConsultationStepRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     /**
@@ -119,9 +121,7 @@ class ConsultationStepRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     /**
@@ -137,12 +137,8 @@ class ConsultationStepRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->andWhere('cs.slug = :slug')
-            ->setParameter('slug', $slug)
-        ;
-
-        return $qb
-            ->getQuery()
-            ->getOneOrNullResult();
+            ->setParameter('slug', $slug);
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     protected function getIsEnabledQueryBuilder()

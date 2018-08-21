@@ -140,16 +140,25 @@ class ConsultationResolver implements ContainerAwareInterface
         );
         $project = $step->getProject();
 
-        return $this->container->get('router')->generate(
-            'app_consultation_show_opinion',
-            [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $step->getSlug(),
-                'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
-                'opinionSlug' => $contribution->getSlug(),
-            ],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );
+        if (
+            $project->getSlug() &&
+            $step->getSlug() &&
+            $contribution->getOpinionType()->getSlug() &&
+            $contribution->getSlug()
+        ) {
+            return $this->container->get('router')->generate(
+                'app_consultation_show_opinion',
+                [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                    'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
+                    'opinionSlug' => $contribution->getSlug(),
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+        }
+
+        return '';
     }
 
     public function getSectionChildren(OpinionType $type, Arg $argument)

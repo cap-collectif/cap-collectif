@@ -27,7 +27,10 @@ class ConnectionTraversor
             if (\count($edges) > 0) {
                 foreach ($edges as $edge) {
                     $callback($edge);
-                    if ($edge['cursor'] === $endCursor && $renewalQuery) {
+                    if ($edge['cursor'] === $endCursor) {
+                        if (!$renewalQuery) {
+                            return;
+                        }
                         $data = $this->executor->execute(null, [
                             'query' => $renewalQuery($pageInfo),
                             'variables' => [],
