@@ -2,7 +2,7 @@
 
 exports[`<DraftBox /> renders draft box 1`] = `
 <div>
-  <p
+  <div
     id="draft"
   >
     <h3>
@@ -22,7 +22,7 @@ exports[`<DraftBox /> renders draft box 1`] = `
         />
       </span>
     </h3>
-  </p>
+  </div>
   <div
     className="draft__box"
   >

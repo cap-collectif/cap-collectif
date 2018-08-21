@@ -8,7 +8,7 @@ import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
 import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';
-import ToggleMapButton from './../Map/ToggleMapButton';
+import ProposalListToggleViewBtn from './ProposalListToggleViewBtn';
 
 type Props = {
   themes: Array<$FlowFixMe>,
@@ -26,7 +26,7 @@ type Props = {
   dispatch: Dispatch,
   showDistrictFilter: boolean,
   showCategoriesFilter: boolean,
-  showToggleMapButton?: boolean,
+  showMapButton: boolean,
   intl: Object,
 };
 
@@ -39,7 +39,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
     orderByVotes: false,
     orderByComments: false,
     orderByCost: false,
-    showToggleMapButton: false,
+    showMapButton: false,
   };
 
   constructor(props: Props) {
@@ -75,7 +75,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
       orderByComments,
       orderByCost,
       orderByVotes,
-      showToggleMapButton,
+      showMapButton,
       defaultSort,
       intl,
     } = this.props;
@@ -90,15 +90,14 @@ export class ProposalListFilters extends React.Component<Props, State> {
     return (
       <div className="mb-15 mt-30">
         <Row>
-          {showToggleMapButton && (
-            <Col xs={12} sm={6} md={4} lg={3} xsHidden smHidden>
-              <ToggleMapButton
-                onChange={mode => {
-                  dispatch(changeProposalListView(mode));
-                }}
-              />
-            </Col>
-          )}
+          <Col xs={12} sm={6} md={4} lg={3}>
+            <ProposalListToggleViewBtn
+              showMapButton={showMapButton}
+              onChange={mode => {
+                dispatch(changeProposalListView(mode));
+              }}
+            />
+          </Col>
           <Col xs={12} sm={6} md={4} lg={3}>
             <ProposalListSearch />
           </Col>

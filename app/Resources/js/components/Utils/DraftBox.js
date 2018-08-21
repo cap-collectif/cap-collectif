@@ -13,7 +13,7 @@ export class DraftBox extends React.Component<Props> {
 
     return (
       <div>
-        <p id="draft">
+        <div id="draft">
           <h3>
             <FormattedMessage id="global.draft.your_draft" />
             <span className="subtitle">
@@ -21,7 +21,7 @@ export class DraftBox extends React.Component<Props> {
               <FormattedMessage id="global.draft.only_visible_by_you" />
             </span>
           </h3>
-        </p>
+        </div>
         <div className={boxClasses}>{this.props.children}</div>
       </div>
     );

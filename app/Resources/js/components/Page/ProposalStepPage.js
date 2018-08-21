@@ -17,6 +17,7 @@ import type {
   ProposalStepPageQueryResponse,
   ProposalStepPageQueryVariables,
 } from './__generated__/ProposalStepPageQuery.graphql';
+import config from '../../config';
 
 type Props = {
   step: Object,
@@ -110,7 +111,7 @@ export class ProposalStepPage extends React.Component<Props> {
             ({
               stepId: this.props.step.id,
               isAuthenticated: this.props.isAuthenticated,
-              count: 50,
+              count: config.isMobile ? 25 : 50,
               cursor: null,
               // $FlowFixMe
               ...this.initialRenderVars,
@@ -147,7 +148,7 @@ export class ProposalStepPage extends React.Component<Props> {
                     showThemes={form.usingThemes}
                     showDistrictFilter={form.usingDistrict}
                     showCategoriesFilter={form.usingCategories}
-                    showToggleMapButton={form.usingAddress && !props.step.private}
+                    showMapButton={form.usingAddress && !props.step.private}
                   />
                   <LeafletMap
                     geoJsons={geoJsons}
@@ -161,7 +162,8 @@ export class ProposalStepPage extends React.Component<Props> {
                   <ProposalListView
                     step={props.step}
                     viewer={props.viewer || null}
-                    visible={selectedViewByStep === 'mosaic'}
+                    view={selectedViewByStep === 'mosaic' ? 'mosaic' : 'table'}
+                    visible={selectedViewByStep === 'mosaic' || selectedViewByStep === 'table'}
                   />
                 </div>
               );

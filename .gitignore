@@ -11,8 +11,10 @@
 translations/*
 !translations/README.md
 
-coverage/*
-!coverage/flow/flow-coverage-badge.svg
+flow-coverage/*
+!flow-coverage/flow-coverage-badge.svg
+
+coverage/
 
 /var
 /build/
