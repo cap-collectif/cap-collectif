@@ -2421,9 +2421,14 @@ type Query {
   # The currently authenticated user.
   viewer: User!
   users(
+    after: String
+    first: Int
+    before: String
+    last: Int
+
     # Remove super admin from export.
     superAdmin: Boolean = false
-  ): [User!]!
+  ): UserConnection!
   consultations(
     # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     id: ID
