@@ -142,6 +142,8 @@ type Answer {
   author: User
 }
 
+union AnswerOrPost = Answer | Post
+
 # A contribution
 type Appendix {
   # Identifies the body of the contribution.

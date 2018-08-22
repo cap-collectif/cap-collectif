@@ -1,17 +1,19 @@
 // @flow
 import * as React from 'react';
 import { FormattedDate } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
+import type { AnswerBody_answer } from './__generated__/AnswerBody_answer.graphql';
 
 type Props = {
-  answer: Object,
+  answer: AnswerBody_answer,
 };
 
 export class AnswerBody extends React.Component<Props> {
   render() {
-    const answer = this.props.answer;
+    const { answer } = this.props;
     return (
       <div>
         {answer.author ? (
@@ -42,4 +44,31 @@ export class AnswerBody extends React.Component<Props> {
   }
 }
 
-export default AnswerBody;
+export default createFragmentContainer(AnswerBody, {
+  answer: graphql`
+    fragment AnswerBody_answer on AnswerOrPost {
+      ... on Answer {
+        body
+        createdAt
+        author {
+          vip
+          displayName
+          media {
+            url
+          }
+          show_url
+        }
+      }
+      ... on Post {
+        title
+        createdAt
+        body
+        authors {
+          id
+          vip
+          displayName
+        }
+      }
+    }
+  `,
+});

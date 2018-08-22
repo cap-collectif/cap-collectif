@@ -22,8 +22,7 @@ export class ProposalPageLastNews extends React.Component<{
     if (!edge || typeof edge === 'undefined') {
       return null;
     }
-    const post = JSON.parse(JSON.stringify(edge.node));
-    post.author = post.authors[0] && post.authors[0];
+    const post = edge.node;
     const classes = {
       'bg-vip': post.authors[0] && post.authors[0].vip,
       block: true,
@@ -36,7 +35,8 @@ export class ProposalPageLastNews extends React.Component<{
     return (
       <div className={classNames(classes)}>
         {post.title && <h3 className="h3 proposal__last__news__title">{post.title}</h3>}
-        <AnswerBody answer={post} />
+        {/* $FlowFixMe $refType */}
+        <AnswerBody answer={edge.node} />
       </div>
     );
   }
@@ -49,14 +49,11 @@ export default createFragmentContainer(
         totalCount
         edges {
           node {
-            url
+            ...AnswerBody_answer
             title
-            createdAt
             body
             authors {
-              id
               vip
-              displayName
             }
           }
         }
