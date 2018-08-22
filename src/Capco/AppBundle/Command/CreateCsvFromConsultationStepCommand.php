@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
+use Capco\AppBundle\Command\Utils\exportUtils;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
@@ -128,7 +129,6 @@ EOF;
         'contributions_createdAt',
         'contributions_updatedAt',
         'contributions_url',
-        'contributions_expired',
         'contributions_published',
         'contributions_trashed',
         'contributions_trashedAt',
@@ -151,7 +151,6 @@ EOF;
         'contributions_arguments_createdAt',
         'contributions_arguments_updatedAt',
         'contributions_arguments_url',
-        'contributions_arguments_expired',
         'contributions_arguments_published',
         'contributions_arguments_trashed',
         'contributions_arguments_trashedAt',
@@ -161,7 +160,6 @@ EOF;
         'contributions_votes_author_id',
         'contributions_votes_value',
         'contributions_votes_createdAt',
-        'contributions_votes_expired',
         'contributions_reportings_related_id',
         'contributions_reportings_related_kind',
         'contributions_reportings_id',
@@ -179,7 +177,6 @@ EOF;
         'contributions_sources_body',
         'contributions_sources_createdAt',
         'contributions_sources_updatedAt',
-        'contributions_sources_expired',
         'contributions_sources_published',
         'contributions_sources_votesCount',
     ];
@@ -296,7 +293,7 @@ EOF;
             return;
         }
 
-        $steps = $this->consultationStepRepository->getAll();
+        $steps = $this->consultationStepRepository->getAllStepsWithAProject();
         foreach ($steps as $key => $step) {
             $output->writeln(
                 "\n<info>Exporting step " . ($key + 1) . "/" . \count($steps) . "</info>"
@@ -552,7 +549,9 @@ EOF;
 
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             if (isset(self::SOURCE_HEADER_MAP[$path])) {
-                $row[] = $this->parseCellValue(Arr::path($source, self::SOURCE_HEADER_MAP[$path]));
+                $row[] = exportUtils::parseCellValue(
+                    Arr::path($source, self::SOURCE_HEADER_MAP[$path])
+                );
             } elseif (isset($this->contributionHeaderMap[$columnName])) {
                 $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
             } else {
@@ -569,7 +568,9 @@ EOF;
 
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             if (isset(self::VOTES_HEADER_MAP[$path])) {
-                $row[] = $this->parseCellValue(Arr::path($vote, self::VOTES_HEADER_MAP[$path]));
+                $row[] = exportUtils::parseCellValue(
+                    Arr::path($vote, self::VOTES_HEADER_MAP[$path])
+                );
             } elseif (isset($this->contributionHeaderMap[$columnName])) {
                 $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
             } else {
@@ -587,7 +588,7 @@ EOF;
         // we add a row for 1 Opinion.
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             $row[] = isset($this->contributionHeaderMap[$path])
-                ? $this->parseCellValue(
+                ? exportUtils::parseCellValue(
                     Arr::path($contribution, $this->contributionHeaderMap[$path])
                 )
                 : '';
@@ -672,7 +673,7 @@ EOF;
 
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             if (isset(self::ARGUMENT_HEADER_MAP[$path])) {
-                $row[] = $this->parseCellValue(
+                $row[] = exportUtils::parseCellValue(
                     Arr::path($argument, self::ARGUMENT_HEADER_MAP[$path])
                 );
             } elseif (isset($this->contributionHeaderMap[$columnName])) {
@@ -683,18 +684,5 @@ EOF;
         }
 
         $this->writer->addRow($row);
-    }
-
-    protected function parseCellValue($value)
-    {
-        if (!\is_array($value)) {
-            if (\is_bool($value)) {
-                return true === $value ? 'Yes' : 'No';
-            }
-
-            return $value;
-        }
-
-        return $value;
     }
 }

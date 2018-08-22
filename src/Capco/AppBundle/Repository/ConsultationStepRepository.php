@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 class ConsultationStepRepository extends EntityRepository
 {
     //fix error where a step is not bind to a project
-    public function getAll()
+    public function getAllStepsWithAProject()
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('pas')

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
+use Capco\AppBundle\Command\Utils\exportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\GraphQL\GraphQLToCsv;
@@ -183,34 +184,21 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         $row = [];
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             $row[] = isset($this->contributionHeaderMap[$path])
-                ? $this->parseCellValue(Arr::path($user, $this->contributionHeaderMap[$path]))
+                ? exportUtils::parseCellValue(Arr::path($user, $this->contributionHeaderMap[$path]))
                 : '';
         }
         $this->writer->addRow($row);
     }
 
-    protected function parseCellValue($value)
+    private function getUsersGraphQLQuery(?string $userCursor = null): string
     {
-        if (!\is_array($value)) {
-            if (\is_bool($value)) {
-                return true === $value ? 'Yes' : 'No';
-            }
-
-            return $value;
-        }
-
-        return $value;
-    }
-
-    private function getUsersGraphQLQuery(?string $userAfter = null): string
-    {
-        if ($userAfter) {
-            $userAfter = sprintf(', after: "%s"', $userAfter);
+        if ($userCursor) {
+            $userCursor = sprintf(', after: "%s"', $userCursor);
         }
 
         return <<<EOF
 {
-  users(superAdmin: false, first: 100 $userAfter) {
+  users(superAdmin: false, first: 100 $userCursor) {
     totalCount
     pageInfo {
       startCursor

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Entity\Opinion;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 
@@ -11,13 +12,16 @@ class OpinionUrlResolver implements ResolverInterface
 {
     private $consultationStepRepository;
     private $router;
+    private $logger;
 
     public function __construct(
         ConsultationStepRepository $consultationStepRepository,
-        Router $router
+        Router $router,
+        LoggerInterface $logger
     ) {
         $this->consultationStepRepository = $consultationStepRepository;
         $this->router = $router;
+        $this->logger = $logger;
     }
 
     public function __invoke(Opinion $contribution): string
@@ -42,7 +46,9 @@ class OpinionUrlResolver implements ResolverInterface
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
         }
-
+        $this->logger->warning(
+            'Opinion ' . $contribution->getId() . ' cannot have his url generated.'
+        );
         return '';
     }
 }
