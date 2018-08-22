@@ -2,13 +2,14 @@
 import { takeEvery, select, call, put } from 'redux-saga/effects';
 import { stringify } from 'qs';
 import Fetcher from '../../services/Fetcher';
+import LocalStorageService from '../../services/LocalStorageService';
 import type { Exact, State as GlobalState, Uuid, Action } from '../../types';
 
 export type State = {
   +currentProjectStepById: ?Uuid,
   +currentProjectById: ?Uuid,
   +visibleProjects: Array<Uuid>,
-  showConsultationPlan: boolean,
+  +showConsultationPlanById: { [id: Uuid]: boolean },
   +projectsById: { [id: Uuid]: Object },
   +projectTypes: Array<Object>,
   +page: number,
@@ -26,7 +27,7 @@ export type State = {
 const initialState: State = {
   currentProjectStepById: null,
   currentProjectById: null,
-  showConsultationPlan: true,
+  showConsultationPlanById: {},
   visibleProjects: [],
   projectsById: {},
   projectTypes: [],
@@ -173,10 +174,16 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, theme: action.theme };
     case 'project/CHANGE_PAGE':
       return { ...state, page: action.page };
-    case 'project/OPEN_CONSULTATION_PLAN':
-      return { ...state, showConsultationPlan: true };
-    case 'project/CLOSE_CONSULTATION_PLAN':
-      return { ...state, showConsultationPlan: false };
+    case 'project/OPEN_CONSULTATION_PLAN': {
+      const data = { ...state.showConsultationPlanById, [action.id]: true };
+      LocalStorageService.set('project.showConsultationPlanById', data);
+      return { ...state, showConsultationPlanById: data };
+    }
+    case 'project/CLOSE_CONSULTATION_PLAN': {
+      const data = { ...state.showConsultationPlanById, [action.id]: false };
+      LocalStorageService.set('project.showConsultationPlanById', data);
+      return { ...state, showConsultationPlanById: data };
+    }
     default:
       return state;
   }

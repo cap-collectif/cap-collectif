@@ -55,10 +55,10 @@ export class ConsultationPropositionBox extends React.Component<Props> {
 
     return (
       <div className="row">
-        <div className={showConsultationPlan ? 'consultation-plan col-sm-3' : 'consultation-plan'}>
+        <div className={showConsultationPlan ? 'consultation-plan col-sm-3 col-xs-12' : 'consultation-plan'}>
           <ConsultationPlan step={step} />
         </div>
-        <div className={showConsultationPlan ? 'col-sm-9' : 'col-md-10 col-md-offset-1'}>
+        <div id="testScroll" className={showConsultationPlan ? 'col-sm-9' : 'col-xs-10 col-xs-offset-1'}>
           {/* <Panel>
             <span>
               Filtres de recherche
@@ -105,8 +105,8 @@ export class ConsultationPropositionBox extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  showConsultationPlan: state.project.showConsultationPlan,
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
+  showConsultationPlan: props.step.id in state.project.showConsultationPlanById ? state.project.showConsultationPlanById[props.step.id] : true,
 });
 
 export default connect(mapStateToProps)(ConsultationPropositionBox);

@@ -33,6 +33,8 @@ export class ConsultationPlan extends React.Component<Props> {
       }
       if (props) {
         if (props.consultation) {
+          // console.log(props.consultation);
+
           return (
             // $FlowFixMe
             <ConsultationPlanRecursiveItems consultation={props.consultation} stepId={step.id} />
@@ -44,20 +46,22 @@ export class ConsultationPlan extends React.Component<Props> {
     };
 
     return (
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
+      <div>
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
           query ConsultationPlanQuery($consultationId: ID!) {
             consultation: node(id: $consultationId) {
               ...ConsultationPlanRecursiveItems_consultation
             }
           }
         `}
-        variables={{
-          consultationId: step.id,
-        }}
-        render={renderConsultationPlanRecursiveItems}
-      />
+          variables={{
+            consultationId: step.id,
+          }}
+          render={renderConsultationPlanRecursiveItems}
+        />
+      </div>
     );
   }
 }

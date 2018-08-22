@@ -19,10 +19,12 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   getPlan = () => {
     const { consultation, closePlan, openPlan, showConsultationPlan, stepId } = this.props;
 
+    const topPlan = document.getElementById('testScroll');
+
     if(showConsultationPlan) {
       return (
-        <React.Fragment>
-          <div className="consultation-plan_open">
+        <div className="consultation-plan_open" data-spy="affix" data-offset-top="495" data-offset-bottom="450"> {/* prendre top div + width {topPlan.x - 47} pas ça*/}
+          <div className="header">
             <p><i className="cap cap-android-menu mr-5" />PLAN</p>
             <a onClick={() => {
               closePlan(stepId);
@@ -30,18 +32,21 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
               <i className="cap cap-delete-1" />
             </a>
           </div>
-          {consultation.sections &&
-          consultation.sections
-            .filter(Boolean)
-            .map((section, index) => (
-              <ConsultationPlanItems
-                key={index}
-                consultation={consultation}
-                section={section}
-                level={0}
-              />
-            ))}
-        </React.Fragment>
+          <div className="list">
+            {consultation.sections &&
+            consultation.sections
+              .filter(Boolean)
+              .map((section, index) => (
+                <ConsultationPlanItems
+                  key={index}
+                  sectionKey={index}
+                  // consultation={consultation}
+                  section={section}
+                  level={0}
+                />
+              ))}
+          </div>
+        </div>
       )
     }
 
@@ -61,8 +66,8 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  showConsultationPlan: state.project.showConsultationPlan,
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
+  showConsultationPlan: props.stepId in state.project.showConsultationPlanById ? state.project.showConsultationPlanById[props.stepId] : true,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

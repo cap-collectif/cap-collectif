@@ -312,19 +312,42 @@ svg.avatar-group {
 
 /* ======================= Consult plan ============================*/
 
-.consultation-plan {
-    &_open {
-        color: $dark-gray;
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid $border-color;
+body {
+    position: relative;
+}
 
-        .cap-android-menu {
-            top: 5px;
+.consultation-plan {
+    .affix {
+        top: 60px;
+        // width: 100%;
+        z-index: 9999 !important;
+    }
+
+    .affix-bottom {
+        position: absolute;
+    }
+
+    &_open {
+        background-color: $page-bgc;
+
+        .header {
+            color: $dark-gray;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid $border-color;
+
+            .cap-android-menu {
+                top: 5px;
+            }
+
+            a {
+                color: $dark-gray;
+            }
         }
 
-        a {
-            color: $dark-gray;
+        .list {
+            max-height: calc(100vh - 115px);
+            overflow-y: scroll;
         }
     }
 
