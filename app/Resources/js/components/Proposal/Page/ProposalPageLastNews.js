@@ -51,7 +51,6 @@ export default createFragmentContainer(
           node {
             ...AnswerBody_answer
             title
-            body
             authors {
               vip
             }

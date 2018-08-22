@@ -24,7 +24,6 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
             "url": "https://capco.dev/media",
           },
           "show_url": "https://capco.dev/url",
-          "vip": true,
         }
       }
     />
@@ -48,7 +47,6 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
                 "url": "https://capco.dev/media",
               },
               "show_url": "https://capco.dev/url",
-              "vip": true,
             }
           }
         />

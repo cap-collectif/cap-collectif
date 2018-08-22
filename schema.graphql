@@ -1812,7 +1812,7 @@ type PhoneRequirement implements Node & Requirement {
 
 type Post {
   id: String!
-  title: String!
+  title: String
   relatedContent: [PostRelatedContent!]!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -1828,7 +1828,7 @@ type Post {
   url: URI!
   media: Media
   themes: [Theme!]!
-  body: String!
+  body: HTML
 }
 
 # Available statuses

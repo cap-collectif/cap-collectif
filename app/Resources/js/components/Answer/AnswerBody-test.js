@@ -12,7 +12,6 @@ describe('<AnswerBody />', () => {
       $refType,
       createdAt: '2015-01-01 00:00:00',
       author: {
-        vip: true,
         displayName: 'bg',
         media: {
           url: 'https://capco.dev/media',

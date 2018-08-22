@@ -5,7 +5,7 @@ Post:
       id:
         type: 'String!'
       title:
-        type: 'String!'
+        type: 'String'
       relatedContent:
         type: '[PostRelatedContent!]!'
         resolve:
@@ -51,4 +51,4 @@ Post:
       themes:
         type: '[Theme!]!'
       body:
-        type: 'String!'
+        type: 'HTML'

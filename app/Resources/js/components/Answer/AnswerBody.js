@@ -14,18 +14,15 @@ type Props = {
 export class AnswerBody extends React.Component<Props> {
   render() {
     const { answer } = this.props;
+    const author = answer.authors ? answer.authors[0] : answer.author;
     return (
       <div>
-        {answer.author ? (
+        {author ? (
           <div className="media media--user-thumbnail" style={{ marginBottom: '10px' }}>
-            <UserAvatar
-              className="pull-left"
-              user={answer.author}
-              style={{ paddingRight: '10px' }}
-            />
+            <UserAvatar className="pull-left" user={author} style={{ paddingRight: '10px' }} />
             <div className="media-body">
               <p className="media-heading media--macro__user" style={{ marginBottom: '0' }}>
-                <UserLink user={answer.author} />
+                <UserLink user={author} />
               </p>
               <span className="excerpt">
                 <FormattedDate
@@ -51,7 +48,6 @@ export default createFragmentContainer(AnswerBody, {
         body
         createdAt
         author {
-          vip
           displayName
           media {
             url
