@@ -1,28 +1,29 @@
 // @flow
 import * as React from 'react';
 import { FormattedDate } from 'react-intl';
-import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
-import type { AnswerBody_answer } from './__generated__/AnswerBody_answer.graphql';
 
 type Props = {
-  answer: AnswerBody_answer,
+  answer: Object,
 };
 
 export class AnswerBody extends React.Component<Props> {
   render() {
-    const { answer } = this.props;
-    const author = answer.authors ? answer.authors[0] : answer.author;
+    const answer = this.props.answer;
     return (
       <div>
-        {author ? (
+        {answer.author ? (
           <div className="media media--user-thumbnail" style={{ marginBottom: '10px' }}>
-            <UserAvatar className="pull-left" user={author} style={{ paddingRight: '10px' }} />
+            <UserAvatar
+              className="pull-left"
+              user={answer.author}
+              style={{ paddingRight: '10px' }}
+            />
             <div className="media-body">
               <p className="media-heading media--macro__user" style={{ marginBottom: '0' }}>
-                <UserLink user={author} />
+                <UserLink user={answer.author} />
               </p>
               <span className="excerpt">
                 <FormattedDate
@@ -41,30 +42,4 @@ export class AnswerBody extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(AnswerBody, {
-  answer: graphql`
-    fragment AnswerBody_answer on AnswerOrPost {
-      ... on Answer {
-        body
-        createdAt
-        author {
-          displayName
-          media {
-            url
-          }
-          show_url
-        }
-      }
-      ... on Post {
-        title
-        createdAt
-        body
-        authors {
-          id
-          vip
-          displayName
-        }
-      }
-    }
-  `,
-});
+export default AnswerBody;

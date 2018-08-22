@@ -84,7 +84,7 @@
     },
     {
       "path": "./web/js/vendor.js",
-      "maxSize": "850 KB"
+      "maxSize": "860 KB"
     }
   ],
   "prettier": {

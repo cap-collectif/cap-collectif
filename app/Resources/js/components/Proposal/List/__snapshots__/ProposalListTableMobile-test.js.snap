@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalListTableMobile /> renders correctly 1`] = `
+<ListGroup
+  bsClass="list-group"
+  className="list-group-custom"
+>
+  <ListGroupItem
+    bsClass="list-group-item"
+    key="0"
+    listItem={false}
+  >
+    <div
+      className="w-100"
+    >
+      <div
+        className="d-flex justify-content-between"
+      >
+        <a
+          href="http://google.com"
+        >
+          Ravalement de la façade de la bibliothèque mu...
+        </a>
+        <div
+          className="ml-5"
+        >
+          <CroppedLabel
+            className="badge-pill"
+            label="my status"
+            maxSize={9}
+          />
+        </div>
+      </div>
+      <div
+        className="m-auto"
+      >
+        <div
+          className="mb-5 mt-10"
+        >
+          <span>
+            <ForwardRef(Relay(ImplementationStepTitle))
+              progressSteps={
+                Array [
+                  Object {
+                    "endAt": "2018-06-27 00:00:00",
+                    "startAt": "2018-06-27 00:00:00",
+                    "title": "Before",
+                  },
+                  Object {
+                    "endAt": "2018-08-27 00:00:00",
+                    "startAt": "2018-07-27 00:00:00",
+                    "title": "In progress",
+                  },
+                  Object {
+                    "endAt": "2018-10-27 00:00:00",
+                    "startAt": "2018-09-27 00:00:00",
+                    "title": "After",
+                  },
+                ]
+              }
+            />
+          </span>
+        </div>
+        <ProgressList>
+          <ProgressListItem
+            item={
+              Object {
+                "isActive": true,
+                "title": "Before",
+              }
+            }
+            key="0"
+          />
+          <ProgressListItem
+            item={
+              Object {
+                "isActive": false,
+                "title": "In progress",
+              }
+            }
+            key="1"
+          />
+          <ProgressListItem
+            item={
+              Object {
+                "isActive": false,
+                "title": "After",
+              }
+            }
+            key="2"
+          />
+        </ProgressList>
+      </div>
+    </div>
+  </ListGroupItem>
+  <ListGroupItem
+    bsClass="list-group-item"
+    key="1"
+    listItem={false}
+  >
+    <div
+      className="w-100"
+    >
+      <div
+        className="d-flex justify-content-between"
+      >
+        <a
+          href="http://google.com"
+        >
+          Installation de bancs sur la place de la mair...
+        </a>
+      </div>
+    </div>
+  </ListGroupItem>
+</ListGroup>
+`;
