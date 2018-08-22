@@ -1,93 +1,60 @@
 services:
   capco.proposal_notifier:
     class: Capco\AppBundle\Notifier\ProposalNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
-      - '@capco.resolver.proposals'
-      - '@capco.url.resolver'
-      - '@router'
-      - '@translator'
+    autowire: true
+    autoconfigure: true
+
   capco.comment_notifier:
     class: Capco\AppBundle\Notifier\CommentNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
-      - '@capco.comment.resolver'
-      - '@capco.resolver.proposals'
+    autowire: true
+    autoconfigure: true
+
   capco.fos_notifier:
     class: Capco\AppBundle\Notifier\FOSNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
+    autowire: true
+    autoconfigure: true
+
   capco.opinion_notifier:
     class: Capco\AppBundle\Notifier\OpinionNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
-      - '@capco.resolver.consultations'
-      - '@router'
+    autowire: true
+    autoconfigure: true
+
   capco.argument_notifier:
     class: Capco\AppBundle\Notifier\ArgumentNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
-      - '@capco.resolver.consultations'
-      - '@router'
-      - '@translator'
+    autowire: true
+    autoconfigure: true
+
   capco.contact_notifier:
     class: Capco\AppBundle\Notifier\ContactNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
+    autowire: true
+    autoconfigure: true
+
   capco.user_notifier:
     class: Capco\AppBundle\Notifier\UserNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
+    autowire: true
+    autoconfigure: true
+
   capco.project_notifier:
     class: Capco\AppBundle\Notifier\ProjectNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
-      - '@capco.project.resolver'
+    autowire: true
+    autoconfigure: true
+
   capco.contribution_notifier:
     class: Capco\AppBundle\Notifier\ContributionNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
-      - '@capco.url.resolver'
+    autowire: true
+    autoconfigure: true
+
   capco.report_notifier:
     class: Capco\AppBundle\Notifier\ReportNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
-      - '@translator'
-      - '@capco.url.resolver'
+    autowire: true
+    autoconfigure: true
 
   capco.follower_notifier:
     class: Capco\AppBundle\Notifier\FollowerNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
-      - '@capco.url.resolver'
-      - '@logger'
+    autowire: true
+    autoconfigure: true
 
   capco.user_archive_notifier:
     class: Capco\AppBundle\Notifier\UserArchiveNotifier
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
-      - '@router'
+    autowire: true
+    autoconfigure: true

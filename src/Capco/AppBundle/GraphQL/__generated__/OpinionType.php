@@ -378,7 +378,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposition_url", array(0 => $value)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", array(0 => $value)]);
                     },
                     'description' => 'The HTTP show url for this contribution.',
                     'deprecationReason' => 'Use url instead of show_url',
@@ -392,7 +392,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposition_url", array(0 => $value)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", array(0 => $value)]);
                     },
                     'description' => 'Url of the contribution',
                     'deprecationReason' => null,
