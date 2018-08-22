@@ -176,11 +176,6 @@ services:
         }
       - {
           name: overblog_graphql.resolver,
-          alias: 'proposition_url',
-          method: 'resolvePropositionUrl',
-        }
-      - {
-          name: overblog_graphql.resolver,
           alias: 'proposition_arguments',
           method: 'resolvePropositionArguments',
         }
