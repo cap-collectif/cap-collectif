@@ -426,6 +426,7 @@ services:
   # This is not a resolver but a voter, rename and move this elsewhere
   Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:
     arguments: ['@security.token_storage', '@logger']
+    public: true
 
     Capco\AppBundle\GraphQL\Resolver\Project\ProjectAllowedViewersResolver:
         autowire: true

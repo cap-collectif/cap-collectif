@@ -152,16 +152,16 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         $this->writer->addRow(self::SHEET_HEADER);
 
         $requestString = $this->getUsersGraphQLQuery(null);
-        $users = $this->executor->execute(null, [
+        $datas = $this->executor->execute(null, [
             'query' => $requestString,
             'variables' => [],
         ])->toArray();
 
-        $totalCount = Arr::path($users, 'data.users.totalCount');
+        $totalCount = Arr::path($datas, 'data.users.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
         $this->connectionTraversor->traverse(
-            $users,
+            $datas,
             'data.users',
             function ($edge) use ($progress) {
                 $progress->advance();
