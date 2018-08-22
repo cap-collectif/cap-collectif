@@ -89,7 +89,7 @@ class ArgumentAdmin extends AbstractAdmin
         $formMapper
             ->add('type', 'choice', [
                 'label' => 'admin.fields.argument.type',
-                'choices' => Argument::$argumentTypesLabels,
+                'choices' => array_flip(Argument::$argumentTypesLabels),
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('published', null, [

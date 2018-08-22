@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
-use Capco\AppBundle\Command\Utils\exportUtils;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
@@ -13,7 +12,6 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
 use Overblog\GraphQLBundle\Request\Executor;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -129,6 +127,7 @@ EOF;
         'contributions_createdAt',
         'contributions_updatedAt',
         'contributions_url',
+        'contributions_expired',
         'contributions_published',
         'contributions_trashed',
         'contributions_trashedAt',
@@ -151,6 +150,7 @@ EOF;
         'contributions_arguments_createdAt',
         'contributions_arguments_updatedAt',
         'contributions_arguments_url',
+        'contributions_arguments_expired',
         'contributions_arguments_published',
         'contributions_arguments_trashed',
         'contributions_arguments_trashedAt',
@@ -160,6 +160,7 @@ EOF;
         'contributions_votes_author_id',
         'contributions_votes_value',
         'contributions_votes_createdAt',
+        'contributions_votes_expired',
         'contributions_reportings_related_id',
         'contributions_reportings_related_kind',
         'contributions_reportings_id',
@@ -177,6 +178,7 @@ EOF;
         'contributions_sources_body',
         'contributions_sources_createdAt',
         'contributions_sources_updatedAt',
+        'contributions_sources_expired',
         'contributions_sources_published',
         'contributions_sources_votesCount',
     ];
@@ -293,18 +295,17 @@ EOF;
             return;
         }
 
-        $steps = $this->consultationStepRepository->getAllStepsWithAProject();
-        foreach ($steps as $key => $step) {
-            $output->writeln(
-                "\n<info>Exporting step " . ($key + 1) . "/" . \count($steps) . "</info>"
-            );
+        $steps = $this->consultationStepRepository->findAll();
+
+        foreach ($steps as $step) {
             $this->currentStep = $step;
-            $this->generateSheet($step, $output);
+            $this->generateSheet($step);
         }
+
         $output->writeln('Done !');
     }
 
-    protected function generateSheet(ConsultationStep $step, OutputInterface $output): void
+    protected function generateSheet(ConsultationStep $step): void
     {
         $filename = $this->getFilename($step);
 
@@ -321,14 +322,10 @@ EOF;
             'variables' => [],
         ])->toArray();
 
-        $totalCount = Arr::path($contributions, 'data.node.contributionConnection.totalCount');
-        $progress = new ProgressBar($output, $totalCount);
-
         $this->connectionTraversor->traverse(
             $contributions,
             'data.node.contributionConnection',
-            function ($edge) use ($progress) {
-                $progress->advance();
+            function ($edge) {
                 $contribution = $edge['node'];
                 $this->addContributionRow($contribution);
             },
@@ -339,13 +336,13 @@ EOF;
                 );
             }
         );
-
-        $progress->finish();
     }
 
     private function getContributionsGraphQLQueryByConsultationStep(
         ConsultationStep $consultationStep,
         ?string $contributionAfter = null,
+        ?string $argumentAfter = null,
+        int $argumentsPerPage = self::ARGUMENT_PER_PAGE,
         int $contributionPerPage = 100
     ): string {
         $argumentFragment = self::ARGUMENT_FRAGMENT;
@@ -355,6 +352,10 @@ EOF;
         $reportingFragment = self::REPORTING_FRAGMENT;
         $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
         $sourceFragment = self::SOURCE_FRAGMENT;
+
+        if ($argumentAfter) {
+            $argumentAfter = sprintf(', after: "%s"', $argumentAfter);
+        }
 
         if ($contributionAfter) {
             $contributionAfter = sprintf(', after: "%s"', $contributionAfter);
@@ -418,7 +419,6 @@ ${sourceFragment}
                     }
                 }
                 pageInfo {
-                    startCursor
                     endCursor
                     hasNextPage
                 }
@@ -432,7 +432,6 @@ ${sourceFragment}
                 }
               }
               pageInfo {
-                startCursor
                 endCursor
                 hasNextPage
               }
@@ -446,7 +445,6 @@ ${sourceFragment}
                     }
                 }
                 pageInfo {
-                    startCursor
                     endCursor
                     hasNextPage
                 }
@@ -454,7 +452,7 @@ ${sourceFragment}
             reportings {
               ...reportInfos
             }
-            versions(first: 100) {
+            versions {
                 totalCount
                 edges {
                     cursor
@@ -493,7 +491,6 @@ ${sourceFragment}
                             }
                           }
                           pageInfo {
-                            startCursor
                             endCursor
                             hasNextPage
                           }
@@ -549,9 +546,7 @@ EOF;
 
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             if (isset(self::SOURCE_HEADER_MAP[$path])) {
-                $row[] = exportUtils::parseCellValue(
-                    Arr::path($source, self::SOURCE_HEADER_MAP[$path])
-                );
+                $row[] = $this->parseCellValue(Arr::path($source, self::SOURCE_HEADER_MAP[$path]));
             } elseif (isset($this->contributionHeaderMap[$columnName])) {
                 $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
             } else {
@@ -568,9 +563,7 @@ EOF;
 
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             if (isset(self::VOTES_HEADER_MAP[$path])) {
-                $row[] = exportUtils::parseCellValue(
-                    Arr::path($vote, self::VOTES_HEADER_MAP[$path])
-                );
+                $row[] = $this->parseCellValue(Arr::path($vote, self::VOTES_HEADER_MAP[$path]));
             } elseif (isset($this->contributionHeaderMap[$columnName])) {
                 $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
             } else {
@@ -588,7 +581,7 @@ EOF;
         // we add a row for 1 Opinion.
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             $row[] = isset($this->contributionHeaderMap[$path])
-                ? exportUtils::parseCellValue(
+                ? $this->parseCellValue(
                     Arr::path($contribution, $this->contributionHeaderMap[$path])
                 )
                 : '';
@@ -673,7 +666,7 @@ EOF;
 
         foreach ($this->contributionHeaderMap as $path => $columnName) {
             if (isset(self::ARGUMENT_HEADER_MAP[$path])) {
-                $row[] = exportUtils::parseCellValue(
+                $row[] = $this->parseCellValue(
                     Arr::path($argument, self::ARGUMENT_HEADER_MAP[$path])
                 );
             } elseif (isset($this->contributionHeaderMap[$columnName])) {
@@ -684,5 +677,18 @@ EOF;
         }
 
         $this->writer->addRow($row);
+    }
+
+    protected function parseCellValue($value)
+    {
+        if (!\is_array($value)) {
+            if (\is_bool($value)) {
+                return true === $value ? 'Yes' : 'No';
+            }
+
+            return $value;
+        }
+
+        return $value;
     }
 }

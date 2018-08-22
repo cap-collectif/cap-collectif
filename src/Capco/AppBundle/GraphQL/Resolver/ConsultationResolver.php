@@ -133,6 +133,25 @@ class ConsultationResolver implements ContainerAwareInterface
         return $repo->findAll();
     }
 
+    public function resolvePropositionUrl(Opinion $contribution): string
+    {
+        $step = $this->container->get('capco.consultation_step.repository')->getByOpinionId(
+            $contribution->getId()
+        );
+        $project = $step->getProject();
+
+        return $this->container->get('router')->generate(
+            'app_consultation_show_opinion',
+            [
+                'projectSlug' => $project->getSlug(),
+                'stepSlug' => $step->getSlug(),
+                'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
+                'opinionSlug' => $contribution->getSlug(),
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+    }
+
     public function getSectionChildren(OpinionType $type, Arg $argument)
     {
         $iterator = $type->getChildren()->getIterator();
@@ -251,13 +270,7 @@ class ConsultationResolver implements ContainerAwareInterface
     {
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
-            return (
-                $this->container->get(
-                    'Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver'
-                )->__invoke($parent) .
-                '#arg-' .
-                $argument->getId()
-            );
+            return $this->resolvePropositionUrl($parent) . '#arg-' . $argument->getId();
         } elseif ($parent instanceof OpinionVersion) {
             return $this->resolveVersionUrl($parent) . '#arg-' . $argument->getId();
         }

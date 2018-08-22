@@ -23,5 +23,5 @@ services:
     autoconfigure: true
 
   Capco\AppBundle\GraphQL\ConnectionTraversor:
-    autowire: true
-    autoconfigure: true
+    class: Capco\AppBundle\GraphQL\ConnectionTraversor
+    arguments: ['@overblog_graphql.request_executor']

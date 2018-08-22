@@ -40,28 +40,8 @@ final class QueryType extends ObjectType implements GeneratedTypeInterface
                     },
                 ],
                 'users' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('UserConnection')),
+                    'type' => Type::nonNull(Type::listOf(Type::nonNull($globalVariable->get('typeResolver')->resolve('User')))),
                     'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
                         [
                             'name' => 'superAdmin',
                             'type' => Type::boolean(),
@@ -70,7 +50,7 @@ final class QueryType extends ObjectType implements GeneratedTypeInterface
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserQueryResolver", array(0 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["user", array(0 => $args)]);
                     },
                     'description' => null,
                     'deprecationReason' => null,
