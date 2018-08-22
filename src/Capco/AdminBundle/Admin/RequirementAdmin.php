@@ -3,14 +3,13 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Requirement;
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class RequirementAdmin extends Admin
+class RequirementAdmin extends CapcoAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -46,8 +45,7 @@ class RequirementAdmin extends Admin
                     'disabled' => true,
                     'class' => 'checkbox-label',
                 ],
-            ])
-        ;
+            ]);
     }
 
     // Fields to be shown on show page

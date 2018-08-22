@@ -9,6 +9,7 @@ use Coduo\PHPMatcher\Factory\SimpleFactory;
 use LogicException;
 use Swarrot\SwarrotBundle\Broker\PeclFactory;
 use Symfony\Component\HttpKernel\KernelInterface;
+use PHPUnit\Framework\Assert;
 
 class RabbitMQContext implements KernelAwareContext
 {
@@ -27,8 +28,10 @@ class RabbitMQContext implements KernelAwareContext
      *
      * @throws \LogicException
      */
-    public function theQueueAssociatedToProducerHasMessagesBelow(string $producerName, TableNode $tableNode)
-    {
+    public function theQueueAssociatedToProducerHasMessagesBelow(
+        string $producerName,
+        TableNode $tableNode
+    ) {
         $matcher = (new SimpleFactory())->createMatcher();
         $expectedMessages = $this->getExpectedMessages($tableNode);
         $queuedMessages = $this->getQueuedMessages($producerName);
@@ -43,19 +46,23 @@ class RabbitMQContext implements KernelAwareContext
                 $d = json_decode($queuedMessage, true);
                 foreach ($decoded as $key => $value) {
                     if (!array_key_exists($key, $d)) {
-                        throw new LogicException(sprintf(
-                            'Message mismatch. Unknown property : "%s" %s%s',
-                            $key,
-                            PHP_EOL,
-                            json_encode($queuedMessages)
-                        ));
+                        throw new LogicException(
+                            sprintf(
+                                'Message mismatch. Unknown property : "%s" %s%s',
+                                $key,
+                                PHP_EOL,
+                                json_encode($queuedMessages)
+                            )
+                        );
                     }
                     if (!$matcher->match($d[$key], $decoded[$key])) {
-                        throw new LogicException(sprintf(
-                            'Message mismatch. Queue contains:%s%s',
-                            PHP_EOL,
-                            json_encode($queuedMessages)
-                        ));
+                        throw new LogicException(
+                            sprintf(
+                                'Message mismatch. Queue contains:%s%s',
+                                PHP_EOL,
+                                json_encode($queuedMessages)
+                            )
+                        );
                     }
                 }
             }
@@ -68,7 +75,11 @@ class RabbitMQContext implements KernelAwareContext
     public function theQueueAssociatedToProducerShouldBeEmpty(string $producerName)
     {
         $queuedMessages = $this->getQueuedMessages($producerName);
-        \PHPUnit_Framework_Assert::assertCount(0, $queuedMessages, 'The queue is not empty (' . \count($queuedMessages) . ' queued messages)');
+        Assert::assertCount(
+            0,
+            $queuedMessages,
+            'The queue is not empty (' . \count($queuedMessages) . ' queued messages)'
+        );
     }
 
     /**
@@ -77,16 +88,22 @@ class RabbitMQContext implements KernelAwareContext
     public function theQueueAssociatedToProducerShouldNotBeEmpty(string $producerName)
     {
         $queuedMessages = $this->getQueuedMessages($producerName);
-        \PHPUnit_Framework_Assert::assertGreaterThan(0, $queuedMessages, 'The queue is empty');
+        Assert::assertGreaterThan(0, $queuedMessages, 'The queue is empty');
     }
 
     /**
      * @Then /^the queue associated to "([^"]*)" should have (?P<num>\d+) messages$/
      */
-    public function theQueueAssociatedToProducerShouldHave(string $producerName, int $messagesCount)
-    {
+    public function theQueueAssociatedToProducerShouldHave(
+        string $producerName,
+        int $messagesCount
+    ) {
         $queuedMessages = $this->getQueuedMessages($producerName);
-        \PHPUnit_Framework_Assert::assertCount($messagesCount, $queuedMessages, 'The queue contains ' . \count($queuedMessages) . ' messages');
+        Assert::assertCount(
+            $messagesCount,
+            $queuedMessages,
+            'The queue contains ' . \count($queuedMessages) . ' messages'
+        );
     }
 
     /**
@@ -158,10 +175,7 @@ class RabbitMQContext implements KernelAwareContext
                 '/\b(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\+(\d{2}):(\d{2})\b/',
                 '#:\d{10}(,|})#',
             ],
-            [
-                'ISO8601_TIMESTAMP',
-                ':"UNIX_TIMESTAMP"$1',
-            ],
+            ['ISO8601_TIMESTAMP', ':"UNIX_TIMESTAMP"$1'],
             $data
         );
     }

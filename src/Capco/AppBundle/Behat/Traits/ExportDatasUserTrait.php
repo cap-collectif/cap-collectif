@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Behat\Traits;
 
+use PHPUnit\Framework\Assert;
+
 trait ExportDatasUserTrait
 {
     /**
@@ -18,7 +20,7 @@ trait ExportDatasUserTrait
 
         $archiveFile = $archive->getPath();
         $directory = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/';
-        \PHPUnit_Framework_Assert::assertFileExists("$directory/$archiveFile");
+        Assert::assertFileExists("$directory/$archiveFile");
     }
 
     /**
@@ -43,6 +45,6 @@ trait ExportDatasUserTrait
         $archiveFile = $archive->getPath();
         $directory = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/';
 
-        \PHPUnit_Framework_Assert::assertFileNotExists("$directory/$archiveFile");
+        Assert::assertFileNotExists("$directory/$archiveFile");
     }
 }

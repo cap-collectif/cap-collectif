@@ -26,6 +26,7 @@ use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
 use Symfony\Component\Process\Process;
 use WebDriver\Exception\ElementNotVisible;
+use PHPUnit\Framework\Assert;
 
 const REPOSITORY_NAME = 'repository_qa';
 const SNAPSHOT_NAME = 'snap_qa';
@@ -203,7 +204,7 @@ class ApplicationContext extends UserContext
         // Make sure we are not using virtual file system, because here we want to see real files in path
         $directory = str_replace('vfs://', '', rtrim($directory, '/\\'));
         $filename = str_replace('vfs://', '', $filename);
-        \PHPUnit_Framework_Assert::assertFileExists("$directory/$filename");
+        Assert::assertFileExists("$directory/$filename");
     }
 
     /**
@@ -439,7 +440,7 @@ class ApplicationContext extends UserContext
         if (!\in_array($second, $items, true)) {
             throw new ElementNotFoundException($this->getSession(), 'Element "' . $second . '"');
         }
-        \PHPUnit_Framework_TestCase::assertTrue(
+        Assert::assertTrue(
             array_search($first, $items, true) < array_search($second, $items, true)
         );
     }
@@ -634,7 +635,7 @@ class ApplicationContext extends UserContext
         if (!$element) {
             throw new ElementNotFoundException($session, 'Element "' . $selector . '"');
         }
-        \PHPUnit_Framework_TestCase::assertTrue($element->hasClass($class));
+        Assert::assertTrue($element->hasClass($class));
     }
 
     /**
@@ -651,7 +652,7 @@ class ApplicationContext extends UserContext
         if (!$element) {
             throw new ElementNotFoundException($session, 'Element "' . $selector . '"');
         }
-        \PHPUnit_Framework_TestCase::assertFalse($element->hasClass($class));
+        Assert::assertFalse($element->hasClass($class));
     }
 
     /**
@@ -673,7 +674,7 @@ class ApplicationContext extends UserContext
             );
         }
 
-        \PHPUnit_Framework_TestCase::assertTrue($button->hasAttribute('disabled'));
+        Assert::assertTrue($button->hasAttribute('disabled'));
     }
 
     /**
@@ -695,7 +696,7 @@ class ApplicationContext extends UserContext
             );
         }
 
-        \PHPUnit_Framework_TestCase::assertFalse($button->hasAttribute('disabled'));
+        Assert::assertFalse($button->hasAttribute('disabled'));
     }
 
     /**
@@ -716,7 +717,7 @@ class ApplicationContext extends UserContext
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
         }
 
-        \PHPUnit_Framework_TestCase::assertTrue($element->hasAttribute($attribute));
+        Assert::assertTrue($element->hasAttribute($attribute));
     }
 
     /**
@@ -809,7 +810,7 @@ class ApplicationContext extends UserContext
             ->getPage()
             ->find('css', $element);
 
-        \PHPUnit_Framework_TestCase::assertTrue($input->hasAttribute('disabled'));
+        Assert::assertTrue($input->hasAttribute('disabled'));
     }
 
     private function visitPageWithParams($page, $params = [])

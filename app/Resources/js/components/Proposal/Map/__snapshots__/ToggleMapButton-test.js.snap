@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ToggleMapButton /> should render a toggle button with map selected 1`] = `
+<div
+  aria-label="Step view"
+  className="btn-group"
+  id="step-view-toggle"
+  role="group"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
+  >
+    <i
+      className="cap cap-th-large"
+      onClick={[Function]}
+    />
+     
+    <FormattedMessage
+      id="proposal.map.mosaic"
+      values={Object {}}
+    />
+  </Button>
+  <Button
+    active={true}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
+  >
+    <i
+      className="cap cap-map-location"
+      onClick={[Function]}
+    />
+     
+    <FormattedMessage
+      id="proposal.map.map"
+      values={Object {}}
+    />
+  </Button>
+</div>
+`;
+
+exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 1`] = `
+<div
+  aria-label="Step view"
+  className="btn-group"
+  id="step-view-toggle"
+  role="group"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <Button
+    active={true}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
+  >
+    <i
+      className="cap cap-th-large"
+      onClick={[Function]}
+    />
+     
+    <FormattedMessage
+      id="proposal.map.mosaic"
+      values={Object {}}
+    />
+  </Button>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
+  >
+    <i
+      className="cap cap-map-location"
+      onClick={[Function]}
+    />
+     
+    <FormattedMessage
+      id="proposal.map.map"
+      values={Object {}}
+    />
+  </Button>
+</div>
+`;

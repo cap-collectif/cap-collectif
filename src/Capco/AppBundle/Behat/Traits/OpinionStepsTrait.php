@@ -1,6 +1,8 @@
 <?php
 namespace Capco\AppBundle\Behat\Traits;
 
+use PHPUnit\Framework\Assert;
+
 trait OpinionStepsTrait
 {
     protected static $opinion = [
@@ -262,7 +264,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $votesCount = $page->getArgumentVotesCount();
-        \PHPUnit_Framework_Assert::assertNotEquals(
+        Assert::assertNotEquals(
             0,
             $votesCount,
             'Argument has no votes from the begining, test will not be conclusive.'
@@ -282,7 +284,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $votesCount = $page->getArgumentVotesCount();
-        \PHPUnit_Framework_Assert::assertNotEquals(
+        Assert::assertNotEquals(
             0,
             $votesCount,
             'Argument has no votes from the begining, test will not be conclusive.'
@@ -301,7 +303,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $votesCount = $page->getArgumentVotesCount();
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             0,
             $votesCount,
             'Incorrect votes number ' . $votesCount . ' for argument after edition.'
@@ -361,7 +363,7 @@ trait OpinionStepsTrait
         $wantedVotesCount = $page->getArgumentVotesCount() + 1;
         $this->clickArgumentVoteButtonWithLabel('vote.ok');
         $newVotesCount = $page->getArgumentVotesCount();
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             $wantedVotesCount,
             $newVotesCount,
             'Argument votes number should be increased by 1.'
@@ -377,7 +379,7 @@ trait OpinionStepsTrait
         $wantedVotesCount = $page->getArgumentVotesCount() - 1;
         $this->clickArgumentVoteButtonWithLabel('vote.cancel');
         $newVotesCount = $page->getArgumentVotesCount();
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             $wantedVotesCount,
             $newVotesCount,
             'Argument votes number should be decreased by 1.'
@@ -406,7 +408,7 @@ trait OpinionStepsTrait
         $inClosedStep =
             $this->opinionPageInClosedStepIsOpen() || $this->versionPageInClosedStepIsOpen();
         $button = $page->getArgumentVoteButton($inClosedStep);
-        \PHPUnit_Framework_Assert::assertTrue($button->hasAttribute('disabled'));
+        Assert::assertTrue($button->hasAttribute('disabled'));
     }
 
     /**
@@ -436,7 +438,7 @@ trait OpinionStepsTrait
         $wantedVotesCount = $page->getSourceVotesCount() + 1;
         $this->clickSourceVoteButtonWithLabel('vote.ok');
         $newVotesCount = $page->getSourceVotesCount();
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             $wantedVotesCount,
             $newVotesCount,
             'Source votes number should be increased by 1.'
@@ -452,7 +454,7 @@ trait OpinionStepsTrait
         $wantedVotesCount = $page->getSourceVotesCount() - 1;
         $this->clickSourceVoteButtonWithLabel('vote.cancel');
         $newVotesCount = $page->getSourceVotesCount();
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             $wantedVotesCount,
             $newVotesCount,
             'Source votes number should be decreased by 1.'
@@ -496,7 +498,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $button = $page->getAddSourceButton();
-        \PHPUnit_Framework_Assert::assertTrue($button->hasAttribute('disabled'));
+        Assert::assertTrue($button->hasAttribute('disabled'));
     }
 
     /**
@@ -506,7 +508,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $button = $page->find('css', '#btn-add--les-causes');
-        \PHPUnit_Framework_Assert::assertTrue($button->hasAttribute('disabled'));
+        Assert::assertTrue($button->hasAttribute('disabled'));
     }
 
     /**
@@ -516,7 +518,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $votesCount = $page->getSourceVotesCount();
-        \PHPUnit_Framework_Assert::assertNotEquals(
+        Assert::assertNotEquals(
             0,
             $votesCount,
             'Source has no votes from the begining, test will not be conclusive.'
@@ -538,7 +540,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $votesCount = $page->getSourceVotesCount();
-        \PHPUnit_Framework_Assert::assertNotEquals(
+        Assert::assertNotEquals(
             0,
             $votesCount,
             'Source has no votes from the begining, test will not be conclusive.'
@@ -559,7 +561,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $votesCount = $page->getSourceVotesCount();
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             0,
             $votesCount,
             'Incorrect votes number ' . $votesCount . ' for source after edition.'
@@ -763,7 +765,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $buttonLabel = $page->getArgumentVoteButtonLabel();
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             $label,
             $buttonLabel,
             'Incorrect button label ' . $buttonLabel . ' on argument vote button.'
@@ -778,7 +780,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $buttonLabel = $page->getSourceVoteButtonLabel();
-        \PHPUnit_Framework_Assert::assertEquals(
+        Assert::assertEquals(
             $label,
             $buttonLabel,
             'Incorrect button label ' . $buttonLabel . ' on source vote button.'

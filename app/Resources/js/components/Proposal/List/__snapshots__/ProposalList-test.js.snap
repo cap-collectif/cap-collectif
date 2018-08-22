@@ -17,71 +17,93 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
 `;
 
 exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
-<Fragment>
-  <ForwardRef(Relay(ProposalListTable))
-    proposals={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "edges": Array [
-          Object {
-            "node": Object {
-              "$fragmentRefs": null,
-              "id": "1",
-            },
-          },
-          Object {
-            "node": Object {
-              "$fragmentRefs": null,
-              "id": "2",
-            },
-          },
-        ],
-        "totalCount": 2,
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <ul
+    className="media-list proposal-preview-list opinion__list"
+  >
+    <ForwardRef(Relay(ProposalPreview))
+      key="0"
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "id": "1",
+        }
       }
-    }
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "1",
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "1",
+        }
       }
-    }
-  />
-</Fragment>
+      viewer={null}
+    />
+    <ForwardRef(Relay(ProposalPreview))
+      key="1"
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "id": "2",
+        }
+      }
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "1",
+        }
+      }
+      viewer={null}
+    />
+  </ul>
+</Row>
 `;
 
 exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
-<Fragment>
-  <ForwardRef(Relay(ProposalListTable))
-    proposals={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "edges": Array [
-          Object {
-            "node": Object {
-              "$fragmentRefs": null,
-              "id": "1",
-            },
-          },
-          Object {
-            "node": Object {
-              "$fragmentRefs": null,
-              "id": "2",
-            },
-          },
-        ],
-        "totalCount": 2,
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <ul
+    className="media-list proposal-preview-list opinion__list"
+  >
+    <ForwardRef(Relay(ProposalPreview))
+      key="0"
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "id": "1",
+        }
       }
-    }
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "id": "1",
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "1",
+        }
       }
-    }
-  />
-</Fragment>
+      viewer={null}
+    />
+    <ForwardRef(Relay(ProposalPreview))
+      key="1"
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "id": "2",
+        }
+      }
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "1",
+        }
+      }
+      viewer={null}
+    />
+  </ul>
+</Row>
 `;
