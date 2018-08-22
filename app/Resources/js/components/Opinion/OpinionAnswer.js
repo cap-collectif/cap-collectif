@@ -11,7 +11,7 @@ type Props = {
 
 class OpinionAnswer extends React.Component<Props> {
   render() {
-    const answer = this.props.opinion.answer;
+    const { answer } = this.props.opinion;
     if (!answer) {
       return null;
     }
@@ -26,6 +26,7 @@ class OpinionAnswer extends React.Component<Props> {
             {answer.title}
           </p>
         ) : null}
+        {/* $FlowFixMe $refType */}
         <AnswerBody answer={answer} />
       </div>
     );
@@ -37,28 +38,20 @@ export default createFragmentContainer(OpinionAnswer, {
     fragment OpinionAnswer_opinion on OpinionOrVersion {
       ... on Opinion {
         answer {
-          title
           author {
             vip
-            displayName
-            media {
-              url
-            }
-            show_url
           }
+          title
+          ...AnswerBody_answer
         }
       }
       ... on Version {
         answer {
-          title
           author {
             vip
-            displayName
-            media {
-              url
-            }
-            show_url
           }
+          title
+          ...AnswerBody_answer
         }
       }
     }
