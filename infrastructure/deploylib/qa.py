@@ -63,7 +63,11 @@ def perf():
 @task(environments=['ci'])
 def codecov():
     "Upload code coverage"
-    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov')
+    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov --file=coverage/php/clover.xml --flags=graphql')
+    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov --file=coverage/php/clover.xml --flags=php')
+    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov --file=coverage/js/lcov.info --flags=jest')
+# TODO:  https://github.com/rpl/flow-coverage-report/issues/67
+#    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov -f ./coverage/flow/index.html -c --flags=flow')
 
 
 @task(environments=['local', 'ci'])

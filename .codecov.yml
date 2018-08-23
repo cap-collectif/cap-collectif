@@ -1,31 +1,58 @@
+# https://docs.codecov.io/docs
 codecov:
-  allow_coverage_offsets: true
   notify:
-    require_ci_to_pass: yes
+    require_ci_to_pass: no # will send notifications without checking ci status
+
+comment:
+  layout: 'reach, diff, flags, files'
+  require_changes: yes # only post the comment if coverage changes
 
 coverage:
-  round: down
-  precision: 2
+  precision: 2 # 2 = xx.xx%
+  range: 50...60 # default 70...90. red...green
   status:
-    project:
-      default: no
-      frontend:
-        target: 89%
-        flags: frontend
-      backend:
-        target: 1%
-        flags: backend
+    patch: # Only measures lines adjusted in the pull request
+      default: off
+      jest:
+        flags: jest
+        target: 70
+      php:
+        flags: php
       graphql:
-        target: 50%
         flags: graphql
+      flow:
+        flags: flow
+    project: # Overall project coverage
+      default: off
+      jest:
+        flags: jest
+        target: 35
+      php:
+        flags: php
+        target: 1
+      graphql:
+        flags: graphql
+        target: 0
+      flow:
+        target: 88
+        flags: flow
 
 flags:
+  # Filter the folder(s) you wish to measure by that flag
   graphql:
     paths:
-      - src/Capco/AppBundle/GraphQL
-  backend:
+      - src/Capco/AppBundle/GraphQL/
+  php:
     paths:
       - src/
-  frontend:
+  jest:
     paths:
       - app/Resources/js/
+  flow:
+    paths:
+      - app/Resources/js/
+
+ignore:
+  - '**/__generated__/**/*'
+  - '**/*-test.js'
+  - 'src/Capco/AppBundle/Behat'
