@@ -357,14 +357,17 @@ svg.avatar-group {
     }
 
     &_close {
-        position: absolute;
-        left: 15px;
         padding: 7px 15px;
         border: 1px solid $primary-color;
         text-align: center;
         color: $primary-color;
         border-radius: 4px;
         line-height: 19px;
+
+        &:not(.affix) {
+            position: absolute;
+            left: 15px;
+        }
 
         .cap-android-menu {
             right: 0;

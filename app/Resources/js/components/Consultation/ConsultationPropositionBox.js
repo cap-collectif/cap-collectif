@@ -37,6 +37,15 @@ export class ConsultationPropositionBox extends React.Component<Props> {
         this.getActiveLink();
       });
     });
+
+    // const planWidth = document.getElementById('consultation-plan').getBoundingClientRect().width;
+    // const plan = document.getElementById('consultNav');
+    //
+    // if(plan && planWidth) {
+    //   plan.style.width = planWidth;
+    // }
+    //
+    // console.log(plan, planWidth);
   }
 
   getActiveLink() {
@@ -78,7 +87,7 @@ export class ConsultationPropositionBox extends React.Component<Props> {
 
   render() {
     const { step, showConsultationPlan } = this.props;
-    
+
     const renderSectionRecursiveList = ({
       error,
       props,

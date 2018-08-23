@@ -16,12 +16,21 @@ type Props = {
 };
 
 export class ConsultationPlanRecursiveItems extends React.Component<Props> {
+  componentDidMount() {
+    const planWidth = document.getElementById('scrollspy').clientWidth;
+    // const planWidth = window.getComputedStyle(document.getElementById("consultation-plan"), null);
+    // planWidth.getPropertyValue("width");
+    const plan = document.getElementById('consultNav'); // prend aussi close
+
+    if(plan && planWidth) {
+      plan.style.width = `${planWidth}px`;
+    }
+
+    console.log(plan, planWidth);
+  }
+
   getPlan = () => {
     const { consultation, closePlan, openPlan, showConsultationPlan, stepId } = this.props;
-
-    // const topPlan = document.getElementById('testScroll');
-
-    // $('#testScrollspy').scrollspy();
 
     if(showConsultationPlan) {
       return (
@@ -53,7 +62,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
     }
 
     return (
-      <div className="consultation-plan_close">
+      <div className="consultation-plan_close" style={{ width: "auto"}} data-spy="affix" data-offset-top="495" data-offset-bottom="450">
         <span>Plan</span><br/>
         <a onClick={() => {
           openPlan(stepId);
