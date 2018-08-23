@@ -8,15 +8,13 @@ Query:
         description: 'The currently authenticated user.'
         resolve: '@=getUser()'
       users:
-        type: 'UserConnection!'
-        argsBuilder: 'Relay::Connection'
+        type: '[User!]!'
         args:
           superAdmin:
             type: 'Boolean'
             defaultValue: false
             description: 'Remove super admin from export.'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserQueryResolver", [args])'
+        resolve: "@=resolver('user', [args])"
       consultations:
         type: '[Consultation!]!'
         args:

@@ -4,9 +4,10 @@ exports[`<ProposalPageLastNews /> should render correctly 1`] = `
 <div
   className="block"
 >
-  <ForwardRef(Relay(AnswerBody))
+  <AnswerBody
     answer={
       Object {
+        "author": Object {},
         "authors": Array [
           Object {},
         ],

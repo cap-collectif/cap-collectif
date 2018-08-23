@@ -639,7 +639,6 @@ overblog_graphql:
       # These types names should be explicitly declare here
       types:
           - Argument
-          - AnswerOrPost
           - CheckboxRequirement
           - FirstnameRequirement
           - LastnameRequirement

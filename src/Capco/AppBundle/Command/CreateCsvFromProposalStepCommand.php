@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
-use Capco\AppBundle\Command\Utils\exportUtils;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -692,7 +691,7 @@ EOF;
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_REPORTING_HEADER_MAP[$columnName])) {
                 $value = Arr::path($report, self::PROPOSAL_REPORTING_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$columnName])) {
                 // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
@@ -710,7 +709,7 @@ EOF;
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_VOTE_HEADER_MAP[$columnName])) {
                 $value = Arr::path($vote, self::PROPOSAL_VOTE_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$columnName])) {
                 // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
@@ -728,7 +727,7 @@ EOF;
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
                 $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$columnName])) {
                 // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
@@ -791,14 +790,14 @@ EOF;
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_REPORTING_HEADER_MAP[$columnName])) {
                 $value = Arr::path($report, self::PROPOSAL_REPORTING_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$columnName])) {
                 // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
             } elseif (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
                 // copy comment row
                 $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } else {
                 $row[] = '';
             }
@@ -816,14 +815,14 @@ EOF;
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_COMMENT_VOTE_HEADER_MAP[$columnName])) {
                 $value = Arr::path($vote, self::PROPOSAL_COMMENT_VOTE_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$columnName])) {
                 // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
             } elseif (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
                 // copy comment row
                 $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } else {
                 $row[] = '';
             }
@@ -885,7 +884,7 @@ EOF;
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) {
                 $value = Arr::path($comment, self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$columnName])) {
                 // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
@@ -945,14 +944,14 @@ EOF;
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_NEWS_COMMENT_VOTE_HEADER_MAP[$columnName])) {
                 $value = Arr::path($vote, self::PROPOSAL_NEWS_COMMENT_VOTE_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$columnName])) {
                 // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
             } elseif (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) {
                 // copy comment row
                 $value = Arr::path($comment, self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) {
                 // copy news row
                 $this->handleProposalNewsValues($news, $columnName, $row);
@@ -977,14 +976,14 @@ EOF;
                     $report,
                     self::PROPOSAL_NEWS_COMMENT_REPORTING_HEADER_MAP[$columnName]
                 );
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$columnName])) {
                 // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
             } elseif (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) {
                 // copy comment row
                 $value = Arr::path($comment, self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName]);
-                $row[] = exportUtils::parseCellValue($value);
+                $row[] = $this->parseCellValue($value);
             } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) {
                 // copy news row
                 $this->handleProposalNewsValues($news, $columnName, $row);
@@ -1032,7 +1031,7 @@ EOF;
             }
         } else {
             $value = Arr::path($proposal, $this->proposalHeaderMap[$columnName]);
-            $row[] = exportUtils::parseCellValue($value);
+            $row[] = $this->parseCellValue($value);
         }
 
         return $row;
@@ -1048,7 +1047,7 @@ EOF;
             foreach (Arr::path($news, 'authors') as $author) {
                 $values[] = Arr::path($author, $path);
             }
-            $row[] = exportUtils::parseCellValue(implode(', ', $values));
+            $row[] = $this->parseCellValue(implode(', ', $values));
         } elseif ('proposal_news_linkedProposal' === $columnName) {
             $related = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
             $proposal = array_map(
@@ -1084,7 +1083,7 @@ EOF;
             $row[] = implode(', ', $themes);
         } else {
             $value = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
-            $row[] = exportUtils::parseCellValue($value);
+            $row[] = $this->parseCellValue($value);
         }
     }
 
@@ -1138,6 +1137,19 @@ EOF;
             $selectionStep->getProject()->getSlug(),
             $selectionStep->getSlug()
         );
+    }
+
+    protected function parseCellValue($value)
+    {
+        if (!\is_array($value)) {
+            if (\is_bool($value)) {
+                return true === $value ? 'Yes' : 'No';
+            }
+
+            return $value;
+        }
+
+        return $value;
     }
 
     protected function getProject(InputInterface $input): ?Project

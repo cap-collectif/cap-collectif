@@ -142,8 +142,6 @@ type Answer {
   author: User
 }
 
-union AnswerOrPost = Answer | Post
-
 # A contribution
 type Appendix {
   # Identifies the body of the contribution.
@@ -1812,7 +1810,7 @@ type PhoneRequirement implements Node & Requirement {
 
 type Post {
   id: String!
-  title: String
+  title: String!
   relatedContent: [PostRelatedContent!]!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -1828,7 +1826,7 @@ type Post {
   url: URI!
   media: Media
   themes: [Theme!]!
-  body: HTML
+  body: String!
 }
 
 # Available statuses
@@ -2423,14 +2421,9 @@ type Query {
   # The currently authenticated user.
   viewer: User!
   users(
-    after: String
-    first: Int
-    before: String
-    last: Int
-
     # Remove super admin from export.
     superAdmin: Boolean = false
-  ): UserConnection!
+  ): [User!]!
   consultations(
     # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     id: ID

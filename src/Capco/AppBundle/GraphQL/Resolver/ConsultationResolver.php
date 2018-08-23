@@ -1,33 +1,31 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Reply;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Answer;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\OpinionVote;
-use Capco\AppBundle\Entity\AbstractVote;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Model\CreatableInterface;
-use Capco\AppBundle\Entity\OpinionVersionVote;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVote;
+use Capco\AppBundle\Entity\OpinionVersionVote;
+use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Entity\Source;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Model\CreatableInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 
 class ConsultationResolver implements ContainerAwareInterface
 {
@@ -69,13 +67,6 @@ class ConsultationResolver implements ContainerAwareInterface
             return $typeResolver->resolve('Reply');
         }
 
-        if ($data instanceof Answer) {
-            return $typeResolver->resolve('Answer');
-        }
-
-        if ($data instanceof Post) {
-            return $typeResolver->resolve('Post');
-        }
         throw new UserError('Could not resolve type of Contribution.');
     }
 
@@ -140,6 +131,25 @@ class ConsultationResolver implements ContainerAwareInterface
         }
 
         return $repo->findAll();
+    }
+
+    public function resolvePropositionUrl(Opinion $contribution): string
+    {
+        $step = $this->container->get('capco.consultation_step.repository')->getByOpinionId(
+            $contribution->getId()
+        );
+        $project = $step->getProject();
+
+        return $this->container->get('router')->generate(
+            'app_consultation_show_opinion',
+            [
+                'projectSlug' => $project->getSlug(),
+                'stepSlug' => $step->getSlug(),
+                'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
+                'opinionSlug' => $contribution->getSlug(),
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
     public function getSectionChildren(OpinionType $type, Arg $argument)
@@ -260,13 +270,7 @@ class ConsultationResolver implements ContainerAwareInterface
     {
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
-            return (
-                $this->container->get(
-                    'Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver'
-                )->__invoke($parent) .
-                '#arg-' .
-                $argument->getId()
-            );
+            return $this->resolvePropositionUrl($parent) . '#arg-' . $argument->getId();
         } elseif ($parent instanceof OpinionVersion) {
             return $this->resolveVersionUrl($parent) . '#arg-' . $argument->getId();
         }
