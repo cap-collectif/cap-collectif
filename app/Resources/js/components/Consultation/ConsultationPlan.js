@@ -46,7 +46,7 @@ export class ConsultationPlan extends React.Component<Props> {
     };
 
     return (
-      <div>
+      <div className="scrollspy">
         <QueryRenderer
           environment={environment}
           query={graphql`

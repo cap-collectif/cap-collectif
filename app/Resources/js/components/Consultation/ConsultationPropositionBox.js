@@ -30,9 +30,55 @@ type Props = {
 };
 
 export class ConsultationPropositionBox extends React.Component<Props> {
+
+  componentDidMount() {
+    window.addEventListener('scroll', () => {
+      window.requestAnimationFrame(() => {
+        this.getActiveLink();
+      });
+    });
+  }
+
+  getActiveLink() {
+    const sectionItems = document.querySelectorAll('.opinion-type__title');
+
+    sectionItems.forEach((item) => {
+      const navItem = document.getElementById(`nav-${item.id}`);
+      const itemPosition = item.getBoundingClientRect();
+
+      if(navItem && navItem.parentNode) {
+        // 50 is height of nav
+        if(
+          ((itemPosition.top - 60) < 0)
+          && ((itemPosition.top - 60) > -itemPosition.height)
+        ){
+          // id is passed on children of navItem component
+          navItem.parentNode.classList.add('active');
+        } else {
+          navItem.parentNode.classList.remove('active');
+        }
+      }
+    });
+  }
+
+  // componentWillUnmount() {
+  // add removeEventListener
+  // }
+
+  // componentDidUpdate() {
+  //   const planWidth = document.getElementById('consultation-plan').getBoundingClientRect().width;
+  //   const plan = document.getElementById('consultationNav');
+  //
+  //   if(plan && planWidth) {
+  //     plan.style.width = planWidth;
+  //   }
+  //
+  //   console.log(plan && plan.style.width);
+  // }
+
   render() {
     const { step, showConsultationPlan } = this.props;
-
+    
     const renderSectionRecursiveList = ({
       error,
       props,
@@ -55,10 +101,10 @@ export class ConsultationPropositionBox extends React.Component<Props> {
 
     return (
       <div className="row">
-        <div className={showConsultationPlan ? 'consultation-plan col-sm-3 col-xs-12' : 'consultation-plan'}>
+        <div className={showConsultationPlan ? 'consultation-plan col-sm-3 col-xs-12' : 'consultation-plan'} id="consultation-plan">
           <ConsultationPlan step={step} />
         </div>
-        <div id="testScroll" className={showConsultationPlan ? 'col-sm-9' : 'col-xs-10 col-xs-offset-1'}>
+        <div id="scroll-content" className={showConsultationPlan ? 'col-sm-9' : 'col-xs-10 col-xs-offset-1'}>
           {/* <Panel>
             <span>
               Filtres de recherche

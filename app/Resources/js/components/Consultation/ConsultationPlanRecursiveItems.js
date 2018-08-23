@@ -19,11 +19,13 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   getPlan = () => {
     const { consultation, closePlan, openPlan, showConsultationPlan, stepId } = this.props;
 
-    const topPlan = document.getElementById('testScroll');
+    // const topPlan = document.getElementById('testScroll');
+
+    // $('#testScrollspy').scrollspy();
 
     if(showConsultationPlan) {
       return (
-        <div className="consultation-plan_open" data-spy="affix" data-offset-top="495" data-offset-bottom="450"> {/* prendre top div + width {topPlan.x - 47} pas ça*/}
+        <div className="consultation-plan_open" id="consultNav" data-spy="affix" data-offset-top="495" data-offset-bottom="450"> {/* prendre top div + width {topPlan.x - 47} pas ça*/}
           <div className="header">
             <p><i className="cap cap-android-menu mr-5" />PLAN</p>
             <a onClick={() => {

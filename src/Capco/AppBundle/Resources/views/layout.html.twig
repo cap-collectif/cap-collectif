@@ -50,7 +50,9 @@
     {% include '@CapcoApp/Default/custom.css.twig' %}
 </head>
 
-<body>
+<body
+    data-spy="scroll"
+    data-target=".scrollspy">
 
 <div id="app-wrapper">
     {% block reduxStore %}

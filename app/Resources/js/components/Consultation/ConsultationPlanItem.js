@@ -11,27 +11,6 @@ type Props = {
 };
 
 export class ConsultationPlanItem extends React.Component<Props> {
-  componentDidUpdate() {
-    const { section } = this.props;
-
-    console.warn(section.slug);
-    console.error(`opinion-type--${section.slug}`);
-
-    if(config.canUseDOM) {
-      // const scrollZone = document.getElementById('testScroll');
-      if(section.slug) {
-
-        console.log(document.getElementById(`opinion-type--${section.slug}`));
-        // const getBoundingItem = item && item.getBoundingClientRect();
-      }
-    }
-
-    // if top == top fenetre - 60, add classname active sinon remove
-
-    // if(scrollZone) {
-      // $('testScroll').scrollspy({ target: `#opinion-type--${section.slug}` })
-    // }
-  }
 
   render() {
     const { section, level } = this.props;
@@ -42,6 +21,7 @@ export class ConsultationPlanItem extends React.Component<Props> {
         data-toggle="collapse"
         aria-expanded="false" // {level === 0 ? 'false' : 'true'}
         data-target={`#collapseCslt${section.id}`}
+        id={`nav-opinion-type--${section.slug}`}
         onClick={() => {
           if(config.canUseDOM) {
             const anchor = document.getElementById(`opinion-type--${section.slug}`);
