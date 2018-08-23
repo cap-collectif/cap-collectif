@@ -3,14 +3,17 @@ namespace Capco\AppBundle\GraphQL;
 
 use Capco\AppBundle\Utils\Arr;
 use Overblog\GraphQLBundle\Request\Executor;
+use Psr\Log\LoggerInterface;
 
 class ConnectionTraversor
 {
     protected $executor;
+    protected $logger;
 
-    public function __construct(Executor $executor)
+    public function __construct(Executor $executor, LoggerInterface $logger)
     {
         $this->executor = $executor;
+        $this->logger = $logger;
     }
 
     public function traverse(
@@ -27,11 +30,17 @@ class ConnectionTraversor
             if (\count($edges) > 0) {
                 foreach ($edges as $edge) {
                     $callback($edge);
-                    if ($edge['cursor'] === $endCursor && $renewalQuery) {
+                    if ($edge['cursor'] === $endCursor) {
+                        if (!$renewalQuery) {
+                            return;
+                        }
                         $data = $this->executor->execute(null, [
                             'query' => $renewalQuery($pageInfo),
                             'variables' => [],
                         ])->toArray();
+                        if (isset($data['errors'])) {
+                            $this->logger->warning(json_encode($data['errors']));
+                        }
                     }
                 }
             }

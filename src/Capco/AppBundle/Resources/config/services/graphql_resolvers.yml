@@ -176,8 +176,8 @@ services:
         }
       - {
           name: overblog_graphql.resolver,
-          alias: 'proposition_url',
-          method: 'resolvePropositionUrl',
+          alias: 'proposition_arguments',
+          method: 'resolvePropositionArguments',
         }
       - {
           name: overblog_graphql.resolver,
@@ -226,7 +226,6 @@ services:
   capco.resolvers.users:
     class: Capco\AppBundle\GraphQL\Resolver\UserResolver
     tags:
-      - { name: overblog_graphql.resolver, alias: 'user', method: 'resolve' }
       - { name: overblog_graphql.resolver, alias: 'user_email', method: 'resolveEmail' }
       - { name: overblog_graphql.resolver, alias: 'user_show_url', method: 'resolveShowUrl' }
       - { name: overblog_graphql.resolver, alias: 'user_updatedAt', method: 'resolveUpdatedAt' }
@@ -422,11 +421,12 @@ services:
   # This is not a resolver but a voter, rename and move this elsewhere
   Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:
     arguments: ['@security.token_storage', '@logger']
+    public: true
 
-    Capco\AppBundle\GraphQL\Resolver\Project\ProjectAllowedViewersResolver:
-        autowire: true
-        tags:
-          - { name: overblog_graphql.resolver }
+  Capco\AppBundle\GraphQL\Resolver\Project\ProjectAllowedViewersResolver:
+      autowire: true
+      tags:
+        - { name: overblog_graphql.resolver }
 
   Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireViewerRepliesResolver:
     arguments:
@@ -502,3 +502,9 @@ services:
       - '@overblog_graphql.type_resolver'
     tags:
       - { name: overblog_graphql.resolver }
+
+  Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver:
+    autowire: true
+
+  Capco\AppBundle\GraphQL\Resolver\Query\UserQueryResolver:
+    autowire: true

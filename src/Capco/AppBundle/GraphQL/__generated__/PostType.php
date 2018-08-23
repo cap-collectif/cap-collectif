@@ -36,7 +36,7 @@ final class PostType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'title' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => Type::string(),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -243,7 +243,7 @@ final class PostType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'body' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => $globalVariable->get('typeResolver')->resolve('HTML'),
                     'args' => [
                     ],
                     'resolve' => null,
