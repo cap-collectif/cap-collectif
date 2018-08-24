@@ -46,7 +46,7 @@ export class ConsultationPlan extends React.Component<Props> {
     };
 
     return (
-      <div id="scrollspy">
+      <div id="scrollspy" data-spy="affix" data-offset-top="495" data-offset-bottom="450">
         <QueryRenderer
           environment={environment}
           query={graphql`

@@ -312,20 +312,11 @@ svg.avatar-group {
 
 /* ======================= Consult plan ============================*/
 
-//body {
-//    position: relative;
-//}
-
-// to remove
-.step-tabs-list {
-    padding: 100px 0;
-}
-
 .consultation-plan {
     .affix {
         top: 60px;
-        // width: 100%;
-        z-index: 9999 !important;
+        position: fixed;
+        z-index: 20 !important;
     }
 
     .affix-bottom {
@@ -334,6 +325,22 @@ svg.avatar-group {
 
     &_open {
         background-color: $page-bgc;
+
+        @media (min-width: $screen-lg-min) {
+            width: 262.5px;
+        }
+
+        @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+            width: 212.5px;
+        }
+
+        @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+            width: 157.5px;
+        }
+
+        .panel {
+            all: unset;
+        }
 
         .header {
             color: $dark-gray;
@@ -356,6 +363,11 @@ svg.avatar-group {
         }
     }
 
+    &:not(.affix) .consultation-plan_close {
+        position: absolute;
+        left: 15px;
+    }
+
     &_close {
         padding: 7px 15px;
         border: 1px solid $primary-color;
@@ -364,10 +376,10 @@ svg.avatar-group {
         border-radius: 4px;
         line-height: 19px;
 
-        &:not(.affix) {
-            position: absolute;
-            left: 15px;
-        }
+        //&:not(.affix) {
+        //    position: absolute;
+        //    left: 15px;
+        //}
 
         .cap-android-menu {
             right: 0;

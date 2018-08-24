@@ -16,25 +16,12 @@ type Props = {
 };
 
 export class ConsultationPlanRecursiveItems extends React.Component<Props> {
-  componentDidMount() {
-    const planWidth = document.getElementById('scrollspy').clientWidth;
-    // const planWidth = window.getComputedStyle(document.getElementById("consultation-plan"), null);
-    // planWidth.getPropertyValue("width");
-    const plan = document.getElementById('consultNav'); // prend aussi close
-
-    if(plan && planWidth) {
-      plan.style.width = `${planWidth}px`;
-    }
-
-    console.log(plan, planWidth);
-  }
-
   getPlan = () => {
     const { consultation, closePlan, openPlan, showConsultationPlan, stepId } = this.props;
 
     if(showConsultationPlan) {
       return (
-        <div className="consultation-plan_open" id="consultNav" data-spy="affix" data-offset-top="495" data-offset-bottom="450"> {/* prendre top div + width {topPlan.x - 47} pas ça*/}
+        <div className="consultation-plan_open" id="consultNav"> {/* prendre top div + width {topPlan.x - 47} pas ça*/}
           <div className="header">
             <p><i className="cap cap-android-menu mr-5" />PLAN</p>
             <a onClick={() => {
@@ -43,7 +30,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
               <i className="cap cap-delete-1" />
             </a>
           </div>
-          <div className="list">
+          <div className="list" id="myAccordion">
             {consultation.sections &&
             consultation.sections
               .filter(Boolean)
@@ -62,7 +49,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
     }
 
     return (
-      <div className="consultation-plan_close" style={{ width: "auto"}} data-spy="affix" data-offset-top="495" data-offset-bottom="450">
+      <div className="consultation-plan_close">
         <span>Plan</span><br/>
         <a onClick={() => {
           openPlan(stepId);

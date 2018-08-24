@@ -54,17 +54,23 @@ export class ConsultationPropositionBox extends React.Component<Props> {
     sectionItems.forEach((item) => {
       const navItem = document.getElementById(`nav-${item.id}`);
       const itemPosition = item.getBoundingClientRect();
+      const parentItem = navItem.parentNode;
+      const nextSiblingParentItem = parentItem.nextSibling;
 
-      if(navItem && navItem.parentNode) {
+      console.log(nextSiblingParentItem);
+
+      if(navItem && parentItem) {
         // 50 is height of nav
         if(
-          ((itemPosition.top - 60) < 0)
-          && ((itemPosition.top - 60) > -itemPosition.height)
+          ((itemPosition.top - 20) < 0)
+          && ((itemPosition.top - 20) > (-itemPosition.height + 40))
         ){
           // id is passed on children of navItem component
-          navItem.parentNode.classList.add('active');
+          parentItem.classList.add('active');
+          // nextSiblingParentItem.classList.add('in');
         } else {
-          navItem.parentNode.classList.remove('active');
+          parentItem.classList.remove('active');
+          // nextSiblingParentItem.classList.remove('in');
         }
       }
     });
@@ -72,17 +78,6 @@ export class ConsultationPropositionBox extends React.Component<Props> {
 
   // componentWillUnmount() {
   // add removeEventListener
-  // }
-
-  // componentDidUpdate() {
-  //   const planWidth = document.getElementById('consultation-plan').getBoundingClientRect().width;
-  //   const plan = document.getElementById('consultationNav');
-  //
-  //   if(plan && planWidth) {
-  //     plan.style.width = planWidth;
-  //   }
-  //
-  //   console.log(plan && plan.style.width);
   // }
 
   render() {
@@ -110,7 +105,7 @@ export class ConsultationPropositionBox extends React.Component<Props> {
 
     return (
       <div className="row">
-        <div className={showConsultationPlan ? 'consultation-plan col-sm-3 col-xs-12' : 'consultation-plan'} id="consultation-plan">
+        <div className={showConsultationPlan ? 'consultation-plan col-sm-3 col-xs-12  hidden-xs' : 'consultation-plan  hidden-xs'} id="consultation-plan">
           <ConsultationPlan step={step} />
         </div>
         <div id="scroll-content" className={showConsultationPlan ? 'col-sm-9' : 'col-xs-10 col-xs-offset-1'}>

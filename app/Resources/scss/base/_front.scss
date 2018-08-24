@@ -654,12 +654,14 @@ div.embeddedContent {
   text-decoration: none;
 }
 
-.anchor-offset:before {
-  display: block;
-  visibility: hidden;
-  height: 60px;
-  content: "";
-  margin-top: -60px;
+.anchor-offset { // :not(.opinion-type__title)
+    &:before {
+        display: block;
+        visibility: hidden;
+        height: 60px;
+        content: "";
+        margin-top: -60px;
+    }
 }
 
 @each $icon in $icons-colors {

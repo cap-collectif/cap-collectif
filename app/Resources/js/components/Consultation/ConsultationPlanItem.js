@@ -19,8 +19,9 @@ export class ConsultationPlanItem extends React.Component<Props> {
       <NavItem
         className={`level--${level}`}
         data-toggle="collapse"
-        aria-expanded="false" // {level === 0 ? 'false' : 'true'}
+        // aria-expanded="false" // {level === 0 ? 'false' : 'true'}
         data-target={`#collapseCslt${section.id}`}
+        data-parent={level === 0 && "#myAccordion"}
         id={`nav-opinion-type--${section.slug}`}
         onClick={() => {
           if(config.canUseDOM) {
