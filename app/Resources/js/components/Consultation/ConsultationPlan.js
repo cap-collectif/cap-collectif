@@ -20,24 +20,26 @@ type Props = {
 };
 
 type State = {
-  topPlan: ?number
+  topPlan: ?number,
 };
 
 export class ConsultationPlan extends React.Component<Props, State> {
   state = {
-    topPlan: null
+    topPlan: null,
   };
 
   componentDidMount() {
     const planContainer = document.getElementById('consultation-plan');
     const mainContainer = document.querySelector('body');
-    const topPlanContainer = planContainer.getBoundingClientRect().top;
-    const topMainContainer = mainContainer.getBoundingClientRect().top;
+    const topPlanContainer = planContainer && planContainer.getBoundingClientRect().top;
+    const topMainContainer = mainContainer && mainContainer.getBoundingClientRect().top;
     // 50 is height of nav
-    const newTopPlan = (topPlanContainer - topMainContainer) - 50;
+    const newTopPlan =
+      topPlanContainer && topMainContainer && topPlanContainer - topMainContainer - 50;
 
+    // eslint-disable-next-line
     this.setState({
-      topPlan: newTopPlan,
+      topPlan: newTopPlan || null,
     });
   }
 
@@ -55,8 +57,6 @@ export class ConsultationPlan extends React.Component<Props, State> {
       }
       if (props) {
         if (props.consultation) {
-          // console.log(props.consultation);
-
           return (
             // $FlowFixMe
             <ConsultationPlanRecursiveItems consultation={props.consultation} stepId={step.id} />
@@ -68,16 +68,20 @@ export class ConsultationPlan extends React.Component<Props, State> {
     };
 
     return (
-      <div id="scrollspy" data-spy="affix" data-offset-top={topPlan || '655'} data-offset-bottom="450">
+      <div
+        id="scrollspy"
+        data-spy="affix"
+        data-offset-top={topPlan || '655'}
+        data-offset-bottom="450">
         <QueryRenderer
           environment={environment}
           query={graphql`
-          query ConsultationPlanQuery($consultationId: ID!) {
-            consultation: node(id: $consultationId) {
-              ...ConsultationPlanRecursiveItems_consultation
+            query ConsultationPlanQuery($consultationId: ID!) {
+              consultation: node(id: $consultationId) {
+                ...ConsultationPlanRecursiveItems_consultation
+              }
             }
-          }
-        `}
+          `}
           variables={{
             consultationId: step.id,
           }}

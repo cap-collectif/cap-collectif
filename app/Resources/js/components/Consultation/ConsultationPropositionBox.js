@@ -30,55 +30,35 @@ type Props = {
 };
 
 export class ConsultationPropositionBox extends React.Component<Props> {
-
   componentDidMount() {
     window.addEventListener('scroll', () => {
       window.requestAnimationFrame(() => {
         this.getActiveLink();
       });
     });
-
-    // const planWidth = document.getElementById('consultation-plan').getBoundingClientRect().width;
-    // const plan = document.getElementById('consultNav');
-    //
-    // if(plan && planWidth) {
-    //   plan.style.width = planWidth;
-    // }
-    //
-    // console.log(plan, planWidth);
   }
 
   getActiveLink() {
     const sectionItems = document.querySelectorAll('.opinion-type__title');
 
-    sectionItems.forEach((item) => {
+    sectionItems.forEach(item => {
       const navItem = document.getElementById(`nav-${item.id}`);
       const itemPosition = item.getBoundingClientRect();
-      const parentItem = navItem.parentNode;
-      const nextSiblingParentItem = parentItem.nextSibling;
+      const parentItem = navItem && navItem.parentNode;
 
-      console.log(nextSiblingParentItem);
-
-      if(navItem && parentItem) {
+      if (navItem && parentItem) {
         // 50 is height of nav
-        if(
-          ((itemPosition.top - 20) < 0)
-          && ((itemPosition.top - 20) > (-itemPosition.height + 40))
-        ){
+        if (itemPosition.top - 20 < 0 && itemPosition.top - 20 > -itemPosition.height + 40) {
           // id is passed on children of navItem component
+          // $FlowFixMe
           parentItem.classList.add('active');
-          // nextSiblingParentItem.classList.add('in');
         } else {
+          // $FlowFixMe
           parentItem.classList.remove('active');
-          // nextSiblingParentItem.classList.remove('in');
         }
       }
     });
   }
-
-  // componentWillUnmount() {
-  // add removeEventListener
-  // }
 
   render() {
     const { step, showConsultationPlan } = this.props;
@@ -105,10 +85,18 @@ export class ConsultationPropositionBox extends React.Component<Props> {
 
     return (
       <div className="row">
-        <div className={showConsultationPlan ? 'consultation-plan col-sm-3 col-xs-12  hidden-xs' : 'consultation-plan  hidden-xs'} id="consultation-plan">
+        <div
+          className={
+            showConsultationPlan
+              ? 'consultation-plan col-sm-3 col-xs-12  hidden-xs'
+              : 'consultation-plan  hidden-xs'
+          }
+          id="consultation-plan">
           <ConsultationPlan step={step} />
         </div>
-        <div id="scroll-content" className={showConsultationPlan ? 'col-sm-9' : 'col-xs-10 col-xs-offset-1'}>
+        <div
+          id="scroll-content"
+          className={showConsultationPlan ? 'col-sm-9' : 'col-xs-10 col-xs-offset-1'}>
           {/* <Panel>
             <span>
               Filtres de recherche
@@ -156,7 +144,10 @@ export class ConsultationPropositionBox extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
-  showConsultationPlan: props.step.id in state.project.showConsultationPlanById ? state.project.showConsultationPlanById[props.step.id] : true,
+  showConsultationPlan:
+    props.step.id in state.project.showConsultationPlanById
+      ? state.project.showConsultationPlanById[props.step.id]
+      : true,
 });
 
 export default connect(mapStateToProps)(ConsultationPropositionBox);
