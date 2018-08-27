@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalVoteButton /> renders viewer has not voted 1`] = `
+<Button
+  active={false}
+  block={false}
+  bsClass="btn"
+  bsStyle="default"
+  className="mr-15 proposal__button__vote btn btn-success  "
+  disabled={false}
+  id="buttonID"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <FormattedMessage
+    id="proposal.vote.add"
+    values={Object {}}
+  />
+</Button>
+`;
+
+exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
+<Button
+  active={true}
+  block={false}
+  bsClass="btn"
+  bsStyle="default"
+  className="mr-15 proposal__button__vote btn btn-success  "
+  disabled={false}
+  id="buttonID"
+  onClick={[Function]}
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  <ForwardRef(Relay(UnpublishedTooltip))
+    publishable={
+      Object {
+        "$fragmentRefs": null,
+        "id": "vote1",
+      }
+    }
+    target={[Function]}
+  />
+  <FormattedMessage
+    id="proposal.vote.hasVoted"
+    values={Object {}}
+  />
+</Button>
+`;

@@ -13,7 +13,7 @@ class ProposalCommentRepository extends EntityRepository
         int $limit = 10,
         string $filter = 'last'
     ): Paginator {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'i', 'r', 'ans')
             ->leftJoin('c.Author', 'aut')
             ->leftJoin('aut.media', 'm')
@@ -84,7 +84,7 @@ class ProposalCommentRepository extends EntityRepository
 
     public function countCommentsAndAnswersEnabledByProposal(Proposal $proposal): int
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('count(c.id)')
             ->andWhere('c.proposal = :proposal')
             ->andWhere('c.trashedStatus IS NULL')
@@ -93,7 +93,7 @@ class ProposalCommentRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    protected function getIsEnabledQueryBuilder()
+    protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('c')->andWhere('c.published = true');
     }

@@ -25,10 +25,10 @@ export class UnpublishedTooltip extends React.Component<Props> {
             <FormattedMessage id="voting-pending-publication" />
           ) : null}
           {publishable && publishable.notPublishedReason === 'AUTHOR_NOT_CONFIRMED' ? (
-            <FormattedMessage id="unpublished-Vote" />
+            <FormattedMessage id="unpublished-vote" />
           ) : null}
           {publishable && publishable.notPublishedReason === 'AUTHOR_CONFIRMED_TOO_LATE' ? (
-            <FormattedMessage id="unpublished-Vote" />
+            <FormattedMessage id="unpublished-vote" />
           ) : null}
         </Tooltip>
       </Overlay>

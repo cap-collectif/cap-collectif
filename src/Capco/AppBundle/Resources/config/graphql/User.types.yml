@@ -253,7 +253,7 @@ User:
         type: 'ProposalVoteConnection!'
         argsBuilder: 'Relay::Connection'
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProposalVotesResolver", [value, args, context])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerProposalVotesResolver", [value, args, context])'
         args:
           first:
             type: 'Int'

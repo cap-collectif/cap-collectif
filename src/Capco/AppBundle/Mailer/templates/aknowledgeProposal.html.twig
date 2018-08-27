@@ -36,6 +36,9 @@
 
             {% if not proposalPublished %} 
                 {{ 'unpublished-contribution-help-text'|trans({},'CapcoAppBundle')|raw }}
+                <p>
+                    <a href="{{ confirmationUrl }}"><strong>{{ 'user.register.confirmation_message.validate'|trans }}</strong></a>
+                </p>
             {% endif %} 
         {% else %}
             {{ 'you-have-modified-your-proposal'|trans({

@@ -22,11 +22,6 @@ Capco\AppBundle\Entity\Argument:
       type: DateTime
       groups: [Opinions, OpinionVersions, Elasticsearch]
       serialized_name: updatedAt
-    votesCount:
-      expose: true
-      type: integer
-      serialized_name: votesCount
-      groups: [Opinions, OpinionVersions]
     Author:
       expose: true
       type: Capco\UserBundle\Entity\User

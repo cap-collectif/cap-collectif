@@ -220,6 +220,15 @@ Proposal:
             description: 'The concerned step.'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, getUser()])'
+      viewerVote:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'ProposalVote'
+        args:
+          step:
+            type: 'ID!'
+            description: 'The concerned step.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerVoteResolver", [value, args, getUser()])'
       viewerHasReport:
         resolve: '@=value.userHasReport(getUser())'
       votableSteps:

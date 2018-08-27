@@ -33,9 +33,11 @@ Argument:
       type:
         type: 'ArgumentValue!'
         description: 'The type.'
-      votesCount:
-        type: 'Int'
-        description: 'This will be deprecated for a connection, soon.'
+      votes:
+        type: 'ArgumentVoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentVotesResolver", [value, args])'
       body:
         type: 'String!'
         description: 'The content of the argument.'

@@ -106,7 +106,7 @@ services:
 
   capco.contribution.manager:
     class: Capco\AppBundle\Manager\ContributionManager
-    arguments: ['@doctrine.orm.entity_manager']
+    autowire: true
 
   ## Toggle
   capco.toggle.manager:
@@ -133,7 +133,7 @@ services:
 
   capco.project.helper:
     class: Capco\AppBundle\Helper\ProjectHelper
-    arguments: ['@Capco\AppBundle\Repository\ProjectRepository', "@capco.abstract_step.repository"]
+    arguments: ['@Capco\AppBundle\Repository\ProjectRepository', '@capco.abstract_step.repository']
 
   capco.step.helper:
     class: Capco\AppBundle\Helper\StepHelper

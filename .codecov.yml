@@ -15,11 +15,14 @@ coverage:
       default: off
       jest:
         flags: jest
-        target: 70
+        target: 0
+        threshold: 0
       php:
         flags: php
+        target: 0
       graphql:
         flags: graphql
+        target: 0
       flow:
         flags: flow
     project: # Overall project coverage
@@ -53,6 +56,7 @@ flags:
       - app/Resources/js/
 
 ignore:
-  - '**/__generated__/**/*'
+  - '**/__generated__/*.js'
+  - 'src/Capco/AppBundle/GraphQL/__generated__/*.php'
   - '**/*-test.js'
   - 'src/Capco/AppBundle/Behat'

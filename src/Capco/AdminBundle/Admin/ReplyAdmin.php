@@ -91,7 +91,7 @@ class ReplyAdmin extends AbstractAdmin
             ->leftJoin('q.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
-            ->andWhere(
+            ->orWhere(
                 $query
                     ->expr()
                     ->andX(

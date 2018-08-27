@@ -1,0 +1,8 @@
+AddArgumentVoteInput:
+  type: relay-mutation-input
+  config:
+    description: 'Add a vote for an argument.'
+    fields:
+      argumentId:
+        type: 'ID!'
+        description: 'The Node ID of the argument to vote.'

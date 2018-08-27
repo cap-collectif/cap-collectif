@@ -64,8 +64,8 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
           hasReachedLimit={
             !proposal.viewerHasVote && step.votesLimit && step.votesLimit - viewerVotesCount <= 0
           }>
+          {/* $FlowFixMe */}
           <ProposalVoteButton
-            userHasVote={proposal.viewerHasVote}
             id={id}
             proposal={proposal}
             step={step}
@@ -87,7 +87,6 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
         <ProposalVoteButton
           id={id}
           proposal={proposal}
-          userHasVote={proposal.viewerHasVote}
           step={step}
           user={viewer}
           className={className}
@@ -108,6 +107,7 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
       id
       estimation
       viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
+      ...ProposalVoteButton_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
     }
   `,
   viewer: graphql`

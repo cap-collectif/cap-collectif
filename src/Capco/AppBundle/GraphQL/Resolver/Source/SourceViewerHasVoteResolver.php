@@ -1,23 +1,23 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\Source;
 
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Repository\SourceVoteRepository;
-use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Source;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\GraphQL\Resolver\Source\SourceViewerVoteResolver;
 
 class SourceViewerHasVoteResolver implements ResolverInterface
 {
-    private $sourceVoteRepository;
+    private $resolver;
 
-    public function __construct(SourceVoteRepository $sourceVoteRepository)
+    public function __construct(SourceViewerVoteResolver $resolver)
     {
-        $this->sourceVoteRepository = $sourceVoteRepository;
+        $this->resolver = $resolver;
     }
 
     public function __invoke(Source $source, User $user): bool
     {
-        return $this->sourceVoteRepository->getBySourceAndUser($source, $user) !== null;
+        return $this->resolver->__invoke($source, $user) !== null;
     }
 }

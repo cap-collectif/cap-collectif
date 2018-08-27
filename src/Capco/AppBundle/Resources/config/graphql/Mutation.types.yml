@@ -10,6 +10,14 @@ Mutation:
           payloadType: AddArgumentPayload
           mutateAndGetPayload:
             '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddArgumentMutation", [value, getUser()])'
+      addArgumentVote:
+        access: "@=hasRole('ROLE_USER')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: AddArgumentVoteInput
+          payloadType: AddArgumentVotePayload
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddArgumentVoteMutation", [value, getUser()])'
       addSource:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
@@ -123,6 +131,14 @@ Mutation:
           payloadType: RemoveOpinionVotePayload
           mutateAndGetPayload:
             '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveOpinionVoteMutation", [value, getUser()])'
+      removeArgumentVote:
+        access: "@=hasRole('ROLE_USER')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: RemoveArgumentVoteInput
+          payloadType: RemoveArgumentVotePayload
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveArgumentVoteMutation", [value, getUser()])'
       # Proposal
       addProposalVote:
         access: "@=hasRole('ROLE_USER')"

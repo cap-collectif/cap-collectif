@@ -19,7 +19,7 @@ exports[`<UnpublishedTooltip /> renders when not published because author confir
     />
      
     <FormattedMessage
-      id="unpublished-Vote"
+      id="unpublished-vote"
       values={Object {}}
     />
   </Tooltip>
@@ -45,7 +45,7 @@ exports[`<UnpublishedTooltip /> renders when not published because author is not
     />
      
     <FormattedMessage
-      id="unpublished-Vote"
+      id="unpublished-vote"
       values={Object {}}
     />
   </Tooltip>

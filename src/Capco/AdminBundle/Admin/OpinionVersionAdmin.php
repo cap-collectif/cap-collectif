@@ -148,7 +148,7 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->leftJoin('pa.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
-            ->andWhere(
+            ->orWhere(
                 $query
                     ->expr()
                     ->andX(

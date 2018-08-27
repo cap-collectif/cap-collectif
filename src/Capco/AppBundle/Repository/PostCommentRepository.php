@@ -9,7 +9,7 @@ class PostCommentRepository extends EntityRepository
 {
     public function getEnabledByPost($post, $offset = 0, $limit = 10, $filter = 'last')
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'p', 'r', 'ans')
             ->leftJoin('c.Author', 'aut')
             ->leftJoin('aut.media', 'm')
@@ -70,7 +70,7 @@ class PostCommentRepository extends EntityRepository
 
     public function countCommentsAndAnswersEnabledByPost($post)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('count(c.id)')
             ->andWhere('c.post = :post')
             ->andWhere('c.trashedStatus IS NULL')
@@ -80,14 +80,14 @@ class PostCommentRepository extends EntityRepository
 
     public function countAllCommentsAndAnswersByPost(Post $post): int
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('count(c.id)')
             ->andWhere('c.post = :post')
             ->setParameter('post', $post);
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    protected function getIsEnabledQueryBuilder()
+    protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('c')->andWhere('c.published = true');
     }

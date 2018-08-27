@@ -1,21 +1,23 @@
 // @flow
 import * as React from 'react';
+import ReactDOM from 'react-dom';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
-import type { MapStateToProps } from 'react-redux';
+import { type MapStateToProps, connect } from 'react-redux';
 import { openVoteModal, deleteVote } from '../../../redux/modules/proposal';
+import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import type { Uuid, Dispatch, GlobalState } from '../../../types';
+import type { ProposalVoteButton_proposal } from './__generated__/ProposalVoteButton_proposal.graphql';
 
 type Step = {
   +id: Uuid,
 };
 
 type ParentProps = {
-  proposal: { +id: string },
+  proposal: ProposalVoteButton_proposal,
   step: Step,
-  userHasVote: ?boolean,
   user: { +id: string },
   id: string,
 };
@@ -32,20 +34,16 @@ type State = {
 
 // Should only be used via ProposalVoteButtonWrapper
 export class ProposalVoteButton extends React.Component<Props, State> {
-  static defaultProps = {
-    disabled: false,
-    userHasVote: false,
-  };
-  state = {
-    isHovering: false,
-  };
+  static defaultProps = { disabled: false };
+  state = { isHovering: false };
+  target: null;
 
   render() {
-    const { dispatch, step, user, proposal, disabled, userHasVote, isDeleting, id } = this.props;
+    const { dispatch, step, user, proposal, disabled, isDeleting, id } = this.props;
     const classes = classNames({ disabled });
     const action = !user
       ? null
-      : userHasVote
+      : proposal.viewerHasVote
         ? () => {
             deleteVote(step, proposal);
           }
@@ -54,17 +52,17 @@ export class ProposalVoteButton extends React.Component<Props, State> {
           };
     let buttonText = '';
     let style = 'btn btn-success';
-    if (userHasVote && this.state.isHovering) {
+    if (proposal.viewerVote && this.state.isHovering) {
       buttonText = 'proposal.vote.delete';
       style = 'btn btn-danger';
     }
 
-    if (userHasVote && !this.state.isHovering) {
+    if (proposal.viewerVote && !this.state.isHovering) {
       buttonText = 'proposal.vote.hasVoted';
       style = 'btn btn-success';
     }
 
-    if (!userHasVote) {
+    if (!proposal.viewerVote) {
       buttonText = 'proposal.vote.add';
       style = 'btn btn-success';
     }
@@ -72,24 +70,29 @@ export class ProposalVoteButton extends React.Component<Props, State> {
     return (
       <Button
         id={id}
+        ref={button => {
+          this.target = button;
+        }}
         className={`mr-15 proposal__button__vote ${style} ${classes} `}
         onMouseOver={() => {
-          if (userHasVote) {
-            this.setState({
-              isHovering: true,
-            });
+          if (proposal.viewerHasVote) {
+            this.setState({ isHovering: true });
           }
         }}
         onMouseOut={() => {
-          if (userHasVote) {
-            this.setState({
-              isHovering: false,
-            });
+          if (proposal.viewerHasVote) {
+            this.setState({ isHovering: false });
           }
         }}
         onClick={disabled ? null : action}
-        active={userHasVote}
+        active={proposal.viewerHasVote}
         disabled={disabled || isDeleting}>
+        {proposal.viewerVote /* $FlowFixMe */ && (
+          <UnpublishedTooltip
+            target={() => ReactDOM.findDOMNode(this.target)}
+            publishable={proposal.viewerVote}
+          />
+        )}
         <FormattedMessage id={buttonText} />
       </Button>
     );
@@ -100,4 +103,21 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Pa
   isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
 });
 
-export default connect(mapStateToProps)(ProposalVoteButton);
+const container = connect(mapStateToProps)(ProposalVoteButton);
+
+export default createFragmentContainer(container, {
+  proposal: graphql`
+    fragment ProposalVoteButton_proposal on Proposal
+      @argumentDefinitions(
+        isAuthenticated: { type: "Boolean", defaultValue: true }
+        stepId: { type: "ID!", nonNull: true }
+      ) {
+      id
+      viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
+      viewerVote(step: $stepId) @include(if: $isAuthenticated) {
+        id
+        ...UnpublishedTooltip_publishable
+      }
+    }
+  `,
+});

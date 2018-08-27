@@ -331,7 +331,10 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
 
     public function canDisplay($user = null): bool
     {
-        return $this->isPublished() && $this->getParent()->canDisplay($user);
+        return (
+            $this->isPublished() && $this->getParent()->canDisplay($user) ||
+            ($user && $user->isAdmin())
+        );
     }
 
     public function canContribute(): bool

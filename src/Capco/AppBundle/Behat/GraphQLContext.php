@@ -72,6 +72,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @Given I am logged in to graphql as lbrunet
+     */
+    public function iAmLoggedInToGraphQLAsLbrunet()
+    {
+        $this->createAuthenticatedClient('lbrunet@jolicode.com', 'toto');
+    }
+
+    /**
      * @When /^I send a GraphQL request:$/
      */
     public function iSendAraphQLQuery(PyStringNode $query)

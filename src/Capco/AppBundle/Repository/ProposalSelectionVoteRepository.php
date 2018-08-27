@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 
 class ProposalSelectionVoteRepository extends EntityRepository
 {
@@ -37,7 +38,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         Proposal $proposal,
         SelectionStep $step,
         User $author
-    ): array {
+    ): ?ProposalSelectionVote {
         return $this->createQueryBuilder('pv')
             ->andWhere('pv.user = :author')
             ->andWhere('pv.selectionStep = :step')
@@ -46,7 +47,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('step', $step)
             ->setParameter('proposal', $proposal)
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 
     public function countByAuthorAndStep(User $author, SelectionStep $step): int

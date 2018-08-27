@@ -3,9 +3,18 @@ namespace Capco\AppBundle\Manager;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Model\Publishable;
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 
 class ContributionManager
 {
+    private $indexer;
+
+    public function __construct(Indexer $indexer)
+    {
+        $this->indexer = $indexer;
+    }
+
     public function publishContributions(User $user): bool
     {
         $republishedCount = 0;
@@ -18,8 +27,12 @@ class ContributionManager
                     $contribution->setPublishedAt(new \DateTime());
                 }
                 ++$republishedCount;
+                if ($contribution instanceof IndexableInterface) {
+                    $this->indexer->index(\get_class($contribution), $contribution->getId());
+                }
             }
         }
+        $this->indexer->finishBulk();
 
         return $republishedCount > 0;
     }

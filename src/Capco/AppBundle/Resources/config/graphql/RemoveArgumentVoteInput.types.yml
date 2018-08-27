@@ -1,0 +1,8 @@
+RemoveArgumentVoteInput:
+  type: relay-mutation-input
+  config:
+    description: 'Remove a vote for an argument in a contribuable step.'
+    fields:
+      argumentId:
+        type: 'ID!'
+        description: 'The Node ID of the argument to unvote.'

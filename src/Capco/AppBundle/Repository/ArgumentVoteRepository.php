@@ -1,12 +1,13 @@
 <?php
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ArgumentVote;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 class ArgumentVoteRepository extends EntityRepository
 {
@@ -83,19 +84,26 @@ class ArgumentVoteRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    /**
-     * Get all by argument.
-     */
-    public function getAllByArgument(string $argumentId, bool $asArray = false)
+    public function getByContribution(Argument $argument, ?int $limit, ?int $offset): Paginator
     {
         $qb = $this->getPublishedQueryBuilder()
-            ->addSelect('u', 'ut')
-            ->leftJoin('v.user', 'u')
-            ->leftJoin('u.userType', 'ut')
             ->andWhere('v.argument = :argument')
-            ->setParameter('argument', $argumentId)
-            ->orderBy('v.updatedAt', 'ASC');
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
+            ->setParameter('argument', $argument)
+            ->orderBy('v.publishedAt', 'ASC');
+
+        $qb->setFirstResult($offset)->setMaxResults($limit);
+
+        return new Paginator($qb);
+    }
+
+    public function countByContribution(Argument $argument): int
+    {
+        return $this->getPublishedQueryBuilder()
+            ->select('COUNT(v.id)')
+            ->andWhere('v.argument = :argument')
+            ->setParameter('argument', $argument)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     protected function getPublishedQueryBuilder()

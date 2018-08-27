@@ -1,12 +1,13 @@
 <?php
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Proposal;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\ProposalCollectVote;
 
 class ProposalCollectVoteRepository extends EntityRepository
 {
@@ -24,7 +25,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         Proposal $proposal,
         CollectStep $step,
         User $author
-    ): array {
+    ): ?ProposalCollectVote {
         return $this->createQueryBuilder('pv')
             ->andWhere('pv.user = :author')
             ->andWhere('pv.collectStep = :step')
@@ -33,7 +34,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->setParameter('step', $step)
             ->setParameter('proposal', $proposal)
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 
     public function getByProposalAndStep(

@@ -929,7 +929,7 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProposalVotesResolver", array(0 => $value, 1 => $args, 2 => $context)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerProposalVotesResolver", array(0 => $value, 1 => $args, 2 => $context)]);
                     },
                     'description' => null,
                     'deprecationReason' => null,

@@ -16,38 +16,4 @@ export default {
       });
     });
   },
-
-  addVote: argument => {
-    return Fetcher.post(`/arguments/${argument}/votes`, {})
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.add.vote' },
-        });
-        return true;
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'danger', content: 'alert.danger.add.vote' },
-        });
-      });
-  },
-
-  deleteVote: argument => {
-    return Fetcher.delete(`/arguments/${argument}/votes`)
-      .then(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.delete.vote' },
-        });
-        return true;
-      })
-      .catch(() => {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'danger', content: 'alert.danger.delete.vote' },
-        });
-      });
-  },
 };

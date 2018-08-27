@@ -34,7 +34,9 @@ fragment argumentInfos on Argument {
   url
   published
   ...trashableInfos
-  votesCount
+  votes(first: 0) {
+    totalCount
+  }
 }
 EOF;
 
@@ -195,7 +197,7 @@ EOF;
         'contributions_arguments_trashed' => 'trashed',
         'contributions_arguments_trashedAt' => 'trashedAt',
         'contributions_arguments_trashedReason' => 'trashedReason',
-        'contributions_arguments_votesCount' => 'votesCount',
+        'contributions_arguments_votesCount' => 'votes.totalCount',
     ];
 
     protected $contributionHeaderMap = [

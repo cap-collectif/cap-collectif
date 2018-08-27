@@ -138,7 +138,7 @@ class QuestionnaireAdmin extends CapcoAdmin
             ->leftJoin($query->getRootAliases()[0] . '.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
-            ->andWhere(
+            ->orWhere(
                 $query
                     ->expr()
                     ->andX(

@@ -1,23 +1,23 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\Argument;
 
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Repository\ArgumentVoteRepository;
-use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\GraphQL\Resolver\Argument\ArgumentViewerVoteResolver;
 
 class ArgumentViewerHasVoteResolver implements ResolverInterface
 {
-    private $argumentVoteRepository;
+    private $resolver;
 
-    public function __construct(ArgumentVoteRepository $argumentVoteRepository)
+    public function __construct(ArgumentViewerVoteResolver $resolver)
     {
-        $this->argumentVoteRepository = $argumentVoteRepository;
+        $this->resolver = $resolver;
     }
 
     public function __invoke(Argument $argument, User $user): bool
     {
-        return $this->argumentVoteRepository->getByArgumentAndUser($argument, $user) !== null;
+        return $this->resolver->__invoke($argument, $user) !== null;
     }
 }

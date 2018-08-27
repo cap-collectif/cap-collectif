@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArgumentVoteBox /> renders correctly 1`] = `
+<span>
+  <form
+    style={
+      Object {
+        "display": "inline-block",
+      }
+    }
+  >
+    <ForwardRef(Relay(ArgumentVoteButton))
+      argument={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "votes": Object {
+            "totalCount": 5,
+          },
+        }
+      }
+    />
+  </form>
+   
+  <span
+    className="opinion__votes-nb"
+  >
+    5
+  </span>
+</span>
+`;

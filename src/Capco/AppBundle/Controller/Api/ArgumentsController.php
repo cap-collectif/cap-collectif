@@ -23,76 +23,16 @@ class ArgumentsController extends FOSRestController
 {
     /**
      * @Security("has_role('ROLE_USER')")
-     * @Post("/arguments/{argumentId}/votes")
-     * @ParamConverter("argument", options={"mapping": {"argumentId": "id"}})
-     * @ParamConverter("vote", converter="fos_rest.request_body")
-     * @View(statusCode=201, serializerGroups={})
-     */
-    public function postArgumentVoteAction(Argument $argument, ArgumentVote $vote, ConstraintViolationListInterface $validationErrors)
-    {
-        if (!$argument->canContribute()) {
-            throw new BadRequestHttpException('Uncontributable argument.');
-        }
-
-        $user = $this->getUser();
-        $previousVote = $this->get('capco.argument_vote.repository')
-                    ->findOneBy(['user' => $user, 'argument' => $argument]);
-
-        if ($previousVote) {
-            throw new BadRequestHttpException('Already voted.');
-        }
-
-        if ($validationErrors->count() > 0) {
-            throw new BadRequestHttpException($validationErrors);
-        }
-
-        $vote
-            ->setArgument($argument)
-            ->setUser($user)
-        ;
-
-        $argument->incrementVotesCount();
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($vote);
-        $em->persist($argument);
-        $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-    }
-
-    /**
-     * @Security("has_role('ROLE_USER')")
-     * @Delete("/arguments/{argumentId}/votes")
-     * @ParamConverter("argument", options={"mapping": {"argumentId": "id"}})
-     * @View()
-     */
-    public function deleteArgumentVoteAction(Argument $argument)
-    {
-        if (!$argument->getLinkedOpinion()->canContribute()) {
-            throw new BadRequestHttpException('Uncontributable opinion.');
-        }
-        $vote = $this->get('capco.argument_vote.repository')
-                     ->findOneBy(['user' => $this->getUser(), 'argument' => $argument]);
-
-        if (!$vote) {
-            throw new BadRequestHttpException('You have not voted for this argument.');
-        }
-
-        $argument->decrementVotesCount();
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($vote);
-        $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-    }
-
-    /**
-     * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/arguments/{argumentId}/reports")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("argument", options={"mapping": {"argumentId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
-    public function postOpinionArgumentReportAction(Request $request, Opinion $opinion, Argument $argument)
-    {
+    public function postOpinionArgumentReportAction(
+        Request $request,
+        Opinion $opinion,
+        Argument $argument
+    ) {
         if ($this->getUser() === $argument->getAuthor()) {
             throw new AccessDeniedHttpException();
         }
@@ -112,8 +52,12 @@ class ArgumentsController extends FOSRestController
      * @ParamConverter("argument", options={"mapping": {"argumentId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
-    public function postOpinionVersionArgumentReportAction(Request $request, Opinion $opinion, OpinionVersion $version, Argument $argument)
-    {
+    public function postOpinionVersionArgumentReportAction(
+        Request $request,
+        Opinion $opinion,
+        OpinionVersion $version,
+        Argument $argument
+    ) {
         if ($this->getUser() === $argument->getAuthor()) {
             throw new AccessDeniedHttpException();
         }
@@ -131,10 +75,7 @@ class ArgumentsController extends FOSRestController
 
     private function createReport(Request $request, Argument $argument)
     {
-        $report = (new Reporting())
-            ->setReporter($this->getUser())
-            ->setArgument($argument)
-        ;
+        $report = (new Reporting())->setReporter($this->getUser())->setArgument($argument);
 
         $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);

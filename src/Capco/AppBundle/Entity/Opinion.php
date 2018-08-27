@@ -500,7 +500,8 @@ class Opinion implements OpinionContributionInterface
     {
         return (
             ($this->isPublished() && $this->getStep() && $this->getStep()->canDisplay($user)) ||
-            $this->getAuthor() === $user
+            $this->getAuthor() === $user ||
+            ($user && $user->isAdmin())
         );
     }
 

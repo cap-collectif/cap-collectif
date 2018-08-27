@@ -1,0 +1,7 @@
+ArgumentVoteConnection:
+  type: relay-connection
+  config:
+    nodeType: ArgumentVote
+    connectionFields:
+      totalCount:
+        type: Int!

@@ -9,7 +9,7 @@ class EventCommentRepository extends EntityRepository
 {
     public function getEnabledByEvent($event, $offset = 0, $limit = 10, $filter = 'last')
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'e', 'r', 'ans')
             ->leftJoin('c.Author', 'aut')
             ->leftJoin('aut.media', 'm')
@@ -41,7 +41,7 @@ class EventCommentRepository extends EntityRepository
 
     public function countCommentsAndAnswersEnabledByEvent(Event $event): int
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getPublishedQueryBuilder()
             ->select('count(c.id)')
             ->andWhere('c.Event = :event')
             ->andWhere('c.trashedAt IS NULL')
@@ -49,7 +49,7 @@ class EventCommentRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    protected function getIsEnabledQueryBuilder()
+    protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('c')->andWhere('c.published = true');
     }

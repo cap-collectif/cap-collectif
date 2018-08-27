@@ -2,7 +2,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\ViewerProposalVotesResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -14,7 +14,7 @@ class ViewerStepVotesResolver implements ResolverInterface
     private $resolver;
     private $logger;
 
-    public function __construct(ProposalVotesResolver $resolver, LoggerInterface $logger)
+    public function __construct(ViewerProposalVotesResolver $resolver, LoggerInterface $logger)
     {
         $this->resolver = $resolver;
         $this->logger = $logger;
