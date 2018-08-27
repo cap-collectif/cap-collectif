@@ -149,6 +149,8 @@ class QuestionnaireAdmin extends CapcoAdmin
         $query->orWhere(
             $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
         );
+        /** if questionnaire is just be created, it's not linked to a step, but we need to display it */
+        $query->orWhere($query->getRootAliases()[0] . '.step IS NULL');
         $query->setParameter('author', $user);
 
         return $query;
