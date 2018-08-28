@@ -15,7 +15,6 @@ use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Swarrot\Broker\Message;

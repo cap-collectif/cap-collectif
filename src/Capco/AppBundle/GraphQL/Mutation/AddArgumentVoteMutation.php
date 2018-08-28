@@ -2,26 +2,15 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\ArgumentVote;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Overblog\GraphQLBundle\Error\UserError;
 use Doctrine\DBAL\Exception\DriverException;
-use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ArgumentRepository;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Capco\AppBundle\Repository\OpinionVoteRepository;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 

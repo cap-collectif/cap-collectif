@@ -470,3 +470,11 @@ Mutation:
           payloadType: UpdateUserAccountPayload
           mutateAndGetPayload:
             '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserAccountMutation", [value, getUser()])'
+      addUsersToGroupFromEmail:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: AddUsersToGroupFromEmailInput
+          payloadType: AddUsersToGroupFromEmailPayload
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddUsersToGroupFromEmailMutation", [value["emails"], value["dryRun"], value["groupId"]])'

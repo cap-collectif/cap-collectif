@@ -1,0 +1,15 @@
+AddUsersToGroupFromEmailInput:
+  type: relay-mutation-input
+  config:
+    description: 'Add many users in a specific group from their emails.'
+    fields:
+      emails:
+        type: '[Email!]!'
+        description: 'A list of email(s).'
+      dryRun:
+        type: 'Boolean!'
+        description:
+          'This option is useful if you want to test your emails list. Set it to true if you want to import definitively.'
+      groupId:
+        type: 'ID!'
+        description: 'The Node ID of the group.'

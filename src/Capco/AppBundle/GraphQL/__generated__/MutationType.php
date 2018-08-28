@@ -1262,6 +1262,27 @@ final class MutationType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_ADMIN");
                     },
                 ],
+                'addUsersToGroupFromEmail' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('AddUsersToGroupFromEmailPayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('AddUsersToGroupFromEmailInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\AddUsersToGroupFromEmailMutation", array(0 => $value["emails"], 1 => $value["dryRun"], 2 => $value["groupId"])]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_ADMIN");
+                    },
+                ],
             ];
             },
             'interfaces' => function () use ($globalVariable) {

@@ -123,6 +123,30 @@ type AddUsersInGroupPayload {
   clientMutationId: String
 }
 
+input AddUsersToGroupFromEmailInput {
+  # A list of email(s).
+  emails: [Email!]!
+
+  # This option is useful if you want to test your emails list. Set it to true if you want to import definitively.
+  dryRun: Boolean!
+
+  # The Node ID of the group.
+  groupId: ID!
+  clientMutationId: String
+}
+
+type AddUsersToGroupFromEmailPayload {
+  # List of imported users.
+  importedUsers: [User]!
+
+  # List of emails that didn't match an existing user.
+  notFoundEmails: [Email]!
+
+  # If an email from your list is already associated to a user who is in the chosen group, it will be in this field.
+  alreadyImportedUsers: [User]!
+  clientMutationId: String
+}
+
 input AddVersionInput {
   # The concerned opinion id.
   opinionId: ID!
@@ -1171,6 +1195,8 @@ interface EditableContribution {
   updatedAt: DateTime
 }
 
+scalar Email
+
 # A Evaluation form (question)
 type EvaluationForm {
   # The id of evaluation form (question)
@@ -1495,6 +1521,7 @@ type Mutation {
   updateRequirement(input: UpdateRequirementInput!): UpdateRequirementPayload
   createUser(input: CreateUserInput!): CreateUserPayload
   updateUserAccount(input: UpdateUserAccountInput!): UpdateUserAccountPayload
+  addUsersToGroupFromEmail(input: AddUsersToGroupFromEmailInput!): AddUsersToGroupFromEmailPayload
 }
 
 # A connection to a list of items.
