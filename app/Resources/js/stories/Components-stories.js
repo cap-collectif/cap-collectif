@@ -26,7 +26,6 @@ import { Loader } from '../components/Ui/Loader';
 import ProgressList from '../components/Ui/List/ProgressList';
 import { UserAvatar } from '../components/User/UserAvatar';
 import ProgressListItem from '../components/Ui/List/ProgressListItem';
-import ListGroupFlush from '../components/Ui/List/ListGroupFlush';
 
 const openProject = {
   step: {
@@ -769,12 +768,6 @@ storiesOf('Components', module)
           </div>
         </ListGroupItem>
       </ListGroup>
-      
-      // List group flush 
-      <ListGroupItem>
-        <p>Paragraph</p>
-        </ListGroupItem>
-      </ListGroupFlush>
       ~~~
     
     `,
@@ -787,13 +780,12 @@ storiesOf('Components', module)
           </a>
         </h1>
         <hr />
-        <h3>Default list group</h3>
         <ListGroup className="list-group-custom">
           <ListGroupItem>
             <p>Paragraph</p>
           </ListGroupItem>
           <ListGroupItem>
-            <a href="#" className="d-flex">
+            <a href="https://ui.cap-collectif.com" className="d-flex">
               <h3>My item</h3>
             </a>
             <Button>My button</Button>
@@ -803,14 +795,14 @@ storiesOf('Components', module)
               <UserAvatar user={author} defaultAvatar={null} />
               <div>
                 <p>
-                  <a href="#" className="author-name">
+                  <a href="https://ui.cap-collectif.com" className="author-name">
                     Lorem ipsum
                   </a>{' '}
                   <span className="excerpt">3 juin 2014</span>
                 </p>
                 <h3 className="title">
-                  consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua.
+                  consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua.
                 </h3>
                 <InlineList>
                   <li>Item 1</li>
@@ -830,23 +822,6 @@ storiesOf('Components', module)
             <div className="right-block">Right block ...</div>
           </ListGroupItem>
         </ListGroup>
-        <h3>List group flush</h3>
-        <ListGroupFlush>
-          <ListGroupItem>
-            <p>Paragraph</p>
-          </ListGroupItem>
-          <ListGroupItem>
-            <UserAvatar user={author} defaultAvatar={null} />
-            <a href="#">{author.username}</a>
-          </ListGroupItem>
-          <ListGroupItem>
-            <p>Paragraph</p>
-          </ListGroupItem>
-          <ListGroupItem>
-            <UserAvatar user={author} defaultAvatar={null} />
-            <a href="#">{author.username}</a>
-          </ListGroupItem>
-        </ListGroupFlush>
       </div>
     )),
   );

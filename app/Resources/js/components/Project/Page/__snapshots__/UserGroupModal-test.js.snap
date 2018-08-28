@@ -8,6 +8,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
     autoFocus={true}
     backdrop={true}
     bsClass="modal"
+    dialogClassName="modal-body-without-padding-top"
     dialogComponentClass={[Function]}
     enforceFocus={true}
     keyboard={true}
@@ -46,78 +47,96 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
         </b>
       </ModalTitle>
     </ModalHeader>
-    <ListGroupFlush
-      className="d-flex text-left"
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
     >
-      <ListGroupItem
-        bsClass="list-group-item"
-        id="group2"
-        key="group2"
-        listItem={false}
+      <ListGroup
+        bsClass="list-group"
+        className="list-group-custom"
       >
-        <GroupAvatar
-          className="img-circle avatar avatar-group mr-10"
-          size={35}
-        />
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="link"
-          className="btn-md p-0"
-          disabled={false}
-          onClick={[Function]}
-          title="persons-in-the-group"
+        <div
+          id="group2"
+          key="group2"
         >
-          Un groupe cool
-        </Button>
-        <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
-          group={
-            Object {
-              "$fragmentRefs": null,
-              "id": "group2",
-              "title": "Un groupe cool",
-            }
-          }
-          handleClose={[Function]}
-          show={false}
-        />
-      </ListGroupItem>
-      <ListGroupItem
-        bsClass="list-group-item"
-        id="group3"
-        key="group3"
-        listItem={false}
-      >
-        <GroupAvatar
-          className="img-circle avatar avatar-group mr-10"
-          size={35}
-        />
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="link"
-          className="btn-md p-0"
-          disabled={false}
-          onClick={[Function]}
-          title="persons-in-the-group"
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <GroupAvatar
+              className="img-circle avatar avatar-group mr-10"
+              size={35}
+            />
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+              onClick={[Function]}
+            >
+              Un groupe cool
+            </Button>
+          </ListGroupItem>
+          <div
+            className="users-modal"
+          >
+            <ForwardRef(Relay(UserInGroupModal))
+              group={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "group2",
+                  "title": "Un groupe cool",
+                }
+              }
+              handleClose={[Function]}
+              show={false}
+            />
+          </div>
+        </div>
+        <div
+          id="group3"
+          key="group3"
         >
-          mon super groupe 2
-        </Button>
-        <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
-          group={
-            Object {
-              "$fragmentRefs": null,
-              "id": "group3",
-              "title": "mon super groupe 2",
-            }
-          }
-          handleClose={[Function]}
-          show={false}
-        />
-      </ListGroupItem>
-    </ListGroupFlush>
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <GroupAvatar
+              className="img-circle avatar avatar-group mr-10"
+              size={35}
+            />
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+              onClick={[Function]}
+            >
+              mon super groupe 2
+            </Button>
+          </ListGroupItem>
+          <div
+            className="users-modal"
+          >
+            <ForwardRef(Relay(UserInGroupModal))
+              group={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "group3",
+                  "title": "mon super groupe 2",
+                }
+              }
+              handleClose={[Function]}
+              show={false}
+            />
+          </div>
+        </div>
+      </ListGroup>
+    </ModalBody>
     <ModalFooter
       bsClass="modal-footer"
       componentClass="div"
@@ -139,6 +158,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
     autoFocus={true}
     backdrop={true}
     bsClass="modal"
+    dialogClassName="modal-body-without-padding-top"
     dialogComponentClass={[Function]}
     enforceFocus={true}
     keyboard={true}
@@ -177,95 +197,113 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
         </b>
       </ModalTitle>
     </ModalHeader>
-    <ListGroupFlush
-      className="d-flex text-left"
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
     >
-      <ListGroupItem
-        bsClass="list-group-item"
-        id="group2"
-        key="group2"
-        listItem={false}
+      <ListGroup
+        bsClass="list-group"
+        className="list-group-custom"
       >
-        <GroupAvatar
-          className="img-circle avatar avatar-group mr-10"
-          size={35}
-        />
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="link"
-          className="btn-md p-0"
-          disabled={false}
-          onClick={[Function]}
-          title="persons-in-the-group"
+        <div
+          id="group2"
+          key="group2"
         >
-          Un groupe cool
-        </Button>
-        <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
-          group={
-            Object {
-              "$fragmentRefs": null,
-              "id": "group2",
-              "title": "Un groupe cool",
-            }
-          }
-          handleClose={[Function]}
-          show={false}
-        />
-      </ListGroupItem>
-      <ListGroupItem
-        bsClass="list-group-item"
-        id="group3"
-        key="group3"
-        listItem={false}
-      >
-        <GroupAvatar
-          className="img-circle avatar avatar-group mr-10"
-          size={35}
-        />
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="link"
-          className="btn-md p-0"
-          disabled={false}
-          onClick={[Function]}
-          title="persons-in-the-group"
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <GroupAvatar
+              className="img-circle avatar avatar-group mr-10"
+              size={35}
+            />
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+              onClick={[Function]}
+            >
+              Un groupe cool
+            </Button>
+          </ListGroupItem>
+          <div
+            className="users-modal"
+          >
+            <ForwardRef(Relay(UserInGroupModal))
+              group={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "group2",
+                  "title": "Un groupe cool",
+                }
+              }
+              handleClose={[Function]}
+              show={false}
+            />
+          </div>
+        </div>
+        <div
+          id="group3"
+          key="group3"
         >
-          mon super groupe 2
-        </Button>
-        <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
-          group={
-            Object {
-              "$fragmentRefs": null,
-              "id": "group3",
-              "title": "mon super groupe 2",
-            }
-          }
-          handleClose={[Function]}
-          show={false}
-        />
-      </ListGroupItem>
-      <div
-        className="text-center"
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={false}
-          onClick={[Function]}
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <GroupAvatar
+              className="img-circle avatar avatar-group mr-10"
+              size={35}
+            />
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+              onClick={[Function]}
+            >
+              mon super groupe 2
+            </Button>
+          </ListGroupItem>
+          <div
+            className="users-modal"
+          >
+            <ForwardRef(Relay(UserInGroupModal))
+              group={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "group3",
+                  "title": "mon super groupe 2",
+                }
+              }
+              handleClose={[Function]}
+              show={false}
+            />
+          </div>
+        </div>
+        <div
+          className="text-center"
         >
-          <FormattedMessage
-            id="global.more"
-            values={Object {}}
-          />
-        </Button>
-      </div>
-    </ListGroupFlush>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="primary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="global.more"
+              values={Object {}}
+            />
+          </Button>
+        </div>
+      </ListGroup>
+    </ModalBody>
     <ModalFooter
       bsClass="modal-footer"
       componentClass="div"
@@ -287,6 +325,7 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
     autoFocus={true}
     backdrop={true}
     bsClass="modal"
+    dialogClassName="modal-body-without-padding-top"
     dialogComponentClass={[Function]}
     enforceFocus={true}
     keyboard={true}
@@ -325,6 +364,10 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
         </b>
       </ModalTitle>
     </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    />
     <ModalFooter
       bsClass="modal-footer"
       componentClass="div"

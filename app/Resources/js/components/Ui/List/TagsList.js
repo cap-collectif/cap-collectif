@@ -23,17 +23,6 @@ const TagsList = styled.div.attrs({
       padding-right: 5px;
     }
   }
-
-  a.tags-list__tag {
-    &:not(:hover) {
-      color: inherit;
-    }
-
-    &:hover {
-      text-decoration: none;
-      cursor: pointer;
-    }
-  }
 `;
 
 export default TagsList;
