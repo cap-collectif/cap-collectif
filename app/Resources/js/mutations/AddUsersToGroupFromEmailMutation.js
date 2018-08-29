@@ -11,7 +11,8 @@ const mutation = graphql`
   mutation AddUsersToGroupFromEmailMutation($input: AddUsersToGroupFromEmailInput!) {
     addUsersToGroupFromEmail(input: $input) {
       importedUsers {
-        ...GroupAdminUsersListGroupItem_user
+        id
+        email
       }
       notFoundEmails
       alreadyImportedUsers {

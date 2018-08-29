@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Grid, Col, Row, Button, ListGroup } from 'react-bootstrap';
+import { Button, ListGroup, ButtonToolbar } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import {
   isValid,
@@ -114,29 +114,14 @@ export class GroupAdminUsers extends React.Component<Props, State> {
           </a>
         </div>
         <div className="box-content">
-          <Grid>
-            <Row>
-              <Col xs={12} md={2}>
-                <Button
-                  bsStyle="success"
-                  className="mb-10"
-                  href="#"
-                  onClick={() => this.openCreateModal()}>
-                  <i className="fa fa-plus-circle" />{' '}
-                  <FormattedMessage id="group.admin.add_users" />
-                </Button>
-              </Col>
-              <Col xs={12} md={2}>
-                <Button
-                  bsStyle="success"
-                  className="mb-10 ml-5"
-                  href="#"
-                  onClick={() => this.openImportModal()}>
-                  <i className="fa fa-upload" /> <FormattedMessage id="import-users" />
-                </Button>
-              </Col>
-            </Row>
-          </Grid>
+          <ButtonToolbar>
+            <Button bsStyle="success" href="#" onClick={() => this.openCreateModal()}>
+              <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
+            </Button>
+            <Button bsStyle="success" href="#" onClick={() => this.openImportModal()}>
+              <i className="fa fa-upload" /> <FormattedMessage id="import-users" />
+            </Button>
+          </ButtonToolbar>
           {this.getAlertForm()}
           <GroupAdminModalAddUsers
             show={showAddUsersModal}

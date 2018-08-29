@@ -4,7 +4,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import type { IntlShape } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
-import { submit, isValid, isSubmitting, isPristine } from 'redux-form';
+import { submit, isSubmitting, isPristine } from 'redux-form';
 import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
 import CloseButton from '../../Form/CloseButton';
 import type { Dispatch } from '../../../types';
@@ -16,14 +16,13 @@ type Props = {
   group: GroupAdminUsers_group,
   dispatch: Dispatch,
   intl: IntlShape,
-  valid: boolean,
   submitting: boolean,
   pristine: boolean,
 };
 
 export class GroupAdminModalImportUsers extends React.Component<Props> {
   render() {
-    const { show, onClose, group, dispatch, intl, valid, submitting, pristine } = this.props;
+    const { show, onClose, group, dispatch, intl, submitting, pristine } = this.props;
 
     return (
       <Modal show={show} onHide={onClose} aria-labelledby="delete-modal-title-lg">
@@ -38,7 +37,7 @@ export class GroupAdminModalImportUsers extends React.Component<Props> {
         <Modal.Footer>
           <CloseButton label={intl.formatMessage({ id: 'global.close' })} onClose={onClose} />
           <Button
-            disabled={!valid || pristine || submitting}
+            disabled={pristine || submitting}
             bsStyle="primary"
             type="button"
             onClick={() => dispatch(submit(formName))}>
@@ -51,7 +50,6 @@ export class GroupAdminModalImportUsers extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  valid: isValid(formName)(state),
   submitting: isSubmitting(formName)(state),
   pristine: isPristine(formName)(state),
 });

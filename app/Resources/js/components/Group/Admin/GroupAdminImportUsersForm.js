@@ -1,15 +1,18 @@
 // @flow
 import React from 'react';
 import { injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { FormGroup, HelpBlock, ControlLabel } from 'react-bootstrap';
+import { FormGroup, HelpBlock, ControlLabel, Row, Col, Collapse } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
 import type { FieldProps } from 'redux-form';
 import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
 import FileUpload from '../../Form/FileUpload';
 import AddUsersToGroupFromEmailMutation from '../../../mutations/AddUsersToGroupFromEmailMutation';
-import type { Dispatch } from '../../../types';
+import type { Dispatch, Uuid } from '../../../types';
 import config from '../../../config';
-import type { AddUsersToGroupFromEmailMutationResponse } from '../../../mutations/__generated__/AddUsersToGroupFromEmailMutation.graphql';
+import type {
+  AddUsersToGroupFromEmailMutationResponse,
+  AddUsersToGroupFromEmailMutationVariables,
+} from '../../../mutations/__generated__/AddUsersToGroupFromEmailMutation.graphql';
 import Loader from '../../Ui/Loader';
 
 type Props = {
@@ -19,25 +22,43 @@ type Props = {
   onClose: Function,
 };
 
+type State = {
+  showMoreError: boolean,
+};
+
 type DefaultProps = void;
 type FormValues = {
   emails: string,
 };
 
+type FileUploadFieldProps = FieldProps & {
+  showMoreError: boolean,
+  onClickShowMoreError: Function,
+  resetShowMoreError: Function,
+};
+
 export const formName = 'group-users-import';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, { group, onClose, reset }) => {
-  const emails = values.emails.split('\n').map((email: string) => {
+const prepareVariables = (
+  fileContent: string,
+  groupId: Uuid,
+  dryRun: boolean,
+): AddUsersToGroupFromEmailMutationVariables => {
+  const emails = fileContent.split('\n').map((email: string) => {
     return email.replace(/['"]+/g, '');
   });
 
-  const variables = {
+  return {
     input: {
       emails,
-      groupId: group.id,
-      dryRun: false,
+      groupId,
+      dryRun,
     },
   };
+};
+
+const onSubmit = (values: FormValues, dispatch: Dispatch, { group, onClose, reset }) => {
+  const variables = prepareVariables(values.emails, group.id, false);
 
   return AddUsersToGroupFromEmailMutation.commit(variables).then(() => {
     reset();
@@ -46,24 +67,23 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { group, onClose, rese
 };
 
 const asyncValidate = (values: FormValues, dispatch: Dispatch, { group, reset }) => {
-  console.log(values);
-  const emails = values.emails.split('\n').map((email: string) => {
-    return email.replace(/['"]+/g, '');
-  });
-
-  const variables = {
-    input: {
-      emails,
-      groupId: group.id,
-      dryRun: true,
-    },
-  };
+  const variables = prepareVariables(values.emails, group.id, true);
 
   return AddUsersToGroupFromEmailMutation.commit(variables).then(
     (response: AddUsersToGroupFromEmailMutationResponse) => {
-      reset();
-      console.log(response);
-      // @TODO: here change the state of 2 cols
+      if (!response || !response.addUsersToGroupFromEmail) {
+        reset();
+      }
+
+      const data = response.addUsersToGroupFromEmail;
+
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        emails: {
+          importedUsers: data ? data.importedUsers : [],
+          notFoundEmails: data ? data.notFoundEmails : [],
+        },
+      };
     },
   );
 };
@@ -85,7 +105,15 @@ const onDrop = (acceptedFiles: Array<File>, { onChange }) => {
   });
 };
 
-const renderDropzoneInput = ({ input, meta: { asyncValidating } }: FieldProps) => {
+const renderDropzoneInput = ({
+  input,
+  meta: { asyncValidating, error },
+  showMoreError,
+  onClickShowMoreError,
+  resetShowMoreError,
+}: FileUploadFieldProps) => {
+  const colWidth = error && error.notFoundEmails.length === 0 ? 12 : 6;
+
   return (
     <FormGroup>
       <ControlLabel htmlFor={input.name}>
@@ -103,19 +131,80 @@ const renderDropzoneInput = ({ input, meta: { asyncValidating } }: FieldProps) =
           minSize={1}
           onDrop={(files: Array<File>) => {
             onDrop(files, input);
+            resetShowMoreError();
           }}
         />
+        {!asyncValidating &&
+          error && (
+            <React.Fragment>
+              <div className="h5">
+                <FormattedMessage id="document-analysis" />{' '}
+              </div>
+              <Row className="mt-15">
+                <Col xs={12} sm={colWidth} className="text-center pl-0 pr-0">
+                  <h4>
+                    <i className="cap cap-check-bubble text-success" />{' '}
+                    <b>
+                      <FormattedMessage
+                        id="count-users-found"
+                        values={{ num: error.importedUsers.length }}
+                      />
+                    </b>
+                  </h4>
+                </Col>
+                {error.notFoundEmails &&
+                  error.notFoundEmails.length > 0 && (
+                    <Col xs={12} sm={colWidth} className="text-center pl-0 pr-0 ">
+                      <h4>
+                        <i className="cap cap-ios-close text-danger" />{' '}
+                        <b>
+                          <FormattedMessage
+                            id="count-untraceable-users"
+                            values={{ num: error.notFoundEmails.length }}
+                          />
+                        </b>
+                      </h4>
+                      <Collapse in={showMoreError}>
+                        <ul
+                          style={{ listStyle: 'none', maxHeight: 80, overflowY: 'scroll' }}
+                          className="small">
+                          {error.notFoundEmails.map((email: string) => {
+                            return <li>{email}</li>;
+                          })}
+                        </ul>
+                      </Collapse>
+                      <div
+                        className="text-info"
+                        style={{ cursor: 'pointer' }}
+                        onClick={onClickShowMoreError}>
+                        <i className={showMoreError ? 'cap cap-arrow-40' : 'cap cap-arrow-39'} />{' '}
+                        <FormattedMessage id={showMoreError ? 'see-less' : 'global.see'} />
+                      </div>
+                    </Col>
+                  )}
+              </Row>
+            </React.Fragment>
+          )}
       </Loader>
     </FormGroup>
   );
 };
 
-export class GroupAdminImportUsersForm extends React.Component<Props> {
+export class GroupAdminImportUsersForm extends React.Component<Props, State> {
   static defaultProps: DefaultProps;
+  state = {
+    showMoreError: false,
+  };
+
+  toggle() {
+    this.setState((prevState: State) => ({
+      showMoreError: !prevState.showMoreError,
+    }));
+  }
 
   render() {
     const { handleSubmit } = this.props;
-
+    const { showMoreError } = this.state;
     return (
       <form onSubmit={handleSubmit}>
         <div>
@@ -129,6 +218,11 @@ export class GroupAdminImportUsersForm extends React.Component<Props> {
             labelClassName="control-label"
             inputClassName="fake-inputClassName"
             component={renderDropzoneInput}
+            showMoreError={showMoreError}
+            onClickShowMoreError={this.toggle.bind(this)}
+            resetShowMoreError={() => {
+              this.setState({ showMoreError: false });
+            }}
           />
         </div>
       </form>
@@ -139,7 +233,6 @@ export class GroupAdminImportUsersForm extends React.Component<Props> {
 const form = reduxForm({
   onSubmit,
   form: formName,
-  destroyOnUnmount: false,
   asyncValidate,
 })(GroupAdminImportUsersForm);
 
