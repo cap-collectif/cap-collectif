@@ -51,7 +51,10 @@ class ProjectsController extends FOSRestController
             );
         }
 
-        return $this->get('capco.project.search.resolver')->search($projectSearchParameters);
+        return $this->get('capco.project.search.resolver')->search(
+            $projectSearchParameters,
+            $this->getUser()
+        );
     }
 
     /**

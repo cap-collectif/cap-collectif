@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RenderCustomAccess /> should render correctly 1`] = `
+<div>
+  <OverlayTrigger
+    defaultOverlayShown={false}
+    overlay={
+      <Tooltip
+        bsClass="tooltip"
+        id="tooltip"
+        placement="right"
+      >
+        <FormattedMessage
+          id="only-visible-by"
+          values={
+            Object {
+              "num": 15,
+            }
+          }
+        />
+      </Tooltip>
+    }
+    placement="top"
+    trigger={
+      Array [
+        "hover",
+        "focus",
+      ]
+    }
+  >
+    <span
+      onClick={[Function]}
+    >
+      <i
+        className="cap cap-lock-2 mr-1"
+      />
+      <FormattedMessage
+        id="restrictedaccess"
+        values={Object {}}
+      />
+    </span>
+  </OverlayTrigger>
+  <div>
+    <ForwardRef(Relay(UserGroupModal))
+      handleClose={[Function]}
+      project={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "restrictedViewers": Object {
+            "totalUserCount": 15,
+          },
+        }
+      }
+      show={false}
+    />
+  </div>
+</div>
+`;

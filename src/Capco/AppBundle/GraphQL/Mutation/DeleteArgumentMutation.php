@@ -1,7 +1,7 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
@@ -15,8 +15,11 @@ class DeleteArgumentMutation
     private $argumentRepo;
     private $redisStorage;
 
-    public function __construct(EntityManagerInterface $em, ArgumentRepository $argumentRepo, RedisStorageHelper $redisStorage)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        ArgumentRepository $argumentRepo,
+        RedisStorageHelper $redisStorage
+    ) {
         $this->em = $em;
         $this->argumentRepo = $argumentRepo;
         $this->redisStorage = $redisStorage;
@@ -25,6 +28,7 @@ class DeleteArgumentMutation
     public function __invoke(Arg $input, User $user): array
     {
         $argumentId = $input->offsetGet('argumentId');
+        /** @var Argument $argument */
         $argument = $this->argumentRepo->find($argumentId);
 
         if (!$argument) {
@@ -35,7 +39,7 @@ class DeleteArgumentMutation
             throw new UserError('You are not the author of argument with id: ' . $argumentId);
         }
 
-        if (!$argument->canBeDeleted()) {
+        if (!$argument->canBeDeleted($user)) {
             throw new UserError('Uncontributable argument.');
         }
 

@@ -59,11 +59,11 @@ class AddOpinionVoteMutation implements MutationInterface
         $contribution = $opinion ?? $version;
         $step = $contribution->getStep();
 
-        if (!$step->canContribute()) {
+        if (!$step->canContribute($viewer)) {
             throw new UserError('This step is no longer contributable.');
         }
 
-        if (!$contribution->canContribute()) {
+        if (!$contribution->canContribute($viewer)) {
             throw new UserError('Uncontribuable opinion.');
         }
 

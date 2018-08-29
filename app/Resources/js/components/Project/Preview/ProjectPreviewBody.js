@@ -182,10 +182,8 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
   render() {
     const { project } = this.props;
-
     const actualStep = getActualStep(project);
     const isCurrentStep = getCurrentStep(project);
-
     return (
       <div className="card__body">
         <div className="card__body__infos">

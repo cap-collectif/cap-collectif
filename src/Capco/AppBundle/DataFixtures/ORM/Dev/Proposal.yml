@@ -434,3 +434,27 @@ Capco\AppBundle\Entity\Proposal:
     createdAt: <dateTimeBetween('-30 days', '-29 days')>
     category: '@pCategory1'
     reference: 36
+  proposal37:
+    id: proposal37
+    title: Libérons les nains de jardin
+    body: <p><text(100)></p>
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    author: '@user1'
+    proposalForm: '@proposalform12'
+    reference: 45
+  proposal38:
+    id: proposal38
+    title: Libérons blanche neige
+    body: <p><text(100)></p>
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    author: '@user1'
+    proposalForm: '@proposalform12'
+    reference: 46
+  proposal39:
+    id: proposal39
+    title: Donnons leur un village dédié
+    body: <p><text(100)></p>
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    author: '@user1'
+    proposalForm: '@proposalform12'
+    reference: 47

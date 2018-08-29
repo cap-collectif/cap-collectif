@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
@@ -96,9 +95,6 @@ class Questionnaire
      */
     private $proposalForm;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -255,12 +251,12 @@ class Questionnaire
 
     public function canDisplay($user): bool
     {
-        return $this->getStep()->canDisplay($user);
+        return $this->getStep() ? $this->getStep()->canDisplay($user) : true;
     }
 
-    public function canContribute(): bool
+    public function canContribute($viewer = null): bool
     {
-        return $this->getStep() && $this->getStep()->canContribute();
+        return $this->getStep() && $this->getStep()->canContribute($viewer);
     }
 
     /**

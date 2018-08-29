@@ -337,9 +337,11 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
         );
     }
 
-    public function canContribute(): bool
+    public function canContribute($user = null): bool
     {
-        return $this->isPublished() && !$this->isTrashed() && $this->getParent()->canContribute();
+        return (
+            $this->isPublished() && !$this->isTrashed() && $this->getParent()->canContribute($user)
+        );
     }
 
     // ******************** Lifecycle ************************************

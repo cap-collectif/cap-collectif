@@ -191,16 +191,26 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     position: 2
   pas39:
     id: pas39
-    step: "@collectstep9"
-    project: "@p17"
+    step: '@collectstep9'
+    project: '@p17'
     position: 1
   pas40:
     id: pas40
-    step: "@collectstep10"
-    project: "@p18"
+    step: '@collectstep10'
+    project: '@p18'
     position: 1
   pas41:
     id: pas41
-    step: "@collectstep11"
-    project: "@p19"
+    step: '@collectstep11'
+    project: '@p19'
     position: 1
+  pas42:
+    id: pas42
+    step: '@pstep5'
+    project: '@p20'
+    position: 1
+  pas43:
+    id: pas43
+    step: '@collectstep12'
+    project: '@p20'
+    position: 2

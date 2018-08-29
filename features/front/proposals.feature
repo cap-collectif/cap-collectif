@@ -152,7 +152,8 @@ Scenario: Anonymous user wants to create a proposal
 
 @javascript @database
 Scenario: Author of a proposal wants to update it
-  Given I am logged in as user
+  Given feature districts is enabled
+  When I am logged in as user
   And I go to a proposal
   When I click the edit proposal button
   And I wait 3 seconds

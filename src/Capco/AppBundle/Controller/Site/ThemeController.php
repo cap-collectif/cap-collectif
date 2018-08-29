@@ -84,10 +84,9 @@ class ThemeController extends Controller
 
         $projectProps = $serializer->serialize(
             [
-                'projects' =>
-                    $this->get('Capco\AppBundle\Repository\ProjectRepository')->getProjectsByTheme(
-                        $theme
-                    ),
+                'projects' => $this->get(
+                    'Capco\AppBundle\Repository\ProjectRepository'
+                )->getProjectsByTheme($theme, $this->getUser()),
             ],
             'json',
             SerializationContext::create()->setGroups([

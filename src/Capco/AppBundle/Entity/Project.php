@@ -13,6 +13,7 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -218,8 +219,15 @@ class Project implements IndexableInterface
      */
     private $opinionCanBeFollowed = false;
 
+    /**
+     * @ORM\JoinTable(name="restricted_viewer_groups")
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Group", inversedBy="projectsVisibleByTheGroup", cascade={"persist"})
+     */
+    private $restrictedViewerGroups;
+
     public function __construct()
     {
+        $this->restrictedViewerGroups = new ArrayCollection();
         $this->themes = new ArrayCollection();
         $this->steps = new ArrayCollection();
         $this->events = new ArrayCollection();
@@ -699,12 +707,12 @@ class Project implements IndexableInterface
 
     public function canDisplay($user = null): bool
     {
-        return $this->canDisplayForViewer($user);
+        return $this->viewerCanSee($user);
     }
 
     public function canContribute($user = null): bool
     {
-        return $this->canDisplayForViewer($user);
+        return $this->viewerCanSee($user);
     }
 
     /**
@@ -982,5 +990,70 @@ class Project implements IndexableInterface
         $this->opinionCanBeFollowed = $opinionCanBeFollowed;
 
         return $this;
+    }
+
+    public function getRestrictedViewerGroups(): Collection
+    {
+        return $this->restrictedViewerGroups;
+    }
+
+    public function setRestrictedViewerGroups($restrictedViewerGroups): self
+    {
+        if ($restrictedViewerGroups instanceof Collection) {
+            $this->restrictedViewerGroups = $restrictedViewerGroups;
+        } elseif (is_array($restrictedViewerGroups)) {
+            foreach ($restrictedViewerGroups as $group) {
+                $this->addAccessToUserGroup($group);
+            }
+        }
+
+        return $this;
+    }
+
+    public function addAccessToUserGroup(Group $group): self
+    {
+        $this->restrictedViewerGroups->add($group);
+
+        return $this;
+    }
+
+    public function removeAccessToUserGroup(Group $group): self
+    {
+        if ($this->restrictedViewerGroups->containsKey($group)) {
+            $this->restrictedViewerGroups->remove($group);
+        }
+
+        return $this;
+    }
+
+    /**
+     * check if viewer is allowed the project
+     */
+    protected function viewerCanSee($viewer = null): bool
+    {
+        if ($this->getVisibility() === ProjectVisibilityMode::VISIBILITY_PUBLIC) {
+            return true;
+        }
+
+        if ($viewer && $viewer->isSuperAdmin() || $this->getAuthor() === $viewer) {
+            return true;
+        }
+
+        /** @var $viewer User */
+        if ($this->getVisibility() === ProjectVisibilityMode::VISIBILITY_CUSTOM && $viewer) {
+            $viewerGroups = $viewer->getUserGroups()->toArray();
+            $allowedGroups = $this->getRestrictedViewerGroups()->toArray();
+            foreach ($viewerGroups as $userGroup) {
+                if (in_array($userGroup->getGroup(), $allowedGroups)) {
+                    return true;
+                }
+            }
+        }
+        $viewerVisibility = $this->getVisibilityForViewer($viewer);
+
+        return (
+            $this->getVisibility() >= $viewerVisibility &&
+            $this->getVisibility() < ProjectVisibilityMode::VISIBILITY_CUSTOM
+        );
     }
 }

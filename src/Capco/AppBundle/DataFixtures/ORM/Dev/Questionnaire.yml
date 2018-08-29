@@ -39,3 +39,7 @@ Capco\AppBundle\Entity\Questionnaire:
     id: questionnaire8
     title: Consultation pour la capcoBeer
     description: <p><text(100)></p>
+  questionnaire9:
+    id: questionnaire9
+    title: Consultation pour la FLNJ
+    description: <p><text(100)></p>

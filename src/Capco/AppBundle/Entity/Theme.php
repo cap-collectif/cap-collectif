@@ -490,6 +490,7 @@ class Theme implements IndexableInterface
 
     public function countEnabledProjects()
     {
+        /** TODO manage access projects with visibility */
         return $this->countPublicProject();
     }
 
@@ -508,20 +509,16 @@ class Theme implements IndexableInterface
 
     public function countEnabledPosts(): int
     {
-        return $this->posts
-            ->map(function (Post $post) {
-                return $post->canDisplay() && $post->getIsPublished();
-            })
-            ->count();
+        return $this->posts->map(function (Post $post) {
+            return $post->canDisplay() && $post->getIsPublished();
+        })->count();
     }
 
     public function countEnabledEvents(): int
     {
-        return $this->events
-            ->map(function (Event $event) {
-                return $event->getIsEnabled();
-            })
-            ->count();
+        return $this->events->map(function (Event $event) {
+            return $event->getIsEnabled();
+        })->count();
     }
 
     public function isOpened()

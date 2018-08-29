@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
@@ -27,6 +26,8 @@ class CollectPage extends Page
         'follow proposal button' => '.proposal__button__follow',
         'type of follow proposal' => '.proposal__follow',
         'my votes' => '.widget__button.navbar-btn.pull-right.btn.btn-default',
+        'restricted-access-link' => '#restricted-access > div > span',
+        'restricted-group' => ' > span:nth-child(1) > div',
     ];
 
     public function sortByDate()
@@ -115,5 +116,17 @@ class CollectPage extends Page
                 );
             }
         }
+    }
+
+    public function clickOnRestrictedAccess()
+    {
+        return $this->getElement('restricted-access-link')->click();
+    }
+
+    public function iClickOnUserGroupModal(string $groupId)
+    {
+        $element = "#$groupId" . $this->elements['restricted-group'];
+
+        return $this->find('css', $element)->click();
     }
 }

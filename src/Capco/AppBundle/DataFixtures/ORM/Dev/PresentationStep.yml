@@ -28,3 +28,10 @@ Capco\AppBundle\Entity\Steps\PresentationStep:
     isEnabled: true
     body: |
       <p><text(100)></p>
+  pstep5:
+    id: pstep5
+    title: Présentation
+    label: Présentation
+    isEnabled: true
+    body: |
+      <p><text(100)></p>

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Argument;

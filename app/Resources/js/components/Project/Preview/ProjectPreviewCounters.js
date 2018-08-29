@@ -2,6 +2,7 @@
 import * as React from 'react';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
+import ProjectRestrictedAccess from '../Page/ProjectRestrictedAccess';
 
 type Props = {
   project: Object,
@@ -37,6 +38,9 @@ class ProjectPreviewCounters extends React.Component<Props> {
           showZero
           icon="cap-user-2-1"
         />
+        <div className="tags-list__tag">
+          <ProjectRestrictedAccess projectId={project.id} icon="cap-lock-2-1" />
+        </div>
       </TagsList>
     );
   }

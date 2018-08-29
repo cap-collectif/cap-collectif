@@ -251,16 +251,16 @@ services:
     arguments: ['CapcoAppBundle:Video']
 
   Capco\AppBundle\Repository\ProjectRepository:
-    class: Capco\AppBundle\Repository\ProjectRepository
-    autowire: true
-    autoconfigure: true
     public: true
+    class: Capco\AppBundle\Repository\ProjectRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Project']
 
   Capco\AppBundle\Repository\ProjectTypeRepository:
-    class: Capco\AppBundle\Repository\ProjectTypeRepository
-    autowire: true
     public: true
-    autoconfigure: true
+    class: Capco\AppBundle\Repository\ProjectTypeRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:ProjectType']
 
   capco.abstract_step.repository:
     public: true

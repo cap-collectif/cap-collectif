@@ -243,14 +243,16 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         );
     }
 
-    public function canContribute(): bool
+    public function canContribute($user = null): bool
     {
-        return $this->isPublished() && !$this->isTrashed() && $this->getParent()->canContribute();
+        return (
+            $this->isPublished() && !$this->isTrashed() && $this->getParent()->canContribute($user)
+        );
     }
 
-    public function canBeDeleted(): bool
+    public function canBeDeleted($user = null): bool
     {
-        return !$this->isTrashed() && $this->getParent()->canBeDeleted();
+        return !$this->isTrashed() && $this->getParent()->canBeDeleted($user);
     }
 
     public function getParent()

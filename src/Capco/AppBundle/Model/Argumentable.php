@@ -9,7 +9,7 @@ interface Argumentable
 
     public function getArgumentAgainstCount();
 
-    public function canContribute();
+    public function canContribute($user = null);
 
     public function getOpinionType();
 

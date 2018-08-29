@@ -8,7 +8,7 @@ Group:
       id:
         description: 'The id of the group.'
       title:
-        type: 'String!'
+        type: 'String'
         description: 'Identifies the group name.'
       description:
         type: 'String'

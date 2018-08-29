@@ -21,7 +21,7 @@
       }}
     {% endif %}
     {% if project.isPublic == false %}
-        {{ react_render_component('ProjectRestrictedAccessApp', {
+        {{ react_render_component('ProjectRestrictedAccessAlertApp', {
             'props': {
                 'projectId': project.id,
             },

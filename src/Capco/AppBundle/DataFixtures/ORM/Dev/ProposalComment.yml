@@ -58,3 +58,24 @@ Capco\AppBundle\Entity\ProposalComment:
     body: <text(300)>
     publishedAt: '<dateTimeBetween("-2 days", "now")>'
     createdAt: <dateTimeBetween('-50 days', '-1 days')>
+  propComment{43..49}:
+    id: 'proposalComment<current()>'
+    proposal: '@proposal35'
+    Author: '@user<numberBetween(1, 5)>'
+    body: <text(300)>
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+  propComment{50..55}:
+    id: 'proposalComment<current()>'
+    proposal: '@proposal36'
+    Author: '@user<numberBetween(1, 5)>'
+    body: <text(300)>
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+  propComment{56..60}:
+    id: 'proposalComment<current()>'
+    proposal: '@proposal37'
+    Author: '@user<numberBetween(1, 5)>'
+    body: <text(300)>
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    createdAt: <dateTimeBetween('-50 days', '-1 days')>

@@ -64,7 +64,7 @@ class RemoveProposalVoteMutation
         }
 
         // Check if step is contributable
-        if (!$step->canContribute()) {
+        if (!$step->canContribute($user)) {
             throw new UserError('This step is no longer contributable.');
         }
 

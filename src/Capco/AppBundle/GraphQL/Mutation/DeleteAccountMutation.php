@@ -153,7 +153,7 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
                     $contribution
                         ->getRelated()
                         ->getStep()
-                        ->canContribute()
+                        ->canContribute($user)
                 ) {
                     $toDeleteList[] = $contribution;
                 }
@@ -177,7 +177,7 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
                         $contribution instanceof Source ||
                         $contribution instanceof Argument
                 ) &&
-                $contribution->getStep()->canContribute()
+                $contribution->getStep()->canContribute($user)
             ) {
                 $toDeleteList[] = $contribution;
             }

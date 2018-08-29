@@ -34,7 +34,7 @@ class ProjectController extends Controller
             [
                 'projects' => $this->get(
                     'Capco\AppBundle\Repository\ProjectRepository'
-                )->getLastPublished($max, $offset),
+                )->getLastPublished($max, $offset, $this->getUser()),
             ],
             'json',
             SerializationContext::create()->setGroups([
@@ -92,7 +92,7 @@ class ProjectController extends Controller
      */
     public function showTrashedAction(Project $project)
     {
-        if (!$project->canDisplay()) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createNotFoundException(
                 $this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle')
             );

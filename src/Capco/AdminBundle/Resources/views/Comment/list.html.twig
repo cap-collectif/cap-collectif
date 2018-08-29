@@ -108,7 +108,7 @@ file that was distributed with this source code.
                                     {% endfor %}
                                 {% else %}
                                     {% for object in admin.datagrid.results %}
-                                        {% if object.canDisplay() %}
+                                        {% if object.canDisplay(app.user) %}
                                             <tr>
                                                 {% include get_admin_template('inner_list_row', admin.code) %}
                                             </tr>

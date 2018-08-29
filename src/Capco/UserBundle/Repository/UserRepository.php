@@ -776,8 +776,8 @@ class UserRepository extends EntityRepository
     /**
      * Get search results.
      *
-     * @param int  $nbByPage
-     * @param int  $page
+     * @param int $nbByPage
+     * @param int $page
      * @param null $sort
      * @param null $type
      *
@@ -935,6 +935,7 @@ class UserRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->useQueryCache(true); // ->useResultCache(true, 60)
+
         return new Paginator($query);
     }
 
@@ -1016,7 +1017,6 @@ class UserRepository extends EntityRepository
             ->andWhere('f.user = :user')
             ->andWhere('f.proposal IS NOT NULL')
             ->andWhere('p.deletedAt IS NULL')
-
             ->setParameter('user', $user);
 
         return $query->getQuery()->getSingleScalarResult();
@@ -1037,5 +1037,18 @@ class UserRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');
+    }
+
+    public function countAllowedViewersForProject(Project $project): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(DISTINCT u.id)')
+            ->leftJoin('u.userGroups', 'uG')
+            ->leftJoin('uG.group', 'g')
+            ->leftJoin('g.projectsVisibleByTheGroup', 'p')
+            ->andWhere('p.id = :project')
+            ->setParameter('project', $project->getId());
+
+        return $query->getQuery()->getSingleScalarResult();
     }
 }

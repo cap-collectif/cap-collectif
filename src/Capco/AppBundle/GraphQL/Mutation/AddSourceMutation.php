@@ -67,7 +67,7 @@ class AddSourceMutation implements MutationInterface
             return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
         }
 
-        if (!$sourceable->canContribute()) {
+        if (!$sourceable->canContribute($viewer)) {
             $this->logger->error(
                 'Can\'t add an source to an uncontributable sourceable with id: ' . $sourceableId
             );

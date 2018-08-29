@@ -31,4 +31,8 @@ parameters:
         - %currentWorkingDirectory%/spec/*
         - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/ProjectVisibilityTrait.php
         - %currentWorkingDirectory%/src/Capco/AppBundle/Repository/AbstractVoteRepository.php
+# because of $connection->totalUserCount = $totalUsersInGroups;
+        - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectAllowedGroupsResolver.php
 
+# Method Capco\AppBundle\Entity\Post::canContribute() invoked with 1 parameter, 0 required.
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/CommentableTrait.php

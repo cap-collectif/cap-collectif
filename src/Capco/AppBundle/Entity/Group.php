@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\BlameableTrait;
@@ -43,10 +42,16 @@ class Group
      */
     private $userGroups;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="restrictedViewerGroups")
+     */
+    protected $projectsVisibleByTheGroup;
+
     public function __construct()
     {
         $this->userGroups = new ArrayCollection();
         $this->evaluating = new ArrayCollection();
+        $this->projectsVisibleByTheGroup = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
 
@@ -118,5 +123,32 @@ class Group
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
         ];
+    }
+
+    public function getProjectsVisibleByTheGroup(): Collection
+    {
+        return $this->projectsVisibleByTheGroup;
+    }
+
+    public function setProjectsVisibleByTheGroup(Collection $projectsVisibleByTheGroup): self
+    {
+        $this->projectsVisibleByTheGroup = $projectsVisibleByTheGroup;
+
+        return $this;
+    }
+
+    public function addProjectsVisibleByTheGroup(Project $project): self
+    {
+        $this->projectsVisibleByTheGroup->add($project);
+
+        return $this;
+    }
+
+    public function removeProjectsVisibleByTheGroup(Project $project): self
+    {
+        if ($this->projectsVisibleByTheGroup->get($project)) {
+            $this->projectsVisibleByTheGroup->remove($project);
+        }
+        return $this;
     }
 }

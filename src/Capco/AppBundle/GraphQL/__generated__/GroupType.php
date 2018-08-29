@@ -36,7 +36,7 @@ final class GroupType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'title' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => Type::string(),
                     'args' => [
                     ],
                     'resolve' => null,

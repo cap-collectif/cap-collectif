@@ -54,7 +54,7 @@ class AddVersionMutation implements MutationInterface
             return ['version' => null, 'versionEdge' => null, 'userErrors' => [$error]];
         }
 
-        if (!$opinion->canContribute()) {
+        if (!$opinion->canContribute($viewer)) {
             $this->logger->error(
                 'Can\'t add a version to an uncontributable opinion with id: ' . $opinionId
             );

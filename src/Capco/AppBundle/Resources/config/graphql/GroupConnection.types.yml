@@ -5,3 +5,5 @@ GroupConnection:
     connectionFields:
       totalCount:
         type: Int!
+      totalUserCount:
+        type: Int!

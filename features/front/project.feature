@@ -174,6 +174,15 @@ Scenario: Anonymous try to access to a wrong page
   Then I should see "error.404.title"
 
 @javascript
+Scenario: user try to access to a project with restricted access
+  Given feature "projects_form" is enabled
+  When I visited "collect page" with:
+    | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
+    | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
+  And I wait 1 seconds
+  Then I should see 'restricted-access'
+
+@javascript
 Scenario: Not allowed user can't access to a private project
   Given feature "projects_form" is enabled
   And I am logged in as user
@@ -184,6 +193,16 @@ Scenario: Not allowed user can't access to a private project
   Then I should see 'restricted-access'
   When I follow "error.report"
   Then I should be redirected to "/contact"
+
+@javascript
+Scenario: user try to access to a project with restricted access
+  Given feature "projects_form" is enabled
+  And I am logged in as user
+  When I visited "collect page" with:
+    | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
+    | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
+  And I wait 1 seconds
+  Then I should see 'restricted-access'
 
 @javascript
 Scenario: Super Admin can access to all private projects
@@ -207,6 +226,11 @@ Scenario: Super Admin can access to all private projects
   And I wait 1 seconds
   Then I should see "Collecte des propositions pour La Force"
   And I should see "global.draft.only_visible_by_you"
+  When I visited "collect page" with:
+    | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
+    | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
+  And I wait 1 seconds
+  Then I should see "Un avenir meilleur pour les nains de jardins (custom access)"
 
 @javascript
 Scenario: An admin can't access a private project of an other admin
@@ -229,3 +253,27 @@ Scenario: Admin access to his project and click to edit it
   And I should see "global.draft.only_visible_by_you"
   Then I follow "action_edit"
   And I should be redirected to "/admin/capco/app/project/ProjectAccessibleForMeOnlyByAdmin/edit"
+
+@javascript
+Scenario: Pierre can access to a restricted project to his user group
+  Given feature "projects_form" is enabled
+  And I am logged in as pierre
+  When I visited "collect page" with:
+    | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
+    | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
+  Then I should see "Un avenir meilleur pour les nains de jardins (custom access)"
+  And I should see "restrictedaccess"
+  And I wait 2 seconds
+  And I click the "#restricted-access" element
+  And I open restricted access modal
+  Then I should see "people-with-access-to-project"
+  And I should see "Agent de la ville"
+  And I should see "Utilisateurs"
+  And I should see "global.close"
+  When I unfold "group3" group inside restricted access modal
+  Then I should see "Utilisateurs"
+  And I should not see "ptondereau" in the "#group3-modal .modal-body" element
+  And I should see "global.more"
+  Then I click on button "#load-more"
+  And I wait 1 seconds
+  Then I should see "ptondereau" in the "#group3-modal .modal-body" element

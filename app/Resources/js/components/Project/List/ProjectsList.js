@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import ProjectPreview from '../Preview/ProjectPreview';
 import type { State } from '../../../types';
 
@@ -21,7 +22,11 @@ export class ProjectsList extends React.Component<Props> {
         </div>
       );
     }
-    return <p>Aucun projet</p>;
+    return (
+      <p>
+        <FormattedMessage id="project.none" />
+      </p>
+    );
   }
 }
 

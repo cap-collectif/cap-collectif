@@ -190,7 +190,10 @@ class ProfileController extends Controller
 
         $serializer = $this->get('jms_serializer');
 
-        $projectsRaw = $this->get('Capco\AppBundle\Repository\ProjectRepository')->getByUser($user);
+        $projectsRaw = $this->get('Capco\AppBundle\Repository\ProjectRepository')->getByUser(
+            $user,
+            $this->getUser()
+        );
 
         $projectsProps = $serializer->serialize(
             ['projects' => $projectsRaw],
@@ -245,7 +248,10 @@ class ProfileController extends Controller
     public function showProjectsAction(User $user)
     {
         $serializer = $this->get('jms_serializer');
-        $projectsRaw = $this->get('Capco\AppBundle\Repository\ProjectRepository')->getByUser($user);
+        $projectsRaw = $this->get('Capco\AppBundle\Repository\ProjectRepository')->getByUser(
+            $user,
+            $this->getUser()
+        );
 
         $projectsProps = $serializer->serialize(
             ['projects' => $projectsRaw],

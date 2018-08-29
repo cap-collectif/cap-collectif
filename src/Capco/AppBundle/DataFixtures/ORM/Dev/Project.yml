@@ -174,5 +174,15 @@ Capco\AppBundle\Entity\Project:
     Author: '@user4'
     themes: ['@theme3']
     exportable: true
-    publishedAt: <dateTimeBetween('-50 days', 'now')>
+    publishedAt: <dateTimeBetween('-2 days', 'now')>
     visibility: 0
+  p20:
+    id: 'ProjectWithCustomAccess'
+    title: Un avenir meilleur pour les nains de jardins (custom access)
+    projectType: '@projectType7'
+    Author: '@user4'
+    themes: ['@theme2']
+    exportable: true
+    publishedAt: <dateTimeBetween('-1 days', 'now')>
+    visibility: 3
+    restrictedViewerGroups: ['@group2', '@group3']

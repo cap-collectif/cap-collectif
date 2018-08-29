@@ -346,9 +346,13 @@ abstract class Comment
         return $this->isPublished() && $this->canDisplayRelatedObject($user);
     }
 
-    public function canContribute(): bool
+    public function canContribute($user = null): bool
     {
-        return $this->isPublished() && !$this->isTrashed() && $this->canContributeToRelatedObject();
+        return (
+            $this->isPublished() &&
+            !$this->isTrashed() &&
+            $this->canContributeToRelatedObject($user)
+        );
     }
 
     public function canVote(): bool
@@ -361,21 +365,21 @@ abstract class Comment
         $this->getRelatedObject()->removeComment($this);
     }
 
-    public function canDisplayRelatedObject(?User $user = null): bool
+    public function canDisplayRelatedObject($user = null): bool
     {
         if ($this->getRelatedObject() instanceof ProposalComment) {
             return $this->getRelatedObject()->canDisplay($user);
         }
 
-        return $this->getRelatedObject()->canDisplay();
+        return $this->getRelatedObject()->canDisplay($user);
     }
 
     /**
      * @return bool
      */
-    public function canContributeToRelatedObject()
+    public function canContributeToRelatedObject($user = null)
     {
-        return $this->getRelatedObject()->canContribute();
+        return $this->getRelatedObject()->canContribute($user);
     }
 
     // ********************** Abstract methods **********************************

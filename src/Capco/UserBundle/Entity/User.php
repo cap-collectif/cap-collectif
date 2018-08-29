@@ -1349,6 +1349,21 @@ class User extends BaseUser
         return $this->userGroups;
     }
 
+    /**
+     * https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730
+     */
+    public function getUserGroupIds(): array
+    {
+        $userGroups = $this->getUserGroups()->toArray();
+        $userGroupsId = [];
+
+        foreach ($userGroups as $userGroup) {
+            $userGroupsId[] = $userGroup->getGroup()->getId();
+        }
+
+        return $userGroupsId;
+    }
+
     public function setUserGroups(Collection $userGroups): self
     {
         $this->userGroups = $userGroups;

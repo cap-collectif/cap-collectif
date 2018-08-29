@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -51,11 +52,11 @@ class AddReplyMutation
     public function __invoke(Argument $input, User $user)
     {
         $values = $input->getRawArguments();
-
+        /** @var Questionnaire $questionnaire */
         $questionnaire = $this->questionnaireRepo->find($values['questionnaireId']);
         unset($values['questionnaireId']);
 
-        if (!$questionnaire->canContribute()) {
+        if (!$questionnaire->canContribute($user)) {
             throw new UserError('You can no longer contribute to this questionnaire step.');
         }
 

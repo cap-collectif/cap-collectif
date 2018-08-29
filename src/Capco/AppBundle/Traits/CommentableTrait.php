@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Post;
 use Doctrine\ORM\Mapping as ORM;
 
 trait CommentableTrait
@@ -57,12 +59,7 @@ trait CommentableTrait
         return $this->comments;
     }
 
-    /**
-     * @param $comment
-     *
-     * @return $this
-     */
-    public function addComment(Comment $comment)
+    public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
@@ -71,39 +68,31 @@ trait CommentableTrait
         return $this;
     }
 
-    /**
-     * @param $comment
-     *
-     * @return $this
-     */
-    public function removeComment(Comment $comment)
+    public function removeComment(Comment $comment): self
     {
         $this->comments->removeElement($comment);
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsCommentable(): bool
     {
         return $this->isCommentable ?? false;
     }
 
-    /**
-     * @param bool $isCommentable
-     */
-    public function setIsCommentable($isCommentable)
+    public function setIsCommentable(bool $isCommentable): self
     {
         $this->isCommentable = $isCommentable;
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function canComment()
+    public function canComment($user = null): bool
     {
+        if (!$this instanceof Event && !$this instanceof Post) {
+            return $this->canContribute($user) && $this->isCommentable;
+        }
+
         return $this->canContribute() && $this->isCommentable;
     }
 }

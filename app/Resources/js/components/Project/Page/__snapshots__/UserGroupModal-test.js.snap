@@ -1,0 +1,362 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
+<div>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    dialogClassName="modal-body-without-padding-top"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <b>
+          <FormattedMessage
+            id="people-with-access-to-project"
+            values={Object {}}
+          />
+        </b>
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <ListGroup
+        bsClass="list-group"
+        className="list-group-custom"
+      >
+        <div
+          id="group2"
+          key="group2"
+        >
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <GroupAvatar
+              className="img-circle avatar avatar-group mr-10"
+              size={35}
+            />
+            <div
+              onClick={[Function]}
+            >
+              Un groupe cool
+            </div>
+          </ListGroupItem>
+          <div
+            className="users-modal"
+          >
+            <ForwardRef(Relay(UserInGroupModal))
+              group={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "group2",
+                  "title": "Un groupe cool",
+                }
+              }
+              handleClose={[Function]}
+              show={false}
+            />
+          </div>
+        </div>
+        <div
+          id="group3"
+          key="group3"
+        >
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <GroupAvatar
+              className="img-circle avatar avatar-group mr-10"
+              size={35}
+            />
+            <div
+              onClick={[Function]}
+            >
+              mon super groupe 2
+            </div>
+          </ListGroupItem>
+          <div
+            className="users-modal"
+          >
+            <ForwardRef(Relay(UserInGroupModal))
+              group={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "group3",
+                  "title": "mon super groupe 2",
+                }
+              }
+              handleClose={[Function]}
+              show={false}
+            />
+          </div>
+        </div>
+      </ListGroup>
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[Function]}
+      />
+    </ModalFooter>
+  </Modal>
+</div>
+`;
+
+exports[`<UserGroupModal /> should render correctly with load more 1`] = `
+<div>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    dialogClassName="modal-body-without-padding-top"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <b>
+          <FormattedMessage
+            id="people-with-access-to-project"
+            values={Object {}}
+          />
+        </b>
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <ListGroup
+        bsClass="list-group"
+        className="list-group-custom"
+      >
+        <div
+          id="group2"
+          key="group2"
+        >
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <GroupAvatar
+              className="img-circle avatar avatar-group mr-10"
+              size={35}
+            />
+            <div
+              onClick={[Function]}
+            >
+              Un groupe cool
+            </div>
+          </ListGroupItem>
+          <div
+            className="users-modal"
+          >
+            <ForwardRef(Relay(UserInGroupModal))
+              group={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "group2",
+                  "title": "Un groupe cool",
+                }
+              }
+              handleClose={[Function]}
+              show={false}
+            />
+          </div>
+        </div>
+        <div
+          id="group3"
+          key="group3"
+        >
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <GroupAvatar
+              className="img-circle avatar avatar-group mr-10"
+              size={35}
+            />
+            <div
+              onClick={[Function]}
+            >
+              mon super groupe 2
+            </div>
+          </ListGroupItem>
+          <div
+            className="users-modal"
+          >
+            <ForwardRef(Relay(UserInGroupModal))
+              group={
+                Object {
+                  "$fragmentRefs": null,
+                  "id": "group3",
+                  "title": "mon super groupe 2",
+                }
+              }
+              handleClose={[Function]}
+              show={false}
+            />
+          </div>
+        </div>
+        <div
+          className="text-center"
+        >
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="primary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="global.more"
+              values={Object {}}
+            />
+          </Button>
+        </div>
+      </ListGroup>
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[Function]}
+      />
+    </ModalFooter>
+  </Modal>
+</div>
+`;
+
+exports[`<UserGroupModal /> should render correctly without group 1`] = `
+<div>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    dialogClassName="modal-body-without-padding-top"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={false}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <b>
+          <FormattedMessage
+            id="people-with-access-to-project"
+            values={Object {}}
+          />
+        </b>
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    />
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[Function]}
+      />
+    </ModalFooter>
+  </Modal>
+</div>
+`;

@@ -61,15 +61,15 @@ class OpinionsController extends FOSRestController
         ConsultationStep $step,
         OpinionType $type
     ) {
-        if (!$step->canContribute()) {
-            throw new BadRequestHttpException('This step is not contribuable.');
-        }
-
         if (!$type->getIsEnabled()) {
             throw new BadRequestHttpException('This opinionType is not enabled.');
         }
-
         $author = $this->getUser();
+
+        if (!$step->canContribute($author)) {
+            throw new BadRequestHttpException('This step is not contribuable.');
+        }
+
         $repo = $this->get('capco.opinion.repository');
 
         if (\count($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
@@ -123,7 +123,7 @@ class OpinionsController extends FOSRestController
             throw new AccessDeniedHttpException();
         }
 
-        if (!$opinion->canContribute()) {
+        if (!$opinion->canContribute($this->getUser())) {
             throw new BadRequestHttpException('Uncontribuable opinion.');
         }
 

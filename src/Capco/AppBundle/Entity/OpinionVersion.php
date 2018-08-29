@@ -377,14 +377,24 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         );
     }
 
-    public function canContribute(): bool
+    public function canContribute($user = null): bool
     {
-        return $this->isPublished() && !$this->isTrashed() && $this->getParent()->canContribute();
+        return (
+            $this->isPublished() &&
+                !$this->isTrashed() &&
+                $this->getParent()->canContribute($user) ||
+            $this->getAuthor() === $user
+        );
     }
 
-    public function canBeDeleted(): bool
+    public function canBeDeleted($user = null): bool
     {
-        return $this->isPublished() && !$this->isTrashed() && $this->getParent()->canBeDeleted();
+        return (
+            $this->isPublished() &&
+                !$this->isTrashed() &&
+                $this->getParent()->canBeDeleted($user) ||
+            $this->getAuthor() === $user
+        );
     }
 
     public function increaseArgumentsCount()

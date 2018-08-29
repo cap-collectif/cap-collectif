@@ -33,20 +33,18 @@ class ProjectSearchResolverSpec extends ObjectBehavior
         $paginator->count()->willReturn(2);
         $paginator->getIterator()->willReturn($arrayIterator);
 
-        $projectRepository->getSearchResults(0, 1, null, null, null, null)
+        $projectRepository
+            ->getSearchResults(0, 1, null, null, null, null, null)
             ->willReturn($paginator);
 
-        $projectSearchParameters->setElements(Argument::type('int'))->willReturn($projectSearchParameters);
-        $projectSearchParameters->setPage(Argument::type('int'))->willReturn($projectSearchParameters);
+        $projectSearchParameters
+            ->setElements(Argument::type('int'))
+            ->willReturn($projectSearchParameters);
+        $projectSearchParameters
+            ->setPage(Argument::type('int'))
+            ->willReturn($projectSearchParameters);
 
-        $projectSearchParameters->toArray()->willReturn([
-            0,
-            1,
-            null,
-            null,
-            null,
-            null,
-        ]);
+        $projectSearchParameters->toArray()->willReturn([0, 1, null, null, null, null]);
 
         $projectSearchParameters->getElements()->willReturn(0);
         $projectSearchParameters->getPage()->willReturn(1);

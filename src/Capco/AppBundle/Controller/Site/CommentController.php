@@ -53,7 +53,7 @@ class CommentController extends Controller
      */
     public function updateCommentAction(Request $request, Comment $comment)
     {
-        if (false === $comment->canContribute()) {
+        if (false === $comment->canContribute($this->getUser())) {
             throw new ProjectAccessDeniedException(
                 $this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle')
             );
@@ -109,7 +109,7 @@ class CommentController extends Controller
      */
     public function deleteCommentAction(Request $request, Comment $comment)
     {
-        if (false === $comment->canContribute()) {
+        if (false === $comment->canContribute($this->getUser())) {
             throw new ProjectAccessDeniedException(
                 $this->get('translator')->trans('comment.error.no_contribute', [], 'CapcoAppBundle')
             );

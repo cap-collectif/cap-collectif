@@ -40,8 +40,8 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $this->setAuthor($author);
         $this->getAuthor()->shouldReturn($author);
 
-        $this->canDisplayForViewer($viewer)->shouldReturn(true);
-        $this->canDisplayForViewer(null)->shouldReturn(true);
+        $this->getVisibilityForViewer($viewer)->shouldReturn([2]);
+        $this->getVisibilityForViewer(null)->shouldReturn([2]);
     }
 
     function it_is_visible_for_admin_only(User $viewer, User $author)
@@ -64,16 +64,16 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $this->setAuthor($author);
         $this->getAuthor()->shouldReturn($author);
 
-        $this->canDisplayForViewer($viewer)->shouldReturn(false);
-        $this->canDisplayForViewer(null)->shouldReturn(false);
+        $this->getVisibilityForViewer($viewer)->shouldReturn([2]);
+        $this->getVisibilityForViewer(null)->shouldReturn([2]);
 
         $viewer->hasRole('ROLE_ADMIN')->willReturn(true);
         $viewer->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN']);
-        $this->canDisplayForViewer($viewer)->shouldReturn(true);
+        $this->getVisibilityForViewer($viewer)->shouldReturn([2, 1]);
 
         $viewer->hasRole('ROLE_SUPER_ADMIN')->willReturn(true);
         $viewer->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);
-        $this->canDisplayForViewer($viewer)->shouldReturn(true);
+        $this->getVisibilityForViewer($viewer)->shouldReturn([2, 0, 1, 3]);
     }
 
     function it_is_visible_for_me_only(User $viewer, User $author)
@@ -96,17 +96,17 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $this->setAuthor($author);
         $this->getAuthor()->shouldReturn($author);
 
-        $this->canDisplayForViewer($author)->shouldReturn(true);
-        $this->canDisplayForViewer($viewer)->shouldReturn(false);
+        $this->getVisibilityForViewer($author)->shouldReturn([2, 1]);
+        $this->getVisibilityForViewer($viewer)->shouldReturn([2]);
 
         $viewer->hasRole('ROLE_ADMIN')->willReturn(true);
         $viewer->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN']);
-        $this->canDisplayForViewer($viewer)->shouldReturn(false);
+        $this->getVisibilityForViewer($viewer)->shouldReturn([2, 1]);
 
         $viewer->hasRole('ROLE_SUPER_ADMIN')->willReturn(true);
         $viewer->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);
-        $this->canDisplayForViewer($viewer)->shouldReturn(true);
+        $this->getVisibilityForViewer($viewer)->shouldReturn([2, 0, 1, 3]);
 
-        $this->canDisplayForViewer(null)->shouldReturn(false);
+        $this->getVisibilityForViewer(null)->shouldReturn([2]);
     }
 }

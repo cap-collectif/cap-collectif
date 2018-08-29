@@ -33,7 +33,7 @@ export const rendering = ({
   }
   // eslint-disable-next-line
   if (props && props.project != null && props.project.visibility != null) {
-    if (props.project.visibility !== 'PUBLIC') {
+    if (props.project.visibility !== 'PUBLIC' && props.project.visibility !== 'CUSTOM') {
       const alertText =
         props.project.visibility === 'ME'
           ? 'global.draft.only_visible_by_you'

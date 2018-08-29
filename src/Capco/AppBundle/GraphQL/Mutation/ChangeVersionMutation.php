@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Form\OpinionVersionType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -35,6 +36,7 @@ class ChangeVersionMutation implements MutationInterface
     public function __invoke(Arg $input, User $user): array
     {
         $versionId = $input->offsetGet('versionId');
+        /** @var OpinionVersion $version */
         $version = $this->versionRepo->find($versionId);
 
         if (!$version) {
@@ -45,7 +47,7 @@ class ChangeVersionMutation implements MutationInterface
             throw new UserError("Can't update the version of someone else.");
         }
 
-        if (!$version->canContribute()) {
+        if (!$version->canContribute($user)) {
             throw new UserError("Can't update uncontributable version.");
         }
 

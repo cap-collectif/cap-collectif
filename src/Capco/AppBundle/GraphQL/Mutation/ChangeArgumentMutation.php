@@ -48,7 +48,7 @@ class ChangeArgumentMutation
             throw new UserError("Can't update the argument of someone else.");
         }
 
-        if (!$argument->canContribute()) {
+        if (!$argument->canContribute($user)) {
             throw new UserError("Can't update uncontributable argument.");
         }
 

@@ -505,9 +505,9 @@ class Opinion implements OpinionContributionInterface
         );
     }
 
-    public function canContribute(): bool
+    public function canContribute($viewer = null): bool
     {
-        return $this->isActive() && $this->getStep()->canContribute();
+        return $this->isActive() && $this->getStep()->canContribute($viewer);
     }
 
     public function isActive(): bool
@@ -515,9 +515,9 @@ class Opinion implements OpinionContributionInterface
         return $this->isPublished() && !$this->isTrashed();
     }
 
-    public function canBeDeleted(): bool
+    public function canBeDeleted($viewer = null): bool
     {
-        return $this->isActive() && $this->getStep()->isActive();
+        return $this->isActive() && $this->getStep()->isActive($viewer);
     }
 
     public function getSortedAppendices()

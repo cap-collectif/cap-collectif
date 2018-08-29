@@ -1343,7 +1343,7 @@ type Group implements Node {
   id: ID!
 
   # Identifies the group name.
-  title: String!
+  title: String
 
   # Identifies the description of the group.
   description: String
@@ -1355,6 +1355,7 @@ type Group implements Node {
 # A connection to a list of items.
 type GroupConnection {
   totalCount: Int!
+  totalUserCount: Int!
 
   # Information to aid in pagination.
   pageInfo: PageInfo!
@@ -1952,13 +1953,22 @@ type Project implements Node {
 
   # State of activation of Opinion subscription.
   opinionCanBeFollowed: Boolean!
+  restrictedViewers(after: String, first: Int, before: String, last: Int): GroupConnection
 }
 
-# 3 possible values
+# 4 possible values
 enum ProjectVisibility {
+  # visible for me only
   ME
+
+  # visible for group admin
   ADMIN
+
+  # visible for all
   PUBLIC
+
+  # the project is restricted to users groups
+  CUSTOM
 }
 
 # A budget contribution

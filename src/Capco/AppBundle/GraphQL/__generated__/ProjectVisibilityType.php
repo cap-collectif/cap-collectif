@@ -21,24 +21,30 @@ final class ProjectVisibilityType extends EnumType implements GeneratedTypeInter
             'values' => [
                 'ME' => [
                     'name' => 'ME',
-                    'value' => 0,
+                    'value' => \constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_ME"),
                     'deprecationReason' => null,
-                    'description' => null,
+                    'description' => 'visible for me only',
                 ],
                 'ADMIN' => [
                     'name' => 'ADMIN',
-                    'value' => 1,
+                    'value' => \constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_ADMIN"),
                     'deprecationReason' => null,
-                    'description' => null,
+                    'description' => 'visible for group admin',
                 ],
                 'PUBLIC' => [
                     'name' => 'PUBLIC',
-                    'value' => 2,
+                    'value' => \constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_PUBLIC"),
                     'deprecationReason' => null,
-                    'description' => null,
+                    'description' => 'visible for all',
+                ],
+                'CUSTOM' => [
+                    'name' => 'CUSTOM',
+                    'value' => \constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_CUSTOM"),
+                    'deprecationReason' => null,
+                    'description' => 'the project is restricted to users groups',
                 ],
             ],
-            'description' => '3 possible values',
+            'description' => '4 possible values',
         ];
         };
         $config = $configProcessor->process(LazyConfig::create($configLoader, $globalVariables))->load();

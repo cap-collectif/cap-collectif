@@ -6,47 +6,14 @@ use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ProjectRepository extends ServiceEntityRepository
+class ProjectRepository extends EntityRepository
 {
     use ProjectVisibilityTrait;
-
-    /**
-     * @var TokenStorageInterface $token
-     */
-    private $token;
-
-    public function __construct(ManagerRegistry $registry, TokenStorageInterface $tokenStorage)
-    {
-        $this->token = $tokenStorage;
-        if ($tokenStorage) {
-            $this->token = $tokenStorage->getToken();
-        }
-        parent::__construct($registry, Project::class);
-    }
-
-    /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function getOne($slug)
-    {
-        $qb = $this->getVisibilityQueryBuilder()
-            ->addSelect('t', 'pas', 's', 'pov')
-            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('p.steps', 'pas')
-            ->leftJoin('pas.step', 's')
-            ->leftJoin('p.Cover', 'pov')
-            ->andWhere('p.slug = :slug')
-            ->andWhere('s.isEnabled = :enabled')
-            ->setParameter('slug', $slug);
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
 
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
@@ -67,9 +34,9 @@ class ProjectRepository extends ServiceEntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getByUser($user)
+    public function getByUser(User $user, $viewer = null)
     {
-        $qb = $this->getVisibilityQueryBuilder()
+        $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
             ->addSelect('a', 'm', 't')
             ->leftJoin('p.Author', 'a')
             ->leftJoin('a.media', 'm')
@@ -81,33 +48,24 @@ class ProjectRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute();
     }
 
-    /**
-     * Get search results.
-     *
-     * @param int $nbByPage
-     * @param int $page
-     * @param null $theme
-     * @param null $sort
-     * @param null $term
-     * @param null $type
-     *
-     * @return Paginator
-     */
     public function getSearchResults(
         int $nbByPage = 8,
         int $page = 1,
         $theme = null,
         $sort = null,
         $term = null,
-        $type = null
-    ) {
+        $type = null,
+        $viewer = null
+    ): Paginator {
         if ($page < 1) {
             throw new \InvalidArgumentException(
                 sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
             );
         }
-        // TODO in next feature, to find projects accessible by current user, parse user to query
-        $qb = $this->getVisibilityQueryBuilder()
+
+        $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer);
+
+        $qb
             ->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
@@ -146,41 +104,10 @@ class ProjectRepository extends ServiceEntityRepository
         return new Paginator($query);
     }
 
-    /**
-     * Count search results.
-     *
-     * @param null $themeSlug
-     * @param null $term
-     *
-     * @return mixed
-     */
-    public function countSearchResults($themeSlug = null, $term = null)
+    public function getLastPublished($limit = 1, $offset = 0, $viewer = null): array
     {
-        $qb = $this->getVisibilityQueryBuilder()
-            ->select('COUNT(p.id)')
-            ->innerJoin('p.themes', 't');
-
-        if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
-            $qb->andWhere('t.slug = :themeSlug')->setParameter('themeSlug', $themeSlug);
-        }
-
-        if (null !== $term) {
-            $qb->andWhere('p.title LIKE :term')->setParameter('term', '%' . $term . '%');
-        }
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    /**
-     * Get last enabled projects.
-     *
-     * @param mixed $limit
-     * @param mixed $offset
-     */
-    public function getLastPublished($limit = 1, $offset = 0)
-    {
-        $qb = $this->getVisibilityQueryBuilder()
-            ->addSelect('t', 'pas', 's', 'pov')
+        $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
+            ->addSelect('t', 'pas', 's', 'pov', 'pvg')
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 's')
@@ -205,9 +132,9 @@ class ProjectRepository extends ServiceEntityRepository
         return $projects;
     }
 
-    public function getProjectsByTheme(Theme $theme): array
+    public function getProjectsByTheme(Theme $theme, $viewer = null): array
     {
-        $query = $this->getVisibilityQueryBuilder()
+        $query = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
             ->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
@@ -221,59 +148,51 @@ class ProjectRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function countPublished()
+    public function countPublished($viewer = null)
     {
-        $qb = $this->getVisibilityQueryBuilder()->select('COUNT(p.id)');
+        $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)->select('COUNT(p.id)');
 
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    /**
-     * Get last projects by theme.
-     *
-     * @param theme
-     * @param int $limit
-     * @param int $offset
-     * @param mixed $themeId
-     *
-     * @return mixed
-     */
-    public function getLastByTheme($themeId, $limit = null, $offset = null)
+    public function getProjectsViewerCanSeeQueryBuilder($viewer = null): QueryBuilder
     {
-        $qb = $this->getVisibilityQueryBuilder()
-            ->addSelect('pov', 't', 'pas', 's')
-            ->leftJoin('p.Cover', 'pov')
-            ->leftJoin('p.themes', 't')
-            ->leftJoin('p.steps', 'pas')
-            ->leftJoin('pas.step', 's')
-            ->andWhere(':theme MEMBER OF p.themes')
-            ->setParameter('theme', $themeId)
-            ->orderBy('p.publishedAt', 'DESC');
+        $visibility = $this->getVisibilityForViewer($viewer);
 
-        if ($limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        if ($offset) {
-            $qb->setFirstResult($offset);
-        }
-
-        $paginator = new Paginator($qb->getQuery());
-        $projects = [];
-        foreach ($paginator as $project) {
-            $projects[] = $project;
-        }
-
-        return $projects;
-    }
-
-    public function getVisibilityQueryBuilder($user = null): QueryBuilder
-    {
-        $visibility = $this->getVisibilityByViewer($user);
-
-        return $this->createQueryBuilder('p')
-            ->select('p')
-            ->andWhere("p.visibility >= :visibility")
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.restrictedViewerGroups', 'pvg')
+            ->orWhere("p.visibility IN (:visibility)")
             ->setParameter('visibility', $visibility);
+
+        // https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730
+        /** @var User $viewer */
+        $viewerGroups = $viewer && is_object($viewer) ? $viewer->getUserGroupIds() : [];
+
+        if ($viewer && is_object($viewer) && !$viewer->isSuperAdmin()) {
+            if ($viewerGroups) {
+                $qb->orWhere(
+                    $qb
+                        ->expr()
+                        ->andX(
+                            $qb->expr()->eq('p.visibility', ':custom'),
+                            $qb->expr()->in('pvg.id', ':pvgId')
+                        )
+                );
+                $qb->setParameter('custom', ProjectVisibilityMode::VISIBILITY_CUSTOM);
+                $qb->setParameter('pvgId', $viewerGroups);
+            }
+            $qb->orWhere(
+                $qb
+                    ->expr()
+                    ->andX(
+                        $qb->expr()->eq('p.visibility', ':me'),
+                        $qb->expr()->eq('p.Author', ':author')
+                    )
+            );
+            $qb->setParameter('me', ProjectVisibilityMode::VISIBILITY_ME);
+            $qb->setParameter('author', $viewer);
+        }
+
+        return $qb;
     }
 }

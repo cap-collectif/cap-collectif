@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Source;
 use Swarrot\Broker\Message;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ApiSourceType;
@@ -35,6 +36,7 @@ class ChangeSourceMutation implements MutationInterface
     public function __invoke(Arg $input, User $viewer): array
     {
         $sourceId = $input->offsetGet('sourceId');
+        /** @var Source $source */
         $source = $this->sourceRepo->find($sourceId);
 
         if (!$source) {
@@ -45,7 +47,7 @@ class ChangeSourceMutation implements MutationInterface
             throw new UserError("Can't update the source of someone else.");
         }
 
-        if (!$source->canContribute()) {
+        if (!$source->canContribute($viewer)) {
             throw new UserError("Can't update uncontributable source.");
         }
 

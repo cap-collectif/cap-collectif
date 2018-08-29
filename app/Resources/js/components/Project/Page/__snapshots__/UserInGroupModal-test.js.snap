@@ -1,0 +1,361 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] = `
+<div>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    dialogClassName="modal-body-without-padding-top"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    id="group2-modal"
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <b>
+          Mon super groupe 2
+        </b>
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <ListGroup
+        bsClass="list-group"
+        className="list-group-custom"
+      >
+        <div
+          id="user1"
+          key="user1"
+        >
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <UserAvatar
+              anchor={true}
+              className=""
+              defaultAvatar={null}
+              onBlur={[Function]}
+              onFocus={[Function]}
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
+              size={45}
+              style={Object {}}
+              user={
+                Object {
+                  "id": "user1",
+                  "media": Object {
+                    "id": "media1",
+                    "name": "perl1",
+                    "size": "45px",
+                    "url": "http://poudre.de/perlinpinpin.jpg",
+                  },
+                  "show_url": "http://poudre.de/perlinpinpin",
+                  "username": "Perlinpinpin",
+                }
+              }
+            />
+            Perlinpinpin
+          </ListGroupItem>
+        </div>
+        <div
+          id="user2"
+          key="user2"
+        >
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <UserAvatar
+              anchor={true}
+              className=""
+              defaultAvatar={null}
+              onBlur={[Function]}
+              onFocus={[Function]}
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
+              size={45}
+              style={Object {}}
+              user={
+                Object {
+                  "id": "user2",
+                  "media": Object {
+                    "id": "media2",
+                    "name": "toto",
+                    "size": "45px",
+                    "url": "http://toto.com/image.jpg",
+                  },
+                  "show_url": "htp://toto.com",
+                  "username": "Toto",
+                }
+              }
+            />
+            Toto
+          </ListGroupItem>
+        </div>
+      </ListGroup>
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[Function]}
+      />
+    </ModalFooter>
+  </Modal>
+</div>
+`;
+
+exports[`<UserInGroupModal /> should render correctly with user in load more 1`] = `
+<div>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    dialogClassName="modal-body-without-padding-top"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    id="group2-modal"
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <b>
+          Mon super groupe 2
+        </b>
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <ListGroup
+        bsClass="list-group"
+        className="list-group-custom"
+      >
+        <div
+          id="user1"
+          key="user1"
+        >
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <UserAvatar
+              anchor={true}
+              className=""
+              defaultAvatar={null}
+              onBlur={[Function]}
+              onFocus={[Function]}
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
+              size={45}
+              style={Object {}}
+              user={
+                Object {
+                  "id": "user1",
+                  "media": Object {
+                    "id": "media1",
+                    "name": "perl1",
+                    "size": "45px",
+                    "url": "http://poudre.de/perlinpinpin.jpg",
+                  },
+                  "show_url": "http://poudre.de/perlinpinpin",
+                  "username": "Perlinpinpin",
+                }
+              }
+            />
+            Perlinpinpin
+          </ListGroupItem>
+        </div>
+        <div
+          id="user2"
+          key="user2"
+        >
+          <ListGroupItem
+            bsClass="list-group-item"
+            className="list-group-item-custom"
+            listItem={false}
+          >
+            <UserAvatar
+              anchor={true}
+              className=""
+              defaultAvatar={null}
+              onBlur={[Function]}
+              onFocus={[Function]}
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
+              size={45}
+              style={Object {}}
+              user={
+                Object {
+                  "id": "user2",
+                  "media": Object {
+                    "id": "media2",
+                    "name": "toto",
+                    "size": "45px",
+                    "url": "http://toto.com/image.jpg",
+                  },
+                  "show_url": "htp://toto.com",
+                  "username": "Toto",
+                }
+              }
+            />
+            Toto
+          </ListGroupItem>
+        </div>
+        <div
+          className="text-center"
+        >
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="primary"
+            disabled={false}
+            id="load-more"
+            onClick={[Function]}
+          >
+            <FormattedMessage
+              id="global.more"
+              values={Object {}}
+            />
+          </Button>
+        </div>
+      </ListGroup>
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[Function]}
+      />
+    </ModalFooter>
+  </Modal>
+</div>
+`;
+
+exports[`<UserInGroupModal /> should render correctly without user in group 1`] = `
+<div>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    dialogClassName="modal-body-without-padding-top"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    id="group1-modal"
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={false}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <b>
+          Mon super groupe 1
+        </b>
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    />
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.close"
+        onClose={[Function]}
+      />
+    </ModalFooter>
+  </Modal>
+</div>
+`;

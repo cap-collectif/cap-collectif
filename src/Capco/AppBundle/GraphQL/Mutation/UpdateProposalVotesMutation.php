@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -20,12 +19,12 @@ class UpdateProposalVotesMutation
     private $logger;
 
     public function __construct(
-      EntityManagerInterface $em,
-      $proposalCollectVoteRepository,
-      $proposalSelectionVoteRepository,
-      AbstractStepRepository $stepRepo,
-      LoggerInterface $logger)
-    {
+        EntityManagerInterface $em,
+        $proposalCollectVoteRepository,
+        $proposalSelectionVoteRepository,
+        AbstractStepRepository $stepRepo,
+        LoggerInterface $logger
+    ) {
         $this->em = $em;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -44,9 +43,19 @@ class UpdateProposalVotesMutation
         $votesInput = $input->offsetGet('votes');
 
         if ($step instanceof SelectionStep) {
-            $votes = $this->proposalSelectionVoteRepository->getByAuthorAndStep($user, $step, -1, 0)->getIterator();
+            $votes = $this->proposalSelectionVoteRepository->getByAuthorAndStep(
+                $user,
+                $step,
+                -1,
+                0
+            )->getIterator();
         } elseif ($step instanceof CollectStep) {
-            $votes = $this->proposalCollectVoteRepository->getByAuthorAndStep($user, $step, -1, 0)->getIterator();
+            $votes = $this->proposalCollectVoteRepository->getByAuthorAndStep(
+                $user,
+                $step,
+                -1,
+                0
+            )->getIterator();
         } else {
             throw new UserError(sprintf('Not good step with id "%s"', $stepId));
         }
@@ -60,11 +69,11 @@ class UpdateProposalVotesMutation
             }
             if ($voteInput) {
                 $vote->setPrivate($voteInput['anonymous']);
-                if ($step->canContribute() && $step->isVotesRanking()) {
+                if ($step->canContribute($user) && $step->isVotesRanking()) {
                     $vote->setPosition(array_search($voteInput, $votesInput, true));
                 }
             } else {
-                if (!$step->canContribute()) {
+                if (!$step->canContribute($user)) {
                     throw new UserError('This step is not contribuable.');
                 }
                 $this->em->remove($vote);

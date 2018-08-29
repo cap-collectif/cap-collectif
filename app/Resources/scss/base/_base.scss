@@ -260,6 +260,10 @@
 svg.avatar {
   vertical-align: middle;
 }
+svg.avatar-group{
+  transform: rotateX(180deg);
+  color: $white;
+}
 
 /* ======================= Ellipsis ============================*/
 

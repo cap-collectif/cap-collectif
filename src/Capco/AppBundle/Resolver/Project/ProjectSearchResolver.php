@@ -2,7 +2,6 @@
 namespace Capco\AppBundle\Resolver\Project;
 
 use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProjectSearchResolver
@@ -14,9 +13,9 @@ class ProjectSearchResolver
         $this->projectRepository = $projectRepository;
     }
 
-    public function search(ProjectSearchParameters $projectSearchParameters): array
+    public function search(ProjectSearchParameters $projectSearchParameters, $user = null): array
     {
-        $projects = $this->getProjects($projectSearchParameters);
+        $projects = $this->getProjects($projectSearchParameters, $user);
         $count = $projects->count();
 
         return [
@@ -30,9 +29,12 @@ class ProjectSearchResolver
         ];
     }
 
-    protected function getProjects(ProjectSearchParameters $projectSearchParameters): Paginator
-    {
-        // TODO in next feature, to find projects accessible by current user, parse user to query
-        return $this->projectRepository->getSearchResults(...$projectSearchParameters->toArray());
+    protected function getProjects(
+        ProjectSearchParameters $projectSearchParameters,
+        $user
+    ): Paginator {
+        $params = array_merge($projectSearchParameters->toArray(), [$user]);
+
+        return $this->projectRepository->getSearchResults(...$params);
     }
 }

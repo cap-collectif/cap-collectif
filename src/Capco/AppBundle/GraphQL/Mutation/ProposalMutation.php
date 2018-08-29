@@ -1,6 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Follower;
@@ -21,10 +23,17 @@ use Capco\AppBundle\Enum\ProposalPublicationStatus;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\Form\Form;
 
 class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
+    private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
 
     public function changeNotation(Argument $input)
     {
@@ -287,25 +296,25 @@ class ProposalMutation implements ContainerAwareInterface
     public function create(Argument $input, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $logger = $this->container->get('logger');
         $formFactory = $this->container->get('form.factory');
         $proposalFormRepo = $this->container->get('capco.proposal_form.repository');
 
         $values = $input->getRawArguments();
 
+        /** @var ProposalForm $proposalForm */
         $proposalForm = $proposalFormRepo->find($values['proposalFormId']);
         if (!$proposalForm) {
             $error = sprintf('Unknown proposalForm with id "%s"', $values['proposalFormId']);
-            $logger->error($error);
+            $this->logger->error($error);
             throw new UserError($error);
         }
-        if (!$proposalForm->canContribute() && !$user->isAdmin()) {
+        if (!$proposalForm->canContribute($user) && !$user->isAdmin()) {
             throw new UserError('You can no longer contribute to this collect step.');
         }
         unset($values['proposalFormId']); // This only usefull to retrieve the proposalForm
 
         $draft = false;
-        if (array_key_exists('draft', $values)) {
+        if (isset($values['draft'])) {
             $draft = $values['draft'];
             unset($values['draft']);
         }
@@ -334,7 +343,7 @@ class ProposalMutation implements ContainerAwareInterface
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
         ]);
 
-        $logger->info('createProposal: ' . json_encode($values, true));
+        $this->logger->info('createProposal: ' . json_encode($values, true));
         $form->submit($values);
 
         if (!$form->isValid()) {
@@ -365,14 +374,13 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
         $proposalRepo = $this->container->get('capco.proposal.repository');
-        $logger = $this->container->get('logger');
 
         $values = $input->getRawArguments();
         $proposal = $proposalRepo->find($values['id']);
 
         if (!$proposal) {
             $error = sprintf('Unknown proposal with id "%s"', $values['id']);
-            $logger->error($error);
+            $this->logger->error($error);
             throw new UserError($error);
         }
         unset($values['id']); // This only usefull to retrieve the proposal
@@ -380,18 +388,18 @@ class ProposalMutation implements ContainerAwareInterface
 
         if ($user !== $proposal->getAuthor() && !$user->isAdmin()) {
             $error = sprintf('You must be the author to update a proposal.');
-            $logger->error($error);
+            $this->logger->error($error);
             throw new UserError($error);
         }
 
-        if (!$proposal->canContribute() && !$user->isAdmin()) {
+        if (!$proposal->canContribute($user) && !$user->isAdmin()) {
             $error = sprintf('Sorry, you can\'t contribute to this proposal anymore.');
-            $logger->error($error);
+            $this->logger->error($error);
             throw new UserError($error);
         }
 
         $draft = false;
-        if (array_key_exists('draft', $values)) {
+        if (isset($values['draft'])) {
             if ($proposal->isDraft()) {
                 $draft = $values['draft'];
             }
@@ -408,16 +416,16 @@ class ProposalMutation implements ContainerAwareInterface
         ]);
 
         if (!$user->isSuperAdmin()) {
-            if (array_key_exists('author', $values)) {
+            if (isset($values['author'])) {
                 $error = 'Only a user with role ROLE_SUPER_ADMIN can update an author.';
-                $logger->error($error);
+                $this->logger->error($error);
                 // For now we only log an error and unset the submitted value…
                 unset($values['author']);
             }
             $form->remove('author');
         }
 
-        $logger->info('changeContent: ' . json_encode($values, true));
+        $this->logger->info(__METHOD__ . ' : ' . var_export($values, true));
         $form->submit($values, false);
 
         if (!$form->isValid()) {
@@ -446,23 +454,23 @@ class ProposalMutation implements ContainerAwareInterface
 
         if (
             (!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes()) &&
-            array_key_exists('theme', $values)
+            isset($values['theme'])
         ) {
             unset($values['theme']);
         }
 
-        if (!$proposalForm->isUsingCategories() && array_key_exists('category', $values)) {
+        if (!$proposalForm->isUsingCategories() && isset($values['category'])) {
             unset($values['category']);
         }
 
         if (
             (!$toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict()) &&
-            array_key_exists('district', $values)
+            isset($values['districts'])
         ) {
             unset($values['district']);
         }
 
-        if (!$proposalForm->getUsingAddress() && array_key_exists('address', $values)) {
+        if (!$proposalForm->getUsingAddress() && isset($values['address'])) {
             unset($values['address']);
         }
 
@@ -475,13 +483,14 @@ class ProposalMutation implements ContainerAwareInterface
         return $values;
     }
 
-    private function handleErrors($form)
+    private function handleErrors(Form $form)
     {
-        $logger = $this->container->get('logger');
         $errors = [];
         foreach ($form->getErrors() as $error) {
-            $logger->error((string) $error->getMessage());
-            $logger->error('Extra data: ' . implode($form->getExtraData()));
+            $this->logger->error((string) $error->getMessage());
+            $this->logger->error(
+                $form->getName() . ' ' . 'Extra data: ' . implode($form->getExtraData())
+            );
             $errors[] = (string) $error->getMessage();
         }
         if (!empty($errors)) {

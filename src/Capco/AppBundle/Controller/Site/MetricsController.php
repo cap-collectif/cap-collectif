@@ -75,7 +75,7 @@ class MetricsController extends Controller
         $steps = $this->get('capco.abstract_step.repository')->findAll();
         $contribuableStepsCount = \count(
             array_reduce($steps, function ($step) {
-                return $step && $step->canContribute();
+                return $step && $step->canContribute($this->getUser());
             })
         );
 

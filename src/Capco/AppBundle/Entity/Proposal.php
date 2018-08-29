@@ -505,13 +505,13 @@ class Proposal
         return !$this->isPrivate() || $this->isSelected();
     }
 
-    public function canContribute(): bool
+    public function canContribute($viewer = null): bool
     {
         return (
             ($this->isPublished() || $this->isDraft()) &&
             !$this->isTrashed() &&
             $this->getStep() &&
-            $this->getStep()->canContribute()
+            $this->getStep()->canContribute($viewer)
         );
     }
 

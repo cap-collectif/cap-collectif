@@ -212,4 +212,22 @@ trait ProjectStepsTrait
         )->getVotesStatsItemsSelector();
         $this->assertNumElements($number, $selector);
     }
+
+    /**
+     * @Then I open restricted access modal
+     */
+    public function iOpenRestrictedAccessModal()
+    {
+        $this->navigationContext->getPage('collect page')->clickOnRestrictedAccess();
+        $this->iWait(1);
+    }
+
+    /**
+     * @Then I unfold :groupId group inside restricted access modal
+     */
+    public function iUnfoldGroupInsideRestrictedAccessModal(string $groupId)
+    {
+        $this->navigationContext->getPage('collect page')->iClickOnUserGroupModal($groupId);
+        $this->iWait(1);
+    }
 }

@@ -167,9 +167,9 @@ class HomepageController extends Controller
         $offset = $offset ?? 0;
         $serializer = $this->get('jms_serializer');
         $projectRepo = $this->get('Capco\AppBundle\Repository\ProjectRepository');
-        $count = $projectRepo->countPublished();
+        $count = $projectRepo->countPublished($this->getUser());
         $props = $serializer->serialize(
-            ['projects' => $projectRepo->getLastPublished($max, $offset)],
+            ['projects' => $projectRepo->getLastPublished($max, $offset, $this->getUser())],
             'json',
             SerializationContext::create()->setGroups([
                 'Projects',
@@ -179,7 +179,6 @@ class HomepageController extends Controller
                 'ProjectType',
             ])
         );
-
         return ['max' => $max, 'props' => $props, 'count' => $count, 'section' => $section];
     }
 

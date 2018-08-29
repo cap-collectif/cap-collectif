@@ -47,7 +47,7 @@ class RemoveOpinionVoteMutation implements MutationInterface
 
         $contribution = $opinion ?? $version;
 
-        if (!$contribution->canContribute()) {
+        if (!$contribution->canContribute($viewer)) {
             throw new UserError('Uncontribuable opinion.');
         }
 

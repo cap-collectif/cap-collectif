@@ -33,7 +33,7 @@ class SourcesController extends FOSRestController
         SourceVote $vote,
         ConstraintViolationListInterface $validationErrors
     ) {
-        if (!$source->canContribute()) {
+        if (!$source->canContribute($this->getUser())) {
             throw new BadRequestHttpException('Uncontributable source.');
         }
 
@@ -67,7 +67,7 @@ class SourcesController extends FOSRestController
      */
     public function deleteSourceVoteAction(Source $source)
     {
-        if (!$source->canContribute()) {
+        if (!$source->canContribute($this->getUser())) {
             throw new BadRequestHttpException('Uncontributable source.');
         }
 

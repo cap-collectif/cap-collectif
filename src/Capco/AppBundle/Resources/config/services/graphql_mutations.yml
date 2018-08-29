@@ -1,7 +1,5 @@
 services:
   Capco\AppBundle\GraphQL\Mutation\DeleteProposalMutation:
-    # only for sf < 3.3
-    class: Capco\AppBundle\GraphQL\Mutation\DeleteProposalMutation
     arguments:
       - '@doctrine.orm.default_entity_manager'
       - '@capco.proposal.repository'
@@ -11,8 +9,6 @@ services:
     tags:
       - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation:
-    # only for sf < 3.3
-    class: Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation
     arguments:
       - '@doctrine.orm.default_entity_manager'
       - '@validator'
@@ -33,8 +29,6 @@ services:
     tags:
       - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\UpdateProposalVotesMutation:
-    # only for sf < 3.3
-    class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalVotesMutation
     arguments:
       - '@doctrine.orm.default_entity_manager'
       - '@capco.proposal_collect_vote.repository'
@@ -219,6 +213,7 @@ services:
         }
       - { name: overblog_graphql.mutation, alias: 'changeProposalContent', method: 'changeContent' }
       - { name: overblog_graphql.mutation, alias: 'createProposal', method: 'create' }
+    autowire: true
 
   capco.mutation.proposal_form:
     class: Capco\AppBundle\GraphQL\Mutation\ProposalFormMutation

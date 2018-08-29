@@ -5,7 +5,7 @@ interface Sourceable
 {
     public function getSources();
 
-    public function canContribute(): bool;
+    public function canContribute($user = null): bool;
 
     public function canDisplay($user = null): bool;
 

@@ -39,6 +39,7 @@ import ParisUserNotValidApp from '../js/startup/ParisUserNotValidApp';
 import EditProfileApp from '../js/startup/EditProfileApp';
 import CookieApp from '../js/startup/CookieApp';
 import UserAdminPageApp from '../js/startup/UserAdminPageApp';
+import ProjectRestrictedAccessAlertApp from '../js/startup/ProjectRestrictedAccessAlertApp';
 import ProjectRestrictedAccessApp from '../js/startup/ProjectRestrictedAccessApp';
 
 const emptyFunction = () => {};
@@ -89,5 +90,6 @@ ReactOnRails.register({
   EditProfileApp,
   CookieApp,
   UserAdminPageApp,
+  ProjectRestrictedAccessAlertApp,
   ProjectRestrictedAccessApp,
 });

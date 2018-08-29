@@ -304,6 +304,10 @@ class ProjectAdmin extends CapcoAdmin
                 'required' => true,
                 'choices_as_values' => true,
                 'choice_translation_domain' => 'CapcoAppBundle',
+                'attr' => ['class' => 'project-visibility-selector'],
+            ])
+            ->add('restrictedViewerGroups', null, [
+                'attr' => ['class' => 'project-visibility-group-selector'],
             ])
             ->end()
             ->with('admin.fields.project.advanced')

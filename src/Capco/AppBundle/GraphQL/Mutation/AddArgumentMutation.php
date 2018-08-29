@@ -69,7 +69,7 @@ class AddArgumentMutation
             return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
-        if (!$argumentable->canContribute()) {
+        if (!$argumentable->canContribute($author)) {
             $this->logger->error(
                 'Can\'t add an argument to an uncontributable argumentable with id: ' .
                     $argumentableId
