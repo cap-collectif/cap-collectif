@@ -20,7 +20,7 @@ export class CardProposal extends React.Component<Props> {
             <img src={proposal.user.avatar} alt={proposal.user.name} />
           </div>
           <div>
-            <a href="">{proposal.user.name}</a>
+            <a href="https://ui.cap-collectif.com">{proposal.user.name}</a>
             <p>
               <div className="excerpt small">{proposal.user.publicationDate}</div>
             </p>
@@ -30,7 +30,7 @@ export class CardProposal extends React.Component<Props> {
         <div className="card__body">
           <div className="card__body__infos">
             <h3 className="card__title">
-              <a href="#">{proposal.title}</a>
+              <a href="https://ui.cap-collectif.com">{proposal.title}</a>
             </h3>
             <div className="excerpt small">{proposal.content}</div>
             <TagsList>

@@ -20,9 +20,13 @@ export class CardTheme extends React.Component<Props> {
         <div className="card__body">
           <div className="card__body__infos">
             <h3 className="card__title">
-              <a href="#">{theme.title}</a>
+              <a href="https://ui.cap-collectif.com">{theme.title}</a>
             </h3>
-            <InlineList>{theme.counters.list.map(counter => <li>{counter}</li>)}</InlineList>
+            <InlineList>
+              {theme.counters.list.map(counter => (
+                <li>{counter}</li>
+              ))}
+            </InlineList>
           </div>
           <div>
             <span className={`label label-${theme.label}`}>{theme.label}</span>

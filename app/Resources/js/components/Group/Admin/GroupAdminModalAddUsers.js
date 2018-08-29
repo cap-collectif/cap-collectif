@@ -26,7 +26,7 @@ export class GroupAdminModalAddUsers extends React.Component<Props> {
       <Modal show={show} onHide={onClose} aria-labelledby="delete-modal-title-lg">
         <Modal.Header>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="group.admin.add_users" />}
+            {<FormattedMessage id="group-admin-add-members" />}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

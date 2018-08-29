@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Capco\AppBundle\Repository\ProjectRepository;
 
 /**
  * @Route("/profile")
@@ -281,7 +282,13 @@ class ProfileController extends Controller
             ->getRepository('CapcoAppBundle:OpinionType')
             ->getByUser($user);
 
-        return ['user' => $user, 'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions];
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
+
+        return [
+            'user' => $user,
+            'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
+            'projectsCount' => $projectsCount,
+        ];
     }
 
     /**
@@ -301,7 +308,15 @@ class ProfileController extends Controller
      */
     public function showProposalsAction(User $user)
     {
-        return array_merge(['user' => $user], $this->getProposalsProps($user));
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
+
+        return array_merge(
+            [
+                'user' => $user,
+                'projectsCount' => $projectsCount,
+            ],
+            $this->getProposalsProps($user)
+        );
     }
 
     /**
@@ -331,10 +346,13 @@ class ProfileController extends Controller
             ->getRepository('CapcoAppBundle:Argument')
             ->getByUser($user);
 
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
+
         return [
             'user' => $user,
             'arguments' => $arguments,
             'argumentsLabels' => Argument::$argumentTypesLabels,
+            'projectsCount' => $projectsCount,
         ];
     }
 
@@ -348,7 +366,13 @@ class ProfileController extends Controller
             ->getRepository('CapcoAppBundle:Source')
             ->getByUser($user);
 
-        return ['user' => $user, 'sources' => $sources];
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
+
+        return [
+            'user' => $user,
+            'sources' => $sources,
+            'projectsCount' => $projectsCount,
+        ];
     }
 
     /**
@@ -361,7 +385,13 @@ class ProfileController extends Controller
             ->getRepository('CapcoAppBundle:Comment')
             ->getByUser($user);
 
-        return ['user' => $user, 'comments' => $comments];
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
+
+        return [
+            'user' => $user,
+            'comments' => $comments,
+            'projectsCount' => $projectsCount,
+        ];
     }
 
     /**
@@ -372,7 +402,13 @@ class ProfileController extends Controller
     {
         $votes = $this->get('capco.abstract_vote.repository')->getPublicVotesByUser($user);
 
-        return ['user' => $user, 'votes' => $votes];
+        $projectsCount = $this->getProjectsCount($user, $this->getUser());
+
+        return [
+            'user' => $user,
+            'votes' => $votes,
+            'projectsCount' => $projectsCount,
+        ];
     }
 
     private function getProposalsProps(User $user)
@@ -424,5 +460,15 @@ class ProfileController extends Controller
         $this->get('security.token_storage')->setToken($userToken);
         $logInEvent = new InteractiveLoginEvent($request, $userToken);
         $this->get('event_dispatcher')->dispatch('security.interactive_login', $logInEvent);
+    }
+
+    private function getProjectsCount(User $user, User $loggedUser): int
+    {
+        $projectsRaw = $this->get('Capco\AppBundle\Repository\ProjectRepository')->getByUser(
+            $user,
+            $loggedUser
+        );
+
+        return \count($projectsRaw);
     }
 }

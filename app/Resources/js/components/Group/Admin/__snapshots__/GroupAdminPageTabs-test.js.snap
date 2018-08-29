@@ -4,7 +4,9 @@ exports[`<GroupAdminPageTabs /> render correctly 1`] = `
 <div
   className="col-xs-12"
 >
-  <Uncontrolled(Tabs)>
+  <Uncontrolled(Tabs)
+    id="group-admin-tabs"
+  >
     <Tab
       eventKey={1}
       title="group.admin.users"

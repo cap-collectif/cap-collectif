@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { UserGroupModal } from './UserGroupModal';
-import { $fragmentRefs, $refType, relayPaginationMock } from '../../../mocks';
+import { $fragmentRefs, $refType, relayPaginationMock, intlMock } from '../../../mocks';
 
 describe('<UserGroupModal />', () => {
   const noGroup = {
@@ -54,9 +54,14 @@ describe('<UserGroupModal />', () => {
     $refType,
   };
 
+  const intl = {
+    intl: intlMock,
+  };
+
   it('should render correctly without group', () => {
     const wrapper = shallow(
       <UserGroupModal
+        {...intl}
         project={noGroup}
         show={false}
         handleClose={() => {}}
@@ -68,6 +73,7 @@ describe('<UserGroupModal />', () => {
   it('should render correctly with 2 groups', () => {
     const wrapper = shallow(
       <UserGroupModal
+        {...intl}
         project={twoGroups}
         show
         handleClose={() => {}}
@@ -79,6 +85,7 @@ describe('<UserGroupModal />', () => {
   it('should render correctly with load more', () => {
     const wrapper = shallow(
       <UserGroupModal
+        {...intl}
         project={twoGroups}
         show
         handleClose={() => {}}

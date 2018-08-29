@@ -23,9 +23,7 @@ export class FollowingsProposals extends Component<Props, State> {
 
   onUnfollowAll() {
     const { viewer } = this.props;
-    const ids = viewer.followingProposals.edges.map(edge => {
-      return edge.node.id;
-    });
+    const ids = viewer.followingProposals.edges.map(edge => edge.node.id);
 
     this.setState({ open: !this.state.open }, () => {
       UnfollowProposalMutation.commit({
@@ -62,11 +60,9 @@ export class FollowingsProposals extends Component<Props, State> {
           {Object.keys(projectsById).length > 0 ? (
             <Collapse in={this.state.open}>
               <div id="all-projects">
-                {Object.keys(projectsById).map((project, id) => {
-                  return (
-                    <ProposalProjectRow key={id} project={projectsById[project]} viewer={viewer} />
-                  );
-                })}
+                {Object.keys(projectsById).map((project, id) => (
+                  <ProposalProjectRow key={id} project={projectsById[project]} viewer={viewer} />
+                ))}
               </div>
             </Collapse>
           ) : (

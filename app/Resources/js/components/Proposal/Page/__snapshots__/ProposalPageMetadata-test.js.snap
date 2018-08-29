@@ -43,25 +43,28 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
         }
         showNullEstimation={true}
       />
-      <ForwardRef(Relay(ProposalDetailLikers))
-        componentClass="div"
-        proposal={
-          Object {
-            "$refType": null,
-            "category": Object {
-              "name": "Nom de la catégorie",
-            },
-            "district": Object {
-              "name": "Nom du quartier",
-            },
-            "estimation": null,
-            "id": "1",
-            "likers": Array [],
-            "reference": "Reference",
-            "theme": null,
+      <div
+        className="pt-10"
+      >
+        <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikers))))
+          proposal={
+            Object {
+              "$refType": null,
+              "category": Object {
+                "name": "Nom de la catégorie",
+              },
+              "district": Object {
+                "name": "Nom du quartier",
+              },
+              "estimation": null,
+              "id": "1",
+              "likers": Array [],
+              "reference": "Reference",
+              "theme": null,
+            }
           }
-        }
-      />
+        />
+      </div>
       <div
         className="proposal__info proposal__info--reference ellipsis"
       >

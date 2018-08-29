@@ -232,11 +232,9 @@ export class Post extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => {
-  return {
-    features: state.default.features,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+  features: state.default.features,
+});
 
 const container = connect(mapStateToProps)(Post);
 

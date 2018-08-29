@@ -78,12 +78,12 @@ export class RegistrationForm extends React.Component<Props> {
         id="registration.charte"
         values={{
           link: (
-            <a
+            <button
               onClick={() => {
                 dispatch(displayChartModal());
               }}>
               {cguName}
-            </a>
+            </button>
           ),
         }}
       />

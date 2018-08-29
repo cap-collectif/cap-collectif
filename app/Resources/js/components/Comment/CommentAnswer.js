@@ -9,10 +9,10 @@ import CommentBody from './CommentBody';
 import CommentVoteButton from './CommentVoteButton';
 import CommentReportButton from './CommentReportButton';
 import CommentEdit from './CommentEdit';
-import type { Comment_comment } from './__generated__/Comment_comment.graphql';
+import type { CommentAnswer_comment } from './__generated__/CommentAnswer_comment.graphql';
 
 type Props = {
-  comment: Comment_comment,
+  comment: CommentAnswer_comment,
   isHighlighted?: ?boolean,
 };
 

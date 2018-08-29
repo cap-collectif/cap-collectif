@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Col, Label } from 'react-bootstrap';
+import { Col, Label, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 type Media = {
@@ -41,22 +41,20 @@ export class PreviewMedia extends React.PureComponent<Props, State> {
               <strong>
                 <FormattedMessage id="proposal.documents.deposited" />
               </strong>{' '}
-              {medias.map((file, key) => {
-                return (
-                  <Label key={key} bsStyle="info" style={{ marginRight: '5px' }}>
-                    <a href={file.url} target="_blank" rel="noopener noreferrer">
-                      {file.name}
-                    </a>{' '}
-                    <i
-                      style={{ cursor: 'pointer' }}
-                      className="glyphicon glyphicon-remove"
-                      onClick={() => {
-                        onRemoveMedia(file);
-                      }}
-                    />
-                  </Label>
-                );
-              })}
+              {medias.map((file, key) => (
+                <Label key={key} bsStyle="info" style={{ marginRight: '5px' }}>
+                  <a href={file.url} target="_blank" rel="noopener noreferrer">
+                    {file.name}
+                  </a>{' '}
+                  <Button
+                    bsStyle="link"
+                    onClick={() => {
+                      onRemoveMedia(file);
+                    }}>
+                    <i style={{ cursor: 'pointer' }} className="glyphicon glyphicon-remove" />
+                  </Button>
+                </Label>
+              ))}
             </Col>
           )}
       </div>

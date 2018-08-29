@@ -12,9 +12,11 @@ class ProjectUserVotesPage extends Page
     public $elements = [
         'vote table' => '.proposals-user-votes__table',
         'vote' => '.proposals-user-votes__row',
-        'first vote button' => '.proposals-user-votes__table .proposals-user-votes__row:nth-child(1) .proposal-vote__delete',
-        'confirm vote delete' => '.popover-content .proposal-vote__delete',
-        'toggle vote access' => ' > div > div > div > label > div > div.react-toggle-track > div.react-toggle-track-check',
+        'first vote button' =>
+            '.proposals-user-votes__table .proposals-user-votes__row:nth-child(1) .proposal-vote__delete',
+        'confirm vote delete' => '.popover-content .proposal-vote__delete-confirm',
+        'toggle vote access' =>
+            ' > div > div > div > label > div > div.react-toggle-track > div.react-toggle-track-check',
     ];
 
     /**

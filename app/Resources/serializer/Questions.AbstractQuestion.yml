@@ -6,7 +6,6 @@ Capco\AppBundle\Entity\Questions\AbstractQuestion:
       simple: Capco\AppBundle\Entity\Questions\SimpleQuestion
       multiple_choice: Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion
       media: Capco\AppBundle\Entity\Questions\MediaQuestion
-      section: Capco\AppBundle\Entity\Questions\SectionQuestion
   properties:
     id:
       expose: true

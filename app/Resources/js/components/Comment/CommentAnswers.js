@@ -44,16 +44,10 @@ class CommentAnswers extends React.Component<Props, State> {
             .filter(Boolean)
             .map(edge => edge.node)
             .filter(Boolean)
-            .map(node => {
-              return (
-                // $FlowFixMe
-                <CommentAnswer
-                  key={node.id}
-                  comment={node}
-                  isHighlighted={node.id === this.state.highlightedComment}
-                />
-              );
-            })}
+            .map(node => (
+              // $FlowFixMe
+              <CommentAnswer key={node.id} comment={node} isHighlighted={node.id === this.state.highlightedComment} />
+            ))}
       </ul>
     );
   }

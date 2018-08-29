@@ -1440,11 +1440,11 @@ trait ProposalStepsTrait
         $tableNode = new TableNode([
             ['proposal_title', 'Nouvelle proposition créée'],
             ['proposal_body', 'Description de ma proposition'],
-            ['responses[1]', 'Réponse à la question 1'],
+            ['responses[0]', 'Réponse à la question 1'],
             ['proposal_address', '5 Allée Rallier-du-Baty 35000 Rennes'],
         ]);
         if (false !== $requiredResponse) {
-            $this->fillField('responses[2]', $requiredResponse);
+            $this->fillField('responses[1]', $requiredResponse);
         }
         $this->fillFields($tableNode);
         $this->selectOption('proposal_category', 'Politique');

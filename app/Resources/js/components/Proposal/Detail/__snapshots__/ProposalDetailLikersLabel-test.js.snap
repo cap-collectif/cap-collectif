@@ -10,20 +10,14 @@ exports[`<ProposalDetailLikersLabel /> should render a <FormattedMessage/> when 
   <i
     className="cap cap-heart-1 icon--red"
   />
-  <Truncate
-    ellipsis="…"
-    lines={1}
-    trimWhitespace={false}
-  >
-    <FormattedMessage
-      id="proposal.likers.count"
-      values={
-        Object {
-          "num": 2,
-        }
+  <FormattedMessage
+    id="proposal.likers.count"
+    values={
+      Object {
+        "num": 2,
       }
-    />
-  </Truncate>
+    }
+  />
 </span>
 `;
 
@@ -39,12 +33,13 @@ exports[`<ProposalDetailLikersLabel /> should render truncated liker name when o
   <i
     className="cap cap-heart-1 icon--red"
   />
-  <Truncate
-    ellipsis="…"
-    lines={1}
-    trimWhitespace={false}
-  >
-    user with a very long name that need to be truncated
-  </Truncate>
+  <FormattedMessage
+    id="proposal.likers.count"
+    values={
+      Object {
+        "num": 1,
+      }
+    }
+  />
 </span>
 `;
