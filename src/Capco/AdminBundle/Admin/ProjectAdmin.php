@@ -27,7 +27,7 @@ class ProjectAdmin extends CapcoAdmin
         $this->tokenStorage = $tokenStorage;
     }
 
-    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
+    protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'publishedAt'];
 
     protected $formOptions = ['cascade_validation' => true];
 
