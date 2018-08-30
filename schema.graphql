@@ -4133,6 +4133,9 @@ type User implements Node {
 
   # The user's email was confirmed at date
   emailConfirmationSentAt: DateTime
+
+  # Array of Arguments of the user.
+  arguments(after: String, first: Int, before: String, last: Int): ArgumentConnection!
 }
 
 # A connection to a list of items.

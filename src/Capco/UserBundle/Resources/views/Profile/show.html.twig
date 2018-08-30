@@ -50,7 +50,7 @@
     {% if arguments|length > 0 %}
         <div class="container container--custom">
             <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% include '@CapcoUser/Profile/arguments.html.twig' %}
+            {{ react_render_component('ArgumentListApp', { 'props': { 'authorId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
         </div>
     {% endif %}
 

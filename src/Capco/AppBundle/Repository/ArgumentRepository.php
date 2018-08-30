@@ -176,14 +176,13 @@ class ArgumentRepository extends EntityRepository
 
     /**
      * Count all arguments by user.
-     *
-     * @param $user
-     *
-     * @return mixed
      */
-    public function countByUser($user)
+    public function countByUser(User $user): int
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb /**
+         * Project has no field or association named isEnabled
+         */ = // ->andWhere('c.isEnabled = true')
+        $this->getIsEnabledQueryBuilder()
             ->select('COUNT(a) as TotalArguments')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.step', 's')
@@ -192,8 +191,8 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('a.Author = :author')
             ->andWhere('o.published = true')
             ->andWhere('s.isEnabled = true')
-            ->andWhere('c.isEnabled = true')
             ->setParameter('author', $user);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -234,12 +233,10 @@ class ArgumentRepository extends EntityRepository
 
     /**
      * Get all arguments by user.
-     *
-     * @param mixed $user
      */
-    public function getByUser($user)
+    public function getByUser(User $user, int $first = 0, int $offset = 100): Paginator
     {
-        return $this->getIsEnabledQueryBuilder()
+        $query = $this->getIsEnabledQueryBuilder()
             ->leftJoin('a.opinion', 'o')
             ->addSelect('o')
             ->leftJoin('o.step', 's')
@@ -258,8 +255,10 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('o.published = true')
             ->andWhere('s.isEnabled = true')
             ->setParameter('author', $user)
-            ->getQuery()
-            ->getResult();
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
+
+        return new Paginator($query);
     }
 
     protected function getIsEnabledQueryBuilder()

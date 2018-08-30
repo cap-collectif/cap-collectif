@@ -344,3 +344,9 @@ User:
       emailConfirmationSentAt:
         type: 'DateTime'
         description: "The user's email was confirmed at date"
+      arguments:
+        type: 'ArgumentConnection!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentByUserResolver", [value, args])'
+        description: 'Array of Arguments of the user.'
+        argsBuilder: 'Relay::Connection'
