@@ -14,6 +14,7 @@ import type { ArgumentItem_argument } from './__generated__/ArgumentItem_argumen
 
 type Props = {
   argument: ArgumentItem_argument,
+  isProfile: boolean,
 };
 
 export class ArgumentItem extends React.Component<Props> {
@@ -42,8 +43,24 @@ export class ArgumentItem extends React.Component<Props> {
     );
   };
 
+  renderLabel = type => {
+    const labelStyle = type === 'FOR' ? 'success' : 'danger';
+    const labelValue = type === 'FOR' ? 'Pour' : 'Contre';
+
+    return <Label bsStyle={labelStyle}>{labelValue}</Label>;
+  };
+
+  renderConsultationLink = consultation => {
+    return (
+      <p>
+        {/* $FlowFixMe */}
+        Lié à la proposition : <a href={consultation.url}>{consultation.title}</a>
+      </p>
+    );
+  };
+
   render() {
-    const { argument } = this.props;
+    const { argument, isProfile } = this.props;
     const classes = classNames({
       opinion: true,
       'opinion--argument': true,
@@ -58,6 +75,7 @@ export class ArgumentItem extends React.Component<Props> {
       <ListGroupItem className={classes} id={`arg-${argument.id}`}>
         <div className="opinion__body">
           <UserAvatar user={argument.author} className="pull-left" />
+          {isProfile && this.renderLabel(argument.type)}
           <div className="opinion__data">
             <p className="h5 opinion__user">
               <UserLink user={argument.author} />
@@ -96,6 +114,11 @@ export class ArgumentItem extends React.Component<Props> {
   }
 }
 
+// $FlowFixMe
+ArgumentItem.defaultProps = {
+  isProfile: false,
+};
+
 export default createFragmentContainer(
   ArgumentItem,
   graphql`
@@ -117,6 +140,17 @@ export default createFragmentContainer(
         }
       }
       body
+      type
+      related {
+        id
+        url
+        ... on Opinion {
+          title
+        }
+        ... on Version {
+          title
+        }
+      }
     }
   `,
 );

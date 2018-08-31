@@ -106,7 +106,7 @@ export default createPaginationContainer(
         ...fragmentVariables,
         count,
         cursor,
-        argumentId: props.argumentList.id,
+        userId: props.argumentList.id,
       };
     },
     query: graphql`
