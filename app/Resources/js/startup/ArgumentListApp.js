@@ -15,10 +15,10 @@ export default ({ userId }: { userId: string }) => (
         variables={{ userId, count: 5 }}
         environment={environment}
         query={graphql`
-          query ArgumentListAppQuery($userId: ID!, $count: Int) {
+          query ArgumentListAppQuery($userId: ID!, $count: Int, $after: String) {
             node(id: $userId) {
               id
-              ...ArgumentListProfile_argumentList @arguments(count: $count)
+              ...ArgumentListProfile_argumentList @arguments(count: $count, after: $after)
             }
           }
         `}

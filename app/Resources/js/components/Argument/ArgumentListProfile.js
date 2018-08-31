@@ -89,7 +89,8 @@ export default createPaginationContainer(
   {
     direction: 'forward',
     getConnectionFromProps(props: Props) {
-      return props.argumentList && props.argumentList;
+      console.log(props);
+      return props.argumentList && props.argumentList.arguments;
     },
     getFragmentVariables(prevVars) {
       return {
@@ -105,12 +106,7 @@ export default createPaginationContainer(
       };
     },
     query: graphql`
-      query ArgumentListProfileQuery(
-        $argumentId: ID!
-        $isAuthenticated: Boolean!
-        $cursor: String
-        $count: Int
-      ) {
+      query ArgumentListProfileQuery($argumentId: ID!, $cursor: String, $count: Int) {
         argumentList: node(id: $argumentId) {
           id
           ...ArgumentListProfile_argumentList @arguments(cursor: $cursor, count: $count)
