@@ -8,22 +8,17 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import type { ArgumentListAppQueryResponse } from './__generated__/ArgumentListAppQuery.graphql';
 import ArgumentListProfile from '../components/Argument/ArgumentListProfile';
 
-export default ({ isAuthenticated }: { isAuthenticated: boolean }) => (
+export default ({ userId }: { userId: string }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QueryRenderer
-        variables={{ isAuthenticated }}
+        variables={{ userId, count: 5 }}
         environment={environment}
         query={graphql`
-          query ArgumentListAppQuery($isAuthenticated: Boolean!) {
-            viewer: viewer @include(if: $isAuthenticated) {
-              arguments(first: 5) {
-                edges {
-                  node {
-                    id
-                  }
-                }
-              }
+          query ArgumentListAppQuery($userId: ID!, $count: Int) {
+            node(id: $userId) {
+              id
+              ...ArgumentListProfile_argumentList @arguments(count: $count)
             }
           }
         `}
@@ -38,7 +33,7 @@ export default ({ isAuthenticated }: { isAuthenticated: boolean }) => (
 
           return (
             // $FlowFixMe
-            <ArgumentListProfile argumentList={props.viewer} />
+            <ArgumentListProfile argumentList={props.node} />
           );
         }}
       />

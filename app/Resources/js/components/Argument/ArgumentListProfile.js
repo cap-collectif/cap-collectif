@@ -24,7 +24,6 @@ export class ArgumentListProfile extends Component<Props, State> {
 
   render() {
     const { argumentList, relay } = this.props;
-    console.log(argumentList);
 
     return (
       <ListGroup>
@@ -35,6 +34,7 @@ export class ArgumentListProfile extends Component<Props, State> {
           .filter(Boolean)
           // $FlowFixMe
           .map(argument => (
+            // $FlowFixMe
             <ArgumentItem key={argument.id} argument={argument} />
           ))}
         {relay.hasMore() && (
@@ -66,18 +66,14 @@ export default createPaginationContainer(
   {
     argumentList: graphql`
       fragment ArgumentListProfile_argumentList on User
-        @argumentDefinitions(
-          isAuthenticated: { type: "Boolean!" }
-          count: { type: "Int!" }
-          cursor: { type: "String" }
-        ) {
+        @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
         id
         arguments(first: $count, after: $cursor) @connection(key: "ArgumentListProfile_arguments") {
           totalCount
           edges {
             node {
               id
-              ...ArgumentItem_argument @arguments(isAuthenticated: $isAuthenticated)
+              ...ArgumentItem_argument
             }
           }
           pageInfo {
@@ -117,8 +113,7 @@ export default createPaginationContainer(
       ) {
         argumentList: node(id: $argumentId) {
           id
-          ...ArgumentListProfile_argumentList
-            @arguments(isAuthenticated: $isAuthenticated, cursor: $cursor, count: $count)
+          ...ArgumentListProfile_argumentList @arguments(cursor: $cursor, count: $count)
         }
       }
     `,
