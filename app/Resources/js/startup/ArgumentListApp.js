@@ -7,6 +7,7 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import type { ArgumentListAppQueryResponse } from './__generated__/ArgumentListAppQuery.graphql';
 import ArgumentListProfile from '../components/Argument/ArgumentListProfile';
+import Loader from '../components/Ui/Loader';
 
 export default ({ userId }: { userId: string }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
@@ -28,7 +29,7 @@ export default ({ userId }: { userId: string }) => (
           }
 
           if (!props) {
-            return null;
+            return <Loader />;
           }
 
           return (

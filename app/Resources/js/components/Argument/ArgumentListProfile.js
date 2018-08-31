@@ -8,6 +8,8 @@ import type { ArgumentListProfile_argumentList } from './__generated__/ArgumentL
 import ArgumentItem from './ArgumentItem';
 import Loader from '../Ui/Loader';
 
+const ARGUMENTS_PAGINATION = 5;
+
 type Props = {
   relay: RelayPaginationProp,
   argumentList: ArgumentListProfile_argumentList,
@@ -20,6 +22,13 @@ type State = {
 export class ArgumentListProfile extends Component<Props, State> {
   state = {
     loading: false,
+  };
+
+  handleLoadMore = () => {
+    this.setState({ loading: true });
+    this.props.relay.loadMore(ARGUMENTS_PAGINATION, () => {
+      this.setState({ loading: false });
+    });
   };
 
   render() {
@@ -42,15 +51,7 @@ export class ArgumentListProfile extends Component<Props, State> {
             {this.state.loading ? (
               <Loader />
             ) : (
-              <a
-                style={{ cursor: 'pointer' }}
-                className="small"
-                onClick={() => {
-                  this.setState({ loading: true });
-                  relay.loadMore(5, () => {
-                    this.setState({ loading: false });
-                  });
-                }}>
+              <a style={{ cursor: 'pointer' }} className="small" onClick={this.handleLoadMore}>
                 <FormattedMessage id="global.more" />
               </a>
             )}
@@ -89,7 +90,6 @@ export default createPaginationContainer(
   {
     direction: 'forward',
     getConnectionFromProps(props: Props) {
-      console.log(props);
       return props.argumentList && props.argumentList.arguments;
     },
     getFragmentVariables(prevVars) {
