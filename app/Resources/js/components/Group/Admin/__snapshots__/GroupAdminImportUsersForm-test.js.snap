@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GroupAdminImportUsersForm /> render correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <div>
+    <p>
+      <FormattedMessage
+        id="import-users-helptext"
+        values={Object {}}
+      />
+    </p>
+    <Field
+      component={[Function]}
+      hide={false}
+      id="csv-file"
+      inputClassName="fake-inputClassName"
+      label={
+        <FormattedMessage
+          id="group.admin.form.users"
+          values={Object {}}
+        />
+      }
+      labelClassName="control-label"
+      name="emails"
+      onClickShowMoreError={[Function]}
+      onResetField={[Function]}
+      showMoreError={false}
+    />
+  </div>
+</form>
+`;

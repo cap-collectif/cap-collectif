@@ -24,6 +24,7 @@ type Props = {
 
 type State = {
   showMoreError: boolean,
+  analyzed: boolean,
 };
 
 type DefaultProps = void;
@@ -34,7 +35,8 @@ type FormValues = {
 type FileUploadFieldProps = FieldProps & {
   showMoreError: boolean,
   onClickShowMoreError: Function,
-  resetShowMoreError: Function,
+  onResetField: Function,
+  hide: boolean,
 };
 
 export const formName = 'group-users-import';
@@ -110,7 +112,8 @@ const renderDropzoneInput = ({
   meta: { asyncValidating, error },
   showMoreError,
   onClickShowMoreError,
-  resetShowMoreError,
+  onResetField,
+  hide,
 }: FileUploadFieldProps) => {
   const colWidth = error && error.notFoundEmails.length === 0 ? 12 : 6;
 
@@ -123,19 +126,22 @@ const renderDropzoneInput = ({
         <FormattedHTMLMessage id="csv-file-helptext" />
       </HelpBlock>
       <Loader show={asyncValidating}>
-        <FileUpload
-          id="csv-file"
-          name={input.name}
-          accept="text/csv"
-          maxSize={26000}
-          minSize={1}
-          onDrop={(files: Array<File>) => {
-            onDrop(files, input);
-            resetShowMoreError();
-          }}
-        />
+        {!hide && (
+          <FileUpload
+            id="csv-file"
+            name={input.name}
+            accept="text/csv"
+            maxSize={26000}
+            minSize={1}
+            onDrop={(files: Array<File>) => {
+              onDrop(files, input);
+              onResetField();
+            }}
+          />
+        )}
         {!asyncValidating &&
-          error && (
+          error &&
+          hide && (
             <React.Fragment>
               <div className="h5">
                 <FormattedMessage id="document-analysis" />{' '}
@@ -194,6 +200,7 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
   static defaultProps: DefaultProps;
   state = {
     showMoreError: false,
+    analyzed: false,
   };
 
   toggle() {
@@ -204,7 +211,7 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
 
   render() {
     const { handleSubmit } = this.props;
-    const { showMoreError } = this.state;
+    const { showMoreError, analyzed } = this.state;
     return (
       <form onSubmit={handleSubmit}>
         <div>
@@ -215,13 +222,14 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
             name="emails"
             label={<FormattedMessage id="group.admin.form.users" />}
             id="csv-file"
+            hide={analyzed}
             labelClassName="control-label"
             inputClassName="fake-inputClassName"
             component={renderDropzoneInput}
             showMoreError={showMoreError}
             onClickShowMoreError={this.toggle.bind(this)}
-            resetShowMoreError={() => {
-              this.setState({ showMoreError: false });
+            onResetField={() => {
+              this.setState({ showMoreError: false, analyzed: true });
             }}
           />
         </div>
