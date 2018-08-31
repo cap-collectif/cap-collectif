@@ -15,7 +15,17 @@ do
   sleep 0.1
 done
 
+# remove write permission for (g)roup and (o)ther (required by cron)
+chmod -R go-w /etc/cron.d
+
+# update default values of PAM environment variables (used by CRON scripts)
+env | while read -r LINE; do
+    IFS="=" read VAR VAL <<< ${LINE}
+    sed --in-place "/^${VAR}[[:blank:]=]/d" /etc/security/pam_env.conf || true
+    echo "${VAR} DEFAULT=\"${VAL}\"" >> /etc/security/pam_env.conf
+done
+
 echo "[$(date -u)][CRONTAB] Started!"
-crontab /etc/cron.d/crontab
+crontab -uroot /etc/cron.d/crontab
 
 exec cron -f

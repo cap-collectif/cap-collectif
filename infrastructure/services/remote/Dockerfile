@@ -207,9 +207,16 @@ COPY infrastructure/services/remote/php-fpm/populate_elasticsearch_index /etc/se
 ENV SYMFONY_ENVIRONMENT prod
 ENV SYMFONY_DEBUG false
 
+# make pam_loginuid.so optional for cron
+# see https://github.com/docker/docker/issues/5663#issuecomment-42550548
+RUN sed --regexp-extended --in-place \
+    's/^session\s+required\s+pam_loginuid.so$/session optional pam_loginuid.so/' \
+    /etc/pam.d/cron
+
 # Create Working dir with good rights
 RUN mkdir -p /var/www \
     && chown capco:capco /var/www \
+    && chmod 0644 /etc/cron.d/crontab \
     && find /etc/service/ -name "run" -exec chmod +x {} \;
 
 WORKDIR /var/www
