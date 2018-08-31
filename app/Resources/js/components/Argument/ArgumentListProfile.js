@@ -78,7 +78,7 @@ export default createPaginationContainer(
           edges {
             node {
               id
-              ...ArgumentItem_argument @arguments(isAuthenticated: $isAuthenticated)
+              ...ArgumentItem_argument
             }
           }
           pageInfo {
