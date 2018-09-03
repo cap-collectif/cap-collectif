@@ -1052,7 +1052,7 @@ class Project implements IndexableInterface
         $viewerVisibility = $this->getVisibilityForViewer($viewer);
 
         return (
-            $this->getVisibility() >= $viewerVisibility &&
+            in_array($this->getVisibility(), $viewerVisibility) &&
             $this->getVisibility() < ProjectVisibilityMode::VISIBILITY_CUSTOM
         );
     }

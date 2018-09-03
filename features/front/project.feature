@@ -242,6 +242,17 @@ Scenario: An admin can't access a private project of an other admin
   Then I should see 'restricted-access'
 
 @javascript
+Scenario: Admin access to a project accessible for admins only
+  Given feature "projects_form" is enabled
+  And I am logged in as admin
+  And I visited "collect page" with:
+    | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
+    | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
+  And I wait 1 seconds
+  Then I should see "Collecte des propositions pour conquérir le monde"
+  And I should see "only-visible-by-administrators"
+
+@javascript
 Scenario: Admin access to his project and click to edit it
   Given feature "projects_form" is enabled
   And I am logged in as admin

@@ -69,7 +69,7 @@ class StepController extends Controller
 
         $projectContributorResolver = $this->get(ProjectContributorResolver::class);
 
-        $contributorsConnection = $projectContributorResolver(
+        $contributorsConnection = $projectContributorResolver->__invoke(
             $project,
             new Argument(['first' => 10])
         );
