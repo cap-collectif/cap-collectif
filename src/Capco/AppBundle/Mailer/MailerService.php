@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Mailer\Message\Message;
@@ -18,8 +17,13 @@ class MailerService
     protected $router;
     protected $failedRecipients;
 
-    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $siteParams, Router $router)
-    {
+    public function __construct(
+        \Swift_Mailer $mailer,
+        EngineInterface $templating,
+        TranslatorInterface $translator,
+        Resolver $siteParams,
+        Router $router
+    ) {
         $this->mailer = $mailer;
         $this->templating = $templating;
         $this->translator = $translator;
@@ -40,19 +44,26 @@ class MailerService
         }
 
         $message->setSitename($this->siteParams->getValue('global.site.fullname'));
-        $message->setSiteUrl($this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL));
+        $message->setSiteUrl(
+            $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL)
+        );
 
-        $subject = $this->translator->trans($message->getSubject(), $message->getSubjectVars(), 'CapcoAppBundle');
+        $subject = $this->translator->trans(
+            $message->getSubject(),
+            $message->getSubjectVars(),
+            'CapcoAppBundle'
+        );
 
         $template = $message->getTemplate();
         $body = '';
         if (false !== strpos($template, '.twig')) {
-            $body = $this->templating->render(
-                $message->getTemplate(),
-                $message->getTemplateVars()
-            );
+            $body = $this->templating->render($message->getTemplate(), $message->getTemplateVars());
         } else {
-            $body = $this->translator->trans($template, $message->getTemplateVars(), 'CapcoAppBundle');
+            $body = $this->translator->trans(
+                $template,
+                $message->getTemplateVars(),
+                'CapcoAppBundle'
+            );
         }
         if ($message->getFooterTemplate()) {
             if (false !== strpos($message->getFooterTemplate(), '.twig')) {
@@ -61,16 +72,18 @@ class MailerService
                     $message->getFooterVars()
                 );
             } else {
-                $body .= $this->translator->trans($message->getFooterTemplate(), $message->getFooterVars(), 'CapcoAppBundle');
+                $body .= $this->translator->trans(
+                    $message->getFooterTemplate(),
+                    $message->getFooterVars(),
+                    'CapcoAppBundle'
+                );
             }
         }
         $swiftMessage = (new \Swift_Message())
             ->setSubject($subject)
             ->setContentType('text/html')
             ->setBody($body)
-            ->setFrom([
-                $message->getSenderEmail() => $message->getSenderName(),
-            ]);
+            ->setFrom([$message->getSenderEmail() => $message->getSenderName()]);
 
         if (!empty($message->getBcc())) {
             $swiftMessage->setBcc($message->getBcc());
@@ -94,7 +107,7 @@ class MailerService
         return $delivered;
     }
 
-    public function getFailedRecipients()
+    public function getFailedRecipients(): array
     {
         return $this->failedRecipients;
     }

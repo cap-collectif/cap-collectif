@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\SiteParameter;
 
 use Capco\AppBundle\Entity\SiteParameter;
@@ -18,7 +17,7 @@ class Resolver
         $this->logger = $logger;
     }
 
-    public function getValue(?string $key, ?string $value = null)
+    public function getValue(?string $key, $value = null)
     {
         if (!$this->parameters) {
             $this->parameters = $this->repository->getValuesIfEnabled();

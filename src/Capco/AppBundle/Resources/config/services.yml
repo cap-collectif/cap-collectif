@@ -15,6 +15,7 @@ imports:
   - { resource: services/graphql_dataloaders.yml }
   - { resource: services/notifiers.yml }
   - { resource: services/elasticsearch.yml }
+  - { resource: services/mailer.yml }
 
 parameters:
   traits:
@@ -44,8 +45,7 @@ parameters:
   env(SYMFONY_USE_ASSETIC_CONTROLLER): true
   env(SYMFONY_FACEBOOK_APP_ID): ***REMOVED***
   env(SYMFONY_FACEBOOK_APP_SECRET): ***REMOVED***
-  env(SYMFONY_GOOGLE_APP_ID):
-    ***REMOVED***
+  env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
   env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
   env(SYMFONY_JWT_TOKEN_TTL): 86400
   env(SYMFONY_LANGUAGE_ANALYZER): french
@@ -58,6 +58,9 @@ parameters:
   env(SYMFONY_TWILIO_TOKEN): ***REMOVED***
   env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
+  env(SYMFONY_SENTRY_DSN): ~
+  env(SYMFONY_MAILJET_KEY): ~
+  env(SYMFONY_MAILJET_SECRET): ~
 
 services:
   import.csvtoarray:
