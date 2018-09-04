@@ -44,6 +44,7 @@ import UserAdminPageApp from '../js/startup/UserAdminPageApp';
 import ProjectRestrictedAccessAlertApp from '../js/startup/ProjectRestrictedAccessAlertApp';
 import ProjectRestrictedAccessApp from '../js/startup/ProjectRestrictedAccessApp';
 import ArgumentListApp from '../js/startup/ArgumentListApp';
+import VoteListApp from '../js/startup/VoteListApp';
 
 const emptyFunction = () => {};
 
@@ -98,4 +99,5 @@ ReactOnRails.register({
   ProjectRestrictedAccessApp,
   QuestionnaireCreateButtonApp,
   ArgumentListApp,
+  VoteListApp,
 });
