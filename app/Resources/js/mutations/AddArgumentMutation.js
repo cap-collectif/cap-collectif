@@ -107,7 +107,9 @@ const commit = (
       const connection = ConnectionHandler.getConnection(argumentableProxy, connectionKey, {
         type: variables.input.type,
       });
-      connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+      if (connection) {
+        connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+      }
 
       if (viewerIsConfirmed) {
         const allArgumentsProxy = argumentableProxy.getLinkedRecord('arguments', { first: 0 });

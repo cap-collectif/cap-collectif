@@ -64,7 +64,9 @@ const commit = (variables: FollowOpinionMutationVariables): Promise<Response> =>
         opinionProxy,
         'OpinionFollowersBox_followers',
       );
-      connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+      if (connection) {
+        connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+      }
     },
   });
 

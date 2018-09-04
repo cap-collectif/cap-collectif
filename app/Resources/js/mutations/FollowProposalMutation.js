@@ -64,7 +64,9 @@ const commit = (variables: FollowProposalMutationVariables): Promise<Response> =
         proposalProxy,
         'ProposalPageFollowers_followers',
       );
-      connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+      if (connection) {
+        connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+      }
     },
   });
 

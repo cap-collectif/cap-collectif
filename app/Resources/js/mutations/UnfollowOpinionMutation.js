@@ -29,7 +29,9 @@ const decrementFollowerCount = (opinionId: string, store: RecordSourceSelectorPr
   allFollowersProxy.setValue(previousValue - 1, 'totalCount');
 
   const connection = ConnectionHandler.getConnection(opinionProxy, 'OpinionFollowersBox_followers');
-  connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
+  if (connection) {
+    connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
+  }
 };
 
 const commit = (

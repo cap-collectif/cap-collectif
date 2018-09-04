@@ -108,6 +108,9 @@ export class ProposalVoteModal extends React.Component<Props, State> {
       const connection = stepProxy.getLinkedRecord('viewerVotes', {
         orderBy: { field: 'POSITION', direction: 'ASC' },
       });
+      if (!connection) {
+        return;
+      }
       ConnectionHandler.insertEdgeAfter(connection, newEdge);
       const totalCount = parseInt(connection.getValue('totalCount'), 10);
       connection.setValue(totalCount + 1, 'totalCount');

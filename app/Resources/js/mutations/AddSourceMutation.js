@@ -102,7 +102,9 @@ const commit = (
           sourceableProxy,
           'OpinionSourceBox_viewerSourcesUnpublished',
         );
-        connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+        if (connection) {
+          connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+        }
       }
     },
   });

@@ -71,7 +71,9 @@ const commit = (variables: AddCommentMutationVariables): Promise<AddCommentMutat
       }
 
       const commentableProxy = store.get(variables.input.commentableId);
-      if (!commentableProxy) return;
+      if (!commentableProxy) {
+        throw new Error('Expected commentable to be in the store');
+      }
 
       const answersConnection = ConnectionHandler.getConnection(
         commentableProxy,

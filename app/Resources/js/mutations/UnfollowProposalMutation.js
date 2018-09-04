@@ -32,7 +32,9 @@ const decrementFollowerCount = (proposalId: string, store: RecordSourceSelectorP
     proposalProxy,
     'ProposalPageFollowers_followers',
   );
-  connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
+  if (connection) {
+    connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
+  }
 };
 
 const commit = (

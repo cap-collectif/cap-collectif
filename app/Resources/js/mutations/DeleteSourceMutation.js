@@ -57,6 +57,11 @@ const commit = (
           sourceable,
           'OpinionSourceBox_viewerSourcesUnpublished',
         );
+        if (!connection) {
+          throw new Error(
+            'Expected "OpinionSourceBox_viewerSourcesUnpublished" to be in the store',
+          );
+        }
         connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
       }
     },

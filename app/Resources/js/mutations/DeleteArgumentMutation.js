@@ -45,7 +45,9 @@ const commit = (
       }
 
       const argumentableProxy = store.get(id);
-      if (!argumentableProxy) return;
+      if (!argumentableProxy) {
+        throw new Error('Expected argumentable to be in the store');
+      }
 
       // We update the "FOR" or "AGAINST" row arguments totalCount
       if (published) {
@@ -56,6 +58,9 @@ const commit = (
             type,
           },
         );
+        if (!connection) {
+          throw new Error('Expected "ArgumentList_allArguments" to be in the store');
+        }
         connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
 
         const allArgumentsProxy = argumentableProxy.getLinkedRecord('arguments', { first: 0 });
@@ -72,6 +77,11 @@ const commit = (
             type,
           },
         );
+        if (!connection) {
+          throw new Error(
+            'Expected "UnpublishedArgumentList_viewerArgumentsUnpublished" to be in the store',
+          );
+        }
         connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
       }
     },
