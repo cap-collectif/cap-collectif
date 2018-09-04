@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedDate } from 'react-intl';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import moment from 'moment';
@@ -50,6 +50,7 @@ class ArgumentItem extends React.Component<Props> {
           <div className="opinion__data">
             <p className="h5 opinion__user">
               <UserLink user={argument.author} />
+              {isProfile && this.renderLabel(argument.type)}
             </p>
             {this.renderDate()}
             {/* $FlowFixMe */}
