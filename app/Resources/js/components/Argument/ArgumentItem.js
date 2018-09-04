@@ -45,9 +45,14 @@ export class ArgumentItem extends React.Component<Props> {
 
   renderLabel = type => {
     const labelStyle = type === 'FOR' ? 'success' : 'danger';
-    const labelValue = type === 'FOR' ? 'Pour' : 'Contre';
+    const labelValueTranslateId =
+      type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against';
 
-    return <Label bsStyle={labelStyle}>{labelValue}</Label>;
+    return (
+      <Label bsStyle={labelStyle} className={'label--right'}>
+        <FormattedMessage id={labelValueTranslateId} />
+      </Label>
+    );
   };
 
   renderConsultationLink = consultation => {
@@ -75,7 +80,6 @@ export class ArgumentItem extends React.Component<Props> {
       <ListGroupItem className={classes} id={`arg-${argument.id}`}>
         <div className="opinion__body">
           <UserAvatar user={argument.author} className="pull-left" />
-          {isProfile && this.renderLabel(argument.type)}
           <div className="opinion__data">
             <p className="h5 opinion__user">
               <UserLink user={argument.author} />
