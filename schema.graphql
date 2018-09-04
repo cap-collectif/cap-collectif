@@ -32,6 +32,39 @@ type AddArgumentVotePayload {
   clientMutationId: String
 }
 
+input AddCommentInput {
+  # The Commentable ID of the subject to comment.
+  commentableId: ID!
+
+  # The contents of the comment.
+  body: String!
+  authorName: String
+  authorEmail: String
+  clientMutationId: String
+}
+
+type AddCommentPayload {
+  # The edge from the commentable's comment connection.
+  commentEdge: CommentEdge
+
+  # The commentable.
+  commentable: Commentable
+  userErrors: [UserError!]!
+  clientMutationId: String
+}
+
+input AddCommentVoteInput {
+  # The Node ID of the comment to vote.
+  commentId: ID!
+  clientMutationId: String
+}
+
+type AddCommentVotePayload {
+  voteEdge: CommentVoteEdge
+  viewer: User!
+  clientMutationId: String
+}
+
 input AddOpinionVoteInput {
   # The Node ID of the opinion/version to vote.
   opinionId: ID!
@@ -692,7 +725,10 @@ type CollectStep implements Node & Step & ProposalStep {
 }
 
 # A comment
-type Comment implements Node & Publishable & Contribution {
+type Comment implements Node & Publishable & Reportable & Contribution & Commentable {
+  # The comments related to the commentable.
+  comments(after: String, first: Int, before: String, last: Int, orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}): CommentConnection!
+
   # The ID of an object
   id: ID!
 
@@ -707,6 +743,9 @@ type Comment implements Node & Publishable & Contribution {
 
   # Url of the contribution
   url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
 
   # `true` if the object is published.
   published: Boolean!
@@ -737,6 +776,7 @@ type Comment implements Node & Publishable & Contribution {
   author: User
   parent: Comment
   pinned: Boolean!
+  contribuable: Boolean!
   answers: [Comment]!
   authorName: String
   authorEmail: String
@@ -744,11 +784,15 @@ type Comment implements Node & Publishable & Contribution {
   publicationStatus: CommentPublicationStatus!
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: PUBLISHED_AT, direction: DESC}): CommentVoteConnection!
+  viewerHasVote: Boolean!
+  viewerVote: CommentVote
+  editUrl: URI
 }
 
 # A connection to a list of items.
 type CommentConnection {
   totalCount: Int!
+  totalCountWithAnswers: Int!
 
   # Information to aid in pagination.
   pageInfo: PageInfo!
@@ -794,14 +838,29 @@ enum CommentPublicationStatus {
   TRASHED_NOT_VISIBLE
 }
 
-type CommentVote {
+# Entities that can be published.
+type CommentVote implements Node & Publishable {
+  # The ID of an object
   id: ID!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 
   # Date of vote.
   createdAt: DateTime
 
   # The author of the contribution.
   author: User!
+  contribution: Comment!
 
   # Returns 'commentVote'.
   kind: String!
@@ -825,6 +884,15 @@ type CommentVoteEdge {
 
   # A cursor for use in pagination.
   cursor: String!
+}
+
+# A commentable
+interface Commentable {
+  # The ID of an object
+  id: ID!
+
+  # The comments related to the commentable.
+  comments(after: String, first: Int, before: String, last: Int, orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}): CommentConnection!
 }
 
 # A consultation
@@ -1085,6 +1153,19 @@ type DeleteArgumentPayload {
   clientMutationId: String
 }
 
+input DeleteCommentInput {
+  # The ID of the comment to delete.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteCommentPayload {
+  deletedCommentId: ID
+  commentable: Commentable
+  userErrors: [UserError]
+  clientMutationId: String
+}
+
 input DeleteGroupInput {
   # The group id
   groupId: ID!
@@ -1213,7 +1294,10 @@ type EvaluationForm {
 }
 
 # Fetches an object given its ID
-type Event implements Node {
+type Event implements Node & Commentable {
+  # The comments related to the commentable.
+  comments(after: String, first: Int, before: String, last: Int, orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}): CommentConnection!
+
   # The ID of an object
   id: ID!
   title: String!
@@ -1463,6 +1547,8 @@ type MultipleChoiceQuestionValidationRule {
 }
 
 type Mutation {
+  addComment(input: AddCommentInput!): AddCommentPayload
+  addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
   addArgument(input: AddArgumentInput!): AddArgumentPayload
   addArgumentVote(input: AddArgumentVoteInput!): AddArgumentVotePayload
   addSource(input: AddSourceInput!): AddSourcePayload
@@ -1471,6 +1557,7 @@ type Mutation {
   changeVersion(input: ChangeVersionInput!): ChangeVersionPayload
   changeSource(input: ChangeSourceInput!): ChangeSourcePayload
   deleteArgument(input: DeleteArgumentInput!): DeleteArgumentPayload
+  deleteComment(input: DeleteCommentInput!): DeleteCommentPayload
   deleteSource(input: DeleteSourceInput!): DeleteSourcePayload
   deleteOpinion(input: DeleteOpinionInput!): DeleteOpinionPayload
   deleteVersion(input: DeleteVersionInput!): DeleteVersionPayload
@@ -1480,6 +1567,7 @@ type Mutation {
   addOpinionVote(input: AddOpinionVoteInput!): AddOpinionVotePayload
   removeOpinionVote(input: RemoveOpinionVoteInput!): RemoveOpinionVotePayload
   removeArgumentVote(input: RemoveArgumentVoteInput!): RemoveArgumentVotePayload
+  removeCommentVote(input: RemoveCommentVoteInput!): RemoveCommentVotePayload
   addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
   removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
   updateProposalVotes(input: UpdateProposalVotesInput!): UpdateProposalVotesPayload
@@ -1870,8 +1958,13 @@ type PhoneRequirement implements Node & Requirement {
   viewerValue: String
 }
 
-type Post {
-  id: String!
+# Fetches an object given its ID
+type Post implements Node & Commentable {
+  # The comments related to the commentable.
+  comments(after: String, first: Int, before: String, last: Int, orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}): CommentConnection!
+
+  # The ID of an object
+  id: ID!
   title: String
   relatedContent: [PostRelatedContent!]!
   createdAt: DateTime!
@@ -1883,7 +1976,6 @@ type Post {
   publicationStatus: PostPublicationStatus!
   commentable: Boolean!
   displayedOnBlog: Boolean!
-  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}): CommentConnection!
   abstract: String!
   url: URI!
   media: Media
@@ -1972,7 +2064,10 @@ enum ProjectVisibility {
 }
 
 # A budget contribution
-type Proposal implements Node & Contribution & Publishable & Reportable & Trashable {
+type Proposal implements Node & Contribution & Commentable & Publishable & Reportable & Trashable {
+  # The comments related to the commentable.
+  comments(after: String, first: Int, before: String, last: Int, orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}): CommentConnection!
+
   # The ID of an object
   id: ID!
 
@@ -2109,7 +2204,6 @@ type Proposal implements Node & Contribution & Publishable & Reportable & Trasha
 
   # Count number of comments for the proposal.
   commentsCount: Int!
-  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}): CommentConnection!
   votes(
     after: String
     first: Int = 30
@@ -2672,6 +2766,19 @@ input RemoveArgumentVoteInput {
 type RemoveArgumentVotePayload {
   deletedVoteId: ID
   contribution: Argument
+  viewer: User!
+  clientMutationId: String
+}
+
+input RemoveCommentVoteInput {
+  # The Node ID of the comment to unvote.
+  commentId: ID!
+  clientMutationId: String
+}
+
+type RemoveCommentVotePayload {
+  deletedVoteId: ID
+  contribution: Comment
   viewer: User!
   clientMutationId: String
 }

@@ -1,37 +1,58 @@
 <?php
 namespace Capco\AppBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Entity\Event;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\EventComment;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Model\CommentableInterface;
 
 class EventCommentRepository extends EntityRepository
 {
-    public function getEnabledByEvent($event, $offset = 0, $limit = 10, $filter = 'last')
-    {
-        $qb = $this->getPublishedQueryBuilder()
-            ->addSelect('aut', 'm', 'v', 'e', 'r', 'ans')
-            ->leftJoin('c.Author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->leftJoin('c.votes', 'v')
-            ->leftJoin('c.Reports', 'r')
-            ->leftJoin('c.Event', 'e')
-            ->leftJoin('c.answers', 'ans', 'WITH', 'ans.trashedAt IS NULL')
-            ->andWhere('c.Event = :event')
-            ->andWhere('c.parent is NULL')
-            ->andWhere('c.trashedAt IS NULL')
-            ->setParameter('event', $event)
-            ->orderBy('c.pinned', 'DESC');
-        if ('old' === $filter) {
-            $qb->addOrderBy('c.createdAt', 'ASC');
+    private function getByCommentableQueryBuilder(
+        CommentableInterface $commentable,
+        bool $excludeAnswers = true,
+        ?User $viewer
+    ): QueryBuilder {
+        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
+        if ($excludeAnswers && $commentable instanceof Event) {
+            $qb->andWhere('c.parent is NULL');
+        }
+        if ($commentable instanceof Event) {
+            $qb->andWhere('c.Event = :event')->setParameter('event', $commentable);
         }
 
-        if ('last' === $filter) {
-            $qb->addOrderBy('c.createdAt', 'DESC');
+        if ($commentable instanceof EventComment) {
+            $qb->andWhere('c.parent = :comment')->setParameter('comment', $commentable);
         }
 
-        if ('popular' === $filter) {
-            $qb->addOrderBy('c.votesCount', 'DESC');
+        return $qb;
+    }
+
+    public function getByCommentable(
+        CommentableInterface $commentable,
+        ?int $offset,
+        ?int $limit,
+        string $field,
+        string $direction,
+        ?User $viewer
+    ): Paginator {
+        $qb = $this->getByCommentableQueryBuilder($commentable, true, $viewer);
+        // Pinned always come first
+        $qb->addOrderBy('c.pinned', 'DESC');
+
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('c.publishedAt', $direction);
+        }
+
+        if ('UPDATED_AT' === $field) {
+            $qb->addOrderBy('c.updatedAt', $direction);
+        }
+
+        if ('POPULARITY' === $field) {
+            $qb->addOrderBy('c.votesCount', $direction);
         }
 
         $qb->setFirstResult($offset)->setMaxResults($limit);
@@ -39,18 +60,41 @@ class EventCommentRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function countCommentsAndAnswersEnabledByEvent(Event $event): int
-    {
-        $qb = $this->getPublishedQueryBuilder()
-            ->select('count(c.id)')
-            ->andWhere('c.Event = :event')
-            ->andWhere('c.trashedAt IS NULL')
-            ->setParameter('event', $event);
+    public function countCommentsAndAnswersByCommentable(
+        CommentableInterface $commentable,
+        ?User $viewer
+    ): int {
+        $qb = $this->getByCommentableQueryBuilder($commentable, false, $viewer)->select(
+            'count(c.id)'
+        );
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    protected function getPublishedQueryBuilder()
+    public function countCommentsByCommentable(
+        CommentableInterface $commentable,
+        ?User $viewer
+    ): int {
+        $qb = $this->getByCommentableQueryBuilder($commentable, true, $viewer)->select(
+            'count(c.id)'
+        );
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    protected function getPublishedNotTrashedQueryBuilder(?User $viewer): QueryBuilder
     {
-        return $this->createQueryBuilder('c')->andWhere('c.published = true');
+        return $this->getPublishedQueryBuilder($viewer)->andWhere('c.trashedStatus IS NULL');
+    }
+
+    protected function getPublishedQueryBuilder(?User $viewer): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('c')->orWhere('c.published = true');
+        if ($viewer) {
+            $qb
+                ->orWhere('c.Author = :viewer AND c.published = false')
+                ->setParameter('viewer', $viewer);
+        }
+
+        return $qb;
     }
 }

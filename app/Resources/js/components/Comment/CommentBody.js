@@ -1,11 +1,13 @@
 // @flow
 import React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import Linkify from 'react-linkify';
 import { FormattedMessage } from 'react-intl';
 import nl2br from 'react-nl2br';
+import type { CommentBody_comment } from './__generated__/CommentBody_comment.graphql';
 
 type Props = {
-  comment: Object,
+  comment: CommentBody_comment,
 };
 
 type State = {
@@ -19,7 +21,7 @@ class CommentBody extends React.Component<Props, State> {
 
   textShouldBeTruncated = () => {
     const { comment } = this.props;
-    return comment.body.length > 400;
+    return comment.body && comment.body.length > 400;
   };
 
   generateText = () => {
@@ -28,7 +30,7 @@ class CommentBody extends React.Component<Props, State> {
 
     if (!this.textShouldBeTruncated() || this.state.expanded) {
       text = comment.body;
-    } else {
+    } else if (comment.body) {
       text = comment.body.substr(0, 400);
       text = text.substr(0, Math.min(text.length, text.lastIndexOf(' ')));
       if (text.indexOf('.', text.length - 1) === -1) {
@@ -79,4 +81,11 @@ class CommentBody extends React.Component<Props, State> {
   }
 }
 
-export default CommentBody;
+export default createFragmentContainer(CommentBody, {
+  comment: graphql`
+    fragment CommentBody_comment on Comment {
+      trashed
+      body
+    }
+  `,
+});

@@ -30,7 +30,15 @@ class PostComment extends Comment
         return $this;
     }
 
-    // ************************ Overriden methods *********************************
+    public function isCommentable(): bool
+    {
+        return true;
+    }
+
+    public function acceptNewComments(): bool
+    {
+        return $this->isPublished() && !$this->isTrashed();
+    }
 
     public function getRelatedObject(): ?Post
     {

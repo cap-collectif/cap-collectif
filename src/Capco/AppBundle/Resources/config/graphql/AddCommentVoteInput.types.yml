@@ -1,0 +1,8 @@
+AddCommentVoteInput:
+  type: relay-mutation-input
+  config:
+    description: 'Add a vote for an comment.'
+    fields:
+      commentId:
+        type: 'ID!'
+        description: 'The Node ID of the comment to vote.'

@@ -1,9 +1,9 @@
 Comment:
   type: object
-  inherits: [Node, Trashable, Publishable, Contribution]
+  inherits: [Node, Trashable, Reportable, Publishable, Contribution, Commentable]
   config:
     description: 'A comment'
-    interfaces: [Node, Publishable, Contribution]
+    interfaces: [Node, Publishable, Reportable, Contribution, Commentable]
     fields:
       body:
         type: 'String'
@@ -17,6 +17,9 @@ Comment:
         type: 'Comment'
       pinned:
         type: 'Boolean!'
+      contribuable:
+        type: 'Boolean!'
+        resolve: '@=value.canContribute()'
       show_url:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
@@ -59,3 +62,15 @@ Comment:
             defaultValue: { field: PUBLISHED_AT, direction: DESC }
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'
+      viewerHasVote:
+        type: 'Boolean!'
+        resolve: '@=value.userHasVote(getUser())'
+      viewerVote:
+        type: 'CommentVote'
+        resolve: '@=value.userGetVote(getUser())'
+      editUrl:
+        type: 'URI'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentEditUrlResolver", [value])'
+      viewerHasReport:
+        resolve: '@=value.userHasReport(getUser())'

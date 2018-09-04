@@ -23,6 +23,46 @@ final class MutationType extends ObjectType implements GeneratedTypeInterface
             'description' => null,
             'fields' => function () use ($globalVariable) {
                 return [
+                'addComment' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('AddCommentPayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('AddCommentInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\AddCommentMutation", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), 2 => $globalVariable->get('container')->get("request_stack"))]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'addCommentVote' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('AddCommentVotePayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('AddCommentVoteInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\AddCommentVoteMutation", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
                 'addArgument' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('AddArgumentPayload'),
                     'args' => [
@@ -181,6 +221,27 @@ final class MutationType extends ObjectType implements GeneratedTypeInterface
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\DeleteArgumentMutation", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
+                'deleteComment' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DeleteCommentPayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DeleteCommentInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\DeleteCommentMutation", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
                     },
                     'description' => null,
                     'deprecationReason' => null,
@@ -370,6 +431,27 @@ final class MutationType extends ObjectType implements GeneratedTypeInterface
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\RemoveArgumentVoteMutation", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
+                'removeCommentVote' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('RemoveCommentVotePayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('RemoveCommentVoteInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\RemoveCommentVoteMutation", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
                     },
                     'description' => null,
                     'deprecationReason' => null,

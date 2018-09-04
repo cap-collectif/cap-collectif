@@ -1,9 +1,9 @@
 Proposal:
   type: object
-  inherits: [Node, Contribution, Publishable, Reportable, Trashable, WithFollowers]
+  inherits: [Node, Contribution, Commentable, Publishable, Reportable, Trashable, WithFollowers]
   config:
     description: 'A budget contribution'
-    interfaces: [Node, Contribution, Publishable, Reportable, Trashable]
+    interfaces: [Node, Contribution, Commentable, Publishable, Reportable, Trashable]
     fields:
       show_url:
         resolve: "@=resolver('proposal_show_url', [value])"
@@ -131,21 +131,10 @@ Proposal:
       draft:
         type: 'Boolean!'
         description: 'Identifies proposals as draft.'
+      # TODO remove this counter
       commentsCount:
         type: 'Int!'
         description: 'Count number of comments for the proposal.'
-      comments:
-        type: 'CommentConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCommentsResolver", [value, args])'
-        args:
-          first:
-            type: 'Int'
-            defaultValue: 30
-          orderBy:
-            type: 'CommentOrder'
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
       votes:
         type: 'ProposalVoteConnection!'
         argsBuilder: 'Relay::Connection'

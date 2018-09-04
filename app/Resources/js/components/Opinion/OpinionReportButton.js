@@ -25,7 +25,7 @@ class OpinionReportButton extends React.Component<Props> {
     return (
       <ReportBox
         id={`opinion-${opinion.id}`}
-        reported={opinion.viewerHasReport}
+        reported={opinion.viewerHasReport || false}
         onReport={this.handleReport}
         author={{ uniqueId: opinion.author.slug }}
         buttonClassName="opinion__action--report btn--outline btn-dark-gray"

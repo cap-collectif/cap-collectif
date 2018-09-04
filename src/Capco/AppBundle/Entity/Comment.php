@@ -9,16 +9,17 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
@@ -34,7 +35,13 @@ use Capco\AppBundle\Entity\Interfaces\Trashable;
  * @CapcoAssert\HasAuthor
  */
 abstract class Comment
-    implements Publishable, Trashable, Contribution, VotableInterface, HasAuthorInterface
+    implements
+        Publishable,
+        Trashable,
+        Contribution,
+        VotableInterface,
+        HasAuthorInterface,
+        CommentableInterface
 {
     use VotableOkTrait;
     use PinnableTrait;

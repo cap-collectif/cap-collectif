@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\ProposalComment:
   propComment{1..4}:
     id: 'proposalComment<current()>'
     proposal: '@proposal1'
-    Author: '@user<numberBetween(1, 3)>'
+    Author: '@user<numberBetween(2, 3)>'
     body: <text(300)>
     createdAt: '<dateTimeBetween("-2 days", "now")>'
     publishedAt: '<dateTimeBetween("-2 days", "now")>'

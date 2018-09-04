@@ -515,13 +515,20 @@ class Post implements CommentableInterface, IndexableInterface
         return $this->isPublished;
     }
 
+    public function isCommentable(): bool
+    {
+        return true;
+    }
+
     public function getAbstractOrBeginningOfTheText()
     {
         if ($this->abstract) {
             return $this->abstract;
         }
 
-        return \strlen($this->getBodyText()) > 300 ? substr($this->getBodyText(), 0, 300) . ' [&hellip;]' : $this->getBodyText();
+        return \strlen($this->getBodyText()) > 300
+            ? substr($this->getBodyText(), 0, 300) . ' [&hellip;]'
+            : $this->getBodyText();
     }
 
     // ************************** Lifecycle **************************************

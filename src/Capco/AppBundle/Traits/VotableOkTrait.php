@@ -25,17 +25,21 @@ trait VotableOkTrait
         return $this;
     }
 
-    public function userHasVote(User $user = null)
+    public function userHasVote(User $user = null): bool
+    {
+        return $this->userGetVote($user) !== null;
+    }
+
+    public function userGetVote(User $user = null): ?AbstractVote
     {
         if (null !== $user) {
             foreach ($this->votes as $vote) {
                 if ($vote->getUser() === $user) {
-                    return true;
+                    return $vote;
                 }
             }
         }
-
-        return false;
+        return null;
     }
 
     public function getVotes()

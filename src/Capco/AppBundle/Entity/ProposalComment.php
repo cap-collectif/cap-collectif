@@ -32,7 +32,33 @@ class ProposalComment extends Comment
         return $this;
     }
 
-    // ************************ Overriden methods *********************************
+    public function isCommentable(): bool
+    {
+        try {
+            return (
+                !$this->getRelatedObject()->isDeleted() &&
+                $this->getProposal()
+                    ->getProposalForm()
+                    ->isCommentable()
+            );
+        } catch (EntityNotFoundException $e) {
+            return false;
+        }
+    }
+
+    public function acceptNewComments(): bool
+    {
+        try {
+            return (
+                $this->isCommentable() &&
+                $this->isPublished() &&
+                !$this->isTrashed() &&
+                !$this->getProposal()->isDeleted()
+            );
+        } catch (EntityNotFoundException $e) {
+            return false;
+        }
+    }
 
     public function isIndexable(): bool
     {
@@ -56,7 +82,7 @@ class ProposalComment extends Comment
 
     public function getRelatedObject(): ?Proposal
     {
-        return $this->proposal;
+        return $this->getProposal();
     }
 
     public function setRelatedObject($object)

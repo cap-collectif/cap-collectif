@@ -23,6 +23,46 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
             'description' => 'A budget contribution',
             'fields' => function () use ($globalVariable) {
                 return [
+                'comments' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CommentConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('CommentOrder'),
+                            'description' => null,
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableCommentsResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'The comments related to the commentable.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'id' => [
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
@@ -772,47 +812,6 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'comments' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CommentConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                            'defaultValue' => 30,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('CommentOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCommentsResolver", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'votes' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalVoteConnection')),
                     'args' => [
@@ -992,7 +991,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('Publishable'), $globalVariable->get('typeResolver')->resolve('Reportable'), $globalVariable->get('typeResolver')->resolve('Trashable')];
+                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('Commentable'), $globalVariable->get('typeResolver')->resolve('Publishable'), $globalVariable->get('typeResolver')->resolve('Reportable'), $globalVariable->get('typeResolver')->resolve('Trashable')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

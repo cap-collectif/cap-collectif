@@ -3,6 +3,7 @@ namespace Capco\AppBundle\GraphQL\__GENERATED__;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
+use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\ConfigProcessor;
 use Overblog\GraphQLBundle\Definition\LazyConfig;
 use Overblog\GraphQLBundle\Definition\GlobalVariables;
@@ -19,7 +20,7 @@ final class CommentVoteType extends ObjectType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'CommentVote',
-            'description' => null,
+            'description' => 'Entities that can be published.',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [
@@ -27,7 +28,63 @@ final class CommentVoteType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->isPublished();
+                    },
+                    'description' => '`true` if the object is published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'publishableUntil' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishableUntil();
+                    },
+                    'description' => 'Identifies when the entity can no more be published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'publishedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishedAt();
+                    },
+                    'description' => 'Identifies when the entity was published at.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'notPublishedReason' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('NotPublishedReason'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
+                    },
+                    'description' => 'Reason that the entity is not published.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -58,6 +115,20 @@ final class CommentVoteType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+                'contribution' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Comment')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getComment();
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'kind' => [
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
@@ -73,7 +144,7 @@ final class CommentVoteType extends ObjectType implements GeneratedTypeInterface
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [];
+                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Publishable')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

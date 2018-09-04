@@ -39,6 +39,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         'lastLogin',
         'rolesText',
         'enabled',
+        'emailConfirmed',
         'locked',
         'phoneConfirmed',
         'phoneConfirmationSentAt',
@@ -75,7 +76,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         'deletedAccountAt',
     ];
 
-    protected $contributionHeaderMap = [
+    protected $userHeaderMap = [
         'id' => 'id',
         'email' => 'email',
         'username' => 'username',
@@ -84,6 +85,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         'lastLogin' => 'lastLogin',
         'rolesText' => 'rolesText',
         'enabled' => 'enabled',
+        'isEmailConfirmed' => 'emailConfirmed',
         'locked' => 'locked',
         'phoneConfirmed' => 'phoneConfirmed',
         'phoneConfirmationSentAt' => 'phoneConfirmationSentAt',
@@ -182,9 +184,9 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
     private function addUserRow($user): void
     {
         $row = [];
-        foreach ($this->contributionHeaderMap as $path => $columnName) {
-            $row[] = isset($this->contributionHeaderMap[$path])
-                ? exportUtils::parseCellValue(Arr::path($user, $this->contributionHeaderMap[$path]))
+        foreach ($this->userHeaderMap as $path => $columnName) {
+            $row[] = isset($this->userHeaderMap[$path])
+                ? exportUtils::parseCellValue(Arr::path($user, $this->userHeaderMap[$path]))
                 : '';
         }
         $this->writer->addRow($row);
@@ -216,6 +218,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         lastLogin
         rolesText
         enabled
+        isEmailConfirmed
         locked
         phoneConfirmed
         phoneConfirmationSentAt

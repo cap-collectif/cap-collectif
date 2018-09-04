@@ -44,22 +44,40 @@ class EventController extends Controller
             if ($form->isValid()) {
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_event_search_term', [
-                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
-                    'term' => $data['term'],
-                ]));
+                return $this->redirect(
+                    $this->generateUrl('app_event_search_term', [
+                        'theme' => array_key_exists('theme', $data) && $data['theme']
+                            ? $data['theme']->getSlug()
+                            : Theme::FILTER_ALL,
+                        'project' => $data['project']
+                            ? $data['project']->getSlug()
+                            : Project::FILTER_ALL,
+                        'term' => $data['term'],
+                    ])
+                );
             }
         } else {
             $form->setData([
                 'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                'project' => $this->get('Capco\AppBundle\Repository\ProjectRepository')->findOneBySlug($project),
+                'project' => $this->get(
+                    'Capco\AppBundle\Repository\ProjectRepository'
+                )->findOneBySlug($project),
                 'term' => $term,
             ]);
         }
 
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(false, $theme, $project, $term);
-        $archivedEventsNb = $this->get('capco.event.resolver')->countEvents(true, $theme, $project, $term);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(
+            false,
+            $theme,
+            $project,
+            $term
+        );
+        $archivedEventsNb = $this->get('capco.event.resolver')->countEvents(
+            true,
+            $theme,
+            $project,
+            $term
+        );
 
         return [
             'years' => $groupedEvents,
@@ -79,8 +97,12 @@ class EventController extends Controller
      * @param null|mixed $project
      * @param null|mixed $term
      */
-    public function showArchivedAction(Request $request, $theme = null, $project = null, $term = null)
-    {
+    public function showArchivedAction(
+        Request $request,
+        $theme = null,
+        $project = null,
+        $term = null
+    ) {
         $currentUrl = $this->generateUrl('app_event_archived');
 
         $form = $this->createForm(EventSearchType::class, null, [
@@ -94,21 +116,34 @@ class EventController extends Controller
             if ($form->isValid()) {
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_event_archived_term', [
-                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
-                    'term' => $data['term'],
-                ]));
+                return $this->redirect(
+                    $this->generateUrl('app_event_archived_term', [
+                        'theme' => array_key_exists('theme', $data) && $data['theme']
+                            ? $data['theme']->getSlug()
+                            : Theme::FILTER_ALL,
+                        'project' => $data['project']
+                            ? $data['project']->getSlug()
+                            : Project::FILTER_ALL,
+                        'term' => $data['term'],
+                    ])
+                );
             }
         } else {
             $form->setData([
                 'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                'project' => $this->get('Capco\AppBundle\Repository\ProjectRepository')->findOneBySlug($project),
+                'project' => $this->get(
+                    'Capco\AppBundle\Repository\ProjectRepository'
+                )->findOneBySlug($project),
                 'term' => $term,
             ]);
         }
 
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(true, $theme, $project, $term);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(
+            true,
+            $theme,
+            $project,
+            $term
+        );
 
         return [
             'years' => $groupedEvents,
@@ -127,21 +162,17 @@ class EventController extends Controller
 
         $serializer = $this->get('jms_serializer');
 
-        $props = $serializer->serialize([
-            'object' => $event->getId(),
-            'uri' => 'events',
-        ], 'json', SerializationContext::create());
-
         if (!$eventHelper->isRegistrationPossible($event)) {
             return [
                 'event' => $event,
-                'props' => $props,
             ];
         }
 
         $user = $this->getUser();
         $registration = $eventHelper->findUserRegistrationOrCreate($event, $user);
-        $form = $this->createForm(EventRegistrationType::class, $registration, ['registered' => $registration->isConfirmed()]);
+        $form = $this->createForm(EventRegistrationType::class, $registration, [
+            'registered' => $registration->isConfirmed(),
+        ]);
 
         if ('POST' === $request->getMethod()) {
             $registration->setIpAddress($request->getClientIp());
@@ -154,19 +185,34 @@ class EventController extends Controller
                 $em->persist($registration);
                 $em->flush();
                 if ($registration->isConfirmed()) {
-                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('event_registration.create.register_success'));
+                    $this->get('session')
+                        ->getFlashBag()
+                        ->add(
+                            'success',
+                            $this->get('translator')->trans(
+                                'event_registration.create.register_success'
+                            )
+                        );
                 } else {
-                    $this->get('session')->getFlashBag()->add('info', $this->get('translator')->trans('event_registration.create.unregister_success'));
+                    $this->get('session')
+                        ->getFlashBag()
+                        ->add(
+                            'info',
+                            $this->get('translator')->trans(
+                                'event_registration.create.unregister_success'
+                            )
+                        );
                 }
 
-                return $this->redirect($this->generateUrl('app_event_show', ['slug' => $event->getSlug()]));
+                return $this->redirect(
+                    $this->generateUrl('app_event_show', ['slug' => $event->getSlug()])
+                );
             }
         }
 
         return [
             'form' => $form->createView(),
             'event' => $event,
-            'props' => $props,
         ];
     }
 

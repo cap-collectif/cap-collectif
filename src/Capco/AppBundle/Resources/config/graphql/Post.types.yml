@@ -1,9 +1,13 @@
 Post:
   type: object
+  inherits: [Node, Commentable]
   config:
+    interfaces: [Node, Commentable]
     fields:
       id:
-        type: 'String!'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Post
       title:
         type: 'String'
       relatedContent:
@@ -25,21 +29,9 @@ Post:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
       commentable:
         type: 'Boolean!'
-        resolve: '@=value.getIsCommentable()'
+        resolve: '@=value.isCommentable()'
       displayedOnBlog:
         type: 'Boolean!'
-      comments:
-        type: 'CommentConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostCommentsResolver", [value, args])'
-        args:
-          first:
-            type: 'Int'
-            defaultValue: 30
-          orderBy:
-            type: 'CommentOrder'
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
       abstract:
         type: 'String!'
         resolve: "@=resolver('post_abstract', [value])"

@@ -1,72 +1,51 @@
 <?php
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Proposal;
+use Doctrine\ORM\QueryBuilder;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalComment;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Model\CommentableInterface;
 
 class ProposalCommentRepository extends EntityRepository
 {
-    public function getEnabledByProposal(
-        Proposal $proposal,
-        int $offset = 0,
-        int $limit = 10,
-        string $filter = 'last'
-    ): Paginator {
-        $qb = $this->getPublishedQueryBuilder()
-            ->addSelect('aut', 'm', 'v', 'i', 'r', 'ans')
-            ->leftJoin('c.Author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->leftJoin('c.votes', 'v')
-            ->leftJoin('c.Reports', 'r')
-            ->leftJoin('c.proposal', 'i')
-            ->leftJoin('c.answers', 'ans', 'WITH', 'ans.published = true AND ans.trashedAt IS NULL')
-            ->andWhere('c.proposal = :proposal')
-            ->andWhere('c.parent is NULL')
-            ->andWhere('c.trashedAt IS NULL')
-            ->setParameter('proposal', $proposal)
-            ->orderBy('c.pinned', 'DESC');
-
-        if ('old' === $filter) {
-            $qb->addOrderBy('c.updatedAt', 'ASC');
+    private function getByCommentableQueryBuilder(
+        CommentableInterface $commentable,
+        bool $excludeAnswers = true,
+        ?User $viewer = null
+    ): QueryBuilder {
+        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
+        if ($excludeAnswers && $commentable instanceof Proposal) {
+            $qb->andWhere('c.parent is NULL');
+        }
+        if ($commentable instanceof Proposal) {
+            $qb->andWhere('c.proposal = :proposal')->setParameter('proposal', $commentable);
         }
 
-        if ('last' === $filter) {
-            $qb->addOrderBy('c.updatedAt', 'DESC');
+        if ($commentable instanceof ProposalComment) {
+            $qb->andWhere('c.parent = :comment')->setParameter('comment', $commentable);
         }
 
-        if ('popular' === $filter) {
-            $qb->addOrderBy('c.votesCount', 'DESC');
-        }
-
-        $qb->setFirstResult($offset)->setMaxResults($limit);
-
-        return new Paginator($qb);
+        return $qb;
     }
 
-    public function getByProposal(
-        Proposal $proposal,
-        int $offset,
-        int $limit,
+    public function getByCommentable(
+        CommentableInterface $commentable,
+        ?int $offset,
+        ?int $limit,
         string $field,
-        string $direction
+        string $direction,
+        ?User $viewer
     ): Paginator {
-        $qb = $this->createQueryBuilder('c');
-        $qb
-            ->addSelect('aut', 'm', 'v', 'i', 'r', 'ans')
-            ->leftJoin('c.Author', 'aut')
-            ->leftJoin('aut.media', 'm')
-            ->leftJoin('c.votes', 'v')
-            ->leftJoin('c.Reports', 'r')
-            ->leftJoin('c.proposal', 'i')
-            ->leftJoin('c.answers', 'ans')
-            ->andWhere('c.proposal = :proposal')
-            ->andWhere('c.parent is NULL')
-            ->setParameter('proposal', $proposal)
-            ->addOrderBy('c.pinned', $direction);
+        $qb = $this->getByCommentableQueryBuilder($commentable, true, $viewer);
+        // Pinned always come first
+        $qb->addOrderBy('c.pinned', 'DESC');
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('c.publishedAt', $direction);
+            $qb->addOrderBy('c.createdAt', $direction);
         }
 
         if ('UPDATED_AT' === $field) {
@@ -82,19 +61,41 @@ class ProposalCommentRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function countCommentsAndAnswersEnabledByProposal(Proposal $proposal): int
-    {
-        $qb = $this->getPublishedQueryBuilder()
-            ->select('count(c.id)')
-            ->andWhere('c.proposal = :proposal')
-            ->andWhere('c.trashedStatus IS NULL')
-            ->setParameter('proposal', $proposal);
+    public function countCommentsByCommentable(
+        CommentableInterface $commentable,
+        ?User $viewer
+    ): int {
+        $qb = $this->getByCommentableQueryBuilder($commentable, true, $viewer)->select(
+            'count(c.id)'
+        );
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    protected function getPublishedQueryBuilder()
+    public function countCommentsAndAnswersByCommentable(
+        CommentableInterface $commentable,
+        ?User $viewer
+    ): int {
+        $qb = $this->getByCommentableQueryBuilder($commentable, false, $viewer)->select(
+            'count(c.id)'
+        );
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    protected function getPublishedNotTrashedQueryBuilder(?User $viewer): QueryBuilder
     {
-        return $this->createQueryBuilder('c')->andWhere('c.published = true');
+        return $this->getPublishedQueryBuilder($viewer)->andWhere('c.trashedStatus IS NULL');
+    }
+
+    protected function getPublishedQueryBuilder(?User $viewer): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('c')->orWhere('c.published = true');
+        if ($viewer) {
+            $qb
+                ->orWhere('c.Author = :viewer AND c.published = false')
+                ->setParameter('viewer', $viewer);
+        }
+
+        return $qb;
     }
 }

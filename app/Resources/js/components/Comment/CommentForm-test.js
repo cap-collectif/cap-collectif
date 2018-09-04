@@ -3,18 +3,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { CommentForm } from './CommentForm';
-import { intlMock } from '../../mocks';
+import { formMock, intlMock, $refType } from '../../mocks';
 
 const props = {
-  submitting: false,
-  pristine: false,
-  invalid: false,
-  handleSubmit: jest.fn(),
-  reset: jest.fn(),
+  ...formMock,
   isAnswer: false,
   comment: 'test of comment',
-  object: 'proposal1',
-  uri: 'proposal_forms/proposalForm1/proposals',
+  commentable: { $refType, id: 'proposal1' },
   intl: intlMock,
 };
 
@@ -26,7 +21,7 @@ const userProps = {
 
 describe('<CommentForm />', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<CommentForm {...props} />);
+    const wrapper = shallow(<CommentForm {...props} user={null} />);
     wrapper.setState({ expanded: true });
     expect(wrapper).toMatchSnapshot();
   });

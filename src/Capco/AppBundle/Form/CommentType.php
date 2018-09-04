@@ -25,28 +25,20 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ('edit' === $options['actionType']) {
-            $builder
-                ->add('confirm',
-                    CheckboxType::class, [
-                    'mapped' => false,
-                    'label' => 'opinion.form.confirm',
-                    'required' => true,
-                    'constraints' => [new IsTrue(['message' => 'opinion.votes_not_confirmed'])],
-                ])
-            ;
+            $builder->add('confirm', CheckboxType::class, [
+                'mapped' => false,
+                'label' => 'opinion.form.confirm',
+                'required' => true,
+                'constraints' => [new IsTrue(['message' => 'opinion.votes_not_confirmed'])],
+            ]);
         }
 
         $builder->add('body', PurifiedTextareaType::class, ['required' => true]);
 
-        if ('create' === $options['actionType']) {
-            $builder->add('parent', null, ['required' => false]);
-        }
-
         if (!$this->user || !\is_object($this->user)) {
             $builder
                 ->add('authorName', PurifiedTextType::class, ['required' => true])
-                ->add('authorEmail', EmailType::class, ['required' => true])
-            ;
+                ->add('authorEmail', EmailType::class, ['required' => true]);
         }
     }
 

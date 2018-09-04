@@ -34,6 +34,18 @@ final class CommentConnectionType extends ObjectType implements GeneratedTypeInt
                     'public' => null,
                     'access' => null,
                 ],
+                'totalCountWithAnswers' => [
+                    'type' => Type::nonNull(Type::int()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'pageInfo' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('PageInfo')),
                     'args' => [

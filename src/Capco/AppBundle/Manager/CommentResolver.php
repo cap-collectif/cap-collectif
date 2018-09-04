@@ -53,15 +53,15 @@ class CommentResolver
     public function getCommentsByObject($object)
     {
         if ($object instanceof Event) {
-            return $this->em
-                ->getRepository('CapcoAppBundle:EventComment')
-                ->getEnabledByEvent($object);
+            return $this->em->getRepository('CapcoAppBundle:EventComment')->getEnabledByEvent(
+                $object
+            );
         }
 
         if ($object instanceof Post) {
-            return $this->em
-                ->getRepository('CapcoAppBundle:PostComment')
-                ->getEnabledByPost($object);
+            return $this->em->getRepository('CapcoAppBundle:PostComment')->getEnabledByPost(
+                $object
+            );
         }
     }
 
@@ -108,16 +108,6 @@ class CommentResolver
             ['id' => $comment->getId()],
             $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH
         );
-    }
-
-    public function canShowCommentOn($object)
-    {
-        return $object->getIsCommentable();
-    }
-
-    public function canAddCommentOn($object)
-    {
-        return $object->canComment();
     }
 
     public function setObjectOnComment($object, Comment $comment)

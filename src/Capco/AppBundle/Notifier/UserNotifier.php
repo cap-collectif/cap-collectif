@@ -7,8 +7,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
-use Capco\AppBundle\Mailer\Message\User\UserExpiredWithContributionsMessage;
-use Capco\AppBundle\Mailer\Message\User\UserExpiredWithNoContributionsMessage;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
 use Capco\AppBundle\Mailer\Message\Project\QuestionnaireAcknowledgeReplyMessage;
 

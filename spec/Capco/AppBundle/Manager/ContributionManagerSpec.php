@@ -14,17 +14,21 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Psr\Log\LoggerInterface;
 
 class ContributionManagerSpec extends ObjectBehavior
 {
-    function it_is_initializable(Indexer $indexer)
+    function let(Indexer $indexer, LoggerInterface $logger)
     {
-        $this->beConstructedWith($indexer);
+        $this->beConstructedWith($indexer, $logger);
+    }
+
+    function it_is_initializable()
+    {
         $this->shouldHaveType('Capco\AppBundle\Manager\ContributionManager');
     }
 
     function it_can_publish_contributions_of_a_user(
-        Indexer $indexer,
         User $user,
         OpinionVote $vote,
         Proposal $proposal,
@@ -35,8 +39,6 @@ class ContributionManagerSpec extends ObjectBehavior
         Source $source,
         Reply $reply
     ) {
-        $this->beConstructedWith($indexer);
-
         $proposal->getStep()->willReturn(null);
         $proposal->getId()->willReturn('proposal1');
         $proposal->setPublishedAt(Arg::any())->shouldBeCalled();
@@ -75,9 +77,8 @@ class ContributionManagerSpec extends ObjectBehavior
         $this->publishContributions($user)->shouldReturn(true);
     }
 
-    function it_can_publish_contribution_of_a_user_with_nothing(Indexer $indexer, User $user)
+    function it_can_publish_contribution_of_a_user_with_nothing(User $user)
     {
-        $this->beConstructedWith($indexer);
         $user->getContributions()->willReturn([]);
         $this->publishContributions($user)->shouldReturn(false);
     }

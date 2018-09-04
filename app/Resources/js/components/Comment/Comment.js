@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import UserAvatar from '../User/UserAvatar';
@@ -11,13 +12,10 @@ import CommentReportButton from './CommentReportButton';
 import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
 import CommentForm from './CommentForm';
+import type { Comment_comment } from './__generated__/Comment_comment.graphql';
 
 type Props = {
-  uri?: string,
-  object?: string | number,
-  comment: Object,
-  root?: boolean,
-  onVote: Function,
+  comment: Comment_comment,
 };
 
 type State = {
@@ -25,26 +23,10 @@ type State = {
   answerFormFocus: boolean,
 };
 
-class Comment extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    const { comment } = props;
-    if (comment.answers.length > 0) {
-      this.state = {
-        answerFormShown: true,
-        answerFormFocus: false,
-      };
+export class Comment extends React.Component<Props, State> {
+  state = { answerFormShown: false, answerFormFocus: false };
 
-      return;
-    }
-
-    this.state = {
-      answerFormShown: false,
-      answerFormFocus: false,
-    };
-  }
-
-  answer = () => {
+  focusAnswer = () => {
     this.setState({
       answerFormShown: true,
       answerFormFocus: true,
@@ -52,15 +34,14 @@ class Comment extends React.Component<Props, State> {
   };
 
   render() {
-    const { onVote, root, uri, object } = this.props;
-    const comment = this.props.comment;
+    const { comment } = this.props;
     const classes = classNames({
       opinion: true,
       'opinion--comment': true,
     });
     const detailClasses = classNames({
       'bg-vip': comment.author && comment.author.vip,
-      comment__descript: true,
+      comment__descripton: true,
     });
 
     return (
@@ -71,28 +52,33 @@ class Comment extends React.Component<Props, State> {
             <div className="comment__detail">
               <div className={detailClasses}>
                 <div className="opinion__data">
+                  {/* $FlowFixMe $refType */}
                   <CommentInfos comment={comment} />
                 </div>
+                {/* $FlowFixMe $refType */}
                 <CommentBody comment={comment} />
               </div>
               <div className="comment__action">
+                {/* $FlowFixMe $refType */}
                 <CommentDate comment={comment} />
                 <div className="comment__buttons">
-                  <CommentVoteButton comment={comment} onVote={onVote} />{' '}
-                  {root ? (
-                    <a onClick={this.answer} className="btn btn-sm btn-dark-gray btn--outline">
-                      <i className="cap-reply-mail-2" /> {<FormattedMessage id="global.answer" />}
-                    </a>
-                  ) : null}{' '}
-                  <CommentReportButton comment={comment} /> <CommentEdit comment={comment} />{' '}
+                  {/* $FlowFixMe $refType */}
+                  <CommentVoteButton comment={comment} />{' '}
+                  <a onClick={this.focusAnswer} className="btn btn-sm btn-dark-gray btn--outline">
+                    <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
+                  </a>{' '}
+                  {/* $FlowFixMe $refType */}
+                  <CommentReportButton comment={comment} /> {/* $FlowFixMe $refType */}
+                  <CommentEdit comment={comment} />{' '}
                 </div>
               </div>
             </div>
           </div>
           <div className="comment-answers-block">
-            {root ? <CommentAnswers onVote={onVote} comments={comment.answers} /> : null}
+            {/* $FlowFixMe $refType */}
+            <CommentAnswers comment={comment} />
             {this.state.answerFormShown ? (
-              <CommentForm object={object} uri={uri} answerOf={comment.id} />
+              <CommentForm commentable={comment} answerOf={comment.id} />
             ) : null}
           </div>
         </div>
@@ -101,4 +87,26 @@ class Comment extends React.Component<Props, State> {
   }
 }
 
-export default Comment;
+export default createFragmentContainer(Comment, {
+  comment: graphql`
+    fragment Comment_comment on Comment
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      id
+      author {
+        vip
+        displayName
+        media {
+          url
+        }
+      }
+      ...CommentAnswers_comment @arguments(isAuthenticated: $isAuthenticated)
+      ...CommentDate_comment
+      ...CommentInfos_comment
+      ...CommentBody_comment
+      ...CommentEdit_comment @arguments(isAuthenticated: $isAuthenticated)
+      ...CommentVoteButton_comment @arguments(isAuthenticated: $isAuthenticated)
+      ...CommentReportButton_comment @arguments(isAuthenticated: $isAuthenticated)
+      ...CommentForm_commentable
+    }
+  `,
+});

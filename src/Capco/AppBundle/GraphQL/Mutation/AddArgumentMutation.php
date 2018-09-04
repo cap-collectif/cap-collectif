@@ -1,28 +1,29 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Form\ArgumentType;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Capco\AppBundle\Helper\RedisStorageHelper;
-use Capco\AppBundle\Model\Argumentable;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\FormFactory;
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Form\ArgumentType;
+use Capco\AppBundle\Model\Argumentable;
+use Symfony\Component\Form\FormFactory;
+use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Swarrot\SwarrotBundle\Broker\Publisher;
+use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
-class AddArgumentMutation
+class AddArgumentMutation implements MutationInterface
 {
     private $em;
     private $opinionRepo;

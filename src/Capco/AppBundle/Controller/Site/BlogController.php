@@ -1,15 +1,16 @@
 <?php
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\PostSearchType;
 use JMS\Serializer\SerializationContext;
+use Symfony\Component\HttpFoundation\Request;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BlogController extends Controller
@@ -43,22 +44,21 @@ class BlogController extends Controller
 
                 return $this->redirect(
                     $this->generateUrl('app_blog_search_project', [
-                        'theme' =>
-                            array_key_exists('theme', $data) && $data['theme']
-                                ? $data['theme']->getSlug()
-                                : Theme::FILTER_ALL,
-                        'project' =>
-                            $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
+                        'theme' => array_key_exists('theme', $data) && $data['theme']
+                            ? $data['theme']->getSlug()
+                            : Theme::FILTER_ALL,
+                        'project' => $data['project']
+                            ? $data['project']->getSlug()
+                            : Project::FILTER_ALL,
                     ])
                 );
             }
         } else {
             $form->setData([
                 'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                'project' =>
-                    $this->get('Capco\AppBundle\Repository\ProjectRepository')->findOneBySlug(
-                        $project
-                    ),
+                'project' => $this->get(
+                    'Capco\AppBundle\Repository\ProjectRepository'
+                )->findOneBySlug($project),
             ]);
         }
 
@@ -103,13 +103,9 @@ class BlogController extends Controller
             throw new NotFoundHttpException('Could not find a published article for this slug.');
         }
 
-        $serializer = $this->get('jms_serializer');
-
-        $props = $serializer->serialize(
-            ['object' => $post->getId(), 'uri' => 'posts'],
-            'json',
-            SerializationContext::create()
-        );
+        $props = [
+            'commentableId' => GlobalId::toGlobalId('Post', $post->getId()),
+        ];
 
         return ['post' => $post, 'props' => $props];
     }

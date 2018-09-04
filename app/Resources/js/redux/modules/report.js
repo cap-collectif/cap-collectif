@@ -116,9 +116,9 @@ export const submitOpinionReport = (opinion: Object, data: Object, dispatch: Dis
   );
 };
 
-export const submitCommentReport = (comment: Object, data: Object, dispatch: Dispatch) => {
+export const submitCommentReport = (commentId: string, data: Object, dispatch: Dispatch) => {
   return submitReport(
-    `/comments/${comment.id}/reports`,
+    `/comments/${commentId}/reports`,
     data,
     dispatch,
     'alert.success.report.comment',

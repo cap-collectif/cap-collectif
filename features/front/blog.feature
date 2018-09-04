@@ -36,9 +36,9 @@ Scenario: Anonymous wants to comment a blogpost
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
   When I press "comment.submit"
-  And I wait 8 seconds
-  Then I should see "comment.submit_success" in the "#main" element
-  And I should see "J'ai un truc à dire" in the ".opinion__list" element
+  And I wait 2 seconds
+  Then I should see "comment.submit_success" in the "#global-alert-box" element
+  And I should see "J'ai un truc à dire" in the ".comments__section" element
 
 @database @javascript
 Scenario: Logged in user wants to comment a blogpost
@@ -52,4 +52,5 @@ Scenario: Logged in user wants to comment a blogpost
   And I should not see "comment.without_account"
   When I press "comment.submit"
   And I wait 2 seconds
-  Then I should see "J'ai un truc à dire" in the ".opinion__list" element
+  Then I should see "comment.submit_success" in the "#global-alert-box" element
+  Then I should see "J'ai un truc à dire" in the ".comments__section" element

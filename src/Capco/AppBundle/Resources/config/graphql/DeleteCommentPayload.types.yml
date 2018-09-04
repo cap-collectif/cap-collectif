@@ -1,0 +1,10 @@
+DeleteCommentPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      deletedCommentId:
+        type: 'ID'
+      commentable:
+        type: 'Commentable'
+      userErrors:
+        type: '[UserError]'

@@ -515,14 +515,14 @@ class Proposal
         );
     }
 
-    public function canComment(): bool
+    public function acceptNewComments(): bool
     {
         return (
             $this->isPublished() &&
             !$this->isTrashed() &&
             $this->proposalForm &&
             $this->proposalForm->isCommentable() &&
-            $this->getIsCommentable()
+            $this->isCommentable()
         );
     }
 

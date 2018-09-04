@@ -16,6 +16,7 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class GlobalIdResolver
 {
@@ -108,6 +109,15 @@ class GlobalIdResolver
         }
         if (!$node) {
             $node = $this->container->get('capco.follower.repository')->find($uuid);
+        }
+
+        if (!$node) {
+            $decodeGlobalId = GlobalId::fromGlobalId($uuid);
+            if (isset($decodeGlobalId['type']) && $decodeGlobalId['type'] === 'Post') {
+                $node = $this->container->get('capco.blog.post.repository')->find(
+                    $decodeGlobalId['id']
+                );
+            }
         }
 
         if (!$node) {

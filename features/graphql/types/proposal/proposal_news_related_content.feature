@@ -48,7 +48,7 @@ Scenario: Admin wants to get the related content of the first proposal
           "edges": [
             {
               "node": {
-                "id": "7",
+                "id": @string@,
                 "title": @string@,
                 "relatedContent": [
                   {
@@ -113,7 +113,7 @@ Scenario: Admin wants to get only themes on the related content of the first pro
           "edges": [
             {
               "node": {
-                "id": "7",
+                "id": @string@,
                 "title": @string@,
                 "relatedContent": [
                   {
@@ -175,7 +175,7 @@ Scenario: Admin wants to get only proposals on the related content of a blog pos
           "edges": [
             {
               "node": {
-                "id": "7",
+                "id": @string@,
                 "title": @string@,
                 "relatedContent": [
                   {},

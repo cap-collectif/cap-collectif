@@ -17,7 +17,7 @@ exports[`<CommentForm /> should render correctly 1`] = `
     className="opinion__data"
   >
     <form
-      onSubmit={[MockFunction]}
+      onSubmit={[Function]}
     >
       <Field
         aria-label="comment.write"
@@ -132,7 +132,7 @@ exports[`<CommentForm /> should render correctly 1`] = `
                 bsClass="btn"
                 bsStyle="primary"
                 className="btn--comment"
-                disabled={false}
+                disabled={true}
                 type="submit"
               >
                 <FormattedMessage
@@ -170,7 +170,7 @@ exports[`<CommentForm /> should render correctly with user 1`] = `
     className="opinion__data"
   >
     <form
-      onSubmit={[MockFunction]}
+      onSubmit={[Function]}
     >
       <Field
         aria-label="comment.write"
@@ -187,7 +187,7 @@ exports[`<CommentForm /> should render correctly with user 1`] = `
         bsClass="btn"
         bsStyle="primary"
         className="btn--comment"
-        disabled={false}
+        disabled={true}
         type="submit"
       >
         <FormattedMessage

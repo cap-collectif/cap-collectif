@@ -10,22 +10,15 @@ describe('<UserAdminAccount/>', () => {
     ...formMock,
     intl: intlMock,
   };
-
-  const userExpiredAndSubscribed = {
-    subscribedToNewsLetterAt: '2018-05-03 11:11:11',
-    expiresAt: '2018-06-03 11:11:11',
-  };
-
-  const userNotExpiredAndNotSubscribed = {
-    subscribedToNewsLetterAt: null,
-    expiresAt: null,
-  };
   it('should render when user is admin or viewer', () => {
+    const userSubscribed = {
+      subscribedToNewsLetterAt: '2018-05-03 11:11:11',
+    };
     const wrapper = shallow(
       <UserAdminAccount
         {...props1}
         isViewerOrSuperAdmin
-        user={userExpiredAndSubscribed}
+        user={userSubscribed}
         userDeletedIsNotViewer
       />,
     );
@@ -33,10 +26,13 @@ describe('<UserAdminAccount/>', () => {
   });
 
   it('should render when user is not admin or viewer', () => {
+    const userNotSubscribed = {
+      subscribedToNewsLetterAt: null,
+    };
     const wrapper = shallow(
       <UserAdminAccount
         {...props1}
-        user={userNotExpiredAndNotSubscribed}
+        user={userNotSubscribed}
         isViewerOrSuperAdmin={false}
         userDeletedIsNotViewer={false}
       />,

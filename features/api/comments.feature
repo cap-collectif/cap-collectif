@@ -1,16 +1,6 @@
 @comments
 Feature: Comments
 
-@parallel-scenario
-Scenario: API client wants to know the number of comments
-  When I send a GET request to "/api/comments"
-  Then the JSON response should match:
-  """
-  {
-    "count": "@integer@.greaterThan(0)"
-  }
-  """
-
 @security
 Scenario: Anonymous API client wants to report a idea
   When I send a POST request to "/api/comments/proposalComment1/reports" with a valid report json

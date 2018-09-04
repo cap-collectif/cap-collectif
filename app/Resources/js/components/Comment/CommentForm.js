@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { reduxForm, Field, formValueSelector } from 'redux-form';
+import { graphql, createFragmentContainer } from 'react-relay';
+import { type FormProps, reduxForm, Field, formValueSelector } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
@@ -11,43 +12,66 @@ import renderComponent from '../Form/Field';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
 import UserAvatar from '../User/UserAvatar';
+import AddCommentMutation from '../../mutations/AddCommentMutation';
+import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import type { GlobalState, Dispatch } from '../../types';
-import CommentActions from '../../actions/CommentActions';
+import type { CommentForm_commentable } from './__generated__/CommentForm_commentable.graphql';
 
-type Props = {
-  answerOf?: ?string,
-  comment: ?string,
-  object: string,
-  uri: string,
-  user?: ?Object,
-  intl: IntlShape,
-  submitting: boolean,
-  pristine: boolean,
-  invalid: boolean,
-  reset: Function,
-  handleSubmit?: Function,
-};
+type RelayProps = { commentable: CommentForm_commentable };
+type Props = FormProps &
+  RelayProps & {
+    isAnswer: boolean,
+    comment: ?string,
+    user: ?Object,
+    intl: IntlShape,
+  };
 
 type State = {
   expanded: boolean,
 };
 
-const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const { object, uri, user, reset, answerOf } = props;
+type FormValues = {
+  authorName: string,
+  authorEmail: string,
+  body: string,
+};
 
-  values.parent = answerOf;
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+  const { commentable, user, reset } = props;
 
   if (user) {
     delete values.authorName;
     delete values.authorEmail;
   }
 
-  return CommentActions.create(uri, object, values).then(() => {
-    reset();
-  });
+  const input = {
+    commentableId: commentable.id,
+    ...values,
+  };
+
+  return AddCommentMutation.commit({ input, isAuthenticated: !!user })
+    .then(response => {
+      if (
+        !response.addComment ||
+        (response.addComment.userErrors && response.addComment.userErrors.length)
+      ) {
+        throw new Error('Mutation "addComment" failed');
+      }
+      reset();
+      FluxDispatcher.dispatch({
+        actionType: 'UPDATE_ALERT',
+        alert: { bsStyle: 'success', content: 'comment.submit_success' },
+      });
+    })
+    .catch(() => {
+      FluxDispatcher.dispatch({
+        actionType: 'UPDATE_ALERT',
+        alert: { bsStyle: 'danger', content: 'comment.submit_error' },
+      });
+    });
 };
 
-const validate = ({ body, authorEmail, authorName }) => {
+const validate = ({ body, authorEmail, authorName }: FormValues) => {
   const errors = {};
 
   if (body && body.length < 2) {
@@ -66,12 +90,9 @@ const validate = ({ body, authorEmail, authorName }) => {
 };
 
 export const formName = 'CommentForm';
-
 export class CommentForm extends React.Component<Props, State> {
   static defaultProps = {
-    answerOf: null,
-    user: null,
-    comment: 0,
+    isAnswer: false,
   };
 
   state = {
@@ -81,6 +102,14 @@ export class CommentForm extends React.Component<Props, State> {
   componentDidUpdate() {
     autosize(ReactDOM.findDOMNode(this.refs.body));
   }
+
+  onSubmit = (e: any) => {
+    e.preventDefault();
+    // $FlowFixMe
+    this.props.handleSubmit().then(() => {
+      this.setState({ expanded: false });
+    });
+  };
 
   expand = () => {
     const { comment } = this.props;
@@ -185,16 +214,16 @@ export class CommentForm extends React.Component<Props, State> {
   }
 
   render() {
-    const { answerOf, user, intl, handleSubmit } = this.props;
+    const { isAnswer, user, intl } = this.props;
     const classes = classNames({
-      'comment-answer-form': answerOf !== null,
+      'comment-answer-form': isAnswer,
     });
 
     return (
       <div className={classes} style={{ padding: '5px' }}>
         <UserAvatar user={user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={this.onSubmit}>
             <Field
               type="textarea"
               name="body"
@@ -212,17 +241,25 @@ export class CommentForm extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
-  comment: formValueSelector(props.answerOf ? formName + props.answerOf : formName)(state, 'body'),
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: RelayProps) => ({
+  comment: formValueSelector(formName + props.commentable.id)(state, 'body'),
   user: state.user.user,
-  form: props.answerOf ? formName + props.answerOf : formName,
+  form: formName + props.commentable.id,
 });
 
 const container = injectIntl(CommentForm);
 
-export default connect(mapStateToProps)(
+const form = connect(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,
   })(container),
 );
+
+export default createFragmentContainer(form, {
+  commentable: graphql`
+    fragment CommentForm_commentable on Commentable {
+      id
+    }
+  `,
+});

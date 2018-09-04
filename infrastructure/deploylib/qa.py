@@ -11,7 +11,7 @@ capcobot = {
 
 
 @task(environments=['local', 'ci'])
-def check_dependencies():
+def scan_vulnerabilities():
     "Check dependencies"
     env.compose_run('composer validate', 'qarunner', '.', no_deps=True)
     env.service_command('bin/console security:check', 'application', env.www_app)

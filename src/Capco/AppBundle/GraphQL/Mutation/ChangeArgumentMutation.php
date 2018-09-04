@@ -1,19 +1,21 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Form\ArgumentType;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Capco\AppBundle\Helper\RedisStorageHelper;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\Broker\Message;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Form\ArgumentType;
 use Symfony\Component\Form\FormFactory;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
-class ChangeArgumentMutation
+class ChangeArgumentMutation implements MutationInterface
 {
     private $em;
     private $argumentRepo;
@@ -26,7 +28,7 @@ class ChangeArgumentMutation
         FormFactory $formFactory,
         ArgumentRepository $argumentRepo,
         RedisStorageHelper $redisStorage,
-        $publisher
+        Publisher $publisher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;

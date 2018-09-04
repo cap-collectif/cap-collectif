@@ -131,6 +131,12 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:ProposalComment']
 
+  capco.event_comment.repository:
+    public: true
+    class: Capco\AppBundle\Repository\EventCommentRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:EventComment']
+
   capco.comment_vote.repository:
     public: true
     class: Capco\AppBundle\Repository\CommentVoteRepository

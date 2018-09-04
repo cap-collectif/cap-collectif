@@ -17,6 +17,7 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -124,6 +125,9 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof Follower) {
             return $this->typeResolver->resolve('Follower');
+        }
+        if ($node instanceof Post) {
+            return $this->typeResolver->resolve('Post');
         }
         if ($node instanceof Requirement) {
             return $this->requirementTypeResolver->__invoke($node);

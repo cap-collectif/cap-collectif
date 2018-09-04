@@ -1,0 +1,15 @@
+AddCommentInput:
+  type: relay-mutation-input
+  config:
+    description: 'Input type of AddComment.'
+    fields:
+      commentableId:
+        type: 'ID!'
+        description: 'The Commentable ID of the subject to comment.'
+      body:
+        type: 'String!'
+        description: 'The contents of the comment.'
+      authorName:
+        type: 'String'
+      authorEmail:
+        type: 'String'

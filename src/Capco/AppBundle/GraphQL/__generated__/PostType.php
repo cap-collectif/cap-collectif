@@ -20,15 +20,57 @@ final class PostType extends ObjectType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'Post',
-            'description' => null,
+            'description' => 'Fetches an object given its ID',
             'fields' => function () use ($globalVariable) {
                 return [
+                'comments' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CommentConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('CommentOrder'),
+                            'description' => null,
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableCommentsResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'The comments related to the commentable.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'id' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => Type::nonNull(Type::id()),
                     'args' => [
                     ],
-                    'resolve' => null,
-                    'description' => null,
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_globalid_field", array(0 => $value, 1 => $info, 2 => null, 3 => "Post")]);
+                    },
+                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -128,7 +170,7 @@ final class PostType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->getIsCommentable();
+                        return $value->isCommentable();
                     },
                     'description' => null,
                     'deprecationReason' => null,
@@ -142,47 +184,6 @@ final class PostType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'comments' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CommentConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                            'defaultValue' => 30,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('CommentOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostCommentsResolver", array(0 => $value, 1 => $args)]);
-                    },
                     'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
@@ -257,7 +258,7 @@ final class PostType extends ObjectType implements GeneratedTypeInterface
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [];
+                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Commentable')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

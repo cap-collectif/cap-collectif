@@ -1,0 +1,8 @@
+RemoveCommentVoteInput:
+  type: relay-mutation-input
+  config:
+    description: 'Remove a vote for a comment.'
+    fields:
+      commentId:
+        type: 'ID!'
+        description: 'The Node ID of the comment to unvote.'

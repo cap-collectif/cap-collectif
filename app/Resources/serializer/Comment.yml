@@ -4,53 +4,17 @@ Capco\AppBundle\Entity\Comment:
     id:
       expose: true
       type: string
-      groups: [Comments, Elasticsearch]
+      groups: [Elasticsearch]
     body:
       expose: true
       type: string
-      groups: [Comments, Elasticsearch]
+      groups: [Elasticsearch]
     createdAt:
       expose: true
       type: DateTime
-      groups: [Comments, Elasticsearch]
+      groups: [Elasticsearch]
       serialized_name: createdAt
-    updatedAt:
-      expose: true
-      type: DateTime
-      groups: [Comments]
-      serialized_name: updatedAt
-    votesCount:
-      expose: true
-      type: integer
-      groups: [Comments]
-      serialized_name: votesCount
-    Author:
-      expose: true
-      type: Capco\UserBundle\Entity\User
-      serialized_name: author
-      groups: [Comments, UserMedias]
     authorName:
       expose: true
       type: string
-      groups: [Comments, Elasticsearch]
-    authorEmail:
-      expose: true
-      type: string
-      groups: [Comments]
-    answers:
-      expose: true
-      groups: [Comments, UserMedias]
-    pinned:
-      expose: true
-      type: boolean
-      groups: [Comments]
-  virtual_properties:
-    canContribute:
-      serialized_name: canContribute
-      type: boolean
-      groups: [Comments]
-    isTrashed:
-      expose: true
-      type: boolean
-      groups: [Comments]
-      serialized_name: trashed
+      groups: [Elasticsearch]

@@ -4,10 +4,12 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import CommentSection from '../components/Comment/CommentSection';
 
-export default props => (
+type Props = { commentableId: string };
+
+export default (props: Props) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <CommentSection {...props} />
+      <CommentSection commentableId={props.commentableId} />
     </IntlProvider>
   </Provider>
 );

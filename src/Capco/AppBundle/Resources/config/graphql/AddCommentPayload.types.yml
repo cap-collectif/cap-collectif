@@ -1,0 +1,12 @@
+AddCommentPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      commentEdge:
+        type: 'CommentEdge'
+        description: The edge from the commentable's comment connection.
+      commentable:
+        type: 'Commentable'
+        description: 'The commentable.'
+      userErrors:
+        type: '[UserError!]!'

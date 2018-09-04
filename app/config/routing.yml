@@ -57,20 +57,6 @@ capco_api_users:
   defaults:
     _format: json
 
-capco_api_events:
-  resource: '@CapcoAppBundle/Controller/Api/EventsController.php'
-  type: annotation
-  prefix: /api
-  defaults:
-    _format: json
-
-capco_api_posts:
-  resource: '@CapcoAppBundle/Controller/Api/PostsController.php'
-  type: annotation
-  prefix: /api
-  defaults:
-    _format: json
-
 capco_api_selection_steps:
   resource: '@CapcoAppBundle/Controller/Api/SelectionStepsController.php'
   type: annotation

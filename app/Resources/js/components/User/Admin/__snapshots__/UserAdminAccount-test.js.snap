@@ -166,7 +166,6 @@ exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
         userDeletedIsNotViewer={true}
         viewer={
           Object {
-            "expiresAt": "2018-06-03 11:11:11",
             "subscribedToNewsLetterAt": "2018-05-03 11:11:11",
           }
         }

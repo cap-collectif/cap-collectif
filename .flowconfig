@@ -12,7 +12,13 @@ all=warn
 .*/web/*
 ; large dirs that are not imported
 .*/vendor/*
-.*/app/Resources/assets/js/ckeditor/*
+.*/app/Resources/assets/*
+.*/app/Resources/fonts/*
+.*/bower.json
+.*/.storybook/*
+.*/docs/*
+.*/coverage/*
+.*/codemod/*
 
 [libs]
 flow-typed

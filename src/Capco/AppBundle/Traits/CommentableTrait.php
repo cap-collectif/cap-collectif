@@ -59,7 +59,7 @@ trait CommentableTrait
         return $this->comments;
     }
 
-    public function addComment(Comment $comment): self
+    public function addComment(Comment $comment) : self
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
@@ -68,31 +68,31 @@ trait CommentableTrait
         return $this;
     }
 
-    public function removeComment(Comment $comment): self
+    public function removeComment(Comment $comment) : self
     {
         $this->comments->removeElement($comment);
 
         return $this;
     }
 
-    public function getIsCommentable(): bool
+    public function isCommentable() : bool
     {
         return $this->isCommentable ?? false;
     }
 
-    public function setIsCommentable(bool $isCommentable): self
+    public function setIsCommentable(bool $isCommentable) : self
     {
         $this->isCommentable = $isCommentable;
 
         return $this;
     }
 
-    public function canComment($user = null): bool
+    public function acceptNewComments($user = null) : bool
     {
         if (!$this instanceof Event && !$this instanceof Post) {
-            return $this->canContribute($user) && $this->isCommentable;
+            return $this->canContribute($user) && $this->isCommentable();
         }
 
-        return $this->canContribute() && $this->isCommentable;
+        return $this->canContribute() && $this->isCommentable();
     }
 }

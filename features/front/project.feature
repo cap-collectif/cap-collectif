@@ -137,18 +137,6 @@ Scenario: Can not access trash if feature is disabled
   Then I should not see "project.show.trashed.short_name" in the "#main" element
 
 @javascript
-Scenario: Project trash display correct numbers of elements
-  Given feature "project_trash" is enabled
-  And I am logged in as user
-  And I visited "consultation page" with:
-    | projectSlug | croissance-innovation-disruption |
-    | stepSlug    | collecte-des-avis                |
-  When I should see "project.show.trashed.short_name" in the "#main" element
-  When I click the "#trash-link" element
-  Then I should see 75 ".opinion__list .opinion" elements
-  And I should see "75 project.show.meta.total_count" in the "h3" element
-
-@javascript
 Scenario: Users can't see privates project
   Given feature "projects_form" is enabled
   And I visited "projects page"

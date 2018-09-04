@@ -42,6 +42,7 @@ fragment commentInfos on Comment {
     id
   }
   createdAt
+  publishedAt
   updatedAt
   author {
     ... authorInfos
@@ -104,6 +105,7 @@ EOF;
 fragment voteInfos on ProposalVote{
   id
   createdAt
+  publishedAt
   anonymous
   author {
     ... authorInfos
@@ -114,6 +116,7 @@ EOF;
 fragment voteInfos on CommentVote{
   id
   createdAt
+  publishedAt
   author {
     ... authorInfos
   }
@@ -149,6 +152,7 @@ EOF;
 fragment commentVoteInfos on CommentVote {
   id
   createdAt
+  publishedAt
   kind
   author {
     ... authorInfos
@@ -161,6 +165,7 @@ EOF;
         'proposal_reference',
         'proposal_title',
         'proposal_createdAt',
+        'proposal_publishedAt',
         'proposal_updatedAt',
         'proposal_publicationStatus',
         'proposal_trashedAt',
@@ -180,7 +185,8 @@ EOF;
         'proposal_summaryOrBodyExcerpt',
         'proposal_votes_id',
         'proposal_votes_createdAt',
-        'proposal_votes_expired',
+        'proposal_votes_publishedAt',
+        'proposal_votes_published',
         'proposal_votes_anonymous',
         'proposal_votes_author_id',
         'proposal_votes_author_username',
@@ -190,6 +196,7 @@ EOF;
         'proposal_comments_body',
         'proposal_comments_parent',
         'proposal_comments_createdAt',
+        'proposal_comments_publishedAt',
         'proposal_comments_updatedAt',
         'proposal_comments_author_id',
         'proposal_comments_author_username',
@@ -200,7 +207,8 @@ EOF;
         'proposal_comments_publicationStatus',
         'proposal_comments_vote_id',
         'proposal_comments_vote_createdAt',
-        'proposal_comments_vote_expired',
+        'proposal_comments_vote_publishedAt',
+        'proposal_comments_vote_published',
         'proposal_comments_vote_author_id',
         'proposal_comments_vote_author_username',
         'proposal_comments_vote_author_userType_id',
@@ -234,14 +242,15 @@ EOF;
         'proposal_news_comments_publicationStatus',
         'proposal_news_comments_vote_id',
         'proposal_news_comments_vote_createdAt',
-        'proposal_news_comments_vote_expired',
+        'proposal_news_comments_vote_publishedAt',
+        'proposal_news_comments_vote_published',
         'proposal_news_comments_vote_author_id',
         'proposal_news_comments_vote_author_username',
         'proposal_news_comments_vote_author_userType_id',
         'proposal_news_comments_vote_author_userType_name',
         'proposal_news_comments_reportings_id',
         'proposal_news_comments_reportings_createdAt',
-        'proposal_news_comments_reportings_expired',
+        'proposal_news_comments_reportings_published',
         'proposal_news_comments_reportings_author_id',
         'proposal_news_comments_reportings_author_username',
         'proposal_news_comments_reportings_author_userType_id',
@@ -297,6 +306,7 @@ EOF;
         'proposal_news_comments_body' => 'body',
         'proposal_news_comments_parent' => 'parent',
         'proposal_news_comments_createdAt' => 'createdAt',
+        'proposal_news_comments_publishedAt' => 'publishedAt',
         'proposal_news_comments_updatedAt' => 'updatedAt',
         'proposal_news_comments_author_id' => 'author.id',
         'proposal_news_comments_author_username' => 'author.username',
@@ -310,6 +320,7 @@ EOF;
     protected const PROPOSAL_NEWS_COMMENT_VOTE_HEADER_MAP = [
         'proposal_news_comments_vote_id' => 'id',
         'proposal_news_comments_vote_createdAt' => 'createdAt',
+        'proposal_news_comments_vote_publishedAt' => 'publishedAt',
         'proposal_news_comments_vote_author_id' => 'author.id',
         'proposal_news_comments_vote_author_username' => 'author.username',
         'proposal_news_comments_vote_author_userType_id' => 'author.userType.id',
@@ -319,6 +330,7 @@ EOF;
     protected const PROPOSAL_VOTE_HEADER_MAP = [
         'proposal_votes_id' => 'id',
         'proposal_votes_createdAt' => 'createdAt',
+        'proposal_votes_publishedAt' => 'publishedAt',
         'proposal_votes_anonymous' => 'anonymous',
         'proposal_votes_author_id' => 'author.id',
         'proposal_votes_author_username' => 'author.username',
@@ -329,6 +341,7 @@ EOF;
     protected const PROPOSAL_COMMENT_VOTE_HEADER_MAP = [
         'proposal_comments_vote_id' => 'id',
         'proposal_comments_vote_createdAt' => 'createdAt',
+        'proposal_comments_vote_publishedAt' => 'publishedAt',
         'proposal_comments_vote_author_id' => 'author.id',
         'proposal_comments_vote_author_username' => 'author.username',
         'proposal_comments_vote_author_userType_id' => 'author.userType.id',
@@ -339,6 +352,7 @@ EOF;
         'proposal_comments_id' => 'id',
         'proposal_comments_body' => 'body',
         'proposal_comments_createdAt' => 'createdAt',
+        'proposal_comments_publishedAt' => 'publishedAt',
         'proposal_comments_updatedAt' => 'updatedAt',
         'proposal_comments_author_id' => 'author.id',
         'proposal_comments_author_username' => 'author.username',
@@ -389,6 +403,7 @@ EOF;
         'proposal_reference' => 'reference',
         'proposal_title' => 'title',
         'proposal_createdAt' => 'createdAt',
+        'proposal_publishedAt' => 'publishedAt',
         'proposal_updatedAt' => 'updatedAt',
         'proposal_publicationStatus' => 'publicationStatus',
         'proposal_trashedAt' => 'trashedAt',
@@ -1511,7 +1526,7 @@ ${COMMENT_VOTE_INFOS}
 {
   node(id: "{$proposalStep->getId()}") {
     ... on ProposalStep {
-      proposals(first: ${PROPOSALS_PER_PAGE}{$proposalAfter}) {
+      proposals(includeUnpublished: true, first: ${PROPOSALS_PER_PAGE}{$proposalAfter}) {
         totalCount
         pageInfo {
           startCursor
@@ -1546,6 +1561,7 @@ ${COMMENT_VOTE_INFOS}
             id
             title
             createdAt
+            publishedAt
             updatedAt
             publicationStatus
             trashedAt

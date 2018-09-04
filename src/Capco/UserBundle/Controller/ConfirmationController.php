@@ -22,6 +22,7 @@ class ConfirmationController extends Controller
         $response = new RedirectResponse($this->container->get('router')->generate('app_homepage'));
 
         if (!$user) {
+            // We could not find a user with this token
             $session
                 ->getFlashBag()
                 ->set('sonata_user_success', 'global.alert.already_email_confirmed');
@@ -30,13 +31,15 @@ class ConfirmationController extends Controller
         }
 
         $user->setEnabled(true);
+
         $user->setLastLogin(new \DateTime());
 
+        // We publish the user's contributions
         $hasPulishedContributions = $this->get('capco.contribution.manager')->publishContributions(
             $user
         );
 
-        // if user has been created via API he has no password yet.
+        // If user has been created via API he has no password yet.
         // That's why we create a reset password request to let him chose a password
         if (null === $user->getPassword()) {
             $user->setPasswordRequestedAt(new \DateTime());
@@ -47,7 +50,9 @@ class ConfirmationController extends Controller
             ]);
         }
 
+        // We can confirm by email the user
         $user->setConfirmationToken(null);
+
         $manager->updateUser($user);
 
         $this->get('fos_user.security.login_manager')->loginUser(

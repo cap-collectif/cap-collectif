@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Manager\CommentResolver;
+use Capco\AppBundle\Model\CommentableInterface;
 
 class CommentExtension extends \Twig_Extension
 {
@@ -21,7 +22,10 @@ class CommentExtension extends \Twig_Extension
             new \Twig_SimpleFunction('capco_comment_can_add', [$this, 'canAddCommentOnObject']),
             new \Twig_SimpleFunction('capco_comment_object_url', [$this, 'getRelatedObjectUrl']),
             new \Twig_SimpleFunction('capco_comment_object', [$this, 'getRelatedObject']),
-            new \Twig_SimpleFunction('capco_comment_object_admin_url', [$this, 'getRelatedObjectAdminUrl']),
+            new \Twig_SimpleFunction('capco_comment_object_admin_url', [
+                $this,
+                'getRelatedObjectAdminUrl',
+            ]),
         ];
     }
 
@@ -40,13 +44,13 @@ class CommentExtension extends \Twig_Extension
         return $this->resolver->getRelatedObject($comment);
     }
 
-    public function canShowCommentOnObject($object)
+    public function canShowCommentOnObject(CommentableInterface $object)
     {
-        return $this->resolver->canShowCommentOn($object);
+        return $object->isCommentable();
     }
 
-    public function canAddCommentOnObject($object)
+    public function canAddCommentOnObject(CommentableInterface $object)
     {
-        return $this->resolver->canAddCommentOn($object);
+        return $object->acceptNewComments();
     }
 }

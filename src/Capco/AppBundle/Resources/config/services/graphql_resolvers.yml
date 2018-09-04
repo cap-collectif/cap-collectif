@@ -323,11 +323,6 @@ services:
     tags:
       - { name: overblog_graphql.resolver }
 
-  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalCommentsResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@capco.proposal_comment.repository', '@logger']
-
   Capco\AppBundle\GraphQL\Resolver\Post\PostCommentsResolver:
     tags:
       - { name: overblog_graphql.resolver }

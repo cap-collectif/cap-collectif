@@ -73,24 +73,10 @@ services:
     tags:
       - { name: 'jms_serializer.event_subscriber' }
 
-  capco.comment.serialization_listener:
-    public: true
-    class: Capco\AppBundle\EventListener\CommentSerializationListener
-    arguments: ['@router', '@security.token_storage']
-    tags:
-      - { name: 'jms_serializer.event_subscriber' }
-
   capco.theme.serialization_listener:
     public: true
     class: Capco\AppBundle\EventListener\ThemeSerializationListener
     arguments: ['@router']
-    tags:
-      - { name: 'jms_serializer.event_subscriber' }
-
-  capco.argument.serialization_listener:
-    public: true
-    class: Capco\AppBundle\EventListener\ArgumentSerializationListener
-    arguments: ['@router', '@security.token_storage']
     tags:
       - { name: 'jms_serializer.event_subscriber' }
 

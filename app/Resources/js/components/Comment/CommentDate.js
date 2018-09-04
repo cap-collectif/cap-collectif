@@ -1,10 +1,12 @@
 // @flow
 import React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
+import type { CommentDate_comment } from './__generated__/CommentDate_comment.graphql';
 
 type Props = {
-  comment: Object,
+  comment: CommentDate_comment,
 };
 
 class CommentDate extends React.Component<Props> {
@@ -42,7 +44,7 @@ class CommentDate extends React.Component<Props> {
       <span className="excerpt">
         {<FormattedMessage id="comment.edited" />}{' '}
         <FormattedDate
-          value={moment(comment.updated_at)}
+          value={moment(comment.updatedAt)}
           day="numeric"
           month="long"
           year="numeric"
@@ -64,4 +66,12 @@ class CommentDate extends React.Component<Props> {
   }
 }
 
-export default CommentDate;
+export default createFragmentContainer(CommentDate, {
+  comment: graphql`
+    fragment CommentDate_comment on Comment {
+      createdAt
+      publishedAt
+      updatedAt
+    }
+  `,
+});

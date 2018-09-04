@@ -25,7 +25,7 @@ class ArgumentReportButton extends React.Component<Props> {
     return (
       <ReportBox
         id={`argument-${argument.id}`}
-        reported={argument.viewerHasReport}
+        reported={argument.viewerHasReport || false}
         onReport={this.handleReport}
         author={{ uniqueId: argument.author.slug }}
         buttonBsSize="xs"

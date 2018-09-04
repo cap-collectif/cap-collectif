@@ -5,14 +5,17 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Psr\Log\LoggerInterface;
 
 class ContributionManager
 {
     private $indexer;
+    private $logger;
 
-    public function __construct(Indexer $indexer)
+    public function __construct(Indexer $indexer, LoggerInterface $logger)
     {
         $this->indexer = $indexer;
+        $this->logger = $logger;
     }
 
     public function publishContributions(User $user): bool
@@ -32,7 +35,17 @@ class ContributionManager
                 }
             }
         }
-        $this->indexer->finishBulk();
+
+        try {
+            $this->indexer->finishBulk();
+        } catch (\RuntimeException $exception) {
+            // In some rare cases indexation could failed
+            // the user will not see his published contributions
+            // Until next indexation
+            $this->logger->warning('Could not index, published contributions of a user.', [
+                'userId' => $user->getId(),
+            ]);
+        }
 
         return $republishedCount > 0;
     }

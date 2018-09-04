@@ -1,8 +1,8 @@
 Event:
   type: object
-  inherits: [Node]
+  inherits: [Node, Commentable]
   config:
-    interfaces: [Node]
+    interfaces: [Node, Commentable]
     fields:
       title:
         type: 'String!'
@@ -24,7 +24,7 @@ Event:
         type: 'User!'
       commentable:
         type: 'Boolean!'
-        resolve: '@=value.getIsCommentable()'
+        resolve: '@=value.isCommentable()'
       updatedAt:
         type: 'DateTime'
       createdAt:
