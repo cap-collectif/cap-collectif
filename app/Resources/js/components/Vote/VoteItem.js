@@ -51,6 +51,7 @@ export class VoteItem extends React.Component<Props> {
     }
 
     return (
+<<<<<<< HEAD
       <ListVoteItem id={`vote-${vote.id}`}>
         <UserAvatar user={vote.author} className="pull-left" />
         <div className="opinion__data">
@@ -82,6 +83,14 @@ export class VoteItem extends React.Component<Props> {
           </a>
         </p>
       </ListVoteItem>
+=======
+      <ListGroupItem id={`vote-${vote.id}`}>
+        {/* $FlowFixMe */}
+        <a href={vote.related.url}>
+          {vote.related.id} - {vote.related.title}
+        </a>
+      </ListGroupItem>
+>>>>>>> fix argument name in findAllByAuthor
     );
   }
 }
