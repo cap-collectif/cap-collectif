@@ -14,10 +14,10 @@ class VoteItem extends React.Component<Props> {
 
     return (
       <ListGroupItem id={`vote-${vote.id}`}>
-        <div>
-          {/* $FlowFixMe */}
-          <a href={vote.related.url}>{vote.related.title}</a>
-        </div>
+        {/* $FlowFixMe */}
+        <a href={vote.related.url}>
+          {vote.related.id} - {vote.related.title}
+        </a>
       </ListGroupItem>
     );
   }

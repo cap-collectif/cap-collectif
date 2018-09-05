@@ -39,14 +39,14 @@ class AbstractVoteRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findAllByAuthor(User $user, int $first = 0, int $offset = 100): Paginator
+    public function findAllByAuthor(User $user, int $limit = 100, int $offset = 0): Paginator
     {
         $qb = $this->createQueryBuilder('v');
         $qb
             ->andWhere('v.user = :author')
             ->setParameter('author', $user)
-            ->setMaxResults($offset)
-            ->setFirstResult($first);
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
 
         return new Paginator($qb);
     }

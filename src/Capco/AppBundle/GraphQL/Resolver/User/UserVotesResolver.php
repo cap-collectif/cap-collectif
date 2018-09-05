@@ -19,7 +19,7 @@ class UserVotesResolver
 
     public function __invoke(User $user, Argument $args): Connection
     {
-        $paginator = new Paginator(function (?int $limit, ?int $offset) use ($user) {
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($user) {
             return $this->votesRepo->findAllByAuthor($user, $limit, $offset)
                 ->getIterator()
                 ->getArrayCopy();
