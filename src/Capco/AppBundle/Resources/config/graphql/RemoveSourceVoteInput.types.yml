@@ -1,0 +1,8 @@
+RemoveSourceVoteInput:
+  type: relay-mutation-input
+  config:
+    description: 'Remove a vote for a source.'
+    fields:
+      sourceId:
+        type: 'ID!'
+        description: 'The Node ID of the source to unvote.'

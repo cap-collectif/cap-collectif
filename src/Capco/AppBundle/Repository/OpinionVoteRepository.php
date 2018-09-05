@@ -52,21 +52,6 @@ class OpinionVoteRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getEnabledByConsultationStep(ConsultationStep $step)
-    {
-        $qb = $this->getPublishedQueryBuilder()
-            ->addSelect('u', 'ut', 'o')
-            ->leftJoin('v.user', 'u')
-            ->leftJoin('u.userType', 'ut')
-            ->leftJoin('v.opinion', 'o')
-            ->andWhere('o.step = :step')
-            ->andWhere('o.published = 1')
-            ->setParameter('step', $step)
-            ->orderBy('v.updatedAt', 'ASC');
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function getByContributionQB(Opinion $votable)
     {
         $qb = $this->getPublishedQueryBuilder();

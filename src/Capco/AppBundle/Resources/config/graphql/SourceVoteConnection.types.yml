@@ -1,0 +1,7 @@
+SourceVoteConnection:
+  type: relay-connection
+  config:
+    nodeType: SourceVote!
+    connectionFields:
+      totalCount:
+        type: Int!

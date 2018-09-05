@@ -4,43 +4,22 @@ Capco\AppBundle\Entity\Source:
         id:
             expose: true
             type: string
-            groups: [Opinions, OpinionVersions, Elasticsearch]
+            groups: [Elasticsearch]
         body:
             expose: true
             type: string
-            groups: [Opinions, OpinionVersions, Elasticsearch]
-        category:
-            expose: true
-            groups: [Opinions, OpinionVersions]
+            groups: [Elasticsearch]
         title:
             expose: true
             type: string
-            groups: [Opinions, OpinionVersions, Elasticsearch]
-        link:
-            expose: true
-            type: string
-            groups: [Opinions, OpinionVersions]
+            groups: [Elasticsearch]
         createdAt:
             expose: true
             type: DateTime
-            groups: [Opinions, OpinionVersions, Elasticsearch]
+            groups: [Elasticsearch]
             serialized_name: createdAt
         updatedAt:
             expose: true
             type: DateTime
-            groups: [Opinions, OpinionVersions, Elasticsearch]
+            groups: [Elasticsearch]
             serialized_name: updatedAt
-        votesCount:
-            expose: true
-            type: integer
-            serialized_name: votesCount
-            groups: [Opinions, OpinionVersions]
-        author:
-            expose: true
-            type: Capco\UserBundle\Entity\User
-            groups: [Opinions, OpinionVersions, UsersInfos]
-    virtual_properties:
-        canContribute:
-            serialized_name: isContribuable
-            type: boolean
-            groups: [Opinions, OpinionVersions]

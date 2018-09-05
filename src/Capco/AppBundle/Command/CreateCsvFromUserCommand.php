@@ -527,7 +527,9 @@ EOF;
               trashed
               trashedAt
               trashedReason
-              votesCount
+              votes(first: 0) {
+                totalCount
+              }
             }
           }
         }

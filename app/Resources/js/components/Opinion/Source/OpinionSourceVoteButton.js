@@ -4,22 +4,29 @@ import ReactDOM from 'react-dom';
 import { Button } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import AddSourceVoteMutation from '../../../mutations/AddSourceVoteMutation';
+import RemoveSourceVoteMutation from '../../../mutations/RemoveSourceVoteMutation';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import type { OpinionSourceVoteButton_source } from './__generated__/OpinionSourceVoteButton_source.graphql';
 
 type Props = {
   disabled: boolean,
-  hasVoted: boolean,
-  onClick: Function,
   source: OpinionSourceVoteButton_source,
 };
 
 export class OpinionSourceVoteButton extends React.Component<Props> {
-  target: null;
+  onClick = () => {
+    const { source } = this.props;
+    if (source.viewerHasVote) {
+      return RemoveSourceVoteMutation.commit({ input: { sourceId: source.id } });
+    }
+    return AddSourceVoteMutation.commit({ input: { sourceId: source.id } });
+  };
 
+  target: null;
   render() {
-    const { source, disabled, hasVoted, onClick } = this.props;
+    const { source, disabled } = this.props;
     return (
       <LoginOverlay>
         <Button
@@ -27,11 +34,11 @@ export class OpinionSourceVoteButton extends React.Component<Props> {
             this.target = button;
           }}
           disabled={disabled}
-          bsStyle={hasVoted ? 'danger' : 'success'}
-          className={`source__btn--vote${hasVoted ? '' : ' btn--outline'}`}
+          bsStyle={source.viewerHasVote ? 'danger' : 'success'}
+          className={`source__btn--vote${source.viewerHasVote ? '' : ' btn--outline'}`}
           bsSize="xsmall"
-          onClick={onClick}>
-          {hasVoted ? (
+          onClick={this.onClick}>
+          {source.viewerHasVote ? (
             <FormattedMessage id="vote.cancel" />
           ) : (
             <span>

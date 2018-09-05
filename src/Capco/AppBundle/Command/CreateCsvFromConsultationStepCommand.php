@@ -95,7 +95,9 @@ fragment sourceInfos on Source {
   updatedAt
   published
   ...trashableInfos
-  votesCount
+  votes(first: 0) {
+    totalCount
+  }
 }
 EOF;
 
@@ -111,7 +113,7 @@ EOF;
         'contributions_sources_createdAt' => 'createdAt',
         'contributions_sources_updatedAt' => 'updatedAt',
         'contributions_sources_published' => 'published',
-        'contributions_sources_votesCount' => 'votesCount',
+        'contributions_sources_votesCount' => 'votes.totalCount',
     ];
 
     protected const VOTES_HEADER_MAP = [
@@ -235,7 +237,7 @@ EOF;
         'contributions_arguments_trashed' => 'trashed',
         'contributions_arguments_trashedAt' => 'trashedAt',
         'contributions_arguments_trashedReason' => 'trashedReason',
-        'contributions_arguments_votesCount' => 'votesCount',
+        'contributions_arguments_votesCount' => 'votes.totalCount',
         'contributions_votes_id' => 'votes.id',
         'contributions_votes_author_id' => 'votes.author.id',
         'contributions_votes_value' => 'votes.value',

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Source;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\SourceVote;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 class SourceVoteRepository extends EntityRepository
@@ -50,47 +51,26 @@ class SourceVoteRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    /**
-     * Get enabled by consultation step.
-     */
-    public function getEnabledByConsultationStep(ConsultationStep $step, bool $asArray = false)
+    public function getByContribution(Source $source, ?int $limit, ?int $offset): Paginator
     {
         $qb = $this->getPublishedQueryBuilder()
-            ->addSelect('u', 'ut')
-            ->leftJoin('v.user', 'u')
-            ->leftJoin('u.userType', 'ut')
-            ->leftJoin('v.source', 'source')
-            ->leftJoin('source.opinion', 'o')
-            ->leftJoin('source.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->andWhere(
-                '
-                (source.opinion IS NOT NULL AND o.step = :step AND o.published = 1)
-                OR
-                (source.opinionVersion IS NOT NULL AND ovo.step = :step AND ov.published = 1 AND ovo.published = 1)'
-            )
-            ->setParameter('step', $step);
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
+            ->andWhere('v.source = :source')
+            ->setParameter('source', $source)
+            ->orderBy('v.publishedAt', 'ASC');
+
+        $qb->setFirstResult($offset)->setMaxResults($limit);
+
+        return new Paginator($qb);
     }
 
-    /**
-     * Get all by source.
-     *
-     * @param $sourceId
-     * @param mixed $asArray
-     *
-     * @return mixed
-     */
-    public function getAllBySource($sourceId, $asArray = false)
+    public function countByContribution(Source $source): int
     {
-        $qb = $this->getPublishedQueryBuilder()
-            ->addSelect('u', 'ut')
-            ->leftJoin('v.user', 'u')
-            ->leftJoin('u.userType', 'ut')
+        return $this->getPublishedQueryBuilder()
+            ->select('COUNT(v.id)')
             ->andWhere('v.source = :source')
-            ->setParameter('source', $sourceId)
-            ->orderBy('v.updatedAt', 'ASC');
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
+            ->setParameter('source', $source)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     public function getBySourceAndUser(Source $source, User $author): ?SourceVote

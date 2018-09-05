@@ -51,29 +51,6 @@ class ArgumentVoteRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    /**
-     * Get enabled by consultation step.
-     */
-    public function getEnabledByConsultationStep(ConsultationStep $step, bool $asArray = false)
-    {
-        $qb = $this->getPublishedQueryBuilder()
-            ->addSelect('u', 'ut')
-            ->leftJoin('v.user', 'u')
-            ->leftJoin('u.userType', 'ut')
-            ->leftJoin('v.argument', 'arg')
-            ->leftJoin('arg.opinion', 'o')
-            ->leftJoin('arg.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'ovo')
-            ->andWhere(
-                '
-                (arg.opinion IS NOT NULL AND o.step = :step AND o.published = 1)
-                OR
-                (arg.opinionVersion IS NOT NULL AND ovo.step = :step AND ov.published = 1 AND ovo.published = 1)'
-            )
-            ->setParameter('step', $step);
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
-    }
-
     public function getByArgumentAndUser(Argument $argument, User $author): ?ArgumentVote
     {
         $qb = $this->createQueryBuilder('v')

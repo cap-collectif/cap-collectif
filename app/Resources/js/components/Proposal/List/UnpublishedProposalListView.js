@@ -50,6 +50,7 @@ export class UnpublishedProposalListView extends React.Component<Props> {
             step={step}
             proposals={step.viewerProposalsUnpublished}
             viewer={viewer}
+            view="mosaic"
             id="proposals-unpublished-list"
           />
         </Panel.Body>

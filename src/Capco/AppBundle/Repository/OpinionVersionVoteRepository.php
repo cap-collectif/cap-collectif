@@ -113,28 +113,6 @@ class OpinionVersionVoteRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    /**
-     * Get published by consultation step.
-     *
-     * @param mixed $asArray
-     */
-    public function getEnabledByConsultationStep(ConsultationStep $step, $asArray = false)
-    {
-        $qb = $this->getPublishedQueryBuilder()
-            ->addSelect('u', 'ut')
-            ->leftJoin('v.user', 'u')
-            ->leftJoin('u.userType', 'ut')
-            ->leftJoin('v.opinionVersion', 'ov')
-            ->leftJoin('ov.parent', 'o')
-            ->andWhere('o.step = :step')
-            ->andWhere('ov.published = 1')
-            ->andWhere('o.published = 1')
-            ->setParameter('step', $step)
-            ->orderBy('v.updatedAt', 'ASC');
-
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
-    }
-
     public function getByAuthorAndOpinion(
         User $author,
         OpinionVersion $version

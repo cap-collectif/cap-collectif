@@ -1,35 +1,34 @@
 Source:
   type: object
   inherits:
-    [
-      Node,
-      Publishable,
-      Contribution,
-      Reportable,
-      Trashable,
-      ContributionWithAuthor,
-      EditableContribution,
-    ]
+    - Node
+    - Publishable
+    -  Contribution
+    -  Reportable
+    -  Trashable
+    -  ContributionWithAuthor
+    -  EditableContribution
   config:
     description: 'A source'
     interfaces:
-      [
-        Node,
-        Publishable,
-        Contribution,
-        Reportable,
-        Trashable,
-        ContributionWithAuthor,
-        EditableContribution,
-      ]
+      - Node
+      - Publishable
+      - Contribution
+      - Reportable
+      - Trashable
+      - ContributionWithAuthor
+      - EditableContribution
     fields:
       createdAt:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
       viewerHasReport:
         resolve: '@=value.userHasReport(getUser())'
-      votesCount:
-        type: 'Int!'
+      votes: 
+        type: SourceVoteConnection
+        argsBuilder: 'Relay::Connection'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceVotesResolver", [value, args, getUser()])'
       contribuable:
         type: 'Boolean!'
         resolve: '@=value.canContribute()'

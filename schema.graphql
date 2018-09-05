@@ -142,6 +142,18 @@ type AddSourcePayload {
   clientMutationId: String
 }
 
+input AddSourceVoteInput {
+  # The Node ID of the source to vote.
+  sourceId: ID!
+  clientMutationId: String
+}
+
+type AddSourceVotePayload {
+  voteEdge: SourceVoteEdge
+  viewer: User!
+  clientMutationId: String
+}
+
 input AddUsersInGroupInput {
   # Users that will be added to the group.
   users: [ID!]!
@@ -1548,6 +1560,7 @@ type MultipleChoiceQuestionValidationRule {
 
 type Mutation {
   addComment(input: AddCommentInput!): AddCommentPayload
+  addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
   addArgument(input: AddArgumentInput!): AddArgumentPayload
   addArgumentVote(input: AddArgumentVoteInput!): AddArgumentVotePayload
@@ -1568,6 +1581,7 @@ type Mutation {
   removeOpinionVote(input: RemoveOpinionVoteInput!): RemoveOpinionVotePayload
   removeArgumentVote(input: RemoveArgumentVoteInput!): RemoveArgumentVotePayload
   removeCommentVote(input: RemoveCommentVoteInput!): RemoveCommentVotePayload
+  removeSourceVote(input: RemoveSourceVoteInput!): RemoveSourceVotePayload
   addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
   removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
   updateProposalVotes(input: UpdateProposalVotesInput!): UpdateProposalVotesPayload
@@ -2812,6 +2826,19 @@ type RemoveProposalVotePayload {
   clientMutationId: String
 }
 
+input RemoveSourceVoteInput {
+  # The Node ID of the source to unvote.
+  sourceId: ID!
+  clientMutationId: String
+}
+
+type RemoveSourceVotePayload {
+  deletedVoteId: ID
+  contribution: Source
+  viewer: User!
+  clientMutationId: String
+}
+
 # A Reply
 type Reply implements Node & Publishable & Contribution {
   # The ID of an object
@@ -3280,7 +3307,7 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  votesCount: Int!
+  votes(after: String, first: Int, before: String, last: Int): SourceVoteConnection
   contribuable: Boolean!
   viewerHasVote: Boolean!
   viewerVote: SourceVote
@@ -3368,6 +3395,26 @@ type SourceVote implements Publishable {
 
   # Returns 'sourceVote'.
   kind: String!
+}
+
+# A connection to a list of items.
+type SourceVoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [SourceVoteEdge]
+}
+
+# An edge in a connection.
+type SourceVoteEdge {
+  # The item at the end of the edge.
+  node: SourceVote!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # A sourceable

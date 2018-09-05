@@ -1,0 +1,8 @@
+AddSourceVoteInput:
+  type: relay-mutation-input
+  config:
+    description: 'Add a vote for an source.'
+    fields:
+      sourceId:
+        type: 'ID!'
+        description: 'The Node ID of the source to vote.'

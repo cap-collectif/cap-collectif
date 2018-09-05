@@ -245,11 +245,33 @@ final class SourceType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'votesCount' => [
-                    'type' => Type::nonNull(Type::int()),
+                'votes' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('SourceVoteConnection'),
                     'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
                     ],
-                    'resolve' => null,
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceVotesResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
                     'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,

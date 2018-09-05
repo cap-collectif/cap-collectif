@@ -130,15 +130,13 @@ class ProjectDownloadResolver
         return $this->data;
     }
 
-    public function getRepliesData($replies)
+    public function getRepliesData(iterable $replies)
     {
         foreach ($replies as $reply) {
-            if ($reply['published']) {
-                $responses = $this->em->getRepository(
-                    'CapcoAppBundle:Responses\AbstractResponse'
-                )->getByReplyAsArray($reply['id']);
-                $this->addItemToData($this->getReplyItem($reply, $responses));
-            }
+            $responses = $this->em->getRepository(
+                'CapcoAppBundle:Responses\AbstractResponse'
+            )->getByReplyAsArray($reply['id']);
+            $this->addItemToData($this->getReplyItem($reply, $responses));
         }
     }
 
