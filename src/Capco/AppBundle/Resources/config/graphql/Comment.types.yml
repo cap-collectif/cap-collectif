@@ -6,7 +6,7 @@ Comment:
     interfaces: [Node, Publishable, Reportable, Contribution, Commentable]
     fields:
       body:
-        type: 'String'
+        type: 'String!'
       createdAt:
         type: 'DateTime!'
       updatedAt:

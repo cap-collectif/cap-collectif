@@ -19,3 +19,6 @@ Vote:
       private:
         type: 'Boolean'
         description: 'Update the vote privacy.'
+      value:
+        type: 'Int'
+        description: 'The value of the vote.'

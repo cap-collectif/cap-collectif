@@ -94,6 +94,18 @@ final class VoteType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+                'value' => [
+                    'type' => Type::int(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The value of the vote.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
             ];
             },
             'interfaces' => function () use ($globalVariable) {

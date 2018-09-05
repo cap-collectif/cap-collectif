@@ -35,7 +35,7 @@ export class VoteListProfile extends Component<Props, State> {
     const { voteList, relay } = this.props;
 
     return (
-      <ListGroup>
+      <ListGroup bsClass="media-list" componentClass="ul">
         {// $FlowFixMe
         voteList.votes.edges
           .filter(Boolean)

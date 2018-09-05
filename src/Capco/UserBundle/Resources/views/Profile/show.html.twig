@@ -86,7 +86,6 @@
         <div class="container container--custom">
             <h2>{{ 'user.profile.show.votes' | trans({}, 'CapcoAppBundle') }}</h2>
             {{ react_render_component('VoteListApp', { 'props': { 'userId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
-            <!-- {% include '@CapcoUser/Profile/votes.html.twig' %} -->
         </div>
     {% endif %}
 

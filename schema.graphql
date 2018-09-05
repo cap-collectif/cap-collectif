@@ -4415,6 +4415,9 @@ type Vote {
 
   # Update the vote privacy.
   private: Boolean
+
+  # The value of the vote.
+  value: Int
 }
 
 # A connection to a list of items.
