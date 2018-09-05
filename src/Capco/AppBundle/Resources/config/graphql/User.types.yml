@@ -275,8 +275,6 @@ User:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMediasResolver", [value, args])'
       votes:
-        access:
-          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
         type: 'VoteConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all votes of the user.'

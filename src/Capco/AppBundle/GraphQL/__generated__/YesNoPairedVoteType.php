@@ -20,7 +20,7 @@ final class YesNoPairedVoteType extends InterfaceType implements GeneratedTypeIn
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'YesNoPairedVote',
-            'description' => 'Fetches an object given its ID',
+            'description' => 'Entities that can be published.',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [

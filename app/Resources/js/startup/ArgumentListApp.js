@@ -9,17 +9,23 @@ import type { ArgumentListAppQueryResponse } from './__generated__/ArgumentListA
 import ArgumentListProfile from '../components/Argument/ArgumentListProfile';
 import Loader from '../components/Ui/Loader';
 
-export default ({ userId }: { userId: string }) => (
+export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: boolean }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QueryRenderer
-        variables={{ userId, count: 5 }}
+        variables={{ userId, count: 5, isAuthenticated }}
         environment={environment}
         query={graphql`
-          query ArgumentListAppQuery($userId: ID!, $count: Int, $after: String) {
+          query ArgumentListAppQuery(
+            $userId: ID!
+            $count: Int
+            $after: String
+            $isAuthenticated: Boolean!
+          ) {
             node(id: $userId) {
               id
-              ...ArgumentListProfile_argumentList @arguments(count: $count, after: $after)
+              ...ArgumentListProfile_argumentList
+                @arguments(count: $count, after: $after, isAuthenticated: $isAuthenticated)
             }
           }
         `}

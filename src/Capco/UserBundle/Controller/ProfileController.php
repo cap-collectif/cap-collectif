@@ -462,12 +462,9 @@ class ProfileController extends Controller
         $this->get('event_dispatcher')->dispatch('security.interactive_login', $logInEvent);
     }
 
-    private function getProjectsCount(User $user, User $loggedUser): int
+    private function getProjectsCount(User $user, ?User $loggedUser): int
     {
-        $projectsRaw = $this->get('Capco\AppBundle\Repository\ProjectRepository')->getByUser(
-            $user,
-            $loggedUser
-        );
+        $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $loggedUser);
 
         return \count($projectsRaw);
     }

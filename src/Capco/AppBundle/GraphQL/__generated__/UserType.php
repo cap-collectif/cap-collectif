@@ -997,9 +997,7 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver")->isGranted(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), $value, $context);
-                    },
+                    'access' => null,
                 ],
                 'groups' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('GroupConnection')),

@@ -67,14 +67,18 @@ export default createPaginationContainer(
   {
     argumentList: graphql`
       fragment ArgumentListProfile_argumentList on User
-        @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
+        @argumentDefinitions(
+          cursor: { type: "String" }
+          count: { type: "Int!" }
+          isAuthenticated: { type: "Boolean!" }
+        ) {
         id
         arguments(first: $count, after: $cursor) @connection(key: "ArgumentListProfile_arguments") {
           totalCount
           edges {
             node {
               id
-              ...ArgumentItem_argument
+              ...ArgumentItem_argument @arguments(isAuthenticated: $isAuthenticated)
             }
           }
           pageInfo {
@@ -106,10 +110,16 @@ export default createPaginationContainer(
       };
     },
     query: graphql`
-      query ArgumentListProfileQuery($argumentId: ID!, $cursor: String, $count: Int) {
-        argumentList: node(id: $argumentId) {
+      query ArgumentListProfileQuery(
+        $userId: ID!
+        $cursor: String
+        $count: Int
+        $isAuthenticated: Boolean!
+      ) {
+        argumentList: node(id: $userId) {
           id
-          ...ArgumentListProfile_argumentList @arguments(cursor: $cursor, count: $count)
+          ...ArgumentListProfile_argumentList
+            @arguments(cursor: $cursor, count: $count, isAuthenticated: $isAuthenticated)
         }
       }
     `,
