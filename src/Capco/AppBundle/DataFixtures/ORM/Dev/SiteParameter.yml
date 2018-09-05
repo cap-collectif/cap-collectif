@@ -421,17 +421,3 @@ Capco\AppBundle\Entity\SiteParameter:
     position: 3
     type: 3
     helpText: reserved-for-ad-scripts  script-desactivatable-by-user
-
-  SiteParameterMailjetPublicKey:
-    keyname: mailjet.keys.public
-    category: settings.notifications
-    value: ''
-    position: 4
-    type: 0
-
-  SiteParameterMailjetSecretKey:
-    keyname: mailjet.keys.secret
-    category: settings.notifications
-    value: ''
-    position: 5
-    type: 0

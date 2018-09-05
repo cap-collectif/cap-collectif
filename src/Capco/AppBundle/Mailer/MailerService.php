@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Mailer\Message\Message;
@@ -83,7 +84,9 @@ class MailerService
             ->setSubject($subject)
             ->setContentType('text/html')
             ->setBody($body)
-            ->setFrom([$message->getSenderEmail() => $message->getSenderName()]);
+            ->setFrom([
+                $message->getSenderEmail() => $message->getSenderName(),
+            ]);
 
         if (!empty($message->getBcc())) {
             $swiftMessage->setBcc($message->getBcc());
@@ -107,7 +110,7 @@ class MailerService
         return $delivered;
     }
 
-    public function getFailedRecipients(): array
+    public function getFailedRecipients()
     {
         return $this->failedRecipients;
     }

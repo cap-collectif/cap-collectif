@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Helper;
 
 use Capco\UserBundle\Entity\User;
@@ -13,25 +14,10 @@ class RedisStorageHelper
         $this->redis = $redis;
     }
 
-    public function recomputeUserCounters(User $user = null): void
+    public function recomputeUserCounters(User $user = null)
     {
         if ($user) {
             $this->redis->sadd('recalculate_user_counters', $user->getId());
         }
-    }
-
-    public function getValue(string $key): ?string
-    {
-        return $this->redis->get($key);
-    }
-
-    public function setValue(string $key, $value): void
-    {
-        $this->redis->set($key, $value);
-    }
-
-    public function deleteKey(string $key): void
-    {
-        $this->redis->del([$key]);
     }
 }

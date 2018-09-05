@@ -234,13 +234,6 @@ services:
     tags:
       - { name: doctrine.event_listener, event: preFlush, method: preFlush }
 
-  capco.listener.site_parameter:
-    public: true
-    class: Capco\AppBundle\EventListener\SiteParameterListener
-    arguments: ['@cache.app']
-    tags:
-      - { name: doctrine.orm.entity_listener }
-
   Capco\AppBundle\EventListener\ProjectAccessDeniedExceptionListener:
     public: true
     autowire: true

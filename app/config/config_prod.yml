@@ -44,6 +44,3 @@ monolog:
       level: warning
       type: raven
       dsn: '%sentry_dsn%'
-
-swiftmailer:
-  default_mailer: mailjet

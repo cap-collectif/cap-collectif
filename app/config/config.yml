@@ -45,8 +45,6 @@ parameters:
   locales: ['en-GB', 'fr-FR', 'es-ES']
   google_maps_key_server: '***REMOVED***'
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
-  mailjet_key: '%env(SYMFONY_MAILJET_KEY)%'
-  mailjet_secret: '%env(SYMFONY_MAILJET_SECRET)%'
 
   # Default values
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
@@ -83,8 +81,6 @@ parameters:
   env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
   env(SYMFONY_SENTRY_DSN): ~
-  env(SYMFONY_MAILJET_KEY): ~
-  env(SYMFONY_MAILJET_SECRET): ~
 
 framework:
   secret: '%secret%'
@@ -244,8 +240,6 @@ swiftmailer:
       port: '%mailer_port%'
       username: '%mailer_user%'
       password: '%mailer_password%'
-    mailjet:
-      transport: mailjet
 
 # Stof\DoctrineExtensionBundle configuration
 stof_doctrine_extensions:
