@@ -925,6 +925,15 @@ type Consultation implements Node & Step {
   url: String!
   opinionCountShownBySection: Int
 
+  # Whether the user has vote for a contribution in this consultation.
+  userHasVote(
+    # The user's login.
+    login: String!
+  ): Boolean!
+
+  # The number of votes in this consultation.
+  votesCount: Int @deprecated(reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a `votes` connection.")
+
   # The project
   project: Project!
 

@@ -248,6 +248,14 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
+    public function findOneByEmail(string $email): ?User
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->andWhere('u.email = :email')->setParameter('email', $email);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
     public function findUserByNewEmailConfirmationToken(string $token)
     {
         $qb = $this->createQueryBuilder('u');

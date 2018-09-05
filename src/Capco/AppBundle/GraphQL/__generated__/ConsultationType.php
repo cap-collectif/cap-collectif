@@ -101,6 +101,37 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
+                'userHasVote' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                        [
+                            'name' => 'login',
+                            'type' => Type::nonNull(Type::string()),
+                            'description' => 'The user\'s login.',
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationUserHasVoteResolver", array(0 => $value, 1 => $args)]);
+                    },
+                    'description' => 'Whether the user has vote for a contribution in this consultation.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'votesCount' => [
+                    'type' => Type::int(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The number of votes in this consultation.',
+                    'deprecationReason' => 'In preparation for an upcoming change to the way we expose counters, this field will only be available inside a `votes` connection.',
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'project' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Project')),
                     'args' => [

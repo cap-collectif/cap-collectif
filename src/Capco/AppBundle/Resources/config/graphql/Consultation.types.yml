@@ -9,6 +9,20 @@ Consultation:
         resolve: 'consultation'
       opinionCountShownBySection:
         type: 'Int'
+      userHasVote:
+        type: 'Boolean!'
+        description: 'Whether the user has vote for a contribution in this consultation.'
+        args:
+          login:
+            type: 'String!'
+            description: "The user's login."
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationUserHasVoteResolver", [value, args])'
+      votesCount:
+        type: 'Int'
+        description: 'The number of votes in this consultation.'
+        deprecationReason:
+          'In preparation for an upcoming change to the way we expose counters, this field will only be available inside a `votes` connection.'
       project:
         type: 'Project!'
         description: 'The project'
