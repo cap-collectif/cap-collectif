@@ -3,7 +3,6 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
-use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\exportUtils;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -18,7 +17,7 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
-use Overblog\GraphQLBundle\Request\Executor;
+use Capco\AppBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -363,40 +362,20 @@ EOF;
         'proposal_comments_pinned' => 'pinned',
         'proposal_comments_publicationStatus' => 'publicationStatus',
     ];
+
     protected const CUSTOM_QUESTIONS_HEADER_OFFSET = 21;
-    /**
-     * @var ProjectRepository
-     */
+
     protected $projectRepository;
-
-    /**
-     * @var Manager
-     */
     protected $toggleManager;
-
-    /**
-     * @var Executor
-     */
     protected $executor;
-
-    /**
-     * @var InfoResolver
-     */
-    protected $infoResolver;
-
-    /**
-     * @var WriterInterface
-     */
     protected $writer;
-
+    protected $infoResolver;
     protected $currentQuery;
     protected $currentData;
     protected $currentStep;
-
-    protected $proposalCursor;
     protected $voteCursor;
+    protected $proposalCursor;
     protected $commentCursor;
-
     protected $headersMap = [];
 
     protected $proposalHeaderMap = [
