@@ -280,6 +280,10 @@ User:
         type: 'VoteConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all votes of the user.'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 100000
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value, args])'
       groups:

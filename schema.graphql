@@ -4090,7 +4090,7 @@ type User implements Node {
   medias: [Media]!
 
   # Get all votes of the user.
-  votes(after: String, first: Int, before: String, last: Int): VoteConnection!
+  votes(after: String, first: Int = 100000, before: String, last: Int): VoteConnection!
 
   # Get all groups where the user is.
   groups(after: String, first: Int, before: String, last: Int): GroupConnection!

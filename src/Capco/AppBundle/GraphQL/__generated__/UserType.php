@@ -976,6 +976,7 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
+                            'defaultValue' => 100000,
                         ],
                         [
                             'name' => 'before',
