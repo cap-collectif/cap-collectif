@@ -5,7 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import moment from 'moment';
 import Linkify from 'react-linkify';
-import { Label } from 'react-bootstrap';
+import { Label, ListGroupItem } from 'react-bootstrap';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
@@ -16,14 +16,6 @@ type Props = {
   argument: ArgumentItem_argument,
   isProfile: boolean,
 };
-
-type ListArgumentItemProps = {
-  children: React.Node,
-};
-
-const ListArgumentItem = ({ children }: ListArgumentItemProps) => (
-  <li className="opinion  opinion--vote block  block--bordered  box">{children}</li>
-);
 
 class ArgumentItem extends React.Component<Props> {
   static defaultProps = {
@@ -84,7 +76,7 @@ class ArgumentItem extends React.Component<Props> {
       argument.type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against';
 
     return (
-      <ListArgumentItem className={classes} id={`arg-${argument.id}`}>
+      <ListGroupItem className={classes} id={`arg-${argument.id}`}>
         <div className="opinion__body">
           <UserAvatar user={argument.author} className="pull-left" />
           <div className="opinion__data">
@@ -120,7 +112,7 @@ class ArgumentItem extends React.Component<Props> {
           </p>
           <ArgumentButtons argument={argument} />
         </div>
-      </ListArgumentItem>
+      </ListGroupItem>
     );
   }
 }
