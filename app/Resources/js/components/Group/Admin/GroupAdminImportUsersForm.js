@@ -2,7 +2,7 @@
 import React from 'react';
 import { injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { FormGroup, HelpBlock, ControlLabel, Row, Col, Collapse } from 'react-bootstrap';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, change } from 'redux-form';
 import type { FieldProps } from 'redux-form';
 import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
 import FileUpload from '../../Form/FileUpload';
@@ -14,6 +14,7 @@ import type {
   AddUsersToGroupFromEmailMutationVariables,
 } from '../../../mutations/__generated__/AddUsersToGroupFromEmailMutation.graphql';
 import Loader from '../../Ui/Loader';
+import type { User } from '../../../redux/modules/user';
 
 type Props = {
   group: GroupAdminUsers_group,
@@ -25,6 +26,7 @@ type Props = {
 type State = {
   showMoreError: boolean,
   analyzed: boolean,
+  files: ?Array<File>,
 };
 
 type DefaultProps = void;
@@ -32,11 +34,21 @@ type FormValues = {
   emails: string,
 };
 
+type ResponseFormValues = {
+  importedUsers: Array<User>,
+  notFoundEmails: Array<string>,
+};
+
+type SubmittedFormValue = {
+  emails: ResponseFormValues,
+};
+
 type FileUploadFieldProps = FieldProps & {
   showMoreError: boolean,
   onClickShowMoreError: Function,
-  onResetField: Function,
-  hide: boolean,
+  onPostDrop: Function,
+  disabled: boolean,
+  currentFile: ?File,
 };
 
 export const formName = 'group-users-import';
@@ -59,8 +71,16 @@ const prepareVariables = (
   };
 };
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, { group, onClose, reset }) => {
-  const variables = prepareVariables(values.emails, group.id, false);
+const onSubmit = (values: SubmittedFormValue, dispatch: Dispatch, { group, onClose, reset }) => {
+  const variables = {
+    input: {
+      emails: values.emails.importedUsers.map((user: User) => {
+        return user.email;
+      }),
+      groupId: group.id,
+      dryRun: false,
+    },
+  };
 
   return AddUsersToGroupFromEmailMutation.commit(variables).then(() => {
     reset();
@@ -78,44 +98,26 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, { group, reset })
       }
 
       const data = response.addUsersToGroupFromEmail;
-
-      // eslint-disable-next-line no-throw-literal
-      throw {
-        emails: {
+      dispatch(
+        change(formName, 'emails', {
           importedUsers: data ? data.importedUsers : [],
           notFoundEmails: data ? data.notFoundEmails : [],
-        },
-      };
+        }),
+      );
     },
   );
 };
 
-const onDrop = (acceptedFiles: Array<File>, { onChange }) => {
-  if (!config.canUseDOM) {
-    return;
-  }
-
-  acceptedFiles.forEach(file => {
-    const reader = new window.FileReader();
-    reader.onload = () => {
-      onChange(reader.result);
-    };
-    reader.onabort = () => onChange(null);
-    reader.onerror = () => onChange(null);
-
-    reader.readAsText(file);
-  });
-};
-
 const renderDropzoneInput = ({
   input,
-  meta: { asyncValidating, error },
+  meta: { asyncValidating },
   showMoreError,
   onClickShowMoreError,
-  onResetField,
-  hide,
+  onPostDrop,
+  disabled,
+  currentFile,
 }: FileUploadFieldProps) => {
-  const colWidth = error && error.notFoundEmails.length === 0 ? 12 : 6;
+  const colWidth = input.value.notFoundEmails && input.value.notFoundEmails.length === 0 ? 12 : 6;
 
   return (
     <FormGroup>
@@ -126,25 +128,22 @@ const renderDropzoneInput = ({
         <FormattedHTMLMessage id="csv-file-helptext" />
       </HelpBlock>
       <Loader show={asyncValidating}>
-        {!hide && (
-          <FileUpload
-            id="csv-file"
-            name={input.name}
-            accept="text/csv"
-            maxSize={26000}
-            minSize={1}
-            onDrop={(files: Array<File>) => {
-              onDrop(files, input);
-              onResetField();
-            }}
-          />
-        )}
+        <FileUpload
+          id="csv-file"
+          name={input.name}
+          accept="text/csv"
+          maxSize={26000}
+          minSize={1}
+          disabled={disabled}
+          onDrop={(files: Array<File>) => {
+            onPostDrop(files, input);
+          }}
+        />
         {!asyncValidating &&
-          error &&
-          hide && (
+          input.value.importedUsers && (
             <React.Fragment>
               <div className="h5">
-                <FormattedMessage id="document-analysis" />{' '}
+                <FormattedMessage id="document-analysis" /> {currentFile ? currentFile.name : ''}
               </div>
               <Row className="mt-15">
                 <Col xs={12} sm={colWidth} className="text-center pl-0 pr-0">
@@ -153,20 +152,20 @@ const renderDropzoneInput = ({
                     <b>
                       <FormattedMessage
                         id="count-users-found"
-                        values={{ num: error.importedUsers.length }}
+                        values={{ num: input.value.importedUsers.length }}
                       />
                     </b>
                   </h4>
                 </Col>
-                {error.notFoundEmails &&
-                  error.notFoundEmails.length > 0 && (
+                {input.value.notFoundEmails &&
+                  input.value.notFoundEmails.length > 0 && (
                     <Col xs={12} sm={colWidth} className="text-center pl-0 pr-0 ">
                       <h4>
                         <i className="cap cap-ios-close text-danger" />{' '}
                         <b>
                           <FormattedMessage
                             id="count-untraceable-users"
-                            values={{ num: error.notFoundEmails.length }}
+                            values={{ num: input.value.notFoundEmails.length }}
                           />
                         </b>
                       </h4>
@@ -174,8 +173,8 @@ const renderDropzoneInput = ({
                         <ul
                           style={{ listStyle: 'none', maxHeight: 80, overflowY: 'scroll' }}
                           className="small">
-                          {error.notFoundEmails.map((email: string) => {
-                            return <li>{email}</li>;
+                          {input.value.notFoundEmails.map((email: string, key: number) => {
+                            return <li key={key}>{email}</li>;
                           })}
                         </ul>
                       </Collapse>
@@ -201,6 +200,7 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
   state = {
     showMoreError: false,
     analyzed: false,
+    files: null,
   };
 
   toggle() {
@@ -211,7 +211,7 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
 
   render() {
     const { handleSubmit } = this.props;
-    const { showMoreError, analyzed } = this.state;
+    const { showMoreError, analyzed, files } = this.state;
     return (
       <form onSubmit={handleSubmit}>
         <div>
@@ -222,14 +222,28 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
             name="emails"
             label={<FormattedMessage id="group.admin.form.users" />}
             id="csv-file"
-            hide={analyzed}
             labelClassName="control-label"
             inputClassName="fake-inputClassName"
             component={renderDropzoneInput}
             showMoreError={showMoreError}
+            disabled={analyzed}
             onClickShowMoreError={this.toggle.bind(this)}
-            onResetField={() => {
-              this.setState({ showMoreError: false, analyzed: true });
+            currentFile={files && files.length > 0 ? files[0] : null}
+            onPostDrop={(droppedFiles: Array<File>, input: Object) => {
+              this.setState({ showMoreError: false, analyzed: true, files: droppedFiles });
+              if (!config.canUseDOM) {
+                return;
+              }
+
+              droppedFiles.forEach(file => {
+                const reader = new window.FileReader();
+                reader.onload = () => {
+                  input.onChange(reader.result);
+                };
+                reader.onabort = () => input.onChange(null);
+                reader.onerror = () => input.onChange(null);
+                reader.readAsText(file);
+              });
             }}
           />
         </div>
@@ -242,6 +256,20 @@ const form = reduxForm({
   onSubmit,
   form: formName,
   asyncValidate,
+  shouldAsyncValidate: ({ trigger }) => {
+    switch (trigger) {
+      case 'touch':
+        return false;
+      case 'change':
+        return true;
+      case 'blur':
+        return false;
+      case 'submit':
+        return false;
+      default:
+        return true;
+    }
+  },
 })(GroupAdminImportUsersForm);
 
 export default injectIntl(form);

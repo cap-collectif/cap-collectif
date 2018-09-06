@@ -13,7 +13,8 @@ exports[`<GroupAdminImportUsersForm /> render correctly 1`] = `
     </p>
     <Field
       component={[Function]}
-      hide={false}
+      currentFile={null}
+      disabled={false}
       id="csv-file"
       inputClassName="fake-inputClassName"
       label={
@@ -25,7 +26,7 @@ exports[`<GroupAdminImportUsersForm /> render correctly 1`] = `
       labelClassName="control-label"
       name="emails"
       onClickShowMoreError={[Function]}
-      onResetField={[Function]}
+      onPostDrop={[Function]}
       showMoreError={false}
     />
   </div>

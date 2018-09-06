@@ -12,11 +12,12 @@ type Props = {
   maxSize: number,
   minSize: number,
   onDrop: Function,
+  disabled: boolean,
 };
 
 export class FileUpload extends React.Component<Props> {
   render() {
-    const { id, name, accept, minSize, maxSize, onDrop } = this.props;
+    const { id } = this.props;
 
     const classes = {
       'image-uploader': true,
@@ -27,14 +28,9 @@ export class FileUpload extends React.Component<Props> {
         <Col xs={12} sm={12}>
           <Dropzone
             ref="dropzone"
-            onDrop={onDrop}
-            accept={accept}
-            minSize={minSize}
-            maxSize={maxSize}
-            name={name}
             inputProps={{ id: `${id}_field` }}
-            disablePreview
-            className="image-uploader__dropzone--fullwidth">
+            className="image-uploader__dropzone--fullwidth"
+            {...this.props}>
             <div className="image-uploader__dropzone-label">
               <FormattedMessage id="global.image_uploader.file.dropzone" />
               <br />
