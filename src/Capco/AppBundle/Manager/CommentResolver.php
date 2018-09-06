@@ -104,7 +104,7 @@ class CommentResolver
     public function getAdminUrl(Comment $comment, $absolute = false)
     {
         return $this->router->generate(
-            'admin_capco_app_comment_show',
+            'admin_capco_app_comment_edit',
             ['id' => $comment->getId()],
             $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH
         );

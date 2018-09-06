@@ -5,13 +5,15 @@ use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType as CommentForm;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CommentController extends Controller
 {
@@ -153,5 +155,18 @@ class CommentController extends Controller
         }
 
         return ['form' => $form->createView(), 'comment' => $comment];
+    }
+
+    /**
+     * @Route("/admin/capco/app/comment/{commentId}/preview", name="capco_admin.admin.comment.preview")
+     * @ParamConverter("comment", options={"mapping": {"commentId": "id"}})
+     */
+    public function previewAction(Request $request, Comment $comment): Response
+    {
+        $commentUrlResolver = $this->container->get(
+            'Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver'
+        );
+
+        return new RedirectResponse($commentUrlResolver->__invoke($comment));
     }
 }

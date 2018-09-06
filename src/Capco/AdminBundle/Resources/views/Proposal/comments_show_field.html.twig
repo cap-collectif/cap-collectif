@@ -7,7 +7,7 @@
             <li>
                 {{ comment.body | truncate(140, true, '...') }}
                 <div style="margin-top: 5px; margin-bottom: 15px;">
-                    <a class="btn btn-sm btn-default view_link" href="{{ path('admin_capco_app_comment_show', {'id': comment.id}) }}">
+                    <a class="btn btn-sm btn-default view_link" href="{{ path('admin_capco_app_comment_edit', {'id': comment.id}) }}">
                         <i class="fa fa-search-plus"></i>
                         {{ 'action_show' | trans({}, 'CapcoAppBundle') }}
                     </a>

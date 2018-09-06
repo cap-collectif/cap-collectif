@@ -365,7 +365,6 @@ services:
       - { name: overblog_graphql.resolver }
 
   Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver:
-    class: Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver
     tags:
       - { name: overblog_graphql.resolver }
     arguments: ['@capco.url.resolver']

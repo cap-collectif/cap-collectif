@@ -10,11 +10,12 @@ type Props = {
   relay: RelayPaginationProp,
   intl: IntlShape,
   commentable: CommentListViewPaginated_commentable,
+  highlightedComment: ?string,
 };
 
 export class CommentListViewPaginated extends React.Component<Props> {
   render() {
-    const { intl, commentable, relay } = this.props;
+    const { intl, commentable, relay, highlightedComment } = this.props;
     if (!commentable.comments || commentable.comments.totalCount === 0) {
       return null;
     }
@@ -33,11 +34,18 @@ export class CommentListViewPaginated extends React.Component<Props> {
             .map(edge => edge.node)
             .filter(Boolean)
             .map(node => {
-              // $FlowFixMe
-              return <Comment key={node.id} comment={node} />;
+              return (
+                // $FlowFixMe $refType
+                <Comment
+                  key={node.id}
+                  comment={node}
+                  isHighlighted={node.id === highlightedComment}
+                />
+              );
             })}
         {relay.hasMore() && (
           <button
+            id="comments-section-load-more"
             className="btn btn-block btn-secondary"
             data-loading-text={intl.formatMessage({ id: 'global.loading' })}
             onClick={() => {

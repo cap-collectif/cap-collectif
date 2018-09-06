@@ -31,8 +31,14 @@ class UrlResolver
     protected $host;
     private $container;
 
-    public function __construct(ContainerInterface $container, Router $router, Manager $manager, MediaExtension $mediaExtension, string $scheme, string $host)
-    {
+    public function __construct(
+        ContainerInterface $container,
+        Router $router,
+        Manager $manager,
+        MediaExtension $mediaExtension,
+        string $scheme,
+        string $host
+    ) {
         $this->router = $router;
         $this->manager = $manager;
         $this->mediaExtension = $mediaExtension;
@@ -54,7 +60,13 @@ class UrlResolver
             $path = '/media';
         }
 
-        return $this->scheme . '://' . $this->host . $path . $provider->generatePublicUrl($media, $format);
+        return (
+            $this->scheme .
+            '://' .
+            $this->host .
+            $path .
+            $provider->generatePublicUrl($media, $format)
+        );
     }
 
     public function generateOpinionOrProposalRoute($object, $absolute)
@@ -64,7 +76,10 @@ class UrlResolver
             return $this->router->generate(
                 'app_project_show_opinion',
                 [
-                    'projectSlug' => $object->getStep()->getProject()->getSlug(),
+                    'projectSlug' => $object
+                        ->getStep()
+                        ->getProject()
+                        ->getSlug(),
                     'stepSlug' => $object->getStep()->getSlug(),
                     'opinionTypeSlug' => $object->getOpinionType()->getSlug(),
                     'opinionSlug' => $object->getSlug(),
@@ -79,7 +94,10 @@ class UrlResolver
             return $this->router->generate(
                 'app_project_show_opinion_version',
                 [
-                    'projectSlug' => $opinion->getStep()->getProject()->getSlug(),
+                    'projectSlug' => $opinion
+                        ->getStep()
+                        ->getProject()
+                        ->getSlug(),
                     'stepSlug' => $opinion->getStep()->getSlug(),
                     'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
                     'opinionSlug' => $opinion->getSlug(),
@@ -92,9 +110,12 @@ class UrlResolver
         if ($object instanceof Proposal) {
             return $object->getStep() && $object->getStep()->getProject()
                 ? $this->router->generate(
-                'app_project_show_proposal',
+                    'app_project_show_proposal',
                     [
-                            'projectSlug' => $object->getStep()->getProject()->getSlug(),
+                        'projectSlug' => $object
+                            ->getStep()
+                            ->getProject()
+                            ->getSlug(),
                         'stepSlug' => $object->getStep()->getSlug(),
                         'proposalSlug' => $object->getSlug(),
                     ],
@@ -177,15 +198,27 @@ class UrlResolver
     {
         $referenceType = $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH;
         if ($object instanceof Post && $object->getSlug()) {
-            return $this->router->generate('app_blog_show', ['slug' => $object->getSlug()], $referenceType);
+            return $this->router->generate(
+                'app_blog_show',
+                ['slug' => $object->getSlug()],
+                $referenceType
+            );
         }
 
         if ($object instanceof Argument && $object->getParent() && $object->getId()) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) . '#arg-' . $object->getId();
+            return (
+                $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) .
+                '#arg-' .
+                $object->getId()
+            );
         }
 
         if ($object instanceof Source && $object->getParent() && $object->getId()) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) . '#source-' . $object->getId();
+            return (
+                $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) .
+                '#source-' .
+                $object->getId()
+            );
         }
 
         if ($object instanceof AbstractStep) {
@@ -193,11 +226,19 @@ class UrlResolver
         }
 
         if ($object instanceof Event && $object->getSlug()) {
-            return $this->router->generate('app_event_show', ['slug' => $object->getSlug()], $referenceType);
+            return $this->router->generate(
+                'app_event_show',
+                ['slug' => $object->getSlug()],
+                $referenceType
+            );
         }
 
         if ($object instanceof Comment && $object->getRelatedObject()) {
-            return $this->getObjectUrl($object->getRelatedObject(), $absolute);
+            return (
+                $this->getObjectUrl($object->getRelatedObject(), $absolute) .
+                '#comment-' .
+                $object->getId()
+            );
         }
 
         if ($object instanceof Reporting && $object->getRelated()) {
@@ -205,12 +246,20 @@ class UrlResolver
         }
 
         if ($object instanceof Theme && $object->getSlug()) {
-            return $this->router->generate('app_theme_show', ['slug' => $object->getSlug()], $referenceType);
+            return $this->router->generate(
+                'app_theme_show',
+                ['slug' => $object->getSlug()],
+                $referenceType
+            );
         }
 
         if ($object instanceof User && $object->getSlug()) {
             return $this->manager->isActive('profiles')
-                ? $this->router->generate('capco_user_profile_show_all', ['slug' => $object->getSlug()], $referenceType)
+                ? $this->router->generate(
+                    'capco_user_profile_show_all',
+                    ['slug' => $object->getSlug()],
+                    $referenceType
+                )
                 : null;
         }
 
@@ -223,17 +272,25 @@ class UrlResolver
 
     public function getTrashedObjectUrl($object, $absolute = false)
     {
-        if (($object instanceof Argument || $object instanceof Source) && $object->getLinkedOpinion()) {
-            $referenceType = $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH;
+        if (
+            ($object instanceof Argument || $object instanceof Source) &&
+            $object->getLinkedOpinion()
+        ) {
+            $referenceType = $absolute
+                ? RouterInterface::ABSOLUTE_URL
+                : RouterInterface::RELATIVE_PATH;
 
-            return $this->router
-                ->generate(
-                    'app_project_show_trashed',
-                    [
-                        'projectSlug' => $object->getLinkedOpinion()->getStep()->getProject()->getSlug(),
-                    ],
-                    $referenceType
-                );
+            return $this->router->generate(
+                'app_project_show_trashed',
+                [
+                    'projectSlug' => $object
+                        ->getLinkedOpinion()
+                        ->getStep()
+                        ->getProject()
+                        ->getSlug(),
+                ],
+                $referenceType
+            );
         }
 
         if (false !== $url = $this->generateOpinionOrProposalRoute($object, $absolute)) {
@@ -245,11 +302,19 @@ class UrlResolver
     {
         $referenceType = $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH;
         if ($object instanceof Source) {
-            return $this->router->generate('admin_capco_app_source_show', ['id' => $object->getId()], $referenceType);
+            return $this->router->generate(
+                'admin_capco_app_source_show',
+                ['id' => $object->getId()],
+                $referenceType
+            );
         }
 
         if ($object instanceof Argument) {
-            return $this->router->generate('admin_capco_app_argument_show', ['id' => $object->getId()], $referenceType);
+            return $this->router->generate(
+                'admin_capco_app_argument_show',
+                ['id' => $object->getId()],
+                $referenceType
+            );
         }
 
         if ($object instanceof Comment) {
@@ -257,7 +322,11 @@ class UrlResolver
         }
 
         if ($object instanceof Opinion) {
-            return $this->router->generate('admin_capco_app_opinion_show', ['id' => $object->getId()], $referenceType);
+            return $this->router->generate(
+                'admin_capco_app_opinion_show',
+                ['id' => $object->getId()],
+                $referenceType
+            );
         }
 
         if ($object instanceof OpinionVersion) {
@@ -269,7 +338,11 @@ class UrlResolver
         }
 
         if ($object instanceof Proposal) {
-            return $this->router->generate('admin_capco_app_proposal_edit', ['id' => $object->getId()], $referenceType);
+            return $this->router->generate(
+                'admin_capco_app_proposal_edit',
+                ['id' => $object->getId()],
+                $referenceType
+            );
         }
 
         return '';
@@ -279,6 +352,10 @@ class UrlResolver
     {
         $referenceType = $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH;
 
-        return $this->router->generate('admin_capco_app_reporting_show', ['id' => $reporting->getId()], $referenceType);
+        return $this->router->generate(
+            'admin_capco_app_reporting_show',
+            ['id' => $reporting->getId()],
+            $referenceType
+        );
     }
 }

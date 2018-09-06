@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Post;
@@ -10,6 +11,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class CommentAdmin extends AbstractAdmin
@@ -67,6 +69,16 @@ class CommentAdmin extends AbstractAdmin
     {
         unset($this->listModes['mosaic']);
 
+        $availableActions = [
+            'display' => [
+                'template' => 'CapcoAdminBundle:CRUD:list__action_display.html.twig',
+            ],
+        ];
+
+        $availableActions['delete'] = [
+            'template' => 'CapcoAdminBundle:Comment:list__action_delete.html.twig',
+        ];
+
         $listMapper
             ->addIdentifier('body', null, [
                 'label' => 'admin.fields.comment.body',
@@ -92,17 +104,14 @@ class CommentAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', 'datetime', ['label' => 'admin.fields.comment.updated_at'])
-            ->add('_action', 'actions', ['actions' => ['delete' => []]]);
+            ->add('_action', 'actions', [
+                'actions' => $availableActions,
+            ]);
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subject = $this->getSubject();
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
 
         if ($subject instanceof EventComment) {
             $formMapper->add('event', 'sonata_type_model', [
@@ -142,6 +151,8 @@ class CommentAdmin extends AbstractAdmin
     {
         if ('list' === $name) {
             return 'CapcoAdminBundle:Comment:list.html.twig';
+        } elseif ('edit' === $name) {
+            return 'CapcoAdminBundle:Comment:edit.html.twig';
         }
 
         return $this->getTemplateRegistry()->getTemplate($name);
@@ -155,5 +166,11 @@ class CommentAdmin extends AbstractAdmin
     public function isViewerSuperAdmin()
     {
         return is_object($this->getViewer()) && $this->getViewer()->hasRole('ROLE_SUPER_ADMIN');
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete']);
+        $collection->add('preview', $this->getRouterIdParameter() . '/preview');
     }
 }

@@ -306,6 +306,7 @@ Capco\UserBundle\Entity\User:
     vip: true
     emailConfirmationSentAt: '2018-06-06 13:37:00'
     enabled: true
+    phoneConfirmed: true
 
   user517:
     id: 'user517'

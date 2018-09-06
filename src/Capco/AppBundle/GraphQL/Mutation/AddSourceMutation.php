@@ -1,7 +1,6 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Swarrot\Broker\Message;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
@@ -11,7 +10,6 @@ use Capco\AppBundle\Form\ApiSourceType;
 use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\OpinionVersion;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -29,7 +27,6 @@ class AddSourceMutation implements MutationInterface
     private $versionRepo;
     private $formFactory;
     private $redisStorage;
-    private $publisher;
     private $sourceRepo;
     private $logger;
 

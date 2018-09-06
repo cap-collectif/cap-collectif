@@ -4,6 +4,7 @@ import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-re
 import type { CommentListView_commentable } from './__generated__/CommentListView_commentable.graphql';
 import Loader from '../Ui/Loader';
 import CommentListViewPaginated from './CommentListViewPaginated';
+import scrollToAnchor from '../../services/ScrollToAnchor';
 
 export type CommentOrderBy = 'last' | 'old' | 'popular';
 
@@ -16,12 +17,25 @@ type Props = {
 
 type State = {
   isRefetching: boolean,
+  highlightedComment: ?string,
 };
 
 export class CommentListView extends React.Component<Props, State> {
   state = {
     isRefetching: false,
+    highlightedComment: null,
   };
+
+  componentDidMount() {
+    if (this.props.commentable) {
+      if (location.hash.length > 0) {
+        this.setState({ highlightedComment: location.hash.split('-')[1] }); // eslint-disable-line
+        setTimeout(() => {
+          scrollToAnchor('#comments-section-load-more');
+        }, 20);
+      }
+    }
+  }
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.order !== this.props.order) {
@@ -41,7 +55,7 @@ export class CommentListView extends React.Component<Props, State> {
       cursor: null,
       commentableId: commentable.id,
       isAuthenticated,
-      count: 10,
+      count: 100,
     });
 
     this.props.relay.refetch(
@@ -62,7 +76,12 @@ export class CommentListView extends React.Component<Props, State> {
     const { commentable } = this.props;
 
     // $FlowFixMe
-    return <CommentListViewPaginated commentable={commentable} />;
+    return (
+      <CommentListViewPaginated
+        commentable={commentable}
+        highlightedComment={this.state.highlightedComment}
+      />
+    );
   }
 }
 

@@ -44,7 +44,7 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
   And I select "Transport" from "project-theme"
   And I wait 1 seconds
   And I select "global.filter_f_popular" from "project-sorting"
-  And I wait 1 seconds
+  And I wait 2 seconds
   Then I should see 9 "#project-preview" elements
   And I should see "Projet de loi Renseignement"
   And I should see "Budget Participatif Rennes"

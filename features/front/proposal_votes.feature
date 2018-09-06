@@ -120,6 +120,7 @@ Scenario: Logged in as user who doesn't full fill requirements and want to vote.
   Then I should see a proposal vote modal
   Given I didn't full fill requirements conditions
   Then I cannot confirm my vote
+  And I wait 1 seconds
   Then I full fill the requirements conditions
   And I confirm my vote
   # We delete the vote

@@ -23,173 +23,173 @@
 }
 
 .text-label {
-    font-size: 14px;
+  font-size: 14px;
 
-    i {
-        @include border-radius(3px);
-        padding: 3px 3px 0;
-        font-size: 10px;
-        margin-right: 5px;
-        top: 0;
+  i {
+    @include border-radius(3px);
+    padding: 3px 3px 0;
+    font-size: 10px;
+    margin-right: 5px;
+    top: 0;
+  }
+
+  // Colors
+  @each $label in $opinion-labels {
+    $name: nth($label, 1);
+    $color: nth($label, 2);
+    $text: set-link-text-color($color);
+
+    &--#{$name} {
+      color: $color;
+
+      i {
+        background-color: $color;
+        color: $text;
+      }
     }
-
-    // Colors
-    @each $label in $opinion-labels {
-        $name: nth($label, 1);
-        $color: nth($label, 2);
-        $text: set-link-text-color($color);
-
-        &--#{$name} {
-            color: $color;
-
-            i {
-                background-color: $color;
-                color: $text;
-            }
-        }
-    }
+  }
 }
 
 /* ======================== Panel ============================*/
 
 .panel-custom { // Todo remove custom when all panel changed
 
-    // Colors depending on opinion type
-    @each $type in $opinion-types {
-        $name: nth($type, 1);
-        $color: nth($type, 2);
-        $text: set-link-text-color($color);
+  // Colors depending on opinion type
+  @each $type in $opinion-types {
+    $name: nth($type, 1);
+    $color: nth($type, 2);
+    $text: set-link-text-color($color);
 
-        &.panel--#{$name} .panel-heading {
-            background-color: $color;
-            color: $text;
-        }
+    &.panel--#{$name} .panel-heading {
+      background-color: $color;
+      color: $text;
+    }
+  }
+
+  .panel-heading {
+    display: flex;
+    justify-content: space-between;
+
+    p, h3 {
+      font-size: 18px;
+      font-weight: 500;
+      color: $dark;
+      margin: auto 15px auto 0;
     }
 
-    .panel-heading {
-        display: flex;
-        justify-content: space-between;
-
-        p, h3 {
-            font-size: 18px;
-            font-weight: 500;
-            color: $dark;
-            margin: auto 15px auto 0;
-        }
-
-        .panel-title span {
-            margin: auto 0;
-        }
-
-        &__actions {
-            display: flex;
-            align-items: center;
-
-            button, select {
-                margin-left: 5px;
-            }
-        }
-
-        .form-group {
-            display: flex;
-            margin: 0;
-        }
+    .panel-title span {
+      margin: auto 0;
     }
 
-    .panel-body {
-        p:last-child {
-            margin: 0;
-        }
+    &__actions {
+      display: flex;
+      align-items: center;
+
+      button, select {
+        margin-left: 5px;
+      }
     }
 
-    .panel-footer {
-        font-size: 16px;
+    .form-group {
+      display: flex;
+      margin: 0;
     }
+  }
+
+  .panel-body {
+    p:last-child {
+      margin: 0;
+    }
+  }
+
+  .panel-footer {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: $screen-xs-max) {
-    .panel-heading {
-        flex-direction: column;
+  .panel-heading {
+    flex-direction: column;
 
-        &__actions{
-            margin-top: 10px;
+    &__actions {
+      margin-top: 10px;
 
-            .form-group {
-                width: 100%;
-            }
+      .form-group {
+        width: 100%;
+      }
 
-            select {
-                margin-left: 0;
-            }
-        }
+      select {
+        margin-left: 0;
+      }
     }
+  }
 }
 
 /* ======================== List group ============================*/
 
 .list-group-custom { // Todo remove custom when all panel changed
-    .list-group-item {
-        display: flex;
-        justify-content: space-between;
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
 
-        p {
-            margin: 0;
-        }
-
-        &__opinion {
-            font-size: 16px;
-
-            .left-block {
-                display: flex;
-                text-align: left;
-
-                .title {
-                    line-height: 20px;
-                    margin: 10px 0;
-                }
-
-                .author-name {
-                    color: $dark;
-                    font-weight: 500;
-                }
-
-                .excerpt {
-                    font-size: 14px;
-                }
-
-                .actions {
-                    margin-top: 10px;
-
-                    .btn {
-                        margin-right: 5px;
-                    }
-                }
-            }
-
-            .right-block {
-                display: flex;
-                margin: auto 0;
-            }
-        }
-
-        h4, h3 {
-            margin: auto 15px auto 0;
-            font-size: 16px;
-            font-weight: 400;
-        }
+    p {
+      margin: 0;
     }
+
+    &__opinion {
+      font-size: 16px;
+
+      .left-block {
+        display: flex;
+        text-align: left;
+
+        .title {
+          line-height: 20px;
+          margin: 10px 0;
+        }
+
+        .author-name {
+          color: $dark;
+          font-weight: 500;
+        }
+
+        .excerpt {
+          font-size: 14px;
+        }
+
+        .actions {
+          margin-top: 10px;
+
+          .btn {
+            margin-right: 5px;
+          }
+        }
+      }
+
+      .right-block {
+        display: flex;
+        margin: auto 0;
+      }
+    }
+
+    h4, h3 {
+      margin: auto 15px auto 0;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
 }
 
 @media (max-width: $screen-xs-max) {
-    .list-group-custom {
-        .list-group-item {
-            flex-direction: column;
-        }
-
-        .opinion__chart {
-            display: none;
-        }
+  .list-group-custom {
+    .list-group-item {
+      flex-direction: column;
     }
+
+    .opinion__chart {
+      display: none;
+    }
+  }
 }
 
 /* ======================== Button ============================*/
@@ -203,7 +203,7 @@
     border-color: $color;
 
     &:hover {
-        background-color: darken($color, 5%);
+      background-color: darken($color, 5%);
     }
   }
 }
@@ -260,7 +260,8 @@
 svg.avatar {
   vertical-align: middle;
 }
-svg.avatar-group{
+
+svg.avatar-group {
   transform: rotateX(180deg);
   color: $white;
 }
@@ -289,4 +290,13 @@ svg.avatar-group{
 
 .b-none {
   border: 0;
+}
+
+/* =============================== Comment ================================ */
+
+.highlighted-comment {
+  border: 1px solid #0488CC;
+  box-shadow: 0 0 5px 1.5px rgba(8, 121, 180, 0.46);
+  border-radius: 4px;
+  padding: 5px;
 }

@@ -457,7 +457,8 @@ services:
 
   capco_admin.admin.comment:
     class: Capco\AdminBundle\Admin\CommentAdmin
-    arguments: [~, Capco\AppBundle\Entity\Comment, CapcoAdminBundle:CRUD, '@security.token_storage']
+    arguments:
+      [~, Capco\AppBundle\Entity\Comment, CapcoAdminBundle:Comment, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
