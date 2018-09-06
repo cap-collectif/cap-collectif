@@ -51,6 +51,11 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
           "id": "1",
         }
       }
+      step={
+        Object {
+          "$refType": null,
+        }
+      }
     />
     <ForwardRef(Relay(ProposalStatus))
       proposal={
@@ -116,6 +121,11 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
             "vip": true,
           },
           "id": "1",
+        }
+      }
+      step={
+        Object {
+          "$refType": null,
         }
       }
     />

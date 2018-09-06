@@ -32,7 +32,7 @@ export class ProposalPreview extends React.Component<Props> {
           <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
           {/* $FlowFixMe */}
-          {step && <ProposalPreviewFooter proposal={proposal} />}
+          {step && <ProposalPreviewFooter step={step} proposal={proposal} />}
           {/* $FlowFixMe */}
           <ProposalStatus proposal={proposal} />
         </CardContainer>
@@ -50,6 +50,7 @@ export default createFragmentContainer(ProposalPreview, {
   step: graphql`
     fragment ProposalPreview_step on Step {
       ...ProposalPreviewBody_step
+      ...ProposalPreviewFooter_step
     }
   `,
   proposal: graphql`

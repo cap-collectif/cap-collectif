@@ -1,6 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalPreviewFooter /> should render a footer with comment counter 1`] = `
+exports[`<ProposalPreviewFooter /> should render a footer with comments counters only 1`] = `
+<div
+  className="card__counters "
+>
+  <div
+    className="card__counter card__counter-comments"
+  >
+    <div
+      className="card__counter__value"
+    >
+      3
+    </div>
+    <div>
+      <FormattedMessage
+        id="comment.count_no_nb"
+        values={
+          Object {
+            "count": 3,
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProposalPreviewFooter /> should render a footer with votes and comments counters 1`] = `
 <div
   className="card__counters card__counters_multiple"
 >
@@ -44,3 +70,31 @@ exports[`<ProposalPreviewFooter /> should render a footer with comment counter 1
   </div>
 </div>
 `;
+
+exports[`<ProposalPreviewFooter /> should render a footer with votes counters only 1`] = `
+<div
+  className="card__counters "
+>
+  <div
+    className="card__counter card__counter-votes"
+  >
+    <div
+      className="card__counter__value"
+    >
+      42
+    </div>
+    <div>
+      <FormattedMessage
+        id="proposal.vote.count_no_nb"
+        values={
+          Object {
+            "count": 42,
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProposalPreviewFooter /> should render a footer without counters 1`] = `""`;
