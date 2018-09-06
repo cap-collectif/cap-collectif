@@ -35,7 +35,7 @@ export class ArgumentListProfile extends Component<Props, State> {
     const { argumentList, relay } = this.props;
 
     return (
-      <ListGroup bsClass="media-list" componentClass="ul">
+      <ListGroup bsClass="media-list">
         {// $FlowFixMe
         argumentList.arguments.edges
           .filter(Boolean)

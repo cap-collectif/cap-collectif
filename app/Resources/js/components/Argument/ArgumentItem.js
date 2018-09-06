@@ -16,14 +16,6 @@ type Props = {
   argument: ArgumentItem_argument,
 };
 
-type ListArgumentItemProps = {
-  children: React.Node,
-};
-
-const ListArgumentItem = ({ children }: ListArgumentItemProps) => (
-  <li className="opinion  opinion--vote block  block--bordered  box">{children}</li>
-);
-
 class ArgumentItem extends React.Component<Props> {
   renderDate = () => {
     const argument = this.props.argument;
@@ -52,7 +44,7 @@ class ArgumentItem extends React.Component<Props> {
       'bg-vip': argument.author && argument.author.vip,
     });
     return (
-      <ListArgumentItem className={classes} id={`arg-${argument.id}`}>
+      <ListGroupItem className={classes} id={`arg-${argument.id}`}>
         <div className="opinion__body">
           <UserAvatar user={argument.author} className="pull-left" />
           <div className="opinion__data">
@@ -76,7 +68,7 @@ class ArgumentItem extends React.Component<Props> {
           </p>
           <ArgumentButtons argument={argument} />
         </div>
-      </ListArgumentItem>
+      </ListGroupItem>
     );
   }
 }
