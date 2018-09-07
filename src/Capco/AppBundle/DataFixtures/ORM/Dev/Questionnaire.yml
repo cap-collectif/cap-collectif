@@ -51,3 +51,11 @@ Capco\AppBundle\Entity\Questionnaire:
     id: questionnaire9
     title: Consultation pour la FLNJ
     description: <p><text(100)></p>
+  questionnaireWithJumps2:
+    id: questionnaireWithJumps2
+    title: Questionnaire saut conditionnel (tous les champs)
+    description: <p><text(100)></p>
+    step: '@questionnairestepJump2'
+    multipleRepliesAllowed: true
+    anonymousAllowed: true
+    acknowledgeReplies: true

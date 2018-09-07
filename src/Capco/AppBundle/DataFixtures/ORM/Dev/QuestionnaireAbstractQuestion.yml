@@ -156,14 +156,34 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     question: '@multiplequestionEndConditionel'
     position: 16
   qaq40:
+    questionnaire: '@questionnaireWithJumps2'
+    question: '@ljMultipleQuestionRadio'
+    position: 1
+  qaq41:
+    questionnaire: '@questionnaireWithJumps2'
+    question: '@ljMultipleQuestionSelect'
+    position: 2
+  qaq42:
+    questionnaire: '@questionnaireWithJumps2'
+    question: '@ljMultipleQuestionButton'
+    position: 3
+  qaq43:
+    questionnaire: '@questionnaireWithJumps2'
+    question: '@ljMultipleQuestionCheckbox'
+    position: 4
+  qaq44:
+    questionnaire: '@questionnaireWithJumps2'
+    question: '@ljMultipleQuestionRanking'
+    position: 5
+  qaq45:
     questionnaire: '@questionnaire1'
     question: '@sectionquestion1'
     position: 1
-  qaq41:
+  qaq46:
     questionnaire: '@questionnaire1'
     question: '@sectionquestion2'
     position: 3
-  qaq42:
+  qaq47:
     proposalForm: '@proposalform1'
     question: '@sectionquestion3'
     position: 1

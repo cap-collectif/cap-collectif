@@ -320,3 +320,43 @@ Capco\AppBundle\Entity\QuestionChoice:
     id: questionchoiceHapNotGoodHowDareYouGpaslu
     title: mdr g pas lu
     position: 2
+  ljQuestionChoiceIsARadio:
+    id: ljQuestionChoiceIsARadio
+    title: Oui ceci est un champ de type radio
+    position: 1
+  ljQuestionChoiceIsntARadio:
+    id: ljQuestionChoiceIsntARadio
+    title: Non, ceci n'est pas un champ de type radio
+    position: 2
+  ljQuestionChoiceIsASelect:
+    id: ljQuestionChoiceIsASelect
+    title: Oui ceci est un champ de type select
+    position: 1
+  ljQuestionChoiceIsntASelect:
+    id: ljQuestionChoiceIsntASelect
+    title: Non, ceci n'est pas un champ de type select
+    position: 2
+  ljQuestionChoiceIsAButton:
+    id: ljQuestionChoiceIsAButton
+    title: Oui ceci est un champ de type boutton
+    position: 1
+  ljQuestionChoiceIsntAButton:
+    id: ljQuestionChoiceIsntAButton
+    title: Non, ceci n'est pas un champ de type boutton
+    position: 2
+  ljQuestionChoiceIsACheckbox:
+    id: ljQuestionChoiceIsACheckbox
+    title: Oui ceci est un champ de type checkbox
+    position: 1
+  ljQuestionChoiceIsntACheckbox:
+    id: ljQuestionChoiceIsntACheckbox
+    title: Non, ceci n'est pas un champ de type checkbox
+    position: 2
+  ljQuestionChoiceIsARanking:
+    id: ljQuestionChoiceIsARanking
+    title: Oui ceci est un champ de type classement
+    position: 1
+  ljQuestionChoiceIsntARanking:
+    id: ljQuestionChoiceIsntARanking
+    title: Non, ceci n'est pas un champ de type classement
+    position: 2

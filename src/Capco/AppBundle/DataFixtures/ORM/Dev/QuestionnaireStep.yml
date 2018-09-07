@@ -21,6 +21,13 @@ Capco\AppBundle\Entity\Steps\QuestionnaireStep:
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('+3 days', '+10 days')>
+  questionnairestepJump2:
+    id: questionnairestepJump2
+    title: Essais de sauts conditionnels
+    label: Questionnaire conditionnel
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
   questionnairestep3:
     id: questionnairestep3
     title: Etape de questionnaire fermée

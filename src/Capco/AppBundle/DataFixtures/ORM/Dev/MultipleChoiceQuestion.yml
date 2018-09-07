@@ -90,6 +90,24 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     title: Hap ou Noel ?
     questionChoices: ['@questionchoiceHap', '@questionchoiceNoel']
     required: true
+    type: 3 # radio
+  multiplequestionFavoriteFleuve:
+    id: 25
+    title: Votre fleuve préféré
+    questionChoices:
+      [
+        '@questionchoiceLeGange',
+        '@questionchoiceLeNil',
+        '@questionchoiceLaSeine',
+        '@questionchoiceAmazone',
+      ]
+    required: true
+    type: 4
+  multiplequestionHapGange:
+    id: 26
+    title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
+    questionChoices: ['@questionchoiceHapGangeOui', '@questionchoiceHapGangeNon']
+    required: false
     type: 4
   multiplequestionHapCreation:
     id: 25
@@ -163,3 +181,33 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     questionChoices:
       ['@questionchoiceHapNotGoodHowDareYouOki', '@questionchoiceHapNotGoodHowDareYouGpaslu']
     type: 4
+  ljMultipleQuestionRadio:
+    id: 40
+    title: Ceci est-il une question de type Radio ?
+    questionChoices:
+      ['@ljQuestionChoiceIsARadio', '@ljQuestionChoiceIsntARadio']
+    type: 3
+  ljMultipleQuestionSelect:
+    id: 41
+    title: Ceci est-il une question de type Select ?
+    questionChoices:
+      ['@ljQuestionChoiceIsASelect', '@ljQuestionChoiceIsntASelect']
+    type: 4
+  ljMultipleQuestionButton:
+    id: 42
+    title: Ceci est-il une question de type Boutton ?
+    questionChoices:
+      ['@ljQuestionChoiceIsAButton', '@ljQuestionChoiceIsntAButton']
+    type: 8
+  ljMultipleQuestionCheckbox:
+    id: 43
+    title: Ceci est-il une question de type Checkbox ?
+    questionChoices:
+      ['@ljQuestionChoiceIsACheckbox', '@ljQuestionChoiceIsntACheckbox']
+    type: 5
+  ljMultipleQuestionRanking:
+    id: 44
+    title: Ceci est-il une question de type Classement ?
+    questionChoices:
+      ['@ljQuestionChoiceIsARanking', '@ljQuestionChoiceIsntARanking']
+    type: 6

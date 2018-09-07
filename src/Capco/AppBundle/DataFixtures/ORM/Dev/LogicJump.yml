@@ -60,3 +60,27 @@ Capco\AppBundle\Entity\LogicJump:
     always: true
     origin: '@multiplequestionHapNotGoodHowDareYou'
     destination: '@multiplequestionMarvelOrDc'
+  logicjump12:
+    id: logicjump12
+    always: false
+    origin: '@ljMultipleQuestionRadio'
+    destination: '@ljMultipleQuestionSelect'
+    conditions: ['@ljconditionRadio']
+  logicjump13:
+    id: logicjump13
+    always: false
+    origin: '@ljMultipleQuestionSelect'
+    destination: '@ljMultipleQuestionButton'
+    conditions: ['@ljconditionSelect']
+  logicjump14:
+    id: logicjump14
+    always: false
+    origin: '@ljMultipleQuestionButton'
+    destination: '@ljMultipleQuestionCheckbox'
+    conditions: ['@ljconditionButton']
+  logicjump15:
+    id: logicjump15
+    always: false
+    origin: '@ljMultipleQuestionCheckbox'
+    destination: '@ljMultipleQuestionRanking'
+    conditions: ['@ljconditionCheckbox']
