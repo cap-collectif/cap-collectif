@@ -17,7 +17,7 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
-use Capco\AppBundle\Request\Executor;
+use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;

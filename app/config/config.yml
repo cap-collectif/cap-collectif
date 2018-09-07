@@ -618,6 +618,7 @@ overblog_dataloader:
   defaults:
     promise_adapter: 'overblog_dataloader.webonyx_graphql_sync_promise_adapter'
 overblog_graphql:
+  errors_handler: false
   security:
     query_max_depth: false
     query_max_complexity: false

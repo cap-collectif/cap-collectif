@@ -1,4 +1,0 @@
-services:
-  Capco\AppBundle\Request\Executor:
-    public: true
-    autowire: true

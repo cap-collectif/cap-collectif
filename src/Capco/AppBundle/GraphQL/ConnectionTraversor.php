@@ -2,8 +2,8 @@
 namespace Capco\AppBundle\GraphQL;
 
 use Capco\AppBundle\Utils\Arr;
-use Capco\AppBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
+use Overblog\GraphQLBundle\Request\Executor;
 
 class ConnectionTraversor
 {
