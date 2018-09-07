@@ -8,6 +8,11 @@
 /web/uploads/*
 /web/export/*
 
+# Fonts directory used by styleguide and containing _fonts.scss compiled by brunch
+app/Resources/fonts
+# Fonts directory containing fonts compiled by brunch
+app/Resources/assets/fonts
+
 translations/*
 !translations/README.md
 

@@ -59,6 +59,8 @@ else
       npm rebuild node-sass > /dev/null
   fi
   echo "Binding ready!"
+
+  echo "Downloading translations…"
   yarn run trad
 
   if [ -n "CI" ]; then

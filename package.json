@@ -17,6 +17,7 @@
     "download-translations": "bin/console translation:download --no-debug",
     "update-js-translation": "babel-node ./xlf2-to-json.js",
     "trad": "yarn run download-translations && yarn run update-js-translation",
+    "fonts": "cd app/Resources; rm -rf fonts; git clone --depth 1 git@github.com:cap-collectif/fonts.git; cp -r fonts/fonts assets/fonts",
     "clean-cache": "rm -rf var/cache/*",
     "compile-graphql": "bin/console graphql:compile --no-debug && composer dump-autoload",
     "dump-graphql-schema": "bin/console graphql:dump-schema --no-debug --file schema.graphql --format graphql",
