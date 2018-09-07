@@ -8,7 +8,6 @@ import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql
 import FileUpload from '../../Form/FileUpload';
 import AddUsersToGroupFromEmailMutation from '../../../mutations/AddUsersToGroupFromEmailMutation';
 import type { Dispatch, Uuid } from '../../../types';
-import config from '../../../config';
 import type {
   AddUsersToGroupFromEmailMutationResponse,
   AddUsersToGroupFromEmailMutationVariables,
@@ -53,7 +52,7 @@ type FileUploadFieldProps = FieldProps & {
 
 export const formName = 'group-users-import';
 
-const prepareVariables = (
+const prepareVariablesFromAnalyzedFile = (
   fileContent: string,
   groupId: Uuid,
   dryRun: boolean,
@@ -89,7 +88,7 @@ const onSubmit = (values: SubmittedFormValue, dispatch: Dispatch, { group, onClo
 };
 
 const asyncValidate = (values: FormValues, dispatch: Dispatch, { group, reset }) => {
-  const variables = prepareVariables(values.emails, group.id, true);
+  const variables = prepareVariablesFromAnalyzedFile(values.emails, group.id, true);
 
   return AddUsersToGroupFromEmailMutation.commit(variables).then(
     (response: AddUsersToGroupFromEmailMutationResponse) => {
@@ -230,19 +229,16 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
             onClickShowMoreError={this.toggle.bind(this)}
             currentFile={files && files.length > 0 ? files[0] : null}
             onPostDrop={(droppedFiles: Array<File>, input: Object) => {
-              this.setState({ showMoreError: false, analyzed: true, files: droppedFiles });
-              if (!config.canUseDOM) {
-                return;
-              }
-
-              droppedFiles.forEach(file => {
-                const reader = new window.FileReader();
-                reader.onload = () => {
-                  input.onChange(reader.result);
-                };
-                reader.onabort = () => input.onChange(null);
-                reader.onerror = () => input.onChange(null);
-                reader.readAsText(file);
+              this.setState({ showMoreError: false, analyzed: true, files: droppedFiles }, () => {
+                droppedFiles.forEach(file => {
+                  const reader = new window.FileReader();
+                  reader.onload = () => {
+                    input.onChange(reader.result);
+                  };
+                  reader.onabort = () => input.onChange(null);
+                  reader.onerror = () => input.onChange(null);
+                  reader.readAsText(file);
+                });
               });
             }}
           />
@@ -259,13 +255,11 @@ const form = reduxForm({
   shouldAsyncValidate: ({ trigger }) => {
     switch (trigger) {
       case 'touch':
+      case 'blur':
+      case 'submit':
         return false;
       case 'change':
         return true;
-      case 'blur':
-        return false;
-      case 'submit':
-        return false;
       default:
         return true;
     }
