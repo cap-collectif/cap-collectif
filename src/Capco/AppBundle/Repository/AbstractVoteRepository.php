@@ -1,13 +1,11 @@
 <?php
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 class AbstractVoteRepository extends EntityRepository
 {
@@ -40,18 +38,42 @@ class AbstractVoteRepository extends EntityRepository
     }
 
     /**
-     * @todo don't show private vote.
+     * Find all votes by author, only the public one.
+     * @see https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/native-sql.html
      */
-    public function findAllByAuthor(User $user, int $limit = 100, int $offset = 0): Paginator
+    public function findAllByAuthor(User $user, int $limit = 100, int $offset = 0): array
     {
-        $qb = $this->createQueryBuilder('v');
-        $qb
-            ->andWhere('v.user = :author')
-            ->setParameter('author', $user)
-            ->setMaxResults($limit)
-            ->setFirstResult($offset);
+        $sqlRequest =
+            "SELECT * FROM votes WHERE (private = 0 OR private IS NULL) AND voter_id = :user_id LIMIT :offset, :limit";
 
-        return new Paginator($qb);
+        $rsm = new ResultSetMapping();
+        $rsm->addEntityResult(AbstractVote::class, 'v');
+        $rsm->addFieldResult('v', 'id', 'id');
+        $rsm->addFieldResult('v', 'created_at', 'createdAt');
+        $rsm->addFieldResult('v', 'publishedAt', 'publishedAt');
+        $rsm->addFieldResult('v', 'published', 'published');
+        $rsm->addMetaResult('v', 'comment_id', 'comment_id');
+        $rsm->addMetaResult('v', 'opinion_id', 'opinion_id');
+        $rsm->addMetaResult('v', 'argument_id', 'argument_id');
+        $rsm->addMetaResult('v', 'source_id', 'source_id');
+        $rsm->addMetaResult('v', 'proposal_id', 'proposal_id');
+        $rsm->addMetaResult('v', 'voter_id', 'voter_id');
+        $rsm->addMetaResult('v', 'private', 'private');
+        $rsm->addMetaResult('v', 'value', 'value');
+        $rsm->addMetaResult('v', 'selection_step_id', 'selection_step_id');
+        $rsm->addMetaResult('v', 'collect_step_id', 'collect_step_id');
+        $rsm->addMetaResult('v', 'opinion_version_id', 'opinion_version_id');
+        $rsm->addMetaResult('v', 'voteType', 'voteType');
+        $rsm->setDiscriminatorColumn('v', 'voteType');
+
+        $nativeQuery = $this->getEntityManager()
+            ->createNativeQuery($sqlRequest, $rsm)
+            ->setParameter('user_id', $user->getId())
+            ->setParameter('offset', $offset)
+            ->setParameter('limit', $limit);
+        $results = $nativeQuery->execute();
+
+        return $results;
     }
 
     /**
