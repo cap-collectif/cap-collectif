@@ -4,6 +4,7 @@ import { injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { FormGroup, HelpBlock, ControlLabel, Row, Col, Collapse } from 'react-bootstrap';
 import { reduxForm, Field, change } from 'redux-form';
 import type { FieldProps } from 'redux-form';
+import type { DropzoneFile } from 'react-dropzone';
 import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
 import FileUpload from '../../Form/FileUpload';
 import AddUsersToGroupFromEmailMutation from '../../../mutations/AddUsersToGroupFromEmailMutation';
@@ -17,15 +18,15 @@ import type { User } from '../../../redux/modules/user';
 
 type Props = {
   group: GroupAdminUsers_group,
-  handleSubmit: Function,
+  handleSubmit: () => void,
   dispatch: Dispatch,
-  onClose: Function,
+  onClose: () => void,
 };
 
 type State = {
   showMoreError: boolean,
   analyzed: boolean,
-  files: ?Array<File>,
+  files: ?Array<DropzoneFile>,
 };
 
 type DefaultProps = void;
@@ -44,10 +45,10 @@ type SubmittedFormValue = {
 
 type FileUploadFieldProps = FieldProps & {
   showMoreError: boolean,
-  onClickShowMoreError: Function,
-  onPostDrop: Function,
+  onClickShowMoreError: () => void,
+  onPostDrop: (droppedFiles: Array<DropzoneFile>, input: Object) => void,
   disabled: boolean,
-  currentFile: ?File,
+  currentFile: ?DropzoneFile,
 };
 
 export const formName = 'group-users-import';
@@ -94,13 +95,14 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, { group, reset })
     (response: AddUsersToGroupFromEmailMutationResponse) => {
       if (!response || !response.addUsersToGroupFromEmail) {
         reset();
+        return;
       }
 
-      const data = response.addUsersToGroupFromEmail;
+      const { importedUsers, notFoundEmails } = response.addUsersToGroupFromEmail;
       dispatch(
         change(formName, 'emails', {
-          importedUsers: data ? data.importedUsers : [],
-          notFoundEmails: data ? data.notFoundEmails : [],
+          importedUsers,
+          notFoundEmails,
         }),
       );
     },
@@ -128,13 +130,13 @@ const renderDropzoneInput = ({
       </HelpBlock>
       <Loader show={asyncValidating}>
         <FileUpload
-          id="csv-file"
           name={input.name}
           accept="text/csv"
           maxSize={26000}
+          inputProps={{ id: 'csv-file_field' }}
           minSize={1}
           disabled={disabled}
-          onDrop={(files: Array<File>) => {
+          onDrop={(files: Array<DropzoneFile>) => {
             onPostDrop(files, input);
           }}
         />
@@ -202,6 +204,20 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
     files: null,
   };
 
+  onPostDrop(droppedFiles: Array<DropzoneFile>, input: Object) {
+    this.setState({ showMoreError: false, analyzed: true, files: droppedFiles }, () => {
+      droppedFiles.forEach(file => {
+        const reader = new window.FileReader();
+        reader.onload = () => {
+          input.onChange(reader.result);
+        };
+        reader.onabort = () => input.onChange(null);
+        reader.onerror = () => input.onChange(null);
+        reader.readAsText(file);
+      });
+    });
+  }
+
   toggle() {
     this.setState((prevState: State) => ({
       showMoreError: !prevState.showMoreError,
@@ -226,21 +242,11 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
             component={renderDropzoneInput}
             showMoreError={showMoreError}
             disabled={analyzed}
-            onClickShowMoreError={this.toggle.bind(this)}
-            currentFile={files && files.length > 0 ? files[0] : null}
-            onPostDrop={(droppedFiles: Array<File>, input: Object) => {
-              this.setState({ showMoreError: false, analyzed: true, files: droppedFiles }, () => {
-                droppedFiles.forEach(file => {
-                  const reader = new window.FileReader();
-                  reader.onload = () => {
-                    input.onChange(reader.result);
-                  };
-                  reader.onabort = () => input.onChange(null);
-                  reader.onerror = () => input.onChange(null);
-                  reader.readAsText(file);
-                });
-              });
+            onClickShowMoreError={() => {
+              this.toggle();
             }}
+            currentFile={files && files.length > 0 ? files[0] : null}
+            onPostDrop={this.onPostDrop}
           />
         </div>
       </form>

@@ -2,7 +2,7 @@
 
 exports[`<GroupAdminImportUsersForm /> render correctly 1`] = `
 <form
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <div>
     <p>

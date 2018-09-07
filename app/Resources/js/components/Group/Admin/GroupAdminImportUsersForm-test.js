@@ -14,7 +14,7 @@ describe('<GroupAdminImportUsersForm />', () => {
       id: 'group4',
     },
     intl: intlMock,
-    handleSubmit: Function,
+    handleSubmit: jest.fn(),
   };
 
   it('render correctly', () => {
