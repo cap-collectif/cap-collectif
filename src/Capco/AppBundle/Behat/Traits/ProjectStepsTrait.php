@@ -130,7 +130,7 @@ trait ProjectStepsTrait
     public function iVoteForTheFirstProposal()
     {
         $this->navigationContext->getPage('collect page')->clickVoteProposalButton();
-        $this->iWait(1);
+        $this->iWait(2);
     }
 
     /**

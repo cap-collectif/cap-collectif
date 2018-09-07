@@ -125,7 +125,6 @@ Scenario: Logged in as user who doesn't full fill requirements and want to vote.
   And I confirm my vote
   # We delete the vote
   And I vote for the first proposal
-  And I wait 2 seconds
   # We vote again
   And I vote for the first proposal
   And I should see "requirements filled"

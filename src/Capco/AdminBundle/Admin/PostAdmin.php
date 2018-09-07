@@ -295,6 +295,8 @@ class PostAdmin extends CapcoAdmin
         $query->orWhere(
             $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
         );
+        $query->orWhere('p IS NULL');
+
         $query->setParameter('author', $user);
 
         return $query;

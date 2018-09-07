@@ -418,7 +418,7 @@ services:
 
   capco_admin.admin.post:
     class: Capco\AdminBundle\Admin\PostAdmin
-    arguments: [~, Capco\AppBundle\Entity\Post, CapcoAdminBundle:CRUD, '@security.token_storage']
+    arguments: [~, Capco\AppBundle\Entity\Post, SonataAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,

@@ -791,7 +791,6 @@ trait ProposalStepsTrait
         $this->checkOption('requirement2');
         $this->iWait(1);
         $this->checkOption('requirement3');
-        $this->iWait(1);
     }
 
     /**
@@ -799,9 +798,13 @@ trait ProposalStepsTrait
      */
     public function iConfirmMyVote()
     {
+        $this->getSession()->wait(2000, "$('#confirm-proposal-vote').length > 0");
         $this->buttonShouldNotBeDisabled('global.validate');
         $this->iClickOnButton('#confirm-proposal-vote');
-        $this->iWait(2);
+        $this->getSession()->wait(
+            2000,
+            "$('.button__vote.btn.btn-success.btn-default.active').length > 0"
+        );
     }
 
     /**
