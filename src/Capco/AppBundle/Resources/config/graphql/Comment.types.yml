@@ -38,6 +38,18 @@ Comment:
         type: 'CommentPublicationStatus!'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentPublicationStatusResolver", [value])'
+      reportings:
+        type: 'ReportingConnection!'
+        argsBuilder: 'Relay::Connection'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 30
+          orderBy:
+            type: 'ReportingOrder'
+            defaultValue: { field: CREATED_AT, direction: DESC }
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentReportingsResolver", [value, args])'
       votes:
         type: 'CommentVoteConnection!'
         argsBuilder: 'Relay::Connection'

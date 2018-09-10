@@ -21,5 +21,7 @@ QuestionTypeValue:
         value: 7
       button:
         value: 8
+      number:
+        value: 9
       section:
         value: 10

@@ -95,6 +95,9 @@ Opinion:
         type: 'Section!'
         description: 'Where the proposition has been placed.'
         resolve: "@=resolver('proposition_section', [value])"
+      reportings:
+        type: '[Reporting]'
+        resolve: "@=resolver('proposition_reportings', [value])"
       contribuable:
         resolve: '@=value.canContribute()'
       answer:
