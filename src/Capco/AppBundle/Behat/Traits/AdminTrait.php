@@ -30,23 +30,39 @@ trait AdminTrait
     public function iFillTheProposalMergeForm()
     {
         // Select a project
-        $this->getSession()->getPage()->find('css', '#project .Select-input input')->setValue('7');
+        $this->getSession()
+            ->getPage()
+            ->find('css', '#project .Select-input input')
+            ->setValue('7');
         $this->iWait(3);
         // Select 2 distinct proposals from the project
         $proposals = ['', 'pas'];
         foreach ($proposals as $search) {
-            $this->getSession()->getPage()->find('css', '#fromProposals')->click();
-            $searchInput = $this->getSession()->getPage()->find('css', '#fromProposals .Select-input input');
+            $this->getSession()
+                ->getPage()
+                ->find('css', '#fromProposals')
+                ->click();
+            $searchInput = $this->getSession()
+                ->getPage()
+                ->find('css', '#fromProposals .Select-input input');
             $searchInput->setValue($search);
-            $this->getSession()->getPage()->find('css', '#fromProposals')->click();
+            $this->getSession()
+                ->getPage()
+                ->find('css', '#fromProposals')
+                ->click();
             $this->iWait(3);
-            $option = $this->getSession()->getPage()->find('css', '#fromProposals .Select-option[id*="-option-1"]');
+            $option = $this->getSession()
+                ->getPage()
+                ->find('css', '#fromProposals .Select-option[id*="-option-1"]');
             if ($option) {
                 $option->click();
             }
             $this->iWait(2);
         }
-        $this->getSession()->getPage()->find('css', '#fromProposals')->click();
+        $this->getSession()
+            ->getPage()
+            ->find('css', '#fromProposals')
+            ->click();
     }
 
     /**
@@ -55,7 +71,12 @@ trait AdminTrait
     public function iShouldBeRedirectedToAMergeProposal()
     {
         $url = $this->getSession()->getCurrentUrl();
-        expect(preg_match('/^https:\/\/capco.test\/admin\/capco\/app\/proposal\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/edit$/i', $url))->toBe(1);
+        expect(
+            preg_match(
+                '/^https:\/\/capco.test\/admin\/capco\/app\/proposal\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/edit$/i',
+                $url
+            )
+        )->toBe(1);
     }
 
     /**
@@ -80,6 +101,7 @@ trait AdminTrait
     public function iGoToTheAdminProposalFormPageWithId(string $id)
     {
         $this->visitPageWithParams('admin proposal form page', ['id' => $id]);
+        $this->getSession()->wait(2000, "$('#proposal-form-admin-page-tabs-tab-1').length > 0");
     }
 
     /**
@@ -105,7 +127,9 @@ trait AdminTrait
      */
     public function iClickOnButton(string $id)
     {
-        $this->getCurrentPage()->find('css', $id)->click();
+        $this->getCurrentPage()
+            ->find('css', $id)
+            ->click();
     }
 
     /**
