@@ -4,6 +4,7 @@ exports[`<VoteListProfile /> renders correcty with empty node 1`] = `
 <ListGroup
   bsClass="media-list"
   componentClass="ul"
+<<<<<<< HEAD
 >
   <ForwardRef(Relay(VoteItem))
     key="node1"
@@ -15,6 +16,9 @@ exports[`<VoteListProfile /> renders correcty with empty node 1`] = `
     }
   />
 </ListGroup>
+=======
+/>
+>>>>>>> Add jest test
 `;
 
 exports[`<VoteListProfile /> renders correcty with two node 1`] = `
@@ -26,7 +30,10 @@ exports[`<VoteListProfile /> renders correcty with two node 1`] = `
     key="1"
     vote={
       Object {
+<<<<<<< HEAD
         "$fragmentRefs": null,
+=======
+>>>>>>> Add jest test
         "id": "1",
       }
     }
@@ -35,7 +42,10 @@ exports[`<VoteListProfile /> renders correcty with two node 1`] = `
     key="2"
     vote={
       Object {
+<<<<<<< HEAD
         "$fragmentRefs": null,
+=======
+>>>>>>> Add jest test
         "id": "2",
       }
     }
@@ -52,7 +62,10 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 1`] = `
     key="1"
     vote={
       Object {
+<<<<<<< HEAD
         "$fragmentRefs": null,
+=======
+>>>>>>> Add jest test
         "id": "1",
       }
     }
@@ -61,7 +74,10 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 1`] = `
     key="2"
     vote={
       Object {
+<<<<<<< HEAD
         "$fragmentRefs": null,
+=======
+>>>>>>> Add jest test
         "id": "2",
       }
     }
@@ -75,6 +91,7 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 1`] = `
       }
     }
   >
+<<<<<<< HEAD
     <Button
       active={false}
       block={false}
@@ -82,12 +99,26 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 1`] = `
       bsStyle="link"
       disabled={false}
       onClick={[Function]}
+=======
+    <a
+      className="small"
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+>>>>>>> Add jest test
     >
       <FormattedMessage
         id="global.more"
         values={Object {}}
       />
+<<<<<<< HEAD
     </Button>
+=======
+    </a>
+>>>>>>> Add jest test
   </ListGroupItem>
 </ListGroup>
 `;
@@ -101,7 +132,10 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 2`] = `
     key="1"
     vote={
       Object {
+<<<<<<< HEAD
         "$fragmentRefs": null,
+=======
+>>>>>>> Add jest test
         "id": "1",
       }
     }
@@ -110,7 +144,10 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 2`] = `
     key="2"
     vote={
       Object {
+<<<<<<< HEAD
         "$fragmentRefs": null,
+=======
+>>>>>>> Add jest test
         "id": "2",
       }
     }
@@ -119,7 +156,10 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 2`] = `
     key="3"
     vote={
       Object {
+<<<<<<< HEAD
         "$fragmentRefs": null,
+=======
+>>>>>>> Add jest test
         "id": "3",
       }
     }
