@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArgumentListProfile /> renders correcty with empty node 1`] = `
+<ListGroup
+  bsClass="media-list"
+/>
+`;
+
+exports[`<ArgumentListProfile /> renders correcty with two nodes 1`] = `
+<ListGroup
+  bsClass="media-list"
+>
+  <ForwardRef(Relay(ArgumentItem))
+    argument={
+      Object {
+        "id": "1",
+      }
+    }
+    isProfile={true}
+    key="1"
+  />
+  <ForwardRef(Relay(ArgumentItem))
+    argument={
+      Object {
+        "id": "2",
+      }
+    }
+    isProfile={true}
+    key="2"
+  />
+</ListGroup>
+`;
+
+exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 1`] = `
+<ListGroup
+  bsClass="media-list"
+>
+  <ForwardRef(Relay(ArgumentItem))
+    argument={
+      Object {
+        "id": "1",
+      }
+    }
+    isProfile={true}
+    key="1"
+  />
+  <ForwardRef(Relay(ArgumentItem))
+    argument={
+      Object {
+        "id": "2",
+      }
+    }
+    isProfile={true}
+    key="2"
+  />
+  <ListGroupItem
+    bsClass="list-group-item"
+    listItem={false}
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <a
+      className="small"
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    >
+      <FormattedMessage
+        id="global.more"
+        values={Object {}}
+      />
+    </a>
+  </ListGroupItem>
+</ListGroup>
+`;
+
+exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 2`] = `
+<ListGroup
+  bsClass="media-list"
+>
+  <ForwardRef(Relay(ArgumentItem))
+    argument={
+      Object {
+        "id": "1",
+      }
+    }
+    isProfile={true}
+    key="1"
+  />
+  <ForwardRef(Relay(ArgumentItem))
+    argument={
+      Object {
+        "id": "2",
+      }
+    }
+    isProfile={true}
+    key="2"
+  />
+  <ForwardRef(Relay(ArgumentItem))
+    argument={
+      Object {
+        "id": "3",
+      }
+    }
+    isProfile={true}
+    key="3"
+  />
+</ListGroup>
+`;

@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VoteListProfile /> renders correcty with empty node 1`] = `
+<ListGroup
+  bsClass="media-list"
+  componentClass="ul"
+/>
+`;
+
+exports[`<VoteListProfile /> renders correcty with two node 1`] = `
+<ListGroup
+  bsClass="media-list"
+  componentClass="ul"
+>
+  <ForwardRef(Relay(VoteItem))
+    key="1"
+    vote={
+      Object {
+        "id": "1",
+      }
+    }
+  />
+  <ForwardRef(Relay(VoteItem))
+    key="2"
+    vote={
+      Object {
+        "id": "2",
+      }
+    }
+  />
+</ListGroup>
+`;
+
+exports[`<VoteListProfile /> renders two nodes and a loadmore button 1`] = `
+<ListGroup
+  bsClass="media-list"
+  componentClass="ul"
+>
+  <ForwardRef(Relay(VoteItem))
+    key="1"
+    vote={
+      Object {
+        "id": "1",
+      }
+    }
+  />
+  <ForwardRef(Relay(VoteItem))
+    key="2"
+    vote={
+      Object {
+        "id": "2",
+      }
+    }
+  />
+  <ListGroupItem
+    bsClass="list-group-item"
+    listItem={false}
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <a
+      className="small"
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    >
+      <FormattedMessage
+        id="global.more"
+        values={Object {}}
+      />
+    </a>
+  </ListGroupItem>
+</ListGroup>
+`;
+
+exports[`<VoteListProfile /> renders two nodes and a loadmore button 2`] = `
+<ListGroup
+  bsClass="media-list"
+  componentClass="ul"
+>
+  <ForwardRef(Relay(VoteItem))
+    key="1"
+    vote={
+      Object {
+        "id": "1",
+      }
+    }
+  />
+  <ForwardRef(Relay(VoteItem))
+    key="2"
+    vote={
+      Object {
+        "id": "2",
+      }
+    }
+  />
+  <ForwardRef(Relay(VoteItem))
+    key="3"
+    vote={
+      Object {
+        "id": "3",
+      }
+    }
+  />
+</ListGroup>
+`;

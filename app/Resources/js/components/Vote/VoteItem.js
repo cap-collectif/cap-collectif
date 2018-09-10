@@ -21,7 +21,7 @@ const ListVoteItem = ({ children }: ListVoteItemProps) => (
   <li className="opinion  opinion--vote block  block--bordered  box">{children}</li>
 );
 
-class VoteItem extends React.Component<Props> {
+export class VoteItem extends React.Component<Props> {
   render() {
     const { vote } = this.props;
     let voteType;
