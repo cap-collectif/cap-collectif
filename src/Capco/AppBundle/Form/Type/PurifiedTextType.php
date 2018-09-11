@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Form\Type;
 
+use Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,7 +12,7 @@ class PurifiedTextType extends AbstractType
 {
     private $purifier;
 
-    public function __construct(DataTransformerInterface $purifier)
+    public function __construct(HTMLPurifierTransformer $purifier)
     {
         $this->purifier = $purifier;
     }
