@@ -23,18 +23,6 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
             'description' => 'A budget contribution',
             'fields' => function () use ($globalVariable) {
                 return [
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The id of the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'published' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
@@ -163,6 +151,18 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
                 ],
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The id of the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'comments' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CommentConnection')),
                     'args' => [
@@ -203,53 +203,21 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'trashed' => [
+                'viewerHasReport' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
-                    'resolve' => null,
-                    'description' => '`true` if the contribution is trashed.',
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->userHasReport(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable));
+                    },
+                    'description' => 'Does the viewer already submitted a report ?',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => null,
-                ],
-                'trashedStatus' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The status.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'trashedAt' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The moment the moderator trashed the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'trashedReason' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The reason the moderator trashed the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
                 'kind' => [
                     'type' => Type::nonNull(Type::string()),
@@ -303,21 +271,53 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'viewerHasReport' => [
+                'trashed' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->userHasReport(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable));
-                    },
-                    'description' => 'Does the viewer already submitted a report ?',
+                    'resolve' => null,
+                    'description' => '`true` if the contribution is trashed.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
+                    'access' => null,
+                ],
+                'trashedStatus' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The status.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The moment the moderator trashed the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashedReason' => [
+                    'type' => Type::string(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The reason the moderator trashed the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
                 ],
                 'adminUrl' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),

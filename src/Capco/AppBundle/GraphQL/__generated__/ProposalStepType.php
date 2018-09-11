@@ -93,12 +93,6 @@ final class ProposalStepType extends InterfaceType implements GeneratedTypeInter
                             'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('ProposalAffiliation')),
                             'description' => 'Affiliation options for proposals returned from the connection.',
                         ],
-                        [
-                            'name' => 'includeUnpublished',
-                            'type' => Type::boolean(),
-                            'description' => '(ROLE_SUPER_ADMIN only) Select also unpublished proposals.',
-                            'defaultValue' => false,
-                        ],
                     ],
                     'resolve' => null,
                     'description' => null,

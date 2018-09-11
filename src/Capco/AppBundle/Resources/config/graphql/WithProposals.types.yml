@@ -38,10 +38,6 @@ WithProposals:
           affiliations:
             type: '[ProposalAffiliation]'
             description: 'Affiliation options for proposals returned from the connection.'
-          includeUnpublished:
-            type: 'Boolean'
-            description: '(ROLE_SUPER_ADMIN only) Select also unpublished proposals.'
-            defaultValue: false
       viewerProposalsUnpublished:
         access: "@=hasRole('ROLE_USER')"
         type: 'ProposalConnection'
