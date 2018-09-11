@@ -15,6 +15,7 @@ imports:
   - { resource: services/graphql_dataloaders.yml }
   - { resource: services/notifiers.yml }
   - { resource: services/elasticsearch.yml }
+  - { resource: services/data_fixtures.yml }
 
 parameters:
   traits:
@@ -196,15 +197,6 @@ services:
   capco.form.transformer.html_purifier:
     class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
     arguments: ['@exercise_html_purifier.default']
-
-  alice.processor.media:
-    class: Capco\AppBundle\DataFixtures\Processor\MediaProcessor
-    tags: [{ name: hautelook_alice.alice.processor }]
-
-  alice.processor.ids:
-    class: Capco\AppBundle\DataFixtures\Processor\FixedIdsProcessor
-    tags: [{ name: hautelook_alice.alice.processor }]
-    arguments: ['@doctrine.orm.entity_manager']
 
   geocoder.google_map:
     class: Geocoder\Provider\GoogleMaps
