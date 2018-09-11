@@ -17,6 +17,10 @@ type Props = {
 };
 
 class ArgumentItem extends React.Component<Props> {
+  static defaultProps = {
+    isProfile: false,
+  };
+
   renderDate = () => {
     const argument = this.props.argument;
     if (!Modernizr.intl) {
@@ -32,6 +36,29 @@ class ArgumentItem extends React.Component<Props> {
           hour="numeric"
           minute="numeric"
         />
+      </p>
+    );
+  };
+
+  renderLabel = type => {
+    const labelStyle = type === 'FOR' ? 'success' : 'danger';
+    const labelValueTranslateId =
+      type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against';
+
+    return (
+      <Label bsStyle={labelStyle} className={'label--right'}>
+        <FormattedMessage id={labelValueTranslateId} />
+      </Label>
+    );
+  };
+
+  renderConsultationLink = consultation => {
+    return (
+      <p>
+        <FormattedMessage id={'admin.fields.opinion.link'} />
+        {' : '}
+        {/* $FlowFixMe */}
+        <a href={consultation.url}>{consultation.title}</a>
       </p>
     );
   };
@@ -53,7 +80,6 @@ class ArgumentItem extends React.Component<Props> {
               {isProfile && this.renderLabel(argument.type)}
             </p>
             {this.renderDate()}
-            {/* $FlowFixMe */}
             <UnpublishedLabel publishable={argument} />
           </div>
           <p

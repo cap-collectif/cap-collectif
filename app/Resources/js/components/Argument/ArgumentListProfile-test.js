@@ -4,20 +4,28 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { cloneDeep } from 'lodash';
 import { ArgumentListProfile } from './ArgumentListProfile';
-import { relayPaginationMock } from '../../mocks';
+import { relayPaginationMock, $refType, $fragmentRefs } from '../../mocks';
 
 describe('<ArgumentListProfile />', () => {
   const defaultProps = {
     relay: relayPaginationMock,
     argumentList: {
+      $refType,
       id: 'idarguments',
       arguments: {
-        edges: [],
+        pageInfo: {
+          hasPreviousPage: false,
+          hasNextPage: true,
+          startCursor: '1',
+          endCursor: '3',
+        },
+        totalCount: 3,
+        edges: [{ node: { $fragmentRefs, id: '1' } }],
       },
     },
   };
 
-  const nodes = [{ node: { id: '1' } }, { node: { id: '2' } }];
+  const nodes = [{ node: { id: '1', $fragmentRefs } }, { node: { id: '2', $fragmentRefs } }];
 
   const propsWithTwoNodes = cloneDeep(defaultProps);
   propsWithTwoNodes.argumentList.arguments.edges = nodes;
@@ -27,21 +35,18 @@ describe('<ArgumentListProfile />', () => {
   propsWithMore.relay.hasMore.mockReturnValueOnce(true).mockReturnValueOnce(false);
 
   it('renders correcty with empty node', () => {
-    // $FlowFixMe
     const wrapper = shallow(<ArgumentListProfile {...defaultProps} />);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correcty with two nodes', () => {
-    // $FlowFixMe
     const wrapper = shallow(<ArgumentListProfile {...propsWithTwoNodes} />);
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders two nodes and a loadmore button', () => {
-    // $FlowFixMe
     const wrapper = shallow(<ArgumentListProfile {...propsWithMore} />);
 
     expect(wrapper).toMatchSnapshot();
@@ -49,11 +54,10 @@ describe('<ArgumentListProfile />', () => {
     wrapper.find('a').simulate('click');
 
     propsWithMore.argumentList.arguments.edges = [
-      { node: { id: '1' } },
-      { node: { id: '2' } },
-      { node: { id: '3' } },
+      { node: { id: '1', $fragmentRefs } },
+      { node: { id: '2', $fragmentRefs } },
+      { node: { id: '3', $fragmentRefs } },
     ];
-    // $FlowFixMe
     const wrapperAfterClick = shallow(<ArgumentListProfile {...propsWithMore} />);
 
     expect(wrapperAfterClick).toMatchSnapshot();
