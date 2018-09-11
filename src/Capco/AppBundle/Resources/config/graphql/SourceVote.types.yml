@@ -1,24 +1,9 @@
 SourceVote:
   type: object
   inherits:
+    - Vote
     - Publishable
   config:
     interfaces:
+      - Vote
       - Publishable
-    fields:
-      id:
-        builder: 'Relay::GlobalId'
-      author:
-        type: 'User'
-        description: 'The author of the contribution. If null, account has been deleted.'
-        resolve: "@=resolver('proposition_vote_author', [value])"
-      createdAt:
-        type: 'DateTime!'
-        description: 'Date of vote.'
-      related:
-        type: 'Source'
-        description: 'Return the related contribution if the contribution is related to another.'
-      kind:
-        type: 'String!'
-        description: "Returns 'sourceVote'."
-        resolve: 'sourceVote'

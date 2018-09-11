@@ -24,10 +24,10 @@ const ListVoteItem = ({ children }: ListVoteItemProps) => (
 export class VoteItem extends React.Component<Props> {
   render() {
     const { vote } = this.props;
-    let voteType;
-    let voteVerbe;
-    let voteLabelClass;
-    let voteLabel;
+    let voteType = 'votes.type.propositionVote';
+    let voteVerbe = 'votes.has';
+    let voteLabelClass = classNames('label', 'label-success');
+    let voteLabel = 'votes.value.voteFor';
 
     if (vote.value !== null && vote.value === 1) {
       voteVerbe = 'votes.is';
@@ -41,18 +41,12 @@ export class VoteItem extends React.Component<Props> {
       voteVerbe = 'votes.is';
       voteLabelClass = classNames('label', 'label-warning');
       voteLabel = 'votes.value.mitigated';
-    } else {
-      voteVerbe = 'votes.has';
-      voteLabelClass = classNames('label', 'label-success');
-      voteLabel = 'votes.value.voteFor';
     }
 
-    if (vote.kind === 'commentVote') {
+    if (vote.__typename === 'commentVote') {
       voteType = 'votes.type.commentary';
     } else if (vote.value !== null) {
       voteType = 'votes.type.proposition';
-    } else {
-      voteType = 'votes.type.propositionVote';
     }
 
     return (
@@ -103,9 +97,14 @@ export default createFragmentContainer(
   graphql`
     fragment VoteItem_vote on Vote {
       id
-      kind
-      value
+      __typename
       createdAt
+      ... on OpinionVote {
+        value
+      }
+      ... on VersionVote {
+        value
+      }
       author {
         id
         slug

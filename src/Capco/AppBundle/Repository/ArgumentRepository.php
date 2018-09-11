@@ -179,10 +179,7 @@ class ArgumentRepository extends EntityRepository
      */
     public function countByUser(User $user): int
     {
-        $qb /**
-         * Project has no field or association named isEnabled
-         */ = // ->andWhere('c.isEnabled = true')
-        $this->getIsEnabledQueryBuilder()
+        $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(a) as TotalArguments')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.step', 's')
@@ -191,6 +188,8 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('a.Author = :author')
             ->andWhere('o.published = true')
             ->andWhere('s.isEnabled = true')
+            ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
+            ->setParameter('status', 'invisible')
             ->setParameter('author', $user);
 
         return $qb->getQuery()->getSingleScalarResult();
@@ -236,25 +235,12 @@ class ArgumentRepository extends EntityRepository
      */
     public function getByUser(User $user, int $first = 0, int $offset = 100): Paginator
     {
-        $query = $this->getIsEnabledQueryBuilder()
-            ->leftJoin('a.opinion', 'o')
-            ->addSelect('o')
-            ->leftJoin('o.step', 's')
-            ->addSelect('s')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->addSelect('cas')
-            ->leftJoin('cas.project', 'p')
-            ->addSelect('p')
-            ->leftJoin('o.Author', 'aut')
-            ->addSelect('aut')
-            ->leftJoin('aut.media', 'm')
-            ->addSelect('m')
-            ->leftJoin('a.votes', 'v')
-            ->addSelect('v')
+        $query = $this->getIsEnabledQueryBuilder();
+        $query
             ->andWhere('a.Author = :author')
-            ->andWhere('o.published = true')
-            ->andWhere('s.isEnabled = true')
+            ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
             ->setParameter('author', $user)
+            ->setParameter('status', 'invisible')
             ->setMaxResults($offset)
             ->setFirstResult($first);
 

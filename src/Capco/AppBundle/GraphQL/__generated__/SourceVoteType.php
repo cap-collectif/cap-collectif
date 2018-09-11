@@ -27,10 +27,44 @@ final class SourceVoteType extends ObjectType implements GeneratedTypeInterface
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["relay_globalid_field", array(0 => $value, 1 => $info, 2 => null, 3 => null)]);
-                    },
+                    'resolve' => null,
                     'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'createdAt' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Date of vote.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'author' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The author of the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'related' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The contribution that was voted.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -93,62 +127,10 @@ final class SourceVoteType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'author' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('User'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposition_vote_author", array(0 => $value)]);
-                    },
-                    'description' => 'The author of the contribution. If null, account has been deleted.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'createdAt' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Date of vote.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'related' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Source'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Return the related contribution if the contribution is related to another.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'kind' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => function () use ($globalVariable) {
-                        return 'sourceVote';
-                    },
-                    'description' => 'Returns \'sourceVote\'.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('Publishable')];
+                return [$globalVariable->get('typeResolver')->resolve('Vote'), $globalVariable->get('typeResolver')->resolve('Publishable')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

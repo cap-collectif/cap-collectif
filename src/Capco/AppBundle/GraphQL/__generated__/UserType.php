@@ -1214,7 +1214,7 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentByUserResolver", array(0 => $value, 1 => $args)]);
                     },
-                    'description' => 'Array of Arguments of the user.',
+                    'description' => 'Get all the arguments for a specific user with pagination.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

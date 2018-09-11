@@ -11,7 +11,8 @@ describe('<VoteItem />', () => {
     vote: {
       $refType,
       id: '51',
-      kind: 'vote',
+      __typename: 'vote',
+      // $FlowFixMe
       value: 1,
       createdAt: '2018-04-09T23:21:06+0200',
       author: {
@@ -36,9 +37,11 @@ describe('<VoteItem />', () => {
   };
 
   const voteAgainstProps = cloneDeep(defaultProps);
+  // $FlowFixMe
   voteAgainstProps.vote.value = -1;
 
   const voteMitigatedProps = cloneDeep(defaultProps);
+  // $FlowFixMe
   voteMitigatedProps.vote.value = 0;
 
   const voteWithoutValueProps = cloneDeep(defaultProps);
