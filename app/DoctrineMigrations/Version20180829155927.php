@@ -18,7 +18,6 @@ final class Version20180829155927 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->connection->delete('question_choice', ['question_id' => null]);
         $this->addSql('ALTER TABLE question_choice CHANGE question_id question_id INT NOT NULL');
     }
 
