@@ -12,12 +12,13 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AddProposalVoteMutation
+class AddProposalVoteMutation implements MutationInterface
 {
     private $em;
     private $validator;
@@ -45,7 +46,7 @@ class AddProposalVoteMutation
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
     }
 
-    public function __invoke(Argument $input, User $user, RequestStack $request)
+    public function __invoke(Argument $input, User $user, RequestStack $request): array
     {
         $proposal = $this->proposalRepo->find($input->offsetGet('proposalId'));
         $step = $this->stepRepo->find($input->offsetGet('stepId'));

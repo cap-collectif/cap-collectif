@@ -7,11 +7,12 @@ use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 
-class DeleteProposalMutation
+class DeleteProposalMutation implements MutationInterface
 {
     private $em;
     private $proposalRepo;
@@ -20,11 +21,11 @@ class DeleteProposalMutation
     private $indexer;
 
     public function __construct(
-      EntityManagerInterface $em,
-      ProposalRepository $proposalRepo,
-      RedisStorageHelper $redisHelper,
-      Publisher $publisher,
-      Indexer $indexer
+        EntityManagerInterface $em,
+        ProposalRepository $proposalRepo,
+        RedisStorageHelper $redisHelper,
+        Publisher $publisher,
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->proposalRepo = $proposalRepo;
@@ -47,11 +48,14 @@ class DeleteProposalMutation
 
         $this->redisHelper->recomputeUserCounters($author);
 
-        $this->publisher->publish('proposal.delete', new Message(
-          json_encode([
-              'proposalId' => $proposal->getId(),
-          ])
-        ));
+        $this->publisher->publish(
+            'proposal.delete',
+            new Message(
+                json_encode([
+                    'proposalId' => $proposal->getId(),
+                ])
+            )
+        );
 
         // Synchronous indexation
         $this->indexer->remove(\get_class($proposal), $proposal->getId());

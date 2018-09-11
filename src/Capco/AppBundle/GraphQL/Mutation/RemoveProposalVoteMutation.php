@@ -9,9 +9,10 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class RemoveProposalVoteMutation
+class RemoveProposalVoteMutation implements MutationInterface
 {
     private $em;
     private $proposalRepo;
@@ -30,7 +31,7 @@ class RemoveProposalVoteMutation
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
     }
 
-    public function __invoke(Argument $input, User $user)
+    public function __invoke(Argument $input, User $user): array
     {
         $proposal = $this->proposalRepo->find($input->offsetGet('proposalId'));
         $step = $this->stepRepo->find($input->offsetGet('stepId'));

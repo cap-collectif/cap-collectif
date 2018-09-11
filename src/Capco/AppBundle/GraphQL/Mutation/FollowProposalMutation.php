@@ -8,18 +8,22 @@ use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
-class FollowProposalMutation
+class FollowProposalMutation implements MutationInterface
 {
     private $em;
     private $proposalRepository;
     private $followerRepository;
 
-    public function __construct(EntityManagerInterface $em, ProposalRepository $proposalRepository, FollowerRepository $followerRepository)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        ProposalRepository $proposalRepository,
+        FollowerRepository $followerRepository
+    ) {
         $this->em = $em;
         $this->proposalRepository = $proposalRepository;
         $this->followerRepository = $followerRepository;

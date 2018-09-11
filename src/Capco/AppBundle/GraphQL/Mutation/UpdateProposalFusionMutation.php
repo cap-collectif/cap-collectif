@@ -6,23 +6,27 @@ use Capco\AppBundle\Form\ProposalFusionType;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\Form\FormFactory;
 
-class UpdateProposalFusionMutation
+class UpdateProposalFusionMutation implements MutationInterface
 {
     private $em;
     private $formFactory;
     private $proposalRepo;
 
-    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, ProposalRepository $proposalRepo)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        ProposalRepository $proposalRepo
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->proposalRepo = $proposalRepo;
     }
 
-    public function __invoke(Argument $input)
+    public function __invoke(Argument $input): array
     {
         $proposalIds = $input->getRawArguments()['fromProposals'];
         $proposalId = $input->getRawArguments()['proposalId'];
@@ -32,11 +36,9 @@ class UpdateProposalFusionMutation
             throw new UserError('Unknown proposal to merge with id: ' . $proposalId);
         }
 
-        $beforeChildProposalIds = $proposal->getChildConnections()->map(
-          function ($entity) {
-              return $entity->getId();
-          }
-        );
+        $beforeChildProposalIds = $proposal->getChildConnections()->map(function ($entity) {
+            return $entity->getId();
+        });
 
         $proposalForm = $proposal->getProposalForm();
         foreach ($proposalIds as $key => $id) {
@@ -49,7 +51,9 @@ class UpdateProposalFusionMutation
             }
         }
 
-        $form = $this->formFactory->create(ProposalFusionType::class, $proposal, ['proposalForm' => $proposalForm]);
+        $form = $this->formFactory->create(ProposalFusionType::class, $proposal, [
+            'proposalForm' => $proposalForm,
+        ]);
         $form->submit(['childConnections' => $proposalIds], false);
 
         if (!$form->isValid()) {
@@ -58,16 +62,14 @@ class UpdateProposalFusionMutation
 
         $this->em->flush();
 
-        $afterChildProposalIds = $proposal->getChildConnections()->map(
-          function ($entity) {
-              return $entity->getId();
-          }
-        );
-        $removedMergedFromIds = $beforeChildProposalIds->filter(
-            function ($id) use ($afterChildProposalIds) {
-                return !$afterChildProposalIds->contains($id);
-            }
-        );
+        $afterChildProposalIds = $proposal->getChildConnections()->map(function ($entity) {
+            return $entity->getId();
+        });
+        $removedMergedFromIds = $beforeChildProposalIds->filter(function ($id) use (
+            $afterChildProposalIds
+        ) {
+            return !$afterChildProposalIds->contains($id);
+        });
         $removedMergedFrom = [];
         foreach ($removedMergedFromIds as $id) {
             $removedMergedFrom[] = $this->proposalRepo->find($id);

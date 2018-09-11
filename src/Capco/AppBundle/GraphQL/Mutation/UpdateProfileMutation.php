@@ -6,18 +6,22 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ProfileFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
 
-class UpdateProfileMutation
+class UpdateProfileMutation implements MutationInterface
 {
     private $em;
     private $formFactory;
     private $logger;
 
-    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, LoggerInterface $logger)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        LoggerInterface $logger
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
@@ -27,7 +31,9 @@ class UpdateProfileMutation
     {
         $arguments = $input->getRawArguments();
 
-        $form = $this->formFactory->create(ProfileFormType::class, $user, ['csrf_protection' => false]);
+        $form = $this->formFactory->create(ProfileFormType::class, $user, [
+            'csrf_protection' => false,
+        ]);
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {

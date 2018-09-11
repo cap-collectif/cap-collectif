@@ -6,18 +6,19 @@ use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class DeleteReplyMutation
+class DeleteReplyMutation implements MutationInterface
 {
     private $em;
     private $replyRepo;
     private $redisStorageHelper;
 
     public function __construct(
-      EntityManagerInterface $em,
-      ReplyRepository $replyRepo,
-      RedisStorageHelper $redisStorageHelper
+        EntityManagerInterface $em,
+        ReplyRepository $replyRepo,
+        RedisStorageHelper $redisStorageHelper
     ) {
         $this->em = $em;
         $this->replyRepo = $replyRepo;

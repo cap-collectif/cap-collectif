@@ -7,11 +7,12 @@ use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
-final class UpdateFollowProposalMutation
+final class UpdateFollowProposalMutation implements MutationInterface
 {
     private $em;
     private $proposalRepository;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Questionnaire;
@@ -12,12 +13,14 @@ use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserErrors;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormInterface;
 
-class AddReplyMutation
+class AddReplyMutation implements MutationInterface
 {
     private $em;
     private $formFactory;
@@ -49,7 +52,7 @@ class AddReplyMutation
         $this->userNotifier = $userNotifier;
     }
 
-    public function __invoke(Argument $input, User $user)
+    public function __invoke(Argument $input, User $user): array
     {
         $values = $input->getRawArguments();
         /** @var Questionnaire $questionnaire */
@@ -94,7 +97,7 @@ class AddReplyMutation
         return ['questionnaire' => $questionnaire, 'reply' => $reply];
     }
 
-    private function handleErrors($form)
+    private function handleErrors(FormInterface $form): void
     {
         $errors = [];
         foreach ($form->getErrors() as $error) {

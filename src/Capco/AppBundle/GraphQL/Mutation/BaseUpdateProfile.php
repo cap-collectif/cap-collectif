@@ -7,10 +7,11 @@ use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
 
-abstract class BaseUpdateProfile
+abstract class BaseUpdateProfile implements MutationInterface
 {
     public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
     public const USER_ID = 'userId';
@@ -39,11 +40,17 @@ abstract class BaseUpdateProfile
         $this->arguments = $input->getRawArguments();
 
         if (!$user->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID])) {
-            throw new UserError('Only a SUPER_ADMIN can edit data from another user. Or the account owner');
+            throw new UserError(
+                'Only a SUPER_ADMIN can edit data from another user. Or the account owner'
+            );
         }
         $this->user = $user;
 
-        if ($user->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID]) && $user->getId() !== $this->arguments[self::USER_ID]) {
+        if (
+            $user->hasRole(self::ROLE_SUPER_ADMIN) &&
+            !empty($this->arguments[self::USER_ID]) &&
+            $user->getId() !== $this->arguments[self::USER_ID]
+        ) {
             $user = $this->userRepository->find($this->arguments[self::USER_ID]);
             if ($user) {
                 $this->user = $user;

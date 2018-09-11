@@ -5,11 +5,12 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\District;
 use Capco\AppBundle\Form\DistrictAdminType;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class DistrictMutation implements ContainerAwareInterface
+class DistrictMutation implements ContainerAwareInterface, MutationInterface
 {
     use ContainerAwareTrait;
 

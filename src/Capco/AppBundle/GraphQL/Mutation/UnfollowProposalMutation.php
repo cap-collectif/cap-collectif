@@ -8,9 +8,10 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class UnfollowProposalMutation
+class UnfollowProposalMutation implements MutationInterface
 {
     private $em;
     private $proposalRepository;
