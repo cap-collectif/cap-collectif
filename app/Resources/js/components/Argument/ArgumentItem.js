@@ -17,7 +17,7 @@ type Props = {
   isProfile: boolean,
 };
 
-class ArgumentItem extends React.Component<Props> {
+export class ArgumentItem extends React.Component<Props> {
   static defaultProps = {
     isProfile: false,
   };
@@ -57,8 +57,10 @@ class ArgumentItem extends React.Component<Props> {
   renderConsultationLink = consultation => {
     return (
       <p>
+        <FormattedMessage id={'admin.fields.opinion.link'} />
+        {' : '}
         {/* $FlowFixMe */}
-        Lié à la proposition : <a href={consultation.url}>{consultation.title}</a>
+        <a href={consultation.url}>{consultation.title}</a>
       </p>
     );
   };
@@ -116,11 +118,6 @@ class ArgumentItem extends React.Component<Props> {
     );
   }
 }
-
-// $FlowFixMe
-ArgumentItem.defaultProps = {
-  isProfile: false,
-};
 
 export default createFragmentContainer(
   ArgumentItem,

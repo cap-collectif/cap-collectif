@@ -308,11 +308,7 @@ exports[`<VoteItem /> renders correcty for vote without value 1`] = `
       </span>
        
       <FormattedMessage
-<<<<<<< HEAD
         id="votes.type.proposition"
-=======
-        id="votes.type.propositionVote"
->>>>>>> Add jest test
         values={Object {}}
       />
        

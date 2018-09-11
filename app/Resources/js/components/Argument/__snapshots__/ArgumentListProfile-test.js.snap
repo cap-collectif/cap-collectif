@@ -13,10 +13,7 @@ exports[`<ArgumentListProfile /> renders correcty with two nodes 1`] = `
   <ForwardRef(Relay(ArgumentItem))
     argument={
       Object {
-<<<<<<< HEAD
         "$fragmentRefs": null,
-=======
->>>>>>> Add jest test
         "id": "1",
       }
     }
@@ -26,10 +23,7 @@ exports[`<ArgumentListProfile /> renders correcty with two nodes 1`] = `
   <ForwardRef(Relay(ArgumentItem))
     argument={
       Object {
-<<<<<<< HEAD
         "$fragmentRefs": null,
-=======
->>>>>>> Add jest test
         "id": "2",
       }
     }
@@ -46,10 +40,7 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 1`] = `
   <ForwardRef(Relay(ArgumentItem))
     argument={
       Object {
-<<<<<<< HEAD
         "$fragmentRefs": null,
-=======
->>>>>>> Add jest test
         "id": "1",
       }
     }
@@ -59,10 +50,7 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 1`] = `
   <ForwardRef(Relay(ArgumentItem))
     argument={
       Object {
-<<<<<<< HEAD
         "$fragmentRefs": null,
-=======
->>>>>>> Add jest test
         "id": "2",
       }
     }
@@ -78,7 +66,6 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 1`] = `
       }
     }
   >
-<<<<<<< HEAD
     <Button
       active={false}
       block={false}
@@ -86,26 +73,12 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 1`] = `
       bsStyle="link"
       disabled={false}
       onClick={[Function]}
-=======
-    <a
-      className="small"
-      onClick={[Function]}
-      style={
-        Object {
-          "cursor": "pointer",
-        }
-      }
->>>>>>> Add jest test
     >
       <FormattedMessage
         id="global.more"
         values={Object {}}
       />
-<<<<<<< HEAD
     </Button>
-=======
-    </a>
->>>>>>> Add jest test
   </ListGroupItem>
 </ListGroup>
 `;
@@ -117,10 +90,7 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 2`] = `
   <ForwardRef(Relay(ArgumentItem))
     argument={
       Object {
-<<<<<<< HEAD
         "$fragmentRefs": null,
-=======
->>>>>>> Add jest test
         "id": "1",
       }
     }
@@ -130,10 +100,7 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 2`] = `
   <ForwardRef(Relay(ArgumentItem))
     argument={
       Object {
-<<<<<<< HEAD
         "$fragmentRefs": null,
-=======
->>>>>>> Add jest test
         "id": "2",
       }
     }
@@ -143,10 +110,7 @@ exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 2`] = `
   <ForwardRef(Relay(ArgumentItem))
     argument={
       Object {
-<<<<<<< HEAD
         "$fragmentRefs": null,
-=======
->>>>>>> Add jest test
         "id": "3",
       }
     }
