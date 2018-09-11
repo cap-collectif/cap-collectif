@@ -22,6 +22,10 @@ final class ProposalCategoryInputType extends InputObjectType implements Generat
             'description' => null,
             'fields' => function () use ($globalVariable) {
                 return [
+                'id' => [
+                    'type' => Type::id(),
+                    'description' => null,
+                ],
                 'name' => [
                     'type' => Type::nonNull(Type::string()),
                     'description' => null,

@@ -60,7 +60,9 @@ describe('<RankingItem />', () => {
     expect(arrows.prop('disabled')).toEqual(false);
     const description = wrapper.find('.ranking__item__description');
     expect(description).toHaveLength(1);
-    expect(description.text()).toEqual('Description');
+    expect(description.html()).toEqual(
+      '<p class="excerpt small ranking__item__description">Description</p>',
+    );
     const image = wrapper.find('.ranking__item__image');
     expect(image).toHaveLength(1);
     expect(image.prop('src')).toEqual('test.png');

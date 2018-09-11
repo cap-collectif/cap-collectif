@@ -1111,6 +1111,17 @@ type CreateProposalPayload {
   clientMutationId: String
 }
 
+input CreateQuestionnaireInput {
+  # The questionnaire form title
+  title: String!
+  clientMutationId: String
+}
+
+type CreateQuestionnairePayload {
+  questionnaire: Questionnaire
+  clientMutationId: String
+}
+
 input CreateUserInput {
   # The user's username
   username: String!
@@ -1279,6 +1290,7 @@ type District {
 }
 
 input DistrictInput {
+  id: ID
   name: String!
   geojson: GeoJSON
   geojsonStyle: CssJSON
@@ -1517,10 +1529,9 @@ type Media {
 
 # A media question
 type MediaQuestion implements Question {
-  id: String!
+  id: ID!
   title: String!
   type: QuestionTypeValue!
-  position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -1530,7 +1541,6 @@ type MediaQuestion implements Question {
 
   # Return users who answered the question
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
-  validationRule: MultipleChoiceQuestionValidationRule
 }
 
 # A response
@@ -1543,10 +1553,9 @@ type MediaResponse implements Response {
 
 # A multiple choice question
 type MultipleChoiceQuestion implements Question {
-  id: String!
+  id: ID!
   title: String!
   type: QuestionTypeValue!
-  position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -1556,15 +1565,32 @@ type MultipleChoiceQuestion implements Question {
 
   # Return users who answered the question
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
-  validationRule: MultipleChoiceQuestionValidationRule
   isOtherAllowed: Boolean!
-  choices: [QuestionChoice!]
+  choices(
+    # Randomize the order of the choices.
+    randomize: Boolean
+  ): [QuestionChoice!]
+  questionChoices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+  isRandomQuestionChoices: Boolean!
 }
 
 # Multiple Choice Question Validation Rule
 type MultipleChoiceQuestionValidationRule {
-  type: String!
+  type: MultipleChoiceQuestionValidationRulesTypes!
   number: Int!
+}
+
+input MultipleChoiceQuestionValidationRuleInput {
+  type: MultipleChoiceQuestionValidationRulesTypes!
+  number: Int!
+}
+
+# Available types of validation rules
+enum MultipleChoiceQuestionValidationRulesTypes {
+  MIN
+  EQUAL
+  MAX
 }
 
 type Mutation {
@@ -1634,6 +1660,9 @@ type Mutation {
   createUser(input: CreateUserInput!): CreateUserPayload
   updateUserAccount(input: UpdateUserAccountInput!): UpdateUserAccountPayload
   addUsersToGroupFromEmail(input: AddUsersToGroupFromEmailInput!): AddUsersToGroupFromEmailPayload
+  createQuestionnaire(input: CreateQuestionnaireInput!): CreateQuestionnairePayload
+  updateQuestionnaireParameters(input: UpdateQuestionnaireParametersInput!): UpdateQuestionnaireParametersPayload
+  updateQuestionnaireConfiguration(input: UpdateQuestionnaireConfigurationInput!): UpdateQuestionnaireConfigurationPayload
 }
 
 # A connection to a list of items.
@@ -2275,6 +2304,7 @@ type ProposalCategory {
 }
 
 input ProposalCategoryInput {
+  id: ID
   name: String!
 }
 
@@ -2656,10 +2686,9 @@ type Query {
 }
 
 interface Question {
-  id: String!
+  id: ID!
   title: String!
   type: QuestionTypeValue!
-  position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -2669,7 +2698,6 @@ interface Question {
 
   # Return users who answered the question
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
-  validationRule: MultipleChoiceQuestionValidationRule
 }
 
 # A possible choice of a question
@@ -2677,7 +2705,7 @@ type QuestionChoice {
   id: ID!
   title: String!
   description: String
-  color: String
+  color: QuestionChoiceColor
   image: Media
 
   # Select all the responses of the given question choice
@@ -2685,6 +2713,24 @@ type QuestionChoice {
 
   # Return the ranking of the given question choice
   ranking: [QuestionChoiceRanking]
+}
+
+# Available colors for a question choice
+enum QuestionChoiceColor {
+  PRIMARY
+  SUCCESS
+  INFO
+  WARNING
+  DANGER
+}
+
+# A possible choice of a question
+input QuestionChoiceInput {
+  id: ID
+  title: String!
+  description: String
+  color: QuestionChoiceColor
+  image: ID
 }
 
 # The choice ranking
@@ -2704,6 +2750,11 @@ input QuestionInput {
   private: Boolean! = false
   required: Boolean! = false
   helpText: String
+  randomQuestionChoices: Boolean
+  otherAllowed: Boolean
+  validationRule: MultipleChoiceQuestionValidationRuleInput
+  questionChoices: [QuestionChoiceInput]
+  description: String
 }
 
 # Value of type of question
@@ -2733,12 +2784,13 @@ type Questionnaire implements Node {
   phoneConfirmationRequired: Boolean!
   questions: [Question!]!
   viewerReplies: [Reply!]!
+  acknowledgeReplies: Boolean!
+  phoneConfirmation: Boolean!
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
 }
 
 input QuestionnaireAbstractQuestionInput {
   question: QuestionInput!
-  position: Int!
 }
 
 # A step in a project
@@ -3248,10 +3300,9 @@ type SetEvaluationFormInProposalFormPayload {
 
 # A simple question
 type SimpleQuestion implements Question {
-  id: String!
+  id: ID!
   title: String!
   type: QuestionTypeValue!
-  position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -3261,7 +3312,6 @@ type SimpleQuestion implements Question {
 
   # Return users who answered the question
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
-  validationRule: MultipleChoiceQuestionValidationRule
 }
 
 # A source
@@ -3787,6 +3837,33 @@ input UpdateProposalVotesInput {
 
 type UpdateProposalVotesPayload {
   step: ProposalStep!
+  clientMutationId: String
+}
+
+input UpdateQuestionnaireConfigurationInput {
+  questionnaireId: ID!
+  title: String
+  description: String
+  questions: [QuestionnaireAbstractQuestionInput!]
+  clientMutationId: String
+}
+
+type UpdateQuestionnaireConfigurationPayload {
+  questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input UpdateQuestionnaireParametersInput {
+  questionnaireId: ID!
+  acknowledgeReplies: Boolean
+  anonymousAllowed: Boolean
+  multipleRepliesAllowed: Boolean
+  phoneConfirmation: Boolean
+  clientMutationId: String
+}
+
+type UpdateQuestionnaireParametersPayload {
+  questionnaire: Questionnaire
   clientMutationId: String
 }
 

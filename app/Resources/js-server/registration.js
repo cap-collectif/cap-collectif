@@ -26,6 +26,8 @@ import ProposalFormCreateButtonApp from '../js/startup/ProposalFormCreateButtonA
 import ProjectListPageApp from '../js/startup/ProjectListPageApp';
 import ProposalAdminPageApp from '../js/startup/ProposalAdminPageApp';
 import ProposalFormAdminPageApp from '../js/startup/ProposalFormAdminPageApp';
+import QuestionnaireAdminPageApp from '../js/startup/QuestionnaireAdminPageApp';
+import QuestionnaireCreateButtonApp from '../js/startup/QuestionnaireCreateButtonApp';
 import ShieldApp from '../js/startup/ShieldApp';
 import RegistrationAdminApp from '../js/startup/RegistrationAdminApp';
 import AdminModalsApp from '../js/startup/AdminModalsApp';
@@ -84,6 +86,7 @@ ReactOnRails.register({
   AccountProfileApp,
   ShareButtonDropdownApp,
   ProposalFormAdminPageApp,
+  QuestionnaireAdminPageApp,
   GroupAdminPageApp,
   UserAdminCreateButtonApp,
   ParisUserNotValidApp,
@@ -92,4 +95,5 @@ ReactOnRails.register({
   UserAdminPageApp,
   ProjectRestrictedAccessAlertApp,
   ProjectRestrictedAccessApp,
+  QuestionnaireCreateButtonApp,
 });

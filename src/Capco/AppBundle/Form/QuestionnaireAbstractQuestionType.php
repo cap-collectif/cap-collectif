@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use pmill\Doctrine\Hydrator\ArrayHydrator;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,8 +21,9 @@ class QuestionnaireAbstractQuestionType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber(new AddQuestionFieldSubscriber($builder->getFormFactory(), $this->arrayHydrator));
-        $builder->add('position', IntegerType::class);
+        $builder->addEventSubscriber(
+            new AddQuestionFieldSubscriber($builder->getFormFactory(), $this->arrayHydrator)
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

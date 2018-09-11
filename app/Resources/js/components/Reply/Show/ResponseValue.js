@@ -16,7 +16,10 @@ export class ResponseValue extends React.Component<Props> {
       ? getValueFromResponse(response.question.type, response.value)
       : null;
 
-    if (!responseValue || (Array.isArray(responseValue) && !responseValue.length)) {
+    if (
+      (!responseValue || (Array.isArray(responseValue) && !responseValue.length)) &&
+      !response.medias
+    ) {
       return <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>;
     }
     if (response.question.type === 'editor') {
@@ -24,6 +27,21 @@ export class ResponseValue extends React.Component<Props> {
         <p>
           <div dangerouslySetInnerHTML={{ __html: responseValue }} />
         </p>
+      );
+    }
+    if (response.question.type === 'medias' && response.medias) {
+      return (
+        <ol>
+          {response.medias.map((media: Object) => {
+            return (
+              <li>
+                <a href={media.url} download>
+                  {media.name}
+                </a>
+              </li>
+            );
+          })}
+        </ol>
       );
     }
     if (response.question.type === 'ranking') {
@@ -74,6 +92,12 @@ export default createFragmentContainer(ResponseValue, {
       }
       ... on ValueResponse {
         value
+      }
+      ... on MediaResponse {
+        medias {
+          name
+          url
+        }
       }
     }
   `,

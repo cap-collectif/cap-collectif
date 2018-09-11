@@ -6,6 +6,7 @@ use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -43,50 +44,6 @@ class QuestionnaireAdmin extends CapcoAdmin
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->with('admin.fields.questionnaire.group_general')
-            ->add('title', null, ['label' => 'admin.fields.questionnaire.title'])
-            ->add('description', CKEditorType::class, [
-                'label' => 'admin.fields.questionnaire.description',
-                'config_name' => 'admin_editor',
-                'required' => false,
-            ])
-            ->end();
-        $formMapper
-            ->with('admin.fields.questionnaire.group_questions')
-            ->add(
-                'questions',
-                'sonata_type_collection',
-                [
-                    'label' => 'admin.fields.questionnaire.questions',
-                    'by_reference' => false,
-                    'required' => false,
-                ],
-                ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
-            )
-            ->end();
-        $formMapper
-            ->with('user.profile.notifications.title')
-            ->add('acknowledgeReplies', CheckboxType::class, [
-                'label' => 'admin.fields.questionnaire.acknowledge_replies',
-                'required' => false,
-            ])
-            ->end()
-            ->with('proposal_form.admin.settings.options')
-            ->add('anonymousAllowed', CheckboxType::class, [
-                'label' => 'reply-anonymously',
-                'required' => false,
-            ])
-            ->add('multipleRepliesAllowed', CheckboxType::class, [
-                'label' => 'answer-several-times',
-                'required' => false,
-            ])
-            ->end()
-            ->with('requirements')
-            ->add('phoneConfirmation', CheckboxType::class, [
-                'label' => 'phone-number-verified-by-sms',
-                'required' => false,
-            ]);
     }
 
     // Fields to be shown on filter forms
@@ -154,5 +111,10 @@ class QuestionnaireAdmin extends CapcoAdmin
         $query->setParameter('author', $user);
 
         return $query;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('create');
     }
 }

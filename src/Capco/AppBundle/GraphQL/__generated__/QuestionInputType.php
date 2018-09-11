@@ -48,6 +48,26 @@ final class QuestionInputType extends InputObjectType implements GeneratedTypeIn
                     'type' => Type::string(),
                     'description' => null,
                 ],
+                'randomQuestionChoices' => [
+                    'type' => Type::boolean(),
+                    'description' => null,
+                ],
+                'otherAllowed' => [
+                    'type' => Type::boolean(),
+                    'description' => null,
+                ],
+                'validationRule' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('MultipleChoiceQuestionValidationRuleInput'),
+                    'description' => null,
+                ],
+                'questionChoices' => [
+                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('QuestionChoiceInput')),
+                    'description' => null,
+                ],
+                'description' => [
+                    'type' => Type::string(),
+                    'description' => null,
+                ],
             ];
             },
         ];

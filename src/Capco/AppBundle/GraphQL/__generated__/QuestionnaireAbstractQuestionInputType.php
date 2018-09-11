@@ -26,10 +26,6 @@ final class QuestionnaireAbstractQuestionInputType extends InputObjectType imple
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('QuestionInput')),
                     'description' => null,
                 ],
-                'position' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'description' => null,
-                ],
             ];
             },
         ];

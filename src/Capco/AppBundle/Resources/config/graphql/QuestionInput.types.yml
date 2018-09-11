@@ -17,3 +17,13 @@ QuestionInput:
         defaultValue: false
       helpText:
         type: 'String'
+      randomQuestionChoices:
+        type: 'Boolean'
+      otherAllowed:
+        type: 'Boolean'
+      validationRule:
+        type: 'MultipleChoiceQuestionValidationRuleInput'
+      questionChoices:
+        type: '[QuestionChoiceInput]'
+      description:
+        type: 'String'

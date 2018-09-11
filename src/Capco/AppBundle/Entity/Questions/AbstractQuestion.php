@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\Questionnaire;
@@ -91,6 +90,11 @@ abstract class AbstractQuestion
     protected $helpText;
 
     /**
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    protected $description;
+
+    /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse", mappedBy="question", cascade={"persist", "remove"})
      */
     protected $responses;
@@ -152,8 +156,9 @@ abstract class AbstractQuestion
         return $this->questionnaireAbstractQuestion;
     }
 
-    public function setQuestionnaireAbstractQuestion(QuestionnaireAbstractQuestion $questionnaireAbstractQuestion): self
-    {
+    public function setQuestionnaireAbstractQuestion(
+        QuestionnaireAbstractQuestion $questionnaireAbstractQuestion
+    ): self {
         $this->questionnaireAbstractQuestion = $questionnaireAbstractQuestion;
 
         return $this;
@@ -234,14 +239,31 @@ abstract class AbstractQuestion
         return $question ? $question->getId() : null;
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     public function updateTimestamp()
     {
         $now = new \DateTime();
 
         $this->setUpdatedAt($now);
 
-        if ($this->getQuestionnaireAbstractQuestion() && $this->getQuestionnaireAbstractQuestion()->getProposalForm()) {
-            $this->getQuestionnaireAbstractQuestion()->getProposalForm()->setUpdatedAt($now);
+        if (
+            $this->getQuestionnaireAbstractQuestion() &&
+            $this->getQuestionnaireAbstractQuestion()->getProposalForm()
+        ) {
+            $this->getQuestionnaireAbstractQuestion()
+                ->getProposalForm()
+                ->setUpdatedAt($now);
         }
     }
 }

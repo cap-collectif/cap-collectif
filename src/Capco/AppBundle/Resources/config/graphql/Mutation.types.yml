@@ -525,3 +525,28 @@ Mutation:
           payloadType: AddUsersToGroupFromEmailPayload
           mutateAndGetPayload:
             '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddUsersToGroupFromEmailMutation", [value["emails"], value["dryRun"], value["groupId"]])'
+      # Questionnaire
+      createQuestionnaire:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: CreateQuestionnaireInput
+          payloadType: CreateQuestionnairePayload
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateQuestionnaireMutation", [value])'
+      updateQuestionnaireParameters:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: UpdateQuestionnaireParametersInput
+          payloadType: UpdateQuestionnaireParametersPayload
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireParametersMutation", [value])'
+      updateQuestionnaireConfiguration:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: UpdateQuestionnaireConfigurationInput
+          payloadType: UpdateQuestionnaireConfigurationPayload
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireConfigurationMutation", [value])'

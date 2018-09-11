@@ -1,0 +1,8 @@
+CreateQuestionnaireInput:
+  type: relay-mutation-input
+  config:
+    description: ''
+    fields:
+      title:
+        type: 'String!'
+        description: 'The questionnaire form title'

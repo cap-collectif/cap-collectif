@@ -4,6 +4,6 @@ MultipleChoiceQuestionValidationRule:
     description: 'Multiple Choice Question Validation Rule'
     fields:
       type:
-        type: 'String!'
+        type: 'MultipleChoiceQuestionValidationRulesTypes!'
       number:
         type: 'Int!'

@@ -1,0 +1,15 @@
+QuestionChoiceColor:
+  type: enum
+  config:
+    description: 'Available colors for a question choice'
+    values:
+      PRIMARY:
+        value: '#fffff'
+      SUCCESS:
+        value: '#5cb85c'
+      INFO:
+        value: '#5bc0de'
+      WARNING:
+        value: '#f0ad4e'
+      DANGER:
+        value: '#d9534f'

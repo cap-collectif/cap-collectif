@@ -24,7 +24,7 @@ final class QuestionType extends InterfaceType implements GeneratedTypeInterface
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => Type::nonNull(Type::id()),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -53,20 +53,6 @@ final class QuestionType extends InterfaceType implements GeneratedTypeInterface
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["question_type", array(0 => $value)]);
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'position' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["question_position", array(0 => $value)]);
                     },
                     'description' => null,
                     'deprecationReason' => null,
@@ -175,20 +161,6 @@ final class QuestionType extends InterfaceType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", array(0 => $value, 1 => $args)]);
                     },
                     'description' => 'Return users who answered the question',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'validationRule' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('MultipleChoiceQuestionValidationRule'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["question_validation_rule", array(0 => $value)]);
-                    },
-                    'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

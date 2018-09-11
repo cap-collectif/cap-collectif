@@ -1,0 +1,13 @@
+UpdateQuestionnaireConfigurationInput:
+  type: relay-mutation-input
+  config:
+    description: ''
+    fields:
+      questionnaireId:
+        type: 'ID!'
+      title:
+        type: 'String'
+      description:
+        type: 'String'
+      questions:
+        type: '[QuestionnaireAbstractQuestionInput!]'

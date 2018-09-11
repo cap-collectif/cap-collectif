@@ -157,3 +157,8 @@ services:
     class: Capco\AppBundle\Form\ProposalEvaluationType
     tags:
       - { name: form.type }
+
+  capco.form.questionnaire_parameter_update:
+    class: Capco\AppBundle\Form\QuestionnaireParametersUpdateType
+    tags:
+      - { name: form.type }

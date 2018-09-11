@@ -106,7 +106,7 @@ const validate = (values: FormValues, props: Props) => {
         responsesNumber = response.value.length;
       }
 
-      if (rule.type === 'min' && (rule.number && responsesNumber < rule.number)) {
+      if (rule.type === 'MIN' && (rule.number && responsesNumber < rule.number)) {
         responsesError[index] = {
           value: props.intl.formatMessage(
             { id: 'reply.constraints.choices_min' },
@@ -115,7 +115,7 @@ const validate = (values: FormValues, props: Props) => {
         };
       }
 
-      if (rule.type === 'max' && (rule.number && responsesNumber > rule.number)) {
+      if (rule.type === 'MAX' && (rule.number && responsesNumber > rule.number)) {
         responsesError[index] = {
           value: props.intl.formatMessage(
             { id: 'reply.constraints.choices_max' },
@@ -124,7 +124,7 @@ const validate = (values: FormValues, props: Props) => {
         };
       }
 
-      if (rule.type === 'equal' && responsesNumber !== rule.number) {
+      if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
         responsesError[index] = {
           value: props.intl.formatMessage(
             { id: 'reply.constraints.choices_equal' },
@@ -260,7 +260,6 @@ export default createFragmentContainer(container, {
       questions {
         id
         title
-        position
         private
         required
         description
@@ -272,7 +271,7 @@ export default createFragmentContainer(container, {
             type
             number
           }
-          choices {
+          choices(randomize: true) {
             id
             title
             description

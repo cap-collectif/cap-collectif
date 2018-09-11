@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\ProposalForm;
@@ -58,7 +57,7 @@ class QuestionnaireAbstractQuestion
     protected $registrationForm;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="questionnaireAbstractQuestion", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="questionnaireAbstractQuestion", cascade={"remove"})
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      * @Assert\NotNull()
      **/

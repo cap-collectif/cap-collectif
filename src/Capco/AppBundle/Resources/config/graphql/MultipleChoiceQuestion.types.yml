@@ -12,4 +12,18 @@ MultipleChoiceQuestion:
         resolve: "@=resolver('question_isOtherAllowed', [value])"
       choices:
         type: '[QuestionChoice!]'
-        resolve: "@=resolver('question_choices', [value])"
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQuestionChoicesResolver", [value, args])'
+        args:
+          randomize:
+            type: 'Boolean'
+            description: 'Randomize the order of the choices.'
+      questionChoices:
+        type: '[QuestionChoice!]'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQuestionChoicesResolver", [value, args])'
+      validationRule:
+        type: 'MultipleChoiceQuestionValidationRule'
+        resolve: "@=resolver('question_validation_rule', [value])"
+      isRandomQuestionChoices:
+        type: 'Boolean!'

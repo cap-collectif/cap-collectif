@@ -141,6 +141,30 @@ final class QuestionnaireType extends ObjectType implements GeneratedTypeInterfa
                         return ($globalVariable->get('container')->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED') || $globalVariable->get('container')->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY'));
                     },
                 ],
+                'acknowledgeReplies' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'phoneConfirmation' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'participants' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ParticipantConnection')),
                     'args' => [

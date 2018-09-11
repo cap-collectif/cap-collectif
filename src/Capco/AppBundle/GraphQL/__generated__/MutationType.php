@@ -1407,6 +1407,69 @@ final class MutationType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_ADMIN");
                     },
                 ],
+                'createQuestionnaire' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('CreateQuestionnairePayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CreateQuestionnaireInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\CreateQuestionnaireMutation", array(0 => $value)]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_ADMIN");
+                    },
+                ],
+                'updateQuestionnaireParameters' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('UpdateQuestionnaireParametersPayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('UpdateQuestionnaireParametersInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireParametersMutation", array(0 => $value)]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_ADMIN");
+                    },
+                ],
+                'updateQuestionnaireConfiguration' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('UpdateQuestionnaireConfigurationPayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('UpdateQuestionnaireConfigurationInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireConfigurationMutation", array(0 => $value)]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_ADMIN");
+                    },
+                ],
             ];
             },
             'interfaces' => function () use ($globalVariable) {

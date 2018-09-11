@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
@@ -17,6 +16,7 @@ class SimpleQuestionType extends AbstractType
         $builder->add('id', IntegerType::class);
         $builder->add('title', PurifiedTextType::class);
         $builder->add('helpText', PurifiedTextType::class);
+        $builder->add('description', PurifiedTextType::class);
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
         $builder->add('type', IntegerType::class);
@@ -24,9 +24,6 @@ class SimpleQuestionType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'csrf_protection' => false,
-            'data_class' => SimpleQuestion::class,
-        ]);
+        $resolver->setDefaults(['csrf_protection' => false, 'data_class' => SimpleQuestion::class]);
     }
 }

@@ -24,7 +24,7 @@ final class MultipleChoiceQuestionType extends ObjectType implements GeneratedTy
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => Type::nonNull(Type::id()),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -53,20 +53,6 @@ final class MultipleChoiceQuestionType extends ObjectType implements GeneratedTy
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["question_type", array(0 => $value)]);
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'position' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["question_position", array(0 => $value)]);
                     },
                     'description' => null,
                     'deprecationReason' => null,
@@ -183,20 +169,6 @@ final class MultipleChoiceQuestionType extends ObjectType implements GeneratedTy
                     'public' => null,
                     'access' => null,
                 ],
-                'validationRule' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('MultipleChoiceQuestionValidationRule'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["question_validation_rule", array(0 => $value)]);
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'isOtherAllowed' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
@@ -214,10 +186,55 @@ final class MultipleChoiceQuestionType extends ObjectType implements GeneratedTy
                 'choices' => [
                     'type' => Type::listOf(Type::nonNull($globalVariable->get('typeResolver')->resolve('QuestionChoice'))),
                     'args' => [
+                        [
+                            'name' => 'randomize',
+                            'type' => Type::boolean(),
+                            'description' => 'Randomize the order of the choices.',
+                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["question_choices", array(0 => $value)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQuestionChoicesResolver", array(0 => $value, 1 => $args)]);
                     },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'questionChoices' => [
+                    'type' => Type::listOf(Type::nonNull($globalVariable->get('typeResolver')->resolve('QuestionChoice'))),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQuestionChoicesResolver", array(0 => $value, 1 => $args)]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'validationRule' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('MultipleChoiceQuestionValidationRule'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["question_validation_rule", array(0 => $value)]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'isRandomQuestionChoices' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
                     'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,

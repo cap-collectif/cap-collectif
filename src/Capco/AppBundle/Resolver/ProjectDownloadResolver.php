@@ -12,6 +12,7 @@ use Capco\AppBundle\Utils\Map;
 use Capco\AppBundle\Utils\Text;
 use Doctrine\ORM\EntityManager;
 use Liuggio\ExcelBundle\Factory;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
 use Symfony\Bridge\Twig\Extension\HttpFoundationExtension;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -22,6 +23,7 @@ class ProjectDownloadResolver
     protected $em;
     protected $translator;
     protected $urlArrayResolver;
+    protected $urlResolver;
     protected $phpexcel;
     protected $headers;
     protected $data;
@@ -35,6 +37,7 @@ class ProjectDownloadResolver
         EntityManager $em,
         TranslatorInterface $translator,
         UrlArrayResolver $urlArrayResolver,
+        UrlResolver $urlResolver,
         Factory $phpexcel,
         MediaExtension $mediaExtension,
         HttpFoundationExtension $httpFoundationExtension
@@ -42,6 +45,7 @@ class ProjectDownloadResolver
         $this->em = $em;
         $this->translator = $translator;
         $this->urlArrayResolver = $urlArrayResolver;
+        $this->urlResolver = $urlResolver;
         $this->phpexcel = $phpexcel;
         $this->headers = [];
         $this->customFields = [];
@@ -171,7 +175,24 @@ class ProjectDownloadResolver
 
     private function getResponseValue(array $response)
     {
-        $originalValue = $response['value'];
+        $responseMedia = null;
+        $mediasUrl = [];
+        if ($response['response_type'] === 'media') {
+            $responseMedia = $this->em->getRepository(
+                'CapcoAppBundle:Responses\MediaResponse'
+            )->findOneBy([
+                'id' => $response['id'],
+            ]);
+
+            foreach ($responseMedia->getMedias() as $media) {
+                $mediasUrl[] = $this->urlResolver->getMediaUrl(
+                    $media,
+                    new Argument(['format' => 'reference'])
+                );
+            }
+        }
+
+        $originalValue = $responseMedia ? implode(' ; ', $mediasUrl) : $response['value'];
         if (\is_array($originalValue)) {
             $values = $originalValue['labels'];
             if (array_key_exists('other', $originalValue) && $originalValue['other']) {

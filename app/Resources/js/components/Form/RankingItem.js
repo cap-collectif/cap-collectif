@@ -64,7 +64,10 @@ class RankingItem extends React.Component<Props> {
           </div>
         </div>
         {item.description && (
-          <p className="excerpt small ranking__item__description">{item.description}</p>
+          <p
+            className="excerpt small ranking__item__description"
+            dangerouslySetInnerHTML={{ __html: item.description }}
+          />
         )}
         {item.image && (
           <div>

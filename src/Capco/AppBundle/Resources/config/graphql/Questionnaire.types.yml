@@ -27,6 +27,10 @@ Questionnaire:
         access: '@=isAuthenticated()'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
+      acknowledgeReplies:
+        type: 'Boolean!'
+      phoneConfirmation:
+        type: 'Boolean!'
       participants:
         type: 'ParticipantConnection!'
         argsBuilder: 'Relay::Connection'

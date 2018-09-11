@@ -106,6 +106,21 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
   };
 
+  getColor = (color: string) => {
+    switch (color) {
+      case 'SUCCESS':
+        return '#5cb85c';
+      case 'INFO':
+        return '#5bc0de';
+      case 'WARNING':
+        return '#f0ad4e';
+      case 'DANGER':
+        return '#d9534f';
+      default:
+        return '#fffff';
+    }
+  };
+
   refFormControl: ?Element;
 
   renderAddon(addon: ?string) {
@@ -242,7 +257,7 @@ class ReactBootstrapInput extends React.Component<Props> {
               disabled={props.disabled}
               value={choice.label}
               iconSize={20}
-              pointColor={choice.color}>
+              pointColor={this.getColor(choice.color)}>
               {choice.label}
             </RadioButton>
           ))}

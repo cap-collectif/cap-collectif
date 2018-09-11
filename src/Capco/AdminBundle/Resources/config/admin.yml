@@ -171,6 +171,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: admin.label.questionnaire }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
+      - [setTemplate, [edit, CapcoAdminBundle:Questionnaire:edit.html.twig]]
 
   capco_admin.admin.proposal_form:
     class: Capco\AdminBundle\Admin\ProposalFormAdmin
@@ -192,31 +193,6 @@ services:
       - [setTranslationDomain, [CapcoAppBundle]]
       - [setTemplate, [edit, CapcoAdminBundle:ProposalForm:edit.html.twig]]
       - [setTemplate, [list, CapcoAdminBundle:ProposalForm:list.html.twig]]
-
-  capco_admin.admin.question:
-    class: Capco\AdminBundle\Admin\QuestionAdmin
-    arguments:
-      [
-        ~,
-        Capco\AppBundle\Entity\Questions\AbstractQuestion,
-        CapcoAdminBundle:CRUD,
-        '@security.token_storage',
-      ]
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: admin.label.question }
-    calls:
-      - [setTranslationDomain, [CapcoAppBundle]]
-      - [
-          setSubClasses,
-          [
-            {
-              simple_question: Capco\AppBundle\Entity\Questions\SimpleQuestion,
-              multiple_choice_question: Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion,
-              document_question: Capco\AppBundle\Entity\Questions\MediaQuestion,
-            },
-          ],
-        ]
-      - [setTemplate, [edit, CapcoAdminBundle:Question:edit.html.twig]]
 
   capco_admin.admin.question_choice:
     class: Capco\AdminBundle\Admin\QuestionChoiceAdmin

@@ -23,7 +23,7 @@ final class MultipleChoiceQuestionValidationRuleType extends ObjectType implemen
             'fields' => function () use ($globalVariable) {
                 return [
                 'type' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('MultipleChoiceQuestionValidationRulesTypes')),
                     'args' => [
                     ],
                     'resolve' => null,

@@ -1,9 +1,9 @@
 <?php
-
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use pmill\Doctrine\Hydrator\ArrayHydrator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -25,10 +25,7 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents(): array
     {
-        return [
-            FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT => 'preSubmit',
-        ];
+        return [FormEvents::PRE_SET_DATA => 'preSetData', FormEvents::PRE_SUBMIT => 'preSubmit'];
     }
 
     public function preSetData(FormEvent $event)
@@ -36,7 +33,6 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
         if (!$data = $event->getData()) {
             return;
         }
-
         $form = $event->getForm();
         $question = $data->getQuestion();
         $this->addQuestionToForm($question, $form);
@@ -48,13 +44,17 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
         if ((!$data = $event->getData()) || !\is_array($data) || isset($data['question']['id'])) {
             return;
         }
-
         // because of abstract inheritance, we need to handle creation and mapping to Doctrine.
         $form = $event->getForm();
+        $question = new MultipleChoiceQuestion();
 
         if (AbstractQuestion::QUESTION_TYPE_MEDIAS === $data['question']['type']) {
             $question = new MediaQuestion();
-        } else {
+        } elseif (
+            AbstractQuestion::QUESTION_TYPE_SIMPLE_TEXT === $data['question']['type'] ||
+            AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT === $data['question']['type'] ||
+            AbstractQuestion::QUESTION_TYPE_EDITOR === $data['question']['type']
+        ) {
             $question = new SimpleQuestion();
         }
 
@@ -72,13 +72,19 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
         if ($question instanceof SimpleQuestion) {
             return SimpleQuestionType::class;
         }
+        if ($question instanceof MultipleChoiceQuestion) {
+            return MultipleChoiceQuestionType::class;
+        }
 
         return MediaQuestionType::class;
     }
 
     private function addQuestionToForm(AbstractQuestion $data, FormInterface $form)
     {
-        $formElement = $this->factory->createNamed('question', $this->getFormType($data), $data, ['auto_initialize' => false]);
+        $formElement = $this->factory->createNamed('question', $this->getFormType($data), $data, [
+            'auto_initialize' => false,
+        ]);
+
         $form->add($formElement);
     }
 }

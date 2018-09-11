@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
@@ -17,6 +16,7 @@ class MediaQuestionType extends AbstractType
         $builder->add('id');
         $builder->add('title', PurifiedTextType::class);
         $builder->add('helpText', PurifiedTextType::class);
+        $builder->add('description', PurifiedTextType::class);
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
         $builder->add('type', IntegerType::class);
@@ -24,9 +24,6 @@ class MediaQuestionType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => MediaQuestion::class,
-            'csrf_protection' => false,
-        ]);
+        $resolver->setDefaults(['data_class' => MediaQuestion::class, 'csrf_protection' => false]);
     }
 }

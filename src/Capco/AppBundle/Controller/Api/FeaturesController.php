@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\QuestionChoice;
@@ -31,7 +30,9 @@ class FeaturesController extends FOSRestController
     {
         $toggleManager = $this->container->get('capco.toggle.manager');
         if (!$toggleManager->exists($feature)) {
-            throw $this->createNotFoundException(sprintf('The feature "%s" doesn\'t exists.', $feature));
+            throw $this->createNotFoundException(
+                sprintf('The feature "%s" doesn\'t exists.', $feature)
+            );
         }
         $form = $this->createForm(ApiToggleType::class);
         $form->submit($request->request->all(), false);
@@ -103,7 +104,9 @@ class FeaturesController extends FOSRestController
     {
         $orderedQuestions = json_decode($request->getContent(), true)['questions'];
         $registrationForm = $this->get('capco.registration_form.repository')->findCurrent();
-        $absQuestions = $this->get('capco.questionnaire_abstract_question.repository')->findByRegistrationForm($registrationForm);
+        $absQuestions = $this->get(
+            'capco.questionnaire_abstract_question.repository'
+        )->findByRegistrationForm($registrationForm);
 
         foreach ($orderedQuestions as $key => $orderQuestion) {
             foreach ($absQuestions as $absQuestion) {
@@ -112,7 +115,9 @@ class FeaturesController extends FOSRestController
                 }
             }
         }
-        $this->get('doctrine')->getManager()->flush();
+        $this->get('doctrine')
+            ->getManager()
+            ->flush();
     }
 
     /**
@@ -174,7 +179,9 @@ class FeaturesController extends FOSRestController
             return $form;
         }
 
-        $this->get('doctrine')->getManager()->flush();
+        $this->get('doctrine')
+            ->getManager()
+            ->flush();
 
         $cacheManager = $this->get('fos_http_cache.cache_manager');
         $cacheManager->invalidateRoute('app_homepage')->flush();

@@ -49,6 +49,7 @@ const zoomLevels = [
   { id: 20, name: '20 - Immeubles' },
 ];
 const formName = 'proposal-form-admin-configuration';
+const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 const validate = (values: Object) => {
   const errors = {};
@@ -109,12 +110,7 @@ const validate = (values: Object) => {
         questionsArrayErrors[questionIndex] = questionErrors;
       }
 
-      if (!question.kind || question.kind.length === 0) {
-        questionErrors.kind = 'admin.fields.proposal_form.errors.question.kind';
-        questionsArrayErrors[questionIndex] = questionErrors;
-      }
-
-      if (question.kind === 'simple' && (!question.type || question.type.length === 0)) {
+      if (!question.type || question.type.length === 0) {
         questionErrors.type = 'admin.fields.proposal_form.errors.question.type';
         questionsArrayErrors[questionIndex] = questionErrors;
       }
@@ -201,16 +197,29 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     ...values,
     id: undefined,
     proposalFormId: props.proposalForm.id,
-    districts: values.districts.map(district => ({ ...district, id: undefined })),
-    categories: values.categories.map(category => ({ ...category, id: undefined })),
-    questions: values.questions.map((question, index) => ({
-      position: index,
-      question: {
-        ...question,
-        position: undefined,
-        kind: undefined,
-      },
-    })),
+    districts: values.districts.map(district => ({ ...district })),
+    categories: values.categories.map(category => ({ ...category })),
+    questions: values.questions.map(question => {
+      const questionInput = {
+        question: {
+          ...question,
+          kind: undefined,
+          otherAllowed: question.isOtherAllowed,
+          randomQuestionChoices: question.isRandomQuestionChoices,
+          isOtherAllowed: undefined,
+          isRandomQuestionChoices: undefined,
+        },
+      };
+      if (multipleChoiceQuestions.indexOf(question.type) !== -1 && question.questionChoices) {
+        questionInput.question.questionChoices = question.questionChoices.map(choice => ({
+          ...choice,
+          kind: undefined,
+          image: choice.image ? choice.image.id : null,
+        }));
+      }
+
+      return questionInput;
+    }),
   };
 
   return UpdateProposalFormMutation.commit({ input });
@@ -517,7 +526,11 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                 <FormattedMessage id="proposal_form.admin.configuration.custom_field" />
               </h3>
             </div>
-            <FieldArray name="questions" component={ProposalFormAdminQuestions} />
+            <FieldArray
+              name="questions"
+              component={ProposalFormAdminQuestions}
+              formName={formName}
+            />
             <Field
               name="allowAknowledge"
               component={component}
@@ -614,11 +627,31 @@ export default createFragmentContainer(
         id
         title
         helpText
+        description
         type
         private
         required
-        position
         kind
+        ... on MultipleChoiceQuestion {
+          isRandomQuestionChoices
+          isOtherAllowed
+          validationRule {
+            type
+            number
+          }
+          questionChoices {
+            id
+            title
+            description
+            color
+            image {
+              id
+              url
+              name
+              size
+            }
+          }
+        }
       }
     }
   `,

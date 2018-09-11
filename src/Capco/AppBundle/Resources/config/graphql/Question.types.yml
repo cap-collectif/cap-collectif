@@ -5,16 +5,12 @@ Question:
       '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
     fields:
       id:
-        type: 'String!'
+        type: 'ID!'
       title:
         type: 'String!'
       type:
         type: 'QuestionTypeValue!'
         resolve: "@=resolver('question_type', [value])"
-      # This field should not be exposed
-      position:
-        type: 'Int!'
-        resolve: "@=resolver('question_position', [value])"
       private:
         type: 'Boolean!'
       required:
@@ -30,8 +26,6 @@ Question:
       participants:
         type: 'ParticipantConnection!'
         argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", [value, args])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", [value, args])'
         description: 'Return users who answered the question'
-      validationRule:
-        type: 'MultipleChoiceQuestionValidationRule'
-        resolve: "@=resolver('question_validation_rule', [value])"

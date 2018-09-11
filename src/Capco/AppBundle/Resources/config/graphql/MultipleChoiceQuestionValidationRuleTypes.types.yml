@@ -1,0 +1,11 @@
+MultipleChoiceQuestionValidationRulesTypes:
+  type: enum
+  config:
+    description: 'Available types of validation rules'
+    values:
+      MIN:
+        value: 'min'
+      EQUAL:
+        value: 'equal'
+      MAX:
+        value: 'max'

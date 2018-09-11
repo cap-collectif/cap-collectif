@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block form %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    {{ react_render_component('QuestionnaireAdminPageApp', {
+        'props': {
+            'questionnaireId': admin.subject.id,
+        },
+        'rendering': 'client_side'
+    }) }}
+{% endblock %}

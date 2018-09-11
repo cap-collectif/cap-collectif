@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Questionnaire;
@@ -25,19 +24,24 @@ class QuestionResolver implements ContainerAwareInterface
         return $this->container->get('capco.abstract_question.repository')->find($args['id']);
     }
 
-    public function resolveDistrictsForLocalisation(string $proposalFormId, float $latitude, float $longitude): array
-    {
+    public function resolveDistrictsForLocalisation(
+        string $proposalFormId,
+        float $latitude,
+        float $longitude
+    ): array {
         $form = $this->container->get('capco.proposal_form.repository')->find($proposalFormId);
         $districts = $form->getDistricts();
 
-        return $form->isProposalInAZoneRequired() ? $districts->filter(function ($district) use ($longitude, $latitude) {
-            return $district->getGeojson() && GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson());
-        }, [])->toArray() : $districts->toArray();
-    }
-
-    public function resolvePosition(AbstractQuestion $question): int
-    {
-        return $question->getQuestionnaireAbstractQuestion()->getPosition();
+        return $form->isProposalInAZoneRequired()
+            ? $districts
+                ->filter(function ($district) use ($longitude, $latitude) {
+                    return (
+                        $district->getGeojson() &&
+                        GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson())
+                    );
+                }, [])
+                ->toArray()
+            : $districts->toArray();
     }
 
     public function resolveisOtherAllowed(AbstractQuestion $question): bool
@@ -47,23 +51,6 @@ class QuestionResolver implements ContainerAwareInterface
         }
 
         return false;
-    }
-
-    public function resolveChoices(AbstractQuestion $question): iterable
-    {
-        // This resolver should not be called
-        if (!($question instanceof MultipleChoiceQuestion)) {
-            return [];
-        }
-
-        if ($question->isRandomQuestionChoices()) {
-            $choices = $question->getQuestionChoices()->toArray();
-            shuffle($choices);
-
-            return new ArrayCollection($choices);
-        }
-
-        return $question->getQuestionChoices();
     }
 
     public function resolveValidationRule(AbstractQuestion $question)
@@ -77,14 +64,21 @@ class QuestionResolver implements ContainerAwareInterface
 
     public function resolveAvailableQuestionnaires()
     {
-        return $this->container
-            ->get('capco.questionnaire.repository')
-            ->getAvailableQuestionnaires();
+        return $this->container->get(
+            'capco.questionnaire.repository'
+        )->getAvailableQuestionnaires();
     }
 
     public function resolveQuestionnaireQuestions(Questionnaire $questionnaire)
     {
-        return $questionnaire->getRealQuestions();
+        $questions = $questionnaire->getRealQuestions()->toArray();
+        usort($questions, function ($a, $b) {
+            return (
+                $a->getQuestionnaireAbstractQuestion()->getPosition() <=>
+                $b->getQuestionnaireAbstractQuestion()->getPosition()
+            );
+        });
+        return $questions;
     }
 
     public function resolveQuestionnaireOpen(Questionnaire $questionnaire): bool
@@ -92,8 +86,9 @@ class QuestionResolver implements ContainerAwareInterface
         return $questionnaire->canContribute();
     }
 
-    public function resolveQuestionnairePhoneConfirmationRequired(Questionnaire $questionnaire): bool
-    {
+    public function resolveQuestionnairePhoneConfirmationRequired(
+        Questionnaire $questionnaire
+    ): bool {
         return $questionnaire->isPhoneConfirmationRequired();
     }
 }

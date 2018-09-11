@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\QuestionChoice;
@@ -14,15 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class MultipleChoiceQuestion extends AbstractQuestion
 {
     public static $questionTypesLabels = [
-         'question.types.button' => self::QUESTION_TYPE_BUTTON,
-         'question.types.radio' => self::QUESTION_TYPE_RADIO,
-         'question.types.select' => self::QUESTION_TYPE_SELECT,
-         'question.types.checkbox' => self::QUESTION_TYPE_CHECKBOX,
-         'question.types.ranking' => self::QUESTION_TYPE_RANKING,
+        'question.types.button' => self::QUESTION_TYPE_BUTTON,
+        'question.types.radio' => self::QUESTION_TYPE_RADIO,
+        'question.types.select' => self::QUESTION_TYPE_SELECT,
+        'question.types.checkbox' => self::QUESTION_TYPE_CHECKBOX,
+        'question.types.ranking' => self::QUESTION_TYPE_RANKING,
     ];
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $questionChoices;
@@ -48,41 +47,23 @@ class MultipleChoiceQuestion extends AbstractQuestion
      */
     protected $hasValidationRule = false;
 
-    /**
-     * @ORM\Column(type="text", name="description")
-     */
-    protected $description;
-
     public function __construct()
     {
         $this->questionChoices = new ArrayCollection();
-        unset(
-            self::$questionTypesInputs[self::QUESTION_TYPE_SIMPLE_TEXT],
-            self::$questionTypesInputs[self::QUESTION_TYPE_MULTILINE_TEXT],
-            self::$questionTypesInputs[self::QUESTION_TYPE_EDITOR],
-            self::$questionTypesInputs[self::QUESTION_TYPE_MEDIAS]
-        );
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description = null): self
-    {
-        $this->description = $description;
-
-        return $this;
     }
 
     public function getQuestionChoices(): Collection
     {
-        return $this->questionChoices;
+        return ($this->questionChoices instanceof Collection)
+            ? $this->questionChoices
+            : new ArrayCollection($this->questionChoices);
     }
 
     public function setQuestionChoices(Collection $questionChoices): self
     {
+        foreach ($questionChoices as $qc) {
+            $qc->setQuestion($this);
+        }
         $this->questionChoices = $questionChoices;
 
         return $this;
@@ -90,8 +71,8 @@ class MultipleChoiceQuestion extends AbstractQuestion
 
     public function addQuestionChoice(QuestionChoice $questionChoice): self
     {
-        if (!$this->questionChoices->contains($questionChoice)) {
-            $this->questionChoices->add($questionChoice);
+        if (!$this->getQuestionChoices()->contains($questionChoice)) {
+            $this->getQuestionChoices()->add($questionChoice);
         }
         $questionChoice->setQuestion($this);
 
@@ -100,18 +81,8 @@ class MultipleChoiceQuestion extends AbstractQuestion
 
     public function removeQuestionChoice(QuestionChoice $questionChoice): self
     {
-        $this->questionChoices->removeElement($questionChoice);
+        $this->getQuestionChoices()->removeElement($questionChoice);
         $questionChoice->setQuestion(null);
-
-        return $this;
-    }
-
-    public function resetQuestionChoices(): self
-    {
-        foreach ($this->questionChoices as $choice) {
-            $choice->setQuestion(null);
-        }
-        $this->questionChoices = new ArrayCollection();
 
         return $this;
     }
@@ -145,13 +116,14 @@ class MultipleChoiceQuestion extends AbstractQuestion
         return $this;
     }
 
-    public function getValidationRule(): ? MultipleChoiceQuestionValidationRule
+    public function getValidationRule(): ?MultipleChoiceQuestionValidationRule
     {
         return $this->hasValidationRule ? $this->validationRule : null;
     }
 
-    public function setValidationRule(MultipleChoiceQuestionValidationRule $validationRule = null): self
-    {
+    public function setValidationRule(
+        MultipleChoiceQuestionValidationRule $validationRule = null
+    ): self {
         if (!$validationRule || !$validationRule->getType() || !$validationRule->getNumber()) {
             $validationRule = null;
         }

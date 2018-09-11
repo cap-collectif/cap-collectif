@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="questionnaire")
@@ -55,7 +56,8 @@ class Questionnaire
     private $replies;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="questionnaire", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Assert\Valid
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="questionnaire", cascade={"remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $questions;
@@ -76,7 +78,7 @@ class Questionnaire
      * @var bool
      * @ORM\Column(name="multiple_replies_allowed", type="boolean", nullable=true)
      */
-    private $multipleRepliesAllowed;
+    private $multipleRepliesAllowed = false;
 
     /**
      * @var bool

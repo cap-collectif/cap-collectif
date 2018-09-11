@@ -66,6 +66,13 @@
               {{ react_render_component('GroupCreateButtonApp') }}
           </li>
       </ul>
+  {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Questionnaire' and admin.hasSubject == false %}
+      {% include '@CapcoApp/redux_store.html.twig' %}
+      <ul class="nav navbar-nav navbar-right">
+          <li>
+              {{ react_render_component('QuestionnaireCreateButtonApp') }}
+          </li>
+      </ul>
   {% elseif admin.class == 'Capco\\UserBundle\\Entity\\User' and admin.hasSubject == false %}
       {# TODO redux store in global #}
   {% include '@CapcoApp/redux_store.html.twig' %}

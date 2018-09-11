@@ -56,3 +56,8 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     title: Un peu d'informations s'il vous plaît !
     required: true
     type: 0
+  simplequestion11:
+    id: 666
+    title: ça roule ?
+    required: true
+    type: 1

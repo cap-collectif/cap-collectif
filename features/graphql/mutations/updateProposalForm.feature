@@ -8,57 +8,56 @@ Scenario: GraphQL client wants to update a proposal form
   """
   {
     "query": "mutation ($input: UpdateProposalFormInput!) {
-      updateProposalForm(input: $input) {
-        proposalForm {
-          id
-          title
-          titleHelpText
-          allowAknowledge
-          description
-          descriptionHelpText
-          summaryHelpText
-          illustrationHelpText
-          usingThemes
-          themeMandatory
-          themeHelpText
-          usingDistrict
-          districtMandatory
-          districtHelpText
-          usingCategories
-          categoryMandatory
-          categoryHelpText
-          usingAddress
-          addressHelpText
-          proposalInAZoneRequired
-          latMap
-          lngMap
-          zoomMap
-          commentable
-          costable
-          categories {
-            id
-            name
+          updateProposalForm(input: $input) {
+            proposalForm {
+              id
+              title
+              titleHelpText
+              allowAknowledge
+              description
+              descriptionHelpText
+              summaryHelpText
+              illustrationHelpText
+              usingThemes
+              themeMandatory
+              themeHelpText
+              usingDistrict
+              districtMandatory
+              districtHelpText
+              usingCategories
+              categoryMandatory
+              categoryHelpText
+              usingAddress
+              addressHelpText
+              proposalInAZoneRequired
+              latMap
+              lngMap
+              zoomMap
+              commentable
+              costable
+              categories {
+                id
+                name
+              }
+              districts {
+                id
+                name
+                geojson
+                geojsonStyle
+                displayedOnMap
+              }
+              questions {
+                id
+                helpText
+                private
+                required
+                title
+                type
+              }
+            }
           }
-          districts {
-            id
-            name
-            geojson
-            geojsonStyle
-            displayedOnMap
-          }
-          questions {
-            id
-            position
-            helpText
-            private
-            required
-            title
-            type
-          }
-        }
-      }
-    }",
-    "variables": {
+        }",
+    "variables":{
       "input": {
         "proposalFormId": "proposalForm1",
         "title": "New title",
@@ -86,9 +85,11 @@ Scenario: GraphQL client wants to update a proposal form
         "commentable": true,
         "costable": true,
         "categories": [{
+            "id": "pCategory1",
             "name": "Aménagement"
           },
           {
+            "id": "pCategory2",
             "name": "Politique"
           },
           {
@@ -116,18 +117,18 @@ Scenario: GraphQL client wants to update a proposal form
   Then the JSON response should match:
   """
   {
-    "data": {
+   "data": {
       "updateProposalForm": {
         "proposalForm": {
           "id": "proposalForm1",
           "title": "New title",
           "titleHelpText": "Title help",
+          "allowAknowledge": true,
           "description": "New description",
           "descriptionHelpText": "Description help",
           "summaryHelpText": "Summary Help",
           "illustrationHelpText": "Illustration Help",
           "usingThemes": true,
-          "allowAknowledge": true,
           "themeMandatory": true,
           "themeHelpText": "Theme Help",
           "usingDistrict": true,
@@ -135,10 +136,10 @@ Scenario: GraphQL client wants to update a proposal form
           "districtHelpText": "District Help",
           "usingCategories": true,
           "categoryMandatory": true,
-          "proposalInAZoneRequired": true,
           "categoryHelpText": "Category Help",
           "usingAddress": true,
           "addressHelpText": "Address help",
+          "proposalInAZoneRequired": true,
           "latMap": 0,
           "lngMap": 0,
           "zoomMap": 0,
@@ -158,7 +159,22 @@ Scenario: GraphQL client wants to update a proposal form
               "name": "Politique"
             }
           ],
-          "districts": @wildcard@,
+          "districts": [
+            {
+              "id": @string@,
+              "name": "Beauregard",
+              "geojson": null,
+              "geojsonStyle": null,
+              "displayedOnMap": false
+            },
+            {
+              "id": @string@,
+              "name": "Other district",
+              "geojson": null,
+              "geojsonStyle": null,
+              "displayedOnMap": true
+            }
+          ],
           "questions": []
         }
       }
@@ -178,7 +194,6 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
           id
           questions {
             id
-            position
             helpText
             private
             required
@@ -193,8 +208,8 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
         "proposalFormId": "proposalForm1",
         "questions": [
           {
-            "position": 1,
             "question": {
+              "id": "716",
               "title": "Etes-vous réél ?",
               "helpText": "Peut-être que non...",
               "private": false,
@@ -203,8 +218,8 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
             }
           },
           {
-            "position": 2,
             "question": {
+              "id": "717",
               "title": "Documents à remplir",
               "helpText": "5 fichiers max",
               "private": false,
@@ -226,21 +241,19 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
           "id": "proposalForm1",
           "questions": [
             {
-              "id": @string@,
-              "position": 1,
-              "title": "Etes-vous réél ?",
+              "id": "716",
               "helpText": "Peut-être que non...",
               "private": false,
               "required": true,
+              "title": "Etes-vous réél ?",
               "type": "text"
             },
             {
-              "id": @string@,
-              "position": 2,
-              "title": "Documents à remplir",
+              "id": "717",
               "helpText": "5 fichiers max",
               "private": false,
               "required": true,
+              "title": "Documents à remplir",
               "type": "medias"
             }
           ]

@@ -92,7 +92,16 @@ services:
 
   capco.twig.theme:
     class: Capco\AppBundle\Twig\ThemeExtension
-    arguments: ["@capco.theme.repository", '@Capco\AppBundle\Repository\ProjectRepository', "@twig.extension.intl", "@jms_serializer", "@router", "@capco.step.helper", "@capco.url.resolver"]
+    arguments:
+      [
+        '@capco.theme.repository',
+        '@Capco\AppBundle\Repository\ProjectRepository',
+        '@twig.extension.intl',
+        '@jms_serializer',
+        '@router',
+        '@capco.step.helper',
+        '@capco.url.resolver',
+      ]
     tags:
       - { name: twig.extension }
 

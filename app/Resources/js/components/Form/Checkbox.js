@@ -120,7 +120,6 @@ class Checkbox extends React.Component<Props, State> {
                   type="checkbox"
                   value={choiceValue}
                   checked={finalValue.indexOf(choiceValue) !== -1}
-                  description={choice.description}
                   disabled={disabled}
                   onBlur={event => {
                     if (onBlur) onBlur(event.preventDefault());
@@ -138,6 +137,11 @@ class Checkbox extends React.Component<Props, State> {
                   image={choice.image ? choice.image.url : null}>
                   {choice.label}
                 </Input>
+                {choice.description && (
+                  <div style={{ marginBottom: '20px', paddingLeft: '20px' }}>
+                    <i dangerouslySetInnerHTML={{ __html: choice.description }} />
+                  </div>
+                )}
               </div>
             );
           })}

@@ -60,7 +60,7 @@ final class QuestionChoiceType extends ObjectType implements GeneratedTypeInterf
                     'access' => null,
                 ],
                 'color' => [
-                    'type' => Type::string(),
+                    'type' => $globalVariable->get('typeResolver')->resolve('QuestionChoiceColor'),
                     'args' => [
                     ],
                     'resolve' => null,

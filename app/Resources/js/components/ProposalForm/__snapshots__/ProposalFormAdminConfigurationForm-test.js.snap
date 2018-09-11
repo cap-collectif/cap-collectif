@@ -639,6 +639,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
       </div>
       <FieldArray
         component={[Function]}
+        formName="proposal-form-admin-configuration"
         name="questions"
       />
       <Field

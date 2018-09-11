@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -41,8 +40,8 @@ class QuestionChoice
 
     /**
      * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion", inversedBy="questionChoices", cascade={"persist"})
-     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion", inversedBy="questionChoices")
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false)
      */
     private $question;
 
@@ -56,12 +55,12 @@ class QuestionChoice
         return $this->title ?? 'New QuestionChoice';
     }
 
-    public function getColor()
+    public function getColor(): ?string
     {
         return $this->color;
     }
 
-    public function setColor(string $color = null): self
+    public function setColor(?string $color = null): self
     {
         $this->color = $color;
 
@@ -78,7 +77,7 @@ class QuestionChoice
      *
      * @return $this
      */
-    public function setQuestion(AbstractQuestion $question = null)
+    public function setQuestion(?AbstractQuestion $question)
     {
         $this->question = $question;
 

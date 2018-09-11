@@ -2,6 +2,7 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Form\QuestionnaireCreateType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -31,6 +32,15 @@ class ProposalFormController extends CRUDController
             $evaluationForm->setTitle(
                 $translator->trans('copy-of') . ' ' . $evaluationForm->getTitle()
             );
+            foreach ($evaluationForm->getQuestions() as $qaq) {
+                $em->persist($qaq);
+                $em->persist($qaq->getQuestion());
+            }
+        }
+
+        foreach ($clonedProposalForm->getQuestions() as $qaq) {
+            $em->persist($qaq);
+            $em->persist($qaq->getQuestion());
         }
 
         $em->persist($clonedProposalForm);

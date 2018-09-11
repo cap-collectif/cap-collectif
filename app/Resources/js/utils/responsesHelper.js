@@ -11,7 +11,6 @@ import component from '../components/Form/Field';
 type Questions = $ReadOnlyArray<{|
   +id: string,
   +title: string,
-  +position: number,
   +private: boolean,
   +required: boolean,
   +helpText: ?string,

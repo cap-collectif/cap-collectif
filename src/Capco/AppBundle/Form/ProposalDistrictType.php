@@ -13,6 +13,7 @@ class ProposalDistrictType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('id');
         $builder->add('name', TextType::class);
         $builder->add('displayedOnMap', CheckboxType::class);
         $builder->add('geojson', TextType::class);

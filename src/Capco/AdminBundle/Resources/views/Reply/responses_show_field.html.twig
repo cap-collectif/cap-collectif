@@ -5,18 +5,29 @@
         {% for response in value %}
             <strong>{{ response.question.title }}</strong></br>
             </br>
-            {% if response.value is iterable %}
+            {% if response.value is defined %}
+                {% if response.value is iterable %}
+                    <ul>
+                        {% for label in response.value.labels %}
+                            <li>{{ label }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    {% if response.value.label is defined %}
+                        {{ response.value.label }}
+                    {% else %}
+                        {{ response.value }}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            {% if response.medias is defined %}
                 <ul>
-                    {% for label in response.value.labels %}
-                        <li>{{ label }}</li>
+                    {% for media in response.medias %}
+                        <li>
+                            <a href="{{ app.request.schemeAndHttpHost ~ '/media/default/0001/01/' ~ media.providerReference }}" download="{{ media.name }}">{{ media.name }}</a>
+                        </li>
                     {% endfor %}
                 </ul>
-            {% else %}
-                {% if response.value.label is defined %}
-                    {{ response.value.label }}
-                {% else %}
-                    {{ response.value }}
-                {% endif %}
             {% endif %}
             {% if loop.last == false %}<hr>{% endif %}
         {% endfor %}
