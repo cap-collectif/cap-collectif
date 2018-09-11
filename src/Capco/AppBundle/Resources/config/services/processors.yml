@@ -1,52 +1,62 @@
 services:
   opinion_create.processor:
     class: Capco\AppBundle\Processor\Opinion\OpinionCreateProcessor
-    arguments: ['@capco.opinion.repository', '@capco.opinion_notifier']
+    autowire: true
+
   opinion_update.processor:
     class: Capco\AppBundle\Processor\Opinion\OpinionUpdateProcessor
-    arguments: ['@capco.opinion.repository', '@capco.opinion_notifier']
+    autowire: true
+
   opinion_delete.processor:
     class: Capco\AppBundle\Processor\Opinion\OpinionDeleteProcessor
-    arguments: []
+    autowire: true
+
   opinion_trash.processor:
     class: Capco\AppBundle\Processor\Opinion\OpinionTrashProcessor
-    arguments: ['@capco.opinion.repository', '@capco.opinion_notifier']
+    autowire: true
+
   argument_create.processor:
     class: Capco\AppBundle\Processor\Argument\ArgumentCreateProcessor
-    arguments: ['@capco.argument.repository', '@capco.argument_notifier']
+    autowire: true
+
   argument_update.processor:
     class: Capco\AppBundle\Processor\Argument\ArgumentUpdateProcessor
-    arguments: ['@capco.argument.repository', '@capco.argument_notifier']
+    autowire: true
+
   argument_delete.processor:
     class: Capco\AppBundle\Processor\Argument\ArgumentDeleteProcessor
-    arguments: []
+    autowire: true
+
   argument_trash.processor:
     class: Capco\AppBundle\Processor\Argument\ArgumentTrashProcessor
-    arguments: ['@capco.argument.repository', '@capco.argument_notifier']
+    autowire: true
+
   proposal_create.processor:
     class: Capco\AppBundle\Processor\Proposal\ProposalCreateProcessor
-    arguments: ['@capco.proposal.repository', '@capco.proposal_notifier']
+    autowire: true
+
   proposal_update.processor:
     class: Capco\AppBundle\Processor\Proposal\ProposalUpdateProcessor
-    arguments: ['@capco.proposal.repository', '@capco.proposal_notifier']
+    autowire: true
+
   proposal_delete.processor:
     class: Capco\AppBundle\Processor\Proposal\ProposalDeleteProcessor
-    arguments:
-      ['@doctrine.orm.entity_manager', '@capco.proposal.repository', '@capco.proposal_notifier']
+    autowire: true
+
   comment_create.processor:
     class: Capco\AppBundle\Processor\Comment\CommentCreateProcessor
-    arguments: ['@capco.comment.repository', '@capco.comment_notifier']
+    autowire: true
+
   comment_update.processor:
     class: Capco\AppBundle\Processor\Comment\CommentUpdateProcessor
-    arguments: ['@capco.comment.repository', '@capco.comment_notifier']
+    autowire: true
+
   comment_delete.processor:
     class: Capco\AppBundle\Processor\Comment\CommentDeleteProcessor
-    arguments: ['@capco.comment_notifier']
+    autowire: true
+
   user_archive_request.processor:
     class: Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor
+    autowire: true
     arguments:
-      - '@capco.user_archive.repository'
-      - '@doctrine.orm.default_entity_manager'
-      - '@capco.user_archive_notifier'
-      - '@kernel'
-      - '%kernel.root_dir%'
+      $rootDir: '%kernel.root_dir%'

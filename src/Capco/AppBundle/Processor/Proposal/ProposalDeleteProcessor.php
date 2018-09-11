@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Processor\Proposal;
 use Capco\AppBundle\Notifier\ProposalNotifier;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 
@@ -14,8 +15,11 @@ class ProposalDeleteProcessor implements ProcessorInterface
     private $proposalRepository;
     private $notifier;
 
-    public function __construct(EntityManager $em, ProposalRepository $proposalRepository, ProposalNotifier $notifier)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        ProposalRepository $proposalRepository,
+        ProposalNotifier $notifier
+    ) {
         $this->em = $em;
         $this->proposalRepository = $proposalRepository;
         $this->notifier = $notifier;
@@ -30,8 +34,11 @@ class ProposalDeleteProcessor implements ProcessorInterface
         $proposal = $this->proposalRepository->find($json['proposalId']);
         $this->em->getFilters()->enable('softdeleted');
         if (
-            $proposal->getProposalForm()->getNotificationsConfiguration()
-            && $proposal->getProposalForm()->getNotificationsConfiguration()->isOnDelete()
+            $proposal->getProposalForm()->getNotificationsConfiguration() &&
+            $proposal
+                ->getProposalForm()
+                ->getNotificationsConfiguration()
+                ->isOnDelete()
         ) {
             $this->notifier->onDelete($proposal);
         }

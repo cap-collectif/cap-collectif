@@ -1,60 +1,17 @@
 services:
-  capco.proposal_notifier:
-    class: Capco\AppBundle\Notifier\ProposalNotifier
+  _defaults:
     autowire: true
     autoconfigure: true
+    public: false
 
-  capco.comment_notifier:
-    class: Capco\AppBundle\Notifier\CommentNotifier
-    autowire: true
-    autoconfigure: true
+  Capco\AppBundle\Notifier\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Notifier/*'
+    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/Notifier/BaseNotifier.php'
 
   capco.fos_notifier:
     class: Capco\AppBundle\Notifier\FOSNotifier
-    autowire: true
-    autoconfigure: true
-
-  capco.opinion_notifier:
-    class: Capco\AppBundle\Notifier\OpinionNotifier
-    autowire: true
-    autoconfigure: true
-
-  capco.argument_notifier:
-    class: Capco\AppBundle\Notifier\ArgumentNotifier
-    autowire: true
-    autoconfigure: true
-
-  capco.contact_notifier:
-    class: Capco\AppBundle\Notifier\ContactNotifier
-    autowire: true
-    autoconfigure: true
+    public: true
 
   capco.user_notifier:
     class: Capco\AppBundle\Notifier\UserNotifier
-    autowire: true
-    autoconfigure: true
-
-  capco.project_notifier:
-    class: Capco\AppBundle\Notifier\ProjectNotifier
-    autowire: true
-    autoconfigure: true
-
-  capco.contribution_notifier:
-    class: Capco\AppBundle\Notifier\ContributionNotifier
-    autowire: true
-    autoconfigure: true
-
-  capco.report_notifier:
-    class: Capco\AppBundle\Notifier\ReportNotifier
-    autowire: true
-    autoconfigure: true
-
-  capco.follower_notifier:
-    class: Capco\AppBundle\Notifier\FollowerNotifier
-    autowire: true
-    autoconfigure: true
-
-  capco.user_archive_notifier:
-    class: Capco\AppBundle\Notifier\UserArchiveNotifier
-    autowire: true
-    autoconfigure: true
+    public: true
