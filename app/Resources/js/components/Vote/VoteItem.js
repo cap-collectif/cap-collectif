@@ -24,6 +24,10 @@ const ListVoteItem = ({ children }: ListVoteItemProps) => (
 export class VoteItem extends React.Component<Props> {
   render() {
     const { vote } = this.props;
+    let voteType = 'votes.type.propositionVote';
+    let voteVerbe = 'votes.has';
+    let voteLabelClass = classNames('label', 'label-success');
+    let voteLabel = 'votes.value.voteFor';
 
     let voteType = 'votes.type.propositionVote';
     let voteVerbe = 'votes.has';

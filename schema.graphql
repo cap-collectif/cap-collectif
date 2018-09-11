@@ -867,7 +867,7 @@ type CommentVote implements Node & Vote & Publishable {
   # The contribution that was voted.
   related: Contribution
 
-  # Returns 'commentVote'.
+  # Returns Type of vote
   kind: String!
 
   # `true` if the object is published.
@@ -4170,7 +4170,7 @@ type User implements Node {
   # The user's email was confirmed at date
   emailConfirmationSentAt: DateTime
 
-  # The arguments created by user.
+  # Get all the arguments for a specific user with pagination.
   arguments(after: String, first: Int, before: String, last: Int): ArgumentConnection!
 }
 

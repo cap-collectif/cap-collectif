@@ -1,6 +1,7 @@
 ProposalVote:
   type: object
   inherits:
+    - PrivateVote
     - Publishable
     - PrivatableVote
   config:

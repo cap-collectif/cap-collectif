@@ -1,0 +1,10 @@
+PrivateVote:
+  type: interface
+  inherits:
+    - Vote
+    - Publishable
+  config:
+    fields:
+      private:
+        type: 'Boolean'
+        description: 'Update the vote privacy.'

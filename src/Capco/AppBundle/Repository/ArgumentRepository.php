@@ -180,9 +180,7 @@ class ArgumentRepository extends EntityRepository
      */
     public function countByUser(User $user): int
     {
-        $qb /** // ->andWhere('c.isEnabled = true')
-         * Project has no field or association named isEnabled
-         */ = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(a) as TotalArguments')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.step', 's')

@@ -1,7 +1,7 @@
 <?php
 namespace Capco\AppBundle\GraphQL\__GENERATED__;
 
-use GraphQL\Type\Definition\ObjectType;
+use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\ConfigProcessor;
@@ -12,14 +12,14 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class CommentVoteType extends ObjectType implements GeneratedTypeInterface
+final class PrivateVoteType extends InterfaceType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'CommentVote',
+            'name' => 'PrivateVote',
             'description' => 'Entities that can be published.',
             'fields' => function () use ($globalVariable) {
                 return [
@@ -141,14 +141,12 @@ final class CommentVoteType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'contribution' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Comment')),
+                'private' => [
+                    'type' => Type::boolean(),
                     'args' => [
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->getComment();
-                    },
-                    'description' => null,
+                    'resolve' => null,
+                    'description' => 'Update the vote privacy.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -157,11 +155,9 @@ final class CommentVoteType extends ObjectType implements GeneratedTypeInterface
                 ],
             ];
             },
-            'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Vote'), $globalVariable->get('typeResolver')->resolve('Publishable')];
+            'resolveType' => function ($value, $context, ResolveInfo $info) use ($globalVariable) {
+                return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableTypeResolver", array(0 => $value)]);
             },
-            'isTypeOf' => null,
-            'resolveField' => null,
         ];
         };
         $config = $configProcessor->process(LazyConfig::create($configLoader, $globalVariables))->load();
