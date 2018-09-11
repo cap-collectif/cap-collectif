@@ -4,6 +4,7 @@ namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByProjectResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByStepResolver;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
@@ -21,7 +22,7 @@ class UserSerializationListener extends AbstractSerializationListener
         Manager $manager,
         UserContributionByProjectResolver $contributionProjectResolver,
         UserContributionByStepResolver $contributionStepResolver,
-        $projectRepository
+        ProjectRepository $projectRepository
     ) {
         $this->router = $router;
         $this->manager = $manager;

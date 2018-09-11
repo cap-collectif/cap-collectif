@@ -4,8 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Source;
 
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Resolver\UrlResolver;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class SourceUrlResolver
+class SourceUrlResolver implements ResolverInterface
 {
     private $urlResolver;
 

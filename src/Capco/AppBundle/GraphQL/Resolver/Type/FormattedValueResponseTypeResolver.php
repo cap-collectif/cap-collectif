@@ -4,8 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Utils\Text;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class FormattedValueResponseTypeResolver
+class FormattedValueResponseTypeResolver implements ResolverInterface
 {
     public function __invoke(ValueResponse $response): ?string
     {
@@ -17,9 +18,12 @@ class FormattedValueResponseTypeResolver
         }
 
         $value = $response->getValue();
-        $filtered = array_filter(array_merge($value['labels'] ?? [], [$value['other'] ?? []]), function ($label) {
-            return $label;
-        });
+        $filtered = array_filter(
+            array_merge($value['labels'] ?? [], [$value['other'] ?? []]),
+            function ($label) {
+                return $label;
+            }
+        );
         $labels = array_map(function ($label) {
             return Text::htmlToString($label);
         }, $filtered);

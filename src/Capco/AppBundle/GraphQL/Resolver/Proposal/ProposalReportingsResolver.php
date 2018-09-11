@@ -5,11 +5,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ProposalReportingsResolver
+class ProposalReportingsResolver implements ResolverInterface
 {
     private $repository;
     private $logger;
@@ -23,11 +24,22 @@ class ProposalReportingsResolver
     public function __invoke(Proposal $proposal, Argument $arguments): Connection
     {
         try {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $arguments) {
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $proposal,
+                $arguments
+            ) {
                 $field = $arguments->offsetGet('orderBy')['field'];
                 $direction = $arguments->offsetGet('orderBy')['direction'];
 
-                return $this->repository->getByProposal($proposal, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
+                return $this->repository->getByProposal(
+                    $proposal,
+                    $offset,
+                    $limit,
+                    $field,
+                    $direction
+                )
+                    ->getIterator()
+                    ->getArrayCopy();
             });
 
             $totalCount = $this->repository->countForProposal($proposal);

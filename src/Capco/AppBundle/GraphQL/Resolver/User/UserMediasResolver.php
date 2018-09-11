@@ -5,8 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class UserMediasResolver
+class UserMediasResolver implements ResolverInterface
 {
     protected $proposalRepo;
 

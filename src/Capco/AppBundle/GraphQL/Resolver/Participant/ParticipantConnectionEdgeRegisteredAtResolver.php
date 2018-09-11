@@ -5,9 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Participant;
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
-class ParticipantConnectionEdgeRegisteredAtResolver
+class ParticipantConnectionEdgeRegisteredAtResolver implements ResolverInterface
 {
     private $eventRegistrationRepository;
 
@@ -22,7 +23,10 @@ class ParticipantConnectionEdgeRegisteredAtResolver
             return $edge->node->getCreatedAt();
         }
         if ($edge->node instanceof User) {
-            $registration = $this->eventRegistrationRepository->getOneByUserAndEvent($edge->node, $edge->node->registeredEvent);
+            $registration = $this->eventRegistrationRepository->getOneByUserAndEvent(
+                $edge->node,
+                $edge->node->registeredEvent
+            );
 
             return $registration->getCreatedAt();
         }

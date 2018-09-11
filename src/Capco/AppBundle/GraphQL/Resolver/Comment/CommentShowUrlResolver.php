@@ -4,8 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Comment;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Resolver\UrlResolver;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class CommentShowUrlResolver
+class CommentShowUrlResolver implements ResolverInterface
 {
     private $urlResolver;
 

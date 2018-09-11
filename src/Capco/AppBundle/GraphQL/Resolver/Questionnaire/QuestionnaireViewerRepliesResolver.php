@@ -6,8 +6,9 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class QuestionnaireViewerRepliesResolver
+class QuestionnaireViewerRepliesResolver implements ResolverInterface
 {
     protected $replyRepo;
 

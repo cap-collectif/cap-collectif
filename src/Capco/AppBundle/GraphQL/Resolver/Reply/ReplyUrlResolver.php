@@ -4,8 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Resolver\UrlResolver;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ReplyUrlResolver
+class ReplyUrlResolver implements ResolverInterface
 {
     private $urlResolver;
 

@@ -5,11 +5,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Repository\PostRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ProposalNewsResolver
+class ProposalNewsResolver implements ResolverInterface
 {
     private $logger;
     private $repository;
@@ -27,7 +28,15 @@ class ProposalNewsResolver
                 $field = $args->offsetGet('orderBy')['field'];
                 $direction = $args->offsetGet('orderBy')['direction'];
 
-                return $this->repository->getOrderedPublishedPostsByProposal($proposal, $offset, $field, $limit, $direction)->getIterator()->getArrayCopy();
+                return $this->repository->getOrderedPublishedPostsByProposal(
+                    $proposal,
+                    $offset,
+                    $field,
+                    $limit,
+                    $direction
+                )
+                    ->getIterator()
+                    ->getArrayCopy();
             });
 
             $totalCount = $this->repository->countPublishedPostsByProposal($proposal);

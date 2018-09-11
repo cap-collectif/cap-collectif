@@ -9,19 +9,24 @@ use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ProjectContributorResolver
+class ProjectContributorResolver implements ResolverInterface
 {
     private $userSearch;
     private $logger;
     private $proposalSelectionVoteRepository;
     private $proposalCollectVoteRepository;
 
-    public function __construct(UserSearch $userSearch, LoggerInterface $logger, ProposalSelectionVoteRepository $proposalSelectionVoteRepository, ProposalCollectVoteRepository $proposalCollectVoteRepository)
-    {
+    public function __construct(
+        UserSearch $userSearch,
+        LoggerInterface $logger,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository
+    ) {
         $this->userSearch = $userSearch;
         $this->logger = $logger;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -62,12 +67,16 @@ class ProjectContributorResolver
 
         foreach ($project->getRealSteps() as $step) {
             if ($step instanceof CollectStep) {
-                $anonymousCount += $this->proposalCollectVoteRepository->getAnonymousVotesCountByStep($step);
+                $anonymousCount += $this->proposalCollectVoteRepository->getAnonymousVotesCountByStep(
+                    $step
+                );
                 continue;
             }
 
             if ($step instanceof SelectionStep) {
-                $anonymousCount += $this->proposalSelectionVoteRepository->getAnonymousVotesCountByStep($step);
+                $anonymousCount += $this->proposalSelectionVoteRepository->getAnonymousVotesCountByStep(
+                    $step
+                );
                 continue;
             }
         }

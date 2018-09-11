@@ -5,10 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class UserEventsResolver
+class UserEventsResolver implements ResolverInterface
 {
     protected $eventRepo;
 

@@ -9,19 +9,24 @@ use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class StepContributorResolver
+class StepContributorResolver implements ResolverInterface
 {
     private $userSearch;
     private $logger;
     private $proposalSelectionVoteRepository;
     private $proposalCollectVoteRepository;
 
-    public function __construct(UserSearch $userSearch, LoggerInterface $logger, ProposalSelectionVoteRepository $proposalSelectionVoteRepository, ProposalCollectVoteRepository $proposalCollectVoteRepository)
-    {
+    public function __construct(
+        UserSearch $userSearch,
+        LoggerInterface $logger,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository
+    ) {
         $this->userSearch = $userSearch;
         $this->logger = $logger;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;

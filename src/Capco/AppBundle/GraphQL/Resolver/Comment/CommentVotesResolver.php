@@ -5,11 +5,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Comment;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Repository\CommentVoteRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class CommentVotesResolver
+class CommentVotesResolver implements ResolverInterface
 {
     private $logger;
     private $repository;
@@ -27,7 +28,15 @@ class CommentVotesResolver
                 $field = $args->offsetGet('orderBy')['field'];
                 $direction = $args->offsetGet('orderBy')['direction'];
 
-                return $this->repository->getAllByComment($comment, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
+                return $this->repository->getAllByComment(
+                    $comment,
+                    $offset,
+                    $limit,
+                    $field,
+                    $direction
+                )
+                    ->getIterator()
+                    ->getArrayCopy();
             });
 
             $totalCount = $this->repository->countAllByComment($comment);

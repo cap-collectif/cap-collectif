@@ -1,4 +1,13 @@
 services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Capco\AppBundle\GraphQL\Resolver\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/*'
+    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,QuestionResolver.php,Proposal/ProposalResolver.php,ConsultationResolver.php,UserResolver.php, Group/GroupResolver.php,EvaluationForm/EvaluationFormResolver.php, Proposal/ProposalEvaluationResolver.php,UserIsGrantedResolver.php}'
+
   global_id_resolver:
     class: Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver
     arguments:
@@ -7,51 +16,6 @@ services:
       - { name: overblog_graphql.resolver, alias: 'query_node', method: 'resolve' }
       - { name: overblog_graphql.resolver, alias: 'query_nodes', method: 'resolveMultiple' }
 
-  Capco\AppBundle\GraphQL\Resolver\Type\NodeTypeResolver:
-    arguments:
-      - '@overblog_graphql.type_resolver'
-      - '@Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantTypeResolver:
-    arguments:
-      - '@overblog_graphql.type_resolver'
-      - '@logger'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  user_contribution_by_step_resolver:
-    class: Capco\AppBundle\GraphQL\Resolver\User\UserContributionByStepResolver
-    arguments:
-      - '@service_container'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  user_contribution_by_project_resolver:
-    class: Capco\AppBundle\GraphQL\Resolver\User\UserContributionByProjectResolver
-    arguments:
-      - '@service_container'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Step\StepContributorResolver:
-    arguments:
-      - '@capco.search.user_search'
-      - '@logger'
-      - '@capco.proposal_selection_vote.repository'
-      - '@capco.proposal_collect_vote.repository'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver:
-    arguments:
-      - '@capco.search.user_search'
-      - '@logger'
-      - '@capco.proposal_selection_vote.repository'
-      - '@capco.proposal_collect_vote.repository'
-    tags:
-      - { name: overblog_graphql.resolver }
 
   capco.resolver.question:
     class: Capco\AppBundle\GraphQL\Resolver\QuestionResolver
@@ -242,42 +206,6 @@ services:
           method: 'contributionsToDeleteCount',
         }
 
-  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalFollowersResolver:
-    arguments:
-      - '@capco.user.repository'
-      - '@logger'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\ViewerFollowProposalResolver:
-    arguments:
-      - '@capco.user.repository'
-      - '@logger'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalsFollowedByUserResolver:
-    arguments:
-      - '@capco.proposal.repository'
-      - '@logger'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalFollowerConnection:
-    arguments:
-      - '@capco.user.repository'
-      - '@logger'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Event\EventParticipantsResolver:
-    arguments:
-      - '@capco.user.repository'
-      - '@capco.event_registration.repository'
-      - '@logger'
-    tags:
-      - { name: overblog_graphql.resolver }
-
   capco.resolvers.groups:
     class: Capco\AppBundle\GraphQL\Resolver\Group\GroupResolver
     tags:
@@ -297,172 +225,17 @@ services:
           method: 'resolveQuestions',
         }
 
-  Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver:
-    arguments:
-      - '@router'
+  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalEvaluationResolver:
     tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Project\ProjectAdminUrlResolver:
-    arguments:
-      - '@router'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Post\PostCommentsResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@capco.post_comment.repository', '@monolog.logger']
-
-  Capco\AppBundle\GraphQL\Resolver\Comment\CommentVotesResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@capco.comment_vote.repository', '@monolog.logger']
-
-  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalNewsResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@capco.blog.post.repository', '@monolog.logger']
-
-  Capco\AppBundle\GraphQL\Resolver\Type\FormattedAddressTypeResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Type\FormattedValueResponseTypeResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalReportingsResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@capco.reporting.repository', '@monolog.logger']
-
-  Capco\AppBundle\GraphQL\Resolver\Comment\CommentReportingsResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@capco.reporting.repository', '@monolog.logger']
-
-  Capco\AppBundle\GraphQL\Resolver\Comment\CommentPublicationStatusResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Post\PostPublicationStatusResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@capco.url.resolver']
-
-  Capco\AppBundle\GraphQL\Resolver\Post\PostRelatedContentTypeResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@overblog_graphql.type_resolver']
-
-  Capco\AppBundle\GraphQL\Resolver\Post\PostRelatedContentResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantConnectionEdgeRegisteredAtResolver:
-    arguments:
-      - '@capco.event_registration.repository'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantConnectionEdgeRegisteredAnonymouslyResolver:
-    arguments:
-      - '@capco.event_registration.repository'
-    tags:
-      - { name: overblog_graphql.resolver }
+      - {
+          name: overblog_graphql.resolver,
+          alias: 'proposal_evaluation_responses',
+          method: 'resolveResponses',
+        }
 
   # This is not a resolver but a voter, rename and move this elsewhere
   Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:
     arguments: ['@security.token_storage', '@logger']
     public: true
 
-  Capco\AppBundle\GraphQL\Resolver\Project\ProjectAllowedViewersResolver:
-      autowire: true
-      tags:
-        - { name: overblog_graphql.resolver }
 
-  Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireViewerRepliesResolver:
-    arguments:
-      - '@capco.reply.repository'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\User\UserContributionResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\User\UserEventsResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments:
-      - '@capco.event.repository'
-
-  Capco\AppBundle\GraphQL\Resolver\User\UserMediasResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments:
-      - '@capco.proposal.repository'
-
-  Capco\AppBundle\GraphQL\Resolver\User\UserGroupsResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments:
-      - '@capco.user_group.repository'
-      - '@capco.group.repository'
-
-  Capco\AppBundle\GraphQL\Resolver\User\UserReportsResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments:
-      - '@capco.reporting.repository'
-
-  Capco\AppBundle\GraphQL\Resolver\User\UserVotesResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments:
-      - '@capco.abstract_vote.repository'
-
-  Capco\AppBundle\GraphQL\Resolver\Source\SourceUrlResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@capco.url.resolver']
-
-  Capco\AppBundle\GraphQL\Resolver\Reply\ReplyUrlResolver:
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments: ['@capco.url.resolver']
-
-  Capco\AppBundle\GraphQL\Resolver\Question\QuestionTypeResolver:
-    arguments:
-      - '@overblog_graphql.type_resolver'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Query\QueryProposalFormResolver:
-    arguments:
-      - '@capco.proposal_form.repository'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\User\UserNewsLetterResolver:
-    arguments:
-      - '@capco.newsletter_subscription.repository'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver:
-    arguments:
-      - '@overblog_graphql.type_resolver'
-    tags:
-      - { name: overblog_graphql.resolver }
-
-  Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver:
-    autowire: true
-
-  Capco\AppBundle\GraphQL\Resolver\Query\UserQueryResolver:
-    autowire: true

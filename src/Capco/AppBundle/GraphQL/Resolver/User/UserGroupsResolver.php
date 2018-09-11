@@ -6,10 +6,11 @@ use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class UserGroupsResolver
+class UserGroupsResolver implements ResolverInterface
 {
     protected $userGroupRepo;
     protected $groupRepo;
@@ -23,7 +24,7 @@ class UserGroupsResolver
     public function __invoke(User $user, Argument $args): Connection
     {
         $paginator = new Paginator(function () use ($user) {
-            return  $this->groupRepo->getGroupsByUser($user);
+            return $this->groupRepo->getGroupsByUser($user);
         });
 
         $totalCount = $this->userGroupRepo->countAllByUser($user);
