@@ -110,6 +110,7 @@ const getConditionsResultForJump = (jump, responses) => {
         .filter(Boolean)
         .find(r => condition && condition.question && r.question === condition.question.id);
       const userResponse = search && search.value;
+      // const userResponse = (search && typeof search.value === "string") ? search.value : search && search.value.labels[0];
       return condition.operator === 'IS'
         ? condition && condition.value && condition.value.title === userResponse
         : condition && condition.value && condition.value.title !== userResponse;
@@ -243,6 +244,7 @@ export const getAvailableQuestionsIds = (questions: Questions, responses: Respon
           question.position < firstLogicQuestion.position),
     )
     .map(question => question.id);
+
   const firstQuestionsIds = [firstLogicQuestionId, ...filteredIds];
   const questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump => {
     return getAvailableQuestionsIdsAfter(questionWithJump, questions, responses);
@@ -556,7 +558,6 @@ export const renderResponses = ({
               if (responses) {
                 response = responses[index].value;
               }
-
               let choices = [];
               if (
                 inputType === 'ranking' ||

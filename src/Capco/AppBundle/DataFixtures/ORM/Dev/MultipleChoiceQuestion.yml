@@ -184,30 +184,25 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   ljMultipleQuestionRadio:
     id: 40
     title: Ceci est-il une question de type Radio ?
-    questionChoices:
-      ['@ljQuestionChoiceIsARadio', '@ljQuestionChoiceIsntARadio']
+    questionChoices: ['@ljQuestionChoiceIsARadio', '@ljQuestionChoiceIsntARadio']
     type: 3
   ljMultipleQuestionSelect:
     id: 41
     title: Ceci est-il une question de type Select ?
-    questionChoices:
-      ['@ljQuestionChoiceIsASelect', '@ljQuestionChoiceIsntASelect']
+    questionChoices: ['@ljQuestionChoiceIsASelect', '@ljQuestionChoiceIsntASelect']
     type: 4
   ljMultipleQuestionButton:
     id: 42
     title: Ceci est-il une question de type Boutton ?
-    questionChoices:
-      ['@ljQuestionChoiceIsAButton', '@ljQuestionChoiceIsntAButton']
+    questionChoices: ['@ljQuestionChoiceIsAButton', '@ljQuestionChoiceIsntAButton']
     type: 8
   ljMultipleQuestionCheckbox:
     id: 43
     title: Ceci est-il une question de type Checkbox ?
-    questionChoices:
-      ['@ljQuestionChoiceIsACheckbox', '@ljQuestionChoiceIsntACheckbox']
+    questionChoices: ['@ljQuestionChoiceIsACheckbox', '@ljQuestionChoiceIsntACheckbox']
     type: 5
   ljMultipleQuestionRanking:
     id: 44
     title: Ceci est-il une question de type Classement ?
-    questionChoices:
-      ['@ljQuestionChoiceIsARanking', '@ljQuestionChoiceIsntARanking']
+    questionChoices: ['@ljQuestionChoiceIsARanking', '@ljQuestionChoiceIsntARanking']
     type: 6
