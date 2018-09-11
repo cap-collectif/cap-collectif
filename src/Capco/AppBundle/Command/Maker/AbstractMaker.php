@@ -80,13 +80,14 @@ abstract class AbstractMaker extends ContainerAwareCommand
      */
     protected function makeFile(): string
     {
-        $path = $this->getOutputDirectory() .
-            ($this->entity ? '/' . $this->entity->getShortName() : '') . '/' . $this->className . '.php';
+        $path =
+            $this->getOutputDirectory() .
+            ($this->entity ? '/' . $this->entity->getShortName() : '') .
+            '/' .
+            $this->className .
+            '.php';
 
-        $parsed = $this->parser->parseTemplate(
-            $this->getTemplate(),
-            $this->getTemplateVars()
-        );
+        $parsed = $this->parser->parseTemplate($this->getTemplate(), $this->getTemplateVars());
 
         if ($this->fs->exists($path)) {
             throw new FileException('File already exist.');
@@ -100,26 +101,34 @@ abstract class AbstractMaker extends ContainerAwareCommand
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->parser = $this->getContainer()->get('capco.maker_parser');
-        $this->sourcePath = $this->getContainer()->get('kernel')->getRootDir() . '/../src';
+        $this->sourcePath =
+            $this->getContainer()
+                ->get('kernel')
+                ->getRootDir() . '/../src';
         $this->finder = new Finder();
-        $defaultDirectories = [
-            'src/Capco/AppBundle/Entity',
-            'src/Capco/UserBundle/Entity',
-        ];
+        $defaultDirectories = ['src/Capco/AppBundle/Entity', 'src/Capco/UserBundle/Entity'];
         $directories = array_merge($this->getDirectories(), $defaultDirectories);
-        foreach ($this->finder->files()->name('/\.php$/')
-                     ->depth($this->getDirectoryDepth())
-                     ->in($directories)
-                     ->exclude($this->getExcludedDirectories())
-                     ->sortByName() as $file) {
+        foreach (
+            $this->finder->files()
+                ->name('/\.php$/')
+                ->depth($this->getDirectoryDepth())
+                ->in($directories)
+                ->exclude($this->getExcludedDirectories())
+                ->sortByName()
+            as $file
+        ) {
             $this->fqcns[] = NamespaceResolver::getFullQualifiedClassName($file->getRealPath());
         }
         $this->helper = $this->getHelper('question');
         $this->fs = $this->getContainer()->get('filesystem');
     }
 
-    protected function askEntity(InputInterface $input, OutputInterface $output, string $questionLabel, bool $nullable = false)// :?\ReflectionClass
-    {
+    protected function askEntity(
+        InputInterface $input,
+        OutputInterface $output,
+        string $questionLabel,
+        bool $nullable = false
+    ): ?\ReflectionClass {
         $questionLabel .= $nullable ? ' <info>[nullable]</info>' : '';
         $entity = $this->askSimpleQuestion($input, $output, $questionLabel, null, null, $nullable);
         if ($entity) {
@@ -133,21 +142,31 @@ abstract class AbstractMaker extends ContainerAwareCommand
                 throw new \RuntimeException('The given entity was not found in the application');
             }
             if (\count($found) > 1) {
-                return new \ReflectionClass($this->askChoiceQuestion($input, $output, "'$entity' was found in many entities. Please choose one below", $found, null, $found));
+                return new \ReflectionClass(
+                    $this->askChoiceQuestion(
+                        $input,
+                        $output,
+                        "'$entity' was found in many entities. Please choose one below",
+                        $found,
+                        null,
+                        $found
+                    )
+                );
             }
-            $output->writeln("using <info>$found[0]</info>");
+            $output->writeln("using <info>{$found[0]}</info>");
 
             return new \ReflectionClass($found[0]);
         }
     }
 
-    protected function askSimpleQuestion(InputInterface $input,
-                                         OutputInterface $output,
-                                         string $questionLabel,
-                                         $default = null,
-                                         $autocompleteValues = null,
-                                         $nullable = false) //:?string
-    {
+    protected function askSimpleQuestion(
+        InputInterface $input,
+        OutputInterface $output,
+        string $questionLabel,
+        $default = null,
+        $autocompleteValues = null,
+        $nullable = false
+    ): ?string {
         $question = new Question($questionLabel . PHP_EOL, $default);
         if ($autocompleteValues) {
             $question->setAutocompleterValues($autocompleteValues);
@@ -164,18 +183,15 @@ abstract class AbstractMaker extends ContainerAwareCommand
         return $response;
     }
 
-    protected function askChoiceQuestion(InputInterface $input,
-                                         OutputInterface $output,
-                                         string $questionLabel,
-                                         array $choices,
-                                         $default = null,
-                                         $autocompleteValues = null): string
-    {
-        $question = new ChoiceQuestion(
-            $questionLabel . PHP_EOL,
-            $choices,
-            $default
-        );
+    protected function askChoiceQuestion(
+        InputInterface $input,
+        OutputInterface $output,
+        string $questionLabel,
+        array $choices,
+        $default = null,
+        $autocompleteValues = null
+    ): string {
+        $question = new ChoiceQuestion($questionLabel . PHP_EOL, $choices, $default);
         if ($autocompleteValues) {
             $question->setAutocompleterValues($autocompleteValues);
         }
@@ -186,11 +202,12 @@ abstract class AbstractMaker extends ContainerAwareCommand
         return $this->helper->ask($input, $output, $question);
     }
 
-    protected function askQuestionWithArrayResponse(InputInterface $input,
-                                                    OutputInterface $output,
-                                                    string $questionLabel,
-                                                    bool $nullable = true) //:?array
-    {
+    protected function askQuestionWithArrayResponse(
+        InputInterface $input,
+        OutputInterface $output,
+        string $questionLabel,
+        bool $nullable = true
+    ): ?array {
         $questionLabel .= $nullable ? ' <info>[nullable]</info>' : '';
         $question = new Question($questionLabel . PHP_EOL);
         $question->setNormalizer(function ($value) {

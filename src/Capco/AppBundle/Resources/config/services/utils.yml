@@ -7,9 +7,6 @@ services:
     class: pmill\Doctrine\Hydrator\ArrayHydrator
     arguments: ['@doctrine.orm.default_entity_manager']
 
-  capco.maker_parser:
-    class: Capco\AppBundle\Command\Maker\Parser
-
   capco.utils.throwable_email_checker:
     class: EmailChecker\EmailChecker
     arguments: ['@capco.utils.throwable_email_checker.adapter']

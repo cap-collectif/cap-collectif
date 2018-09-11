@@ -4,6 +4,10 @@ services:
     autoconfigure: true
     public: false
 
+  Capco\AppBundle\Command\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Command/*'
+    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/Command/Maker/*'
+
   Capco\AppBundle\Command\CreateCsvFromProposalStepCommand:
     arguments:
       $projectRootDir: '%kernel.project_dir%'

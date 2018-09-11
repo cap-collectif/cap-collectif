@@ -30,17 +30,26 @@ class MakeProcessor extends AbstractMaker
 
     protected function configure()
     {
-        $this
-            ->setName('capco:make:processor')
+        $this->setName('capco:make:processor')
             ->setDescription('Generate a processor')
-            ->addArgument('name', InputArgument::REQUIRED, "The name of your processor. You don't need to put the suffix Processor, it will be automatically added.");
+            ->addArgument(
+                'name',
+                InputArgument::REQUIRED,
+                "The name of your processor. You don't need to put the suffix Processor, it will be automatically added."
+            );
     }
 
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getArgument('name')) {
-            $input->setArgument('name',
-                $this->askSimpleQuestion($input, $output, 'Please specify the name of your processor. Note that Processor suffix will be automatically added. <info>(e.g ProposalCreate)</info>'));
+            $input->setArgument(
+                'name',
+                $this->askSimpleQuestion(
+                    $input,
+                    $output,
+                    'Please specify the name of your processor. Note that Processor suffix will be automatically added. <info>(e.g ProposalCreate)</info>'
+                )
+            );
         }
     }
 
@@ -50,18 +59,32 @@ class MakeProcessor extends AbstractMaker
         $this->className = str_replace('Processor', '', $this->className);
         $this->className .= 'Processor';
 
-        $this->entity = $this->askEntity($input, $output, 'Please type the related entity of your message <info>(e.g Proposal)</info>');
+        $this->entity = $this->askEntity(
+            $input,
+            $output,
+            'Please type the related entity of your message <info>(e.g Proposal)</info>'
+        );
 
         $path = $this->makeFile();
-        $service = $this->configureService();
+
+        // TODO We should delete this function du of autowire
+        //        $service = $this->configureService();
 
         $output->writeln('<info>File successfully written at ' . realpath($path) . '</info>');
-        $output->writeln('<info>Successfully added service "' . $service . '" to ' . $this->getProcessorsPath() . '</info>');
+        //        $output->writeln(
+        //            '<info>Successfully added service "' .
+        //                $service .
+        //                '" to ' .
+        //                $this->getProcessorsPath() .
+        //                '</info>'
+        //        );
     }
 
     private function getProcessorsPath(): string
     {
-        return realpath($this->sourcePath . '/Capco/AppBundle/Resources/config/services/processors.yml');
+        return realpath(
+            $this->sourcePath . '/Capco/AppBundle/Resources/config/services/processors.yml'
+        );
     }
 
     private function configureService(): string
@@ -69,7 +92,7 @@ class MakeProcessor extends AbstractMaker
         $shortname = $this->entity->getShortname();
         $shortnameSnakeCased = Text::snakeCase($shortname);
         $service = Text::snakeCase(str_replace('Processor', '', $this->className)) . '.processor';
-        $processorPath = "\\$shortname\\$this->className";
+        $processorPath = "\\$shortname\\{$this->className}";
         $yml = <<<EOF
   {$service}:
     class: Capco\AppBundle\Processor{$processorPath}
@@ -78,7 +101,9 @@ class MakeProcessor extends AbstractMaker
       - '@capco.{$shortnameSnakeCased}_notifier'
 EOF;
         if (false === file_put_contents($this->getProcessorsPath(), $yml, FILE_APPEND)) {
-            throw new \RuntimeException(sprintf('Error during writing of file %s', $this->getProcessorsPath()));
+            throw new \RuntimeException(
+                sprintf('Error during writing of file %s', $this->getProcessorsPath())
+            );
         }
 
         return $service;
