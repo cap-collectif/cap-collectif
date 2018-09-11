@@ -34,14 +34,16 @@ export class VoteListProfile extends Component<Props, State> {
   render() {
     const { voteList, relay } = this.props;
 
+    if (!voteList.votes.edges || voteList.votes.edges.length === 0) {
+      return null;
+    }
+
     return (
       <ListGroup bsClass="media-list" componentClass="ul">
-        {// $FlowFixMe
-        voteList.votes.edges
+        {voteList.votes.edges
           .filter(Boolean)
           .map(edge => edge.node)
           .filter(Boolean)
-          // $FlowFixMe
           .map(vote => (
             // $FlowFixMe
             <VoteItem vote={vote} key={vote.id} />
