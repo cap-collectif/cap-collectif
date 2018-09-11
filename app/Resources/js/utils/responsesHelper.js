@@ -182,6 +182,86 @@ export const getRequiredFieldIndicationStrategy = (fields: Questions) => {
   return 'minority_required';
 };
 
+const checkOnlyNumbers = (input: string) => {
+  const regexS = '[0-9.-]+' ;
+  const regex = new RegExp( regexS ) ;
+  const results = regex.exec(input) ;
+  return !results || results[0] !== input;
+};
+
+export const validateResponses = (questions, responses, className, intl) => {
+  const errors = {};
+
+  const responsesError = [];
+  questions.map((question, index) => {
+    const response = responses.filter(res => res && res.question === question.id)[0];
+    if (question.required) {
+      if (question.type === 'medias') {
+        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
+          responsesError[index] = { value: `${className}.constraints.field_mandatory` };
+        }
+      } else if (!response || !response.value) {
+        responsesError[index] = { value: `${className}.constraints.field_mandatory` };
+      }
+    } else if(question.type === 'number' && checkOnlyNumbers(response.value)) {
+        responsesError[index] = { value: `${className}.constraints.please_enter_a_number` };
+    }
+
+    if (
+      question.validationRule &&
+      question.type !== 'button' &&
+      response.value &&
+      typeof response.value === 'object' &&
+      (Array.isArray(response.value.labels) || Array.isArray(response.value))
+    ) {
+      const rule = question.validationRule;
+      let responsesNumber = 0;
+      if (typeof response.value === 'object' && Array.isArray(response.value.labels)) {
+        const labelsNumber = response.value.labels.length;
+        const hasOtherValue = response.value.other ? 1 : 0;
+        responsesNumber = labelsNumber + hasOtherValue;
+      }
+
+      if (typeof response.value === 'object' && Array.isArray(response.value)) {
+        responsesNumber = response.value.length;
+      }
+
+      if (rule.type === 'MIN' && (rule.number && responsesNumber < rule.number)) {
+        responsesError[index] = {
+          value: intl.formatMessage(
+            { id: 'reply.constraints.choices_min' },
+            { nb: rule.number },
+          ),
+        };
+      }
+
+      if (rule.type === 'MAX' && (rule.number && responsesNumber > rule.number)) {
+        responsesError[index] = {
+          value: intl.formatMessage(
+            { id: 'reply.constraints.choices_max' },
+            { nb: rule.number },
+          ),
+        };
+      }
+
+      if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
+        responsesError[index] = {
+          value: intl.formatMessage(
+            { id: 'reply.constraints.choices_equal' },
+            { nb: rule.number },
+          ),
+        };
+      }
+    }
+  });
+
+  if (responsesError.length) {
+    errors.responses = responsesError;
+  }
+
+  return errors;
+};
+
 export const renderResponses = ({
   fields,
   questions,
