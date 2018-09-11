@@ -1,19 +1,18 @@
 services:
-  Capco\AppBundle\Command\CreateCsvFromProposalStepCommand:
-    autoconfigure: true
+  _defaults:
     autowire: true
+    autoconfigure: true
+    public: false
+
+  Capco\AppBundle\Command\CreateCsvFromProposalStepCommand:
     arguments:
       $projectRootDir: '%kernel.project_dir%'
 
   Capco\AppBundle\Command\CreateCsvFromConsultationStepCommand:
-    autoconfigure: true
-    autowire: true
     arguments:
       $projectRootDir: '%kernel.project_dir%'
 
   Capco\AppBundle\Command\CreateCsvFromUserCommand:
-    autoconfigure: true
-    autowire: true
     arguments:
       $kernelRootDir: '%kernel.root_dir%'
 
@@ -22,7 +21,5 @@ services:
     autowire: true
 
   Capco\AppBundle\Command\CreateCsvFromUsersCommand:
-    autoconfigure: true
-    autowire: true
     arguments:
       $projectRootDir: '%kernel.project_dir%'
