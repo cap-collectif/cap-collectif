@@ -49,7 +49,7 @@ export class CommentListViewPaginated extends React.Component<Props> {
             className="btn btn-block btn-secondary"
             data-loading-text={intl.formatMessage({ id: 'global.loading' })}
             onClick={() => {
-              relay.loadMore(100);
+              relay.loadMore(10);
             }}>
             <FormattedMessage id="comment.more" />
           </button>
@@ -65,7 +65,7 @@ export default createPaginationContainer(
     commentable: graphql`
       fragment CommentListViewPaginated_commentable on Commentable
         @argumentDefinitions(
-          count: { type: "Int", defaultValue: 100 }
+          count: { type: "Int", defaultValue: 10 }
           cursor: { type: "String" }
           orderBy: { type: "CommentOrder!" }
           isAuthenticated: { type: "Boolean!" }
