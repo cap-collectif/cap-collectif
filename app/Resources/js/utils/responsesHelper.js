@@ -6,6 +6,7 @@ import type { QuestionTypeValue } from '../components/Proposal/Page/__generated_
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
+import { checkOnlyNumbers } from '../services/Validator';
 
 import component from '../components/Form/Field';
 
@@ -182,15 +183,8 @@ export const getRequiredFieldIndicationStrategy = (fields: Questions) => {
   return 'minority_required';
 };
 
-const checkOnlyNumbers = (input: string) => {
-  const regexS = '[0-9.-]+';
-  const regex = new RegExp(regexS);
-  const results = regex.exec(input);
-  return !results || results[0] !== input;
-};
-
 export const validateResponses = (
-  questions: any,
+  questions: Questions,
   responses: ResponsesInReduxForm,
   className: string,
   intl: IntlShape,
@@ -213,7 +207,7 @@ export const validateResponses = (
       typeof response.value === 'string' &&
       checkOnlyNumbers(response.value)
     ) {
-      responsesError[index] = { value: `${className}.constraints.please_enter_a_number` };
+      responsesError[index] = { value: `please-enter-a-number` };
     }
 
     if (
@@ -284,7 +278,8 @@ export const renderResponses = ({
       {fields.map((member, index) => {
         const field = questions[index];
 
-        const inputType = field.type || 'text';
+        // We want to overidde the HTML verification of the input type number
+        const inputType = field.type && field.type !== 'number' ? field.type : 'text';
         const isOtherAllowed = field.isOtherAllowed;
 
         const labelAppend = field.required
