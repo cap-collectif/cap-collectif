@@ -12,8 +12,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('capco:create-users-account-from-csv')
+        $this->setName('capco:create-users-account-from-csv')
             ->addArgument(
                 'input',
                 InputArgument::REQUIRED,
@@ -23,8 +22,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
                 'output',
                 InputArgument::REQUIRED,
                 'Please provide the path of the export.'
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -41,7 +39,16 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
         $createdCount = 0;
         $writer = Writer::createFromPath($outputFilePath, 'w+');
         $writer->insertOne(['email', 'confirmation_link']);
+        $deduplicatedRows = [];
+        // We deduplicate rows by email
         foreach ($rows as $row) {
+            $niddle = $row['email'];
+            if (array_key_exists($niddle, $deduplicatedRows)) {
+                continue;
+            }
+            $deduplicatedRows[$niddle] = $row;
+        }
+        foreach ($deduplicatedRows as $row) {
             try {
                 $user = $userManager->createUser();
                 $user->setUsername($row['username']);
@@ -49,11 +56,17 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
                 $user->setConfirmationToken($tokenGenerator->generateToken());
                 $user->setEnabled(false);
                 $userManager->updateUser($user);
-                $confirmationUrl = $router->generate('account_confirm_email', [
-                  'token' => $user->getConfirmationToken(),
-                ], true);
+                $confirmationUrl = $router->generate(
+                    'account_confirm_email',
+                    [
+                        'token' => $user->getConfirmationToken(),
+                    ],
+                    true
+                );
                 if ($sendEmail) {
-                    $this->getContainer()->get('capco.user_notifier')->emailConfirmation($user);
+                    $this->getContainer()
+                        ->get('capco.user_notifier')
+                        ->emailConfirmation($user);
                 }
                 $writer->insertOne([$user->getEmail(), $confirmationUrl]);
                 ++$createdCount;
