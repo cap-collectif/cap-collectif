@@ -23,6 +23,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
             'description' => 'A contribution',
             'fields' => function () use ($globalVariable) {
                 return [
+<<<<<<< refs/remotes/origin/master
                 'contribuable' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
@@ -31,14 +32,39 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         return $value->canContribute();
                     },
                     'description' => null,
+=======
+                'updatedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Identifies the date and time when the object was last updated.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The id of the contribution.',
+>>>>>>> yarn relay after rebase
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+<<<<<<< refs/remotes/origin/master
                 'arguments' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ArgumentConnection')),
+=======
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
+>>>>>>> yarn relay after rebase
                     'args' => [
                         [
                             'name' => 'after',
@@ -73,15 +99,22 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+<<<<<<< refs/remotes/origin/master
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Argumentable\\ArgumentableArgumentsResolver", array(0 => $value, 1 => $args)]);
                     },
                     'description' => 'The arguments related to the argumentable.',
+=======
+                        return $value->isPublished();
+                    },
+                    'description' => '`true` if the object is published.',
+>>>>>>> yarn relay after rebase
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
+<<<<<<< refs/remotes/origin/master
                 'viewerArgumentsUnpublished' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('ArgumentConnection'),
                     'args' => [
@@ -129,24 +162,46 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     ],
                     'resolve' => null,
                     'description' => 'The ID of an object',
+=======
+                'publishableUntil' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishableUntil();
+                    },
+                    'description' => 'Identifies when the entity can no more be published.',
+>>>>>>> yarn relay after rebase
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
+<<<<<<< refs/remotes/origin/master
                 'kind' => [
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
                     ],
                     'resolve' => null,
                     'description' => 'The kind of contribution.',
+=======
+                'publishedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishedAt();
+                    },
+                    'description' => 'Identifies when the entity was published at.',
+>>>>>>> yarn relay after rebase
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
+<<<<<<< refs/remotes/origin/master
                 'related' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
                     'args' => [
@@ -181,6 +236,16 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", array(0 => $value)]);
                     },
                     'description' => 'Url of the contribution',
+=======
+                'notPublishedReason' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('NotPublishedReason'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
+                    },
+                    'description' => 'Reason that the entity is not published.',
+>>>>>>> yarn relay after rebase
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -326,12 +391,15 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                             'type' => Type::int(),
                             'description' => null,
                         ],
+<<<<<<< refs/remotes/origin/master
                         [
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('FollowerOrder'),
                             'description' => null,
                             'defaultValue' => ['field' => 'FOLLOWED_AT', 'direction' => 'DESC'],
                         ],
+=======
+>>>>>>> yarn relay after rebase
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionFollowersConnection", array(0 => $value, 1 => $args)]);
@@ -375,8 +443,13 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
                 ],
+<<<<<<< refs/remotes/origin/master
                 'published' => [
                     'type' => Type::nonNull(Type::boolean()),
+=======
+                'arguments' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ArgumentConnection')),
+>>>>>>> yarn relay after rebase
                     'args' => [
                         [
                             'name' => 'after',
@@ -411,17 +484,28 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+<<<<<<< refs/remotes/origin/master
                         return $value->isPublished();
                     },
                     'description' => '`true` if the object is published.',
+=======
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Argumentable\\ArgumentableArgumentsResolver", array(0 => $value, 1 => $args)]);
+                    },
+                    'description' => 'The arguments related to the argumentable.',
+>>>>>>> yarn relay after rebase
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
+<<<<<<< refs/remotes/origin/master
                 'publishableUntil' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+=======
+                'viewerArgumentsUnpublished' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('ArgumentConnection'),
+>>>>>>> yarn relay after rebase
                     'args' => [
                         [
                             'name' => 'after',
@@ -450,9 +534,15 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+<<<<<<< refs/remotes/origin/master
                         return $value->getPublishableUntil();
                     },
                     'description' => 'Identifies when the entity can no more be published.',
+=======
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Argumentable\\ArgumentableViewerArgumentsUnpublishedResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'The unpublished arguments of to the viewer.',
+>>>>>>> yarn relay after rebase
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -473,6 +563,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+<<<<<<< refs/remotes/origin/master
                 'publishedAt' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
@@ -481,12 +572,21 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         return $value->getPublishedAt();
                     },
                     'description' => 'Identifies when the entity was published at.',
+=======
+                'trashedStatus' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The status.',
+>>>>>>> yarn relay after rebase
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
+<<<<<<< refs/remotes/origin/master
                 'notPublishedReason' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('NotPublishedReason'),
                     'args' => [
@@ -495,6 +595,14 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
                     },
                     'description' => 'Reason that the entity is not published.',
+=======
+                'trashedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The moment the moderator trashed the contribution.',
+>>>>>>> yarn relay after rebase
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

@@ -25,6 +25,21 @@ final class ReplyType extends ObjectType implements GeneratedTypeInterface
                 return [
                 'id' => [
                     'type' => Type::nonNull(Type::id()),
+<<<<<<< refs/remotes/origin/master
+=======
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The id of the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
+>>>>>>> yarn relay after rebase
                     'args' => [
                     ],
                     'resolve' => null,
@@ -73,6 +88,7 @@ final class ReplyType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+<<<<<<< refs/remotes/origin/master
                 'url' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
                     'args' => [
@@ -89,6 +105,10 @@ final class ReplyType extends ObjectType implements GeneratedTypeInterface
                 ],
                 'published' => [
                     'type' => Type::nonNull(Type::boolean()),
+=======
+                'kind' => [
+                    'type' => Type::nonNull(Type::string()),
+>>>>>>> yarn relay after rebase
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

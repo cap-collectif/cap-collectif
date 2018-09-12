@@ -23,8 +23,25 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
             'description' => 'A budget contribution',
             'fields' => function () use ($globalVariable) {
                 return [
+<<<<<<< refs/remotes/origin/master
                 'comments' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CommentConnection')),
+=======
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The id of the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
+>>>>>>> yarn relay after rebase
                     'args' => [
                         [
                             'name' => 'after',
@@ -216,8 +233,13 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
                 ],
+<<<<<<< refs/remotes/origin/master
                 'published' => [
                     'type' => Type::nonNull(Type::boolean()),
+=======
+                'comments' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CommentConnection')),
+>>>>>>> yarn relay after rebase
                     'args' => [
                         [
                             'name' => 'after',
@@ -256,6 +278,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+<<<<<<< refs/remotes/origin/master
                 'publishableUntil' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
@@ -264,12 +287,33 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         return $value->getPublishableUntil();
                     },
                     'description' => 'Identifies when the entity can no more be published.',
+=======
+                'trashed' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => '`true` if the contribution is trashed.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
+                'trashedStatus' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The status.',
+>>>>>>> yarn relay after rebase
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+<<<<<<< refs/remotes/origin/master
                 'publishedAt' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
@@ -292,6 +336,14 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
                     },
                     'description' => 'Reason that the entity is not published.',
+=======
+                'trashedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The moment the moderator trashed the contribution.',
+>>>>>>> yarn relay after rebase
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
