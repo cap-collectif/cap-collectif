@@ -183,13 +183,18 @@ export const getRequiredFieldIndicationStrategy = (fields: Questions) => {
 };
 
 const checkOnlyNumbers = (input: string) => {
-  const regexS = '[0-9.-]+' ;
-  const regex = new RegExp( regexS ) ;
-  const results = regex.exec(input) ;
+  const regexS = '[0-9.-]+';
+  const regex = new RegExp(regexS);
+  const results = regex.exec(input);
   return !results || results[0] !== input;
 };
 
-export const validateResponses = (questions, responses, className, intl) => {
+export const validateResponses = (
+  questions: any,
+  responses: ResponsesInReduxForm,
+  className: string,
+  intl: IntlShape,
+) => {
   const errors = {};
 
   const responsesError = [];
@@ -203,8 +208,12 @@ export const validateResponses = (questions, responses, className, intl) => {
       } else if (!response || !response.value) {
         responsesError[index] = { value: `${className}.constraints.field_mandatory` };
       }
-    } else if(question.type === 'number' && checkOnlyNumbers(response.value)) {
-        responsesError[index] = { value: `${className}.constraints.please_enter_a_number` };
+    } else if (
+      question.type === 'number' &&
+      typeof response.value === 'string' &&
+      checkOnlyNumbers(response.value)
+    ) {
+      responsesError[index] = { value: `${className}.constraints.please_enter_a_number` };
     }
 
     if (
@@ -228,28 +237,19 @@ export const validateResponses = (questions, responses, className, intl) => {
 
       if (rule.type === 'MIN' && (rule.number && responsesNumber < rule.number)) {
         responsesError[index] = {
-          value: intl.formatMessage(
-            { id: 'reply.constraints.choices_min' },
-            { nb: rule.number },
-          ),
+          value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
         };
       }
 
       if (rule.type === 'MAX' && (rule.number && responsesNumber > rule.number)) {
         responsesError[index] = {
-          value: intl.formatMessage(
-            { id: 'reply.constraints.choices_max' },
-            { nb: rule.number },
-          ),
+          value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
         };
       }
 
       if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
         responsesError[index] = {
-          value: intl.formatMessage(
-            { id: 'reply.constraints.choices_equal' },
-            { nb: rule.number },
-          ),
+          value: intl.formatMessage({ id: 'reply.constraints.choices_equal' }, { nb: rule.number }),
         };
       }
     }
