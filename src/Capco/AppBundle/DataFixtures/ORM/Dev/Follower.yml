@@ -172,3 +172,16 @@ Capco\AppBundle\Entity\Follower:
     user: '@user<current()>'
     followedAt: <dateTimeBetween('-50 days', 'now')>
     notifiedOf: 'ALL'
+
+  follower2{68..79}:
+    opinion: '@opinion69'
+    user: '@user<current()>'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 'ALL'
+
+  # Subscribe to trashed yesterday opinions
+  follower2{80...85}:
+    opinion: '@opinion<numberBetween(74, 79)>'
+    user: '@user<current()>'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 'ALL'

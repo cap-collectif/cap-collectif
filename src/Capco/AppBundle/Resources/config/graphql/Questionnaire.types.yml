@@ -34,4 +34,5 @@ Questionnaire:
       participants:
         type: 'ParticipantConnection!'
         argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireParticipantsResolver", [value, args])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireParticipantsResolver", [value, args])'

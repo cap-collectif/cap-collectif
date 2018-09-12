@@ -515,6 +515,11 @@ class Post implements CommentableInterface, IndexableInterface
         return $this->isPublished;
     }
 
+    public function isCommentable(): bool
+    {
+        return true;
+    }
+
     public function getAbstractOrBeginningOfTheText()
     {
         if ($this->abstract) {

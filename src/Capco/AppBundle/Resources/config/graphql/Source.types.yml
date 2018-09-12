@@ -3,11 +3,11 @@ Source:
   inherits:
     - Node
     - Publishable
-    -  Contribution
-    -  Reportable
-    -  Trashable
-    -  ContributionWithAuthor
-    -  EditableContribution
+    - Contribution
+    - Reportable
+    - Trashable
+    - ContributionWithAuthor
+    - EditableContribution
   config:
     description: 'A source'
     interfaces:
@@ -24,7 +24,7 @@ Source:
         description: 'Identifies the date and time when the object was created.'
       viewerHasReport:
         resolve: '@=value.userHasReport(getUser())'
-      votes: 
+      votes:
         type: SourceVoteConnection
         argsBuilder: 'Relay::Connection'
         resolve:

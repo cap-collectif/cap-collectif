@@ -17,6 +17,10 @@ services:
     arguments:
       $kernelRootDir: '%kernel.root_dir%'
 
+  Capco\AppBundle\Command\FollowerNotifierCommand:
+    autoconfigure: true
+    autowire: true
+
   Capco\AppBundle\Command\CreateCsvFromUsersCommand:
     autoconfigure: true
     autowire: true

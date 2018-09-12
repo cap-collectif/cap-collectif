@@ -156,6 +156,79 @@ class OpinionVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * countPublishedBetweenByOpinionByVote
+     */
+    protected function countPublishedBetweenByOpinionByVote(
+        \DateTime $from,
+        \DateTime $to,
+        string $opinionId,
+        int $voteValue
+    ): int {
+        $query = $this->getPublishedQueryBuilder();
+        $query
+            ->select('COUNT(v.id)')
+            ->andWhere($query->expr()->between('v.publishedAt', ':from', ':to'))
+            ->andWhere('v.opinion = :id')
+            ->andWhere('v.value = :vote')
+            ->setParameters([
+                'from' => $from,
+                'to' => $to,
+                'id' => $opinionId,
+                'vote' => $voteValue,
+            ]);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Get the count of OK vote for the Opinion between date.
+     */
+    public function countOkVotePublishedBetweenByOpinion(
+        \DateTime $from,
+        \DateTime $to,
+        string $opinionId
+    ): int {
+        return $this->countPublishedBetweenByOpinionByVote(
+            $from,
+            $to,
+            $opinionId,
+            OpinionVote::VOTE_OK
+        );
+    }
+
+    /**
+     * Get the count of non OK vote for the Opinion between date.
+     */
+    public function countNOkVotePublishedBetweenByOpinion(
+        \DateTime $from,
+        \DateTime $to,
+        string $opinionId
+    ): int {
+        return $this->countPublishedBetweenByOpinionByVote(
+            $from,
+            $to,
+            $opinionId,
+            OpinionVote::VOTE_NOK
+        );
+    }
+
+    /**
+     * Get the count of mitige vote for the Opinion between date.
+     */
+    public function countMitigeVotePublishedBetweenByOpinion(
+        \DateTime $from,
+        \DateTime $to,
+        string $opinionId
+    ): int {
+        return $this->countPublishedBetweenByOpinionByVote(
+            $from,
+            $to,
+            $opinionId,
+            OpinionVote::VOTE_MITIGE
+        );
+    }
+
     protected function getPublishedQueryBuilder()
     {
         return $this->createQueryBuilder('v')->andWhere('v.published = true');

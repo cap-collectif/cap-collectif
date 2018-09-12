@@ -30,15 +30,13 @@ export class ProposalProjectRow extends Component<Props, State> {
 
   onUnfollowCurrentProject() {
     const { project, viewer } = this.props;
-    const ids = viewer.followingProposals.edges
+    const idsProposal = viewer.followingProposals.edges
       .filter(edge => edge.node.project.id === project.id)
-      .map(edge => {
-        return edge.node.id;
-      });
+      .map(edge => edge.node.__id);
 
     this.setState({ open: !this.state.open }, () => {
       UnfollowProposalMutation.commit({
-        input: { ids },
+        input: { idsProposal },
       }).then(() => {
         return true;
       });

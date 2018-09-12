@@ -427,6 +427,11 @@ class Event implements CommentableInterface, IndexableInterface
         return $this->isEnabled;
     }
 
+    public function isCommentable(): bool
+    {
+        return true;
+    }
+
     public function canContribute(): bool
     {
         return $this->isEnabled;

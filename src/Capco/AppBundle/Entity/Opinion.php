@@ -13,6 +13,7 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -39,6 +40,7 @@ class Opinion implements OpinionContributionInterface
     use ModerableTrait;
     use FollowableTrait;
     use PublishableTrait;
+    use TimestampableTrait;
 
     public static $sortCriterias = [
         'opinion.sort.positions' => 'positions',
@@ -49,11 +51,6 @@ class Opinion implements OpinionContributionInterface
         'opinion.sort.votes' => 'votes',
         'opinion.sort.comments' => 'comments',
     ];
-
-    /**
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    protected $createdAt;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body", "appendices"})
@@ -590,6 +587,17 @@ class Opinion implements OpinionContributionInterface
         --$this->argumentsCount;
 
         return $this;
+    }
+
+    public function isUpdatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
+    {
+        if (property_exists($this, 'updatedAt') && isset($this->updatedAt)) {
+            $diff = $this->updatedAt->diff($to);
+
+            return (array) $diff < (array) $interval;
+        }
+
+        return false;
     }
 
     // ******************* Lifecycle *********************************

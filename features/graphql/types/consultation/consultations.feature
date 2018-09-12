@@ -135,7 +135,7 @@ Scenario: GraphQL client wants to list contributions in a consultation
         "id": "cstep5",
         "title": "Elaboration de la Loi",
         "contributionConnection": {
-          "totalCount": 6,
+          "totalCount": 12,
           "edges": [
             {
               "cursor": @string@,

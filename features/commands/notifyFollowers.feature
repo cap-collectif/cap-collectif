@@ -3,9 +3,9 @@ Feature: Notify Followers Command
 
 @parallel-scenario
 Scenario: "Cron want to notify followers and open an email"
-  Given I run "capco:follower-proposal-notifier"
+  Given I run "capco:follower-notifier"
   Then the command exit code should be 0
-  And 67 mail should be sent
+  And 71 mail should be sent
   And I open mail to "lbrunet@jolicode.com"
   And I should see "admin.fields.highlighted_content.project" in mail
   And I should see "Budget Participatif Rennes" in mail
