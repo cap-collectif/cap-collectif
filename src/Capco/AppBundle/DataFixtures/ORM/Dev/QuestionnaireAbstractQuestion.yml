@@ -27,10 +27,6 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaire2'
     question: '@simplequestion4'
     position: 1
-  qaq24:
-    questionnaire: '@questionnaire2'
-    question: '@simplequestion11'
-    position: 2
   qaq8:
     questionnaire: '@questionnaire3'
     question: '@simplequestion5'
@@ -95,15 +91,23 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaire4'
     question: '@multiplequestion11'
     position: 6
-  qaq25:
+  qaq24:
     questionnaire: '@questionnaire1'
     question: '@sectionquestion1'
     position: 1
-  qaq26:
+  qaq25:
     questionnaire: '@questionnaire1'
     question: '@sectionquestion2'
     position: 3
-  qaq27:
+  qaq26:
     proposalForm: '@proposalform1'
     question: '@sectionquestion3'
     position: 1
+  qaq27:
+    questionnaire: '@questionnaire2'
+    question: '@simplequestion11'
+    position: 2
+  qaq28:
+    questionnaire: '@questionnaire2'
+    question: '@simplequestion12'
+    position: 3
