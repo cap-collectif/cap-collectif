@@ -264,6 +264,7 @@ export default createFragmentContainer(container, {
       questions {
         id
         title
+        position
         private
         required
         description

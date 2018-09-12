@@ -638,6 +638,7 @@ export default createFragmentContainer(container, {
         id
         title
         private
+        position
         required
         helpText
         jumps {

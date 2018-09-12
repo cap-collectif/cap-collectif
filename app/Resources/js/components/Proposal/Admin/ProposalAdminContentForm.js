@@ -583,6 +583,7 @@ export default createFragmentContainer(
         questions {
           id
           title
+          position
           private
           required
           helpText

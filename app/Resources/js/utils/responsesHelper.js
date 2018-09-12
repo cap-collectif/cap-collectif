@@ -14,6 +14,7 @@ import component from '../components/Form/Field';
 type Question = {|
   +id: string,
   +title: string,
+  +position: number,
   +private: boolean,
   +required: boolean,
   +helpText: ?string,

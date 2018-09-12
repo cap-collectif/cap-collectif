@@ -45,6 +45,8 @@ describe('<ProposalForm />', () => {
           helpText: 'Question 1',
           description: null,
           type: 'text',
+          position: 1,
+          jumps: [],
           private: true,
           required: true,
           validationRule: null,

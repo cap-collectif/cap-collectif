@@ -333,6 +333,7 @@ export default createFragmentContainer(
             id
             title
             private
+            position
             required
             helpText
             jumps {

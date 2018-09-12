@@ -86,123 +86,89 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     type: 6
     randomQuestionChoices: false
   multiplequestionHapNoel:
-    id: 24
+    id: 45
     title: Hap ou Noel ?
-    questionChoices: ['@questionchoiceHap', '@questionchoiceNoel']
     required: true
-    type: 3 # radio
+    type: 4 # radio
   multiplequestionFavoriteFleuve:
     id: 25
     title: Votre fleuve préféré
-    questionChoices:
-      [
-        '@questionchoiceLeGange',
-        '@questionchoiceLeNil',
-        '@questionchoiceLaSeine',
-        '@questionchoiceAmazone',
-      ]
     required: true
     type: 4
   multiplequestionHapGange:
     id: 26
     title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
-    questionChoices: ['@questionchoiceHapGangeOui', '@questionchoiceHapGangeNon']
     required: false
     type: 4
   multiplequestionHapCreation:
     id: 25
     title: Par qui Hap a t-il été créé ?
-    questionChoices: ['@questionchoiceHapJvc', '@questionchoiceHapTesla', '@questionchoiceHapCisla']
     type: 4
   multiplequestionIsHapGood:
     id: 26
     title: Hap est-il un homme bon ?
-    questionChoices: ['@questionchoiceHapBonOui', '@questionchoiceHapBonNon']
     type: 4
   multiplequestionNoelFete:
     id: 27
     title: Noel a t-il un rapport avec la fête de Noël ?
-    questionChoices: ['@questionchoiceNoelOui', '@questionchoiceNoelNonBaka']
     type: 4
   multiplequestionNoelHatColor:
     id: 28
     title: De quelle couleur est le chapeau de Noël ?
-    questionChoices:
-      ['@questionchoiceNoelRedHat', '@questionchoiceNoelGreenHat', '@questionchoiceNoelBlueHat']
     type: 4
   multiplequestionMarvelOrDc:
     id: 31
     title: Plutôt Marvel ou DC ?
-    questionChoices: ['@questionchoiceMarvelOrDcMarvel', '@questionchoiceMarvelOrDcDc']
     type: 4
   multiplequestionDcSupermanLike:
     id: 32
     title: T'aimes bien Superman ?
-    questionChoices: ['@questionchoiceDcSupermanYes', '@questionchoiceDcSupermanNo']
     type: 4
   multiplequestionDcBatmanLike:
     id: 33
     title: T'aimes bien Batman ?
-    questionChoices: ['@questionchoiceDcBatmanYes', '@questionchoiceDcBatmanYes2']
     type: 4
   multiplequestionDcSupergirlLike:
     id: 34
     title: T'aimes bien Supergirl ?
-    questionChoices: ['@questionchoiceDcSupergirlYes', '@questionchoiceDcSupergirlNo']
     type: 4
   multiplequestionMarvelIronManLike:
     id: 35
     title: T'aimes bien Iron Man ?
-    questionChoices: ['@questionchoiceMarvelIronManYes', '@questionchoiceMarvelIronManNo']
     type: 4
   multiplequestionMarvelLukeCageLike:
     id: 36
     title: T'aimes bien Luke Cage ?
-    questionChoices:
-      [
-        '@questionchoiceMarvelLukeCageYes',
-        '@questionchoiceMarvelLukeCageYes2',
-        '@questionchoiceMarvelLukeCageYes3',
-      ]
     type: 4
   multiplequestionMarvelThorLike:
     id: 37
     title: T'aimes bien Thor ?
-    questionChoices: ['@questionchoiceMarvelThorYes', '@questionchoiceMarvelThorNo']
     type: 4
   multiplequestionEndConditionel:
     id: 38
     title: C'est la fin mais j'affiche quand même des choix
-    questionChoices: ['@questionchoiceEndConditionOk', '@questionchoiceEndConditionOk2']
     type: 4
   multiplequestionHapNotGoodHowDareYou:
     id: 39
     title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
-    questionChoices:
-      ['@questionchoiceHapNotGoodHowDareYouOki', '@questionchoiceHapNotGoodHowDareYouGpaslu']
     type: 4
   ljMultipleQuestionRadio:
     id: 40
     title: Ceci est-il une question de type Radio ?
-    questionChoices: ['@ljQuestionChoiceIsARadio', '@ljQuestionChoiceIsntARadio']
     type: 3
   ljMultipleQuestionSelect:
     id: 41
     title: Ceci est-il une question de type Select ?
-    questionChoices: ['@ljQuestionChoiceIsASelect', '@ljQuestionChoiceIsntASelect']
     type: 4
   ljMultipleQuestionButton:
     id: 42
     title: Ceci est-il une question de type Boutton ?
-    questionChoices: ['@ljQuestionChoiceIsAButton', '@ljQuestionChoiceIsntAButton']
     type: 8
   ljMultipleQuestionCheckbox:
     id: 43
     title: Ceci est-il une question de type Checkbox ?
-    questionChoices: ['@ljQuestionChoiceIsACheckbox', '@ljQuestionChoiceIsntACheckbox']
     type: 5
   ljMultipleQuestionRanking:
     id: 44
     title: Ceci est-il une question de type Classement ?
-    questionChoices: ['@ljQuestionChoiceIsARanking', '@ljQuestionChoiceIsntARanking']
     type: 6
