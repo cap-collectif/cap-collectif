@@ -12,7 +12,7 @@ Capco\AppBundle\Entity\SiteColor:
   SiteColor3:
     keyname: color.header.bg
     category: settings.appearance
-    value: '#0058c5'
+    value: '#16a085'
     position: 3
   SiteColor41:
     keyname: color.header.title
@@ -22,7 +22,7 @@ Capco\AppBundle\Entity\SiteColor:
   SiteColor42:
     keyname: color.home.bg
     category: pages.homepage
-    value: '#0058c5'
+    value: '#16a085'
     position: 1
   SiteColor43:
     keyname: color.home.title
@@ -37,7 +37,7 @@ Capco\AppBundle\Entity\SiteColor:
   SiteColor5:
     keyname: color.header2.bg
     category: pages.homepage
-    value: '#0070ff'
+    value: '#1abc9c'
     position: 5
   SiteColor6:
     keyname: color.header2.text
@@ -52,7 +52,7 @@ Capco\AppBundle\Entity\SiteColor:
   SiteColor8:
     keyname: color.btn.bg
     category: pages.homepage
-    value: '#0070ff'
+    value: '#1abc9c'
     position: 8
   SiteColor9:
     keyname: color.btn.text
@@ -66,12 +66,12 @@ Capco\AppBundle\Entity\SiteColor:
   SiteColor11:
     keyname: color.h2
     category: settings.appearance
-    value: '#0058c5'
+    value: '#16a085'
     position: 11
   SiteColor12:
     keyname: color.h3
     category: settings.appearance
-    value: '#0070ff'
+    value: '#1abc9c'
     position: 12
   SiteColor13:
     keyname: color.h4
@@ -88,7 +88,7 @@ Capco\AppBundle\Entity\SiteColor:
   SiteColor16:
     keyname: color.btn.primary.bg
     category: settings.appearance
-    value: '#0070ff'
+    value: '#1abc9c'
     position: 16
   SiteColor17:
     keyname: color.btn.primary.text
@@ -103,17 +103,17 @@ Capco\AppBundle\Entity\SiteColor:
   SiteColor172:
     keyname: color.btn.ghost.base
     category: settings.appearance
-    value: '#0070ff'
+    value: '#1abc9c'
     position: 17
   SiteColor18:
     keyname: color.link.default
     category: settings.appearance
-    value: '#0058c5'
+    value: '#16a085'
     position: 18
   SiteColor19:
     keyname: color.link.hover
     category: settings.appearance
-    value: '#0070ff'
+    value: '#1abc9c'
     position: 19
   SiteColor20:
     keyname: color.footer.text
@@ -123,7 +123,7 @@ Capco\AppBundle\Entity\SiteColor:
   SiteColor21:
     keyname: color.footer.bg
     category: pages.footer
-    value: '#0070ff'
+    value: '#1abc9c'
     position: 21
   SiteColor22:
     keyname: color.footer2.text
@@ -133,7 +133,7 @@ Capco\AppBundle\Entity\SiteColor:
   SiteColor23:
     keyname: color.footer2.bg
     category: pages.footer
-    value: '#0058c5'
+    value: '#16a085'
     position: 23
   SiteColor24:
     keyname: color.section.bg

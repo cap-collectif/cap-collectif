@@ -24,7 +24,7 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
       >
         <div
           className="bg-vip comment__descripton"
-          id="comment-proposalComment1"
+          id="comment_proposalComment1"
         >
           <div
             className="opinion__data"
@@ -188,7 +188,7 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
       >
         <div
           className="bg-vip comment__descripton"
-          id="comment-proposalComment1"
+          id="comment_proposalComment1"
         >
           <div
             className="opinion__data"
@@ -352,7 +352,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
       >
         <div
           className="bg-vip comment__descripton"
-          id="comment-proposalComment1"
+          id="comment_proposalComment1"
         >
           <div
             className="opinion__data"
@@ -531,7 +531,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
       >
         <div
           className="bg-vip comment__descripton"
-          id="comment-proposalComment1"
+          id="comment_proposalComment1"
         >
           <div
             className="opinion__data"
@@ -712,7 +712,7 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
       >
         <div
           className="bg-vip comment__descripton highlighted-comment"
-          id="comment-comment1"
+          id="comment_comment1"
         >
           <div
             className="opinion__data"
@@ -890,7 +890,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
       >
         <div
           className="bg-vip comment__descripton"
-          id="comment-comment2"
+          id="comment_comment2"
         >
           <div
             className="opinion__data"

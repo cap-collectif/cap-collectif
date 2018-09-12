@@ -12,22 +12,17 @@ class LoadProdDataCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('capco:load-prod-data')
+        $this
+            ->setName('capco:load-prod-data')
             ->setDescription('A bunch of fixtures to start using the application')
-            ->addOption(
-                'force',
-                false,
-                InputOption::VALUE_NONE,
-                'set this option to force the rebuild'
-            );
+            ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the rebuild')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getOption('force')) {
-            $output->writeln(
-                'This command will add some demo data in your project, if you\'re sure that you want those data, go ahead and add --force'
-            );
+            $output->writeln('This command will add some demo data in your project, if you\'re sure that you want those data, go ahead and add --force');
             $output->writeln('Please set the --force option to run this command');
 
             return;
@@ -43,7 +38,7 @@ class LoadProdDataCommand extends ContainerAwareCommand
     {
         $command = $this->getApplication()->find('hautelook_alice:doctrine:fixtures:load');
         $input = new ArrayInput([
-            '-e' => 'prod',
+          '-e' => 'prod',
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);

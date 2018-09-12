@@ -2,7 +2,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -280,49 +279,5 @@ class ArgumentRepository extends EntityRepository
         }
 
         return $qb;
-    }
-
-    protected function countPublishedBetweenByOpinion(
-        \DateTime $from,
-        \DateTime $to,
-        string $opinionId,
-        int $type
-    ): int {
-        $qb = $this->getIsEnabledQueryBuilder();
-        $qb
-            ->select('COUNT(a.id)')
-            ->andWhere($qb->expr()->between('a.publishedAt', ':from', ':to'))
-            ->andWhere('a.opinion = :id')
-            ->andWhere('a.type = :type')
-            ->orderBy('a.publishedAt', 'DESC')
-            ->setParameters([
-                'from' => $from,
-                'to' => $to,
-                'id' => $opinionId,
-                'type' => $type,
-            ]);
-
-        return (int) $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function countAgainstPublishedBetweenByOpinion(
-        \DateTime $from,
-        \DateTime $to,
-        string $opinionId
-    ): int {
-        return $this->countPublishedBetweenByOpinion(
-            $from,
-            $to,
-            $opinionId,
-            Argument::TYPE_AGAINST
-        );
-    }
-
-    public function countForPublishedBetweenByOpinion(
-        \DateTime $from,
-        \DateTime $to,
-        string $opinionId
-    ): int {
-        return $this->countPublishedBetweenByOpinion($from, $to, $opinionId, Argument::TYPE_FOR);
     }
 }

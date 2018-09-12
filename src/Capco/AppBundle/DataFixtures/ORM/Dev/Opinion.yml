@@ -235,34 +235,3 @@ Capco\AppBundle\Entity\Opinion:
       <p><text(300)></p>
     Author: '@user5'
     OpinionType: '@opinionType12'
-
-  opinion{68...74}:
-    id: 'opinion<current()>'
-    step: '@cstep5'
-    createdAt: <(new \DateTime('yesterday'))>
-    updatedAt: <(new \DateTime('yesterday'))>
-    publishedAt: <(new \DateTime('yesterday'))>
-    title: 'Opinion d hier <current()>'
-    body: |
-      <p><text(100)></p>
-      <p><text(300)></p>
-    Author: '@user5'
-    OpinionType: '@opinionType6'
-    position: 1
-
-  opinion{74...80}:
-    id: 'opinion<current()>'
-    step: '@cstep5'
-    createdAt: <(new \DateTime('-12 days'))>
-    updatedAt: <(new \DateTime('-12 days'))>
-    publishedAt: <(new \DateTime('-12 days'))>
-    trashedAt: <(new \DateTime('yesterday'))>
-    trashedStatus: 'visible'
-    trashedReason: reporting.status.spam
-    title: 'Opinion mis a la corbeille hier <current()>'
-    body: |
-      <p><text(100)></p>
-      <p><text(300)></p>
-    Author: '@user1'
-    OpinionType: '@opinionType5'
-    published: 1

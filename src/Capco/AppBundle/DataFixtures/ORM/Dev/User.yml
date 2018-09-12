@@ -337,20 +337,3 @@ Capco\UserBundle\Entity\User:
     roles:
       - 'ROLE_USER'
     enabled: true
-
-  user519:
-    id: 'user519'
-    username: Juan
-    firstname: Jean
-    lastname: Treibert
-    email: jean@cap-collectif.com
-    userType: '@UserType1'
-    plainPassword: toto
-    roles:
-      - 'ROLE_SUPER_ADMIN'
-    media: '@MediaUser1'
-    biography:
-      Yrf pungf qbzvarebag ovragbg yr zbaqr.
-    vip: true
-    emailConfirmationSentAt: '2018-09-05 17:14:00'
-    enabled: true

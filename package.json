@@ -168,7 +168,7 @@
     "exports-loader": "^0.6.3",
     "fancybox": "^3.0.0",
     "file-loader": "^1.1.11",
-    "flow-bin": "^0.80.0",
+    "flow-bin": "^0.75.0",
     "flow-coverage-report": "^0.5.0",
     "flux": "^3.1.2",
     "gherkin-lint": "^2.8.0",

@@ -130,19 +130,19 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                     id="proposal-follow-btn-minimal-proposal1"
                     inline={true}
                     name="minimal"
-                    onChange={[Function]}
+                    onClick={[Function]}
                     title=""
                   >
                     <b>
                       <FormattedMessage
-                        id="essential"
+                        id="the-progress"
                         values={Object {}}
                       />
                     </b>
                      
                     <br />
                     <FormattedMessage
-                      id="updates-and-news"
+                      id="list-of-progress-notifications"
                       values={Object {}}
                     />
                   </Radio>
@@ -159,20 +159,15 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                     id="proposal-follow-btn-essential-proposal1"
                     inline={false}
                     name="essential"
-                    onChange={[Function]}
+                    onClick={[Function]}
                     title=""
                   >
                     <b>
                       <FormattedMessage
-                        id="intermediate"
+                        id="progress-and-comments"
                         values={Object {}}
                       />
                     </b>
-                    <br />
-                    <FormattedMessage
-                      id="updates-news-and-new-contributions"
-                      values={Object {}}
-                    />
                   </Radio>
                 </ListGroupItem>
                 <ListGroupItem
@@ -187,18 +182,18 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                     id="proposal-follow-btn-all-proposal1"
                     inline={false}
                     name="all"
-                    onChange={[Function]}
+                    onClick={[Function]}
                     title=""
                   >
                     <b>
                       <FormattedMessage
-                        id="complete"
+                        id="all-activities"
                         values={Object {}}
                       />
                     </b>
                     <br />
                     <FormattedMessage
-                      id="updates-news-new-contributions-votes-and-subscriptions"
+                      id="list-of-activity-notifications"
                       values={Object {}}
                     />
                   </Radio>

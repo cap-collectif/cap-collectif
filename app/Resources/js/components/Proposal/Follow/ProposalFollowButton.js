@@ -117,14 +117,14 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                               proposal.viewerFollowingConfiguration === 'MINIMAL' ? 'checked' : ''
                             }
                             inline
-                            onChange={() => {
+                            onClick={() => {
                               return this.changeFollowType(proposal, 'MINIMAL');
                             }}>
                             <b>
-                              <FormattedMessage id="essential" />
+                              <FormattedMessage id="the-progress" />
                             </b>{' '}
                             <br />
-                            <FormattedMessage id="updates-and-news" />
+                            <FormattedMessage id="list-of-progress-notifications" />
                           </Radio>
                         </ListGroupItem>
                         <ListGroupItem>
@@ -135,14 +135,12 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             checked={
                               proposal.viewerFollowingConfiguration === 'ESSENTIAL' ? 'checked' : ''
                             }
-                            onChange={() => {
+                            onClick={() => {
                               return this.changeFollowType(proposal, 'ESSENTIAL');
                             }}>
                             <b>
-                              <FormattedMessage id="intermediate" />
+                              <FormattedMessage id="progress-and-comments" />
                             </b>
-                            <br />
-                            <FormattedMessage id="updates-news-and-new-contributions" />
                           </Radio>
                         </ListGroupItem>
                         <ListGroupItem>
@@ -153,14 +151,14 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             checked={
                               proposal.viewerFollowingConfiguration === 'ALL' ? 'checked' : ''
                             }
-                            onChange={() => {
+                            onClick={() => {
                               return this.changeFollowType(proposal, 'ALL');
                             }}>
                             <b>
-                              <FormattedMessage id="complete" />
+                              <FormattedMessage id="all-activities" />
                             </b>
                             <br />
-                            <FormattedMessage id="updates-news-new-contributions-votes-and-subscriptions" />
+                            <FormattedMessage id="list-of-activity-notifications" />
                           </Radio>
                         </ListGroupItem>
                       </ListGroup>

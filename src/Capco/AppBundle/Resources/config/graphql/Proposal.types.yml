@@ -169,8 +169,7 @@ Proposal:
         type: 'UserConnection!'
         args:
           orderBy:
-            type: 'FollowerOrder'
-            defaultValue: { field: FOLLOWED_AT, direction: DESC }
+            type: 'String'
             description: 'Ordering options for followers returning from the connection'
           after:
             type: 'String'

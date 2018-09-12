@@ -4,7 +4,7 @@ Capco\MediaBundle\Entity\Media:
     binaryContent: logo.png
     name: Logo
   header:
-    binaryContent: header_prod.jpg
+    binaryContent: header.jpg
     name: Header
   picto:
     binaryContent: picto.png
@@ -37,13 +37,3 @@ Capco\MediaBundle\Entity\Media:
   MediaVotesBar:
     binaryContent: votes_bar_image.png
     name: Image de la barre de votes
-  # projects
-  MediaProject1:
-    binaryContent: project-1.jpg
-    name: Titre du média
-  MediaProject2:
-    binaryContent: project-2.jpg
-    name: Titre du média
-  MediaProject3:
-    binaryContent: project-3.jpg
-    name: Titre du média

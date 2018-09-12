@@ -11,14 +11,12 @@ exports[`<ProjectPreview /> should render correctly project with participative s
   xs={12}
 >
   <CardContainer
-    className="project-preview"
-    id="project-preview-project1"
+    id="project-preview"
   >
     <ProjectCover
       project={
         Object {
           "hasParticipativeStep": true,
-          "id": "project1",
           "title": "project with participative step",
         }
       }
@@ -27,7 +25,6 @@ exports[`<ProjectPreview /> should render correctly project with participative s
       project={
         Object {
           "hasParticipativeStep": true,
-          "id": "project1",
           "title": "project with participative step",
         }
       }
@@ -47,14 +44,12 @@ exports[`<ProjectPreview /> should render correctly project without participativ
   xs={12}
 >
   <CardContainer
-    className="project-preview"
-    id="project-preview-project1"
+    id="project-preview"
   >
     <ProjectType
       project={
         Object {
           "hasParticipativeStep": false,
-          "id": "project1",
           "projectType": Object {
             "color": "#337ab7",
             "title": "presentation",
@@ -67,7 +62,6 @@ exports[`<ProjectPreview /> should render correctly project without participativ
       project={
         Object {
           "hasParticipativeStep": false,
-          "id": "project1",
           "projectType": Object {
             "color": "#337ab7",
             "title": "presentation",
@@ -80,7 +74,6 @@ exports[`<ProjectPreview /> should render correctly project without participativ
       project={
         Object {
           "hasParticipativeStep": false,
-          "id": "project1",
           "projectType": Object {
             "color": "#337ab7",
             "title": "presentation",
@@ -104,14 +97,12 @@ exports[`<ProjectPreview /> should render correctly project without participativ
   xs={12}
 >
   <CardContainer
-    className="project-preview"
-    id="project-preview-project1"
+    id="project-preview"
   >
     <ProjectType
       project={
         Object {
           "hasParticipativeStep": false,
-          "id": "project1",
           "projectType": Object {
             "color": "#337ab7",
             "title": "presentation",
@@ -124,7 +115,6 @@ exports[`<ProjectPreview /> should render correctly project without participativ
       project={
         Object {
           "hasParticipativeStep": false,
-          "id": "project1",
           "projectType": Object {
             "color": "#337ab7",
             "title": "presentation",
@@ -137,7 +127,6 @@ exports[`<ProjectPreview /> should render correctly project without participativ
       project={
         Object {
           "hasParticipativeStep": false,
-          "id": "project1",
           "projectType": Object {
             "color": "#337ab7",
             "title": "presentation",

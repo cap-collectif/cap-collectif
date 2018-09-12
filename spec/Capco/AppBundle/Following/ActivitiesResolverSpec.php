@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Routing\Router;
 
-class ProposalActivitiesResolverSpec extends ObjectBehavior
+class ActivitiesResolverSpec extends ObjectBehavior
 {
     function let(
         FollowerRepository $followerRepository,
@@ -62,26 +62,31 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
             $router
         );
 
-        $this->getActivitiesByRelativeTime()->shouldBe([]);
+        $this->getYesterdayProposalActivities()->shouldBe([]);
 
         $proposalForm->getProposals()->willReturn(new ArrayCollection([]));
-        $proposalFormRepository->findAll()->willReturn([$proposalForm]);
-        $this->getActivitiesByRelativeTime()->shouldBe([]);
+        $proposalFormRepository->findAll()->willReturn(
+            [
+                $proposalForm,
+            ]
+        );
+        $this->getYesterdayProposalActivities()->shouldBe([]);
+
     }
-    //
-    //    function it_can_resolver_yesterday_activities_2(ProposalForm $proposalForm,Proposal $proposal, FollowerRepository $followerRepository, ProposalRepository $proposalRepository, ProposalFormRepository $proposalFormRepository, Logger $logger, Router $router)
-    //    {
-    //        $proposalRepository->countProposalCommentsCreatedBetween()->willReturn(0);
-    //        $proposal->getStep()->willReturn(null);
-    //        $proposal->getId()->willReturn('proposal1');
-    //        $proposalForm->getProposals()->willReturn(new ArrayCollection([$proposal]));
-    //        $proposalFormRepository->findAll()->willReturn([
-    //            $proposalForm
-    //        ]);
-    //        $this->beConstructedWith($followerRepository, $proposalRepository, $proposalFormRepository, $logger, $router);
-    //
-    //        $this->getYesterdayActivities()->shouldBe([]);
-    //    }
+//
+//    function it_can_resolver_yesterday_activities_2(ProposalForm $proposalForm,Proposal $proposal, FollowerRepository $followerRepository, ProposalRepository $proposalRepository, ProposalFormRepository $proposalFormRepository, Logger $logger, Router $router)
+//    {
+//        $proposalRepository->countProposalCommentsCreatedBetween()->willReturn(0);
+//        $proposal->getStep()->willReturn(null);
+//        $proposal->getId()->willReturn('proposal1');
+//        $proposalForm->getProposals()->willReturn(new ArrayCollection([$proposal]));
+//        $proposalFormRepository->findAll()->willReturn([
+//            $proposalForm
+//        ]);
+//        $this->beConstructedWith($followerRepository, $proposalRepository, $proposalFormRepository, $logger, $router);
+//
+//        $this->getYesterdayProposalActivities()->shouldBe([]);
+//    }
 
     function it_should_matching_user_without_project_activities(UserActivity $userActivity)
     {
@@ -89,16 +94,14 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
         $userActivity->hasUserProject()->willReturn(false);
         $userActivity->hasProposal()->willReturn(false);
         $userActivity->getUserProposals()->willReturn([]);
-        $this->getMatchingActivitiesByUserId(
-            ['user1' => $userActivity],
-            ['proposal1' => []]
-        )->shouldReturn([]);
+        $this->getMatchingActivitiesByUserId(['user1' => $userActivity], ['proposal1' => []])->shouldReturn([]);
     }
 
     function it_should_not_matching_activities_with_empty_parameters()
     {
         $this->getMatchingActivitiesByUserId([], [])->shouldReturn([]);
     }
+
 
     function it_matching_activities_by_user(UserActivity $userActivity)
     {
@@ -122,14 +125,17 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
                 'comments' => 0,
                 'votes' => 0,
                 'lastStep' => false,
-            ],
+            ]
         ];
-        $userProposalsEmpty = [];
+        $userProposalsEmpty = [
+        ];
 
         $userProject = [
-            'proposals' => [$userProposalsComplete],
-            'projectTitle' => 'Project title',
-            'projectType' => 'project type',
+          'proposals'=> [
+            $userProposalsComplete
+          ],
+          'projectTitle'=> 'Project title',
+          'projectType'=> 'project type',
         ];
         $userActivity->setUserProposals(Argument::type('array'))->willReturn($userActivity);
         $userActivity->hasUserProject()->willReturn(true);
@@ -157,9 +163,8 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
         )->shouldReturn(['user1' => $userActivity]);
     }
 
-    function it_matching_activities_by_user_without_proposal_in_user_project(
-        UserActivity $userActivity
-    ) {
+    function it_matching_activities_by_user_without_proposal_in_user_project(UserActivity $userActivity)
+    {
         $userProposalsComplete = [
             'proposal1' => [
                 'projectId' => 'project1',
@@ -176,9 +181,11 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
         ];
 
         $userProject = [
-            'proposals' => [],
-            'projectTitle' => 'Project title',
-            'projectType' => 'project type',
+            'proposals'=> [
+
+            ],
+            'projectTitle'=> 'Project title',
+            'projectType'=> 'project type',
         ];
         $userActivity->setUserProposals(Argument::type('array'))->willReturn($userActivity);
         $userActivity->hasUserProject()->willReturn(true);
@@ -192,5 +199,6 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
             ['user1' => $userActivity],
             ['proposal1' => ['countActivities' => 1, 'projectId' => 'project1']]
         )->shouldReturn(['user1' => $userActivity]);
+
     }
 }

@@ -13,11 +13,12 @@ import type { Comment_comment } from './__generated__/Comment_comment.graphql';
 
 type Props = {
   comment: Comment_comment,
+  isHighlighted?: ?boolean,
 };
 
 export class CommentAnswer extends React.Component<Props> {
   render() {
-    const { comment } = this.props;
+    const { comment, isHighlighted } = this.props;
     const classes = classNames({
       opinion: true,
       'opinion--comment': true,
@@ -25,6 +26,7 @@ export class CommentAnswer extends React.Component<Props> {
     const detailClasses = classNames({
       'bg-vip': comment.author && comment.author.vip,
       comment__description: true,
+      'highlighted-comment': isHighlighted,
     });
 
     return (
@@ -33,7 +35,7 @@ export class CommentAnswer extends React.Component<Props> {
           <div className="opinion__content">
             <UserAvatar user={comment.author} />
             <div className="comment__detail">
-              <div className={detailClasses}>
+              <div className={detailClasses} id={`comment_${comment.id}`}>
                 <div className="opinion__data">
                   {/* $FlowFixMe $refType */}
                   <CommentInfos comment={comment} />

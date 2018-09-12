@@ -7,7 +7,6 @@ import { ProjectPreview } from './ProjectPreview';
 
 const propsNotParticipativeSteps = {
   project: {
-    id: 'project1',
     hasParticipativeStep: false,
     title: 'project without participative step',
     projectType: { title: 'presentation', color: '#337ab7' },
@@ -17,7 +16,6 @@ const propsNotParticipativeSteps = {
 
 const propsNotParticipativeSteps2 = {
   project: {
-    id: 'project1',
     hasParticipativeStep: false,
     title: 'project without participative step 2',
     projectType: { title: 'presentation', color: '#337ab7' },
@@ -27,7 +25,6 @@ const propsNotParticipativeSteps2 = {
 
 const propsParticipativeSteps = {
   project: {
-    id: 'project1',
     hasParticipativeStep: true,
     title: 'project with participative step',
   },

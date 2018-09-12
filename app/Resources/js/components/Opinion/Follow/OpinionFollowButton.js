@@ -114,7 +114,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
                               opinion.viewerFollowingConfiguration === 'MINIMAL' ? 'checked' : ''
                             }
                             inline
-                            onChange={() => {
+                            onClick={() => {
                               return this.changeFollowType(opinion, 'MINIMAL');
                             }}>
                             <b>
@@ -132,7 +132,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
                             checked={
                               opinion.viewerFollowingConfiguration === 'ESSENTIAL' ? 'checked' : ''
                             }
-                            onChange={() => {
+                            onClick={() => {
                               return this.changeFollowType(opinion, 'ESSENTIAL');
                             }}>
                             <b>
@@ -150,7 +150,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
                             checked={
                               opinion.viewerFollowingConfiguration === 'ALL' ? 'checked' : ''
                             }
-                            onChange={() => {
+                            onClick={() => {
                               return this.changeFollowType(opinion, 'ALL');
                             }}>
                             <b>

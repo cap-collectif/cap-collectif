@@ -139,7 +139,7 @@ exports[`<OpinionFollowButton /> should render a button to unfollow a opinion 1`
                     id="opinion-follow-btn-minimal-opinion1"
                     inline={true}
                     name="minimal"
-                    onChange={[Function]}
+                    onClick={[Function]}
                     title=""
                   >
                     <b>
@@ -168,7 +168,7 @@ exports[`<OpinionFollowButton /> should render a button to unfollow a opinion 1`
                     id="opinion-follow-btn-essential-opinion1"
                     inline={false}
                     name="essential"
-                    onChange={[Function]}
+                    onClick={[Function]}
                     title=""
                   >
                     <b>
@@ -196,7 +196,7 @@ exports[`<OpinionFollowButton /> should render a button to unfollow a opinion 1`
                     id="opinion-follow-btn-all-opinion1"
                     inline={false}
                     name="all"
-                    onChange={[Function]}
+                    onClick={[Function]}
                     title=""
                   >
                     <b>

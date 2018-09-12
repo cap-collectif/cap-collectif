@@ -14,9 +14,6 @@ const mutation = graphql`
       proposal {
         id
         ...ProposalFollowButton_proposal
-        followers(first: 0) {
-          totalCount
-        }
       }
       unfollowerId
     }
@@ -26,6 +23,10 @@ const mutation = graphql`
 const decrementFollowerCount = (proposalId: string, store: RecordSourceSelectorProxy) => {
   const proposalProxy = store.get(proposalId);
   if (!proposalProxy) return;
+  const allFollowersProxy = proposalProxy.getLinkedRecord('followers', { first: 0 });
+  if (!allFollowersProxy) return;
+  const previousValue = parseInt(allFollowersProxy.getValue('totalCount'), 10);
+  allFollowersProxy.setValue(previousValue - 1, 'totalCount');
 
   const connection = ConnectionHandler.getConnection(
     proposalProxy,
@@ -44,15 +45,7 @@ const commit = (
     variables,
     configs: [
       {
-        type: 'RANGE_DELETE',
-        // $FlowFixMe
-        parentID: variables.input.proposalId || variables.input.idsProposal[0] || '',
-        connectionKeys: [
-          {
-            key: 'ProposalPageFollowers_followers',
-          },
-        ],
-        pathToConnection: ['proposal', 'followers'],
+        type: 'NODE_DELETE',
         deletedIDFieldName: 'unfollowerId',
       },
     ],

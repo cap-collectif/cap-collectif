@@ -29,7 +29,7 @@ export class CommentListView extends React.Component<Props, State> {
   componentDidMount() {
     if (this.props.commentable) {
       if (location.hash.length > 0) {
-        this.setState({ highlightedComment: location.hash.split('-')[1] }); // eslint-disable-line
+        this.setState({ highlightedComment: location.hash.split('_')[1] }); // eslint-disable-line
         setTimeout(() => {
           scrollToAnchor('#comments-section-load-more');
         }, 20);

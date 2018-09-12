@@ -112,11 +112,6 @@ Opinion:
       followers:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionFollowersConnection", [value, args])'
-        argsBuilder: 'Relay::Connection'
-        args:
-          orderBy:
-            type: 'FollowerOrder'
-            defaultValue: { field: FOLLOWED_AT, direction: DESC }
       viewerFollowingConfiguration:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionResolver", [value, getUser()])'

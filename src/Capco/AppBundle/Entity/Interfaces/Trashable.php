@@ -11,6 +11,4 @@ interface Trashable
     public function getTrashedAt(): ?\DateTime;
 
     public function getTrashedReason(): ?string;
-
-    public function isTrashedInLastInterval(\DateTime $to, \DateInterval $interval): bool;
 }

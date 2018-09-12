@@ -12,22 +12,17 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('capco:load-benchmark-data')
+        $this
+            ->setName('capco:load-benchmark-data')
             ->setDescription('A bunch of fixtures to benchmark the application')
-            ->addOption(
-                'force',
-                false,
-                InputOption::VALUE_NONE,
-                'set the --force option to run this command'
-            );
+            ->addOption('force', false, InputOption::VALUE_NONE, 'set the --force option to run this command')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getOption('force')) {
-            $output->writeln(
-                'This command will clear your databse and populate it with lots of data, if you\'re sure that you want those data, go ahead and add --force'
-            );
+            $output->writeln('This command will clear your databse and populate it with lots of data, if you\'re sure that you want those data, go ahead and add --force');
             $output->writeln('Please set the --force option to run this command');
 
             return;
@@ -55,6 +50,7 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
         $command = $this->getApplication()->find('capco:reset-feature-flags');
         $input = new ArrayInput([
             '--force' => true,
+            '',
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);

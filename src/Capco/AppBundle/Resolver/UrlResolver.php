@@ -236,7 +236,7 @@ class UrlResolver
         if ($object instanceof Comment && $object->getRelatedObject()) {
             return (
                 $this->getObjectUrl($object->getRelatedObject(), $absolute) .
-                '#comment-' .
+                '#comment_' .
                 $object->getId()
             );
         }

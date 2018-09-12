@@ -34,7 +34,7 @@
             <ul>
                 {% for footerLink in footerLinks %}
                     <li>
-                        <a href="{{ menu_url(footerLink) }}">
+                        <a href="{{ menu_url(footerLink.link) }}">
                             {{ footerLink.title }}
                         </a>
                         {% if not loop.last %} |{% endif %}

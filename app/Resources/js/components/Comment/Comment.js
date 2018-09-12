@@ -52,7 +52,7 @@ export class Comment extends React.Component<Props, State> {
           <div className="opinion__content">
             <UserAvatar user={comment.author} />
             <div className="comment__detail">
-              <div className={detailClasses} id={`comment-${comment.id}`}>
+              <div className={detailClasses} id={`comment_${comment.id}`}>
                 <div className="opinion__data">
                   {/* $FlowFixMe $refType */}
                   <CommentInfos comment={comment} />

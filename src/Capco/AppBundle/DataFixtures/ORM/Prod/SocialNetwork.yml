@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\SocialNetwork:
 
   SocialNetwork2:
     title: Twitter
-    link: https://twitter.com
+    link: https://twitter.com/CapCollectif
     position: 2
     isEnabled: true
     media: '@MediaTwitter'
@@ -36,7 +36,7 @@ Capco\AppBundle\Entity\SocialNetwork:
 
   SocialNetwork6:
     title: Google
-    link: https://plus.google.com/
+    link: ***REMOVED***
     position: 6
     isEnabled: true
     media: '@MediaGooglePlus'
@@ -50,7 +50,7 @@ Capco\AppBundle\Entity\SocialNetwork:
 
   SocialNetwork8:
     title: Instagram
-    link: https://www.instagram.com/
+    link: https://www.instagram.com/coucou.capco/
     position: 7
     isEnabled: true
     media: '@MediaInstagram'

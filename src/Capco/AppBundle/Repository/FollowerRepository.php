@@ -80,16 +80,4 @@ class FollowerRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-
-    /**
-     * Find All the followers with published opinion.
-     */
-    public function findAllWithOpinion(): array
-    {
-        $qd = $this->createQueryBuilder('f')
-            ->leftJoin('f.opinion', 'o')
-            ->andWhere('f.opinion IS NOT NULL')
-            ->andWhere('o.published = 1');
-        return $qd->getQuery()->getResult();
-    }
 }

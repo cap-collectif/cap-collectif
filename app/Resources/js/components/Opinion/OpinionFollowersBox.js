@@ -63,7 +63,14 @@ export default createPaginationContainer(
         edges {
           cursor
           node {
-            ...UserBox_user
+            id
+            show_url
+            displayName
+            username
+            contributionsCount
+            media {
+              url
+            }
           }
         }
         pageInfo {

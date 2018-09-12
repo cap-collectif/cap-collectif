@@ -69,19 +69,4 @@ trait TrashableTrait
 
         return $this;
     }
-
-    public function isTrashedInLastInterval(\DateTime $to, \DateInterval $interval): bool
-    {
-        if ($this->isTrashed()) {
-            $diff = $this->trashedAt->diff($to);
-
-            /**
-             * (array) to fix bug on DateInterval comparison.
-             * @see http://www.fabienmoreau.com/php/comparer-objets-dateinterval-en-php-5
-             */
-            return (array) $diff < (array) $interval;
-        }
-
-        return false;
-    }
 }

@@ -24,14 +24,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/SiteImage.yml',
             __DIR__ . '/SiteColor.yml',
             __DIR__ . '/Section.yml',
-            __DIR__ . '/PresentationStep.yml',
-            __DIR__ . '/OtherStep.yml',
-            __DIR__ . '/ProjectAbstractStep.yml',
             __DIR__ . '/ProjectType.yml',
-            __DIR__ . '/Project.yml',
-            __DIR__ . '/Post.yml',
-            __DIR__ . '/Event.yml',
-            __DIR__ . '/HighlightedContent.yml',
         ];
     }
 }

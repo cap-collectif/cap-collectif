@@ -9,13 +9,27 @@ type Props = {
   comment: CommentAnswers_comment,
 };
 
+type State = {
+  highlightedComment: ?string,
+};
+
 const classes = classNames({
   'media-list': true,
   opinion__list: true,
   'comment-answers': true,
 });
 
-class CommentAnswers extends React.Component<Props> {
+class CommentAnswers extends React.Component<Props, State> {
+  state = {
+    highlightedComment: null,
+  };
+
+  componentDidMount() {
+    if (location.hash.length > 0) {
+      this.setState({ highlightedComment: location.hash.split('_')[1] }); // eslint-disable-line
+    }
+  }
+
   render() {
     const { comment } = this.props;
     if (!comment.answers || comment.answers.totalCount === 0) {
@@ -31,8 +45,14 @@ class CommentAnswers extends React.Component<Props> {
             .map(edge => edge.node)
             .filter(Boolean)
             .map(node => {
-              // $FlowFixMe
-              return <CommentAnswer key={node.id} comment={node} />;
+              return (
+                // $FlowFixMe
+                <CommentAnswer
+                  key={node.id}
+                  comment={node}
+                  isHighlighted={node.id === this.state.highlightedComment}
+                />
+              );
             })}
       </ul>
     );

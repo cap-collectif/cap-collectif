@@ -44,14 +44,6 @@ def static_analysis():
 def phpspec():
     "Run PHP Unit Tests"
     env.service_command('phpenmod xdebug', 'application', env.www_app, 'root')
-    env.service_command('php -d memory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
-    env.service_command('phpdismod xdebug', 'application', env.www_app, 'root')
-
-
-@task(environments=['local', 'ci'])
-def phpspec_coverage():
-    "Run PHP Unit Tests"
-    env.service_command('phpenmod xdebug', 'application', env.www_app, 'root')
     env.service_command('php -d memory_limit=-1 bin/phpspec run --no-code-generation', 'application', env.www_app)
     env.service_command('phpdismod xdebug', 'application', env.www_app, 'root')
 

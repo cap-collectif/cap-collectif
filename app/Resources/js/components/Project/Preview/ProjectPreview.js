@@ -14,10 +14,10 @@ type Props = {
 export class ProjectPreview extends React.Component<Props> {
   render() {
     const { project, hasSecondTitle } = this.props;
-    const projectID = project.id ? `project-preview-${project.id}` : 'project-preview';
+
     return (
       <Col xs={12} sm={6} md={4} lg={3} className="d-flex">
-        <CardContainer id={projectID} className="project-preview">
+        <CardContainer id="project-preview">
           {project.projectType && <ProjectType project={project} />}
           <ProjectCover project={project} />
           <ProjectPreviewBody project={project} hasSecondTitle={hasSecondTitle} />

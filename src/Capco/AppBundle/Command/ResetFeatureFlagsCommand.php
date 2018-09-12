@@ -11,14 +11,11 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('capco:reset-feature-flags')
+        $this
+            ->setName('capco:reset-feature-flags')
             ->setDescription('Reset the feature flags to default values')
-            ->addOption(
-                'force',
-                false,
-                InputOption::VALUE_NONE,
-                'set this option to force the reinit. Warning, this may de/activate some features'
-            );
+            ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the reinit. Warning, this may de/activate some features')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -33,7 +30,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $output->writeln('Resetting the feature toggles to the default configuration');
 
         $toggleManager = $this->getContainer()->get('capco.toggle.manager');
-
         $toggleManager->activate('blog');
         $toggleManager->activate('calendar');
         $toggleManager->activate('newsletter');
@@ -58,22 +54,9 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->deactivate('zipcode_at_register');
         $toggleManager->deactivate('shield_mode');
         $toggleManager->deactivate('login_saml');
-        $toggleManager->deactivate('restrict_registration_via_email_domain');
         $toggleManager->deactivate('login_paris');
+        $toggleManager->deactivate('restrict_registration_via_email_domain');
         $toggleManager->activate('indexation');
-
-        if ($this->getContainer()->getParameter('kernel.environment') == 'prod') {
-            $toggleManager->deactivate('registration');
-            $toggleManager->deactivate('login_facebook');
-            $toggleManager->deactivate('login_gplus');
-            $toggleManager->deactivate('server_side_rendering');
-
-            $toggleManager->deactivate('login_saml');
-            $toggleManager->deactivate('login_paris');
-            $toggleManager->activate('export');
-
-            $toggleManager->activate('shield_mode');
-        }
 
         $output->writeln('Feature flags reseted');
     }

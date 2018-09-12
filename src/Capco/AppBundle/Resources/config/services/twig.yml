@@ -50,7 +50,7 @@ services:
 
   capco.twig.menu_url:
     class: Capco\AppBundle\Twig\MenuLinkExtension
-    arguments: ['@capco.menu_item.resolver', '@router']
+    arguments: ['@capco.menu_item.resolver']
     tags:
       - { name: twig.extension }
 

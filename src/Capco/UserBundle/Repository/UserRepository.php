@@ -934,8 +934,6 @@ class UserRepository extends EntityRepository
             case 'RANDOM':
                 $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
                 break;
-            case 'FOLLOWED_AT':
-                $qb->addOrderBy('f.followedAt', $direction);
             default:
                 $qb->addOrderBy('u.username', $direction);
                 break;

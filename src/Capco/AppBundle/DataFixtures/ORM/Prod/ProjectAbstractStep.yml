@@ -1,9 +1,0 @@
-Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
-  pas1:
-    step: '@cstep1'
-    project: '@p1'
-    position: 1
-  pas2:
-    step: '@cstep2'
-    project: '@p1'
-    position: 2
