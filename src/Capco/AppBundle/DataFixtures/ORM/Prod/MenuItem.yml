@@ -12,7 +12,7 @@ Capco\AppBundle\Entity\MenuItem:
   MenuItem2:
     title: Thèmes
     link: themes
-    isEnabled: 1
+    isEnabled: false
     isDeletable: 0
     isFullyModifiable: 0
     position: 2
@@ -61,7 +61,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem10:
     title: Comment ça marche
-    link: pages/comment-ça-marche
+    Page: '@page2'
     isEnabled: 1
     isDeletable: 1
     position: 8
@@ -110,3 +110,12 @@ Capco\AppBundle\Entity\MenuItem:
     position: 2
     menu: 1
     parent: '@MenuItem5'
+
+  MenuItem15:
+    title: Mentions légales
+    Page: '@page3'
+    isEnabled: 1
+    isDeletable: 1
+    position: 1
+    parent: null
+    menu: 2
