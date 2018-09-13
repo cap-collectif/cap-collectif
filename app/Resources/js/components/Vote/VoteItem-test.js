@@ -2,7 +2,6 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { cloneDeep } from 'lodash';
 import { VoteItem } from './VoteItem';
 import { $refType } from '../../mocks';
 
@@ -36,17 +35,32 @@ describe('<VoteItem />', () => {
     },
   };
 
-  const voteAgainstProps = cloneDeep(defaultProps);
-  // $FlowFixMe
-  voteAgainstProps.vote.value = -1;
+  const voteAgainstProps = {
+    ...defaultProps,
+    vote: {
+      ...defaultProps.vote,
+      // $FlowFixMe
+      value: -1,
+    },
+  };
 
-  const voteMitigatedProps = cloneDeep(defaultProps);
-  // $FlowFixMe
-  voteMitigatedProps.vote.value = 0;
+  const voteMitigatedProps = {
+    ...defaultProps,
+    vote: {
+      ...defaultProps.vote,
+      // $FlowFixMe
+      value: 0,
+    },
+  };
 
-  const voteWithoutValueProps = cloneDeep(defaultProps);
-  // $FlowFixMe
-  voteWithoutValueProps.vote.value = null;
+  const voteWithoutValueProps = {
+    ...defaultProps,
+    vote: {
+      ...defaultProps.vote,
+      // $FlowFixMe
+      value: null,
+    },
+  };
 
   it('renders correcty for vote for', () => {
     const wrapper = shallow(<VoteItem {...defaultProps} />);

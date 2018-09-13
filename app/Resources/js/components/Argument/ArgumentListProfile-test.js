@@ -20,7 +20,7 @@ describe('<ArgumentListProfile />', () => {
           endCursor: '3',
         },
         totalCount: 3,
-        edges: [{ node: { $fragmentRefs, id: '1' } }],
+        edges: [],
       },
     },
   };

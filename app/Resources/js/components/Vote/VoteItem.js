@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import moment from 'moment';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { truncate } from 'lodash';
+import Truncate from 'react-truncate';
 import classNames from 'classnames';
 import type { VoteItem_vote } from './__generated__/VoteItem_vote.graphql';
 import UserAvatar from '../User/UserAvatar';
@@ -72,19 +72,12 @@ export class VoteItem extends React.Component<Props> {
           </p>
         </div>
         <p>
-          {/* $FlowFixMe */}
-          <a href={vote.related.url}>
-            {/* $FlowFixMe */}
-            {vote.related.title
-              ? vote.related.title
-              : truncate(
-                  /* $FlowFixMe */
-                  vote.related.body,
-                  {
-                    length: 50,
-                    separator: ' ',
-                  },
-                )}
+          <a href={vote.related ? vote.related.url : ''}>
+            {vote.related && vote.related.title ? (
+              vote.related.title
+            ) : (
+              <Truncate>{vote.related ? vote.related.body : ''}</Truncate>
+            )}
           </a>
         </p>
       </ListVoteItem>

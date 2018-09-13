@@ -16,16 +16,18 @@ type Props = {
   argument: ArgumentItem_argument,
 };
 
-class ArgumentItem extends React.Component<Props> {
+export class ArgumentItem extends React.Component<Props> {
   static defaultProps = {
     isProfile: false,
   };
 
   renderDate = () => {
     const argument = this.props.argument;
-    if (!Modernizr.intl) {
+
+    if (typeof Modernizr === 'undefined' || !Modernizr.intl) {
       return null;
     }
+
     return (
       <p className="excerpt opinion__date">
         <FormattedDate
@@ -40,29 +42,6 @@ class ArgumentItem extends React.Component<Props> {
     );
   };
 
-  renderLabel = type => {
-    const labelStyle = type === 'FOR' ? 'success' : 'danger';
-    const labelValueTranslateId =
-      type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against';
-
-    return (
-      <Label bsStyle={labelStyle} className={'label--right'}>
-        <FormattedMessage id={labelValueTranslateId} />
-      </Label>
-    );
-  };
-
-  renderConsultationLink = consultation => {
-    return (
-      <p>
-        <FormattedMessage id={'admin.fields.opinion.link'} />
-        {' : '}
-        {/* $FlowFixMe */}
-        <a href={consultation.url}>{consultation.title}</a>
-      </p>
-    );
-  };
-
   render() {
     const { argument } = this.props;
     const classes = classNames({
@@ -70,6 +49,11 @@ class ArgumentItem extends React.Component<Props> {
       'opinion--argument': true,
       'bg-vip': argument.author && argument.author.vip,
     });
+
+    const labelStyle = argument.type === 'FOR' ? 'success' : 'danger';
+    const labelValueTranslateId =
+      argument.type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against';
+
     return (
       <ListGroupItem className={classes} id={`arg-${argument.id}`}>
         <div className="opinion__body">
@@ -77,10 +61,23 @@ class ArgumentItem extends React.Component<Props> {
           <div className="opinion__data">
             <p className="h5 opinion__user">
               <UserLink user={argument.author} />
-              {isProfile && this.renderLabel(argument.type)}
+              {isProfile && (
+                <Label bsStyle={labelStyle} className={'label--right'}>
+                  <FormattedMessage id={labelValueTranslateId} />
+                </Label>
+              )}
             </p>
             {this.renderDate()}
             <UnpublishedLabel publishable={argument} />
+            {isProfile && (
+              <p>
+                <FormattedMessage id={'admin.fields.opinion.link'} />
+                {' : '}
+                <a href={argument.related ? argument.related.url : ''}>
+                  {argument.related ? argument.related.title : ''}
+                </a>
+              </p>
+            )}
           </div>
           <p
             className="opinion__text"

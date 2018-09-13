@@ -3,18 +3,7 @@
 exports[`<ArgumentListProfile /> renders correcty with empty node 1`] = `
 <ListGroup
   bsClass="media-list"
->
-  <ForwardRef(Relay(ArgumentItem))
-    argument={
-      Object {
-        "$fragmentRefs": null,
-        "id": "1",
-      }
-    }
-    isProfile={true}
-    key="1"
-  />
-</ListGroup>
+/>
 `;
 
 exports[`<ArgumentListProfile /> renders correcty with two nodes 1`] = `
