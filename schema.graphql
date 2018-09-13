@@ -4170,7 +4170,7 @@ type User implements Node {
   # The user's email was confirmed at date
   emailConfirmationSentAt: DateTime
 
-  # Get all the arguments for a specific user with pagination.
+  # The arguments created by user.
   arguments(after: String, first: Int, before: String, last: Int): ArgumentConnection!
 }
 

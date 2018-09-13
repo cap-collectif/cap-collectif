@@ -350,5 +350,5 @@ User:
         type: 'ArgumentConnection!'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentByUserResolver", [value, args])'
-        description: 'Get all the arguments for a specific user with pagination.'
+        description: 'The arguments created by user.'
         argsBuilder: 'Relay::Connection'
