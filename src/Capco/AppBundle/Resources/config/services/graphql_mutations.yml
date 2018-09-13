@@ -4,7 +4,6 @@ services:
     autoconfigure: true
     public: false
 
-    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Mutation/{UserNotificationsConfigurationMutation.php,DistrictMutation.php,ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php,ProposalEvaluationMutation.php}'
   Capco\AppBundle\GraphQL\Mutation\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Mutation/*'
     exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Mutation/{UserNotificationsConfigurationMutation.php,DistrictMutation.php,ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php,ProposalEvaluationMutation.php}'
