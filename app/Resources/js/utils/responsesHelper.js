@@ -72,7 +72,7 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
 //   medias: $ReadOnlyArray<string>,
 // |}>;
 type SubmitResponses = $ReadOnlyArray<{
-  value?: ?string,
+  value?: ?string | ?number,
   question: string,
   medias?: ?$ReadOnlyArray<string>,
 }>;
@@ -84,6 +84,7 @@ export const formatSubmitResponses = (
   if (!responses) return [];
   return responses.map(res => {
     const question = questions.filter(q => res.question === q.id)[0];
+
     if (question.type === 'medias') {
       return {
         question: res.question,
@@ -98,8 +99,10 @@ export const formatSubmitResponses = (
       });
     } else if (question.type === 'checkbox' || question.type === 'radio') {
       value = JSON.stringify(res.value);
+    } else if (question.type === 'number') {
+      value = Number(res.value);
     }
-    if (typeof value === 'string') {
+    if (typeof value === 'string' || typeof value === 'number') {
       return { value, question: res.question };
     }
     return { value: null, question: res.question };
