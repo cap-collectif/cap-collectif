@@ -4,17 +4,9 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import QuestionnaireStepPage from '../components/Page/QuestionnaireStepPage';
 
-/**
- * @see https://github.com/yahoo/react-intl/issues/999#issuecomment-335799491
- * In order to delete "<span> cannot appear as a child of <option>" warning
- */
-function Fragment(props) {
-  return props.children || <span {...props} /> || null;
-}
-
 export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
-    <IntlProvider textComponent={Fragment}>
+    <IntlProvider>
       <QuestionnaireStepPage {...props} />
     </IntlProvider>
   </Provider>
