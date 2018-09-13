@@ -83,27 +83,34 @@ export const formatSubmitResponses = (
 ): SubmitResponses => {
   if (!responses) return [];
   return responses.map(res => {
-    const question = questions.filter(q => res.question === q.id)[0];
-
-    if (question.type === 'medias') {
+    const { type: questionType } = questions.filter(q => res.question === q.id)[0];
+    const question = res.question;
+    if (questionType === 'medias') {
       return {
-        question: res.question,
+        question,
         medias: Array.isArray(res.value) ? res.value.map(value => value.id) : [],
       };
     }
-    let value = res.value;
-    if (question.type === 'ranking' || question.type === 'button') {
-      value = JSON.stringify({
+
+    if (questionType === 'ranking' || questionType === 'button') {
+      const value = JSON.stringify({
         labels: Array.isArray(res.value) ? res.value : [res.value],
         other: null,
       });
-    } else if (question.type === 'checkbox' || question.type === 'radio') {
-      value = JSON.stringify(res.value);
-    } else if (question.type === 'number') {
-      value = Number(res.value);
-    }
-    if (typeof value === 'string' || typeof value === 'number') {
-      return { value, question: res.question };
+      return {
+        question,
+        value,
+      };
+    } else if (questionType === 'checkbox' || questionType === 'radio') {
+      return {
+        question,
+        value: JSON.stringify(res.value),
+      };
+    } else if (questionType === 'number') {
+      return {
+        question,
+        value: Number(res.value),
+      };
     }
     return { value: null, question: res.question };
   });
