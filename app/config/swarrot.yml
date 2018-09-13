@@ -59,7 +59,7 @@ swarrot:
       routing_key: user_archive_request
   consumers:
     elasticsearch_indexation:
-      processor: elasticsearch_indexation.processor
+      processor: Capco\AppBundle\Elasticsearch\IndexationProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time

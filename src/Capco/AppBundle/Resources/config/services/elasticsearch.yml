@@ -36,11 +36,3 @@ services:
     public: true
     tags:
       - { name: doctrine.event_subscriber, connection: default }
-
-  Capco\AppBundle\Elasticsearch\IndexationProcessor:
-    class: Capco\AppBundle\Elasticsearch\IndexationProcessor
-    autowire: true
-
-  elasticsearch_indexation.processor:
-    class: Capco\AppBundle\Elasticsearch\IndexationProcessor
-    autowire: true
