@@ -14,6 +14,9 @@ const mutation = graphql`
       opinion {
         id
         ...OpinionFollowButton_opinion
+        followers(first: 0) {
+          totalCount
+        }
       }
       unfollowerId
     }
@@ -23,10 +26,6 @@ const mutation = graphql`
 const decrementFollowerCount = (opinionId: string, store: RecordSourceSelectorProxy) => {
   const opinionProxy = store.get(opinionId);
   if (!opinionProxy) return;
-  const allFollowersProxy = opinionProxy.getLinkedRecord('followers', { first: 0 });
-  if (!allFollowersProxy) return;
-  const previousValue = parseInt(allFollowersProxy.getValue('totalCount'), 10);
-  allFollowersProxy.setValue(previousValue - 1, 'totalCount');
 
   const connection = ConnectionHandler.getConnection(opinionProxy, 'OpinionFollowersBox_followers');
   if (connection) {
@@ -42,7 +41,15 @@ const commit = (
     variables,
     configs: [
       {
-        type: 'NODE_DELETE',
+        type: 'RANGE_DELETE',
+        // $FlowFixMe
+        parentID: variables.input.opinionId || variables.input.idsOpinion[0] || '',
+        connectionKeys: [
+          {
+            key: 'OpinionFollowersBox_followers',
+          },
+        ],
+        pathToConnection: ['opinion', 'followers'],
         deletedIDFieldName: 'unfollowerId',
       },
     ],

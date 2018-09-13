@@ -16,6 +16,7 @@ class UserActivity implements FollowerNotifiedOfInterface
     protected $userProjects = [];
     protected $notifiedOf;
     protected $urlManagingFollowings;
+    protected $userOpinions = [];
 
     public function getUsername(): string
     {
@@ -117,7 +118,7 @@ class UserActivity implements FollowerNotifiedOfInterface
         return null;
     }
 
-    public function setUserProjects(array $userProjects): string
+    public function setUserProjects(array $userProjects): self
     {
         $this->userProjects = $userProjects;
 
@@ -173,5 +174,29 @@ class UserActivity implements FollowerNotifiedOfInterface
     public function getUrlManagingFollowings(): string
     {
         return $this->urlManagingFollowings;
+    }
+
+    public function getUserOpinions(): array
+    {
+        return $this->userOpinions;
+    }
+
+    public function setUserOpinions(array $userOpinions): self
+    {
+        $this->userOpinions = $userOpinions;
+
+        return $this;
+    }
+
+    public function addUserOpinion(string $opinionId, string $notifiedOf): self
+    {
+        $this->userOpinions[$opinionId] = $notifiedOf;
+
+        return $this;
+    }
+
+    public function hasOpinion(): bool
+    {
+        return \count($this->userOpinions) > 0;
     }
 }

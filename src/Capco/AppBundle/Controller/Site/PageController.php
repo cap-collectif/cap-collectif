@@ -26,17 +26,23 @@ class PageController extends Controller
         $slugCharter = strtolower($this->get('translator')->trans('charter', [], 'CapcoAppBundle'));
 
         if (null === $page && $request->get('slug') === $slugCharter) {
-            $body = $this->container->get('capco.site_parameter.resolver')->getValue('charter.body');
+            $body = $this->container->get('capco.site_parameter.resolver')->getValue(
+                'charter.body'
+            );
 
             if (null === $body) {
-                throw $this->createNotFoundException($this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle'));
+                throw $this->createNotFoundException(
+                    $this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle')
+                );
             }
 
             return $this->render('CapcoAppBundle:Page:charter.html.twig', ['body' => $body]);
         }
 
-        if (null !== $page && !$page->getIsEnabled()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle'));
+        if (null == $page || !$page->getIsEnabled()) {
+            throw $this->createNotFoundException(
+                $this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle')
+            );
         }
 
         return [

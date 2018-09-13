@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Section:
     associatedFeatures: []
   SectionIntro:
     type: introduction
-    title: Introduction
+    title: La démarche
     position: 2
     teaser: null
     body: |
@@ -70,7 +70,7 @@ Capco\AppBundle\Entity\Section:
     teaser: Inscrivez-vous à la lettre d'information pour rester informé de l'actualité.
     body: null
     nbObjects: null
-    enabled: true
+    enabled: false
     associatedFeatures: [newsletter]
   SectionSocialNetworks:
     type: social-networks
@@ -97,5 +97,5 @@ Capco\AppBundle\Entity\Section:
     teaser: null
     body: null
     nbObjects: 3
-    enabled: true
+    enabled: false
     associatedFeatures: []

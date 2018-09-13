@@ -10,7 +10,7 @@ Scenario: GraphQL client wants to get list of users who following an opinion
     "query": "query getFollowers ($opinionId: ID!,$count: Int, $cursor: String){
       opinion: node(id: $opinionId) {
         ... on Opinion {
-          followers(first: $count, after: $cursor) {
+          followers(first: $count, after: $cursor, orderBy: {field: NAME, direction: ASC}) {
             edges {
               cursor
               node {

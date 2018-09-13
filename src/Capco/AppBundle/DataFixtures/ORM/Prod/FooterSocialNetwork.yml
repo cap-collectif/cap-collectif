@@ -1,9 +1,9 @@
 Capco\AppBundle\Entity\FooterSocialNetwork:
   FooterSocialNetwork1:
     title: Facebook
-    link: http://facebook.com
+    link: https://www.facebook.com/coucou.capco
     position: 1
-    isEnabled: false
+    isEnabled: true
     style: facebook
 
   FooterSocialNetwork2:
@@ -22,9 +22,9 @@ Capco\AppBundle\Entity\FooterSocialNetwork:
 
   FooterSocialNetwork4:
     title: Google+
-    link: ***REMOVED***
+    link: https://plus.google.com
     position: 4
-    isEnabled: true
+    isEnabled: false
     style: gplus
 
   FooterSocialNetwork5:

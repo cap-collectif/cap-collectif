@@ -18,6 +18,7 @@ describe('<ProposalPageHeader />', () => {
     updatedAt: '2015-01-05 00:00:00',
     publicationStatus: 'PUBLISHED',
     show_url: 'true',
+    project: { opinionCanBeFollowed: true },
   };
 
   const proposalWithoutTheme = {
@@ -32,6 +33,7 @@ describe('<ProposalPageHeader />', () => {
     updatedAt: '2015-01-05 00:00:00',
     publicationStatus: 'PUBLISHED',
     show_url: 'true',
+    project: { opinionCanBeFollowed: true },
   };
 
   const props = {

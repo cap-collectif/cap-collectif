@@ -166,7 +166,9 @@ class ReinitCommand extends ContainerAwareCommand
     {
         $this->runCommands(
             [
-                'capco:reset-feature-flags' => ['--force' => true],
+                'capco:reset-feature-flags' => [
+                    '--force' => true,
+                ],
             ],
             $output
         );

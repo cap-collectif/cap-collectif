@@ -9,29 +9,29 @@ Scenario: Can not sort or filter if feature projects_form is disabled
 Scenario: Project can be sorted by published date
   Given feature "projects_form" is enabled
   And I visited "projects page"
-  And I wait 1 seconds
+  And I wait "#project-preview-project1" to appear on current page
   And I select "global.filter_f_last" from "project-sorting"
-  And I wait 1 seconds
-  Then "Projet vide" should be before "Dépot avec selection vote budget" for selector "#project-preview .card__title a"
+  And I wait "#project-preview-project1" to appear on current page
+  Then "Projet vide" should be before "Dépot avec selection vote budget" for selector ".project-preview .card__title a"
 
 @javascript @elasticsearch
 Scenario: Project can be sorted by contributions number
   Given feature "projects_form" is enabled
   And I visited "projects page"
   And I select "global.filter_f_popular" from "project-sorting"
-  And I wait 1 seconds
-  Then "Croissance, innovation, disruption" should be before "Projet de loi Renseignement" for selector "#project-preview .card__title a"
+  And I wait "#project-preview-project1" to appear on current page
+  Then "Croissance, innovation, disruption" should be before "Projet de loi Renseignement" for selector ".project-preview .card__title a"
 
 @javascript
 Scenario: Project can be filtered by theme
   Given feature "themes" is enabled
   And feature "projects_form" is enabled
   And I visited "projects page"
-  And I wait 1 seconds
-  Then I should see 16 "#project-preview" elements
+  And I wait ".project-preview" to appear on current page
+  Then I should see 16 ".project-preview" elements
   And I select "Transport" from "project-theme"
-  And I wait 1 seconds
-  Then I should see 9 "#project-preview" elements
+  And I wait ".project-preview" to appear on current page
+  Then I should see 9 ".project-preview" elements
   And I should see "Projet vide"
   And I should see "Dépot avec selection vote budget"
   And I should not see "Croissance, innovation, disruption"
@@ -42,28 +42,28 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
   And feature "projects_form" is enabled
   And I visited "projects page"
   And I select "Transport" from "project-theme"
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   And I select "global.filter_f_popular" from "project-sorting"
-  And I wait 2 seconds
-  Then I should see 9 "#project-preview" elements
+  And I wait ".project-preview" to appear on current page
+  Then I should see 9 ".project-preview" elements
   And I should see "Projet de loi Renseignement"
   And I should see "Budget Participatif Rennes"
   And I should not see "Croissance, innovation, disruption"
-  And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector "#project-preview .card__title a"
+  And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".project-preview .card__title a"
 
 @javascript
 Scenario: Project can be filtered by type and sorted by contributions number at the same time
   And feature "projects_form" is enabled
   And I visited "projects page"
   And I select "project.types.consultation" from "project-type"
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   And I select "global.filter_f_popular" from "project-sorting"
-  And I wait 1 seconds
-  Then I should see 5 "#project-preview" elements
+  And I wait ".project-preview" to appear on current page
+  Then I should see 5 ".project-preview" elements
   And I should see "Projet de loi Renseignement"
   And I should see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Croissance, innovation, disruption"
-  And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector "#project-preview .card__title a"
+  And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".project-preview .card__title a"
 
 @javascript
 Scenario: Project can be filtered by title
@@ -72,8 +72,8 @@ Scenario: Project can be filtered by title
   When I fill in the following:
     | project-search-input | innovation |
   And I click the "#project-search-button" element
-  And I wait 1 seconds
-  Then I should see 1 "#project-preview" elements
+  And I wait ".project-preview" to appear on current page
+  Then I should see 1 ".project-preview" elements
   And I should see "Croissance, innovation, disruption"
   And I should not see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Projet vide"
@@ -167,7 +167,7 @@ Scenario: user try to access to a project with restricted access
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   Then I should see 'restricted-access'
 
 @javascript
@@ -177,7 +177,7 @@ Scenario: Not allowed user can't access to a private project
   And I visited "collect page" with:
     | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   Then I should see 'restricted-access'
   When I follow "error.report"
   Then I should be redirected to "/contact"
@@ -189,7 +189,7 @@ Scenario: user try to access to a project with restricted access
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   Then I should see 'restricted-access'
 
 @javascript
@@ -199,25 +199,25 @@ Scenario: Super Admin can access to all private projects
   And I visited "collect page" with:
     | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   Then I should see "Collecte des propositions pour conquérir le monde"
   And I should see "only-visible-by-administrators"
   When I visited "collect page" with:
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   Then I should see "Collecte des propositions pour la capcoBeer"
   And I should see "global.draft.only_visible_by_you"
   When I visited "collect page" with:
     | projectSlug | project-pour-la-force-visible-par-mauriau-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-force             |
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   Then I should see "Collecte des propositions pour La Force"
   And I should see "global.draft.only_visible_by_you"
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   Then I should see "Un avenir meilleur pour les nains de jardins (custom access)"
 
 @javascript
@@ -236,7 +236,7 @@ Scenario: Admin access to a project accessible for admins only
   And I visited "collect page" with:
     | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   Then I should see "Collecte des propositions pour conquérir le monde"
   And I should see "only-visible-by-administrators"
 
@@ -274,5 +274,5 @@ Scenario: Pierre can access to a restricted project to his user group
   And I should not see "ptondereau" in the "#group3-modal .modal-body" element
   And I should see "global.more"
   Then I click on button "#load-more"
-  And I wait 1 seconds
+  And I wait ".project-preview" to appear on current page
   Then I should see "ptondereau" in the "#group3-modal .modal-body" element

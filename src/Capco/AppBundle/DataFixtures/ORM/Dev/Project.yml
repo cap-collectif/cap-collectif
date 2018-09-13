@@ -59,6 +59,7 @@ Capco\AppBundle\Entity\Project:
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     visibility: 2
+    opinionCanBeFollowed: true
   p7:
     id: 'project7'
     title: Dépot avec selection vote budget

@@ -104,8 +104,10 @@ export class ProposalPageHeader extends React.Component<Props> {
                 id="proposal-vote-btn"
               />
             )}
-            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-            <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
+            {proposal.project.opinionCanBeFollowed && (
+              /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
+              <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
+            )}
           </div>
         )}
         {viewer &&
@@ -165,6 +167,9 @@ export default createFragmentContainer(container, {
       updatedAt
       publicationStatus
       show_url
+      project {
+        opinionCanBeFollowed
+      }
     }
   `,
 });
