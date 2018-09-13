@@ -370,7 +370,6 @@ class ReactBootstrapInput extends React.Component<Props> {
       ...props
     } = this.props;
 
-    console.log(props.description);
     return (
       <FormGroup
         bsSize={bsSize}
