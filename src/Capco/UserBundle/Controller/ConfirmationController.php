@@ -39,9 +39,9 @@ class ConfirmationController extends Controller
         $user->setLastLogin(new \DateTime());
 
         // We publish the user's contributions
-        $hasPulishedContributions = $this->get('capco.contribution.manager')->publishContributions(
-            $user
-        );
+        $hasPulishedContributions = $this->get(
+            'Capco\AppBundle\Manager\ContributionManager'
+        )->publishContributions($user);
 
         // If user has been created via API he has no password yet.
         // That's why we create a reset password request to let him chose a password

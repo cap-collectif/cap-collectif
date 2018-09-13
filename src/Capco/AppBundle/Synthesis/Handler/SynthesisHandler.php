@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Synthesis\Handler;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SynthesisHandler
@@ -13,8 +13,10 @@ class SynthesisHandler
     protected $em;
     protected $consultationStepExtractor;
 
-    public function __construct(EntityManager $em, ConsultationStepExtractor $consultationStepExtractor)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        ConsultationStepExtractor $consultationStepExtractor
+    ) {
         $this->em = $em;
         $this->consultationStepExtractor = $consultationStepExtractor;
     }
@@ -44,7 +46,13 @@ class SynthesisHandler
 
     public function getSynthesis($id)
     {
-        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->getOne($id))) {
+        if (
+            !(
+                $synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->getOne(
+                    $id
+                )
+            )
+        ) {
             throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
         }
 
@@ -53,7 +61,13 @@ class SynthesisHandler
 
     public function getUpdatedSynthesis($id)
     {
-        if (!($synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id))) {
+        if (
+            !(
+                $synthesis = $this->em->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find(
+                    $id
+                )
+            )
+        ) {
             throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
         }
 
@@ -62,8 +76,10 @@ class SynthesisHandler
         return $synthesis;
     }
 
-    public function createSynthesisFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep)
-    {
+    public function createSynthesisFromConsultationStep(
+        Synthesis $synthesis,
+        ConsultationStep $consultationStep
+    ) {
         $synthesis->setConsultationStep($consultationStep);
         $synthesis->setSourceType('consultation_step');
 
@@ -73,7 +89,10 @@ class SynthesisHandler
     public function createOrUpdateElementsFromSource(Synthesis $synthesis)
     {
         if ('consultation_step' === $synthesis->getSourceType()) {
-            return $this->consultationStepExtractor->createOrUpdateElementsFromConsultationStep($synthesis, $synthesis->getConsultationStep());
+            return $this->consultationStepExtractor->createOrUpdateElementsFromConsultationStep(
+                $synthesis,
+                $synthesis->getConsultationStep()
+            );
         }
 
         return $synthesis;

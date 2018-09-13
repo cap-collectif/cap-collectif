@@ -5,5 +5,5 @@ services:
 
   alice.processor.ids:
     class: Capco\AppBundle\DataFixtures\Processor\FixedIdsProcessor
+    autowire: true
     tags: [{ name: hautelook_alice.alice.processor }]
-    arguments: ['@doctrine.orm.entity_manager']

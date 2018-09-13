@@ -12,7 +12,7 @@ class SectionController extends PositionableController
 {
     public function __construct()
     {
-        parent::__construct('capco.section.resolver');
+        parent::__construct('Capco\AppBundle\Resolver\SectionResolver');
     }
 
     /**

@@ -1005,7 +1005,7 @@ final class MutationType extends ObjectType implements GeneratedTypeInterface
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return ($globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_SUPER_ADMIN") || ($globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER") && $globalVariable->get('container')->get("capco.proposal.helper")->isAuthor($args["input"]["proposalId"], \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))));
+                        return ($globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_SUPER_ADMIN") || ($globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER") && $globalVariable->get('container')->get("Capco\\AppBundle\\Helper\\ProposalHelper")->isAuthor($args["input"]["proposalId"], \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))));
                     },
                 ],
                 'createProposalForm' => [

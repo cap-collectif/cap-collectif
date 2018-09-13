@@ -10,10 +10,9 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -37,8 +36,13 @@ class ConsultationStepExtractor
     protected $consultationStep;
     protected $previousElements;
 
-    public function __construct(EntityManager $em, TranslatorInterface $translator, Router $router, OpinionTypesResolver $opinionTypeResolver, UrlResolver $urlResolver)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        TranslatorInterface $translator,
+        Router $router,
+        OpinionTypesResolver $opinionTypeResolver,
+        UrlResolver $urlResolver
+    ) {
         $this->em = $em;
         $this->translator = $translator;
         $this->router = $router;
@@ -51,8 +55,10 @@ class ConsultationStepExtractor
     /**
      * Update or create all elements from consultation step and return updated synthesis.
      */
-    public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ?ConsultationStep $consultationStep): Synthesis
-    {
+    public function createOrUpdateElementsFromConsultationStep(
+        Synthesis $synthesis,
+        ?ConsultationStep $consultationStep
+    ): Synthesis {
         if (!$consultationStep) {
             return $synthesis;
         }
@@ -119,23 +125,45 @@ class ConsultationStepExtractor
 
             // Create elements from arguments
             if (2 === $opinion->getOpinionType()->getCommentSystem()) {
-                $proArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_PROS, $elementFromOpinion);
-                $consArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_CONS, $elementFromOpinion);
-                $this->createElementsFromArguments($opinion->getArguments(), $proArgumentsElement, $consArgumentsElement);
+                $proArgumentsElement = $this->createFolderInElement(
+                    self::LABEL_ARG_PROS,
+                    $elementFromOpinion
+                );
+                $consArgumentsElement = $this->createFolderInElement(
+                    self::LABEL_ARG_CONS,
+                    $elementFromOpinion
+                );
+                $this->createElementsFromArguments(
+                    $opinion->getArguments(),
+                    $proArgumentsElement,
+                    $consArgumentsElement
+                );
             } elseif (1 === $opinion->getOpinionType()->getCommentSystem()) {
-                $simpleArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_SIMPLE, $elementFromOpinion);
-                $this->createElementsFromArguments($opinion->getArguments(), $simpleArgumentsElement);
+                $simpleArgumentsElement = $this->createFolderInElement(
+                    self::LABEL_ARG_SIMPLE,
+                    $elementFromOpinion
+                );
+                $this->createElementsFromArguments(
+                    $opinion->getArguments(),
+                    $simpleArgumentsElement
+                );
             }
 
             // Create elements from sources
             if ($opinion->getOpinionType()->isSourceable()) {
-                $sourcesElement = $this->createFolderInElement(self::LABEL_SOURCES, $elementFromOpinion);
+                $sourcesElement = $this->createFolderInElement(
+                    self::LABEL_SOURCES,
+                    $elementFromOpinion
+                );
                 $this->createElementsFromSources($opinion->getSources(), $sourcesElement);
             }
 
             // // Create elements from versions
             if ($opinion->getOpinionType()->isVersionable()) {
-                $versionsElement = $this->createFolderInElement(self::LABEL_VERSIONS, $elementFromOpinion);
+                $versionsElement = $this->createFolderInElement(
+                    self::LABEL_VERSIONS,
+                    $elementFromOpinion
+                );
                 $this->createElementsFromVersions($opinion->getVersions(), $versionsElement);
             }
         }
@@ -153,12 +181,25 @@ class ConsultationStepExtractor
             $elementFromVersion = $this->getRelatedElement($version, $parent);
 
             // Create elements from arguments
-            $proArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_PROS, $elementFromVersion);
-            $consArgumentsElement = $this->createFolderInElement(self::LABEL_ARG_CONS, $elementFromVersion);
-            $this->createElementsFromArguments($version->getArguments(), $proArgumentsElement, $consArgumentsElement);
+            $proArgumentsElement = $this->createFolderInElement(
+                self::LABEL_ARG_PROS,
+                $elementFromVersion
+            );
+            $consArgumentsElement = $this->createFolderInElement(
+                self::LABEL_ARG_CONS,
+                $elementFromVersion
+            );
+            $this->createElementsFromArguments(
+                $version->getArguments(),
+                $proArgumentsElement,
+                $consArgumentsElement
+            );
 
             // Create elements from sources
-            $sourcesElement = $this->createFolderInElement(self::LABEL_SOURCES, $elementFromVersion);
+            $sourcesElement = $this->createFolderInElement(
+                self::LABEL_SOURCES,
+                $elementFromVersion
+            );
             $this->createElementsFromSources($version->getSources(), $sourcesElement);
         }
     }
@@ -168,8 +209,11 @@ class ConsultationStepExtractor
      *
      * @param mixed $arguments
      */
-    public function createElementsFromArguments($arguments, SynthesisElement $prosFolder, SynthesisElement $consFolder = null)
-    {
+    public function createElementsFromArguments(
+        $arguments,
+        SynthesisElement $prosFolder,
+        SynthesisElement $consFolder = null
+    ) {
         foreach ($arguments as $argument) {
             if (1 === $argument->getType() || null !== $consFolder) {
                 // Define parent folder
@@ -210,9 +254,8 @@ class ConsultationStepExtractor
         foreach ($this->previousElements as $element) {
             if ($this->isElementExisting($element, $object)) {
                 return $this->isElementOutdated($element, $object)
-                      ? $this->updateElementFrom($element, $object)
-                      : $element
-                ;
+                    ? $this->updateElementFrom($element, $object)
+                    : $element;
             }
         }
 
@@ -226,8 +269,10 @@ class ConsultationStepExtractor
     /**
      * Get or create a new folder from a provided parent.
      */
-    public function createFolderInElement(string $label, SynthesisElement $parent): SynthesisElement
-    {
+    public function createFolderInElement(
+        string $label,
+        SynthesisElement $parent
+    ): SynthesisElement {
         $label = $this->translator->trans($label, [], 'CapcoAppBundle');
 
         // Check if folder already exists
@@ -267,7 +312,9 @@ class ConsultationStepExtractor
         }
 
         // Contributions from consultation author are automatically published and archived
-        $authorIsConsultationAuthor = method_exists($data, 'getAuthor') && $data->getAuthor() === $this->consultationStep->getProject()->getAuthor();
+        $authorIsConsultationAuthor =
+            method_exists($data, 'getAuthor') &&
+            $data->getAuthor() === $this->consultationStep->getProject()->getAuthor();
         $element->setDisplayType('contribution');
         $element->setArchived($authorIsConsultationAuthor);
         $element->setPublished($authorIsConsultationAuthor);
@@ -285,10 +332,10 @@ class ConsultationStepExtractor
         // Update last modified, archive status and deletion date
         $element->setLinkedDataLastUpdate($data->getUpdatedAt());
         if (
-            !$this->consultationStep
-            || !method_exists($data, 'getAuthor')
-            || !$this->consultationStep->getProject()
-            || $data->getAuthor() !== $this->consultationStep->getProject()->getAuthor()
+            !$this->consultationStep ||
+            !method_exists($data, 'getAuthor') ||
+            !$this->consultationStep->getProject() ||
+            $data->getAuthor() !== $this->consultationStep->getProject()->getAuthor()
         ) {
             $element->setArchived(false);
             $element->setPublished(false);
@@ -305,8 +352,10 @@ class ConsultationStepExtractor
      *
      * @param mixed $contribution
      */
-    public function setDataFromContribution(SynthesisElement $element, /*Contribution|OpinionType*/ $contribution): SynthesisElement
-    {
+    public function setDataFromContribution(
+        SynthesisElement $element,
+        /*Contribution|OpinionType*/ $contribution
+    ): SynthesisElement {
         if ($contribution instanceof OpinionType) {
             return $this->setDataFromOpinionType($element, $contribution);
         }
@@ -326,8 +375,10 @@ class ConsultationStepExtractor
 
     // ************************* Set element data from contributions ***************************
 
-    public function setDataFromOpinionType(SynthesisElement $element, OpinionType $opinionType): SynthesisElement
-    {
+    public function setDataFromOpinionType(
+        SynthesisElement $element,
+        OpinionType $opinionType
+    ): SynthesisElement {
         $element->setAuthor(null);
         $element->setTitle($opinionType->getTitle());
         $element->setSubtitle($opinionType->getSubtitle());
@@ -337,8 +388,10 @@ class ConsultationStepExtractor
         return $element;
     }
 
-    public function setDataFromOpinion(SynthesisElement $element, Opinion $opinion): SynthesisElement
-    {
+    public function setDataFromOpinion(
+        SynthesisElement $element,
+        Opinion $opinion
+    ): SynthesisElement {
         // Set author
         $element->setAuthor($opinion->getAuthor());
 
@@ -347,12 +400,18 @@ class ConsultationStepExtractor
 
             $content = '';
             if (\count($opinion->getAppendices()) > 0) {
-                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTEXT, [], 'CapcoAppBundle') . '</p>';
+                $content .=
+                    '<p>' .
+                    $this->translator->trans(self::LABEL_CONTEXT, [], 'CapcoAppBundle') .
+                    '</p>';
                 foreach ($opinion->getAppendices() as $app) {
                     $content .= '<p>' . $app->getAppendixType()->getTitle() . '</p>';
                     $content .= $app->getBody();
                 }
-                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundle') . '</p>';
+                $content .=
+                    '<p>' .
+                    $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundle') .
+                    '</p>';
             }
             $content .= $opinion->getBody();
 
@@ -369,8 +428,10 @@ class ConsultationStepExtractor
         return $element;
     }
 
-    public function setDataFromVersion(SynthesisElement $element, OpinionVersion $version): SynthesisElement
-    {
+    public function setDataFromVersion(
+        SynthesisElement $element,
+        OpinionVersion $version
+    ): SynthesisElement {
         // Set author
         $element->setAuthor($version->getAuthor());
 
@@ -379,9 +440,15 @@ class ConsultationStepExtractor
 
             $content = '';
             if ($version->getComment()) {
-                $content .= '<p>' . $this->translator->trans(self::LABEL_COMMENT, [], 'CapcoAppBundle') . '</p>';
+                $content .=
+                    '<p>' .
+                    $this->translator->trans(self::LABEL_COMMENT, [], 'CapcoAppBundle') .
+                    '</p>';
                 $content .= $version->getComment();
-                $content .= '<p>' . $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundle') . '</p>';
+                $content .=
+                    '<p>' .
+                    $this->translator->trans(self::LABEL_CONTENT, [], 'CapcoAppBundle') .
+                    '</p>';
             }
             $content .= $version->getBody();
             $element->setBody($content);
@@ -407,7 +474,9 @@ class ConsultationStepExtractor
 
         // Set link
         if ($source->getMedia()) {
-            $mediaURL = $this->router->generate('sonata_media_download', ['id' => $source->getMedia()->getId()]);
+            $mediaURL = $this->router->generate('sonata_media_download', [
+                'id' => $source->getMedia()->getId(),
+            ]);
             $element->setLink($mediaURL);
         } elseif ($source->getLink()) {
             $element->setLink($source->getLink());
@@ -421,8 +490,10 @@ class ConsultationStepExtractor
         return $element;
     }
 
-    public function setDataFromArgument(SynthesisElement $element, Argument $argument): SynthesisElement
-    {
+    public function setDataFromArgument(
+        SynthesisElement $element,
+        Argument $argument
+    ): SynthesisElement {
         // Set author
         $element->setAuthor($argument->getAuthor());
 
@@ -440,7 +511,10 @@ class ConsultationStepExtractor
 
     public function isElementExisting(SynthesisElement $element, $object): bool
     {
-        return $element->getLinkedDataClass() === \get_class($object) && (string) $element->getLinkedDataId() === (string) $object->getId();
+        return (
+            $element->getLinkedDataClass() === \get_class($object) &&
+            (string) $element->getLinkedDataId() === (string) $object->getId()
+        );
     }
 
     public function isElementOutdated(SynthesisElement $element, $object): bool

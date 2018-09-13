@@ -458,7 +458,7 @@ class ProposalMutation implements ContainerAwareInterface
 
     private function fixValues(array $values, ProposalForm $proposalForm)
     {
-        $toggleManager = $this->container->get('capco.toggle.manager');
+        $toggleManager = $this->container->get('Capco\AppBundle\Toggle\Manager');
 
         if (
             (!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes()) &&
@@ -483,9 +483,9 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         if (isset($values['responses'])) {
-            $values['responses'] = $this->container->get('responses.formatter')->format(
-                $values['responses']
-            );
+            $values['responses'] = $this->container->get(
+                'Capco\AppBundle\Helper\ResponsesFormatter'
+            )->format($values['responses']);
         }
 
         return $values;

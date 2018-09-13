@@ -71,7 +71,9 @@ class ProjectController extends Controller
     {
         $serializer = $this->get('serializer');
 
-        $steps = $this->get('capco.project_stats.resolver')->getStepsWithStatsForProject($project);
+        $steps = $this->get(
+            'Capco\AppBundle\Resolver\ProjectStatsResolver'
+        )->getStepsWithStatsForProject($project);
         $props = $serializer->serialize(
             ['projectId' => $project->getId(), 'steps' => $steps],
             'json'
@@ -194,13 +196,10 @@ class ProjectController extends Controller
      */
     public function showEventsAction(Project $project)
     {
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(
-            null,
-            null,
-            $project->getSlug(),
-            null
-        );
-        $nbEvents = $this->get('capco.event.resolver')->countEvents(
+        $groupedEvents = $this->get(
+            'Capco\AppBundle\Resolver\EventResolver'
+        )->getEventsGroupedByYearAndMonth(null, null, $project->getSlug(), null);
+        $nbEvents = $this->get('Capco\AppBundle\Resolver\EventResolver')->countEvents(
             null,
             null,
             $project->getSlug(),
@@ -228,7 +227,9 @@ class ProjectController extends Controller
      */
     public function showPostsAction(Project $project, $page)
     {
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('blog.pagination.size');
+        $pagination = $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
+            'blog.pagination.size'
+        );
 
         $posts = $this->get('capco.blog.post.repository')->getSearchResults(
             $pagination,
@@ -263,16 +264,13 @@ class ProjectController extends Controller
      */
     public function showContributorsAction(Project $project, $page)
     {
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue(
+        $pagination = $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
             'contributors.pagination'
         );
 
-        $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered(
-            $project,
-            true,
-            $pagination,
-            $page
-        );
+        $contributors = $this->get(
+            'Capco\AppBundle\Resolver\ContributionResolver'
+        )->getProjectContributorsOrdered($project, true, $pagination, $page);
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
@@ -280,7 +278,7 @@ class ProjectController extends Controller
             $nbPage = ceil(\count($contributors) / $pagination);
         }
 
-        $showVotes = $this->get('capco.project.helper')->hasStepWithVotes($project);
+        $showVotes = $this->get('Capco\AppBundle\Helper\ProjectHelper')->hasStepWithVotes($project);
 
         return [
             'project' => $project,

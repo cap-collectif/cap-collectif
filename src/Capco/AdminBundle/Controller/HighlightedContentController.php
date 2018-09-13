@@ -6,6 +6,6 @@ class HighlightedContentController extends PositionableController
 {
     public function __construct()
     {
-        parent::__construct('capco.highlighted.resolver');
+        parent::__construct('Capco\AppBundle\Resolver\HighlightedContentResolver');
     }
 }

@@ -18,7 +18,7 @@ class Resolver
         $this->logger = $logger;
     }
 
-    public function getValue(?string $key, ?string $value = null)
+    public function getValue(?string $key, ?string $value = null): ?string
     {
         if (!$this->parameters) {
             $this->parameters = $this->repository->getValuesIfEnabled();

@@ -37,7 +37,7 @@ class OpinionController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
+        $opinionTypesResolver = $this->get('Capco\AppBundle\Resolver\OpinionTypesResolver');
         $opinionType = $opinionTypesResolver->findByStepAndSlug($currentStep, $opinionTypeSlug);
 
         $filter = $opinionsSort ?: $opinionType->getDefaultFilter();

@@ -1,43 +1,46 @@
 services:
   capco.elasticsearch.client:
     class: Elastica\Client
+    autowire: true
+    public: true
     arguments:
       - connections:
           - { host: '%elasticsearch_host%', port: '9200' }
-      - ~
-      - '@monolog.logger'
 
   capco.elasticsearch.index_builder:
     class: Capco\AppBundle\Elasticsearch\IndexBuilder
-    arguments:
-      - '@capco.elasticsearch.client'
+    autowire: true
+    public: true
 
   capco.elasticsearch.indexer:
     class: Capco\AppBundle\Elasticsearch\Indexer
     autowire: true
+    public: true
 
   capco.elasticsearch.index:
     class: Elastica\Index
+    autowire: true
+    public: true
     factory: ['@capco.elasticsearch.index_builder', getLiveSearchIndex]
 
   capco.elasticsearch.elastica_to_doctrine_transformer:
     class: Capco\AppBundle\Elasticsearch\ElasticaToDoctrineTransformer
-    arguments:
-      - '@doctrine'
-      - '@capco.elasticsearch.indexer'
-      - '@logger'
+    autowire: true
+    public: true
     calls:
       - ['setPropertyAccessor', ['@property_accessor']]
 
   capco.elasticsearch.listener:
     class: Capco\AppBundle\Elasticsearch\DoctrineUpdateListener
-    arguments:
-      - '@swarrot.publisher'
+    autowire: true
+    public: true
     tags:
       - { name: doctrine.event_subscriber, connection: default }
 
+  Capco\AppBundle\Elasticsearch\IndexationProcessor:
+    class: Capco\AppBundle\Elasticsearch\IndexationProcessor
+    autowire: true
+
   elasticsearch_indexation.processor:
     class: Capco\AppBundle\Elasticsearch\IndexationProcessor
-    arguments:
-      - '@capco.elasticsearch.indexer'
-      - '@logger'
+    autowire: true

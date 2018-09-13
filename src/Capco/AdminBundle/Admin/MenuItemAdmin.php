@@ -22,7 +22,7 @@ class MenuItemAdmin extends AbstractAdmin
     {
         $resolver = $this->getConfigurationPool()
             ->getContainer()
-            ->get('capco.menu_item.resolver');
+            ->get('Capco\AppBundle\Manager\MenuItemResolver');
         $em = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine')

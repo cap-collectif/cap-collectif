@@ -111,7 +111,7 @@ class OauthConnectController extends ConnectController
 
     protected function serviceHasEnabledFeature($service)
     {
-        $toggleManager = $this->container->get('capco.toggle.manager');
+        $toggleManager = $this->container->get('Capco\AppBundle\Toggle\Manager');
 
         return $toggleManager->hasOneActive($this->getFeaturesForService($service));
     }

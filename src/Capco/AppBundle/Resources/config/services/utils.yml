@@ -1,7 +1,19 @@
 services:
-  capco.utils.map:
-    class: Capco\AppBundle\Utils\Map
-    arguments: ['%google_maps_key_server%']
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Capco\AppBundle\Utils\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Utils/*'
+  #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'
+  Capco\AppBundle\GraphQL\:
+    resource:
+      '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/{GraphQLToCsv.php, ConnectionTraversor.php}'
+
+  Capco\AppBundle\Utils\Map:
+    arguments:
+      $apiSeverKey: '%google_maps_key_server%'
 
   capco.utils.array_hydrator:
     class: pmill\Doctrine\Hydrator\ArrayHydrator
@@ -14,11 +26,3 @@ services:
   capco.utils.throwable_email_checker.adapter:
     class: EmailChecker\Adapter\FileAdapter
     arguments: ['%kernel.root_dir%/config/throwable_emails.txt']
-
-  Capco\AppBundle\GraphQL\GraphQLToCsv:
-    autowire: true
-    autoconfigure: true
-
-  Capco\AppBundle\GraphQL\ConnectionTraversor:
-    autowire: true
-    autoconfigure: true

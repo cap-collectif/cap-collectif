@@ -1,59 +1,11 @@
 services:
-  opinion_create.processor:
-    class: Capco\AppBundle\Processor\Opinion\OpinionCreateProcessor
+  _defaults:
     autowire: true
+    autoconfigure: true
+    public: false
 
-  opinion_update.processor:
-    class: Capco\AppBundle\Processor\Opinion\OpinionUpdateProcessor
-    autowire: true
-
-  opinion_delete.processor:
-    class: Capco\AppBundle\Processor\Opinion\OpinionDeleteProcessor
-    autowire: true
-
-  opinion_trash.processor:
-    class: Capco\AppBundle\Processor\Opinion\OpinionTrashProcessor
-    autowire: true
-
-  argument_create.processor:
-    class: Capco\AppBundle\Processor\Argument\ArgumentCreateProcessor
-    autowire: true
-
-  argument_update.processor:
-    class: Capco\AppBundle\Processor\Argument\ArgumentUpdateProcessor
-    autowire: true
-
-  argument_delete.processor:
-    class: Capco\AppBundle\Processor\Argument\ArgumentDeleteProcessor
-    autowire: true
-
-  argument_trash.processor:
-    class: Capco\AppBundle\Processor\Argument\ArgumentTrashProcessor
-    autowire: true
-
-  proposal_create.processor:
-    class: Capco\AppBundle\Processor\Proposal\ProposalCreateProcessor
-    autowire: true
-
-  proposal_update.processor:
-    class: Capco\AppBundle\Processor\Proposal\ProposalUpdateProcessor
-    autowire: true
-
-  proposal_delete.processor:
-    class: Capco\AppBundle\Processor\Proposal\ProposalDeleteProcessor
-    autowire: true
-
-  comment_create.processor:
-    class: Capco\AppBundle\Processor\Comment\CommentCreateProcessor
-    autowire: true
-
-  comment_update.processor:
-    class: Capco\AppBundle\Processor\Comment\CommentUpdateProcessor
-    autowire: true
-
-  comment_delete.processor:
-    class: Capco\AppBundle\Processor\Comment\CommentDeleteProcessor
-    autowire: true
+  Capco\AppBundle\Processor\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Processor/*'
 
   user_archive_request.processor:
     class: Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor

@@ -23,7 +23,7 @@ class SectionAdmin extends AbstractAdmin
     {
         $manager = $this->getConfigurationPool()
             ->getContainer()
-            ->get('capco.toggle.manager');
+            ->get('Capco\AppBundle\Toggle\Manager');
         $em = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine')

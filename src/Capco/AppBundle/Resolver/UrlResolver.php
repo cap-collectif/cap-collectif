@@ -36,8 +36,8 @@ class UrlResolver
         Router $router,
         Manager $manager,
         MediaExtension $mediaExtension,
-        string $scheme,
-        string $host
+        ?string $scheme = '',
+        ?string $host = ''
     ) {
         $this->router = $router;
         $this->manager = $manager;

@@ -10,8 +10,7 @@ services:
 
   global_id_resolver:
     class: Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver
-    arguments:
-      - '@service_container'
+    autowire: true
     tags:
       - { name: overblog_graphql.resolver, alias: 'query_node', method: 'resolve' }
       - { name: overblog_graphql.resolver, alias: 'query_nodes', method: 'resolveMultiple' }
@@ -235,7 +234,7 @@ services:
 
   # This is not a resolver but a voter, rename and move this elsewhere
   Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:
-    arguments: ['@security.token_storage', '@logger']
+    autowire: true
     public: true
 
 

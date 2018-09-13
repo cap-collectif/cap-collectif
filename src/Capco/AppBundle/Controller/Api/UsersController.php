@@ -303,7 +303,7 @@ class UsersController extends FOSRestController
         $user = $this->getUser();
         $newEmailToConfirm = $request->request->get('email');
         $password = $request->request->get('password');
-        $toggleManager = $this->container->get('capco.toggle.manager');
+        $toggleManager = $this->container->get('Capco\AppBundle\Toggle\Manager');
 
         $encoder = $this->get('security.encoder_factory')->getEncoder($user);
         if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {

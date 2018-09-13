@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Manager;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Loggable\Entity\LogEntry;
 use Sonata\UserBundle\Entity\UserManager;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -13,8 +13,11 @@ class LogManager
     protected $userManager;
     protected $em;
 
-    public function __construct(TranslatorInterface $translator, UserManager $userManager, EntityManager $em)
-    {
+    public function __construct(
+        TranslatorInterface $translator,
+        UserManager $userManager,
+        EntityManagerInterface $em
+    ) {
         $this->translator = $translator;
         $this->userManager = $userManager;
         $this->em = $em;
@@ -25,9 +28,7 @@ class LogManager
         $sentences = [];
         $username = $log->getUsername()
             ? $this->userManager->findOneBy(['slug' => $log->getUsername()])
-            : null
-        ;
-
+            : null;
         // Update actions
         if ('update' === $log->getAction()) {
             if (array_key_exists('parent', $log->getData())) {
@@ -40,7 +41,10 @@ class LogManager
                     $sentences[] = $this->makeSentence('unpublish', $username);
                 }
             }
-            if (array_key_exists('archived', $log->getData()) && true === $log->getData()['archived']) {
+            if (
+                array_key_exists('archived', $log->getData()) &&
+                true === $log->getData()['archived']
+            ) {
                 $sentences[] = $this->makeSentence('archive', $username);
             }
             if (array_key_exists('notation', $log->getData())) {
@@ -49,7 +53,10 @@ class LogManager
             if (array_key_exists('comment', $log->getData())) {
                 $sentences[] = $this->makeSentence('comment', $username);
             }
-            if (array_key_exists('title', $log->getData()) || array_key_exists('body', $log->getData())) {
+            if (
+                array_key_exists('title', $log->getData()) ||
+                array_key_exists('body', $log->getData())
+            ) {
                 $sentences[] = $this->makeSentence('update', $username);
             }
             if (array_key_exists('division', $log->getData())) {
@@ -74,8 +81,12 @@ class LogManager
     {
         $transBase = 'synthesis.logs.sentence.';
 
-        return $this->translator->trans($transBase . $action, [
-            '%author%' => $username,
-        ], 'CapcoAppBundle');
+        return $this->translator->trans(
+            $transBase . $action,
+            [
+                '%author%' => $username,
+            ],
+            'CapcoAppBundle'
+        );
     }
 }

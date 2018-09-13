@@ -65,7 +65,7 @@ class PostAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('capco.toggle.manager')
+                ->get('Capco\AppBundle\Toggle\Manager')
                 ->isActive('themes')
         ) {
             $datagridMapper->add('themes', null, ['label' => 'admin.fields.blog_post.themes']);
@@ -105,7 +105,7 @@ class PostAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('capco.toggle.manager')
+                ->get('Capco\AppBundle\Toggle\Manager')
                 ->isActive('themes')
         ) {
             $listMapper->add('themes', null, ['label' => 'admin.fields.blog_post.themes']);
@@ -183,7 +183,7 @@ class PostAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('capco.toggle.manager')
+                ->get('Capco\AppBundle\Toggle\Manager')
                 ->isActive('themes')
         ) {
             $formMapper->add('themes', 'sonata_type_model', [
@@ -244,7 +244,7 @@ class PostAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('capco.toggle.manager')
+                ->get('Capco\AppBundle\Toggle\Manager')
                 ->isActive('themes')
         ) {
             $showMapper->add('themes', null, ['label' => 'admin.fields.blog_post.themes']);

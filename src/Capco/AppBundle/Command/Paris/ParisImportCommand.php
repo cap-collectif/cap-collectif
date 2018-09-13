@@ -58,10 +58,7 @@ class ParisImportCommand extends ContainerAwareCommand
         'filename',
     ];
 
-    protected const CATEGORY_HEADER = [
-        'project_id',
-        'name',
-    ];
+    protected const CATEGORY_HEADER = ['project_id', 'name'];
 
     protected const COMMENT_HEADER = [
         'proposal_id',
@@ -110,15 +107,15 @@ class ParisImportCommand extends ContainerAwareCommand
 
     protected function configure(): void
     {
-        $this
-            ->setName('capco:import:paris')
-            ->setDescription('Import data from paris');
+        $this->setName('capco:import:paris')->setDescription('Import data from paris');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
+        $this->em->getConnection()
+            ->getConfiguration()
+            ->setSQLLogger(null);
         $this->categories = $this->createCategories();
         $this->proposals = $this->createProposals();
         $this->comments = $this->createComments();
@@ -134,21 +131,31 @@ class ParisImportCommand extends ContainerAwareCommand
         $stopwatch->start('import');
         $this->importProjects($output);
         $event = $stopwatch->stop('import');
-        $output->writeln("\n<info>Elapsed time : " . round($event->getDuration() / 1000 / 60, 2) . " minutes. \n Memory usage : " . round($event->getMemory() / 1000000, 2) . ' MB</info>');
+        $output->writeln(
+            "\n<info>Elapsed time : " .
+                round($event->getDuration() / 1000 / 60, 2) .
+                " minutes. \n Memory usage : " .
+                round($event->getMemory() / 1000000, 2) .
+                ' MB</info>'
+        );
     }
 
     protected function importProjects(OutputInterface $output): void
     {
         $csv = Reader::createFromPath(__DIR__ . '/' . self::PROJECTS_FILE);
         $rows = [];
-        $type = $this->em->getRepository(ProjectType::class)->findOneBy(['title' => 'project.types.participatoryBudgeting']);
+        $type = $this->em->getRepository(ProjectType::class)->findOneBy([
+            'title' => 'project.types.participatoryBudgeting',
+        ]);
         $iterator = $csv->setOffset(1)->fetchAssoc(self::PROJECT_HEADER);
         foreach ($iterator as $item) {
             $rows[] = $item;
         }
 
         $output->writeln('<info>Importing projects...</info>');
-        $author = $this->em->getRepository(User::class)->findOneBy(['username' => 'Mairie de Paris']);
+        $author = $this->em->getRepository(User::class)->findOneBy([
+            'username' => 'Mairie de Paris',
+        ]);
         foreach ($rows as $row) {
             $body = $row['animateur_title'] . $row['animateur_body'] . $row['body'];
             $introductionStep = (new PresentationStep())
@@ -169,14 +176,19 @@ class ParisImportCommand extends ContainerAwareCommand
                 ->setPublishedAt(new \DateTime($row['created_at']))
                 ->setUpdatedAt(new \DateTime($row['updated_at']));
             try {
-                if ('' !== $row['filename'] && file_exists(__DIR__ . '/images/' . $row['filename'])) {
-                    $thumbnail = $this->getContainer()->get('capco.media.manager')->createImageFromPath(
-                        __DIR__ . '/images/' . $row['filename']
-                    );
+                if (
+                    '' !== $row['filename'] &&
+                    file_exists(__DIR__ . '/images/' . $row['filename'])
+                ) {
+                    $thumbnail = $this->getContainer()
+                        ->get('Capco\AppBundle\Manager\MediaManager')
+                        ->createImageFromPath(__DIR__ . '/images/' . $row['filename']);
                     $project->setCover($thumbnail);
                 }
             } catch (\Exception $exception) {
-                $output->writeln('<info>' . $row['filename'] . '</info> not found. Set default image instead...');
+                $output->writeln(
+                    '<info>' . $row['filename'] . '</info> not found. Set default image instead...'
+                );
             }
             $project->addStep(
                 (new ProjectAbstractStep())
@@ -198,9 +210,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
             $proposalForm = $this->createProposalForm($output, $project, $row['id']);
 
-            $collectStep
-                ->setProposalForm($proposalForm)
-                ->setStatuses($this->createStatuses());
+            $collectStep->setProposalForm($proposalForm)->setStatuses($this->createStatuses());
 
             $this->em->persist($collectStep);
 
@@ -216,12 +226,16 @@ class ParisImportCommand extends ContainerAwareCommand
                 $this->importProposals($output, $parisProjectId, $project);
             }
         }
-        $output->writeln("\n<info>Successfully imported " . \count($this->projects) . ' projects.</info>');
+        $output->writeln(
+            "\n<info>Successfully imported " . \count($this->projects) . ' projects.</info>'
+        );
     }
 
     protected function importDistricts(OutputInterface $output, ProposalForm $proposalForm): void
     {
-        $output->writeln('<info>Importing districts for ' . $proposalForm->getStep()->getTitle() . '...</info>');
+        $output->writeln(
+            '<info>Importing districts for ' . $proposalForm->getStep()->getTitle() . '...</info>'
+        );
 
         $json = \GuzzleHttp\json_decode(file_get_contents(__DIR__ . '/districts.geojson'), true);
         foreach ($json['features'] as $district) {
@@ -234,11 +248,16 @@ class ParisImportCommand extends ContainerAwareCommand
         $output->writeln('<info>Successfully imported districts.</info>');
     }
 
-    protected function importProposals(OutputInterface $output, int $parisProjectId, Project $project): void
-    {
+    protected function importProposals(
+        OutputInterface $output,
+        int $parisProjectId,
+        Project $project
+    ): void {
         $step = $project->getFirstCollectStep();
         if ($step && isset($this->proposals[$parisProjectId])) {
-            $output->writeln("\n<info>Importing proposals for project \"" . $project->getTitle() . '"...</info>');
+            $output->writeln(
+                "\n<info>Importing proposals for project \"" . $project->getTitle() . '"...</info>'
+            );
             $proposals = $this->proposals[$parisProjectId];
             $questions = $step->getProposalForm()->getRealQuestions();
             $categories = $step->getProposalForm()->getCategories();
@@ -251,21 +270,31 @@ class ParisImportCommand extends ContainerAwareCommand
                     ++$count;
                     continue;
                 }
-                $author = $this->em->getRepository(User::class)->findOneBy(['username' => $proposal['author_name']]);
+                $author = $this->em->getRepository(User::class)->findOneBy([
+                    'username' => $proposal['author_name'],
+                ]);
                 $proposalParisId = $proposal['proposal_id'];
-                $district = $this->em->getRepository(District::class)->findOneBy(
-                    ['form' => $step->getProposalForm(), 'name' => $proposal['district']]
-                );
+                $district = $this->em->getRepository(District::class)->findOneBy([
+                    'form' => $step->getProposalForm(),
+                    'name' => $proposal['district'],
+                ]);
                 $responses = $this->createResponses($proposal, $questions);
-                $category = $categories->filter(function (ProposalCategory $category) use ($proposal) {
-                    return false !== stripos($category->getName(), $proposal['category']);
-                })->first();
-                $status = $statuses->filter(function (Status $status) use ($proposal) {
-                    return false !== stripos(
-                            Slugify::create()->slugify($status->getName()),
-                            $proposal['status']
+                $category = $categories
+                    ->filter(function (ProposalCategory $category) use ($proposal) {
+                        return false !== stripos($category->getName(), $proposal['category']);
+                    })
+                    ->first();
+                $status = $statuses
+                    ->filter(function (Status $status) use ($proposal) {
+                        return (
+                            false !==
+                            stripos(
+                                Slugify::create()->slugify($status->getName()),
+                                $proposal['status']
+                            )
                         );
-                })->first();
+                    })
+                    ->first();
                 $proposal = (new Proposal())
                     ->setTitle($proposal['title'])
                     ->setAuthor($author)
@@ -304,14 +333,21 @@ class ParisImportCommand extends ContainerAwareCommand
             $progress->finish();
             $output->writeln("\n<info>Successfully imported proposals.</info>");
         } else {
-            $output->writeln("\n<info>No proposals found for project \"" . $project->getTitle() . '"</info>');
+            $output->writeln(
+                "\n<info>No proposals found for project \"" . $project->getTitle() . '"</info>'
+            );
         }
     }
 
-    protected function importComments(OutputInterface $output, Proposal $proposal, int $proposalParisId): void
-    {
+    protected function importComments(
+        OutputInterface $output,
+        Proposal $proposal,
+        int $proposalParisId
+    ): void {
         if (isset($this->comments[$proposalParisId])) {
-            $output->writeln("\n<info>Importing comments for proposal \"" . $proposal->getTitle() . '"</info>');
+            $output->writeln(
+                "\n<info>Importing comments for proposal \"" . $proposal->getTitle() . '"</info>'
+            );
             $comments = $this->comments[$proposalParisId];
             $progress = new ProgressBar($output, \count($comments));
             foreach ($comments as $comment) {
@@ -319,7 +355,9 @@ class ParisImportCommand extends ContainerAwareCommand
                     $progress->advance();
                     continue;
                 }
-                $author = $this->em->getRepository(User::class)->findOneBy(['username' => $comment['author_name']]);
+                $author = $this->em->getRepository(User::class)->findOneBy([
+                    'username' => $comment['author_name'],
+                ]);
                 $comment = (new ProposalComment())
                     ->setAuthor($author)
                     ->setProposal($proposal)
@@ -332,7 +370,9 @@ class ParisImportCommand extends ContainerAwareCommand
             $progress->finish();
             $output->writeln("\n<info>Successfully imported comments for proposal.</info>");
         } else {
-            $output->writeln('<info>No comments found for proposal "' . $proposal->getTitle() . '"</info>');
+            $output->writeln(
+                '<info>No comments found for proposal "' . $proposal->getTitle() . '"</info>'
+            );
         }
     }
 
@@ -358,9 +398,11 @@ class ParisImportCommand extends ContainerAwareCommand
         $questionColumns = ['objectif', 'diagnostic'];
         foreach ($questionColumns as $questionColumn) {
             if ($row[$questionColumn]) {
-                $question = $questions->filter(function (AbstractQuestion $question) use ($questionColumn) {
-                    return false !== stripos($question->getTitle(), $questionColumn);
-                })->first();
+                $question = $questions
+                    ->filter(function (AbstractQuestion $question) use ($questionColumn) {
+                        return false !== stripos($question->getTitle(), $questionColumn);
+                    })
+                    ->first();
                 if ($question) {
                     $responses[] = (new ValueResponse())
                         ->setValue($row[$questionColumn])
@@ -372,8 +414,11 @@ class ParisImportCommand extends ContainerAwareCommand
         return $responses;
     }
 
-    protected function createProposalForm(OutputInterface $output, Project $project, int $parisProjectId): ProposalForm
-    {
+    protected function createProposalForm(
+        OutputInterface $output,
+        Project $project,
+        int $parisProjectId
+    ): ProposalForm {
         $formName = 'Formulaire pour "' . $project->getTitle() . '"';
         $output->writeln('<info>Creating "' . $formName . '" form...</info>');
 
@@ -406,8 +451,7 @@ class ParisImportCommand extends ContainerAwareCommand
         }
 
         foreach ($projectCategories as $categoryName) {
-            $category = (new ProposalCategory())
-                ->setName($categoryName);
+            $category = (new ProposalCategory())->setName($categoryName);
             $proposalForm->addCategory($category);
         }
 
@@ -511,7 +555,13 @@ class ParisImportCommand extends ContainerAwareCommand
     private function printMemoryUsage(OutputInterface $output): void
     {
         $output->write("\n");
-        $output->writeln(sprintf('Memory usage (currently) %dKB/ (max) %dKB', round(memory_get_usage(true) / 1024), memory_get_peak_usage(true) / 1024));
+        $output->writeln(
+            sprintf(
+                'Memory usage (currently) %dKB/ (max) %dKB',
+                round(memory_get_usage(true) / 1024),
+                memory_get_peak_usage(true) / 1024
+            )
+        );
     }
 
     private function array_group_by(array $arr, callable $key_selector): array

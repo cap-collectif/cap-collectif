@@ -31,8 +31,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $output->writeln('');
         $output->writeln('Resetting the feature toggles to the default configuration');
 
-        $toggleManager = $this->getContainer()->get('capco.toggle.manager');
-
+        $toggleManager = $this->getContainer()->get('Capco\AppBundle\Toggle\Manager');
         $toggleManager->activate('blog');
         $toggleManager->activate('calendar');
         $toggleManager->activate('newsletter');

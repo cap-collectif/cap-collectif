@@ -46,7 +46,7 @@ class ProposalController extends Controller
         }
 
         $serializer = $this->get('serializer');
-        $urlResolver = $this->get('capco.url.resolver');
+        $urlResolver = $this->get('Capco\AppBundle\Resolver\UrlResolver');
 
         $stepUrls = $project
             ->getSteps()

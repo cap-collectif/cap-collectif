@@ -45,7 +45,9 @@ class ThemeController extends Controller
             $form->setData(['term' => $term]);
         }
 
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('themes.pagination');
+        $pagination = $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
+            'themes.pagination'
+        );
 
         $themes = $this->get('capco.theme.repository')->getSearchResultsWithCounters(
             $pagination,

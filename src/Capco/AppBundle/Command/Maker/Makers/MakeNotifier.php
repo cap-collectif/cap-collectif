@@ -30,17 +30,26 @@ class MakeNotifier extends AbstractMaker
 
     protected function configure()
     {
-        $this
-            ->setName('capco:make:notifier')
+        $this->setName('capco:make:notifier')
             ->setDescription('Generate a notifier')
-            ->addArgument('name', InputArgument::REQUIRED, "The name of your notifier. You don't need to put the suffix Notifier, it will be automatically added.");
+            ->addArgument(
+                'name',
+                InputArgument::REQUIRED,
+                "The name of your notifier. You don't need to put the suffix Notifier, it will be automatically added."
+            );
     }
 
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getArgument('name')) {
-            $input->setArgument('name',
-                $this->askSimpleQuestion($input, $output, 'Please specify the name of your notifier. Note that Notifier suffix will be automatically added. <info>(e.g Proposal)</info>'));
+            $input->setArgument(
+                'name',
+                $this->askSimpleQuestion(
+                    $input,
+                    $output,
+                    'Please specify the name of your notifier. Note that Notifier suffix will be automatically added. <info>(e.g Proposal)</info>'
+                )
+            );
         }
     }
 
@@ -51,32 +60,7 @@ class MakeNotifier extends AbstractMaker
         $this->className .= 'Notifier';
 
         $path = $this->makeFile();
-        $service = $this->configureService();
 
         $output->writeln('<info>File successfully written at ' . realpath($path) . '</info>');
-        $output->writeln('<info>Successfully added service "' . $service . '" to ' . $this->getNotifiersPath() . '</info>');
-    }
-
-    private function getNotifiersPath(): string
-    {
-        return realpath($this->sourcePath . '/Capco/AppBundle/Resources/config/services/notifiers.yml');
-    }
-
-    private function configureService(): string
-    {
-        $service = 'capco.' . Text::snakeCase($this->className);
-        $yml = <<<EOF
-  {$service}:
-    class: Capco\AppBundle\Notifier\\{$this->className}
-    arguments:
-      - '@mailer_service'
-      - '@capco.site_parameter.resolver'
-      - '@capco.resolvers.users'
-EOF;
-        if (false === file_put_contents($this->getNotifiersPath(), $yml, FILE_APPEND)) {
-            throw new \RuntimeException(sprintf('Error during writing of file %s', $this->getNotifiersPath()));
-        }
-
-        return $service;
     }
 }

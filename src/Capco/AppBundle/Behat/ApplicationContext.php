@@ -340,7 +340,7 @@ class ApplicationContext extends UserContext
      */
     public function allFeaturesAreEnabled()
     {
-        $this->getService('capco.toggle.manager')->activateAll();
+        $this->getService('Capco\AppBundle\Toggle\Manager')->activateAll();
     }
 
     /**
@@ -353,11 +353,11 @@ class ApplicationContext extends UserContext
      */
     public function activateFeatures(string $featureA, $featureB = null, $featureC = null)
     {
-        $this->getService('capco.toggle.manager')->activate($featureA);
+        $this->getService('Capco\AppBundle\Toggle\Manager')->activate($featureA);
         if ($featureB) {
-            $this->getService('capco.toggle.manager')->activate($featureB);
+            $this->getService('Capco\AppBundle\Toggle\Manager')->activate($featureB);
             if ($featureC) {
-                $this->getService('capco.toggle.manager')->activate($featureC);
+                $this->getService('Capco\AppBundle\Toggle\Manager')->activate($featureC);
             }
         }
     }

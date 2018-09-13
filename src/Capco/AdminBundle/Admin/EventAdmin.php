@@ -50,7 +50,7 @@ class EventAdmin extends Admin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('capco.toggle.manager')
+                ->get('Capco\AppBundle\Toggle\Manager')
                 ->isActive('themes')
         ) {
             $datagridMapper->add('themes', null, [
@@ -108,7 +108,7 @@ class EventAdmin extends Admin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('capco.toggle.manager')
+                ->get('Capco\AppBundle\Toggle\Manager')
                 ->isActive('themes')
         ) {
             $listMapper->add('themes', null, [
@@ -225,7 +225,7 @@ class EventAdmin extends Admin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('capco.toggle.manager')
+                ->get('Capco\AppBundle\Toggle\Manager')
                 ->isActive('themes')
         ) {
             $formMapper->add('themes', 'sonata_type_model', [
@@ -309,7 +309,7 @@ class EventAdmin extends Admin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('capco.toggle.manager')
+                ->get('Capco\AppBundle\Toggle\Manager')
                 ->isActive('themes')
         ) {
             $showMapper->add('themes', null, [

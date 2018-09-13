@@ -46,7 +46,7 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 $data = $form->getData();
 
-                $adminEmail = $this->get('capco.site_parameter.resolver')->getValue(
+                $adminEmail = $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
                     'admin.mail.contact'
                 );
                 if (null === $adminEmail) {

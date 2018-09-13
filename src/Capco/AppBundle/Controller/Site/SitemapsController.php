@@ -17,7 +17,7 @@ class SitemapsController extends Controller
      */
     public function sitemapAction()
     {
-        $toggleManager = $this->get('capco.toggle.manager');
+        $toggleManager = $this->get('Capco\AppBundle\Toggle\Manager');
         $em = $this->getDoctrine()->getManager();
         $urls = [];
         $hostname = $this->get('request_stack')
@@ -127,7 +127,7 @@ class SitemapsController extends Controller
         ];
 
         // Steps
-        $stepResolver = $this->get('capco.step.resolver');
+        $stepResolver = $this->get('Capco\AppBundle\Resolver\StepResolver');
         /** @var AbstractStep $step */
         foreach (
             $this->get('capco.abstract_step.repository')->findBy(['isEnabled' => true])

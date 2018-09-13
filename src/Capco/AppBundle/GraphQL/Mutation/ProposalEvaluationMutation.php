@@ -34,10 +34,14 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
 
         $isEvaluer = $proposalRepo->isViewerAnEvaluer($proposal, $user);
         if (!$isEvaluer && !$user->isAdmin()) {
-            throw new UserError(sprintf('You are not an evaluer of proposal with id %s', $arguments['proposalId']));
+            throw new UserError(
+                sprintf('You are not an evaluer of proposal with id %s', $arguments['proposalId'])
+            );
         }
         unset($arguments['proposalId']);
-        $proposalEvaluation = $this->container->get('capco.proposal_evaluation.repository')->findOneBy([
+        $proposalEvaluation = $this->container->get(
+            'capco.proposal_evaluation.repository'
+        )->findOneBy([
             'proposal' => $proposal,
         ]);
 
@@ -53,7 +57,9 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
         }
 
         if (isset($arguments['responses'])) {
-            $arguments['responses'] = $this->container->get('responses.formatter')->format($arguments['responses']);
+            $arguments['responses'] = $this->container->get(
+                'Capco\AppBundle\Helper\ResponsesFormatter'
+            )->format($arguments['responses']);
         }
 
         $form = $formFactory->create(ProposalEvaluationType::class, $proposalEvaluation);

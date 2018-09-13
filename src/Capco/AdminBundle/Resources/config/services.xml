@@ -15,12 +15,12 @@
             <argument>capco_admin.blog.block.recent_posts</argument>
             <argument type="service" id="templating" />
             <argument type="service" id="capco.blog.post.repository" />
-            <argument type="service" id="capco.toggle.manager" />
+            <argument type="service" id="Capco\AppBundle\Toggle\Manager" />
             <tag name="sonata.block" />
         </service>
 
         <service id="capco.admin.features_category_resolver" class="Capco\AdminBundle\Resolver\FeaturesCategoryResolver">
-            <argument type="service" id="capco.toggle.manager" />
+            <argument type="service" id="Capco\AppBundle\Toggle\Manager" />
         </service>
 
         <service id="capco.admin.features_category_extension" class="Capco\AdminBundle\Twig\FeaturesCategoryExtension">
@@ -35,7 +35,7 @@
 
         <service id="capco_admin.recent_contributions_resolver" class="Capco\AdminBundle\Resolver\RecentContributionsResolver">
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="capco.toggle.manager" />
+            <argument type="service" id="Capco\AppBundle\Toggle\Manager" />
         </service>
 
         <service id="capco_admin.recent_reports_resolver" class="Capco\AdminBundle\Resolver\RecentReportingResolver">
@@ -61,7 +61,7 @@
 
         <service id="capco.intl.timezone_detector.global" class="%sonata.intl.timezone_detector.global.class%">
             <tag name="sonata_intl.timezone_detector" alias="global" />
-            <argument type="service" id="capco.site_parameter.resolver" />
+            <argument type="service" id="Capco\AppBundle\SiteParameter\Resolver" />
         </service>
 
     </services>

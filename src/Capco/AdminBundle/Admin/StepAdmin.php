@@ -245,7 +245,7 @@ class StepAdmin extends CapcoAdmin
             if (
                 $this->getConfigurationPool()
                     ->getContainer()
-                    ->get('capco.toggle.manager')
+                    ->get('Capco\AppBundle\Toggle\Manager')
                     ->isActive('phone_confirmation')
             ) {
                 $formMapper->add('verification', 'choice', [

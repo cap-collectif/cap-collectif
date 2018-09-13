@@ -32,7 +32,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $this->entityManager = $container->get('doctrine')->getManager();
-        $contributionResolver = $container->get('capco.contribution.resolver');
+        $contributionResolver = $container->get('Capco\AppBundle\Resolver\ContributionResolver');
         $this->force = $input->getOption('force');
 
         // ****************************** Opinion counters **********************************************

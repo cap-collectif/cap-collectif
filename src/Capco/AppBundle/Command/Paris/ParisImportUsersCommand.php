@@ -27,7 +27,7 @@ class ParisImportUsersCommand extends ContainerAwareCommand
 {
     protected const USERS_BATCH_SIZE = 500;
 
-    protected  const USERS_FILE = 'paris_users.csv';
+    protected const USERS_FILE = 'paris_users.csv';
 
     protected const LISTENERS_WHITELIST = [
         SluggableListener::class,
@@ -106,15 +106,15 @@ class ParisImportUsersCommand extends ContainerAwareCommand
 
     protected function configure(): void
     {
-        $this
-            ->setName('capco:import:paris-users')
-            ->setDescription('Import users from paris');
+        $this->setName('capco:import:paris-users')->setDescription('Import users from paris');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
+        $this->em->getConnection()
+            ->getConfiguration()
+            ->setSQLLogger(null);
         $this->users = $this->createUsers();
         $this->faker = Factory::create();
     }
@@ -127,7 +127,13 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         $this->importUsers($output);
         $this->enableListeners($output);
         $event = $stopwatch->stop('import');
-        $output->writeln("\n<info>Elapsed time : " . round($event->getDuration() / 1000 / 60, 2) . " minutes. \n Memory usage : " . round($event->getMemory() / 1000000, 2) . ' MB</info>');
+        $output->writeln(
+            "\n<info>Elapsed time : " .
+                round($event->getDuration() / 1000 / 60, 2) .
+                " minutes. \n Memory usage : " .
+                round($event->getMemory() / 1000000, 2) .
+                ' MB</info>'
+        );
     }
 
     protected function createUsers(): array
@@ -146,18 +152,14 @@ class ParisImportUsersCommand extends ContainerAwareCommand
     {
         foreach (self::PROFILES_TYPES as $key => $value) {
             if (!$this->em->getRepository(UserType::class)->findOneBy(['name' => $value])) {
-                $type = (new UserType())
-                    ->setName($value)
-                    ->setCreatedAt(new \DateTime());
+                $type = (new UserType())->setName($value)->setCreatedAt(new \DateTime());
                 $this->em->persist($type);
                 $this->em->flush();
             }
         }
         foreach (self::PROFILES_TYPES_RATTACHEMENT as $agentName) {
             if (!$this->em->getRepository(UserType::class)->findOneBy(['name' => $agentName])) {
-                $type = (new UserType())
-                    ->setName($agentName)
-                    ->setCreatedAt(new \DateTime());
+                $type = (new UserType())->setName($agentName)->setCreatedAt(new \DateTime());
                 $this->em->persist($type);
                 $this->em->flush();
             }
@@ -174,18 +176,24 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         $progress = new ProgressBar($output, \count($this->users));
         $types = $this->getUserTypes();
         foreach ($this->users as $userRow) {
-            $type = $types->filter(function (UserType $type) use ($userRow) {
-                if (!$userRow['user_type'] || 'p' === $userRow['user_type']) {
-                    return 'Un particulier' === $type->getName();
-                }
-                if ($userRow['user_type_rattachement']) {
-                    return $type->getName() === $userRow['user_type_rattachement'];
-                }
+            $type = $types
+                ->filter(function (UserType $type) use ($userRow) {
+                    if (!$userRow['user_type'] || 'p' === $userRow['user_type']) {
+                        return 'Un particulier' === $type->getName();
+                    }
+                    if ($userRow['user_type_rattachement']) {
+                        return $type->getName() === $userRow['user_type_rattachement'];
+                    }
 
-                return $type->getName() === self::PROFILES_TYPES[$userRow['user_type']];
-            })->first();
-            $firstName = ('' === $userRow['firstname'] || !$userRow['firstname']) ? null : $userRow['firstname'];
-            $lastName = ('' === $userRow['lastname'] || !$userRow['lastname']) ? null : $userRow['lastname'];
+                    return $type->getName() === self::PROFILES_TYPES[$userRow['user_type']];
+                })
+                ->first();
+            $firstName = ('' === $userRow['firstname'] || !$userRow['firstname'])
+                ? null
+                : $userRow['firstname'];
+            $lastName = ('' === $userRow['lastname'] || !$userRow['lastname'])
+                ? null
+                : $userRow['lastname'];
             $email = '' === $userRow['email'] ? $userRow['email_init'] : $userRow['email'];
             $address = '' === $userRow['address'] ? null : $userRow['address'];
             $zipCode = '' === $userRow['zipcode'] ? null : (int) $userRow['zipcode'];
@@ -204,25 +212,34 @@ class ParisImportUsersCommand extends ContainerAwareCommand
                 ->setParisId($email)
                 ->setCreatedAt(new \DateTime($userRow['created_at']))
                 ->setLastLogin(new \DateTime($userRow['last_login_at']))
-                ->setDateOfBirth(new \DateTime($userRow['birthdate']))
-            ;
+                ->setDateOfBirth(new \DateTime($userRow['birthdate']));
             try {
-                if ('' !== $userRow['filename'] && file_exists(__DIR__ . '/images/' . $userRow['filename'])) {
-                    $avatar = $this->getContainer()->get('capco.media.manager')->createImageFromPath(
-                        __DIR__ . '/images/' . $userRow['filename']
-                    );
+                if (
+                    '' !== $userRow['filename'] &&
+                    file_exists(__DIR__ . '/images/' . $userRow['filename'])
+                ) {
+                    $avatar = $this->getContainer()
+                        ->get('Capco\AppBundle\Manager\MediaManager')
+                        ->createImageFromPath(__DIR__ . '/images/' . $userRow['filename']);
                     $user->setMedia($avatar);
                 }
             } catch (\Exception $exception) {
-                $output->writeln('<info>' . $userRow['filename'] . '</info> not found. Set default image instead...');
+                $output->writeln(
+                    '<info>' .
+                        $userRow['filename'] .
+                        '</info> not found. Set default image instead...'
+                );
             }
             if ('' === $userRow['notification_type']) {
                 $user->setNotificationsConfiguration(
-                    (new UserNotificationsConfiguration())
-                        ->setOnProposalCommentMail(false)
+                    (new UserNotificationsConfiguration())->setOnProposalCommentMail(false)
                 );
                 $output->write("\n");
-                $output->writeln('Disabled on proposal comment notifications for user <info>' . $user->getUsername() . '</info>');
+                $output->writeln(
+                    'Disabled on proposal comment notifications for user <info>' .
+                        $user->getUsername() .
+                        '</info>'
+                );
             }
             $this->em->persist($user);
             if ('' !== $userRow['newsletter_subscription']) {
@@ -257,7 +274,13 @@ class ParisImportUsersCommand extends ContainerAwareCommand
     private function printMemoryUsage(OutputInterface $output): void
     {
         $output->write("\n");
-        $output->writeln(sprintf('Memory usage (currently) %dKB/ (max) %dKB', round(memory_get_usage(true) / 1024), memory_get_peak_usage(true) / 1024));
+        $output->writeln(
+            sprintf(
+                'Memory usage (currently) %dKB/ (max) %dKB',
+                round(memory_get_usage(true) / 1024),
+                memory_get_peak_usage(true) / 1024
+            )
+        );
     }
 
     private function disableListeners(OutputInterface $output): void
@@ -265,11 +288,17 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         foreach ($this->em->getEventManager()->getListeners() as $event => $listeners) {
             $this->events = $this->em->getEventManager()->getListeners();
             foreach ($listeners as $key => $listener) {
-                if (\is_string($listener) || \in_array(\get_class($listener), self::LISTENERS_WHITELIST, true)) {
+                if (
+                    \is_string($listener) ||
+                    \in_array(\get_class($listener), self::LISTENERS_WHITELIST, true)
+                ) {
                     continue;
                 }
                 if (method_exists($listener, 'getSubscribedEvents')) {
-                    $this->em->getEventManager()->removeEventListener($listener->getSubscribedEvents(), $listener);
+                    $this->em->getEventManager()->removeEventListener(
+                        $listener->getSubscribedEvents(),
+                        $listener
+                    );
                     $output->writeln('Disabled <info>' . \get_class($listener) . '</info>');
                 }
             }
@@ -281,7 +310,10 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         foreach ($this->events as $event => $listeners) {
             foreach ($listeners as $key => $listener) {
                 if (method_exists($listener, 'getSubscribedEvents')) {
-                    $this->em->getEventManager()->addEventListener($listener->getSubscribedEvents(), $listener);
+                    $this->em->getEventManager()->addEventListener(
+                        $listener->getSubscribedEvents(),
+                        $listener
+                    );
                     $output->writeln('Enabled <info>' . \get_class($listener) . '</info>');
                 }
             }

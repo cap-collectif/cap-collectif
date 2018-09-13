@@ -32,7 +32,9 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
         $sendEmail = false; // Not used for now
         $inputFilePath = $input->getArgument('input');
         $outputFilePath = $input->getArgument('output');
-        $rows = $container->get('import.csvtoarray')->convert($inputFilePath);
+        $rows = $container
+            ->get('Capco\AppBundle\Helper\ConvertCsvToArray')
+            ->convert($inputFilePath);
         $userManager = $container->get('fos_user.user_manager');
         $tokenGenerator = $container->get('fos_user.util.token_generator');
         $router = $container->get('router');

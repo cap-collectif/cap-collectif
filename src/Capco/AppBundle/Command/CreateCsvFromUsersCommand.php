@@ -145,7 +145,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
-        if (!$container->get('capco.toggle.manager')->isActive('export')) {
+        if (!$container->get('Capco\AppBundle\Toggle\Manager')->isActive('export')) {
             return;
         }
         $fileName = 'users.csv';

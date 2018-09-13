@@ -24,7 +24,7 @@ class RegistrationFormExtension extends \Twig_Extension
         ];
     }
 
-    public function serializeFields()
+    public function serializeFields(): array
     {
         $form = $this->formRepo->findCurrent();
         $serializedQuestions = $this->serializer->serialize(
@@ -40,12 +40,12 @@ class RegistrationFormExtension extends \Twig_Extension
         );
 
         return [
-          'bottomTextDisplayed' => $form ? $form->isBottomTextDisplayed() : '',
-          'bottomText' => $form ? $form->getBottomText() : '',
-          'topTextDisplayed' => $form ? $form->isTopTextDisplayed() : '',
-          'topText' => $form ? $form->getTopText() : '',
-          'domains' => json_decode($serializedDomains, true),
-          'questions' => json_decode($serializedQuestions, true),
+            'bottomTextDisplayed' => $form ? $form->isBottomTextDisplayed() : '',
+            'bottomText' => $form ? $form->getBottomText() : '',
+            'topTextDisplayed' => $form ? $form->isTopTextDisplayed() : '',
+            'topText' => $form ? $form->getTopText() : '',
+            'domains' => json_decode($serializedDomains, true),
+            'questions' => json_decode($serializedQuestions, true),
         ];
     }
 }

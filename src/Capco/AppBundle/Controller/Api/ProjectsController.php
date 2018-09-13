@@ -36,7 +36,7 @@ class ProjectsController extends FOSRestController
     {
         $shouldLimit =
             !$paramFetcher->get('limit') &&
-            $this->get('capco.toggle.manager')->isActive('projects_form');
+            $this->get('Capco\AppBundle\Toggle\Manager')->isActive('projects_form');
         $projectSearchParameters = ProjectSearchParameters::createFromRequest(
             $paramFetcher,
             $shouldLimit
@@ -44,14 +44,16 @@ class ProjectsController extends FOSRestController
         if (
             $shouldLimit &&
             !$paramFetcher->get('limit') &&
-            $this->get('capco.toggle.manager')->isActive('projects_form')
+            $this->get('Capco\AppBundle\Toggle\Manager')->isActive('projects_form')
         ) {
             $projectSearchParameters->setElements(
-                $this->get('capco.site_parameter.resolver')->getValue('projects.pagination')
+                $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
+                    'projects.pagination'
+                )
             );
         }
 
-        return $this->get('capco.project.search.resolver')->search(
+        return $this->get('Capco\AppBundle\Resolver\Project\ProjectSearchResolver')->search(
             $projectSearchParameters,
             $this->getUser()
         );
@@ -129,7 +131,7 @@ class ProjectsController extends FOSRestController
             // throw new BadRequestHttpException('Only votes stats can be filtered by theme or district.');
         }
 
-        $data = $this->get('capco.project_stats.resolver')->getStatsForStepByKey(
+        $data = $this->get('Capco\AppBundle\Resolver\ProjectStatsResolver')->getStatsForStepByKey(
             $step,
             $key,
             $limit,

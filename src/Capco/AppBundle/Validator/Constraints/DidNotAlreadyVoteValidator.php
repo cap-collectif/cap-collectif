@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Validator\Constraints;
 
 use Capco\AppBundle\Entity\ProposalSelectionVote;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -12,7 +12,7 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
 {
     private $entityManager;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
@@ -41,12 +41,9 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
 
         foreach ($votes as $vote) {
             if ($vote->getId() !== $object->getId()) {
-                $this->context
-                    ->buildViolation($constraint->message)
+                $this->context->buildViolation($constraint->message)
                     ->atPath('email')
-                    ->addViolation()
-                ;
-
+                    ->addViolation();
                 return false;
             }
         }

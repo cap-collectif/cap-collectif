@@ -13,16 +13,13 @@ class ListCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this
-            ->setName('capco:toggle:list')
-            ->setDescription('Show a list of all feature toggles')
-        ;
+        $this->setName('capco:toggle:list')->setDescription('Show a list of all feature toggles');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $style = new SymfonyStyle($input, $output);
-        $toggleManager = $this->getContainer()->get('capco.toggle.manager');
+        $toggleManager = $this->getContainer()->get('Capco\AppBundle\Toggle\Manager');
         $list = $toggleManager->all();
         array_walk($list, function (&$value, $name) {
             $value = [$name, $value ? 'Yes' : 'No'];

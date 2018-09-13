@@ -39,17 +39,26 @@ class SettingsController extends Controller
         $admin_pool = $this->get('sonata.admin.pool');
         $em = $this->get('doctrine')->getManager();
 
-        $parameters = $em->getRepository('CapcoAppBundle:SiteParameter')->findBy([
-            'category' => $category,
-        ], ['position' => 'ASC']);
+        $parameters = $em->getRepository('CapcoAppBundle:SiteParameter')->findBy(
+            [
+                'category' => $category,
+            ],
+            ['position' => 'ASC']
+        );
 
-        $images = $em->getRepository('CapcoAppBundle:SiteImage')->findBy([
-            'category' => $category,
-        ], ['position' => 'ASC']);
+        $images = $em->getRepository('CapcoAppBundle:SiteImage')->findBy(
+            [
+                'category' => $category,
+            ],
+            ['position' => 'ASC']
+        );
 
-        $colors = $em->getRepository('CapcoAppBundle:SiteColor')->findBy([
-            'category' => $category,
-        ], ['position' => 'ASC']);
+        $colors = $em->getRepository('CapcoAppBundle:SiteColor')->findBy(
+            [
+                'category' => $category,
+            ],
+            ['position' => 'ASC']
+        );
 
         $featuresCategoryResolver = $this->get('capco.admin.features_category_resolver');
         $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
@@ -78,19 +87,36 @@ class SettingsController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $toggleManager = $this->get('capco.toggle.manager');
+        $toggleManager = $this->get('Capco\AppBundle\Toggle\Manager');
         $value = $toggleManager->switchValue($toggle);
 
         if ($value) {
-            $message = $this->get('translator')->trans('features.switch.enabled', [], 'CapcoAppBundle');
+            $message = $this->get('translator')->trans(
+                'features.switch.enabled',
+                [],
+                'CapcoAppBundle'
+            );
         } else {
-            $message = $this->get('translator')->trans('features.switch.disabled', [], 'CapcoAppBundle');
+            $message = $this->get('translator')->trans(
+                'features.switch.disabled',
+                [],
+                'CapcoAppBundle'
+            );
         }
 
-        $this->get('sonata.core.flashmessage.manager')->getSession()->getFlashBag()->add('success', $message);
+        $this->get('sonata.core.flashmessage.manager')
+            ->getSession()
+            ->getFlashBag()
+            ->add('success', $message);
 
-        $category = $this->get('capco.admin.features_category_resolver')->findCategoryForToggle($toggle);
+        $category = $this->get('capco.admin.features_category_resolver')->findCategoryForToggle(
+            $toggle
+        );
 
-        return $this->redirect($this->generateUrl('capco_admin_settings', ['category' => $category ?? 'settings.modules']));
+        return $this->redirect(
+            $this->generateUrl('capco_admin_settings', [
+                'category' => $category ?? 'settings.modules',
+            ])
+        );
     }
 }

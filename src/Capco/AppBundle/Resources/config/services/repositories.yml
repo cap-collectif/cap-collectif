@@ -192,7 +192,7 @@ services:
     arguments: ['CapcoAppBundle:Steps\SelectionStep']
 
   Capco\AppBundle\Repository\SelectionStepRepository:
-    class: Capco\AppBundle\Repository\SelectionStepRepository
+    public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\SelectionStep']
 

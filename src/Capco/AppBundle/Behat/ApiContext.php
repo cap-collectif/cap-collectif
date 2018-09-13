@@ -388,10 +388,12 @@ EOF;
         $element = $this->getEntityManager()
             ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
             ->find($id);
-        $logs = $this->getService('capco.synthesis.log_manager')->getLogEntries($element);
+        $logs = $this->getService('Capco\AppBundle\Manager\LogManager')->getLogEntries($element);
         $logExists = false;
         foreach ($logs as $log) {
-            $sentences = $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log);
+            $sentences = $this->getService(
+                'Capco\AppBundle\Manager\LogManager'
+            )->getSentencesForLog($log);
             if (\in_array($sentence, $sentences, true)) {
                 $logExists = true;
                 break;

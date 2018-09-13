@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Manager\LogManager;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SynthesisElementHandler
@@ -17,24 +17,30 @@ class SynthesisElementHandler
     protected $em;
     protected $logManager;
 
-    public function __construct(EntityManager $em, LogManager $logManager)
+    public function __construct(EntityManagerInterface $em, LogManager $logManager)
     {
         $this->em = $em;
         $this->logManager = $logManager;
     }
 
-    public function getElementsFromSynthesisByType($synthesis, $type = null, $term = null, $offset = 0, $limit = null)
-    {
+    public function getElementsFromSynthesisByType(
+        $synthesis,
+        $type = null,
+        $term = null,
+        $offset = 0,
+        $limit = null
+    ) {
         if (null === $type || !\in_array($type, self::$types, true)) {
             throw new NotFoundHttpException();
         }
 
-        $paginator = $this
-            ->em
-            ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
-            ->getWith($synthesis, $type, $term, $offset, $limit)
-        ;
-
+        $paginator = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith(
+            $synthesis,
+            $type,
+            $term,
+            $offset,
+            $limit
+        );
         $elements = [];
         foreach ($paginator as $element) {
             $elements[] = $element;
@@ -46,16 +52,17 @@ class SynthesisElementHandler
         ];
     }
 
-    public function getElementsTreeFromSynthesisByType($synthesis, $type = null, $parentId = null, $depth = null)
-    {
+    public function getElementsTreeFromSynthesisByType(
+        $synthesis,
+        $type = null,
+        $parentId = null,
+        $depth = null
+    ) {
         if (null === $type || !\in_array($type, self::$types, true)) {
             throw new NotFoundHttpException();
         }
 
-        $repo = $this->em
-            ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
-        ;
-
+        $repo = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement');
         return $repo->getFormattedTree($synthesis, $type, $parentId, $depth);
     }
 
@@ -65,11 +72,16 @@ class SynthesisElementHandler
             throw new NotFoundHttpException();
         }
 
-        return (int) $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->countWith($synthesis, $type);
+        return (int) $this->em->getRepository(
+            'CapcoAppBundle:Synthesis\SynthesisElement'
+        )->countWith($synthesis, $type);
     }
 
-    public function createElementInSynthesis(SynthesisElement $element, Synthesis $synthesis, SynthesisUserInterface $user = null)
-    {
+    public function createElementInSynthesis(
+        SynthesisElement $element,
+        Synthesis $synthesis,
+        SynthesisUserInterface $user = null
+    ) {
         $element->setSynthesis($synthesis);
         $element->setAuthor($user);
 
@@ -83,7 +95,11 @@ class SynthesisElementHandler
     {
         // If we're adding a division to the element, we need to do some stuff
         if ($element->getDivision()) {
-            $division = $this->updateDivisionFromElementInSynthesis($element->getDivision(), $element, $synthesis);
+            $division = $this->updateDivisionFromElementInSynthesis(
+                $element->getDivision(),
+                $element,
+                $synthesis
+            );
         }
 
         // If we're ignoring the element, all childrens must be ignored
@@ -97,8 +113,11 @@ class SynthesisElementHandler
         return $element;
     }
 
-    public function updateDivisionFromElementInSynthesis(SynthesisDivision $division, SynthesisElement $element, Synthesis $synthesis)
-    {
+    public function updateDivisionFromElementInSynthesis(
+        SynthesisDivision $division,
+        SynthesisElement $element,
+        Synthesis $synthesis
+    ) {
         foreach ($division->getElements() as $el) {
             $el->setSynthesis($synthesis);
             $el->setAuthor($element->getAuthor());

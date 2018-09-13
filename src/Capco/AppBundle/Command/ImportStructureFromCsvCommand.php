@@ -36,9 +36,10 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this
-            ->setName('capco:import:structure-from-csv')
-            ->setDescription('Import consultation from CSV file with specified author and consultation step')
+        $this->setName('capco:import:structure-from-csv')
+            ->setDescription(
+                'Import consultation from CSV file with specified author and consultation step'
+            )
             ->addArgument(
                 'filePath',
                 InputArgument::REQUIRED,
@@ -48,8 +49,7 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
                 'name',
                 InputArgument::REQUIRED,
                 'Please provide the name of the structure to create.'
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -60,8 +60,8 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
     protected function getOpinionTypes()
     {
         return $this->getContainer()
-                    ->get('import.csvtoarray')
-                    ->convert($this->filePath);
+            ->get('Capco\AppBundle\Helper\ConvertCsvToArray')
+            ->convert($this->filePath);
     }
 
     protected function import(InputInterface $input, OutputInterface $output)
@@ -71,7 +71,9 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
 
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
-        $appendixType = $em->getRepository('CapcoAppBundle:AppendixType')->findOneBySlug('expose-des-motifs');
+        $appendixType = $em
+            ->getRepository('CapcoAppBundle:AppendixType')
+            ->findOneBySlug('expose-des-motifs');
 
         $consultationStepType = new ConsultationStepType();
         $consultationStepType->setTitle($name);

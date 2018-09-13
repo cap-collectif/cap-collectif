@@ -18,7 +18,7 @@ class MediasController extends FOSRestController
     public function postMediaAction(Request $request)
     {
         $uploadedMedia = $request->files->get('file');
-        $mediaManager = $this->get('capco.media.manager');
+        $mediaManager = $this->get('Capco\AppBundle\Manager\MediaManager');
         $em = $this->get('doctrine.orm.entity_manager');
 
         if (!$uploadedMedia) {
@@ -28,10 +28,12 @@ class MediasController extends FOSRestController
         $media = $mediaManager->createFileFromUploadedFile($uploadedMedia);
 
         return [
-          'name' => $media->getName(),
-          'id' => $media->getId(),
-          'size' => $this->formatBytes($media->getSize()),
-          'url' => $request->getUriForPath('/media') . $this->get('sonata.media.twig.extension')->path($media, 'reference'),
+            'name' => $media->getName(),
+            'id' => $media->getId(),
+            'size' => $this->formatBytes($media->getSize()),
+            'url' =>
+                $request->getUriForPath('/media') .
+                    $this->get('sonata.media.twig.extension')->path($media, 'reference'),
         ];
     }
 

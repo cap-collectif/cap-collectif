@@ -66,13 +66,10 @@ class EventController extends Controller
             ]);
         }
 
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(
-            false,
-            $theme,
-            $project,
-            $term
-        );
-        $archivedEventsNb = $this->get('capco.event.resolver')->countEvents(
+        $groupedEvents = $this->get(
+            'Capco\AppBundle\Resolver\EventResolver'
+        )->getEventsGroupedByYearAndMonth(false, $theme, $project, $term);
+        $archivedEventsNb = $this->get('Capco\AppBundle\Resolver\EventResolver')->countEvents(
             true,
             $theme,
             $project,
@@ -138,12 +135,9 @@ class EventController extends Controller
             ]);
         }
 
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(
-            true,
-            $theme,
-            $project,
-            $term
-        );
+        $groupedEvents = $this->get(
+            'Capco\AppBundle\Resolver\EventResolver'
+        )->getEventsGroupedByYearAndMonth(true, $theme, $project, $term);
 
         return [
             'years' => $groupedEvents,
@@ -158,7 +152,7 @@ class EventController extends Controller
      */
     public function showAction(Request $request, Event $event)
     {
-        $eventHelper = $this->container->get('capco.event.helper');
+        $eventHelper = $this->container->get('Capco\AppBundle\Helper\EventHelper');
 
         $serializer = $this->get('jms_serializer');
 

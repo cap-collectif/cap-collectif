@@ -9,12 +9,21 @@ use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
-use Doctrine\ORM\EntityManager;
-use Monolog\Logger;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 
 class ProposalResolver
 {
-    const FOLLOWER_HEADER = ['id', 'email', 'username', 'firstname', 'lastname', 'followedAt', 'userType_name', 'show_url'];
+    const FOLLOWER_HEADER = [
+        'id',
+        'email',
+        'username',
+        'firstname',
+        'lastname',
+        'followedAt',
+        'userType_name',
+        'show_url',
+    ];
     const FOLLOWER_FILE_EXPORT_NAME = 'followers_%proposal%_%date%';
 
     protected $em;
@@ -22,16 +31,22 @@ class ProposalResolver
     protected $userResolver;
     protected $logger;
 
-    public function __construct(EntityManager $entityManager, string $rootDir, UserResolver $userResolver, Logger $logger)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        string $rootDir,
+        UserResolver $userResolver,
+        LoggerInterface $logger
+    ) {
         $this->em = $entityManager;
         $this->rootDir = $rootDir;
         $this->userResolver = $userResolver;
         $this->logger = $logger;
     }
 
-    public function exportProposalFollowers(Proposal $proposal, string $fileType = Type::CSV): array
-    {
+    public function exportProposalFollowers(
+        Proposal $proposal,
+        string $fileType = Type::CSV
+    ): array {
         $proposalFollowers = $proposal->getFollowers();
         $followers = [];
         /** @var Follower $follower */
@@ -43,7 +58,10 @@ class ProposalResolver
             $followers[$key]['firstname'] = $userFollower->getFirstname();
             $followers[$key]['lastname'] = $userFollower->getLastname();
             $followers[$key]['followedAt'] = $follower->getFollowedAt()->format('d-m-Y H:i:s');
-            $followers[$key]['userType_name'] = null !== $userFollower->getUserType() ? $userFollower->getUserType()->getName() : 'NONE';
+            $followers[$key]['userType_name'] =
+                null !== $userFollower->getUserType()
+                    ? $userFollower->getUserType()->getName()
+                    : 'NONE';
             $followers[$key]['show_url'] = $this->userResolver->resolveShowUrl($userFollower);
         }
         $path = $this->rootDir . '/../web/export/';

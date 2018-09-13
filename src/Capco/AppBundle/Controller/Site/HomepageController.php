@@ -20,8 +20,10 @@ class HomepageController extends Controller
      */
     public function homepageAction(Request $request)
     {
-        $sections = $this->get('capco.section.resolver')->getDisplayableEnabledOrdered();
-        $newsletterActive = $this->get('capco.toggle.manager')->isActive('newsletter');
+        $sections = $this->get(
+            'Capco\AppBundle\Resolver\SectionResolver'
+        )->getDisplayableEnabledOrdered();
+        $newsletterActive = $this->get('Capco\AppBundle\Toggle\Manager')->isActive('newsletter');
 
         $translator = $this->get('translator');
         $deleteType = $request->get('deleteType');

@@ -26,7 +26,10 @@ class CommentController extends Controller
     public function loginToCommentAction($objectType, $objectId)
     {
         return $this->redirect(
-            $this->get('capco.comment.resolver')->getUrlOfObjectByTypeAndId($objectType, $objectId)
+            $this->get('Capco\AppBundle\Manager\CommentResolver')->getUrlOfObjectByTypeAndId(
+                $objectType,
+                $objectId
+            )
         );
     }
 
@@ -39,7 +42,9 @@ class CommentController extends Controller
      */
     public function showCommentsAction($object)
     {
-        $comments = $this->get('capco.comment.resolver')->getCommentsByObject($object);
+        $comments = $this->get('Capco\AppBundle\Manager\CommentResolver')->getCommentsByObject(
+            $object
+        );
 
         return ['comments' => $comments];
     }
@@ -88,7 +93,9 @@ class CommentController extends Controller
                     ->add('success', $this->get('translator')->trans('comment.update.success'));
 
                 return $this->redirect(
-                    $this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment)
+                    $this->get('Capco\AppBundle\Manager\CommentResolver')->getUrlOfRelatedObject(
+                        $comment
+                    )
                 );
             }
             $this->get('session')
@@ -146,7 +153,9 @@ class CommentController extends Controller
                     ->add('info', $this->get('translator')->trans('comment.delete.success'));
 
                 return $this->redirect(
-                    $this->get('capco.comment.resolver')->getUrlOfRelatedObject($comment)
+                    $this->get('Capco\AppBundle\Manager\CommentResolver')->getUrlOfRelatedObject(
+                        $comment
+                    )
                 );
             }
             $this->get('session')

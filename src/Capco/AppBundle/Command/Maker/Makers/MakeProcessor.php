@@ -67,45 +67,6 @@ class MakeProcessor extends AbstractMaker
 
         $path = $this->makeFile();
 
-        // TODO We should delete this function du of autowire
-        //        $service = $this->configureService();
-
         $output->writeln('<info>File successfully written at ' . realpath($path) . '</info>');
-        //        $output->writeln(
-        //            '<info>Successfully added service "' .
-        //                $service .
-        //                '" to ' .
-        //                $this->getProcessorsPath() .
-        //                '</info>'
-        //        );
-    }
-
-    private function getProcessorsPath(): string
-    {
-        return realpath(
-            $this->sourcePath . '/Capco/AppBundle/Resources/config/services/processors.yml'
-        );
-    }
-
-    private function configureService(): string
-    {
-        $shortname = $this->entity->getShortname();
-        $shortnameSnakeCased = Text::snakeCase($shortname);
-        $service = Text::snakeCase(str_replace('Processor', '', $this->className)) . '.processor';
-        $processorPath = "\\$shortname\\{$this->className}";
-        $yml = <<<EOF
-  {$service}:
-    class: Capco\AppBundle\Processor{$processorPath}
-    arguments:
-      - '@capco.$shortnameSnakeCased.repository'
-      - '@capco.{$shortnameSnakeCased}_notifier'
-EOF;
-        if (false === file_put_contents($this->getProcessorsPath(), $yml, FILE_APPEND)) {
-            throw new \RuntimeException(
-                sprintf('Error during writing of file %s', $this->getProcessorsPath())
-            );
-        }
-
-        return $service;
     }
 }

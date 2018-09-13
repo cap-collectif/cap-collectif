@@ -13,17 +13,18 @@ class PopulateIndexCommand extends ContainerAwareCommand
      */
     protected function configure()
     {
-        $this
-            ->setName('capco:es:populate')
-            ->setDescription('Populate the current Elasticsearch Indexes.')
-        ;
+        $this->setName('capco:es:populate')->setDescription(
+            'Populate the current Elasticsearch Indexes.'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
-        if (!$container->get('capco.toggle.manager')->isActive('indexation')) {
-            $output->writeln('<error>Please enable "indexation" feature to run this command</error>');
+        if (!$container->get('Capco\AppBundle\Toggle\Manager')->isActive('indexation')) {
+            $output->writeln(
+                '<error>Please enable "indexation" feature to run this command</error>'
+            );
 
             return 1;
         }

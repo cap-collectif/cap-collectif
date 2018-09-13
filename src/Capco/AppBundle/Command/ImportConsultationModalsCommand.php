@@ -12,8 +12,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('capco:import:consultation-modals-from-csv')
+        $this->setName('capco:import:consultation-modals-from-csv')
             ->setDescription('Import consultation modals from CSV file for consultation step')
             ->addArgument(
                 'filePath',
@@ -24,8 +23,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
                 'step',
                 InputArgument::REQUIRED,
                 'Please provide the slug of the consultation step you want to use'
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -35,22 +33,25 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
 
     protected function import(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        $step = $em->getRepository('CapcoAppBundle:Steps\ConsultationStep')
-                   ->findOneBySlug($input->getArgument('step'))
-                ;
-
+        $em = $this->getContainer()
+            ->get('doctrine')
+            ->getManager();
+        $step = $em
+            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
+            ->findOneBySlug($input->getArgument('step'));
         if (!\is_object($step)) {
-            throw new \InvalidArgumentException('Unknown step with slug ' . $input->getArgument('step'), 1);
+            throw new \InvalidArgumentException(
+                'Unknown step with slug ' . $input->getArgument('step'),
+                1
+            );
         }
 
         $modals = $this->getModals($input->getArgument('filePath'));
         foreach ($modals as $row) {
-            $opinion = $em->getRepository('CapcoAppBundle:Opinion')
-                          ->findOneBy([
-                                'title' => $row['opinion'],
-                                'step' => $step,
-                            ]);
+            $opinion = $em->getRepository('CapcoAppBundle:Opinion')->findOneBy([
+                'title' => $row['opinion'],
+                'step' => $step,
+            ]);
 
             if (!\is_object($opinion)) {
                 throw new \InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
@@ -71,7 +72,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
     protected function getModals(string $filePath)
     {
         return $this->getContainer()
-                    ->get('import.csvtoarray')
-                    ->convert($filePath);
+            ->get('Capco\AppBundle\Helper\ConvertCsvToArray')
+            ->convert($filePath);
     }
 }

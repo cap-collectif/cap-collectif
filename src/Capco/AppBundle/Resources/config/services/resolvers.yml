@@ -1,158 +1,89 @@
 services:
-  capco.comment.resolver:
-    class: Capco\AppBundle\Manager\CommentResolver
-    arguments: ['@doctrine.orm.entity_manager', '@router', '@capco.url.resolver']
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
 
-  capco.project.download.resolver:
-    class: Capco\AppBundle\Resolver\ProjectDownloadResolver
-    arguments:
-      - '@doctrine.orm.entity_manager'
-      - '@translator'
-      - '@capco.url.array.resolver'
-      - '@capco.url.resolver'
-      - '@phpexcel'
-      - '@sonata.media.twig.extension'
-      - '@twig.extension.httpfoundation'
+  Capco\AppBundle\Resolver\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Resolver/*'
+  #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'
 
-  capco.contribution.resolver:
+  Capco\AppBundle\Manager\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Manager/*'
+
+  Capco\AppBundle\SiteImage\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/SiteImage/*'
+
+  Capco\AppBundle\SiteColor\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/SiteColor/*'
+
+  Capco\AppBundle\Manager\CommentResolver:
+    autowire: true
+    public: true
+
+  Capco\AppBundle\Manager\LogManager:
+    public: true
+
+  Capco\AppBundle\Resolver\ProjectDownloadResolver:
+    public: true
+
+  Capco\AppBundle\Resolver\ContributionResolver:
     class: Capco\AppBundle\Resolver\ContributionResolver
-    arguments: ['@capco.user.repository']
+    public: true
 
-  capco.event.resolver:
-    class: Capco\AppBundle\Resolver\EventResolver
-    arguments: ['@capco.event.repository']
+  Capco\AppBundle\Resolver\EventResolver:
+    public: true
 
-  capco.highlighted.resolver:
+  Capco\AppBundle\Resolver\HighlightedContentResolver:
     class: Capco\AppBundle\Resolver\HighlightedContentResolver
-    arguments: ['@capco.highlighted.repository', '@capco.toggle.manager']
+    public: true
 
-  capco.menu_item.resolver:
-    class: Capco\AppBundle\Manager\MenuItemResolver
-    arguments: ['@capco.menu_item.repository', '@capco.toggle.manager', '@router', '@validator']
+  Capco\AppBundle\Manager\MenuItemResolver:
+    public: true
 
-  capco.opinion_types.resolver:
-    class: Capco\AppBundle\Resolver\OpinionTypesResolver
-    arguments: ['@capco.opinion_type.repository', '@capco.opinion.repository', '@router']
+  Capco\AppBundle\Resolver\OpinionTypesResolver:
+    public: true
 
-  capco.section.resolver:
+  Capco\AppBundle\Resolver\SectionResolver:
     class: Capco\AppBundle\Resolver\SectionResolver
-    arguments: ['@capco.section.repository', '@capco.toggle.manager']
+    public: true
 
-  capco.site_color.resolver:
-    class: Capco\AppBundle\SiteColor\Resolver
-    arguments: ['@capco.site_color.repository', '@logger']
+  Capco\AppBundle\SiteParameter\Resolver:
+    public: true
 
-  capco.site_image.resolver:
-    class: Capco\AppBundle\SiteImage\Resolver
-    arguments: ['@capco.site_image.repository', '@logger']
+  Capco\AppBundle\Resolver\StepResolver:
+    public: true
 
-  capco.site_parameter.resolver:
-    class: Capco\AppBundle\SiteParameter\Resolver
-    arguments: ['@capco.site_parameter.repository', '@logger']
-
-  capco.step.resolver:
-    class: Capco\AppBundle\Resolver\StepResolver
-    arguments: ['@capco.url.resolver']
-
-  capco.twig.highlighted_resolver:
-    class: Capco\AppBundle\Twig\HighlightedContentExtension
-    arguments: ['@capco.highlighted.resolver']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.section_resolver:
-    class: Capco\AppBundle\Twig\SectionExtension
-    arguments: ['@capco.section.resolver']
-    tags:
-      - { name: twig.extension }
-
-  capco.url.resolver:
-    class: Capco\AppBundle\Resolver\UrlResolver
+  Capco\AppBundle\Resolver\UrlResolver:
     arguments:
-      [
-        '@service_container',
-        '@router',
-        '@capco.toggle.manager',
-        '@capco.twig.media',
-        '%router.request_context.scheme%',
-        '%router.request_context.host%',
-      ]
+      $scheme: '%router.request_context.scheme%'
+      $host: '%router.request_context.host%'
     tags:
       - { name: overblog_graphql.resolver, alias: 'media_url', method: 'getMediaUrl' }
 
-  capco.url.array.resolver:
-    class: Capco\AppBundle\Resolver\UrlArrayResolver
-    arguments: ['@router']
-
-  capco.vote.resolver:
-    class: Capco\AppBundle\Resolver\VoteResolver
-    arguments: ['@router', '@capco.url.resolver']
-
-  capco.proposal_votes.resolver:
-    class: Capco\AppBundle\Resolver\ProposalStepVotesResolver
-    arguments:
-      [
-        '@capco.proposal_selection_vote.repository',
-        '@capco.selection_step.repository',
-        '@capco.proposal_collect_vote.repository',
-        '@capco.collect_step.repository',
-        '@capco.proposal.repository',
-      ]
-    tags:
-      - { name: twig.extension }
-
-  capco.project_stats.resolver:
-    class: Capco\AppBundle\Resolver\ProjectStatsResolver
-    arguments:
-      [
-        '@capco.selection_step.repository',
-        '@capco.collect_step.repository',
-        '@capco.theme.repository',
-        '@capco.district.repository',
-        '@capco.proposal_category.repository',
-        '@capco.user_type.repository',
-        '@capco.proposal.repository',
-        '@capco.proposal_selection_vote.repository',
-      ]
-
-  capco.project.resolver:
-    class: Capco\AppBundle\Resolver\ProjectResolver
-    arguments: ['@Capco\AppBundle\Repository\ProjectRepository', '@router.default']
-
-  capco.media.manager:
-    class: Capco\AppBundle\Manager\MediaManager
-    arguments: ['@sonata.media.manager.media']
-
-  capco.project.serializer:
-    class: Capco\AppBundle\Resolver\Project\ProjectSerializer
-    arguments: ['@jms_serializer.serializer']
-
-  capco.project.json.serializer:
-    class: Capco\AppBundle\Resolver\Project\JsonProjectSerializer
-    arguments: ['@capco.project.serializer']
-
-  capco.project.search.resolver:
-    class: Capco\AppBundle\Resolver\Project\ProjectSearchResolver
-    autowire: true
-    autoconfigure: true
+  Capco\AppBundle\Resolver\ProjectStatsResolver:
     public: true
 
-  capco.follower.resolver:
-    class: Capco\AppBundle\Resolver\ProposalResolver
+  Capco\AppBundle\Manager\MediaManager:
+    public: true
+
+  Capco\AppBundle\Resolver\Project\ProjectSearchResolver:
+    public: true
+
+  Capco\AppBundle\Resolver\ProposalResolver:
     arguments:
-      [
-        '@doctrine.orm.entity_manager',
-        '%kernel.root_dir%',
-        '@capco.resolvers.users',
-        '@monolog.logger',
-      ]
+      $rootDir: '%kernel.root_dir%'
+    public: true
 
-  capco.following.proposal_activities.resolver:
-    class: Capco\AppBundle\Following\ProposalActivitiesResolver
-    autowire: true
-    autoconfigure: true
+  Capco\AppBundle\Following\ActivitiesResolver:
+    public: true
 
-  capco.following.opinion_activities.resolver:
-    class: Capco\AppBundle\Following\OpinionActivitiesResolver
-    autowire: true
-    autoconfigure: true
+  Capco\AppBundle\Manager\ContributionManager:
+    public: true
+
+  Capco\AppBundle\Toggle\Manager:
+    public: true
+
+  Capco\AppBundle\Manager\RedisCacheManager:
+    arguments:
+      $redisClient: '@snc_redis.default'

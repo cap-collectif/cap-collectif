@@ -18,7 +18,7 @@ services:
 
   capco.simple_preauth.provider:
     class: Capco\UserBundle\Security\Core\User\SimplePreAuthenticatorUserProvider
-    arguments: ['@capco.toggle.manager', '@capco.saml.provider', '@capco.paris.provider']
+    arguments: ['@Capco\AppBundle\Toggle\Manager', '@capco.saml.provider', '@capco.paris.provider']
 
   capco.saml.provider:
     class: Capco\UserBundle\Security\Core\User\SamlUserProvider
@@ -30,13 +30,13 @@ services:
 
   capco_user.registration.form.type:
     class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
-    arguments: ['@capco.toggle.manager']
+    arguments: ['@Capco\AppBundle\Toggle\Manager']
     tags:
       - { name: form.type, alias: capco_user_registration }
 
   capco_user.profile.form.type:
     class: Capco\UserBundle\Form\Type\ProfileFormType
-    arguments: ['@capco.toggle.manager']
+    arguments: ['@Capco\AppBundle\Toggle\Manager']
     tags:
       - { name: form.type }
 
@@ -47,7 +47,7 @@ services:
 
   capco_user.public_data.form.type:
     class: Capco\UserBundle\Form\Type\PublicDataType
-    arguments: ['@capco.toggle.manager']
+    arguments: ['@Capco\AppBundle\Toggle\Manager']
     tags:
       - { name: form.type }
 
@@ -83,12 +83,18 @@ services:
   capco.logout_handler:
     class: Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler
     arguments:
-      ['@simplesamlphp.auth', '@router', '@capco.toggle.manager', '@capco.paris.opem_am_client']
+      [
+        '@simplesamlphp.auth',
+        '@router',
+        '@Capco\AppBundle\Toggle\Manager',
+        '@capco.paris.opem_am_client',
+      ]
 
   # Custom authentications
   capco.simple_preauth.authenticator:
     class: Capco\UserBundle\Authenticator\SimplePreAuthenticator
-    arguments: ['@capco.toggle.manager', '@capco.saml.authenticator', '@capco.paris.authenticator']
+    arguments:
+      ['@Capco\AppBundle\Toggle\Manager', '@capco.saml.authenticator', '@capco.paris.authenticator']
 
   capco.paris.authenticator:
     class: Capco\UserBundle\Authenticator\MonCompteParisAuthenticator

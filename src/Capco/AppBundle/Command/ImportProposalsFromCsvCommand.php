@@ -39,8 +39,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this
-            ->setName('capco:import:proposals-from-csv')
+        $this->setName('capco:import:proposals-from-csv')
             ->setDescription('Import proposals from CSV file with specified proposal form id')
             ->addArgument(
                 'filePath',
@@ -52,11 +51,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 InputArgument::REQUIRED,
                 'Please provide the proposal form id where you want to import proposals.'
             )
-            ->addArgument(
-                'delimiter',
-                InputArgument::OPTIONAL,
-                ', or ;'
-            );
+            ->addArgument('delimiter', InputArgument::OPTIONAL, ', or ;');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -69,9 +64,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         $this->filePath = $input->getArgument('filePath');
         $this->delimiter = $input->getArgument('delimiter');
         $proposalFormId = $input->getArgument('proposal-form');
-        $map = $this->getContainer()->get('capco.utils.map');
+        $map = $this->getContainer()->get('Capco\AppBundle\Utils\Map');
 
-        $this->om = $this->getContainer()->get('doctrine')->getManager();
+        $this->om = $this->getContainer()
+            ->get('doctrine')
+            ->getManager();
 
         /* @var ProposalForm $proposalForm */
         $this->proposalForm = $this->om->getRepository(ProposalForm::class)->find($proposalFormId);
@@ -80,9 +77,10 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
         if (null === $this->proposalForm) {
             $output->writeln(
-                '<error>Proposal Form with id '
-                . $proposalFormId .
-                ' was not found in your database. Please create it or change the id.</error>');
+                '<error>Proposal Form with id ' .
+                    $proposalFormId .
+                    ' was not found in your database. Please create it or change the id.</error>'
+            );
             $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 
             return 1;
@@ -93,9 +91,10 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
         if (0 === $count) {
             $output->writeln(
-                '<error>Your file with path '
-                . $this->filePath .
-                ' was not found or no proposal was found in your file. Please verify your path and file\'s content.</error>');
+                '<error>Your file with path ' .
+                    $this->filePath .
+                    ' was not found or no proposal was found in your file. Please verify your path and file\'s content.</error>'
+            );
             $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 
             return 1;
@@ -126,15 +125,21 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
                 if (!$author) {
                     if (filter_var($row[1], FILTER_VALIDATE_EMAIL)) {
-                        $output->writeln('<error>Could not find user for "' . $row[1] . '"</error>');
+                        $output->writeln(
+                            '<error>Could not find user for "' . $row[1] . '"</error>'
+                        );
 
                         return 1;
                     }
                     if (!isset($this->newUsersMap[trim($row[1])])) {
                         $output->writeln(
-                        '<info>Creating a new user with a fake email and username: ' . $row[1] . '</info>'
-                    );
-                        $this->newUsersMap[trim($row[1])] = $this->createUserFromUsername(trim($row[1]));
+                            '<info>Creating a new user with a fake email and username: ' .
+                                $row[1] .
+                                '</info>'
+                        );
+                        $this->newUsersMap[trim($row[1])] = $this->createUserFromUsername(
+                            trim($row[1])
+                        );
                     }
                     $author = $this->newUsersMap[trim($row[1])];
                 }
@@ -166,7 +171,9 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 }
 
                 if ('' !== $row[6]) {
-                    $proposalCategory = $this->om->getRepository(ProposalCategory::class)->findOneBy([
+                    $proposalCategory = $this->om->getRepository(
+                        ProposalCategory::class
+                    )->findOneBy([
                         'name' => trim($row[6]),
                         'form' => $this->proposalForm,
                     ]);
@@ -182,8 +189,8 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 if (\count($row) > \count(self::HEADERS)) {
                     for ($i = \count(self::HEADERS); isset($row[$i]); ++$i) {
                         $reponse = (new ValueResponse())
-                      ->setQuestion($this->questionsMap[$i])
-                      ->setValue($row[$i]);
+                            ->setQuestion($this->questionsMap[$i])
+                            ->setValue($row[$i]);
                         $proposal->addResponse($reponse);
                     }
                 }
@@ -197,7 +204,9 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         try {
             $this->om->flush();
         } catch (\Exception $e) {
-            $output->writeln('<error>Error when flushing proposals : ' . $e->getMessage() . '</error>');
+            $output->writeln(
+                '<error>Error when flushing proposals : ' . $e->getMessage() . '</error>'
+            );
 
             return 1;
         }
@@ -205,9 +214,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         $progress->finish();
 
         $output->writeln(
-            '<info>'
-            . (\count($rows) - 1) .
-            ' proposals successfully created.</info>'
+            '<info>' . (\count($rows) - 1) . ' proposals successfully created.</info>'
         );
 
         return 0;
@@ -219,7 +226,9 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
         $user = $userManager->createUser();
         $user->setUsername($username);
-        $user->setEmail(filter_var($username . '@fake-email-cap-collectif.com', FILTER_SANITIZE_EMAIL));
+        $user->setEmail(
+            filter_var($username . '@fake-email-cap-collectif.com', FILTER_SANITIZE_EMAIL)
+        );
         $user->setPlainPassword('ykWc+ud(4vza2|');
         $user->setEnabled(true);
         $this->om->persist($user);
@@ -259,7 +268,9 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                         }
                     }
                     if (!$found) {
-                        $output->writeln('<error>Error could not find question "' . $row[$i] . '"</error>');
+                        $output->writeln(
+                            '<error>Error could not find question "' . $row[$i] . '"</error>'
+                        );
 
                         return false;
                     }
@@ -288,8 +299,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
     protected function generateContentException($output)
     {
-        $output->writeln(
-            '<error>Content of your file is not valid.</error>');
+        $output->writeln('<error>Content of your file is not valid.</error>');
         $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 
         return 1;

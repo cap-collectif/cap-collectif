@@ -14,18 +14,5 @@ Scenario: API client wants to get an opinion type
     "linkable": @boolean@,
     "sourceable": @boolean@,
     "appendixTypes": @array@,
-    "availableLinkTypes": [
-      {
-        "id": @string@,
-        "title": @string@,
-        "voteWidgetType": @integer@,
-        "commentSystem": @integer@,
-        "versionable": @boolean@,
-        "linkable": @boolean@,
-        "sourceable": @boolean@,
-        "appendixTypes": @array@
-      },
-      @...@
-    ]
   }
   """

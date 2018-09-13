@@ -23,7 +23,10 @@ services:
   # We disable captcha validation
   capco.recaptcha.validator:
     class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
-    arguments: ['@request_stack', '%recaptcha_private_key%', '@capco.toggle.manager', false]
+    autowire: true
+    arguments:
+      $privateKey: '%recaptcha_private_key%'
+      $enabled: false
     tags:
       - { name: validator.constraint_validator, alias: recaptcha.validator }
   # We disable translation

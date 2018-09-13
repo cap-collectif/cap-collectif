@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
@@ -19,8 +19,11 @@ class CommentResolver
     protected $router;
     protected $urlResolver;
 
-    public function __construct(EntityManager $em, Router $router, UrlResolver $urlResolver)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        Router $router,
+        UrlResolver $urlResolver
+    ) {
         $this->em = $em;
         $this->router = $router;
         $this->urlResolver = $urlResolver;

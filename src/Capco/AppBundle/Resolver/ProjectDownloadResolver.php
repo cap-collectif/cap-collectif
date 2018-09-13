@@ -2,15 +2,11 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Responses\MediaResponse;
-use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Helper\EnvHelper;
-use Capco\AppBundle\Utils\Map;
 use Capco\AppBundle\Utils\Text;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Liuggio\ExcelBundle\Factory;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
@@ -34,7 +30,7 @@ class ProjectDownloadResolver
     protected $httpFoundExtension;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         TranslatorInterface $translator,
         UrlArrayResolver $urlArrayResolver,
         UrlResolver $urlResolver,

@@ -14,18 +14,16 @@ class DisableCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this
-            ->setName('capco:toggle:disable')
+        $this->setName('capco:toggle:disable')
             ->setDescription('Disable a given feature toggle')
-            ->addArgument('toggle', InputArgument::REQUIRED, 'A feature toggle name to disable')
-        ;
+            ->addArgument('toggle', InputArgument::REQUIRED, 'A feature toggle name to disable');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $style = new SymfonyStyle($input, $output);
         $inputToggle = $input->getArgument('toggle');
-        $toggleManager = $this->getContainer()->get('capco.toggle.manager');
+        $toggleManager = $this->getContainer()->get('Capco\AppBundle\Toggle\Manager');
 
         if (!$toggleManager->exists($inputToggle)) {
             $style->error($inputToggle . ' feature toggle doesn\'t exist...');

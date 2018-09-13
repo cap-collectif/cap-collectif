@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\DataFixtures\Processor;
 
 use Capco\ClassificationBundle\Entity\Context;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Id\AssignedGenerator;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Nelmio\Alice\ProcessorInterface;
@@ -12,7 +12,7 @@ class FixedIdsProcessor implements ProcessorInterface
 {
     protected $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }

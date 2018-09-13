@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Twig;
 use Capco\AppBundle\Helper\StepHelper;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Resolver\UrlResolver;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Routing\Router;
@@ -22,11 +23,11 @@ class ThemeExtension extends \Twig_Extension
     public function __construct(
         ThemeRepository $themeRepo,
         ProjectRepository $projectRepo,
-        $twig,
+        \Twig_Extensions_Extension_Intl $twig,
         Serializer $serializer,
         Router $router,
         StepHelper $stepHelper,
-        $urlResolver
+        UrlResolver $urlResolver
     ) {
         $this->themeRepo = $themeRepo;
         $this->projectRepo = $projectRepo;
@@ -69,29 +70,56 @@ class ThemeExtension extends \Twig_Extension
                     'label' => $realStep->getLabel(),
                     'body' => $realStep->getBody(),
                     'slug' => $realStep->getSlug(),
-                    'startAt' => $realStep->getStartAt() ? $realStep->getStartAt()->format(\DateTime::ATOM) : null,
-                    'endAt' => $realStep->getEndAt() ? $realStep->getEndAt()->format(\DateTime::ATOM) : null,
+                    'startAt' => $realStep->getStartAt()
+                        ? $realStep->getStartAt()->format(\DateTime::ATOM)
+                        : null,
+                    'endAt' => $realStep->getEndAt()
+                        ? $realStep->getEndAt()->format(\DateTime::ATOM)
+                        : null,
                     'position' => $realStep->getPosition(),
                     'type' => $realStep->getType(),
                     'enabled' => $realStep->getIsEnabled(),
-                    'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps') ? $realStep->isAllowingProgressSteps() : false, //|default(false),
+                    'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps')
+                        ? $realStep->isAllowingProgressSteps()
+                        : false, //|default(false),
                     'statuses' => $projectStepsStatus,
                     'status' => $this->stepHelper->getStatus($realStep),
                     'open' => $realStep->isOpen(),
                     'timeless' => $realStep->isTimeless(),
-                    'titleHelpText' => method_exists($realStep, 'getTitleHelpText') ? $realStep->getTitleHelpText() : null,
-                    'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText') ? $realStep->getDescriptionHelpText() : null,
+                    'titleHelpText' => method_exists($realStep, 'getTitleHelpText')
+                        ? $realStep->getTitleHelpText()
+                        : null,
+                    'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText')
+                        ? $realStep->getDescriptionHelpText()
+                        : null,
                     '_links' => [
                         'show' => $this->urlResolver->getStepUrl($realStep, true),
-                        'stats' => $this->router->generate('app_project_show_stats', ['projectSlug' => $project->getSlug()], true),
-                        'editSynthesis' => $this->router->generate('app_project_edit_synthesis', ['projectSlug' => $project->getSlug(), 'stepSlug' => $realStep->getSlug()], true),
+                        'stats' => $this->router->generate(
+                            'app_project_show_stats',
+                            ['projectSlug' => $project->getSlug()],
+                            true
+                        ),
+                        'editSynthesis' => $this->router->generate(
+                            'app_project_edit_synthesis',
+                            [
+                                'projectSlug' => $project->getSlug(),
+                                'stepSlug' => $realStep->getSlug(),
+                            ],
+                            true
+                        ),
                     ],
                 ];
                 $projectStepsData[] = $stepData;
                 $projectStepsByIdData[$realStep->getId()] = $stepData;
             }
             $context = new SerializationContext();
-            $context->setGroups(['Projects', 'UserDetails', 'UserVotes', 'ThemeDetails', 'ProjectType']);
+            $context->setGroups([
+                'Projects',
+                'UserDetails',
+                'UserVotes',
+                'ThemeDetails',
+                'ProjectType',
+            ]);
             $projectSerialized = $this->serializer->serialize($project, 'json', $context);
 
             $projectData = json_decode($projectSerialized, true);
@@ -108,7 +136,11 @@ class ThemeExtension extends \Twig_Extension
         $themes = $this->themeRepo->findBy(['isEnabled' => true]);
         $list = [];
         foreach ($themes as $theme) {
-            $list[] = ['id' => $theme->getId(), 'title' => $theme->getTitle(), 'slug' => $theme->getSlug()];
+            $list[] = [
+                'id' => $theme->getId(),
+                'title' => $theme->getTitle(),
+                'slug' => $theme->getSlug(),
+            ];
         }
 
         return $list;

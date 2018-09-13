@@ -42,7 +42,9 @@ class ModerationController extends Controller
         $contribution
             ->setTrashedStatus(Trashable::STATUS_VISIBLE)
             ->setTrashedReason($trashedReason);
-        $redirectUrl = $this->get('capco.url.resolver')->getObjectUrl($contribution);
+        $redirectUrl = $this->get('Capco\AppBundle\Resolver\UrlResolver')->getObjectUrl(
+            $contribution
+        );
 
         if (\in_array($reason, $hiddenReasons, true)) {
             $contribution->setTrashedStatus(Trashable::STATUS_INVISIBLE);

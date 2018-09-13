@@ -17,9 +17,9 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        $this
-        ->setName('capco:import:answers-from-csv')
-        ->setDescription('Import answers from CSV file');
+        $this->setName('capco:import:answers-from-csv')->setDescription(
+            'Import answers from CSV file'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -29,19 +29,16 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
 
     protected function import(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em = $this->getContainer()
+            ->get('doctrine')
+            ->getManager();
 
         $answers = $this->getContainer()
-            ->get('import.csvtoarray')
-            ->convert('pjl/answers.csv', '|')
-        ;
-
-        $author = $this
-            ->getContainer()
+            ->get('Capco\AppBundle\Helper\ConvertCsvToArray')
+            ->convert('pjl/answers.csv', '|');
+        $author = $this->getContainer()
             ->get('fos_user.user_manager')
-            ->findOneBy(['email' => $this->userEmail])
-       ;
-
+            ->findOneBy(['email' => $this->userEmail]);
         if (!$author) {
             throw new UsernameNotFoundException('Author email does not exist in db');
         }
@@ -61,22 +58,16 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             $slug = explode('/', $slug);
             $slug = $slug[\count($slug) - 1];
 
-            $type = \in_array('versions', explode('/', $row['slug']), true)
-                ? 'version'
-                : 'opinion'
-            ;
-
+            $type = \in_array('versions', explode('/', $row['slug']), true) ? 'version' : 'opinion';
             $object = null;
             if ('opinion' === $type) {
                 $object = $em
                     ->getRepository('CapcoAppBundle:Opinion')
-                    ->findOneBy(['slug' => $slug])
-                ;
+                    ->findOneBy(['slug' => $slug]);
             } elseif ('version' === $type) {
                 $object = $em
                     ->getRepository('CapcoAppBundle:OpinionVersion')
-                    ->findOneBy(['slug' => $slug])
-                ;
+                    ->findOneBy(['slug' => $slug]);
             }
 
             if (!$object) {
@@ -94,17 +85,17 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             $em->flush();
 
             $dump .=
-                '<li>'
-                . '<a href="'
-                . $this->getContainer()->get('capco.url.resolver')->getObjectUrl($object, false)
-                . '">'
-                . $object->getAuthor()->getUsername()
-                . ' - '
-                . $object->getTitle()
-                . '</a>'
-                . '</li>'
-            ;
-
+                '<li>' .
+                '<a href="' .
+                $this->getContainer()
+                    ->get('Capco\AppBundle\Resolver\UrlResolver')
+                    ->getObjectUrl($object, false) .
+                '">' .
+                $object->getAuthor()->getUsername() .
+                ' - ' .
+                $object->getTitle() .
+                '</a>' .
+                '</li>';
             $progress->advance(1);
         }
 

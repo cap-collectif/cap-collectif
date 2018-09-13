@@ -75,7 +75,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'elasticsearch_indexation_retry_%%attempt%%'
     opinion_create:
-      processor: opinion_create.processor
+      processor: Capco\AppBundle\Processor\Opinion\OpinionCreateProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -92,7 +92,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'opinion_create_retry_%%attempt%%'
     opinion_update:
-      processor: opinion_update.processor
+      processor: Capco\AppBundle\Processor\Opinion\OpinionUpdateProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -109,7 +109,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'opinion_update_retry_%%attempt%%'
     opinion_delete:
-      processor: opinion_delete.processor
+      processor: Capco\AppBundle\Processor\Opinion\OpinionDeleteProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -126,7 +126,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'opinion_delete_retry_%%attempt%%'
     opinion_trash:
-      processor: opinion_trash.processor
+      processor: Capco\AppBundle\Processor\Opinion\OpinionTrashProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -143,7 +143,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'opinion_trash_retry_%%attempt%%'
     argument_create:
-      processor: argument_create.processor
+      processor: Capco\AppBundle\Processor\Argument\ArgumentCreateProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -160,7 +160,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'argument_create_retry_%%attempt%%'
     argument_update:
-      processor: argument_update.processor
+      processor: Capco\AppBundle\Processor\Argument\ArgumentUpdateProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -177,7 +177,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'argument_update_retry_%%attempt%%'
     argument_delete:
-      processor: argument_delete.processor
+      processor: Capco\AppBundle\Processor\Argument\ArgumentDeleteProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -194,7 +194,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'argument_delete_retry_%%attempt%%'
     argument_trash:
-      processor: argument_trash.processor
+      processor: Capco\AppBundle\Processor\Argument\ArgumentTrashProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -211,7 +211,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'argument_trash_retry_%%attempt%%'
     proposal_create:
-      processor: proposal_create.processor
+      processor: Capco\AppBundle\Processor\Proposal\ProposalCreateProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -228,7 +228,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'proposal_create_retry_%%attempt%%'
     proposal_update:
-      processor: proposal_update.processor
+      processor: Capco\AppBundle\Processor\Proposal\ProposalUpdateProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -245,7 +245,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'proposal_update_retry_%%attempt%%'
     proposal_delete:
-      processor: proposal_delete.processor
+      processor: Capco\AppBundle\Processor\Proposal\ProposalUpdateProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -262,7 +262,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'proposal_delete_retry_%%attempt%%'
     comment_create:
-      processor: comment_create.processor
+      processor: Capco\AppBundle\Processor\Comment\CommentCreateProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -279,7 +279,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'comment_create_retry_%%attempt%%'
     comment_update:
-      processor: comment_update.processor
+      processor: Capco\AppBundle\Processor\Comment\CommentUpdateProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time
@@ -296,7 +296,7 @@ swarrot:
             retry_exchange: 'retry'
             retry_routing_key_pattern: 'comment_update_retry_%%attempt%%'
     comment_delete:
-      processor: comment_delete.processor
+      processor: Capco\AppBundle\Processor\Comment\CommentDeleteProcessor
       middleware_stack:
         - configurator: swarrot.processor.signal_handler
         - configurator: swarrot.processor.max_execution_time

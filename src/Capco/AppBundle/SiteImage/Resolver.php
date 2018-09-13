@@ -23,7 +23,7 @@ class Resolver
             $this->images = $this->repository->getValuesIfEnabled();
         }
 
-        if (!array_key_exists($key, $this->images)) {
+        if (!isset($images[$key])) {
             return;
         }
 

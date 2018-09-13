@@ -11,11 +11,9 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('capco:syntheses:fix-urls')
+        $this->setName('capco:syntheses:fix-urls')
             ->setDescription('Set original contributions urls on syntheses elements')
-            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Regenerate all URLs')
-        ;
+            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Regenerate all URLs');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -28,7 +26,8 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
             ->createQueryBuilder('se');
 
         if (!$input->getOption('force')) {
-            $elements->andWhere('se.linkedDataClass IS NOT NULL')
+            $elements
+                ->andWhere('se.linkedDataClass IS NOT NULL')
                 ->andWhere('se.linkedDataId IS NOT NULL');
         }
 
@@ -38,9 +37,13 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
             if (empty($el->getLinkedDataClass())) {
                 continue;
             }
-            $contribution = $em->getRepository($el->getLinkedDataClass())->find($el->getLinkedDataId());
+            $contribution = $em
+                ->getRepository($el->getLinkedDataClass())
+                ->find($el->getLinkedDataId());
 
-            $url = $container->get('capco.url.resolver')->getObjectUrl($contribution, false);
+            $url = $container
+                ->get('Capco\AppBundle\Resolver\UrlResolver')
+                ->getObjectUrl($contribution, false);
 
             $el->setLinkedDataUrl(empty($url) ? null : $url);
         }

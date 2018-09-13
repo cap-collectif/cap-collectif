@@ -10,8 +10,11 @@ class ReactIntlExtension extends \Twig_Extension
     private $resolver;
     private $env;
 
-    public function __construct(string $translationFolder, Resolver $resolver, string $env)
-    {
+    public function __construct(
+        ?string $translationFolder = '',
+        Resolver $resolver,
+        ?string $env = ''
+    ) {
         $this->translationFolder = $translationFolder;
         $this->resolver = $resolver;
         $this->env = $env;

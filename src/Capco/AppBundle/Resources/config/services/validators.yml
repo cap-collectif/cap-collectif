@@ -1,25 +1,25 @@
 services:
   capco.check_email_domain.validator:
     class: Capco\AppBundle\Validator\Constraints\CheckEmailDomainValidator
-    arguments: ['@capco.toggle.manager', '@capco.registration_form.repository']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: capco.check_email_domain.validator }
 
   capco.has_required_responses.validator:
     class: Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestionsValidator
-    arguments: ['@capco.registration_form.repository']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: has_required_responses.validator }
 
   capco.already_vote.validator:
     class: Capco\AppBundle\Validator\Constraints\DidNotAlreadyVoteValidator
-    arguments: ['@doctrine.orm.entity_manager']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: already_vote.validator }
 
   capco.email_belongs_not.validator:
     class: Capco\AppBundle\Validator\Constraints\EmailDoesNotBelongToUserValidator
-    arguments: ['@fos_user.user_manager']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: email_belongs_not.validator }
 
@@ -30,7 +30,7 @@ services:
 
   capco.has_theme_if_activated.validator:
     class: Capco\AppBundle\Validator\Constraints\HasThemeIfActivatedValidator
-    arguments: ['@capco.toggle.manager']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: has_theme_if_activated.validator }
 
@@ -41,25 +41,27 @@ services:
 
   capco.unlisted_email.validator:
     class: Capco\AppBundle\Validator\Constraints\HasUnlistedEmailValidator
-    arguments: ['@doctrine.orm.entity_manager']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: unlisted_email.validator }
 
   capco.has_enough_credits.validator:
     class: Capco\AppBundle\Validator\Constraints\HasEnoughCreditsToVoteValidator
-    arguments: ['@capco.proposal_votes.resolver']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: has_enough_credits.validator }
 
   capco.recaptcha.validator:
     class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
-    arguments: ['@request_stack', '%recaptcha_private_key%', '@capco.toggle.manager']
+    autowire: true
+    arguments:
+      $privateKey: '%recaptcha_private_key%'
     tags:
       - { name: validator.constraint_validator, alias: recaptcha.validator }
 
   capco.has_theme_if_mandatory.validator:
     class: Capco\AppBundle\Validator\Constraints\HasThemeIfMandatoryValidator
-    arguments: ['@capco.toggle.manager']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: has_theme_if_mandatory.validator }
 
@@ -75,7 +77,7 @@ services:
 
   capco.has_valid_address.validator:
     class: Capco\AppBundle\Validator\Constraints\HasValidAddressValidator
-    arguments: ['@geocoder.google_map', '@logger']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: has_valid_address.validator }
 
@@ -90,7 +92,7 @@ services:
 
   capco.has_district_if_mandatory.validator:
     class: Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatoryValidator
-    arguments: ['@capco.toggle.manager']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: has_district_if_mandatory.validator }
 
@@ -101,6 +103,6 @@ services:
 
   capco.not_throwable_email.validator:
     class: Capco\AppBundle\Validator\Constraints\NotThrowableEmailValidator
-    arguments: ['@capco.utils.throwable_email_checker']
+    autowire: true
     tags:
       - { name: validator.constraint_validator, alias: capco.not_throwable_email.validator }

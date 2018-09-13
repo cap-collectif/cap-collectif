@@ -1,124 +1,20 @@
 services:
-  capco.twig.comment:
-    class: Capco\AppBundle\Twig\CommentExtension
-    arguments: ['@capco.comment.resolver']
-    tags:
-      - { name: twig.extension }
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
 
-  capco.twig.user_type:
-    class: Capco\AppBundle\Twig\UserTypeExtension
-    arguments: ['@capco.user_type.repository']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.media:
-    class: Capco\AppBundle\Twig\MediaExtension
-    arguments: ['@service_container']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.navigation:
-    class: Capco\AppBundle\Twig\NavigationExtension
-    arguments: ['@capco.menu_item.resolver']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.default_avatar:
-    class: Capco\AppBundle\Twig\DefaultAvatarExtension
-    arguments:
-      - '@capco.site_image.resolver'
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.registration_form:
-    class: Capco\AppBundle\Twig\RegistrationFormExtension
-    arguments: ['@capco.registration_form.repository', '@serializer']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.event_helper:
-    class: Capco\AppBundle\Twig\EventExtension
-    arguments: ['@capco.event.helper']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.parameters:
-    class: Capco\AppBundle\Twig\ParametersExtension
-    arguments:
-      [
-        '@capco.toggle.manager',
-        '@capco.site_parameter.resolver',
-        '@translator',
-        '@router',
-        '@capco.site_color.resolver',
-      ]
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.menu_url:
-    class: Capco\AppBundle\Twig\MenuLinkExtension
-    arguments: ['@capco.menu_item.resolver', '@router']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.site_color:
-    class: Capco\AppBundle\Twig\SiteColorExtension
-    arguments: ['@capco.site_color.resolver']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.site_image:
-    class: Capco\AppBundle\Twig\SiteImageExtension
-    arguments: ['@capco.site_image.resolver']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.site_parameter:
-    class: Capco\AppBundle\Twig\SiteParameterExtension
-    arguments: ['@capco.site_parameter.resolver']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.steps:
-    class: Capco\AppBundle\Twig\StepsExtension
-    arguments: ['@capco.step.resolver', '@capco.step.helper']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.url:
-    class: Capco\AppBundle\Twig\UrlExtension
-    arguments: ['@capco.url.resolver']
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.vote:
-    class: Capco\AppBundle\Twig\VoteExtension
-    arguments: ['@capco.vote.resolver', '@capco.proposal_votes.resolver']
-    tags:
-      - { name: twig.extension }
+  Capco\AppBundle\Twig\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Twig/*'
+  #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'
 
   capco.twig.theme:
     class: Capco\AppBundle\Twig\ThemeExtension
     arguments:
-      [
-        '@capco.theme.repository',
-        '@Capco\AppBundle\Repository\ProjectRepository',
-        '@twig.extension.intl',
-        '@jms_serializer',
-        '@router',
-        '@capco.step.helper',
-        '@capco.url.resolver',
-      ]
-    tags:
-      - { name: twig.extension }
+      $twig: '@twig.extension.intl'
 
-  capco.twig.dates:
-    class: Capco\AppBundle\Twig\DateExtension
-    tags:
-      - { name: twig.extension }
-
-  capco.twig.stats:
-    class: Capco\AppBundle\Twig\StatsExtension
-    arguments: ['@capco.project_stats.resolver']
-    tags:
-      - { name: twig.extension }
+  capco.react_intl.twig:
+    class: Capco\AppBundle\Twig\ReactIntlExtension
+    arguments:
+      $translationFolder: '%kernel.root_dir%/../translations/'
+      $env: '%kernel.environment%'

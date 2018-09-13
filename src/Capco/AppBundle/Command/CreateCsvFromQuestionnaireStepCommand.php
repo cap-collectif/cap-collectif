@@ -10,28 +10,25 @@ class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('capco:export:questionnaire')
-            ->setDescription('Create csv file from questionnaire step data')
-        ;
+        $this->setName('capco:export:questionnaire')->setDescription(
+            'Create csv file from questionnaire step data'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
-        if (!$container->get('capco.toggle.manager')->isActive('export')) {
+        if (!$container->get('Capco\AppBundle\Toggle\Manager')->isActive('export')) {
             $output->writeln('Please enable "export" feature to run this command');
 
             return;
         }
-        $resolver = $container->get('capco.project.download.resolver');
+        $resolver = $container->get('Capco\AppBundle\Resolver\ProjectDownloadResolver');
 
         $steps = $container
             ->get('doctrine')
             ->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')
-            ->findAll()
-        ;
-
+            ->findAll();
         foreach ($steps as $qs) {
             $writer = $resolver->getContent($qs);
             $filename = '';

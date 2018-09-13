@@ -26,7 +26,7 @@ class ProposalController extends CRUDController
         Proposal $proposal,
         string $_format
     ): Response {
-        $followerResolver = $this->get('capco.follower.resolver');
+        $followerResolver = $this->get('Capco\AppBundle\Resolver\ProposalResolver');
 
         $export = $followerResolver->exportProposalFollowers($proposal, $_format);
         $filename = $export['filename'];

@@ -62,7 +62,9 @@ class BlogController extends Controller
             ]);
         }
 
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('blog.pagination.size');
+        $pagination = $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
+            'blog.pagination.size'
+        );
 
         $posts = $this->get('capco.blog.post.repository')->getSearchResults(
             $pagination,

@@ -5,14 +5,14 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Event\AbstractVoteChangedEvent;
 use Capco\AppBundle\Event\OpinionVoteChangedEvent;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class VoteSubscriber implements EventSubscriberInterface
 {
     protected $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
