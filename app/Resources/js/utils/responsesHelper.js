@@ -50,6 +50,7 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
   // eslint-disable-next-line flowtype/space-after-type-colon
   value:
     | ?string
+    | ?number
     | $ReadOnlyArray<{|
         +id: string,
         +name: string,
@@ -193,80 +194,90 @@ export const getRequiredFieldIndicationStrategy = (fields: Questions) => {
   return 'minority_required';
 };
 
+const getResponseNumber = (value: any) => {
+  if (typeof value === 'object' && Array.isArray(value.labels)) {
+    const labelsNumber = value.labels.length;
+    const hasOtherValue = value.other ? 1 : 0;
+    return labelsNumber + hasOtherValue;
+  }
+
+  if (typeof value === 'object' && Array.isArray(value)) {
+    return value.length;
+  }
+
+  return 0;
+};
+
+type ResponseError = ?{
+  value: string,
+};
+
+type ResponsesError = ResponseError[];
+
 export const validateResponses = (
   questions: Questions,
   responses: ResponsesInReduxForm,
   className: string,
   intl: IntlShape,
-) => {
-  const errors = {};
-
-  const responsesError = [];
-  questions.map((question, index) => {
-    const response = responses.filter(res => res && res.question === question.id)[0];
-    if (question.required) {
-      if (question.type === 'medias') {
-        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
-          responsesError[index] = { value: `${className}.constraints.field_mandatory` };
+): {
+  responses?: ResponsesError,
+} => {
+  const responsesError = questions
+    .map(question => {
+      const response = responses.filter(res => res && res.question === question.id)[0];
+      if (question.required) {
+        if (question.type === 'medias') {
+          if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
+            return { value: `${className}.constraints.field_mandatory` };
+          }
+        } else if (!response || !response.value) {
+          return { value: `${className}.constraints.field_mandatory` };
         }
-      } else if (!response || !response.value) {
-        responsesError[index] = { value: `${className}.constraints.field_mandatory` };
-      }
-    }
-
-    if (
-      question.type === 'number' &&
-      response.value &&
-      typeof response.value === 'string' &&
-      checkOnlyNumbers(response.value)
-    ) {
-      responsesError[index] = { value: `please-enter-a-number` };
-    }
-
-    if (
-      question.validationRule &&
-      question.type !== 'button' &&
-      response.value &&
-      typeof response.value === 'object' &&
-      (Array.isArray(response.value.labels) || Array.isArray(response.value))
-    ) {
-      const rule = question.validationRule;
-      let responsesNumber = 0;
-      if (typeof response.value === 'object' && Array.isArray(response.value.labels)) {
-        const labelsNumber = response.value.labels.length;
-        const hasOtherValue = response.value.other ? 1 : 0;
-        responsesNumber = labelsNumber + hasOtherValue;
       }
 
-      if (typeof response.value === 'object' && Array.isArray(response.value)) {
-        responsesNumber = response.value.length;
+      if (
+        question.type === 'number' &&
+        response.value &&
+        typeof response.value === 'string' &&
+        checkOnlyNumbers(response.value)
+      ) {
+        return { value: `please-enter-a-number` };
       }
 
-      if (rule.type === 'MIN' && (rule.number && responsesNumber < rule.number)) {
-        responsesError[index] = {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
-        };
+      if (
+        question.validationRule &&
+        question.type !== 'button' &&
+        response.value &&
+        typeof response.value === 'object' &&
+        (Array.isArray(response.value.labels) || Array.isArray(response.value))
+      ) {
+        const rule = question.validationRule;
+        const responsesNumber = getResponseNumber(response.value);
+        if (rule.type === 'MIN' && (rule.number && responsesNumber < rule.number)) {
+          return {
+            value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
+          };
+        }
+
+        if (rule.type === 'MAX' && (rule.number && responsesNumber > rule.number)) {
+          return {
+            value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
+          };
+        }
+
+        if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
+          return {
+            value: intl.formatMessage(
+              { id: 'reply.constraints.choices_equal' },
+              { nb: rule.number },
+            ),
+          };
+        }
       }
+    })
+    .filter(n => n);
 
-      if (rule.type === 'MAX' && (rule.number && responsesNumber > rule.number)) {
-        responsesError[index] = {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
-        };
-      }
-
-      if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
-        responsesError[index] = {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_equal' }, { nb: rule.number }),
-        };
-      }
-    }
-  });
-
-  if (responsesError.length) {
-    errors.responses = responsesError;
-  }
-
-  return errors;
+  return responsesError && responsesError.length ? { responses: responsesError } : {};
 };
 
 export const renderResponses = ({
