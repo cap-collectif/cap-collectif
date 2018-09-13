@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Authenticator;
 
 use Capco\AppBundle\Toggle\Manager;

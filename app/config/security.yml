@@ -57,7 +57,7 @@ security:
       provider: fos_userbundle
       anonymous: true
       simple_preauth:
-        authenticator: capco.simple_preauth.authenticator
+        authenticator: Capco\UserBundle\Authenticator\SimplePreAuthenticator
         provider: simple_preauth
       form_login:
         check_path: /login_check
@@ -81,7 +81,7 @@ security:
         domain: ~
       logout:
         path: /logout
-        success_handler: capco.logout_handler
+        success_handler: Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler
 
   access_control:
     - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }

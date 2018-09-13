@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Resolver;
 
 use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RecentContributionsResolver
@@ -11,7 +12,7 @@ class RecentContributionsResolver
     protected $em;
     protected $toggleManager;
 
-    public function __construct(EntityManager $em, Manager $toggleManager)
+    public function __construct(EntityManagerInterface $em, Manager $toggleManager)
     {
         $this->em = $em;
         $this->toggleManager = $toggleManager;
@@ -36,7 +37,9 @@ class RecentContributionsResolver
                 $result = $this->em->getRepository('CapcoAppBundle:Comment')->find($id);
                 break;
             default:
-                throw new NotFoundHttpException('Contribution not found for type ' . $type . ' and id ' . $id);
+                throw new NotFoundHttpException(
+                    'Contribution not found for type ' . $type . ' and id ' . $id
+                );
                 break;
         }
 
@@ -54,7 +57,9 @@ class RecentContributionsResolver
                 $result = $this->em->getRepository('CapcoAppBundle:Opinion')->getArrayById($id);
                 break;
             case 'version':
-                $result = $this->em->getRepository('CapcoAppBundle:OpinionVersion')->getArrayById($id);
+                $result = $this->em->getRepository('CapcoAppBundle:OpinionVersion')->getArrayById(
+                    $id
+                );
                 break;
             case 'source':
                 $result = $this->em->getRepository('CapcoAppBundle:Source')->getArrayById($id);
@@ -75,42 +80,28 @@ class RecentContributionsResolver
 
     public function getRecentContributions($limit = null)
     {
-        $opinions = $this->em
-            ->getRepository('CapcoAppBundle:Opinion')
-            ->getRecentOrdered();
+        $opinions = $this->em->getRepository('CapcoAppBundle:Opinion')->getRecentOrdered();
         foreach ($opinions as $key => $opinion) {
             $opinions[$key]['type'] = 'opinion';
         }
 
-        $versions = $this->em
-            ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getRecentOrdered()
-        ;
+        $versions = $this->em->getRepository('CapcoAppBundle:OpinionVersion')->getRecentOrdered();
         foreach ($versions as $key => $version) {
             $versions[$key]['type'] = 'version';
         }
 
-        $arguments = $this->em
-            ->getRepository('CapcoAppBundle:Argument')
-            ->getRecentOrdered()
-        ;
+        $arguments = $this->em->getRepository('CapcoAppBundle:Argument')->getRecentOrdered();
         foreach ($arguments as $key => $argument) {
             $arguments[$key]['title'] = 'Argument';
             $arguments[$key]['type'] = 'argument';
         }
 
-        $sources = $this->em
-            ->getRepository('CapcoAppBundle:Source')
-            ->getRecentOrdered()
-        ;
+        $sources = $this->em->getRepository('CapcoAppBundle:Source')->getRecentOrdered();
         foreach ($sources as $key => $source) {
             $sources[$key]['type'] = 'source';
         }
 
-        $comments = $this->em
-            ->getRepository('CapcoAppBundle:Comment')
-            ->getRecentOrdered()
-        ;
+        $comments = $this->em->getRepository('CapcoAppBundle:Comment')->getRecentOrdered();
         foreach ($comments as $key => $comment) {
             $comments[$key]['title'] = 'Commentaire';
             $comments[$key]['type'] = 'comment';
