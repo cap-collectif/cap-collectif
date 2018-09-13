@@ -202,8 +202,11 @@ export const validateResponses = (
       } else if (!response || !response.value) {
         responsesError[index] = { value: `${className}.constraints.field_mandatory` };
       }
-    } else if (
+    }
+
+    if (
       question.type === 'number' &&
+      response.value &&
       typeof response.value === 'string' &&
       checkOnlyNumbers(response.value)
     ) {
