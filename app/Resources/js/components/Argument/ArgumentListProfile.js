@@ -36,16 +36,16 @@ export class ArgumentListProfile extends Component<Props, State> {
 
     return (
       <ListGroup bsClass="media-list">
-        {// $FlowFixMe
-        argumentList.arguments.edges
-          .filter(Boolean)
-          .map(edge => edge.node)
-          .filter(Boolean)
-          // $FlowFixMe
-          .map(argument => (
-            // $FlowFixMe
-            <ArgumentItem key={argument.id} argument={argument} />
-          ))}
+        {argumentList.arguments &&
+          argumentList.arguments.edges &&
+          argumentList.arguments.edges
+            .filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .map(argument => (
+              // $FlowFixMe
+              <ArgumentItem key={argument.id} argument={argument} isProfile />
+            ))}
         {relay.hasMore() && (
           <ListGroupItem style={{ textAlign: 'center' }}>
             {this.state.loading ? (

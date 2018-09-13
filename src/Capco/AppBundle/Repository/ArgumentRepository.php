@@ -12,6 +12,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 class ArgumentRepository extends EntityRepository
 {
@@ -189,7 +190,7 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('o.published = true')
             ->andWhere('s.isEnabled = true')
             ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
-            ->setParameter('status', 'invisible')
+            ->setParameter('status', Trashable::STATUS_INVISIBLE)
             ->setParameter('author', $user);
 
         return $qb->getQuery()->getSingleScalarResult();
@@ -240,7 +241,7 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('a.Author = :author')
             ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
             ->setParameter('author', $user)
-            ->setParameter('status', 'invisible')
+            ->setParameter('status', Trashable::STATUS_INVISIBLE)
             ->setMaxResults($offset)
             ->setFirstResult($first);
 

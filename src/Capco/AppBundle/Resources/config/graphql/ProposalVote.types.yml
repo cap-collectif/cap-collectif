@@ -1,11 +1,11 @@
 ProposalVote:
   type: object
   inherits:
-    - PrivateVote
+    - PrivatableVote
     - Publishable
   config:
     interfaces:
-      - PrivateVote
+      - PrivatableVote
       - Publishable
       - Vote
     fields:

@@ -7,6 +7,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 
 class ArgumentByUserResolver implements ResolverInterface
@@ -29,7 +30,7 @@ class ArgumentByUserResolver implements ResolverInterface
                     ->getArrayCopy();
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-                throw new \RuntimeException('get by user failed');
+                throw new UserError('Error during fetching arguments of ' . $user->getLastname());
             }
 
             return $arguments;

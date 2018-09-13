@@ -2084,7 +2084,7 @@ type PresentationStep implements Step {
 }
 
 # Entities that can be published.
-interface PrivateVote {
+interface PrivatableVote {
   # The ID of an object
   id: ID!
 
@@ -2607,7 +2607,7 @@ enum ProposalStepVoteType {
 }
 
 # Entities that can be published.
-type ProposalVote implements PrivateVote & Publishable & Vote {
+type ProposalVote implements PrivatableVote & Publishable & Vote {
   # Update the vote privacy.
   private: Boolean
 

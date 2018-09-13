@@ -180,7 +180,7 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('PrivateVote'), $globalVariable->get('typeResolver')->resolve('Publishable'), $globalVariable->get('typeResolver')->resolve('Vote')];
+                return [$globalVariable->get('typeResolver')->resolve('PrivatableVote'), $globalVariable->get('typeResolver')->resolve('Publishable'), $globalVariable->get('typeResolver')->resolve('Vote')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

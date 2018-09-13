@@ -1,4 +1,4 @@
-PrivateVote:
+PrivatableVote:
   type: interface
   inherits:
     - Vote
@@ -7,4 +7,4 @@ PrivateVote:
     fields:
       private:
         type: 'Boolean'
-        description: 'Update the vote privacy.'
+        description: 'Anonymous or not.'

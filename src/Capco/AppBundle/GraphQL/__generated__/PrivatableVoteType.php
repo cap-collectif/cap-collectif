@@ -12,14 +12,14 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class PrivateVoteType extends InterfaceType implements GeneratedTypeInterface
+final class PrivatableVoteType extends InterfaceType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'PrivateVote',
+            'name' => 'PrivatableVote',
             'description' => 'Entities that can be published.',
             'fields' => function () use ($globalVariable) {
                 return [
