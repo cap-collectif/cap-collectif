@@ -370,6 +370,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       ...props
     } = this.props;
 
+    console.log(props.description);
     return (
       <FormGroup
         bsSize={bsSize}
@@ -381,11 +382,12 @@ class ReactBootstrapInput extends React.Component<Props> {
           </ControlLabel>
         )}
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
-        {props.description && (
-          <div style={{ paddingBottom: 15 }}>
-            <ButtonBody body={props.description || ''} />
-          </div>
-        )}
+        {props.description &&
+          props.description !== '<div><br /></div>' && (
+            <div style={{ paddingBottom: 15 }}>
+              <ButtonBody body={props.description || ''} />
+            </div>
+          )}
         {this.renderInputGroup(props)}
         {props.errors && <span className="error-block">{props.errors}</span>}
       </FormGroup>
