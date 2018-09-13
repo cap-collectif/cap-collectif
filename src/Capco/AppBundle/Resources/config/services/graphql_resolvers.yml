@@ -165,11 +165,21 @@ services:
       - { name: overblog_graphql.resolver, alias: 'argument_url', method: 'resolveArgumentUrl' }
       - {
           name: overblog_graphql.resolver,
+          alias: 'proposition_reportings',
+          method: 'resolvePropositionReportings',
+        }
+      - {
+          name: overblog_graphql.resolver,
           alias: 'reporting_author',
           method: 'resolveReportingAuthor',
         }
       - { name: overblog_graphql.resolver, alias: 'reporting_type', method: 'resolveReportingType' }
       - { name: overblog_graphql.resolver, alias: 'version_url', method: 'resolveVersionUrl' }
+      - {
+          name: overblog_graphql.resolver,
+          alias: 'version_reportings',
+          method: 'resolveVersionReportings',
+        }
       - {
           name: overblog_graphql.resolver,
           alias: 'contribution_type',

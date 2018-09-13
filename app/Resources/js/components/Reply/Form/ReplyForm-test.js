@@ -159,9 +159,9 @@ describe('<ReplyForm />', () => {
     intl: intlMock,
     ...formMock,
     responses: [
-      { question: 'Nelson Monfort parle-t-il:', value: 'Trop fort (Mon sonotone est tout neuf)' },
+      { questionId: 'Nelson Monfort parle-t-il:', value: 'Trop fort (Mon sonotone est tout neuf)' },
       {
-        question: "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+        questionId: "Pour quel type d'épreuve êtes vous prêt à acheter des places",
         value: { labels: ['Superman'], other: 'Pikachu' },
       },
     ],

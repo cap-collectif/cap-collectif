@@ -120,6 +120,9 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
               <option value="editor">
                 {intl.formatMessage({ id: 'global.question.types.editor' })}
               </option>
+              <option value="number">
+                <FormattedMessage id="admin.fields.validation_rule.number" />
+              </option>
             </optgroup>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>
               <option value="button">{intl.formatMessage({ id: 'question.types.button' })}</option>

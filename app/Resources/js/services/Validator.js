@@ -8,3 +8,10 @@ export const isUrl = (value: ?string): boolean => {
   const urlPattern = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
   return !value || urlPattern.test(value);
 };
+
+export const checkOnlyNumbers = (input: string): boolean => {
+  const regexS = '[0-9.-]+';
+  const regex = new RegExp(regexS);
+  const results = regex.exec(input);
+  return !results || results[0] !== input;
+};
