@@ -42,29 +42,6 @@ export class ArgumentItem extends React.Component<Props> {
     );
   };
 
-  renderLabel = type => {
-    const labelStyle = type === 'FOR' ? 'success' : 'danger';
-    const labelValueTranslateId =
-      type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against';
-
-    return (
-      <Label bsStyle={labelStyle} className={'label--right'}>
-        <FormattedMessage id={labelValueTranslateId} />
-      </Label>
-    );
-  };
-
-  renderConsultationLink = consultation => {
-    return (
-      <p>
-        <FormattedMessage id={'admin.fields.opinion.link'} />
-        {' : '}
-        {/* $FlowFixMe */}
-        <a href={consultation.url}>{consultation.title}</a>
-      </p>
-    );
-  };
-
   render() {
     const { argument, isProfile } = this.props;
     const classes = classNames({
