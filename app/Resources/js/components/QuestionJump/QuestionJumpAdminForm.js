@@ -8,101 +8,60 @@ import type { GlobalState, Dispatch } from '../../types';
 import component from "../Form/Field";
 import {changeOrderBy, fetchProjects} from "../../redux/modules/project";
 
-type Jumps = $ReadOnlyArray<{|
-  +id: string,
-  +always: boolean,
-  +origin: ?Object,
-  +destination: ?Object,
-  +conditions: ?Object,
-|}>;
-
 type Props = {
-  dispatch: Dispatch,
-  fields: { length: number, map: Function, remove: Function },
-  jumps: Jumps,
   questions: Object,
+  selectedQuestion: any,
   formName: string,
-  oldMember: string,
-  intl: IntlShape,
+  index: number
 };
 
-type State = { selectedQuestion: number };
-
-
 export class QuestionJumpAdminForm extends React.Component<Props, State> {
-  state = {
-    editIndex: null,
-    selectedQuestion: 0
-  };
-
-  handleQuestionChange = (e) => {
-    this.setState({ selectedQuestion: e.target.value });
-  };
-
-  handleChange
 
   render() {
-    const { dispatch, fields, jumps, oldMember, questions } = this.props;
+    const { formName, index, questions } = this.props;
 
     return (
-      <div className="form-group" id="questions_choice_panel_personal">
-        <ListGroup>
-          {fields.map((member, index) => (
-            <ListGroupItem key={index}>
-              <Field
-                id={`${member}.origin`}
-                name={`${member}.origin`}
-                type="select"
-                onChange={e => {
-                  this.handleQuestionChange(e);
-                }}
-                component={component}>
-                {questions.map((question, questionIndex) => {
-                  return <option value={question.id}>
-                    {questionIndex}. {question.title}
-                  </option>
-                })}
-              </Field>
-              <Field
-                id={`${member}.conditions.operator`}
-                name={`${member}.conditions.operator`}
-                type="select"
-                component={component}>
-                <option value="IS">
-                  <FormattedMessage id="is" />
-                </option>
-                <option value="IS_NOT">
-                  <FormattedMessage id="is-not" />
-                </option>
-              </Field>
-              <Field
-                id={`${member}.destination`}
-                name={`${member}.destination`}
-                type="select"
-                component={component}>
-              </Field>
-            </ListGroupItem>
-          ))}
-        </ListGroup>
-        <Button
-          bsStyle="primary"
-          className="btn--outline box-content__toolbar"
-          onClick={() => {
-            dispatch(arrayPush(this.props.formName, `${oldMember}.jumps`, {}));
-            this.setState({ editIndex: fields.length });
-          }}>
-          <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
-        </Button>
-      </div>
+      <ListGroupItem key={index}>
+        <Field
+          id={`${formName}.origin`}
+          name={`${formName}.origin`}
+          type="select"
+          component={component}>
+          {questions.map((question, questionIndex) => {
+            return <option value={question.id}>
+              {questionIndex}. {question.title}
+            </option>
+          })}
+        </Field>
+        <Field
+          id={`${formName}.conditions.operator`}
+          name={`${formName}.conditions.operator`}
+          type="select"
+          component={component}>
+          <option value="IS">
+            <FormattedMessage id="is" />
+          </option>
+          <option value="IS_NOT">
+            <FormattedMessage id="is-not" />
+          </option>
+        </Field>
+        <Field
+          id={`${formName}.destination`}
+          name={`${formName}.destination`}
+          type="select"
+          component={component}>
+        </Field>
+      </ListGroupItem>
     );
   }
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => {
   const selector = formValueSelector(props.formName);
+  console.log('QUESTION*****');
+  console.log(selector(state, `${props.formName}.origin`));
   return {
-    jumps: selector(state, `${props.oldMember}.jumps`),
-    questions: selector(state, 'questions'),
+    selectedQuestion: selector(state, `${props.formName}.origin`)
   };
 };
 

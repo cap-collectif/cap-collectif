@@ -19,6 +19,7 @@ type Props = RelayProps &
     features: FeatureToggles,
   };
 
+
 export type MultipleChoiceQuestionValidationRulesTypes = 'EQUAL' | 'MAX' | 'MIN';
 export type QuestionChoiceColor = 'DANGER' | 'INFO' | 'PRIMARY' | 'SUCCESS' | 'WARNING';
 export type QuestionTypeValue =
@@ -49,6 +50,7 @@ type FormValues = {
       type: MultipleChoiceQuestionValidationRulesTypes,
       number: number,
     |},
+    jumps: Object[],
     questionChoices?: ?$ReadOnlyArray<{|
       id: string,
       title: string,

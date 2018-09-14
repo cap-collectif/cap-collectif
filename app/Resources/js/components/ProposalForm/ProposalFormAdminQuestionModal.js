@@ -9,7 +9,7 @@ import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
 import type { GlobalState } from '../../types';
 import QuestionChoiceAdminForm from '../QuestionChoices/QuestionChoiceAdminForm';
-import QuestionJumpAdmin from '../QuestionJump/QuestionJumpAdminForm';
+import QuestionJumpAdmin from '../QuestionJump/QuestionsJumpAdminForm';
 
 type ParentProps = {
   show: boolean,
