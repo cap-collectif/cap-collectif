@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Manager\MediaManager;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -18,8 +19,7 @@ class MediasController extends FOSRestController
     public function postMediaAction(Request $request)
     {
         $uploadedMedia = $request->files->get('file');
-        $mediaManager = $this->get('Capco\AppBundle\Manager\MediaManager');
-        $em = $this->get('doctrine.orm.entity_manager');
+        $mediaManager = $this->get(MediaManager::class);
 
         if (!$uploadedMedia) {
             return;

@@ -1,6 +1,8 @@
 <?php
+
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Form\Type\MemberSearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -18,7 +20,7 @@ class MembersController extends Controller
      * @Template()
      * @Cache(smaxage="60", public=true)
      *
-     * @param mixed      $page
+     * @param mixed $page
      * @param null|mixed $userType
      * @param null|mixed $sort
      */
@@ -57,14 +59,15 @@ class MembersController extends Controller
             ]);
         }
 
-        $pagination = $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
-            'members.pagination.size'
-        );
+        $pagination = $this->get(Resolver::class)->getValue('members.pagination.size');
 
         $sort = null === $sort ? 'activity' : $sort;
-        $members = $em
-            ->getRepository('CapcoUserBundle:User')
-            ->getSearchResults($pagination, $page, $sort, $userType);
+        $members = $this->get('capco.user.repository')->getSearchResults(
+            $pagination,
+            $page,
+            $sort,
+            $userType
+        );
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;

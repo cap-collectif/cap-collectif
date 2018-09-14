@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -50,7 +51,7 @@ class EventAdmin extends Admin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $datagridMapper->add('themes', null, [
@@ -108,7 +109,7 @@ class EventAdmin extends Admin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $listMapper->add('themes', null, [
@@ -225,7 +226,7 @@ class EventAdmin extends Admin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $formMapper->add('themes', 'sonata_type_model', [
@@ -309,7 +310,7 @@ class EventAdmin extends Admin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $showMapper->add('themes', null, [

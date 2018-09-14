@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Toggle\Manager;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -65,7 +66,7 @@ class PostAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $datagridMapper->add('themes', null, ['label' => 'admin.fields.blog_post.themes']);
@@ -105,7 +106,7 @@ class PostAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $listMapper->add('themes', null, ['label' => 'admin.fields.blog_post.themes']);
@@ -183,7 +184,7 @@ class PostAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $formMapper->add('themes', 'sonata_type_model', [
@@ -244,7 +245,7 @@ class PostAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $showMapper->add('themes', null, ['label' => 'admin.fields.blog_post.themes']);

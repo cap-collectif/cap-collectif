@@ -11,6 +11,8 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
+use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Resolver\EventResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use JMS\Serializer\SerializationContext;
@@ -59,20 +61,12 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
         $projectSlug = $project->getSlug();
-        $events = $this->get('Capco\AppBundle\Resolver\EventResolver')->getLastByProject(
-            $projectSlug,
-            2
-        );
+        $events = $this->get(EventResolver::class)->getLastByProject($projectSlug, 2);
         $posts = $this->get('capco.blog.post.repository')->getLastPublishedByProject(
             $projectSlug,
             2
         );
-        $nbEvents = $this->get('Capco\AppBundle\Resolver\EventResolver')->countEvents(
-            null,
-            null,
-            $projectSlug,
-            null
-        );
+        $nbEvents = $this->get(EventResolver::class)->countEvents(null, null, $projectSlug, null);
         $nbPosts = $this->get('capco.blog.post.repository')->countSearchResults(null, $projectSlug);
 
         $projectContributorResolver = $this->get(ProjectContributorResolver::class);
@@ -103,7 +97,7 @@ class StepController extends Controller
                 )
                 : [];
 
-        $showVotes = $this->get('Capco\AppBundle\Helper\ProjectHelper')->hasStepWithVotes($project);
+        $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
 
         return [
             'project' => $project,

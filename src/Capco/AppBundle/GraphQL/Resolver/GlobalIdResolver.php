@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\ModerableInterface;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -85,9 +86,7 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $node = $this->container->get('Capco\AppBundle\Repository\ProjectRepository')->find(
-                $uuid
-            );
+            $node = $this->container->get(ProjectRepository::class)->find($uuid);
         }
 
         if (!$node) {

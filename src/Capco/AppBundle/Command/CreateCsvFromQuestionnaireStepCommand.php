@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Resolver\ProjectDownloadResolver;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,12 +20,12 @@ class CreateCsvFromQuestionnaireStepCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
-        if (!$container->get('Capco\AppBundle\Toggle\Manager')->isActive('export')) {
+        if (!$container->get(Manager::class)->isActive('export')) {
             $output->writeln('Please enable "export" feature to run this command');
 
             return;
         }
-        $resolver = $container->get('Capco\AppBundle\Resolver\ProjectDownloadResolver');
+        $resolver = $container->get(ProjectDownloadResolver::class);
 
         $steps = $container
             ->get('doctrine')

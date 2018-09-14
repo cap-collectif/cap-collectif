@@ -3,6 +3,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Form\ContactType;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -46,9 +47,7 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 $data = $form->getData();
 
-                $adminEmail = $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
-                    'admin.mail.contact'
-                );
+                $adminEmail = $this->get(Resolver::class)->getValue('admin.mail.contact');
                 if (null === $adminEmail) {
                     $this->get('session')
                         ->getFlashBag()
@@ -93,9 +92,9 @@ class DefaultController extends Controller
      */
     public function footerAction($max = 4, $offset = 0)
     {
-        $footerLinks = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:MenuItem')
-            ->getParentItems(MenuItem::TYPE_FOOTER);
+        $footerLinks = $this->get('capco.menu_item.repository')->getParentItems(
+            MenuItem::TYPE_FOOTER
+        );
 
         $socialNetworks = $this->getDoctrine()
             ->getRepository('CapcoAppBundle:FooterSocialNetwork')

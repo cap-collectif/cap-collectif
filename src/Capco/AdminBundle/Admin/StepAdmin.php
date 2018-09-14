@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
+use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -245,7 +246,7 @@ class StepAdmin extends CapcoAdmin
             if (
                 $this->getConfigurationPool()
                     ->getContainer()
-                    ->get('Capco\AppBundle\Toggle\Manager')
+                    ->get(Manager::class)
                     ->isActive('phone_confirmation')
             ) {
                 $formMapper->add('verification', 'choice', [

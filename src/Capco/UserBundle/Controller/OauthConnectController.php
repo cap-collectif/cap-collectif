@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\Toggle\Manager;
 use HWI\Bundle\OAuthBundle\Controller\ConnectController;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -111,7 +112,7 @@ class OauthConnectController extends ConnectController
 
     protected function serviceHasEnabledFeature($service)
     {
-        $toggleManager = $this->container->get('Capco\AppBundle\Toggle\Manager');
+        $toggleManager = $this->container->get(Manager::class);
 
         return $toggleManager->hasOneActive($this->getFeaturesForService($service));
     }

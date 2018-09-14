@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,7 +69,7 @@ class MetricsController extends Controller
         )->countUnpublished();
 
         $projectCount = \count(
-            $this->get('Capco\AppBundle\Repository\ProjectRepository')->findBy([
+            $this->get(ProjectRepository::class)->findBy([
                 'visibility' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
             ])
         );

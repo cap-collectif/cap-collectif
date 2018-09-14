@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -41,7 +42,7 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
             ->getManager();
 
         $responses = $this->getContainer()
-            ->get('Capco\AppBundle\Helper\ConvertCsvToArray')
+            ->get(ConvertCsvToArray::class)
             ->convert('pjl/responses.csv', ';');
         foreach ($responses as $row) {
             $author = $em

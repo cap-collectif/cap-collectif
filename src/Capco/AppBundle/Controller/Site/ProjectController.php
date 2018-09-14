@@ -1,10 +1,15 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\ProjectSearchType;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
+use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Resolver\EventResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -199,7 +204,7 @@ class ProjectController extends Controller
         $groupedEvents = $this->get(
             'Capco\AppBundle\Resolver\EventResolver'
         )->getEventsGroupedByYearAndMonth(null, null, $project->getSlug(), null);
-        $nbEvents = $this->get('Capco\AppBundle\Resolver\EventResolver')->countEvents(
+        $nbEvents = $this->get(EventResolver::class)->countEvents(
             null,
             null,
             $project->getSlug(),
@@ -227,9 +232,7 @@ class ProjectController extends Controller
      */
     public function showPostsAction(Project $project, $page)
     {
-        $pagination = $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
-            'blog.pagination.size'
-        );
+        $pagination = $this->get(Resolver::class)->getValue('blog.pagination.size');
 
         $posts = $this->get('capco.blog.post.repository')->getSearchResults(
             $pagination,
@@ -264,9 +267,7 @@ class ProjectController extends Controller
      */
     public function showContributorsAction(Project $project, $page)
     {
-        $pagination = $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
-            'contributors.pagination'
-        );
+        $pagination = $this->get(Resolver::class)->getValue('contributors.pagination');
 
         $contributors = $this->get(
             'Capco\AppBundle\Resolver\ContributionResolver'
@@ -278,7 +279,7 @@ class ProjectController extends Controller
             $nbPage = ceil(\count($contributors) / $pagination);
         }
 
-        $showVotes = $this->get('Capco\AppBundle\Helper\ProjectHelper')->hasStepWithVotes($project);
+        $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
 
         return [
             'project' => $project,
@@ -325,9 +326,7 @@ class ProjectController extends Controller
      */
     public function previewAction(Request $request, Project $project): Response
     {
-        $projectUrlResolver = $this->container->get(
-            'Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver'
-        );
+        $projectUrlResolver = $this->container->get(ProjectUrlResolver::class);
 
         return new RedirectResponse($projectUrlResolver->__invoke($project));
     }

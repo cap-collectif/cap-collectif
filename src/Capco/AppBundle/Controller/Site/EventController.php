@@ -7,6 +7,8 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Form\EventSearchType;
+use Capco\AppBundle\Helper\EventHelper;
+use Capco\AppBundle\Resolver\EventResolver;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -69,7 +71,7 @@ class EventController extends Controller
         $groupedEvents = $this->get(
             'Capco\AppBundle\Resolver\EventResolver'
         )->getEventsGroupedByYearAndMonth(false, $theme, $project, $term);
-        $archivedEventsNb = $this->get('Capco\AppBundle\Resolver\EventResolver')->countEvents(
+        $archivedEventsNb = $this->get(EventResolver::class)->countEvents(
             true,
             $theme,
             $project,
@@ -152,7 +154,7 @@ class EventController extends Controller
      */
     public function showAction(Request $request, Event $event)
     {
-        $eventHelper = $this->container->get('Capco\AppBundle\Helper\EventHelper');
+        $eventHelper = $this->container->get(EventHelper::class);
 
         $serializer = $this->get('jms_serializer');
 

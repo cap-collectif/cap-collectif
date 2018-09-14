@@ -7,6 +7,10 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProjectType;
 use Capco\AppBundle\Resolver\Project\ProjectSearchParameters;
+use Capco\AppBundle\Resolver\Project\ProjectSearchResolver;
+use Capco\AppBundle\Resolver\ProjectStatsResolver;
+use Capco\AppBundle\SiteParameter\Resolver;
+use Capco\AppBundle\Toggle\Manager;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
@@ -35,8 +39,7 @@ class ProjectsController extends FOSRestController
     public function getProjectsAction(ParamFetcherInterface $paramFetcher)
     {
         $shouldLimit =
-            !$paramFetcher->get('limit') &&
-            $this->get('Capco\AppBundle\Toggle\Manager')->isActive('projects_form');
+            !$paramFetcher->get('limit') && $this->get(Manager::class)->isActive('projects_form');
         $projectSearchParameters = ProjectSearchParameters::createFromRequest(
             $paramFetcher,
             $shouldLimit
@@ -44,16 +47,14 @@ class ProjectsController extends FOSRestController
         if (
             $shouldLimit &&
             !$paramFetcher->get('limit') &&
-            $this->get('Capco\AppBundle\Toggle\Manager')->isActive('projects_form')
+            $this->get(Manager::class)->isActive('projects_form')
         ) {
             $projectSearchParameters->setElements(
-                $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
-                    'projects.pagination'
-                )
+                $this->get(Resolver::class)->getValue('projects.pagination')
             );
         }
 
-        return $this->get('Capco\AppBundle\Resolver\Project\ProjectSearchResolver')->search(
+        return $this->get(ProjectSearchResolver::class)->search(
             $projectSearchParameters,
             $this->getUser()
         );
@@ -131,7 +132,7 @@ class ProjectsController extends FOSRestController
             // throw new BadRequestHttpException('Only votes stats can be filtered by theme or district.');
         }
 
-        $data = $this->get('Capco\AppBundle\Resolver\ProjectStatsResolver')->getStatsForStepByKey(
+        $data = $this->get(ProjectStatsResolver::class)->getStatsForStepByKey(
             $step,
             $key,
             $limit,

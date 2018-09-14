@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Answer;
+use Capco\AppBundle\Helper\ConvertCsvToArray;
+use Capco\AppBundle\Resolver\UrlResolver;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,7 +36,7 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             ->getManager();
 
         $answers = $this->getContainer()
-            ->get('Capco\AppBundle\Helper\ConvertCsvToArray')
+            ->get(ConvertCsvToArray::class)
             ->convert('pjl/answers.csv', '|');
         $author = $this->getContainer()
             ->get('fos_user.user_manager')
@@ -88,7 +90,7 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
                 '<li>' .
                 '<a href="' .
                 $this->getContainer()
-                    ->get('Capco\AppBundle\Resolver\UrlResolver')
+                    ->get(UrlResolver::class)
                     ->getObjectUrl($object, false) .
                 '">' .
                 $object->getAuthor()->getUsername() .

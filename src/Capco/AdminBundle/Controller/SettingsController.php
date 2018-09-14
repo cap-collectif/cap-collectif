@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -87,7 +88,7 @@ class SettingsController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $toggleManager = $this->get('Capco\AppBundle\Toggle\Manager');
+        $toggleManager = $this->get(Manager::class);
         $value = $toggleManager->switchValue($toggle);
 
         if ($value) {

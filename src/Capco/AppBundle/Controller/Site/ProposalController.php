@@ -5,6 +5,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -46,7 +47,7 @@ class ProposalController extends Controller
         }
 
         $serializer = $this->get('serializer');
-        $urlResolver = $this->get('Capco\AppBundle\Resolver\UrlResolver');
+        $urlResolver = $this->get(UrlResolver::class);
 
         $stepUrls = $project
             ->getSteps()

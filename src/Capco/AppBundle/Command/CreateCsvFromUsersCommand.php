@@ -9,6 +9,7 @@ use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\GraphQL\GraphQLToCsv;
 use Capco\AppBundle\GraphQL\InfoResolver;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Request\Executor;
@@ -145,7 +146,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
-        if (!$container->get('Capco\AppBundle\Toggle\Manager')->isActive('export')) {
+        if (!$container->get(Manager::class)->isActive('export')) {
             return;
         }
         $fileName = 'users.csv';

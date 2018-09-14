@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Utils\Map;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
 use League\Csv\Reader;
@@ -64,7 +65,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         $this->filePath = $input->getArgument('filePath');
         $this->delimiter = $input->getArgument('delimiter');
         $proposalFormId = $input->getArgument('proposal-form');
-        $map = $this->getContainer()->get('Capco\AppBundle\Utils\Map');
+        $map = $this->getContainer()->get(Map::class);
 
         $this->om = $this->getContainer()
             ->get('doctrine')

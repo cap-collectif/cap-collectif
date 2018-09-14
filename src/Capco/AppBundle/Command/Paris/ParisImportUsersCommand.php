@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command\Paris;
 
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\Manager\MediaManager;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
@@ -219,7 +220,7 @@ class ParisImportUsersCommand extends ContainerAwareCommand
                     file_exists(__DIR__ . '/images/' . $userRow['filename'])
                 ) {
                     $avatar = $this->getContainer()
-                        ->get('Capco\AppBundle\Manager\MediaManager')
+                        ->get(MediaManager::class)
                         ->createImageFromPath(__DIR__ . '/images/' . $userRow['filename']);
                     $user->setMedia($avatar);
                 }

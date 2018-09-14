@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
+use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -60,7 +61,7 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
     protected function getOpinionTypes()
     {
         return $this->getContainer()
-            ->get('Capco\AppBundle\Helper\ConvertCsvToArray')
+            ->get(ConvertCsvToArray::class)
             ->convert($this->filePath);
     }
 

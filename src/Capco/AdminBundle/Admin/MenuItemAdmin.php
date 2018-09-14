@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\MenuItem;
+use Capco\AppBundle\Manager\MenuItemResolver;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -22,7 +23,7 @@ class MenuItemAdmin extends AbstractAdmin
     {
         $resolver = $this->getConfigurationPool()
             ->getContainer()
-            ->get('Capco\AppBundle\Manager\MenuItemResolver');
+            ->get(MenuItemResolver::class);
         $em = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine')

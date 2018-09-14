@@ -3,6 +3,7 @@ namespace Capco\AdminBundle\Controller;
 
 use Box\Spout\Common\Type;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Resolver\ProposalResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -26,7 +27,7 @@ class ProposalController extends CRUDController
         Proposal $proposal,
         string $_format
     ): Response {
-        $followerResolver = $this->get('Capco\AppBundle\Resolver\ProposalResolver');
+        $followerResolver = $this->get(ProposalResolver::class);
 
         $export = $followerResolver->exportProposalFollowers($proposal, $_format);
         $filename = $export['filename'];

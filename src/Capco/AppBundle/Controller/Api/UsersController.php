@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiProfileFormType;
@@ -303,7 +304,7 @@ class UsersController extends FOSRestController
         $user = $this->getUser();
         $newEmailToConfirm = $request->request->get('email');
         $password = $request->request->get('password');
-        $toggleManager = $this->container->get('Capco\AppBundle\Toggle\Manager');
+        $toggleManager = $this->container->get(Manager::class);
 
         $encoder = $this->get('security.encoder_factory')->getEncoder($user);
         if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {

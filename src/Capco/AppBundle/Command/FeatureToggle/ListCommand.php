@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command\FeatureToggle;
 
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,7 +20,7 @@ class ListCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $style = new SymfonyStyle($input, $output);
-        $toggleManager = $this->getContainer()->get('Capco\AppBundle\Toggle\Manager');
+        $toggleManager = $this->getContainer()->get(Manager::class);
         $list = $toggleManager->all();
         array_walk($list, function (&$value, $name) {
             $value = [$name, $value ? 'Yes' : 'No'];

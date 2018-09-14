@@ -3,6 +3,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -80,7 +81,7 @@ class ProjectAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $datagridMapper->add('themes', null, ['label' => 'admin.fields.project.themes']);
@@ -114,7 +115,7 @@ class ProjectAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $listMapper->add('themes', null, ['label' => 'admin.fields.project.themes']);
@@ -227,7 +228,7 @@ class ProjectAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $formMapper->add('themes', 'sonata_type_model', [
@@ -355,7 +356,7 @@ class ProjectAdmin extends CapcoAdmin
         if (
             $this->getConfigurationPool()
                 ->getContainer()
-                ->get('Capco\AppBundle\Toggle\Manager')
+                ->get(Manager::class)
                 ->isActive('themes')
         ) {
             $showMapper->add('themes', null, ['label' => 'admin.fields.project.themes']);

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command\FeatureToggle;
 
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,7 +24,7 @@ class DisableCommand extends ContainerAwareCommand
     {
         $style = new SymfonyStyle($input, $output);
         $inputToggle = $input->getArgument('toggle');
-        $toggleManager = $this->getContainer()->get('Capco\AppBundle\Toggle\Manager');
+        $toggleManager = $this->getContainer()->get(Manager::class);
 
         if (!$toggleManager->exists($inputToggle)) {
             $style->error($inputToggle . ' feature toggle doesn\'t exist...');

@@ -3,6 +3,8 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Resolver\StepResolver;
+use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,7 +19,7 @@ class SitemapsController extends Controller
      */
     public function sitemapAction()
     {
-        $toggleManager = $this->get('Capco\AppBundle\Toggle\Manager');
+        $toggleManager = $this->get(Manager::class);
         $em = $this->getDoctrine()->getManager();
         $urls = [];
         $hostname = $this->get('request_stack')
@@ -127,7 +129,7 @@ class SitemapsController extends Controller
         ];
 
         // Steps
-        $stepResolver = $this->get('Capco\AppBundle\Resolver\StepResolver');
+        $stepResolver = $this->get(StepResolver::class);
         /** @var AbstractStep $step */
         foreach (
             $this->get('capco.abstract_step.repository')->findBy(['isEnabled' => true])

@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Toggle\Manager;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,7 +25,7 @@ class HomepageController extends Controller
         $sections = $this->get(
             'Capco\AppBundle\Resolver\SectionResolver'
         )->getDisplayableEnabledOrdered();
-        $newsletterActive = $this->get('Capco\AppBundle\Toggle\Manager')->isActive('newsletter');
+        $newsletterActive = $this->get(Manager::class)->isActive('newsletter');
 
         $translator = $this->get('translator');
         $deleteType = $request->get('deleteType');
@@ -168,7 +170,7 @@ class HomepageController extends Controller
         $max = $max ?? 3;
         $offset = $offset ?? 0;
         $serializer = $this->get('jms_serializer');
-        $projectRepo = $this->get('Capco\AppBundle\Repository\ProjectRepository');
+        $projectRepo = $this->get(ProjectRepository::class);
         $count = $projectRepo->countPublished($this->getUser());
         $props = $serializer->serialize(
             ['projects' => $projectRepo->getLastPublished($max, $offset, $this->getUser())],

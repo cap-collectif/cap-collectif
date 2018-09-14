@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Helper\ConvertCsvToArray;
 use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -32,9 +33,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
         $sendEmail = false; // Not used for now
         $inputFilePath = $input->getArgument('input');
         $outputFilePath = $input->getArgument('output');
-        $rows = $container
-            ->get('Capco\AppBundle\Helper\ConvertCsvToArray')
-            ->convert($inputFilePath);
+        $rows = $container->get(ConvertCsvToArray::class)->convert($inputFilePath);
         $userManager = $container->get('fos_user.user_manager');
         $tokenGenerator = $container->get('fos_user.util.token_generator');
         $router = $container->get('router');

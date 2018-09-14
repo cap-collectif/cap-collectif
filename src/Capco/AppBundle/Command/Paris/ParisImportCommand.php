@@ -21,6 +21,7 @@ use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
+use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
 use Cocur\Slugify\Slugify;
@@ -181,7 +182,7 @@ class ParisImportCommand extends ContainerAwareCommand
                     file_exists(__DIR__ . '/images/' . $row['filename'])
                 ) {
                     $thumbnail = $this->getContainer()
-                        ->get('Capco\AppBundle\Manager\MediaManager')
+                        ->get(MediaManager::class)
                         ->createImageFromPath(__DIR__ . '/images/' . $row['filename']);
                     $project->setCover($thumbnail);
                 }

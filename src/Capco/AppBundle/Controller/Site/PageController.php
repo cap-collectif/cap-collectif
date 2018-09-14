@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Page;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -26,9 +27,7 @@ class PageController extends Controller
         $slugCharter = strtolower($this->get('translator')->trans('charter', [], 'CapcoAppBundle'));
 
         if (null === $page && $request->get('slug') === $slugCharter) {
-            $body = $this->container->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
-                'charter.body'
-            );
+            $body = $this->container->get(Resolver::class)->getValue('charter.body');
 
             if (null === $body) {
                 throw $this->createNotFoundException(

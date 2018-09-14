@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Toggle\Manager;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Capco\UserBundle\Entity\User;
@@ -458,7 +459,7 @@ class ProposalMutation implements ContainerAwareInterface
 
     private function fixValues(array $values, ProposalForm $proposalForm)
     {
-        $toggleManager = $this->container->get('Capco\AppBundle\Toggle\Manager');
+        $toggleManager = $this->container->get(Manager::class);
 
         if (
             (!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes()) &&

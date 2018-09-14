@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Resolver\ContributionResolver;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -32,7 +33,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $this->entityManager = $container->get('doctrine')->getManager();
-        $contributionResolver = $container->get('Capco\AppBundle\Resolver\ContributionResolver');
+        $contributionResolver = $container->get(ContributionResolver::class);
         $this->force = $input->getOption('force');
 
         // ****************************** Opinion counters **********************************************

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Resolver\ContributionResolver;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -27,7 +28,7 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
-        $contributionResolver = $container->get('Capco\AppBundle\Resolver\ContributionResolver');
+        $contributionResolver = $container->get(ContributionResolver::class);
         $this->force = $input->getOption('force');
 
         $projects = $em->getRepository('CapcoAppBundle:Project')->findAll();

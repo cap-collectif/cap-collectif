@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Resolver\UrlResolver;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -41,9 +42,7 @@ class FixSynthesesUrlsCommand extends ContainerAwareCommand
                 ->getRepository($el->getLinkedDataClass())
                 ->find($el->getLinkedDataId());
 
-            $url = $container
-                ->get('Capco\AppBundle\Resolver\UrlResolver')
-                ->getObjectUrl($contribution, false);
+            $url = $container->get(UrlResolver::class)->getObjectUrl($contribution, false);
 
             $el->setLinkedDataUrl(empty($url) ? null : $url);
         }

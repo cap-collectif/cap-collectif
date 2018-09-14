@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Section;
+use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
@@ -23,7 +24,7 @@ class SectionAdmin extends AbstractAdmin
     {
         $manager = $this->getConfigurationPool()
             ->getContainer()
-            ->get('Capco\AppBundle\Toggle\Manager');
+            ->get(Manager::class);
         $em = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine')

@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Resolver\UrlResolver;
 use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Argument;
@@ -42,9 +43,7 @@ class ModerationController extends Controller
         $contribution
             ->setTrashedStatus(Trashable::STATUS_VISIBLE)
             ->setTrashedReason($trashedReason);
-        $redirectUrl = $this->get('Capco\AppBundle\Resolver\UrlResolver')->getObjectUrl(
-            $contribution
-        );
+        $redirectUrl = $this->get(UrlResolver::class)->getObjectUrl($contribution);
 
         if (\in_array($reason, $hiddenReasons, true)) {
             $contribution->setTrashedStatus(Trashable::STATUS_INVISIBLE);

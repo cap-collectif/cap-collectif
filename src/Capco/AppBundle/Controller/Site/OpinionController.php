@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -37,7 +38,7 @@ class OpinionController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        $opinionTypesResolver = $this->get('Capco\AppBundle\Resolver\OpinionTypesResolver');
+        $opinionTypesResolver = $this->get(OpinionTypesResolver::class);
         $opinionType = $opinionTypesResolver->findByStepAndSlug($currentStep, $opinionTypeSlug);
 
         $filter = $opinionsSort ?: $opinionType->getDefaultFilter();

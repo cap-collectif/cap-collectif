@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command\Elasticsearch;
 
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +22,7 @@ class PopulateIndexCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
-        if (!$container->get('Capco\AppBundle\Toggle\Manager')->isActive('indexation')) {
+        if (!$container->get(Manager::class)->isActive('indexation')) {
             $output->writeln(
                 '<error>Please enable "indexation" feature to run this command</error>'
             );

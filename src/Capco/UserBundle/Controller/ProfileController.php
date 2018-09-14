@@ -1,8 +1,10 @@
 <?php
+
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -191,10 +193,7 @@ class ProfileController extends Controller
 
         $serializer = $this->get('jms_serializer');
 
-        $projectsRaw = $this->get('Capco\AppBundle\Repository\ProjectRepository')->getByUser(
-            $user,
-            $this->getUser()
-        );
+        $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
 
         $projectsProps = $serializer->serialize(
             ['projects' => $projectsRaw],
@@ -249,10 +248,7 @@ class ProfileController extends Controller
     public function showProjectsAction(User $user)
     {
         $serializer = $this->get('jms_serializer');
-        $projectsRaw = $this->get('Capco\AppBundle\Repository\ProjectRepository')->getByUser(
-            $user,
-            $this->getUser()
-        );
+        $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
 
         $projectsProps = $serializer->serialize(
             ['projects' => $projectsRaw],
@@ -329,9 +325,10 @@ class ProfileController extends Controller
      */
     public function showRepliesAction(User $user)
     {
-        $replies = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:Reply')
-            ->findBy(['author' => $user, 'private' => false]);
+        $replies = $this->get('capco.reply.repository')->findBy([
+            'author' => $user,
+            'private' => false,
+        ]);
 
         return ['user' => $user, 'replies' => $replies];
     }
@@ -362,9 +359,7 @@ class ProfileController extends Controller
      */
     public function showSourcesAction(User $user)
     {
-        $sources = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:Source')
-            ->getByUser($user);
+        $sources = $this->get('capco.source.repository')->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
 
@@ -381,9 +376,7 @@ class ProfileController extends Controller
      */
     public function showCommentsAction(User $user)
     {
-        $comments = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:Comment')
-            ->getByUser($user);
+        $comments = $this->get('capco.comment.repository')->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
 

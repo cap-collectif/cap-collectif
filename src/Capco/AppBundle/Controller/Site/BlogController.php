@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\PostSearchType;
+use Capco\AppBundle\SiteParameter\Resolver;
 use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Request;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -62,9 +63,7 @@ class BlogController extends Controller
             ]);
         }
 
-        $pagination = $this->get('Capco\AppBundle\SiteParameter\Resolver')->getValue(
-            'blog.pagination.size'
-        );
+        $pagination = $this->get(Resolver::class)->getValue('blog.pagination.size');
 
         $posts = $this->get('capco.blog.post.repository')->getSearchResults(
             $pagination,

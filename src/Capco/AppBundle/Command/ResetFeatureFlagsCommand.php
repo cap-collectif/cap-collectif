@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -31,7 +32,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $output->writeln('');
         $output->writeln('Resetting the feature toggles to the default configuration');
 
-        $toggleManager = $this->getContainer()->get('Capco\AppBundle\Toggle\Manager');
+        $toggleManager = $this->getContainer()->get(Manager::class);
         $toggleManager->activate('blog');
         $toggleManager->activate('calendar');
         $toggleManager->activate('newsletter');

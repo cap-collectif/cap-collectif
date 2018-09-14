@@ -1,10 +1,13 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType as CommentForm;
+use Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver;
+use Capco\AppBundle\Manager\CommentResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -26,10 +29,7 @@ class CommentController extends Controller
     public function loginToCommentAction($objectType, $objectId)
     {
         return $this->redirect(
-            $this->get('Capco\AppBundle\Manager\CommentResolver')->getUrlOfObjectByTypeAndId(
-                $objectType,
-                $objectId
-            )
+            $this->get(CommentResolver::class)->getUrlOfObjectByTypeAndId($objectType, $objectId)
         );
     }
 
@@ -42,9 +42,7 @@ class CommentController extends Controller
      */
     public function showCommentsAction($object)
     {
-        $comments = $this->get('Capco\AppBundle\Manager\CommentResolver')->getCommentsByObject(
-            $object
-        );
+        $comments = $this->get(CommentResolver::class)->getCommentsByObject($object);
 
         return ['comments' => $comments];
     }
@@ -93,9 +91,7 @@ class CommentController extends Controller
                     ->add('success', $this->get('translator')->trans('comment.update.success'));
 
                 return $this->redirect(
-                    $this->get('Capco\AppBundle\Manager\CommentResolver')->getUrlOfRelatedObject(
-                        $comment
-                    )
+                    $this->get(CommentResolver::class)->getUrlOfRelatedObject($comment)
                 );
             }
             $this->get('session')
@@ -110,7 +106,6 @@ class CommentController extends Controller
      * @Route("/comments/{commentId}/delete", name="app_comment_delete")
      * @Template("CapcoAppBundle:Comment:delete.html.twig")
      * @Security("has_role('ROLE_USER')")
-
      *
      * @throws ProjectAccessDeniedException
      *
@@ -142,6 +137,7 @@ class CommentController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($comment);
+                // TODO change it for sf 4.0
                 $this->get('event_dispatcher')->dispatch(
                     CapcoAppBundleEvents::COMMENT_CHANGED,
                     new CommentChangedEvent($comment, 'remove')
@@ -153,9 +149,7 @@ class CommentController extends Controller
                     ->add('info', $this->get('translator')->trans('comment.delete.success'));
 
                 return $this->redirect(
-                    $this->get('Capco\AppBundle\Manager\CommentResolver')->getUrlOfRelatedObject(
-                        $comment
-                    )
+                    $this->get(CommentResolver::class)->getUrlOfRelatedObject($comment)
                 );
             }
             $this->get('session')
@@ -172,9 +166,7 @@ class CommentController extends Controller
      */
     public function previewAction(Request $request, Comment $comment): Response
     {
-        $commentUrlResolver = $this->container->get(
-            'Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver'
-        );
+        $commentUrlResolver = $this->container->get(CommentShowUrlResolver::class);
 
         return new RedirectResponse($commentUrlResolver->__invoke($comment));
     }
