@@ -39,13 +39,10 @@ export class QuestionJumpAdminForm extends React.Component<Props, State> {
     this.setState({ selectedQuestion: e.target.value });
   };
 
+  handleChange
+
   render() {
     const { dispatch, fields, jumps, oldMember, questions } = this.props;
-    const { selectedQuestion } = this.state;
-    const arrayQuestions = [];
-    questions.map((question) => {
-      arrayQuestions[question.id] = question.questionChoices;
-    });
 
     return (
       <div className="form-group" id="questions_choice_panel_personal">
@@ -83,15 +80,7 @@ export class QuestionJumpAdminForm extends React.Component<Props, State> {
                 name={`${member}.destination`}
                 type="select"
                 component={component}>
-                {selectedQuestion === 0 ? '' : arrayQuestions[selectedQuestion].map((questionChoice, questionChoiceIndex) => (
-                  <option value={questionChoice.id}>
-                    {questionChoiceIndex}. {questionChoice.title}
-                  </option>
-                ))}
               </Field>
-              <strong>{jumps[index].conditions[0].value.title}</strong>
-              <p>Then go to</p>
-              <strong>{jumps[index].destination.title}</strong>
             </ListGroupItem>
           ))}
         </ListGroup>
