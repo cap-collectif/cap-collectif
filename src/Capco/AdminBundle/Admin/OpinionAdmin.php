@@ -212,8 +212,9 @@ class OpinionAdmin extends CapcoAdmin
             ->get('doctrine')
             ->getManager();
 
-        $opinionType = $em
-            ->getRepository('CapcoAppBundle:OpinionType')
+        $opinionType = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('capco.opinion_type.repository')
             ->find($this->getPersistentParameter('opinion_type'));
 
         if (!$opinionType) {
@@ -222,8 +223,9 @@ class OpinionAdmin extends CapcoAdmin
 
         $consultationStepType = $opinionType->getConsultationStepType();
 
-        return $em
-            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
+        return $this->getConfigurationPool()
+            ->getContainer()
+            ->get('capco.consultation_step.repository')
             ->createQueryBuilder('cs')
             ->join('cs.consultationStepType', 'type')
             ->where('type = :stepType')

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -66,10 +67,7 @@ class OpinionController extends Controller
 
         $opinionTypeId = $request->get('opinion_type');
         if ($opinionTypeId) {
-            $opinionType = $this->get('doctrine')
-                ->getManager()
-                ->getRepository('CapcoAppBundle:OpinionType')
-                ->find($opinionTypeId);
+            $opinionType = $this->get('capco.opinion_type.repository')->find($opinionTypeId);
             if ($opinionType) {
                 $object->setOpinionType($opinionType);
                 $object = $this->updateAppendicesForOpinion($object);
@@ -422,9 +420,7 @@ class OpinionController extends Controller
 
     public function getConsultationStepTypes()
     {
-        $rootOpinionTypes = $this->get('doctrine')
-            ->getManager()
-            ->getRepository('CapcoAppBundle:OpinionType')
+        $rootOpinionTypes = $this->get('capco.opinion_type.repository')
             ->createQueryBuilder('ot')
             ->select('ot', 'ct')
             ->leftJoin('ot.consultationStepType', 'ct')
@@ -433,9 +429,7 @@ class OpinionController extends Controller
             ->orderBy('ct.id', 'asc')
             ->getQuery()
             ->getArrayResult();
-        $otRepo = $this->get('doctrine')
-            ->getManager()
-            ->getRepository('CapcoAppBundle:OpinionType');
+        $otRepo = $this->get('capco.opinion_type.repository');
         $consultationStepTypes = [];
 
         foreach ($rootOpinionTypes as $root) {

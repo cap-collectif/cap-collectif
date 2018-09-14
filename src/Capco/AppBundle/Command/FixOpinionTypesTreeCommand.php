@@ -10,16 +10,13 @@ class FixOpinionTypesTreeCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('capco:fix:opinion-types')
-            ->setDescription('Fix opinion types hierarchy')
-        ;
+        $this->setName('capco:fix:opinion-types')->setDescription('Fix opinion types hierarchy');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $repo = $em->getRepository('CapcoAppBundle:OpinionType');
+        $repo = $this->getContainer()->get('capco.opinion_type.repository');
 
         $repo->verify();
         $repo->recover();

@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\UserGroup;
+use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -29,15 +30,18 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
     private $em;
     private $translator;
     private $userRepository;
+    private $groupRepository;
 
     public function __construct(
         EntityManagerInterface $em,
         TranslatorInterface $translator,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        UserGroupRepository $groupRepository
     ) {
         $this->em = $em;
         $this->translator = $translator;
         $this->userRepository = $userRepository;
+        $this->groupRepository = $groupRepository;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -70,7 +74,7 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
         $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy([
             'email' => $user->getEmail(),
         ]);
-        $userGroups = $this->em->getRepository(UserGroup::class)->findBy(['user' => $user]);
+        $userGroups = $this->groupRepository->findBy(['user' => $user]);
         $userManager = $this->container->get('fos_user.user_manager');
 
         if ($newsletter) {

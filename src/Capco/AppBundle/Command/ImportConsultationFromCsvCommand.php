@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -66,8 +67,8 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         $user = $this->getContainer()
             ->get('fos_user.user_manager')
             ->findUserByEmail($userEmail);
-        $consultationStep = $em
-            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
+        $consultationStep = $this->getContainer()
+            ->get('capco.consultation_step.repository')
             ->findOneBy(['slug' => $consultationStepSlug]);
         if (!$user) {
             $output->writeln(
@@ -125,16 +126,16 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             $opinionType = null;
             foreach (explode('|', $row[1]) as $index => $ot) {
                 if (0 === $index) {
-                    $opinionType = $em
-                        ->getRepository('CapcoAppBundle:OpinionType')
+                    $opinionType = $this->getContainer()
+                        ->get('capco.opinion_type.repository')
                         ->findOneBy([
                             'title' => $ot,
                             'parent' => null,
                             'consultationStepType' => $consultationStep->getConsultationStepType(),
                         ]);
                 } else {
-                    $opinionType = $em
-                        ->getRepository('CapcoAppBundle:OpinionType')
+                    $opinionType = $this->getContainer()
+                        ->get('capco.opinion_type.repository')
                         ->findOneBy(['title' => $ot, 'parent' => $opinionType]);
                 }
             }
@@ -152,8 +153,8 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 return 1;
             }
 
-            $opinion = $em
-                ->getRepository('CapcoAppBundle:Opinion')
+            $opinion = $this->getContainer()
+                ->get('capco.opinion.repository')
                 ->findOneBy(['title' => $row[0], 'step' => $consultationStep]);
             if (\is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(

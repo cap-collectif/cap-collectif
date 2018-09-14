@@ -14,9 +14,7 @@ class CategoriesController extends FOSRestController
      */
     public function getCategoriesAction()
     {
-        $categories = $this->getDoctrine()->getManager()
-                      ->getRepository('CapcoAppBundle:Category')
-                      ->findBy(['isEnabled' => true]);
+        $categories = $this->get('capco.category.repository')->findBy(['isEnabled' => true]);
 
         return $categories;
     }

@@ -274,9 +274,9 @@ class ProfileController extends Controller
      */
     public function showOpinionsAction(User $user)
     {
-        $opinionTypesWithUserOpinions = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:OpinionType')
-            ->getByUser($user);
+        $opinionTypesWithUserOpinions = $this->get('capco.opinion_type.repository')->getByUser(
+            $user
+        );
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
 
@@ -339,9 +339,7 @@ class ProfileController extends Controller
      */
     public function showArgumentsAction(User $user)
     {
-        $arguments = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:Argument')
-            ->getByUser($user);
+        $arguments = $this->get('capco.argument.repository')->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
 

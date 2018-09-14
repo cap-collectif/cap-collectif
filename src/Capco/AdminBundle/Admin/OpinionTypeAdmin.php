@@ -5,7 +5,6 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -67,9 +66,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
             $consultationStepType = $this->getConfigurationPool()
                 ->getContainer()
-                ->get('doctrine')
-                ->getManager()
-                ->getRepository('CapcoAppBundle:Steps\ConsultationStepType')
+                ->get('capco.consultation_step_type.repository')
                 ->find($consultationStepTypeId);
             $type->setConsultationStepType($consultationStepType);
         }
@@ -92,6 +89,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             ->with('admin.fields.opinion_type.group_appendices', ['class' => 'col-md-12'])
             ->end()
             ->end();
+
         // Info
         // Options
         // Appendices
@@ -121,7 +119,6 @@ class OpinionTypeAdmin extends AbstractAdmin
                 ],
             ])
             ->end()
-
             ->with('admin.fields.opinion_type.group_options')
             ->add('color', 'choice', [
                 'label' => 'admin.fields.opinion_type.color',
@@ -134,7 +131,6 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->end()
-
             ->with('admin.fields.opinion_type.group_votes')
             ->add('voteWidgetType', 'choice', [
                 'label' => 'admin.fields.opinion_type.vote_widget_type',
@@ -155,7 +151,6 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'required' => false,
             ])
             ->end()
-
             ->with('admin.fields.opinion_type.group_contribution')
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.opinion_type.is_enabled',
@@ -176,7 +171,6 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'required' => true,
             ])
             ->end()
-
             ->with('admin.fields.opinion_type.group_appendices')
             ->add(
                 'appendixTypes',
@@ -206,13 +200,12 @@ class OpinionTypeAdmin extends AbstractAdmin
 
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->getRepository('CapcoAppBundle:OpinionType')
+            ->get('capco.opinion_type.repository')
             ->createQueryBuilder('ot')
             ->leftJoin('ot.consultationStepType', 'consultationStepType')
             ->where('consultationStepType.id = :consultationStepTypeId')
             ->setParameter('consultationStepTypeId', $consultationStepTypeId);
+
         if ($this->getSubject()->getId()) {
             $qb->andWhere('ot.id != :otId')->setParameter('otId', $this->getSubject()->getId());
         }

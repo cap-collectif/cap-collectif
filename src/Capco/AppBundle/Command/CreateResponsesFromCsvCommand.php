@@ -45,8 +45,8 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
             ->get(ConvertCsvToArray::class)
             ->convert('pjl/responses.csv', ';');
         foreach ($responses as $row) {
-            $author = $em
-                ->getRepository('CapcoUserBundle:User')
+            $author = $this->getContainer()
+                ->get('capco.user.repository')
                 ->findOneBy(['email' => $row['email']]);
             if (!$author) {
                 $output->writeln(
@@ -57,8 +57,8 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
 
                 return 1;
             }
-            $questionnaire = $em
-                ->getRepository('CapcoAppBundle:Questionnaire')
+            $questionnaire = $this->getContainer()
+                ->get('capco.questionnaire.repository')
                 ->find($row['questionnaire_id']);
             if (!$questionnaire) {
                 $output->writeln(
@@ -69,10 +69,12 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
 
                 return 1;
             }
-            $reply = $em->getRepository('CapcoAppBundle:Reply')->findOneBy([
-                'author' => $author,
-                'questionnaire' => $questionnaire,
-            ]);
+            $reply = $this->getContainer()
+                ->get('capco.reply.repository')
+                ->findOneBy([
+                    'author' => $author,
+                    'questionnaire' => $questionnaire,
+                ]);
             if (!$reply) {
                 $reply = new Reply();
                 $reply->setAuthor($author);
@@ -83,8 +85,8 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
                 $reply->setPrivate($row['private']);
                 $em->persist($reply);
             }
-            $question = $em
-                ->getRepository('CapcoAppBundle:Questions\AbstractQuestion')
+            $question = $this->getContainer()
+                ->get('capco.abstract_question.repository')
                 ->find($row['question_id']);
             $response = new ValueResponse();
             $response->setReply($reply);

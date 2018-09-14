@@ -37,8 +37,8 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
         $em = $this->getContainer()
             ->get('doctrine')
             ->getManager();
-        $step = $em
-            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
+        $step = $this->getContainer()
+            ->get('capco.consultation_step.repository')
             ->findOneBySlug($input->getArgument('step'));
         if (!\is_object($step)) {
             throw new \InvalidArgumentException(

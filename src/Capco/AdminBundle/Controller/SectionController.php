@@ -24,10 +24,7 @@ class SectionController extends PositionableController
     public function batchActionDeleteIsRelevant(array $selectedIds, $allEntitiesSelected)
     {
         foreach ($selectedIds as $id) {
-            $item = $this->container->get('doctrine')
-                ->getManager()
-                ->getRepository('Section')
-                ->find($id);
+            $item = $this->container->get('capco.section.repository')->find($id);
             if (!$item->isCustom()) {
                 return 'admin.action.section.batch_delete.denied';
             }
@@ -40,7 +37,7 @@ class SectionController extends PositionableController
      * Delete action.
      *
      * @param int|string|null $id
-     * @param Request         $request
+     * @param Request $request
      *
      * @throws NotFoundHttpException If the object does not exist
      * @throws AccessDeniedException If access is not granted

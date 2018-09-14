@@ -22,6 +22,7 @@ use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Repository\ProjectTypeRepository;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
 use Cocur\Slugify\Slugify;
@@ -145,18 +146,22 @@ class ParisImportCommand extends ContainerAwareCommand
     {
         $csv = Reader::createFromPath(__DIR__ . '/' . self::PROJECTS_FILE);
         $rows = [];
-        $type = $this->em->getRepository(ProjectType::class)->findOneBy([
-            'title' => 'project.types.participatoryBudgeting',
-        ]);
+        $type = $this->getContainer()
+            ->get(ProjectTypeRepository::class)
+            ->findOneBy([
+                'title' => 'project.types.participatoryBudgeting',
+            ]);
         $iterator = $csv->setOffset(1)->fetchAssoc(self::PROJECT_HEADER);
         foreach ($iterator as $item) {
             $rows[] = $item;
         }
 
         $output->writeln('<info>Importing projects...</info>');
-        $author = $this->em->getRepository(User::class)->findOneBy([
-            'username' => 'Mairie de Paris',
-        ]);
+        $author = $this->getContainer()
+            ->get('capco.user.repository')
+            ->findOneBy([
+                'username' => 'Mairie de Paris',
+            ]);
         foreach ($rows as $row) {
             $body = $row['animateur_title'] . $row['animateur_body'] . $row['body'];
             $introductionStep = (new PresentationStep())
@@ -271,14 +276,18 @@ class ParisImportCommand extends ContainerAwareCommand
                     ++$count;
                     continue;
                 }
-                $author = $this->em->getRepository(User::class)->findOneBy([
-                    'username' => $proposal['author_name'],
-                ]);
+                $author = $this->getContainer()
+                    ->get('capco.user.repository')
+                    ->findOneBy([
+                        'username' => $proposal['author_name'],
+                    ]);
                 $proposalParisId = $proposal['proposal_id'];
-                $district = $this->em->getRepository(District::class)->findOneBy([
-                    'form' => $step->getProposalForm(),
-                    'name' => $proposal['district'],
-                ]);
+                $district = $this->getContainer()
+                    ->get('capco.district.repository')
+                    ->findOneBy([
+                        'form' => $step->getProposalForm(),
+                        'name' => $proposal['district'],
+                    ]);
                 $responses = $this->createResponses($proposal, $questions);
                 $category = $categories
                     ->filter(function (ProposalCategory $category) use ($proposal) {
@@ -356,9 +365,11 @@ class ParisImportCommand extends ContainerAwareCommand
                     $progress->advance();
                     continue;
                 }
-                $author = $this->em->getRepository(User::class)->findOneBy([
-                    'username' => $comment['author_name'],
-                ]);
+                $author = $this->getContainer()
+                    ->get('capco.user.repository')
+                    ->findOneBy([
+                        'username' => $comment['author_name'],
+                    ]);
                 $comment = (new ProposalComment())
                     ->setAuthor($author)
                     ->setProposal($proposal)

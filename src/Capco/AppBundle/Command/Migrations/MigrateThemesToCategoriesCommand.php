@@ -13,22 +13,27 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('capco:migrate:theme-to-categories')
+        $this->setName('capco:migrate:theme-to-categories')
             ->setDescription('Transform all themes in category for a specified collect step.')
             ->addArgument(
                 'step',
                 InputArgument::REQUIRED,
                 'Please provide the slug of the collect step you want to migrate'
             )
-            ->addOption('force', false, InputOption::VALUE_NONE, 'set this option to force the migration')
-        ;
+            ->addOption(
+                'force',
+                false,
+                InputOption::VALUE_NONE,
+                'set this option to force the migration'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getOption('force')) {
-            $output->writeln('This command will permanently alter some data in your project, if you\'re sure you want to execute this migration, go ahead and add --force');
+            $output->writeln(
+                'This command will permanently alter some data in your project, if you\'re sure you want to execute this migration, go ahead and add --force'
+            );
             $output->writeln('Please set the --force option to run this command');
 
             return 1;
@@ -42,16 +47,15 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
         $collectStepSlug = $input->getArgument('step');
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
-        $collectStep = $em
-            ->getRepository('CapcoAppBundle:Steps\CollectStep')
-            ->findOneBy(['slug' => $collectStepSlug])
-        ;
-
+        $collectStep = $this->getContainer()
+            ->get('capco.collect_step.repository')
+            ->findOneBy(['slug' => $collectStepSlug]);
         if (!$collectStep || !$form = $collectStep->getProposalForm()) {
             $output->writeln(
-                '<error>Unknown collect step'
-                . $collectStepSlug .
-                '. Please provide an existing collect step slug that is linked to a proposal form.</error>');
+                '<error>Unknown collect step' .
+                    $collectStepSlug .
+                    '. Please provide an existing collect step slug that is linked to a proposal form.</error>'
+            );
             $output->writeln('<error>Cancelled. No migration executed.</error>');
 
             return 1;
@@ -59,15 +63,17 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
 
         $count = 0;
 
-        $themes = $em->getRepository('CapcoAppBundle:Theme')->findAll();
+        $themes = $this->getContainer()
+            ->get('capco.theme.repository')
+            ->findAll();
 
         foreach ($themes as $theme) {
-            $proposals = $em->getRepository('CapcoAppBundle:Proposal')
+            $proposals = $this->getContainer()
+                ->get('capco.proposal.repository')
                 ->findBy([
                     'proposalForm' => $form,
                     'theme' => $theme,
-                ])
-            ;
+                ]);
             if (\count($proposals) > 0) {
                 $category = new ProposalCategory();
                 $category->setName($theme->getTitle());

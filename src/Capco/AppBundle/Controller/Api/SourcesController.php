@@ -40,9 +40,10 @@ class SourcesController extends FOSRestController
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $previousVote = $em
-            ->getRepository('CapcoAppBundle:SourceVote')
-            ->findOneBy(['user' => $user, 'source' => $source]);
+        $previousVote = $this->get('capco.source_vote.repository')->findOneBy([
+            'user' => $user,
+            'source' => $source,
+        ]);
 
         if ($previousVote) {
             throw new BadRequestHttpException('Already voted.');
@@ -73,9 +74,10 @@ class SourcesController extends FOSRestController
 
         $em = $this->getDoctrine()->getManager();
 
-        $vote = $em
-            ->getRepository('CapcoAppBundle:SourceVote')
-            ->findOneBy(['user' => $this->getUser(), 'source' => $source]);
+        $vote = $this->get('capco.source_vote.repository')->findOneBy([
+            'user' => $this->getUser(),
+            'source' => $source,
+        ]);
 
         if (!$vote) {
             throw new BadRequestHttpException('You have not voted for this source.');

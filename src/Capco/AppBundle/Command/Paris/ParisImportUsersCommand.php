@@ -152,14 +152,22 @@ class ParisImportUsersCommand extends ContainerAwareCommand
     protected function getUserTypes(): Collection
     {
         foreach (self::PROFILES_TYPES as $key => $value) {
-            if (!$this->em->getRepository(UserType::class)->findOneBy(['name' => $value])) {
+            if (
+                !$this->getContainer()
+                    ->get('capco.user_type.repository')
+                    ->findOneBy(['name' => $value])
+            ) {
                 $type = (new UserType())->setName($value)->setCreatedAt(new \DateTime());
                 $this->em->persist($type);
                 $this->em->flush();
             }
         }
         foreach (self::PROFILES_TYPES_RATTACHEMENT as $agentName) {
-            if (!$this->em->getRepository(UserType::class)->findOneBy(['name' => $agentName])) {
+            if (
+                !$this->getContainer()
+                    ->get('capco.user_type.repository')
+                    ->findOneBy(['name' => $agentName])
+            ) {
                 $type = (new UserType())->setName($agentName)->setCreatedAt(new \DateTime());
                 $this->em->persist($type);
                 $this->em->flush();
@@ -167,7 +175,11 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         }
         $this->em->clear(UserType::class);
 
-        return new ArrayCollection($this->em->getRepository(UserType::class)->findAll());
+        return new ArrayCollection(
+            $this->getContainer()
+                ->get('capco.user_type.repository')
+                ->findAll()
+        );
     }
 
     protected function importUsers(OutputInterface $output): void

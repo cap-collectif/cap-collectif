@@ -40,21 +40,21 @@ class SettingsController extends Controller
         $admin_pool = $this->get('sonata.admin.pool');
         $em = $this->get('doctrine')->getManager();
 
-        $parameters = $em->getRepository('CapcoAppBundle:SiteParameter')->findBy(
+        $parameters = $this->get('capco.site_parameter.repository')->findBy(
             [
                 'category' => $category,
             ],
             ['position' => 'ASC']
         );
 
-        $images = $em->getRepository('CapcoAppBundle:SiteImage')->findBy(
+        $images = $this->get('capco.site_image.repository')->findBy(
             [
                 'category' => $category,
             ],
             ['position' => 'ASC']
         );
 
-        $colors = $em->getRepository('CapcoAppBundle:SiteColor')->findBy(
+        $colors = $this->get('capco.site_color.repository')->findBy(
             [
                 'category' => $category,
             ],

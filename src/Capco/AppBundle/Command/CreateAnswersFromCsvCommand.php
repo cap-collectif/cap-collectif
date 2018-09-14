@@ -63,12 +63,12 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             $type = \in_array('versions', explode('/', $row['slug']), true) ? 'version' : 'opinion';
             $object = null;
             if ('opinion' === $type) {
-                $object = $em
-                    ->getRepository('CapcoAppBundle:Opinion')
+                $object = $this->getContainer()
+                    ->get('capco.opinion.repository')
                     ->findOneBy(['slug' => $slug]);
             } elseif ('version' === $type) {
-                $object = $em
-                    ->getRepository('CapcoAppBundle:OpinionVersion')
+                $object = $this->getContainer()
+                    ->get('capco.opinion_version.repository')
                     ->findOneBy(['slug' => $slug]);
             }
 

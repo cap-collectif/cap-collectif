@@ -5,7 +5,6 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Manager\MenuItemResolver;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -24,12 +23,11 @@ class MenuItemAdmin extends AbstractAdmin
         $resolver = $this->getConfigurationPool()
             ->getContainer()
             ->get(MenuItemResolver::class);
-        $em = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine')
-            ->getManager();
 
-        $all = $em->getRepository('CapcoAppBundle:MenuItem')->findAll();
+        $all = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('capco.menu_item.repository')
+            ->findAll();
 
         $ids = [];
         foreach ($all as $mi) {

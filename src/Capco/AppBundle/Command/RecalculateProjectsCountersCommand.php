@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,13 +32,15 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
         $contributionResolver = $container->get(ContributionResolver::class);
         $this->force = $input->getOption('force');
 
-        $projects = $em->getRepository('CapcoAppBundle:Project')->findAll();
+        $projects = $this->getContainer()
+            ->get(ProjectRepository::class)
+            ->findAll();
 
         foreach ($projects as $p) {
             if (!$p->isClosed() || $this->force) {
                 // Participants count
-                $anonymousParticipants = $em
-                    ->getRepository('CapcoUserBundle:User')
+                $anonymousParticipants = $this->getContainer()
+                    ->get('capco.user.repository')
                     ->countProjectProposalAnonymousVotersWithCount($p);
                 $participants =
                     $contributionResolver->countProjectContributors($p) + $anonymousParticipants;

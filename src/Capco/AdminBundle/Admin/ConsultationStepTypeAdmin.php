@@ -123,9 +123,7 @@ class ConsultationStepTypeAdmin extends AbstractAdmin
 
         return $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->getRepository('CapcoAppBundle:OpinionType')
+            ->get('capco.opinion_type.repository')
             ->getOrderedRootNodesQuery($subject);
     }
 }

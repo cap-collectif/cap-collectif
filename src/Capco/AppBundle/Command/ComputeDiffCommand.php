@@ -25,7 +25,7 @@ class ComputeDiffCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
-        $repo = $em->getRepository('CapcoAppBundle:OpinionVersion');
+        $repo = $this->getContainer()->get('capco.opinion_version.repository');
 
         $versions = $repo->getAllIds();
 

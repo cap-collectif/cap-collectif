@@ -72,7 +72,9 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
             ->getManager();
 
         /* @var ProposalForm $proposalForm */
-        $this->proposalForm = $this->om->getRepository(ProposalForm::class)->find($proposalFormId);
+        $this->proposalForm = $this->getContainer()
+            ->get('capco.proposal_form.repository')
+            ->find($proposalFormId);
         $this->questionsMap = [];
         $this->newUsersMap = [];
 
@@ -120,9 +122,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 $proposal->setTitle(Text::escapeHtml($row[0]));
 
                 /** @var User $author */
-                $author = $this->om->getRepository(User::class)->findOneBy([
-                    'email' => $row[1],
-                ]);
+                $author = $this->getContainer()
+                    ->get('capco.user.repository')
+                    ->findOneBy([
+                        'email' => $row[1],
+                    ]);
 
                 if (!$author) {
                     if (filter_var($row[1], FILTER_VALIDATE_EMAIL)) {
@@ -145,15 +149,19 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                     $author = $this->newUsersMap[trim($row[1])];
                 }
 
-                $district = $this->om->getRepository(District::class)->findOneBy([
-                    'name' => trim($row[2]),
-                    'form' => $this->proposalForm,
-                ]);
+                $district = $this->getContainer()
+                    ->get('capco.district.repository')
+                    ->findOneBy([
+                        'name' => trim($row[2]),
+                        'form' => $this->proposalForm,
+                    ]);
 
-                $status = $this->om->getRepository(Status::class)->findOneBy([
-                    'name' => trim($row[4]),
-                    'step' => $this->proposalForm->getStep(),
-                ]);
+                $status = $this->getContainer()
+                    ->get('capco.status.repository')
+                    ->findOneBy([
+                        'name' => trim($row[4]),
+                        'step' => $this->proposalForm->getStep(),
+                    ]);
 
                 if (null === $author) {
                     return $this->generateContentException($output);
@@ -172,12 +180,12 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 }
 
                 if ('' !== $row[6]) {
-                    $proposalCategory = $this->om->getRepository(
-                        ProposalCategory::class
-                    )->findOneBy([
-                        'name' => trim($row[6]),
-                        'form' => $this->proposalForm,
-                    ]);
+                    $proposalCategory = $this->getContainer()
+                        ->get('capco.proposal_category.repository')
+                        ->findOneBy([
+                            'name' => trim($row[6]),
+                            'form' => $this->proposalForm,
+                        ]);
                     $proposal->setCategory($proposalCategory);
                 }
 

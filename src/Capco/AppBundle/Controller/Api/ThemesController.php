@@ -28,8 +28,7 @@ class ThemesController extends FOSRestController
      */
     public function getThemesAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $themes = $em->getRepository('CapcoAppBundle:Theme')->findAll();
+        $themes = $this->get('capco.theme.repository')->findAll();
 
         return $themes;
     }

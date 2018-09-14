@@ -52,9 +52,7 @@ class MembersController extends Controller
             }
         } else {
             $form->setData([
-                'userType' => $em
-                    ->getRepository('CapcoUserBundle:UserType')
-                    ->findOneBySlug($userType),
+                'userType' => $this->get('capco.user_type.repository')->findOneBySlug($userType),
                 'sort' => $sort,
             ]);
         }

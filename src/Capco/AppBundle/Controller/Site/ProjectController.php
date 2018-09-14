@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\ProjectSearchType;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
 use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Resolver\ContributionResolver;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
@@ -113,14 +114,12 @@ class ProjectController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $opinions = $em->getRepository('CapcoAppBundle:Opinion')->getTrashedByProject($project);
-        $versions = $em
-            ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getTrashedByProject($project);
-        $arguments = $em->getRepository('CapcoAppBundle:Argument')->getTrashedByProject($project);
-        $sources = $em->getRepository('CapcoAppBundle:Source')->getTrashedByProject($project);
+        $opinions = $this->get('capco.opinion.repository')->getTrashedByProject($project);
+        $versions = $this->get('capco.opinion_version.repository')->getTrashedByProject($project);
+        $arguments = $this->get('capco.argument.repository')->getTrashedByProject($project);
+        $sources = $this->get('capco.source.repository')->getTrashedByProject($project);
 
-        $proposals = $em->getRepository('CapcoAppBundle:Proposal')->getTrashedByProject($project);
+        $proposals = $this->get('capco.proposal.repository')->getTrashedByProject($project);
 
         return [
             'project' => $project,
@@ -269,9 +268,12 @@ class ProjectController extends Controller
     {
         $pagination = $this->get(Resolver::class)->getValue('contributors.pagination');
 
-        $contributors = $this->get(
-            'Capco\AppBundle\Resolver\ContributionResolver'
-        )->getProjectContributorsOrdered($project, true, $pagination, $page);
+        $contributors = $this->get(ContributionResolver::class)->getProjectContributorsOrdered(
+            $project,
+            true,
+            $pagination,
+            $page
+        );
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;

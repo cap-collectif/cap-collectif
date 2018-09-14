@@ -10,10 +10,9 @@ class FixMalformedResponsesCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('capco:fix:malformed-responses')
-            ->setDescription('Fix malformed questionnaire responses.')
-        ;
+        $this->setName('capco:fix:malformed-responses')->setDescription(
+            'Fix malformed questionnaire responses.'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -21,12 +20,11 @@ class FixMalformedResponsesCommand extends ContainerAwareCommand
         $container = $this->getContainer();
 
         $em = $container->get('doctrine.orm.entity_manager');
-        $responses = $em
-            ->getRepository('CapcoAppBundle:Response')
+        $responses = $this->getContainer()
+            ->get('capco.response.repository')
             ->createQueryBuilder('r')
             ->getQuery()
-            ->getArrayResult()
-        ;
+            ->getArrayResult();
         $count = 0;
         foreach ($responses as $response) {
             $value = $response['value'];
@@ -36,12 +34,12 @@ class FixMalformedResponsesCommand extends ContainerAwareCommand
                 if (json_decode($value)) {
                     $value = json_encode(json_decode($value));
                 }
-                $em->getConnection()
-                    ->executeUpdate(
-                        'UPDATE response SET value = ? where id = ?',
-                        [$value, $response['id']]
-                    )
-                ;
+                $em
+                    ->getConnection()
+                    ->executeUpdate('UPDATE response SET value = ? where id = ?', [
+                        $value,
+                        $response['id'],
+                    ]);
             }
         }
         $em->flush();

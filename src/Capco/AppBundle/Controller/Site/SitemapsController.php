@@ -63,7 +63,7 @@ class SitemapsController extends Controller
                 'priority' => '0.5',
             ];
             foreach (
-                $em->getRepository('CapcoAppBundle:Theme')->findBy(['isEnabled' => true])
+                $this->get('capco.theme.repository')->findBy(['isEnabled' => true])
                 as $theme
             ) {
                 $urls[] = [
@@ -85,7 +85,7 @@ class SitemapsController extends Controller
                 'priority' => '1.0',
             ];
             foreach (
-                $em->getRepository('CapcoAppBundle:Post')->findBy(['isPublished' => true])
+                $this->get('capco.blog.post.repository')->findBy(['isPublished' => true])
                 as $post
             ) {
                 $urls[] = [
@@ -107,7 +107,7 @@ class SitemapsController extends Controller
                 'priority' => '1.0',
             ];
             foreach (
-                $em->getRepository('CapcoAppBundle:Event')->findBy(['isEnabled' => true])
+                $this->get('capco.event.repository')->findBy(['isEnabled' => true])
                 as $event
             ) {
                 $urls[] = [
@@ -147,7 +147,7 @@ class SitemapsController extends Controller
 
         /** @var Opinion $opinion */
         foreach (
-            $em->getRepository('CapcoAppBundle:Opinion')->findBy(['isEnabled' => true])
+            $this->get('capco.opinion.repository')->findBy(['isEnabled' => true])
             as $opinion
         ) {
             if ($opinion->canDisplay($this->getUser())) {

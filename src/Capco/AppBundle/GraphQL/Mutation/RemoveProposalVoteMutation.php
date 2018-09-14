@@ -1,11 +1,14 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -18,17 +21,23 @@ class RemoveProposalVoteMutation implements MutationInterface
     private $proposalRepo;
     private $stepRepo;
     private $proposalVotesDataLoader;
+    private $proposalCollectVoteRepository;
+    private $proposalSelectionVoteRepository;
 
     public function __construct(
         EntityManagerInterface $em,
         ProposalRepository $proposalRepo,
         AbstractStepRepository $stepRepo,
-        ProposalVotesDataLoader $proposalVotesDataLoader
+        ProposalVotesDataLoader $proposalVotesDataLoader,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository
     ) {
         $this->em = $em;
         $this->stepRepo = $stepRepo;
         $this->proposalRepo = $proposalRepo;
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
+        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
+        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -45,13 +54,13 @@ class RemoveProposalVoteMutation implements MutationInterface
 
         $vote = null;
         if ($step instanceof CollectStep) {
-            $vote = $this->em->getRepository('CapcoAppBundle:ProposalCollectVote')->findOneBy([
+            $vote = $this->proposalCollectVoteRepository->findOneBy([
                 'user' => $user,
                 'proposal' => $proposal,
                 'collectStep' => $step,
             ]);
         } elseif ($step instanceof SelectionStep) {
-            $vote = $this->em->getRepository('CapcoAppBundle:ProposalSelectionVote')->findOneBy([
+            $vote = $this->proposalSelectionVoteRepository->findOneBy([
                 'user' => $user,
                 'proposal' => $proposal,
                 'selectionStep' => $step,

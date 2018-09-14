@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -25,12 +24,11 @@ class SectionAdmin extends AbstractAdmin
         $manager = $this->getConfigurationPool()
             ->getContainer()
             ->get(Manager::class);
-        $em = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine')
-            ->getManager();
 
-        $all = $em->getRepository('CapcoAppBundle:Section')->findAll();
+        $all = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('capco.section.repository')
+            ->findAll();
 
         $ids = [];
         foreach ($all as $section) {
@@ -226,8 +224,7 @@ class SectionAdmin extends AbstractAdmin
     {
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine')
-            ->getRepository('CapcoAppBundle:Steps\CollectStep')
+            ->get('capco.collect_step.repository')
             ->createQueryBuilder('cs')
             ->where('cs.isEnabled = :enabled')
             ->setParameter('enabled', true);
