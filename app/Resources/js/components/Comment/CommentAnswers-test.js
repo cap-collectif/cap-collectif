@@ -29,9 +29,25 @@ const props = {
   },
 };
 
+const propsWithoutAnswers = {
+  comment: {
+    $refType,
+    id: 'proposalComment2',
+    answers: {
+      totalCount: 0,
+      edges: [],
+    },
+  },
+};
+
 describe('<CommentAnswers />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<CommentAnswers {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with no answers', () => {
+    const wrapper = shallow(<CommentAnswers {...propsWithoutAnswers} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

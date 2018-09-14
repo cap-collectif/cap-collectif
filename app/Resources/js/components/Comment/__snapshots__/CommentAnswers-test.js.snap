@@ -28,3 +28,19 @@ exports[`<CommentAnswers /> should render correctly 1`] = `
   componentRef={null}
 />
 `;
+
+exports[`<CommentAnswers /> should render correctly with no answers 1`] = `
+<ContainerConstructor
+  comment={
+    Object {
+      "$refType": null,
+      "answers": Object {
+        "edges": Array [],
+        "totalCount": 0,
+      },
+      "id": "proposalComment2",
+    }
+  }
+  componentRef={null}
+/>
+`;
