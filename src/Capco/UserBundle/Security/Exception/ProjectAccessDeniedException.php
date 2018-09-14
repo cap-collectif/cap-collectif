@@ -6,8 +6,10 @@ class ProjectAccessDeniedException extends \RuntimeException
     private $attributes = array();
     private $subject;
 
-    public function __construct($message = 'Project Access Denied.', \Exception $previous = null)
-    {
+    public function __construct(
+        string $message = 'Project Access Denied.',
+        \Exception $previous = null
+    ) {
         parent::__construct($message, 403, $previous);
     }
 

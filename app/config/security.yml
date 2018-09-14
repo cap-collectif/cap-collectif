@@ -17,7 +17,7 @@ security:
     fos_userbundle:
       id: capco_user.user_provider.email
     simple_preauth:
-      id: capco.simple_preauth.provider
+      id: Capco\UserBundle\Security\Core\User\SimplePreAuthenticatorUserProvider
 
   firewalls:
     dev:
@@ -72,7 +72,7 @@ security:
           openid: /login/check-openid
         login_path: /
         oauth_user_provider:
-          service: capco.oauth.provider
+          service: Capco\UserBundle\Security\Core\User\OauthUserProvider
       remember_me:
         always_remember_me: false
         secret: '%remember_secret%'

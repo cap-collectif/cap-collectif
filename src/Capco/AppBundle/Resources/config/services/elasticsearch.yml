@@ -1,4 +1,12 @@
 services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: false
+
+  Capco\AppBundle\Elasticsearch\:
+    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Elasticsearch/*'
+
   capco.elasticsearch.client:
     class: Elastica\Client
     autowire: true

@@ -4,8 +4,25 @@ services:
     autoconfigure: true
     public: false
 
-  Capco\UserBundle\:
-    resource: 'Capco/UserBundle/*'
+  Capco\UserBundle\Authenticator\:
+    resource: '%kernel.root_dir%/../src/Capco/UserBundle/Authenticator/*'
+#    exclude: '%kernel.root_dir%/../src/Capco/UserBundle/{Security/Exception/*, Repository/*,Entity/*, DependencyInjection/*, Controller/*}'
+
+  Capco\UserBundle\Form\:
+    resource: '%kernel.root_dir%/../src/Capco/UserBundle/Form/*'
+
+  Capco\UserBundle\Handler\:
+    resource: '%kernel.root_dir%/../src/Capco/UserBundle/Handler/*'
+
+  Capco\UserBundle\Listener\:
+    resource: '%kernel.root_dir%/../src/Capco/UserBundle/Listener/*'
+
+  Capco\UserBundle\MonCompteParis\:
+    resource: '%kernel.root_dir%/../src/Capco/UserBundle/MonCompteParis/*'
+
+  Capco\UserBundle\Security\:
+    resource: '%kernel.root_dir%/../src/Capco/UserBundle/Security/*'
+    exclude: '%kernel.root_dir%/../src/Capco/UserBundle/Security/Exception/*'
 
   # Redeclare Sonata services
   sonata.user.admin.group:
@@ -14,6 +31,10 @@ services:
   sonata.user.orm.group_manager:
     abstract: false
     public: true
+
+  capco.oauth.provider:
+    class: Capco\UserBundle\Security\Core\User\OauthUserProvider
+    arguments: ['@fos_user.user_manager', { facebook: facebook_id, google: google_id }]
 
   Capco\UserBundle\Security\Core\User\OauthUserProvider:
     arguments: ['@fos_user.user_manager', { facebook: facebook_id, google: google_id }]
@@ -31,6 +52,7 @@ services:
 
   Capco\UserBundle\Security\Core\User\UserEmailProvider:
     arguments: ['@fos_user.user_manager', {}]
+    alias: "capco_user.user_provider.email"
 
   drupal.encoder:
     class: Capco\UserBundle\Security\DrupalEncoder
@@ -42,11 +64,20 @@ services:
       ['@security.http_utils', {}, 'Capco\AppBundle\Toggle\Manager', '@security.token_storage']
     tags:
       - { name: 'monolog.logger', channel: 'security' }
+
   security.authentication.failure_handler:
     class: Capco\UserBundle\Handler\AuthenticationFailureHandler
     arguments: ['@http_kernel', '@security.http_utils', {}, '@logger']
     tags:
       - { name: 'monolog.logger', channel: 'security' }
+
+  Capco\UserBundle\Authenticator\SamlAuthenticator:
+    arguments:
+      $samlIdp: '%simplesamlphp.sp%'
+
+  capco_user.user_provider.email:
+    class: Capco\UserBundle\Security\Core\User\UserEmailProvider
+    arguments: ['@fos_user.user_manager', {}]
 
   Capco\UserBundle\Doctrine\UserManager:
     arguments:
