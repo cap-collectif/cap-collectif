@@ -234,6 +234,32 @@ export default createFragmentContainer(
         type
         private
         required
+        jumps {
+          id
+          always
+          origin {
+            id
+            title
+          }
+          destination {
+            id
+            title
+          }
+          conditions {
+            id
+            operator
+            question {
+              id
+              title
+            }
+            ... on MultipleChoiceQuestionLogicJumpCondition {
+              value {
+                id
+                title
+              }
+            }
+          }
+        }
         kind
         ... on MultipleChoiceQuestion {
           isRandomQuestionChoices
