@@ -1,10 +1,12 @@
 <?php
+
 namespace Capco\AppBundle\Behat;
 
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
+use Capco\AppBundle\Manager\LogManager;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Doctrine\ORM\Id\AssignedGenerator;
 use GuzzleHttp\Client;
@@ -348,21 +350,21 @@ EOF;
         $element = new SynthesisElement();
         $element->setSynthesis($synthesis);
 
-        if (array_key_exists('title', $values)) {
+        if (isset($values['title'])) {
             $element->setTitle($values['title']);
         }
-        if (array_key_exists('body', $values)) {
+        if (isset($values['body'])) {
             $element->setBody($values['body']);
         } else {
             $element->setBody('blabla');
         }
-        if (array_key_exists('notation', $values)) {
+        if (isset($values['notation'])) {
             $element->setNotation($values['notation']);
         }
-        if (array_key_exists('published', $values)) {
+        if (isset($values['published'])) {
             $element->setPublished(filter_var($values['published'], FILTER_VALIDATE_BOOLEAN));
         }
-        if (array_key_exists('archived', $values)) {
+        if (isset($values['archived'])) {
             $element->setArchived(filter_var($values['archived'], FILTER_VALIDATE_BOOLEAN));
         }
 
@@ -388,7 +390,7 @@ EOF;
         $element = $this->getEntityManager()
             ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
             ->find($id);
-        $logs = $this->getService('Capco\AppBundle\Manager\LogManager')->getLogEntries($element);
+        $logs = $this->getService(LogManager::class)->getLogEntries($element);
         $logExists = false;
         foreach ($logs as $log) {
             $sentences = $this->getService(
@@ -418,10 +420,10 @@ EOF;
 
         if (null !== $opinion) {
             $values = $data->getRowsHash();
-            if (array_key_exists('title', $values)) {
+            if (isset($values['title'])) {
                 $opinion->setTitle($values['title']);
             }
-            if (array_key_exists('body', $values)) {
+            if (isset($values['body'])) {
                 $opinion->setBody($values['body']);
             }
 

@@ -45,7 +45,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
         // We deduplicate rows by email
         foreach ($rows as $row) {
             $niddle = $row['email'];
-            if (array_key_exists($niddle, $deduplicatedRows)) {
+            if (isset($deduplicatedRows[$niddle])) {
                 continue;
             }
             $deduplicatedRows[$niddle] = $row;

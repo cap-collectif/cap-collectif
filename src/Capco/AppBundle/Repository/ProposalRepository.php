@@ -48,7 +48,7 @@ class ProposalRepository extends EntityRepository
                 continue;
             }
 
-            if (array_key_exists($collectStep->getId(), $proposalsWithStep)) {
+            if (isset($proposalsWithStep[$collectStep->getId()])) {
                 $proposalsWithStep[$collectStep->getId()]['proposals'][] = $result;
             } else {
                 $proposalsWithStep[$collectStep->getId()] = [

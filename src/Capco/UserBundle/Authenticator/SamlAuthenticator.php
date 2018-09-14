@@ -54,7 +54,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
     public function findUsernameInResponse(array $attributes)
     {
         $authAttribute = $this->getAuthenticationAttribute();
-        if (!array_key_exists($authAttribute, $attributes)) {
+        if (!isset($attributes[$authAttribute])) {
             throw new MissingSamlAuthAttributeException(
                 sprintf(
                     "Attribute '%s' was not found in SAMLResponse '%s'",

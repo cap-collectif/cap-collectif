@@ -30,36 +30,31 @@ class LogManager
             ? $this->userManager->findOneBy(['slug' => $log->getUsername()])
             : null;
         // Update actions
+        $logData = $log->getData();
         if ('update' === $log->getAction()) {
-            if (array_key_exists('parent', $log->getData())) {
+            if (isset($logData['parent'])) {
                 $sentences[] = $this->makeSentence('move', $username);
             }
-            if (array_key_exists('published', $log->getData())) {
+            if (isset($logData['published'])) {
                 if (true === $log->getData()['published']) {
                     $sentences[] = $this->makeSentence('publish', $username);
                 } else {
                     $sentences[] = $this->makeSentence('unpublish', $username);
                 }
             }
-            if (
-                array_key_exists('archived', $log->getData()) &&
-                true === $log->getData()['archived']
-            ) {
+            if (isset($logData['archived']) && true === $logData['archived']) {
                 $sentences[] = $this->makeSentence('archive', $username);
             }
-            if (array_key_exists('notation', $log->getData())) {
+            if (isset($logData['notation'])) {
                 $sentences[] = $this->makeSentence('note', $username);
             }
-            if (array_key_exists('comment', $log->getData())) {
+            if (isset($logData['comment'])) {
                 $sentences[] = $this->makeSentence('comment', $username);
             }
-            if (
-                array_key_exists('title', $log->getData()) ||
-                array_key_exists('body', $log->getData())
-            ) {
+            if (isset($logData['title']) || isset($logData['body'])) {
                 $sentences[] = $this->makeSentence('update', $username);
             }
-            if (array_key_exists('division', $log->getData())) {
+            if (isset($logData['division'])) {
                 $sentences[] = $this->makeSentence('divide', $username);
             }
 

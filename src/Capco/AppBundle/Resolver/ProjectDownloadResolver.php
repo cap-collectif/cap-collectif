@@ -161,7 +161,7 @@ class ProjectDownloadResolver
         }
 
         foreach ($this->headers as $header) {
-            if (\is_array($header) && !array_key_exists($header['label'], $item)) {
+            if (\is_array($header) && !isset($item[$header['label']])) {
                 $item[$header['label']] = '';
             }
         }
@@ -191,7 +191,7 @@ class ProjectDownloadResolver
         $originalValue = $responseMedia ? implode(' ; ', $mediasUrl) : $response['value'];
         if (\is_array($originalValue)) {
             $values = $originalValue['labels'];
-            if (array_key_exists('other', $originalValue) && $originalValue['other']) {
+            if (isset($originalValue['other'])) {
                 $values[] = $originalValue['other'];
             }
 

@@ -45,7 +45,7 @@ class BlogController extends Controller
 
                 return $this->redirect(
                     $this->generateUrl('app_blog_search_project', [
-                        'theme' => array_key_exists('theme', $data) && $data['theme']
+                        'theme' => isset($data['theme'])
                             ? $data['theme']->getSlug()
                             : Theme::FILTER_ALL,
                         'project' => $data['project']

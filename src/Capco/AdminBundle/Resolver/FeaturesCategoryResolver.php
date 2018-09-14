@@ -57,7 +57,7 @@ class FeaturesCategoryResolver
 
     public function isCategoryEnabled(string $category): bool
     {
-        if (!array_key_exists($category, self::$categories)) {
+        if (!isset(self::$categories[$category])) {
             return false;
         }
 
@@ -79,7 +79,7 @@ class FeaturesCategoryResolver
     public function getTogglesByCategory(string $category): array
     {
         $toggles = [];
-        if (array_key_exists($category, self::$categories)) {
+        if (isset(self::$categories[$category])) {
             foreach (self::$categories[$category]['features'] as $feature) {
                 $toggles[$feature] = $this->manager->isActive($feature);
             }

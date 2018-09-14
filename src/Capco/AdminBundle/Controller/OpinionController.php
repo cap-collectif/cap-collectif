@@ -435,10 +435,7 @@ class OpinionController extends Controller
         foreach ($rootOpinionTypes as $root) {
             $ct = $root['consultationStepType']['title'];
             $root['__children'] = $otRepo->childrenHierarchy($otRepo->find($root['id']));
-            if (
-                array_key_exists($ct, $consultationStepTypes) &&
-                \is_array($consultationStepTypes[$ct])
-            ) {
+            if (isset($consultationStepTypes[$ct]) && \is_array($consultationStepTypes[$ct])) {
                 $consultationStepTypes[$ct][] = $root;
             } else {
                 $consultationStepTypes[$ct] = [$root];

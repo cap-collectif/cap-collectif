@@ -174,7 +174,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         }
 
         foreach ($collectStepsIds as $id) {
-            if (!array_key_exists($id, $userVotes)) {
+            if (!isset($userVotes[$id])) {
                 $userVotes[$id] = [];
             }
         }
@@ -349,7 +349,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             $votesBySteps[$result['stepId']] = (int) ($result['votesCount']);
         }
 
-        if (!array_key_exists($index, $votesBySteps)) {
+        if (!isset($votesBySteps[$index])) {
             $votesBySteps[$index] = 0;
         }
 

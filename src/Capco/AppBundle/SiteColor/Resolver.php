@@ -22,7 +22,7 @@ class Resolver
         if (!$this->colors) {
             $this->colors = $this->repository->getValuesIfEnabled();
         }
-        if (!array_key_exists($key, $this->colors)) {
+        if (!isset($this->colors[$key])) {
             return;
         }
 

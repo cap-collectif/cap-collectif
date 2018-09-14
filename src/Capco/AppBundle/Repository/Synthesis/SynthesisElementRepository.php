@@ -23,14 +23,10 @@ class SynthesisElementRepository extends MaterializedPathRepository
      */
     public function countWith($synthesis, $type)
     {
-        $qb = $this->createQueryBuilder('se')
-            ->select('COUNT(se.id)')
-        ;
+        $qb = $this->createQueryBuilder('se')->select('COUNT(se.id)');
         $qb = $this->addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis);
 
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -47,23 +43,16 @@ class SynthesisElementRepository extends MaterializedPathRepository
         $qb = $this->createQueryBuilder('se')
             ->addSelect('a', 'am')
             ->leftJoin('se.author', 'a')
-            ->leftJoin('a.media', 'am')
-        ;
-
+            ->leftJoin('a.media', 'am');
         if (null !== $term) {
-            $qb
-                ->andWhere('se.title LIKE :term')
-                ->setParameter('term', '%' . $term . '%')
-            ;
+            $qb->andWhere('se.title LIKE :term')->setParameter('term', '%' . $term . '%');
         }
 
         $qb = $this->addQueryConditionsForTypeAndSynthesis($qb, $type, $synthesis);
 
         $qb->orderBy('se.linkedDataLastUpdate', 'DESC');
 
-        $qb
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
+        $qb->setFirstResult($offset)->setMaxResults($limit);
 
         return new Paginator($qb);
     }
@@ -88,13 +77,8 @@ class SynthesisElementRepository extends MaterializedPathRepository
             ->leftJoin('se.division', 'div')
             ->leftJoin('se.originalDivision', 'odiv')
             ->where('se.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->setParameter('id', $id);
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     // ************************ Methods for handling tree generation *************************
@@ -109,8 +93,13 @@ class SynthesisElementRepository extends MaterializedPathRepository
      * @param null|mixed $depth
      * @param mixed      $options
      */
-    public function getFormattedTree($synthesis, $type, $parentId = null, $depth = null, $options = [])
-    {
+    public function getFormattedTree(
+        $synthesis,
+        $type,
+        $parentId = null,
+        $depth = null,
+        $options = []
+    ) {
         $parent = $parentId ? $this->find($parentId) : null;
         $nodes = $this->getElementsHierarchy($synthesis, $type, $parent, $depth);
 
@@ -139,31 +128,33 @@ class SynthesisElementRepository extends MaterializedPathRepository
             foreach ($nodes as $child) {
                 $item = $child;
                 $item[$childrenIndex] = [];
-                if (array_key_exists($childrenCountIndex, $item)) {
+                if (isset($item[$childrenCountIndex])) {
                     $item[$childrenCountIndex] = (int) $item[$childrenCountIndex];
                 }
-                if (array_key_exists('publishedChildrenCount', $item)) {
+                if (isset($item['publishedChildrenCount'])) {
                     $item['publishedChildrenCount'] = (int) $item['publishedChildrenCount'];
                 }
-                if (array_key_exists('publishedParentChildrenCount', $item)) {
-                    $item['publishedParentChildrenCount'] = (int) $item['publishedParentChildrenCount'];
+                if (isset($item['publishedParentChildrenCount'])) {
+                    $item['publishedParentChildrenCount'] = (int) $item[
+                        'publishedParentChildrenCount'
+                    ];
                 }
-                if (array_key_exists('childrenScore', $item)) {
+                if (isset($item['childrenScore'])) {
                     $item['childrenScore'] = (int) $item['childrenScore'];
                 }
-                if (array_key_exists('parentChildrenScore', $item)) {
+                if (isset($item['parentChildrenScore'])) {
                     $item['parentChildrenScore'] = (int) $item['parentChildrenScore'];
                 }
-                if (array_key_exists('childrenElementsNb', $item)) {
+                if (isset($item['childrenElementsNb'])) {
                     $item['childrenElementsNb'] = (int) $item['childrenElementsNb'];
                 }
-                if (array_key_exists('parentChildrenElementsNb', $item)) {
+                if (isset($item['parentChildrenElementsNb'])) {
                     $item['parentChildrenElementsNb'] = (int) $item['parentChildrenElementsNb'];
                 }
-                if (array_key_exists($childrenCountIndex, $item)) {
+                if (isset($item[$childrenCountIndex])) {
                     $item[$childrenCountIndex] = (int) $item[$childrenCountIndex];
                 }
-                if (array_key_exists('body', $item)) {
+                if (isset($item['body'])) {
                     $item['body'] = html_entity_decode($item['body'], ENT_QUOTES);
                 }
                 // Number of stack items
@@ -228,40 +219,46 @@ class SynthesisElementRepository extends MaterializedPathRepository
      * @param null|mixed $depth
      * @param mixed      $includeNode
      */
-    public function getElementsHierarchy($synthesis, $type = 'published', $parent = null, $depth = null, $includeNode = false)
-    {
+    public function getElementsHierarchy(
+        $synthesis,
+        $type = 'published',
+        $parent = null,
+        $depth = null,
+        $includeNode = false
+    ) {
         $meta = $this->getClassMetadata();
         $config = $this->listener->getConfiguration($this->_em, $meta->name);
         $separator = addcslashes($config['path_separator'], '%');
         $path = $config['path'];
         $qb = $this->createQueryBuilder('se')
             ->select(
-              'se.id',
-              'se.level',
-              'se.path',
-              'se.displayType',
-              'se.title',
-              'se.body',
-              'se.description',
-              'se.published',
-              'COUNT(c.id) as childrenCount',
-              'se.publishedChildrenCount',
-              'se.publishedParentChildrenCount',
-              'se.childrenScore',
-              'se.parentChildrenScore',
-              '(se.publishedChildrenCount + se.childrenScore) as childrenElementsNb',
-              '(se.publishedParentChildrenCount + se.parentChildrenScore) as parentChildrenElementsNb'
+                'se.id',
+                'se.level',
+                'se.path',
+                'se.displayType',
+                'se.title',
+                'se.body',
+                'se.description',
+                'se.published',
+                'COUNT(c.id) as childrenCount',
+                'se.publishedChildrenCount',
+                'se.publishedParentChildrenCount',
+                'se.childrenScore',
+                'se.parentChildrenScore',
+                '(se.publishedChildrenCount + se.childrenScore) as childrenElementsNb',
+                '(se.publishedParentChildrenCount + se.parentChildrenScore) as parentChildrenElementsNb'
             )
-            ->leftJoin('se.children', 'c', 'WITH', $this->getOnClauseForChildren($type))
-        ;
+            ->leftJoin('se.children', 'c', 'WITH', $this->getOnClauseForChildren($type));
         if ('published' === $type) {
-            $qb->addSelect(
-                'se.votes',
-                'se.linkedDataUrl',
-                'se.subtitle',
-                'a.username as authorName',
-                'se.linkedDataCreation'
-            )->leftJoin('se.author', 'a');
+            $qb
+                ->addSelect(
+                    'se.votes',
+                    'se.linkedDataUrl',
+                    'se.subtitle',
+                    'a.username as authorName',
+                    'se.linkedDataCreation'
+                )
+                ->leftJoin('se.author', 'a');
         }
         $expr = '';
         $includeNodeExpr = '';
@@ -269,15 +266,23 @@ class SynthesisElementRepository extends MaterializedPathRepository
         if (\is_object($parent) && $parent instanceof $meta->name) {
             $parent = new EntityWrapper($parent, $this->_em);
             $nodePath = $parent->getPropertyValue($path);
-            $expr = $qb->expr()->andX()->add(
-                $qb->expr()->like(
-                    'se.' . $path,
-                    $qb->expr()->literal(
-                        $nodePath
-                        . ($config['path_ends_with_separator'] ? '' : $separator) . '%'
-                    )
-                )
-            );
+            $expr = $qb
+                ->expr()
+                ->andX()
+                ->add(
+                    $qb
+                        ->expr()
+                        ->like(
+                            'se.' . $path,
+                            $qb
+                                ->expr()
+                                ->literal(
+                                    $nodePath .
+                                        ($config['path_ends_with_separator'] ? '' : $separator) .
+                                        '%'
+                                )
+                        )
+                );
 
             if ($includeNode) {
                 $includeNodeExpr = $qb->expr()->eq('se.' . $path, $qb->expr()->literal($nodePath));
@@ -287,10 +292,28 @@ class SynthesisElementRepository extends MaterializedPathRepository
 
             if ($depth && $depth > 0) {
                 $expr->add(
-                    $qb->expr()->andX(
-                        $qb->expr()->gte('se.' . $config['level'], $qb->expr()->literal($parent->getPropertyValue($config['level']))),
-                        $qb->expr()->lte('se.' . $config['level'], $qb->expr()->literal($parent->getPropertyValue($config['level']) + $depth))
-                    )
+                    $qb
+                        ->expr()
+                        ->andX(
+                            $qb
+                                ->expr()
+                                ->gte(
+                                    'se.' . $config['level'],
+                                    $qb
+                                        ->expr()
+                                        ->literal($parent->getPropertyValue($config['level']))
+                                ),
+                            $qb
+                                ->expr()
+                                ->lte(
+                                    'se.' . $config['level'],
+                                    $qb
+                                        ->expr()
+                                        ->literal(
+                                            $parent->getPropertyValue($config['level']) + $depth
+                                        )
+                                )
+                        )
                 );
             }
         } elseif ($depth && $depth > 0) {
@@ -313,10 +336,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
 
         $qb->groupBy('se.id');
 
-        return $qb
-            ->getQuery()
-            ->getArrayResult()
-        ;
+        return $qb->getQuery()->getArrayResult();
     }
 
     /**
@@ -349,10 +369,10 @@ class SynthesisElementRepository extends MaterializedPathRepository
                 $qb = $this->addAndQueryCondition($qb, 'published', true);
                 break;
             case 'notIgnored':
-                $qb->andWhere('se.published = :published OR se.archived = :notArchived')
+                $qb
+                    ->andWhere('se.published = :published OR se.archived = :notArchived')
                     ->setParameter('published', true)
-                    ->setParameter('notArchived', false)
-                ;
+                    ->setParameter('notArchived', false);
                 break;
             default:
                 break;
@@ -389,13 +409,10 @@ class SynthesisElementRepository extends MaterializedPathRepository
     {
         if (\in_array($field, self::$allowedFields, true)) {
             if (null === $value) {
-                return $qb
-                    ->andWhere('se.' . $field . ' IS NULL');
+                return $qb->andWhere('se.' . $field . ' IS NULL');
             }
 
-            return $qb
-                ->andWhere('se.' . $field . ' = :' . $field)
-                ->setParameter($field, $value);
+            return $qb->andWhere('se.' . $field . ' = :' . $field)->setParameter($field, $value);
         }
 
         return $qb;

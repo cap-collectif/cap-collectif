@@ -200,7 +200,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
 
     public function getInputType()
     {
-        if (array_key_exists($this->getType(), self::$questionTypesInputs)) {
+        if (isset(self::$questionTypesInputs[$this->getType()])) {
             return self::$questionTypesInputs[$this->getType()];
         }
     }

@@ -158,13 +158,13 @@ class ProposalSearch extends Search
         // but most of the time we don't want to see them
         $filters['trashed'] = false;
 
-        if (array_key_exists('selectionStep', $providedFilters)) {
+        if (isset($providedFilters['selectionStep'])) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
-            if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses']) {
+            if (isset($providedFilters['statuses'])) {
                 $filters['selections.status.id'] = $providedFilters['statuses'];
             }
         } else {
-            if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses']) {
+            if (isset($providedFilters['statuses'])) {
                 $filters['status.id'] = $providedFilters['statuses'];
             }
         }
@@ -179,13 +179,13 @@ class ProposalSearch extends Search
         if (isset($providedFilters['themes'])) {
             $filters['theme.id'] = $providedFilters['themes'];
         }
-        if (array_key_exists('types', $providedFilters) && $providedFilters['types'] > 0) {
+        if (isset($providedFilters['types']) && $providedFilters['types'] > 0) {
             $filters['author.userType.id'] = $providedFilters['types'];
         }
         if (isset($providedFilters['categories'])) {
             $filters['category.id'] = $providedFilters['categories'];
         }
-        if (array_key_exists('author', $providedFilters)) {
+        if (isset($providedFilters['author'])) {
             $filters['author.id'] = $providedFilters['author'];
         }
 

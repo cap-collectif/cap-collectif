@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\EventRegistrationType;
 use Capco\AppBundle\Form\EventSearchType;
 use Capco\AppBundle\Helper\EventHelper;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -48,7 +49,7 @@ class EventController extends Controller
 
                 return $this->redirect(
                     $this->generateUrl('app_event_search_term', [
-                        'theme' => array_key_exists('theme', $data) && $data['theme']
+                        'theme' => isset($data['theme'])
                             ? $data['theme']->getSlug()
                             : Theme::FILTER_ALL,
                         'project' => $data['project']
@@ -117,7 +118,7 @@ class EventController extends Controller
 
                 return $this->redirect(
                     $this->generateUrl('app_event_archived_term', [
-                        'theme' => array_key_exists('theme', $data) && $data['theme']
+                        'theme' => isset($data['theme'])
                             ? $data['theme']->getSlug()
                             : Theme::FILTER_ALL,
                         'project' => $data['project']
@@ -130,16 +131,17 @@ class EventController extends Controller
         } else {
             $form->setData([
                 'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                'project' => $this->get(
-                    'Capco\AppBundle\Repository\ProjectRepository'
-                )->findOneBySlug($project),
+                'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
                 'term' => $term,
             ]);
         }
 
-        $groupedEvents = $this->get(
-            'Capco\AppBundle\Resolver\EventResolver'
-        )->getEventsGroupedByYearAndMonth(true, $theme, $project, $term);
+        $groupedEvents = $this->get(EventResolver::class)->getEventsGroupedByYearAndMonth(
+            true,
+            $theme,
+            $project,
+            $term
+        );
 
         return [
             'years' => $groupedEvents,
@@ -155,8 +157,6 @@ class EventController extends Controller
     public function showAction(Request $request, Event $event)
     {
         $eventHelper = $this->container->get(EventHelper::class);
-
-        $serializer = $this->get('jms_serializer');
 
         if (!$eventHelper->isRegistrationPossible($event)) {
             return [

@@ -26,14 +26,12 @@ class ModelTypeExtension extends AbstractTypeExtension
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        if (array_key_exists('tree', $options) && $options['tree']) {
+        if (isset($options['tree'])) {
             $view->vars['tree'] = true;
             $view->vars['hierarchy'] = [];
             $roots = $form->getData();
             foreach ($roots as $root) {
-                $children = $this->em
-                    ->getRepository(\get_class($root))
-                    ->childrenHierarchy($root);
+                $children = $this->em->getRepository(\get_class($root))->childrenHierarchy($root);
                 $view->vars['hierarchy'][$root->getId()] = $children;
             }
         } else {

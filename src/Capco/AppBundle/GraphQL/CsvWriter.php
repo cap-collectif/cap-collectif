@@ -15,7 +15,7 @@ class CsvWriter
         foreach ($currentData as $dataFieldKey => $dataFieldValue) {
             if (!\is_array($dataFieldValue)) {
                 $rowName = $fieldKey . '_' . $dataFieldKey;
-                if (array_key_exists($rowName, $row)) {
+                if (isset($row[$rowName])) {
                     $row[$rowName] = $dataFieldValue;
                 } else {
                     echo 'missing: ' . $rowName . PHP_EOL;
