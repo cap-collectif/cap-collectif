@@ -44,8 +44,9 @@ class SitemapsController extends Controller
             as $page
         ) {
             $urls[] = [
-                'loc' =>
-                    $this->get('router')->generate('app_page_show', ['slug' => $page->getSlug()]),
+                'loc' => $this->get('router')->generate('app_page_show', [
+                    'slug' => $page->getSlug(),
+                ]),
                 'lastmod' => $page->getUpdatedAt()->format(\DateTime::W3C),
                 'changefreq' => 'monthly',
                 'priority' => '0.1',
@@ -64,10 +65,9 @@ class SitemapsController extends Controller
                 as $theme
             ) {
                 $urls[] = [
-                    'loc' =>
-                        $this->get('router')->generate('app_theme_show', [
-                            'slug' => $theme->getSlug(),
-                        ]),
+                    'loc' => $this->get('router')->generate('app_theme_show', [
+                        'slug' => $theme->getSlug(),
+                    ]),
                     'lastmod' => $theme->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'weekly',
                     'priority' => '0.5',
@@ -87,10 +87,9 @@ class SitemapsController extends Controller
                 as $post
             ) {
                 $urls[] = [
-                    'loc' =>
-                        $this->get('router')->generate('app_blog_show', [
-                            'slug' => $post->getSlug(),
-                        ]),
+                    'loc' => $this->get('router')->generate('app_blog_show', [
+                        'slug' => $post->getSlug(),
+                    ]),
                     'lastmod' => $post->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'daily',
                     'priority' => '1.0',
@@ -110,10 +109,9 @@ class SitemapsController extends Controller
                 as $event
             ) {
                 $urls[] = [
-                    'loc' =>
-                        $this->get('router')->generate('app_event_show', [
-                            'slug' => $event->getSlug(),
-                        ]),
+                    'loc' => $this->get('router')->generate('app_event_show', [
+                        'slug' => $event->getSlug(),
+                    ]),
                     'priority' => '1.0',
                     'lastmod' => $event->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'daily',
@@ -131,8 +129,11 @@ class SitemapsController extends Controller
         // Steps
         $stepResolver = $this->get('capco.step.resolver');
         /** @var AbstractStep $step */
-        foreach ($this->get('capco.abstract_step.repository')->findBy(['isEnabled' => true]) as $step) {
-            if ($step->getProject()->canDisplay($this->getUser())) {
+        foreach (
+            $this->get('capco.abstract_step.repository')->findBy(['isEnabled' => true])
+            as $step
+        ) {
+            if ($step->getProject() && $step->getProject()->canDisplay($this->getUser())) {
                 $urls[] = [
                     'loc' => $stepResolver->getLink($step, false),
                     'priority' => '0.5',
@@ -143,20 +144,21 @@ class SitemapsController extends Controller
         }
 
         /** @var Opinion $opinion */
-        foreach ($em->getRepository('CapcoAppBundle:Opinion')->findBy(['isEnabled' => true]) as $opinion) {
+        foreach (
+            $em->getRepository('CapcoAppBundle:Opinion')->findBy(['isEnabled' => true])
+            as $opinion
+        ) {
             if ($opinion->canDisplay($this->getUser())) {
                 $urls[] = [
-                    'loc' =>
-                        $this->get('router')->generate('app_project_show_opinion', [
-                            'projectSlug' =>
-                                $opinion
-                                    ->getStep()
-                                    ->getProject()
-                                    ->getSlug(),
-                            'stepSlug' => $opinion->getStep()->getSlug(),
-                            'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
-                            'opinionSlug' => $opinion->getSlug(),
-                        ]),
+                    'loc' => $this->get('router')->generate('app_project_show_opinion', [
+                        'projectSlug' => $opinion
+                            ->getStep()
+                            ->getProject()
+                            ->getSlug(),
+                        'stepSlug' => $opinion->getStep()->getSlug(),
+                        'opinionTypeSlug' => $opinion->getOpinionType()->getSlug(),
+                        'opinionSlug' => $opinion->getSlug(),
+                    ]),
                     'priority' => '2.0',
                     'lastmod' => $opinion->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'hourly',
