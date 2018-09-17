@@ -16,6 +16,7 @@ describe('<ProposalDetailLikersModal />', () => {
         {
           id: '1',
           displayName: 'user 1',
+          vip: true,
           rolesText: 'Développeuse web - capco',
           url: 'www.google.com',
           username: 'user1',
@@ -26,6 +27,7 @@ describe('<ProposalDetailLikersModal />', () => {
         {
           id: '2',
           displayName: 'user 2',
+          vip: false,
           rolesText: 'Développeur web - capco',
           url: 'www.google.com',
           username: 'user2',
@@ -47,6 +49,7 @@ describe('<ProposalDetailLikersModal />', () => {
         {
           id: '1',
           displayName: 'user 1',
+          vip: true,
           rolesText: 'Développeuse web - capco',
           url: 'www.google.com',
           username: 'user1',

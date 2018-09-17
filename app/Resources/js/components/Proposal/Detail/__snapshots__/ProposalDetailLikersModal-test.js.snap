@@ -50,6 +50,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when on
   >
     <ListGroupItem
       bsClass="list-group-item"
+      className="bg-vip"
       key="0"
       listItem={false}
     >
@@ -64,6 +65,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when on
             "rolesText": "Développeuse web - capco",
             "url": "www.google.com",
             "username": "user1",
+            "vip": true,
           }
         }
       />
@@ -134,6 +136,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
   >
     <ListGroupItem
       bsClass="list-group-item"
+      className="bg-vip"
       key="0"
       listItem={false}
     >
@@ -148,6 +151,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
             "rolesText": "Développeuse web - capco",
             "url": "www.google.com",
             "username": "user1",
+            "vip": true,
           }
         }
       />
@@ -166,6 +170,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
     </ListGroupItem>
     <ListGroupItem
       bsClass="list-group-item"
+      className={null}
       key="1"
       listItem={false}
     >
@@ -180,6 +185,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
             "rolesText": "Développeur web - capco",
             "url": "www.google.com",
             "username": "user2",
+            "vip": false,
           }
         }
       />

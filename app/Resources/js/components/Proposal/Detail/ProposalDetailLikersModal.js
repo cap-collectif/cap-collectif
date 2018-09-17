@@ -30,7 +30,7 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
           </Modal.Header>
           <ListGroupFlush className="list-group-custom">
             {proposal.likers.map((liker, key) => (
-              <ListGroupItem key={key}>
+              <ListGroupItem key={key} className={liker.vip ? 'bg-vip' : null}>
                 <UserAvatar user={liker} />
                 <div>
                   <a href={liker.url}>{liker.displayName}</a>
@@ -56,6 +56,7 @@ export default createFragmentContainer(ProposalDetailLikersModal, {
         rolesText
         url
         username
+        vip
         media {
           url
         }
