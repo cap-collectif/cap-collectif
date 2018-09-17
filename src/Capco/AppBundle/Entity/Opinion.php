@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
@@ -617,6 +618,10 @@ class Opinion implements OpinionContributionInterface
 
     public function isIndexable(): bool
     {
+        if (!$this->getProject()) {
+            return $this->isPublished();
+        }
+
         return $this->isPublished() && $this->getProject()->isPublic();
     }
 
