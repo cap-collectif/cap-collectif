@@ -12,12 +12,18 @@ import type { Dispatch } from '../../../types';
 type Props = { proposal: ProposalDetailLikersModal_proposal, show: boolean, dispatch: Dispatch };
 
 export class ProposalDetailLikersModal extends React.Component<Props> {
+  handleClose = (e: Event) => {
+    const { dispatch } = this.props;
+    e.preventDefault();
+    dispatch(closeDetailLikersModal());
+  };
+
   render() {
-    const { proposal, show, dispatch } = this.props;
+    const { proposal, show } = this.props;
 
     if (proposal.likers && proposal.likers.length > 0) {
       return (
-        <Modal show={show} onHide={() => dispatch(closeDetailLikersModal())}>
+        <Modal show={show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>
               <FormattedMessage
