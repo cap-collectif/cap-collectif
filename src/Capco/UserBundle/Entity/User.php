@@ -261,6 +261,8 @@ class User extends BaseUser
 
     private $userGroups;
 
+    private $resetPasswordToken = null;
+
     public function __construct($encoder = null)
     {
         parent::__construct();
@@ -1483,5 +1485,17 @@ class User extends BaseUser
         if (!$this->createdAt) {
             $this->createdAt = new \DateTime();
         }
+    }
+
+    public function setResetPasswordToken(?string $token): self
+    {
+        $this->resetPasswordToken = $token;
+
+        return $this;
+    }
+
+    public function getResetPasswordToken(): ?string
+    {
+        return $this->resetPasswordToken;
     }
 }

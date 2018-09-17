@@ -12,8 +12,11 @@ use FOS\UserBundle\Model\UserInterface;
 
 class FOSNotifier extends BaseNotifier implements MailerInterface
 {
-    public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver)
-    {
+    public function __construct(
+        MailerService $mailer,
+        Resolver $siteParams,
+        UserResolver $userResolver
+    ) {
         parent::__construct($mailer, $siteParams, $userResolver);
     }
 
@@ -24,14 +27,16 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
      */
     public function sendConfirmationEmailMessage(UserInterface $user)
     {
-        $this->mailer->sendMessage(UserRegistrationConfirmationMessage::create(
-            $user,
-            $user->getEmail(),
-            $this->userResolver->resolveRegistrationConfirmationUrl($user),
-            $this->siteParams->getValue('global.site.fullname'),
-            'Cap Collectif',
-            $this->userResolver->resolveShowUrl($user)
-        ));
+        $this->mailer->sendMessage(
+            UserRegistrationConfirmationMessage::create(
+                $user,
+                $user->getEmail(),
+                $this->userResolver->resolveRegistrationConfirmationUrl($user),
+                $this->siteParams->getValue('global.site.fullname'),
+                'Cap Collectif',
+                $this->userResolver->resolveShowUrl($user)
+            )
+        );
     }
 
     /**
@@ -41,10 +46,12 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
      */
     public function sendResettingEmailMessage(UserInterface $user)
     {
-        $this->mailer->sendMessage(UserResettingPasswordMessage::create(
-            $user,
-            $user->getEmail(),
-            $this->userResolver->resolveResettingPassworldUrl($user)
-        ));
+        $this->mailer->sendMessage(
+            UserResettingPasswordMessage::create(
+                $user,
+                $user->getEmail(),
+                $this->userResolver->resolveResettingPasswordUrl($user)
+            )
+        );
     }
 }

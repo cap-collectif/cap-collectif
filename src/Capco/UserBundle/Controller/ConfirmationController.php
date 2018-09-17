@@ -2,6 +2,7 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Helper\EnvHelper;
+use FOS\UserBundle\Model\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,6 +17,7 @@ class ConfirmationController extends Controller
      */
     public function emailAction($token)
     {
+        /** @var UserManager $manager */
         $manager = $this->container->get('fos_user.user_manager');
         $session = $this->container->get('session');
         $user = $manager->findUserByConfirmationToken($token);
@@ -79,7 +81,6 @@ class ConfirmationController extends Controller
      */
     public function newEmailAction($token)
     {
-        $manager = $this->container->get('fos_user.user_manager');
         $redirectResponse = new RedirectResponse(
             $this->container->get('router')->generate('app_homepage')
         );

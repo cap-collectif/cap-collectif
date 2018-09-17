@@ -1,6 +1,8 @@
 <?php
 namespace Capco\UserBundle\Controller;
 
+use Capco\UserBundle\Doctrine\UserManager;
+use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Form\Type\ResettingFormType;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,7 +26,8 @@ class ResettingFOSUser1Controller extends Controller
 
     public function resetAction(Request $request, string $token)
     {
-        $user = $this->container->get('fos_user.user_manager')->findUserByConfirmationToken($token);
+        /** @var User $user */
+        $user = $this->container->get(UserManager::class)->findUserByResetPasswordToken($token);
         if (null === $user) {
             throw new NotFoundHttpException(
                 sprintf('The user with "confirmation token" does not exist for value "%s"', $token)
@@ -79,8 +82,8 @@ class ResettingFOSUser1Controller extends Controller
                 ['invalid_email' => $email]
             );
         }
-
-        $user = $this->container->get('fos_user.user_manager')->findUserByEmail($email);
+        /** @var User $user */
+        $user = $this->container->get(UserManager::class)->findUserByEmail($email);
 
         if (
             null !== $user &&
@@ -88,9 +91,9 @@ class ResettingFOSUser1Controller extends Controller
                 $this->container->getParameter('fos_user.resetting.token_ttl')
             )
         ) {
-            if (null === $user->getConfirmationToken()) {
+            if (null === $user->getResetPasswordToken()) {
                 $tokenGenerator = $this->container->get('fos_user.util.token_generator');
-                $user->setConfirmationToken($tokenGenerator->generateToken());
+                $user->setResetPasswordToken($tokenGenerator->generateToken());
             }
 
             $this->container->get('session')->set(static::SESSION_EMAIL, $email);

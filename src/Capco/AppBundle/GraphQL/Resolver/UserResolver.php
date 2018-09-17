@@ -19,13 +19,13 @@ class UserResolver implements ContainerAwareInterface
         return $typeResolver->resolve('user');
     }
 
-    public function resolveResettingPassworldUrl(UserInterface $user): string
+    public function resolveResettingPasswordUrl(User $user): string
     {
         $router = $this->container->get('router');
 
         return $router->generate(
             'fos_user_resetting_reset',
-            ['token' => $user->getConfirmationToken()],
+            ['token' => $user->getResetPasswordToken()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

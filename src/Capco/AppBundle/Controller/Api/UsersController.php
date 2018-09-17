@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
 use Capco\UserBundle\Form\Type\ApiProfileFormType;
@@ -185,6 +186,7 @@ class UsersController extends FOSRestController
      */
     public function postResendEmailConfirmationAction()
     {
+        /** @var User $user */
         $user = $this->getUser();
         if ($user->isEmailConfirmed() && !$user->getNewEmailToConfirm()) {
             throw new BadRequestHttpException('Already confirmed.');

@@ -99,12 +99,19 @@ services:
 
   # We override default security services:
   security.authentication.success_handler:
-      class:  Capco\UserBundle\Handler\AuthenticationSuccessHandler
-      arguments:  ["@security.http_utils", {}, '@capco.toggle.manager', '@security.token_storage']
-      tags:
-          - { name: 'monolog.logger', channel: 'security' }
+    class: Capco\UserBundle\Handler\AuthenticationSuccessHandler
+    arguments: ['@security.http_utils', {}, '@capco.toggle.manager', '@security.token_storage']
+    tags:
+      - { name: 'monolog.logger', channel: 'security' }
   security.authentication.failure_handler:
     class: Capco\UserBundle\Handler\AuthenticationFailureHandler
     arguments: ['@http_kernel', '@security.http_utils', {}, '@logger']
     tags:
       - { name: 'monolog.logger', channel: 'security' }
+
+  Capco\UserBundle\Doctrine\UserManager:
+    arguments:
+      - '@fos_user.util.password_updater'
+      - '@fos_user.util.canonical_fields_updater'
+      - '@fos_user.object_manager'
+      - '%fos_user.model.user.class%'

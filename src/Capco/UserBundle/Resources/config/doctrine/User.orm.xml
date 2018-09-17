@@ -79,6 +79,7 @@
 
         <field name="newEmailToConfirm" column="new_email_to_confirm" type="string" length="255" nullable="true" />
         <field name="newEmailConfirmationToken" column="new_email_confirmation_token" type="string" length="255" nullable="true" />
+        <field name="resetPasswordToken" column="reset_password_token" type="string" length="255" nullable="true" />
 
         <many-to-one field="media" target-entity="Capco\MediaBundle\Entity\Media">
             <cascade>
