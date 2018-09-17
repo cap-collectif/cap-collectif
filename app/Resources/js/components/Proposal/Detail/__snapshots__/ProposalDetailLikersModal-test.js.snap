@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalDetailLikersModal /> should render a formatted message when one liker 1`] = `
+<Modal
+  animation={true}
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+    >
+      <FormattedMessage
+        id="proposal.likers.count"
+        values={
+          Object {
+            "num": 1,
+          }
+        }
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ListGroupFlush
+    className="list-group-custom"
+  >
+    <ListGroupItem
+      bsClass="list-group-item"
+      key="0"
+      listItem={false}
+    >
+      <Connect(UserAvatar)
+        user={
+          Object {
+            "displayName": "user 1",
+            "id": "1",
+            "media": Object {
+              "url": "http://monimage.com/image1.jpg",
+            },
+            "rolesText": "Développeuse web - capco",
+            "url": "www.google.com",
+            "username": "user1",
+          }
+        }
+      />
+      <div>
+        <a
+          href="www.google.com"
+        >
+          user 1
+        </a>
+        <span
+          className="excerpt"
+        >
+          Développeuse web - capco
+        </span>
+      </div>
+    </ListGroupItem>
+  </ListGroupFlush>
+</Modal>
+`;
+
+exports[`<ProposalDetailLikersModal /> should render a formatted message when several liker 1`] = `
+<Modal
+  animation={true}
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+    >
+      <FormattedMessage
+        id="proposal.likers.count"
+        values={
+          Object {
+            "num": 2,
+          }
+        }
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ListGroupFlush
+    className="list-group-custom"
+  >
+    <ListGroupItem
+      bsClass="list-group-item"
+      key="0"
+      listItem={false}
+    >
+      <Connect(UserAvatar)
+        user={
+          Object {
+            "displayName": "user 1",
+            "id": "1",
+            "media": Object {
+              "url": "http://monimage.com/image1.jpg",
+            },
+            "rolesText": "Développeuse web - capco",
+            "url": "www.google.com",
+            "username": "user1",
+          }
+        }
+      />
+      <div>
+        <a
+          href="www.google.com"
+        >
+          user 1
+        </a>
+        <span
+          className="excerpt"
+        >
+          Développeuse web - capco
+        </span>
+      </div>
+    </ListGroupItem>
+    <ListGroupItem
+      bsClass="list-group-item"
+      key="1"
+      listItem={false}
+    >
+      <Connect(UserAvatar)
+        user={
+          Object {
+            "displayName": "user 2",
+            "id": "2",
+            "media": Object {
+              "url": "http://monimage.com/image1.jpg",
+            },
+            "rolesText": "Développeur web - capco",
+            "url": "www.google.com",
+            "username": "user2",
+          }
+        }
+      />
+      <div>
+        <a
+          href="www.google.com"
+        >
+          user 2
+        </a>
+        <span
+          className="excerpt"
+        >
+          Développeur web - capco
+        </span>
+      </div>
+    </ListGroupItem>
+  </ListGroupFlush>
+</Modal>
+`;
+
+exports[`<ProposalDetailLikersModal /> should render nothing when no likers 1`] = `""`;

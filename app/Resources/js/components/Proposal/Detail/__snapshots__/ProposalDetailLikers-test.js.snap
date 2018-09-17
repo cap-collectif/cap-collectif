@@ -2,41 +2,11 @@
 
 exports[`<ProposalDetailLikers /> should not render anything when proposal has no likers 1`] = `""`;
 
-exports[`<ProposalDetailLikers /> should render a <OverlayTrigger /> with <Tooltip /> when proposal has likers 1`] = `
-<span
-  className="tags-list__tag"
->
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    overlay={
-      <Tooltip
-        bsClass="tooltip"
-        id="proposal-1-likers-tooltip-"
-        placement="right"
-      >
-        <ForwardRef(Relay(ProposalDetailLikersTooltipLabel))
-          proposal={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "id": "1",
-              "likers": Array [
-                Object {
-                  "id": "1",
-                },
-              ],
-            }
-          }
-        />
-      </Tooltip>
-    }
-    placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
-    }
+exports[`<ProposalDetailLikers /> should render a <Modal /> when proposal has likers 1`] = `
+<Fragment>
+  <a
+    className="tags-list__tag"
+    onClick={[Function]}
   >
     <ForwardRef(Relay(ProposalDetailLikersLabel))
       proposal={
@@ -48,49 +18,40 @@ exports[`<ProposalDetailLikers /> should render a <OverlayTrigger /> with <Toolt
             Object {
               "id": "1",
             },
+            Object {
+              "id": "2",
+            },
           ],
         }
       }
     />
-  </OverlayTrigger>
-</span>
+  </a>
+  <ForwardRef(Relay(ProposalDetailLikersModal))
+    proposal={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "id": "1",
+        "likers": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
+      }
+    }
+    show={true}
+  />
+</Fragment>
 `;
 
 exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
-<div
-  className="tags-list__tag"
->
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    overlay={
-      <Tooltip
-        bsClass="tooltip"
-        id="proposal-1-likers-tooltip-"
-        placement="right"
-      >
-        <ForwardRef(Relay(ProposalDetailLikersTooltipLabel))
-          proposal={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "id": "1",
-              "likers": Array [
-                Object {
-                  "id": "1",
-                },
-              ],
-            }
-          }
-        />
-      </Tooltip>
-    }
-    placement="top"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
-    }
+<Fragment>
+  <div
+    className="tags-list__tag"
+    onClick={[Function]}
   >
     <ForwardRef(Relay(ProposalDetailLikersLabel))
       proposal={
@@ -102,10 +63,31 @@ exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
             Object {
               "id": "1",
             },
+            Object {
+              "id": "2",
+            },
           ],
         }
       }
     />
-  </OverlayTrigger>
-</div>
+  </div>
+  <ForwardRef(Relay(ProposalDetailLikersModal))
+    proposal={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "id": "1",
+        "likers": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
+      }
+    }
+    show={true}
+  />
+</Fragment>
 `;
