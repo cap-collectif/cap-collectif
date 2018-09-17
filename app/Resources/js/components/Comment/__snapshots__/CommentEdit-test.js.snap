@@ -3,7 +3,7 @@
 exports[`<CommentEdit /> should render correctly 1`] = `
 <a
   className="btn btn-dark-gray btn--outline btn-sm"
-  href="lol"
+  href="https://aa.com/"
 >
   <i
     className="cap cap-pencil-1"

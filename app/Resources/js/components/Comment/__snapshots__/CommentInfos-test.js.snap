@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentInfos /> should render correctly 1`] = `
+<p
+  className="h5  opinion__user"
+>
+  <UserLink
+    className=""
+    user={
+      Object {
+        "displayName": "Pipoudou",
+        "url": "https://aa.com/",
+      }
+    }
+  />
+    
+  <PinnedLabel
+    show={false}
+    type="comment"
+  />
+  <ForwardRef(Relay(Connect(UnpublishedLabel)))
+    publishable={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": Object {
+          "displayName": "Pipoudou",
+          "url": "https://aa.com/",
+        },
+        "authorName": "Poupidou",
+        "pinned": false,
+      }
+    }
+  />
+</p>
+`;
+
+exports[`<CommentInfos /> should render correctly with no author 1`] = `
+<p
+  className="h5  opinion__user"
+>
+  <span>
+    Poupidou
+  </span>
+    
+  <PinnedLabel
+    show={false}
+    type="comment"
+  />
+  <ForwardRef(Relay(Connect(UnpublishedLabel)))
+    publishable={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "author": null,
+        "authorName": "Poupidou",
+        "pinned": false,
+      }
+    }
+  />
+</p>
+`;

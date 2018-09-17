@@ -7,7 +7,7 @@ import { $refType } from '../../mocks';
 
 const defaultComment = {
   $refType,
-  editUrl: 'lol',
+  editUrl: 'https://aa.com/',
   contribuable: true,
   author: {
     isViewer: true,

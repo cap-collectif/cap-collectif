@@ -10,7 +10,7 @@ type Props = {
   comment: CommentInfos_comment,
 };
 
-class CommentInfos extends React.Component<Props> {
+export class CommentInfos extends React.Component<Props> {
   renderAuthorName = () => {
     const { comment } = this.props;
     if (comment.author) {
