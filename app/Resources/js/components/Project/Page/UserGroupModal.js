@@ -3,7 +3,6 @@ import React from 'react';
 import { Modal, ListGroupItem, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import classNames from 'classnames';
 import type { UserGroupModal_project } from './__generated__/UserGroupModal_project.graphql';
 import UserInGroupModal from './UserInGroupModal';
 import CloseButton from '../../Form/CloseButton';
@@ -45,17 +44,13 @@ export class UserGroupModal extends React.Component<Props, State> {
 
   render() {
     const { show, project, relay } = this.props;
-    const modalClasses = classNames({
-      'modal-body-without-padding-top': true,
-    });
     return (
       <div>
         <Modal
           animation={false}
           show={show}
           onHide={this.closeModal}
-          aria-labelledby="contained-modal-title-lg"
-          dialogClassName={modalClasses}>
+          aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               <b>
@@ -81,14 +76,12 @@ export class UserGroupModal extends React.Component<Props, State> {
                         }}>
                         {group.title}
                       </Button>
-                      <div className="users-modal">
-                        {/* $FlowFixMe */}
-                        <UserInGroupModal
-                          group={group}
-                          show={this.state.currentShownGroupModalId === group.id}
-                          handleClose={this.closeUserInGroupModal}
-                        />
-                      </div>
+                      {/* $FlowFixMe */}
+                      <UserInGroupModal
+                        group={group}
+                        show={this.state.currentShownGroupModalId === group.id}
+                        handleClose={this.closeUserInGroupModal}
+                      />
                     </ListGroupItem>
                   ))}
                 {relay.hasMore() && (

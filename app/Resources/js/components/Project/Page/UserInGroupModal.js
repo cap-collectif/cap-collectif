@@ -3,7 +3,6 @@ import React from 'react';
 import { Modal, ListGroupItem, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import classNames from 'classnames';
 import type { UserInGroupModal_group } from './__generated__/UserInGroupModal_group.graphql';
 import { UserAvatar } from '../../User/UserAvatar';
 import CloseButton from '../../Form/CloseButton';
@@ -37,9 +36,6 @@ export class UserInGroupModal extends React.Component<Props, State> {
   };
   render() {
     const { show, group, relay } = this.props;
-    const modalClasses = classNames({
-      'modal-body-without-padding-top': true,
-    });
     return (
       <div>
         <Modal
@@ -47,8 +43,7 @@ export class UserInGroupModal extends React.Component<Props, State> {
           animation={false}
           show={show}
           onHide={this.closeModal}
-          aria-labelledby="contained-modal-title-lg"
-          dialogClassName={modalClasses}>
+          aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               <b>{group.title}</b>

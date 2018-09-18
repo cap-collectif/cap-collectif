@@ -8,7 +8,6 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
     autoFocus={true}
     backdrop={true}
     bsClass="modal"
-    dialogClassName="modal-body-without-padding-top"
     dialogComponentClass={[Function]}
     enforceFocus={true}
     keyboard={true}
@@ -65,21 +64,17 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
         >
           Un groupe cool
         </a>
-        <div
-          className="users-modal"
-        >
-          <ForwardRef(Relay(UserInGroupModal))
-            group={
-              Object {
-                "$fragmentRefs": null,
-                "id": "group2",
-                "title": "Un groupe cool",
-              }
+        <ForwardRef(Relay(UserInGroupModal))
+          group={
+            Object {
+              "$fragmentRefs": null,
+              "id": "group2",
+              "title": "Un groupe cool",
             }
-            handleClose={[Function]}
-            show={false}
-          />
-        </div>
+          }
+          handleClose={[Function]}
+          show={false}
+        />
       </ListGroupItem>
       <ListGroupItem
         bsClass="list-group-item"
@@ -96,21 +91,17 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
         >
           mon super groupe 2
         </a>
-        <div
-          className="users-modal"
-        >
-          <ForwardRef(Relay(UserInGroupModal))
-            group={
-              Object {
-                "$fragmentRefs": null,
-                "id": "group3",
-                "title": "mon super groupe 2",
-              }
+        <ForwardRef(Relay(UserInGroupModal))
+          group={
+            Object {
+              "$fragmentRefs": null,
+              "id": "group3",
+              "title": "mon super groupe 2",
             }
-            handleClose={[Function]}
-            show={false}
-          />
-        </div>
+          }
+          handleClose={[Function]}
+          show={false}
+        />
       </ListGroupItem>
     </ListGroupFlush>
     <ModalFooter
@@ -134,7 +125,6 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
     autoFocus={true}
     backdrop={true}
     bsClass="modal"
-    dialogClassName="modal-body-without-padding-top"
     dialogComponentClass={[Function]}
     enforceFocus={true}
     keyboard={true}
@@ -191,21 +181,17 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
         >
           Un groupe cool
         </a>
-        <div
-          className="users-modal"
-        >
-          <ForwardRef(Relay(UserInGroupModal))
-            group={
-              Object {
-                "$fragmentRefs": null,
-                "id": "group2",
-                "title": "Un groupe cool",
-              }
+        <ForwardRef(Relay(UserInGroupModal))
+          group={
+            Object {
+              "$fragmentRefs": null,
+              "id": "group2",
+              "title": "Un groupe cool",
             }
-            handleClose={[Function]}
-            show={false}
-          />
-        </div>
+          }
+          handleClose={[Function]}
+          show={false}
+        />
       </ListGroupItem>
       <ListGroupItem
         bsClass="list-group-item"
@@ -222,21 +208,17 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
         >
           mon super groupe 2
         </a>
-        <div
-          className="users-modal"
-        >
-          <ForwardRef(Relay(UserInGroupModal))
-            group={
-              Object {
-                "$fragmentRefs": null,
-                "id": "group3",
-                "title": "mon super groupe 2",
-              }
+        <ForwardRef(Relay(UserInGroupModal))
+          group={
+            Object {
+              "$fragmentRefs": null,
+              "id": "group3",
+              "title": "mon super groupe 2",
             }
-            handleClose={[Function]}
-            show={false}
-          />
-        </div>
+          }
+          handleClose={[Function]}
+          show={false}
+        />
       </ListGroupItem>
       <div
         className="text-center"
@@ -277,7 +259,6 @@ exports[`<UserGroupModal /> should render correctly without group 1`] = `
     autoFocus={true}
     backdrop={true}
     bsClass="modal"
-    dialogClassName="modal-body-without-padding-top"
     dialogComponentClass={[Function]}
     enforceFocus={true}
     keyboard={true}

@@ -8,7 +8,6 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
     autoFocus={true}
     backdrop={true}
     bsClass="modal"
-    dialogClassName="modal-body-without-padding-top"
     dialogComponentClass={[Function]}
     enforceFocus={true}
     id="group2-modal"
@@ -142,7 +141,6 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
     autoFocus={true}
     backdrop={true}
     bsClass="modal"
-    dialogClassName="modal-body-without-padding-top"
     dialogComponentClass={[Function]}
     enforceFocus={true}
     id="group2-modal"
@@ -294,7 +292,6 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
     autoFocus={true}
     backdrop={true}
     bsClass="modal"
-    dialogClassName="modal-body-without-padding-top"
     dialogComponentClass={[Function]}
     enforceFocus={true}
     id="group1-modal"
