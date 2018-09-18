@@ -19,7 +19,11 @@ final class Version20180829155927 extends AbstractMigration
         );
 
         $this->connection->delete('question_choice', ['question_id' => null]);
+        $this->addSql('ALTER TABLE question_choice DROP FOREIGN KEY FK_C6F6759A1E27F6BF');
         $this->addSql('ALTER TABLE question_choice CHANGE question_id question_id INT NOT NULL');
+        $this->addSql(
+            'ALTER TABLE question_choice ADD CONSTRAINT FK_C6F6759A1E27F6BF FOREIGN KEY (question_id) REFERENCES question (id)'
+        );
     }
 
     public function down(Schema $schema): void
