@@ -25,7 +25,9 @@ const TagsList = styled.div.attrs({
   }
 
   a.tags-list__tag {
-    color: inherit;
+    &:not(:hover) {
+      color: inherit;
+    }
 
     &:hover {
       text-decoration: none;
