@@ -66,12 +66,12 @@ fi
 echo "[$(date -u)][PHP-FPM] Database is ready!"
 
 echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ Admin..."
-while ! curl http://127.0.0.1:15672 > /dev/null 2>&1;
+while ! curl -sSf http://127.0.0.1:15672 > /dev/null;
   do sleep 0.1
 done
 
 echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
-while ! curl http://127.0.0.1:6379 > /dev/null 2>&1;
+while ! rabbitmqctl ping | grep 'Ping succeed' > /dev/null;
   do sleep 0.1
 done
 

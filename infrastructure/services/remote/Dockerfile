@@ -60,6 +60,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.1-xml \
         php7.1-xsl \
         php7.1-zip \
+        php-amqp \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -72,7 +73,7 @@ RUN set -ex; \
 	wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc"; \
 	chmod +x /usr/local/bin/gosu; \
     # verify that the binary works
-	gosu nobody true;
+	gosu nobody true
 
 # Install fake user 1000
 RUN addgroup --gid=1000 capco && \
