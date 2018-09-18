@@ -48,7 +48,7 @@ type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: Uuid };
 type CloseVoteModalAction = { type: 'proposal/CLOSE_VOTE_MODAL' };
 type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
 type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
-type OpenDetailLikersModalAction = { type: 'proposal/OPEN_DETAIL_LIKERS_MODAL' };
+type OpenDetailLikersModalAction = { type: 'proposal/OPEN_DETAIL_LIKERS_MODAL', id: string };
 type CloseDetailLikersModalAction = { type: 'proposal/CLOSE_DETAIL_LIKERS_MODAL' };
 type ChangeProposalListViewAction = {
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
@@ -84,7 +84,7 @@ export type State = {
   +selectedViewByStep: string,
   +markers: ?Object,
   +referer: ?string,
-  +showDetailLikersModal: boolean,
+  +showDetailLikersModal: ?string,
 };
 
 export const initialState: State = {
@@ -107,7 +107,7 @@ export const initialState: State = {
   selectedViewByStep: 'mosaic',
   markers: null,
   referer: null,
-  showDetailLikersModal: false,
+  showDetailLikersModal: null,
 };
 
 export const loadMarkers = (stepId: Uuid, stepType: string): LoadMarkersAction => ({
@@ -174,8 +174,9 @@ export const changeProposalListView = (mode: string): ChangeProposalListViewActi
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
   mode,
 });
-export const openDetailLikersModal = (): OpenDetailLikersModalAction => ({
+export const openDetailLikersModal = (id: string): OpenDetailLikersModalAction => ({
   type: 'proposal/OPEN_DETAIL_LIKERS_MODAL',
+  id,
 });
 export const closeDetailLikersModal = (): CloseDetailLikersModalAction => ({
   type: 'proposal/CLOSE_DETAIL_LIKERS_MODAL',
@@ -425,9 +426,9 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, selectedViewByStep: action.mode };
     }
     case 'proposal/OPEN_DETAIL_LIKERS_MODAL':
-      return { ...state, showDetailLikersModal: true };
+      return { ...state, showDetailLikersModal: action.id };
     case 'proposal/CLOSE_DETAIL_LIKERS_MODAL':
-      return { ...state, showDetailLikersModal: false };
+      return { ...state, showDetailLikersModal: null };
     default:
       return state;
   }

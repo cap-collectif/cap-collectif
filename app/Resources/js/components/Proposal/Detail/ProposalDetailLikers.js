@@ -21,9 +21,9 @@ export class ProposalDetailLikers extends React.Component<Props> {
   };
 
   handleClick = (e: Event) => {
-    const { dispatch } = this.props;
+    const { dispatch, proposal } = this.props;
     e.preventDefault();
-    dispatch(openDetailLikersModal());
+    dispatch(openDetailLikersModal(proposal.id));
   };
 
   render() {
@@ -46,8 +46,10 @@ export class ProposalDetailLikers extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  showModal: state.proposal.showDetailLikersModal,
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
+  showModal:
+    state.proposal.showDetailLikersModal &&
+    state.proposal.showDetailLikersModal === props.proposal.id,
 });
 
 const container = connect(mapStateToProps)(ProposalDetailLikers);

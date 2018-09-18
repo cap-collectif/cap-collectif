@@ -14,6 +14,7 @@ const Container = styled(ListGroup).attrs({
     border-right: 0;
     border-left: 0;
     border-radius: 0;
+    padding: 15px 0;
   }
 
   .list-group-item:last-child {
@@ -25,7 +26,7 @@ const Container = styled(ListGroup).attrs({
   }
 
   a + p {
-    margin-top: 5px;
+    margin-top: 4px;
   }
 
   .excerpt {
