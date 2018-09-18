@@ -10,10 +10,14 @@ import UserAvatar from '../../User/UserAvatar';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
 import type { Dispatch } from '../../../types';
 
-type Props = { proposal: ProposalDetailLikersModal_proposal, show: boolean, dispatch: Dispatch };
+type Props = {
+  proposal: ProposalDetailLikersModal_proposal,
+  show: boolean,
+  dispatch: Dispatch,
+};
 
 export class ProposalDetailLikersModal extends React.Component<Props> {
-  handleClose = (e: Event) => {
+  handleHide = (e: Event) => {
     const { dispatch } = this.props;
     e.preventDefault();
     dispatch(closeDetailLikersModal());
@@ -22,40 +26,41 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
   render() {
     const { proposal, show } = this.props;
 
-    if (proposal.likers && proposal.likers.length > 0) {
-      return (
-        <Modal show={show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>
-              <FormattedMessage
-                id="proposal.likers.count"
-                values={{
-                  num: proposal.likers.length,
+    if (proposal.likers.length === 0) {
+      return null;
+    }
+
+    return (
+      <Modal show={show} onHide={this.handleHide}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <FormattedMessage
+              id="proposal.likers.count"
+              values={{
+                num: proposal.likers.length,
+              }}
+            />
+          </Modal.Title>
+        </Modal.Header>
+        <ListGroupFlush>
+          {proposal.likers.map((liker, key) => (
+            <ListGroupItem key={key} className={`${liker.vip ? 'bg-vip' : ''} d-flex text-left`}>
+              <UserAvatar
+                user={{
+                  username: liker.username,
+                  media: liker.media,
+                  _links: { profile: liker.url },
                 }}
               />
-            </Modal.Title>
-          </Modal.Header>
-          <ListGroupFlush>
-            {proposal.likers.map((liker, key) => (
-              <ListGroupItem key={key} className="d-flex text-left">
-                <UserAvatar
-                  user={{
-                    username: liker.username,
-                    media: liker.media,
-                    _links: { profile: liker.url },
-                  }}
-                />
-                <div className="d-flex flex-column justify-content-around">
-                  <a href={liker.url}>{liker.displayName}</a>
-                  {liker.biography && <p className="excerpt">{liker.biography}</p>}
-                </div>
-              </ListGroupItem>
-            ))}
-          </ListGroupFlush>
-        </Modal>
-      );
-    }
-    return null;
+              <div className="d-flex flex-column justify-content-around">
+                <a href={liker.url}>{liker.displayName}</a>
+                {liker.biography && <p className="excerpt">{liker.biography}</p>}
+              </div>
+            </ListGroupItem>
+          ))}
+        </ListGroupFlush>
+      </Modal>
+    );
   }
 }
 

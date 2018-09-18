@@ -29,20 +29,21 @@ export class ProposalDetailLikers extends React.Component<Props> {
   render() {
     const { proposal, componentClass, showModal } = this.props;
     const Component = componentClass;
-    if (proposal.likers.length > 0) {
-      return (
-        <React.Fragment>
-          <Component className="tags-list__tag" onClick={this.handleClick}>
-            {/* $FlowFixMe */}
-            <ProposalDetailLikersLabel proposal={proposal} />
-          </Component>
-          {/* $FlowFixMe */}
-          <ProposalDetailLikersModal show={showModal} proposal={proposal} />
-        </React.Fragment>
-      );
+
+    if (proposal.likers.length === 0) {
+      return null;
     }
 
-    return null;
+    return (
+      <React.Fragment>
+        <Component className="tags-list__tag" onClick={this.handleClick}>
+          {/* $FlowFixMe */}
+          <ProposalDetailLikersLabel proposal={proposal} />
+        </Component>
+        {/* $FlowFixMe */}
+        <ProposalDetailLikersModal show={showModal} proposal={proposal} />
+      </React.Fragment>
+    );
   }
 }
 

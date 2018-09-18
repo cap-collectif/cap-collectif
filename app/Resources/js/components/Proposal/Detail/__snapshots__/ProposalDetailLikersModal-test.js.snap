@@ -48,7 +48,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when on
   <ListGroupFlush>
     <ListGroupItem
       bsClass="list-group-item"
-      className="d-flex text-left"
+      className="bg-vip d-flex text-left"
       key="0"
       listItem={false}
     >
@@ -132,7 +132,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
   <ListGroupFlush>
     <ListGroupItem
       bsClass="list-group-item"
-      className="d-flex text-left"
+      className="bg-vip d-flex text-left"
       key="0"
       listItem={false}
     >
@@ -166,7 +166,7 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
     </ListGroupItem>
     <ListGroupItem
       bsClass="list-group-item"
-      className="d-flex text-left"
+      className=" d-flex text-left"
       key="1"
       listItem={false}
     >

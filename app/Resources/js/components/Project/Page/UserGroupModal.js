@@ -8,6 +8,7 @@ import UserInGroupModal from './UserInGroupModal';
 import CloseButton from '../../Form/CloseButton';
 import GroupAvatar from '../../User/GroupAvatar';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
+import type { Uuid } from '../../../types';
 
 type RelayProps = {
   project: UserGroupModal_project,
@@ -42,6 +43,10 @@ export class UserGroupModal extends React.Component<Props, State> {
     });
   };
 
+  handleClick = (groupId: Uuid) => {
+    this.setState({ currentShownGroupModalId: groupId });
+  };
+
   render() {
     const { show, project, relay } = this.props;
     return (
@@ -72,7 +77,7 @@ export class UserGroupModal extends React.Component<Props, State> {
                       <Button
                         bsStyle="link"
                         onClick={() => {
-                          this.setState({ currentShownGroupModalId: group.id });
+                          this.handleClick(group.id);
                         }}>
                         {group.title}
                       </Button>
