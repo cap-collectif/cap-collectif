@@ -155,9 +155,17 @@
    justify-content: center;
 }
 
+.justify-content-around {
+   justify-content: space-around;
+}
+
 .flex-end {
     justify-content: flex-end;
 }
+
+.flex-column {
+    flex-direction: column;
+ }
 
 .object-cover {
     object-fit: cover;

@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { ListGroupItem, Modal } from 'react-bootstrap';
 import { closeDetailLikersModal } from '../../../redux/modules/proposal';
@@ -34,13 +35,19 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
               />
             </Modal.Title>
           </Modal.Header>
-          <ListGroupFlush className="list-group-custom">
+          <ListGroupFlush>
             {proposal.likers.map((liker, key) => (
-              <ListGroupItem key={key} className={liker.vip ? 'bg-vip' : null}>
-                <UserAvatar user={liker} />
-                <div>
+              <ListGroupItem key={key} className="d-flex text-left">
+                <UserAvatar
+                  user={{
+                    username: liker.username,
+                    media: liker.media,
+                    _links: { profile: liker.url },
+                  }}
+                />
+                <div className="d-flex flex-column justify-content-around">
                   <a href={liker.url}>{liker.displayName}</a>
-                  <span className="excerpt">{liker.rolesText}</span>
+                  {liker.biography && <p className="excerpt">{liker.biography}</p>}
                 </div>
               </ListGroupItem>
             ))}
@@ -52,14 +59,16 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(ProposalDetailLikersModal, {
+const container = connect()(ProposalDetailLikersModal);
+
+export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalDetailLikersModal_proposal on Proposal {
       id
       likers {
         id
         displayName
-        rolesText
+        biography
         url
         username
         vip

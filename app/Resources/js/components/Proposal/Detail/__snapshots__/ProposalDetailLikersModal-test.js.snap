@@ -45,41 +45,39 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when on
       />
     </ModalTitle>
   </ModalHeader>
-  <ListGroupFlush
-    className="list-group-custom"
-  >
+  <ListGroupFlush>
     <ListGroupItem
       bsClass="list-group-item"
-      className="bg-vip"
+      className="d-flex text-left"
       key="0"
       listItem={false}
     >
       <Connect(UserAvatar)
         user={
           Object {
-            "displayName": "user 1",
-            "id": "1",
+            "_links": Object {
+              "profile": "www.google.com",
+            },
             "media": Object {
               "url": "http://monimage.com/image1.jpg",
             },
-            "rolesText": "Développeuse web - capco",
-            "url": "www.google.com",
             "username": "user1",
-            "vip": true,
           }
         }
       />
-      <div>
+      <div
+        className="d-flex flex-column justify-content-around"
+      >
         <a
           href="www.google.com"
         >
           user 1
         </a>
-        <span
+        <p
           className="excerpt"
         >
           Développeuse web - capco
-        </span>
+        </p>
       </div>
     </ListGroupItem>
   </ListGroupFlush>
@@ -131,75 +129,73 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
       />
     </ModalTitle>
   </ModalHeader>
-  <ListGroupFlush
-    className="list-group-custom"
-  >
+  <ListGroupFlush>
     <ListGroupItem
       bsClass="list-group-item"
-      className="bg-vip"
+      className="d-flex text-left"
       key="0"
       listItem={false}
     >
       <Connect(UserAvatar)
         user={
           Object {
-            "displayName": "user 1",
-            "id": "1",
+            "_links": Object {
+              "profile": "www.google.com",
+            },
             "media": Object {
               "url": "http://monimage.com/image1.jpg",
             },
-            "rolesText": "Développeuse web - capco",
-            "url": "www.google.com",
             "username": "user1",
-            "vip": true,
           }
         }
       />
-      <div>
+      <div
+        className="d-flex flex-column justify-content-around"
+      >
         <a
           href="www.google.com"
         >
           user 1
         </a>
-        <span
+        <p
           className="excerpt"
         >
           Développeuse web - capco
-        </span>
+        </p>
       </div>
     </ListGroupItem>
     <ListGroupItem
       bsClass="list-group-item"
-      className={null}
+      className="d-flex text-left"
       key="1"
       listItem={false}
     >
       <Connect(UserAvatar)
         user={
           Object {
-            "displayName": "user 2",
-            "id": "2",
+            "_links": Object {
+              "profile": "www.google.com",
+            },
             "media": Object {
               "url": "http://monimage.com/image1.jpg",
             },
-            "rolesText": "Développeur web - capco",
-            "url": "www.google.com",
             "username": "user2",
-            "vip": false,
           }
         }
       />
-      <div>
+      <div
+        className="d-flex flex-column justify-content-around"
+      >
         <a
           href="www.google.com"
         >
           user 2
         </a>
-        <span
+        <p
           className="excerpt"
         >
           Développeur web - capco
-        </span>
+        </p>
       </div>
     </ListGroupItem>
   </ListGroupFlush>

@@ -22,14 +22,14 @@ const TagsList = styled.div.attrs({
     .cap {
       padding-right: 5px;
     }
+  }
 
-    a {
-      color: inherit;
+  a.tags-list__tag {
+    color: inherit;
 
-      &:hover {
-        text-decoration: none;
-        cursor: pointer;
-      }
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
     }
   }
 `;
