@@ -21,6 +21,10 @@ const Container = styled(ListGroup).attrs({
     border-bottom: 0;
   }
 
+  a {
+    cursor: pointer;
+  }
+
   p {
     margin-bottom: 0;
   }

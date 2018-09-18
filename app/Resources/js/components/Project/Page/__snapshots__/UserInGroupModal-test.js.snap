@@ -45,87 +45,82 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         </b>
       </ModalTitle>
     </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <ListGroupFlush>
-        <ListGroupItem
-          bsClass="list-group-item"
-          className="d-flex text-left"
-          id="user1"
-          key="user1"
-          listItem={false}
-        >
-          <UserAvatar
-            anchor={true}
-            className=""
-            defaultAvatar={null}
-            onBlur={[Function]}
-            onFocus={[Function]}
-            onMouseOut={[Function]}
-            onMouseOver={[Function]}
-            size={45}
-            style={Object {}}
-            user={
-              Object {
-                "id": "user1",
-                "media": Object {
-                  "id": "media1",
-                  "name": "perl1",
-                  "size": "45px",
-                  "url": "http://poudre.de/perlinpinpin.jpg",
-                },
-                "show_url": "http://poudre.de/perlinpinpin",
-                "username": "Perlinpinpin",
-              }
+    <ListGroupFlush>
+      <ListGroupItem
+        bsClass="list-group-item"
+        className="d-flex text-left"
+        id="user1"
+        key="user1"
+        listItem={false}
+      >
+        <UserAvatar
+          anchor={true}
+          className=""
+          defaultAvatar={null}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={45}
+          style={Object {}}
+          user={
+            Object {
+              "id": "user1",
+              "media": Object {
+                "id": "media1",
+                "name": "perl1",
+                "size": "45px",
+                "url": "http://poudre.de/perlinpinpin.jpg",
+              },
+              "show_url": "http://poudre.de/perlinpinpin",
+              "username": "Perlinpinpin",
             }
-          />
-          <p
-            className="align-self-center"
-          >
-            Perlinpinpin
-          </p>
-        </ListGroupItem>
-        <ListGroupItem
-          bsClass="list-group-item"
-          className="d-flex text-left"
-          id="user2"
-          key="user2"
-          listItem={false}
+          }
+        />
+        <p
+          className="align-self-center"
         >
-          <UserAvatar
-            anchor={true}
-            className=""
-            defaultAvatar={null}
-            onBlur={[Function]}
-            onFocus={[Function]}
-            onMouseOut={[Function]}
-            onMouseOver={[Function]}
-            size={45}
-            style={Object {}}
-            user={
-              Object {
-                "id": "user2",
-                "media": Object {
-                  "id": "media2",
-                  "name": "toto",
-                  "size": "45px",
-                  "url": "http://toto.com/image.jpg",
-                },
-                "show_url": "htp://toto.com",
-                "username": "Toto",
-              }
+          Perlinpinpin
+        </p>
+      </ListGroupItem>
+      <ListGroupItem
+        bsClass="list-group-item"
+        className="d-flex text-left"
+        id="user2"
+        key="user2"
+        listItem={false}
+      >
+        <UserAvatar
+          anchor={true}
+          className=""
+          defaultAvatar={null}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={45}
+          style={Object {}}
+          user={
+            Object {
+              "id": "user2",
+              "media": Object {
+                "id": "media2",
+                "name": "toto",
+                "size": "45px",
+                "url": "http://toto.com/image.jpg",
+              },
+              "show_url": "htp://toto.com",
+              "username": "Toto",
             }
-          />
-          <p
-            className="align-self-center"
-          >
-            Toto
-          </p>
-        </ListGroupItem>
-      </ListGroupFlush>
-    </ModalBody>
+          }
+        />
+        <p
+          className="align-self-center"
+        >
+          Toto
+        </p>
+      </ListGroupItem>
+    </ListGroupFlush>
     <ModalFooter
       bsClass="modal-footer"
       componentClass="div"
@@ -184,105 +179,100 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         </b>
       </ModalTitle>
     </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <ListGroupFlush>
-        <ListGroupItem
-          bsClass="list-group-item"
-          className="d-flex text-left"
-          id="user1"
-          key="user1"
-          listItem={false}
-        >
-          <UserAvatar
-            anchor={true}
-            className=""
-            defaultAvatar={null}
-            onBlur={[Function]}
-            onFocus={[Function]}
-            onMouseOut={[Function]}
-            onMouseOver={[Function]}
-            size={45}
-            style={Object {}}
-            user={
-              Object {
-                "id": "user1",
-                "media": Object {
-                  "id": "media1",
-                  "name": "perl1",
-                  "size": "45px",
-                  "url": "http://poudre.de/perlinpinpin.jpg",
-                },
-                "show_url": "http://poudre.de/perlinpinpin",
-                "username": "Perlinpinpin",
-              }
+    <ListGroupFlush>
+      <ListGroupItem
+        bsClass="list-group-item"
+        className="d-flex text-left"
+        id="user1"
+        key="user1"
+        listItem={false}
+      >
+        <UserAvatar
+          anchor={true}
+          className=""
+          defaultAvatar={null}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={45}
+          style={Object {}}
+          user={
+            Object {
+              "id": "user1",
+              "media": Object {
+                "id": "media1",
+                "name": "perl1",
+                "size": "45px",
+                "url": "http://poudre.de/perlinpinpin.jpg",
+              },
+              "show_url": "http://poudre.de/perlinpinpin",
+              "username": "Perlinpinpin",
             }
-          />
-          <p
-            className="align-self-center"
-          >
-            Perlinpinpin
-          </p>
-        </ListGroupItem>
-        <ListGroupItem
-          bsClass="list-group-item"
-          className="d-flex text-left"
-          id="user2"
-          key="user2"
-          listItem={false}
+          }
+        />
+        <p
+          className="align-self-center"
         >
-          <UserAvatar
-            anchor={true}
-            className=""
-            defaultAvatar={null}
-            onBlur={[Function]}
-            onFocus={[Function]}
-            onMouseOut={[Function]}
-            onMouseOver={[Function]}
-            size={45}
-            style={Object {}}
-            user={
-              Object {
-                "id": "user2",
-                "media": Object {
-                  "id": "media2",
-                  "name": "toto",
-                  "size": "45px",
-                  "url": "http://toto.com/image.jpg",
-                },
-                "show_url": "htp://toto.com",
-                "username": "Toto",
-              }
+          Perlinpinpin
+        </p>
+      </ListGroupItem>
+      <ListGroupItem
+        bsClass="list-group-item"
+        className="d-flex text-left"
+        id="user2"
+        key="user2"
+        listItem={false}
+      >
+        <UserAvatar
+          anchor={true}
+          className=""
+          defaultAvatar={null}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={45}
+          style={Object {}}
+          user={
+            Object {
+              "id": "user2",
+              "media": Object {
+                "id": "media2",
+                "name": "toto",
+                "size": "45px",
+                "url": "http://toto.com/image.jpg",
+              },
+              "show_url": "htp://toto.com",
+              "username": "Toto",
             }
-          />
-          <p
-            className="align-self-center"
-          >
-            Toto
-          </p>
-        </ListGroupItem>
-        <div
-          className="text-center mt-15 mb-10"
+          }
+        />
+        <p
+          className="align-self-center"
         >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="primary"
-            disabled={false}
-            id="load-more"
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              id="global.more"
-              values={Object {}}
-            />
-          </Button>
-        </div>
-      </ListGroupFlush>
-    </ModalBody>
+          Toto
+        </p>
+      </ListGroupItem>
+      <div
+        className="text-center mt-15 mb-10"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="load-more"
+          onClick={[Function]}
+        >
+          <FormattedMessage
+            id="global.more"
+            values={Object {}}
+          />
+        </Button>
+      </div>
+    </ListGroupFlush>
     <ModalFooter
       bsClass="modal-footer"
       componentClass="div"
@@ -341,10 +331,6 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
         </b>
       </ModalTitle>
     </ModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    />
     <ModalFooter
       bsClass="modal-footer"
       componentClass="div"
