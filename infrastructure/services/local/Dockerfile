@@ -1,8 +1,4 @@
-FROM debian:jessie
-
-MAINTAINER Aurélien David <adavid@jolicode.com>
-
-RUN sed -i 's/httpredir.debian.org/debian.mirrors.ovh.net/g' /etc/apt/sources.list
+FROM debian:stretch
 
 # Install basic
 RUN apt-get update && \
@@ -22,9 +18,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install php7.0
+# Install php
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
         php7.1-apcu \
@@ -46,23 +42,18 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.1-xsl \
         php7.1-zip \
         php-xdebug \
+        php-amqp \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install nodejs and deps for npm install
 ENV NPM_CONFIG_LOGLEVEL warn
-ENV NODE_VERSION 6.11.0
+ENV NODE_VERSION 8.12.0
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
-
-# Install rabbitmq lib and php-amqp
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y php-amqp && \
-    apt-get clean all
 
 # Install blackfire PHP Probe
 RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
@@ -99,10 +90,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install varnish
-RUN apt-get update && \
-    apt-get install -y varnish && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get update && cd /tmp \
+    && wget --content-disposition https://packagecloud.io/varnishcache/varnish41/packages/debian/stretch/varnish_4.1.10-1~stretch_amd64.deb/download.deb \
+    && dpkg -i varnish_4.1.10-1~stretch_amd64.deb \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install Supervisor
 RUN apt-get update && \

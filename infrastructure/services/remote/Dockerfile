@@ -1,6 +1,6 @@
 FROM node:8-slim AS node
 
-FROM debian:jessie AS base
+FROM debian:stretch AS base
 
 LABEL maintainer "Cap collectif <tech@cap-collectif.com>"
 
@@ -26,6 +26,8 @@ RUN set -x \
         sqlite \
         software-properties-common \
         locales \
+        gnupg2 \
+        dirmngr \
     && \
     localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
     apt-get clean && \
@@ -35,7 +37,7 @@ ENV LANG en_US.utf8
 
 # Install php7
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y -qq \
         php7.1-apcu \
@@ -58,22 +60,18 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.1-xml \
         php7.1-xsl \
         php7.1-zip \
-        php-amqp \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install gosu binary (needs wget and ca-certificates).
 ENV GOSU_VERSION 1.10
-RUN set -eux; \
+RUN set -ex; \
 	dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')"; \
 	wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch"; \
 	wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc"; \
-	export GNUPGHOME="$(mktemp -d)"; \
-	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4; \
-	gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu; \
-	rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc; \
 	chmod +x /usr/local/bin/gosu; \
+    # verify that the binary works
 	gosu nobody true;
 
 # Install fake user 1000
@@ -92,7 +90,7 @@ RUN gosu capco composer global require "hirak/prestissimo:^0.3" --prefer-dist --
 
 # Install nginx
 RUN wget -O- https://nginx.org/keys/nginx_signing.key | apt-key add - && \
-    echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" > /etc/apt/sources.list.d/nginx.list && \
+    echo "deb http://nginx.org/packages/mainline/debian/ stretch nginx" > /etc/apt/sources.list.d/nginx.list && \
     apt-get update && \
     apt-get install -y -qq --no-install-recommends \
         nginx \
@@ -101,8 +99,8 @@ RUN wget -O- https://nginx.org/keys/nginx_signing.key | apt-key add - && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install redis
-RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
-    echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
+RUN echo "deb http://packages.dotdeb.org stretch all" > /etc/apt/sources.list.d/dotdeb.list && \
+    echo "deb-src http://packages.dotdeb.org stretch all" >> /etc/apt/sources.list.d/dotdeb.list && \
     wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
     apt-get update && \
     apt-get install -y -qq --no-install-recommends \
@@ -116,8 +114,7 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
 
 # Install java
-RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list && \
-    apt-get update && apt-get install -t jessie-backports -y openjdk-8-jdk-headless net-tools && \
+RUN apt-get update && apt-get install -y openjdk-8-jdk-headless net-tools && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -132,14 +129,14 @@ RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 
 # install erlang for RabbitMQ
 COPY infrastructure/services/remote/rabbitmq/preference /etc/apt/preferences.d/erlang
-RUN echo 'deb https://packages.erlang-solutions.com/debian jessie contrib' >> /etc/apt/sources.list.d/erlang.list && \
+RUN echo 'deb https://packages.erlang-solutions.com/debian stretch contrib' >> /etc/apt/sources.list.d/erlang.list && \
     wget -O- https://packages.erlang-solutions.com/debian/erlang_solutions.asc | apt-key add - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y erlang --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
 # Install rabbitmq
-RUN echo 'deb https://dl.bintray.com/rabbitmq/debian jessie main' >> /etc/apt/sources.list.d/rabbitmq.list && \
+RUN echo 'deb https://dl.bintray.com/rabbitmq/debian stretch main' >> /etc/apt/sources.list.d/rabbitmq.list && \
     wget -O- https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc | apt-key add - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server --no-install-recommends && \
@@ -150,18 +147,19 @@ RUN echo 'deb https://dl.bintray.com/rabbitmq/debian jessie main' >> /etc/apt/so
 
 # Install mariadb
 RUN set -x \
-    && apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db \
-    && add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mariadb.mirrors.ovh.net/MariaDB/repo/10.1/debian jessie main' \
+    && apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8 \
+    && add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mariadb.mirrors.ovh.net/MariaDB/repo/10.1/debian stretch main' \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install mariadb-server -y -qq \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install varnish
-RUN apt-get update && \
-    apt-get install -y varnish --no-install-recommends && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get update && cd /tmp \
+    && wget --content-disposition https://packagecloud.io/varnishcache/varnish41/packages/debian/stretch/varnish_4.1.10-1~stretch_amd64.deb/download.deb \
+    && dpkg -i varnish_4.1.10-1~stretch_amd64.deb \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install Supervisor
 RUN apt-get update && \
@@ -228,7 +226,7 @@ COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
     ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
-ENV YARN_VERSION 1.7.0
+ENV YARN_VERSION 1.9.4
 RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
     && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
     && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
