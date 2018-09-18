@@ -9,7 +9,7 @@ import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
 import type { GlobalState } from '../../types';
 import QuestionChoiceAdminForm from '../QuestionChoices/QuestionChoiceAdminForm';
-import QuestionJumpAdmin from '../QuestionJump/QuestionsJumpAdminForm';
+import QuestionsJumpAdmin from '../QuestionJump/QuestionsJumpAdminForm';
 
 type ParentProps = {
   show: boolean,
@@ -169,7 +169,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
               </h4>
               <FieldArray
                 name={`${member}.jumps`}
-                component={QuestionJumpAdmin}
+                component={QuestionsJumpAdmin}
                 formName={formName}
                 oldMember={member}
               />
