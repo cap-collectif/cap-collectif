@@ -2,13 +2,14 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ProjectTypeAdmin extends Admin
+class ProjectTypeAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -48,11 +49,10 @@ class ProjectTypeAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->add('color', null, [
-                    'label' => 'admin.fields.site_parameter.value',
-                    'attr' => ['class' => 'minicolors-input'],
-            ]);
+        $formMapper->add('color', null, [
+            'label' => 'admin.fields.site_parameter.value',
+            'attr' => ['class' => 'minicolors-input'],
+        ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)

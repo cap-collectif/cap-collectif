@@ -2,11 +2,11 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class SiteColorAdmin extends Admin
+class SiteColorAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -20,7 +20,10 @@ class SiteColorAdmin extends Admin
         }
 
         if (method_exists($object, '__toString') && null !== $object->__toString()) {
-            return $this->getConfigurationPool()->getContainer()->get('translator')->trans((string) $object, [], 'CapcoAppBundle');
+            return $this->getConfigurationPool()
+                ->getContainer()
+                ->get('translator')
+                ->trans((string) $object, [], 'CapcoAppBundle');
         }
 
         return parent::toString($object);
@@ -39,8 +42,7 @@ class SiteColorAdmin extends Admin
             ->add('value', null, [
                 'label' => 'admin.fields.site_parameter.value',
                 'attr' => ['class' => 'minicolors-input'],
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)

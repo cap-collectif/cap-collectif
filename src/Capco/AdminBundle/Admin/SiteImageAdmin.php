@@ -2,12 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Model\Metadata;
 
-class SiteImageAdmin extends Admin
+class SiteImageAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -21,7 +21,10 @@ class SiteImageAdmin extends Admin
         }
 
         if (method_exists($object, '__toString') && null !== $object->__toString()) {
-            return $this->getConfigurationPool()->getContainer()->get('translator')->trans((string) $object, [], 'CapcoAppBundle');
+            return $this->getConfigurationPool()
+                ->getContainer()
+                ->get('translator')
+                ->trans((string) $object, [], 'CapcoAppBundle');
         }
 
         return parent::toString($object);
@@ -32,7 +35,9 @@ class SiteImageAdmin extends Admin
     {
         $media = $object->getMedia();
         if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $provider = $this->getConfigurationPool()
+                ->getContainer()
+                ->get($media->getProviderName());
             $format = $provider->getFormatName($media, 'form');
             $url = $provider->generatePublicUrl($media, $format);
 
@@ -52,16 +57,21 @@ class SiteImageAdmin extends Admin
                 'label' => 'admin.fields.site_image.is_enabled',
                 'required' => false,
             ])
-            ->add('media', 'sonata_type_model_list', [
-                'required' => false,
-                'label' => 'admin.fields.site_image.media',
-            ], [
-                'link_parameters' => [
-                    'context' => 'default',
-                    'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
-            ], ])
-        ;
+            ->add(
+                'media',
+                'sonata_type_model_list',
+                [
+                    'required' => false,
+                    'label' => 'admin.fields.site_image.media',
+                ],
+                [
+                    'link_parameters' => [
+                        'context' => 'default',
+                        'hide_context' => true,
+                        'provider' => 'sonata.media.provider.image',
+                    ],
+                ]
+            );
         if ($this->subject->isSocialNetworkThumbnail()) {
             $formMapper->addHelp('Media', 'admin.help.social_network_thumbnail');
         }

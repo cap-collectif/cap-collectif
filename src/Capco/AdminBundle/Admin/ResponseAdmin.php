@@ -23,12 +23,11 @@ class ResponseAdmin extends CapcoAdmin
                 'label' => 'admin.fields.response.value',
                 'required' => false,
                 'attr' => ['readonly' => true],
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['edit', 'delete']);
+        $collection->clearExcept(['edit', 'delete', 'show']);
     }
 }

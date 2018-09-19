@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Section;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -11,7 +12,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class SectionAdmin extends Admin
+class SectionAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -20,8 +21,13 @@ class SectionAdmin extends Admin
 
     public function createQuery($context = 'list')
     {
-        $manager = $this->getConfigurationPool()->getContainer()->get('capco.toggle.manager');
-        $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
+        $manager = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('capco.toggle.manager');
+        $em = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
 
         $all = $em->getRepository('CapcoAppBundle:Section')->findAll();
 
@@ -33,9 +39,7 @@ class SectionAdmin extends Admin
         }
 
         $query = parent::createQuery($context);
-        $query->andWhere(
-            $query->expr()->in($query->getRootAliases()[0] . '.id', ':ids')
-        );
+        $query->andWhere($query->expr()->in($query->getRootAliases()[0] . '.id', ':ids'));
         $query->setParameter('ids', $ids);
 
         return $query;
@@ -72,8 +76,7 @@ class SectionAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.section.updated_at',
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -112,10 +115,11 @@ class SectionAdmin extends Admin
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => ['template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig'],
+                    'delete' => [
+                        'template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig',
+                    ],
                 ],
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -144,9 +148,7 @@ class SectionAdmin extends Admin
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.section.position',
-            ])
-        ;
-
+            ]);
         if ($fields['teaser']) {
             $formMapper->add('teaser', null, [
                 'label' => 'admin.fields.section.teaser',
@@ -208,8 +210,7 @@ class SectionAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.section.updated_at',
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)
@@ -226,9 +227,7 @@ class SectionAdmin extends Admin
             ->getRepository('CapcoAppBundle:Steps\CollectStep')
             ->createQueryBuilder('cs')
             ->where('cs.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-        ;
-
+            ->setParameter('enabled', true);
         return $qb->getQuery();
     }
 }

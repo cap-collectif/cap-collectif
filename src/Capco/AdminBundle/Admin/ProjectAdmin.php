@@ -381,7 +381,7 @@ class ProjectAdmin extends CapcoAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete']);
+        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete', 'show']);
         $collection->add('preview', $this->getRouterIdParameter() . '/preview');
     }
 

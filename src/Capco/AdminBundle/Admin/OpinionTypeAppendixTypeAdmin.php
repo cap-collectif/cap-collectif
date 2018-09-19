@@ -26,12 +26,11 @@ class OpinionTypeAppendixTypeAdmin extends CapcoAdmin
                 'label' => 'admin.fields.opiniontype_appendixtype.appendix_type',
                 'required' => true,
                 'choices_as_values' => true,
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['create', 'edit', 'delete']);
+        $collection->clearExcept(['create', 'edit', 'delete', 'show']);
     }
 }

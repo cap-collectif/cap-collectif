@@ -4,11 +4,12 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class OpinionTypeAdmin extends Admin
+class OpinionTypeAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -21,8 +22,16 @@ class OpinionTypeAdmin extends Admin
         $consultationStepTypeId = null;
         $consultationStepTypeName = null;
 
-        if ($this->hasParentFieldDescription() && $this->getParentFieldDescription()->getAdmin()->getSubject()) {
-            $consultationStepTypeId = $this->getParentFieldDescription()->getAdmin()->getSubject()->getId();
+        if (
+            $this->hasParentFieldDescription() &&
+            $this->getParentFieldDescription()
+                ->getAdmin()
+                ->getSubject()
+        ) {
+            $consultationStepTypeId = $this->getParentFieldDescription()
+                ->getAdmin()
+                ->getSubject()
+                ->getId();
         } elseif ($subject && $subject->getConsultationStepType()) {
             $consultationStepTypeId = $subject->getConsultationStepType()->getId();
         } elseif ($subject && $subject->getParent()) {
@@ -49,7 +58,7 @@ class OpinionTypeAdmin extends Admin
             return 'CapcoAdminBundle:OpinionType:edit.html.twig';
         }
 
-        return parent::getTemplate($name);
+        return $this->getTemplateRegistry()->getTemplate($name);
     }
 
     public function prePersist($type)
@@ -57,11 +66,11 @@ class OpinionTypeAdmin extends Admin
         if (!$type->getConsultationStepType()) {
             $consultationStepTypeId = $this->getPersistentParameter('consultation_step_type_id');
             $consultationStepType = $this->getConfigurationPool()
-                    ->getContainer()
-                    ->get('doctrine')
-                    ->getManager()
-                    ->getRepository('CapcoAppBundle:Steps\ConsultationStepType')
-                    ->find($consultationStepTypeId);
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->getRepository('CapcoAppBundle:Steps\ConsultationStepType')
+                ->find($consultationStepTypeId);
             $type->setConsultationStepType($consultationStepType);
         }
     }
@@ -72,16 +81,21 @@ class OpinionTypeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('admin.fields.opinion_type.group_info', ['class' => 'col-md-12'])->end()
-            ->with('admin.fields.opinion_type.group_options', ['class' => 'col-md-12'])->end()
-            ->with('admin.fields.opinion_type.group_votes', ['class' => 'col-md-6'])->end()
-            ->with('admin.fields.opinion_type.group_contribution', ['class' => 'col-md-6'])->end()
-            ->with('admin.fields.opinion_type.group_appendices', ['class' => 'col-md-12'])->end()
+            ->with('admin.fields.opinion_type.group_info', ['class' => 'col-md-12'])
             ->end()
-        ;
-
+            ->with('admin.fields.opinion_type.group_options', ['class' => 'col-md-12'])
+            ->end()
+            ->with('admin.fields.opinion_type.group_votes', ['class' => 'col-md-6'])
+            ->end()
+            ->with('admin.fields.opinion_type.group_contribution', ['class' => 'col-md-6'])
+            ->end()
+            ->with('admin.fields.opinion_type.group_appendices', ['class' => 'col-md-12'])
+            ->end()
+            ->end();
+        // Info
+        // Options
+        // Appendices
         $formMapper
-            // Info
             ->with('admin.fields.opinion_type.group_info')
             ->add('title', null, [
                 'label' => 'admin.fields.opinion_type.title',
@@ -89,8 +103,8 @@ class OpinionTypeAdmin extends Admin
             ->add('slug', null, [
                 'label' => 'admin.fields.page.slug',
                 'attr' => [
-                  'readonly' => true,
-                  'disabled' => true,
+                    'readonly' => true,
+                    'disabled' => true,
                 ],
             ])
             ->add('subtitle', null, [
@@ -108,7 +122,6 @@ class OpinionTypeAdmin extends Admin
             ])
             ->end()
 
-            // Options
             ->with('admin.fields.opinion_type.group_options')
             ->add('color', 'choice', [
                 'label' => 'admin.fields.opinion_type.color',
@@ -164,19 +177,22 @@ class OpinionTypeAdmin extends Admin
             ])
             ->end()
 
-            // Appendices
             ->with('admin.fields.opinion_type.group_appendices')
-            ->add('appendixTypes', 'sonata_type_collection', [
-                'label' => 'admin.fields.opinion_type.appendices',
-                'by_reference' => false,
-                'required' => false,
-            ], [
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
-            ])
-            ->end()
-        ;
+            ->add(
+                'appendixTypes',
+                'sonata_type_collection',
+                [
+                    'label' => 'admin.fields.opinion_type.appendices',
+                    'by_reference' => false,
+                    'required' => false,
+                ],
+                [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                ]
+            )
+            ->end();
     }
 
     protected function configureRoutes(RouteCollection $collection)
@@ -196,14 +212,9 @@ class OpinionTypeAdmin extends Admin
             ->createQueryBuilder('ot')
             ->leftJoin('ot.consultationStepType', 'consultationStepType')
             ->where('consultationStepType.id = :consultationStepTypeId')
-            ->setParameter('consultationStepTypeId', $consultationStepTypeId)
-        ;
-
+            ->setParameter('consultationStepTypeId', $consultationStepTypeId);
         if ($this->getSubject()->getId()) {
-            $qb
-                ->andWhere('ot.id != :otId')
-                ->setParameter('otId', $this->getSubject()->getId())
-            ;
+            $qb->andWhere('ot.id != :otId')->setParameter('otId', $this->getSubject()->getId());
         }
 
         return $qb->getQuery();

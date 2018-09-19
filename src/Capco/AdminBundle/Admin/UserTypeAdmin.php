@@ -2,13 +2,13 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class UserTypeAdmin extends Admin
+class UserTypeAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -17,9 +17,7 @@ class UserTypeAdmin extends Admin
 
     public function getFeatures()
     {
-        return [
-            'user_type',
-        ];
+        return ['user_type'];
     }
 
     /**
@@ -36,8 +34,7 @@ class UserTypeAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.user_type.updated_at',
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -58,8 +55,7 @@ class UserTypeAdmin extends Admin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -67,11 +63,9 @@ class UserTypeAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->add('name', null, [
-                'label' => 'admin.fields.user_type.name',
-            ])
-        ;
+        $formMapper->add('name', null, [
+            'label' => 'admin.fields.user_type.name',
+        ]);
     }
 
     /**
@@ -88,7 +82,6 @@ class UserTypeAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.user_type.updated_at',
-            ])
-        ;
+            ]);
     }
 }

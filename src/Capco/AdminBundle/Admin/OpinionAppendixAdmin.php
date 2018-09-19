@@ -3,13 +3,14 @@
 namespace Capco\AdminBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class OpinionAppendixAdmin extends Admin
+class OpinionAppendixAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -40,12 +41,11 @@ class OpinionAppendixAdmin extends Admin
                 'label' => 'admin.fields.appendix.body',
                 'config_name' => 'admin_editor',
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['create', 'delete', 'edit']);
+        $collection->clearExcept(['create', 'delete', 'edit', 'show']);
     }
 }

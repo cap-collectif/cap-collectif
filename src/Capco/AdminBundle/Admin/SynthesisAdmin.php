@@ -3,11 +3,12 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class SynthesisAdmin extends Admin
+class SynthesisAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'DESC',
@@ -36,8 +37,11 @@ class SynthesisAdmin extends Admin
     {
         $projectId = null;
 
-        if ($this->hasParentFieldDescription()) { // this Admin is embedded
-            $projectId = $this->getParentFieldDescription()->getAdmin()->getPersistentParameters()['projectId'];
+        if ($this->hasParentFieldDescription()) {
+            // this Admin is embedded
+            $projectId = $this->getParentFieldDescription()
+                ->getAdmin()
+                ->getPersistentParameters()['projectId'];
         } else {
             $projectId = $this->getRequest()->get('projectId');
         }
@@ -66,9 +70,9 @@ class SynthesisAdmin extends Admin
                 'class' => 'CapcoAppBundle:Steps\ConsultationStep',
                 'query_builder' => $this->createQueryBuilderForConsultationSteps($projectId),
                 'required' => false,
-//                'empty_data' => 'admin.fields.synthesis.consultation_step_empty',
+                //                'empty_data' => 'admin.fields.synthesis.consultation_step_empty',
                 'help' => 'admin.help.synthesis.consultation_step',
-        ]);
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)
@@ -78,23 +82,22 @@ class SynthesisAdmin extends Admin
 
     private function createOrUpdateFromSource($synthesis)
     {
-        $this->getConfigurationPool()->getContainer()->get('capco.synthesis.synthesis_handler')->createOrUpdateElementsFromSource($synthesis);
+        $this->getConfigurationPool()
+            ->getContainer()
+            ->get('capco.synthesis.synthesis_handler')
+            ->createOrUpdateElementsFromSource($synthesis);
     }
 
     private function createQueryBuilderForConsultationSteps($projectId)
     {
-        $qb = $this->modelManager
-            ->createQuery('CapcoAppBundle:Steps\ConsultationStep', 'cs')
+        $qb = $this->modelManager->createQuery('CapcoAppBundle:Steps\ConsultationStep', 'cs')
             ->where('cs.isEnabled = :enabled')
-            ->setParameter('enabled', true)
-        ;
-
+            ->setParameter('enabled', true);
         if ($projectId) {
             $qb
                 ->leftJoin('cs.projectAbstractStep', 'cas')
                 ->andWhere('cas.project = :projectId')
-                ->setParameter('projectId', $projectId)
-            ;
+                ->setParameter('projectId', $projectId);
         }
 
         return $qb;

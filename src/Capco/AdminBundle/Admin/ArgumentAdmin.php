@@ -81,11 +81,6 @@ class ArgumentAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
         $formMapper
             ->add('type', 'choice', [
                 'label' => 'admin.fields.argument.type',

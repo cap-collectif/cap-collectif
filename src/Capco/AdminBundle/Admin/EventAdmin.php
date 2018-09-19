@@ -22,9 +22,7 @@ class EventAdmin extends Admin
 
     public function getFeatures()
     {
-        return [
-            'calendar',
-        ];
+        return ['calendar'];
     }
 
     // For mosaic view
@@ -32,7 +30,9 @@ class EventAdmin extends Admin
     {
         $media = $object->getMedia();
         if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $provider = $this->getConfigurationPool()
+                ->getContainer()
+                ->get($media->getProviderName());
             $format = $provider->getFormatName($media, 'form');
             $url = $provider->generatePublicUrl($media, $format);
 
@@ -44,13 +44,15 @@ class EventAdmin extends Admin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper
-            ->add('title', null, [
-                'label' => 'admin.fields.event.title',
-            ])
-        ;
-
-        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+        $datagridMapper->add('title', null, [
+            'label' => 'admin.fields.event.title',
+        ]);
+        if (
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('capco.toggle.manager')
+                ->isActive('themes')
+        ) {
             $datagridMapper->add('themes', null, [
                 'label' => 'admin.fields.event.themes',
             ]);
@@ -60,11 +62,17 @@ class EventAdmin extends Admin
             ->add('projects', null, [
                 'label' => 'admin.fields.event.projects',
             ])
-            ->add('Author', 'doctrine_orm_model_autocomplete', [
-                'label' => 'admin.fields.event.author',
-            ], null, [
-                'property' => 'username',
-            ])
+            ->add(
+                'Author',
+                'doctrine_orm_model_autocomplete',
+                [
+                    'label' => 'admin.fields.event.author',
+                ],
+                null,
+                [
+                    'property' => 'username',
+                ]
+            )
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
             ])
@@ -79,8 +87,7 @@ class EventAdmin extends Admin
             ])
             ->add('endAt', 'doctrine_orm_datetime_range', [
                 'label' => 'admin.fields.event.end_at',
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -97,10 +104,13 @@ class EventAdmin extends Admin
             ])
             ->add('endAt', null, [
                 'label' => 'admin.fields.event.end_at',
-            ])
-        ;
-
-        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            ]);
+        if (
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('capco.toggle.manager')
+                ->isActive('themes')
+        ) {
             $listMapper->add('themes', null, [
                 'label' => 'admin.fields.event.themes',
             ]);
@@ -129,11 +139,14 @@ class EventAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'registrations' => ['template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig'],
-                    'delete' => ['template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig'],
+                    'registrations' => [
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig',
+                    ],
+                    'delete' => [
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig',
+                    ],
                 ],
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -143,12 +156,13 @@ class EventAdmin extends Admin
     {
         // define group zoning
         $formMapper
-            ->with('admin.fields.event.group_event', ['class' => 'col-md-12'])->end()
-            ->with('admin.fields.event.group_meta', ['class' => 'col-md-6'])->end()
-            ->with('admin.fields.event.group_address', ['class' => 'col-md-6'])->end()
+            ->with('admin.fields.event.group_event', ['class' => 'col-md-12'])
             ->end()
-        ;
-
+            ->with('admin.fields.event.group_meta', ['class' => 'col-md-6'])
+            ->end()
+            ->with('admin.fields.event.group_address', ['class' => 'col-md-6'])
+            ->end()
+            ->end();
         $formMapper
             ->with('admin.fields.event.group_event')
             ->add('title', null, [
@@ -181,8 +195,8 @@ class EventAdmin extends Admin
             ->end()
             ->with('admin.fields.event.group_meta')
             ->add('registrationEnable', null, [
-                  'label' => 'admin.fields.event.registration_enable',
-                  'required' => false,
+                'label' => 'admin.fields.event.registration_enable',
+                'required' => false,
             ])
             ->add('link', UrlType::class, [
                 'label' => 'admin.fields.event.link',
@@ -191,19 +205,29 @@ class EventAdmin extends Admin
                     'placeholder' => 'http://',
                 ],
             ])
-            ->add('media', 'sonata_type_model_list', [
-                'label' => 'admin.fields.event.media',
-                'required' => false,
-            ], [
-                'link_parameters' => [
-                    'context' => 'default',
-                    'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
+            ->add(
+                'media',
+                'sonata_type_model_list',
+                [
+                    'label' => 'admin.fields.event.media',
+                    'required' => false,
                 ],
-            ])
+                [
+                    'link_parameters' => [
+                        'context' => 'default',
+                        'hide_context' => true,
+                        'provider' => 'sonata.media.provider.image',
+                    ],
+                ]
+            )
             ->end();
 
-        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+        if (
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('capco.toggle.manager')
+                ->isActive('themes')
+        ) {
             $formMapper->add('themes', 'sonata_type_model', [
                 'label' => 'admin.fields.event.themes',
                 'required' => false,
@@ -248,8 +272,7 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.country',
                 'required' => false,
             ])
-            ->end()
-        ;
+            ->end();
         $formMapper
             ->with('admin.fields.page.advanced')
             ->add('metaDescription', null, [
@@ -261,9 +284,11 @@ class EventAdmin extends Admin
                 'label' => 'admin.customcode',
                 'required' => false,
                 'help' => 'admin.help.customcode',
-                'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
-            ])
-        ;
+                'attr' => [
+                    'rows' => 10,
+                    'placeholder' => '<script type="text/javascript"> </script>',
+                ],
+            ]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
@@ -280,10 +305,13 @@ class EventAdmin extends Admin
             ])
             ->add('endAt', null, [
                 'label' => 'admin.fields.event.end_at',
-            ])
-        ;
-
-        if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
+            ]);
+        if (
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('capco.toggle.manager')
+                ->isActive('themes')
+        ) {
             $showMapper->add('themes', null, [
                 'label' => 'admin.fields.event.themes',
             ]);
@@ -333,12 +361,11 @@ class EventAdmin extends Admin
             ])
             ->add('lng', null, [
                 'label' => 'admin.fields.event.lng',
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete']);
+        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete', 'show']);
     }
 }

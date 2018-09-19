@@ -123,11 +123,6 @@ class OpinionAdmin extends CapcoAdmin
             $this->getSubject()
                 ->getAppendices()
                 ->count() > 0;
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
 
         $classname = $subjectHasAppendices ? '' : 'hidden';
         $formMapper
@@ -203,7 +198,7 @@ class OpinionAdmin extends CapcoAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'create', 'edit', 'delete', 'export']);
+        $collection->clearExcept(['list', 'create', 'edit', 'delete', 'export', 'show']);
     }
 
     private function createQueryBuilderForStep()

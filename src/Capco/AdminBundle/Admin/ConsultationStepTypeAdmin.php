@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -9,7 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class ConsultationStepTypeAdmin extends Admin
+class ConsultationStepTypeAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -22,7 +23,7 @@ class ConsultationStepTypeAdmin extends Admin
             return 'CapcoAdminBundle:ConsultationStepType:edit.html.twig';
         }
 
-        return parent::getTemplate($name);
+        return $this->getTemplateRegistry()->getTemplate($name);
     }
 
     /**
@@ -42,8 +43,7 @@ class ConsultationStepTypeAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.consultation_step_type.created_at',
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -58,7 +58,7 @@ class ConsultationStepTypeAdmin extends Admin
                 'label' => 'admin.fields.consultation_step_type.title',
             ])
             ->add('step', null, [
-              'label' => 'admin.fields.consultation_step_type.step',
+                'label' => 'admin.fields.consultation_step_type.step',
             ])
             ->add('opinionTypes', 'sonata_type_model', [
                 'label' => 'admin.fields.consultation_step_type.opinion_types',
@@ -72,8 +72,7 @@ class ConsultationStepTypeAdmin extends Admin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -81,21 +80,19 @@ class ConsultationStepTypeAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->add('title', null, [
-                'label' => 'admin.fields.consultation_step_type.title',
-            ])
-        ;
+        $formMapper->add('title', null, [
+            'label' => 'admin.fields.consultation_step_type.title',
+        ]);
         if ($this->getSubject()->getId()) {
             $formMapper->add('opinionTypes', ModelType::class, [
-              'label' => 'admin.fields.consultation_step_type.opinion_types',
-              'query' => $this->createQueryForOpinionTypes(),
-              'by_reference' => false,
-              'multiple' => true,
-              'expanded' => true,
-              'required' => true,
-              'tree' => true,
-              'choices_as_values' => true,
+                'label' => 'admin.fields.consultation_step_type.opinion_types',
+                'query' => $this->createQueryForOpinionTypes(),
+                'by_reference' => false,
+                'multiple' => true,
+                'expanded' => true,
+                'required' => true,
+                'tree' => true,
+                'choices_as_values' => true,
             ]);
         }
     }
@@ -117,8 +114,7 @@ class ConsultationStepTypeAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.consultation_step_type.created_at',
-            ])
-        ;
+            ]);
     }
 
     private function createQueryForOpinionTypes()

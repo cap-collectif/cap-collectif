@@ -3,22 +3,26 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\QuestionChoice;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class QuestionChoiceAdmin extends Admin
+class QuestionChoiceAdmin extends AbstractAdmin
 {
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
         $colorsAvailable = QuestionChoice::$availableColors;
-        $colorsAvailable['admin.fields.question_choice.colors.primary'] = $this->getConfigurationPool()
+        $colorsAvailable[
+            'admin.fields.question_choice.colors.primary'
+        ] = $this->getConfigurationPool()
             ->getContainer()
             ->get('doctrine')
             ->getManager()
             ->getRepository('CapcoAppBundle:SiteColor')
-            ->findOneBy(['keyname' => 'color.btn.primary.bg'])->getValue();
+            ->findOneBy(['keyname' => 'color.btn.primary.bg'])
+            ->getValue();
 
         $formMapper
             ->add('position', null, [
@@ -44,16 +48,20 @@ class QuestionChoiceAdmin extends Admin
                 'choice_translation_domain' => 'CapcoAppBundle',
                 'placeholder' => 'Choisir une couleur...',
             ])
-            ->add('image', 'sonata_type_model_list', [
-                'label' => 'admin.fields.question_choice.image',
-                'required' => false,
-            ], [
-                'link_parameters' => [
-                    'context' => 'default',
-                    'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
+            ->add(
+                'image',
+                'sonata_type_model_list',
+                [
+                    'label' => 'admin.fields.question_choice.image',
+                    'required' => false,
                 ],
-            ])
-        ;
+                [
+                    'link_parameters' => [
+                        'context' => 'default',
+                        'hide_context' => true,
+                        'provider' => 'sonata.media.provider.image',
+                    ],
+                ]
+            );
     }
 }

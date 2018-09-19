@@ -3,14 +3,14 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Video;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 
-class VideoAdmin extends Admin
+class VideoAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -22,7 +22,9 @@ class VideoAdmin extends Admin
     {
         $media = $object->getMedia();
         if ($media) {
-            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
+            $provider = $this->getConfigurationPool()
+                ->getContainer()
+                ->get($media->getProviderName());
             $format = $provider->getFormatName($media, 'form');
             $url = $provider->generatePublicUrl($media, $format);
 
@@ -41,11 +43,17 @@ class VideoAdmin extends Admin
             ->add('title', null, [
                 'label' => 'admin.fields.video.title',
             ])
-            ->add('Author', 'doctrine_orm_model_autocomplete', [
-                'label' => 'admin.fields.video.author',
-            ], null, [
-                'property' => 'username',
-            ])
+            ->add(
+                'Author',
+                'doctrine_orm_model_autocomplete',
+                [
+                    'label' => 'admin.fields.video.author',
+                ],
+                null,
+                [
+                    'property' => 'username',
+                ]
+            )
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.video.is_enabled',
             ])
@@ -57,8 +65,7 @@ class VideoAdmin extends Admin
             ])
             ->add('color', null, [
                 'label' => 'admin.fields.video.color',
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -95,8 +102,7 @@ class VideoAdmin extends Admin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -132,22 +138,26 @@ class VideoAdmin extends Admin
                 'choices' => array_flip(Video::$colorButtonPlay),
                 'translation_domain' => 'CapcoAppBundle',
             ])
-            ->add('media', 'sonata_type_model_list', [
-                'label' => 'admin.fields.video.media',
-                'required' => false,
-                'help' => 'admin.help.video.media',
-            ], [
-                'link_parameters' => [
-                    'context' => 'default',
-                    'hide_context' => true,
-                    'provider' => 'sonata.media.provider.image',
+            ->add(
+                'media',
+                'sonata_type_model_list',
+                [
+                    'label' => 'admin.fields.video.media',
+                    'required' => false,
+                    'help' => 'admin.help.video.media',
                 ],
-            ])
+                [
+                    'link_parameters' => [
+                        'context' => 'default',
+                        'hide_context' => true,
+                        'provider' => 'sonata.media.provider.image',
+                    ],
+                ]
+            )
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.video.is_enabled',
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -184,7 +194,6 @@ class VideoAdmin extends Admin
             ])
             ->add('createdAt', null, [
                 'label' => 'admin.fields.video.created_at',
-            ])
-        ;
+            ]);
     }
 }

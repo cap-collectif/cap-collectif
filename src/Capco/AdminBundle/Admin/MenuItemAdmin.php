@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\MenuItem;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -10,7 +11,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class MenuItemAdmin extends Admin
+class MenuItemAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -19,8 +20,13 @@ class MenuItemAdmin extends Admin
 
     public function createQuery($context = 'list')
     {
-        $resolver = $this->getConfigurationPool()->getContainer()->get('capco.menu_item.resolver');
-        $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
+        $resolver = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('capco.menu_item.resolver');
+        $em = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
 
         $all = $em->getRepository('CapcoAppBundle:MenuItem')->findAll();
 
@@ -32,9 +38,7 @@ class MenuItemAdmin extends Admin
         }
 
         $query = parent::createQuery($context);
-        $query->andWhere(
-            $query->expr()->in($query->getRootAliases()[0] . '.id', ':ids')
-        );
+        $query->andWhere($query->expr()->in($query->getRootAliases()[0] . '.id', ':ids'));
         $query->setParameter('ids', $ids);
 
         return $query;
@@ -70,7 +74,10 @@ class MenuItemAdmin extends Admin
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.menu_item.position',
             ])
-            ->add('parent', null, [
+            ->add(
+                'parent',
+                null,
+                [
                     'label' => 'admin.fields.menu_item.parent',
                 ],
                 'entity',
@@ -83,8 +90,7 @@ class MenuItemAdmin extends Admin
             ])
             ->add('link', null, [
                 'label' => 'admin.fields.menu_item.link',
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -127,10 +133,11 @@ class MenuItemAdmin extends Admin
                 'actions' => [
                     'show' => [],
                     'edit' => [],
-                    'delete' => ['template' => 'CapcoAdminBundle:MenuItem:list__action_delete.html.twig'],
+                    'delete' => [
+                        'template' => 'CapcoAdminBundle:MenuItem:list__action_delete.html.twig',
+                    ],
                 ],
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -162,9 +169,7 @@ class MenuItemAdmin extends Admin
                 'query' => $this->createParentsItemQuery(),
                 'preferred_choices' => [],
                 'choices_as_values' => true,
-            ])
-        ;
-
+            ]);
         $subject = $this->getSubject();
 
         if ($subject->getIsFullyModifiable()) {
@@ -180,8 +185,7 @@ class MenuItemAdmin extends Admin
                     'label' => 'admin.fields.menu_item.link',
                     'required' => false,
                     'help' => 'admin.help.menu_item.link',
-                ])
-            ;
+                ]);
         }
     }
 
@@ -212,16 +216,12 @@ class MenuItemAdmin extends Admin
             ])
             ->add('Page', 'sonata_type_admin', [
                 'label' => 'admin.fields.menu_item.page',
-            ])
-        ;
-
+            ]);
         if (null === $subject->getPage()) {
-            $showMapper
-                ->add('link', null, [
-                    'label' => 'admin.fields.menu_item.link',
-                    'template' => 'CapcoAdminBundle:MenuItem:link_show_field.html.twig',
-                ])
-            ;
+            $showMapper->add('link', null, [
+                'label' => 'admin.fields.menu_item.link',
+                'template' => 'CapcoAdminBundle:MenuItem:link_show_field.html.twig',
+            ]);
         }
 
         $showMapper
@@ -230,8 +230,7 @@ class MenuItemAdmin extends Admin
             ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.menu_item.updated_at',
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)
@@ -249,8 +248,7 @@ class MenuItemAdmin extends Admin
 
     private function createParentsItemQuery()
     {
-        $query = $this->modelManager
-            ->createQuery($this->getClass(), 'p')
+        $query = $this->modelManager->createQuery($this->getClass(), 'p')
             ->where('p.parent IS NULL')
             ->andWhere('p.menu = :header')
             ->setParameter('header', MenuItem::TYPE_HEADER)
@@ -262,8 +260,7 @@ class MenuItemAdmin extends Admin
 
     private function createPageQuery()
     {
-        return $this->modelManager
-            ->createQuery('CapcoAppBundle:Page', 'p')
+        return $this->modelManager->createQuery('CapcoAppBundle:Page', 'p')
             ->where('p.isEnabled = :enabled')
             ->setParameter('enabled', true);
     }

@@ -20,7 +20,10 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
     {
         // delete linked step
         if ($object->getStep()) {
-            $em = $this->getConfigurationPool()->getContainer()->get('doctrine')->getManager();
+            $em = $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager();
             $em->remove($object->getStep());
         }
     }
@@ -32,8 +35,11 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
     {
         $projectId = null;
 
-        if ($this->hasParentFieldDescription()) { // this Admin is embedded
-            $project = $this->getParentFieldDescription()->getAdmin()->getSubject();
+        if ($this->hasParentFieldDescription()) {
+            // this Admin is embedded
+            $project = $this->getParentFieldDescription()
+                ->getAdmin()
+                ->getSubject();
             if ($project) {
                 $projectId = $project->getId();
             }
@@ -43,20 +49,24 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
             ->add('position', null, [
                 'label' => 'admin.fields.project_abstractstep.position',
             ])
-            ->add('step', 'sonata_type_model_list', [
-                'required' => true,
-                'label' => 'admin.fields.project_abstractstep.steps',
-                'translation_domain' => 'CapcoAppBundle',
-                'btn_delete' => false,
-                'btn_add' => 'admin.fields.project_abstractstep.steps_add',
-            ], [
-                'link_parameters' => ['projectId' => $projectId],
-            ])
-        ;
+            ->add(
+                'step',
+                'sonata_type_model_list',
+                [
+                    'required' => true,
+                    'label' => 'admin.fields.project_abstractstep.steps',
+                    'translation_domain' => 'CapcoAppBundle',
+                    'btn_delete' => false,
+                    'btn_add' => 'admin.fields.project_abstractstep.steps_add',
+                ],
+                [
+                    'link_parameters' => ['projectId' => $projectId],
+                ]
+            );
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['create', 'delete', 'edit']);
+        $collection->clearExcept(['create', 'delete', 'edit', 'show']);
     }
 }

@@ -1,13 +1,14 @@
 <?php
 namespace Capco\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class ProposalSelectionVoteAdmin extends Admin
+class ProposalSelectionVoteAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -27,11 +28,6 @@ class ProposalSelectionVoteAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
 
         $listMapper
             ->add('proposal', 'sonata_type_model', ['label' => 'admin.fields.proposal'])
@@ -46,11 +42,6 @@ class ProposalSelectionVoteAdmin extends Admin
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
         $showMapper
             ->add('proposal', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.argument',
