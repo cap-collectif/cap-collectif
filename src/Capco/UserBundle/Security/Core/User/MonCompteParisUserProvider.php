@@ -2,6 +2,7 @@
 namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Exception\ParisAuthenticationException;
+use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,7 +13,7 @@ class MonCompteParisUserProvider implements UserProviderInterface
     private $userManager;
     private $openAmCaller;
 
-    public function __construct($manager, OpenAmClient $openAmCaller)
+    public function __construct(UserManager $manager, OpenAmClient $openAmCaller)
     {
         $this->userManager = $manager;
         $this->openAmCaller = $openAmCaller;

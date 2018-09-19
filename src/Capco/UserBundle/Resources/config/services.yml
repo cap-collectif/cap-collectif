@@ -40,10 +40,8 @@ services:
     arguments: ['@fos_user.user_manager', { facebook: facebook_id, google: google_id }]
 
   Capco\UserBundle\Security\Core\User\SamlUserProvider:
-    arguments: ['@fos_user.user_manager', '%simplesamlphp.sp%']
-
-  Capco\UserBundle\Security\Core\User\MonCompteParisUserProvider:
-    arguments: ['@fos_user.user_manager', 'Capco\UserBundle\MonCompteParis\OpenAmClient']
+    arguments:
+      $samlIdp: '%simplesamlphp.sp%'
 
   Capco\UserBundle\Listener\UserNotificationsListener:
     tags:
@@ -60,8 +58,7 @@ services:
   # We override default security services:
   security.authentication.success_handler:
     class: Capco\UserBundle\Handler\AuthenticationSuccessHandler
-    arguments:
-      ['@security.http_utils', {}, 'Capco\AppBundle\Toggle\Manager', '@security.token_storage']
+    autowire: true
     tags:
       - { name: 'monolog.logger', channel: 'security' }
 
@@ -80,8 +77,8 @@ services:
     arguments: ['@fos_user.user_manager', {}]
 
   Capco\UserBundle\Doctrine\UserManager:
+    autowire: true
+    autoconfigure: true
+    public: true
     arguments:
-      - '@fos_user.util.password_updater'
-      - '@fos_user.util.canonical_fields_updater'
-      - '@fos_user.object_manager'
-      - '%fos_user.model.user.class%'
+      $class: '%fos_user.model.user.class%'
