@@ -276,6 +276,7 @@ Capco\UserBundle\Entity\User:
       - 'ROLE_ADMIN'
     media: null
     confirmationToken: check-my-email-token
+    resetPasswordToken: reset-my-password-token
     createdAt: '<dateTimeBetween("-3 days", "-1 days")>'
 
   user_updating_email:
@@ -349,8 +350,7 @@ Capco\UserBundle\Entity\User:
     roles:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser1'
-    biography:
-      Yrf pungf qbzvarebag ovragbg yr zbaqr.
+    biography: Yrf pungf qbzvarebag ovragbg yr zbaqr.
     vip: true
     emailConfirmationSentAt: '2018-09-05 17:14:00'
     enabled: true

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\UserBundle\Entity\User;
 use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -50,10 +51,12 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
         }
         foreach ($deduplicatedRows as $row) {
             try {
+                /** @var User $user */
                 $user = $userManager->createUser();
                 $user->setUsername($row['username']);
                 $user->setEmail(filter_var($row['email'], FILTER_SANITIZE_EMAIL));
                 $user->setConfirmationToken($tokenGenerator->generateToken());
+                $user->setResetPasswordToken($tokenGenerator->generateToken());
                 $user->setEnabled(false);
                 $userManager->updateUser($user);
                 $confirmationUrl = $router->generate(
