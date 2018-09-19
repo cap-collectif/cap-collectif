@@ -182,8 +182,7 @@ EOF;
         'proposal_formattedAddress',
         'proposal_district_name',
         'proposal_illustration',
-        'proposal_summary',
-        'proposal_description',
+        'proposal_summaryOrBodyExcerpt',
         'proposal_votes_id',
         'proposal_votes_createdAt',
         'proposal_votes_publishedAt',
@@ -421,8 +420,7 @@ EOF;
         'proposal_formattedAddress' => 'formattedAddress',
         'proposal_district_name' => 'district.name',
         'proposal_illustration' => 'media.url',
-        'proposal_summary' => 'summary',
-        'proposal_description' => 'bodyText',
+        'proposal_summaryOrBodyExcerpt' => 'summaryOrBodyExcerpt',
     ];
 
     protected $currentProposalIndex;
@@ -518,6 +516,7 @@ EOF;
             'query' => $proposalsQuery,
             'variables' => [],
         ])->toArray();
+
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
         if ($totalCount > 0) {
             $output->writeln('<info>Importing ' . $totalCount . ' proposals...</info>');
@@ -1588,8 +1587,7 @@ ${COMMENT_VOTE_INFOS}
             media {
               url
             }
-            summary
-            bodyText
+            summaryOrBodyExcerpt
             responses {
               ... on ValueResponse {
                 question {

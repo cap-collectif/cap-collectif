@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -32,7 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *   message="proposal_form.reference.not_unique"
  * )
  */
-class ProposalForm
+class ProposalForm implements DisplayableInBOInterface
 {
     use UuidTrait;
     use ReferenceTrait;
@@ -395,6 +396,16 @@ class ProposalForm
     {
         if ($this->getStep()) {
             return $this->getStep()->canDisplay($user);
+        }
+
+        // not linked to a project so we can display it
+        return true;
+    }
+
+    public function canDisplayInBo($user = null): bool
+    {
+        if ($this->getStep()) {
+            return $this->getStep()->canDisplayInBO($user);
         }
 
         // not linked to a project so we can display it
