@@ -103,3 +103,6 @@ services:
   
   capco.canonicalizer:
     class: Capco\AppBundle\Utils\Canonicalizer
+
+  Box\Spout\Writer\CSV\Writer:
+    class: Box\Spout\Writer\CSV\Writer

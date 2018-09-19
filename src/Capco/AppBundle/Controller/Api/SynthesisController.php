@@ -253,9 +253,7 @@ class SynthesisController extends FOSRestController
             $this->createAccessDeniedException();
         }
 
-        $tree = $this->get('capco.synthesis.synthesis_element_handler')
-                    ->getElementsTreeFromSynthesisByType($synthesis, $type, $parent);
-
+        $tree = $this->get('capco.synthesis.synthesis_element_handler')            ->getElementsTreeFromSynthesisByType($synthesis, $type, $parent);
         return $tree;
     }
 

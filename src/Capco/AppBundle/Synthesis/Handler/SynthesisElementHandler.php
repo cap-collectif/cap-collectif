@@ -63,6 +63,7 @@ class SynthesisElementHandler
         }
 
         $repo = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement');
+
         return $repo->getFormattedTree($synthesis, $type, $parentId, $depth);
     }
 
@@ -117,7 +118,7 @@ class SynthesisElementHandler
         SynthesisDivision $division,
         SynthesisElement $element,
         Synthesis $synthesis
-    ) {
+    ): SynthesisDivision {
         foreach ($division->getElements() as $el) {
             $el->setSynthesis($synthesis);
             $el->setAuthor($element->getAuthor());

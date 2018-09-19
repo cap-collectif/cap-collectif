@@ -1,4 +1,4 @@
-@projects
+@projects @dev
 Feature: Projects
 
 @parallel-scenario
@@ -10,7 +10,7 @@ Scenario: API client wants to get all projects
   {
     "projects": [
       {
-        "id": "4",
+        "id": @string@,
         "title": @string@,
         "startAt": "@string@.isDateTime()",
         "createdAt": "@string@.isDateTime()",

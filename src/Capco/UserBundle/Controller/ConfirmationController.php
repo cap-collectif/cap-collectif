@@ -1,8 +1,10 @@
 <?php
+
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Helper\EnvHelper;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Manager\ContributionManager;
 use FOS\UserBundle\Model\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -39,9 +41,9 @@ class ConfirmationController extends Controller
         $user->setLastLogin(new \DateTime());
 
         // We publish the user's contributions
-        $hasPulishedContributions = $this->get(
-            'Capco\AppBundle\Manager\ContributionManager'
-        )->publishContributions($user);
+        $hasPulishedContributions = $this->get(ContributionManager::class)->publishContributions(
+            $user
+        );
 
         // If user has been created via API he has no password yet.
         // That's why we create a reset password request to let him chose a password

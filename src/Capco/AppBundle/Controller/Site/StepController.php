@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
@@ -79,7 +80,8 @@ class StepController extends Controller
         $contributorsList =
             $contributorsConnection->totalCount > 0
                 ? array_merge(
-                    ...array_map(function (Edge $edge) {
+                ...array_map(
+                    function (Edge $edge) {
                         /** @var User $user */
                         $user = $edge->node;
 
@@ -93,8 +95,10 @@ class StepController extends Controller
                                 'votes' => $user->getVotesCount(),
                             ],
                         ];
-                    }, $contributorsConnection->edges)
+                    },
+                    $contributorsConnection->edges
                 )
+            )
                 : [];
 
         $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
@@ -301,21 +305,23 @@ class StepController extends Controller
                 'countFusions' => $countFusions,
             ],
             'json',
-            SerializationContext::create()->setGroups([
-                'Statuses',
-                'ProposalForms',
-                'Questions',
-                'ThemeDetails',
-                'Districts',
-                'DistrictDetails',
-                'Default',
-                'Steps',
-                'VoteThreshold',
-                'UserVotes',
-                'Proposals',
-                'UsersInfos',
-                'UserMedias',
-            ])
+            SerializationContext::create()->setGroups(
+                [
+                    'Statuses',
+                    'ProposalForms',
+                    'Questions',
+                    'ThemeDetails',
+                    'Districts',
+                    'DistrictDetails',
+                    'Default',
+                    'Steps',
+                    'VoteThreshold',
+                    'UserVotes',
+                    'Proposals',
+                    'UsersInfos',
+                    'UserMedias',
+                ]
+            )
         );
 
         return [
@@ -346,12 +352,14 @@ class StepController extends Controller
         $props = $serializer->serialize(
             ['step' => $step, 'form' => $step->getQuestionnaire() ?: null],
             'json',
-            SerializationContext::create()->setGroups([
-                'Questionnaires',
-                'Questions',
-                'QuestionnaireSteps',
-                'Steps',
-            ])
+            SerializationContext::create()->setGroups(
+                [
+                    'Questionnaires',
+                    'Questions',
+                    'QuestionnaireSteps',
+                    'Steps',
+                ]
+            )
         );
 
         return ['project' => $project, 'currentStep' => $step, 'props' => $props];
@@ -392,19 +400,21 @@ class StepController extends Controller
                 'showThemes' => $showThemes,
             ],
             'json',
-            SerializationContext::create()->setGroups([
-                'Steps',
-                'ProposalForms',
-                'UserVotes',
-                'Statuses',
-                'ThemeDetails',
-                'Districts',
-                'Default',
-                'Proposals',
-                'UsersInfos',
-                'UserMedias',
-                'VoteThreshold',
-            ])
+            SerializationContext::create()->setGroups(
+                [
+                    'Steps',
+                    'ProposalForms',
+                    'UserVotes',
+                    'Statuses',
+                    'ThemeDetails',
+                    'Districts',
+                    'Default',
+                    'Proposals',
+                    'UsersInfos',
+                    'UserMedias',
+                    'VoteThreshold',
+                ]
+            )
         );
 
         return ['project' => $project, 'currentStep' => $step, 'props' => $props];

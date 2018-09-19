@@ -757,7 +757,7 @@ class Project implements IndexableInterface
             if ($step->getStep()->isConsultationStep()) {
                 $count += (
                     $step->getStep()->getOpinionVersionsCount() +
-                        $step->getStep()->getTrashedOpinionVersionsCount()
+                    $step->getStep()->getTrashedOpinionVersionsCount()
                 );
             }
         }
@@ -775,7 +775,7 @@ class Project implements IndexableInterface
             if ($step->getStep()->isConsultationStep()) {
                 $count += (
                     $step->getStep()->getArgumentCount() +
-                        $step->getStep()->getTrashedArgumentCount()
+                    $step->getStep()->getTrashedArgumentCount()
                 );
             }
         }

@@ -23,6 +23,7 @@ use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
+use Capco\AppBundle\Toggle\Manager;
 use Elastica\Snapshot;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
@@ -340,7 +341,7 @@ class ApplicationContext extends UserContext
      */
     public function allFeaturesAreEnabled()
     {
-        $this->getService('Capco\AppBundle\Toggle\Manager')->activateAll();
+        $this->getService(Manager::class)->activateAll();
     }
 
     /**
@@ -353,11 +354,11 @@ class ApplicationContext extends UserContext
      */
     public function activateFeatures(string $featureA, $featureB = null, $featureC = null)
     {
-        $this->getService('Capco\AppBundle\Toggle\Manager')->activate($featureA);
+        $this->getService(Manager::class)->activate($featureA);
         if ($featureB) {
-            $this->getService('Capco\AppBundle\Toggle\Manager')->activate($featureB);
+            $this->getService(Manager::class)->activate($featureB);
             if ($featureC) {
-                $this->getService('Capco\AppBundle\Toggle\Manager')->activate($featureC);
+                $this->getService(Manager::class)->activate($featureC);
             }
         }
     }

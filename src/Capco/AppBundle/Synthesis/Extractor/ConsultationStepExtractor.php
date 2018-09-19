@@ -354,7 +354,8 @@ class ConsultationStepExtractor
      */
     public function setDataFromContribution(
         SynthesisElement $element,
-        /*Contribution|OpinionType*/ $contribution
+        /*Contribution|OpinionType*/
+        $contribution
     ): SynthesisElement {
         if ($contribution instanceof OpinionType) {
             return $this->setDataFromOpinionType($element, $contribution);

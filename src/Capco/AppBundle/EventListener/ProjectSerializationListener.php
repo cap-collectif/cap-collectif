@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Resolver\StepResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
@@ -21,12 +22,12 @@ class ProjectSerializationListener extends AbstractSerializationListener
     private $router;
 
     public function __construct(
-      StepResolver $stepResolver,
-      MediaExtension $mediaExtension,
-      Serializer $serializer,
-      ProjectHelper $helper,
-      Router $router
-      ) {
+        StepResolver $stepResolver,
+        MediaExtension $mediaExtension,
+        Serializer $serializer,
+        ProjectHelper $helper,
+        Router $router
+    ) {
         $this->stepResolver = $stepResolver;
         $this->mediaExtension = $mediaExtension;
         $this->serializer = $serializer;
@@ -39,7 +40,7 @@ class ProjectSerializationListener extends AbstractSerializationListener
         return [
             [
                 'event' => 'serializer.post_serialize',
-                'class' => 'Capco\AppBundle\Entity\Project',
+                'class' => Project::class,
                 'method' => 'onPostProject',
             ],
         ];
@@ -54,15 +55,15 @@ class ProjectSerializationListener extends AbstractSerializationListener
 
         $project = $event->getObject();
         $links = [
-          'show' => $this->stepResolver->getFirstStepLinkForProject($project),
-          'external' => $project->getExternalLink(),
+            'show' => $this->stepResolver->getFirstStepLinkForProject($project),
+            'external' => $project->getExternalLink(),
         ];
 
         if ($this->eventHasGroup($event, 'ProjectAdmin')) {
             $links['admin'] = $this->router->generate(
-              'admin_capco_app_project_edit',
-              ['id' => $project->getId()],
-              UrlGeneratorInterface::ABSOLUTE_URL
+                'admin_capco_app_project_edit',
+                ['id' => $project->getId()],
+                UrlGeneratorInterface::ABSOLUTE_URL
             );
         }
 
@@ -71,11 +72,9 @@ class ProjectSerializationListener extends AbstractSerializationListener
         if ($this->eventHasGroup($event, 'Projects')) {
             if ($project->getCover()) {
                 try {
-                    $event->getVisitor()->addData(
-                      'cover', [
-                          'url' => $this->mediaExtension->path($project->getCover(), 'project'),
-                          ]
-                        );
+                    $event->getVisitor()->addData('cover', [
+                        'url' => $this->mediaExtension->path($project->getCover(), 'project'),
+                    ]);
                 } catch (RouteNotFoundException $e) {
                     // Avoid some SonataMedia problems
                 }

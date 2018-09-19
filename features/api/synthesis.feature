@@ -455,7 +455,7 @@ Scenario: API client wants to get unpublished synthesis elements count
   {"count": 1}
   """
 
-@database
+@database  @dev
 Scenario: Anonymous wants to get synthesis elements published tree
   Given there is a synthesis with id "48" based on consultation step "cstep2"
   And I send a GET request to "/api/syntheses/48/elements/tree?type=published"
