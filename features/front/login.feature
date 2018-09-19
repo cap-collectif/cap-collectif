@@ -42,10 +42,10 @@ Scenario: User has lost password and email should be sent
   And I should see "email-content-resetting-password" in mail
 
 @javascript @database
-Scenario: Admin wants to enable is account and set his password
+Scenario: Admin wants to set his password
   Given features "registration", "profiles" are enabled
   And I go to "/account/email_confirmation/check-my-email-token"
-  Then I should be redirected to "/resetting/reset/reset-my-password-token"
+  Then I should be redirected to "/resetting/reset/check-my-email-token"
   When I fill in the following:
     | fos_user_resetting_plainPassword_first  | capcopopototo |
     | fos_user_resetting_plainPassword_second | capcopopototo |

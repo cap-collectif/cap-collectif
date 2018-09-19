@@ -2,7 +2,6 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Helper\EnvHelper;
-use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Model\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,7 +20,6 @@ class ConfirmationController extends Controller
         /** @var UserManager $manager */
         $manager = $this->container->get('fos_user.user_manager');
         $session = $this->container->get('session');
-        /** @var User $user */
         $user = $manager->findUserByConfirmationToken($token);
         $response = new RedirectResponse($this->container->get('router')->generate('app_homepage'));
 
@@ -50,7 +48,7 @@ class ConfirmationController extends Controller
             $manager->updateUser($user);
 
             return $this->redirectToRoute('fos_user_resetting_reset', [
-                'token' => $user->getResetPasswordToken(),
+                'token' => $user->getConfirmationToken(),
             ]);
         }
 

@@ -310,11 +310,6 @@ abstract class AbstractStep
         return $this->isEnabled && $this->getProject() && $this->getProject()->canDisplay($user);
     }
 
-    public function canDisplayInBO($user = null): bool
-    {
-        return $this->getProject() && $this->getProject()->canDisplay($user);
-    }
-
     public function canContribute($user = null): bool
     {
         return $this->isActive($user) && $this->isOpen();

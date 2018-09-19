@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Helper;
 
 class ConvertCsvToArray
 {
-    public function convert($filename, $delimiter = ';')
+    public function convert(string $filename, string $delimiter = ';')
     {
         if (!file_exists($filename)) {
             echo "File doesn't exist !";

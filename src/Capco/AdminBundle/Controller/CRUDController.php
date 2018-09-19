@@ -1,8 +1,6 @@
 <?php
-
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -316,18 +314,9 @@ class CRUDController extends Controller
                 sprintf('unable to find the object with id: %s', $id)
             );
         }
-        if (is_object($existingObject)) {
-            if (
-                $existingObject instanceof AbstractStep &&
-                !$existingObject->canDisplayInBO($this->getUser())
-            ) {
-                throw new ProjectAccessDeniedException();
-            } elseif (
-                !$existingObject instanceof AbstractStep &&
-                !$existingObject->canDisplay($this->getUser())
-            ) {
-                throw new ProjectAccessDeniedException();
-            }
+
+        if (is_object($existingObject) && !$existingObject->canDisplay($this->getUser())) {
+            throw new ProjectAccessDeniedException();
         }
 
         $this->checkParentChildAssociation($request, $existingObject);
