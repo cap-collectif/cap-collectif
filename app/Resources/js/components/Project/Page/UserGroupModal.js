@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Modal, ListGroupItem, Button } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { UserGroupModal_project } from './__generated__/UserGroupModal_project.graphql';
 import UserInGroupModal from './UserInGroupModal';
@@ -18,6 +18,7 @@ type Props = RelayProps & {
   show: boolean,
   handleClose: () => void,
   relay: RelayPaginationProp,
+  intl: IntlShape,
 };
 type State = {
   currentShownGroupModalId: ?string,
@@ -48,7 +49,7 @@ export class UserGroupModal extends React.Component<Props, State> {
   };
 
   render() {
-    const { show, project, relay } = this.props;
+    const { show, project, relay, intl } = this.props;
     return (
       <div>
         <Modal
@@ -78,7 +79,11 @@ export class UserGroupModal extends React.Component<Props, State> {
                         bsStyle="link"
                         onClick={() => {
                           this.handleClick(group.id);
-                        }}>
+                        }}
+                        title={intl.formatMessage(
+                          { id: 'persons-in-the-group' },
+                          { groupName: group.title },
+                        )}>
                         {group.title}
                       </Button>
                       {/* $FlowFixMe */}
@@ -107,8 +112,10 @@ export class UserGroupModal extends React.Component<Props, State> {
   }
 }
 
+const container = injectIntl(UserGroupModal);
+
 export default createPaginationContainer(
-  UserGroupModal,
+  container,
   graphql`
     fragment UserGroupModal_project on Project
       @argumentDefinitions(

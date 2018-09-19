@@ -61,6 +61,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
         />
         <a
           onClick={[Function]}
+          title="persons-in-the-group"
         >
           Un groupe cool
         </a>
@@ -88,6 +89,7 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
         />
         <a
           onClick={[Function]}
+          title="persons-in-the-group"
         >
           mon super groupe 2
         </a>
@@ -178,6 +180,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
         />
         <a
           onClick={[Function]}
+          title="persons-in-the-group"
         >
           Un groupe cool
         </a>
@@ -205,6 +208,7 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
         />
         <a
           onClick={[Function]}
+          title="persons-in-the-group"
         >
           mon super groupe 2
         </a>
