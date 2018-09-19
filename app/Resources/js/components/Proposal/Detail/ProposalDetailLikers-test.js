@@ -3,12 +3,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalDetailLikers } from './ProposalDetailLikers';
-import { $refType, $fragmentRefs } from '../../../mocks';
+import { $refType, $fragmentRefs, intlMock } from '../../../mocks';
 
 describe('<ProposalDetailLikers />', () => {
   const propsWithLikers = {
     showModal: true,
     dispatch: jest.fn(),
+    intl: intlMock,
     proposal: {
       $refType,
       $fragmentRefs,
@@ -27,6 +28,7 @@ describe('<ProposalDetailLikers />', () => {
   const propsWithoutLikers = {
     showModal: false,
     dispatch: jest.fn(),
+    intl: intlMock,
     proposal: {
       $refType,
       $fragmentRefs,

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ListGroupItem, Modal } from 'react-bootstrap';
 import { closeDetailLikersModal } from '../../../redux/modules/proposal';
 import type { ProposalDetailLikersModal_proposal } from './__generated__/ProposalDetailLikersModal_proposal.graphql';
@@ -14,6 +14,7 @@ type Props = {
   proposal: ProposalDetailLikersModal_proposal,
   show: boolean,
   dispatch: Dispatch,
+  intl: IntlShape,
 };
 
 export class ProposalDetailLikersModal extends React.Component<Props> {
@@ -24,7 +25,7 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, show } = this.props;
+    const { proposal, show, intl } = this.props;
 
     if (proposal.likers.length === 0) {
       return null;
@@ -53,7 +54,14 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
                 }}
               />
               <div className="d-flex flex-column justify-content-around">
-                <a href={liker.url}>{liker.displayName}</a>
+                <a
+                  href={liker.url}
+                  title={intl.formatMessage(
+                    { id: 'usernames-profile' },
+                    { userName: liker.displayName },
+                  )}>
+                  {liker.displayName}
+                </a>
                 {liker.biography && <p className="excerpt">{liker.biography}</p>}
               </div>
             </ListGroupItem>
@@ -64,7 +72,7 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
   }
 }
 
-const container = connect()(ProposalDetailLikersModal);
+const container = connect()(injectIntl(ProposalDetailLikersModal));
 
 export default createFragmentContainer(container, {
   proposal: graphql`

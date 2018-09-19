@@ -7,6 +7,7 @@ exports[`<ProposalDetailLikers /> should render a <Modal /> when proposal has li
   <a
     className="tags-list__tag"
     onClick={[Function]}
+    title="list-of-favorites"
   >
     <ForwardRef(Relay(ProposalDetailLikersLabel))
       proposal={
@@ -26,7 +27,7 @@ exports[`<ProposalDetailLikers /> should render a <Modal /> when proposal has li
       }
     />
   </a>
-  <ForwardRef(Relay(Connect(ProposalDetailLikersModal)))
+  <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikersModal))))
     proposal={
       Object {
         "$fragmentRefs": null,
@@ -52,6 +53,7 @@ exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
   <div
     className="tags-list__tag"
     onClick={[Function]}
+    title="list-of-favorites"
   >
     <ForwardRef(Relay(ProposalDetailLikersLabel))
       proposal={
@@ -71,7 +73,7 @@ exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
       }
     />
   </div>
-  <ForwardRef(Relay(Connect(ProposalDetailLikersModal)))
+  <ForwardRef(Relay(Connect(InjectIntl(ProposalDetailLikersModal))))
     proposal={
       Object {
         "$fragmentRefs": null,

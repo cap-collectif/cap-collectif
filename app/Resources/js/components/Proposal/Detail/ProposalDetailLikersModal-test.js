@@ -3,12 +3,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalDetailLikersModal } from './ProposalDetailLikersModal';
-import { $refType } from '../../../mocks';
+import { $refType, intlMock } from '../../../mocks';
 
 describe('<ProposalDetailLikersModal />', () => {
   const likersProps = {
     show: true,
     dispatch: jest.fn(),
+    intl: intlMock,
     proposal: {
       $refType,
       id: '98069',
@@ -42,6 +43,7 @@ describe('<ProposalDetailLikersModal />', () => {
   const likerProps = {
     show: true,
     dispatch: jest.fn(),
+    intl: intlMock,
     proposal: {
       $refType,
       id: '89789',
@@ -64,6 +66,7 @@ describe('<ProposalDetailLikersModal />', () => {
   const props = {
     show: false,
     dispatch: jest.fn(),
+    intl: intlMock,
     proposal: {
       $refType,
       id: '79807',

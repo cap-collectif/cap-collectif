@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { openDetailLikersModal } from '../../../redux/modules/proposal';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
 import ProposalDetailLikersModal from './ProposalDetailLikersModal';
@@ -13,6 +14,7 @@ type Props = {
   componentClass: string,
   showModal: boolean,
   dispatch: Dispatch,
+  intl: IntlShape,
 };
 
 export class ProposalDetailLikers extends React.Component<Props> {
@@ -27,7 +29,7 @@ export class ProposalDetailLikers extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, componentClass, showModal } = this.props;
+    const { proposal, componentClass, showModal, intl } = this.props;
     const Component = componentClass;
 
     if (proposal.likers.length === 0) {
@@ -36,7 +38,10 @@ export class ProposalDetailLikers extends React.Component<Props> {
 
     return (
       <React.Fragment>
-        <Component className="tags-list__tag" onClick={this.handleClick}>
+        <Component
+          className="tags-list__tag"
+          title={intl.formatMessage({ id: 'list-of-favorites' })}
+          onClick={this.handleClick}>
           {/* $FlowFixMe */}
           <ProposalDetailLikersLabel proposal={proposal} />
         </Component>
@@ -53,7 +58,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
     state.proposal.showDetailLikersModal === props.proposal.id,
 });
 
-const container = connect(mapStateToProps)(ProposalDetailLikers);
+const container = connect(mapStateToProps)(injectIntl(ProposalDetailLikers));
 
 export default createFragmentContainer(container, {
   proposal: graphql`
