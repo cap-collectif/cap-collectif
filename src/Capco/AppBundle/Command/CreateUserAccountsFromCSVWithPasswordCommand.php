@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Box\Spout\Common\Helper\GlobalFunctionsHelper;
 use Box\Spout\Writer\CSV\Writer;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -24,6 +25,7 @@ class CreateUserAccountsFromCSVWithPasswordCommand extends Command
         $this->csvWriter = $csvWriter;
         $this->csvReader = $csvReader;
         $this->userManager = $userManager;
+        $this->csvWriter->setGlobalFunctionsHelper(new GlobalFunctionsHelper());
 
         parent::__construct();
     }
