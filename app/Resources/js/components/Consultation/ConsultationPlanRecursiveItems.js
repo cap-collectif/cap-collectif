@@ -44,6 +44,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
                     sectionKey={index}
                     section={section}
                     level={0}
+                    group={1}
                   />
                 ))}
           </div>

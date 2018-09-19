@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { connect, type MapStateToProps } from 'react-redux';
 import { NavItem } from 'react-bootstrap';
 import type { ConsultationPlanItem_section } from './__generated__/ConsultationPlanItem_section.graphql';
 import config from '../../config';
@@ -8,9 +9,21 @@ import config from '../../config';
 type Props = {
   section: ConsultationPlanItem_section,
   level: number,
+  group: number,
+  activeItem: number,
 };
 
 export class ConsultationPlanItem extends React.Component<Props> {
+  componentDidUpdate() {
+    const { activeItem, group, section } = this.props;
+
+    if(group === activeItem) {
+      $(`#nav-opinion-type--${section.slug}`).collapse({ toggle: true });
+    }
+
+    console.log(activeItem);
+  }
+
   render() {
     const { section, level } = this.props;
 
@@ -36,7 +49,13 @@ export class ConsultationPlanItem extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(ConsultationPlanItem, {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  activeItem: state.project.selectedActiveItem,
+});
+
+const container = connect(mapStateToProps)(ConsultationPlanItem);
+
+export default createFragmentContainer(container, {
   section: graphql`
     fragment ConsultationPlanItem_section on Section {
       title

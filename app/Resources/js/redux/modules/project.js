@@ -22,6 +22,7 @@ export type State = {
   +theme: ?string,
   +isLoading: boolean,
   +count: number,
+  +selectedActiveItem: number,
 };
 
 const initialState: State = {
@@ -41,6 +42,7 @@ const initialState: State = {
   theme: null,
   isLoading: true,
   count: 0,
+  selectedActiveItem: null,
 };
 type RequestFetchProjectsAction = { type: 'project/PROJECTS_FETCH_REQUESTED' };
 type ChangePageAction = { type: 'project/CHANGE_PAGE', page: number };
@@ -69,6 +71,8 @@ type OpenConsultationPlanAction = {
   type: 'project/OPEN_CONSULTATION_PLAN',
   id: string,
 };
+type ChangeConsultationPlanActiveItemAction = { type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM', item: number };
+
 
 export type ProjectAction =
   | RequestFetchProjectsAction
@@ -80,6 +84,7 @@ export type ProjectAction =
   | ReceivedProjectSucceedAction
   | CloseConsultationPlanAction
   | OpenConsultationPlanAction
+  | ChangeConsultationPlanActiveItemAction
   | { type: 'project/PROJECTS_FETCH_FAILED', error: Object }
   | { type: 'project/CHANGE_FILTER', filter: string, value: string };
 
@@ -115,6 +120,11 @@ export const closeConsultationPlan = (id: string): CloseConsultationPlanAction =
 export const openConsultationPlan = (id: string): OpenConsultationPlanAction => ({
   type: 'project/OPEN_CONSULTATION_PLAN',
   id,
+});
+
+export const changeConsultationPlanActiveItem = (item: number): ChangeConsultationPlanActiveItemAction => ({
+  type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM',
+  item,
 });
 
 export function* fetchProjectsSaga(): Generator<*, *, *> {
@@ -183,6 +193,9 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       const data = { ...state.showConsultationPlanById, [action.id]: false };
       LocalStorageService.set('project.showConsultationPlanById', data);
       return { ...state, showConsultationPlanById: data };
+    }
+    case 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM': {
+      return { ...state, selectedActiveItem: action.item };
     }
     default:
       return state;

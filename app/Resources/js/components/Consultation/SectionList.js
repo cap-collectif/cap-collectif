@@ -6,14 +6,15 @@ type Props = {
   section: Object,
   consultation: Object,
   level: number,
+  group: number,
 };
 
 export class SectionList extends React.Component<Props> {
   render() {
-    const { consultation, section, level } = this.props;
+    const { consultation, section, level, group } = this.props;
 
     return (
-      <div>
+      <div className="section-list_container" data-group={group}>
         <Section consultation={consultation} section={section} level={level} />
         {section.sections &&
           section.sections.map((subSelection, index) => (
@@ -22,6 +23,7 @@ export class SectionList extends React.Component<Props> {
               consultation={consultation}
               section={subSelection}
               level={level + 1}
+              group={(group*10)+(index+1)}
             />
           ))}
       </div>

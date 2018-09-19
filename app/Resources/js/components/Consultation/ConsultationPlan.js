@@ -69,7 +69,7 @@ export class ConsultationPlan extends React.Component<Props, State> {
 
     return (
       <div
-        id="scrollspy"
+        // id="scrollspy"
         data-spy="affix"
         data-offset-top={topPlan || '655'}
         data-offset-bottom="450">

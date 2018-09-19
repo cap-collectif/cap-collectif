@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
-import type { GlobalState } from '../../types';
+import type { GlobalState, Dispatch } from '../../types';
+import { changeConsultationPlanActiveItem } from '../../redux/modules/project';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 // import ConsultationFilterForm from './ConsultationFilterForm';
 // import ConsultationContributionFiltered
@@ -14,6 +15,7 @@ import DatesInterval from './../Utils/DatesInterval';
 import StepInfos from '../../components/Steps/Page/StepInfos';
 import type { ConsultationPropositionBoxQueryResponse } from './__generated__/ConsultationPropositionBoxQuery.graphql';
 import ConsultationPlan from './ConsultationPlan';
+
 
 type Step = {
   id: string,
@@ -27,38 +29,71 @@ type Step = {
 type Props = {
   step: Step,
   showConsultationPlan: boolean,
+  dispatch: Dispatch,
 };
 
 export class ConsultationPropositionBox extends React.Component<Props> {
   componentDidMount() {
     window.addEventListener('scroll', () => {
       window.requestAnimationFrame(() => {
-        this.getActiveLink();
+        // this.getActiveLink();
+        this.scrollSpy();
       });
     });
   }
 
-  getActiveLink() {
-    const sectionItems = document.querySelectorAll('.opinion-type__title');
+  // getActiveLink() {
+  //   const sectionItems = document.querySelectorAll('.opinion-type__title');
+  //
+  //   sectionItems.forEach(item => {
+  //     const navItem = document.getElementById(`nav-${item.id}`);
+  //     const itemPosition = item.getBoundingClientRect();
+  //     const parentItem = navItem && navItem.parentNode;
+  //     const nextSiblingItem = parentItem && parentItem.nextSibling;
+  //
+  //     if (navItem && parentItem) {
+  //       // 50 is height of nav
+  //       if (itemPosition.top - 20 < 0 && itemPosition.top - 20 > -itemPosition.height + 40) {
+  //         // id is passed on children of navItem component
+  //         // $FlowFixMe
+  //         parentItem.classList.add('active');
+  //         $(nextSiblingItem).collapse({ toggle: true });
+  //         // console.log(nextSiblingItem);
+  //       } else {
+  //         // $FlowFixMe
+  //         parentItem.classList.remove('active');
+  //         // $(nextSiblingItem).collapse({ toggle: false });
+  //       }
+  //     }
+  //   });
+  // }
+
+  scrollSpy = () => {
+    const { dispatch } = this.props;
+    const sectionItems = document.querySelectorAll('.section-list_container');
+    const actifItemArray = [];
 
     sectionItems.forEach(item => {
-      const navItem = document.getElementById(`nav-${item.id}`);
       const itemPosition = item.getBoundingClientRect();
-      const parentItem = navItem && navItem.parentNode;
 
-      if (navItem && parentItem) {
+      if (itemPosition) {
         // 50 is height of nav
-        if (itemPosition.top - 20 < 0 && itemPosition.top - 20 > -itemPosition.height + 40) {
-          // id is passed on children of navItem component
-          // $FlowFixMe
-          parentItem.classList.add('active');
+        if ((itemPosition.top - 20 < 0) && (itemPosition.top - 20 > -itemPosition.height + 40)) {
+          actifItemArray.push(item.dataset.group);
         } else {
-          // $FlowFixMe
-          parentItem.classList.remove('active');
+          // console.warn(item);
         }
       }
     });
-  }
+
+    if(actifItemArray.length > 0) {
+      const actifItem = Math.max.apply(null, actifItemArray);
+
+      // console.log(actifItem);
+
+      dispatch(changeConsultationPlanActiveItem(actifItem));
+    }
+  };
 
   render() {
     const { step, showConsultationPlan } = this.props;
