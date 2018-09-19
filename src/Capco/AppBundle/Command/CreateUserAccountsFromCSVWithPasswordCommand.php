@@ -76,13 +76,6 @@ class CreateUserAccountsFromCSVWithPasswordCommand extends Command
 
     private function generateRandomPassword(): string
     {
-        $password = '';
-        $desiredLength = random_int(8, 12);
-
-        for ($length = 0; $length < $desiredLength; $length++) {
-            $password .= \chr(random_int(32, 126));
-        }
-
-        return $password;
+        return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyz', 8)), 0, 8);
     }
 }
