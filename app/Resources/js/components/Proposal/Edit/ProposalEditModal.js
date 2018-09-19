@@ -23,7 +23,7 @@ type Props = {
   dispatch: Dispatch,
 };
 
-class ProposalEditModal extends React.Component<Props> {
+export class ProposalEditModal extends React.Component<Props> {
   render() {
     const { invalid, proposal, show, pristine, submitting, dispatch, intl } = this.props;
     return (
