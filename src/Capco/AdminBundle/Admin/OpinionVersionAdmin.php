@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class OpinionVersionAdmin extends AbstractAdmin
@@ -74,11 +75,6 @@ class OpinionVersionAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
         $formMapper
             ->with('admin.fields.opinion_version.group_content', ['class' => 'col-md-12'])
             ->end()
@@ -128,7 +124,7 @@ class OpinionVersionAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'create', 'edit', 'delete']);
+        $collection->clearExcept(['list', 'create', 'edit', 'delete', 'show']);
     }
 
     /**
@@ -162,5 +158,9 @@ class OpinionVersionAdmin extends AbstractAdmin
         $query->setParameter('author', $user);
 
         return $query;
+    }
+
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\AnswerableTrait;
@@ -30,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\AppendicesCorrespondToOpinionType()
  */
-class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
+class Opinion implements OpinionContributionInterface
 {
     use UuidTrait;
     use TrashableTrait;
@@ -499,15 +498,6 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     {
         return (
             ($this->isPublished() && $this->getStep() && $this->getStep()->canDisplay($user)) ||
-            $this->getAuthor() === $user ||
-            ($user && $user->isAdmin())
-        );
-    }
-
-    public function canDisplayInBo($user = null): bool
-    {
-        return (
-            ($this->getStep() && $this->getStep()->canDisplayInBO($user)) ||
             $this->getAuthor() === $user ||
             ($user && $user->isAdmin())
         );

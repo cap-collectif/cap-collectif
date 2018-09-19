@@ -2,8 +2,6 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sonata\AdminBundle\Admin\AdminInterface;
@@ -318,15 +316,14 @@ class CRUDController extends Controller
                 sprintf('unable to find the object with id: %s', $id)
             );
         }
-
         if (is_object($existingObject)) {
             if (
-                $existingObject instanceof DisplayableInBOInterface &&
+                $existingObject instanceof AbstractStep &&
                 !$existingObject->canDisplayInBO($this->getUser())
             ) {
                 throw new ProjectAccessDeniedException();
             } elseif (
-                !$existingObject instanceof DisplayableInBOInterface &&
+                !$existingObject instanceof AbstractStep &&
                 !$existingObject->canDisplay($this->getUser())
             ) {
                 throw new ProjectAccessDeniedException();

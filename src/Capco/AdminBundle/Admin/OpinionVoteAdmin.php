@@ -32,11 +32,6 @@ class OpinionVoteAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
 
         $listMapper
             ->add('opinion', 'sonata_type_model', ['label' => 'admin.fields.opinion_vote.opinion'])
@@ -55,11 +50,6 @@ class OpinionVoteAdmin extends Admin
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
         $showMapper
             ->add('opinion', 'sonata_type_model', ['label' => 'admin.fields.opinion_vote.opinion'])
             ->add('user', 'sonata_type_model', ['label' => 'admin.fields.opinion_vote.voter'])
@@ -75,11 +65,6 @@ class OpinionVoteAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
         $formMapper
             ->add('opinion', 'sonata_type_model', ['label' => 'admin.fields.opinion_vote.opinion'])
             ->add('user', 'sonata_type_model_autocomplete', [

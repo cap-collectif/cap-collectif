@@ -46,11 +46,6 @@ class ArgumentVoteAdmin extends Admin
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
         $showMapper
             ->add('argument', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.argument',

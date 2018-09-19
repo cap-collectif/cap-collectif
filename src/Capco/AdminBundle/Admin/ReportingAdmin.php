@@ -3,19 +3,17 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Reporting;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class ReportingAdmin extends Admin
+class ReportingAdmin extends AbstractAdmin
 {
     public function getFeatures()
     {
-        return [
-            'reporting',
-        ];
+        return ['reporting'];
     }
 
     public function getTemplate($name)
@@ -24,7 +22,7 @@ class ReportingAdmin extends Admin
             return 'CapcoAdminBundle:Reporting:show.html.twig';
         }
 
-        return parent::getTemplate($name);
+        return $this->getTemplateRegistry()->getTemplate($name);
     }
 
     /**
@@ -48,18 +46,23 @@ class ReportingAdmin extends Admin
             ->add('Comment', null, [
                 'label' => 'admin.fields.reporting.comment',
             ])
-            ->add('Reporter', 'doctrine_orm_model_autocomplete', [
-                'label' => 'admin.fields.reporting.reporter',
-            ], null, [
-                'property' => 'username',
-            ])
+            ->add(
+                'Reporter',
+                'doctrine_orm_model_autocomplete',
+                [
+                    'label' => 'admin.fields.reporting.reporter',
+                ],
+                null,
+                [
+                    'property' => 'username',
+                ]
+            )
             ->add('createdAt', null, [
                 'label' => 'admin.fields.reporting.created_at',
             ])
             ->add('isArchived', null, [
                 'label' => 'admin.fields.reporting.is_archived',
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -99,8 +102,7 @@ class ReportingAdmin extends Admin
                 'actions' => [
                     'show' => [],
                 ],
-            ])
-        ;
+            ]);
     }
 
     /**

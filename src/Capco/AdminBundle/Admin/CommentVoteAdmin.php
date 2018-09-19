@@ -44,11 +44,6 @@ class CommentVoteAdmin extends Admin
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
         $showMapper
             ->add('comment', 'sonata_type_model', ['label' => 'admin.fields.comment_vote.comment'])
             ->add('user', 'sonata_type_model', ['label' => 'admin.fields.comment_vote.voter'])

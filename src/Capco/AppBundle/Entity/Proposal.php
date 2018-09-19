@@ -1,8 +1,6 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Utils\Map;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
@@ -55,8 +53,7 @@ class Proposal
         Trashable,
         CommentableInterface,
         SelfLinkableInterface,
-        SoftDeleteable,
-        DisplayableInBOInterface
+        SoftDeleteable
 {
     use UuidTrait;
     use ReferenceTrait;
@@ -484,15 +481,6 @@ class Proposal
     {
         if ($this->isPublished() && !$this->isTrashed()) {
             return $this->getStep() ? $this->getStep()->canDisplay($user) : false;
-        }
-
-        return $this->getAuthor() === $user;
-    }
-
-    public function canDisplayInBo($user = null): bool
-    {
-        if ($this->isPublished() && !$this->isTrashed()) {
-            return $this->getStep() ? $this->getStep()->canDisplayInBO($user) : false;
         }
 
         return $this->getAuthor() === $user;

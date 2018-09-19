@@ -12,7 +12,7 @@ class RecentReportingController extends Controller
 {
     /**
      * @Security("has_role('ROLE_ADMIN')")
-     * @Route("/admin/reporting", name="capco_admin_reporting_index")
+     * @Route("/admin/reporting", name="admin_capco_app_reporting_index")
      * @Template("CapcoAdminBundle:RecentReporting:index.html.twig")
      */
     public function indexAction()
@@ -26,6 +26,7 @@ class RecentReportingController extends Controller
             'recentReporting' => true,
             'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
             'admin_pool' => $this->get('sonata.admin.pool'),
+            'admin' => $this->get('capco_admin.admin.reporting'),
         ];
     }
 }

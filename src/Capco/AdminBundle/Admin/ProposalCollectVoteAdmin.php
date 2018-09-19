@@ -26,11 +26,6 @@ class ProposalCollectVoteAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
 
         $listMapper
             ->add('proposal', 'sonata_type_model', ['label' => 'admin.fields.proposal'])
@@ -45,11 +40,6 @@ class ProposalCollectVoteAdmin extends Admin
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
         $showMapper
             ->add('proposal', 'sonata_type_model', [
                 'label' => 'admin.fields.argument_vote.argument',

@@ -1,7 +1,6 @@
 <?php
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -17,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="questionnaire")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireRepository")
  */
-class Questionnaire implements DisplayableInBOInterface
+class Questionnaire
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -252,14 +251,9 @@ class Questionnaire implements DisplayableInBOInterface
         return $this;
     }
 
-    public function canDisplay($user = null): bool
+    public function canDisplay($user): bool
     {
         return $this->getStep() ? $this->getStep()->canDisplay($user) : true;
-    }
-
-    public function canDisplayInBO($user = null): bool
-    {
-        return $this->getStep() ? $this->getStep()->canDisplayInBO($user) : true;
     }
 
     public function canContribute($viewer = null): bool
