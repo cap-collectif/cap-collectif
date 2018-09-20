@@ -138,12 +138,13 @@ class SiteParameterAdmin extends Admin
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'choices' => [
-                    0 => 'Pas de marge (0px)',
-                    50 => 'Petites marges (50px)',
-                    100 => 'Marges par défaut (100px)',
-                    150 => 'Grandes marges (150px)',
-                    200 => 'Marges importantes (200px)',
+                    'Pas de marge (0px)' => 0,
+                    'Petites marges (50px)' => 50,
+                    'Marges par défaut (100px)' => 100,
+                    'Grandes marges (150px)' => 150,
+                    'Marges importantes (200px)' => 200,
                 ],
+
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ('global.locale' === $subject->getKeyname()) {
