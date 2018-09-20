@@ -1,0 +1,13 @@
+LogicJumpConditionInput:
+  type: input-object
+  config:
+    description: 'A particular condition in a logic jump.'
+    fields:
+      id:
+        type: 'ID'
+      operator:
+        type: 'LogicJumpConditionOperator!'
+      question:
+        type: 'Int!'
+      value:
+        type: 'String'

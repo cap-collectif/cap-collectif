@@ -1,12 +1,24 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\LogicJump;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
+use Capco\AppBundle\Repository\AbstractLogicJumpConditionRepository;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Capco\AppBundle\Repository\LogicJumpRepository;
+use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\PersistentCollection;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -21,6 +33,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
     private $formFactory;
     private $questionnaireRepository;
     private $questionRepo;
+    private $abstractQuestionRepo;
     private $logger;
 
     public function __construct(
@@ -28,12 +41,14 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         FormFactory $formFactory,
         QuestionnaireRepository $questionnaireRepository,
         QuestionnaireAbstractQuestionRepository $questionRepo,
+        AbstractQuestionRepository $abstractQuestionRepo,
         LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->questionnaireRepository = $questionnaireRepository;
         $this->questionRepo = $questionRepo;
+        $this->abstractQuestionRepo = $abstractQuestionRepo;
         $this->logger = $logger;
     }
 
@@ -53,6 +68,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         );
 
         if (isset($arguments['questions'])) {
+
             $questionsOrderedByBase = $form
                 ->getData()
                 ->getRealQuestions()
@@ -66,6 +82,9 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
             //we stock the order sent to apply it after
             $questionsOrderedById = [];
             foreach ($arguments['questions'] as $key => &$argument) {
+                if(!empty($arguments['questions']['jumps'])) {
+                    $this->persistLogicJump($argument['question']['jumps']);
+                }
                 //we are updating a question
                 if (isset($argument['question']['id'])) {
                     $questionsOrderedById[] = $argument['question']['id'];
@@ -108,5 +127,23 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         $this->em->flush();
 
         return ['questionnaire' => $questionnaire];
+    }
+
+    public function persistLogicJump(array $jumps): void
+    {
+        foreach ($jumps as $jump) {
+            $logicJump = $this->em->getRepository(LogicJumpRepository::class)->find($jump['id']);
+            if($logicJump) {
+                $logicJump->setOrigin($this->abstractQuestionRepo->find($jump['origin']));
+                $logicJump->setDestination($this->abstractQuestionRepo->find($jump['destination']));
+
+                foreach ($jump['conditions'] as $condition) {
+                    $logicJumpCondition = $this->em->getRepository(AbstractLogicJumpConditionRepository::class)->find($condition['id']);
+
+                    $logicJumpCondition->setQuestion($this->abstractQuestionRepo->find($condition['question']));
+                    $logicJumpCondition->setValue($this->em->getRepository(QuestionChoiceRepository::class)->find($condition['value']));
+                }
+            }
+        }
     }
 }

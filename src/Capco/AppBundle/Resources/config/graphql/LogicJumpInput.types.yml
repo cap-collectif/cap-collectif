@@ -1,0 +1,14 @@
+LogicJumpInput:
+  type: input-object
+  config:
+    fields:
+      id:
+        type: 'ID'
+      always:
+        type: 'Boolean'
+      origin:
+        type: 'Int!'
+      destination:
+        type: 'Int!'
+      conditions:
+        type: '[LogicJumpConditionInput]'

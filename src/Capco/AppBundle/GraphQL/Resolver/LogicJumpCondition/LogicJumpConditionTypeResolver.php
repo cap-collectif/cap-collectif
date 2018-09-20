@@ -6,7 +6,9 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
 
-class LogicJumpConditionTypeResolver implements ResolverInterface
+class
+
+LogicJumpConditionTypeResolver implements ResolverInterface
 {
     private $typeResolver;
 

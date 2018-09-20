@@ -3,6 +3,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\LogicJump;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -11,10 +12,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method LogicJump[]    findAll()
  * @method LogicJump[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LogicJumpRepository extends ServiceEntityRepository
+class LogicJumpRepository extends EntityRepository
 {
-    public function __construct(RegistryInterface $registry)
-    {
-        parent::__construct($registry, LogicJump::class);
-    }
+
 }

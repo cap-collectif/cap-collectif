@@ -69,6 +69,10 @@ final class QuestionInputType extends InputObjectType implements GeneratedTypeIn
                     'type' => Type::string(),
                     'description' => null,
                 ],
+                'jumps' => [
+                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('LogicJumpInput')),
+                    'description' => null,
+                ],
             ];
             },
         ];

@@ -19,7 +19,13 @@ type Props = RelayProps &
     features: FeatureToggles,
   };
 
-
+export type Jumps = $ReadOnlyArray<{|
+  +id: string,
+  +always: boolean,
+  +origin: ?Object,
+  +destination: ?Object,
+  +conditions: ?Object,
+|}>;
 export type MultipleChoiceQuestionValidationRulesTypes = 'EQUAL' | 'MAX' | 'MIN';
 export type QuestionChoiceColor = 'DANGER' | 'INFO' | 'PRIMARY' | 'SUCCESS' | 'WARNING';
 export type QuestionTypeValue =
@@ -50,7 +56,7 @@ type FormValues = {
       type: MultipleChoiceQuestionValidationRulesTypes,
       number: number,
     |},
-    jumps: Object[],
+    jumps: Jumps,
     questionChoices?: ?$ReadOnlyArray<{|
       id: string,
       title: string,
@@ -110,15 +116,27 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
           otherAllowed: question.isOtherAllowed,
           randomQuestionChoices: question.isRandomQuestionChoices,
           isOtherAllowed: undefined,
-          isRandomQuestionChoices: undefined,
+          isRandomQuestionChoices: undefined
         },
       };
       if (multipleChoiceQuestions.indexOf(question.type) !== -1 && question.questionChoices) {
         questionInput.question.questionChoices = question.questionChoices.map(choice => ({
           ...choice,
           kind: undefined,
-          image: choice.image ? choice.image.id : null,
+          image: choice.image ? choice.image.id : null
         }));
+        if(question.jumps) {
+          questionInput.question.jumps = question.jumps.map(jump => ({
+            ...jump,
+            origin: parseInt(jump.origin.id, 10),
+            destination: parseInt(jump.destination.id, 10),
+            conditions: jump.conditions.map(condition => ({
+              ...condition,
+              question: parseInt(condition.question.id, 10),
+              value: condition.value.id
+            }))
+          }))
+        }
       }
 
       return questionInput;
