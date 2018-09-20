@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Nav } from 'react-bootstrap';
+import {Collapse, Nav} from 'react-bootstrap';
 import ConsultationPlanItem from './ConsultationPlanItem';
 
 type Props = {
@@ -9,25 +9,34 @@ type Props = {
   group: number
 };
 
-export class ConsultationPlanItems extends React.Component<Props> {
+type State = {
+  isOpen: boolean,
+};
+
+export class ConsultationPlanItems extends React.Component<Props, State> {
+  state = {
+    isOpen: false,
+  };
+
   render() {
     const { section, level, group } = this.props;
 
     return (
-      <Nav bsStyle="pills" stacked className="panel">
-        <ConsultationPlanItem section={section} level={level} group={group}/>
-        <div
-          id={`collapseCslt${section.__id}`}
-          className="collapse"> {/* {level === 0 ? 'collapse' : 'collapse in'} */}
-          {section.sections &&
+      <Nav bsStyle="pills" stacked> {/* className="panel" */}
+        <ConsultationPlanItem section={section} level={level} group={group} onCollapse={(activeItem) => {this.setState({ isOpen: activeItem })}}/>
+        <Collapse in={this.state.isOpen}>
+          <div
+            id={`collapseCslt${section.__id}`}
+          > {/* {level === 0 ? 'collapse' : 'collapse in'} className="collapse" in={this.state.isOpen} */}
+            {section.sections &&
             section.sections.map((subSelection, index) => (
               <ConsultationPlanItems key={index} section={subSelection} level={level + 1} group={(group*10)+(index+1)} />
             ))}
-        </div>
+          </div>
+        </Collapse>
       </Nav>
     );
   }
 }
 
 export default ConsultationPlanItems;
-

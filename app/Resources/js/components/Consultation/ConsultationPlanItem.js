@@ -11,21 +11,36 @@ type Props = {
   level: number,
   group: number,
   activeItem: number,
+  onCollapse: (collapseItem: boolean) => {},
 };
 
 export class ConsultationPlanItem extends React.Component<Props> {
-  componentDidUpdate() {
-    const { activeItem, group, section } = this.props;
+  componentDidUpdate(prevProps) {
+    const { activeItem, group, onCollapse } = this.props;
 
-    if(group === activeItem) {
-      $(`#nav-opinion-type--${section.slug}`).collapse({ toggle: true });
+    console.warn(activeItem, group);
+
+    if(prevProps.activeItem !== this.props.activeItem) {
+      if(group === Number(String(this.props.activeItem).slice(0, (this.props.level+1)))) {
+        onCollapse(true);
+        console.log(activeItem, group);
+        // console.warn(group, Number(String(this.props.activeItem).slice(0, (this.props.level+1))));
+      } else {
+        onCollapse(false);
+      }
+
+      if(group === activeItem) {
+        // console.log(section.id);
+        // $(`#nav-opinion-type--${section.slug}`).collapse({ toggle: true });
+      }
+
+      // console.warn(activeItem, group);
+      // onCollapse(group === activeItem);
     }
-
-    console.log(activeItem);
   }
 
   render() {
-    const { section, level } = this.props;
+    const { section, level, activeItem, group } = this.props;
 
     return (
       <NavItem

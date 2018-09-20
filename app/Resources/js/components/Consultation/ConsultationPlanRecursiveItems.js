@@ -34,7 +34,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
               <i className="cap cap-delete-1" />
             </a>
           </div>
-          <div className="list" id="myAccordion">
+          <div className="list" > {/* id="myAccordion" */}
             {consultation.sections &&
               consultation.sections
                 .filter(Boolean)
@@ -44,7 +44,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
                     sectionKey={index}
                     section={section}
                     level={0}
-                    group={1}
+                    group={index + 1}
                   />
                 ))}
           </div>

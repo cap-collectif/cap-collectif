@@ -21,7 +21,7 @@ export class SectionRecursiveList extends React.Component<Props> {
           consultation.sections
             .filter(Boolean)
             .map((section, index) => (
-              <SectionList key={index} consultation={consultation} section={section} level={0} group={1}/>
+              <SectionList key={index} consultation={consultation} section={section} level={0} group={index+1}/>
             ))}
       </div>
     );
