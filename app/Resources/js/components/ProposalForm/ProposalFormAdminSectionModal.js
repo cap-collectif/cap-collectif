@@ -3,9 +3,9 @@ import * as React from 'react';
 import { Field } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import component from '../../Form/Field';
-import CloseButton from '../../Form/CloseButton';
-import SubmitButton from '../../Form/SubmitButton';
+import component from '../Form/Field';
+import CloseButton from '../Form/CloseButton';
+import SubmitButton from '../Form/SubmitButton';
 
 type Props = {
   show: boolean,
@@ -16,7 +16,14 @@ type Props = {
   formName: string,
 };
 
-const SectionAdminForm = (props: Props) => {
+const optional = (
+  <span className="excerpt">
+    {' '}
+    <FormattedMessage id="global.form.optional" />
+  </span>
+);
+
+const ProposalFormAdminSectionModal = (props: Props) => {
   const { show, onClose, member, onSubmit, isCreating } = props;
 
   return (
@@ -41,7 +48,12 @@ const SectionAdminForm = (props: Props) => {
           id={`${member}.description`}
           name={`${member}.description`}
           type="editor"
-          label={<FormattedMessage id="proposal.description" />}
+          label={
+            <span>
+              <FormattedMessage id="proposal.description" />
+              {optional}
+            </span>
+          }
           component={component}
         />
       </Modal.Body>
@@ -53,4 +65,4 @@ const SectionAdminForm = (props: Props) => {
   );
 };
 
-export default SectionAdminForm;
+export default ProposalFormAdminSectionModal;

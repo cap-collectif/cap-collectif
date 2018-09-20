@@ -3,7 +3,6 @@ import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { formValueSelector, arrayPush, arrayMove } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { bindActionCreators } from 'redux';
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import {
   DragDropContext,
@@ -17,7 +16,7 @@ import ProposalFormAdminQuestionModal from './ProposalFormAdminQuestionModal';
 import type { GlobalState, Dispatch } from '../../types';
 import { ProposalFormAdminDeleteQuestionModal } from './ProposalFormAdminDeleteQuestionModal';
 import { QuestionItem } from '../Question/QuestionItem';
-import SectionAdminForm from './Section/SectionAdminForm';
+import ProposalFormAdminSectionModal from './ProposalFormAdminSectionModal';
 
 type Props = {
   dispatch: Dispatch,
@@ -25,8 +24,6 @@ type Props = {
   questions: Array<Object>,
   formName: string,
   intl: IntlShape,
-  arrayPush: Function,
-  arrayMove: Function,
 };
 
 type State = {
@@ -61,16 +58,14 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
   }
 
   onDragEnd = (result: DropResult) => {
+    const { dispatch } = this.props;
     // dropped outside the list
     if (!result.destination) {
       return;
     }
 
-    this.props.arrayMove(
-      this.props.formName,
-      'questions',
-      result.source.index,
-      result.destination.index,
+    dispatch(
+      arrayMove(this.props.formName, 'questions', result.source.index, result.destination.index),
     );
   };
 
@@ -115,24 +110,28 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
   };
 
   handleCreateQuestion = () => {
-    const { fields, formName } = this.props;
+    const { fields, formName, dispatch } = this.props;
 
-    this.props.arrayPush(formName, 'questions', {
-      private: false,
-      required: false,
-    });
+    dispatch(
+      arrayPush(formName, 'questions', {
+        private: false,
+        required: false,
+      }),
+    );
 
     this.setState({ editIndex: fields.length });
   };
 
   handleCreateSection = () => {
-    const { fields, formName } = this.props;
+    const { fields, formName, dispatch } = this.props;
 
-    this.props.arrayPush(formName, 'questions', {
-      private: false,
-      required: false,
-      type: 'section',
-    });
+    dispatch(
+      arrayPush(formName, 'questions', {
+        private: false,
+        required: false,
+        type: 'section',
+      }),
+    );
     this.setState({ editIndexSection: fields.length });
   };
 
@@ -181,7 +180,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                               show={index === editIndex}
                               formName={formName}
                             />
-                            <SectionAdminForm
+                            <ProposalFormAdminSectionModal
                               show={index === editIndexSection}
                               member={member}
                               isCreating={!!questions[index].id}
@@ -231,7 +230,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
           bsStyle="primary"
           className="btn-outline-primary box-content__toolbar"
           onClick={this.handleCreateSection}>
-          <i className="cap cap-folder-add" /> <FormattedMessage id="create-section" />
+          <i className="cap cap-small-caps-1" /> <FormattedMessage id="create-section" />
         </Button>
         <Button
           bsStyle="primary"
@@ -252,9 +251,4 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Pr
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ arrayPush, arrayMove }, dispatch);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(injectIntl(ProposalFormAdminQuestions));
+export default connect(mapStateToProps)(injectIntl(ProposalFormAdminQuestions));
