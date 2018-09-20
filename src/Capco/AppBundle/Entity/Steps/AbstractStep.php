@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
@@ -35,7 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "questionnaire" = "QuestionnaireStep",
  * })
  */
-abstract class AbstractStep
+abstract class AbstractStep implements DisplayableInBOInterface
 {
     use DateHelperTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait, RequirementTrait;
 
@@ -312,7 +313,7 @@ abstract class AbstractStep
 
     public function canDisplayInBO($user = null): bool
     {
-        return $this->getProject() && $this->getProject()->canDisplay($user);
+        return $this->getProject() ? $this->getProject()->canDisplay($user) : true;
     }
 
     public function canContribute($user = null): bool
