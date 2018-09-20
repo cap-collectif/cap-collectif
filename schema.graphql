@@ -1777,7 +1777,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   availableSourceCategories: [SourceCategory]
 
   # Followers connection
-  followers(after: String, first: Int, before: String, last: Int): FollowerConnection
+  followers(after: String, first: Int, before: String, last: Int, orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}): FollowerConnection
 
   # Identifies the viewer following configuration on the entity.
   viewerFollowingConfiguration: SubscriptionTypeValue
@@ -1837,48 +1837,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
-
-  # The sources related to the sourceable.
-  sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}): SourceConnection!
-
-  # The viewer unpublished sources related to the sourceable (only visible by viewer).
-  viewerSourcesUnpublished(after: String, first: Int, before: String, last: Int): SourceConnection!
-
-  # The available sources categories of to the sourceable.
-  availableSourceCategories: [SourceCategory]
-
-  # Followers connection
-  followers(after: String, first: Int, before: String, last: Int, orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}): FollowerConnection
-
-  # Identifies the viewer following configuration on the entity.
-  viewerFollowingConfiguration: SubscriptionTypeValue
-
-  # Identifies if the viewer is following the entity.
-  viewerIsFollowing: Boolean!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
