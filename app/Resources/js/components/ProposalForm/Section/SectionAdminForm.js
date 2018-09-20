@@ -17,14 +17,16 @@ type Props = {
 };
 
 const SectionAdminForm = (props: Props) => {
-  const { show, onClose, member, onSubmit } = props;
+  const { show, onClose, member, onSubmit, isCreating } = props;
 
   return (
     <Modal show={show} aria-labelledby="proposal-form-admin-question-modal-title-lg">
       <Modal.Header>
         <Modal.Title
           id="proposal-form-admin-question-modal-title-lg"
-          children={<FormattedMessage id={'modify-section'} />}
+          children={
+            <FormattedMessage id={!isCreating ? 'question_modal.create.title' : 'modify-section'} />
+          }
         />
       </Modal.Header>
       <Modal.Body>

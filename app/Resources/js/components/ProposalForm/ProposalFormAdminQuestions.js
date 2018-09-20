@@ -101,8 +101,12 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     });
   };
 
-  handleEdit = (index: number) => {
-    this.setState({ editIndex: index });
+  handleEdit = (index: number, type: string) => {
+    if (type === 'section') {
+      this.setState({ editIndexSection: index });
+    } else {
+      this.setState({ editIndex: index });
+    }
   };
 
   handleSubmit = () => {
@@ -194,7 +198,11 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                                   <Button
                                     bsStyle="warning"
                                     className="btn-outline-warning"
-                                    onClick={this.handleEdit.bind(this, index)}>
+                                    onClick={this.handleEdit.bind(
+                                      this,
+                                      index,
+                                      questions[index].type,
+                                    )}>
                                     <i className="fa fa-pencil" />{' '}
                                     <FormattedMessage id="global.edit" />
                                   </Button>
