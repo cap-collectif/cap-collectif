@@ -10,32 +10,25 @@ type Props = {
   section: ConsultationPlanItem_section,
   level: number,
   group: number,
-  activeItem: number,
+  activeItems: Array<string>,
   onCollapse: (collapseItem: boolean) => {},
 };
 
 export class ConsultationPlanItem extends React.Component<Props> {
   componentDidUpdate(prevProps) {
-    const { activeItem, group, onCollapse } = this.props;
+    const { activeItems, group, onCollapse, section } = this.props;
 
-    console.warn(activeItem, group);
-
-    if(prevProps.activeItem !== this.props.activeItem) {
-      if(group === Number(String(this.props.activeItem).slice(0, (this.props.level+1)))) {
+    if(prevProps.activeItems !== this.props.activeItems) {
+      if(this.props.activeItems.includes(section.id)) {
         onCollapse(true);
-        console.log(activeItem, group);
-        // console.warn(group, Number(String(this.props.activeItem).slice(0, (this.props.level+1))));
       } else {
         onCollapse(false);
       }
 
-      if(group === activeItem) {
-        // console.log(section.id);
-        // $(`#nav-opinion-type--${section.slug}`).collapse({ toggle: true });
+      if(this.props.activeItems.slice(-1).includes(section.id)) {
+        console.log(section.id);
+        // add class active à son parent
       }
-
-      // console.warn(activeItem, group);
-      // onCollapse(group === activeItem);
     }
   }
 
@@ -65,7 +58,7 @@ export class ConsultationPlanItem extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  activeItem: state.project.selectedActiveItem,
+  activeItems: state.project.selectedActiveItem,
 });
 
 const container = connect(mapStateToProps)(ConsultationPlanItem);

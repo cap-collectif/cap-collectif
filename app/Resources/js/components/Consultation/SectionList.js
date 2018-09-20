@@ -14,7 +14,7 @@ export class SectionList extends React.Component<Props> {
     const { consultation, section, level, group } = this.props;
 
     return (
-      <div className="section-list_container" data-group={group}>
+      <div className="section-list_container" id={section.__id} data-group={group}>
         <Section consultation={consultation} section={section} level={level} />
         {section.sections &&
           section.sections.map((subSelection, index) => (

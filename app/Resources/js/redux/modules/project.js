@@ -22,7 +22,7 @@ export type State = {
   +theme: ?string,
   +isLoading: boolean,
   +count: number,
-  +selectedActiveItem: number,
+  +selectedActiveItem: Array<string>,
 };
 
 const initialState: State = {
@@ -42,7 +42,7 @@ const initialState: State = {
   theme: null,
   isLoading: true,
   count: 0,
-  selectedActiveItem: null,
+  selectedActiveItem: [],
 };
 type RequestFetchProjectsAction = { type: 'project/PROJECTS_FETCH_REQUESTED' };
 type ChangePageAction = { type: 'project/CHANGE_PAGE', page: number };
@@ -71,7 +71,7 @@ type OpenConsultationPlanAction = {
   type: 'project/OPEN_CONSULTATION_PLAN',
   id: string,
 };
-type ChangeConsultationPlanActiveItemAction = { type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM', item: number };
+type ChangeConsultationPlanActiveItemAction = { type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM', item: Array<string> };
 
 
 export type ProjectAction =
@@ -122,7 +122,7 @@ export const openConsultationPlan = (id: string): OpenConsultationPlanAction => 
   id,
 });
 
-export const changeConsultationPlanActiveItem = (item: number): ChangeConsultationPlanActiveItemAction => ({
+export const changeConsultationPlanActiveItem = (item: Array<string>): ChangeConsultationPlanActiveItemAction => ({
   type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM',
   item,
 });

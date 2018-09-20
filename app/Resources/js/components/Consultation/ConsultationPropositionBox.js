@@ -71,7 +71,7 @@ export class ConsultationPropositionBox extends React.Component<Props> {
   scrollSpy = () => {
     const { dispatch } = this.props;
     const sectionItems = document.querySelectorAll('.section-list_container');
-    const actifItemArray = [];
+    const actifItems = [];
 
     sectionItems.forEach(item => {
       const itemPosition = item.getBoundingClientRect();
@@ -79,19 +79,16 @@ export class ConsultationPropositionBox extends React.Component<Props> {
       if (itemPosition) {
         // 50 is height of nav
         if ((itemPosition.top - 20 < 0) && (itemPosition.top - 20 > -itemPosition.height + 40)) {
-          actifItemArray.push(item.dataset.group);
+          actifItems.push(item.id);
         } else {
           // console.warn(item);
         }
       }
     });
 
-    if(actifItemArray.length > 0) {
-      const actifItem = Math.max.apply(null, actifItemArray);
-
-      // console.log(actifItem);
-
-      dispatch(changeConsultationPlanActiveItem(actifItem));
+    if(actifItems.length > 0) {
+      //  const actifItem = Math.max.apply(null, actifItemArray);
+      dispatch(changeConsultationPlanActiveItem(actifItems));
     }
   };
 
