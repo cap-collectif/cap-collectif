@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Modal, ListGroupItem, Button } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { UserInGroupModal_group } from './__generated__/UserInGroupModal_group.graphql';
 import { UserAvatar } from '../../User/UserAvatar';
@@ -16,6 +16,7 @@ type Props = RelayProps & {
   show: boolean,
   handleClose: () => void,
   relay: RelayPaginationProp,
+  intl: IntlShape,
 };
 type State = {
   loading: boolean,
@@ -35,7 +36,7 @@ export class UserInGroupModal extends React.Component<Props, State> {
     });
   };
   render() {
-    const { show, group, relay } = this.props;
+    const { show, group, relay, intl } = this.props;
     return (
       <div>
         <Modal
@@ -60,8 +61,23 @@ export class UserInGroupModal extends React.Component<Props, State> {
                   .map(user => (
                     <ListGroupItem className="d-flex text-left" key={user.id} id={user.id}>
                       {/* $FlowFixMe */}
-                      <UserAvatar user={user} defaultAvatar={null} />
-                      <p className="align-self-center">{user.username}</p>
+                      <UserAvatar
+                        user={{
+                          username: user.username,
+                          media: user.media,
+                          _links: { profile: user.show_url },
+                        }}
+                        defaultAvatar={null}
+                      />
+                      <a
+                        href={user.show_url}
+                        className="align-self-center"
+                        title={intl.formatMessage(
+                          { id: 'usernames-profile' },
+                          { userName: user.username },
+                        )}>
+                        {user.username}
+                      </a>
                     </ListGroupItem>
                   ))}
                 {relay.hasMore() && (
@@ -86,8 +102,10 @@ export class UserInGroupModal extends React.Component<Props, State> {
   }
 }
 
+const container = injectIntl(UserInGroupModal);
+
 export default createPaginationContainer(
-  UserInGroupModal,
+  container,
   graphql`
     fragment UserInGroupModal_group on Group
       @argumentDefinitions(
