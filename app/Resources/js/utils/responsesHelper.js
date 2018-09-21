@@ -108,9 +108,10 @@ export const formatSubmitResponses = (
         value: JSON.stringify(res.value),
       };
     } else if (questionType === 'number') {
+      const value = Number(res.value) ? Number(res.value) : 0;
       return {
         question,
-        value: Number(res.value),
+        value,
       };
     }
     return { value: null, question };
@@ -238,7 +239,7 @@ export const validateResponses = (
       question.type === 'number' &&
       response.value &&
       typeof response.value === 'string' &&
-      checkOnlyNumbers(response.value)
+      !checkOnlyNumbers(response.value)
     ) {
       return { value: `please-enter-a-number` };
     }

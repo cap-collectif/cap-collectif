@@ -10,8 +10,12 @@ export const isUrl = (value: ?string): boolean => {
 };
 
 export const checkOnlyNumbers = (input: string): boolean => {
-  const regexS = '[0-9,-]+';
+  const regexS = /(^-?(\d*(\.|,)?)?\d*)/gm;
   const regex = new RegExp(regexS);
   const results = regex.exec(input);
-  return !results || results[0] !== input;
+  if (input === '-') {
+    return false;
+  }
+  console.log(results);
+  return results && results[0] === input;
 };

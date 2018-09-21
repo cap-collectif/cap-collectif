@@ -29,7 +29,7 @@ const textReponse = {
 
 const numberReponse = {
   questionId: '2',
-  value: 12,
+  value: '12',
 };
 
 const className = 'test';
@@ -44,16 +44,9 @@ describe('validateResponses', () => {
     expect(value).toEqual({ responses: [undefined, undefined] });
   });
 
-  it('Should return no errors with a correct string number response', () => {
-    const questions = [numberQuestion];
-    const responses = [{ ...numberReponse, value: '123456' }];
-    const value = validateResponses(questions, responses, className, intl);
-    expect(value).toEqual({ responses: [undefined] });
-  });
-
   it('Should return no errors with a correct negative float number', () => {
     const questions = [numberQuestion];
-    const responses = [{ ...numberReponse, value: -4242.1212 }];
+    const responses = [{ ...numberReponse, value: '-4242.1212' }];
     const value = validateResponses(questions, responses, className, intl);
     expect(value).toEqual({ responses: [undefined] });
   });
