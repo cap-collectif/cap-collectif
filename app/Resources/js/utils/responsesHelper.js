@@ -222,60 +222,55 @@ export const validateResponses = (
 ): {
   responses?: ResponsesError,
 } => {
-  const responsesError = questions
-    .map(question => {
-      const response = responses.filter(res => res && res.questionId === question.id)[0];
-      if (question.required) {
-        if (question.type === 'medias') {
-          if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
-            return { value: `${className}.constraints.field_mandatory` };
-          }
-        } else if (!response || !response.value) {
+  const responsesError = questions.map(question => {
+    const response = responses.filter(res => res && res.questionId === question.id)[0];
+    if (question.required) {
+      if (question.type === 'medias') {
+        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
           return { value: `${className}.constraints.field_mandatory` };
         }
+      } else if (!response || !response.value) {
+        return { value: `${className}.constraints.field_mandatory` };
+      }
+    }
+
+    if (
+      question.type === 'number' &&
+      response.value &&
+      typeof response.value === 'string' &&
+      checkOnlyNumbers(response.value)
+    ) {
+      return { value: `please-enter-a-number` };
+    }
+
+    if (
+      question.validationRule &&
+      question.type !== 'button' &&
+      response.value &&
+      typeof response.value === 'object' &&
+      (Array.isArray(response.value.labels) || Array.isArray(response.value))
+    ) {
+      const rule = question.validationRule;
+      const responsesNumber = getResponseNumber(response.value);
+      if (rule.type === 'MIN' && (rule.number && responsesNumber < rule.number)) {
+        return {
+          value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
+        };
       }
 
-      if (
-        question.type === 'number' &&
-        response.value &&
-        typeof response.value === 'string' &&
-        checkOnlyNumbers(response.value)
-      ) {
-        return { value: `please-enter-a-number` };
+      if (rule.type === 'MAX' && (rule.number && responsesNumber > rule.number)) {
+        return {
+          value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
+        };
       }
 
-      if (
-        question.validationRule &&
-        question.type !== 'button' &&
-        response.value &&
-        typeof response.value === 'object' &&
-        (Array.isArray(response.value.labels) || Array.isArray(response.value))
-      ) {
-        const rule = question.validationRule;
-        const responsesNumber = getResponseNumber(response.value);
-        if (rule.type === 'MIN' && (rule.number && responsesNumber < rule.number)) {
-          return {
-            value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
-          };
-        }
-
-        if (rule.type === 'MAX' && (rule.number && responsesNumber > rule.number)) {
-          return {
-            value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
-          };
-        }
-
-        if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
-          return {
-            value: intl.formatMessage(
-              { id: 'reply.constraints.choices_equal' },
-              { nb: rule.number },
-            ),
-          };
-        }
+      if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
+        return {
+          value: intl.formatMessage({ id: 'reply.constraints.choices_equal' }, { nb: rule.number }),
+        };
       }
-    })
-    .filter(n => n);
+    }
+  });
 
   return responsesError && responsesError.length ? { responses: responsesError } : {};
 };

@@ -41,21 +41,21 @@ describe('validateResponses', () => {
     const questions = [textQuestion, numberQuestion];
     const responses = [textReponse, numberReponse];
     const value = validateResponses(questions, responses, className, intl);
-    expect(value).toEqual({});
+    expect(value).toEqual({ responses: [undefined, undefined] });
   });
 
   it('Should return no errors with a correct string number response', () => {
     const questions = [numberQuestion];
     const responses = [{ ...numberReponse, value: '123456' }];
     const value = validateResponses(questions, responses, className, intl);
-    expect(value).toEqual({});
+    expect(value).toEqual({ responses: [undefined] });
   });
 
   it('Should return no errors with a correct negative float number', () => {
     const questions = [numberQuestion];
     const responses = [{ ...numberReponse, value: -4242.1212 }];
     const value = validateResponses(questions, responses, className, intl);
-    expect(value).toEqual({});
+    expect(value).toEqual({ responses: [undefined] });
   });
 
   it('Should return object errors please-enter-a-number', () => {
