@@ -14,6 +14,7 @@ describe('<ConsultationPropositionBox />', () => {
       timeless: false,
       status: 'open',
     },
+    dispatch: jest.fn(),
     showConsultationPlan: true
   };
 

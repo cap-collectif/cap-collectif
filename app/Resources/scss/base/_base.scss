@@ -313,16 +313,6 @@ svg.avatar-group {
 /* ======================= Consult plan ============================*/
 
 .consultation-plan {
-    .affix {
-        top: 60px;
-        position: fixed;
-        z-index: 20 !important;
-    }
-
-    .affix-bottom {
-        position: absolute;
-    }
-
     &_open {
         background-color: $page-bgc;
 
@@ -338,19 +328,12 @@ svg.avatar-group {
             width: 157.5px;
         }
 
-        .panel {
-            all: unset;
-        }
-
         .header {
             color: $dark-gray;
             display: flex;
             justify-content: space-between;
             border-bottom: 1px solid $border-color;
-
-            .cap-android-menu {
-                top: 5px;
-            }
+            text-transform: uppercase;
 
             a {
                 color: $dark-gray;
@@ -358,9 +341,23 @@ svg.avatar-group {
         }
 
         .list {
-            max-height: calc(100vh - 115px);
+            max-height: calc(100vh - 160px);
             overflow-y: scroll;
         }
+    }
+
+    &__back-to-top {
+        padding: 15px 0;
+        color: $black;
+
+        a {
+            color: $black;
+            font-weight: 300;
+        }
+    }
+
+    &_close {
+        text-transform: uppercase;
     }
 
     &:not(.affix) .consultation-plan_close {
@@ -368,39 +365,28 @@ svg.avatar-group {
         left: 15px;
     }
 
-    &_close {
-        padding: 7px 15px;
-        border: 1px solid $primary-color;
-        text-align: center;
-        color: $primary-color;
-        border-radius: 4px;
-        line-height: 19px;
-
-        //&:not(.affix) {
-        //    position: absolute;
-        //    left: 15px;
-        //}
-
-        .cap-android-menu {
-            right: 0;
-        }
-
-        a {
-            color: $primary-color;
-        }
+    .affix {
+        top: 60px;
+        position: fixed;
+        z-index: 20 !important;
     }
 
-    a {
-        text-decoration: none;
-        cursor: pointer;
+    .affix-bottom {
+        position: absolute;
     }
 
     .cap-android-menu {
+        top: 5px;
         font-size: 21px;
     }
 
     .cap-delete-1 {
         font-size: 12px;
+    }
+
+    a {
+        text-decoration: none;
+        cursor: pointer;
     }
 
     .nav.nav-pills {
@@ -423,30 +409,14 @@ svg.avatar-group {
         }
 
         .level {
-            &--0 {
-                font-weight: 600;
-            }
-
-            &--1 {
-                padding-left: 20px;
-                font-weight: 500;
-            }
-
-            &--2 {
-                padding-left: 40px;
-                font-weight: 400;
-            }
-
-            &--3 {
-                padding-left: 60px;
-                font-weight: 300;
-            }
-
-            &--4 {
-                padding-left: 80px;
-                font-weight: 300;
+            @for $i from 0 to 4 {
+                $p: 20 * $i;
+                $w: 600 - ($i * 100);
+                &--#{$i} {
+                    padding-left: #{$p}px;
+                    font-weight: #{$w};
+                }
             }
         }
-
     }
 }

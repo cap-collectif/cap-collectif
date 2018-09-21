@@ -101,19 +101,6 @@ Capco\AppBundle\Entity\OpinionType:
     votesThresholdHelpText: <text(200)>
     consultationStepType: '@typePJL'
     parent: '@opinionType5'
-  opinionType7bis:
-    id: 'opinionType7bis'
-    title: Sous-sous-partie 1
-    position: 1
-    color: red
-    defaultFilter: positions
-    isEnabled: true
-    versionable: true
-    votesHelpText: <text(200)>
-    votesThreshold: 5
-    votesThresholdHelpText: <text(200)>
-    consultationStepType: '@typePJL'
-    parent: '@opinionType7'
   opinionType8:
     id: 'opinionType8'
     title: Le problème constaté

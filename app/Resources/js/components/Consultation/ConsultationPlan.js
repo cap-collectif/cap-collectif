@@ -19,33 +19,25 @@ type Props = {
   step: Step,
 };
 
-type State = {
-  topPlan: ?number,
-};
-
-export class ConsultationPlan extends React.Component<Props, State> {
-  state = {
-    topPlan: null,
-  };
-
-  componentDidMount() {
+export class ConsultationPlan extends React.Component<Props> {
+  getOffsetTop = () => {
     const planContainer = document.getElementById('consultation-plan');
     const mainContainer = document.querySelector('body');
     const topPlanContainer = planContainer && planContainer.getBoundingClientRect().top;
     const topMainContainer = mainContainer && mainContainer.getBoundingClientRect().top;
     // 50 is height of nav
-    const newTopPlan =
+    const topPlan =
       topPlanContainer && topMainContainer && topPlanContainer - topMainContainer - 50;
 
-    // eslint-disable-next-line
-    this.setState({
-      topPlan: newTopPlan || null,
-    });
-  }
+    if(topPlan) {
+      return topPlan;
+    }
+
+    return 655;
+  };
 
   render() {
     const { step } = this.props;
-    const { topPlan } = this.state;
 
     const renderConsultationPlanRecursiveItems = ({
       error,
@@ -71,7 +63,8 @@ export class ConsultationPlan extends React.Component<Props, State> {
       <div
         // id="scrollspy"
         data-spy="affix"
-        data-offset-top={topPlan || '655'}
+        // data-offset-top={topPlan || '655'}
+        data-offset-top={this.getOffsetTop()}
         data-offset-bottom="450">
         <QueryRenderer
           environment={environment}

@@ -5,39 +5,46 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { NavItem } from 'react-bootstrap';
 import type { ConsultationPlanItem_section } from './__generated__/ConsultationPlanItem_section.graphql';
 import config from '../../config';
+import type { State } from '../../types';
 
 type Props = {
   section: ConsultationPlanItem_section,
   level: number,
-  group: number,
   activeItems: Array<string>,
   onCollapse: (collapseItem: boolean) => {},
 };
 
 export class ConsultationPlanItem extends React.Component<Props> {
-  componentDidUpdate(prevProps) {
-    const { activeItems, group, onCollapse, section } = this.props;
+  componentDidUpdate(prevProps: Props) {
+    const { activeItems, onCollapse, section } = this.props;
 
     if(prevProps.activeItems !== this.props.activeItems) {
-      if(this.props.activeItems.includes(section.id)) {
+      const item = document.getElementById(`nav-opinion-type--${section.slug}`);
+      const parentItem = item.parentNode;
+
+      if(activeItems.includes(section.id)) {
         onCollapse(true);
       } else {
         onCollapse(false);
       }
 
-      if(this.props.activeItems.slice(-1).includes(section.id)) {
-        console.log(section.id);
-        // add class active à son parent
+      if(parentItem) {
+        if(activeItems.slice(-1).includes(section.id)) {
+          parentItem.classList.add('active');
+        } else {
+          parentItem.classList.remove('active');
+        }
       }
     }
   }
 
   render() {
-    const { section, level, activeItem, group } = this.props;
+    const { section, level } = this.props;
 
     return (
       <NavItem
         className={`level--${level}`}
+        // ref={this.myRef}
         data-toggle="collapse"
         data-target={`#collapseCslt${section.id}`}
         data-parent={level === 0 && '#myAccordion'}
@@ -47,7 +54,7 @@ export class ConsultationPlanItem extends React.Component<Props> {
             const anchor = document.getElementById(`opinion-type--${section.slug}`);
 
             if (anchor) {
-              anchor.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' }); // OU juste true // { alignWithTop: true, behavior: 'smooth' }
+              anchor.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
             }
           }
         }}>

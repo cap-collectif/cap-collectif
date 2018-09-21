@@ -32,64 +32,42 @@ type Props = {
   dispatch: Dispatch,
 };
 
-export class ConsultationPropositionBox extends React.Component<Props> {
+type State = {
+  currentActiveItems: Array<string>,
+};
+
+export class ConsultationPropositionBox extends React.Component<Props, State> {
+  state = {
+    currentActiveItems: []
+  };
+
   componentDidMount() {
     window.addEventListener('scroll', () => {
       window.requestAnimationFrame(() => {
-        // this.getActiveLink();
         this.scrollSpy();
       });
     });
   }
 
-  // getActiveLink() {
-  //   const sectionItems = document.querySelectorAll('.opinion-type__title');
-  //
-  //   sectionItems.forEach(item => {
-  //     const navItem = document.getElementById(`nav-${item.id}`);
-  //     const itemPosition = item.getBoundingClientRect();
-  //     const parentItem = navItem && navItem.parentNode;
-  //     const nextSiblingItem = parentItem && parentItem.nextSibling;
-  //
-  //     if (navItem && parentItem) {
-  //       // 50 is height of nav
-  //       if (itemPosition.top - 20 < 0 && itemPosition.top - 20 > -itemPosition.height + 40) {
-  //         // id is passed on children of navItem component
-  //         // $FlowFixMe
-  //         parentItem.classList.add('active');
-  //         $(nextSiblingItem).collapse({ toggle: true });
-  //         // console.log(nextSiblingItem);
-  //       } else {
-  //         // $FlowFixMe
-  //         parentItem.classList.remove('active');
-  //         // $(nextSiblingItem).collapse({ toggle: false });
-  //       }
-  //     }
-  //   });
-  // }
-
   scrollSpy = () => {
     const { dispatch } = this.props;
     const sectionItems = document.querySelectorAll('.section-list_container');
-    const actifItems = [];
+    const activeItems = [];
 
     sectionItems.forEach(item => {
       const itemPosition = item.getBoundingClientRect();
 
-      if (itemPosition) {
-        // 50 is height of nav
-        if ((itemPosition.top - 20 < 0) && (itemPosition.top - 20 > -itemPosition.height + 40)) {
-          actifItems.push(item.id);
-        } else {
-          // console.warn(item);
-        }
+      // 40 is height of nav
+      if (itemPosition && (itemPosition.top - 20 < 0) && (itemPosition.top - 20 > -itemPosition.height + 40)) {
+        activeItems.push(item.id);
       }
     });
 
-    if(actifItems.length > 0) {
-      //  const actifItem = Math.max.apply(null, actifItemArray);
-      dispatch(changeConsultationPlanActiveItem(actifItems));
+    if(JSON.stringify(activeItems) !== JSON.stringify(this.state.currentActiveItems)) {
+      dispatch(changeConsultationPlanActiveItem(activeItems));
     }
+
+    this.setState({ currentActiveItems: activeItems });
   };
 
   render() {
@@ -121,7 +99,7 @@ export class ConsultationPropositionBox extends React.Component<Props> {
           className={
             showConsultationPlan
               ? 'consultation-plan col-sm-3 col-xs-12  hidden-xs'
-              : 'consultation-plan  hidden-xs'
+              : 'consultation-plan hidden-xs'
           }
           id="consultation-plan">
           <ConsultationPlan step={step} />

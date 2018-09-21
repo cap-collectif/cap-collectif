@@ -2,10 +2,12 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
+import { FormattedMessage } from "react-intl";
 import type { Dispatch, GlobalState } from '../../types';
 import type { ConsultationPlanRecursiveItems_consultation } from './__generated__/ConsultationPlanRecursiveItems_consultation.graphql';
 import ConsultationPlanItems from './ConsultationPlanItems';
 import { closeConsultationPlan, openConsultationPlan } from '../../redux/modules/project';
+import config from "../../config";
 
 type Props = {
   consultation: ConsultationPlanRecursiveItems_consultation,
@@ -16,6 +18,7 @@ type Props = {
 };
 
 export class ConsultationPlanRecursiveItems extends React.Component<Props> {
+
   getPlan = () => {
     const { consultation, closePlan, openPlan, showConsultationPlan, stepId } = this.props;
 
@@ -25,7 +28,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
           <div className="header">
             <p>
               <i className="cap cap-android-menu mr-5" />
-              PLAN
+              <FormattedMessage id="plan" className="yolo" />
             </p>
             <a
               onClick={() => {
@@ -34,7 +37,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
               <i className="cap cap-delete-1" />
             </a>
           </div>
-          <div className="list" > {/* id="myAccordion" */}
+          <div className="list" >
             {consultation.sections &&
               consultation.sections
                 .filter(Boolean)
@@ -44,9 +47,14 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
                     sectionKey={index}
                     section={section}
                     level={0}
-                    group={index + 1}
                   />
                 ))}
+          </div>
+          <div className="consultation-plan__back-to-top">
+            <a onClick={this.handleClick}>
+              <i className="cap cap-arrow-68 mr-5" />
+              <FormattedMessage id="back-to-top" />
+            </a>
           </div>
         </div>
       );
@@ -54,16 +62,26 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
 
     return (
       <div className="consultation-plan_close">
-        <span>Plan</span>
-        <br />
         <a
           onClick={() => {
             openPlan(stepId);
           }}>
-          <i className="cap cap-android-menu" />
+          <i className="cap cap-android-menu mr-5" />
+          <FormattedMessage id="plan" />
         </a>
       </div>
     );
+  };
+
+  handleClick = () => {
+    if (config.canUseDOM) {
+      const anchor = document.getElementById(`app-wrapper`);
+      const body = anchor.parentNode;
+
+      if (body) {
+        body.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
+      }
+    }
   };
 
   render() {

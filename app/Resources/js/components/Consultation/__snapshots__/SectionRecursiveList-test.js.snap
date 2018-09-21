@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SectionRecursiveList /> renders correcty 1`] = `
-<div>
+<div
+  id="section-list-container"
+>
   <ForwardRef(Relay(UnpublishedOpinionList))
     consultation={
       Object {

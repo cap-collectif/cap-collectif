@@ -14,14 +14,14 @@ export class SectionRecursiveList extends React.Component<Props> {
     const { consultation } = this.props;
 
     return (
-      <div className="consultationContent">
+      <div id="section-list-container">
         {/* $FlowFixMe */}
         <UnpublishedOpinionList consultation={consultation} />
         {consultation.sections &&
           consultation.sections
             .filter(Boolean)
             .map((section, index) => (
-              <SectionList key={index} consultation={consultation} section={section} level={0} group={index+1}/>
+              <SectionList key={index} consultation={consultation} section={section} level={0} />
             ))}
       </div>
     );
