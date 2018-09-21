@@ -73,6 +73,12 @@ final class QuestionTypeValueType extends EnumType implements GeneratedTypeInter
                     'deprecationReason' => null,
                     'description' => null,
                 ],
+                'section' => [
+                    'name' => 'section',
+                    'value' => 10,
+                    'deprecationReason' => null,
+                    'description' => null,
+                ],
             ],
             'description' => 'Value of type of question',
         ];

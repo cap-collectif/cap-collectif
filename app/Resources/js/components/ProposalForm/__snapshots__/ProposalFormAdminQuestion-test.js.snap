@@ -1,0 +1,361 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalFormAdminQuestion /> render correctly a checkbox question 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+    xs={8}
+  >
+    <div>
+      <i
+        className="cap cap-android-menu icon--blue"
+      />
+    </div>
+    <div>
+      <i
+        className="cap cap-bubble-ask-2"
+      />
+    </div>
+    <div>
+      <strong>
+        Question Title
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="global.question.types.multiple_multiple"
+          values={Object {}}
+        />
+      </span>
+    </div>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="pull-right"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="warning"
+        className="btn-outline-warning"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-pencil"
+        />
+         
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="btn-outline-danger"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="cap cap-times"
+        />
+         
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </Col>
+</Row>
+`;
+
+exports[`<ProposalFormAdminQuestion /> render correctly a medias question 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+    xs={8}
+  >
+    <div>
+      <i
+        className="cap cap-android-menu icon--blue"
+      />
+    </div>
+    <div>
+      <i
+        className="cap cap-bubble-ask-2"
+      />
+    </div>
+    <div>
+      <strong>
+        Question Title
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="global.question.types.other"
+          values={Object {}}
+        />
+      </span>
+    </div>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="pull-right"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="warning"
+        className="btn-outline-warning"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-pencil"
+        />
+         
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="btn-outline-danger"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="cap cap-times"
+        />
+         
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </Col>
+</Row>
+`;
+
+exports[`<ProposalFormAdminQuestion /> render correctly a section 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+    xs={8}
+  >
+    <div>
+      <i
+        className="cap cap-android-menu icon--blue"
+      />
+    </div>
+    <div>
+      <i
+        className="cap cap-small-caps-1"
+      />
+    </div>
+    <div>
+      <strong>
+        Section Title
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="global.question.types.section"
+          values={Object {}}
+        />
+      </span>
+    </div>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="pull-right"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="warning"
+        className="btn-outline-warning"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-pencil"
+        />
+         
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="btn-outline-danger"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="cap cap-times"
+        />
+         
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </Col>
+</Row>
+`;
+
+exports[`<ProposalFormAdminQuestion /> render correctly a text question 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+    xs={8}
+  >
+    <div>
+      <i
+        className="cap cap-android-menu icon--blue"
+      />
+    </div>
+    <div>
+      <i
+        className="cap cap-bubble-ask-2"
+      />
+    </div>
+    <div>
+      <strong>
+        Question Title
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="global.question.types.free"
+          values={Object {}}
+        />
+      </span>
+    </div>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="pull-right"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="warning"
+        className="btn-outline-warning"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-pencil"
+        />
+         
+        <FormattedMessage
+          id="global.edit"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="btn-outline-danger"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="cap cap-times"
+        />
+         
+        <FormattedMessage
+          id="global.delete"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
+  </Col>
+</Row>
+`;
