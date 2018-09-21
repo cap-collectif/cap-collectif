@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
+use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
@@ -29,6 +30,9 @@ class QuestionTypeResolver
         }
         if ($question instanceof MultipleChoiceQuestion) {
             return $this->typeResolver->resolve('MultipleChoiceQuestion');
+        }
+        if ($question instanceof SectionQuestion) {
+            return $this->typeResolver->resolve('SectionQuestion');
         }
 
         throw new UserError('Could not resolve type of Question.');

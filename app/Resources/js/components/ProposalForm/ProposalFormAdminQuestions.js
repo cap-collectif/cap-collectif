@@ -14,6 +14,9 @@ import {
 } from 'react-beautiful-dnd';
 import ProposalFormAdminQuestionModal from './ProposalFormAdminQuestionModal';
 import type { GlobalState, Dispatch } from '../../types';
+import { ProposalFormAdminDeleteQuestionModal } from './ProposalFormAdminDeleteQuestionModal';
+import { QuestionItem } from '../Question/QuestionItem';
+import ProposalFormAdminSectionModal from './ProposalFormAdminSectionModal';
 
 type Props = {
   dispatch: Dispatch,
@@ -23,7 +26,12 @@ type Props = {
   intl: IntlShape,
 };
 
-type State = { editIndex: ?number };
+type State = {
+  editIndex: ?number,
+  editIndexSection: ?number,
+  showDeleteModal: boolean,
+  deleteIndex: ?number,
+};
 
 const getItemStyle = (isDragging: boolean, draggableStyle: DraggableStyle) => ({
   userSelect: 'none',
@@ -32,7 +40,7 @@ const getItemStyle = (isDragging: boolean, draggableStyle: DraggableStyle) => ({
   borderRadius: '8px',
 
   // change background colour if dragging
-  background: isDragging ? 'lightgreen' : 'grey',
+  background: isDragging ? 'lightgreen' : '',
 
   ...draggableStyle,
 });
@@ -43,17 +51,20 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
 
     this.state = {
       editIndex: null,
+      editIndexSection: null,
+      deleteIndex: null,
+      showDeleteModal: false,
     };
-    this.onDragEnd = this.onDragEnd.bind(this);
   }
 
   onDragEnd = (result: DropResult) => {
+    const { dispatch } = this.props;
     // dropped outside the list
     if (!result.destination) {
       return;
     }
 
-    this.props.dispatch(
+    dispatch(
       arrayMove(this.props.formName, 'questions', result.source.index, result.destination.index),
     );
   };
@@ -66,15 +77,81 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     this.handleSubmit();
   };
 
+  handleDelete = (index: number) => {
+    this.setState({
+      showDeleteModal: true,
+      deleteIndex: index,
+    });
+  };
+
+  handleDeleteAction = () => {
+    const { deleteIndex } = this.state;
+    const { fields } = this.props;
+
+    fields.remove(deleteIndex);
+
+    this.setState({
+      showDeleteModal: false,
+      deleteIndex: null,
+    });
+  };
+
+  handleEdit = (index: number, type: string) => {
+    if (type === 'section') {
+      this.setState({ editIndexSection: index });
+    } else {
+      this.setState({ editIndex: index });
+    }
+  };
+
   handleSubmit = () => {
     this.setState({ editIndex: null });
+    this.setState({ editIndexSection: null });
+  };
+
+  handleCreateQuestion = () => {
+    const { fields, formName, dispatch } = this.props;
+
+    dispatch(
+      arrayPush(formName, 'questions', {
+        private: false,
+        required: false,
+      }),
+    );
+
+    this.setState({ editIndex: fields.length });
+  };
+
+  handleCreateSection = () => {
+    const { fields, formName, dispatch } = this.props;
+
+    dispatch(
+      arrayPush(formName, 'questions', {
+        private: false,
+        required: false,
+        type: 'section',
+      }),
+    );
+    this.setState({ editIndexSection: fields.length });
+  };
+
+  handleCancelModal = () => {
+    this.setState({
+      showDeleteModal: false,
+      deleteIndex: null,
+    });
   };
 
   render() {
-    const { dispatch, fields, questions, formName, intl } = this.props;
-    const { editIndex } = this.state;
+    const { fields, questions, formName } = this.props;
+    const { editIndex, showDeleteModal, editIndexSection } = this.state;
     return (
       <div className="form-group" id="proposal_form_admin_questions_panel_personal">
+        <ProposalFormAdminDeleteQuestionModal
+          isShow={showDeleteModal}
+          cancelAction={this.handleCancelModal}
+          deleteAction={this.handleDeleteAction}
+        />
         <ListGroup>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Droppable droppableId="droppable">
@@ -97,71 +174,43 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                           <ListGroupItem key={index}>
                             <ProposalFormAdminQuestionModal
                               isCreating={!!questions[index].id}
-                              onClose={() => {
-                                this.handleClose(index);
-                              }}
+                              onClose={this.handleClose.bind(this, index)}
                               onSubmit={this.handleSubmit}
                               member={member}
                               show={index === editIndex}
                               formName={formName}
                             />
+                            <ProposalFormAdminSectionModal
+                              show={index === editIndexSection}
+                              member={member}
+                              isCreating={!!questions[index].id}
+                              onClose={this.handleClose.bind(this, index)}
+                              onSubmit={this.handleSubmit}
+                              formName={formName}
+                            />
                             <Row>
-                              <Col xs={8}>
-                                <div>
-                                  <strong>{questions[index].title}</strong>
-                                  <br />
-                                  <span className="excerpt">
-                                    {(questions[index].type === 'text' ||
-                                      questions[index].type === 'textarea' ||
-                                      questions[index].type === 'editor') && (
-                                      <FormattedMessage id={'global.question.types.free'} />
-                                    )}
-                                    {(questions[index].type === 'button' ||
-                                      questions[index].type === 'radio' ||
-                                      questions[index].type === 'select') && (
-                                      <FormattedMessage
-                                        id={'global.question.types.multiple_unique'}
-                                      />
-                                    )}
-                                    {(questions[index].type === 'checkbox' ||
-                                      questions[index].type === 'ranking') && (
-                                      <FormattedMessage
-                                        id={'global.question.types.multiple_multiple'}
-                                      />
-                                    )}
-                                    {questions[index].type === 'medias' && (
-                                      <FormattedMessage id={'global.question.types.other'} />
-                                    )}
-                                  </span>
-                                </div>
+                              <Col xs={8} style={{ display: 'flex' }}>
+                                <QuestionItem question={questions[index]} />
                               </Col>
                               <Col xs={4}>
                                 <ButtonToolbar className="pull-right">
                                   <Button
                                     bsStyle="warning"
                                     className="btn-outline-warning"
-                                    onClick={() => {
-                                      this.setState({ editIndex: index });
-                                    }}>
+                                    onClick={this.handleEdit.bind(
+                                      this,
+                                      index,
+                                      questions[index].type,
+                                    )}>
                                     <i className="fa fa-pencil" />{' '}
                                     <FormattedMessage id="global.edit" />
                                   </Button>
                                   <Button
                                     bsStyle="danger"
                                     className="btn-outline-danger"
-                                    onClick={() => {
-                                      if (
-                                        window.confirm(
-                                          intl.formatMessage({ id: 'question.alert.delete' }),
-                                          intl.formatMessage({
-                                            id: 'question.alert.delete.bodyText',
-                                          }),
-                                        )
-                                      ) {
-                                        fields.remove(index);
-                                      }
-                                    }}>
-                                    <i className="fa fa-trash" />
+                                    onClick={this.handleDelete.bind(this, index)}>
+                                    <i className="cap cap-times" />{' '}
+                                    <FormattedMessage id="global.delete" />
                                   </Button>
                                 </ButtonToolbar>
                               </Col>
@@ -180,16 +229,16 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
         <Button
           bsStyle="primary"
           className="btn-outline-primary box-content__toolbar"
-          onClick={() => {
-            dispatch(
-              arrayPush(this.props.formName, 'questions', {
-                private: false,
-                required: false,
-              }),
-            );
-            this.setState({ editIndex: fields.length });
-          }}>
-          <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
+          onClick={this.handleCreateSection}>
+          <i className="cap cap-small-caps-1" /> <FormattedMessage id="create-section" />
+        </Button>
+        <Button
+          id="js-btn-create-question"
+          bsStyle="primary"
+          className="btn-outline-primary box-content__toolbar"
+          onClick={this.handleCreateQuestion}>
+          <i className="cap cap-bubble-add-2" />{' '}
+          <FormattedMessage id="question_modal.create.title" />
         </Button>
       </div>
     );

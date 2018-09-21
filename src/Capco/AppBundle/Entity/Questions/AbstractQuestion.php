@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "simple"          = "SimpleQuestion",
  *      "multiple_choice" = "MultipleChoiceQuestion",
  *      "media"           = "MediaQuestion",
+ *      "section"         = "SectionQuestion",
  * })
  */
 abstract class AbstractQuestion
@@ -35,6 +36,7 @@ abstract class AbstractQuestion
     const QUESTION_TYPE_RANKING = 6;
     const QUESTION_TYPE_MEDIAS = 7;
     const QUESTION_TYPE_BUTTON = 8;
+    const QUESTION_TYPE_SECTION = 10;
 
     public static $questionTypesInputs = [
         self::QUESTION_TYPE_SIMPLE_TEXT => 'text',
@@ -46,6 +48,7 @@ abstract class AbstractQuestion
         self::QUESTION_TYPE_RANKING => 'ranking',
         self::QUESTION_TYPE_MEDIAS => 'medias',
         self::QUESTION_TYPE_BUTTON => 'button',
+        self::QUESTION_TYPE_SECTION => 'section',
     ];
 
     public static $questionTypesLabels = [];
@@ -69,7 +72,7 @@ abstract class AbstractQuestion
 
     /**
      * @Assert\NotNull()
-     * @Assert\Range(min=0, max=8)
+     * @Assert\Range(min=0, max=10)
      * @ORM\Column(name="type", nullable=false)
      */
     protected $type;
