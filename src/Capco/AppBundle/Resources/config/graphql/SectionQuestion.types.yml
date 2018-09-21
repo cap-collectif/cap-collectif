@@ -1,9 +1,0 @@
-SectionQuestion:
-  type: object
-  inherits: [Question]
-  config:
-    interfaces: [Question]
-    description: 'A simple section'
-    fields:
-      kind:
-        resolve: 'section'

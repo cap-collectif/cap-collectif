@@ -3,7 +3,6 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
-use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\exportUtils;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -363,40 +362,20 @@ EOF;
         'proposal_comments_pinned' => 'pinned',
         'proposal_comments_publicationStatus' => 'publicationStatus',
     ];
+
     protected const CUSTOM_QUESTIONS_HEADER_OFFSET = 21;
-    /**
-     * @var ProjectRepository
-     */
+
     protected $projectRepository;
-
-    /**
-     * @var Manager
-     */
     protected $toggleManager;
-
-    /**
-     * @var Executor
-     */
     protected $executor;
-
-    /**
-     * @var InfoResolver
-     */
-    protected $infoResolver;
-
-    /**
-     * @var WriterInterface
-     */
     protected $writer;
-
+    protected $infoResolver;
     protected $currentQuery;
     protected $currentData;
     protected $currentStep;
-
-    protected $proposalCursor;
     protected $voteCursor;
+    protected $proposalCursor;
     protected $commentCursor;
-
     protected $headersMap = [];
 
     protected $proposalHeaderMap = [
@@ -534,7 +513,7 @@ EOF;
                 $proposals,
                 'data.node.proposals',
                 function ($edge) use ($progress, $output) {
-                    $proposal = $edge['node'];
+                    $proposal = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
                     $this->addProposalRow($proposal, $output);
                     $progress->advance();
                 },
@@ -584,7 +563,6 @@ EOF;
 
         $totalCount = Arr::path($proposalWithReportings, 'data.node.reportings.totalCount');
         $progress = new ProgressBar($output, $totalCount);
-
         $output->writeln(
             "<info>Importing $totalCount reportings for proposal " . $proposal['title'] . '</info>'
         );
@@ -593,7 +571,7 @@ EOF;
             $proposalWithReportings,
             'data.node.reportings',
             function ($edge) use ($proposal, $progress) {
-                $report = $edge['node'];
+                $report = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalReportRow($report, $proposal);
                 $progress->advance();
             },
@@ -622,12 +600,11 @@ EOF;
         $output->writeln(
             "<info>Importing $totalCount votes for proposal " . $proposal['title'] . '</info>'
         );
-
         $this->connectionTraversor->traverse(
             $proposalsWithVotes,
             'data.node.votes',
             function ($edge) use ($proposal, $progress) {
-                $vote = $edge['node'];
+                $vote = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalVotesRow($vote, $proposal);
                 $progress->advance();
             },
@@ -654,12 +631,11 @@ EOF;
         $output->writeln(
             "<info>Importing $totalCount comments for proposal " . $proposal['title'] . '</info>'
         );
-
         $this->connectionTraversor->traverse(
             $proposalsWithComments,
             'data.node.comments',
             function ($edge) use ($proposal, $progress) {
-                $comment = $edge['node'];
+                $comment = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalCommentRow($comment, $proposal);
                 $progress->advance();
             },
@@ -690,7 +666,7 @@ EOF;
             $proposalWithNews,
             'data.node.news',
             function ($edge) use ($proposal, $progress) {
-                $news = $edge['node'];
+                $news = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsRow($news, $proposal, $edge['cursor']);
                 $progress->advance();
             },
@@ -765,7 +741,7 @@ EOF;
             $commentWithReportings,
             'data.node.reportings',
             function ($edge) use ($proposal, $comment) {
-                $report = $edge['node'];
+                $report = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalCommentReportRow($report, $proposal, $comment);
             },
             function ($pageInfo) use ($comment) {
@@ -786,7 +762,7 @@ EOF;
             $commentWithVotes,
             'data.node.votes',
             function ($edge) use ($proposal, $comment) {
-                $vote = $edge['node'];
+                $vote = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalCommentVotesRow($vote, $proposal, $comment);
             },
             function ($pageInfo) use ($comment) {
@@ -871,7 +847,7 @@ EOF;
             $news,
             'comments',
             function ($edge) use ($proposal, $news, $proposalNewsCursor) {
-                $comment = $edge['node'];
+                $comment = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsCommentRow(
                     $comment,
                     $proposal,
@@ -919,7 +895,7 @@ EOF;
             $comment,
             'votes',
             function ($edge) use ($proposal, $news, $comment) {
-                $vote = $edge['node'];
+                $vote = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsCommentVoteRow($vote, $comment, $proposal, $news);
             },
             function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
@@ -936,7 +912,7 @@ EOF;
             $comment,
             'reportings',
             function ($edge) use ($proposal, $news, $comment) {
-                $report = $edge['node'];
+                $report = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsCommentReportingRow($report, $comment, $proposal, $news);
             },
             function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
