@@ -6,28 +6,28 @@ import type { GlobalState } from '../../types';
 
 type Props = {
   children: any,
-  parameters: any,
+  backgroundColor: string,
+  labelColor: string,
 };
 
 const H3 = styled.h3`
   margin-bottom: 15px;
   span {
-    background-color: ${props => props.primaryBg || '#546E7A'};
-    color: ${props => props.primaryText || '#ffffff'};
+    background-color: ${props => props.backgroundColor || '#546E7A'};
+    color: ${props => props.labelColor || '#ffffff'};
     padding: 8px;
   }
 `;
 
-const TitleInvertContrast = ({ children, parameters }: Props) => (
-  <H3
-    primaryBg={parameters['color.btn.primary.bg']}
-    primaryText={parameters['color.btn.primary.text']}>
+const TitleInvertContrast = ({ children, backgroundColor, labelColor }: Props) => (
+  <H3 backgroundColor={backgroundColor} labelColor={labelColor}>
     <span>{children}</span>
   </H3>
 );
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  parameters: state.default.parameters,
+  backgroundColor: state.default.parameters['color.btn.primary.bg'],
+  labelColor: state.default.parameters['color.btn.primary.text'],
 });
 
 export default connect(mapStateToProps)(TitleInvertContrast);
