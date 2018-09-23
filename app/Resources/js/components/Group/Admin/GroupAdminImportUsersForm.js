@@ -205,16 +205,15 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
   };
 
   onPostDrop(droppedFiles: Array<DropzoneFile>, input: Object) {
-    this.setState({ showMoreError: false, analyzed: true, files: droppedFiles }, () => {
-      droppedFiles.forEach(file => {
-        const reader = new window.FileReader();
-        reader.onload = () => {
-          input.onChange(reader.result);
-        };
-        reader.onabort = () => input.onChange(null);
-        reader.onerror = () => input.onChange(null);
-        reader.readAsText(file);
-      });
+    this.setState({ showMoreError: false, analyzed: true, files: droppedFiles });
+    droppedFiles.forEach(file => {
+      const reader = new window.FileReader();
+      reader.onload = () => {
+        input.onChange(reader.result);
+      };
+      reader.onabort = () => input.onChange(null);
+      reader.onerror = () => input.onChange(null);
+      reader.readAsText(file);
     });
   }
 
