@@ -324,10 +324,6 @@ svg.avatar-group {
             width: 212.5px;
         }
 
-        @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-            width: 157.5px;
-        }
-
         .header {
             color: $dark-gray;
             display: flex;
@@ -339,6 +335,15 @@ svg.avatar-group {
                 color: $dark-gray;
             }
         }
+    }
+
+    &_close {
+        text-transform: uppercase;
+    }
+
+    &:not(.affix) &_close {
+        position: absolute;
+        left: 15px;
     }
 
     &__list {
@@ -354,15 +359,6 @@ svg.avatar-group {
             color: $black;
             font-weight: 300;
         }
-    }
-
-    &_close {
-        text-transform: uppercase;
-    }
-
-    &:not(.affix) .consultation-plan_close {
-        position: absolute;
-        left: 15px;
     }
 
     .affix {
@@ -416,6 +412,72 @@ svg.avatar-group {
                     padding-left: #{$p}px;
                     font-weight: #{$w};
                 }
+            }
+        }
+    }
+}
+
+@media (max-width: $screen-sm-max) {
+    .consultation-plan {
+        z-index: 1100;
+        padding: 0;
+
+        &_open {
+            background-color: $white;
+        }
+
+        &_close {
+            text-transform: capitalize;
+            position: fixed;
+            right: 15px;
+            bottom: 15px;
+            padding: 10px 15px;
+            background-color: $primary-color; // change with primary color
+            color: $white;
+        }
+
+        &__list {
+            height: 25vh;
+            overflow-y: scroll;
+        }
+
+        &__back-to-top {
+            padding: 15px 15px;
+        }
+
+        .header {
+            padding: 10px 15px;
+            color: $white;
+            text-transform: capitalize;
+
+            .cap-android-menu {
+                display: none;
+            }
+
+            a {
+                color: $white;
+            }
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+
+        // rmv affix on mobile
+        .affix, .affix-top, .affix-bottom {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            top: inherit;
+        }
+
+        .nav.nav-pills li {
+            border: 1px solid $white;
+
+            &.active, &:hover {
+                background-color: $form-bgc;
+                border: 1px solid $form-bgc;
             }
         }
     }

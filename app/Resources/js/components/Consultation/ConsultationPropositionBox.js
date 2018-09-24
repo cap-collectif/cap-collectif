@@ -101,8 +101,8 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
         <div
           className={
             showConsultationPlan
-              ? 'consultation-plan col-sm-3 col-xs-12  hidden-xs'
-              : 'consultation-plan hidden-xs'
+              ? 'consultation-plan col-md-3 col-sm-12'
+              : 'consultation-plan'
           }
           id="consultation-plan">
           <ConsultationPlan
@@ -112,7 +112,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
         </div>
         <div
           id="scroll-content"
-          className={showConsultationPlan ? 'col-sm-9' : 'col-xs-10 col-xs-offset-1'}>
+          className={showConsultationPlan ? 'col-md-9' : 'col-xs-10 col-xs-offset-1'}>
           {/* <Panel>
             <span>
               Filtres de recherche

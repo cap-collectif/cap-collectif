@@ -20,6 +20,14 @@ type Props = {
 };
 
 export class ConsultationPlan extends React.Component<Props> {
+  // componentDidMount() {
+  //   window.addEventListener('resize', () => {
+  //     this.setState({
+  //       windowWidth: window.innerWidth,
+  //     });
+  //   });
+  // }
+
   getOffsetTop = () => {
     const planContainer = document.getElementById('consultation-plan');
     const mainContainer = document.querySelector('body');
@@ -48,6 +56,8 @@ export class ConsultationPlan extends React.Component<Props> {
         return graphqlError;
       }
       if (props) {
+        // console.warn(props.consultation);
+
         if (props.consultation) {
           return (
             // $FlowFixMe
@@ -62,7 +72,7 @@ export class ConsultationPlan extends React.Component<Props> {
     return (
       <div
         // id="scrollspy"
-        data-spy="affix"
+        data-spy='affix'
         // data-offset-top={topPlan || '655'}
         data-offset-top={this.getOffsetTop()}
         data-offset-bottom="450">
