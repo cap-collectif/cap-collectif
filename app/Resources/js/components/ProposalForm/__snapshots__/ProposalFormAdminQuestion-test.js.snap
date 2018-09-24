@@ -27,7 +27,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a checkbox question 1`] 
         className="cap cap-bubble-ask-2"
         style={
           Object {
-            "fontSize": "2àpx",
+            "color": "#707070",
+            "fontSize": "20px",
           }
         }
       />
@@ -124,7 +125,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a medias question 1`] = 
         className="cap cap-bubble-ask-2"
         style={
           Object {
-            "fontSize": "2àpx",
+            "color": "#707070",
+            "fontSize": "20px",
           }
         }
       />
@@ -221,7 +223,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a section 1`] = `
         className="cap cap-small-caps-1"
         style={
           Object {
-            "fontSize": "2àpx",
+            "color": "#707070",
+            "fontSize": "20px",
           }
         }
       />
@@ -318,7 +321,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a text question 1`] = `
         className="cap cap-bubble-ask-2"
         style={
           Object {
-            "fontSize": "2àpx",
+            "color": "#707070",
+            "fontSize": "20px",
           }
         }
       />

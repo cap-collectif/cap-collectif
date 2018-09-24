@@ -19,7 +19,7 @@ type Props = {
     placeholder: string,
   },
   handleClickEdit: (index: number, type: string) => void,
-  handleClickDelete: (index: number) => void,
+  handleClickDelete: (index: number, type: string) => void,
 };
 
 export const ProposalFormAdminQuestion = ({
@@ -70,7 +70,7 @@ export const ProposalFormAdminQuestion = ({
           <i className="cap cap-android-menu" style={{ color: '#0388cc', fontSize: '20px' }} />
         </ItemQuestionWrapper>
         <ItemQuestionWrapper>
-          <i className={iconClassType} style={{ fontSize: '2àpx' }} />
+          <i className={iconClassType} style={{ color: '#707070', fontSize: '20px' }} />
         </ItemQuestionWrapper>
         <ItemQuestionWrapper>
           <strong>{question.title}</strong>
@@ -91,7 +91,7 @@ export const ProposalFormAdminQuestion = ({
           <Button
             bsStyle="danger"
             className="btn-outline-danger"
-            onClick={handleClickDelete.bind(this, index)}>
+            onClick={handleClickDelete.bind(this, index, question.type)}>
             <i className="cap cap-times" /> <FormattedMessage id="global.delete" />
           </Button>
         </ButtonToolbar>

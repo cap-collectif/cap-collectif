@@ -7,12 +7,19 @@ import SubmitButton from '../Form/SubmitButton';
 
 type Props = {
   isShow: boolean,
-  cancelAction: Function,
-  deleteAction: Function,
+  deleteType: string,
+  cancelAction: () => void,
+  deleteAction: () => void,
 };
 
 export const ProposalFormAdminDeleteQuestionModal = (props: Props) => {
-  const { isShow, cancelAction, deleteAction } = props;
+  const { isShow, cancelAction, deleteAction, deleteType } = props;
+
+  let titleId = 'question.alert.delete';
+
+  if (deleteType === 'section') {
+    titleId = 'delete-section-alert';
+  }
 
   return (
     <Modal
@@ -21,11 +28,11 @@ export const ProposalFormAdminDeleteQuestionModal = (props: Props) => {
       aria-labelledby="proposal-form-admin-question-modal-title-lg">
       <Modal.Header closeButton>
         <Modal.Title>
-          <FormattedMessage id={'delete-section-alert'} />
+          <FormattedMessage id={titleId} />
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <i className="cap cap-alert-2" />
+        <i className="cap cap-alert-2" style={{ color: '#dc3545', fontSize: '22px' }} />
         <FormattedMessage id={'group-admin-parameters-modal-delete-content'} />
       </Modal.Body>
       <Modal.Footer>

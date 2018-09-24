@@ -31,6 +31,7 @@ type State = {
   editIndexSection: ?number,
   showDeleteModal: boolean,
   deleteIndex: ?number,
+  deleteType: ?string,
 };
 
 const getItemStyle = (draggableStyle: DraggableStyle) => ({
@@ -51,6 +52,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
       editIndexSection: null,
       deleteIndex: null,
       showDeleteModal: false,
+      deleteType: null,
     };
   }
 
@@ -74,10 +76,16 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     this.handleSubmit();
   };
 
-  handleClickDelete = (index: number) => {
+  handleClickDelete = (index: number, type: string) => {
+    let deleteType = 'question';
+    if (type === 'section') {
+      deleteType = 'section';
+    }
+
     this.setState({
       showDeleteModal: true,
       deleteIndex: index,
+      deleteType,
     });
   };
 
@@ -141,13 +149,14 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
 
   render() {
     const { fields, questions, formName } = this.props;
-    const { editIndex, showDeleteModal, editIndexSection } = this.state;
+    const { editIndex, showDeleteModal, editIndexSection, deleteType } = this.state;
     return (
       <div className="form-group" id="proposal_form_admin_questions_panel_personal">
         <ProposalFormAdminDeleteQuestionModal
           isShow={showDeleteModal}
           cancelAction={this.handleCancelModal}
           deleteAction={this.handleDeleteAction}
+          deleteType={deleteType || 'question'}
         />
         <ListGroup>
           <DragDropContext onDragEnd={this.onDragEnd}>
@@ -208,7 +217,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
         <Button
           id="js-btn-create-question"
           bsStyle="primary"
-          className="btn-outline-primary box-content__toolbar"
+          className="btn-outline-primary box-content__toolbar ml-5"
           onClick={this.handleCreateQuestion}>
           <i className="cap cap-bubble-add-2" />{' '}
           <FormattedMessage id="question_modal.create.title" />
