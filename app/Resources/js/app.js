@@ -4,6 +4,11 @@
 if (!global._babelPolyfill) {
   require('babel-polyfill');
 }
+import $ from 'jquery';
+
+window.jQuery = $;
+window.$ = $;
+
 require('./registration');
 const config = require('./config').default;
 global.Cookies = require('js-cookie');
