@@ -19,9 +19,9 @@ final class SubscriptionTypeValueType extends EnumType implements GeneratedTypeI
             return [
             'name' => 'SubscriptionTypeValue',
             'values' => [
-                'ALL' => [
-                    'name' => 'ALL',
-                    'value' => 'ALL',
+                'MINIMAL' => [
+                    'name' => 'MINIMAL',
+                    'value' => 'MINIMAL',
                     'deprecationReason' => null,
                     'description' => null,
                 ],
@@ -31,9 +31,9 @@ final class SubscriptionTypeValueType extends EnumType implements GeneratedTypeI
                     'deprecationReason' => null,
                     'description' => null,
                 ],
-                'MINIMAL' => [
-                    'name' => 'MINIMAL',
-                    'value' => 'MINIMAL',
+                'ALL' => [
+                    'name' => 'ALL',
+                    'value' => 'ALL',
                     'deprecationReason' => null,
                     'description' => null,
                 ],

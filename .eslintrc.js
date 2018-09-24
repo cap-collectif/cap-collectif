@@ -9,7 +9,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
   ],
   parser: 'babel-eslint',
-  plugins: ['flowtype', 'import', 'react', 'jsx-a11y', 'jest', 'relay', 'graphql'],
+  plugins: ['flowtype', 'import', 'react', 'jsx-a11y', 'jest', 'relay'],
   globals: {
     $: true,
     screen: true,
@@ -32,32 +32,6 @@ module.exports = {
     Element: true,
   },
   rules: {
-    'graphql/named-operations': [
-      'error',
-      {
-        env: 'relay',
-        tagName: 'graphql',
-        schemaJson: require('./schema.json'),
-      },
-    ],
-    // TODO set this to `error`:  https://github.com/cap-collectif/platform/issues/6094
-    'graphql/template-strings': [
-      'warn',
-      {
-        env: 'relay',
-        tagName: 'graphql',
-        schemaJson: require('./schema.json'),
-      },
-    ],
-    // TODO set this to `error`:  https://github.com/cap-collectif/platform/issues/6095
-    'graphql/no-deprecated-fields': [
-      'warn',
-      {
-        env: 'relay',
-        tagName: 'graphql',
-        schemaJson: require('./schema.json'),
-      },
-    ],
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/issues/396
     'jsx-a11y/href-no-hash': 'off',
     // Deprecated: https://github.com/evcohen/eslint-plugin-jsx-a11y/releases/tag/v6.1.0
@@ -70,10 +44,10 @@ module.exports = {
     'relay/graphql-syntax': 'error',
     'relay/graphql-naming': 'error',
     // Fix doesn't seem to work yet
-    'relay/generated-flow-types': ['error', { fix: true }],
+    'relay/generated-flow-types': ['error', {fix: true}],
     'relay/unused-fields': 'warn',
     'relay/no-future-added-value': 'warn',
-
+    
     // TODO: https://github.com/cap-collectif/platform/issues/5966
     'react/require-default-props': 'off',
     // TODO: https://github.com/cap-collectif/platform/issues/5967

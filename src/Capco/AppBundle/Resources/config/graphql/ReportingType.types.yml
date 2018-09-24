@@ -3,13 +3,13 @@ ReportingType:
   config:
     description: 'Type of reporting'
     values:
-      ERROR:
-        value: 3
-      OFF:
-        value: 1
-      OFF_TOPIC:
-        value: 4
       SEX:
         value: 0
+      OFF:
+        value: 1
       SPAM:
         value: 2
+      ERROR:
+        value: 3
+      OFF_TOPIC:
+        value: 4

@@ -25,7 +25,6 @@ CollectStep:
       viewerProposalDrafts:
         type: 'ProposalConnection!'
         access: "@=hasRole('ROLE_USER')"
-        argsBuilder: 'Relay::Connection'
         resolve:
           "@=resolver('query_get_draft_proposals_for_user_in_step', [value, getUser(), args])"
       proposals:
