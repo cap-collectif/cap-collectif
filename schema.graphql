@@ -955,7 +955,7 @@ type Consultation implements Node & Step {
   sections: [Section]
 
   # A list of contributor associated with the consultation.
-  contributors(after: String, first: Int = 30, before: String, last: Int): UserConnection!
+  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
   viewerOpinionsUnpublished(after: String, first: Int, before: String, last: Int): OpinionConnection
   contributionConnection(
     after: String
