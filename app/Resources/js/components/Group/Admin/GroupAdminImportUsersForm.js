@@ -144,10 +144,11 @@ const renderDropzoneInput = ({
           input.value.importedUsers && (
             <React.Fragment>
               <div className="h5">
-                <FormattedMessage id="document-analysis" /> {currentFile ? currentFile.name : ''}
+                <FormattedHTMLMessage id="document-analysis" />{' '}
+                {currentFile ? currentFile.name : ''}
               </div>
               <Row className="mt-15">
-                <Col xs={12} sm={colWidth} className="text-center pl-0 pr-0">
+                <Col xs={12} sm={colWidth} className="text-center">
                   <h4>
                     <i className="cap cap-check-bubble text-success" />{' '}
                     <b>
@@ -160,7 +161,7 @@ const renderDropzoneInput = ({
                 </Col>
                 {input.value.notFoundEmails &&
                   input.value.notFoundEmails.length > 0 && (
-                    <Col xs={12} sm={colWidth} className="text-center pl-0 pr-0 ">
+                    <Col xs={12} sm={colWidth} className="text-center">
                       <h4>
                         <i className="cap cap-ios-close text-danger" />{' '}
                         <b>
