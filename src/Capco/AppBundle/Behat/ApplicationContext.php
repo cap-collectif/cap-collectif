@@ -10,6 +10,7 @@ use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
+use Capco\AppBundle\Behat\Traits\CookiesTrait;
 use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
@@ -46,6 +47,8 @@ class ApplicationContext extends UserContext
     use ThemeStepsTrait;
     use AdminTrait;
     use ExportDatasUserTrait;
+    use CookiesTrait;
+
     protected $dbContainer;
     protected $cookieConsented;
     protected $currentPage = 'home page';
@@ -193,7 +196,7 @@ class ApplicationContext extends UserContext
     public function iVisitedPage(string $pageName)
     {
         $this->navigationContext->iVisitedPage($pageName);
-        $this->setCookieConsent();
+        $this->currentPage = $pageName;
     }
 
     /**
