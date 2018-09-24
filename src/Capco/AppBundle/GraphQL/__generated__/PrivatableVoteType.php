@@ -132,7 +132,7 @@ final class PrivatableVoteType extends InterfaceType implements GeneratedTypeInt
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Update the vote privacy.',
+                    'description' => 'Anonymous or not.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

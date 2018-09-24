@@ -2109,7 +2109,7 @@ interface PrivatableVote {
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
-  # Update the vote privacy.
+  # Anonymous or not.
   private: Boolean
 }
 
@@ -2608,7 +2608,7 @@ enum ProposalStepVoteType {
 
 # Entities that can be published.
 type ProposalVote implements PrivatableVote & Publishable & Vote {
-  # Update the vote privacy.
+  # Anonymous or not.
   private: Boolean
 
   # The ID of an object
@@ -4152,7 +4152,7 @@ type User implements Node {
   # The user's email was confirmed at date
   emailConfirmationSentAt: DateTime
 
-  # Get all the arguments for a specific user with pagination.
+  # The arguments created by user.
   arguments(after: String, first: Int, before: String, last: Int): ArgumentConnection!
 }
 
