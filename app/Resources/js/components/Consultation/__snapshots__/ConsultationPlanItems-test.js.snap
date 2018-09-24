@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ConsultationPlanItems /> renders correcty 1`] = `
+<Nav
+  bsClass="nav"
+  bsStyle="pills"
+  justified={false}
+  pullLeft={false}
+  pullRight={false}
+  stacked={true}
+>
+  <ForwardRef(Relay(Connect(ConsultationPlanItem)))
+    level={0}
+    onCollapse={[Function]}
+    section={
+      Object {
+        "contribuable": true,
+        "contributionsCount": 0,
+        "sections": Array [
+          Object {
+            "contribuable": true,
+            "contributionsCount": 0,
+            "slug": "chapter1",
+            "subtitle": "subtitle",
+            "title": "Chapter1",
+          },
+        ],
+        "slug": "title1",
+        "subtitle": "subtitle",
+        "title": "Title1",
+      }
+    }
+  />
+  <Collapse
+    appear={false}
+    dimension="height"
+    getDimensionValue={[Function]}
+    in={true}
+    mountOnEnter={false}
+    timeout={300}
+    unmountOnExit={false}
+  >
+    <div>
+      <ConsultationPlanItems
+        key="0"
+        level={1}
+        section={
+          Object {
+            "contribuable": true,
+            "contributionsCount": 0,
+            "slug": "chapter1",
+            "subtitle": "subtitle",
+            "title": "Chapter1",
+          }
+        }
+      />
+    </div>
+  </Collapse>
+</Nav>
+`;

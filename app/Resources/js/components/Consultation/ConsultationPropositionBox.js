@@ -49,7 +49,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
     });
   }
 
-  scrollSpy = () => {
+  scrollSpy = () => { // test?: boolean
     const { dispatch } = this.props;
     const sectionItems = document.querySelectorAll('.section-list_container');
     const activeItems = [];
@@ -62,6 +62,9 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
         activeItems.push(item.id);
       }
     });
+
+    // console.log("uhuihueom");
+    // test === true ||
 
     if(JSON.stringify(activeItems) !== JSON.stringify(this.state.currentActiveItems)) {
       dispatch(changeConsultationPlanActiveItem(activeItems));
@@ -102,7 +105,10 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
               : 'consultation-plan hidden-xs'
           }
           id="consultation-plan">
-          <ConsultationPlan step={step} />
+          <ConsultationPlan
+            step={step}
+            // scrollSpy={(test) => { this.scrollSpy(test) }}
+          />
         </div>
         <div
           id="scroll-content"

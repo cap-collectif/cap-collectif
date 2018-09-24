@@ -15,6 +15,7 @@ type Props = {
   closePlan: Function,
   openPlan: Function,
   showConsultationPlan: boolean,
+  // scrollSpy: (test: boolean) => {},
 };
 
 export class ConsultationPlanRecursiveItems extends React.Component<Props> {
@@ -28,7 +29,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
           <div className="header">
             <p>
               <i className="cap cap-android-menu mr-5" />
-              <FormattedMessage id="plan" className="yolo" />
+              <FormattedMessage id="plan" />
             </p>
             <a
               onClick={() => {
@@ -37,7 +38,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
               <i className="cap cap-delete-1" />
             </a>
           </div>
-          <div className="list" >
+          <div className="consultation-plan__list" >
             {consultation.sections &&
               consultation.sections
                 .filter(Boolean)
@@ -65,6 +66,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
         <a
           onClick={() => {
             openPlan(stepId);
+            // scrollSpy(true);
           }}>
           <i className="cap cap-android-menu mr-5" />
           <FormattedMessage id="plan" />
@@ -76,7 +78,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   handleClick = () => {
     if (config.canUseDOM) {
       const anchor = document.getElementById(`app-wrapper`);
-      const body = anchor.parentNode;
+      const body = anchor && anchor.parentNode;
 
       if (body) {
         body.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });

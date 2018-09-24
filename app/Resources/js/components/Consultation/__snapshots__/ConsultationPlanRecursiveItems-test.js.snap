@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ConsultationPlanRecursiveItems /> renders correcty close plan 1`] = `
+<div
+  className="consultation-plan_close"
+>
+  <a
+    onClick={[Function]}
+  >
+    <i
+      className="cap cap-android-menu mr-5"
+    />
+    <FormattedMessage
+      id="plan"
+      values={Object {}}
+    />
+  </a>
+</div>
+`;
+
+exports[`<ConsultationPlanRecursiveItems /> renders correcty open plan 1`] = `
+<div
+  className="consultation-plan_open"
+>
+  <div
+    className="header"
+  >
+    <p>
+      <i
+        className="cap cap-android-menu mr-5"
+      />
+      <FormattedMessage
+        id="plan"
+        values={Object {}}
+      />
+    </p>
+    <a
+      onClick={[Function]}
+    >
+      <i
+        className="cap cap-delete-1"
+      />
+    </a>
+  </div>
+  <div
+    className="consultation-plan__list"
+  >
+    <ConsultationPlanItems
+      key="0"
+      level={0}
+      section={
+        Object {
+          "$fragmentRefs": null,
+          "sections": Array [],
+        }
+      }
+      sectionKey={0}
+    />
+    <ConsultationPlanItems
+      key="1"
+      level={0}
+      section={
+        Object {
+          "$fragmentRefs": null,
+          "sections": Array [],
+        }
+      }
+      sectionKey={1}
+    />
+  </div>
+  <div
+    className="consultation-plan__back-to-top"
+  >
+    <a
+      onClick={[Function]}
+    >
+      <i
+        className="cap cap-arrow-68 mr-5"
+      />
+      <FormattedMessage
+        id="back-to-top"
+        values={Object {}}
+      />
+    </a>
+  </div>
+</div>
+`;

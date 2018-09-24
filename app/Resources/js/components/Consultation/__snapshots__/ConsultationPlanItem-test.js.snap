@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ConsultationPlanItem /> renders correcty 1`] = `
+<NavItem
+  active={false}
+  className="level--0"
+  disabled={false}
+  id="nav-opinion-type--slug"
+  onClick={[Function]}
+>
+  title
+</NavItem>
+`;

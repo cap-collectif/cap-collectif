@@ -20,7 +20,7 @@ export class ConsultationPlanItem extends React.Component<Props> {
 
     if(prevProps.activeItems !== this.props.activeItems) {
       const item = document.getElementById(`nav-opinion-type--${section.slug}`);
-      const parentItem = item.parentNode;
+      const parentItem = item && item.parentNode;
 
       if(activeItems.includes(section.id)) {
         onCollapse(true);
@@ -44,10 +44,6 @@ export class ConsultationPlanItem extends React.Component<Props> {
     return (
       <NavItem
         className={`level--${level}`}
-        // ref={this.myRef}
-        data-toggle="collapse"
-        data-target={`#collapseCslt${section.id}`}
-        data-parent={level === 0 && '#myAccordion'}
         id={`nav-opinion-type--${section.slug}`}
         onClick={() => {
           if (config.canUseDOM) {

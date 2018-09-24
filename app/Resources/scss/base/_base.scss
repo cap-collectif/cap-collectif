@@ -339,11 +339,11 @@ svg.avatar-group {
                 color: $dark-gray;
             }
         }
+    }
 
-        .list {
-            max-height: calc(100vh - 160px);
-            overflow-y: scroll;
-        }
+    &__list {
+        max-height: calc(100vh - 160px);
+        overflow-y: scroll;
     }
 
     &__back-to-top {
