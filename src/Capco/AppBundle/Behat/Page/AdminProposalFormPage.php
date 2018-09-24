@@ -48,6 +48,7 @@ class AdminProposalFormPage extends Page
         'proposal form notification save' => '#notification-submit',
         'proposal form parameters save' => '#parameters-submit',
         'proposal form address selection' => '#proposal_form_using_address_field',
+        'proposal form personal-section add' => '#js-btn-create-section',
     ];
 
     public function clickSaveProposalFormButton(string $tab)

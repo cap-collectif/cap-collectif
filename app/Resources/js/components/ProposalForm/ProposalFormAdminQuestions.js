@@ -209,6 +209,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
           </DragDropContext>
         </ListGroup>
         <Button
+          id="js-btn-create-section"
           bsStyle="primary"
           className="btn-outline-primary box-content__toolbar"
           onClick={this.handleCreateSection}>

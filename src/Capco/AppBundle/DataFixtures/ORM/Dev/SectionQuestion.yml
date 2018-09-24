@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\Questions\SectionQuestion:
+  sectionquestion1:
+    id: 24
+    title: Nouvelle section
+    description: ma super description
+    required: false
+    type: 10
+    private: false
