@@ -17,6 +17,7 @@ import type { GlobalState, Dispatch } from '../../types';
 import { ProposalFormAdminDeleteQuestionModal } from './ProposalFormAdminDeleteQuestionModal';
 import { ProposalFormAdminQuestion } from './ProposalFormAdminQuestion';
 import ProposalFormAdminSectionModal from './ProposalFormAdminSectionModal';
+import FlashMessages from '../Utils/FlashMessages';
 
 type Props = {
   dispatch: Dispatch,
@@ -32,6 +33,7 @@ type State = {
   showDeleteModal: boolean,
   deleteIndex: ?number,
   deleteType: ?string,
+  flashMessages: Array<string>,
 };
 
 const getItemStyle = (draggableStyle: DraggableStyle) => ({
@@ -53,7 +55,10 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
       deleteIndex: null,
       showDeleteModal: false,
       deleteType: null,
+      flashMessages: [],
     };
+
+    this.timeoutId = null;
   }
 
   onDragEnd = (result: DropResult) => {
@@ -68,12 +73,18 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     );
   };
 
+  timeoutId: ?TimeoutID;
+
   handleClose = (index: number) => {
     const { fields, questions } = this.props;
     if (!questions[index].id) {
       fields.remove(index);
     }
-    this.handleSubmit();
+
+    this.setState({
+      editIndex: null,
+      editIndexSection: null,
+    });
   };
 
   handleClickDelete = (index: number, type: string) => {
@@ -90,15 +101,38 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
   };
 
   handleDeleteAction = () => {
-    const { deleteIndex } = this.state;
+    const { deleteIndex, flashMessages } = this.state;
     const { fields } = this.props;
 
     fields.remove(deleteIndex);
 
-    this.setState({
-      showDeleteModal: false,
-      deleteIndex: null,
-    });
+    let createSuccessMsgId = 'your-question-has-been-deleted';
+
+    if (createSuccessMsgId === 'section') {
+      createSuccessMsgId = 'your-section-has-been-deleted';
+    }
+
+    flashMessages.push(createSuccessMsgId);
+
+    this.setState(
+      {
+        showDeleteModal: false,
+        deleteIndex: null,
+        flashMessages,
+      },
+      () => {
+        if (this.timeoutId !== null) {
+          clearTimeout(this.timeoutId);
+        }
+
+        this.timeoutId = setTimeout(() => {
+          this.setState({
+            flashMessages: [],
+          });
+          this.timeoutId = null;
+        }, 5000);
+      },
+    );
   };
 
   handleClickEdit = (index: number, type: string) => {
@@ -109,9 +143,35 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     }
   };
 
-  handleSubmit = () => {
-    this.setState({ editIndex: null });
-    this.setState({ editIndexSection: null });
+  handleSubmit = (type: string) => {
+    let createSuccessMsgId = 'your-question-has-been-registered';
+
+    if (type === 'section') {
+      createSuccessMsgId = 'your-section-has-been-registered';
+    }
+
+    const flashMessages = this.state.flashMessages;
+    flashMessages.push(createSuccessMsgId);
+
+    this.setState(
+      {
+        editIndex: null,
+        editIndexSection: null,
+        flashMessages,
+      },
+      () => {
+        if (this.timeoutId !== null) {
+          clearTimeout(this.timeoutId);
+        }
+
+        this.timeoutId = setTimeout(() => {
+          this.setState({
+            flashMessages: [],
+          });
+          this.timeoutId = null;
+        }, 5000);
+      },
+    );
   };
 
   handleCreateQuestion = () => {
@@ -149,7 +209,8 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
 
   render() {
     const { fields, questions, formName } = this.props;
-    const { editIndex, showDeleteModal, editIndexSection, deleteType } = this.state;
+    const { editIndex, showDeleteModal, editIndexSection, deleteType, flashMessages } = this.state;
+
     return (
       <div className="form-group" id="proposal_form_admin_questions_panel_personal">
         <ProposalFormAdminDeleteQuestionModal
@@ -183,7 +244,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                             <ProposalFormAdminQuestionModal
                               isCreating={!!questions[index].id}
                               onClose={this.handleClose.bind(this, index)}
-                              onSubmit={this.handleSubmit}
+                              onSubmit={this.handleSubmit.bind(this, 'question')}
                               member={member}
                               show={index === editIndex}
                               formName={formName}
@@ -193,7 +254,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                               member={member}
                               isCreating={!!questions[index].id}
                               onClose={this.handleClose.bind(this, index)}
-                              onSubmit={this.handleSubmit}
+                              onSubmit={this.handleSubmit.bind(this, 'section')}
                               formName={formName}
                             />
                             <ProposalFormAdminQuestion
@@ -228,6 +289,8 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
           <i className="cap cap-bubble-add-2" />{' '}
           <FormattedMessage id="question_modal.create.title" />
         </Button>
+
+        <FlashMessages style={{ marginTop: '15px' }} success={flashMessages} />
       </div>
     );
   }

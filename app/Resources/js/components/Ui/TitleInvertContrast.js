@@ -12,7 +12,7 @@ type Props = {
 
 const H3 = styled.h3`
   margin-bottom: 15px;
-  span {
+  p {
     background-color: ${props => props.backgroundColor || '#546E7A'};
     color: ${props => props.labelColor || '#ffffff'};
     padding: 8px;
@@ -21,7 +21,7 @@ const H3 = styled.h3`
 
 const TitleInvertContrast = ({ children, backgroundColor, labelColor }: Props) => (
   <H3 backgroundColor={backgroundColor} labelColor={labelColor}>
-    <span>{children}</span>
+    <p>{children}</p>
   </H3>
 );
 
