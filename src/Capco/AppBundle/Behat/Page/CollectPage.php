@@ -28,7 +28,7 @@ class CollectPage extends Page
         'my votes' => '.widget__button.navbar-btn.pull-right.btn.btn-default',
         'restricted-access' => '#restricted-access',
         'restricted-access-link' => '#restricted-access > div > button',
-        'restricted-group' => ' > span:nth-child(1) > button',
+        'restricted-group-link' => ' > button',
     ];
 
     public function sortByDate()
@@ -131,7 +131,7 @@ class CollectPage extends Page
 
     public function iClickOnUserGroupModal(string $groupId)
     {
-        $selector = "#$groupId" . $this->getSelector('restricted-group');
+        $selector = "#$groupId" . $this->getSelector('restricted-group-link');
 
         $element = $this->find('css', $selector);
         if (!$element) {
