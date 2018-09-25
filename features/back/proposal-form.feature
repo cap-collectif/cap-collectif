@@ -17,6 +17,7 @@ Scenario: Logged in admin wants edit a proposal form page content
   And  fill in the following:
     | categories[0].name | test title |
   And I click on a proposal form button "category add popup save"
+  And I wait 1 seconds
   And I check a proposal form checkbox "address toggle"
   And I fill in the following:
     | addressHelpText | test text |
@@ -25,17 +26,14 @@ Scenario: Logged in admin wants edit a proposal form page content
   And I check a proposal form checkbox "address limit"
   And I change the proposal form select "proposal form address zoom" with option 11
   And I click on a proposal form button "personal-field add"
+  And I wait 1 seconds
   And I fill in the following:
     | questions[0].title | test title |
     | questions[0].helpText | test helptext |
   And I select "medias" from "questions[0].type"
   And I check "questions[0].required"
   And I click on a proposal form button "personal-field add popup save"
-  And I click on a proposal form button "personal-section add"
-  And  fill in the following:
-    | questions[1].title | test section |
-    | questions[1].description | greate description for my section |
-  And I click on a proposal form button "personal-field add popup save"
+  And I wait 1 seconds
   Then I save current admin proposal form "content"
   And I wait 1 seconds
   Then I should see "global.saved"

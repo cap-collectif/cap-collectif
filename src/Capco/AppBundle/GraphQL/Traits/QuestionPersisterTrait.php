@@ -1,7 +1,9 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Traits;
 
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\PersistentCollection;
 

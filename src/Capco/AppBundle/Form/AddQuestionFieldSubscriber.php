@@ -3,7 +3,6 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
-use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use pmill\Doctrine\Hydrator\ArrayHydrator;
@@ -57,8 +56,6 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
             AbstractQuestion::QUESTION_TYPE_EDITOR === $data['question']['type']
         ) {
             $question = new SimpleQuestion();
-        } elseif (AbstractQuestion::QUESTION_TYPE_SECTION === $data['question']['type']) {
-            $question = new SectionQuestion();
         }
 
         // We hydrate the question with submitted values
@@ -77,10 +74,6 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
         }
         if ($question instanceof MultipleChoiceQuestion) {
             return MultipleChoiceQuestionType::class;
-        }
-
-        if ($question instanceof SectionQuestion) {
-            return SectionQuestionType::class;
         }
 
         return MediaQuestionType::class;

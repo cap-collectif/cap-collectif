@@ -1,0 +1,687 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="proposal-form-admin-question-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="proposal-form-admin-question-modal-title-lg"
+    >
+      <FormattedMessage
+        id="question_modal.update.title"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <Field
+      component={[Function]}
+      id="string.title"
+      label={
+        <FormattedMessage
+          id="admin.fields.question.title"
+          values={Object {}}
+        />
+      }
+      name="string.title"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="string.description"
+      label={
+        <span>
+          <FormattedMessage
+            id="admin.fields.question.description"
+            values={Object {}}
+          />
+          <span
+            className="excerpt"
+          >
+             
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="string.description"
+      type="editor"
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[MockFunction]}
+    />
+    <Connect(SubmitButton)
+      isSubmitting={false}
+      label="global.validate"
+      onSubmit={[MockFunction]}
+    />
+  </ModalFooter>
+</Modal>
+`;
+
+exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="proposal-form-admin-question-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="proposal-form-admin-question-modal-title-lg"
+    >
+      <FormattedMessage
+        id="question_modal.update.title"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <Field
+      component={[Function]}
+      id="string.title"
+      label={
+        <FormattedMessage
+          id="admin.fields.question.title"
+          values={Object {}}
+        />
+      }
+      name="string.title"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="string.description"
+      label={
+        <span>
+          <FormattedMessage
+            id="admin.fields.question.description"
+            values={Object {}}
+          />
+          <span
+            className="excerpt"
+          >
+             
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="string.description"
+      type="editor"
+    />
+    <Field
+      component={[Function]}
+      id="string.color"
+      label={
+        <FormattedMessage
+          id="admin.fields.question_choice.color"
+          values={Object {}}
+        />
+      }
+      name="string.color"
+      normalize={[Function]}
+      type="select"
+    >
+      <option
+        value=""
+      >
+        <FormattedMessage
+          id="global.select"
+          values={Object {}}
+        />
+      </option>
+      <option
+        value="PRIMARY"
+      >
+        <FormattedMessage
+          id="admin.fields.question_choice.colors.primary"
+          values={Object {}}
+        />
+      </option>
+      <option
+        value="SUCCESS"
+      >
+        <FormattedMessage
+          id="admin.fields.question_choice.colors.success"
+          values={Object {}}
+        />
+      </option>
+      <option
+        value="INFO"
+      >
+        <FormattedMessage
+          id="admin.fields.question_choice.colors.info"
+          values={Object {}}
+        />
+      </option>
+      <option
+        value="WARNING"
+      >
+        <FormattedMessage
+          id="admin.fields.question_choice.colors.warning"
+          values={Object {}}
+        />
+      </option>
+      <option
+        value="DANGER"
+      >
+        <FormattedMessage
+          id="admin.fields.question_choice.colors.danger"
+          values={Object {}}
+        />
+      </option>
+    </Field>
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[MockFunction]}
+    />
+    <Connect(SubmitButton)
+      isSubmitting={false}
+      label="global.validate"
+      onSubmit={[MockFunction]}
+    />
+  </ModalFooter>
+</Modal>
+`;
+
+exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="proposal-form-admin-question-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="proposal-form-admin-question-modal-title-lg"
+    >
+      <FormattedMessage
+        id="question_modal.update.title"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <Field
+      component={[Function]}
+      id="string.title"
+      label={
+        <FormattedMessage
+          id="admin.fields.question.title"
+          values={Object {}}
+        />
+      }
+      name="string.title"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="string.description"
+      label={
+        <span>
+          <FormattedMessage
+            id="admin.fields.question.description"
+            values={Object {}}
+          />
+          <span
+            className="excerpt"
+          >
+             
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="string.description"
+      type="editor"
+    />
+    <Field
+      component={[Function]}
+      help="global.image_uploader.image.dropzone"
+      id="proposal_media"
+      label={
+        <span>
+          <FormattedMessage
+            id="proposal.media"
+            values={Object {}}
+          />
+          <span
+            className="excerpt"
+          >
+             
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="string.image"
+      type="image"
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[MockFunction]}
+    />
+    <Connect(SubmitButton)
+      isSubmitting={false}
+      label="global.validate"
+      onSubmit={[MockFunction]}
+    />
+  </ModalFooter>
+</Modal>
+`;
+
+exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="proposal-form-admin-question-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="proposal-form-admin-question-modal-title-lg"
+    >
+      <FormattedMessage
+        id="question_modal.create.title"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <Field
+      component={[Function]}
+      id="string.title"
+      label={
+        <FormattedMessage
+          id="admin.fields.question.title"
+          values={Object {}}
+        />
+      }
+      name="string.title"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="string.description"
+      label={
+        <span>
+          <FormattedMessage
+            id="admin.fields.question.description"
+            values={Object {}}
+          />
+          <span
+            className="excerpt"
+          >
+             
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="string.description"
+      type="editor"
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[MockFunction]}
+    />
+    <Connect(SubmitButton)
+      isSubmitting={false}
+      label="global.validate"
+      onSubmit={[MockFunction]}
+    />
+  </ModalFooter>
+</Modal>
+`;
+
+exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="proposal-form-admin-question-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={false}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="proposal-form-admin-question-modal-title-lg"
+    >
+      <FormattedMessage
+        id="question_modal.update.title"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <Field
+      component={[Function]}
+      id="string.title"
+      label={
+        <FormattedMessage
+          id="admin.fields.question.title"
+          values={Object {}}
+        />
+      }
+      name="string.title"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="string.description"
+      label={
+        <span>
+          <FormattedMessage
+            id="admin.fields.question.description"
+            values={Object {}}
+          />
+          <span
+            className="excerpt"
+          >
+             
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="string.description"
+      type="editor"
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[MockFunction]}
+    />
+    <Connect(SubmitButton)
+      isSubmitting={false}
+      label="global.validate"
+      onSubmit={[MockFunction]}
+    />
+  </ModalFooter>
+</Modal>
+`;
+
+exports[`<ProposalUserVoteItem /> should render correctly when not show and not creating 1`] = `
+<Modal
+  animation={true}
+  aria-labelledby="proposal-form-admin-question-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[MockFunction]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={false}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="proposal-form-admin-question-modal-title-lg"
+    >
+      <FormattedMessage
+        id="question_modal.create.title"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <Field
+      component={[Function]}
+      id="string.title"
+      label={
+        <FormattedMessage
+          id="admin.fields.question.title"
+          values={Object {}}
+        />
+      }
+      name="string.title"
+      type="text"
+    />
+    <Field
+      component={[Function]}
+      id="string.description"
+      label={
+        <span>
+          <FormattedMessage
+            id="admin.fields.question.description"
+            values={Object {}}
+          />
+          <span
+            className="excerpt"
+          >
+             
+            <FormattedMessage
+              id="global.form.optional"
+              values={Object {}}
+            />
+          </span>
+        </span>
+      }
+      name="string.description"
+      type="editor"
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[MockFunction]}
+    />
+    <Connect(SubmitButton)
+      isSubmitting={false}
+      label="global.validate"
+      onSubmit={[MockFunction]}
+    />
+  </ModalFooter>
+</Modal>
+`;
