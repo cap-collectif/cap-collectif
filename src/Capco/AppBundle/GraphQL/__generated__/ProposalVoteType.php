@@ -60,11 +60,13 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
                     'access' => null,
                 ],
                 'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('User'),
                     'args' => [
                     ],
-                    'resolve' => null,
-                    'description' => 'The author of the contribution.',
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return (($value->isPrivate()) ? (null) : ($value->getUser()));
+                    },
+                    'description' => 'The author of the contribution. If null, the vote is anonymous.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -77,6 +79,20 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
                     ],
                     'resolve' => null,
                     'description' => 'The contribution that was voted.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'kind' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'args' => [
+                    ],
+                    'resolve' => function () use ($globalVariable) {
+                        return 'proposalVote';
+                    },
+                    'description' => 'Returns \'proposalVote\'.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -180,7 +196,7 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('PrivatableVote'), $globalVariable->get('typeResolver')->resolve('Publishable'), $globalVariable->get('typeResolver')->resolve('Vote')];
+                return [$globalVariable->get('typeResolver')->resolve('Vote'), $globalVariable->get('typeResolver')->resolve('Publishable'), $globalVariable->get('typeResolver')->resolve('PrivatableVote')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

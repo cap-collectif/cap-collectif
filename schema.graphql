@@ -357,10 +357,13 @@ type ArgumentVote implements Vote & Publishable {
   createdAt: DateTime!
 
   # The author of the contribution.
-  author: User!
+  author: User
 
   # Return the related contribution if the contribution is related to another.
   related: Argument
+
+  # Returns Type of vote
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -859,10 +862,13 @@ type CommentVote implements Node & Vote & Publishable {
   createdAt: DateTime!
 
   # The author of the contribution.
-  author: User!
+  author: User
 
   # The contribution that was voted.
   related: Contribution
+
+  # Returns 'commentVote'.
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -1928,10 +1934,13 @@ type OpinionVote implements YesNoPairedVote & Publishable & Vote {
   createdAt: DateTime!
 
   # The author of the contribution.
-  author: User!
+  author: User
 
   # The contribution that was voted.
   related: Contribution
+
+  # Returns 'opinionVote'.
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -2092,10 +2101,13 @@ interface PrivatableVote {
   createdAt: DateTime!
 
   # The author of the contribution.
-  author: User!
+  author: User
 
   # The contribution that was voted.
   related: Contribution
+
+  # Returns Type of vote
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -2607,7 +2619,7 @@ enum ProposalStepVoteType {
 }
 
 # Entities that can be published.
-type ProposalVote implements PrivatableVote & Publishable & Vote {
+type ProposalVote implements Vote & Publishable & PrivatableVote {
   # Anonymous or not.
   private: Boolean
 
@@ -2617,11 +2629,14 @@ type ProposalVote implements PrivatableVote & Publishable & Vote {
   # Date of vote.
   createdAt: DateTime!
 
-  # The author of the contribution.
-  author: User!
+  # The author of the contribution. If null, the vote is anonymous.
+  author: User
 
   # The contribution that was voted.
   related: Contribution
+
+  # Returns 'proposalVote'.
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -3492,10 +3507,13 @@ type SourceVote implements Vote & Publishable {
   createdAt: DateTime!
 
   # The author of the contribution.
-  author: User!
+  author: User
 
   # The contribution that was voted.
   related: Contribution
+
+  # Returns 'sourceVote'.
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -4395,10 +4413,13 @@ type VersionVote implements YesNoPairedVote & Publishable & Vote {
   createdAt: DateTime!
 
   # The author of the contribution.
-  author: User!
+  author: User
 
   # The contribution that was voted.
   related: Contribution
+
+  # Returns 'vote'.
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -4421,10 +4442,13 @@ interface Vote {
   createdAt: DateTime!
 
   # The author of the contribution.
-  author: User!
+  author: User
 
   # The contribution that was voted.
   related: Contribution
+
+  # Returns Type of vote
+  kind: String!
 }
 
 # A connection to a list of items.
@@ -4477,10 +4501,13 @@ interface YesNoPairedVote {
   createdAt: DateTime!
 
   # The author of the contribution.
-  author: User!
+  author: User
 
   # The contribution that was voted.
   related: Contribution
+
+  # Returns Type of vote
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!

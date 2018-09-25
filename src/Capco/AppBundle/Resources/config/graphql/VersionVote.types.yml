@@ -8,3 +8,7 @@ VersionVote:
       - YesNoPairedVote
       - Publishable
       - Vote
+    fields:
+      kind:
+        type: 'String!'
+        description: "Returns 'vote'."

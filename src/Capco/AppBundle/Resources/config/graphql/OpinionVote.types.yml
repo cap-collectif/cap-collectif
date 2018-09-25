@@ -8,3 +8,8 @@ OpinionVote:
       - YesNoPairedVote
       - Publishable
       - Vote
+    fields:
+      kind:
+        type: 'String!'
+        description: "Returns 'opinionVote'."
+        resolve: 'opinionVote'

@@ -7,3 +7,8 @@ SourceVote:
     interfaces:
       - Vote
       - Publishable
+    fields:
+      kind:
+        type: 'String!'
+        description: "Returns 'sourceVote'."
+        resolve: 'sourceVote'
