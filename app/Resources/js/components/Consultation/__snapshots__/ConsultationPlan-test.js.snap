@@ -1,11 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ConsultationPlan /> renders correcty 1`] = `
-<div
-  data-offset-bottom="450"
-  data-offset-top={655}
-  data-spy="affix"
->
+<div>
   <ReactRelayQueryRenderer
     environment={
       RelayModernEnvironment {

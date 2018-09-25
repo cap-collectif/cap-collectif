@@ -5,7 +5,7 @@ exports[`<ConsultationPropositionBox /> renders correcty 1`] = `
   className="row"
 >
   <div
-    className="consultation-plan col-sm-3 col-xs-12  hidden-xs"
+    className="consultation-plan col-md-3 col-sm-12"
     id="consultation-plan"
   >
     <ConsultationPlan
@@ -22,7 +22,7 @@ exports[`<ConsultationPropositionBox /> renders correcty 1`] = `
     />
   </div>
   <div
-    className="col-sm-9"
+    className="col-md-9"
     id="scroll-content"
   >
     <h2

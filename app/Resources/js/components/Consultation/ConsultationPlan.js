@@ -20,30 +20,6 @@ type Props = {
 };
 
 export class ConsultationPlan extends React.Component<Props> {
-  // componentDidMount() {
-  //   window.addEventListener('resize', () => {
-  //     this.setState({
-  //       windowWidth: window.innerWidth,
-  //     });
-  //   });
-  // }
-
-  getOffsetTop = () => {
-    const planContainer = document.getElementById('consultation-plan');
-    const mainContainer = document.querySelector('body');
-    const topPlanContainer = planContainer && planContainer.getBoundingClientRect().top;
-    const topMainContainer = mainContainer && mainContainer.getBoundingClientRect().top;
-    // 50 is height of nav
-    const topPlan =
-      topPlanContainer && topMainContainer && topPlanContainer - topMainContainer - 50;
-
-    if(topPlan) {
-      return topPlan;
-    }
-
-    return 655;
-  };
-
   render() {
     const { step } = this.props;
 
@@ -70,12 +46,7 @@ export class ConsultationPlan extends React.Component<Props> {
     };
 
     return (
-      <div
-        // id="scrollspy"
-        data-spy='affix'
-        // data-offset-top={topPlan || '655'}
-        data-offset-top={this.getOffsetTop()}
-        data-offset-bottom="450">
+      <div>
         <QueryRenderer
           environment={environment}
           query={graphql`

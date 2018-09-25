@@ -313,6 +313,10 @@ svg.avatar-group {
 /* ======================= Consult plan ============================*/
 
 .consultation-plan {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 60px;
+
     &_open {
         background-color: $page-bgc;
 
@@ -338,11 +342,8 @@ svg.avatar-group {
     }
 
     &_close {
-        text-transform: uppercase;
-    }
-
-    &:not(.affix) &_close {
         position: absolute;
+        text-transform: uppercase;
         left: 15px;
     }
 
@@ -359,16 +360,6 @@ svg.avatar-group {
             color: $black;
             font-weight: 300;
         }
-    }
-
-    .affix {
-        top: 60px;
-        position: fixed;
-        z-index: 20 !important;
-    }
-
-    .affix-bottom {
-        position: absolute;
     }
 
     .cap-android-menu {
@@ -421,6 +412,11 @@ svg.avatar-group {
     .consultation-plan {
         z-index: 1100;
         padding: 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: inherit;
+        width: 100%;
 
         &_open {
             background-color: $white;
@@ -428,12 +424,10 @@ svg.avatar-group {
 
         &_close {
             text-transform: capitalize;
-            position: fixed;
-            right: 15px;
-            bottom: 15px;
             padding: 10px 15px;
             background-color: $primary-color; // change with primary color
             color: $white;
+            border-radius: 4px;
         }
 
         &__list {
@@ -461,15 +455,6 @@ svg.avatar-group {
             p {
                 margin-bottom: 0;
             }
-        }
-
-        // rmv affix on mobile
-        .affix, .affix-top, .affix-bottom {
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            left: 0;
-            top: inherit;
         }
 
         .nav.nav-pills li {

@@ -19,6 +19,13 @@ type Props = {
 };
 
 export class ConsultationPlanRecursiveItems extends React.Component<Props> {
+  componentDidMount() {
+    const { closePlan, stepId } = this.props;
+
+    if(config.isMobile) {
+      closePlan(stepId);
+    }
+  }
 
   getPlan = () => {
     const { consultation, closePlan, openPlan, showConsultationPlan, stepId } = this.props;
