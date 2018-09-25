@@ -188,9 +188,17 @@ trait ProposalStepsTrait
     {
         $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano);
         $this->getSession()->wait(
-            5000,
+            2000,
             "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
         );
+    }
+
+    /**
+     * @When I go to a proposal with lot of comments
+     */
+    public function iGoToAProposalWithLotOfComments()
+    {
+        $this->iGoToAProposalMadeByMSantoStefano();
     }
 
     /**
@@ -1077,6 +1085,8 @@ trait ProposalStepsTrait
     public function theProposalVoteButtonMustBeDisabled(string $id = null)
     {
         $id = $id ?: $this->getProposalId();
+        $this->getSession()->wait(2000, "$('" . $id . "').length > 0");
+
         $button = $this->getCurrentPage()->getVoteButton($id);
         Assert::assertTrue(
             $button->hasClass('disabled') || $button->hasAttribute('disabled'),
@@ -1095,6 +1105,8 @@ trait ProposalStepsTrait
             : '"proposal vote button" element is not present on the page';
 
         try {
+            $this->getSession()->wait(2000, "$('" . $id . "').length > 0");
+
             $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
         } catch (\Exception $e) {
             Assert::assertSame($execpetionMessage, $e->getMessage());
@@ -1536,6 +1548,8 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $proposalId = $id ?: $this->getProposalId();
+        $this->getSession()->wait(2000, "$('" . $proposalId . "').length > 0");
+
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
         Assert::assertEquals(
             $label,

@@ -193,10 +193,21 @@ class ApplicationContext extends UserContext
     /**
      * @Given I visited :pageName
      */
-    public function iVisitedPage(string $pageName)
+    public function iVisitedPage(string $pageName, bool $cookiesConsent = true)
     {
         $this->navigationContext->iVisitedPage($pageName);
-        $this->setCookieConsent();
+        $this->currentPage = $pageName;
+        if ($cookiesConsent) {
+            $this->setCookieConsent();
+        }
+    }
+
+    /**
+     * @Given I visited :pageName with cookies not accepted
+     */
+    public function iVisitedPageWithCookiesNotAccepted(string $pageName)
+    {
+        $this->iVisitedPage($pageName, false);
     }
 
     /**
@@ -829,8 +840,7 @@ class ApplicationContext extends UserContext
     {
         $this->currentPage = $page;
         $this->navigationContext->getPage($page)->open($params);
-        $this->iWait(2);
-        $this->setCookieConsent();
+        //        $this->setCookieConsent();
     }
 
     private function getCurrentPage()
