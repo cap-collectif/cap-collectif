@@ -12,3 +12,6 @@ CommentVote:
       contribution:
         type: 'Comment!'
         resolve: '@=value.getComment()'
+      kind:
+        type: 'String!'
+        description: "Returns 'commentVote'."

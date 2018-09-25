@@ -867,7 +867,7 @@ type CommentVote implements Node & Vote & Publishable {
   # The contribution that was voted.
   related: Contribution
 
-  # Returns Type of vote
+  # Returns 'commentVote'.
   kind: String!
 
   # `true` if the object is published.

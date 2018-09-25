@@ -78,7 +78,7 @@ final class CommentVoteType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Returns Type of vote',
+                    'description' => 'Returns \'commentVote\'.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
