@@ -15,6 +15,7 @@ import type {
 } from '../../../mutations/__generated__/AddUsersToGroupFromEmailMutation.graphql';
 import Loader from '../../Ui/Loader';
 import type { User } from '../../../redux/modules/user';
+import { isEmail } from '../../../services/Validator';
 
 type Props = {
   group: GroupAdminUsers_group,
@@ -61,6 +62,11 @@ const prepareVariablesFromAnalyzedFile = (
   const emails = fileContent.split('\n').map((email: string) => {
     return email.replace(/['"]+/g, '');
   });
+
+  // detects if first line is a header
+  if (emails.length > 0 && !isEmail(emails[0])) {
+    emails.shift();
+  }
 
   return {
     input: {
@@ -126,7 +132,12 @@ const renderDropzoneInput = ({
         <FormattedMessage id="csv-file" />
       </ControlLabel>
       <HelpBlock>
-        <FormattedHTMLMessage id="csv-file-helptext" />
+        <FormattedHTMLMessage
+          id="csv-file-helptext"
+          values={{
+            link: encodeURI('data:text/csv;charset=utf-8,Email Address [Required]'),
+          }}
+        />
       </HelpBlock>
       <Loader show={asyncValidating}>
         <FileUpload
