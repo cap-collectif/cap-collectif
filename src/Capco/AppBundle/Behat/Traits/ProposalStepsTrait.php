@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Behat\Traits;
 
 use Behat\Gherkin\Node\TableNode;
@@ -198,7 +199,7 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalWithLotOfComments()
     {
-        $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, false);
+        $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, '#main',false);
         $this->getSession()->wait(
             2000,
             "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
@@ -234,10 +235,10 @@ trait ProposalStepsTrait
      */
     public function iGoToACommentNotifiableProposal()
     {
-        $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
-        $this->getSession()->wait(
-            5000,
-            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
+        $this->visitPageWithParams(
+            'proposal page',
+            self::$proposalCommentNotifiable,
+            '.comments__section'
         );
     }
 
@@ -246,7 +247,11 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalNotCommentNotifiable()
     {
-        $this->visitPageWithParams('proposal page', self::$proposalCommentNotNotifiable);
+        $this->visitPageWithParams(
+            'proposal page',
+            self::$proposalCommentNotNotifiable,
+            '.comments__section'
+        );
     }
 
     /**

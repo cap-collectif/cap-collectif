@@ -94,7 +94,11 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionInAClosedStep()
     {
-        $this->visitPageWithParams('opinion page', self::$opinionInClosedStep, 'opinion-page-tabs');
+        $this->visitPageWithParams(
+            'opinion page',
+            self::$opinionInClosedStep,
+            '#opinion-page-tabs'
+        );
     }
 
     /**
@@ -652,7 +656,11 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionWithVersions()
     {
-        $this->visitPageWithParams('opinion page', self::$opinionWithVersions, 'opinion-page-tabs');
+        $this->visitPageWithParams(
+            'opinion page',
+            self::$opinionWithVersions,
+            '#opinion-page-tabs'
+        );
     }
 
     /**
@@ -660,7 +668,7 @@ trait OpinionStepsTrait
      */
     public function iGoToAVersion()
     {
-        $this->visitPageWithParams('opinion version page', self::$version, 'opinion-page-tabs');
+        $this->visitPageWithParams('opinion version page', self::$version, '#opinion-page-tabs');
     }
 
     /**

@@ -840,12 +840,12 @@ class ApplicationContext extends UserContext
     private function visitPageWithParams(
         $page,
         array $params = [],
-        $id = 'main',
+        $element = '#main',
         bool $cookiesConsent = true
     ): void {
         $this->currentPage = $page;
         $this->navigationContext->getPage($page)->open($params);
-        $this->getSession()->wait(3000, "$('#" . $id . "').length > 0");
+        $this->getSession()->wait(3000, "$('" . $element . "').length > 0");
         if ($cookiesConsent) {
             $this->setCookieConsent();
         }
