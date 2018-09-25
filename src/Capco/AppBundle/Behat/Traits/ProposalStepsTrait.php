@@ -198,7 +198,11 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalWithLotOfComments()
     {
-        $this->iGoToAProposalMadeByMSantoStefano();
+        $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, false);
+        $this->getSession()->wait(
+            2000,
+            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
+        );
     }
 
     /**

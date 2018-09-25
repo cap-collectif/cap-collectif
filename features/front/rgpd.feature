@@ -32,7 +32,7 @@ Scenario: An anonymous wants to show cookie page
   When I click the "#main" element
   Then I should see "performance-cookies-alert"
 
-@javascript @dev
+@javascript
 Scenario: An anonymous wants to toggle cookies performance
   Given I visited "confidentialite page" with cookies not accepted
   And I should not see "step.vote_type.disabled"
@@ -44,7 +44,7 @@ Scenario: An anonymous wants to toggle cookies performance
   And I should see "step.vote_type.disabled"
   And I should not see "performance-cookies-alert"
 
-@javascript @dev
+@javascript
 Scenario: An anonymous wants to toggle cookies advertising
   Given I visited "confidentialite page" with cookies not accepted
   And I should not see "step.vote_type.disabled"

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
@@ -836,11 +837,18 @@ class ApplicationContext extends UserContext
         Assert::assertTrue($input->hasAttribute('disabled'));
     }
 
-    private function visitPageWithParams($page, $params = [])
-    {
+    private function visitPageWithParams(
+        $page,
+        array $params = [],
+        $id = 'main',
+        bool $cookiesConsent = true
+    ): void {
         $this->currentPage = $page;
         $this->navigationContext->getPage($page)->open($params);
-        //        $this->setCookieConsent();
+        $this->getSession()->wait(3000, "$('#" . $id . "').length > 0");
+        if ($cookiesConsent) {
+            $this->setCookieConsent();
+        }
     }
 
     private function getCurrentPage()

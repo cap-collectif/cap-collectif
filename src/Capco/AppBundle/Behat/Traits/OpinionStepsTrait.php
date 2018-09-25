@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Behat\Traits;
 
 use PHPUnit\Framework\Assert;
@@ -93,7 +94,7 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionInAClosedStep()
     {
-        $this->visitPageWithParams('opinion page', self::$opinionInClosedStep);
+        $this->visitPageWithParams('opinion page', self::$opinionInClosedStep, 'opinion-page-tabs');
     }
 
     /**
@@ -103,7 +104,11 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionWithLoadsOfVote()
     {
-        $this->visitPageWithParams('opinion page', self::$opinionWithLoadsOfVotes);
+        $this->visitPageWithParams(
+            'opinion page',
+            self::$opinionWithLoadsOfVotes,
+            'opinion-page-tabs'
+        );
     }
 
     /**
@@ -113,7 +118,11 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionWithNoSources()
     {
-        $this->visitPageWithParams('opinion page', self::$opinionWithNoSources);
+        $this->visitPageWithParams(
+            'opinion page',
+            self::$opinionWithNoSources,
+            'opinion-page-tabs'
+        );
     }
 
     /**
@@ -393,7 +402,6 @@ trait OpinionStepsTrait
      */
     public function iClickTheArgumentVoteButton()
     {
-        $page = $this->getCurrentPage();
         $this->clickArgumentVoteButtonWithLabel('vote.ok');
     }
 
@@ -407,6 +415,7 @@ trait OpinionStepsTrait
         $page = $this->getCurrentPage();
         $inClosedStep =
             $this->opinionPageInClosedStepIsOpen() || $this->versionPageInClosedStepIsOpen();
+        $this->getSession()->wait(1);
         $button = $page->getArgumentVoteButton($inClosedStep);
         Assert::assertTrue($button->hasAttribute('disabled'));
     }
@@ -507,6 +516,7 @@ trait OpinionStepsTrait
     public function theCreateOpinionButtonShouldBeDisabled()
     {
         $page = $this->getCurrentPage();
+        $this->getSession()->wait(3000, "$('#btn-add--les-causes').length > 0");
         $button = $page->find('css', '#btn-add--les-causes');
         Assert::assertTrue($button->hasAttribute('disabled'));
     }
@@ -642,7 +652,7 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionWithVersions()
     {
-        $this->visitPageWithParams('opinion page', self::$opinionWithVersions);
+        $this->visitPageWithParams('opinion page', self::$opinionWithVersions, 'opinion-page-tabs');
     }
 
     /**
@@ -650,7 +660,7 @@ trait OpinionStepsTrait
      */
     public function iGoToAVersion()
     {
-        $this->visitPageWithParams('opinion version page', self::$version);
+        $this->visitPageWithParams('opinion version page', self::$version, 'opinion-page-tabs');
     }
 
     /**
@@ -660,7 +670,11 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionVersionInAClosedStep()
     {
-        $this->visitPageWithParams('opinion version page', self::$versionInClosedStep);
+        $this->visitPageWithParams(
+            'opinion version page',
+            self::$versionInClosedStep,
+            'opinion-page-tabs'
+        );
     }
 
     /**
@@ -670,7 +684,11 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionVersionWithLoadsOfVote()
     {
-        $this->visitPageWithParams('opinion version page', self::$opinionVersionWithLoadsOfVotes);
+        $this->visitPageWithParams(
+            'opinion version page',
+            self::$opinionVersionWithLoadsOfVotes,
+            'opinion-page-tabs'
+        );
     }
 
     /**
