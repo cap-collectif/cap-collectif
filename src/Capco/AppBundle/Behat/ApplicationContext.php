@@ -196,7 +196,7 @@ class ApplicationContext extends UserContext
     public function iVisitedPage(string $pageName)
     {
         $this->navigationContext->iVisitedPage($pageName);
-        $this->currentPage = $pageName;
+        $this->setCookieConsent();
     }
 
     /**
@@ -871,5 +871,37 @@ class ApplicationContext extends UserContext
         $element->keyDown($spaceBar);
         $element->keyPress($spaceBar);
         $element->keyUp($spaceBar);
+    }
+
+    /**
+     * @When I scroll bot
+     */
+    public function iScrollBot()
+    {
+        $this->scrollTo('bot');
+    }
+
+    /**
+     * @When I scroll top
+     */
+    public function iScrollTop()
+    {
+        $this->scrollTo('top');
+    }
+
+    private function scrollTo(string $direction = 'bot')
+    {
+        // http://keycode.info/
+        // pageDown = 34
+        $key = 34;
+        if ($direction == 'top') {
+            $key = 33;
+        }
+
+        $page = $this->getCurrentPage();
+        $element = $page->find('css', 'body');
+        $element->keyDown($key);
+        $element->keyPress($key);
+        $element->keyUp($key);
     }
 }
