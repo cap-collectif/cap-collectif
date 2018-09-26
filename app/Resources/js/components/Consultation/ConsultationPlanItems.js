@@ -17,6 +17,10 @@ export class ConsultationPlanItems extends React.Component<Props, State> {
     isOpen: false,
   };
 
+  handleCollapse = (activeItem: boolean) => {
+    this.setState({ isOpen: activeItem });
+  };
+
   render() {
     const { section, level } = this.props;
 
@@ -25,8 +29,8 @@ export class ConsultationPlanItems extends React.Component<Props, State> {
         <ConsultationPlanItem
           section={section}
           level={level}
-          onCollapse={activeItem => {
-            this.setState({ isOpen: activeItem });
+          onCollapse={(activeItem) => {
+            this.handleCollapse(activeItem);
           }}
         />
         <Collapse in={this.state.isOpen}>
