@@ -229,7 +229,7 @@ Scenario: Anonymous API client wants to update a synthesis
   """
   Then the JSON response status code should be 401
 
-@database @dev
+@database
 Scenario: API client wants to get synthesis elements
   Given I am logged in to api as admin
   And there is a synthesis with id "42" and elements:
@@ -455,7 +455,7 @@ Scenario: API client wants to get unpublished synthesis elements count
   {"count": 1}
   """
 
-@database  @test
+@database
 Scenario: Anonymous wants to get synthesis elements published tree
   Given there is a synthesis with id "48" based on consultation step "cstep2"
   And I send a GET request to "/api/syntheses/48/elements/tree?type=published"
@@ -468,7 +468,7 @@ Scenario: Anonymous wants to get synthesis elements published tree
       "path": @string@,
       "displayType": "folder",
       "title": "Le problème constaté",
-      "body": @string@,
+      "body": @null@,
       "description": @null@,
       "childrenCount": 1,
       "votes": [],
@@ -479,10 +479,11 @@ Scenario: Anonymous wants to get synthesis elements published tree
       "parentChildrenScore": 0,
       "childrenElementsNb": 0,
       "parentChildrenElementsNb": 0,
-      "linkedDataUrl": @...@,
+      "linkedDataUrl": "",
       "subtitle": @...@,
       "authorName": @...@,
-      "children": []
+      "linkedDataCreation": @string@,
+      "children": @...@
     },
     {
       "id": @string@,
@@ -490,7 +491,7 @@ Scenario: Anonymous wants to get synthesis elements published tree
       "path": @string@,
       "displayType": "folder",
       "title": "Les causes",
-      "body": @string@,
+      "body": @null@,
       "description": @null@,
       "childrenCount": 0,
       "votes": [],
@@ -501,9 +502,10 @@ Scenario: Anonymous wants to get synthesis elements published tree
       "parentChildrenScore": 0,
       "childrenElementsNb": 0,
       "parentChildrenElementsNb": 0,
-      "linkedDataUrl": @...@,
+      "linkedDataUrl": "",
       "subtitle": @...@,
       "authorName": @...@,
+      "linkedDataCreation": @string@,
       "children": []
     }
   ]
@@ -523,7 +525,7 @@ Scenario: API client wants to get not ignored synthesis elements tree
       "path": @string@,
       "displayType": @string@,
       "title": @string@,
-      "body": @string@,
+      "body": @null@,
       "published": true,
       "description": @null@,
       "childrenCount": @integer@,
@@ -572,7 +574,7 @@ Scenario: API client wants to get synthesis elements tree
       "path": @string@,
       "displayType": @string@,
       "title": @string@,
-      "body": @string@,
+      "body": @null@,
       "description": @null@,
       "published": true,
       "childrenCount": @integer@,
@@ -759,7 +761,7 @@ Scenario: Anonymous API client wants to create a synthesis element
   """
   Then the JSON response status code should be 401
 
-@database
+@database 
 Scenario: API client wants to update a synthesis element
   Given I am logged in to api as admin
   And there is a synthesis with id "42" and elements:
@@ -817,7 +819,7 @@ Scenario: API client wants to update a synthesis element
   }
   """
 
-@database
+@database 
 Scenario: Non admin API client wants to update a synthesis element
   Given I am logged in to api as user
   And there is a synthesis with id "42" and elements:
@@ -831,7 +833,7 @@ Scenario: Non admin API client wants to update a synthesis element
   """
   Then the JSON response status code should be 403
 
-@database
+@database 
 Scenario: Anonymous API client wants to update a synthesis element
   Given there is a synthesis with id "42" and elements:
     | 43 |
@@ -844,7 +846,7 @@ Scenario: Anonymous API client wants to update a synthesis element
   """
   Then the JSON response status code should be 401
 
-@database
+@database 
 Scenario: API client wants to divide a synthesis element
   Given I am logged in to api as admin
   And there is a synthesis with id "42" and elements:

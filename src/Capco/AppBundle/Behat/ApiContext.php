@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Behat;
 
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Manager\LogManager;
@@ -307,7 +308,7 @@ EOF;
     public function thereIsASynthesisBasedOnConsultationStep(string $sId, string $csId)
     {
         $synthesis = $this->getEntityManager()
-            ->getRepository('CapcoAppBundle:Synthesis\Synthesis')
+            ->getRepository(Synthesis::class)
             ->find($sId);
 
         if (null === $synthesis) {
@@ -325,7 +326,7 @@ EOF;
         }
 
         $consultationStep = $this->getEntityManager()
-            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
+            ->getRepository(ConsultationStep::class)
             ->find($csId);
         $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep(
             $synthesis,
