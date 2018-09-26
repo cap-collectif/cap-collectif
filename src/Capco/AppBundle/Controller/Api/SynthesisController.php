@@ -16,6 +16,9 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -253,7 +256,8 @@ class SynthesisController extends FOSRestController
             $this->createAccessDeniedException();
         }
 
-        $tree = $this->get('capco.synthesis.synthesis_element_handler')            ->getElementsTreeFromSynthesisByType($synthesis, $type, $parent);
+        $tree = $this->get('capco.synthesis.synthesis_element_handler')->getElementsTreeFromSynthesisByType($synthesis, $type, $parent);
+
         return $tree;
     }
 

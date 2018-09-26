@@ -34,7 +34,7 @@ class SynthesisElementHandler
             throw new NotFoundHttpException();
         }
 
-        $paginator = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->getWith(
+        $paginator = $this->em->getRepository(SynthesisElement::class)->getWith(
             $synthesis,
             $type,
             $term,
@@ -62,7 +62,7 @@ class SynthesisElementHandler
             throw new NotFoundHttpException();
         }
 
-        $repo = $this->em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement');
+        $repo = $this->em->getRepository(SynthesisElement::class);
 
         return $repo->getFormattedTree($synthesis, $type, $parentId, $depth);
     }
@@ -73,9 +73,7 @@ class SynthesisElementHandler
             throw new NotFoundHttpException();
         }
 
-        return (int) $this->em->getRepository(
-            'CapcoAppBundle:Synthesis\SynthesisElement'
-        )->countWith($synthesis, $type);
+        return (int)$this->em->getRepository(SynthesisElement::class)->countWith($synthesis, $type);
     }
 
     public function createElementInSynthesis(
@@ -96,7 +94,7 @@ class SynthesisElementHandler
     {
         // If we're adding a division to the element, we need to do some stuff
         if ($element->getDivision()) {
-            $division = $this->updateDivisionFromElementInSynthesis(
+            $this->updateDivisionFromElementInSynthesis(
                 $element->getDivision(),
                 $element,
                 $synthesis

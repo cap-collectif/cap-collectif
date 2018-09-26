@@ -229,7 +229,7 @@ Scenario: Anonymous API client wants to update a synthesis
   """
   Then the JSON response status code should be 401
 
-@database
+@database @dev
 Scenario: API client wants to get synthesis elements
   Given I am logged in to api as admin
   And there is a synthesis with id "42" and elements:
@@ -455,7 +455,7 @@ Scenario: API client wants to get unpublished synthesis elements count
   {"count": 1}
   """
 
-@database  @dev
+@database  @test
 Scenario: Anonymous wants to get synthesis elements published tree
   Given there is a synthesis with id "48" based on consultation step "cstep2"
   And I send a GET request to "/api/syntheses/48/elements/tree?type=published"

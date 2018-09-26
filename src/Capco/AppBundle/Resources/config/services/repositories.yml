@@ -384,3 +384,9 @@ services:
     class: Capco\AppBundle\Repository\CategoryRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Category']
+
+  capco.synthesis_syhthesis.repository:
+    public: true
+    class: Capco\AppBundle\Repository\Synthesis\SynthesisRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Synthesis']
