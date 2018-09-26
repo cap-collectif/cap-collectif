@@ -9,6 +9,7 @@ exports[`<ConsultationPropositionBox /> renders correcty 1`] = `
     id="consultation-plan"
   >
     <ConsultationPlan
+      scrollSpy={[Function]}
       step={
         Object {
           "endAt": "2014-09-27T00:00:00+0200",

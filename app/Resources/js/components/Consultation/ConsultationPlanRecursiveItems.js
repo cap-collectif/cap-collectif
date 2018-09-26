@@ -15,7 +15,7 @@ type Props = {
   closePlan: Function,
   openPlan: Function,
   showConsultationPlan: boolean,
-  // scrollSpy: (test: boolean) => {},
+  scrollSpy: (test: boolean) => {},
 };
 
 export class ConsultationPlanRecursiveItems extends React.Component<Props> {
@@ -28,7 +28,14 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   }
 
   getPlan = () => {
-    const { consultation, closePlan, openPlan, showConsultationPlan, stepId } = this.props;
+    const {
+      consultation,
+      closePlan,
+      openPlan,
+      showConsultationPlan,
+      stepId,
+      scrollSpy,
+    } = this.props;
 
     if (showConsultationPlan) {
       return (
@@ -73,7 +80,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
         <a
           onClick={() => {
             openPlan(stepId);
-            // scrollSpy(true);
+            scrollSpy(true);
           }}>
           <i className="cap cap-android-menu mr-5 hidden-xs hidden-sm" />
           <FormattedMessage id="plan" />

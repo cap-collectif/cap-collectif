@@ -48,8 +48,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
     });
   }
 
-  scrollSpy = () => {
-    // test?: boolean
+  scrollSpy = (test?: boolean) => {
     const { dispatch } = this.props;
     const sectionItems = document.querySelectorAll('.section-list_container');
     const activeItems = [];
@@ -67,10 +66,10 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
       }
     });
 
-    // console.log("uhuihueom");
-    // test === true ||
-
-    if (JSON.stringify(activeItems) !== JSON.stringify(this.state.currentActiveItems)) {
+    if (
+      test === true ||
+      JSON.stringify(activeItems) !== JSON.stringify(this.state.currentActiveItems)
+    ) {
       dispatch(changeConsultationPlanActiveItem(activeItems));
     }
 
@@ -109,7 +108,9 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
           id="consultation-plan">
           <ConsultationPlan
             step={step}
-            // scrollSpy={(test) => { this.scrollSpy(test) }}
+            scrollSpy={test => {
+              this.scrollSpy(test);
+            }}
           />
         </div>
         <div
