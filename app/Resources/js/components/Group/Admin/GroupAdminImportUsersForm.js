@@ -1,21 +1,18 @@
 // @flow
 import React from 'react';
-import { injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { FormGroup, HelpBlock, ControlLabel, Row, Col, Collapse } from 'react-bootstrap';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { reduxForm, Field, change } from 'redux-form';
-import type { FieldProps } from 'redux-form';
 import type { DropzoneFile } from 'react-dropzone';
 import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
-import FileUpload from '../../Form/FileUpload';
 import AddUsersToGroupFromEmailMutation from '../../../mutations/AddUsersToGroupFromEmailMutation';
 import type { Dispatch, Uuid } from '../../../types';
 import type {
   AddUsersToGroupFromEmailMutationResponse,
   AddUsersToGroupFromEmailMutationVariables,
 } from '../../../mutations/__generated__/AddUsersToGroupFromEmailMutation.graphql';
-import Loader from '../../Ui/Loader';
 import type { User } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
+import { CsvDropZoneInput } from './CsvDropZoneInput';
 
 type Props = {
   group: GroupAdminUsers_group,
@@ -42,14 +39,6 @@ type ResponseFormValues = {
 
 type SubmittedFormValue = {
   emails: ResponseFormValues,
-};
-
-type FileUploadFieldProps = FieldProps & {
-  showMoreError: boolean,
-  onClickShowMoreError: () => void,
-  onPostDrop: (droppedFiles: Array<DropzoneFile>, input: Object) => void,
-  disabled: boolean,
-  currentFile: ?DropzoneFile,
 };
 
 export const formName = 'group-users-import';
@@ -118,99 +107,6 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, { group, reset })
   );
 };
 
-const renderDropzoneInput = ({
-  input,
-  meta: { asyncValidating },
-  showMoreError,
-  onClickShowMoreError,
-  onPostDrop,
-  disabled,
-  currentFile,
-}: FileUploadFieldProps) => {
-  const colWidth = input.value.notFoundEmails && input.value.notFoundEmails.length === 0 ? 12 : 6;
-
-  return (
-    <FormGroup>
-      <ControlLabel htmlFor={input.name}>
-        <FormattedMessage id="csv-file" />
-      </ControlLabel>
-      <HelpBlock>
-        <FormattedHTMLMessage
-          id="csv-file-helptext"
-          values={{
-            link: encodeURI('data:text/csv;charset=utf-8,Email Address [Required]'),
-          }}
-        />
-      </HelpBlock>
-      <Loader show={asyncValidating}>
-        <FileUpload
-          name={input.name}
-          accept="text/csv"
-          maxSize={26000}
-          inputProps={{ id: 'csv-file_field' }}
-          minSize={1}
-          disabled={disabled}
-          onDrop={(files: Array<DropzoneFile>) => {
-            onPostDrop(files, input);
-          }}
-        />
-        {!asyncValidating &&
-          input.value.importedUsers && (
-            <React.Fragment>
-              <div className="h5">
-                <FormattedHTMLMessage id="document-analysis" />{' '}
-                {currentFile ? currentFile.name : ''}
-              </div>
-              <Row className="mt-15">
-                <Col xs={12} sm={colWidth} className="text-center">
-                  <h4>
-                    <i className="cap cap-check-bubble text-success" />{' '}
-                    <b>
-                      <FormattedMessage
-                        id="count-users-found"
-                        values={{ num: input.value.importedUsers.length }}
-                      />
-                    </b>
-                  </h4>
-                </Col>
-                {input.value.notFoundEmails &&
-                  input.value.notFoundEmails.length > 0 && (
-                    <Col xs={12} sm={colWidth} className="text-center">
-                      <h4>
-                        <i className="cap cap-ios-close text-danger" />{' '}
-                        <b>
-                          <FormattedMessage
-                            id="count-untraceable-users"
-                            values={{ num: input.value.notFoundEmails.length }}
-                          />
-                        </b>
-                      </h4>
-                      <Collapse in={showMoreError}>
-                        <ul
-                          style={{ listStyle: 'none', maxHeight: 80, overflowY: 'scroll' }}
-                          className="small">
-                          {input.value.notFoundEmails.map((email: string, key: number) => {
-                            return <li key={key}>{email}</li>;
-                          })}
-                        </ul>
-                      </Collapse>
-                      <div
-                        className="text-info"
-                        style={{ cursor: 'pointer' }}
-                        onClick={onClickShowMoreError}>
-                        <i className={showMoreError ? 'cap cap-arrow-40' : 'cap cap-arrow-39'} />{' '}
-                        <FormattedMessage id={showMoreError ? 'see-less' : 'global.see'} />
-                      </div>
-                    </Col>
-                  )}
-              </Row>
-            </React.Fragment>
-          )}
-      </Loader>
-    </FormGroup>
-  );
-};
-
 export class GroupAdminImportUsersForm extends React.Component<Props, State> {
   static defaultProps: DefaultProps;
   state = {
@@ -219,7 +115,7 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
     files: null,
   };
 
-  onPostDrop(droppedFiles: Array<DropzoneFile>, input: Object) {
+  onPostDrop = (droppedFiles: Array<DropzoneFile>, input: Object) => {
     this.setState({ showMoreError: false, analyzed: true, files: droppedFiles });
     droppedFiles.forEach(file => {
       const reader = new window.FileReader();
@@ -230,13 +126,13 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
       reader.onerror = () => input.onChange(null);
       reader.readAsText(file);
     });
-  }
+  };
 
-  toggle() {
+  toggle = () => {
     this.setState((prevState: State) => ({
       showMoreError: !prevState.showMoreError,
     }));
-  }
+  };
 
   render() {
     const { handleSubmit } = this.props;
@@ -253,16 +149,12 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
             id="csv-file"
             labelClassName="control-label"
             inputClassName="fake-inputClassName"
-            component={renderDropzoneInput}
+            component={CsvDropZoneInput}
             showMoreError={showMoreError}
             disabled={analyzed}
-            onClickShowMoreError={() => {
-              this.toggle();
-            }}
+            onClickShowMoreError={this.toggle}
             currentFile={files && files.length > 0 ? files[0] : null}
-            onPostDrop={(droppedFiles: Array<DropzoneFile>, input: Object) => {
-              this.onPostDrop(droppedFiles, input);
-            }}
+            onPostDrop={this.onPostDrop}
           />
         </div>
       </form>
