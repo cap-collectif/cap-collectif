@@ -260,7 +260,9 @@ export class GroupAdminImportUsersForm extends React.Component<Props, State> {
               this.toggle();
             }}
             currentFile={files && files.length > 0 ? files[0] : null}
-            onPostDrop={this.onPostDrop.bind(this)}
+            onPostDrop={(droppedFiles: Array<DropzoneFile>, input: Object) => {
+              this.onPostDrop(droppedFiles, input);
+            }}
           />
         </div>
       </form>

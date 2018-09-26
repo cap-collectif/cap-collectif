@@ -115,10 +115,10 @@ export class GroupAdminUsers extends React.Component<Props, State> {
         </div>
         <div className="box-content">
           <ButtonToolbar>
-            <Button bsStyle="success" href="#" onClick={() => this.openCreateModal()}>
+            <Button bsStyle="success" onClick={() => this.openCreateModal()}>
               <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
             </Button>
-            <Button bsStyle="success" href="#" onClick={() => this.openImportModal()}>
+            <Button bsStyle="success" onClick={() => this.openImportModal()}>
               <i className="fa fa-upload" /> <FormattedMessage id="import-users" />
             </Button>
           </ButtonToolbar>

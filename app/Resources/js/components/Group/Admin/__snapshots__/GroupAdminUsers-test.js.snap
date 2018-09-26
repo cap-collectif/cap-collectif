@@ -39,7 +39,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         bsClass="btn"
         bsStyle="success"
         disabled={false}
-        href="#"
         onClick={[Function]}
       >
         <i
@@ -57,7 +56,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         bsClass="btn"
         bsStyle="success"
         disabled={false}
-        href="#"
         onClick={[Function]}
       >
         <i
@@ -172,7 +170,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         bsClass="btn"
         bsStyle="success"
         disabled={false}
-        href="#"
         onClick={[Function]}
       >
         <i
@@ -190,7 +187,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         bsClass="btn"
         bsStyle="success"
         disabled={false}
-        href="#"
         onClick={[Function]}
       >
         <i
@@ -303,7 +299,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         bsClass="btn"
         bsStyle="success"
         disabled={false}
-        href="#"
         onClick={[Function]}
       >
         <i
@@ -321,7 +316,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         bsClass="btn"
         bsStyle="success"
         disabled={false}
-        href="#"
         onClick={[Function]}
       >
         <i
@@ -436,7 +430,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         bsClass="btn"
         bsStyle="success"
         disabled={false}
-        href="#"
         onClick={[Function]}
       >
         <i
@@ -454,7 +447,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         bsClass="btn"
         bsStyle="success"
         disabled={false}
-        href="#"
         onClick={[Function]}
       >
         <i
