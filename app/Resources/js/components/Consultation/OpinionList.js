@@ -117,8 +117,7 @@ export class OpinionList extends React.Component<Props> {
           {section.contributionsCount &&
           consultation.opinionCountShownBySection &&
           section.contributionsCount > consultation.opinionCountShownBySection ? (
-            <Panel.Footer style={{ backgroundColor: '#fff' }}>
-              {/* Todo, ajouter couleur dans style */}
+            <Panel.Footer className="bg-white">
               <a
                 href={section.url}
                 className="text-center"
