@@ -327,24 +327,24 @@ svg.avatar-group {
         @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
             width: 212.5px;
         }
-
-        .header {
-            color: $dark-gray;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid $border-color;
-            text-transform: uppercase;
-
-            a {
-                color: $dark-gray;
-            }
-        }
     }
 
     &_close {
         position: absolute;
         text-transform: uppercase;
         left: 15px;
+    }
+
+    &__header {
+        color: $dark-gray;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $border-color;
+        text-transform: uppercase;
+
+        a {
+            color: $dark-gray;
+        }
     }
 
     &__list {
@@ -452,7 +452,7 @@ svg.avatar-group {
             padding: 15px 15px;
         }
 
-        .header {
+        &__header {
             padding: 10px 15px;
             color: $white;
             text-transform: capitalize;
@@ -461,7 +461,7 @@ svg.avatar-group {
                 display: none;
             }
 
-            a {
+            a, a:hover {
                 color: $white;
             }
 

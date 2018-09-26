@@ -26,7 +26,7 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty open plan 1`] = `
   className="consultation-plan_open"
 >
   <div
-    className="header"
+    className="consultation-plan__header"
   >
     <p>
       <i

@@ -33,7 +33,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
     if (showConsultationPlan) {
       return (
         <div className="consultation-plan_open">
-          <div className="header">
+          <div className="consultation-plan__header">
             <p>
               <i className="cap cap-android-menu mr-5" />
               <FormattedMessage id="plan" />

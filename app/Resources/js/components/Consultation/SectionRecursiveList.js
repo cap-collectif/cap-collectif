@@ -14,7 +14,7 @@ export class SectionRecursiveList extends React.Component<Props> {
     const { consultation } = this.props;
 
     return (
-      <div id="section-list-container">
+      <div>
         {/* $FlowFixMe */}
         <UnpublishedOpinionList consultation={consultation} />
         {consultation.sections &&
