@@ -5,6 +5,7 @@ use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Capco\AppBundle\Toggle\Manager;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -23,7 +24,7 @@ class Version20160525163818 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->container->get('capco.toggle.manager')->activate('server_side_rendering');
+        $this->container->get(Manager::class)->activate('server_side_rendering');
     }
 
     /**

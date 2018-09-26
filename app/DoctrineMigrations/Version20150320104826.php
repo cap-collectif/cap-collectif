@@ -1,6 +1,7 @@
 <?php
 namespace Application\Migrations;
 
+use Capco\AppBundle\SiteParameter\Resolver;
 use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -48,7 +49,7 @@ class Version20150320104826 extends AbstractMigration implements ContainerAwareI
 
         $siteParameters = array('homepage.jumbotron2.title', 'homepage.jumbotron2.body');
 
-        $parameterResolver = $this->container->get('capco.site_parameter.resolver');
+        $parameterResolver = $this->container->get(Resolver::class);
 
         $introTitle = $parameterResolver->getValue($siteParameters[0]);
         if (null == $introTitle) {

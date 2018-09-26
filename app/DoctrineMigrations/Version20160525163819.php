@@ -1,6 +1,7 @@
 <?php
 namespace Application\Migrations;
 
+use Capco\AppBundle\Toggle\Manager;
 use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -23,7 +24,7 @@ class Version20160525163819 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->container->get('capco.toggle.manager')->activate('profiles');
+        $this->container->get(Manager::class)->activate('profiles');
     }
 
     /**

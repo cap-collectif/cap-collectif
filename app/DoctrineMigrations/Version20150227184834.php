@@ -7,6 +7,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Capco\AppBundle\Entity\SiteParameter;
+use Capco\AppBundle\Toggle\Manager;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -34,7 +35,7 @@ class Version20150227184834 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema)
     {
-        $toggleManager = $this->container->get('capco.toggle.manager');
+        $toggleManager = $this->container->get(Manager::class);
         $toggleManager->deactivate('shield_mode');
 
         $em = $this->container->get('doctrine.orm.entity_manager');

@@ -1,10 +1,12 @@
 <?php
 namespace Application\Migrations;
 
+use Capco\AppBundle\Toggle\Manager;
 use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
@@ -32,7 +34,7 @@ class Version20151022093708 extends AbstractMigration implements ContainerAwareI
                 ['keyname' => $oldKey]
             );
         }
-        $manager = $this->container->get('capco.toggle.manager');
+        $manager = $this->container->get(Manager::class);
         $manager->isActive('consultations_form')
             ? $manager->activate('projects_form')
             : $manager->deactivate('projects_form');
@@ -45,7 +47,7 @@ class Version20151022093708 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $manager = $this->container->get('capco.toggle.manager');
+        $manager = $this->container->get(Manager::class);
         $manager->isActive('projects_form')
             ? $manager->activate('consultations_form')
             : $manager->deactivate('consultations_form');

@@ -5,6 +5,7 @@ use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Capco\AppBundle\Toggle\Manager;
 
 class Version20170613093358 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -21,7 +22,7 @@ class Version20170613093358 extends AbstractMigration implements ContainerAwareI
 
     public function postUp(Schema $schema)
     {
-        $toggleManager = $this->container->get('capco.toggle.manager');
+        $toggleManager = $this->container->get(Manager::class);
         $toggleManager->activate('captcha');
     }
 
