@@ -102,48 +102,46 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
             }
           />
           <Field
-            label={<FormattedMessage id="admin.fields.question.type" />}
+            label={intl.formatMessage({ id: 'admin.fields.question.type' })}
             id={`${member}.type`}
             name={`${member}.type`}
             type="select"
             component={component}
             disabled={isCreating}>
             <option value="" disabled>
-              <FormattedMessage id="global.select" />
+              {intl.formatMessage({ id: 'global.select' })}
             </option>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.free' })}>
               <option value="text">
-                <FormattedMessage id="global.question.types.text" />
+                {intl.formatMessage({ id: 'global.question.types.text' })}
               </option>
               <option value="textarea">
-                <FormattedMessage id="global.question.types.textarea" />
+                {intl.formatMessage({ id: 'global.question.types.textarea' })}
               </option>
               <option value="editor">
-                <FormattedMessage id="global.question.types.editor" />
+                {intl.formatMessage({ id: 'global.question.types.editor' })}
               </option>
             </optgroup>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>
-              <option value="button">
-                <FormattedMessage id="question.types.button" />
-              </option>
+              <option value="button">{intl.formatMessage({ id: 'question.types.button' })}</option>
               <option value="radio">
-                <FormattedMessage id="global.question.types.radio" />
+                {intl.formatMessage({ id: 'global.question.types.radio' })}
               </option>
               <option value="select">
-                <FormattedMessage id="global.question.types.select" />
+                {intl.formatMessage({ id: 'global.question.types.select' })}
               </option>
             </optgroup>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_multiple' })}>
               <option value="checkbox">
-                <FormattedMessage id="global.question.types.checkbox" />
+                {intl.formatMessage({ id: 'global.question.types.checkbox' })}
               </option>
               <option value="ranking">
-                <FormattedMessage id="global.question.types.ranking" />
+                {intl.formatMessage({ id: 'global.question.types.ranking' })}
               </option>
             </optgroup>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.other' })}>
               <option value="medias">
-                <FormattedMessage id="global.question.types.medias" />
+                {intl.formatMessage({ id: 'global.question.types.medias' })}
               </option>
             </optgroup>
           </Field>
@@ -213,17 +211,15 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 name={`${member}.validationRule.type`}
                 type="select"
                 component={component}>
-                <option value="">
-                  <FormattedMessage id="global.select" />
-                </option>
+                <option value="">{intl.formatMessage({ id: 'global.select' })}</option>
                 <option value="MIN">
-                  <FormattedMessage id="questionnaire.validation.type.min" />
+                  {intl.formatMessage({ id: 'questionnaire.validation.type.min' })}
                 </option>
                 <option value="MAX">
-                  <FormattedMessage id="questionnaire.validation.type.max" />
+                  {intl.formatMessage({ id: 'questionnaire.validation.type.max' })}
                 </option>
                 <option value="EQUAL">
-                  <FormattedMessage id="questionnaire.validation.type.equal" />
+                  {intl.formatMessage({ id: 'questionnaire.validation.type.equal' })}
                 </option>
               </Field>
               {(validationRuleType === 'MIN' ||

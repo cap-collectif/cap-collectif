@@ -3,7 +3,7 @@ SectionQuestion:
   inherits: [Question]
   config:
     interfaces: [Question]
-    description: 'A simple section'
+    description: 'A section is just a title in a quiz without any possible answer.'
     fields:
       kind:
         resolve: 'section'

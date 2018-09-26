@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
 import styled from 'styled-components';
-import type { GlobalState } from '../../types';
+import withColors from '../Utils/withColors';
 
 type Props = {
   children: any,
@@ -25,9 +24,4 @@ const TitleInvertContrast = ({ children, backgroundColor, labelColor }: Props) =
   </H3>
 );
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  backgroundColor: state.default.parameters['color.btn.primary.bg'],
-  labelColor: state.default.parameters['color.btn.primary.text'],
-});
-
-export default connect(mapStateToProps)(TitleInvertContrast);
+export default withColors(TitleInvertContrast);

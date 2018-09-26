@@ -85,13 +85,13 @@ export const ProposalFormAdminQuestion = ({
           <Button
             bsStyle="warning"
             className="btn-outline-warning"
-            onClick={handleClickEdit.bind(this, index, question.type)}>
+            onClick={handleClickEdit.bind(null, index, question.type)}>
             <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
           </Button>
           <Button
             bsStyle="danger"
             className="btn-outline-danger"
-            onClick={handleClickDelete.bind(this, index, question.type)}>
+            onClick={handleClickDelete.bind(null, index, question.type)}>
             <i className="cap cap-times" /> <FormattedMessage id="global.delete" />
           </Button>
         </ButtonToolbar>
