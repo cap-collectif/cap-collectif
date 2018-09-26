@@ -101,14 +101,14 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
   };
 
   handleDeleteAction = () => {
-    const { deleteIndex, flashMessages } = this.state;
+    const { deleteIndex, flashMessages, deleteType } = this.state;
     const { fields } = this.props;
 
     fields.remove(deleteIndex);
 
     let createSuccessMsgId = 'your-question-has-been-deleted';
 
-    if (createSuccessMsgId === 'section') {
+    if (deleteType === 'section') {
       createSuccessMsgId = 'your-section-has-been-deleted';
     }
 
