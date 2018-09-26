@@ -84,13 +84,8 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   };
 
   handleClick = () => {
-    if (config.canUseDOM) {
-      const anchor = document.getElementById(`app-wrapper`);
-      const body = anchor && anchor.parentNode;
-
-      if (body) {
-        body.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
-      }
+    if (config.canUseDOM && document.body) {
+      document.body.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
     }
   };
 

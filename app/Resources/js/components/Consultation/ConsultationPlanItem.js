@@ -15,12 +15,19 @@ type Props = {
 };
 
 export class ConsultationPlanItem extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+
+    this.navItem = React.createRef();
+  }
+
   componentDidUpdate(prevProps: Props) {
     const { activeItems, onCollapse, section } = this.props;
 
     if (prevProps.activeItems !== this.props.activeItems) {
-      const item = document.getElementById(`nav-opinion-type--${section.slug}`);
-      const parentItem = item && item.parentNode;
+      // We can't pass innerRef to NavItem component and we need to recover <li>
+      const itemLink = this.navItem.current && this.navItem.current.parentNode;
+      const item = itemLink && itemLink.parentNode;
 
       if (activeItems.includes(section.id)) {
         onCollapse(true);
@@ -28,33 +35,36 @@ export class ConsultationPlanItem extends React.Component<Props> {
         onCollapse(false);
       }
 
-      if (parentItem) {
-        if (activeItems.slice(-1).includes(section.id)) {
-          parentItem.classList.add('active');
-        } else {
-          parentItem.classList.remove('active');
-        }
+      if (activeItems.slice(-1).includes(section.id) && item) {
+        // $FlowFixMe
+        item.classList.add('active');
+      } else if (item) {
+        // $FlowFixMe
+        item.classList.remove('active');
       }
     }
   }
+
+  navItem: { current: null | React.ElementRef<'span'> };
+
+  handleClick = () => {
+    const { section } = this.props;
+
+    if (config.canUseDOM) {
+      const anchor = document.getElementById(`opinion-type--${section.slug}`);
+
+      if (anchor) {
+        anchor.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
+      }
+    }
+  };
 
   render() {
     const { section, level } = this.props;
 
     return (
-      <NavItem
-        className={`level--${level}`}
-        id={`nav-opinion-type--${section.slug}`}
-        onClick={() => {
-          if (config.canUseDOM) {
-            const anchor = document.getElementById(`opinion-type--${section.slug}`);
-
-            if (anchor) {
-              anchor.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
-            }
-          }
-        }}>
-        {section.title}
+      <NavItem className={`level--${level}`} onClick={this.handleClick}>
+        <span ref={this.navItem}>{section.title}</span>
       </NavItem>
     );
   }

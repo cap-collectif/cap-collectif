@@ -5,9 +5,10 @@ exports[`<ConsultationPlanItem /> renders correcty 1`] = `
   active={false}
   className="level--0"
   disabled={false}
-  id="nav-opinion-type--slug"
   onClick={[Function]}
 >
-  title
+  <span>
+    title
+  </span>
 </NavItem>
 `;
