@@ -52,7 +52,7 @@ describe('<VoteListProfile />', () => {
 
     expect(wrapper).toMatchSnapshot();
 
-    wrapper.find('a').simulate('click');
+    wrapper.find('Button').simulate('click');
 
     propsWithMore.voteList.votes.edges = [
       { node: { id: '1', $fragmentRefs } },

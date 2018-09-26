@@ -51,7 +51,7 @@ describe('<ArgumentListProfile />', () => {
 
     expect(wrapper).toMatchSnapshot();
 
-    wrapper.find('a').simulate('click');
+    wrapper.find('Button').simulate('click');
 
     propsWithMore.argumentList.arguments.edges = [
       { node: { id: '1', $fragmentRefs } },

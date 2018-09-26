@@ -75,20 +75,19 @@ exports[`<VoteListProfile /> renders two nodes and a loadmore button 1`] = `
       }
     }
   >
-    <a
-      className="small"
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      disabled={false}
       onClick={[Function]}
-      style={
-        Object {
-          "cursor": "pointer",
-        }
-      }
     >
       <FormattedMessage
         id="global.more"
         values={Object {}}
       />
-    </a>
+    </Button>
   </ListGroupItem>
 </ListGroup>
 `;

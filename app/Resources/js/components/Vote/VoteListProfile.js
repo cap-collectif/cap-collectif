@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { VoteListProfile_voteList } from './__generated__/VoteListProfile_voteList.graphql';
@@ -53,9 +53,9 @@ export class VoteListProfile extends Component<Props, State> {
             {this.state.loading ? (
               <Loader />
             ) : (
-              <a style={{ cursor: 'pointer' }} className="small" onClick={this.handleLoadMore}>
+              <Button bsStyle="link" onClick={this.handleLoadMore}>
                 <FormattedMessage id="global.more" />
-              </a>
+              </Button>
             )}
           </ListGroupItem>
         )}
