@@ -72,8 +72,8 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
-        $this->fillField('responses[1]', '');
-        $this->selectOption('responses[4]', 'Pas assez fort (Mon sonotone est en panne)');
+        $this->fillField('responses[0]', '');
+        $this->selectOption('responses[3]', 'Pas assez fort (Mon sonotone est en panne)');
     }
 
     /**
@@ -82,11 +82,11 @@ trait QuestionnaireStepsTrait
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
     {
         $this->fillField(
-            'responses[1]',
+            'responses[0]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
-        $this->checkOption('responses[2]_choice-questionchoice1');
-        $this->checkOption('responses[2]_choice-questionchoice3');
+        $this->checkOption('responses[1]_choice-questionchoice1');
+        $this->checkOption('responses[1]_choice-questionchoice3');
     }
 
     /**
@@ -251,15 +251,15 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
         if (!$edition) {
             $this->fillField(
-                'responses[1]',
+                'responses[0]',
                 'Je pense que c\'est la ville parfaite pour organiser les JO'
             );
-            $this->checkOption('responses[2]_choice-questionchoice1');
-            $this->checkOption('responses[2]_choice-questionchoice2');
-            $this->checkOption('responses[2]_choice-questionchoice3');
+            $this->checkOption('responses[1]_choice-questionchoice1');
+            $this->checkOption('responses[1]_choice-questionchoice2');
+            $this->checkOption('responses[1]_choice-questionchoice3');
 
             return;
         }
-        $this->fillField('responses[1]', 'En fait c\'est nul, je ne veux pas des JO à Paris');
+        $this->fillField('responses[0]', 'En fait c\'est nul, je ne veux pas des JO à Paris');
     }
 }

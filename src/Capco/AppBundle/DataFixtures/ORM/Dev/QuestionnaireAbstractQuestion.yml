@@ -10,19 +10,19 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
   qaq3:
     questionnaire: '@questionnaire1'
     question: '@simplequestion2'
-    position: 2
+    position: 1
   qaq4:
     questionnaire: '@questionnaire1'
     question: '@multiplequestion1'
-    position: 3
+    position: 2
   qaq5:
     questionnaire: '@questionnaire1'
     question: '@multiplequestion2'
-    position: 4
+    position: 3
   qaq6:
     questionnaire: '@questionnaire1'
     question: '@multiplequestion3'
-    position: 5
+    position: 4
   qaq7:
     questionnaire: '@questionnaire2'
     question: '@simplequestion4'
@@ -38,7 +38,7 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
   qaq9:
     questionnaire: '@questionnaire1'
     question: '@multiplequestion4'
-    position: 6
+    position: 5
   qaq10:
     proposalForm: '@proposalform1'
     question: '@mediaquestion1'
@@ -62,11 +62,11 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
   qaq15:
     questionnaire: '@questionnaire1'
     question: '@multiplequestion6'
-    position: 7
+    position: 6
   qaq16:
     questionnaire: '@questionnaire1'
     question: '@multiplequestion7'
-    position: 8
+    position: 7
   qaq17:
     questionnaire: '@questionnaire4'
     question: '@simplequestion8'
@@ -95,7 +95,3 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaire4'
     question: '@multiplequestion11'
     position: 6
-  qaq25:
-    questionnaire: '@questionnaire1'
-    question: '@sectionquestion1'
-    position: 1

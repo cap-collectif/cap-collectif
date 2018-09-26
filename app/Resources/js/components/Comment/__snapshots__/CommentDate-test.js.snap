@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentDate /> should render correctly 1`] = `
+<ContainerConstructor
+  body="lol"
+  comment={
+    Object {
+      "$refType": null,
+      "createdAt": "2018-01-02",
+      "publishedAt": "2018-11-02",
+      "updatedAt": "2018-08-02",
+    }
+  }
+  componentRef={null}
+  trashed={false}
+/>
+`;
+
+exports[`<CommentDate /> should render correctly with trashed false 1`] = `
+<ContainerConstructor
+  body="lol"
+  comment={
+    Object {
+      "$refType": null,
+      "createdAt": "2018-01-02",
+      "publishedAt": "2018-11-02",
+      "updatedAt": "2018-08-02",
+    }
+  }
+  componentRef={null}
+  trashed={false}
+/>
+`;
+
+exports[`<CommentDate /> should render null with createdAt > publishedAt 1`] = `
+<ContainerConstructor
+  body="lol"
+  comment={
+    Object {
+      "$refType": null,
+      "createdAt": "2019-08-02",
+      "publishedAt": "2018-11-02",
+      "updatedAt": "2018-08-02",
+    }
+  }
+  componentRef={null}
+  trashed={false}
+/>
+`;

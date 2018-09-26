@@ -3,7 +3,6 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalPrivateField from '../ProposalPrivateField';
 import ProposalMediaResponse from '../Page/ProposalMediaResponse';
-import TitleInvertContrast from '../../Ui/TitleInvertContrast';
 import type { ProposalResponse_response } from './__generated__/ProposalResponse_response.graphql';
 
 type Props = {
@@ -19,15 +18,6 @@ class ProposalResponse extends React.PureComponent<Props> {
   render() {
     const response = this.props.response;
     let value = '';
-
-    if (response.question.type === 'section') {
-      return (
-        <div>
-          <TitleInvertContrast>{response.question.title}</TitleInvertContrast>
-        </div>
-      );
-    }
-
     if ((!response.value || response.value.length === 0) && response.question.type !== 'medias') {
       return null;
     }
