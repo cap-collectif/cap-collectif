@@ -72,8 +72,8 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
-        $this->fillField('responses[0]', '');
-        $this->selectOption('responses[3]', 'Pas assez fort (Mon sonotone est en panne)');
+        $this->fillField('responses[1]', '');
+        $this->selectOption('responses[4]', 'Pas assez fort (Mon sonotone est en panne)');
     }
 
     /**
