@@ -20,9 +20,9 @@ type Props = {
 
 export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   componentDidMount() {
-    const { closePlan, stepId } = this.props;
+    const { closePlan, stepId, consultation } = this.props;
 
-    if(config.isMobile) {
+    if(config.isMobile || (consultation.sections && consultation.sections.length < 2)) {
       closePlan(stepId);
     }
   }
@@ -75,8 +75,9 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
             openPlan(stepId);
             // scrollSpy(true);
           }}>
-          <i className="cap cap-android-menu mr-5" />
+          <i className="cap cap-android-menu mr-5 hidden-xs hidden-sm" />
           <FormattedMessage id="plan" />
+          <i className="cap cap-android-menu ml-5 hidden-md hidden-lg" />
         </a>
       </div>
     );
@@ -94,6 +95,12 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   };
 
   render() {
+    const { consultation } = this.props;
+
+    if(consultation.sections && consultation.sections.length < 2) {
+      return null;
+    }
+
     return this.getPlan();
   }
 }

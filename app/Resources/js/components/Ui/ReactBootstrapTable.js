@@ -12,6 +12,7 @@ export const Container = styled.div`
   overflow-x: auto;
   border: 1px solid #e3e3e3;
   margin-bottom: 20px;
+  background-color: #FFFFFF;
 
   .table {
     table-layout: fixed;

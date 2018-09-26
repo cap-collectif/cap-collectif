@@ -423,11 +423,24 @@ svg.avatar-group {
         }
 
         &_close {
-            text-transform: capitalize;
-            padding: 10px 15px;
-            background-color: $primary-color; // change with primary color
-            color: $white;
-            border-radius: 4px;
+            position: relative;
+            text-align: right;
+            padding: 15px;
+            left: inherit;
+
+            a {
+                position: relative;
+                left: inherit;
+                right: 0;
+                text-transform: capitalize;
+                padding: 10px 15px;
+                color: $white;
+                border-radius: 4px;
+            }
+
+            a, a:hover {
+                color: $white;
+            }
         }
 
         &__list {

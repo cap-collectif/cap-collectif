@@ -8,11 +8,14 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty close plan 1`] = `
     onClick={[Function]}
   >
     <i
-      className="cap cap-android-menu mr-5"
+      className="cap cap-android-menu mr-5 hidden-xs hidden-sm"
     />
     <FormattedMessage
       id="plan"
       values={Object {}}
+    />
+    <i
+      className="cap cap-android-menu ml-5 hidden-md hidden-lg"
     />
   </a>
 </div>
