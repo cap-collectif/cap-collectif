@@ -8,15 +8,15 @@ import { $refType, $fragmentRefs } from '../../mocks';
 describe('<ConsultationPlan />', () => {
   const props = {
     step: {
-      id: "project1",
-      title: "Elaboration de la Loi",
-      startAt: "2018-09-01T17:08:44+0200",
-      endAt: "2018-09-29T13:23:45+0200",
+      id: 'project1',
+      title: 'Elaboration de la Loi',
+      startAt: '2018-09-01T17:08:44+0200',
+      endAt: '2018-09-29T13:23:45+0200',
       timeless: false,
-      status: "open",
+      status: 'open',
       $refType,
       $fragmentRefs,
-    }
+    },
   };
 
   it('renders correcty', () => {

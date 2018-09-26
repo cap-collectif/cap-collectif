@@ -15,7 +15,7 @@ describe('<ConsultationPropositionBox />', () => {
       status: 'open',
     },
     dispatch: jest.fn(),
-    showConsultationPlan: true
+    showConsultationPlan: true,
   };
 
   it('renders correcty', () => {

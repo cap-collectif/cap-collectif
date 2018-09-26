@@ -71,8 +71,10 @@ type OpenConsultationPlanAction = {
   type: 'project/OPEN_CONSULTATION_PLAN',
   id: string,
 };
-type ChangeConsultationPlanActiveItemAction = { type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM', item: Array<string> };
-
+type ChangeConsultationPlanActiveItemAction = {
+  type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM',
+  item: Array<string>,
+};
 
 export type ProjectAction =
   | RequestFetchProjectsAction
@@ -122,7 +124,9 @@ export const openConsultationPlan = (id: string): OpenConsultationPlanAction => 
   id,
 });
 
-export const changeConsultationPlanActiveItem = (item: Array<string>): ChangeConsultationPlanActiveItemAction => ({
+export const changeConsultationPlanActiveItem = (
+  item: Array<string>,
+): ChangeConsultationPlanActiveItemAction => ({
   type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM',
   item,
 });

@@ -2,12 +2,12 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage } from 'react-intl';
 import type { Dispatch, GlobalState } from '../../types';
 import type { ConsultationPlanRecursiveItems_consultation } from './__generated__/ConsultationPlanRecursiveItems_consultation.graphql';
 import ConsultationPlanItems from './ConsultationPlanItems';
 import { closeConsultationPlan, openConsultationPlan } from '../../redux/modules/project';
-import config from "../../config";
+import config from '../../config';
 
 type Props = {
   consultation: ConsultationPlanRecursiveItems_consultation,
@@ -22,7 +22,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   componentDidMount() {
     const { closePlan, stepId, consultation } = this.props;
 
-    if(config.isMobile || (consultation.sections && consultation.sections.length < 2)) {
+    if (config.isMobile || (consultation.sections && consultation.sections.length < 2)) {
       closePlan(stepId);
     }
   }
@@ -45,7 +45,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
               <i className="cap cap-delete-1" />
             </a>
           </div>
-          <div className="consultation-plan__list" >
+          <div className="consultation-plan__list">
             {consultation.sections &&
               consultation.sections
                 .filter(Boolean)
@@ -97,7 +97,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   render() {
     const { consultation } = this.props;
 
-    if(consultation.sections && consultation.sections.length < 2) {
+    if (consultation.sections && consultation.sections.length < 2) {
       return null;
     }
 

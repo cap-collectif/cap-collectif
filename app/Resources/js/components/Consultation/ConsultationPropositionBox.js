@@ -16,7 +16,6 @@ import StepInfos from '../../components/Steps/Page/StepInfos';
 import type { ConsultationPropositionBoxQueryResponse } from './__generated__/ConsultationPropositionBoxQuery.graphql';
 import ConsultationPlan from './ConsultationPlan';
 
-
 type Step = {
   id: string,
   title: string,
@@ -38,7 +37,7 @@ type State = {
 
 export class ConsultationPropositionBox extends React.Component<Props, State> {
   state = {
-    currentActiveItems: []
+    currentActiveItems: [],
   };
 
   componentDidMount() {
@@ -49,7 +48,8 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
     });
   }
 
-  scrollSpy = () => { // test?: boolean
+  scrollSpy = () => {
+    // test?: boolean
     const { dispatch } = this.props;
     const sectionItems = document.querySelectorAll('.section-list_container');
     const activeItems = [];
@@ -58,7 +58,11 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
       const itemPosition = item.getBoundingClientRect();
 
       // 40 is height of nav
-      if (itemPosition && (itemPosition.top - 20 < 0) && (itemPosition.top - 20 > -itemPosition.height + 40)) {
+      if (
+        itemPosition &&
+        itemPosition.top - 20 < 0 &&
+        itemPosition.top - 20 > -itemPosition.height + 40
+      ) {
         activeItems.push(item.id);
       }
     });
@@ -66,7 +70,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
     // console.log("uhuihueom");
     // test === true ||
 
-    if(JSON.stringify(activeItems) !== JSON.stringify(this.state.currentActiveItems)) {
+    if (JSON.stringify(activeItems) !== JSON.stringify(this.state.currentActiveItems)) {
       dispatch(changeConsultationPlanActiveItem(activeItems));
     }
 
@@ -100,9 +104,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
       <div className="row">
         <div
           className={
-            showConsultationPlan
-              ? 'consultation-plan col-md-3 col-sm-12'
-              : 'consultation-plan'
+            showConsultationPlan ? 'consultation-plan col-md-3 col-sm-12' : 'consultation-plan'
           }
           id="consultation-plan">
           <ConsultationPlan

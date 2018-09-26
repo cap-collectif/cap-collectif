@@ -11,7 +11,7 @@ describe('<ConsultationPlanRecursiveItems />', () => {
       $refType,
       sections: [{ sections: [], $fragmentRefs }, { sections: [], $fragmentRefs }],
     },
-    stepId: "myStep",
+    stepId: 'myStep',
     closePlan: jest.fn(),
     openPlan: jest.fn(),
     showConsultationPlan: true,

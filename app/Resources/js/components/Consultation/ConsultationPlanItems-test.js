@@ -19,8 +19,8 @@ describe('<ConsultationPlanItems />', () => {
           slug: 'chapter1',
           subtitle: 'subtitle',
           title: 'Chapter1',
-        }
-      ]
+        },
+      ],
     },
     level: 0,
   };

@@ -18,18 +18,18 @@ export class ConsultationPlanItem extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
     const { activeItems, onCollapse, section } = this.props;
 
-    if(prevProps.activeItems !== this.props.activeItems) {
+    if (prevProps.activeItems !== this.props.activeItems) {
       const item = document.getElementById(`nav-opinion-type--${section.slug}`);
       const parentItem = item && item.parentNode;
 
-      if(activeItems.includes(section.id)) {
+      if (activeItems.includes(section.id)) {
         onCollapse(true);
       } else {
         onCollapse(false);
       }
 
-      if(parentItem) {
-        if(activeItems.slice(-1).includes(section.id)) {
+      if (parentItem) {
+        if (activeItems.slice(-1).includes(section.id)) {
           parentItem.classList.add('active');
         } else {
           parentItem.classList.remove('active');
