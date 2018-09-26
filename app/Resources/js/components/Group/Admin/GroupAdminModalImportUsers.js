@@ -40,7 +40,10 @@ export class GroupAdminModalImportUsers extends React.Component<Props> {
             disabled={pristine || submitting}
             bsStyle="primary"
             type="button"
-            onClick={() => dispatch(submit(formName))}>
+            onClick={() => {
+              dispatch(submit(formName));
+              window.location.reload();
+            }}>
             <FormattedMessage id="import" />
           </Button>
         </Modal.Footer>
