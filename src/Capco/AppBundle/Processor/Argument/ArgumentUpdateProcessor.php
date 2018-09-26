@@ -12,13 +12,15 @@ class ArgumentUpdateProcessor implements ProcessorInterface
     private $argumentRepository;
     private $argumentNotifier;
 
-    public function __construct(ArgumentRepository $argumentRepository, ArgumentNotifier $argumentNotifier)
-    {
+    public function __construct(
+        ArgumentRepository $argumentRepository,
+        ArgumentNotifier $argumentNotifier
+    ) {
         $this->argumentRepository = $argumentRepository;
         $this->argumentNotifier = $argumentNotifier;
     }
 
-    public function process(Message $message, array $options)
+    public function process(Message $message, array $options): bool
     {
         $json = json_decode($message->getBody(), true);
         $argument = $this->argumentRepository->find($json['argumentId']);

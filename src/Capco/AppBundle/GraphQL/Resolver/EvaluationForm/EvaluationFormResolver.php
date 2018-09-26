@@ -5,10 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\EvaluationForm;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class EvaluationFormResolver implements ContainerAwareInterface
+class EvaluationFormResolver implements ContainerAwareInterface, ResolverInterface
 {
     use ContainerAwareTrait;
 
@@ -18,14 +19,14 @@ class EvaluationFormResolver implements ContainerAwareInterface
         $isEvaluer = false;
         if ($user instanceof User) {
             $proposalForm = $evaluationForm->getProposalForm();
-            $isEvaluer = $this->container->get('capco.proposal.repository')->isViewerAnEvaluerOfAProposalOnForm($proposalForm, $user);
+            $isEvaluer = $this->container->get(
+                'capco.proposal.repository'
+            )->isViewerAnEvaluerOfAProposalOnForm($proposalForm, $user);
         }
         $viewerCanSeePrivateQuestion = $isEvaluer || ($user instanceof User && $user->isAdmin());
 
-        return $questions->filter(
-          function ($question) use ($viewerCanSeePrivateQuestion) {
-              return !$question->isPrivate() || $viewerCanSeePrivateQuestion;
-          }
-        );
+        return $questions->filter(function ($question) use ($viewerCanSeePrivateQuestion) {
+            return !$question->isPrivate() || $viewerCanSeePrivateQuestion;
+        });
     }
 }

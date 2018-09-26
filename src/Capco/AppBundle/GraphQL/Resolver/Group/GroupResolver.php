@@ -1,14 +1,16 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Group;
 
 use Capco\AppBundle\Entity\Group;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
-class GroupResolver implements ContainerAwareInterface
+class GroupResolver implements ContainerAwareInterface, ResolverInterface
 {
     use ContainerAwareTrait;
 

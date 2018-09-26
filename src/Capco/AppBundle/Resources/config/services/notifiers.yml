@@ -8,8 +8,7 @@ services:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Notifier/*'
     exclude: '%kernel.root_dir%/../src/Capco/AppBundle/Notifier/BaseNotifier.php'
 
-  capco.proposal_notifier:
-    class: Capco\AppBundle\Notifier\ProposalNotifier
+  Capco\AppBundle\Notifier\ProposalNotifier:
     public: true
 
   capco.fos_notifier:

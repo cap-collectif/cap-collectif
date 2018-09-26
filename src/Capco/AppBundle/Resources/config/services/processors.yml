@@ -6,9 +6,10 @@ services:
 
   Capco\AppBundle\Processor\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Processor/*'
+    exclude:
+      '%kernel.root_dir%/../src/Capco/AppBundle/Processor/UserArchive/UserArchiveRequestProcessor.php'
 
-  user_archive_request.processor:
-    class: Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor
+  Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor:
     autowire: true
     arguments:
       $rootDir: '%kernel.root_dir%'

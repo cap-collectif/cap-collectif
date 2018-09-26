@@ -133,7 +133,7 @@ class ProposalRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function countFusionsByProposalForm(ProposalForm $form)
+    public function countFusionsByProposalForm(ProposalForm $form): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(proposal.id)')

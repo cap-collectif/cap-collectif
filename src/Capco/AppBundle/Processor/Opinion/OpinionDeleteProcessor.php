@@ -7,7 +7,7 @@ use Swarrot\Processor\ProcessorInterface;
 
 class OpinionDeleteProcessor implements ProcessorInterface
 {
-    public function process(Message $message, array $options)
+    public function process(Message $message, array $options): bool
     {
         return true;
     }

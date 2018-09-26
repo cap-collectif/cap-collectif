@@ -21,8 +21,13 @@ class UserArchiveRequestProcessor implements ProcessorInterface
     protected $em;
     protected $kernel;
 
-    public function __construct(UserArchiveRepository $userArchiveRepository, EntityManagerInterface $em, UserArchiveNotifier $userArchiveNotifier, KernelInterface $kernel, string $rootDir)
-    {
+    public function __construct(
+        UserArchiveRepository $userArchiveRepository,
+        EntityManagerInterface $em,
+        UserArchiveNotifier $userArchiveNotifier,
+        KernelInterface $kernel,
+        $rootDir
+    ) {
         $this->userArchiveRepository = $userArchiveRepository;
         $this->userArchiveNotifier = $userArchiveNotifier;
         $this->rootDir = $rootDir;

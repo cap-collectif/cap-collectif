@@ -18,7 +18,7 @@ class ProposalCreateProcessor implements ProcessorInterface
         $this->notifier = $notifier;
     }
 
-    public function process(Message $message, array $options)
+    public function process(Message $message, array $options): bool
     {
         $json = json_decode($message->getBody(), true);
         $proposal = $this->proposalRepository->find($json['proposalId']);

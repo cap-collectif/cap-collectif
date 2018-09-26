@@ -56,7 +56,6 @@ class MailerService
         );
 
         $template = $message->getTemplate();
-        $body = '';
         if (false !== strpos($template, '.twig')) {
             $body = $this->templating->render($message->getTemplate(), $message->getTemplateVars());
         } else {

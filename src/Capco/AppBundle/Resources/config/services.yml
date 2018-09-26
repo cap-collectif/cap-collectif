@@ -72,8 +72,7 @@ services:
     arguments:
       $redisClient: '@snc_redis.default'
 
-  mailer_service:
-    class: Capco\AppBundle\Mailer\MailerService
+  Capco\AppBundle\Mailer\MailerService:
     autowire: true
 
   capco.diff.generator:

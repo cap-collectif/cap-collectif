@@ -1,4 +1,4 @@
-@projects @dev
+@projects
 Feature: Projects
 
 @parallel-scenario

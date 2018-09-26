@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProposalEvaluationResolver implements ResolverInterface
 {

@@ -12,6 +12,7 @@ services:
       '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/{GraphQLToCsv.php, ConnectionTraversor.php}'
 
   Capco\AppBundle\Utils\Map:
+    public: true
     arguments:
       $apiSeverKey: '%google_maps_key_server%'
 
