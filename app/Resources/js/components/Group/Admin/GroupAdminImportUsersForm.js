@@ -59,9 +59,12 @@ const prepareVariablesFromAnalyzedFile = (
   groupId: Uuid,
   dryRun: boolean,
 ): AddUsersToGroupFromEmailMutationVariables => {
-  const emails = fileContent.split('\n').map((email: string) => {
-    return email.replace(/['"]+/g, '');
-  });
+  const emails = fileContent
+    .replace(/\r\n/g, '\n')
+    .split('\n')
+    .map((email: string) => {
+      return email.replace(/['"]+/g, '');
+    });
 
   // detects if first line is a header
   if (emails.length > 0 && !isEmail(emails[0])) {
