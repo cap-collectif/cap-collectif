@@ -79,7 +79,7 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinion()
     {
-        $this->visitPageWithParams('opinion page', self::$opinion);
+        $this->visitPageWithParams('opinion page', self::$opinion, '#opinion__arguments--AGAINST');
         $this->getSession()->wait(
             5000,
             "document.body.innerHTML.toString().indexOf('Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.') > -1"
@@ -276,6 +276,7 @@ trait OpinionStepsTrait
     public function iEditMyArgument()
     {
         $page = $this->getCurrentPage();
+        $this->getSession()->wait(3000, "$('.opinion__votes-nb').length > 0");
         $votesCount = $page->getArgumentVotesCount();
         Assert::assertNotEquals(
             0,

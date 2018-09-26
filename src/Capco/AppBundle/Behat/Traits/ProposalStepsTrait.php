@@ -199,7 +199,7 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalWithLotOfComments()
     {
-        $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, '#main',false);
+        $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, '#main', false);
         $this->getSession()->wait(
             2000,
             "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
@@ -275,7 +275,11 @@ trait ProposalStepsTrait
      */
     public function iGoToANotNotifiableProposal()
     {
-        $this->visitPageWithParams('proposal page', self::$proposalNotNotifiable);
+        $this->visitPageWithParams(
+            'proposal page',
+            self::$proposalNotNotifiable,
+            '#proposal-delete-button'
+        );
     }
 
     /**
