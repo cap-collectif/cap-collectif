@@ -12,7 +12,7 @@ import GroupAdminImportUsersForm, { formName } from './GroupAdminImportUsersForm
 
 type Props = {
   show: boolean,
-  onClose: Function,
+  onClose: () => void,
   group: GroupAdminUsers_group,
   dispatch: Dispatch,
   intl: IntlShape,
