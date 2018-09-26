@@ -21,9 +21,9 @@ Scenario: GraphQL client wants to retrieve questions
     "data": {
       "questionnaire": {
         "questions": [
+          {"id":"24"},
           {"id":"2"},
           {"id":"13"},
-          {"id":"24"},
           {"id":"14"},
           {"id":"15"},
           {"id":"16"},
