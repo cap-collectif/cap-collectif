@@ -11,10 +11,7 @@ import UpdateProposalFormNotificationsConfigurationMutation from '../../mutation
 import type { ProposalFormAdminNotificationForm_proposalForm } from './__generated__/ProposalFormAdminNotificationForm_proposalForm.graphql';
 import type { State } from '../../types';
 
-type RelayProps = {
-  // eslint-disable-next-line react/no-unused-prop-types
-  proposalForm: ProposalFormAdminNotificationForm_proposalForm,
-};
+type RelayProps = { proposalForm: ProposalFormAdminNotificationForm_proposalForm };
 type Props = RelayProps & {
   intl: IntlShape,
   handleSubmit: () => void,
@@ -27,7 +24,9 @@ type Props = RelayProps & {
 };
 
 const formName = 'proposal-form-admin-notification';
-const validate = () => ({});
+const validate = () => {
+  return {};
+};
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { proposalForm } = props;

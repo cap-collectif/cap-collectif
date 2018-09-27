@@ -9,12 +9,15 @@ import component from '../Form/Field';
 import CreateProposalFormMutation from '../../mutations/CreateProposalFormMutation';
 
 const formName = 'proposal-form-admin-create';
-const validate = () => ({});
+const validate = () => {
+  return {};
+};
 
-const onSubmit = values =>
-  CreateProposalFormMutation.commit({ input: values }).then(() => {
+const onSubmit = values => {
+  return CreateProposalFormMutation.commit({ input: values }).then(() => {
     window.location.reload();
   });
+};
 
 type Props = {
   submitting: boolean,

@@ -29,10 +29,10 @@ export class UserReplies extends React.Component<Props> {
           />
         </h3>
         <ListGroup>
-          {questionnaire.viewerReplies.map((reply, index) => (
+          {questionnaire.viewerReplies.map((reply, index) => {
             // $FlowFixMe $refType
-            <ReplyModalLink key={index} reply={reply} questionnaire={questionnaire} />
-          ))}
+            return <ReplyModalLink key={index} reply={reply} questionnaire={questionnaire} />;
+          })}
         </ListGroup>
         <hr />
       </div>

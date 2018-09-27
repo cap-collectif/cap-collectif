@@ -24,7 +24,6 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
           "lbrunet@jolicode.com",
           "sfavot@jolicode.com",
           "pierre@cap-collectif.com",
-          "unknown@unknown.com",
           "unknown@unknown.com"
         ],
         "dryRun": true,

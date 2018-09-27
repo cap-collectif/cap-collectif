@@ -54,7 +54,9 @@ exports[`<ProposalAdminEvaluersForm /> render correctly 1`] = `
         >
           <i
             className="cap cap-download-1"
-          />
+          >
+             
+          </i>
            
           <FormattedMessage
             id="global.save"

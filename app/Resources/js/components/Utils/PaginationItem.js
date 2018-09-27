@@ -30,10 +30,7 @@ export default class PaginationItem extends React.Component<Props> {
         <span
           className="page-item__wrapper"
           aria-label={ariaLabel || label || page}
-          onClick={onSelect}
-          role="link"
-          tabIndex={page}
-          onKeyPress={onSelect}>
+          onClick={onSelect}>
           <span className="page-item__label" aria-hidden="true">
             {label || page}
           </span>

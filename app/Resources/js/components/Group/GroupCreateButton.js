@@ -31,13 +31,14 @@ const validate = ({ title }) => {
   return errors;
 };
 
-const onSubmit = (values: FormValues) =>
-  CreateGroupMutation.commit({ input: values }).then((resp: CreateGroupMutationResponse) => {
+const onSubmit = (values: FormValues) => {
+  return CreateGroupMutation.commit({ input: values }).then((resp: CreateGroupMutationResponse) => {
     const groupId = resp.createGroup.group.id;
     window.location.href = `${window.location.protocol}//${
       window.location.host
     }/admin/capco/app/group/${groupId}/edit`;
   });
+};
 
 export class GroupCreateButton extends React.Component<Props, ComponentState> {
   constructor(props: Props) {

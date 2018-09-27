@@ -1,23 +1,19 @@
 // @flow
 import * as React from 'react';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import { ListGroupItem, ListGroup, Button, Panel } from 'react-bootstrap';
+import { ListGroup, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionVersion from './OpinionVersion';
-import Loader from '../Ui/Loader';
 import type { OpinionVersionListViewPaginated_opinion } from './__generated__/OpinionVersionListViewPaginated_opinion.graphql';
 
 type Props = {
   relay: RelayPaginationProp,
   opinion: OpinionVersionListViewPaginated_opinion,
 };
-type State = {
-  loading: boolean,
-};
 
-class OpinionVersionListViewPaginated extends React.Component<Props, State> {
+class OpinionVersionListViewPaginated extends React.Component<Props> {
   render() {
-    const { opinion, relay } = this.props;
+    const { opinion } = this.props;
     if (!opinion.versions.edges || opinion.versions.edges.length === 0) {
       return (
         <Panel.Body className="text-center">
@@ -34,28 +30,10 @@ class OpinionVersionListViewPaginated extends React.Component<Props, State> {
           .filter(Boolean)
           .map(edge => edge.node)
           .filter(Boolean)
-          .map(version => (
+          .map(version => {
             // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
-            <OpinionVersion key={version.id} version={version} />
-          ))}
-        {relay.hasMore() && (
-          <ListGroupItem style={{ textAlign: 'center' }}>
-            {this.state.loading ? (
-              <Loader />
-            ) : (
-              <Button
-                bsStyle="link"
-                onClick={() => {
-                  this.setState({ loading: true });
-                  relay.loadMore(50, () => {
-                    this.setState({ loading: false });
-                  });
-                }}>
-                <FormattedMessage id="global.more" />
-              </Button>
-            )}
-          </ListGroupItem>
-        )}
+            return <OpinionVersion key={version.id} version={version} />;
+          })}
       </ListGroup>
     );
   }

@@ -220,7 +220,6 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
-                            'defaultValue' => 30,
                         ],
                         [
                             'name' => 'before',

@@ -109,9 +109,11 @@ class OpinionDelete extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  user: state.user.user,
-});
+const mapStateToProps: MapStateToProps<*, *, *> = state => {
+  return {
+    user: state.user.user,
+  };
+};
 
 const container = connect(mapStateToProps)(OpinionDelete);
 

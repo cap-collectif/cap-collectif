@@ -7,7 +7,7 @@ import RelayNetworkLogger from 'relay-runtime/lib/RelayNetworkLogger';
 import executeFunction from './network/executeFunction';
 
 export const graphqlError = (
-  <p className="text-danger">{"Désolé une erreur s'est produite… Réessayez plus tard."}</p>
+  <p className="text-danger">Désolé une erreur s'est produite… Réessayez plus tard.</p>
 );
 
 // $FlowFixMe https://github.com/cap-collectif/platform/issues/5945

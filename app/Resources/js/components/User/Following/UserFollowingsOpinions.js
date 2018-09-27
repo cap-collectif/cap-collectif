@@ -23,7 +23,9 @@ export class UserFollowingsOpinions extends Component<Props, State> {
 
   onUnfollowAll() {
     const { viewer } = this.props;
-    const ids = viewer.followingOpinions.edges.map(edge => edge.node.id);
+    const ids = viewer.followingOpinions.edges.map(edge => {
+      return edge.node.id;
+    });
 
     this.setState({ open: !this.state.open }, () => {
       UnfollowOpinionMutation.commit({
@@ -60,9 +62,11 @@ export class UserFollowingsOpinions extends Component<Props, State> {
           {Object.keys(projectsById).length > 0 ? (
             <Collapse in={this.state.open}>
               <div id="all-projects">
-                {Object.keys(projectsById).map((project, id) => (
-                  <OpinionProjectRow key={id} project={projectsById[project]} viewer={viewer} />
-                ))}
+                {Object.keys(projectsById).map((project, id) => {
+                  return (
+                    <OpinionProjectRow key={id} project={projectsById[project]} viewer={viewer} />
+                  );
+                })}
               </div>
             </Collapse>
           ) : (

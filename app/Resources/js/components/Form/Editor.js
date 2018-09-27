@@ -126,6 +126,7 @@ class Editor extends React.Component<Props> {
     }
     return (
       <div id={id} className={classNames(classes)}>
+        {/* $FlowFixMe */}
         <QuillToolbar ref="toolbar" />
         <div ref="editor" style={{ position: 'static' }} />
       </div>

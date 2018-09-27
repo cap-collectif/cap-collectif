@@ -61,16 +61,16 @@ export class ProposalFollowButton extends React.Component<Props, State> {
         <LoginOverlay>
           <Button
             className="btn btn-default proposal__button__follow"
-            onClick={() =>
-              FollowProposalMutation.commit({
+            onClick={() => {
+              return FollowProposalMutation.commit({
                 input: { proposalId: proposal.id, notifiedOf: 'MINIMAL' },
               }).then(() => {
                 this.setState({
                   isJustFollowed: true,
                 });
                 return true;
-              })
-            }
+              });
+            }}
             id={`proposal-follow-btn-${proposal.id}`}>
             <FormattedMessage id="follow" />
           </Button>
@@ -117,7 +117,9 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                               proposal.viewerFollowingConfiguration === 'MINIMAL' ? 'checked' : ''
                             }
                             inline
-                            onChange={() => this.changeFollowType(proposal, 'MINIMAL')}>
+                            onChange={() => {
+                              return this.changeFollowType(proposal, 'MINIMAL');
+                            }}>
                             <b>
                               <FormattedMessage id="essential" />
                             </b>{' '}
@@ -133,7 +135,9 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             checked={
                               proposal.viewerFollowingConfiguration === 'ESSENTIAL' ? 'checked' : ''
                             }
-                            onChange={() => this.changeFollowType(proposal, 'ESSENTIAL')}>
+                            onChange={() => {
+                              return this.changeFollowType(proposal, 'ESSENTIAL');
+                            }}>
                             <b>
                               <FormattedMessage id="intermediate" />
                             </b>
@@ -149,7 +153,9 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             checked={
                               proposal.viewerFollowingConfiguration === 'ALL' ? 'checked' : ''
                             }
-                            onChange={() => this.changeFollowType(proposal, 'ALL')}>
+                            onChange={() => {
+                              return this.changeFollowType(proposal, 'ALL');
+                            }}>
                             <b>
                               <FormattedMessage id="complete" />
                             </b>

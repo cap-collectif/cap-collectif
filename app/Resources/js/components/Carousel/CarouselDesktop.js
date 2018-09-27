@@ -65,40 +65,42 @@ export class CarouselDesktop extends PureComponent<Props, State> {
     return emptyItem;
   };
 
-  getItemDate = (type: string, item: Object) => (
-    <span className="carousel__date">
-      {type === 'event' &&
-        item.startAt &&
-        item.endAt && <DatesInterval startAt={item.startAt} endAt={item.endAt} />}
-      {type === 'project' &&
-        item.startAt && (
-          <FormattedDate
-            value={moment(item.startAt).toDate()}
-            day="numeric"
-            month="long"
-            year="numeric"
-          />
-        )}
-      {type === 'idea' &&
-        item.createdAt && (
-          <FormattedDate
-            value={moment(item.createdAt).toDate()}
-            day="numeric"
-            month="long"
-            year="numeric"
-          />
-        )}
-      {type === 'post' &&
-        item.publishedAt && (
-          <FormattedDate
-            value={moment(item.publishedAt).toDate()}
-            day="numeric"
-            month="long"
-            year="numeric"
-          />
-        )}
-    </span>
-  );
+  getItemDate = (type: string, item: Object) => {
+    return (
+      <span className="carousel__date">
+        {type === 'event' &&
+          item.startAt &&
+          item.endAt && <DatesInterval startAt={item.startAt} endAt={item.endAt} />}
+        {type === 'project' &&
+          item.startAt && (
+            <FormattedDate
+              value={moment(item.startAt).toDate()}
+              day="numeric"
+              month="long"
+              year="numeric"
+            />
+          )}
+        {type === 'idea' &&
+          item.createdAt && (
+            <FormattedDate
+              value={moment(item.createdAt).toDate()}
+              day="numeric"
+              month="long"
+              year="numeric"
+            />
+          )}
+        {type === 'post' &&
+          item.publishedAt && (
+            <FormattedDate
+              value={moment(item.publishedAt).toDate()}
+              day="numeric"
+              month="long"
+              year="numeric"
+            />
+          )}
+      </span>
+    );
+  };
 
   render() {
     const { highlighteds } = this.props;

@@ -38,7 +38,7 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
       id="contained-modal-title-lg"
     >
       <FormattedMessage
-        id="group-admin-add-members"
+        id="group.admin.add_users"
         values={Object {}}
       />
     </ModalTitle>

@@ -171,7 +171,7 @@ export class QuestionnaireAdminConfigurationForm extends React.Component<Props> 
             />
             <div className="box-header">
               <h3 className="box-title">
-                <FormattedMessage id="admin.fields.questionnaire.questions" />
+                <FormattedMessage id="proposal.admin.content" />
               </h3>
             </div>
             <FieldArray

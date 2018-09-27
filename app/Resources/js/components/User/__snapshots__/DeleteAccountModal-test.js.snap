@@ -121,14 +121,12 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
           </b>
         </p>
         <div>
-          <Uncontrolled(Panel)
-            bsStyle="primary"
-            className="delete__panel__checked"
+          <div
+            className="panel panel-primary delete__panel__checked"
             onClick={[Function]}
           >
-            <PanelBody
-              bsClass="panel"
-              collapsible={false}
+            <div
+              className="panel-body"
               id="delete-account-soft"
             >
               <div
@@ -212,16 +210,14 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                   </div>
                 </div>
               </div>
-            </PanelBody>
-          </Uncontrolled(Panel)>
-          <Uncontrolled(Panel)
-            bsStyle="default"
-            className=""
+            </div>
+          </div>
+          <div
+            className="panel panel-default"
             onClick={[Function]}
           >
-            <PanelBody
-              bsClass="panel"
-              collapsible={false}
+            <div
+              className="panel-body"
               id="delete-account-hard"
             >
               <div
@@ -306,8 +302,8 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
                   </div>
                 </div>
               </div>
-            </PanelBody>
-          </Uncontrolled(Panel)>
+            </div>
+          </div>
         </div>
       </form>
     </ModalBody>
@@ -468,14 +464,12 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
           </b>
         </p>
         <div>
-          <Uncontrolled(Panel)
-            bsStyle="primary"
-            className="delete__panel__checked"
+          <div
+            className="panel panel-primary delete__panel__checked"
             onClick={[Function]}
           >
-            <PanelBody
-              bsClass="panel"
-              collapsible={false}
+            <div
+              className="panel-body"
               id="delete-account-soft"
             >
               <div
@@ -559,16 +553,14 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                   </div>
                 </div>
               </div>
-            </PanelBody>
-          </Uncontrolled(Panel)>
-          <Uncontrolled(Panel)
-            bsStyle="default"
-            className=""
+            </div>
+          </div>
+          <div
+            className="panel panel-default"
             onClick={[Function]}
           >
-            <PanelBody
-              bsClass="panel"
-              collapsible={false}
+            <div
+              className="panel-body"
               id="delete-account-hard"
             >
               <div
@@ -653,8 +645,8 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
                   </div>
                 </div>
               </div>
-            </PanelBody>
-          </Uncontrolled(Panel)>
+            </div>
+          </div>
         </div>
       </form>
     </ModalBody>

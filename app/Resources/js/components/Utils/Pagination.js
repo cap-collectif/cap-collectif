@@ -46,8 +46,12 @@ export default class Pagination extends React.Component<Props> {
     firstNumber = firstNumber > 0 ? firstNumber : 1;
     // $FlowFixMe
     const pages = Array.apply(0, new Array(displayedPages))
-      .filter((x, y) => y + firstNumber <= nbPages)
-      .map((x, y) => y + firstNumber);
+      .filter((x, y) => {
+        return y + firstNumber <= nbPages;
+      })
+      .map((x, y) => {
+        return y + firstNumber;
+      });
     const prev = current > 1 ? current - 1 : 1;
     const next = current < nbPages ? current + 1 : nbPages;
 
