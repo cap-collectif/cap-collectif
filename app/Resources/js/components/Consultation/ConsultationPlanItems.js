@@ -25,22 +25,24 @@ export class ConsultationPlanItems extends React.Component<Props, State> {
     const { section, level } = this.props;
 
     return (
-      <Nav bsStyle="pills" stacked>
-        <ConsultationPlanItem
-          section={section}
-          level={level}
-          onCollapse={(activeItem) => {
-            this.handleCollapse(activeItem);
-          }}
-        />
-        <Collapse in={this.state.isOpen}>
-          <div>
-            {section.sections &&
+      <Nav>
+        <li>
+          <ConsultationPlanItem
+            section={section}
+            level={level}
+            onCollapse={(activeItem) => {
+              this.handleCollapse(activeItem);
+            }}
+          />
+          <Collapse in={this.state.isOpen}>
+            <div>
+              {section.sections &&
               section.sections.map((subSelection, index) => (
                 <ConsultationPlanItems key={index} section={subSelection} level={level + 1} />
               ))}
-          </div>
-        </Collapse>
+            </div>
+          </Collapse>
+        </li>
       </Nav>
     );
   }

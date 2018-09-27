@@ -317,17 +317,9 @@ svg.avatar-group {
     position: -webkit-sticky;
     top: 60px;
 
-    &_open {
-        background-color: $page-bgc;
-
-        @media (min-width: $screen-lg-min) {
-            width: 262.5px;
-        }
-
-        @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-            width: 212.5px;
-        }
-    }
+    //&_open {
+    //    // background-color: $page-bgc;
+    //}
 
     &_close {
         position: absolute;
@@ -335,32 +327,32 @@ svg.avatar-group {
         left: 15px;
     }
 
-    &__header {
-        color: $dark-gray;
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid $border-color;
-        text-transform: uppercase;
+    //&__header {
+    //    color: $dark-gray;
+    //    display: flex;
+    //    justify-content: space-between;
+    //    border-bottom: 1px solid $border-color;
+    //    text-transform: uppercase;
+    //
+    //    a {
+    //        color: $dark-gray;
+    //    }
+    //}
 
-        a {
-            color: $dark-gray;
-        }
-    }
-
-    &__list {
+    .stacked-nav__list {
         max-height: calc(100vh - 160px);
         overflow-y: scroll;
     }
 
-    &__back-to-top {
-        padding: 15px 0;
-        color: $black;
-
-        a {
-            color: $black;
-            font-weight: 300;
-        }
-    }
+    //&__back-to-top {
+    //    padding: 15px 0;
+    //    color: $black;
+    //
+    //    a {
+    //        color: $black;
+    //        font-weight: 300;
+    //    }
+    //}
 
     .cap-android-menu {
         top: 5px;
@@ -376,36 +368,36 @@ svg.avatar-group {
         cursor: pointer;
     }
 
-    .nav.nav-pills {
-        li {
-            border: 1px solid $page-bgc;
-
-            a {
-                color: $black;
-            }
-
-            &.active a, &:hover a, a:focus {
-                color: $black;
-                background-color: transparent;
-            }
-
-            &.active, &:hover {
-                background-color: $white;
-                border: 1px solid $border-color;
-            }
-        }
-
-        .level {
-            @for $i from 0 to 4 {
-                $p: 20 * $i;
-                $w: 600 - ($i * 100);
-                &--#{$i} {
-                    padding-left: #{$p}px;
-                    font-weight: #{$w};
-                }
-            }
-        }
-    }
+    //.nav.nav-pills {
+    //    li {
+    //        border: 1px solid $page-bgc;
+    //
+    //        a {
+    //            color: $black;
+    //        }
+    //
+    //        &.active a, &:hover a, a:focus {
+    //            color: $black;
+    //            background-color: transparent;
+    //        }
+    //
+    //        &.active, &:hover {
+    //            background-color: $white;
+    //            border: 1px solid $border-color;
+    //        }
+    //    }
+    //
+    //    .level {
+    //        @for $i from 0 to 4 {
+    //            $p: 20 * $i;
+    //            $w: 600 - ($i * 100);
+    //            &--#{$i} {
+    //                padding-left: #{$p}px;
+    //                font-weight: #{$w};
+    //            }
+    //        }
+    //    }
+    //}
 }
 
 @media (max-width: $screen-sm-max) {

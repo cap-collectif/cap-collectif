@@ -28,8 +28,9 @@ export class ConsultationPlanItem extends React.Component<Props> {
 
     if (prevProps.activeItems !== this.props.activeItems) {
       // We can't pass innerRef to NavItem component and we need to recover <li>
-      const itemLink = this.navItem.current && this.navItem.current.parentNode;
-      const item = itemLink && itemLink.parentNode;
+      // const itemLink = this.navItem.current && this.navItem.current.parentNode;
+      // const item = itemLink && itemLink.parentNode;
+      const item = this.navItem.current;
 
       if (activeItems.includes(section.id)) {
         onCollapse(true);
@@ -65,9 +66,9 @@ export class ConsultationPlanItem extends React.Component<Props> {
     const { section, level } = this.props;
 
     return (
-      <NavItem className={`level--${level}`} onClick={this.handleClick}>
-        <span ref={this.navItem}>{section.title}</span>
-      </NavItem>
+      <a className={`level--${level}`} ref={this.navItem} onClick={this.handleClick}>
+        {section.title}
+      </a>
     );
   }
 }

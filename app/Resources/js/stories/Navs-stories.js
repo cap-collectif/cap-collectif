@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import styled from 'styled-components';
-import { Nav } from 'react-bootstrap';
+import {Button, Nav} from 'react-bootstrap';
 import StackedNav from '../components/Ui/Nav/StackedNav';
 
 const Row = styled.div.attrs({
@@ -45,56 +45,56 @@ storiesOf('Navs', module).add(
         <hr />
         <Row>
           <Col>
-            <StackedNav>
+            <StackedNav className="w-100">
               <div className="stacked-nav__header">
                 <p>
-                  <i className="cap cap-android-menu" />
+                  <i className="cap cap-android-menu mr-5" />
                   <span>My plan</span>
                 </p>
-                <a href="">
+                <Button bsStyle="link" bsClass="p-0" href="#">
                   <i className="cap cap-delete-1" />
-                </a>
+                </Button>
               </div>
               <div className="stacked-nav__list">
                 <Nav>
-                  <li className="level--0">
-                    <a href="">Title 1</a>
+                  <li>
+                    <a href="#" className="level--0">Title 1</a>
                     <Nav>
-                      <li className="level--1">
-                        <a href="">Title 1.1</a>
+                      <li>
+                        <a href="#" className="level--1 active">Title 1.1</a>
                         <Nav>
-                          <li className="level--2">
-                            <a href="">Title 1.1.1</a>
+                          <li>
+                            <a href="#" className="level--2">Title 1.1.1</a>
                             <Nav>
-                              <li className="level--3">
-                                <a href="">Title 1.1.1.1</a>
+                              <li>
+                                <a href="#" className="level--3">Title 1.1.1.1</a>
                               </li>
                             </Nav>
                           </li>
                         </Nav>
                       </li>
-                      <li className="level--1">
-                        <a href="">Title 1.2</a>
+                      <li>
+                        <a href="#" className="level--1">Title 1.2</a>
                       </li>
                     </Nav>
                   </li>
                 </Nav>
                 <Nav>
-                  <li className="level--0">
-                    <a href="">Title 2</a>
+                  <li>
+                    <a href="#" className="level--0">Title 2</a>
                     <Nav>
-                      <li className="level--1">
-                        <a href="">Title 2.2</a>
+                      <li>
+                        <a href="#" className="level--1">Title 2.2</a>
                       </li>
                     </Nav>
                   </li>
                 </Nav>
               </div>
               <div className="stacked-nav__footer">
-                <a href="">
-                  <i className="cap cap-arrow-68" />
+                <Button bsStyle="link" bsClass="p-0" href="#">
+                  <i className="cap cap-arrow-68 mr-5" />
                   <span>Back to Top</span>
-                </a>
+                </Button>
               </div>
             </StackedNav>
           </Col>

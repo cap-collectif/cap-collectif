@@ -8,6 +8,7 @@ import type { ConsultationPlanRecursiveItems_consultation } from './__generated_
 import ConsultationPlanItems from './ConsultationPlanItems';
 import { closeConsultationPlan, openConsultationPlan } from '../../redux/modules/project';
 import config from '../../config';
+import StackedNav from "../Ui/Nav/StackedNav";
 
 type Props = {
   consultation: ConsultationPlanRecursiveItems_consultation,
@@ -39,8 +40,8 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
 
     if (showConsultationPlan) {
       return (
-        <div className="consultation-plan_open">
-          <div className="consultation-plan__header">
+        <StackedNav>
+          <div className="stacked-nav__header">
             <p>
               <i className="cap cap-android-menu mr-5" />
               <FormattedMessage id="plan" />
@@ -52,7 +53,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
               <i className="cap cap-delete-1" />
             </a>
           </div>
-          <div className="consultation-plan__list">
+          <div className="stacked-nav__list">
             {consultation.sections &&
               consultation.sections
                 .filter(Boolean)
@@ -65,13 +66,13 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
                   />
                 ))}
           </div>
-          <div className="consultation-plan__back-to-top">
+          <div className="stacked-nav__footer">
             <a onClick={this.handleClick}>
               <i className="cap cap-arrow-68 mr-5" />
               <FormattedMessage id="back-to-top" />
             </a>
           </div>
-        </div>
+        </StackedNav>
       );
     }
 

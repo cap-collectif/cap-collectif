@@ -6,20 +6,25 @@ type Props = {
   children: ?React.Node,
 };
 
-export const Container = styled.div.attrs({
+const Container = styled.div.attrs({
   className: 'stacked-nav',
 })`
-  background-color: #f6f6f6;
-
+  background-color: #F6F6F6;
+  width: 100%;
+  
+  a, a:hover {
+    text-decoration: none;
+  }
+  
   .stacked-nav__header {
-    color: $dark-gray;
+    color: #707070;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #e3e3e3;
     text-transform: uppercase;
 
     a {
-      color: $dark-gray;
+      color: #707070;
     }
 
     .cap {
@@ -34,58 +39,69 @@ export const Container = styled.div.attrs({
       font-size: 12px;
     }
   }
-
+  
   .stacked-nav__list {
     a {
-      text-decoration: none;
       cursor: pointer;
     }
 
     .nav {
       li {
-        border: 1px solid $page-bgc;
-
         a {
-          color: $black;
+          color: #000000;
+          border: 1px solid #F6F6F6;
         }
 
         &.active a,
         &:hover a,
         a:focus {
-          color: $black;
+          color: #000000;
           background-color: transparent;
         }
 
-        &.active,
-        &:hover {
-          background-color: $white;
-          border: 1px solid $border-color;
+        & a.active,
+        & a:hover {
+          background-color: #FFFFFF;
+          border: 1px solid #E3E3E3;
         }
       }
+      
+      .level--0 {
+        font-weight: 600;
+      }
 
-      .level {
-        @for $i from 0 to 4 {
-          $p: 20 * $i;
-          $w: 600 - ($i * 100);
-          &--#{$i} {
-            padding-left: #{$p}px;
-            font-weight: #{$w};
-          }
-        }
+      .level--1 {
+        padding-left: 35px;
+        font-weight: 500;
+      }
+
+      .level--2 {
+        padding-left: 55px;
+        font-weight: 400;
+      }
+
+      .level--3 {
+        padding-left: 75px;
+        font-weight: 300;
       }
     }
-  }
-
+  }  
+  
   .stacked-nav__footer {
     padding: 15px 0;
-    color: $black;
+    color: #000000;
 
     a {
-      color: $black;
       font-weight: 300;
+      font-size: 16px;
+      
+      &:not(:hover) {
+        color: #000000;
+      }
     }
   }
 `;
+
 
 class StackedNav extends React.Component<Props> {
   render() {
