@@ -15,8 +15,8 @@ import {
 import ProposalFormAdminQuestionModal from './ProposalFormAdminQuestionModal';
 import type { GlobalState, Dispatch } from '../../types';
 import { ProposalFormAdminDeleteQuestionModal } from './ProposalFormAdminDeleteQuestionModal';
-import { ProposalFormAdminQuestion } from './ProposalFormAdminQuestion';
-import QuestionSectionAdminModal from '../Question/QuestionSectionAdminModal';
+import { QuestionAdmin } from '../Question/QuestionAdmin';
+import SectionQuestionAdminModal from '../Question/SectionQuestionAdminModal';
 import FlashMessages from '../Utils/FlashMessages';
 import type { QuestionTypeValue } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 
@@ -250,7 +250,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                               show={index === editIndex}
                               formName={formName}
                             />
-                            <QuestionSectionAdminModal
+                            <SectionQuestionAdminModal
                               show={index === editIndexSection}
                               member={member}
                               isCreating={!!questions[index].id}
@@ -258,7 +258,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                               onSubmit={this.handleSubmit.bind(this, 'section')}
                               formName={formName}
                             />
-                            <ProposalFormAdminQuestion
+                            <QuestionAdmin
                               question={questions[index]}
                               provided={provided}
                               handleClickEdit={this.handleClickEdit}

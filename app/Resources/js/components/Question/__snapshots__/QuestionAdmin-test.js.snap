@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalFormAdminQuestion /> render correctly a checkbox question 1`] = `
+exports[`<QuestionAdmin /> render correctly a checkbox question 1`] = `
 <Row
   bsClass="row"
   componentClass="div"
@@ -11,7 +11,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a checkbox question 1`] 
     componentClass="div"
     xs={8}
   >
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <i
         className="cap cap-android-menu"
         style={
@@ -21,8 +21,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a checkbox question 1`] 
           }
         }
       />
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <i
         className="cap cap-bubble-ask-2"
         style={
@@ -32,8 +32,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a checkbox question 1`] 
           }
         }
       />
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <strong>
         Question Title
       </strong>
@@ -46,7 +46,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a checkbox question 1`] 
           values={Object {}}
         />
       </span>
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
   </Col>
   <Col
     bsClass="col"
@@ -98,7 +98,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a checkbox question 1`] 
 </Row>
 `;
 
-exports[`<ProposalFormAdminQuestion /> render correctly a medias question 1`] = `
+exports[`<QuestionAdmin /> render correctly a medias question 1`] = `
 <Row
   bsClass="row"
   componentClass="div"
@@ -109,7 +109,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a medias question 1`] = 
     componentClass="div"
     xs={8}
   >
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <i
         className="cap cap-android-menu"
         style={
@@ -119,8 +119,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a medias question 1`] = 
           }
         }
       />
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <i
         className="cap cap-bubble-ask-2"
         style={
@@ -130,8 +130,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a medias question 1`] = 
           }
         }
       />
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <strong>
         Question Title
       </strong>
@@ -144,7 +144,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a medias question 1`] = 
           values={Object {}}
         />
       </span>
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
   </Col>
   <Col
     bsClass="col"
@@ -196,7 +196,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a medias question 1`] = 
 </Row>
 `;
 
-exports[`<ProposalFormAdminQuestion /> render correctly a section 1`] = `
+exports[`<QuestionAdmin /> render correctly a section 1`] = `
 <Row
   bsClass="row"
   componentClass="div"
@@ -207,7 +207,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a section 1`] = `
     componentClass="div"
     xs={8}
   >
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <i
         className="cap cap-android-menu"
         style={
@@ -217,8 +217,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a section 1`] = `
           }
         }
       />
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <i
         className="cap cap-small-caps-1"
         style={
@@ -228,8 +228,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a section 1`] = `
           }
         }
       />
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <strong>
         Section Title
       </strong>
@@ -242,7 +242,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a section 1`] = `
           values={Object {}}
         />
       </span>
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
   </Col>
   <Col
     bsClass="col"
@@ -294,7 +294,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a section 1`] = `
 </Row>
 `;
 
-exports[`<ProposalFormAdminQuestion /> render correctly a text question 1`] = `
+exports[`<QuestionAdmin /> render correctly a text question 1`] = `
 <Row
   bsClass="row"
   componentClass="div"
@@ -305,7 +305,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a text question 1`] = `
     componentClass="div"
     xs={8}
   >
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <i
         className="cap cap-android-menu"
         style={
@@ -315,8 +315,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a text question 1`] = `
           }
         }
       />
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <i
         className="cap cap-bubble-ask-2"
         style={
@@ -326,8 +326,8 @@ exports[`<ProposalFormAdminQuestion /> render correctly a text question 1`] = `
           }
         }
       />
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
-    <ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
+    <QuestionAdmin__ItemQuestionWrapper>
       <strong>
         Question Title
       </strong>
@@ -340,7 +340,7 @@ exports[`<ProposalFormAdminQuestion /> render correctly a text question 1`] = `
           values={Object {}}
         />
       </span>
-    </ProposalFormAdminQuestion__ItemQuestionWrapper>
+    </QuestionAdmin__ItemQuestionWrapper>
   </Col>
   <Col
     bsClass="col"

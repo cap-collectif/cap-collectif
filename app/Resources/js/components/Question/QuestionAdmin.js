@@ -4,7 +4,7 @@ import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import styled from 'styled-components';
-import type { QuestionTypeValue } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
+import type { QuestionTypeValue } from '../ProposalForm/__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 
 const ItemQuestionWrapper = styled.div`
   padding-right: 8px;
@@ -23,7 +23,7 @@ type Props = {
   handleClickDelete: (index: number, type: QuestionTypeValue) => void,
 };
 
-export const ProposalFormAdminQuestion = ({
+export const QuestionAdmin = ({
   question,
   handleClickEdit,
   handleClickDelete,

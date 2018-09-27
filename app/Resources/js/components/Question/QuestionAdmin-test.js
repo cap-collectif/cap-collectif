@@ -2,9 +2,9 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { ProposalFormAdminQuestion } from './ProposalFormAdminQuestion';
+import { QuestionAdmin } from './QuestionAdmin';
 
-describe('<ProposalFormAdminQuestion />', () => {
+describe('<QuestionAdmin />', () => {
   const props = {
     question: {
       type: 'section',
@@ -43,22 +43,22 @@ describe('<ProposalFormAdminQuestion />', () => {
   };
 
   it('render correctly a section', () => {
-    const wrapper = shallow(<ProposalFormAdminQuestion {...props} />);
+    const wrapper = shallow(<QuestionAdmin {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render correctly a text question', () => {
-    const wrapper = shallow(<ProposalFormAdminQuestion {...propsQuestion} />);
+    const wrapper = shallow(<QuestionAdmin {...propsQuestion} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render correctly a medias question', () => {
-    const wrapper = shallow(<ProposalFormAdminQuestion {...propsMedia} />);
+    const wrapper = shallow(<QuestionAdmin {...propsMedia} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('render correctly a checkbox question', () => {
-    const wrapper = shallow(<ProposalFormAdminQuestion {...propsCheckbox} />);
+    const wrapper = shallow(<QuestionAdmin {...propsCheckbox} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

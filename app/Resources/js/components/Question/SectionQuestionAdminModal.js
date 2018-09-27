@@ -29,7 +29,7 @@ const optional = (
   </span>
 );
 
-const QuestionSectionAdminModal = (props: Props) => {
+const SectionQuestionAdminModal = (props: Props) => {
   const { show, onClose, member, onSubmit, isCreating, disabled } = props;
 
   return (
@@ -80,4 +80,4 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Pa
   disabled: getFormSyncErrors(props.formName)(state).questions !== undefined,
 });
 
-export default connect(mapStateToProps)(injectIntl(QuestionSectionAdminModal));
+export default connect(mapStateToProps)(injectIntl(SectionQuestionAdminModal));
