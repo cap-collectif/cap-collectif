@@ -16,6 +16,5 @@ export const checkOnlyNumbers = (input: string): boolean => {
   if (input === '-') {
     return false;
   }
-  console.log(results);
-  return results && results[0] === input;
+  return !!results && results[0] === input;
 };
