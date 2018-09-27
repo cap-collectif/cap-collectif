@@ -66,14 +66,15 @@ export class NavbarRight extends React.Component<Props> {
                 <FormattedMessage id="evaluations.index.page_title" />
               </MenuItem>
             )}
-            <MenuItem
-              key={3.4}
-              eventKey={3.4}
-              href={`/profile/${features.profiles ? 'edit-profile' : 'edit-profile#account'}`}>
-              <i className="cap cap-setting-adjustment" style={{ marginRight: 10 }} />
-              {<FormattedMessage id="navbar.user_settings" />}
-            </MenuItem>
-            <MenuItem key={3.5} divider />
+            {features.profiles && (
+              <React.Fragment>
+                <MenuItem key={3.4} eventKey={3.4} href="/profile/edit-profile">
+                  <i className="cap cap-setting-adjustment" style={{ marginRight: 10 }} />
+                  {<FormattedMessage id="navbar.user_settings" />}
+                </MenuItem>
+                <MenuItem key={3.5} divider />
+              </React.Fragment>
+            )}
             <MenuItem key={3.6} eventKey={3.6} id="logout-button" onClick={this.logout}>
               <i className="cap cap-power-1" style={{ marginRight: 10 }} />
               {<FormattedMessage id="global.logout" />}
