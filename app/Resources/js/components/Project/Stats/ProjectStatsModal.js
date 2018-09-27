@@ -97,16 +97,14 @@ class ProjectStatsModal extends React.Component<Props, State> {
             <Loader show={this.state.isLoading}>
               <ListGroup className="stats__list">
                 {this.state.data.values.length > 0 &&
-                  this.state.data.values.map((row, index) => {
-                    return (
-                      <ProjectStatsListItem
-                        key={index}
-                        item={row}
-                        showPercentage={showPercentage}
-                        isCurrency={isCurrency}
-                      />
-                    );
-                  })}
+                  this.state.data.values.map((row, index) => (
+                    <ProjectStatsListItem
+                      key={index}
+                      item={row}
+                      showPercentage={showPercentage}
+                      isCurrency={isCurrency}
+                    />
+                  ))}
               </ListGroup>
             </Loader>
           </Modal.Body>

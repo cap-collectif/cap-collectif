@@ -146,60 +146,58 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            Progress bar{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <h3>Simple progress bar</h3>
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Progress bar{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <h3>Simple progress bar</h3>
+        <ProgressBar
+          now={70}
+          className={toComeProject.step.className}
+          label={toComeProject.step.label}
+        />
+        <h3>Progress bar for step</h3>
+        <h4>À venir</h4>
+        <Progress className="mb-30">
           <ProgressBar
-            now={70}
+            now={toComeProject.step.now}
             className={toComeProject.step.className}
             label={toComeProject.step.label}
           />
-          <h3>Progress bar for step</h3>
-          <h4>À venir</h4>
-          <Progress className="mb-30">
-            <ProgressBar
-              now={toComeProject.step.now}
-              className={toComeProject.step.className}
-              label={toComeProject.step.label}
-            />
-          </Progress>
-          <h4>En cours</h4>
-          <Progress className="mb-30">
-            <ProgressBar
-              now={openProject.step.now}
-              bsStyle={openProject.step.bsStyle}
-              className={openProject.step.className}
-              label={openProject.step.label}
-            />
-          </Progress>
-          <h4>Participation en continue</h4>
-          <Progress className="mb-30">
-            <ProgressBar
-              now={continuousProject.step.now}
-              bsStyle={continuousProject.step.bsStyle}
-              className={continuousProject.step.className}
-              label={continuousProject.step.label}
-            />
-          </Progress>
-          <h4>Terminé</h4>
-          <Progress className="mb-30">
-            <ProgressBar
-              now={endedProject.step.now}
-              className={endedProject.step.className}
-              label={endedProject.step.label}
-            />
-          </Progress>
-        </div>
-      );
-    }),
+        </Progress>
+        <h4>En cours</h4>
+        <Progress className="mb-30">
+          <ProgressBar
+            now={openProject.step.now}
+            bsStyle={openProject.step.bsStyle}
+            className={openProject.step.className}
+            label={openProject.step.label}
+          />
+        </Progress>
+        <h4>Participation en continue</h4>
+        <Progress className="mb-30">
+          <ProgressBar
+            now={continuousProject.step.now}
+            bsStyle={continuousProject.step.bsStyle}
+            className={continuousProject.step.className}
+            label={continuousProject.step.label}
+          />
+        </Progress>
+        <h4>Terminé</h4>
+        <Progress className="mb-30">
+          <ProgressBar
+            now={endedProject.step.now}
+            className={endedProject.step.className}
+            label={endedProject.step.label}
+          />
+        </Progress>
+      </div>
+    )),
   )
   .add(
     'List',
@@ -236,50 +234,48 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            List{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <h3>Inline list</h3>
-          <InlineList className="mb-30">
-            <li>5 projets</li>
-            <li>10 articles</li>
-            <li>2 évènements</li>
-            <li>4 idées</li>
-          </InlineList>
-          <h3>Tags list</h3>
-          <TagsList className="mb-30">
-            <div className="tags-list__tag">
-              <i className="cap cap-marker-1-1 icon--blue" />5 projets
-            </div>
-            <div className="tags-list__tag">
-              <i className="cap cap-tag-1-1 icon--blue" />
-              10 articles
-            </div>
-            <div className="tags-list__tag">
-              <i className="cap cap-tag-1-1 icon--blue" />2 évènements
-            </div>
-            <div className="tags-list__tag">
-              <i className="cap cap-marker-1-1 icon--blue" />4 idées
-            </div>
-          </TagsList>
-          <h3>Progress list</h3>
-          <div style={{ width: '200px' }} className="mt-15 mb-15">
-            <ProgressList>
-              <ProgressListItem item={{ title: 'step 1', isActive: true }} />
-              <ProgressListItem item={{ title: 'step 2', isActive: false }} />
-              <ProgressListItem item={{ title: 'step 3', isActive: false }} />
-            </ProgressList>
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          List{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <h3>Inline list</h3>
+        <InlineList className="mb-30">
+          <li>5 projets</li>
+          <li>10 articles</li>
+          <li>2 évènements</li>
+          <li>4 idées</li>
+        </InlineList>
+        <h3>Tags list</h3>
+        <TagsList className="mb-30">
+          <div className="tags-list__tag">
+            <i className="cap cap-marker-1-1 icon--blue" />5 projets
           </div>
+          <div className="tags-list__tag">
+            <i className="cap cap-tag-1-1 icon--blue" />
+            10 articles
+          </div>
+          <div className="tags-list__tag">
+            <i className="cap cap-tag-1-1 icon--blue" />2 évènements
+          </div>
+          <div className="tags-list__tag">
+            <i className="cap cap-marker-1-1 icon--blue" />4 idées
+          </div>
+        </TagsList>
+        <h3>Progress list</h3>
+        <div style={{ width: '200px' }} className="mt-15 mb-15">
+          <ProgressList>
+            <ProgressListItem item={{ title: 'step 1', isActive: true }} />
+            <ProgressListItem item={{ title: 'step 2', isActive: false }} />
+            <ProgressListItem item={{ title: 'step 3', isActive: false }} />
+          </ProgressList>
         </div>
-      );
-    }),
+      </div>
+    )),
   )
   .add(
     'Pagination',
@@ -298,22 +294,20 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            Pagination{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <div className="row">
-            <Pagination nbPages={6} current={3} onChange={() => {}} />
-          </div>
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Pagination{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <div className="row">
+          <Pagination nbPages={6} current={3} onChange={() => {}} />
         </div>
-      );
-    }),
+      </div>
+    )),
   )
   .add(
     'Labels',
@@ -327,26 +321,24 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            Labels{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <div className="row">
-            {labels.map(label => (
-              <div className="col-sm-1 col-xs-6 mb-20">
-                <Label bsStyle={label}>{label}</Label>
-              </div>
-            ))}
-          </div>
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Labels{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <div className="row">
+          {labels.map(label => (
+            <div className="col-sm-1 col-xs-6 mb-20">
+              <Label bsStyle={label}>{label}</Label>
+            </div>
+          ))}
         </div>
-      );
-    }),
+      </div>
+    )),
   )
   .add(
     'Alerts',
@@ -372,34 +364,32 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            Alerts{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <h3>Basic alert</h3>
-          <div className="row">
-            {alerts.map(alert => (
-              <div className="col-sm-3 col-xs-12 mb-10">
-                <Alert bsStyle={alert}>{alert} alert</Alert>
-              </div>
-            ))}
-          </div>
-          <h3>Form alert</h3>
-          {alertFormProps.map(props => (
-            <div className="mb-20">
-              <p>{props.description}</p>
-              <AlertForm {...props.values} />
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Alerts{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <h3>Basic alert</h3>
+        <div className="row">
+          {alerts.map(alert => (
+            <div className="col-sm-3 col-xs-12 mb-10">
+              <Alert bsStyle={alert}>{alert} alert</Alert>
             </div>
           ))}
         </div>
-      );
-    }),
+        <h3>Form alert</h3>
+        {alertFormProps.map(props => (
+          <div className="mb-20">
+            <p>{props.description}</p>
+            <AlertForm {...props.values} />
+          </div>
+        ))}
+      </div>
+    )),
   )
   .add(
     'Buttons',
@@ -432,55 +422,53 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            Buttons{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <div className="row">
-            {buttons.map(button => (
-              <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
-                <Button bsStyle={button}>{button}</Button>
-              </div>
-            ))}
-            {buttonsOutline.map(button => (
-              <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
-                <Button bsStyle={button} className="btn--outline">
-                  {button}
-                </Button>
-              </div>
-            ))}
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Buttons{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <div className="row">
+          {buttons.map(button => (
             <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
-              <DropdownButton bsStyle="primary" title="dropdown button" key="1" id="dropdown-basic">
-                <MenuItem header>Header</MenuItem>
-                <MenuItem eventKey="1">Action</MenuItem>
-                <MenuItem eventKey="3" active>
-                  Active Item
-                </MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey="4">Separated link</MenuItem>
-              </DropdownButton>
+              <Button bsStyle={button}>{button}</Button>
             </div>
-          </div>
-          <div className="row">
+          ))}
+          {buttonsOutline.map(button => (
             <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
-              <Button className="btn-xs">Xs button</Button>
+              <Button bsStyle={button} className="btn--outline">
+                {button}
+              </Button>
             </div>
-            <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
-              <Button className="btn-sm">Sm button</Button>
-            </div>
-            <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
-              <Button className="btn-lg">Lg button</Button>
-            </div>
+          ))}
+          <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
+            <DropdownButton bsStyle="primary" title="dropdown button" key="1" id="dropdown-basic">
+              <MenuItem header>Header</MenuItem>
+              <MenuItem eventKey="1">Action</MenuItem>
+              <MenuItem eventKey="3" active>
+                Active Item
+              </MenuItem>
+              <MenuItem divider />
+              <MenuItem eventKey="4">Separated link</MenuItem>
+            </DropdownButton>
           </div>
         </div>
-      );
-    }),
+        <div className="row">
+          <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
+            <Button className="btn-xs">Xs button</Button>
+          </div>
+          <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
+            <Button className="btn-sm">Sm button</Button>
+          </div>
+          <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
+            <Button className="btn-lg">Lg button</Button>
+          </div>
+        </div>
+      </div>
+    )),
   )
   .add(
     'Modal',
@@ -507,32 +495,30 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            Modal{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <div className="static-modal position-relative">
-            <Modal.Dialog className="position-relative">
-              <Modal.Header>
-                <Modal.Title>Titre</Modal.Title>
-              </Modal.Header>
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Modal{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <div className="static-modal position-relative">
+          <Modal.Dialog className="position-relative">
+            <Modal.Header>
+              <Modal.Title>Titre</Modal.Title>
+            </Modal.Header>
 
-              <Modal.Body>Lorem ipsum ...</Modal.Body>
+            <Modal.Body>Lorem ipsum ...</Modal.Body>
 
-              <Modal.Footer>
-                <Button>Fermer</Button>
-              </Modal.Footer>
-            </Modal.Dialog>
-          </div>
+            <Modal.Footer>
+              <Button>Fermer</Button>
+            </Modal.Footer>
+          </Modal.Dialog>
         </div>
-      );
-    }),
+      </div>
+    )),
   )
   .add(
     'Media',
@@ -561,34 +547,32 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            Media{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <h3>Darken gradient media</h3>
-          <DarkenGradientMedia
-            width="600px"
-            height="400px"
-            url="https://source.unsplash.com/collection/1353633"
-            title="title"
-          />
-          <h3>16:9 media</h3>
-          <div style={{ maxWidth: '400px' }} className="mb-30">
-            <SixteenNineMedia>
-              <img src="https://source.unsplash.com/collection/1353633" alt="img example" />
-            </SixteenNineMedia>
-          </div>
-          <h3>User avatar</h3>
-          <UserAvatar user={author} defaultAvatar={null} />
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Media{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <h3>Darken gradient media</h3>
+        <DarkenGradientMedia
+          width="600px"
+          height="400px"
+          url="https://source.unsplash.com/collection/1353633"
+          title="title"
+        />
+        <h3>16:9 media</h3>
+        <div style={{ maxWidth: '400px' }} className="mb-30">
+          <SixteenNineMedia>
+            <img src="https://source.unsplash.com/collection/1353633" alt="img example" />
+          </SixteenNineMedia>
         </div>
-      );
-    }),
+        <h3>User avatar</h3>
+        <UserAvatar user={author} defaultAvatar={null} />
+      </div>
+    )),
   )
   .add(
     'Loader',
@@ -602,20 +586,18 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            Loader{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <Loader />
-        </div>
-      );
-    }),
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Loader{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <Loader />
+      </div>
+    )),
   )
   .add(
     'Panel',
@@ -643,7 +625,7 @@ storiesOf('Components', module)
               <p>Alone item</p>
             </ListGroupItem>
           <ListGroupItem>
-          <a href="#" className="d-flex"> // center title with flex
+          <a href="https://ui.cap-collectif.com" className="d-flex"> // center title with flex
             <h3>My title</h3>
           </a>
           </ListGroupItem>
@@ -660,81 +642,79 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            Panel{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <Panel className="panel-custom">
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">Panel heading [default]</Panel.Title>
-              <div className="panel-heading__actions">
-                <FormControl componentClass="select" placeholder="select">
-                  <option value="select">select</option>
-                  <option value="other">...</option>
-                </FormControl>
-                <Button>My button</Button>
-              </div>
-            </Panel.Heading>
-            <Panel.Body>
-              <p>panel body</p>
-            </Panel.Body>
-            <ListGroup className="list-group-custom">
-              <ListGroupItem>
-                <p>Alone item</p>
-              </ListGroupItem>
-              <ListGroupItem>
-                <a href="#" className="d-flex">
-                  <h3>My item</h3>
-                </a>
-                <Button>My button</Button>
-              </ListGroupItem>
-            </ListGroup>
-            <Panel.Footer>Panel footer</Panel.Footer>
-          </Panel>
-          <Panel className="panel-custom panel--blue">
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">Blue panel</Panel.Title>
-            </Panel.Heading>
-          </Panel>
-          <Panel className="panel-custom panel--red">
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">Red panel</Panel.Title>
-            </Panel.Heading>
-          </Panel>
-          <Panel className="panel-custom panel--orange">
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">Orange panel</Panel.Title>
-            </Panel.Heading>
-          </Panel>
-          <Panel className="panel-custom panel--green">
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">Green panel</Panel.Title>
-            </Panel.Heading>
-          </Panel>
-          <Panel className="panel-custom panel--gray">
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">Gray panel</Panel.Title>
-            </Panel.Heading>
-          </Panel>
-          <Panel className="panel-custom panel--lightgray">
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">Lightgray panel</Panel.Title>
-            </Panel.Heading>
-          </Panel>
-          <Panel className="panel-custom panel--bluedark">
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">Bluedark panel</Panel.Title>
-            </Panel.Heading>
-          </Panel>
-        </div>
-      );
-    }),
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Panel{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <Panel className="panel-custom">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">Panel heading [default]</Panel.Title>
+            <div className="panel-heading__actions">
+              <FormControl componentClass="select" placeholder="select">
+                <option value="select">select</option>
+                <option value="other">...</option>
+              </FormControl>
+              <Button>My button</Button>
+            </div>
+          </Panel.Heading>
+          <Panel.Body>
+            <p>panel body</p>
+          </Panel.Body>
+          <ListGroup className="list-group-custom">
+            <ListGroupItem>
+              <p>Alone item</p>
+            </ListGroupItem>
+            <ListGroupItem>
+              <a href="https://ui.cap-collectif.com" className="d-flex">
+                <h3>My item</h3>
+              </a>
+              <Button>My button</Button>
+            </ListGroupItem>
+          </ListGroup>
+          <Panel.Footer>Panel footer</Panel.Footer>
+        </Panel>
+        <Panel className="panel-custom panel--blue">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">Blue panel</Panel.Title>
+          </Panel.Heading>
+        </Panel>
+        <Panel className="panel-custom panel--red">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">Red panel</Panel.Title>
+          </Panel.Heading>
+        </Panel>
+        <Panel className="panel-custom panel--orange">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">Orange panel</Panel.Title>
+          </Panel.Heading>
+        </Panel>
+        <Panel className="panel-custom panel--green">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">Green panel</Panel.Title>
+          </Panel.Heading>
+        </Panel>
+        <Panel className="panel-custom panel--gray">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">Gray panel</Panel.Title>
+          </Panel.Heading>
+        </Panel>
+        <Panel className="panel-custom panel--lightgray">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">Lightgray panel</Panel.Title>
+          </Panel.Heading>
+        </Panel>
+        <Panel className="panel-custom panel--bluedark">
+          <Panel.Heading>
+            <Panel.Title componentClass="h3">Bluedark panel</Panel.Title>
+          </Panel.Heading>
+        </Panel>
+      </div>
+    )),
   )
   .add(
     'ListGroup',
@@ -751,7 +731,7 @@ storiesOf('Components', module)
         
         // list group item with element on right side
         <ListGroupItem>
-        <a href="#" className="d-flex"> // center title with flex
+        <a href="https://ui.cap-collectif.com" className="d-flex"> // center title with flex
           <h3>My title</h3>
         </a>
         </ListGroupItem>
@@ -791,59 +771,57 @@ storiesOf('Components', module)
       ~~~
     
     `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            List Group{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-              <i className="small cap cap-github" />
+    })(() => (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          List Group{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <ListGroup className="list-group-custom">
+          <ListGroupItem>
+            <p>Paragraph</p>
+          </ListGroupItem>
+          <ListGroupItem>
+            <a href="https://ui.cap-collectif.com" className="d-flex">
+              <h3>My item</h3>
             </a>
-          </h1>
-          <hr />
-          <ListGroup className="list-group-custom">
-            <ListGroupItem>
-              <p>Paragraph</p>
-            </ListGroupItem>
-            <ListGroupItem>
-              <a href="#" className="d-flex">
-                <h3>My item</h3>
-              </a>
-              <Button>My button</Button>
-            </ListGroupItem>
-            <ListGroupItem className="list-group-item__opinion">
-              <div className="left-block">
-                <UserAvatar user={author} defaultAvatar={null} />
-                <div>
-                  <p>
-                    <a href="#" className="author-name">
-                      Lorem ipsum
-                    </a>{' '}
-                    <span className="excerpt">3 juin 2014</span>
-                  </p>
-                  <h3 className="title">
-                    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                  </h3>
-                  <InlineList>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                  </InlineList>
-                  <div className="actions">
-                    <Button bsStyle="danger" className="btn-xs">
-                      Delete
-                    </Button>
-                    <Button className="btn-xs">Update</Button>
-                    <Button bsStyle="success" className="btn-xs btn--outline">
-                      Agree
-                    </Button>
-                  </div>
+            <Button>My button</Button>
+          </ListGroupItem>
+          <ListGroupItem className="list-group-item__opinion">
+            <div className="left-block">
+              <UserAvatar user={author} defaultAvatar={null} />
+              <div>
+                <p>
+                  <a href="https://ui.cap-collectif.com" className="author-name">
+                    Lorem ipsum
+                  </a>{' '}
+                  <span className="excerpt">3 juin 2014</span>
+                </p>
+                <h3 className="title">
+                  consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua.
+                </h3>
+                <InlineList>
+                  <li>Item 1</li>
+                  <li>Item 2</li>
+                </InlineList>
+                <div className="actions">
+                  <Button bsStyle="danger" className="btn-xs">
+                    Delete
+                  </Button>
+                  <Button className="btn-xs">Update</Button>
+                  <Button bsStyle="success" className="btn-xs btn--outline">
+                    Agree
+                  </Button>
                 </div>
               </div>
-              <div className="right-block">Right block ...</div>
-            </ListGroupItem>
-          </ListGroup>
-        </div>
-      );
-    }),
+            </div>
+            <div className="right-block">Right block ...</div>
+          </ListGroupItem>
+        </ListGroup>
+      </div>
+    )),
   );

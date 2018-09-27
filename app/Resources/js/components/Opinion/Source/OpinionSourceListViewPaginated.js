@@ -1,19 +1,23 @@
 // @flow
 import * as React from 'react';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import { ListGroup, Panel } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Button, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionSource from './OpinionSource';
+import Loader from '../../Ui/Loader';
 import type { OpinionSourceListViewPaginated_sourceable } from './__generated__/OpinionSourceListViewPaginated_sourceable.graphql';
 
 type Props = {
   relay: RelayPaginationProp,
   sourceable: OpinionSourceListViewPaginated_sourceable,
 };
+type State = {
+  loading: boolean,
+};
 
-class OpinionSourceListViewPaginated extends React.Component<Props> {
+class OpinionSourceListViewPaginated extends React.Component<Props, State> {
   render() {
-    const { sourceable } = this.props;
+    const { sourceable, relay } = this.props;
     if (!sourceable.sources.edges || sourceable.sources.edges.length === 0) {
       return (
         <Panel.Body className="text-center">
@@ -30,10 +34,28 @@ class OpinionSourceListViewPaginated extends React.Component<Props> {
           .filter(Boolean)
           .map(edge => edge.node)
           .filter(Boolean)
-          .map(source => {
+          .map(source => (
             // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
-            return <OpinionSource key={source.id} source={source} sourceable={sourceable} />;
-          })}
+            <OpinionSource key={source.id} source={source} sourceable={sourceable} />
+          ))}
+        {relay.hasMore() && (
+          <ListGroupItem style={{ textAlign: 'center' }}>
+            {this.state.loading ? (
+              <Loader />
+            ) : (
+              <Button
+                bsStyle="link"
+                onClick={() => {
+                  this.setState({ loading: true });
+                  relay.loadMore(50, () => {
+                    this.setState({ loading: false });
+                  });
+                }}>
+                <FormattedMessage id="global.more" />
+              </Button>
+            )}
+          </ListGroupItem>
+        )}
       </ListGroup>
     );
   }

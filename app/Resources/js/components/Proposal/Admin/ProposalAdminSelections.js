@@ -26,6 +26,7 @@ type PassedProps = {
 };
 
 type Props = PassedProps & {
+  // eslint-disable-next-line react/no-unused-prop-types
   initialValues: FormValues,
   intl: IntlShape,
   selectionValues: Array<{ step: string, selected: boolean, status: ?string }>,

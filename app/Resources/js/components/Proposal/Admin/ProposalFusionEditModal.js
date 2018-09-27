@@ -17,7 +17,6 @@ type Props = {
   submitting: boolean,
   pristine: boolean,
   invalid: boolean,
-  open: () => void,
   onClose: () => void,
   submitForm: () => void,
 };

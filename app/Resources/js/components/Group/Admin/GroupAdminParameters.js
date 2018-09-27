@@ -33,8 +33,8 @@ type Props = RelayProps & {
 type FormValues = Object;
 const formName = 'group-edit';
 
-const onDelete = (groupId: string) => {
-  return DeleteGroupMutation.commit({
+const onDelete = (groupId: string) =>
+  DeleteGroupMutation.commit({
     input: {
       groupId,
     },
@@ -43,7 +43,6 @@ const onDelete = (groupId: string) => {
       window.location.host
     }/admin/capco/app/group/list`;
   });
-};
 
 const validate = ({ title }) => {
   const errors = {};

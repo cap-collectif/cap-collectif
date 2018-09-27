@@ -36,7 +36,9 @@ class OpinionBodyDiffModal extends React.Component<Props, State> {
               <FormattedMessage id="opinion.diff.tooltip" />
             </Tooltip>
           }>
-          <a onClick={() => this.open()}>{link}</a>
+          <Button bsStyle="link" onClick={() => this.open()}>
+            {link}
+          </Button>
         </OverlayTrigger>
         <Modal show={this.state.showModal} onHide={() => this.close()}>
           <Modal.Header closeButton>

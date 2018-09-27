@@ -26,7 +26,3 @@ services:
     autowire: true
     arguments:
       $projectRootDir: '%kernel.project_dir%'
-
-  Capco\AppBundle\Command\CreateUserAccountsFromCSVWithPasswordCommand:
-    autoconfigure: true
-    autowire: true

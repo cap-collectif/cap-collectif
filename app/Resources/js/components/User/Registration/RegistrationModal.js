@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { Modal, Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
@@ -24,6 +24,8 @@ type Props = {
 };
 
 export class RegistrationModal extends React.Component<Props> {
+  form: ?React.Component<*>;
+
   render() {
     const {
       submitting,
@@ -81,8 +83,9 @@ export class RegistrationModal extends React.Component<Props> {
           )}
           <LoginSocialButtons prefix="registration." />
           <RegistrationForm
-            // $FlowFixMe
-            ref={c => (this.form = c)}
+            ref={c => {
+              this.form = c;
+            }}
             // $FlowFixMe
             onSubmitFail={this.stopSubmit}
             // $FlowFixMe

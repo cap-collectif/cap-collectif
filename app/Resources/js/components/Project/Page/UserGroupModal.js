@@ -75,12 +75,13 @@ export class UserGroupModal extends React.Component<Props, State> {
                       <div key={group.id} id={group.id}>
                         <ListGroupItem className="list-group-item-custom">
                           <GroupAvatar size={35} />
-                          <div
+                          <Button
+                            bsStyle="link"
                             onClick={() => {
                               this.setState({ currentShownGroupModalId: group.id });
                             }}>
                             {group.title}
-                          </div>
+                          </Button>
                         </ListGroupItem>
                         <div className="users-modal">
                           {/* $FlowFixMe */}

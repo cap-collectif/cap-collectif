@@ -37,7 +37,6 @@ type FormValues = {
 };
 
 type Props = {
-  proposalForm: Object,
   projects: Array<Object>,
   currentCollectStep: Object,
   onProjectChange: (form: string, field: string, value: any) => void,
@@ -56,8 +55,8 @@ const validate = (values: FormValues, props: Props) => {
   return errors;
 };
 
-const onSubmit = (values: FormValues, dispatch: Dispatch) => {
-  return CreateProposalFusionMutation.commit({
+const onSubmit = (values: FormValues, dispatch: Dispatch) =>
+  CreateProposalFusionMutation.commit({
     input: { fromProposals: values.fromProposals.map(proposal => proposal.value) },
   })
     .then((response: CreateProposalFusionMutationResponse) => {
@@ -73,7 +72,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch) => {
         _error: 'global.error.server.form',
       });
     });
-};
 
 export class ProposalFusionForm extends React.Component<Props> {
   render() {
@@ -108,15 +106,13 @@ export class ProposalFusionForm extends React.Component<Props> {
             }
             loadOptions={input =>
               fetchQuery(environment, query, { term: input, stepId: currentCollectStep.id }).then(
-                res => {
-                  return {
-                    options: res.step.proposals.edges.map(edge => ({
-                      value: edge.node.id,
-                      label: edge.node.title,
-                      stepId: currentCollectStep.id,
-                    })),
-                  };
-                },
+                res => ({
+                  options: res.step.proposals.edges.map(edge => ({
+                    value: edge.node.id,
+                    label: edge.node.title,
+                    stepId: currentCollectStep.id,
+                  })),
+                }),
               )
             }
           />
@@ -126,15 +122,12 @@ export class ProposalFusionForm extends React.Component<Props> {
   }
 }
 
-const getBudgetProjects = (projects: { [id: Uuid]: Object }): Array<Object> => {
-  return Object.keys(projects)
+const getBudgetProjects = (projects: { [id: Uuid]: Object }): Array<Object> =>
+  Object.keys(projects)
     .map(key => projects[key])
     .filter(p => p.steps.filter(s => s.type === 'collect').length > 0);
-};
 
-const getSelectedProjectId = (state: State): Uuid => {
-  return formValueSelector(formName)(state, 'project');
-};
+const getSelectedProjectId = (state: State): Uuid => formValueSelector(formName)(state, 'project');
 
 const getCurrentCollectStep = (state: State): ?Object => {
   const id = getSelectedProjectId(state);

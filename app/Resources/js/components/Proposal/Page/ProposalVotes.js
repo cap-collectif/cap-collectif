@@ -8,7 +8,6 @@ import UserBox from '../../User/UserBox';
 import type { ProposalVotes_proposal } from './__generated__/ProposalVotes_proposal.graphql';
 
 type Props = {
-  stepId: string,
   proposal: ProposalVotes_proposal,
   relay: RelayPaginationProp,
 };

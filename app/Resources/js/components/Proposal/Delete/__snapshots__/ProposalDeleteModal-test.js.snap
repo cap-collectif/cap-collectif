@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalDeleteModal /> should render correctly 1`] = `
+<div>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="large"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="global.removeMessage"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <p>
+        <FormattedHTMLMessage
+          id="proposal.delete.confirm"
+          values={
+            Object {
+              "title": "Flammenwerfer",
+            }
+          }
+        />
+      </p>
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[Function]}
+      />
+      <Connect(SubmitButton)
+        bsStyle="danger"
+        id="confirm-proposal-delete"
+        isSubmitting={false}
+        label="global.removeDefinitively"
+        onSubmit={[Function]}
+      />
+    </ModalFooter>
+  </Modal>
+</div>
+`;

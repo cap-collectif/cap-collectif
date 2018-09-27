@@ -14,7 +14,7 @@ export class GroupAdminPageTabs extends Component<Props> {
     const { intl, group } = this.props;
     return (
       <div className="col-xs-12">
-        <Tabs>
+        <Tabs id="group-admin-tabs">
           <Tab eventKey={1} title={intl.formatMessage({ id: 'group.admin.users' })}>
             <GroupAdminUsers group={group} />
           </Tab>

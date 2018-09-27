@@ -291,14 +291,13 @@ const form = injectIntl(
   })(ProposalAdminNotationForm),
 );
 
-export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) => {
-  return !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
+export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) =>
+  !props.proposal.form.evaluationForm || !props.proposal.form.evaluationForm.questions
     ? []
     : formatInitialResponsesValues(
         props.proposal.form.evaluationForm.questions,
         props.proposal.evaluation ? props.proposal.evaluation.responses : [],
       );
-};
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentAnswer /> should render correctly 1`] = `
+<ContainerConstructor
+  comment={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "author": Object {
+        "displayName": "admin",
+        "media": null,
+        "vip": true,
+      },
+      "id": "proposalComment1",
+    }
+  }
+  componentRef={null}
+/>
+`;

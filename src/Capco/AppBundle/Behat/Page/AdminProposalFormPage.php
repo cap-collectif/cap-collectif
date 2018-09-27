@@ -28,18 +28,15 @@ class AdminProposalFormPage extends Page
         'proposal form address zoom' => '#proposal_form_zoom_map',
         'proposal form category mandatory' => '#proposal_form_category_mandatory',
         'proposal form category mandatory help' => '#proposal_form_category_help_text',
-        'proposal form category add' =>
-            '#proposal_form_admin_category_panel_body .form-group button',
+        'proposal form category add' => '#proposal_form_admin_category_panel_body .form-group button',
         'proposal form category add popup title' => '#categories[0].name',
         'proposal form category add popup save' => '.modal-content .btn-primary',
-        'proposal form personal-field add' => '#js-btn-create-question',
+        'proposal form personal-field add' => '#proposal_form_admin_questions_panel_personal button',
         'proposal form personal-field add popup required' => 'input[name="questions[0]\.required"]',
         'proposal form personal-field add popup private' => 'input[name="questions[0]\.private"]',
         'proposal form personal-field add popup save' => '.modal-content .btn-primary',
-        'proposal form notification proposition modified' =>
-            '#proposal_form_notification_on_update',
-        'proposal form notification commentary created' =>
-            '#proposal_form_notification_comment_on_create',
+        'proposal form notification proposition modified' => '#proposal_form_notification_on_update',
+        'proposal form notification commentary created' => '#proposal_form_notification_comment_on_create',
         'proposal form evaluation question' => '#evaluation-form',
         'proposal form parameters commentable' => '#proposal_form_commentable',
         'proposal form parameters costable' => '#proposal_form_costable',
@@ -48,7 +45,6 @@ class AdminProposalFormPage extends Page
         'proposal form notification save' => '#notification-submit',
         'proposal form parameters save' => '#parameters-submit',
         'proposal form address selection' => '#proposal_form_using_address_field',
-        'proposal form personal-section add' => '#js-btn-create-section',
     ];
 
     public function clickSaveProposalFormButton(string $tab)

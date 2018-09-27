@@ -5,11 +5,11 @@ import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import UnpublishedArgumentList from './UnpublishedArgumentList';
 import type { UnpublishedArgumentListRendererQueryResponse } from './__generated__/UnpublishedArgumentListRendererQuery.graphql';
-import type { ArgumentList_argumentable } from './__generated__/ArgumentList_argumentable.graphql';
+import type { UnpublishedArgumentListRenderer_argumentable } from './__generated__/UnpublishedArgumentListRenderer_argumentable.graphql';
 import type { State } from '../../types';
 
 type Props = {
-  argumentable: ArgumentList_argumentable,
+  argumentable: UnpublishedArgumentListRenderer_argumentable,
   isAuthenticated: boolean,
   type: 'FOR' | 'AGAINST' | 'SIMPLE',
 };

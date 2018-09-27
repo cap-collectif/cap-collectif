@@ -29,35 +29,6 @@ exports[`<NavbarRight /> should render correctly 1`] = `
       bsClass="dropdown"
       disabled={false}
       divider={false}
-      eventKey={3.4}
-      header={false}
-      href="/profile/edit-profile#account"
-      key="3.4"
-    >
-      <i
-        className="cap cap-setting-adjustment"
-        style={
-          Object {
-            "marginRight": 10,
-          }
-        }
-      />
-      <FormattedMessage
-        id="navbar.user_settings"
-        values={Object {}}
-      />
-    </MenuItem>
-    <MenuItem
-      bsClass="dropdown"
-      disabled={false}
-      divider={true}
-      header={false}
-      key="3.5"
-    />
-    <MenuItem
-      bsClass="dropdown"
-      disabled={false}
-      divider={false}
       eventKey={3.6}
       header={false}
       id="logout-button"

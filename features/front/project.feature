@@ -261,9 +261,8 @@ Scenario: Pierre can access to a restricted project to his user group
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
   Then I should see "Un avenir meilleur pour les nains de jardins (custom access)"
+  And I wait 1 seconds
   And I should see "restrictedaccess"
-  And I wait 2 seconds
-  And I click the "#restricted-access" element
   And I open restricted access modal
   Then I should see "people-with-access-to-project"
   And I should see "Agent de la ville"

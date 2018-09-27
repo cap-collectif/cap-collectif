@@ -28,7 +28,12 @@ exports[`<RenderCustomAccess /> should render correctly 1`] = `
       ]
     }
   >
-    <span
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      disabled={false}
       onClick={[Function]}
     >
       <i
@@ -38,7 +43,7 @@ exports[`<RenderCustomAccess /> should render correctly 1`] = `
         id="restrictedaccess"
         values={Object {}}
       />
-    </span>
+    </Button>
   </OverlayTrigger>
   <div>
     <ForwardRef(Relay(UserGroupModal))

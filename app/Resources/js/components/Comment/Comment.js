@@ -2,6 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
+import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import UserAvatar from '../User/UserAvatar';
 import CommentInfos from './CommentInfos';
@@ -66,9 +67,9 @@ export class Comment extends React.Component<Props, State> {
                 <div className="comment__buttons">
                   {/* $FlowFixMe $refType */}
                   <CommentVoteButton comment={comment} />{' '}
-                  <a onClick={this.focusAnswer} className="btn btn-sm btn-dark-gray btn--outline">
+                  <Button bsStyle="link" bsSize="sm" onClick={this.focusAnswer} className="btn-dark-gray btn--outline">
                     <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
-                  </a>{' '}
+                  </Button>{' '}
                   {/* $FlowFixMe $refType */}
                   <CommentReportButton comment={comment} /> {/* $FlowFixMe $refType */}
                   <CommentEdit comment={comment} />{' '}
