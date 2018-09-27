@@ -8,7 +8,9 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -28,6 +30,7 @@ class AddProposalVoteMutation implements MutationInterface
     private $resolver;
     private $proposalVotesDataLoader;
     private $proposalCollectVote;
+    private $proposalSelectionVoteRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -37,7 +40,8 @@ class AddProposalVoteMutation implements MutationInterface
         LoggerInterface $logger,
         StepRequirementsResolver $resolver,
         ProposalVotesDataLoader $proposalVotesDataLoader,
-        ProposalCollectVote $proposalCollectVote
+        ProposalCollectVoteRepository $proposalCollectVote,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository
     ) {
         $this->em = $em;
         $this->validator = $validator;
@@ -47,6 +51,7 @@ class AddProposalVoteMutation implements MutationInterface
         $this->resolver = $resolver;
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
         $this->proposalCollectVote = $proposalCollectVote;
+        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
     }
 
     public function __invoke(Argument $input, User $user, RequestStack $request): array
@@ -77,7 +82,10 @@ class AddProposalVoteMutation implements MutationInterface
             if (!\in_array($step, $proposal->getSelectionSteps(), true)) {
                 throw new UserError('This proposal is not associated to this selection step.');
             }
-            $countUserVotes = $this->proposalCollectVote->countVotesByStepAndUser($step, $user);
+            $countUserVotes = $this->proposalSelectionVoteRepository->countVotesByStepAndUser(
+                $step,
+                $user
+            );
             $vote = (new ProposalSelectionVote())->setSelectionStep($step);
         } else {
             throw new UserError('Wrong step with id: ' . $input->offsetGet('stepId'));

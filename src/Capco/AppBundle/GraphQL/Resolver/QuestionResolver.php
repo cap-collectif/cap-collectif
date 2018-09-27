@@ -5,14 +5,29 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Helper\GeometryHelper;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use PhpParser\Node\Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class QuestionResolver implements ContainerAwareInterface
+class QuestionResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
+    private $abstractQuestionRepository;
+    private $proposalFormRepository;
+    private $questionnaireRepository;
+    public function __construct(
+        AbstractQuestionRepository $abstractQuestionRepository,
+        ProposalFormRepository $proposalFormRepository,
+        QuestionnaireRepository $questionnaireRepository
+    ) {
+        $this->questionnaireRepository = $questionnaireRepository;
+        $this->abstractQuestionRepository = $abstractQuestionRepository;
+        $this->proposalFormRepository = $proposalFormRepository;
+    }
 
     public function resolveType(AbstractQuestion $question): string
     {
@@ -21,7 +36,7 @@ class QuestionResolver implements ContainerAwareInterface
 
     public function resolve(Arg $args): AbstractQuestion
     {
-        return $this->container->get('capco.abstract_question.repository')->find($args['id']);
+        return $this->abstractQuestionRepository->find($args['id']);
     }
 
     public function resolveDistrictsForLocalisation(
@@ -29,7 +44,7 @@ class QuestionResolver implements ContainerAwareInterface
         float $latitude,
         float $longitude
     ): array {
-        $form = $this->container->get('capco.proposal_form.repository')->find($proposalFormId);
+        $form = $this->proposalFormRepository->find($proposalFormId);
         $districts = $form->getDistricts();
 
         return $form->isProposalInAZoneRequired()
@@ -64,9 +79,7 @@ class QuestionResolver implements ContainerAwareInterface
 
     public function resolveAvailableQuestionnaires()
     {
-        return $this->container->get(
-            'capco.questionnaire.repository'
-        )->getAvailableQuestionnaires();
+        return $this->questionnaireRepository->getAvailableQuestionnaires();
     }
 
     public function resolveQuestionnaireQuestions(Questionnaire $questionnaire)

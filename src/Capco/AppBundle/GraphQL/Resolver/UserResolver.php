@@ -1,29 +1,39 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation;
 use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Resolver\TypeResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Router;
 
-class UserResolver implements ContainerAwareInterface
+class UserResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
+    private $router;
+    private $typeResolver;
+    private $deleteAccountMutation;
+
+    public function __construct(
+        Router $router,
+        TypeResolver $typeResolver,
+        DeleteAccountMutation $deleteAccountMutation
+    ) {
+        $this->router = $router;
+        $this->typeResolver = $typeResolver;
+        $this->deleteAccountMutation = $deleteAccountMutation;
+    }
 
     public function resolveUserType()
     {
-        $typeResolver = $this->container->get('overblog_graphql.type_resolver');
-
-        return $typeResolver->resolve('user');
+        return $this->typeResolver->resolve('user');
     }
 
     public function resolveResettingPasswordUrl(User $user): string
     {
-        $router = $this->container->get('router');
-
-        return $router->generate(
+        return $this->router->generate(
             'fos_user_resetting_reset',
             ['token' => $user->getResetPasswordToken()],
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -32,9 +42,7 @@ class UserResolver implements ContainerAwareInterface
 
     public function resolveRegistrationConfirmationUrl(UserInterface $user): string
     {
-        $router = $this->container->get('router');
-
-        return $router->generate(
+        return $this->router->generate(
             'account_confirm_email',
             ['token' => $user->getConfirmationToken()],
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -43,9 +51,7 @@ class UserResolver implements ContainerAwareInterface
 
     public function resolveConfirmNewEmailUrl(User $user, $absolute = true): string
     {
-        $router = $this->container->get('router');
-
-        return $router->generate(
+        return $this->router->generate(
             'account_confirm_new_email',
             ['token' => $user->getNewEmailConfirmationToken()],
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -68,9 +74,7 @@ class UserResolver implements ContainerAwareInterface
 
     public function resolveShowUrl(User $user): string
     {
-        $router = $this->container->get('router');
-
-        return $router->generate(
+        return $this->router->generate(
             'capco_user_profile_show_all',
             ['slug' => $user->getSlug()],
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -79,9 +83,7 @@ class UserResolver implements ContainerAwareInterface
 
     public function resolveShowNotificationsPreferencesUrl(): string
     {
-        $router = $this->container->get('router');
-
-        return $router->generate(
+        return $this->router->generate(
             'capco_profile_notifications_edit_account',
             [],
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -90,9 +92,7 @@ class UserResolver implements ContainerAwareInterface
 
     public function resolveDisableNotificationsUrl(User $user): string
     {
-        $router = $this->container->get('router');
-
-        return $router->generate(
+        return $this->router->generate(
             'capco_profile_notifications_disable',
             ['token' => $user->getNotificationsConfiguration()->getUnsubscribeToken()],
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -101,9 +101,7 @@ class UserResolver implements ContainerAwareInterface
 
     public function resolveLoginAndShowDataUrl(User $user): string
     {
-        $router = $this->container->get('router');
-
-        return $router->generate(
+        return $this->router->generate(
             'capco_profile_data_login',
             ['token' => $user->getNotificationsConfiguration()->getUnsubscribeToken()],
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -112,9 +110,7 @@ class UserResolver implements ContainerAwareInterface
 
     public function resolveShowUrlBySlug(string $slug)
     {
-        $router = $this->container->get('router');
-
-        return $router->generate(
+        return $this->router->generate(
             'capco_user_profile_show_all',
             compact('slug'),
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -158,8 +154,10 @@ class UserResolver implements ContainerAwareInterface
 
     public function contributionsToDeleteCount($object): int
     {
-        $deleteAction = $this->container->get('capco.mutation.delete_account');
-        $count = $deleteAction->hardDeleteUserContributionsInActiveSteps($object, true);
+        $count = $this->deleteAccountMutation->hardDeleteUserContributionsInActiveSteps(
+            $object,
+            true
+        );
 
         return $count;
     }

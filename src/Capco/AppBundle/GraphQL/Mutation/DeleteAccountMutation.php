@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\AbstractVote;
@@ -12,36 +13,47 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\UserGroup;
+use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\MediaBundle\Entity\Media;
+use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Sonata\MediaBundle\Provider\ImageProvider;
+use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class DeleteAccountMutation implements ContainerAwareInterface, MutationInterface
+class DeleteAccountMutation implements MutationInterface
 {
-    use ContainerAwareTrait;
-
     private $em;
     private $translator;
     private $userRepository;
     private $groupRepository;
+    private $userManager;
+    private $redisStorageHelper;
+    private $mediaProvider;
 
     public function __construct(
         EntityManagerInterface $em,
         TranslatorInterface $translator,
         UserRepository $userRepository,
-        UserGroupRepository $groupRepository
+        UserGroupRepository $groupRepository,
+        UserManager $userManager,
+        RedisStorageHelper $redisStorageHelper,
+        ImageProvider $mediaProvider
     ) {
         $this->em = $em;
         $this->translator = $translator;
         $this->userRepository = $userRepository;
         $this->groupRepository = $groupRepository;
+        $this->userManager = $userManager;
+        $this->redisStorageHelper = $redisStorageHelper;
+        $this->mediaProvider = $mediaProvider;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -75,7 +87,6 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
             'email' => $user->getEmail(),
         ]);
         $userGroups = $this->groupRepository->findBy(['user' => $user]);
-        $userManager = $this->container->get('fos_user.user_manager');
 
         if ($newsletter) {
             $this->em->remove($newsletter);
@@ -135,7 +146,7 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
             $user->setMedia(null);
         }
 
-        $userManager->updateUser($user);
+        $this->userManager->updateUser($user);
     }
 
     public function hardDeleteUserContributionsInActiveSteps(User $user, bool $dryRun = false): int
@@ -202,7 +213,7 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
             }
         }
 
-        $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
+        $this->redisStorageHelper->recomputeUserCounters($user);
 
         return $count;
     }
@@ -250,13 +261,12 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
             $this->em->remove($event);
         }
 
-        $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
+        $this->redisStorageHelper->recomputeUserCounters($user);
     }
 
     public function removeMedia(Media $media): void
     {
-        $provider = $this->container->get($media->getProviderName());
-        $provider->removeThumbnails($media);
+        $this->mediaProvider->removeThumbnails($media);
         $this->em->remove($media);
     }
 }

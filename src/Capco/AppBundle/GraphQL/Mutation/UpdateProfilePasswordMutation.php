@@ -2,15 +2,29 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ChangePasswordFormType;
-use FOS\UserBundle\Doctrine\UserManager;
-use FOS\UserBundle\Model\UserManagerInterface;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactory;
 
 class UpdateProfilePasswordMutation extends BaseUpdateProfile
 {
     private $userManager;
+
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        LoggerInterface $logger,
+        UserRepository $userRepository,
+        UserManager $userManager
+    ) {
+        $this->userManager = $userManager;
+        parent::__construct($em, $formFactory, $logger, $userRepository);
+    }
 
     public function __invoke(Argument $input, User $user): array
     {
@@ -30,10 +44,5 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
         $this->userManager->updateUser($user);
 
         return [self::USER => $user];
-    }
-
-    public function setUserManager(UserManager $userManager)
-    {
-        $this->userManager = $userManager;
     }
 }

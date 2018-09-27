@@ -6,7 +6,7 @@ services:
 
   Capco\AppBundle\GraphQL\Resolver\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/*'
-    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,QuestionResolver.php,Proposal/ProposalResolver.php,ConsultationResolver.php,UserResolver.php, Group/GroupResolver.php,EvaluationForm/EvaluationFormResolver.php, Proposal/ProposalEvaluationResolver.php,UserIsGrantedResolver.php}'
+    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,QuestionResolver.php,ConsultationResolver.php,UserResolver.php, Group/GroupResolver.php, Proposal/ProposalEvaluationResolver.php,UserIsGrantedResolver.php}'
 
   global_id_resolver:
     class: Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver
@@ -18,6 +18,7 @@ services:
 
   capco.resolver.question:
     class: Capco\AppBundle\GraphQL\Resolver\QuestionResolver
+    autowire: true
     tags:
       - { name: overblog_graphql.resolver, alias: 'query_question', method: 'resolve' }
       - { name: overblog_graphql.resolver, alias: 'question_type', method: 'resolveType' }
@@ -49,6 +50,7 @@ services:
 
   capco.resolver.proposals:
     class: Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver
+    autowire: true
     tags:
       - {
           name: overblog_graphql.resolver,
@@ -214,22 +216,6 @@ services:
           name: overblog_graphql.resolver,
           alias: 'group_users_connection',
           method: 'resolveUsersConnection',
-        }
-
-  Capco\AppBundle\GraphQL\Resolver\EvaluationForm\EvaluationFormResolver:
-    tags:
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'evaluation_form_questions',
-          method: 'resolveQuestions',
-        }
-
-  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalEvaluationResolver:
-    tags:
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposal_evaluation_responses',
-          method: 'resolveResponses',
         }
 
   # This is not a resolver but a voter, rename and move this elsewhere

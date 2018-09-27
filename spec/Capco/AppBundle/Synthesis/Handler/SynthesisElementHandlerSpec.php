@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Repository\Synthesis\SynthesisElementRepository;
+use Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Manager\LogManager;
@@ -21,12 +22,12 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler');
+        $this->shouldHaveType(SynthesisElementHandler::class);
     }
 
     function it_can_get_all_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
         $offset = 0;
         $limit = null;
@@ -42,7 +43,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_get_new_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
         $offset = 0;
         $limit = null;
@@ -58,7 +59,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_get_unpublished_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
         $offset = 0;
         $limit = null;
@@ -74,7 +75,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_get_published_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
         $offset = 0;
         $limit = null;
@@ -90,7 +91,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_get_archived_elements_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
         $offset = 0;
         $limit = null;
@@ -106,7 +107,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_get_elements_published_tree_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
 
         $parentId = null;
@@ -119,7 +120,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_get_all_elements_tree_from_synthesis(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Paginator $paginator, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
 
         $parentId = null;
@@ -132,7 +133,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_count_all_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
 
         $type = 'all';
@@ -142,7 +143,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_count_new_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
 
         $type = 'new';
@@ -152,7 +153,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_count_unpublished_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
 
         $type = 'unpublished';
@@ -162,7 +163,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_count_published_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
 
         $type = 'published';
@@ -172,7 +173,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
 
     function it_can_count_archived_elements_from_synthesis_by_type(EntityManager $em, LogManager $logManager, SynthesisElementRepository $synthesisElementRepo, Synthesis $synthesis)
     {
-        $em->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->willReturn($synthesisElementRepo)->shouldBeCalled();
+        $em->getRepository(SynthesisElement::class)->willReturn($synthesisElementRepo)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
 
         $type = 'archived';
@@ -189,7 +190,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $em->flush()->shouldBeCalled();
 
         $this->beConstructedWith($em, $logManager);
-        $this->createElementInSynthesis($element, $synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $this->createElementInSynthesis($element, $synthesis)->shouldReturnAnInstanceOf(SynthesisElement::class);
     }
 
     function it_can_update_element_in_synthesis(EntityManager $em, LogManager $logManager, Synthesis $synthesis)
@@ -200,7 +201,7 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $em->flush()->shouldBeCalled();
 
         $this->beConstructedWith($em, $logManager);
-        $this->updateElementInSynthesis($element, $synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisElement');
+        $this->updateElementInSynthesis($element, $synthesis)->shouldReturnAnInstanceOf(SynthesisElement::class);
     }
 
     function it_can_update_a_division_from_element_in_synthesis(EntityManager $em, LogManager $logManager, SynthesisDivision $division, SynthesisElement $element, Synthesis $synthesis)
@@ -213,13 +214,13 @@ class SynthesisElementHandlerSpec extends ObjectBehavior
         $em->persist($division)->shouldBeCalled();
 
         $this->beConstructedWith($em, $logManager);
-        $this->updateDivisionFromElementInSynthesis($division, $element, $synthesis)->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\Synthesis\SynthesisDivision');
+        $this->updateDivisionFromElementInSynthesis($division, $element, $synthesis)->shouldReturnAnInstanceOf(SynthesisDivision::class);
     }
 
     function it_can_get_logs_for_element(EntityManager $em, LogManager $logManager, SynthesisElement $element, ArrayCollection $logs)
     {
         $logManager->getLogEntries($element)->willReturn($logs)->shouldBeCalled();
         $this->beConstructedWith($em, $logManager);
-        $this->getLogsForElement($element)->shouldReturnAnInstanceOf('Doctrine\Common\Collections\ArrayCollection');
+        $this->getLogsForElement($element)->shouldReturnAnInstanceOf(ArrayCollection::class);
     }
 }

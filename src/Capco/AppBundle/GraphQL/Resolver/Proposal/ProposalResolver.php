@@ -1,11 +1,16 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\OtherStep;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
@@ -21,23 +26,43 @@ use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Resolver\TypeResolver;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Symfony\Component\Routing\Router;
 
-class ProposalResolver implements ContainerAwareInterface
+class ProposalResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
+    private $proposalRepository;
+    private $router;
+    private $postRepository;
+    private $typeResolver;
+    private $proposalFormRepository;
+
+    public function __construct(
+        ProposalRepository $proposalRepository,
+        Router $router,
+        PostRepository $postRepository,
+        TypeResolver $typeResolver,
+        ProposalFormRepository $proposalFormRepository
+    ) {
+        $this->proposalRepository = $proposalRepository;
+        $this->router = $router;
+        $this->postRepository = $postRepository;
+        $this->typeResolver = $typeResolver;
+        $this->proposalFormRepository = $proposalFormRepository;
+    }
 
     public function resolveViewerIsEvaluer(Proposal $proposal, $user): bool
     {
-        $repo = $this->container->get('capco.proposal.repository');
-
-        return $user instanceof User ? $repo->isViewerAnEvaluer($proposal, $user) : false;
+        return $user instanceof User
+            ? $this->proposalRepository->isViewerAnEvaluer($proposal, $user)
+            : false;
     }
 
-    public function resolveProjectSteps(Project $project)
+    public function resolveProjectSteps(Project $project): array
     {
         return $project->getRealSteps();
     }
@@ -46,10 +71,8 @@ class ProposalResolver implements ContainerAwareInterface
         string $projectSlug,
         string $stepSlug,
         string $proposalSlug
-    ) {
-        $router = $this->container->get('router');
-
-        return $router->generate(
+    ): ?string {
+        return $this->router->generate(
             'app_project_show_proposal',
             compact('projectSlug', 'stepSlug', 'proposalSlug'),
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -63,37 +86,34 @@ class ProposalResolver implements ContainerAwareInterface
 
     public function resolveNews(Proposal $proposal)
     {
-        $postRepo = $this->container->get('capco.blog.post.repository');
-
-        return $postRepo->getPublishedPostsByProposal($proposal);
+        return $this->postRepository->getPublishedPostsByProposal($proposal);
     }
 
     public function resolveStepType(AbstractStep $step)
     {
-        $typeResolver = $this->container->get('overblog_graphql.type_resolver');
         if ($step instanceof SelectionStep) {
-            return $typeResolver->resolve('SelectionStep');
+            return $this->typeResolver->resolve('SelectionStep');
         }
         if ($step instanceof CollectStep) {
-            return $typeResolver->resolve('CollectStep');
+            return $this->typeResolver->resolve('CollectStep');
         }
         if ($step instanceof PresentationStep) {
-            return $typeResolver->resolve('PresentationStep');
+            return $this->typeResolver->resolve('PresentationStep');
         }
         if ($step instanceof QuestionnaireStep) {
-            return $typeResolver->resolve('QuestionnaireStep');
+            return $this->typeResolver->resolve('QuestionnaireStep');
         }
         if ($step instanceof ConsultationStep) {
-            return $typeResolver->resolve('Consultation');
+            return $this->typeResolver->resolve('Consultation');
         }
         if ($step instanceof OtherStep) {
-            return $typeResolver->resolve('OtherStep');
+            return $this->typeResolver->resolve('OtherStep');
         }
         if ($step instanceof SynthesisStep) {
-            return $typeResolver->resolve('SynthesisStep');
+            return $this->typeResolver->resolve('SynthesisStep');
         }
         if ($step instanceof RankingStep) {
-            return $typeResolver->resolve('RankingStep');
+            return $this->typeResolver->resolve('RankingStep');
         }
 
         throw new UserError('Could not resolve type of Step.');
@@ -101,12 +121,11 @@ class ProposalResolver implements ContainerAwareInterface
 
     public function resolveResponseType(AbstractResponse $response)
     {
-        $typeResolver = $this->container->get('overblog_graphql.type_resolver');
         if ($response instanceof MediaResponse) {
-            return $typeResolver->resolve('MediaResponse');
+            return $this->typeResolver->resolve('MediaResponse');
         }
         if ($response instanceof ValueResponse) {
-            return $typeResolver->resolve('ValueResponse');
+            return $this->typeResolver->resolve('ValueResponse');
         }
 
         throw new UserError('Could not resolve type of Response.');
@@ -120,7 +139,7 @@ class ProposalResolver implements ContainerAwareInterface
             return '';
         }
 
-        return $this->container->get('router')->generate(
+        return $this->router->generate(
             'app_project_show_proposal',
             [
                 'proposalSlug' => $proposal->getSlug(),
@@ -133,7 +152,7 @@ class ProposalResolver implements ContainerAwareInterface
 
     public function resolveAdminUrl(Proposal $proposal): string
     {
-        return $this->container->get('router')->generate(
+        return $this->router->generate(
             'admin_capco_app_proposal_edit',
             ['id' => $proposal->getId()],
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -155,8 +174,7 @@ class ProposalResolver implements ContainerAwareInterface
         User $user,
         Argument $args
     ): Connection {
-        $proposalRep = $this->container->get('capco.proposal.repository');
-        $proposalForm = $this->container->get('capco.proposal_form.repository')->findOneBy([
+        $proposalForm = $this->proposalFormRepository->findOneBy([
             'step' => $step->getId(),
         ]);
 
@@ -164,7 +182,7 @@ class ProposalResolver implements ContainerAwareInterface
             throw new UserError(sprintf('Unknown proposal form for step "%d"', $step->getId()));
         }
 
-        $proposals = $proposalRep->findBy([
+        $proposals = $this->proposalRepository->findBy([
             'draft' => true,
             'author' => $user,
             'proposalForm' => $proposalForm,
@@ -179,9 +197,7 @@ class ProposalResolver implements ContainerAwareInterface
 
     public function resolvePostsCount(Proposal $proposal): int
     {
-        return $this->container->get('capco.blog.post.repository')->countPublishedPostsByProposal(
-            $proposal
-        );
+        return $this->postRepository->countPublishedPostsByProposal($proposal);
     }
 
     public function resolveViewerCanSeeEvaluation(Proposal $proposal, $user): bool
