@@ -13,9 +13,9 @@ type Props = {
 };
 
 export class ProposalListTableMobile extends React.Component<Props> {
-  getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps) => {
-    return <ImplementationStepTitle progressSteps={progressSteps} />;
-  };
+  getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps) => (
+    <ImplementationStepTitle progressSteps={progressSteps} />
+  );
 
   render() {
     const { data } = this.props;

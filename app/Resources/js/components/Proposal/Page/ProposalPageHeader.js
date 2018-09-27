@@ -118,11 +118,9 @@ export class ProposalPageHeader extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
-  return {
-    referer: state.proposal.referer,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  referer: state.proposal.referer,
+});
 
 const container = connect(mapStateToProps)(ProposalPageHeader);
 

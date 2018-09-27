@@ -1,11 +1,15 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
+use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;

@@ -33,7 +33,7 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
             <strong>
               <FormattedMessage id="permalink-unavailable" />{' '}
             </strong>
-            (Ce formulaire de dépôt n'est pas encore relié à un projet participatif) |{' '}
+            <FormattedMessage id="proposal-form-not-linked-to-a-project" /> |{' '}
             <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
             {proposalForm.reference}
           </p>

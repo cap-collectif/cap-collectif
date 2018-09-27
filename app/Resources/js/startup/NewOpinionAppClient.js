@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import { Provider } from 'react-redux';

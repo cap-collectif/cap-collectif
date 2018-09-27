@@ -71,23 +71,21 @@ if (config.canUseDOM && document) {
   }
 }
 
-const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => {
-  return (
-    <div>
-      {fields.map((member, index) => (
-        /* $FlowFixMe */
-        <ProposalUserVoteItem
-          key={index}
-          member={member}
-          isVoteVisibilityPublic={fields.get(index).public}
-          vote={votes.edges && votes.edges[index].node}
-          step={step}
-          onDelete={deletable ? () => fields.remove(index) : null}
-        />
-      ))}
-    </div>
-  );
-};
+const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => (
+  <div>
+    {fields.map((member, index) => (
+      /* $FlowFixMe */
+      <ProposalUserVoteItem
+        key={index}
+        member={member}
+        isVoteVisibilityPublic={fields.get(index).public}
+        vote={votes.edges && votes.edges[index].node}
+        step={step}
+        onDelete={deletable ? () => fields.remove(index) : null}
+      />
+    ))}
+  </div>
+);
 
 const renderDraggableMembers = ({ fields, votes, step, deletable, intl }: VotesProps & Props) => {
   if (!votes.edges) {
@@ -234,10 +232,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
 
   getTitle = (votes: Object, position: Object) => {
     const draggedProposal =
-      votes.edges &&
-      votes.edges.filter(el => {
-        return el && el.node.proposal.id === position.draggableId;
-      });
+      votes.edges && votes.edges.filter(el => el && el.node.proposal.id === position.draggableId);
 
     return draggedProposal[0] && draggedProposal[0].node.proposal.title;
   };
@@ -266,24 +261,22 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
           onDragStart={this.onDragStart}
           onDragUpdate={this.onDragUpdate}>
           <Droppable droppableId={`droppable${form}`}>
-            {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => {
-              return (
-                <Wrapper
-                  isDraggingOver={snapshot.isDraggingOver}
-                  innerRef={provided.innerRef}
-                  {...provided.droppableProps}>
-                  <FieldArray
-                    step={step}
-                    votes={votes}
-                    intl={intl}
-                    deletable={deletable}
-                    name="votes"
-                    component={renderDraggableMembers}
-                  />
-                  {provided.placeholder}
-                </Wrapper>
-              );
-            }}
+            {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
+              <Wrapper
+                isDraggingOver={snapshot.isDraggingOver}
+                innerRef={provided.innerRef}
+                {...provided.droppableProps}>
+                <FieldArray
+                  step={step}
+                  votes={votes}
+                  intl={intl}
+                  deletable={deletable}
+                  name="votes"
+                  component={renderDraggableMembers}
+                />
+                {provided.placeholder}
+              </Wrapper>
+            )}
           </Droppable>
         </DragDropContext>
       </Row>

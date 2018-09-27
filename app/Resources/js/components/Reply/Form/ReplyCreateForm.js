@@ -27,14 +27,9 @@ const component = ({ error, props }: { error: ?Error, props: ?ReplyCreateFormQue
 
 type Props = {
   form: { id: string },
-  disabled: boolean,
 };
 
 export class ReplyCreateForm extends React.Component<Props> {
-  static defaultProps = {
-    disabled: false,
-  };
-
   render() {
     return (
       <div id="create-reply-form">

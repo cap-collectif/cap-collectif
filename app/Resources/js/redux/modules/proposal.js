@@ -77,7 +77,6 @@ export type State = {
   +filters: Object,
   +terms: ?string,
   +lastEditedStepId: ?Uuid,
-  +currentPaginationPage: number,
   +lastEditedProposalId: ?Uuid,
   +lastNotifiedStepId: ?Uuid,
   +selectedViewByStep: string,
@@ -100,7 +99,6 @@ export const initialState: State = {
   order: 'random',
   filters: {},
   terms: null,
-  currentPaginationPage: 1,
   lastEditedProposalId: null,
   lastNotifiedStepId: null,
   selectedViewByStep: 'mosaic',
@@ -258,8 +256,8 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
     });
 };
 
-export const deleteVote = (step: Object, proposal: Object) => {
-  return removeVote
+export const deleteVote = (step: Object, proposal: Object) =>
+  removeVote
     .commit({
       stepId: step.id,
       input: { proposalId: proposal.id, stepId: step.id },
@@ -283,7 +281,6 @@ export const deleteVote = (step: Object, proposal: Object) => {
         },
       });
     });
-};
 
 export function* fetchMarkers(action: LoadMarkersAction): Generator<*, *, *> {
   try {
@@ -377,18 +374,16 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
   switch (action.type) {
     case 'proposal/CHANGE_FILTER': {
       const filters = { ...state.filters, [action.filter]: action.value };
-      return { ...state, filters, currentPaginationPage: 1 };
+      return { ...state, filters };
     }
     case 'proposal/OPEN_CREATE_FUSION_MODAL':
       return { ...state, isCreatingFusion: true };
     case 'proposal/CLOSE_CREATE_FUSION_MODAL':
       return { ...state, isCreatingFusion: false };
     case 'proposal/CHANGE_ORDER':
-      return { ...state, order: action.order, currentPaginationPage: 1 };
-    case 'proposal/CHANGE_PAGE':
-      return { ...state, currentPaginationPage: action.page };
+      return { ...state, order: action.order };
     case 'proposal/CHANGE_TERMS':
-      return { ...state, terms: action.terms, currentPaginationPage: 1 };
+      return { ...state, terms: action.terms };
     case 'proposal/OPEN_EDIT_MODAL':
       return { ...state, showEditModal: true };
     case 'proposal/CLOSE_EDIT_MODAL':

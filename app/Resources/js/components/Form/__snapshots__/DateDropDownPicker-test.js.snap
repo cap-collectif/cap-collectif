@@ -6,6 +6,7 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
 >
   <label
     className="sm-3"
+    htmlFor="day"
   >
     <FormattedMessage
       id="my-label-id"
@@ -84,6 +85,7 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
 >
   <label
     className="sm-3"
+    htmlFor="day"
   >
     <FormattedMessage
       id="my-label-id"

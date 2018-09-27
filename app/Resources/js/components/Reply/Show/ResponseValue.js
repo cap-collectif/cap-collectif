@@ -32,24 +32,22 @@ export class ResponseValue extends React.Component<Props> {
     if (response.question.type === 'medias' && response.medias) {
       return (
         <ol>
-          {response.medias.map((media: Object) => {
-            return (
-              <li>
-                <a href={media.url} download>
-                  {media.name}
-                </a>
-              </li>
-            );
-          })}
+          {response.medias.map((media: Object) => (
+            <li>
+              <a href={media.url} download>
+                {media.name}
+              </a>
+            </li>
+          ))}
         </ol>
       );
     }
     if (response.question.type === 'ranking') {
       return Array.isArray(responseValue) && responseValue.length > 0 ? (
         <ol>
-          {responseValue.map((label, index) => {
-            return <li key={index}>{label}</li>;
-          })}
+          {responseValue.map((label, index) => (
+            <li key={index}>{label}</li>
+          ))}
         </ol>
       ) : (
         <p>

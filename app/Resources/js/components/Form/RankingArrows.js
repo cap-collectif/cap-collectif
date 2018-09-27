@@ -21,18 +21,16 @@ class RankingArrows extends React.Component<Props> {
     return (
       <ButtonGroup className="ranking__item__arrows">
         {arrowFunctions &&
-          Object.keys(arrowFunctions).map(key => {
-            return (
-              <RankingArrow
-                key={key}
-                onClick={
-                  arrowFunctions && arrowFunctions[key] ? () => arrowFunctions[key](item) : () => {}
-                }
-                type={key}
-                disabled={disabled || (arrowFunctions && !arrowFunctions[key])}
-              />
-            );
-          })}
+          Object.keys(arrowFunctions).map(key => (
+            <RankingArrow
+              key={key}
+              onClick={
+                arrowFunctions && arrowFunctions[key] ? () => arrowFunctions[key](item) : () => {}
+              }
+              type={key}
+              disabled={disabled || (arrowFunctions && !arrowFunctions[key])}
+            />
+          ))}
       </ButtonGroup>
     );
   }

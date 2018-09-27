@@ -40,9 +40,9 @@ export class ProposalFormAdminCategories extends React.Component<Props, State> {
     const { editIndex } = this.state;
     return (
       <div className="form-group">
-        <label style={{ marginBottom: 15, marginTop: 15 }}>
+        <span className="control-label" style={{ marginBottom: 15, marginTop: 15 }}>
           <FormattedMessage id="proposal_form.admin.configuration.categories_list" />
-        </label>
+        </span>
         <ListGroup>
           {fields.map((member, index) => (
             <ListGroupItem key={index}>

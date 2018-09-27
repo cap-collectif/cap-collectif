@@ -137,17 +137,15 @@ export class GroupAdminUsers extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
-  return {
-    valid: isValid('group-users-add')(state),
-    invalid: isInvalid('group-users-add')(state),
-    submitting: isSubmitting('group-users-add')(state),
-    submitSucceeded: hasSubmitSucceeded('group-users-add')(state),
-    submitFailed: hasSubmitFailed('group-users-add')(state),
-    userIsDeleted: state.user.groupAdminUsersUserDeletionSuccessful,
-    userIsNotDeleted: state.user.groupAdminUsersUserDeletionFailed,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  valid: isValid('group-users-add')(state),
+  invalid: isInvalid('group-users-add')(state),
+  submitting: isSubmitting('group-users-add')(state),
+  submitSucceeded: hasSubmitSucceeded('group-users-add')(state),
+  submitFailed: hasSubmitFailed('group-users-add')(state),
+  userIsDeleted: state.user.groupAdminUsersUserDeletionSuccessful,
+  userIsNotDeleted: state.user.groupAdminUsersUserDeletionFailed,
+});
 
 const myComponent = injectIntl(GroupAdminUsers);
 

@@ -18,14 +18,13 @@ type Props = RelayProps & FormProps & FormValues;
 
 const formName = 'proposal-admin-evaluers';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  return ChangeProposalEvaluersMutation.commit({
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) =>
+  ChangeProposalEvaluersMutation.commit({
     input: {
       proposalId: props.proposal.id,
       evaluers: values.evaluers.map(u => u.value),
     },
   });
-};
 
 export class ProposalAdminEvaluersForm extends React.Component<Props> {
   render() {
@@ -89,7 +88,7 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
                 id="proposal-evaluation-analysts-groupes-save"
                 type="submit"
                 bsStyle="primary">
-                <i className="cap cap-download-1"> </i>{' '}
+                <i className="cap cap-download-1" />{' '}
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               <AlertForm

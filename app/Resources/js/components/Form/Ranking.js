@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 import RankingBlock from './RankingBlock';
 import ButtonBody from '../Reply/Form/ButtonBody';
@@ -23,6 +23,8 @@ class Ranking extends React.Component<Props> {
     disabled: false,
     labelClassName: '',
   };
+
+  rankingBlock: ?React.Component<*>;
 
   empty = () => {
     //   ¯\_(ツ)_/¯ // $FlowFixMe
@@ -69,8 +71,9 @@ class Ranking extends React.Component<Props> {
           </div>
         )}
         <RankingBlock
-          // $FlowFixMe
-          ref={c => (this.rankingBlock = c)}
+          ref={c => {
+            this.rankingBlock = c;
+          }}
           field={field}
           disabled={disabled}
           onBlur={this.props.onBlur}

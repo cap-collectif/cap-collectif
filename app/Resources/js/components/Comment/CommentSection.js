@@ -21,7 +21,7 @@ type State = {
   order: CommentOrderBy,
 };
 
-class CommentSection extends React.Component<Props, State> {
+export class CommentSection extends React.Component<Props, State> {
   state = {
     order: 'last',
   };
@@ -86,7 +86,7 @@ class CommentSection extends React.Component<Props, State> {
                             <select
                               className="form-control"
                               value={order}
-                              onChange={value => this.updateSelectedValue(value)}>
+                              onBlur={value => this.updateSelectedValue(value)}>
                               <option value="popular">
                                 {intl.formatMessage({ id: 'global.filter_popular' })}
                               </option>

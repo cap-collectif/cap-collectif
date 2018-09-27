@@ -49,121 +49,121 @@ const addAuthorization = req => {
 
 class Fetcher {
   get(uri: string): Promise<*> {
-    return AuthService.login().then(() => {
-      return fetch(config.api + uri, {
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
         method: 'GET',
         headers: createHeaders(),
         beforeSend: addAuthorization,
       })
         .then(status)
-        .then(json);
-    });
+        .then(json),
+    );
   }
 
   graphqlFormData(body: FormData): Promise<*> {
-    return AuthService.login().then(() => {
-      return fetch(config.graphql, {
+    return AuthService.login().then(() =>
+      fetch(config.graphql, {
         method: 'POST',
         headers: createFormDataHeaders(),
         beforeSend: addAuthorization,
         body,
       })
         .then(status)
-        .then(json);
-    });
+        .then(json),
+    );
   }
 
   graphql(body: Object) {
-    return AuthService.login().then(() => {
-      return fetch(config.graphql, {
+    return AuthService.login().then(() =>
+      fetch(config.graphql, {
         method: 'POST',
         headers: createHeaders(),
         beforeSend: addAuthorization,
         body: JSON.stringify(body),
       })
         .then(status)
-        .then(json);
-    });
+        .then(json),
+    );
   }
 
   postFormData(uri: string, body: FormData): Promise<*> {
-    return AuthService.login().then(() => {
-      return fetch(config.api + uri, {
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
         method: 'POST',
         headers: createFormDataHeaders(),
         beforeSend: addAuthorization,
         body,
-      }).then(status);
-    });
+      }).then(status),
+    );
   }
 
   post(uri: string, body: ?Object = {}) {
-    return AuthService.login().then(() => {
-      return fetch(config.api + uri, {
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
         method: 'POST',
         headers: createHeaders(),
         beforeSend: addAuthorization,
         body: JSON.stringify(body),
-      }).then(status);
-    });
+      }).then(status),
+    );
   }
 
   postToJson(uri: string, body: Object) {
-    return AuthService.login().then(() => {
-      return fetch(config.api + uri, {
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
         method: 'POST',
         headers: createHeaders(),
         beforeSend: addAuthorization,
         body: JSON.stringify(body),
       })
         .then(status)
-        .then(json);
-    });
+        .then(json),
+    );
   }
 
   put(uri: string, body: Object): Promise<*> {
-    return AuthService.login().then(() => {
-      return fetch(config.api + uri, {
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
         method: 'PUT',
         headers: createHeaders(),
         beforeSend: addAuthorization,
         body: JSON.stringify(body),
-      }).then(status);
-    });
+      }).then(status),
+    );
   }
 
   putToJson(uri: string, body: Object): Promise<*> {
-    return AuthService.login().then(() => {
-      return fetch(config.api + uri, {
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
         method: 'PUT',
         headers: createHeaders(),
         beforeSend: addAuthorization,
         body: JSON.stringify(body),
       })
         .then(status)
-        .then(json);
-    });
+        .then(json),
+    );
   }
 
   patch(uri: string, body: Object): Promise<*> {
-    return AuthService.login().then(() => {
-      return fetch(config.api + uri, {
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
         method: 'PATCH',
         headers: createHeaders(),
         beforeSend: addAuthorization,
         body: JSON.stringify(body),
-      }).then(status);
-    });
+      }).then(status),
+    );
   }
 
   delete(uri: string): Promise<*> {
-    return AuthService.login().then(() => {
-      return fetch(config.api + uri, {
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
         method: 'DELETE',
         headers: createHeaders(),
         beforeSend: addAuthorization,
-      }).then(status);
-    });
+      }).then(status),
+    );
   }
 }
 

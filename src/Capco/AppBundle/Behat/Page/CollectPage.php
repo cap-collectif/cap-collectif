@@ -16,7 +16,7 @@ class CollectPage extends Page
 
     protected $elements = [
         'proposal' => '.proposal-preview',
-        'vote proposal button' => '.proposal__button__vote.btn.btn-success',
+        'vote proposal button' => '.proposal__button__vote',
         'proposal vote form submit button' => '#confirm-proposal-vote',
         'create proposal button' => '#add-proposal',
         'proposal form submit button' => '#confirm-proposal-create',
@@ -26,8 +26,9 @@ class CollectPage extends Page
         'follow proposal button' => '.proposal__button__follow',
         'type of follow proposal' => '.proposal__follow',
         'my votes' => '.widget__button.navbar-btn.pull-right.btn.btn-default',
-        'restricted-access-link' => '#restricted-access > div > span',
-        'restricted-group' => ' > span:nth-child(1) > div',
+        'restricted-access' => '#restricted-access',
+        'restricted-access-link' => '#restricted-access > div > button',
+        'restricted-group' => ' > span:nth-child(1) > button',
     ];
 
     public function sortByDate()
@@ -120,13 +121,23 @@ class CollectPage extends Page
 
     public function clickOnRestrictedAccess()
     {
+        $this->getSession()->wait(
+            3000,
+            "$('" . $this->getSelector('restricted-access') . "').length > 0"
+        );
+        $this->getElement('restricted-access')->click();
         return $this->getElement('restricted-access-link')->click();
     }
 
     public function iClickOnUserGroupModal(string $groupId)
     {
-        $element = "#$groupId" . $this->elements['restricted-group'];
+        $selector = "#$groupId" . $this->getSelector('restricted-group');
 
-        return $this->find('css', $element)->click();
+        $element = $this->find('css', $selector);
+        if (!$element) {
+            throw new \RuntimeException('Could not find: ' . $selector);
+        }
+
+        return $element->click();
     }
 }

@@ -34,13 +34,10 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
   // We format appendices to call API (could be improved by changing api design)
   const appendices = Object.keys(data)
     .filter(key => key !== 'title' && key !== 'body' && key !== 'check')
-    .map(key => {
-      return {
-        appendixType: opinion.appendices.filter(a => a.appendixType.title === key)[0].appendixType
-          .id,
-        body: data[key],
-      };
-    });
+    .map(key => ({
+      appendixType: opinion.appendices.filter(a => a.appendixType.title === key)[0].appendixType.id,
+      body: data[key],
+    }));
   const form = {
     title: data.title,
     body: data.body,
@@ -56,7 +53,6 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
 
 type Props = RelayProps & {
   handleSubmit: Function,
-  initialValues: Object,
 };
 
 export class OpinionEditForm extends React.Component<Props> {

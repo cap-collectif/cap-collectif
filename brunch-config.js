@@ -10,12 +10,13 @@ exports.config = {
   },
   npm: {
     enabled: true,
+    globals: process.env.NODE_ENV === 'development' ? { axe: 'react-axe' } : {},
     styles: {
       quill: ['dist/quill.base.css', 'dist/quill.snow.css'],
       'react-select': ['dist/react-select.css'],
       'react-toggle': ['style.css'],
       'react-datetime': ['css/react-datetime.css'],
-      'leaflet': ['dist/leaflet.css'],
+      leaflet: ['dist/leaflet.css'],
     },
   },
   paths: {
@@ -77,9 +78,7 @@ exports.config = {
           'app/Resources/js/**/**/*.js',
         ],
         'js/ckeditor/ckeditor.js': ['bower_components/ckeditor/ckeditor.js'],
-        'js/jquery.minicolors.js': [
-          'bower_components/jquery-minicolors/jquery.minicolors.js',
-        ],
+        'js/jquery.minicolors.js': ['bower_components/jquery-minicolors/jquery.minicolors.js'],
       },
     },
     stylesheets: {
@@ -89,16 +88,9 @@ exports.config = {
           /^node_modules/,
           'app/Resources/scss/style.scss',
         ],
-        'css/print.css': [
-          'app/Resources/scss/print.scss',
-        ],
-        'css/jquery.minicolors.css': [
-          'bower_components/jquery-minicolors/jquery.minicolors.css',
-        ],
-        'css/style-admin.css': [
-          'app/Resources/scss/style-admin.scss',
-          /^node_modules/,
-        ],
+        'css/print.css': ['app/Resources/scss/print.scss'],
+        'css/jquery.minicolors.css': ['bower_components/jquery-minicolors/jquery.minicolors.css'],
+        'css/style-admin.css': ['app/Resources/scss/style-admin.scss', /^node_modules/],
       },
     },
   },
@@ -116,12 +108,12 @@ exports.config = {
         comments: false, // remove comments
       },
       toplevel: true,
-      compress: true
+      compress: true,
     },
-    copycat:{
-      'css': ["bower_components/jquery-minicolors/jquery.minicolors.png"],
-      verbose : false,
-      onlyChanged: false
-    }
+    copycat: {
+      css: ['bower_components/jquery-minicolors/jquery.minicolors.png'],
+      verbose: false,
+      onlyChanged: false,
+    },
   },
 };

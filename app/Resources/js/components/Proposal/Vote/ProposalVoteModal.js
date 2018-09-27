@@ -232,16 +232,14 @@ export class ProposalVoteModal extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => {
-  return {
-    showModal: !!(
-      state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id
-    ),
-    isSubmitting: !!state.proposal.isVoting,
-    invalid: isInvalid(formName)(state),
-    viewerIsConfirmedByEmail: state.user.user && state.user.user.isEmailConfirmed,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => ({
+  showModal: !!(
+    state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id
+  ),
+  isSubmitting: !!state.proposal.isVoting,
+  invalid: isInvalid(formName)(state),
+  viewerIsConfirmedByEmail: state.user.user && state.user.user.isEmailConfirmed,
+});
 
 const container = connect(mapStateToProps)(ProposalVoteModal);
 

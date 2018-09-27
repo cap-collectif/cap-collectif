@@ -22,8 +22,8 @@ const updateElementFromData = (
   data,
   successMessage = 'synthesis.common.success.update_success',
   errorMessage = 'synthesis.common.errors.update_error',
-) => {
-  return Fetcher.put(`/syntheses/${synthesis}/elements/${element}`, data)
+) =>
+  Fetcher.put(`/syntheses/${synthesis}/elements/${element}`, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: Actions.UPDATE_ELEMENT_SUCCESS,
@@ -38,15 +38,14 @@ const updateElementFromData = (
       });
       return false;
     });
-};
 
 const createElementFromData = (
   synthesis,
   data,
   successMessage = 'synthesis.common.success.update_success',
   errorMessage = 'synthesis.common.errors.update_error',
-) => {
-  return Fetcher.post(`/syntheses/${synthesis}/elements`, data)
+) =>
+  Fetcher.post(`/syntheses/${synthesis}/elements`, data)
     .then(response => {
       response.json().then(element => {
         AppDispatcher.dispatch({
@@ -65,10 +64,9 @@ const createElementFromData = (
       });
       return false;
     });
-};
 
-const fetchElementById = (synthesis, element) => {
-  return Fetcher.get(`/syntheses/${synthesis}/elements/${element}`)
+const fetchElementById = (synthesis, element) =>
+  Fetcher.get(`/syntheses/${synthesis}/elements/${element}`)
     .then(data => {
       AppDispatcher.dispatch({
         actionType: Actions.RECEIVE_ELEMENT_SUCCESS,
@@ -76,10 +74,7 @@ const fetchElementById = (synthesis, element) => {
       });
       return true;
     })
-    .catch(() => {
-      return false;
-    });
-};
+    .catch(() => false);
 
 export default {
   create: (synthesis, data) => {
@@ -142,9 +137,7 @@ export default {
         });
         return true;
       })
-      .catch(() => {
-        return false;
-      });
+      .catch(() => false);
   },
 
   loadElementsCountFromServer: (synthesis, type) => {
