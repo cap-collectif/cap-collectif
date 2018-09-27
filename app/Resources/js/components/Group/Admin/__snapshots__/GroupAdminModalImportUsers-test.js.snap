@@ -38,7 +38,7 @@ exports[`<GroupAdminModalImportUsers /> render correctly 1`] = `
       id="contained-modal-title-lg"
     >
       <FormattedMessage
-        id="import-users"
+        id="modal-add-members-via-file"
         values={Object {}}
       />
     </ModalTitle>
@@ -61,7 +61,7 @@ exports[`<GroupAdminModalImportUsers /> render correctly 1`] = `
     componentClass="div"
   >
     <CloseButton
-      label="global.close"
+      label="global.cancel"
       onClose={[MockFunction]}
     />
     <Button
@@ -74,7 +74,7 @@ exports[`<GroupAdminModalImportUsers /> render correctly 1`] = `
       type="button"
     >
       <FormattedMessage
-        id="import"
+        id="group.create.button"
         values={Object {}}
       />
     </Button>

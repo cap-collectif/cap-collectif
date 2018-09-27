@@ -28,14 +28,14 @@ export class GroupAdminModalImportUsers extends React.Component<Props> {
       <Modal show={show} onHide={onClose} aria-labelledby="delete-modal-title-lg">
         <Modal.Header>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="import-users" />}
+            {<FormattedMessage id="modal-add-members-via-file" />}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <GroupAdminImportUsersForm group={group} onClose={onClose} />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton label={intl.formatMessage({ id: 'global.close' })} onClose={onClose} />
+          <CloseButton label={intl.formatMessage({ id: 'global.cancel' })} onClose={onClose} />
           <Button
             disabled={pristine || submitting}
             bsStyle="primary"
@@ -44,7 +44,7 @@ export class GroupAdminModalImportUsers extends React.Component<Props> {
               dispatch(submit(formName));
               window.location.reload();
             }}>
-            <FormattedMessage id="import" />
+            <FormattedMessage id="group.create.button" />
           </Button>
         </Modal.Footer>
       </Modal>

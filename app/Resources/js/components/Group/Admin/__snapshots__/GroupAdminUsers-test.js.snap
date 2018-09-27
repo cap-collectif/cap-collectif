@@ -46,7 +46,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         />
          
         <FormattedMessage
-          id="group.admin.add_users"
+          id="group-admin-add-members"
           values={Object {}}
         />
       </Button>
@@ -63,7 +63,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         />
          
         <FormattedMessage
-          id="import-users"
+          id="group-admin-add-members-via-file"
           values={Object {}}
         />
       </Button>
@@ -177,7 +177,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         />
          
         <FormattedMessage
-          id="group.admin.add_users"
+          id="group-admin-add-members"
           values={Object {}}
         />
       </Button>
@@ -194,7 +194,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         />
          
         <FormattedMessage
-          id="import-users"
+          id="group-admin-add-members-via-file"
           values={Object {}}
         />
       </Button>
@@ -306,7 +306,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         />
          
         <FormattedMessage
-          id="group.admin.add_users"
+          id="group-admin-add-members"
           values={Object {}}
         />
       </Button>
@@ -323,7 +323,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         />
          
         <FormattedMessage
-          id="import-users"
+          id="group-admin-add-members-via-file"
           values={Object {}}
         />
       </Button>
@@ -437,7 +437,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         />
          
         <FormattedMessage
-          id="group.admin.add_users"
+          id="group-admin-add-members"
           values={Object {}}
         />
       </Button>
@@ -454,7 +454,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         />
          
         <FormattedMessage
-          id="import-users"
+          id="group-admin-add-members-via-file"
           values={Object {}}
         />
       </Button>
