@@ -84,8 +84,7 @@ class GraphQLContext implements Context
      */
     public function iSendAraphQLQuery(PyStringNode $query)
     {
-        $response = $this->client->request('GET', '/graphql/', [
-            'exceptions' => false,
+        $response = $this->client->request('GET', '/graphql/internal', [
             'query' => ['query' => $query->getRaw()],
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
@@ -126,9 +125,8 @@ class GraphQLContext implements Context
     {
         // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
         $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
-        $response = $this->client->request('POST', '/graphql/', [
+        $response = $this->client->request('POST', '/graphql/internal', [
             'json' => json_decode($string, true),
-            'exceptions' => false,
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',

@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class OpinionVoteEdgeType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'OpinionVoteEdge';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

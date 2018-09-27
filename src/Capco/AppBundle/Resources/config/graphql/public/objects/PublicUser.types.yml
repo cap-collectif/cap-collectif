@@ -1,0 +1,23 @@
+PublicUser:
+  type: object
+  inherits: [Node]
+  config:
+    description: "A user is an individual's account."
+    interfaces: [Node]
+    name: User
+    fields:
+      url:
+        type: 'URI'
+        description:
+          'The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.'
+        resolve: "@=resolver('user_show_url', [value])"
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      isViewer:
+        type: 'Boolean!'
+        resolve:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(getUser(), value)'
+        description: 'Whether or not this user is the viewing user.'

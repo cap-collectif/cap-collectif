@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class QuestionTypeValueType extends EnumType implements GeneratedTypeInterface
 {
+    const NAME = 'QuestionTypeValue';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

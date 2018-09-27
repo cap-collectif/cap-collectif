@@ -1,0 +1,36 @@
+InternalQuestionnaire:
+  type: object
+  inherits:
+    - Node
+    - PublicQuestionnaire
+  config:
+    name: Questionnaire
+    interfaces: [Node]
+    fields:
+      anonymousAllowed:
+        type: 'Boolean!'
+      description:
+        type: 'String'
+      multipleRepliesAllowed:
+        type: 'Boolean!'
+      contribuable:
+        type: 'Boolean!'
+        resolve: '@=value.canContribute()'
+        description: 'accept answers or not'
+      phoneConfirmationRequired:
+        type: 'Boolean!'
+        resolve: '@=value.isPhoneConfirmationRequired()'
+      questions:
+        type: '[Question!]!'
+        resolve: "@=resolver('questionnaire_questions', [value])"
+      viewerReplies:
+        type: '[Reply!]!'
+        access: '@=isAuthenticated()'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
+      acknowledgeReplies:
+        type: 'Boolean!'
+      phoneConfirmation:
+        type: 'Boolean!'
+      participants:
+        type: 'InternalUserConnection!'

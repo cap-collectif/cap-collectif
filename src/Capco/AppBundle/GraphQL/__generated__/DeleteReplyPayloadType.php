@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class DeleteReplyPayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'DeleteReplyPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -23,7 +24,7 @@ final class DeleteReplyPayloadType extends ObjectType implements GeneratedTypeIn
             'fields' => function () use ($globalVariable) {
                 return [
                 'questionnaire' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Questionnaire')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalQuestionnaire')),
                     'args' => [
                     ],
                     'resolve' => null,

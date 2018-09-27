@@ -31,6 +31,7 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use GraphQL\Type\Definition\Type;
 
 class NodeTypeResolver implements ResolverInterface
 {
@@ -45,13 +46,18 @@ class NodeTypeResolver implements ResolverInterface
         $this->requirementTypeResolver = $requirementTypeResolver;
     }
 
-    public function __invoke($node)
+    public function __invoke($node): Type
     {
+        $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
+
         if ($node instanceof Project) {
             return $this->typeResolver->resolve('Project');
         }
         if ($node instanceof Questionnaire) {
-            return $this->typeResolver->resolve('Questionnaire');
+            if ($currentSchemaName === 'public') {
+                return $this->typeResolver->resolve('PublicQuestionnaire');
+            }
+            return $this->typeResolver->resolve('InternalQuestionnaire');
         }
         if ($node instanceof Opinion) {
             return $this->typeResolver->resolve('Opinion');
@@ -75,7 +81,10 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('Reporting');
         }
         if ($node instanceof User) {
-            return $this->typeResolver->resolve('User');
+            if ($currentSchemaName === 'public') {
+                return $this->typeResolver->resolve('PublicUser');
+            }
+            return $this->typeResolver->resolve('InternalUser');
         }
 
         if ($node instanceof Comment) {
@@ -103,7 +112,10 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('QuestionnaireStep');
         }
         if ($node instanceof ConsultationStep) {
-            return $this->typeResolver->resolve('Consultation');
+            if ($currentSchemaName === 'public') {
+                return $this->typeResolver->resolve('PublicConsultation');
+            }
+            return $this->typeResolver->resolve('InternalConsultation');
         }
         if ($node instanceof OtherStep) {
             return $this->typeResolver->resolve('OtherStep');
@@ -116,9 +128,6 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof Event) {
             return $this->typeResolver->resolve('Event');
-        }
-        if ($node instanceof User) {
-            return $this->typeResolver->resolve('User');
         }
         if ($node instanceof Reply) {
             return $this->typeResolver->resolve('Reply');

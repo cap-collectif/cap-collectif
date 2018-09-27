@@ -1,7 +1,7 @@
 FollowerConnection:
   type: relay-connection
   config:
-    nodeType: User!
+    nodeType: InternalUser!
     connectionFields:
       totalCount:
         type: Int!

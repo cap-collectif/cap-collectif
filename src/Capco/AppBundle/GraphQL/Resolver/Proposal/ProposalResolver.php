@@ -104,7 +104,7 @@ class ProposalResolver implements ResolverInterface
             return $this->typeResolver->resolve('QuestionnaireStep');
         }
         if ($step instanceof ConsultationStep) {
-            return $this->typeResolver->resolve('Consultation');
+            return $this->typeResolver->resolve('InternalConsultation');
         }
         if ($step instanceof OtherStep) {
             return $this->typeResolver->resolve('OtherStep');

@@ -29,6 +29,7 @@ def check_codestyle():
 def lint():
     "Lint all files"
     env.compose_run('yarn run lint', 'qarunner', '.', no_deps=True)
+    env.compose_run('yarn run graphql:lint:public', 'qarunner', '.', no_deps=True)
     env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501,W605', 'qarunner', '.', no_deps=True)
 
 

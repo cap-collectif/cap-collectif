@@ -3,12 +3,31 @@ capco_admin:
   type: annotation
   prefix: /
 
-overblog_graphql_endpoint:
-  resource: '@OverblogGraphQLBundle/Resources/config/routing/graphql.yml'
-  prefix: /graphql
+graphql_endpoint:
+  path: /graphql
+  defaults:
+    _controller: Overblog\GraphQLBundle\Controller\GraphController::endpointAction
+    _format: 'json'
 
-overblog_graphiql_endpoint:
-  resource: '@OverblogGraphiQLBundle/Resources/config/routing.xml'
+graphql_multiple_endpoint:
+  path: /graphql/{schemaName}
+  requirements:
+    schemaName: public|internal
+  defaults:
+    _controller: Overblog\GraphQLBundle\Controller\GraphController::endpointAction
+    _format: 'json'
+
+graphiql_endpoint:
+  path: /graphiql
+  defaults:
+    _controller: Overblog\GraphiQLBundle\Controller\GraphiQLController::indexAction
+
+graphiql_multiple_endpoint:
+  path: /graphiql/{schemaName}
+  requirements:
+    schemaName: public|internal
+  defaults:
+    _controller: Overblog\GraphiQLBundle\Controller\GraphiQLController::indexAction
 
 # API
 

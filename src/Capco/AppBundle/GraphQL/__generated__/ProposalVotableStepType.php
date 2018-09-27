@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ProposalVotableStepType extends UnionType implements GeneratedTypeInterface
 {
+    const NAME = 'ProposalVotableStep';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

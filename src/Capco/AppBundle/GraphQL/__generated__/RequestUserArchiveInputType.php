@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class RequestUserArchiveInputType extends InputObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'RequestUserArchiveInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

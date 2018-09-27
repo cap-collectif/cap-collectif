@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ReplyType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'Reply';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -182,7 +183,7 @@ final class ReplyType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -206,7 +207,7 @@ final class ReplyType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'questionnaire' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Questionnaire')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalQuestionnaire')),
                     'args' => [
                     ],
                     'resolve' => null,

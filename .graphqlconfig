@@ -1,5 +1,5 @@
 {
-  "schemaPath": "schema.graphql",
+  "schemaPath": "schema.internal.graphql",
   "extensions": {
     "endpoints": {
       "dev": "http://capco.dev/graphql"

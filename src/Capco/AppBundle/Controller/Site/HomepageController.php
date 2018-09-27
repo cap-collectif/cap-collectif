@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Capco\AppBundle\Resolver\SectionResolver;
 
 class HomepageController extends Controller
 {
@@ -22,9 +23,7 @@ class HomepageController extends Controller
      */
     public function homepageAction(Request $request)
     {
-        $sections = $this->get(
-            'Capco\AppBundle\Resolver\SectionResolver'
-        )->getDisplayableEnabledOrdered();
+        $sections = $this->get(SectionResolver::class)->getDisplayableEnabledOrdered();
         $newsletterActive = $this->get(Manager::class)->isActive('newsletter');
 
         $translator = $this->get('translator');

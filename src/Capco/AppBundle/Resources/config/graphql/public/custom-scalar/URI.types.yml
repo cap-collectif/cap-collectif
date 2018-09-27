@@ -1,0 +1,7 @@
+URI:
+  type: custom-scalar
+  config:
+    description: 'An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string.'
+    serialize: ["Capco\\AppBundle\\GraphQL\\Type\\URIType", 'serialize']
+    parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\URIType", 'parseValue']
+    parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\URIType", 'parseLiteral']

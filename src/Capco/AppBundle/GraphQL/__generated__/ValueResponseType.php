@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ValueResponseType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'ValueResponse';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

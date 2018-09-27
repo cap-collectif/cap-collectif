@@ -8,6 +8,6 @@ Follower:
       opinion:
         type: 'Opinion'
       user:
-        type: 'User!'
+        type: 'InternalUser!'
       notifiedOf:
         type: 'SubscriptionTypeValue'

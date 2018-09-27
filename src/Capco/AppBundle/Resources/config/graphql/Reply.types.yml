@@ -14,13 +14,13 @@ Reply:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value])'
       author:
-        type: 'User!'
+        type: 'InternalUser!'
         description: 'The author of the contribution.'
       updatedAt:
         type: 'DateTime'
         description: 'The updated date.'
       questionnaire:
-        type: 'Questionnaire!'
+        type: 'InternalQuestionnaire!'
         description: 'Identifies the form where the contribution was submitted.'
       viewerCanDelete:
         type: 'Boolean!'
