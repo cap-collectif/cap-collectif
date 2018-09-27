@@ -68,16 +68,11 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
               className="img-circle avatar avatar-group mr-10"
               size={35}
             />
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              disabled={false}
+            <div
               onClick={[Function]}
             >
               Un groupe cool
-            </Button>
+            </div>
           </ListGroupItem>
           <div
             className="users-modal"
@@ -108,16 +103,11 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
               className="img-circle avatar avatar-group mr-10"
               size={35}
             />
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              disabled={false}
+            <div
               onClick={[Function]}
             >
               mon super groupe 2
-            </Button>
+            </div>
           </ListGroupItem>
           <div
             className="users-modal"
@@ -218,16 +208,11 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
               className="img-circle avatar avatar-group mr-10"
               size={35}
             />
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              disabled={false}
+            <div
               onClick={[Function]}
             >
               Un groupe cool
-            </Button>
+            </div>
           </ListGroupItem>
           <div
             className="users-modal"
@@ -258,16 +243,11 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
               className="img-circle avatar avatar-group mr-10"
               size={35}
             />
-            <Button
-              active={false}
-              block={false}
-              bsClass="btn"
-              bsStyle="link"
-              disabled={false}
+            <div
               onClick={[Function]}
             >
               mon super groupe 2
-            </Button>
+            </div>
           </ListGroupItem>
           <div
             className="users-modal"

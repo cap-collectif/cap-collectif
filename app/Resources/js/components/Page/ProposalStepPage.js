@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Row } from 'react-bootstrap';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import UnpublishedProposalListView from '../Proposal/List/UnpublishedProposalListView';
 import DraftProposalList from '../Proposal/List/DraftProposalList';
@@ -12,7 +12,7 @@ import StepPageHeader from '../Steps/Page/StepPageHeader';
 import LeafletMap from '../Proposal/Map/LeafletMap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import ProposalListView, { queryVariables } from '../Proposal/List/ProposalListView';
-import type { State } from '../../types';
+import type { State, Dispatch } from '../../types';
 import type {
   ProposalStepPageQueryResponse,
   ProposalStepPageQueryVariables,
@@ -28,7 +28,9 @@ type Props = {
   terms: ?string,
   statuses: Array<Object>,
   categories: Array<Object>,
+  currentPage: number,
   isAuthenticated: boolean,
+  dispatch: Dispatch,
   selectedViewByStep: string,
 };
 
@@ -55,9 +57,9 @@ export class ProposalStepPage extends React.Component<Props> {
 
     let geoJsons = [];
     try {
-      geoJsons = form.districts
-        .filter(d => d.geojson && d.displayedOnMap)
-        .map(d => ({ district: JSON.parse(d.geojson), style: d.geojsonStyle }));
+      geoJsons = form.districts.filter(d => d.geojson && d.displayedOnMap).map(d => {
+        return { district: JSON.parse(d.geojson), style: d.geojsonStyle };
+      });
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error("Can't parse your geojsons !", e);
@@ -115,7 +117,7 @@ export class ProposalStepPage extends React.Component<Props> {
               ...this.initialRenderVars,
             }: ProposalStepPageQueryVariables)
           }
-          render={({ error, props }: { props: ?ProposalStepPageQueryResponse } & ReadyState) => {
+          render={({ error, props }: { error: ?Error, props: ?ProposalStepPageQueryResponse }) => {
             if (error) {
               return graphqlError;
             }
@@ -187,6 +189,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) 
   step:
     state.project.currentProjectById &&
     state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],
+  currentPage: state.proposal.currentPaginationPage,
   selectedViewByStep: state.proposal.selectedViewByStep || 'mosaic',
 });
 export default connect(mapStateToProps)(ProposalStepPage);

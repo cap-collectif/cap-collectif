@@ -12,8 +12,8 @@ type Props = {
   comment: CommentReportButton_comment,
 };
 
-export class CommentReportButton extends React.Component<Props> {
-  handleReport = (data: any) => {
+class CommentReportButton extends React.Component<Props> {
+  handleReport = data => {
     const { comment, dispatch } = this.props;
     return submitCommentReport(comment.id, data, dispatch);
   };

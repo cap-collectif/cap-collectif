@@ -51,6 +51,8 @@ Scenario: User wants to add a reply
               "responses": [
                 {"question": {"id":"2" }, "value": "Je pense que c\u0027est la ville parfaite pour organiser les JO"},
                 {"question": {"id":"13"}, "value": "{\"labels\":[\"Athl\u00e9tisme\",\"Sports collectifs\"],\"other\":\"Emb\u00eater Maxime\"}"},
+                {"question": {"id":"31"}, "value": @null@},
+                {"question": {"id":"32"}, "value": @null@},
                 {"question": {"id":"14"}, "value": "{\"labels\":[],\"other\":null}"},
                 {"question": {"id":"15"}, "value": @null@ },
                 {"question": {"id":"16"}, "value": "{\"labels\":[],\"other\":null}"},

@@ -125,11 +125,13 @@ export class ProposalListFilters extends React.Component<Props, State> {
                 <FormattedMessage id={`global.select_${filterName}`}>
                   {message => <option value="0">{message}</option>}
                 </FormattedMessage>
-                {this.props[filterName].map(choice => (
-                  <option key={choice.id} value={choice.id}>
-                    {choice.title || choice.name}
-                  </option>
-                ))}
+                {this.props[filterName].map(choice => {
+                  return (
+                    <option key={choice.id} value={choice.id}>
+                      {choice.title || choice.name}
+                    </option>
+                  );
+                })}
               </Input>
             </Col>
           ))}

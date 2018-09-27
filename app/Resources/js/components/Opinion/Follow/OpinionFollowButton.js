@@ -61,11 +61,11 @@ export class OpinionFollowButton extends React.Component<Props, State> {
         <LoginOverlay>
           <Button
             className="btn btn--outline btn-dark-gray opinion__button__follow"
-            onClick={() =>
-              FollowOpinionMutation.commit({
+            onClick={() => {
+              return FollowOpinionMutation.commit({
                 input: { opinionId: opinion.id, notifiedOf: 'MINIMAL' },
-              })
-            }
+              });
+            }}
             id={`opinion-follow-btn-${opinion.id}`}>
             <i className="cap cap-rss" />
             <FormattedMessage id="follow" />
@@ -114,7 +114,9 @@ export class OpinionFollowButton extends React.Component<Props, State> {
                               opinion.viewerFollowingConfiguration === 'MINIMAL' ? 'checked' : ''
                             }
                             inline
-                            onChange={() => this.changeFollowType(opinion, 'MINIMAL')}>
+                            onChange={() => {
+                              return this.changeFollowType(opinion, 'MINIMAL');
+                            }}>
                             <b>
                               <FormattedMessage id="essential" />
                             </b>{' '}
@@ -130,7 +132,9 @@ export class OpinionFollowButton extends React.Component<Props, State> {
                             checked={
                               opinion.viewerFollowingConfiguration === 'ESSENTIAL' ? 'checked' : ''
                             }
-                            onChange={() => this.changeFollowType(opinion, 'ESSENTIAL')}>
+                            onChange={() => {
+                              return this.changeFollowType(opinion, 'ESSENTIAL');
+                            }}>
                             <b>
                               <FormattedMessage id="intermediate" />
                             </b>
@@ -146,7 +150,9 @@ export class OpinionFollowButton extends React.Component<Props, State> {
                             checked={
                               opinion.viewerFollowingConfiguration === 'ALL' ? 'checked' : ''
                             }
-                            onChange={() => this.changeFollowType(opinion, 'ALL')}>
+                            onChange={() => {
+                              return this.changeFollowType(opinion, 'ALL');
+                            }}>
                             <b>
                               <FormattedMessage id="complete" />
                             </b>

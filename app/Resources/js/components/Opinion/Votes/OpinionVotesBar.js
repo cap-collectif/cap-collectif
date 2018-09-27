@@ -34,10 +34,10 @@ class OpinionVotesBar extends React.Component<Props> {
               .map(edge => edge.node)
               .filter(Boolean)
               .slice(0, 5)
-              .map((vote, index) => (
+              .map((vote, index) => {
                 /* $FlowFixMe */
-                <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />
-              ))}
+                return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
+              })}
           {opinion.__typename === 'Opinion' && (
             /* $FlowFixMe */
             <OpinionVotesModal opinion={opinion} />

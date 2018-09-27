@@ -137,8 +137,9 @@ export const validateProposalContent = (
   return errors;
 };
 
-const validate = (values: FormValues, { proposal, features }: Props) =>
-  validateProposalContent(values, proposal.form, features);
+const validate = (values: FormValues, { proposal, features }: Props) => {
+  return validateProposalContent(values, proposal.form, features);
+};
 
 type State = {
   showEditFusionModal: boolean,

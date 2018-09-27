@@ -30,6 +30,7 @@ exports[`<ProposalListOrderSorting /> should render the list order sorting compo
     >
       <Component />
     </FormattedMessage>
+    ) }
   </InjectIntl(ReactBootstrapInput)>
 </div>
 `;

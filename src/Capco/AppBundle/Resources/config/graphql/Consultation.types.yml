@@ -47,10 +47,6 @@ Consultation:
         type: 'UserConnection!'
         description: 'A list of contributor associated with the consultation.'
         argsBuilder: 'Relay::Connection'
-        args:
-          first:
-            type: 'Int'
-            defaultValue: 30
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
       viewerOpinionsUnpublished:

@@ -57,8 +57,10 @@ class SubmitButton extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
-});
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+  return {
+    user: state.user.user,
+  };
+};
 
 export default connect(mapStateToProps)(SubmitButton);

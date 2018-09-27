@@ -58,7 +58,7 @@ export class OpinionList extends React.Component<Props> {
                 <select
                   className="form-control"
                   aria-label={intl.formatMessage({ id: 'global.filter' })}
-                  onBlur={(event: SyntheticInputEvent<>) => {
+                  onChange={(event: SyntheticInputEvent<>) => {
                     if (section.url) {
                       window.location.href = `${section.url}/sort/${event.target.value}`;
                     }

@@ -5,7 +5,9 @@ import { shallow } from 'enzyme';
 import RankingSpot from './RankingSpot';
 
 const props = {
-  connectDropTarget: cp => cp,
+  connectDropTarget: cp => {
+    return cp;
+  },
   onDrop: () => {},
 };
 

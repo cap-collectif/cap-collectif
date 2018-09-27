@@ -12,7 +12,6 @@ const spotTarget = {
 type Props = {
   connectDropTarget: Function,
   isOver: boolean,
-  // eslint-disable-next-line react/no-unused-prop-types
   onDrop: Function,
   canDrop: boolean,
   children?: $FlowFixMe,

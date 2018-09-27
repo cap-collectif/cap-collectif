@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { Field } from 'redux-form';
 import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
@@ -30,7 +30,6 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
   state = {
     otherChecked: false,
   };
-  textField: ?React.Component<*>;
 
   checkOtherRadio = () => {
     this.props.change(`${this.props.name}.value.labels`, []);
@@ -47,7 +46,9 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
     this.setState({ otherChecked: false });
   };
 
-  normalize = (newValue: string) => [newValue];
+  normalize = (newValue: string) => {
+    return [newValue];
+  };
 
   render() {
     const {
@@ -117,9 +118,8 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                   value={otherValue}
                   disabled={disabled}
                   onFocus={this.checkOtherRadio}
-                  ref={c => {
-                    this.textField = c;
-                  }}
+                  // $FlowFixMe
+                  ref={c => (this.textField = c)}
                 />
               </div>
             </div>

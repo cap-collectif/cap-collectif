@@ -151,11 +151,13 @@ class OpinionSourceForm extends React.Component<Props> {
             </option>
           )}
           {sourceable.availableSourceCategories &&
-            sourceable.availableSourceCategories.filter(Boolean).map(category => (
-              <option key={category.id} value={category.id}>
-                {category.title}
-              </option>
-            ))}
+            sourceable.availableSourceCategories.filter(Boolean).map(category => {
+              return (
+                <option key={category.id} value={category.id}>
+                  {category.title}
+                </option>
+              );
+            })}
         </Field>
         <Field
           id="sourceLink"
