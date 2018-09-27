@@ -73,7 +73,7 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
 //   medias: $ReadOnlyArray<string>,
 // |}>;
 type SubmitResponses = $ReadOnlyArray<{
-  value?: ?string | ?number,
+  value?: any,
   question: string,
   medias?: ?$ReadOnlyArray<string>,
 }>;
@@ -114,7 +114,7 @@ export const formatSubmitResponses = (
         value,
       };
     }
-    return { value: null, question };
+    return { value: res.value, question };
   });
 };
 
