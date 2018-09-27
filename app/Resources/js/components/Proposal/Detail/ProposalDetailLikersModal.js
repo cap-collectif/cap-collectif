@@ -18,7 +18,7 @@ type Props = {
 };
 
 export class ProposalDetailLikersModal extends React.Component<Props> {
-  handleHide = (e: Event) => {
+  handleHide = (e: SyntheticEvent<HTMLButtonElement>) => {
     const { dispatch } = this.props;
     e.preventDefault();
     dispatch(closeDetailLikersModal());

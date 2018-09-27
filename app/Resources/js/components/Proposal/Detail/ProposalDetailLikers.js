@@ -22,7 +22,7 @@ export class ProposalDetailLikers extends React.Component<Props> {
     componentClass: 'a',
   };
 
-  handleClick = (e: Event) => {
+  handleClick = (e: SyntheticEvent<HTMLButtonElement>) => {
     const { dispatch, proposal } = this.props;
     e.preventDefault();
     dispatch(openDetailLikersModal(proposal.id));
