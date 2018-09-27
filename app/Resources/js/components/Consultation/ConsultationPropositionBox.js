@@ -53,6 +53,10 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
     const sectionItems = document.querySelectorAll('.section-list_container');
     const activeItems = [];
 
+    if(test) {
+      console.log(test);
+    }
+
     sectionItems.forEach(item => {
       const itemPosition = item.getBoundingClientRect();
 

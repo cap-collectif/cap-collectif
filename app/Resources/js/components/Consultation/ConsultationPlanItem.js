@@ -24,6 +24,8 @@ export class ConsultationPlanItem extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
     const { activeItems, onCollapse, section } = this.props;
 
+    console.warn(activeItems);
+
     if (prevProps.activeItems !== this.props.activeItems) {
       // We can't pass innerRef to NavItem component and we need to recover <li>
       const itemLink = this.navItem.current && this.navItem.current.parentNode;
