@@ -952,7 +952,7 @@ type Consultation implements Node & Step {
   sections: [Section]
 
   # A list of contributor associated with the consultation.
-  contributors(after: String, first: Int = 30, before: String, last: Int): UserConnection!
+  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
   viewerOpinionsUnpublished(after: String, first: Int, before: String, last: Int): OpinionConnection
   contributionConnection(
     after: String
@@ -2798,6 +2798,7 @@ enum QuestionTypeValue {
   ranking
   medias
   button
+  section
 }
 
 # Fetches an object given its ID
@@ -3213,6 +3214,22 @@ type SectionAppendixType {
   id: String
   position: Int!
   title: String
+}
+
+# A section is just a title in a quiz without any possible answer.
+type SectionQuestion implements Question {
+  id: ID!
+  title: String!
+  type: QuestionTypeValue!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  description: String
+  kind: String!
+  slug: String!
+
+  # Return users who answered the question
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
 }
 
 input SelectProposalInput {

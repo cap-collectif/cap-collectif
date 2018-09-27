@@ -21,7 +21,7 @@ type State = {
   order: CommentOrderBy,
 };
 
-export class CommentSection extends React.Component<Props, State> {
+class CommentSection extends React.Component<Props, State> {
   state = {
     order: 'last',
   };

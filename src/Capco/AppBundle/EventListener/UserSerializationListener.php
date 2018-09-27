@@ -16,13 +16,8 @@ class UserSerializationListener extends AbstractSerializationListener
     private $contributionStepResolver;
     private $projectRepository;
 
-    public function __construct(
-        RouterInterface $router,
-        Manager $manager,
-        UserContributionByProjectResolver $contributionProjectResolver,
-        UserContributionByStepResolver $contributionStepResolver,
-        $projectRepository
-    ) {
+    public function __construct(RouterInterface $router, Manager $manager, UserContributionByProjectResolver $contributionProjectResolver, UserContributionByStepResolver $contributionStepResolver, $projectRepository)
+    {
         $this->router = $router;
         $this->manager = $manager;
         $this->contributionProjectResolver = $contributionProjectResolver;
@@ -33,11 +28,7 @@ class UserSerializationListener extends AbstractSerializationListener
     public static function getSubscribedEvents(): array
     {
         return [
-            [
-                'event' => 'serializer.post_serialize',
-                'class' => 'Capco\UserBundle\Entity\User',
-                'method' => 'onPostUserSerialize',
-            ],
+            ['event' => 'serializer.post_serialize', 'class' => 'Capco\UserBundle\Entity\User', 'method' => 'onPostUserSerialize'],
         ];
     }
 
@@ -46,34 +37,23 @@ class UserSerializationListener extends AbstractSerializationListener
         $user = $event->getObject();
 
         // We skip if we are serializing for Elasticsearch
-        if (
-            isset($this->getIncludedGroups($event)['Elasticsearch']) &&
-            !isset($this->getIncludedGroups($event)['ElasticsearchProposal'])
-        ) {
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
             $contributionsCountByProject = [];
             $contributionsCountByStep = [];
             foreach ($this->projectRepository->findAll() as $project) {
-                $count = $this->contributionProjectResolver->__invoke($user, $project, [
-                    'first' => 1,
-                ])->totalCount;
+                $count = $this->contributionProjectResolver->__invoke($user, $project, ['first' => 1])->totalCount;
                 $contributionsCountByProject[] = [
-                    'project' => ['id' => $project->getId()],
-                    'count' => $count,
+                  'project' => ['id' => $project->getId()],
+                  'count' => $count,
                 ];
                 foreach ($project->getRealSteps() as $step) {
                     $contributionsCountByStep[] = [
-                        'step' => ['id' => $step->getId()],
-                        'count' => 0 === $count
-                            ? 0
-                            : $this->contributionStepResolver->__invoke($user, $step, [
-                                'first' => 1,
-                            ])->totalCount,
-                    ];
+                  'step' => ['id' => $step->getId()],
+                  'count' => 0 === $count ? 0 : $this->contributionStepResolver->__invoke($user, $step, ['first' => 1])->totalCount,
+                ];
                 }
             }
-            $event
-                ->getVisitor()
-                ->addData('contributionsCountByProject', $contributionsCountByProject);
+            $event->getVisitor()->addData('contributionsCountByProject', $contributionsCountByProject);
             $event->getVisitor()->addData('contributionsCountByStep', $contributionsCountByStep);
 
             return;
@@ -83,11 +63,7 @@ class UserSerializationListener extends AbstractSerializationListener
             'settings' => $this->router->generate('capco_profile_edit', [], true),
         ];
         if ($this->manager->isActive('profiles')) {
-            $links['profile'] = $this->router->generate(
-                'capco_user_profile_show_all',
-                ['slug' => $user->getSlug()],
-                true
-            );
+            $links['profile'] = $this->router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], true);
         }
 
         $event->getVisitor()->addData('_links', $links);
