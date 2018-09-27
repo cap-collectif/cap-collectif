@@ -55,7 +55,7 @@ class AddUsersToGroupFromEmailMutation implements MutationInterface
         $alreadyImportedUsers = [];
 
         try {
-            foreach ($emails as $email) {
+            foreach (array_unique($emails) as $email) {
                 /** @var User $user */
                 $user = $this->userRepository->findOneBy(['email' => $email]);
 

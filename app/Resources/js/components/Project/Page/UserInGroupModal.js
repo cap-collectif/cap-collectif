@@ -1,12 +1,12 @@
 // @flow
 import React from 'react';
-import { Modal, ListGroupItem, Button } from 'react-bootstrap';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
+import classNames from 'classnames';
 import type { UserInGroupModal_group } from './__generated__/UserInGroupModal_group.graphql';
 import { UserAvatar } from '../../User/UserAvatar';
 import CloseButton from '../../Form/CloseButton';
-import ListGroupFlush from '../../Ui/List/ListGroupFlush';
 
 type RelayProps = {
   group: UserInGroupModal_group,
@@ -16,7 +16,6 @@ type Props = RelayProps & {
   show: boolean,
   handleClose: () => void,
   relay: RelayPaginationProp,
-  intl: IntlShape,
 };
 type State = {
   loading: boolean,
@@ -36,7 +35,10 @@ export class UserInGroupModal extends React.Component<Props, State> {
     });
   };
   render() {
-    const { show, group, relay, intl } = this.props;
+    const { show, group, relay } = this.props;
+    const modalClasses = classNames({
+      'modal-body-without-padding-top': true,
+    });
     return (
       <div>
         <Modal
@@ -44,55 +46,47 @@ export class UserInGroupModal extends React.Component<Props, State> {
           animation={false}
           show={show}
           onHide={this.closeModal}
-          aria-labelledby="contained-modal-title-lg">
+          aria-labelledby="contained-modal-title-lg"
+          dialogClassName={modalClasses}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               <b>{group.title}</b>
             </Modal.Title>
           </Modal.Header>
-          {group.users !== null &&
-            group.users.edges &&
-            group.users.edges.length > 0 && (
-              <ListGroupFlush>
-                {group.users.edges
-                  .filter(Boolean)
-                  .map(edge => edge && edge.node)
-                  .filter(Boolean)
-                  .map(user => (
-                    <ListGroupItem className="d-flex text-left" key={user.id} id={user.id}>
-                      {/* $FlowFixMe */}
-                      <UserAvatar
-                        user={{
-                          username: user.username,
-                          media: user.media,
-                          _links: { profile: user.show_url },
-                        }}
-                        defaultAvatar={null}
-                      />
-                      <a
-                        href={user.show_url}
-                        className="align-self-center"
-                        title={intl.formatMessage(
-                          { id: 'usernames-profile' },
-                          { userName: user.username },
-                        )}>
-                        {user.username}
-                      </a>
-                    </ListGroupItem>
-                  ))}
-                {relay.hasMore() && (
-                  <div className="text-center mt-15 mb-10">
-                    <Button
-                      id="load-more"
-                      bsStyle="primary"
-                      disabled={this.state.loading}
-                      onClick={this.loadMore}>
-                      <FormattedMessage id={relay.isLoading() ? 'global.loading' : 'global.more'} />
-                    </Button>
-                  </div>
-                )}
-              </ListGroupFlush>
-            )}
+          <Modal.Body>
+            {group.users !== null &&
+              group.users.edges &&
+              group.users.edges.length > 0 && (
+                <ListGroup className="list-group-custom">
+                  {group.users.edges
+                    .filter(Boolean)
+                    .map(edge => edge && edge.node)
+                    .filter(Boolean)
+                    .map(user => (
+                      <div key={user.id} id={user.id}>
+                        <ListGroupItem className="list-group-item-custom">
+                          {/* $FlowFixMe */}
+                          <UserAvatar user={user} defaultAvatar={null} />
+                          {user.username}
+                        </ListGroupItem>
+                      </div>
+                    ))}
+                  {relay.hasMore() && (
+                    <div className="text-center">
+                      <Button
+                        id="load-more"
+                        bsStyle="primary"
+                        disabled={this.state.loading}
+                        onClick={this.loadMore}>
+                        <FormattedMessage
+                          id={relay.isLoading() ? 'global.loading' : 'global.more'}
+                        />
+                      </Button>
+                    </div>
+                  )}
+                </ListGroup>
+              )}
+          </Modal.Body>
           <Modal.Footer>
             <CloseButton label="global.close" onClose={this.closeModal} />
           </Modal.Footer>
@@ -102,10 +96,8 @@ export class UserInGroupModal extends React.Component<Props, State> {
   }
 }
 
-const container = injectIntl(UserInGroupModal);
-
 export default createPaginationContainer(
-  container,
+  UserInGroupModal,
   graphql`
     fragment UserInGroupModal_group on Group
       @argumentDefinitions(

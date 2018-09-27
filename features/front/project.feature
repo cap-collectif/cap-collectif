@@ -270,8 +270,8 @@ Scenario: Pierre can access to a restricted project to his user group
   And I should see "global.close"
   When I unfold "group3" group inside restricted access modal
   Then I should see "Utilisateurs"
-  And I should not see "ptondereau" in the "#group3-modal .list-group" element
+  And I should not see "ptondereau" in the "#group3-modal .modal-body" element
   And I should see "global.more"
   Then I click on button "#load-more"
   And I wait ".project-preview" to appear on current page
-  Then I should see "ptondereau" in the "#group3-modal .list-group" element
+  Then I should see "ptondereau" in the "#group3-modal .modal-body" element

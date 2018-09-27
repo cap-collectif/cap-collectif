@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
+exports[`<GroupAdminModalImportUsers /> render correctly 1`] = `
 <Modal
   animation={true}
   aria-labelledby="delete-modal-title-lg"
@@ -38,7 +38,7 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
       id="contained-modal-title-lg"
     >
       <FormattedMessage
-        id="group-admin-add-members"
+        id="modal-add-members-via-file"
         values={Object {}}
       />
     </ModalTitle>
@@ -51,8 +51,6 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
       group={
         Object {
           "id": "group4",
-          "title": "Comité de suvi",
-          "users": Array [],
         }
       }
       onClose={[MockFunction]}
@@ -63,7 +61,7 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
     componentClass="div"
   >
     <CloseButton
-      label="global.close"
+      label="global.cancel"
       onClose={[MockFunction]}
     />
     <Button
@@ -76,7 +74,7 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
       type="button"
     >
       <FormattedMessage
-        id="global.add"
+        id="group.create.button"
         values={Object {}}
       />
     </Button>
