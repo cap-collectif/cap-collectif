@@ -59,12 +59,18 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
           className="img-circle avatar avatar-group mr-10"
           size={35}
         />
-        <a
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="link"
+          className="btn-md p-0"
+          disabled={false}
           onClick={[Function]}
           title="persons-in-the-group"
         >
           Un groupe cool
-        </a>
+        </Button>
         <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
           group={
             Object {
@@ -87,12 +93,18 @@ exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
           className="img-circle avatar avatar-group mr-10"
           size={35}
         />
-        <a
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="link"
+          className="btn-md p-0"
+          disabled={false}
           onClick={[Function]}
           title="persons-in-the-group"
         >
           mon super groupe 2
-        </a>
+        </Button>
         <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
           group={
             Object {
@@ -178,12 +190,18 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
           className="img-circle avatar avatar-group mr-10"
           size={35}
         />
-        <a
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="link"
+          className="btn-md p-0"
+          disabled={false}
           onClick={[Function]}
           title="persons-in-the-group"
         >
           Un groupe cool
-        </a>
+        </Button>
         <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
           group={
             Object {
@@ -206,12 +224,18 @@ exports[`<UserGroupModal /> should render correctly with load more 1`] = `
           className="img-circle avatar avatar-group mr-10"
           size={35}
         />
-        <a
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="link"
+          className="btn-md p-0"
+          disabled={false}
           onClick={[Function]}
           title="persons-in-the-group"
         >
           mon super groupe 2
-        </a>
+        </Button>
         <ForwardRef(Relay(InjectIntl(UserInGroupModal)))
           group={
             Object {

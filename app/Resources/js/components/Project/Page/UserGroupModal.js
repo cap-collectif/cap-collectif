@@ -77,6 +77,7 @@ export class UserGroupModal extends React.Component<Props, State> {
                       <GroupAvatar size={35} />
                       <Button
                         bsStyle="link"
+                        className="btn-md p-0"
                         onClick={() => {
                           this.handleClick(group.id);
                         }}
