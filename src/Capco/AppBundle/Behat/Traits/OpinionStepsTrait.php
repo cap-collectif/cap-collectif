@@ -343,9 +343,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $page->clickArgumentDeleteButton();
-        $this->iWait(1);
         $page->clickArgumentConfirmDeletionButton();
-        $this->iWait(1);
     }
 
     /**
@@ -420,7 +418,6 @@ trait OpinionStepsTrait
         $page = $this->getCurrentPage();
         $inClosedStep =
             $this->opinionPageInClosedStepIsOpen() || $this->versionPageInClosedStepIsOpen();
-        $this->getSession()->wait(1);
         $button = $page->getArgumentVoteButton($inClosedStep);
         Assert::assertTrue($button->hasAttribute('disabled'));
     }
