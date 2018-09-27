@@ -24,20 +24,21 @@ const ListVoteItem = ({ children }: ListVoteItemProps) => (
 export class VoteItem extends React.Component<Props> {
   render() {
     const { vote } = this.props;
+
     let voteType = 'votes.type.propositionVote';
     let voteVerbe = 'votes.has';
     let voteLabelClass = classNames('label', 'label-success');
     let voteLabel = 'votes.value.voteFor';
 
-    if (vote.value !== null && vote.value === 1) {
+    if (vote.value !== null && vote.value === 'YES') {
       voteVerbe = 'votes.is';
       voteLabelClass = classNames('label', 'label-success');
       voteLabel = 'votes.value.agree';
-    } else if (vote.value !== null && vote.value === -1) {
+    } else if (vote.value !== null && vote.value === 'NO') {
       voteVerbe = 'votes.isNot';
       voteLabelClass = classNames('label', 'label-danger');
       voteLabel = 'votes.value.disagree';
-    } else if (vote.value !== null && vote.value === 0) {
+    } else if (vote.value !== null && vote.value === 'MITIGE') {
       voteVerbe = 'votes.is';
       voteLabelClass = classNames('label', 'label-warning');
       voteLabel = 'votes.value.mitigated';

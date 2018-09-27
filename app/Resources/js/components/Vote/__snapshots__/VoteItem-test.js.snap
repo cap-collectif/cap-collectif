@@ -308,7 +308,7 @@ exports[`<VoteItem /> renders correcty for vote without value 1`] = `
       </span>
        
       <FormattedMessage
-        id="votes.type.propositionVote"
+        id="votes.type.proposition"
         values={Object {}}
       />
        

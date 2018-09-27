@@ -11,8 +11,7 @@ describe('<VoteItem />', () => {
       $refType,
       id: '51',
       __typename: 'vote',
-      // $FlowFixMe
-      value: 1,
+      value: 'YES',
       createdAt: '2018-04-09T23:21:06+0200',
       author: {
         id: 'user1',
@@ -39,8 +38,7 @@ describe('<VoteItem />', () => {
     ...defaultProps,
     vote: {
       ...defaultProps.vote,
-      // $FlowFixMe
-      value: -1,
+      value: 'NO',
     },
   };
 
@@ -48,17 +46,34 @@ describe('<VoteItem />', () => {
     ...defaultProps,
     vote: {
       ...defaultProps.vote,
-      // $FlowFixMe
-      value: 0,
+      value: 'MITIGE',
     },
   };
 
   const voteWithoutValueProps = {
-    ...defaultProps,
     vote: {
-      ...defaultProps.vote,
-      // $FlowFixMe
-      value: null,
+      $refType,
+      id: '51',
+      __typename: 'vote',
+      createdAt: '2018-04-09T23:21:06+0200',
+      author: {
+        id: 'user1',
+        slug: 'lbrunet',
+        displayName: 'lbrunet',
+        show_url: 'https://capco.dev/profile/lbrunet',
+        vip: false,
+        media: {
+          url:
+            'https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg',
+        },
+      },
+      related: {
+        id: 'version2',
+        kind: 'vote',
+        url:
+          'https://capco.dev/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/article-1/versions/modification-2',
+        title: 'Modification 2',
+      },
     },
   };
 
