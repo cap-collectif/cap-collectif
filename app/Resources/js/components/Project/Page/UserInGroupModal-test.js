@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { UserInGroupModal } from './UserInGroupModal';
-import { $refType, relayPaginationMock } from '../../../mocks';
+import { $refType, relayPaginationMock, intlMock } from '../../../mocks';
 
 describe('<UserInGroupModal />', () => {
   const noUser = {
@@ -111,6 +111,10 @@ describe('<UserInGroupModal />', () => {
     $refType,
   };
 
+  const intl = {
+    intl: intlMock,
+  };
+
   it('should render correctly without user in group', () => {
     const wrapper = shallow(
       <UserInGroupModal
@@ -118,13 +122,20 @@ describe('<UserInGroupModal />', () => {
         show={false}
         handleClose={() => {}}
         relay={relayPaginationMock}
+        {...intl}
       />,
     );
     expect(wrapper).toMatchSnapshot();
   });
   it('should render correctly with user in 2 groups', () => {
     const wrapper = shallow(
-      <UserInGroupModal group={twoUsers} show handleClose={() => {}} relay={relayPaginationMock} />,
+      <UserInGroupModal
+        group={twoUsers}
+        show
+        handleClose={() => {}}
+        relay={relayPaginationMock}
+        {...intl}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -135,6 +146,7 @@ describe('<UserInGroupModal />', () => {
         show
         handleClose={() => {}}
         relay={{ ...relayPaginationMock, hasMore: () => true }}
+        {...intl}
       />,
     );
     expect(wrapper).toMatchSnapshot();
