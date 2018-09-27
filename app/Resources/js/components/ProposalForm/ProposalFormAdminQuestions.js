@@ -18,6 +18,7 @@ import { ProposalFormAdminDeleteQuestionModal } from './ProposalFormAdminDeleteQ
 import { ProposalFormAdminQuestion } from './ProposalFormAdminQuestion';
 import QuestionSectionAdminModal from '../Question/QuestionSectionAdminModal';
 import FlashMessages from '../Utils/FlashMessages';
+import type { QuestionTypeValue } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 
 type Props = {
   dispatch: Dispatch,
@@ -87,7 +88,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     });
   };
 
-  handleClickDelete = (index: number, type: string) => {
+  handleClickDelete = (index: number, type: QuestionTypeValue) => {
     let deleteType = 'question';
     if (type === 'section') {
       deleteType = 'section';
@@ -135,7 +136,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     );
   };
 
-  handleClickEdit = (index: number, type: string) => {
+  handleClickEdit = (index: number, type: QuestionTypeValue) => {
     if (type === 'section') {
       this.setState({ editIndexSection: index });
     } else {
@@ -143,7 +144,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     }
   };
 
-  handleSubmit = (type: string) => {
+  handleSubmit = (type: QuestionTypeValue) => {
     let createSuccessMsgId = 'your-question-has-been-registered';
 
     if (type === 'section') {
@@ -244,7 +245,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                             <ProposalFormAdminQuestionModal
                               isCreating={!!questions[index].id}
                               onClose={this.handleClose.bind(this, index)}
-                              onSubmit={this.handleSubmit.bind(this, 'question')}
+                              onSubmit={this.handleSubmit.bind(this, questions[index].type)}
                               member={member}
                               show={index === editIndex}
                               formName={formName}
