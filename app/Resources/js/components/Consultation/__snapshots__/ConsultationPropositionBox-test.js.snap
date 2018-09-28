@@ -5,7 +5,7 @@ exports[`<ConsultationPropositionBox /> renders correcty 1`] = `
   className="row"
 >
   <div
-    className="consultation-plan col-md-3 col-sm-12"
+    className="consultation-plan sticky col-md-3 col-sm-12"
     id="consultation-plan"
   >
     <ConsultationPlan

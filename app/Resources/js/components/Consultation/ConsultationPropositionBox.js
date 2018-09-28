@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import * as Stickyfill from 'stickyfilljs';
 import type { GlobalState, Dispatch } from '../../types';
 import { changeConsultationPlanActiveItems } from '../../redux/modules/project';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -46,6 +47,9 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
         this.scrollSpy();
       });
     });
+
+    const elements = document.querySelectorAll('.sticky');
+    Stickyfill.add(elements);
   }
 
   scrollSpy = () => {
@@ -100,7 +104,9 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
       <div className="row">
         <div
           className={
-            showConsultationPlan ? 'consultation-plan col-md-3 col-sm-12' : 'consultation-plan'
+            showConsultationPlan
+              ? 'consultation-plan sticky col-md-3 col-sm-12'
+              : 'consultation-plan sticky'
           }
           id="consultation-plan">
           <ConsultationPlan step={step} />
