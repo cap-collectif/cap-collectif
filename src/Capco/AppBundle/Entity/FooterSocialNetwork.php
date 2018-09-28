@@ -19,21 +19,21 @@ class FooterSocialNetwork
     use IdTrait;
 
     public static $socialIcons = [
-        'Site externe' => 'link-1',
-        'Facebook' => 'facebook',
-        'Twitter' => 'twitter',
-        'Google+' => 'gplus',
-        'RSS' => 'rss',
-        'Pinterest' => 'pinterest',
-        'Github' => 'github',
-        'Linkedin' => 'linkedin',
-        'Picasa' => 'picasa',
-        'Vimeo' => 'vimeo',
-        'Instagram' => 'instagram',
-        'Flickr' => 'flickr',
-        'Tumblr' => 'tumblr',
+        'link-1' => 'Site externe',
+        'facebook' => 'Facebook',
+        'twitter' => 'Twitter',
+        'gplus' => 'Google+',
+        'rss' => 'RSS',
+        'pinterest' => 'Pinterest',
+        'github' => 'Github',
+        'linkedin' => 'Linkedin',
+        'picasa' => 'Picasa',
+        'vimeo' => 'Vimeo',
+        'instagram' => 'Instagram',
+        'flickr' => 'Flickr',
+        'tumblr' => 'Tumblr',
         'youtube' => 'youtube',
-    ];
+   ];
 
     /**
      * @var string

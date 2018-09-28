@@ -9,19 +9,16 @@ import component from '../Form/Field';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 
-type DefaultProps = {
+type ParentProps = {
   show: boolean,
   onClose: () => void,
   onSubmit: () => void,
   member: string,
   isCreating: boolean,
-};
-
-type ParentProps = DefaultProps & {
   formName: string,
 };
 
-type Props = DefaultProps & {
+type Props = ParentProps & {
   disabled: boolean,
 };
 
