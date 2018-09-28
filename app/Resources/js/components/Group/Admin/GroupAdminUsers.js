@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Button, ListGroup } from 'react-bootstrap';
+import { Button, ListGroup, ButtonToolbar } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import {
   isValid,
@@ -17,6 +17,7 @@ import AlertForm from '../../Alert/AlertForm';
 import AlertFormSucceededMessage from '../../Alert/AlertFormSucceededMessage';
 import GroupAdminUsersListGroupItem from './GroupAdminUsersListGroupItem';
 import GroupAdminModalAddUsers from './GroupAdminModalAddUsers';
+import GroupAdminModalImportUsers from './GroupAdminModalImportUsers';
 
 type Props = FormProps & {
   group: GroupAdminUsers_group,
@@ -27,6 +28,7 @@ type Props = FormProps & {
 
 type State = {
   showAddUsersModal: boolean,
+  showImportUsersModal: boolean,
   user: Object,
 };
 
@@ -35,6 +37,7 @@ export const formName = 'group-admin-users';
 export class GroupAdminUsers extends React.Component<Props, State> {
   state = {
     showAddUsersModal: false,
+    showImportUsersModal: false,
     user: {},
   };
 
@@ -84,13 +87,17 @@ export class GroupAdminUsers extends React.Component<Props, State> {
     this.setState({ showAddUsersModal: true });
   };
 
+  openImportModal = () => {
+    this.setState({ showImportUsersModal: true });
+  };
+
   handleClose = () => {
-    this.setState({ showAddUsersModal: false });
+    this.setState({ showAddUsersModal: false, showImportUsersModal: false });
   };
 
   render() {
     const { group, intl } = this.props;
-    const { showAddUsersModal } = this.state;
+    const { showAddUsersModal, showImportUsersModal } = this.state;
 
     return (
       <div className="box box-primary container-fluid">
@@ -107,12 +114,23 @@ export class GroupAdminUsers extends React.Component<Props, State> {
           </a>
         </div>
         <div className="box-content">
-          <Button bsStyle="success" href="#" onClick={() => this.openCreateModal()}>
-            <i className="fa fa-plus-circle" /> <FormattedMessage id="group.admin.add_users" />
-          </Button>
+          <ButtonToolbar>
+            <Button bsStyle="success" onClick={this.openCreateModal}>
+              <i className="fa fa-plus-circle" /> <FormattedMessage id="group-admin-add-members" />
+            </Button>
+            <Button bsStyle="success" onClick={this.openImportModal}>
+              <i className="fa fa-upload" />{' '}
+              <FormattedMessage id="group-admin-add-members-via-file" />
+            </Button>
+          </ButtonToolbar>
           {this.getAlertForm()}
           <GroupAdminModalAddUsers
             show={showAddUsersModal}
+            onClose={this.handleClose}
+            group={group}
+          />
+          <GroupAdminModalImportUsers
+            show={showImportUsersModal}
             onClose={this.handleClose}
             group={group}
           />
