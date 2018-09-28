@@ -91,6 +91,7 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false', par
         command = 'php -d memory_limit=-1 ./bin/behat' + ('', ' --log-step-times')[timer != 'false'] + ('', ' --parallel-process 10')[parallel != 'false'] + ' -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'] + ('', ' --name ' + feature)[feature != 'false']
         env.service_command(command, 'application', env.www_app)
 
+
 @task(environments=['local'])
 def view():
     if env.dinghy:
