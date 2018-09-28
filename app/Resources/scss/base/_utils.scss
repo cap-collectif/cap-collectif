@@ -69,10 +69,6 @@
     padding-bottom: 20px;
 }
 
-.pt-10 {
-    padding-top: 10px;
-}
-
 .p-0 {
     padding: 0;
 }
@@ -127,6 +123,14 @@
   Display
 ==== */
 
+.d-flex {
+    display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 .d-ib {
     display: inline-block;
 }
@@ -135,8 +139,32 @@
     font-weight: normal;
 }
 
+.flex-end {
+    justify-content: flex-end;
+}
+
+.justify-content-between {
+   justify-content: space-between;
+}
+
+.justify-content-end {
+   justify-content: flex-end;
+}
+
+.justify-content-center {
+   justify-content: center;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
 .object-cover {
     object-fit: cover;
+}
+
+.align-items-center {
+    align-items: center;
 }
 
 /* =====
