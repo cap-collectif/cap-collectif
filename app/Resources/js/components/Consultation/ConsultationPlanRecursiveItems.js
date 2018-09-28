@@ -7,11 +7,7 @@ import { Button } from 'react-bootstrap';
 import type { Dispatch, GlobalState } from '../../types';
 import type { ConsultationPlanRecursiveItems_consultation } from './__generated__/ConsultationPlanRecursiveItems_consultation.graphql';
 import ConsultationPlanItems from './ConsultationPlanItems';
-import {
-  closeConsultationPlan,
-  openConsultationPlan,
-  openConsultationPlanActiveItems,
-} from '../../redux/modules/project';
+import { closeConsultationPlan, openConsultationPlan } from '../../redux/modules/project';
 import config from '../../config';
 import StackedNav from '../Ui/Nav/StackedNav';
 
@@ -20,7 +16,6 @@ type Props = {
   stepId: string,
   closePlan: Function,
   openPlan: Function,
-  onOpenActiveItems: Function,
   showConsultationPlan: boolean,
   intl: IntlShape,
 };
@@ -100,26 +95,9 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   };
 
   openAction = () => {
-    const { openPlan, stepId, onOpenActiveItems } = this.props;
-    const sectionItems = document.querySelectorAll('.section-list_container');
-    const activeItems = [];
+    const { openPlan, stepId } = this.props;
 
     openPlan(stepId);
-
-    sectionItems.forEach(item => {
-      const itemPosition = item.getBoundingClientRect();
-
-      // 40 is height of nav
-      if (
-        itemPosition &&
-        itemPosition.top - 20 < 0 &&
-        itemPosition.top - 20 > -itemPosition.height + 40
-      ) {
-        activeItems.push(item.id);
-      }
-    });
-
-    onOpenActiveItems(activeItems);
   };
 
   render() {
@@ -146,9 +124,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   openPlan: id => {
     dispatch(openConsultationPlan(id));
-  },
-  onOpenActiveItems: items => {
-    dispatch(openConsultationPlanActiveItems(items));
   },
 });
 

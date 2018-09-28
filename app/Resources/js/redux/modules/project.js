@@ -23,7 +23,6 @@ export type State = {
   +isLoading: boolean,
   +count: number,
   +selectedActiveItems: Array<string>,
-  +onOpenActiveItems: Array<string>,
 };
 
 const initialState: State = {
@@ -44,7 +43,6 @@ const initialState: State = {
   isLoading: true,
   count: 0,
   selectedActiveItems: [],
-  onOpenActiveItems: [],
 };
 type RequestFetchProjectsAction = { type: 'project/PROJECTS_FETCH_REQUESTED' };
 type ChangePageAction = { type: 'project/CHANGE_PAGE', page: number };
@@ -77,10 +75,6 @@ type ChangeConsultationPlanActiveItemsAction = {
   type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEMS',
   items: Array<string>,
 };
-type OpenConsultationPlanActiveItemsAction = {
-  type: 'proposal/OPEN_CONSULTATION_PLAN_ACTIVE_ITEMS',
-  items: Array<string>,
-};
 
 export type ProjectAction =
   | RequestFetchProjectsAction
@@ -93,7 +87,6 @@ export type ProjectAction =
   | CloseConsultationPlanAction
   | OpenConsultationPlanAction
   | ChangeConsultationPlanActiveItemsAction
-  | OpenConsultationPlanActiveItemsAction
   | { type: 'project/PROJECTS_FETCH_FAILED', error: Object }
   | { type: 'project/CHANGE_FILTER', filter: string, value: string };
 
@@ -135,13 +128,6 @@ export const changeConsultationPlanActiveItems = (
   items: Array<string>,
 ): ChangeConsultationPlanActiveItemsAction => ({
   type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEMS',
-  items,
-});
-
-export const openConsultationPlanActiveItems = (
-  items: Array<string>,
-): OpenConsultationPlanActiveItemsAction => ({
-  type: 'proposal/OPEN_CONSULTATION_PLAN_ACTIVE_ITEMS',
   items,
 });
 
@@ -214,9 +200,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     }
     case 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEMS': {
       return { ...state, selectedActiveItems: action.items };
-    }
-    case 'proposal/OPEN_CONSULTATION_PLAN_ACTIVE_ITEMS': {
-      return { ...state, onOpenActiveItems: action.items };
     }
     default:
       return state;

@@ -14,7 +14,6 @@ describe('<ConsultationPlanItem />', () => {
       title: 'title',
     },
     activeItems: [],
-    onOpenActiveItems: [],
     level: 0,
     onCollapse: jest.fn(),
   };

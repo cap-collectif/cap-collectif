@@ -10,7 +10,6 @@ type Props = {
   section: ConsultationPlanItem_section,
   level: number,
   activeItems: Array<string>,
-  onOpenActiveItems: Array<string>,
   onCollapse: (collapseItem: boolean) => {},
 };
 
@@ -22,9 +21,9 @@ export class ConsultationPlanItem extends React.Component<Props> {
   }
 
   componentDidMount() {
-    const { onOpenActiveItems } = this.props;
+    const { activeItems } = this.props;
 
-    this.getActiveItems(onOpenActiveItems);
+    this.getActiveItems(activeItems);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -81,7 +80,6 @@ export class ConsultationPlanItem extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   activeItems: state.project.selectedActiveItems,
-  onOpenActiveItems: state.project.onOpenActiveItems,
 });
 
 const container = connect(mapStateToProps)(ConsultationPlanItem);
