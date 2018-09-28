@@ -48,6 +48,8 @@ type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: Uuid };
 type CloseVoteModalAction = { type: 'proposal/CLOSE_VOTE_MODAL' };
 type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
 type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
+type OpenDetailLikersModalAction = { type: 'proposal/OPEN_DETAIL_LIKERS_MODAL', id: string };
+type CloseDetailLikersModalAction = { type: 'proposal/CLOSE_DETAIL_LIKERS_MODAL' };
 type ChangeProposalListViewAction = {
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
   mode: string,
@@ -82,6 +84,7 @@ export type State = {
   +selectedViewByStep: string,
   +markers: ?Object,
   +referer: ?string,
+  +showDetailLikersModal: ?string,
 };
 
 export const initialState: State = {
@@ -104,6 +107,7 @@ export const initialState: State = {
   selectedViewByStep: 'mosaic',
   markers: null,
   referer: null,
+  showDetailLikersModal: null,
 };
 
 export const loadMarkers = (stepId: Uuid, stepType: string): LoadMarkersAction => ({
@@ -169,6 +173,13 @@ export const changeFilter = (filter: string, value: string): ChangeFilterAction 
 export const changeProposalListView = (mode: string): ChangeProposalListViewAction => ({
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
   mode,
+});
+export const openDetailLikersModal = (id: string): OpenDetailLikersModalAction => ({
+  type: 'proposal/OPEN_DETAIL_LIKERS_MODAL',
+  id,
+});
+export const closeDetailLikersModal = (): CloseDetailLikersModalAction => ({
+  type: 'proposal/CLOSE_DETAIL_LIKERS_MODAL',
 });
 
 type RequestDeleteAction = { type: 'proposal/DELETE_REQUEST' };
@@ -349,6 +360,8 @@ export type ProposalAction =
   | CloseCreateFusionModalAction
   | OpenEditProposalModalAction
   | LoadMarkersSuccessAction
+  | OpenDetailLikersModalAction
+  | CloseDetailLikersModalAction
   | { type: 'proposal/POSTS_FETCH_FAILED', error: Error }
   | {
       type: 'proposal/FETCH_SUCCEEDED',
@@ -412,6 +425,10 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'proposal/CHANGE_PROPOSAL_LIST_VIEW': {
       return { ...state, selectedViewByStep: action.mode };
     }
+    case 'proposal/OPEN_DETAIL_LIKERS_MODAL':
+      return { ...state, showDetailLikersModal: action.id };
+    case 'proposal/CLOSE_DETAIL_LIKERS_MODAL':
+      return { ...state, showDetailLikersModal: null };
     default:
       return state;
   }

@@ -192,6 +192,14 @@
   }
 }
 
+/* ======================== List group flush & modal ============================*/
+.modal .list-group-flush {
+    padding: 5px 20px;
+    margin-bottom: 0;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
 /* ======================== Button ============================*/
 
 @each $button in $basic-btns {

@@ -3,3 +3,46 @@
 .badge-pill {
     border-radius: 10rem;
 }
+
+/* ======================== Button ============================*/
+.btn-md {
+    font-size: 16px;
+}
+
+/* ======================== Utilities Flex ============================*/
+
+.d-flex {
+    display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-around {
+    justify-content: space-around;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.align-self-center {
+    align-self: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
