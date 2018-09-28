@@ -59,6 +59,8 @@ export class ImageUpload extends React.Component<Props> {
     }
   };
 
+  _deleteCheckbox: ?React.Component<*>;
+
   uncheckDelete = () => {
     // $FlowFixMe
     const ref = this._deleteCheckbox;
@@ -160,8 +162,9 @@ export class ImageUpload extends React.Component<Props> {
                 id={`${id}_delete`}
                 name="image-uploader__delete"
                 onChange={this.onToggleDelete}
-                // $FlowFixMe
-                ref={c => (this._deleteCheckbox = c)}
+                ref={c => {
+                  this._deleteCheckbox = c;
+                }}
                 children={<FormattedMessage id="global.image_uploader.image.delete" />}
               />
             )}

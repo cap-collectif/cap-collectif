@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
@@ -12,7 +13,7 @@ import EditElement from '../components/Synthesis/Edit/EditElement';
 import Preview from '../components/Synthesis/View/Preview';
 import SynthesisBox from '../components/Synthesis/SynthesisBox';
 
-export default props => {
+export default (props: Object) => {
   const store = ReactOnRails.getStore('appStore');
 
   const redirectToDefaultInbox = (nextState, replace) => {

@@ -5,7 +5,6 @@ import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
-import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
 
 import component from '../components/Form/Field';
 
@@ -128,8 +127,8 @@ export const getValueFromResponse = (questionType: string, responseValue: string
 export const formatInitialResponsesValues = (
   questions: Questions,
   responses: ResponsesFromAPI,
-): ResponsesInReduxForm => {
-  return questions.map(question => {
+): ResponsesInReduxForm =>
+  questions.map(question => {
     const response = responses.filter(res => res && res.question.id === question.id)[0];
 
     // If we have a previous response format it
@@ -153,19 +152,15 @@ export const formatInitialResponsesValues = (
     }
     return { question: question.id, value: null };
   });
-};
 
-const formattedChoicesInField = field => {
-  return field.choices.map(choice => {
-    return {
-      id: choice.id,
-      label: choice.title,
-      description: choice.description,
-      color: choice.color,
-      image: choice.image,
-    };
-  });
-};
+const formattedChoicesInField = field =>
+  field.choices.map(choice => ({
+    id: choice.id,
+    label: choice.title,
+    description: choice.description,
+    color: choice.color,
+    image: choice.image,
+  }));
 
 export const getRequiredFieldIndicationStrategy = (fields: Questions) => {
   const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
@@ -227,14 +222,6 @@ export const renderResponses = ({
         const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
         switch (inputType) {
-          case 'section': {
-            return (
-              <div key={field.id}>
-                <TitleInvertContrast>{field.title}</TitleInvertContrast>
-                <div dangerouslySetInnerHTML={{ __html: field.description }} />
-              </div>
-            );
-          }
           case 'medias': {
             return (
               <ProposalPrivateField key={field.id} show={field.private}>

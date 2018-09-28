@@ -27,7 +27,6 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with map se
   >
     <i
       className="cap cap-android-menu"
-      onClick={[Function]}
     />
      
     <FormattedMessage
@@ -50,7 +49,6 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with map se
   >
     <i
       className="cap cap-th-large"
-      onClick={[Function]}
     />
      
     <FormattedMessage
@@ -73,7 +71,6 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with map se
   >
     <i
       className="cap cap-map-location"
-      onClick={[Function]}
     />
      
     <FormattedMessage
@@ -111,7 +108,6 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
   >
     <i
       className="cap cap-android-menu"
-      onClick={[Function]}
     />
      
     <FormattedMessage
@@ -134,7 +130,6 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
   >
     <i
       className="cap cap-th-large"
-      onClick={[Function]}
     />
      
     <FormattedMessage
@@ -157,7 +152,6 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button with mosaic
   >
     <i
       className="cap cap-map-location"
-      onClick={[Function]}
     />
      
     <FormattedMessage
@@ -195,7 +189,6 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button without map
   >
     <i
       className="cap cap-android-menu"
-      onClick={[Function]}
     />
      
     <FormattedMessage
@@ -218,7 +211,6 @@ exports[`<ProposalListToggleViewBtn /> should render a toggle button without map
   >
     <i
       className="cap cap-th-large"
-      onClick={[Function]}
     />
      
     <FormattedMessage

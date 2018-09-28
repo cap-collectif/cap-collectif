@@ -51,11 +51,10 @@ class OpinionTabs extends React.Component<Props> {
     return opinion.section && opinion.section.commentSystem;
   };
 
-  getArgumentsTrad = () => {
-    return this.getCommentSystem() === COMMENT_SYSTEM_BOTH
+  getArgumentsTrad = () =>
+    this.getCommentSystem() === COMMENT_SYSTEM_BOTH
       ? 'global.arguments'
       : 'global.simple_arguments';
-  };
 
   getDefaultKey = () => {
     const hash = window.location.hash;
@@ -72,20 +71,14 @@ class OpinionTabs extends React.Component<Props> {
           : null;
   };
 
-  isSourceable = () => {
-    return this.props.opinion.section && this.props.opinion.section.sourceable;
-  };
+  isSourceable = () => this.props.opinion.section && this.props.opinion.section.sourceable;
 
-  isFollowable = () => {
-    return this.props.opinion.project && this.props.opinion.project.opinionCanBeFollowed;
-  };
+  isFollowable = () =>
+    this.props.opinion.project && this.props.opinion.project.opinionCanBeFollowed;
 
-  isCommentable = () => {
-    return (
-      this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE ||
-      this.getCommentSystem() === COMMENT_SYSTEM_BOTH
-    );
-  };
+  isCommentable = () =>
+    this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE ||
+    this.getCommentSystem() === COMMENT_SYSTEM_BOTH;
 
   isVersionable = () => {
     const opinion = this.props.opinion;

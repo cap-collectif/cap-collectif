@@ -19,14 +19,13 @@ type Props = RelayProps & {
 };
 
 export class ProposalsUserVotesStep extends React.Component<Props> {
-  onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) => {
-    return UpdateProposalVotesMutation.commit({
+  onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) =>
+    UpdateProposalVotesMutation.commit({
       input: {
         step: this.props.step.id,
         votes: values.votes.map(v => ({ id: v.id, anonymous: !v.public })),
       },
     });
-  };
 
   render() {
     const { step, dirty, submitting, dispatch } = this.props;

@@ -43,12 +43,13 @@ class OpinionVotesModal extends React.Component<Props, State> {
 
     return (
       <span>
-        <span
+        <Button
+          bsStyle="link"
           id="opinion-votes-show-all"
           onClick={this.show}
           className="opinion__votes__more__link text-center">
           {`+${moreVotes}`}
-        </span>
+        </Button>
         <Modal
           animation={false}
           show={this.state.showModal}
@@ -72,12 +73,10 @@ class OpinionVotesModal extends React.Component<Props, State> {
                   .filter(Boolean)
                   .map(vote => vote.author)
                   .filter(Boolean)
-                  .map((author, index) => {
-                    return (
-                      /* $FlowFixMe */
-                      <UserBox key={index} user={author} className="opinion__votes__userbox" />
-                    );
-                  })}
+                  .map((author, index) => (
+                    /* $FlowFixMe */
+                    <UserBox key={index} user={author} className="opinion__votes__userbox" />
+                  ))}
             </Row>
             {relay.hasMore() && (
               <Button

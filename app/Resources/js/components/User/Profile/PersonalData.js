@@ -194,34 +194,32 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     this.props.dispatch(change(formName, target, null));
   };
 
-  popover = (target: string) => {
-    return (
-      <Popover
-        placement="top"
-        className="in"
-        id="delete-field"
-        title={<FormattedMessage id="are-you-sure-you-want-to-delete-this-field" />}>
-        <Button
-          onClick={() => {
-            this.deleteField(target);
-          }}
-          id="btn-confirm-delete-field"
-          bsStyle="danger"
-          className="right-bloc btn-block">
-          {<FormattedMessage id="btn_delete" />}
-        </Button>
-        <Button
-          onClick={() => {
-            this.refs[target].hide();
-          }}
-          id="btn-cancel-delete-field"
-          bsStyle="default"
-          className="right-block btn-block">
-          {<FormattedMessage id="global.no" />}
-        </Button>
-      </Popover>
-    );
-  };
+  popover = (target: string) => (
+    <Popover
+      placement="top"
+      className="in"
+      id="delete-field"
+      title={<FormattedMessage id="are-you-sure-you-want-to-delete-this-field" />}>
+      <Button
+        onClick={() => {
+          this.deleteField(target);
+        }}
+        id="btn-confirm-delete-field"
+        bsStyle="danger"
+        className="right-bloc btn-block">
+        {<FormattedMessage id="btn_delete" />}
+      </Button>
+      <Button
+        onClick={() => {
+          this.refs[target].hide();
+        }}
+        id="btn-cancel-delete-field"
+        bsStyle="default"
+        className="right-block btn-block">
+        {<FormattedMessage id="global.no" />}
+      </Button>
+    </Popover>
+  );
 
   render() {
     const {
@@ -602,9 +600,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
               <FormattedMessage id="data-export" />
             </h2>
             <div className="horizontal_field_with_border_top">
-              <label className="col-sm-3 control-label">
+              <span className="col-sm-3 control-label">
                 <FormattedMessage id="your-data" />
-              </label>
+              </span>
               <div className="col-sm-9">
                 <UserArchiveRequestButton viewer={viewer} />
                 {viewer.isArchiveReady && (

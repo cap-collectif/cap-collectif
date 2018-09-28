@@ -11,7 +11,6 @@ type Props = {
   reply: Object,
   show: boolean,
   onToggleModal: Function,
-  onEdit: Function,
 };
 
 type State = {

@@ -61,13 +61,13 @@ class FlashMessages extends React.Component<Props> {
       return (
         <div className="flashmessages">
           {errors &&
-            errors.map((message: string, index: number) => {
-              return this.renderMessage(index, message, 'warning');
-            })}
+            errors.map((message: string, index: number) =>
+              this.renderMessage(index, message, 'warning'),
+            )}
           {success &&
-            success.map((message: string, index: number) => {
-              return this.renderMessage(index, message, 'success');
-            })}
+            success.map((message: string, index: number) =>
+              this.renderMessage(index, message, 'success'),
+            )}
         </div>
       );
     }

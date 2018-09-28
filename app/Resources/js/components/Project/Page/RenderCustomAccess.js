@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Tooltip, OverlayTrigger, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserGroupModal from './UserGroupModal';
@@ -47,10 +47,10 @@ export class RenderCustomAccess extends React.Component<Props, State> {
     return (
       <div>
         <OverlayTrigger placement="top" overlay={tooltip}>
-          <span onClick={this.showModal}>
+          <Button bsStyle="link" onClick={this.showModal}>
             <i className={`cap ${lock} mr-1`} />
             <FormattedMessage id="restrictedaccess" />
-          </span>
+          </Button>
         </OverlayTrigger>
         <div>
           {/* $FlowFixMe */}

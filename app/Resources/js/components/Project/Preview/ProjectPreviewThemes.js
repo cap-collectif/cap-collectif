@@ -15,13 +15,11 @@ class ProjectPreviewThemes extends React.Component<Props> {
     if (features.themes && project.themes.length > 0) {
       return (
         <InlineList className="small excerpt">
-          {project.themes.map((theme, index) => {
-            return (
-              <li key={index}>
-                <a href={theme._links.show}>{theme.title}</a>
-              </li>
-            );
-          })}
+          {project.themes.map((theme, index) => (
+            <li key={index}>
+              <a href={theme._links.show}>{theme.title}</a>
+            </li>
+          ))}
         </InlineList>
       );
     }
@@ -29,8 +27,8 @@ class ProjectPreviewThemes extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
-  return { features: state.default.features };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  features: state.default.features,
+});
 
 export default connect(mapStateToProps)(ProjectPreviewThemes);

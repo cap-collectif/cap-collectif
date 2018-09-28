@@ -51,7 +51,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
             ref="filter"
             className="form-control pull-right"
             value={this.state.order}
-            onChange={() => this.updateSelectedValue()}>
+            onBlur={() => this.updateSelectedValue()}>
             <FormattedMessage id="global.filter_random">
               {message => <option value="random">{message}</option>}
             </FormattedMessage>
@@ -99,10 +99,10 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
                   .filter(Boolean)
                   .map(edge => edge.node)
                   .filter(Boolean)
-                  .map(version => {
+                  .map(version => (
                     // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
-                    return <OpinionVersion key={version.id} version={version} />;
-                  })}
+                    <OpinionVersion key={version.id} version={version} />
+                  ))}
             </ListGroup>
           </Panel>
         ) : null}

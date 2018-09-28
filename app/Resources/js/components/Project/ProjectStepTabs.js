@@ -1,5 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
+import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { type GlobalState } from '../../types';
@@ -7,6 +8,7 @@ import { type GlobalState } from '../../types';
 type Props = {
   steps: Array<Object>,
   currentStepId: ?string,
+  // eslint-disable-next-line react/no-unused-prop-types
   projectId: string,
 };
 
@@ -221,65 +223,61 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
           <div id="step-tabs-content" className="position-relative">
             {showArrowLeft && (
               <div className="step-tabs__tab-prev" id="step-tabs-tab-prev">
-                <a onClick={this.getTranslateLeft}>
+                <Button bsStyle="link" onClick={this.getTranslateLeft}>
                   <i className="cap-arrow-65" />
-                </a>
+                </Button>
               </div>
             )}
             {showArrowRight && (
               <div className="step-tabs__tab-next" id="step-tabs-tab-next">
-                <a onClick={this.getTranslateRight}>
+                <Button bsStyle="link" onClick={this.getTranslateRight}>
                   <i className="cap-arrow-66" />
-                </a>
+                </Button>
               </div>
             )}
             <div className="step-tabs__list" id="step-tabs-list">
               <ul className="nav" id="step-tabs-scroll-nav" style={{ transform: translation }}>
-                {steps
-                  .filter(step => {
-                    return step.enabled;
-                  })
-                  .map((step, key) => (
-                    <li className={this.getClass(step.id)} key={key}>
-                      <a href={step._links.show} className="d-flex">
-                        <div className="navbar__step-nb">
-                          <span>{key + 1}</span>
-                        </div>
+                {steps.filter(step => step.enabled).map((step, key) => (
+                  <li className={this.getClass(step.id)} key={key}>
+                    <a href={step._links.show} className="d-flex">
+                      <div className="navbar__step-nb">
+                        <span>{key + 1}</span>
+                      </div>
 
-                        <div className="navbar__step">
-                          <span className="navbar__step-title">
-                            <span className="navbar__step-nb_small">{key + 1}.</span>
-                            {step.label}
-                          </span>
-                          <p className="excerpt">
-                            {step.type !== 'presentation' && (
-                              <FormattedMessage id={`step.status.${step.status}`} />
-                            )}
-                          </p>
-                        </div>
-                      </a>
-                      <svg
-                        id="step-tabs-svg"
-                        height="80"
-                        width="21"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          <filter id="f1" x="0" y="0" width="200%" height="200%">
-                            <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
-                            <feColorMatrix
-                              result="matrixOut"
-                              in="offOut"
-                              type="matrix"
-                              values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                            />
-                            <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1" />
-                            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-                          </filter>
-                        </defs>
-                        <polygon points="0,0, 0,80,20 40" filter="url(#f1)" />
-                      </svg>
-                    </li>
-                  ))}
+                      <div className="navbar__step">
+                        <span className="navbar__step-title">
+                          <span className="navbar__step-nb_small">{key + 1}.</span>
+                          {step.label}
+                        </span>
+                        <p className="excerpt">
+                          {step.type !== 'presentation' && (
+                            <FormattedMessage id={`step.status.${step.status}`} />
+                          )}
+                        </p>
+                      </div>
+                    </a>
+                    <svg
+                      id="step-tabs-svg"
+                      height="80"
+                      width="21"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <filter id="f1" x="0" y="0" width="200%" height="200%">
+                          <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
+                          <feColorMatrix
+                            result="matrixOut"
+                            in="offOut"
+                            type="matrix"
+                            values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
+                          />
+                          <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1" />
+                          <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                        </filter>
+                      </defs>
+                      <polygon points="0,0, 0,80,20 40" filter="url(#f1)" />
+                    </svg>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

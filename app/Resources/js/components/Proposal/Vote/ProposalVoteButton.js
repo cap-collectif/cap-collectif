@@ -38,6 +38,18 @@ export class ProposalVoteButton extends React.Component<Props, State> {
   state = { isHovering: false };
   target: null;
 
+  handleHovering = () => {
+    if (this.props.proposal.viewerHasVote) {
+      this.setState({ isHovering: true });
+    }
+  };
+
+  handleBlur = () => {
+    if (this.props.proposal.viewerHasVote) {
+      this.setState({ isHovering: false });
+    }
+  };
+
   render() {
     const { dispatch, step, user, proposal, disabled, isDeleting, id } = this.props;
     const classes = classNames({ disabled });
@@ -74,16 +86,10 @@ export class ProposalVoteButton extends React.Component<Props, State> {
           this.target = button;
         }}
         className={`mr-15 proposal__button__vote ${style} ${classes} `}
-        onMouseOver={() => {
-          if (proposal.viewerHasVote) {
-            this.setState({ isHovering: true });
-          }
-        }}
-        onMouseOut={() => {
-          if (proposal.viewerHasVote) {
-            this.setState({ isHovering: false });
-          }
-        }}
+        onFocus={this.handleHovering}
+        onMouseOver={this.handleHovering}
+        onBlur={this.handleBlur}
+        onMouseOut={this.handleBlur}
         onClick={disabled ? null : action}
         active={proposal.viewerHasVote}
         disabled={disabled || isDeleting}>

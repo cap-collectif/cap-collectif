@@ -94,8 +94,14 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
               }
             />
              
-            <a
-              className="btn btn-sm btn-dark-gray btn--outline"
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsSize="sm"
+              bsStyle="link"
+              className="btn-dark-gray btn--outline"
+              disabled={false}
               onClick={[Function]}
             >
               <i
@@ -106,7 +112,7 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
                 id="global.answer"
                 values={Object {}}
               />
-            </a>
+            </Button>
              
             <ForwardRef(Relay(Connect(CommentReportButton)))
               comment={
@@ -258,8 +264,14 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
               }
             />
              
-            <a
-              className="btn btn-sm btn-dark-gray btn--outline"
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsSize="sm"
+              bsStyle="link"
+              className="btn-dark-gray btn--outline"
+              disabled={false}
               onClick={[Function]}
             >
               <i
@@ -270,7 +282,7 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
                 id="global.answer"
                 values={Object {}}
               />
-            </a>
+            </Button>
              
             <ForwardRef(Relay(Connect(CommentReportButton)))
               comment={
@@ -422,8 +434,14 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
               }
             />
              
-            <a
-              className="btn btn-sm btn-dark-gray btn--outline"
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsSize="sm"
+              bsStyle="link"
+              className="btn-dark-gray btn--outline"
+              disabled={false}
               onClick={[Function]}
             >
               <i
@@ -434,7 +452,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
                 id="global.answer"
                 values={Object {}}
               />
-            </a>
+            </Button>
              
             <ForwardRef(Relay(Connect(CommentReportButton)))
               comment={
@@ -601,8 +619,14 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
               }
             />
              
-            <a
-              className="btn btn-sm btn-dark-gray btn--outline"
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsSize="sm"
+              bsStyle="link"
+              className="btn-dark-gray btn--outline"
+              disabled={false}
               onClick={[Function]}
             >
               <i
@@ -613,7 +637,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
                 id="global.answer"
                 values={Object {}}
               />
-            </a>
+            </Button>
              
             <ForwardRef(Relay(Connect(CommentReportButton)))
               comment={
@@ -790,8 +814,14 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
               }
             />
              
-            <a
-              className="btn btn-sm btn-dark-gray btn--outline"
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsSize="sm"
+              bsStyle="link"
+              className="btn-dark-gray btn--outline"
+              disabled={false}
               onClick={[Function]}
             >
               <i
@@ -802,7 +832,7 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
                 id="global.answer"
                 values={Object {}}
               />
-            </a>
+            </Button>
              
             <ForwardRef(Relay(Connect(CommentReportButton)))
               comment={
@@ -960,8 +990,14 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
               }
             />
              
-            <a
-              className="btn btn-sm btn-dark-gray btn--outline"
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsSize="sm"
+              bsStyle="link"
+              className="btn-dark-gray btn--outline"
+              disabled={false}
               onClick={[Function]}
             >
               <i
@@ -972,7 +1008,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
                 id="global.answer"
                 values={Object {}}
               />
-            </a>
+            </Button>
              
             <ForwardRef(Relay(Connect(CommentReportButton)))
               comment={

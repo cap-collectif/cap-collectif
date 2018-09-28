@@ -1,15 +1,9 @@
 import Fetcher from '../services/Fetcher';
 
 export default {
-  update: data => {
-    return Fetcher.put('/users/me', data);
-  },
+  update: data => Fetcher.put('/users/me', data),
 
-  sendConfirmSms: () => {
-    return Fetcher.post('/send-sms-confirmation');
-  },
+  sendConfirmSms: () => Fetcher.post('/send-sms-confirmation'),
 
-  sendSmsCode: data => {
-    return Fetcher.post('/sms-confirmation', data);
-  },
+  sendSmsCode: data => Fetcher.post('/sms-confirmation', data),
 };

@@ -8,9 +8,6 @@ type Props = {
   label: string,
   roledescription?: string,
   disabled: boolean,
-  error: any,
-  labelClassName?: string,
-  inputClassName?: string,
   id: string,
   labelSide: 'RIGHT' | 'LEFT',
 };

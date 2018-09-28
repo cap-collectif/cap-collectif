@@ -193,9 +193,9 @@ class SynthesisElementStore extends BaseStore {
         this.emitChange();
         break;
       case DISMISS_MESSAGE:
-        this._messages[action.type] = this._messages[action.type].filter(message => {
-          return message !== action.message;
-        });
+        this._messages[action.type] = this._messages[action.type].filter(
+          message => message !== action.message,
+        );
         this.emitChange();
         break;
       default:

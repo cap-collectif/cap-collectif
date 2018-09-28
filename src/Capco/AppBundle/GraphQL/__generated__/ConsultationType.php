@@ -28,7 +28,7 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The ID of the step',
+                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -220,6 +220,7 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
+                            'defaultValue' => 30,
                         ],
                         [
                             'name' => 'before',
