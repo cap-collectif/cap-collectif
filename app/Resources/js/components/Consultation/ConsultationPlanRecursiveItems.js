@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import type { Dispatch, GlobalState } from '../../types';
 import type { ConsultationPlanRecursiveItems_consultation } from './__generated__/ConsultationPlanRecursiveItems_consultation.graphql';
@@ -18,6 +18,7 @@ type Props = {
   openPlan: Function,
   showConsultationPlan: boolean,
   scrollSpy: (test: boolean) => {},
+  intl: IntlShape,
 };
 
 export class ConsultationPlanRecursiveItems extends React.Component<Props> {
@@ -37,6 +38,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
       showConsultationPlan,
       stepId,
       scrollSpy,
+      intl,
     } = this.props;
 
     if (showConsultationPlan) {
@@ -50,6 +52,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
             <Button
               bsStyle="link"
               className="p-0 btn-md"
+              aria-label={intl.formatMessage({ id: 'close-the-plan' })}
               onClick={() => {
                 closePlan(stepId);
               }}>
@@ -84,6 +87,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
         <Button
           bsStyle="link"
           className="p-0 btn-md"
+          aria-label={intl.formatMessage({ id: 'open-the-plan' })}
           onClick={() => {
             openPlan(stepId);
             scrollSpy(true);
@@ -132,7 +136,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 const container = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ConsultationPlanRecursiveItems);
+)(injectIntl(ConsultationPlanRecursiveItems));
 
 export default createFragmentContainer(
   container,

@@ -6,6 +6,7 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty close plan 1`] = `
 >
   <Button
     active={false}
+    aria-label="open-the-plan"
     block={false}
     bsClass="btn"
     bsStyle="link"
@@ -43,6 +44,7 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty open plan 1`] = `
     </p>
     <Button
       active={false}
+      aria-label="close-the-plan"
       block={false}
       bsClass="btn"
       bsStyle="link"

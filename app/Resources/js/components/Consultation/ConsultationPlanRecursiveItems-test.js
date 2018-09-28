@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ConsultationPlanRecursiveItems } from './ConsultationPlanRecursiveItems';
-import { $refType, $fragmentRefs } from '../../mocks';
+import { $refType, $fragmentRefs, intlMock } from '../../mocks';
 
 describe('<ConsultationPlanRecursiveItems />', () => {
   const props = {
@@ -16,6 +16,7 @@ describe('<ConsultationPlanRecursiveItems />', () => {
     openPlan: jest.fn(),
     showConsultationPlan: true,
     scrollSpy: jest.fn(),
+    intl: intlMock,
   };
 
   it('renders correcty open plan', () => {
