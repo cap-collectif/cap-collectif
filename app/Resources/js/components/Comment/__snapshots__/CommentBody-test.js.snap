@@ -25,29 +25,3 @@ exports[`<CommentBody /> should render correctly when trashed with body 1`] = `
   componentRef={null}
 />
 `;
-
-exports[`<CommentBody /> should render correctly when trashed with no body 1`] = `
-<ContainerConstructor
-  comment={
-    Object {
-      "$refType": null,
-      "body": null,
-      "trashed": true,
-    }
-  }
-  componentRef={null}
-/>
-`;
-
-exports[`<CommentBody /> should render correctly with no body 1`] = `
-<ContainerConstructor
-  comment={
-    Object {
-      "$refType": null,
-      "body": null,
-      "trashed": false,
-    }
-  }
-  componentRef={null}
-/>
-`;
