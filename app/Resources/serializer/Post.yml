@@ -13,10 +13,6 @@ Capco\AppBundle\Entity\Post:
       expose: true
       type: string
       groups: [Posts, PostDetails, Elasticsearch]
-    body:
-      expose: true
-      type: string
-      groups: [PostDetails, Elasticsearch]
     createdAt:
       expose: true
       type: DateTime
@@ -43,3 +39,8 @@ Capco\AppBundle\Entity\Post:
       serialized_name: abstract
       type: string
       groups: [Posts, Elasticsearch]
+    getBodyText:
+      expose: true
+      type: string
+      serialized_name: body
+      groups: [Proposals, Elasticsearch]

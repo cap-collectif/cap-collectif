@@ -20,7 +20,7 @@ class UserVotesResolver
     public function __invoke(User $user, Argument $args): Connection
     {
         $paginator = new Paginator(function (?int $offset, ?int $limit) use ($user) {
-            return $this->votesRepo->findAllByAuthor($user, $limit, $offset);
+            return $this->votesRepo->findAllByAuthor($user);
         });
 
         $totalCount = $this->votesRepo->countAllByAuthor($user);

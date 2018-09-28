@@ -2,27 +2,32 @@ ProposalVote:
   type: object
   inherits:
     - Publishable
-    - PrivatableVote
   config:
     interfaces:
-      - Vote
       - Publishable
-      - PrivatableVote
     fields:
+      id:
+        type: 'ID!'
+      author:
+        type: 'User'
+        description: 'The author of the contribution. If null, the vote is anonymous.'
+        resolve: '@=value.isPrivate() ? null : value.getUser()'
       anonymous:
         type: 'Boolean!'
         description: 'Is the vote anonymous ?'
         resolve: '@=value.isPrivate()'
+      createdAt:
+        type: 'DateTime!'
+        description: 'Date of vote.'
       proposal:
         type: 'Proposal!'
         description: 'Return the proposal.'
       step:
         type: 'ProposalStep!'
         description: 'Return the step.'
-      author:
-        type: 'User'
-        description: 'The author of the contribution. If null, the vote is anonymous.'
-        resolve: '@=value.isPrivate() ? null : value.getUser()'
+      related:
+        type: 'Contribution'
+        description: 'Return the related contribution if the contribution is related to another.'
       kind:
         type: 'String!'
         description: "Returns 'proposalVote'."

@@ -20,7 +20,7 @@ final class YesNoPairedVoteType extends InterfaceType implements GeneratedTypeIn
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'YesNoPairedVote',
-            'description' => 'Entities that can be published.',
+            'description' => 'Fetches an object given its ID',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [
@@ -29,56 +29,6 @@ final class YesNoPairedVoteType extends InterfaceType implements GeneratedTypeIn
                     ],
                     'resolve' => null,
                     'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'createdAt' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Date of vote.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'author' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('User'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposition_vote_author", array(0 => $value)]);
-                    },
-                    'description' => 'The author of the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'related' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The contribution that was voted.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'kind' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Returns Type of vote',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -141,8 +91,44 @@ final class YesNoPairedVoteType extends InterfaceType implements GeneratedTypeIn
                     'public' => null,
                     'access' => null,
                 ],
+                'author' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('User'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The author of the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'value' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('YesNoPairedVoteValue')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'createdAt' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Date of vote.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'related' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
                     'args' => [
                     ],
                     'resolve' => null,

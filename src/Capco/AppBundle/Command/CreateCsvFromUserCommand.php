@@ -555,9 +555,7 @@ EOF;
               url
             }
             createdAt
-            ... on PrivatableVote {
-                private
-            }
+            private
           }
         }
       }
@@ -619,7 +617,7 @@ EOF;
         authorName
         description
         contentType
-        size
+        size 
         url
         providerReference
       }
@@ -730,12 +728,12 @@ EOF;
             ... on Proposal {
               url
               title
-              bodyText
+              bodyText              
               formattedAddress
               createdAt
               updatedAt
               trashedAt
-              trashedReason
+              trashedReason            
             }
           }
         }
