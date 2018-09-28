@@ -319,7 +319,6 @@ svg.avatar-group {
 
     &_close {
         position: absolute;
-        text-transform: uppercase;
         left: 15px;
 
         .cap-android-menu {
@@ -329,6 +328,7 @@ svg.avatar-group {
 
         .btn-link {
             text-decoration: none;
+            text-transform: uppercase;
         }
     }
 
@@ -355,7 +355,6 @@ svg.avatar-group {
             left: inherit;
 
             i {
-                line-height: normal;
                 right: 0;
             }
 
@@ -369,6 +368,10 @@ svg.avatar-group {
                     color: $white;
                 }
             }
+        }
+
+        i {
+            line-height: normal;
         }
 
         .stacked-nav__list {

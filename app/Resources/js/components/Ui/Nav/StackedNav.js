@@ -99,13 +99,9 @@ const Container = styled.div.attrs({
     background-color: #ffffff;
 
     .stacked-nav__header {
-      padding: 10px 15px;
+      padding: 5px 15px 10px;
       color: #ffffff;
       text-transform: capitalize;
-
-      .cap-android-menu {
-        display: none;
-      }
 
       .btn-link,
       .btn-link:hover {
