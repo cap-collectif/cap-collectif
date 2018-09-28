@@ -38,15 +38,23 @@ exports[`<PreviewMedia /> should render correctly 1`] = `
         image
       </a>
        
-      <i
-        className="glyphicon glyphicon-remove"
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="link"
+        disabled={false}
         onClick={[Function]}
-        style={
-          Object {
-            "cursor": "pointer",
+      >
+        <i
+          className="glyphicon glyphicon-remove"
+          style={
+            Object {
+              "cursor": "pointer",
+            }
           }
-        }
-      />
+        />
+      </Button>
     </Label>
   </Col>
 </div>

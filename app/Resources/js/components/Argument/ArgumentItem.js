@@ -1,11 +1,11 @@
 // @flow
-import React from 'react';
-import { FormattedDate } from 'react-intl';
+import * as React from 'react';
+import { FormattedDate, FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import moment from 'moment';
 import Linkify from 'react-linkify';
-import { ListGroupItem } from 'react-bootstrap';
+import { Label, ListGroupItem } from 'react-bootstrap';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
@@ -14,14 +14,20 @@ import type { ArgumentItem_argument } from './__generated__/ArgumentItem_argumen
 
 type Props = {
   argument: ArgumentItem_argument,
+  isProfile: boolean,
 };
 
-class ArgumentItem extends React.Component<Props> {
+export class ArgumentItem extends React.Component<Props> {
+  static defaultProps = {
+    isProfile: false,
+  };
   renderDate = () => {
     const argument = this.props.argument;
-    if (!Modernizr.intl) {
+
+    if (typeof Modernizr === 'undefined' || !Modernizr.intl) {
       return null;
     }
+
     return (
       <p className="excerpt opinion__date">
         <FormattedDate
@@ -37,12 +43,17 @@ class ArgumentItem extends React.Component<Props> {
   };
 
   render() {
-    const { argument } = this.props;
+    const { argument, isProfile } = this.props;
     const classes = classNames({
       opinion: true,
       'opinion--argument': true,
       'bg-vip': argument.author && argument.author.vip,
     });
+
+    const labelStyle = argument.type === 'FOR' ? 'success' : 'danger';
+    const labelValueTranslateId =
+      argument.type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against';
+
     return (
       <ListGroupItem className={classes} id={`arg-${argument.id}`}>
         <div className="opinion__body">
@@ -50,10 +61,23 @@ class ArgumentItem extends React.Component<Props> {
           <div className="opinion__data">
             <p className="h5 opinion__user">
               <UserLink user={argument.author} />
+              {isProfile && (
+                <Label bsStyle={labelStyle} className={'label--right'}>
+                  <FormattedMessage id={labelValueTranslateId} />
+                </Label>
+              )}
             </p>
             {this.renderDate()}
-            {/* $FlowFixMe */}
             <UnpublishedLabel publishable={argument} />
+            {isProfile && (
+              <p>
+                <FormattedMessage id={'admin.fields.opinion.link'} />
+                {' : '}
+                <a href={argument.related ? argument.related.url : ''}>
+                  {argument.related ? argument.related.title : ''}
+                </a>
+              </p>
+            )}
           </div>
           <p
             className="opinion__text"
@@ -93,6 +117,17 @@ export default createFragmentContainer(
         }
       }
       body
+      type
+      related {
+        id
+        url
+        ... on Opinion {
+          title
+        }
+        ... on Version {
+          title
+        }
+      }
     }
   `,
 );

@@ -2,8 +2,8 @@
 namespace Capco\AppBundle\GraphQL;
 
 use Capco\AppBundle\Utils\Arr;
-use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
+use Overblog\GraphQLBundle\Request\Executor;
 
 class ConnectionTraversor
 {
@@ -38,9 +38,6 @@ class ConnectionTraversor
                             'query' => $renewalQuery($pageInfo),
                             'variables' => [],
                         ])->toArray();
-                        if (isset($data['errors'])) {
-                            $this->logger->warning(json_encode($data['errors']));
-                        }
                     }
                 }
             }

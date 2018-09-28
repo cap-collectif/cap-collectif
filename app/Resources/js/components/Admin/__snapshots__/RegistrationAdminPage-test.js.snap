@@ -23,14 +23,23 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       componentClass="div"
       xs={11}
     >
-      Permettre l'inscription
+      <FormattedMessage
+        id="allow-registration"
+        values={Object {}}
+      />
     </Col>
   </div>
   <h4>
-    Réseaux sociaux
+    <FormattedMessage
+      id="social-medias"
+      values={Object {}}
+    />
   </h4>
   <p>
-    Permettre l'inscription via :
+    <FormattedMessage
+      id="allow-registration-with"
+      values={Object {}}
+    />
   </p>
   <div
     className="row"
@@ -87,7 +96,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     </Col>
   </div>
   <h4>
-    Autorisation
+    <FormattedMessage
+      id="allow"
+      values={Object {}}
+    />
   </h4>
   <div
     className="row"
@@ -113,11 +125,17 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       componentClass="div"
       xs={11}
     >
-      Limiter l'inscription à certains noms de domaine
+      <FormattedMessage
+        id="limit-registration-to-some-domains"
+        values={Object {}}
+      />
     </Col>
   </div>
   <h4>
-    Données recueillies
+    <FormattedMessage
+      id="received-data"
+      values={Object {}}
+    />
   </h4>
   <div
     className="row"
@@ -143,7 +161,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       componentClass="div"
       xs={11}
     >
-      Nom ou pseudonyme
+      <FormattedMessage
+        id="user.register.username.username"
+        values={Object {}}
+      />
     </Col>
   </div>
   <div
@@ -170,7 +191,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       componentClass="div"
       xs={11}
     >
-      Mot de passe
+      <FormattedMessage
+        id="form.new_password"
+        values={Object {}}
+      />
     </Col>
   </div>
   <div
@@ -197,7 +221,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       componentClass="div"
       xs={11}
     >
-      Code postal
+      <FormattedMessage
+        id="user.register.zipcode"
+        values={Object {}}
+      />
     </Col>
   </div>
   <div
@@ -224,7 +251,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       componentClass="div"
       xs={11}
     >
-      Statut
+      <FormattedMessage
+        id="registration.type"
+        values={Object {}}
+      />
     </Col>
   </div>
   <Well
@@ -238,7 +268,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       }
     >
       <strong>
-        Champ(s) supplémentaire(s)
+        <FormattedMessage
+          id="more-fields"
+          values={Object {}}
+        />
       </strong>
     </p>
     <Button
@@ -255,7 +288,10 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         }
       }
     >
-      Ajouter
+      <FormattedMessage
+        id="link_action_create"
+        values={Object {}}
+      />
     </Button>
   </Well>
   <div
@@ -334,11 +370,17 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       componentClass="div"
       xs={11}
     >
-      Je ne suis pas un robot
+      <FormattedMessage
+        id="i-am-not-a-bot"
+        values={Object {}}
+      />
     </Col>
   </div>
   <h3>
-    Communication
+    <FormattedMessage
+      id="communication"
+      values={Object {}}
+    />
   </h3>
   <Connect(ReduxForm) />
 </div>
@@ -367,14 +409,23 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       componentClass="div"
       xs={11}
     >
-      Permettre l'inscription
+      <FormattedMessage
+        id="allow-registration"
+        values={Object {}}
+      />
     </Col>
   </div>
   <h4>
-    Réseaux sociaux
+    <FormattedMessage
+      id="social-medias"
+      values={Object {}}
+    />
   </h4>
   <p>
-    Permettre l'inscription via :
+    <FormattedMessage
+      id="allow-registration-with"
+      values={Object {}}
+    />
   </p>
   <div
     className="row"
@@ -431,7 +482,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     </Col>
   </div>
   <h4>
-    Autorisation
+    <FormattedMessage
+      id="allow"
+      values={Object {}}
+    />
   </h4>
   <div
     className="row"
@@ -457,11 +511,17 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       componentClass="div"
       xs={11}
     >
-      Limiter l'inscription à certains noms de domaine
+      <FormattedMessage
+        id="limit-registration-to-some-domains"
+        values={Object {}}
+      />
     </Col>
   </div>
   <h4>
-    Données recueillies
+    <FormattedMessage
+      id="received-data"
+      values={Object {}}
+    />
   </h4>
   <div
     className="row"
@@ -487,7 +547,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       componentClass="div"
       xs={11}
     >
-      Nom ou pseudonyme
+      <FormattedMessage
+        id="user.register.username.username"
+        values={Object {}}
+      />
     </Col>
   </div>
   <div
@@ -514,7 +577,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       componentClass="div"
       xs={11}
     >
-      Mot de passe
+      <FormattedMessage
+        id="form.new_password"
+        values={Object {}}
+      />
     </Col>
   </div>
   <div
@@ -541,7 +607,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       componentClass="div"
       xs={11}
     >
-      Code postal
+      <FormattedMessage
+        id="user.register.zipcode"
+        values={Object {}}
+      />
     </Col>
   </div>
   <div
@@ -568,7 +637,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       componentClass="div"
       xs={11}
     >
-      Statut
+      <FormattedMessage
+        id="registration.type"
+        values={Object {}}
+      />
     </Col>
   </div>
   <Well
@@ -589,7 +661,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         Cette section est modifiable uniquement par votre administrateur cap-collectif.
       </Alert>
       <strong>
-        Champ(s) supplémentaire(s)
+        <FormattedMessage
+          id="more-fields"
+          values={Object {}}
+        />
       </strong>
     </p>
     <Button
@@ -606,7 +681,10 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         }
       }
     >
-      Ajouter
+      <FormattedMessage
+        id="link_action_create"
+        values={Object {}}
+      />
     </Button>
   </Well>
   <div
@@ -685,11 +763,17 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       componentClass="div"
       xs={11}
     >
-      Je ne suis pas un robot
+      <FormattedMessage
+        id="i-am-not-a-bot"
+        values={Object {}}
+      />
     </Col>
   </div>
   <h3>
-    Communication
+    <FormattedMessage
+      id="communication"
+      values={Object {}}
+    />
   </h3>
   <Connect(ReduxForm) />
 </div>

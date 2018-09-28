@@ -1,26 +1,14 @@
 OpinionVote:
   type: object
   inherits:
+    - YesNoPairedVote
     - Publishable
   config:
     interfaces:
-      - Publishable
       - YesNoPairedVote
+      - Publishable
+      - Vote
     fields:
-      id:
-        builder: 'Relay::GlobalId'
-      author:
-        type: 'User'
-        description: 'The author of the contribution. If null, account has been deleted.'
-        resolve: "@=resolver('proposition_vote_author', [value])"
-      value:
-        type: 'YesNoPairedVoteValue!'
-      createdAt:
-        type: 'DateTime!'
-        description: 'Date of vote.'
-      related:
-        type: 'Contribution'
-        description: 'Return the related contribution if the contribution is related to another.'
       kind:
         type: 'String!'
         description: "Returns 'opinionVote'."

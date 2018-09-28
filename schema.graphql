@@ -349,9 +349,21 @@ enum ArgumentValue {
 }
 
 # Entities that can be published.
-type ArgumentVote implements Publishable {
+type ArgumentVote implements Vote & Publishable {
   # The ID of an object
   id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # Return the related contribution if the contribution is related to another.
+  related: Argument
+
+  # Returns Type of vote
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -364,18 +376,6 @@ type ArgumentVote implements Publishable {
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
-
-  # The author of the contribution. If null, account has been deleted.
-  author: User
-
-  # Date of vote.
-  createdAt: DateTime!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Argument
-
-  # Returns 'argumentVote'.
-  kind: String!
 }
 
 # A connection to a list of items.
@@ -785,7 +785,7 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
 
   # The reason the moderator trashed the contribution.
   trashedReason: String
-  body: String
+  body: String!
   createdAt: DateTime!
   updatedAt: DateTime
   author: User
@@ -854,9 +854,21 @@ enum CommentPublicationStatus {
 }
 
 # Entities that can be published.
-type CommentVote implements Node & Publishable {
+type CommentVote implements Node & Vote & Publishable {
   # The ID of an object
   id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns 'commentVote'.
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -869,16 +881,7 @@ type CommentVote implements Node & Publishable {
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
-
-  # Date of vote.
-  createdAt: DateTime
-
-  # The author of the contribution.
-  author: User!
   contribution: Comment!
-
-  # Returns 'commentVote'.
-  kind: String!
 }
 
 # A connection to a list of items.
@@ -952,7 +955,7 @@ type Consultation implements Node & Step {
   sections: [Section]
 
   # A list of contributor associated with the consultation.
-  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+  contributors(after: String, first: Int = 30, before: String, last: Int): UserConnection!
   viewerOpinionsUnpublished(after: String, first: Int, before: String, last: Int): OpinionConnection
   contributionConnection(
     after: String
@@ -1923,9 +1926,21 @@ type OpinionModal {
 union OpinionOrVersion = Opinion | Version
 
 # Entities that can be published.
-type OpinionVote implements Publishable & YesNoPairedVote {
+type OpinionVote implements YesNoPairedVote & Publishable & Vote {
   # The ID of an object
   id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns 'opinionVote'.
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -1938,19 +1953,7 @@ type OpinionVote implements Publishable & YesNoPairedVote {
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
-
-  # The author of the contribution. If null, account has been deleted.
-  author: User
   value: YesNoPairedVoteValue!
-
-  # Date of vote.
-  createdAt: DateTime!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # Returns 'opinionVote'.
-  kind: String!
 }
 
 # Possible directions in which to order a list of items when provided an orderBy argument.
@@ -2087,6 +2090,39 @@ type PresentationStep implements Step {
 
   # The url of the step
   url: String!
+}
+
+# Entities that can be published.
+interface PrivatableVote {
+  # The ID of an object
+  id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns Type of vote
+  kind: String!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # Anonymous or not.
+  private: Boolean
 }
 
 # A budget contribution
@@ -2583,9 +2619,24 @@ enum ProposalStepVoteType {
 }
 
 # Entities that can be published.
-type ProposalVote implements Publishable {
+type ProposalVote implements Vote & Publishable & PrivatableVote {
+  # Anonymous or not.
+  private: Boolean
+
   # The ID of an object
   id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution. If null, the vote is anonymous.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns 'proposalVote'.
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -2599,26 +2650,14 @@ type ProposalVote implements Publishable {
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
 
-  # The author of the contribution. If null, the vote is anonymous.
-  author: User
-
   # Is the vote anonymous ?
   anonymous: Boolean!
-
-  # Date of vote.
-  createdAt: DateTime!
 
   # Return the proposal.
   proposal: Proposal!
 
   # Return the step.
   step: ProposalStep!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # Returns 'proposalVote'.
-  kind: String!
 }
 
 # A connection to a list of items.
@@ -2798,7 +2837,6 @@ enum QuestionTypeValue {
   ranking
   medias
   button
-  section
 }
 
 # Fetches an object given its ID
@@ -3216,22 +3254,6 @@ type SectionAppendixType {
   title: String
 }
 
-# A section is just a title in a quiz without any possible answer.
-type SectionQuestion implements Question {
-  id: ID!
-  title: String!
-  type: QuestionTypeValue!
-  private: Boolean!
-  required: Boolean!
-  helpText: String
-  description: String
-  kind: String!
-  slug: String!
-
-  # Return users who answered the question
-  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
-}
-
 input SelectProposalInput {
   # The step where the proposal is selected
   stepId: String!
@@ -3477,9 +3499,21 @@ enum SourceOrderField {
 }
 
 # Entities that can be published.
-type SourceVote implements Publishable {
+type SourceVote implements Vote & Publishable {
   # The ID of an object
   id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns 'sourceVote'.
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -3492,18 +3526,6 @@ type SourceVote implements Publishable {
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
-
-  # The author of the contribution. If null, account has been deleted.
-  author: User
-
-  # Date of vote.
-  createdAt: DateTime!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Source
-
-  # Returns 'sourceVote'.
-  kind: String!
 }
 
 # A connection to a list of items.
@@ -4104,7 +4126,7 @@ type User implements Node {
   medias: [Media]!
 
   # Get all votes of the user.
-  votes(after: String, first: Int, before: String, last: Int): VoteConnection!
+  votes(after: String, first: Int = 100000, before: String, last: Int): VoteConnection!
 
   # Get all groups where the user is.
   groups(after: String, first: Int, before: String, last: Int): GroupConnection!
@@ -4147,6 +4169,9 @@ type User implements Node {
 
   # The user's email was confirmed at date
   emailConfirmationSentAt: DateTime
+
+  # The arguments created by user.
+  arguments(after: String, first: Int, before: String, last: Int): ArgumentConnection!
 }
 
 # A connection to a list of items.
@@ -4380,9 +4405,21 @@ enum VersionOrderField {
 }
 
 # Entities that can be published.
-type VersionVote implements Publishable & YesNoPairedVote {
+type VersionVote implements YesNoPairedVote & Publishable & Vote {
   # The ID of an object
   id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns 'vote'.
+  kind: String!
 
   # `true` if the object is published.
   published: Boolean!
@@ -4395,38 +4432,23 @@ type VersionVote implements Publishable & YesNoPairedVote {
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
-
-  # The author of the contribution.
-  author: User
   value: YesNoPairedVoteValue!
-
-  # Date of vote.
-  createdAt: DateTime!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # Returns 'vote'.
-  kind: String!
 }
 
-type Vote {
+interface Vote {
   id: ID!
 
   # Date of vote.
   createdAt: DateTime!
 
-  # Returns Type of vote
-  kind: String!
-
   # The author of the contribution.
-  author: User!
+  author: User
 
   # The contribution that was voted.
   related: Contribution
 
-  # Update the vote privacy.
-  private: Boolean
+  # Returns Type of vote
+  kind: String!
 }
 
 # A connection to a list of items.
@@ -4475,6 +4497,18 @@ interface YesNoPairedVote {
   # The ID of an object
   id: ID!
 
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns Type of vote
+  kind: String!
+
   # `true` if the object is published.
   published: Boolean!
 
@@ -4486,14 +4520,7 @@ interface YesNoPairedVote {
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
-
-  # The author of the contribution.
-  author: User
   value: YesNoPairedVoteValue!
-
-  # Date of vote.
-  createdAt: DateTime!
-  related: Contribution
 }
 
 # A connection to a list of items.

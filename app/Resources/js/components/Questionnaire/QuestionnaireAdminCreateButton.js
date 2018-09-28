@@ -20,11 +20,10 @@ const validate = (values: Object) => {
   return errors;
 };
 
-const onSubmit = values => {
-  return CreateQuestionnaireMutation.commit({ input: values }).then(() => {
+const onSubmit = values =>
+  CreateQuestionnaireMutation.commit({ input: values }).then(() => {
     window.location.reload();
   });
-};
 
 type Props = {
   submitting: boolean,

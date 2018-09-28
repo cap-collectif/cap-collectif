@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentBody /> should render correctly 1`] = `
+<ContainerConstructor
+  comment={
+    Object {
+      "$refType": null,
+      "body": "lol",
+      "trashed": false,
+    }
+  }
+  componentRef={null}
+/>
+`;
+
+exports[`<CommentBody /> should render correctly when trashed with body 1`] = `
+<ContainerConstructor
+  comment={
+    Object {
+      "$refType": null,
+      "body": "lol",
+      "trashed": true,
+    }
+  }
+  componentRef={null}
+/>
+`;

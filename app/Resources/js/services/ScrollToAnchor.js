@@ -1,11 +1,14 @@
-export const scrollToAnchor = (fallback: String) => {
+// @flow
+export const scrollToAnchor = (fallback?: string) => {
   const hash = typeof window === 'undefined' ? null : window.location.hash;
   if (hash) {
     const element = document.querySelector(hash)
-      ? document.querySelector(hash).scrollIntoView(false)
-      : document.querySelector(fallback);
-    if (typeof fallback !== 'undefined') {
-      element.scrollIntoView(fallback);
+      ? document.querySelector(hash)
+      : fallback
+        ? document.querySelector(fallback)
+        : null;
+    if (element) {
+      element.scrollIntoView(false);
     }
   }
 };

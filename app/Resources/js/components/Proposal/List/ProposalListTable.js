@@ -59,9 +59,9 @@ export class ProposalListTable extends React.Component<Props, State> {
     });
   }
 
-  getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps) => {
-    return <ImplementationStepTitle progressSteps={progressSteps} />;
-  };
+  getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps) => (
+    <ImplementationStepTitle progressSteps={progressSteps} />
+  );
 
   getFormattedData = (): ?Array<Object> => {
     const { proposals, step } = this.props;
@@ -154,41 +154,36 @@ export class ProposalListTable extends React.Component<Props, State> {
     const columnsName = Object.keys(data[0]);
     const firstData = data[0];
 
-    const isHidden = cellName => {
-      return (
-        data &&
-        data.filter(row => {
-          if (cellName === 'implementationPhase') {
-            return row[cellName].value.list
-              ? row[cellName].value.list.length !== 0
-              : row[cellName].value;
-          }
-          if (cellName === 'lastActivity') {
-            return row[cellName].value.date;
-          }
-          return Array.isArray(row[cellName] && row[cellName].value)
-            ? row[cellName].value.length !== 0
-            : row[cellName] && row[cellName].value;
-        }).length === 0
-      );
-    };
+    const isHidden = cellName =>
+      data &&
+      data.filter(row => {
+        if (cellName === 'implementationPhase') {
+          return row[cellName].value.list
+            ? row[cellName].value.list.length !== 0
+            : row[cellName].value;
+        }
+        if (cellName === 'lastActivity') {
+          return row[cellName].value.date;
+        }
+        return Array.isArray(row[cellName] && row[cellName].value)
+          ? row[cellName].value.length !== 0
+          : row[cellName] && row[cellName].value;
+      }).length === 0;
 
-    const column = columnsName.map((columnName, key) => {
-      return {
-        style: {
-          width:
-            firstData[columnName] && firstData[columnName].width
-              ? firstData[columnName].width
-              : '200px',
-        },
-        hidden:
-          firstData[columnName] && firstData[columnName].hidden
-            ? firstData[columnName].hidden
-            : isHidden(columnName),
-        text: firstData[columnName] && firstData[columnName].text,
-        key,
-      };
-    });
+    const column = columnsName.map((columnName, key) => ({
+      style: {
+        width:
+          firstData[columnName] && firstData[columnName].width
+            ? firstData[columnName].width
+            : '200px',
+      },
+      hidden:
+        firstData[columnName] && firstData[columnName].hidden
+          ? firstData[columnName].hidden
+          : isHidden(columnName),
+      text: firstData[columnName] && firstData[columnName].text,
+      key,
+    }));
 
     return column;
   };

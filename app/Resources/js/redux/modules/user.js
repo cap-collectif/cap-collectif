@@ -187,15 +187,13 @@ export const submitConfirmPasswordFormSucceed = (
 
 export const setRegistrationEmailDomains = (values: {
   domains: Array<{ value: string }>,
-}): Promise<*> => {
-  return Fetcher.put('/registration_form', values);
-};
+}): Promise<*> => Fetcher.put('/registration_form', values);
 
 export const login = (
   data: { username: string, password: string },
   dispatch: Dispatch,
-): Promise<*> => {
-  return fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
+): Promise<*> =>
+  fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
     method: 'POST',
     body: JSON.stringify(data),
     credentials: 'include',
@@ -218,7 +216,6 @@ export const login = (
         throw new SubmissionError({ _error: 'global.login_failed' });
       }
     });
-};
 
 export const register = (
   values: Object,

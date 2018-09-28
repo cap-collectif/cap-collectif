@@ -9,7 +9,7 @@ type Props = {
   disabled: boolean,
 };
 
-class ProposalCreateButton extends React.Component<Props> {
+export class ProposalCreateButton extends React.Component<Props> {
   render() {
     const { disabled, handleClick } = this.props;
     return (

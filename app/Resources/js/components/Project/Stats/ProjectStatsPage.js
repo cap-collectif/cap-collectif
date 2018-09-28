@@ -7,7 +7,6 @@ import ProjectStatsList from './ProjectStatsList';
 import type { GlobalState } from '../../../types';
 
 type Props = {
-  projectId: string,
   steps: Array<Object>,
   themes: Array<Object>,
   districts: Array<Object>,
@@ -50,35 +49,31 @@ export class ProjectStatsPage extends React.Component<Props, State> {
             activeKey={this.state.selectedStepIndex}
             onSelect={this.selectStep}
             className="block">
-            {steps.map((step, index) => {
-              return (
-                <NavItem key={step.id} eventKey={index}>
-                  {step.title}
-                </NavItem>
-              );
-            })}
+            {steps.map((step, index) => (
+              <NavItem key={step.id} eventKey={index}>
+                {step.title}
+              </NavItem>
+            ))}
           </Nav>
         )}
         {selectedStep ? (
           <div className="block stats__step-details">
-            {Object.keys(selectedStep.stats).map(key => {
-              return (
-                <ProjectStatsList
-                  key={key}
-                  type={key}
-                  stepId={selectedStep.id}
-                  data={selectedStep.stats[key]}
-                  label={`project.stats.list.${key}`}
-                  icon={icons[key]}
-                  isCurrency={key === 'costs'}
-                  showFilters={key === 'votes'}
-                  step={selectedStep}
-                  themes={themes}
-                  districts={districts}
-                  categories={categories}
-                />
-              );
-            })}
+            {Object.keys(selectedStep.stats).map(key => (
+              <ProjectStatsList
+                key={key}
+                type={key}
+                stepId={selectedStep.id}
+                data={selectedStep.stats[key]}
+                label={`project.stats.list.${key}`}
+                icon={icons[key]}
+                isCurrency={key === 'costs'}
+                showFilters={key === 'votes'}
+                step={selectedStep}
+                themes={themes}
+                districts={districts}
+                categories={categories}
+              />
+            ))}
           </div>
         ) : (
           <p className="project-stats__empty">{<FormattedMessage id="project.stats.no_data" />}</p>

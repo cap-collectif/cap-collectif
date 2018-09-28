@@ -6,7 +6,6 @@ import EditProfileTabs from './EditProfileTabs';
 import Loader from '../../Ui/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { FeatureToggles, State } from '../../../types';
-import type EditProfileTabs_viewer from './__generated__/EditProfileBoxQuery.graphql';
 
 const query = graphql`
   query EditProfileBoxQuery {
@@ -18,7 +17,6 @@ const query = graphql`
 
 type Props = {
   features: FeatureToggles,
-  viewer: EditProfileTabs_viewer,
 };
 
 export class EditProfileBox extends Component<Props> {
@@ -47,9 +45,7 @@ export class EditProfileBox extends Component<Props> {
     );
   }
 }
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
-  return {
-    features: state.default.features,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  features: state.default.features,
+});
 export default connect(mapStateToProps)(EditProfileBox);

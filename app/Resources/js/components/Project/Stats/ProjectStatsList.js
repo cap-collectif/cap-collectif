@@ -150,16 +150,14 @@ export class ProjectStatsList extends React.Component<Props, State> {
               </span>
             </ListGroupItem>
             {data.values.length > 0 ? (
-              data.values.map((row, index) => {
-                return (
-                  <ProjectStatsListItem
-                    key={index}
-                    item={row}
-                    showPercentage={this.state.showPercentage}
-                    isCurrency={isCurrency}
-                  />
-                );
-              })
+              data.values.map((row, index) => (
+                <ProjectStatsListItem
+                  key={index}
+                  item={row}
+                  showPercentage={this.state.showPercentage}
+                  isCurrency={isCurrency}
+                />
+              ))
             ) : (
               <ListGroupItem className="excerpt text-center">
                 <FormattedMessage id="project.stats.no_values" />

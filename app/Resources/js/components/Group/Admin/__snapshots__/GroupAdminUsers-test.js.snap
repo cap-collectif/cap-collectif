@@ -30,24 +30,44 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
   <div
     className="box-content"
   >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="success"
-      disabled={false}
-      href="#"
-      onClick={[Function]}
+    <ButtonToolbar
+      bsClass="btn-toolbar"
     >
-      <i
-        className="fa fa-plus-circle"
-      />
-       
-      <FormattedMessage
-        id="group.admin.add_users"
-        values={Object {}}
-      />
-    </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="success"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-plus-circle"
+        />
+         
+        <FormattedMessage
+          id="group-admin-add-members"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="success"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-upload"
+        />
+         
+        <FormattedMessage
+          id="group-admin-add-members-via-file"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
     <AlertForm
       invalid={false}
       submitFailed={false}
@@ -56,6 +76,25 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       valid={true}
     />
     <Connect(InjectIntl(GroupAdminModalAddUsers))
+      group={
+        Object {
+          "id": "group4",
+          "title": "Comité de suvi",
+          "users": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "id": "id1",
+                },
+              },
+            ],
+          },
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+    <Connect(InjectIntl(GroupAdminModalImportUsers))
       group={
         Object {
           "id": "group4",
@@ -122,30 +161,69 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
   <div
     className="box-content"
   >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="success"
-      disabled={false}
-      href="#"
-      onClick={[Function]}
+    <ButtonToolbar
+      bsClass="btn-toolbar"
     >
-      <i
-        className="fa fa-plus-circle"
-      />
-       
-      <FormattedMessage
-        id="group.admin.add_users"
-        values={Object {}}
-      />
-    </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="success"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-plus-circle"
+        />
+         
+        <FormattedMessage
+          id="group-admin-add-members"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="success"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-upload"
+        />
+         
+        <FormattedMessage
+          id="group-admin-add-members-via-file"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
     <div
       className="d-ib"
     >
       <AlertFormSucceededMessage />
     </div>
     <Connect(InjectIntl(GroupAdminModalAddUsers))
+      group={
+        Object {
+          "id": "group4",
+          "title": "Comité de suvi",
+          "users": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "id": "id1",
+                },
+              },
+            ],
+          },
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+    <Connect(InjectIntl(GroupAdminModalImportUsers))
       group={
         Object {
           "id": "group4",
@@ -212,24 +290,44 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
   <div
     className="box-content"
   >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="success"
-      disabled={false}
-      href="#"
-      onClick={[Function]}
+    <ButtonToolbar
+      bsClass="btn-toolbar"
     >
-      <i
-        className="fa fa-plus-circle"
-      />
-       
-      <FormattedMessage
-        id="group.admin.add_users"
-        values={Object {}}
-      />
-    </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="success"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-plus-circle"
+        />
+         
+        <FormattedMessage
+          id="group-admin-add-members"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="success"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-upload"
+        />
+         
+        <FormattedMessage
+          id="group-admin-add-members-via-file"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
     <AlertForm
       invalid={false}
       submitFailed={true}
@@ -238,6 +336,25 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       valid={false}
     />
     <Connect(InjectIntl(GroupAdminModalAddUsers))
+      group={
+        Object {
+          "id": "group4",
+          "title": "Comité de suvi",
+          "users": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "id": "id1",
+                },
+              },
+            ],
+          },
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+    <Connect(InjectIntl(GroupAdminModalImportUsers))
       group={
         Object {
           "id": "group4",
@@ -304,24 +421,44 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
   <div
     className="box-content"
   >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="success"
-      disabled={false}
-      href="#"
-      onClick={[Function]}
+    <ButtonToolbar
+      bsClass="btn-toolbar"
     >
-      <i
-        className="fa fa-plus-circle"
-      />
-       
-      <FormattedMessage
-        id="group.admin.add_users"
-        values={Object {}}
-      />
-    </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="success"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-plus-circle"
+        />
+         
+        <FormattedMessage
+          id="group-admin-add-members"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="success"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-upload"
+        />
+         
+        <FormattedMessage
+          id="group-admin-add-members-via-file"
+          values={Object {}}
+        />
+      </Button>
+    </ButtonToolbar>
     <AlertForm
       invalid={false}
       submitFailed={true}
@@ -330,6 +467,25 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       valid={false}
     />
     <Connect(InjectIntl(GroupAdminModalAddUsers))
+      group={
+        Object {
+          "id": "group4",
+          "title": "Comité de suvi",
+          "users": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "id": "id1",
+                },
+              },
+            ],
+          },
+        }
+      }
+      onClose={[Function]}
+      show={false}
+    />
+    <Connect(InjectIntl(GroupAdminModalImportUsers))
       group={
         Object {
           "id": "group4",

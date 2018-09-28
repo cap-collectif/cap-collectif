@@ -192,11 +192,9 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => {
-  return {
-    project: state.project.projectsById[state.project.currentProjectById],
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+  project: state.project.projectsById[state.project.currentProjectById],
+});
 
 const container = connect(mapStateToProps)(ProposalDetailAdvancement);
 

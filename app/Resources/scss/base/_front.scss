@@ -475,22 +475,6 @@ h2 + h3 {
   }
 }
 
-.modal-body-without-padding-top {
-  .modal-body {
-    padding-top: 0;
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
-    align-content: center;
-    .list-group-custom .list-group-item {
-      justify-content: left;
-      align-content: center;
-      border: none;
-      border-bottom: 1px solid $border-color;
-      margin-bottom: 0;
-    }
-  }
-}
-
 .btn--no-radius {
     @include border-radius(0);
 }

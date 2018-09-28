@@ -35,16 +35,18 @@ export class ProposalListToggleViewBtn extends React.Component<Props> {
           active={mode === 'table'}
           style={{ flex: '1 0 auto' }}
           onClick={this.handleClick.bind(this, 'table')}>
-          <i className="cap cap-android-menu" onClick={this.handleClick.bind(this, 'table')} />{' '}
-          {<FormattedMessage id="list-view" />}
+            <i className="cap cap-android-menu" />
+            {' '}
+            <FormattedMessage id="list-view" />
         </Button>
         <Button
           bsStyle="default"
           active={mode === 'mosaic'}
           style={{ flex: '1 0 auto' }}
           onClick={this.handleClick.bind(this, 'mosaic')}>
-          <i className="cap cap-th-large" onClick={this.handleClick.bind(this, 'mosaic')} />{' '}
-          {<FormattedMessage id="grid" />}
+          <i className="cap cap-th-large" />
+          {' '}
+          <FormattedMessage id="grid" />
         </Button>
         {!config.isMobile &&
           showMapButton && (
@@ -53,8 +55,8 @@ export class ProposalListToggleViewBtn extends React.Component<Props> {
               style={{ flex: '1 0 auto' }}
               active={mode === 'map'}
               onClick={this.handleClick.bind(this, 'map')}>
-              <i className="cap cap-map-location" onClick={this.handleClick.bind(this, 'map')} />{' '}
-              {<FormattedMessage id="proposal.map.map" />}
+              <i className="cap cap-map-location" />{' '}
+              <FormattedMessage id="proposal.map.map" />
             </Button>
           )}
       </div>

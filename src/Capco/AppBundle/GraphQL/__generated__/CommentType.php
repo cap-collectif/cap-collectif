@@ -248,7 +248,7 @@ final class CommentType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'body' => [
-                    'type' => Type::string(),
+                    'type' => Type::nonNull(Type::string()),
                     'args' => [
                     ],
                     'resolve' => null,

@@ -14,11 +14,11 @@ import type { NotificationsForm_viewer } from './__generated__/NotificationsForm
 import type { State } from '../../../types';
 
 type RelayProps = {
+  // eslint-disable-next-line react/no-unused-prop-types
   viewer: NotificationsForm_viewer,
 };
 type FormValues = Object;
 type Props = RelayProps & {
-  initialValues: Object,
   invalid: boolean,
   pristine: boolean,
   submitting: boolean,
@@ -127,11 +127,9 @@ const form = reduxForm({
   enableReinitialize: true,
 })(NotificationsForm);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
-  return {
-    initialValues: props.viewer.notificationsConfiguration,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
+  initialValues: props.viewer.notificationsConfiguration,
+});
 
 const container = connect(mapStateToProps)(injectIntl(form));
 

@@ -33,16 +33,14 @@ export class CommentListViewPaginated extends React.Component<Props> {
             .filter(Boolean)
             .map(edge => edge.node)
             .filter(Boolean)
-            .map(node => {
-              return (
-                // $FlowFixMe $refType
-                <Comment
-                  key={node.id}
-                  comment={node}
-                  isHighlighted={node.id === highlightedComment}
-                />
-              );
-            })}
+            .map(node => (
+              // $FlowFixMe
+              <Comment
+                key={node.id}
+                comment={node}
+                isHighlighted={node.id === highlightedComment}
+              />
+            ))}
         {relay.hasMore() && (
           <button
             id="comments-section-load-more"

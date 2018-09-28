@@ -1,24 +1,20 @@
 // @flow
 import React from 'react';
-import { type IntlShape, FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-type Props = {
-  intl: IntlShape,
-};
+type Props = {};
 
 class QuillToolbar extends React.Component<Props> {
   render() {
-    const { intl } = this.props;
-
     return (
       <div>
         <span className="ql-format-group">
           <select title="Size" className="ql-size">
-            <option value="10px">{intl.formatMessage({ id: 'editor.size.small' })}</option>
+            <option value="10px">{<FormattedMessage id="editor.size.small" />}</option>
             <option value="13px" selected>
-              {intl.formatMessage({ id: 'editor.size.normal' })}
+              {<FormattedMessage id="editor.size.normal" />}
             </option>
-            <option value="18px">{intl.formatMessage({ id: 'editor.size.large' })}</option>
+            <option value="18px">{<FormattedMessage id="editor.size.large" />}</option>
           </select>
         </span>
         <span className="ql-format-group">
@@ -39,11 +35,11 @@ class QuillToolbar extends React.Component<Props> {
             className="ql-format-button ql-bullet"
           />
           <span className="ql-format-separator" />
-          <select title={intl.formatMessage({ id: 'editor.align.title' })} className="ql-align">
-            <option value="left" label={intl.formatMessage({ id: 'editor.align.left' })} selected />
-            <option value="center" label={intl.formatMessage({ id: 'editor.align.center' })} />
-            <option value="right" label={intl.formatMessage({ id: 'editor.align.right' })} />
-            <option value="justify" label={intl.formatMessage({ id: 'editor.align.justify' })} />
+          <select title={<FormattedMessage id="editor.align.title" />} className="ql-align">
+            <option value="left" label={<FormattedMessage id="editor.align.left" />} selected />
+            <option value="center" label={<FormattedMessage id="editor.align.center" />} />
+            <option value="right" label={<FormattedMessage id="editor.align.right" />} />
+            <option value="justify" label={<FormattedMessage id="editor.align.justify" />} />
           </select>
         </span>
         <span className="ql-format-group">
@@ -62,4 +58,4 @@ class QuillToolbar extends React.Component<Props> {
   }
 }
 
-export default injectIntl(QuillToolbar);
+export default QuillToolbar;

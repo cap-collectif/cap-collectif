@@ -12,6 +12,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 class ArgumentRepository extends EntityRepository
 {
@@ -176,12 +177,8 @@ class ArgumentRepository extends EntityRepository
 
     /**
      * Count all arguments by user.
-     *
-     * @param $user
-     *
-     * @return mixed
      */
-    public function countByUser($user)
+    public function countByUser(User $user): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(a) as TotalArguments')
@@ -192,8 +189,10 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('a.Author = :author')
             ->andWhere('o.published = true')
             ->andWhere('s.isEnabled = true')
-            ->andWhere('c.isEnabled = true')
+            ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
+            ->setParameter('status', Trashable::STATUS_INVISIBLE)
             ->setParameter('author', $user);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -234,32 +233,19 @@ class ArgumentRepository extends EntityRepository
 
     /**
      * Get all arguments by user.
-     *
-     * @param mixed $user
      */
-    public function getByUser($user)
+    public function getByUser(User $user, int $first = 0, int $offset = 100): Paginator
     {
-        return $this->getIsEnabledQueryBuilder()
-            ->leftJoin('a.opinion', 'o')
-            ->addSelect('o')
-            ->leftJoin('o.step', 's')
-            ->addSelect('s')
-            ->leftJoin('s.projectAbstractStep', 'cas')
-            ->addSelect('cas')
-            ->leftJoin('cas.project', 'p')
-            ->addSelect('p')
-            ->leftJoin('o.Author', 'aut')
-            ->addSelect('aut')
-            ->leftJoin('aut.media', 'm')
-            ->addSelect('m')
-            ->leftJoin('a.votes', 'v')
-            ->addSelect('v')
+        $query = $this->getIsEnabledQueryBuilder();
+        $query
             ->andWhere('a.Author = :author')
-            ->andWhere('o.published = true')
-            ->andWhere('s.isEnabled = true')
+            ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
             ->setParameter('author', $user)
-            ->getQuery()
-            ->getResult();
+            ->setParameter('status', Trashable::STATUS_INVISIBLE)
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
+
+        return new Paginator($query);
     }
 
     protected function getIsEnabledQueryBuilder()

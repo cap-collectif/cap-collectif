@@ -32,16 +32,12 @@ export class OpinionProjectRow extends Component<Props, State> {
     const { project, viewer } = this.props;
     const ids = viewer.followingOpinions.edges
       .filter(edge => edge.node.project.id === project.id)
-      .map(edge => {
-        return edge.node.id;
-      });
+      .map(edge => edge.node.id);
 
     this.setState({ open: !this.state.open }, () => {
       UnfollowOpinionMutation.commit({
         input: { ids },
-      }).then(() => {
-        return true;
-      });
+      }).then(() => true);
     });
   }
 
@@ -69,9 +65,7 @@ export class OpinionProjectRow extends Component<Props, State> {
               viewer.followingOpinions.edges
                 .filter(Boolean)
                 .filter(edge => edge.node.project.id === project.id)
-                .map((edge, key) => {
-                  return <OpinionRow key={key} opinion={edge.node} />;
-                })}
+                .map((edge, key) => <OpinionRow key={key} opinion={edge.node} />)}
           </ListGroup>
         </Panel>
       </Collapse>

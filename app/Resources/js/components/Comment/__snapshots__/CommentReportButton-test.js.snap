@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentReportButton /> should render correctly 1`] = `
+<Connect(ReportBox)
+  author={
+    Object {
+      "uniqueId": "thisisaslug",
+    }
+  }
+  buttonBsSize="sm"
+  buttonClassName="btn btn-sm btn-dark-gray btn--outline"
+  id="comment-1"
+  onReport={[Function]}
+  reported={false}
+/>
+`;

@@ -61,12 +61,10 @@ export class OpinionSourceBox extends React.Component<Props, State> {
                   .filter(Boolean)
                   .map(edge => edge.node)
                   .filter(Boolean)
-                  .map(source => {
-                    return (
-                      // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
-                      <OpinionSource key={source.id} source={source} sourceable={sourceable} />
-                    );
-                  })}
+                  .map(source => (
+                    // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
+                    <OpinionSource key={source.id} source={source} sourceable={sourceable} />
+                  ))}
             </ListGroup>
           </Panel>
         ) : null}

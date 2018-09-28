@@ -7,9 +7,9 @@ type Props = {
   source: OpinionSourceContent_source,
 };
 
-const OpinionSourceContent = ({ source }: Props) => {
-  return <p className="excerpt" dangerouslySetInnerHTML={{ __html: source.body }} />;
-};
+const OpinionSourceContent = ({ source }: Props) => (
+  <p className="excerpt" dangerouslySetInnerHTML={{ __html: source.body }} />
+);
 
 export default createFragmentContainer(
   OpinionSourceContent,

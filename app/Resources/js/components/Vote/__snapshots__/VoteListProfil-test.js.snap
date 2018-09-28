@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VoteListProfile /> renders correcty with empty node 1`] = `
+<ListGroup
+  bsClass="media-list"
+  componentClass="ul"
+>
+  <ForwardRef(Relay(VoteItem))
+    key="node1"
+    vote={
+      Object {
+        "$fragmentRefs": null,
+        "id": "node1",
+      }
+    }
+  />
+</ListGroup>
+`;
+
+exports[`<VoteListProfile /> renders correcty with two node 1`] = `
+<ListGroup
+  bsClass="media-list"
+  componentClass="ul"
+>
+  <ForwardRef(Relay(VoteItem))
+    key="1"
+    vote={
+      Object {
+        "$fragmentRefs": null,
+        "id": "1",
+      }
+    }
+  />
+  <ForwardRef(Relay(VoteItem))
+    key="2"
+    vote={
+      Object {
+        "$fragmentRefs": null,
+        "id": "2",
+      }
+    }
+  />
+</ListGroup>
+`;
+
+exports[`<VoteListProfile /> renders two nodes and a loadmore button 1`] = `
+<ListGroup
+  bsClass="media-list"
+  componentClass="ul"
+>
+  <ForwardRef(Relay(VoteItem))
+    key="1"
+    vote={
+      Object {
+        "$fragmentRefs": null,
+        "id": "1",
+      }
+    }
+  />
+  <ForwardRef(Relay(VoteItem))
+    key="2"
+    vote={
+      Object {
+        "$fragmentRefs": null,
+        "id": "2",
+      }
+    }
+  />
+  <ListGroupItem
+    bsClass="list-group-item"
+    listItem={false}
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.more"
+        values={Object {}}
+      />
+    </Button>
+  </ListGroupItem>
+</ListGroup>
+`;
+
+exports[`<VoteListProfile /> renders two nodes and a loadmore button 2`] = `
+<ListGroup
+  bsClass="media-list"
+  componentClass="ul"
+>
+  <ForwardRef(Relay(VoteItem))
+    key="1"
+    vote={
+      Object {
+        "$fragmentRefs": null,
+        "id": "1",
+      }
+    }
+  />
+  <ForwardRef(Relay(VoteItem))
+    key="2"
+    vote={
+      Object {
+        "$fragmentRefs": null,
+        "id": "2",
+      }
+    }
+  />
+  <ForwardRef(Relay(VoteItem))
+    key="3"
+    vote={
+      Object {
+        "$fragmentRefs": null,
+        "id": "3",
+      }
+    }
+  />
+</ListGroup>
+`;

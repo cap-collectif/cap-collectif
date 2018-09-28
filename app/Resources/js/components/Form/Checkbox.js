@@ -16,7 +16,7 @@ type Props = {
   disabled?: boolean,
   labelClassName?: string,
   value: Object,
-  errors?: any,
+  // eslint-disable-next-line react/no-unused-prop-types
   other?: $FlowFixMe,
 };
 
@@ -59,6 +59,7 @@ class Checkbox extends React.Component<Props, State> {
       other: changeValue || null,
     });
   };
+  other: ?React.Component<*, *>;
 
   empty = () => {
     // $FlowFixMe
@@ -147,8 +148,9 @@ class Checkbox extends React.Component<Props, State> {
           })}
         {field.isOtherAllowed ? (
           <Other
-            // $FlowFixMe
-            ref={c => (this.other = c)}
+            ref={c => {
+              this.other = c;
+            }}
             value={otherValue}
             field={field}
             onChange={this.onOtherChange}

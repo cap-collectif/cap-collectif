@@ -3,7 +3,7 @@ import React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { createFragmentContainer, graphql, QueryRenderer } from 'react-relay';
+import { createFragmentContainer, graphql, QueryRenderer, type ReadyState } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type { Dispatch, State } from '../../types';
@@ -84,7 +84,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
                   }
                 }
               `}
-              render={({ error, props }: { error: ?Error, props: any }) => {
+              render={({ error, props }: { props: any } & ReadyState) => {
                 if (error) {
                   console.log(error); // eslint-disable-line no-console
                   return graphqlError;

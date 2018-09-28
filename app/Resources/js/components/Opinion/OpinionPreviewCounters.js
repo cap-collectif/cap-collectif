@@ -54,9 +54,9 @@ class OpinionPreviewCounters extends React.Component<Props> {
     }
     return (
       <InlineList>
-        {counters.map((counter, index) => {
-          return <li key={index}>{counter}</li>;
-        })}
+        {counters.map((counter, index) => (
+          <li key={index}>{counter}</li>
+        ))}
       </InlineList>
     );
   }
