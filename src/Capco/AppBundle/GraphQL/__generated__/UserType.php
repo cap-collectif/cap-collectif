@@ -976,7 +976,6 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
-                            'defaultValue' => 100000,
                         ],
                         [
                             'name' => 'before',
@@ -997,7 +996,9 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver")->isGranted(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), $value, $context);
+                    },
                 ],
                 'groups' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('GroupConnection')),
@@ -1181,40 +1182,6 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                     ],
                     'resolve' => null,
                     'description' => 'The user\'s email was confirmed at date',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'arguments' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ArgumentConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentByUserResolver", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => 'The arguments created by user.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

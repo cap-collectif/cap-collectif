@@ -19,6 +19,7 @@ module.exports = {
     window: true,
     FormData: true,
     location: true,
+    URLSearchParams: true,
     File: true,
     localStorage: true,
     fetch: true,

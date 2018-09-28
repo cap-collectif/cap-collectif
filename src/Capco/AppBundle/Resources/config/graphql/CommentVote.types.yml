@@ -1,14 +1,19 @@
 CommentVote:
   type: object
   inherits:
-    - Vote
+    - Node
     - Publishable
   config:
     interfaces:
       - Node
-      - Vote
       - Publishable
     fields:
+      createdAt:
+        type: 'DateTime'
+        description: 'Date of vote.'
+      author:
+        type: 'User!'
+        description: 'The author of the contribution.'
       contribution:
         type: 'Comment!'
         resolve: '@=value.getComment()'

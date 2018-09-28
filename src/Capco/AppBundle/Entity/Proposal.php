@@ -1027,6 +1027,6 @@ class Proposal
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch'];
+        return ['Elasticsearch', 'ElasticsearchProposal'];
     }
 }
