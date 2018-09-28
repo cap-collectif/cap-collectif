@@ -46,42 +46,38 @@ const Container = styled.div.attrs({
   }
 
   .stacked-nav__list {
-    .nav {
-      li {
-        button.active,
-        button:hover {
-          background-color: #ffffff;
-          border: 1px solid #e3e3e3;
-        }
-      }
+    .btn-link.active,
+    .btn-link:hover {
+      background-color: #ffffff;
+      border: 1px solid #e3e3e3;
+    }
 
-      .btn-link {
-        color: #000000;
-        border: 1px solid #f6f6f6;
-        font-size: 16px;
-        width: 100%;
-        text-align: left;
-        padding: 10px 15px;
-      }
+    .btn-link {
+      color: #000000;
+      border: 1px solid #f6f6f6;
+      font-size: 16px;
+      width: 100%;
+      text-align: left;
+      padding: 10px 15px;
+    }
 
-      .level--0 {
-        font-weight: 600;
-      }
+    .level--0 {
+      font-weight: 600;
+    }
 
-      .level--1 {
-        padding-left: 35px;
-        font-weight: 500;
-      }
+    .level--1 {
+      padding-left: 35px;
+      font-weight: 500;
+    }
 
-      .level--2 {
-        padding-left: 55px;
-        font-weight: 400;
-      }
+    .level--2 {
+      padding-left: 55px;
+      font-weight: 400;
+    }
 
-      .level--3 {
-        padding-left: 75px;
-        font-weight: 300;
-      }
+    .level--3 {
+      padding-left: 75px;
+      font-weight: 300;
     }
   }
 
@@ -96,6 +92,39 @@ const Container = styled.div.attrs({
       &:not(:hover) {
         color: #000000;
       }
+    }
+  }
+
+  @media (max-width: 991px) {
+    background-color: #ffffff;
+
+    .stacked-nav__header {
+      padding: 10px 15px;
+      color: #ffffff;
+      text-transform: capitalize;
+
+      .cap-android-menu {
+        display: none;
+      }
+
+      .btn-link,
+      .btn-link:hover {
+        color: #ffffff;
+      }
+    }
+
+    .stacked-nav__list .btn-link {
+      border: 1px solid #ffffff;
+
+      &.active,
+      &:hover {
+        background-color: #f6f6f6;
+        border: 1px solid #f6f6f6;
+      }
+    }
+
+    .stacked-nav__footer {
+      padding: 15px 15px;
     }
   }
 `;

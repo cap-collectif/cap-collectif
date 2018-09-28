@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ConsultationPlanItem /> renders correcty 1`] = `
-<a
-  className="level--0"
+<button
+  className="level--0 btn-link"
   onClick={[Function]}
 >
   title
-</a>
+</button>
 `;

@@ -4,7 +4,13 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty close plan 1`] = `
 <div
   className="consultation-plan_close"
 >
-  <a
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="link"
+    className="p-0 btn-md"
+    disabled={false}
     onClick={[Function]}
   >
     <i
@@ -17,7 +23,7 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty close plan 1`] = `
     <i
       className="cap cap-android-menu ml-5 hidden-md hidden-lg"
     />
-  </a>
+  </Button>
 </div>
 `;
 
@@ -35,13 +41,19 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty open plan 1`] = `
         values={Object {}}
       />
     </p>
-    <a
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      className="p-0 btn-md"
+      disabled={false}
       onClick={[Function]}
     >
       <i
         className="cap cap-delete-1"
       />
-    </a>
+    </Button>
   </div>
   <div
     className="stacked-nav__list"
@@ -72,7 +84,13 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty open plan 1`] = `
   <div
     className="stacked-nav__footer"
   >
-    <a
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="link"
+      className="p-0"
+      disabled={false}
       onClick={[Function]}
     >
       <i
@@ -82,7 +100,7 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty open plan 1`] = `
         id="back-to-top"
         values={Object {}}
       />
-    </a>
+    </Button>
   </div>
 </StackedNav>
 `;
