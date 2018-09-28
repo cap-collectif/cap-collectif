@@ -8,7 +8,6 @@ import renderComponent from '../../Form/Field';
 import UserActions from '../../../actions/UserActions';
 
 type Props = {
-  // eslint-disable-next-line react/no-unused-prop-types
   onSubmitSuccess: () => void,
   submitting: boolean,
   handleSubmit: () => void,

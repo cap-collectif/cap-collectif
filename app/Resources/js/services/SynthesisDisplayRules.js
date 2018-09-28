@@ -2,18 +2,19 @@ import { ALLOWED_RULES } from '../constants/SynthesisDisplayConstants';
 
 class SynthesisDisplayRules {
   getMatchingSettingsForElement(element, settings, synthesisRules) {
-    const matching = settings.filter(
-      setting =>
+    const matching = settings.filter(setting => {
+      return (
         this.isElementMatchingConditions(setting.conditions, element, synthesisRules) &&
-        this.areRulesAllowed(setting.rules),
-    );
+        this.areRulesAllowed(setting.rules)
+      );
+    });
     return matching;
   }
 
   isElementMatchingConditions(conditions, element, synthesisRules) {
-    return conditions.every(condition =>
-      this.isElementMatchingCondition(condition, element, synthesisRules),
-    );
+    return conditions.every(condition => {
+      return this.isElementMatchingCondition(condition, element, synthesisRules);
+    });
   }
 
   isElementMatchingCondition(condition, element, synthesisRules) {
@@ -31,7 +32,9 @@ class SynthesisDisplayRules {
   }
 
   areRulesAllowed(rules) {
-    return rules.every(rule => this.isRuleAllowed(rule));
+    return rules.every(rule => {
+      return this.isRuleAllowed(rule);
+    });
   }
 
   isRuleAllowed(rule) {
@@ -57,14 +60,14 @@ class SynthesisDisplayRules {
   }
 
   getValueForRule(settings, category, name) {
-    return settings.some(setting =>
-      setting.rules.some(rule => {
+    return settings.some(setting => {
+      return setting.rules.some(rule => {
         if (rule.category === category && rule.name === name) {
           return rule.value;
         }
         return false;
-      }),
-    );
+      });
+    });
   }
 
   getValueForRuleAndElement(element, allSettings, category, name, synthesisRules) {
@@ -72,14 +75,14 @@ class SynthesisDisplayRules {
       return false;
     }
     const settings = this.getMatchingSettingsForElement(element, allSettings, synthesisRules);
-    return settings.some(setting =>
-      setting.rules.some(rule => {
+    return settings.some(setting => {
+      return setting.rules.some(rule => {
         if (rule.category === category && rule.name === name) {
           return rule.value;
         }
         return false;
-      }),
-    );
+      });
+    });
   }
 }
 

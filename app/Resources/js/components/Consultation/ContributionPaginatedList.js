@@ -1,7 +1,5 @@
 // @flow
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import Opinion from './Opinion';
 import type { ContributionPaginatedList_consultation } from './__generated__/ContributionPaginatedList_consultation.graphql';
@@ -36,16 +34,15 @@ export class ContributionPaginatedList extends React.Component<Props> {
         </div>
         <ul className="media-list  opinion__list">
           <div>
-            {contributionConnection.edges.filter(Boolean).map((edge, index) => (
+            {contributionConnection.edges
+              .filter(Boolean)
               // $FlowFixMe
-              <Opinion key={index} opinion={edge.node} />
-            ))}
+              .map((edge, index) => <Opinion key={index} opinion={edge.node} />)}
           </div>
         </ul>
         {relay.hasMore() && (
           <div className="opinion  opinion__footer  box">
-            <Button
-              bsStyle="link"
+            <a
               onClick={() => {
                 relay.loadMore(pageSize, e => {
                   console.log(e); // eslint-disable-line
@@ -53,8 +50,8 @@ export class ContributionPaginatedList extends React.Component<Props> {
               }}
               className="text-center"
               style={{ display: 'block' }}>
-              <FormattedMessage id="global.more" />
-            </Button>
+              Voir plus
+            </a>
           </div>
         )}
       </div>

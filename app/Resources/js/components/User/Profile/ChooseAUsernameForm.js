@@ -7,11 +7,12 @@ import UpdateProfileMutation from '../../../mutations/UpdateProfileMutation';
 
 export const formName = 'choose-username';
 
-const onSubmit = (values: Object) =>
-  UpdateProfileMutation.commit({ input: { username: values.username } }).then(() => {
+const onSubmit = (values: Object) => {
+  return UpdateProfileMutation.commit({ input: { username: values.username } }).then(() => {
     window.location.reload();
     return true;
   });
+};
 
 const validate = ({ username }: { username: ?string }) => {
   const errors = {};

@@ -47,8 +47,10 @@ export class ReportButton extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
-  reported: props.reported || state.report.elements.includes(props.id),
-});
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => {
+  return {
+    reported: props.reported || state.report.elements.includes(props.id),
+  };
+};
 
 export default connect(mapStateToProps)(ReportButton);

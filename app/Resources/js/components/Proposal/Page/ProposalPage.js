@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageAlert from './ProposalPageAlert';
@@ -60,7 +60,7 @@ export class ProposalPage extends React.Component<Props> {
             cursor: null,
             isAuthenticated: this.props.isAuthenticated,
           }}
-          render={({ error, props }: { props?: ProposalPageQueryResponse } & ReadyState) => {
+          render={({ error, props }: { error: ?Error, props?: ProposalPageQueryResponse }) => {
             if (error) {
               console.log(error); // eslint-disable-line no-console
               return graphqlError;
@@ -100,9 +100,11 @@ export class ProposalPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  isAuthenticated: state.user.user !== null,
-  features: state.default.features,
-});
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+  return {
+    isAuthenticated: state.user.user !== null,
+    features: state.default.features,
+  };
+};
 
 export default connect(mapStateToProps)(ProposalPage);

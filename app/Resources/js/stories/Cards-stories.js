@@ -272,10 +272,30 @@ storiesOf('Cards', module)
       ~~~
     
     `,
-    })(() => (
+    })(() => {
+      return (
+        <div className="ml-30 mr-30 storybook-container">
+          <h1>
+            Card{' '}
+            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
+              <i className="small cap cap-github" />
+            </a>
+          </h1>
+          <hr />
+          <Row>
+            <Col>
+              <Card project={continuousProject} />
+            </Col>
+          </Row>
+        </div>
+      );
+    }),
+  )
+  .add('Project Card', () => {
+    return (
       <div className="ml-30 mr-30 storybook-container">
         <h1>
-          Card{' '}
+          Project Card{' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
             <i className="small cap cap-github" />
           </a>
@@ -283,84 +303,72 @@ storiesOf('Cards', module)
         <hr />
         <Row>
           <Col>
-            <Card project={continuousProject} />
+            <CardProject project={openProject} />
+          </Col>
+          <Col>
+            <CardProject project={endedProject} />
+          </Col>
+          <Col>
+            <CardProject project={continuousProject} />
+          </Col>
+          <Col>
+            <CardProject project={toComeProject} />
           </Col>
         </Row>
       </div>
-    )),
-  )
-  .add('Project Card', () => (
-    <div className="ml-30 mr-30 storybook-container">
-      <h1>
-        Project Card{' '}
-        <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
-          <i className="small cap cap-github" />
-        </a>
-      </h1>
-      <hr />
-      <Row>
-        <Col>
-          <CardProject project={openProject} />
-        </Col>
-        <Col>
-          <CardProject project={endedProject} />
-        </Col>
-        <Col>
-          <CardProject project={continuousProject} />
-        </Col>
-        <Col>
-          <CardProject project={toComeProject} />
-        </Col>
-      </Row>
-    </div>
-  ))
-  .add('Proposal Card', () => (
-    <div className="ml-30 mr-30 storybook-container">
-      <h1>
-        Proposal Card{' '}
-        <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
-          <i className="small cap cap-github" />
-        </a>
-      </h1>
-      <hr />
-      <Row>
-        <Col>
-          <CardProposal proposal={openProject} />
-        </Col>
-        <Col>
-          <CardProposal proposal={endedProject} />
-        </Col>
-        <Col>
-          <CardProposal proposal={continuousProject} />
-        </Col>
-        <Col>
-          <CardProposal proposal={toComeProject} />
-        </Col>
-      </Row>
-    </div>
-  ))
-  .add('Theme cards', () => (
-    <div className="ml-30 mr-30 storybook-container">
-      <h1>
-        Theme Card{' '}
-        <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
-          <i className="small cap cap-github" />
-        </a>
-      </h1>
-      <hr />
-      <Row>
-        <Col>
-          <CardTheme theme={openProject} />
-        </Col>
-        <Col>
-          <CardTheme theme={endedProject} />
-        </Col>
-        <Col>
-          <CardTheme theme={continuousProject} />
-        </Col>
-        <Col>
-          <CardTheme theme={toComeProject} />
-        </Col>
-      </Row>
-    </div>
-  ));
+    );
+  })
+  .add('Proposal Card', () => {
+    return (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Proposal Card{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <Row>
+          <Col>
+            <CardProposal proposal={openProject} />
+          </Col>
+          <Col>
+            <CardProposal proposal={endedProject} />
+          </Col>
+          <Col>
+            <CardProposal proposal={continuousProject} />
+          </Col>
+          <Col>
+            <CardProposal proposal={toComeProject} />
+          </Col>
+        </Row>
+      </div>
+    );
+  })
+  .add('Theme cards', () => {
+    return (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Theme Card{' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
+            <i className="small cap cap-github" />
+          </a>
+        </h1>
+        <hr />
+        <Row>
+          <Col>
+            <CardTheme theme={openProject} />
+          </Col>
+          <Col>
+            <CardTheme theme={endedProject} />
+          </Col>
+          <Col>
+            <CardTheme theme={continuousProject} />
+          </Col>
+          <Col>
+            <CardTheme theme={toComeProject} />
+          </Col>
+        </Row>
+      </div>
+    );
+  });

@@ -127,8 +127,8 @@ export const getValueFromResponse = (questionType: string, responseValue: string
 export const formatInitialResponsesValues = (
   questions: Questions,
   responses: ResponsesFromAPI,
-): ResponsesInReduxForm =>
-  questions.map(question => {
+): ResponsesInReduxForm => {
+  return questions.map(question => {
     const response = responses.filter(res => res && res.question.id === question.id)[0];
 
     // If we have a previous response format it
@@ -152,15 +152,19 @@ export const formatInitialResponsesValues = (
     }
     return { question: question.id, value: null };
   });
+};
 
-const formattedChoicesInField = field =>
-  field.choices.map(choice => ({
-    id: choice.id,
-    label: choice.title,
-    description: choice.description,
-    color: choice.color,
-    image: choice.image,
-  }));
+const formattedChoicesInField = field => {
+  return field.choices.map(choice => {
+    return {
+      id: choice.id,
+      label: choice.title,
+      description: choice.description,
+      color: choice.color,
+      image: choice.image,
+    };
+  });
+};
 
 export const getRequiredFieldIndicationStrategy = (fields: Questions) => {
   const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);

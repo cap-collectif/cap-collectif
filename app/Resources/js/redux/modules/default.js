@@ -105,8 +105,8 @@ export const requestUpdateRegistrationField = (
   values: Object,
   dispatch: Dispatch,
   { fieldId }: { fieldId: number },
-) =>
-  Fetcher.putToJson(`/registration_form/questions/${fieldId}`, values).then(
+) => {
+  return Fetcher.putToJson(`/registration_form/questions/${fieldId}`, values).then(
     (question: Object) => {
       dispatch(hideRegistrationFieldModal());
       dispatch(updateRegistrationFieldSucceeded(fieldId, question));
@@ -115,14 +115,16 @@ export const requestUpdateRegistrationField = (
       throw new SubmissionError({ _error: 'Un problème est survenu' });
     },
   );
+};
 
-export const updateRegistrationCommunicationForm = (values: Object) =>
-  Fetcher.put('/registration_form', values).then(
+export const updateRegistrationCommunicationForm = (values: Object) => {
+  return Fetcher.put('/registration_form', values).then(
     () => {},
     () => {
       throw new SubmissionError({ _error: 'Un problème est survenu' });
     },
   );
+};
 
 export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
   if (values.type !== '4') {
@@ -155,13 +157,14 @@ export const toggleFeature = (
   dispatch: Dispatch,
   feature: FeatureToggle,
   enabled: boolean,
-): Promise<*> =>
-  Fetcher.put(`/toggles/${feature}`, { enabled }).then(
+): Promise<*> => {
+  return Fetcher.put(`/toggles/${feature}`, { enabled }).then(
     () => {
       dispatch(toggleFeatureSucceeded(feature, enabled));
     },
     () => {},
   );
+};
 
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {

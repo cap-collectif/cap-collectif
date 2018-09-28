@@ -134,27 +134,12 @@
     background-color: $page-bgc;
     font-size: 100%;
 
-    a {
-        &:not(:hover) {
-            color: inherit;
-        }
-
-        &:hover {
-            text-decoration: none;
-            cursor: pointer;
-        }
-    }
-
     .proposal__info, .tags-list__tag {
         padding-top: 10px;
 
         .cap {
             font-size: 22px;
             margin: 0 5px 0 3px;
-        }
-
-        .cap-heart-1 {
-            top: 6px;
         }
     }
 

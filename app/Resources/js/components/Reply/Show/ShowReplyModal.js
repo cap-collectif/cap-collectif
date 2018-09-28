@@ -56,13 +56,15 @@ export class ShowReplyModal extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {reply.responses.filter(Boolean).map((response, index) => (
-            <div key={index}>
-              {response.question.title}
-              {/* $FlowFixMe $refType */}
-              <ResponseValue response={response} />
-            </div>
-          ))}
+          {reply.responses.filter(Boolean).map((response, index) => {
+            return (
+              <div key={index}>
+                {response.question.title}
+                {/* $FlowFixMe $refType */}
+                <ResponseValue response={response} />
+              </div>
+            );
+          })}
         </Modal.Body>
         <Modal.Footer>
           {/* $FlowFixMe $refType */}

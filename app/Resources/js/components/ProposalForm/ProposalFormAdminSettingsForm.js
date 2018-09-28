@@ -13,7 +13,6 @@ import type { State } from '../../types';
 
 type RelayProps = {
   isSuperAdmin: boolean,
-  // eslint-disable-next-line react/no-unused-prop-types
   proposalForm: ProposalFormAdminSettingsForm_proposalForm,
 };
 type Props = RelayProps & {
@@ -28,7 +27,9 @@ type Props = RelayProps & {
 };
 
 const formName = 'proposal-form-admin-settings';
-const validate = () => ({});
+const validate = () => {
+  return {};
+};
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { proposalForm } = props;

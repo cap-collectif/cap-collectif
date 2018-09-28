@@ -156,8 +156,7 @@
         "tweedegolf/prometheus-bundle": "dev-master",
         "overblog/dataloader-bundle": "^0.4.1",
         "zendframework/zend-diactoros": "^1.8",
-        "overblog/graphiql-bundle": "^0.1.1",
-        "nelmio/cors-bundle": "^1.5"
+        "overblog/graphiql-bundle": "^0.1.1"
     },
     "require-dev": {
         "behat/behat": "^3.3",

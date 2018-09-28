@@ -76,7 +76,7 @@ export class Cookie extends React.Component<Props, CookieState> {
                   <FormattedMessage id="indispensable" />
                 </strong>
               </Col>
-              <Col sm={4} className="d-flex justify-content-end color-green">
+              <Col sm={4} className="d-flex flex-end color-green">
                 <FormattedMessage id="always-on" />
               </Col>
             </div>
@@ -95,7 +95,7 @@ export class Cookie extends React.Component<Props, CookieState> {
                       <FormattedMessage id="performance" />
                     </strong>
                   </Col>
-                  <Col sm={4} className="d-flex justify-content-end">
+                  <Col sm={4} className="d-flex flex-end">
                     <div
                       className={isAnalyticEnabled ? 'color-green' : 'color-red'}
                       style={{ marginRight: 10 }}>
@@ -125,7 +125,7 @@ export class Cookie extends React.Component<Props, CookieState> {
                       <FormattedMessage id="advertising" />
                     </strong>
                   </Col>
-                  <Col sm={4} className="d-flex justify-content-end">
+                  <Col sm={4} className="d-flex flex-end">
                     <div
                       className={isAdvertisingEnabled ? 'color-green' : 'color-red'}
                       style={{ marginRight: 10 }}>

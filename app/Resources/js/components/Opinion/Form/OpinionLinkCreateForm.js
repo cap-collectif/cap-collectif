@@ -13,12 +13,14 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
   // We format appendices to call API (could be improved by changing api design)
   const appendices = Object.keys(data)
     .filter(key => key !== 'title' && key !== 'body' && key !== 'opinionType')
-    .map(key => ({
-      appendixType: availableTypes
-        .filter(type => type.id === data.opinionType)[0]
-        .appendixTypes.filter(t => t.title === key)[0].id,
-      body: data[key],
-    }));
+    .map(key => {
+      return {
+        appendixType: availableTypes
+          .filter(type => type.id === data.opinionType)[0]
+          .appendixTypes.filter(t => t.title === key)[0].id,
+        body: data[key],
+      };
+    });
   const form = {
     OpinionType: data.opinionType,
     title: data.title,
@@ -34,7 +36,6 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
 
 type Props = {
   availableTypes: Array<Object>,
-  // eslint-disable-next-line react/no-unused-prop-types
   opinion: Object,
   handleSubmit: Function,
   currentType: ?Object,

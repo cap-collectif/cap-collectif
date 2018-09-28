@@ -73,10 +73,12 @@ export class OpinionCreateModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
-  show: state.opinion.showOpinionCreateModal === props.section.id,
-  submitting: isSubmitting(formName)(state),
-});
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => {
+  return {
+    show: state.opinion.showOpinionCreateModal === props.section.id,
+    submitting: isSubmitting(formName)(state),
+  };
+};
 
 const container = connect(mapStateToProps)(injectIntl(OpinionCreateModal));
 

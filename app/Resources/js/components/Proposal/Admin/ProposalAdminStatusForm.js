@@ -52,12 +52,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   });
 };
 
-const onDelete = (proposalId: string) =>
-  DeleteProposalMutation.commit({
+const onDelete = (proposalId: string) => {
+  return DeleteProposalMutation.commit({
     input: {
       proposalId,
     },
   });
+};
 
 export class ProposalAdminStatusForm extends Component<Props> {
   static defaultProps: DefaultProps;

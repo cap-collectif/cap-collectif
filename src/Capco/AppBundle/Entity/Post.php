@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Utils\Text;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -518,12 +519,15 @@ class Post implements CommentableInterface, IndexableInterface
     public function getAbstractOrBeginningOfTheText()
     {
         if ($this->abstract) {
-            return $this->abstract;
+            return Text::htmlToString($this->abstract);
         }
 
-        return \strlen($this->getBodyText()) > 300
-            ? substr($this->getBodyText(), 0, 300) . ' [&hellip;]'
-            : $this->getBodyText();
+        $abstract =
+            \strlen($this->getBodyText()) > 300
+                ? substr($this->getBodyText(), 0, 300) . ' [&hellip;]'
+                : $this->getBodyText();
+
+        return Text::htmlToString($abstract);
     }
 
     // ************************** Lifecycle **************************************

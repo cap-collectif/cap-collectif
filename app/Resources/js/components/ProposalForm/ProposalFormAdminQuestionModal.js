@@ -7,7 +7,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
-import type { GlobalState } from '../../types';
+import type { Dispatch, GlobalState } from '../../types';
 import QuestionChoiceAdminForm from '../QuestionChoices/QuestionChoiceAdminForm';
 
 type ParentProps = {
@@ -20,6 +20,7 @@ type ParentProps = {
 };
 
 type Props = {
+  dispatch: Dispatch,
   type: string,
   validationRuleType: string,
   formErrors: Object,

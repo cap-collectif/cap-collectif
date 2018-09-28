@@ -43,6 +43,7 @@ const valueToObject = (value: YesNoPairedVoteValue): Object => {
 type Props = {
   style: Object,
   value: YesNoPairedVoteValue,
+  user?: Object,
 } & RelayProps;
 
 export class OpinionVotesButton extends React.Component<Props> {

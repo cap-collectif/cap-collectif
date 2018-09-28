@@ -11,6 +11,7 @@ import type { State, Dispatch } from '../../../types';
 import type { ProposalDeleteModal_proposal } from './__generated__/ProposalDeleteModal_proposal.graphql';
 
 type Props = {
+  form: Object,
   proposal: ProposalDeleteModal_proposal,
   show: boolean,
   isDeleting: boolean,
@@ -67,10 +68,12 @@ export class ProposalDeleteModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  isDeleting: state.proposal.isDeleting,
-  show: state.proposal.showDeleteModal,
-});
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+  return {
+    isDeleting: state.proposal.isDeleting,
+    show: state.proposal.showDeleteModal,
+  };
+};
 const container = connect(mapStateToProps)(ProposalDeleteModal);
 
 export default createFragmentContainer(container, {

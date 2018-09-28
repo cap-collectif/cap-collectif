@@ -84,45 +84,55 @@ export const submitSourceReport = (
   sourceId: Uuid,
   data: Object,
   dispatch: Dispatch,
-) =>
-  submitReport(
+) => {
+  return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/sources/${sourceId}/reports`,
     data,
     dispatch,
     'alert.success.report.source',
   );
+};
 
 export const submitArgumentReport = (
   opinion: Object,
   argument: Uuid,
   data: Object,
   dispatch: Dispatch,
-) =>
-  submitReport(
+) => {
+  return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}/reports`,
     data,
     dispatch,
     'alert.success.report.argument',
   );
+};
 
-export const submitOpinionReport = (opinion: Object, data: Object, dispatch: Dispatch) =>
-  submitReport(
+export const submitOpinionReport = (opinion: Object, data: Object, dispatch: Dispatch) => {
+  return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/reports`,
     data,
     dispatch,
     'alert.success.report.opinion',
   );
+};
 
-export const submitCommentReport = (commentId: string, data: Object, dispatch: Dispatch) =>
-  submitReport(`/comments/${commentId}/reports`, data, dispatch, 'alert.success.report.comment');
+export const submitCommentReport = (commentId: string, data: Object, dispatch: Dispatch) => {
+  return submitReport(
+    `/comments/${commentId}/reports`,
+    data,
+    dispatch,
+    'alert.success.report.comment',
+  );
+};
 
-export const submitProposalReport = (proposal: Object, data: Object, dispatch: Dispatch) =>
-  submitReport(
+export const submitProposalReport = (proposal: Object, data: Object, dispatch: Dispatch) => {
+  return submitReport(
     `/proposals/${proposal.id}/reports`,
     data,
     dispatch,
     'alert.success.report.proposal',
   );
+};
 
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
