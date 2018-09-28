@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import type { GlobalState, Dispatch } from '../../types';
-import { changeConsultationPlanActiveItem } from '../../redux/modules/project';
+import { changeConsultationPlanActiveItems } from '../../redux/modules/project';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 // import ConsultationFilterForm from './ConsultationFilterForm';
 // import ConsultationContributionFiltered
@@ -48,14 +48,10 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
     });
   }
 
-  scrollSpy = (test?: boolean) => {
+  scrollSpy = () => {
     const { dispatch } = this.props;
     const sectionItems = document.querySelectorAll('.section-list_container');
     const activeItems = [];
-
-    if(test) {
-      console.log(test);
-    }
 
     sectionItems.forEach(item => {
       const itemPosition = item.getBoundingClientRect();
@@ -70,11 +66,8 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
       }
     });
 
-    if (
-      test === true ||
-      JSON.stringify(activeItems) !== JSON.stringify(this.state.currentActiveItems)
-    ) {
-      dispatch(changeConsultationPlanActiveItem(activeItems));
+    if (JSON.stringify(activeItems) !== JSON.stringify(this.state.currentActiveItems)) {
+      dispatch(changeConsultationPlanActiveItems(activeItems));
     }
 
     this.setState({ currentActiveItems: activeItems });
@@ -110,12 +103,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
             showConsultationPlan ? 'consultation-plan col-md-3 col-sm-12' : 'consultation-plan'
           }
           id="consultation-plan">
-          <ConsultationPlan
-            step={step}
-            scrollSpy={test => {
-              this.scrollSpy(test);
-            }}
-          />
+          <ConsultationPlan step={step} />
         </div>
         <div
           id="scroll-content"

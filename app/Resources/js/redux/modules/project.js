@@ -22,7 +22,8 @@ export type State = {
   +theme: ?string,
   +isLoading: boolean,
   +count: number,
-  +selectedActiveItem: Array<string>,
+  +selectedActiveItems: Array<string>,
+  +onOpenActiveItems: Array<string>,
 };
 
 const initialState: State = {
@@ -42,7 +43,8 @@ const initialState: State = {
   theme: null,
   isLoading: true,
   count: 0,
-  selectedActiveItem: [],
+  selectedActiveItems: [],
+  onOpenActiveItems: [],
 };
 type RequestFetchProjectsAction = { type: 'project/PROJECTS_FETCH_REQUESTED' };
 type ChangePageAction = { type: 'project/CHANGE_PAGE', page: number };
@@ -71,9 +73,13 @@ type OpenConsultationPlanAction = {
   type: 'project/OPEN_CONSULTATION_PLAN',
   id: string,
 };
-type ChangeConsultationPlanActiveItemAction = {
-  type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM',
-  item: Array<string>,
+type ChangeConsultationPlanActiveItemsAction = {
+  type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEMS',
+  items: Array<string>,
+};
+type OpenConsultationPlanActiveItemsAction = {
+  type: 'proposal/OPEN_CONSULTATION_PLAN_ACTIVE_ITEMS',
+  items: Array<string>,
 };
 
 export type ProjectAction =
@@ -86,7 +92,8 @@ export type ProjectAction =
   | ReceivedProjectSucceedAction
   | CloseConsultationPlanAction
   | OpenConsultationPlanAction
-  | ChangeConsultationPlanActiveItemAction
+  | ChangeConsultationPlanActiveItemsAction
+  | OpenConsultationPlanActiveItemsAction
   | { type: 'project/PROJECTS_FETCH_FAILED', error: Object }
   | { type: 'project/CHANGE_FILTER', filter: string, value: string };
 
@@ -124,11 +131,18 @@ export const openConsultationPlan = (id: string): OpenConsultationPlanAction => 
   id,
 });
 
-export const changeConsultationPlanActiveItem = (
-  item: Array<string>,
-): ChangeConsultationPlanActiveItemAction => ({
-  type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM',
-  item,
+export const changeConsultationPlanActiveItems = (
+  items: Array<string>,
+): ChangeConsultationPlanActiveItemsAction => ({
+  type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEMS',
+  items,
+});
+
+export const openConsultationPlanActiveItems = (
+  items: Array<string>,
+): OpenConsultationPlanActiveItemsAction => ({
+  type: 'proposal/OPEN_CONSULTATION_PLAN_ACTIVE_ITEMS',
+  items,
 });
 
 export function* fetchProjectsSaga(): Generator<*, *, *> {
@@ -198,8 +212,11 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       LocalStorageService.set('project.showConsultationPlanById', data);
       return { ...state, showConsultationPlanById: data };
     }
-    case 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEM': {
-      return { ...state, selectedActiveItem: action.item };
+    case 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEMS': {
+      return { ...state, selectedActiveItems: action.items };
+    }
+    case 'proposal/OPEN_CONSULTATION_PLAN_ACTIVE_ITEMS': {
+      return { ...state, onOpenActiveItems: action.items };
     }
     default:
       return state;

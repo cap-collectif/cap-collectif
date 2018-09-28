@@ -7,7 +7,11 @@ import { Button } from 'react-bootstrap';
 import type { Dispatch, GlobalState } from '../../types';
 import type { ConsultationPlanRecursiveItems_consultation } from './__generated__/ConsultationPlanRecursiveItems_consultation.graphql';
 import ConsultationPlanItems from './ConsultationPlanItems';
-import { closeConsultationPlan, openConsultationPlan } from '../../redux/modules/project';
+import {
+  closeConsultationPlan,
+  openConsultationPlan,
+  openConsultationPlanActiveItems,
+} from '../../redux/modules/project';
 import config from '../../config';
 import StackedNav from '../Ui/Nav/StackedNav';
 
@@ -16,8 +20,8 @@ type Props = {
   stepId: string,
   closePlan: Function,
   openPlan: Function,
+  onOpenActiveItems: Function,
   showConsultationPlan: boolean,
-  scrollSpy: (test: boolean) => {},
   intl: IntlShape,
 };
 
@@ -31,15 +35,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   }
 
   getPlan = () => {
-    const {
-      consultation,
-      closePlan,
-      openPlan,
-      showConsultationPlan,
-      stepId,
-      scrollSpy,
-      intl,
-    } = this.props;
+    const { consultation, closePlan, showConsultationPlan, stepId, intl } = this.props;
 
     if (showConsultationPlan) {
       return (
@@ -88,10 +84,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
           bsStyle="link"
           className="p-0 btn-md"
           aria-label={intl.formatMessage({ id: 'open-the-plan' })}
-          onClick={() => {
-            openPlan(stepId);
-            scrollSpy(true);
-          }}>
+          onClick={this.openAction}>
           <i className="cap cap-android-menu mr-5 hidden-xs hidden-sm" />
           <FormattedMessage id="plan" />
           <i className="cap cap-android-menu ml-5 hidden-md hidden-lg" />
@@ -104,6 +97,29 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
     if (config.canUseDOM && document.body) {
       document.body.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
     }
+  };
+
+  openAction = () => {
+    const { openPlan, stepId, onOpenActiveItems } = this.props;
+    const sectionItems = document.querySelectorAll('.section-list_container');
+    const activeItems = [];
+
+    openPlan(stepId);
+
+    sectionItems.forEach(item => {
+      const itemPosition = item.getBoundingClientRect();
+
+      // 40 is height of nav
+      if (
+        itemPosition &&
+        itemPosition.top - 20 < 0 &&
+        itemPosition.top - 20 > -itemPosition.height + 40
+      ) {
+        activeItems.push(item.id);
+      }
+    });
+
+    onOpenActiveItems(activeItems);
   };
 
   render() {
@@ -130,6 +146,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   openPlan: id => {
     dispatch(openConsultationPlan(id));
+  },
+  onOpenActiveItems: items => {
+    dispatch(openConsultationPlanActiveItems(items));
   },
 });
 

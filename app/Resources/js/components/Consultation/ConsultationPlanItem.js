@@ -10,6 +10,7 @@ type Props = {
   section: ConsultationPlanItem_section,
   level: number,
   activeItems: Array<string>,
+  onOpenActiveItems: Array<string>,
   onCollapse: (collapseItem: boolean) => {},
 };
 
@@ -20,27 +21,38 @@ export class ConsultationPlanItem extends React.Component<Props> {
     this.navItem = React.createRef();
   }
 
+  componentDidMount() {
+    const { onOpenActiveItems } = this.props;
+
+    this.getActiveItems(onOpenActiveItems);
+  }
+
   componentDidUpdate(prevProps: Props) {
-    const { activeItems, onCollapse, section } = this.props;
+    const { activeItems } = this.props;
 
-    if (prevProps.activeItems !== this.props.activeItems) {
-      const item = this.navItem.current;
-
-      if (activeItems.includes(section.id)) {
-        onCollapse(true);
-      } else {
-        onCollapse(false);
-      }
-
-      if (activeItems.slice(-1).includes(section.id) && item) {
-        // $FlowFixMe
-        item.classList.add('active');
-      } else if (item) {
-        // $FlowFixMe
-        item.classList.remove('active');
-      }
+    if (prevProps.activeItems !== activeItems) {
+      this.getActiveItems(activeItems);
     }
   }
+
+  getActiveItems = (items: Array<string>) => {
+    const { onCollapse, section } = this.props;
+    const item = this.navItem.current;
+
+    if (items.includes(section.id)) {
+      onCollapse(true);
+    } else {
+      onCollapse(false);
+    }
+
+    if (items[items.length - 1] === section.id && item) {
+      // $FlowFixMe
+      item.classList.add('active');
+    } else if (item) {
+      // $FlowFixMe
+      item.classList.remove('active');
+    }
+  };
 
   navItem: { current: null | React.ElementRef<'button'> };
 
@@ -68,7 +80,8 @@ export class ConsultationPlanItem extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  activeItems: state.project.selectedActiveItem,
+  activeItems: state.project.selectedActiveItems,
+  onOpenActiveItems: state.project.onOpenActiveItems,
 });
 
 const container = connect(mapStateToProps)(ConsultationPlanItem);
