@@ -22,11 +22,9 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty close plan 1`] = `
 `;
 
 exports[`<ConsultationPlanRecursiveItems /> renders correcty open plan 1`] = `
-<div
-  className="consultation-plan_open"
->
+<StackedNav>
   <div
-    className="consultation-plan__header"
+    className="stacked-nav__header"
   >
     <p>
       <i
@@ -46,7 +44,7 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty open plan 1`] = `
     </a>
   </div>
   <div
-    className="consultation-plan__list"
+    className="stacked-nav__list"
   >
     <ConsultationPlanItems
       key="0"
@@ -72,7 +70,7 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty open plan 1`] = `
     />
   </div>
   <div
-    className="consultation-plan__back-to-top"
+    className="stacked-nav__footer"
   >
     <a
       onClick={[Function]}
@@ -86,5 +84,5 @@ exports[`<ConsultationPlanRecursiveItems /> renders correcty open plan 1`] = `
       />
     </a>
   </div>
-</div>
+</StackedNav>
 `;

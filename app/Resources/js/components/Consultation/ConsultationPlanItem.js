@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
-import { NavItem } from 'react-bootstrap';
 import type { ConsultationPlanItem_section } from './__generated__/ConsultationPlanItem_section.graphql';
 import config from '../../config';
 import type { State } from '../../types';
@@ -24,12 +23,7 @@ export class ConsultationPlanItem extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
     const { activeItems, onCollapse, section } = this.props;
 
-    console.warn(activeItems);
-
     if (prevProps.activeItems !== this.props.activeItems) {
-      // We can't pass innerRef to NavItem component and we need to recover <li>
-      // const itemLink = this.navItem.current && this.navItem.current.parentNode;
-      // const item = itemLink && itemLink.parentNode;
       const item = this.navItem.current;
 
       if (activeItems.includes(section.id)) {
@@ -48,7 +42,7 @@ export class ConsultationPlanItem extends React.Component<Props> {
     }
   }
 
-  navItem: { current: null | React.ElementRef<'span'> };
+  navItem: { current: null | React.ElementRef<'button'> };
 
   handleClick = () => {
     const { section } = this.props;
@@ -66,9 +60,9 @@ export class ConsultationPlanItem extends React.Component<Props> {
     const { section, level } = this.props;
 
     return (
-      <a className={`level--${level}`} ref={this.navItem} onClick={this.handleClick}>
+      <button className={`level--${level} btn-link`} ref={this.navItem} onClick={this.handleClick}>
         {section.title}
-      </a>
+      </button>
     );
   }
 }

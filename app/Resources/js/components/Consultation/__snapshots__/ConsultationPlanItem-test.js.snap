@@ -1,14 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ConsultationPlanItem /> renders correcty 1`] = `
-<NavItem
-  active={false}
+<a
   className="level--0"
-  disabled={false}
   onClick={[Function]}
 >
-  <span>
-    title
-  </span>
-</NavItem>
+  title
+</a>
 `;

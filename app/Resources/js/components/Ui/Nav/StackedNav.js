@@ -9,63 +9,61 @@ type Props = {
 const Container = styled.div.attrs({
   className: 'stacked-nav',
 })`
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
   width: 100%;
-  
-  a, a:hover {
+
+  a,
+  a:hover,
+  button,
+  button:hover {
     text-decoration: none;
   }
-  
+
   .stacked-nav__header {
     color: #707070;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #e3e3e3;
     text-transform: uppercase;
+    padding-bottom: 10px;
 
-    a {
+    .btn-link {
       color: #707070;
     }
 
-    .cap {
-      top: 5px;
+    p {
+      margin: 0;
     }
 
     .cap-android-menu {
       font-size: 21px;
+      top: 5px;
     }
 
     .cap-delete-1 {
       font-size: 12px;
     }
   }
-  
-  .stacked-nav__list {
-    a {
-      cursor: pointer;
-    }
 
+  .stacked-nav__list {
     .nav {
       li {
-        a {
-          color: #000000;
-          border: 1px solid #F6F6F6;
-        }
-
-        &.active a,
-        &:hover a,
-        a:focus {
-          color: #000000;
-          background-color: transparent;
-        }
-
-        & a.active,
-        & a:hover {
-          background-color: #FFFFFF;
-          border: 1px solid #E3E3E3;
+        button.active,
+        button:hover {
+          background-color: #ffffff;
+          border: 1px solid #e3e3e3;
         }
       }
-      
+
+      .btn-link {
+        color: #000000;
+        border: 1px solid #f6f6f6;
+        font-size: 16px;
+        width: 100%;
+        text-align: left;
+        padding: 10px 15px;
+      }
+
       .level--0 {
         font-weight: 600;
       }
@@ -85,23 +83,22 @@ const Container = styled.div.attrs({
         font-weight: 300;
       }
     }
-  }  
-  
+  }
+
   .stacked-nav__footer {
     padding: 15px 0;
     color: #000000;
 
-    a {
+    .btn-link {
       font-weight: 300;
       font-size: 16px;
-      
+
       &:not(:hover) {
         color: #000000;
       }
     }
   }
 `;
-
 
 class StackedNav extends React.Component<Props> {
   render() {

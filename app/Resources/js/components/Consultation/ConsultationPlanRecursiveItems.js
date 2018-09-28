@@ -3,12 +3,13 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { Button } from 'react-bootstrap';
 import type { Dispatch, GlobalState } from '../../types';
 import type { ConsultationPlanRecursiveItems_consultation } from './__generated__/ConsultationPlanRecursiveItems_consultation.graphql';
 import ConsultationPlanItems from './ConsultationPlanItems';
 import { closeConsultationPlan, openConsultationPlan } from '../../redux/modules/project';
 import config from '../../config';
-import StackedNav from "../Ui/Nav/StackedNav";
+import StackedNav from '../Ui/Nav/StackedNav';
 
 type Props = {
   consultation: ConsultationPlanRecursiveItems_consultation,
@@ -46,12 +47,14 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
               <i className="cap cap-android-menu mr-5" />
               <FormattedMessage id="plan" />
             </p>
-            <a
+            <Button
+              bsStyle="link"
+              className="p-0 btn-md"
               onClick={() => {
                 closePlan(stepId);
               }}>
               <i className="cap cap-delete-1" />
-            </a>
+            </Button>
           </div>
           <div className="stacked-nav__list">
             {consultation.sections &&
@@ -67,10 +70,10 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
                 ))}
           </div>
           <div className="stacked-nav__footer">
-            <a onClick={this.handleClick}>
+            <Button bsStyle="link" className="p-0" onClick={this.handleClick}>
               <i className="cap cap-arrow-68 mr-5" />
               <FormattedMessage id="back-to-top" />
-            </a>
+            </Button>
           </div>
         </StackedNav>
       );
@@ -78,7 +81,9 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
 
     return (
       <div className="consultation-plan_close">
-        <a
+        <Button
+          bsStyle="link"
+          className="p-0 btn-md"
           onClick={() => {
             openPlan(stepId);
             scrollSpy(true);
@@ -86,7 +91,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
           <i className="cap cap-android-menu mr-5 hidden-xs hidden-sm" />
           <FormattedMessage id="plan" />
           <i className="cap cap-android-menu ml-5 hidden-md hidden-lg" />
-        </a>
+        </Button>
       </div>
     );
   };

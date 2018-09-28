@@ -17,12 +17,11 @@ type Step = {
 
 type Props = {
   step: Step,
-  scrollSpy: (test: boolean) => {}
 };
 
 export class ConsultationPlan extends React.Component<Props> {
   render() {
-    const { step, scrollSpy } = this.props;
+    const { step } = this.props;
 
     const renderConsultationPlanRecursiveItems = ({
       error,
@@ -36,7 +35,7 @@ export class ConsultationPlan extends React.Component<Props> {
         if (props.consultation) {
           return (
             // $FlowFixMe
-            <ConsultationPlanRecursiveItems consultation={props.consultation} stepId={step.id} scrollSpy={scrollSpy} />
+            <ConsultationPlanRecursiveItems consultation={props.consultation} stepId={step.id} />
           );
         }
         return graphqlError;
