@@ -128,7 +128,12 @@ export const validateProposalContent = (
     errors.theme = 'proposal.constraints.theme';
   }
 
-  const responsesError = validateResponses(proposalForm.questions, values.responses, 'reply', intl);
+  const responsesError = validateResponses(
+    proposalForm.questions,
+    values.responses,
+    'proposal',
+    intl,
+  );
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses;
   }
@@ -136,9 +141,8 @@ export const validateProposalContent = (
   return errors;
 };
 
-const validate = (values: FormValues, { proposal, features, intl }: Props) => {
-  return validateProposalContent(values, proposal.form, features, intl);
-};
+const validate = (values: FormValues, { proposal, features, intl }: Props) =>
+  validateProposalContent(values, proposal.form, features, intl);
 
 type State = {
   showEditFusionModal: boolean,
