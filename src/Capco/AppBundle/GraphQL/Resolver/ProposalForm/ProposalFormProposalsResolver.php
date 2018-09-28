@@ -33,8 +33,6 @@ class ProposalFormProposalsResolver implements ResolverInterface
         $totalCount = 0;
         $filters = [];
         $term = null;
-        $isExporting = $args->offsetGet('includeUnpublished');
-
         if ($args->offsetExists('term')) {
             $term = $args->offsetGet('term');
         }
@@ -47,15 +45,10 @@ class ProposalFormProposalsResolver implements ResolverInterface
             return $emptyConnection;
         }
 
-        /**
-         * When a collect step is private, only the author
-         * or an admin can see proposals inside.
-         *
-         * Except when exporting .csv files, in this case
-         * everything is shown, because the admin should have
-         * disable public export anyway.
-         */
-        if ($form->getStep()->isPrivate() && !$isExporting) {
+        if ($form->getStep()->isPrivate()) {
+            // The step is private
+            // only an author or an admin can see proposals
+
             // If viewer is not authentiated we return an empty connection
             if (!$viewer instanceof User) {
                 return $emptyConnection;
