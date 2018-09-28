@@ -71,8 +71,12 @@ trait AdminProposalTrait
      */
     public function iFillProposalContentAddressWith(string $address)
     {
+        $this->getSession()->wait(3000, "$('#proposal_address').length > 0");
         $this->fillField('proposal_address', $address);
-        $this->iWait(1);
+        $this->getSession()->wait(
+            3000,
+            "$('#PlacesAutocomplete__autocomplete-container > div:first-child').length > 0"
+        );
         $this->iClickElement('#PlacesAutocomplete__autocomplete-container > div:first-child');
         $this->iWait(1);
     }
@@ -137,7 +141,7 @@ trait AdminProposalTrait
     public function iCheckTheProposalDefinitionEvaluationWithValue(string $value)
     {
         $element =
-            '#proposal-admin-page-tabs-pane-5 div[id="proposal-admin-evaluation-responses[3]"] div.checkbox input[type="checkbox"][name="choices-for-field-proposal-admin-evaluation-responses[3]"][value="' .
+            '#proposal-admin-page-tabs-pane-5 div[id="responses[3]"] div.checkbox input[type="checkbox"][name="choices-for-field-responses[3]"][value="' .
             $value .
             '"]';
         $this->getCurrentPage()
