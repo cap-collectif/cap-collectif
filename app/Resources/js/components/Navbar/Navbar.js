@@ -18,9 +18,9 @@ class Navbar extends React.Component<Props> {
 
     const navbarLgSize = (
       <Nav id="navbar-content" className="visible-lg-block">
-        {items.filter((item, index) => index < 6).map((header, index) => (
-          <NavbarItem key={index} item={header} />
-        ))}
+        {items.filter((item, index) => index < 6).map((header, index) => {
+          return <NavbarItem key={index} item={header} />;
+        })}
         {items.length > 6 && (
           <NavbarItem
             item={{
@@ -37,9 +37,9 @@ class Navbar extends React.Component<Props> {
 
     const navbarMdSize = (
       <Nav id="navbar-content" className="visible-md-block">
-        {items.filter((item, index) => index < 3).map((header, index) => (
-          <NavbarItem key={index} item={header} />
-        ))}
+        {items.filter((item, index) => index < 3).map((header, index) => {
+          return <NavbarItem key={index} item={header} />;
+        })}
         {items.length > 3 && (
           <NavbarItem
             item={{
@@ -56,9 +56,9 @@ class Navbar extends React.Component<Props> {
 
     const navbarSmSize = (
       <Nav id="navbar-content" className="visible-sm-block">
-        {items.filter((item, index) => index < 1).map((header, index) => (
-          <NavbarItem key={index} item={header} />
-        ))}
+        {items.filter((item, index) => index < 1).map((header, index) => {
+          return <NavbarItem key={index} item={header} />;
+        })}
         {items.length > 1 && (
           <NavbarItem
             item={{
@@ -75,9 +75,9 @@ class Navbar extends React.Component<Props> {
 
     const navbarXsSize = (
       <Nav id="navbar-content" className="visible-xs-block">
-        {items.map((header, index) => (
-          <NavbarItem key={index} item={header} />
-        ))}
+        {items.map((header, index) => {
+          return <NavbarItem key={index} item={header} />;
+        })}
       </Nav>
     );
 

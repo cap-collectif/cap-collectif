@@ -9,6 +9,8 @@ import VisibilityBox from '../../Utils/VisibilityBox';
 import ProposalList from './ProposalList';
 
 type Props = {
+  term: ?string,
+  order: string,
   relay: RelayPaginationProp,
   step: ProposalListViewPaginated_step,
   view: 'mosaic' | 'table',

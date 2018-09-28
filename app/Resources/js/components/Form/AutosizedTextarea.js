@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import autosize from 'autosize';
 import { FormControl } from 'react-bootstrap';
@@ -21,8 +20,6 @@ class AutosizedTextarea extends React.Component<Props> {
     const input = ReactDOM.findDOMNode(this.refFormControl);
     autosize.destroy(input);
   }
-
-  refFormControl: ?React.Component<*>;
 
   render() {
     return (

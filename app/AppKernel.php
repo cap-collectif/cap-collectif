@@ -86,8 +86,6 @@ class AppKernel extends Kernel
             new \Infinite\FormBundle\InfiniteFormBundle(),
             new Overblog\DataLoaderBundle\OverblogDataLoaderBundle(),
             new Overblog\GraphiQLBundle\OverblogGraphiQLBundle(),
-            // CORS
-            new Nelmio\CorsBundle\NelmioCorsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

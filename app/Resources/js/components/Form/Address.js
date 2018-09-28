@@ -9,12 +9,14 @@ import type { Dispatch } from '../../types';
 type PassedProps = {
   onChange: Function,
   value: any,
+  name: string,
   id: string,
   placeholder: string,
-  // eslint-disable-next-line react/no-unused-prop-types
   formName: string,
+  disabled: boolean,
 };
-type Props = PassedProps & { updateAddressValue: (value: ?string) => void };
+type DefaultProps = { disabled: boolean };
+type Props = PassedProps & DefaultProps & { updateAddressValue: (value: ?string) => void };
 
 const renderSuggestion = ({
   formattedSuggestion,
@@ -27,6 +29,10 @@ const renderSuggestion = ({
 );
 
 class Address extends React.Component<Props> {
+  static defaultProps = {
+    disabled: false,
+  };
+
   resetAddressField = () => {
     this.props.onChange(null);
     this.props.updateAddressValue(null);

@@ -458,11 +458,13 @@ export class ProposalForm extends React.Component<Props, State> {
                   </option>
                 )}
               </FormattedMessage>
-              {proposalForm.categories.map(category => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
+              {proposalForm.categories.map(category => {
+                return (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                );
+              })}
             </Field>
           )}
         {proposalForm.usingAddress && (

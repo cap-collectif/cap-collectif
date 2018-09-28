@@ -39,10 +39,10 @@ export class UnpublishedArgumentList extends React.Component<Props> {
             .filter(Boolean)
             .map(edge => edge.node)
             .filter(Boolean)
-            .map(argument => (
+            .map(argument => {
               // $FlowFixMe
-              <ArgumentItem key={argument.id} argument={argument} />
-            ))}
+              return <ArgumentItem key={argument.id} argument={argument} />;
+            })}
         </ListGroup>
       </Panel>
     );

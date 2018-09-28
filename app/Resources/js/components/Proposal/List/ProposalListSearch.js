@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { injectIntl } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
@@ -21,7 +21,6 @@ class ProposalListSearch extends React.Component<Props, State> {
   state = {
     terms: this.props.terms,
   };
-  _input: ?React.Component<*>;
 
   handleSubmit = (e: Event) => {
     const { dispatch } = this.props;
@@ -48,9 +47,8 @@ class ProposalListSearch extends React.Component<Props, State> {
           id="proposal-search-input"
           type="text"
           aria-label={intl.formatMessage({ id: 'project.searchform.search' })}
-          ref={c => {
-            this._input = c;
-          }}
+          // $FlowFixMe
+          ref={c => (this._input = c)}
           placeholder="proposal.search"
           buttonAfter={
             <Button id="proposal-search-button" type="submit">

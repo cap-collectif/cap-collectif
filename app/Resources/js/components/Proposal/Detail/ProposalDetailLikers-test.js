@@ -3,52 +3,41 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalDetailLikers } from './ProposalDetailLikers';
-import { $refType, $fragmentRefs, intlMock } from '../../../mocks';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalDetailLikers />', () => {
-  const propsWithLikers = {
-    showModal: true,
-    dispatch: jest.fn(),
-    intl: intlMock,
-    proposal: {
-      $refType,
-      $fragmentRefs,
-      id: '1',
-      likers: [
-        {
-          id: '1',
-        },
-        {
-          id: '2',
-        },
-      ],
-    },
-  };
-
-  const propsWithoutLikers = {
-    showModal: false,
-    dispatch: jest.fn(),
-    intl: intlMock,
-    proposal: {
-      $refType,
-      $fragmentRefs,
-      id: '1',
-      likers: [],
-    },
+  const proposalWithoutLikers = {
+    $refType,
+    $fragmentRefs,
+    id: '1',
+    likers: [],
   };
 
   it('should not render anything when proposal has no likers', () => {
-    const wrapper = shallow(<ProposalDetailLikers {...propsWithoutLikers} />);
+    const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithoutLikers} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a <Modal /> when proposal has likers', () => {
-    const wrapper = shallow(<ProposalDetailLikers {...propsWithLikers} />);
+  const proposalWithLikers = {
+    $refType,
+    $fragmentRefs,
+    id: '1',
+    likers: [
+      {
+        id: '1',
+      },
+    ],
+  };
+
+  it('should render a <OverlayTrigger /> with <Tooltip /> when proposal has likers', () => {
+    const wrapper = shallow(<ProposalDetailLikers proposal={proposalWithLikers} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a div when specified', () => {
-    const wrapper = shallow(<ProposalDetailLikers componentClass="div" {...propsWithLikers} />);
+    const wrapper = shallow(
+      <ProposalDetailLikers componentClass="div" proposal={proposalWithLikers} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

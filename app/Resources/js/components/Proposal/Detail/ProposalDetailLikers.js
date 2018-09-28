@@ -1,66 +1,50 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
-import { injectIntl, type IntlShape } from 'react-intl';
-import { openDetailLikersModal } from '../../../redux/modules/proposal';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
-import ProposalDetailLikersModal from './ProposalDetailLikersModal';
+import ProposalDetailLikersTooltipLabel from './ProposalDetailLikersTooltipLabel';
 import type { ProposalDetailLikers_proposal } from './__generated__/ProposalDetailLikers_proposal.graphql';
-import type { Dispatch, State } from '../../../types';
 
 type Props = {
   proposal: ProposalDetailLikers_proposal,
   componentClass: string,
-  showModal: boolean,
-  dispatch: Dispatch,
-  intl: IntlShape,
 };
 
 export class ProposalDetailLikers extends React.Component<Props> {
   static defaultProps = {
-    componentClass: 'a',
+    componentClass: 'span',
   };
 
-  handleClick = (e: SyntheticEvent<HTMLButtonElement>) => {
-    const { dispatch, proposal } = this.props;
-    e.preventDefault();
-    dispatch(openDetailLikersModal(proposal.id));
-  };
+  renderContent() {
+    const { proposal } = this.props;
+    return (
+      <OverlayTrigger
+        placement="top"
+        overlay={
+          <Tooltip id={`proposal-${proposal.id}-likers-tooltip-`}>
+            {/* $FlowFixMe */}
+            <ProposalDetailLikersTooltipLabel proposal={proposal} />
+          </Tooltip>
+        }>
+        {/* $FlowFixMe */}
+        <ProposalDetailLikersLabel proposal={proposal} />
+      </OverlayTrigger>
+    );
+  }
 
   render() {
-    const { proposal, componentClass, showModal, intl } = this.props;
+    const { proposal, componentClass } = this.props;
     const Component = componentClass;
-
-    if (proposal.likers.length === 0) {
-      return null;
+    if (proposal.likers.length > 0) {
+      return <Component className="tags-list__tag">{this.renderContent()}</Component>;
     }
 
-    return (
-      <React.Fragment>
-        <Component
-          className="tags-list__tag"
-          title={intl.formatMessage({ id: 'list-of-favorites' })}
-          onClick={this.handleClick}>
-          {/* $FlowFixMe */}
-          <ProposalDetailLikersLabel proposal={proposal} />
-        </Component>
-        {/* $FlowFixMe */}
-        <ProposalDetailLikersModal show={showModal} proposal={proposal} />
-      </React.Fragment>
-    );
+    return null;
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
-  showModal:
-    state.proposal.showDetailLikersModal &&
-    state.proposal.showDetailLikersModal === props.proposal.id,
-});
-
-const container = connect(mapStateToProps)(injectIntl(ProposalDetailLikers));
-
-export default createFragmentContainer(container, {
+export default createFragmentContainer(ProposalDetailLikers, {
   proposal: graphql`
     fragment ProposalDetailLikers_proposal on Proposal {
       id
@@ -68,7 +52,7 @@ export default createFragmentContainer(container, {
         id
       }
       ...ProposalDetailLikersLabel_proposal
-      ...ProposalDetailLikersModal_proposal
+      ...ProposalDetailLikersTooltipLabel_proposal
     }
   `,
 });

@@ -8,7 +8,7 @@ import {
   injectIntl,
 } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Button, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
+import { Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import moment from 'moment';
 import toggle from '../../Form/Toggle';
@@ -89,24 +89,22 @@ export class ProposalUserVoteItem extends React.Component<Props> {
         <i className="cap cap-attention icon--red" />
         <FormattedMessage id="are-you-sure-you-want-to-delete-this-vote" />
         <div className="mt-10 d-flex justify-content-end">
-          <Button
-            bsStyle="default"
+          <button
             onClick={() => {
               this.refs.popover.hide();
             }}
-            className="mr-10">
+            className="btn btn-default mr-10">
             <FormattedMessage id="global.no" />
-          </Button>
+          </button>
           {onDelete && (
-            <Button
-              bsStyle="danger"
+            <button
               onClick={() => {
                 onDelete();
               }}
-              className="proposal-vote__delete-confirm"
+              className="proposal-vote__delete btn btn-danger"
               disabled={!step.open}>
               <FormattedMessage id="btn-delete" />
-            </Button>
+            </button>
           )}
         </div>
       </Popover>
@@ -201,9 +199,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               placement="bottom"
               overlay={popoverConfirmDelete}
               ref="popover">
-              <Button
-                bsStyle="link"
-                onClick={() => {}}
+              <a
                 className="proposal-vote__delete"
                 disabled={!step.open}
                 aria-label={intl.formatMessage({ id: 'aria-label-delete-vote' })}>
@@ -211,7 +207,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
                   className="cap cap-ios-close"
                   id={`${proposal.id}-proposal-vote__private-delete`}
                 />
-              </Button>
+              </a>
             </OverlayTrigger>
           </Col>
         )}

@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Modal, Button, Radio, Panel } from 'react-bootstrap';
+import { Modal, Button, Radio } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { DeleteAccountModal_viewer } from './__generated__/DeleteAccountModal_viewer.graphql';
 import DefaultAvatar from './DefaultAvatar';
@@ -56,9 +56,9 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
 
   render() {
     const softPanelChecked =
-      this.state.removalType === 'SOFT' ? 'delete__panel__checked' : '';
+      this.state.removalType === 'SOFT' ? 'panel-primary delete__panel__checked' : 'panel-default';
     const hardPanelChecked =
-      this.state.removalType === 'HARD' ? 'delete__panel__checked' : '';
+      this.state.removalType === 'HARD' ? 'panel-primary delete__panel__checked' : 'panel-default';
     const { show, viewer } = this.props;
     const removalName = 'type-of-removal';
     return (
@@ -115,11 +115,10 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                 </b>
               </p>
               <div>
-                <Panel
-                  bsStyle={softPanelChecked ? 'primary' : 'default'}
-                  className={softPanelChecked}
+                <div
+                  className={`panel ${softPanelChecked}`}
                   onClick={() => this.onPanelClick('SOFT')}>
-                  <Panel.Body id="delete-account-soft">
+                  <div className="panel-body" id="delete-account-soft">
                     <div className="row">
                       <div className="col-sm-7">
                         <Radio
@@ -161,13 +160,12 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                         </div>
                       </div>
                     </div>
-                  </Panel.Body>
-                </Panel>
-                <Panel
-                  bsStyle={hardPanelChecked ? 'primary' : 'default'}
-                  className={hardPanelChecked}
+                  </div>
+                </div>
+                <div
+                  className={`panel ${hardPanelChecked}`}
                   onClick={() => this.onPanelClick('HARD')}>
-                  <Panel.Body id="delete-account-hard">
+                  <div className="panel-body" id="delete-account-hard">
                     <div className="row">
                       <div className="col-sm-7">
                         <Radio
@@ -210,8 +208,8 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                         </div>
                       </div>
                     </div>
-                  </Panel.Body>
-                </Panel>
+                  </div>
+                </div>
               </div>
             </form>
           </Modal.Body>

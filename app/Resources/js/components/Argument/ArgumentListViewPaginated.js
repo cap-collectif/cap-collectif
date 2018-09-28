@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { ArgumentListViewPaginated_argumentable } from './__generated__/ArgumentListViewPaginated_argumentable.graphql';
@@ -34,17 +34,18 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
           .filter(Boolean)
           .map(edge => edge.node)
           .filter(Boolean)
-          .map(argument => (
+          .map(argument => {
             // $FlowFixMe
-            <ArgumentItem key={argument.id} argument={argument} />
-          ))}
+            return <ArgumentItem key={argument.id} argument={argument} />;
+          })}
         {relay.hasMore() && (
           <ListGroupItem style={{ textAlign: 'center' }}>
             {this.state.loading ? (
               <Loader />
             ) : (
-              <Button
-                bsStyle="link"
+              <a
+                style={{ cursor: 'pointer' }}
+                className="small"
                 onClick={() => {
                   this.setState({ loading: true });
                   relay.loadMore(ARGUMENTS_PAGINATION, () => {
@@ -52,7 +53,7 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
                   });
                 }}>
                 <FormattedMessage id="global.more" />
-              </Button>
+              </a>
             )}
           </ListGroupItem>
         )}

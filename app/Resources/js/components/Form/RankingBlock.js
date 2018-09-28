@@ -1,5 +1,4 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col, ListGroup } from 'react-bootstrap';
 import { DropTarget, DragDropContext } from 'react-dnd';
@@ -30,12 +29,19 @@ type State = {
 
 export class RankingBlock extends React.Component<Props, State> {
   static displayName = 'RankingBlock';
-  static defaultProps = { disabled: false };
 
   constructor(props: Props) {
     super(props);
+
+    this.props = {
+      disabled: false,
+    };
+
     this.state = {
-      items: { pickBox: props.field.choices, choiceBox: props.field.values || [] },
+      items: {
+        pickBox: props.field.choices,
+        choiceBox: props.field.values || [],
+      },
       choicesHeight: 'auto',
     };
   }
@@ -44,10 +50,7 @@ export class RankingBlock extends React.Component<Props, State> {
     this.recalculateChoicesHeight();
   }
 
-  choiceBox: ?React.Component<*>;
-  pickBox: ?React.Component<*>;
-
-  moveItem = (atList: number, atIndex: number, it: Object) => {
+  moveItem = (atList, atIndex, it) => {
     const { onRankingChange, onBlur } = this.props;
     const { item, list, index } = this.findItem(it.id);
     const items = JSON.parse(JSON.stringify(this.state.items));
@@ -67,15 +70,15 @@ export class RankingBlock extends React.Component<Props, State> {
   };
 
   recalculateChoicesHeight() {
-    const domNode = ReactDOM.findDOMNode(this.choiceBox);
-    if (!domNode) return;
-    const height = `${$(domNode).height()}px`;
+    const height = `${$(ReactDOM.findDOMNode(this.choiceBox)).height()}px`;
     if (height !== '0px' && height !== 'undefinedpx') {
-      this.setState({ choicesHeight: height });
+      this.setState({
+        choicesHeight: height,
+      });
     }
   }
 
-  findItem(id: string) {
+  findItem(id) {
     const { items } = this.state;
     let itemList = null;
     let item = null;
@@ -89,7 +92,15 @@ export class RankingBlock extends React.Component<Props, State> {
         }
       });
     });
-    return { item, list: itemList, index: itemIndex };
+    return {
+      item,
+      list: itemList,
+      index: itemIndex,
+    };
+  }
+
+  reset() {
+    this.setState(this.getInitialState());
   }
 
   render() {
@@ -112,9 +123,7 @@ export class RankingBlock extends React.Component<Props, State> {
             <h5 className="h5">{<FormattedMessage id="global.form.ranking.pickBox.title" />}</h5>
             <ListGroup className="ranking__pick-box">
               <RankingBox
-                ref={c => {
-                  this.pickBox = c;
-                }}
+                ref={c => (this.pickBox = c)}
                 items={items.pickBox}
                 spotsNb={spotsNb}
                 listType="pickBox"
@@ -128,9 +137,7 @@ export class RankingBlock extends React.Component<Props, State> {
             <h5 className="h5">{<FormattedMessage id="global.form.ranking.choiceBox.title" />}</h5>
             <ListGroup className="ranking__choice-box" style={{ height: choicesHeight }}>
               <RankingBox
-                ref={c => {
-                  this.choiceBox = c;
-                }}
+                ref={c => (this.choiceBox = c)}
                 items={items.choiceBox}
                 spotsNb={spotsNb}
                 listType="choiceBox"

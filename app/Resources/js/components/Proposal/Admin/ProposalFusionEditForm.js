@@ -21,11 +21,7 @@ type FormValues = {
   fromProposals: $ReadOnlyArray<{ value: Uuid, title: string }>,
 };
 
-type Props = RelayProps & {
-  // eslint-disable-next-line react/no-unused-prop-types
-  onClose: () => void,
-  intl: IntlShape,
-};
+type Props = RelayProps & { onClose: () => void, intl: IntlShape };
 
 const validate = (values: FormValues, props: Props) => {
   const { intl } = props;
@@ -94,20 +90,22 @@ export class ProposalFusionEditForm extends React.Component<Props> {
           component={select}
           clearable={false}
           loadOptions={(input: string) =>
-            fetchQuery(environment, query, { term: input, stepId }).then(res => ({
-              options: res.step.proposals.edges
-                .map(edge => ({
-                  value: edge.node.id,
-                  label: edge.node.title,
-                  stepId,
-                }))
-                .concat(
-                  proposal.mergedFrom.map(p => ({
-                    value: p.id,
-                    label: p.title,
-                  })),
-                ),
-            }))
+            fetchQuery(environment, query, { term: input, stepId }).then(res => {
+              return {
+                options: res.step.proposals.edges
+                  .map(edge => ({
+                    value: edge.node.id,
+                    label: edge.node.title,
+                    stepId,
+                  }))
+                  .concat(
+                    proposal.mergedFrom.map(p => ({
+                      value: p.id,
+                      label: p.title,
+                    })),
+                  ),
+              };
+            })
           }
         />
       </form>
@@ -122,14 +120,16 @@ const form = reduxForm({
   onSubmit,
 })(ProposalFusionEditForm);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
-  initialValues: {
-    fromProposals: props.proposal.mergedFrom.map(p => ({
-      value: p.id,
-      label: p.title,
-    })),
-  },
-});
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
+  return {
+    initialValues: {
+      fromProposals: props.proposal.mergedFrom.map(p => ({
+        value: p.id,
+        label: p.title,
+      })),
+    },
+  };
+};
 const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(

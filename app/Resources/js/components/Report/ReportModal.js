@@ -11,6 +11,7 @@ import { closeModal } from '../../redux/modules/report';
 import type { State, Dispatch } from '../../types';
 
 type Props = {
+  id: string,
   dispatch: Dispatch,
   isLoading?: boolean,
   show: boolean,
@@ -18,6 +19,8 @@ type Props = {
 };
 
 class ReportModal extends React.Component<Props> {
+  static displayName = 'ReportModal';
+
   render() {
     const { dispatch, isLoading, show, onSubmit } = this.props;
     return (
