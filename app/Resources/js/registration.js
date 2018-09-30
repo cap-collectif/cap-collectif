@@ -1,7 +1,5 @@
 // @flow
 import moment from 'moment';
-import React from 'react';
-import ReactDOM from 'react-dom';
 import ReactOnRails from 'react-on-rails';
 import { addLocaleData } from 'react-intl';
 import 'moment/locale/fr';
@@ -57,12 +55,6 @@ import ProjectRestrictedAccessApp from '../js/startup/ProjectRestrictedAccessApp
 import QuestionnaireCreateButtonApp from '../js/startup/QuestionnaireCreateButtonApp';
 
 import appStore from '../js/stores/AppStore';
-
-if (process.env.NODE_ENV === 'development') {
-  if (new URLSearchParams(window.location.search).get('axe')) {
-    global.axe(React, ReactDOM, 1000);
-  }
-}
 
 const locale = window.locale;
 if (locale === 'fr-FR') {

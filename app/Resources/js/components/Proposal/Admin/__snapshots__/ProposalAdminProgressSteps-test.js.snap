@@ -4,12 +4,9 @@ exports[`<ProposalAdminProgressSteps /> render correctly 1`] = `
 <div
   className="form-group"
 >
-  <span>
-    <FormattedMessage
-      id="list-realisation-steps"
-      values={Object {}}
-    />
-  </span>
+  <label>
+    Liste des phases de réalisation
+  </label>
   <ListGroup
     bsClass="list-group"
   />

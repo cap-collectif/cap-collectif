@@ -37,7 +37,9 @@ export class ProposalProjectRow extends Component<Props, State> {
     this.setState({ open: !this.state.open }, () => {
       UnfollowProposalMutation.commit({
         input: { idsProposal },
-      }).then(() => true);
+      }).then(() => {
+        return true;
+      });
     });
   }
 
@@ -65,7 +67,9 @@ export class ProposalProjectRow extends Component<Props, State> {
               viewer.followingProposals.edges
                 .filter(Boolean)
                 .filter(edge => edge.node.project.id === project.id)
-                .map((edge, key) => <ProposalRow key={key} proposal={edge.node} />)}
+                .map((edge, key) => {
+                  return <ProposalRow key={key} proposal={edge.node} />;
+                })}
           </ListGroup>
         </Panel>
       </Collapse>

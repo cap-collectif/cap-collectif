@@ -25,12 +25,10 @@ export class CardProject extends React.Component<Props> {
         <div className="card__body">
           <div className="card__body__infos">
             <InlineList className="small">
-              {project.theme.map(theme => (
-                <li>{theme}</li>
-              ))}
+              {project.theme.map(theme => <li>{theme}</li>)}
             </InlineList>
             <h3 className="card__title">
-              <a href="https://ui.cap-collectif.com">{project.title}</a>
+              <a href="#">{project.title}</a>
             </h3>
             <TagsList>
               <div className="tags-list__tag">
@@ -52,9 +50,7 @@ export class CardProject extends React.Component<Props> {
             />
           </Progress>
           <div className="card__actions">
-            {project.step.actionLink && (
-              <a href="https://ui.cap-collectif.com">{project.step.actionLink}</a>
-            )}
+            {project.step.actionLink && <a href="">{project.step.actionLink}</a>}
             <span className="excerpt_dark">{project.step.remainingTime.value}</span>{' '}
             <span>{project.step.remainingTime && project.step.remainingTime.label}</span>
           </div>

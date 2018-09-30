@@ -48,8 +48,6 @@ type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: Uuid };
 type CloseVoteModalAction = { type: 'proposal/CLOSE_VOTE_MODAL' };
 type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
 type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
-type OpenDetailLikersModalAction = { type: 'proposal/OPEN_DETAIL_LIKERS_MODAL', id: string };
-type CloseDetailLikersModalAction = { type: 'proposal/CLOSE_DETAIL_LIKERS_MODAL' };
 type ChangeProposalListViewAction = {
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
   mode: string,
@@ -79,12 +77,12 @@ export type State = {
   +filters: Object,
   +terms: ?string,
   +lastEditedStepId: ?Uuid,
+  +currentPaginationPage: number,
   +lastEditedProposalId: ?Uuid,
   +lastNotifiedStepId: ?Uuid,
   +selectedViewByStep: string,
   +markers: ?Object,
   +referer: ?string,
-  +showDetailLikersModal: ?string,
 };
 
 export const initialState: State = {
@@ -102,12 +100,12 @@ export const initialState: State = {
   order: 'random',
   filters: {},
   terms: null,
+  currentPaginationPage: 1,
   lastEditedProposalId: null,
   lastNotifiedStepId: null,
   selectedViewByStep: 'mosaic',
   markers: null,
   referer: null,
-  showDetailLikersModal: null,
 };
 
 export const loadMarkers = (stepId: Uuid, stepType: string): LoadMarkersAction => ({
@@ -173,13 +171,6 @@ export const changeFilter = (filter: string, value: string): ChangeFilterAction 
 export const changeProposalListView = (mode: string): ChangeProposalListViewAction => ({
   type: 'proposal/CHANGE_PROPOSAL_LIST_VIEW',
   mode,
-});
-export const openDetailLikersModal = (id: string): OpenDetailLikersModalAction => ({
-  type: 'proposal/OPEN_DETAIL_LIKERS_MODAL',
-  id,
-});
-export const closeDetailLikersModal = (): CloseDetailLikersModalAction => ({
-  type: 'proposal/CLOSE_DETAIL_LIKERS_MODAL',
 });
 
 type RequestDeleteAction = { type: 'proposal/DELETE_REQUEST' };
@@ -267,8 +258,8 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
     });
 };
 
-export const deleteVote = (step: Object, proposal: Object) =>
-  removeVote
+export const deleteVote = (step: Object, proposal: Object) => {
+  return removeVote
     .commit({
       stepId: step.id,
       input: { proposalId: proposal.id, stepId: step.id },
@@ -292,6 +283,7 @@ export const deleteVote = (step: Object, proposal: Object) =>
         },
       });
     });
+};
 
 export function* fetchMarkers(action: LoadMarkersAction): Generator<*, *, *> {
   try {
@@ -360,8 +352,6 @@ export type ProposalAction =
   | CloseCreateFusionModalAction
   | OpenEditProposalModalAction
   | LoadMarkersSuccessAction
-  | OpenDetailLikersModalAction
-  | CloseDetailLikersModalAction
   | { type: 'proposal/POSTS_FETCH_FAILED', error: Error }
   | {
       type: 'proposal/FETCH_SUCCEEDED',
@@ -387,16 +377,18 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
   switch (action.type) {
     case 'proposal/CHANGE_FILTER': {
       const filters = { ...state.filters, [action.filter]: action.value };
-      return { ...state, filters };
+      return { ...state, filters, currentPaginationPage: 1 };
     }
     case 'proposal/OPEN_CREATE_FUSION_MODAL':
       return { ...state, isCreatingFusion: true };
     case 'proposal/CLOSE_CREATE_FUSION_MODAL':
       return { ...state, isCreatingFusion: false };
     case 'proposal/CHANGE_ORDER':
-      return { ...state, order: action.order };
+      return { ...state, order: action.order, currentPaginationPage: 1 };
+    case 'proposal/CHANGE_PAGE':
+      return { ...state, currentPaginationPage: action.page };
     case 'proposal/CHANGE_TERMS':
-      return { ...state, terms: action.terms };
+      return { ...state, terms: action.terms, currentPaginationPage: 1 };
     case 'proposal/OPEN_EDIT_MODAL':
       return { ...state, showEditModal: true };
     case 'proposal/CLOSE_EDIT_MODAL':
@@ -425,10 +417,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'proposal/CHANGE_PROPOSAL_LIST_VIEW': {
       return { ...state, selectedViewByStep: action.mode };
     }
-    case 'proposal/OPEN_DETAIL_LIKERS_MODAL':
-      return { ...state, showDetailLikersModal: action.id };
-    case 'proposal/CLOSE_DETAIL_LIKERS_MODAL':
-      return { ...state, showDetailLikersModal: null };
     default:
       return state;
   }

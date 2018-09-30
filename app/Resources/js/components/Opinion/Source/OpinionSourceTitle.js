@@ -8,14 +8,16 @@ type Props = {
   source: OpinionSourceTitle_source,
 };
 
-const OpinionSourceTitle = ({ source }: Props) => (
-  <h3 className="title">
-    {source.category && <Label bsStyle="primary">{source.category.title}</Label>}{' '}
-    <a className="external-link" href={source.url}>
-      {source.title}
-    </a>
-  </h3>
-);
+const OpinionSourceTitle = ({ source }: Props) => {
+  return (
+    <h3 className="title">
+      {source.category && <Label bsStyle="primary">{source.category.title}</Label>}{' '}
+      <a className="external-link" href={source.url}>
+        {source.title}
+      </a>
+    </h3>
+  );
+};
 
 export default createFragmentContainer(
   OpinionSourceTitle,

@@ -11,6 +11,7 @@ import type { State, Dispatch } from '../../../types';
 
 type Props = {
   features: Object,
+  themes: Array<$FlowFixMe>,
   project: Object,
   dispatch: Dispatch,
 };
@@ -51,6 +52,7 @@ export class ProjectListPage extends React.Component<Props, State> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   features: state.default.features,
+  themes: state.default.themes,
   project: state.project,
 });
 

@@ -43,9 +43,7 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
 
     return (
       <div className="form-group">
-        <span>
-          <FormattedMessage id="list-realisation-steps" />
-        </span>
+        <label>Liste des phases de réalisation</label>
         <ListGroup>
           {fields.map((member, index) => (
             <ListGroupItem key={index}>

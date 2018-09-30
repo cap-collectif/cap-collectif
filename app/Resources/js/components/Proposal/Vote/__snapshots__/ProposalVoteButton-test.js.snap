@@ -9,9 +9,7 @@ exports[`<ProposalVoteButton /> renders viewer has not voted 1`] = `
   className="mr-15 proposal__button__vote btn btn-success  "
   disabled={false}
   id="buttonID"
-  onBlur={[Function]}
   onClick={[Function]}
-  onFocus={[Function]}
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >
@@ -31,9 +29,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
   className="mr-15 proposal__button__vote btn btn-success  "
   disabled={false}
   id="buttonID"
-  onBlur={[Function]}
   onClick={[Function]}
-  onFocus={[Function]}
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >

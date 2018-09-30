@@ -70,17 +70,19 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
             <FormattedMessage key={choice} id={`global.filter_f_${choice}`}>
               {message => <option value={choice}>{message}</option>}
             </FormattedMessage>
-          ))}
+          ))}) }
         </Input>
       </div>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  order: state.proposal.order,
-  stepId: state.project.currentProjectStepById || null,
-});
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+  return {
+    order: state.proposal.order,
+    stepId: state.project.currentProjectStepById || null,
+  };
+};
 
 const container = injectIntl(ProposalListOrderSorting);
 

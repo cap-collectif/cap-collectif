@@ -1,4 +1,5 @@
 // @flow
+// mport * as React from 'react';
 import styled from 'styled-components';
 
 const TagsList = styled.div.attrs({
@@ -20,29 +21,6 @@ const TagsList = styled.div.attrs({
 
     .cap {
       padding-right: 5px;
-    }
-
-    button {
-      padding: 0;
-      margin: 0;
-      color: inherit;
-
-      &:hover {
-        text-decoration: none;
-        color: inherit;
-        cursor: pointer;
-      }
-    }
-  }
-
-  a.tags-list__tag {
-    &:not(:hover) {
-      color: inherit;
-    }
-
-    &:hover {
-      text-decoration: none;
-      cursor: pointer;
     }
   }
 `;

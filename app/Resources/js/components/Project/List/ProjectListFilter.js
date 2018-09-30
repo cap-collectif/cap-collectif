@@ -112,11 +112,13 @@ class ProjectListFilter extends React.Component<Props, State> {
           <option key="all" value="">
             {intl.formatMessage({ id: 'global.select_themes' })}
           </option>
-          {themes.map(theme => (
-            <option key={theme.slug} value={theme.slug}>
-              {theme.title}
-            </option>
-          ))}
+          {themes.map(theme => {
+            return (
+              <option key={theme.slug} value={theme.slug}>
+                {theme.title}
+              </option>
+            );
+          })}
         </FormControl>,
       );
     }
@@ -143,21 +145,25 @@ class ProjectListFilter extends React.Component<Props, State> {
 
     return (
       <Row className="mb-35">
-        {filters.map((filter, index) => (
-          <Col key={index} xs={12} sm={columnWidth}>
-            {filter}
-          </Col>
-        ))}
+        {filters.map((filter, index) => {
+          return (
+            <Col key={index} xs={12} sm={columnWidth}>
+              {filter}
+            </Col>
+          );
+        })}
       </Row>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  features: state.default.features,
-  themes: state.default.themes,
-  orderBy: state.project.orderBy || 'date',
-  type: state.project.type || 'all',
-});
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => {
+  return {
+    features: state.default.features,
+    themes: state.default.themes,
+    orderBy: state.project.orderBy || 'date',
+    type: state.project.type || 'all',
+  };
+};
 
 export default connect(mapStateToProps)(injectIntl(ProjectListFilter));

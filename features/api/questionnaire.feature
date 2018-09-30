@@ -23,6 +23,26 @@ Scenario: Anonymous API client wants to get one questionnaire
         "required": @boolean@,
         "question": @string@,
         "slug": @string@,
+        "description": @string@,
+        "private": @boolean@
+      },
+      {
+        "id": @integer@,
+        "type": @string@,
+        "helpText": @...@,
+        "required": @boolean@,
+        "question": @string@,
+        "slug": @string@,
+        "private": @boolean@
+      },
+      {
+        "id": @integer@,
+        "type": @string@,
+        "helpText": @...@,
+        "required": @boolean@,
+        "question": @string@,
+        "slug": @string@,
+        "description": @string@,
         "private": @boolean@
       },
       {

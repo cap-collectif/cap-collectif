@@ -487,14 +487,9 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $errors = [];
         foreach ($form->getErrors() as $error) {
-            $this->logger->error(__METHOD__ . ' : ' . $error->getMessage());
+            $this->logger->error((string) $error->getMessage());
             $this->logger->error(
-                __METHOD__ .
-                    ' : ' .
-                    $form->getName() .
-                    ' ' .
-                    'Extra data: ' .
-                    implode($form->getExtraData())
+                $form->getName() . ' ' . 'Extra data: ' . implode($form->getExtraData())
             );
             $errors[] = (string) $error->getMessage();
         }

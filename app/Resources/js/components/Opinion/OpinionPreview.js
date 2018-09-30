@@ -10,9 +10,16 @@ import type { OpinionPreview_opinion } from './__generated__/OpinionPreview_opin
 type Props = {
   opinion: OpinionPreview_opinion,
   rankingThreshold?: ?number,
+  link?: boolean,
+  showTypeLabel?: boolean,
 };
 
 class OpinionPreview extends React.Component<Props> {
+  static defaultProps = {
+    link: true,
+    showTypeLabel: false,
+  };
+
   render() {
     const { opinion, rankingThreshold } = this.props;
 

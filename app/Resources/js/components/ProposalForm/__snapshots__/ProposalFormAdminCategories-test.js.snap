@@ -4,8 +4,7 @@ exports[`<ProposalFormAdminCategories /> render correctly 1`] = `
 <div
   className="form-group"
 >
-  <span
-    className="control-label"
+  <label
     style={
       Object {
         "marginBottom": 15,
@@ -17,7 +16,7 @@ exports[`<ProposalFormAdminCategories /> render correctly 1`] = `
       id="proposal_form.admin.configuration.categories_list"
       values={Object {}}
     />
-  </span>
+  </label>
   <ListGroup
     bsClass="list-group"
   />

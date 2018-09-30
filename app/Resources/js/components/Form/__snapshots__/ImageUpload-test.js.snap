@@ -13,13 +13,11 @@ exports[`<ImageUpload /> render correctly 1`] = `
     sm={12}
     xs={12}
   >
-    <t
+    <Dropzone
       accept=""
       className="image-uploader__dropzone--fullwidth"
       disableClick={false}
       disablePreview={false}
-      disabled={false}
-      getDataTransferItems={[Function]}
       inputProps={
         Object {
           "id": "id_field",
@@ -67,7 +65,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
           </Button>
         </p>
       </div>
-    </t>
+    </Dropzone>
   </Col>
   <Col
     bsClass="col"
@@ -140,13 +138,11 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
     sm={12}
     xs={12}
   >
-    <t
+    <Dropzone
       accept=""
       className="image-uploader__dropzone--fullwidth"
       disableClick={false}
       disablePreview={true}
-      disabled={false}
-      getDataTransferItems={[Function]}
       inputProps={
         Object {
           "id": "id_field",
@@ -194,7 +190,7 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
           </Button>
         </p>
       </div>
-    </t>
+    </Dropzone>
   </Col>
 </Row>
 `;

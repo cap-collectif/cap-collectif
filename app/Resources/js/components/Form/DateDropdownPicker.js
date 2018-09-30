@@ -13,6 +13,7 @@ type Props = {
   yearDefaultValue: string,
   yearId: string,
   dayDefaultValue: string,
+  formName: string,
   input: Object,
   label: string,
   componentId: string,
@@ -114,7 +115,7 @@ export class DateDropdownPicker extends Component<Props, DateState> {
 
     return (
       <div className={globalClassName}>
-        <label htmlFor={dayId} className={labelClassName}>
+        <label className={labelClassName}>
           <FormattedMessage id={label} />
         </label>
         <div className={divClassName} id={componentId}>

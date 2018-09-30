@@ -23,7 +23,9 @@ class DeleteButton extends React.Component<Props> {
     user: null,
   };
 
-  isDeletable = () => this.isTheUserTheAuthor();
+  isDeletable = () => {
+    return this.isTheUserTheAuthor();
+  };
 
   isTheUserTheAuthor = () => {
     const { author, user } = this.props;

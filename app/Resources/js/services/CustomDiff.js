@@ -19,7 +19,9 @@ function strip(value) {
 }
 
 function everythingHasChanged(diff) {
-  const changed = diff.every(part => part.added || part.removed || part.value === ' ');
+  const changed = diff.every(part => {
+    return part.added || part.removed || part.value === ' ';
+  });
   return !!changed;
 }
 

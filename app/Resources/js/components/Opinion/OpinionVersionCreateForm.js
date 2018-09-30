@@ -20,10 +20,7 @@ type FormValues = {
   title: string,
   comment: string,
 };
-type RelayProps = {
-  // eslint-disable-next-line react/no-unused-prop-types
-  opinion: OpinionVersionCreateForm_opinion,
-};
+type RelayProps = { opinion: OpinionVersionCreateForm_opinion };
 type Props = RelayProps & { initialValues: FormValues };
 
 const onSubmit = (data: FormValues, dispatch: Dispatch, { opinion }: Props): Promise<*> => {

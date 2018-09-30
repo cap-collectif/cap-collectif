@@ -28,11 +28,15 @@ export class FollowingsTab extends Component<Props, State> {
 
     const idsProposal =
       viewer.followingProposals && viewer.followingProposals.edges.length > 0
-        ? viewer.followingProposals.edges.map(edge => edge.node.id)
+        ? viewer.followingProposals.edges.map(edge => {
+            return edge.node.id;
+          })
         : null;
     const idsOpinion =
       viewer.followingOpinions && viewer.followingOpinions.edges.length > 0
-        ? viewer.followingOpinions.edges.map(edge => edge.node.id)
+        ? viewer.followingOpinions.edges.map(edge => {
+            return edge.node.id;
+          })
         : null;
 
     this.setState({ open: !this.state.open }, () => {
