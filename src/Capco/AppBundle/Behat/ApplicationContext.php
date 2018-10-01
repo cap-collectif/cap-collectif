@@ -846,15 +846,10 @@ class ApplicationContext extends UserContext
         Assert::assertTrue($input->hasAttribute('disabled'));
     }
 
-    private function visitPageWithParams(
-        $page,
-        array $params = [],
-        $element = '#main',
-        bool $cookiesConsent = true
-    ): void {
+    private function visitPageWithParams($page, array $params = [], bool $cookiesConsent = true)
+    {
         $this->currentPage = $page;
         $this->navigationContext->getPage($page)->open($params);
-        $this->getSession()->wait(4000, "$('" . $element . "').length > 0");
         if ($cookiesConsent) {
             $this->setCookieConsent();
         }

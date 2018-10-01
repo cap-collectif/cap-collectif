@@ -79,7 +79,7 @@ def codecov():
 
 
 @task(environments=['local', 'ci'])
-def behat(fast_failure='true', profile=False, tags='false', feature='false', parallel='false', timer='false'):
+def behat(fast_failure='true', profile=False, tags='false', feature='false', parallel='false', timer='true'):
     "Run Gerhkin Tests"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     if profile:

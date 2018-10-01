@@ -79,12 +79,13 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinion()
     {
-        $this->visitPageWithParams('opinion page', self::$opinion, '#opinion__arguments--AGAINST');
+        $this->visitPageWithParams('opinion page', self::$opinion);
+        $this->getSession()->wait(4000, "$('#opinion__arguments--AGAINST').length > 0");
+
         $this->getSession()->wait(
             5000,
             "document.body.innerHTML.toString().indexOf('Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.') > -1"
         );
-        $this->setCookieConsent();
     }
 
     /**
@@ -94,11 +95,8 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionInAClosedStep()
     {
-        $this->visitPageWithParams(
-            'opinion page',
-            self::$opinionInClosedStep,
-            '#opinion-page-tabs'
-        );
+        $this->getSession()->wait(3000, "$('#opinion-page-tabs').length > 0");
+        $this->visitPageWithParams('opinion page', self::$opinionInClosedStep);
     }
 
     /**
@@ -220,6 +218,7 @@ trait OpinionStepsTrait
 
     public function submitArgumentForTypeWithText($type, $text)
     {
+        $this->getSession()->wait(3000, "$('#argument-form--FOR textarea').length > 0");
         $this->navigationContext->getPage('opinion page')->submitArgument($type, $text);
         $this->iWait(3);
     }
@@ -284,7 +283,7 @@ trait OpinionStepsTrait
             'Argument has no votes from the begining, test will not be conclusive.'
         );
         $page->clickArgumentEditButton();
-        $this->iWait(1);
+        $this->getSession()->wait(3000, "$('#argument-form #argument-body').length > 0");
         $page->fillArgumentBodyField();
         $page->checkArgumentConfirmCheckbox();
         $page->submitArgumentEditForm();
@@ -297,6 +296,7 @@ trait OpinionStepsTrait
     public function iEditMyArgumentwithoutConfirmingMyVotesLost()
     {
         $page = $this->getCurrentPage();
+        $this->getSession()->wait(3000, "$('.opinion__votes-nb').length > 0");
         $votesCount = $page->getArgumentVotesCount();
         Assert::assertNotEquals(
             0,
@@ -304,7 +304,7 @@ trait OpinionStepsTrait
             'Argument has no votes from the begining, test will not be conclusive.'
         );
         $page->clickArgumentEditButton();
-        $this->iWait(1);
+        $this->getSession()->wait(3000, "$('#argument-form #argument-body').length > 0");
         $page->fillArgumentBodyField();
         $page->submitArgumentEditForm();
         $this->iWait(1);
@@ -342,7 +342,10 @@ trait OpinionStepsTrait
     public function iDeleteMyArgument()
     {
         $page = $this->getCurrentPage();
+        $this->getSession()->wait(3000, '$("#confirm-argument-delete").length > 0');
         $page->clickArgumentDeleteButton();
+
+        $this->getSession()->wait(3000, '$("#arg-argument1 .argument__btn--delete").length > 0');
         $page->clickArgumentConfirmDeletionButton();
     }
 
@@ -372,6 +375,7 @@ trait OpinionStepsTrait
     public function iVoteForTheArgument()
     {
         $page = $this->getCurrentPage();
+        $this->getSession()->wait(3000, '$(".opinion__votes-nb").length > 0');
         $wantedVotesCount = $page->getArgumentVotesCount() + 1;
         $this->clickArgumentVoteButtonWithLabel('vote.ok');
         $newVotesCount = $page->getArgumentVotesCount();
@@ -388,6 +392,8 @@ trait OpinionStepsTrait
     public function iDeleteMyVoteOnTheArgument()
     {
         $page = $this->getCurrentPage();
+        $this->getSession()->wait(3000, '$(".opinion__votes-nb").length > 0');
+
         $wantedVotesCount = $page->getArgumentVotesCount() - 1;
         $this->clickArgumentVoteButtonWithLabel('vote.cancel');
         $newVotesCount = $page->getArgumentVotesCount();
@@ -405,6 +411,7 @@ trait OpinionStepsTrait
      */
     public function iClickTheArgumentVoteButton()
     {
+        $this->getSession()->wait(3000, "$('.argument__btn--vote').length > 0");
         $this->clickArgumentVoteButtonWithLabel('vote.ok');
     }
 
@@ -418,6 +425,7 @@ trait OpinionStepsTrait
         $page = $this->getCurrentPage();
         $inClosedStep =
             $this->opinionPageInClosedStepIsOpen() || $this->versionPageInClosedStepIsOpen();
+        $this->getSession()->wait(3000, "$('.argument__btn--vote').length > 0");
         $button = $page->getArgumentVoteButton($inClosedStep);
         Assert::assertTrue($button->hasAttribute('disabled'));
     }
@@ -437,6 +445,7 @@ trait OpinionStepsTrait
      */
     public function iClickTheArgumentReportButton()
     {
+        $this->getSession()->wait(3000, "$('#report-argument-argument1-button').length > 0");
         $this->getCurrentPage()->clickArgumentReportButton();
     }
 
@@ -654,11 +663,8 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionWithVersions()
     {
-        $this->visitPageWithParams(
-            'opinion page',
-            self::$opinionWithVersions,
-            '#opinion-page-tabs'
-        );
+        $this->getSession()->wait(3000, "$('#opinion-page-tabs').length > 0");
+        $this->visitPageWithParams('opinion page', self::$opinionWithVersions);
     }
 
     /**
@@ -666,7 +672,7 @@ trait OpinionStepsTrait
      */
     public function iGoToAVersion()
     {
-        $this->visitPageWithParams('opinion version page', self::$version, '#opinion-page-tabs');
+        $this->visitPageWithParams('opinion version page', self::$version);
     }
 
     /**
@@ -676,11 +682,9 @@ trait OpinionStepsTrait
      */
     public function iGoToAnOpinionVersionInAClosedStep()
     {
-        $this->visitPageWithParams(
-            'opinion version page',
-            self::$versionInClosedStep,
-            'opinion-page-tabs'
-        );
+        $this->getSession()->wait(3000, "$('#opinion-page-tabs').length > 0");
+
+        $this->visitPageWithParams('opinion version page', self::$versionInClosedStep);
     }
 
     /**

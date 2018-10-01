@@ -120,11 +120,6 @@ class OpinionPage extends Page
 
     public function getArgumentVotesCounter()
     {
-        $this->getSession()->wait(
-            3000,
-            '$("' . $this->getElement('argument votes counter') . '").length > 0'
-        );
-
         return $this->getElement('argument votes counter');
     }
 
@@ -155,37 +150,19 @@ class OpinionPage extends Page
 
     public function clickArgumentDeleteButton()
     {
-        $this->getSession()->wait(
-            3000,
-            '$("' . $this->getElement('argument delete button') . '").length > 0'
-        );
         $this->getElement('argument delete button')->click();
     }
 
     public function clickArgumentConfirmDeletionButton()
     {
-        $this->getSession()->wait(
-            3000,
-            '$("' . $this->getElement('argument confirm delete button') . '").length > 0'
-        );
-
         $this->getElement('argument confirm delete button')->click();
     }
 
     public function getArgumentVoteButton($inClosedStep = false)
     {
         if ($inClosedStep) {
-            $this->getSession()->wait(
-                3000,
-                '$("' . $this->getElement('argument vote button in closed step') . '").length > 0'
-            );
-
             return $this->getElement('argument vote button in closed step');
         }
-        $this->getSession()->wait(
-            3000,
-            '$("' . $this->getElement('argument vote button') . '").length > 0'
-        );
 
         return $this->getElement('argument vote button');
     }
@@ -210,11 +187,6 @@ class OpinionPage extends Page
 
     public function clickArgumentReportButton()
     {
-        $this->getSession()->wait(
-            3000,
-            '$("' . $this->getElement('argument report button') . '").length > 0'
-        );
-
         $this->getElement('argument report button')->click();
     }
 

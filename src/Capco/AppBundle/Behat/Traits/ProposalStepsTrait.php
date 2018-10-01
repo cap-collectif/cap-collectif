@@ -199,7 +199,9 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalWithLotOfComments()
     {
-        $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, '#main', false);
+        $this->getSession()->wait(5000, "$('#main').length > 0");
+
+        $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, false);
         $this->getSession()->wait(
             2000,
             "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
@@ -235,11 +237,9 @@ trait ProposalStepsTrait
      */
     public function iGoToACommentNotifiableProposal()
     {
-        $this->visitPageWithParams(
-            'proposal page',
-            self::$proposalCommentNotifiable,
-            '.comments__section'
-        );
+        $this->getSession()->wait(3000, "$('.comments__section').length > 0");
+
+        $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
     }
 
     /**
@@ -247,11 +247,8 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalNotCommentNotifiable()
     {
-        $this->visitPageWithParams(
-            'proposal page',
-            self::$proposalCommentNotNotifiable,
-            '.comments__section'
-        );
+        $this->getSession()->wait(3000, "$('.comments__section').length > 0");
+        $this->visitPageWithParams('proposal page', self::$proposalCommentNotNotifiable);
     }
 
     /**
@@ -275,11 +272,8 @@ trait ProposalStepsTrait
      */
     public function iGoToANotNotifiableProposal()
     {
-        $this->visitPageWithParams(
-            'proposal page',
-            self::$proposalNotNotifiable,
-            '#proposal-delete-button'
-        );
+        $this->getSession()->wait(3000, "$('#proposal-delete-button').length > 0");
+        $this->visitPageWithParams('proposal page', self::$proposalNotNotifiable);
     }
 
     /**
