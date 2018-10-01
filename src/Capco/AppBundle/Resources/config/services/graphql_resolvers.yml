@@ -297,6 +297,18 @@ services:
           method: 'resolveQuestions',
         }
 
+  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalEvaluationResolver:
+    tags:
+      - {
+          name: overblog_graphql.resolver,
+          alias: 'proposal_evaluation_responses',
+          method: 'resolveResponses',
+        }
+
+  Capco\AppBundle\GraphQL\Resolver\Response\ResponseValueResolver:
+    tags:
+      - { name: overblog_graphql.resolver }
+
   Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver:
     arguments:
       - '@router'

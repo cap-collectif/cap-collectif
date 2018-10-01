@@ -35,7 +35,6 @@ final class SelectionStepType extends ObjectType implements GeneratedTypeInterfa
                     'public' => null,
                     'access' => null,
                 ],
-<<<<<<< refs/remotes/origin/master
                 'kind' => [
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
@@ -90,8 +89,6 @@ final class SelectionStepType extends ObjectType implements GeneratedTypeInterfa
                     'public' => null,
                     'access' => null,
                 ],
-=======
->>>>>>> yarn relay
                 'proposals' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
                     'args' => [
@@ -374,60 +371,6 @@ final class SelectionStepType extends ObjectType implements GeneratedTypeInterfa
                         return $value->getProposalForm();
                     },
                     'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'kind' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => function () use ($globalVariable) {
-                        return 'selection';
-                    },
-                    'description' => 'The kind of the step',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'title' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The title of the step',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'show_url' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", array(0 => $value)]);
-                    },
-                    'description' => 'The url of the step',
-                    'deprecationReason' => 'Use url instead of show_url',
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'url' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", array(0 => $value)]);
-                    },
-                    'description' => 'The url of the step',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
