@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import type { Dispatch, GlobalState } from '../../types';
+import type { Dispatch, GlobalState, Uuid } from '../../types';
 import type { ConsultationPlanRecursiveItems_consultation } from './__generated__/ConsultationPlanRecursiveItems_consultation.graphql';
 import ConsultationPlanItems from './ConsultationPlanItems';
 import { closeConsultationPlan, openConsultationPlan } from '../../redux/modules/project';
@@ -14,8 +14,8 @@ import StackedNav from '../Ui/Nav/StackedNav';
 type Props = {
   consultation: ConsultationPlanRecursiveItems_consultation,
   stepId: string,
-  closePlan: Function,
-  openPlan: Function,
+  closePlan: (stepId: Uuid) => void,
+  openPlan: (stepId: Uuid) => void,
   showConsultationPlan: boolean,
   intl: IntlShape,
 };

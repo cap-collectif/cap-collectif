@@ -47,15 +47,21 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
     // eslint-disable-next-line
     Stickyfill = require('stickyfilljs');
 
-    window.addEventListener('scroll', () => {
-      window.requestAnimationFrame(() => {
-        this.scrollSpy();
-      });
-    });
+    window.addEventListener('scroll', this.animationFrame, false);
 
     const elements = document.querySelectorAll('.sticky');
     Stickyfill.add(elements);
   }
+
+  componentWillUnmount() {
+    window.removeListener('scroll', this.animationFrame, false);
+  }
+
+  animationFrame = () => {
+    window.requestAnimationFrame(() => {
+      this.scrollSpy();
+    });
+  };
 
   scrollSpy = () => {
     const { dispatch } = this.props;

@@ -177,11 +177,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
         />
         <div>
           <hr
-            style={
-              Object {
-                "marginBottom": "30px",
-              }
-            }
+            className="mb-30"
           />
           <Field
             component={[Function]}
@@ -359,11 +355,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
         />
         <div>
           <hr
-            style={
-              Object {
-                "marginBottom": "30px",
-              }
-            }
+            className="mb-30"
           />
           <Field
             component={[Function]}
@@ -616,11 +608,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
         />
         <div>
           <hr
-            style={
-              Object {
-                "marginBottom": "30px",
-              }
-            }
+            className="mb-30"
           />
           <Field
             component={[Function]}
@@ -820,11 +808,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
         />
         <div>
           <hr
-            style={
-              Object {
-                "marginBottom": "30px",
-              }
-            }
+            className="mb-30"
           />
           <Field
             component={[Function]}
@@ -968,11 +952,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
         />
         <div>
           <hr
-            style={
-              Object {
-                "marginBottom": "30px",
-              }
-            }
+            className="mb-30"
           />
           <Field
             component={[Function]}

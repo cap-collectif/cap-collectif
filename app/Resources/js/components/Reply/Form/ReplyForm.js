@@ -25,7 +25,7 @@ import renderComponent from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import AddReplyMutation from '../../../mutations/AddReplyMutation';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import { CardContainer } from "../../Ui/Card/CardContainer";
+import { CardContainer } from '../../Ui/Card/CardContainer';
 import UpdateReplyMutation from '../../../mutations/UpdateReplyMutation';
 
 type Props = FormProps & {
@@ -227,7 +227,7 @@ export class ReplyForm extends React.Component<Props> {
               />
               {questionnaire.anonymousAllowed && (
                 <div>
-                  <hr style={{ marginBottom: '30px' }} />
+                  <hr className="mb-30" />
                   <Field
                     type="checkbox"
                     name="private"
@@ -246,15 +246,15 @@ export class ReplyForm extends React.Component<Props> {
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               {!disabled &&
-              !pristine && (
-                <AlertForm
-                  valid={valid}
-                  invalid={invalid}
-                  submitSucceeded={submitSucceeded}
-                  submitFailed={submitFailed}
-                  submitting={submitting}
-                />
-              )}
+                !pristine && (
+                  <AlertForm
+                    valid={valid}
+                    invalid={invalid}
+                    submitSucceeded={submitSucceeded}
+                    submitFailed={submitFailed}
+                    submitting={submitting}
+                  />
+                )}
             </form>
           </div>
         </div>
