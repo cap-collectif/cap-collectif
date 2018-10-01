@@ -20,33 +20,10 @@ describe('<CommentBody />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly with no body', () => {
-    const props = {
-      comment: {
-        ...comment,
-        body: null,
-      },
-    };
-    const wrapper = shallow(<CommentBody {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should render correctly when trashed with body', () => {
     const props = {
       comment: {
         ...comment,
-        trashed: true,
-      },
-    };
-    const wrapper = shallow(<CommentBody {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly when trashed with no body', () => {
-    const props = {
-      comment: {
-        ...comment,
-        body: null,
         trashed: true,
       },
     };

@@ -1,7 +1,7 @@
 <?php
 namespace Capco\AppBundle\GraphQL\__GENERATED__;
 
-use GraphQL\Type\Definition\ObjectType;
+use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\ConfigProcessor;
@@ -12,29 +12,17 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class ProposalVoteType extends ObjectType implements GeneratedTypeInterface
+final class PrivatableVoteType extends InterfaceType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'ProposalVote',
+            'name' => 'PrivatableVote',
             'description' => 'Entities that can be published.',
             'fields' => function () use ($globalVariable) {
                 return [
-                'private' => [
-                    'type' => Type::boolean(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Anonymous or not.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'id' => [
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
@@ -64,9 +52,9 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return (($value->isPrivate()) ? (null) : ($value->getUser()));
+                        return $globalVariable->get('resolverResolver')->resolve(["proposition_vote_author", array(0 => $value)]);
                     },
-                    'description' => 'The author of the contribution. If null, the vote is anonymous.',
+                    'description' => 'The author of the contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -89,10 +77,8 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
                     ],
-                    'resolve' => function () use ($globalVariable) {
-                        return 'proposalVote';
-                    },
-                    'description' => 'Returns \'proposalVote\'.',
+                    'resolve' => null,
+                    'description' => 'Returns Type of vote',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -155,38 +141,12 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
-                'anonymous' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->isPrivate();
-                    },
-                    'description' => 'Is the vote anonymous ?',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'proposal' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Proposal')),
+                'private' => [
+                    'type' => Type::boolean(),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Return the proposal.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'step' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalStep')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Return the step.',
+                    'description' => 'Anonymous or not.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -195,11 +155,9 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
                 ],
             ];
             },
-            'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('Vote'), $globalVariable->get('typeResolver')->resolve('Publishable'), $globalVariable->get('typeResolver')->resolve('PrivatableVote')];
+            'resolveType' => function ($value, $context, ResolveInfo $info) use ($globalVariable) {
+                return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableTypeResolver", array(0 => $value)]);
             },
-            'isTypeOf' => null,
-            'resolveField' => null,
         ];
         };
         $config = $configProcessor->process(LazyConfig::create($configLoader, $globalVariables))->load();

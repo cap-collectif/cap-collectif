@@ -275,11 +275,13 @@ User:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMediasResolver", [value, args])'
       votes:
-        access:
-          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
         type: 'VoteConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all votes of the user.'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 100000
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value, args])'
       groups:
@@ -344,3 +346,9 @@ User:
       emailConfirmationSentAt:
         type: 'DateTime'
         description: "The user's email was confirmed at date"
+      arguments:
+        type: 'ArgumentConnection!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentByUserResolver", [value, args])'
+        description: 'The arguments created by user.'
+        argsBuilder: 'Relay::Connection'

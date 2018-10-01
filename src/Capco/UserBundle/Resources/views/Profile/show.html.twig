@@ -50,7 +50,7 @@
     {% if arguments|length > 0 %}
         <div class="container container--custom">
             <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% include '@CapcoUser/Profile/arguments.html.twig' %}
+            {{ react_render_component('ArgumentListApp', { 'props': { 'userId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
         </div>
     {% endif %}
 
@@ -85,7 +85,7 @@
     {% if votes|length > 0 %}
         <div class="container container--custom">
             <h2>{{ 'user.profile.show.votes' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% include '@CapcoUser/Profile/votes.html.twig' %}
+            {{ react_render_component('VoteListApp', { 'props': { 'userId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
         </div>
     {% endif %}
 

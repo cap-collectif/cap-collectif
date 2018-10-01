@@ -1,21 +1,21 @@
 Vote:
-  type: object
+  type: interface
   config:
+    resolveType:
+      '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", [value])'
     fields:
       id:
         type: 'ID!'
       createdAt:
         type: 'DateTime!'
         description: 'Date of vote.'
-      kind:
-        type: 'String!'
-        description: 'Returns Type of vote'
       author:
-        type: 'User!'
+        type: 'User'
         description: 'The author of the contribution.'
+        resolve: "@=resolver('proposition_vote_author', [value])"
       related:
         type: 'Contribution'
         description: 'The contribution that was voted.'
-      private:
-        type: 'Boolean'
-        description: 'Update the vote privacy.'
+      kind:
+        type: 'String!'
+        description: 'Returns Type of vote'
