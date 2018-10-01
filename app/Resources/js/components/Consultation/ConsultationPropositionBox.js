@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
-import * as Stickyfill from 'stickyfilljs';
 import type { GlobalState, Dispatch } from '../../types';
 import { changeConsultationPlanActiveItems } from '../../redux/modules/project';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -36,12 +35,17 @@ type State = {
   currentActiveItems: Array<string>,
 };
 
+let Stickyfill;
+
 export class ConsultationPropositionBox extends React.Component<Props, State> {
   state = {
     currentActiveItems: [],
   };
 
   componentDidMount() {
+    // eslint-disable-next-line
+    Stickyfill = require('stickyfilljs');
+
     window.addEventListener('scroll', () => {
       window.requestAnimationFrame(() => {
         this.scrollSpy();
