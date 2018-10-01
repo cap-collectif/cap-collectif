@@ -38,13 +38,13 @@ export class ConsultationPlanItem extends React.Component<Props> {
     const { onCollapse, section } = this.props;
     const item = this.navItem.current;
 
-    if (items && items.includes(section.id)) {
+    if (items.includes(section.id)) {
       onCollapse(true);
-    } else if (items) {
+    } else {
       onCollapse(false);
     }
 
-    if ((items && items[items.length - 1]) === section.id && item) {
+    if (items[items.length - 1] === section.id && item) {
       // $FlowFixMe
       item.classList.add('active');
     } else if (item) {
