@@ -113,8 +113,10 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
   showConsultationPlan:
-    props.stepId in state.project.showConsultationPlanById
-      ? state.project.showConsultationPlanById[props.stepId]
+    state.project && state.project.showConsultationPlanById
+      ? props.stepId in state.project.showConsultationPlanById
+        ? state.project.showConsultationPlanById[props.stepId]
+        : true
       : true,
 });
 
