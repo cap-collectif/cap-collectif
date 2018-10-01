@@ -1,6 +1,7 @@
 // // @flow
 import styled from 'styled-components';
 import * as React from 'react';
+import colors from '../../../utils/colors';
 
 type Props = {
   children: ?React.Node,
@@ -9,7 +10,7 @@ type Props = {
 const Container = styled.div.attrs({
   className: 'stacked-nav',
 })`
-  background-color: #f6f6f6;
+  background-color: ${colors.pageBgc};
   width: 100%;
 
   a,
@@ -20,15 +21,15 @@ const Container = styled.div.attrs({
   }
 
   .stacked-nav__header {
-    color: #707070;
+    color: ${colors.darkGray};
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid ${colors.borderColor};
     text-transform: uppercase;
     padding-bottom: 10px;
 
     .btn-link {
-      color: #707070;
+      color: ${colors.darkGray};
     }
 
     p {
@@ -48,13 +49,13 @@ const Container = styled.div.attrs({
   .stacked-nav__list {
     .btn-link.active,
     .btn-link:hover {
-      background-color: #ffffff;
-      border: 1px solid #e3e3e3;
+      background-color: ${colors.white};
+      border: 1px solid ${colors.borderColor};
     }
 
     .btn-link {
-      color: #000000;
-      border: 1px solid #f6f6f6;
+      color: ${colors.black};
+      border: 1px solid ${colors.pageBgc};
       font-size: 16px;
       width: 100%;
       text-align: left;
@@ -83,39 +84,39 @@ const Container = styled.div.attrs({
 
   .stacked-nav__footer {
     padding: 15px 0;
-    color: #000000;
+    color: ${colors.black};
 
     .btn-link {
       font-weight: 300;
       font-size: 16px;
 
       &:not(:hover) {
-        color: #000000;
+        color: ${colors.black};
       }
     }
   }
 
   @media (max-width: 991px) {
-    background-color: #ffffff;
+    background-color: ${colors.white};
 
     .stacked-nav__header {
       padding: 5px 15px 10px;
-      color: #ffffff;
+      color: ${colors.white};
       text-transform: capitalize;
 
       .btn-link,
       .btn-link:hover {
-        color: #ffffff;
+        color: ${colors.white};
       }
     }
 
     .stacked-nav__list .btn-link {
-      border: 1px solid #ffffff;
+      border: 1px solid ${colors.white};
 
       &.active,
       &:hover {
-        background-color: #f6f6f6;
-        border: 1px solid #f6f6f6;
+        background-color: ${colors.pageBgc};
+        border: 1px solid ${colors.pageBgc};
       }
     }
 
