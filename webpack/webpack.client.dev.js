@@ -49,56 +49,19 @@ const devConf = {
       path.join(webpackConfig.appDir, 'Resources/js/browserUpdate.js'),
       path.join(webpackConfig.appDir, 'Resources/js/modernizr.js'),
     ],
-    app: [path.join(webpackConfig.appDir, 'Resources/js/app.js')],
+    app: [
+      path.join(webpackConfig.appDir, 'Resources/js/app.js'),
+      path.join(webpackConfig.appDir, 'Resources/js/registration.js'),
+    ],
     'ckeditor/ckeditor': [path.join(webpackConfig.bowerDir, 'ckeditor/ckeditor.js')],
     'jquery.minicolors': [
       path.join(webpackConfig.bowerDir, 'jquery-minicolors/jquery.minicolors.js'),
     ],
   },
   mode: 'development',
-  plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-    }),
-  ],
+  plugins: [],
   module: {
     rules: [
-      {
-        test: /\.(png|jpe?g|gif|svg|woff|swf|zip|woff2|ttf|eot|ico|otf|pdf)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            },
-          },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              root: webpackConfig.ressourcesDir,
-            },
-          },
-          {
-            loader: 'sass-loader',
-          },
-        ],
-      },
       {
         test: /(\.js|\.jsx)$/,
         exclude: [
@@ -108,6 +71,28 @@ const devConf = {
         use: [
           {
             loader: 'babel-loader',
+          },
+        ],
+      },
+      {
+        test: require.resolve('jquery'),
+        use: [
+          {
+            loader: 'expose-loader',
+            options: 'jQuery',
+          },
+          {
+            loader: 'expose-loader',
+            options: '$',
+          },
+        ],
+      },
+      {
+        test: path.join(webpackConfig.appDir, 'Resources/js/app.js'),
+        use: [
+          {
+            loader: 'expose-loader',
+            options: 'App',
           },
         ],
       },

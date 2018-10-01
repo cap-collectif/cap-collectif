@@ -93,13 +93,13 @@
     {{ parent() }}
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.equalheight('.theme');
-            App.equalheight('.media--macro');
-            App.equalheight('.media--news');
-            App.equalheight('.event-js');
-            App.equalheight('.video');
-            App.video('.fancybox');
-            App.carousel();
+            App.default.equalheight('.theme');
+            App.default.equalheight('.media--macro');
+            App.default.equalheight('.media--news');
+            App.default.equalheight('.event-js');
+            App.default.equalheight('.video');
+            App.default.video('.fancybox');
+            App.default.carousel();
         });
 
         $(window).on('resize', function() {
