@@ -896,7 +896,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When I scroll bot
+     * @When I scroll to the bottom
      */
     public function iScrollBot()
     {
@@ -904,7 +904,7 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When I scroll top
+     * @When I scroll to the top
      */
     public function iScrollTop()
     {

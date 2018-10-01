@@ -36,7 +36,7 @@ Scenario: Anonymous wants to comment a blogpost
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
   When I press "comment.submit"
-  And I wait 2 seconds
+  And I wait "#global-alert-box" to appear on current page
   Then I should see "comment.submit_success" in the "#global-alert-box" element
   And I should see "J'ai un truc à dire" in the ".comments__section" element
 
@@ -51,6 +51,6 @@ Scenario: Logged in user wants to comment a blogpost
   And I should not see "comment.with_my_account"
   And I should not see "comment.without_account"
   When I press "comment.submit"
-  And I wait 2 seconds
+  And I wait "#global-alert-box" to appear on current page
   Then I should see "comment.submit_success" in the "#global-alert-box" element
   Then I should see "J'ai un truc à dire" in the ".comments__section" element

@@ -529,7 +529,7 @@ trait ProposalStepsTrait
     public function iSubmitTheCommentForm()
     {
         $this->navigationContext->getPage('proposal page')->submitCommentForm();
-        $this->iWait(5);
+        $this->getSession()->wait(3000, "$('#current-alert').length > 0");
     }
 
     /**
@@ -856,6 +856,7 @@ trait ProposalStepsTrait
      */
     public function iShouldHaveNbVotes(int $nb)
     {
+        $this->getSession()->wait(3000, "$('.proposals-user-votes__table').length > 0");
         $count = $this->navigationContext->getPage('project user votes page')->countVotes();
         expect($count)->toBe($nb);
     }
@@ -1061,7 +1062,7 @@ trait ProposalStepsTrait
     public function iSubmitTheProposalVoteForm()
     {
         $page = $this->getCurrentPage()->submitProposalVoteForm();
-        $this->iWait(8); // We wait for alert to disappear
+        $this->getSession()->wait(5000, "$('#confirm-proposal-vote').length == 0");
     }
 
     /**
@@ -1481,11 +1482,13 @@ trait ProposalStepsTrait
 
     protected function fillComment($body)
     {
+        $this->getSession()->wait(3000, "$('textarea[name=body]').length > 0");
         $this->fillField('body', $body);
     }
 
     protected function fillAnonymousComment($body, $name, $email)
     {
+        $this->getSession()->wait(3000, "$('input[name=authorEmail]').length > 0");
         $this->fillField('body', $body);
         $this->fillField('authorName', $name);
         $this->fillField('authorEmail', $email);

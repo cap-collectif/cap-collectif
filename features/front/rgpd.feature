@@ -19,8 +19,8 @@ Scenario: An anonymous wants to simply accept cookies by clicking anywhere
 Scenario: An anonymous wants to simply accept cookies by scrolling
   Given I go to a proposal with lot of comments
   And I should see "performance-cookies-alert"
-  Then I scroll bot
-  And I scroll bot
+  Then I scroll to the bottom
+  And I scroll to the bottom
   Then I should not see "performance-cookies-alert"
 
 @javascript
