@@ -28,6 +28,7 @@ class FeaturesCategoryResolver
             'features' => [
                 'blog',
                 'calendar',
+                'consultation_plan',
                 'versions',
                 'themes',
                 'districts',

@@ -18,8 +18,25 @@ describe('<ConsultationPropositionBox />', () => {
     showConsultationPlan: true,
   };
 
-  it('renders correcty', () => {
-    const wrapper = shallow(<ConsultationPropositionBox {...props} />);
+  const consultationPlanIsEnabled = {
+    consultationPlanEnable: true,
+  };
+
+  const consultationPlanIsNotEnabled = {
+    consultationPlanEnable: false,
+  };
+
+  it('renders correctly with plan', () => {
+    const wrapper = shallow(
+      <ConsultationPropositionBox {...consultationPlanIsEnabled} {...props} />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders correctly without plan', () => {
+    const wrapper = shallow(
+      <ConsultationPropositionBox {...consultationPlanIsNotEnabled} {...props} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -29,6 +29,7 @@ type Props = {
   step: Step,
   showConsultationPlan: boolean,
   dispatch: Dispatch,
+  consultationPlanEnable: boolean,
 };
 
 type State = {
@@ -82,7 +83,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
   };
 
   render() {
-    const { step, showConsultationPlan } = this.props;
+    const { step, showConsultationPlan, consultationPlanEnable } = this.props;
 
     const renderSectionRecursiveList = ({
       error,
@@ -106,18 +107,24 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
 
     return (
       <div className="row">
-        <div
-          className={
-            showConsultationPlan
-              ? 'consultation-plan sticky col-md-3 col-sm-12'
-              : 'consultation-plan sticky'
-          }
-          id="consultation-plan">
-          <ConsultationPlan step={step} />
-        </div>
+        {consultationPlanEnable && (
+          <div
+            className={
+              showConsultationPlan
+                ? 'consultation-plan sticky col-md-3 col-sm-12'
+                : 'consultation-plan sticky'
+            }
+            id="consultation-plan">
+            <ConsultationPlan step={step} />
+          </div>
+        )}
         <div
           id="scroll-content"
-          className={showConsultationPlan ? 'col-md-9' : 'col-md-10 col-md-offset-1'}>
+          className={
+            consultationPlanEnable && showConsultationPlan
+              ? 'col-md-9'
+              : 'col-md-10 col-md-offset-1'
+          }>
           {/* <Panel
             <span>
               Filtres de recherche
@@ -169,6 +176,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Pr
     props.step.id in state.project.showConsultationPlanById
       ? state.project.showConsultationPlanById[props.step.id]
       : true,
+  consultationPlanEnable: state.default.features.consultation_plan,
 });
 
 export default connect(mapStateToProps)(ConsultationPropositionBox);
