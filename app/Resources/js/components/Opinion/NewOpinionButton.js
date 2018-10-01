@@ -13,7 +13,6 @@ type Props = {
   section: NewOpinionButton_section,
   consultation: NewOpinionButton_consultation,
   label: string,
-  disabled?: boolean,
   dispatch: Function,
 };
 

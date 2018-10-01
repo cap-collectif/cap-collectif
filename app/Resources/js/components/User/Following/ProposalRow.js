@@ -30,9 +30,7 @@ export class ProposalRow extends Component<Props, State> {
         input: {
           proposalId,
         },
-      }).then(() => {
-        return true;
-      });
+      }).then(() => true);
     });
   }
 

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedNumber, FormattedMessage } from 'react-intl';
 import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
 import type { ProposalVoteBasketWidget_step } from './__generated__/ProposalVoteBasketWidget_step.graphql';
@@ -12,7 +12,6 @@ type Props = {
   viewer: ?ProposalVoteBasketWidget_viewer,
   votesPageUrl: string,
   image: ?string,
-  relay: RelayRefetchProp,
 };
 
 export class ProposalVoteBasketWidget extends React.Component<Props> {
@@ -164,35 +163,25 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
   }
 }
 
-export default createRefetchContainer(
-  ProposalVoteBasketWidget,
-  {
-    step: graphql`
-      fragment ProposalVoteBasketWidget_step on ProposalStep {
-        id
-        title
-        voteType
-        votesLimit
-        budget
-      }
-    `,
-    viewer: graphql`
-      fragment ProposalVoteBasketWidget_viewer on User
-        @argumentDefinitions(stepId: { type: "ID!", nonNull: true }) {
-        id
-        proposalVotes(stepId: $stepId) {
-          totalCount
-          creditsLeft
-          creditsSpent
-        }
-      }
-    `,
-  },
-  graphql`
-    query ProposalVoteBasketWidgetQuery($stepId: ID!) {
-      viewer {
-        ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId)
+export default createFragmentContainer(ProposalVoteBasketWidget, {
+  step: graphql`
+    fragment ProposalVoteBasketWidget_step on ProposalStep {
+      id
+      title
+      voteType
+      votesLimit
+      budget
+    }
+  `,
+  viewer: graphql`
+    fragment ProposalVoteBasketWidget_viewer on User
+      @argumentDefinitions(stepId: { type: "ID!", nonNull: true }) {
+      id
+      proposalVotes(stepId: $stepId) {
+        totalCount
+        creditsLeft
+        creditsSpent
       }
     }
   `,
-);
+});

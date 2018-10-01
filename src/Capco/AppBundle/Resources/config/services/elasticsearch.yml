@@ -14,10 +14,7 @@ services:
 
   capco.elasticsearch.indexer:
     class: Capco\AppBundle\Elasticsearch\Indexer
-    arguments:
-      - '@doctrine'
-      - '@serializer'
-      - '@capco.elasticsearch.index'
+    autowire: true
 
   capco.elasticsearch.index:
     class: Elastica\Index

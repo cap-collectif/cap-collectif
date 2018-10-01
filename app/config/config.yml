@@ -4,6 +4,7 @@ imports:
   - { resource: liip_imagine.yml }
   - { resource: swarrot.yml }
   - { resource: joli/jolitypo.yml }
+  - { resource: cors.yml }
 
 parameters:
   database_driver: '%env(SYMFONY_DATABASE_DRIVER)%'
@@ -618,10 +619,16 @@ overblog_dataloader:
   defaults:
     promise_adapter: 'overblog_dataloader.webonyx_graphql_sync_promise_adapter'
 overblog_graphql:
+  errors_handler:
+    enabled: true # false will totally disabled errors handling
+    internal_error_message: ~ # custom generic error message
+    rethrow_internal_exceptions: false # re-throw internal exception
+    debug: false # will add trace stack and debugMessage to error
+    log: true # false will disabled the default logging behavior
+    logger_service: logger # the service to use to log
   security:
     query_max_depth: false
     query_max_complexity: false
-    handle_cors: true
   services:
         promise_adapter: "webonyx_graphql.sync_promise_adapter"
   definitions:
@@ -656,7 +663,6 @@ overblog_graphql:
           - SimpleQuestion
           - ValueResponse
           - VersionVote
-          - SectionQuestion
 
 limenius_react:
   default_rendering: 'both'

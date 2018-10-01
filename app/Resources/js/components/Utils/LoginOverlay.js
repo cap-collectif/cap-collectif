@@ -20,10 +20,7 @@ type Props = {
 export class LoginOverlay extends React.Component<Props> {
   static displayName = 'LoginOverlay';
 
-  static defaultProps = {
-    user: null,
-    enabled: true,
-  };
+  static defaultProps = { user: null, enabled: true, loginWithMonCompteParis: false };
 
   // We add Popover if user is not connected
   render() {

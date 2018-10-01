@@ -1,5 +1,13 @@
 module.exports = {
-  extends: ['airbnb', 'prettier', 'prettier/flowtype', 'prettier/react'],
+  extends: [
+    'airbnb',
+    'prettier',
+    'prettier/flowtype',
+    'prettier/react',
+    'plugin:flowtype/recommended',
+    'plugin:jest/recommended',
+    'plugin:jsx-a11y/recommended',
+  ],
   parser: 'babel-eslint',
   plugins: ['flowtype', 'import', 'react', 'jsx-a11y', 'jest', 'relay'],
   globals: {
@@ -23,79 +31,64 @@ module.exports = {
     Element: true,
   },
   rules: {
-    'camelcase': 'off',
-    'jest/no-disabled-tests': 'warn',
-    'jest/no-focused-tests': 'error',
-    'jest/no-identical-title': 'error',
-    'relay/graphql-syntax': 'error',
-    'relay/compat-uses-vars': 'warn',
-    'relay/graphql-naming': 'error',
-    'relay/generated-flow-types': 'warn',
-    'relay/unused-fields': 'warn',
-    'flowtype/boolean-style': ['error', 'boolean'],
-    'flowtype/define-flow-type': 1,
-    'flowtype/generic-spacing': ['off'],
-    'flowtype/no-primitive-constructor-types': 'error',
-    'flowtype/no-weak-types': ['off'],
-    'flowtype/object-type-delimiter': ['error', 'comma'],
-    'flowtype/require-parameter-type': ['off'],
-    'flowtype/require-return-type': [
-      'off',
-      'always',
-      { annotateUndefined: 'never' },
-    ],
-    'flowtype/require-valid-file-annotation': 'error',
-    'flowtype/semi': ['error', 'always'],
-    'flowtype/space-after-type-colon': ['off'],
-    'flowtype/space-before-generic-bracket': ['error', 'never'],
-    'flowtype/space-before-type-colon': ['error', 'never'],
-    'flowtype/type-id-match': 'off',
-    'flowtype/union-intersection-spacing': ['error', 'always'],
-    'jsx-a11y/no-static-element-interactions': 'off',
-    'react/require-default-props': 'off',
-    'react/no-children-prop': 'off',
-    'react/no-array-index-key': 'off',
-    'react/no-unescaped-entities': 'off',
-    'no-plusplus': 'off',
-    'no-alert': 'off',
-    'global-require': 'off',
-    'react/no-danger': 'off',
-    'jsx-a11y/label-has-for': 'off',
-    'react/forbid-prop-types': 'off',
-    'class-methods-use-this': 'off',
-    'react/no-unused-prop-types': 'off',
-    'no-restricted-syntax': 'off',
+    // https://github.com/evcohen/eslint-plugin-jsx-a11y/issues/396
     'jsx-a11y/href-no-hash': 'off',
-    'jsx-a11y/anchor-has-content': 'off',
+    // Deprecated: https://github.com/evcohen/eslint-plugin-jsx-a11y/releases/tag/v6.1.0
+    'jsx-a11y/label-has-for': 'off',
+    // Disabled for Flow generated props
+    // Maybe we could use a different syntax
+    // Such as import * as generated from …
+    camelcase: 'off',
+    // Relay config
+    'relay/graphql-syntax': 'error',
+    'relay/graphql-naming': 'error',
+    // Fix doesn't seem to work yet
+    'relay/generated-flow-types': ['error', {fix: true}],
+    'relay/unused-fields': 'warn',
+    'relay/no-future-added-value': 'warn',
+    
+    // TODO: https://github.com/cap-collectif/platform/issues/5966
+    'react/require-default-props': 'off',
+    // TODO: https://github.com/cap-collectif/platform/issues/5967
+    'react/no-children-prop': 'off',
+    // TODO enable this
+    'react/no-array-index-key': 'off',
+    // TODO enable this
+    'no-plusplus': 'off',
+    // We must render some HTML from WYSIWYG
+    'react/no-danger': 'off',
+    // TODO enable this
+    'class-methods-use-this': 'off',
+    // TODO enable this
+    'no-restricted-syntax': 'off',
+    // TODO enable this
     'import/no-named-as-default': 'off',
-    'import/imports-first': 'off',
-    'import/no-extraneous-dependencies': 'off',
+    // TODO enable this
     'import/prefer-default-export': 'off',
+    // We have a usecase for findDOMNode
     'react/no-find-dom-node': 'off',
-    'react/no-string-refs': 'off',
-    'react/jsx-closing-bracket-location': 'off',
-    'react/jsx-first-prop-new-line': 'off',
-    'react/self-closing-comp': 'off',
+    // TODO turn this into an error to prepare for React 17
+    'react/no-string-refs': 'warn',
+    // We use .js instead of .jsx
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
-    'react/jsx-indent': 'off',
-    'react/jsx-indent-props': 'off',
+    // TODO enable this
     'react/jsx-no-bind': 'off',
-    'no-duplicate-imports': 'off', // for flow type import
+    // TODO enable this
     'react/prefer-stateless-function': 'off',
-    'react/require-extension': 'off',
-    'react/prefer-es6-class': 'off',
+    // TODO enable this, maybe not possible because of
+    // GraphQL __typename
     'no-underscore-dangle': 'off',
-    'no-confusing-arrow': 'off',
     'no-nested-ternary': 'off',
-    'arrow-body-style': 'off',
-    'max-len': 'off',
+    // This conflict with `style` props of `<FormattedNumber />`
     'react/style-prop-object': 'off',
+    // This conflict with Prettier
+    'flowtype/space-after-type-colon': 'off',
+    // TODO enable this
     'no-param-reassign': 'off',
+    // Maybe enable this
     'consistent-return': 'off',
+    // Maybe enable this
     'array-callback-return': 'off',
-    'no-return-assign': 'off',
-    'flowtype/define-flow-type': 'warn',
-    'flowtype/use-flow-type': 1,
   },
   settings: {
     flowtype: {

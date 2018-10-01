@@ -8,7 +8,7 @@ type Props = {
   comment: CommentEdit_comment,
 };
 
-class CommentEdit extends React.Component<Props> {
+export class CommentEdit extends React.Component<Props> {
   render() {
     const { comment } = this.props;
     if (comment.contribuable && comment.author && comment.author.isViewer) {

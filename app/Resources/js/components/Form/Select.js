@@ -17,7 +17,6 @@ type Props = {
   meta: { touched: boolean, error: ?string },
   label: string | React.Node,
   help: string | React.Node,
-  id: string,
   placeholder?: string,
   autoload?: boolean,
   clearable?: boolean,

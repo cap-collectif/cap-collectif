@@ -18,9 +18,7 @@ type Props = RelayProps & FormProps;
 
 const formName = 'questionnaire-admin-parameters';
 
-const validate = () => {
-  return {};
-};
+const validate = () => ({});
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { questionnaire } = props;

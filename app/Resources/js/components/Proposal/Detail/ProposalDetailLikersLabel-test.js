@@ -12,7 +12,6 @@ describe('<ProposalDetailLikersLabel />', () => {
     likers: [
       {
         id: '1',
-        displayName: 'user with a very long name that need to be truncated',
       },
     ],
   };
@@ -23,11 +22,9 @@ describe('<ProposalDetailLikersLabel />', () => {
     likers: [
       {
         id: '1',
-        displayName: 'user 1',
       },
       {
         id: '2',
-        displayName: 'user 2',
       },
     ],
   };

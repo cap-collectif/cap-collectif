@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Elastica\Bulk;
@@ -10,6 +11,7 @@ use Elastica\Document;
 use Elastica\Index;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -49,13 +51,19 @@ class Indexer
      * @var array
      */
     private $classes;
+    private $logger;
 
-    public function __construct(Registry $registry, SerializerInterface $serializer, Index $index)
-    {
+    public function __construct(
+        Registry $registry,
+        SerializerInterface $serializer,
+        Index $index,
+        LoggerInterface $logger
+    ) {
         $this->index = $index;
         $this->client = $index->getClient();
         $this->em = $registry->getManager();
         $this->serializer = $serializer;
+        $this->logger = $logger;
     }
 
     /**
@@ -72,8 +80,12 @@ class Indexer
             $iterableResult = $query->iterate();
 
             if ($output) {
-                $count = $repository->createQueryBuilder('a')->select('count(a)')->getQuery()->getSingleScalarResult();
-                $output->writeln(PHP_EOL . '<info>' . 'Indexing ' . $count . ' ' . $class . '</info>');
+                $count = $repository
+                    ->createQueryBuilder('a')
+                    ->select('count(a)')
+                    ->getQuery()
+                    ->getSingleScalarResult();
+                $output->writeln(PHP_EOL . "<info> Indexing $count $class</info>");
                 $progress = new ProgressBar($output, $count);
                 $progress->start();
             }
@@ -87,7 +99,9 @@ class Indexer
                     $this->addToBulk($document);
                 } else {
                     // Empty mean DELETE
-                    $this->addToBulk(new Document($object->getId(), [], $object->getElasticsearchTypeName()));
+                    $this->addToBulk(
+                        new Document($object->getId(), [], $object->getElasticsearchTypeName())
+                    );
                 }
 
                 if (isset($progress)) {
@@ -185,7 +199,7 @@ class Indexer
             }
         }
 
-        $this->classes['comment'] = "Capco\AppBundle\Entity\Comment";
+        $this->classes['comment'] = Comment::class;
 
         return $this->classes;
     }
@@ -194,7 +208,12 @@ class Indexer
     {
         $context = SerializationContext::create();
         $context->setGroups($object::getElasticsearchSerializationGroups());
-        $json = $this->serializer->serialize($object, 'json', $context);
+        $json = [];
+        try {
+            $json = $this->serializer->serialize($object, 'json', $context);
+        } catch (\Exception $exception) {
+            $this->logger->error(__METHOD__ . $exception->getMessage());
+        }
 
         return new Document($object->getId(), $json, $object::getElasticsearchTypeName());
     }
@@ -213,7 +232,10 @@ class Indexer
             $this->currentDeleteBulk[] = $document;
         }
 
-        if (\count($this->currentInsertBulk) >= self::BULK_SIZE || \count($this->currentDeleteBulk) >= self::BULK_SIZE) {
+        if (
+            \count($this->currentInsertBulk) >= self::BULK_SIZE ||
+            \count($this->currentDeleteBulk) >= self::BULK_SIZE
+        ) {
             $this->finishBulk();
         }
     }

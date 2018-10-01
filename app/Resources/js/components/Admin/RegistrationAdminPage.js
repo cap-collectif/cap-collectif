@@ -35,10 +35,16 @@ export class RegistrationAdminPage extends React.Component<Props> {
               onChange={() => onToggle('registration', !features.registration)}
             />
           </Col>
-          <Col xs={11}>Permettre l'inscription</Col>
+          <Col xs={11}>
+            <FormattedMessage id="allow-registration" />
+          </Col>
         </div>
-        <h4>Réseaux sociaux</h4>
-        <p>Permettre l'inscription via :</p>
+        <h4>
+          <FormattedMessage id="social-medias" />
+        </h4>
+        <p>
+          <FormattedMessage id="allow-registration-with" />
+        </p>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
@@ -59,7 +65,9 @@ export class RegistrationAdminPage extends React.Component<Props> {
           </Col>
           <Col xs={11}>Google</Col>
         </div>
-        <h4>Autorisation</h4>
+        <h4>
+          <FormattedMessage id="allow" />
+        </h4>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
@@ -73,21 +81,29 @@ export class RegistrationAdminPage extends React.Component<Props> {
               }
             />
           </Col>
-          <Col xs={11}>Limiter l'inscription à certains noms de domaine</Col>
+          <Col xs={11}>
+            <FormattedMessage id="limit-registration-to-some-domains" />
+          </Col>
         </div>
         {features.restrict_registration_via_email_domain && <RegistrationEmailDomainsForm />}
-        <h4>Données recueillies</h4>
+        <h4>
+          <FormattedMessage id="received-data" />
+        </h4>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle checked icons disabled />
           </Col>
-          <Col xs={11}>Nom ou pseudonyme</Col>
+          <Col xs={11}>
+            <FormattedMessage id="user.register.username.username" />
+          </Col>
         </div>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle checked icons disabled />
           </Col>
-          <Col xs={11}>Mot de passe</Col>
+          <Col xs={11}>
+            <FormattedMessage id="form.new_password" />
+          </Col>
         </div>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
@@ -97,7 +113,9 @@ export class RegistrationAdminPage extends React.Component<Props> {
               onChange={() => onToggle('zipcode_at_register', !features.zipcode_at_register)}
             />
           </Col>
-          <Col xs={11}>Code postal</Col>
+          <Col xs={11}>
+            <FormattedMessage id="user.register.zipcode" />
+          </Col>
         </div>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
@@ -107,7 +125,9 @@ export class RegistrationAdminPage extends React.Component<Props> {
               onChange={() => onToggle('user_type', !features.user_type)}
             />
           </Col>
-          <Col xs={11}>Statut</Col>
+          <Col xs={11}>
+            <FormattedMessage id="registration.type" />
+          </Col>
         </div>
         <Well bsClass={isSuperAdmin ? 'div' : 'well'}>
           <p style={{ marginTop: 10 }}>
@@ -116,7 +136,9 @@ export class RegistrationAdminPage extends React.Component<Props> {
                 Cette section est modifiable uniquement par votre administrateur cap-collectif.
               </Alert>
             )}
-            <strong>Champ(s) supplémentaire(s)</strong>
+            <strong>
+              <FormattedMessage id="more-fields" />
+            </strong>
           </p>
           {dynamicFields.length > 0 && (
             <RegistrationQuestionSortableList
@@ -139,7 +161,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
                     addNewField();
                   }
             }>
-            Ajouter
+            <FormattedMessage id="link_action_create" />
           </Button>
         </Well>
         <div className="row" style={{ padding: '10px 0' }}>
@@ -184,9 +206,13 @@ export class RegistrationAdminPage extends React.Component<Props> {
               onChange={() => onToggle('captcha', !features.captcha)}
             />
           </Col>
-          <Col xs={11}>Je ne suis pas un robot</Col>
+          <Col xs={11}>
+            <FormattedMessage id="i-am-not-a-bot" />
+          </Col>
         </div>
-        <h3>Communication</h3>
+        <h3>
+          <FormattedMessage id="communication" />
+        </h3>
         <RegistrationCommunicationForm />
       </div>
     );

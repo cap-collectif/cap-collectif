@@ -30,42 +30,38 @@ const colors = [
 ];
 
 storiesOf('UI', module)
-  .add('Fonts', () => {
-    return (
-      <div className="ml-30 mr-30 storybook-container">
-        <h1>
-          Fonts{' '}
-          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Style-stories.js">
-            <i className="small cap cap-github" />
-          </a>
-        </h1>
-        <hr />
-        <FontStyle />
-      </div>
-    );
-  })
-  .add('Colors', () => {
-    return (
-      <div className="ml-30 mr-30 storybook-container">
-        <h1>
-          Colors{' '}
-          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Style-stories.js">
-            <i className="small cap cap-github" />
-          </a>
-        </h1>
-        <hr />
-        <div className="row">
-          {colors.map(color => (
-            <div className="col-sm-2 col-xs-12 mb-20">
-              <ColorContainer hex={color.hex} />
-              <div className="text-center">
-                <b>{color.hex}</b>
-                <br />
-                {color.description}
-              </div>
+  .add('Fonts', () => (
+    <div className="ml-30 mr-30 storybook-container">
+      <h1>
+        Fonts{' '}
+        <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Style-stories.js">
+          <i className="small cap cap-github" />
+        </a>
+      </h1>
+      <hr />
+      <FontStyle />
+    </div>
+  ))
+  .add('Colors', () => (
+    <div className="ml-30 mr-30 storybook-container">
+      <h1>
+        Colors{' '}
+        <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Style-stories.js">
+          <i className="small cap cap-github" />
+        </a>
+      </h1>
+      <hr />
+      <div className="row">
+        {colors.map(color => (
+          <div className="col-sm-2 col-xs-12 mb-20">
+            <ColorContainer hex={color.hex} />
+            <div className="text-center">
+              <b>{color.hex}</b>
+              <br />
+              {color.description}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    );
-  });
+    </div>
+  ));

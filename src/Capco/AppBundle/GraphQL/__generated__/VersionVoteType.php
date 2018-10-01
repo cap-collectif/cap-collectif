@@ -20,7 +20,7 @@ final class VersionVoteType extends ObjectType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'VersionVote',
-            'description' => 'Entities that can be published.',
+            'description' => 'Fetches an object given its ID',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [

@@ -25,7 +25,7 @@ export class Card extends React.Component<Props> {
             <img src={project.user.avatar} alt={project.user.name} />
           </div>
           <div>
-            <a href="">{project.user.name}</a>
+            <a href="https://ui.cap-collectif.com">{project.user.name}</a>
             <p>
               <div className="excerpt small">{project.user.publicationDate}</div>
             </p>
@@ -35,11 +35,13 @@ export class Card extends React.Component<Props> {
         <div className="card__body">
           <div className="card__body__infos">
             <h3 className="card__title">
-              <a href="#">{project.title}</a>
+              <a href="https://ui.cap-collectif.com">{project.title}</a>
             </h3>
           </div>
           <div className="card__actions">
-            {project.step.actionLink && <a href="">{project.step.actionLink}</a>}
+            {project.step.actionLink && (
+              <a href="https://ui.cap-collectif.com">{project.step.actionLink}</a>
+            )}
             <span className="excerpt_dark">{project.step.remainingTime.value}</span>{' '}
             <span>{project.step.remainingTime && project.step.remainingTime.label}</span>
           </div>

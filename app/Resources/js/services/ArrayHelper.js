@@ -3,9 +3,7 @@ class ArrayHelper {
     let index = -1;
     const valueToCheck = secondUniqueField ? el[uniqueField][secondUniqueField] : el[uniqueField];
     index = els
-      .map(e => {
-        return secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField];
-      })
+      .map(e => (secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField]))
       .indexOf(valueToCheck);
     return index;
   }
@@ -13,9 +11,7 @@ class ArrayHelper {
   getElementFromArray(els, value, uniqueField = 'id', secondUniqueField = null) {
     let index = -1;
     index = els
-      .map(e => {
-        return secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField];
-      })
+      .map(e => (secondUniqueField ? e[uniqueField][secondUniqueField] : e[uniqueField]))
       .indexOf(value);
     return els[index];
   }

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Input from './Input';
@@ -73,6 +73,8 @@ class Other extends React.Component<Props, State> {
     });
   };
 
+  textField: ?React.Component<*>;
+
   clear = () => {
     this.setState({
       value: '',
@@ -107,8 +109,9 @@ class Other extends React.Component<Props, State> {
         <div className="other-field__value">
           <Input
             id={`reply-${field.id}_choice-other--field`}
-            // $FlowFixMe
-            ref={c => (this.textField = c)}
+            ref={c => {
+              this.textField = c;
+            }}
             type="text"
             onChange={this.onType}
             placeholder="reply.your_response"

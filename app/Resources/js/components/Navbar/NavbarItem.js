@@ -33,9 +33,9 @@ class NavbarItem extends React.Component<Props> {
                 onKeyDown={onKeyDown}>
                 {item.title}
               </MenuItem>
-              {item.children.map(child => {
-                return <NavbarItem item={child} key={child.id} isChild onKeyDown={onKeyDown} />;
-              })}
+              {item.children.map(child => (
+                <NavbarItem item={child} key={child.id} isChild onKeyDown={onKeyDown} />
+              ))}
             </span>
           );
         }
@@ -46,9 +46,9 @@ class NavbarItem extends React.Component<Props> {
             ref={refCallback}
             className={className}
             onKeyDown={onKeyDown}>
-            {item.children.map((child, childIndex) => {
-              return <NavbarItem item={child} isChild key={childIndex} onKeyDown={onKeyDown} />;
-            })}
+            {item.children.map((child, childIndex) => (
+              <NavbarItem item={child} isChild key={childIndex} onKeyDown={onKeyDown} />
+            ))}
           </NavDropdown>
         );
       }
