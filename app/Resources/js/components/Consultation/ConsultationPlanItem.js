@@ -71,6 +71,7 @@ export class ConsultationPlanItem extends React.Component<Props> {
     const { section, level } = this.props;
 
     return (
+      // we can't add innerRef with react-bootstrap Button
       <button className={`level--${level} btn-link`} ref={this.navItem} onClick={this.handleClick}>
         {section.title}
       </button>

@@ -29,8 +29,24 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
     }
   }
 
-  getPlan = () => {
+  handleClick = () => {
+    if (config.canUseDOM && document.body) {
+      document.body.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
+    }
+  };
+
+  openAction = () => {
+    const { openPlan, stepId } = this.props;
+
+    openPlan(stepId);
+  };
+
+  render() {
     const { consultation, closePlan, showConsultationPlan, stepId, intl } = this.props;
+
+    if (consultation.sections && consultation.sections.length < 2) {
+      return null;
+    }
 
     if (showConsultationPlan) {
       return (
@@ -86,28 +102,6 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
         </Button>
       </div>
     );
-  };
-
-  handleClick = () => {
-    if (config.canUseDOM && document.body) {
-      document.body.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
-    }
-  };
-
-  openAction = () => {
-    const { openPlan, stepId } = this.props;
-
-    openPlan(stepId);
-  };
-
-  render() {
-    const { consultation } = this.props;
-
-    if (consultation.sections && consultation.sections.length < 2) {
-      return null;
-    }
-
-    return this.getPlan();
   }
 }
 

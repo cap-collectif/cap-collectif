@@ -5,9 +5,6 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import type { GlobalState, Dispatch } from '../../types';
 import { changeConsultationPlanActiveItems } from '../../redux/modules/project';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-// import ConsultationFilterForm from './ConsultationFilterForm';
-// import ConsultationContributionFiltered
-//   from './ConsultationContributionFiltered';
 import SectionRecursiveList from './SectionRecursiveList';
 import Loader from '../Ui/Loader';
 import RemainingTime from './../Utils/RemainingTime';
@@ -29,7 +26,7 @@ type Props = {
   step: Step,
   showConsultationPlan: boolean,
   dispatch: Dispatch,
-  consultationPlanEnable: boolean,
+  consultationPlanEnabled: boolean,
 };
 
 type State = {
@@ -89,7 +86,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
   };
 
   render() {
-    const { step, showConsultationPlan, consultationPlanEnable } = this.props;
+    const { step, showConsultationPlan, consultationPlanEnabled } = this.props;
 
     const renderSectionRecursiveList = ({
       error,
@@ -113,7 +110,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
 
     return (
       <div className="row">
-        {consultationPlanEnable && (
+        {consultationPlanEnabled && (
           <div
             className={
               showConsultationPlan
@@ -127,19 +124,10 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
         <div
           id="scroll-content"
           className={
-            consultationPlanEnable && showConsultationPlan
+            consultationPlanEnabled && showConsultationPlan
               ? 'col-md-9'
               : 'col-md-10 col-md-offset-1'
           }>
-          {/* <Panel
-            <span>
-              Filtres de recherche
-            </span>
-            <span className="pull-right">
-              <ConsultationFilterForm />
-            </span>
-          </Panel> */}
-          {/* <ConsultationContributionFiltered consultationId={step.id} /> */}
           <h2 className="text-center">{step.title}</h2>
           <div className="mb-30 project__step-dates text-center">
             {(step.startAt || step.endAt) && (
@@ -182,7 +170,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Pr
     props.step.id in state.project.showConsultationPlanById
       ? state.project.showConsultationPlanById[props.step.id]
       : true,
-  consultationPlanEnable: state.default.features.consultation_plan,
+  consultationPlanEnabled: state.default.features.consultation_plan,
 });
 
 export default connect(mapStateToProps)(ConsultationPropositionBox);

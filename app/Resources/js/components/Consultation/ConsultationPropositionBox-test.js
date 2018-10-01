@@ -19,11 +19,11 @@ describe('<ConsultationPropositionBox />', () => {
   };
 
   const consultationPlanIsEnabled = {
-    consultationPlanEnable: true,
+    consultationPlanEnabled: true,
   };
 
   const consultationPlanIsNotEnabled = {
-    consultationPlanEnable: false,
+    consultationPlanEnabled: false,
   };
 
   it('renders correctly with plan', () => {
