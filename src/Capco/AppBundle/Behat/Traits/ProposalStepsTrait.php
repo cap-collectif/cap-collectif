@@ -199,8 +199,6 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalWithLotOfComments()
     {
-        $this->getSession()->wait(5000, "$('#main').length > 0");
-
         $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, false);
         $this->getSession()->wait(
             2000,
@@ -299,6 +297,7 @@ trait ProposalStepsTrait
      */
     public function thereShouldBeNbProposals(int $nb)
     {
+        $this->getSession()->wait(3000, "$('.proposal-preview').length > 0");
         $this->assertPageMatchesText(
             '/(proposal.count_with_total {"num":' . $nb . '|proposal.count {"num":' . $nb . '})/'
         );
@@ -381,6 +380,7 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeOrderedRandomly()
     {
+        $this->getSession()->wait(3000, "$('select#proposal-sorting').length > 0");
         $option = $this->getCurrentPage()->getSelectedSortingOption();
         Assert::assertEquals('random', $option);
     }
@@ -618,8 +618,8 @@ trait ProposalStepsTrait
      */
     public function iClickTheDeleteProposalButton()
     {
+        $this->getSession()->wait(3000, "$('#proposal-delete-button').length > 0");
         $this->navigationContext->getPage('proposal page')->clickDeleteProposalButton();
-        $this->iWait(1);
     }
 
     /**
@@ -627,6 +627,7 @@ trait ProposalStepsTrait
      */
     public function iConfirmProposalDeletion()
     {
+        $this->getSession()->wait(3000, "$('#confirm-proposal-delete').length > 0");
         $this->navigationContext->getPage('proposal page')->clickConfirmDeleteProposalButton();
         $this->iWait(3);
         $this->currentPage = 'collect page';

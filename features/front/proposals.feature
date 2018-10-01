@@ -188,7 +188,6 @@ Scenario: Admin should not be notified when an user deletes his proposal on an n
   And I go to a proposal which is not notifiable
   When I click the delete proposal button
   And I confirm proposal deletion
-  And I wait 3 seconds
   Then I should not see mail with subject "notification.email.proposal.delete.subject"
 
 @javascript @database @rabbitmq

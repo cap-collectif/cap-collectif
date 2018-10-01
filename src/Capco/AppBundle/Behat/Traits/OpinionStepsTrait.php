@@ -132,8 +132,8 @@ trait OpinionStepsTrait
      */
     public function iClickTheShowAllOpinionVotesButton()
     {
+        $this->getSession()->wait(3000, "$('#opinion-votes-show-all').length > 0");
         $this->navigationContext->getPage('opinion page')->clickShowAllVotesButton();
-        $this->iWait(1);
     }
 
     /**
@@ -141,6 +141,10 @@ trait OpinionStepsTrait
      */
     public function iShouldSeeAllOpinionVotes()
     {
+        $this->getSession()->wait(
+            3000,
+            "$('.opinion__votes__more__modal .opinion__votes__userbox').length > 0"
+        );
         $votesInModalSelector = $this->navigationContext->getPage(
             'opinion page'
         )->getVotesInModalSelector();
@@ -154,8 +158,8 @@ trait OpinionStepsTrait
      */
     public function iClickTheShareOpinionButton()
     {
+        $this->getSession()->wait(3000, "$('#opinion-share-button').length > 0");
         $this->navigationContext->getPage('opinion page')->clickShareButton();
-        $this->iWait(1);
     }
 
     /**
@@ -721,8 +725,9 @@ trait OpinionStepsTrait
      */
     public function iClickTheDeleteVersionButton()
     {
+        $link = 'a.btn.btn-danger[href*="/delete"]';
+        $this->getSession()->wait(3000, "$('$link').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickDeleteButton();
-        $this->iWait(1);
     }
 
     /**
@@ -732,8 +737,8 @@ trait OpinionStepsTrait
      */
     public function iConfirmVersionDeletion()
     {
+        $this->getSession()->wait(3000, "$('#confirm-opinion-delete').length > 0");
         $this->navigationContext->getPage('opinion version page')->confirmDeletion();
-        $this->iWait(1);
     }
 
     /**
@@ -743,6 +748,7 @@ trait OpinionStepsTrait
      */
     public function iShouldNotSeeMyVersionAnymore()
     {
+        $this->iWait(1);
         $this->assertPageNotContainsText('Modification 1');
     }
 
@@ -753,8 +759,8 @@ trait OpinionStepsTrait
      */
     public function iClickTheShowAllOpinionVersionVotesButton()
     {
+        $this->getSession()->wait(3000, "$('#opinion-votes-show-all').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickShowAllVotesButton();
-        $this->iWait(1);
     }
 
     /**
