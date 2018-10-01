@@ -5,6 +5,7 @@ import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
+import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
 
 import component from '../components/Form/Field';
 
@@ -222,6 +223,14 @@ export const renderResponses = ({
         const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
         switch (inputType) {
+          case 'section': {
+            return (
+              <div key={field.id}>
+                <TitleInvertContrast>{field.title}</TitleInvertContrast>
+                <div dangerouslySetInnerHTML={{ __html: field.description }} />
+              </div>
+            );
+          }
           case 'medias': {
             return (
               <ProposalPrivateField key={field.id} show={field.private}>

@@ -190,7 +190,8 @@ Scenario: GraphQL client wants to edit his proposal
             { "question": {"id":"1"}, "value": "New reponse-1" },
             { "question": {"id":"3"}, "value": "New reponse-3" },
             { "question": {"id":"11"}, "medias": [{"id": "media1"}, {"id": "media2"}] },
-            { "question": {"id":"12"}, "medias": []}
+            { "question": {"id":"12"}, "medias": []},
+            { "question": {"id":"33"}, "value": null}
           ]
         }
       }
@@ -287,7 +288,8 @@ Scenario: Super Admin GraphQL client wants to update a proposal
             {"question":{"id":"1"},"value":"reponse-1"},
             {"question":{"id":"3"},"value":"reponse-3"},
             {"question":{"id":"12"},"medias":[{"id":"media1"}]},
-            {"question":{"id":"11"},"medias":[{"id":"media1"}]}
+            {"question":{"id":"11"},"medias":[{"id":"media1"}]},
+            {"question":{"id":"33"},"value": null}
           ]
         }
       }

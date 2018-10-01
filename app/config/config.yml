@@ -663,6 +663,7 @@ overblog_graphql:
           - SimpleQuestion
           - ValueResponse
           - VersionVote
+          - SectionQuestion
 
 limenius_react:
   default_rendering: 'both'

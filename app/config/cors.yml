@@ -16,8 +16,8 @@ nelmio_cors:
       allow_origin: ['*']
       # Required header when we use file upload and form
       allow_headers: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With']
-      # GraphQL uses only POST, OPTIONS is used by browsers to get CORS.
-      allow_methods: ['POST', 'OPTIONS']
+      # GraphQL uses only POST
+      allow_methods: ['POST']
       # Cache for CORS checks
       max_age: 3600
     # Internal endpoint
@@ -25,5 +25,5 @@ nelmio_cors:
       # We restrict the Origin header
       allow_origin: ['%router.request_context.scheme%://%router.request_context.host%']
       allow_headers: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With']
-      allow_methods: ['POST', 'OPTIONS']
+      allow_methods: ['POST']
       max_age: 3600

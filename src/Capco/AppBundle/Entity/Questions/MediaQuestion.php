@@ -11,7 +11,7 @@ class MediaQuestion extends AbstractQuestion
 {
     public function __construct()
     {
-        $this->type = 7;
+        $this->type = self::QUESTION_TYPE_MEDIAS;
     }
 
     public function isMediaQuestion(): bool
