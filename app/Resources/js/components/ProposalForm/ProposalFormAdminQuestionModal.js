@@ -162,17 +162,24 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 oldMember={member}
                 type={type}
               />
-              <h4 style={{ fontWeight: 'bold' }}>
-                <span>
-                  <FormattedMessage id="conditional-jumps" />
-                </span>
-              </h4>
-              <FieldArray
-                name={`${member}.jumps`}
-                component={QuestionsJumpAdmin}
-                formName={formName}
-                oldMember={member}
-              />
+              {(type === 'button' ||
+                type === 'radio' ||
+                type === 'select')
+                && (
+                <div>
+                  <h4 style={{ fontWeight: 'bold' }}>
+                    <span>
+                      <FormattedMessage id="conditional-jumps" />
+                    </span>
+                  </h4>
+                  <FieldArray
+                    name={`${member}.jumps`}
+                    component={QuestionsJumpAdmin}
+                    formName={formName}
+                    oldMember={member}
+                  />
+                </div>
+              )}
               <h4 style={{ fontWeight: 'bold' }}>
                 <span>
                   <FormattedMessage id="group.admin.parameters" />

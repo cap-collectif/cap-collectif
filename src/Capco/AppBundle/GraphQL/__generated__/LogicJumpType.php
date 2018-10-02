@@ -3,7 +3,6 @@ namespace Capco\AppBundle\GraphQL\__GENERATED__;
 
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
-use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\ConfigProcessor;
 use Overblog\GraphQLBundle\Definition\LazyConfig;
 use Overblog\GraphQLBundle\Definition\GlobalVariables;
@@ -24,13 +23,11 @@ final class LogicJumpType extends ObjectType implements GeneratedTypeInterface
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [
-                    'type' => Type::nonNull(Type::id()),
+                    'type' => Type::id(),
                     'args' => [
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["relay_globalid_field", array(0 => $value, 1 => $info, 2 => null, 3 => null)]);
-                    },
-                    'description' => 'The ID of an object',
+                    'resolve' => null,
+                    'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

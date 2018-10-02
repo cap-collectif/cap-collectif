@@ -1,20 +1,23 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FieldArray } from 'redux-form';
+import {FieldArray, formValueSelector} from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { ListGroup, Button } from 'react-bootstrap';
 import QuestionJumpConditionsAdminForm from './QuestionJumpConditionsAdminForm';
+import type {MapStateToProps} from "react-redux";
+import type {GlobalState} from "../../types";
 
 type Props = {
   fields: { length: number, map: Function, remove: Function, push: Function },
   formName: string,
   oldMember: string,
+  currentQuestion: Object
 };
 
 export class QuestionsJumpAdminForm extends React.Component<Props> {
   render() {
-    const { fields, oldMember, formName } = this.props;
+    const { fields, formName, currentQuestion } = this.props;
     return (
       <div className="form-group" id="questions_choice_panel_personal">
         <ListGroup>
@@ -22,6 +25,9 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
             <div className="panel-custom panel panel-default">
               <div className="panel-heading">
                 <h3 className="panel-title">En répondant à l'élément {index + 1}</h3>
+                <button type="button" title="Remove Member" onClick={() => fields.remove(index)}>
+                  X
+                </button>
               </div>
               <div className="panel-body">
                 <FieldArray
@@ -29,8 +35,6 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
                   component={QuestionJumpConditionsAdminForm}
                   formName={formName}
                   member={member}
-                  oldMember={oldMember}
-                  conditionsLentgh={fields.length}
                 />
               </div>
             </div>
@@ -40,7 +44,28 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
           bsStyle="primary"
           className="btn--outline box-content__toolbar"
           onClick={() => {
-            fields.push();
+            fields.push(
+              {
+                always: false,
+                origin: {
+                  id: currentQuestion.id
+                },
+                conditions: [
+                  {
+                    question: {
+                      id: currentQuestion.id
+                    },
+                    value: {
+                      id: undefined
+                    },
+                    operator: 'IS'
+                  },
+                ],
+                destination: {
+                  id: currentQuestion.id
+                }
+              }
+            );
           }}>
           <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
         </Button>
@@ -49,4 +74,11 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
   }
 }
 
-export default connect()(QuestionsJumpAdminForm);
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => {
+  const selector = formValueSelector(props.formName);
+  return {
+    currentQuestion: selector(state, `${props.oldMember}`),
+  };
+};
+
+export default connect(mapStateToProps)(QuestionsJumpAdminForm);

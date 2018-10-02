@@ -81,7 +81,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     protected $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true, cascade={"persist", "remove"})
      */
     protected $jumps;
 
@@ -129,7 +129,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     /**
      * @return Collection|LogicJump[]
      */
-    public function getJumps(): Collection
+    public function getJumps(): ?Collection
     {
         return $this->jumps;
     }

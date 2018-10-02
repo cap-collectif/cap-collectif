@@ -116,7 +116,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
           otherAllowed: question.isOtherAllowed,
           randomQuestionChoices: question.isRandomQuestionChoices,
           isOtherAllowed: undefined,
-          isRandomQuestionChoices: undefined
+          isRandomQuestionChoices: undefined,
+          jumps: question.jumps ? question.jumps : []
         },
       };
       if (multipleChoiceQuestions.indexOf(question.type) !== -1 && question.questionChoices) {

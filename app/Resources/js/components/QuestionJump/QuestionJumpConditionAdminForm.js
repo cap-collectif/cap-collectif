@@ -13,6 +13,7 @@ type Props = RelayProps & {
   formName: string,
   member: string,
   index: number,
+  initialIndex: number,
 };
 
 type State = {
@@ -35,16 +36,14 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
     questions.map(question => {
       arrayQuestions[question.id] = question.questionChoices;
     });
-
     return (
       <div className="movable-element" key={index}>
         <button type="button" title="Remove Member" onClick={() => fields.remove(index)}>
-          {' '}
-          X{' '}
+          X
         </button>
         <Field
-          id={`${member}.conditions[${index}].question.id`}
-          name={`${member}.conditions[${index}].question.id`}
+          id={`${member}.question.id`}
+          name={`${member}.question.id`}
           normalize={val => val && parseInt(val, 10)}
           type="select"
           onChange={e => {
@@ -60,8 +59,8 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
           })}
         </Field>
         <Field
-          id={`${member}.conditions[${index}].operator`}
-          name={`${member}.conditions[${index}].operator`}
+          id={`${member}.operator`}
+          name={`${member}.operator`}
           type="select"
           component={component}>
           <option value="IS">
@@ -72,7 +71,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
           </option>
         </Field>
         <Field
-          id={`${member}.conditions[${index}].value.id`}
+          id={`${member}.value.id`}
           name={`${member}.value.id`}
           type="select"
           component={component}>

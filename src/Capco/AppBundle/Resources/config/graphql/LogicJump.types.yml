@@ -4,7 +4,8 @@ LogicJump:
     description: 'A logic jump in a question.'
     fields:
       id:
-        builder: 'Relay::GlobalId'
+        #builder: 'Relay::GlobalId'
+        type: 'ID'
       always:
         description: 'If true, the logic jump will always be triggered, '
         type: 'Boolean!'

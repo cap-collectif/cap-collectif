@@ -32,7 +32,7 @@ class LogicJump
     protected $always;
 
     /**
-     * @ORM\OneToMany(targetEntity="AbstractLogicJumpCondition", mappedBy="jump")
+     * @ORM\OneToMany(targetEntity="AbstractLogicJumpCondition", mappedBy="jump", cascade={"persist", "remove"})
      */
     protected $conditions;
 
