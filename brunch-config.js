@@ -20,7 +20,7 @@ exports.config = {
     },
   },
   paths: {
-    watched: ['app/Resources'],
+    watched: ['app/Resources/scss'],
     public: 'web',
   },
   conventions: {
