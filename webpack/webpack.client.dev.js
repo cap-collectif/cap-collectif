@@ -4,6 +4,7 @@
 const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const webpackConfig = require('./config');
 
@@ -59,7 +60,7 @@ const devConf = {
     ],
   },
   mode: 'development',
-  plugins: [],
+  plugins: [new webpack.ProgressPlugin({ profile: true })],
   module: {
     rules: [
       {
@@ -74,6 +75,8 @@ const devConf = {
           },
         ],
       },
+      // Those modules are here to expose global variables
+      // this is only for legacy code and should be deleted asap.
       {
         test: require.resolve('jquery'),
         use: [
@@ -98,6 +101,12 @@ const devConf = {
       },
     ],
   },
+  optimization: {
+    minimizer: [
+      new UglifyJSPlugin({
+        sourceMap: true,
+      }),
+    ],
+  },
 };
-
 module.exports = devConf;

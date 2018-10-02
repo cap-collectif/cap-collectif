@@ -103,11 +103,11 @@
         });
 
         $(window).on('resize', function() {
-            App.resized('.theme');
-            App.resized('.media--macro');
-            App.resized('.media--news');
-            App.resized('.event-js');
-            App.resized('.video');
+            App.default.resized('.theme');
+            App.default.resized('.media--macro');
+            App.default.resized('.media--news');
+            App.default.resized('.event-js');
+            App.default.resized('.video');
         });
     </script>
     {% set customCode = capco_site_parameter_value('homepage.customcode') %}

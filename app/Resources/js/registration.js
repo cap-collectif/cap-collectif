@@ -93,6 +93,7 @@ ReactOnRails.register({
   ShieldApp,
   ProjectListPageApp,
   ProposalFormCreateButtonApp,
+  ProjectsListApp,
   ProposalAdminPageApp,
   ProposalCreateFusionButtonApp,
   ProposalStepPageApp,
