@@ -692,6 +692,7 @@ trait ProposalStepsTrait
     public function iGoToTheVotesDetailsOfProjectWithRequirementsPage()
     {
         $this->visitPageWithParams('project user votes page', self::$bpVoteClassement);
+        $this->getSession()->wait(3000, '$(".media-list proposal-preview-list").length > 0');
     }
 
     /**

@@ -11,6 +11,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire
   And I go to a questionnaire step
   When I fill the questionnaire form
   And I submit my reply
+  And I wait "#global-alert-box" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my reply
 
@@ -21,6 +22,7 @@ Scenario: Logged in user wants to add a private reply to a questionnaire
   And I fill the questionnaire form
   And I check the reply private checkbox
   And I submit my reply
+  And I wait "#global-alert-box" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my anonymous reply
 

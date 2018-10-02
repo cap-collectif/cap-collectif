@@ -82,12 +82,13 @@ Scenario: Non author of an opinion wants to update it
     | stepSlug         | collecte-des-avis                |
     | opinionTypeSlug  | enjeux                           |
     | opinionSlug      | opinion-3                        |
-  And I wait 1 seconds
+  And I wait ".opinion__description .opinion__buttons" to appear on current page
   Then I should not see "global.edit" in the ".opinion__description .opinion__buttons" element
 
 @javascript
 Scenario: Anonymous wants to see opinion appendix
   Given I go to an opinion with versions
+  And I wait 1 seconds
   Then I should see "Motifs 1"
   And I press "Exposé des motifs"
   And I wait 1 seconds
