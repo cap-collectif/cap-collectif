@@ -47,6 +47,9 @@
     ]
   },
   "lint-staged": {
+    "schema.graphql": [
+      "graphql-schema-linter"
+    ],
     "app/Resources/js/**/*.js": [
       "eslint --fix",
       "prettier --parser flow --write",
