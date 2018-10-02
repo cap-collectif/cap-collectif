@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
-import { formValueSelector, Field } from 'redux-form';
+import { formValueSelector, Field, arrayRemove } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import type { GlobalState } from '../../types';
+import type { GlobalState, Dispatch } from '../../types';
 import component from '../Form/Field';
 
 type RelayProps = { selectedQuestion: any };
@@ -13,7 +13,8 @@ type Props = RelayProps & {
   formName: string,
   member: string,
   index: number,
-  initialIndex: number,
+  dispatch: Dispatch,
+  oldMember: string
 };
 
 type State = {
@@ -30,7 +31,8 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
   };
 
   render() {
-    const { index, questions, selectedQuestion, member, fields } = this.props;
+    const { index, questions, selectedQuestion, member, dispatch, formName, oldMember} = this.props;
+    console.log(this.props);
     const { currentQuestion } = this.state;
     const arrayQuestions = [];
     questions.map(question => {
@@ -38,7 +40,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
     });
     return (
       <div className="movable-element" key={index}>
-        <button type="button" title="Remove Member" onClick={() => fields.remove(index)}>
+        <button type="button" title="Remove Member" onClick={() => dispatch(arrayRemove(formName, `${oldMember}.conditions`, index))}>
           X
         </button>
         <Field

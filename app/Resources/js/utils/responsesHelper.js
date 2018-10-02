@@ -190,6 +190,7 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
         afterQuestion &&
         question.position >= afterQuestion.position,
     );
+
   let firstQuestionsIds = [];
   if (firstLogicQuestion) {
     const filteredIds = questions
@@ -217,6 +218,7 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
       .filter(question => afterQuestion && question.position > afterQuestion.position)
       .map(question => question.id);
   }
+
   let questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump => {
     return questionWithJump ? [questionWithJump.id] : [];
   });

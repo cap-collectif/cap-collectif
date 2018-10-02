@@ -21,7 +21,7 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
     const { fields, questions, member, formName, currentJump } = this.props;
     const arrayQuestions = [];
     questions.map(question => {
-      arrayQuestions[question.id] = question.questionChoices;
+        arrayQuestions[question.id] = question.questionChoices;
     });
 
     return (
@@ -34,6 +34,7 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
               member={memberConditions}
               formName={formName}
               index={index}
+              oldMember={member}
             />
           );
         })}
