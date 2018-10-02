@@ -716,7 +716,7 @@ type CollectStep implements Node & Step & ProposalStep {
   viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
 
   # The requirements to vote on this step.
-  requirements: RequirementConnection!
+  requirements(after: String, first: Int, before: String, last: Int): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -736,7 +736,7 @@ type CollectStep implements Node & Step & ProposalStep {
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  viewerProposalDrafts: ProposalConnection!
+  viewerProposalDrafts(after: String, first: Int, before: String, last: Int): ProposalConnection!
 }
 
 # A comment
@@ -2594,7 +2594,7 @@ interface ProposalStep {
   viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
 
   # The requirements to vote on this step.
-  requirements: RequirementConnection!
+  requirements(after: String, first: Int, before: String, last: Int): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -3351,7 +3351,7 @@ type SelectionStep implements Node & Step & ProposalStep {
   viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
 
   # The requirements to vote on this step.
-  requirements: RequirementConnection!
+  requirements(after: String, first: Int, before: String, last: Int): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -4149,7 +4149,7 @@ type User implements Node {
   groups(after: String, first: Int, before: String, last: Int): GroupConnection!
 
   # Get all reports the user has done.
-  reports: ReportConnection!
+  reports(after: String, first: Int, before: String, last: Int): ReportConnection!
 
   # Get all events the user has created.
   events(after: String, first: Int, before: String, last: Int): EventConnection!
@@ -4228,9 +4228,9 @@ type UserNotificationsConfiguration {
 
 # 3 possible values
 enum UserRole {
+  ROLE_USER
   ROLE_ADMIN
   ROLE_SUPER_ADMIN
-  ROLE_USER
 }
 
 # A type of person
