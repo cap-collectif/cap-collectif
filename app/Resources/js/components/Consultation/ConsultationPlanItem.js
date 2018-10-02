@@ -45,10 +45,8 @@ export class ConsultationPlanItem extends React.Component<Props> {
     }
 
     if (items[items.length - 1] === section.id && item) {
-      // $FlowFixMe
       item.classList.add('active');
     } else if (item) {
-      // $FlowFixMe
       item.classList.remove('active');
     }
   };

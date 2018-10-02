@@ -67,12 +67,12 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
 
     sectionItems.forEach(item => {
       const itemPosition = item.getBoundingClientRect();
+      const navHeight = 40;
 
-      // 40 is height of nav
       if (
         itemPosition &&
         itemPosition.top - 20 < 0 &&
-        itemPosition.top - 20 > -itemPosition.height + 40
+        itemPosition.top - 20 > -itemPosition.height + navHeight
       ) {
         activeItems.push(item.id);
       }

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import StepText from './StepText';
-import { CardContainer } from "../../Ui/Card/CardContainer";
+import { CardContainer } from '../../Ui/Card/CardContainer';
 
 type Props = {
   step: Object,
