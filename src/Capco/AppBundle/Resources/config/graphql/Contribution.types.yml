@@ -16,7 +16,8 @@ Contribution:
       show_url:
         type: 'URI!'
         description: 'The HTTP show url for this contribution.'
-        deprecationReason: 'Use url instead of show_url'
+        deprecationReason:
+          '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-01-01", reason: "This field does not respect naming consistency.", supersededBy: "Use `url` instead."})'
       url:
         type: 'URI!'
         description: 'Url of the contribution'
