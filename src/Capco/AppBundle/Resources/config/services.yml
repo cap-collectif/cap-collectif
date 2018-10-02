@@ -218,8 +218,5 @@ services:
   curl.http_adapter:
     class: Ivory\HttpAdapter\CurlHttpAdapter
 
-  Capco\AppBundle\GraphQL\Deprecation:
-    autowire: true
-
   capco.canonicalizer:
     class: Capco\AppBundle\Utils\Canonicalizer

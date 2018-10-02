@@ -69,7 +69,7 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", array(0 => $value)]);
                     },
                     'description' => 'The url of the step',
-                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
+                    'deprecationReason' => 'Use url instead of show_url',
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
@@ -126,7 +126,7 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     ],
                     'resolve' => null,
                     'description' => 'The number of votes in this consultation.',
-                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", "description" => "Field `votesCount` will be removed.", "supersededBy" => "Use `votes.totalCount` instead.")),
+                    'deprecationReason' => 'In preparation for an upcoming change to the way we expose counters, this field will only be available inside a `votes` connection.',
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,

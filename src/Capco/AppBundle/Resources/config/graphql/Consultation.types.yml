@@ -22,7 +22,7 @@ Consultation:
         type: 'Int'
         description: 'The number of votes in this consultation.'
         deprecationReason:
-          '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-01-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `votesCount` will be removed.", supersededBy: "Use `votes.totalCount` instead."})'
+          'In preparation for an upcoming change to the way we expose counters, this field will only be available inside a `votes` connection.'
       project:
         type: 'Project!'
         description: 'The project'
