@@ -19,21 +19,9 @@ final class ContributionOrderFieldType extends EnumType implements GeneratedType
             return [
             'name' => 'ContributionOrderField',
             'values' => [
-                'POSITION' => [
-                    'name' => 'POSITION',
-                    'value' => 'POSITION',
-                    'deprecationReason' => null,
-                    'description' => null,
-                ],
-                'RANDOM' => [
-                    'name' => 'RANDOM',
-                    'value' => 'RANDOM',
-                    'deprecationReason' => null,
-                    'description' => null,
-                ],
-                'PUBLISHED_AT' => [
-                    'name' => 'PUBLISHED_AT',
-                    'value' => 'PUBLISHED_AT',
+                'COMMENT_COUNT' => [
+                    'name' => 'COMMENT_COUNT',
+                    'value' => 'COMMENT_COUNT',
                     'deprecationReason' => null,
                     'description' => null,
                 ],
@@ -43,9 +31,21 @@ final class ContributionOrderFieldType extends EnumType implements GeneratedType
                     'deprecationReason' => null,
                     'description' => null,
                 ],
-                'COMMENT_COUNT' => [
-                    'name' => 'COMMENT_COUNT',
-                    'value' => 'COMMENT_COUNT',
+                'POSITION' => [
+                    'name' => 'POSITION',
+                    'value' => 'POSITION',
+                    'deprecationReason' => null,
+                    'description' => null,
+                ],
+                'PUBLISHED_AT' => [
+                    'name' => 'PUBLISHED_AT',
+                    'value' => 'PUBLISHED_AT',
+                    'deprecationReason' => null,
+                    'description' => null,
+                ],
+                'RANDOM' => [
+                    'name' => 'RANDOM',
+                    'value' => 'RANDOM',
                     'deprecationReason' => null,
                     'description' => null,
                 ],

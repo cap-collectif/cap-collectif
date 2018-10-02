@@ -19,12 +19,6 @@ final class UserRoleType extends EnumType implements GeneratedTypeInterface
             return [
             'name' => 'UserRole',
             'values' => [
-                'ROLE_USER' => [
-                    'name' => 'ROLE_USER',
-                    'value' => 'ROLE_USER',
-                    'deprecationReason' => null,
-                    'description' => null,
-                ],
                 'ROLE_ADMIN' => [
                     'name' => 'ROLE_ADMIN',
                     'value' => 'ROLE_ADMIN',
@@ -34,6 +28,12 @@ final class UserRoleType extends EnumType implements GeneratedTypeInterface
                 'ROLE_SUPER_ADMIN' => [
                     'name' => 'ROLE_SUPER_ADMIN',
                     'value' => 'ROLE_SUPER_ADMIN',
+                    'deprecationReason' => null,
+                    'description' => null,
+                ],
+                'ROLE_USER' => [
+                    'name' => 'ROLE_USER',
+                    'value' => 'ROLE_USER',
                     'deprecationReason' => null,
                     'description' => null,
                 ],

@@ -40,15 +40,16 @@ module.exports = {
         schemaJson: require('./schema.json'),
       },
     ],
+    // TODO set this to `error`:  https://github.com/cap-collectif/platform/issues/6094
     'graphql/template-strings': [
       'warn',
       {
         env: 'relay',
         tagName: 'graphql',
-        validators: 'all',
         schemaJson: require('./schema.json'),
       },
     ],
+    // TODO set this to `error`:  https://github.com/cap-collectif/platform/issues/6095
     'graphql/no-deprecated-fields': [
       'warn',
       {
