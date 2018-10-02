@@ -285,7 +285,7 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   related: Contribution
 
   # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # Url of the contribution
   url: URI!
@@ -711,13 +711,13 @@ type CollectStep implements Node & Step & ProposalStep {
   title: String!
 
   # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # The url of the step
   url: String!
 
   # The requirements to vote on this step.
-  requirements: RequirementConnection!
+  requirements(after: String, first: Int, before: String, last: Int): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -737,7 +737,7 @@ type CollectStep implements Node & Step & ProposalStep {
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  viewerProposalDrafts: ProposalConnection!
+  viewerProposalDrafts(after: String, first: Int, before: String, last: Int): ProposalConnection!
 }
 
 # A comment
@@ -779,7 +779,7 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   related: Contribution
 
   # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # Url of the contribution
   url: URI!
@@ -926,7 +926,7 @@ type Consultation implements Node & Step {
   title: String!
 
   # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # The url of the step
   url: String!
@@ -939,7 +939,7 @@ type Consultation implements Node & Step {
   ): Boolean!
 
   # The number of votes in this consultation.
-  votesCount: Int @deprecated(reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a `votes` connection.")
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
 
   # The project
   project: Project!
@@ -981,7 +981,7 @@ interface Contribution {
   related: Contribution
 
   # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # Url of the contribution
   url: URI!
@@ -1015,11 +1015,11 @@ input ContributionOrder {
 
 # Ordering options for contributions connections.
 enum ContributionOrderField {
-  POSITION
-  RANDOM
-  PUBLISHED_AT
-  POPULAR
   COMMENT_COUNT
+  POPULAR
+  POSITION
+  PUBLISHED_AT
+  RANDOM
   VOTE_COUNT
 }
 
@@ -1814,7 +1814,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   related: Contribution
 
   # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # Url of the contribution
   url: URI!
@@ -1978,7 +1978,7 @@ type OtherStep implements Step {
   title: String!
 
   # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # The url of the step
   url: String!
@@ -2087,7 +2087,7 @@ type PresentationStep implements Step {
   title: String!
 
   # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # The url of the step
   url: String!
@@ -2163,17 +2163,17 @@ type Project implements Node {
 
 # 4 possible values
 enum ProjectVisibility {
-  # visible for me only
-  ME
-
   # visible for group admin
   ADMIN
 
-  # visible for all
-  PUBLIC
-
   # the project is restricted to users groups
   CUSTOM
+
+  # visible for me only
+  ME
+
+  # visible for all
+  PUBLIC
 }
 
 # A budget contribution
@@ -2239,7 +2239,7 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Repor
   related: Contribution
 
   # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # Url of the contribution
   url: URI!
@@ -2591,13 +2591,13 @@ interface ProposalStep {
   title: String!
 
   # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # The url of the step
   url: String!
 
   # The requirements to vote on this step.
-  requirements: RequirementConnection!
+  requirements(after: String, first: Int, before: String, last: Int): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -2878,7 +2878,7 @@ type QuestionnaireStep implements Node & Step {
   title: String!
 
   # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # The url of the step
   url: String!
@@ -2899,7 +2899,7 @@ type RankingStep implements Step {
   title: String!
 
   # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # The url of the step
   url: String!
@@ -2997,7 +2997,7 @@ type Reply implements Node & Publishable & Contribution {
   related: Contribution
 
   # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # Url of the contribution
   url: URI!
@@ -3057,7 +3057,7 @@ type Reporting implements Contribution & ContributionWithAuthor {
   related: Contribution
 
   # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # Url of the contribution
   url: URI!
@@ -3109,11 +3109,11 @@ enum ReportingOrderField {
 
 # Type of reporting
 enum ReportingType {
-  SEX
-  OFF
-  SPAM
   ERROR
+  OFF
   OFF_TOPIC
+  SEX
+  SPAM
 }
 
 input RequestUserArchiveInput {
@@ -3349,13 +3349,13 @@ type SelectionStep implements Node & Step & ProposalStep {
   title: String!
 
   # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # The url of the step
   url: String!
 
   # The requirements to vote on this step.
-  requirements: RequirementConnection!
+  requirements(after: String, first: Int, before: String, last: Int): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -3452,7 +3452,7 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
   related: Contribution
 
   # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # Url of the contribution
   url: URI!
@@ -3602,7 +3602,7 @@ interface Step {
   title: String!
 
   # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # The url of the step
   url: String!
@@ -3610,9 +3610,9 @@ interface Step {
 
 # 3 possible values for a subscription.
 enum SubscriptionTypeValue {
-  MINIMAL
-  ESSENTIAL
   ALL
+  ESSENTIAL
+  MINIMAL
 }
 
 # A theme
@@ -3639,11 +3639,11 @@ interface Trashable {
 
 # Different trashable status.
 enum TrashableStatus {
-  # Content is visible.
-  VISIBLE
-
   # Content is not visible.
   INVISIBLE
+
+  # Content is visible.
+  VISIBLE
 }
 
 scalar URI
@@ -4009,7 +4009,7 @@ type User implements Node {
 
   # (unique) slug of the user.
   slug: String
-  show_url: URI @deprecated(reason: "Use url instead of show_url")
+  show_url: URI @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # URL to user profile, null if the feature profiles is disabled.
   url: URI
@@ -4153,7 +4153,7 @@ type User implements Node {
   groups(after: String, first: Int, before: String, last: Int): GroupConnection!
 
   # Get all reports the user has done.
-  reports: ReportConnection!
+  reports(after: String, first: Int, before: String, last: Int): ReportConnection!
 
   # Get all events the user has created.
   events(after: String, first: Int, before: String, last: Int): EventConnection!
@@ -4309,7 +4309,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   related: Contribution
 
   # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 
   # The url of version.
   url: URI!
