@@ -175,6 +175,7 @@ describe('<ReplyForm />', () => {
           questions: [requiredText, requiredRadio, facultativeSelect, facultativeRanking],
           ...questionnaireProps,
         }}
+        reply={null}
         {...props}
       />,
     );
@@ -194,6 +195,7 @@ describe('<ReplyForm />', () => {
           ],
           ...questionnaireProps,
         }}
+        reply={null}
         {...props}
       />,
     );
@@ -207,6 +209,7 @@ describe('<ReplyForm />', () => {
           questions: [requiredText, requiredRadio, facultativeRanking],
           ...questionnaireProps,
         }}
+        reply={null}
         {...props}
       />,
     );
@@ -217,6 +220,7 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         questionnaire={{ questions: [requiredText, requiredRadio], ...questionnaireProps }}
+        reply={null}
         {...props}
       />,
     );
@@ -230,6 +234,7 @@ describe('<ReplyForm />', () => {
           questions: [facultativeCheckbox, facultativeSelect, facultativeRanking],
           ...questionnaireProps,
         }}
+        reply={null}
         {...props}
       />,
     );

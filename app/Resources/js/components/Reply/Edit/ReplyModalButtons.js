@@ -4,11 +4,9 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { type ReplyModalButtons_reply } from './__generated__/ReplyModalButtons_reply.graphql';
-import ReplyDeleteModal from '../Delete/ReplyDeleteModal';
 
 type Props = {
   reply: ReplyModalButtons_reply,
-  onChange: () => void,
 };
 
 type State = {
@@ -27,7 +25,7 @@ export class ReplyModalButtons extends React.Component<Props, State> {
   };
 
   render() {
-    const { reply, onChange } = this.props;
+    const { reply } = this.props;
     return (
       <span className="pull-left reply__buttons">
         {reply.viewerCanDelete && (
@@ -42,13 +40,6 @@ export class ReplyModalButtons extends React.Component<Props, State> {
               <i className="cap cap-bin-2" />
               <FormattedMessage id="global.remove" />
             </Button>
-            {/* $FlowFixMe $refType */}
-            <ReplyDeleteModal
-              reply={reply}
-              show={this.state.showDeleteModal}
-              onToggleModal={this.toggleDeleteModal}
-              onDelete={onChange}
-            />
           </div>
         )}
       </span>
@@ -61,7 +52,7 @@ export default createFragmentContainer(ReplyModalButtons, {
     fragment ReplyModalButtons_reply on Reply {
       id
       viewerCanDelete
-      ...ReplyDeleteModal_reply
+      ...DeleteReplyModal_reply
     }
   `,
 });

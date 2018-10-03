@@ -14,6 +14,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import type { Dispatch, State } from '../../../types';
 import type { ReplyForm_questionnaire } from './__generated__/ReplyForm_questionnaire.graphql';
+import type { ReplyForm_reply } from './__generated__/ReplyForm_reply.graphql';
 import {
   formatInitialResponsesValues,
   renderResponses,
@@ -24,12 +25,15 @@ import renderComponent from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import AddReplyMutation from '../../../mutations/AddReplyMutation';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
+import UpdateReplyMutation from '../../../mutations/UpdateReplyMutation';
 
 type Props = FormProps & {
   +questionnaire: ReplyForm_questionnaire,
+  +reply: ?ReplyForm_reply,
   +responses: ResponsesInReduxForm,
   +user: ?Object,
   +intl: IntlShape,
+  +onClose?: () => void,
 };
 
 type FormValues = {|
@@ -38,13 +42,34 @@ type FormValues = {|
 |};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { questionnaire } = props;
+  const { questionnaire, reply, onClose } = props;
 
   const data = {};
 
-  data.questionnaireId = questionnaire.id;
-
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions);
+
+  if (reply) {
+    data.replyId = reply.id;
+    return UpdateReplyMutation.commit({ input: data })
+      .then(() => {
+        AppDispatcher.dispatch({
+          actionType: 'UPDATE_ALERT',
+          alert: { bsStyle: 'success', content: 'reply.request.create.success' },
+        });
+        if (questionnaire.multipleRepliesAllowed) {
+          props.reset();
+        }
+        if (onClose) {
+          onClose();
+        }
+      })
+      .catch(() => {
+        throw new SubmissionError({
+          _error: 'global.error.server.form',
+        });
+      });
+  }
+  data.questionnaireId = questionnaire.id;
 
   if (questionnaire.anonymousAllowed) {
     data.private = values.private;
@@ -145,6 +170,10 @@ const validate = (values: FormValues, props: Props) => {
 export const formName = 'ReplyForm';
 
 export class ReplyForm extends React.Component<Props> {
+  static defaultProps = {
+    reply: null,
+  };
+
   formIsDisabled() {
     const { questionnaire, user } = this.props;
 
@@ -229,21 +258,47 @@ export class ReplyForm extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
-    responses: formatInitialResponsesValues(props.questionnaire.questions, []),
-    private: false,
+    responses: formatInitialResponsesValues(
+      props.questionnaire.questions,
+      props.reply ? props.reply.responses : [],
+    ),
+    private: props.reply ? props.reply.private : false,
   },
   user: state.user.user,
+  form: props.reply ? `reply-update-${props.reply.id}` : formName,
 });
 
 const form = reduxForm({
   validate,
   onSubmit,
-  form: formName,
 })(ReplyForm);
 
 const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
+  reply: graphql`
+    fragment ReplyForm_reply on Reply
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+      id
+      private
+      responses {
+        question {
+          id
+        }
+        ... on ValueResponse {
+          value
+        }
+        ... on MediaResponse {
+          medias {
+            id
+            name
+            size
+            url
+          }
+        }
+      }
+    }
+  `,
   questionnaire: graphql`
     fragment ReplyForm_questionnaire on Questionnaire
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
