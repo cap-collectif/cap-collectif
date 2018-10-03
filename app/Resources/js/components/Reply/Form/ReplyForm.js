@@ -256,7 +256,10 @@ export class ReplyForm extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
-  responses: formValueSelector(formName)(state, 'responses'),
+  responses: formValueSelector(props.reply ? `${formName}-${props.reply.id}` : formName)(
+    state,
+    'responses',
+  ),
   initialValues: {
     responses: formatInitialResponsesValues(
       props.questionnaire.questions,
@@ -265,7 +268,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
     private: props.reply ? props.reply.private : false,
   },
   user: state.user.user,
-  form: props.reply ? `reply-update-${props.reply.id}` : formName,
+  form: props.reply ? `${formName}-${props.reply.id}` : formName,
 });
 
 const form = reduxForm({

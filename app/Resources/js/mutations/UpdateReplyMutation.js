@@ -12,6 +12,7 @@ const mutation = graphql`
     updateReply(input: $input) {
       reply {
         id
+        ...ReplyModalLink_reply
       }
     }
   }
