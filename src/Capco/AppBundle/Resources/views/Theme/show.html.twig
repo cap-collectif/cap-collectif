@@ -29,7 +29,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container">
             {% if theme.body %}
                 {{ theme.body|raw }}
@@ -46,10 +46,10 @@
                 </p>
             {% endif %}
         </div>
-    </div>
+    </section>
 
 
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container">
             <h2 class="h2">{{ 'theme.show.projects.title'|trans({}, 'CapcoAppBundle') }}</h2>
             {% set projectsCount = theme.projects | length %}
@@ -62,7 +62,7 @@
                 <p>{{ 'project.none'|trans({}, 'CapcoAppBundle') }}</p>
             {% endif %}
         </div>
-    </div>
+    </section>
 
     {% include 'CapcoAppBundle:Theme:appendices.html.twig' %}
 

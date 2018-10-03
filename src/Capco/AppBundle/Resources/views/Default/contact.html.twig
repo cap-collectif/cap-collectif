@@ -35,7 +35,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container">
             {%  if content_body is defined %}
                 {{ content_body|raw }}
@@ -55,9 +55,9 @@
                 </address>
             {% endif %}
         </div>
-    </div>
+    </section>
 
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-8">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
 {% endblock %}
 {% block javascripts %}

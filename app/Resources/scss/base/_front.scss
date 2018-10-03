@@ -63,26 +63,22 @@ body {
     max-width: $thin-container;
   }
 
-  .container--bg {
-    position: relative;
-  }
-
-  .container--alt {
+  .section--alt {
     color: $dark;
     background-color: $page-bgc;
     border-top: 1px solid $border-color;
   }
 }
 
-.main .container--custom:nth-of-type(odd) {
-  @extend .container--alt;
+.main .section--custom:nth-of-type(odd) {
+  @extend .section--alt;
 
   .section-clear {
     clear: both;
   }
 }
 
-.main .container--custom:last-of-type {
+.main .section--custom:last-of-type {
   border-bottom: 0;
 }
 

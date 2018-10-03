@@ -1,5 +1,5 @@
 {% if topics|length > 0 %}
-    <div id="topics" class="container--custom">
+    <section id="topics" class="section--custom">
         <div class="container">
             {% if null != section.title %}
                 <h2 class="h2">{{ section.title }}</h2>
@@ -19,5 +19,5 @@
             </div>
             <a href="{{ path('app_theme') }}" class="btn  btn-primary  btn--outline">{{ 'theme.see_all'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
-    </div>
+    </section>
 {% endif %}

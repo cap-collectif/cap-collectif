@@ -3,7 +3,7 @@
 {% set nbAppendices = (nbPosts > 0) + (nbEvents > 0) %}
 
 {% if nbAppendices > 0 %}
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container appendices__container">
             <div class="row  text-center">
                 {% if nbPosts > 0 %}
@@ -26,5 +26,5 @@
                 {% endif %}
             </div>
         </div>
-    </div>
+    </section>
 {% endif %}

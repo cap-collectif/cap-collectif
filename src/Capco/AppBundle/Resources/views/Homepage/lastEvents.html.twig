@@ -1,5 +1,5 @@
 {% if events|length > 0 %}
-    <div id="events" class="container--custom">
+    <section id="events" class="section--custom">
         <div class="container">
             {% if null != section.title %}
                 <h2 class="h2">{{ section.title }}</h2>
@@ -19,5 +19,5 @@
             </div>
             <a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_all'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
-    </div>
+    </section>
 {% endif %}

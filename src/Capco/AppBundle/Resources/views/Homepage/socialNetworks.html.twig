@@ -1,5 +1,5 @@
 {% if socialNetworks|length > 0 %}
-    <div id="links" class="container--custom">
+    <section id="links" class="section--custom">
         <div class="container  text-center">
             {% if null != section.title %}
                 <h2 class="h2">{{ section.title }}</h2>
@@ -23,5 +23,5 @@
                 {% endfor %}
             </ul>
         </div>
-    </div>
+    </section>
 {% endif %}

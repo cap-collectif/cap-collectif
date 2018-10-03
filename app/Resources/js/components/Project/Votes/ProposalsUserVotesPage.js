@@ -14,13 +14,13 @@ class ProposalsUserVotesPage extends React.Component<Props> {
     const { project } = this.props;
 
     return (
-      <div className="container--custom">
+      <section className="section--custom">
         <div className="container text-center">
           <h1 className="mb-0">
             <FormattedMessage id="project.votes.title" />
           </h1>
         </div>
-        <div className="container--custom">
+        <div className="section--custom">
           <div className="container">
             {project.votableSteps.length > 0 ? (
               project.votableSteps
@@ -33,7 +33,7 @@ class ProposalsUserVotesPage extends React.Component<Props> {
             )}
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

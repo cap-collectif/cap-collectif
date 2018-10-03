@@ -20,14 +20,14 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container container--thinner">
             <h1>{{ post.title | jolitypo() }}</h1>
             {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.Authors, 'themes': post.themes, 'publishedAt': post.publishedAt} %}
         </div>
-    </div>
+    </section>
 
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container container--thinner">
 
             {%  if post.media %}
@@ -63,16 +63,16 @@
             }}
 
         </div>
-    </div>
+    </section>
 
     {% if capco_comment_can_add(post) or (capco_comment_can_show(post) and post.commentsCount > 0) %}
-        <div class="container--custom">
+        <section class="section--custom">
             <div class="container container--thinner">
                 {% if capco_comment_can_show(post) %}
                     {{ react_render_component('CommentSectionApp', { 'props': props }) }}
                 {% endif %}
             </div>
-        </div>
+        </section>
     {% endif %}
 
 {% endblock %}

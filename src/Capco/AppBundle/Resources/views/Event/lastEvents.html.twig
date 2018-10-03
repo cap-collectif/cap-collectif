@@ -1,5 +1,5 @@
 {% if events|length > 0 %}
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container">
             <h2 class="h2">{{ 'event.last.title'|trans({}, 'CapcoAppBundle') }}</h2>
             <div class="row">
@@ -9,5 +9,5 @@
             </div>
             <a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_all'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
-    </div>
+    </section>
 {% endif %}

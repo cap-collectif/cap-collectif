@@ -43,15 +43,15 @@
 
 {% block body %}
 
-    <div class="container--custom" {% if content_body is null %}style="display: none;"{% endif %}>
+    <section class="section--custom" {% if content_body is null %}style="display: none;"{% endif %}>
         <div class="container" {% if content_body is null %}style="display: none;"{% endif %}>
             {% if null != content_body %}
                 {{ content_body|raw }}
             {% endif %}
         </div>
-    </div>
+    </section>
 
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container">
 
             <div class="filter  block">
@@ -101,7 +101,7 @@
             {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 
         </div>
-    </div>
+    </section>
 
 {% endblock %}
 {% block javascripts %}

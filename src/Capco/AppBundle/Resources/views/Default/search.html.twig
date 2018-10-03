@@ -23,7 +23,7 @@
 
 {% block body %}
     <form id="capco_app_search" name="capco_app_search" method="get">
-        <div class="container--custom">
+        <section class="section--custom">
             <div class="container">
                 {{ form_errors(form.term) }}
                 <div class="row">
@@ -37,9 +37,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="container--custom">
+        <section class="section--custom">
             <div class="container">
 
                 <div class="row">
@@ -118,7 +118,7 @@
                 </div>
 
             </div>
-        </div>
+        </section>
     </form>
 {% endblock %}
 

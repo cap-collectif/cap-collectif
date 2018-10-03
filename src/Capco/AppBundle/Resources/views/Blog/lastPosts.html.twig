@@ -1,5 +1,5 @@
 {% if posts|length > 0 %}
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container block">
             <h2 class="h2">{{ 'homepage.posts.last'|trans({}, 'CapcoAppBundle') }}</h2>
             <ul class="media-list">
@@ -9,5 +9,5 @@
             </ul>
             <a href="{{ path('app_blog') }}" class="btn  btn-primary  btn--outline">{{ 'blog.see_all'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
-    </div>
+    </section>
 {% endif %}

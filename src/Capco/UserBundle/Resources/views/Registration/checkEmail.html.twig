@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block fos_user_content %}
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container">
             <h2 class="h2">{{ 'registration.check_email.title'|trans({}, 'CapcoAppBundle') }}</h2>
             <p class="text-blue">{{ 'registration.check_email.body'|trans({'%email%': user.email}, 'CapcoAppBundle') }}</p>
@@ -18,6 +18,6 @@
             <h2 class="h2">{{ 'registration.check_email.content.title'|trans({}, 'CapcoAppBundle') }}</h2>
             <p>{{ 'registration.check_email.content.body'|trans({}, 'CapcoAppBundle') }}</p>
         </div>
-    </div>
+    </section>
 
 {% endblock fos_user_content %}

@@ -1,5 +1,5 @@
 {% if videos | length > 0 %}
-    <div id="videos" class="container--custom">
+    <section id="videos" class="section--custom">
         <div class="container">
             {% if null != section.title %}
                 <h2 class="h2">{{ section.title }}</h2>
@@ -36,5 +36,5 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
+    </section>
 {% endif %}

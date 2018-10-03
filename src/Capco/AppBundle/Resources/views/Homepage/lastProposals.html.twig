@@ -1,5 +1,5 @@
 {% if proposals|length > 0 %}
-    <div id="proposals" class="container--custom">
+    <section id="proposals" class="section--custom">
         <div class="container">
             {% if null != section.title %}
                 <h2 class="h2">{{ section.title }}</h2>
@@ -21,5 +21,5 @@
                 <a href="{{ path('app_project_show_collect', {'projectSlug': section.step.project.slug, 'stepSlug': section.step.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'proposal.see_all'|trans({}, 'CapcoAppBundle') }}</a>
             {% endif %}
         </div>
-    </div>
+    </section>
 {% endif %}

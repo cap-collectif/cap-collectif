@@ -44,7 +44,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container--custom">
+    <section class="section--custom">
         <div class="container text-center error-page">
             <i class="cap cap-lock-2"></i>
             <p class="clearfix mt-5 error-page__name">{{ '403-error'|trans({}, 'CapcoAppBundle') }}</p>
@@ -53,7 +53,7 @@
             <a class="clearfix error-page__home" href="{{ path('app_homepage') }}">{{ 'error.to_homepage'|trans({}, 'CapcoAppBundle') }}</a>
             <a class="clearfix error-page__report" href="{{ path('app_contact') }}">{{ 'error.report'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
-    </div>
+    </section>
 {% endblock %}
 
 {% block javascripts %}
