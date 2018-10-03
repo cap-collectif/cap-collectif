@@ -1,0 +1,11 @@
+UpdateReplyInput:
+  type: relay-mutation-input
+  config:
+    description: 'Update a reply'
+    fields:
+      replyId:
+        type: 'ID!'
+        description: 'The id of the reply'
+      responses:
+        type: '[ResponseInput]'
+        description: 'The responses to the questionnaire questions'

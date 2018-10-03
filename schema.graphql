@@ -1637,6 +1637,7 @@ type Mutation {
   deleteOpinion(input: DeleteOpinionInput!): DeleteOpinionPayload
   deleteVersion(input: DeleteVersionInput!): DeleteVersionPayload
   addReply(input: AddReplyInput!): AddReplyPayload
+  updateReply(input: UpdateReplyInput!): UpdateReplyPayload
   deleteReply(input: DeleteReplyInput!): DeleteReplyPayload
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
   addOpinionVote(input: AddOpinionVoteInput!): AddOpinionVotePayload
@@ -3953,6 +3954,20 @@ input UpdateQuestionnaireParametersInput {
 
 type UpdateQuestionnaireParametersPayload {
   questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input UpdateReplyInput {
+  # The id of the reply
+  replyId: ID!
+
+  # The responses to the questionnaire questions
+  responses: [ResponseInput]
+  clientMutationId: String
+}
+
+type UpdateReplyPayload {
+  reply: Reply
   clientMutationId: String
 }
 
