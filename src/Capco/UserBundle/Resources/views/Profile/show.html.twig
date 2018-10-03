@@ -27,65 +27,83 @@
     {% include '@CapcoUser/Profile/showProfile.html.twig' %}
 
     {% if projectsCount > 0 %}
-        <div class="container container--custom">
-            <h2>{{ 'user.profile.show.projects' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% include '@CapcoUser/Profile/projects.html.twig' %}
+        <div class="container--custom">
+            <div class="container">
+                <h2>{{ 'user.profile.show.projects' | trans({}, 'CapcoAppBundle') }}</h2>
+                {% include '@CapcoUser/Profile/projects.html.twig' %}
+            </div>
         </div>
     {% endif %}
 
     {% if opinionTypesWithUserOpinions|length > 0 %}
-        <div class="container container--custom">
-            <h2>{{ 'user.profile.show.opinions' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% include '@CapcoUser/Profile/opinions.html.twig' %}
+        <div class="container--custom">
+            <div class="container">
+                <h2>{{ 'user.profile.show.opinions' | trans({}, 'CapcoAppBundle') }}</h2>
+                {% include '@CapcoUser/Profile/opinions.html.twig' %}
+            </div>
         </div>
     {% endif %}
 
     {% if versions|length > 0 %}
-        <div class="container container--custom">
-            <h2>{{ 'user.profile.show.opinions_versions' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% include '@CapcoUser/Profile/opinionVersions.html.twig' %}
+        <div class="container--custom">
+            <div class="container">
+                <h2>{{ 'user.profile.show.opinions_versions' | trans({}, 'CapcoAppBundle') }}</h2>
+                {% include '@CapcoUser/Profile/opinionVersions.html.twig' %}
+            </div>
         </div>
     {% endif %}
 
     {% if arguments|length > 0 %}
-        <div class="container container--custom">
-            <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
-            {{ react_render_component('ArgumentListApp', { 'props': { 'userId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+        <div class="container--custom">
+            <div class="container">
+                <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
+                {{ react_render_component('ArgumentListApp', { 'props': { 'userId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+            </div>
         </div>
     {% endif %}
 
     {% if sources|length > 0 %}
-        <div class="container container--custom">
-            <h2>{{ 'user.profile.show.sources' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% include '@CapcoUser/Profile/sources.html.twig' %}
+        <div class="container--custom">
+            <div class="container">
+                <h2>{{ 'user.profile.show.sources' | trans({}, 'CapcoAppBundle') }}</h2>
+                {% include '@CapcoUser/Profile/sources.html.twig' %}
+            </div>
         </div>
     {% endif %}
 
     {% if proposalsCount > 0 %}
-        <div class="container container--custom">
-            <h2>{{ 'user.profile.show.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
-            {{ react_render_component('ProposalListApp', { 'props': { 'authorId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+        <div class="container--custom">
+            <div class="container">
+                <h2>{{ 'user.profile.show.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
+                {{ react_render_component('ProposalListApp', { 'props': { 'authorId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+            </div>
         </div>
     {% endif %}
 
     {% if (is_feature_enabled('calendar') or is_feature_enabled('blog')) and comments|length > 0 %}
-        <div class="container container--custom">
-            <h2>{{ 'user.profile.show.comments' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% include '@CapcoUser/Profile/comments.html.twig' %}
+        <div class="container--custom">
+            <div class="container">
+                <h2>{{ 'user.profile.show.comments' | trans({}, 'CapcoAppBundle') }}</h2>
+                {% include '@CapcoUser/Profile/comments.html.twig' %}
+            </div>
         </div>
     {% endif %}
 
     {% if replies|length > 0 %}
-        <div class="container container--custom">
-            <h2>{{ 'user.profile.show.replies' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% include '@CapcoUser/Profile/replies.html.twig' %}
+        <div class="container--custom">
+            <div class="container">
+                <h2>{{ 'user.profile.show.replies' | trans({}, 'CapcoAppBundle') }}</h2>
+                {% include '@CapcoUser/Profile/replies.html.twig' %}
+            </div>
         </div>
     {% endif %}
 
     {% if votes|length > 0 %}
-        <div class="container container--custom">
-            <h2>{{ 'user.profile.show.votes' | trans({}, 'CapcoAppBundle') }}</h2>
-            {{ react_render_component('VoteListApp', { 'props': { 'userId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+        <div class="container--custom">
+            <div class="container">
+                <h2>{{ 'user.profile.show.votes' | trans({}, 'CapcoAppBundle') }}</h2>
+                {{ react_render_component('VoteListApp', { 'props': { 'userId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+            </div>
         </div>
     {% endif %}
 

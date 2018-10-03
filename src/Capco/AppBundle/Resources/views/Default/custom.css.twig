@@ -388,10 +388,13 @@
         color: {{ sectionText | raw }};
     }
 
-    .container--alt:after,
-    .tabs__container .tabs,
-    .main .container--custom:nth-of-type(odd):after {
+    .tabs__container .tabs {
         background: {{ sectionBg | raw }};
+    }
+
+    .container--alt,
+    .main .container--custom:nth-of-type(odd) {
+        background-color: {{ sectionBg | raw }};
     }
 
     .avatar {

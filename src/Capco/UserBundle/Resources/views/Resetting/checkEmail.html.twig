@@ -10,9 +10,11 @@
 {% endblock %}
 
 {% block fos_user_content %}
-    <div class="container  container--custom">
-        <div class="alert alert-success alert-dismissible  block" role="alert">
-            <p>{{ 'resetting.check_email'|trans({'%email%': email}, 'CapcoAppBundle') }}</p>
+    <div class="container--custom">
+        <div class="container">
+            <div class="alert alert-success alert-dismissible  block" role="alert">
+                <p>{{ 'resetting.check_email'|trans({'%email%': email}, 'CapcoAppBundle') }}</p>
+            </div>
         </div>
     </div>
 {% endblock %}

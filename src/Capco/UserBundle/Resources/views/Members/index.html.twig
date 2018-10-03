@@ -45,60 +45,64 @@
 {% block body %}
 
     {% set content_body = capco_site_parameter_value('members.content.body') %}
-    <div class="container  container--custom" {% if content_body is null %}style="display: none;"{% endif %}>
-        {% if null != content_body %}
-            {{ content_body|raw }}
-        {% endif %}
+    <div class="container--custom" {% if content_body is null %}style="display: none;"{% endif %}>
+        <div class="container">
+            {% if null != content_body %}
+                {{ content_body|raw }}
+            {% endif %}
+        </div>
     </div>
 
-    <div class="container  container--custom">
+    <div class="container--custom">
+        <div class="container">
 
-        <div class="filter  block">
-            <div class="row">
-                {{ form_start(form) }}
-                {{ form_errors(form) }}
-                {% if is_feature_enabled('user_type') %}
+            <div class="filter  block">
+                <div class="row">
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {% if is_feature_enabled('user_type') %}
+                        <div class="col-xs-12  col-sm-3  col-md-4  col-lg-4 filter__down">
+                            {{ form_label(form.userType, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                            {{ form_errors(form.userType) }}
+                            {{ form_widget(form.userType, {'attr':{"class":"form-control"} }) }}
+                        </div>
+                    {% endif %}
                     <div class="col-xs-12  col-sm-3  col-md-4  col-lg-4 filter__down">
-                        {{ form_label(form.userType, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                        {{ form_errors(form.userType) }}
-                        {{ form_widget(form.userType, {'attr':{"class":"form-control"} }) }}
+                        <div class="formgroup--inline">
+                            {{ form_label(form.sort, null, {'label_attr':{"class":"control-label"} }) }}
+                            <span class="formgroup--inline__control">
+                                    {{ form_errors(form.sort) }}
+                                {{ form_widget(form.sort, {'attr':{"class":"form-control"} }) }}
+                            </span>
+                        </div>
                     </div>
-                {% endif %}
-                <div class="col-xs-12  col-sm-3  col-md-4  col-lg-4 filter__down">
-                    <div class="formgroup--inline">
-                        {{ form_label(form.sort, null, {'label_attr':{"class":"control-label"} }) }}
-                        <span class="formgroup--inline__control">
-                                {{ form_errors(form.sort) }}
-                            {{ form_widget(form.sort, {'attr':{"class":"form-control"} }) }}
-                        </span>
-                    </div>
-                </div>
 
-                {{ form_end(form) }}
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+
+            <div class="row">
+                {% for member in members %}
+                    {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': member, 'col': 3} only %}
+                {% else %}
+                    <p>
+                        {{ 'user.index.no_result'|trans({}, 'CapcoAppBundle') }}
+                    </p>
+                {% endfor %}
 
             </div>
-        </div>
+            {% set userType = (form.vars.data.userType is null ? 'all' : form.vars.data.userType.slug) %}
 
-        <div class="row">
-            {% for member in members %}
-                {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': member, 'col': 3} only %}
+            {% if form.vars.data.sort is not null %}
+                {% set route, params = 'app_members_type_sorted', {'sort': form.vars.data.sort, 'userType': userType } %}
             {% else %}
-                <p>
-                    {{ 'user.index.no_result'|trans({}, 'CapcoAppBundle') }}
-                </p>
-            {% endfor %}
+                {% set route, params = 'app_members_type', {'userType': userType} %}
+            {% endif %}
+
+            {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 
         </div>
-        {% set userType = (form.vars.data.userType is null ? 'all' : form.vars.data.userType.slug) %}
-
-        {% if form.vars.data.sort is not null %}
-            {% set route, params = 'app_members_type_sorted', {'sort': form.vars.data.sort, 'userType': userType } %}
-        {% else %}
-            {% set route, params = 'app_members_type', {'userType': userType} %}
-        {% endif %}
-
-        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
-
     </div>
 
 {% endblock %}

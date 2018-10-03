@@ -43,60 +43,64 @@
 
 {% block body %}
 
-    <div class="container  container--custom" {% if content_body is null %}style="display: none;"{% endif %}>
-        {% if null != content_body %}
-            {{ content_body|raw }}
-        {% endif %}
+    <div class="container--custom" {% if content_body is null %}style="display: none;"{% endif %}>
+        <div class="container" {% if content_body is null %}style="display: none;"{% endif %}>
+            {% if null != content_body %}
+                {{ content_body|raw }}
+            {% endif %}
+        </div>
     </div>
 
-    <div class="container  container--custom">
+    <div class="container--custom">
+        <div class="container">
 
-        <div class="filter  block">
-            <div class="row">
-                {{ form_start(form) }}
-                {{ form_errors(form) }}
-                {% if is_feature_enabled('themes') %}
-                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-4  filter__down">
-                        {{ form_label(form.theme, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                        {{ form_errors(form.theme) }}
-                        {{ form_widget(form.theme, {'attr':{"class":"form-control"} }) }}
+            <div class="filter  block">
+                <div class="row">
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {% if is_feature_enabled('themes') %}
+                        <div class="col-xs-12  col-sm-3  col-md-3  col-lg-4  filter__down">
+                            {{ form_label(form.theme, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                            {{ form_errors(form.theme) }}
+                            {{ form_widget(form.theme, {'attr':{"class":"form-control"} }) }}
+                        </div>
+                    {% endif %}
+                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3 filter__down">
+                        {{ form_label(form.project, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                        {{ form_errors(form.project) }}
+                        {{ form_widget(form.project, {'attr':{"class":"form-control"} }) }}
                     </div>
-                {% endif %}
-                <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3 filter__down">
-                    {{ form_label(form.project, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                    {{ form_errors(form.project) }}
-                    {{ form_widget(form.project, {'attr':{"class":"form-control"} }) }}
+
+                    {{ form_end(form) }}
                 </div>
-
-                {{ form_end(form) }}
             </div>
-        </div>
 
-        {% if posts|length > 0 %}
-            <ul class="media-list">
-                {% for post in posts %}
-                    {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>{{ 'blog.no_post' | trans({}, 'CapcoAppBundle') | jolitypo() }}</p>
-        {% endif %}
-
-        {% set theme = (form.vars.data.theme is not null ? form.vars.data.theme.slug : 'all') %}
-        {% set project = (form.vars.data.project is not null ? form.vars.data.project.slug : 'all') %}
-
-        {% if theme != 'all' or project != 'all' %}
-            {% if project != 'all' %}
-                {% set route, params = 'app_blog_search_project', {'theme': theme, 'project': project } %}
+            {% if posts|length > 0 %}
+                <ul class="media-list">
+                    {% for post in posts %}
+                        {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
+                    {% endfor %}
+                </ul>
             {% else %}
-                {% set route, params = 'app_blog_search_theme', {'theme': theme } %}
+                <p>{{ 'blog.no_post' | trans({}, 'CapcoAppBundle') | jolitypo() }}</p>
             {% endif %}
-        {% else %}
-            {% set route, params = 'app_blog', {} %}
-        {% endif %}
 
-        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+            {% set theme = (form.vars.data.theme is not null ? form.vars.data.theme.slug : 'all') %}
+            {% set project = (form.vars.data.project is not null ? form.vars.data.project.slug : 'all') %}
 
+            {% if theme != 'all' or project != 'all' %}
+                {% if project != 'all' %}
+                    {% set route, params = 'app_blog_search_project', {'theme': theme, 'project': project } %}
+                {% else %}
+                    {% set route, params = 'app_blog_search_theme', {'theme': theme } %}
+                {% endif %}
+            {% else %}
+                {% set route, params = 'app_blog', {} %}
+            {% endif %}
+
+            {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+
+        </div>
     </div>
 
 {% endblock %}

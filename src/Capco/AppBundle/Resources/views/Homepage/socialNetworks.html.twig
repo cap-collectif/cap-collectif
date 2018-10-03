@@ -1,25 +1,27 @@
 {% if socialNetworks|length > 0 %}
-    <div id="links" class="container  container--custom  text-center">
-        {% if null != section.title %}
-            <h2 class="h2">{{ section.title }}</h2>
-        {% else %}
-            <h2 class="h2">{{ 'homepage.social_networks.title' | trans({}, 'CapcoAppBundle') }}</h2>
-        {% endif %}
-        {% if null != section.teaser %}
-            <p class="block">{{ section.teaser }}</p>
-        {% endif %}
-        {% if null != section.body %}
-            <p>{{ section.body | raw }}</p>
-        {% endif %}
-        <ul class="social__icons">
-            {% for socialNetwork in socialNetworks %}
-                <li>
-                    <a href="{{ socialNetwork.link }}" class="external-link">
-                        {% thumbnail socialNetwork.media, 'socialIcon' with {'title': socialNetwork.title, 'alt': '', 'class': 'social__icon'} %}
-                        <p>{{ socialNetwork.title }}</p>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+    <div id="links" class="container--custom">
+        <div class="container  text-center">
+            {% if null != section.title %}
+                <h2 class="h2">{{ section.title }}</h2>
+            {% else %}
+                <h2 class="h2">{{ 'homepage.social_networks.title' | trans({}, 'CapcoAppBundle') }}</h2>
+            {% endif %}
+            {% if null != section.teaser %}
+                <p class="block">{{ section.teaser }}</p>
+            {% endif %}
+            {% if null != section.body %}
+                <p>{{ section.body | raw }}</p>
+            {% endif %}
+            <ul class="social__icons">
+                {% for socialNetwork in socialNetworks %}
+                    <li>
+                        <a href="{{ socialNetwork.link }}" class="external-link">
+                            {% thumbnail socialNetwork.media, 'socialIcon' with {'title': socialNetwork.title, 'alt': '', 'class': 'social__icon'} %}
+                            <p>{{ socialNetwork.title }}</p>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endif %}

@@ -35,43 +35,47 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container  container--custom">
-        {%  if content_body is defined %}
-            {{ content_body|raw }}
-        {% endif %}
-        {% set address = capco_site_parameter_value('contact.content.address') %}
-        {% set tel = capco_site_parameter_value('contact.content.phone_number') %}
-        {%  if address != null or tel != null %}
-            <address>
-                {% if address != null %}
-                    <strong>{{ 'contact.address' | trans({}, 'CapcoAppBundle') }}</strong><br/>
-                    {{ address|raw }}<br/>
-                {% endif %}
-                {% if tel != null %}
-                    <strong>{{ 'contact.tel' | trans({}, 'CapcoAppBundle') }}</strong><br/>
-                    {{ tel|raw }}
-                {% endif %}
-            </address>
-        {% endif %}
+    <div class="container--custom">
+        <div class="container">
+            {%  if content_body is defined %}
+                {{ content_body|raw }}
+            {% endif %}
+            {% set address = capco_site_parameter_value('contact.content.address') %}
+            {% set tel = capco_site_parameter_value('contact.content.phone_number') %}
+            {%  if address != null or tel != null %}
+                <address>
+                    {% if address != null %}
+                        <strong>{{ 'contact.address' | trans({}, 'CapcoAppBundle') }}</strong><br/>
+                        {{ address|raw }}<br/>
+                    {% endif %}
+                    {% if tel != null %}
+                        <strong>{{ 'contact.tel' | trans({}, 'CapcoAppBundle') }}</strong><br/>
+                        {{ tel|raw }}
+                    {% endif %}
+                </address>
+            {% endif %}
+        </div>
     </div>
 
-    <div class="container  container--custom">
-        <div class="row">
-            <div class="col-xs-12 col-md-8">
-                <form method="post" novalidate="novalidate" class="pb-20">
-                    {{ form_errors(form) }}
-                    {{ form_rest(form) }}
-                    <button type="submit" class="btn btn-primary">{{ 'contact.submit'|trans({}, 'CapcoAppBundle') }}</button>
-                </form>
-                {% if null != capco_site_parameter_value('global.site.organization_name') or '' != capco_site_parameter_value('global.site.organization_name') %}
-                    <p class="excerpt">
-                        {{ 'information-for-the-contact-form'|trans({'%organisationName%': capco_site_parameter_value('global.site.organization_name') }, 'CapcoAppBundle')|raw }}
-                    </p>
-                {% endif %}
+    <div class="container--custom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-8">
+                    <form method="post" novalidate="novalidate" class="pb-20">
+                        {{ form_errors(form) }}
+                        {{ form_rest(form) }}
+                        <button type="submit" class="btn btn-primary">{{ 'contact.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                    </form>
+                    {% if null != capco_site_parameter_value('global.site.organization_name') or '' != capco_site_parameter_value('global.site.organization_name') %}
+                        <p class="excerpt">
+                            {{ 'information-for-the-contact-form'|trans({'%organisationName%': capco_site_parameter_value('global.site.organization_name') }, 'CapcoAppBundle')|raw }}
+                        </p>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-    
+
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
