@@ -14,22 +14,24 @@ class ProposalsUserVotesPage extends React.Component<Props> {
     const { project } = this.props;
 
     return (
-      <div>
-        <div className="container container--custom text-center">
+      <div className="container--custom">
+        <div className="container text-center">
           <h1 className="mb-0">
             <FormattedMessage id="project.votes.title" />
           </h1>
         </div>
-        <div className="container container--custom">
-          {project.votableSteps.length > 0 ? (
-            project.votableSteps
-              .filter(step => !!step.id)
-              .map((step, index) => <ProposalsUserVotesStep key={index} step={step} />)
-          ) : (
-            <p>
-              <FormattedMessage id="project.votes.no_active_step" />
-            </p>
-          )}
+        <div className="container--custom">
+          <div className="container">
+            {project.votableSteps.length > 0 ? (
+              project.votableSteps
+                .filter(step => !!step.id)
+                .map((step, index) => <ProposalsUserVotesStep key={index} step={step} />)
+            ) : (
+              <p>
+                <FormattedMessage id="project.votes.no_active_step" />
+              </p>
+            )}
+          </div>
         </div>
       </div>
     );
