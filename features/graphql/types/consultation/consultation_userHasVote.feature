@@ -6,18 +6,20 @@ Scenario: API client wants to know if a user has voted on the consultation
   Given I send a GraphQL POST request:
   """
   {
-    "query": "query ($consultationId: ID!, $loginA: String!, $loginB: String!) {
+    "query": "query ($consultationId: ID!, $loginA: String!, $loginB: String!, $loginC: String!) {
       consultation: node(id: $consultationId) {
-          ... on Consultation {
-              spylHasVote: userHasVote(login: $loginA)
-              lbrunetHasVote: userHasVote(login: $loginB)
-          }
+        ... on Consultation {
+          spylHasVote: userHasVote(login: $loginA)
+          lbrunetHasVote: userHasVote(login: $loginB)
+          unknownUserHasVote: userHasVote(login: $loginC)
+        }
       }
     }",
     "variables": {
       "consultationId": "cstep1",
       "loginA": "aurelien@cap-collectif.com",
-      "loginB": "lbrunet@jolicode.com"
+      "loginB": "lbrunet@jolicode.com",
+      "loginC": "unknown@gmail.com"
     }
   }
   """
@@ -25,11 +27,11 @@ Scenario: API client wants to know if a user has voted on the consultation
   """
   {
     "data": {
-        "consultation": {
-            "spylHasVote": false,
-            "lbrunetHasVote": true
-        }
+      "consultation": {
+        "spylHasVote": false,
+        "lbrunetHasVote": true,
+        "unknownUserHasVote": false
+      }
     }
   }
   """
-  

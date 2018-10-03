@@ -1,18 +1,15 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Repository\ArgumentVoteRepository;
+use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
+use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Capco\AppBundle\Repository\SourceVoteRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Repository\OpinionVoteRepository;
-use Capco\AppBundle\Repository\ArgumentVoteRepository;
-use Capco\AppBundle\Repository\SourceVoteRepository;
-use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
+use Psr\Log\LoggerInterface;
 
 class ConsultationUserHasVoteResolver implements ResolverInterface
 {
@@ -21,26 +18,32 @@ class ConsultationUserHasVoteResolver implements ResolverInterface
     private $argumentVoteRepo;
     private $sourceVoteRepo;
     private $versionVoteRepo;
+    private $logger;
 
     public function __construct(
         UserRepository $userRepo,
         OpinionVoteRepository $opinionVoteRepo,
         ArgumentVoteRepository $argumentVoteRepo,
         SourceVoteRepository $sourceVoteRepo,
-        OpinionVersionVoteRepository $versionVoteRepo
+        OpinionVersionVoteRepository $versionVoteRepo,
+        LoggerInterface $logger
     ) {
         $this->userRepo = $userRepo;
         $this->opinionVoteRepo = $opinionVoteRepo;
         $this->argumentVoteRepo = $argumentVoteRepo;
         $this->sourceVoteRepo = $sourceVoteRepo;
         $this->versionVoteRepo = $versionVoteRepo;
+        $this->logger = $logger;
     }
 
     public function __invoke(ConsultationStep $step, Argument $args): bool
     {
         $user = $this->userRepo->findOneByEmail($args->offsetGet('login'));
+
         if (!$user) {
-            throw new UserError('Could not find user.');
+            $this->logger->warning(__CLASS__ . ' : Could not find user.');
+
+            return false;
         }
 
         $votesCount = 0;

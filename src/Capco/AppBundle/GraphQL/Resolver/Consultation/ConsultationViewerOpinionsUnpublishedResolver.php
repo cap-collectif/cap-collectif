@@ -1,12 +1,12 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
-use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\OpinionRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class ConsultationViewerOpinionsUnpublishedResolver implements ResolverInterface

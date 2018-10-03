@@ -59,6 +59,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/prometheus-bundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/ptondereau/GraphQLBundle"
         }
     ],
     "require": {
@@ -143,7 +147,7 @@
         "php-http/httplug-bundle": "^1.8",
         "php-http/curl-client": "^1.7",
         "symfony/polyfill-apcu": "^1.7",
-        "overblog/graphql-bundle": "^0.11.0",
+        "overblog/graphql-bundle": "0.11.x-dev#4796eeeeb5caebb8ecc726edd6259085f0baeb4e",
         "imagine/imagine": "^0.6",
         "knplabs/knp-menu-bundle": "2.2.1",
         "sensio/generator-bundle": "3.1.7",

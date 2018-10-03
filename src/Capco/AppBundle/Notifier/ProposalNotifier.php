@@ -45,7 +45,7 @@ class ProposalNotifier extends BaseNotifier
 
     public function onCreate(Proposal $proposal)
     {
-        if (!$proposal->isDraft() && $proposal->getProposalForm()->isNotifyingOnCreate()) {
+        if ($proposal->getProposalForm()->isNotifyingOnCreate()) {
             $this->mailer->sendMessage(
                 ProposalCreateAdminMessage::create(
                     $proposal,
@@ -93,23 +93,20 @@ class ProposalNotifier extends BaseNotifier
 
     public function onDelete(Proposal $proposal)
     {
-        if (!$proposal->isDraft()) {
-            $this->mailer->sendMessage(
-                ProposalDeleteAdminMessage::create(
-                    $proposal,
-                    $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    $this->proposalResolver->resolveShowUrl($proposal),
-                    $this->proposalResolver->resolveAdminUrl($proposal),
-                    $this->userResolver->resolveShowUrl($proposal->getAuthor())
-                )
-            );
-        }
+        $this->mailer->sendMessage(
+            ProposalDeleteAdminMessage::create(
+                $proposal,
+                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                $this->proposalResolver->resolveShowUrl($proposal),
+                $this->proposalResolver->resolveAdminUrl($proposal),
+                $this->userResolver->resolveShowUrl($proposal->getAuthor())
+            )
+        );
     }
 
     public function onUpdate(Proposal $proposal)
     {
         if (
-            !$proposal->isDraft() &&
             $proposal
                 ->getProposalForm()
                 ->getNotificationsConfiguration()
