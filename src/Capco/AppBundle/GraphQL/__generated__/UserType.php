@@ -119,7 +119,7 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["user_show_url", array(0 => $value)]);
                     },
                     'description' => null,
-                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
+                    'deprecationReason' => 'Use url instead of show_url',
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,

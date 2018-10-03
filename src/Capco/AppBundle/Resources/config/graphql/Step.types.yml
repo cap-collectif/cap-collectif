@@ -17,8 +17,7 @@ Step:
         type: 'String!'
         description: 'The url of the step'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
-        deprecationReason:
-          '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-01-01", reason: "This field does not respect naming consistency.", supersededBy: "Use `url` instead."})'
+        deprecationReason: 'Use url instead of show_url'
       url:
         type: 'String!'
         description: 'The url of the step'

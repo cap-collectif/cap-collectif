@@ -29,8 +29,7 @@ User:
       show_url:
         type: 'URI'
         resolve: "@=resolver('user_show_url', [value])"
-        deprecationReason:
-          '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-01-01", reason: "This field does not respect naming consistency.", supersededBy: "Use `url` instead."})'
+        deprecationReason: 'Use url instead of show_url'
       url:
         type: 'URI'
         description: 'URL to user profile, null if the feature profiles is disabled.'

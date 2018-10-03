@@ -65,7 +65,7 @@ final class ContributionType extends InterfaceType implements GeneratedTypeInter
                     ],
                     'resolve' => null,
                     'description' => 'The HTTP show url for this contribution.',
-                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
+                    'deprecationReason' => 'Use url instead of show_url',
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
