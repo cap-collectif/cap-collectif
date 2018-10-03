@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0e31ef2e7b3a23377ddb7781b5f917c",
+    "content-hash": "16e7fd442b8e513f503a2e857880505a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -514,16 +514,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.8.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "d768d58baee9a4862ca783840eca1b9add7a7f57"
+                "reference": "b3217d58609e9c8e661cd41357a54d926c4a2a1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/d768d58baee9a4862ca783840eca1b9add7a7f57",
-                "reference": "d768d58baee9a4862ca783840eca1b9add7a7f57",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/b3217d58609e9c8e661cd41357a54d926c4a2a1a",
+                "reference": "b3217d58609e9c8e661cd41357a54d926c4a2a1a",
                 "shasum": ""
             },
             "require": {
@@ -534,9 +534,8 @@
             },
             "require-dev": {
                 "alcaeus/mongo-php-adapter": "^1.1",
-                "doctrine/coding-standard": "^4.0",
                 "mongodb/mongodb": "^1.1",
-                "phpunit/phpunit": "^7.0",
+                "phpunit/phpunit": "^5.7",
                 "predis/predis": "~1.0"
             },
             "suggest": {
@@ -545,7 +544,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8.x-dev"
+                    "dev-master": "1.7.x-dev"
                 }
             },
             "autoload": {
@@ -580,12 +579,12 @@
                 }
             ],
             "description": "Caching library offering an object-oriented API for many cache backends",
-            "homepage": "https://www.doctrine-project.org",
+            "homepage": "http://www.doctrine-project.org",
             "keywords": [
                 "cache",
                 "caching"
             ],
-            "time": "2018-08-21T18:01:43+00:00"
+            "time": "2017-08-25T07:02:50+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -1574,16 +1573,16 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "v1.0.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "af1ec238659a83e320f03e0e454e200f689b4b97"
+                "reference": "17896f6d56a2794a1619e019596ae627aabd8fd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/af1ec238659a83e320f03e0e454e200f689b4b97",
-                "reference": "af1ec238659a83e320f03e0e454e200f689b4b97",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/17896f6d56a2794a1619e019596ae627aabd8fd5",
+                "reference": "17896f6d56a2794a1619e019596ae627aabd8fd5",
                 "shasum": ""
             },
             "require": {
@@ -1648,7 +1647,7 @@
             "keywords": [
                 "persistence"
             ],
-            "time": "2018-07-12T12:37:50+00:00"
+            "time": "2018-06-14T18:57:48+00:00"
         },
         {
             "name": "doctrine/reflection",
@@ -6216,16 +6215,16 @@
         },
         {
             "name": "overblog/graphql-bundle",
-            "version": "0.11.x-dev",
+            "version": "v0.11.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ptondereau/GraphQLBundle.git",
-                "reference": "4796eeeeb5caebb8ecc726edd6259085f0baeb4e"
+                "url": "https://github.com/overblog/GraphQLBundle.git",
+                "reference": "3117b60e0212443210d291a9ec7d8c929fb56bb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ptondereau/GraphQLBundle/zipball/4796eeeeb5caebb8ecc726edd6259085f0baeb4e",
-                "reference": "4796eeeeb5caebb8ecc726edd6259085f0baeb4e",
+                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/3117b60e0212443210d291a9ec7d8c929fb56bb3",
+                "reference": "3117b60e0212443210d291a9ec7d8c929fb56bb3",
                 "shasum": ""
             },
             "require": {
@@ -6242,7 +6241,7 @@
                 "webonyx/graphql-php": "^0.11.2 || ^0.12.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7.26 || ^6.0 || ^7.2",
+                "phpunit/phpunit": "^5.7.26 || ^6.0",
                 "react/promise": "^2.5",
                 "sensio/framework-extra-bundle": "^3.0",
                 "symfony/asset": "^3.1 || ^4.0",
@@ -6269,51 +6268,13 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Overblog\\GraphQLBundle\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Overblog\\GraphQLBundle\\Benchmarks\\": "benchmarks",
-                    "Overblog\\GraphQLBundle\\Tests\\": "tests"
+                    "Overblog\\GraphQLBundle\\": ""
                 },
-                "files": [
-                    "vendor/overblog/graphql-php-generator/tests/DateTimeType.php",
-                    "vendor/overblog/graphql-php-generator/tests/Resolver.php"
+                "exclude-from-classmap": [
+                    "/Tests/"
                 ]
             },
-            "scripts": {
-                "test": [
-                    "bin/phpunit --color=always -v --debug"
-                ],
-                "static-analysis": [
-                    "@composer req --ansi --dev 'phpstan/phpstan:^0.10.3' 'phpstan/phpstan-phpunit:^0.10.0'",
-                    "phpstan analyse --ansi",
-                    "@composer rem --ansi --dev phpstan/phpstan phpstan/phpstan-phpunit"
-                ],
-                "bench": [
-                    "test -f phpbench.phar || wget https://phpbench.github.io/phpbench/phpbench.phar https://phpbench.github.io/phpbench/phpbench.phar.pubkey",
-                    "@php phpbench.phar run -l dots --ansi -vvv --report='generator: \"table\", cols: [\"benchmark\", \"subject\", \"params\", \"best\", \"mean\", \"mode\", \"worst\", \"diff\"], break: [\"benchmark\"], sort: {mean: \"asc\"}'"
-                ],
-                "install-cs": [
-                    "test -f php-cs-fixer.phar || wget https://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer.phar"
-                ],
-                "fix-cs": [
-                    "@install-cs",
-                    "@php php-cs-fixer.phar fix --diff -v --allow-risky=yes --ansi"
-                ],
-                "check-cs": [
-                    "@install-cs",
-                    "@php php-cs-fixer.phar fix --dry-run --diff -v --allow-risky=yes --ansi"
-                ],
-                "code-quality": [
-                    "rm composer.lock",
-                    "@composer install --ansi",
-                    "@static-analysis",
-                    "@bench",
-                    "@check-cs"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -6325,13 +6286,10 @@
             ],
             "description": "This bundle provides tools to build a GraphQL server in your Symfony App.",
             "keywords": [
-                "GraphQL",
-                "Relay"
+                "Relay",
+                "graphql"
             ],
-            "support": {
-                "source": "https://github.com/ptondereau/GraphQLBundle/tree/0.11"
-            },
-            "time": "2018-10-02T21:03:53+00:00"
+            "time": "2018-07-18T07:53:01+00:00"
         },
         {
             "name": "overblog/graphql-php-generator",
@@ -11078,20 +11036,20 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.16",
+            "version": "v3.4.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "43421aaec946240f79c2768edd2753b8b9080ffa"
+                "reference": "f50e17fa4edd6216f7fe5b908f04e64ba1d19a9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/43421aaec946240f79c2768edd2753b8b9080ffa",
-                "reference": "43421aaec946240f79c2768edd2753b8b9080ffa",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/f50e17fa4edd6216f7fe5b908f04e64ba1d19a9e",
+                "reference": "f50e17fa4edd6216f7fe5b908f04e64ba1d19a9e",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "~2.4",
+                "doctrine/common": "~2.4@stable",
                 "ext-xml": "*",
                 "fig/link-util": "^1.0",
                 "php": "^5.5.9|>=7.0.8",
@@ -11179,7 +11137,7 @@
                 "doctrine/data-fixtures": "1.0.*",
                 "doctrine/dbal": "~2.4",
                 "doctrine/doctrine-bundle": "~1.4",
-                "doctrine/orm": "~2.4,>=2.4.5",
+                "doctrine/orm": "~2.4,>=2.4.5,<=2.7.0",
                 "egulias/email-validator": "~1.2,>=1.2.8|~2.0",
                 "monolog/monolog": "~1.11",
                 "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
@@ -11229,7 +11187,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-09-30T04:54:04+00:00"
+            "time": "2018-08-01T14:48:04+00:00"
         },
         {
             "name": "tilleuls/ckeditor-sonata-media-bundle",
@@ -15596,7 +15554,6 @@
         "cocur/slugify": 20,
         "phayes/geophp": 20,
         "webonyx/graphql-php": 20,
-        "overblog/graphql-bundle": 20,
         "tweedegolf/prometheus-bundle": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20,

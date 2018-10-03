@@ -287,6 +287,7 @@ class UserRepository extends EntityRepository
             ->leftJoin('proposalForm.step', 'step', 'WITH', 'step.isEnabled = 1')
             ->leftJoin('step.projectAbstractStep', 'pas')
             ->where('pas.project = :project')
+            ->andWhere('proposals.draft = 0')
             ->groupBy('u.id')
             ->setParameter('project', $project);
 
