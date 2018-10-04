@@ -19,21 +19,15 @@ final class ContributionOrderFieldType extends EnumType implements GeneratedType
             return [
             'name' => 'ContributionOrderField',
             'values' => [
-                'COMMENT_COUNT' => [
-                    'name' => 'COMMENT_COUNT',
-                    'value' => 'COMMENT_COUNT',
-                    'deprecationReason' => null,
-                    'description' => null,
-                ],
-                'POPULAR' => [
-                    'name' => 'POPULAR',
-                    'value' => 'POPULAR',
-                    'deprecationReason' => null,
-                    'description' => null,
-                ],
                 'POSITION' => [
                     'name' => 'POSITION',
                     'value' => 'POSITION',
+                    'deprecationReason' => null,
+                    'description' => null,
+                ],
+                'RANDOM' => [
+                    'name' => 'RANDOM',
+                    'value' => 'RANDOM',
                     'deprecationReason' => null,
                     'description' => null,
                 ],
@@ -43,9 +37,15 @@ final class ContributionOrderFieldType extends EnumType implements GeneratedType
                     'deprecationReason' => null,
                     'description' => null,
                 ],
-                'RANDOM' => [
-                    'name' => 'RANDOM',
-                    'value' => 'RANDOM',
+                'POPULAR' => [
+                    'name' => 'POPULAR',
+                    'value' => 'POPULAR',
+                    'deprecationReason' => null,
+                    'description' => null,
+                ],
+                'COMMENT_COUNT' => [
+                    'name' => 'COMMENT_COUNT',
+                    'value' => 'COMMENT_COUNT',
                     'deprecationReason' => null,
                     'description' => null,
                 ],

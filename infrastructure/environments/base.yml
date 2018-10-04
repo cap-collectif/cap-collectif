@@ -1,89 +1,89 @@
 application:
-  build: ../services/local
-  ports:
-    - '80:80'
-    - '443:443'
-    - '8686:8686'
-    - '1664:1664'
-    - '1337:1337'
-  environment:
-    SYMFONY_DATABASE_HOST: database
-    SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
-    SYMFONY_ELASTICSEARCH_HOST: elasticsearch
-    SYMFONY_REDIS_HOST: redis
-    SYMFONY_SAML_SP: daher
-    SYMFONY_LOGIN_SAML_ALLOWED: 'True'
-    SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
-  volumes_from:
-    - applicationdata
-  links:
-    - database:database
-    - elasticsearch:elasticsearch
-    - kibana:kibana
-    - redis:redis
-    - seleniumhub:selenium
-    - mailcatcher:mailcatchersmtp
-  extra_hosts: # Used to ban varnish cache
-    - 'capco.test:0.0.0.0'
+    build: ../services/local
+    ports:
+        - "80:80"
+        - "443:443"
+        - "8686:8686"
+        - "1664:1664"
+        - "1337:1337"
+    environment:
+        SYMFONY_DATABASE_HOST: database
+        SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
+        SYMFONY_ELASTICSEARCH_HOST: elasticsearch
+        SYMFONY_REDIS_HOST: redis
+        SYMFONY_SAML_SP: daher
+        SYMFONY_LOGIN_SAML_ALLOWED: 'True'
+        SYMFONY_LOGIN_PARIS_ALLOWED: 'True'
+    volumes_from:
+        - applicationdata
+    links:
+        - database:database
+        - elasticsearch:elasticsearch
+        - kibana:kibana
+        - redis:redis
+        - seleniumhub:selenium
+        - mailcatcher:mailcatchersmtp
+    extra_hosts: # Used to ban varnish cache
+        - "capco.test:0.0.0.0"
 
 applicationdata:
-  build: ../services/applicationdata
-  volumes:
-    - /var/www/web/media
-    - /var/www/var/cache
-    - /var/www/var/logs
+    build: ../services/applicationdata
+    volumes:
+        - /var/www/web/media
+        - /var/www/var/cache
+        - /var/www/var/logs
 
 database:
-  image: capco/fixtures:latest
+    image: capco/fixtures:latest
 
 redis:
-  build: ../services/redis
+    build: ../services/redis
 
 elasticsearch:
-  build: ../services/elasticsearch
-  environment:
-    - cluster.name=capco
-    - bootstrap.memory_lock=true
-    - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
-  ulimits:
-    memlock:
-      soft: -1
-      hard: -1
-  mem_limit: 1g
+    build: ../services/elasticsearch
+    environment:
+       - cluster.name=capco
+       - bootstrap.memory_lock=true
+       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
 
 kibana:
-  image: kibana:5
-  links:
-    - elasticsearch
-  ports:
-    - '5601:5601'
+    image: kibana:5
+    links:
+        - elasticsearch
+    ports:
+        - "5601:5601"
 
 seleniumhub:
   build: ../services/seleniumhub
+  # environment:
     # https://github.com/SeleniumHQ/selenium/wiki/Grid2
     # GRID_TIMEOUT: 600 # (300 is default)
     # GRID_BROWSER_TIMEOUT: 300
-  # environment:
   ports:
-    - '4444:4444'
+    - "4444:4444"
 
 mailcatcher:
   build: ../services/mailcatcher
   ports:
-    - '25:25'
+    - "25:25"
 
 chrome:
-  build: ../services/chrome
-  environment:
-    SCREEN_WIDTH: 1920
-    SCREEN_HEIGHT: 1080
-    TZ: 'Europe/Paris'
-  volumes:
-    - /dev/shm:/dev/shm
-    - ../../:/var/www
-  links:
-    - seleniumhub:hub
-    - application:capco.test
-      # - /tmp
-#  shm_size: 1G
-#  tmpfs:
+   build: ../services/chrome
+   environment:
+      SCREEN_WIDTH: 1920
+      SCREEN_HEIGHT: 1080
+      TZ: "Europe/Paris"
+   volumes:
+      - /dev/shm:/dev/shm
+      - ../../:/var/www
+   links:
+     - seleniumhub:hub
+     - application:capco.test
+   #  shm_size: 1G
+   #  tmpfs:
+        # - /tmp

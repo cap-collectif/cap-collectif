@@ -19,17 +19,17 @@ final class TrashableStatusType extends EnumType implements GeneratedTypeInterfa
             return [
             'name' => 'TrashableStatus',
             'values' => [
-                'INVISIBLE' => [
-                    'name' => 'INVISIBLE',
-                    'value' => \constant("Capco\\AppBundle\\Entity\\Interfaces\\Trashable::STATUS_INVISIBLE"),
-                    'deprecationReason' => null,
-                    'description' => 'Content is not visible.',
-                ],
                 'VISIBLE' => [
                     'name' => 'VISIBLE',
                     'value' => \constant("Capco\\AppBundle\\Entity\\Interfaces\\Trashable::STATUS_VISIBLE"),
                     'deprecationReason' => null,
                     'description' => 'Content is visible.',
+                ],
+                'INVISIBLE' => [
+                    'name' => 'INVISIBLE',
+                    'value' => \constant("Capco\\AppBundle\\Entity\\Interfaces\\Trashable::STATUS_INVISIBLE"),
+                    'deprecationReason' => null,
+                    'description' => 'Content is not visible.',
                 ],
             ],
             'description' => 'Different trashable status.',

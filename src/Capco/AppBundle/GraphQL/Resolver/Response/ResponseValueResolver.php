@@ -2,13 +2,16 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Response;
 
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ResponseValueResolver
+class ResponseValueResolver implements ResolverInterface
 {
     public function __invoke(ValueResponse $response): ?string
     {
+        /** @var AbstractQuestion $question */
         $question = $response->getQuestion();
         // Multiple choice question value is encoded in JSON.
         if ($question instanceof MultipleChoiceQuestion) {

@@ -19,29 +19,29 @@ final class ProjectVisibilityType extends EnumType implements GeneratedTypeInter
             return [
             'name' => 'ProjectVisibility',
             'values' => [
-                'ADMIN' => [
-                    'name' => 'ADMIN',
-                    'value' => \constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_ADMIN"),
-                    'deprecationReason' => null,
-                    'description' => 'visible for group admin',
-                ],
-                'CUSTOM' => [
-                    'name' => 'CUSTOM',
-                    'value' => \constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_CUSTOM"),
-                    'deprecationReason' => null,
-                    'description' => 'the project is restricted to users groups',
-                ],
                 'ME' => [
                     'name' => 'ME',
                     'value' => \constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_ME"),
                     'deprecationReason' => null,
                     'description' => 'visible for me only',
                 ],
+                'ADMIN' => [
+                    'name' => 'ADMIN',
+                    'value' => \constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_ADMIN"),
+                    'deprecationReason' => null,
+                    'description' => 'visible for group admin',
+                ],
                 'PUBLIC' => [
                     'name' => 'PUBLIC',
                     'value' => \constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_PUBLIC"),
                     'deprecationReason' => null,
                     'description' => 'visible for all',
+                ],
+                'CUSTOM' => [
+                    'name' => 'CUSTOM',
+                    'value' => \constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_CUSTOM"),
+                    'deprecationReason' => null,
+                    'description' => 'the project is restricted to users groups',
                 ],
             ],
             'description' => '4 possible values',

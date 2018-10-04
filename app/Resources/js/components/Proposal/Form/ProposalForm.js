@@ -105,7 +105,6 @@ type Props = FormProps &
     +features: FeatureToggles,
     +titleValue: ?string,
     +addressValue: ?string,
-    +responses: ResponsesInReduxForm,
   };
 
 type FormValues = {|
@@ -324,7 +323,7 @@ export class ProposalForm extends React.Component<Props, State> {
   };
 
   render() {
-    const { intl, titleValue, proposalForm, features, themes, error, responses } = this.props;
+    const { intl, titleValue, proposalForm, features, themes, error } = this.props;
     const {
       districtIdsFilteredByAddress,
       isLoadingTitleSuggestions,
@@ -516,8 +515,6 @@ export class ProposalForm extends React.Component<Props, State> {
           component={renderResponses}
           questions={proposalForm.questions}
           intl={intl}
-          change={this.props.change}
-          responses={responses}
         />
         <Field
           id="proposal_media"
@@ -565,7 +562,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
   features: state.default.features,
   themes: state.default.themes,
   currentStepId: state.project.currentProjectStepById,
-  responses: formValueSelector(formName)(state, 'responses'),
 });
 
 const form = reduxForm({
