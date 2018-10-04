@@ -1,18 +1,16 @@
 <?php
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Consultation;
 
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
-use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Repository\SourceVoteRepository;
-use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Capco\AppBundle\GraphQL\Resolver\Consultation\ConsultationUserHasVoteResolver;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
+use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Capco\AppBundle\Repository\SourceVoteRepository;
+use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Resolver\Consultation\ConsultationUserHasVoteResolver;
+use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 
 class ConsultationUserHasVoteResolverSpec extends ObjectBehavior
 {
@@ -21,14 +19,16 @@ class ConsultationUserHasVoteResolverSpec extends ObjectBehavior
         OpinionVoteRepository $opinionVoteRepo,
         ArgumentVoteRepository $argumentVoteRepo,
         SourceVoteRepository $sourceVoteRepo,
-        OpinionVersionVoteRepository $versionVoteRepo
+        OpinionVersionVoteRepository $versionVoteRepo,
+        LoggerInterface $logger
     ) {
         $this->beConstructedWith(
             $userRepo,
             $opinionVoteRepo,
             $argumentVoteRepo,
             $sourceVoteRepo,
-            $versionVoteRepo
+            $versionVoteRepo,
+            $logger
         );
     }
 
@@ -37,16 +37,13 @@ class ConsultationUserHasVoteResolverSpec extends ObjectBehavior
         $this->shouldHaveType(ConsultationUserHasVoteResolver::class);
     }
 
-    function it_throws_an_error_if_user_not_found(
+    function it_return_false_if_user_not_found(
         UserRepository $userRepo,
         ConsultationStep $step,
         Arg $args
     ) {
         $args->offsetGet('login')->willReturn('not-found@gmail.com');
         $userRepo->findOneByEmail('not-found@gmail.com')->willReturn(null);
-        $this->shouldThrow(new UserError('Could not find user.'))->during('__invoke', [
-            $step,
-            $args,
-        ]);
+        $this->__invoke($step, $args)->shouldReturn(false);
     }
 }
