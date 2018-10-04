@@ -110,8 +110,8 @@ const getConditionsResultForJump = (jump, responses) => {
       const search = responses
         .filter(Boolean)
         .find(r => condition && condition.question && r.question === condition.question.id);
-      const userResponse = search && search.value;
-      // const userResponse = (search && typeof search.value === "string") ? search.value : search && search.value.labels[0];
+      //const userResponse = search && search.value;
+      const userResponse = (search && typeof search.value === "string") ? search.value : search && search.value.labels[0];
       return condition.operator === 'IS'
         ? condition && condition.value && condition.value.title === userResponse
         : condition && condition.value && condition.value.title !== userResponse;
@@ -122,7 +122,7 @@ const getConditionsResultForJump = (jump, responses) => {
 
 const populateQuestionsJump = (responses, questions, callback) => {
   const questionsWithJumpsIds = [];
-
+  dump(responses);
   if (responses) {
     responses.forEach(response => {
       if (response.value) {
@@ -185,10 +185,11 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
     .filter(Boolean)
     .find(
       question =>
-        question.jumps &&
+        question.required ||
+        (question.jumps &&
         question.jumps.length > 0 &&
         afterQuestion &&
-        question.position >= afterQuestion.position,
+        question.position >= afterQuestion.position)
     );
 
   let firstQuestionsIds = [];
@@ -215,7 +216,7 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
     firstQuestionsIds = [firstLogicQuestion.id, ...filteredIds];
   } else {
     firstQuestionsIds = questions
-      .filter(question => afterQuestion && question.position > afterQuestion.position)
+      .filter(question => afterQuestion === question)
       .map(question => question.id);
   }
 

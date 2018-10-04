@@ -32,7 +32,6 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
 
   render() {
     const { index, questions, selectedQuestion, member, dispatch, formName, oldMember} = this.props;
-    console.log(this.props);
     const { currentQuestion } = this.state;
     const arrayQuestions = [];
     questions.map(question => {
@@ -40,13 +39,18 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
     });
     return (
       <div className="movable-element" key={index}>
-        <button type="button" title="Remove Member" onClick={() => dispatch(arrayRemove(formName, `${oldMember}.conditions`, index))}>
-          X
-        </button>
+        <div style={{marginBottom:'10px'}}>
+          <h4 className="panel-title">
+            <i className="cap cap-android-menu" style={{ color: 'rgb(3, 136, 204)', fontSize:'15px', marginRight:'10px' }} />
+            Si la réponse à la question :
+            <button type="button" style={{ border: 'none', float:'right', backgroundColor:'#f5f5f5' }} title="Remove Member" onClick={() => dispatch(arrayRemove(formName, `${oldMember}.conditions`, index))}>X</button>
+          </h4>
+        </div>
         <Field
           id={`${member}.question.id`}
           name={`${member}.question.id`}
           normalize={val => val && parseInt(val, 10)}
+          className={'col-md-8'}
           type="select"
           onChange={e => {
             this.handleQuestionChange(e);
@@ -63,6 +67,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
         <Field
           id={`${member}.operator`}
           name={`${member}.operator`}
+          className={'col-md-3'}
           type="select"
           component={component}>
           <option value="IS">
