@@ -57,7 +57,7 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
                       id: currentQuestion.id
                     },
                     value: {
-                      id: undefined
+                      id: currentQuestion.questionChoices[0]
                     },
                     operator: 'IS'
                   },

@@ -35,7 +35,9 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
     const { currentQuestion } = this.state;
     const arrayQuestions = [];
     questions.map(question => {
-      arrayQuestions[question.id] = question.questionChoices;
+      if(question.kind !== 'simple') {
+        arrayQuestions[question.id] = question.questionChoices;
+      }
     });
     return (
       <div className="movable-element" key={index}>
@@ -57,11 +59,13 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
           }}
           component={component}>
           {questions.map((question, questionIndex) => {
-            return (
+            if(question.kind !== 'simple') {
+              return (
               <option value={question.id}>
                 {questionIndex}. {question.title}
               </option>
-            );
+              );
+            }
           })}
         </Field>
         <Field

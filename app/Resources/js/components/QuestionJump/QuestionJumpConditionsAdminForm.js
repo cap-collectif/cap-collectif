@@ -21,7 +21,9 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
     const { fields, questions, member, formName, currentJump } = this.props;
     const arrayQuestions = [];
     questions.map(question => {
+      if(question.kind !== 'simple') {
         arrayQuestions[question.id] = question.questionChoices;
+      }
     });
 
     return (
@@ -48,7 +50,7 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
                     id: currentJump.origin.id
                   },
                   value: {
-                    id: undefined
+                    id: arrayQuestions[currentJump.origin.id][0]
                   },
                   operator: 'IS'
                 });
