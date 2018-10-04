@@ -223,4 +223,6 @@ services:
     autowire: true
     public: true
 
-
+  Capco\AppBundle\GraphQL\Deprecation:
+    autowire: true
+    public: true

@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AppBundle\Resolver\SectionResolver;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ class SectionController extends PositionableController
 {
     public function __construct()
     {
-        parent::__construct('Capco\AppBundle\Resolver\SectionResolver');
+        parent::__construct(SectionResolver::class);
     }
 
     /**
