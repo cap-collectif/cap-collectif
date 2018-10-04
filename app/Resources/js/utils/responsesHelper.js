@@ -122,7 +122,6 @@ const getConditionsResultForJump = (jump, responses) => {
 
 const populateQuestionsJump = (responses, questions, callback) => {
   const questionsWithJumpsIds = [];
-  dump(responses);
   if (responses) {
     responses.forEach(response => {
       if (response.value) {
