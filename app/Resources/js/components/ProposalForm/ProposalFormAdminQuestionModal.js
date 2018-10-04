@@ -148,17 +148,6 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
               </option>
             </optgroup>
           </Field>
-          <h4 style={{ fontWeight: 'bold' }}>
-                    <span>
-                      <FormattedMessage id="conditional-jumps" />
-                    </span>
-          </h4>
-          <FieldArray
-            name={`${member}.jumps`}
-            component={QuestionsJumpAdmin}
-            formName={formName}
-            oldMember={member}
-          />
           {multipleChoiceQuestions.indexOf(type) !== -1 && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
@@ -172,6 +161,17 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 formName={formName}
                 oldMember={member}
                 type={type}
+              />
+              <h4 style={{ fontWeight: 'bold' }}>
+                <span>
+                  <FormattedMessage id="conditional-jumps" />
+                </span>
+              </h4>
+              <FieldArray
+                name={`${member}.jumps`}
+                component={QuestionsJumpAdmin}
+                formName={formName}
+                oldMember={member}
               />
               <h4 style={{ fontWeight: 'bold' }}>
                 <span>
