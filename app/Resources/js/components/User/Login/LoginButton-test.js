@@ -9,6 +9,7 @@ describe('<LoginButton />', () => {
     className: 'btn-darkest-gray navbar-btn btn--connection',
     dispatch: jest.fn(),
     loginWithMonCompteParis: false,
+    loginWithOpenId: false,
   };
 
   it('renders a button', () => {

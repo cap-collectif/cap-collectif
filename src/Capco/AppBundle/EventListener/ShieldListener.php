@@ -12,43 +12,47 @@ use Symfony\Component\Templating\EngineInterface;
 class ShieldListener
 {
     const AVAILABLE_ROUTES = [
-      // Basics
-      'app_get_api_token',
-      'sonata_media_view',
-      'sonata_media_download',
-      'capco_metrics',
-      '_wdt',
+        // Basics
+        'app_get_api_token',
+        'sonata_media_view',
+        'sonata_media_download',
+        'capco_metrics',
+        '_wdt',
 
-      // Login
-      'capco_api_login_check',
-      'facebook_login',
-      'google_login',
-      'api_login_check',
-      'hwi_oauth_service_redirect',
+        // Login
+        'capco_api_login_check',
+        'facebook_login',
+        'google_login',
+        'openid_login',
+        'api_login_check',
+        'hwi_oauth_service_redirect',
 
-      // API documentation
-      'overblog_graphql_graphiql',
-      'nelmio_api_doc_index',
+        // API documentation
+        'overblog_graphql_graphiql',
+        'nelmio_api_doc_index',
 
-      // Account confirmation
-      'account_confirm_email',
-      'account_confirm_new_email',
+        // Account confirmation
+        'account_confirm_email',
+        'account_confirm_new_email',
 
-      // Registration
-      'capco_app_api_users_postuser',
+        // Registration
+        'capco_app_api_users_postuser',
 
-      // Password reset
-      'fos_user_resetting_request',
-      'fos_user_resetting_reset',
-      'fos_user_resetting_send_email',
-      'fos_user_resetting_check_email',
+        // Password reset
+        'fos_user_resetting_request',
+        'fos_user_resetting_reset',
+        'fos_user_resetting_send_email',
+        'fos_user_resetting_check_email',
     ];
     protected $manager;
     protected $tokenStorage;
     protected $templating;
 
-    public function __construct(Manager $manager, TokenStorageInterface $tokenStorage, EngineInterface $templating)
-    {
+    public function __construct(
+        Manager $manager,
+        TokenStorageInterface $tokenStorage,
+        EngineInterface $templating
+    ) {
         $this->manager = $manager;
         $this->tokenStorage = $tokenStorage;
         $this->templating = $templating;
@@ -82,7 +86,7 @@ class ShieldListener
         }
 
         $response = new Response(
-          $this->templating->render('CapcoAppBundle:Default:shield.html.twig')
+            $this->templating->render('CapcoAppBundle:Default:shield.html.twig')
         );
         $event->setResponse($response);
     }

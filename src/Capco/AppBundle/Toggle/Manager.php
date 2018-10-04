@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Toggle;
 
 use Qandidate\Toggle\ContextFactory;
@@ -39,6 +38,7 @@ class Manager
         'server_side_rendering',
         'zipcode_at_register',
         'indexation',
+        'login_openid',
     ];
 
     protected $context;

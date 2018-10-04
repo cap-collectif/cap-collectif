@@ -36,7 +36,7 @@ class SimplePreAuthenticatorUserProvider implements UserProviderInterface
         return $this->getCurrentProvider()->supportsClass($class);
     }
 
-    private function getCurrentProvider()
+    private function getCurrentProvider(): ?UserProviderInterface
     {
         if ($this->toggleManager->isActive('login_saml')) {
             return $this->samlProvider;

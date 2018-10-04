@@ -14,7 +14,9 @@ type Props = {
   className: ?string,
   style: ?Object,
   loginWithMonCompteParis: boolean,
+  loginWithOpenId: boolean,
 };
+
 export class LoginButton extends React.Component<Props> {
   static defaultProps = {
     bsStyle: 'default',
@@ -23,7 +25,15 @@ export class LoginButton extends React.Component<Props> {
   };
 
   render() {
-    const { dispatch, loginWithMonCompteParis, style, bsStyle, className } = this.props;
+    const {
+      dispatch,
+      loginWithMonCompteParis,
+      loginWithOpenId,
+      style,
+      bsStyle,
+      className,
+    } = this.props;
+
     return (
       <span style={style}>
         <Button
@@ -39,6 +49,9 @@ export class LoginButton extends React.Component<Props> {
                 '_blank',
                 `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`,
               );
+            }
+            if (loginWithOpenId) {
+              window.location.href = `/login/openid?_destination=${window && window.location.href}`;
             } else {
               dispatch(showLoginModal());
             }
@@ -54,6 +67,7 @@ export class LoginButton extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   loginWithMonCompteParis: state.default.features.login_paris,
+  loginWithOpenId: state.default.features.login_openid,
 });
 
 const connector = connect(mapStateToProps);

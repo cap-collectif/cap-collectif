@@ -15,6 +15,7 @@ type Props = {
   showRegistrationButton: boolean,
   openRegistrationModal: Function,
   loginWithMonCompteParis?: boolean,
+  loginWithOpenId?: boolean,
 };
 
 export class LoginOverlay extends React.Component<Props> {
@@ -32,6 +33,7 @@ export class LoginOverlay extends React.Component<Props> {
       isLoginOrRegistrationModalOpen,
       openRegistrationModal,
       loginWithMonCompteParis,
+      loginWithOpenId,
     } = this.props;
 
     if (!enabled || user) {
@@ -44,7 +46,8 @@ export class LoginOverlay extends React.Component<Props> {
           <FormattedMessage id="vote.popover.body" />
         </p>
         {showRegistrationButton &&
-          !loginWithMonCompteParis && (
+          !loginWithMonCompteParis &&
+          !loginWithOpenId && (
             <p>
               <Button onClick={openRegistrationModal} className="center-block btn-block">
                 {<FormattedMessage id="global.registration" />}
@@ -77,6 +80,7 @@ const mapStateToProps = (state: State) => ({
   isLoginOrRegistrationModalOpen:
     state.user.showLoginModal || state.user.showRegistrationModal || false,
   loginWithMonCompteParis: state.default.features.login_paris,
+  loginWithOpenId: state.default.features.login_openid,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   openRegistrationModal: () => {

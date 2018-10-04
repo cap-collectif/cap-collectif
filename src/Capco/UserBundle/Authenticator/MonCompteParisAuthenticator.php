@@ -55,7 +55,6 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         $this->openAmCaller->setCookie($cookieValue);
         try {
             $parisId = $this->openAmCaller->getUid();
-            $isAlreadyAuthenticated = true;
         } catch (\RuntimeException $e) {
             $this->logger->critical('Failed to get uuid from cookie !', ['cookie' => $cookieValue]);
 
@@ -63,9 +62,7 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         }
         $this->logger->info('Creating Paris token for parisId: {uuid}', ['uuid' => $parisId]);
 
-        $token = new ParisToken($parisId);
-
-        return $token;
+        return new ParisToken($parisId);
     }
 
     public function authenticateToken(

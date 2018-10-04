@@ -2,25 +2,26 @@
 namespace Capco\UserBundle\MonCompteParis;
 
 use Http\Client\HttpClient;
+use Psr\Log\LoggerInterface;
 
 class OpenAmClient
 {
-    const COOKIE_NAME = 'mcpAuth'; // Iplanetdirectorypro in test env
-    const COOKIE_DOMAIN = '.paris.fr';
-    const API_URL = 'https://moncompte.paris.fr/v69/json/';
-    const API_INFORMATIONS_URL = 'https://moncompte.paris.fr/moncompte/rest/banner/api/1/informations';
+    public const COOKIE_NAME = 'mcpAuth'; // Iplanetdirectorypro in test env
+    public const COOKIE_DOMAIN = '.paris.fr';
+    public const API_URL = 'https://moncompte.paris.fr/v69/json';
+    public const API_INFORMATIONS_URL = 'https://moncompte.paris.fr/moncompte/rest/banner/api/1/informations';
 
-    protected $cookie = null;
+    protected $cookie;
     protected $client;
     protected $logger;
 
-    public function __construct(HttpClient $client, $logger)
+    public function __construct(HttpClient $client, LoggerInterface $logger)
     {
         $this->client = $client;
         $this->logger = $logger;
     }
 
-    public function setCookie(string $cookie)
+    public function setCookie(string $cookie): void
     {
         $this->cookie = $cookie;
     }
@@ -28,7 +29,7 @@ class OpenAmClient
     public function getUid(): string
     {
         $response = $this->client->post(
-            self::API_URL . 'sessions/' . $this->cookie . '?_action=validate',
+            sprintf('%s/sessions/%s?_action=validate', self::API_URL, $this->cookie),
             ['content-type' => 'application/json'],
             '{}'
         );
@@ -50,7 +51,7 @@ class OpenAmClient
     public function logoutUser(): void
     {
         $response = $this->client->post(
-            self::API_URL . 'sessions/?_action=logout',
+            sprintf('%s/sessions/?_action=logout', self::API_URL),
             ['content-type' => 'application/json', 'mcpAuth' => $this->cookie],
             '{}'
         );

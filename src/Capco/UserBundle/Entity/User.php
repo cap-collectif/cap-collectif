@@ -39,6 +39,8 @@ class User extends BaseUser
 
     protected $samlId;
     protected $parisId;
+    protected $openId;
+    protected $openIdAccessToken;
     protected $id;
 
     protected $locked = false;
@@ -345,6 +347,30 @@ class User extends BaseUser
     public function getParisId(): ?string
     {
         return $this->parisId;
+    }
+
+    public function setOpenId(?string $openId): self
+    {
+        $this->openId = $openId;
+
+        return $this;
+    }
+
+    public function getOpenId(): ?string
+    {
+        return $this->openId;
+    }
+
+    public function setOpenIdAccessToken(string $accessToken): self
+    {
+        $this->openIdAccessToken = $accessToken;
+
+        return $this;
+    }
+
+    public function getOpenIdAccessToken(): ?string
+    {
+        return $this->openIdAccessToken;
     }
 
     // used as a lifecycleCallback

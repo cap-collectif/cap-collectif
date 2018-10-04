@@ -43,6 +43,9 @@
         <field name="google_id" column="google_id" type="string" length="255" nullable="true" />
         <field name="google_access_token" column="google_access_token" type="string" length="255" nullable="true" />
 
+        <field name="openId" column="openid_id" type="string" length="255" nullable="true" />
+        <field name="openIdAccessToken" column="openid_access_token" type="string" length="255" nullable="true" />
+
         <field name="linkedInUrl" column="linked_in_url" type="string" length="255" nullable="true" />
 
         <field name="twitter_id" column="twitter_id" type="string" length="255" nullable="true" />

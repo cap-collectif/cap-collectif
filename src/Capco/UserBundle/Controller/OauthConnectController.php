@@ -17,6 +17,7 @@ class OauthConnectController extends ConnectController
         'facebook' => ['login_facebook'],
         'google' => ['login_gplus'],
         'twitter' => ['login_twitter'],
+        'openid' => ['login_openid'],
     ];
 
     public function getFeaturesForService($service)
@@ -35,8 +36,7 @@ class OauthConnectController extends ConnectController
     public function connectAction(Request $request)
     {
         $connect = $this->container->getParameter('hwi_oauth.connect');
-        $hasUser = $this->container
-            ->get('security.token_storage')
+        $hasUser = $this->container->get('security.token_storage')
             ->getToken()
             ->getUser()
             ->isGranted('IS_AUTHENTICATED_REMEMBERED');
@@ -75,9 +75,11 @@ class OauthConnectController extends ConnectController
     public function connectServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->container
-                ->get('translator')
-                ->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
+            $message = $this->container->get('translator')->trans(
+                'error.feature_not_enabled',
+                [],
+                'CapcoAppBundle'
+            );
             throw new NotFoundHttpException($message);
         }
 
@@ -95,9 +97,11 @@ class OauthConnectController extends ConnectController
     public function redirectToServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->container
-                ->get('translator')
-                ->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
+            $message = $this->container->get('translator')->trans(
+                'error.feature_not_enabled',
+                [],
+                'CapcoAppBundle'
+            );
             throw new NotFoundHttpException($message);
         }
 

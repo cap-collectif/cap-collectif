@@ -46,6 +46,11 @@ parameters:
   locales: ['en-GB', 'fr-FR', 'es-ES']
   google_maps_key_server: '***REMOVED***'
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
+  openid_client_id: '%env(SYMFONY_OPENID_CLIENT_ID)%'
+  openid_secret: '%env(SYMFONY_OPENID_SECRET)%'
+  openid_authorization_url: '%env(SYMFONY_OPENID_AUTHORIZATION_URL)%'
+  openid_access_token_url: '%env(SYMFONY_OPENID_ACCESS_TOKEN_URL)%'
+  openid_userinfo_url: '%env(SYMFONY_OPENID_USERINFO_URL)%'
 
   # Default values
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
@@ -82,6 +87,11 @@ parameters:
   env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
   env(SYMFONY_SENTRY_DSN): ~
+  env(SYMFONY_OPENID_CLIENT_ID): ~
+  env(SYMFONY_OPENID_SECRET): ~
+  env(SYMFONY_OPENID_AUTHORIZATION_URL): ~
+  env(SYMFONY_OPENID_ACCESS_TOKEN_URL): ~
+  env(SYMFONY_OPENID_USERINFO_URL): ~
 
 framework:
   secret: '%secret%'
@@ -406,6 +416,14 @@ hwi_oauth:
         approval_prompt: auto
         display: page
         login_hint: email address
+    openid:
+      class: Capco\UserBundle\OpenID\OpenIDResourceOwner
+      type: oauth2
+      client_id: '%openid_client_id%'
+      client_secret: '%openid_secret%'
+      access_token_url: '%openid_access_token_url%'
+      authorization_url: '%openid_authorization_url%'
+      infos_url: '%openid_userinfo_url%'
 
 qandidate_toggle:
   persistence: redis

@@ -7,36 +7,30 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class OauthUserProvider extends FOSUBUserProvider
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function connect(UserInterface $user, UserResponseInterface $response)
+    public function connect(UserInterface $user, UserResponseInterface $response): void
     {
         $email = $response->getEmail() ?: $response->getUsername();
 
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
         $setter = 'set' . ucfirst($service);
-        $setter_id = $setter . 'Id';
-        $setter_token = $setter . 'AccessToken';
+        $setterId = $service === 'openid' ? $setter : $setter . 'Id';
+        $setterToken = $setter . 'AccessToken';
 
         //we "disconnect" previously connected users
         if (null !== $previousUser = $this->userManager->findUserByEmail($email)) {
-            $previousUser->{$setter_id}(null);
-            $previousUser->{$setter_token}(null);
+            $previousUser->$setterId(null);
+            $previousUser->$setterToken(null);
             $this->userManager->updateUser($previousUser);
         }
 
         //we connect current user
-        $user->{$setter_id}($response->getUsername());
-        $user->{$setter_token}($response->getAccessToken());
+        $user->$setterId($response->getUsername());
+        $user->$setterToken($response->getAccessToken());
         $this->userManager->updateUser($user);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function loadUserByOAuthUserResponse(UserResponseInterface $response)
+    public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
     {
         $email = $response->getEmail() ?: 'twitter_' . $response->getUsername();
         $username = $response->getNickname()
@@ -53,10 +47,16 @@ class OauthUserProvider extends FOSUBUserProvider
 
         $service = $response->getResourceOwner()->getName();
         $setter = 'set' . ucfirst($service);
-        $setter_id = $setter . 'Id';
-        $setter_token = $setter . 'AccessToken';
-        $user->{$setter_id}($response->getUsername());
-        $user->{$setter_token}($response->getAccessToken());
+        $setterId = $service === 'openid' ? $setter : $setter . 'Id';
+        $setterToken = $setter . 'AccessToken';
+
+        if ($service === 'openid') {
+            $user->setUsername($username);
+            $user->setEmail($email);
+        }
+
+        $user->$setterId($response->getUsername());
+        $user->$setterToken($response->getAccessToken());
 
         $this->userManager->updateUser($user);
 

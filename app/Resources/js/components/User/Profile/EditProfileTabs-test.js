@@ -22,6 +22,15 @@ describe('<EditProfileTabs />', () => {
     },
   };
 
+  const propsWithOpenIdAndNotProfiles = {
+    features: {
+      ...features,
+      profiles: false,
+      login_paris: false,
+      login_openid: true,
+    },
+  };
+
   const viewer = {
     username: 'user',
     displayName: 'iAmAUser',
@@ -36,8 +45,13 @@ describe('<EditProfileTabs />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render all tabs except profile, password and account', () => {
+  it('should render all tabs except profile, password and account (Paris)', () => {
     const wrapper = shallow(<EditProfileTabs viewer={viewer} {...propsWithParisAndNotProfiles} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render all tabs except profile, password and account (OpenID)', () => {
+    const wrapper = shallow(<EditProfileTabs viewer={viewer} {...propsWithOpenIdAndNotProfiles} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

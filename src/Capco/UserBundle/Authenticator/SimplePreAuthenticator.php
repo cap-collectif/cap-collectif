@@ -13,8 +13,11 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
     protected $samlAuthenticator;
     protected $parisAuthenticator;
 
-    public function __construct(Manager $toggleManager, $samlAuthenticator, $parisAuthenticator)
-    {
+    public function __construct(
+        Manager $toggleManager,
+        SamlAuthenticator $samlAuthenticator,
+        MonCompteParisAuthenticator $parisAuthenticator
+    ) {
         $this->toggleManager = $toggleManager;
         $this->samlAuthenticator = $samlAuthenticator;
         $this->parisAuthenticator = $parisAuthenticator;
@@ -49,7 +52,7 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
         return $authenticator ? $authenticator->supportsToken($token, $providerKey) : false;
     }
 
-    private function getCurrentAuthenticator()
+    private function getCurrentAuthenticator(): ?SimplePreAuthenticatorInterface
     {
         if ($this->toggleManager->isActive('login_saml')) {
             return $this->samlAuthenticator;

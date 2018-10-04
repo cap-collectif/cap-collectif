@@ -24,6 +24,7 @@ export type FeatureToggles = {
   login_gplus: boolean,
   login_saml: boolean,
   login_paris: boolean,
+  login_openid: boolean,
   members_list: boolean,
   newsletter: boolean,
   profiles: boolean,

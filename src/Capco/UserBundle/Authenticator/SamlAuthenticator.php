@@ -31,7 +31,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         $this->logger = $logger;
     }
 
-    public function getAuthenticationAttribute()
+    public function getAuthenticationAttribute(): string
     {
         if ('oda' === $this->samlIdp) {
             return 'oda_id';

@@ -69,6 +69,7 @@ security:
         resource_owners:
           facebook: /login/check-facebook
           google: /login/check-google
+          openid: /login/check-openid
         login_path: /
         oauth_user_provider:
           service: capco.oauth.provider

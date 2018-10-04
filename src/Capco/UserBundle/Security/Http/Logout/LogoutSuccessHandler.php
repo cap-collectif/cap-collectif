@@ -6,6 +6,7 @@ use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use SimpleSAML\Auth\Simple;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
@@ -45,16 +46,17 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 
         $response = new RedirectResponse($returnTo);
 
-        if ($this->toggleManager->isActive('login_paris')) {
-            if ($request->cookies->has(OpenAmClient::COOKIE_NAME)) {
-                $this->client->setCookie($request->cookies->get(OpenAmClient::COOKIE_NAME));
-                $this->client->logoutUser();
-                $response->headers->clearCookie(
-                    OpenAmClient::COOKIE_NAME,
-                    '/',
-                    OpenAmClient::COOKIE_DOMAIN
-                );
-            }
+        if (
+            $this->toggleManager->isActive('login_paris') &&
+            $request->cookies->has(OpenAmClient::COOKIE_NAME)
+        ) {
+            $this->client->setCookie($request->cookies->get(OpenAmClient::COOKIE_NAME));
+            $this->client->logoutUser();
+            $response->headers->clearCookie(
+                OpenAmClient::COOKIE_NAME,
+                '/',
+                OpenAmClient::COOKIE_DOMAIN
+            );
         }
 
         return $response;

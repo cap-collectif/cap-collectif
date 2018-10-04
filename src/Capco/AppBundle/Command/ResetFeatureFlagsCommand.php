@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -61,6 +60,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->deactivate('restrict_registration_via_email_domain');
         $toggleManager->deactivate('login_paris');
         $toggleManager->activate('indexation');
+        $toggleManager->deactivate('login_openid');
 
         if ($this->getContainer()->getParameter('kernel.environment') == 'prod') {
             $toggleManager->deactivate('registration');
