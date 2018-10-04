@@ -498,14 +498,12 @@ EOF;
             'variables' => [],
         ])->toArray();
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
-
-        // Prepare the export file.
-        $this->writer = WriterFactory::create(Type::CSV);
-        $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
-
         if ($totalCount > 0) {
             $output->writeln('<info>Importing ' . $totalCount . ' proposals...</info>');
-
+            $this->writer = WriterFactory::create(Type::CSV);
+            $this->writer->openToFile(
+                sprintf('%s/web/export/%s', $this->projectRootDir, $fileName)
+            );
             $this->headersMap = $this->createHeadersMap(self::SHEET_HEADERS, $proposals);
             $this->writer->addRow(
                 array_merge(['contribution_type'], array_values($this->headersMap))
@@ -528,10 +526,9 @@ EOF;
             );
 
             $progress->clear();
-        } else {
-            // Add the header in CSV.
-            $this->writer->addRow(array_merge(['contribution_type'], self::SHEET_HEADERS));
 
+            $this->writer->close();
+        } else {
             $output->writeln(
                 "<info>No proposal found for step '" .
                     $step->getTitle() .
@@ -540,8 +537,6 @@ EOF;
                     "'</info>"
             );
         }
-
-        $this->writer->close();
 
         $output->writeln('The export file "' . $fileName . '" has been created.');
     }

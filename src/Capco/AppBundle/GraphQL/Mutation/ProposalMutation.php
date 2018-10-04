@@ -377,6 +377,8 @@ class ProposalMutation implements ContainerAwareInterface
 
         $values = $input->getRawArguments();
         $proposal = $proposalRepo->find($values['id']);
+        // Save the previous draft status to send the good notif.
+        $wasDraft = $proposal->isDraft();
 
         if (!$proposal) {
             $error = sprintf('Unknown proposal with id "%s"', $values['id']);
@@ -435,8 +437,14 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setUpdateAuthor($user);
         $em->flush();
 
+        if ($wasDraft && !$proposal->isDraft()) {
+            $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_CREATE;
+        } else {
+            $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE;
+        }
+
         $this->container->get('swarrot.publisher')->publish(
-            CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE,
+            $proposalQueue,
             new Message(json_encode(['proposalId' => $proposal->getId()]))
         );
 
