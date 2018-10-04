@@ -64,10 +64,13 @@ export class ReplyModalLink extends React.Component<Props, State> {
           {/* $FlowFixMe $refType */}
           <UnpublishedLabel publishable={reply} />
           <div>
-            <Button className="mr-10" bsStyle="warning" onClick={() => this.showModal('edit')}>
+            <Button
+              className="mr-10 reply__update-btn"
+              bsStyle="warning"
+              onClick={() => this.showModal('edit')}>
               Update
             </Button>
-            <Button bsStyle="danger" onClick={() => this.showModal('delete')}>
+            <Button bsStyle="danger reply__delete-btn" onClick={() => this.showModal('delete')}>
               Delete
             </Button>
           </div>

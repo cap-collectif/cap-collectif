@@ -187,12 +187,14 @@ export const renderResponses = ({
   questions,
   responses,
   intl,
+  form,
   change,
   disabled,
 }: FieldArrayProps & {
   questions: Questions,
   responses: ResponsesInReduxForm,
   change: (field: string, value: any) => void,
+  form: string,
   intl: IntlShape,
   disabled: boolean,
 }) => {
@@ -236,7 +238,7 @@ export const renderResponses = ({
               <ProposalPrivateField key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
-                  id={member}
+                  id={`${form}-${member}`}
                   type="medias"
                   component={component}
                   help={field.helpText}
@@ -253,7 +255,7 @@ export const renderResponses = ({
               <ProposalPrivateField key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
-                  id={member}
+                  id={`${form}-${member}`}
                   type={inputType}
                   component={component}
                   help={field.helpText}
@@ -293,7 +295,7 @@ export const renderResponses = ({
                   <ProposalPrivateField key={field.id} show={field.private}>
                     <div key={`${member}-container`}>
                       <MultipleChoiceRadio
-                        id={member}
+                        id={`${form}-${member}`}
                         name={member}
                         description={field.description}
                         helpText={field.helpText}
@@ -314,7 +316,7 @@ export const renderResponses = ({
               <ProposalPrivateField key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
-                  id={member}
+                  id={`${form}-${member}`}
                   type={inputType}
                   component={component}
                   description={field.description}

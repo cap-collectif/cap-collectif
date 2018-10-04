@@ -73,7 +73,6 @@ Scenario: Logged in user wants to add a reply to a closed questionnaire step
 Scenario: Logged in user wants to add another reply when multiple replies is allowed
   Given I am logged in as admin
   When I go to a questionnaire step
-  And I fill the questionnaire form
   And I submit my reply
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my reply
@@ -93,20 +92,24 @@ Scenario: Logged in user wants to see the list of his replies
   When I go to a questionnaire step
   Then I should see my reply
 
+## Update
+
 @javascript
-Scenario: Logged in user wants to see his reply
+Scenario: Logged in user wants to update a reply
   Given I am logged in as admin
   When I go to a questionnaire step
-  And I click on my first reply
-  Then I should see my first reply
+  And I click on the update reply button
+  And I update the questionnaire form
+  And I submit my reply
+  Then I should see "reply.request.create.success" in the "#global-alert-box" element
+  And I should see my reply
 
 ## Deletion
 
-@javascript @database
+@javascript @database 
 Scenario: Logged in user wants to remove a reply
   Given I am logged in as admin
   When I go to a questionnaire step
-  And I click on my first reply
   And I click the delete reply button
   And I confirm reply deletion
   Then I should see "reply.request.delete.success" in the "#global-alert-box" element

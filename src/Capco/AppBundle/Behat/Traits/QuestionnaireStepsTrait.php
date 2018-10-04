@@ -193,6 +193,24 @@ trait QuestionnaireStepsTrait
     {
         $this->assertElementContainsText('.ranking__choice-box__choices', '1. Choix');
     }
+    // ************************************************* Update *************************************************
+
+    /**
+     * @When I update the questionnaire form
+     */
+    public function iUpdateTheQuestionnaireForm()
+    {
+        $this->fillUpdateQuestionnaireForm();
+    }
+
+    /**
+     * @Then I click on the update reply button
+     */
+    public function iClickOnTheUpdateReplyButton()
+    {
+        $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyButton();
+        $this->iWait(1);
+    }
 
     // ************************************************* Deletion *************************************************
 
@@ -246,9 +264,9 @@ trait QuestionnaireStepsTrait
         $this->assertElementContainsText($replyModalSelector, 'reply.show.link');
     }
 
-    protected function fillQuestionnaireForm($edition = false)
+    protected function fillQuestionnaireForm($edition = false, $element = 'questionnaire form')
     {
-        $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
+        $this->iShouldSeeElementOnPage($element, 'questionnaire page');
         if (!$edition) {
             $this->fillField(
                 'responses[1]',
@@ -261,5 +279,14 @@ trait QuestionnaireStepsTrait
             return;
         }
         $this->fillField('responses[1]', 'En fait c\'est nul, je ne veux pas des JO à Paris');
+    }
+
+    protected function fillUpdateQuestionnaireForm()
+    {
+        $this->iShouldSeeElementOnPage('user reply modal', 'questionnaire page');
+        $this->getSession()
+            ->getPage('questionnaire page')
+            ->find('css', '.reply__modal--show .has-success input')
+            ->setValue('En fait c\'est nul, je ne veux pas des JO à Paris');
     }
 }

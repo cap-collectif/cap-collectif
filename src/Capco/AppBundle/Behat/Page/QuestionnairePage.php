@@ -23,8 +23,10 @@ class QuestionnairePage extends Page
         'user first reply link' => '#user-replies .reply:first-child',
         'reply buttons' => '.reply__buttons',
         'delete reply button' => '.reply__delete-btn',
+        'update reply button' => '.reply__update-btn',
         'confirm delete reply button' => '.reply__confirm-delete-btn',
-        'first ranking choice right arrow' => '.ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right',
+        'first ranking choice right arrow' =>
+            '.ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right',
     ];
 
     public function submitReply()
@@ -60,6 +62,11 @@ class QuestionnairePage extends Page
     public function getDeleteReplyButtonSelector()
     {
         return $this->getSelector('delete reply button');
+    }
+
+    public function clickUpdateReplyButton()
+    {
+        $this->getElement('update reply button')->click();
     }
 
     public function clickDeleteReplyButton()

@@ -194,6 +194,7 @@ export class ReplyForm extends React.Component<Props> {
       submitting,
       pristine,
       invalid,
+      form,
       valid,
       change,
       submitSucceeded,
@@ -214,6 +215,7 @@ export class ReplyForm extends React.Component<Props> {
             name="responses"
             change={change}
             responses={responses}
+            form={form}
             component={renderResponses}
             questions={questionnaire.questions}
             intl={intl}
@@ -225,7 +227,7 @@ export class ReplyForm extends React.Component<Props> {
               <Field
                 type="checkbox"
                 name="private"
-                id="reply-private"
+                id={`${form}reply-private`}
                 component={renderComponent}
                 children={<FormattedMessage id="reply.form.private" />}
                 disabled={disabled}
@@ -256,10 +258,9 @@ export class ReplyForm extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
-  responses: formValueSelector(props.reply ? `${formName}-${props.reply.id}` : formName)(
-    state,
-    'responses',
-  ),
+  responses: formValueSelector(
+    props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`,
+  )(state, 'responses'),
   initialValues: {
     responses: formatInitialResponsesValues(
       props.questionnaire.questions,
@@ -268,7 +269,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
     private: props.reply ? props.reply.private : false,
   },
   user: state.user.user,
-  form: props.reply ? `${formName}-${props.reply.id}` : formName,
+  form: props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`,
 });
 
 const form = reduxForm({

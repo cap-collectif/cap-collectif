@@ -324,6 +324,56 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       <FieldArray
         change={[MockFunction]}
         component={[Function]}
+        form={
+          Object {
+            "addressHelpText": "Address Help",
+            "categories": Array [
+              Object {
+                "id": "1",
+                "name": "category-1",
+              },
+              Object {
+                "id": "2",
+                "name": "category-2",
+              },
+            ],
+            "categoryHelpText": "Category Help",
+            "categoryMandatory": true,
+            "description": "Description",
+            "descriptionHelpText": "Description Help",
+            "districtHelpText": "District Help",
+            "districtMandatory": true,
+            "districts": Array [],
+            "id": "form1",
+            "illustrationHelpText": "Illustration Help",
+            "proposalInAZoneRequired": true,
+            "questions": Array [
+              Object {
+                "choices": Array [],
+                "description": null,
+                "helpText": "Help 1",
+                "id": "1",
+                "isOtherAllowed": false,
+                "private": false,
+                "required": true,
+                "title": "title",
+                "type": "text",
+                "validationRule": null,
+              },
+            ],
+            "step": Object {
+              "id": "step1",
+            },
+            "summaryHelpText": "Summary Help",
+            "themeHelpText": "Theme Help",
+            "themeMandatory": true,
+            "titleHelpText": "Title help",
+            "usingAddress": true,
+            "usingCategories": true,
+            "usingDistrict": true,
+            "usingThemes": true,
+          }
+        }
         intl={
           Object {
             "formatDate": [Function],
