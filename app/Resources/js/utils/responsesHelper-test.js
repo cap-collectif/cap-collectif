@@ -46,7 +46,7 @@ describe('validateResponses', () => {
 
   it('Should return no errors with a correct negative float number', () => {
     const questions = [numberQuestion];
-    const responses = [{ ...numberReponse, value: '-4242.1212' }];
+    const responses = [{ ...numberReponse, value: '-4242,1212' }];
     const value = validateResponses(questions, responses, className, intl);
     expect(value).toEqual({ responses: [undefined] });
   });

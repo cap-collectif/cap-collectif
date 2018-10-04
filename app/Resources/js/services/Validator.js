@@ -10,7 +10,7 @@ export const isUrl = (value: ?string): boolean => {
 };
 
 export const checkOnlyNumbers = (input: string): boolean => {
-  const regexS = /(^-?(\d*(\.|,)?)?\d*)/gm;
+  const regexS = /(^-?(\d*,?)?\d*)/gm;
   const regex = new RegExp(regexS);
   const results = regex.exec(input);
   if (input === '-') {

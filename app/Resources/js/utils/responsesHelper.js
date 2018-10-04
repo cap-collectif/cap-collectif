@@ -108,10 +108,9 @@ export const formatSubmitResponses = (
         value: JSON.stringify(res.value),
       };
     } else if (questionType === 'number') {
-      const value = Number(res.value) ? Number(res.value) : 0;
       return {
         question,
-        value,
+        value: res.value,
       };
     }
     return { value: res.value, question };
