@@ -240,6 +240,7 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     type="editor"
   />
   <FieldArray
+    change={[MockFunction]}
     component={[Function]}
     intl={
       Object {
@@ -273,6 +274,7 @@ exports[`<ProposalForm /> should render a create form 1`] = `
         },
       ]
     }
+    responses={Array []}
   />
   <Field
     component={[Function]}
@@ -541,6 +543,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     type="editor"
   />
   <FieldArray
+    change={[MockFunction]}
     component={[Function]}
     intl={
       Object {
@@ -574,6 +577,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
         },
       ]
     }
+    responses={Array []}
   />
   <Field
     component={[Function]}
