@@ -27,7 +27,7 @@ final class UpdateReplyPayloadType extends ObjectType implements GeneratedTypeIn
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'Update a reply',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
