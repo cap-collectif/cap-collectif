@@ -2,14 +2,7 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import {
-  type FormProps,
-  SubmissionError,
-  reduxForm,
-  Field,
-  FieldArray,
-  formValueSelector,
-} from 'redux-form';
+import { type FormProps, SubmissionError, reduxForm, Field, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ListGroup, ListGroupItem, Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import Fetcher from '../../../services/Fetcher';
@@ -53,7 +46,6 @@ type Props = FormProps &
     +features: FeatureToggles,
     +intl: IntlShape,
     +isSuperAdmin: boolean,
-    +responses: ResponsesInReduxForm,
   };
 
 const formName = 'proposal-admin-edit';
@@ -171,8 +163,6 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
       themes,
       handleSubmit,
       intl,
-      change,
-      responses,
     } = this.props;
     const form = proposal.form;
     const categories = proposal.form.categories;
@@ -426,8 +416,6 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               name="responses"
               component={renderResponses}
               questions={form.questions}
-              change={change}
-              responses={responses}
             />
             <Field
               id="proposal_media"
@@ -507,7 +495,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
     responses: formatInitialResponsesValues(proposal.form.questions, proposal.responses),
     addressText: proposal.formattedAddress,
   },
-  responses: formValueSelector(formName)(state, 'responses'),
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
