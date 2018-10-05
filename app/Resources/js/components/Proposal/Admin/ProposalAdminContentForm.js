@@ -425,7 +425,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
               intl={intl}
               name="responses"
               component={renderResponses}
-              form={form}
+              form={formName}
               questions={form.questions}
               change={change}
               responses={responses}

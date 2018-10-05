@@ -199,7 +199,6 @@ export const renderResponses = ({
   disabled: boolean,
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
-
   return (
     <div>
       {fields.map((member, index) => {
