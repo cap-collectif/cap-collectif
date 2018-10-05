@@ -36,20 +36,16 @@ class UpdateReplyMutation implements MutationInterface
         FormFactory $formFactory,
         ReplyRepository $replyRepo,
         RedisStorageHelper $redisStorageHelper,
-        ResponsesFormatter $responsesFormatter,
-        LoggerInterface $logger,
-        UserNotifier $userNotifier
+        ResponsesFormatter $responsesFormatter
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->replyRepo = $replyRepo;
         $this->redisStorageHelper = $redisStorageHelper;
         $this->responsesFormatter = $responsesFormatter;
-        $this->logger = $logger;
-        $this->userNotifier = $userNotifier;
     }
 
-    public function __invoke(Argument $input, User $user)
+    public function __invoke(Argument $input, User $user): array
     {
         $values = $input->getRawArguments();
         $reply = $this->replyRepo->find($values['replyId']);

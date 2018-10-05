@@ -4,3 +4,4 @@ UpdateReplyPayload:
     fields:
       reply:
         type: 'Reply'
+        description: 'Update a reply'
