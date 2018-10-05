@@ -31,25 +31,42 @@ class ProposalResponse extends React.PureComponent<Props> {
     if ((!response.value || response.value.length === 0) && response.question.type !== 'medias') {
       return null;
     }
-    if (response.question.type === 'medias') {
-      value = (
-        <div>
-          <h3 className="h3">{response.question.title}</h3>
-          {/* $FlowFixMe */}
-          <ProposalMediaResponse medias={response.medias} />
-        </div>
-      );
-    } else {
-      value = (
-        <div>
-          <h3 className="h3">{response.question.title}</h3>
-          {this.isHTML() ? (
-            <div dangerouslySetInnerHTML={{ __html: response.value }} />
-          ) : (
-            <p>{response.value}</p>
-          )}
-        </div>
-      );
+
+    switch (response.question.type) {
+      case 'medias':
+        value = (
+          <div>
+            <h3 className="h3">{response.question.title}</h3>
+            {/* $FlowFixMe */}
+            <ProposalMediaResponse medias={response.medias} />
+          </div>
+        );
+        break;
+
+      case 'radio':
+      case 'button': {
+        const radioLabels = JSON.parse(response.value || '');
+        const radioValue = radioLabels.labels.map(label => `${label} `);
+        value = (
+          <div>
+            <h3 className="h3">{response.question.title}</h3>
+            <p>{radioValue}</p>
+          </div>
+        );
+        break;
+      }
+
+      default:
+        value = (
+          <div>
+            <h3 className="h3">{response.question.title}</h3>
+            {this.isHTML() ? (
+              <div dangerouslySetInnerHTML={{ __html: response.value }} />
+            ) : (
+              <p>{response.value}</p>
+            )}
+          </div>
+        );
     }
 
     return (

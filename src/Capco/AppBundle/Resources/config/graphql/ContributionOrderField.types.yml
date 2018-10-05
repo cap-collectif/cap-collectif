@@ -3,15 +3,15 @@ ContributionOrderField:
   config:
     description: 'Ordering options for contributions connections.'
     values:
-      POSITION:
-        value: 'POSITION'
-      RANDOM:
-        value: 'RANDOM'
-      PUBLISHED_AT:
-        value: 'PUBLISHED_AT'
-      POPULAR:
-        value: 'POPULAR'
       COMMENT_COUNT:
         value: 'COMMENT_COUNT'
+      POPULAR:
+        value: 'POPULAR'
+      POSITION:
+        value: 'POSITION'
+      PUBLISHED_AT:
+        value: 'PUBLISHED_AT'
+      RANDOM:
+        value: 'RANDOM'
       VOTE_COUNT:
         value: 'VOTE_COUNT'

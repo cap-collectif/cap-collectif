@@ -19,9 +19,9 @@ final class ReportingTypeType extends EnumType implements GeneratedTypeInterface
             return [
             'name' => 'ReportingType',
             'values' => [
-                'SEX' => [
-                    'name' => 'SEX',
-                    'value' => 0,
+                'ERROR' => [
+                    'name' => 'ERROR',
+                    'value' => 3,
                     'deprecationReason' => null,
                     'description' => null,
                 ],
@@ -31,21 +31,21 @@ final class ReportingTypeType extends EnumType implements GeneratedTypeInterface
                     'deprecationReason' => null,
                     'description' => null,
                 ],
-                'SPAM' => [
-                    'name' => 'SPAM',
-                    'value' => 2,
-                    'deprecationReason' => null,
-                    'description' => null,
-                ],
-                'ERROR' => [
-                    'name' => 'ERROR',
-                    'value' => 3,
-                    'deprecationReason' => null,
-                    'description' => null,
-                ],
                 'OFF_TOPIC' => [
                     'name' => 'OFF_TOPIC',
                     'value' => 4,
+                    'deprecationReason' => null,
+                    'description' => null,
+                ],
+                'SEX' => [
+                    'name' => 'SEX',
+                    'value' => 0,
+                    'deprecationReason' => null,
+                    'description' => null,
+                ],
+                'SPAM' => [
+                    'name' => 'SPAM',
+                    'value' => 2,
                     'deprecationReason' => null,
                     'description' => null,
                 ],

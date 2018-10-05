@@ -5,8 +5,6 @@ use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
 use Capco\AppBundle\Command\Utils\exportUtils;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
@@ -374,14 +372,13 @@ EOF;
     protected $infoResolver;
     protected $currentQuery;
     protected $currentData;
-    /** @var CollectStep $currentStep */
     protected $currentStep;
     protected $voteCursor;
     protected $proposalCursor;
     protected $commentCursor;
     protected $headersMap = [];
 
-    const PROPOSAL_HEADER_MAP = [
+    protected $proposalHeaderMap = [
         'proposal_id' => 'id',
         'proposal_reference' => 'reference',
         'proposal_title' => 'title',
@@ -406,8 +403,6 @@ EOF;
         'proposal_summary' => 'summary',
         'proposal_description' => 'bodyText',
     ];
-
-    protected $proposalHeaderMap = [];
 
     protected $currentProposalIndex;
     protected $logger;
@@ -478,7 +473,6 @@ EOF;
             );
         }
 
-        /** @var AbstractStep $step */
         foreach ($steps as $step) {
             if ($step->getProject()) {
                 $this->currentStep = $step;
@@ -491,13 +485,14 @@ EOF;
     protected function generateSheet(AbstractStep $step, OutputInterface $output): void
     {
         $fileName = $this->getFilename($step);
-        $this->proposalHeaderMap = self::PROPOSAL_HEADER_MAP;
+
         if (!isset($this->currentData['data']) && isset($this->currentData['error'])) {
             $this->logger->error('GraphQL Query Error: ' . $this->currentData['error']);
             $this->logger->info('GraphQL query: ' . json_encode($this->currentData));
         }
 
         $proposalsQuery = $this->getContributionsGraphQLQueryByProposalStep($this->currentStep);
+
         $proposals = $this->executor->execute(null, [
             'query' => $proposalsQuery,
             'variables' => [],
@@ -1116,14 +1111,11 @@ EOF;
         foreach (\array_reverse($questions) as $question) {
             $result = $this->insert($result, self::CUSTOM_QUESTIONS_HEADER_OFFSET, $question);
         }
-        /** @var Questionnaire $evaluationForm */
         if (
             $this->currentStep->getProposalForm() &&
             $evaluationForm = $this->currentStep->getProposalForm()->getEvaluationForm()
         ) {
-            $evaluationFormAsArray = $evaluationForm->getRealQuestions()->toArray();
-            /** @var AbstractQuestion $question */
-            foreach (\array_reverse($evaluationFormAsArray) as $question) {
+            foreach (\array_reverse($evaluationForm->getRealQuestions()->toArray()) as $question) {
                 $result = $this->insert(
                     $result,
                     self::CUSTOM_QUESTIONS_HEADER_OFFSET + \count($questions),

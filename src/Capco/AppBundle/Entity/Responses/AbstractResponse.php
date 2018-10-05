@@ -85,7 +85,7 @@ abstract class AbstractResponse
 
     abstract public function getType();
 
-    public function getProposal(): ?Proposal
+    public function getProposal()// : ?Proposal
     {
         return $this->proposal;
     }
@@ -104,12 +104,12 @@ abstract class AbstractResponse
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser()//: ?User
     {
         return $this->user;
     }
 
-    public function getQuestion(): ?AbstractQuestion
+    public function getQuestion()//: AbstractQuestion
     {
         return $this->question;
     }

@@ -1036,6 +1036,26 @@ final class UserType extends ObjectType implements GeneratedTypeInterface
                 'reports' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ReportConnection')),
                     'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserReportsResolver", array(0 => $value, 1 => $args)]);
