@@ -27,7 +27,7 @@ final class ReportingConnectionType extends ObjectType implements GeneratedTypeI
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'Identifies the total count of items in the connection.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
