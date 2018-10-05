@@ -201,7 +201,7 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
             question.jumps.length === 0 &&
             afterQuestion &&
             question.position > afterQuestion.position &&
-            question.position < firstLogicQuestion.position),
+            question.position < firstLogicQuestion.position)
       )
       .map(question => question.id);
     if (firstLogicQuestion && firstLogicQuestion.jumps) {
@@ -215,7 +215,7 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
     firstQuestionsIds = [firstLogicQuestion.id, ...filteredIds];
   } else {
     firstQuestionsIds = questions
-      .filter(question => afterQuestion === question)
+      .filter(question => (afterQuestion && question.position > afterQuestion.position))
       .map(question => question.id);
   }
 
@@ -237,6 +237,13 @@ export const getAvailableQuestionsIds = (questions: Questions, responses: Respon
     question => question.jumps && question.jumps.length > 0,
   );
   const firstLogicQuestionId = firstLogicQuestion ? firstLogicQuestion.id : null;
+  const questionIsADestination = [];
+  questions.map(question => {
+    question.jumps.map(jump => {
+      questionIsADestination.push(jump.destination.id);
+    });
+  });
+
   const filteredIds = questions
     .filter(
       question =>
@@ -244,7 +251,7 @@ export const getAvailableQuestionsIds = (questions: Questions, responses: Respon
         (question.jumps &&
           question.jumps.length === 0 &&
           firstLogicQuestion &&
-          question.position < firstLogicQuestion.position),
+          !questionIsADestination.includes(question.id))
     )
     .map(question => question.id);
 
