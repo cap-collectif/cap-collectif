@@ -716,7 +716,7 @@ type CollectStep implements Node & Step & ProposalStep {
   viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
 
   # The requirements to vote on this step.
-  requirements: RequirementConnection!
+  requirements(after: String, first: Int, before: String, last: Int): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -736,7 +736,7 @@ type CollectStep implements Node & Step & ProposalStep {
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  viewerProposalDrafts: ProposalConnection!
+  viewerProposalDrafts(after: String, first: Int, before: String, last: Int): ProposalConnection!
 }
 
 # A comment
@@ -1014,11 +1014,11 @@ input ContributionOrder {
 
 # Ordering options for contributions connections.
 enum ContributionOrderField {
-  POSITION
-  RANDOM
-  PUBLISHED_AT
-  POPULAR
   COMMENT_COUNT
+  POPULAR
+  POSITION
+  PUBLISHED_AT
+  RANDOM
   VOTE_COUNT
 }
 
@@ -2162,17 +2162,17 @@ type Project implements Node {
 
 # 4 possible values
 enum ProjectVisibility {
-  # visible for me only
-  ME
-
   # visible for group admin
   ADMIN
 
-  # visible for all
-  PUBLIC
-
   # the project is restricted to users groups
   CUSTOM
+
+  # visible for me only
+  ME
+
+  # visible for all
+  PUBLIC
 }
 
 # A budget contribution
@@ -2594,7 +2594,7 @@ interface ProposalStep {
   viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
 
   # The requirements to vote on this step.
-  requirements: RequirementConnection!
+  requirements(after: String, first: Int, before: String, last: Int): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -3106,11 +3106,11 @@ enum ReportingOrderField {
 
 # Type of reporting
 enum ReportingType {
-  SEX
-  OFF
-  SPAM
   ERROR
+  OFF
   OFF_TOPIC
+  SEX
+  SPAM
 }
 
 input RequestUserArchiveInput {
@@ -3351,7 +3351,7 @@ type SelectionStep implements Node & Step & ProposalStep {
   viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
 
   # The requirements to vote on this step.
-  requirements: RequirementConnection!
+  requirements(after: String, first: Int, before: String, last: Int): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -3606,9 +3606,9 @@ interface Step {
 
 # 3 possible values for a subscription.
 enum SubscriptionTypeValue {
-  MINIMAL
-  ESSENTIAL
   ALL
+  ESSENTIAL
+  MINIMAL
 }
 
 # A theme
@@ -3635,11 +3635,11 @@ interface Trashable {
 
 # Different trashable status.
 enum TrashableStatus {
-  # Content is visible.
-  VISIBLE
-
   # Content is not visible.
   INVISIBLE
+
+  # Content is visible.
+  VISIBLE
 }
 
 scalar URI
@@ -4149,7 +4149,7 @@ type User implements Node {
   groups(after: String, first: Int, before: String, last: Int): GroupConnection!
 
   # Get all reports the user has done.
-  reports: ReportConnection!
+  reports(after: String, first: Int, before: String, last: Int): ReportConnection!
 
   # Get all events the user has created.
   events(after: String, first: Int, before: String, last: Int): EventConnection!

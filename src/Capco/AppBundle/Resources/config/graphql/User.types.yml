@@ -293,6 +293,7 @@ User:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserGroupsResolver", [value, args])'
       reports:
         type: 'ReportConnection!'
+        argsBuilder: 'Relay::Connection'
         description: 'Get all reports the user has done.'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserReportsResolver", [value, args])'
