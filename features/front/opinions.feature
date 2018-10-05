@@ -33,7 +33,6 @@ Scenario: Can not create an opinion in closed project
     | stepSlug    | collecte-des-avis-pour-une-meilleur-strategie         |
   Then I should see "step.consultation.alert.ended.title" in the "#main" element
   Then I should see "step.consultation.alert.ended.text" in the "#main" element
-  And I wait 3 seconds
   And the create opinion button should be disabled
 
 @javascript @security
@@ -83,12 +82,13 @@ Scenario: Non author of an opinion wants to update it
     | stepSlug         | collecte-des-avis                |
     | opinionTypeSlug  | enjeux                           |
     | opinionSlug      | opinion-3                        |
-  And I wait 1 seconds
+  And I wait ".opinion__description .opinion__buttons" to appear on current page
   Then I should not see "global.edit" in the ".opinion__description .opinion__buttons" element
 
 @javascript
 Scenario: Anonymous wants to see opinion appendix
   Given I go to an opinion with versions
+  And I wait 1 seconds
   Then I should see "Motifs 1"
   And I press "Exposé des motifs"
   And I wait 1 seconds

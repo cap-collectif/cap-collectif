@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
@@ -15,6 +16,8 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Entity\OpinionVersionVote;
@@ -206,20 +209,29 @@ class ConsultationResolver implements ContainerAwareInterface
         return $repo->countByOpinionType($type->getId());
     }
 
-    public function resolveConsultationSections(ConsultationStep $consultation, Arg $argument)
-    {
-        $sections = $consultation->getConsultationStepType()->getOpinionTypes();
+    public function resolveConsultationSections(
+        ConsultationStep $consultation,
+        Arg $argument
+    ): \Traversable {
+        /** @var Collection $sections */
+        $sections = $consultation->getConsultationStepType()
+            ? $consultation->getConsultationStepType()->getOpinionTypes()
+            : new ArrayCollection();
 
-        $iterator = $sections
-            ->filter(function (OpinionType $section) {
-                return null === $section->getParent();
-            })
-            ->getIterator();
+        $iterator = $sections->getIterator();
 
-        // define ordering closure, using preferred comparison method/field
-        $iterator->uasort(function ($first, $second) {
-            return (int) $first->getPosition() > (int) $second->getPosition() ? 1 : -1;
-        });
+        if ($sections) {
+            $iterator = $sections
+                ->filter(function (OpinionType $section) {
+                    return null === $section->getParent();
+                })
+                ->getIterator();
+
+            // define ordering closure, using preferred comparison method/field
+            $iterator->uasort(function ($first, $second) {
+                return (int) $first->getPosition() > (int) $second->getPosition() ? 1 : -1;
+            });
+        }
 
         return $iterator;
     }

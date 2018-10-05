@@ -179,8 +179,8 @@ class OpinionPage extends Page
 
     public function submitArgument($type, $text)
     {
-        $field = $this->getElement('argument ' . $type . ' field');
-        $button = $this->getElement('argument ' . $type . ' button');
+        $field = $this->getElement("argument $type field");
+        $button = $this->getElement("argument $type button");
         $field->setValue($text);
         $button->press();
     }

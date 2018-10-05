@@ -180,7 +180,7 @@ Scenario: Logged as user, I want to update my firstname
 Scenario: Logged as user, I want to delete my address
   Given I am logged in as user
   And I visited "manage personal data page"
-  And I wait 3 seconds
+  And I wait "#personal-data" to appear on current page
   And I should see "form.label_address"
   And I should see "form.label_address2"
   And I should see "form.label_city"
@@ -201,7 +201,7 @@ Scenario: Logged as user, I want to delete my address
   And I wait 1 seconds
   And I should see "global.saved"
   Then I reload the page
-  And I wait 2 seconds
+  And I wait "#personal-data" to appear on current page
   And I should not see "form.label_address"
   And I should not see "form.label_address2"
   And I should not see "form.label_city"
@@ -212,7 +212,7 @@ Scenario: Logged as user, I want to update my profile
   Given feature "user_type" is enabled
   And I am logged in as user
   And I visited "edit profile page"
-  And I wait 2 seconds
+  And I wait "#profile-form-save" to appear on current page
   And I select "Organisation à but non lucratif" from "profile-form-userType"
   Then I fill the element "#public-data-form-biography" with value "I'm superman"
   And I press "profile-form-save"
@@ -224,9 +224,9 @@ Scenario: Logged as user, I want to update my profile
   Given feature "user_type" is disabled
   And I am logged in as user
   And I visited "edit profile page"
-  And I wait 2 seconds
+  And I wait "#main" to appear on current page
   And I should not see an "profile.form.userType" element
-  And I wait 2 seconds
+  And I wait "#profile-form-save" to appear on current page
   Then I fill the element "#public-data-form-biography" with value "I'm superman"
   And I press "profile-form-save"
   And I wait 1 seconds

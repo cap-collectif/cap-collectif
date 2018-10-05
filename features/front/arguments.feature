@@ -57,6 +57,7 @@ Scenario: Can not create an argument in a version when step is closed
 Scenario: Author of an argument on an opinion looses his votes when updating it
   Given I am logged in as user
   And I go to an opinion
+  And I wait ".opinion__votes-nb" to appear on current page
   When I edit my argument
   Then I should see "alert.success.update.argument" in the "#global-alert-box" element
   And my argument should have changed
@@ -116,6 +117,7 @@ Scenario: Author of an argument on an opinion wants to delete it
   Given I am logged in as user
   And I go to an opinion
   When I delete my argument
+  And I wait 1 seconds
   Then I should see "alert.success.delete.argument" in the "#global-alert-box" element
   And I should not see my argument anymore
 
@@ -137,6 +139,7 @@ Scenario: Author of an argument on a version wants to delete it
   Given I am logged in as user
   And I go to a version
   When I delete my argument
+  And I wait "#global-alert-box" to appear on current page
   Then I should see "alert.success.delete.argument" in the "#global-alert-box" element
   And I should not see my argument anymore
 

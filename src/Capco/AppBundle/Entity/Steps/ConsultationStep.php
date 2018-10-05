@@ -358,7 +358,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     /**
      * @return null|ConsultationStepType
      */
-    public function getConsultationStepType()
+    public function getConsultationStepType(): ?ConsultationStepType
     {
         return $this->consultationStepType;
     }
@@ -381,10 +381,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
             return null;
         }
 
-        return $this->projectAbstractStep
-                    ->getProject()
-                    ->getId()
-            ;
+        return $this->projectAbstractStep->getProject()->getId();
     }
 
     public function getType()
@@ -402,7 +399,16 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
      */
     public function getContributionsCount()
     {
-        return $this->argumentCount + $this->opinionCount + $this->trashedArgumentCount + $this->trashedOpinionCount + $this->opinionVersionsCount + $this->trashedOpinionVersionsCount + $this->sourcesCount + $this->trashedSourceCount;
+        return (
+            $this->argumentCount +
+            $this->opinionCount +
+            $this->trashedArgumentCount +
+            $this->trashedOpinionCount +
+            $this->opinionVersionsCount +
+            $this->trashedOpinionVersionsCount +
+            $this->sourcesCount +
+            $this->trashedSourceCount
+        );
     }
 
     public function getLabelTitle()
