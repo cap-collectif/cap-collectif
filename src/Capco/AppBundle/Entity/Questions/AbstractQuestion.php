@@ -1,7 +1,6 @@
 <?php
 namespace Capco\AppBundle\Entity\Questions;
 
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\SluggableUpdatableTitleTrait;
@@ -22,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "section"         = "SectionQuestion",
  * })
  */
-abstract class AbstractQuestion implements DisplayableInBOInterface
+abstract class AbstractQuestion
 {
     use TimestampableTrait;
     use SluggableUpdatableTitleTrait;
@@ -269,10 +268,5 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
                 ->getProposalForm()
                 ->setUpdatedAt($now);
         }
-    }
-
-    public function canDisplayInBo($user = null): bool
-    {
-        return true;
     }
 }

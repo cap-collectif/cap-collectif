@@ -52,7 +52,7 @@ export class Cookie extends React.Component<Props, CookieState> {
     const { isAnalyticEnabled, isAdvertisingEnabled } = this.state;
     const { analyticsJs, adJs } = this.props;
     return (
-      <div id="cookies-manager">
+      <div>
         <div>
           {config.canUseDOM &&
             cookieMonster.isDoNotTrackActive() && (
@@ -69,7 +69,7 @@ export class Cookie extends React.Component<Props, CookieState> {
             )}
         </div>
         <div>
-          <div className="row" style={{ padding: '10px 0' }} id="cookies-indispensable">
+          <div className="row" style={{ padding: '10px 0' }}>
             <div>
               <Col sm={8}>
                 <strong>
@@ -88,7 +88,7 @@ export class Cookie extends React.Component<Props, CookieState> {
         {analyticsJs &&
           analyticsJs.length > 1 && (
             <div>
-              <div className="row" style={{ padding: '10px 0' }} id="cookies-performance">
+              <div className="row" style={{ padding: '10px 0' }}>
                 <div>
                   <Col sm={8}>
                     <strong>
@@ -118,7 +118,7 @@ export class Cookie extends React.Component<Props, CookieState> {
         {adJs &&
           adJs.length > 1 && (
             <div>
-              <div className="row" style={{ padding: '10px 0' }} id="cookies-advertising">
+              <div className="row" style={{ padding: '10px 0' }}>
                 <div>
                   <Col sm={8}>
                     <strong>

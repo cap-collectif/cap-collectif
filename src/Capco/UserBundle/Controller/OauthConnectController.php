@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Controller;
 
 use HWI\Bundle\OAuthBundle\Controller\ConnectController;
@@ -39,8 +38,8 @@ class OauthConnectController extends ConnectController
         $connect = $this->container->getParameter('hwi_oauth.connect');
         $hasUser = $this->container->get('security.token_storage')
             ->getToken()
-            ->getUser();
-        $hasUser = is_object($user) ? $user->isGranted('IS_AUTHENTICATED_REMEMBERED') : false;
+            ->getUser()
+            ->isGranted('IS_AUTHENTICATED_REMEMBERED');
 
         $error = $this->getErrorForRequest($request);
 
@@ -67,7 +66,7 @@ class OauthConnectController extends ConnectController
      * Connects a user to a given account if the user is logged in and connect is enabled.
      *
      * @param Request $request The active request
-     * @param string $service Name of the resource owner to connect to
+     * @param string  $service Name of the resource owner to connect to
      *
      * @throws NotFoundHttpException if features associated to web service are not enabled
      *
@@ -89,7 +88,7 @@ class OauthConnectController extends ConnectController
 
     /**
      * @param Request $request
-     * @param string $service
+     * @param string  $service
      *
      * @throws NotFoundHttpException if features associated to web service are not enabled
      *

@@ -52,14 +52,11 @@ Scenario: Logged in user wants to vote and unvote for a proposal
   And the proposal has 1 votes
   And I click the proposal vote button
   And I submit the proposal vote form
-  And I wait "#global-alert-box" to appear on current page
   And I should see "proposal.request.vote.success" in the "#global-alert-box" element
   And the proposal should have 2 votes
   And I go to the proposal votes tab
   And I should see my vote in the proposal votes list
-  And I wait "#global-alert-box" to disappear on current page
   When I click the proposal unvote button
-  And I wait "#global-alert-box" to appear on current page
   And I should see "proposal.request.delete_vote.success" in the "#global-alert-box" element
   And the proposal should have 1 votes
   And I should not see my vote in the proposal votes list
@@ -72,7 +69,6 @@ Scenario: Logged in user wants to vote for a proposal anonymously
   When I click the proposal vote button
   And I check the proposal vote private checkbox
   And I submit the proposal vote form
-  And I wait "#global-alert-box" to appear on current page
   And I should see "proposal.request.vote.success" in the "#global-alert-box" element
   And the proposal should have 2 votes
   And I go to the proposal votes tab
@@ -90,7 +86,6 @@ Scenario: Proposal should stay voted after user refresh the page
   And I go to a collect step with vote
   And I vote for the first proposal
   And I submit the proposal vote form
-  And I wait "#global-alert-box" to appear on current page
   And I should see "proposal.request.vote.success" in the "#global-alert-box" element
   And I should see "proposal.vote.delete"
   Then I go to a collect step with vote

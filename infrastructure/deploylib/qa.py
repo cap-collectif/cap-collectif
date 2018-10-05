@@ -79,7 +79,7 @@ def codecov():
 
 
 @task(environments=['local', 'ci'])
-def behat(fast_failure='true', profile=False, tags='false', feature='false', parallel='false', timer='true'):
+def behat(fast_failure='true', profile=False, tags='false', feature='false', parallel='false'):
     "Run Gerhkin Tests"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     if profile:
@@ -88,7 +88,7 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false', par
         jobs = ['api', 'commands', 'frontend', 'javascript', 'graphql', 'back']
 
     for job in jobs:
-        command = 'php -d memory_limit=-1 ./bin/behat' + ('', ' --log-step-times')[timer != 'false'] + ('', ' --parallel-process 10')[parallel != 'false'] + ' -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'] + ('', ' --name ' + feature)[feature != 'false']
+        command = 'php -d memory_limit=-1 ./bin/behat' + ('', ' --parallel-process 10')[parallel != 'false'] + ' -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'] + ('', ' --name ' + feature)[feature != 'false']
         env.service_command(command, 'application', env.www_app)
 
 

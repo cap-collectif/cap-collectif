@@ -79,9 +79,8 @@ Scenario: Logged in super admin wants delete a user
   Then I go to the admin user page with userId "user516"
   Then I click on button "#delete-account-profile-button"
   And I click the "#delete-account-hard" element
-  And I wait "#confirm-delete-form-submit" to appear on current page
   When I click the "#confirm-delete-form-submit" element
-  And I wait "#confirm-delete-form-submit" to disappear on current page
+  And I wait 5 seconds
   Then I should be redirected to "/admin/capco/user/user/list"
   And I should see "deleted-user"
 

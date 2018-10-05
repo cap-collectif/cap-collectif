@@ -267,7 +267,6 @@ class UserContext extends DefaultContext
         $this->fillField('username', $email);
         $this->fillField('password', $pwd);
         $this->pressButton('global.login_me');
-        // TODO !!
-        sleep(4);
+        sleep(4); // TODO
     }
 }

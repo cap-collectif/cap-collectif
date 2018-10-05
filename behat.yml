@@ -1,159 +1,147 @@
 frontend:
-  extensions:
-    Behat\Symfony2Extension:
-      kernel:
-        env: test
-        debug: false
-    Tonic\Behat\ParallelScenarioExtension: ~
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mailcatchersmtp
-      purge_before_scenario: true
-    SensioLabs\Behat\PageObjectExtension:
-      namespaces:
-        page: [Capco\AppBundle\Behat\Page]
-    Behat\MinkExtension:
-      base_url: 'https://capco.test'
-      sessions:
-        default:
-          symfony2: ~
-    Bex\Behat\StepTimeLoggerExtension:
-      output: [console, csv]
-  suites:
-    front:
-      paths: ['%paths.base%/features/front']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
-      filters:
-        tags: '~@javascript'
+    extensions:
+        Behat\Symfony2Extension:
+          kernel:
+              env: test
+              debug: false
+        Tonic\Behat\ParallelScenarioExtension: ~
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url: http://mailcatchersmtp
+            purge_before_scenario: true
+        SensioLabs\Behat\PageObjectExtension:
+            namespaces:
+                page: [ Capco\AppBundle\Behat\Page ]
+        Behat\MinkExtension:
+            base_url: 'https://capco.test'
+            sessions:
+               default:
+                   symfony2: ~
+    suites:
+        front:
+            paths: [ '%paths.base%/features/front' ]
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Alex\MailCatcher\Behat\MailCatcherContext
+            filters:
+                tags: "~@javascript"
 
 javascript:
-  extensions:
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mailcatchersmtp
-      purge_before_scenario: true
-    Behat\Symfony2Extension:
-      kernel:
-        env: test
-        debug: false
-    SensioLabs\Behat\PageObjectExtension:
-      namespaces:
-        page: [Capco\AppBundle\Behat\Page]
-    Behat\MinkExtension:
-      base_url: 'https://capco.test'
-      # browser_name: firefox
-      browser_name: chrome
-      sessions:
-        default:
-          selenium2:
-            capabilities:
-              version: ''
-              acceptSslCerts: true
-            wd_host: http://selenium:4444/wd/hub
-    Bex\Behat\StepTimeLoggerExtension:
-      output: [console, csv]
-  suites:
-    javascript:
-      paths: ['%paths.base%/features/front']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\RabbitMQContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
-      filters:
-        tags: '@javascript&&~@event_registration'
+    extensions:
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url: http://mailcatchersmtp
+            purge_before_scenario: true
+        Behat\Symfony2Extension:
+            kernel:
+                env: test
+                debug: false
+        SensioLabs\Behat\PageObjectExtension:
+            namespaces:
+                page: [ Capco\AppBundle\Behat\Page ]
+        Behat\MinkExtension:
+            base_url: 'https://capco.test'
+            # browser_name: firefox
+            browser_name: chrome
+            sessions:
+               default:
+                    selenium2:
+                        capabilities:
+                            version: ''
+                            acceptSslCerts: true
+                        wd_host: http://selenium:4444/wd/hub
+    suites:
+        javascript:
+            paths: [ '%paths.base%/features/front' ]
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\RabbitMQContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Alex\MailCatcher\Behat\MailCatcherContext
+            filters:
+                tags: "@javascript&&~@event_registration"
 
 commands:
-  formatters:
-    pretty:
-      verbose: true
-      paths: false
-      snippets: true
-  extensions:
-    Tonic\Behat\ParallelScenarioExtension: ~
-    Behat\Symfony2Extension: ~
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mailcatchersmtp
-      purge_before_scenario: true
-    Bex\Behat\StepTimeLoggerExtension:
-      output: [console, csv]
-  suites:
-    commands:
-      paths: ['%paths.base%/features/commands']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\CommandContext
-        - Capco\AppBundle\Behat\RabbitMQContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
-        - SamParkinson\Behat\Context\FileSystemContext
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: true
+    extensions:
+        Tonic\Behat\ParallelScenarioExtension: ~
+        Behat\Symfony2Extension: ~
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url: http://mailcatchersmtp
+            purge_before_scenario: true
+    suites:
+        commands:
+            paths: [ '%paths.base%/features/commands' ]
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Capco\AppBundle\Behat\CommandContext
+                - Capco\AppBundle\Behat\RabbitMQContext
+                - Alex\MailCatcher\Behat\MailCatcherContext
+                - SamParkinson\Behat\Context\FileSystemContext
 
 api:
-  extensions:
-    Tonic\Behat\ParallelScenarioExtension: ~
-    Behat\Symfony2Extension: ~
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mailcatchersmtp
-      purge_before_scenario: true
-    Bex\Behat\StepTimeLoggerExtension:
-      output: [console, csv]
-  suites:
-    api:
-      paths: ['%paths.base%/features/api']
-      contexts:
-        - Capco\AppBundle\Behat\ApiContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\RabbitMQContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+    extensions:
+        Tonic\Behat\ParallelScenarioExtension: ~
+        Behat\Symfony2Extension: ~
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url: http://mailcatchersmtp
+            purge_before_scenario: true
+    suites:
+        api:
+            paths: [ '%paths.base%/features/api' ]
+            contexts:
+                - Capco\AppBundle\Behat\ApiContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Capco\AppBundle\Behat\RabbitMQContext
+                - Alex\MailCatcher\Behat\MailCatcherContext
 
 graphql:
-  extensions:
-    Behat\Symfony2Extension: ~
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mailcatchersmtp
-      purge_before_scenario: true
-    Bex\Behat\StepTimeLoggerExtension:
-      output: [console, csv]
-  suites:
-    graphql:
-      paths:
-        - '%paths.base%/features/graphql'
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\GraphQLContext
-        - Capco\AppBundle\Behat\RabbitMQContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+    extensions:
+          Behat\Symfony2Extension: ~
+          Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+              url: http://mailcatchersmtp
+              purge_before_scenario: true
+    suites:
+        graphql:
+            paths:
+                - '%paths.base%/features/graphql'
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Capco\AppBundle\Behat\GraphQLContext
+                - Capco\AppBundle\Behat\RabbitMQContext
+                - Alex\MailCatcher\Behat\MailCatcherContext
 
 back:
-  extensions:
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mailcatchersmtp
-      purge_before_scenario: true
-    Behat\Symfony2Extension:
-      kernel:
-        env: test
-        debug: false
-    SensioLabs\Behat\PageObjectExtension:
-      namespaces:
-        page: [Capco\AppBundle\Behat\Page]
-    Behat\MinkExtension:
-      base_url: 'https://capco.test'
-      browser_name: chrome
-      sessions:
-        default:
-          selenium2:
-            capabilities:
-              version: ''
-              acceptSslCerts: true
-            wd_host: http://selenium:4444/wd/hub
-    Bex\Behat\StepTimeLoggerExtension:
-      output: [console, csv]
-  suites:
-    javascript:
-      paths: ['%paths.base%/features/back']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
+    extensions:
+        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+            url: http://mailcatchersmtp
+            purge_before_scenario: true
+        Behat\Symfony2Extension:
+            kernel:
+                env: test
+                debug: false
+        SensioLabs\Behat\PageObjectExtension:
+            namespaces:
+                page: [ Capco\AppBundle\Behat\Page ]
+        Behat\MinkExtension:
+            base_url: 'https://capco.test'
+            browser_name: chrome
+            sessions:
+               default:
+                    selenium2:
+                        capabilities:
+                            version: ''
+                            acceptSslCerts: true
+                        wd_host: http://selenium:4444/wd/hub
+    suites:
+        javascript:
+            paths: [ '%paths.base%/features/back' ]
+            contexts:
+                - Capco\AppBundle\Behat\ApplicationContext
+                - Capco\AppBundle\Behat\NavigationContext
+                - Alex\MailCatcher\Behat\MailCatcherContext

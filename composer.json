@@ -183,8 +183,7 @@
         "phpspec/phpspec": "^5.0",
         "leanphp/phpspec-code-coverage": "dev-patch-1",
         "bossa/phpspec2-expect": "@dev",
-        "phpunit/phpunit": "^7.3",
-        "bex/behat-step-time-logger": "^1.0"
+        "phpunit/phpunit": "^7.3"
     },
     "scripts": {
         "post-install-cmd":[

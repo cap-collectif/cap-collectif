@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Behat\Traits;
 
 use Behat\Gherkin\Node\TableNode;
@@ -189,19 +188,7 @@ trait ProposalStepsTrait
     {
         $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano);
         $this->getSession()->wait(
-            2000,
-            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
-        );
-    }
-
-    /**
-     * @When I go to a proposal with lot of comments
-     */
-    public function iGoToAProposalWithLotOfComments()
-    {
-        $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano, false);
-        $this->getSession()->wait(
-            2000,
+            5000,
             "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
         );
     }
@@ -235,9 +222,11 @@ trait ProposalStepsTrait
      */
     public function iGoToACommentNotifiableProposal()
     {
-        $this->getSession()->wait(3000, "$('.comments__section').length > 0");
-
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
+        $this->getSession()->wait(
+            5000,
+            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
+        );
     }
 
     /**
@@ -245,7 +234,6 @@ trait ProposalStepsTrait
      */
     public function iGoToAProposalNotCommentNotifiable()
     {
-        $this->getSession()->wait(3000, "$('.comments__section').length > 0");
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotNotifiable);
     }
 
@@ -270,7 +258,6 @@ trait ProposalStepsTrait
      */
     public function iGoToANotNotifiableProposal()
     {
-        $this->getSession()->wait(3000, "$('#proposal-delete-button').length > 0");
         $this->visitPageWithParams('proposal page', self::$proposalNotNotifiable);
     }
 
@@ -297,7 +284,6 @@ trait ProposalStepsTrait
      */
     public function thereShouldBeNbProposals(int $nb)
     {
-        $this->getSession()->wait(3000, "$('.proposal-preview').length > 0");
         $this->assertPageMatchesText(
             '/(proposal.count_with_total {"num":' . $nb . '|proposal.count {"num":' . $nb . '})/'
         );
@@ -380,7 +366,6 @@ trait ProposalStepsTrait
      */
     public function proposalsShouldBeOrderedRandomly()
     {
-        $this->getSession()->wait(3000, "$('select#proposal-sorting').length > 0");
         $option = $this->getCurrentPage()->getSelectedSortingOption();
         Assert::assertEquals('random', $option);
     }
@@ -529,7 +514,7 @@ trait ProposalStepsTrait
     public function iSubmitTheCommentForm()
     {
         $this->navigationContext->getPage('proposal page')->submitCommentForm();
-        $this->getSession()->wait(3000, "$('#current-alert').length > 0");
+        $this->iWait(5);
     }
 
     /**
@@ -618,8 +603,8 @@ trait ProposalStepsTrait
      */
     public function iClickTheDeleteProposalButton()
     {
-        $this->getSession()->wait(3000, "$('#proposal-delete-button').length > 0");
         $this->navigationContext->getPage('proposal page')->clickDeleteProposalButton();
+        $this->iWait(1);
     }
 
     /**
@@ -627,7 +612,6 @@ trait ProposalStepsTrait
      */
     public function iConfirmProposalDeletion()
     {
-        $this->getSession()->wait(3000, "$('#confirm-proposal-delete').length > 0");
         $this->navigationContext->getPage('proposal page')->clickConfirmDeleteProposalButton();
         $this->iWait(3);
         $this->currentPage = 'collect page';
@@ -692,7 +676,6 @@ trait ProposalStepsTrait
     public function iGoToTheVotesDetailsOfProjectWithRequirementsPage()
     {
         $this->visitPageWithParams('project user votes page', self::$bpVoteClassement);
-        $this->getSession()->wait(3000, '$(".media-list proposal-preview-list").length > 0');
     }
 
     /**
@@ -857,7 +840,6 @@ trait ProposalStepsTrait
      */
     public function iShouldHaveNbVotes(int $nb)
     {
-        $this->getSession()->wait(3000, "$('.proposals-user-votes__table').length > 0");
         $count = $this->navigationContext->getPage('project user votes page')->countVotes();
         expect($count)->toBe($nb);
     }
@@ -1063,7 +1045,7 @@ trait ProposalStepsTrait
     public function iSubmitTheProposalVoteForm()
     {
         $page = $this->getCurrentPage()->submitProposalVoteForm();
-        $this->getSession()->wait(5000, "$('#confirm-proposal-vote').length == 0");
+        $this->iWait(8); // We wait for alert to disappear
     }
 
     /**
@@ -1095,8 +1077,6 @@ trait ProposalStepsTrait
     public function theProposalVoteButtonMustBeDisabled(string $id = null)
     {
         $id = $id ?: $this->getProposalId();
-        $this->getSession()->wait(2000, "$('" . $id . "').length > 0");
-
         $button = $this->getCurrentPage()->getVoteButton($id);
         Assert::assertTrue(
             $button->hasClass('disabled') || $button->hasAttribute('disabled'),
@@ -1115,8 +1095,6 @@ trait ProposalStepsTrait
             : '"proposal vote button" element is not present on the page';
 
         try {
-            $this->getSession()->wait(2000, "$('" . $id . "').length > 0");
-
             $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
         } catch (\Exception $e) {
             Assert::assertSame($execpetionMessage, $e->getMessage());
@@ -1483,13 +1461,11 @@ trait ProposalStepsTrait
 
     protected function fillComment($body)
     {
-        $this->getSession()->wait(3000, "$('textarea[name=body]').length > 0");
         $this->fillField('body', $body);
     }
 
     protected function fillAnonymousComment($body, $name, $email)
     {
-        $this->getSession()->wait(3000, "$('input[name=authorEmail]').length > 0");
         $this->fillField('body', $body);
         $this->fillField('authorName', $name);
         $this->fillField('authorEmail', $email);
@@ -1560,8 +1536,6 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $proposalId = $id ?: $this->getProposalId();
-        $this->getSession()->wait(2000, "$('" . $proposalId . "').length > 0");
-
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
         Assert::assertEquals(
             $label,

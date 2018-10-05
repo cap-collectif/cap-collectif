@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
@@ -11,7 +10,6 @@ use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
-use Capco\AppBundle\Behat\Traits\CookiesTrait;
 use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
@@ -48,8 +46,6 @@ class ApplicationContext extends UserContext
     use ThemeStepsTrait;
     use AdminTrait;
     use ExportDatasUserTrait;
-    use CookiesTrait;
-
     protected $dbContainer;
     protected $cookieConsented;
     protected $currentPage = 'home page';
@@ -194,21 +190,10 @@ class ApplicationContext extends UserContext
     /**
      * @Given I visited :pageName
      */
-    public function iVisitedPage(string $pageName, bool $cookiesConsent = true)
+    public function iVisitedPage(string $pageName)
     {
         $this->navigationContext->iVisitedPage($pageName);
-        $this->currentPage = $pageName;
-        if ($cookiesConsent) {
-            $this->setCookieConsent();
-        }
-    }
-
-    /**
-     * @Given I visited :pageName with cookies not accepted
-     */
-    public function iVisitedPageWithCookiesNotAccepted(string $pageName)
-    {
-        $this->iVisitedPage($pageName, false);
+        $this->setCookieConsent();
     }
 
     /**
@@ -440,15 +425,6 @@ class ApplicationContext extends UserContext
     public function iWaitElementToAppearOnPage(string $element, int $timeout = 3000)
     {
         $this->getSession()->wait($timeout, "$('" . $element . "').length > 0");
-    }
-
-    /**
-     * @Then I wait :element to disappear on current page
-     * @Then I wait :element to disappear on current page maximum :timeout
-     */
-    public function iWaitElementToDisappearOnPage(string $element, int $timeout = 3000)
-    {
-        $this->getSession()->wait($timeout, "$('" . $element . "').length == 0");
     }
 
     /**
@@ -846,13 +822,12 @@ class ApplicationContext extends UserContext
         Assert::assertTrue($input->hasAttribute('disabled'));
     }
 
-    private function visitPageWithParams($page, array $params = [], bool $cookiesConsent = true)
+    private function visitPageWithParams($page, $params = [])
     {
         $this->currentPage = $page;
         $this->navigationContext->getPage($page)->open($params);
-        if ($cookiesConsent) {
-            $this->setCookieConsent();
-        }
+        $this->iWait(2);
+        $this->setCookieConsent();
     }
 
     private function getCurrentPage()
@@ -893,37 +868,5 @@ class ApplicationContext extends UserContext
         $element->keyDown($spaceBar);
         $element->keyPress($spaceBar);
         $element->keyUp($spaceBar);
-    }
-
-    /**
-     * @When I scroll to the bottom
-     */
-    public function iScrollBot()
-    {
-        $this->scrollTo('bot');
-    }
-
-    /**
-     * @When I scroll to the top
-     */
-    public function iScrollTop()
-    {
-        $this->scrollTo('top');
-    }
-
-    private function scrollTo(string $direction = 'bot')
-    {
-        // http://keycode.info/
-        // pageDown = 34
-        $key = 34;
-        if ($direction == 'top') {
-            $key = 33;
-        }
-
-        $page = $this->getCurrentPage();
-        $element = $page->find('css', 'body');
-        $element->keyDown($key);
-        $element->keyPress($key);
-        $element->keyUp($key);
     }
 }

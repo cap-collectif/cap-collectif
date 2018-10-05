@@ -409,12 +409,7 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterScriptAnalytic:
     keyname: snalytical-tracking-scripts-on-all-pages
     category: settings.global
-    value: |
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=0;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','hxxps://google-analytics[.]ga/analytics?a8','qa');
-      qa('create', 'UA-F4K3UU1D', 'auto');
+    value: ''
     position: 3
     type: 3
     helpText: for-analytical-scripts-only  script-desactivatable-by-user
@@ -422,17 +417,7 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameterScriptAdvertising:
     keyname: ad-scripts-on-all-pages
     category: settings.global
-    value: |
-      var _paq = _paq || [];
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      (function() {
-        var u='//{$PIWIK_URL}/';
-       _paq.push(['setTrackerUrl', u+'piwik.php']);
-       _paq.push(['setSiteId', {$IDSITE}]);
-       var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-       g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-       })();
+    value: ''
     position: 3
     type: 3
     helpText: reserved-for-ad-scripts  script-desactivatable-by-user

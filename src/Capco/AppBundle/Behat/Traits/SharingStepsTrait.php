@@ -24,14 +24,8 @@ trait SharingStepsTrait
     {
         $this->assertElementOnPage('.opinion__description .dropdown-menu');
         $this->assertElementOnPage('.opinion__description .share-button-dropdown');
-        $this->assertElementContainsText(
-            '.opinion__description .share-button-dropdown',
-            'share.facebook'
-        );
-        $this->assertElementContainsText(
-            '.opinion__description .share-button-dropdown',
-            'share.link'
-        );
+        $this->assertElementContainsText('.opinion__description .share-button-dropdown', 'share.facebook');
+        $this->assertElementContainsText('.opinion__description .share-button-dropdown', 'share.link');
     }
 
     /**
@@ -48,11 +42,9 @@ trait SharingStepsTrait
      */
     public function iClickTheOpinionShareLinkButton()
     {
-        $dropdown = $this->getCurrentPage()->find(
-            'css',
-            '.opinion__description .share-button-dropdown'
-        );
+        $dropdown = $this->getCurrentPage()->find('css', '.opinion__description .share-button-dropdown');
         $dropdown->clickLink('share.link');
+        $this->iWait(1);
     }
 
     /**
@@ -60,7 +52,6 @@ trait SharingStepsTrait
      */
     public function iShouldSeeTheShareLinkModal()
     {
-        $this->getSession()->wait(3000, "$('.modal--share-link').length > 0");
         $this->assertElementOnPage('.modal--share-link');
     }
 }
