@@ -720,20 +720,6 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'reportings' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('Reporting')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposition_reportings", array(0 => $value)]);
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'answer' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('Answer'),
                     'args' => [

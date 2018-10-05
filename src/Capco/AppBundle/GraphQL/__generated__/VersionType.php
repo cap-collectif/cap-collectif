@@ -526,20 +526,6 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'reportings' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('Reporting')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["version_reportings", array(0 => $value)]);
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'section' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Section')),
                     'args' => [
