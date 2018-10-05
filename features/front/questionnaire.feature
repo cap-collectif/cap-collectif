@@ -73,6 +73,7 @@ Scenario: Logged in user wants to add a reply to a closed questionnaire step
 Scenario: Logged in user wants to add another reply when multiple replies is allowed
   Given I am logged in as admin
   When I go to a questionnaire step
+  And I fill the questionnaire form
   And I submit my reply
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my reply
@@ -100,7 +101,7 @@ Scenario: Logged in user wants to update a reply
   When I go to a questionnaire step
   And I click on the update reply button
   And I update the questionnaire form
-  And I submit my reply
+  And I submit my updated reply
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my reply
 

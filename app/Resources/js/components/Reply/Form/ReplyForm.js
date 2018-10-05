@@ -227,7 +227,7 @@ export class ReplyForm extends React.Component<Props> {
               <Field
                 type="checkbox"
                 name="private"
-                id={`${form}reply-private`}
+                id={`${form}-reply-private`}
                 component={renderComponent}
                 children={<FormattedMessage id="reply.form.private" />}
                 disabled={disabled}
@@ -236,7 +236,7 @@ export class ReplyForm extends React.Component<Props> {
           )}
           <Button
             type="submit"
-            id="submit-create-reply"
+            id={`${form}-submit-create-reply`}
             bsStyle="primary"
             disabled={pristine || invalid || submitting || disabled}>
             <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />

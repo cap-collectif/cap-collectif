@@ -72,8 +72,11 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
-        $this->fillField('responses[1]', '');
-        $this->selectOption('responses[5]', 'Pas assez fort (Mon sonotone est en panne)');
+        $this->fillField('CreateReplyForm-responses[1]', '');
+        $this->selectOption(
+            'CreateReplyForm-responses[5]',
+            'Pas assez fort (Mon sonotone est en panne)'
+        );
     }
 
     /**
@@ -82,11 +85,11 @@ trait QuestionnaireStepsTrait
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
     {
         $this->fillField(
-            'responses[1]',
+            'CreateReplyForm-responses[1]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
-        $this->checkOption('responses[3]_choice-questionchoice1');
-        $this->checkOption('responses[3]_choice-questionchoice3');
+        $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice1');
+        $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice3');
     }
 
     /**
@@ -103,7 +106,7 @@ trait QuestionnaireStepsTrait
      */
     public function iCheckTheReplyPrivateCheckbox()
     {
-        $this->checkOption('reply-private');
+        $this->checkOption('CreateReplyForm-reply-private');
     }
 
     /**
@@ -112,6 +115,15 @@ trait QuestionnaireStepsTrait
     public function iSubmitMyReply()
     {
         $this->navigationContext->getPage('questionnaire page')->submitReply();
+        $this->iWait(5);
+    }
+
+    /**
+     * @When I submit my updated reply
+     */
+    public function iSubmitMyUpdatedReply()
+    {
+        $this->navigationContext->getPage('questionnaire page')->submitUpdatedReply();
         $this->iWait(5);
     }
 
@@ -183,6 +195,14 @@ trait QuestionnaireStepsTrait
         $this->navigationContext->getPage(
             'questionnaire page'
         )->clickFirstRankingChoiceRightArrow();
+        $this->iWait(1);
+    }
+
+    public function iClickOneRankingChoiceRightArrowUpdate()
+    {
+        $this->navigationContext->getPage(
+            'questionnaire page'
+        )->clickFirstRankingChoiceRightArrowUpdate();
         $this->iWait(1);
     }
 
@@ -264,29 +284,39 @@ trait QuestionnaireStepsTrait
         $this->assertElementContainsText($replyModalSelector, 'reply.show.link');
     }
 
-    protected function fillQuestionnaireForm($edition = false, $element = 'questionnaire form')
+    protected function fillQuestionnaireForm($edition = false)
     {
-        $this->iShouldSeeElementOnPage($element, 'questionnaire page');
+        $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
         if (!$edition) {
             $this->fillField(
-                'responses[1]',
+                'CreateReplyForm-responses[1]',
                 'Je pense que c\'est la ville parfaite pour organiser les JO'
             );
-            $this->checkOption('responses[3]_choice-questionchoice1');
-            $this->checkOption('responses[3]_choice-questionchoice2');
-            $this->checkOption('responses[3]_choice-questionchoice3');
+            $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice1');
+            $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice2');
+            $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice3');
 
             return;
         }
-        $this->fillField('responses[1]', 'En fait c\'est nul, je ne veux pas des JO à Paris');
+        $this->fillField(
+            'CreateReplyForm-responses[1]',
+            'En fait c\'est nul, je ne veux pas des JO à Paris'
+        );
     }
 
     protected function fillUpdateQuestionnaireForm()
     {
         $this->iShouldSeeElementOnPage('user reply modal', 'questionnaire page');
-        $this->getSession()
-            ->getPage('questionnaire page')
-            ->find('css', '.reply__modal--show .has-success input')
-            ->setValue('En fait c\'est nul, je ne veux pas des JO à Paris');
+        $this->fillField(
+            'UpdateReplyForm-reply2-responses[1]',
+            'En fait c\'est nul, je ne veux pas des JO à Paris'
+        );
+        $this->fillField(
+            'UpdateReplyForm-reply2-responses[1]',
+            'Je pense que c\'est la ville parfaite pour organiser les JO'
+        );
+        $this->checkOption('UpdateReplyForm-reply2-responses[3]_choice-questionchoice1');
+
+        $this->iClickOneRankingChoiceRightArrowUpdate();
     }
 }

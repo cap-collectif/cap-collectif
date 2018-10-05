@@ -16,7 +16,8 @@ class QuestionnairePage extends Page
 
     protected $elements = [
         'questionnaire form' => '#create-reply-form',
-        'submit reply button' => '#submit-create-reply',
+        'submit reply button' => '#CreateReplyForm-submit-create-reply',
+        'submit update reply button' => '#UpdateReplyForm-reply2-submit-create-reply',
         'user replies' => '#user-replies',
         'user reply' => '#user-replies .reply',
         'user reply modal' => '.reply__modal--show',
@@ -27,6 +28,8 @@ class QuestionnairePage extends Page
         'confirm delete reply button' => '.reply__confirm-delete-btn',
         'first ranking choice right arrow' =>
             '.ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right',
+        'update first ranking choice right arrow' =>
+            '.reply__modal--show .ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right',
     ];
 
     public function submitReply()
@@ -34,9 +37,19 @@ class QuestionnairePage extends Page
         $this->getElement('submit reply button')->click();
     }
 
+    public function submitUpdatedReply()
+    {
+        $this->getElement('submit update reply button')->click();
+    }
+
     public function clickFirstRankingChoiceRightArrow()
     {
         $this->getElement('first ranking choice right arrow')->click();
+    }
+
+    public function clickFirstRankingChoiceRightArrowUpdate()
+    {
+        $this->getElement('update first ranking choice right arrow')->click();
     }
 
     public function getSubmitReplyButtonSelector()
