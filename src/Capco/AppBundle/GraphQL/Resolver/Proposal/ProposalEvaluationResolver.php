@@ -5,22 +5,35 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ProposalEvaluationResolver implements ContainerAwareInterface
+class ProposalEvaluationResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
+    private $proposalResolver;
 
-    public function resolveResponses(ProposalEvaluation $evaluation, $user): Collection
+    public function __construct(ProposalResolver $proposalResolver)
     {
-        $isEvaluer = $this->container->get('capco.resolver.proposals')->resolveViewerIsEvaluer($evaluation->getProposal(), $user);
-        $viewerCanSeePrivateResponses = $isEvaluer || ($user instanceof User && $user->isAdmin());
+        $this->proposalResolver = $proposalResolver;
+    }
 
-        return $evaluation->getResponses()->filter(
-          function ($response) use ($viewerCanSeePrivateResponses) {
-              return !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;
-          }
+    public function __invoke(
+        ProposalEvaluation $evaluation,
+        $user,
+        \ArrayObject $context
+    ): Collection {
+        $isEvaluer = $this->proposalResolver->resolveViewerIsEvaluer(
+            $evaluation->getProposal(),
+            $user
         );
+        $viewerCanSeePrivateResponses =
+            $isEvaluer ||
+            ($user instanceof User && $user->isAdmin()) ||
+            ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
+
+        return $evaluation
+            ->getResponses()
+            ->filter(function ($response) use ($viewerCanSeePrivateResponses) {
+                return !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;
+            });
     }
 }
