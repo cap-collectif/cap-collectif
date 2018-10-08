@@ -9,3 +9,8 @@ UpdateReplyInput:
       responses:
         type: '[ResponseInput]'
         description: 'The responses to the questionnaire questions'
+      draft:
+        type: 'Boolean'
+        description: 'Is the reply is draft'
+        defaultValue: false
+

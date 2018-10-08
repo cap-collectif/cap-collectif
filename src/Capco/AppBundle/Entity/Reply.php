@@ -62,6 +62,11 @@ class Reply implements Publishable, Contribution, VoteContribution
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(name="draft", type="boolean")
+     */
+    private $draft = false;
+
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
@@ -91,6 +96,18 @@ class Reply implements Publishable, Contribution, VoteContribution
     public function setAuthor(User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getDraft()
+    {
+        return $this->draft;
+    }
+
+    public function setDraft(bool $enabled): self
+    {
+        $this->draft = $enabled;
 
         return $this;
     }

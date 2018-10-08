@@ -49,7 +49,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const data = {};
 
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions);
-
+  data.draft = false;
   if (reply) {
     data.replyId = reply.id;
     return UpdateReplyMutation.commit({ input: data })
@@ -231,6 +231,7 @@ export default createFragmentContainer(container, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       private
+      draft
       responses {
         question {
           id

@@ -7,6 +7,8 @@ Reply:
     fields:
       private:
         type: 'Boolean!'
+      draft:
+        type: 'Boolean!'
       createdAt:
         type: 'DateTime!'
       responses:
