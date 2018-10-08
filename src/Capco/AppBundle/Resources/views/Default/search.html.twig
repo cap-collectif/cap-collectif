@@ -23,102 +23,98 @@
 
 {% block body %}
     <form id="capco_app_search" name="capco_app_search" method="get">
-        <section class="section--custom">
-            <div class="container">
-                {{ form_errors(form.term) }}
-                <div class="row">
-                    <div class="col-xs-12 col-sm-9 col-md-6 input-group">
-                        {{ form_widget(form.term) }}
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit"><i class="cap cap-magnifier"></i>
-                                <span class="sr-only">{{ 'search.form.submit' | trans({}, 'CapcoAppBundle') }}</span>
-                            </button>
-                        </span>
-                    </div>
+        <div class="container container--custom">
+            {{ form_errors(form.term) }}
+            <div class="row">
+                <div class="col-xs-12 col-sm-9 col-md-6 input-group">
+                    {{ form_widget(form.term) }}
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit"><i class="cap cap-magnifier"></i>
+                            <span class="sr-only">{{ 'search.form.submit' | trans({}, 'CapcoAppBundle') }}</span>
+                        </button>
+                    </span>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="section--custom">
-            <div class="container">
+        <div class="container container--custom">
 
-                <div class="row">
+            <div class="row">
 
-                    <div class="col-xs-12 col-sm-3 block--mobile">
+                <div class="col-xs-12 col-sm-3 block--mobile">
 
-                        <h2 class="h5 excerpt"
-                            style="margin-top: 0;">{{ 'search.sharpen' | trans({}, 'CapcoAppBundle') }}</h2>
+                    <h2 class="h5 excerpt"
+                        style="margin-top: 0;">{{ 'search.sharpen' | trans({}, 'CapcoAppBundle') }}</h2>
 
-                        {# Type #}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">{{ 'search.form.label.type' | trans({}, 'CapcoAppBundle') }}</h3>
-                            </div>
-                            <div class="panel-body search__choice-panel">
-                                {{ form_widget(form.type) }}
-                            </div>
+                    {# Type #}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ 'search.form.label.type' | trans({}, 'CapcoAppBundle') }}</h3>
                         </div>
-
-                    </div>
-
-                    <div class="col-xs-12 col-sm-9">
-                        <h2 class="h2 search__results-nb" style="margin-top: 0;">
-                            {% transchoice count with { '%count%': count} from 'CapcoAppBundle' %}
-                            search.results.title{% endtranschoice %}
-                            <span class="pull-right">
-                                {{ form_widget(form.sort) }}
-                            </span>
-                        </h2>
-
-                        <hr class="hr--no-margin"/>
-
-                        <ul class="search__results {% if nbPages > 1 %} block {% endif %}">
-                            {% for result in results %}
-                                {% set entity = result.transformed %}
-                                {% set default_title = 'search.results.default_title' | trans({}, 'CapcoAppBundle') %}
-                                {% set type_label    = 'search.results.type.' ~ result.result.hit['_type'] %}
-
-                                {% if result.result.hit['_type'] == 'user' %}
-                                    {% set title = result.result.hit['_source']['displayName'] is defined ? result.result.hit['_source']['displayName'] : result.transformed.displayName %}
-                                {% else %}
-                                    {% set title = result.result.hit['_source']['title'] is defined ? result.result.hit['_source']['title'] : ( result.transformed.title is defined ? result.transformed.title : default_title) %}
-                                {% endif %}
-                                <li>
-                                    <h4 class="h4 search-result__title">
-                                        {% if attribute(result.transformed, 'isTrashed') is defined and result.transformed.isTrashed() == true %}
-                                            <span
-                                                class="label label-default">{{ 'comment.trashed.label' | trans({}, 'CapcoAppBundle') }}</span>
-                                        {% endif %}
-                                        <a class="search-result__link" href="{{ result.transformed | capco_url }}">
-                                            {{ title | raw }}
-                                        </a>
-                                    </h4>
-                                    <span class="small">
-                                        {{ type_label | trans({}, 'CapcoAppBundle') }}
-                                        {% if entity.proposalForm is defined %}
-                                            • {{ entity.proposalForm.step.project.title }}
-                                        {% endif %}
-                                        {{ entity.proposalForm is defined and entity.fullReference is defined ? '•' }}
-                                        {% if entity.fullReference is defined %}
-                                            {{ ('global.reference'|trans({}, 'CapcoAppBundle'))~' '~entity.fullReference }}
-                                        {% endif %}
-                                    </span>
-                                    {% for key in ['biography', 'body'] if attribute(entity, key) is defined %}
-                                            <p class="excerpt small search-result__preview">
-                                                {{ attribute(entity, key)|striptags|truncate(175) }}
-                                            </p>
-                                    {% endfor %}
-                                </li>
-                            {% endfor %}
-                        </ul>
-
-                        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': 'app_search', 'params': {q: q}} only %}
+                        <div class="panel-body search__choice-panel">
+                            {{ form_widget(form.type) }}
+                        </div>
                     </div>
 
                 </div>
 
+                <div class="col-xs-12 col-sm-9">
+                    <h2 class="h2 search__results-nb" style="margin-top: 0;">
+                        {% transchoice count with { '%count%': count} from 'CapcoAppBundle' %}
+                        search.results.title{% endtranschoice %}
+                        <span class="pull-right">
+                            {{ form_widget(form.sort) }}
+                        </span>
+                    </h2>
+
+                    <hr class="hr--no-margin"/>
+
+                    <ul class="search__results {% if nbPages > 1 %} block {% endif %}">
+                        {% for result in results %}
+                            {% set entity = result.transformed %}
+                            {% set default_title = 'search.results.default_title' | trans({}, 'CapcoAppBundle') %}
+                            {% set type_label    = 'search.results.type.' ~ result.result.hit['_type'] %}
+
+                            {% if result.result.hit['_type'] == 'user' %}
+                                {% set title = result.result.hit['_source']['displayName'] is defined ? result.result.hit['_source']['displayName'] : result.transformed.displayName %}
+                            {% else %}
+                                {% set title = result.result.hit['_source']['title'] is defined ? result.result.hit['_source']['title'] : ( result.transformed.title is defined ? result.transformed.title : default_title) %}
+                            {% endif %}
+                            <li>
+                                <h4 class="h4 search-result__title">
+                                    {% if attribute(result.transformed, 'isTrashed') is defined and result.transformed.isTrashed() == true %}
+                                        <span
+                                            class="label label-default">{{ 'comment.trashed.label' | trans({}, 'CapcoAppBundle') }}</span>
+                                    {% endif %}
+                                    <a class="search-result__link" href="{{ result.transformed | capco_url }}">
+                                        {{ title | raw }}
+                                    </a>
+                                </h4>
+                                <span class="small">
+                                    {{ type_label | trans({}, 'CapcoAppBundle') }}
+                                    {% if entity.proposalForm is defined %}
+                                        • {{ entity.proposalForm.step.project.title }}
+                                    {% endif %}
+                                    {{ entity.proposalForm is defined and entity.fullReference is defined ? '•' }}
+                                    {% if entity.fullReference is defined %}
+                                        {{ ('global.reference'|trans({}, 'CapcoAppBundle'))~' '~entity.fullReference }}
+                                    {% endif %}
+                                </span>
+                                {% for key in ['biography', 'body'] if attribute(entity, key) is defined %}
+                                        <p class="excerpt small search-result__preview">
+                                            {{ attribute(entity, key)|striptags|truncate(175) }}
+                                        </p>
+                                {% endfor %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': 'app_search', 'params': {q: q}} only %}
+                </div>
+
             </div>
-        </section>
+
+        </div>
     </form>
 {% endblock %}
 

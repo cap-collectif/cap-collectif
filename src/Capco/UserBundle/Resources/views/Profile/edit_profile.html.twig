@@ -20,13 +20,11 @@
 
 
 {% block fos_user_content %}
-    <section class="section--custom">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 col-md-12">
-                    {{ react_render_component('EditProfileApp') }}
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
+    <div class="container  container--custom">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-12">
+                {{ react_render_component('EditProfileApp') }}
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
 {% endblock fos_user_content %}

@@ -1,25 +1,23 @@
-<section class="section--custom">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4  col-lg-offset-4  col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12">
-                <div class="block--bordered  box">
-                    {{ form_errors(form.plainPassword.first) }}
-                    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
-                        <div class="form-group">
-                            <label for="password" class="control-label">{{ 'change_password.form.password'|trans({}, 'CapcoAppBundle') }}</label>
-                            {{ form_widget(form.plainPassword.first) }}
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="control-label">{{ 'change_password.form.password_confirmation'|trans({}, 'CapcoAppBundle') }}</label>
-                            {{ form_widget(form.plainPassword.second) }}
-                        </div>
-                        {{ form_widget(form) }}
-                        <div>
-                            <input type="submit" value="{{ 'change_password.form.submit'|trans({}, 'CapcoAppBundle') }}" class="btn btn-success btn-block  login__submit"/>
-                        </div>
-                    {{ form_end(form) }}
-                </div>
+<div class="container  container--custom">
+    <div class="row">
+        <div class="col-lg-4  col-lg-offset-4  col-md-6  col-md-offset-3  col-sm-8  col-sm-offset-2  col-xs-12">
+            <div class="block--bordered  box">
+                {{ form_errors(form.plainPassword.first) }}
+                {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+                    <div class="form-group">
+                        <label for="password" class="control-label">{{ 'change_password.form.password'|trans({}, 'CapcoAppBundle') }}</label>
+                        {{ form_widget(form.plainPassword.first) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label">{{ 'change_password.form.password_confirmation'|trans({}, 'CapcoAppBundle') }}</label>
+                        {{ form_widget(form.plainPassword.second) }}
+                    </div>
+                    {{ form_widget(form) }}
+                    <div>
+                        <input type="submit" value="{{ 'change_password.form.submit'|trans({}, 'CapcoAppBundle') }}" class="btn btn-success btn-block  login__submit"/>
+                    </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
-</section>
+</div>

@@ -2,7 +2,7 @@
 
 exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] = `
 <Uncontrolled(TabContainer)
-  className="tabs__container"
+  className="tabs__container container--custom"
   defaultActiveKey="content"
   id="proposal-page-tabs"
 >

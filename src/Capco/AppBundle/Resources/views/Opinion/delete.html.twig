@@ -9,37 +9,35 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-    <section class="section--custom">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                    <div class="dialog  dialog--light-gray  block--bordered">
-                        <div class="dialog__header  box">
-                            <h1 class="h4  dialog__title">{{ 'opinion.delete.title'|trans({}, 'CapcoAppBundle') }}</h1>
-                        </div>
+    <div class="container  container--custom">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="dialog  dialog--light-gray  block--bordered">
+                    <div class="dialog__header  box">
+                        <h1 class="h4  dialog__title">{{ 'opinion.delete.title'|trans({}, 'CapcoAppBundle') }}</h1>
+                    </div>
 
-                        {{ form_start(form) }}
-                            <div class="dialog__body  box">
-                                <div class="media">
-                                    <div class="media-body">
-                                        {{ form_rest(form) }}
-                                        <p class="h4">{{ 'opinion.delete.subtitle'|trans({}, 'CapcoAppBundle') }}</p>
-                                        <div>
-                                            {{ 'opinion.delete.text'|trans({}, 'CapcoAppBundle') }}
-                                        </div>
+                    {{ form_start(form) }}
+                        <div class="dialog__body  box">
+                            <div class="media">
+                                <div class="media-body">
+                                    {{ form_rest(form) }}
+                                    <p class="h4">{{ 'opinion.delete.subtitle'|trans({}, 'CapcoAppBundle') }}</p>
+                                    <div>
+                                        {{ 'opinion.delete.text'|trans({}, 'CapcoAppBundle') }}
                                     </div>
                                 </div>
                             </div>
-                            <div class="dialog__footer  box">
-                                <div class="pull-right">
-                                    <a href="{{ path('app_consultation_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}" class="btn  btn-default">{{ 'opinion.delete.cancel'|trans({}, 'CapcoAppBundle') }}</a>
-                                    <button type="submit" class="btn  btn-danger">{{ 'opinion.delete.submit'|trans({}, 'CapcoAppBundle') }}</button>
-                                </div>
+                        </div>
+                        <div class="dialog__footer  box">
+                            <div class="pull-right">
+                                <a href="{{ path('app_consultation_show_opinions', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug}) }}" class="btn  btn-default">{{ 'opinion.delete.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                <button type="submit" class="btn  btn-danger">{{ 'opinion.delete.submit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
-                        {{ form_end(form) }}
-                    </div>
+                        </div>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

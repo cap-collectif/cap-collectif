@@ -1,40 +1,38 @@
 {% if videos | length > 0 %}
-    <section id="videos" class="section--custom">
-        <div class="container">
-            {% if null != section.title %}
-                <h2 class="h2">{{ section.title }}</h2>
-            {% else %}
-                <h2 class="h2">{{ 'homepage.videos.title' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% endif %}
-            {% if null != section.teaser %}
-                <p class="block">{{ section.teaser }}</p>
-            {% endif %}
-            {% if null != section.body %}
-                <p>{{ section.body | raw }}</p>
-            {% endif %}
-            <div class="row">
-                {% for video in videos %}
-                    <div class="col-xs-12  col-sm-6  col-md-4  col-lg-4">
-                        <div class="video">
-                            {%  if video.media %}
-                                <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %}fancybox" data-type="iframe">
-                                    {% thumbnail video.media, 'homepageVideo' with {'title': video.media.name, 'alt': video.media.name, 'class': 'img-responsive'} %}
-                                </a>
-                            {% else %}
-                                <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %} fancybox" data-type="iframe">
-                                    <div class="bg--default bg--video"></div>
-                                </a>
-                            {%  endif %}
-                            {% if video.title %}
-                                <h3 class="h4">{{ video.title }}</h3>
-                            {% endif %}
-                            {% if video.body %}
-                                <p>{{ video.body }}</p>
-                            {% endif %}
-                        </div>
+    <div id="videos" class="container  container--custom">
+        {% if null != section.title %}
+            <h2 class="h2">{{ section.title }}</h2>
+        {% else %}
+            <h2 class="h2">{{ 'homepage.videos.title' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% endif %}
+        {% if null != section.teaser %}
+            <p class="block">{{ section.teaser }}</p>
+        {% endif %}
+        {% if null != section.body %}
+            <p>{{ section.body | raw }}</p>
+        {% endif %}
+        <div class="row">
+            {% for video in videos %}
+                <div class="col-xs-12  col-sm-6  col-md-4  col-lg-4">
+                    <div class="video">
+                        {%  if video.media %}
+                            <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %}fancybox" data-type="iframe">
+                                {% thumbnail video.media, 'homepageVideo' with {'title': video.media.name, 'alt': video.media.name, 'class': 'img-responsive'} %}
+                            </a>
+                        {% else %}
+                            <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %} fancybox" data-type="iframe">
+                                <div class="bg--default bg--video"></div>
+                            </a>
+                        {%  endif %}
+                        {% if video.title %}
+                            <h3 class="h4">{{ video.title }}</h3>
+                        {% endif %}
+                        {% if video.body %}
+                            <p>{{ video.body }}</p>
+                        {% endif %}
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
-    </section>
+    </div>
 {% endif %}

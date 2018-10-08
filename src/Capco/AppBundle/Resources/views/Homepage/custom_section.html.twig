@@ -1,13 +1,11 @@
-<section class="section--custom">
-    <div class="container">
-        {% if null != section.title %}
-            <h2 class="h2">{{ section.title }}</h2>
-        {% endif %}
-        {% if null != section.teaser %}
-            <p class="block">{{ section.teaser }}</p>
-        {% endif %}
-        {% if null != section.body %}
-            {{ section.body | raw }}
-        {% endif %}
-     </div>
- </section>
+<div class="container  container--custom">
+    {% if null != section.title %}
+        <h2 class="h2">{{ section.title }}</h2>
+    {% endif %}
+    {% if null != section.teaser %}
+        <p class="block">{{ section.teaser }}</p>
+    {% endif %}
+    {% if null != section.body %}
+        {{ section.body | raw }}
+    {% endif %}
+ </div>

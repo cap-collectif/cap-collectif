@@ -1,23 +1,21 @@
 {% if topics|length > 0 %}
-    <section id="topics" class="section--custom">
-        <div class="container">
-            {% if null != section.title %}
-                <h2 class="h2">{{ section.title }}</h2>
-            {% else %}
-                <h2 class="h2">{{ 'homepage.themes.title' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% endif %}
-            {% if null != section.teaser %}
-                <p class="block">{{ section.teaser }}</p>
-            {% endif %}
-            {% if null != section.body %}
-                <p>{{ section.body | raw }}</p>
-            {% endif %}
-            <div class="row">
-                {% for theme in topics %}
-                    {% include '@CapcoApp/Theme/blockTheme.html.twig' with {'theme': theme} only %}
-                {% endfor %}
-            </div>
-            <a href="{{ path('app_theme') }}" class="btn  btn-primary  btn--outline">{{ 'theme.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    <div id="topics" class="container  container--custom">
+        {% if null != section.title %}
+            <h2 class="h2">{{ section.title }}</h2>
+        {% else %}
+            <h2 class="h2">{{ 'homepage.themes.title' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% endif %}
+        {% if null != section.teaser %}
+            <p class="block">{{ section.teaser }}</p>
+        {% endif %}
+        {% if null != section.body %}
+            <p>{{ section.body | raw }}</p>
+        {% endif %}
+        <div class="row">
+            {% for theme in topics %}
+                {% include '@CapcoApp/Theme/blockTheme.html.twig' with {'theme': theme} only %}
+            {% endfor %}
         </div>
-    </section>
+        <a href="{{ path('app_theme') }}" class="btn  btn-primary  btn--outline">{{ 'theme.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    </div>
 {% endif %}
