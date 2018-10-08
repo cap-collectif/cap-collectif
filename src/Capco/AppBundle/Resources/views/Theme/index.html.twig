@@ -44,8 +44,8 @@
 
 {% block body %}
 
-    <section class="section--custom" {% if content_body is null %}style="display: none;"{% endif %}>
-        <div class="container" {% if content_body is null %}style="display: none;"{% endif %}>
+    <section class="section--custom{% if content_body is null %} hidden{% endif %}">
+        <div class="container">
             {% if null != content_body %}
                 {{ content_body|raw }}
             {% endif %}
