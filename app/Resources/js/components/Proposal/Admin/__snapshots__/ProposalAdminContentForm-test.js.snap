@@ -322,6 +322,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         type="editor"
       />
       <FieldArray
+        change={[MockFunction]}
         component={[Function]}
         intl={
           Object {
@@ -355,6 +356,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             },
           ]
         }
+        responses={Array []}
       />
       <Field
         component={[Function]}

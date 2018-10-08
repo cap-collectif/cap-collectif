@@ -82,6 +82,7 @@ describe('<ProposalAdminContentForm />', () => {
       address: null,
       district: { id: '1' },
     },
+    responses: [],
   };
 
   it('render correctly', () => {
