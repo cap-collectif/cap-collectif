@@ -21,13 +21,13 @@ final class ProposalTrashedStatusType extends EnumType implements GeneratedTypeI
             'values' => [
                 'TRASHED' => [
                     'name' => 'TRASHED',
-                    'value' => 'TRASHED',
+                    'value' => \constant("Capco\\AppBundle\\Enum\\ProposalTrashedStatus::TRASHED"),
                     'deprecationReason' => null,
                     'description' => '`TRASHED` status to include the trashed proposal.',
                 ],
                 'NOT_TRASHED' => [
                     'name' => 'NOT_TRASHED',
-                    'value' => 'NOT_TRASHED',
+                    'value' => \constant("Capco\\AppBundle\\Enum\\ProposalTrashedStatus::NOT_TRASHED"),
                     'deprecationReason' => null,
                     'description' => '`NOT_TRASHED` status to inclide the non trashed proposal.',
                 ],
