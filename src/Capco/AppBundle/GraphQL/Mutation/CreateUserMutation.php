@@ -7,13 +7,13 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UserFormType;
 use Doctrine\DBAL\Driver\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
-use GraphQL\Error\UserError;
-use Monolog\Logger;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class CreateUserMutation
+class CreateUserMutation implements MutationInterface
 {
     private $em;
     private $formFactory;
@@ -22,7 +22,7 @@ class CreateUserMutation
     public function __construct(
         EntityManagerInterface $em,
         FormFactory $formFactory,
-        Logger $logger
+        LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;

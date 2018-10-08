@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Form\Extension;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -12,7 +13,7 @@ class ModelTypeExtension extends AbstractTypeExtension
 {
     protected $em;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
@@ -26,7 +27,7 @@ class ModelTypeExtension extends AbstractTypeExtension
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        if (isset($options['tree'])) {
+        if (isset($options['tree']) && $options['tree']) {
             $view->vars['tree'] = true;
             $view->vars['hierarchy'] = [];
             $roots = $form->getData();

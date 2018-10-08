@@ -12,9 +12,13 @@ services:
     class: Capco\AppBundle\Twig\ThemeExtension
     arguments:
       $twig: '@twig.extension.intl'
+    tags:
+      - { name: twig.extension }
 
   capco.react_intl.twig:
     class: Capco\AppBundle\Twig\ReactIntlExtension
     arguments:
       $translationFolder: '%kernel.root_dir%/../translations/'
       $env: '%kernel.environment%'
+    tags:
+      - { name: twig.extension }

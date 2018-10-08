@@ -38,7 +38,6 @@ class SettingsController extends Controller
         }
 
         $admin_pool = $this->get('sonata.admin.pool');
-        $em = $this->get('doctrine')->getManager();
 
         $parameters = $this->get('capco.site_parameter.repository')->findBy(
             [

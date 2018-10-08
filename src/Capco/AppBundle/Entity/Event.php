@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
@@ -24,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasValidAddress()
  * @CapcoAssert\CheckRegister()
  */
-class Event implements CommentableInterface, IndexableInterface
+class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface
 {
     use DateHelperTrait, CommentableTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
 
@@ -511,5 +512,10 @@ class Event implements CommentableInterface, IndexableInterface
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch'];
+    }
+
+    public function canDisplayInBo($user = null): bool
+    {
+        return true;
     }
 }
