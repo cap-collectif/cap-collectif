@@ -99,6 +99,12 @@ final class ProposalStepType extends InterfaceType implements GeneratedTypeInter
                             'description' => '(ROLE_SUPER_ADMIN only) Select also unpublished proposals.',
                             'defaultValue' => false,
                         ],
+                        [
+                            'name' => 'includeTrashed',
+                            'type' => Type::boolean(),
+                            'description' => 'Select the trashed proposal',
+                            'defaultValue' => false,
+                        ],
                     ],
                     'resolve' => null,
                     'description' => null,

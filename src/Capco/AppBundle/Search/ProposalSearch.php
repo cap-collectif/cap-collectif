@@ -154,9 +154,12 @@ class ProposalSearch extends Search
     {
         $filters = [];
 
-        // Trashed proposals are indexed
-        // but most of the time we don't want to see them
-        $filters['trashed'] = false;
+        if (
+            !isset($providedFilters['includeTrashed']) ||
+            false === $providedFilters['includeTrashed']
+        ) {
+            $filters['trashed'] = false;
+        }
 
         if (isset($providedFilters['selectionStep'])) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];

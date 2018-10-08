@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
@@ -101,28 +102,6 @@ fragment sourceInfos on Source {
 }
 EOF;
 
-    protected const SOURCE_HEADER_MAP = [
-        'contributions_sources_id' => 'id',
-        'contributions_sources_related_id' => 'related.id',
-        'contributions_sources_related_kind' => 'related.kind',
-        'contributions_sources_author_id' => 'author.id',
-        'contributions_sources_trashed' => 'trashed',
-        'contributions_sources_trashedAt' => 'trashedAt',
-        'contributions_sources_trashedReason' => 'trashedReason',
-        'contributions_sources_body' => 'body',
-        'contributions_sources_createdAt' => 'createdAt',
-        'contributions_sources_updatedAt' => 'updatedAt',
-        'contributions_sources_published' => 'published',
-        'contributions_sources_votesCount' => 'votes.totalCount',
-    ];
-
-    protected const VOTES_HEADER_MAP = [
-        'contributions_votes_id' => 'id',
-        'contributions_votes_author_id' => 'author.id',
-        'contributions_votes_value' => 'value',
-        'contributions_votes_createdAt' => 'createdAt',
-    ];
-
     protected const SHEET_HEADER = [
         'type',
         'contributions_id',
@@ -184,7 +163,27 @@ EOF;
         'contributions_sources_published',
         'contributions_sources_votesCount',
     ];
+    protected const SOURCE_HEADER_MAP = [
+        'contributions_sources_id' => 'id',
+        'contributions_sources_related_id' => 'related.id',
+        'contributions_sources_related_kind' => 'related.kind',
+        'contributions_sources_author_id' => 'author.id',
+        'contributions_sources_trashed' => 'trashed',
+        'contributions_sources_trashedAt' => 'trashedAt',
+        'contributions_sources_trashedReason' => 'trashedReason',
+        'contributions_sources_body' => 'body',
+        'contributions_sources_createdAt' => 'createdAt',
+        'contributions_sources_updatedAt' => 'updatedAt',
+        'contributions_sources_published' => 'published',
+        'contributions_sources_votesCount' => 'votes.totalCount',
+    ];
 
+    protected const VOTES_HEADER_MAP = [
+        'contributions_votes_id' => 'id',
+        'contributions_votes_author_id' => 'author.id',
+        'contributions_votes_value' => 'value',
+        'contributions_votes_createdAt' => 'createdAt',
+    ];
     protected const ARGUMENT_HEADER_MAP = [
         'contributions_arguments_related_id' => 'related.id',
         'contributions_arguments_related_kind' => 'related.kind',
@@ -200,6 +199,16 @@ EOF;
         'contributions_arguments_trashedAt' => 'trashedAt',
         'contributions_arguments_trashedReason' => 'trashedReason',
         'contributions_arguments_votesCount' => 'votes.totalCount',
+    ];
+
+    protected const REPORTING_HEADER_MAP = [
+        'contributions_reportings_related_id' => 'related.id',
+        'contributions_reportings_related_kind' => 'related.kind',
+        'contributions_reportings_id' => 'id',
+        'contributions_reportings_author_id' => 'author.id',
+        'contributions_reportings_type' => 'type',
+        'contributions_reportings_body' => 'body',
+        'contributions_reportings_createdAt' => 'createdAt',
     ];
 
     protected $contributionHeaderMap = [
@@ -224,32 +233,10 @@ EOF;
         'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
         'contributions_sourcesCount' => 'sources.totalCount',
         'contributions_versionsCount' => 'versions.totalCount',
-        'contributions_arguments_related_id' => 'related.id',
-        'contributions_arguments_related_kind' => 'related.kind',
-        'contributions_arguments_id' => 'id',
-        'contributions_arguments_author_id' => 'author.id',
-        'contributions_arguments_type' => 'type',
-        'contributions_arguments_body' => 'body',
-        'contributions_arguments_createdAt' => 'createdAt',
-        'contributions_arguments_updatedAt' => 'updatedAt',
-        'contributions_arguments_url' => 'url',
-        'contributions_arguments_published' => 'published',
-        'contributions_arguments_trashed' => 'trashed',
-        'contributions_arguments_trashedAt' => 'trashedAt',
-        'contributions_arguments_trashedReason' => 'trashedReason',
-        'contributions_arguments_votesCount' => 'votes.totalCount',
-        'contributions_votes_id' => 'votes.id',
-        'contributions_votes_author_id' => 'votes.author.id',
-        'contributions_votes_value' => 'votes.value',
-        'contributions_votes_createdAt' => 'votes.createdAt',
-        'contributions_reportings_related_id' => 'reportings.related.id',
-        'contributions_reportings_related_kind' => 'reportings.related.kind',
-        'contributions_reportings_id' => 'reportings.id',
-        'contributions_reportings_author_id' => 'reportings.author.id',
-        'contributions_reportings_type' => 'reportings.type',
-        'contributions_reportings_body' => 'reportings.body',
-        'contributions_reportings_createdAt' => 'reportings.createdAt',
-    ];
+    ] +
+    self::ARGUMENT_HEADER_MAP +
+    self::VOTES_HEADER_MAP +
+    self::REPORTING_HEADER_MAP;
 
     protected static $defaultName = 'capco:export:consultation';
 
@@ -455,8 +442,19 @@ ${sourceFragment}
                     hasNextPage
                 }
             }
-            reportings {
-              ...reportInfos
+            reportings(first: 100) {
+              totalCount
+              edges {
+              cursor
+                node {
+                  ...reportInfos
+                }
+              }
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+              }
             }
             versions(first: 100) {
                 totalCount
@@ -515,7 +513,17 @@ ${sourceFragment}
                           }
                         }
                         reportings {
-                          ...reportInfos
+                          totalCount
+                          edges {
+                            node {
+                              ...reportInfos
+                            }
+                          }
+                          pageInfo {
+                            startCursor
+                            endCursor
+                            hasNextPage
+                          }
                         }
                         votes {
                             totalCount
@@ -581,7 +589,23 @@ EOF;
                 $row[] = '';
             }
         }
+        $this->writer->addRow($row);
+    }
 
+    private function addContributionReportingsRow($contribution, $reporting): void
+    {
+        $row = ['reportings'];
+        foreach ($this->contributionHeaderMap as $path => $columnName) {
+            if (isset(self::REPORTING_HEADER_MAP[$path])) {
+                $row[] = exportUtils::parseCellValue(
+                    Arr::path($reporting, self::REPORTING_HEADER_MAP[$path])
+                );
+            } elseif (isset($this->contributionHeaderMap[$columnName])) {
+                $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
+            } else {
+                $row[] = '';
+            }
+        }
         $this->writer->addRow($row);
     }
 
@@ -613,6 +637,12 @@ EOF;
             $this->addContributionSourcesRow($contribution, $edge['node']);
         });
 
+        // we add Opinion's reportings rows.
+        $this->connectionTraversor->traverse($contribution, 'reportings', function ($edge) use (
+            $contribution
+        ) {
+            $this->addContributionReportingsRow($contribution, $edge['node']);
+        });
         // we add Opinion's arguments rows.
         $this->connectionTraversor->traverse(
             $contribution,

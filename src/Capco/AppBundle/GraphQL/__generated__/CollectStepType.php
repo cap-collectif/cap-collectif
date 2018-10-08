@@ -111,6 +111,12 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                             'description' => '(ROLE_SUPER_ADMIN only) Select also unpublished proposals.',
                             'defaultValue' => false,
                         ],
+                        [
+                            'name' => 'includeTrashed',
+                            'type' => Type::boolean(),
+                            'description' => 'Select the trashed proposal',
+                            'defaultValue' => false,
+                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Step\\CollectStepProposalResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), 3 => $globalVariable->get('container')->get("request_stack"))]);

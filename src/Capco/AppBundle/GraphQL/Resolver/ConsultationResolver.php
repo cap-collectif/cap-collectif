@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Answer;
 use Capco\AppBundle\Entity\Source;
@@ -71,11 +72,9 @@ class ConsultationResolver implements ContainerAwareInterface
         if ($data instanceof Reply) {
             return $typeResolver->resolve('Reply');
         }
-
         if ($data instanceof Answer) {
             return $typeResolver->resolve('Answer');
         }
-
         if ($data instanceof Post) {
             return $typeResolver->resolve('Post');
         }
@@ -256,26 +255,12 @@ class ConsultationResolver implements ContainerAwareInterface
         return $reporting->getReporter();
     }
 
-    public function resolvePropositionReportings(Opinion $opinion)
-    {
-        return $this->container->get('capco.reporting.repository')->findBy(['Opinion' => $opinion]);
-    }
-
-    public function resolveVersionReportings(OpinionVersion $version)
-    {
-        return $this->container->get('capco.reporting.repository')->findBy([
-            'opinionVersion' => $version,
-        ]);
-    }
-
     public function resolveArgumentUrl(Argument $argument): string
     {
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
             return (
-                $this->container->get(
-                    'Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver'
-                )->__invoke($parent) .
+                $this->container->get(OpinionUrlResolver::class)->__invoke($parent) .
                 '#arg-' .
                 $argument->getId()
             );

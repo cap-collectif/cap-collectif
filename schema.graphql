@@ -290,6 +290,9 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
 
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
@@ -698,6 +701,9 @@ type CollectStep implements Node & Step & ProposalStep {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # Select the trashed proposal
+    includeTrashed: Boolean = false
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -785,6 +791,9 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   body: String!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -797,7 +806,6 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   authorEmail: String
   authorIp: IP
   publicationStatus: CommentPublicationStatus!
-  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: PUBLISHED_AT, direction: DESC}): CommentVoteConnection!
   viewerHasVote: Boolean!
   viewerVote: CommentVote
@@ -1842,6 +1850,9 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
 
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
@@ -1879,7 +1890,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # Where the proposition has been placed.
   section: Section!
-  reportings: [Reporting]
   answer: Answer
   ranking: Int
   modals: [OpinionModal]
@@ -2247,6 +2257,9 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Repor
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
 
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
+
   # The admin url for this contribution.
   adminUrl: URI!
   progressSteps: [ProgressStep!]!
@@ -2254,7 +2267,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Repor
   currentVotableStep: ProposalStep
   viewerIsAnEvaluer: Boolean!
   news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: DESC}): NewsConnection!
-  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
 
   # The related project.
   project: Project!
@@ -2441,6 +2453,9 @@ type ProposalForm implements Node {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # Select the trashed proposal
+    includeTrashed: Boolean = false
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -2575,6 +2590,9 @@ interface ProposalStep {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # Select the trashed proposal
+    includeTrashed: Boolean = false
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -2839,7 +2857,6 @@ enum QuestionTypeValue {
   ranking
   medias
   button
-  number
   section
 }
 
@@ -3046,6 +3063,9 @@ type ReportEdge {
 interface Reportable {
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
 }
 
 # A report
@@ -3083,6 +3103,7 @@ type Reporting implements Contribution & ContributionWithAuthor {
 
 # A connection to a list of items.
 type ReportingConnection {
+  # Identifies the total count of items in the connection.
   totalCount: Int!
 
   # Information to aid in pagination.
@@ -3342,6 +3363,9 @@ type SelectionStep implements Node & Step & ProposalStep {
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
+
+    # Select the trashed proposal
+    includeTrashed: Boolean = false
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -3461,6 +3485,9 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -4357,6 +4384,9 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
 
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
@@ -4381,7 +4411,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   # The content of the contribution.
   bodyText: HTML!
-  reportings: [Reporting]
 
   # The section of the parent opinion.
   section: Section!

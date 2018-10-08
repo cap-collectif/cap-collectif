@@ -440,7 +440,7 @@ class ApplicationContext extends UserContext
      */
     public function iWaitElementToAppearOnPage(string $element, int $timeout = 3000)
     {
-        expect($this->getSession()->wait($timeout, "$('" . $element . "').length > 0"))->toBe(true);
+        $this->getSession()->wait($timeout, "$('" . $element . "').length > 0");
     }
 
     /**
