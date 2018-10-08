@@ -8,7 +8,10 @@ Reply:
       private:
         type: 'Boolean!'
       draft:
-        type: 'Boolean!'
+        type: 'ReplyStatus!'
+        description: 'The reply status.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyStatusResolver", [value])'
       createdAt:
         type: 'DateTime!'
       responses:

@@ -18,6 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Enum\ReplyStatus;
+use Capco\AppBundle\Traits\DraftableTrait;
 
 /**
  * @ORM\Table(name="reply")
@@ -31,6 +33,7 @@ class Reply implements Publishable, Contribution, VoteContribution
     use PrivatableTrait;
     use HasResponsesTrait;
     use PublishableTrait;
+    use DraftableTrait;
 
     /**
      * @Assert\NotNull()
@@ -62,11 +65,6 @@ class Reply implements Publishable, Contribution, VoteContribution
      */
     private $updatedAt;
 
-    /**
-     * @ORM\Column(name="draft", type="boolean")
-     */
-    private $draft = false;
-
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
@@ -96,18 +94,6 @@ class Reply implements Publishable, Contribution, VoteContribution
     public function setAuthor(User $author): self
     {
         $this->author = $author;
-
-        return $this;
-    }
-
-    public function getDraft()
-    {
-        return $this->draft;
-    }
-
-    public function setDraft(bool $enabled): self
-    {
-        $this->draft = $enabled;
 
         return $this;
     }
