@@ -21,7 +21,7 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
     const { fields, questions, member, formName, currentJump } = this.props;
     const arrayQuestions = [];
     questions.map(question => {
-      if(question.kind !== 'simple') {
+      if(question.kind !== 'simple' && question.id && question.questionChoices && question.questionChoices.length > 0) {
         arrayQuestions[question.id] = question.questionChoices;
       }
     });
@@ -30,14 +30,21 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
       <div className="form-group" id="questions_choice_panel_personal">
         {fields.map((memberConditions, index) => {
           return (
-            <FieldArray
-              component={QuestionJumpConditionAdminForm}
-              questions={questions}
-              member={memberConditions}
-              formName={formName}
-              index={index}
-              oldMember={member}
-            />
+            <div>
+              <FieldArray
+                component={QuestionJumpConditionAdminForm}
+                questions={questions}
+                member={memberConditions}
+                formName={formName}
+                index={index}
+                oldMember={member}
+              />
+              {(fields.length > 1 && (index+1) < fields.length) && (
+                <p>
+                  <b><FormattedMessage id="and-or-conditions" /></b>
+                </p>
+              )}
+              </div>
           );
         })}
           <div>
@@ -71,11 +78,13 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
                   type="select"
                   component={component}>
                   {questions.map((question, questionIndex) => {
-                    return (
-                      <option value={question.id}>
-                        {questionIndex}. {question.title}
-                      </option>
-                    );
+                    if (question.id){
+                      return (
+                          <option value={question.id}>
+                            {questionIndex}. {question.title}
+                          </option>
+                      );
+                    }
                   })}
                 </Field>
               </div>

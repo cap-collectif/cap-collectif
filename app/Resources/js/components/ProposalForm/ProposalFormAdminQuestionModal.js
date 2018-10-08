@@ -24,6 +24,7 @@ type Props = {
   type: string,
   validationRuleType: string,
   formErrors: Object,
+  currentQuestion: Object,
   intl: IntlShape,
 } & ParentProps;
 
@@ -42,6 +43,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
       type,
       intl,
       validationRuleType,
+      currentQuestion,
       formErrors,
     } = this.props;
     if (formErrors.questions !== undefined) {
@@ -167,12 +169,19 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                   <FormattedMessage id="conditional-jumps" />
                 </span>
               </h4>
-              <FieldArray
-                name={`${member}.jumps`}
-                component={QuestionsJumpAdmin}
-                formName={formName}
-                oldMember={member}
-              />
+              {(currentQuestion.id && currentQuestion.type !== 'ranking') && (
+                <FieldArray
+                  name={`${member}.jumps`}
+                  component={QuestionsJumpAdmin}
+                  formName={formName}
+                  oldMember={member}
+                />
+              )}
+              {(!currentQuestion.id && currentQuestion.type !== 'ranking') && (
+                <p>
+                  <FormattedMessage id="save-question-before-adding-conditional-jump" />
+                </p>
+              )}
               <h4 style={{ fontWeight: 'bold' }}>
                 <span>
                   <FormattedMessage id="group.admin.parameters" />
@@ -273,6 +282,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);
   return {
+    currentQuestion: selector(state, `${props.member}`),
     type: selector(state, `${props.member}.type`),
     validationRuleType: selector(state, `${props.member}.validationRule.type`),
     formErrors: getFormSyncErrors(props.formName)(state),

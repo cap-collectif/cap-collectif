@@ -35,7 +35,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
     const { currentQuestion } = this.state;
     const arrayQuestions = [];
     questions.map(question => {
-      if(question.kind !== 'simple') {
+      if(question.kind !== 'simple' && question.id && question.questionChoices && question.questionChoices.length > 0) {
         arrayQuestions[question.id] = question.questionChoices;
       }
     });
@@ -52,14 +52,13 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
           id={`${member}.question.id`}
           name={`${member}.question.id`}
           normalize={val => val && parseInt(val, 10)}
-          className={'col-md-8'}
           type="select"
           onChange={e => {
             this.handleQuestionChange(e);
           }}
           component={component}>
           {questions.map((question, questionIndex) => {
-            if(question.kind !== 'simple') {
+            if(question.kind !== 'simple' && question.id && question.questionChoices && question.questionChoices.length > 0) {
               return (
               <option value={question.id}>
                 {questionIndex}. {question.title}
@@ -71,7 +70,6 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
         <Field
           id={`${member}.operator`}
           name={`${member}.operator`}
-          className={'col-md-3'}
           type="select"
           component={component}>
           <option value="IS">
