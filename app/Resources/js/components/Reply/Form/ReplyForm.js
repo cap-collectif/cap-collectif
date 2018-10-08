@@ -175,7 +175,7 @@ export class ReplyForm extends React.Component<Props> {
   };
 
   formIsDisabled() {
-    const { questionnaire, user } = this.props;
+    const { questionnaire, user, reply } = this.props;
 
     return (
       !questionnaire.contribuable ||
@@ -183,7 +183,8 @@ export class ReplyForm extends React.Component<Props> {
       (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
       (questionnaire.viewerReplies &&
         questionnaire.viewerReplies.length > 0 &&
-        !questionnaire.multipleRepliesAllowed)
+        !questionnaire.multipleRepliesAllowed &&
+        !reply)
     );
   }
 
