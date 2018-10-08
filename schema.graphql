@@ -702,8 +702,8 @@ type CollectStep implements Node & Step & ProposalStep {
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
 
-    # Select the trashed proposal
-    includeTrashed: Boolean = false
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -2454,8 +2454,8 @@ type ProposalForm implements Node {
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
 
-    # Select the trashed proposal
-    includeTrashed: Boolean = false
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -2591,8 +2591,8 @@ interface ProposalStep {
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
 
-    # Select the trashed proposal
-    includeTrashed: Boolean = false
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).
@@ -3364,8 +3364,8 @@ type SelectionStep implements Node & Step & ProposalStep {
     # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
     includeUnpublished: Boolean = false
 
-    # Select the trashed proposal
-    includeTrashed: Boolean = false
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
   ): ProposalConnection!
 
   # The viewer unpublished proposals (only visible by viewer).

@@ -154,11 +154,12 @@ class ProposalSearch extends Search
     {
         $filters = [];
 
-        if (
-            !isset($providedFilters['includeTrashed']) ||
-            false === $providedFilters['includeTrashed']
-        ) {
-            $filters['trashed'] = false;
+        if (isset($providedFilters['trashedStatus'])) {
+            if ('TRASHED' === $providedFilters['trashedStatus']) {
+                $filters['trashed'] = true;
+            } elseif ('NOT_TRASHED' === $providedFilters['trashedStatus']) {
+                $filters['trashed'] = false;
+            }
         }
 
         if (isset($providedFilters['selectionStep'])) {

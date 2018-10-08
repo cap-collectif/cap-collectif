@@ -1,0 +1,11 @@
+ProposalTrashedStatus:
+  type: enum
+  config:
+    description: 'Possible trashed status for a `Proposal`.'
+    values:
+      TRASHED:
+        value: 'TRASHED'
+        description: '`TRASHED` status to include the trashed proposal.'
+      NOT_TRASHED:
+        value: 'NOT_TRASHED'
+        description: '`NOT_TRASHED` status to inclide the non trashed proposal.'

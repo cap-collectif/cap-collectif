@@ -112,10 +112,10 @@ final class SelectionStepType extends ObjectType implements GeneratedTypeInterfa
                             'defaultValue' => false,
                         ],
                         [
-                            'name' => 'includeTrashed',
-                            'type' => Type::boolean(),
-                            'description' => 'Select the trashed proposal',
-                            'defaultValue' => false,
+                            'name' => 'trashedStatus',
+                            'type' => $globalVariable->get('typeResolver')->resolve('ProposalTrashedStatus'),
+                            'description' => 'If non-null, filters proposals with the given trashed status.',
+                            'defaultValue' => 'NOT_TRASHED',
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

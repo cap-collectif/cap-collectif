@@ -42,10 +42,10 @@ WithProposals:
             type: 'Boolean'
             description: '(ROLE_SUPER_ADMIN only) Select also unpublished proposals.'
             defaultValue: false
-          includeTrashed:
-            type: 'Boolean'
-            description: 'Include the trashed proposals.'
-            defaultValue: false
+          trashedStatus:
+            type: 'ProposalTrashedStatus'
+            description: 'If non-null, filters proposals with the given trashed status.'
+            defaultValue: 'NOT_TRASHED'
       viewerProposalsUnpublished:
         access: "@=hasRole('ROLE_USER')"
         type: 'ProposalConnection'
