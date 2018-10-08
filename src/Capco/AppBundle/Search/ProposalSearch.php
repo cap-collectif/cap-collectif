@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Enum\ProposalTrashedStatus;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -155,9 +156,9 @@ class ProposalSearch extends Search
         $filters = [];
 
         if (isset($providedFilters['trashedStatus'])) {
-            if ('TRASHED' === $providedFilters['trashedStatus']) {
+            if (ProposalTrashedStatus::TRASHED === $providedFilters['trashedStatus']) {
                 $filters['trashed'] = true;
-            } elseif ('NOT_TRASHED' === $providedFilters['trashedStatus']) {
+            } elseif (ProposalTrashedStatus::NOT_TRASHED === $providedFilters['trashedStatus']) {
                 $filters['trashed'] = false;
             }
         }
