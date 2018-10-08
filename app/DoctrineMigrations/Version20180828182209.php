@@ -2,6 +2,7 @@
 
 namespace Application\Migrations;
 
+use Capco\AppBundle\Toggle\Manager;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -24,7 +25,7 @@ final class Version20180828182209 extends AbstractMigration implements Container
         $this->addSql(
             'ALTER TABLE fos_user ADD openid_id VARCHAR(255) DEFAULT NULL, ADD openid_access_token VARCHAR(255) DEFAULT NULL'
         );
-        $this->container->get('capco.toggle.manager')->deactivate('login_openid');
+        $this->container->get(Manager::class)->deactivate('login_openid');
     }
 
     public function down(Schema $schema): void
