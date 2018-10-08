@@ -115,35 +115,35 @@ Capco\AppBundle\Entity\QuestionChoice:
   questionchoice19:
     id: questionchoice19
     title: Oui
-    color: '#5cb85c'
+    color: '#5bc0de'
     position: 1
     question: '@multiplequestion7'
 
   questionchoice20:
     id: questionchoice20
     title: Il bluffe
-    color: '#d9534f'
+    color: '#5cb85c'
     position: 2
     question: '@multiplequestion7'
 
   questionchoice21:
     id: questionchoice21
     title: Du pur bullshit
-    color: '#d953f9'
+    color: '#5cb85c'
     position: 2
     question: '@multiplequestion8'
 
   questionchoice22:
     id: questionchoice22
     title: Au top
-    color: '#FFF600'
+    color: '#fffff'
     position: 1
     question: '@multiplequestion8'
 
   questionchoice23:
     id: questionchoice23
     title: Incohérente
-    color: '#FF000'
+    color: '#fffff'
     position: 1
     question: '@multiplequestion9'
 
