@@ -2858,6 +2858,12 @@ type Questionnaire implements Node {
   acknowledgeReplies: Boolean!
   phoneConfirmation: Boolean!
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+
+  # Whether the user has reply to a questionnaire.
+  userHasReply(
+    # The user's login.
+    login: String!
+  ): Boolean!
 }
 
 input QuestionnaireAbstractQuestionInput {

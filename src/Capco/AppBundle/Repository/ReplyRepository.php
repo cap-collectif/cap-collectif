@@ -3,18 +3,20 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 class ReplyRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
 
-    public function countPublishedForQuestionnaire(Questionnaire $questionnaire)
+    public function countPublishedForQuestionnaire(Questionnaire $questionnaire): int
     {
         $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT(reply.id) as repliesCount')
@@ -24,7 +26,7 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getOneForUserAndQuestionnaire(Questionnaire $questionnaire, User $user)
+    public function getOneForUserAndQuestionnaire(Questionnaire $questionnaire, User $user): ?Reply
     {
         $qb = $this->getPublishedQueryBuilder()
             ->andWhere('reply.questionnaire = :questionnaire')
@@ -63,17 +65,23 @@ class ReplyRepository extends EntityRepository
 
     public function getForUserAndQuestionnaire(
         Questionnaire $questionnaire,
-        User $user
+        User $user,
+        bool $excludePrivate = false
     ): Collection {
         $qb = $this->createQueryBuilder('reply')
             ->andWhere('reply.questionnaire = :questionnaire')
             ->andWhere('reply.author = :user')
             ->setParameter('questionnaire', $questionnaire)
             ->setParameter('user', $user);
+
+        if ($excludePrivate) {
+            $qb->andWhere('reply.private = :private')->setParameter('private', false);
+        }
+
         return new ArrayCollection($qb->getQuery()->getResult());
     }
 
-    public function getEnabledByQuestionnaireAsArray(Questionnaire $questionnaire)
+    public function getEnabledByQuestionnaireAsArray(Questionnaire $questionnaire): array
     {
         $qb = $this->createQueryBuilder('reply')
             ->andWhere('reply.published = true')
@@ -113,7 +121,7 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    protected function getPublishedQueryBuilder()
+    protected function getPublishedQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('reply')->andWhere('reply.published = true');
     }

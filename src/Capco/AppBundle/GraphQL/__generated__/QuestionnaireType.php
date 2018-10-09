@@ -199,6 +199,25 @@ final class QuestionnaireType extends ObjectType implements GeneratedTypeInterfa
                     'public' => null,
                     'access' => null,
                 ],
+                'userHasReply' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                        [
+                            'name' => 'login',
+                            'type' => Type::nonNull(Type::string()),
+                            'description' => 'The user\'s login.',
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\UserHasReplyResolver", array(0 => $value, 1 => $args)]);
+                    },
+                    'description' => 'Whether the user has reply to a questionnaire.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
             ];
             },
             'interfaces' => function () use ($globalVariable) {

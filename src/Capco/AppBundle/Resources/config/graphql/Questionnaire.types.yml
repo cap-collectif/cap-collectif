@@ -36,3 +36,12 @@ Questionnaire:
         argsBuilder: 'Relay::Connection'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireParticipantsResolver", [value, args])'
+      userHasReply:
+        type: 'Boolean!'
+        description: 'Whether the user has reply to a questionnaire.'
+        args:
+          login:
+            type: 'String!'
+            description: "The user's login."
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\UserHasReplyResolver", [value, args])'
