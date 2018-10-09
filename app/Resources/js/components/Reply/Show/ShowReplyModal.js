@@ -4,18 +4,19 @@ import { Modal } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
+import ResponseValue from './ResponseValue';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
-import { type UpdateReplyModal_reply } from './__generated__/UpdateReplyModal_reply.graphql';
+import { type ShowReplyModal_reply } from './__generated__/ShowReplyModal_reply.graphql';
+import ReplyModalButtons from './ReplyModalButtons';
 import CloseButton from '../../Form/CloseButton';
-import ReplyForm from '../Form/ReplyForm';
 
 type Props = {
   show: boolean,
-  reply: UpdateReplyModal_reply,
+  reply: ShowReplyModal_reply,
   onClose: Function,
 };
 
-export class UpdateReplyModal extends React.Component<Props> {
+export class ShowReplyModal extends React.Component<Props> {
   onChange = () => {
     const { onClose } = this.props;
     onClose();
@@ -55,10 +56,17 @@ export class UpdateReplyModal extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ReplyForm questionnaire={reply.questionnaire} reply={reply} onClose={onClose} />
+          {reply.responses.filter(Boolean).map((response, index) => (
+            <div key={index}>
+              {response.question.title}
+              {/* $FlowFixMe $refType */}
+              <ResponseValue response={response} />
+            </div>
+          ))}
         </Modal.Body>
         <Modal.Footer>
           {/* $FlowFixMe $refType */}
+          <ReplyModalButtons reply={reply} onChange={this.onChange} onClose={onClose} />
           <CloseButton onClose={onClose} />
         </Modal.Footer>
       </Modal>
@@ -66,15 +74,19 @@ export class UpdateReplyModal extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(UpdateReplyModal, {
+export default createFragmentContainer(ShowReplyModal, {
   reply: graphql`
-    fragment UpdateReplyModal_reply on Reply {
+    fragment ShowReplyModal_reply on Reply {
+      ...ReplyModalButtons_reply
       ...UnpublishedLabel_publishable
-      ...ReplyForm_reply
       id
       createdAt
-      questionnaire {
-        ...ReplyForm_questionnaire
+      responses {
+        question {
+          id
+          title
+        }
+        ...ResponseValue_response
       }
     }
   `,

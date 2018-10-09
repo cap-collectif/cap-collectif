@@ -242,7 +242,6 @@ exports[`<ProposalForm /> should render a create form 1`] = `
   <FieldArray
     change={[MockFunction]}
     component={[Function]}
-    form="formName"
     intl={
       Object {
         "formatDate": [Function],
@@ -546,7 +545,6 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   <FieldArray
     change={[MockFunction]}
     component={[Function]}
-    form="formName"
     intl={
       Object {
         "formatDate": [Function],

@@ -12,7 +12,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
-      form="formName"
       intl={
         Object {
           "formatDate": [Function],
@@ -183,7 +182,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
       <Field
         component={[Function]}
         disabled={true}
-        id="formName-reply-private"
+        id="reply-private"
         name="private"
         type="checkbox"
       >
@@ -199,7 +198,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="formName-submit-create-reply"
+      id="submit-create-reply"
       type="submit"
     >
       <FormattedMessage
@@ -223,7 +222,6 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
-      form="formName"
       intl={
         Object {
           "formatDate": [Function],
@@ -360,7 +358,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
       <Field
         component={[Function]}
         disabled={true}
-        id="formName-reply-private"
+        id="reply-private"
         name="private"
         type="checkbox"
       >
@@ -376,7 +374,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="formName-submit-create-reply"
+      id="submit-create-reply"
       type="submit"
     >
       <FormattedMessage
@@ -400,7 +398,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
-      form="formName"
       intl={
         Object {
           "formatDate": [Function],
@@ -612,7 +609,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
       <Field
         component={[Function]}
         disabled={true}
-        id="formName-reply-private"
+        id="reply-private"
         name="private"
         type="checkbox"
       >
@@ -628,7 +625,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="formName-submit-create-reply"
+      id="submit-create-reply"
       type="submit"
     >
       <FormattedMessage
@@ -652,7 +649,6 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
-      form="formName"
       intl={
         Object {
           "formatDate": [Function],
@@ -811,7 +807,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
       <Field
         component={[Function]}
         disabled={true}
-        id="formName-reply-private"
+        id="reply-private"
         name="private"
         type="checkbox"
       >
@@ -827,7 +823,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="formName-submit-create-reply"
+      id="submit-create-reply"
       type="submit"
     >
       <FormattedMessage
@@ -851,7 +847,6 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
       change={[MockFunction]}
       component={[Function]}
       disabled={true}
-      form="formName"
       intl={
         Object {
           "formatDate": [Function],
@@ -954,7 +949,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
       <Field
         component={[Function]}
         disabled={true}
-        id="formName-reply-private"
+        id="reply-private"
         name="private"
         type="checkbox"
       >
@@ -970,7 +965,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="formName-submit-create-reply"
+      id="submit-create-reply"
       type="submit"
     >
       <FormattedMessage

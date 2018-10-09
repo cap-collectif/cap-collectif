@@ -129,14 +129,6 @@ Mutation:
           payloadType: AddReplyPayload
           mutateAndGetPayload:
             '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddReplyMutation", [value, getUser()])'
-      updateReply:
-        access: "@=hasRole('ROLE_USER')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: UpdateReplyInput
-          payloadType: UpdateReplyPayload
-          mutateAndGetPayload:
-            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateReplyMutation", [value, getUser()])'
       deleteReply:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'

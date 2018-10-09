@@ -93,24 +93,20 @@ Scenario: Logged in user wants to see the list of his replies
   When I go to a questionnaire step
   Then I should see my reply
 
-## Update
-
 @javascript
-Scenario: Logged in user wants to update a reply
+Scenario: Logged in user wants to see his reply
   Given I am logged in as admin
   When I go to a questionnaire step
-  And I click on the update reply button
-  And I update the questionnaire form
-  And I submit my updated reply
-  Then I should see "reply.request.create.success" in the "#global-alert-box" element
-  And I should see my reply
+  And I click on my first reply
+  Then I should see my first reply
 
 ## Deletion
 
-@javascript @database 
+@javascript @database
 Scenario: Logged in user wants to remove a reply
   Given I am logged in as admin
   When I go to a questionnaire step
+  And I click on my first reply
   And I click the delete reply button
   And I confirm reply deletion
   Then I should see "reply.request.delete.success" in the "#global-alert-box" element

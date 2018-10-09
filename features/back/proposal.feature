@@ -9,11 +9,11 @@ Scenario: Logged in admin wants edit a proposal content
     | title | Proposition pas encore votable |
     | summary | "Un super résumé" |
     | proposal_body | "Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfucking' house, fucking' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'?" |
-    | proposal-admin-edit-responses[2]  | HAHAHA |
+    | responses[2]  | HAHAHA |
   And I fill the proposal content address with "5 Allée Rallier-du-Baty 35000 Rennes"
   And I change the proposals "category" with option "Politique"
   And I attach the file "/var/www/features/files/image.jpg" to "proposal_media_field"
-  And I attach the file "/var/www/features/files/document.pdf" to "proposal-admin-edit-responses[3]_field"
+  And I attach the file "/var/www/features/files/document.pdf" to "responses[3]_field"
   And I wait 3 seconds
   Then I save current admin content proposal
   And I wait 1 seconds

@@ -324,7 +324,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       <FieldArray
         change={[MockFunction]}
         component={[Function]}
-        form="proposal-admin-edit"
         intl={
           Object {
             "formatDate": [Function],

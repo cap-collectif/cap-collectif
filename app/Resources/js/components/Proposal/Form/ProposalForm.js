@@ -324,7 +324,7 @@ export class ProposalForm extends React.Component<Props, State> {
   };
 
   render() {
-    const { intl, titleValue, proposalForm, features, themes, error, form, responses } = this.props;
+    const { intl, titleValue, proposalForm, features, themes, error, responses } = this.props;
     const {
       districtIdsFilteredByAddress,
       isLoadingTitleSuggestions,
@@ -514,7 +514,6 @@ export class ProposalForm extends React.Component<Props, State> {
         <FieldArray
           name="responses"
           component={renderResponses}
-          form={form}
           questions={proposalForm.questions}
           intl={intl}
           change={this.props.change}
