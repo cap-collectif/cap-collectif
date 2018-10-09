@@ -72,9 +72,9 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
-        $this->fillField('CreateReplyForm-responses[1]', '');
+        $this->fillField('CreateReplyForm-responses[0]', '');
         $this->selectOption(
-            'CreateReplyForm-responses[5]',
+            'CreateReplyForm-responses[4]',
             'Pas assez fort (Mon sonotone est en panne)'
         );
     }
@@ -85,7 +85,7 @@ trait QuestionnaireStepsTrait
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
     {
         $this->fillField(
-            'CreateReplyForm-responses[1]',
+            'CreateReplyForm-responses[0]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
         $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice1');
@@ -173,6 +173,7 @@ trait QuestionnaireStepsTrait
             'questionnaire page'
         )->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
+        $this->iWait(3);
         $this->assertElementContainsText($userReplySelector, 'reply.private');
     }
 
@@ -286,20 +287,25 @@ trait QuestionnaireStepsTrait
 
     protected function fillQuestionnaireForm($edition = false)
     {
+        $page = $this->navigationContext->getPage('questionnaire page');
+        $this->getSession()->wait(
+            2000,
+            "$('" . $page->getSelector('questionnaire form') . "').length > 0"
+        );
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
         if (!$edition) {
             $this->fillField(
-                'CreateReplyForm-responses[1]',
+                'CreateReplyForm-responses[0]',
                 'Je pense que c\'est la ville parfaite pour organiser les JO'
             );
-            $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice1');
-            $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice2');
-            $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice3');
+            $this->checkOption('CreateReplyForm-responses[2]_choice-questionchoice1');
+            $this->checkOption('CreateReplyForm-responses[2]_choice-questionchoice2');
+            $this->checkOption('CreateReplyForm-responses[2]_choice-questionchoice3');
 
             return;
         }
         $this->fillField(
-            'CreateReplyForm-responses[1]',
+            'CreateReplyForm-responses[0]',
             'En fait c\'est nul, je ne veux pas des JO à Paris'
         );
     }
@@ -308,14 +314,14 @@ trait QuestionnaireStepsTrait
     {
         $this->iShouldSeeElementOnPage('user reply modal', 'questionnaire page');
         $this->fillField(
-            'UpdateReplyForm-reply2-responses[1]',
+            'UpdateReplyForm-reply2-responses[0]',
             'En fait c\'est nul, je ne veux pas des JO à Paris'
         );
         $this->fillField(
-            'UpdateReplyForm-reply2-responses[1]',
+            'UpdateReplyForm-reply2-responses[0]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
-        $this->checkOption('UpdateReplyForm-reply2-responses[3]_choice-questionchoice1');
+        $this->checkOption('UpdateReplyForm-reply2-responses[2]_choice-questionchoice1');
 
         $this->iClickOneRankingChoiceRightArrowUpdate();
     }
