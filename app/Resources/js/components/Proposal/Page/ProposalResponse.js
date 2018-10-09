@@ -44,13 +44,35 @@ class ProposalResponse extends React.PureComponent<Props> {
         break;
 
       case 'radio':
+      case 'checkbox':
       case 'button': {
         const radioLabels = JSON.parse(response.value || '');
-        const radioValue = radioLabels.labels.map(label => `${label} `);
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
-            <p>{radioValue}</p>
+            {radioLabels.labels.length > 1 ? (
+              <ul>
+                {radioLabels.labels.map((label, index) => (
+                  <li key={index}>{label}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>{radioLabels.labels[0] ? radioLabels.labels[0] : ''}</p>
+            )}
+          </div>
+        );
+        break;
+      }
+      case 'ranking': {
+        const radioLabels = JSON.parse(response.value || '');
+        value = (
+          <div>
+            <h3 className="h3">{response.question.title}</h3>
+            <ol>
+              {radioLabels.labels.map((label, index) => (
+                <li key={index}>{label}</li>
+              ))}
+            </ol>
           </div>
         );
         break;

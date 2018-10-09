@@ -2,7 +2,7 @@
 
 exports[`<ProjectTrashButton /> should render correctly 1`] = `
 <div
-  className="container container--custom text-center"
+  className="container text-center"
 >
   <div
     className="row"

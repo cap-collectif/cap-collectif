@@ -20,9 +20,11 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-    <div class="container container--custom">
-        {% include '@CapcoApp/Project/show_title.html.twig' %}
-    </div>
+    <section class="section--custom">
+        <div class="container">
+            {% include '@CapcoApp/Project/show_title.html.twig' %}
+        </div>
+    </section>
 
     {% if project.steps | length > 1 %}
         <section>
@@ -34,22 +36,20 @@
         </section>
     {% endif %}
 
-    <div
-        class="container container--custom"
-        {{ project.steps | length > 1 ? "style='padding-top: 0'" }}
-    >
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12" id="details">
 
-        <div class="row">
-            <div class="col-xs-12" id="details">
+                    {% block details %}{% endblock %}
 
-                {% block details %}{% endblock %}
-
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
     {% if showTrash %}
-        <section>
+        <section class="section--alt">
             {{ react_render_component('ProjectTrashButtonApp', {
                 'props': {
                     'link': path('app_project_show_trashed', {'projectSlug': project.slug })
