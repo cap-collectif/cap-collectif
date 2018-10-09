@@ -180,10 +180,10 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
       handleSubmit,
       submitting,
       proposal,
+      form,
       intl,
     } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
-
     return (
       <div className="box box-primary container-fluid">
         <div className="box-content box-content__notation-form">
@@ -253,6 +253,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
               <FieldArray
                 name="responses"
                 component={renderResponses}
+                form={form}
                 questions={evaluationForm ? evaluationForm.questions : []}
                 responses={this.props.responses}
                 intl={this.props.intl}

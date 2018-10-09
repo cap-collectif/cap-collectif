@@ -23,14 +23,12 @@
 {% endblock %}
 
 {% block body %}
-<section class="section--custom">
-    <div class="container" style="max-width: 660px">
-        {{ 'confidentialite.content' | trans({}, 'CapcoAppBundle')|raw }}
-        <div class="row" style="margin-top: 10px">
-            <div class="col-xs-12 col-sm-8 col-md-12">
-                {{ react_render_component('CookieApp') }}
-            </div>
-        </div> <!-- row -->
-    </div>
-</section>
+<div class="container container--custom" style="max-width: 660px">
+    {{ 'confidentialite.content' | trans({}, 'CapcoAppBundle')|raw }}
+    <div class="row" style="margin-top: 10px">
+        <div class="col-xs-12 col-sm-8 col-md-12">
+            {{ react_render_component('CookieApp') }}
+        </div>
+    </div> <!-- row -->
+</div>
 {% endblock %}

@@ -1,0 +1,7 @@
+UpdateReplyPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      reply:
+        type: 'Reply'
+        description: 'Update a reply'

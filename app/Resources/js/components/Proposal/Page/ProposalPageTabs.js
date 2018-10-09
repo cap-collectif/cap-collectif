@@ -64,7 +64,7 @@ export class ProposalPageTabs extends React.Component<Props> {
       <Tab.Container
         id="proposal-page-tabs"
         defaultActiveKey={this.getDefaultKey()}
-        className="tabs__container">
+        className="tabs__container container--custom">
         <div>
           <div className="tabs">
             <div className="container">

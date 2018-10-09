@@ -383,18 +383,15 @@
         background-color: {{ footer2Bg | raw }};
     }
 
-    .section--alt,
-    .main .section--custom:nth-of-type(odd) {
+    .container--alt,
+    .main .container--custom:nth-of-type(odd) {
         color: {{ sectionText | raw }};
     }
 
-    .tabs__container .tabs {
+    .container--alt:after,
+    .tabs__container .tabs,
+    .main .container--custom:nth-of-type(odd):after {
         background: {{ sectionBg | raw }};
-    }
-
-    .section--alt,
-    .main .section--custom:nth-of-type(odd) {
-        background-color: {{ sectionBg | raw }};
     }
 
     .avatar {
@@ -402,26 +399,26 @@
     }
 
     {% if header2Text is not null %}
-        .main .section--header {
+        .main .container--header {
             color: {{ header2Text | raw }} !important;
         }
     {% endif %}
 
     {% if header2Bg is not null %}
-        .main .section--header {
+        .main .container--header {
             background-color: {{ header2Bg | raw }} !important;
         }
     {% endif %}
 
     {% if header2Title is not null %}
-        .section--header h1,
-        .section--header h2,
-        .section--header h3,
-        .section--header h4,
-        .section--header h5 {
+        .container--header h1,
+        .container--header h2,
+        .container--header h3,
+        .container--header h4,
+        .container--header h5 {
             color: {{ header2Title | raw }};
         }
-        .section--header h2 {
+        .container--header h2 {
             border-bottom-color: {{ header2Title | raw }};
         }
     {% endif %}
@@ -621,11 +618,23 @@
             background-color: {{ vipBg | raw }} !important;
         }
 
-        .main .section--custom.bg-vip {
+        .main .container--custom.bg-vip {
             position: relative;
-            background-color: {{ vipBg | raw }};
         }
 
+        .main .container--custom.bg-vip:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin-left: -200%;
+            margin-right: -200%;
+            z-index: -1;
+            background: {{ vipBg | raw }};
+        }
         .bg-vip .smart-fade:after {
             background: linear-gradient(to right, rgba(255,255,255,0), {{ vipBg | raw }} 50%) !important;
         }

@@ -1,23 +1,21 @@
 {% if posts|length > 0 %}
-    <section id="news" class="section--custom">
-        <div class="container">
-            {% if null != section.title %}
-                <h2 class="h2">{{ section.title }}</h2>
-            {% else %}
-                <h2 class="h2">{{ 'homepage.blog.title' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% endif %}
-            {% if null != section.teaser %}
-                <p class="block">{{ section.teaser }}</p>
-            {% endif %}
-            {% if null != section.body %}
-                <p>{{ section.body | raw }}</p>
-            {% endif %}
-            <ul class="media-list">
-                {% for post in posts %}
-                    {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
-                {% endfor %}
-            </ul>
-            <a href="{{ path('app_blog') }}" class="btn  btn-primary  btn--outline">{{ 'blog.see_all'|trans({}, 'CapcoAppBundle') }}</a>
-        </div>
-    </section>
+    <div id="news" class="container  container--custom">
+        {% if null != section.title %}
+            <h2 class="h2">{{ section.title }}</h2>
+        {% else %}
+            <h2 class="h2">{{ 'homepage.blog.title' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% endif %}
+        {% if null != section.teaser %}
+            <p class="block">{{ section.teaser }}</p>
+        {% endif %}
+        {% if null != section.body %}
+            <p>{{ section.body | raw }}</p>
+        {% endif %}
+        <ul class="media-list">
+            {% for post in posts %}
+                {% include '@CapcoApp/Blog/blockPost.html.twig' with {'post': post} only %}
+            {% endfor %}
+        </ul>
+        <a href="{{ path('app_blog') }}" class="btn  btn-primary  btn--outline">{{ 'blog.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    </div>
 {% endif %}

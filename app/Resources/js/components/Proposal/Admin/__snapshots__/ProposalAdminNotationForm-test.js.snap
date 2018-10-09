@@ -111,6 +111,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
         </div>
         <FieldArray
           component={[Function]}
+          form="formName"
           intl={
             Object {
               "formatDate": [Function],

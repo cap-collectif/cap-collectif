@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Modal } from 'react-bootstrap';
-import type { ReplyDeleteModal_reply } from './__generated__/ReplyDeleteModal_reply.graphql';
+import type { DeleteReplyModal_reply } from './__generated__/DeleteReplyModal_reply.graphql';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
@@ -11,33 +11,29 @@ import DeleteReplyMutation from '../../../mutations/DeleteReplyMutation';
 import { UPDATE_ALERT } from '../../../constants/AlertConstants';
 
 type Props = {
-  reply: ReplyDeleteModal_reply,
+  reply: DeleteReplyModal_reply,
   show: boolean,
-  onToggleModal: (value: boolean) => void,
-  onDelete: () => void,
+  onClose: () => void,
 };
 
 type State = {
   isSubmitting: boolean,
 };
 
-export class ReplyDeleteModal extends React.Component<Props, State> {
-  state = {
-    isSubmitting: false,
-  };
+export class DeleteReplyModal extends React.Component<Props, State> {
+  state = { isSubmitting: false };
 
   handleSubmit = () => {
-    const { onDelete, reply } = this.props;
+    const { reply, onClose } = this.props;
 
     this.setState({ isSubmitting: true });
     DeleteReplyMutation.commit({ input: { id: reply.id } })
       .then(() => {
-        this.close();
+        onClose();
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'reply.request.delete.success' },
         });
-        onDelete();
       })
       .catch(() => {
         this.setState({ isSubmitting: false });
@@ -48,18 +44,8 @@ export class ReplyDeleteModal extends React.Component<Props, State> {
       });
   };
 
-  close = () => {
-    const { onToggleModal } = this.props;
-    onToggleModal(false);
-  };
-
-  show = () => {
-    const { onToggleModal } = this.props;
-    onToggleModal(true);
-  };
-
   render() {
-    const { reply, show } = this.props;
+    const { reply, show, onClose } = this.props;
     return (
       <div>
         <Modal
@@ -67,7 +53,7 @@ export class ReplyDeleteModal extends React.Component<Props, State> {
           className="reply__modal--delete"
           animation={false}
           show={show}
-          onHide={this.close}
+          onHide={onClose}
           bsSize="large"
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
@@ -79,7 +65,7 @@ export class ReplyDeleteModal extends React.Component<Props, State> {
             <p>{<FormattedMessage id="reply.delete.confirm" />}</p>
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={this.close} />
+            <CloseButton onClose={onClose} />
             <SubmitButton
               id={`reply-confirm-delete-button${reply.id}`}
               className="reply__confirm-delete-btn"
@@ -95,9 +81,9 @@ export class ReplyDeleteModal extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(ReplyDeleteModal, {
+export default createFragmentContainer(DeleteReplyModal, {
   reply: graphql`
-    fragment ReplyDeleteModal_reply on Reply {
+    fragment DeleteReplyModal_reply on Reply {
       id
       questionnaire {
         id

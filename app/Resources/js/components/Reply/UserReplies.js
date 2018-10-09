@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ListGroup } from 'react-bootstrap';
-import ReplyModalLink from './Show/ReplyModalLink';
+import ReplyModalLink from './Edit/ReplyModalLink';
 import { type UserReplies_questionnaire } from './__generated__/UserReplies_questionnaire.graphql';
 
 type Props = {
@@ -28,7 +28,7 @@ export class UserReplies extends React.Component<Props> {
             }}
           />
         </h3>
-        <ListGroup>
+        <ListGroup className="list-group-custom">
           {questionnaire.viewerReplies.map((reply, index) => (
             // $FlowFixMe $refType
             <ReplyModalLink key={index} reply={reply} questionnaire={questionnaire} />

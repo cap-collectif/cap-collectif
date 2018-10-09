@@ -1,37 +1,36 @@
 // @flow
 import React, { Fragment } from 'react';
 import { FormattedMessage, FormattedDate } from 'react-intl';
-import { ListGroupItem } from 'react-bootstrap';
+import { ListGroupItem, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
 import type { ReplyModalLink_reply } from './__generated__/ReplyModalLink_reply.graphql';
-import ShowReplyModal from './ShowReplyModal';
+import UpdateReplyModal from './UpdateReplyModal';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
+import DeleteReplyModal from '../Delete/DeleteReplyModal';
 
 type Props = {
   reply: ReplyModalLink_reply,
   questionnaire: Object,
 };
 
+type CurrentOpenModal = 'edit' | 'delete' | null;
+
 type State = {
-  showModal: boolean,
+  currentOpenModal: CurrentOpenModal,
 };
 
 export class ReplyModalLink extends React.Component<Props, State> {
   state = {
-    showModal: false,
+    currentOpenModal: null,
   };
 
-  showModal = () => {
-    this.setState({
-      showModal: true,
-    });
+  showModal = (modal: CurrentOpenModal) => {
+    this.setState({ currentOpenModal: modal });
   };
 
   hideModal = () => {
-    this.setState({
-      showModal: false,
-    });
+    this.setState({ currentOpenModal: null });
   };
 
   render() {
@@ -39,7 +38,7 @@ export class ReplyModalLink extends React.Component<Props, State> {
 
     return (
       <Fragment>
-        <ListGroupItem className="reply" id={`reply-link-${reply.id}`} onClick={this.showModal}>
+        <ListGroupItem className="reply" id={`reply-link-${reply.id}`}>
           <FormattedMessage
             id="reply.show.link"
             values={{
@@ -64,13 +63,30 @@ export class ReplyModalLink extends React.Component<Props, State> {
           )}
           {/* $FlowFixMe $refType */}
           <UnpublishedLabel publishable={reply} />
+          <div>
+            <Button
+              className="mr-10 reply__update-btn"
+              bsStyle="warning"
+              onClick={() => this.showModal('edit')}>
+              <FormattedMessage id="glodal.edit" />
+            </Button>
+            <Button bsStyle="danger reply__delete-btn" onClick={() => this.showModal('delete')}>
+              <FormattedMessage id="glodal.delete" />
+            </Button>
+          </div>
         </ListGroupItem>
         {/* $FlowFixMe $refType */}
-        <ShowReplyModal
-          show={this.state.showModal}
+        <UpdateReplyModal
+          show={this.state.currentOpenModal === 'edit'}
           onClose={this.hideModal}
           reply={reply}
           questionnaire={questionnaire}
+        />
+        {/* $FlowFixMe $refType */}
+        <DeleteReplyModal
+          reply={reply}
+          show={this.state.currentOpenModal === 'delete'}
+          onClose={this.hideModal}
         />
       </Fragment>
     );
@@ -84,7 +100,8 @@ export default createFragmentContainer(ReplyModalLink, {
       publishedAt
       id
       private
-      ...ShowReplyModal_reply
+      ...UpdateReplyModal_reply
+      ...DeleteReplyModal_reply
       ...UnpublishedLabel_publishable
     }
   `,

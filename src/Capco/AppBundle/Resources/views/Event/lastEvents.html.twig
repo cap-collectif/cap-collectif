@@ -1,13 +1,11 @@
 {% if events|length > 0 %}
-    <section class="section--custom">
-        <div class="container">
-            <h2 class="h2">{{ 'event.last.title'|trans({}, 'CapcoAppBundle') }}</h2>
-            <div class="row">
-                {% for event in events %}
-                    {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event} only %}
-                {% endfor %}
-            </div>
-            <a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    <div class="container  container--custom">
+        <h2 class="h2">{{ 'event.last.title'|trans({}, 'CapcoAppBundle') }}</h2>
+        <div class="row">
+            {% for event in events %}
+                {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event} only %}
+            {% endfor %}
         </div>
-    </section>
+        <a href="{{ path('app_event') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    </div>
 {% endif %}
