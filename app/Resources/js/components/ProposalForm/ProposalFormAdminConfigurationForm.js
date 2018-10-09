@@ -216,6 +216,20 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
           kind: undefined,
           image: choice.image ? choice.image.id : null,
         }));
+        if (question.jumps) {
+          questionInput.question.jumps = question.jumps.map(jump => ({
+            ...jump,
+            origin: parseInt(jump.origin.id, 10),
+            destination: parseInt(jump.destination.id, 10),
+            conditions: jump.conditions
+              ? jump.conditions.map(condition => ({
+                  ...condition,
+                  question: parseInt(condition.question.id, 10),
+                  value: condition.value.id,
+                }))
+              : null,
+          }));
+        }
       }
 
       return questionInput;
