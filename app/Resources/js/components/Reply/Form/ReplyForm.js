@@ -11,7 +11,6 @@ import {
 } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Button } from 'react-bootstrap';
 import type { Dispatch, State } from '../../../types';
 import type { ReplyForm_questionnaire } from './__generated__/ReplyForm_questionnaire.graphql';
 import type { ReplyForm_reply } from './__generated__/ReplyForm_reply.graphql';
@@ -28,6 +27,7 @@ import AddReplyMutation from '../../../mutations/AddReplyMutation';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import { CardContainer } from '../../Ui/Card/CardContainer';
 import UpdateReplyMutation from '../../../mutations/UpdateReplyMutation';
+import SubmitButton from '../../Form/SubmitButton';
 
 type Props = FormProps & {
   +questionnaire: ReplyForm_questionnaire,
@@ -41,15 +41,15 @@ type Props = FormProps & {
 type FormValues = {|
   responses: ResponsesInReduxForm,
   private: boolean,
+  draft: boolean,
 |};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { questionnaire, reply, onClose } = props;
-
   const data = {};
 
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions);
-  data.draft = false;
+  data.draft = values.draft;
   if (reply) {
     data.replyId = reply.id;
     return UpdateReplyMutation.commit({ input: data })
@@ -100,7 +100,9 @@ const validate = (values: FormValues, props: Props) => {
   const errors = {};
 
   const responsesError = validateResponses(questions, responses, 'reply', props.intl);
-
+  if (values.draft) {
+    return errors;
+  }
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses;
   }
@@ -143,6 +145,7 @@ export class ReplyForm extends React.Component<Props> {
       submitFailed,
       handleSubmit,
       responses,
+      dispatch,
     } = this.props;
 
     const disabled = this.formIsDisabled();
@@ -178,13 +181,32 @@ export class ReplyForm extends React.Component<Props> {
                   />
                 </div>
               )}
-              <Button
-                type="submit"
-                id={`${form}-submit-create-reply`}
-                bsStyle="primary"
-                disabled={pristine || invalid || submitting || disabled}>
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-              </Button>
+              <div className="btn-toolbar">
+                <div className="btn-group">
+                  <SubmitButton
+                    type="submit"
+                    id={`${form}-submit-create-reply`}
+                    bsStyle="primary"
+                    disabled={pristine || invalid || submitting || disabled || submitDisabled}
+                    label={submitting ? 'global.loading' : 'global.save'}
+                    onSubmit={() => {
+                      dispatch(changeRedux('CreateReplyForm', 'draft', false));
+                    }}
+                  />
+                </div>
+                <div className="btn-group">
+                  <SubmitButton
+                    type="submit"
+                    id={`${form}-submit-create-draft-reply`}
+                    bsStyle="primary"
+                    disabled={pristine || submitting}
+                    label={submitting ? 'global.loading' : 'global.save_as_draft'}
+                    onSubmit={() => {
+                      dispatch(changeRedux('CreateReplyForm', 'draft', true));
+                    }}
+                  />
+                </div>
+              </div>
               {!disabled &&
                 !pristine && (
                   <AlertForm
@@ -212,6 +234,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
       props.questionnaire.questions,
       props.reply ? props.reply.responses : [],
     ),
+    draft: props.reply ? props.reply.draft : false,
     private: props.reply ? props.reply.private : false,
   },
   user: state.user.user,

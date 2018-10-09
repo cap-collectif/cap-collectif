@@ -21,17 +21,18 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 
     public function validate($object, Constraint $constraint)
     {
+        if ($object->isDraft()) {
+            return;
+        }
         $questions = $this->getQuestions($constraint, $object);
         $responses = $object->getResponses();
         foreach ($questions as $qaq) {
             $question = $qaq->getQuestion();
             if ($question->isRequired() && !$this->hasResponseForQuestion($question, $responses)) {
                 $this->context->buildViolation($constraint->message)
-                      ->atPath('responses')
-                      ->setParameter('missing', $question->getId())
-                      ->addViolation()
-                ;
-
+                    ->atPath('responses')
+                    ->setParameter('missing', $question->getId())
+                    ->addViolation();
                 return;
             }
         }
