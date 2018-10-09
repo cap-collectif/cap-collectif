@@ -19,12 +19,18 @@ type Props = RelayProps &
     features: FeatureToggles,
   };
 
-export type Jumps = $ReadOnlyArray<{|
-  +id: string,
+export type Jumps = ?$ReadOnlyArray<{|
+  +id?: string,
   +always: boolean,
-  +origin: ?Object,
-  +destination: ?Object,
-  +conditions: ?Object,
+  +origin: {
+    id: number,
+    title: string,
+  },
+  +destination: {
+    id: number,
+    title: string,
+  },
+  +conditions: Object,
 |}>;
 export type MultipleChoiceQuestionValidationRulesTypes = 'EQUAL' | 'MAX' | 'MIN';
 export type QuestionChoiceColor = 'DANGER' | 'INFO' | 'PRIMARY' | 'SUCCESS' | 'WARNING';
@@ -117,26 +123,28 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
           randomQuestionChoices: question.isRandomQuestionChoices,
           isOtherAllowed: undefined,
           isRandomQuestionChoices: undefined,
-          jumps: question.jumps ? question.jumps : []
+          jumps: question.jumps ? question.jumps : [],
         },
       };
       if (multipleChoiceQuestions.indexOf(question.type) !== -1 && question.questionChoices) {
         questionInput.question.questionChoices = question.questionChoices.map(choice => ({
           ...choice,
           kind: undefined,
-          image: choice.image ? choice.image.id : null
+          image: choice.image ? choice.image.id : null,
         }));
-        if(question.jumps) {
+        if (question.jumps) {
           questionInput.question.jumps = question.jumps.map(jump => ({
             ...jump,
             origin: parseInt(jump.origin.id, 10),
             destination: parseInt(jump.destination.id, 10),
-            conditions: jump.conditions.map(condition => ({
-              ...condition,
-              question: parseInt(condition.question.id, 10),
-              value: condition.value.id
-            }))
-          }))
+            conditions: jump.conditions
+              ? jump.conditions.map(condition => ({
+                  ...condition,
+                  question: parseInt(condition.question.id, 10),
+                  value: condition.value.id,
+                }))
+              : null,
+          }));
         }
       }
 

@@ -169,19 +169,21 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                   <FormattedMessage id="conditional-jumps" />
                 </span>
               </h4>
-              {(currentQuestion.id && currentQuestion.type !== 'ranking') && (
-                <FieldArray
-                  name={`${member}.jumps`}
-                  component={QuestionsJumpAdmin}
-                  formName={formName}
-                  oldMember={member}
-                />
-              )}
-              {(!currentQuestion.id && currentQuestion.type !== 'ranking') && (
-                <p>
-                  <FormattedMessage id="save-question-before-adding-conditional-jump" />
-                </p>
-              )}
+              {currentQuestion.id &&
+                type !== 'ranking' && (
+                  <FieldArray
+                    name={`${member}.jumps`}
+                    component={QuestionsJumpAdmin}
+                    formName={formName}
+                    oldMember={member}
+                  />
+                )}
+              {!currentQuestion.id &&
+                type !== 'ranking' && (
+                  <p>
+                    <FormattedMessage id="save-question-before-adding-conditional-jump" />
+                  </p>
+                )}
               <h4 style={{ fontWeight: 'bold' }}>
                 <span>
                   <FormattedMessage id="group.admin.parameters" />

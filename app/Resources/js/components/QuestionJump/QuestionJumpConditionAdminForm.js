@@ -14,7 +14,7 @@ type Props = RelayProps & {
   member: string,
   index: number,
   dispatch: Dispatch,
-  oldMember: string
+  oldMember: string,
 };
 
 type State = {
@@ -30,22 +30,63 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
     this.setState({ currentQuestion: e.target.value });
   };
 
+  displayValueList = (
+    currentQuestion: ?number,
+    selectedQuestion: ?number,
+    arrayQuestions: Array<Object>,
+  ) => {
+    let choiceList = [];
+    if (currentQuestion) {
+      choiceList = arrayQuestions[currentQuestion];
+    } else if (selectedQuestion) {
+      choiceList = arrayQuestions[selectedQuestion];
+    }
+
+    return choiceList.map((questionChoice, questionChoiceIndex) => (
+      <option value={questionChoice.id}>
+        {questionChoiceIndex}. {questionChoice.title}
+      </option>
+    ));
+  };
+
   render() {
-    const { index, questions, selectedQuestion, member, dispatch, formName, oldMember} = this.props;
+    const {
+      index,
+      questions,
+      selectedQuestion,
+      member,
+      dispatch,
+      formName,
+      oldMember,
+    } = this.props;
     const { currentQuestion } = this.state;
     const arrayQuestions = [];
     questions.map(question => {
-      if(question.kind !== 'simple' && question.id && question.questionChoices && question.questionChoices.length > 0) {
+      if (
+        question.kind !== 'simple' &&
+        question.id &&
+        question.questionChoices &&
+        question.questionChoices.length > 0
+      ) {
         arrayQuestions[question.id] = question.questionChoices;
       }
     });
     return (
       <div className="movable-element" key={index}>
-        <div style={{marginBottom:'10px'}}>
+        <div style={{ marginBottom: '10px' }}>
           <h4 className="panel-title">
-            <i className="cap cap-android-menu" style={{ color: 'rgb(3, 136, 204)', fontSize:'15px', marginRight:'10px' }} />
+            <i
+              className="cap cap-android-menu"
+              style={{ color: 'rgb(3, 136, 204)', fontSize: '15px', marginRight: '10px' }}
+            />
             Si la réponse à la question :
-            <button type="button" style={{ border: 'none', float:'right', backgroundColor:'#f5f5f5' }} title="Remove Member" onClick={() => dispatch(arrayRemove(formName, `${oldMember}.conditions`, index))}>X</button>
+            <button
+              type="button"
+              style={{ border: 'none', float: 'right', backgroundColor: '#f5f5f5' }}
+              title="Remove Member"
+              onClick={() => dispatch(arrayRemove(formName, `${oldMember}.conditions`, index))}>
+              X
+            </button>
           </h4>
         </div>
         <Field
@@ -58,11 +99,16 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
           }}
           component={component}>
           {questions.map((question, questionIndex) => {
-            if(question.kind !== 'simple' && question.id && question.questionChoices && question.questionChoices.length > 0) {
+            if (
+              question.kind !== 'simple' &&
+              question.id &&
+              question.questionChoices &&
+              question.questionChoices.length > 0
+            ) {
               return (
-              <option value={question.id}>
-                {questionIndex}. {question.title}
-              </option>
+                <option value={question.id}>
+                  {questionIndex}. {question.title}
+                </option>
               );
             }
           })}
@@ -84,16 +130,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
           name={`${member}.value.id`}
           type="select"
           component={component}>
-          {/* $FlowFixMe */}
-          {currentQuestion !== null || selectedQuestion !== undefined
-            ? arrayQuestions[currentQuestion !== null ? currentQuestion : selectedQuestion].map(
-                (questionChoice, questionChoiceIndex) => (
-                  <option value={questionChoice.id}>
-                    {questionChoiceIndex}. {questionChoice.title}
-                  </option>
-                ),
-              )
-            : ''}
+          {this.displayValueList(currentQuestion, selectedQuestion, arrayQuestions)}
         </Field>
       </div>
     );

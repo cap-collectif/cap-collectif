@@ -1,9 +1,12 @@
 <?php
 namespace Capco\AppBundle\Form;
 
+use Capco\AdminBundle\Form\QuestionValidationRuleType;
 use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
