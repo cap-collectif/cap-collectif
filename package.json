@@ -46,6 +46,9 @@
       "json"
     ]
   },
+  "graphql-doctor": {
+    "schema.graphql": { "ref": "heads/master", "schemaPath": "schema.graphql"}
+  },
   "lint-staged": {
     "schema.graphql": [
       "graphql-schema-linter"
