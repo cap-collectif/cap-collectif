@@ -43,76 +43,82 @@
 
 {% block body %}
 
-    <div class="container  container--custom" {% if content_body is null %}style="display: none;"{% endif %}>
-        {% if null != content_body %}
-            {{ content_body|raw }}
-        {% endif %}
-    </div>
-
-    <div class="container  container--custom">
-
-        <div class="filter  block">
-            <div class="row">
-                {{ form_start(form) }}
-                {{ form_errors(form) }}
-                {% if is_feature_enabled('themes')%}
-                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-4  filter__down">
-                        {{ form_label(form.theme, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                        {{ form_errors(form.theme) }}
-                        {{ form_widget(form.theme, {'attr':{"class":"form-control"} }) }}
-                    </div>
-                {% endif %}
-                <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3 filter__down">
-                    {{ form_label(form.project, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
-                    {{ form_errors(form.project) }}
-                    {{ form_widget(form.project, {'attr':{"class":"form-control"} }) }}
-                </div>
-                <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3 filter__down">
-                    {{ form_label(form.term, null, {'label_attr':{"class":"control-label sr-only"} }) }}
-                    <div class="input-group  filter__search">
-                        {{ form_errors(form.term) }}
-                        {{ form_widget(form.term, {'attr':{"class":"form-control", "placeholder": 'project.searchform.search'|trans({}, 'CapcoAppBundle')} }) }}
-                        <span class="input-group-btn">
-                                <button type="submit" class="btn  btn-default"> <i class="cap cap-magnifier"></i><span class="sr-only">{{ 'project.searchform.search'|trans({}, 'CapcoAppBundle') }}</span></button>
-                            </span>
-                    </div>
-                </div>
-
-                {{ form_end(form) }}
-            </div>
+    <section class="section--custom" {% if content_body is null %}style="display: none;"{% endif %}>
+        <div class="container">
+            {% if null != content_body %}
+                {{ content_body|raw }}
+            {% endif %}
         </div>
+    </section>
 
-        {% if years|length > 0 %}
-            {% for year, months in years %}
-                {% for month, events in months %}
-                    {% set date = (year ~ '-' ~ month ~ '-01') %}
-                    <h2>{{ date | localizeddate('none', 'none', null, null, "MMMM y") | capitalize }}</h2>
-                    <div class="row">
-                        {% for event in events %}
-                            {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event} only %}
-                        {% endfor %}
+    <section class="section--custom">
+        <div class="container">
+
+            <div class="filter  block">
+                <div class="row">
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {% if is_feature_enabled('themes')%}
+                        <div class="col-xs-12  col-sm-3  col-md-3  col-lg-4  filter__down">
+                            {{ form_label(form.theme, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                            {{ form_errors(form.theme) }}
+                            {{ form_widget(form.theme, {'attr':{"class":"form-control"} }) }}
+                        </div>
+                    {% endif %}
+                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3 filter__down">
+                        {{ form_label(form.project, null, {'label_attr':{"class":"control-label  sr-only"} }) }}
+                        {{ form_errors(form.project) }}
+                        {{ form_widget(form.project, {'attr':{"class":"form-control"} }) }}
                     </div>
+                    <div class="col-xs-12  col-sm-3  col-md-3  col-lg-3 filter__down">
+                        {{ form_label(form.term, null, {'label_attr':{"class":"control-label sr-only"} }) }}
+                        <div class="input-group  filter__search">
+                            {{ form_errors(form.term) }}
+                            {{ form_widget(form.term, {'attr':{"class":"form-control", "placeholder": 'project.searchform.search'|trans({}, 'CapcoAppBundle')} }) }}
+                            <span class="input-group-btn">
+                                    <button type="submit" class="btn  btn-default"> <i class="cap cap-magnifier"></i><span class="sr-only">{{ 'project.searchform.search'|trans({}, 'CapcoAppBundle') }}</span></button>
+                                </span>
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+            {% if years|length > 0 %}
+                {% for year, months in years %}
+                    {% for month, events in months %}
+                        {% set date = (year ~ '-' ~ month ~ '-01') %}
+                        <h2>{{ date | localizeddate('none', 'none', null, null, "MMMM y") | capitalize }}</h2>
+                        <div class="row">
+                            {% for event in events %}
+                                {% include '@CapcoApp/Event/blockEvent.html.twig' with {'event': event} only %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-        {% else %}
-            <p class="block">
-                {{ 'event.no_result'|trans({}, 'CapcoAppBundle') }}
-            </p>
-        {% endif %}
-    </div>
+            {% else %}
+                <p class="block">
+                    {{ 'event.no_result'|trans({}, 'CapcoAppBundle') }}
+                </p>
+            {% endif %}
+        </div>
+    </section>
 
-    <div class="container  container--custom  appendices__container">
-        <div class="row">
-            <div class="col-xs-12 col-md-4 col-md-offset-4 text-center  appendices__item  box">
-                <p class="appendices__title">{{ 'event.archived'|trans({}, 'CapcoAppBundle') }}</p>
-                <p class="excerpt">
-                    {% transchoice archivedEventsNb with {'%count%': archivedEventsNb} from 'CapcoAppBundle' %}
-                        event.index.appendices.archived.number
-                    {% endtranschoice %}</p>
-                <p><a href="{{ path('app_event_archived') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_archived'|trans({}, 'CapcoAppBundle') }}</a></p>
+    <section class="section--custom">
+        <div class="container appendices__container">
+            <div class="row">
+                <div class="col-xs-12 col-md-4 col-md-offset-4 text-center  appendices__item  box">
+                    <p class="appendices__title">{{ 'event.archived'|trans({}, 'CapcoAppBundle') }}</p>
+                    <p class="excerpt">
+                        {% transchoice archivedEventsNb with {'%count%': archivedEventsNb} from 'CapcoAppBundle' %}
+                            event.index.appendices.archived.number
+                        {% endtranschoice %}</p>
+                    <p><a href="{{ path('app_event_archived') }}" class="btn  btn-primary  btn--outline">{{ 'event.see_archived'|trans({}, 'CapcoAppBundle') }}</a></p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}
 
 {% block javascripts %}

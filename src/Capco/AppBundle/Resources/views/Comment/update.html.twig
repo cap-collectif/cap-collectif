@@ -10,41 +10,43 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container  container--custom">
-        <div class="row">
-            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <div class="dialog  dialog--light-gray  block--bordered">
-                    <div class="dialog__header  box">
-                        <h1 class="h4  dialog__title">{{ 'comment.update.title'|trans({}, 'CapcoAppBundle') }}</h1>
-                    </div>
-                    {{ form_start(form) }}
-                        <div class="dialog__body  box">
-                            <div class="media">
-                                {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': comment.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
-                                <div class="media-body">
-                                    {% if form.confirm %}
-                                        {{ form_errors(form.confirm) }}
-                                        <div class="alert alert-warning  edit-confirm-alert">
-                                            <div class="checkbox form-group">
-                                                {{ form_widget(form.confirm) }}
+    <section class="section--custom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="dialog  dialog--light-gray  block--bordered">
+                        <div class="dialog__header  box">
+                            <h1 class="h4  dialog__title">{{ 'comment.update.title'|trans({}, 'CapcoAppBundle') }}</h1>
+                        </div>
+                        {{ form_start(form) }}
+                            <div class="dialog__body  box">
+                                <div class="media">
+                                    {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': comment.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
+                                    <div class="media-body">
+                                        {% if form.confirm %}
+                                            {{ form_errors(form.confirm) }}
+                                            <div class="alert alert-warning  edit-confirm-alert">
+                                                <div class="checkbox form-group">
+                                                    {{ form_widget(form.confirm) }}
+                                                </div>
                                             </div>
-                                        </div>
-                                    {% endif %}
-                                    {{form_widget(form.body)}}
-                                    {{ form_rest(form) }}
+                                        {% endif %}
+                                        {{form_widget(form.body)}}
+                                        {{ form_rest(form) }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="dialog__footer  box">
-                            <a href="{{ path('app_comment_delete' ,{'commentId': comment.id } ) }}" class="btn  btn-danger">{{ 'comment.update.remove'|trans({}, 'CapcoAppBundle') }}</a>
-                            <div class="pull-right">
-                                <a href="{{ capco_comment_object_url(comment) }}" class="btn  btn-default">{{ 'comment.update.cancel'|trans({}, 'CapcoAppBundle') }}</a>
-                                <button type="submit" class="btn  btn-warning">{{ 'comment.update.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                            <div class="dialog__footer  box">
+                                <a href="{{ path('app_comment_delete' ,{'commentId': comment.id } ) }}" class="btn  btn-danger">{{ 'comment.update.remove'|trans({}, 'CapcoAppBundle') }}</a>
+                                <div class="pull-right">
+                                    <a href="{{ capco_comment_object_url(comment) }}" class="btn  btn-default">{{ 'comment.update.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                    <button type="submit" class="btn  btn-warning">{{ 'comment.update.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                                </div>
                             </div>
-                        </div>
-                    {{ form_end(form) }}
+                        {{ form_end(form) }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}

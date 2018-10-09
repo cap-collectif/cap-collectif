@@ -44,50 +44,52 @@
 
 {% block body %}
 
-    <div class="container  container--custom" {% if content_body is null %}style="display: none;"{% endif %}>
-        {% if null != content_body %}
-            {{ content_body|raw }}
-        {% endif %}
-    </div>
-
-    <div class="container  container--custom">
-
-        <div class="filter  block">
-            <div class="row">
-                {{ form_start(form) }}
-                    {{ form_errors(form) }}
-                    <div role="form" class="col-xs-12  col-sm-3  col-md-3  col-lg-3">
-                        {{ form_label(form.term, null, {'label_attr':{"class":"control-label sr-only"} }) }}
-                        <div class="input-group  filter__search">
-                            {{ form_errors(form.term) }}
-                            {{ form_widget(form.term, {'attr':{"class":"form-control", "placeholder": 'theme.index.search'|trans({}, 'CapcoAppBundle') } }) }}
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn  btn-default"><i class="cap cap-magnifier"></i><span class="sr-only">{{ 'theme.searchform.search'|trans({}, 'CapcoAppBundle') }}</span></button>
-                            </span>
-                        </div>
-                    </div>
-                {{ form_end(form) }}
-            </div>
+    <section class="section--custom{% if content_body is null %} hidden{% endif %}">
+        <div class="container">
+            {% if null != content_body %}
+                {{ content_body|raw }}
+            {% endif %}
         </div>
+    </section>
 
-        {% if themes|length > 0 %}
-            <div class="row">
-                {% for theme in themes %}
-                    {% include '@CapcoApp/Theme/blockTheme.html.twig' with {'theme': theme} only %}
-                {% endfor %}
+    <section class="section--custom">
+        <div class="container">
+            <div class="filter  block">
+                <div class="row">
+                    {{ form_start(form) }}
+                        {{ form_errors(form) }}
+                        <div role="form" class="col-xs-12  col-sm-3  col-md-3  col-lg-3">
+                            {{ form_label(form.term, null, {'label_attr':{"class":"control-label sr-only"} }) }}
+                            <div class="input-group  filter__search">
+                                {{ form_errors(form.term) }}
+                                {{ form_widget(form.term, {'attr':{"class":"form-control", "placeholder": 'theme.index.search'|trans({}, 'CapcoAppBundle') } }) }}
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn  btn-default"><i class="cap cap-magnifier"></i><span class="sr-only">{{ 'theme.searchform.search'|trans({}, 'CapcoAppBundle') }}</span></button>
+                                </span>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
-        {% else %}
-            <p>{{ 'theme.index.none'|trans({}, 'CapcoAppBundle') }}</p>
-        {% endif %}
 
-        {% if form.vars.data.term is not null %}
-            {% set route, params = 'app_theme_search', {'term': form.vars.data.term } %}
-        {% else %}
-            {% set route, params = 'app_theme', {} %}
-        {% endif %}
-        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+            {% if themes|length > 0 %}
+                <div class="row">
+                    {% for theme in themes %}
+                        {% include '@CapcoApp/Theme/blockTheme.html.twig' with {'theme': theme} only %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>{{ 'theme.index.none'|trans({}, 'CapcoAppBundle') }}</p>
+            {% endif %}
 
-    </div>
+            {% if form.vars.data.term is not null %}
+                {% set route, params = 'app_theme_search', {'term': form.vars.data.term } %}
+            {% else %}
+                {% set route, params = 'app_theme', {} %}
+            {% endif %}
+            {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+        </div>
+    </section>
 
 {% endblock %}
 

@@ -3,26 +3,28 @@
 {% set nbAppendices = (nbPosts > 0) + (nbEvents > 0) %}
 
 {% if nbAppendices > 0 %}
-    <div class="container  container--custom  appendices__container">
-        <div class="row  text-center">
-            {% if nbPosts > 0 %}
-                <div class="col-centered col-xs-12 col-sm-6 col-md-4 text-center  appendices__item  box">
-                    <h2 class="h4">{{ 'theme.show.appendices.posts.title'|trans({}, 'CapcoAppBundle') }}</h2>
-                    <p class="excerpt">{% transchoice nbPosts | length with {'%count%': nbPosts | length} from 'CapcoAppBundle' %}
-                        theme.show.appendices.posts.number
-                        {% endtranschoice %}</p>
-                    <p><a href="{{ path('app_blog_search_theme', {'theme': theme.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.posts.button'|trans({}, 'CapcoAppBundle') }}</a></p>
-                </div>
-            {% endif %}
-            {% if nbEvents > 0 %}
-                <div class="col-centered col-xs-12 col-sm-6 col-md-4 text-center  appendices__item  box">
-                    <h2 class="h4">{{ 'theme.show.appendices.events.title'|trans({}, 'CapcoAppBundle') }}</h2>
-                    <p class="excerpt">{% transchoice nbEvents with {'%count%': nbEvents | length} from 'CapcoAppBundle' %}
-                        theme.show.appendices.events.number
-                        {% endtranschoice %}</p>
-                    <p><a href="{{ path('app_event_search_theme', {'theme': theme.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.events.button'|trans({}, 'CapcoAppBundle') }}</a></p>
-                </div>
-            {% endif %}
+    <section class="section--custom">
+        <div class="container appendices__container">
+            <div class="row  text-center">
+                {% if nbPosts > 0 %}
+                    <div class="col-centered col-xs-12 col-sm-6 col-md-4 text-center  appendices__item  box">
+                        <h2 class="h4">{{ 'theme.show.appendices.posts.title'|trans({}, 'CapcoAppBundle') }}</h2>
+                        <p class="excerpt">{% transchoice nbPosts | length with {'%count%': nbPosts | length} from 'CapcoAppBundle' %}
+                            theme.show.appendices.posts.number
+                            {% endtranschoice %}</p>
+                        <p><a href="{{ path('app_blog_search_theme', {'theme': theme.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.posts.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+                    </div>
+                {% endif %}
+                {% if nbEvents > 0 %}
+                    <div class="col-centered col-xs-12 col-sm-6 col-md-4 text-center  appendices__item  box">
+                        <h2 class="h4">{{ 'theme.show.appendices.events.title'|trans({}, 'CapcoAppBundle') }}</h2>
+                        <p class="excerpt">{% transchoice nbEvents with {'%count%': nbEvents | length} from 'CapcoAppBundle' %}
+                            theme.show.appendices.events.number
+                            {% endtranschoice %}</p>
+                        <p><a href="{{ path('app_event_search_theme', {'theme': theme.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'theme.show.appendices.events.button'|trans({}, 'CapcoAppBundle') }}</a></p>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-    </div>
+    </section>
 {% endif %}

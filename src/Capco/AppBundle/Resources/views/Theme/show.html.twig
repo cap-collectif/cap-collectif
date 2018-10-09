@@ -29,36 +29,40 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container  container--custom">
-        {% if theme.body %}
-            {{ theme.body|raw }}
-        {% endif %}
-        {% if theme.status != null %}
-            <p class="theme__status">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
-                {% if theme.isOpened %}
-                    <span class="label label-success">{{ 'theme.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
-                {% elseif theme.isClosed %}
-                    <span class="label label-danger">{{ 'theme.show.status.closed'|trans({}, 'CapcoAppBundle') }}</span>
-                {% elseif theme.isFuture %}
-                    <span class="label label-info">{{ 'theme.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
-                {% endif %}
-            </p>
-        {% endif %}
-    </div>
-
-
-    <div class="container  container--custom">
-        <h2 class="h2">{{ 'theme.show.projects.title'|trans({}, 'CapcoAppBundle') }}</h2>
-        {% set projectsCount = theme.projects | length %}
-        {% if projectsCount > 0 %}
-            {{ react_render_component('ProjectsListApp', {'props': projectProps }) }}
-            {% if projectsCount > maxProjectsDisplayed %}
-                <a href="{{ path('app_project', {'theme': theme.slug, 'sort': 'date'}) }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    <section class="section--custom">
+        <div class="container">
+            {% if theme.body %}
+                {{ theme.body|raw }}
             {% endif %}
-        {% else %}
-            <p>{{ 'project.none'|trans({}, 'CapcoAppBundle') }}</p>
-        {% endif %}
-    </div>
+            {% if theme.status != null %}
+                <p class="theme__status">{{ 'theme.show.status.title'|trans({}, 'CapcoAppBundle') }}
+                    {% if theme.isOpened %}
+                        <span class="label label-success">{{ 'theme.show.status.opened'|trans({}, 'CapcoAppBundle') }}</span>
+                    {% elseif theme.isClosed %}
+                        <span class="label label-danger">{{ 'theme.show.status.closed'|trans({}, 'CapcoAppBundle') }}</span>
+                    {% elseif theme.isFuture %}
+                        <span class="label label-info">{{ 'theme.show.status.future'|trans({}, 'CapcoAppBundle') }}</span>
+                    {% endif %}
+                </p>
+            {% endif %}
+        </div>
+    </section>
+
+
+    <section class="section--custom">
+        <div class="container">
+            <h2 class="h2">{{ 'theme.show.projects.title'|trans({}, 'CapcoAppBundle') }}</h2>
+            {% set projectsCount = theme.projects | length %}
+            {% if projectsCount > 0 %}
+                {{ react_render_component('ProjectsListApp', {'props': projectProps }) }}
+                {% if projectsCount > maxProjectsDisplayed %}
+                    <a href="{{ path('app_project', {'theme': theme.slug, 'sort': 'date'}) }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+                {% endif %}
+            {% else %}
+                <p>{{ 'project.none'|trans({}, 'CapcoAppBundle') }}</p>
+            {% endif %}
+        </div>
+    </section>
 
     {% include 'CapcoAppBundle:Theme:appendices.html.twig' %}
 

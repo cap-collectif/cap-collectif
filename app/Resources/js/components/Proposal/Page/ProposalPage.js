@@ -72,20 +72,24 @@ export class ProposalPage extends React.Component<Props> {
                   <div>
                     <ProposalDraftAlert proposal={props.proposal} />
                     <ProposalPageAlert proposal={props.proposal} />
-                    <ProposalPageHeader
-                      proposal={props.proposal}
-                      step={props.step || null}
-                      viewer={props.viewer || null}
-                      isAuthenticated={!!props.viewer}
-                      className="container container--custom"
-                    />
-                    <ProposalPageTabs
-                      proposal={props.proposal}
-                      step={props.step || null}
-                      viewer={props.viewer || null}
-                      features={features}
-                      form={form}
-                    />
+                    <section className="section--custom">
+                      <ProposalPageHeader
+                        proposal={props.proposal}
+                        step={props.step || null}
+                        viewer={props.viewer || null}
+                        isAuthenticated={!!props.viewer}
+                        className="container"
+                      />
+                    </section>
+                    <section className="section--custom">
+                      <ProposalPageTabs
+                        proposal={props.proposal}
+                        step={props.step || null}
+                        viewer={props.viewer || null}
+                        features={features}
+                        form={form}
+                      />
+                    </section>
                   </div>
                 );
               }

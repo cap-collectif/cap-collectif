@@ -20,53 +20,59 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-    <div class="container  container--custom  container--thinner">
-        <h1>{{ post.title | jolitypo() }}</h1>
-        {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.Authors, 'themes': post.themes, 'publishedAt': post.publishedAt} %}
-    </div>
-
-    <div class="container  container--custom  container--thinner">
-
-        {%  if post.media %}
-            {% thumbnail post.media, 'blockHeader' with {'title': post.media.name, 'alt': post.media.name, 'class': 'img-responsive block'} %}
-        {%  endif %}
-
-        <div class="block">
-            {{ post.body|raw | jolitypo() }}
+    <section class="section--custom">
+        <div class="container container--thinner">
+            <h1>{{ post.title | jolitypo() }}</h1>
+            {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.Authors, 'themes': post.themes, 'publishedAt': post.publishedAt} %}
         </div>
+    </section>
 
-        {% if post.projects | length > 0 %}
-            <div class="block blog_link-project">
-                <p>
-                    {% transchoice post.projects | length from 'CapcoAppBundle' %}
-                        blog.show.projects.title
-                    {% endtranschoice %}
-                </p>
-                <ul>
-                    {% for project in post.projects %}
-                        <li><a href="{{ project | capco_first_step_link }}">{{ project.title }}</a></li>
-                    {% endfor %}
-                </ul>
+    <section class="section--custom">
+        <div class="container container--thinner">
+
+            {%  if post.media %}
+                {% thumbnail post.media, 'blockHeader' with {'title': post.media.name, 'alt': post.media.name, 'class': 'img-responsive block'} %}
+            {%  endif %}
+
+            <div class="block">
+                {{ post.body|raw | jolitypo() }}
             </div>
-        {% endif %}
 
-        {{ react_render_component('ShareButtonDropdownApp', {
-                'props': {
-                    'url': url('app_blog_show', {'slug': post.slug}),
-                    'title': post.title,
-                    'id': 'post-' ~ post.slug,
-                }
-            })
-        }}
+            {% if post.projects | length > 0 %}
+                <div class="block blog_link-project">
+                    <p>
+                        {% transchoice post.projects | length from 'CapcoAppBundle' %}
+                            blog.show.projects.title
+                        {% endtranschoice %}
+                    </p>
+                    <ul>
+                        {% for project in post.projects %}
+                            <li><a href="{{ project | capco_first_step_link }}">{{ project.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
 
-    </div>
+            {{ react_render_component('ShareButtonDropdownApp', {
+                    'props': {
+                        'url': url('app_blog_show', {'slug': post.slug}),
+                        'title': post.title,
+                        'id': 'post-' ~ post.slug,
+                    }
+                })
+            }}
+
+        </div>
+    </section>
 
     {% if capco_comment_can_add(post) or (capco_comment_can_show(post) and post.commentsCount > 0) %}
-        <div class="container  container--custom  container--thinner">
-            {% if capco_comment_can_show(post) %}
-                {{ react_render_component('CommentSectionApp', { 'props': props }) }}
-            {% endif %}
-        </div>
+        <section class="section--custom">
+            <div class="container container--thinner">
+                {% if capco_comment_can_show(post) %}
+                    {{ react_render_component('CommentSectionApp', { 'props': props }) }}
+                {% endif %}
+            </div>
+        </section>
     {% endif %}
 
 {% endblock %}
