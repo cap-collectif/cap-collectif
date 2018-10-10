@@ -345,6 +345,7 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                             'name' => 'order',
                             'type' => $globalVariable->get('typeResolver')->resolve('DistrictOrderField'),
                             'description' => null,
+                            'defaultValue' => 'ALPHABETICAL',
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

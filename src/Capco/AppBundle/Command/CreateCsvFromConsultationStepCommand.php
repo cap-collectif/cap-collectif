@@ -55,7 +55,7 @@ fragment voteInfos on YesNoPairedVote {
  id
  ...authorInfos
  value
- createdAt  
+ createdAt
 }
 EOF;
 
@@ -236,7 +236,8 @@ EOF;
     ] +
     self::ARGUMENT_HEADER_MAP +
     self::VOTES_HEADER_MAP +
-    self::REPORTING_HEADER_MAP;
+    self::REPORTING_HEADER_MAP +
+    self::SOURCE_HEADER_MAP;
 
     protected static $defaultName = 'capco:export:consultation';
 
@@ -331,6 +332,7 @@ EOF;
             }
         );
 
+        $this->writer->close();
         $progress->finish();
     }
 

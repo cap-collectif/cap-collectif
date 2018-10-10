@@ -626,7 +626,7 @@ export default createFragmentContainer(container, {
       step {
         id
       }
-      districts(order: ALPHABETICAL) {
+      districts {
         id
         name
       }
