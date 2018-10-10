@@ -31,6 +31,15 @@ InternalQuery:
         type: '[Group!]!'
         access: "@=hasRole('ROLE_ADMIN')"
         resolve: "@=resolver('groups')"
+      events:
+        type: 'EventConnection'
+        argsBuilder: 'Relay::Connection'
+        description: 'The list of events'
+        args:
+          time:
+            type: 'string'
+            description: '"PASSED" for old, "FUTURE" for current and next, "" for all'
+        resolver: '@=resolve("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventsResolver", [args])'
       proposalForms:
         description: 'Lookup forms.'
         type: '[ProposalForm]!'
