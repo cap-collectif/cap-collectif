@@ -23,20 +23,8 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
             'description' => 'Entities that can be published.',
             'fields' => function () use ($globalVariable) {
                 return [
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'published' => [
-                    'type' => Type::nonNull(Type::boolean()),
+                'private' => [
+                    'type' => Type::boolean(),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -85,8 +73,20 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
-                'createdAt' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
+                'related' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The contribution that was voted.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'kind' => [
+                    'type' => Type::nonNull(Type::string()),
                     'args' => [
                     ],
                     'resolve' => function () use ($globalVariable) {

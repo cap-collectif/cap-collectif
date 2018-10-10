@@ -28,18 +28,6 @@ final class ReplyType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The id of the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'published' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
                     'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
@@ -85,8 +73,22 @@ final class ReplyType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'kind' => [
-                    'type' => Type::nonNull(Type::string()),
+                'url' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", array(0 => $value)]);
+                    },
+                    'description' => 'Url of the contribution',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

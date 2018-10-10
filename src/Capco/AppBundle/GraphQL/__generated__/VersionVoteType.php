@@ -23,32 +23,8 @@ final class VersionVoteType extends ObjectType implements GeneratedTypeInterface
             'description' => 'Entities that can be published.',
             'fields' => function () use ($globalVariable) {
                 return [
-                'value' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('YesNoPairedVoteValue')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'id' => [
                     'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'published' => [
-                    'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -97,8 +73,34 @@ final class VersionVoteType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'createdAt' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
+                'kind' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Returns \'vote\'.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->isPublished();
+                    },
+                    'description' => '`true` if the object is published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'publishableUntil' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

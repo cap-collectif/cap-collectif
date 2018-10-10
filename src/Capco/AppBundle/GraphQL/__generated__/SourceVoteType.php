@@ -35,18 +35,6 @@ final class SourceVoteType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'published' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'createdAt' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
                     'args' => [
@@ -85,8 +73,22 @@ final class SourceVoteType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'createdAt' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
+                'kind' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'args' => [
+                    ],
+                    'resolve' => function () use ($globalVariable) {
+                        return 'sourceVote';
+                    },
+                    'description' => 'Returns \'sourceVote\'.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
