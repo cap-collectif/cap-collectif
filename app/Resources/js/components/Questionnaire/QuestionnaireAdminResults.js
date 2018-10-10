@@ -23,10 +23,10 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     }, []);
 
     return (
-      <ResponsiveContainer height={250}>
+      <ResponsiveContainer height={300}>
         <BarChart data={data} layout="vertical">
           <XAxis type="number" />
-          <YAxis dataKey="name" type="category"/>
+          <YAxis dataKey="name" type="category" /> {/* allowDataOverflow */}
           <Bar dataKey='value' maxBarSize={30} fill='#8884d8'>
             <LabelList dataKey="value" position="right" />
           </Bar>
@@ -53,7 +53,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
       const x  = cx + radius * Math.cos(-midAngle * RADIAN);
       const y = cy  + radius * Math.sin(-midAngle * RADIAN);
 
-      console.warn(percent);
+      // console.warn(percent);
 
       return (
         <text x={x} y={y} fill={percent === 0 ? 'white' : 'white'} textAnchor="middle" dominantBaseline="central">
@@ -85,9 +85,9 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
             data={data}
             // cx={500}
             // cy={200}
-            innerRadius={35}
+            innerRadius={25}
             outerRadius={80}
-            // paddingAngle={2}
+            paddingAngle={1}
             fill="#82ca9d"
             stroke="none"
             fontSize="16px"
@@ -106,11 +106,53 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     );
   };
 
-  getRankingTable = (choices: Array<Object>) => (
-      <div>
-        RANKING TABLE
-      </div>
-    );
+  getRankingTable = (choices: Array<Object>) => {
+    const data = choices.reduce((acc, curr) => {
+      acc.push({
+        title: curr.title,
+        ranking: curr.responses.totalCount
+      });
+      return acc;
+    }, []);
+
+    return (
+      <table>
+        {choices.map(choice => {
+          const test = choice.ranking;
+
+          console.log(choice.ranking.length);
+
+          // console.warn(test.length > 0 && test.sort((a, b) => a.position - b.position));
+
+          return (
+            <tr>
+              <td style={{border: '1px solid black'}}>{choice.title}</td>
+              {choice.ranking
+              // .sort((a, b) => a.position - b.position)
+                .map(r => (
+                    <td style={{border: '1px solid black'}}>{r.responses.totalCount}</td>
+                  )
+                )}
+            </tr>
+          )
+        })}
+      </table>
+    )
+  };
+
+  getQuestion = (question: Object) => {
+    if(question.type === "checkbox") {
+      return this.getBarChart(question.questionChoices);
+    }
+
+    if(question.type === "radio" || question.type === "select" || question.type === "button") {
+      return this.getPieChart(question.questionChoices)
+    }
+
+    if(question.type === "ranking") {
+      return this.getRankingTable(question.questionChoices);
+    }
+  };
   
   render() {
     const { questionnaire } = this.props;
@@ -120,23 +162,27 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     return (
       <div className="box box-primary container-fluid">
         <div className="box-content mt-15">
-          {questionnaire.questions
-            .filter(q => q.type !=='section')
-            .map((question, key) => (
-              <div key={key}>
-                <p>
-                  <b>{key + 1}. {question.title}</b> <br/>
-                  <span className="excerpt">
+          {questionnaire.questions.length > 0 ? (
+            questionnaire.questions
+              .filter(q => q.type !=='section')
+              .map((question, key) => (
+                <div key={key}>
+                  <p>
+                    <b>{key + 1}. {question.title}</b> <br/>
+                    <span className="excerpt">
                     {/* {question.questionChoices && question.questionChoices[0].responses && question.questionChoices[0].responses.totalCount} réponses /{' '} */}
-                    {question.participants.totalCount} participants <br/>
-                    {question.required && <FormattedMessage id="global.required" />}
+                      {question.participants.totalCount} participants <br/>
+                      {question.required && <b><FormattedMessage id="mandatory-question" /></b>}
                   </span>
-                </p>
-                {question.type === "checkbox" && this.getBarChart(question.questionChoices)}
-                {(question.type === "radio" || question.type === "select" || question.type === "button") && this.getPieChart(question.questionChoices)}
-                {question.type === "ranking" && this.getRankingTable(question.questionChoices)}
-              </div>
-          ))}
+                  </p>
+                  {this.getQuestion(question)}
+                </div>
+            ))
+          ) : (
+            <div>
+              <FormattedMessage id="no-question" />
+            </div>
+          )}
         </div>
       </div>
     );
@@ -165,6 +211,12 @@ export default createFragmentContainer(
                     value
                   }
                 }
+              }
+            }
+            ranking {
+              position
+              responses {
+                totalCount
               }
             }
           }
