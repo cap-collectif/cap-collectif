@@ -65,6 +65,7 @@ class ProposalResponse extends React.PureComponent<Props> {
       }
       case 'ranking': {
         const radioLabels = JSON.parse(response.value || '');
+
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
@@ -78,17 +79,20 @@ class ProposalResponse extends React.PureComponent<Props> {
         break;
       }
 
-      default:
+      default: {
+        const responseValue =
+          response.question.type === 'number' ? JSON.parse(response.value || '') : response.value;
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
             {this.isHTML() ? (
               <div dangerouslySetInnerHTML={{ __html: response.value }} />
             ) : (
-              <p>{response.value}</p>
+              <p>{responseValue}</p>
             )}
           </div>
         );
+      }
     }
 
     return (
