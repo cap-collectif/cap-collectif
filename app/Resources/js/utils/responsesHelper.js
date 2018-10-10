@@ -129,6 +129,9 @@ export const getValueFromResponse = (questionType: string, responseValue: string
     if (questionType === 'ranking') {
       return JSON.parse(responseValue).labels;
     }
+    if (questionType === 'number') {
+      return JSON.parse(responseValue);
+    }
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(`Failed to parse : ${responseValue}`);
