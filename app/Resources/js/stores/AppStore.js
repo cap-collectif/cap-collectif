@@ -54,16 +54,6 @@ export default function configureStore(initialState: Object): Store {
       initialState.proposal.order = orderByStep[initialState.project.currentProjectStepById];
     }
   }
-  if (
-    initialState.project &&
-    initialState.project.showConsultationPlanById &&
-    LocalStorageService.isValid('project.showConsultationPlanById')
-  ) {
-    const showConsultationPlanById = LocalStorageService.get('project.showConsultationPlanById');
-    if (showConsultationPlanById) {
-      initialState.project.showConsultationPlanById = showConsultationPlanById;
-    }
-  }
 
   const sagaMiddleware = createSagaMiddleware();
 

@@ -14,29 +14,10 @@ describe('<ConsultationPropositionBox />', () => {
       timeless: false,
       status: 'open',
     },
-    dispatch: jest.fn(),
-    showConsultationPlan: true,
   };
 
-  const consultationPlanIsEnabled = {
-    consultationPlanEnabled: true,
-  };
-
-  const consultationPlanIsNotEnabled = {
-    consultationPlanEnabled: false,
-  };
-
-  it('renders correctly with plan', () => {
-    const wrapper = shallow(
-      <ConsultationPropositionBox {...consultationPlanIsEnabled} {...props} />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('renders correctly without plan', () => {
-    const wrapper = shallow(
-      <ConsultationPropositionBox {...consultationPlanIsNotEnabled} {...props} />,
-    );
+  it('renders correcty', () => {
+    const wrapper = shallow(<ConsultationPropositionBox {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

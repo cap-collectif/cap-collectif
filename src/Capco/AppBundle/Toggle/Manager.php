@@ -39,7 +39,6 @@ class Manager
         'zipcode_at_register',
         'indexation',
         'login_openid',
-        'consultation_plan',
     ];
 
     protected $context;

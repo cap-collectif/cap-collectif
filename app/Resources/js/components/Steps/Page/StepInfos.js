@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import StepText from './StepText';
-import { CardContainer } from '../../Ui/Card/CardContainer';
 
 type Props = {
   step: Object,
@@ -16,11 +15,11 @@ class StepInfos extends React.Component<Props> {
     }
 
     return (
-      <CardContainer>
-        <div className="card__body">
+      <div>
+        <div className="step__infos block">
           <StepText text={body} />
         </div>
-      </CardContainer>
+      </div>
     );
   }
 }

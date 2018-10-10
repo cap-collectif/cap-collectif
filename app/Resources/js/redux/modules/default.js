@@ -68,7 +68,6 @@ export const features = {
   export: false,
   server_side_rendering: false,
   zipcode_at_register: false,
-  consultation_plan: false,
 };
 
 const initialState: State = {

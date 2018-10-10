@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SectionList /> renders correcty 1`] = `
-<div
-  className="section-list_container"
->
+<div>
   <ForwardRef(Relay(Section))
     consultation={Object {}}
     level={0}

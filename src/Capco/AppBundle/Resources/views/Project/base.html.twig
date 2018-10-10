@@ -20,7 +20,7 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
-    <section>
+    <section class="section--custom">
         <div class="container">
             {% include '@CapcoApp/Project/show_title.html.twig' %}
         </div>
@@ -36,7 +36,7 @@
         </section>
     {% endif %}
 
-    <section class="section--alt">
+    <section>
         <div class="container">
             <div class="row">
                 <div class="col-xs-12" id="details">
@@ -49,7 +49,7 @@
     </section>
 
     {% if showTrash %}
-        <section>
+        <section class="section--alt">
             {{ react_render_component('ProjectTrashButtonApp', {
                 'props': {
                     'link': path('app_project_show_trashed', {'projectSlug': project.slug })

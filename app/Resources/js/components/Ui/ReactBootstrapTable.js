@@ -2,18 +2,16 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Table } from 'react-bootstrap';
-import colors from '../../utils/colors';
 
 type Props = {
   children: Array<?React.Node>,
 };
 
 export const Container = styled.div`
-  color: ${colors.darkText};
+  color: #333333;
   overflow-x: auto;
-  border: 1px solid ${colors.borderColor};
+  border: 1px solid #e3e3e3;
   margin-bottom: 20px;
-  background-color: ${colors.white};
 
   .table {
     table-layout: fixed;
@@ -22,7 +20,7 @@ export const Container = styled.div`
   }
 
   thead > tr > th {
-    background-color: ${colors.pageBgc};
+    background-color: #f6f6f6;
     border-bottom-width: 1px;
   }
 
@@ -54,7 +52,7 @@ export const Container = styled.div`
   }
 
   ul {
-    color: ${colors.darkText};
+    color: #333333;
     font-weight: 500;
   }
 `;

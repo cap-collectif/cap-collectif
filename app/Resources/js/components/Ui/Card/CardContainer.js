@@ -1,10 +1,9 @@
 // @flow
 import styled from 'styled-components';
-import colors from '../../../utils/colors';
 
 export const CardContainer = styled.div`
-  border: 1px solid ${colors.borderColor};
-  background-color: ${colors.white};
+  border: 1px solid #e3e3e3;
+  background-color: #fff;
   margin-bottom: 30px;
   display: flex;
   flex: 1 0 auto;
@@ -20,7 +19,7 @@ export const CardContainer = styled.div`
     margin-bottom: 5px;
 
     a {
-      color: ${colors.darkGray};
+      color: #707070;
     }
   }
 
@@ -50,7 +49,7 @@ export const CardContainer = styled.div`
   }
 
   .card__actions {
-    color: ${colors.darkGray};
+    color: #707070;
     font-size: 14px;
 
     a {
@@ -61,8 +60,8 @@ export const CardContainer = styled.div`
 
   .card__counters {
     padding: 5px;
-    background-color: ${colors.pageBgc};
-    border-top: 1px solid ${colors.borderColor};
+    background-color: #f6f6f6;
+    border-top: 1px solid #e3e3e3;
     font-size: 14px;
     text-align: center;
 
@@ -70,7 +69,7 @@ export const CardContainer = styled.div`
       width: 50%;
 
       &:nth-child(2) {
-        border-left: 1px solid ${colors.borderColor};
+        border-left: 1px solid #e3e3e3;
       }
     }
 

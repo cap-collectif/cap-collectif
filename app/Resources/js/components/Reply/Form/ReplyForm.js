@@ -25,7 +25,6 @@ import renderComponent from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import AddReplyMutation from '../../../mutations/AddReplyMutation';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import { CardContainer } from '../../Ui/Card/CardContainer';
 import UpdateReplyMutation from '../../../mutations/UpdateReplyMutation';
 
 type Props = FormProps & {
@@ -208,57 +207,53 @@ export class ReplyForm extends React.Component<Props> {
     const disabled = this.formIsDisabled();
 
     return (
-      <CardContainer>
-        <div className="card__body">
-          <div id="create-reply-form">
-            <form id="reply-form" ref="form" onSubmit={handleSubmit}>
-              {questionnaire.description && (
-                <p dangerouslySetInnerHTML={{ __html: questionnaire.description }} />
-              )}
-              <FieldArray
-                name="responses"
-                change={change}
-                responses={responses}
-                form={form}
-                component={renderResponses}
-                questions={questionnaire.questions}
-                intl={intl}
+      <div id="create-reply-form">
+        <form id="reply-form" ref="form" onSubmit={handleSubmit}>
+          {questionnaire.description && (
+            <p dangerouslySetInnerHTML={{ __html: questionnaire.description }} />
+          )}
+          <FieldArray
+            name="responses"
+            change={change}
+            responses={responses}
+            form={form}
+            component={renderResponses}
+            questions={questionnaire.questions}
+            intl={intl}
+            disabled={disabled}
+          />
+          {questionnaire.anonymousAllowed && (
+            <div>
+              <hr style={{ marginBottom: '30px' }} />
+              <Field
+                type="checkbox"
+                name="private"
+                id={`${form}-reply-private`}
+                component={renderComponent}
+                children={<FormattedMessage id="reply.form.private" />}
                 disabled={disabled}
               />
-              {questionnaire.anonymousAllowed && (
-                <div>
-                  <hr className="mb-30" />
-                  <Field
-                    type="checkbox"
-                    name="private"
-                    id={`${form}-reply-private`}
-                    component={renderComponent}
-                    children={<FormattedMessage id="reply.form.private" />}
-                    disabled={disabled}
-                  />
-                </div>
-              )}
-              <Button
-                type="submit"
-                id={`${form}-submit-create-reply`}
-                bsStyle="primary"
-                disabled={pristine || invalid || submitting || disabled}>
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-              </Button>
-              {!disabled &&
-                !pristine && (
-                  <AlertForm
-                    valid={valid}
-                    invalid={invalid}
-                    submitSucceeded={submitSucceeded}
-                    submitFailed={submitFailed}
-                    submitting={submitting}
-                  />
-                )}
-            </form>
-          </div>
-        </div>
-      </CardContainer>
+            </div>
+          )}
+          <Button
+            type="submit"
+            id={`${form}-submit-create-reply`}
+            bsStyle="primary"
+            disabled={pristine || invalid || submitting || disabled}>
+            <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+          </Button>
+          {!disabled &&
+            !pristine && (
+              <AlertForm
+                valid={valid}
+                invalid={invalid}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
+            )}
+        </form>
+      </div>
     );
   }
 }

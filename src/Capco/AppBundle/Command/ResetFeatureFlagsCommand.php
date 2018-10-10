@@ -61,7 +61,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->deactivate('login_paris');
         $toggleManager->activate('indexation');
         $toggleManager->deactivate('login_openid');
-        $toggleManager->activate('consultation_plan');
 
         if ($this->getContainer()->getParameter('kernel.environment') == 'prod') {
             $toggleManager->deactivate('registration');

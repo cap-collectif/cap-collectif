@@ -117,11 +117,8 @@ export class OpinionList extends React.Component<Props> {
           {section.contributionsCount &&
           consultation.opinionCountShownBySection &&
           section.contributionsCount > consultation.opinionCountShownBySection ? (
-            <Panel.Footer className="bg-white">
-              <a
-                href={section.url}
-                className="text-center"
-                style={{ display: 'block', backgroundColor: '#fff' }}>
+            <Panel.Footer>
+              <a href={section.url} className="text-center" style={{ display: 'block' }}>
                 <FormattedMessage id="opinion.show.all" />
               </a>
             </Panel.Footer>
