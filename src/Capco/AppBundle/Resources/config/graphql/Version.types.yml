@@ -60,9 +60,6 @@ Version:
       bodyText:
         type: 'HTML!'
         description: 'The content of the contribution.'
-      reportings:
-        type: '[Reporting]'
-        resolve: "@=resolver('version_reportings', [value])"
       section:
         type: 'Section!'
         description: 'The section of the parent opinion.'

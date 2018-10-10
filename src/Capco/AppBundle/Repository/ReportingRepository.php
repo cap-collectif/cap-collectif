@@ -1,8 +1,13 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Model\Contribution;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -38,6 +43,7 @@ class ReportingRepository extends EntityRepository
             ->select('count(DISTINCT r)')
             ->andWhere('r.Reporter = :user')
             ->setParameter('user', $user);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -91,6 +97,70 @@ class ReportingRepository extends EntityRepository
         return new Paginator($qb);
     }
 
+    public function getByOpinion(
+        Opinion $opinion,
+        int $offset,
+        int $limit,
+        string $field,
+        string $direction
+    ): Paginator {
+        $qb = $this->createQueryBuilder('r');
+
+        $qb
+            ->andWhere('r.Opinion = :opinion')
+            ->setParameter('opinion', $opinion)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('r.createdAt', $direction);
+        }
+
+        return new Paginator($qb);
+    }
+
+    public function countForOpinion(Opinion $opinion): int
+    {
+        return (int) $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->where('r.Opinion = :opinion')
+            ->setParameter('opinion', $opinion)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getByOpinionVersion(
+        OpinionVersion $opinionVersion,
+        int $offset,
+        int $limit,
+        string $field,
+        string $direction
+    ): Paginator {
+        $qb = $this->createQueryBuilder('r');
+
+        $qb
+            ->andWhere('r.opinionVersion = :opinionVersion')
+            ->setParameter('opinionVersion', $opinionVersion)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('r.createdAt', $direction);
+        }
+
+        return new Paginator($qb);
+    }
+
+    public function countForOpinionVersion(OpinionVersion $opinionVersion): int
+    {
+        return (int) $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->where('r.opinionVersion = :opinionVersion')
+            ->setParameter('opinionVersion', $opinionVersion)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function getRecentOrdered(): array
     {
         $qb = $this->createQueryBuilder('r')
@@ -103,6 +173,42 @@ class ReportingRepository extends EntityRepository
             ->leftJoin('r.Comment', 'c')
             ->leftJoin('r.proposal', 'p')
             ->addOrderBy('r.createdAt', 'DESC');
+
         return $qb->getQuery()->execute();
+    }
+
+    public function getByContributionType(
+        Contribution $contribution,
+        string $contributionType,
+        int $offset,
+        int $limit,
+        string $field,
+        string $direction
+    ): Paginator {
+        $qb = $this->createQueryBuilder('r');
+
+        $qb
+            ->andWhere("r.$contributionType = :contribution")
+            ->setParameter('contribution', $contribution)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        if ('PUBLISHED_AT' === $field) {
+            $qb->addOrderBy('r.createdAt', $direction);
+        }
+
+        return new Paginator($qb);
+    }
+
+    public function countForContributionType(
+        Contribution $contribution,
+        string $contributionType
+    ): int {
+        return (int) $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->andWhere("r.$contributionType = :contribution")
+            ->setParameter('contribution', $contribution)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

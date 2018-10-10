@@ -20,7 +20,6 @@ import {
   renderResponses,
   formatSubmitResponses,
   type ResponsesInReduxForm,
-  validateResponses
 } from '../../../utils/responsesHelper';
 import renderComponent from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
@@ -95,15 +94,77 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 const validate = (values: FormValues, props: Props) => {
-  const { questions } = props.questionnaire;
+  const { questionnaire } = props;
   const { responses } = values;
   const errors = {};
 
-  const responsesError = validateResponses(questions, responses, 'reply', props.intl);
+  const responsesError = [];
+  questionnaire.questions.map((question, index) => {
+    responsesError[index] = {};
+    const response = responses.filter(res => res && res.question === question.id)[0];
 
-  if (responsesError.responses && responsesError.responses.length) {
-    errors.responses = responsesError.responses;
+    if (question.required) {
+      if (question.type === 'medias') {
+        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
+          responsesError[index] = { value: 'reply.constraints.field_mandatory' };
+        }
+      } else if (!response || !response.value) {
+        responsesError[index] = { value: 'reply.constraints.field_mandatory' };
+      }
+    }
+
+    if (
+      question.validationRule &&
+      question.type !== 'button' &&
+      response.value &&
+      typeof response.value === 'object' &&
+      (Array.isArray(response.value.labels) || Array.isArray(response.value))
+    ) {
+      const rule = question.validationRule;
+      let responsesNumber = 0;
+      if (typeof response.value === 'object' && Array.isArray(response.value.labels)) {
+        const labelsNumber = response.value.labels.length;
+        const hasOtherValue = response.value.other ? 1 : 0;
+        responsesNumber = labelsNumber + hasOtherValue;
+      }
+
+      if (typeof response.value === 'object' && Array.isArray(response.value)) {
+        responsesNumber = response.value.length;
+      }
+
+      if (rule.type === 'MIN' && (rule.number && responsesNumber < rule.number)) {
+        responsesError[index] = {
+          value: props.intl.formatMessage(
+            { id: 'reply.constraints.choices_min' },
+            { nb: rule.number },
+          ),
+        };
+      }
+
+      if (rule.type === 'MAX' && (rule.number && responsesNumber > rule.number)) {
+        responsesError[index] = {
+          value: props.intl.formatMessage(
+            { id: 'reply.constraints.choices_max' },
+            { nb: rule.number },
+          ),
+        };
+      }
+
+      if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
+        responsesError[index] = {
+          value: props.intl.formatMessage(
+            { id: 'reply.constraints.choices_equal' },
+            { nb: rule.number },
+          ),
+        };
+      }
+    }
+  });
+
+  if (responsesError.length) {
+    errors.responses = responsesError;
   }
+
   return errors;
 };
 
