@@ -39,7 +39,7 @@ class EventSearch extends Search
     public function searchEvents(
         int $offset,
         int $limit,
-        string $order = null,
+        $order = null,
         $terms,
         array $providedFilters,
         string $seed
@@ -111,7 +111,7 @@ class EventSearch extends Search
         );
     }
 
-    private function getSort(string $order, string $eventId): array
+    private function getSort(string $order): array
     {
         switch ($order) {
             case self::OLD:
@@ -127,7 +127,7 @@ class EventSearch extends Search
                 $sortOrder = 'desc';
                 break;
             default:
-                throw new \RuntimeException('Unknow order: '.$order);
+                throw new \RuntimeException("Unknow order: $order");
                 break;
         }
 

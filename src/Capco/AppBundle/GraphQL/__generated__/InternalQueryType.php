@@ -154,6 +154,45 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_ADMIN");
                     },
                 ],
+                'events' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('EventConnection'),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'time',
+                            'type' => Type::string(),
+                            'description' => '"PASSED" for old, "FUTURE" for current and next, "" for all',
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventsResolver", array(0 => $args)]);
+                    },
+                    'description' => 'The list of events',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'proposalForms' => [
                     'type' => Type::nonNull(Type::listOf($globalVariable->get('typeResolver')->resolve('ProposalForm'))),
                     'args' => [

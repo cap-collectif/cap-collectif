@@ -3381,7 +3381,16 @@ type Query {
   # Lookup groups.
   groups: [Group!]!
 
-  # Lookup forms.
+  # The list of events
+  events(
+    after: String
+    first: Int
+    before: String
+    last: Int
+
+    # "PASSED" for old, "FUTURE" for current and next, "" for all
+    time: String
+  ): EventConnection
   proposalForms: [ProposalForm]!
 
   # Lookup availables districts on a proposalForm for a given address.
