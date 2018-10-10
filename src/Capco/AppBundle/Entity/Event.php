@@ -8,6 +8,7 @@ use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -27,19 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface
 {
-    use DateHelperTrait, CommentableTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
-
-    /**
-     * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $title;
-
-    /**
-     * @Gedmo\Slug(separator="-", unique=true, fields={"title"}, updatable=false)
-     * @ORM\Column(name="slug", type="string", length=255)
-     */
-    private $slug;
+    use DateHelperTrait, CommentableTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait, SluggableTitleTrait;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -158,18 +147,6 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New event';
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
     }
 
     public function getCreatedAt(): ?\DateTime
@@ -387,16 +364,6 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function setEndAt(\DateTime $endAt = null)
     {
         $this->endAt = $endAt;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug)
-    {
-        $this->slug = $slug;
     }
 
     public function getRegistrations()
