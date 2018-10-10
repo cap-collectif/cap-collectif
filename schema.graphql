@@ -290,6 +290,9 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
 
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
@@ -785,6 +788,9 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   body: String!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -1841,6 +1847,9 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
 
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
@@ -2244,6 +2253,9 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Repor
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
 
   # The admin url for this contribution.
   adminUrl: URI!
@@ -3462,6 +3474,9 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
 
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
   votes(after: String, first: Int, before: String, last: Int): SourceVoteConnection
@@ -4356,6 +4371,9 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
