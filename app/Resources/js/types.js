@@ -44,6 +44,7 @@ export type FeatureToggles = {
   export: boolean,
   server_side_rendering: boolean,
   zipcode_at_register: boolean,
+  consultation_plan: boolean,
 };
 export type FeatureToggle =
   | 'blog'
@@ -72,7 +73,8 @@ export type FeatureToggle =
   | 'votes_evolution'
   | 'export'
   | 'server_side_rendering'
-  | 'zipcode_at_register';
+  | 'zipcode_at_register'
+  | 'consultation_plan';
 
 export type Action =
   | ProposalAction

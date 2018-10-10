@@ -11,8 +11,9 @@ type Props = {
 export class SectionList extends React.Component<Props> {
   render() {
     const { consultation, section, level } = this.props;
+
     return (
-      <div>
+      <div className="section-list_container" id={section.__id}>
         <Section consultation={consultation} section={section} level={level} />
         {section.sections &&
           section.sections.map((subSelection, index) => (

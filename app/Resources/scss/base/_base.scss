@@ -138,6 +138,7 @@
 
     &__opinion {
       font-size: 16px;
+      background-color: $white;
 
       .left-block {
         display: flex;
@@ -307,4 +308,73 @@ svg.avatar-group {
   box-shadow: 0 0 5px 1.5px rgba(8, 121, 180, 0.46);
   border-radius: 4px;
   padding: 5px;
+}
+
+/* ======================= Consultation plan ============================*/
+
+.consultation-plan {
+    top: 60px;
+
+    &_close {
+        position: absolute;
+        left: 15px;
+
+        .cap-android-menu {
+            top: 5px;
+            font-size: 21px;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    }
+
+    .stacked-nav__list {
+        max-height: calc(100vh - 160px);
+        overflow-y: scroll;
+    }
+}
+
+@media (max-width: $screen-sm-max) {
+    .consultation-plan {
+        z-index: 1100;
+        padding: 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: inherit;
+        width: 100%;
+
+        &_close {
+            position: relative;
+            text-align: right;
+            padding: 15px;
+            left: inherit;
+
+            i {
+                right: 0;
+            }
+
+            .btn.btn-link {
+                text-transform: capitalize;
+                padding: 5px 15px 10px;
+                color: $white;
+                border-radius: 4px;
+
+                &:hover {
+                    color: $white;
+                }
+            }
+        }
+
+        i {
+            line-height: normal;
+        }
+
+        .stacked-nav__list {
+            height: 21vh;
+            overflow-y: scroll;
+        }
+    }
 }

@@ -101,19 +101,6 @@ Capco\AppBundle\Entity\OpinionType:
     votesThresholdHelpText: <text(200)>
     consultationStepType: '@typePJL'
     parent: '@opinionType5'
-  opinionType7bis:
-    id: 'opinionType7bis'
-    title: Sous-sous-partie 1
-    position: 1
-    color: red
-    defaultFilter: positions
-    isEnabled: true
-    versionable: true
-    votesHelpText: <text(200)>
-    votesThreshold: 5
-    votesThresholdHelpText: <text(200)>
-    consultationStepType: '@typePJL'
-    parent: '@opinionType7'
   opinionType8:
     id: 'opinionType8'
     title: Le problème constaté
@@ -179,3 +166,49 @@ Capco\AppBundle\Entity\OpinionType:
     isEnabled: true
     consultationStepType: '@typePJL'
     parent: '@opinionType5ter'
+  opinionType28:
+    id: 'opinionType28'
+    title: Titre II
+    subtitle: La protection dans la société numérique
+    position: 2
+    color: blue
+    defaultFilter: positions
+    isEnabled: false
+    versionable: false
+    sourceable: false
+    consultationStepType: '@typePJL'
+  opinionType28ter:
+    id: 'opinionType28ter'
+    title: Chapitre Ier
+    subtitle: Le numérique
+    position: 1
+    color: red
+    defaultFilter: positions
+    isEnabled: false
+    versionable: false
+    sourceable: false
+    consultationStepType: '@typePJL'
+    parent: '@opinionType28'
+  opinionType29:
+    id: 'opinionType29'
+    title: Titre III
+    subtitle: L'accès au numérique
+    position: 3
+    color: blue
+    defaultFilter: positions
+    isEnabled: false
+    versionable: false
+    sourceable: false
+    consultationStepType: '@typePJL'
+  opinionType29ter:
+    id: 'opinionType29ter'
+    title: Chapitre Ier
+    subtitle: Encore le numérique
+    position: 1
+    color: green
+    defaultFilter: positions
+    isEnabled: false
+    versionable: false
+    sourceable: false
+    consultationStepType: '@typePJL'
+    parent: '@opinionType29'

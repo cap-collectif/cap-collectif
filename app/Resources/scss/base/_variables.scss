@@ -55,11 +55,12 @@ $navbar-collapsed-height: 60px;
 // -------------------------------
 $opinion-types:
         ("default" $page-bgc)
-        ("red" #f2dede)
-        ("orange" #fcf8e3)
-        ("blue" #d9edf7)
-        ("bluedark" darken(#d9edf7, 15%))
-        ("green" #dff0d8) ("white" #fff)
+        ("red" #f8d7da)
+        ("orange" #fff3cd)
+        ("blue" #cce5ff)
+        ("bluedark" darken(#cce5ff, 15%))
+        ("green" #d4edda)
+        ("white" #fff)
         ("gray" $border-color)
         ("light-gray", $page-bgc)
         (source darken(#428bca, 6.5%));

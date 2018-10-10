@@ -5,6 +5,7 @@ body {
   padding-top: $navbar-height;
   font-family: $font-family-sans-serif;
   font-size: $font-size-base;
+  overflow-x: hidden !important;
 
   &.modal-open {
     position: fixed;
@@ -655,11 +656,11 @@ div.embeddedContent {
 }
 
 .anchor-offset:before {
-  display: block;
-  visibility: hidden;
-  height: 60px;
-  content: "";
-  margin-top: -60px;
+    display: block;
+    visibility: hidden;
+    height: 60px;
+    content: "";
+    margin-top: -60px;
 }
 
 @each $icon in $icons-colors {

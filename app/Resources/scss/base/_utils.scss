@@ -139,10 +139,6 @@
     object-fit: cover;
 }
 
-.overflow-hidden {
-    overflow: hidden;
-}
-
 /* =====
   16:9 Display
 ==== */
@@ -178,4 +174,11 @@
 
 .sixteen-nine {
     @include aspect-ratio(16,9);
+}
+
+/* =============================== Sticky ================================ */
+.sticky {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
 }

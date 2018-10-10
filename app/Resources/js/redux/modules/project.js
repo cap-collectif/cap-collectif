@@ -2,12 +2,14 @@
 import { takeEvery, select, call, put } from 'redux-saga/effects';
 import { stringify } from 'qs';
 import Fetcher from '../../services/Fetcher';
+import LocalStorageService from '../../services/LocalStorageService';
 import type { Exact, State as GlobalState, Uuid, Action } from '../../types';
 
 export type State = {
   +currentProjectStepById: ?Uuid,
   +currentProjectById: ?Uuid,
   +visibleProjects: Array<Uuid>,
+  +showConsultationPlanById: { [id: Uuid]: boolean },
   +projectsById: { [id: Uuid]: Object },
   +projectTypes: Array<Object>,
   +page: number,
@@ -20,11 +22,13 @@ export type State = {
   +theme: ?string,
   +isLoading: boolean,
   +count: number,
+  +selectedActiveItems: Array<string>,
 };
 
 const initialState: State = {
   currentProjectStepById: null,
   currentProjectById: null,
+  showConsultationPlanById: {},
   visibleProjects: [],
   projectsById: {},
   projectTypes: [],
@@ -38,6 +42,7 @@ const initialState: State = {
   theme: null,
   isLoading: true,
   count: 0,
+  selectedActiveItems: [],
 };
 type RequestFetchProjectsAction = { type: 'project/PROJECTS_FETCH_REQUESTED' };
 type ChangePageAction = { type: 'project/CHANGE_PAGE', page: number };
@@ -58,6 +63,18 @@ type ReceivedProjectSucceedAction = {
   type: 'project/PROJECTS_FETCH_SUCCEEDED',
   project: Object,
 };
+type CloseConsultationPlanAction = {
+  type: 'project/CLOSE_CONSULTATION_PLAN',
+  id: string,
+};
+type OpenConsultationPlanAction = {
+  type: 'project/OPEN_CONSULTATION_PLAN',
+  id: string,
+};
+type ChangeConsultationPlanActiveItemsAction = {
+  type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEMS',
+  items: Array<string>,
+};
 
 export type ProjectAction =
   | RequestFetchProjectsAction
@@ -67,6 +84,9 @@ export type ProjectAction =
   | ChangeProjectTermAction
   | ChangeProjectThemeAction
   | ReceivedProjectSucceedAction
+  | CloseConsultationPlanAction
+  | OpenConsultationPlanAction
+  | ChangeConsultationPlanActiveItemsAction
   | { type: 'project/PROJECTS_FETCH_FAILED', error: Object }
   | { type: 'project/CHANGE_FILTER', filter: string, value: string };
 
@@ -92,6 +112,23 @@ export const changeTerm = (term: ?string): ChangeProjectTermAction => ({
 export const changeTheme = (theme: ?string): ChangeProjectThemeAction => ({
   type: 'project/CHANGE_THEME',
   theme,
+});
+
+export const closeConsultationPlan = (id: string): CloseConsultationPlanAction => ({
+  type: 'project/CLOSE_CONSULTATION_PLAN',
+  id,
+});
+
+export const openConsultationPlan = (id: string): OpenConsultationPlanAction => ({
+  type: 'project/OPEN_CONSULTATION_PLAN',
+  id,
+});
+
+export const changeConsultationPlanActiveItems = (
+  items: Array<string>,
+): ChangeConsultationPlanActiveItemsAction => ({
+  type: 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEMS',
+  items,
 });
 
 export function* fetchProjectsSaga(): Generator<*, *, *> {
@@ -151,6 +188,19 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, theme: action.theme };
     case 'project/CHANGE_PAGE':
       return { ...state, page: action.page };
+    case 'project/OPEN_CONSULTATION_PLAN': {
+      const data = { ...state.showConsultationPlanById, [action.id]: true };
+      LocalStorageService.set('project.showConsultationPlanById', data);
+      return { ...state, showConsultationPlanById: data };
+    }
+    case 'project/CLOSE_CONSULTATION_PLAN': {
+      const data = { ...state.showConsultationPlanById, [action.id]: false };
+      LocalStorageService.set('project.showConsultationPlanById', data);
+      return { ...state, showConsultationPlanById: data };
+    }
+    case 'proposal/CHANGE_CONSULTATION_PLAN_ACTIVE_ITEMS': {
+      return { ...state, selectedActiveItems: action.items };
+    }
     default:
       return state;
   }
