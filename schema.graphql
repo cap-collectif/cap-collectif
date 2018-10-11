@@ -2478,7 +2478,7 @@ type ProposalForm implements Node {
   commentable: Boolean!
   costable: Boolean!
   proposalInAZoneRequired: Boolean!
-  districts(order: DistrictOrderField): [District!]!
+  districts(order: DistrictOrderField = ALPHABETICAL): [District!]!
   districtMandatory: Boolean!
   districtHelpText: String
   usingCategories: Boolean!
@@ -2865,7 +2865,6 @@ enum QuestionTypeValue {
   ranking
   medias
   button
-  number
   section
 }
 

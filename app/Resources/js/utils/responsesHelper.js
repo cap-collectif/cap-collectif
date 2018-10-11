@@ -6,7 +6,6 @@ import type { QuestionTypeValue } from '../components/Proposal/Page/__generated_
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
-import { checkOnlyNumbers } from '../services/Validator';
 
 import component from '../components/Form/Field';
 
@@ -46,11 +45,10 @@ type ResponsesFromAPI = $ReadOnlyArray<?{|
 |}>;
 
 export type ResponsesInReduxForm = $ReadOnlyArray<{|
-  questionId: string,
+  question: string,
   // eslint-disable-next-line flowtype/space-after-type-colon
   value:
     | ?string
-    | ?number
     | $ReadOnlyArray<{|
         +id: string,
         +name: string,
@@ -73,7 +71,7 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
 //   medias: $ReadOnlyArray<string>,
 // |}>;
 type SubmitResponses = $ReadOnlyArray<{
-  value?: any,
+  value?: ?string,
   question: string,
   medias?: ?$ReadOnlyArray<string>,
 }>;
@@ -84,36 +82,26 @@ export const formatSubmitResponses = (
 ): SubmitResponses => {
   if (!responses) return [];
   return responses.map(res => {
-    const { type: questionType } = questions.filter(q => res.questionId === q.id)[0];
-    const question = res.questionId;
-    if (questionType === 'medias') {
+    const question = questions.filter(q => res.question === q.id)[0];
+    if (question.type === 'medias') {
       return {
-        question,
+        question: res.question,
         medias: Array.isArray(res.value) ? res.value.map(value => value.id) : [],
       };
     }
-
-    if (questionType === 'ranking' || questionType === 'button') {
-      const value = JSON.stringify({
+    let value = res.value;
+    if (question.type === 'ranking' || question.type === 'button') {
+      value = JSON.stringify({
         labels: Array.isArray(res.value) ? res.value : [res.value],
         other: null,
       });
-      return {
-        question,
-        value,
-      };
-    } else if (questionType === 'checkbox' || questionType === 'radio') {
-      return {
-        question,
-        value: JSON.stringify(res.value),
-      };
-    } else if (questionType === 'number') {
-      return {
-        question,
-        value: res.value,
-      };
+    } else if (question.type === 'checkbox' || question.type === 'radio') {
+      value = JSON.stringify(res.value);
     }
-    return { value: res.value, question };
+    if (typeof value === 'string') {
+      return { value, question: res.question };
+    }
+    return { value: null, question: res.question };
   });
 };
 
@@ -129,9 +117,6 @@ export const getValueFromResponse = (questionType: string, responseValue: string
     if (questionType === 'ranking') {
       return JSON.parse(responseValue).labels;
     }
-    if (questionType === 'number') {
-      return JSON.parse(responseValue);
-    }
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(`Failed to parse : ${responseValue}`);
@@ -146,27 +131,27 @@ export const formatInitialResponsesValues = (
 ): ResponsesInReduxForm =>
   questions.map(question => {
     const response = responses.filter(res => res && res.question.id === question.id)[0];
-    const questionId = question.id;
+
     // If we have a previous response format it
     if (response) {
       if (typeof response.value !== 'undefined' && response.value !== null) {
         return {
-          questionId,
+          question: question.id,
           value: getValueFromResponse(question.type, response.value),
         };
       }
       if (typeof response.medias !== 'undefined') {
-        return { questionId, value: response.medias };
+        return { question: question.id, value: response.medias };
       }
     }
     // Otherwise we create an empty response
     if (question.type === 'medias') {
-      return { questionId, value: [] };
+      return { question: question.id, value: [] };
     }
     if (question.type === 'radio' || question.type === 'checkbox') {
-      return { questionId, value: { labels: [], other: null } };
+      return { question: question.id, value: { labels: [], other: null } };
     }
-    return { questionId, value: null };
+    return { question: question.id, value: null };
   });
 
 const formattedChoicesInField = field =>
@@ -197,87 +182,6 @@ export const getRequiredFieldIndicationStrategy = (fields: Questions) => {
   return 'minority_required';
 };
 
-const getResponseNumber = (value: any) => {
-  if (typeof value === 'object' && Array.isArray(value.labels)) {
-    const labelsNumber = value.labels.length;
-    const hasOtherValue = value.other ? 1 : 0;
-    return labelsNumber + hasOtherValue;
-  }
-
-  if (typeof value === 'object' && Array.isArray(value)) {
-    return value.length;
-  }
-
-  return 0;
-};
-
-type ResponseError = ?{
-  value: string,
-};
-
-type ResponsesError = ResponseError[];
-
-export const validateResponses = (
-  questions: Questions,
-  responses: ResponsesInReduxForm,
-  className: string,
-  intl: IntlShape,
-): {
-  responses?: ResponsesError,
-} => {
-  const responsesError = questions.map(question => {
-    const response = responses.filter(res => res && res.questionId === question.id)[0];
-    if (question.required) {
-      if (question.type === 'medias') {
-        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
-          return { value: `${className}.constraints.field_mandatory` };
-        }
-      } else if (!response || !response.value) {
-        return { value: `${className}.constraints.field_mandatory` };
-      }
-    }
-
-    if (
-      question.type === 'number' &&
-      response.value &&
-      typeof response.value === 'string' &&
-      !checkOnlyNumbers(response.value)
-    ) {
-      return { value: `please-enter-a-number` };
-    }
-
-    if (
-      question.validationRule &&
-      question.type !== 'button' &&
-      response.value &&
-      typeof response.value === 'object' &&
-      (Array.isArray(response.value.labels) || Array.isArray(response.value))
-    ) {
-      const rule = question.validationRule;
-      const responsesNumber = getResponseNumber(response.value);
-      if (rule.type === 'MIN' && (rule.number && responsesNumber < rule.number)) {
-        return {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_min' }, { nb: rule.number }),
-        };
-      }
-
-      if (rule.type === 'MAX' && (rule.number && responsesNumber > rule.number)) {
-        return {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_max' }, { nb: rule.number }),
-        };
-      }
-
-      if (rule.type === 'EQUAL' && responsesNumber !== rule.number) {
-        return {
-          value: intl.formatMessage({ id: 'reply.constraints.choices_equal' }, { nb: rule.number }),
-        };
-      }
-    }
-  });
-
-  return responsesError && responsesError.length ? { responses: responsesError } : {};
-};
-
 export const renderResponses = ({
   fields,
   questions,
@@ -300,8 +204,7 @@ export const renderResponses = ({
       {fields.map((member, index) => {
         const field = questions[index];
 
-        // We want to overidde the HTML verification of the input type number
-        const inputType = field.type && field.type !== 'number' ? field.type : 'text';
+        const inputType = field.type || 'text';
         const isOtherAllowed = field.isOtherAllowed;
 
         const labelAppend = field.required

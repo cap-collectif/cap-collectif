@@ -64,16 +64,6 @@ Scenario: GraphQL client wants to update a questionnaire
                     "private":false,
                     "required":true,
                     "kind":"simple"
-                 },
-                 {
-                    "id":"1313",
-                    "title":"Un nombre stp",
-                    "helpText":null,
-                    "description":null,
-                    "type":"number",
-                    "private":false,
-                    "required":true,
-                    "kind":"simple"
                  }
               ]
            }

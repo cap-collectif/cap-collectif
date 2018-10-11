@@ -16,11 +16,6 @@ const getIdFromQuestionType = (type: QuestionTypeValue): string => {
   const mutipleTypes = ['checkbox', 'ranking'];
   const mediaTypes = ['medias'];
   const sectionTypes = ['section'];
-  const numberTypes = ['number'];
-
-  if (numberTypes.includes(type)) {
-    return 'admin.fields.validation_rule.number';
-  }
 
   if (freeTypes.includes(type)) {
     return 'global.question.types.free';

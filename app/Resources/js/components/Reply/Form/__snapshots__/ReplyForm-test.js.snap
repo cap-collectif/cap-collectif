@@ -161,11 +161,11 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
           responses={
             Array [
               Object {
-                "questionId": "Nelson Monfort parle-t-il:",
+                "question": "Nelson Monfort parle-t-il:",
                 "value": "Trop fort (Mon sonotone est tout neuf)",
               },
               Object {
-                "questionId": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
                 "value": Object {
                   "labels": Array [
                     "Superman",
@@ -340,11 +340,11 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
           responses={
             Array [
               Object {
-                "questionId": "Nelson Monfort parle-t-il:",
+                "question": "Nelson Monfort parle-t-il:",
                 "value": "Trop fort (Mon sonotone est tout neuf)",
               },
               Object {
-                "questionId": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
                 "value": Object {
                   "labels": Array [
                     "Superman",
@@ -594,11 +594,11 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
           responses={
             Array [
               Object {
-                "questionId": "Nelson Monfort parle-t-il:",
+                "question": "Nelson Monfort parle-t-il:",
                 "value": "Trop fort (Mon sonotone est tout neuf)",
               },
               Object {
-                "questionId": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
                 "value": Object {
                   "labels": Array [
                     "Superman",
@@ -795,11 +795,11 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
           responses={
             Array [
               Object {
-                "questionId": "Nelson Monfort parle-t-il:",
+                "question": "Nelson Monfort parle-t-il:",
                 "value": "Trop fort (Mon sonotone est tout neuf)",
               },
               Object {
-                "questionId": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
                 "value": Object {
                   "labels": Array [
                     "Superman",
@@ -940,11 +940,11 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
           responses={
             Array [
               Object {
-                "questionId": "Nelson Monfort parle-t-il:",
+                "question": "Nelson Monfort parle-t-il:",
                 "value": "Trop fort (Mon sonotone est tout neuf)",
               },
               Object {
-                "questionId": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
                 "value": Object {
                   "labels": Array [
                     "Superman",
