@@ -48,7 +48,11 @@ class ReplyAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', 'sonata_type_model', ['label' => 'admin.fields.reply.author'])
-            ->add('published', null, ['label' => 'admin.fields.reply.enabled'])
+            ->add('state', null, [
+                'mapped' => false,
+                'label' => 'admin.fields.proposal.state.label',
+                'template' => 'CapcoAdminBundle:Reply:state_list_field.html.twig',
+            ])
             ->add('createdAt', null, ['label' => 'admin.fields.questionnaire.created_at'])
             ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at']);
     }
