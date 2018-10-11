@@ -1,0 +1,10 @@
+RemoveSourceVotePayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      deletedVoteId:
+        type: 'ID'
+      contribution:
+        type: 'Source'
+      viewer:
+        type: 'InternalUser!'

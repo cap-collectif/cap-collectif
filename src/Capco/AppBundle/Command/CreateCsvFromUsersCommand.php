@@ -156,7 +156,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         $this->writer->addRow(self::SHEET_HEADER);
 
         $requestString = $this->getUsersGraphQLQuery(null);
-        $datas = $this->executor->execute(null, [
+        $datas = $this->executor->execute('internal', [
             'query' => $requestString,
             'variables' => [],
         ])->toArray();

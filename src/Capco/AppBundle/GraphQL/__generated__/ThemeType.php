@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ThemeType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'Theme';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

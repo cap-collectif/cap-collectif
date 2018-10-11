@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 
 class UserSerializationListener extends AbstractSerializationListener
 {
@@ -54,9 +55,13 @@ class UserSerializationListener extends AbstractSerializationListener
             $contributionsCountByProject = [];
             $contributionsCountByStep = [];
             foreach ($this->projectRepository->findAll() as $project) {
-                $count = $this->contributionProjectResolver->__invoke($user, $project, [
-                    'first' => 1,
-                ])->totalCount;
+                $count = $this->contributionProjectResolver->__invoke(
+                    $user,
+                    $project,
+                    new Argument([
+                        'first' => 1,
+                    ])
+                )->totalCount;
                 $contributionsCountByProject[] = [
                     'project' => ['id' => $project->getId()],
                     'count' => $count,
@@ -66,9 +71,13 @@ class UserSerializationListener extends AbstractSerializationListener
                         'step' => ['id' => $step->getId()],
                         'count' => 0 === $count
                             ? 0
-                            : $this->contributionStepResolver->__invoke($user, $step, [
-                                'first' => 1,
-                            ])->totalCount,
+                            : $this->contributionStepResolver->__invoke(
+                                $user,
+                                $step,
+                                new Argument([
+                                    'first' => 1,
+                                ])
+                            )->totalCount,
                     ];
                 }
             }

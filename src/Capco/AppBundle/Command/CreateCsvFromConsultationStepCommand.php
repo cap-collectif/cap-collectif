@@ -307,7 +307,7 @@ EOF;
             $this->currentStep
         );
 
-        $contributions = $this->executor->execute(null, [
+        $contributions = $this->executor->execute('internal', [
             'query' => $contributionsQuery,
             'variables' => [],
         ])->toArray();

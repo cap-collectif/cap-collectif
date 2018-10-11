@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class CreateQuestionnairePayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'CreateQuestionnairePayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -23,7 +24,7 @@ final class CreateQuestionnairePayloadType extends ObjectType implements Generat
             'fields' => function () use ($globalVariable) {
                 return [
                 'questionnaire' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Questionnaire'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('InternalQuestionnaire'),
                     'args' => [
                     ],
                     'resolve' => null,

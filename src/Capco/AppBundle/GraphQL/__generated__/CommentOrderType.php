@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class CommentOrderType extends InputObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'CommentOrder';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

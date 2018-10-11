@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class DeleteSourceInputType extends InputObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'DeleteSourceInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -24,7 +25,7 @@ final class DeleteSourceInputType extends InputObjectType implements GeneratedTy
                 return [
                 'sourceId' => [
                     'type' => Type::nonNull(Type::id()),
-                    'description' => null,
+                    'description' => 'The ID to delete.',
                 ],
                 'clientMutationId' => [
                     'type' => Type::string(),

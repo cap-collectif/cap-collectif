@@ -295,9 +295,4 @@ class ConsultationResolver implements ContainerAwareInterface
     {
         return $object->getCreatedAt()->format(\DateTime::ATOM);
     }
-
-    public function resolveUpdatedAt($object): string
-    {
-        return $object->getUpdatedAt()->format(\DateTime::ATOM);
-    }
 }

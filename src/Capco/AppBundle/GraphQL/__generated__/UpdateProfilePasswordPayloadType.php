@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class UpdateProfilePasswordPayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'UpdateProfilePasswordPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -23,7 +24,7 @@ final class UpdateProfilePasswordPayloadType extends ObjectType implements Gener
             'fields' => function () use ($globalVariable) {
                 return [
                 'user' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
                     'args' => [
                     ],
                     'resolve' => null,

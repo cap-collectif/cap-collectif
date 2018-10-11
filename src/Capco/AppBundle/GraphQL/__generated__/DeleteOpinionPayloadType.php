@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class DeleteOpinionPayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'DeleteOpinionPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -27,7 +28,7 @@ final class DeleteOpinionPayloadType extends ObjectType implements GeneratedType
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'The deleted ID.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

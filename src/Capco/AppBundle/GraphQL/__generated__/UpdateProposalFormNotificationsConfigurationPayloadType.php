@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class UpdateProposalFormNotificationsConfigurationPayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'UpdateProposalFormNotificationsConfigurationPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

@@ -5,5 +5,5 @@ ContributionWithAuthor:
     resolveType: "@=resolver('contribution_type', [value])"
     fields:
       author:
-        type: 'User!'
+        type: 'InternalUser!'
         description: 'The author of the contribution.'

@@ -4,7 +4,7 @@ export const baseUrl = `${typeof window !== 'undefined' ? window.location.protoc
 }`;
 
 export default {
-  graphql: `${baseUrl}/graphql/`,
+  graphql: `${baseUrl}/graphql/internal`,
   api: `${baseUrl}/api`,
   mapsServerKey: '***REMOVED***',
   mapboxApiKey:

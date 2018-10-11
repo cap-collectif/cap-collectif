@@ -1,0 +1,5452 @@
+input AddArgumentInput {
+  # The Argumentable ID to argue.
+  argumentableId: ID!
+
+  # The contents of the argument body.
+  body: String!
+
+  # The type of the argument.
+  type: ArgumentValue!
+  clientMutationId: String
+}
+
+type AddArgumentPayload {
+  # The newly created argument.
+  argument: Argument
+
+  # The edge from the argumentable's arguments connection.
+  argumentEdge: ArgumentEdge
+  userErrors: [UserError!]!
+  clientMutationId: String
+}
+
+input AddArgumentVoteInput {
+  # The Node ID of the argument to vote.
+  argumentId: ID!
+  clientMutationId: String
+}
+
+type AddArgumentVotePayload {
+  voteEdge: ArgumentVoteEdge
+  viewer: User!
+  clientMutationId: String
+}
+
+input AddCommentInput {
+  # The Commentable ID of the subject to comment.
+  commentableId: ID!
+
+  # The contents of the comment.
+  body: String!
+  authorName: String
+  authorEmail: String
+  clientMutationId: String
+}
+
+type AddCommentPayload {
+  # The edge from the commentable's comment connection.
+  commentEdge: CommentEdge
+
+  # The commentable.
+  commentable: Commentable
+  userErrors: [UserError!]!
+  clientMutationId: String
+}
+
+input AddCommentVoteInput {
+  # The Node ID of the comment to vote.
+  commentId: ID!
+  clientMutationId: String
+}
+
+type AddCommentVotePayload {
+  voteEdge: CommentVoteEdge
+  viewer: User!
+  clientMutationId: String
+}
+
+input AddOpinionVoteInput {
+  # The Node ID of the opinion/version to vote.
+  opinionId: ID!
+
+  # The vote value.
+  value: YesNoPairedVoteValue!
+  clientMutationId: String
+}
+
+type AddOpinionVotePayload {
+  vote: YesNoPairedVote
+  voteEdge: YesNoPairedVoteEdge
+  viewer: User!
+  previousVoteId: ID
+  clientMutationId: String
+}
+
+input AddProposalVoteInput {
+  # The Node ID of the proposal to vote.
+  proposalId: ID!
+
+  # The Node ID of the step.
+  stepId: ID!
+
+  # The vote will be anonymous.
+  anonymously: Boolean = false
+  clientMutationId: String
+}
+
+type AddProposalVotePayload {
+  vote: ProposalVote!
+  viewer: User!
+  clientMutationId: String
+}
+
+input AddReplyInput {
+  # The id of the questionnaire
+  questionnaireId: ID!
+
+  # The responses to the questionnaire questions
+  responses: [ResponseInput]
+
+  # Anonymous or not.
+  private: Boolean
+  clientMutationId: String
+}
+
+type AddReplyPayload {
+  reply: Reply
+  questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input AddSourceInput {
+  # The Sourceable ID to source.
+  sourceableId: ID!
+
+  # The contents of the source body.
+  body: String!
+
+  # The category of the source.
+  category: ID!
+  link: URI!
+  title: String!
+  clientMutationId: String
+}
+
+type AddSourcePayload {
+  # The newly created source.
+  source: Source
+
+  # The edge from the sourceable's sources connection.
+  sourceEdge: SourceEdge
+  userErrors: [UserError!]!
+  clientMutationId: String
+}
+
+input AddSourceVoteInput {
+  # The Node ID of the source to vote.
+  sourceId: ID!
+  clientMutationId: String
+}
+
+type AddSourceVotePayload {
+  voteEdge: SourceVoteEdge
+  viewer: User!
+  clientMutationId: String
+}
+
+input AddUsersInGroupInput {
+  # Users that will be added to the group.
+  users: [ID!]!
+
+  # The concerned group id.
+  groupId: ID!
+  clientMutationId: String
+}
+
+type AddUsersInGroupPayload {
+  group: Group!
+  clientMutationId: String
+}
+
+input AddUsersToGroupFromEmailInput {
+  # A list of email(s).
+  emails: [Email!]!
+
+  # This option is useful if you want to test your emails list. Set it to true if you want to import definitively.
+  dryRun: Boolean!
+
+  # The Node ID of the group.
+  groupId: ID!
+  clientMutationId: String
+}
+
+type AddUsersToGroupFromEmailPayload {
+  # List of imported users.
+  importedUsers: [User]!
+
+  # List of emails that didn't match an existing user.
+  notFoundEmails: [Email]!
+
+  # If an email from your list is already associated to a user who is in the chosen group, it will be in this field.
+  alreadyImportedUsers: [User]!
+  clientMutationId: String
+}
+
+input AddVersionInput {
+  # The concerned opinion id.
+  opinionId: ID!
+  title: String!
+  body: String!
+  comment: String
+  clientMutationId: String
+}
+
+type AddVersionPayload {
+  version: Version
+  versionEdge: VersionEdge
+  userErrors: [UserError]
+  clientMutationId: String
+}
+
+scalar Address
+
+# A contribution
+type Answer {
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # Identifies the contribution title.
+  title: String
+
+  # Identifies the body of the contribution.
+  body: HTML
+  author: User
+}
+
+union AnswerOrPost = Answer | Post
+
+# A contribution
+type Appendix {
+  # Identifies the body of the contribution.
+  body: HTML
+
+  # Identifies the body of the contribution rendered to text.
+  bodyText: String
+  appendixType: AppendixType!
+}
+
+# An AppendixType
+type AppendixType {
+  title: String!
+}
+
+# An argument
+type Argument implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution (argument).
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # Url of the contribution
+  url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # The type.
+  type: ArgumentValue!
+  votes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ArgumentVoteConnection!
+
+  # The content of the argument.
+  body: String!
+  viewerHasVote: Boolean!
+  viewerVote: ArgumentVote
+  contribuable: Boolean!
+}
+
+# A connection to a list of items.
+type ArgumentConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ArgumentEdge]
+}
+
+# An edge in a connection.
+type ArgumentEdge {
+  # The item at the end of the edge.
+  node: Argument
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which argument connections can be ordered.
+input ArgumentOrder {
+  # The field in which to order nodes by.
+  field: ArgumentOrderField!
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = ASC
+}
+
+# Properties by which argument connections can be ordered
+enum ArgumentOrderField {
+  # Allows ordering a list of arguments by when they were published.
+  PUBLISHED_AT
+
+  # Allows ordering a list of arguments by the number of votes it have.
+  VOTES
+}
+
+# Value of an argument
+enum ArgumentValue {
+  AGAINST
+  FOR
+}
+
+# Fetches an object given its ID
+type ArgumentVote implements Vote & Publishable {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # The ID of an object
+  id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # Return the related contribution if the contribution is related to another.
+  related: Argument
+
+  # Returns Type of vote
+  kind: String!
+}
+
+# A connection to a list of items.
+type ArgumentVoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ArgumentVoteEdge]
+}
+
+# An edge in a connection.
+type ArgumentVoteEdge {
+  # The item at the end of the edge.
+  node: ArgumentVote
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# An argumentable
+interface Argumentable {
+  # The ID of an object
+  id: ID!
+  contribuable: Boolean!
+
+  # The arguments related to the argumentable.
+  arguments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
+
+    # If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection!
+
+  # The unpublished arguments of to the viewer.
+  viewerArgumentsUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection
+}
+
+input ChangeArgumentInput {
+  # The argument Node id.
+  argumentId: ID!
+
+  # The contents of the argument body.
+  body: String!
+  clientMutationId: String
+}
+
+type ChangeArgumentPayload {
+  argument: Argument!
+  clientMutationId: String
+}
+
+input ChangeCollectStatusInput {
+  statusId: ID
+
+  # The proposal id
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type ChangeCollectStatusPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeDistrictInput {
+  # The district id
+  districtId: ID!
+  geojson: GeoJSON
+  displayedOnMap: Boolean
+  name: String
+  clientMutationId: String
+}
+
+type ChangeDistrictPayload {
+  district: District!
+  clientMutationId: String
+}
+
+input ChangeProposalContentInput {
+  # The proposal id
+  id: ID!
+
+  # Pass 'true' to keep your proposal in draft state, otherwise we admit that you want to publish it.
+  draft: Boolean
+
+  # The new proposal title
+  title: String
+
+  # The new proposal body
+  body: HTML
+
+  # The new proposal summary
+  summary: String
+
+  # The author id (ROLE_SUPER_ADMIN allowed only)
+  author: ID
+
+  # The theme id (feature themes enabled)
+  theme: String
+
+  # The category id
+  category: String
+
+  # The district id (feature districts enabled)
+  district: String
+
+  # The address geocoded by google
+  address: Address
+
+  # The custom fields responses
+  responses: [ResponseInput]
+
+  # Current media id
+  media: ID
+  clientMutationId: String
+}
+
+type ChangeProposalContentPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeProposalEvaluationInput {
+  # The proposal id
+  proposalId: ID!
+
+  # The revision number of the evaluation
+  version: Int!
+  responses: [ResponseInput!]!
+  clientMutationId: String
+}
+
+type ChangeProposalEvaluationPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeProposalEvaluersInput {
+  # The proposal id
+  proposalId: ID!
+  evaluers: [ID!]
+  clientMutationId: String
+}
+
+type ChangeProposalEvaluersPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeProposalNotationInput {
+  # The proposal id
+  proposalId: ID!
+  estimation: Int
+  likers: [ID!]
+  clientMutationId: String
+}
+
+type ChangeProposalNotationPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeProposalProgressStepsInput {
+  progressSteps: [ProgressStepInput!]!
+  proposalId: String!
+  clientMutationId: String
+}
+
+type ChangeProposalProgressStepsPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeProposalPublicationStatusInput {
+  # The new publication status
+  publicationStatus: ProposalPublicationStatus!
+
+  # Added if you set publicationStatus to TRASHED
+  trashedReason: String
+
+  # The proposal id
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type ChangeProposalPublicationStatusPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeSelectionStatusInput {
+  stepId: ID!
+  proposalId: ID!
+  statusId: ID
+  clientMutationId: String
+}
+
+type ChangeSelectionStatusPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ChangeSourceInput {
+  # The source id.
+  sourceId: ID!
+
+  # The contents of the source body.
+  body: String
+
+  # The contents of the source category.
+  category: ID
+
+  # The contents of the source title.
+  title: String
+
+  # The contents of the source link.
+  link: URI
+  clientMutationId: String
+}
+
+type ChangeSourcePayload {
+  source: Source
+  clientMutationId: String
+}
+
+input ChangeUserNotificationsConfigurationInput {
+  # The new proposal comment notification value
+  onProposalCommentMail: Boolean!
+  clientMutationId: String
+}
+
+type ChangeUserNotificationsConfigurationPayload {
+  user: User!
+  clientMutationId: String
+}
+
+input ChangeVersionInput {
+  # The version Node id.
+  versionId: ID!
+
+  # Updated version body.
+  body: String
+
+  # Updated version title.
+  title: String
+
+  # Updated version comment.
+  comment: String
+  clientMutationId: String
+}
+
+type ChangeVersionPayload {
+  version: Version
+  clientMutationId: String
+}
+
+# Requires the viewer to check a box
+type CheckboxRequirement implements Node & Requirement {
+  # The ID of an object
+  id: ID!
+
+  # Does the viewer meets the requirement ?
+  viewerMeetsTheRequirement: Boolean!
+
+  # The condition set by the requirement.
+  label: String!
+}
+
+# A proposal step
+type CollectStep implements Node & Step & ProposalStep {
+  # The ID of an object
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # The url of the step
+  url: String!
+  proposals(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # If non-null, filters proposals with the given district.
+    district: ID
+
+    # If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # If non-null, filters proposals with the given category.
+    category: ID
+
+    # If non-null, filters proposals with the given author.
+    author: ID
+
+    # If non-null, filters proposals with the given status.
+    status: ID
+
+    # If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
+
+    # Ordering options for proposals returned from the connection.
+    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # Affiliation options for proposals returned from the connection.
+    affiliations: [ProposalAffiliation]
+
+    # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
+    includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
+  ): ProposalConnection!
+
+  # The viewer unpublished proposals (only visible by viewer).
+  viewerProposalsUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ProposalConnection
+
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
+  project: Project
+  votesLimit: Int
+  budget: Int
+  voteType: ProposalStepVoteType!
+  votesHelpText: String
+  voteThreshold: Int
+  open: Boolean!
+
+  # If enabled, allow voters to order their votes by preferences.
+  votesRanking: Boolean!
+
+  # A list of viewer votes associated with the step.
+  viewerVotes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100000
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProposalVotesOrder = {direction: DESC}
+  ): ProposalVoteConnection!
+  form: ProposalForm!
+  statuses: [Status!]!
+  private: Boolean!
+
+  # A list of contributor associated with the step.
+  contributors(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+  viewerProposalDrafts(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ProposalConnection!
+}
+
+# A comment
+type Comment implements Node & Publishable & Reportable & Contribution & Commentable {
+  # The comments related to the commentable.
+  comments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
+
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # Url of the contribution
+  url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+  body: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  author: User
+  parent: Comment
+  pinned: Boolean!
+  contribuable: Boolean!
+  answers: [Comment]!
+  authorName: String
+  authorEmail: String
+  authorIp: IP
+  publicationStatus: CommentPublicationStatus!
+  votes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: VoteOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentVoteConnection!
+  viewerHasVote: Boolean!
+  viewerVote: CommentVote
+  editUrl: URI
+}
+
+# A connection to a list of items.
+type CommentConnection {
+  totalCount: Int!
+  totalCountWithAnswers: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [CommentEdge]
+}
+
+# An edge in a connection.
+type CommentEdge {
+  # The item at the end of the edge.
+  node: Comment!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which lists of comments can be ordered upon return.
+input CommentOrder {
+  field: CommentOrderField! = PUBLISHED_AT
+  direction: OrderDirection! = DESC
+}
+
+# Ordering options for comments.
+enum CommentOrderField {
+  PUBLISHED_AT
+  UPDATED_AT
+  POPULARITY
+}
+
+# Available statuses
+enum CommentPublicationStatus {
+  # Visible by author only.
+  UNPUBLISHED
+
+  # Normal status, Publicly visible
+  PUBLISHED
+
+  # Publicly visible in the trash bin
+  TRASHED
+
+  # In the trash bin, content not visible
+  TRASHED_NOT_VISIBLE
+}
+
+# Fetches an object given its ID
+type CommentVote implements Node & Vote & Publishable {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # The ID of an object
+  id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns 'commentVote'.
+  kind: String!
+  contribution: Comment!
+}
+
+# A connection to a list of items.
+type CommentVoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [CommentVoteEdge]
+}
+
+# An edge in a connection.
+type CommentVoteEdge {
+  # The item at the end of the edge.
+  node: CommentVote!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# A commentable
+interface Commentable {
+  # The ID of an object
+  id: ID!
+
+  # The comments related to the commentable.
+  comments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
+}
+
+# A consultation
+type Consultation implements Node & Step {
+  # The ID of an object
+  id: ID!
+
+  # A list of contributor associated with the consultation.
+  contributors(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+
+  # The title of the step.
+  title: String!
+
+  # Whether the user has vote for a contribution in this consultation.
+  userHasVote(
+    # The user's login (for example, an email).
+    login: String!
+  ): Boolean!
+
+  # The number of votes in this consultation.
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
+
+  # The kind of the step
+  kind: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # The url of the step
+  url: String!
+  opinionCountShownBySection: Int
+
+  # The project
+  project: Project!
+
+  # The id of the related project.
+  projectId: String!
+  titleHelpText: String
+  descriptionHelpText: String
+
+  # Contributions are allowed right now.
+  contribuable: Boolean!
+
+  # List of sections.
+  sections: [Section]
+  viewerOpinionsUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): OpinionConnection
+  contributionConnection(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Ordering options for contributions returned from the connection.
+    orderBy: ContributionOrder = {field: POSITION, direction: DESC}
+  ): ContributionConnection
+}
+
+# A contribution with an author
+interface Contribution {
+  # The id of the contribution.
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # Url of the contribution
+  url: URI!
+}
+
+# A connection to a list of items.
+type ContributionConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ContributionEdge]
+}
+
+# An edge in a connection.
+type ContributionEdge {
+  # The item at the end of the edge.
+  node: Contribution!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which lists of contributions can be ordered upon return.
+input ContributionOrder {
+  field: ContributionOrderField! = POSITION
+  direction: OrderDirection! = DESC
+}
+
+# Ordering options for contributions connections.
+enum ContributionOrderField {
+  COMMENT_COUNT
+  POPULAR
+  POSITION
+  PUBLISHED_AT
+  RANDOM
+  VOTE_COUNT
+}
+
+# Different contribution type
+enum ContributionType {
+  OPINION
+  OPINIONVERSION
+  COMMENT
+  ARGUMENT
+  SOURCE
+  PROPOSAL
+  REPLY
+}
+
+# A contribution with an author
+interface ContributionWithAuthor {
+  # The author of the contribution.
+  author: User!
+}
+
+input CreateGroupInput {
+  # The title of the group
+  title: String!
+
+  # The description of the group
+  description: String
+  clientMutationId: String
+}
+
+type CreateGroupPayload {
+  group: Group!
+  clientMutationId: String
+}
+
+input CreateProposalFormInput {
+  # The proposal form title
+  title: String!
+  clientMutationId: String
+}
+
+type CreateProposalFormPayload {
+  proposalForm: ProposalForm!
+  clientMutationId: String
+}
+
+input CreateProposalFusionInput {
+  # Proposal ids from which the fusion is created
+  fromProposals: [ID!]!
+  clientMutationId: String
+}
+
+type CreateProposalFusionPayload {
+  proposal: Proposal
+  clientMutationId: String
+}
+
+input CreateProposalInput {
+  # The id of the form form proposal
+  proposalFormId: ID!
+
+  # If true will create a draft proposal, otherwise a published proposal.
+  draft: Boolean
+
+  # The proposal title
+  title: String
+
+  # The proposal body
+  body: HTML
+
+  # The proposal summary
+  summary: String
+
+  # The theme id (feature themes must be enabled)
+  theme: ID
+
+  # The category id
+  category: ID
+
+  # The district id (feature districts must be enabled)
+  district: ID
+
+  # The address geocoded by google
+  address: Address
+
+  # The responses to the form questions
+  responses: [ResponseInput]
+
+  # The media id to illustrate
+  media: ID
+  clientMutationId: String
+}
+
+type CreateProposalPayload {
+  # The created proposal, if everything goes well !
+  proposal: Proposal
+  clientMutationId: String
+}
+
+input CreateQuestionnaireInput {
+  # The questionnaire form title
+  title: String!
+  clientMutationId: String
+}
+
+type CreateQuestionnairePayload {
+  questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input CreateUserInput {
+  # The user's username
+  username: String!
+
+  # The user's email
+  email: String!
+
+  # The user's password
+  plainPassword: String
+
+  # Unattended roles as array.
+  roles: [UserRole]
+  locked: Boolean
+  vip: Boolean
+  enabled: Boolean
+  clientMutationId: String
+}
+
+type CreateUserPayload {
+  # The created user, if everything goes well !
+  user: User
+  clientMutationId: String
+}
+
+scalar CssJSON
+
+# A string containing a datetime.
+scalar DateTime
+
+input DeleteAccountInput {
+  # You must chose a strategy to delete your account
+  type: DeleteAccountType!
+
+  # (ROLE_SUPER_ADMIN only) The user to delete
+  userId: ID
+  clientMutationId: String
+}
+
+type DeleteAccountPayload {
+  # user id
+  userId: ID!
+  clientMutationId: String
+}
+
+# Differents strategies to delete an account
+enum DeleteAccountType {
+  # Anonymize the user and delete his content only on active steps
+  SOFT
+
+  # Anonymize the user and delete his content
+  HARD
+}
+
+input DeleteArgumentInput {
+  argumentId: ID!
+  clientMutationId: String
+}
+
+type DeleteArgumentPayload {
+  deletedArgumentId: ID
+  argumentable: Argumentable!
+  clientMutationId: String
+}
+
+input DeleteCommentInput {
+  # The ID of the comment to delete.
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteCommentPayload {
+  deletedCommentId: ID
+  commentable: Commentable
+  userErrors: [UserError]
+  clientMutationId: String
+}
+
+input DeleteGroupInput {
+  # The group id
+  groupId: ID!
+  clientMutationId: String
+}
+
+type DeleteGroupPayload {
+  deletedGroupTitle: String!
+  clientMutationId: String
+}
+
+input DeleteOpinionInput {
+  # The opinion id
+  opinionId: ID!
+  clientMutationId: String
+}
+
+type DeleteOpinionPayload {
+  # The deleted ID.
+  deletedOpinionId: ID
+  clientMutationId: String
+}
+
+input DeleteProposalInput {
+  # The proposal id
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type DeleteProposalPayload {
+  proposal: Proposal!
+  step: CollectStep!
+  clientMutationId: String
+}
+
+input DeleteReplyInput {
+  # The id of the reply
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteReplyPayload {
+  questionnaire: Questionnaire!
+  clientMutationId: String
+}
+
+input DeleteSourceInput {
+  # The ID to delete.
+  sourceId: ID!
+  clientMutationId: String
+}
+
+type DeleteSourcePayload {
+  # The deleted ID.
+  deletedSourceId: ID
+
+  # The parent of the deleted source.
+  sourceable: Sourceable
+  clientMutationId: String
+}
+
+input DeleteUserInGroupInput {
+  # The user id
+  userId: ID!
+
+  # The group id
+  groupId: ID!
+  clientMutationId: String
+}
+
+type DeleteUserInGroupPayload {
+  group: Group!
+  clientMutationId: String
+}
+
+input DeleteVersionInput {
+  # The version id
+  versionId: ID!
+  clientMutationId: String
+}
+
+type DeleteVersionPayload {
+  # The deleted ID.
+  deletedVersionId: ID
+
+  # The parent of the deleted `Version`.
+  opinion: Opinion
+  clientMutationId: String
+}
+
+# A district
+type District {
+  id: ID!
+  name: String!
+  geojson: GeoJSON
+  geojsonStyle: CssJSON
+  displayedOnMap: Boolean!
+}
+
+input DistrictInput {
+  id: ID
+  name: String!
+  geojson: GeoJSON
+  geojsonStyle: CssJSON
+  displayedOnMap: Boolean = false
+}
+
+# Ordering options for districts.
+enum DistrictOrderField {
+  ALPHABETICAL
+  CREATED_AT
+}
+
+# A contribution with an author
+interface EditableContribution {
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+}
+
+scalar Email
+
+# A Evaluation form (question)
+type EvaluationForm {
+  # The id of evaluation form (question)
+  id: String!
+
+  # The title of evaluation form (question)
+  title: String!
+
+  # The description of evaluation form
+  description: String
+
+  # List of questions in the evaluation form
+  questions: [Question!]!
+}
+
+# Fetches an object given its ID
+type Event implements Node & Commentable {
+  # The comments related to the commentable.
+  comments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
+
+  # The ID of an object
+  id: ID!
+  title: String!
+
+  # A list of Users that are participating to the event.
+  participants(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ParticipantConnection!
+  startAt: DateTime!
+  endAt: DateTime!
+  themes: [Theme!]!
+  projects: [Project!]!
+  author: User!
+  commentable: Boolean!
+  updatedAt: DateTime
+  createdAt: DateTime!
+  body: String
+  link: URI
+  media: Media
+  address: String
+  zipCode: String
+  city: String
+  country: String
+}
+
+# A connection to a list of items.
+type EventConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [EventEdge]
+}
+
+# An edge in a connection.
+type EventEdge {
+  # The item at the end of the edge.
+  node: Event!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Require a firstname
+type FirstnameRequirement implements Node & Requirement {
+  # The ID of an object
+  id: ID!
+
+  # Does the viewer meets the requirement ?
+  viewerMeetsTheRequirement: Boolean!
+
+  # The firstname of the viewer.
+  viewerValue: String
+}
+
+input FollowOpinionInput {
+  # The opinion id
+  opinionId: ID!
+
+  # The type of notification
+  notifiedOf: SubscriptionTypeValue!
+  clientMutationId: String
+}
+
+type FollowOpinionPayload {
+  opinion: Opinion
+  followerEdge: FollowerEdge
+  clientMutationId: String
+}
+
+input FollowProposalInput {
+  # The proposal id
+  proposalId: ID!
+
+  # The type of notification
+  notifiedOf: SubscriptionTypeValue!
+  clientMutationId: String
+}
+
+type FollowProposalPayload {
+  proposal: Proposal
+  followerEdge: FollowerEdge
+  clientMutationId: String
+}
+
+# A follower
+type Follower {
+  proposal: Proposal
+  opinion: Opinion
+  user: User!
+  notifiedOf: SubscriptionTypeValue
+}
+
+# A connection to a list of items.
+type FollowerConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [FollowerEdge]
+}
+
+# An edge in a connection.
+type FollowerEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which follower connections can be ordered.
+input FollowerOrder {
+  # The field in which to order nodes by.
+  field: FollowerOrderField!
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = ASC
+}
+
+# Properties by which follower connections can be ordered
+enum FollowerOrderField {
+  # Allows ordering a list of followers namely.
+  NAME
+
+  # Allows ordering a list of followers by when they were followed.
+  FOLLOWED_AT
+
+  # Allows ordering a list of followers randomly.
+  RANDOM
+}
+
+# 3 possible values
+enum GenderValue {
+  MALE
+  FEMALE
+  OTHER
+}
+
+scalar GeoJSON
+
+# A group of User
+type Group implements Node {
+  # The id of the group.
+  id: ID!
+
+  # Identifies the group name.
+  title: String
+
+  # Identifies the description of the group.
+  description: String
+  users(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# A connection to a list of items.
+type GroupConnection {
+  totalCount: Int!
+  totalUserCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [GroupEdge]
+}
+
+# An edge in a connection.
+type GroupEdge {
+  # The item at the end of the edge.
+  node: Group!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+scalar HTML
+
+scalar IP
+
+scalar JSON
+
+# Requires a lastname
+type LastnameRequirement implements Node & Requirement {
+  # The ID of an object
+  id: ID!
+
+  # Does the viewer meets the requirement ?
+  viewerMeetsTheRequirement: Boolean!
+
+  # The lastname of the viewer.
+  viewerValue: String
+}
+
+# A media
+type Media {
+  # The id of the media.
+  id: ID!
+
+  # The url of the media.
+  url(
+    # The format of the media
+    format: String
+  ): String!
+  name: String!
+  size: String!
+  enabled: Boolean!
+  authorName: String
+  description: String
+  copyright: String
+  contentType: String!
+  providerReference: String!
+}
+
+# A media question
+type MediaQuestion implements Question {
+  id: ID!
+  title: String!
+  type: QuestionTypeValue!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  description: String
+  kind: String!
+  slug: String!
+
+  # Return users who answered the question
+  participants(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ParticipantConnection!
+}
+
+# A response
+type MediaResponse implements Response {
+  question: Question!
+
+  # Medias
+  medias: [Media!]!
+}
+
+# A multiple choice question
+type MultipleChoiceQuestion implements Question {
+  id: ID!
+  title: String!
+  type: QuestionTypeValue!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  description: String
+  kind: String!
+  slug: String!
+
+  # Return users who answered the question
+  participants(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ParticipantConnection!
+  isOtherAllowed: Boolean!
+  choices(
+    # Randomize the order of the choices.
+    randomize: Boolean
+  ): [QuestionChoice!]
+  questionChoices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+  isRandomQuestionChoices: Boolean!
+}
+
+# Multiple Choice Question Validation Rule
+type MultipleChoiceQuestionValidationRule {
+  type: MultipleChoiceQuestionValidationRulesTypes!
+  number: Int!
+}
+
+input MultipleChoiceQuestionValidationRuleInput {
+  type: MultipleChoiceQuestionValidationRulesTypes!
+  number: Int!
+}
+
+# Available types of validation rules
+enum MultipleChoiceQuestionValidationRulesTypes {
+  MIN
+  EQUAL
+  MAX
+}
+
+# Root of the schema.
+type Mutation {
+  addComment(input: AddCommentInput!): AddCommentPayload
+  addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
+  addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
+  addArgument(input: AddArgumentInput!): AddArgumentPayload
+  addArgumentVote(input: AddArgumentVoteInput!): AddArgumentVotePayload
+  addSource(input: AddSourceInput!): AddSourcePayload
+  addVersion(input: AddVersionInput!): AddVersionPayload
+  changeArgument(input: ChangeArgumentInput!): ChangeArgumentPayload
+  changeVersion(input: ChangeVersionInput!): ChangeVersionPayload
+  changeSource(input: ChangeSourceInput!): ChangeSourcePayload
+  deleteArgument(input: DeleteArgumentInput!): DeleteArgumentPayload
+  deleteComment(input: DeleteCommentInput!): DeleteCommentPayload
+  deleteSource(input: DeleteSourceInput!): DeleteSourcePayload
+  deleteOpinion(input: DeleteOpinionInput!): DeleteOpinionPayload
+  deleteVersion(input: DeleteVersionInput!): DeleteVersionPayload
+  addReply(input: AddReplyInput!): AddReplyPayload
+  updateReply(input: UpdateReplyInput!): UpdateReplyPayload
+  deleteReply(input: DeleteReplyInput!): DeleteReplyPayload
+  changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
+  addOpinionVote(input: AddOpinionVoteInput!): AddOpinionVotePayload
+  removeOpinionVote(input: RemoveOpinionVoteInput!): RemoveOpinionVotePayload
+  removeArgumentVote(input: RemoveArgumentVoteInput!): RemoveArgumentVotePayload
+  removeCommentVote(input: RemoveCommentVoteInput!): RemoveCommentVotePayload
+  removeSourceVote(input: RemoveSourceVoteInput!): RemoveSourceVotePayload
+  addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
+  removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
+  updateProposalVotes(input: UpdateProposalVotesInput!): UpdateProposalVotesPayload
+  requestUserArchive(input: RequestUserArchiveInput!): RequestUserArchivePayload
+  changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
+  changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
+  createProposal(input: CreateProposalInput!): CreateProposalPayload
+  createProposalFusion(input: CreateProposalFusionInput!): CreateProposalFusionPayload
+  updateProposalFusion(input: UpdateProposalFusionInput!): UpdateProposalFusionPayload
+  changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
+  changeProposalEvaluers(input: ChangeProposalEvaluersInput!): ChangeProposalEvaluersPayload
+  followProposal(input: FollowProposalInput!): FollowProposalPayload
+  followOpinion(input: FollowOpinionInput!): FollowOpinionPayload
+  updateFollowProposal(input: UpdateFollowProposalInput!): UpdateFollowProposalPayload
+  updateFollowOpinion(input: UpdateFollowOpinionInput!): UpdateFollowOpinionPayload
+  unfollowProposal(input: UnfollowProposalInput!): UnfollowProposalPayload
+  unfollowOpinion(input: UnfollowOpinionInput!): UnfollowOpinionPayload
+  selectProposal(input: SelectProposalInput!): SelectProposalPayload
+  unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
+  changeSelectionStatus(input: ChangeSelectionStatusInput!): ChangeSelectionStatusPayload
+  changeCollectStatus(input: ChangeCollectStatusInput!): ChangeCollectStatusPayload
+  changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
+  deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
+  createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
+  changeDistrict(input: ChangeDistrictInput!): ChangeDistrictPayload
+  updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
+  updateProposalFormNotificationsConfiguration(input: UpdateProposalFormNotificationsConfigurationInput!): UpdateProposalFormNotificationsConfigurationPayload
+  setEvaluationFormInProposalForm(input: SetEvaluationFormInProposalFormInput!): SetEvaluationFormInProposalFormPayload
+  changeProposalEvaluation(input: ChangeProposalEvaluationInput!): ChangeProposalEvaluationPayload
+  createGroup(input: CreateGroupInput!): CreateGroupPayload
+  updateGroup(input: UpdateGroupInput!): UpdateGroupPayload
+  deleteGroup(input: DeleteGroupInput!): DeleteGroupPayload
+  deleteUserInGroup(input: DeleteUserInGroupInput!): DeleteUserInGroupPayload
+  addUsersInGroup(input: AddUsersInGroupInput!): AddUsersInGroupPayload
+  updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
+  updateProfilePassword(input: UpdateProfilePasswordInput!): UpdateProfilePasswordPayload
+  updateProfilePersonalData(input: UpdateProfilePersonalDataInput!): UpdateProfilePersonalDataPayload
+  updateProfilePublicData(input: UpdateProfilePublicDataInput!): UpdateProfilePublicDataPayload
+  deleteAccount(input: DeleteAccountInput!): DeleteAccountPayload
+  updateRequirement(input: UpdateRequirementInput!): UpdateRequirementPayload
+  createUser(input: CreateUserInput!): CreateUserPayload
+  updateUserAccount(input: UpdateUserAccountInput!): UpdateUserAccountPayload
+  addUsersToGroupFromEmail(input: AddUsersToGroupFromEmailInput!): AddUsersToGroupFromEmailPayload
+  createQuestionnaire(input: CreateQuestionnaireInput!): CreateQuestionnairePayload
+  updateQuestionnaireParameters(input: UpdateQuestionnaireParametersInput!): UpdateQuestionnaireParametersPayload
+  updateQuestionnaireConfiguration(input: UpdateQuestionnaireConfigurationInput!): UpdateQuestionnaireConfigurationPayload
+}
+
+# A connection to a list of items.
+type NewsConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [NewsEdge]
+}
+
+# An edge in a connection.
+type NewsEdge {
+  # The item at the end of the edge.
+  node: Post!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Fetches an object given its ID
+interface Node {
+  # The ID of an object
+  id: ID!
+}
+
+# Possible reason that a `Publishable` is not published.
+enum NotPublishedReason {
+  # Author account isn't confirmed yet.
+  WAITING_AUTHOR_CONFIRMATION
+
+  # Author account isn't confirmed and the step has ended.
+  AUTHOR_NOT_CONFIRMED
+
+  # Author account was confirmed after the step has ended.
+  AUTHOR_CONFIRMED_TOO_LATE
+}
+
+# A user without account.
+type NotRegistered {
+  # Email of the user.
+  email: String
+
+  # Username of the user.
+  username: String
+}
+
+# A notifications configuration
+type NotificationsConfiguration {
+  onCreate: Boolean!
+  onUpdate: Boolean!
+  onDelete: Boolean!
+  onCommentCreate: Boolean!
+  onCommentUpdate: Boolean!
+  onCommentDelete: Boolean!
+}
+
+# A contribution
+type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & Trashable & ContributionWithAuthor & EditableContribution {
+  contribuable: Boolean!
+
+  # The arguments related to the argumentable.
+  arguments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
+
+    # If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection!
+
+  # The unpublished arguments of to the viewer.
+  viewerArgumentsUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection
+
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # Url of the contribution
+  url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # The sources related to the sourceable.
+  sources(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): SourceConnection!
+
+  # The viewer unpublished sources related to the sourceable (only visible by viewer).
+  viewerSourcesUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): SourceConnection!
+
+  # The available sources categories of to the sourceable.
+  availableSourceCategories: [SourceCategory]
+
+  # Followers connection
+  followers(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
+  ): FollowerConnection
+
+  # Identifies the viewer following configuration on the entity.
+  viewerFollowingConfiguration: SubscriptionTypeValue
+
+  # Identifies if the viewer is following the entity.
+  viewerIsFollowing: Boolean!
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # true if the contribution is pinned.
+  pinned: Boolean!
+  step: Consultation!
+
+  # The viewer vote.
+  viewerVote: OpinionVote
+  votes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+
+    # Filters vote by value
+    value: YesNoPairedVoteValue
+  ): YesNoPairedVoteConnection!
+
+  # Identifies the contribution title.
+  title: String!
+
+  # Identifies the body of the contribution.
+  body: HTML!
+
+  # Identifies the body of the contribution rendered to text.
+  bodyText: String!
+
+  # The versions related to the contribution.
+  versions(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: VersionOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): VersionConnection!
+
+  # The viewer versions related to the contribution.
+  viewerVersionsUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: VersionOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): VersionConnection!
+
+  # Where the proposition has been placed.
+  section: Section!
+  answer: Answer
+  ranking: Int
+  modals: [OpinionModal]
+  appendices: [Appendix]
+
+  # The related project.
+  project: Project
+}
+
+# A connection to a list of items.
+type OpinionConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [OpinionEdge]
+}
+
+# An edge in a connection.
+type OpinionEdge {
+  # The item at the end of the edge.
+  node: Opinion!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# A contribution
+type OpinionModal {
+  # Identifies the contribution title.
+  key: String!
+
+  # Identifies the contribution title.
+  after: String!
+
+  # Identifies the contribution title.
+  before: String!
+  title: String!
+  diff: HTML
+}
+
+union OpinionOrVersion = Opinion | Version
+
+# Fetches an object given its ID
+type OpinionVote implements YesNoPairedVote & Publishable & Vote {
+  # The ID of an object
+  id: ID!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns 'opinionVote'.
+  kind: String!
+  value: YesNoPairedVoteValue!
+}
+
+# Possible directions in which to order a list of items when provided an orderBy argument.
+enum OrderDirection {
+  # Specifies an ascending order for a given orderBy argument.
+  ASC
+
+  # Specifies a descending order for a given orderBy argument.
+  DESC
+}
+
+# A step inside a project.
+type OtherStep implements Step {
+  # The ID of an object
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # The url of the step
+  url: String!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+# User and NotRegistered
+union Participant = User | NotRegistered
+
+# A connection to a list of items.
+type ParticipantConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ParticipantEdge]
+}
+
+# An edge in a connection.
+type ParticipantEdge {
+  registeredAt: DateTime!
+  registeredAnonymously: Boolean!
+
+  # The item at the end of the edge.
+  node: Participant!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Requires a phone
+type PhoneRequirement implements Node & Requirement {
+  # The ID of an object
+  id: ID!
+
+  # Does the viewer meets the requirement ?
+  viewerMeetsTheRequirement: Boolean!
+
+  # The phone of the viewer.
+  viewerValue: String
+}
+
+# Fetches an object given its ID
+type Post implements Node & Commentable {
+  # The comments related to the commentable.
+  comments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
+
+  # The ID of an object
+  id: ID!
+  title: String
+  relatedContent: [PostRelatedContent!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  publishedAt: DateTime
+  authors: [User!]!
+
+  # The publication status for this post.
+  publicationStatus: PostPublicationStatus!
+  commentable: Boolean!
+  displayedOnBlog: Boolean!
+  abstract: String!
+  url: URI!
+  media: Media
+  themes: [Theme!]!
+  body: HTML
+}
+
+# Available statuses
+enum PostPublicationStatus {
+  # Normal status, publicly visible
+  PUBLISHED
+
+  # Not publicly visible
+  NOT_PUBLISHED
+}
+
+# A related content for a post
+union PostRelatedContent = Theme | Proposal | Project
+
+# A step inside a project.
+type PresentationStep implements Step {
+  # The ID of an object
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # The url of the step
+  url: String!
+}
+
+# Fetches an object given its ID
+interface PrivatableVote {
+  # The ID of an object
+  id: ID!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns Type of vote
+  kind: String!
+
+  # Anonymous or not.
+  private: Boolean
+}
+
+# A budget contribution
+type ProgressStep {
+  id: ID!
+  title: String!
+  startAt: DateTime!
+  endAt: DateTime
+}
+
+input ProgressStepInput {
+  title: String!
+  startAt: DateTime!
+  endAt: DateTime
+}
+
+# A participatory project.
+type Project implements Node {
+  # The ID of an object
+  id: ID!
+  steps: [Step!]!
+  title: String!
+
+  # A list of contributor associated with the project.
+  contributors(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+  url: URI
+  votableSteps: [ProposalStep!]!
+
+  # The visibility of project
+  visibility: ProjectVisibility!
+  adminUrl: URI
+
+  # State of activation of Opinion subscription.
+  opinionCanBeFollowed: Boolean!
+  restrictedViewers(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): GroupConnection
+}
+
+# 4 possible values
+enum ProjectVisibility {
+  # visible for group admin
+  ADMIN
+
+  # the project is restricted to users groups
+  CUSTOM
+
+  # visible for me only
+  ME
+
+  # visible for all
+  PUBLIC
+}
+
+# A budget contribution
+type Proposal implements Node & Contribution & Commentable & Publishable & Reportable & Trashable {
+  # The comments related to the commentable.
+  comments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
+
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # Url of the contribution
+  url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # Followers connection
+  followers(
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 32
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+
+    # Ordering options for followers returning from the connection
+    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
+  ): UserConnection!
+
+  # Identifies the viewer following configuration on the entity.
+  viewerFollowingConfiguration: SubscriptionTypeValue
+
+  # View follow current proposal
+  viewerIsFollowing: Boolean!
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+
+  # The admin url for this contribution.
+  adminUrl: URI!
+  progressSteps: [ProgressStep!]!
+  evaluers: [Group!]!
+  currentVotableStep: ProposalStep
+  viewerIsAnEvaluer: Boolean!
+  news(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): NewsConnection!
+
+  # The related project.
+  project: Project!
+  status(
+    # Used to get the status on a selection step.
+    step: ID
+  ): Status
+  selections: [Selection!]!
+  likers: [User!]!
+  estimation: Int
+  responses: [Response]!
+  media: Media
+  theme: Theme
+  category: ProposalCategory
+  district: District
+  address: Address
+  formattedAddress: String
+
+  # The author of the contribution.
+  author: User!
+
+  # The delete date.
+  deletedAt: DateTime
+
+  # The updated date.
+  updatedAt: DateTime
+
+  # The update user.
+  updatedBy: User
+
+  # The publication status for this proposal.
+  publicationStatus: ProposalPublicationStatus!
+
+  # The unique reference of proposal
+  reference: String!
+
+  # Identifies the contribution title.
+  title: String!
+
+  # Identifies the body of the contribution.
+  body: HTML
+
+  # Identifies the body of the contribution rendered to text.
+  bodyText: String!
+
+  # Identifies the summary of the contribution.
+  summary: String
+
+  # Identifies the preview text of the contribution.
+  summaryOrBodyExcerpt: String
+
+  # Identifies the form where the contribution was submitted.
+  form: ProposalForm!
+
+  # Identifies the answers to an evaluation form.
+  evaluation: ProposalEvaluation
+
+  # Identifies proposals as draft.
+  draft: Boolean!
+
+  # Count number of comments for the proposal.
+  commentsCount: Int!
+  votes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+
+    # If provided, retrieve only in this step.
+    stepId: ID
+
+    # (ROLE_SUPER_ADMIN only) Select also unpublished votes.
+    includeUnpublished: Boolean = false
+  ): ProposalVoteConnection!
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # If the proposal is a fusion, contains the list of merged proposals.
+  mergedFrom: [Proposal!]!
+
+  # If the proposal listed in a fusion, contains the list of fusions.
+  mergedIn: [Proposal!]!
+  postsCount: Int!
+  viewerCanSeeEvaluation: Boolean!
+  viewerHasVote(
+    # The concerned step.
+    step: ID!
+  ): Boolean!
+  viewerVote(
+    # The concerned step.
+    step: ID!
+  ): ProposalVote
+  votableSteps: [ProposalStep!]!
+}
+
+# The affiliation of a user to a proposal
+enum ProposalAffiliation {
+  OWNER
+  EVALUER
+}
+
+# A proposal category
+type ProposalCategory {
+  id: ID!
+  name: String!
+}
+
+input ProposalCategoryInput {
+  id: ID
+  name: String!
+}
+
+# A connection to a list of items.
+type ProposalConnection {
+  totalCount: Int!
+  fusionCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ProposalEdge]
+}
+
+# An edge in a connection.
+type ProposalEdge {
+  # The item at the end of the edge.
+  node: Proposal!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# An evaluation for a proposal
+type ProposalEvaluation {
+  # Identifies the proposal.
+  proposal: Proposal!
+
+  # The revision number of the evaluation
+  version: Int!
+
+  # List of responses for the evaluation
+  responses: [Response]!
+}
+
+# A budget form
+type ProposalForm implements Node {
+  # The ID of an object
+  id: ID!
+  proposals(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # If non-null, filters proposals with the given district.
+    district: ID
+
+    # If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # If non-null, filters proposals with the given category.
+    category: ID
+
+    # If non-null, filters proposals with the given author.
+    author: ID
+
+    # If non-null, filters proposals with the given status.
+    status: ID
+
+    # If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
+
+    # Ordering options for proposals returned from the connection.
+    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # Affiliation options for proposals returned from the connection.
+    affiliations: [ProposalAffiliation]
+
+    # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
+    includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
+  ): ProposalConnection!
+
+  # The viewer unpublished proposals (only visible by viewer).
+  viewerProposalsUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ProposalConnection
+  reference: String!
+  description: String
+  summaryHelpText: String
+  illustrationHelpText: String
+  title: String!
+
+  # Available categories for proposals of this form.
+  categories: [ProposalCategory!]!
+  usingThemes: Boolean!
+
+  # Viewer can contribute to the form
+  contribuable: Boolean!
+  themeMandatory: Boolean!
+  themeHelpText: String
+  usingDistrict: Boolean!
+  commentable: Boolean!
+  costable: Boolean!
+  proposalInAZoneRequired: Boolean!
+  districts(order: DistrictOrderField): [District!]!
+  districtMandatory: Boolean!
+  districtHelpText: String
+  usingCategories: Boolean!
+  categoryMandatory: Boolean!
+  categoryHelpText: String
+  usingAddress: Boolean!
+  titleHelpText: String
+  descriptionHelpText: String
+  addressHelpText: String
+  questions: [Question!]!
+  latMap: Float
+  lngMap: Float
+  zoomMap: Int
+
+  # The HTTP url for this proposal form.
+  url: URI!
+  notificationsConfiguration: NotificationsConfiguration!
+
+  # Get the evaluation form of the proposal form
+  evaluationForm: EvaluationForm
+
+  # Identifies the step that use the proposal form.
+  step: CollectStep
+  allowAknowledge: Boolean!
+}
+
+# Ways in which proposal connections can be ordered.
+input ProposalOrder {
+  # The field in which to order nodes by.
+  field: ProposalOrderField!
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = ASC
+}
+
+# Properties by which proposal connections can be ordered
+enum ProposalOrderField {
+  # Allows ordering a list of proposals by when they were created.
+  PUBLISHED_AT
+
+  # Allows ordering a list of proposals by the number of votes it have.
+  VOTES
+
+  # Allows ordering a list of proposals by the number of comments it have.
+  COMMENTS
+
+  # Allows randomizing a list of proposals.
+  RANDOM
+
+  # Allows ordering a list of proposals by the cost it have been estimated.
+  COST
+}
+
+# Available statuses
+enum ProposalPublicationStatus {
+  # Publicly visible
+  PUBLISHED
+
+  # Publicly visible in the trash bin
+  TRASHED
+
+  # In the trash bin, content not visible
+  TRASHED_NOT_VISIBLE
+
+  # Not publicly visible, deleted by author
+  DELETED
+
+  # Draft, not publicly visible, only showed for his author.
+  DRAFT
+
+  # Visible by author only.
+  UNPUBLISHED
+}
+
+# A proposal step
+interface ProposalStep {
+  # The ID of an object
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # The url of the step
+  url: String!
+  proposals(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # If non-null, filters proposals with the given district.
+    district: ID
+
+    # If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # If non-null, filters proposals with the given category.
+    category: ID
+
+    # If non-null, filters proposals with the given author.
+    author: ID
+
+    # If non-null, filters proposals with the given status.
+    status: ID
+
+    # If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
+
+    # Ordering options for proposals returned from the connection.
+    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # Affiliation options for proposals returned from the connection.
+    affiliations: [ProposalAffiliation]
+
+    # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
+    includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
+  ): ProposalConnection!
+
+  # The viewer unpublished proposals (only visible by viewer).
+  viewerProposalsUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ProposalConnection
+
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
+  project: Project
+  votesLimit: Int
+  budget: Int
+  voteType: ProposalStepVoteType!
+  votesHelpText: String
+  voteThreshold: Int
+  open: Boolean!
+
+  # If enabled, allow voters to order their votes by preferences.
+  votesRanking: Boolean!
+
+  # A list of viewer votes associated with the step.
+  viewerVotes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100000
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProposalVotesOrder = {direction: DESC}
+  ): ProposalVoteConnection!
+  form: ProposalForm!
+}
+
+# Type of vote.
+enum ProposalStepVoteType {
+  DISABLED
+  SIMPLE
+  BUDGET
+}
+
+# Possible trashed status for a `Proposal`.
+enum ProposalTrashedStatus {
+  # `TRASHED` status to include the trashed proposal.
+  TRASHED
+
+  # `NOT_TRASHED` status to inclide the non trashed proposal.
+  NOT_TRASHED
+}
+
+# Fetches an object given its ID
+type ProposalVote implements Vote & Publishable & PrivatableVote {
+  # Anonymous or not.
+  private: Boolean
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # The ID of an object
+  id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution. If null, the vote is anonymous.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns 'proposalVote'.
+  kind: String!
+
+  # Is the vote anonymous ?
+  anonymous: Boolean!
+
+  # Return the proposal.
+  proposal: Proposal!
+
+  # Return the step.
+  step: ProposalStep!
+}
+
+# A connection to a list of items.
+type ProposalVoteConnection {
+  totalCount: Int!
+  creditsLeft: Int
+  creditsSpent: Int
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ProposalVoteEdge]
+}
+
+# An edge in a connection.
+type ProposalVoteEdge {
+  # The item at the end of the edge.
+  node: ProposalVote!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which lists of votes can be ordered upon return.
+input ProposalVotesOrder {
+  field: VoteOrderField! = PUBLISHED_AT
+  direction: OrderDirection! = DESC
+}
+
+# Entities that can be published.
+interface Publishable {
+  # The ID of an object
+  id: ID!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+}
+
+# Root of the schema.
+type Query {
+  # The currently authenticated user.
+  viewer: User!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+
+  # Lookup nodes by a list of IDs.
+  nodes(
+    # The list of node IDs.
+    ids: [ID!]!
+  ): [Node]!
+  users(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Remove super admin from export.
+    superAdmin: Boolean = false
+  ): UserConnection!
+  consultations(
+    # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
+    id: ID
+  ): [Consultation!]!
+  groups: [Group!]!
+  proposalForms: [ProposalForm]!
+
+  # Retrieve availables districts for a given address
+  availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
+  votesByContribution(contribution: ID!): [ProposalVote!]!
+  contributions(
+    # Returns all contributions of the provided consultation.
+    consultation: ID!
+  ): [Opinion!]!
+  contributionsBySection(
+    sectionId: ID!
+
+    # Max depth.
+    limit: Int!
+  ): [Opinion!]!
+  question(id: Int!): Question!
+  availableQuestionnaires: [Questionnaire!]!
+}
+
+interface Question {
+  id: ID!
+  title: String!
+  type: QuestionTypeValue!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  description: String
+  kind: String!
+  slug: String!
+
+  # Return users who answered the question
+  participants(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ParticipantConnection!
+}
+
+# A possible choice of a question
+type QuestionChoice {
+  id: ID!
+  title: String!
+  description: String
+  color: QuestionChoiceColor
+  image: Media
+
+  # Select all the responses of the given question choice
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ResponseConnection!
+
+  # Return the ranking of the given question choice
+  ranking: [QuestionChoiceRanking]
+}
+
+# Available colors for a question choice
+enum QuestionChoiceColor {
+  PRIMARY
+  SUCCESS
+  INFO
+  WARNING
+  DANGER
+}
+
+# A possible choice of a question
+input QuestionChoiceInput {
+  id: ID
+  title: String!
+  description: String
+  color: QuestionChoiceColor
+  image: ID
+}
+
+# The choice ranking
+type QuestionChoiceRanking {
+  # Return the position of the choice
+  position: Int!
+
+  # Select the responses of the c
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ResponseConnection!
+}
+
+input QuestionInput {
+  # If null, a new question will be created.
+  id: String
+  title: String!
+  type: QuestionTypeValue!
+  private: Boolean! = false
+  required: Boolean! = false
+  helpText: String
+  randomQuestionChoices: Boolean
+  otherAllowed: Boolean
+  validationRule: MultipleChoiceQuestionValidationRuleInput
+  questionChoices: [QuestionChoiceInput]
+  description: String
+}
+
+# Value of type of question
+enum QuestionTypeValue {
+  text
+  textarea
+  editor
+  radio
+  select
+  checkbox
+  ranking
+  medias
+  button
+  number
+  section
+}
+
+# A questionnaire is a form.
+type Questionnaire implements Node {
+  # The ID of an object
+  id: ID!
+
+  # Identifies the questionnaire title.
+  title: String!
+
+  # Whether the user has reply to a questionnaire.
+  userHasReply(
+    # The user's login (for example, an email).
+    login: String!
+  ): Boolean!
+
+  # A list of users that have replied to the questionnaire.
+  participants(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+  anonymousAllowed: Boolean!
+  description: String
+  multipleRepliesAllowed: Boolean!
+
+  # accept answers or not
+  contribuable: Boolean!
+  phoneConfirmationRequired: Boolean!
+  questions: [Question!]!
+  viewerReplies: [Reply!]!
+  acknowledgeReplies: Boolean!
+  phoneConfirmation: Boolean!
+}
+
+input QuestionnaireAbstractQuestionInput {
+  question: QuestionInput!
+}
+
+# A step inside a project.
+type QuestionnaireStep implements Node & Step {
+  # The ID of an object
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # The url of the step
+  url: String!
+
+  # A list of contributor associated with the step.
+  contributors(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+}
+
+# A step inside a project.
+type RankingStep implements Step {
+  # The ID of an object
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # The url of the step
+  url: String!
+}
+
+input RemoveArgumentVoteInput {
+  # The Node ID of the argument to unvote.
+  argumentId: ID!
+  clientMutationId: String
+}
+
+type RemoveArgumentVotePayload {
+  deletedVoteId: ID
+  contribution: Argument
+  viewer: User!
+  clientMutationId: String
+}
+
+input RemoveCommentVoteInput {
+  # The Node ID of the comment to unvote.
+  commentId: ID!
+  clientMutationId: String
+}
+
+type RemoveCommentVotePayload {
+  deletedVoteId: ID
+  contribution: Comment
+  viewer: User!
+  clientMutationId: String
+}
+
+input RemoveOpinionVoteInput {
+  # The Node ID of the opinion to unvote.
+  opinionId: ID!
+  clientMutationId: String
+}
+
+type RemoveOpinionVotePayload {
+  deletedVoteId: ID
+  contribution: Contribution
+  viewer: User!
+  clientMutationId: String
+}
+
+input RemoveProposalVoteInput {
+  # The Node ID of the proposal to unvote.
+  proposalId: ID!
+
+  # The Node ID of the contribuable step.
+  stepId: ID!
+  clientMutationId: String
+}
+
+type RemoveProposalVotePayload {
+  step: ProposalStep!
+  proposal: Proposal!
+  viewer: User!
+  clientMutationId: String
+}
+
+input RemoveSourceVoteInput {
+  # The Node ID of the source to unvote.
+  sourceId: ID!
+  clientMutationId: String
+}
+
+type RemoveSourceVotePayload {
+  deletedVoteId: ID
+  contribution: Source
+  viewer: User!
+  clientMutationId: String
+}
+
+# A Reply
+type Reply implements Node & Publishable & Contribution {
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # Url of the contribution
+  url: URI!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+  private: Boolean!
+  createdAt: DateTime!
+  responses: [Response]!
+
+  # The author of the contribution.
+  author: User!
+
+  # The updated date.
+  updatedAt: DateTime
+
+  # Identifies the form where the contribution was submitted.
+  questionnaire: Questionnaire!
+  viewerCanDelete: Boolean!
+}
+
+# A connection to a list of items.
+type ReportConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ReportEdge]
+}
+
+# An edge in a connection.
+type ReportEdge {
+  # The item at the end of the edge.
+  node: Reporting!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# A reportable
+interface Reportable {
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+}
+
+# A report
+type Reporting implements Contribution & ContributionWithAuthor {
+  # The id of the contribution.
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # Url of the contribution
+  url: URI!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # The escaped content of the argument.
+  bodyText: String!
+
+  # Kind of report.
+  type: ReportingType!
+
+  # The content of the argument.
+  body: String!
+}
+
+# A connection to a list of items.
+type ReportingConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ReportingEdge]
+}
+
+# An edge in a connection.
+type ReportingEdge {
+  # The item at the end of the edge.
+  node: Reporting!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which lists of reportings can be ordered upon return.
+input ReportingOrder {
+  field: ReportingOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
+}
+
+# Properties by which report connections can be ordered
+enum ReportingOrderField {
+  # Allows ordering a list of reports by when they were created.
+  CREATED_AT
+}
+
+# Type of reporting
+enum ReportingType {
+  ERROR
+  OFF
+  OFF_TOPIC
+  SEX
+  SPAM
+}
+
+input RequestUserArchiveInput {
+  clientMutationId: String
+}
+
+type RequestUserArchivePayload {
+  viewer: User!
+  clientMutationId: String
+}
+
+# A requirement
+interface Requirement {
+  id: ID!
+
+  # Does the viewer meets the requirement ?
+  viewerMeetsTheRequirement: Boolean!
+}
+
+# A connection to a list of items.
+type RequirementConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Does the viewer meets all the requirements ?
+  viewerMeetsTheRequirements: Boolean!
+
+  # The reason for requirements.
+  reason: String
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [RequirementEdge]
+}
+
+# An edge in a connection.
+type RequirementEdge {
+  # The item at the end of the edge.
+  node: Requirement!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# A contribution with an author
+interface Response {
+  question: Question!
+}
+
+# A connection to a list of items.
+type ResponseConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ResponseEdge]
+}
+
+# An edge in a connection.
+type ResponseEdge {
+  # The item at the end of the edge.
+  node: Response!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# A response
+input ResponseInput {
+  # If related to a value question
+  value: JSON
+
+  # The question id
+  question: String!
+
+  # If related to a media question
+  medias: [ID!]
+}
+
+# A section
+type Section implements Node {
+  # The id of the section.
+  id: ID!
+
+  # The slug of the section.
+  slug: String!
+
+  # The title of the section.
+  title: String!
+
+  # The color of the section.
+  color: String!
+
+  # The subtitle of the section.
+  subtitle: String
+  contributionsCount: Int!
+  contributionConnection(
+    # Ordering options for contributions returned from the connection.
+    orderBy: ContributionOrder
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 10
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ContributionConnection!
+
+  # Array of appendix types (possibly empty).
+  appendixTypes: [SectionAppendixType]
+
+  # Array of subsections (possibly empty).
+  sections: [Section]
+  voteWidgetType: Int!
+  commentSystem: Int!
+  contribuable: Boolean!
+  versionable: Boolean!
+  sourceable: Boolean!
+  linkable: Boolean!
+  votesHelpText: String
+  votesThreshold: Int
+  votesThresholdHelpText: String
+
+  # The url of the section.
+  url: URI!
+}
+
+# A section
+type SectionAppendixType {
+  id: String
+  position: Int!
+  title: String
+}
+
+# A section is just a title in a quiz without any possible answer.
+type SectionQuestion implements Question {
+  id: ID!
+  title: String!
+  type: QuestionTypeValue!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  description: String
+  kind: String!
+  slug: String!
+
+  # Return users who answered the question
+  participants(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ParticipantConnection!
+}
+
+input SelectProposalInput {
+  # The step where the proposal is selected
+  stepId: String!
+
+  # The proposal ID to select.
+  proposalId: ID!
+
+  # The selection status.
+  statusId: String
+  clientMutationId: String
+}
+
+type SelectProposalPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+# A budget contribution
+type Selection {
+  step: SelectionStep!
+  status: Status
+}
+
+# A budget contribution
+type SelectionStep implements Node & Step & ProposalStep {
+  # The ID of an object
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # The url of the step
+  url: String!
+  proposals(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # If non-null, filters proposals with the given district.
+    district: ID
+
+    # If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # If non-null, filters proposals with the given category.
+    category: ID
+
+    # If non-null, filters proposals with the given author.
+    author: ID
+
+    # If non-null, filters proposals with the given status.
+    status: ID
+
+    # If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
+
+    # Ordering options for proposals returned from the connection.
+    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+
+    # Affiliation options for proposals returned from the connection.
+    affiliations: [ProposalAffiliation]
+
+    # (ROLE_SUPER_ADMIN only) Select also unpublished proposals.
+    includeUnpublished: Boolean = false
+
+    # If non-null, filters proposals with the given trashed status.
+    trashedStatus: ProposalTrashedStatus = NOT_TRASHED
+  ): ProposalConnection!
+
+  # The viewer unpublished proposals (only visible by viewer).
+  viewerProposalsUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ProposalConnection
+
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
+  project: Project
+  votesLimit: Int
+  budget: Int
+  voteType: ProposalStepVoteType!
+  votesHelpText: String
+  voteThreshold: Int
+  open: Boolean!
+
+  # If enabled, allow voters to order their votes by preferences.
+  votesRanking: Boolean!
+
+  # A list of viewer votes associated with the step.
+  viewerVotes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100000
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProposalVotesOrder = {direction: DESC}
+  ): ProposalVoteConnection!
+  form: ProposalForm!
+  position: Int!
+  statuses: [Status!]!
+
+  # Only one selection step inside a project can have realisation steps, true if this one
+  allowingProgressSteps: Boolean!
+
+  # A list of contributor associated with the consultation.
+  contributors(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+}
+
+input SetEvaluationFormInProposalFormInput {
+  proposalFormId: ID!
+  evaluationFormId: ID
+  clientMutationId: String
+}
+
+type SetEvaluationFormInProposalFormPayload {
+  proposalForm: ProposalForm!
+  clientMutationId: String
+}
+
+# A simple question
+type SimpleQuestion implements Question {
+  id: ID!
+  title: String!
+  type: QuestionTypeValue!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  description: String
+  kind: String!
+  slug: String!
+
+  # Return users who answered the question
+  participants(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ParticipantConnection!
+}
+
+# A source
+type Source implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # Url of the contribution
+  url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+  votes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): SourceVoteConnection
+  contribuable: Boolean!
+  viewerHasVote: Boolean!
+  viewerVote: SourceVote
+  category: SourceCategory
+
+  # The link of the source.
+  link: URI!
+
+  # The title of the source.
+  title: String!
+
+  # The content of the source.
+  body: String!
+}
+
+# A source category.
+type SourceCategory {
+  id: ID!
+  title: String!
+}
+
+# A connection to a list of items.
+type SourceConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [SourceEdge]
+}
+
+# An edge in a connection.
+type SourceEdge {
+  # The item at the end of the edge.
+  node: Source
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which source connections can be ordered.
+input SourceOrder {
+  # The field in which to order nodes by.
+  field: SourceOrderField!
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = ASC
+}
+
+# Properties by which source connections can be ordered
+enum SourceOrderField {
+  # Allows ordering a list of sources by when they were published.
+  PUBLISHED_AT
+
+  # Allows ordering a list of sources by the number of votes it have.
+  VOTES
+}
+
+# Fetches an object given its ID
+type SourceVote implements Vote & Publishable {
+  # The ID of an object
+  id: ID!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns 'sourceVote'.
+  kind: String!
+}
+
+# A connection to a list of items.
+type SourceVoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [SourceVoteEdge]
+}
+
+# An edge in a connection.
+type SourceVoteEdge {
+  # The item at the end of the edge.
+  node: SourceVote!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# A sourceable
+interface Sourceable {
+  id: ID!
+  contribuable: Boolean!
+
+  # The sources related to the sourceable.
+  sources(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): SourceConnection!
+
+  # The viewer unpublished sources related to the sourceable (only visible by viewer).
+  viewerSourcesUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): SourceConnection!
+
+  # The available sources categories of to the sourceable.
+  availableSourceCategories: [SourceCategory]
+}
+
+type Status {
+  id: ID!
+  name: String!
+  color: String!
+}
+
+# A step inside a project.
+interface Step {
+  # The ID of an object
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # The url of the step
+  url: String!
+}
+
+# 3 possible values for a subscription.
+enum SubscriptionTypeValue {
+  ALL
+  ESSENTIAL
+  MINIMAL
+}
+
+# A theme
+type Theme {
+  id: ID!
+  title: String!
+  url: URI!
+}
+
+# A trashable contribution
+interface Trashable {
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+}
+
+# Different trashable status.
+enum TrashableStatus {
+  # Content is not visible.
+  INVISIBLE
+
+  # Content is visible.
+  VISIBLE
+}
+
+# An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string.
+scalar URI
+
+input UnfollowOpinionInput {
+  # The opinion id
+  opinionId: ID
+
+  # Array of opinion id
+  idsOpinion: [ID!]
+  clientMutationId: String
+}
+
+type UnfollowOpinionPayload {
+  opinion: Opinion
+  unfollowerId: ID
+  clientMutationId: String
+}
+
+input UnfollowProposalInput {
+  # The proposal id
+  proposalId: ID
+
+  # Array of proposal id
+  idsProposal: [ID!]
+  clientMutationId: String
+}
+
+type UnfollowProposalPayload {
+  proposal: Proposal
+  unfollowerId: ID
+  clientMutationId: String
+}
+
+input UnselectProposalInput {
+  # The step where the proposal is selected
+  stepId: String!
+
+  # The proposal ID to remove from step.
+  proposalId: ID!
+  clientMutationId: String
+}
+
+type UnselectProposalPayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input UpdateFollowOpinionInput {
+  # The opinion id
+  opinionId: ID!
+  notifiedOf: SubscriptionTypeValue!
+  clientMutationId: String
+}
+
+type UpdateFollowOpinionPayload {
+  follower: Follower
+  followerEdge: FollowerEdge
+  opinion: Opinion
+  clientMutationId: String
+}
+
+input UpdateFollowProposalInput {
+  # The proposal id
+  proposalId: ID!
+  notifiedOf: SubscriptionTypeValue!
+  clientMutationId: String
+}
+
+type UpdateFollowProposalPayload {
+  follower: Follower
+  followerEdge: FollowerEdge
+  proposal: Proposal
+  clientMutationId: String
+}
+
+input UpdateGroupInput {
+  groupId: ID!
+  title: String!
+  description: String
+  clientMutationId: String
+}
+
+type UpdateGroupPayload {
+  group: Group!
+  clientMutationId: String
+}
+
+input UpdateProfileInput {
+  username: String
+  clientMutationId: String
+}
+
+input UpdateProfilePasswordInput {
+  # The current password
+  current_password: String!
+
+  # The new password
+  new: String!
+  clientMutationId: String
+}
+
+type UpdateProfilePasswordPayload {
+  # The user who just have been updated
+  user: User!
+
+  # The error
+  error: String
+  clientMutationId: String
+}
+
+type UpdateProfilePayload {
+  # The viewer
+  viewer: User!
+  clientMutationId: String
+}
+
+input UpdateProfilePersonalDataInput {
+  # (ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.
+  userId: ID
+
+  # Your firstname
+  firstname: String
+
+  # Your lastname
+  lastname: String
+
+  # Your gender
+  gender: GenderValue
+
+  # Your phone number
+  phone: String
+
+  # Your address
+  address: String
+
+  # Your complementary address
+  address2: String
+
+  # Your city
+  city: String
+
+  # Your zipcode
+  zipCode: String
+
+  # Your date of birth
+  dateOfBirth: String
+
+  # Is your phone confirmed ?
+  phoneConfirmed: Boolean
+
+  # Your email
+  email: String
+  clientMutationId: String
+}
+
+type UpdateProfilePersonalDataPayload {
+  # The user who just have been updated
+  user: User!
+  clientMutationId: String
+}
+
+input UpdateProfilePublicDataInput {
+  # (ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.
+  userId: ID
+
+  # Your username
+  username: String!
+
+  # Your user type
+  userType: ID
+
+  # Your biography
+  biography: String
+
+  # Your neighborhood
+  neighborhood: String
+
+  # Your website
+  website: String
+
+  # Your linkedIn
+  linkedInUrl: String
+
+  # Your facebook
+  facebookUrl: String
+
+  # Your twitter
+  twitterUrl: String
+
+  # Do you want to be indexed in web search engine ?
+  profilePageIndexed: Boolean
+
+  # Current media id
+  media: ID
+  clientMutationId: String
+}
+
+type UpdateProfilePublicDataPayload {
+  # The user who just have been updated
+  user: User!
+  clientMutationId: String
+}
+
+input UpdateProposalFormInput {
+  proposalFormId: ID!
+  title: String
+  description: String
+  summaryHelpText: String
+  illustrationHelpText: String
+  usingThemes: Boolean
+  themeMandatory: Boolean
+  themeHelpText: String
+  usingDistrict: Boolean
+  districtMandatory: Boolean
+  commentable: Boolean
+  costable: Boolean
+  districtHelpText: String
+  usingCategories: Boolean
+  categoryMandatory: Boolean
+  categoryHelpText: String
+  usingAddress: Boolean
+  proposalInAZoneRequired: Boolean
+  titleHelpText: String
+  descriptionHelpText: String
+  addressHelpText: String
+  latMap: Float
+  lngMap: Float
+  zoomMap: Int
+  categories: [ProposalCategoryInput!]
+  districts: [DistrictInput!]
+  questions: [QuestionnaireAbstractQuestionInput!]
+  allowAknowledge: Boolean
+  clientMutationId: String
+}
+
+input UpdateProposalFormNotificationsConfigurationInput {
+  proposalFormId: ID!
+  onCreate: Boolean!
+  onUpdate: Boolean!
+  onDelete: Boolean!
+  onCommentCreate: Boolean!
+  onCommentUpdate: Boolean!
+  onCommentDelete: Boolean!
+  clientMutationId: String
+}
+
+type UpdateProposalFormNotificationsConfigurationPayload {
+  proposalForm: ProposalForm!
+  clientMutationId: String
+}
+
+type UpdateProposalFormPayload {
+  proposalForm: ProposalForm!
+  clientMutationId: String
+}
+
+input UpdateProposalFusionInput {
+  # The proposal to update.
+  proposalId: ID!
+
+  # Proposal ids that are merged.
+  fromProposals: [ID!]!
+  clientMutationId: String
+}
+
+type UpdateProposalFusionPayload {
+  # The updated proposal
+  proposal: Proposal
+
+  # The proposals that have been removed from the fusion.
+  removedMergedFrom: [Proposal]!
+  clientMutationId: String
+}
+
+input UpdateProposalVotesInput {
+  # The step.
+  step: ID!
+
+  # The votes.
+  votes: [VoteInput!]!
+  clientMutationId: String
+}
+
+type UpdateProposalVotesPayload {
+  step: ProposalStep!
+  clientMutationId: String
+}
+
+input UpdateQuestionnaireConfigurationInput {
+  questionnaireId: ID!
+  title: String
+  description: String
+  questions: [QuestionnaireAbstractQuestionInput!]
+  clientMutationId: String
+}
+
+type UpdateQuestionnaireConfigurationPayload {
+  questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input UpdateQuestionnaireParametersInput {
+  questionnaireId: ID!
+  acknowledgeReplies: Boolean
+  anonymousAllowed: Boolean
+  multipleRepliesAllowed: Boolean
+  phoneConfirmation: Boolean
+  clientMutationId: String
+}
+
+type UpdateQuestionnaireParametersPayload {
+  questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input UpdateReplyInput {
+  # The id of the reply
+  replyId: ID!
+
+  # The responses to the questionnaire questions
+  responses: [ResponseInput]
+  clientMutationId: String
+}
+
+type UpdateReplyPayload {
+  # Update a reply
+  reply: Reply
+  clientMutationId: String
+}
+
+input UpdateRequirementInput {
+  # The Node ID of the requirement to modify.
+  requirement: ID!
+
+  # The updated value of the requirement.
+  value: Boolean!
+  clientMutationId: String
+}
+
+type UpdateRequirementPayload {
+  viewer: User
+  requirement: Requirement
+  clientMutationId: String
+}
+
+input UpdateUserAccountInput {
+  userId: ID!
+
+  # Unattended roles as array.
+  roles: [UserRole]
+  locked: Boolean
+  vip: Boolean
+  enabled: Boolean
+  clientMutationId: String
+}
+
+type UpdateUserAccountPayload {
+  user: User!
+  clientMutationId: String
+}
+
+# A user is an individual's account.
+type User implements Node {
+  # The ID of an object
+  id: ID!
+
+  # The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.
+  url: URI
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # Whether or not this user is the viewing user.
+  isViewer: Boolean!
+
+  # The user's public username.
+  username: String
+
+  # The user's public profile name.
+  displayName: String!
+
+  # Whether or not this user is a vip.
+  vip: Boolean!
+
+  # The user's slug (unique).
+  slug: String
+
+  # The user's email.
+  email: String
+
+  # The user's public avatar.
+  media: Media
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Last connection of the user.
+  lastLogin: DateTime
+
+  # Is user is activated.
+  enabled: Boolean!
+
+  # A user notifications preferences
+  notificationsConfiguration: UserNotificationsConfiguration!
+  locked: Boolean!
+  phoneConfirmed: Boolean!
+  phoneConfirmationSentAt: DateTime
+  gender: GenderValue
+  firstname: String
+  lastname: String
+  dateOfBirth: DateTime
+
+  # Unattended roles as array.
+  roles: [UserRole]
+
+  # Array of roles converted and translated to string.
+  rolesText: String
+
+  # Is the personal archive of the user has been deleted
+  isArchiveDeleted: Boolean!
+
+  # Is the personal archive of the user is ready?
+  isArchiveReady: Boolean!
+
+  # Is the personal archive of the user is being asked for the first time?
+  firstArchive: Boolean!
+  website: String
+  biography: String
+  address: String
+  address2: String
+  zipCode: String
+  city: String
+  phone: String
+  googleId: String
+  facebookId: String
+  samlId: String
+  opinionsCount: Int!
+  opinionVotesCount: Int!
+  opinionVersionsCount: Int!
+  argumentsCount: Int!
+  argumentVotesCount: Int!
+  proposalsCount: Int!
+  proposalVotesCount: Int!
+  commentVotesCount: Int!
+  votesCount: Int!
+
+  # Previsionnal number of contributions who will be totally deleted if the user chose to delete his account.
+  contributionsToDeleteCount: Int!
+  sourcesCount: Int!
+  repliesCount: Int!
+  postCommentsCount: Int!
+  eventCommentsCount: Int!
+  projectsCount: Int!
+
+  # The type of the person.
+  userType: UserType
+
+  # Is user accepted the external communication during the registration.
+  consentExternalCommunication: Boolean!
+
+  # Array of proposals followed by current user.
+  followingProposals(
+    # Ordering options for followers returning from the connection
+    orderBy: String
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 32
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
+
+  # Array of opinions followed by current user.
+  followingOpinions(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # Ordering options for followers returning from the connection
+    orderBy: String
+  ): OpinionConnection!
+
+  # Total of contributions count
+  contributionsCount: Int!
+
+  # Your facebook url
+  facebookUrl: String
+
+  # Your twitter url
+  twitterUrl: String
+
+  # Your linkedIn url
+  linkedInUrl: String
+
+  # Is your profile indexed or not
+  profilePageIndexed: Boolean
+
+  # Your localisation
+  neighborhood: String
+  proposalVotes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100000
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+    stepId: ID
+
+    # (ROLE_SUPER_ADMIN only) Select also unpublished votes.
+    includeUnpublished: Boolean = false
+  ): ProposalVoteConnection!
+  deletedAccountAt: DateTime
+
+  # Get all medias the user has published.
+  medias: [Media]!
+
+  # Get all votes of the user.
+  votes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100000
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): VoteConnection!
+
+  # Get all groups where the user is.
+  groups(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): GroupConnection!
+
+  # Get all reports the user has done.
+  reports(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ReportConnection!
+
+  # Get all events the user has created.
+  events(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): EventConnection!
+
+  # Return the user's contributions of the type requested.
+  contributions(
+    # Type of contribustion requested
+    type: ContributionType
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ContributionConnection!
+
+  # Is user subscribed to the newsletter ?
+  isSubscribedToNewsLetter: Boolean
+
+  # The user subrscibes to the newsletter at date
+  subscribedToNewsLetterAt: DateTime
+
+  # Has the user confirmed his email address ?
+  isEmailConfirmed: Boolean
+
+  # The user's email was confirmed at date
+  emailConfirmationSentAt: DateTime
+
+  # The arguments created by user.
+  arguments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ArgumentConnection!
+
+  # The HTTP URL for this user, null if feature `profiles` is disabled.
+  show_url: URI @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Identifies the total count of anonymous items in the connection. (Not fetched from connection)
+  anonymousCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [UserEdge]
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# An error.
+type UserError {
+  message: String
+}
+
+# A user's notifications configuration
+type UserNotificationsConfiguration {
+  # A boolean representing if the user wants to receive notifications by mail when someone commented his proposal
+  onProposalCommentMail: Boolean!
+}
+
+# 3 possible values
+enum UserRole {
+  ROLE_USER
+  ROLE_ADMIN
+  ROLE_SUPER_ADMIN
+}
+
+# A type of person
+type UserType {
+  id: ID!
+
+  # The name of the type.
+  name: String!
+}
+
+# A response
+type ValueResponse implements Response {
+  question: Question!
+
+  # The value, can be a JSON
+  value: String
+  formattedValue: String
+}
+
+# A version of contribution
+type Version implements Node & Contribution & Sourceable & Reportable & Publishable & Argumentable & Trashable & ContributionWithAuthor & EditableContribution {
+  contribuable: Boolean!
+
+  # The arguments related to the argumentable.
+  arguments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
+
+    # If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection!
+
+  # The unpublished arguments of to the viewer.
+  viewerArgumentsUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection
+
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
+
+  # The url of version.
+  url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # The sources related to the sourceable.
+  sources(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): SourceConnection!
+
+  # The viewer unpublished sources related to the sourceable (only visible by viewer).
+  viewerSourcesUnpublished(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): SourceConnection!
+
+  # The available sources categories of to the sourceable.
+  availableSourceCategories: [SourceCategory]
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # Explenation.
+  comment: String
+  votes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+
+    # Filters vote by value
+    value: YesNoPairedVoteValue
+  ): YesNoPairedVoteConnection!
+
+  # The title of the contribution.
+  title: String!
+
+  # The content of the contribution.
+  body: HTML!
+
+  # The content of the contribution.
+  bodyText: HTML!
+
+  # The section of the parent opinion.
+  section: Section!
+  answer: Answer
+  parent: Opinion!
+
+  # The viewer vote.
+  viewerVote: OpinionVote
+  diff: HTML
+
+  # The related project.
+  project: Project
+}
+
+# A connection to a list of items.
+type VersionConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [VersionEdge]
+}
+
+# An edge in a connection.
+type VersionEdge {
+  # The item at the end of the edge.
+  node: Version!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which version connections can be ordered.
+input VersionOrder {
+  # The field in which to order nodes by.
+  field: VersionOrderField!
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = ASC
+}
+
+# Properties by which version connections can be ordered
+enum VersionOrderField {
+  # Allows ordering a list of versions by when they were published.
+  PUBLISHED_AT
+
+  # Allows ordering a list of versions by the number of votes it have.
+  VOTES
+
+  # Allows ordering a list of versions by the number of arguments it have.
+  ARGUMENTS
+
+  # Allows ordering a list of versions by the number of votes ok it have.
+  VOTES_OK
+
+  # Allows ordering a list of versions randomly.
+  RANDOM
+}
+
+# Fetches an object given its ID
+type VersionVote implements YesNoPairedVote & Publishable & Vote {
+  # The ID of an object
+  id: ID!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns 'vote'.
+  kind: String!
+  value: YesNoPairedVoteValue!
+}
+
+interface Vote {
+  id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns Type of vote
+  kind: String!
+}
+
+# A connection to a list of items.
+type VoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [VoteEdge]
+}
+
+# An edge in a connection.
+type VoteEdge {
+  # The item at the end of the edge.
+  node: Vote
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# A vote
+input VoteInput {
+  # The vote id.
+  id: ID!
+
+  # Update the vote privacy.
+  anonymous: Boolean!
+}
+
+# Ways in which lists of votes can be ordered upon return.
+input VoteOrder {
+  field: VoteOrderField! = PUBLISHED_AT
+  direction: OrderDirection! = DESC
+}
+
+# Ordering options for votes.
+enum VoteOrderField {
+  PUBLISHED_AT
+  POSITION
+}
+
+# Fetches an object given its ID
+interface YesNoPairedVote {
+  # The ID of an object
+  id: ID!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # The author of the contribution.
+  author: User
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Returns Type of vote
+  kind: String!
+  value: YesNoPairedVoteValue!
+}
+
+# A connection to a list of items.
+type YesNoPairedVoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [YesNoPairedVoteEdge]
+}
+
+# An edge in a connection.
+type YesNoPairedVoteEdge {
+  # The item at the end of the edge.
+  node: YesNoPairedVote
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# 3 possible values
+enum YesNoPairedVoteValue {
+  YES
+  NO
+  MITIGE
+}

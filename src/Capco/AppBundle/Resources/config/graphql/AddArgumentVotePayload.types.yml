@@ -1,8 +1,0 @@
-AddArgumentVotePayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      voteEdge:
-        type: 'ArgumentVoteEdge'
-      viewer:
-        type: 'User!'

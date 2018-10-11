@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class YesNoPairedVoteEdgeType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'YesNoPairedVoteEdge';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

@@ -1,6 +1,0 @@
-DateTime:
-  type: custom-scalar
-  config:
-    serialize: ["Capco\\AppBundle\\GraphQL\\Type\\DateTimeType", 'serialize']
-    parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\DateTimeType", 'parseValue']
-    parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\DateTimeType", 'parseLiteral']

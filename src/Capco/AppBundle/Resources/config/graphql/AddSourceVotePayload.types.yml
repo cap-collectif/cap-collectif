@@ -1,8 +1,0 @@
-AddSourceVotePayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      voteEdge:
-        type: 'SourceVoteEdge'
-      viewer:
-        type: 'User!'

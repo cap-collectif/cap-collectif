@@ -15,8 +15,9 @@ class DateTimeType
             return null;
         }
 
-        return $value; // For now we return a string... Because Symfony forms doesn't recognize DateTime wtf
-        return \DateTime::createFromFormat('Y-m-d H:i:s', $value);
+        // For now we return a string...
+        // Because Symfony forms doesn't recognize DateTime wtf
+        return $value;
     }
 
     public static function parseLiteral($valueNode): \DateTime

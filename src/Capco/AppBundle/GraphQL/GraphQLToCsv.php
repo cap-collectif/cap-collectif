@@ -25,7 +25,7 @@ class GraphQLToCsv
 
     public function generate(string $requestString, Writer $writer)
     {
-        $response = $this->executor->execute(null, [
+        $response = $this->executor->execute('internal', [
             'query' => $requestString,
             'variables' => [],
         ])->toArray();

@@ -1,7 +1,0 @@
-UpdateProfilePersonalDataPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      user:
-        type: 'User!'
-        description: 'The user who just have been updated'

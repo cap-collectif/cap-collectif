@@ -14,13 +14,14 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class RankingStepType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'RankingStep';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'RankingStep',
-            'description' => 'A step in a project',
+            'description' => 'A step inside a project.',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [
@@ -28,7 +29,7 @@ final class RankingStepType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The ID of the step',
+                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -54,7 +55,7 @@ final class RankingStepType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The title of the step',
+                    'description' => 'The title of the step.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

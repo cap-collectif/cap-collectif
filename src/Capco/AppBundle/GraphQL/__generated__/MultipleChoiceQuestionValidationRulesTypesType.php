@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class MultipleChoiceQuestionValidationRulesTypesType extends EnumType implements GeneratedTypeInterface
 {
+    const NAME = 'MultipleChoiceQuestionValidationRulesTypes';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

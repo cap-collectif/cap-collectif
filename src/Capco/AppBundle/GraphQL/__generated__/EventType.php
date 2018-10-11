@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class EventType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'Event';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -29,22 +30,23 @@ final class EventType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the last `n` elements from the list.',
                         ],
                         [
                             'name' => 'orderBy',
@@ -93,22 +95,23 @@ final class EventType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the last `n` elements from the list.',
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -170,7 +173,7 @@ final class EventType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
                     'args' => [
                     ],
                     'resolve' => null,

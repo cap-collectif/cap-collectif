@@ -1,0 +1,8 @@
+AddReplyPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      reply:
+        type: 'Reply'
+      questionnaire:
+        type: 'InternalQuestionnaire'

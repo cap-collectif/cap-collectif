@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class VersionType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'Version';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -43,22 +44,23 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the last `n` elements from the list.',
                         ],
                         [
                             'name' => 'orderBy',
@@ -88,22 +90,23 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the last `n` elements from the list.',
                         ],
                         [
                             'name' => 'type',
@@ -209,7 +212,7 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
                         ],
                         [
                             'name' => 'first',
@@ -220,12 +223,12 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the last `n` elements from the list.',
                         ],
                         [
                             'name' => 'orderBy',
@@ -245,7 +248,7 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -262,96 +265,6 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     ],
                     'resolve' => null,
                     'description' => 'Identifies the date and time when the object was last updated.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'sources' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('SourceOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => 'The sources related to the sourceable.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'viewerSourcesUnpublished' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableViewerSourcesUnpublishedResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
-                    },
-                    'description' => 'The viewer unpublished sources related to the sourceable (only visible by viewer).',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
-                ],
-                'availableSourceCategories' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('SourceCategory')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableAvailableCategoriesResolver", array()]);
-                    },
-                    'description' => 'The available sources categories of to the sourceable.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -408,6 +321,98 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
                     },
                     'description' => 'Reason that the entity is not published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'sources' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last `n` elements from the list.',
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('SourceOrder'),
+                            'description' => null,
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args)]);
+                    },
+                    'description' => 'The sources related to the sourceable.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'viewerSourcesUnpublished' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last `n` elements from the list.',
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableViewerSourcesUnpublishedResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'The viewer unpublished sources related to the sourceable (only visible by viewer).',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
+                'availableSourceCategories' => [
+                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('SourceCategory')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableAvailableCategoriesResolver", array()]);
+                    },
+                    'description' => 'The available sources categories of to the sourceable.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -492,22 +497,23 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the last `n` elements from the list.',
                         ],
                         [
                             'name' => 'orderBy',

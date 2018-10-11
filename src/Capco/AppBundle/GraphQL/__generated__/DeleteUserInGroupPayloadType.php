@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class DeleteUserInGroupPayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'DeleteUserInGroupPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
