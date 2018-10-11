@@ -4,14 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import { Label } from 'react-bootstrap';
 
 type Props = {
-  status: string,
+  draft: string,
 };
 
 export default class ReplyDraftLabel extends React.Component<Props> {
   render() {
     return (
-      this.props.status === 'DRAFT' && (
-        <Label className="badge-pill ml-5" bsStyle="default">
+      this.props.draft === 'DRAFT' && (
+        <Label className="badge-pill" bsStyle={'default'}>
           <FormattedMessage id="proposal.state.draft" />
         </Label>
       )
