@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ChangeProposalPublicationStatusInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'ChangeProposalPublicationStatusInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

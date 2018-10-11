@@ -97,7 +97,7 @@ class CreateCsvFromUserCommand extends Command
         ];
 
         foreach ($types as $type => $query) {
-            $datas[$type] = $this->executor->execute('internal', [
+            $datas[$type] = $this->executor->execute(null, [
                 'query' => $query,
                 'variables' => [],
             ])->toArray();

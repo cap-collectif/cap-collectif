@@ -34,7 +34,7 @@ class ConnectionTraversor
                         if (!$renewalQuery) {
                             return;
                         }
-                        $data = $this->executor->execute('internal', [
+                        $data = $this->executor->execute(null, [
                             'query' => $renewalQuery($pageInfo),
                             'variables' => [],
                         ])->toArray();

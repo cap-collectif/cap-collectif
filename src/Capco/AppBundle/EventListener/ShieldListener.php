@@ -28,7 +28,7 @@ class ShieldListener
         'hwi_oauth_service_redirect',
 
         // API documentation
-        'graphiql_endpoint',
+        'overblog_graphql_graphiql',
         'nelmio_api_doc_index',
 
         // Account confirmation

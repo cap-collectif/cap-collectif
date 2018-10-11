@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class AddUsersInGroupInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'AddUsersInGroupInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

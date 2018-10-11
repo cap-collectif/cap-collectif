@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class OpinionOrVersionType extends UnionType implements GeneratedTypeInterface
 {
-    const NAME = 'OpinionOrVersion';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

@@ -1,0 +1,356 @@
+User:
+  type: object
+  config:
+    description: "A user is an individual's account."
+    interfaces: [Node]
+    fields:
+      id:
+        type: 'ID!'
+        description: 'The id of the user.'
+      vip:
+        type: 'Boolean!'
+      media:
+        type: 'Media'
+        description: 'The profile picture of the user.'
+      email:
+        type: 'String'
+        description: 'email.'
+        resolve: "@=resolver('user_email', [value])"
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      displayName:
+        type: 'String!'
+      username:
+        type: 'String'
+        description: 'Username of the user.'
+      slug:
+        type: 'String'
+        description: '(unique) slug of the user.'
+      show_url:
+        type: 'URI'
+        resolve: "@=resolver('user_show_url', [value])"
+        deprecationReason:
+          '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-01-01", reason: "This field does not respect naming consistency.", supersededBy: "Use `url` instead."})'
+      url:
+        type: 'URI'
+        description: 'URL to user profile, null if the feature profiles is disabled.'
+        resolve: "@=resolver('user_show_url', [value])"
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      updatedAt:
+        type: 'String'
+        description: 'Updated date of the user.'
+        resolve: "@=resolver('user_updatedAt', [value])"
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      lastLogin:
+        type: 'String'
+        description: 'Last connection of the user.'
+        resolve: "@=resolver('user_lastLogin', [value])"
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      enabled:
+        type: 'Boolean!'
+        description: 'Is user is activated.'
+      notificationsConfiguration:
+        type: 'UserNotificationsConfiguration!'
+        description: 'A user notifications preferences'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      locked:
+        type: 'Boolean!'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      phoneConfirmed:
+        type: 'Boolean!'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      phoneConfirmationSentAt:
+        type: 'String'
+        resolve: "@=resolver('user_phoneConfirmationSentAt', [value])"
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      gender:
+        type: 'GenderValue'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      firstname:
+        type: 'String'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      lastname:
+        type: 'String'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      dateOfBirth:
+        type: 'String'
+        resolve: "@=resolver('user_dateOfBirth', [value])"
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      roles:
+        type: '[UserRole]'
+        description: 'Unattended roles as array.'
+      rolesText:
+        type: 'String'
+        resolve: "@=resolver('user_rolesText', [value])"
+        description: 'Array of roles converted and translated to string.'
+      isArchiveDeleted:
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+        type: 'Boolean!'
+        description: 'Is the personal archive of the user has been deleted'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveDeletedResolver", [getUser()])'
+      isArchiveReady:
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+        type: 'Boolean!'
+        description: 'Is the personal archive of the user is ready?'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveReadyResolver", [getUser()])'
+      firstArchive:
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+        type: 'Boolean!'
+        description: 'Is the personal archive of the user is being asked for the first time?'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveFirstResolver", [getUser()])'
+      website:
+        type: 'String'
+      biography:
+        type: 'String'
+      address:
+        type: 'String'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      address2:
+        type: 'String'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      zipCode:
+        type: 'String'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      city:
+        type: 'String'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      phone:
+        type: 'String'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      googleId:
+        type: 'String'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      facebookId:
+        type: 'String'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      samlId:
+        type: 'String'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      opinionsCount:
+        type: 'Int!'
+      opinionVotesCount:
+        type: 'Int!'
+      opinionVersionsCount:
+        type: 'Int!'
+      argumentsCount:
+        type: 'Int!'
+      argumentVotesCount:
+        type: 'Int!'
+      proposalsCount:
+        type: 'Int!'
+      proposalVotesCount:
+        type: 'Int!'
+      commentVotesCount:
+        type: 'Int!'
+      votesCount:
+        type: 'Int!'
+      contributionsToDeleteCount:
+        type: 'Int!'
+        description:
+          'Previsionnal number of contributions who will be totally deleted if the user chose to delete his account.'
+        resolve: "@=resolver('user_contributionsToDeleteCount', [value])"
+      sourcesCount:
+        type: 'Int!'
+      repliesCount:
+        type: 'Int!'
+      postCommentsCount:
+        type: 'Int!'
+      eventCommentsCount:
+        type: 'Int!'
+      projectsCount:
+        type: 'Int!'
+      userType:
+        type: 'UserType'
+        description: 'The type of the person.'
+      consentExternalCommunication:
+        type: 'Boolean!'
+        description: 'Is user accepted the external communication during the registration.'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      followingProposals:
+        type: 'ProposalConnection!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalsFollowedByUserResolver", [value, args])'
+        description: 'Array of proposals followed by current user.'
+        args:
+          orderBy:
+            type: 'String'
+            description: 'Ordering options for followers returning from the connection'
+          after:
+            type: 'String'
+            description: 'Returns the elements in the list that come after the specified global ID.'
+          first:
+            type: 'Int'
+            defaultValue: 32
+            description: 'Returns the first n elements from the list.'
+          before:
+            type: 'String'
+            description:
+              'Returns the elements in the list that come before the specified global ID.'
+          last:
+            type: 'Int'
+            description: 'Returns the last n elements from the list.'
+      followingOpinions:
+        type: 'OpinionConnection!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionsFollowedByUserResolver", [value, args])'
+        description: 'Array of opinions followed by current user.'
+        argsBuilder: 'Relay::Connection'
+        args:
+          orderBy:
+            type: 'String'
+            description: 'Ordering options for followers returning from the connection'
+      contributionsCount:
+        type: 'Int!'
+        description: 'Total of contributions count'
+      facebookUrl:
+        type: 'String'
+        description: 'Your facebook url'
+      twitterUrl:
+        type: 'String'
+        description: 'Your twitter url'
+      linkedInUrl:
+        type: 'String'
+        description: 'Your linkedIn url'
+      profilePageIndexed:
+        type: 'Boolean'
+        description: 'Is your profile indexed or not'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      neighborhood:
+        type: 'String'
+        description: 'Your localisation'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      proposalVotes:
+        type: 'ProposalVoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerProposalVotesResolver", [value, args, context])'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 100000
+          orderBy:
+            type: 'ProposalVotesOrder'
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+          stepId:
+            type: 'ID'
+          includeUnpublished:
+            type: 'Boolean'
+            description: '(ROLE_SUPER_ADMIN only) Select also unpublished votes.'
+            defaultValue: false
+      deletedAccountAt:
+        type: 'DateTime'
+      medias:
+        type: '[Media]!'
+        description: 'Get all medias the user has published.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMediasResolver", [value, args])'
+      votes:
+        type: 'VoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get all votes of the user.'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 100000
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value, args])'
+      groups:
+        type: 'GroupConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get all groups where the user is.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserGroupsResolver", [value, args])'
+      reports:
+        type: 'ReportConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get all reports the user has done.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserReportsResolver", [value, args])'
+      events:
+        type: 'EventConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Get all events the user has created.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventsResolver", [value, args])'
+      contributions:
+        type: 'ContributionConnection!'
+        args:
+          type:
+            type: 'ContributionType'
+            description: 'Type of contribustion requested'
+          after:
+            type: 'String'
+            description: 'Returns the elements in the list that come after the specified global ID.'
+          first:
+            type: 'Int'
+            defaultValue: 100
+            description: 'Returns the first n elements from the list.'
+          before:
+            type: 'String'
+            description:
+              'Returns the elements in the list that come before the specified global ID.'
+          last:
+            type: 'Int'
+            description: 'Returns the last n elements from the list.'
+        description: "Return the user's contributions of the type requested."
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", [value, args])'
+
+      isSubscribedToNewsLetter:
+        type: 'Boolean'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value])'
+        description: 'Is user subscribed to the newsletter ?'
+      subscribedToNewsLetterAt:
+        type: 'DateTime'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value, "at"])'
+        description: 'The user subrscibes to the newsletter at date'
+      isViewer:
+        type: 'Boolean!'
+        resolve:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(getUser(), value)'
+        description: 'Is user given the current viewer ?'
+      isEmailConfirmed:
+        type: 'Boolean'
+        description: 'Has the user confirmed his email address ?'
+      emailConfirmationSentAt:
+        type: 'DateTime'
+        description: "The user's email was confirmed at date"
+      arguments:
+        type: 'ArgumentConnection!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentByUserResolver", [value, args])'
+        description: 'The arguments created by user.'
+        argsBuilder: 'Relay::Connection'

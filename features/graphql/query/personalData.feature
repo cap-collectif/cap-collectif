@@ -28,7 +28,7 @@ Scenario: GraphQL client want to get the personal data of authenticate user
       "viewer": {
         "firstname": "Utilisateur",
         "lastname": "authentifier",
-        "dateOfBirth": "1996-03-01 00:00:00",
+        "dateOfBirth": "1996-03-01T00:00:00+01:00",
         "address": "12 rue des boulets",
         "address2": "2ieme etages",
         "zipCode": "75012",
@@ -131,7 +131,7 @@ Scenario: Admin GraphQL client want to get the personal data of a user
       "user": {
         "firstname": "Utilisateur",
         "lastname": "authentifier",
-        "dateOfBirth": "1996-03-01 00:00:00",
+        "dateOfBirth": "1996-03-01T00:00:00+01:00",
         "address": "12 rue des boulets",
         "address2": "2ieme etages",
         "zipCode": "75012",

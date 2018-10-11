@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class CreateUserPayloadType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'CreateUserPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -24,7 +23,7 @@ final class CreateUserPayloadType extends ObjectType implements GeneratedTypeInt
             'fields' => function () use ($globalVariable) {
                 return [
                 'user' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('InternalUser'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('User'),
                     'args' => [
                     ],
                     'resolve' => null,

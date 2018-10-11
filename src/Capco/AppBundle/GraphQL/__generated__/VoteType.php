@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class VoteType extends InterfaceType implements GeneratedTypeInterface
 {
-    const NAME = 'Vote';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -49,7 +48,7 @@ final class VoteType extends InterfaceType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'author' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('InternalUser'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('User'),
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

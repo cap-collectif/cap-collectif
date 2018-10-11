@@ -21,7 +21,7 @@ Post:
       publishedAt:
         type: 'DateTime'
       authors:
-        type: '[InternalUser!]!'
+        type: '[User!]!'
       publicationStatus:
         type: 'PostPublicationStatus!'
         description: 'The publication status for this post.'

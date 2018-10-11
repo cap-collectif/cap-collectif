@@ -1,6 +1,0 @@
-ChangeVersionPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      version:
-        type: 'Version'

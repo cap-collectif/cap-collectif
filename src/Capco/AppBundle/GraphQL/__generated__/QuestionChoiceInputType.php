@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class QuestionChoiceInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'QuestionChoiceInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

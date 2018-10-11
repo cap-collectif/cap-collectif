@@ -21,7 +21,7 @@ Event:
       projects:
         type: '[Project!]!'
       author:
-        type: 'InternalUser!'
+        type: 'User!'
       commentable:
         type: 'Boolean!'
         resolve: '@=value.isCommentable()'

@@ -7,7 +7,7 @@ UserGroup:
         type: 'ID!'
         description: 'The identifier of the group'
       user:
-        type: 'InternalUser!'
+        type: 'User!'
         description: 'Identifies the user'
       group:
         type: 'Group!'

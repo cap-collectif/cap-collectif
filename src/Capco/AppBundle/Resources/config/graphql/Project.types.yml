@@ -11,7 +11,7 @@ Project:
       title:
         type: 'String!'
       contributors:
-        type: 'InternalUserConnection!'
+        type: 'UserConnection!'
         description: 'A list of contributor associated with the project.'
         argsBuilder: 'Relay::Connection'
         resolve:

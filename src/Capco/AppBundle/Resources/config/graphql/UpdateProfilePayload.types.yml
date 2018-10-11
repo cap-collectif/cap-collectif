@@ -1,0 +1,7 @@
+UpdateProfilePayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      viewer:
+        type: 'User!'
+        description: 'The viewer'

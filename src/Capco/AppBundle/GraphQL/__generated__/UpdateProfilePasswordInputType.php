@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class UpdateProfilePasswordInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'UpdateProfilePasswordInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

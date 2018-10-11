@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ChangeDistrictInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'ChangeDistrictInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

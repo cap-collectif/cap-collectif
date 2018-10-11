@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class UserGroupType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'UserGroup';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -36,7 +35,7 @@ final class UserGroupType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'user' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
                     'args' => [
                     ],
                     'resolve' => null,

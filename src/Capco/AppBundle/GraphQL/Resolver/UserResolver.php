@@ -28,7 +28,7 @@ class UserResolver implements ResolverInterface
 
     public function resolveUserType()
     {
-        return $this->typeResolver->resolve('InternalUser');
+        return $this->typeResolver->resolve('user');
     }
 
     public function resolveResettingPasswordUrl(User $user): string
@@ -67,9 +67,9 @@ class UserResolver implements ResolverInterface
         return $object->getEmail();
     }
 
-    public function resolveCreatedAt($object): \DateTime
+    public function resolveCreatedAt($object): string
     {
-        return $object->getCreatedAt();
+        return $object->getCreatedAt() ? $object->getCreatedAt()->format(\DateTime::ATOM) : '';
     }
 
     public function resolveShowUrl(User $user): string
@@ -117,9 +117,26 @@ class UserResolver implements ResolverInterface
         );
     }
 
-    public function resolvePhoneConfirmationSentAt($object): ?\DateTime
+    public function resolveUpdatedAt($object): string
     {
-        return $object->getSmsConfirmationSentAt();
+        return $object->getUpdatedAt() ? $object->getUpdatedAt()->format(\DateTime::ATOM) : '';
+    }
+
+    public function resolveDateOfBirth($object): string
+    {
+        return $object->getDateOfBirth() ? $object->getDateOfBirth()->format(\DateTime::ATOM) : '';
+    }
+
+    public function resolvePhoneConfirmationSentAt($object): string
+    {
+        return $object->getSmsConfirmationSentAt()
+            ? $object->getSmsConfirmationSentAt()->format(\DateTime::ATOM)
+            : '';
+    }
+
+    public function resolveLastLogin($object): string
+    {
+        return $object->getLastLogin() ? $object->getLastLogin()->format(\DateTime::ATOM) : '';
     }
 
     public function resolveRolesText($object): string

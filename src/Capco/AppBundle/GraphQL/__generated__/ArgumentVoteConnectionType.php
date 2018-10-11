@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ArgumentVoteConnectionType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'ArgumentVoteConnection';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

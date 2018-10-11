@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class FollowerType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'Follower';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -48,7 +47,7 @@ final class FollowerType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'user' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
                     'args' => [
                     ],
                     'resolve' => null,

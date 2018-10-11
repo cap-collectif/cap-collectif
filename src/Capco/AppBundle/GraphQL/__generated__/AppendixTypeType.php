@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class AppendixTypeType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'AppendixType';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

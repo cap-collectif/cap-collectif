@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ChangeDistrictPayloadType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'ChangeDistrictPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

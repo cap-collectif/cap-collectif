@@ -13,14 +13,11 @@ SelectionStep:
         type: '[Status!]!'
       allowingProgressSteps:
         type: 'Boolean!'
-        description:
-          'Only one selection step inside a project can have realisation steps, true if this one'
+        description: 'Only one selection step inside a project can have realisation steps, true if this one'
       proposals:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\SelectionStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\SelectionStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
       contributors:
-        type: 'InternalUserConnection!'
+        type: 'UserConnection!'
         description: 'A list of contributor associated with the consultation.'
         argsBuilder: 'Relay::Connection'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'

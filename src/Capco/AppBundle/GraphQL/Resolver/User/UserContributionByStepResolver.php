@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
 
 class UserContributionByStepResolver implements ResolverInterface
 {
@@ -23,7 +22,7 @@ class UserContributionByStepResolver implements ResolverInterface
         $this->container = $container;
     }
 
-    public function __invoke(User $user, AbstractStep $step, Argument $args): Connection
+    public function __invoke(User $user, AbstractStep $step, array $args): Connection
     {
         $paginator = new Paginator(function (int $offset, int $limit) {
             return [];

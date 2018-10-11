@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class DeleteUserInGroupInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'DeleteUserInGroupInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

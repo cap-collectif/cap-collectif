@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ContributionWithAuthorType extends InterfaceType implements GeneratedTypeInterface
 {
-    const NAME = 'ContributionWithAuthor';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -25,7 +24,7 @@ final class ContributionWithAuthorType extends InterfaceType implements Generate
             'fields' => function () use ($globalVariable) {
                 return [
                 'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
                     'args' => [
                     ],
                     'resolve' => null,

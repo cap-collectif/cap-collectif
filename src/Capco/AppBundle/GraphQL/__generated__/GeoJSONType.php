@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class GeoJSONType extends CustomScalarType implements GeneratedTypeInterface
 {
-    const NAME = 'GeoJSON';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

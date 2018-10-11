@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class PostRelatedContentType extends UnionType implements GeneratedTypeInterface
 {
-    const NAME = 'PostRelatedContent';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class RemoveCommentVoteInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'RemoveCommentVoteInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
