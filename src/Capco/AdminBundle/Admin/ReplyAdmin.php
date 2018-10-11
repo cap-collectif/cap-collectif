@@ -38,7 +38,9 @@ class ReplyAdmin extends AbstractAdmin
             ->add('questionnaire.step', null, ['label' => 'admin.fields.reply.questionnaire_step'])
             ->add('questionnaire.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.reply.project',
-            ]);
+            ])
+            ->add('draft', null, ['label' => 'admin.fields.proposal.draft'])
+            ->add('published', null, ['label' => 'admin.fields.proposal.enabled']);
     }
 
     protected function configureListFields(ListMapper $listMapper)
