@@ -210,8 +210,8 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
             <Connect(SubmitButton)
               bsStyle="primary"
               disabled={true}
-              id="formName-submit-create-reply"
-              label="global.save"
+              id="formName-submit-create-draft-reply"
+              label="global.save_as_draft"
               onSubmit={[Function]}
               type="submit"
             />
@@ -220,10 +220,10 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
             className="btn-group"
           >
             <Connect(SubmitButton)
-              bsStyle="primary"
+              bsStyle="info"
               disabled={true}
-              id="formName-submit-create-draft-reply"
-              label="global.save_as_draft"
+              id="formName-submit-create-reply"
+              label="global.validate"
               onSubmit={[Function]}
               type="submit"
             />
@@ -409,8 +409,8 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
             <Connect(SubmitButton)
               bsStyle="primary"
               disabled={true}
-              id="formName-submit-create-reply"
-              label="global.save"
+              id="formName-submit-create-draft-reply"
+              label="global.save_as_draft"
               onSubmit={[Function]}
               type="submit"
             />
@@ -419,10 +419,10 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
             className="btn-group"
           >
             <Connect(SubmitButton)
-              bsStyle="primary"
+              bsStyle="info"
               disabled={true}
-              id="formName-submit-create-draft-reply"
-              label="global.save_as_draft"
+              id="formName-submit-create-reply"
+              label="global.validate"
               onSubmit={[Function]}
               type="submit"
             />
@@ -687,8 +687,8 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
             <Connect(SubmitButton)
               bsStyle="primary"
               disabled={true}
-              id="formName-submit-create-reply"
-              label="global.save"
+              id="formName-submit-create-draft-reply"
+              label="global.save_as_draft"
               onSubmit={[Function]}
               type="submit"
             />
@@ -697,10 +697,10 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
             className="btn-group"
           >
             <Connect(SubmitButton)
-              bsStyle="primary"
+              bsStyle="info"
               disabled={true}
-              id="formName-submit-create-draft-reply"
-              label="global.save_as_draft"
+              id="formName-submit-create-reply"
+              label="global.validate"
               onSubmit={[Function]}
               type="submit"
             />
@@ -908,8 +908,8 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
             <Connect(SubmitButton)
               bsStyle="primary"
               disabled={true}
-              id="formName-submit-create-reply"
-              label="global.save"
+              id="formName-submit-create-draft-reply"
+              label="global.save_as_draft"
               onSubmit={[Function]}
               type="submit"
             />
@@ -918,10 +918,10 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
             className="btn-group"
           >
             <Connect(SubmitButton)
-              bsStyle="primary"
+              bsStyle="info"
               disabled={true}
-              id="formName-submit-create-draft-reply"
-              label="global.save_as_draft"
+              id="formName-submit-create-reply"
+              label="global.validate"
               onSubmit={[Function]}
               type="submit"
             />
@@ -1071,8 +1071,8 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
             <Connect(SubmitButton)
               bsStyle="primary"
               disabled={true}
-              id="formName-submit-create-reply"
-              label="global.save"
+              id="formName-submit-create-draft-reply"
+              label="global.save_as_draft"
               onSubmit={[Function]}
               type="submit"
             />
@@ -1081,10 +1081,10 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
             className="btn-group"
           >
             <Connect(SubmitButton)
-              bsStyle="primary"
+              bsStyle="info"
               disabled={true}
-              id="formName-submit-create-draft-reply"
-              label="global.save_as_draft"
+              id="formName-submit-create-reply"
+              label="global.validate"
               onSubmit={[Function]}
               type="submit"
             />

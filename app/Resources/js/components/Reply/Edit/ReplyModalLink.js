@@ -39,7 +39,7 @@ export class ReplyModalLink extends React.Component<Props, State> {
 
     return (
       <Fragment>
-        <ListGroupItem className="reply" id={`reply-link-${reply.id}`}>
+        <ListGroupItem className="reply align-items-center" id={`reply-link-${reply.id}`}>
           <div>
             <FormattedMessage
               id="reply.show.link"

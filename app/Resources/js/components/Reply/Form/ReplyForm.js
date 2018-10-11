@@ -8,6 +8,8 @@ import {
   FieldArray,
   Field,
   SubmissionError,
+  getFormSyncErrors,
+  change as changeRedux,
 } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -56,7 +58,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: 'UPDATE_ALERT',
-          alert: { bsStyle: 'success', content: 'reply.request.create.success' },
+          alert: {
+            bsStyle: 'success',
+            content: data.draft
+              ? 'your-answer-has-been-saved-as-a-draft'
+              : 'reply.request.create.success',
+          },
         });
         if (questionnaire.multipleRepliesAllowed) {
           props.reset();
@@ -81,7 +88,12 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     .then(() => {
       AppDispatcher.dispatch({
         actionType: 'UPDATE_ALERT',
-        alert: { bsStyle: 'success', content: 'reply.request.create.success' },
+        alert: {
+          bsStyle: 'success',
+          content: data.draft
+            ? 'your-answer-has-been-saved-as-a-draft'
+            : 'reply.request.create.success',
+        },
       });
       if (questionnaire.multipleRepliesAllowed) {
         props.reset();
@@ -146,8 +158,8 @@ export class ReplyForm extends React.Component<Props> {
       handleSubmit,
       responses,
       dispatch,
+      reply,
     } = this.props;
-
     const disabled = this.formIsDisabled();
 
     return (
@@ -182,6 +194,20 @@ export class ReplyForm extends React.Component<Props> {
                 </div>
               )}
               <div className="btn-toolbar">
+                {(!reply || (reply && reply.draft !== 'PUBLISHED')) && (
+                  <div className="btn-group">
+                    <SubmitButton
+                      type="submit"
+                      id={`${form}-submit-create-draft-reply`}
+                      disabled={pristine || submitting || disabled}
+                      bsStyle="primary"
+                      label={submitting ? 'global.loading' : 'global.save_as_draft'}
+                      onSubmit={() => {
+                        dispatch(changeRedux(form, 'draft', true));
+                      }}
+                    />
+                  </div>
+                )}
                 <div className="btn-group">
                   <SubmitButton
                     type="submit"
@@ -202,7 +228,7 @@ export class ReplyForm extends React.Component<Props> {
                     disabled={pristine || submitting}
                     label={submitting ? 'global.loading' : 'global.save_as_draft'}
                     onSubmit={() => {
-                      dispatch(changeRedux('CreateReplyForm', 'draft', true));
+                      dispatch(changeRedux(form, 'draft', false));
                     }}
                   />
                 </div>
