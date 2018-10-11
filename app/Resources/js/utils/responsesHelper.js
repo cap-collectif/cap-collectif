@@ -296,16 +296,16 @@ export const formatSubmitResponses = (
         : null;
       return {
         question: res.question,
-        medias
+        medias,
       };
     }
     let value = res.value;
     if (questionType === 'ranking' || questionType === 'button') {
       value = answeredQuestionsIds.includes(question.id)
         ? JSON.stringify({
-          labels: Array.isArray(res.value) ? res.value : [res.value],
-          other: null,
-        })
+            labels: Array.isArray(res.value) ? res.value : [res.value],
+            other: null,
+          })
         : null;
     } else if (questionType === 'checkbox' || questionType === 'radio') {
       value = answeredQuestionsIds.includes(question.id) ? JSON.stringify(res.value) : null;
@@ -329,14 +329,11 @@ export const getValueFromResponse = (questionType: string, responseValue: string
     if (questionType === 'button') {
       return JSON.parse(responseValue).labels[0];
     }
-    if (questionType === 'radio' || questionType === 'checkbox') {
+    if (questionType === 'radio' || questionType === 'checkbox' || questionType === 'number') {
       return JSON.parse(responseValue);
     }
     if (questionType === 'ranking') {
       return JSON.parse(responseValue).labels;
-    }
-    if (questionType === 'number') {
-      return JSON.parse(responseValue);
     }
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -357,22 +354,22 @@ export const formatInitialResponsesValues = (
     if (response) {
       if (typeof response.value !== 'undefined' && response.value !== null) {
         return {
-          questionId,
+          question: questionId,
           value: getValueFromResponse(question.type, response.value),
         };
       }
       if (typeof response.medias !== 'undefined') {
-        return { questionId, value: response.medias };
+        return { question: questionId, value: response.medias };
       }
     }
     // Otherwise we create an empty response
     if (question.type === 'medias') {
-      return { questionId, value: [] };
+      return { question: questionId, value: [] };
     }
     if (question.type === 'radio' || question.type === 'checkbox') {
-      return { questionId, value: { labels: [], other: null } };
+      return { question: questionId, value: { labels: [], other: null } };
     }
-    return { questionId, value: null };
+    return { question: questionId, value: null };
   });
 
 const formattedChoicesInField = field =>
@@ -432,7 +429,7 @@ export const validateResponses = (
   responses?: ResponsesError,
 } => {
   const responsesError = questions.map(question => {
-    const response = responses.filter(res => res && res.questionId === question.id)[0];
+    const response = responses.filter(res => res && res.question === question.id)[0];
     if (question.required) {
       if (question.type === 'medias') {
         if (!response || (Array.isArray(response.value) && response.value.length === 0)) {

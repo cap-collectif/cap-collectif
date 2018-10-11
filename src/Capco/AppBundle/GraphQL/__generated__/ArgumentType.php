@@ -78,18 +78,6 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
                     'args' => [
                     ],
-                    'resolve' => null,
-                    'description' => 'Return the related contribution if the contribution is related to another.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'show_url' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
-                    'args' => [
-                    ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["argument_url", array(0 => $value)]);
                     },
@@ -155,9 +143,7 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
+                    'access' => null,
                 ],
                 'author' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),

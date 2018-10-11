@@ -86,20 +86,10 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     type: 6
     randomQuestionChoices: false
   multiplequestionHapNoel:
-    id: 45
+    id: 24
     title: Hap ou Noel ?
     required: true
     type: 4 # radio
-  multiplequestionFavoriteFleuve:
-    id: 25
-    title: Votre fleuve préféré
-    required: true
-    type: 4
-  multiplequestionHapGange:
-    id: 26
-    title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
-    required: false
-    type: 4
   multiplequestionHapCreation:
     id: 25
     title: Par qui Hap a t-il été créé ?
@@ -172,3 +162,13 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     id: 44
     title: Ceci est-il une question de type Classement ?
     type: 6
+  multiplequestionFavoriteFleuve:
+    id: 45
+    title: Votre fleuve préféré
+    required: true
+    type: 4
+  multiplequestionHapGange:
+    id: 46
+    title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
+    required: false
+    type: 4
