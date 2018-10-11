@@ -209,7 +209,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     });
 };
 
-const validate = (values: FormValues, { proposalForm, features }: Props) => {
+const validate = (values: FormValues, { proposalForm, features, intl }: Props) => {
   const errors = {};
 
   if (values.draft) {
@@ -224,7 +224,7 @@ const validate = (values: FormValues, { proposalForm, features }: Props) => {
     return errors;
   }
 
-  return validateProposalContent(values, proposalForm, features);
+  return validateProposalContent(values, proposalForm, features, intl);
 };
 
 type State = {
@@ -626,7 +626,7 @@ export default createFragmentContainer(container, {
       step {
         id
       }
-      districts {
+      districts(order: ALPHABETICAL) {
         id
         name
       }

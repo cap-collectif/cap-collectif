@@ -55,7 +55,7 @@ fragment voteInfos on YesNoPairedVote {
  id
  ...authorInfos
  value
- createdAt
+ createdAt  
 }
 EOF;
 
@@ -162,7 +162,6 @@ EOF;
         'contributions_sources_updatedAt',
         'contributions_sources_published',
         'contributions_sources_votesCount',
-        'contribution_versions_id',
     ];
     protected const SOURCE_HEADER_MAP = [
         'contributions_sources_id' => 'id',
@@ -202,10 +201,6 @@ EOF;
         'contributions_arguments_votesCount' => 'votes.totalCount',
     ];
 
-    protected const VERSION_HEADER_MAP = [
-        'contribution_versions_id' => 'id',
-    ];
-
     protected const REPORTING_HEADER_MAP = [
         'contributions_reportings_related_id' => 'related.id',
         'contributions_reportings_related_kind' => 'related.kind',
@@ -241,9 +236,7 @@ EOF;
     ] +
     self::ARGUMENT_HEADER_MAP +
     self::VOTES_HEADER_MAP +
-    self::REPORTING_HEADER_MAP +
-    self::SOURCE_HEADER_MAP +
-    self::VERSION_HEADER_MAP;
+    self::REPORTING_HEADER_MAP;
 
     protected static $defaultName = 'capco:export:consultation';
 
@@ -338,7 +331,6 @@ EOF;
             }
         );
 
-        $this->writer->close();
         $progress->finish();
     }
 
@@ -651,28 +643,20 @@ EOF;
         ) {
             $this->addContributionReportingsRow($contribution, $edge['node']);
         });
-
         // we add Opinion's arguments rows.
         $this->connectionTraversor->traverse(
             $contribution,
             'arguments',
             function ($edge) use ($contribution) {
                 $this->addContributionArgumentRow($edge['node'], $contribution);
-            } //,
-            // function ($pageInfo) use ($contribution) {
-            //     return $this->getContributionsArgumentsGraphQLQuery(
-            //         $contribution['id'],
-            //         $pageInfo['endCursor']
-            //     );
-            // }
+            },
+            function ($pageInfo) use ($contribution) {
+                return $this->getContributionsArgumentsGraphQLQuery(
+                    $contribution['id'],
+                    $pageInfo['endCursor']
+                );
+            }
         );
-
-        // We add Opinion's versions rows.
-        $this->connectionTraversor->traverse($contribution, 'versions', function ($edge) use (
-            $contribution
-        ) {
-            $this->addContributionVersionRow($edge['node'], $contribution);
-        });
     }
 
     private function getContributionsArgumentsGraphQLQuery(
@@ -725,25 +709,6 @@ EOF;
             if (isset(self::ARGUMENT_HEADER_MAP[$path])) {
                 $row[] = exportUtils::parseCellValue(
                     Arr::path($argument, self::ARGUMENT_HEADER_MAP[$path])
-                );
-            } elseif (isset($this->contributionHeaderMap[$columnName])) {
-                $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
-            } else {
-                $row[] = '';
-            }
-        }
-
-        $this->writer->addRow($row);
-    }
-
-    private function addContributionVersionRow($version, $contribution): void
-    {
-        $row = ['version'];
-
-        foreach ($this->contributionHeaderMap as $path => $columnName) {
-            if (isset(self::VERSION_HEADER_MAP[$path])) {
-                $row[] = exportUtils::parseCellValue(
-                    Arr::path($version, self::VERSION_HEADER_MAP[$path])
                 );
             } elseif (isset($this->contributionHeaderMap[$columnName])) {
                 $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);

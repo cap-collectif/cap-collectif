@@ -61,3 +61,8 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     title: ça roule ?
     required: true
     type: 1
+  simplequestion12:
+    id: 1313
+    title: Un nombre stp
+    required: true
+    type: 9
