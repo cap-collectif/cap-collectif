@@ -24,7 +24,9 @@ type Props = {
   type: string,
   validationRuleType: string,
   formErrors: Object,
-  currentQuestion: Object,
+  currentQuestion: {
+    id: string,
+  },
   intl: IntlShape,
 } & ParentProps;
 

@@ -12,7 +12,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
 class LogicJumpConditionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -21,22 +20,14 @@ class LogicJumpConditionType extends AbstractType
         $builder->add('operator');
         $builder->add('question');
         $builder->add('value');
-        /*$builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            if (!$data = $event->getData()) {
-                return;
-            }
-            $form = $event->getForm();
-
-            if ($data->getQuestion() instanceof MultipleChoiceQuestion) {
-                $form->add('value', EntityType::class, array(
-                    'class' => QuestionChoice::class
-                ));
-            }
-        });*/
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['csrf_protection' => false, 'data_class' => MultipleChoiceQuestionLogicJumpCondition::class, 'allow_extra_fields' => true]);
+        $resolver->setDefaults([
+            'csrf_protection' => false,
+            'data_class' => MultipleChoiceQuestionLogicJumpCondition::class,
+            'allow_extra_fields' => true,
+        ]);
     }
 }

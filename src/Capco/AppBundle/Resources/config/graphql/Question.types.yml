@@ -11,10 +11,11 @@ Question:
       type:
         type: 'QuestionTypeValue!'
         resolve: "@=resolver('question_type', [value])"
-      # need it for conditional jumps
+      #need it for conditional jumps
       position:
         type: 'Int!'
         resolve: "@=resolver('question_position', [value])"
+        description: 'The position of the question'
       private:
         type: 'Boolean!'
       required:

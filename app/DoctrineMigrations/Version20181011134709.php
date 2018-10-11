@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180808121004 extends AbstractMigration
+final class Version20181011134709 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -39,6 +39,7 @@ final class Version20180808121004 extends AbstractMigration
         $this->addSql(
             'ALTER TABLE logic_jump_condition ADD CONSTRAINT FK_A7F4B1ACF920BBA2 FOREIGN KEY (value_id) REFERENCES question_choice (id)'
         );
+        $this->addSql('ALTER TABLE logic_jump ADD always TINYINT(1) NOT NULL');
     }
 
     public function down(Schema $schema): void

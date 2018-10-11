@@ -6,9 +6,9 @@ import { FormattedMessage } from 'react-intl';
 import type { GlobalState, Dispatch } from '../../types';
 import component from '../Form/Field';
 
-type RelayProps = { selectedQuestion: any };
-type Props = RelayProps & {
-  fields: { length: number, map: Function, remove: Function },
+type ReduxProps = { selectedQuestion: number };
+type Props = ReduxProps & {
+  fields: { length: number, map: () => void, remove: () => void },
   questions: Object,
   formName: string,
   member: string,
@@ -79,7 +79,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
               className="cap cap-android-menu"
               style={{ color: 'rgb(3, 136, 204)', fontSize: '15px', marginRight: '10px' }}
             />
-            Si la réponse à la question :
+            <FormattedMessage id="if-the-question-answer-is" />
             <button
               type="button"
               style={{ border: 'none', float: 'right', backgroundColor: '#f5f5f5' }}

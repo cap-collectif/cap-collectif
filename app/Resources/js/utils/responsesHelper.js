@@ -126,7 +126,6 @@ const getConditionsResultForJump = (jump, responses) => {
       const search = responses
         .filter(Boolean)
         .find(r => condition && condition.question && r.question === condition.question.id);
-      // const userResponse = search && search.value;
       const userResponse = getValueFromSubmitResponse(search);
       return condition.operator === 'IS'
         ? condition && condition.value && condition.value.title === userResponse
