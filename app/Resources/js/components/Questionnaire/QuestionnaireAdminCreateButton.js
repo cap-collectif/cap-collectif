@@ -5,8 +5,9 @@ import { Button, Modal } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
-import component from '../Form/Field';
+import * as FormField from '../Form/Field';
 import CreateQuestionnaireMutation from '../../mutations/CreateQuestionnaireMutation';
+import QuestionnaireAdminCreateButtonType from './QuestionnaireAdminCreateButtonType';
 
 const formName = 'questionnaire-form-admin-create';
 
@@ -33,10 +34,18 @@ type Props = {
 
 type State = {
   showModal: boolean,
+  type: string,
 };
 
 export class QuestionnaireAdminCreateButton extends React.Component<Props, State> {
-  state = { showModal: false };
+  state = { showModal: false, type: 'survey' };
+
+  changeType(type: string) {
+    this.setState({
+      ...this.state,
+      type,
+    });
+  }
 
   render() {
     const { submitting, handleSubmit, submit } = this.props;
@@ -67,10 +76,14 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={handleSubmit}>
+              <QuestionnaireAdminCreateButtonType
+                type={this.state.type}
+                handleClick={this.changeType}
+              />
               <Field
                 name="title"
                 label={<FormattedMessage id="admin.fields.questionnaire.title" />}
-                component={component}
+                component={FormField.default}
                 type="text"
                 id="questionnaire_title"
               />

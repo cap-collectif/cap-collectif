@@ -1344,6 +1344,9 @@ type CreateProposalPayload {
 input CreateQuestionnaireInput {
   # The questionnaire form title
   title: String!
+
+  # The questionnaire type
+  type: String! = "QUESTIONNAIRE"
   clientMutationId: String
 }
 

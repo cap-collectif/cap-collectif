@@ -27,6 +27,11 @@ final class CreateQuestionnaireInputType extends InputObjectType implements Gene
                     'type' => Type::nonNull(Type::string()),
                     'description' => 'The questionnaire form title',
                 ],
+                'type' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'description' => 'The questionnaire type',
+                    'defaultValue' => 'QUESTIONNAIRE',
+                ],
                 'clientMutationId' => [
                     'type' => Type::string(),
                     'description' => null,

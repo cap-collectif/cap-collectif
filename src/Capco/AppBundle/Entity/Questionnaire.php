@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Enum\QuestionnaireType;
 
 /**
  * @ORM\Table(name="questionnaire")
@@ -74,6 +75,12 @@ class Questionnaire implements DisplayableInBOInterface
      * @ORM\Column(name="district_help_text", type="string", length=255, nullable=true)
      */
     private $districtHelpText;
+    
+    /**
+     * @var string
+     * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     */
+    private $type = QuestionnaireType::SURVEY;
 
     /**
      * @var bool
@@ -148,6 +155,30 @@ class Questionnaire implements DisplayableInBOInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set type.
+     *
+     * @param string $type
+     *
+     * @return Questionnaire
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     public function isFullyPrivate(): bool
