@@ -28,15 +28,15 @@ final class LogicJumpConditionInputType extends InputObjectType implements Gener
                 ],
                 'operator' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('LogicJumpConditionOperator')),
-                    'description' => null,
+                    'description' => 'The operator used to check the condition',
                 ],
                 'question' => [
                     'type' => Type::nonNull(Type::int()),
-                    'description' => null,
+                    'description' => 'The id of the question you want to have a condition',
                 ],
                 'value' => [
                     'type' => Type::string(),
-                    'description' => null,
+                    'description' => 'The answer the selected question should have to trigger the condition',
                 ],
             ];
             },

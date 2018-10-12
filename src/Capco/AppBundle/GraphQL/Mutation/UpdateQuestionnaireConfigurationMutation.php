@@ -68,7 +68,6 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         );
 
         if (isset($arguments['questions'])) {
-
             $questionsOrderedByBase = $form
                 ->getData()
                 ->getRealQuestions()
@@ -111,7 +110,6 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
                     $questionnaire->getId()
                 ) + 1;
             $this->persistQuestion($qaq, $this->em, $delta, $questionsOrderedById);
-            //$this->persistLogicJump($arguments['questions']);
         } else {
             $form->submit($arguments, false);
         }
@@ -123,29 +121,5 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         $this->em->flush();
 
         return ['questionnaire' => $questionnaire];
-    }
-
-    public function persistLogicJump(array $questions): void
-    {
-        foreach ($questions as &$question) {
-            if(!empty($arguments['questions']['jumps'])) {
-                foreach ($question['question']['jumps'] as $jump) {
-                $logicJump = $this->em->getRepository(LogicJumpRepository::class)->find($jump['id']);
-                    if($logicJump) {
-                        $logicJump->setOrigin($this->abstractQuestionRepo->find($jump['origin']));
-                        $logicJump->setDestination($this->abstractQuestionRepo->find($jump['destination']));
-
-                        foreach ($jump['conditions'] as $condition) {
-                            $logicJumpCondition = $this->em->getRepository(AbstractLogicJumpConditionRepository::class)->find($condition['id']);
-
-                            $logicJumpCondition->setQuestion($this->abstractQuestionRepo->find($condition['question']));
-                            $logicJumpCondition->setValue($this->em->getRepository(QuestionChoiceRepository::class)->find($condition['value']));
-                            $this->em->persist($logicJumpCondition);
-                        }
-                        $this->em->persist($logicJump);
-                    }
-                }
-            }
-        }
     }
 }

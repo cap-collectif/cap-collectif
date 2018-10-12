@@ -69,7 +69,7 @@ final class MediaQuestionType extends ObjectType implements GeneratedTypeInterfa
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["question_position", array(0 => $value)]);
                     },
-                    'description' => null,
+                    'description' => 'The position of the question',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

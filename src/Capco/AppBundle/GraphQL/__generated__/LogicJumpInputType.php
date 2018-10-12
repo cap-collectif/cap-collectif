@@ -32,15 +32,15 @@ final class LogicJumpInputType extends InputObjectType implements GeneratedTypeI
                 ],
                 'origin' => [
                     'type' => Type::nonNull(Type::int()),
-                    'description' => null,
+                    'description' => 'The id of the question where the logic jump start',
                 ],
                 'destination' => [
                     'type' => Type::nonNull(Type::int()),
-                    'description' => null,
+                    'description' => 'The id of the question where the logic jump end if the conditions are fulfilled',
                 ],
                 'conditions' => [
                     'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('LogicJumpConditionInput')),
-                    'description' => null,
+                    'description' => 'A collection of conditions that you have to fulfill for displaying the destination question',
                 ],
             ];
             },

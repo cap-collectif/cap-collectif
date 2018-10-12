@@ -5,6 +5,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field, FieldArray, type FormProps } from 'redux-form';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { submitQuestion } from '../../utils/submitQuestion';
 import AlertForm from '../Alert/AlertForm';
 import component from '../Form/Field';
 import UpdateQuestionnaireConfigurationMutation from '../../mutations/UpdateQuestionnaireConfigurationMutation';
@@ -114,42 +115,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     ...values,
     id: undefined,
     questionnaireId: props.questionnaire.id,
-    questions: values.questions.map(question => {
-      const questionInput = {
-        question: {
-          ...question,
-          kind: undefined,
-          otherAllowed: question.isOtherAllowed,
-          randomQuestionChoices: question.isRandomQuestionChoices,
-          isOtherAllowed: undefined,
-          isRandomQuestionChoices: undefined,
-          jumps: question.jumps ? question.jumps : [],
-        },
-      };
-      if (multipleChoiceQuestions.indexOf(question.type) !== -1 && question.questionChoices) {
-        questionInput.question.questionChoices = question.questionChoices.map(choice => ({
-          ...choice,
-          kind: undefined,
-          image: choice.image ? choice.image.id : null,
-        }));
-        if (question.jumps) {
-          questionInput.question.jumps = question.jumps.map(jump => ({
-            ...jump,
-            origin: parseInt(jump.origin.id, 10),
-            destination: parseInt(jump.destination.id, 10),
-            conditions: jump.conditions
-              ? jump.conditions.map(condition => ({
-                  ...condition,
-                  question: parseInt(condition.question.id, 10),
-                  value: condition.value.id,
-                }))
-              : null,
-          }));
-        }
-      }
-
-      return questionInput;
-    }),
+    questions: submitQuestion(values.questions, multipleChoiceQuestions),
   };
 
   // $FlowFixMe

@@ -42,11 +42,13 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
       choiceList = arrayQuestions[selectedQuestion];
     }
 
-    return choiceList.map((questionChoice, questionChoiceIndex) => (
-      <option value={questionChoice.id}>
-        {questionChoiceIndex}. {questionChoice.title}
-      </option>
-    ));
+    return choiceList
+      ? choiceList.map((questionChoice, questionChoiceIndex) => (
+          <option value={questionChoice.id}>
+            {questionChoiceIndex}. {questionChoice.title}
+          </option>
+        ))
+      : null;
   };
 
   render() {
