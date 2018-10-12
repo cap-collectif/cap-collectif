@@ -1,7 +1,7 @@
 <?php
 namespace Capco\AppBundle\Enum;
 
-final class ReplyStatus
+final class ReplyPublicationStatus
 {
     public const PUBLISHED = 'PUBLISHED';
     public const DRAFT = 'DRAFT';

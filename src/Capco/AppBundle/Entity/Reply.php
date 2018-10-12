@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Enum\ReplyStatus;
+use Capco\AppBundle\Enum\ReplyPublicationStatus;
 use Capco\AppBundle\Traits\DraftableTrait;
 
 /**
