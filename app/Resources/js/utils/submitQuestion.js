@@ -32,6 +32,5 @@ export const submitQuestion = (questions, multipleChoiceQuestions) =>
         }));
       }
     }
-
     return questionInput;
   });

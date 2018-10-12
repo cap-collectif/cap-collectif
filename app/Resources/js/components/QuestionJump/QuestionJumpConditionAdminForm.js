@@ -75,7 +75,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
     });
     return (
       <div className="movable-element" key={index}>
-        <div style={{ marginBottom: '10px' }}>
+        <div className='mb-10'>
           <h4 className="panel-title">
             <i
               className="cap cap-android-menu"

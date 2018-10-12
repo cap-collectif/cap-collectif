@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import {FieldArray, formValueSelector} from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { ListGroup, Button } from 'react-bootstrap';
-import QuestionJumpConditionsAdminForm from './QuestionJumpConditionsAdminForm';
 import type {MapStateToProps} from "react-redux";
+import QuestionJumpConditionsAdminForm from './QuestionJumpConditionsAdminForm';
 import type {GlobalState} from "../../types";
 
 type Props = {
@@ -58,9 +58,7 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
                     question: {
                       id: currentQuestion.id
                     },
-                    value: {
-                      id: currentQuestion.questionChoices[0]
-                    },
+                    value: currentQuestion.questionChoices[0],
                     operator: 'IS'
                   },
                 ],

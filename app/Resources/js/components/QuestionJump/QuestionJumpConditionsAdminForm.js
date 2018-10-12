@@ -28,8 +28,7 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
 
     return (
       <div className="form-group" id="questions_choice_panel_personal">
-        {fields.map((memberConditions, index) => {
-          return (
+        {fields.map((memberConditions, index) => (
             <div>
               <FieldArray
                 component={QuestionJumpConditionAdminForm}
@@ -41,12 +40,11 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
               />
               {(fields.length > 1 && (index+1) < fields.length) && (
                 <p>
-                  <b><FormattedMessage id="and-or-conditions" /></b>
+                  <FormattedMessage id="and-or-conditions" tagName="b" />
                 </p>
               )}
               </div>
-          );
-        })}
+          ))}
           <div>
             <Button
               bsStyle="primary"
@@ -56,9 +54,7 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
                   question: {
                     id: currentJump.origin.id
                   },
-                  value: {
-                    id: arrayQuestions[currentJump.origin.id][0]
-                  },
+                  value: arrayQuestions[currentJump.origin.id][0],
                   operator: 'IS'
                 });
               }}>
