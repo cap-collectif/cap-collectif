@@ -1634,6 +1634,15 @@ type EventEdge {
   cursor: String!
 }
 
+# Properties by which events can be research
+enum EventTime {
+  # Allows finding a list of PASSED event
+  PASSED
+
+  # Allows finding a list of FUTURE event
+  FUTURE
+}
+
 # Require a firstname
 type FirstnameRequirement implements Node & Requirement {
   # The ID of an object
@@ -3388,8 +3397,8 @@ type Query {
     before: String
     last: Int
 
-    # "PASSED" for old, "FUTURE" for current and next, "" for all
-    time: String
+    # PASSED for old, FUTURE for current and next
+    time: EventTime
   ): EventConnection
   proposalForms: [ProposalForm]!
 

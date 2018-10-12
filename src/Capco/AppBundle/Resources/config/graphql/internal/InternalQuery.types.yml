@@ -37,9 +37,9 @@ InternalQuery:
         description: 'The list of events'
         args:
           time:
-            type: 'String'
-            description: '"PASSED" for old, "FUTURE" for current and next, "" for all'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventsResolver", [args])'
+            type: 'EventTime'
+            description: 'PASSED for old, FUTURE for current and next'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventsResolver", [args, serv("request_stack")])'
       proposalForms:
         description: 'Lookup forms.'
         type: '[ProposalForm]!'

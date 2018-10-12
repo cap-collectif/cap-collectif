@@ -8,6 +8,8 @@ use Elastica\Query;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
+use Capco\AppBundle\Entity\Event;
+use Psr\Log\LoggerInterface;
 
 class EventSearch extends Search
 {
@@ -24,22 +26,24 @@ class EventSearch extends Search
         'teaser.std',
     ];
 
-    private const OLD = 'old';
-    private const LAST = 'last';
+    private const OLD = 'PASSED';
+    private const LAST = 'FUTURE';
 
     private $eventRepository;
+    private $logger;
 
-    public function __construct(Index $index, EventRepository $eventRepository)
+    public function __construct(Index $index, EventRepository $eventRepository, LoggerInterface $logger)
     {
         parent::__construct($index);
         $this->eventRepository = $eventRepository;
+        $this->logger = $logger;
         $this->type = 'event';
     }
 
     public function searchEvents(
         int $offset,
         int $limit,
-        $order = null,
+        ?string $order = null,
         $terms,
         array $providedFilters,
         string $seed
@@ -53,8 +57,13 @@ class EventSearch extends Search
         );
 
         $filters = $this->getFilters($providedFilters);
+
         foreach ($filters as $key => $value) {
-            $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+            if ($key == 'endAt' || $key == 'startAt') {
+                $boolQuery->addMust(new Query\Range($key, $value));
+            } else {
+                $boolQuery->addMust(new Term([$key => ['value' => $value]]));
+            }
         }
         $boolQuery->addMust(new Exists('id'));
 
@@ -63,30 +72,23 @@ class EventSearch extends Search
         } else {
             $query = new Query($boolQuery);
             if ($order) {
-                $query->setSort(
-                    $this->getSort(
-                        $order,
-                        $providedFilters[self::LAST] ?? $providedFilters[self::OLD]
-                    )
-                );
+                $query->setSort($this->getSort($order));
             }
         }
 
-        $query
-            ->setSource(['id'])
-            ->setFrom($offset)
-            ->setSize($limit);
+        $query->setSource(['id'])->setFrom($offset)->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
+        $events = $this->getHydratedResults(
+            array_map(
+                function (Result $result) {
+                    return $result->getData()['id'];
+                },
+                $resultSet->getResults()
+            )
+        );
 
         return [
-            'events' => $this->getHydratedResults(
-                array_map(
-                    function (Result $result) {
-                        return $result->getData()['id'];
-                    },
-                    $resultSet->getResults()
-                )
-            ),
+            'events' => $events,
             'count' => $resultSet->getTotalHits(),
             'order' => $order,
         ];
@@ -100,7 +102,7 @@ class EventSearch extends Search
             array_filter(
                 array_map(
                     function (string $id) {
-                        return $this->eventRepository->findOneBy(['id' => $id, 'deletedAt' => null]);
+                        return $this->eventRepository->findOneBy(['id' => $id, 'isEnabled' => true]);
                     },
                     $ids
                 ),
@@ -137,7 +139,24 @@ class EventSearch extends Search
     private function getFilters(array $providedFilters): array
     {
         $filters = [];
-
+        $now = "now/d";
+        if (isset($providedFilters['time'])) {
+            switch ($providedFilters['time']) {
+                // PASSED only
+                case self::OLD:
+                    $filters['endAt'] = ['lt' => $now];
+                    $filters['startAt'] = ['lt' => $now];
+                    break;
+                // FUTURE and current
+                case self::LAST:
+                    $filters['endAt'] = ['gte' => $now];
+                    $filters['startAt'] = ['lte' => $now];
+                    break;
+                // FUTURE and PASSED
+                default:
+                    break;
+            }
+        }
         if (isset($providedFilters['themes'])) {
             $filters['theme.id'] = $providedFilters['themes'];
         }

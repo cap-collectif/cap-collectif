@@ -51,7 +51,9 @@ class EventsResolver implements ResolverInterface
                     if ($args->offsetExists('project')) {
                         $filters['projects'] = $args->offsetGet('project');
                     }
-
+                    if ($args->offsetExists('time')) {
+                        $filters['time'] = $args->offsetGet('time');
+                    }
                     $seed = Text::random();
 
                     $results = $this->eventSearch->searchEvents(

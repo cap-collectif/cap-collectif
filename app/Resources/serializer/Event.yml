@@ -19,11 +19,11 @@ Capco\AppBundle\Entity\Event:
     lat:
       expose: true
       type: double
-      groups: [Events]
+      groups: [Events,Elasticsearch]
     lng:
       expose: true
       type: double
-      groups: [Events]
+      groups: [Events,Elasticsearch]
     address:
       expose: true
       type: string
@@ -66,12 +66,12 @@ Capco\AppBundle\Entity\Event:
     startAt:
       expose: true
       type: DateTime
-      groups: [Default]
+      groups: [Default, Elasticsearch]
       serialized_name: startAt
     endAt:
       expose: true
       type: DateTime
-      groups: [Default]
+      groups: [Default, Elasticsearch]
       serialized_name: endAt
     media:
       expose: true
