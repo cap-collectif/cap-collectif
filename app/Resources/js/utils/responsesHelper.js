@@ -530,6 +530,7 @@ export const renderResponses = ({
   form,
   change,
   disabled,
+  reply,
 }: FieldArrayProps & {
   questions: Questions,
   responses: ResponsesInReduxForm,
@@ -537,6 +538,7 @@ export const renderResponses = ({
   form: string,
   intl: IntlShape,
   disabled: boolean,
+  reply: any,
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);

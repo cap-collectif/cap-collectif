@@ -177,6 +177,7 @@ export class ReplyForm extends React.Component<Props> {
                 questions={questionnaire.questions}
                 intl={intl}
                 disabled={disabled}
+                reply={reply}
               />
               {questionnaire.anonymousAllowed && (
                 <div>
@@ -213,7 +214,7 @@ export class ReplyForm extends React.Component<Props> {
                     id={`${form}-submit-create-reply`}
                     bsStyle="info"
                     disabled={pristine || invalid || submitting || disabled}
-                    label={submitting ? 'global.loading' : 'global.validate'}
+                    label={submitting ? 'global.loading' : 'global.save'}
                     onSubmit={() => {
                       dispatch(changeRedux(form, 'draft', false));
                     }}
@@ -268,6 +269,7 @@ export default createFragmentContainer(container, {
       id
       private
       publicationStatus
+      draft
       responses {
         question {
           id
