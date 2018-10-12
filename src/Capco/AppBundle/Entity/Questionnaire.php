@@ -75,12 +75,12 @@ class Questionnaire implements DisplayableInBOInterface
      * @ORM\Column(name="district_help_text", type="string", length=255, nullable=true)
      */
     private $districtHelpText;
-
+    
     /**
      * @var string
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
      */
-    private $type = QuestionnaireType::VOTING;
+    private $type = QuestionnaireType::SURVEY;
 
     /**
      * @var bool

@@ -6,8 +6,9 @@ import { ToggleButton, Button, Modal } from 'react-bootstrap';
 import { reduxForm, Field, change, type FormProps } from 'redux-form';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
-import component from '../Form/Field';
+import * as FormField from '../Form/Field';
 import CreateQuestionnaireMutation from '../../mutations/CreateQuestionnaireMutation';
+import QuestionnaireAdminCreateButtonType from './QuestionnaireAdminCreateButtonType';
 
 const formName = 'questionnaire-form-admin-create';
 
@@ -79,6 +80,7 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+<<<<<<< HEAD
             <form onSubmit={() => handleSubmit}>
               <Field type="radio-buttons" id="questionnaire_type" name="type" component={component}>
                 <ToggleButton
@@ -92,10 +94,17 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
                   <FormattedMessage id="project.types.questionnaire" />
                 </ToggleButton>
               </Field>
+=======
+            <form onSubmit={handleSubmit}>
+              <QuestionnaireAdminCreateButtonType
+                type={this.state.type}
+                handleClick={this.changeType}
+              />
+>>>>>>> [5673-DRAFT] WIP
               <Field
                 name="title"
                 label={<FormattedMessage id="admin.fields.questionnaire.title" />}
-                component={component}
+                component={FormField.default}
                 type="text"
                 id="questionnaire_title"
               />

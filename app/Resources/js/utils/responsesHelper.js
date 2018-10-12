@@ -530,6 +530,7 @@ export const renderResponses = ({
   form,
   change,
   disabled,
+  reply,
 }: FieldArrayProps & {
   questions: Questions,
   responses: ResponsesInReduxForm,
@@ -537,6 +538,7 @@ export const renderResponses = ({
   form: string,
   intl: IntlShape,
   disabled: boolean,
+  reply: any,
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
@@ -551,10 +553,7 @@ export const renderResponses = ({
         if (!availableQuestions.includes(field.id)) {
           isAvailableQuestion = false;
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> [5673-DRAFT] Fix errors in rebase.
+        const currentReplyValue = reply && reply.responses ? reply.responses[index].value : null;
         // We want to overidde the HTML verification of the input type number
         const isOtherAllowed = field.isOtherAllowed;
 
@@ -684,25 +683,22 @@ export const renderResponses = ({
               }
             }
             return (
-              <div className={isAvailableQuestion === false && 'visible-print-block'}>
-                <PrivateBox key={field.id} show={field.private}>
-                  <Field
-                    name={`${member}.value`}
-                    id={`${form}-${member}`}
-                    type={field.type}
-                    component={component}
-                    validationRule={field.validationRule}
-                    description={field.description}
-                    help={field.helpText}
-                    isOtherAllowed={isOtherAllowed}
-                    placeholder="reply.your_response"
-                    choices={choices}
-                    label={label}
-                    disabled={disabled}
-                  />
-                  <ConditionalJumps jumps={field.jumps} />
-                </PrivateBox>
-              </div>
+              <ProposalPrivateField key={field.id} show={field.private}>
+                <Field
+                  name={`${member}.value`}
+                  id={`${form}-${member}`}
+                  type={inputType}
+                  component={component}
+                  description={field.description}
+                  help={field.helpText}
+                  isOtherAllowed={isOtherAllowed}
+                  placeholder="reply.your_response"
+                  choices={choices}
+                  label={label}
+                  disabled={disabled}
+                  value={currentReplyValue}
+                />
+              </ProposalPrivateField>
             );
           }
         }
