@@ -292,7 +292,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
             $lat = (float) $lat;
         }
 
-        $this->lat = $lat;
+        $this->lat = str_replace(',', '.', $lat);
 
         return $this;
     }
@@ -307,6 +307,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         if (\is_string($lng)) {
             $lng = (float) $lng;
         }
+        $this->lng = str_replace(',', '.', $lng);
         $this->lng = $lng;
 
         return $this;
