@@ -3399,6 +3399,18 @@ type Query {
 
     # PASSED for old, FUTURE for current and next
     time: EventTime
+
+    # Search with themeId
+    themes: ID
+
+    # Search with projectId
+    projects: ID
+
+    # Search with authorId
+    author: ID
+
+    # Search by term
+    term: String
   ): EventConnection
   proposalForms: [ProposalForm]!
 

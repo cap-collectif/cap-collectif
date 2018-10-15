@@ -118,12 +118,12 @@ mappings:
       startAt: { type: date }
       endAt: { type: date }
       author: *Author
-      theme:
+      themes:
         type: object
         properties:
           id: { type: keyword }
           slug: { type: keyword }
-      project:
+      projects:
         type: object
         properties:
           id: { type: keyword }

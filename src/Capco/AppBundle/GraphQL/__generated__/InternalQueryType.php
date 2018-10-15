@@ -182,6 +182,26 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                             'type' => $globalVariable->get('typeResolver')->resolve('EventTime'),
                             'description' => 'PASSED for old, FUTURE for current and next',
                         ],
+                        [
+                            'name' => 'themes',
+                            'type' => Type::id(),
+                            'description' => 'Search with themeId',
+                        ],
+                        [
+                            'name' => 'projects',
+                            'type' => Type::id(),
+                            'description' => 'Search with projectId',
+                        ],
+                        [
+                            'name' => 'author',
+                            'type' => Type::id(),
+                            'description' => 'Search with authorId',
+                        ],
+                        [
+                            'name' => 'term',
+                            'type' => Type::string(),
+                            'description' => 'Search by term',
+                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventsResolver", array(0 => $args, 1 => $globalVariable->get('container')->get("request_stack"))]);

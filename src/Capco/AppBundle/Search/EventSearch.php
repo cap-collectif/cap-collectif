@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Helper\ElasticsearchHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -59,7 +60,7 @@ class EventSearch extends Search
         $filters = $this->getFilters($providedFilters);
 
         foreach ($filters as $key => $value) {
-            if ($key == 'endAt' || $key == 'startAt') {
+            if ('endAt' == $key|| 'startAt' == $key) {
                 $boolQuery->addMust(new Query\Range($key, $value));
             } else {
                 $boolQuery->addMust(new Term([$key => ['value' => $value]]));
@@ -158,13 +159,13 @@ class EventSearch extends Search
             }
         }
         if (isset($providedFilters['themes'])) {
-            $filters['theme.id'] = $providedFilters['themes'];
+            $filters['themes.id'] = $providedFilters['themes'];
         }
         if (isset($providedFilters['author'])) {
-            $filters['author.id'] = $providedFilters['author'];
+            $filters['Author.id'] = $providedFilters['author'];
         }
-        if (isset($providedFilters['project'])) {
-            $filters['project.id'] = $providedFilters['project'];
+        if (isset($providedFilters['projects'])) {
+            $filters['projects.id'] = $providedFilters['projects'];
         }
 
         return $filters;

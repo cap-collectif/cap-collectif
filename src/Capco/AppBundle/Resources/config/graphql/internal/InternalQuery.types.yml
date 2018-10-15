@@ -39,6 +39,18 @@ InternalQuery:
           time:
             type: 'EventTime'
             description: 'PASSED for old, FUTURE for current and next'
+          themes:
+            type: 'ID'
+            description: 'Search with themeId'
+          projects:
+            type: 'ID'
+            description: 'Search with projectId'
+          author:
+            type: 'ID'
+            description: 'Search with authorId'
+          term:
+            type: 'String'
+            description: 'Search by term'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventsResolver", [args, serv("request_stack")])'
       proposalForms:
         description: 'Lookup forms.'

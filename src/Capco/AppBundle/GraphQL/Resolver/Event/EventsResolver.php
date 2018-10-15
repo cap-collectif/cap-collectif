@@ -45,15 +45,16 @@ class EventsResolver implements ResolverInterface
                     $order
                 ) {
                     $filters = [];
-                    if ($args->offsetExists('theme')) {
-                        $filters['themes'] = $args->offsetGet('theme');
+                    if ($args->offsetExists('themes')) {
+                        $filters['themes'] = $args->offsetGet('themes');
                     }
-                    if ($args->offsetExists('project')) {
-                        $filters['projects'] = $args->offsetGet('project');
+                    if ($args->offsetExists('projects')) {
+                        $filters['projects'] = $args->offsetGet('projects');
                     }
                     if ($args->offsetExists('time')) {
                         $filters['time'] = $args->offsetGet('time');
                     }
+
                     $seed = Text::random();
 
                     $results = $this->eventSearch->searchEvents(
