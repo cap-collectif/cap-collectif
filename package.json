@@ -9,9 +9,10 @@
     "flow:coverage": "flow-coverage-report",
     "build": "NODE_ENV=development ./node_modules/brunch/bin/brunch build && webpack --config webpack/webpack.client.js",
     "build:analyzer": "NODE_ENV=development webpack --config webpack/webpack.client.analyzer.js",
+    "build:analyzer:prod": "NODE_ENV=production webpack --config webpack/webpack.prod.analyzer.js",
     "build:watch": "NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
     "build:watch:js": "NODE_ENV=development webpack --config webpack/webpack.client.hot.js",
-    "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build -p && webpack --config webpack/webpack.client.js",
+    "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build -p && webpack --config webpack/webpack.prod.client.js",
     "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-relay-schema": "relay-compiler --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums",
@@ -98,11 +99,11 @@
     },
     {
       "path": "./web/js/app.js",
-      "maxSize": "350 KB"
+      "maxSize": "840 KB"
     },
     {
       "path": "./web/js/vendor.js",
-      "maxSize": "860 KB"
+      "maxSize": "260 KB"
     }
   ],
   "prettier": {
@@ -216,6 +217,7 @@
     "lodash": "^4.17.4",
     "mailcheck": "^1.1.1",
     "moment": "^2.11.2",
+    "moment-locales-webpack-plugin": "^1.0.7",
     "moment-timezone": "^0.5.21",
     "points-cluster": "^0.1.4",
     "pre-commit": "^1.2.2",
