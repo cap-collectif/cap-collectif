@@ -26,6 +26,7 @@ Scenario: User wants to add a reply
     "variables": {
       "input": {
         "questionnaireId": "questionnaire1",
+        "draft": false,
         "responses": [
             {
               "question": "2",
