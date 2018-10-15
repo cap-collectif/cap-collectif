@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class MultipleChoiceQuestionType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'MultipleChoiceQuestion';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -142,23 +141,22 @@ final class MultipleChoiceQuestionType extends ObjectType implements GeneratedTy
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
+                            'description' => null,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

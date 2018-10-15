@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ArgumentConnectionType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'ArgumentConnection';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

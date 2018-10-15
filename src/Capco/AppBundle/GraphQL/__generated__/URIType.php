@@ -12,14 +12,13 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class URIType extends CustomScalarType implements GeneratedTypeInterface
 {
-    const NAME = 'URI';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'URI',
-            'description' => 'An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string.',
+            'description' => null,
             'scalarType' => null,
             'serialize' => function () use ($globalVariable) {
                 return call_user_func_array(['Capco\\AppBundle\\GraphQL\\Type\\URIType', 'serialize'], func_get_args());

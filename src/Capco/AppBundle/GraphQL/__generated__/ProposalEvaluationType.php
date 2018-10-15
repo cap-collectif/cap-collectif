@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ProposalEvaluationType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'ProposalEvaluation';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

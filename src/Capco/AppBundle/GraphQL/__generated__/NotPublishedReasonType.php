@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class NotPublishedReasonType extends EnumType implements GeneratedTypeInterface
 {
-    const NAME = 'NotPublishedReason';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

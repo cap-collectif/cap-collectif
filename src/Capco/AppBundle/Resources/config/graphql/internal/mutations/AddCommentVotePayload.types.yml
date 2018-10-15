@@ -1,8 +1,0 @@
-AddCommentVotePayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      voteEdge:
-        type: 'CommentVoteEdge'
-      viewer:
-        type: 'InternalUser!'

@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class CommentOrderFieldType extends EnumType implements GeneratedTypeInterface
 {
-    const NAME = 'CommentOrderField';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class JSONType extends CustomScalarType implements GeneratedTypeInterface
 {
-    const NAME = 'JSON';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

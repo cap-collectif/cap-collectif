@@ -120,6 +120,7 @@ class AddArgumentMutation implements MutationInterface
             new Message(json_encode(['argumentId' => $argument->getId()]))
         );
 
+        // $totalCount = $this->followerRepository->countFollowersOfProposal($proposal);
         $totalCount = 0;
         $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $argument);
 

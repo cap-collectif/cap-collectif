@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class GroupEdgeType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'GroupEdge';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

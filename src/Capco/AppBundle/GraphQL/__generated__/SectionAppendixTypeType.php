@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class SectionAppendixTypeType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'SectionAppendixType';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

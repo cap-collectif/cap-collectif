@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class FollowerOrderFieldType extends EnumType implements GeneratedTypeInterface
 {
-    const NAME = 'FollowerOrderField';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

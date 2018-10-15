@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class DeleteCommentInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'DeleteCommentInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class LastnameRequirementType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'LastnameRequirement';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

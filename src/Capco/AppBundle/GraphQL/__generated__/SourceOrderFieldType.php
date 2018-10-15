@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class SourceOrderFieldType extends EnumType implements GeneratedTypeInterface
 {
-    const NAME = 'SourceOrderField';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

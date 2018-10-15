@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class VersionOrderFieldType extends EnumType implements GeneratedTypeInterface
 {
-    const NAME = 'VersionOrderField';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

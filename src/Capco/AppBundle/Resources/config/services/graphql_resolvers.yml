@@ -3,9 +3,6 @@ services:
     autowire: true
     autoconfigure: true
     public: false
-  _instanceof:
-    Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface:
-      tags: ['overblog_graphql.resolver']
 
   Capco\AppBundle\GraphQL\Resolver\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Resolver/*'
@@ -160,6 +157,11 @@ services:
           alias: 'consultation_contribuable',
           method: 'resolveConsultationIsContribuable',
         }
+      - {
+          name: overblog_graphql.resolver,
+          alias: 'proposition_updatedAt',
+          method: 'resolveUpdatedAt',
+        }
       - { name: overblog_graphql.resolver, alias: 'argument_url', method: 'resolveArgumentUrl' }
       - {
           name: overblog_graphql.resolver,
@@ -179,11 +181,14 @@ services:
     tags:
       - { name: overblog_graphql.resolver, alias: 'user_email', method: 'resolveEmail' }
       - { name: overblog_graphql.resolver, alias: 'user_show_url', method: 'resolveShowUrl' }
+      - { name: overblog_graphql.resolver, alias: 'user_updatedAt', method: 'resolveUpdatedAt' }
+      - { name: overblog_graphql.resolver, alias: 'user_lastLogin', method: 'resolveLastLogin' }
       - {
           name: overblog_graphql.resolver,
           alias: 'user_phoneConfirmationSentAt',
           method: 'resolvePhoneConfirmationSentAt',
         }
+      - { name: overblog_graphql.resolver, alias: 'user_dateOfBirth', method: 'resolveDateOfBirth' }
       - { name: overblog_graphql.resolver, alias: 'user_gender', method: 'resolveGender' }
       - { name: overblog_graphql.resolver, alias: 'user_rolesText', method: 'resolveRolesText' }
       - {

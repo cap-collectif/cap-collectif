@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class NotificationsConfigurationType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'NotificationsConfiguration';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

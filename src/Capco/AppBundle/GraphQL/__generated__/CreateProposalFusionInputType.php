@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class CreateProposalFusionInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'CreateProposalFusionInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

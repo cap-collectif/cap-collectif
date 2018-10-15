@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ProposalOrderFieldType extends EnumType implements GeneratedTypeInterface
 {
-    const NAME = 'ProposalOrderField';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

@@ -7,7 +7,7 @@ QuestionnaireStep:
       kind:
         resolve: 'questionnaire'
       contributors:
-        type: 'InternalUserConnection!'
+        type: 'UserConnection!'
         description: 'A list of contributor associated with the step.'
         argsBuilder: 'Relay::Connection'
         resolve:

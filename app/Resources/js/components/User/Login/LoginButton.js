@@ -49,7 +49,8 @@ export class LoginButton extends React.Component<Props> {
                 '_blank',
                 `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`,
               );
-            } else if (loginWithOpenId) {
+            }
+            if (loginWithOpenId) {
               window.location.href = `/login/openid?_destination=${window && window.location.href}`;
             } else {
               dispatch(showLoginModal());

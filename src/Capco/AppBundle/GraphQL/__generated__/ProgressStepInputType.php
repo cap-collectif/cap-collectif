@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ProgressStepInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'ProgressStepInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class FollowerConnectionType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'FollowerConnection';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

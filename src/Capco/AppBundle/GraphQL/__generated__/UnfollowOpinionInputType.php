@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class UnfollowOpinionInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'UnfollowOpinionInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class MediaEdgeType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'MediaEdge';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

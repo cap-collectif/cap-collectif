@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ArgumentOrderFieldType extends EnumType implements GeneratedTypeInterface
 {
-    const NAME = 'ArgumentOrderField';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

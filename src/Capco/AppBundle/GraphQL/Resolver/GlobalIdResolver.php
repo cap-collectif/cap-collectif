@@ -38,8 +38,10 @@ class GlobalIdResolver
         return $results;
     }
 
-    public function resolve(string $uuid, $user)
-    {
+    public function resolve(
+        string $uuid,
+        $user // : Node
+    ) {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         if ($user instanceof User && $user->isAdmin()) {
             // If user is an admin, we allow to retrieve softdeleted nodes

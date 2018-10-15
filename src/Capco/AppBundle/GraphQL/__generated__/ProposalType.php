@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ProposalType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'Proposal';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -30,23 +29,22 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
+                            'description' => null,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'orderBy',
@@ -151,7 +149,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
@@ -162,12 +160,12 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'orderBy',
@@ -186,64 +184,8 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'published' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->isPublished();
-                    },
-                    'description' => '`true` if the object is published.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'publishableUntil' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->getPublishableUntil();
-                    },
-                    'description' => 'Identifies when the entity can no more be published.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'publishedAt' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->getPublishedAt();
-                    },
-                    'description' => 'Identifies when the entity was published at.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'notPublishedReason' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('NotPublishedReason'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
-                    },
-                    'description' => 'Reason that the entity is not published.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'followers' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUserConnection')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('UserConnection')),
                     'args' => [
                         [
                             'name' => 'after',
@@ -314,6 +256,62 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
+                ],
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->isPublished();
+                    },
+                    'description' => '`true` if the object is published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'publishableUntil' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishableUntil();
+                    },
+                    'description' => 'Identifies when the entity can no more be published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'publishedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishedAt();
+                    },
+                    'description' => 'Identifies when the entity was published at.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'notPublishedReason' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('NotPublishedReason'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
+                    },
+                    'description' => 'Reason that the entity is not published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
                 ],
                 'trashed' => [
                     'type' => Type::nonNull(Type::boolean()),
@@ -437,7 +435,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
@@ -448,12 +446,12 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'orderBy',
@@ -516,7 +514,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'likers' => [
-                    'type' => Type::nonNull(Type::listOf(Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')))),
+                    'type' => Type::nonNull(Type::listOf(Type::nonNull($globalVariable->get('typeResolver')->resolve('User')))),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -628,7 +626,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -664,7 +662,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'updatedBy' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('InternalUser'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('User'),
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -821,7 +819,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
@@ -832,12 +830,12 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'orderBy',

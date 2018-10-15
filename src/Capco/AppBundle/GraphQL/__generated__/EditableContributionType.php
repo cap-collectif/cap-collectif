@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class EditableContributionType extends InterfaceType implements GeneratedTypeInterface
 {
-    const NAME = 'EditableContribution';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

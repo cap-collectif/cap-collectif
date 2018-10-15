@@ -16,7 +16,8 @@ Scenario: Logged in admin wants edit a proposal content
   And I attach the file "/var/www/features/files/document.pdf" to "proposal-admin-edit-responses[3]_field"
   And I wait 3 seconds
   Then I save current admin content proposal
-  And I wait ".alert__form_succeeded-message" to appear on current page
+  And I wait 1 seconds
+  Then I should see "global.saved"
 
 @database @elasticsearch
 Scenario: Logged in admin wants edit a proposal advancement tab
@@ -24,10 +25,11 @@ Scenario: Logged in admin wants edit a proposal advancement tab
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal advancement tab
   And I toggle a proposal advancement "proposal advancement selection"
-  And I wait "#proposal-admin-page-tabs-pane-2" to appear on current page
+  And I wait 3 seconds
   And I change the proposal advancement select "proposal advancement selection status" with option "Soumis au vote"
   Then I save current proposal admin advancement
-  And I wait ".alert__form_succeeded-message" to appear on current page
+  And I wait 2 seconds
+  Then I should see "global.saved"
 
 @database @elasticsearch
 Scenario: Logged in admin wants to add some analyst groups
@@ -36,7 +38,8 @@ Scenario: Logged in admin wants to add some analyst groups
   Then I go to the admin proposal evaluation tab
   And I fill "ag" and "Utilisateurs" to the analyst select
   And I save the current proposal evaluation analysts groupes
-  And I wait ".alert__form_succeeded-message" to appear on current page
+  And I wait 2 seconds
+  Then I should see "global.saved"
 
 @database @elasticsearch
 Scenario: Logged in admin wants to evaluate a proposal
@@ -51,7 +54,8 @@ Scenario: Logged in admin wants to evaluate a proposal
   And I check "Je dis oui" in the proposal definition resume
   And I wait 1 seconds
   And I save the custom evaluation
-  And I wait ".alert__form_succeeded-message" to appear on current page
+  And I wait 2 seconds
+  Then I should see "global.saved"
 
 @database @elasticsearch
 Scenario: Logged in admin, wants to change the proposal's status
@@ -60,7 +64,8 @@ Scenario: Logged in admin, wants to change the proposal's status
   Then I go to the admin proposal status tab
   And I click on DRAFT status
   And I save the proposal's status
-  And I wait ".alert__form_succeeded-message" to appear on current page
+  And I wait 2 seconds
+  Then I should see "global.saved"
 
 @database @elasticsearch
 Scenario: Logged in admin, wants to delete a proposal and check if followers are not present
@@ -85,7 +90,8 @@ Scenario: Logged in admin, wants to delete a proposal and re published it
   And I wait 2 seconds
   And I click on PUBLISHED status
   And I save the proposal's status
-  And I wait ".alert__form_succeeded-message" to appear on current page
+  And I wait 2 seconds
+  Then I should see "global.saved"
 
 @database @elasticsearch
 Scenario: Logged in admin, wants to view the proposal's followers

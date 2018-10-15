@@ -3,14 +3,10 @@ services:
     autowire: true
     autoconfigure: true
     public: false
-  _instanceof:
-    Overblog\GraphQLBundle\Definition\Resolver\MutationInterface:
-      tags: ['overblog_graphql.mutation']
 
   Capco\AppBundle\GraphQL\Mutation\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Mutation/*'
-    exclude:
-      '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Mutation/{UserNotificationsConfigurationMutation.php,DistrictMutation.php,ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php,ProposalEvaluationMutation.php}'
+    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/GraphQL/Mutation/{UserNotificationsConfigurationMutation.php,DistrictMutation.php,ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php,ProposalEvaluationMutation.php}'
 
   capco.mutation.user_notifications:
     class: Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation

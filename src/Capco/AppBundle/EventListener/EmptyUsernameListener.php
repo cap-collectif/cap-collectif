@@ -40,10 +40,7 @@ class EmptyUsernameListener
         $route = $request->get('_route');
 
         // Skip if route is allowed
-        $routes = array_merge(ShieldListener::AVAILABLE_ROUTES, [
-            'graphql_endpoint',
-            'graphql_multiple_endpoint',
-        ]);
+        $routes = array_merge(ShieldListener::AVAILABLE_ROUTES, ['overblog_graphql_endpoint']);
         if (\in_array($route, $routes, true)) {
             return;
         }
@@ -53,7 +50,7 @@ class EmptyUsernameListener
         }
 
         $response = new Response(
-            $this->templating->render('CapcoAppBundle:Default:choose_a_username.html.twig')
+          $this->templating->render('CapcoAppBundle:Default:choose_a_username.html.twig')
         );
         $event->setResponse($response);
     }

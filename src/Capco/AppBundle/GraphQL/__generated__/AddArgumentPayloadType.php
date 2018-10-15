@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class AddArgumentPayloadType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'AddArgumentPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

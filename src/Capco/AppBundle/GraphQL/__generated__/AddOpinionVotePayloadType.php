@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class AddOpinionVotePayloadType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'AddOpinionVotePayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -48,7 +47,7 @@ final class AddOpinionVotePayloadType extends ObjectType implements GeneratedTyp
                     'access' => null,
                 ],
                 'viewer' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
                     'args' => [
                     ],
                     'resolve' => null,

@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class AddUsersToGroupFromEmailPayloadType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'AddUsersToGroupFromEmailPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -24,7 +23,7 @@ final class AddUsersToGroupFromEmailPayloadType extends ObjectType implements Ge
             'fields' => function () use ($globalVariable) {
                 return [
                 'importedUsers' => [
-                    'type' => Type::nonNull(Type::listOf($globalVariable->get('typeResolver')->resolve('InternalUser'))),
+                    'type' => Type::nonNull(Type::listOf($globalVariable->get('typeResolver')->resolve('User'))),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -48,7 +47,7 @@ final class AddUsersToGroupFromEmailPayloadType extends ObjectType implements Ge
                     'access' => null,
                 ],
                 'alreadyImportedUsers' => [
-                    'type' => Type::nonNull(Type::listOf($globalVariable->get('typeResolver')->resolve('InternalUser'))),
+                    'type' => Type::nonNull(Type::listOf($globalVariable->get('typeResolver')->resolve('User'))),
                     'args' => [
                     ],
                     'resolve' => null,

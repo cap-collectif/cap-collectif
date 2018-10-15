@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class FollowerEdgeType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'FollowerEdge';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -24,7 +23,7 @@ final class FollowerEdgeType extends ObjectType implements GeneratedTypeInterfac
             'fields' => function () use ($globalVariable) {
                 return [
                 'node' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
                     'args' => [
                     ],
                     'resolve' => null,

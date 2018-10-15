@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ReportConnectionType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'ReportConnection';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

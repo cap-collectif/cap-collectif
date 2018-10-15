@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class AddProposalVoteInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'AddProposalVoteInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

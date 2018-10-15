@@ -14,7 +14,7 @@ Group:
         type: 'String'
         description: 'Identifies the description of the group.'
       users:
-        type: 'InternalUserConnection!'
+        type: 'UserConnection!'
         argsBuilder: 'Relay::Connection'
         resolve: "@=resolver('group_users_connection', [value, args])"
       createdAt:

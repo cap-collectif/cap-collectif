@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class DeleteCommentPayloadType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'DeleteCommentPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

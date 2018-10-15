@@ -54,6 +54,7 @@ ProposalForm:
         args:
           order:
             type: 'DistrictOrderField'
+            defaultValue: 'ALPHABETICAL'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormDistrictsResolver", [value, args["order"]])'
       districtMandatory:

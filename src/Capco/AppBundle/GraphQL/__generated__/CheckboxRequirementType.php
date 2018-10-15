@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class CheckboxRequirementType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'CheckboxRequirement';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

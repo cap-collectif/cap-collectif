@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class MediaResponseType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'MediaResponse';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

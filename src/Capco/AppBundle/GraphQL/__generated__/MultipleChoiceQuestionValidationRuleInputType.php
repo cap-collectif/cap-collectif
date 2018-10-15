@@ -13,7 +13,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class MultipleChoiceQuestionValidationRuleInputType extends InputObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'MultipleChoiceQuestionValidationRuleInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

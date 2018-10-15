@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ProposalTrashedStatusType extends EnumType implements GeneratedTypeInterface
 {
-    const NAME = 'ProposalTrashedStatus';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

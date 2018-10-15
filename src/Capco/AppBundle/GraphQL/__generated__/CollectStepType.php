@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class CollectStepType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'CollectStep';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -29,7 +28,7 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The ID of an object',
+                    'description' => 'The ID of the step',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -55,7 +54,7 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The title of the step.',
+                    'description' => 'The title of the step',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -96,7 +95,7 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
@@ -107,12 +106,12 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'district',
@@ -189,23 +188,22 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
+                            'description' => null,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -226,23 +224,22 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
+                            'description' => null,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -357,7 +354,7 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
@@ -368,12 +365,12 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'orderBy',
@@ -433,28 +430,27 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'contributors' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUserConnection')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('UserConnection')),
                     'args' => [
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
+                            'description' => null,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -473,23 +469,22 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
+                            'description' => null,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

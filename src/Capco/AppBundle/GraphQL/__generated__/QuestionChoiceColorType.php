@@ -12,7 +12,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class QuestionChoiceColorType extends EnumType implements GeneratedTypeInterface
 {
-    const NAME = 'QuestionChoiceColor';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

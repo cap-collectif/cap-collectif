@@ -26,7 +26,7 @@ class ParticipantTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('NotRegistered');
         }
         if ($node instanceof User) {
-            return $this->typeResolver->resolve('InternalUser');
+            return $this->typeResolver->resolve('User');
         }
 
         throw new UserError('Could not resolve type of Participant.');

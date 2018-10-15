@@ -14,7 +14,6 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ArgumentType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'Argument';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -110,7 +109,7 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
@@ -121,12 +120,12 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'orderBy',
@@ -146,7 +145,7 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -303,23 +302,22 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
+                            'description' => null,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                            'description' => null,
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
+                            'description' => null,
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

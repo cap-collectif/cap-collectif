@@ -633,8 +633,6 @@ exercise_html_purifier:
 hslavich_simplesamlphp:
   sp: '%saml_sp%'
 
-overblog_graphiql:
-  endpoint_resolver: Capco\AppBundle\GraphQL\EndpointResolver
 overblog_dataloader:
   defaults:
     promise_adapter: 'overblog_dataloader.webonyx_graphql_sync_promise_adapter'
@@ -660,24 +658,12 @@ overblog_graphql:
     cache_dir: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/__generated__'
     class_namespace: "Capco\\AppBundle\\GraphQL\\__GENERATED__"
     schema:
-      # This is our public schema (considered default)
-      public:
-        query: PublicQuery
-        # mutation: PublicMutation
-        # The name of extra types that can not be detected
-        # by graphql-php during static schema analysis.
-        # These types names should be explicitly declare here
-        types:
-          - PublicConsultation
-          - PublicQuestionnaire
-      # This is our internal schema (used by our clients)
-      internal:
-        query: InternalQuery
-        mutation: InternalMutation
-        # The name of extra types that can not be detected
-        # by graphql-php during static schema analysis.
-        # These types names should be explicitly declare here
-        types:
+      query: Query
+      mutation: Mutation
+      # the name of extra types that can not be detected
+      # by graphql-php during static schema analysis.
+      # These types names should be explicitly declare here
+      types:
           - Argument
           - AnswerOrPost
           - CheckboxRequirement
@@ -696,7 +682,7 @@ overblog_graphql:
           - ValueResponse
           - VersionVote
           - SectionQuestion
-          
+
 limenius_react:
   default_rendering: 'both'
   serverside_rendering:
