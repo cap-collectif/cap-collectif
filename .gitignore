@@ -69,9 +69,6 @@ Icon
 # PHPStorm configuration
 .idea
 
-# PHPStorm GraphQL plugin config file
-graphql.config.json
-
 # Sublime Text Project Manager
 *.sublime-project
 

@@ -10,8 +10,6 @@ const numberQuestion = {
   description: null,
   helpText: null,
   type: 'number',
-  jumps: [],
-  position: 1,
 };
 
 const textQuestion = {
@@ -22,17 +20,15 @@ const textQuestion = {
   description: null,
   helpText: null,
   type: 'textarea',
-  jumps: [],
-  position: 2,
 };
 
 const textReponse = {
-  question: '1',
+  questionId: '1',
   value: 'a',
 };
 
 const numberReponse = {
-  question: '2',
+  questionId: '2',
   value: '12',
 };
 

@@ -4,62 +4,74 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: Athlétisme
     position: 1
     question: '@multiplequestion1'
+
   questionchoice2:
     id: questionchoice2
     title: Natation
     position: 2
     question: '@multiplequestion1'
+
   questionchoice3:
     id: questionchoice3
     title: Sports collectifs
     position: 3
     question: '@multiplequestion1'
+
   questionchoice4:
     id: questionchoice4
     title: Sports individuels
     position: 4
     question: '@multiplequestion1'
+
   questionchoice5:
     id: questionchoice5
     title: Maxime Arrouard
     position: 1
     question: '@multiplequestion2'
+
   questionchoice6:
     id: questionchoice6
     title: Superman
     position: 2
     question: '@multiplequestion2'
+
   questionchoice7:
     id: questionchoice7
     title: Cyril Lage
     position: 3
     question: '@multiplequestion2'
+
   questionchoice8:
     id: questionchoice8
     title: Spylou Super Sayen
     position: 4
     question: '@multiplequestion2'
+
   questionchoice9:
     id: questionchoice9
     title: Trop fort (Mon sonotone est tout neuf)
     position: 1
     question: '@multiplequestion3'
+
   questionchoice10:
     id: questionchoice10
     title: Assez fort (Mon sonotone est mal réglé)
     position: 2
     question: '@multiplequestion3'
+
   questionchoice11:
     id: questionchoice11
     title: Pas assez fort (Mon sonotone est en panne)
     position: 3
     question: '@multiplequestion3'
+
   questionchoice12:
     id: questionchoice12
     title: Choix 1
     position: 1
     description: Description
     question: '@multiplequestion4'
+
   questionchoice13:
     id: questionchoice13
     title: Choix 2
@@ -67,336 +79,119 @@ Capco\AppBundle\Entity\QuestionChoice:
     description: Description
     image: '@MediaProject1'
     question: '@multiplequestion4'
+
   questionchoice14:
     id: questionchoice14
     title: Choix 3 avec un titre très long pour le test du rendu
     position: 3
     question: '@multiplequestion4'
+
   questionchoice15:
     id: questionchoice15
     title: Sangohan
     position: 3
     question: '@multiplequestion5'
+
   questionchoice16:
     id: questionchoice16
     title: Végéta
     position: 3
     question: '@multiplequestion5'
+
   questionchoice17:
     id: questionchoice17
     title: Logo 1
     position: 1
     image: '@MediaProject1'
     question: '@multiplequestion6'
+
   questionchoice18:
     id: questionchoice18
     title: Logo 2
     image: '@MediaProject2'
     position: 2
     question: '@multiplequestion6'
+
   questionchoice19:
     id: questionchoice19
     title: Oui
     color: '#5bc0de'
     position: 1
     question: '@multiplequestion7'
+
   questionchoice20:
     id: questionchoice20
     title: Il bluffe
     color: '#5cb85c'
     position: 2
     question: '@multiplequestion7'
+
   questionchoice21:
     id: questionchoice21
     title: Du pur bullshit
     color: '#5cb85c'
     position: 2
     question: '@multiplequestion8'
+
   questionchoice22:
     id: questionchoice22
     title: Au top
     color: '#fffff'
     position: 1
     question: '@multiplequestion8'
+
   questionchoice23:
     id: questionchoice23
     title: Incohérente
     color: '#fffff'
     position: 1
     question: '@multiplequestion9'
+
   questionchoice24:
     id: questionchoice24
     title: C'est de la diffamation !
     position: 2
     question: '@multiplequestion9'
+
   questionchoice25:
     id: questionchoice25
     title: Que de la publicité (mensongère en plus !)
     position: 3
     question: '@multiplequestion9'
+
   questionchoice26:
     id: questionchoice26
     title: Je dis oui
     position: 1
     question: '@multiplequestion10'
+
   questionchoice27:
     id: questionchoice27
     title: Je dis non
     position: 2
     question: '@multiplequestion10'
+
   questionchoice28:
     id: questionchoice28
     title: J'ai rien compris
     position: 3
     question: '@multiplequestion10'
+
   questionchoice29:
     id: questionchoice29
     title: Compréhensible
     position: 1
     question: '@multiplequestion11'
+
   questionchoice30:
     id: questionchoice30
     title: Réalisable
     position: 2
     question: '@multiplequestion11'
+
   questionchoice31:
     id: questionchoice31
     title: Importante
     description: Description de ma valeur importante !
     position: 3
     question: '@multiplequestion11'
-  questionchoiceHap:
-    id: questionchoiceHap
-    title: Hap
-    position: 1
-    question: '@multiplequestionHapNoel'
-  questionchoiceNoel:
-    id: questionchoiceNoel
-    title: Noel
-    position: 2
-    question: '@multiplequestionHapNoel'
-  questionchoiceLeGange:
-    id: questionchoicLeGange
-    title: Le gange
-    position: 1
-    question: '@multiplequestionFavoriteFleuve'
-  questionchoiceLeNil:
-    id: questionchoiceLeNil
-    title: Le nil
-    position: 2
-    question: '@multiplequestionFavoriteFleuve'
-  questionchoiceLaSeine:
-    id: questionchoiceLaSeine
-    title: La seine
-    position: 3
-    question: '@multiplequestionFavoriteFleuve'
-  questionchoiceAmazone:
-    id: questionchoiceAmazone
-    title: L'Amazone
-    position: 4
-    question: '@multiplequestionFavoriteFleuve'
-  questionchoiceHapGangeOui:
-    id: questionchoiceHapGangeOui
-    title: Oui
-    position: 1
-    question: '@multiplequestionHapGange'
-  questionchoiceHapGangeNon:
-    id: questionchoiceHapGangeNon
-    title: Non
-    position: 2
-    question: '@multiplequestionHapGange'
-  questionchoiceHapJvc:
-    id: questionchoiceJvc
-    title: JVC
-    position: 1
-    question: '@multiplequestionHapCreation'
-  questionchoiceHapTesla:
-    id: questionchoiceTesla
-    title: Tesla
-    position: 2
-    question: '@multiplequestionHapCreation'
-  questionchoiceHapCisla:
-    id: questionchoiceCisla
-    title: Cisla
-    position: 3
-    question: '@multiplequestionHapCreation'
-  questionchoiceHapBonOui:
-    id: questionchoiceHapBonOui
-    title: Oui
-    position: 1
-    question: '@multiplequestionIsHapGood'
-  questionchoiceHapBonNon:
-    id: questionchoiceHapBonNon
-    title: Non
-    position: 2
-    question: '@multiplequestionIsHapGood'
-  questionchoiceNoelOui:
-    id: questionchoiceNoelOui
-    title: Oui
-    position: 1
-    question: '@multiplequestionNoelFete'
-  questionchoiceNoelNonBaka:
-    id: questionchoiceNoelNonBaka
-    title: Non baka
-    position: 2
-    question: '@multiplequestionNoelFete'
-  questionchoiceNoelRedHat:
-    id: questionchoiceNoelRedHat
-    title: Rouge
-    position: 1
-    question: '@multiplequestionNoelHatColor'
-  questionchoiceNoelGreenHat:
-    id: questionchoiceNoelGreenHat
-    title: Vert
-    position: 2
-    question: '@multiplequestionNoelHatColor'
-  questionchoiceNoelBlueHat:
-    id: questionchoiceNoelBlueHat
-    title: Bleu
-    position: 3
-    question: '@multiplequestionNoelHatColor'
-  questionchoiceMarvelOrDcMarvel:
-    id: questionchoiceMarvelOrDcMarvel
-    title: Marvel
-    position: 1
-    question: '@multiplequestionMarvelOrDc'
-  questionchoiceMarvelOrDcDc:
-    id: questionchoiceMarvelOrDcDc
-    title: DC
-    position: 2
-    question: '@multiplequestionMarvelOrDc'
-  questionchoiceDcSupermanYes:
-    id: questionchoiceDcSupermanYes
-    title: Oui
-    position: 1
-    question: '@multiplequestionDcSupermanLike'
-  questionchoiceDcSupermanNo:
-    id: questionchoiceDcSupermanNo
-    title: Non
-    position: 2
-    question: '@multiplequestionDcSupermanLike'
-  questionchoiceDcBatmanYes:
-    id: questionchoiceDcBatmanYes
-    title: Oui
-    position: 1
-    question: '@multiplequestionDcBatmanLike'
-  questionchoiceDcBatmanYes2:
-    id: questionchoiceDcBatmanYes2
-    title: Oui
-    position: 2
-    question: '@multiplequestionDcBatmanLike'
-  questionchoiceDcSupergirlYes:
-    id: questionchoiceDcSupergirlYes
-    title: Oui
-    position: 1
-    question: '@multiplequestionDcSupergirlLike'
-  questionchoiceDcSupergirlNo:
-    id: questionchoiceDcSupergirlNo
-    title: Non
-    position: 2
-    question: '@multiplequestionDcSupergirlLike'
-  questionchoiceMarvelIronManYes:
-    id: questionchoiceMarvelIronManYes
-    title: Oui
-    position: 1
-    question: '@multiplequestionMarvelIronManLike'
-  questionchoiceMarvelIronManNo:
-    id: questionchoiceMarvelIronManNo
-    title: Non
-    position: 2
-    question: '@multiplequestionMarvelIronManLike'
-  questionchoiceMarvelLukeCageYes:
-    id: questionchoiceMarvelLukeCageYes
-    title: Oui c un bo chauve ténébreux
-    position: 1
-    question: '@multiplequestionMarvelLukeCageLike'
-  questionchoiceMarvelLukeCageYes2:
-    id: questionchoiceMarvelLukeCageYes2
-    title: Oui
-    position: 2
-    question: '@multiplequestionMarvelLukeCageLike'
-  questionchoiceMarvelLukeCageYes3:
-    id: questionchoiceMarvelLukeCageYes3
-    title: OUI
-    position: 3
-    question: '@multiplequestionMarvelLukeCageLike'
-  questionchoiceMarvelThorYes:
-    id: questionchoiceMarvelThorYes
-    title: ui
-    position: 1
-    question: '@multiplequestionMarvelThorLike'
-  questionchoiceMarvelThorNo:
-    id: questionchoiceMarvelThorNo
-    title: nn
-    position: 2
-    question: '@multiplequestionMarvelThorLike'
-  questionchoiceEndConditionOk:
-    id: questionchoiceEndConditionOk
-    title: Oki
-    position: 1
-    question: '@multiplequestionEndConditionel'
-  questionchoiceEndConditionOk2:
-    id: questionchoiceEndConditionOk2
-    title: Doki
-    position: 2
-    question: '@multiplequestionEndConditionel'
-  questionchoiceHapNotGoodHowDareYouOki:
-    id: questionchoiceHapNotGoodHowDareYouOki
-    title: Oki
-    position: 1
-    question: '@multiplequestionHapNotGoodHowDareYou'
-  questionchoiceHapNotGoodHowDareYouGpaslu:
-    id: questionchoiceHapNotGoodHowDareYouGpaslu
-    title: mdr g pas lu
-    position: 2
-    question: '@multiplequestionHapNotGoodHowDareYou'
-  ljQuestionChoiceIsARadio:
-    id: ljQuestionChoiceIsARadio
-    title: Oui ceci est un champ de type radio
-    position: 1
-    question: '@ljMultipleQuestionRadio'
-  ljQuestionChoiceIsntARadio:
-    id: ljQuestionChoiceIsntARadio
-    title: Non, ceci n'est pas un champ de type radio
-    position: 2
-    question: '@ljMultipleQuestionRadio'
-  ljQuestionChoiceIsASelect:
-    id: ljQuestionChoiceIsASelect
-    title: Oui ceci est un champ de type select
-    position: 1
-    question: '@ljMultipleQuestionSelect'
-  ljQuestionChoiceIsntASelect:
-    id: ljQuestionChoiceIsntASelect
-    title: Non, ceci n'est pas un champ de type select
-    position: 2
-    question: '@ljMultipleQuestionSelect'
-  ljQuestionChoiceIsAButton:
-    id: ljQuestionChoiceIsAButton
-    title: Oui ceci est un champ de type boutton
-    position: 1
-    question: '@ljMultipleQuestionButton'
-  ljQuestionChoiceIsntAButton:
-    id: ljQuestionChoiceIsntAButton
-    title: Non, ceci n'est pas un champ de type boutton
-    position: 2
-    question: '@ljMultipleQuestionButton'
-  ljQuestionChoiceIsACheckbox:
-    id: ljQuestionChoiceIsACheckbox
-    title: Oui ceci est un champ de type checkbox
-    position: 1
-    question: '@ljMultipleQuestionCheckbox'
-  ljQuestionChoiceIsntACheckbox:
-    id: ljQuestionChoiceIsntACheckbox
-    title: Non, ceci n'est pas un champ de type checkbox
-    position: 2
-    question: '@ljMultipleQuestionCheckbox'
-  ljQuestionChoiceIsARanking:
-    id: ljQuestionChoiceIsARanking
-    title: Oui ceci est un champ de type classement
-    position: 1
-    question: '@ljMultipleQuestionRanking'
-  ljQuestionChoiceIsntARanking:
-    id: ljQuestionChoiceIsntARanking
-    title: Non, ceci n'est pas un champ de type classement
-    position: 2
-    question: '@ljMultipleQuestionRanking'

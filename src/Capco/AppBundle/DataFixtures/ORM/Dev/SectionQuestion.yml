@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Questions\SectionQuestion:
   sectionquestion{1..3}:
-    id: 30<current()>
+    id: 3<current()>
     title: Nouvelle section <current()>
     description: ma super description <current()>
     type: 10

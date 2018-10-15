@@ -11,11 +11,6 @@ Question:
       type:
         type: 'QuestionTypeValue!'
         resolve: "@=resolver('question_type', [value])"
-      #need it for conditional jumps
-      position:
-        type: 'Int!'
-        resolve: "@=resolver('question_position', [value])"
-        description: 'The position of the question'
       private:
         type: 'Boolean!'
       required:
@@ -34,6 +29,3 @@ Question:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", [value, args])'
         description: 'Return users who answered the question'
-      jumps:
-        description: 'The associated logic jumps to this question.'
-        type: '[LogicJump]'

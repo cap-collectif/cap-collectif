@@ -5,7 +5,6 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, formValueSelector, Field, FieldArray, type FormProps } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
-import { submitQuestion } from '../../utils/submitQuestion';
 import ProposalFormAdminCategories from './ProposalFormAdminCategories';
 import ProposalFormAdminQuestions from './ProposalFormAdminQuestions';
 import ProposalFormAdminDistricts from './ProposalFormAdminDistricts';
@@ -200,7 +199,27 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     proposalFormId: props.proposalForm.id,
     districts: values.districts.map(district => ({ ...district })),
     categories: values.categories.map(category => ({ ...category })),
-    questions: submitQuestion(values.questions, multipleChoiceQuestions),
+    questions: values.questions.map(question => {
+      const questionInput = {
+        question: {
+          ...question,
+          kind: undefined,
+          otherAllowed: question.isOtherAllowed,
+          randomQuestionChoices: question.isRandomQuestionChoices,
+          isOtherAllowed: undefined,
+          isRandomQuestionChoices: undefined,
+        },
+      };
+      if (multipleChoiceQuestions.indexOf(question.type) !== -1 && question.questionChoices) {
+        questionInput.question.questionChoices = question.questionChoices.map(choice => ({
+          ...choice,
+          kind: undefined,
+          image: choice.image ? choice.image.id : null,
+        }));
+      }
+
+      return questionInput;
+    }),
   };
 
   return UpdateProposalFormMutation.commit({ input });

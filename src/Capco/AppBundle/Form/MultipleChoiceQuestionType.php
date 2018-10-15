@@ -28,12 +28,6 @@ class MultipleChoiceQuestionType extends AbstractType
             'by_reference' => false,
             'entry_type' => QuestionChoiceType::class,
         ]);
-        $builder->add('jumps', CollectionType::class, [
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-            'entry_type' => LogicJumpType::class,
-        ]);
         $builder->add('randomQuestionChoices', CheckboxType::class);
         $builder->add('otherAllowed', CheckboxType::class);
         $builder->add('validationRule', QuestionValidationRuleType::class);

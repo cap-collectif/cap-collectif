@@ -49,8 +49,6 @@ describe('<ProposalAdminContentForm />', () => {
             type: 'text',
             helpText: 'Help 1',
             description: null,
-            position: 0,
-            jumps: [],
             private: false,
             required: true,
             validationRule: null,

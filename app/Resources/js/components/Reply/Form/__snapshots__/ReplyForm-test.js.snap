@@ -41,8 +41,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "helpText": "",
                 "id": "10",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 1,
                 "private": false,
                 "required": true,
                 "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
@@ -84,8 +82,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "helpText": "Un seul choix possible",
                 "id": "12",
                 "isOtherAllowed": true,
-                "jumps": Array [],
-                "position": 3,
                 "private": false,
                 "required": true,
                 "title": "Quel est ton athlète favori ?",
@@ -120,8 +116,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "helpText": "Merci de répondre sincèrement",
                 "id": "13",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 4,
                 "private": false,
                 "required": false,
                 "title": "Nelson Monfort parle-t-il:",
@@ -156,8 +150,6 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "helpText": "Merci de répondre sincèrement",
                 "id": "14",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 5,
                 "private": false,
                 "required": false,
                 "title": "Nelson Monfort parle-t-il:",
@@ -169,11 +161,11 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
           responses={
             Array [
               Object {
-                "question": "Nelson Monfort parle-t-il:",
+                "questionId": "Nelson Monfort parle-t-il:",
                 "value": "Trop fort (Mon sonotone est tout neuf)",
               },
               Object {
-                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "questionId": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
                 "value": Object {
                   "labels": Array [
                     "Superman",
@@ -262,8 +254,6 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                 "helpText": "",
                 "id": "10",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 1,
                 "private": false,
                 "required": true,
                 "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
@@ -305,8 +295,6 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                 "helpText": "Un seul choix possible",
                 "id": "12",
                 "isOtherAllowed": true,
-                "jumps": Array [],
-                "position": 3,
                 "private": false,
                 "required": true,
                 "title": "Quel est ton athlète favori ?",
@@ -341,8 +329,6 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                 "helpText": "Merci de répondre sincèrement",
                 "id": "14",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 5,
                 "private": false,
                 "required": false,
                 "title": "Nelson Monfort parle-t-il:",
@@ -354,11 +340,11 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
           responses={
             Array [
               Object {
-                "question": "Nelson Monfort parle-t-il:",
+                "questionId": "Nelson Monfort parle-t-il:",
                 "value": "Trop fort (Mon sonotone est tout neuf)",
               },
               Object {
-                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "questionId": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
                 "value": Object {
                   "labels": Array [
                     "Superman",
@@ -447,8 +433,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "helpText": "",
                 "id": "10",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 1,
                 "private": false,
                 "required": true,
                 "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
@@ -490,8 +474,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "helpText": "Plusieurs choix sont possibles",
                 "id": "11",
                 "isOtherAllowed": true,
-                "jumps": Array [],
-                "position": 2,
                 "private": false,
                 "required": false,
                 "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
@@ -533,8 +515,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "helpText": "Un seul choix possible",
                 "id": "12",
                 "isOtherAllowed": true,
-                "jumps": Array [],
-                "position": 3,
                 "private": false,
                 "required": true,
                 "title": "Quel est ton athlète favori ?",
@@ -569,8 +549,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "helpText": "Merci de répondre sincèrement",
                 "id": "13",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 4,
                 "private": false,
                 "required": false,
                 "title": "Nelson Monfort parle-t-il:",
@@ -605,8 +583,6 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "helpText": "Merci de répondre sincèrement",
                 "id": "14",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 5,
                 "private": false,
                 "required": false,
                 "title": "Nelson Monfort parle-t-il:",
@@ -618,11 +594,11 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
           responses={
             Array [
               Object {
-                "question": "Nelson Monfort parle-t-il:",
+                "questionId": "Nelson Monfort parle-t-il:",
                 "value": "Trop fort (Mon sonotone est tout neuf)",
               },
               Object {
-                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "questionId": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
                 "value": Object {
                   "labels": Array [
                     "Superman",
@@ -740,8 +716,6 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                 "helpText": "Plusieurs choix sont possibles",
                 "id": "11",
                 "isOtherAllowed": true,
-                "jumps": Array [],
-                "position": 2,
                 "private": false,
                 "required": false,
                 "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
@@ -776,8 +750,6 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                 "helpText": "Merci de répondre sincèrement",
                 "id": "13",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 4,
                 "private": false,
                 "required": false,
                 "title": "Nelson Monfort parle-t-il:",
@@ -812,8 +784,6 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                 "helpText": "Merci de répondre sincèrement",
                 "id": "14",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 5,
                 "private": false,
                 "required": false,
                 "title": "Nelson Monfort parle-t-il:",
@@ -825,11 +795,11 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
           responses={
             Array [
               Object {
-                "question": "Nelson Monfort parle-t-il:",
+                "questionId": "Nelson Monfort parle-t-il:",
                 "value": "Trop fort (Mon sonotone est tout neuf)",
               },
               Object {
-                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "questionId": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
                 "value": Object {
                   "labels": Array [
                     "Superman",
@@ -918,8 +888,6 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
                 "helpText": "",
                 "id": "10",
                 "isOtherAllowed": false,
-                "jumps": Array [],
-                "position": 1,
                 "private": false,
                 "required": true,
                 "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
@@ -961,8 +929,6 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
                 "helpText": "Un seul choix possible",
                 "id": "12",
                 "isOtherAllowed": true,
-                "jumps": Array [],
-                "position": 3,
                 "private": false,
                 "required": true,
                 "title": "Quel est ton athlète favori ?",
@@ -974,11 +940,11 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
           responses={
             Array [
               Object {
-                "question": "Nelson Monfort parle-t-il:",
+                "questionId": "Nelson Monfort parle-t-il:",
                 "value": "Trop fort (Mon sonotone est tout neuf)",
               },
               Object {
-                "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+                "questionId": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
                 "value": Object {
                   "labels": Array [
                     "Superman",

@@ -27,5 +27,3 @@ QuestionInput:
         type: '[QuestionChoiceInput]'
       description:
         type: 'String'
-      jumps:
-        type: '[LogicJumpInput]'

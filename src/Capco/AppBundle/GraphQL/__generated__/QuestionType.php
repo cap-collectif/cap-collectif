@@ -62,20 +62,6 @@ final class QuestionType extends InterfaceType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'position' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["question_position", array(0 => $value)]);
-                    },
-                    'description' => 'The position of the question',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'private' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
@@ -177,18 +163,6 @@ final class QuestionType extends InterfaceType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", array(0 => $value, 1 => $args)]);
                     },
                     'description' => 'Return users who answered the question',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'jumps' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('LogicJump')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The associated logic jumps to this question.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

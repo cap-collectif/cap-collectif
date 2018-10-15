@@ -91,99 +91,23 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaire4'
     question: '@multiplequestion11'
     position: 6
-  qaq45:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionHapNoel'
-    position: 1
-  qaq25:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionFavoriteFleuve'
-    position: 2
-  qaq26:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionHapGange'
-    position: 3
-  qaq27:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionHapCreation'
-    position: 4
-  qaq28:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionIsHapGood'
-    position: 5
-  qaq29:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionHapNotGoodHowDareYou'
-    position: 6
-  qaq30:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionNoelFete'
-    position: 7
-  qaq31:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionNoelHatColor'
-    position: 8
-  qaq32:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionMarvelOrDc'
-    position: 9
-  qaq33:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionDcSupermanLike'
-    position: 10
-  qaq34:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionDcBatmanLike'
-    position: 11
-  qaq35:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionDcSupergirlLike'
-    position: 12
-  qaq36:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionMarvelIronManLike'
-    position: 13
-  qaq37:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionMarvelLukeCageLike'
-    position: 14
-  qaq38:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionMarvelThorLike'
-    position: 15
-  qaq39:
-    questionnaire: '@questionnaireWithJumps'
-    question: '@multiplequestionEndConditionel'
-    position: 16
-  qaq40:
-    questionnaire: '@questionnaireWithJumps2'
-    question: '@ljMultipleQuestionRadio'
-    position: 1
-  qaq41:
-    questionnaire: '@questionnaireWithJumps2'
-    question: '@ljMultipleQuestionSelect'
-    position: 2
-  qaq42:
-    questionnaire: '@questionnaireWithJumps2'
-    question: '@ljMultipleQuestionButton'
-    position: 3
-  qaq43:
-    questionnaire: '@questionnaireWithJumps2'
-    question: '@ljMultipleQuestionCheckbox'
-    position: 4
-  qaq44:
-    questionnaire: '@questionnaireWithJumps2'
-    question: '@ljMultipleQuestionRanking'
-    position: 5
-  qaq45:
+  qaq24:
     questionnaire: '@questionnaire1'
     question: '@sectionquestion1'
     position: 1
-  qaq46:
+  qaq25:
     questionnaire: '@questionnaire1'
     question: '@sectionquestion2'
     position: 3
-  qaq47:
+  qaq26:
     proposalForm: '@proposalform1'
     question: '@sectionquestion3'
     position: 1
+  qaq27:
+    questionnaire: '@questionnaire2'
+    question: '@simplequestion11'
+    position: 2
+  qaq28:
+    questionnaire: '@questionnaire2'
+    question: '@simplequestion12'
+    position: 3

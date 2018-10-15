@@ -153,31 +153,8 @@ export default createFragmentContainer(
             id
             title
             private
-            position
             required
             helpText
-            jumps {
-              id
-              always
-              destination {
-                id
-                title
-              }
-              conditions {
-                id
-                operator
-                question {
-                  id
-                  title
-                }
-                ... on MultipleChoiceQuestionLogicJumpCondition {
-                  value {
-                    id
-                    title
-                  }
-                }
-              }
-            }
             description
             type
             ... on MultipleChoiceQuestion {

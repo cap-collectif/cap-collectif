@@ -7,7 +7,6 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class OpinionVersionsResolver implements ResolverInterface
 {
