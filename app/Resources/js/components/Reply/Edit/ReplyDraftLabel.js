@@ -11,7 +11,7 @@ export default class ReplyDraftLabel extends React.Component<Props> {
   render() {
     return (
       this.props.status === 'DRAFT' && (
-        <Label className="badge-pill ml-5" bsStyle={'default'}>
+        <Label className="badge-pill ml-5" bsStyle="default">
           <FormattedMessage id="proposal.state.draft" />
         </Label>
       )
