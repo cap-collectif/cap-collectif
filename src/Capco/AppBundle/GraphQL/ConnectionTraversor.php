@@ -71,7 +71,7 @@ class ConnectionTraversor
                         /**
                          * Change here from $data to $data[$path].
                          */
-                        $data[$path] = $this->executor->execute(null, [
+                        $data[$path] = $this->executor->execute('internal', [
                             'query' => $renewalQuery($pageInfo),
                             'variables' => [],
                         ])->toArray();
