@@ -75,11 +75,11 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
     });
     return (
       <div className="movable-element" key={index}>
-        <div className='mb-10'>
+        <div className="mb-10">
           <h4 className="panel-title">
             <i
-              className="cap cap-android-menu"
-              style={{ color: 'rgb(3, 136, 204)', fontSize: '15px', marginRight: '10px' }}
+              className="cap cap-android-menu mr-10"
+              style={{ color: 'rgb(3, 136, 204)', fontSize: '15px' }}
             />
             <FormattedMessage id="if-the-question-answer-is" />
             <button
