@@ -29,7 +29,7 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
               <div className="panel-heading">
                 <i
                   className="cap cap-android-menu"
-                  style={{ color: 'rgb(3, 136, 204)', fontSize: '20px' }}
+                  style={{ color: '#0388CC', fontSize: '20px' }}
                 />
                 <h3 className="panel-title">
                   <FormattedMessage id="answering-this-question" />
@@ -37,7 +37,6 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
                 <button
                   type="button"
                   style={{ border: 'none', fontSize: '20px', backgroundColor: '#f5f5f5' }}
-                  title="Remove Member"
                   onClick={() => fields.remove(index)}>
                   X
                 </button>
