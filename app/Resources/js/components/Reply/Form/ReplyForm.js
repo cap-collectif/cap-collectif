@@ -194,7 +194,7 @@ export class ReplyForm extends React.Component<Props> {
                 </div>
               )}
               <div className="btn-toolbar">
-                {(!reply || (reply && reply.draft !== 'PUBLISHED')) && (
+                {(!reply || (reply && reply.publicationStatus !== 'PUBLISHED')) && (
                   <div className="btn-group">
                     <SubmitButton
                       type="submit"
@@ -260,7 +260,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
       props.questionnaire.questions,
       props.reply ? props.reply.responses : [],
     ),
-    draft: props.reply ? props.reply.draft : false,
+    draft: props.reply ? props.reply.publicationStatus : false,
     private: props.reply ? props.reply.private : false,
   },
   user: state.user.user,
@@ -280,7 +280,7 @@ export default createFragmentContainer(container, {
       @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       id
       private
-      draft
+      publicationStatus
       responses {
         question {
           id

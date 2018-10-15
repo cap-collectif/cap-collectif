@@ -64,7 +64,7 @@ export class ReplyModalLink extends React.Component<Props, State> {
               </span>
             )}
             {/* $FlowFixMe $refType */}
-            <ReplyDraftLabel draft={reply.draft} />
+            <ReplyDraftLabel status={reply.publicationStatus} />
             <UnpublishedLabel publishable={reply} />
           </div>
           <div>
@@ -104,7 +104,7 @@ export default createFragmentContainer(ReplyModalLink, {
       publishedAt
       id
       private
-      draft
+      publicationStatus
       ...UpdateReplyModal_reply
       ...DeleteReplyModal_reply
       ...UnpublishedLabel_publishable
