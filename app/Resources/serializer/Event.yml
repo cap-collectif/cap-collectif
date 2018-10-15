@@ -12,22 +12,14 @@ Capco\AppBundle\Entity\Event:
       expose: true
       type: string
       groups: [Events, Elasticsearch]
-    zipcode:
-      expose: true
-      type: string
-      groups: [Events]
     lat:
       expose: true
-      type: double
+      type: float
       groups: [Events,Elasticsearch]
     lng:
       expose: true
-      type: double
+      type: float
       groups: [Events,Elasticsearch]
-    address:
-      expose: true
-      type: string
-      groups: [Events]
     city:
       expose: true
       type: string
@@ -91,3 +83,8 @@ Capco\AppBundle\Entity\Event:
     enabled:
       expose: true
       groups: [Events]
+  virtual_properties:
+    getFullAddress:
+      serialized_name: address
+      type: string
+      groups: [Events, Elasticsearch]

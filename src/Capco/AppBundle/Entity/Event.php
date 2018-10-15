@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
@@ -275,10 +276,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         $this->country = $country;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLat()
+    public function getLat(): ?float
     {
         return $this->lat;
     }
@@ -289,7 +287,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function setLat($lat): self
     {
         if (\is_string($lat)) {
-            $lat = (float) $lat;
+            $lat = (float)$lat;
         }
 
         $this->lat = str_replace(',', '.', $lat);
@@ -297,7 +295,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this;
     }
 
-    public function getLng(): float
+    public function getLng(): ?float
     {
         return $this->lng;
     }
@@ -305,7 +303,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function setLng($lng): self
     {
         if (\is_string($lng)) {
-            $lng = (float) $lng;
+            $lng = (float)$lng;
         }
         $this->lng = str_replace(',', '.', $lng);
         $this->lng = $lng;
@@ -485,5 +483,14 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function canDisplayInBo($user = null): bool
     {
         return true;
+    }
+
+    public function getFullAddress(): string
+    {
+        $address = trim($this->getAddress());
+        $address .= !empty($this->getZipCode()) ? ', '.$this->getZipCode() : '';
+        $address .= !empty($this->getCity()) ? ', '.$this->getCity() : '';
+
+        return $address;
     }
 }

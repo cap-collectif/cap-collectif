@@ -1612,6 +1612,8 @@ type Event implements Node & Commentable {
   zipCode: String
   city: String
   country: String
+  lat: Float
+  lng: Float
 }
 
 # A connection to a list of items.
