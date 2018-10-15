@@ -55,7 +55,7 @@ fragment voteInfos on YesNoPairedVote {
  id
  ...authorInfos
  value
- createdAt
+ createdAt  
 }
 EOF;
 
@@ -162,11 +162,6 @@ EOF;
         'contributions_sources_updatedAt',
         'contributions_sources_published',
         'contributions_sources_votesCount',
-        'contribution_versions_id',
-        'contribution_versions_title',
-        'contribution_versions_bodyText',
-        'contribution_versions_createdAt',
-        'contribution_versions_updatedAt',
     ];
     protected const SOURCE_HEADER_MAP = [
         'contributions_sources_id' => 'id',
@@ -206,14 +201,6 @@ EOF;
         'contributions_arguments_votesCount' => 'votes.totalCount',
     ];
 
-    protected const VERSION_HEADER_MAP = [
-        'contribution_versions_id' => 'id',
-        'contribution_versions_title' => 'title',
-        'contribution_versions_bodyText' => 'bodyText',
-        'contribution_versions_createdAt' => 'createdAt',
-        'contribution_versions_updatedAt' => 'updatedAt',
-    ];
-
     protected const REPORTING_HEADER_MAP = [
         'contributions_reportings_related_id' => 'related.id',
         'contributions_reportings_related_kind' => 'related.kind',
@@ -249,9 +236,7 @@ EOF;
     ] +
     self::ARGUMENT_HEADER_MAP +
     self::VOTES_HEADER_MAP +
-    self::REPORTING_HEADER_MAP +
-    self::SOURCE_HEADER_MAP +
-    self::VERSION_HEADER_MAP;
+    self::REPORTING_HEADER_MAP;
 
     protected static $defaultName = 'capco:export:consultation';
 
@@ -336,7 +321,7 @@ EOF;
             function ($edge) use ($progress) {
                 $progress->advance();
                 $contribution = $edge['node'];
-                $this->addContributionOpinionRow($contribution);
+                $this->addContributionRow($contribution);
             },
             function ($pageInfo) {
                 return $this->getContributionsGraphQLQueryByConsultationStep(
@@ -346,7 +331,6 @@ EOF;
             }
         );
 
-        $this->writer->close();
         $progress->finish();
     }
 
@@ -573,25 +557,59 @@ EOF;
 
     private function addContributionSourcesRow($contribution, $source): void
     {
-        $this->addContributionRow('source', $source, $contribution, self::SOURCE_HEADER_MAP);
+        $row = ['source'];
+
+        foreach ($this->contributionHeaderMap as $path => $columnName) {
+            if (isset(self::SOURCE_HEADER_MAP[$path])) {
+                $row[] = exportUtils::parseCellValue(
+                    Arr::path($source, self::SOURCE_HEADER_MAP[$path])
+                );
+            } elseif (isset($this->contributionHeaderMap[$columnName])) {
+                $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
+            } else {
+                $row[] = '';
+            }
+        }
+
+        $this->writer->addRow($row);
     }
 
     private function addContributionVotesRow($contribution, $vote): void
     {
-        $this->addContributionRow('vote', $vote, $contribution, self::VOTES_HEADER_MAP);
+        $row = ['vote'];
+
+        foreach ($this->contributionHeaderMap as $path => $columnName) {
+            if (isset(self::VOTES_HEADER_MAP[$path])) {
+                $row[] = exportUtils::parseCellValue(
+                    Arr::path($vote, self::VOTES_HEADER_MAP[$path])
+                );
+            } elseif (isset($this->contributionHeaderMap[$columnName])) {
+                $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
+            } else {
+                $row[] = '';
+            }
+        }
+        $this->writer->addRow($row);
     }
 
     private function addContributionReportingsRow($contribution, $reporting): void
     {
-        $this->addContributionRow(
-            'reportings',
-            $reporting,
-            $contribution,
-            self::REPORTING_HEADER_MAP
-        );
+        $row = ['reportings'];
+        foreach ($this->contributionHeaderMap as $path => $columnName) {
+            if (isset(self::REPORTING_HEADER_MAP[$path])) {
+                $row[] = exportUtils::parseCellValue(
+                    Arr::path($reporting, self::REPORTING_HEADER_MAP[$path])
+                );
+            } elseif (isset($this->contributionHeaderMap[$columnName])) {
+                $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
+            } else {
+                $row[] = '';
+            }
+        }
+        $this->writer->addRow($row);
     }
 
-    private function addContributionOpinionRow($contribution): void
+    private function addContributionRow($contribution): void
     {
         $row = ['opinion'];
 
@@ -625,9 +643,8 @@ EOF;
         ) {
             $this->addContributionReportingsRow($contribution, $edge['node']);
         });
-
         // we add Opinion's arguments rows.
-        $this->connectionTraversor->traverseMutatePath(
+        $this->connectionTraversor->traverse(
             $contribution,
             'arguments',
             function ($edge) use ($contribution) {
@@ -640,13 +657,6 @@ EOF;
                 );
             }
         );
-
-        // We add Opinion's versions rows.
-        $this->connectionTraversor->traverse($contribution, 'versions', function ($edge) use (
-            $contribution
-        ) {
-            $this->addContributionVersionRow($edge['node'], $contribution);
-        });
     }
 
     private function getContributionsArgumentsGraphQLQuery(
@@ -693,21 +703,13 @@ EOF;
 
     private function addContributionArgumentRow($argument, $contribution): void
     {
-        $this->addContributionRow('argument', $argument, $contribution, self::ARGUMENT_HEADER_MAP);
-    }
-
-    private function addContributionVersionRow($version, $contribution): void
-    {
-        $this->addContributionRow('version', $version, $contribution, self::VERSION_HEADER_MAP);
-    }
-
-    private function addContributionRow(string $type, $node, $contribution, $headerMap): void
-    {
-        $row = [$type];
+        $row = ['argument'];
 
         foreach ($this->contributionHeaderMap as $path => $columnName) {
-            if (isset($headerMap[$path])) {
-                $row[] = exportUtils::parseCellValue(Arr::path($node, $headerMap[$path]));
+            if (isset(self::ARGUMENT_HEADER_MAP[$path])) {
+                $row[] = exportUtils::parseCellValue(
+                    Arr::path($argument, self::ARGUMENT_HEADER_MAP[$path])
+                );
             } elseif (isset($this->contributionHeaderMap[$columnName])) {
                 $row = Arr::path($contribution, $this->contributionHeaderMap[$path]);
             } else {

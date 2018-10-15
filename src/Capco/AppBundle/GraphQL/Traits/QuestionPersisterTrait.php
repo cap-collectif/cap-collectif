@@ -43,6 +43,7 @@ trait QuestionPersisterTrait
                     $questionChoice->setPosition($key);
                     $em->persist($questionChoice);
                 }
+                
             }
             $em->persist($abstractQuestion);
         }

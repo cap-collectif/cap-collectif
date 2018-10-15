@@ -1,0 +1,15 @@
+LogicJumpCondition:
+  type: interface
+  config:
+    description: 'A particular condition in a logic jump.'
+    resolveType:
+      '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\LogicJumpCondition\\LogicJumpConditionTypeResolver", [value])'
+    fields:
+      id:
+        type: 'ID'
+      operator:
+        description: 'Return the operator for this condition.'
+        type: 'LogicJumpConditionOperator!'
+      question:
+        description: 'Return the question which is going to be tested against the condition.'
+        type: 'Question!'

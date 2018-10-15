@@ -48,6 +48,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
 
     public function __construct()
     {
+        parent::__construct();
         $this->questionChoices = new ArrayCollection();
     }
 

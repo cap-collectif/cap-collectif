@@ -1768,6 +1768,71 @@ type LastnameRequirement implements Node & Requirement {
   viewerValue: String
 }
 
+# A logic jump in a question.
+type LogicJump {
+  id: ID
+
+  # If true, the logic jump will always be triggered, 
+  always: Boolean!
+
+  # Return the question that trigger this logic jump.
+  origin: Question!
+
+  # Return the question which this logic jump leads to.
+  destination: Question!
+
+  # Return the necessited conditions that needs to be fullfiled to trigger this logic jump.
+  conditions: [LogicJumpCondition]
+}
+
+# A particular condition in a logic jump.
+interface LogicJumpCondition {
+  id: ID
+
+  # Return the operator for this condition.
+  operator: LogicJumpConditionOperator!
+
+  # Return the question which is going to be tested against the condition.
+  question: Question!
+}
+
+# A particular condition in a logic jump.
+input LogicJumpConditionInput {
+  id: ID
+
+  # The operator used to check the condition
+  operator: LogicJumpConditionOperator!
+
+  # The id of the question you want to have a condition
+  question: Int!
+
+  # The answer the selected question should have to trigger the condition
+  value: String
+}
+
+# Possible operator for a logic jump condition
+enum LogicJumpConditionOperator {
+  # Allows to test an equality.
+  IS
+
+  # Allows to test the opposite of an equality test.
+  IS_NOT
+}
+
+input LogicJumpInput {
+  id: ID
+  always: Boolean
+
+  # The id of the question where the logic jump start
+  origin: Int!
+
+  # The id of the question where the logic jump end if the conditions are fulfilled
+  destination: Int!
+
+  # A collection of conditions that you have to fulfill for displaying the destination question
+  conditions: [LogicJumpConditionInput]
+}
+
 # A media
 type Media {
   # The id of the media.
@@ -1793,6 +1858,9 @@ type MediaQuestion implements Question {
   id: ID!
   title: String!
   type: QuestionTypeValue!
+
+  # The position of the question
+  position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -1814,6 +1882,9 @@ type MediaQuestion implements Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
+
+  # The associated logic jumps to this question.
+  jumps: [LogicJump]
 }
 
 # A response
@@ -1829,6 +1900,9 @@ type MultipleChoiceQuestion implements Question {
   id: ID!
   title: String!
   type: QuestionTypeValue!
+
+  # The position of the question
+  position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -1850,6 +1924,9 @@ type MultipleChoiceQuestion implements Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
+
+  # The associated logic jumps to this question.
+  jumps: [LogicJump]
   isOtherAllowed: Boolean!
   choices(
     # Randomize the order of the choices.
@@ -1858,6 +1935,20 @@ type MultipleChoiceQuestion implements Question {
   questionChoices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
   isRandomQuestionChoices: Boolean!
+}
+
+# A particular condition in a logic jump in a multiple choice question.
+type MultipleChoiceQuestionLogicJumpCondition implements LogicJumpCondition {
+  id: ID
+
+  # Return the operator for this condition.
+  operator: LogicJumpConditionOperator!
+
+  # Return the question which is going to be tested against the condition.
+  question: Question!
+
+  # The value that the condition should meet to be fullfiled (depending on the operator).
+  value: QuestionChoice
 }
 
 # Multiple Choice Question Validation Rule
@@ -3275,6 +3366,9 @@ interface Question {
   id: ID!
   title: String!
   type: QuestionTypeValue!
+
+  # The position of the question
+  position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -3296,6 +3390,9 @@ interface Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
+
+  # The associated logic jumps to this question.
+  jumps: [LogicJump]
 }
 
 # A possible choice of a question
@@ -3377,6 +3474,7 @@ input QuestionInput {
   validationRule: MultipleChoiceQuestionValidationRuleInput
   questionChoices: [QuestionChoiceInput]
   description: String
+  jumps: [LogicJumpInput]
 }
 
 # Value of type of question
@@ -3863,6 +3961,9 @@ type SectionQuestion implements Question {
   id: ID!
   title: String!
   type: QuestionTypeValue!
+
+  # The position of the question
+  position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -3884,6 +3985,9 @@ type SectionQuestion implements Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
+
+  # The associated logic jumps to this question.
+  jumps: [LogicJump]
 }
 
 input SelectProposalInput {
@@ -4062,6 +4166,9 @@ type SimpleQuestion implements Question {
   id: ID!
   title: String!
   type: QuestionTypeValue!
+
+  # The position of the question
+  position: Int!
   private: Boolean!
   required: Boolean!
   helpText: String
@@ -4083,6 +4190,9 @@ type SimpleQuestion implements Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
+
+  # The associated logic jumps to this question.
+  jumps: [LogicJump]
 }
 
 # A source

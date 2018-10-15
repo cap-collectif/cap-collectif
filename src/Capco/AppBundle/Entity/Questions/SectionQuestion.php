@@ -11,6 +11,7 @@ class SectionQuestion extends AbstractQuestion
 {
     public function __construct()
     {
+        parent::__construct();
         $this->type = self::QUESTION_TYPE_SECTION;
     }
 }

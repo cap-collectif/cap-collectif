@@ -1,12 +1,24 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\LogicJump;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
+use Capco\AppBundle\Repository\AbstractLogicJumpConditionRepository;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Capco\AppBundle\Repository\LogicJumpRepository;
+use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\PersistentCollection;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -21,6 +33,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
     private $formFactory;
     private $questionnaireRepository;
     private $questionRepo;
+    private $abstractQuestionRepo;
     private $logger;
 
     public function __construct(
@@ -28,12 +41,14 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         FormFactory $formFactory,
         QuestionnaireRepository $questionnaireRepository,
         QuestionnaireAbstractQuestionRepository $questionRepo,
+        AbstractQuestionRepository $abstractQuestionRepo,
         LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->questionnaireRepository = $questionnaireRepository;
         $this->questionRepo = $questionRepo;
+        $this->abstractQuestionRepo = $abstractQuestionRepo;
         $this->logger = $logger;
     }
 
@@ -89,13 +104,11 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
 
             $form->submit($arguments, false);
             $qaq = $questionnaire->getQuestions();
-
             // We make sure a question position by questionnaire is unique
             $delta =
                 $this->questionRepo->getCurrentMaxPositionForQuestionnaire(
                     $questionnaire->getId()
                 ) + 1;
-
             $this->persistQuestion($qaq, $this->em, $delta, $questionsOrderedById);
         } else {
             $form->submit($arguments, false);

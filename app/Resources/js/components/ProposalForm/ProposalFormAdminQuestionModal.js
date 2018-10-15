@@ -9,6 +9,7 @@ import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
 import type { GlobalState } from '../../types';
 import QuestionChoiceAdminForm from '../QuestionChoices/QuestionChoiceAdminForm';
+import QuestionsJumpAdmin from '../QuestionJump/QuestionsJumpAdminForm';
 
 type ParentProps = {
   show: boolean,
@@ -23,6 +24,9 @@ type Props = {
   type: string,
   validationRuleType: string,
   formErrors: Object,
+  currentQuestion: {
+    id: string,
+  },
   intl: IntlShape,
 } & ParentProps;
 
@@ -41,6 +45,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
       type,
       intl,
       validationRuleType,
+      currentQuestion,
       formErrors,
     } = this.props;
     if (formErrors.questions !== undefined) {
@@ -150,9 +155,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           {multipleChoiceQuestions.indexOf(type) !== -1 && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
-                <span>
-                  <FormattedMessage id="admin.fields.question.group_question_choices" />
-                </span>
+                 <FormattedMessage id="admin.fields.question.group_question_choices" />
               </h4>
               <FieldArray
                 name={`${member}.questionChoices`}
@@ -161,6 +164,24 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 oldMember={member}
                 type={type}
               />
+              <h4 style={{ fontWeight: 'bold' }}>
+                <span>
+                  <FormattedMessage id="conditional-jumps" />
+                </span>
+              </h4>
+              {currentQuestion.id &&
+                type !== 'ranking' && (
+                  <FieldArray
+                    name={`${member}.jumps`}
+                    component={QuestionsJumpAdmin}
+                    formName={formName}
+                    oldMember={member}
+                  />
+                )}
+              {!currentQuestion.id &&
+                type !== 'ranking' && (
+                  <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
+                )}
               <h4 style={{ fontWeight: 'bold' }}>
                 <span>
                   <FormattedMessage id="group.admin.parameters" />
@@ -261,6 +282,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);
   return {
+    currentQuestion: selector(state, `${props.member}`),
     type: selector(state, `${props.member}.type`),
     validationRuleType: selector(state, `${props.member}.validationRule.type`),
     formErrors: getFormSyncErrors(props.formName)(state),

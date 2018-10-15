@@ -21,9 +21,9 @@ Scenario: GraphQL client wants to retrieve questions
     "data": {
       "questionnaire": {
         "questions": [
-          {"id":"31"},
+          {"id":"301"},
           {"id":"2"},
-          {"id":"32"},
+          {"id":"302"},
           {"id":"13"},
           {"id":"14"},
           {"id":"15"},
@@ -80,11 +80,11 @@ Scenario: GraphQL client wants to retrieve replies
                   "value": "{\"labels\":[\"Maxime Arrouard\"],\"other\":null}"
                 },
                 {
-                  "question": {"id": "31"},
+                  "question": {"id": "301"},
                   "value": @null@
                 },
                 {
-                  "question": {"id": "32"},
+                  "question": {"id": "302"},
                   "value": @null@
                 },
                 {

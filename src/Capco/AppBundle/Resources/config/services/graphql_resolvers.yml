@@ -25,6 +25,7 @@ services:
     tags:
       - { name: overblog_graphql.resolver, alias: 'query_question', method: 'resolve' }
       - { name: overblog_graphql.resolver, alias: 'question_type', method: 'resolveType' }
+      - { name: overblog_graphql.resolver, alias: 'question_position', method: 'resolvePosition' }
       - {
           name: overblog_graphql.resolver,
           alias: 'query_available_districts_for_location',

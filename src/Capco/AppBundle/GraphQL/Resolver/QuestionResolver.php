@@ -59,6 +59,11 @@ class QuestionResolver implements ResolverInterface
             : $districts->toArray();
     }
 
+    public function resolvePosition(AbstractQuestion $question): int
+    {
+        return $question->getQuestionnaireAbstractQuestion()->getPosition();
+    }
+
     public function resolveisOtherAllowed(AbstractQuestion $question): bool
     {
         if ($question instanceof MultipleChoiceQuestion) {

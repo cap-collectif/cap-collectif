@@ -3,6 +3,7 @@ import * as React from 'react';
 import { type IntlShape, FormattedMessage } from 'react-intl';
 import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
+import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
@@ -10,13 +11,34 @@ import { checkOnlyNumbers } from '../services/Validator';
 
 import component from '../components/Form/Field';
 
-type Questions = $ReadOnlyArray<{|
+type Question = {|
   +id: string,
   +title: string,
+  +position: number,
   +private: boolean,
   +required: boolean,
   +helpText: ?string,
   +description: ?string,
+  +jumps: ?$ReadOnlyArray<?{|
+    +id: ?string,
+    +always: boolean,
+    +destination: {|
+      +id: string,
+      +title: string,
+    |},
+    +conditions: ?$ReadOnlyArray<?{|
+      +id: ?string,
+      +operator: LogicJumpConditionOperator,
+      +question: {|
+        +id: string,
+        +title: string,
+      |},
+      +value: ?{|
+        +id: string,
+        +title: string,
+      |},
+    |}>,
+  |}>,
   +type: QuestionTypeValue,
   +isOtherAllowed?: boolean,
   +validationRule?: ?{|
@@ -30,7 +52,9 @@ type Questions = $ReadOnlyArray<{|
     +color: ?string,
     +image: ?Object,
   |}>,
-|}>;
+|};
+
+type Questions = $ReadOnlyArray<Question>;
 
 type ResponsesFromAPI = $ReadOnlyArray<?{|
   +question: {|
@@ -46,7 +70,7 @@ type ResponsesFromAPI = $ReadOnlyArray<?{|
 |}>;
 
 export type ResponsesInReduxForm = $ReadOnlyArray<{|
-  questionId: string,
+  question: string,
   // eslint-disable-next-line flowtype/space-after-type-colon
   value:
     | ?string
@@ -78,42 +102,223 @@ type SubmitResponses = $ReadOnlyArray<{
   medias?: ?$ReadOnlyArray<string>,
 }>;
 
+const getValueFromSubmitResponse = search => {
+  if (search && typeof search.value === 'string') {
+    return search.value;
+  } else if (
+    search &&
+    search.value &&
+    typeof search.value === 'object' &&
+    !Array.isArray(search.value)
+  ) {
+    return search.value.labels[0];
+  } else if (search && search.value && Array.isArray(search.value)) {
+    return search.value[0].name;
+  }
+  return null;
+};
+
+const getConditionsResultForJump = (jump, responses) => {
+  const conditions =
+    jump &&
+    jump.conditions &&
+    jump.conditions.filter(Boolean).map(condition => {
+      const search = responses
+        .filter(Boolean)
+        .find(r => condition && condition.question && r.question === condition.question.id);
+      const userResponse = getValueFromSubmitResponse(search);
+      return condition.operator === 'IS'
+        ? condition && condition.value && condition.value.title === userResponse
+        : condition && condition.value && condition.value.title !== userResponse;
+    });
+
+  return (jump && jump.always) || (conditions && conditions.every(condition => condition === true));
+};
+
+const populateQuestionsJump = (responses, questions, callback) => {
+  const questionsWithJumpsIds = [];
+  if (responses) {
+    responses.forEach(response => {
+      if (response.value) {
+        const question = questions.find(q => q.id === response.question);
+        if (question && question.jumps && question.jumps.length > 0) {
+          question.jumps.some(jump => {
+            const conditionsResult = getConditionsResultForJump(jump, responses);
+            if (conditionsResult) {
+              const questionWithJump = questions.find(
+                q => q.id === (jump && jump.destination && jump.destination.id),
+              );
+              questionsWithJumpsIds.push(...callback(questionWithJump));
+            }
+            return conditionsResult;
+          });
+        }
+      }
+    });
+  }
+  return questionsWithJumpsIds;
+};
+
+const filterQuestions = (questions, questionsWithJumps, otherQuestions) => {
+  const tree = {};
+  questionsWithJumps.forEach(questionId => {
+    tree[questionId] = questions.filter(
+      q => q && q.jumps && q.jumps.some(j => j && j.destination && j.destination.id === questionId),
+    );
+  });
+
+  let questionsJumps = questionsWithJumps;
+  let questionsOther = otherQuestions;
+
+  Object.keys(tree).forEach(questionId => {
+    tree[questionId].forEach(question => {
+      if (!questionsWithJumps.includes(question.id) && !otherQuestions.includes(question.id)) {
+        questionsJumps = questionsWithJumps.filter(qId => qId !== questionId);
+        questionsOther = otherQuestions.filter(qId => qId !== questionId);
+        questionsJumps.push(
+          ...question.jumps.filter(jump => jump.always).map(jump => jump.destination.id),
+        );
+        questionsOther.push(
+          ...question.jumps.filter(jump => jump.always).map(jump => jump.destination.id),
+        );
+      }
+    });
+  });
+
+  return [questionsJumps, questionsOther];
+};
+
+const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
+  const firstLogicQuestion = questions
+    .filter(Boolean)
+    .find(
+      question =>
+        question.required ||
+        (question.jumps &&
+          question.jumps.length > 0 &&
+          afterQuestion &&
+          question.position >= afterQuestion.position),
+    );
+
+  let firstQuestionsIds = [];
+  if (firstLogicQuestion) {
+    const filteredIds = questions
+      .filter(
+        question =>
+          question.required ||
+          (question.jumps &&
+            question.jumps.length === 0 &&
+            afterQuestion &&
+            question.position > afterQuestion.position &&
+            question.position < firstLogicQuestion.position),
+      )
+      .map(question => question.id);
+    if (firstLogicQuestion && firstLogicQuestion.jumps) {
+      firstLogicQuestion.jumps.some(jump => {
+        if (jump && jump.always && jump.destination) {
+          filteredIds.push(jump.destination.id);
+        }
+        return jump && jump.always;
+      });
+    }
+    firstQuestionsIds = [firstLogicQuestion.id, ...filteredIds];
+  } else {
+    firstQuestionsIds = questions
+      .filter(question => afterQuestion && question.position > afterQuestion.position)
+      .map(question => question.id);
+  }
+
+  let questionsWithJumpsIds = populateQuestionsJump(
+    responses,
+    questions,
+    questionWithJump => (questionWithJump ? [questionWithJump.id] : []),
+  );
+
+  [questionsWithJumpsIds, firstQuestionsIds] = filterQuestions(
+    questions,
+    questionsWithJumpsIds,
+    firstQuestionsIds,
+  );
+
+  return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
+};
+
+export const getAvailableQuestionsIds = (questions: Questions, responses: ResponsesInReduxForm) => {
+  const firstLogicQuestion = questions.find(
+    question => question.jumps && question.jumps.length > 0,
+  );
+  const firstLogicQuestionId = firstLogicQuestion ? firstLogicQuestion.id : null;
+  const questionIsADestination = [];
+  questions.map(question => {
+    if (question.jumps !== null && question.jumps !== undefined) {
+      question.jumps.map(jump => {
+        questionIsADestination.push(jump ? jump.destination.id : {});
+      });
+    }
+  });
+
+  const filteredIds = questions
+    .filter(
+      question =>
+        question.required ||
+        (question.jumps &&
+          question.jumps.length === 0 &&
+          firstLogicQuestion &&
+          !questionIsADestination.includes(question.id)),
+    )
+    .map(question => question.id);
+
+  const firstQuestionsIds = [firstLogicQuestionId, ...filteredIds];
+  const questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump =>
+    getAvailableQuestionsIdsAfter(questionWithJump, questions, responses),
+  );
+
+  // $FlowFixMe
+  return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
+};
+
 export const formatSubmitResponses = (
   responses: ?ResponsesInReduxForm,
   questions: Questions,
 ): SubmitResponses => {
   if (!responses) return [];
+  const answeredQuestionsIds = getAvailableQuestionsIds(questions, responses);
   return responses.map(res => {
-    const { type: questionType } = questions.filter(q => res.questionId === q.id)[0];
-    const question = res.questionId;
+    const question = questions.filter(q => res.question === q.id)[0];
+    const { type: questionType } = question;
+
     if (questionType === 'medias') {
+      const medias = answeredQuestionsIds.includes(question.id)
+        ? Array.isArray(res.value)
+          ? res.value.map(value => value.id)
+          : []
+        : null;
       return {
-        question,
-        medias: Array.isArray(res.value) ? res.value.map(value => value.id) : [],
+        question: res.question,
+        medias,
       };
     }
-
+    let value = res.value;
     if (questionType === 'ranking' || questionType === 'button') {
-      const value = JSON.stringify({
-        labels: Array.isArray(res.value) ? res.value : [res.value],
-        other: null,
-      });
-      return {
-        question,
-        value,
-      };
+      value = answeredQuestionsIds.includes(question.id)
+        ? JSON.stringify({
+            labels: Array.isArray(res.value) ? res.value : [res.value],
+            other: null,
+          })
+        : null;
     } else if (questionType === 'checkbox' || questionType === 'radio') {
-      return {
-        question,
-        value: JSON.stringify(res.value),
-      };
+      value = answeredQuestionsIds.includes(question.id) ? JSON.stringify(res.value) : null;
     } else if (questionType === 'number') {
       return {
-        question,
+        question: res.question,
         value: res.value,
       };
     }
-    return { value: res.value, question };
+    if (typeof value === 'string') {
+      value = answeredQuestionsIds.includes(question.id) ? value : null;
+      return { value, question: res.question };
+    }
+    return { value: null, question: res.question };
   });
 };
 
@@ -123,14 +328,11 @@ export const getValueFromResponse = (questionType: string, responseValue: string
     if (questionType === 'button') {
       return JSON.parse(responseValue).labels[0];
     }
-    if (questionType === 'radio' || questionType === 'checkbox') {
+    if (questionType === 'radio' || questionType === 'checkbox' || questionType === 'number') {
       return JSON.parse(responseValue);
     }
     if (questionType === 'ranking') {
       return JSON.parse(responseValue).labels;
-    }
-    if (questionType === 'number') {
-      return JSON.parse(responseValue);
     }
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -151,22 +353,22 @@ export const formatInitialResponsesValues = (
     if (response) {
       if (typeof response.value !== 'undefined' && response.value !== null) {
         return {
-          questionId,
+          question: questionId,
           value: getValueFromResponse(question.type, response.value),
         };
       }
       if (typeof response.medias !== 'undefined') {
-        return { questionId, value: response.medias };
+        return { question: questionId, value: response.medias };
       }
     }
     // Otherwise we create an empty response
     if (question.type === 'medias') {
-      return { questionId, value: [] };
+      return { question: questionId, value: [] };
     }
     if (question.type === 'radio' || question.type === 'checkbox') {
-      return { questionId, value: { labels: [], other: null } };
+      return { question: questionId, value: { labels: [], other: null } };
     }
-    return { questionId, value: null };
+    return { question: questionId, value: null };
   });
 
 const formattedChoicesInField = field =>
@@ -226,7 +428,7 @@ export const validateResponses = (
   responses?: ResponsesError,
 } => {
   const responsesError = questions.map(question => {
-    const response = responses.filter(res => res && res.questionId === question.id)[0];
+    const response = responses.filter(res => res && res.question === question.id)[0];
     if (question.required) {
       if (question.type === 'medias') {
         if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
@@ -295,6 +497,141 @@ export const renderResponses = ({
   disabled: boolean,
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
+  const hasLogicJumps = questions.reduce(
+    (acc, question) => acc || (question && question.jumps && question.jumps.length > 0),
+    false,
+  );
+
+  if (hasLogicJumps) {
+    const availableQuestions = getAvailableQuestionsIds(questions, responses);
+    return (
+      <div>
+        {fields.map((member, index) => {
+          const field = questions[index];
+          if (!availableQuestions.includes(field.id)) {
+            return;
+          }
+          const inputType = field.type || 'text';
+          const isOtherAllowed = field.isOtherAllowed;
+
+          const labelAppend = field.required
+            ? strategy === 'minority_required'
+              ? ` <span class="warning small"> ${intl.formatMessage({
+                  id: 'global.mandatory',
+                })}</span>`
+              : ''
+            : strategy === 'majority_required' || strategy === 'half_required'
+              ? ` <span class="excerpt small"> ${intl.formatMessage({
+                  id: 'global.optional',
+                })}</span>`
+              : '';
+
+          const labelMessage = field.title + labelAppend;
+
+          const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
+
+          switch (inputType) {
+            case 'medias': {
+              return (
+                <ProposalPrivateField key={field.id} show={field.private}>
+                  <Field
+                    name={`${member}.value`}
+                    id={member}
+                    type="medias"
+                    component={component}
+                    help={field.helpText}
+                    description={field.description}
+                    placeholder="reply.your_response"
+                    label={label}
+                    disabled={disabled}
+                  />
+                </ProposalPrivateField>
+              );
+            }
+            case 'select': {
+              return (
+                <ProposalPrivateField key={field.id} show={field.private}>
+                  <Field
+                    name={`${member}.value`}
+                    id={member}
+                    type={inputType}
+                    component={component}
+                    help={field.helpText}
+                    isOtherAllowed={isOtherAllowed}
+                    description={field.description}
+                    placeholder="reply.your_response"
+                    label={label}
+                    disabled={disabled}>
+                    <option value="" disabled>
+                      {<FormattedMessage id="global.select" />}
+                    </option>
+                    {field.choices.map(choice => (
+                      <option key={choice.id} value={choice.title}>
+                        {choice.title}
+                      </option>
+                    ))}
+                  </Field>
+                </ProposalPrivateField>
+              );
+            }
+            default: {
+              let response;
+              if (responses) {
+                response = responses[index].value;
+              }
+              let choices = [];
+              if (
+                inputType === 'ranking' ||
+                inputType === 'radio' ||
+                inputType === 'checkbox' ||
+                inputType === 'button'
+              ) {
+                choices = formattedChoicesInField(field);
+                if (inputType === 'radio') {
+                  return (
+                    <ProposalPrivateField key={field.id} show={field.private}>
+                      <div key={`${member}-container`}>
+                        <MultipleChoiceRadio
+                          id={member}
+                          name={member}
+                          description={field.description}
+                          helpText={field.helpText}
+                          isOtherAllowed={isOtherAllowed}
+                          label={label}
+                          change={change}
+                          choices={choices}
+                          value={response}
+                          disabled={disabled}
+                        />
+                      </div>
+                    </ProposalPrivateField>
+                  );
+                }
+              }
+
+              return (
+                <ProposalPrivateField key={field.id} show={field.private}>
+                  <Field
+                    name={`${member}.value`}
+                    id={member}
+                    type={inputType}
+                    component={component}
+                    description={field.description}
+                    help={field.helpText}
+                    isOtherAllowed={isOtherAllowed}
+                    placeholder="reply.your_response"
+                    choices={choices}
+                    label={label}
+                    disabled={disabled}
+                  />
+                </ProposalPrivateField>
+              );
+            }
+          }
+        })}
+      </div>
+    );
+  }
   return (
     <div>
       {fields.map((member, index) => {

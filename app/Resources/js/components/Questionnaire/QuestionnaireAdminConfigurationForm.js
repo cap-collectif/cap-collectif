@@ -5,6 +5,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field, FieldArray, type FormProps } from 'redux-form';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
+import { submitQuestion } from '../../utils/submitQuestion';
 import AlertForm from '../Alert/AlertForm';
 import component from '../Form/Field';
 import UpdateQuestionnaireConfigurationMutation from '../../mutations/UpdateQuestionnaireConfigurationMutation';
@@ -19,6 +20,19 @@ type Props = RelayProps &
     features: FeatureToggles,
   };
 
+export type Jumps = ?$ReadOnlyArray<{|
+  +id?: string,
+  +always: boolean,
+  +origin: {
+    id: number,
+    title: string,
+  },
+  +destination: {
+    id: number,
+    title: string,
+  },
+  +conditions: Object,
+|}>;
 export type MultipleChoiceQuestionValidationRulesTypes = 'EQUAL' | 'MAX' | 'MIN';
 export type QuestionChoiceColor = 'DANGER' | 'INFO' | 'PRIMARY' | 'SUCCESS' | 'WARNING';
 export type QuestionTypeValue =
@@ -49,6 +63,7 @@ type FormValues = {
       type: MultipleChoiceQuestionValidationRulesTypes,
       number: number,
     |},
+    jumps: Jumps,
     questionChoices?: ?$ReadOnlyArray<{|
       id: string,
       title: string,
@@ -100,27 +115,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     ...values,
     id: undefined,
     questionnaireId: props.questionnaire.id,
-    questions: values.questions.map(question => {
-      const questionInput = {
-        question: {
-          ...question,
-          kind: undefined,
-          otherAllowed: question.isOtherAllowed,
-          randomQuestionChoices: question.isRandomQuestionChoices,
-          isOtherAllowed: undefined,
-          isRandomQuestionChoices: undefined,
-        },
-      };
-      if (multipleChoiceQuestions.indexOf(question.type) !== -1 && question.questionChoices) {
-        questionInput.question.questionChoices = question.questionChoices.map(choice => ({
-          ...choice,
-          kind: undefined,
-          image: choice.image ? choice.image.id : null,
-        }));
-      }
-
-      return questionInput;
-    }),
+    questions: submitQuestion(values.questions, multipleChoiceQuestions),
   };
 
   // $FlowFixMe
@@ -234,6 +229,32 @@ export default createFragmentContainer(
         type
         private
         required
+        jumps {
+          id
+          always
+          origin {
+            id
+            title
+          }
+          destination {
+            id
+            title
+          }
+          conditions {
+            id
+            operator
+            question {
+              id
+              title
+            }
+            ... on MultipleChoiceQuestionLogicJumpCondition {
+              value {
+                id
+                title
+              }
+            }
+          }
+        }
         kind
         ... on MultipleChoiceQuestion {
           isRandomQuestionChoices

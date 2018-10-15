@@ -1,0 +1,86 @@
+Capco\AppBundle\Entity\LogicJump:
+  logicjump1:
+    id: logicjump1
+    always: false
+    origin: '@multiplequestionHapNoel'
+    destination: '@multiplequestionHapCreation'
+    conditions: ['@ljconditionHap']
+  logicjump2:
+    id: logicjump2
+    always: false
+    origin: '@multiplequestionHapNoel'
+    destination: '@multiplequestionNoelFete'
+    conditions: ['@ljconditionNoel']
+  logicjump3:
+    id: logicjump3
+    always: false
+    origin: '@multiplequestionFavoriteFleuve'
+    destination: '@multiplequestionHapGange'
+    conditions: ['@ljconditionFleuveHap', '@ljconditionFleuveGange']
+  logicjump4:
+    id: logicjump4
+    always: false
+    origin: '@multiplequestionMarvelOrDc'
+    destination: '@multiplequestionMarvelIronManLike'
+    conditions: ['@ljconditionMarvel']
+  logicjump5:
+    id: logicjump5
+    always: false
+    origin: '@multiplequestionMarvelOrDc'
+    destination: '@multiplequestionDcSupermanLike'
+    conditions: ['@ljconditionDc']
+  logicjump6:
+    id: logicjump6
+    always: true
+    origin: '@multiplequestionDcSupergirlLike'
+    destination: '@multiplequestionEndConditionel'
+  logicjump7:
+    id: logicjump7
+    always: true
+    origin: '@multiplequestionMarvelThorLike'
+    destination: '@multiplequestionEndConditionel'
+  logicjump8:
+    id: logicjump8
+    always: true
+    origin: '@multiplequestionIsHapGood'
+    destination: '@multiplequestionMarvelOrDc'
+  logicjump9:
+    id: logicjump9
+    always: true
+    origin: '@multiplequestionNoelHatColor'
+    destination: '@multiplequestionMarvelOrDc'
+  logicjump10:
+    id: logicjump10
+    always: false
+    origin: '@multiplequestionIsHapGood'
+    destination: '@multiplequestionHapNotGoodHowDareYou'
+    conditions: ['@ljconditionHapGood']
+  logicjump11:
+    id: logicjump11
+    always: true
+    origin: '@multiplequestionHapNotGoodHowDareYou'
+    destination: '@multiplequestionMarvelOrDc'
+  logicjump12:
+    id: logicjump12
+    always: false
+    origin: '@ljMultipleQuestionRadio'
+    destination: '@ljMultipleQuestionSelect'
+    conditions: ['@ljconditionRadio']
+  logicjump13:
+    id: logicjump13
+    always: false
+    origin: '@ljMultipleQuestionSelect'
+    destination: '@ljMultipleQuestionButton'
+    conditions: ['@ljconditionSelect']
+  logicjump14:
+    id: logicjump14
+    always: false
+    origin: '@ljMultipleQuestionButton'
+    destination: '@ljMultipleQuestionCheckbox'
+    conditions: ['@ljconditionButton']
+  logicjump15:
+    id: logicjump15
+    always: false
+    origin: '@ljMultipleQuestionCheckbox'
+    destination: '@ljMultipleQuestionRanking'
+    conditions: ['@ljconditionCheckbox']

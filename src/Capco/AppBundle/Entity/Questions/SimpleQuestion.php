@@ -10,13 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 class SimpleQuestion extends AbstractQuestion
 {
     public static $questionTypesLabels = [
-         'question.types.text' => self::QUESTION_TYPE_SIMPLE_TEXT,
-         'question.types.textarea' => self::QUESTION_TYPE_MULTILINE_TEXT,
-         'question.types.editor' => self::QUESTION_TYPE_EDITOR,
+        'question.types.text' => self::QUESTION_TYPE_SIMPLE_TEXT,
+        'question.types.textarea' => self::QUESTION_TYPE_MULTILINE_TEXT,
+        'question.types.editor' => self::QUESTION_TYPE_EDITOR,
     ];
 
     public function __construct()
     {
+        parent::__construct();
         // Simple questions can't be of those types, we unset them
         unset(
             self::$questionTypesInputs[self::QUESTION_TYPE_RADIO],
