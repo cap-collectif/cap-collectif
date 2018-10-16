@@ -5,7 +5,10 @@ CommentOrderField:
     values:
       PUBLISHED_AT:
         value: 'PUBLISHED_AT'
+        description: 'Allows ordering a list of comments by when they were published.'
       UPDATED_AT:
         value: 'UPDATED_AT'
+        description: 'Allows ordering a list of comments by when they were updated.'
       POPULARITY:
         value: 'POPULARITY'
+        description: 'Allows ordering a list of comments by there likes.'

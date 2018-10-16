@@ -31,9 +31,6 @@ type Consultation implements Node {
   votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
 }
 
-# A string containing a datetime.
-scalar DateTime
-
 # Fetches an object given its ID
 interface Node {
   # The ID of an object
@@ -60,7 +57,7 @@ type Query {
   # The currently authenticated user.
   viewer: User!
 
-  # Fetches an object given its ID
+  # The ID of an object.
   node(
     # The ID of an object
     id: ID!
@@ -114,10 +111,10 @@ type User implements Node {
   # The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.
   url: URI
 
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  # The user's public name.
+  username: String
 
-  # Whether or not this user is the viewing user.
+  # Whether or not this user is the authenticated user.
   isViewer: Boolean!
 }
 

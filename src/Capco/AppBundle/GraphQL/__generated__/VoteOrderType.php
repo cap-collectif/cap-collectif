@@ -25,12 +25,12 @@ final class VoteOrderType extends InputObjectType implements GeneratedTypeInterf
                 return [
                 'field' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('VoteOrderField')),
-                    'description' => null,
+                    'description' => 'The field to order votes by.',
                     'defaultValue' => 'PUBLISHED_AT',
                 ],
                 'direction' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('OrderDirection')),
-                    'description' => null,
+                    'description' => 'The ordering direction.',
                     'defaultValue' => 'DESC',
                 ],
             ];

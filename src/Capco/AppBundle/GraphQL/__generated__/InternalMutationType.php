@@ -21,7 +21,7 @@ final class InternalMutationType extends ObjectType implements GeneratedTypeInte
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'Mutation',
-            'description' => 'Root of the schema.',
+            'description' => null,
             'fields' => function () use ($globalVariable) {
                 return [
                 'addComment' => [

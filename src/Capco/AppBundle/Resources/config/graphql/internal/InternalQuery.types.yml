@@ -27,16 +27,18 @@ InternalQuery:
             type: 'ID'
         resolve: "@=resolver('consultation', [args])"
       groups:
+        description: 'Lookup groups.'
         type: '[Group!]!'
         access: "@=hasRole('ROLE_ADMIN')"
         resolve: "@=resolver('groups')"
       proposalForms:
+        description: 'Lookup forms.'
         type: '[ProposalForm]!'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver")'
       availableDistrictsForLocalisation:
         type: '[District!]!'
-        description: 'Retrieve availables districts for a given address'
+        description: 'Lookup availables districts on a proposalForm for a given address.'
         args:
           proposalFormId:
             type: 'ID!'
@@ -48,12 +50,14 @@ InternalQuery:
           "@=resolver('query_available_districts_for_location', [args['proposalFormId'], args['latitude'], args['longitude']])"
       votesByContribution:
         type: '[ProposalVote!]!'
+        description: 'TO BE REMOVED'
         args:
           contribution:
             type: 'ID!'
         resolve: "@=resolver('votesByContribution', [args])"
       contributions:
         type: '[Opinion!]!'
+        description: 'TO BE REMOVED'
         args:
           consultation:
             description: 'Returns all contributions of the provided consultation.'
@@ -61,6 +65,7 @@ InternalQuery:
         resolve: "@=resolver('contributions', [args])"
       contributionsBySection:
         type: '[Opinion!]!'
+        description: 'TO BE REMOVED'
         args:
           sectionId:
             type: 'ID!'
@@ -70,6 +75,7 @@ InternalQuery:
         resolve: "@=resolver('contributionsBySection', [args])"
       question:
         type: 'Question!'
+        description: 'TO BE REMOVED'
         args:
           id:
             type: 'Int!'

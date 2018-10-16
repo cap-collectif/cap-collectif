@@ -11,13 +11,12 @@ PublicUser:
         description:
           'The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.'
         resolve: "@=resolver('user_show_url', [value])"
-      createdAt:
-        type: 'DateTime!'
-        description: 'Identifies the date and time when the object was created.'
-        access:
-          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      username:
+        type: 'String'
+        description: "The user's public name."
       isViewer:
         type: 'Boolean!'
+        access: "@=hasRole('ROLE_USER')"
         resolve:
           '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(getUser(), value)'
-        description: 'Whether or not this user is the viewing user.'
+        description: 'Whether or not this user is the authenticated user.'

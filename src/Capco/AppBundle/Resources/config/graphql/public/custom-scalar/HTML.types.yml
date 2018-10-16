@@ -1,7 +1,7 @@
 HTML:
   type: custom-scalar
   config:
-    # description: "A string containing HTML code."
+    description: 'A string containing HTML code.'
     serialize: ["Capco\\AppBundle\\GraphQL\\Type\\HTMLType", 'serialize']
     parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\HTMLType", 'parseValue']
     parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\HTMLType", 'parseLiteral']

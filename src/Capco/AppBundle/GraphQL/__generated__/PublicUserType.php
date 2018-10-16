@@ -50,19 +50,17 @@ final class PublicUserType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'createdAt' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
+                'username' => [
+                    'type' => Type::string(),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Identifies the date and time when the object was created.',
+                    'description' => 'The user\'s public name.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver")->isGranted(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), $value, $context);
-                    },
+                    'access' => null,
                 ],
                 'isViewer' => [
                     'type' => Type::nonNull(Type::boolean()),
@@ -71,12 +69,14 @@ final class PublicUserType extends ObjectType implements GeneratedTypeInterface
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver")->isViewer(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), $value);
                     },
-                    'description' => 'Whether or not this user is the viewing user.',
+                    'description' => 'Whether or not this user is the authenticated user.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
             ];
             },

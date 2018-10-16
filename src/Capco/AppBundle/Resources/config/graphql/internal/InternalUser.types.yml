@@ -7,10 +7,13 @@ InternalUser:
     interfaces: [Node]
     name: User
     fields:
-      # TODO move to internal ?
-      username:
-        type: 'String'
-        description: "The user's public username."
+      # TODO We need to check with RGPD if we can expose this data
+      # Ex: github is doing it
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       # TODO rename this to `name`
       displayName:
         type: 'String!'

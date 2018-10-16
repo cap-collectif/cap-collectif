@@ -120,3 +120,14 @@ Capco\AppBundle\Entity\MenuItem:
     position: 3
     menu: 1
     parent: '@MenuItem5'
+
+  MenuItem16:
+    title: Développeurs
+    link: developer
+    isEnabled: 1
+    isDeletable: 0
+    isFullyModifiable: 0
+    associatedFeatures: [developer_documentation]
+    position: 8
+    parent: null
+    menu: 2

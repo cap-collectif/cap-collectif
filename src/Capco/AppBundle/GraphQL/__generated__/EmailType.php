@@ -19,7 +19,7 @@ final class EmailType extends CustomScalarType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'Email',
-            'description' => null,
+            'description' => 'A string containing an email.',
             'scalarType' => null,
             'serialize' => function () use ($globalVariable) {
                 return call_user_func_array(['Capco\\AppBundle\\GraphQL\\Type\\EmailType', 'serialize'], func_get_args());

@@ -10,3 +10,4 @@ AddCommentPayload:
         description: 'The commentable.'
       userErrors:
         type: '[UserError!]!'
+        description: 'An unsuccessful mutation will return one or more `UserError` objects.'

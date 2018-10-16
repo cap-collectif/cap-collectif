@@ -3,7 +3,9 @@
     "license": "proprietary",
     "description": "Cap-Collectif SaaS",
     "autoload": {
-        "exclude-from-classmap": ["**/Behat/"],
+        "exclude-from-classmap": [
+            "**/Behat/"
+        ],
         "psr-4": {
             "Capco\\AppBundle\\": "src/Capco/AppBundle",
             "Capco\\AdminBundle\\": "src/Capco/AdminBundle",
@@ -12,7 +14,9 @@
             "Capco\\UserBundle\\": "src/Capco/UserBundle",
             "Capco\\AppBundle\\GraphQL\\__GENERATED__\\": "src/Capco/AppBundle/GraphQL/__generated__"
         },
-        "files": ["app/AppKernel.php"]
+        "files": [
+            "app/AppKernel.php"
+        ]
     },
     "repositories": [
         {
@@ -74,13 +78,11 @@
         "symfony/monolog-bundle": "~2.11",
         "sensio/distribution-bundle": "~5.0",
         "sensio/framework-extra-bundle": "^3.0.29",
-
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "stof/doctrine-extensions-bundle": "^1.2",
         "hautelook/alice-bundle": "^1.4",
         "doctrine/doctrine-migrations-bundle": "^1.2",
         "doctrine/orm": "^2.5",
-
         "sonata-project/easy-extends-bundle": "2.5.0",
         "sonata-project/core-bundle": "3.9.1",
         "sonata-project/admin-bundle": "^3.1.0",
@@ -94,12 +96,10 @@
         "sonata-project/doctrine-extensions": "^1.0",
         "sonata-project/intl-bundle": "2.4.0",
         "sonata-project/notification-bundle": "^3.0",
-
         "hwi/oauth-bundle": "^0.6",
         "liip/imagine-bundle": "1.9.1",
         "qandidate/toggle-bundle": "~0.1",
         "predis/predis": "^1.0",
-
         "willdurand/geocoder": "~3.0",
         "tilleuls/ckeditor-sonata-media-bundle": "1.0.8",
         "egeloen/ckeditor-bundle": "~4.0",
@@ -187,13 +187,15 @@
         "bex/behat-step-time-logger": "^1.0"
     },
     "scripts": {
-        "post-install-cmd":[
+        "post-install-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
         ]
     },
     "config": {
         "bin-dir": "bin",
-        "github-oauth": {"github.com": "***REMOVED***"}
+        "github-oauth": {
+            "github.com": "***REMOVED***"
+        }
     },
     "extra": {
         "symfony-app-dir": "app",

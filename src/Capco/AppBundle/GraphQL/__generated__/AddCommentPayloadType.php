@@ -52,7 +52,7 @@ final class AddCommentPayloadType extends ObjectType implements GeneratedTypeInt
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'An unsuccessful mutation will return one or more `UserError` objects.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

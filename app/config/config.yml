@@ -635,6 +635,7 @@ hslavich_simplesamlphp:
 
 overblog_graphiql:
   endpoint_resolver: Capco\AppBundle\GraphQL\EndpointResolver
+  template: 'CapcoAppBundle:GraphiQL:index.html.twig'
 overblog_dataloader:
   defaults:
     promise_adapter: 'overblog_dataloader.webonyx_graphql_sync_promise_adapter'
@@ -656,6 +657,7 @@ overblog_graphql:
     # internal_error_message: "An error occurred, please retry later or contact us!"
     config_validation: '%kernel.debug%'
     use_classloader_listener: false
+    # We generate types manually with "graphql:compile" command.
     auto_compile: false
     cache_dir: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/__generated__'
     class_namespace: "Capco\\AppBundle\\GraphQL\\__GENERATED__"

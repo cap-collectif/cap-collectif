@@ -6,9 +6,9 @@ use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByProjectResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByStepResolver;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
-use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use JMS\Serializer\EventDispatcher\ObjectEvent;
 
 class UserSerializationListener extends AbstractSerializationListener
 {

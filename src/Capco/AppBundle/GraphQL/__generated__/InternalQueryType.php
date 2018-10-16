@@ -52,7 +52,7 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["relay_node_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('resolverResolver')->resolve(["query_node", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
                     },
-                    'description' => 'Fetches an object given its ID',
+                    'description' => 'The ID of an object.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -145,7 +145,7 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["groups", []]);
                     },
-                    'description' => null,
+                    'description' => 'Lookup groups.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -161,7 +161,7 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver", []]);
                     },
-                    'description' => null,
+                    'description' => 'Lookup forms.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -190,7 +190,7 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["query_available_districts_for_location", array(0 => $args["proposalFormId"], 1 => $args["latitude"], 2 => $args["longitude"])]);
                     },
-                    'description' => 'Retrieve availables districts for a given address',
+                    'description' => 'Lookup availables districts on a proposalForm for a given address.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -209,7 +209,7 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["votesByContribution", array(0 => $args)]);
                     },
-                    'description' => null,
+                    'description' => 'TO BE REMOVED',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -228,7 +228,7 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["contributions", array(0 => $args)]);
                     },
-                    'description' => null,
+                    'description' => 'TO BE REMOVED',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -252,7 +252,7 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["contributionsBySection", array(0 => $args)]);
                     },
-                    'description' => null,
+                    'description' => 'TO BE REMOVED',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -271,7 +271,7 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["query_question", array(0 => $args)]);
                     },
-                    'description' => null,
+                    'description' => 'TO BE REMOVED',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

@@ -16,6 +16,8 @@ type AddArgumentPayload {
 
   # The edge from the argumentable's arguments connection.
   argumentEdge: ArgumentEdge
+
+  # An unsuccessful mutation will return one or more `UserError` objects.
   userErrors: [UserError!]!
   clientMutationId: String
 }
@@ -49,6 +51,8 @@ type AddCommentPayload {
 
   # The commentable.
   commentable: Commentable
+
+  # An unsuccessful mutation will return one or more `UserError` objects.
   userErrors: [UserError!]!
   clientMutationId: String
 }
@@ -138,6 +142,8 @@ type AddSourcePayload {
 
   # The edge from the sourceable's sources connection.
   sourceEdge: SourceEdge
+
+  # An unsuccessful mutation will return one or more `UserError` objects.
   userErrors: [UserError!]!
   clientMutationId: String
 }
@@ -204,10 +210,13 @@ input AddVersionInput {
 type AddVersionPayload {
   version: Version
   versionEdge: VersionEdge
+
+  # An unsuccessful mutation will return one or more `UserError` objects.
   userErrors: [UserError]
   clientMutationId: String
 }
 
+# A string containing Address code.
 scalar Address
 
 # A contribution
@@ -370,7 +379,10 @@ enum ArgumentOrderField {
 
 # Value of an argument
 enum ArgumentValue {
+  # AGAINST argument
   AGAINST
+
+  # FOR argument
   FOR
 }
 
@@ -977,8 +989,13 @@ input CommentOrder {
 
 # Ordering options for comments.
 enum CommentOrderField {
+  # Allows ordering a list of comments by when they were published.
   PUBLISHED_AT
+
+  # Allows ordering a list of comments by when they were updated.
   UPDATED_AT
+
+  # Allows ordering a list of comments by there likes.
   POPULARITY
 }
 
@@ -1202,11 +1219,22 @@ input ContributionOrder {
 
 # Ordering options for contributions connections.
 enum ContributionOrderField {
+  # Allows ordering a list of contributions by there number of comments.
   COMMENT_COUNT
+
+  # Allows ordering a list of contributions by there number of votes ok.
   POPULAR
+
+  # Allows ordering a list of contributions by there position.
   POSITION
+
+  # Allows ordering a list of contributions by when they were published.
   PUBLISHED_AT
+
+  # Allows ordering a list of contributions randomly.
   RANDOM
+
+  # Allows ordering a list of contributions by there number of votes.
   VOTE_COUNT
 }
 
@@ -1340,6 +1368,7 @@ type CreateUserPayload {
   clientMutationId: String
 }
 
+# A string containing CSS.
 scalar CssJSON
 
 # A string containing a datetime.
@@ -1389,6 +1418,8 @@ input DeleteCommentInput {
 type DeleteCommentPayload {
   deletedCommentId: ID
   commentable: Commentable
+
+  # An unsuccessful mutation will return one or more `UserError` objects.
   userErrors: [UserError]
   clientMutationId: String
 }
@@ -1512,6 +1543,7 @@ interface EditableContribution {
   updatedAt: DateTime
 }
 
+# A string containing an email.
 scalar Email
 
 # A Evaluation form (question)
@@ -1700,6 +1732,7 @@ enum GenderValue {
   OTHER
 }
 
+# A string containing GeoJSON code.
 scalar GeoJSON
 
 # A group of User
@@ -1750,10 +1783,13 @@ type GroupEdge {
   cursor: String!
 }
 
+# A string containing HTML code.
 scalar HTML
 
+# A string containing an IP address.
 scalar IP
 
+# A string containing JSON code.
 scalar JSON
 
 # Requires a lastname
@@ -1969,7 +2005,6 @@ enum MultipleChoiceQuestionValidationRulesTypes {
   MAX
 }
 
-# Root of the schema.
 type Mutation {
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
@@ -3311,7 +3346,7 @@ type Query {
   # The currently authenticated user.
   viewer: User!
 
-  # Fetches an object given its ID
+  # The ID of an object.
   node(
     # The ID of an object
     id: ID!
@@ -3342,22 +3377,34 @@ type Query {
     # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     id: ID
   ): [Consultation!]!
+
+  # Lookup groups.
   groups: [Group!]!
+
+  # Lookup forms.
   proposalForms: [ProposalForm]!
 
-  # Retrieve availables districts for a given address
+  # Lookup availables districts on a proposalForm for a given address.
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
+
+  # TO BE REMOVED
   votesByContribution(contribution: ID!): [ProposalVote!]!
+
+  # TO BE REMOVED
   contributions(
     # Returns all contributions of the provided consultation.
     consultation: ID!
   ): [Opinion!]!
+
+  # TO BE REMOVED
   contributionsBySection(
     sectionId: ID!
 
     # Max depth.
     limit: Int!
   ): [Opinion!]!
+
+  # TO BE REMOVED
   question(id: Int!): Question!
   availableQuestionnaires: [Questionnaire!]!
 }
@@ -4854,14 +4901,14 @@ type User implements Node {
   # The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.
   url: URI
 
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  # The user's public name.
+  username: String
 
-  # Whether or not this user is the viewing user.
+  # Whether or not this user is the authenticated user.
   isViewer: Boolean!
 
-  # The user's public username.
-  username: String
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
 
   # The user's public profile name.
   displayName: String!
@@ -5150,9 +5197,13 @@ type UserEdge {
   cursor: String!
 }
 
-# An error.
+# A business-level error.
 type UserError {
+  # The reason which caused the error.
   message: String
+
+  # Path to input field which caused the error.
+  field: [String!]
 }
 
 # A user's notifications configuration
@@ -5163,8 +5214,13 @@ type UserNotificationsConfiguration {
 
 # 3 possible values
 enum UserRole {
+  # Represents a user.
   ROLE_USER
+
+  # Represents an administrator.
   ROLE_ADMIN
+
+  # Represents Cap Collectif account.
   ROLE_SUPER_ADMIN
 }
 
@@ -5393,7 +5449,7 @@ input VersionOrder {
   # The field in which to order nodes by.
   field: VersionOrderField!
 
-  # The direction in which to order nodes.
+  # The ordering direction.
   direction: OrderDirection! = ASC
 }
 
@@ -5493,7 +5549,10 @@ input VoteInput {
 
 # Ways in which lists of votes can be ordered upon return.
 input VoteOrder {
+  # The field to order votes by.
   field: VoteOrderField! = PUBLISHED_AT
+
+  # The ordering direction.
   direction: OrderDirection! = DESC
 }
 

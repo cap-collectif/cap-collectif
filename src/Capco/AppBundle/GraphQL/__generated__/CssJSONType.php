@@ -19,7 +19,7 @@ final class CssJSONType extends CustomScalarType implements GeneratedTypeInterfa
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'CssJSON',
-            'description' => null,
+            'description' => 'A string containing CSS.',
             'scalarType' => null,
             'serialize' => function () use ($globalVariable) {
                 return call_user_func_array(['Capco\\AppBundle\\GraphQL\\Type\\CssJSONType', 'serialize'], func_get_args());

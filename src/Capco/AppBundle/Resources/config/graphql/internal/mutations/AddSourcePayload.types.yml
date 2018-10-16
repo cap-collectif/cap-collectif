@@ -10,3 +10,4 @@ AddSourcePayload:
         description: "The edge from the sourceable's sources connection."
       userErrors:
         type: '[UserError!]!'
+        description: 'An unsuccessful mutation will return one or more `UserError` objects.'

@@ -19,7 +19,7 @@ final class IPType extends CustomScalarType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'IP',
-            'description' => null,
+            'description' => 'A string containing an IP address.',
             'scalarType' => null,
             'serialize' => function () use ($globalVariable) {
                 return call_user_func_array(['Capco\\AppBundle\\GraphQL\\Type\\IPType', 'serialize'], func_get_args());

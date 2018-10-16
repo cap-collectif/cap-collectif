@@ -19,7 +19,7 @@ final class GeoJSONType extends CustomScalarType implements GeneratedTypeInterfa
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'GeoJSON',
-            'description' => null,
+            'description' => 'A string containing GeoJSON code.',
             'scalarType' => null,
             'serialize' => function () use ($globalVariable) {
                 return call_user_func_array(['Capco\\AppBundle\\GraphQL\\Type\\GeoJSONType', 'serialize'], func_get_args());

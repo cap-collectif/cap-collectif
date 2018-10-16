@@ -20,7 +20,7 @@ final class UserErrorType extends ObjectType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'UserError',
-            'description' => 'An error.',
+            'description' => 'A business-level error.',
             'fields' => function () use ($globalVariable) {
                 return [
                 'message' => [
@@ -28,7 +28,19 @@ final class UserErrorType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'The reason which caused the error.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'field' => [
+                    'type' => Type::listOf(Type::nonNull(Type::string())),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Path to input field which caused the error.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

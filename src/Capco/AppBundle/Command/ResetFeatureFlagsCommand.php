@@ -60,6 +60,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->deactivate('restrict_registration_via_email_domain');
         $toggleManager->deactivate('login_paris');
         $toggleManager->activate('indexation');
+        $toggleManager->activate('developer_documentation');
         $toggleManager->deactivate('login_openid');
         $toggleManager->activate('consultation_plan');
 
@@ -68,6 +69,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
             $toggleManager->deactivate('login_facebook');
             $toggleManager->deactivate('login_gplus');
             $toggleManager->deactivate('server_side_rendering');
+            $toggleManager->deactivate('developer_documentation');
 
             $toggleManager->deactivate('login_saml');
             $toggleManager->deactivate('login_paris');

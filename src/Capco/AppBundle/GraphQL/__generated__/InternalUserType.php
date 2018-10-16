@@ -50,6 +50,34 @@ final class InternalUserType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
+                'username' => [
+                    'type' => Type::string(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The user\'s public name.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'isViewer' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver")->isViewer(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), $value);
+                    },
+                    'description' => 'Whether or not this user is the authenticated user.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
                 'createdAt' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
                     'args' => [
@@ -63,32 +91,6 @@ final class InternalUserType extends ObjectType implements GeneratedTypeInterfac
                     'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
                         return $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver")->isGranted(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), $value, $context);
                     },
-                ],
-                'isViewer' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver")->isViewer(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable), $value);
-                    },
-                    'description' => 'Whether or not this user is the viewing user.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'username' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The user\'s public username.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
                 ],
                 'displayName' => [
                     'type' => Type::nonNull(Type::string()),

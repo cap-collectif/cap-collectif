@@ -42,6 +42,7 @@ class FeaturesCategoryResolver
                 'server_side_rendering',
                 'export',
                 'indexation',
+                'developer_documentation',
             ],
         ],
         'settings.notifications' => ['conditions' => [], 'features' => []],

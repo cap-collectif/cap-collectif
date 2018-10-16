@@ -5,5 +5,7 @@ ArgumentValue:
     values:
       AGAINST:
         value: 0
+        description: 'AGAINST argument'
       FOR:
         value: 1
+        description: 'FOR argument'

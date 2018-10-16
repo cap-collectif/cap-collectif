@@ -63,6 +63,12 @@ parameters:
   env(SYMFONY_DISABLE_MAIL_DELIVERY): false
 
 services:
+  import.csvtoarray:
+    class: Capco\AppBundle\Helper\ConvertCsvToArray
+
+  Capco\AppBundle\Controller\Site\DeveloperController:
+    autowire: true
+
   redis_adapter:
     class: Capco\AppBundle\Adapter\RedisAdapter
     arguments: ['@snc_redis.default']
@@ -99,7 +105,8 @@ services:
     autowire: true
     arguments:
       $number: '%twilio_number%'
-  
+    public: true
+
   capco.canonicalizer:
     class: Capco\AppBundle\Utils\Canonicalizer
 

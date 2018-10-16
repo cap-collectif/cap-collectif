@@ -19,7 +19,7 @@ final class HTMLType extends CustomScalarType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'HTML',
-            'description' => null,
+            'description' => 'A string containing HTML code.',
             'scalarType' => null,
             'serialize' => function () use ($globalVariable) {
                 return call_user_func_array(['Capco\\AppBundle\\GraphQL\\Type\\HTMLType', 'serialize'], func_get_args());

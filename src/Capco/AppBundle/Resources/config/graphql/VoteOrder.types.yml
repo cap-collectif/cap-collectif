@@ -6,6 +6,8 @@ VoteOrder:
       field:
         type: 'VoteOrderField!'
         defaultValue: 'PUBLISHED_AT'
+        description: The field to order votes by.
       direction:
         type: 'OrderDirection!'
         defaultValue: 'DESC'
+        description: The ordering direction.

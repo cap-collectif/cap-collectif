@@ -1,7 +1,11 @@
 UserError:
   type: object
   config:
-    description: 'An error.'
+    description: 'A business-level error.'
     fields:
       message:
+        description: 'The reason which caused the error.'
         type: 'String'
+      field:
+        description: 'Path to input field which caused the error.'
+        type: '[String!]'

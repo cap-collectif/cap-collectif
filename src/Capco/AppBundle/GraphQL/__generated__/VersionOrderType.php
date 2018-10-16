@@ -29,7 +29,7 @@ final class VersionOrderType extends InputObjectType implements GeneratedTypeInt
                 ],
                 'direction' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('OrderDirection')),
-                    'description' => 'The direction in which to order nodes.',
+                    'description' => 'The ordering direction.',
                     'defaultValue' => 'ASC',
                 ],
             ];

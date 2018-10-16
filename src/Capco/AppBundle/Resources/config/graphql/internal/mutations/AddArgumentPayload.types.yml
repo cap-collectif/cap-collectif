@@ -10,3 +10,4 @@ AddArgumentPayload:
         description: "The edge from the argumentable's arguments connection."
       userErrors:
         type: '[UserError!]!'
+        description: 'An unsuccessful mutation will return one or more `UserError` objects.'

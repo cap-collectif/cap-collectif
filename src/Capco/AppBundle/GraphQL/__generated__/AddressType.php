@@ -19,7 +19,7 @@ final class AddressType extends CustomScalarType implements GeneratedTypeInterfa
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'Address',
-            'description' => null,
+            'description' => 'A string containing Address code.',
             'scalarType' => null,
             'serialize' => function () use ($globalVariable) {
                 return call_user_func_array(['Capco\\AppBundle\\GraphQL\\Type\\AddressType', 'serialize'], func_get_args());

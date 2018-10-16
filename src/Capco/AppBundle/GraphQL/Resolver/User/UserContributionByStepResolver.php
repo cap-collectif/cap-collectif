@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
@@ -23,7 +23,7 @@ class UserContributionByStepResolver implements ResolverInterface
         $this->container = $container;
     }
 
-    public function __invoke(User $user, AbstractStep $step, Argument $args): Connection
+    public function __invoke(User $user, AbstractStep $step, Argument $args) : Connection
     {
         $paginator = new Paginator(function (int $offset, int $limit) {
             return [];

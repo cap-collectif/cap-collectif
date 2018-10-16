@@ -14,6 +14,7 @@ class Manager
         'calendar',
         'captcha',
         'consent_external_communication',
+        'developer_documentation',
         'login_facebook',
         'login_gplus',
         'login_saml',

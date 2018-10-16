@@ -1,0 +1,326 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block metaTags %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title': 'Developper',
+        'url':   url('app_developer')
+    } only %}
+{% endblock %}
+
+{% block title %}
+    Cap Collectif Developers
+{% endblock %}
+
+{% block body %}
+{# See https://jsfiddle.net/ann7tctp/ #}
+<style>
+
+.list-group.list-group-root {
+    padding: 0;
+    overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+    margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+    border-radius: 0;
+    border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+    border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+    padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+    padding-left: 45px;
+}
+
+.list-group-item .glyphicon {
+    margin-right: 5px;
+}
+</style>
+
+{% block javascripts %}
+{{ parent() }}
+{% endblock %}
+
+<div class="container">
+
+<div class="row">
+    <h2><strong>Cap Collectif Developers</strong> - GraphQL API</h2>
+
+    {% include 'CapcoAppBundle:Developer:menu.html.twig' with {'active': 'reference'} %}
+</div>
+
+<div class="row" style="margin-top: 30px">
+
+<div class="col-md-4 list-group list-group-root well">
+
+  <a href="#" class="list-group-item" data-toggle="collapse" data-target="#overview">
+    <i class="glyphicon glyphicon-chevron-right"></i>Overview
+  </a>
+
+  <a href="#" class="list-group-item" data-toggle="collapse" data-target="#query">
+    <i class="glyphicon glyphicon-chevron-right"></i>Query
+  </a>
+  <div class="list-group collapse" id="query">
+      {# <a href="/developer/query#connections" class="list-group-item">Connections</a> #}
+      <a href="/developer/query#fields" class="list-group-item">Fields</a>
+  </div>
+
+    {% if mutation %}
+  <a href="#mutations" class="list-group-item" data-toggle="collapse">
+    <i class="glyphicon glyphicon-chevron-right"></i>Mutations
+  </a>
+  <div class="list-group collapse" id="mutations">
+      {% for field in mutation.fields %}
+      <a href="/developer/mutation/{{field.name}}" class="list-group-item">{{ field.name }}</a>
+      {% endfor %}
+  </div>
+    {% endif %}
+  
+  {% if objects is not empty %}
+  <a href="#objects" class="list-group-item" data-toggle="collapse">
+    <i class="glyphicon glyphicon-chevron-right"></i>Objects
+  </a>
+  <div class="list-group collapse" id="objects">
+        {% for type in objects %}
+      <a href="/developer/object/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+      {% endfor %}
+  </div>
+    {% endif %}
+  
+  {% if interfaces is not empty %}
+  <a href="#interfaces" class="list-group-item" data-toggle="collapse">
+    <i class="glyphicon glyphicon-chevron-right"></i>Interfaces
+  </a>
+  <div class="list-group collapse" id="interfaces">
+        {% for type in interfaces %}
+      <a href="/developer/interface/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+      {% endfor %}
+  </div>
+    {% endif %}
+  
+  {% if enums is not empty %}
+  <a href="#enums" class="list-group-item" data-toggle="collapse">
+    <i class="glyphicon glyphicon-chevron-right"></i>Enums
+  </a>
+  <div class="list-group collapse" id="enums">
+        {% for type in enums %}
+      <a href="/developer/enum/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+      {% endfor %}
+  </div>
+    {% endif %}
+  
+    {% if unions is not empty %}
+   <a href="#unions" class="list-group-item" data-toggle="collapse">
+    <i class="glyphicon glyphicon-chevron-right"></i>Unions
+  </a>
+  <div class="list-group collapse" id="unions">
+        {% for type in unions %}
+      <a href="/developer/union/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+      {% endfor %}
+  </div>
+    {% endif %}
+  
+    {% if input_objects is not empty %}
+  <a href="#input_objects" class="list-group-item" data-toggle="collapse">
+    <i class="glyphicon glyphicon-chevron-right"></i>Input Objects
+  </a>
+  <div class="list-group collapse" id="input_objects">
+        {% for type in input_objects %}
+      <a href="/developer/input_object/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+      {% endfor %}
+  </div>
+    {% endif %}
+  
+  <a href="#scalars" class="list-group-item" data-toggle="collapse">
+    <i class="glyphicon glyphicon-chevron-right"></i>Scalars
+  </a>
+  <div class="list-group collapse" id="scalars">
+        {% for type in scalars %}
+      <a href="/developer/scalar/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+      {% endfor %}
+  </div>
+  
+</div>
+
+<div class="col-md-8">
+
+    {% if category is null %}
+    <h1>Overview</h1>
+
+    Cap Collectif provides an API to read and write data.
+
+    <h4>Endpoints</h4>
+    This is an HTTPS-only API. All API requests are made to <strong>{{ url('graphql_endpoint') }}</strong>.
+
+    <h4>Authentication</h4>
+    Documentation coming soon.
+
+    <span class="label label-info">ROLE_USER</span> Indicates that this field can only be access if authenticated.
+
+    {# Authentication is based on API Keys. Each API Key is associated with a Help Scout user. Results returned from various responses are based upon the role of the user to which the API key is tied. #}
+
+    <h4>Rate limits</h4>
+    Coming soon.
+
+    <h4>About the GraphQL schema reference</h4>
+    The docs in the sidebar are generated from Cap Collectif GraphQL schema. All calls are validated and executed against the schema. Use these docs to find out what data you can call:
+
+    <ul>
+        <li>Allowed operations: queries and mutations.</li>
+        <li>Schema-defined types: scalars, objects, enums, interfaces, unions, and input objects.</li>
+    </ul>
+
+{# You can access this same content via the Explorer Docs sidebar. Note that you may need to rely on both the docs and the schema validation to successfully call the GraphQL API. #}
+{# For other information, such as authentication and rate limit details, check out the guides. #}
+
+    {% endif %}
+
+    {% if category == "query" %}
+    <h1>{{query.name}}</h1>
+    <p>Every GraphQL schema has a root type for both queries and mutations. The <a href="https://facebook.github.io/graphql/#sec-Type-System">query type</a> defines GraphQL operations that retrieve data from the server.</p>
+    {% for field in query.fields if 'Connection' in field.type.toString %}
+        {% if loop.first %}
+        <h2>
+            Connections
+        </h2>
+        {% endif %}
+        {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
+    {% endfor %}
+    {% for field in query.fields if 'Connection' not in field.type.toString %}
+        {% if loop.first %}
+        <h2>
+            Fields
+        </h2>
+        {% endif %}
+        {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
+    {% endfor %}
+    {% endif %}
+    
+    {% if mutation and category == "mutation" and selection is not null %}
+    {% for field in mutation.fields if field.name == selection %}
+        <h1>{{field.name}}</h1>
+        <p>{{field.description}}</p>
+        <h2>
+           Input fields
+        </h2>
+        {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field.args[0]} %}
+        <h2>
+            Payload fields
+        </h2>
+        {% for payloadField in field.type.fields %}
+         {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': payloadField} %}
+        {% endfor %}
+
+    {% endfor %}
+    {% endif %}
+
+    {% if category == "object" %}
+      {% for type in objects if type.name == selection %}
+        <h1>{{type.name}}</h1>
+        <p>{{type.description}}</p>
+
+        {% for interface in type.interfaces %}
+            {% if loop.first %}
+                <h2>Implements</h2>
+                <ul>
+            {% endif %}
+            <li>
+                <a href="/developer/interface/{{interface.name}}">
+                    {{ interface.name }}
+                </a>
+            </li>
+            {% if loop.last %}
+                </ul>
+            {% endif %}
+        {% endfor %}
+
+        {% for field in type.fields %}
+            {% if loop.first %}
+                <h2>Fields</h2>
+            {% endif %}
+            {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+
+    {% if category == "interface" %}
+      {% for type in interfaces if type.name == selection %}
+        <h1>{{type.name}}</h1>
+        <p>{{type.description}}</p>
+        <h2>Implemented by</h2>
+        <ul>
+        {% for object in objects if object.implementsInterface(type) %}
+            <li>
+            <a href="/developer/object/{{object.name}}">
+             {{ object.name }}
+            </a>
+            </li>
+        {% endfor %}
+        </ul>
+        {% for field in type.fields %}
+            {% if loop.first %}
+                <h2>Fields</h2>
+            {% endif %}
+            {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+
+    {% if category == "enum" %}
+      {% for enum in enums if enum.name == selection %}
+        <h1>{{enum.name}}</h1>
+        <p>{{enum.description}}</p>
+        <h2>Values</h2>
+        {% for value in enum.values %}
+            <div>
+             <h4>{{ value.name }}</h4>
+             <p>{{ value.description }}</p>
+            </div>
+        {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    {% if category == "union" %}
+      {% for union in unions if union.name == selection %}
+        <h1>{{union.name}}</h1>
+        <p>{{union.description}}</p>
+        <h2>Possible Types</h2>
+        {% for type in union.getTypes() %}
+             <h4>{{ type.name }}</h4>
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+
+    {% if category == "input_object" %}
+      {% for input_object in input_objects if input_object.name == selection %}
+        <h1>{{input_object.name}}</h1>
+        <p>{{input_object.description}}</p>
+        <h2>Input Fields</h2>
+        {% for field in input_object.fields %}
+            {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+
+    {% if category == "scalar" %}
+      {% for scalar in scalars if scalar.name == selection %}
+        <h1>{{scalar.name}}</h1>
+        <p>{{scalar.description}}</p>
+      {% endfor %}
+    {% endif %}
+
+</div>
+
+</div>
+
+</div>
+{% endblock %}

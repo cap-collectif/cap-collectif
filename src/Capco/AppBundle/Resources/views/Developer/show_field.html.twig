@@ -1,0 +1,45 @@
+<div style="margin-bottom: 32px">
+    <strong>{{ field.name }} (<code><a href="#">{{field.type}}</a></code>)</strong>
+    {% if field.config.access %}
+        {# We need a way to get info about the required access #}
+        <span class="label label-info">ROLE_USER</span>
+    {% endif %}
+
+    <p>{{ field.description|default('') }}</p>
+
+    {% if field.deprecated %}
+      <div class="alert alert-danger">
+        <strong>Deprecation notice</strong>
+        <p>
+          {{ field.deprecationReason }}
+        </p>
+      </div>
+    {% endif %}
+
+    {% if field.args is defined and field.args is not empty %}
+    <table class="table table-bordered">
+       <thead>
+  <tr>
+    <th>Argument</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    {% for argument in field.args %}
+ <tr>
+  <td><code class="anchored">{{argument.name}}</code></td>
+  <td>
+    <code><a href="/scalar/{{argument.type}}">{{argument.type}}</a></code>
+  </td>
+  <td>
+    <p>
+        {{argument.description}}
+    </p>
+   </td>
+  </tr>
+  {% endfor %}
+    </tbody>
+    </table>
+    {% endif %}
+</div>

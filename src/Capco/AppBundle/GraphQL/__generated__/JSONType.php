@@ -19,7 +19,7 @@ final class JSONType extends CustomScalarType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'JSON',
-            'description' => null,
+            'description' => 'A string containing JSON code.',
             'scalarType' => null,
             'serialize' => function () use ($globalVariable) {
                 return call_user_func_array(['Capco\\AppBundle\\GraphQL\\Type\\JSONType', 'serialize'], func_get_args());
