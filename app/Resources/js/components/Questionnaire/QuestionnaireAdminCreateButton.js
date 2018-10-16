@@ -6,9 +6,8 @@ import { ToggleButton, Button, Modal } from 'react-bootstrap';
 import { reduxForm, Field, change, type FormProps } from 'redux-form';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
-import * as FormField from '../Form/Field';
+import component from '../Form/Field';
 import CreateQuestionnaireMutation from '../../mutations/CreateQuestionnaireMutation';
-import QuestionnaireAdminCreateButtonType from './QuestionnaireAdminCreateButtonType';
 
 const formName = 'questionnaire-form-admin-create';
 
@@ -44,7 +43,7 @@ type State = {
 };
 
 export class QuestionnaireAdminCreateButton extends React.Component<Props, State> {
-  state = { showModal: false, type: 'VOTING' };
+  state = { showModal: false, type: 'SURVEY' };
 
   changeType = (type: string) => {
     this.setState({
@@ -80,13 +79,13 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-<<<<<<< HEAD
             <form onSubmit={() => handleSubmit}>
               <Field type="radio-buttons" id="questionnaire_type" name="type" component={component}>
                 <ToggleButton
-                  onClick={() => dispatch(change(formName, 'type', 'VOTING'))}
-                  value="VOTING">
-                  <FormattedMessage id="voting" />
+                  onClick={() => dispatch(change(formName, 'type', 'SURVEY'))}
+                  value="SURVEY">
+                  {/* TODO Mettre la vrai traduction */}
+                  <FormattedMessage id="votationnn" />
                 </ToggleButton>
                 <ToggleButton
                   onClick={() => dispatch(change(formName, 'type', 'QUESTIONNAIRE'))}
@@ -94,17 +93,10 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
                   <FormattedMessage id="project.types.questionnaire" />
                 </ToggleButton>
               </Field>
-=======
-            <form onSubmit={handleSubmit}>
-              <QuestionnaireAdminCreateButtonType
-                type={this.state.type}
-                handleClick={this.changeType}
-              />
->>>>>>> [5673-DRAFT] WIP
               <Field
                 name="title"
                 label={<FormattedMessage id="admin.fields.questionnaire.title" />}
-                component={FormField.default}
+                component={component}
                 type="text"
                 id="questionnaire_title"
               />

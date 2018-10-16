@@ -212,7 +212,7 @@ export class ReplyForm extends React.Component<Props> {
                 </div>
               )}
               <div className="btn-toolbar btn-box sticky">
-                {(!reply || reply.draft) &&
+                {(!reply || (reply && reply.publicationStatus !== 'PUBLISHED')) &&
                   questionnaire.type === 'QUESTIONNAIRE' && (
                     <div className="btn-group">
                       <SubmitButton
