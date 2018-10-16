@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Capco\AppBundle\Entity\Reply;
 
 class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 {
@@ -21,7 +22,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 
     public function validate($object, Constraint $constraint)
     {
-        if ($object->isDraft()) {
+        if ($objet instanceof Reply && $object->isDraft()) {
             return;
         }
         $questions = $this->getQuestions($constraint, $object);
