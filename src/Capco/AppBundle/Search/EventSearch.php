@@ -31,13 +31,11 @@ class EventSearch extends Search
     private const LAST = 'FUTURE';
 
     private $eventRepository;
-    private $logger;
 
-    public function __construct(Index $index, EventRepository $eventRepository, LoggerInterface $logger)
+    public function __construct(Index $index, EventRepository $eventRepository)
     {
         parent::__construct($index);
         $this->eventRepository = $eventRepository;
-        $this->logger = $logger;
         $this->type = 'event';
     }
 
@@ -60,7 +58,7 @@ class EventSearch extends Search
         $filters = $this->getFilters($providedFilters);
 
         foreach ($filters as $key => $value) {
-            if ('endAt' == $key|| 'startAt' == $key) {
+            if ('endAt' == $key || 'startAt' == $key) {
                 $boolQuery->addMust(new Query\Range($key, $value));
             } else {
                 $boolQuery->addMust(new Term([$key => ['value' => $value]]));
@@ -77,15 +75,15 @@ class EventSearch extends Search
             }
         }
 
-        $query->setSource(['id'])->setFrom($offset)->setSize($limit);
+        $query
+            ->setSource(['id'])
+            ->setFrom($offset)
+            ->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
         $events = $this->getHydratedResults(
-            array_map(
-                function (Result $result) {
-                    return $result->getData()['id'];
-                },
-                $resultSet->getResults()
-            )
+            array_map(function (Result $result) {
+                return $result->getData()['id'];
+            }, $resultSet->getResults())
         );
 
         return [
@@ -101,12 +99,9 @@ class EventSearch extends Search
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
         return array_values(
             array_filter(
-                array_map(
-                    function (string $id) {
-                        return $this->eventRepository->findOneBy(['id' => $id, 'isEnabled' => true]);
-                    },
-                    $ids
-                ),
+                array_map(function (string $id) {
+                    return $this->eventRepository->findOneBy(['id' => $id, 'isEnabled' => true]);
+                }, $ids),
                 function (?Event $event) {
                     return null !== $event;
                 }
