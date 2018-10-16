@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class EventTimeType extends EnumType implements GeneratedTypeInterface
 {
+    const NAME = 'EventTime';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
