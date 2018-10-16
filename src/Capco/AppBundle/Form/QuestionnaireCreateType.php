@@ -13,6 +13,7 @@ class QuestionnaireCreateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', PurifiedTextType::class);
+        $builder->add('type');
     }
 
     public function configureOptions(OptionsResolver $resolver)

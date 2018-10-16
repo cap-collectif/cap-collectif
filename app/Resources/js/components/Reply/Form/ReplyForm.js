@@ -193,6 +193,7 @@ export class ReplyForm extends React.Component<Props> {
                   />
                 </div>
               )}
+<<<<<<< HEAD
               <div className="btn-toolbar btn-box sticky">
                 {(!reply || (reply && reply.draft)) && (
                   <div className="btn-group">
@@ -208,6 +209,24 @@ export class ReplyForm extends React.Component<Props> {
                     />
                   </div>
                 )}
+=======
+              <div className="btn-toolbar">
+                {(!reply || (reply && reply.publicationStatus !== 'PUBLISHED')) &&
+                  questionnaire.type === 'QUESTIONNAIRE' && (
+                    <div className="btn-group">
+                      <SubmitButton
+                        type="submit"
+                        id={`${form}-submit-create-draft-reply`}
+                        disabled={pristine || submitting || disabled}
+                        bsStyle="primary"
+                        label={submitting ? 'global.loading' : 'global.save_as_draft'}
+                        onSubmit={() => {
+                          dispatch(changeRedux(form, 'draft', true));
+                        }}
+                      />
+                    </div>
+                  )}
+>>>>>>> [5673-DRAFT] Add QuestionnaireType and remove brouillon when votation.
                 <div className="btn-group">
                   <SubmitButton
                     type="submit"
@@ -296,6 +315,7 @@ export default createFragmentContainer(container, {
       multipleRepliesAllowed
       phoneConfirmationRequired
       contribuable
+      type
       viewerReplies @include(if: $isAuthenticated) {
         id
       }

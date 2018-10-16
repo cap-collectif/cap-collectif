@@ -15,6 +15,7 @@ describe('<ReplyForm />', () => {
     id: '2',
     phoneConfirmationRequired: false,
     contribuable: true,
+    type: 'QUESTIONNAIRE',
   };
 
   const requiredText = {

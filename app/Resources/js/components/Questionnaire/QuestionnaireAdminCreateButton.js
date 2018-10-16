@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
+import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Button, Modal } from 'react-bootstrap';
-import { reduxForm, Field } from 'redux-form';
+import { ToggleButton, Button, Modal } from 'react-bootstrap';
+import { reduxForm, Field, change, type FormProps } from 'redux-form';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
-import * as FormField from '../Form/Field';
+import component from '../Form/Field';
 import CreateQuestionnaireMutation from '../../mutations/CreateQuestionnaireMutation';
-import QuestionnaireAdminCreateButtonType from './QuestionnaireAdminCreateButtonType';
 
 const formName = 'questionnaire-form-admin-create';
 
@@ -21,12 +21,13 @@ const validate = (values: Object) => {
   return errors;
 };
 
-const onSubmit = values =>
+const onSubmit = values => {
   CreateQuestionnaireMutation.commit({ input: values }).then(() => {
     window.location.reload();
   });
+};
 
-type Props = {
+type Props = FormProps & {
   submitting: boolean,
   handleSubmit: () => void,
   submit: Function,
@@ -38,17 +39,16 @@ type State = {
 };
 
 export class QuestionnaireAdminCreateButton extends React.Component<Props, State> {
-  state = { showModal: false, type: 'survey' };
+  state = { showModal: false, type: 'SURVEY' };
 
-  changeType(type: string) {
+  changeType = (type: string) => {
     this.setState({
-      ...this.state,
       type,
     });
-  }
+  };
 
   render() {
-    const { submitting, handleSubmit, submit } = this.props;
+    const { submitting, handleSubmit, submit, dispatch } = this.props;
     const { showModal } = this.state;
     return (
       <div>
@@ -75,15 +75,24 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form onSubmit={handleSubmit}>
-              <QuestionnaireAdminCreateButtonType
-                type={this.state.type}
-                handleClick={this.changeType}
-              />
+            <form onSubmit={() => handleSubmit}>
+              <Field type="radio-buttons" id="questionnaire_type" name="type" component={component}>
+                <ToggleButton
+                  onClick={() => dispatch(change(formName, 'type', 'SURVEY'))}
+                  value="SURVEY">
+                  {/* TODO Mettre la vrai traduction */}
+                  <FormattedMessage id="votationnn" />
+                </ToggleButton>
+                <ToggleButton
+                  onClick={() => dispatch(change(formName, 'type', 'QUESTIONNAIRE'))}
+                  value="QUESTIONNAIRE">
+                  <FormattedMessage id="project.types.questionnaire" />
+                </ToggleButton>
+              </Field>
               <Field
                 name="title"
                 label={<FormattedMessage id="admin.fields.questionnaire.title" />}
-                component={FormField.default}
+                component={component}
                 type="text"
                 id="questionnaire_title"
               />
@@ -109,8 +118,12 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
   }
 }
 
-export default reduxForm({
+const mapStateToProps: MapStateToProps<*, *, *> = () => ({});
+
+const form = reduxForm({
   onSubmit,
   validate,
   form: formName,
 })(QuestionnaireAdminCreateButton);
+
+export default connect(mapStateToProps)(form);

@@ -30,6 +30,8 @@ InternalQuestionnaire:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
       acknowledgeReplies:
         type: 'Boolean!'
+      type:
+        type: 'String!'
       phoneConfirmation:
         type: 'Boolean!'
       participants:
