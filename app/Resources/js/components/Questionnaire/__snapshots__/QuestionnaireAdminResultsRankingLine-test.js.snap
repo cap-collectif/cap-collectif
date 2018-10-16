@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionnaireAdminResultsRankingLine /> renders correctly empty ranking 1`] = `
+<tr>
+  <td>
+    First choice
+  </td>
+  <td
+    key="e0"
+  >
+    0
+  </td>
+  <td
+    key="e1"
+  >
+    0
+  </td>
+  <td
+    key="e2"
+  >
+    0
+  </td>
+  <td
+    key="e3"
+  >
+    0
+  </td>
+  <td
+    key="e4"
+  >
+    0
+  </td>
+  <td
+    key="e5"
+  >
+    0
+  </td>
+</tr>
+`;
+
+exports[`<QuestionnaireAdminResultsRankingLine /> renders correctly full ranking 1`] = `
+<tr>
+  <td>
+    First choice
+  </td>
+  <td
+    key="0"
+  >
+    98
+  </td>
+  <td
+    key="1"
+  >
+    8
+  </td>
+  <td
+    key="2"
+  >
+    3
+  </td>
+</tr>
+`;
+
+exports[`<QuestionnaireAdminResultsRankingLine /> renders correctly half-filled ranking 1`] = `
+<tr>
+  <td>
+    First choice
+  </td>
+  <td
+    key="0"
+  >
+    0
+  </td>
+  <td
+    key="1"
+  >
+    0
+  </td>
+  <td
+    key="2.3"
+  >
+    0
+  </td>
+  <td
+    key="2.4"
+  >
+    0
+  </td>
+  <td
+    key="2.5"
+  >
+    0
+  </td>
+  <td
+    key="2.6"
+  >
+    403
+  </td>
+  <td
+    key="2.7"
+  >
+    0
+  </td>
+</tr>
+`;
+
+exports[`<QuestionnaireAdminResultsRankingLine /> renders correctly one ranking 1`] = `
+<tr>
+  <td>
+    First choice
+  </td>
+  <td
+    key="0.1"
+  >
+    0
+  </td>
+  <td
+    key="0.2"
+  >
+    0
+  </td>
+  <td
+    key="0.3"
+  >
+    7897
+  </td>
+</tr>
+`;

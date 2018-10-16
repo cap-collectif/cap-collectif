@@ -9,6 +9,18 @@
     background-color: $white;
 }
 
+/* ======================== Border ============================*/
+
+//.border, div.border {
+//    border: 1px solid $border-color;
+//    box-shadow: none;
+//    border-radius: 0;
+//}
+
+.rounded-top {
+    border-radius: 4px 4px 0 0;
+}
+
 /* ======================== Button ============================*/
 .btn-md {
     font-size: 16px;

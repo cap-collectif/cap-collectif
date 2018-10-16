@@ -157,446 +157,304 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
 `;
 
 exports[`<ProposalListTable /> renders table with formatted data 1`] = `
-<ReactBootstrapTable
-  data={
-    Array [
-      Object {
-        "author": Object {
-          "text": "project_download.label.author",
-          "value": Object {
-            "displayName": "admin",
-            "media": null,
-            "url": "google.com",
-          },
-          "width": "250px",
-        },
-        "category": Object {
-          "hidden": false,
-          "text": "proposal.category",
-          "value": null,
-        },
-        "district": Object {
-          "hidden": false,
-          "text": "proposal.district",
-          "value": null,
-        },
-        "implementationPhase": Object {
-          "text": "implementation-phase",
-          "value": Object {
-            "list": Array [],
-            "title": false,
-          },
-          "width": "250px",
-        },
-        "lastActivity": Object {
-          "text": "last-activity",
-          "value": Object {
-            "date": null,
-            "user": null,
-          },
-        },
-        "likers": Object {
-          "text": "project_download.label.likers",
-          "value": Array [],
-          "width": "250px",
-        },
-        "priceEstimation": Object {
-          "text": "proposal.estimation",
-          "value": null,
-        },
-        "publishedOn": Object {
-          "text": "published-on",
-          "value": "2018-08-16 15:15:39",
-          "width": "150px",
-        },
-        "ref": Object {
-          "text": "proposal.admin.reference",
-          "value": "1-3",
-          "width": "150px",
-        },
-        "status": Object {
-          "text": "admin.fields.theme.status",
-          "value": null,
-        },
-        "theme": Object {
-          "hidden": false,
-          "text": "proposal.theme",
-          "value": "Justice",
-        },
-        "title": Object {
-          "text": "admin.fields.selection.proposal",
-          "value": Object {
-            "displayTitle": "Installation de bancs",
-            "url": null,
-          },
-          "width": "250px",
-        },
-      },
-      Object {
-        "author": Object {
-          "text": "project_download.label.author",
-          "value": Object {
-            "displayName": "admin2",
-            "media": null,
-            "url": "google.com",
-          },
-          "width": "250px",
-        },
-        "category": Object {
-          "hidden": false,
-          "text": "proposal.category",
-          "value": null,
-        },
-        "district": Object {
-          "hidden": false,
-          "text": "proposal.district",
-          "value": null,
-        },
-        "implementationPhase": Object {
-          "text": "implementation-phase",
-          "value": Object {
-            "list": Array [],
-            "title": false,
-          },
-          "width": "250px",
-        },
-        "lastActivity": Object {
-          "text": "last-activity",
-          "value": Object {
-            "date": null,
-            "user": null,
-          },
-        },
-        "likers": Object {
-          "text": "project_download.label.likers",
-          "value": Array [],
-          "width": "250px",
-        },
-        "priceEstimation": Object {
-          "text": "proposal.estimation",
-          "value": null,
-        },
-        "publishedOn": Object {
-          "text": "published-on",
-          "value": "2018-09-17 16:15:39",
-          "width": "150px",
-        },
-        "ref": Object {
-          "text": "proposal.admin.reference",
-          "value": "1-2",
-          "width": "150px",
-        },
-        "status": Object {
-          "text": "admin.fields.theme.status",
-          "value": Object {
-            "color": "info",
-            "name": "En cours",
-          },
-        },
-        "theme": Object {
-          "hidden": false,
-          "text": "proposal.theme",
-          "value": "Justice",
-        },
-        "title": Object {
-          "text": "admin.fields.selection.proposal",
-          "value": Object {
-            "displayTitle": "Proposition plus votable",
-            "url": null,
-          },
-          "width": "250px",
-        },
-      },
-    ]
-  }
+<Table
+  bordered={true}
+  hover={true}
+  tableLayoutFixed={true}
 >
-  <th
-    key="0"
-    style={
-      Object {
-        "display": "table-cell",
-        "width": "250px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="admin.fields.selection.proposal"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="1"
-    style={
-      Object {
-        "display": "none",
-        "width": "250px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="implementation-phase"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="2"
-    style={
-      Object {
-        "display": "table-cell",
-        "width": "200px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="admin.fields.theme.status"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="3"
-    style={
-      Object {
-        "display": "table-cell",
-        "width": "250px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="project_download.label.author"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="4"
-    style={
-      Object {
-        "display": "table-cell",
-        "width": "150px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="proposal.admin.reference"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="5"
-    style={
-      Object {
-        "display": "none",
-        "width": "200px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="proposal.district"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="6"
-    style={
-      Object {
-        "display": "none",
-        "width": "200px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="proposal.category"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="7"
-    style={
-      Object {
-        "display": "table-cell",
-        "width": "200px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="proposal.theme"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="8"
-    style={
-      Object {
-        "display": "none",
-        "width": "200px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="proposal.estimation"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="9"
-    style={
-      Object {
-        "display": "none",
-        "width": "250px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="project_download.label.likers"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="10"
-    style={
-      Object {
-        "display": "none",
-        "width": "200px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="last-activity"
-      values={Object {}}
-    />
-  </th>
-  <th
-    key="11"
-    style={
-      Object {
-        "display": "table-cell",
-        "width": "150px",
-      }
-    }
-  >
-    <FormattedMessage
-      id="published-on"
-      values={Object {}}
-    />
-  </th>
-  <tr
-    key="0"
-  >
-    <td
+  <thead>
+    <tr>
+      <th
+        key="0"
+        style={
+          Object {
+            "display": "table-cell",
+            "width": "250px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="admin.fields.selection.proposal"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="1"
+        style={
+          Object {
+            "display": "none",
+            "width": "250px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="implementation-phase"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="2"
+        style={
+          Object {
+            "display": "table-cell",
+            "width": "200px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="admin.fields.theme.status"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="3"
+        style={
+          Object {
+            "display": "table-cell",
+            "width": "250px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="project_download.label.author"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="4"
+        style={
+          Object {
+            "display": "table-cell",
+            "width": "150px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal.admin.reference"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="5"
+        style={
+          Object {
+            "display": "none",
+            "width": "200px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal.district"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="6"
+        style={
+          Object {
+            "display": "none",
+            "width": "200px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal.category"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="7"
+        style={
+          Object {
+            "display": "table-cell",
+            "width": "200px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal.theme"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="8"
+        style={
+          Object {
+            "display": "none",
+            "width": "200px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal.estimation"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="9"
+        style={
+          Object {
+            "display": "none",
+            "width": "250px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="project_download.label.likers"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="10"
+        style={
+          Object {
+            "display": "none",
+            "width": "200px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="last-activity"
+          values={Object {}}
+        />
+      </th>
+      <th
+        key="11"
+        style={
+          Object {
+            "display": "table-cell",
+            "width": "150px",
+          }
+        }
+      >
+        <FormattedMessage
+          id="published-on"
+          values={Object {}}
+        />
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
       key="0"
     >
-      <a
-        href={null}
+      <td
+        key="0"
       >
-        Installation de bancs
-      </a>
-    </td>
-    <td
-      key="2"
-    />
-    <td
-      key="3"
-    >
-      <div
-        className="d-flex align-items-center"
-      >
-        <Connect(UserAvatar)
-          defaultAvatar={null}
-          user={
-            Object {
-              "_links": Object {},
-              "media": null,
-              "username": "admin",
-            }
-          }
-        />
         <a
-          href="google.com"
+          href={null}
         >
-          admin
+          Installation de bancs
         </a>
-      </div>
-    </td>
-    <td
-      key="4"
-    >
-      1-3
-    </td>
-    <td
-      key="7"
-    >
-      Justice
-    </td>
-    <td
-      key="11"
-    >
-      <FormattedDate
-        value={2018-08-16T13:15:39.000Z}
+      </td>
+      <td
+        key="2"
       />
-    </td>
-  </tr>
-  <tr
-    key="1"
-  >
-    <td
-      key="0"
-    >
-      <a
-        href={null}
+      <td
+        key="3"
       >
-        Proposition plus votable
-      </a>
-    </td>
-    <td
-      key="2"
-    >
-      <Label
-        bsClass="label"
-        bsStyle="info"
-        className="badge-pill"
-      >
-        En cours
-      </Label>
-    </td>
-    <td
-      key="3"
-    >
-      <div
-        className="d-flex align-items-center"
-      >
-        <Connect(UserAvatar)
-          defaultAvatar={null}
-          user={
-            Object {
-              "_links": Object {},
-              "media": null,
-              "username": "admin2",
+        <div
+          className="d-flex align-items-center"
+        >
+          <Connect(UserAvatar)
+            defaultAvatar={null}
+            user={
+              Object {
+                "_links": Object {},
+                "media": null,
+                "username": "admin",
+              }
             }
-          }
+          />
+          <a
+            href="google.com"
+          >
+            admin
+          </a>
+        </div>
+      </td>
+      <td
+        key="4"
+      >
+        1-3
+      </td>
+      <td
+        key="7"
+      >
+        Justice
+      </td>
+      <td
+        key="11"
+      >
+        <FormattedDate
+          value={2018-08-16T13:15:39.000Z}
         />
+      </td>
+    </tr>
+    <tr
+      key="1"
+    >
+      <td
+        key="0"
+      >
         <a
-          href="google.com"
+          href={null}
         >
-          admin2
+          Proposition plus votable
         </a>
-      </div>
-    </td>
-    <td
-      key="4"
-    >
-      1-2
-    </td>
-    <td
-      key="7"
-    >
-      Justice
-    </td>
-    <td
-      key="11"
-    >
-      <FormattedDate
-        value={2018-09-17T14:15:39.000Z}
-      />
-    </td>
-  </tr>
-</ReactBootstrapTable>
+      </td>
+      <td
+        key="2"
+      >
+        <Label
+          bsClass="label"
+          bsStyle="info"
+          className="badge-pill"
+        >
+          En cours
+        </Label>
+      </td>
+      <td
+        key="3"
+      >
+        <div
+          className="d-flex align-items-center"
+        >
+          <Connect(UserAvatar)
+            defaultAvatar={null}
+            user={
+              Object {
+                "_links": Object {},
+                "media": null,
+                "username": "admin2",
+              }
+            }
+          />
+          <a
+            href="google.com"
+          >
+            admin2
+          </a>
+        </div>
+      </td>
+      <td
+        key="4"
+      >
+        1-2
+      </td>
+      <td
+        key="7"
+      >
+        Justice
+      </td>
+      <td
+        key="11"
+      >
+        <FormattedDate
+          value={2018-09-17T14:15:39.000Z}
+        />
+      </td>
+    </tr>
+  </tbody>
+</Table>
 `;

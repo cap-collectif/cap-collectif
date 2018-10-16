@@ -4697,9 +4697,9 @@ decamelize@^2.0.0:
     xregexp "4.0.0"
 
 decimal.js-light@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/decimal.js-light/-/decimal.js-light-2.4.1.tgz#3260d025fa504f30b94b0ef8721f0b4d37dcfc72"
-  integrity sha512-OToPy7ssm+ha36h4Af2Yyh3ky51GcKmirdTcyQ1zmjCzV8/M6kqJqjOYMSxWAfm311mtOWLZPnD13JcQngr3vw==
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/decimal.js-light/-/decimal.js-light-2.5.0.tgz#ca7faf504c799326df94b0ab920424fdfc125348"
+  integrity sha512-b3VJCbd2hwUpeRGG3Toob+CRo8W22xplipNhP3tN7TSVB/cyMX71P1vM2Xjc9H74uV6dS2hDDmo/rHq8L87Upg==
 
 decode-uri-component@^0.2.0:
   version "0.2.0"
@@ -9210,12 +9210,7 @@ lodash@4.13.1:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.13.1.tgz#83e4b10913f48496d4d16fec4a560af2ee744b68"
   integrity sha1-g+SxCRP0hJbU0W/sSlYK8u50S2g=
 
-lodash@^4.0.0, lodash@^4.1.0, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.2.0, lodash@^4.2.1, lodash@~4.17.10:
-  version "4.17.10"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
-  integrity sha512-UejweD1pDoXu+AD825lWwp4ZGtSwgnpZxb3JDViD7StjQz+Nb/6l093lx4OQ0foGWNRoc19mWy7BzL+UAK2iVg==
-
-lodash@^4.11.1, lodash@^4.17.0, lodash@^4.17.10, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@~4.17.4:
+lodash@^4.0.0, lodash@^4.1.0, lodash@^4.11.1, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.0, lodash@^4.17.10, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@~4.17.10, lodash@~4.17.4:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
@@ -11811,12 +11806,12 @@ react-dom@^16.6.0:
     react "^16.3.1"
 
 react-dropzone@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-5.0.1.tgz#3ed201215794c0f650c6f25a8311a9d96d35ebb6"
-  integrity sha512-v2bwYi5zQkUTuY5e1NHacaPUgPjN9XqyAsCy5B07ZVWS8HMzqp+uvn91NT3INwdUU1yiEC7uJp57XD8tmkTh6A==
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-5.1.1.tgz#b05613ea22f1ab71aa1f7cf5367df7b19468a2f3"
+  integrity sha512-C9kXI3D95rVXbLLg9DvzCnmjplKwpfj/2F/MwvGVM05kDwWMzKVKZnmgZHZUebmiVj4mFOmBs2ObLiKvAxunGw==
   dependencies:
     attr-accept "^1.1.3"
-    prop-types "^15.5.7"
+    prop-types "^15.6.2"
 
 react-error-overlay@^4.0.1:
   version "4.0.1"
@@ -12042,7 +12037,7 @@ react-relay@^1.6.0:
 
 react-resize-detector@~2.3.0:
   version "2.3.0"
-  resolved "http://registry.npmjs.org/react-resize-detector/-/react-resize-detector-2.3.0.tgz#57bad1ae26a28a62a2ddb678ba6ffdf8fa2b599c"
+  resolved "https://registry.yarnpkg.com/react-resize-detector/-/react-resize-detector-2.3.0.tgz#57bad1ae26a28a62a2ddb678ba6ffdf8fa2b599c"
   integrity sha512-oCAddEWWeFWYH5FAcHdBYcZjAw9fMzRUK9sWSx6WvSSOPVRxcHd5zTIGy/mOus+AhN/u6T4TMiWxvq79PywnJQ==
   dependencies:
     lodash.debounce "^4.0.8"
@@ -12365,17 +12360,17 @@ recast@~0.11.12:
     private "~0.1.5"
     source-map "~0.5.0"
 
-recharts-scale@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/recharts-scale/-/recharts-scale-0.4.0.tgz#a8dca2b32abc4c68ee0a214e6376b7af3e04513c"
-  integrity sha512-+XRGUAZsw5Fs6aiosBVcmu76JZXmb1HLUMFeAPzAfrPlO6muPNEXMuC5fXOO8Sy1bZ6QVJzAFY5w1nXXZzqB5Q==
+recharts-scale@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/recharts-scale/-/recharts-scale-0.4.2.tgz#b66315d985cd9b80d5f7d977a5aab9a305abc354"
+  integrity sha512-p/cKt7j17D1CImLgX2f5+6IXLbRHGUQkogIp06VUoci/XkhOQiGSzUrsD1uRmiI7jha4u8XNFOjkHkzzBPivMg==
   dependencies:
     decimal.js-light "^2.4.1"
 
 recharts@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/recharts/-/recharts-1.3.2.tgz#46673f3da903d7cdf69c678f37ae71e36ea3fcf7"
-  integrity sha512-wQAYKscZccZtA3QSnn0PKV9yjXMkU+cU4fG7yOM1kmWMymoDN71u6MN5kDFAcbsirpTo/I1QZxTYoV0AF7spYQ==
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/recharts/-/recharts-1.3.4.tgz#b8e4cbb18bf89484f0744d35cca2c4c023f190ac"
+  integrity sha512-jOImzEnTsHjEDxLnfbuTpxZHz1XV3vPWFyujrbFzrkSWBwoR0He9HbkSui8x/LpoDzwgeO25J0t6z+edFuwgWw==
   dependencies:
     classnames "~2.2.5"
     core-js "~2.5.1"
@@ -12386,7 +12381,7 @@ recharts@^1.3.2:
     prop-types "~15.6.0"
     react-resize-detector "~2.3.0"
     react-smooth "~1.0.0"
-    recharts-scale "^0.4.0"
+    recharts-scale "^0.4.2"
     reduce-css-calc "~1.3.0"
 
 rechoir@^0.6.2:
