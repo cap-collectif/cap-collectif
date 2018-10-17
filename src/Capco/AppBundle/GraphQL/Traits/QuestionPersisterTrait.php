@@ -15,14 +15,13 @@ trait QuestionPersisterTrait
     ): void {
         foreach ($questionnaireAbstractQuestions as $index => $abstractQuestion) {
             $question = $abstractQuestion->getQuestion();
-
             if (!empty($questionsOrdered)) {
                 $newPosition = 0;
                 foreach ($questionsOrdered as $key => $questionOrdered) {
                     //it compare string to int
                     if ($questionOrdered == $question->getId()) {
                         $newPosition = $key;
-                    } elseif ($questionOrdered === $question->getTitle()) {
+                    } elseif (trim($questionOrdered) === $question->getTitle()) {
                         //if the question is not in db, she doesn't have id
                         $newPosition = $key;
                     }
@@ -43,7 +42,6 @@ trait QuestionPersisterTrait
                     $questionChoice->setPosition($key);
                     $em->persist($questionChoice);
                 }
-                
             }
             $em->persist($abstractQuestion);
         }
