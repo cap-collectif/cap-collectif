@@ -1,9 +1,9 @@
 Proposal:
   type: object
-  inherits: [Node, Contribution, Commentable, Publishable, Reportable, Trashable, WithFollowers]
+  inherits: [Node, Contribution, Commentable, Publishable, Draftable, Reportable, Trashable, WithFollowers]
   config:
     description: 'A budget contribution'
-    interfaces: [Node, Contribution, Commentable, Publishable, Reportable, Trashable]
+    interfaces: [Node, Contribution, Commentable, Publishable, Draftable, Reportable, Trashable]
     fields:
       show_url:
         resolve: "@=resolver('proposal_show_url', [value])"
