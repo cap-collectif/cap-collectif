@@ -36,14 +36,10 @@ class EventController extends Controller
     {
         $currentUrl = $this->generateUrl('app_event');
 
-        $form = $this->createForm(
-            EventSearchType::class,
-            null,
-            [
-                'action' => $currentUrl,
-                'method' => 'POST',
-            ]
-        );
+        $form = $this->createForm(EventSearchType::class, null, [
+            'action' => $currentUrl,
+            'method' => 'POST',
+        ]);
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
@@ -52,38 +48,30 @@ class EventController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect(
-                    $this->generateUrl(
-                        'app_event_search_term',
-                        [
-                            'theme' => isset($data['theme']) && $data['theme']
-                                ? $data['theme']->getSlug()
-                                : Theme::FILTER_ALL,
-                            'project' => $data['project']
-                                ? $data['project']->getSlug()
-                                : Project::FILTER_ALL,
-                            'term' => $data['term'],
-                        ]
-                    )
+                    $this->generateUrl('app_event_search_term', [
+                        'theme' => isset($data['theme'])
+                            ? $data['theme']->getSlug()
+                            : Theme::FILTER_ALL,
+                        'project' => $data['project']
+                            ? $data['project']->getSlug()
+                            : Project::FILTER_ALL,
+                        'term' => $data['term'],
+                    ])
                 );
             }
         } else {
-            $form->setData(
-                [
-                    'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                    'project' => $this->get(
-                        ProjectRepository::class
-                    )->findOneBySlug($project),
-                    'term' => $term,
-                ]
-            );
+            $form->setData([
+                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
+                'project' => $this->get(
+                    'Capco\AppBundle\Repository\ProjectRepository'
+                )->findOneBySlug($project),
+                'term' => $term,
+            ]);
         }
 
-        $groupedEvents = $this->get(EventResolver::class)->getEventsGroupedByYearAndMonth(
-            false,
-            $theme,
-            $project,
-            $term
-        );
+        $groupedEvents = $this->get(
+            'Capco\AppBundle\Resolver\EventResolver'
+        )->getEventsGroupedByYearAndMonth(false, $theme, $project, $term);
         $archivedEventsNb = $this->get(EventResolver::class)->countEvents(
             true,
             $theme,
@@ -117,14 +105,10 @@ class EventController extends Controller
     ) {
         $currentUrl = $this->generateUrl('app_event_archived');
 
-        $form = $this->createForm(
-            EventSearchType::class,
-            null,
-            [
-                'action' => $currentUrl,
-                'method' => 'POST',
-            ]
-        );
+        $form = $this->createForm(EventSearchType::class, null, [
+            'action' => $currentUrl,
+            'method' => 'POST',
+        ]);
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
@@ -133,28 +117,23 @@ class EventController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect(
-                    $this->generateUrl(
-                        'app_event_archived_term',
-                        [
-                            'theme' => isset($data['theme'])
-                                ? $data['theme']->getSlug()
-                                : Theme::FILTER_ALL,
-                            'project' => $data['project']
-                                ? $data['project']->getSlug()
-                                : Project::FILTER_ALL,
-                            'term' => $data['term'],
-                        ]
-                    )
+                    $this->generateUrl('app_event_archived_term', [
+                        'theme' => isset($data['theme'])
+                            ? $data['theme']->getSlug()
+                            : Theme::FILTER_ALL,
+                        'project' => $data['project']
+                            ? $data['project']->getSlug()
+                            : Project::FILTER_ALL,
+                        'term' => $data['term'],
+                    ])
                 );
             }
         } else {
-            $form->setData(
-                [
-                    'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                    'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
-                    'term' => $term,
-                ]
-            );
+            $form->setData([
+                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
+                'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
+                'term' => $term,
+            ]);
         }
 
         $groupedEvents = $this->get(EventResolver::class)->getEventsGroupedByYearAndMonth(
@@ -187,13 +166,9 @@ class EventController extends Controller
 
         $user = $this->getUser();
         $registration = $eventHelper->findUserRegistrationOrCreate($event, $user);
-        $form = $this->createForm(
-            EventRegistrationType::class,
-            $registration,
-            [
-                'registered' => $registration->isConfirmed(),
-            ]
-        );
+        $form = $this->createForm(EventRegistrationType::class, $registration, [
+            'registered' => $registration->isConfirmed(),
+        ]);
 
         if ('POST' === $request->getMethod()) {
             $registration->setIpAddress($request->getClientIp());

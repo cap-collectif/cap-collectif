@@ -21,9 +21,75 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'CollectStep',
-            'description' => 'Fetches an object given its ID',
+            'description' => 'A proposal step',
             'fields' => function () use ($globalVariable) {
                 return [
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'kind' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'args' => [
+                    ],
+                    'resolve' => function () use ($globalVariable) {
+                        return 'collect';
+                    },
+                    'description' => 'The kind of the step',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'title' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The title of the step.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'show_url' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", array(0 => $value)]);
+                    },
+                    'description' => 'The url of the step',
+                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'url' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", array(0 => $value)]);
+                    },
+                    'description' => 'The url of the step',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'proposals' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
                     'args' => [
@@ -153,60 +219,6 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                     'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
-                ],
-                'kind' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => function () use ($globalVariable) {
-                        return 'collect';
-                    },
-                    'description' => 'The kind of the step',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'title' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The title of the step.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'show_url' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", array(0 => $value)]);
-                    },
-                    'description' => 'The url of the step',
-                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'url' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", array(0 => $value)]);
-                    },
-                    'description' => 'The url of the step',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
                 ],
                 'requirements' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('RequirementConnection')),
@@ -390,18 +402,6 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                         return $value->getProposalForm();
                     },
                     'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
