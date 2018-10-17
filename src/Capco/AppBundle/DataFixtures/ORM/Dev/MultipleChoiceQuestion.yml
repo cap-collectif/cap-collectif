@@ -26,7 +26,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     title: 'Nelson Monfort parle-t-il:'
     helpText: Merci de répondre sincèrement
     required: false
-    type: 4 # select
+    type: 4
     randomQuestionChoices: true
   multiplequestion4:
     id: 16
@@ -41,7 +41,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     id: 17
     title: Sangohan / Vegeta ?
     required: true
-    type: 4 # select
+    type: 4
     randomQuestionChoices: true
   multiplequestion6:
     id: 18
@@ -89,59 +89,59 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     id: 24
     title: Hap ou Noel ?
     required: true
-    type: 4 # select
+    type: 4 # radio
   multiplequestionHapCreation:
     id: 25
     title: Par qui Hap a t-il été créé ?
-    type: 4 # select
+    type: 4
   multiplequestionIsHapGood:
     id: 26
     title: Hap est-il un homme bon ?
-    type: 4 # select
+    type: 4
   multiplequestionNoelFete:
     id: 27
     title: Noel a t-il un rapport avec la fête de Noël ?
-    type: 4 # select
+    type: 4
   multiplequestionNoelHatColor:
     id: 28
     title: De quelle couleur est le chapeau de Noël ?
-    type: 4 # select
+    type: 4
   multiplequestionMarvelOrDc:
     id: 31
     title: Plutôt Marvel ou DC ?
-    type: 4 # select
+    type: 4
   multiplequestionDcSupermanLike:
     id: 32
     title: T'aimes bien Superman ?
-    type: 4 # select
+    type: 4
   multiplequestionDcBatmanLike:
     id: 33
     title: T'aimes bien Batman ?
-    type: 4 # select
+    type: 4
   multiplequestionDcSupergirlLike:
     id: 34
     title: T'aimes bien Supergirl ?
-    type: 4 # select
+    type: 4
   multiplequestionMarvelIronManLike:
     id: 35
     title: T'aimes bien Iron Man ?
-    type: 4 # select
+    type: 4
   multiplequestionMarvelLukeCageLike:
     id: 36
     title: T'aimes bien Luke Cage ?
-    type: 4 # select
+    type: 4
   multiplequestionMarvelThorLike:
     id: 37
     title: T'aimes bien Thor ?
-    type: 4 # select
+    type: 4
   multiplequestionEndConditionel:
     id: 38
     title: C'est la fin mais j'affiche quand même des choix
-    type: 4 # select
+    type: 4
   multiplequestionHapNotGoodHowDareYou:
     id: 39
     title: Comment ça ce n'est pas un homme bon, comment oses-tu ?
-    type: 4 # select
+    type: 4
   ljMultipleQuestionRadio:
     id: 40
     title: Ceci est-il une question de type Radio ?
@@ -149,7 +149,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   ljMultipleQuestionSelect:
     id: 41
     title: Ceci est-il une question de type Select ?
-    type: 4 # select
+    type: 4
   ljMultipleQuestionButton:
     id: 42
     title: Ceci est-il une question de type Boutton ?
@@ -166,14 +166,9 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     id: 45
     title: Votre fleuve préféré
     required: true
-    type: 4 # select
+    type: 4
   multiplequestionHapGange:
     id: 46
     title: Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)
     required: false
-    type: 4 # select
-  multiplequestionReactVue:
-    id: 47
-    title: Who is the best ?
-    required: false
-    type: 4 # select
+    type: 4

@@ -7,17 +7,9 @@ MultipleChoiceQuestion:
     fields:
       kind:
         resolve: 'multiple_choice'
-      # TODO we can probably design this better
       isOtherAllowed:
         type: 'Boolean!'
         resolve: "@=resolver('question_isOtherAllowed', [value])"
-      # TODO we can probably design this better
-      otherResponses:
-        type: 'ResponseConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", [value, args])'
-        description: 'Responses of the `other` question choice.'
       choices:
         type: '[QuestionChoice!]'
         resolve:

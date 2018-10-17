@@ -1964,21 +1964,6 @@ type MultipleChoiceQuestion implements Question {
   # The associated logic jumps to this question.
   jumps: [LogicJump]
   isOtherAllowed: Boolean!
-
-  # Responses of the `other` question choice.
-  otherResponses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
   choices(
     # Randomize the order of the choices.
     randomize: Boolean
