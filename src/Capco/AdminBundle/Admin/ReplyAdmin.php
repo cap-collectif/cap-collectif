@@ -63,8 +63,14 @@ class ReplyAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
+            ->add('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', 'sonata_type_model', ['label' => 'admin.fields.reply.author'])
+            ->add('createdAt', null, ['label' => 'admin.fields.questionnaire.created_at'])
             ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at'])
+            ->add('state', null, [
+                'label' => 'admin.fields.proposal.state.label',
+                'template' => 'CapcoAdminBundle:Reply:state_show_field.html.twig',
+            ])
             ->add('responses', null, [
                 'label' => 'admin.fields.reply.responses',
                 'template' => 'CapcoAdminBundle:Reply:responses_show_field.html.twig',
