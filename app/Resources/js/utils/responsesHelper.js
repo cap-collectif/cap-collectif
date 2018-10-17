@@ -434,6 +434,16 @@ export const validateResponses = (
         if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
           return { value: `${className}.constraints.field_mandatory` };
         }
+      } else if (question.type === 'checkbox') {
+        if (
+          !question.validationRule &&
+          (!response ||
+            (response.value &&
+              Array.isArray(response.value.labels) &&
+              response.value.labels.length === 0))
+        ) {
+          return { value: `${className}.constraints.field_mandatory` };
+        }
       } else if (question.type === 'radio') {
         if (
           !response ||
