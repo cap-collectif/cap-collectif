@@ -95,7 +95,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response23:
     question: '@multiplequestion8'
     proposalEvaluation: '@proposalEvaluation2'
-    value: { 'labels': [], 'other': 'Pas la folie tout ça…' }
+    value: { 'labels': ['Du pur bullshit'], 'other': null }
   response24:
     question: '@simplequestion8'
     proposalEvaluation: '@proposalEvaluation3'

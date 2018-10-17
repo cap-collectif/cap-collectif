@@ -88,10 +88,6 @@ Scenario: Admin wants to update the evaluation of a proposal
             {
                "question": { "id": "23" },
                "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
-            },
-            {
-              "question": {"id":"47"},
-              "value": null
             }
             ]
           }
@@ -190,10 +186,6 @@ Scenario: Admin wants to update the evaluation of a proposal and the version sho
             {
                "question": { "id": "23" },
                "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
-            },
-            {
-              "question": {"id":"47"},
-              "value": null
             }
             ]
           }
@@ -292,11 +284,7 @@ Scenario: Admin should be prompted to refresh page if someone has already modifi
           {
              "question": { "id": "23" },
              "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
-          },
-          {
-              "question": {"id":"47"},
-              "value": null
-           }
+          }
           ]
         }
       }
@@ -588,8 +576,7 @@ Scenario: Evaluer should be prompted to refresh page if someone has already modi
           {
              "question": { "id": "23" },
              "value":"{\"labels\":[\"Réalisable\",\"Importante\"],\"other\":null}"
-          },
-          {"question":{"id":"47"},"value":null}
+          }
           ]
         }
       }
