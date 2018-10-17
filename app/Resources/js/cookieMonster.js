@@ -131,7 +131,7 @@ class CookieMonster {
     Cookies.set('hasFullConsent', false, { expires: 395 });
     this.hideBanner();
     Cookies.set(type, value, { expires: 395 });
-    const theCookies = this.getCookies();
+    const cookies = this.getCookies();
     if (type === 'analyticConsentValue') {
       if (value) {
         this.executeAnalyticScript();
@@ -148,12 +148,11 @@ class CookieMonster {
           }
         });
         PK_COOKIE_NAMES.forEach(name => {
-          for (let i = 0; i < theCookies.length; i++) {
-            if (theCookies[i].startsWith(name)) {
-              document.cookie =
-                theCookies[i] + '=; expires=' + new Date().toUTCString() + '; path=/';
+          cookies.forEach(cookie => {
+            if (cookie.startsWith(name)) {
+              document.cookie = cookie + '=; expires=' + new Date().toUTCString() + '; path=/';
             }
-          }
+          });
         });
       }
     } else if (type === 'adCookieConsentValue') {
