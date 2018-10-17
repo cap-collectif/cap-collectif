@@ -11,6 +11,9 @@ Scenario: GraphQL client wants question's choices and the number of answers to e
         questions {
           type
           ... on MultipleChoiceQuestion {
+            otherResponses {
+              totalCount
+            }
             choices {
               title
               responses {
@@ -33,6 +36,7 @@ Scenario: GraphQL client wants question's choices and the number of answers to e
           {"type": "textarea"},
           {
             "type": "button",
+            "otherResponses": {"totalCount": 1},
             "choices": [
               {
                 "title": "Au top",
@@ -43,13 +47,14 @@ Scenario: GraphQL client wants question's choices and the number of answers to e
               {
                 "title": "Du pur bullshit",
                 "responses": {
-                  "totalCount": 1
+                  "totalCount": 0
                 }
               }
             ]
           },
           {
             "type": "checkbox",
+            "otherResponses": {"totalCount": 0},
             "choices": [
               {
                 "title": @string@,
@@ -73,6 +78,7 @@ Scenario: GraphQL client wants question's choices and the number of answers to e
           },
           {
             "type":"radio",
+            "otherResponses": {"totalCount": 0},
             "choices": [
               {
                 "title": "Je dis oui",
@@ -96,6 +102,7 @@ Scenario: GraphQL client wants question's choices and the number of answers to e
           },
           {
             "type": "ranking",
+            "otherResponses": {"totalCount": 0},
             "choices": [
               {
                 "title": @string@,
@@ -117,7 +124,11 @@ Scenario: GraphQL client wants question's choices and the number of answers to e
               }
             ]
           },
-          {"type":"select","choices":[{"title":"React","responses":{"totalCount":0}},{"title":"Vue","responses":{"totalCount":0}}]}
+          {
+            "type":"select",
+            "otherResponses": {"totalCount": 0},
+            "choices":[{"title":"React","responses":{"totalCount":0}},{"title":"Vue","responses":{"totalCount":0}}]
+          }
         ]
       }
     }

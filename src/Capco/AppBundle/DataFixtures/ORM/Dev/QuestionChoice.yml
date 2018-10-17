@@ -410,5 +410,3 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: Vue
     position: 2
     question: '@multiplequestionReactVue'
-
-

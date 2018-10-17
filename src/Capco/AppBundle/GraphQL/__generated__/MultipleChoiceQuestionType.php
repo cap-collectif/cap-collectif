@@ -211,6 +211,41 @@ final class MultipleChoiceQuestionType extends ObjectType implements GeneratedTy
                     'public' => null,
                     'access' => null,
                 ],
+                'otherResponses' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ResponseConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last `n` elements from the list.',
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", array(0 => $value, 1 => $args)]);
+                    },
+                    'description' => 'Responses of the `other` question choice.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'choices' => [
                     'type' => Type::listOf(Type::nonNull($globalVariable->get('typeResolver')->resolve('QuestionChoice'))),
                     'args' => [
