@@ -6,6 +6,6 @@ QuestionnaireType:
       QUESTIONNAIRE:
         value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireType::QUESTIONNAIRE")'
         description: 'Draft are allowed'
-      SURVEY:
-        value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireType::SURVEY")'
+      VOTING:
+        value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireType::VOTING")'
         description: 'Draft are not allowed'

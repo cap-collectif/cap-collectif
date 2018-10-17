@@ -26,9 +26,9 @@ final class QuestionnaireTypeType extends EnumType implements GeneratedTypeInter
                     'deprecationReason' => null,
                     'description' => 'Draft are allowed',
                 ],
-                'SURVEY' => [
-                    'name' => 'SURVEY',
-                    'value' => \constant("Capco\\AppBundle\\Enum\\QuestionnaireType::SURVEY"),
+                'VOTING' => [
+                    'name' => 'VOTING',
+                    'value' => \constant("Capco\\AppBundle\\Enum\\QuestionnaireType::VOTING"),
                     'deprecationReason' => null,
                     'description' => 'Draft are not allowed',
                 ],
