@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Utils\Map;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
@@ -72,6 +73,7 @@ class Proposal
     use HasResponsesTrait;
     use PublishableTrait;
     use FollowableTrait;
+    use AddressableTrait;
 
     public static $ratings = [1, 2, 3, 4, 5];
 
@@ -117,11 +119,6 @@ class Proposal
      * @ORM\JoinTable(name="user_evaluatin_proposal")
      */
     protected $evaluers;
-
-    /**
-     * @ORM\Column(name="address", type="text", nullable=true)
-     */
-    private $address;
 
     /**
      * @ORM\Column(name="rating", type="integer", nullable=true)
@@ -895,27 +892,6 @@ class Proposal
         $this->proposedAnswer = $proposedAnswer;
 
         return $this;
-    }
-
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    public function setAddress($address = null)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getFiledAddress(): string
-    {
-        if (!$this->getAddress()) {
-            return '';
-        }
-
-        return Map::decodeAddressFromJson($this->getAddress());
     }
 
     public function getFullReference(): string
