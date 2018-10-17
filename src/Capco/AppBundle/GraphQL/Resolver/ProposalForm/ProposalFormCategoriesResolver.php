@@ -10,12 +10,6 @@ class ProposalFormCategoriesResolver implements ResolverInterface
     public function __invoke(ProposalForm $form): array
     {
         $categories = $form->getCategories()->toArray();
-        usort(
-          $categories,
-          function ($a, $b) {
-              return $a->getName() <=> $b->getName();
-          }
-      );
 
         return $categories;
     }

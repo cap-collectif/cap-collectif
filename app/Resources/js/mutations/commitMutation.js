@@ -9,12 +9,7 @@ const commitMutation = (environment: Environment, config: MutationConfig<*>): Pr
   new Promise((resolve, reject) => {
     relayCommitMutation(environment, {
       ...config,
-      onCompleted: (response: ?Object, errors) => {
-        if (errors) {
-          return reject(errors[0]);
-        }
-        return resolve(response);
-      },
+      onCompleted: (response: ?Object) => resolve(response),
       onError: (error: Error) => reject(error),
     });
   });
