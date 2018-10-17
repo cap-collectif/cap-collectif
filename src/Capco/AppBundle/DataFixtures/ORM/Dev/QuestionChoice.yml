@@ -400,3 +400,15 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: Non, ceci n'est pas un champ de type classement
     position: 2
     question: '@ljMultipleQuestionRanking'
+  QuestionChoiceReact:
+    id: QuestionChoiceReact
+    title: React
+    position: 1
+    question: '@multiplequestionReactVue'
+  QuestionChoiceVue:
+    id: QuestionChoiceVue
+    title: Vue
+    position: 2
+    question: '@multiplequestionReactVue'
+
+
