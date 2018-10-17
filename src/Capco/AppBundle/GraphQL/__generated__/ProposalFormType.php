@@ -231,14 +231,9 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                 'categories' => [
                     'type' => Type::nonNull(Type::listOf(Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalCategory')))),
                     'args' => [
-                        [
-                            'name' => 'order',
-                            'type' => $globalVariable->get('typeResolver')->resolve('CategoryOrderField'),
-                            'description' => null,
-                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", array(0 => $value, 1 => $args["order"])]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", array(0 => $value)]);
                     },
                     'description' => 'Available categories for proposals of this form.',
                     'deprecationReason' => null,
