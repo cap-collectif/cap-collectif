@@ -1,4 +1,4 @@
-@event
+@events @read-only
 Feature: Events
 
 Scenario: GraphQL client wants to list events
@@ -146,18 +146,19 @@ Scenario: GraphQL client wants to list current and future events
   }
   """
 
-@read-only
 Scenario: GraphQL client wants to list event in project
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
     "query": "query getEventsByProject ($projectId: ID!, $first: Int){
-      events(projects: $projectId, first: $first) {
+      events(project: $projectId, first: $first) {
       totalCount
         edges {
           node {
             id
+            themes { id }
+            projects { id }
           }
         }
       }
@@ -177,17 +178,51 @@ Scenario: GraphQL client wants to list event in project
            "edges":[
               {
                  "node":{
-                    "id":"event1"
+                    "id":"event1",
+                    "themes":[
+                       {
+                          "id":"theme1"
+                       },
+                       {
+                          "id":"theme2"
+                       }
+                    ],
+                    "projects":[
+                       {
+                          "id":"project1"
+                       }
+                    ]
                  }
               },
               {
                  "node":{
-                    "id":"event2"
+                    "id":"event2",
+                    "themes":[
+                       {
+                          "id":"theme1"
+                       },
+                       {
+                          "id":"theme2"
+                       }
+                    ],
+                    "projects":[
+                       {
+                          "id":"project1"
+                       }
+                    ]
                  }
               },
               {
                  "node":{
-                    "id":"event3"
+                    "id":"event3",
+                    "themes":[
+
+                    ],
+                    "projects":[
+                       {
+                          "id":"project1"
+                       }
+                    ]
                  }
               }
            ]
@@ -196,18 +231,20 @@ Scenario: GraphQL client wants to list event in project
   }
   """
 
-@read-only
 Scenario: GraphQL client wants to list events with theme2
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
     "query": "query getEventsByTheme ($themeId: ID!, $first: Int){
-      events(themes: $themeId, first: $first) {
+      events(theme: $themeId, first: $first) {
       totalCount
         edges {
           node {
             id
+            themes {
+              id
+            }
           }
         }
       }
@@ -227,12 +264,28 @@ Scenario: GraphQL client wants to list events with theme2
            "edges":[
               {
                  "node":{
-                    "id":"event1"
+                    "id":"event1",
+                    "themes":[
+                       {
+                          "id":"theme1"
+                       },
+                       {
+                          "id":"theme2"
+                       }
+                    ]
                  }
               },
               {
                  "node":{
-                    "id":"event2"
+                    "id":"event2",
+                    "themes":[
+                       {
+                          "id":"theme1"
+                       },
+                       {
+                          "id":"theme2"
+                       }
+                    ]
                  }
               }
            ]
@@ -241,7 +294,6 @@ Scenario: GraphQL client wants to list events with theme2
   }
   """
 
-@read-only
 Scenario: GraphQL client wants to list events from a term
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -253,6 +305,7 @@ Scenario: GraphQL client wants to list events from a term
         edges {
           node {
             id
+            themes { id }
           }
         }
       }
@@ -272,12 +325,23 @@ Scenario: GraphQL client wants to list events from a term
            "edges":[
               {
                  "node":{
-                    "id":"event1"
+                    "id":"event1",
+                    "themes":[
+                       {
+                          "id":"theme1"
+                       },
+                       {
+                          "id":"theme2"
+                       }
+                    ]
                  }
               },
               {
                  "node":{
-                    "id":"event3"
+                    "id":"event3",
+                    "themes":[
+
+                    ]
                  }
               }
            ]

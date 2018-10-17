@@ -184,24 +184,24 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                             'description' => 'PASSED for old, FUTURE for current and next',
                         ],
                         [
-                            'name' => 'themes',
+                            'name' => 'theme',
                             'type' => Type::id(),
-                            'description' => 'Search with themeId',
+                            'description' => 'If non-null, filters events with the given theme.',
                         ],
                         [
-                            'name' => 'projects',
+                            'name' => 'project',
                             'type' => Type::id(),
-                            'description' => 'Search with projectId',
+                            'description' => 'If non-null, filters events with the given project.',
                         ],
                         [
                             'name' => 'author',
                             'type' => Type::id(),
-                            'description' => 'Search with authorId',
+                            'description' => 'If non-null, filters events with the given author.',
                         ],
                         [
                             'name' => 'term',
                             'type' => Type::string(),
-                            'description' => 'Search by term',
+                            'description' => 'If non-null, filters events with the given string to look for.',
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

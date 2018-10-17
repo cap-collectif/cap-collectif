@@ -3412,16 +3412,16 @@ type Query {
     # PASSED for old, FUTURE for current and next
     time: EventTime
 
-    # Search with themeId
-    themes: ID
+    # If non-null, filters events with the given theme.
+    theme: ID
 
-    # Search with projectId
-    projects: ID
+    # If non-null, filters events with the given project.
+    project: ID
 
-    # Search with authorId
+    # If non-null, filters events with the given author.
     author: ID
 
-    # Search by term
+    # If non-null, filters events with the given string to look for.
     term: String
   ): EventConnection
   proposalForms: [ProposalForm]!

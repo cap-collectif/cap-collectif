@@ -15,11 +15,11 @@ Capco\AppBundle\Entity\Event:
     lat:
       expose: true
       type: float
-      groups: [Events,Elasticsearch]
+      groups: [Events, Elasticsearch]
     lng:
       expose: true
       type: float
-      groups: [Events,Elasticsearch]
+      groups: [Events, Elasticsearch]
     city:
       expose: true
       type: string
@@ -40,11 +40,11 @@ Capco\AppBundle\Entity\Event:
     projects:
       expose: true
       type: Capco\AppBundle\Entity\Project
-      groups: [Events, Elasticsearch]
+      groups: [Elasticsearch]
     themes:
       expose: true
       type: Capco\AppBundle\Entity\Theme
-      groups: [Proposals, Elasticsearch]
+      groups: [Elasticsearch]
     commentsCount:
       expose: true
       type: integer
@@ -87,4 +87,4 @@ Capco\AppBundle\Entity\Event:
     getFullAddress:
       serialized_name: address
       type: string
-      groups: [Events, Elasticsearch]
+      groups: [Elasticsearch]

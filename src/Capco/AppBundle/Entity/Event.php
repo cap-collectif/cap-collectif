@@ -287,11 +287,11 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function setLat($lat): self
     {
         if (\is_string($lat)) {
-            $lat = (float)$lat;
+            $lat = str_replace(',', '.', $lat);
+            $lat = (float) $lat;
         }
 
-        $this->lat = null !== $lat ? str_replace(',', '.', $lat) : $lat;
-
+        $this->lat = $lat;
         return $this;
     }
 
@@ -303,9 +303,10 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function setLng($lng): self
     {
         if (\is_string($lng)) {
-            $lng = (float)$lng;
+            $lng = str_replace(',', '.', $lng);
+            $lng = (float) $lng;
         }
-        $this->lng = null !== $lng ? str_replace(',', '.', $lng) : $lng;
+        $this->lng = $lng;
 
         return $this;
     }
@@ -487,8 +488,8 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function getFullAddress(): string
     {
         $address = trim($this->getAddress());
-        $address .= !empty($this->getZipCode()) ? ', '.$this->getZipCode() : '';
-        $address .= !empty($this->getCity()) ? ', '.$this->getCity() : '';
+        $address .= !empty($this->getZipCode()) ? ', ' . $this->getZipCode() : '';
+        $address .= !empty($this->getCity()) ? ', ' . $this->getCity() : '';
 
         return $address;
     }
