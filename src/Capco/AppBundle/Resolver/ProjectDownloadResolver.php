@@ -62,6 +62,7 @@ class ProjectDownloadResolver
             'phone',
             'created',
             'anonymous',
+            'draft',
         ];
 
         if ($step->getQuestionnaire()) {
@@ -153,6 +154,7 @@ class ProjectDownloadResolver
             'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
             'created' => $this->dateToString($reply['createdAt']),
             'anonymous' => $this->booleanToString($reply['private']),
+            'draft' => $this->booleanToString($reply['draft']),
         ];
 
         foreach ($responses as $response) {

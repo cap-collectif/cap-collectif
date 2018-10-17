@@ -27,6 +27,7 @@ class ReplyAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('id', null, ['label' => 'admin.fields.reply.id'])
             ->add(
                 'author',
                 'doctrine_orm_model_autocomplete',
