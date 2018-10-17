@@ -43,7 +43,7 @@ type State = {
 };
 
 export class QuestionnaireAdminCreateButton extends React.Component<Props, State> {
-  state = { showModal: false, type: 'SURVEY' };
+  state = { showModal: false, type: 'VOTING' };
 
   changeType = (type: string) => {
     this.setState({
@@ -82,10 +82,9 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
             <form onSubmit={() => handleSubmit}>
               <Field type="radio-buttons" id="questionnaire_type" name="type" component={component}>
                 <ToggleButton
-                  onClick={() => dispatch(change(formName, 'type', 'SURVEY'))}
-                  value="SURVEY">
-                  {/* TODO Mettre la vrai traduction */}
-                  <FormattedMessage id="votationnn" />
+                  onClick={() => dispatch(change(formName, 'type', 'VOTING'))}
+                  value="VOTING">
+                  <FormattedMessage id="voting" />
                 </ToggleButton>
                 <ToggleButton
                   onClick={() => dispatch(change(formName, 'type', 'QUESTIONNAIRE'))}
