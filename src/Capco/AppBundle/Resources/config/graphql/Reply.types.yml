@@ -1,11 +1,13 @@
 Reply:
   type: object
-  inherits: [Node, Publishable, Contribution]
+  inherits: [Node, Publishable, Draftable, Contribution]
   config:
     description: 'A Reply'
-    interfaces: [Node, Publishable, Contribution]
+    interfaces: [Node, Publishable, Draftable, Contribution]
     fields:
       private:
+        type: 'Boolean!'
+      draft:
         type: 'Boolean!'
       publicationStatus:
         type: 'ReplyPublicationStatus!'
