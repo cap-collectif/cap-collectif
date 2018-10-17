@@ -31,6 +31,28 @@ InternalQuery:
         type: '[Group!]!'
         access: "@=hasRole('ROLE_ADMIN')"
         resolve: "@=resolver('groups')"
+      events:
+        type: 'EventConnection'
+        argsBuilder: 'Relay::Connection'
+        description: 'Lookup events.'
+        args:
+          time:
+            type: 'EventTime'
+            description: 'If non-null, filters events with the given time.'
+          theme:
+            type: 'ID'
+            description: 'If non-null, filters events with the given theme.'
+          project:
+            type: 'ID'
+            description: 'If non-null, filters events with the given project.'
+          author:
+            type: 'ID'
+            description: 'If non-null, filters events with the given author.'
+          term:
+            type: 'String'
+            description: 'If non-null, filters events with the given string to look for.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventsResolver", [args, serv("request_stack")])'
       proposalForms:
         description: 'Lookup forms.'
         type: '[ProposalForm]!'
