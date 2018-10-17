@@ -1,20 +1,10 @@
 /* eslint-disable */
 // @flow
 
-const GA_COOKIE_NAMES = [
-  '__utma',
-  '__utmb',
-  '__utmc',
-  '__utmz',
-  '_ga',
-  '_gat',
-  '_gid',
-  '_pk_ref',
-  '_pk_cvar',
-  '_pk_id',
-  '_pk_ses',
-  '_pk_hsr',
-];
+const GA_COOKIE_NAMES = ['__utma', '__utmb', '__utmc', '__utmz', '_ga', '_gat', '_gid'];
+
+const PK_COOKIE_NAMES = ['_pk_ref', '_pk_cvar', '_pk_id', '_pk_ses', '_pk_hsr'];
+
 const SCROLL_VALUE_TO_CONSENT = 2000;
 
 class CookieMonster {
@@ -141,6 +131,7 @@ class CookieMonster {
     Cookies.set('hasFullConsent', false, { expires: 395 });
     this.hideBanner();
     Cookies.set(type, value, { expires: 395 });
+    const theCookies = this.getCookies();
     if (type === 'analyticConsentValue') {
       if (value) {
         this.executeAnalyticScript();
@@ -148,7 +139,20 @@ class CookieMonster {
         GA_COOKIE_NAMES.forEach(name => {
           if (typeof Cookies.get(name) !== 'undefined') {
             document.cookie =
-              name + '=; expires=' + +new Date() + '; domain=.' + window.location.host + '; path=/';
+              name +
+              '=; expires=' +
+              new Date().toUTCString() +
+              '; domain=.' +
+              window.location.host +
+              '; path=/';
+          }
+        });
+        PK_COOKIE_NAMES.forEach(name => {
+          for (let i = 0; i < theCookies.length; i++) {
+            if (theCookies[i].startsWith(name)) {
+              document.cookie =
+                theCookies[i] + '=; expires=' + new Date().toUTCString() + '; path=/';
+            }
           }
         });
       }
@@ -157,6 +161,16 @@ class CookieMonster {
         // do something; waiting for instruction
       }
     }
+  };
+
+  getCookies = () => {
+    let k = 0;
+    return document.cookie.split(';').reduce((cookies, cookie) => {
+      let [name] = cookie.split('=').map(c => c.trim());
+      cookies[k] = name;
+      k++;
+      return cookies;
+    }, []);
   };
 
   analyticCookieValue = () => {
