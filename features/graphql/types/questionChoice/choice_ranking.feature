@@ -127,7 +127,8 @@ Scenario: GraphQL client wants to see the ranking of the choices answered
                 ]
               }
             ]
-          }
+          },
+          {"choices":[{"title":"React","ranking":null},{"title":"Vue","ranking":null}]}
         ]
       }
     }

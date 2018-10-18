@@ -85,7 +85,8 @@ Scenario: Evaluer wants to retrieve evaluation form questions
               {"id":"20"},
               {"id":"21"},
               {"id":"22"},
-              {"id":"23"}
+              {"id":"23"},
+              {"id":"47"}
             ]
           }
        }
@@ -120,7 +121,8 @@ Scenario: Anonymous wants to retrieve evaluation form questions
               {"id":"20"},
               {"id":"21"},
               {"id":"22"},
-              {"id":"23"}
+              {"id":"23"},
+              {"id":"47"}
             ]
           }
        }
