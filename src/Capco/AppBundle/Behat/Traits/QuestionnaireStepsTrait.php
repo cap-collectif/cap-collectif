@@ -148,6 +148,15 @@ trait QuestionnaireStepsTrait
     }
 
     /**
+     * @When I submit my draft
+     */
+    public function iSubmitMyDraft()
+    {
+        $this->navigationContext->getPage('questionnaire page')->submitDraft();
+        $this->iWait(5);
+    }
+
+    /**
      * @When I submit my updated reply
      */
     public function iSubmitMyUpdatedReply()
@@ -161,6 +170,15 @@ trait QuestionnaireStepsTrait
     public function iSubmitMyUpdatedDraft()
     {
         $this->navigationContext->getPage('questionnaire page')->submitUpdatedDraft();
+    }
+
+    /**
+     * @When I submit my updated draft
+     */
+    public function iSubmitMyUpdatedDraft()
+    {
+        $this->navigationContext->getPage('questionnaire page')->submitUpdatedDraft();
+        $this->iWait(5);
     }
 
     /**
@@ -296,6 +314,15 @@ trait QuestionnaireStepsTrait
     public function iClickOnTheUpdateReplyDraftButton()
     {
         $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyDraftButton();
+    }
+
+    /**
+     * @Then I click on the update reply draft button
+     */
+    public function iClickOnTheUpdateReplyDraftButton()
+    {
+        $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyDraftButton();
+        $this->iWait(1);
     }
 
     // ************************************************* Deletion *************************************************
