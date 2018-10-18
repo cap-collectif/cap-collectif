@@ -106,6 +106,28 @@ Scenario: Logged in user wants to update a reply
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my reply
 
+# Draft
+
+@javascript @database
+Scenario: Logged in user wants to add a draft to a questionnaire with wrong values
+  Given I am logged in as user
+  And I go to a questionnaire step
+  When I fill the questionnaire form with wrong values
+  And I submit my draft
+  And I wait "#global-alert-box" to appear on current page
+  Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
+  And I should see my reply
+  
+@javascript @database
+Scenario: Logged in user wants to update a draft to a questionnaire with wrong values
+  Given I am logged in as admin
+  And I go to a questionnaire step
+  And I click on the update reply draft button
+  When I update the draft form without the required questions
+  And I submit my updated draft
+  Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
+  And I should see my reply
+
 ## Deletion
 
 @javascript @database

@@ -194,21 +194,20 @@ export class ReplyForm extends React.Component<Props> {
                 </div>
               )}
               <div className="btn-toolbar btn-box sticky">
-                {(!reply || (reply && !reply.draft)) &&
-                  questionnaire.type === 'QUESTIONNAIRE' && (
-                    <div className="btn-group">
-                      <SubmitButton
-                        type="submit"
-                        id={`${form}-submit-create-draft-reply`}
-                        disabled={pristine || submitting || disabled}
-                        bsStyle="primary"
-                        label={submitting ? 'global.loading' : 'global.save_as_draft'}
-                        onSubmit={() => {
-                          dispatch(changeRedux(form, 'draft', true));
-                        }}
-                      />
-                    </div>
-                  )}
+                {(!reply || reply.draft) && (
+                  <div className="btn-group">
+                    <SubmitButton
+                      type="submit"
+                      id={`${form}-submit-create-draft-reply`}
+                      disabled={pristine || submitting || disabled}
+                      bsStyle="primary"
+                      label={submitting ? 'global.loading' : 'global.save_as_draft'}
+                      onSubmit={() => {
+                        dispatch(changeRedux(form, 'draft', true));
+                      }}
+                    />
+                  </div>
+                )}
                 <div className="btn-group">
                   <SubmitButton
                     type="submit"

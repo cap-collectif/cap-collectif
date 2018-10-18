@@ -116,3 +116,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@multiplequestion10'
     proposalEvaluation: '@proposalEvaluation3'
     value: { 'labels': ["J'ai rien compris"], 'other': null }
+  response28:
+    question: '@multiplequestion1'
+    reply: '@reply5'
+    value: { 'labels': ['Natation'], 'other': null }

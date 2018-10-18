@@ -72,15 +72,32 @@ trait QuestionnaireStepsTrait
     }
 
     /**
+     * @When I fill the questionnaire form with wrong values
+     */
+    public function iFillTheQuestionnaireFormWithWrongValues()
+    {
+        $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice1');
+        $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice2');
+    }
+
+    /**
      * @When I fill the questionnaire form without the required questions
      */
     public function iFillTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
-        $this->fillField('CreateReplyForm-responses[0]', '');
+        $this->fillField('CreateReplyForm-responses[1]', '');
         $this->selectOption(
             'CreateReplyForm-responses[3]',
             'Pas assez fort (Mon sonotone est en panne)'
         );
+    }
+
+    /**
+     * @When I update the draft form without the required questions
+     */
+    public function iUpdateTheQuestionnaireFormWithoutTheRequiredQuestions()
+    {
+        $this->fillField('UpdateReplyForm-reply5-responses[1]', 'This biscuit bless your soul');
     }
 
     /**
@@ -89,7 +106,7 @@ trait QuestionnaireStepsTrait
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
     {
         $this->fillField(
-            'CreateReplyForm-responses[0]',
+            'CreateReplyForm-responses[1]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
         $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
@@ -123,11 +140,29 @@ trait QuestionnaireStepsTrait
     }
 
     /**
+     * @When I submit my draft
+     */
+    public function iSubmitMyDraft()
+    {
+        $this->navigationContext->getPage('questionnaire page')->submitDraft();
+        $this->iWait(5);
+    }
+
+    /**
      * @When I submit my updated reply
      */
     public function iSubmitMyUpdatedReply()
     {
         $this->navigationContext->getPage('questionnaire page')->submitUpdatedReply();
+        $this->iWait(5);
+    }
+
+    /**
+     * @When I submit my updated draft
+     */
+    public function iSubmitMyUpdatedDraft()
+    {
+        $this->navigationContext->getPage('questionnaire page')->submitUpdatedDraft();
         $this->iWait(5);
     }
 
@@ -231,11 +266,42 @@ trait QuestionnaireStepsTrait
     }
 
     /**
+     * @When I update the questionnaire form with wrong values
+     */
+    public function iUpdateTheQuestionnaireFormWithWrongValues()
+    {
+        $this->fillField(
+            'UpdateReplyForm-reply2-responses[2]',
+            'I am not the right answer you are looking for'
+        );
+    }
+
+    /**
+     * @When I update the draft form with wrong values
+     */
+    public function iUpdateTheDraftFormWithWrongValues()
+    {
+        $this->fillField(
+            'UpdateReplyForm-reply5-responses[2]',
+            'I am not the right answer you are looking for'
+        );
+    }
+
+    /**
      * @Then I click on the update reply button
      */
     public function iClickOnTheUpdateReplyButton()
     {
         $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyButton();
+        $this->iWait(1);
+    }
+
+    /**
+     * @Then I click on the update reply draft button
+     */
+    public function iClickOnTheUpdateReplyDraftButton()
+    {
+        $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyDraftButton();
         $this->iWait(1);
     }
 
@@ -301,7 +367,7 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
         if (!$edition) {
             $this->fillField(
-                'CreateReplyForm-responses[0]',
+                'CreateReplyForm-responses[1]',
                 'Je pense que c\'est la ville parfaite pour organiser les JO'
             );
             $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
@@ -311,7 +377,7 @@ trait QuestionnaireStepsTrait
             return;
         }
         $this->fillField(
-            'CreateReplyForm-responses[0]',
+            'CreateReplyForm-responses[1]',
             'En fait c\'est nul, je ne veux pas des JO à Paris'
         );
     }

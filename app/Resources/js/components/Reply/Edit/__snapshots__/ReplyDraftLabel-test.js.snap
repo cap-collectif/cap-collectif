@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReplyDraftLabel /> should render correctly with draft 1`] = `
+<Label
+  bsClass="label"
+  bsStyle="default"
+  className="badge-pill ml-5"
+>
+  <FormattedMessage
+    id="proposal.state.draft"
+    values={Object {}}
+  />
+</Label>
+`;
+
+exports[`<ReplyDraftLabel /> should render correctly with not draft 1`] = `""`;

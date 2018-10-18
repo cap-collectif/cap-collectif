@@ -17,15 +17,18 @@ class QuestionnairePage extends Page
     protected $elements = [
         'questionnaire form' => '#create-reply-form',
         'submit reply button' => '#CreateReplyForm-submit-create-reply',
+        'submit draft button' => '#CreateReplyForm-submit-create-draft-reply',
         'submit update reply button' => '#UpdateReplyForm-reply2-submit-create-reply',
+        'submit update draft button' => '#UpdateReplyForm-reply5-submit-create-draft-reply',
         'user replies' => '#user-replies',
         'user reply' => '#user-replies .reply',
         'user reply modal' => '.reply__modal--show',
         'user first reply link' => '#user-replies .reply:first-child',
         'reply buttons' => '.reply__buttons',
-        'delete reply button' => '.reply__delete-btn',
-        'update reply button' => '.reply__update-btn',
-        'confirm delete reply button' => '.reply__confirm-delete-btn',
+        'delete reply button' => '#reply-link-reply2 .reply__delete-btn',
+        'update reply button' => '#reply-link-reply2 .reply__update-btn',
+        'update reply draft button' => '#reply-link-reply5 .reply__update-btn',
+        'confirm delete reply button' => '#reply-link-reply2 .reply__confirm-delete-btn',
         'first ranking choice right arrow' =>
             '.ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right',
         'update first ranking choice right arrow' =>
@@ -37,9 +40,19 @@ class QuestionnairePage extends Page
         $this->getElement('submit reply button')->click();
     }
 
+    public function submitDraft()
+    {
+        $this->getElement('submit draft button')->click();
+    }
+
     public function submitUpdatedReply()
     {
         $this->getElement('submit update reply button')->click();
+    }
+
+    public function submitUpdatedDraft()
+    {
+        $this->getElement('submit update draft button')->click();
     }
 
     public function clickFirstRankingChoiceRightArrow()
@@ -80,6 +93,11 @@ class QuestionnairePage extends Page
     public function clickUpdateReplyButton()
     {
         $this->getElement('update reply button')->click();
+    }
+
+    public function clickUpdateReplyDraftButton()
+    {
+        $this->getElement('update reply draft button')->click();
     }
 
     public function clickDeleteReplyButton()

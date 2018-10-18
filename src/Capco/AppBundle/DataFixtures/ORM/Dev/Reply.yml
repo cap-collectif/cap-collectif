@@ -24,3 +24,10 @@ Capco\AppBundle\Entity\Reply:
     questionnaire: '@questionnaire3'
     createdAt: <(new \DateTime('2016-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
+  reply5:
+    id: 'reply5'
+    author: '@user4'
+    questionnaire: '@questionnaire1'
+    createdAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2016-03-01'))>
+    draft: true
