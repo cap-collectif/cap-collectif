@@ -159,6 +159,12 @@ const populateQuestionsJump = (responses, questions, callback) => {
   return questionsWithJumpsIds;
 };
 
+const questionsHaveLogicJump = questions =>
+  questions.reduce(
+    (acc, question) => acc || (question && question.jumps && question.jumps.length > 0),
+    false,
+  );
+
 const filterQuestions = (questions, questionsWithJumps, otherQuestions) => {
   const tree = {};
   questionsWithJumps.forEach(questionId => {
@@ -244,10 +250,18 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
 };
 
 export const getAvailableQuestionsIds = (questions: Questions, responses: ResponsesInReduxForm) => {
+  // If no jump in questionnaire every question is available
+  const hasLogicJumps = questionsHaveLogicJump(questions);
+  if (!hasLogicJumps) {
+    return questions.map(q => q.id);
+  }
+
+  // Otherwise let's calculate what is currently displayed to user…
   const firstLogicQuestion = questions.find(
     question => question.jumps && question.jumps.length > 0,
   );
   const firstLogicQuestionId = firstLogicQuestion ? firstLogicQuestion.id : null;
+
   const questionIsADestination = [];
   questions.map(question => {
     if (question.jumps !== null && question.jumps !== undefined) {
@@ -434,6 +448,16 @@ export const validateResponses = (
         if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
           return { value: `${className}.constraints.field_mandatory` };
         }
+      } else if (question.type === 'checkbox') {
+        if (
+          !question.validationRule &&
+          (!response ||
+            (response.value &&
+              Array.isArray(response.value.labels) &&
+              response.value.labels.length === 0))
+        ) {
+          return { value: `${className}.constraints.field_mandatory` };
+        }
       } else if (question.type === 'radio') {
         if (
           !response ||
@@ -506,146 +530,15 @@ export const renderResponses = ({
   disabled: boolean,
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
-  const hasLogicJumps = questions.reduce(
-    (acc, question) => acc || (question && question.jumps && question.jumps.length > 0),
-    false,
-  );
+  const availableQuestions = getAvailableQuestionsIds(questions, responses);
 
-  if (hasLogicJumps) {
-    const availableQuestions = getAvailableQuestionsIds(questions, responses);
-    return (
-      <div>
-        {fields.map((member, index) => {
-          const field = questions[index];
-          if (!availableQuestions.includes(field.id)) {
-            return;
-          }
-          const inputType = field.type || 'text';
-          const isOtherAllowed = field.isOtherAllowed;
-
-          const labelAppend = field.required
-            ? strategy === 'minority_required'
-              ? ` <span class="warning small"> ${intl.formatMessage({
-                  id: 'global.mandatory',
-                })}</span>`
-              : ''
-            : strategy === 'majority_required' || strategy === 'half_required'
-              ? ` <span class="excerpt small"> ${intl.formatMessage({
-                  id: 'global.optional',
-                })}</span>`
-              : '';
-
-          const labelMessage = field.title + labelAppend;
-
-          const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
-
-          switch (inputType) {
-            case 'medias': {
-              return (
-                <ProposalPrivateField key={field.id} show={field.private}>
-                  <Field
-                    name={`${member}.value`}
-                    id={member}
-                    type="medias"
-                    component={component}
-                    help={field.helpText}
-                    description={field.description}
-                    placeholder="reply.your_response"
-                    label={label}
-                    disabled={disabled}
-                  />
-                </ProposalPrivateField>
-              );
-            }
-            case 'select': {
-              return (
-                <ProposalPrivateField key={field.id} show={field.private}>
-                  <Field
-                    name={`${member}.value`}
-                    id={member}
-                    type={inputType}
-                    component={component}
-                    help={field.helpText}
-                    isOtherAllowed={isOtherAllowed}
-                    description={field.description}
-                    placeholder="reply.your_response"
-                    label={label}
-                    disabled={disabled}>
-                    <option value="" disabled>
-                      {<FormattedMessage id="global.select" />}
-                    </option>
-                    {field.choices.map(choice => (
-                      <option key={choice.id} value={choice.title}>
-                        {choice.title}
-                      </option>
-                    ))}
-                  </Field>
-                </ProposalPrivateField>
-              );
-            }
-            default: {
-              let response;
-              if (responses) {
-                response = responses[index].value;
-              }
-              let choices = [];
-              if (
-                inputType === 'ranking' ||
-                inputType === 'radio' ||
-                inputType === 'checkbox' ||
-                inputType === 'button'
-              ) {
-                choices = formattedChoicesInField(field);
-                if (inputType === 'radio') {
-                  return (
-                    <ProposalPrivateField key={field.id} show={field.private}>
-                      <div key={`${member}-container`}>
-                        <MultipleChoiceRadio
-                          id={member}
-                          name={member}
-                          description={field.description}
-                          helpText={field.helpText}
-                          isOtherAllowed={isOtherAllowed}
-                          label={label}
-                          change={change}
-                          choices={choices}
-                          value={response}
-                          disabled={disabled}
-                        />
-                      </div>
-                    </ProposalPrivateField>
-                  );
-                }
-              }
-
-              return (
-                <ProposalPrivateField key={field.id} show={field.private}>
-                  <Field
-                    name={`${member}.value`}
-                    id={member}
-                    type={inputType}
-                    component={component}
-                    description={field.description}
-                    help={field.helpText}
-                    isOtherAllowed={isOtherAllowed}
-                    placeholder="reply.your_response"
-                    choices={choices}
-                    label={label}
-                    disabled={disabled}
-                  />
-                </ProposalPrivateField>
-              );
-            }
-          }
-        })}
-      </div>
-    );
-  }
   return (
     <div>
       {fields.map((member, index) => {
         const field = questions[index];
-
+        if (!availableQuestions.includes(field.id)) {
+          return;
+        }
         // We want to overidde the HTML verification of the input type number
         const inputType = field.type && field.type !== 'number' ? field.type : 'text';
         const isOtherAllowed = field.isOtherAllowed;

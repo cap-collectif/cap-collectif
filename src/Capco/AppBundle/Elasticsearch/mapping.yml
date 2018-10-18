@@ -117,17 +117,7 @@ mappings:
       updatedAt: { type: date }
       startAt: { type: date }
       endAt: { type: date }
-      author: *Author
-      themes:
-        type: object
-        properties:
-          id: { type: keyword }
-          slug: { type: keyword }
-      projects:
-        type: object
-        properties:
-          id: { type: keyword }
-          slug: { type: keyword }
+      Author: *Author
 
   proposal:
     properties:
