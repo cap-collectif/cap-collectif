@@ -41,6 +41,7 @@ class Manager
         'indexation',
         'login_openid',
         'consultation_plan',
+        'display_map',
     ];
 
     protected $context;

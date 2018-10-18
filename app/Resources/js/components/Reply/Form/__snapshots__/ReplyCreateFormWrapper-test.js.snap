@@ -23,6 +23,7 @@ exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form
         ],
       }
     }
+    reply={null}
   />
 </div>
 `;
@@ -68,6 +69,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         ],
       }
     }
+    reply={null}
   />
 </div>
 `;
@@ -120,6 +122,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         ],
       }
     }
+    reply={null}
   />
 </div>
 `;
@@ -144,6 +147,7 @@ exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`
         ],
       }
     }
+    reply={null}
   />
 </div>
 `;
