@@ -4,7 +4,6 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
 <div>
   <FormGroup
     bsClass="form-group"
-    validationState="success"
   >
     <HelpBlock
       bsClass="help-block"
