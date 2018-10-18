@@ -25,7 +25,7 @@
     "dump-graphql-json-schema:internal": "bin/console graphql:dump-schema --schema internal --no-debug --file schema.internal.json --format json",
     "dump-graphql-json-schema:public": "bin/console graphql:dump-schema --schema public --no-debug --file schema.public.json --format json",
     "relay": "yarn run clean-cache && yarn run compile-graphql && yarn run dump-graphql-schema:internal && yarn run dump-graphql-json-schema:internal && yarn run dump-graphql-schema:public && yarn run build-relay-schema",
-    "relay:watch": "yarn run clean-cache && yarn run compile-graphql && yarn run dump-graphql-schema && yarn run build-relay-schema:watch",
+    "relay:watch": "yarn run clean-cache && yarn run compile-graphql && yarn run dump-graphql-schema:internal && yarn run dump-graphql-json-schema:internal && yarn run build-relay-schema:watch",
     "checkcs": "eslint --cache app/Resources/js",
     "graphql:lint:public": "graphql-schema-linter --comment-descriptions schema.public.graphql",
     "graphql:lint:internal": "graphql-schema-linter --comment-descriptions schema.internal.graphql",
@@ -50,10 +50,7 @@
     ]
   },
   "graphql-doctor": {
-    "schema.public.graphql": {
-      "ref": "heads/master",
-      "schemaPath": "schema.public.graphql"
-    }
+    "schema.public.graphql": { "ref": "heads/master", "schemaPath": "schema.public.graphql"}
   },
   "lint-staged": {
     "schema.public.graphql": [
@@ -133,7 +130,7 @@
     }
   },
   "dependencies": {
-    "@prettier/plugin-php": "^0.9.0",
+    "@prettier/plugin-php": "^0.6.0",
     "@storybook/addon-info": "^3.4.8",
     "@storybook/addons": "^3.4.8",
     "@storybook/react": "^3.4.8",

@@ -91,10 +91,6 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaire4'
     question: '@multiplequestion11'
     position: 6
-  qaq24:
-    questionnaire: '@questionnaire4'
-    question: '@multiplequestionReactVue'
-    position: 7
   qaq45:
     questionnaire: '@questionnaireWithJumps'
     question: '@multiplequestionHapNoel'

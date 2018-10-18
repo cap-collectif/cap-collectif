@@ -27,8 +27,11 @@ ProposalForm:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerProposalsUnpublishedResolver", [value, args, getUser()])'
       categories:
         type: '[ProposalCategory!]!'
+        args:
+          order:
+            type: 'CategoryOrderField'
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", [value])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", [value, args["order"]])'
         description: 'Available categories for proposals of this form.'
       usingThemes:
         type: 'Boolean!'
