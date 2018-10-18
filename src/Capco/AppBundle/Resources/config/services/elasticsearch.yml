@@ -6,6 +6,7 @@ services:
 
   Capco\AppBundle\Elasticsearch\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Elasticsearch/*'
+    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/Elasticsearch/{ElasticsearchHelper.php}'
 
   capco.elasticsearch.client:
     class: Elastica\Client

@@ -8,7 +8,6 @@ import {
   FieldArray,
   Field,
   SubmissionError,
-  getFormSyncErrors,
 } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -37,7 +36,6 @@ type Props = FormProps & {
   +user: ?Object,
   +intl: IntlShape,
   +onClose?: () => void,
-  +formErrors?: Object,
 };
 
 type FormValues = {|
@@ -106,6 +104,7 @@ const validate = (values: FormValues, props: Props) => {
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses;
   }
+
   return errors;
 };
 
@@ -130,16 +129,6 @@ export class ReplyForm extends React.Component<Props> {
     );
   }
 
-  submitIsDisabled() {
-    const { formErrors } = this.props;
-
-    if (formErrors && formErrors.responses) {
-      return formErrors.responses.filter(response => response !== undefined).length !== 0;
-    }
-
-    return false;
-  }
-
   render() {
     const {
       intl,
@@ -157,7 +146,6 @@ export class ReplyForm extends React.Component<Props> {
     } = this.props;
 
     const disabled = this.formIsDisabled();
-    const submitDisabled = this.submitIsDisabled();
 
     return (
       <CardContainer>
@@ -194,7 +182,7 @@ export class ReplyForm extends React.Component<Props> {
                 type="submit"
                 id={`${form}-submit-create-reply`}
                 bsStyle="primary"
-                disabled={pristine || invalid || submitting || disabled || submitDisabled}>
+                disabled={pristine || invalid || submitting || disabled}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               {!disabled &&
@@ -228,7 +216,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
   },
   user: state.user.user,
   form: props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`,
-  formErrors: getFormSyncErrors(`Create${formName}`)(state),
 });
 
 const form = reduxForm({
