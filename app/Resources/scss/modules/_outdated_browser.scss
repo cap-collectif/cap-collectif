@@ -6,15 +6,19 @@
     border-bottom: 1px solid darken($danger-color, 10%);
     background-color: $danger-color;
     color: $white;
+
     .buorg-icon {
         display: none;
     }
+
     .buorg-buttons {
         margin-top: 1rem;
+
         a {
             box-shadow: none;
             background: transparent;
             border: 1px solid $white;
+
             &:hover {
                 color: $black;
                 background: $white;
