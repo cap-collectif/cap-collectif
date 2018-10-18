@@ -8,7 +8,6 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class SectionQuestionType extends AbstractType
 {
@@ -25,12 +24,6 @@ class SectionQuestionType extends AbstractType
         $builder->add('type', IntegerType::class);
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
-        $builder->add('jumps', CollectionType::class, [
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-            'entry_type' => LogicJumpType::class,
-        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
