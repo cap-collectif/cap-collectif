@@ -496,6 +496,13 @@ svg.avatar-group {
     }
 }
 
-/* ======================= Consultation plan ============================*/
+/* ======================= Pie chart ============================*/
 
+.pie-chart__container {
+    width: 650px;
+    height: 300px;
 
+    @media (max-width: $screen-sm-max) {
+        width: 100%;
+    }
+}

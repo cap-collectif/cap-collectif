@@ -1,0 +1,292 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-content mt-15"
+  >
+    <div
+      key="0"
+    >
+      <p>
+        <b>
+          1
+          . 
+          question type select
+        </b>
+        <br />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.counters.contributors"
+            values={
+              Object {
+                "num": 7,
+              }
+            }
+          />
+          <br />
+        </span>
+      </p>
+      <ForwardRef(Relay(InjectIntl(QuestionnaireAdminResultsPieChart)))
+        backgroundColor="#897897"
+        multipleChoiceQuestion={
+          Object {
+            "$fragmentRefs": null,
+            "participants": Object {
+              "totalCount": 7,
+            },
+            "required": false,
+            "title": "question type select",
+            "type": "select",
+          }
+        }
+      />
+    </div>
+    <div
+      key="1"
+    >
+      <p>
+        <b>
+          2
+          . 
+          question type radio
+        </b>
+        <br />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.counters.contributors"
+            values={
+              Object {
+                "num": 98,
+              }
+            }
+          />
+          <br />
+          <b>
+            <FormattedMessage
+              id="mandatory-question"
+              values={Object {}}
+            />
+          </b>
+        </span>
+      </p>
+      <ForwardRef(Relay(InjectIntl(QuestionnaireAdminResultsPieChart)))
+        backgroundColor="#897897"
+        multipleChoiceQuestion={
+          Object {
+            "$fragmentRefs": null,
+            "participants": Object {
+              "totalCount": 98,
+            },
+            "required": true,
+            "title": "question type radio",
+            "type": "radio",
+          }
+        }
+      />
+    </div>
+    <div
+      key="2"
+    >
+      <p>
+        <b>
+          3
+          . 
+          question type checkbox
+        </b>
+        <br />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.counters.contributors"
+            values={
+              Object {
+                "num": 45,
+              }
+            }
+          />
+          <br />
+        </span>
+      </p>
+      <ForwardRef(Relay(InjectIntl(QuestionnaireAdminResultsBarChart)))
+        backgroundColor="#897897"
+        multipleChoiceQuestion={
+          Object {
+            "$fragmentRefs": null,
+            "participants": Object {
+              "totalCount": 45,
+            },
+            "required": false,
+            "title": "question type checkbox",
+            "type": "checkbox",
+          }
+        }
+      />
+    </div>
+    <div
+      key="3"
+    >
+      <p>
+        <b>
+          4
+          . 
+          question type button
+        </b>
+        <br />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.counters.contributors"
+            values={
+              Object {
+                "num": 43,
+              }
+            }
+          />
+          <br />
+        </span>
+      </p>
+      <ForwardRef(Relay(InjectIntl(QuestionnaireAdminResultsPieChart)))
+        backgroundColor="#897897"
+        multipleChoiceQuestion={
+          Object {
+            "$fragmentRefs": null,
+            "participants": Object {
+              "totalCount": 43,
+            },
+            "required": false,
+            "title": "question type button",
+            "type": "button",
+          }
+        }
+      />
+    </div>
+    <div
+      key="4"
+    >
+      <p>
+        <b>
+          5
+          . 
+          question type ranking
+        </b>
+        <br />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.counters.contributors"
+            values={
+              Object {
+                "num": 38,
+              }
+            }
+          />
+          <br />
+        </span>
+      </p>
+      <ForwardRef(Relay(QuestionnaireAdminResultsRanking))
+        multipleChoiceQuestion={
+          Object {
+            "$fragmentRefs": null,
+            "participants": Object {
+              "totalCount": 38,
+            },
+            "required": false,
+            "title": "question type ranking",
+            "type": "ranking",
+          }
+        }
+      />
+    </div>
+    <div
+      key="5"
+    >
+      <p>
+        <b>
+          6
+          . 
+          question type text
+        </b>
+        <br />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.counters.contributors"
+            values={
+              Object {
+                "num": 4,
+              }
+            }
+          />
+          <br />
+        </span>
+      </p>
+      <p>
+        <FormattedHTMLMessage
+          id="results-not-available"
+          values={Object {}}
+        />
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<QuestionnaireAdminResults /> renders correctly without participants 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-content mt-15"
+  >
+    <div
+      key="0"
+    >
+      <p>
+        <b>
+          1
+          . 
+          question type select
+        </b>
+        <br />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="no-answer"
+            values={Object {}}
+          />
+          <br />
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<QuestionnaireAdminResults /> renders correctly without questions 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-content mt-15"
+  >
+    <div>
+      <FormattedMessage
+        id="no-question"
+        values={Object {}}
+      />
+    </div>
+  </div>
+</div>
+`;

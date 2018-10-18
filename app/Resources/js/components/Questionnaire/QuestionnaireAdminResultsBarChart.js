@@ -46,10 +46,8 @@ export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
         <BarChart data={data} layout="vertical">
           <XAxis type="number" allowDecimals={false} tickLine={false} />
           <YAxis dataKey="name" type="category" tickLine={false} width={100} />{' '}
-          {/* allowDataOverflow */}
           <Bar dataKey="value" maxBarSize={30} fill={backgroundColor}>
             {' '}
-            {/* fill='#8884d8' */}
             <LabelList dataKey="value" position="right" />
           </Bar>
         </BarChart>

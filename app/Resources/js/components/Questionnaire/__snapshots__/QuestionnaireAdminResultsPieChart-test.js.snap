@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionnaireAdminResultsPieChart /> renders correctly with other responses 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col-xs-12"
+  >
+    <div
+      className="pie-chart__container mb-20"
+    >
+      <ResponsiveContainer
+        debounce={0}
+        height="100%"
+        width="100%"
+      >
+        <PieChart
+          barCategoryGap="10%"
+          barGap={4}
+          cx="50%"
+          cy="50%"
+          endAngle={360}
+          innerRadius={0}
+          layout="centric"
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 5,
+              "right": 5,
+              "top": 5,
+            }
+          }
+          outerRadius="80%"
+          reverseStackOrder={false}
+          stackOffset="none"
+          startAngle={0}
+        >
+          <Legend
+            align="right"
+            iconSize={14}
+            layout="vertical"
+            verticalAlign="middle"
+            wrapperStyle={
+              Object {
+                "width": "60%",
+              }
+            }
+          />
+          <Pie
+            animationBegin={400}
+            animationDuration={1500}
+            animationEasing="ease"
+            blendStroke={false}
+            cx="50%"
+            cy="50%"
+            data={
+              Array [
+                Object {
+                  "name": "C'est pas faux",
+                  "value": 97,
+                },
+                Object {
+                  "name": "Oui",
+                  "value": 7,
+                },
+                Object {
+                  "name": "Non",
+                  "value": 25,
+                },
+                Object {
+                  "name": "global.question.types.other",
+                  "value": 6,
+                },
+              ]
+            }
+            dataKey="value"
+            endAngle={360}
+            fill="#808080"
+            fontSize="16px"
+            hide={false}
+            innerRadius={25}
+            isAnimationActive={false}
+            label={[Function]}
+            labelLine={false}
+            legendType="rect"
+            minAngle={0}
+            nameKey="name"
+            outerRadius={80}
+            paddingAngle={2}
+            startAngle={0}
+            stroke="none"
+          >
+            <Cell
+              aria-labelledby="C'est pas faux"
+              fill="#36c"
+              key="0"
+            />
+            <Cell
+              aria-labelledby="Oui"
+              fill="#dc3912"
+              key="1"
+            />
+            <Cell
+              aria-labelledby="Non"
+              fill="#f90"
+              key="2"
+            />
+            <Cell
+              aria-labelledby="global.question.types.other"
+              fill="#109618"
+              key="3"
+            />
+             
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<QuestionnaireAdminResultsPieChart /> renders correctly without other responses & on mobile 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col-xs-12"
+  >
+    <div
+      className="pie-chart__container mb-20"
+    >
+      <ResponsiveContainer
+        debounce={0}
+        height="100%"
+        width="100%"
+      >
+        <PieChart
+          barCategoryGap="10%"
+          barGap={4}
+          cx="50%"
+          cy="50%"
+          endAngle={360}
+          innerRadius={0}
+          layout="centric"
+          margin={
+            Object {
+              "bottom": 5,
+              "left": 5,
+              "right": 5,
+              "top": 5,
+            }
+          }
+          outerRadius="80%"
+          reverseStackOrder={false}
+          stackOffset="none"
+          startAngle={0}
+        >
+          <Legend
+            align="right"
+            iconSize={14}
+            layout="vertical"
+            verticalAlign="middle"
+            wrapperStyle={
+              Object {
+                "width": "60%",
+              }
+            }
+          />
+          <Pie
+            animationBegin={400}
+            animationDuration={1500}
+            animationEasing="ease"
+            blendStroke={false}
+            cx="50%"
+            cy="50%"
+            data={
+              Array [
+                Object {
+                  "name": "C'est pas faux",
+                  "value": 76,
+                },
+                Object {
+                  "name": "Oui",
+                  "value": 3,
+                },
+                Object {
+                  "name": "Non",
+                  "value": 1,
+                },
+              ]
+            }
+            dataKey="value"
+            endAngle={360}
+            fill="#808080"
+            fontSize="16px"
+            hide={false}
+            innerRadius={25}
+            isAnimationActive={false}
+            label={[Function]}
+            labelLine={false}
+            legendType="rect"
+            minAngle={0}
+            nameKey="name"
+            outerRadius={80}
+            paddingAngle={2}
+            startAngle={0}
+            stroke="none"
+          >
+            <Cell
+              aria-labelledby="C'est pas faux"
+              fill="#36c"
+              key="0"
+            />
+            <Cell
+              aria-labelledby="Oui"
+              fill="#dc3912"
+              key="1"
+            />
+            <Cell
+              aria-labelledby="Non"
+              fill="#f90"
+              key="2"
+            />
+             
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+</div>
+`;
