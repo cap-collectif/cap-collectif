@@ -12,14 +12,22 @@ Capco\AppBundle\Entity\Event:
       expose: true
       type: string
       groups: [Events, Elasticsearch]
+    zipcode:
+      expose: true
+      type: string
+      groups: [Events]
     lat:
       expose: true
-      type: float
-      groups: [Events, Elasticsearch]
+      type: double
+      groups: [Events]
     lng:
       expose: true
-      type: float
-      groups: [Events, Elasticsearch]
+      type: double
+      groups: [Events]
+    address:
+      expose: true
+      type: string
+      groups: [Events]
     city:
       expose: true
       type: string
@@ -32,19 +40,11 @@ Capco\AppBundle\Entity\Event:
       expose: true
       type: string
       groups: [Events]
-    Author:
+    author:
       expose: true
       type: Capco\UserBundle\Entity\User
       serialized_name: author
       groups: [Events, Elasticsearch]
-    projects:
-      expose: true
-      type: Capco\AppBundle\Entity\Project
-      groups: [Elasticsearch]
-    themes:
-      expose: true
-      type: Capco\AppBundle\Entity\Theme
-      groups: [Elasticsearch]
     commentsCount:
       expose: true
       type: integer
@@ -66,12 +66,12 @@ Capco\AppBundle\Entity\Event:
     startAt:
       expose: true
       type: DateTime
-      groups: [Default, Elasticsearch]
+      groups: [Default]
       serialized_name: startAt
     endAt:
       expose: true
       type: DateTime
-      groups: [Default, Elasticsearch]
+      groups: [Default]
       serialized_name: endAt
     media:
       expose: true
@@ -83,8 +83,3 @@ Capco\AppBundle\Entity\Event:
     enabled:
       expose: true
       groups: [Events]
-  virtual_properties:
-    getFullAddress:
-      serialized_name: address
-      type: string
-      groups: [Elasticsearch]

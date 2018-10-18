@@ -21,7 +21,7 @@ final class PrivatableVoteType extends InterfaceType implements GeneratedTypeInt
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'PrivatableVote',
-            'description' => 'Entities that can be published.',
+            'description' => 'Fetches an object given its ID',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [

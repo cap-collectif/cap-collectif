@@ -428,7 +428,7 @@ const getResponseNumber = (value: any) => {
 };
 
 type ResponseError = ?{
-  value: string | { labels: string, other: string },
+  value: string,
 };
 
 type ResponsesError = ResponseError[];
@@ -448,13 +448,13 @@ export const validateResponses = (
         if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
           return { value: `${className}.constraints.field_mandatory` };
         }
-      } else if (!question.validationRule && question.type === 'checkbox') {
+      } else if (question.type === 'checkbox') {
         if (
-          !response ||
-          (response.value &&
-            Array.isArray(response.value.labels) &&
-            response.value.labels.length === 0 &&
-            response.value.other === null)
+          !question.validationRule &&
+          (!response ||
+            (response.value &&
+              Array.isArray(response.value.labels) &&
+              response.value.labels.length === 0))
         ) {
           return { value: `${className}.constraints.field_mandatory` };
         }
@@ -463,18 +463,9 @@ export const validateResponses = (
           !response ||
           (response.value &&
             Array.isArray(response.value.labels) &&
-            response.value.labels.length === 0 &&
-            (response.value.other === null || response.value.other === ''))
+            response.value.labels.length === 0)
         ) {
-          // We don't have a field with ${name}.value
-          // Maybe ${name}.value._error could do the job but it doesn't
-          // For now, we have to set the error to ${name}.value.other and/or ${name}.value.labels
-          return {
-            value: {
-              other: `${className}.constraints.field_mandatory`,
-              labels: `${className}.constraints.field_mandatory`,
-            },
-          };
+          return { value: `${className}.constraints.field_mandatory` };
         }
       } else if (!response || !response.value) {
         return { value: `${className}.constraints.field_mandatory` };

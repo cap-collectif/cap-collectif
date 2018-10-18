@@ -21,7 +21,7 @@ final class SynthesisStepType extends ObjectType implements GeneratedTypeInterfa
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'SynthesisStep',
-            'description' => 'Fetches an object given its ID',
+            'description' => 'A step inside a project.',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [
