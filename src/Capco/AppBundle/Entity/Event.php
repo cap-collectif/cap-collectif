@@ -5,9 +5,11 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -27,19 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface
 {
-    use DateHelperTrait, CommentableTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
-
-    /**
-     * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $title;
-
-    /**
-     * @Gedmo\Slug(separator="-", unique=true, fields={"title"}, updatable=false)
-     * @ORM\Column(name="slug", type="string", length=255)
-     */
-    private $slug;
+    use DateHelperTrait, CommentableTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait, SluggableTitleTrait;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -158,18 +148,6 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New event';
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
     }
 
     public function getCreatedAt(): ?\DateTime
@@ -298,10 +276,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         $this->country = $country;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLat()
+    public function getLat(): ?float
     {
         return $this->lat;
     }
@@ -312,15 +287,15 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function setLat($lat): self
     {
         if (\is_string($lat)) {
+            $lat = str_replace(',', '.', $lat);
             $lat = (float) $lat;
         }
 
         $this->lat = $lat;
-
         return $this;
     }
 
-    public function getLng(): float
+    public function getLng(): ?float
     {
         return $this->lng;
     }
@@ -328,6 +303,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function setLng($lng): self
     {
         if (\is_string($lng)) {
+            $lng = str_replace(',', '.', $lng);
             $lng = (float) $lng;
         }
         $this->lng = $lng;
@@ -387,16 +363,6 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function setEndAt(\DateTime $endAt = null)
     {
         $this->endAt = $endAt;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug)
-    {
-        $this->slug = $slug;
     }
 
     public function getRegistrations()
@@ -517,5 +483,14 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     public function canDisplayInBo($user = null): bool
     {
         return true;
+    }
+
+    public function getFullAddress(): string
+    {
+        $address = $this->getAddress();
+        $address .= !empty($this->getZipCode()) ? ', ' . $this->getZipCode() : '';
+        $address .= !empty($this->getCity()) ? ', ' . $this->getCity() : '';
+
+        return $address;
     }
 }
