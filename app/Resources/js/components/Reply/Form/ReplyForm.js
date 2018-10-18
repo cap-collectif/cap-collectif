@@ -191,7 +191,6 @@ export class ReplyForm extends React.Component<Props> {
                 questions={questionnaire.questions}
                 intl={intl}
                 disabled={disabled}
-                reply={reply}
               />
               {questionnaire.anonymousAllowed && (
                 <div>
@@ -225,9 +224,9 @@ export class ReplyForm extends React.Component<Props> {
                   <SubmitButton
                     type="submit"
                     id={`${form}-submit-create-reply`}
-                    bsStyle="primary"
+                    bsStyle="info"
                     disabled={pristine || invalid || submitting || disabled || submitDisabled}
-                    label={submitting ? 'global.loading' : 'global.save'}
+                    label={submitting ? 'global.loading' : 'global.validate'}
                     onSubmit={() => {
                       dispatch(changeRedux(form, 'draft', false));
                     }}

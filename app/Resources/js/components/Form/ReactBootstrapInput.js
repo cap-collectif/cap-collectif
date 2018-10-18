@@ -81,6 +81,7 @@ type Props = {
   radioChecked?: boolean,
   checkedValue?: ?string,
   maxLength?: ?string,
+  input?: any,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
@@ -289,16 +290,14 @@ class ReactBootstrapInput extends React.Component<Props> {
       let values;
       let choices;
       if (value) {
-        values = props.choices.filter(
-          choice => choice.label === value.find(val => val === choice.label),
-        );
+        values = value.map(v => props.choices.find(choice => v === choice.label));
+
         choices = props.choices.filter(
           choice => choice.label !== value.find(val => val === choice.label),
         );
       } else {
         choices = props.choices;
       }
-
       const field = {};
       field.id = props.id;
       field.choices = choices;
