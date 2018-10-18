@@ -1,0 +1,21 @@
+/* ===============================================================
+  $Outdated browser header
+================================================================*/
+
+#buorg {
+    border-bottom: 1px solid darken($danger-color, 10%);
+    background-color: $danger-color;
+    color: whitesmoke;
+    .buorg-buttons {
+        margin-top: 1rem;
+        a {
+            box-shadow: none;
+            background: transparent;
+            border: 1px solid $white;
+            &:hover {
+                color: $black;
+                background: $white;
+            }
+        }
+    }
+}

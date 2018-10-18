@@ -55,24 +55,3 @@ Scenario: An anonymous wants to toggle cookies advertising
   And I visited "confidentialite page" with cookies not accepted
   And I should see "step.vote_type.disabled"
   And I should not see "performance-cookies-alert"
-
-@javascript
-Scenario: An anonymous accept cookies then should have one created
-  Given I visited "home page" with cookies not accepted
-  And I should not see a cookie named "hasFullConsent"
-  And I should see "performance-cookies-alert"
-  Then I follow "cookies-setting"
-  And I should be redirected to "/confidentialite"
-  And I click on button "#cookie-consent"
-  Then I should not see "performance-cookies-alert"
-  Then I should see a cookie named "hasFullConsent"
-
-@javascript
-Scenario: An anonymous accept cookies then change is mind and the cookies should be deleted
-  Given I am on the homepage
-  And I should not see "performance-cookies-alert"
-  And I should see a cookie named "hasFullConsent"
-  And I create a cookie named "_pk_id.2733"
-  And I visited "confidentialite page"
-  And I toggle performance cookies
-  Then I should not see a cookie named "_pk_id.2733"
