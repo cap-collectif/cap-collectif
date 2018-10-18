@@ -6,6 +6,23 @@
   display: none;
 }
 
+.btn-box {
+   border-top: 1px solid $border-color;
+   padding: 10px;
+   background-color: $white;
+
+   .btn-group button {
+     margin-top: 0;
+   }
+  
+   &.sticky {
+      bottom: 0;
+      right: 0;
+      left: 0;
+      top: inherit;
+   }
+}
+
 /* ======================== Label ============================*/
 
 @each $label in $basic-colors {

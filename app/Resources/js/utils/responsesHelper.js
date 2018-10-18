@@ -541,17 +541,12 @@ export const renderResponses = ({
   reply: any,
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
-<<<<<<< HEAD
-  const availableQuestions = getAvailableQuestionsIds(questions, responses);
-
-=======
   const hasLogicJumps = questions.reduce(
     (acc, question) => acc || (question && question.jumps && question.jumps.length > 0),
     false,
   );
-
+  const availableQuestions = getAvailableQuestionsIds(questions, responses);
   if (hasLogicJumps) {
-    const availableQuestions = getAvailableQuestionsIds(questions, responses);
     return (
       <div>
         {fields.map((member, index) => {
@@ -687,7 +682,6 @@ export const renderResponses = ({
         if (!availableQuestions.includes(field.id)) {
           return;
         }
-        const currentReplyValue = reply && reply.responses ? reply.responses[index].value : null;
         // We want to overidde the HTML verification of the input type number
         const inputType = field.type && field.type !== 'number' ? field.type : 'text';
         const isOtherAllowed = field.isOtherAllowed;
@@ -810,7 +804,6 @@ export const renderResponses = ({
                   choices={choices}
                   label={label}
                   disabled={disabled}
-                  value={currentReplyValue}
                 />
               </ProposalPrivateField>
             );

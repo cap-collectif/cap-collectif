@@ -202,7 +202,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
           </Field>
         </div>
         <div
-          className="btn-toolbar"
+          className="btn-toolbar btn-box sticky"
         >
           <div
             className="btn-group"
@@ -401,7 +401,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
           </Field>
         </div>
         <div
-          className="btn-toolbar"
+          className="btn-toolbar btn-box sticky"
         >
           <div
             className="btn-group"
@@ -679,7 +679,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
           </Field>
         </div>
         <div
-          className="btn-toolbar"
+          className="btn-toolbar btn-box sticky"
         >
           <div
             className="btn-group"
@@ -900,7 +900,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
           </Field>
         </div>
         <div
-          className="btn-toolbar"
+          className="btn-toolbar btn-box sticky"
         >
           <div
             className="btn-group"
@@ -1063,7 +1063,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
           </Field>
         </div>
         <div
-          className="btn-toolbar"
+          className="btn-toolbar btn-box sticky"
         >
           <div
             className="btn-group"
