@@ -25,7 +25,6 @@
     <title>{% block title %}{% if sitename is not empty %}{{ sitename }}{% else %}Cap-Collectif{% endif %}{% endblock %}</title>
 {% endspaceless %}
 
-    {#<link rel="stylesheet" href="{{ asset('js/outdatedbrowser/outdatedbrowser.min.css') }}">#}
     {% block stylesheets %}
       <style>
         @font-face {
@@ -59,7 +58,7 @@
     {% endblock %}
     {% block mainContent %}{% endblock %}
 </div>
-{% include '@CapcoApp/partials/_outdated_browser.html.twig' %}
+
 {% block javascripts %}
     <script src="{{ asset('js/vendor.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
