@@ -146,7 +146,36 @@ Scenario: GraphQL client wants to get question's participants
               "totalCount": @integer@
             }
           },
-          @...@
+          {
+            "id": @string@,
+            "participants": {
+              "totalCount": @integer@
+            }
+          },
+          {
+            "id": @string@,
+            "participants": {
+              "totalCount": @integer@
+            }
+          },
+          {
+            "id": @string@,
+            "participants": {
+              "totalCount": @integer@
+            }
+          },
+          {
+            "id": @string@,
+            "participants": {
+              "totalCount": @integer@
+            }
+          },
+          {
+            "id": @string@,
+            "participants": {
+              "totalCount": @integer@
+            }
+          }
         ]
       }
     }
