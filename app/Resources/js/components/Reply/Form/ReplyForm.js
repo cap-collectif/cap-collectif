@@ -143,6 +143,18 @@ export class ReplyForm extends React.Component<Props> {
     );
   }
 
+<<<<<<< HEAD
+=======
+  submitIsDisabled() {
+    const { formErrors } = this.props;
+    if (formErrors && formErrors.responses) {
+      return formErrors.responses.filter(response => response !== undefined).length !== 0;
+    }
+
+    return false;
+  }
+
+>>>>>>> [5673-DRAFT] WIP
   render() {
     const {
       intl,
@@ -179,6 +191,7 @@ export class ReplyForm extends React.Component<Props> {
                 questions={questionnaire.questions}
                 intl={intl}
                 disabled={disabled}
+                reply={reply}
               />
               {questionnaire.anonymousAllowed && (
                 <div>
@@ -215,18 +228,6 @@ export class ReplyForm extends React.Component<Props> {
                     bsStyle="primary"
                     disabled={pristine || invalid || submitting || disabled || submitDisabled}
                     label={submitting ? 'global.loading' : 'global.save'}
-                    onSubmit={() => {
-                      dispatch(changeRedux('CreateReplyForm', 'draft', false));
-                    }}
-                  />
-                </div>
-                <div className="btn-group">
-                  <SubmitButton
-                    type="submit"
-                    id={`${form}-submit-create-draft-reply`}
-                    bsStyle="primary"
-                    disabled={pristine || submitting}
-                    label={submitting ? 'global.loading' : 'global.save_as_draft'}
                     onSubmit={() => {
                       dispatch(changeRedux(form, 'draft', false));
                     }}
@@ -265,6 +266,9 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
   },
   user: state.user.user,
   form: props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`,
+  formErrors: props.reply
+    ? getFormSyncErrors(`Update${formName}-${props.reply.id}`)(state)
+    : getFormSyncErrors(`Create${formName}`)(state),
 });
 
 const form = reduxForm({

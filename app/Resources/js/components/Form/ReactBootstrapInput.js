@@ -303,7 +303,6 @@ class ReactBootstrapInput extends React.Component<Props> {
       field.id = props.id;
       field.choices = choices;
       field.values = values;
-
       return (
         <Ranking
           formName={formName}
