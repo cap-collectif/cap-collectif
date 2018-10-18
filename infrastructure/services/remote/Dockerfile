@@ -262,7 +262,7 @@ RUN yarn global add bower@1.8.4 babel-cli \
     && gosu capco php bin/console translation:download --env=prod \
     && gosu capco yarn run update-js-translation \
     && gosu capco yarn run build:prod \
-    # && gosu capco yarn run build-server-bundle:prod \
+#    && gosu capco yarn run build-server-bundle:prod \
     && rm -rf node_modules bower_components
 
 CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]

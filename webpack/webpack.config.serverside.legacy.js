@@ -4,6 +4,7 @@ const devBuild = process.env.NODE_ENV !== 'production';
 const nodeEnv = devBuild ? 'development' : 'production';
 
 module.exports = {
+  mode: nodeEnv,
   context: __dirname,
   entry: ['babel-polyfill', './app/Resources/js-server/registration.js'],
   output: {
@@ -23,31 +24,9 @@ module.exports = {
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
-    ...devBuild ? [] : [
-      // Search for equal or similar files and deduplicate them in the output
-      // https://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
-      new webpack.optimize.DedupePlugin(),
-
-      // Minimize all JavaScript output of chunks
-      // https://github.com/mishoo/UglifyJS2#compressor-options
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          screw_ie8: true,
-          warnings: false,
-        },
-        comments: false,
-        sourceMap: false,
-        mangle: true,
-        minimize: true,
-      }),
-
-      // A plugin for a more aggressive chunk merging strategy
-      // https://webpack.github.io/docs/list-of-plugins.html#aggressivemergingplugin
-      new webpack.optimize.AggressiveMergingPlugin(),
-    ],
   ],
   module: {
-    loaders: [
+    rules:  [
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/, query: { cacheDirectory: devBuild } },
       { test: /LeafletMap.js$/, loader: 'ignore-loader' },
