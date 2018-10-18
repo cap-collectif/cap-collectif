@@ -3,7 +3,7 @@ import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Cell, LabelList, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { connect, type MapStateToProps } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import QuestionnaireAdminResultsBarChart from './QuestionnaireAdminResultsBarChart';
 import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking';
 import type { QuestionnaireAdminResults_questionnaire } from './__generated__/QuestionnaireAdminResults_questionnaire.graphql';
@@ -13,17 +13,35 @@ import type { State } from '../../types';
 type Props = {
   questionnaire: QuestionnaireAdminResults_questionnaire,
   backgroundColor: string,
+  intl: IntlShape,
 };
 
 export class QuestionnaireAdminResults extends React.Component<Props> {
-  getPieChart = (choices: Array<Object>, backgroundColor: string) => {
-    const data = choices.filter(choice => choice.responses.totalCount > 0).reduce((acc, curr) => {
-      acc.push({
-        name: curr.title,
-        value: curr.responses.totalCount,
+  getPieChart = (choices: Object, backgroundColor: string) => {
+    const { intl } = this.props;
+
+    const data = choices.questionChoices
+      .filter(choice => choice.responses.totalCount > 0)
+      .reduce((acc, curr) => {
+        acc.push({
+          name: curr.title,
+          value: curr.responses.totalCount,
+        });
+        return acc;
+      }, []);
+
+    if (
+      data &&
+      choices &&
+      choices.isOtherAllowed &&
+      choices.otherResponses &&
+      choices.otherResponses.totalCount !== 0
+    ) {
+      data.push({
+        name: intl.formatMessage({ id: 'global.question.types.other' }),
+        value: choices.otherResponses && choices.otherResponses.totalCount,
       });
-      return acc;
-    }, []);
+    }
 
     const RADIAN = Math.PI / 180;
 
@@ -114,7 +132,11 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     const { backgroundColor } = this.props;
 
     if (question.type === 'text' || question.type === 'number' || question.type === 'file') {
-      return `<span>L'affichage des résultats est pour le moment indisponible</span>`;
+      return (
+        <p>
+          <FormattedHTMLMessage id="results-not-available" />
+        </p>
+      );
     }
 
     if (question.participants && question.participants.totalCount === 0) {
@@ -131,7 +153,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     }
 
     if (question.type === 'radio' || question.type === 'select' || question.type === 'button') {
-      return this.getPieChart(question.questionChoices, backgroundColor);
+      return this.getPieChart(question, backgroundColor);
     }
 
     if (question.type === 'ranking') {
@@ -188,7 +210,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   backgroundColor: state.default.parameters['color.btn.primary.bg'],
 });
 
-const container = connect(mapStateToProps)(QuestionnaireAdminResults);
+const container = connect(mapStateToProps)(injectIntl(QuestionnaireAdminResults));
 
 export default createFragmentContainer(
   container,
@@ -214,6 +236,10 @@ export default createFragmentContainer(
                 }
               }
             }
+          }
+          isOtherAllowed
+          otherResponses {
+            totalCount
           }
         }
         ...QuestionnaireAdminResultsBarChart_multipleChoiceQuestion
