@@ -50,14 +50,14 @@ class ProposalResponse extends React.PureComponent<Props> {
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
-            {radioLabels.labels.length > 1 ? (
+            {radioLabels && radioLabels.labels.length > 1 ? (
               <ul>
                 {radioLabels.labels.map((label, index) => (
                   <li key={index}>{label}</li>
                 ))}
               </ul>
             ) : (
-              <p>{radioLabels.labels[0] ? radioLabels.labels[0] : ''}</p>
+              <p>{radioLabels && radioLabels.labels[0] ? radioLabels.labels[0] : ''}</p>
             )}
           </div>
         );
@@ -65,14 +65,12 @@ class ProposalResponse extends React.PureComponent<Props> {
       }
       case 'ranking': {
         const radioLabels = JSON.parse(response.value || '');
-
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
             <ol>
-              {radioLabels.labels.map((label, index) => (
-                <li key={index}>{label}</li>
-              ))}
+              {radioLabels &&
+                radioLabels.labels.map((label, index) => <li key={index}>{label}</li>)}
             </ol>
           </div>
         );
