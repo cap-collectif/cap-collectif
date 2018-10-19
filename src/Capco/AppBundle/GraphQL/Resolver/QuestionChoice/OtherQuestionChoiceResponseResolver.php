@@ -1,14 +1,14 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 
-use Capco\AppBundle\Entity\QuestionChoice;
-use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\Repository\AbstractResponseRepository;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class QuestionChoiceResponseResolver implements ResolverInterface
+class OtherQuestionChoiceResponseResolver implements ResolverInterface
 {
     private $responseRepository;
 
@@ -17,10 +17,10 @@ class QuestionChoiceResponseResolver implements ResolverInterface
         $this->responseRepository = $responseRepository;
     }
 
-    public function __invoke(QuestionChoice $questionChoice, Arg $args): Connection
+    public function __invoke(MultipleChoiceQuestion $question, Arg $args): Connection
     {
         $responses = $this->responseRepository->findBy([
-            'question' => $questionChoice->getQuestion(),
+            'question' => $question,
         ]);
         $totalCount = 0;
 
@@ -28,17 +28,8 @@ class QuestionChoiceResponseResolver implements ResolverInterface
         foreach ($responses as $response) {
             $responseValue = $response ? $response->getValue() : null;
             if ($responseValue) {
-                if (isset($responseValue['labels'])) {
-                    foreach ($responseValue['labels'] as $label) {
-                        if ($label === $questionChoice->getTitle()) {
-                            ++$totalCount;
-                        }
-                    }
-                } else {
-                    // Question type is select
-                    if ($responseValue === $questionChoice->getTitle()) {
-                        ++$totalCount;
-                    }
+                if (isset($responseValue['other']) && $responseValue['other'] !== null) {
+                    ++$totalCount;
                 }
             }
         }

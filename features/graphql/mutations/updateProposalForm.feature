@@ -35,7 +35,7 @@ Scenario: GraphQL client wants to update a proposal form
               zoomMap
               commentable
               costable
-              categories(order: ALPHABETICAL) {
+              categories {
                 id
                 name
               }
