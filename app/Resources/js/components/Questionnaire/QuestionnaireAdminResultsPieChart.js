@@ -5,14 +5,39 @@ import { injectIntl, type IntlShape } from 'react-intl';
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import type { QuestionnaireAdminResultsPieChart_multipleChoiceQuestion } from './__generated__/QuestionnaireAdminResultsBarChart_multipleChoiceQuestion.graphql';
 import colors from '../../utils/colors';
-import config from '../../config';
 
 type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsPieChart_multipleChoiceQuestion,
   intl: IntlShape,
 };
 
-export class QuestionnaireAdminResultsPieChart extends React.Component<Props> {
+type State = {
+  windowWidth: ?number,
+};
+
+export class QuestionnaireAdminResultsPieChart extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      windowWidth: window.innerWidth,
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.updateWindowsWidth, false);
+  }
+
+  componentWillUnmount() {
+    window.removeListener('resize', this.updateWindowsWidth, false);
+  }
+
+  updateWindowsWidth = () => {
+    this.setState({
+      windowWidth: window.innerWidth,
+    });
+  };
+
   renderCustomizedLabel = ({
     cx,
     cy,
@@ -36,6 +61,7 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props> {
 
   render() {
     const { multipleChoiceQuestion, intl } = this.props;
+    const { windowWidth } = this.state;
 
     const data =
       multipleChoiceQuestion.questionChoices &&
@@ -69,7 +95,7 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props> {
           <div className="pie-chart__container mb-20">
             <ResponsiveContainer>
               <PieChart>
-                {config.isMobile ? (
+                {windowWidth && windowWidth < 992 ? (
                   <Legend verticalAlign="bottom" />
                 ) : (
                   <Legend

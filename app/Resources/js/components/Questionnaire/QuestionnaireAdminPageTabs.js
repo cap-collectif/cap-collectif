@@ -10,7 +10,7 @@ import type { QuestionnaireAdminPageTabs_questionnaire } from './__generated__/Q
 
 type Props = {
   questionnaire: QuestionnaireAdminPageTabs_questionnaire,
-  intl: IntlShape
+  intl: IntlShape,
 };
 
 export class QuestionnaireAdminPageTabs extends Component<Props> {
@@ -19,8 +19,7 @@ export class QuestionnaireAdminPageTabs extends Component<Props> {
 
     return (
       <div>
-        {/* à changer */}
-        <Tabs defaultActiveKey={3} id="proposal-form-admin-page-tabs">
+        <Tabs defaultActiveKey={1} id="proposal-form-admin-page-tabs">
           <Tab eventKey={1} title={intl.formatMessage({ id: 'questionnaire.admin.configuration' })}>
             <QuestionnaireAdminConfigurationForm questionnaire={questionnaire} />
           </Tab>
