@@ -289,7 +289,7 @@ InternalUser:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserReportsResolver", [value, args])'
       events:
-        type: 'EventConnection!'
+        type: 'InternalEventConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'Get all events the user has created.'
         resolve:

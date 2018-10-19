@@ -1,0 +1,28 @@
+PreviewEvent:
+  type: object
+  inherits:
+    - Node
+  config:
+    interfaces:
+      - Node
+    name: Event
+    description: 'An event.'
+    fields:
+      title:
+        type: 'String!'
+        description: 'The title of the event.'
+      startAt:
+        type: 'DateTime'
+        description: 'The start of the event.'
+      endAt:
+        type: 'DateTime'
+        description: 'The end of the event.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'Identifies the date and time when the object was last updated.'
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      body:
+        type: 'HTML'
+        description: 'Identifies the body of the event.'

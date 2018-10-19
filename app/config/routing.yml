@@ -6,7 +6,7 @@ capco_admin:
 graphql_endpoint:
   path: /graphql
   defaults:
-    _controller: Overblog\GraphQLBundle\Controller\GraphController::endpointAction
+    _controller: Capco\AppBundle\Controller\Api\GraphQLController::endpointAction
     _format: 'json'
 
 graphql_multiple_endpoint:

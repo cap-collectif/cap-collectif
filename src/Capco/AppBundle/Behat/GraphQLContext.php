@@ -119,17 +119,37 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @When /^I send a preview GraphQL POST request:$/
+     */
+    public function iSendAPreviewGraphQLPostRequest(PyStringNode $string)
+    {
+        $this->iSendAGraphQLPostRequest('preview', $string);
+    }
+
+    /**
      * @When /^I send a GraphQL POST request:$/
      */
-    public function iSendAraphQLPostRequest(PyStringNode $string)
+    public function iSendAnInternalGraphQLPostRequest(PyStringNode $string)
     {
+        $this->iSendAGraphQLPostRequest('internal', $string);
+    }
+
+    private function iSendAGraphQLPostRequest(string $schemaName, PyStringNode $string)
+    {
+        $endpoint = $schemaName === 'internal' ? '/graphql/internal' : '/graphql';
+        $accept =
+            $schemaName === 'preview'
+                ? 'application/vnd.cap-collectif.preview+json'
+                : 'application/json';
+
         // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
         $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
-        $response = $this->client->request('POST', '/graphql/internal', [
+        $response = $this->client->request('POST', $endpoint, [
             'json' => json_decode($string, true),
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
+                'Accept' => $accept,
             ],
         ]);
         $this->response = (string) $response->getBody();

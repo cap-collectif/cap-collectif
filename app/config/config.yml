@@ -675,6 +675,16 @@ overblog_graphql:
         types:
           - PublicConsultation
           - PublicQuestionnaire
+      # This is our preview schema
+      preview:
+        query: PreviewQuery
+        #mutation: PreviewMutation
+        # The name of extra types that can not be detected
+        # by graphql-php during static schema analysis.
+        # These types names should be explicitly declare here
+        types:
+          - PublicConsultation
+          - PublicQuestionnaire
       # This is our internal schema (used by our clients)
       internal:
         query: InternalQuery

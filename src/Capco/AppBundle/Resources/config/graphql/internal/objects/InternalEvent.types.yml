@@ -1,21 +1,19 @@
-Event:
+InternalEvent:
   type: object
-  inherits: [Node, Commentable]
+  inherits:
+    - PreviewEvent
+    - Commentable
   config:
+    description: 'An event.'
     interfaces: [Node, Commentable]
+    name: Event
     fields:
-      title:
-        type: 'String!'
       participants:
         type: 'ParticipantConnection!'
         description: 'A list of Users that are participating to the event.'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", [value, args])'
         argsBuilder: 'Relay::Connection'
-      startAt:
-        type: 'DateTime!'
-      endAt:
-        type: 'DateTime!'
       themes:
         type: '[Theme!]!'
       projects:
@@ -25,12 +23,6 @@ Event:
       commentable:
         type: 'Boolean!'
         resolve: '@=value.isCommentable()'
-      updatedAt:
-        type: 'DateTime'
-      createdAt:
-        type: 'DateTime!'
-      body:
-        type: 'String'
       link:
         type: 'URI'
       media:

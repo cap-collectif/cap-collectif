@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class EventType extends ObjectType implements GeneratedTypeInterface
+final class InternalEventType extends ObjectType implements GeneratedTypeInterface
 {
     const NAME = 'Event';
 
@@ -21,7 +21,7 @@ final class EventType extends ObjectType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'Event',
-            'description' => 'Fetches an object given its ID',
+            'description' => 'An event.',
             'fields' => function () use ($globalVariable) {
                 return [
                 'comments' => [
@@ -65,24 +65,84 @@ final class EventType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
+                'title' => [
+                    'type' => Type::nonNull(Type::string()),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The ID of an object',
+                    'description' => 'The title of the event.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'title' => [
-                    'type' => Type::nonNull(Type::string()),
+                'startAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'The start of the event.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'endAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The end of the event.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'updatedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Identifies the date and time when the object was last updated.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'createdAt' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Identifies the date and time when the object was created.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'body' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('HTML'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Identifies the body of the event.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -118,30 +178,6 @@ final class EventType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", array(0 => $value, 1 => $args)]);
                     },
                     'description' => 'A list of Users that are participating to the event.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'startAt' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'endAt' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -191,42 +227,6 @@ final class EventType extends ObjectType implements GeneratedTypeInterface
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $value->isCommentable();
                     },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'updatedAt' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'createdAt' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'body' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
                     'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,

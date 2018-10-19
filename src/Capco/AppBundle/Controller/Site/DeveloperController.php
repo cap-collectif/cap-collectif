@@ -28,7 +28,7 @@ class DeveloperController extends Controller
 
     /**
      * @Route("/developer", name="app_developer", defaults={"_feature_flags" = "developer_documentation"})
-     * @Route("/developer/{category}/", name="app_developer_category", requirements={"category" = "query"}, defaults={"_feature_flags" = "developer_documentation"})
+     * @Route("/developer/{category}/", name="app_developer_category", requirements={"category" = "query|previews|breaking_changes"}, defaults={"_feature_flags" = "developer_documentation"})
      * @Route("/developer/{category}/{selection}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"})
      * @Template("CapcoAppBundle:Developer:index.html.twig")
      */
@@ -47,14 +47,22 @@ class DeveloperController extends Controller
         $mutation = null;
 
         foreach ($typeResolver->getSolutions() as $solutionID => $solution) {
+            $aliases = $typeResolver->getSolutionAliases($solutionID);
+
+            // We set info about preview
+            $solution->{'preview'} = false;
+            if (substr($aliases[0], 0, 7) === "Preview") {
+                $solution->{'preview'} = true;
+            }
+
+            // All scalars are considered public
             if ($solution instanceof ScalarType) {
                 $scalars[] = $solution;
                 continue;
             }
-            $aliases = $typeResolver->getSolutionAliases($solutionID);
 
-            // We remove everything not in public schema
-            if (substr($aliases[0], 0, 6) !== "Public") {
+            // We remove everything not in public or preview schema
+            if ($solution->{'preview'} === false && substr($aliases[0], 0, 6) !== "Public") {
                 continue;
             }
 
@@ -69,7 +77,10 @@ class DeveloperController extends Controller
             } elseif ($solution instanceof ObjectType) {
                 // Special types
                 if ($solution->name === 'Query') {
-                    $query = $solution;
+                    // We display PreviewQuery
+                    if ($solution->{'preview'}) {
+                        $query = $solution;
+                    }
                     continue;
                 }
                 if ($solution->name === 'Mutation') {

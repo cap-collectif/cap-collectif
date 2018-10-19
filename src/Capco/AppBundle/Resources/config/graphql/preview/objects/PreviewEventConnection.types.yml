@@ -1,0 +1,8 @@
+PreviewEventConnection:
+  type: relay-connection
+  config:
+    name: EventConnection
+    nodeType: PreviewEvent!
+    connectionFields:
+      totalCount:
+        type: Int!

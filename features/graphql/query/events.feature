@@ -2,7 +2,7 @@
 Feature: Events
 
 Scenario: GraphQL client wants to list events
-  Given I send a GraphQL POST request:
+  Given I send a preview GraphQL POST request:
   """
   {
     "query": "{
@@ -56,7 +56,7 @@ Scenario: GraphQL client wants to list events
   """
 
 Scenario: GraphQL client wants to list current and future events
-  Given I send a GraphQL POST request:
+  Given I send a preview GraphQL POST request:
   """
   {
     "query": "{
@@ -105,7 +105,7 @@ Scenario: GraphQL client wants to list current and future events
   """
 
 Scenario: GraphQL client wants to list passed events
-  Given I send a GraphQL POST request:
+  Given I send a preview GraphQL POST request:
   """
   {
     "query": "{
@@ -289,24 +289,22 @@ Scenario: GraphQL client wants to list events with theme2
   }
   """
 
-Scenario: GraphQL client wants to list events from a term
+Scenario: GraphQL client wants to list events with a search
   Given I send a GraphQL POST request:
   """
   {
-    "query": "query getEventsByTerm ($term: String!, $first: Int){
-      events(term: $term, first: $first) {
+    "query": "query getEventsBySearch ($search: String!){
+      events(search: $search) {
       totalCount
         edges {
           node {
             id
-            themes { id }
           }
         }
       }
     }",
     "variables": {
-      "term": "registrations",
-      "first": 5
+      "search": "registrations"
     }
   }
   """
@@ -319,23 +317,12 @@ Scenario: GraphQL client wants to list events from a term
            "edges":[
               {
                  "node":{
-                    "id":"event1",
-                    "themes":[
-                       {
-                          "id":"theme1"
-                       },
-                       {
-                          "id":"theme2"
-                       }
-                    ]
+                    "id":"event1"
                  }
               },
               {
                  "node":{
-                    "id":"event3",
-                    "themes":[
-
-                    ]
+                    "id":"event3"
                  }
               }
            ]

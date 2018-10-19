@@ -286,12 +286,6 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  # The author of the contribution.
-  author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
   # `true` if the object is published.
   published: Boolean!
 
@@ -303,6 +297,12 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # `true` if the contribution is trashed.
   trashed: Boolean!
@@ -1569,7 +1569,7 @@ type EvaluationForm {
   questions: [Question!]!
 }
 
-# Fetches an object given its ID
+# An event.
 type Event implements Node & Commentable {
   # The comments related to the commentable.
   comments(
@@ -1587,9 +1587,26 @@ type Event implements Node & Commentable {
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
 
+  # The title of the event.
+  title: String!
+
+  # The start of the event.
+  startAt: DateTime
+
+  # The end of the event.
+  endAt: DateTime
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # Identifies the body of the event.
+  body: HTML
+
   # The ID of an object
   id: ID!
-  title: String!
 
   # A list of Users that are participating to the event.
   participants(
@@ -1605,15 +1622,10 @@ type Event implements Node & Commentable {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
-  startAt: DateTime!
-  endAt: DateTime!
   themes: [Theme!]!
   projects: [Project!]!
   author: User!
   commentable: Boolean!
-  updatedAt: DateTime
-  createdAt: DateTime!
-  body: String
   link: URI
   media: Media
   address: String
@@ -2233,12 +2245,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  # The author of the contribution.
-  author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
   # `true` if the object is published.
   published: Boolean!
 
@@ -2250,6 +2256,12 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # The sources related to the sourceable.
   sources(
@@ -2616,9 +2628,6 @@ type PresentationStep implements Step {
 
 # Fetches an object given its ID
 interface PrivatableVote {
-  # The ID of an object
-  id: ID!
-
   # `true` if the object is published.
   published: Boolean!
 
@@ -2630,6 +2639,9 @@ interface PrivatableVote {
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
+
+  # The ID of an object
+  id: ID!
 
   # Date of vote.
   createdAt: DateTime!
@@ -3280,9 +3292,6 @@ enum ProposalTrashedStatus {
 
 # Fetches an object given its ID
 type ProposalVote implements Vote & Publishable & PrivatableVote {
-  # Anonymous or not.
-  private: Boolean
-
   # `true` if the object is published.
   published: Boolean!
 
@@ -3294,6 +3303,9 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
+
+  # Anonymous or not.
+  private: Boolean
 
   # The ID of an object
   id: ID!
@@ -3368,6 +3380,36 @@ interface Publishable {
 
 # Root of the schema.
 type Query {
+  # Lookup events.
+  events(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+
+    # If non-null, filters events by comparing the start date with present.
+    isFuture: Boolean
+
+    # If non-null, filters events with the given theme.
+    theme: ID
+
+    # If non-null, filters events with the given project.
+    project: ID
+
+    # If non-null, filters events with the given author.
+    author: ID
+
+    # If non-null, filters events with the given string to look for.
+    search: String
+  ): EventConnection!
+
   # The currently authenticated user.
   viewer: User!
 
@@ -3405,36 +3447,6 @@ type Query {
 
   # Lookup groups.
   groups: [Group!]!
-
-  # Lookup events.
-  events(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-
-    # If null, get all, if false get passed, if true get current and future
-    isFuture: Boolean
-
-    # If non-null, filters events with the given theme.
-    theme: ID
-
-    # If non-null, filters events with the given project.
-    project: ID
-
-    # If non-null, filters events with the given author.
-    author: ID
-
-    # If non-null, filters events with the given string to look for.
-    term: String
-  ): EventConnection
 
   # Lookup forms.
   proposalForms: [ProposalForm]!
@@ -4343,12 +4355,6 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  # The author of the contribution.
-  author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
   # `true` if the object is published.
   published: Boolean!
 
@@ -4360,6 +4366,12 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # `true` if the contribution is trashed.
   trashed: Boolean!
@@ -4449,9 +4461,6 @@ enum SourceOrderField {
 
 # Fetches an object given its ID
 type SourceVote implements Vote & Publishable {
-  # The ID of an object
-  id: ID!
-
   # `true` if the object is published.
   published: Boolean!
 
@@ -4463,6 +4472,9 @@ type SourceVote implements Vote & Publishable {
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
+
+  # The ID of an object
+  id: ID!
 
   # Date of vote.
   createdAt: DateTime!
@@ -5384,12 +5396,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  # The author of the contribution.
-  author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
   # `true` if the object is published.
   published: Boolean!
 
@@ -5401,6 +5407,12 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # The sources related to the sourceable.
   sources(
@@ -5634,9 +5646,6 @@ enum VoteOrderField {
 
 # Fetches an object given its ID
 interface YesNoPairedVote {
-  # The ID of an object
-  id: ID!
-
   # `true` if the object is published.
   published: Boolean!
 
@@ -5648,6 +5657,9 @@ interface YesNoPairedVote {
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
+
+  # The ID of an object
+  id: ID!
 
   # Date of vote.
   createdAt: DateTime!

@@ -47,7 +47,8 @@
 
           {% block graphql_fetcher_headers %}
           headers = {
-            "Accept": "application/json",
+            // Preview is enabled by default, maybe we should add a toggle
+            "Accept": "application/vnd.cap-collectif.preview+json",
             "Content-Type": "application/json",
           }
           {% endblock graphql_fetcher_headers %}

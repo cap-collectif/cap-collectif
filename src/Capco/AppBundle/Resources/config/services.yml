@@ -69,6 +69,12 @@ services:
   Capco\AppBundle\Controller\Site\DeveloperController:
     autowire: true
 
+  Capco\AppBundle\Controller\Api\GraphQLController:
+    autowire: true
+    arguments:
+      $batchParser: '@overblog_graphql.request_batch_parser'
+      $requestParser: '@overblog_graphql.request_parser'
+
   redis_adapter:
     class: Capco\AppBundle\Adapter\RedisAdapter
     arguments: ['@snc_redis.default']

@@ -4,7 +4,9 @@
         {# We need a way to get info about the required access #}
         <span class="label label-info">ROLE_USER</span>
     {% endif %}
-
+    {% if field.type.getNullableType(field.type).preview is defined and field.type.getNullableType(field.type).preview %}
+      {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+    {% endif %}
     <p>{{ field.description|default('') }}</p>
 
     {% if field.deprecated %}
@@ -26,7 +28,7 @@
   </tr>
   </thead>
   <tbody>
-    {% for argument in field.args %}
+    {% for argument in field.args|sort %}
  <tr>
   <td><code class="anchored">{{argument.name}}</code></td>
   <td>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Event;
+namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Search\EventSearch;
 use Capco\AppBundle\Utils\Text;
@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class EventsResolver implements ResolverInterface
+class QueryEventsResolver implements ResolverInterface
 {
     private $eventSearch;
     private $logger;
@@ -22,13 +22,13 @@ class EventsResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Argument $args, RequestStack $request): Connection
+    public function __invoke(Argument $args): Connection
     {
         $totalCount = 0;
-        $term = null;
+        $search = null;
         $order = null;
-        if ($args->offsetExists('term')) {
-            $term = $args->offsetGet('term');
+        if ($args->offsetExists('search')) {
+            $search = $args->offsetGet('search');
         }
         if ($args->offsetExists('isFuture')) {
             $order = $args->offsetGet('isFuture');
@@ -36,7 +36,7 @@ class EventsResolver implements ResolverInterface
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use (
                 $args,
-                $term,
+                $search,
                 &$totalCount,
                 $order
             ) {
@@ -55,7 +55,7 @@ class EventsResolver implements ResolverInterface
                     $offset,
                     $limit,
                     $order,
-                    $term,
+                    $search,
                     $filters
                 );
 

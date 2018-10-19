@@ -1,0 +1,30 @@
+PreviewQuery:
+  type: object
+  inherits:
+    - PublicQuery
+  config:
+    name: Query
+    description: 'Root of the schema.'
+    fields:
+      events:
+        type: 'PreviewEventConnection!'
+        argsBuilder: 'Relay::Connection'
+        description: 'Lookup events.'
+        args:
+          isFuture:
+            type: 'Boolean'
+            description: 'If non-null, filters events by comparing the start date with present.'
+          theme:
+            type: 'ID'
+            description: 'If non-null, filters events with the given theme.'
+          project:
+            type: 'ID'
+            description: 'If non-null, filters events with the given project.'
+          author:
+            type: 'ID'
+            description: 'If non-null, filters events with the given author.'
+          search:
+            type: 'String'
+            description: 'If non-null, filters events with the given string to look for.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", [args])'

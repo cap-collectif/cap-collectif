@@ -127,7 +127,10 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('RankingStep');
         }
         if ($node instanceof Event) {
-            return $this->typeResolver->resolve('Event');
+            if ($currentSchemaName === 'preview') {
+                return $this->typeResolver->resolve('PreviewEvent');
+            }
+            return $this->typeResolver->resolve('InternalEvent');
         }
         if ($node instanceof Reply) {
             return $this->typeResolver->resolve('Reply');

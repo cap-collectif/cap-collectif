@@ -11,48 +11,36 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class EventConnectionType extends ObjectType implements GeneratedTypeInterface
+final class InternalEventEdgeType extends ObjectType implements GeneratedTypeInterface
 {
-    const NAME = 'EventConnection';
+    const NAME = 'EventEdge';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'EventConnection',
-            'description' => 'A connection to a list of items.',
+            'name' => 'EventEdge',
+            'description' => 'An edge in a connection.',
             'fields' => function () use ($globalVariable) {
                 return [
-                'totalCount' => [
-                    'type' => Type::nonNull(Type::int()),
+                'node' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalEvent')),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'The item at the end of the edge.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'pageInfo' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('PageInfo')),
+                'cursor' => [
+                    'type' => Type::nonNull(Type::string()),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Information to aid in pagination.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'edges' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('EventEdge')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Information to aid in pagination.',
+                    'description' => 'A cursor for use in pagination.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

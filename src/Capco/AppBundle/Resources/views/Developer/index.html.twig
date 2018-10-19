@@ -66,11 +66,16 @@
     <i class="glyphicon glyphicon-chevron-right"></i>Overview
   </a>
 
+  <div class="list-group collapse" id="overview">
+      <a href="/developer/previews" class="list-group-item">Schema Previews</a>
+      <a href="/developer/breaking_changes" class="list-group-item">Breaking Changes</a>
+  </div>
+
   <a href="#" class="list-group-item" data-toggle="collapse" data-target="#query">
     <i class="glyphicon glyphicon-chevron-right"></i>Query
   </a>
   <div class="list-group collapse" id="query">
-      {# <a href="/developer/query#connections" class="list-group-item">Connections</a> #}
+      <a href="/developer/query#connections" class="list-group-item">Connections</a>
       <a href="/developer/query#fields" class="list-group-item">Fields</a>
   </div>
 
@@ -79,7 +84,7 @@
     <i class="glyphicon glyphicon-chevron-right"></i>Mutations
   </a>
   <div class="list-group collapse" id="mutations">
-      {% for field in mutation.fields %}
+      {% for field in mutation.fields|sort %}
       <a href="/developer/mutation/{{field.name}}" class="list-group-item">{{ field.name }}</a>
       {% endfor %}
   </div>
@@ -90,7 +95,7 @@
     <i class="glyphicon glyphicon-chevron-right"></i>Objects
   </a>
   <div class="list-group collapse" id="objects">
-        {% for type in objects %}
+        {% for type in objects|sort %}
       <a href="/developer/object/{{type.name}}" class="list-group-item">{{ type.name }}</a>
       {% endfor %}
   </div>
@@ -101,7 +106,7 @@
     <i class="glyphicon glyphicon-chevron-right"></i>Interfaces
   </a>
   <div class="list-group collapse" id="interfaces">
-        {% for type in interfaces %}
+        {% for type in interfaces|sort %}
       <a href="/developer/interface/{{type.name}}" class="list-group-item">{{ type.name }}</a>
       {% endfor %}
   </div>
@@ -112,7 +117,7 @@
     <i class="glyphicon glyphicon-chevron-right"></i>Enums
   </a>
   <div class="list-group collapse" id="enums">
-        {% for type in enums %}
+        {% for type in enums|sort %}
       <a href="/developer/enum/{{type.name}}" class="list-group-item">{{ type.name }}</a>
       {% endfor %}
   </div>
@@ -123,7 +128,7 @@
     <i class="glyphicon glyphicon-chevron-right"></i>Unions
   </a>
   <div class="list-group collapse" id="unions">
-        {% for type in unions %}
+        {% for type in unions|sort %}
       <a href="/developer/union/{{type.name}}" class="list-group-item">{{ type.name }}</a>
       {% endfor %}
   </div>
@@ -134,7 +139,7 @@
     <i class="glyphicon glyphicon-chevron-right"></i>Input Objects
   </a>
   <div class="list-group collapse" id="input_objects">
-        {% for type in input_objects %}
+        {% for type in input_objects|sort %}
       <a href="/developer/input_object/{{type.name}}" class="list-group-item">{{ type.name }}</a>
       {% endfor %}
   </div>
@@ -144,7 +149,7 @@
     <i class="glyphicon glyphicon-chevron-right"></i>Scalars
   </a>
   <div class="list-group collapse" id="scalars">
-        {% for type in scalars %}
+        {% for type in scalars|sort %}
       <a href="/developer/scalar/{{type.name}}" class="list-group-item">{{ type.name }}</a>
       {% endfor %}
   </div>
@@ -184,10 +189,27 @@
 
     {% endif %}
 
+    {% if category == "previews" %}
+    <h1>Schema Previews</h1>
+
+<p>Schema previews let you try out new features and changes to our GraphQL schema before they become part of the official Cap-Collectif API.</p>
+
+<p>During the preview period, we may change some features <strong>without advance notice</strong>.</p>
+<p>
+    To access a schema preview, you'll need to provide a custom <code>Accept</code> header for your requests.
+    <pre><code>application/vnd.cap-collectif.preview+json</code></pre>
+</p>
+    {% endif %}
+
+    {% if category == "breaking_changes" %}
+    <h1>Breaking changes</h1>
+    <p>Coming soon…</p>
+    {% endif %}
+
     {% if category == "query" %}
     <h1>{{query.name}}</h1>
-    <p>Every GraphQL schema has a root type for both queries and mutations. The <a href="https://facebook.github.io/graphql/#sec-Type-System">query type</a> defines GraphQL operations that retrieve data from the server.</p>
-    {% for field in query.fields if 'Connection' in field.type.toString %}
+    <p>The <a href="https://facebook.github.io/graphql/#sec-Type-System">query type</a> defines GraphQL operations that retrieve data from the server.</p>
+    {% for field in query.fields|sort if 'Connection' in field.type.toString %}
         {% if loop.first %}
         <h2>
             Connections
@@ -195,7 +217,7 @@
         {% endif %}
         {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
     {% endfor %}
-    {% for field in query.fields if 'Connection' not in field.type.toString %}
+    {% for field in query.fields|sort if 'Connection' not in field.type.toString %}
         {% if loop.first %}
         <h2>
             Fields
@@ -216,7 +238,7 @@
         <h2>
             Payload fields
         </h2>
-        {% for payloadField in field.type.fields %}
+        {% for payloadField in field.type.fields|sort %}
          {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': payloadField} %}
         {% endfor %}
 
@@ -226,9 +248,12 @@
     {% if category == "object" %}
       {% for type in objects if type.name == selection %}
         <h1>{{type.name}}</h1>
+        {% if type.preview is defined and type.preview %}
+            {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+        {% endif %}
         <p>{{type.description}}</p>
 
-        {% for interface in type.interfaces %}
+        {% for interface in type.interfaces|sort %}
             {% if loop.first %}
                 <h2>Implements</h2>
                 <ul>
@@ -243,7 +268,7 @@
             {% endif %}
         {% endfor %}
 
-        {% for field in type.fields %}
+        {% for field in type.fields|sort %}
             {% if loop.first %}
                 <h2>Fields</h2>
             {% endif %}
@@ -253,7 +278,7 @@
     {% endif %}
 
     {% if category == "interface" %}
-      {% for type in interfaces if type.name == selection %}
+      {% for type in interfaces if type.name == selection|sort %}
         <h1>{{type.name}}</h1>
         <p>{{type.description}}</p>
         <h2>Implemented by</h2>
@@ -266,7 +291,7 @@
             </li>
         {% endfor %}
         </ul>
-        {% for field in type.fields %}
+        {% for field in type.fields|sort %}
             {% if loop.first %}
                 <h2>Fields</h2>
             {% endif %}
@@ -276,7 +301,7 @@
     {% endif %}
 
     {% if category == "enum" %}
-      {% for enum in enums if enum.name == selection %}
+      {% for enum in enums if enum.name == selection|sort %}
         <h1>{{enum.name}}</h1>
         <p>{{enum.description}}</p>
         <h2>Values</h2>
@@ -290,7 +315,7 @@
     {% endif %}
 
     {% if category == "union" %}
-      {% for union in unions if union.name == selection %}
+      {% for union in unions if union.name == selection|sort %}
         <h1>{{union.name}}</h1>
         <p>{{union.description}}</p>
         <h2>Possible Types</h2>
@@ -301,18 +326,18 @@
     {% endif %}
 
     {% if category == "input_object" %}
-      {% for input_object in input_objects if input_object.name == selection %}
+      {% for input_object in input_objects if input_object.name == selection|sort %}
         <h1>{{input_object.name}}</h1>
         <p>{{input_object.description}}</p>
         <h2>Input Fields</h2>
-        {% for field in input_object.fields %}
+        {% for field in input_object.fields|sort %}
             {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
         {% endfor %}
       {% endfor %}
     {% endif %}
 
     {% if category == "scalar" %}
-      {% for scalar in scalars if scalar.name == selection %}
+      {% for scalar in scalars if scalar.name == selection|sort %}
         <h1>{{scalar.name}}</h1>
         <p>{{scalar.description}}</p>
       {% endfor %}

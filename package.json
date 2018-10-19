@@ -21,6 +21,7 @@
     "clean-cache": "rm -rf var/cache/*",
     "compile-graphql": "bin/console graphql:compile --no-debug && composer dump-autoload",
     "dump-graphql-schema:public": "bin/console graphql:dump-schema --schema public --no-debug --file schema.public.graphql --format graphql",
+    "dump-graphql-schema:preview": "bin/console graphql:dump-schema --schema preview --no-debug --file schema.preview.graphql --format graphql",
     "dump-graphql-schema:internal": "bin/console graphql:dump-schema --schema internal --no-debug --file schema.internal.graphql --format graphql",
     "dump-graphql-json-schema:internal": "bin/console graphql:dump-schema --schema internal --no-debug --file schema.internal.json --format json",
     "dump-graphql-json-schema:public": "bin/console graphql:dump-schema --schema public --no-debug --file schema.public.json --format json",

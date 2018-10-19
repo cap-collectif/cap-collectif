@@ -1068,7 +1068,7 @@ final class InternalUserType extends ObjectType implements GeneratedTypeInterfac
                     'access' => null,
                 ],
                 'events' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('EventConnection')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalEventConnection')),
                     'args' => [
                         [
                             'name' => 'after',
