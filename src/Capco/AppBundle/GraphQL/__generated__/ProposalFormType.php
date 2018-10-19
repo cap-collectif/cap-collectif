@@ -24,6 +24,18 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
             'description' => 'A budget form',
             'fields' => function () use ($globalVariable) {
                 return [
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'proposals' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
                     'args' => [
@@ -154,18 +166,6 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
                 ],
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'reference' => [
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
@@ -231,14 +231,9 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                 'categories' => [
                     'type' => Type::nonNull(Type::listOf(Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalCategory')))),
                     'args' => [
-                        [
-                            'name' => 'order',
-                            'type' => $globalVariable->get('typeResolver')->resolve('CategoryOrderField'),
-                            'description' => null,
-                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", array(0 => $value, 1 => $args["order"])]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", array(0 => $value)]);
                     },
                     'description' => 'Available categories for proposals of this form.',
                     'deprecationReason' => null,

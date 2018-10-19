@@ -89,7 +89,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props, State> {
               </span>
             </Alert>
           )}
-        <ReplyForm questionnaire={questionnaire} reply={null} />
+        <ReplyForm questionnaire={questionnaire} />
         {/* <PhoneModal show={this.state.showPhoneModal} onClose={this.closePhoneModal} /> */}
       </div>
     );

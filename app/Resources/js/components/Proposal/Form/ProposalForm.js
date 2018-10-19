@@ -630,7 +630,7 @@ export default createFragmentContainer(container, {
         id
         name
       }
-      categories(order: ALPHABETICAL) {
+      categories {
         id
         name
       }

@@ -1,7 +1,0 @@
-CategoryOrderField:
-  type: enum
-  config:
-    description: 'Ordering options for categories.'
-    values:
-      ALPHABETICAL:
-        value: 'ALPHABETICAL'
