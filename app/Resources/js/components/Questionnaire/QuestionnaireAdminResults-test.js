@@ -15,6 +15,7 @@ describe('<QuestionnaireAdminResults />', () => {
           title: 'question type select',
           type: 'select',
           required: false,
+          private: false,
           participants: { totalCount: 7 },
         },
         {
@@ -22,6 +23,7 @@ describe('<QuestionnaireAdminResults />', () => {
           title: 'question type radio',
           type: 'radio',
           required: true,
+          private: false,
           participants: { totalCount: 98 },
         },
         {
@@ -29,6 +31,7 @@ describe('<QuestionnaireAdminResults />', () => {
           title: 'question type checkbox',
           type: 'checkbox',
           required: false,
+          private: false,
           participants: { totalCount: 45 },
         },
         {
@@ -36,6 +39,7 @@ describe('<QuestionnaireAdminResults />', () => {
           title: 'section',
           type: 'section',
           required: false,
+          private: false,
           participants: { totalCount: 2 },
         },
         {
@@ -43,6 +47,7 @@ describe('<QuestionnaireAdminResults />', () => {
           title: 'question type button',
           type: 'button',
           required: false,
+          private: false,
           participants: { totalCount: 43 },
         },
         {
@@ -50,6 +55,7 @@ describe('<QuestionnaireAdminResults />', () => {
           title: 'question type ranking',
           type: 'ranking',
           required: false,
+          private: false,
           participants: { totalCount: 38 },
         },
         {
@@ -57,6 +63,7 @@ describe('<QuestionnaireAdminResults />', () => {
           title: 'question type text',
           type: 'text',
           required: false,
+          private: false,
           participants: { totalCount: 4 },
         },
       ],
@@ -81,6 +88,7 @@ describe('<QuestionnaireAdminResults />', () => {
           title: 'question type select',
           type: 'select',
           required: false,
+          private: true,
           participants: { totalCount: 0 },
         },
       ],
@@ -98,7 +106,7 @@ describe('<QuestionnaireAdminResults />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders correctly without participants', () => {
+  it('renders correctly with private question & without participants', () => {
     const wrapper = shallow(<QuestionnaireAdminResults {...withoutParticipants} />);
     expect(wrapper).toMatchSnapshot();
   });

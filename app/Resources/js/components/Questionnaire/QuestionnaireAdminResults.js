@@ -8,6 +8,7 @@ import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking
 import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
 import type { QuestionnaireAdminResults_questionnaire } from './__generated__/QuestionnaireAdminResults_questionnaire.graphql';
 import type { State } from '../../types';
+import ProposalPrivateField from '../Proposal/ProposalPrivateField';
 
 type Props = {
   questionnaire: QuestionnaireAdminResults_questionnaire,
@@ -63,29 +64,31 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
           questionnaire.questions.filter(q => q.type !== 'section').length > 0 ? (
             questionnaire.questions.filter(q => q.type !== 'section').map((question, key) => (
               <div key={key}>
-                <p>
-                  <b>
-                    {key + 1}. {question.title}
-                  </b>
-                  <br />
-                  <span className="excerpt">
-                    {question.participants && question.participants.totalCount !== 0 ? (
-                      <FormattedMessage
-                        id="global.counters.contributors"
-                        values={{ num: question.participants.totalCount }}
-                      />
-                    ) : (
-                      <FormattedMessage id="no-answer" />
-                    )}
+                <ProposalPrivateField show={question.private}>
+                  <p>
+                    <b>
+                      {key + 1}. {question.title}
+                    </b>
                     <br />
-                    {question.required && (
-                      <b>
-                        <FormattedMessage id="mandatory-question" />
-                      </b>
-                    )}
-                  </span>
-                </p>
-                {this.getFormattedResults(question)}
+                    <span className="excerpt">
+                      {question.participants && question.participants.totalCount !== 0 ? (
+                        <FormattedMessage
+                          id="global.counters.contributors"
+                          values={{ num: question.participants.totalCount }}
+                        />
+                      ) : (
+                        <FormattedMessage id="no-answer" />
+                      )}
+                      <br />
+                      {question.required && (
+                        <b>
+                          <FormattedMessage id="mandatory-question" />
+                        </b>
+                      )}
+                    </span>
+                  </p>
+                  {this.getFormattedResults(question)}
+                </ProposalPrivateField>
               </div>
             ))
           ) : (
@@ -113,6 +116,7 @@ export default createFragmentContainer(
         title
         type
         required
+        private
         participants {
           totalCount
         }

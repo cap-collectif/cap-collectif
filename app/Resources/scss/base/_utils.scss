@@ -143,10 +143,6 @@
     overflow: hidden;
 }
 
-.overflow-x-scroll {
-    overflow-x: scroll;
-}
-
 /* =====
   16:9 Display
 ==== */
@@ -189,8 +185,4 @@
     position: sticky;
     position: -webkit-sticky;
     top: 0;
-}
-
-.bordered {
-    border: 1px solid $border-color;
 }
