@@ -29,7 +29,6 @@ module.exports = {
   ],
   module: {
     rules:  [
-      { test: /\.json$/, loader: 'json-loader' },
       { test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/, query: { cacheDirectory: devBuild } },
       { test: /LeafletMap.js$/, loader: 'ignore-loader' },
     ],

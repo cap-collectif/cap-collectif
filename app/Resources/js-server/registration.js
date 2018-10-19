@@ -12,7 +12,7 @@ import OpinionPageApp from '../js/startup/OpinionPageApp';
 import CommentSectionApp from '../js/startup/CommentSectionApp';
 import SynthesisViewBoxApp from '../js/startup/SynthesisViewBoxApp';
 import SynthesisEditBoxApp from '../js/startup/SynthesisEditBoxApp';
-// import ProposalPageApp from '../js/startup/ProposalPageApp';
+import ProposalPageApp from '../js/startup/ProposalPageApp';
 import QuestionnaireStepPageApp from '../js/startup/QuestionnaireStepPageApp';
 import ProjectStatsPageApp from '../js/startup/ProjectStatsPageApp';
 import ProposalVoteBasketWidgetApp from '../js/startup/ProposalVoteBasketWidgetApp';
@@ -77,7 +77,7 @@ ReactOnRails.register({
   CommentSectionApp,
   SynthesisViewBoxApp,
   SynthesisEditBoxApp,
-  // ProposalPageApp,
+  ProposalPageApp,
   QuestionnaireStepPageApp,
   ProjectStatsPageApp,
   ProposalVoteBasketWidgetApp,
