@@ -31,7 +31,7 @@ if [ "$PRODUCTION" ]; then
   yarn run build:prod
 
   # Server side rendering deps
-  # yarn run build-server-bundle:prod
+  yarn run build-server-bundle:prod
 else
   echo "Building for development/testing"
   # Symfony deps
