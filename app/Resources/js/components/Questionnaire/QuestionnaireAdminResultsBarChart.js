@@ -42,7 +42,7 @@ export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
     }
 
     return (
-      <ResponsiveContainer height={350}>
+      <ResponsiveContainer height={320}>
         <BarChart data={data} layout="vertical">
           <XAxis type="number" allowDecimals={false} tickLine={false} />
           <YAxis dataKey="name" type="category" tickLine={false} width={120} />{' '}

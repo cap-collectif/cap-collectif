@@ -13,7 +13,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
     sm={12}
     xs={12}
   >
-    <n
+    <t
       accept=""
       className="image-uploader__dropzone--fullwidth"
       disableClick={false}
@@ -67,7 +67,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
           </Button>
         </p>
       </div>
-    </n>
+    </t>
   </Col>
   <Col
     bsClass="col"
@@ -140,7 +140,7 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
     sm={12}
     xs={12}
   >
-    <n
+    <t
       accept=""
       className="image-uploader__dropzone--fullwidth"
       disableClick={false}
@@ -194,7 +194,7 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
           </Button>
         </p>
       </div>
-    </n>
+    </t>
   </Col>
 </Row>
 `;

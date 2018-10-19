@@ -34,10 +34,9 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
   render() {
     const { multipleChoiceQuestion } = this.props;
 
-    const choicesNumber =
-      multipleChoiceQuestion && multipleChoiceQuestion.questionChoices
-        ? multipleChoiceQuestion.questionChoices.length
-        : 0;
+    const choicesNumber = multipleChoiceQuestion.questionChoices
+      ? multipleChoiceQuestion.questionChoices.length
+      : 0;
 
     return (
       <Table hover>
@@ -45,8 +44,7 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
           <tr>{this.getHead(choicesNumber)}</tr>
         </thead>
         <tbody>
-          {multipleChoiceQuestion &&
-            multipleChoiceQuestion.questionChoices &&
+          {multipleChoiceQuestion.questionChoices &&
             multipleChoiceQuestion.questionChoices.map((choice, key) => (
               <QuestionnaireAdminResultsRankingLine
                 key={key}

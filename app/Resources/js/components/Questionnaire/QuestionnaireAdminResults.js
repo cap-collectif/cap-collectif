@@ -1,14 +1,13 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import QuestionnaireAdminResultsBarChart from './QuestionnaireAdminResultsBarChart';
 import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking';
 import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
 import type { QuestionnaireAdminResults_questionnaire } from './__generated__/QuestionnaireAdminResults_questionnaire.graphql';
-import type { State } from '../../types';
 import ProposalPrivateField from '../Proposal/ProposalPrivateField';
+import withColors from '../Utils/withColors';
 
 type Props = {
   questionnaire: QuestionnaireAdminResults_questionnaire,
@@ -52,17 +51,19 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     if (question.type === 'ranking') {
       return <QuestionnaireAdminResultsRanking multipleChoiceQuestion={question} />;
     }
+
+    return null;
   };
 
   render() {
     const { questionnaire } = this.props;
+    const questions = questionnaire.questions.filter(q => q.type !== 'section');
 
     return (
       <div className="box box-primary container-fluid">
         <div className="box-content mt-15">
-          {questionnaire.questions &&
-          questionnaire.questions.filter(q => q.type !== 'section').length > 0 ? (
-            questionnaire.questions.filter(q => q.type !== 'section').map((question, key) => (
+          {questionnaire.questions && questions.length > 0 ? (
+            questions.map((question, key) => (
               <div key={key}>
                 <ProposalPrivateField show={question.private}>
                   <p>
@@ -102,11 +103,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  backgroundColor: state.default.parameters['color.btn.primary.bg'],
-});
-
-const container = connect(mapStateToProps)(QuestionnaireAdminResults);
+const container = withColors(QuestionnaireAdminResults);
 
 export default createFragmentContainer(
   container,

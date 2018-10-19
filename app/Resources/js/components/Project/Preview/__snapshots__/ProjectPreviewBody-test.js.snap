@@ -86,7 +86,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               ellipsis="…"
               lines={3}
               trimWhitespace={false}
-              width={0}
             >
               Name of my project
             </Truncate>
@@ -244,7 +243,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               ellipsis="…"
               lines={3}
               trimWhitespace={false}
-              width={0}
             >
               Name of my project
             </Truncate>
@@ -409,7 +407,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               ellipsis="…"
               lines={3}
               trimWhitespace={false}
-              width={0}
             >
               Name of my project
             </Truncate>
@@ -624,7 +621,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               ellipsis="…"
               lines={3}
               trimWhitespace={false}
-              width={0}
             >
               Name of my project
             </Truncate>
@@ -837,7 +833,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
               ellipsis="…"
               lines={3}
               trimWhitespace={false}
-              width={0}
             >
               Name of my project
             </Truncate>
@@ -1025,7 +1020,6 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
               ellipsis="…"
               lines={3}
               trimWhitespace={false}
-              width={0}
             >
               Name of my project
             </Truncate>
