@@ -5,6 +5,7 @@ import { injectIntl, type IntlShape } from 'react-intl';
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import type { QuestionnaireAdminResultsPieChart_multipleChoiceQuestion } from './__generated__/QuestionnaireAdminResultsBarChart_multipleChoiceQuestion.graphql';
 import colors from '../../utils/colors';
+import { cleanMultipleChoiceQuestion } from '../../utils/cleanMultipleChoiceQuestion';
 
 type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsPieChart_multipleChoiceQuestion,
@@ -63,31 +64,7 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
     const { multipleChoiceQuestion, intl } = this.props;
     const { windowWidth } = this.state;
 
-    const data =
-      multipleChoiceQuestion.questionChoices &&
-      multipleChoiceQuestion.questionChoices
-        .filter(choice => choice.responses.totalCount > 0)
-        .reduce((acc, curr) => {
-          acc.push({
-            name: curr.title,
-            value: curr.responses.totalCount,
-          });
-          return acc;
-        }, []);
-
-    if (
-      data &&
-      multipleChoiceQuestion &&
-      multipleChoiceQuestion.isOtherAllowed &&
-      multipleChoiceQuestion.otherResponses &&
-      multipleChoiceQuestion.otherResponses.totalCount !== 0
-    ) {
-      data.push({
-        name: intl.formatMessage({ id: 'global.question.types.other' }),
-        value:
-          multipleChoiceQuestion.otherResponses && multipleChoiceQuestion.otherResponses.totalCount,
-      });
-    }
+    const data = cleanMultipleChoiceQuestion(multipleChoiceQuestion, intl);
 
     return (
       <div className="row">

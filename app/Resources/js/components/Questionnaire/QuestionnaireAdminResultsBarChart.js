@@ -4,6 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import type { QuestionnaireAdminResultsBarChart_multipleChoiceQuestion } from './__generated__/QuestionnaireAdminResultsBarChart_multipleChoiceQuestion.graphql';
+import { cleanMultipleChoiceQuestion } from '../../utils/cleanMultipleChoiceQuestion';
 
 type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsBarChart_multipleChoiceQuestion,
@@ -15,31 +16,7 @@ export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
   render() {
     const { multipleChoiceQuestion, backgroundColor, intl } = this.props;
 
-    const data =
-      multipleChoiceQuestion.questionChoices &&
-      multipleChoiceQuestion.questionChoices
-        .filter(choice => choice.responses.totalCount > 0)
-        .reduce((acc, curr) => {
-          acc.push({
-            name: curr.title,
-            value: curr.responses.totalCount,
-          });
-          return acc;
-        }, []);
-
-    if (
-      data &&
-      multipleChoiceQuestion &&
-      multipleChoiceQuestion.isOtherAllowed &&
-      multipleChoiceQuestion.otherResponses &&
-      multipleChoiceQuestion.otherResponses.totalCount !== 0
-    ) {
-      data.push({
-        name: intl.formatMessage({ id: 'global.question.types.other' }),
-        value:
-          multipleChoiceQuestion.otherResponses && multipleChoiceQuestion.otherResponses.totalCount,
-      });
-    }
+    const data = cleanMultipleChoiceQuestion(multipleChoiceQuestion, intl);
 
     return (
       <ResponsiveContainer height={320}>
