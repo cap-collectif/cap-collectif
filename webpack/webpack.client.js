@@ -1,6 +1,3 @@
-/* eslint-disable  sorting/sort-object-props */
-/* eslint-disable flowtype/require-valid-file-annotation */
-
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');

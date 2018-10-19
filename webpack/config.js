@@ -1,6 +1,3 @@
-/* eslint-disable sorting/sort-object-props */
-/* eslint-disable flowtype/require-valid-file-annotation */
-
 const path = require('path');
 
 const ABSOLUTE_BASE = path.resolve('.');

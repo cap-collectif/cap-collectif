@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 
 const devBuild = process.env.NODE_ENV !== 'production';
@@ -6,12 +7,13 @@ const nodeEnv = devBuild ? 'development' : 'production';
 module.exports = {
   mode: nodeEnv,
   context: __dirname,
-  entry: ['babel-polyfill', './app/Resources/js-server/registration.js'],
+  entry: ['babel-polyfill', '../app/Resources/js-server/registration.js'],
   output: {
-    filename: 'web/js/server-bundle.js',
+    path: path.resolve(__dirname, '../web/js'),
+    filename: 'server-bundle.js',
   },
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['.js'],
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -21,7 +23,7 @@ module.exports = {
       __SERVER__: true,
     }),
     new webpack.ProvidePlugin({
-      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
   ],
