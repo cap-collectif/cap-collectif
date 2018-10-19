@@ -67,6 +67,9 @@ const devConf = {
         use: [
           {
             loader: 'babel-loader',
+            options: {
+              cacheDirectory: true
+            }
           },
         ],
       },
