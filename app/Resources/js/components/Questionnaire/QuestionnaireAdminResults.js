@@ -18,16 +18,16 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
   getFormattedResults = (question: Object) => {
     const { backgroundColor } = this.props;
 
+    if (question.participants && question.participants.totalCount === 0) {
+      return null;
+    }
+
     if (question.type === 'text' || question.type === 'number' || question.type === 'file') {
       return (
         <p>
           <FormattedHTMLMessage id="results-not-available" />
         </p>
       );
-    }
-
-    if (question.participants && question.participants.totalCount === 0) {
-      return null;
     }
 
     if (question.type === 'checkbox') {
@@ -59,7 +59,8 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
     return (
       <div className="box box-primary container-fluid">
         <div className="box-content mt-15">
-          {questionnaire.questions.length > 0 ? (
+          {questionnaire.questions &&
+          questionnaire.questions.filter(q => q.type !== 'section').length > 0 ? (
             questionnaire.questions.filter(q => q.type !== 'section').map((question, key) => (
               <div key={key}>
                 <p>
