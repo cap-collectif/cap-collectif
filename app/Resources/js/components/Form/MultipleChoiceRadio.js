@@ -13,11 +13,9 @@ type Props = {
   helpText: ?string,
   label?: string | any,
   description?: string,
-  validationState?: ?string,
   isOtherAllowed?: ?boolean,
   labelClassName?: ?string,
   disabled?: ?boolean,
-  errors?: Array<string>,
   value: ?Object,
   change: (field: string, value: any) => void,
 };
@@ -50,19 +48,16 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
   normalize = (newValue: string) => [newValue];
 
   render() {
-    const {
-      disabled,
-      name,
-      choices,
-      helpText,
-      validationState,
-      label,
-      value,
-      ...props
-    } = this.props;
+    const { disabled, name, choices, helpText, label, value, ...props } = this.props;
 
     const finalValue = value && Array.isArray(value.labels) ? value.labels[0] : undefined;
     const otherValue = value ? value.other : undefined;
+
+    const validationState =
+      (typeof finalValue === 'string' && finalValue !== '') ||
+      (typeof otherValue === 'string' && otherValue !== '')
+        ? 'success'
+        : null;
 
     return (
       <div>
@@ -124,8 +119,6 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
               </div>
             </div>
           )}
-
-          {props.errors && <span className="error-block">{props.errors}</span>}
         </FormGroup>
       </div>
     );

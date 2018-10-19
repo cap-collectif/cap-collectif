@@ -21,7 +21,7 @@ final class SourceVoteType extends ObjectType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'SourceVote',
-            'description' => 'Fetches an object given its ID',
+            'description' => 'Entities that can be published.',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [

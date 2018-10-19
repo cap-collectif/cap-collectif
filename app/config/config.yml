@@ -116,6 +116,8 @@ framework:
   trusted_proxies: ['127.0.0.1']
   session:
     handler_id: snc_redis.session.handler
+    cookie_httponly: true
+    cookie_secure: true
   fragments: null
   http_method_override: true
   translator:

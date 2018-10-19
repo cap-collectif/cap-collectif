@@ -645,6 +645,30 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then /^I create a cookie named "([^"]*)"$/
+     */
+    public function iCreateACookieNamed(string $cookieName)
+    {
+        $this->getSession()->setCookie($cookieName, 'test');
+    }
+
+    /**
+     * @Then /^I should see a cookie named "([^"]*)"$/
+     */
+    public function iShouldSeeCookieNamed(string $cookieName)
+    {
+        Assert::assertTrue($this->getSession()->getCookie($cookieName) !== null);
+    }
+
+    /**
+     * @Then /^I should not see a cookie named "([^"]*)"$/
+     */
+    public function iShouldNotSeeCookieNamed(string $cookieName)
+    {
+        Assert::assertTrue($this->getSession()->getCookie($cookieName) === null);
+    }
+
+    /**
      * @Then /^I should see in the header "([^"]*)"$/
      */
     public function iShouldSeeInTheHeader(string $header)

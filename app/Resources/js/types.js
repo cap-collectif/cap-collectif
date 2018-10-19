@@ -45,6 +45,7 @@ export type FeatureToggles = {
   server_side_rendering: boolean,
   zipcode_at_register: boolean,
   consultation_plan: boolean,
+  display_map: boolean,
 };
 export type FeatureToggle =
   | 'blog'
@@ -74,7 +75,8 @@ export type FeatureToggle =
   | 'export'
   | 'server_side_rendering'
   | 'zipcode_at_register'
-  | 'consultation_plan';
+  | 'consultation_plan'
+  | 'display_map';
 
 export type Action =
   | ProposalAction
