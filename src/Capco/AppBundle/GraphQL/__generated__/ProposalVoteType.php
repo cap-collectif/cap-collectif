@@ -21,15 +21,15 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'ProposalVote',
-            'description' => 'Entities that can be published.',
+            'description' => 'Fetches an object given its ID',
             'fields' => function () use ($globalVariable) {
                 return [
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
+                'private' => [
+                    'type' => Type::boolean(),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The ID of an object',
+                    'description' => 'Anonymous or not.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -88,8 +88,25 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
+<<<<<<< master
                 'published' => [
                     'type' => Type::nonNull(Type::boolean()),
+=======
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'createdAt' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
+>>>>>>> - Added email cell : fixes #6180
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -138,18 +155,6 @@ final class ProposalVoteType extends ObjectType implements GeneratedTypeInterfac
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
                     },
                     'description' => 'Reason that the entity is not published.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'private' => [
-                    'type' => Type::boolean(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Anonymous or not.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

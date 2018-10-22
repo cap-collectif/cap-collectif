@@ -133,6 +133,7 @@ EOF;
 fragment authorInfos on User {
   id
   username
+  email
   userType {
 		...userTypeInfos
   }
@@ -174,6 +175,7 @@ EOF;
         'proposal_link',
         'proposal_author_id',
         'proposal_author_username',
+        'proposal_author_email',
         'proposal_author_userType_id',
         'proposal_author_userType_name',
         'proposal_status_name',
@@ -394,6 +396,7 @@ EOF;
         'proposal_link' => 'show_url',
         'proposal_author_id' => 'author.id',
         'proposal_author_username' => 'author.username',
+        'proposal_author_email' => 'author.email',
         'proposal_author_userType_id' => 'author.userType.id',
         'proposal_author_userType_name' => 'author.userType.name',
         'proposal_status_name' => 'status.name',

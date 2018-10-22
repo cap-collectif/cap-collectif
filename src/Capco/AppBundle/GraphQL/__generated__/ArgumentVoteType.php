@@ -21,9 +21,10 @@ final class ArgumentVoteType extends ObjectType implements GeneratedTypeInterfac
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'ArgumentVote',
-            'description' => 'Entities that can be published.',
+            'description' => 'Fetches an object given its ID',
             'fields' => function () use ($globalVariable) {
                 return [
+<<<<<<< master
                 'id' => [
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
@@ -38,6 +39,10 @@ final class ArgumentVoteType extends ObjectType implements GeneratedTypeInterfac
                 ],
                 'createdAt' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
+=======
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
+>>>>>>> - Added email cell : fixes #6180
                     'args' => [
                     ],
                     'resolve' => null,
@@ -86,8 +91,25 @@ final class ArgumentVoteType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
+<<<<<<< master
                 'published' => [
                     'type' => Type::nonNull(Type::boolean()),
+=======
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'createdAt' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
+>>>>>>> - Added email cell : fixes #6180
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
