@@ -64,7 +64,7 @@ export class ReplyModalLink extends React.Component<Props, State> {
               </span>
             )}
             {/* $FlowFixMe $refType */}
-            <ReplyDraftLabel status={reply.publicationStatus} />
+            <ReplyDraftLabel status={reply.draft} />
             <UnpublishedLabel publishable={reply} />
           </div>
           <div>
