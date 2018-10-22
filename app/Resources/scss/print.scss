@@ -51,18 +51,23 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 19pt;
 }
 
 h2 {
     text-align: center;
-    font-size: 15pt;
+    font-size: 16pt;
 }
 
 
-p, a, a:active, a:hover, h2, .h2, h3, h4, .excerpt {
-    color: #000 !important;
+a, a:active, a:hover, h2, .h2, h3, h4, .excerpt {
+    color: #333 !important;
+    text-decoration: none;
+}
+
+p, h3, h4, .excerpt {
+    color: #333;
     text-decoration: none;
 }
 
@@ -135,7 +140,7 @@ p img {
 }
 
 /* ===============================================================
-    Questionnaire
+    Project
 ================================================================*/
 
 .project__header__title {
@@ -151,5 +156,54 @@ p img {
 
     .mr-15 {
         margin-right: 15px;
+    }
+}
+
+/* ===============================================================
+    Questionnaire
+================================================================*/
+
+#reply-form {
+    .form-fields {
+        display: flex;
+        flex-wrap: wrap;
+
+        .other-field {
+            width: 100%;
+            display: flex;
+            margin-top: 10px;
+
+            label {
+                margin-right: 10px;
+            }
+        }
+
+        .other-field__value {
+            flex: 1;
+            width: 100%;
+            // margin-left: 10px;
+
+            input {
+                width: 100%;
+            }
+        }
+    }
+
+    .control-label {
+        font-weight: 500;
+        display: block;
+        margin: 10px 0;
+    }
+
+    .help-block {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .ranking__pick-box {
+        .ranking__item__image {
+            max-height: 150px;
+            margin-top: 0;
+        }
     }
 }

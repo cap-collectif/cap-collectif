@@ -97,7 +97,7 @@ class Checkbox extends React.Component<Props, State> {
       labelClasses[labelClassName] = true;
     }
     return (
-      <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
+      <div className={`form-group ${getGroupStyle(field.id)} form-fields`} id={id}>
         {label && (
           <label htmlFor={fieldName} className={classNames(labelClasses)}>
             {label}

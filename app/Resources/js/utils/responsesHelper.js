@@ -568,7 +568,7 @@ export const renderResponses = ({
         switch (inputType) {
           case 'section': {
             return (
-              <div key={field.id}>
+              <div key={field.id} className="form__section">
                 <TitleInvertContrast>{field.title}</TitleInvertContrast>
                 <div dangerouslySetInnerHTML={{ __html: field.description }} />
               </div>

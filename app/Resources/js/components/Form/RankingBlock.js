@@ -126,7 +126,7 @@ export class RankingBlock extends React.Component<Props, State> {
               />
             </ListGroup>
           </Col>
-          <Col xs={6}>
+          <Col xs={6} className="hidden-print">
             <h5 className="h5">{<FormattedMessage id="global.form.ranking.choiceBox.title" />}</h5>
             <ListGroup className="ranking__choice-box" style={{ height: choicesHeight }}>
               <RankingBox

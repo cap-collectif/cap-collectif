@@ -2,7 +2,7 @@
 
 exports[`<Checkbox /> should render correctly 1`] = `
 <div
-  className="form-group undefined"
+  className="form-group undefined form-fields"
   id="reply-1"
 >
   <label
@@ -89,7 +89,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
 
 exports[`<Checkbox /> should render with an other field 1`] = `
 <div
-  className="form-group undefined"
+  className="form-group undefined form-fields"
   id="reply-1"
 >
   <label
