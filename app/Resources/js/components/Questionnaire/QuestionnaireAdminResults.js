@@ -22,7 +22,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
       return null;
     }
 
-    if (question.type === 'text' || question.type === 'number' || question.type === 'file') {
+    if (question.__typename !== 'MultipleChoiceQuestion') {
       return (
         <p>
           <FormattedHTMLMessage id="results-not-available" />
@@ -110,6 +110,7 @@ export default createFragmentContainer(
   graphql`
     fragment QuestionnaireAdminResults_questionnaire on Questionnaire {
       questions {
+        __typename
         title
         type
         required

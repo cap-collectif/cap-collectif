@@ -40,6 +40,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
           multipleChoiceQuestion={
             Object {
               "$fragmentRefs": null,
+              "__typename": "MultipleChoiceQuestion",
               "participants": Object {
                 "totalCount": 7,
               },
@@ -91,6 +92,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
           multipleChoiceQuestion={
             Object {
               "$fragmentRefs": null,
+              "__typename": "MultipleChoiceQuestion",
               "participants": Object {
                 "totalCount": 98,
               },
@@ -136,6 +138,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
           multipleChoiceQuestion={
             Object {
               "$fragmentRefs": null,
+              "__typename": "MultipleChoiceQuestion",
               "participants": Object {
                 "totalCount": 45,
               },
@@ -181,6 +184,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
           multipleChoiceQuestion={
             Object {
               "$fragmentRefs": null,
+              "__typename": "MultipleChoiceQuestion",
               "participants": Object {
                 "totalCount": 43,
               },
@@ -225,6 +229,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
           multipleChoiceQuestion={
             Object {
               "$fragmentRefs": null,
+              "__typename": "MultipleChoiceQuestion",
               "participants": Object {
                 "totalCount": 38,
               },
@@ -259,6 +264,78 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               values={
                 Object {
                   "num": 4,
+                }
+              }
+            />
+            <br />
+          </span>
+        </p>
+        <p>
+          <FormattedHTMLMessage
+            id="results-not-available"
+            values={Object {}}
+          />
+        </p>
+      </ProposalPrivateField>
+    </div>
+    <div
+      key="6"
+    >
+      <ProposalPrivateField
+        divClassName=""
+        show={false}
+      >
+        <p>
+          <b>
+            7
+            . 
+            question type number
+          </b>
+          <br />
+          <span
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="global.counters.contributors"
+              values={
+                Object {
+                  "num": 89,
+                }
+              }
+            />
+            <br />
+          </span>
+        </p>
+        <p>
+          <FormattedHTMLMessage
+            id="results-not-available"
+            values={Object {}}
+          />
+        </p>
+      </ProposalPrivateField>
+    </div>
+    <div
+      key="7"
+    >
+      <ProposalPrivateField
+        divClassName=""
+        show={false}
+      >
+        <p>
+          <b>
+            8
+            . 
+            question type number
+          </b>
+          <br />
+          <span
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="global.counters.contributors"
+              values={
+                Object {
+                  "num": 9,
                 }
               }
             />
