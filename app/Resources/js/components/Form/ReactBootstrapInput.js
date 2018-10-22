@@ -291,7 +291,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       let values;
       let choices;
       if (value) {
-        values = value.map(v => props.choices.find(choice => v === choice.label));
+        values = value.map(v => props.choices.find(choice => v === choice.label)).filter(v => v);
 
         choices = props.choices.filter(
           choice => choice.label !== value.find(val => val === choice.label),
