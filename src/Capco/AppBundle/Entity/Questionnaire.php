@@ -205,7 +205,7 @@ class Questionnaire implements DisplayableInBOInterface
     /**
      * @return ArrayCollection
      */
-    public function getQuestions()
+    public function getQuestions(): iterable
     {
         return $this->questions;
     }

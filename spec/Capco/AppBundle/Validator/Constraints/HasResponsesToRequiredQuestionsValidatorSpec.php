@@ -1,34 +1,64 @@
 <?php
 
-namespace spec\Capco\AppBundle\Command;
+namespace spec\Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Entity\Responses\ValueResponse;
 use PhpSpec\ObjectBehavior;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Questionnaire;
+use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Repository\RegistrationFormRepository;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestions;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestionsValidator');
+    function it_should_should_not_validate_a_draft(
+        Reply $reply,
+        HasResponsesToRequiredQuestions $constraint,
+        ExecutionContextInterface $context,
+        RegistrationFormRepository $formRepo
+    ) {
+        $this->beConstructedWith($formRepo);
+        $this->initialize($context);
+        $reply->isDraft()->willReturn(true);
+        $context->buildViolation()->shouldNotBeCalled();
+        $this->validate($reply, $constraint);
     }
 
-    function it_should_find_if_proposal_has_response_for_question(AbstractQuestion $question1, AbstractQuestion $question2, ValueResponse $response1, ValueResponse $response2, ValueResponse $response3)
-    {
-        // Response exists
-        $response1->getQuestion()->willReturn($question1);
-        $response1->getValue()->willReturn('coucou');
+    function it_should_should_validate_if_not_a_draft(
+        ConstraintViolationBuilderInterface $builder,
+        QuestionnaireAbstractQuestion $aq1,
+        AbstractQuestion $question1,
+        ValueResponse $response1,
+        ValueResponse $response2,
+        Questionnaire $questionnaire,
+        Reply $reply,
+        HasResponsesToRequiredQuestions $constraint,
+        ExecutionContextInterface $context,
+        RegistrationFormRepository $formRepo
+    ) {
+        $this->beConstructedWith($formRepo);
+        $this->initialize($context);
+        $question1->isRequired()->willReturn(true);
+        $question1->getId()->willReturn(1);
+        $aq1->getQuestion()->willReturn($question1);
+        $questionnaire->getQuestions()->willReturn([$aq1]);
+        $reply->getQuestionnaire()->willReturn($questionnaire);
+        $reply->getResponses()->willReturn(new ArrayCollection([$response1]));
+        $builder->setParameter('missing', 1)->willReturn($builder);
+        $builder->atPath('responses')->willReturn($builder);
+        $builder->addViolation()->shouldBeCalled();
 
-        // Response exist with empty
-        $response2->getQuestion()->willReturn($question1);
-        $response2->getValue()->willReturn('');
-
-        // Response does not exist
-        $response3->getQuestion()->willReturn($question2);
-        $response3->getValue()->willReturn('coucou');
-
-        $this->hasResponseForQuestion($question1, [$response1])->shouldReturn(true);
-        $this->hasResponseForQuestion($question1, [$response2])->shouldReturn(false);
-        $this->hasResponseForQuestion($question1, [$response3])->shouldReturn(false);
+        $constraint->formField = 'questionnaire';
+        $reply->isDraft()->willReturn(false);
+        $context
+            ->buildViolation("global.missing_required_responses")
+            ->willReturn($builder)
+            ->shouldBeCalled();
+        $this->validate($reply, $constraint);
     }
 }
