@@ -8,10 +8,11 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProposalResponsesResolver implements ResolverInterface
 {
-    public function __invoke(Proposal $proposal, $user): iterable
+    public function __invoke(Proposal $proposal, $user, \ArrayObject $context): iterable
     {
+        $skipVerification = $context && $context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl');
         $isAuthor = $proposal->getAuthor() === $user;
-        $viewerCanSeePrivateResponses = $isAuthor || ($user instanceof User && $user->isAdmin());
+        $viewerCanSeePrivateResponses = $skipVerification || $isAuthor || ($user instanceof User && $user->isAdmin());
 
         return $proposal->getResponses()->filter(
           function ($response) use ($viewerCanSeePrivateResponses) {

@@ -69,7 +69,7 @@ Proposal:
       responses:
         type: '[Response]!'
         resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", [value, getUser()])'
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", [value, getUser(), context])'
       media:
         type: 'Media'
       theme:
