@@ -395,3 +395,103 @@ svg.avatar-group {
         }
     }
 }
+
+
+.developers__container {
+    h1 span {
+        font-weight: 300;
+    }
+
+    h2, h3 {
+        color: $dark-text;
+    }
+
+    h4 {
+        font-weight: 500;
+    }
+
+    .label {
+        font-weight: 400;
+    }
+
+    &:not(.list-group) {
+        line-height: 1.5;
+    }
+
+    code {
+        background-color: transparent;
+    }
+
+    .nav-tabs {
+       li {
+           a, a:hover {
+               border-width: 0 0 1px 0;
+               color: $dark-text;
+           }
+
+           & a:hover {
+               background-color: transparent;
+               border-bottom: 1px solid $dark-text;
+           }
+
+           &.active a:hover {
+               background-color: transparent;
+               border-bottom: 1px solid transparent;
+           }
+       }
+
+
+    }
+
+    .list-group {
+        border-bottom: 1px solid $border-color;
+
+        > .list-group-item {
+            &:hover, &:focus, &:active {
+                background-color: transparent;
+
+                i {
+                    color: $dark-text;
+                }
+            }
+        }
+
+        .list-group-item[aria-expanded="true"] i::before {
+            transform: rotate(90deg);
+            transition: all 0.1s ease-in;
+        }
+
+        i {
+            margin-right: 7px;
+
+            &::before {
+                display: inline-block;
+                top: 2px;
+                transition: all 0.1s ease-in;
+            }
+
+        }
+    }
+
+    .list-group_collapse {
+        font-size: 14px;
+
+        .list-group-item {
+            padding-left: 40px;
+            background-color: $page-bgc;
+
+            &:hover {
+                background-color: darken($page-bgc, 3%);
+            }
+        }
+
+        .list-group-item:first-child {
+            border-radius: 0;
+        }
+
+        .list-group-item:last-child {
+            border-bottom: 0;
+            border-radius: 0;
+        }
+    }
+}

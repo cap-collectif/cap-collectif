@@ -12,154 +12,124 @@
 {% endblock %}
 
 {% block body %}
-{# See https://jsfiddle.net/ann7tctp/ #}
-<style>
-
-.list-group.list-group-root {
-    padding: 0;
-    overflow: hidden;
-}
-
-.list-group.list-group-root .list-group {
-    margin-bottom: 0;
-}
-
-.list-group.list-group-root .list-group-item {
-    border-radius: 0;
-    border-width: 1px 0 0 0;
-}
-
-.list-group.list-group-root > .list-group-item:first-child {
-    border-top-width: 0;
-}
-
-.list-group.list-group-root > .list-group > .list-group-item {
-    padding-left: 30px;
-}
-
-.list-group.list-group-root > .list-group > .list-group > .list-group-item {
-    padding-left: 45px;
-}
-
-.list-group-item .glyphicon {
-    margin-right: 5px;
-}
-</style>
 
 {% block javascripts %}
 {{ parent() }}
 {% endblock %}
 
-<div class="container">
+<div class="container developers__container">
 
 <div class="row">
-    <h2><strong>Cap Collectif Developers</strong> - GraphQL API</h2>
-
-    {% include 'CapcoAppBundle:Developer:menu.html.twig' with {'active': 'reference'} %}
+    <div class="col-xs-12">
+        <div class="mb-40">
+            <h1>Cap Collectif Developers <span>- GraphQL API</span></h1>
+        </div>
+        {% include 'CapcoAppBundle:Developer:menu.html.twig' with {'active': 'reference'} %}
+    </div>
 </div>
 
-<div class="row" style="margin-top: 30px">
+<div class="row mt-40">
 
-<div class="col-md-4 list-group list-group-root well">
+    <div class="col-md-3">
+    <div class="list-group">
+        <a href="#" class="list-group-item" data-toggle="collapse" data-target="#overview">
+            <i class="cap cap-arrow-66"></i>Overview
+        </a>
 
-  <a href="#" class="list-group-item" data-toggle="collapse" data-target="#overview">
-    <i class="glyphicon glyphicon-chevron-right"></i>Overview
-  </a>
+        <div class="list-group_collapse collapse" id="overview">
+            <a href="/developer/previews" class="list-group-item">Schema Previews</a>
+            <a href="/developer/breaking_changes" class="list-group-item">Breaking Changes</a>
+        </div>
 
-  <div class="list-group collapse" id="overview">
-      <a href="/developer/previews" class="list-group-item">Schema Previews</a>
-      <a href="/developer/breaking_changes" class="list-group-item">Breaking Changes</a>
-  </div>
+        <a href="#" class="list-group-item" data-toggle="collapse" data-target="#query">
+            <i class="cap cap-arrow-66"></i>Query
+        </a>
+        <div class="list-group_collapse collapse" id="query">
+            <a href="/developer/query#connections" class="list-group-item">Connections</a>
+            <a href="/developer/query#fields" class="list-group-item">Fields</a>
+        </div>
 
-  <a href="#" class="list-group-item" data-toggle="collapse" data-target="#query">
-    <i class="glyphicon glyphicon-chevron-right"></i>Query
-  </a>
-  <div class="list-group collapse" id="query">
-      <a href="/developer/query#connections" class="list-group-item">Connections</a>
-      <a href="/developer/query#fields" class="list-group-item">Fields</a>
-  </div>
+        {% if mutation %}
+            <a href="#mutations" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Mutations
+            </a>
+            <div class="list-group_collapse collapse" id="mutations">
+                {% for field in mutation.fields|sort %}
+                    <a href="/developer/mutation/{{field.name}}" class="list-group-item">{{ field.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
 
-    {% if mutation %}
-  <a href="#mutations" class="list-group-item" data-toggle="collapse">
-    <i class="glyphicon glyphicon-chevron-right"></i>Mutations
-  </a>
-  <div class="list-group collapse" id="mutations">
-      {% for field in mutation.fields|sort %}
-      <a href="/developer/mutation/{{field.name}}" class="list-group-item">{{ field.name }}</a>
-      {% endfor %}
-  </div>
-    {% endif %}
-  
-  {% if objects is not empty %}
-  <a href="#objects" class="list-group-item" data-toggle="collapse">
-    <i class="glyphicon glyphicon-chevron-right"></i>Objects
-  </a>
-  <div class="list-group collapse" id="objects">
-        {% for type in objects|sort %}
-      <a href="/developer/object/{{type.name}}" class="list-group-item">{{ type.name }}</a>
-      {% endfor %}
-  </div>
-    {% endif %}
-  
-  {% if interfaces is not empty %}
-  <a href="#interfaces" class="list-group-item" data-toggle="collapse">
-    <i class="glyphicon glyphicon-chevron-right"></i>Interfaces
-  </a>
-  <div class="list-group collapse" id="interfaces">
-        {% for type in interfaces|sort %}
-      <a href="/developer/interface/{{type.name}}" class="list-group-item">{{ type.name }}</a>
-      {% endfor %}
-  </div>
-    {% endif %}
-  
-  {% if enums is not empty %}
-  <a href="#enums" class="list-group-item" data-toggle="collapse">
-    <i class="glyphicon glyphicon-chevron-right"></i>Enums
-  </a>
-  <div class="list-group collapse" id="enums">
-        {% for type in enums|sort %}
-      <a href="/developer/enum/{{type.name}}" class="list-group-item">{{ type.name }}</a>
-      {% endfor %}
-  </div>
-    {% endif %}
-  
-    {% if unions is not empty %}
-   <a href="#unions" class="list-group-item" data-toggle="collapse">
-    <i class="glyphicon glyphicon-chevron-right"></i>Unions
-  </a>
-  <div class="list-group collapse" id="unions">
-        {% for type in unions|sort %}
-      <a href="/developer/union/{{type.name}}" class="list-group-item">{{ type.name }}</a>
-      {% endfor %}
-  </div>
-    {% endif %}
-  
-    {% if input_objects is not empty %}
-  <a href="#input_objects" class="list-group-item" data-toggle="collapse">
-    <i class="glyphicon glyphicon-chevron-right"></i>Input Objects
-  </a>
-  <div class="list-group collapse" id="input_objects">
-        {% for type in input_objects|sort %}
-      <a href="/developer/input_object/{{type.name}}" class="list-group-item">{{ type.name }}</a>
-      {% endfor %}
-  </div>
-    {% endif %}
-  
-  <a href="#scalars" class="list-group-item" data-toggle="collapse">
-    <i class="glyphicon glyphicon-chevron-right"></i>Scalars
-  </a>
-  <div class="list-group collapse" id="scalars">
-        {% for type in scalars|sort %}
-      <a href="/developer/scalar/{{type.name}}" class="list-group-item">{{ type.name }}</a>
-      {% endfor %}
-  </div>
-  
+        {% if objects is not empty %}
+            <a href="#objects" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Objects
+            </a>
+            <div class="list-group_collapse collapse" id="objects">
+                {% for type in objects|sort %}
+                    <a href="/developer/object/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if interfaces is not empty %}
+            <a href="#interfaces" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Interfaces
+            </a>
+            <div class="list-group_collapse collapse" id="interfaces">
+                {% for type in interfaces|sort %}
+                    <a href="/developer/interface/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if enums is not empty %}
+            <a href="#enums" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Enums
+            </a>
+            <div class="list-group_collapse collapse" id="enums">
+                {% for type in enums|sort %}
+                    <a href="/developer/enum/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if unions is not empty %}
+            <a href="#unions" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Unions
+            </a>
+            <div class="list-group_collapse collapse" id="unions">
+                {% for type in unions|sort %}
+                    <a href="/developer/union/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if input_objects is not empty %}
+            <a href="#input_objects" class="list-group-item" data-toggle="collapse">
+                <i class="cap cap-arrow-66"></i>Input Objects
+            </a>
+            <div class="list-group_collapse collapse" id="input_objects">
+                {% for type in input_objects|sort %}
+                    <a href="/developer/input_object/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <a href="#scalars" class="list-group-item" data-toggle="collapse">
+            <i class="cap cap-arrow-66"></i>Scalars
+        </a>
+        <div class="list-group_collapse collapse" id="scalars">
+            {% for type in scalars|sort %}
+                <a href="/developer/scalar/{{type.name}}" class="list-group-item">{{ type.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
-<div class="col-md-8">
+    <div class="col-md-9">
 
     {% if category is null %}
-    <h1>Overview</h1>
+    <h2>Overview</h2>
 
     Cap Collectif provides an API to read and write data.
 
@@ -190,7 +160,7 @@
     {% endif %}
 
     {% if category == "previews" %}
-    <h1>Schema Previews</h1>
+    <h2>Schema Previews</h2>
 
 <p>Schema previews let you try out new features and changes to our GraphQL schema before they become part of the official Cap-Collectif API.</p>
 
@@ -202,26 +172,26 @@
     {% endif %}
 
     {% if category == "breaking_changes" %}
-    <h1>Breaking changes</h1>
+    <h2>Breaking changes</h2>
     <p>Coming soon…</p>
     {% endif %}
 
     {% if category == "query" %}
-    <h1>{{query.name}}</h1>
+    <h2>{{query.name}}</h2>
     <p>The <a href="https://facebook.github.io/graphql/#sec-Type-System">query type</a> defines GraphQL operations that retrieve data from the server.</p>
     {% for field in query.fields|sort if 'Connection' in field.type.toString %}
         {% if loop.first %}
-        <h2>
+        <h3>
             Connections
-        </h2>
+        </h3>
         {% endif %}
         {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
     {% endfor %}
     {% for field in query.fields|sort if 'Connection' not in field.type.toString %}
         {% if loop.first %}
-        <h2>
+        <h3>
             Fields
-        </h2>
+        </h3>
         {% endif %}
         {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
     {% endfor %}
@@ -229,15 +199,15 @@
     
     {% if mutation and category == "mutation" and selection is not null %}
     {% for field in mutation.fields if field.name == selection %}
-        <h1>{{field.name}}</h1>
+        <h2>{{field.name}}</h2>
         <p>{{field.description}}</p>
-        <h2>
+        <h3>
            Input fields
-        </h2>
+        </h3>
         {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field.args[0]} %}
-        <h2>
+        <h3>
             Payload fields
-        </h2>
+        </h3>
         {% for payloadField in field.type.fields|sort %}
          {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': payloadField} %}
         {% endfor %}
@@ -247,7 +217,7 @@
 
     {% if category == "object" %}
       {% for type in objects if type.name == selection %}
-        <h1>{{type.name}}</h1>
+        <h2>{{type.name}}</h2>
         {% if type.preview is defined and type.preview %}
             {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
         {% endif %}
@@ -255,7 +225,7 @@
 
         {% for interface in type.interfaces|sort %}
             {% if loop.first %}
-                <h2>Implements</h2>
+                <h3>Implements</h3>
                 <ul>
             {% endif %}
             <li>
@@ -270,7 +240,7 @@
 
         {% for field in type.fields|sort %}
             {% if loop.first %}
-                <h2>Fields</h2>
+                <h3>Fields</h3>
             {% endif %}
             {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
         {% endfor %}
@@ -279,9 +249,9 @@
 
     {% if category == "interface" %}
       {% for type in interfaces if type.name == selection|sort %}
-        <h1>{{type.name}}</h1>
+        <h2>{{type.name}}</h2>
         <p>{{type.description}}</p>
-        <h2>Implemented by</h2>
+        <h3>Implemented by</h3>
         <ul>
         {% for object in objects if object.implementsInterface(type) %}
             <li>
@@ -293,7 +263,7 @@
         </ul>
         {% for field in type.fields|sort %}
             {% if loop.first %}
-                <h2>Fields</h2>
+                <h3>Fields</h3>
             {% endif %}
             {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
         {% endfor %}
@@ -302,9 +272,9 @@
 
     {% if category == "enum" %}
       {% for enum in enums if enum.name == selection|sort %}
-        <h1>{{enum.name}}</h1>
+        <h2>{{enum.name}}</h2>
         <p>{{enum.description}}</p>
-        <h2>Values</h2>
+        <h3>Values</h3>
         {% for value in enum.values %}
             <div>
              <h4>{{ value.name }}</h4>
@@ -316,9 +286,9 @@
 
     {% if category == "union" %}
       {% for union in unions if union.name == selection|sort %}
-        <h1>{{union.name}}</h1>
+        <h2>{{union.name}}</h2>
         <p>{{union.description}}</p>
-        <h2>Possible Types</h2>
+        <h3>Possible Types</h3>
         {% for type in union.getTypes() %}
              <h4>{{ type.name }}</h4>
         {% endfor %}
@@ -327,9 +297,9 @@
 
     {% if category == "input_object" %}
       {% for input_object in input_objects if input_object.name == selection|sort %}
-        <h1>{{input_object.name}}</h1>
+        <h2>{{input_object.name}}</h2>
         <p>{{input_object.description}}</p>
-        <h2>Input Fields</h2>
+        <h3>Input Fields</h3>
         {% for field in input_object.fields|sort %}
             {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
         {% endfor %}
@@ -338,7 +308,7 @@
 
     {% if category == "scalar" %}
       {% for scalar in scalars if scalar.name == selection|sort %}
-        <h1>{{scalar.name}}</h1>
+        <h2>{{scalar.name}}</h2>
         <p>{{scalar.description}}</p>
       {% endfor %}
     {% endif %}

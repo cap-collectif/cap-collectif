@@ -200,6 +200,15 @@
         background-color: {{ bgPrimary | raw }};
     }
 
+    .developers__container .list-group > .list-group-item:hover {
+        color: {{ linkHover | raw }};
+    }
+
+    .developers__container .nav-tabs li.active a,
+    .developers__container .nav-tabs li.active a:hover {
+        border-bottom: 1px solid {{ link | raw }};
+    }
+
     .counters-nav li .value {
         color: {{ btnPrimary | raw }};
     }
