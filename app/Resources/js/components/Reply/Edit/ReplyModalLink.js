@@ -69,12 +69,14 @@ export class ReplyModalLink extends React.Component<Props, State> {
           </div>
           <div>
             <Button
-              className="mr-10 reply__update-btn"
+              className="mr-10 reply__update-btn mt-5"
               bsStyle="warning"
               onClick={() => this.showModal('edit')}>
               <FormattedMessage id="glodal.edit" />
             </Button>
-            <Button bsStyle="danger reply__delete-btn" onClick={() => this.showModal('delete')}>
+            <Button
+              bsStyle="danger reply__delete-btn mt-5"
+              onClick={() => this.showModal('delete')}>
               <FormattedMessage id="glodal.delete" />
             </Button>
           </div>

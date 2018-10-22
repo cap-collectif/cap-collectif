@@ -258,7 +258,8 @@ class ReactBootstrapInput extends React.Component<Props> {
               disabled={props.disabled}
               value={choice.label}
               iconSize={20}
-              pointColor={this.getColor(choice.color)}>
+              pointColor={this.getColor(choice.color)}
+              checked={value === choice.label}>
               {choice.label}
             </RadioButton>
           ))}

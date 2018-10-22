@@ -143,18 +143,6 @@ export class ReplyForm extends React.Component<Props> {
     );
   }
 
-<<<<<<< HEAD
-=======
-  submitIsDisabled() {
-    const { formErrors } = this.props;
-    if (formErrors && formErrors.responses) {
-      return formErrors.responses.filter(response => response !== undefined).length !== 0;
-    }
-
-    return false;
-  }
-
->>>>>>> [5673-DRAFT] WIP
   render() {
     const {
       intl,
@@ -225,7 +213,7 @@ export class ReplyForm extends React.Component<Props> {
                     type="submit"
                     id={`${form}-submit-create-reply`}
                     bsStyle="info"
-                    disabled={pristine || invalid || submitting || disabled || submitDisabled}
+                    disabled={pristine || invalid || submitting || disabled}
                     label={submitting ? 'global.loading' : 'global.validate'}
                     onSubmit={() => {
                       dispatch(changeRedux(form, 'draft', false));
