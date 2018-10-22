@@ -2,7 +2,7 @@
 
 exports[`<ProposalUserVoteItem /> should render correctly without arrow & with active tab 1`] = `
 <div
-  className="step-tabs"
+  className="step-tabs hidden-print"
 >
   <div
     className="step-tabs__bar container"

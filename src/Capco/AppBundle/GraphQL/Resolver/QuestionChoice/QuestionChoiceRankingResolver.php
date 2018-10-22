@@ -46,6 +46,13 @@ class QuestionChoiceRankingResolver implements ResolverInterface
             }
         }
 
+        usort($rankingArray, function ($a, $b) {
+            return (
+                $a['position'] <=>
+                $b['position']
+            );
+        });
+
         return $rankingArray;
     }
 }

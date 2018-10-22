@@ -24,6 +24,7 @@ type State = { editIndex: ?number, showModal: ?number };
 
 export class ProposalAdminProgressSteps extends React.Component<Props, State> {
   static defaultProps: DefaultProps;
+
   state = {
     editIndex: null,
     showModal: null,
@@ -61,8 +62,8 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
                 deleteElement={() => {
                   fields.remove(index);
                 }}
-                deleteModalTitle={'proposal.admin.realisationStep.modal.delete'}
-                deleteModalContent={'proposal.admin.realisationStep.modal.content'}
+                deleteModalTitle="proposal.admin.realisationStep.modal.delete"
+                deleteModalContent="proposal.admin.realisationStep.modal.content"
               />
               <Row>
                 <Col xs={8}>

@@ -36,7 +36,7 @@
 {% import _self as render %}
 
 <div class="row">
-    <div class="col-xs-12 col-sm-5">
+    <div class="col-xs-12 col-sm-5 hidden-print">
         {% if project.video is not null %}
             <a href="{{ project.video }}" class="play fancybox" data-type="iframe">
         {% endif %}
@@ -62,7 +62,7 @@
         <h1 class="project__header__title  h1">{{ project.title }}</h1>
 
         {% if project.Author is not null %}
-            <div class="media" style="display: flex; align-items: center">
+            <div class="media hidden-print d-flex" style="align-items: center">
                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with {'user': project.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                 <div class="media-body">
                     <p class="media--aligned  excerpt">
@@ -99,7 +99,7 @@
         {% set contributorsCount = project.participantsCount %}
 
         {% if project.hasParticipativeStep %}
-            <ul class="nav nav-pills counters-nav counters-nav--project">
+            <ul class="nav nav-pills counters-nav counters-nav--project hidden-print">
                 <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
                     <i class="cap cap-file-edit-1"></i>
                     <span class="value">{{ contributionsCount }}</span>
@@ -135,7 +135,7 @@
         {% endif %}
 
 
-        <div class="share-button-wrapper">
+        <div class="share-button-wrapper hidden-print">
 
             {{ react_render_component('ShareButtonDropdownApp', {
                 'props': {

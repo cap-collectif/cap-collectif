@@ -1,6 +1,9 @@
 sonata_admin:
   title: Cap Collectif
   title_logo: favicon-64x64.png
+  assets:
+    remove_javascripts:
+      - bundles/sonatacore/vendor/jquery/dist/jquery.min.js
   options:
     pager_links: 5 # pager max links to display
   templates:

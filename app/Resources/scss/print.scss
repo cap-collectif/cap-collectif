@@ -5,14 +5,22 @@
 @import "bower_components/compass-mixins/lib/compass";
 @import "app/Resources/fonts/_fonts.scss";
 
+.hidden-print {
+    display: none;
+}
+
 a[href]:after {
     content: none;
 }
 
 body {
     font-family: "openSans", sans-serif;
-    font-size: 13.5pt;
+    font-size: 12pt;
     margin: 10%
+}
+
+.section--alt {
+    background-color: transparent;
 }
 
 #main-navbar, .btn, #cookieChoiceInfo, footer, .comments__section, .share-button-dropdown, svg, .leaflet-container, .proposal-vote__widget {
@@ -38,9 +46,20 @@ span.avatar {
 }
 
 h1, h2, h3, h4 {
-    font-family: "montserrat", sans-serif;
+    font-family: "openSans", sans-serif;
     font-weight: normal;
 }
+
+h1 {
+    font-weight: 600;
+    font-size: 19pt;
+}
+
+h2 {
+    text-align: center;
+    font-size: 15pt;
+}
+
 
 p, a, a:active, a:hover, h2, .h2, h3, h4, .excerpt {
     color: #000 !important;
@@ -113,4 +132,24 @@ p img {
 
 .block h2:first-child {
     margin-top: 5pt;
+}
+
+/* ===============================================================
+    Questionnaire
+================================================================*/
+
+.project__header__title {
+    text-align: center;
+}
+
+.project__step-dates {
+    text-align: center;
+
+    .d-ib {
+        display: inline-block;
+    }
+
+    .mr-15 {
+        margin-right: 15px;
+    }
 }

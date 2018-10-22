@@ -82,7 +82,6 @@ exports[`<QuestionAdmin /> render correctly a checkbox question 1`] = `
         bsStyle="danger"
         className="btn-outline-danger"
         disabled={false}
-        id="js-btn-delete-1"
         onClick={[Function]}
       >
         <i
@@ -181,7 +180,6 @@ exports[`<QuestionAdmin /> render correctly a medias question 1`] = `
         bsStyle="danger"
         className="btn-outline-danger"
         disabled={false}
-        id="js-btn-delete-1"
         onClick={[Function]}
       >
         <i
@@ -280,7 +278,6 @@ exports[`<QuestionAdmin /> render correctly a section 1`] = `
         bsStyle="danger"
         className="btn-outline-danger"
         disabled={false}
-        id="js-btn-delete-1"
         onClick={[Function]}
       >
         <i
@@ -379,7 +376,6 @@ exports[`<QuestionAdmin /> render correctly a text question 1`] = `
         bsStyle="danger"
         className="btn-outline-danger"
         disabled={false}
-        id="js-btn-delete-1"
         onClick={[Function]}
       >
         <i

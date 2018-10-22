@@ -82,4 +82,8 @@ export const CardContainer = styled.div`
       }
     }
   }
+
+  @media print {
+    border: none;
+  }
 `;

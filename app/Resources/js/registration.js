@@ -50,15 +50,15 @@ import ParisUserNotValidApp from './startup/ParisUserNotValidApp';
 import AccountProfileFollowingsApp from './startup/AccountProfileFollowingsApp';
 import UserAdminCreateButtonApp from './startup/UserAdminCreateButtonApp';
 import EditProfileApp from './startup/EditProfileApp';
-import CookieApp from '../js/startup/CookieApp';
-import UserAdminPageApp from '../js/startup/UserAdminPageApp';
-import ProjectRestrictedAccessAlertApp from '../js/startup/ProjectRestrictedAccessAlertApp';
-import ProjectRestrictedAccessApp from '../js/startup/ProjectRestrictedAccessApp';
-import QuestionnaireCreateButtonApp from '../js/startup/QuestionnaireCreateButtonApp';
+import CookieApp from './startup/CookieApp';
+import UserAdminPageApp from './startup/UserAdminPageApp';
+import ProjectRestrictedAccessAlertApp from './startup/ProjectRestrictedAccessAlertApp';
+import ProjectRestrictedAccessApp from './startup/ProjectRestrictedAccessApp';
+import QuestionnaireCreateButtonApp from './startup/QuestionnaireCreateButtonApp';
 import ArgumentListApp from './startup/ArgumentListApp';
 import VoteListApp from './startup/VoteListApp';
 
-import appStore from '../js/stores/AppStore';
+import appStore from './stores/AppStore';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
