@@ -10,8 +10,9 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
     <div
       key="0"
     >
-      <ProposalPrivateField
+      <PrivateBox
         divClassName=""
+        message="admin.fields.question.private"
         show={false}
       >
         <p>
@@ -65,13 +66,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             }
           }
         />
-      </ProposalPrivateField>
+      </PrivateBox>
     </div>
     <div
       key="1"
     >
-      <ProposalPrivateField
+      <PrivateBox
         divClassName=""
+        message="admin.fields.question.private"
         show={false}
       >
         <p>
@@ -131,13 +133,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             }
           }
         />
-      </ProposalPrivateField>
+      </PrivateBox>
     </div>
     <div
       key="2"
     >
-      <ProposalPrivateField
+      <PrivateBox
         divClassName=""
+        message="admin.fields.question.private"
         show={false}
       >
         <p>
@@ -191,13 +194,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             }
           }
         />
-      </ProposalPrivateField>
+      </PrivateBox>
     </div>
     <div
       key="3"
     >
-      <ProposalPrivateField
+      <PrivateBox
         divClassName=""
+        message="admin.fields.question.private"
         show={false}
       >
         <p>
@@ -251,13 +255,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             }
           }
         />
-      </ProposalPrivateField>
+      </PrivateBox>
     </div>
     <div
       key="4"
     >
-      <ProposalPrivateField
+      <PrivateBox
         divClassName=""
+        message="admin.fields.question.private"
         show={false}
       >
         <p>
@@ -299,13 +304,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             }
           }
         />
-      </ProposalPrivateField>
+      </PrivateBox>
     </div>
     <div
       key="5"
     >
-      <ProposalPrivateField
+      <PrivateBox
         divClassName=""
+        message="admin.fields.question.private"
         show={false}
       >
         <p>
@@ -348,13 +354,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             values={Object {}}
           />
         </p>
-      </ProposalPrivateField>
+      </PrivateBox>
     </div>
     <div
       key="6"
     >
-      <ProposalPrivateField
+      <PrivateBox
         divClassName=""
+        message="admin.fields.question.private"
         show={false}
       >
         <p>
@@ -397,13 +404,14 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             values={Object {}}
           />
         </p>
-      </ProposalPrivateField>
+      </PrivateBox>
     </div>
     <div
       key="7"
     >
-      <ProposalPrivateField
+      <PrivateBox
         divClassName=""
+        message="admin.fields.question.private"
         show={false}
       >
         <p>
@@ -446,7 +454,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
             values={Object {}}
           />
         </p>
-      </ProposalPrivateField>
+      </PrivateBox>
     </div>
   </div>
 </div>
@@ -462,8 +470,9 @@ exports[`<QuestionnaireAdminResults /> renders correctly with private question &
     <div
       key="0"
     >
-      <ProposalPrivateField
+      <PrivateBox
         divClassName=""
+        message="admin.fields.question.private"
         show={true}
       >
         <p>
@@ -483,7 +492,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly with private question &
             <br />
           </span>
         </p>
-      </ProposalPrivateField>
+      </PrivateBox>
     </div>
   </div>
 </div>

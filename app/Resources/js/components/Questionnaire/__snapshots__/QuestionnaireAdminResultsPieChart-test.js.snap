@@ -9,6 +9,11 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly with other resp
   >
     <div
       className="pie-chart__container mb-20"
+      style={
+        Object {
+          "height": "225px",
+        }
+      }
     >
       <ResponsiveContainer
         debounce={0}
@@ -65,8 +70,28 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly with other resp
                   "value": 7,
                 },
                 Object {
-                  "name": "Non",
+                  "name": "choix1",
+                  "value": 5,
+                },
+                Object {
+                  "name": "choix2",
                   "value": 25,
+                },
+                Object {
+                  "name": "choix3",
+                  "value": 2,
+                },
+                Object {
+                  "name": "choix4",
+                  "value": 250,
+                },
+                Object {
+                  "name": "choix5",
+                  "value": 76,
+                },
+                Object {
+                  "name": "choix6",
+                  "value": 77,
                 },
                 Object {
                   "name": "global.question.types.other",
@@ -102,14 +127,39 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly with other resp
               key="1"
             />
             <Cell
-              aria-labelledby="Non"
+              aria-labelledby="choix1"
               fill="#f90"
               key="2"
             />
             <Cell
-              aria-labelledby="global.question.types.other"
+              aria-labelledby="choix2"
               fill="#109618"
               key="3"
+            />
+            <Cell
+              aria-labelledby="choix3"
+              fill="#909"
+              key="4"
+            />
+            <Cell
+              aria-labelledby="choix4"
+              fill="#0099c6"
+              key="5"
+            />
+            <Cell
+              aria-labelledby="choix5"
+              fill="#d47"
+              key="6"
+            />
+            <Cell
+              aria-labelledby="choix6"
+              fill="#6a0"
+              key="7"
+            />
+            <Cell
+              aria-labelledby="global.question.types.other"
+              fill="#b82e2e"
+              key="8"
             />
              
           </Pie>
@@ -129,6 +179,11 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly without other r
   >
     <div
       className="pie-chart__container mb-20"
+      style={
+        Object {
+          "height": "200px",
+        }
+      }
     >
       <ResponsiveContainer
         debounce={0}

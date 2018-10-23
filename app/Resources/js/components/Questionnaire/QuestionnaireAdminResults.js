@@ -6,8 +6,8 @@ import QuestionnaireAdminResultsBarChart from './QuestionnaireAdminResultsBarCha
 import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking';
 import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
 import type { QuestionnaireAdminResults_questionnaire } from './__generated__/QuestionnaireAdminResults_questionnaire.graphql';
-import ProposalPrivateField from '../Proposal/ProposalPrivateField';
 import withColors from '../Utils/withColors';
+import PrivateBox from '../Ui/PrivateBox';
 
 type Props = {
   questionnaire: QuestionnaireAdminResults_questionnaire,
@@ -65,7 +65,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
           {questionnaire.questions && questions.length > 0 ? (
             questions.map((question, key) => (
               <div key={key}>
-                <ProposalPrivateField show={question.private}>
+                <PrivateBox show={question.private} message="admin.fields.question.private">
                   <p>
                     <b>
                       {key + 1}. {question.title}
@@ -101,7 +101,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
                     </span>
                   </p>
                   {this.getFormattedResults(question)}
-                </ProposalPrivateField>
+                </PrivateBox>
               </div>
             ))
           ) : (

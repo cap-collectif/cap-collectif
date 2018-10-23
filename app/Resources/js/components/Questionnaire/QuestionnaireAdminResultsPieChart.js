@@ -33,6 +33,20 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
     window.removeListener('resize', this.updateWindowsWidth, false);
   }
 
+  getHeight = (choicesNumber: number) => {
+    const { windowWidth } = this.state;
+
+    if (choicesNumber && choicesNumber > 8) {
+      return `${choicesNumber * 25}px`;
+    }
+
+    if (windowWidth && windowWidth < 992) {
+      return '300px';
+    }
+
+    return '200px';
+  };
+
   updateWindowsWidth = () => {
     this.setState({
       windowWidth: window.innerWidth,
@@ -69,7 +83,9 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
     return (
       <div className="row">
         <div className="col-xs-12">
-          <div className="pie-chart__container mb-20">
+          <div
+            className="pie-chart__container mb-20"
+            style={{ height: this.getHeight(data.length) }}>
             <ResponsiveContainer>
               <PieChart>
                 {windowWidth && windowWidth < 992 ? (

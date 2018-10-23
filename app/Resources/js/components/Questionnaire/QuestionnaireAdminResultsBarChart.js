@@ -19,8 +19,8 @@ export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
     const data = cleanMultipleChoiceQuestion(multipleChoiceQuestion, intl);
 
     return (
-      <ResponsiveContainer height={320}>
-        <BarChart data={data} layout="vertical">
+      <ResponsiveContainer height={340}>
+        <BarChart data={data} layout="vertical" margin={{ top: 15, right: 5, bottom: 15, left: 5 }}>
           <XAxis type="number" allowDecimals={false} tickLine={false} />
           <YAxis dataKey="name" type="category" tickLine={false} width={120} />{' '}
           <Bar dataKey="value" maxBarSize={30} fill={backgroundColor}>

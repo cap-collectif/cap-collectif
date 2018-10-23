@@ -4,12 +4,12 @@ import { type IntlShape, FormattedMessage } from 'react-intl';
 import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
-import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
 import { checkOnlyNumbers } from '../services/Validator';
 
 import component from '../components/Form/Field';
+import PrivateBox from '../components/Ui/PrivateBox';
 
 type Question = {|
   +id: string,
@@ -576,7 +576,7 @@ export const renderResponses = ({
           }
           case 'medias': {
             return (
-              <ProposalPrivateField key={field.id} show={field.private}>
+              <PrivateBox key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
                   id={`${form}-${member}`}
@@ -588,12 +588,12 @@ export const renderResponses = ({
                   label={label}
                   disabled={disabled}
                 />
-              </ProposalPrivateField>
+              </PrivateBox>
             );
           }
           case 'select': {
             return (
-              <ProposalPrivateField key={field.id} show={field.private}>
+              <PrivateBox key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
                   id={`${form}-${member}`}
@@ -614,7 +614,7 @@ export const renderResponses = ({
                     </option>
                   ))}
                 </Field>
-              </ProposalPrivateField>
+              </PrivateBox>
             );
           }
           default: {
@@ -634,7 +634,7 @@ export const renderResponses = ({
 
               if (inputType === 'radio') {
                 return (
-                  <ProposalPrivateField key={field.id} show={field.private}>
+                  <PrivateBox key={field.id} show={field.private}>
                     <div key={`${member}-container`}>
                       <MultipleChoiceRadio
                         id={`${form}-${member}`}
@@ -649,12 +649,12 @@ export const renderResponses = ({
                         disabled={disabled}
                       />
                     </div>
-                  </ProposalPrivateField>
+                  </PrivateBox>
                 );
               }
             }
             return (
-              <ProposalPrivateField key={field.id} show={field.private}>
+              <PrivateBox key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
                   id={`${form}-${member}`}
@@ -668,7 +668,7 @@ export const renderResponses = ({
                   label={label}
                   disabled={disabled}
                 />
-              </ProposalPrivateField>
+              </PrivateBox>
             );
           }
         }

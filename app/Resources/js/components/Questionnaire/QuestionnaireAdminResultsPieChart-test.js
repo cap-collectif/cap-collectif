@@ -15,7 +15,12 @@ describe('<QuestionnaireAdminResultsPieChart />', () => {
         { title: "C'est pas faux", responses: { totalCount: 97 } },
         { title: "C'est vrai", responses: { totalCount: 0 } },
         { title: 'Oui', responses: { totalCount: 7 } },
-        { title: 'Non', responses: { totalCount: 25 } },
+        { title: 'choix1', responses: { totalCount: 5 } },
+        { title: 'choix2', responses: { totalCount: 25 } },
+        { title: 'choix3', responses: { totalCount: 2 } },
+        { title: 'choix4', responses: { totalCount: 250 } },
+        { title: 'choix5', responses: { totalCount: 76 } },
+        { title: 'choix6', responses: { totalCount: 77 } },
       ],
     },
   };
