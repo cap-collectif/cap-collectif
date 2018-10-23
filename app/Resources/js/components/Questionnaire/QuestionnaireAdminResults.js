@@ -24,7 +24,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
 
     if (question.__typename !== 'MultipleChoiceQuestion') {
       return (
-        <p>
+        <p className="mb-25">
           <FormattedHTMLMessage id="results-not-available" />
         </p>
       );
@@ -61,7 +61,7 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
 
     return (
       <div className="box box-primary container-fluid">
-        <div className="box-content mt-15">
+        <div className="box-content mt-25">
           {questionnaire.questions && questions.length > 0 ? (
             questions.map((question, key) => (
               <div key={key}>
@@ -80,6 +80,18 @@ export class QuestionnaireAdminResults extends React.Component<Props> {
                       ) : (
                         <FormattedMessage id="no-answer" />
                       )}
+                      {question.participants &&
+                        question.responses &&
+                        question.responses.totalCount !== 0 && (
+                          <React.Fragment>
+                            {' '}
+                            /{' '}
+                            <FormattedMessage
+                              id="count-answers"
+                              values={{ num: question.responses.totalCount }}
+                            />
+                          </React.Fragment>
+                        )}
                       <br />
                       {question.required && (
                         <b>
@@ -116,6 +128,9 @@ export default createFragmentContainer(
         required
         private
         participants {
+          totalCount
+        }
+        responses {
           totalCount
         }
         ...QuestionnaireAdminResultsBarChart_multipleChoiceQuestion

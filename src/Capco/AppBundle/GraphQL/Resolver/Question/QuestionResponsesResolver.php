@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class QuestionParticipantsResolver implements ResolverInterface
+class QuestionResponsesResolver implements ResolverInterface
 {
     private $responseRepository;
 
@@ -19,7 +19,7 @@ class QuestionParticipantsResolver implements ResolverInterface
 
     public function __invoke(AbstractQuestion $question, Arg $args): Connection
     {
-        $totalCount = $this->responseRepository->countParticipantsByQuestion($question);
+        $totalCount = $this->responseRepository->countByQuestion($question);
         $paginator = new Paginator(function () {
             return [];
         });

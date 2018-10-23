@@ -5,7 +5,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
   className="box box-primary container-fluid"
 >
   <div
-    className="box-content mt-15"
+    className="box-content mt-25"
   >
     <div
       key="0"
@@ -32,6 +32,17 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
                 }
               }
             />
+             
+            /
+             
+            <FormattedMessage
+              id="count-answers"
+              values={
+                Object {
+                  "num": 14,
+                }
+              }
+            />
             <br />
           </span>
         </p>
@@ -46,6 +57,9 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               },
               "private": false,
               "required": false,
+              "responses": Object {
+                "totalCount": 14,
+              },
               "title": "question type select",
               "type": "select",
             }
@@ -78,6 +92,17 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
                 }
               }
             />
+             
+            /
+             
+            <FormattedMessage
+              id="count-answers"
+              values={
+                Object {
+                  "num": 98,
+                }
+              }
+            />
             <br />
             <b>
               <FormattedMessage
@@ -98,6 +123,9 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               },
               "private": false,
               "required": true,
+              "responses": Object {
+                "totalCount": 98,
+              },
               "title": "question type radio",
               "type": "radio",
             }
@@ -130,6 +158,17 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
                 }
               }
             />
+             
+            /
+             
+            <FormattedMessage
+              id="count-answers"
+              values={
+                Object {
+                  "num": 48,
+                }
+              }
+            />
             <br />
           </span>
         </p>
@@ -144,6 +183,9 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               },
               "private": false,
               "required": false,
+              "responses": Object {
+                "totalCount": 48,
+              },
               "title": "question type checkbox",
               "type": "checkbox",
             }
@@ -176,6 +218,17 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
                 }
               }
             />
+             
+            /
+             
+            <FormattedMessage
+              id="count-answers"
+              values={
+                Object {
+                  "num": 43,
+                }
+              }
+            />
             <br />
           </span>
         </p>
@@ -190,6 +243,9 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               },
               "private": false,
               "required": false,
+              "responses": Object {
+                "totalCount": 43,
+              },
               "title": "question type button",
               "type": "button",
             }
@@ -235,6 +291,9 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
               },
               "private": false,
               "required": false,
+              "responses": Object {
+                "totalCount": 0,
+              },
               "title": "question type ranking",
               "type": "ranking",
             }
@@ -267,10 +326,23 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
                 }
               }
             />
+             
+            /
+             
+            <FormattedMessage
+              id="count-answers"
+              values={
+                Object {
+                  "num": 4,
+                }
+              }
+            />
             <br />
           </span>
         </p>
-        <p>
+        <p
+          className="mb-25"
+        >
           <FormattedHTMLMessage
             id="results-not-available"
             values={Object {}}
@@ -303,10 +375,23 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
                 }
               }
             />
+             
+            /
+             
+            <FormattedMessage
+              id="count-answers"
+              values={
+                Object {
+                  "num": 89,
+                }
+              }
+            />
             <br />
           </span>
         </p>
-        <p>
+        <p
+          className="mb-25"
+        >
           <FormattedHTMLMessage
             id="results-not-available"
             values={Object {}}
@@ -339,10 +424,23 @@ exports[`<QuestionnaireAdminResults /> renders correctly all type of questions 1
                 }
               }
             />
+             
+            /
+             
+            <FormattedMessage
+              id="count-answers"
+              values={
+                Object {
+                  "num": 9,
+                }
+              }
+            />
             <br />
           </span>
         </p>
-        <p>
+        <p
+          className="mb-25"
+        >
           <FormattedHTMLMessage
             id="results-not-available"
             values={Object {}}
@@ -359,7 +457,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly with private question &
   className="box box-primary container-fluid"
 >
   <div
-    className="box-content mt-15"
+    className="box-content mt-25"
   >
     <div
       key="0"
@@ -396,7 +494,7 @@ exports[`<QuestionnaireAdminResults /> renders correctly without questions 1`] =
   className="box box-primary container-fluid"
 >
   <div
-    className="box-content mt-15"
+    className="box-content mt-25"
   >
     <div>
       <FormattedMessage

@@ -34,6 +34,17 @@ class AbstractResponseRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function countParticipantsByQuestion(AbstractQuestion $question): ?int
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('COUNT(DISTINCT reply.author) as responseCount')
+            ->leftJoin('r.question', 'question')
+            ->leftJoin('r.reply', 'reply')
+            ->andWhere('question.id = :question')
+            ->setParameter('question', $question);
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function getByProposal(Proposal $proposal, bool $showPrivate = false)
     {
         $qb = $this->createQueryBuilder('r')
