@@ -144,7 +144,7 @@ class ProposalSearch extends Search
                 $sortOrder = 'asc';
                 break;
             default:
-                throw new \RuntimeException('Unknow order: ' . $order);
+                throw new \RuntimeException('Unknown order: ' . $order);
                 break;
         }
 
@@ -168,10 +168,8 @@ class ProposalSearch extends Search
             if (isset($providedFilters['statuses'])) {
                 $filters['selections.status.id'] = $providedFilters['statuses'];
             }
-        } else {
-            if (isset($providedFilters['statuses'])) {
-                $filters['status.id'] = $providedFilters['statuses'];
-            }
+        } elseif (isset($providedFilters['statuses'])) {
+            $filters['status.id'] = $providedFilters['statuses'];
         }
 
         if (isset($providedFilters['proposalForm'])) {

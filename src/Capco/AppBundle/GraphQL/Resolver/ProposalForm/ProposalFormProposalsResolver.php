@@ -55,8 +55,8 @@ class ProposalFormProposalsResolver implements ResolverInterface
          * everything is shown, because the admin should have
          * disable public export anyway.
          */
-        if ($form->getStep()->isPrivate() && !$isExporting) {
-            // If viewer is not authentiated we return an empty connection
+        if (!$isExporting && $form->getStep()->isPrivate()) {
+            // If viewer is not authenticated we return an empty connection
             if (!$viewer instanceof User) {
                 return $emptyConnection;
             }
@@ -67,16 +67,12 @@ class ProposalFormProposalsResolver implements ResolverInterface
                     return $emptyConnection;
                 }
                 $filters['author'] = $args->offsetGet('author');
-            } else {
-                if (!$viewer->isAdmin()) {
-                    // When the step is private, only an author or an admin can see proposals
-                    $filters['author'] = $viewer->getId();
-                }
+            } elseif (!$viewer->isAdmin()) {
+                // When the step is private, only an author or an admin can see proposals
+                $filters['author'] = $viewer->getId();
             }
-        } else {
-            if ($args->offsetExists('author')) {
-                $filters['author'] = $args->offsetGet('author');
-            }
+        } elseif ($args->offsetExists('author')) {
+            $filters['author'] = $args->offsetGet('author');
         }
         $paginator = new Paginator(function (?int $offset, ?int $limit) use (
             $form,
@@ -117,14 +113,15 @@ class ProposalFormProposalsResolver implements ResolverInterface
                             ? $this->proposalRepo->countProposalsByFormAndEvaluer($form, $viewer)
                             : $totalCount;
 
-                    return $this->proposalRepo->getProposalsByFormAndEvaluer(
-                        $form,
-                        $viewer,
-                        $offset,
-                        $limit,
-                        $field,
-                        $direction
-                    )
+                    return $this->proposalRepo
+                        ->getProposalsByFormAndEvaluer(
+                            $form,
+                            $viewer,
+                            $offset,
+                            $limit,
+                            $field,
+                            $direction
+                        )
                         ->getIterator()
                         ->getArrayCopy();
                 }

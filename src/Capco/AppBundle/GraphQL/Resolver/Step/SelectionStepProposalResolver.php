@@ -1,19 +1,17 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Utils\Text;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Search\ProposalSearch;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
+use Capco\AppBundle\Search\ProposalSearch;
+use Capco\AppBundle\Utils\Text;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class SelectionStepProposalResolver implements ResolverInterface
 {

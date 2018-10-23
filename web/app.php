@@ -24,7 +24,7 @@ Request::setTrustedProxies(
         '10.10.200.0/16',
         '127.0.0.1',
     ],
-    Request::HEADER_FORWARDED
+    Request::HEADER_X_FORWARDED_ALL
 );
 
 $kernel = new AppKernel('prod', false);

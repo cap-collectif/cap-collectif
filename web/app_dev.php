@@ -10,7 +10,7 @@ $loader = require __DIR__ . '/../app/autoload.php';
 Debug::enable();
 Request::setTrustedProxies(
     ['172.17.0.0/16', '10.10.200.0/16', '127.0.0.1'],
-    Request::HEADER_FORWARDED
+    Request::HEADER_X_FORWARDED_ALL
 );
 
 $request = Request::createFromGlobals();
