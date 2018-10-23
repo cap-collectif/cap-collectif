@@ -44,6 +44,7 @@ class GraphQLController extends BaseController
         if ($request->headers->get('accept') === self::PREVIEW_HEADER) {
             $schemaName = 'preview';
         }
+
         return $this->createResponse($request, $schemaName, false);
     }
 
@@ -56,7 +57,7 @@ class GraphQLController extends BaseController
      *
      * @return JsonResponse|Response
      */
-    private function createResponse(Request $request, string $schemaName = null, bool $batched)
+    private function createResponse(Request $request, string $schemaName = null, bool $batched): Response
     {
         if ('OPTIONS' === $request->getMethod()) {
             $response = new JsonResponse([], 200);
@@ -70,6 +71,7 @@ class GraphQLController extends BaseController
         $this->addCORSHeadersIfNeeded($response, $request);
         return $response;
     }
+
     private function addCORSHeadersIfNeeded(Response $response, Request $request): void
     {
         if ($this->shouldHandleCORS && $request->headers->has('Origin')) {
@@ -102,6 +104,7 @@ class GraphQLController extends BaseController
         } else {
             $payload = $this->processNormalQuery($request, $schemaName);
         }
+
         return $payload;
     }
     /**
@@ -126,6 +129,7 @@ class GraphQLController extends BaseController
             }
             $payloads[] = $payload;
         }
+
         return $payloads;
     }
     /**
@@ -137,6 +141,7 @@ class GraphQLController extends BaseController
     private function processNormalQuery(Request $request, string $schemaName = null): array
     {
         $params = $this->requestParser->parse($request);
+
         return $this->requestExecutor->execute($schemaName, $params)->toArray();
     }
 }
