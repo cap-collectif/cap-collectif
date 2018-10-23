@@ -11,7 +11,7 @@ nelmio_cors:
     forced_allow_origin_value: ~
   paths:
     # Public endpoint
-    '^/graphql/':
+    '^/graphql':
       # Public means anyone can use it
       allow_origin: ['*']
       # Required header when we use file upload and form
