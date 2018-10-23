@@ -43,3 +43,7 @@ Event:
         type: 'String'
       country:
         type: 'String'
+      lat:
+        type: 'Float'
+      lng:
+        type: 'Float'
