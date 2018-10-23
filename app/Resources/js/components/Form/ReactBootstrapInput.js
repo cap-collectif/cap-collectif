@@ -81,7 +81,6 @@ type Props = {
   radioChecked?: boolean,
   checkedValue?: ?string,
   maxLength?: ?string,
-  input?: any,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {

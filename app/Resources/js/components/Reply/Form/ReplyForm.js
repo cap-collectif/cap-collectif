@@ -8,7 +8,6 @@ import {
   FieldArray,
   Field,
   SubmissionError,
-  getFormSyncErrors,
   change as changeRedux,
 } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
@@ -253,9 +252,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
   },
   user: state.user.user,
   form: props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`,
-  formErrors: props.reply
-    ? getFormSyncErrors(`Update${formName}-${props.reply.id}`)(state)
-    : getFormSyncErrors(`Create${formName}`)(state),
 });
 
 const form = reduxForm({
