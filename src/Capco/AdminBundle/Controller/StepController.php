@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Elastica\Query;
@@ -31,13 +32,20 @@ class StepController extends CRUDController
 
         $boolQuery = new BoolQuery();
         $boolQuery->addMust($titleQuery);
-        $boolQuery->addMust(new Term([
-          'proposalForm.id' => $project->getFirstStep()->getProposalForm()->getId(),
-        ]));
+        $boolQuery->addMust(
+            new Term([
+                'proposalForm.id' => $project
+                    ->getFirstStep()
+                    ->getProposalForm()
+                    ->getId(),
+            ])
+        );
 
         $query = new Query($boolQuery);
         $query->setSource(['id', 'title']);
-        $results = $this->get('capco.elasticsearch.index')->getType(Proposal::getElasticsearchTypeName())->search($query);
+        $results = $this->get(Indexer::class)
+            ->getType(Proposal::getElasticsearchTypeName())
+            ->search($query);
 
         $items = array_map(function ($result) {
             return ['id' => $result->getData()['id'], 'label' => $result->getData()['title']];

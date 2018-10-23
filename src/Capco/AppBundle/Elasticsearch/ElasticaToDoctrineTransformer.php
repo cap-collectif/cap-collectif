@@ -46,8 +46,11 @@ class ElasticaToDoctrineTransformer
 
     private $logger;
 
-    public function __construct(ManagerRegistry $registry, Indexer $indexer, LoggerInterface $logger)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        Indexer $indexer,
+        LoggerInterface $logger
+    ) {
         $this->registry = $registry;
         $this->indexer = $indexer;
         $this->logger = $logger;
@@ -70,13 +73,21 @@ class ElasticaToDoctrineTransformer
 
         foreach ($toFetchByType as $type => $toFetchIds) {
             $objectClass = $this->getObjectClassFromType($type);
-            $objects = array_merge($objects, $this->findByIdentifiers($toFetchIds, $this->options['hydrate'], $objectClass));
+            $objects = array_merge(
+                $objects,
+                $this->findByIdentifiers($toFetchIds, $this->options['hydrate'], $objectClass)
+            );
         }
 
         $objectsCnt = \count($objects);
         $elasticaObjectsCnt = \count($elasticaObjects);
         if ($objectsCnt < $elasticaObjectsCnt) {
-            $error = sprintf('Cannot find corresponding Doctrine objects (%d) for all Elastica results (%d). IDs: %s', $objectsCnt, $elasticaObjectsCnt, implode(', ', $ids));
+            $error = sprintf(
+                'Cannot find corresponding Doctrine objects (%d) for all Elastica results (%d). IDs: %s',
+                $objectsCnt,
+                $elasticaObjectsCnt,
+                implode(', ', $ids)
+            );
 
             if (!$this->options['ignore_missing']) {
                 throw new \RuntimeException($error);
@@ -90,17 +101,22 @@ class ElasticaToDoctrineTransformer
 
         // sort objects in the order of ids
         $idPos = array_flip($ids);
-        usort(
-            $objects,
-            function ($a, $b) use ($idPos, $identifier, $propertyAccessor) {
-                if ($this->options['hydrate']) {
-                    return $idPos[$a::getElasticsearchTypeName() . '#' . (string) $propertyAccessor->getValue($a, $identifier)]
-                        > $idPos[$b::getElasticsearchTypeName() . '#' . (string) $propertyAccessor->getValue($b, $identifier)];
-                }
-
-                return $idPos[$a[$identifier]] > $idPos[$b[$identifier]];
+        usort($objects, function ($a, $b) use ($idPos, $identifier, $propertyAccessor) {
+            if ($this->options['hydrate']) {
+                return $idPos[
+                    $a::getElasticsearchTypeName() .
+                        '#' .
+                        $propertyAccessor->getValue($a, $identifier)
+                ] >
+                    $idPos[
+                        $b::getElasticsearchTypeName() .
+                            '#' .
+                            $propertyAccessor->getValue($b, $identifier)
+                    ];
             }
-        );
+
+            return $idPos[$a[$identifier]] > $idPos[$b[$identifier]];
+        });
 
         return $objects;
     }
@@ -135,15 +151,21 @@ class ElasticaToDoctrineTransformer
      *
      * @param mixed $objectClass
      */
-    protected function findByIdentifiers(array $identifierValues, bool $hydrate, $objectClass): array
-    {
+    protected function findByIdentifiers(
+        array $identifierValues,
+        bool $hydrate,
+        $objectClass
+    ): array {
         if (empty($identifierValues)) {
             return [];
         }
         $hydrationMode = $hydrate ? Query::HYDRATE_OBJECT : Query::HYDRATE_ARRAY;
 
         $qb = $this->getEntityQueryBuilder($objectClass);
-        $qb->andWhere($qb->expr()->in(static::ENTITY_ALIAS . '.' . $this->getIdentifierField(), ':values'))
+        $qb
+            ->andWhere(
+                $qb->expr()->in(static::ENTITY_ALIAS . '.' . $this->getIdentifierField(), ':values')
+            )
             ->setParameter('values', $identifierValues);
 
         $query = $qb->getQuery();
@@ -178,7 +200,8 @@ class ElasticaToDoctrineTransformer
         $propertyAccessor = $this->propertyAccessor;
 
         return function ($a, $b) use ($idPos, $identifierPath, $propertyAccessor) {
-            return $idPos[(string) $propertyAccessor->getValue($a, $identifierPath)] > $idPos[(string) $propertyAccessor->getValue($b, $identifierPath)];
+            return $idPos[(string) $propertyAccessor->getValue($a, $identifierPath)] >
+                $idPos[(string) $propertyAccessor->getValue($b, $identifierPath)];
         };
     }
 
@@ -195,6 +218,8 @@ class ElasticaToDoctrineTransformer
             return $classes[$type];
         }
 
-        throw new \Exception(sprintf("Can't find the Doctrine class for Elastic document of type '%s'", $type));
+        throw new \Exception(
+            sprintf("Can't find the Doctrine class for Elastic document of type '%s'", $type)
+        );
     }
 }

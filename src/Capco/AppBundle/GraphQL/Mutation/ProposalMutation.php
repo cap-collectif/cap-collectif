@@ -2,7 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Toggle\Manager;
+use Elastica\Index;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Capco\UserBundle\Entity\User;
@@ -25,6 +27,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\Form\Form;
+use Capco\AppBundle\Helper\ResponsesFormatter;
 
 class ProposalMutation implements ContainerAwareInterface
 {
@@ -43,13 +46,13 @@ class ProposalMutation implements ContainerAwareInterface
 
         $values = $input->getRawArguments();
         $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
-        unset($values['proposalId']); // This only usefull to retrieve the proposal
+        unset($values['proposalId']); // This only useful to retrieve the proposal
 
         $form = $formFactory->create(ProposalNotationType::class, $proposal);
         $form->submit($values);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+            throw new UserError('Input not valid : ' . $form->getErrors(true, false));
         }
 
         $em->flush();
@@ -70,7 +73,7 @@ class ProposalMutation implements ContainerAwareInterface
         $form->submit($values);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+            throw new UserError('Input not valid : ' . $form->getErrors(true, false));
         }
 
         $em->flush();
@@ -103,13 +106,13 @@ class ProposalMutation implements ContainerAwareInterface
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $values['proposalId']));
         }
-        unset($values['proposalId']); // This only usefull to retrieve the proposal
+        unset($values['proposalId']); // This only useful to retrieve the proposal
 
         $form = $formFactory->create(ProposalProgressStepType::class, $proposal);
         $form->submit($values);
 
         if (!$form->isValid()) {
-            throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
+            throw new UserError('Input not valid : ' . $form->getErrors(true, false));
         }
 
         $em->flush();
@@ -135,7 +138,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em->flush();
 
         // Synchronously index
-        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
 
@@ -169,7 +172,7 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal = $this->getProposal($proposalId);
 
         // Synchronously index
-        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
 
@@ -193,7 +196,7 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal = $this->getProposal($proposalId);
 
         // Synchronously index
-        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
 
@@ -233,7 +236,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em->flush();
 
         // Synchronously index
-        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
 
@@ -243,11 +246,9 @@ class ProposalMutation implements ContainerAwareInterface
     public function changePublicationStatus(Argument $values, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        if ($user && $user->isAdmin()) {
+        if ($user && $user->isAdmin() && $em->getFilters()->isEnabled('softdeleted')) {
             // If user is an admin, we allow to retrieve deleted proposal
-            if ($em->getFilters()->isEnabled('softdeleted')) {
-                $em->getFilters()->disable('softdeleted');
-            }
+            $em->getFilters()->disable('softdeleted');
         }
         $proposal = $this->getProposal($values['proposalId']);
         if (!$proposal) {
@@ -287,7 +288,7 @@ class ProposalMutation implements ContainerAwareInterface
         $em->flush();
 
         // Synchronously index
-        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
 
@@ -312,7 +313,7 @@ class ProposalMutation implements ContainerAwareInterface
         if (!$proposalForm->canContribute($user) && !$user->isAdmin()) {
             throw new UserError('You can no longer contribute to this collect step.');
         }
-        unset($values['proposalFormId']); // This only usefull to retrieve the proposalForm
+        unset($values['proposalFormId']); // This only useful to retrieve the proposalForm
 
         $draft = false;
         if (isset($values['draft'])) {
@@ -334,7 +335,7 @@ class ProposalMutation implements ContainerAwareInterface
             ->addFollower($follower);
         if (
             $proposalForm->getStep() &&
-            $defaultStatus = $proposalForm->getStep()->getDefaultStatus()
+            ($defaultStatus = $proposalForm->getStep()->getDefaultStatus())
         ) {
             $proposal->setStatus($defaultStatus);
         }
@@ -358,14 +359,16 @@ class ProposalMutation implements ContainerAwareInterface
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
 
         // Synchronously index
-        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
 
-        $this->container->get('swarrot.publisher')->publish(
-            CapcoAppBundleMessagesTypes::PROPOSAL_CREATE,
-            new Message(json_encode(['proposalId' => $proposal->getId()]))
-        );
+        $this->container
+            ->get('swarrot.publisher')
+            ->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_CREATE,
+                new Message(json_encode(['proposalId' => $proposal->getId()]))
+            );
 
         return ['proposal' => $proposal];
     }
@@ -386,7 +389,7 @@ class ProposalMutation implements ContainerAwareInterface
             $this->logger->error($error);
             throw new UserError($error);
         }
-        unset($values['id']); // This only usefull to retrieve the proposal
+        unset($values['id']); // This only useful to retrieve the proposal
         $proposalForm = $proposal->getProposalForm();
 
         if ($user !== $proposal->getAuthor() && !$user->isAdmin()) {
@@ -444,13 +447,15 @@ class ProposalMutation implements ContainerAwareInterface
             $proposalQueue = CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE;
         }
 
-        $this->container->get('swarrot.publisher')->publish(
-            $proposalQueue,
-            new Message(json_encode(['proposalId' => $proposal->getId()]))
-        );
+        $this->container
+            ->get('swarrot.publisher')
+            ->publish(
+                $proposalQueue,
+                new Message(json_encode(['proposalId' => $proposal->getId()]))
+            );
 
         // Synchronously index draft proposals being publish
-        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
 
@@ -462,31 +467,31 @@ class ProposalMutation implements ContainerAwareInterface
         $toggleManager = $this->container->get(Manager::class);
 
         if (
-            (!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes()) &&
-            isset($values['theme'])
+            isset($values['theme']) &&
+            (!$toggleManager->isActive('themes') || !$proposalForm->isUsingThemes())
         ) {
             unset($values['theme']);
         }
 
-        if (!$proposalForm->isUsingCategories() && isset($values['category'])) {
+        if (isset($values['category']) && !$proposalForm->isUsingCategories()) {
             unset($values['category']);
         }
 
         if (
-            (!$toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict()) &&
-            isset($values['districts'])
+            isset($values['districts']) &&
+            (!$toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict())
         ) {
             unset($values['district']);
         }
 
-        if (!$proposalForm->getUsingAddress() && isset($values['address'])) {
+        if (isset($values['address']) && !$proposalForm->getUsingAddress()) {
             unset($values['address']);
         }
 
         if (isset($values['responses'])) {
-            $values['responses'] = $this->container->get(
-                'Capco\AppBundle\Helper\ResponsesFormatter'
-            )->format($values['responses']);
+            $values['responses'] = $this->container
+                ->get(ResponsesFormatter::class)
+                ->format($values['responses']);
         }
 
         return $values;

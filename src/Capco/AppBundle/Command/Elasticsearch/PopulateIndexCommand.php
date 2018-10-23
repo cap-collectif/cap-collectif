@@ -2,27 +2,34 @@
 
 namespace Capco\AppBundle\Command\Elasticsearch;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class PopulateIndexCommand extends ContainerAwareCommand
+class PopulateIndexCommand extends Command
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure()
+    protected $toggleManager;
+    protected $indexer;
+
+    public function __construct(Manager $toggleManager, Indexer $indexer)
+    {
+        $this->toggleManager = $toggleManager;
+        $this->indexer = $indexer;
+        parent::__construct();
+    }
+
+    protected function configure(): void
     {
         $this->setName('capco:es:populate')->setDescription(
             'Populate the current Elasticsearch Indexes.'
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $container = $this->getContainer();
-        if (!$container->get(Manager::class)->isActive('indexation')) {
+        if (!$this->toggleManager->isActive('indexation')) {
             $output->writeln(
                 '<error>Please enable "indexation" feature to run this command</error>'
             );
@@ -30,13 +37,11 @@ class PopulateIndexCommand extends ContainerAwareCommand
             return 1;
         }
 
-        $indexer = $container->get('capco.elasticsearch.indexer');
-
         $output->writeln(['Start indexing Elasticsearch.']);
 
         try {
-            $indexer->indexAll($output);
-            $indexer->finishBulk();
+            $this->indexer->indexAll($output);
+            $this->indexer->finishBulk();
         } catch (\RuntimeException $e) {
             $output->writeln('<error>' . $e->getMessage() . '</error>');
 

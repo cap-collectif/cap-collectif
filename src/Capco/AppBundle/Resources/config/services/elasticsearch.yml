@@ -5,42 +5,36 @@ services:
     public: false
 
   Capco\AppBundle\Elasticsearch\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/Elasticsearch/*'
-    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/Elasticsearch/{ElasticsearchHelper.php}'
+    resource: '%kernel.project_dir%/src/Capco/AppBundle/Elasticsearch/*'
+    exclude: '%kernel.project_dir%/src/Capco/AppBundle/Elasticsearch/{ElasticsearchHelper.php}'
 
-  capco.elasticsearch.client:
-    class: Elastica\Client
+  Elastica\Client:
     autowire: true
     public: true
     arguments:
       - connections:
           - { host: '%elasticsearch_host%', port: '9200' }
 
-  capco.elasticsearch.index_builder:
-    class: Capco\AppBundle\Elasticsearch\IndexBuilder
+  Capco\AppBundle\Elasticsearch\IndexBuilder:
     autowire: true
     public: true
 
-  capco.elasticsearch.indexer:
-    class: Capco\AppBundle\Elasticsearch\Indexer
+  Capco\AppBundle\Elasticsearch\Indexer:
     autowire: true
     public: true
 
-  capco.elasticsearch.index:
-    class: Elastica\Index
+  Elastica\Index:
     autowire: true
     public: true
-    factory: ['@capco.elasticsearch.index_builder', getLiveSearchIndex]
+    factory: ['@Capco\AppBundle\Elasticsearch\IndexBuilder', getLiveSearchIndex]
 
-  capco.elasticsearch.elastica_to_doctrine_transformer:
-    class: Capco\AppBundle\Elasticsearch\ElasticaToDoctrineTransformer
+  Capco\AppBundle\Elasticsearch\ElasticaToDoctrineTransformer:
     autowire: true
     public: true
     calls:
       - ['setPropertyAccessor', ['@property_accessor']]
 
-  capco.elasticsearch.listener:
-    class: Capco\AppBundle\Elasticsearch\DoctrineUpdateListener
+  Capco\AppBundle\Elasticsearch\DoctrineUpdateListener:
     autowire: true
     public: true
     tags:

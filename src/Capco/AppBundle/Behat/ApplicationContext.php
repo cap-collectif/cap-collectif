@@ -23,7 +23,9 @@ use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
+use Capco\AppBundle\Elasticsearch\IndexBuilder;
 use Capco\AppBundle\Toggle\Manager;
+use Elastica\Client;
 use Elastica\Snapshot;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
@@ -97,10 +99,10 @@ class ApplicationContext extends UserContext
             $job->mustRun();
         }
 
-        $this->snapshot = new Snapshot($this->getService('capco.elasticsearch.client'));
+        $this->snapshot = new Snapshot($this->getService(Client::class));
         $this->snapshot->registerRepository(REPOSITORY_NAME, 'fs', ['location' => 'var']);
 
-        $this->indexManager = $this->getService('capco.elasticsearch.index_builder');
+        $this->indexManager = $this->getService(IndexBuilder::class);
 
         try {
             $this->snapshot->deleteSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME);
@@ -151,7 +153,7 @@ class ApplicationContext extends UserContext
         }
 
         echo 'Restoring ElasticSearch snapshot.' . PHP_EOL;
-        $indexManager = $this->getService('capco.elasticsearch.index_builder');
+        $indexManager = $this->getService(IndexBuilder::class);
         $indexManager->getLiveSearchIndex()->close();
         $this->snapshot->restoreSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [], true);
         $indexManager->getLiveSearchIndex()->open();
@@ -285,7 +287,7 @@ class ApplicationContext extends UserContext
     {
         $suiteName = $suiteScope->getSuite()->getName();
         $resultCode = $suiteScope->getTestResult()->getResultCode();
-        if ($notifier = NotifierFactory::create()) {
+        if (($notifier = NotifierFactory::create())) {
             $notification = new Notification();
             if (TestResult::PASSED === $resultCode) {
                 $notification
@@ -892,7 +894,7 @@ class ApplicationContext extends UserContext
         try {
             $swarrot = $this->getContainer()->get('swarrot.factory.default');
             foreach ($this->queues as $queue) {
-                if ($q = $swarrot->getQueue($queue, 'rabbitmq')) {
+                if (($q = $swarrot->getQueue($queue, 'rabbitmq'))) {
                     $q->purge();
                 }
             }

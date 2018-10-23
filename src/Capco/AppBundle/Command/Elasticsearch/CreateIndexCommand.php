@@ -2,34 +2,35 @@
 
 namespace Capco\AppBundle\Command\Elasticsearch;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Capco\AppBundle\Elasticsearch\IndexBuilder;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateIndexCommand extends ContainerAwareCommand
+class CreateIndexCommand extends Command
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure()
+    protected $indexManager;
+
+    public function __construct(IndexBuilder $indexManager)
     {
-        $this
-            ->setName('capco:es:create')
-            ->setDescription('Create the Elasticsearch Indexes.')
-        ;
+        $this->indexManager = $indexManager;
+        parent::__construct();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function configure(): void
     {
-        $indexManager = $this->getContainer()->get('capco.elasticsearch.index_builder');
+        $this->setName('capco:es:create')->setDescription('Create the Elasticsearch Indexes.');
+    }
 
-        $newIndex = $indexManager->createIndex();
-        $indexManager->slowDownRefresh($newIndex);
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $newIndex = $this->indexManager->createIndex();
+        $this->indexManager->slowDownRefresh($newIndex);
 
         $output->writeln([sprintf('Index %s created.', $newIndex->getName()), '']);
 
-        $indexManager->speedUpRefresh($newIndex);
-        $indexManager->markAsLive($newIndex);
+        $this->indexManager->speedUpRefresh($newIndex);
+        $this->indexManager->markAsLive($newIndex);
 
         $output->writeln(['', '', 'New Index is now LIVE!']);
 
