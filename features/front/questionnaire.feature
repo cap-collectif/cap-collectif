@@ -11,7 +11,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire
   And I go to a questionnaire step
   When I fill the questionnaire form
   And I submit my reply
-  And I wait "#global-alert-box" to appear on current page
+  And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my reply
 
@@ -23,7 +23,7 @@ Scenario: Logged in user wants to add a private reply to a questionnaire
   And I scroll to the bottom
   And I check the reply private checkbox
   And I submit my reply
-  And I wait "#global-alert-box" to appear on current page
+  And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my anonymous reply
 
@@ -76,6 +76,7 @@ Scenario: Logged in user wants to add another reply when multiple replies is all
   When I go to a questionnaire step
   And I fill the questionnaire form
   And I submit my reply
+  And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my reply
 
@@ -103,28 +104,30 @@ Scenario: Logged in user wants to update a reply
   And I click on the update reply button
   And I update the questionnaire form
   And I submit my updated reply
+  And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my reply
 
 # Draft
 
-@javascript @database
+@javascript @database @draft
 Scenario: Logged in user wants to add a draft to a questionnaire with wrong values
   Given I am logged in as user
   And I go to a questionnaire step
   When I fill the questionnaire form with wrong values
   And I submit my draft
-  And I wait "#global-alert-box" to appear on current page
+  And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
   And I should see my reply
   
-@javascript @database
+@javascript @draft
 Scenario: Logged in user wants to update a draft to a questionnaire with wrong values
   Given I am logged in as admin
   And I go to a questionnaire step
   And I click on the update reply draft button
   When I update the draft form without the required questions
   And I submit my updated draft
+  And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
   And I should see my reply
 
@@ -136,6 +139,11 @@ Scenario: Logged in user wants to remove a reply
   When I go to a questionnaire step
   And I click the delete reply button
   And I confirm reply deletion
+  And I wait "#global-alert-box .alert-success" to appear on current page
+  Then I should see "reply.request.delete.success" in the "#global-alert-box" element
+  And I click the delete reply draft button
+  And I confirm reply draft deletion
+  And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.delete.success" in the "#global-alert-box" element
   And I should not see my reply anymore
 

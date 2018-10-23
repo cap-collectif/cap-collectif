@@ -42,6 +42,7 @@ trait QuestionnaireStepsTrait
      */
     public function iGoToAQuestionnaireStepWithNoMultipleRepliesAllowed()
     {
+        $this->iWait(1);
         $this->visitPageWithParams(
             'questionnaire page',
             self::$questionnaireStepWithNoMultipleReplies
@@ -98,6 +99,7 @@ trait QuestionnaireStepsTrait
     public function iUpdateTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
         $this->fillField('UpdateReplyForm-reply5-responses[1]', 'This biscuit bless your soul');
+        $this->checkOption('UpdateReplyForm-reply5-responses[3]_choice-questionchoice3');
     }
 
     /**
@@ -105,6 +107,7 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
     {
+        $this->iWait(1);
         $this->fillField(
             'CreateReplyForm-responses[1]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
@@ -136,7 +139,6 @@ trait QuestionnaireStepsTrait
     public function iSubmitMyReply()
     {
         $this->navigationContext->getPage('questionnaire page')->submitReply();
-        $this->iWait(5);
     }
 
     /**
@@ -145,7 +147,6 @@ trait QuestionnaireStepsTrait
     public function iSubmitMyDraft()
     {
         $this->navigationContext->getPage('questionnaire page')->submitDraft();
-        $this->iWait(5);
     }
 
     /**
@@ -154,7 +155,6 @@ trait QuestionnaireStepsTrait
     public function iSubmitMyUpdatedReply()
     {
         $this->navigationContext->getPage('questionnaire page')->submitUpdatedReply();
-        $this->iWait(5);
     }
 
     /**
@@ -163,7 +163,6 @@ trait QuestionnaireStepsTrait
     public function iSubmitMyUpdatedDraft()
     {
         $this->navigationContext->getPage('questionnaire page')->submitUpdatedDraft();
-        $this->iWait(5);
     }
 
     /**
@@ -194,12 +193,12 @@ trait QuestionnaireStepsTrait
      */
     public function iShouldSeeMyReply()
     {
+        $this->iWait(1);
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
             ->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
-        $this->assertElementNotContainsText($userReplySelector, 'reply.private');
     }
 
     /**
@@ -292,6 +291,7 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOnTheUpdateReplyButton()
     {
+        $this->iWait(1);
         $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyButton();
         $this->iWait(1);
     }
@@ -301,6 +301,7 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOnTheUpdateReplyDraftButton()
     {
+        $this->iWait(1);
         $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyDraftButton();
         $this->iWait(1);
     }
@@ -317,12 +318,30 @@ trait QuestionnaireStepsTrait
     }
 
     /**
+     * @Then I click the delete reply draft button
+     */
+    public function iClickTheDeleteReplyDraftButton()
+    {
+        $this->iWait(1);
+        $this->navigationContext->getPage('questionnaire page')->clickDeleteReplyDraftButton();
+    }
+
+    /**
      * @Then I confirm reply deletion
      */
     public function iConfirmReplyDeletion()
     {
         $this->navigationContext->getPage('questionnaire page')->clickConfirmDeleteReplyButton();
-        $this->iWait(3);
+    }
+
+    /**
+     * @Then I confirm reply draft deletion
+     */
+    public function iConfirmReplyDraftDeletion()
+    {
+        $this->navigationContext
+            ->getPage('questionnaire page')
+            ->clickConfirmDeleteReplyDraftButton();
     }
 
     /**

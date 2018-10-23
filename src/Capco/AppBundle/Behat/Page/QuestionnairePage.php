@@ -26,9 +26,11 @@ class QuestionnairePage extends Page
         'user first reply link' => '#user-replies .reply:first-child',
         'reply buttons' => '.reply__buttons',
         'delete reply button' => '#reply-link-reply2 .reply__delete-btn',
+        'delete reply draft button' => '#reply-link-reply5 .reply__delete-btn',
         'update reply button' => '#reply-link-reply2 .reply__update-btn',
         'update reply draft button' => '#reply-link-reply5 .reply__update-btn',
-        'confirm delete reply button' => '#reply-link-reply2 .reply__confirm-delete-btn',
+        'confirm delete reply button' => '#reply-confirm-delete-buttonreply2',
+        'confirm delete reply draft button' => '#reply-confirm-delete-buttonreply5',
         'first ranking choice right arrow' =>
             '.ranking__pick-box__choices .ranking__spot:first-child .ranking__item__arrow--right',
         'update first ranking choice right arrow' =>
@@ -103,6 +105,16 @@ class QuestionnairePage extends Page
     public function clickDeleteReplyButton()
     {
         $this->getElement('delete reply button')->click();
+    }
+
+    public function clickDeleteReplyDraftButton()
+    {
+        $this->getElement('delete reply draft button')->click();
+    }
+
+    public function clickConfirmDeleteReplyDraftButton()
+    {
+        $this->getElement('confirm delete reply draft button')->click();
     }
 
     public function clickConfirmDeleteReplyButton()
