@@ -51,7 +51,7 @@ class DeveloperController extends Controller
 
             // We set info about preview
             $solution->{'preview'} = false;
-            if (substr($aliases[0], 0, 7) === "Preview") {
+            if (substr($aliases[0], 0, 7) === 'Preview') {
                 $solution->{'preview'} = true;
             }
 
@@ -62,7 +62,7 @@ class DeveloperController extends Controller
             }
 
             // We remove everything not in public or preview schema
-            if ($solution->{'preview'} === false && substr($aliases[0], 0, 6) !== "Public") {
+            if ($solution->{'preview'} === false && substr($aliases[0], 0, 6) !== 'Public') {
                 continue;
             }
 
