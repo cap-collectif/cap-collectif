@@ -68,8 +68,15 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text x={x} y={y} fill="white" key={index} textAnchor="middle" dominantBaseline="central">
-        {`${(percent * 100).toFixed(0)}%`}
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        key={index}
+        textAnchor="middle"
+        scaleToFit
+        dominantBaseline="central">
+        {`${(percent * 100).toFixed(1)}%`}
       </text>
     );
   };
