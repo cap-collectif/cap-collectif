@@ -133,50 +133,26 @@ class Questionnaire implements DisplayableInBOInterface
         }
     }
 
-    /**
-     * Set description.
-     *
-     * @param string $description
-     *
-     * @return Questionnaire
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): Questionnaire
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * Get description.
-     *
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * Set type.
-     *
-     * @param string $type
-     *
-     * @return Questionnaire
-     */
-    public function setType($type)
+    public function setType(string $type): Questionnaire
     {
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * Get type.
-     *
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -202,9 +178,6 @@ class Questionnaire implements DisplayableInBOInterface
         return $questions;
     }
 
-    /**
-     * @return ArrayCollection
-     */
     public function getQuestions(): iterable
     {
         return $this->questions;
@@ -215,7 +188,7 @@ class Questionnaire implements DisplayableInBOInterface
      *
      * @return $this
      */
-    public function setQuestions($questions)
+    public function setQuestions(ArrayCollection $questions)
     {
         $this->questions = $questions;
 
