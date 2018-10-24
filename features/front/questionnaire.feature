@@ -160,17 +160,21 @@ Scenario: Logged in user wants to add a draft to a questionnaire with wrong valu
   And I submit my draft
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
+  When I wait 1 seconds
   And I should see my reply
   
 @javascript @draft
 Scenario: Logged in user wants to update a draft to a questionnaire with wrong values
   Given I am logged in as admin
   And I go to a questionnaire step
+  When I wait 1 seconds
   And I click on the update reply draft button
+  When I wait 1 seconds
   When I update the draft form without the required questions
   And I submit my updated draft
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
+  When I wait 1 seconds
   And I should see my reply
 
 ## Deletion
