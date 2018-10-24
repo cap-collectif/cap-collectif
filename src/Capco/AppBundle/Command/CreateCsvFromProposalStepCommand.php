@@ -1563,7 +1563,7 @@ ${COMMENT_VOTE_INFOS}
             author {
               ...authorInfos
             }
-            status {
+            status(step: "{$proposalStep->getId()}") {
               name
             }
             estimation
