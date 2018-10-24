@@ -24,81 +24,42 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
             'description' => 'An argument',
             'fields' => function () use ($globalVariable) {
                 return [
-<<<<<<< master
-                'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The author of the contribution.',
-=======
                 'id' => [
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
                     ],
                     'resolve' => null,
                     'description' => 'The ID of an object',
->>>>>>> - Added email cell : fixes #6180
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-<<<<<<< master
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The id of the contribution.',
-=======
                 'kind' => [
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
                     ],
                     'resolve' => null,
                     'description' => 'The kind of contribution (argument).',
->>>>>>> - Added email cell : fixes #6180
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-<<<<<<< master
-                'published' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->isPublished();
-                    },
-                    'description' => '`true` if the object is published.',
-=======
                 'related' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
                     'args' => [
                     ],
                     'resolve' => null,
                     'description' => 'Return the related contribution if the contribution is related to another.',
->>>>>>> - Added email cell : fixes #6180
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-<<<<<<< master
-                'publishableUntil' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->getPublishableUntil();
-                    },
-                    'description' => 'Identifies when the entity can no more be published.',
-=======
                 'show_url' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
                     'args' => [
@@ -190,14 +151,52 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                     ],
                     'resolve' => null,
                     'description' => 'The author of the contribution.',
->>>>>>> - Added email cell : fixes #6180
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-<<<<<<< master
+                'updatedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Identifies the date and time when the object was last updated.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->isPublished();
+                    },
+                    'description' => '`true` if the object is published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'publishableUntil' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishableUntil();
+                    },
+                    'description' => 'Identifies when the entity can no more be published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'publishedAt' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
@@ -206,14 +205,6 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                         return $value->getPublishedAt();
                     },
                     'description' => 'Identifies when the entity was published at.',
-=======
-                'updatedAt' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Identifies the date and time when the object was last updated.',
->>>>>>> - Added email cell : fixes #6180
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -234,75 +225,6 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'updatedAt' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Identifies the date and time when the object was last updated.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'viewerHasReport' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->userHasReport(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable));
-                    },
-                    'description' => 'Does the viewer already submitted a report ?',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
-                ],
-                'reportings' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ReportingConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                            'defaultValue' => 30,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('ReportingOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Reportable\\ReportableReportingResolver", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => 'The reportings related to the reportable.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'trashed' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
@@ -315,40 +237,6 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'trashedStatus' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The status.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-<<<<<<< master
-                'trashed' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => '`true` if the contribution is trashed.',
-=======
-                'trashedAt' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The moment the moderator trashed the contribution.',
->>>>>>> - Added email cell : fixes #6180
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-<<<<<<< master
                 'trashedStatus' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
                     'args' => [
@@ -378,13 +266,6 @@ final class ArgumentType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-=======
-                'trashedReason' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
->>>>>>> - Added email cell : fixes #6180
                     'description' => 'The reason the moderator trashed the contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,

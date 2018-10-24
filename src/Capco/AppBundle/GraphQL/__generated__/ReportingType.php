@@ -24,20 +24,6 @@ final class ReportingType extends ObjectType implements GeneratedTypeInterface
             'description' => 'A report',
             'fields' => function () use ($globalVariable) {
                 return [
-                'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["reporting_author", array(0 => $value)]);
-                    },
-                    'description' => 'The author of the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'id' => [
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
@@ -98,6 +84,20 @@ final class ReportingType extends ObjectType implements GeneratedTypeInterface
                         return '';
                     },
                     'description' => 'Url of the contribution',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'author' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["reporting_author", array(0 => $value)]);
+                    },
+                    'description' => 'The author of the contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
