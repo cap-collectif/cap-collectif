@@ -32,6 +32,7 @@ InternalQuestionnaire:
         type: 'Boolean!'
       type:
         type: 'QuestionnaireType!'
+        description: 'The questionnaire type'
       phoneConfirmation:
         type: 'Boolean!'
       participants:
