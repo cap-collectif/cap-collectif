@@ -7,9 +7,6 @@ Reply:
     fields:
       private:
         type: 'Boolean!'
-      draft:
-        type: 'Boolean!'
-        description: 'Identifies reply as draft.'
       publicationStatus:
         type: 'ReplyPublicationStatus!'
         description: 'The reply status.'
