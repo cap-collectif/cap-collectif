@@ -393,7 +393,7 @@ EOF;
         'proposal_publicationStatus' => 'publicationStatus',
         'proposal_trashedAt' => 'trashedAt',
         'proposal_trashedReason' => 'trashedReason',
-        'proposal_link' => 'show_url',
+        'proposal_link' => 'url',
         'proposal_author_id' => 'author.id',
         'proposal_author_username' => 'author.username',
         'proposal_author_email' => 'author.email',
@@ -523,7 +523,7 @@ EOF;
                 $proposals,
                 'data.node.proposals',
                 function ($edge) use ($progress, $output) {
-                    $proposal = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
+                    $proposal = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                     $this->addProposalRow($proposal, $output);
                     $progress->advance();
                 },
@@ -584,7 +584,7 @@ EOF;
             $proposalWithReportings,
             'data.node.reportings',
             function ($edge) use ($proposal, $progress) {
-                $report = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
+                $report = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalReportRow($report, $proposal);
                 $progress->advance();
             },
@@ -617,7 +617,7 @@ EOF;
             $proposalsWithVotes,
             'data.node.votes',
             function ($edge) use ($proposal, $progress) {
-                $vote = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
+                $vote = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalVotesRow($vote, $proposal);
                 $progress->advance();
             },
@@ -648,7 +648,7 @@ EOF;
             $proposalsWithComments,
             'data.node.comments',
             function ($edge) use ($proposal, $progress) {
-                $comment = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
+                $comment = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalCommentRow($comment, $proposal);
                 $progress->advance();
             },
@@ -679,7 +679,7 @@ EOF;
             $proposalWithNews,
             'data.node.news',
             function ($edge) use ($proposal, $progress) {
-                $news = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
+                $news = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsRow($news, $proposal, $edge['cursor']);
                 $progress->advance();
             },
@@ -754,7 +754,7 @@ EOF;
             $commentWithReportings,
             'data.node.reportings',
             function ($edge) use ($proposal, $comment) {
-                $report = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
+                $report = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalCommentReportRow($report, $proposal, $comment);
             },
             function ($pageInfo) use ($comment) {
@@ -775,7 +775,7 @@ EOF;
             $commentWithVotes,
             'data.node.votes',
             function ($edge) use ($proposal, $comment) {
-                $vote = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
+                $vote = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalCommentVotesRow($vote, $proposal, $comment);
             },
             function ($pageInfo) use ($comment) {
@@ -860,7 +860,7 @@ EOF;
             $news,
             'comments',
             function ($edge) use ($proposal, $news, $proposalNewsCursor) {
-                $comment = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
+                $comment = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsCommentRow(
                     $comment,
                     $proposal,
@@ -908,7 +908,7 @@ EOF;
             $comment,
             'votes',
             function ($edge) use ($proposal, $news, $comment) {
-                $vote = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
+                $vote = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsCommentVoteRow($vote, $comment, $proposal, $news);
             },
             function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
@@ -925,7 +925,7 @@ EOF;
             $comment,
             'reportings',
             function ($edge) use ($proposal, $news, $comment) {
-                $report = $edge['node'] && is_array($edge['node']) ? $edge['node'] : [];
+                $report = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsCommentReportingRow($report, $comment, $proposal, $news);
             },
             function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
@@ -1559,7 +1559,7 @@ ${COMMENT_VOTE_INFOS}
             publicationStatus
             trashedAt
             trashedReason
-            show_url
+            url
             author {
               ...authorInfos
             }
