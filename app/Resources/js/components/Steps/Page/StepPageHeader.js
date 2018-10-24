@@ -39,7 +39,7 @@ export class StepPageHeader extends React.Component<Props> {
             step.status === 'open' &&
             !step.timeless &&
             this.stepIsParticipative() && (
-              <div className="mr-15 d-ib">
+              <div className="mr-15 d-ib hidden-print">
                 <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
               </div>
             )}

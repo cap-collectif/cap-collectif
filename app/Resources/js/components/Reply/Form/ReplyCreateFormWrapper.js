@@ -52,7 +52,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props, State> {
     return (
       <div>
         {questionnaire.contribuable && !user ? (
-          <Alert bsStyle="warning" className="text-center">
+          <Alert bsStyle="warning" className="hidden-print text-center">
             <strong>
               <FormattedMessage id="reply.not_logged_in.error" />
             </strong>
@@ -64,7 +64,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props, State> {
           questionnaire.viewerReplies &&
           questionnaire.viewerReplies.length > 0 &&
           !questionnaire.multipleRepliesAllowed && (
-            <Alert bsStyle="warning">
+            <Alert bsStyle="warning" className="hidden-print">
               <strong>
                 <FormattedMessage id="reply.user_has_reply.reason" />
               </strong>
@@ -78,7 +78,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props, State> {
           questionnaire.phoneConfirmationRequired &&
           user &&
           !user.isPhoneConfirmed && (
-            <Alert bsStyle="warning">
+            <Alert bsStyle="warning" className="hidden-print">
               <strong>
                 <FormattedMessage id="phone.please_verify" />
               </strong>

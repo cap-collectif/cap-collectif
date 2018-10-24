@@ -40,7 +40,7 @@ class StepText extends React.Component<Props, State> {
     };
     return (
       <div className="step__intro">
-        <div style={{ fontSize: 15 }}>
+        <div>
           <div>
             <div
               ref="content"

@@ -62,7 +62,7 @@
         <h1 class="project__header__title  h1">{{ project.title }}</h1>
 
         {% if project.Author is not null %}
-            <div class="media hidden-print d-flex" style="align-items: center">
+            <div class="media d-flex project__header__media" style="align-items: center">
                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with {'user': project.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                 <div class="media-body">
                     <p class="media--aligned  excerpt">

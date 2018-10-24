@@ -15,9 +15,12 @@ a[href]:after {
 
 body {
     font-family: "openSans", sans-serif;
-    font-size: 12pt;
-    margin: 10%;
+    font-size: 10pt;
     background-color: #fff !important;
+}
+
+@page {
+    margin: 1cm;
 }
 
 .section--alt {
@@ -144,8 +147,21 @@ p img {
     Project
 ================================================================*/
 
-.project__header__title {
-    text-align: center;
+.project__header {
+    &__title {
+        text-align: center;
+    }
+
+    &__media {
+        display: flex;
+        flex-direction: column;
+        line-height: initial;
+        margin-bottom: 0;
+
+        .img-circle {
+            margin-bottom: 10px;
+        }
+    }
 }
 
 .project__step-dates {
@@ -173,7 +189,8 @@ p img {
         &[type="text"] {
             width: 100%;
             border-width: 0 0 2px 0;
-            border-color: #ACACAC;
+            border-color: #acacac;
+            background-color: #fff;
         }
 
         &[type="checkbox"], &[type="radio"] {
@@ -184,38 +201,28 @@ p img {
         }
     }
 
-    .checkbox {
+    .checkbox, .radio {
         padding-left: 25px;
-        margin-right: 10px;
+        margin-right: 30px;
         position: relative;
 
         &::before {
             content: "";
-            width: 15px;
-            height: 15px;
-            border-radius: 2px;
-            border: 1px solid #ACACAC;
-            top: 4px;
+            width: 12px;
+            height: 12px;
+            border: 1px solid #acacac;
+            top: 2px;
             left: 0;
             position: absolute;
         }
     }
 
-    .radio {
-        padding-left: 25px;
-        margin-right: 10px;
-        position: relative;
+    .checkbox::before {
+        border-radius: 2px;
+    }
 
-        &::before {
-            content: "";
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            border: 1px solid #ACACAC;
-            top: 4px;
-            left: 0;
-            position: absolute;
-        }
+    .radio::before {
+        border-radius: 50%;
     }
 
     .form-fields {
@@ -232,30 +239,44 @@ p img {
             flex: 1;
             width: 100%;
         }
+
+        .thumbnail {
+            max-width: 200px;
+            margin: 0 30px 15px 0;
+
+            img {
+                width: 100%;
+            }
+
+            .caption {
+                text-align: left;
+            }
+        }
     }
 
     .control-label {
-        font-weight: bold;
+        font-weight: 600;
         display: block;
-        margin: 10px 0;
+        margin: 10px 0 5px 0;
+
+        .warning {
+            font-weight: 300;
+            color: #dc3545;
+            font-style: italic;
+        }
     }
 
     .help-block {
         display: block;
         margin: 10px 0;
+        font-size: 10pt;
+        color: #707070;
     }
 
     .ranking__pick-box {
         .ranking__item__image {
             max-height: 150px;
             margin-top: 0;
-        }
-    }
-
-    .form__section {
-        h3 {
-            background-color: red;
-            color: white;
         }
     }
 }

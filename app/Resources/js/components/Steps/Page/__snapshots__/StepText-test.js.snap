@@ -8,13 +8,7 @@ exports[`<StepText /> should render a step intro div, a FormattedHTMLMessage and
 <div
   className="step__intro"
 >
-  <div
-    style={
-      Object {
-        "fontSize": 15,
-      }
-    }
-  >
+  <div>
     <div>
       <div
         className="step__intro__content"

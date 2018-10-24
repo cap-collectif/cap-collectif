@@ -70,56 +70,56 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
               <ButtonBody body={props.description || ''} />
             </div>
           )}
-
-          {choices.map((choice, index) => (
-            <Field
-              component={component}
-              type="radio"
-              key={`${name}-${index}`}
-              name={`${name}.value.labels`}
-              id={`${name}-${index}`}
-              disabled={disabled}
-              radioChecked={finalValue === choice.label}
-              onChange={this.uncheckOtherRadio}
-              normalize={this.normalize}
-              radioImage={choice.image}
-              value={choice.label}>
-              {choice.label}
-            </Field>
-          ))}
-
-          {props.isOtherAllowed && (
-            <div className="other-field" id={`${name}-other-value-row`}>
-              <div className="other-field__input">
-                <Field
-                  component={component}
-                  type="radio"
-                  disabled={disabled}
-                  name={`${name}-other-value-field`}
-                  id={`${name}-other-value`}
-                  radioChecked={this.state.otherChecked || !!otherValue}
-                  onChange={this.checkOtherRadio}
-                  value="other">
-                  {<FormattedMessage id="reply.other" />}
-                </Field>
+          <div className="form-fields">
+            {choices.map((choice, index) => (
+              <Field
+                component={component}
+                type="radio"
+                key={`${name}-${index}`}
+                name={`${name}.value.labels`}
+                id={`${name}-${index}`}
+                disabled={disabled}
+                radioChecked={finalValue === choice.label}
+                onChange={this.uncheckOtherRadio}
+                normalize={this.normalize}
+                radioImage={choice.image}
+                value={choice.label}>
+                {choice.label}
+              </Field>
+            ))}
+            {props.isOtherAllowed && (
+              <div className="other-field" id={`${name}-other-value-row`}>
+                <div className="other-field__input">
+                  <Field
+                    component={component}
+                    type="radio"
+                    disabled={disabled}
+                    name={`${name}-other-value-field`}
+                    id={`${name}-other-value`}
+                    radioChecked={this.state.otherChecked || !!otherValue}
+                    onChange={this.checkOtherRadio}
+                    value="other">
+                    {<FormattedMessage id="reply.other" />}
+                  </Field>
+                </div>
+                <div className="other-field__value">
+                  <Field
+                    component={component}
+                    type="text"
+                    name={`${name}.value.other`}
+                    id={`${name}.value.other`}
+                    placeholder="reply.your_response"
+                    value={otherValue}
+                    disabled={disabled}
+                    onFocus={this.checkOtherRadio}
+                    ref={c => {
+                      this.textField = c;
+                    }}
+                  />
+                </div>
               </div>
-              <div className="other-field__value">
-                <Field
-                  component={component}
-                  type="text"
-                  name={`${name}.value.other`}
-                  id={`${name}.value.other`}
-                  placeholder="reply.your_response"
-                  value={otherValue}
-                  disabled={disabled}
-                  onFocus={this.checkOtherRadio}
-                  ref={c => {
-                    this.textField = c;
-                  }}
-                />
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </FormGroup>
       </div>
     );

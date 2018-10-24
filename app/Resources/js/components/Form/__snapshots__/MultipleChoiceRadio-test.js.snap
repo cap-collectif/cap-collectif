@@ -11,79 +11,83 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
     >
       Une seule réponse valable ici, faites le bon choix !
     </HelpBlock>
-    <Field
-      component={[Function]}
-      id="responses[4]-0"
-      key="responses[4]-0"
-      name="responses[4].value.labels"
-      normalize={[Function]}
-      onChange={[Function]}
-      radioChecked={false}
-      type="radio"
-      value="Je dis oui"
-    >
-      Je dis oui
-    </Field>
-    <Field
-      component={[Function]}
-      id="responses[4]-1"
-      key="responses[4]-1"
-      name="responses[4].value.labels"
-      normalize={[Function]}
-      onChange={[Function]}
-      radioChecked={false}
-      type="radio"
-      value="Je dis non"
-    >
-      Je dis non
-    </Field>
-    <Field
-      component={[Function]}
-      id="responses[4]-2"
-      key="responses[4]-2"
-      name="responses[4].value.labels"
-      normalize={[Function]}
-      onChange={[Function]}
-      radioChecked={false}
-      type="radio"
-      value="J'ai rien compris"
-    >
-      J'ai rien compris
-    </Field>
     <div
-      className="other-field"
-      id="responses[4]-other-value-row"
+      className="form-fields"
     >
-      <div
-        className="other-field__input"
+      <Field
+        component={[Function]}
+        id="responses[4]-0"
+        key="responses[4]-0"
+        name="responses[4].value.labels"
+        normalize={[Function]}
+        onChange={[Function]}
+        radioChecked={false}
+        type="radio"
+        value="Je dis oui"
       >
-        <Field
-          component={[Function]}
-          id="responses[4]-other-value"
-          name="responses[4]-other-value-field"
-          onChange={[Function]}
-          radioChecked={true}
-          type="radio"
-          value="other"
+        Je dis oui
+      </Field>
+      <Field
+        component={[Function]}
+        id="responses[4]-1"
+        key="responses[4]-1"
+        name="responses[4].value.labels"
+        normalize={[Function]}
+        onChange={[Function]}
+        radioChecked={false}
+        type="radio"
+        value="Je dis non"
+      >
+        Je dis non
+      </Field>
+      <Field
+        component={[Function]}
+        id="responses[4]-2"
+        key="responses[4]-2"
+        name="responses[4].value.labels"
+        normalize={[Function]}
+        onChange={[Function]}
+        radioChecked={false}
+        type="radio"
+        value="J'ai rien compris"
+      >
+        J'ai rien compris
+      </Field>
+      <div
+        className="other-field"
+        id="responses[4]-other-value-row"
+      >
+        <div
+          className="other-field__input"
         >
-          <FormattedMessage
-            id="reply.other"
-            values={Object {}}
+          <Field
+            component={[Function]}
+            id="responses[4]-other-value"
+            name="responses[4]-other-value-field"
+            onChange={[Function]}
+            radioChecked={true}
+            type="radio"
+            value="other"
+          >
+            <FormattedMessage
+              id="reply.other"
+              values={Object {}}
+            />
+          </Field>
+        </div>
+        <div
+          className="other-field__value"
+        >
+          <Field
+            component={[Function]}
+            id="responses[4].value.other"
+            name="responses[4].value.other"
+            onFocus={[Function]}
+            placeholder="reply.your_response"
+            type="text"
+            value="Autre valeur"
           />
-        </Field>
-      </div>
-      <div
-        className="other-field__value"
-      >
-        <Field
-          component={[Function]}
-          id="responses[4].value.other"
-          name="responses[4].value.other"
-          onFocus={[Function]}
-          placeholder="reply.your_response"
-          type="text"
-          value="Autre valeur"
-        />
+        </div>
       </div>
     </div>
   </FormGroup>
