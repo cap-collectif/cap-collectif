@@ -140,11 +140,13 @@ class ProposalFormProposalsResolver implements ResolverInterface
             $filters['collectStep'] = $form->getStep()->getId();
 
             if ($viewer instanceof User) {
-                $seed = $viewer->getId();
+                // sprintf with %u is here in order to avoid negative int.
+                $seed = sprintf('%u', crc32($viewer->getId()));
             } elseif ($request->getCurrentRequest()) {
-                $seed = $request->getCurrentRequest()->getClientIp();
+                // sprintf with %u is here in order to avoid negative int.
+                $seed = sprintf('%u', ip2long($request->getCurrentRequest()->getClientIp()));
             } else {
-                $seed = substr(md5(mt_rand()), 0, 10);
+                $seed = random_int(0, PHP_INT_MAX);
             }
 
             $results = $this->proposalSearch->searchProposals(
