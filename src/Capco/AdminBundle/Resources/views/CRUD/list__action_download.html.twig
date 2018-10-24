@@ -8,7 +8,6 @@
     - {{ 'event_registration.listing.title_all'|trans({}, 'CapcoAppBundle') }}
   </a></li>
   {% for pas in object.exportableSteps %}
-  {% if pas.step.isSelectionStep() == false %}
   <li>
       <a href="{{ path('app_project_download', {'stepSlug': pas.step.slug, 'projectSlug': object.slug}) }}" >
           <strong>{{ 'admin.label.step'| trans({}, 'CapcoAppBundle') }}
@@ -18,7 +17,6 @@
           - {{ (pas.step.isQuestionnaireStep() ? 'list-of-answers' : 'list-of-contributions')| trans({}, 'CapcoAppBundle') }}
       </a>
   </li>
-  {% endif %}
   <li>
       <a href="{{ path('app_export_step_contributors', {'stepId': pas.step.id}) }}" >
           <strong>{{ 'admin.label.step'| trans({}, 'CapcoAppBundle') }}
