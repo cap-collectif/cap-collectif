@@ -250,7 +250,12 @@ class ReactBootstrapInput extends React.Component<Props> {
       field.choices = props.choices;
 
       return (
-        <RadioGroup key={props.id} horizontal id={props.id} onChange={props.onChange}>
+        <RadioGroup
+          key={props.id}
+          horizontal
+          id={props.id}
+          onChange={props.onChange}
+          className="form-fields">
           {field.choices.map(choice => (
             <RadioButton
               key={choice.id}
@@ -347,7 +352,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     return (
-      <InputGroup bsClass={cx('input-group', wrapperClassName)}>
+      <InputGroup className="form-fields" bsClass={cx('input-group', wrapperClassName)}>
         {this.renderAddon(addonBefore)}
         {this.renderButton(buttonBefore)}
         {formControl}

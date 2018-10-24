@@ -12,11 +12,6 @@ export const CardContainer = styled.div`
   width: 100%;
   border-radius: 4px;
 
-  @media print {
-    border: none;
-    margin-bottom: 0;
-  }
-
   .small {
     font-size: 14px;
   }
@@ -85,6 +80,16 @@ export const CardContainer = styled.div`
       &__value {
         font-size: 18px;
       }
+    }
+  }
+
+  @media print {
+    border: none;
+    display: block;
+    margin-bottom: 0;
+
+    .card__body {
+      display: block;
     }
   }
 `;

@@ -16,11 +16,12 @@ a[href]:after {
 body {
     font-family: "openSans", sans-serif;
     font-size: 12pt;
-    margin: 10%
+    margin: 10%;
+    background-color: #fff !important;
 }
 
 .section--alt {
-    background-color: transparent;
+    background-color: #fff !important;
 }
 
 #main-navbar, .btn, #cookieChoiceInfo, footer, .comments__section, .share-button-dropdown, svg, .leaflet-container, .proposal-vote__widget {
@@ -164,6 +165,59 @@ p img {
 ================================================================*/
 
 #reply-form {
+    input {
+        &::placeholder {
+            color: transparent;
+        }
+
+        &[type="text"] {
+            width: 100%;
+            border-width: 0 0 2px 0;
+            border-color: #ACACAC;
+        }
+
+        &[type="checkbox"], &[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            height: 0;
+            width: 0;
+        }
+    }
+
+    .checkbox {
+        padding-left: 25px;
+        margin-right: 10px;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 15px;
+            height: 15px;
+            border-radius: 2px;
+            border: 1px solid #ACACAC;
+            top: 4px;
+            left: 0;
+            position: absolute;
+        }
+    }
+
+    .radio {
+        padding-left: 25px;
+        margin-right: 10px;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 1px solid #ACACAC;
+            top: 4px;
+            left: 0;
+            position: absolute;
+        }
+    }
+
     .form-fields {
         display: flex;
         flex-wrap: wrap;
@@ -172,25 +226,16 @@ p img {
             width: 100%;
             display: flex;
             margin-top: 10px;
-
-            label {
-                margin-right: 10px;
-            }
         }
 
         .other-field__value {
             flex: 1;
             width: 100%;
-            // margin-left: 10px;
-
-            input {
-                width: 100%;
-            }
         }
     }
 
     .control-label {
-        font-weight: 500;
+        font-weight: bold;
         display: block;
         margin: 10px 0;
     }
@@ -204,6 +249,13 @@ p img {
         .ranking__item__image {
             max-height: 150px;
             margin-top: 0;
+        }
+    }
+
+    .form__section {
+        h3 {
+            background-color: red;
+            color: white;
         }
     }
 }
