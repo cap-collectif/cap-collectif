@@ -530,7 +530,6 @@ export const renderResponses = ({
   form,
   change,
   disabled,
-  reply,
 }: FieldArrayProps & {
   questions: Questions,
   responses: ResponsesInReduxForm,
@@ -538,7 +537,6 @@ export const renderResponses = ({
   form: string,
   intl: IntlShape,
   disabled: boolean,
-  reply: any,
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
@@ -553,7 +551,10 @@ export const renderResponses = ({
         if (!availableQuestions.includes(field.id)) {
           isAvailableQuestion = false;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> [5673-DRAFT] Fix errors in rebase.
         // We want to overidde the HTML verification of the input type number
         const isOtherAllowed = field.isOtherAllowed;
 

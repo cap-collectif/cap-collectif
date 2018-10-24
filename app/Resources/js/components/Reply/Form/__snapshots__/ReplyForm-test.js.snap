@@ -170,6 +170,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
               },
             ]
           }
+          reply={null}
           responses={
             Array [
               Object {
@@ -228,7 +229,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />
@@ -373,6 +374,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
               },
             ]
           }
+          reply={null}
           responses={
             Array [
               Object {
@@ -431,7 +433,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />
@@ -657,6 +659,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
               },
             ]
           }
+          reply={null}
           responses={
             Array [
               Object {
@@ -715,7 +718,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />
@@ -882,6 +885,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
               },
             ]
           }
+          reply={null}
           responses={
             Array [
               Object {
@@ -940,7 +944,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />
@@ -1048,6 +1052,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
               },
             ]
           }
+          reply={null}
           responses={
             Array [
               Object {
@@ -1106,7 +1111,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
               bsStyle="info"
               disabled={true}
               id="formName-submit-create-reply"
-              label="global.validate"
+              label="global.save"
               onSubmit={[Function]}
               type="submit"
             />
