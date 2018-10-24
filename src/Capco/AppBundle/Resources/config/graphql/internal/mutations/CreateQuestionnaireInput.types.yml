@@ -1,7 +1,7 @@
 CreateQuestionnaireInput:
   type: relay-mutation-input
   config:
-    description: 'Payload of the creation of a questionnaire.'
+    description: 'Input of createQuestionnaire.'
     fields:
       title:
         type: 'String!'
