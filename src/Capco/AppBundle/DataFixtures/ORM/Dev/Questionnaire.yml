@@ -7,6 +7,7 @@ Capco\AppBundle\Entity\Questionnaire:
     multipleRepliesAllowed: true
     anonymousAllowed: true
     acknowledgeReplies: true
+    type: 'QUESTIONNAIRE'
   questionnaire2:
     id: questionnaire2
     title: Questionnaire de test

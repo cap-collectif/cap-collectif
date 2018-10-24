@@ -42,7 +42,6 @@ trait QuestionnaireStepsTrait
      */
     public function iGoToAQuestionnaireStepWithNoMultipleRepliesAllowed()
     {
-        $this->iWait(1);
         $this->visitPageWithParams(
             'questionnaire page',
             self::$questionnaireStepWithNoMultipleReplies
@@ -107,7 +106,6 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
     {
-        $this->iWait(1);
         $this->fillField(
             'CreateReplyForm-responses[1]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
@@ -193,7 +191,6 @@ trait QuestionnaireStepsTrait
      */
     public function iShouldSeeMyReply()
     {
-        $this->iWait(1);
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
@@ -235,7 +232,6 @@ trait QuestionnaireStepsTrait
         $this->navigationContext
             ->getPage('questionnaire page')
             ->clickFirstRankingChoiceRightArrow();
-        $this->iWait(1);
     }
 
     public function iClickOneRankingChoiceRightArrowUpdate()
@@ -291,9 +287,7 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOnTheUpdateReplyButton()
     {
-        $this->iWait(1);
         $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyButton();
-        $this->iWait(1);
     }
 
     /**
@@ -301,9 +295,7 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOnTheUpdateReplyDraftButton()
     {
-        $this->iWait(1);
         $this->navigationContext->getPage('questionnaire page')->clickUpdateReplyDraftButton();
-        $this->iWait(1);
     }
 
     // ************************************************* Deletion *************************************************
@@ -314,7 +306,6 @@ trait QuestionnaireStepsTrait
     public function iClickTheDeleteReplyButton()
     {
         $this->navigationContext->getPage('questionnaire page')->clickDeleteReplyButton();
-        $this->iWait(1);
     }
 
     /**
@@ -322,7 +313,6 @@ trait QuestionnaireStepsTrait
      */
     public function iClickTheDeleteReplyDraftButton()
     {
-        $this->iWait(1);
         $this->navigationContext->getPage('questionnaire page')->clickDeleteReplyDraftButton();
     }
 
@@ -361,7 +351,6 @@ trait QuestionnaireStepsTrait
     public function iClickOnMyFirstReply()
     {
         $this->navigationContext->getPage('questionnaire page')->clickFirstUserReply();
-        $this->iWait(1);
     }
 
     /**
