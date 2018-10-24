@@ -66,12 +66,16 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/cap-collectif/GraphQLBundle"
+            "url": "https://github.com/ptondereau/GraphQLBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cap-collectif/symfony"
         }
     ],
     "require": {
         "php": ">=7.1",
-        "symfony/symfony": "^3.4.20",
+        "symfony/symfony": "dev-master#ce00e7dd3493b3c7a98d5f737ce381f90c820abe as 3.4.17",
         "doctrine/doctrine-bundle": "^1.6",
         "twig/extensions": "~1.0",
         "symfony/swiftmailer-bundle": "^3.1.0",
