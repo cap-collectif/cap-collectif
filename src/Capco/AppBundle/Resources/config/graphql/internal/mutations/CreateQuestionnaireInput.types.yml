@@ -7,6 +7,6 @@ CreateQuestionnaireInput:
         type: 'String!'
         description: 'The questionnaire form title'
       type:
-        type: 'String!'
+        type: 'QuestionnaireType!'
         description: 'The questionnaire type'
         defaultValue: 'QUESTIONNAIRE'

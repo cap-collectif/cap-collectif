@@ -1,9 +1,11 @@
 // @flow
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { ToggleButton, Button, Modal } from 'react-bootstrap';
 import { reduxForm, Field, change, type FormProps } from 'redux-form';
+
+import { type QuestionnaireType } from '../Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
@@ -39,16 +41,14 @@ type Props = FormProps & {
 
 type State = {
   showModal: boolean,
-  type: string,
+  type: QuestionnaireType,
 };
 
 export class QuestionnaireAdminCreateButton extends React.Component<Props, State> {
   state = { showModal: false, type: 'VOTING' };
 
-  changeType = (type: string) => {
-    this.setState({
-      type,
-    });
+  changeType = (type: QuestionnaireType) => {
+    this.setState({ type });
   };
 
   render() {
@@ -121,12 +121,10 @@ export class QuestionnaireAdminCreateButton extends React.Component<Props, State
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = () => ({});
-
 const form = reduxForm({
   onSubmit,
   validate,
   form: formName,
 })(QuestionnaireAdminCreateButton);
 
-export default connect(mapStateToProps)(form);
+export default connect()(form);

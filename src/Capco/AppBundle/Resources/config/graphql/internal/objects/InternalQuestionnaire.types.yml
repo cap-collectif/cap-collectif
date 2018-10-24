@@ -31,7 +31,7 @@ InternalQuestionnaire:
       acknowledgeReplies:
         type: 'Boolean!'
       type:
-        type: 'String!'
+        type: 'QuestionnaireType!'
       phoneConfirmation:
         type: 'Boolean!'
       participants:
