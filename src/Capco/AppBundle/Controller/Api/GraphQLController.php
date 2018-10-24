@@ -57,8 +57,11 @@ class GraphQLController extends BaseController
      *
      * @return JsonResponse|Response
      */
-    private function createResponse(Request $request, string $schemaName = null, bool $batched): Response
-    {
+    private function createResponse(
+        Request $request,
+        string $schemaName = null,
+        bool $batched
+    ): Response {
         if ('OPTIONS' === $request->getMethod()) {
             $response = new JsonResponse([], 200);
         } else {
@@ -69,6 +72,7 @@ class GraphQLController extends BaseController
             $response = new JsonResponse($payload, 200);
         }
         $this->addCORSHeadersIfNeeded($response, $request);
+
         return $response;
     }
 
