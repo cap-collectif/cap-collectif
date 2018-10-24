@@ -46,6 +46,10 @@ type FormValues = {|
   draft: boolean,
 |};
 
+const onUnload = e => {
+  e.returnValue = true;
+};
+
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { questionnaire, reply, onClose } = props;
   const data = {};
@@ -128,6 +132,20 @@ export class ReplyForm extends React.Component<Props> {
   static defaultProps = {
     reply: null,
   };
+
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.dirty === false && this.props.dirty === true) {
+      window.addEventListener('beforeunload', onUnload);
+    }
+
+    if (this.props.dirty === false) {
+      window.removeEventListener('beforeunload', onUnload);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', onUnload);
+  }
 
   formIsDisabled() {
     const { questionnaire, user, reply } = this.props;
