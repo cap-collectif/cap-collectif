@@ -258,6 +258,15 @@ p img {
         font-weight: 600;
         display: block;
         margin: 10px 0 5px 0;
+        padding-left: 20px;
+        position: relative;
+
+        // to see
+        &::before {
+            content: "1.";
+            position: absolute;
+            left: 0;
+        }
 
         .warning {
             font-weight: 300;
@@ -268,15 +277,27 @@ p img {
 
     .help-block {
         display: block;
-        margin: 10px 0;
-        font-size: 10pt;
+        margin: 5px 0 10px 0;
+        font-size: 9pt;
         color: #707070;
     }
 
     .ranking__pick-box {
         .ranking__item__image {
-            max-height: 150px;
+            max-width: 200px;
             margin-top: 0;
+        }
+
+        .ranking__item__icon {
+            display: none;
+        }
+
+        .ranking__item__label::before {
+            content:"";
+            width: 30px;
+            margin-right: 5px;
+            border-bottom: 1px solid #acacac;
+            display: inline-block;
         }
     }
 }

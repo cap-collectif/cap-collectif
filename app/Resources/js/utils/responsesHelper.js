@@ -543,6 +543,8 @@ export const renderResponses = ({
       {fields.map((member, index) => {
         const field = questions[index];
         if (!availableQuestions.includes(field.id)) {
+          // la question n'est pas affichée pour l'impression il va falloir qu'on l'affiche donc changer la logique pour plutôt mettre en display none
+          // boolean en fonction de cette condition (const)
           return;
         }
         // We want to overidde the HTML verification of the input type number
