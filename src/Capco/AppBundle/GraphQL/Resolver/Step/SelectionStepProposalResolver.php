@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
 use Capco\AppBundle\Search\ProposalSearch;
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Utils\Text;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -79,14 +79,12 @@ class SelectionStepProposalResolver implements ResolverInterface
                 );
                 $filters['selectionStep'] = $selectionStep->getId();
 
-                if ($viewer instanceof User) {
-                    // sprintf with %u is here in order to avoid negative int.
-                    $seed = sprintf('%u', crc32($viewer->getId()));
+                if (method_exists($viewer, 'getId')) {
+                    $seed = $viewer->getId();
                 } elseif ($request->getCurrentRequest()) {
-                    // sprintf with %u is here in order to avoid negative int.
-                    $seed = sprintf('%u', ip2long($request->getCurrentRequest()->getClientIp()));
+                    $seed = $request->getCurrentRequest()->getClientIp();
                 } else {
-                    $seed = random_int(0, PHP_INT_MAX);
+                    $seed = Text::random();
                 }
 
                 $results = $this->proposalSearch->searchProposals(

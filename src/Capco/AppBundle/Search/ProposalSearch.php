@@ -12,7 +12,7 @@ use Elastica\Result;
 
 class ProposalSearch extends Search
 {
-    public const SEARCH_FIELDS = [
+    const SEARCH_FIELDS = [
         'title',
         'title.std',
         'reference',
@@ -40,7 +40,7 @@ class ProposalSearch extends Search
         string $order = null,
         $terms,
         array $providedFilters,
-        int $seed
+        string $seed
     ): array {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(

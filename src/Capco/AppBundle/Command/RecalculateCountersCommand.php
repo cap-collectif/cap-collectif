@@ -350,13 +350,13 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             'UPDATE CapcoAppBundle:Steps\QuestionnaireStep qs set qs.repliesCount = (
           select count(DISTINCT r.id)
           from CapcoAppBundle:Reply r INNER JOIN CapcoAppBundle:Questionnaire q WITH r.questionnaire = q
-          where q.step = qs AND r.published = 1 group by q.step
+          where q.step = qs AND r.published = 1 AND r.draft = 0 group by q.step
         )'
         );
 
-        $questionnaireSteps = $this->entityManager->getRepository(
-            'CapcoAppBundle:Steps\QuestionnaireStep'
-        )->findAll();
+        $questionnaireSteps = $this->entityManager
+            ->getRepository('CapcoAppBundle:Steps\QuestionnaireStep')
+            ->findAll();
         foreach ($questionnaireSteps as $qs) {
             if ($qs->isOpen() || $this->force) {
                 $participants = $contributionResolver->countStepContributors($qs);

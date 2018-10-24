@@ -21,7 +21,7 @@ final class EventType extends ObjectType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'Event',
-            'description' => 'Fetches an object given its ID',
+            'description' => 'A commentable',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [

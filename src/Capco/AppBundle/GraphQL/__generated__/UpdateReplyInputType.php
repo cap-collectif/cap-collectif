@@ -31,6 +31,11 @@ final class UpdateReplyInputType extends InputObjectType implements GeneratedTyp
                     'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('ResponseInput')),
                     'description' => 'The responses to the questionnaire questions',
                 ],
+                'draft' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'description' => 'If true will create a draft reply.',
+                    'defaultValue' => false,
+                ],
                 'clientMutationId' => [
                     'type' => Type::string(),
                     'description' => null,

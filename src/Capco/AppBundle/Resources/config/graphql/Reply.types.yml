@@ -7,6 +7,11 @@ Reply:
     fields:
       private:
         type: 'Boolean!'
+      publicationStatus:
+        type: 'ReplyPublicationStatus!'
+        description: 'The reply status.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyPublicationStatusResolver", [value])'
       createdAt:
         type: 'DateTime!'
       responses:

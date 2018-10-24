@@ -137,6 +137,7 @@ twig:
     google_maps_key: '%google_maps_key%'
     # Register here any services accessibles in templates
     proposalPublicationResolver: '@Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalPublicationStatusResolver'
+    replyPublicationStatusResolver: '@Capco\AppBundle\GraphQL\Resolver\Reply\ReplyPublicationStatusResolver'
   paths:
     '%kernel.root_dir%/../src/Capco/AppBundle/Mailer/templates': CapcoMail
 
