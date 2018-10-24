@@ -26,7 +26,6 @@ Scenario: User wants to update a reply
     "variables": {
       "input": {
         "replyId": "reply2",
-        "draft": false,
         "responses": [
             {
               "question": "2",

@@ -6,7 +6,6 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
 import type { ReplyModalLink_reply } from './__generated__/ReplyModalLink_reply.graphql';
 import UpdateReplyModal from './UpdateReplyModal';
-import ReplyDraftLabel from './ReplyDraftLabel';
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel';
 import DeleteReplyModal from '../Delete/DeleteReplyModal';
 
@@ -39,44 +38,39 @@ export class ReplyModalLink extends React.Component<Props, State> {
 
     return (
       <Fragment>
-        <ListGroupItem className="reply align-items-center" id={`reply-link-${reply.id}`}>
-          <div>
-            <FormattedMessage
-              id="reply.show.link"
-              values={{
-                date: (
-                  <FormattedDate
-                    value={moment(reply.publishedAt ? reply.publishedAt : reply.createdAt)}
-                    day="numeric"
-                    month="long"
-                    year="numeric"
-                  />
-                ),
-                time: (
-                  <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />
-                ),
-              }}
-            />
-            {reply.private && (
-              <span>
-                {' '}
-                <FormattedMessage id="reply.private" />
-              </span>
-            )}
-            {/* $FlowFixMe $refType */}
-            <ReplyDraftLabel status={reply.publicationStatus} />
-            <UnpublishedLabel publishable={reply} />
-          </div>
+        <ListGroupItem className="reply" id={`reply-link-${reply.id}`}>
+          <FormattedMessage
+            id="reply.show.link"
+            values={{
+              date: (
+                <FormattedDate
+                  value={moment(reply.publishedAt ? reply.publishedAt : reply.createdAt)}
+                  day="numeric"
+                  month="long"
+                  year="numeric"
+                />
+              ),
+              time: (
+                <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />
+              ),
+            }}
+          />
+          {reply.private && (
+            <span>
+              {' '}
+              <FormattedMessage id="reply.private" />
+            </span>
+          )}
+          {/* $FlowFixMe $refType */}
+          <UnpublishedLabel publishable={reply} />
           <div>
             <Button
-              className="mr-10 reply__update-btn mt-5"
+              className="mr-10 reply__update-btn"
               bsStyle="warning"
               onClick={() => this.showModal('edit')}>
               <FormattedMessage id="glodal.edit" />
             </Button>
-            <Button
-              bsStyle="danger reply__delete-btn mt-5"
-              onClick={() => this.showModal('delete')}>
+            <Button bsStyle="danger reply__delete-btn" onClick={() => this.showModal('delete')}>
               <FormattedMessage id="glodal.delete" />
             </Button>
           </div>
@@ -106,7 +100,6 @@ export default createFragmentContainer(ReplyModalLink, {
       publishedAt
       id
       private
-      publicationStatus
       ...UpdateReplyModal_reply
       ...DeleteReplyModal_reply
       ...UnpublishedLabel_publishable

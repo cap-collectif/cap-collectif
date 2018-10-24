@@ -216,7 +216,6 @@ class ProfileController extends Controller
         $replies = $this->get('capco.reply.repository')->findBy([
             'author' => $user,
             'private' => false,
-            'draft' => false,
         ]);
 
         $sources = $this->get('capco.source.repository')->getByUser($user);

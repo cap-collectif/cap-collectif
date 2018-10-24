@@ -12,7 +12,3 @@ AddReplyInput:
       private:
         type: 'Boolean'
         description: 'Anonymous or not.'
-      draft:
-        type: 'Boolean!'
-        description: 'If true will create a draft reply.'
-        defaultValue: false

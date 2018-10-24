@@ -62,7 +62,6 @@ class ProjectDownloadResolver
             'phone',
             'created',
             'anonymous',
-            'draft',
         ];
 
         if ($step->getQuestionnaire()) {
@@ -74,8 +73,10 @@ class ProjectDownloadResolver
         return $headers;
     }
 
-    public function getContent(AbstractStep $step, bool $withVote = false): \PHPExcel_Writer_IWriter
-    {
+    public function getContent(
+        AbstractStep $step,
+        bool $withVote = false
+    ): \PHPExcel_Writer_IWriter {
         if (!$step) {
             throw new NotFoundHttpException('Step not found');
         }
@@ -113,9 +114,9 @@ class ProjectDownloadResolver
 
         if ($questionnaireStep->getQuestionnaire()) {
             // Replies
-            $replies = $this->em
-                ->getRepository('CapcoAppBundle:Reply')
-                ->getEnabledByQuestionnaireAsArray($questionnaireStep->getQuestionnaire());
+            $replies = $this->em->getRepository(
+                'CapcoAppBundle:Reply'
+            )->getEnabledByQuestionnaireAsArray($questionnaireStep->getQuestionnaire());
         }
 
         $this->getRepliesData($replies);
@@ -132,9 +133,9 @@ class ProjectDownloadResolver
     public function getRepliesData(iterable $replies)
     {
         foreach ($replies as $reply) {
-            $responses = $this->em
-                ->getRepository('CapcoAppBundle:Responses\AbstractResponse')
-                ->getByReplyAsArray($reply['id']);
+            $responses = $this->em->getRepository(
+                'CapcoAppBundle:Responses\AbstractResponse'
+            )->getByReplyAsArray($reply['id']);
             $this->addItemToData($this->getReplyItem($reply, $responses));
         }
     }
@@ -152,7 +153,6 @@ class ProjectDownloadResolver
             'phone' => $reply['author']['phone'] ? (string) $reply['author']['phone'] : '',
             'created' => $this->dateToString($reply['createdAt']),
             'anonymous' => $this->booleanToString($reply['private']),
-            'draft' => $this->booleanToString($reply['draft']),
         ];
 
         foreach ($responses as $response) {
@@ -174,11 +174,11 @@ class ProjectDownloadResolver
         $responseMedia = null;
         $mediasUrl = [];
         if ($response['response_type'] === 'media') {
-            $responseMedia = $this->em
-                ->getRepository('CapcoAppBundle:Responses\MediaResponse')
-                ->findOneBy([
-                    'id' => $response['id'],
-                ]);
+            $responseMedia = $this->em->getRepository(
+                'CapcoAppBundle:Responses\MediaResponse'
+            )->findOneBy([
+                'id' => $response['id'],
+            ]);
 
             foreach ($responseMedia->getMedias() as $media) {
                 $mediasUrl[] = $this->urlResolver->getMediaUrl(
@@ -268,7 +268,7 @@ class ProjectDownloadResolver
     private function booleanToString($boolean): string
     {
         if ($boolean) {
-            return $this->translator->trans('global.yes', [], 'CapcoAppBundle');
+            return $this->translator->trans('project_download.values.yes', [], 'CapcoAppBundle');
         }
 
         return $this->translator->trans('global.no', [], 'CapcoAppBundle');

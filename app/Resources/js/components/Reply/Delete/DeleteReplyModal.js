@@ -34,7 +34,6 @@ export class DeleteReplyModal extends React.Component<Props, State> {
           actionType: UPDATE_ALERT,
           alert: { bsStyle: 'success', content: 'reply.request.delete.success' },
         });
-        this.setState({ isSubmitting: false });
       })
       .catch(() => {
         this.setState({ isSubmitting: false });

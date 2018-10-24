@@ -27,7 +27,6 @@ class ReplyAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id', null, ['label' => 'admin.fields.reply.id'])
             ->add(
                 'author',
                 'doctrine_orm_model_autocomplete',
@@ -39,9 +38,7 @@ class ReplyAdmin extends AbstractAdmin
             ->add('questionnaire.step', null, ['label' => 'admin.fields.reply.questionnaire_step'])
             ->add('questionnaire.step.projectAbstractStep.project', null, [
                 'label' => 'admin.fields.reply.project',
-            ])
-            ->add('draft', null, ['label' => 'admin.fields.proposal.draft'])
-            ->add('published', null, ['label' => 'admin.fields.proposal.enabled']);
+            ]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -51,11 +48,7 @@ class ReplyAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', 'sonata_type_model', ['label' => 'admin.fields.reply.author'])
-            ->add('state', null, [
-                'mapped' => false,
-                'label' => 'admin.fields.proposal.state.label',
-                'template' => 'CapcoAdminBundle:Reply:state_list_field.html.twig',
-            ])
+            ->add('published', null, ['label' => 'admin.fields.reply.enabled'])
             ->add('createdAt', null, ['label' => 'admin.fields.questionnaire.created_at'])
             ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at']);
     }
@@ -63,14 +56,8 @@ class ReplyAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', 'sonata_type_model', ['label' => 'admin.fields.reply.author'])
-            ->add('createdAt', null, ['label' => 'admin.fields.questionnaire.created_at'])
             ->add('updatedAt', null, ['label' => 'admin.fields.reply.updated_at'])
-            ->add('state', null, [
-                'label' => 'admin.fields.proposal.state.label',
-                'template' => 'CapcoAdminBundle:Reply:state_show_field.html.twig',
-            ])
             ->add('responses', null, [
                 'label' => 'admin.fields.reply.responses',
                 'template' => 'CapcoAdminBundle:Reply:responses_show_field.html.twig',

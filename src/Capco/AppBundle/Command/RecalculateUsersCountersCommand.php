@@ -70,7 +70,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         $this->compute(
             'UPDATE CapcoUserBundle:User u set u.repliesCount = (
           SELECT count(r.id) from CapcoAppBundle:Reply r
-          WHERE r.author = u AND r.published = 1 AND r.private = 0 AND r.draft = 0
+          WHERE r.author = u AND r.published = 1 AND r.private = 0
           GROUP BY r.author
         )'
         );

@@ -18,8 +18,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Enum\ReplyPublicationStatus;
-use Capco\AppBundle\Traits\DraftableTrait;
 
 /**
  * @ORM\Table(name="reply")
@@ -33,7 +31,6 @@ class Reply implements Publishable, Contribution, VoteContribution
     use PrivatableTrait;
     use HasResponsesTrait;
     use PublishableTrait;
-    use DraftableTrait;
 
     /**
      * @Assert\NotNull()

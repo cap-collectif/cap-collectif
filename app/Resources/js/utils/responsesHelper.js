@@ -634,7 +634,6 @@ export const renderResponses = ({
               inputType === 'button'
             ) {
               choices = formattedChoicesInField(field);
-
               if (inputType === 'radio') {
                 return (
                   <ProposalPrivateField key={field.id} show={field.private}>
@@ -656,6 +655,7 @@ export const renderResponses = ({
                 );
               }
             }
+
             return (
               <ProposalPrivateField key={field.id} show={field.private}>
                 <Field

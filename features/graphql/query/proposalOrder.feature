@@ -124,4 +124,4 @@ Scenario: GraphQL client want to randomize proposals
     }
   }
   """
-  Then the current result should not math with the stored result
+  Then the current result should not match with the stored result

@@ -201,34 +201,20 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
             />
           </Field>
         </div>
-        <div
-          className="btn-toolbar btn-box sticky"
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="formName-submit-create-reply"
+          type="submit"
         >
-          <div
-            className="btn-group"
-          >
-            <Connect(SubmitButton)
-              bsStyle="primary"
-              disabled={true}
-              id="formName-submit-create-draft-reply"
-              label="global.save_as_draft"
-              onSubmit={[Function]}
-              type="submit"
-            />
-          </div>
-          <div
-            className="btn-group"
-          >
-            <Connect(SubmitButton)
-              bsStyle="info"
-              disabled={true}
-              id="formName-submit-create-reply"
-              label="global.validate"
-              onSubmit={[Function]}
-              type="submit"
-            />
-          </div>
-        </div>
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
       </form>
     </div>
   </div>
@@ -400,34 +386,20 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
             />
           </Field>
         </div>
-        <div
-          className="btn-toolbar btn-box sticky"
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="formName-submit-create-reply"
+          type="submit"
         >
-          <div
-            className="btn-group"
-          >
-            <Connect(SubmitButton)
-              bsStyle="primary"
-              disabled={true}
-              id="formName-submit-create-draft-reply"
-              label="global.save_as_draft"
-              onSubmit={[Function]}
-              type="submit"
-            />
-          </div>
-          <div
-            className="btn-group"
-          >
-            <Connect(SubmitButton)
-              bsStyle="info"
-              disabled={true}
-              id="formName-submit-create-reply"
-              label="global.validate"
-              onSubmit={[Function]}
-              type="submit"
-            />
-          </div>
-        </div>
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
       </form>
     </div>
   </div>
@@ -678,34 +650,20 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
             />
           </Field>
         </div>
-        <div
-          className="btn-toolbar btn-box sticky"
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="formName-submit-create-reply"
+          type="submit"
         >
-          <div
-            className="btn-group"
-          >
-            <Connect(SubmitButton)
-              bsStyle="primary"
-              disabled={true}
-              id="formName-submit-create-draft-reply"
-              label="global.save_as_draft"
-              onSubmit={[Function]}
-              type="submit"
-            />
-          </div>
-          <div
-            className="btn-group"
-          >
-            <Connect(SubmitButton)
-              bsStyle="info"
-              disabled={true}
-              id="formName-submit-create-reply"
-              label="global.validate"
-              onSubmit={[Function]}
-              type="submit"
-            />
-          </div>
-        </div>
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
       </form>
     </div>
   </div>
@@ -899,34 +857,20 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
             />
           </Field>
         </div>
-        <div
-          className="btn-toolbar btn-box sticky"
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="formName-submit-create-reply"
+          type="submit"
         >
-          <div
-            className="btn-group"
-          >
-            <Connect(SubmitButton)
-              bsStyle="primary"
-              disabled={true}
-              id="formName-submit-create-draft-reply"
-              label="global.save_as_draft"
-              onSubmit={[Function]}
-              type="submit"
-            />
-          </div>
-          <div
-            className="btn-group"
-          >
-            <Connect(SubmitButton)
-              bsStyle="info"
-              disabled={true}
-              id="formName-submit-create-reply"
-              label="global.validate"
-              onSubmit={[Function]}
-              type="submit"
-            />
-          </div>
-        </div>
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
       </form>
     </div>
   </div>
@@ -1062,34 +1006,20 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
             />
           </Field>
         </div>
-        <div
-          className="btn-toolbar btn-box sticky"
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="formName-submit-create-reply"
+          type="submit"
         >
-          <div
-            className="btn-group"
-          >
-            <Connect(SubmitButton)
-              bsStyle="primary"
-              disabled={true}
-              id="formName-submit-create-draft-reply"
-              label="global.save_as_draft"
-              onSubmit={[Function]}
-              type="submit"
-            />
-          </div>
-          <div
-            className="btn-group"
-          >
-            <Connect(SubmitButton)
-              bsStyle="info"
-              disabled={true}
-              id="formName-submit-create-reply"
-              label="global.validate"
-              onSubmit={[Function]}
-              type="submit"
-            />
-          </div>
-        </div>
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
       </form>
     </div>
   </div>

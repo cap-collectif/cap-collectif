@@ -35,11 +35,6 @@ final class AddReplyInputType extends InputObjectType implements GeneratedTypeIn
                     'type' => Type::boolean(),
                     'description' => 'Anonymous or not.',
                 ],
-                'draft' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'description' => 'If true will create a draft reply.',
-                    'defaultValue' => false,
-                ],
                 'clientMutationId' => [
                     'type' => Type::string(),
                     'description' => null,

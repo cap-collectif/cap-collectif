@@ -257,8 +257,7 @@ class ReactBootstrapInput extends React.Component<Props> {
               disabled={props.disabled}
               value={choice.label}
               iconSize={20}
-              pointColor={this.getColor(choice.color)}
-              checked={value === choice.label}>
+              pointColor={this.getColor(choice.color)}>
               {choice.label}
             </RadioButton>
           ))}
@@ -290,18 +289,21 @@ class ReactBootstrapInput extends React.Component<Props> {
       let values;
       let choices;
       if (value) {
-        values = value.map(v => props.choices.find(choice => v === choice.label)).filter(v => v);
-
+        values = props.choices.filter(
+          choice => choice.label === value.find(val => val === choice.label),
+        );
         choices = props.choices.filter(
           choice => choice.label !== value.find(val => val === choice.label),
         );
       } else {
         choices = props.choices;
       }
+
       const field = {};
       field.id = props.id;
       field.choices = choices;
       field.values = values;
+
       return (
         <Ranking
           formName={formName}
