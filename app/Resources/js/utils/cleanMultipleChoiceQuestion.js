@@ -1,16 +1,41 @@
-export const cleanMultipleChoiceQuestion = (multipleChoiceQuestion, intl) => {
-  const data = multipleChoiceQuestion.questionChoices
-    .filter(choice => choice.responses.totalCount > 0)
-    .reduce((acc, curr) => {
-      acc.push({
-        name: curr.title,
-        value: curr.responses.totalCount,
-      });
-      return acc;
-    }, []);
+// @flow
+import { type IntlShape } from 'react-intl';
+
+type MultipleChoiceQuestion = {
+  +questionChoices: ?$ReadOnlyArray<{|
+    +title: string,
+    +responses: {|
+      +totalCount: number,
+    |},
+  |}>,
+  +isOtherAllowed: boolean,
+  +otherResponses: {|
+    +totalCount: number,
+  |},
+  +$refType: any,
+};
+
+export const cleanMultipleChoiceQuestion = (
+  multipleChoiceQuestion: MultipleChoiceQuestion,
+  intl: IntlShape,
+) => {
+  let data =
+    multipleChoiceQuestion.questionChoices &&
+    multipleChoiceQuestion.questionChoices
+      .filter(choice => choice.responses.totalCount > 0)
+      .reduce((acc, curr) => {
+        acc.push({
+          name: curr.title,
+          value: curr.responses.totalCount,
+        });
+        return acc;
+      }, []);
+
+  if (!data) {
+    data = [];
+  }
 
   if (
-    data &&
     multipleChoiceQuestion &&
     multipleChoiceQuestion.isOtherAllowed &&
     multipleChoiceQuestion.otherResponses &&
