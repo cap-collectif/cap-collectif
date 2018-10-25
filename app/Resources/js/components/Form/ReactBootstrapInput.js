@@ -28,6 +28,7 @@ import EmailInput from './EmailInput';
 import AutosizedTextarea from './AutosizedTextarea';
 import Address from './Address';
 import ButtonBody from '../Reply/Form/ButtonBody';
+import ProposalPrivateField from '../Proposal/ProposalPrivateField';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -250,24 +251,33 @@ class ReactBootstrapInput extends React.Component<Props> {
       field.choices = props.choices;
 
       return (
-        <RadioGroup
-          key={props.id}
-          horizontal
-          id={props.id}
-          onChange={props.onChange}
-          className="form-fields">
-          {field.choices.map(choice => (
-            <RadioButton
-              key={choice.id}
-              disabled={props.disabled}
-              value={choice.label}
-              iconSize={20}
-              pointColor={this.getColor(choice.color)}
-              checked={value === choice.label}>
-              {choice.label}
-            </RadioButton>
-          ))}
-        </RadioGroup>
+        <React.Fragment>
+          <RadioGroup
+            key={props.id}
+            horizontal
+            className="radio-group form-fields"
+            id={props.id}
+            onChange={props.onChange}>
+            {field.choices.map(choice => (
+              <RadioButton
+                key={choice.id}
+                disabled={props.disabled}
+                value={choice.label}
+                iconSize={20}
+                pointColor={this.getColor(choice.color)}
+                checked={value === choice.label}>
+                {choice.label}
+              </RadioButton>
+            ))}
+          </RadioGroup>
+          <div className="visible-print-block form-fields">
+            {field.choices.map(choice => (
+              <div key={choice.id} className="radio">
+                {choice.label}
+              </div>
+            ))}
+          </div>
+        </React.Fragment>
       );
     }
 
@@ -326,7 +336,28 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'textarea') {
-      formControl = <AutosizedTextarea maxLength={props.maxLength} value={value} {...props} />;
+      formControl = (
+        <React.Fragment>
+          <AutosizedTextarea maxLength={props.maxLength} value={value} {...props} />
+          <div className="visible-print-block textarea">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </React.Fragment>
+      );
     }
 
     if (popover) {
@@ -383,7 +414,8 @@ class ReactBootstrapInput extends React.Component<Props> {
             {label}
           </ControlLabel>
         )}
-        {props.help && <HelpBlock>{props.help}</HelpBlock>}
+        {props.help && <HelpBlock>{props.help}</HelpBlock>}{' '}
+        {props.errors && <span className="visible-print-block help-block">{props.errors}</span>}
         {props.description &&
           props.description !== '<div><br /></div>' && (
             <div style={{ paddingBottom: 15 }}>

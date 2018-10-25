@@ -29,11 +29,13 @@ const ConditionalJumps = (props: Props) => {
   }
 
   return (
-    jumps.map((jump, jumpKey) => (
-      <div key={jumpKey}>
-        Si vous avez répondu {getConditionValue(jump.conditions)}, allez à la question {jump.destination.id}
-      </div>
-    ))
+    <div className="visible-print-block" >
+      {jumps.map((jump, jumpKey) => (
+        <div key={jumpKey}>
+            Si vous avez répondu {getConditionValue(jump.conditions)}, allez à la question <b>{jump.destination.title}</b>
+        </div>
+      ))}
+    </div>
   )
 };
 

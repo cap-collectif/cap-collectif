@@ -25,6 +25,8 @@ class AutosizedTextarea extends React.Component<Props> {
   refFormControl: ?React.Component<*>;
 
   render() {
+    console.log(this.props);
+
     return (
       <FormControl
         ref={c => {

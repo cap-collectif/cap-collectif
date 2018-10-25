@@ -143,6 +143,10 @@ p img {
     margin-top: 5pt;
 }
 
+.cookie-banner {
+    display: none;
+}
+
 /* ===============================================================
     Project
 ================================================================*/
@@ -181,11 +185,17 @@ p img {
 ================================================================*/
 
 #reply-form {
-    input {
+    input, textarea {
         &::placeholder {
             color: transparent;
         }
+    }
 
+    select, .radio-group {
+        display: none !important;
+    }
+
+    input {
         &[type="text"] {
             width: 100%;
             border-width: 0 0 2px 0;
@@ -201,9 +211,24 @@ p img {
         }
     }
 
+    textarea {
+        display: none;
+    }
+
+    .textarea {
+        width: 100%;
+
+        span {
+            width: 100%;
+            border-bottom: 1px solid #acacac;
+            height: 31px;
+            display: block;
+        }
+    }
+
     .checkbox, .radio {
         padding-left: 25px;
-        margin-right: 30px;
+        margin: 5px 30px 10px 0;
         position: relative;
 
         &::before {
@@ -232,7 +257,6 @@ p img {
         .other-field {
             width: 100%;
             display: flex;
-            margin-top: 10px;
         }
 
         .other-field__value {
@@ -242,10 +266,11 @@ p img {
 
         .thumbnail {
             max-width: 200px;
-            margin: 0 30px 15px 0;
+            margin-right: 30px;
 
             img {
                 width: 100%;
+                margin: 10pt 0;
             }
 
             .caption {
@@ -255,19 +280,10 @@ p img {
     }
 
     .control-label {
-        font-weight: 500;
+        font-weight: 600;
         display: block;
         font-size: 11pt;
         margin: 10px 0 5px 0;
-        //padding-left: 20px;
-        //position: relative;
-
-        // to see
-        //&::before {
-        //    content: "1.";
-        //    position: absolute;
-        //    left: 0;
-        //}
 
         .warning {
             font-weight: 300;
@@ -281,6 +297,21 @@ p img {
         margin: 5px 0 10px 0;
         font-size: 9pt;
         color: #707070;
+    }
+
+    .excerpt_private {
+        margin-top: 10px;
+        color: #1D8293;
+    }
+
+    .private-box {
+        border: 1px solid #1D8293;
+        padding: 0 10pt 10pt 10pt;
+        border-radius: 4px;
+
+        .form-group {
+            overflow: hidden;
+        }
     }
 
     .ranking__pick-box {
@@ -300,5 +331,9 @@ p img {
             border-bottom: 1px solid #acacac;
             display: inline-block;
         }
+    }
+
+    hr {
+        margin: 20pt 0 15pt 0;
     }
 }

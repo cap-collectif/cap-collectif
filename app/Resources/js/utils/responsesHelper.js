@@ -579,7 +579,14 @@ export const renderResponses = ({
 
         const labelMessage = field.title + labelAppend;
 
-        const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
+        const label = (
+          <React.Fragment>
+            <span>{index+1}.</span>{' '}
+            <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
+          </React.Fragment>
+        );
+
+
 
         switch (inputType) {
           case 'section': {
@@ -635,6 +642,13 @@ export const renderResponses = ({
                       </option>
                     ))}
                   </Field>
+                  <div className="visible-print-block form-fields">
+                    {field.choices.map(choice => (
+                      <div key={choice.id} className="radio">
+                        {choice.title}
+                      </div>
+                    ))}
+                  </div>
                 </PrivateBox>
               </div>
             );
