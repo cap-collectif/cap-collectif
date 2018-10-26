@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import {
@@ -28,7 +28,6 @@ import EmailInput from './EmailInput';
 import AutosizedTextarea from './AutosizedTextarea';
 import Address from './Address';
 import ButtonBody from '../Reply/Form/ButtonBody';
-import ProposalPrivateField from '../Proposal/ProposalPrivateField';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -156,7 +155,28 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'editor') {
-      return <Editor value={value} className={wrapperClassName} {...props} />;
+      return (
+        <React.Fragment>
+          <Editor value={value} className={wrapperClassName} {...props} />
+          <div className="visible-print-block textarea">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </React.Fragment>
+      );
     }
 
     if (type === 'captcha') {
@@ -165,21 +185,23 @@ class ReactBootstrapInput extends React.Component<Props> {
 
     if (type === 'image') {
       return (
-        <ImageUpload
-          id={props.id}
-          className={props.className}
-          valueLink={props.valueLink}
-          value={value}
-          onChange={props.onChange}
-          accept="image/*"
-          preview={props.image}
-        />
+        <div className="hidden-print">
+          <ImageUpload
+            id={props.id}
+            className={props.className}
+            valueLink={props.valueLink}
+            value={value}
+            onChange={props.onChange}
+            accept="image/*"
+            preview={props.image}
+          />
+        </div>
       );
     }
 
     if (type === 'medias') {
       return (
-        <div>
+        <div className="hidden-print">
           <ImageUpload
             id={props.id}
             className={props.className}
@@ -255,7 +277,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           <RadioGroup
             key={props.id}
             horizontal
-            className="radio-group form-fields"
+            className="hidden-print form-fields"
             id={props.id}
             onChange={props.onChange}>
             {field.choices.map(choice => (
@@ -415,10 +437,15 @@ class ReactBootstrapInput extends React.Component<Props> {
           </ControlLabel>
         )}
         {props.help && <HelpBlock>{props.help}</HelpBlock>}{' '}
-        {props.errors && <span className="visible-print-block help-block">{props.errors}</span>}
+        {/* {props.errors && <span className="visible-print-block help-block">{props.errors}</span>} */}
+        {(props.type === 'image' || props.type === 'medias') && (
+          <span className="visible-print-block help-block">
+            <FormattedMessage id="document-to-be-attached-to-this-form" />
+          </span>
+        )}
         {props.description &&
           props.description !== '<div><br /></div>' && (
-            <div style={{ paddingBottom: 15 }}>
+            <div className="pb-15">
               <ButtonBody body={props.description || ''} />
             </div>
           )}

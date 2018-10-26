@@ -66,7 +66,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
           {label && <ControlLabel bsClass="control-label">{label}</ControlLabel>}
           {helpText && <HelpBlock>{helpText}</HelpBlock>}
           {props.description && (
-            <div style={{ paddingBottom: 15 }}>
+            <div className="pb-15">
               <ButtonBody body={props.description || ''} />
             </div>
           )}

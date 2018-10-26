@@ -17,6 +17,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     Plusieurs choix sont possibles
   </span>
   <div
+    className="choice-field"
     key="choice-20"
   >
     <InjectIntl(ReactBootstrapInput)
@@ -34,6 +35,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-21"
   >
     <InjectIntl(ReactBootstrapInput)
@@ -51,6 +53,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-22"
   >
     <InjectIntl(ReactBootstrapInput)
@@ -68,6 +71,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-23"
   >
     <InjectIntl(ReactBootstrapInput)
@@ -104,6 +108,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     Plusieurs choix sont possibles
   </span>
   <div
+    className="choice-field"
     key="choice-20"
   >
     <InjectIntl(ReactBootstrapInput)
@@ -121,6 +126,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-21"
   >
     <InjectIntl(ReactBootstrapInput)
@@ -138,6 +144,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-22"
   >
     <InjectIntl(ReactBootstrapInput)
@@ -155,6 +162,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-23"
   >
     <InjectIntl(ReactBootstrapInput)

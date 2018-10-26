@@ -1,4 +1,9 @@
 /* ===============================================================
+    $VARIABLES
+================================================================*/
+@import "base/variables";
+
+/* ===============================================================
     $PRINT
 ================================================================*/
 
@@ -6,7 +11,7 @@
 @import "app/Resources/fonts/_fonts.scss";
 
 .hidden-print {
-    display: none;
+    display: none !important;
 }
 
 a[href]:after {
@@ -20,7 +25,7 @@ body {
 }
 
 @page {
-    margin: 1cm;
+    margin: 1.5cm 1cm;
 }
 
 .section--alt {
@@ -36,14 +41,14 @@ body {
 }
 
 span.avatar {
-    background-color: #000;
+    background-color: $black;
     @include border-radius(50%);
     width: 45px;
     height: 45px;
     display: flex;
 
     i.cap-user-2-1 {
-        color: #fff;
+        color: $white;
         margin: auto;
         font-size: 20pt;
     }
@@ -66,12 +71,12 @@ h2 {
 
 
 a, a:active, a:hover, h2, .h2, h3, h4, .excerpt {
-    color: #333 !important;
+    color: $dark-text !important;
     text-decoration: none;
 }
 
 p, h3, h4, .excerpt {
-    color: #333;
+    color: $dark-text;
     text-decoration: none;
 }
 
@@ -115,7 +120,7 @@ ul.event__meta {
 img {
     margin: 15pt 0;
     padding: 0;
-    background: #fff;
+    background: $white;
 }
 
 .media .img-circle {
@@ -191,16 +196,16 @@ p img {
         }
     }
 
-    select, .radio-group {
-        display: none !important;
+    select, textarea, .editor {
+        display: none;
     }
 
     input {
         &[type="text"] {
             width: 100%;
-            border-width: 0 0 2px 0;
-            border-color: #acacac;
-            background-color: #fff;
+            border-width: 0 0 1px 0;
+            border-color: $icon-gray-color;
+            background-color: $white;
         }
 
         &[type="checkbox"], &[type="radio"] {
@@ -211,18 +216,19 @@ p img {
         }
     }
 
-    textarea {
-        display: none;
-    }
-
     .textarea {
         width: 100%;
+        margin-bottom: 20px;
 
         span {
             width: 100%;
-            border-bottom: 1px solid #acacac;
+            border-bottom: 1px solid $icon-gray-color;
             height: 31px;
             display: block;
+
+            &:first-child {
+                height: 21px;
+            }
         }
     }
 
@@ -235,7 +241,7 @@ p img {
             content: "";
             width: 12px;
             height: 12px;
-            border: 1px solid #acacac;
+            border: 1px solid $icon-gray-color;
             top: 2px;
             left: 0;
             position: absolute;
@@ -250,68 +256,8 @@ p img {
         border-radius: 50%;
     }
 
-    .form-fields {
-        display: flex;
-        flex-wrap: wrap;
-
-        .other-field {
-            width: 100%;
-            display: flex;
-        }
-
-        .other-field__value {
-            flex: 1;
-            width: 100%;
-        }
-
-        .thumbnail {
-            max-width: 200px;
-            margin-right: 30px;
-
-            img {
-                width: 100%;
-                margin: 10pt 0;
-            }
-
-            .caption {
-                text-align: left;
-            }
-        }
-    }
-
-    .control-label {
-        font-weight: 600;
-        display: block;
-        font-size: 11pt;
-        margin: 10px 0 5px 0;
-
-        .warning {
-            font-weight: 300;
-            color: #dc3545;
-            font-style: italic;
-        }
-    }
-
-    .help-block {
-        display: block;
-        margin: 5px 0 10px 0;
-        font-size: 9pt;
-        color: #707070;
-    }
-
-    .excerpt_private {
-        margin-top: 10px;
-        color: #1D8293;
-    }
-
-    .private-box {
-        border: 1px solid #1D8293;
-        padding: 0 10pt 10pt 10pt;
-        border-radius: 4px;
-
-        .form-group {
-            overflow: hidden;
-        }
+    .image-uploader {
+        display: none;
     }
 
     .ranking__pick-box {
@@ -328,8 +274,87 @@ p img {
             content:"";
             width: 30px;
             margin-right: 5px;
-            border-bottom: 1px solid #acacac;
+            border-bottom: 1px solid $icon-gray-color;
             display: inline-block;
+        }
+    }
+
+    .form-fields {
+        display: flex;
+        flex-wrap: wrap;
+        // margin-top: 10pt;
+
+        .other-field {
+            width: 100%;
+            display: flex;
+        }
+
+        .other-field__value {
+            flex: 1;
+            width: 100%;
+        }
+    }
+
+    .choice-field {
+        width: 190px;
+        margin-right: 30px;
+
+        .thumbnail {
+            img {
+                width: 100%;
+                height: 130px;
+                margin: 10pt 0;
+                object-fit: cover;
+            }
+
+            .caption {
+                text-align: left;
+            }
+        }
+    }
+
+    .control-label {
+        font-weight: 600;
+        display: block;
+        font-size: 11pt;
+        margin: 10pt 0 5pt 0;
+
+        .warning {
+            font-weight: 300;
+            color: $danger-color;
+            font-style: italic;
+        }
+    }
+
+    .help-block {
+        display: block;
+        margin: 7pt 0;
+        font-size: 9pt;
+        color: $dark-gray;
+    }
+
+    .opinion__text {
+        margin-bottom: 8pt;
+    }
+
+    .excerpt {
+        font-size: 9pt;
+        color: $dark-gray;
+    }
+
+    .excerpt_private {
+        margin: 10pt 0;
+        display: inline-block;
+        color: $info-color;
+    }
+
+    .private-box {
+        border: 1px solid $info-color;
+        padding: 0 10pt 10pt 10pt;
+        border-radius: 4px;
+
+        .form-group {
+            overflow: hidden;
         }
     }
 
