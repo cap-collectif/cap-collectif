@@ -113,7 +113,6 @@ framework:
     version: '%assets_version%'
   default_locale: '%locale%'
   trusted_hosts: null
-  trusted_proxies: ['127.0.0.1']
   session:
     handler_id: snc_redis.session.handler
     cookie_httponly: true
