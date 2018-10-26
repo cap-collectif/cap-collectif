@@ -10,7 +10,9 @@ const ConditionalJumps = (props: Props) => {
   const { jumps } = props;
 
   const getConditionsValues = (conditions: Array<Object>) => {
-    if (conditions.length === 0) {
+    const conditionsLength = conditions.length;
+
+    if (conditionsLength === 0) {
       return null;
     }
 
@@ -22,11 +24,17 @@ const ConditionalJumps = (props: Props) => {
             values={{ responseTitle: condition.value.title }}
           />
         )}
-        {conditionKey > 0 && (
-          <React.Fragment>
-            <FormattedMessage id="event.and" /> {condition.value.title}
-          </React.Fragment>
-        )}
+        {conditionKey > 0 &&
+          conditionKey + 1 !== conditionsLength && (
+            <React.Fragment>, {`"${condition.value.title}"`}</React.Fragment>
+          )}
+        {conditionKey > 0 &&
+          conditionKey + 1 === conditionsLength && (
+            <React.Fragment>
+              {' '}
+              <FormattedMessage id="event.and" /> {`"${condition.value.title}"`}
+            </React.Fragment>
+          )}
       </span>
     ));
   };

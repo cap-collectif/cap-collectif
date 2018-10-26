@@ -140,7 +140,7 @@ class Checkbox extends React.Component<Props, State> {
                   {choice.label}
                 </Input>
                 {choice.description && (
-                  <div className="mb-20 pl-20">
+                  <div className="mb-20 pl-20 choice-description">
                     <i dangerouslySetInnerHTML={{ __html: choice.description }} />
                   </div>
                 )}

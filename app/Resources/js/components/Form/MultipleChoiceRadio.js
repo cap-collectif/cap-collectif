@@ -72,20 +72,27 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
           )}
           <div className="form-fields">
             {choices.map((choice, index) => (
-              <Field
-                component={component}
-                type="radio"
-                key={`${name}-${index}`}
-                name={`${name}.value.labels`}
-                id={`${name}-${index}`}
-                disabled={disabled}
-                radioChecked={finalValue === choice.label}
-                onChange={this.uncheckOtherRadio}
-                normalize={this.normalize}
-                radioImage={choice.image}
-                value={choice.label}>
-                {choice.label}
-              </Field>
+              <div className="radio-field" key={index}>
+                <Field
+                  component={component}
+                  type="radio"
+                  key={`${name}-${index}`}
+                  name={`${name}.value.labels`}
+                  id={`${name}-${index}`}
+                  disabled={disabled}
+                  radioChecked={finalValue === choice.label}
+                  onChange={this.uncheckOtherRadio}
+                  normalize={this.normalize}
+                  radioImage={choice.image}
+                  value={choice.label}>
+                  {choice.label}
+                </Field>
+                {choice.description && (
+                  <div className="mb-20 pl-20 choice-description">
+                    <i dangerouslySetInnerHTML={{ __html: choice.description }} />
+                  </div>
+                )}
+              </div>
             ))}
             {props.isOtherAllowed && (
               <div className="other-field" id={`${name}-other-value-row`}>
