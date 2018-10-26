@@ -131,6 +131,21 @@ class ReactBootstrapInput extends React.Component<Props> {
     return button && <InputGroup.Button>{button}</InputGroup.Button>;
   }
 
+  renderPrintTextareaNotepad() {
+    const lines = 15;
+    const rows = [];
+
+    const getLines = () => {
+      for (let i = 0; i < lines; i++) {
+        rows.push(<span key={i} />);
+      }
+
+      return rows;
+    };
+
+    return <div className="visible-print-block textarea-notepad">{getLines()}</div>;
+  }
+
   renderInputGroup({
     wrapperClassName,
     addonBefore,
@@ -158,23 +173,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       return (
         <React.Fragment>
           <Editor value={value} className={wrapperClassName} {...props} />
-          <div className="visible-print-block textarea">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
+          {this.renderPrintTextareaNotepad()}
         </React.Fragment>
       );
     }
@@ -361,23 +360,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       formControl = (
         <React.Fragment>
           <AutosizedTextarea maxLength={props.maxLength} value={value} {...props} />
-          <div className="visible-print-block textarea">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
+          {this.renderPrintTextareaNotepad()}
         </React.Fragment>
       );
     }

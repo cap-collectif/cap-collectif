@@ -216,7 +216,7 @@ p img {
         }
     }
 
-    .textarea {
+    .textarea-notepad {
         width: 100%;
         margin-bottom: 20px;
 
@@ -365,7 +365,7 @@ p img {
     }
 
     .excerpt_private {
-        margin: 10pt 0;
+        margin: 20pt 0 10pt 0;
         display: inline-block;
         color: $info-color;
     }
@@ -375,8 +375,8 @@ p img {
         padding: 0 10pt 10pt 10pt;
         border-radius: 4px;
 
-        .form-group {
-            overflow: hidden;
+        .control-label {
+            margin-top: 10pt;
         }
     }
 
