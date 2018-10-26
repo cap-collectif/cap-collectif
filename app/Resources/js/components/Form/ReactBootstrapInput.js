@@ -426,6 +426,11 @@ class ReactBootstrapInput extends React.Component<Props> {
             <FormattedMessage id="document-to-be-attached-to-this-form" />
           </span>
         )}
+        {props.type === 'select' && (
+          <span className="visible-print-block help-block">
+            <FormattedMessage id="one-possible-answer" />
+          </span>
+        )}
         {props.description &&
           props.description !== '<div><br /></div>' && (
             <div className="pb-15">
