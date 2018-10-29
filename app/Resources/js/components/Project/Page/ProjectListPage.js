@@ -3,7 +3,7 @@ import React from 'react';
 import { Row } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import Pagination from '../../Utils/Pagination';
-import ProjectList from './../List/ProjectsList';
+import ProjectList from '../List/ProjectsList';
 import ProjectListFilter from '../List/ProjectListFilter';
 import Loader from '../../Ui/Loader';
 import { changePage, fetchProjects } from '../../../redux/modules/project';

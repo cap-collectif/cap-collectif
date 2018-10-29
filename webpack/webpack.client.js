@@ -2,7 +2,7 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const webpackConfig = require('./config');
 
@@ -44,20 +44,24 @@ const devConf = {
       path.join(webpackConfig.appDir, 'Resources/js/app.js'),
       path.join(webpackConfig.appDir, 'Resources/js/registration.js'),
     ],
-    'ckeditor/ckeditor': [path.join(webpackConfig.bowerDir, 'ckeditor/ckeditor.js')]
+    'ckeditor/ckeditor': [path.join(webpackConfig.bowerDir, 'ckeditor/ckeditor.js')],
   },
   mode: 'development',
   plugins: [
-    new webpack.ProgressPlugin({profile: true}),
+    new webpack.ProgressPlugin({ profile: true }),
+    new webpack.IgnorePlugin(/vertx/),
     new MomentLocalesPlugin({
       localesToKeep: ['fr', 'en-gb', 'es'],
     }),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../bower_components/jquery-minicolors/jquery.minicolors.min.js'),
+        from: path.resolve(
+          __dirname,
+          '../bower_components/jquery-minicolors/jquery.minicolors.min.js',
+        ),
         to: path.resolve(__dirname, '../web/js/jquery.minicolors.js'),
-      }
-    ])
+      },
+    ]),
   ],
   module: {
     rules: [
@@ -71,8 +75,8 @@ const devConf = {
           {
             loader: 'babel-loader',
             options: {
-              cacheDirectory: true
-            }
+              cacheDirectory: true,
+            },
           },
         ],
       },

@@ -69,7 +69,7 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
         <Modal.Footer>
           <CloseButton onClose={onClose} />
           <SubmitButton
-            id={'confirm-argument-delete'}
+            id="confirm-argument-delete"
             label="global.removeDefinitively"
             isSubmitting={isSubmitting}
             onSubmit={() => {
