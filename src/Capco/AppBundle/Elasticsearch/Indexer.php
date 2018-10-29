@@ -205,12 +205,9 @@ class Indexer
 
     protected function buildDocument(IndexableInterface $object): Document
     {
-        $context = SerializationContext::create();
-        $context->setGroups($object::getElasticsearchSerializationGroups());
-        $context->setSerializeNull(true);
         $json = [];
         try {
-            $json = $this->serializer->serialize($object, 'json', $context);
+            $json = $this->serializer->serialize($object, 'json', ['Elasticsearch']);
         } catch (\Exception $exception) {
             $this->logger->error(__METHOD__ . $exception->getMessage());
         }

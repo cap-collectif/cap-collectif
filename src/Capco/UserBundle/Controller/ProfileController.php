@@ -190,21 +190,17 @@ class ProfileController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
 
         $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
 
-        $projectsProps = $serializer->serialize(
-            ['projects' => $projectsRaw],
-            'json',
-            SerializationContext::create()->setGroups([
-                'Projects',
-                'UserDetails',
-                'Steps',
-                'ThemeDetails',
-                'ProjectType',
-            ])
-        );
+        $projectsProps = $serializer->serialize(['projects' => $projectsRaw], 'json', [
+            'Projects',
+            'UserDetails',
+            'Steps',
+            'ThemeDetails',
+            'ProjectType',
+        ]);
         $projectsCount = \count($projectsRaw);
 
         $opinionTypesWithUserOpinions = $this->get('capco.opinion_type.repository')->getByUser(
@@ -247,14 +243,14 @@ class ProfileController extends Controller
      */
     public function showProjectsAction(User $user)
     {
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
         $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
 
-        $projectsProps = $serializer->serialize(
-            ['projects' => $projectsRaw],
-            'json',
-            SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails'])
-        );
+        $projectsProps = $serializer->serialize(['projects' => $projectsRaw], 'json', [
+            'Projects',
+            'Steps',
+            'ThemeDetails',
+        ]);
         $projectsCount = \count($projectsRaw);
 
         return [
@@ -415,18 +411,14 @@ class ProfileController extends Controller
         $proposalsPropsBySteps = [];
         foreach ($proposalsWithStep as $key => $value) {
             $proposalsPropsBySteps[$key] = json_decode(
-                $this->get('jms_serializer')->serialize(
-                    $value,
-                    'json',
-                    SerializationContext::create()->setGroups([
-                        'Steps',
-                        'Proposals',
-                        'PrivateProposals',
-                        'ProposalResponses',
-                        'UsersInfos',
-                        'UserMedias',
-                    ])
-                ),
+                $this->get('serializer')->serialize($value, 'json', [
+                    'Steps',
+                    'Proposals',
+                    'PrivateProposals',
+                    'ProposalResponses',
+                    'UsersInfos',
+                    'UserMedias',
+                ]),
                 true
             );
         }

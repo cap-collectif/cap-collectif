@@ -7,12 +7,9 @@ Capco\AppBundle\Entity\Responses\AbstractResponse:
       media: Capco\AppBundle\Entity\Responses\MediaResponse
   attributes:
     id:
-      expose: true
       groups: [Proposals, Replies]
     updatedAt:
-      expose: true
       groups: [Proposals, Replies]
     question:
-      expose: true
       groups: [Proposals, Replies]
       serialized_name: field

@@ -1,8 +1,4 @@
 Capco\AppBundle\Entity\Questions\MediaQuestion:
-  exclusion_policy: ALL
   attributes:
     medias:
-      expose: true
-      type: array
-      serialized_name: medias
       groups: [Questions, Proposals, Replies]

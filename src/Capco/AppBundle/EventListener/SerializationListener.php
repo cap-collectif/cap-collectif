@@ -101,12 +101,10 @@ class SerializationListener extends AbstractSerializationListener
         $context->attributes->get('groups')->map(function (array $groups) use ($event) {
             if (\in_array('LogDetails', $groups, true)) {
                 $element = $event->getObject();
-                $context = new SerializationContext();
-                $context->setGroups(['LogDetails']);
                 $serializedLogs = $this->serializer->serialize(
                     $this->logManager->getLogEntries($element),
                     'json',
-                    $context
+                    ['LogDetails']
                 );
                 $event->getVisitor()->addData('logs', json_decode($serializedLogs));
             }

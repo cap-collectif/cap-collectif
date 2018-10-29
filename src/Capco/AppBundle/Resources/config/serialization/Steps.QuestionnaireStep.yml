@@ -1,6 +1,4 @@
 Capco\AppBundle\Entity\Steps\QuestionnaireStep:
-  exclusion_policy: ALL
   attributes:
     footer:
-      expose: true
       groups: [QuestionnaireSteps]

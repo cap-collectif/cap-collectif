@@ -1,28 +1,14 @@
 Capco\AppBundle\Entity\ProposalCollectVote:
-  exclusion_policy: ALL
   attributes:
     id:
-      expose: true
-      type: integer
       groups: [ProposalCollectVotes]
     collectStep:
-      expose: true
-      type: Capco\AppBundle\Entity\Steps\CollectStep
       groups: [ProposalCollectVotes]
-      serialized_name: collectStep
     proposal:
-      expose: true
-      type: Capco\AppBundle\Entity\Proposal
       groups: [ProposalCollectVotes]
     user:
-      expose: true
-      type: Capco\UserBundle\Entity\User
       groups: [ProposalCollectVotes]
     username:
-      expose: true
-      type: string
       groups: [ProposalCollectVotes]
     private:
-      expose: true
-      type: boolean
       groups: [ProposalCollectVotes]

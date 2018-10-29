@@ -1,25 +1,12 @@
 Capco\AppBundle\Entity\Source:
-  exclusion_policy: ALL
   attributes:
     id:
-      expose: true
-      type: string
       groups: [Elasticsearch]
     body:
-      expose: true
-      type: string
       groups: [Elasticsearch]
     title:
-      expose: true
-      type: string
       groups: [Elasticsearch]
     createdAt:
-      expose: true
-      type: DateTime
       groups: [Elasticsearch]
-      serialized_name: createdAt
     updatedAt:
-      expose: true
-      type: DateTime
       groups: [Elasticsearch]
-      serialized_name: updatedAt

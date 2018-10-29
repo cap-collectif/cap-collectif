@@ -1,10 +1,6 @@
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule:
-  exclusion_policy: ALL
   attributes:
     type:
-      expose: true
-      type: string
       groups: [Questions]
     number:
-      type: integer
       groups: [Questions]

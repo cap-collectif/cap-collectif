@@ -2,9 +2,6 @@ Capco\AppBundle\Entity\Project:
   attributes:
     id:
       groups: [Projects, Elasticsearch]
-    getElasticsearchSerializationGroups:
-      groups: [Projects]
-      serialized_name: 'baz'
     title:
       groups: [Projects, Elasticsearch]
     Author:

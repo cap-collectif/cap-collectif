@@ -1,25 +1,15 @@
 Capco\AppBundle\Entity\Synthesis\Synthesis:
-  exclusion_policy: ALL
   attributes:
     id:
-      expose: true
       groups: [Syntheses, SynthesisDetails]
     enabled:
-      expose: true
       groups: [SynthesisDetails]
     editable:
-      expose: true
       groups: [SynthesisDetails]
-    consultationStep:
-      type: Capco\AppBundle\Entity\Steps\ConsultationStep
     elements:
-      type: ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>
-      expose: true
       groups: [Syntheses, SynthesisDetails, Elements]
     displayRules:
-      expose: true
       groups: [Syntheses, SynthesisDetails]
-      serialized_name: displayRules
   relations:
     - rel: self
       href:

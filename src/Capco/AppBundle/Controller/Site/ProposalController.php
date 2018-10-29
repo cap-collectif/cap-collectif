@@ -46,7 +46,7 @@ class ProposalController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        $serializer = $this->get('serializer');
+        $serializer = $this->get('jms_serializer');
         $urlResolver = $this->get(UrlResolver::class);
 
         $stepUrls = $project

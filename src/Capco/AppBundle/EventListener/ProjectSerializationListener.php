@@ -94,9 +94,7 @@ class ProjectSerializationListener extends AbstractSerializationListener
 
             $abstractSteps = $this->helper->getAbstractSteps($project);
 
-            $context = new SerializationContext();
-            $context->setGroups(['Steps', 'StepTypes']);
-            $steps = $this->serializer->serialize($abstractSteps, 'json', $context);
+            $steps = $this->serializer->serialize($abstractSteps, 'json', ['Steps', 'StepTypes']);
 
             $event->getVisitor()->addData('steps', json_decode($steps, true));
         }

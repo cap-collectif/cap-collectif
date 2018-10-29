@@ -1,46 +1,25 @@
 Capco\AppBundle\Entity\Post:
-  exclusion_policy: ALL
   attributes:
     id:
-      expose: true
-      type: integer
       groups: [Posts, PostDetails, Elasticsearch]
     media:
-      expose: true
       groups: [Posts, PostDetails]
-      serialized_name: media
     title:
-      expose: true
-      type: string
       groups: [Posts, PostDetails, Elasticsearch]
     createdAt:
-      expose: true
-      type: DateTime
-      serialized_name: createdAt
       groups: [Posts, PostDetails, Elasticsearch]
     updatedAt:
-      expose: true
-      type: DateTime
       groups: [Posts, PostDetails, Elasticsearch]
     publishedAt:
-      expose: true
-      type: DateTime
       groups: [Default]
-      serialized_name: publishedAt
     Authors:
-      expose: true
       groups: [Posts, PostDetails]
       serialized_name: authors
     themes:
-      expose: true
       groups: [Posts, PostDetails, Elasticsearch]
-  virtual_properties:
     getAbstractOrBeginningOfTheText:
       serialized_name: abstract
-      type: string
       groups: [Posts, Elasticsearch]
     getBodyText:
-      expose: true
-      type: string
       serialized_name: body
       groups: [Proposals, Elasticsearch]

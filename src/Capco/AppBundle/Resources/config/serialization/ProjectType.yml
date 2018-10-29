@@ -1,15 +1,8 @@
 Capco\AppBundle\Entity\ProjectType:
-  exclusion_policy: ALL
   attributes:
     title:
-      expose: true
-      type: string
       groups: [ProjectType]
     slug:
-      expose: true
-      type: string
       groups: [ProjectType]
     color:
-      expose: true
-      type: string
       groups: [ProjectType]

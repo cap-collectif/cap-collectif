@@ -91,13 +91,7 @@ class ThemeController extends Controller
                 )->getProjectsByTheme($theme, $this->getUser()),
             ],
             'json',
-            SerializationContext::create()->setGroups([
-                'Projects',
-                'UserDetails',
-                'Steps',
-                'Themes',
-                'ProjectType',
-            ])
+            ['Projects', 'UserDetails', 'Steps', 'Themes', 'ProjectType']
         );
 
         $ideaCreationProps = $serializer->serialize(
@@ -106,7 +100,7 @@ class ThemeController extends Controller
                 'themeId' => $theme->getId(),
             ],
             'json',
-            SerializationContext::create()->setGroups(['ThemeDetails'])
+            ['ThemeDetails']
         );
 
         return [

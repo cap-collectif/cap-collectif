@@ -1,13 +1,9 @@
 Capco\AppBundle\Entity\Selection:
-  exclusion_policy: ALL
   attributes:
     proposal:
-      expose: true
       groups: [Proposals, SelectionSteps]
     selectionStep:
-      expose: true
       groups: [Proposals, SelectionSteps, Statuses, Elasticsearch]
       serialized_name: step
     status:
-      expose: true
       groups: [Proposals, SelectionSteps, Statuses, Elasticsearch]

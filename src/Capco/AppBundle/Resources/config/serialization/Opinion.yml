@@ -1,5 +1,4 @@
 Capco\AppBundle\Entity\Opinion:
-  exclusion_policy: ALL
   attributes:
     id:
       groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]

@@ -1,15 +1,8 @@
 Capco\AppBundle\Entity\Status:
-  exclusion_policy: ALL
   attributes:
     id:
-      expose: true
-      type: string
       groups: [Statuses, Proposals, Elasticsearch]
     name:
-      expose: true
-      type: string
       groups: [Statuses, Proposals, Elasticsearch]
     color:
-      expose: true
-      type: string
       groups: [Statuses, Proposals]

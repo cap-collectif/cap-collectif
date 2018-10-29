@@ -42,13 +42,9 @@ class OpinionTypeSerializationListener extends AbstractSerializationListener
                 $opinionType->getConsultationStepType()
             );
 
-            $context = new SerializationContext();
-            $context->setGroups(['OpinionTypeDetails']);
-            $serializedTypes = $this->serializer->serialize(
-                ['data' => $availableTypes],
-                'json',
-                $context
-            );
+            $serializedTypes = $this->serializer->serialize(['data' => $availableTypes], 'json', [
+                'OpinionTypeDetails',
+            ]);
 
             $event
                 ->getVisitor()
