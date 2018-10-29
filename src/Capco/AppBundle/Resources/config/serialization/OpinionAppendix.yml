@@ -1,0 +1,14 @@
+Capco\AppBundle\Entity\OpinionAppendix:
+  exclusion_policy: ALL
+  attributes:
+    id:
+      expose: true
+      type: integer
+    body:
+      expose: true
+      type: string
+      groups: [Opinions, OpinionVersions]
+    appendixType:
+      expose: true
+      groups: [Opinions, OpinionVersions]
+      serialized_name: type

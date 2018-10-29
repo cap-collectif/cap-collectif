@@ -1,0 +1,126 @@
+Capco\AppBundle\Entity\ProposalForm:
+  exclusion_policy: ALL
+  attributes:
+    id:
+      expose: true
+      type: string
+      groups: [Proposals, ProposalForms, Elasticsearch]
+    title:
+      expose: true
+      type: string
+      groups: [ProposalForms]
+    titleHelpText:
+      expose: true
+      type: string
+      groups: [ProposalForms]
+      serialized_name: titleHelpText
+    description:
+      expose: true
+      type: string
+      groups: [ProposalForms]
+    descriptionHelpText:
+      expose: true
+      type: string
+      groups: [ProposalForms]
+      serialized_name: descriptionHelpText
+    themeHelpText:
+      expose: true
+      type: string
+      groups: [ProposalForms]
+      serialized_name: themeHelpText
+    districtHelpText:
+      expose: true
+      type: string
+      groups: [ProposalForms]
+      serialized_name: districtHelpText
+    categoryHelpText:
+      expose: true
+      type: string
+      groups: [ProposalForms]
+      serialized_name: categoryHelpText
+    addressHelpText:
+      expose: true
+      type: string
+      groups: [ProposalForms]
+      serialized_name: addressHelpText
+    summaryHelpText:
+      expose: true
+      groups: [ProposalForms]
+      serialized_name: summaryHelpText
+    usingThemes:
+      expose: true
+      type: boolean
+      groups: [ProposalForms]
+      serialized_name: usingThemes
+    usingCategories:
+      expose: true
+      type: boolean
+      groups: [ProposalForms]
+      serialized_name: usingCategories
+    usingDistrict:
+      expose: true
+      type: boolean
+      groups: [ProposalForms]
+      serialized_name: usingDistrict
+    usingAddress:
+      expose: true
+      type: boolean
+      groups: [ProposalForms]
+      serialized_name: usingAddress
+    themeMandatory:
+      expose: true
+      type: boolean
+      groups: [ProposalForms]
+      serialized_name: themeMandatory
+    categoryMandatory:
+      expose: true
+      type: boolean
+      groups: [ProposalForms]
+      serialized_name: categoryMandatory
+    districtMandatory:
+      expose: true
+      type: boolean
+      groups: [ProposalForms]
+      serialized_name: districtMandatory
+    categories:
+      expose: true
+      groups: [ProposalForms]
+    districts:
+      expose: true
+      groups: [ProposalForms]
+    zoomMap:
+      expose: true
+      type: integer
+      groups: [ProposalForms]
+      serialized_name: zoomMap
+    latMap:
+      expose: true
+      type: float
+      groups: [ProposalForms]
+      serialized_name: latMap
+    lngMap:
+      expose: true
+      type: float
+      groups: [ProposalForms]
+      serialized_name: lngMap
+    commentable:
+      expose: true
+      type: boolean
+      groups: [ProposalForms]
+    costable:
+      expose: true
+      type: boolean
+      groups: [ProposalForms]
+    proposalInAZoneRequired:
+      expose: true
+      type: boolean
+      groups: [ProposalForms]
+      serialized_name: proposalInAZoneRequired
+  virtual_properties:
+    canContribute:
+      serialized_name: isContribuable
+      type: boolean
+      groups: [ProposalForms]
+    getRealQuestions:
+      serialized_name: fields
+      groups: [ProposalForms]

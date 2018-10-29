@@ -1,0 +1,10 @@
+Capco\AppBundle\Entity\Answer:
+  attributes:
+    id:
+      type: integer
+    title:
+      groups: [Opinions, OpinionVersions, Proposals]
+    body:
+      groups: [Opinions, OpinionVersions, Proposals]
+    author:
+      groups: [Opinions, OpinionVersions, Proposals]

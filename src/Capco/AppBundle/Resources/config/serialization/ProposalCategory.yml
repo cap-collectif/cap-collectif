@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\ProposalCategory:
+  exclusion_policy: ALL
+  attributes:
+    id:
+      expose: true
+      type: string
+      groups: [ProposalForms, ProposalCategories, Proposals, Elasticsearch]
+    name:
+      expose: true
+      type: string
+      groups: [ProposalForms, ProposalCategories, Proposals]

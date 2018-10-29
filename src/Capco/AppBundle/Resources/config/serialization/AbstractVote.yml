@@ -1,0 +1,4 @@
+Capco\AppBundle\Entity\AbstractVote:
+  attributes:
+    user:
+      groups: [OpinionVersions, UserMedias]

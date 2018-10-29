@@ -91,29 +91,24 @@ services:
 
   Capco\AppBundle\EventListener\ProjectSerializationListener:
     public: true
-    tags:
-      - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
   Capco\AppBundle\EventListener\SerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
   Capco\AppBundle\EventListener\ThemeSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
   Capco\AppBundle\EventListener\ProposalSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.event.serialization_listener:
   Capco\AppBundle\EventListener\EventSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.media_response.serialization_listener:
   Capco\AppBundle\EventListener\MediaResponseSerializationListener:
@@ -124,26 +119,22 @@ services:
 #  capco.source.serialization_listener:
   Capco\AppBundle\EventListener\SourceSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.opinion.serialization_listener:
   Capco\AppBundle\EventListener\OpinionSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.user.serialization_listener:
   Capco\AppBundle\EventListener\UserSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.post.serialization_listener:
   Capco\AppBundle\EventListener\PostSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.synthesis.synthesis_listener:
   Capco\AppBundle\EventListener\SynthesisLoggableListener:
@@ -154,47 +145,39 @@ services:
 #  capco.opinion_type.serialization_listener:
   Capco\AppBundle\EventListener\OpinionTypeSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.proposal_vote.serialization_listener:
   Capco\AppBundle\EventListener\ProposalVoteSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.selection_step.serialization_listener:
   Capco\AppBundle\EventListener\SelectionStepSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.consultation_step.serialization_listener:
   Capco\AppBundle\EventListener\ConsultationStepSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.collect_step.serialization_listener:
   Capco\AppBundle\EventListener\CollectStepSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.questionnaire_step.serialization_listener:
   Capco\AppBundle\EventListener\QuestionnaireStepSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.abstract_step.serialization_listener:
   Capco\AppBundle\EventListener\AbstractStepSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true
 
 #  capco.question_choice.serialization_listener:
   Capco\AppBundle\EventListener\QuestionChoiceSerializationListener:
     public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+    autowire: true

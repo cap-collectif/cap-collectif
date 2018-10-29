@@ -1,0 +1,18 @@
+Capco\AppBundle\Entity\Responses\AbstractResponse:
+  exclusion_policy: ALL
+  discriminator:
+    field_name: response_type
+    map:
+      value: Capco\AppBundle\Entity\Responses\ValueResponse
+      media: Capco\AppBundle\Entity\Responses\MediaResponse
+  attributes:
+    id:
+      expose: true
+      groups: [Proposals, Replies]
+    updatedAt:
+      expose: true
+      groups: [Proposals, Replies]
+    question:
+      expose: true
+      groups: [Proposals, Replies]
+      serialized_name: field

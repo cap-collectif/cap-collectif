@@ -10644,16 +10644,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.20",
+            "version": "dev-waiting-42",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/symfony.git",
-                "reference": "f6b8ddc362b1cf3fb06548693c3adbb736092412"
+                "url": "https://github.com/cap-collectif/symfony.git",
+                "reference": "5e029e50ba00ac6e3724e78fdf2b5eaf717e3d8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/f6b8ddc362b1cf3fb06548693c3adbb736092412",
-                "reference": "f6b8ddc362b1cf3fb06548693c3adbb736092412",
+                "url": "https://api.github.com/repos/cap-collectif/symfony/zipball/5e029e50ba00ac6e3724e78fdf2b5eaf717e3d8f",
+                "reference": "5e029e50ba00ac6e3724e78fdf2b5eaf717e3d8f",
                 "shasum": ""
             },
             "require": {
@@ -10795,7 +10795,11 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-12-06T15:24:36+00:00"
+            "support": {
+                "source": "https://github.com/cap-collectif/symfony/tree/waiting-42",
+                "issues": "https://github.com/cap-collectif/symfony/issues"
+            },
+            "time": "2018-10-29T14:14:48+00:00"
         },
         {
             "name": "tilleuls/ckeditor-sonata-media-bundle",
@@ -15579,6 +15583,12 @@
     ],
     "aliases": [
         {
+            "alias": "3.4.17",
+            "alias_normalized": "3.4.17.0",
+            "version": "dev-waiting-42",
+            "package": "symfony/symfony"
+        },
+        {
             "alias": "3.13.1",
             "alias_normalized": "3.13.1.0",
             "version": "dev-bugfix-3.11.1",
@@ -15599,6 +15609,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "symfony/symfony": 20,
         "sonata-project/media-bundle": 20,
         "sonata-project/datagrid-bundle": 20,
         "friendsofsymfony/elastica-bundle": 20,

@@ -1,0 +1,17 @@
+Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
+  exclusion_policy: ALL
+  attributes:
+    id:
+      expose: true
+      type: string
+      groups: [ProjectAbstractSteps]
+    project:
+      expose: true
+      groups: [ProjectAbstractSteps]
+    step:
+      expose: true
+      groups: [ProjectAbstractSteps, Steps]
+    position:
+      expose: true
+      type: integer
+      groups: [ProjectAbstractSteps, Steps]

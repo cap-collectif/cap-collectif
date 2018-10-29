@@ -97,6 +97,8 @@ parameters:
 
 framework:
   secret: '%secret%'
+  serializer:
+    enabled: true
   cache:
     app: cache.adapter.redis
     default_redis_provider: "redis://%redis_host%"
@@ -125,6 +127,31 @@ framework:
     paths:
       - '%kernel.root_dir%/../translations'
     fallback: fr-FR
+
+jms_serializer:
+  metadata:
+    cache: file
+    debug: '%kernel.debug%'
+    file_cache:
+      dir: '%kernel.cache_dir%/serializer'
+    auto_detection: false
+    directories:
+      App:
+        namespace_prefix: "Capco\\AppBundle\\Entity"
+        path: '%kernel.root_dir%/Resources/serializer'
+      User:
+        namespace_prefix: "Capco\\UserBundle"
+        path: '@CapcoUserBundle/Resources/config/serializer'
+      Media:
+        namespace_prefix: "Capco\\MediaBundle"
+        path: '@CapcoMediaBundle/Resources/config/serializer'
+      FOSUserBundle:
+        namespace_prefix: "FOS\\UserBundle"
+        path: '@CapcoUserBundle/Resources/config/serializer/FOSUserBundle'
+      GedmoLoggable:
+        namespace_prefix: "Gedmo\\Loggable"
+        path: '@CapcoAppBundle/Resources/config/serializer/GedmoLoggable'
+  enable_short_alias: false
 
 twig:
   debug: '%kernel.debug%'
@@ -599,29 +626,6 @@ lexik_jwt_authentication:
   token_ttl: '%jwt_token_ttl%'
   user_identity_field: email
 
-jms_serializer:
-  metadata:
-    cache: file
-    debug: '%kernel.debug%'
-    file_cache:
-      dir: '%kernel.cache_dir%/serializer'
-    auto_detection: false
-    directories:
-      App:
-        namespace_prefix: "Capco\\AppBundle\\Entity"
-        path: '%kernel.root_dir%/Resources/serializer'
-      User:
-        namespace_prefix: "Capco\\UserBundle"
-        path: '@CapcoUserBundle/Resources/config/serializer'
-      Media:
-        namespace_prefix: "Capco\\MediaBundle"
-        path: '@CapcoMediaBundle/Resources/config/serializer'
-      FOSUserBundle:
-        namespace_prefix: "FOS\\UserBundle"
-        path: '@CapcoUserBundle/Resources/config/serializer/FOSUserBundle'
-      GedmoLoggable:
-        namespace_prefix: "Gedmo\\Loggable"
-        path: '@CapcoAppBundle/Resources/config/serializer/GedmoLoggable'
 
 exercise_html_purifier:
   default:

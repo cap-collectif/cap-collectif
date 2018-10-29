@@ -6,13 +6,14 @@ use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class OpinionTypeSerializationListener extends AbstractSerializationListener
 {
     protected $resolver;
     protected $serializer;
 
-    public function __construct(OpinionTypesResolver $resolver, Serializer $serializer)
+    public function __construct(OpinionTypesResolver $resolver, SerializerInterface $serializer)
     {
         $this->resolver = $resolver;
         $this->serializer = $serializer;
@@ -49,10 +50,9 @@ class OpinionTypeSerializationListener extends AbstractSerializationListener
                 $context
             );
 
-            $event->getVisitor()->addData(
-                'availableLinkTypes',
-                json_decode($serializedTypes, true)['data']
-            );
+            $event
+                ->getVisitor()
+                ->addData('availableLinkTypes', json_decode($serializedTypes, true)['data']);
         }
     }
 }

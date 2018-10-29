@@ -10,7 +10,7 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
 use JMS\Serializer\SerializationContext;
-use JMS\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;

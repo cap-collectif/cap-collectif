@@ -896,6 +896,7 @@ class Project implements IndexableInterface
                 return $step->getStep();
             }
         }
+        return null;
     }
 
     public function getExportableSteps()

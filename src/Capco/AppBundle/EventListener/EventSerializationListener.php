@@ -6,16 +6,15 @@ use Capco\AppBundle\Entity\Event;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class EventSerializationListener extends AbstractSerializationListener
 {
     private $router;
     private $serializer;
 
-    public function __construct(
-      RouterInterface $router,
-      Serializer $serializer
-    ) {
+    public function __construct(RouterInterface $router, SerializerInterface $serializer)
+    {
         $this->router = $router;
         $this->serializer = $serializer;
     }
@@ -44,12 +43,9 @@ class EventSerializationListener extends AbstractSerializationListener
                 true
             );
 
-            $event->getVisitor()->addData(
-                '_links',
-                [
-                    'show' => $showUrl,
-                ]
-            );
+            $event->getVisitor()->addData('_links', [
+                'show' => $showUrl,
+            ]);
         }
     }
 }

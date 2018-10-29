@@ -1,0 +1,19 @@
+Capco\AppBundle\Entity\OpinionTypeAppendixType:
+  exclusion_policy: ALL
+  attributes:
+    id:
+      expose: true
+      type: string
+    position:
+      expose: true
+      type: integer
+      groups: [Opinions, OpinionTypeDetails]
+  virtual_properties:
+    getAppendixTypeTitle:
+      serialized_name: title
+      type: string
+      groups: [Opinions, OpinionTypeDetails]
+    getAppendixTypeId:
+      serialized_name: id
+      type: string
+      groups: [Opinions, OpinionTypeDetails]

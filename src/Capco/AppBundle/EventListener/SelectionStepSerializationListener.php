@@ -5,13 +5,14 @@ namespace Capco\AppBundle\EventListener;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class SelectionStepSerializationListener extends AbstractSerializationListener
 {
     protected $serializer;
     protected $router;
 
-    public function __construct(Serializer $serializer, RouterInterface $router)
+    public function __construct(SerializerInterface $serializer, RouterInterface $router)
     {
         $this->serializer = $serializer;
         $this->router = $router;
@@ -55,19 +56,16 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
             }
             $event->getVisitor()->addData('counters', $counters);
             if ($project) {
-                $event->getVisitor()->addData(
-                  '_links',
-                  [
-                      'show' => $this->router->generate(
-                          'app_project_show_selection',
-                          [
-                              'projectSlug' => $project->getSlug(),
-                              'stepSlug' => $step->getSlug(),
-                          ],
-                          true
-                      ),
-                  ]
-              );
+                $event->getVisitor()->addData('_links', [
+                    'show' => $this->router->generate(
+                        'app_project_show_selection',
+                        [
+                            'projectSlug' => $project->getSlug(),
+                            'stepSlug' => $step->getSlug(),
+                        ],
+                        true
+                    ),
+                ]);
             }
         }
     }

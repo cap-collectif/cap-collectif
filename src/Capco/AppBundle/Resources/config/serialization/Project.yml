@@ -1,0 +1,39 @@
+Capco\AppBundle\Entity\Project:
+  attributes:
+    id:
+      groups: [Projects, Elasticsearch]
+    getElasticsearchSerializationGroups:
+      groups: [Projects]
+      serialized_name: 'baz'
+    title:
+      groups: [Projects, Elasticsearch]
+    Author:
+      groups: [Projects]
+      serialized_name: author
+    contributionsCount:
+      groups: [Projects]
+    participantsCount:
+      groups: [Projects]
+    votesCount:
+      groups: [Projects]
+    canContribute:
+      groups: [Projects]
+    createdAt:
+      groups: [Projects, Elasticsearch]
+    updatedAt:
+      groups: [Default]
+    themes:
+      groups: [Projects]
+    projectType:
+      groups: [Projects]
+    video:
+      groups: [Projects]
+    Cover:
+      groups: [Default]
+      serialized_name: cover
+    participativeStep:
+      groups: [Projects]
+      serialized_name: hasParticipativeStep
+    startAt:
+      groups: [Projects]
+      serialized_name: startAt

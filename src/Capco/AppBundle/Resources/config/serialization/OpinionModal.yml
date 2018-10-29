@@ -1,0 +1,15 @@
+Capco\AppBundle\Entity\OpinionModal:
+  exclusion_policy: ALL
+  attributes:
+    key:
+      expose: true
+      type: string
+      groups: [Opinions, OpinionVersions]
+    title:
+      expose: true
+      type: string
+      groups: [Opinions, OpinionVersions]
+    diff:
+      expose: true
+      type: string
+      groups: [Opinions, OpinionVersions]

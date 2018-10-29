@@ -1,0 +1,96 @@
+Capco\AppBundle\Entity\Synthesis\SynthesisElement:
+  exclusion_policy: ALL
+  attributes:
+    id:
+      type: string
+      expose: true
+      groups: [ElementsTree, Elements, ElementsList, ElementsPublished, ElementDetails]
+    published:
+      expose: true
+      groups: [ElementsList, ElementDetails, ElementsTree]
+    createdAt:
+      expose: true
+      groups: [ElementsList, ElementsPublished, ElementDetails]
+    updatedAt:
+      expose: true
+      groups: [ElementsList, ElementsPublished, ElementDetails]
+    archived:
+      expose: true
+      groups: [ElementsList, ElementDetails]
+    author:
+      expose: true
+      groups: [ElementsList, ElementsPublished, ElementDetails, UserDetails]
+    path:
+      expose: true
+      groups: [ElementsTree, ElementsList, ElementDetails]
+    parent:
+      expose: true
+      groups: [ElementDetails]
+      max_depth: 1
+    children:
+      type: ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>
+      expose: true
+      groups: [ElementsTree, ElementDetails]
+      max_depth: 2
+    displayType:
+      serialized_name: displayType
+      expose: true
+      groups: [ElementsTree, ElementsList, ElementsPublished, ElementDetails]
+    title:
+      expose: true
+      groups: [ElementsTree, ElementsList, ElementsPublished, Elements, ElementDetails]
+    link:
+      expose: true
+      groups: [ElementDetails, ElementsPublished]
+    notation:
+      expose: true
+      groups: [ElementsList, ElementDetails]
+    comment:
+      expose: true
+      groups: [ElementDetails]
+    votes:
+      expose: true
+      groups: [ElementDetails]
+    linkedDataCreation:
+      expose: true
+      groups: [ElementsList, ElementsPublished, ElementDetails]
+      serialized_name: linkedDataCreation
+    originalDivision:
+      expose: true
+      groups: [ElementDetails]
+      serialized_name: originalDivision
+    division:
+      expose: true
+      groups: [ElementDetails]
+    level:
+      expose: true
+      groups: [ElementsTree, ElementDetails, ElementsPublished]
+    description:
+      expose: true
+      groups: [ElementsTree, ElementsList, ElementDetails, ElementsPublished]
+    childrenCount:
+      serialized_name: childrenCount
+      groups: [ElementsTree, ElementDetails]
+    getDecodedBody:
+      serialized_name: body
+      groups: [ElementsTree, ElementsList, ElementDetails, ElementsPublished]
+    hasLinkedData:
+      serialized_name: hasLinkedData
+      groups: [ElementsList, ElementsPublished, ElementDetails]
+  relations:
+    - rel: self
+      href:
+        route: get_synthesis_element
+        parameters:
+          synthesis_id: expr(object.getSynthesis().getId())
+          element_id: expr(object.getId())
+      exclusion:
+        groups: [Elements, ElementsList, ElementDetails]
+    - rel: history
+      href:
+        route: get_synthesis_element_history
+        parameters:
+          synthesis_id: expr(object.getSynthesis().getId())
+          element_id: expr(object.getId())
+      exclusion:
+        groups: [Elements, ElementsList, ElementDetails]

@@ -1,0 +1,8 @@
+Capco\UserBundle\Entity\UserType:
+  attributes:
+    id:
+      groups: [Default, UsersInfos, Elasticsearch]
+    slug:
+      groups: [Default, UsersInfos]
+    name:
+      groups: [Default, UsersInfos]

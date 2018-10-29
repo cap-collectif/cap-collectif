@@ -1,0 +1,46 @@
+Capco\AppBundle\Entity\Questions\AbstractQuestion:
+  exclusion_policy: ALL
+  discriminator:
+    field_name: question_type
+    map:
+      simple: Capco\AppBundle\Entity\Questions\SimpleQuestion
+      multiple_choice: Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion
+      media: Capco\AppBundle\Entity\Questions\MediaQuestion
+      section: Capco\AppBundle\Entity\Questions\SectionQuestion
+  attributes:
+    id:
+      expose: true
+      type: integer
+      groups: [Questions, Proposals, Replies]
+    title:
+      expose: true
+      type: string
+      groups: [Questions, Proposals, Replies]
+      serialized_name: question
+    slug:
+      expose: true
+      type: string
+      groups: [Questions, Proposals, Replies]
+    helpText:
+      serialized_name: helpText
+      expose: true
+      type: string
+      groups: [Questions, Proposals, Replies]
+    required:
+      expose: true
+      type: boolean
+      groups: [Questions, Proposals, Replies]
+    private:
+      expose: true
+      type: boolean
+      groups: [Questions, Proposals, Replies]
+    description:
+      expose: true
+      type: string
+      groups: [Questions, Proposals, Replies]
+  virtual_properties:
+    getInputType:
+      expose: true
+      type: string
+      serialized_name: type
+      groups: [Questions, Proposals, Replies]

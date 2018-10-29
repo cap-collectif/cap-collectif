@@ -1,0 +1,30 @@
+Capco\AppBundle\Entity\Steps\SelectionStep:
+  exclusion_policy: ALL
+  attributes:
+    voteType:
+      expose: true
+      type: integer
+      groups: [Steps]
+      serialized_name: voteType
+    votesHelpText:
+      expose: true
+      type: string
+      groups: [Steps]
+      serialized_name: votesHelpText
+    budget:
+      expose: true
+      type: float
+      groups: [Steps]
+    defaultOrder:
+      expose: true
+      type: string
+      groups: [Steps]
+      serialized_name: defaultOrder
+    statuses:
+      expose: true
+      groups: [Steps, Statuses]
+    voteThreshold:
+      expose: true
+      groups: [VoteThreshold]
+      type: integer
+      serialized_name: voteThreshold

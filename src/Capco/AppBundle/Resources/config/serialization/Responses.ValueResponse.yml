@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\Responses\ValueResponse:
+  exclusion_policy: ALL
+  attributes:
+    value:
+      groups: [Proposals, Replies]

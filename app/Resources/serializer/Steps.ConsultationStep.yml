@@ -2,7 +2,6 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
   exclusion_policy: ALL
   properties:
     titleHelpText:
-      expose: true
       type: string
       groups: [ConsultationSteps]
       serialized_name: titleHelpText

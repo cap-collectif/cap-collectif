@@ -26,7 +26,7 @@ class ProjectSerializationListener extends AbstractSerializationListener
     public function __construct(
         StepResolver $stepResolver,
         MediaExtension $mediaExtension,
-        Serializer $serializer,
+        SerializerInterface $serializer,
         ProjectHelper $helper,
         ContributionResolver $contributionResolver,
         Router $router
