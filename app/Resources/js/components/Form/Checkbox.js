@@ -120,6 +120,7 @@ class Checkbox extends React.Component<Props, State> {
                   id={`${id}_${choiceKey}`}
                   name={fieldName}
                   type="checkbox"
+                  helpPrint={false}
                   value={choiceValue}
                   checked={finalValue.indexOf(choiceValue) !== -1}
                   disabled={disabled}

@@ -64,6 +64,9 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
       <div>
         <FormGroup validationState={validationState}>
           {label && <ControlLabel bsClass="control-label">{label}</ControlLabel>}
+          <span className="visible-print-block help-block">
+            <FormattedMessage id="one-possible-answer" />
+          </span>
           {helpText && <HelpBlock>{helpText}</HelpBlock>}
           {props.description && (
             <div className="pb-15">

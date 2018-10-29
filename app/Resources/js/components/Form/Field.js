@@ -14,6 +14,7 @@ type Props = {
   divClassName?: string,
   wrapperClassName?: string,
   help?: string,
+  helpPrint?: string,
   description?: string,
   formName?: string,
   autoComplete?: string,
@@ -42,6 +43,7 @@ type Props = {
   placeholder?: string,
   disabled?: boolean,
   isOtherAllowed?: boolean,
+  validationRule?: Object,
   image?: string,
   children?: any,
   id: string,
@@ -80,12 +82,14 @@ class Field extends React.Component<Props> {
       labelClassName,
       disabled,
       help,
+      helpPrint,
       description,
       formName,
       addonAfter,
       addonBefore,
       choices,
       isOtherAllowed,
+      validationRule,
       style,
       radioImage,
       radioChecked,
@@ -94,6 +98,8 @@ class Field extends React.Component<Props> {
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched || (dirty && !disableValidation);
+
+    // console.error(type);
 
     let errorMessage = null;
 
@@ -111,6 +117,7 @@ class Field extends React.Component<Props> {
         type={type}
         name={name}
         help={help}
+        helpPrint={helpPrint}
         description={description}
         formName={formName}
         disabled={disabled}
@@ -125,6 +132,7 @@ class Field extends React.Component<Props> {
         placeholder={placeholder || null}
         errors={errorMessage}
         validationState={check ? (error ? 'error' : 'success') : null}
+        validationRule={validationRule}
         autoComplete={autoComplete}
         autoFocus={autoFocus || false}
         choices={choices}

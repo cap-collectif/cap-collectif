@@ -61,6 +61,7 @@ type Props = {
   id: ?string,
   children?: any,
   help?: string | any,
+  helpPrint?: boolean | any,
   description?: string | any,
   bsSize?: string,
   wrapperClassName?: ?string,
@@ -72,6 +73,7 @@ type Props = {
   buttonAfter?: any,
   standalone?: boolean,
   validationState?: string,
+  validationRule?: Object,
   isOtherAllowed?: boolean,
   label?: string | any,
   type: ?string,
@@ -89,6 +91,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     errors: null,
     image: null,
     medias: [],
+    helpPrint: true,
   };
 
   constructor(props, context) {
@@ -119,6 +122,64 @@ class ReactBootstrapInput extends React.Component<Props> {
       default:
         return '#fffff';
     }
+  };
+
+  getPrintHelpText = (validationRule: ?Object, questionType: ?string) => {
+    const { choices } = this.props;
+    let rule;
+    let message;
+
+    if (!validationRule && questionType === 'checkbox' && this.props.helpPrint) {
+      rule = <FormattedMessage id="several-possible-answers" />;
+    }
+
+    if (validationRule) {
+      const { type, number } = validationRule;
+
+      if (type === 'MIN') {
+        rule = <FormattedMessage id="reply.constraints.choices_min" values={{ nb: number }} />;
+      }
+
+      if (type === 'MAX') {
+        rule = <FormattedMessage id="reply.constraints.choices_max" values={{ nb: number }} />;
+      }
+
+      if (type === 'EQUAL') {
+        rule = <FormattedMessage id="reply.constraints.choices_equal" values={{ nb: number }} />;
+      }
+    }
+
+    if (questionType === 'ranking' && choices) {
+      message = (
+        <FormattedMessage
+          id="sort-the-answers-by-numbering-them-from-one-to-n"
+          values={{ questionsNumber: choices.length }}
+        />
+      );
+    }
+
+    if (questionType === 'select') {
+      message = <FormattedMessage id="one-possible-answer" />;
+    }
+
+    if (questionType === 'image' || questionType === 'medias') {
+      message = <FormattedMessage id="document-to-be-attached-to-this-form" />;
+    }
+
+    if (questionType === 'number') {
+      message = <FormattedMessage id="please-indicate-a-number" />;
+    }
+
+    if (message || rule) {
+      return (
+        <span className="visible-print-block help-block">
+          {message}
+          {rule}
+        </span>
+      );
+    }
+
+    return null;
   };
 
   refFormControl: ?Element;
@@ -226,7 +287,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         ref={c => {
           this.refFormControl = c;
         }}
-        type={props.componentClass ? undefined : type}
+        type={props.componentClass ? undefined : type !== 'number' ? type : 'text'}
         value={value}
         {...props}>
         {children}
@@ -406,6 +467,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       labelClassName, // eslint-disable-line
       standalone, // eslint-disable-line
       validationState, // eslint-disable-line
+      validationRule, // eslint-disable-line
       ...props
     } = this.props;
 
@@ -419,18 +481,8 @@ class ReactBootstrapInput extends React.Component<Props> {
             {label}
           </ControlLabel>
         )}
-        {props.help && <HelpBlock>{props.help}</HelpBlock>}{' '}
-        {/* {props.errors && <span className="visible-print-block help-block">{props.errors}</span>} */}
-        {(props.type === 'image' || props.type === 'medias') && (
-          <span className="visible-print-block help-block">
-            <FormattedMessage id="document-to-be-attached-to-this-form" />
-          </span>
-        )}
-        {props.type === 'select' && (
-          <span className="visible-print-block help-block">
-            <FormattedMessage id="one-possible-answer" />
-          </span>
-        )}
+        {this.getPrintHelpText(validationRule || null, props.type)}
+        {props.help && <HelpBlock>{props.help}</HelpBlock>}
         {props.description &&
           props.description !== '<div><br /></div>' && (
             <div className="pb-15">

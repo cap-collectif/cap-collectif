@@ -6,6 +6,14 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
     bsClass="form-group"
     validationState="success"
   >
+    <span
+      className="visible-print-block help-block"
+    >
+      <FormattedMessage
+        id="one-possible-answer"
+        values={Object {}}
+      />
+    </span>
     <HelpBlock
       bsClass="help-block"
     >

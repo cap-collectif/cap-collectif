@@ -353,6 +353,10 @@ p img {
         margin: 0 0 5pt 0;
         font-size: 9pt;
         color: $dark-gray;
+
+        span {
+            margin-right: 2pt;
+        }
     }
 
     .opinion__text {

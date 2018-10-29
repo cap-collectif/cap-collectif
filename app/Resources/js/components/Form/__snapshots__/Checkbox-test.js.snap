@@ -23,6 +23,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-20"
       image={null}
       name="choices-for-field-11"
@@ -41,6 +42,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-21"
       image={null}
       name="choices-for-field-11"
@@ -59,6 +61,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-22"
       image={null}
       name="choices-for-field-11"
@@ -77,6 +80,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-23"
       image={null}
       name="choices-for-field-11"
@@ -114,6 +118,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-20"
       image={null}
       name="choices-for-field-11"
@@ -132,6 +137,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-21"
       image={null}
       name="choices-for-field-11"
@@ -150,6 +156,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-22"
       image={null}
       name="choices-for-field-11"
@@ -168,6 +175,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-23"
       image={null}
       name="choices-for-field-11"

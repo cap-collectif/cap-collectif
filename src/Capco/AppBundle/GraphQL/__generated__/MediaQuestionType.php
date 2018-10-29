@@ -48,6 +48,20 @@ final class MediaQuestionType extends ObjectType implements GeneratedTypeInterfa
                     'public' => null,
                     'access' => null,
                 ],
+                'number' => [
+                    'type' => Type::nonNull(Type::int()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", array(0 => $value)]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'type' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('QuestionTypeValue')),
                     'args' => [

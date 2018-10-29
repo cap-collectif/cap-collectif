@@ -8,6 +8,10 @@ Question:
         type: 'ID!'
       title:
         type: 'String!'
+      number:
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
+        type: 'Int!'
       type:
         type: 'QuestionTypeValue!'
         resolve: "@=resolver('question_type', [value])"

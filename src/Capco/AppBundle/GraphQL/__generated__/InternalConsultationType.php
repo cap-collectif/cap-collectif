@@ -24,18 +24,6 @@ final class InternalConsultationType extends ObjectType implements GeneratedType
             'description' => 'A consultation',
             'fields' => function () use ($globalVariable) {
                 return [
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'contributors' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUserConnection')),
                     'args' => [
@@ -109,6 +97,18 @@ final class InternalConsultationType extends ObjectType implements GeneratedType
                     'resolve' => null,
                     'description' => 'The number of votes in this consultation.',
                     'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", "description" => "Field `votesCount` will be removed.", "supersededBy" => "Use `votes.totalCount` instead.")),
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,

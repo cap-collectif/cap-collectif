@@ -21,21 +21,9 @@ final class InternalQuestionnaireType extends ObjectType implements GeneratedTyp
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'Questionnaire',
-            'description' => 'A questionnaire is a form.',
+            'description' => 'Fetches an object given its ID',
             'fields' => function () use ($globalVariable) {
                 return [
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'title' => [
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
@@ -96,6 +84,18 @@ final class InternalQuestionnaireType extends ObjectType implements GeneratedTyp
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireParticipantsResolver", array(0 => $value, 1 => $args)]);
                     },
                     'description' => 'A list of users that have replied to the questionnaire.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

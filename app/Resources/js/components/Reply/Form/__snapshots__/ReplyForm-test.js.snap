@@ -42,6 +42,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "id": "10",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 2,
                 "position": 1,
                 "private": false,
                 "required": true,
@@ -85,6 +86,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "id": "12",
                 "isOtherAllowed": true,
                 "jumps": Array [],
+                "number": 4,
                 "position": 3,
                 "private": false,
                 "required": true,
@@ -121,6 +123,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "id": "13",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 5,
                 "position": 4,
                 "private": false,
                 "required": false,
@@ -157,6 +160,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
                 "id": "14",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 6,
                 "position": 5,
                 "private": false,
                 "required": false,
@@ -191,6 +195,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
           <Field
             component={[Function]}
             disabled={true}
+            helpPrint={false}
             id="formName-reply-private"
             name="private"
             type="checkbox"
@@ -277,6 +282,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                 "id": "10",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 2,
                 "position": 1,
                 "private": false,
                 "required": true,
@@ -320,6 +326,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                 "id": "12",
                 "isOtherAllowed": true,
                 "jumps": Array [],
+                "number": 4,
                 "position": 3,
                 "private": false,
                 "required": true,
@@ -356,6 +363,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
                 "id": "14",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 6,
                 "position": 5,
                 "private": false,
                 "required": false,
@@ -390,6 +398,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
           <Field
             component={[Function]}
             disabled={true}
+            helpPrint={false}
             id="formName-reply-private"
             name="private"
             type="checkbox"
@@ -476,6 +485,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "id": "10",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 2,
                 "position": 1,
                 "private": false,
                 "required": true,
@@ -519,6 +529,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "id": "11",
                 "isOtherAllowed": true,
                 "jumps": Array [],
+                "number": 3,
                 "position": 2,
                 "private": false,
                 "required": false,
@@ -562,6 +573,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "id": "12",
                 "isOtherAllowed": true,
                 "jumps": Array [],
+                "number": 4,
                 "position": 3,
                 "private": false,
                 "required": true,
@@ -598,6 +610,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "id": "13",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 5,
                 "position": 4,
                 "private": false,
                 "required": false,
@@ -634,6 +647,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
                 "id": "14",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 6,
                 "position": 5,
                 "private": false,
                 "required": false,
@@ -668,6 +682,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
           <Field
             component={[Function]}
             disabled={true}
+            helpPrint={false}
             id="formName-reply-private"
             name="private"
             type="checkbox"
@@ -783,6 +798,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                 "id": "11",
                 "isOtherAllowed": true,
                 "jumps": Array [],
+                "number": 3,
                 "position": 2,
                 "private": false,
                 "required": false,
@@ -819,6 +835,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                 "id": "13",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 5,
                 "position": 4,
                 "private": false,
                 "required": false,
@@ -855,6 +872,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
                 "id": "14",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 6,
                 "position": 5,
                 "private": false,
                 "required": false,
@@ -889,6 +907,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
           <Field
             component={[Function]}
             disabled={true}
+            helpPrint={false}
             id="formName-reply-private"
             name="private"
             type="checkbox"
@@ -975,6 +994,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
                 "id": "10",
                 "isOtherAllowed": false,
                 "jumps": Array [],
+                "number": 2,
                 "position": 1,
                 "private": false,
                 "required": true,
@@ -1018,6 +1038,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
                 "id": "12",
                 "isOtherAllowed": true,
                 "jumps": Array [],
+                "number": 4,
                 "position": 3,
                 "private": false,
                 "required": true,
@@ -1052,6 +1073,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
           <Field
             component={[Function]}
             disabled={true}
+            helpPrint={false}
             id="formName-reply-private"
             name="private"
             type="checkbox"

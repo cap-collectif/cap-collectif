@@ -7,17 +7,14 @@ import type { LogicJumpConditionOperator } from '../components/Reply/Form/__gene
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
 import { checkOnlyNumbers } from '../services/Validator';
-
 import component from '../components/Form/Field';
-<<<<<<< HEAD
 import PrivateBox from '../components/Ui/PrivateBox';
-=======
 import ConditionalJumps from './ConditionalJumps';
->>>>>>> [ADD] conditional jumps
 
 type Question = {|
   +id: string,
   +title: string,
+  +number?: number,
   +position: number,
   +private: boolean,
   +required: boolean,
@@ -29,6 +26,7 @@ type Question = {|
     +destination: {|
       +id: string,
       +title: string,
+      +number?: number,
     |},
     +conditions: ?$ReadOnlyArray<?{|
       +id: ?string,
@@ -549,20 +547,11 @@ export const renderResponses = ({
 
         let isAvailableQuestion = true;
 
-        console.warn(field);
-        console.log(index);
-
         if (!availableQuestions.includes(field.id)) {
-          // la question n'est pas affichée pour l'impression il va falloir qu'on l'affiche donc changer la logique pour plutôt mettre en display none
-          // boolean en fonction de cette condition (const)
           isAvailableQuestion = false;
-          // return;
         }
 
-        console.error(isAvailableQuestion);
-
         // We want to overidde the HTML verification of the input type number
-        const inputType = field.type && field.type !== 'number' ? field.type : 'text';
         const isOtherAllowed = field.isOtherAllowed;
 
         const labelAppend = field.required
@@ -581,14 +570,12 @@ export const renderResponses = ({
 
         const label = (
           <React.Fragment>
-            <span>{index+1}.</span>{' '}
+            {field.number && <span className="visible-print-block">{field.number}.</span>}{' '}
             <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
           </React.Fragment>
         );
 
-
-
-        switch (inputType) {
+        switch (field.type) {
           case 'section': {
             return (
               <div key={field.id} className="form__section">
@@ -601,7 +588,7 @@ export const renderResponses = ({
             return (
               <div className={isAvailableQuestion === false && 'visible-print-block'}>
                 <PrivateBox key={field.id} show={field.private}>
-                  <span>{index+1}. </span>
+                  <span>{index + 1}. </span>
                   <Field
                     name={`${member}.value`}
                     id={`${form}-${member}`}
@@ -621,11 +608,11 @@ export const renderResponses = ({
             return (
               <div className={isAvailableQuestion === false && 'visible-print-block'}>
                 <PrivateBox key={field.id} show={field.private}>
-                  <span>{index+1}. </span>
+                  <span>{index + 1}. </span>
                   <Field
                     name={`${member}.value`}
                     id={`${form}-${member}`}
-                    type={inputType}
+                    type={field.type}
                     component={component}
                     help={field.helpText}
                     isOtherAllowed={isOtherAllowed}
@@ -661,18 +648,18 @@ export const renderResponses = ({
 
             let choices = [];
             if (
-              inputType === 'ranking' ||
-              inputType === 'radio' ||
-              inputType === 'checkbox' ||
-              inputType === 'button'
+              field.type === 'ranking' ||
+              field.type === 'radio' ||
+              field.type === 'checkbox' ||
+              field.type === 'button'
             ) {
               choices = formattedChoicesInField(field);
 
-              if (inputType === 'radio') {
+              if (field.type === 'radio') {
                 return (
                   <div className={isAvailableQuestion === false && 'visible-print-block'}>
                     <PrivateBox key={field.id} show={field.private}>
-                      <span>{index+1}. </span>
+                      <span>{index + 1}. </span>
                       <div key={`${member}-container`}>
                         <MultipleChoiceRadio
                           id={`${form}-${member}`}
@@ -695,12 +682,13 @@ export const renderResponses = ({
             return (
               <div className={isAvailableQuestion === false && 'visible-print-block'}>
                 <PrivateBox key={field.id} show={field.private}>
-                  <span>{index+1}. </span>
+                  <span>{index + 1}. </span>
                   <Field
                     name={`${member}.value`}
                     id={`${form}-${member}`}
-                    type={inputType}
+                    type={field.type}
                     component={component}
+                    validationRule={field.validationRule}
                     description={field.description}
                     help={field.helpText}
                     isOtherAllowed={isOtherAllowed}

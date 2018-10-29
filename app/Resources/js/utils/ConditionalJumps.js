@@ -50,7 +50,7 @@ const ConditionalJumps = (props: Props) => {
           {getConditionsValues(jump.conditions)},{' '}
           <FormattedHTMLMessage
             id="go-to-question-number"
-            values={{ questionNumber: jump.destination.title }}
+            values={{ questionNumber: jump.destination.number }}
           />
         </div>
       ))}
