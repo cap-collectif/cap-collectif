@@ -148,27 +148,11 @@ trait QuestionnaireStepsTrait
     }
 
     /**
-     * @When I submit my draft
-     */
-    public function iSubmitMyDraft()
-    {
-        $this->navigationContext->getPage('questionnaire page')->submitDraft();
-    }
-
-    /**
      * @When I submit my updated reply
      */
     public function iSubmitMyUpdatedReply()
     {
         $this->navigationContext->getPage('questionnaire page')->submitUpdatedReply();
-    }
-
-    /**
-     * @When I submit my updated draft
-     */
-    public function iSubmitMyUpdatedDraft()
-    {
-        $this->navigationContext->getPage('questionnaire page')->submitUpdatedDraft();
     }
 
     /**
@@ -324,14 +308,6 @@ trait QuestionnaireStepsTrait
         $this->navigationContext->getPage('questionnaire page')->clickDeleteReplyButton();
     }
 
-
-    /**
-     * @Then I click the delete reply draft button
-     */
-    public function iClickTheDeleteReplyDraftButton()
-    {
-        $this->navigationContext->getPage('questionnaire page')->clickDeleteReplyDraftButton();
-    }
 
     /**
      * @Then I confirm reply deletion
