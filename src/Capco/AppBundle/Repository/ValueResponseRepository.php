@@ -17,13 +17,11 @@ class ValueResponseRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    // TODO: This only works for question on a reply
     public function countParticipantsByQuestion(AbstractQuestion $question): ?int
     {
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->select('COUNT(DISTINCT reply.author)')
             ->leftJoin('r.question', 'question')
-            ->leftJoin('r.reply', 'reply')
             ->andWhere('question.id = :question')
             ->setParameter('question', $question);
         return $qb->getQuery()->getSingleScalarResult();
@@ -33,6 +31,10 @@ class ValueResponseRepository extends EntityRepository
     {
         return // Some fixes until we use a proper JSON query
             $this->createQueryBuilder('r')
+                // TODO: This only works for question on a reply
+                // We must support responses on a proposal/other object
+                ->leftJoin('r.reply', 'reply')
+                ->andWhere('reply.draft = false')
                 ->andWhere('r.value IS NOT NULL')
                 ->andWhere('r.value NOT LIKE :emptyValueOne')
                 ->andWhere('r.value NOT LIKE :emptyValueTwo')
