@@ -21,7 +21,7 @@ describe('<ProposalListTableMobile />', () => {
           list: [
             { title: 'Before', startAt: '2018-06-27 00:00:00', endAt: '2018-06-27 00:00:00' },
             { title: 'In progress', startAt: '2018-07-27 00:00:00', endAt: '2018-08-27 00:00:00' },
-            { title: 'After', startAt: '2018-09-27 00:00:00', endAt: '2018-10-27 00:00:00' },
+            { title: 'After', startAt: '2118-09-27 00:00:00', endAt: '2118-10-27 00:00:00' },
           ],
           title: 'In progress',
         },

@@ -52,8 +52,8 @@ exports[`<ProposalListTableMobile /> renders correctly 1`] = `
                     "title": "In progress",
                   },
                   Object {
-                    "endAt": "2018-10-27 00:00:00",
-                    "startAt": "2018-09-27 00:00:00",
+                    "endAt": "2118-10-27 00:00:00",
+                    "startAt": "2118-09-27 00:00:00",
                     "title": "After",
                   },
                 ]
