@@ -43,7 +43,10 @@ type Props = {
   placeholder?: string,
   disabled?: boolean,
   isOtherAllowed?: boolean,
-  validationRule?: Object,
+  validationRule?: {
+    type: string,
+    number: number,
+  },
   image?: string,
   children?: any,
   id: string,
@@ -98,8 +101,6 @@ class Field extends React.Component<Props> {
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched || (dirty && !disableValidation);
-
-    // console.error(type);
 
     let errorMessage = null;
 

@@ -21,7 +21,7 @@ a[href]:after {
 body {
     font-family: "openSans", sans-serif;
     font-size: 10pt;
-    background-color: #fff !important;
+    background-color: $white !important;
 }
 
 @page {
@@ -29,7 +29,7 @@ body {
 }
 
 .section--alt {
-    background-color: #fff !important;
+    background-color: $white !important;
 }
 
 #main-navbar, .btn, #cookieChoiceInfo, footer, .comments__section, .share-button-dropdown, svg, .leaflet-container, .proposal-vote__widget {
@@ -168,7 +168,7 @@ p img {
         margin-bottom: 0;
 
         .img-circle {
-            margin-bottom: 10px;
+            margin-bottom: 7pt;
         }
     }
 }
@@ -181,7 +181,7 @@ p img {
     }
 
     .mr-15 {
-        margin-right: 15px;
+        margin-right: 11pt;
     }
 }
 
@@ -218,7 +218,7 @@ p img {
 
     .textarea-notepad {
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 15pt;
 
         span {
             width: 100%;
@@ -233,8 +233,8 @@ p img {
     }
 
     .checkbox, .radio {
-        padding-left: 25px;
-        margin: 5px 30px 10px 0;
+        padding-left: 19pt;
+        margin: 4pt 0 7pt;
         position: relative;
 
         &::before {
@@ -263,7 +263,7 @@ p img {
     .ranking__pick-box {
         .ranking__item {
             &__description, &__image {
-                padding-left: 35px;
+                padding-left: 27pt;
             }
 
             &__description {
@@ -284,7 +284,7 @@ p img {
             &__label::before {
                 content:"";
                 width: 30px;
-                margin-right: 5px;
+                margin-right: 4pt;
                 border-bottom: 1px solid $icon-gray-color;
                 display: inline-block;
             }
@@ -294,7 +294,10 @@ p img {
     .form-fields {
         display: flex;
         flex-wrap: wrap;
-        // margin-top: 10pt;
+
+        > .radio {
+            margin-right: 25pt;
+        }
 
         .other-field {
             width: 100%;
@@ -304,6 +307,7 @@ p img {
         .other-field__value {
             flex: 1;
             width: 100%;
+            margin-left: 25pt;
         }
 
         .thumbnail {
@@ -322,7 +326,7 @@ p img {
 
     .choice-field, .radio-field {
         width: 190px;
-        margin-right: 30px;
+        margin-right: 25pt;
     }
 
     .choice-description {

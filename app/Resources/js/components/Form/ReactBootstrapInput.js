@@ -125,11 +125,11 @@ class ReactBootstrapInput extends React.Component<Props> {
   };
 
   getPrintHelpText = (validationRule: ?Object, questionType: ?string) => {
-    const { choices } = this.props;
+    const { choices, helpPrint } = this.props;
     let rule;
     let message;
 
-    if (!validationRule && questionType === 'checkbox' && this.props.helpPrint) {
+    if (!validationRule && questionType === 'checkbox' && helpPrint) {
       rule = <FormattedMessage id="several-possible-answers" />;
     }
 
