@@ -5,7 +5,6 @@ use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\PostSearchType;
 use Capco\AppBundle\SiteParameter\Resolver;
-use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Request;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

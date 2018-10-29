@@ -105,79 +105,79 @@ services:
     public: true
     autowire: true
 
-#  capco.event.serialization_listener:
+  #  capco.event.serialization_listener:
   Capco\AppBundle\EventListener\EventSerializationListener:
     public: true
     autowire: true
 
-#  capco.media_response.serialization_listener:
+  #  capco.media_response.serialization_listener:
   Capco\AppBundle\EventListener\MediaResponseSerializationListener:
     public: true
     tags:
-    - { name: 'jms_serializer.event_subscriber' }
+      - { name: 'jms_serializer.event_subscriber' }
 
-#  capco.source.serialization_listener:
+  #  capco.source.serialization_listener:
   Capco\AppBundle\EventListener\SourceSerializationListener:
     public: true
     autowire: true
 
-#  capco.opinion.serialization_listener:
+  #  capco.opinion.serialization_listener:
   Capco\AppBundle\EventListener\OpinionSerializationListener:
     public: true
     autowire: true
 
-#  capco.user.serialization_listener:
+  #  capco.user.serialization_listener:
   Capco\AppBundle\EventListener\UserSerializationListener:
     public: true
     autowire: true
 
-#  capco.post.serialization_listener:
+  #  capco.post.serialization_listener:
   Capco\AppBundle\EventListener\PostSerializationListener:
     public: true
     autowire: true
 
-#  capco.synthesis.synthesis_listener:
+  #  capco.synthesis.synthesis_listener:
   Capco\AppBundle\EventListener\SynthesisLoggableListener:
     public: true
     calls:
-    - [setAnnotationReader, ['@annotation_reader']]
+      - [setAnnotationReader, ['@annotation_reader']]
 
-#  capco.opinion_type.serialization_listener:
+  #  capco.opinion_type.serialization_listener:
   Capco\AppBundle\EventListener\OpinionTypeSerializationListener:
     public: true
     autowire: true
 
-#  capco.proposal_vote.serialization_listener:
+  #  capco.proposal_vote.serialization_listener:
   Capco\AppBundle\EventListener\ProposalVoteSerializationListener:
     public: true
     autowire: true
 
-#  capco.selection_step.serialization_listener:
+  #  capco.selection_step.serialization_listener:
   Capco\AppBundle\EventListener\SelectionStepSerializationListener:
     public: true
     autowire: true
 
-#  capco.consultation_step.serialization_listener:
+  #  capco.consultation_step.serialization_listener:
   Capco\AppBundle\EventListener\ConsultationStepSerializationListener:
     public: true
     autowire: true
 
-#  capco.collect_step.serialization_listener:
+  #  capco.collect_step.serialization_listener:
   Capco\AppBundle\EventListener\CollectStepSerializationListener:
     public: true
     autowire: true
 
-#  capco.questionnaire_step.serialization_listener:
+  #  capco.questionnaire_step.serialization_listener:
   Capco\AppBundle\EventListener\QuestionnaireStepSerializationListener:
     public: true
     autowire: true
 
-#  capco.abstract_step.serialization_listener:
+  #  capco.abstract_step.serialization_listener:
   Capco\AppBundle\EventListener\AbstractStepSerializationListener:
     public: true
     autowire: true
 
-#  capco.question_choice.serialization_listener:
+  #  capco.question_choice.serialization_listener:
   Capco\AppBundle\EventListener\QuestionChoiceSerializationListener:
     public: true
     autowire: true
