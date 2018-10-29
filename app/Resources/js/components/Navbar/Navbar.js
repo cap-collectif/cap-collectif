@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { Navbar as Navigation, Nav } from 'react-bootstrap';
 import NavbarRight from './NavbarRight';
 import NavbarItem from './NavbarItem';
 
 type Props = {
-  intl: intlShape,
+  intl: IntlShape,
   logo?: ?string,
   items: Array<Object>,
   siteName: ?string,

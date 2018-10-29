@@ -186,6 +186,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
         </LoginOverlay>
       );
     }
+    return null;
   }
 }
 

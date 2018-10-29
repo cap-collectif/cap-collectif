@@ -80,15 +80,6 @@ const devConf = {
           },
         ],
       },
-      {
-        test: path.join(webpackConfig.appDir, 'Resources/js/app.js'),
-        use: [
-          {
-            loader: 'expose-loader',
-            options: 'App',
-          },
-        ],
-      },
     ],
   },
   optimization: {

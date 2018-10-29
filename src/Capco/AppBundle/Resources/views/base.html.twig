@@ -59,15 +59,15 @@
         });
 
         $(window).on('load', function() {
-            App.default.externalLinks();
-            App.default.skipLinks();
+            App.externalLinks();
+            App.skipLinks();
         });
         $(function () {
           $('[data-toggle="tooltip"]').tooltip();
         });
 
-        App.default.customModal('.modal--custom');
-        App.default.video('.fancybox');
+        App.customModal('.modal--custom');
+        App.video('.fancybox');
     </script>
     {% set client_js = capco_site_parameter_value('global.site.embed_js') %}
     {% if null != client_js %}

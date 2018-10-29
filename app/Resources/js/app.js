@@ -20,7 +20,7 @@ if (!Modernizr.intl) {
 global.cookieMonster = require('./cookieMonster').default;
 
 // Our global App for symfony
-const App = ($ => {
+global.App = ($ => {
   const equalheight = container => {
     let currentTallest = 0;
     let currentRowStart = 0;
@@ -195,5 +195,3 @@ const App = ($ => {
     skipLinks,
   };
 })(jQuery);
-
-export default App;

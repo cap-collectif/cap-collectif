@@ -179,6 +179,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
         </LoginOverlay>
       );
     }
+    return null;
   }
 }
 

@@ -155,7 +155,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           {multipleChoiceQuestions.indexOf(type) !== -1 && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
-                 <FormattedMessage id="admin.fields.question.group_question_choices" />
+                <FormattedMessage id="admin.fields.question.group_question_choices" />
               </h4>
               <FieldArray
                 name={`${member}.questionChoices`}

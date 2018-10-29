@@ -46,7 +46,11 @@ class CommentAnswers extends React.Component<Props, State> {
             .filter(Boolean)
             .map(node => (
               // $FlowFixMe
-              <CommentAnswer key={node.id} comment={node} isHighlighted={node.id === this.state.highlightedComment} />
+              <CommentAnswer
+                key={node.id}
+                comment={node}
+                isHighlighted={node.id === this.state.highlightedComment}
+              />
             ))}
       </ul>
     );

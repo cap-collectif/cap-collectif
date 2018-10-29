@@ -93,21 +93,21 @@
     {{ parent() }}
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.default.equalheight('.theme');
-            App.default.equalheight('.media--macro');
-            App.default.equalheight('.media--news');
-            App.default.equalheight('.event-js');
-            App.default.equalheight('.video');
-            App.default.video('.fancybox');
-            App.default.carousel();
+            App.equalheight('.theme');
+            App.equalheight('.media--macro');
+            App.equalheight('.media--news');
+            App.equalheight('.event-js');
+            App.equalheight('.video');
+            App.video('.fancybox');
+            App.carousel();
         });
 
         $(window).on('resize', function() {
-            App.default.resized('.theme');
-            App.default.resized('.media--macro');
-            App.default.resized('.media--news');
-            App.default.resized('.event-js');
-            App.default.resized('.video');
+            App.resized('.theme');
+            App.resized('.media--macro');
+            App.resized('.media--news');
+            App.resized('.event-js');
+            App.resized('.video');
         });
     </script>
     {% set customCode = capco_site_parameter_value('homepage.customcode') %}

@@ -125,11 +125,11 @@
     {{ parent() }}
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.default.equalheight('.event-js');
+            App.equalheight('.event-js');
         });
 
         $(window).on('resize', function() {
-            App.default.resized('.event-js');
+            App.resized('.event-js');
         });
     </script>
     {% set customCode = capco_site_parameter_value('event.customcode') %}

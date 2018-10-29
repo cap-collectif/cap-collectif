@@ -180,7 +180,7 @@ COPY infrastructure/services/remote/cron/run                   /etc/service/cron
 COPY infrastructure/services/remote/elasticsearch/run          /etc/service/elasticsearch/run
 COPY infrastructure/services/remote/varnish/run                /etc/service/varnish/run
 COPY infrastructure/services/remote/rabbitmq/run               /etc/service/rabbitmq/run
-COPY infrastructure/services/remote/nodejs/run                 /etc/service/nodejs/run
+#COPY infrastructure/services/remote/nodejs/run                 /etc/service/nodejs/run
 COPY infrastructure/services/remote/supervisord/run            /etc/service/supervisord/run
 COPY infrastructure/services/remote/php-fpm/run                /etc/service/php-fpm/run
 
@@ -261,7 +261,7 @@ RUN yarn global add bower@1.8.4 babel-cli \
     && gosu capco npm rebuild node-sass > /dev/null \
     && gosu capco php bin/console translation:download --env=prod \
     && gosu capco yarn run update-js-translation \
-    && gosu capco yarn run build-server-bundle:prod \
+    #&& gosu capco yarn run build-server-bundle:prod \
     && gosu capco yarn run build:prod \
     && rm -rf node_modules bower_components
 

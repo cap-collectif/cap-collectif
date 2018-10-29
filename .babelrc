@@ -4,20 +4,10 @@
         "@babel/preset-flow",
         "@babel/preset-env"
     ],
-    "env": {
-        /*"production": {
-          "presets": [[ // Waiting resolution of https://github.com/babel/babili/issues/556
-            "babili", { // https://github.com/babel/babili/tree/master/packages/babel-preset-babili#options
-            "evaluate": false,
-            "mangle": true,
-            "removeConsole": false
-          }]]
-        }*/
-    },
     "plugins": [
         "@babel/plugin-proposal-class-properties",
         "styled-components",
-        // "react-docgen",
+        "react-docgen",
         "relay",
         "transform-class-properties",
         [
