@@ -179,6 +179,18 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Responses\AbstractResponse']
 
+  capco.value_response.repository:
+    public: true
+    class: Capco\AppBundle\Repository\ValueResponseRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Responses\ValueResponse']
+
+  capco.media_response.repository:
+    public: true
+    class: Capco\AppBundle\Repository\MediaResponseRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Responses\MediaResponse']
+
   capco.section.repository:
     public: true
     class: Capco\AppBundle\Repository\SectionRepository
