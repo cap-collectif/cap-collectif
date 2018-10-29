@@ -179,7 +179,7 @@ export class ReplyForm extends React.Component<Props> {
       reply,
     } = this.props;
     const disabled = this.formIsDisabled();
-
+    const isDraft = reply && reply.draft;
     return (
       <CardContainer>
         <div className="card__body">
@@ -212,7 +212,7 @@ export class ReplyForm extends React.Component<Props> {
                 </div>
               )}
               <div className="btn-toolbar btn-box sticky">
-                {(!reply || (reply && reply.draft)) &&
+                {(!reply || isDraft) &&
                   questionnaire.type === 'QUESTIONNAIRE' && (
                     <div className="btn-group">
                       <SubmitButton
@@ -232,7 +232,7 @@ export class ReplyForm extends React.Component<Props> {
                     type="submit"
                     id={`${form}-submit-create-reply`}
                     bsStyle="info"
-                    disabled={pristine || invalid || submitting || disabled}
+                    disabled={(!isDraft && pristine) || invalid || submitting || disabled}
                     label={submitting ? 'global.loading' : 'global.save'}
                     onSubmit={() => {
                       dispatch(changeRedux(form, 'draft', false));
