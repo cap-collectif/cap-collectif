@@ -104,6 +104,47 @@ Scenario: GraphQL client wants to retrieve replies
                   "value": @null@
                 }
             ]
+          },
+          {
+            "id": "reply5",
+            "responses": [
+              {
+                "question": {"id":"13"},
+                "value":"{\"labels\":[\"Natation\"],\"other\":null}"
+              },
+              {
+                "question": {"id":"301"},
+                "value": @null@
+              },
+              {
+                "question": {"id":"2"},
+                "value": @null@
+              },
+              {
+                "question": {"id":"302"},
+                "value": @null@
+              },
+              {
+                "question": {"id":"14"},
+                "value":"{\"labels\":[],\"other\":null}"
+              },
+              {
+                "question": {"id":"15"},
+                "value": @null@
+              },
+              {
+                "question": {"id":"16"},
+                "value":"{\"labels\":[],\"other\":null}"
+              },
+              {
+                "question": {"id":"18"},
+                "value":"{\"labels\":[],\"other\":null}"
+              },
+              {
+                "question": {"id":"19"},
+                "value":"{\"labels\":[],\"other\":null}"
+              }
+            ]
           }
         ]
       }

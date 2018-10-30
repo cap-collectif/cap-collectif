@@ -31,7 +31,7 @@ Scenario: User can delete his reply
       "deleteReply": {
         "questionnaire": {
           "id": "questionnaire1",
-          "viewerReplies": []
+          "viewerReplies": [{"id":"reply5"}]
         }
       }
     }
