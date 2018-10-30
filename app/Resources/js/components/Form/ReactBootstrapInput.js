@@ -490,7 +490,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             </div>
           )}
         {this.renderInputGroup(props)}
-        {props.errors && <span className="error-block">{props.errors}</span>}
+        {props.errors && <span className="error-block hidden-print">{props.errors}</span>}
       </FormGroup>
     );
   }
