@@ -99,7 +99,7 @@
     },
     {
       "path": "./web/js/app.js",
-      "maxSize": "880 KB"
+      "maxSize": "900 KB"
     },
     {
       "path": "./web/js/vendor.js",
@@ -277,6 +277,7 @@
     "storybook-addon-intl": "^2.3.0",
     "styled-components": "^3.1.6",
     "styled-spinkit": "^0.2.1",
+    "terser-webpack-plugin": "^1.1.0",
     "uglify-js-brunch": "^2.10.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.19.1",

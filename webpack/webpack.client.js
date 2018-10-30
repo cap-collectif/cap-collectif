@@ -1,13 +1,14 @@
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const webpackConfig = require('./config');
 
 const devConf = {
   output: {
+    // Add /* filename */ comments to generated require()s in the output.
+    pathinfo: true,
     filename: '[name].js',
     path: webpackConfig.outputDir,
   },
@@ -48,11 +49,16 @@ const devConf = {
   },
   mode: 'development',
   plugins: [
-    new webpack.ProgressPlugin({ profile: true }),
+    // Add some progress infos
+    new webpack.ProgressPlugin(),
+    // Remove a warning with es6-polyfill
     new webpack.IgnorePlugin(/vertx/),
+    // Moment.js is an extremely popular library that bundles large locale files
+    // by default due to how Webpack interprets its code.
     new MomentLocalesPlugin({
       localesToKeep: ['fr', 'en-gb', 'es'],
     }),
+    // Copy some legacy deps
     new CopyWebpackPlugin([
       {
         from: path.resolve(
@@ -66,7 +72,7 @@ const devConf = {
   module: {
     rules: [
       {
-        test: /(\.js|\.jsx)$/,
+        test: /\.js$/,
         exclude: [
           path.join(webpackConfig.absoluteBase, 'node_modules'),
           /(\-test\.js|\.snap|\-stories\.js)$/,
@@ -76,19 +82,17 @@ const devConf = {
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
+              // Don't waste time on Gzipping the cache
+              cacheCompression: false,
+              // If an error happens in a package, it's possible to be
+              // because it was compiled. Thus, we don't want the browser
+              // debugger to show the original code. Instead, the code
+              // being evaluated would be much more helpful.
+              sourceMaps: false,
             },
           },
         ],
       },
-    ],
-  },
-  optimization: {
-    minimizer: [
-      new UglifyJSPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true,
-      }),
     ],
   },
 };
