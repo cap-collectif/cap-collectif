@@ -27,7 +27,8 @@
         z-index: 1;
         background-color: $white;
 
-        a {
+        .btn.btn-link {
+            padding: 0;
             height: 30px;
             width: 30px;
             display: flex;
@@ -49,7 +50,7 @@
         border-right: 1px solid $border-color;
 
         i {
-            margin: 5px 6px;
+            margin: 6px 7px;
         }
     }
 
@@ -58,7 +59,7 @@
         border-left: 1px solid $border-color;
 
         i {
-            margin: 5px 8px;
+            margin: 6px 8px;
         }
     }
 
