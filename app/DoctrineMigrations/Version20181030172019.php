@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181024122058 extends AbstractMigration
+final class Version20181030172019 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -18,7 +18,7 @@ final class Version20181024122058 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('ALTER TABLE questionnaire ADD type VARCHAR(255) NOT NULL DEFAULT "'.QuestionnaireType::VOTING).'"';
+        $this->addSql('ALTER TABLE questionnaire ADD type VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema): void
