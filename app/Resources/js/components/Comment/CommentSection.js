@@ -79,13 +79,14 @@ export class CommentSection extends React.Component<Props, State> {
                       {props.commentable.allComments &&
                         props.commentable.allComments.totalCountWithAnswers > 1 && (
                           <Col
-                            xsOffset={2}
+                            smOffset={2}
                             sm={4}
-                            className="hidden-xs"
+                            xs={12}
                             style={{ marginTop: '10px', marginBottom: '20px' }}>
                             <select
                               className="form-control"
                               value={order}
+                              onChange={value => this.updateSelectedValue(value)}
                               onBlur={value => this.updateSelectedValue(value)}>
                               <option value="popular">
                                 {intl.formatMessage({ id: 'global.filter_popular' })}
