@@ -158,7 +158,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       );
     }
 
-    if (questionType === 'select') {
+    if (questionType === 'select' || questionType === 'button') {
       message = <FormattedMessage id="one-possible-answer" />;
     }
 

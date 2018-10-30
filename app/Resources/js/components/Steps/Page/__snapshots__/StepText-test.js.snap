@@ -8,32 +8,28 @@ exports[`<StepText /> should render a step intro div, a FormattedHTMLMessage and
 <div
   className="step__intro"
 >
-  <div>
-    <div>
-      <div
-        className="step__intro__content"
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "coucou",
-          }
-        }
-        style={
-          Object {
-            "maxHeight": "none",
-            "visibility": "visible",
-          }
-        }
-      />
-    </div>
-    <div
-      className="text-center"
-    >
-      <ReadMoreLink
-        expanded={true}
-        onClick={[Function]}
-        visible={false}
-      />
-    </div>
+  <div
+    className="step__intro__content"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "coucou",
+      }
+    }
+    style={
+      Object {
+        "maxHeight": "none",
+        "visibility": "visible",
+      }
+    }
+  />
+  <div
+    className="text-center"
+  >
+    <ReadMoreLink
+      expanded={true}
+      onClick={[Function]}
+      visible={false}
+    />
   </div>
 </div>
 `;
