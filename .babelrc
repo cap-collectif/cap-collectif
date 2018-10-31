@@ -1,6 +1,12 @@
 {
     // Fix: [BABEL] Note: The code generator has deoptimised the styling of cap-collectif/platform/bower_components/ckeditor/ckeditor.js as it exceeds the max of 500KB.
     "compact": false,
+    "env": {
+        "test": {
+          // Make sure to have { "modules": true } in test environment.
+          "presets": [["@babel/preset-env"], "@babel/preset-react"]
+        }
+    },
     "presets": [
         ["@babel/preset-react", {
             // Adds component stack to warning messages
