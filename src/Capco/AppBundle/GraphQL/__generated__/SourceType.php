@@ -24,48 +24,66 @@ final class SourceType extends ObjectType implements GeneratedTypeInterface
             'description' => 'A source',
             'fields' => function () use ($globalVariable) {
                 return [
-                'trashed' => [
-                    'type' => Type::nonNull(Type::boolean()),
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => '`true` if the contribution is trashed.',
+                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'trashedStatus' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
+                'kind' => [
+                    'type' => Type::nonNull(Type::string()),
                     'args' => [
                     ],
-                    'resolve' => null,
-                    'description' => 'The status.',
+                    'resolve' => function () use ($globalVariable) {
+                        return 'source';
+                    },
+                    'description' => 'The kind of contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'trashedAt' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                'related' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The moment the moderator trashed the contribution.',
+                    'description' => 'Return the related contribution if the contribution is related to another.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'trashedReason' => [
-                    'type' => Type::string(),
+                'show_url' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
                     'args' => [
                     ],
-                    'resolve' => null,
-                    'description' => 'The reason the moderator trashed the contribution.',
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", array(0 => $value)]);
+                    },
+                    'description' => 'The HTTP show url for this contribution.',
+                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'url' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", array(0 => $value)]);
+                    },
+                    'description' => 'Url of the contribution',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -129,18 +147,6 @@ final class SourceType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The id of the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'published' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
@@ -197,18 +203,6 @@ final class SourceType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'updatedAt' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Identifies the date and time when the object was last updated.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'author' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
                     'args' => [
@@ -221,54 +215,60 @@ final class SourceType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'kind' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => function () use ($globalVariable) {
-                        return 'source';
-                    },
-                    'description' => 'The kind of contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'related' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
+                'updatedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Return the related contribution if the contribution is related to another.',
+                    'description' => 'Identifies the date and time when the object was last updated.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'show_url' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                'trashed' => [
+                    'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", array(0 => $value)]);
-                    },
-                    'description' => 'The HTTP show url for this contribution.',
-                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
+                    'resolve' => null,
+                    'description' => '`true` if the contribution is trashed.',
+                    'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'url' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                'trashedStatus' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
                     'args' => [
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", array(0 => $value)]);
-                    },
-                    'description' => 'Url of the contribution',
+                    'resolve' => null,
+                    'description' => 'The status.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The moment the moderator trashed the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashedReason' => [
+                    'type' => Type::string(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The reason the moderator trashed the contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

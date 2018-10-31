@@ -83,7 +83,7 @@ exports[`<ProposalListTableMobile /> renders correctly 1`] = `
           <ProgressListItem
             item={
               Object {
-                "isActive": true,
+                "isActive": false,
                 "title": "After",
               }
             }

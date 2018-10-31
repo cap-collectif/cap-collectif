@@ -2,8 +2,8 @@
 namespace Capco\AppBundle\GraphQL\__GENERATED__;
 
 use GraphQL\Type\Definition\ObjectType;
-use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
+use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\ConfigProcessor;
 use Overblog\GraphQLBundle\Definition\LazyConfig;
 use Overblog\GraphQLBundle\Definition\GlobalVariables;
@@ -24,6 +24,18 @@ final class InternalUserType extends ObjectType implements GeneratedTypeInterfac
             'description' => 'A user is an individual\'s account.',
             'fields' => function () use ($globalVariable) {
                 return [
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'url' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('URI'),
                     'args' => [
@@ -65,18 +77,6 @@ final class InternalUserType extends ObjectType implements GeneratedTypeInterfac
                     'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
-                ],
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
                 ],
                 'createdAt' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),

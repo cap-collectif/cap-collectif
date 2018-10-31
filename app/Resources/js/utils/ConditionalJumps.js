@@ -6,7 +6,7 @@ type Props = {
   jumps: Array<Object>,
 };
 
-const ConditionalJumps = (props: Props) => {
+export const ConditionalJumps = (props: Props) => {
   const { jumps } = props;
 
   const getConditionsValues = (conditions: Array<Object>) => {
@@ -48,10 +48,13 @@ const ConditionalJumps = (props: Props) => {
       {jumps.map((jump, jumpKey) => (
         <div key={jumpKey}>
           {getConditionsValues(jump.conditions)},{' '}
-          <FormattedHTMLMessage
-            id="go-to-question-number"
-            values={{ questionNumber: jump.destination.number }}
-          />
+          {jump.destination &&
+            jump.destination.number && (
+              <FormattedHTMLMessage
+                id="go-to-question-number"
+                values={{ questionNumber: jump.destination.number }}
+              />
+            )}
         </div>
       ))}
     </div>
