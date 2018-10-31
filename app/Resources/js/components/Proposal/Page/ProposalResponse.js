@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import ProposalPrivateField from '../ProposalPrivateField';
 import ProposalMediaResponse from './ProposalMediaResponse';
 import TitleInvertContrast from '../../Ui/TitleInvertContrast';
 import type { ProposalResponse_response } from './__generated__/ProposalResponse_response.graphql';

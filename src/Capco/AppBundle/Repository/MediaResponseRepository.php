@@ -12,7 +12,6 @@ class MediaResponseRepository extends EntityRepository
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->select('COUNT(DISTINCT reply.author)')
             ->leftJoin('r.question', 'question')
-            ->leftJoin('r.reply', 'reply')
             ->andWhere('question.id = :question')
             ->setParameter('question', $question);
         return $qb->getQuery()->getSingleScalarResult();
@@ -31,14 +30,13 @@ class MediaResponseRepository extends EntityRepository
     private function getNoEmptyResultQueryBuilder(): QueryBuilder
     {
         return // Some fixes until we use a proper JSON query
+            // TODO: This only works for question on a reply
+            // We must support responses on a proposal/other object
             $this->createQueryBuilder('r')
-                // TODO: This only works for question on a reply
-                // We must support responses on a proposal/other object
                 ->leftJoin('r.reply', 'reply')
                 ->andWhere('reply.draft = false')
 
                 ->leftJoin('r.medias', 'media')
-                ->andWhere('media.id IS NOT NULL')
-            ;
+                ->andWhere('media.id IS NOT NULL');
     }
 }
