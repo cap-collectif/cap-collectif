@@ -67,16 +67,6 @@ class UpdateProposalFormMutation implements MutationInterface
                 $questionsOrderedByIdInDb[] = $question->getId();
             }
 
-            // we must reorder arguments datas to match database order (used in the symfony form)
-            usort($arguments['questions'], function ($a, $b) use ($questionsOrderedByIdInDb) {
-                if (isset($a['question']['id'], $b['question']['id'])) {
-                    return array_search($a['question']['id'], $questionsOrderedByIdInDb) >
-                        array_search($b['question']['id'], $questionsOrderedByIdInDb);
-                }
-                //respect the user order, for now we just put new items at the end
-                return isset($a['question']['id']) ? false : true;
-            });
-
             //we stock the order sent to apply it after
             $questionsOrderedById = [];
             // We need an array of questions ids from arguments
@@ -126,6 +116,16 @@ class UpdateProposalFormMutation implements MutationInterface
                     $questionsOrderedById[] = $dataQuestion['question']['title'];
                 }
             }
+
+            // we must reorder arguments datas to match database order (used in the symfony form)
+            usort($arguments['questions'], function ($a, $b) use ($questionsOrderedByIdInDb) {
+                if (isset($a['question']['id'], $b['question']['id'])) {
+                    return array_search($a['question']['id'], $questionsOrderedByIdInDb) >
+                        array_search($b['question']['id'], $questionsOrderedByIdInDb);
+                }
+                //respect the user order, for now we just put new items at the end
+                return isset($a['question']['id']) ? false : true;
+            });
 
             foreach ($proposalForm->getQuestions() as $position => $proposalFormQuestion) {
                 if (
