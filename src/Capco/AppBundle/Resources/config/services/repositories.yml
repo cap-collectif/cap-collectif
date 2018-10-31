@@ -179,15 +179,13 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Responses\AbstractResponse']
 
-  capco.value_response.repository:
+  Capco\AppBundle\Repository\ValueResponseRepository:
     public: true
-    class: Capco\AppBundle\Repository\ValueResponseRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Responses\ValueResponse']
 
-  capco.media_response.repository:
+  Capco\AppBundle\Repository\MediaResponseRepository:
     public: true
-    class: Capco\AppBundle\Repository\MediaResponseRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Responses\MediaResponse']
 
