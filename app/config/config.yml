@@ -573,6 +573,8 @@ coop_tilleuls_ck_editor_sonata_media:
 nelmio_api_doc: ~
 
 fos_rest:
+  service:
+    serializer: fos_rest.serializer.symfony
   view:
     view_response_listener: true
     failed_validation: HTTP_BAD_REQUEST

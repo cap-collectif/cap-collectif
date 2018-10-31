@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Steps\AbstractStep:
   discriminator:
-    field_name: step_type
-    map:
+    type_property: step_type
+    mapping:
       consultation: Capco\AppBundle\Entity\Steps\ConsultationStep
       presentation: Capco\AppBundle\Entity\Steps\PresentationStep
       other: Capco\AppBundle\Entity\Steps\OtherStep

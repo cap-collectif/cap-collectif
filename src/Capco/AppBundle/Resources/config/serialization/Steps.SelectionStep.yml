@@ -6,8 +6,6 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
       groups: [Steps]
     budget:
       groups: [Steps]
-    defaultOrder:
-      groups: [Steps]
     statuses:
       groups: [Steps, Statuses]
     voteThreshold:

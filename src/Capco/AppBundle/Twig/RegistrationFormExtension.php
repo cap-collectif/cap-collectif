@@ -3,8 +3,6 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Repository\RegistrationFormRepository;
-use JMS\Serializer\SerializationContext;
-use JMS\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class RegistrationFormExtension extends \Twig_Extension

@@ -129,3 +129,18 @@ services:
   Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator:
     autowire: true
     public: true
+  Capco\AppBundle\Normalizer\OpinionTypeNormalizer:
+    tags: ['serializer.normalizer']
+    autowire: true
+
+  Capco\AppBundle\Normalizer\ProjectNormalizer:
+    tags: ['serializer.normalizer']
+    autowire: true
+
+  Capco\AppBundle\Normalizer\ThemeNormalizer:
+    tags: ['serializer.normalizer']
+    autowire: true
+
+  Capco\AppBundle\Normalizer\UserNormalizer:
+    tags: ['serializer.normalizer']
+    autowire: true
