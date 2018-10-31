@@ -61,7 +61,6 @@ const onDelete = (proposalId: string) =>
 
 export class ProposalAdminStatusForm extends Component<Props> {
   static defaultProps: DefaultProps;
-
   render() {
     const {
       isSuperAdmin,

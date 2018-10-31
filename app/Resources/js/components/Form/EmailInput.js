@@ -50,7 +50,7 @@ export class EmailInput extends React.Component<Props, State> {
           <p className="registration__help">
             <FormattedMessage id="registration.email.suggestion" />{' '}
             <a
-              href="#email-correction"
+              href={'#email-correction'}
               onClick={() => {
                 this.setSuggestion();
               }}
