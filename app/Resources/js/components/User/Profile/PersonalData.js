@@ -412,7 +412,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         <div>
                           <div className="horizontal_field_with_border_top">
                             <Field
-                              name="dateOfBirth"
+                              name={`dateOfBirth`}
                               id="dateOfBirth"
                               component={DateDropdownPicker}
                               locale={wLocale}

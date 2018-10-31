@@ -105,11 +105,14 @@ type SubmitResponses = $ReadOnlyArray<{
 const getValueFromSubmitResponse = search => {
   if (search && typeof search.value === 'string') {
     return search.value;
-  }
-  if (search && search.value && typeof search.value === 'object' && !Array.isArray(search.value)) {
+  } else if (
+    search &&
+    search.value &&
+    typeof search.value === 'object' &&
+    !Array.isArray(search.value)
+  ) {
     return search.value.labels[0];
-  }
-  if (search && search.value && Array.isArray(search.value)) {
+  } else if (search && search.value && Array.isArray(search.value)) {
     return search.value[0].name;
   }
   return null;

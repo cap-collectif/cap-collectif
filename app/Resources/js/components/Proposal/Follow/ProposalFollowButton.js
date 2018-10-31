@@ -31,7 +31,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
   state = {
     isJustFollowed: false,
   };
-
   componentWillReceiveProps(nextProps: Props) {
     if (this.props !== nextProps) {
       this.setState({
@@ -39,7 +38,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
       });
     }
   }
-
   changeFollowType(proposal: ProposalFollowButton_proposal, type: string) {
     if (
       proposal.viewerIsFollowing &&
@@ -186,7 +184,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
         </LoginOverlay>
       );
     }
-    return null;
   }
 }
 

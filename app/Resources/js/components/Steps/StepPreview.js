@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import DatesInterval from '../Utils/DatesInterval';
+import DatesInterval from './../Utils/DatesInterval';
 
 type Props = {
   step: Object,

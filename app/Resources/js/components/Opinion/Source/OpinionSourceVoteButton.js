@@ -25,7 +25,6 @@ export class OpinionSourceVoteButton extends React.Component<Props> {
   };
 
   target: null;
-
   render() {
     const { source, disabled } = this.props;
     return (

@@ -27,7 +27,7 @@ export class ContributionPaginatedList extends React.Component<Props> {
     }
     return (
       <div className="anchor-offset block  block--bordered">
-        <div className="opinion opinion--default">
+        <div className={`opinion opinion--default`}>
           <div className="opinion__header  opinion__header--mobile-centered">
             <h2 className="pull-left  h4  opinion__header__title">
               {contributionConnection.totalCount || 0} propositions

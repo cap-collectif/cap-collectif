@@ -72,8 +72,8 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
         <Modal.Footer>
           <CloseButton onClose={onClose} />
           <SubmitButton
-            id="confirm-opinion-source-delete"
-            label="global.delete"
+            id={'confirm-opinion-source-delete'}
+            label={'global.delete'}
             isSubmitting={isSubmitting}
             onSubmit={() => {
               this.handleSubmit();

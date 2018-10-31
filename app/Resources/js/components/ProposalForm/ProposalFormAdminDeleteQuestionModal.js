@@ -33,7 +33,7 @@ export const ProposalFormAdminDeleteQuestionModal = (props: Props) => {
       </Modal.Header>
       <Modal.Body>
         <i className="cap cap-alert-2" style={{ color: '#dc3545', fontSize: '22px' }} />
-        <FormattedMessage id="group-admin-parameters-modal-delete-content" />
+        <FormattedMessage id={'group-admin-parameters-modal-delete-content'} />
       </Modal.Body>
       <Modal.Footer>
         <CloseButton onClose={cancelAction} />

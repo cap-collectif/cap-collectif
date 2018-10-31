@@ -47,7 +47,6 @@ type Props = {
 
 export class OpinionVotesButton extends React.Component<Props> {
   static defaultProps = { style: {} };
-
   target: null;
 
   vote = () => {

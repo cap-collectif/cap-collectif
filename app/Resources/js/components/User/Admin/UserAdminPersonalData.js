@@ -178,7 +178,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
             </Field>
             <div className="clearfix" />
             <Field
-              name="dateOfBirth"
+              name={`dateOfBirth`}
               id="dateOfBirth"
               disabled={!isViewerOrSuperAdmin}
               component={DateDropdownPicker}
