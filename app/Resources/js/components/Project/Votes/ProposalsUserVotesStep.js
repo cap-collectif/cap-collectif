@@ -30,7 +30,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
   render() {
     const { step, dirty, submitting, dispatch } = this.props;
     if (!step.viewerVotes) {
-      return;
+      return null;
     }
 
     return (

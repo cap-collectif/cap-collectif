@@ -3,7 +3,6 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AdminBundle\Form\QuestionValidationRuleType;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -28,9 +27,6 @@ class MultipleChoiceQuestionType extends AbstractType
             'allow_delete' => true,
             'by_reference' => false,
             'entry_type' => QuestionChoiceType::class,
-            'delete_empty' => function (QuestionChoice $questionChoice = null) {
-                return null === $questionChoice || empty($questionChoice->getTitle());
-            },
         ]);
         $builder->add('jumps', CollectionType::class, [
             'allow_add' => true,

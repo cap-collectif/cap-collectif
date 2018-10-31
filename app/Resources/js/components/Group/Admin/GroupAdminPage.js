@@ -26,6 +26,7 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
 
 export class GroupAdminPage extends Component<Props, State> {
   static defaultProps: DefaultProps;
+
   render() {
     return (
       <div className="row">

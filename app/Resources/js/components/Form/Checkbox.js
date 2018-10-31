@@ -59,6 +59,7 @@ class Checkbox extends React.Component<Props, State> {
       other: changeValue || null,
     });
   };
+
   other: ?React.Component<*, *>;
 
   empty = () => {
