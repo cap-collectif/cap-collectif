@@ -25,17 +25,26 @@ class Editor extends React.Component<Props> {
     disabled: false,
   };
 
+  constructor(props: Props) {
+    super(props);
+
+    // $FlowFixMe
+    this.editorRef = React.createRef();
+    // $FlowFixMe
+    this.toolbarRef = React.createRef();
+  }
+
   componentDidMount() {
     const { intl, disabled, onBlur, onChange, value, valueLink } = this.props;
-    if (!disabled) {
-      // $FlowFixMe
-      this._editor = new Quill(ReactDOM.findDOMNode(this.refs.editor), {
-        modules: {
-          toolbar: {
-            container: ReactDOM.findDOMNode(this.refs.toolbar),
-          },
-          'image-tooltip': {
-            template: `
+
+    const options = {
+      modules: {
+        toolbar: {
+          // $FlowFixMe
+          container: ReactDOM.findDOMNode(this.toolbarRef.current),
+        },
+        'image-tooltip': {
+          template: `
               <input class="input" type="textbox">
               <div class="preview">
                 <span>${intl.formatMessage({ id: 'global.preview' })}</span>
@@ -45,9 +54,9 @@ class Editor extends React.Component<Props> {
               <a href="javascript:;" class="insert">
                 ${intl.formatMessage({ id: 'global.insert' })}
               </a>`,
-          },
-          'link-tooltip': {
-            template: `
+        },
+        'link-tooltip': {
+          template: `
               <span class="title">
                 ${intl.formatMessage({ id: 'editor.url' })}&nbsp;
               </span>
@@ -63,11 +72,14 @@ class Editor extends React.Component<Props> {
               <a href="javascript:;" class="done">
                 ${intl.formatMessage({ id: 'global.done' })}
               </a>`,
-          },
         },
-        styles: false,
-        theme: 'snow',
-      });
+      },
+      theme: 'snow',
+    };
+
+    if (!disabled) {
+      // $FlowFixMe
+      this._editor = new Quill(ReactDOM.findDOMNode(this.editorRef.current), options);
       // $FlowFixMe
       this._editor.getModule('keyboard').removeHotkeys(9);
 
@@ -106,13 +118,13 @@ class Editor extends React.Component<Props> {
     }
   }
 
-  componentWillUnmount() {
-    // $FlowFixMe
-    if (this._editor) {
-      // $FlowFixMe
-      this._editor.destroy();
-    }
-  }
+  // componentWillUnmount() {
+  //   // $FlowFixMe
+  //   if (this._editor) {
+  //     // $FlowFixMe
+  //     this._editor.destroy();
+  //   }
+  // }
 
   render() {
     const { className, disabled, id } = this.props;
@@ -127,8 +139,9 @@ class Editor extends React.Component<Props> {
     return (
       <div id={id} className={classNames(classes)}>
         {/* $FlowFixMe */}
-        <QuillToolbar ref="toolbar" />
-        <div ref="editor" style={{ position: 'static' }} />
+        <QuillToolbar ref={this.toolbarRef} />
+        {/* $FlowFixMe */}
+        <div ref={this.editorRef} style={{ position: 'static' }} />
       </div>
     );
   }

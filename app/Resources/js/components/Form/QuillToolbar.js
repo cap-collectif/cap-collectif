@@ -12,7 +12,7 @@ class QuillToolbar extends React.Component<Props> {
 
     return (
       <div>
-        <span className="ql-format-group">
+        <span className="ql-formats">
           <select title="Size" className="ql-size">
             <option value="10px">{intl.formatMessage({ id: 'editor.size.small' })}</option>
             <option value="13px" selected>
@@ -21,14 +21,14 @@ class QuillToolbar extends React.Component<Props> {
             <option value="18px">{intl.formatMessage({ id: 'editor.size.large' })}</option>
           </select>
         </span>
-        <span className="ql-format-group">
+        <span className="ql-formats">
           <span className="ql-format-button ql-bold" />
           <span className="ql-format-separator" />
           <span className="ql-format-button ql-italic" />
           <span className="ql-format-separator" />
           <span className="ql-format-button ql-underline" />
         </span>
-        <span className="ql-format-group">
+        <span className="ql-formats">
           <span
             title={<FormattedMessage id="editor.list" />}
             className="ql-format-button ql-list"
@@ -46,7 +46,7 @@ class QuillToolbar extends React.Component<Props> {
             <option value="justify" label={intl.formatMessage({ id: 'editor.align.justify' })} />
           </select>
         </span>
-        <span className="ql-format-group">
+        <span className="ql-formats">
           <span
             title={<FormattedMessage id="editor.link" />}
             className="ql-format-button ql-link"
