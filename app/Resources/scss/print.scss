@@ -216,22 +216,6 @@ p img {
         }
     }
 
-    .textarea-notepad {
-        width: 100%;
-        margin-bottom: 15pt;
-
-        span {
-            width: 100%;
-            border-bottom: 1px solid $icon-gray-color;
-            height: 31px;
-            display: block;
-
-            &:first-child {
-                height: 21px;
-            }
-        }
-    }
-
     .checkbox, .radio {
         padding-left: 19pt;
         margin: 4pt 0 7pt;
@@ -386,6 +370,10 @@ p img {
         .control-label {
             margin-top: 10pt;
         }
+    }
+
+    .conditional-jumps {
+        margin-top: 5pt;
     }
 
     hr {

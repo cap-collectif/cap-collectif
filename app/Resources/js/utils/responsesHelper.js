@@ -600,6 +600,7 @@ export const renderResponses = ({
                     label={label}
                     disabled={disabled}
                   />
+                  <ConditionalJumps jumps={field.jumps} />
                 </PrivateBox>
               </div>
             );
@@ -636,6 +637,7 @@ export const renderResponses = ({
                       </div>
                     ))}
                   </div>
+                  <ConditionalJumps jumps={field.jumps} />
                 </PrivateBox>
               </div>
             );
@@ -674,6 +676,7 @@ export const renderResponses = ({
                           disabled={disabled}
                         />
                       </div>
+                      <ConditionalJumps jumps={field.jumps} />
                     </PrivateBox>
                   </div>
                 );

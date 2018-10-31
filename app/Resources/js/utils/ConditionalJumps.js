@@ -44,7 +44,7 @@ const ConditionalJumps = (props: Props) => {
   }
 
   return (
-    <div className="visible-print-block">
+    <div className="visible-print-block conditional-jumps">
       {jumps.map((jump, jumpKey) => (
         <div key={jumpKey}>
           {getConditionsValues(jump.conditions)},{' '}
