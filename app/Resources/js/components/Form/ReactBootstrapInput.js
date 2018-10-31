@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import {
@@ -28,6 +28,7 @@ import EmailInput from './EmailInput';
 import AutosizedTextarea from './AutosizedTextarea';
 import Address from './Address';
 import ButtonBody from '../Reply/Form/ButtonBody';
+import QuestionPrintHelpText from './QuestionPrintHelpText';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -61,7 +62,7 @@ type Props = {
   id: ?string,
   children?: any,
   help?: string | any,
-  helpPrint?: boolean | any,
+  helpPrint?: boolean,
   description?: string | any,
   bsSize?: string,
   wrapperClassName?: ?string,
@@ -122,64 +123,6 @@ class ReactBootstrapInput extends React.Component<Props> {
       default:
         return '#fffff';
     }
-  };
-
-  getPrintHelpText = (validationRule: ?Object, questionType: ?string) => {
-    const { choices, helpPrint } = this.props;
-    let rule;
-    let message;
-
-    if (!validationRule && questionType === 'checkbox' && helpPrint) {
-      rule = <FormattedMessage id="several-possible-answers" />;
-    }
-
-    if (validationRule) {
-      const { type, number } = validationRule;
-
-      if (type === 'MIN') {
-        rule = <FormattedMessage id="reply.constraints.choices_min" values={{ nb: number }} />;
-      }
-
-      if (type === 'MAX') {
-        rule = <FormattedMessage id="reply.constraints.choices_max" values={{ nb: number }} />;
-      }
-
-      if (type === 'EQUAL') {
-        rule = <FormattedMessage id="reply.constraints.choices_equal" values={{ nb: number }} />;
-      }
-    }
-
-    if (questionType === 'ranking' && choices) {
-      message = (
-        <FormattedMessage
-          id="sort-the-answers-by-numbering-them-from-one-to-n"
-          values={{ questionsNumber: choices.length }}
-        />
-      );
-    }
-
-    if (questionType === 'select' || questionType === 'button') {
-      message = <FormattedMessage id="one-possible-answer" />;
-    }
-
-    if (questionType === 'image' || questionType === 'medias') {
-      message = <FormattedMessage id="document-to-be-attached-to-this-form" />;
-    }
-
-    if (questionType === 'number') {
-      message = <FormattedMessage id="please-indicate-a-number" />;
-    }
-
-    if (message || rule) {
-      return (
-        <span className="visible-print-block help-block">
-          {message}
-          {rule}
-        </span>
-      );
-    }
-
-    return null;
   };
 
   refFormControl: ?Element;
@@ -481,7 +424,12 @@ class ReactBootstrapInput extends React.Component<Props> {
             {label}
           </ControlLabel>
         )}
-        {this.getPrintHelpText(validationRule || null, props.type)}
+        <QuestionPrintHelpText
+          validationRule={validationRule || null}
+          questionType={props.type}
+          choices={this.props.choices}
+          helpPrint={this.props.helpPrint}
+        />
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
         {props.description &&
           props.description !== '<div><br /></div>' && (

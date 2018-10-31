@@ -14,7 +14,7 @@ type Props = {
   divClassName?: string,
   wrapperClassName?: string,
   help?: string,
-  helpPrint?: string,
+  helpPrint?: boolean,
   description?: string,
   formName?: string,
   autoComplete?: string,
