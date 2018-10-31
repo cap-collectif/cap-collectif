@@ -7,9 +7,9 @@ import { changeConsultationPlanActiveItems } from '../../redux/modules/project';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import SectionRecursiveList from './SectionRecursiveList';
 import Loader from '../Ui/Loader';
-import RemainingTime from './../Utils/RemainingTime';
-import DatesInterval from './../Utils/DatesInterval';
-import StepInfos from '../../components/Steps/Page/StepInfos';
+import RemainingTime from '../Utils/RemainingTime';
+import DatesInterval from '../Utils/DatesInterval';
+import StepInfos from '../Steps/Page/StepInfos';
 import type { ConsultationPropositionBoxQueryResponse } from './__generated__/ConsultationPropositionBoxQuery.graphql';
 import ConsultationPlan from './ConsultationPlan';
 

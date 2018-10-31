@@ -31,6 +31,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
   state = {
     isJustFollowed: false,
   };
+
   componentWillReceiveProps(nextProps: Props) {
     if (this.props !== nextProps) {
       this.setState({
@@ -38,6 +39,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
       });
     }
   }
+
   changeFollowType(opinion: OpinionFollowButton_opinion, type: string) {
     if (
       opinion.viewerIsFollowing &&
@@ -177,6 +179,7 @@ export class OpinionFollowButton extends React.Component<Props, State> {
         </LoginOverlay>
       );
     }
+    return null;
   }
 }
 

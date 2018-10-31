@@ -2,7 +2,6 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use pmill\Doctrine\Hydrator\ArrayHydrator;
@@ -24,12 +23,6 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
                 'allow_delete' => true,
                 'entry_type' => QuestionnaireAbstractQuestionType::class,
                 'by_reference' => false,
-                'delete_empty' => function (
-                    QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
-                ) {
-                    return null === $questionnaireAbstractQuestion ||
-                        empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
-                },
             ]);
     }
 

@@ -6,7 +6,7 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/Loader';
 import type { EvaluationsIndexPageQueryResponse } from './__generated__/EvaluationsIndexPageQuery.graphql';
 
-export const render = ({
+export const renderComponent = ({
   error,
   props,
 }: { props: ?EvaluationsIndexPageQueryResponse } & ReadyState) => {
@@ -48,7 +48,7 @@ export class EvaluationsIndexPage extends React.Component<{}> {
             }
           }
         `}
-        render={render}
+        render={renderComponent}
       />
     );
   }
