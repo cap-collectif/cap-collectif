@@ -209,7 +209,6 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
         "questions": [
           {
             "question": {
-              "id": "716",
               "title": "Etes-vous réél ?",
               "helpText": "Peut-être que non...",
               "private": false,
@@ -219,7 +218,6 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
           },
           {
             "question": {
-              "id": "717",
               "title": "Documents à remplir",
               "helpText": "5 fichiers max",
               "private": false,
@@ -241,20 +239,20 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
           "id": "proposalForm1",
           "questions": [
             {
-              "id": "716",
-              "helpText": "Peut-être que non...",
-              "private": false,
-              "required": true,
-              "title": "Etes-vous réél ?",
-              "type": "text"
-            },
-            {
-              "id": "717",
+              "id": @string@,
               "helpText": "5 fichiers max",
               "private": false,
               "required": true,
               "title": "Documents à remplir",
               "type": "medias"
+            },
+            {
+              "id": @string@,
+              "helpText": "Peut-être que non...",
+              "private": false,
+              "required": true,
+              "title": "Etes-vous réél ?",
+              "type": "text"
             }
           ]
         }
