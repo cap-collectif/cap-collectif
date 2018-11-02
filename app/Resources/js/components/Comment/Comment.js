@@ -67,7 +67,11 @@ export class Comment extends React.Component<Props, State> {
                 <div className="comment__buttons">
                   {/* $FlowFixMe $refType */}
                   <CommentVoteButton comment={comment} />{' '}
-                  <Button bsStyle="link" bsSize="sm" onClick={this.focusAnswer} className="btn-dark-gray btn--outline">
+                  <Button
+                    bsStyle="link"
+                    bsSize="sm"
+                    onClick={this.focusAnswer}
+                    className="btn-dark-gray btn--outline">
                     <i className="cap-reply-mail-2" /> <FormattedMessage id="global.answer" />
                   </Button>{' '}
                   {/* $FlowFixMe $refType */}

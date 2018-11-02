@@ -83,7 +83,7 @@ storiesOf('Navs', module).add(
     <div className="ml-30 mr-30 storybook-container">
       <h1>
         StackedNav{' '}
-        <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
+        <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Navs-stories.js">
           <i className="small cap cap-github" />
         </a>
       </h1>

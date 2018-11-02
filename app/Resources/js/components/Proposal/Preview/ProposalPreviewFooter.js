@@ -26,7 +26,7 @@ export class ProposalPreviewFooter extends React.Component<Props> {
     const countersClasses = {};
 
     if (showVotes && showComments) {
-      countersClasses[`card__counters_multiple`] = true;
+      countersClasses.card__counters_multiple = true;
     }
 
     return (

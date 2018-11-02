@@ -15,6 +15,7 @@ type State = void;
 
 export class UserAdminPageTabs extends Component<Props, State> {
   static defaultProps: DefaultProps;
+
   render() {
     const { intl, user } = this.props;
     return (

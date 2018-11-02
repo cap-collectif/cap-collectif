@@ -53,7 +53,7 @@ export class RegistrationQuestionForm extends React.Component<Props> {
           children={<FormattedMessage id="global.admin.required" />}
           component={renderInput}
         />
-        <Field name="type" type="select" label={'Type'} component={renderInput}>
+        <Field name="type" type="select" label="Type" component={renderInput}>
           <option value="" disabled>
             <FormattedMessage id="global.select" />
           </option>

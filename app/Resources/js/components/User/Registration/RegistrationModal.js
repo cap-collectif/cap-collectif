@@ -56,7 +56,7 @@ export class RegistrationModal extends React.Component<Props> {
           </Modal.Header>
           <Modal.Body dangerouslySetInnerHTML={{ __html: chartBody }} />
           <Modal.Footer>
-            <CloseButton label={'global.close'} onClose={onCloseChart} />
+            <CloseButton label="global.close" onClose={onCloseChart} />
           </Modal.Footer>
         </Modal>
       );

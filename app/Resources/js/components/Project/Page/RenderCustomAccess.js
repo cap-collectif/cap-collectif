@@ -18,6 +18,7 @@ export class RenderCustomAccess extends React.Component<Props, State> {
   state = {
     showModal: false,
   };
+
   showModal = () => {
     this.setState({ showModal: true });
   };
@@ -25,6 +26,7 @@ export class RenderCustomAccess extends React.Component<Props, State> {
   hideModal = () => {
     this.setState({ showModal: false });
   };
+
   render() {
     const { project, lockIcon } = this.props;
     let nbUserInGroups = 0;

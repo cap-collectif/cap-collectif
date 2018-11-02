@@ -61,7 +61,7 @@ class ProposalNotifier extends BaseNotifier
 
         if (!$proposal->isDraft() && $proposal->getProposalForm()->isAllowAknowledge()) {
             $stepUrl = $this->urlResolver->getStepUrl($proposal->getStep(), true);
-            $confirmationUrl = '';
+            $confirmationUrl = null;
 
             if (!$proposal->getAuthor()->isEmailConfirmed()) {
                 $confirmationUrl = $this->router->generate(
@@ -69,7 +69,7 @@ class ProposalNotifier extends BaseNotifier
                     [
                         'token' => $proposal->getAuthor()->getConfirmationToken(),
                     ],
-                    true
+                    UrlGeneratorInterface::ABSOLUTE_URL
                 );
             }
 
