@@ -2,7 +2,7 @@
 // Todo : ref Quill
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { injectIntl, type IntlShape } from 'react-intl';
+import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
 import classNames from 'classnames';
 import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
@@ -28,106 +28,36 @@ class Editor extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
 
-    // $FlowFixMe
     this.editorRef = React.createRef();
-    // $FlowFixMe
     this.toolbarRef = React.createRef();
   }
 
+  // $FlowFixMe
+  editorRef: { current: null | React.ElementRef<'div'> };
+
+  // $FlowFixMe
+  toolbarRef: { current: null | React.ElementRef<'div'> };
+
   componentDidMount() {
-    const { intl, disabled, onBlur, onChange, value, valueLink } = this.props;
+    const {disabled} = this.props;
 
     const options = {
       modules: {
         toolbar: {
-          // $FlowFixMe
-          container: ReactDOM.findDOMNode(this.toolbarRef.current),
-        },
-        'image-tooltip': {
-          template: `
-              <input class="input" type="textbox">
-              <div class="preview">
-                <span>${intl.formatMessage({ id: 'global.preview' })}</span>
-              </div>
-              <a href="javascript:;" class="cancel">
-                ${intl.formatMessage({ id: 'global.cancel' })}</a>
-              <a href="javascript:;" class="insert">
-                ${intl.formatMessage({ id: 'global.insert' })}
-              </a>`,
-        },
-        'link-tooltip': {
-          template: `
-              <span class="title">
-                ${intl.formatMessage({ id: 'editor.url' })}&nbsp;
-              </span>
-              <a href="#" class="url" target="_blank" href="about:blank"></a>
-              <input class="input" type="text">
-              <span>&nbsp;&#45;&nbsp;</span>
-              <a href="javascript:;" class="change">
-                ${intl.formatMessage({ id: 'global.change' })}
-              </a>
-              <a href="javascript:;" class="remove">
-                ${intl.formatMessage({ id: 'global.remove' })}
-              </a>
-              <a href="javascript:;" class="done">
-                ${intl.formatMessage({ id: 'global.done' })}
-              </a>`,
+          container: this.toolbarRef.current
         },
       },
       theme: 'snow',
     };
 
-    if (!disabled) {
-      // $FlowFixMe
-      this._editor = new Quill(ReactDOM.findDOMNode(this.editorRef.current), options);
-      // $FlowFixMe
-      this._editor.getModule('keyboard').removeHotkeys(9);
-
-      if (valueLink) {
-        // eslint-disable-next-line no-console
-        console.warn('This is deprecated please use redux-form instead of valueLink.');
-        const defaultValue = valueLink.value;
-        if (defaultValue) {
-          // $FlowFixMe
-          this._editor.setHTML(defaultValue);
-        }
-        // $FlowFixMe
-        this._editor.on('text-change', () => {
-          // $FlowFixMe
-          valueLink.requestChange(this._editor.getHTML());
-        });
-      } else {
-        const defaultValue = value;
-        if (defaultValue) {
-          // $FlowFixMe
-          this._editor.setHTML(defaultValue);
-        }
-        // $FlowFixMe
-        this._editor.on('selection-change', range => {
-          if (!range) {
-            // $FlowFixMe
-            onBlur(this._editor.getHTML());
-          }
-        });
-        // $FlowFixMe
-        this._editor.on('text-change', () => {
-          // $FlowFixMe
-          onChange(this._editor.getHTML());
-        });
-      }
+    if(!disabled) {
+      const quill = new Quill(this.editorRef.current, options);
     }
+
   }
 
-  // componentWillUnmount() {
-  //   // $FlowFixMe
-  //   if (this._editor) {
-  //     // $FlowFixMe
-  //     this._editor.destroy();
-  //   }
-  // }
-
   render() {
-    const { className, disabled, id } = this.props;
+    const { className, disabled, id, intl } = this.props;
     const classes = {
       editor: !disabled,
       'form-control': disabled,
@@ -137,11 +67,47 @@ class Editor extends React.Component<Props> {
       return <textarea id={id} className={classNames(classes)} disabled />;
     }
     return (
-      <div id={id} className={classNames(classes)}>
-        {/* $FlowFixMe */}
-        <QuillToolbar ref={this.toolbarRef} />
-        {/* $FlowFixMe */}
-        <div ref={this.editorRef} style={{ position: 'static' }} />
+      <div id={id} className={classNames(classes)} >
+        <div ref={this.toolbarRef} >
+          <span className="ql-formats">
+            <select title="Size" className="ql-size">
+              <option value="small">{intl.formatMessage({ id: 'editor.size.small' })}</option>
+              <option selected>
+                {intl.formatMessage({ id: 'editor.size.normal' })}
+              </option>
+              <option value="large">{intl.formatMessage({ id: 'editor.size.large' })}</option>
+            </select>
+          </span>
+          <span className="ql-formats">
+            <button className="ql-bold" />
+            <button className="ql-italic" />
+            <button className="ql-underline" />
+          </span>
+          <span className="ql-formats">
+            <button className="ql-list" value="ordered" title={<FormattedMessage id="editor.list" />} />
+            <button className="ql-list" value="bullet" title={<FormattedMessage id="editor.bullet" />} />
+            <select
+              title={intl.formatMessage({ id: 'editor.align.title' })}
+              className="ql-align"
+            >
+              <option  label={intl.formatMessage({ id: 'editor.align.left' })} selected />
+              <option value="center" label={intl.formatMessage({ id: 'editor.align.center' })} />
+              <option value="right" label={intl.formatMessage({ id: 'editor.align.right' })} />
+              <option value="justify" label={intl.formatMessage({ id: 'editor.align.justify' })} />
+            </select>
+          </span>
+          <span className="ql-formats">
+            <button
+              title={<FormattedMessage id="editor.link" />}
+              className="ql-link"
+            />
+            <button
+              title={<FormattedMessage id="editor.image" />}
+              className="ql-image"
+            />
+          </span>
+        </div>
+        <div ref={this.editorRef} />
       </div>
     );
   }
