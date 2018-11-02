@@ -588,7 +588,6 @@ export const renderResponses = ({
             return (
               <div className={isAvailableQuestion === false && 'visible-print-block'}>
                 <PrivateBox key={field.id} show={field.private}>
-                  <span>{index + 1}. </span>
                   <Field
                     name={`${member}.value`}
                     id={`${form}-${member}`}
@@ -609,7 +608,6 @@ export const renderResponses = ({
             return (
               <div className={isAvailableQuestion === false && 'visible-print-block'}>
                 <PrivateBox key={field.id} show={field.private}>
-                  <span>{index + 1}. </span>
                   <Field
                     name={`${member}.value`}
                     id={`${form}-${member}`}
@@ -661,7 +659,6 @@ export const renderResponses = ({
                 return (
                   <div className={isAvailableQuestion === false && 'visible-print-block'}>
                     <PrivateBox key={field.id} show={field.private}>
-                      <span>{index + 1}. </span>
                       <div key={`${member}-container`}>
                         <MultipleChoiceRadio
                           id={`${form}-${member}`}
@@ -685,7 +682,6 @@ export const renderResponses = ({
             return (
               <div className={isAvailableQuestion === false && 'visible-print-block'}>
                 <PrivateBox key={field.id} show={field.private}>
-                  <span>{index + 1}. </span>
                   <Field
                     name={`${member}.value`}
                     id={`${form}-${member}`}
