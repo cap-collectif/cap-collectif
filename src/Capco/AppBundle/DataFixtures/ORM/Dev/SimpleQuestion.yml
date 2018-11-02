@@ -71,3 +71,8 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     title: Question simple?
     required: false
     type: 0
+  simplequestion14:
+    id: 1315
+    title: Je n'ai pas de projet?
+    required: false
+    type: 0

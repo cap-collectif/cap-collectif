@@ -182,3 +182,8 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     title: Question Multiple?
     required: false
     type: 3 # radio
+  multiplequestion13:
+    id: 49
+    title: J'ai plusieurs choix?
+    required: false
+    type: 3 # radio
