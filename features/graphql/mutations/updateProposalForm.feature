@@ -346,3 +346,96 @@ Scenario: GraphQL client wants to delete the first question
     }
   }
   """
+
+@database
+Scenario: GraphQL client wants to delete the first question choice
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateProposalFormInput!) {
+      updateProposalForm(input: $input) {
+        proposalForm {
+          id
+          questions {
+            id
+            title
+            type
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "proposalFormId": "proposalForm13",
+        "questions": [
+          {
+            "question": {
+              "id": "1314",
+              "private": false,
+              "required": false,
+              "title": "Question simple?",
+              "type": "text"
+            }
+          },
+          {
+            "question": {
+              "id": "48",
+              "title": "Question Multiple?",
+              "helpText": null,
+              "description": null,
+              "type": "radio",
+              "private": false,
+              "required": false,
+              "validationRule": null,
+              "questionChoices": [
+                {
+                  "id": "questionchoice33",
+                  "title": "Non",
+                  "description": null,
+                  "color": null,
+                  "image": null
+                },
+                {
+                  "id": "questionchoice34",
+                  "title": "Peut être",
+                  "description": null,
+                  "color": null,
+                  "image": null
+                }
+              ],
+              "otherAllowed": false,
+              "randomQuestionChoices": false,
+              "jumps": []
+            }
+          }
+        ],
+        "proposalFormId": "proposalform13"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "updateProposalForm": {
+        "proposalForm": {
+          "id": "proposalform13",
+          "questions": [
+            {
+              "id": "1314",
+              "title": "Question simple?",
+              "type": "text"
+            },
+            {
+              "id": "48",
+              "title": "Question Multiple?",
+              "type": "radio"
+            }
+          ]
+        }
+      }
+    }
+  }
+  """

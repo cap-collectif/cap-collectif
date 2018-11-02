@@ -192,9 +192,8 @@ Capco\AppBundle\Entity\ProposalForm:
     allowAknowledge: true
   proposalform13:
     id: proposalform13
-    title: Proposal Form attaché à aucun projet
+    title: Formulmaire attaché à aucun projet
     description: <p><text(100)></p>
-    # notificationsConfiguration: '@proposalFormNotificationConfiguration14'
     titleHelpText: Choisissez un titre pour votre proposition
     themeHelpText: Sélectionnez un thème
     districtHelpText: Sélectionnez une zone géographique
