@@ -273,9 +273,6 @@ Scenario: GraphQL client wants to delete the first question
           id
           questions {
             id
-            helpText
-            private
-            required
             title
             type
           }
@@ -284,49 +281,48 @@ Scenario: GraphQL client wants to delete the first question
     }",
     "variables": {
       "input": {
-        "proposalFormId": "proposalForm1",
+        "proposalFormId": "proposalForm13",
         "questions": [
           {
             "question": {
-              "id": "1",
-              "helpText": "Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)",
-              "private": true,
-              "required": false,
-              "title": "Evaluez l'importance de votre proposition",
-              "type": "text"
-            }
-          },
-          {
-            "question": {
-              "id": "3",
-              "helpText": "Décrivez dans les grandes lignes le budget de votre proposition",
-              "private": false,
-              "required": true,
-              "title": "Evaluez le coût de votre proposition",
-              "type": "textarea"
-            }
-          },
-          {
-            "question": {
-              "id": "11",
-              "helpText": "5 fichiers max",
-              "private": false,
-              "required": true,
-              "title": "Documents",
-              "type": "medias"
-            }
-          },
-          {
-            "question": {
-              "id": "12",
-              "helpText": "5 fichiers max",
+              "id": "48",
+              "title": "Question Multiple?",
+              "helpText": null,
+              "description": null,
+              "type": "radio",
               "private": false,
               "required": false,
-              "title": "Bilans",
-              "type": "medias"
+              "validationRule": null,
+              "questionChoices": [
+                {
+                  "id": "questionchoice32",
+                  "title": "Oui",
+                  "description": null,
+                  "color": null,
+                  "image": null
+                },
+                {
+                  "id": "questionchoice33",
+                  "title": "Non",
+                  "description": null,
+                  "color": null,
+                  "image": null
+                },
+                {
+                  "id": "questionchoice34",
+                  "title": "Peut être",
+                  "description": null,
+                  "color": null,
+                  "image": null
+                }
+              ],
+              "otherAllowed": false,
+              "randomQuestionChoices": false,
+              "jumps": []
             }
           }
-        ]
+        ],
+        "proposalFormId": "proposalform13"
       }
     }
   }
@@ -337,39 +333,12 @@ Scenario: GraphQL client wants to delete the first question
     "data": {
       "updateProposalForm": {
         "proposalForm": {
-          "id": "proposalForm1",
+          "id": "proposalform13",
           "questions": [
             {
-              "id": "1",
-              "helpText": "Décrivez l'importance de votre proposition avec un adjectif (ex: indispensable, souhaitable ...)",
-              "private": true,
-              "required": false,
-              "title": "Evaluez l'importance de votre proposition",
-              "type": "text"
-            },
-            {
-              "id": "3",
-              "helpText": "Décrivez dans les grandes lignes le budget de votre proposition",
-              "private": false,
-              "required": true,
-              "title": "Evaluez le coût de votre proposition",
-              "type": "textarea"
-            },
-            {
-              "id": "11",
-              "helpText": "5 fichiers max",
-              "private": false,
-              "required": true,
-              "title": "Documents",
-              "type": "medias"
-            },
-            {
-              "id": "12",
-              "helpText": "5 fichiers max",
-              "private": false,
-              "required": false,
-              "title": "Bilans",
-              "type": "medias"
+              "id": "48",
+              "title": "Question Multiple?",
+              "type": "radio"
             }
           ]
         }
