@@ -27,8 +27,8 @@ class OpinionVersion extends React.Component<Props> {
           /* $FlowFixMe */
           <VotePiechart
             top={10}
-            height="90px"
-            width="145px"
+            height={'90px'}
+            width={'145px'}
             ok={version.votesOk.totalCount}
             nok={version.votesNok.totalCount}
             mitige={version.votesMitige.totalCount}

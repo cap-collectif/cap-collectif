@@ -32,28 +32,6 @@ module.exports = {
     Element: true,
   },
   rules: {
-    // TODO set this to error
-    'prefer-destructuring': 'warn',
-    // TODO set this to error
-    'react/destructuring-assignment': 'warn',
-    // TODO set this to error
-    'no-restricted-globals': 'warn',
-    // TODO set this to error
-    'jsx-a11y/label-has-associated-control': 'warn',
-    // TODO set this to error
-    'react/no-this-in-sfc': 'warn',
-    // TODO set this to error
-    'prefer-promise-reject-errors': 'warn',
-    // TODO set this to error
-    'react/no-unescaped-entities': 'warn',
-    // TODO set this to error
-    'react/button-has-type': 'warn',
-    // TODO set this to error
-    'react/no-access-state-in-setstate': 'warn',
-    // TODO set this to error
-    'react/no-unused-state': 'warn',
-    // TODO set this to error
-    'react/sort-comp': 'warn',
     'graphql/named-operations': [
       'error',
       {

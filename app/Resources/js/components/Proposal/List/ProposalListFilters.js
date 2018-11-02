@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import type { GlobalState, Dispatch } from '../../../types';
-import ProposalListSearch from './ProposalListSearch';
+import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
 import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';

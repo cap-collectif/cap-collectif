@@ -5,18 +5,13 @@ import { injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import QuestionnaireAdminConfigurationForm from './QuestionnaireAdminConfigurationForm';
 import QuestionnaireAdminParametersForm from './QuestionnaireAdminParametersForm';
-import QuestionnaireAdminResults from './QuestionnaireAdminResults';
 import type { QuestionnaireAdminPageTabs_questionnaire } from './__generated__/QuestionnaireAdminPageTabs_questionnaire.graphql';
 
-type Props = {
-  questionnaire: QuestionnaireAdminPageTabs_questionnaire,
-  intl: IntlShape,
-};
+type Props = { questionnaire: QuestionnaireAdminPageTabs_questionnaire, intl: IntlShape };
 
 export class QuestionnaireAdminPageTabs extends Component<Props> {
   render() {
     const { intl, questionnaire } = this.props;
-
     return (
       <div>
         <Tabs defaultActiveKey={1} id="proposal-form-admin-page-tabs">
@@ -25,9 +20,6 @@ export class QuestionnaireAdminPageTabs extends Component<Props> {
           </Tab>
           <Tab eventKey={2} title={intl.formatMessage({ id: 'questionnaire.admin.parameters' })}>
             <QuestionnaireAdminParametersForm questionnaire={questionnaire} />
-          </Tab>
-          <Tab eventKey={3} title={intl.formatMessage({ id: 'results' })}>
-            <QuestionnaireAdminResults questionnaire={questionnaire} />
           </Tab>
         </Tabs>
       </div>
@@ -41,7 +33,6 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment QuestionnaireAdminPageTabs_questionnaire on Questionnaire {
-      ...QuestionnaireAdminResults_questionnaire
       ...QuestionnaireAdminConfigurationForm_questionnaire
       ...QuestionnaireAdminParametersForm_questionnaire
     }

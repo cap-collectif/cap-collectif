@@ -14,7 +14,6 @@ const mutation = graphql`
     updateQuestionnaireConfiguration(input: $input) {
       questionnaire {
         ...QuestionnaireAdminConfigurationForm_questionnaire
-        ...QuestionnaireAdminResults_questionnaire
       }
     }
   }

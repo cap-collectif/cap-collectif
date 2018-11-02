@@ -153,7 +153,7 @@ export class ProposalAdminSelections extends Component<Props> {
                 <br />
                 <Field
                   label="Publié dans cette étape"
-                  name="collectPublished"
+                  name={`collectPublished`}
                   id="collectPublished"
                   disabled
                   readOnly

@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import RemainingTime from '../../Utils/RemainingTime';
-import DatesInterval from '../../Utils/DatesInterval';
+import RemainingTime from './../../Utils/RemainingTime';
+import DatesInterval from './../../Utils/DatesInterval';
 import StepInfos from './StepInfos';
 
 type Props = {

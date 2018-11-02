@@ -66,3 +66,8 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     title: Un nombre stp
     required: true
     type: 9
+  simplequestion13:
+    id: 1314
+    title: Question simple?
+    required: false
+    type: 0

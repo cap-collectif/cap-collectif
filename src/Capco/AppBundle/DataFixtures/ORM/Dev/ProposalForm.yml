@@ -190,3 +190,21 @@ Capco\AppBundle\Entity\ProposalForm:
     reference: 111
     evaluationForm: '@questionnaire9'
     allowAknowledge: true
+  proposalform13:
+    id: proposalform13
+    title: Proposal Form attaché à aucun projet
+    description: <p><text(100)></p>
+    # notificationsConfiguration: '@proposalFormNotificationConfiguration14'
+    titleHelpText: Choisissez un titre pour votre proposition
+    themeHelpText: Sélectionnez un thème
+    districtHelpText: Sélectionnez une zone géographique
+    descriptionHelpText: Décrivez votre proposition
+    categoryHelpText: Sélectionnez une catégorie.
+    usingThemes: true
+    usingDistrict: false
+    districtMandatory: false
+    usingCategories: true
+    themeMandatory: false
+    categoryMandatory: true
+    reference: 112
+    allowAknowledge: true
