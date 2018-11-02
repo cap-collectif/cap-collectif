@@ -5,6 +5,7 @@ import { validateResponses } from './responsesHelper';
 const numberQuestion = {
   id: '2',
   title: 'Un nombre stp',
+  number: 1,
   private: false,
   required: true,
   description: null,
@@ -17,6 +18,7 @@ const numberQuestion = {
 const textQuestion = {
   id: '1',
   title: 'ça roule ?',
+  number: 2,
   private: false,
   required: false,
   description: null,

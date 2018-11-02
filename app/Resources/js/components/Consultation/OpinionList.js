@@ -64,25 +64,19 @@ export class OpinionList extends React.Component<Props> {
                     }
                   }}>
                   <option value="positions">
-                    <FormattedMessage id="opinion.sort.positions" />
+                    {intl.formatMessage({ id: 'opinion.sort.positions' })}
                   </option>
                   <option value="random">
-                    <FormattedMessage id="opinion.sort.random" />
+                    {intl.formatMessage({ id: 'opinion.sort.random' })}
                   </option>
-                  <option value="last">
-                    <FormattedMessage id="opinion.sort.last" />
-                  </option>
-                  <option value="old">
-                    <FormattedMessage id="opinion.sort.old" />
-                  </option>
+                  <option value="last">{intl.formatMessage({ id: 'opinion.sort.last' })}</option>
+                  <option value="old">{intl.formatMessage({ id: 'opinion.sort.old' })}</option>
                   <option value="favorable">
-                    <FormattedMessage id="opinion.sort.favorable" />
+                    {intl.formatMessage({ id: 'opinion.sort.favorable' })}
                   </option>
-                  <option value="votes">
-                    <FormattedMessage id="opinion.sort.votes" />
-                  </option>
+                  <option value="votes">{intl.formatMessage({ id: 'opinion.sort.votes' })}</option>
                   <option value="comments">
-                    <FormattedMessage id="opinion.sort.comments" />
+                    {intl.formatMessage({ id: 'opinion.sort.comments' })}
                   </option>
                 </select>
               )}

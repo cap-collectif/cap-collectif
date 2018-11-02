@@ -21,6 +21,7 @@ class ProposalListSearch extends React.Component<Props, State> {
   state = {
     terms: this.props.terms,
   };
+
   _input: ?React.Component<*>;
 
   handleSubmit = (e: Event) => {

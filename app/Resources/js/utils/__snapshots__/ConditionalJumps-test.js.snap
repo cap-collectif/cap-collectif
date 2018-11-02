@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ConditionalJumps /> should render correctly 1`] = `
+<div
+  className="visible-print-block conditional-jumps"
+>
+  <div
+    key="0"
+  >
+    <span
+      key="0"
+    >
+      <FormattedMessage
+        id="if-you-have-answered"
+        values={
+          Object {
+            "responseTitle": "First question",
+          }
+        }
+      />
+    </span>
+    <span
+      key="1"
+    >
+       
+      <FormattedMessage
+        id="event.and"
+        values={Object {}}
+      />
+       
+      "Second question"
+    </span>
+    ,
+     
+    <FormattedHTMLMessage
+      id="go-to-question-number"
+      values={
+        Object {
+          "questionNumber": 6,
+        }
+      }
+    />
+  </div>
+  <div
+    key="1"
+  >
+    ,
+     
+  </div>
+  <div
+    key="2"
+  >
+    <span
+      key="0"
+    >
+      <FormattedMessage
+        id="if-you-have-answered"
+        values={
+          Object {
+            "responseTitle": "Question 6",
+          }
+        }
+      />
+    </span>
+    <span
+      key="1"
+    >
+      , 
+      "Question 7"
+    </span>
+    <span
+      key="2"
+    >
+       
+      <FormattedMessage
+        id="event.and"
+        values={Object {}}
+      />
+       
+      "Question 8"
+    </span>
+    ,
+     
+    <FormattedHTMLMessage
+      id="go-to-question-number"
+      values={
+        Object {
+          "questionNumber": 23,
+        }
+      }
+    />
+  </div>
+  <div
+    key="3"
+  >
+    <span
+      key="0"
+    >
+      <FormattedMessage
+        id="if-you-have-answered"
+        values={
+          Object {
+            "responseTitle": "Question 9",
+          }
+        }
+      />
+    </span>
+    ,
+     
+    <FormattedHTMLMessage
+      id="go-to-question-number"
+      values={
+        Object {
+          "questionNumber": 2,
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`<ConditionalJumps /> should render null 1`] = `""`;

@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import ProposalPrivateField from '../ProposalPrivateField';
-import ProposalMediaResponse from '../Page/ProposalMediaResponse';
+import ProposalMediaResponse from './ProposalMediaResponse';
 import TitleInvertContrast from '../../Ui/TitleInvertContrast';
 import type { ProposalResponse_response } from './__generated__/ProposalResponse_response.graphql';
+import PrivateBox from '../../Ui/PrivateBox';
 
 type Props = {
   response: ProposalResponse_response,
@@ -93,13 +93,7 @@ class ProposalResponse extends React.PureComponent<Props> {
       }
     }
 
-    return (
-      <ProposalPrivateField
-        show={response.question.private}
-        children={value}
-        divClassName="block"
-      />
-    );
+    return <PrivateBox show={response.question.private} children={value} divClassName="block" />;
   }
 }
 

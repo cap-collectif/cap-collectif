@@ -21,6 +21,7 @@ export class ArgumentItem extends React.Component<Props> {
   static defaultProps = {
     isProfile: false,
   };
+
   renderDate = () => {
     const argument = this.props.argument;
 
@@ -62,7 +63,7 @@ export class ArgumentItem extends React.Component<Props> {
             <p className="h5 opinion__user">
               <UserLink user={argument.author} />
               {isProfile && (
-                <Label bsStyle={labelStyle} className={'label--right'}>
+                <Label bsStyle={labelStyle} className="label--right">
                   <FormattedMessage id={labelValueTranslateId} />
                 </Label>
               )}
@@ -71,7 +72,7 @@ export class ArgumentItem extends React.Component<Props> {
             <UnpublishedLabel publishable={argument} />
             {isProfile && (
               <p>
-                <FormattedMessage id={'admin.fields.opinion.link'} />
+                <FormattedMessage id="admin.fields.opinion.link" />
                 {' : '}
                 <a href={argument.related ? argument.related.url : ''}>
                   {argument.related ? argument.related.title : ''}

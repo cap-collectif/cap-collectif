@@ -232,6 +232,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       submitting,
       error,
       currentValues,
+      intl,
     } = this.props;
 
     const tooltipDelete = (
@@ -380,13 +381,13 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               id="personal-data-form-gender"
                               divClassName="col-sm-4">
                               <option value="MALE">
-                                <FormattedMessage id="gender.male" />
+                                {intl.formatMessage({ id: 'gender.male' })}
                               </option>
                               <option value="FEMALE">
-                                <FormattedMessage id="gender.female" />
+                                {intl.formatMessage({ id: 'gender.female' })}
                               </option>
                               <option value="OTHER">
-                                <FormattedMessage id="gender.other" />
+                                {intl.formatMessage({ id: 'gender.other' })}
                               </option>
                             </Field>
                           </div>
@@ -412,7 +413,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         <div>
                           <div className="horizontal_field_with_border_top">
                             <Field
-                              name={`dateOfBirth`}
+                              name="dateOfBirth"
                               id="dateOfBirth"
                               component={DateDropdownPicker}
                               locale={wLocale}

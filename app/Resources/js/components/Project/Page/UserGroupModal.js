@@ -34,9 +34,11 @@ export class UserGroupModal extends React.Component<Props, State> {
   closeModal = () => {
     this.props.handleClose();
   };
+
   closeUserInGroupModal = () => {
     this.setState({ currentShownGroupModalId: null });
   };
+
   loadMore = () => {
     this.setState({ loading: true });
     this.props.relay.loadMore(10, () => {

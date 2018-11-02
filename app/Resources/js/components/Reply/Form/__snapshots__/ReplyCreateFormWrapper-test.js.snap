@@ -33,6 +33,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
   <Alert
     bsClass="alert"
     bsStyle="warning"
+    className="hidden-print"
     closeLabel="Close alert"
   >
     <strong>
@@ -79,7 +80,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
   <Alert
     bsClass="alert"
     bsStyle="warning"
-    className="text-center"
+    className="hidden-print text-center"
     closeLabel="Close alert"
   >
     <strong>

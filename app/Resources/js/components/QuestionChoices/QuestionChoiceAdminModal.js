@@ -86,23 +86,21 @@ export class QuestionChoiceAdminModal extends React.Component<Props, ModalState>
               type="select"
               component={component}
               normalize={val => (val === '' ? null : val)}>
-              <option value="">
-                <FormattedMessage id="global.select" />
-              </option>
+              <option value="">{intl.formatMessage({ id: 'global.select' })}</option>
               <option value="PRIMARY">
-                <FormattedMessage id="admin.fields.question_choice.colors.primary" />
+                {intl.formatMessage({ id: 'admin.fields.question_choice.colors.primary' })}
               </option>
               <option value="SUCCESS">
-                <FormattedMessage id="admin.fields.question_choice.colors.success" />
+                {intl.formatMessage({ id: 'admin.fields.question_choice.colors.success' })}
               </option>
               <option value="INFO">
-                <FormattedMessage id="admin.fields.question_choice.colors.info" />
+                {intl.formatMessage({ id: 'admin.fields.question_choice.colors.info' })}
               </option>
               <option value="WARNING">
-                <FormattedMessage id="admin.fields.question_choice.colors.warning" />
+                {intl.formatMessage({ id: 'admin.fields.question_choice.colors.warning' })}
               </option>
               <option value="DANGER">
-                <FormattedMessage id="admin.fields.question_choice.colors.danger" />
+                {intl.formatMessage({ id: 'admin.fields.question_choice.colors.danger' })}
               </option>
             </Field>
           )}

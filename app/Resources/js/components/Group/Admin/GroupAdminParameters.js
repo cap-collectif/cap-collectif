@@ -100,9 +100,9 @@ export class GroupAdminParameters extends React.Component<Props, State> {
             deleteElement={() => {
               onDelete(this.props.group.id);
             }}
-            deleteModalTitle={'group.admin.parameters.modal.delete.title'}
-            deleteModalContent={'group.admin.parameters.modal.delete.content'}
-            buttonConfirmMessage={'group.admin.parameters.modal.delete.button'}
+            deleteModalTitle="group.admin.parameters.modal.delete.title"
+            deleteModalContent="group.admin.parameters.modal.delete.content"
+            buttonConfirmMessage="group.admin.parameters.modal.delete.button"
           />
 
           <ButtonToolbar className="box-content__toolbar mb-15">
