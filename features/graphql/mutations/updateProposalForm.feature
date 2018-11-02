@@ -361,6 +361,14 @@ Scenario: GraphQL client wants to delete the first question choice
             id
             title
             type
+            ... on MultipleChoiceQuestion {
+              questionChoices {
+                id
+                title
+                description
+                color
+              }
+            }
           }
         }
       }
@@ -431,7 +439,21 @@ Scenario: GraphQL client wants to delete the first question choice
             {
               "id": "48",
               "title": "Question Multiple?",
-              "type": "radio"
+              "type": "radio",
+              "questionChoices": [
+                {
+                  "id": "questionchoice33",
+                  "title": "Non",
+                  "description": "",
+                  "color": null
+                },
+                {
+                  "id": "questionchoice34",
+                  "title": "Peut être",
+                  "description": "",
+                  "color": null
+                }
+              ]
             }
           ]
         }
