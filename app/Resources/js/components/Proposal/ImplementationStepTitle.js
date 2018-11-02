@@ -43,7 +43,7 @@ export class ImplementationStepTitle extends React.Component<Props> {
     const { progressSteps } = this.props;
 
     if (progressSteps) {
-      return <span>this.getStepTitle(progressSteps)</span>;
+      return this.getStepTitle(progressSteps);
     }
 
     return null;

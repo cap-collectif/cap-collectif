@@ -1941,21 +1941,6 @@ type MediaQuestion implements Question {
     last: Int
   ): ParticipantConnection!
 
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
-
   # The associated logic jumps to this question.
   jumps: [LogicJump]
 }
@@ -1997,21 +1982,6 @@ type MultipleChoiceQuestion implements Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -3535,21 +3505,6 @@ interface Question {
     last: Int
   ): ParticipantConnection!
 
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
-
   # The associated logic jumps to this question.
   jumps: [LogicJump]
 }
@@ -4157,21 +4112,6 @@ type SectionQuestion implements Question {
     last: Int
   ): ParticipantConnection!
 
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
-
   # The associated logic jumps to this question.
   jumps: [LogicJump]
 }
@@ -4376,21 +4316,6 @@ type SimpleQuestion implements Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]

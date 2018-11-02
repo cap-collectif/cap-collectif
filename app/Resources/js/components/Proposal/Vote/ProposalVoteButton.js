@@ -35,9 +35,7 @@ type State = {
 // Should only be used via ProposalVoteButtonWrapper
 export class ProposalVoteButton extends React.Component<Props, State> {
   static defaultProps = { disabled: false };
-
   state = { isHovering: false };
-
   target: null;
 
   handleHovering = () => {

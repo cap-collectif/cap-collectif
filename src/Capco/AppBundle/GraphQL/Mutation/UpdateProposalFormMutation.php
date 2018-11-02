@@ -7,6 +7,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -23,19 +24,22 @@ class UpdateProposalFormMutation implements MutationInterface
     private $proposalFormRepo;
     private $logger;
     private $questionRepo;
+    private $abstractQuestionRepo;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactory $formFactory,
         ProposalFormRepository $proposalFormRepo,
         LoggerInterface $logger,
-        QuestionnaireAbstractQuestionRepository $questionRepo
+        QuestionnaireAbstractQuestionRepository $questionRepo,
+        AbstractQuestionRepository $abstractQuestionRepo
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->proposalFormRepo = $proposalFormRepo;
         $this->logger = $logger;
         $this->questionRepo = $questionRepo;
+        $this->abstractQuestionRepo = $abstractQuestionRepo;
     }
 
     public function __invoke(Argument $input): array
@@ -65,27 +69,80 @@ class UpdateProposalFormMutation implements MutationInterface
 
             //we stock the order sent to apply it after
             $questionsOrderedById = [];
-            foreach ($arguments['questions'] as $key => &$argument) {
+            // We need an array of questions ids from arguments
+            $argumentsQuestionsId = [];
+            foreach ($arguments['questions'] as $key => &$dataQuestion) {
                 //we are updating a question
-                if (isset($argument['question']['id'])) {
-                    $questionsOrderedById[] = $argument['question']['id'];
+                if (isset($dataQuestion['question']['id'])) {
+                    $dataQuestionId = $dataQuestion['question']['id'];
+                    $questionsOrderedById[] = $dataQuestionId;
+                    $argumentsQuestionsId[] = $dataQuestionId;
+
+                    $abstractQuestion = $this->abstractQuestionRepo->find($dataQuestionId);
+                    // If it's not a multiple choice question
+                    if (!$abstractQuestion instanceof MultipleChoiceQuestion) {
+                        continue;
+                    }
+
+                    $dataQuestionChoicesIds = [];
+                    foreach (
+                        $dataQuestion['question']['questionChoices']
+                        as $key => $dataQuestionChoice
+                    ) {
+                        if (isset($dataQuestionChoice['id'])) {
+                            $dataQuestionChoicesIds[] = $dataQuestionChoice['id'];
+                        }
+                    }
+
+                    foreach (
+                        $abstractQuestion->getQuestionChoices()
+                        as $position => $questionChoice
+                    ) {
+                        if (!in_array($questionChoice->getId(), $dataQuestionChoicesIds)) {
+                            $deletedChoice = [
+                                'id' => $abstractQuestion->getId(),
+                                'title' => null,
+                            ];
+                            array_splice(
+                                $dataQuestion['question']['questionChoices'],
+                                $position,
+                                0,
+                                [$deletedChoice]
+                            );
+                        }
+                    }
                 } else {
                     //creating a question
-                    $questionsOrderedById[] = $argument['question']['title'];
+                    $questionsOrderedById[] = $dataQuestion['question']['title'];
                 }
             }
 
             // we must reorder arguments datas to match database order (used in the symfony form)
             usort($arguments['questions'], function ($a, $b) use ($questionsOrderedByIdInDb) {
                 if (isset($a['question']['id'], $b['question']['id'])) {
-                    return (
-                        array_search($a['question']['id'], $questionsOrderedByIdInDb) >
-                        array_search($b['question']['id'], $questionsOrderedByIdInDb)
-                    );
+                    return array_search($a['question']['id'], $questionsOrderedByIdInDb) >
+                        array_search($b['question']['id'], $questionsOrderedByIdInDb);
                 }
                 //respect the user order, for now we just put new items at the end
                 return isset($a['question']['id']) ? false : true;
             });
+
+            foreach ($proposalForm->getQuestions() as $position => $proposalFormQuestion) {
+                if (
+                    !in_array($proposalFormQuestion->getQuestion()->getId(), $argumentsQuestionsId)
+                ) {
+                    // Put the title to null to be delete from delete_empty CollectionType field
+                    $deletedQuestion = [
+                        'question' => [
+                            'id' => $proposalFormQuestion->getQuestion()->getId(),
+                            'type' => $proposalFormQuestion->getQuestion()->getType(),
+                            'title' => null,
+                        ],
+                    ];
+                    // Inject back the deleted question into the arguments question array
+                    array_splice($arguments['questions'], $position, 0, [$deletedQuestion]);
+                }
+            }
 
             $form->submit($arguments, false);
             $qaq = $proposalForm->getQuestions();

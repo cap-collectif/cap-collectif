@@ -79,8 +79,8 @@ export class renderSelect extends React.Component<Props> {
               name={name}
               multi={multi}
               options={options}
-              noResultsText="Pas de résultats…"
-              loadingPlaceholder="Chargement…"
+              noResultsText={'Pas de résultats…'}
+              loadingPlaceholder={'Chargement…'}
               onBlur={() => onBlur()}
               onFocus={onFocus}
               onChange={(newValue: OnChangeInput) => {
@@ -109,8 +109,8 @@ export class renderSelect extends React.Component<Props> {
               autoload={autoload}
               multi={multi}
               value={value}
-              noResultsText="Pas de résultats…"
-              loadingPlaceholder="Chargement…"
+              noResultsText={'Pas de résultats…'}
+              loadingPlaceholder={'Chargement…'}
               onBlur={() => onBlur()}
               onFocus={onFocus}
               onChange={(newValue: OnChangeInput) => {

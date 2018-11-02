@@ -4,12 +4,12 @@ import { type IntlShape, FormattedMessage } from 'react-intl';
 import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
+import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
 import { checkOnlyNumbers } from '../services/Validator';
 
 import component from '../components/Form/Field';
-import PrivateBox from '../components/Ui/PrivateBox';
 
 type Question = {|
   +id: string,
@@ -105,11 +105,14 @@ type SubmitResponses = $ReadOnlyArray<{
 const getValueFromSubmitResponse = search => {
   if (search && typeof search.value === 'string') {
     return search.value;
-  }
-  if (search && search.value && typeof search.value === 'object' && !Array.isArray(search.value)) {
+  } else if (
+    search &&
+    search.value &&
+    typeof search.value === 'object' &&
+    !Array.isArray(search.value)
+  ) {
     return search.value.labels[0];
-  }
-  if (search && search.value && Array.isArray(search.value)) {
+  } else if (search && search.value && Array.isArray(search.value)) {
     return search.value[0].name;
   }
   return null;
@@ -576,7 +579,7 @@ export const renderResponses = ({
           }
           case 'medias': {
             return (
-              <PrivateBox key={field.id} show={field.private}>
+              <ProposalPrivateField key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
                   id={`${form}-${member}`}
@@ -588,12 +591,12 @@ export const renderResponses = ({
                   label={label}
                   disabled={disabled}
                 />
-              </PrivateBox>
+              </ProposalPrivateField>
             );
           }
           case 'select': {
             return (
-              <PrivateBox key={field.id} show={field.private}>
+              <ProposalPrivateField key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
                   id={`${form}-${member}`}
@@ -614,7 +617,7 @@ export const renderResponses = ({
                     </option>
                   ))}
                 </Field>
-              </PrivateBox>
+              </ProposalPrivateField>
             );
           }
           default: {
@@ -634,7 +637,7 @@ export const renderResponses = ({
 
               if (inputType === 'radio') {
                 return (
-                  <PrivateBox key={field.id} show={field.private}>
+                  <ProposalPrivateField key={field.id} show={field.private}>
                     <div key={`${member}-container`}>
                       <MultipleChoiceRadio
                         id={`${form}-${member}`}
@@ -649,12 +652,12 @@ export const renderResponses = ({
                         disabled={disabled}
                       />
                     </div>
-                  </PrivateBox>
+                  </ProposalPrivateField>
                 );
               }
             }
             return (
-              <PrivateBox key={field.id} show={field.private}>
+              <ProposalPrivateField key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
                   id={`${form}-${member}`}
@@ -668,7 +671,7 @@ export const renderResponses = ({
                   label={label}
                   disabled={disabled}
                 />
-              </PrivateBox>
+              </ProposalPrivateField>
             );
           }
         }

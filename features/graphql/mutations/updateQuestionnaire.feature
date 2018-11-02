@@ -165,3 +165,190 @@ Scenario: GraphQL admin wants to reorder questions
     }
   }
   """
+
+@database
+Scenario: GraphQL admin wants to delete first question
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateQuestionnaireConfigurationInput!) {
+      updateQuestionnaireConfiguration(input: $input) {
+        questionnaire {
+          questions {
+            id
+            title
+            type
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "questionnaireId": "questionnaire10",
+        "title": "Questionnaire non rattaché",
+        "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
+        "questions": [
+          {
+            "question": {
+              "id": "49",
+              "private": false,
+              "otherAllowed": false,
+              "randomQuestionChoices": false,
+              "questionChoices": [
+                {
+                  "color": null,
+                  "description": null,
+                  "id": "questionchoice35",
+                  "image": null,
+                  "title": "premier choix"
+                },
+                {
+                  "color": null,
+                  "description": null,
+                  "id": "questionchoice36",
+                  "image": null,
+                  "title": "deuxième choix"
+                },
+                {
+                  "color": null,
+                  "description": null,
+                  "id": "questionchoice37",
+                  "image": null,
+                  "title": "troisième choix"
+                }
+              ],
+              "required": false,
+              "title": "J'ai plusieurs choix?",
+              "type": "radio"
+            }
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "updateQuestionnaireConfiguration": {
+        "questionnaire": {
+          "questions": [
+            {
+              "id": "49",
+              "title": "J'ai plusieurs choix?",
+              "type": "radio"
+            }
+          ]
+        }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: GraphQL admin wants to delete first question choice
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: UpdateQuestionnaireConfigurationInput!) {
+      updateQuestionnaireConfiguration(input: $input) {
+        questionnaire {
+          questions {
+            id
+            title
+            type
+            ... on MultipleChoiceQuestion {
+              questionChoices {
+                id
+                title
+              }
+            }
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "questionnaireId": "questionnaire10",
+        "title": "Questionnaire non rattaché",
+        "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
+        "questions": [
+          {
+            "question": {
+              "id": "1315",
+              "private": false,
+              "required": false,
+              "title": "Je n'ai pas de projet?",
+              "type": "text"
+            }
+          },
+          {
+            "question": {
+              "id": "49",
+              "private": false,
+              "otherAllowed": false,
+              "randomQuestionChoices": false,
+              "validationRule": null,
+              "questionChoices": [
+                {
+                  "color": null,
+                  "description": null,
+                  "id": "questionchoice36",
+                  "image": null,
+                  "title": "deuxième choix"
+                },
+                {
+                  "color": null,
+                  "description": null,
+                  "id": "questionchoice37",
+                  "image": null,
+                  "title": "troisième choix"
+                }
+              ],
+              "required": false,
+              "title": "J'ai plusieurs choix?",
+              "jumps": [],
+              "type": "radio"
+            }
+          }
+        ]
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "updateQuestionnaireConfiguration": {
+        "questionnaire": {
+          "questions": [
+            {
+              "id": "1315",
+              "title": "Je n'ai pas de projet?",
+              "type": "text"
+            },
+            {
+              "id": "49",
+              "title": "J'ai plusieurs choix?",
+              "type": "radio"
+              "questionChoices": [
+                {
+                  "id": "questionchoice36",
+                  "title": "deuxième choix",
+                },
+                {
+                  "id": "questionchoice37",
+                  "title": "troisième choix",
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+  """

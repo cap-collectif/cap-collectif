@@ -28,7 +28,6 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
   state = {
     otherChecked: false,
   };
-
   textField: ?React.Component<*>;
 
   checkOtherRadio = () => {

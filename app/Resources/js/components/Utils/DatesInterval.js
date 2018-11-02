@@ -15,7 +15,7 @@ export class DatesInterval extends React.Component<Props> {
     return moment(endAt).diff(moment(startAt), 'days') < 1;
   }
 
-  render() {
+  render(): ?React.Element<any> {
     const { startAt, endAt, fullDay } = this.props;
 
     const startAtDate = moment(startAt).toDate();

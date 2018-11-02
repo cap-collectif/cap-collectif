@@ -30,7 +30,6 @@ type State = {
 
 export class RankingBlock extends React.Component<Props, State> {
   static displayName = 'RankingBlock';
-
   static defaultProps = { disabled: false };
 
   constructor(props: Props) {
@@ -46,7 +45,6 @@ export class RankingBlock extends React.Component<Props, State> {
   }
 
   choiceBox: ?React.Component<*>;
-
   pickBox: ?React.Component<*>;
 
   moveItem = (atList: number, atIndex: number, it: Object) => {
