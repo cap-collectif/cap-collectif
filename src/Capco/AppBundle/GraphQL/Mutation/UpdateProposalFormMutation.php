@@ -75,6 +75,25 @@ class UpdateProposalFormMutation implements MutationInterface
             }
         }
 
+        if (isset($arguments['categories'])) {
+            $categoriesIds = [];
+            foreach ($arguments['categories'] as $dataCategory) {
+                if (isset($dataCategory['id'])) {
+                    $categoriesIds[] = $dataCategory['id'];
+                }
+            }
+
+            foreach ($proposalForm->getCategories() as $position => $category) {
+                if (!in_array($category->getId(), $categoriesIds)) {
+                    $deletedCategory = [
+                        'id' => $category->getId(),
+                        'name' => "NULL",
+                    ];
+                    array_splice($arguments['categories'], $position, 0, [$deletedCategory]);
+                }
+            }
+        }
+
         if (isset($arguments['questions'])) {
             $questionsOrderedByBase = $form
                 ->getData()

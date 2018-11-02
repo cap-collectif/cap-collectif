@@ -569,11 +569,11 @@ Scenario: GraphQL client wants to delete the first category
           "categories": [
             {
               "id": "pCategory8",
-              "name": "Escrime",
+              "name": "Escrime"
             },
             {
               "id": "pCategory7",
-              "name": "Water Polo",
+              "name": "Water Polo"
             }
           ]
         }

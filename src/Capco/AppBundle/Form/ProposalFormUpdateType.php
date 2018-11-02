@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\District;
+use Capco\AppBundle\Entity\ProposalCategory;
 
 class ProposalFormUpdateType extends AbstractType
 {
@@ -58,6 +59,9 @@ class ProposalFormUpdateType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'delete_empty' => function (ProposalCategory $category = null) {
+                    return null === $category || $category->getName() === "NULL";
+                },
             ])
 
             ->add('districts', CollectionType::class, [
