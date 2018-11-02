@@ -512,11 +512,11 @@ Scenario: GraphQL client wants to delete the first district
           "districts": [
             {
               "id": "district15",
-              "name": "Quartier 2",
+              "name": "Quartier 2"
             },
             {
               "id": "district16",
-              "name": "Quartier 3",
+              "name": "Quartier 3"
             }
           ]
         }

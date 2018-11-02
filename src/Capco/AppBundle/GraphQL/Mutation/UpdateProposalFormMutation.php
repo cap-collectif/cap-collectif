@@ -56,6 +56,25 @@ class UpdateProposalFormMutation implements MutationInterface
 
         $form = $this->formFactory->create(ProposalFormUpdateType::class, $proposalForm);
 
+        if (isset($arguments['districts'])) {
+            $districtsIds = [];
+            foreach ($arguments['districts'] as $dataDistrict) {
+                if (isset($dataDistrict['id'])) {
+                    $districtsIds[] = $dataDistrict['id'];
+                }
+            }
+
+            foreach ($proposalForm->getdistricts() as $position => $district) {
+                if (!in_array($district->getId(), $districtsIds)) {
+                    $deletedDistrict = [
+                        'id' => $district->getId(),
+                        'name' => "NULL",
+                    ];
+                    array_splice($arguments['districts'], $position, 0, [$deletedDistrict]);
+                }
+            }
+        }
+
         if (isset($arguments['questions'])) {
             $questionsOrderedByBase = $form
                 ->getData()
