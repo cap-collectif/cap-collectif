@@ -4,16 +4,17 @@ import { type IntlShape, FormattedMessage } from 'react-intl';
 import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
-import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
 import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
 import { checkOnlyNumbers } from '../services/Validator';
-
 import component from '../components/Form/Field';
+import PrivateBox from '../components/Ui/PrivateBox';
+import ConditionalJumps from './ConditionalJumps';
 
 type Question = {|
   +id: string,
   +title: string,
+  +number?: number,
   +position: number,
   +private: boolean,
   +required: boolean,
@@ -25,6 +26,7 @@ type Question = {|
     +destination: {|
       +id: string,
       +title: string,
+      +number?: number,
     |},
     +conditions: ?$ReadOnlyArray<?{|
       +id: ?string,
@@ -105,14 +107,11 @@ type SubmitResponses = $ReadOnlyArray<{
 const getValueFromSubmitResponse = search => {
   if (search && typeof search.value === 'string') {
     return search.value;
-  } else if (
-    search &&
-    search.value &&
-    typeof search.value === 'object' &&
-    !Array.isArray(search.value)
-  ) {
+  }
+  if (search && search.value && typeof search.value === 'object' && !Array.isArray(search.value)) {
     return search.value.labels[0];
-  } else if (search && search.value && Array.isArray(search.value)) {
+  }
+  if (search && search.value && Array.isArray(search.value)) {
     return search.value[0].name;
   }
   return null;
@@ -545,11 +544,14 @@ export const renderResponses = ({
     <div>
       {fields.map((member, index) => {
         const field = questions[index];
+
+        let isAvailableQuestion = true;
+
         if (!availableQuestions.includes(field.id)) {
-          return;
+          isAvailableQuestion = false;
         }
+
         // We want to overidde the HTML verification of the input type number
-        const inputType = field.type && field.type !== 'number' ? field.type : 'text';
         const isOtherAllowed = field.isOtherAllowed;
 
         const labelAppend = field.required
@@ -566,12 +568,17 @@ export const renderResponses = ({
 
         const labelMessage = field.title + labelAppend;
 
-        const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
+        const label = (
+          <React.Fragment>
+            {field.number && <span className="visible-print-block">{field.number}.</span>}{' '}
+            <span dangerouslySetInnerHTML={{ __html: labelMessage }} />
+          </React.Fragment>
+        );
 
-        switch (inputType) {
+        switch (field.type) {
           case 'section': {
             return (
-              <div key={field.id}>
+              <div key={field.id} className="form__section">
                 <TitleInvertContrast>{field.title}</TitleInvertContrast>
                 <div dangerouslySetInnerHTML={{ __html: field.description }} />
               </div>
@@ -579,45 +586,60 @@ export const renderResponses = ({
           }
           case 'medias': {
             return (
-              <ProposalPrivateField key={field.id} show={field.private}>
-                <Field
-                  name={`${member}.value`}
-                  id={`${form}-${member}`}
-                  type="medias"
-                  component={component}
-                  help={field.helpText}
-                  description={field.description}
-                  placeholder="reply.your_response"
-                  label={label}
-                  disabled={disabled}
-                />
-              </ProposalPrivateField>
+              <div className={isAvailableQuestion === false && 'visible-print-block'}>
+                <PrivateBox key={field.id} show={field.private}>
+                  <span>{index + 1}. </span>
+                  <Field
+                    name={`${member}.value`}
+                    id={`${form}-${member}`}
+                    type="medias"
+                    component={component}
+                    help={field.helpText}
+                    description={field.description}
+                    placeholder="reply.your_response"
+                    label={label}
+                    disabled={disabled}
+                  />
+                  <ConditionalJumps jumps={field.jumps} />
+                </PrivateBox>
+              </div>
             );
           }
           case 'select': {
             return (
-              <ProposalPrivateField key={field.id} show={field.private}>
-                <Field
-                  name={`${member}.value`}
-                  id={`${form}-${member}`}
-                  type={inputType}
-                  component={component}
-                  help={field.helpText}
-                  isOtherAllowed={isOtherAllowed}
-                  description={field.description}
-                  placeholder="reply.your_response"
-                  label={label}
-                  disabled={disabled}>
-                  <option value="" disabled>
-                    {<FormattedMessage id="global.select" />}
-                  </option>
-                  {field.choices.map(choice => (
-                    <option key={choice.id} value={choice.title}>
-                      {choice.title}
+              <div className={isAvailableQuestion === false && 'visible-print-block'}>
+                <PrivateBox key={field.id} show={field.private}>
+                  <span>{index + 1}. </span>
+                  <Field
+                    name={`${member}.value`}
+                    id={`${form}-${member}`}
+                    type={field.type}
+                    component={component}
+                    help={field.helpText}
+                    isOtherAllowed={isOtherAllowed}
+                    description={field.description}
+                    placeholder="reply.your_response"
+                    label={label}
+                    disabled={disabled}>
+                    <option value="" disabled>
+                      {<FormattedMessage id="global.select" />}
                     </option>
-                  ))}
-                </Field>
-              </ProposalPrivateField>
+                    {field.choices.map(choice => (
+                      <option key={choice.id} value={choice.title}>
+                        {choice.title}
+                      </option>
+                    ))}
+                  </Field>
+                  <div className="visible-print-block form-fields">
+                    {field.choices.map(choice => (
+                      <div key={choice.id} className="radio">
+                        {choice.title}
+                      </div>
+                    ))}
+                  </div>
+                  <ConditionalJumps jumps={field.jumps} />
+                </PrivateBox>
+              </div>
             );
           }
           default: {
@@ -628,50 +650,59 @@ export const renderResponses = ({
 
             let choices = [];
             if (
-              inputType === 'ranking' ||
-              inputType === 'radio' ||
-              inputType === 'checkbox' ||
-              inputType === 'button'
+              field.type === 'ranking' ||
+              field.type === 'radio' ||
+              field.type === 'checkbox' ||
+              field.type === 'button'
             ) {
               choices = formattedChoicesInField(field);
 
-              if (inputType === 'radio') {
+              if (field.type === 'radio') {
                 return (
-                  <ProposalPrivateField key={field.id} show={field.private}>
-                    <div key={`${member}-container`}>
-                      <MultipleChoiceRadio
-                        id={`${form}-${member}`}
-                        name={member}
-                        description={field.description}
-                        helpText={field.helpText}
-                        isOtherAllowed={isOtherAllowed}
-                        label={label}
-                        change={change}
-                        choices={choices}
-                        value={response}
-                        disabled={disabled}
-                      />
-                    </div>
-                  </ProposalPrivateField>
+                  <div className={isAvailableQuestion === false && 'visible-print-block'}>
+                    <PrivateBox key={field.id} show={field.private}>
+                      <span>{index + 1}. </span>
+                      <div key={`${member}-container`}>
+                        <MultipleChoiceRadio
+                          id={`${form}-${member}`}
+                          name={member}
+                          description={field.description}
+                          helpText={field.helpText}
+                          isOtherAllowed={isOtherAllowed}
+                          label={label}
+                          change={change}
+                          choices={choices}
+                          value={response}
+                          disabled={disabled}
+                        />
+                      </div>
+                      <ConditionalJumps jumps={field.jumps} />
+                    </PrivateBox>
+                  </div>
                 );
               }
             }
             return (
-              <ProposalPrivateField key={field.id} show={field.private}>
-                <Field
-                  name={`${member}.value`}
-                  id={`${form}-${member}`}
-                  type={inputType}
-                  component={component}
-                  description={field.description}
-                  help={field.helpText}
-                  isOtherAllowed={isOtherAllowed}
-                  placeholder="reply.your_response"
-                  choices={choices}
-                  label={label}
-                  disabled={disabled}
-                />
-              </ProposalPrivateField>
+              <div className={isAvailableQuestion === false && 'visible-print-block'}>
+                <PrivateBox key={field.id} show={field.private}>
+                  <span>{index + 1}. </span>
+                  <Field
+                    name={`${member}.value`}
+                    id={`${form}-${member}`}
+                    type={field.type}
+                    component={component}
+                    validationRule={field.validationRule}
+                    description={field.description}
+                    help={field.helpText}
+                    isOtherAllowed={isOtherAllowed}
+                    placeholder="reply.your_response"
+                    choices={choices}
+                    label={label}
+                    disabled={disabled}
+                  />
+                  <ConditionalJumps jumps={field.jumps} />
+                </PrivateBox>
+              </div>
             );
           }
         }

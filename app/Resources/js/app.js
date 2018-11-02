@@ -4,14 +4,24 @@
 if (!global._babelPolyfill) {
   require('babel-polyfill');
 }
-require('./registration');
+
 const config = require('./config').default;
 global.Cookies = require('js-cookie');
 
 require('fancybox')($);
 
+// remove when Piechart is rendered by VotePiechart component everywhere
+require('./jsapi');
+require('./googleCharts');
+global.Modernizr = require('./modernizr');
+
+if (!Modernizr.intl) {
+  require('./browserUpdate');
+}
+global.cookieMonster = require('./cookieMonster').default;
+
 // Our global App for symfony
-const App = ($ => {
+global.App = ($ => {
   const equalheight = container => {
     let currentTallest = 0;
     let currentRowStart = 0;
@@ -186,5 +196,3 @@ const App = ($ => {
     skipLinks,
   };
 })(jQuery);
-
-export default App;

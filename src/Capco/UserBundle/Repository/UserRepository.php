@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
@@ -553,9 +554,8 @@ class UserRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findConsultationStepArgumentContributorsWithCount(
-        ConsultationStep $step
-    ): array {
+    public function findConsultationStepArgumentContributorsWithCount(ConsultationStep $step): array
+    {
         $em = $this->getEntityManager();
         $query = $em
             ->createQuery(

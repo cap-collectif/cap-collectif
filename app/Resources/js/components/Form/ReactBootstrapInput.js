@@ -28,6 +28,8 @@ import EmailInput from './EmailInput';
 import AutosizedTextarea from './AutosizedTextarea';
 import Address from './Address';
 import ButtonBody from '../Reply/Form/ButtonBody';
+import QuestionPrintHelpText from './QuestionPrintHelpText';
+import Notepad from '../Ui/Notepad';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -61,6 +63,7 @@ type Props = {
   id: ?string,
   children?: any,
   help?: string | any,
+  helpPrint?: boolean,
   description?: string | any,
   bsSize?: string,
   wrapperClassName?: ?string,
@@ -72,6 +75,7 @@ type Props = {
   buttonAfter?: any,
   standalone?: boolean,
   validationState?: string,
+  validationRule?: Object,
   isOtherAllowed?: boolean,
   label?: string | any,
   type: ?string,
@@ -89,6 +93,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     errors: null,
     image: null,
     medias: [],
+    helpPrint: true,
   };
 
   constructor(props, context) {
@@ -155,7 +160,12 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'editor') {
-      return <Editor value={value} className={wrapperClassName} {...props} />;
+      return (
+        <React.Fragment>
+          <Editor value={value} className={wrapperClassName} {...props} />
+          <Notepad />
+        </React.Fragment>
+      );
     }
 
     if (type === 'captcha') {
@@ -164,21 +174,23 @@ class ReactBootstrapInput extends React.Component<Props> {
 
     if (type === 'image') {
       return (
-        <ImageUpload
-          id={props.id}
-          className={props.className}
-          valueLink={props.valueLink}
-          value={value}
-          onChange={props.onChange}
-          accept="image/*"
-          preview={props.image}
-        />
+        <div className="hidden-print">
+          <ImageUpload
+            id={props.id}
+            className={props.className}
+            valueLink={props.valueLink}
+            value={value}
+            onChange={props.onChange}
+            accept="image/*"
+            preview={props.image}
+          />
+        </div>
       );
     }
 
     if (type === 'medias') {
       return (
-        <div>
+        <div className="hidden-print">
           <ImageUpload
             id={props.id}
             className={props.className}
@@ -204,7 +216,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         ref={c => {
           this.refFormControl = c;
         }}
-        type={props.componentClass ? undefined : type}
+        type={props.componentClass ? undefined : type !== 'number' ? type : 'text'}
         value={value}
         {...props}>
         {children}
@@ -250,19 +262,33 @@ class ReactBootstrapInput extends React.Component<Props> {
       field.choices = props.choices;
 
       return (
-        <RadioGroup key={props.id} horizontal id={props.id} onChange={props.onChange}>
-          {field.choices.map(choice => (
-            <RadioButton
-              key={choice.id}
-              disabled={props.disabled}
-              value={choice.label}
-              iconSize={20}
-              pointColor={this.getColor(choice.color)}
-              checked={value === choice.label}>
-              {choice.label}
-            </RadioButton>
-          ))}
-        </RadioGroup>
+        <React.Fragment>
+          <RadioGroup
+            key={props.id}
+            horizontal
+            className="hidden-print form-fields"
+            id={props.id}
+            onChange={props.onChange}>
+            {field.choices.map(choice => (
+              <RadioButton
+                key={choice.id}
+                disabled={props.disabled}
+                value={choice.label}
+                iconSize={20}
+                pointColor={this.getColor(choice.color)}
+                checked={value === choice.label}>
+                {choice.label}
+              </RadioButton>
+            ))}
+          </RadioGroup>
+          <div className="visible-print-block form-fields">
+            {field.choices.map(choice => (
+              <div key={choice.id} className="radio">
+                {choice.label}
+              </div>
+            ))}
+          </div>
+        </React.Fragment>
       );
     }
 
@@ -321,7 +347,12 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'textarea') {
-      formControl = <AutosizedTextarea maxLength={props.maxLength} value={value} {...props} />;
+      formControl = (
+        <React.Fragment>
+          <AutosizedTextarea maxLength={props.maxLength} value={value} {...props} />
+          <Notepad />
+        </React.Fragment>
+      );
     }
 
     if (popover) {
@@ -347,7 +378,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     return (
-      <InputGroup bsClass={cx('input-group', wrapperClassName)}>
+      <InputGroup className="form-fields" bsClass={cx('input-group', wrapperClassName)}>
         {this.renderAddon(addonBefore)}
         {this.renderButton(buttonBefore)}
         {formControl}
@@ -365,6 +396,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       labelClassName, // eslint-disable-line
       standalone, // eslint-disable-line
       validationState, // eslint-disable-line
+      validationRule, // eslint-disable-line
       ...props
     } = this.props;
 
@@ -378,15 +410,21 @@ class ReactBootstrapInput extends React.Component<Props> {
             {label}
           </ControlLabel>
         )}
+        <QuestionPrintHelpText
+          validationRule={validationRule || null}
+          questionType={props.type}
+          choices={this.props.choices}
+          helpPrint={this.props.helpPrint}
+        />
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
         {props.description &&
           props.description !== '<div><br /></div>' && (
-            <div style={{ paddingBottom: 15 }}>
+            <div className="pb-15">
               <ButtonBody body={props.description || ''} />
             </div>
           )}
         {this.renderInputGroup(props)}
-        {props.errors && <span className="error-block">{props.errors}</span>}
+        {props.errors && <span className="error-block hidden-print">{props.errors}</span>}
       </FormGroup>
     );
   }

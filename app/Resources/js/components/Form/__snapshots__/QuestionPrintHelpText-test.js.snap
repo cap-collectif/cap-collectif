@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionPrintHelpText /> should render correctly button text 1`] = `
+<span
+  className="visible-print-block help-block"
+>
+  <FormattedMessage
+    id="one-possible-answer"
+    values={Object {}}
+  />
+</span>
+`;
+
+exports[`<QuestionPrintHelpText /> should render correctly checkbox text with max validation rule 1`] = `
+<span
+  className="visible-print-block help-block"
+>
+  <FormattedMessage
+    id="reply.constraints.choices_max"
+    values={
+      Object {
+        "nb": 3,
+      }
+    }
+  />
+</span>
+`;
+
+exports[`<QuestionPrintHelpText /> should render correctly checkbox text without validation rule & false helpPrint 1`] = `""`;
+
+exports[`<QuestionPrintHelpText /> should render correctly checkbox text without validation rule 1`] = `
+<span
+  className="visible-print-block help-block"
+>
+  <FormattedMessage
+    id="several-possible-answers"
+    values={Object {}}
+  />
+</span>
+`;
+
+exports[`<QuestionPrintHelpText /> should render correctly image text 1`] = `
+<span
+  className="visible-print-block help-block"
+>
+  <FormattedMessage
+    id="document-to-be-attached-to-this-form"
+    values={Object {}}
+  />
+</span>
+`;
+
+exports[`<QuestionPrintHelpText /> should render correctly medias text 1`] = `
+<span
+  className="visible-print-block help-block"
+>
+  <FormattedMessage
+    id="document-to-be-attached-to-this-form"
+    values={Object {}}
+  />
+</span>
+`;
+
+exports[`<QuestionPrintHelpText /> should render correctly number text 1`] = `
+<span
+  className="visible-print-block help-block"
+>
+  <FormattedMessage
+    id="please-indicate-a-number"
+    values={Object {}}
+  />
+</span>
+`;
+
+exports[`<QuestionPrintHelpText /> should render correctly ranking text with min validation rule 1`] = `
+<span
+  className="visible-print-block help-block"
+>
+  <FormattedMessage
+    id="sort-the-answers-by-numbering-them-from-one-to-n"
+    values={
+      Object {
+        "questionsNumber": 3,
+      }
+    }
+  />
+  <FormattedMessage
+    id="reply.constraints.choices_min"
+    values={
+      Object {
+        "nb": 1,
+      }
+    }
+  />
+</span>
+`;
+
+exports[`<QuestionPrintHelpText /> should render correctly select text with equal validation rule 1`] = `
+<span
+  className="visible-print-block help-block"
+>
+  <FormattedMessage
+    id="one-possible-answer"
+    values={Object {}}
+  />
+  <FormattedMessage
+    id="reply.constraints.choices_equal"
+    values={
+      Object {
+        "nb": 2,
+      }
+    }
+  />
+</span>
+`;
+
+exports[`<QuestionPrintHelpText /> should render null 1`] = `""`;

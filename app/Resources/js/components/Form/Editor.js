@@ -2,13 +2,13 @@
 // Todo : ref Quill
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 import classNames from 'classnames';
 import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
 
 type Props = {
-  intl: intlShape,
+  intl: IntlShape,
   valueLink?: Object,
   value?: any,
   onChange: Function,

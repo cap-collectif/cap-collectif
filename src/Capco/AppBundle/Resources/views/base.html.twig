@@ -39,18 +39,13 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script type="text/javascript">
+        window.locale = "{{ intl_locale() }}";
+    </script>
     {{ parent() }}
     {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
     <script type="text/javascript">
-        require('Resources/js/modernizr');
-        {# remove when Piechart is rendered by VotePiechart component everywhere #}
-        require('Resources/js/jsapi');
-        require('Resources/js/googleCharts');
-        window.locale = "{{ intl_locale() }}";
 
-        var App = require('Resources/js/app').default;
-
-        var cookieMonster = require('Resources/js/cookieMonster').default;
         window.executeAnalyticScript = function(){
             {% if null != analytic_js %}
               var script = document.createElement("script");
@@ -62,10 +57,6 @@
         document.addEventListener('DOMContentLoaded', function(event) {
           cookieMonster.processCookieConsent();
         });
-
-        if (!Modernizr.intl) {
-            require('Resources/js/browserUpdate');
-        }
 
         $(window).on('load', function() {
             App.externalLinks();

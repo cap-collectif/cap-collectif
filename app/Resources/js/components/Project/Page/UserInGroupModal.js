@@ -26,15 +26,18 @@ export class UserInGroupModal extends React.Component<Props, State> {
   state = {
     loading: false,
   };
+
   closeModal = () => {
     this.props.handleClose();
   };
+
   loadMore = () => {
     this.setState({ loading: true });
     this.props.relay.loadMore(10, () => {
       this.setState({ loading: false });
     });
   };
+
   render() {
     const { show, group, relay, intl } = this.props;
     return (

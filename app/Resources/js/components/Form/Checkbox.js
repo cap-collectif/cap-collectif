@@ -59,6 +59,7 @@ class Checkbox extends React.Component<Props, State> {
       other: changeValue || null,
     });
   };
+
   other: ?React.Component<*, *>;
 
   empty = () => {
@@ -96,7 +97,7 @@ class Checkbox extends React.Component<Props, State> {
       labelClasses[labelClassName] = true;
     }
     return (
-      <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
+      <div className={`form-group ${getGroupStyle(field.id)} form-fields`} id={id}>
         {label && (
           <label htmlFor={fieldName} className={classNames(labelClasses)}>
             {label}
@@ -104,7 +105,7 @@ class Checkbox extends React.Component<Props, State> {
         )}
         {field.helpText && <span className="help-block">{field.helpText}</span>}
         {field.description && (
-          <div style={{ paddingBottom: 15 }}>
+          <div className="pb-15">
             <ButtonBody body={field.description || ''} />
           </div>
         )}
@@ -114,11 +115,12 @@ class Checkbox extends React.Component<Props, State> {
             const choiceKey = `choice-${choice.id}`;
             const choiceValue = choice.useIdAsValue && choice.id ? choice.id : choice.label;
             return (
-              <div key={choiceKey}>
+              <div key={choiceKey} className="choice-field">
                 <Input
                   id={`${id}_${choiceKey}`}
                   name={fieldName}
                   type="checkbox"
+                  helpPrint={false}
                   value={choiceValue}
                   checked={finalValue.indexOf(choiceValue) !== -1}
                   disabled={disabled}
@@ -139,7 +141,7 @@ class Checkbox extends React.Component<Props, State> {
                   {choice.label}
                 </Input>
                 {choice.description && (
-                  <div style={{ marginBottom: '20px', paddingLeft: '20px' }}>
+                  <div className="mb-20 pl-20 choice-description">
                     <i dangerouslySetInnerHTML={{ __html: choice.description }} />
                   </div>
                 )}

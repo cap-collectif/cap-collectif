@@ -45,6 +45,7 @@ export class ProposalAdminPage extends React.Component<Props> {
   componentWillUnmount() {
     window.removeEventListener('beforeunload', onUnload);
   }
+
   render() {
     return (
       <div className="admin_proposal_form">
