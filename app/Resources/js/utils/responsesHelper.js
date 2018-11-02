@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, FormattedMessage } from 'react-intl';
+import { type IntlShape } from 'react-intl';
 import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
@@ -622,7 +622,7 @@ export const renderResponses = ({
                     label={label}
                     disabled={disabled}>
                     <option value="" disabled>
-                      {<FormattedMessage id="global.select" />}
+                      {intl.formatMessage({ id: 'global.select' })}
                     </option>
                     {field.choices.map(choice => (
                       <option key={choice.id} value={choice.title}>

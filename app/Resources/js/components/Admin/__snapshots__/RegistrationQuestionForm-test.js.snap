@@ -33,26 +33,17 @@ exports[`<RegistrationQuestionForm /> renders correctly 1`] = `
       disabled={true}
       value=""
     >
-      <FormattedMessage
-        id="global.select"
-        values={Object {}}
-      />
+      global.select
     </option>
     <option
       value={0}
     >
-      <FormattedMessage
-        id="global.question.types.text"
-        values={Object {}}
-      />
+      global.question.types.text
     </option>
     <option
       value={4}
     >
-      <FormattedMessage
-        id="global.question.types.select"
-        values={Object {}}
-      />
+      global.question.types.select
     </option>
   </Field>
 </form>

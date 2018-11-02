@@ -198,50 +198,32 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
       <option
         value=""
       >
-        <FormattedMessage
-          id="global.select"
-          values={Object {}}
-        />
+        global.select
       </option>
       <option
         value="PRIMARY"
       >
-        <FormattedMessage
-          id="admin.fields.question_choice.colors.primary"
-          values={Object {}}
-        />
+        admin.fields.question_choice.colors.primary
       </option>
       <option
         value="SUCCESS"
       >
-        <FormattedMessage
-          id="admin.fields.question_choice.colors.success"
-          values={Object {}}
-        />
+        admin.fields.question_choice.colors.success
       </option>
       <option
         value="INFO"
       >
-        <FormattedMessage
-          id="admin.fields.question_choice.colors.info"
-          values={Object {}}
-        />
+        admin.fields.question_choice.colors.info
       </option>
       <option
         value="WARNING"
       >
-        <FormattedMessage
-          id="admin.fields.question_choice.colors.warning"
-          values={Object {}}
-        />
+        admin.fields.question_choice.colors.warning
       </option>
       <option
         value="DANGER"
       >
-        <FormattedMessage
-          id="admin.fields.question_choice.colors.danger"
-          values={Object {}}
-        />
+        admin.fields.question_choice.colors.danger
       </option>
     </Field>
   </ModalBody>
