@@ -55,8 +55,10 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
   };
 
   render() {
-    const softPanelChecked = this.state.removalType === 'SOFT' ? 'delete__panel__checked' : '';
-    const hardPanelChecked = this.state.removalType === 'HARD' ? 'delete__panel__checked' : '';
+    const softPanelChecked =
+      this.state.removalType === 'SOFT' ? 'delete__panel__checked' : '';
+    const hardPanelChecked =
+      this.state.removalType === 'HARD' ? 'delete__panel__checked' : '';
     const { show, viewer } = this.props;
     const removalName = 'type-of-removal';
     return (

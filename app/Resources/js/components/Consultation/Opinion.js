@@ -25,8 +25,8 @@ export class Opinion extends React.Component<Props> {
           /* $FlowFixMe */
           <VotePiechart
             top={10}
-            height="90px"
-            width="145px"
+            height={'90px'}
+            width={'145px'}
             ok={opinion.votesOk.totalCount}
             nok={opinion.votesNok.totalCount}
             mitige={opinion.votesMitige.totalCount}

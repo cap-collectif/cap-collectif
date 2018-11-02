@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import RemainingTime from '../../Utils/RemainingTime';
-import DatesInterval from '../../Utils/DatesInterval';
+import RemainingTime from './../../Utils/RemainingTime';
+import DatesInterval from './../../Utils/DatesInterval';
 import StepInfos from './StepInfos';
 
 type Props = {
@@ -39,7 +39,7 @@ export class StepPageHeader extends React.Component<Props> {
             step.status === 'open' &&
             !step.timeless &&
             this.stepIsParticipative() && (
-              <div className="mr-15 d-ib hidden-print">
+              <div className="mr-15 d-ib">
                 <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
               </div>
             )}

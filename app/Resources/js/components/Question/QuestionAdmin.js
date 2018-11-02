@@ -99,6 +99,7 @@ export const QuestionAdmin = ({
             <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
           </Button>
           <Button
+            id={`js-btn-delete-${index}`}
             bsStyle="danger"
             className="btn-outline-danger"
             onClick={handleClickDelete.bind(null, index, question.type)}>

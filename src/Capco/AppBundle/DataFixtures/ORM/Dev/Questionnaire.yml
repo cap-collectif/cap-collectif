@@ -59,3 +59,10 @@ Capco\AppBundle\Entity\Questionnaire:
     multipleRepliesAllowed: true
     anonymousAllowed: true
     acknowledgeReplies: true
+  questionnaire10:
+    id: questionnaire10
+    title: Questionnaire non rattaché
+    description: <p><text(100)></p>
+    multipleRepliesAllowed: true
+    anonymousAllowed: true
+    acknowledgeReplies: true

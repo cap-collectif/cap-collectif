@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReactBootstrapTable /> renders table with all type of data 1`] = `
+<ReactBootstrapTable__Container>
+  <Table
+    bordered={true}
+    bsClass="table"
+    condensed={false}
+    hover={true}
+    responsive={false}
+    striped={false}
+  >
+    <thead>
+      <tr>
+        <th>
+          Titre
+        </th>
+        <th>
+          Valeur
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          1
+        </td>
+        <td>
+          2
+        </td>
+      </tr>
+      <tr>
+        <td>
+          1
+        </td>
+        <td>
+          2
+        </td>
+      </tr>
+    </tbody>
+  </Table>
+</ReactBootstrapTable__Container>
+`;

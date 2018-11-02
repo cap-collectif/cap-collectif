@@ -101,7 +101,6 @@ class Other extends React.Component<Props, State> {
             name={fieldName}
             type={this.props.field.type}
             checked={this.state.checked}
-            helpPrint={false}
             onChange={this.onCheckUncheck}
             disabled={disabled}>
             <FormattedMessage id="reply.other" />

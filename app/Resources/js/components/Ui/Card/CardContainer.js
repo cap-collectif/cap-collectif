@@ -82,16 +82,4 @@ export const CardContainer = styled.div`
       }
     }
   }
-
-  @media print {
-    border: none;
-    display: block;
-    margin-bottom: 0;
-    margin-top: 15pt;
-
-    .card__body {
-      display: block;
-      padding: 0;
-    }
-  }
 `;

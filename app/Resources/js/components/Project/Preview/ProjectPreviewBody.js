@@ -4,7 +4,7 @@ import moment from 'moment';
 import Truncate from 'react-truncate';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
-import RemainingTime from '../../Utils/RemainingTime';
+import RemainingTime from './../../Utils/RemainingTime';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 import ProjectPreviewCounters from './ProjectPreviewCounters';
