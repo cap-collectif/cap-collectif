@@ -440,4 +440,3 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: troisième choix
     position: 3
     question: '@multiplequestion13'
-  
