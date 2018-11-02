@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MediaResponseRepository")
+ * @ORM\Entity()
  */
 class MediaResponse extends AbstractResponse
 {

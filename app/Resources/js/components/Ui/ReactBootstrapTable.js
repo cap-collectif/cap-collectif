@@ -1,26 +1,22 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
-import { Table as BtstTable } from 'react-bootstrap';
-import colors from '../../../utils/colors';
+import { Table } from 'react-bootstrap';
+import colors from '../../utils/colors';
 
 type Props = {
-  children?: ?React.Node,
-  hover?: boolean,
-  bordered?: boolean,
-  tableLayoutFixed?: boolean,
+  children: Array<?React.Node>,
 };
 
 export const Container = styled.div`
   color: ${colors.darkText};
-  background-color: ${colors.white};
+  overflow-x: auto;
   border: 1px solid ${colors.borderColor};
   margin-bottom: 20px;
-  overflow-x: scroll;
-  border-radius: 4px 4px 0 0;
+  background-color: ${colors.white};
 
   .table {
-    table-layout: ${props => (props.tableLayoutFixed ? 'fixed' : 'auto')};
+    table-layout: fixed;
     margin-bottom: 0;
     border: none;
   }
@@ -61,26 +57,23 @@ export const Container = styled.div`
     color: ${colors.darkText};
     font-weight: 500;
   }
-
-  @media (max-width: 991px) {
-    thead th:first-child {
-      min-width: 150px;
-    }
-  }
 `;
 
-export class Table extends React.PureComponent<Props> {
+export class ReactBootstrapTable extends React.Component<Props> {
   render() {
-    const { children, hover, bordered, tableLayoutFixed } = this.props;
+    const { children } = this.props;
 
     return (
-      <Container tableLayoutFixed={tableLayoutFixed}>
-        <BtstTable hover={hover} bordered={bordered}>
-          {children}
-        </BtstTable>
+      <Container>
+        <Table bordered hover>
+          <thead>
+            <tr>{children[0]}</tr>
+          </thead>
+          <tbody>{children[1]}</tbody>
+        </Table>
       </Container>
     );
   }
 }
 
-export default Table;
+export default ReactBootstrapTable;

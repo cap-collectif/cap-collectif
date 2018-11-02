@@ -1,25 +1,34 @@
 Capco\AppBundle\Entity\ProposalCategory:
-    pCategory1:
-        id: pCategory1
-        name: Aménagement
-        form: '@proposalform1'
-    pCategory2:
-        id: pCategory2
-        name: Politique
-        form: '@proposalform1'
-    pCategory3:
-        id: pCategory3
-        name: Aménagement
-        form: '@proposalform3'
-    pCategory4:
-        id: pCategory4
-        name: Politique
-        form: '@proposalform3'
-    pCategory5:
-        id: pCategory5
-        name: Ethnique
-        form: '@proposalform9'
-    pCategory5:
-        id: pCategory5
-        name: Politique
-        form: '@proposalform10'
+  pCategory1:
+    id: pCategory1
+    name: Aménagement
+    form: '@proposalform1'
+  pCategory2:
+    id: pCategory2
+    name: Politique
+    form: '@proposalform1'
+  pCategory3:
+    id: pCategory3
+    name: Aménagement
+    form: '@proposalform3'
+  pCategory4:
+    id: pCategory4
+    name: Politique
+    form: '@proposalform3'
+  pCategory5:
+    id: pCategory5
+    name: Ethnique
+    form: '@proposalform9'
+
+  pCategory6:
+    id: pCategory6
+    name: Escalade
+    form: '@proposalform13'
+  pCategory7:
+    id: pCategory7
+    name: Water Polo
+    form: '@proposalform13'
+  pCategory8:
+    id: pCategory8
+    name: Escrime
+    form: '@proposalform13'

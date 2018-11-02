@@ -7,7 +7,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import type { ProposalListTable_proposals } from './__generated__/ProposalListTable_proposals.graphql';
 import type { ProposalListTable_step } from './__generated__/ProposalListTable_step.graphql';
 import type { ImplementationStepTitle_progressSteps } from '../__generated__/ImplementationStepTitle_progressSteps.graphql';
-import Table from '../../Ui/Table/Table';
+import ReactBootstrapTable from '../../Ui/ReactBootstrapTable';
 import ProposalListTableMobile from './ProposalListTableMobile';
 import ImplementationStepTitle from '../ImplementationStepTitle';
 import ProgressList from '../../Ui/List/ProgressList';
@@ -354,9 +354,8 @@ export class ProposalListTable extends React.Component<Props, State> {
     }
 
     return (
-      <Table bordered hover tableLayoutFixed>
-        <thead>
-        <tr>
+      <ReactBootstrapTable data={data}>
+        <React.Fragment>
           {columns.map((column, key) => (
             <th
               style={{
@@ -367,14 +366,13 @@ export class ProposalListTable extends React.Component<Props, State> {
               <FormattedMessage id={column.text || 'global.non_applicable'} />
             </th>
           ))}
-        </tr>
-        </thead>
-        <tbody>
-        {data.map((rows, key) => (
-          <tr key={key}>{this.getCell(rows)}</tr>
-        ))}
-        </tbody>
-      </Table>
+        </React.Fragment>
+        <React.Fragment>
+          {data.map((rows, key) => (
+            <tr key={key}>{this.getCell(rows)}</tr>
+          ))}
+        </React.Fragment>
+      </ReactBootstrapTable>
     );
   }
 }

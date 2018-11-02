@@ -15,7 +15,7 @@ class Filter extends React.Component<Props> {
     show: true,
   };
 
-  render() {
+  render(): ?React.Element<any> {
     const { onChange, show, value, values } = this.props;
     if (show) {
       return (

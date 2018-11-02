@@ -101,7 +101,6 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, { group, reset })
 
 export class GroupAdminImportUsersForm extends React.Component<Props, State> {
   static defaultProps: DefaultProps;
-
   state = {
     showMoreError: false,
     analyzed: false,

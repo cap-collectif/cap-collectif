@@ -21,7 +21,7 @@ class PinnedLabel extends React.Component<Props> {
             </Tooltip>
           }>
           <span className="opinion__label opinion__label--blue">
-            <i className="cap cap-pin-1" /> <FormattedMessage id="global.pinned.label" />
+            <i className="cap cap-pin-1" /> <FormattedMessage id={`global.pinned.label`} />
           </span>
         </OverlayTrigger>
       );

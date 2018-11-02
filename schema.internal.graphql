@@ -1915,7 +1915,6 @@ type Media {
 type MediaQuestion implements Question {
   id: ID!
   title: String!
-  number: Int!
   type: QuestionTypeValue!
 
   # The position of the question
@@ -1941,21 +1940,6 @@ type MediaQuestion implements Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -1973,7 +1957,6 @@ type MediaResponse implements Response {
 type MultipleChoiceQuestion implements Question {
   id: ID!
   title: String!
-  number: Int!
   type: QuestionTypeValue!
 
   # The position of the question
@@ -1999,21 +1982,6 @@ type MultipleChoiceQuestion implements Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -3511,7 +3479,6 @@ type Query {
 interface Question {
   id: ID!
   title: String!
-  number: Int!
   type: QuestionTypeValue!
 
   # The position of the question
@@ -3537,21 +3504,6 @@ interface Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -4134,7 +4086,6 @@ type SectionAppendixType {
 type SectionQuestion implements Question {
   id: ID!
   title: String!
-  number: Int!
   type: QuestionTypeValue!
 
   # The position of the question
@@ -4160,21 +4111,6 @@ type SectionQuestion implements Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
@@ -4355,7 +4291,6 @@ type SetEvaluationFormInProposalFormPayload {
 type SimpleQuestion implements Question {
   id: ID!
   title: String!
-  number: Int!
   type: QuestionTypeValue!
 
   # The position of the question
@@ -4381,21 +4316,6 @@ type SimpleQuestion implements Question {
     # Returns the last `n` elements from the list.
     last: Int
   ): ParticipantConnection!
-
-  # Return users who answered the question
-  responses(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): ResponseConnection!
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]

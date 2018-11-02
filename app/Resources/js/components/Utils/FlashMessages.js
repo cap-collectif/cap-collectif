@@ -22,7 +22,7 @@ class FlashMessages extends React.Component<Props> {
     translate: true,
   };
 
-  renderText = (message: string | Object) => {
+  renderText = (message: string | Object): React.Element<any> | string | void => {
     const { translate } = this.props;
     if (translate) {
       if (typeof message === 'string') {
@@ -35,7 +35,7 @@ class FlashMessages extends React.Component<Props> {
     }
   };
 
-  renderMessage = (index: number, message: string, type: string) => {
+  renderMessage = (index: number, message: string, type: string): ?React.Element<any> => {
     const { form, onDismissMessage, style } = this.props;
     if (!form) {
       return (
@@ -55,7 +55,7 @@ class FlashMessages extends React.Component<Props> {
     );
   };
 
-  render() {
+  render(): ?React.Element<any> {
     const { errors, success } = this.props;
     if ((errors && errors.length > 0) || (success && success.length > 0)) {
       return (

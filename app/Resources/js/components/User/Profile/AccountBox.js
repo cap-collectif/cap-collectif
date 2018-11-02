@@ -25,7 +25,6 @@ type State = {
 
 export class AccountBox extends React.Component<Props, State> {
   state = { showDeleteAccountModal: false };
-
   render() {
     const { invalid, submitting, dispatch, viewer } = this.props;
 

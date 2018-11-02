@@ -185,7 +185,6 @@ export class ReplyForm extends React.Component<Props> {
                   <Field
                     type="checkbox"
                     name="private"
-                    helpPrint={false}
                     id={`${form}-reply-private`}
                     component={renderComponent}
                     children={<FormattedMessage id="reply.form.private" />}
@@ -302,7 +301,6 @@ export default createFragmentContainer(container, {
       id
       questions {
         id
-        number
         title
         position
         private
@@ -315,7 +313,6 @@ export default createFragmentContainer(container, {
           destination {
             id
             title
-            number
           }
           conditions {
             id

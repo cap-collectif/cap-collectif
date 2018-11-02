@@ -16,8 +16,8 @@ svg.avatar {
 }
 
 .sonata-bc {
-     .table.sonata-ba-list > tbody > tr > td,
-     .table-bordered.sonata-ba-list > thead > tr > th {
+    .table > tbody > tr > td,
+    .table-bordered > thead > tr > th {
         border-color: $page-bgc;
     }
 

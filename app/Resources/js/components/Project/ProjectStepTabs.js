@@ -218,7 +218,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     const translation = `translateX(${translateX}px)`;
 
     return (
-      <div className="step-tabs hidden-print">
+      <div className="step-tabs">
         <div className="step-tabs__bar container">
           <div id="step-tabs-content" className="position-relative">
             {showArrowLeft && (
