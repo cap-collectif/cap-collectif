@@ -1,7 +1,7 @@
 // @flow
 // Todo : ref Quill
 import React from 'react';
-// import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+// import { injectIntl, type IntlShape } from 'react-intl';
 import classNames from 'classnames';
 import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
@@ -51,13 +51,34 @@ class Editor extends React.Component<Props> {
 
     if (!disabled) {
       const quill = new Quill(this.editorRef.current, options);
-      quill.keyboard.addBinding({
-        key: '9',
-        shortKey: false,
-        // handler: (range, context) => {
-        //
-        // }
-      });
+
+      const imageHandler = () => {
+        const range = quill.getSelection();
+        const test = window.prompt('imaage');
+        if (test) {
+          quill.insertEmbed(range.index, 'image', test, Quill.sources.USER);
+        }
+      };
+
+      const linkHandler = () => {
+        const range = quill.getSelection();
+        const test = window.prompt('lieeen');
+        if (test) {
+          quill.insertEmbed(range.index, 'link', test, Quill.sources.USER);
+        }
+      };
+
+      const toolbar = quill.getModule('toolbar');
+      toolbar.addHandler('link', linkHandler);
+      toolbar.addHandler('image', imageHandler);
+
+      // quill.keyboard.addBinding({
+      //   key: '9',
+      //   shortKey: false,
+      //   // handler: (range, context) => {
+      //   //
+      //   // }
+      // });
 
       if (valueLink) {
         const defaultValue = valueLink.value;
@@ -80,6 +101,7 @@ class Editor extends React.Component<Props> {
           }
         });
         quill.on('text-change', () => {
+          console.warn(quill.container.innerHTML);
           onChange(quill.container.innerHTML);
         });
       }

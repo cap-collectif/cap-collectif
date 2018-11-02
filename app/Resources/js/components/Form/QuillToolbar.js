@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { type IntlShape, FormattedMessage, injectIntl } from 'react-intl';
+import { type IntlShape, injectIntl } from 'react-intl';
 
 type Props = {
   intl: IntlShape,
@@ -29,22 +29,24 @@ class QuillToolbar extends React.Component<Props> {
           <button
             className="ql-list"
             value="ordered"
-            title={<FormattedMessage id="editor.list" />}
+            title={intl.formatMessage({ id: 'editor.list' })}
           />
           <button
             className="ql-list"
             value="bullet"
-            title={<FormattedMessage id="editor.bullet" />}
+            title={intl.formatMessage({ id: 'editor.bullet' })}
           />
           <button
             className="ql-indent"
             value="-1"
-            title={<FormattedMessage id="editor.bullet" />}
+            // change title
+            title={intl.formatMessage({ id: 'editor.bullet' })}
           />
           <button
             className="ql-indent"
             value="+1"
-            title={<FormattedMessage id="editor.bullet" />}
+            // change title
+            title={intl.formatMessage({ id: 'editor.bullet' })}
           />
           <select title={intl.formatMessage({ id: 'editor.align.title' })} className="ql-align">
             <option label={intl.formatMessage({ id: 'editor.align.left' })} selected />
@@ -54,8 +56,9 @@ class QuillToolbar extends React.Component<Props> {
           </select>
         </span>
         <span className="ql-formats">
-          <button title={<FormattedMessage id="editor.link" />} className="ql-link" />
-          <button title={<FormattedMessage id="editor.image" />} className="ql-image" />
+          <button title={intl.formatMessage({ id: 'editor.link' })} className="ql-link" />
+          <button title={intl.formatMessage({ id: 'editor.image' })} className="ql-image" />
+          {/* <button title={intl.formatMessage({id:'editor.image'})} id="custom-button">Image</button> */}
         </span>
       </React.Fragment>
     );
