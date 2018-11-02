@@ -19,7 +19,7 @@ export class UserReplies extends React.Component<Props> {
     }
 
     return (
-      <div id="user-replies" className="block">
+      <div id="user-replies" className="block hidden-print">
         <h3 className="h4">
           <FormattedMessage
             id="reply.show.title"

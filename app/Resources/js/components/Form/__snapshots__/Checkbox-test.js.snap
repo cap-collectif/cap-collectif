@@ -2,7 +2,7 @@
 
 exports[`<Checkbox /> should render correctly 1`] = `
 <div
-  className="form-group undefined"
+  className="form-group undefined form-fields"
   id="reply-1"
 >
   <label
@@ -17,11 +17,13 @@ exports[`<Checkbox /> should render correctly 1`] = `
     Plusieurs choix sont possibles
   </span>
   <div
+    className="choice-field"
     key="choice-20"
   >
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-20"
       image={null}
       name="choices-for-field-11"
@@ -34,11 +36,13 @@ exports[`<Checkbox /> should render correctly 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-21"
   >
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-21"
       image={null}
       name="choices-for-field-11"
@@ -51,11 +55,13 @@ exports[`<Checkbox /> should render correctly 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-22"
   >
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-22"
       image={null}
       name="choices-for-field-11"
@@ -68,11 +74,13 @@ exports[`<Checkbox /> should render correctly 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-23"
   >
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-23"
       image={null}
       name="choices-for-field-11"
@@ -89,7 +97,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
 
 exports[`<Checkbox /> should render with an other field 1`] = `
 <div
-  className="form-group undefined"
+  className="form-group undefined form-fields"
   id="reply-1"
 >
   <label
@@ -104,11 +112,13 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     Plusieurs choix sont possibles
   </span>
   <div
+    className="choice-field"
     key="choice-20"
   >
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-20"
       image={null}
       name="choices-for-field-11"
@@ -121,11 +131,13 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-21"
   >
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-21"
       image={null}
       name="choices-for-field-11"
@@ -138,11 +150,13 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-22"
   >
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-22"
       image={null}
       name="choices-for-field-11"
@@ -155,11 +169,13 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     </InjectIntl(ReactBootstrapInput)>
   </div>
   <div
+    className="choice-field"
     key="choice-23"
   >
     <InjectIntl(ReactBootstrapInput)
       checked={false}
       disabled={false}
+      helpPrint={false}
       id="reply-1_choice-23"
       image={null}
       name="choices-for-field-11"

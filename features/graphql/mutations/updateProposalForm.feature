@@ -209,6 +209,7 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
         "questions": [
           {
             "question": {
+              "id": "716",
               "title": "Etes-vous réél ?",
               "helpText": "Peut-être que non...",
               "private": false,
@@ -218,6 +219,7 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
           },
           {
             "question": {
+              "id": "717",
               "title": "Documents à remplir",
               "helpText": "5 fichiers max",
               "private": false,
@@ -239,341 +241,20 @@ Scenario: GraphQL client wants to update custom fields of a proposal form
           "id": "proposalForm1",
           "questions": [
             {
-              "id": @string@,
-              "helpText": "5 fichiers max",
-              "private": false,
-              "required": true,
-              "title": "Documents à remplir",
-              "type": "medias"
-            },
-            {
-              "id": @string@,
+              "id": "716",
               "helpText": "Peut-être que non...",
               "private": false,
               "required": true,
               "title": "Etes-vous réél ?",
               "type": "text"
-            }
-          ]
-        }
-      }
-    }
-  }
-  """
-
-@database
-Scenario: GraphQL client wants to delete the first question
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation ($input: UpdateProposalFormInput!) {
-      updateProposalForm(input: $input) {
-        proposalForm {
-          id
-          questions {
-            id
-            title
-            type
-          }
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "proposalFormId": "proposalForm13",
-        "questions": [
-          {
-            "question": {
-              "id": "48",
-              "title": "Question Multiple?",
-              "helpText": null,
-              "description": null,
-              "type": "radio",
-              "private": false,
-              "required": false,
-              "validationRule": null,
-              "questionChoices": [
-                {
-                  "id": "questionchoice32",
-                  "title": "Oui",
-                  "description": null,
-                  "color": null,
-                  "image": null
-                },
-                {
-                  "id": "questionchoice33",
-                  "title": "Non",
-                  "description": null,
-                  "color": null,
-                  "image": null
-                },
-                {
-                  "id": "questionchoice34",
-                  "title": "Peut être",
-                  "description": null,
-                  "color": null,
-                  "image": null
-                }
-              ],
-              "otherAllowed": false,
-              "randomQuestionChoices": false,
-              "jumps": []
-            }
-          }
-        ],
-        "proposalFormId": "proposalform13"
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "updateProposalForm": {
-        "proposalForm": {
-          "id": "proposalform13",
-          "questions": [
-            {
-              "id": "48",
-              "title": "Question Multiple?",
-              "type": "radio"
-            }
-          ]
-        }
-      }
-    }
-  }
-  """
-
-@database
-Scenario: GraphQL client wants to delete the first question choice
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation ($input: UpdateProposalFormInput!) {
-      updateProposalForm(input: $input) {
-        proposalForm {
-          id
-          questions {
-            id
-            title
-            type
-            ... on MultipleChoiceQuestion {
-              questionChoices {
-                id
-                title
-                description
-                color
-              }
-            }
-          }
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "proposalFormId": "proposalForm13",
-        "questions": [
-          {
-            "question": {
-              "id": "1314",
-              "private": false,
-              "required": false,
-              "title": "Question simple?",
-              "type": "text"
-            }
-          },
-          {
-            "question": {
-              "id": "48",
-              "title": "Question Multiple?",
-              "helpText": null,
-              "description": null,
-              "type": "radio",
-              "private": false,
-              "required": false,
-              "validationRule": null,
-              "questionChoices": [
-                {
-                  "id": "questionchoice33",
-                  "title": "Non",
-                  "description": null,
-                  "color": null,
-                  "image": null
-                },
-                {
-                  "id": "questionchoice34",
-                  "title": "Peut être",
-                  "description": null,
-                  "color": null,
-                  "image": null
-                }
-              ],
-              "otherAllowed": false,
-              "randomQuestionChoices": false,
-              "jumps": []
-            }
-          }
-        ],
-        "proposalFormId": "proposalform13"
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "updateProposalForm": {
-        "proposalForm": {
-          "id": "proposalform13",
-          "questions": [
-            {
-              "id": "1314",
-              "title": "Question simple?",
-              "type": "text"
             },
             {
-              "id": "48",
-              "title": "Question Multiple?",
-              "type": "radio",
-              "questionChoices": [
-                {
-                  "id": "questionchoice33",
-                  "title": "Non",
-                  "description": "",
-                  "color": null
-                },
-                {
-                  "id": "questionchoice34",
-                  "title": "Peut être",
-                  "description": "",
-                  "color": null
-                }
-              ]
-            }
-          ]
-        }
-      }
-    }
-  }
-  """
-
-@database
-Scenario: GraphQL client wants to delete the first district
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation ($input: UpdateProposalFormInput!) {
-      updateProposalForm(input: $input) {
-        proposalForm {
-          id
-          districts {
-            id
-            name
-          }
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "proposalFormId": "proposalForm13",
-        "districts": [
-          {
-            "id": "district15",
-            "name": "Quartier 2",
-            "displayedOnMap": true,
-            "geojson": null,
-            "geojsonStyle": null
-          },
-          {
-            "id": "district16",
-            "name": "Quartier 3",
-            "displayedOnMap": true,
-            "geojson": null,
-            "geojsonStyle": null
-          }
-        ]
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "updateProposalForm": {
-        "proposalForm": {
-          "id": "proposalform13",
-          "districts": [
-            {
-              "id": "district15",
-              "name": "Quartier 2"
-            },
-            {
-              "id": "district16",
-              "name": "Quartier 3"
-            }
-          ]
-        }
-      }
-    }
-  }
-  """
-
-@database
-Scenario: GraphQL client wants to delete the first category
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation ($input: UpdateProposalFormInput!) {
-      updateProposalForm(input: $input) {
-        proposalForm {
-          id
-          categories {
-            id
-            name
-          }
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "proposalFormId": "proposalForm13",
-        "categories": [
-          {
-            "id": "pCategory8",
-            "name": "Escrime"
-          },
-          {
-            "id": "pCategory7",
-            "name": "Water Polo"
-          }
-        ]
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "updateProposalForm": {
-        "proposalForm": {
-          "id": "proposalform13",
-          "categories": [
-            {
-              "id": "pCategory8",
-              "name": "Escrime"
-            },
-            {
-              "id": "pCategory7",
-              "name": "Water Polo"
+              "id": "717",
+              "helpText": "5 fichiers max",
+              "private": false,
+              "required": true,
+              "title": "Documents à remplir",
+              "type": "medias"
             }
           ]
         }

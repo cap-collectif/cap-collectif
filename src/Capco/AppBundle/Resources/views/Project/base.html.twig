@@ -49,7 +49,7 @@
     </section>
 
     {% if showTrash %}
-        <section>
+        <section class="hidden-print">
             {{ react_render_component('ProjectTrashButtonApp', {
                 'props': {
                     'link': path('app_project_show_trashed', {'projectSlug': project.slug })
@@ -57,15 +57,4 @@
             })}}
         </section>
     {% endif %}
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        $('.more').readmore({
-            collapsedHeight: 88,
-            moreLink: '<a class="text-center" href="#">{{ 'project.show.meta.read_more'|trans({}, 'CapcoAppBundle') }}</a>',
-            lessLink: '<a class="text-center" href="#">{{ 'project.show.meta.read_less'|trans({}, 'CapcoAppBundle') }}</a>'
-        });
-    </script>
 {% endblock %}

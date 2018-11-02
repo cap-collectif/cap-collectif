@@ -300,26 +300,17 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   <option
                     value="MALE"
                   >
-                    <FormattedMessage
-                      id="gender.male"
-                      values={Object {}}
-                    />
+                    gender.male
                   </option>
                   <option
                     value="FEMALE"
                   >
-                    <FormattedMessage
-                      id="gender.female"
-                      values={Object {}}
-                    />
+                    gender.female
                   </option>
                   <option
                     value="OTHER"
                   >
-                    <FormattedMessage
-                      id="gender.other"
-                      values={Object {}}
-                    />
+                    gender.other
                   </option>
                 </Field>
               </div>
@@ -1607,26 +1598,17 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   <option
                     value="MALE"
                   >
-                    <FormattedMessage
-                      id="gender.male"
-                      values={Object {}}
-                    />
+                    gender.male
                   </option>
                   <option
                     value="FEMALE"
                   >
-                    <FormattedMessage
-                      id="gender.female"
-                      values={Object {}}
-                    />
+                    gender.female
                   </option>
                   <option
                     value="OTHER"
                   >
-                    <FormattedMessage
-                      id="gender.other"
-                      values={Object {}}
-                    />
+                    gender.other
                   </option>
                 </Field>
               </div>

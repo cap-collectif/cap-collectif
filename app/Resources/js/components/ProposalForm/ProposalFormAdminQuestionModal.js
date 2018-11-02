@@ -126,7 +126,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 {intl.formatMessage({ id: 'global.question.types.editor' })}
               </option>
               <option value="number">
-                <FormattedMessage id="admin.fields.validation_rule.number" />
+                {intl.formatMessage({ id: 'admin.fields.validation_rule.number' })}
               </option>
             </optgroup>
             <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>
@@ -155,7 +155,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
           {multipleChoiceQuestions.indexOf(type) !== -1 && (
             <div>
               <h4 style={{ fontWeight: 'bold' }}>
-                 <FormattedMessage id="admin.fields.question.group_question_choices" />
+                <FormattedMessage id="admin.fields.question.group_question_choices" />
               </h4>
               <FieldArray
                 name={`${member}.questionChoices`}

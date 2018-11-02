@@ -410,33 +410,3 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: Vue
     position: 2
     question: '@multiplequestionReactVue'
-  questionchoice32:
-    id: questionchoice32
-    title: Oui
-    position: 1
-    question: '@multiplequestion12'
-  questionchoice33:
-    id: questionchoice33
-    title: Non
-    position: 2
-    question: '@multiplequestion12'
-  questionchoice34:
-    id: questionchoice34
-    title: Peut être
-    position: 3
-    question: '@multiplequestion12'
-  questionchoice35:
-    id: questionchoice35
-    title: premier choix
-    position: 1
-    question: '@multiplequestion13'
-  questionchoice36:
-    id: questionchoice36
-    title: deuxième choix
-    position: 2
-    question: '@multiplequestion13'
-  questionchoice37:
-    id: questionchoice37
-    title: troisième choix
-    position: 3
-    question: '@multiplequestion13'

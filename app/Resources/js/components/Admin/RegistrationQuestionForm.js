@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect, type MapStateToProps, type Connector } from 'react-redux';
 import { Field, FieldArray, formValueSelector } from 'redux-form';
 import { Button, Alert } from 'react-bootstrap';
@@ -34,11 +34,12 @@ const renderDynamicFields = (
 
 type Props = {
   showChoices: boolean,
+  intl: IntlShape,
 };
 
 export class RegistrationQuestionForm extends React.Component<Props> {
   render() {
-    const { showChoices } = this.props;
+    const { showChoices, intl } = this.props;
     return (
       <form>
         <Field
@@ -53,21 +54,12 @@ export class RegistrationQuestionForm extends React.Component<Props> {
           children={<FormattedMessage id="global.admin.required" />}
           component={renderInput}
         />
-        <Field name="type" type="select" label={'Type'} component={renderInput}>
+        <Field name="type" type="select" label="Type" component={renderInput}>
           <option value="" disabled>
-            <FormattedMessage id="global.select" />
+            {intl.formatMessage({ id: 'global.select' })}
           </option>
-          <option value={0}>
-            <FormattedMessage id="global.question.types.text" />
-          </option>
-          {/* <option value={1}>{this.getIntlMessage('global.question.types.textarea')}</option> */}
-          {/* <option value={2}>{this.getIntlMessage('global.question.types.editor')}</option> */}
-          {/* <option value={3}>{this.getIntlMessage('global.question.types.radio')}</option> */}
-          <option value={4}>
-            <FormattedMessage id="global.question.types.select" />
-          </option>
-          {/* <option value={5}>{this.getIntlMessage('global.question.types.checkbox')}</option> */}
-          {/* <option value={6}>{this.getIntlMessage('global.question.types.ranking')}</option> */}
+          <option value={0}>{intl.formatMessage({ id: 'global.question.types.text' })}</option>
+          <option value={4}>{intl.formatMessage({ id: 'global.question.types.select' })}</option>
         </Field>
         {showChoices && <FieldArray name="choices" component={renderDynamicFields} />}
       </form>
@@ -78,5 +70,6 @@ export class RegistrationQuestionForm extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: { form: string }) => ({
   showChoices: formValueSelector(props.form)(state, 'type') === '4',
 });
-const connector: Connector<{ form: string }, Props> = connect(mapStateToProps);
-export default connector(RegistrationQuestionForm);
+const connector: Connector<{ form: string, intl: IntlShape }, Props> = connect(mapStateToProps);
+const container = connector(RegistrationQuestionForm);
+export default injectIntl(container);

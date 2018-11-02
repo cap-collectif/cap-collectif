@@ -31,7 +31,7 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
 
     public function preSetData(FormEvent $event)
     {
-        if (!$data = $event->getData()) {
+        if (!($data = $event->getData())) {
             return;
         }
         $form = $event->getForm();
@@ -42,23 +42,36 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
     public function preSubmit(FormEvent $event)
     {
         // if data has an id, it is considered as a update, so we can skip
-        if ((!$data = $event->getData()) || !\is_array($data) || isset($data['question']['id'])) {
+        if (!($data = $event->getData()) || !\is_array($data) || isset($data['question']['id'])) {
             return;
         }
         // because of abstract inheritance, we need to handle creation and mapping to Doctrine.
         $form = $event->getForm();
-        $question = new MultipleChoiceQuestion();
+        $question = null;
 
         if (AbstractQuestion::QUESTION_TYPE_MEDIAS === $data['question']['type']) {
             $question = new MediaQuestion();
         } elseif (
             AbstractQuestion::QUESTION_TYPE_SIMPLE_TEXT === $data['question']['type'] ||
             AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_EDITOR === $data['question']['type']
+            AbstractQuestion::QUESTION_TYPE_EDITOR === $data['question']['type'] ||
+            AbstractQuestion::QUESTION_TYPE_NUMBER === $data['question']['type']
         ) {
             $question = new SimpleQuestion();
         } elseif (AbstractQuestion::QUESTION_TYPE_SECTION === $data['question']['type']) {
             $question = new SectionQuestion();
+        } elseif (
+            AbstractQuestion::QUESTION_TYPE_RADIO === $data['question']['type'] ||
+            AbstractQuestion::QUESTION_TYPE_SELECT === $data['question']['type'] ||
+            AbstractQuestion::QUESTION_TYPE_CHECKBOX === $data['question']['type'] ||
+            AbstractQuestion::QUESTION_TYPE_RANKING === $data['question']['type'] ||
+            AbstractQuestion::QUESTION_TYPE_BUTTON === $data['question']['type']
+        ) {
+            $question = new MultipleChoiceQuestion();
+        }
+
+        if (!$question) {
+            throw new \RuntimeException(__METHOD__ . 'Could not guess your question type.');
         }
 
         // We hydrate the question with submitted values

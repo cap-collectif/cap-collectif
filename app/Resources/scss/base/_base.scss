@@ -2,10 +2,6 @@
    $BASE
 ================================================================*/
 
-.print {
-  display: none;
-}
-
 .btn-box {
    border-top: 1px solid $border-color;
    padding: 10px;
@@ -493,5 +489,16 @@ svg.avatar-group {
             border-bottom: 0;
             border-radius: 0;
         }
+    }
+}
+
+/* ======================= Pie chart ============================*/
+
+.pie-chart__container {
+    width: 650px;
+    // height: 300px;
+
+    @media (max-width: $screen-sm-max) {
+        width: 100%;
     }
 }

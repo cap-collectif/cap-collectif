@@ -24,6 +24,7 @@ export class UserArchiveRequestButton extends Component<Props, State> {
     loading: false,
     showModal: false,
   };
+
   handleButtonClick = async () => {
     const {
       viewer: { isArchiveReady, isArchiveDeleted },

@@ -1,9 +1,18 @@
 /* ===============================================================
+    $VARIABLES
+================================================================*/
+@import "base/variables";
+
+/* ===============================================================
     $PRINT
 ================================================================*/
 
 @import "bower_components/compass-mixins/lib/compass";
 @import "app/Resources/fonts/_fonts.scss";
+
+.hidden-print {
+    display: none !important;
+}
 
 a[href]:after {
     content: none;
@@ -11,8 +20,16 @@ a[href]:after {
 
 body {
     font-family: "openSans", sans-serif;
-    font-size: 13.5pt;
-    margin: 10%
+    font-size: 10pt;
+    background-color: $white !important;
+}
+
+@page {
+    margin: 1.5cm 1cm;
+}
+
+.section--alt {
+    background-color: $white !important;
 }
 
 #main-navbar, .btn, #cookieChoiceInfo, footer, .comments__section, .share-button-dropdown, svg, .leaflet-container, .proposal-vote__widget {
@@ -24,26 +41,42 @@ body {
 }
 
 span.avatar {
-    background-color: #000;
+    background-color: $black;
     @include border-radius(50%);
     width: 45px;
     height: 45px;
     display: flex;
 
     i.cap-user-2-1 {
-        color: #fff;
+        color: $white;
         margin: auto;
         font-size: 20pt;
     }
 }
 
 h1, h2, h3, h4 {
-    font-family: "montserrat", sans-serif;
+    font-family: "openSans", sans-serif;
     font-weight: normal;
 }
 
-p, a, a:active, a:hover, h2, .h2, h3, h4, .excerpt {
-    color: #000 !important;
+h1 {
+    font-weight: 500;
+    font-size: 19pt;
+}
+
+h2 {
+    text-align: center;
+    font-size: 16pt;
+}
+
+
+a, a:active, a:hover, h2, .h2, h3, h4, .excerpt {
+    color: $dark-text !important;
+    text-decoration: none;
+}
+
+p, h3, h4, .excerpt {
+    color: $dark-text;
     text-decoration: none;
 }
 
@@ -87,7 +120,7 @@ ul.event__meta {
 img {
     margin: 15pt 0;
     padding: 0;
-    background: #fff;
+    background: $white;
 }
 
 .media .img-circle {
@@ -113,4 +146,237 @@ p img {
 
 .block h2:first-child {
     margin-top: 5pt;
+}
+
+.cookie-banner {
+    display: none;
+}
+
+/* ===============================================================
+    Project
+================================================================*/
+
+.project__header {
+    &__title {
+        text-align: center;
+    }
+
+    &__media {
+        display: flex;
+        flex-direction: column;
+        line-height: initial;
+        margin-bottom: 0;
+
+        .img-circle {
+            margin-bottom: 7pt;
+        }
+    }
+}
+
+.project__step-dates {
+    text-align: center;
+
+    .d-ib {
+        display: inline-block;
+    }
+
+    .mr-15 {
+        margin-right: 11pt;
+    }
+}
+
+/* ===============================================================
+    Questionnaire
+================================================================*/
+
+#reply-form {
+    input, textarea {
+        &::placeholder {
+            color: transparent;
+        }
+    }
+
+    select, textarea, .editor {
+        display: none;
+    }
+
+    input {
+        &[type="text"] {
+            width: 100%;
+            border: 0 solid $icon-gray-color;
+            border-bottom-width: 1px;
+            background-color: $white;
+        }
+
+        &[type="checkbox"], &[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            height: 0;
+            width: 0;
+        }
+    }
+
+    .checkbox, .radio {
+        padding-left: 19pt;
+        margin: 4pt 0 7pt;
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            border: 1px solid $icon-gray-color;
+            top: 2px;
+            left: 0;
+            position: absolute;
+        }
+    }
+
+    .checkbox::before {
+        border-radius: 2px;
+    }
+
+    .radio::before {
+        border-radius: 50%;
+    }
+
+    .image-uploader {
+        display: none;
+    }
+
+    .ranking__pick-box {
+        .ranking__item {
+            &__description, &__image {
+                padding-left: 27pt;
+            }
+
+            &__description {
+                font-style: italic;
+            }
+
+            &__image {
+                height: 130px;
+                width: 190px;
+                object-fit: cover;
+                margin: 0 0 5pt 0;
+            }
+
+            &__icon {
+                display: none;
+            }
+
+            &__label::before {
+                content:"";
+                width: 30px;
+                margin-right: 4pt;
+                border-bottom: 1px solid $icon-gray-color;
+                display: inline-block;
+            }
+        }
+    }
+
+    .form-fields {
+        display: flex;
+        flex-wrap: wrap;
+
+        > .radio {
+            margin-right: 25pt;
+        }
+
+        .other-field {
+            width: 100%;
+            display: flex;
+        }
+
+        .other-field__value {
+            flex: 1;
+            width: 100%;
+            margin-left: 25pt;
+        }
+
+        .thumbnail {
+            img {
+                width: 100%;
+                height: 130px;
+                margin: 10pt 0;
+                object-fit: cover;
+            }
+
+            .caption {
+                text-align: left;
+            }
+        }
+    }
+
+    .choice-field, .radio-field {
+        width: 190px;
+        margin-right: 25pt;
+    }
+
+    .choice-description {
+        margin-bottom: 5pt;
+        font-size: 9pt;
+    }
+
+    .control-label {
+        font-weight: 600;
+        display: block;
+        font-size: 11pt;
+        margin: 20pt 0 5pt 0;
+
+        .warning {
+            font-weight: 300;
+            color: $danger-color;
+            font-style: italic;
+        }
+
+        .excerpt {
+            font-weight: 500;
+            color: $dark-gray;
+        }
+    }
+
+    .help-block {
+        display: inline-block;
+        margin: 0 0 5pt 0;
+        font-size: 9pt;
+        color: $dark-gray;
+
+        span {
+            margin-right: 2pt;
+        }
+    }
+
+    .opinion__text {
+        margin-bottom: 8pt;
+    }
+
+    .excerpt {
+        font-size: 9pt;
+        color: $dark-gray;
+    }
+
+    .excerpt_private {
+        margin: 20pt 0 10pt 0;
+        display: inline-block;
+        color: $info-color;
+    }
+
+    .private-box {
+        border: 1px solid $info-color;
+        padding: 0 10pt 10pt 10pt;
+        border-radius: 4px;
+
+        .control-label {
+            margin-top: 10pt;
+        }
+    }
+
+    .conditional-jumps {
+        margin-top: 5pt;
+    }
+
+    hr {
+        margin: 20pt 0 15pt 0;
+    }
 }

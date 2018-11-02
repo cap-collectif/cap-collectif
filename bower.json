@@ -17,7 +17,6 @@
     "tests"
   ],
   "dependencies": {
-    "Readmore.js": "readmore#~2.1.0",
     "bootstrap-sass": "~3.3.6",
     "ckeditor": "#full/4.4.7",
     "compass-mixins": "~1.0.2",
