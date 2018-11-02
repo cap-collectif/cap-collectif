@@ -3,12 +3,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationQuestionForm } from './RegistrationQuestionForm';
-import { intlMock } from '../../mocks';
 
 describe('<AddNewQuestionForm />', () => {
-  const props = {
-    intl: intlMock,
-  };
+  const props = {};
 
   it('renders correctly', () => {
     const wrapper = shallow(<RegistrationQuestionForm showChoices={false} {...props} />);

@@ -40,18 +40,22 @@ class StepText extends React.Component<Props, State> {
     };
     return (
       <div className="step__intro">
-        <div
-          ref="content"
-          className="step__intro__content"
-          style={style}
-          dangerouslySetInnerHTML={{ __html: text }}
-        />
-        <div className="text-center">
-          <ReadMoreLink
-            visible={this.state.truncated}
-            expanded={this.state.expanded}
-            onClick={this.toggleExpand}
-          />
+        <div style={{ fontSize: 15 }}>
+          <div>
+            <div
+              ref="content"
+              className="step__intro__content"
+              style={style}
+              dangerouslySetInnerHTML={{ __html: text }}
+            />
+          </div>
+          <div className="text-center">
+            <ReadMoreLink
+              visible={this.state.truncated}
+              expanded={this.state.expanded}
+              onClick={this.toggleExpand}
+            />
+          </div>
         </div>
       </div>
     );

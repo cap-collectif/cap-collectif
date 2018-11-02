@@ -127,10 +127,10 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               onChange={day => {
                 this.setState({ day });
               }}
-              id="day"
-              name="day"
-              classes="form-control"
-              optionClasses="option classes"
+              id={'day'}
+              name={'day'}
+              classes={'form-control'}
+              optionClasses={'option classes'}
               disabled={disabled}
             />
           </Col>
@@ -143,10 +143,10 @@ export class DateDropdownPicker extends Component<Props, DateState> {
                 this.setState({ month });
               }}
               locale={wLocale.substr(3, 5)}
-              id="month"
-              name="month"
-              classes="form-control"
-              optionClasses="option classes"
+              id={'month'}
+              name={'month'}
+              classes={'form-control'}
+              optionClasses={'option classes'}
               disabled={disabled}
             />
           </Col>
@@ -157,10 +157,10 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               onChange={year => {
                 this.setState({ year });
               }}
-              id="year"
-              name="year"
-              classes="form-control"
-              optionClasses="option classes"
+              id={'year'}
+              name={'year'}
+              classes={'form-control'}
+              optionClasses={'option classes'}
               disabled={disabled}
             />
           </Col>

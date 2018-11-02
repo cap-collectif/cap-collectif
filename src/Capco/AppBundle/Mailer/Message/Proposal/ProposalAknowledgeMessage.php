@@ -12,7 +12,7 @@ final class ProposalAknowledgeMessage extends Message
         string $stepLink,
         string $proposalLink,
         string $homepageUrl,
-        ?string $confirmationUrl = null,
+        string $confirmationUrl,
         string $typeOfMail,
         string $recipientName = null
     ): self {
@@ -49,7 +49,7 @@ final class ProposalAknowledgeMessage extends Message
         string $proposalLink,
         string $homepageUrl,
         string $typeOfMail,
-        ?string $confirmationUrl
+        string $confirmationUrl
     ): array {
         return [
             'projectTitle' => self::escape(
@@ -65,8 +65,9 @@ final class ProposalAknowledgeMessage extends Message
             'proposalName' => $proposal->getTitle(),
             'homepageUrl' => $homepageUrl,
             'typeOfMail' => $typeOfMail,
-            'sendAt' =>
-                'create' === $typeOfMail ? $proposal->getCreatedAt() : $proposal->getUpdatedAt(),
+            'sendAt' => ('create' === $typeOfMail)
+                ? $proposal->getCreatedAt()
+                : $proposal->getUpdatedAt(),
             'endAt' => $proposal->getStep()->getEndAt(),
             'to' => self::escape($recipentEmail),
             'username' => $proposal->getAuthor()->getDisplayName(),

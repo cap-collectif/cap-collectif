@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 
 class ProposalFormUpdateType extends AbstractType
 {
@@ -70,10 +71,15 @@ class ProposalFormUpdateType extends AbstractType
                 'allow_delete' => true,
                 'entry_type' => QuestionnaireAbstractQuestionType::class,
                 'by_reference' => false,
+                'delete_empty' => function (
+                    QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
+                ) {
+                    return null === $questionnaireAbstractQuestion ||
+                        empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
+                },
             ])
 
-            ->add('allowAknowledge', CheckboxType::class)
-        ;
+            ->add('allowAknowledge', CheckboxType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -30,7 +30,6 @@ type State = {
 
 export class RankingBlock extends React.Component<Props, State> {
   static displayName = 'RankingBlock';
-
   static defaultProps = { disabled: false };
 
   constructor(props: Props) {
@@ -46,7 +45,6 @@ export class RankingBlock extends React.Component<Props, State> {
   }
 
   choiceBox: ?React.Component<*>;
-
   pickBox: ?React.Component<*>;
 
   moveItem = (atList: number, atIndex: number, it: Object) => {
@@ -111,9 +109,7 @@ export class RankingBlock extends React.Component<Props, State> {
       <div>
         <Row>
           <Col xs={6}>
-            <h5 className="h5 hidden-print">
-              {<FormattedMessage id="global.form.ranking.pickBox.title" />}
-            </h5>
+            <h5 className="h5">{<FormattedMessage id="global.form.ranking.pickBox.title" />}</h5>
             <ListGroup className="ranking__pick-box">
               <RankingBox
                 ref={c => {
@@ -128,7 +124,7 @@ export class RankingBlock extends React.Component<Props, State> {
               />
             </ListGroup>
           </Col>
-          <Col xs={6} className="hidden-print">
+          <Col xs={6}>
             <h5 className="h5">{<FormattedMessage id="global.form.ranking.choiceBox.title" />}</h5>
             <ListGroup className="ranking__choice-box" style={{ height: choicesHeight }}>
               <RankingBox

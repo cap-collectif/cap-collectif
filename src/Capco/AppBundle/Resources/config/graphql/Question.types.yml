@@ -8,10 +8,6 @@ Question:
         type: 'ID!'
       title:
         type: 'String!'
-      number:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
-        type: 'Int!'
       type:
         type: 'QuestionTypeValue!'
         resolve: "@=resolver('question_type', [value])"
@@ -37,12 +33,6 @@ Question:
         argsBuilder: 'Relay::Connection'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", [value, args])'
-        description: 'Return users who answered the question'
-      responses:
-        type: 'ResponseConnection!'
-        argsBuilder: 'Relay::Connection'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionResponsesResolver", [value, args])'
         description: 'Return users who answered the question'
       jumps:
         description: 'The associated logic jumps to this question.'

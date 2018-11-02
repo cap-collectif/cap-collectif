@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { formValueSelector, Field, arrayRemove } from 'redux-form';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import type { GlobalState, Dispatch } from '../../types';
 import component from '../Form/Field';
 
@@ -15,7 +15,6 @@ type Props = ReduxProps & {
   index: number,
   dispatch: Dispatch,
   oldMember: string,
-  intl: IntlShape,
 };
 
 type State = {
@@ -54,7 +53,6 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
 
   render() {
     const {
-      intl,
       index,
       questions,
       selectedQuestion,
@@ -122,8 +120,12 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
           name={`${member}.operator`}
           type="select"
           component={component}>
-          <option value="IS">{intl.formatMessage({ id: 'is' })}</option>
-          <option value="IS_NOT">{intl.formatMessage({ id: 'is-not' })}</option>
+          <option value="IS">
+            <FormattedMessage id="is" />
+          </option>
+          <option value="IS_NOT">
+            <FormattedMessage id="is-not" />
+          </option>
         </Field>
         <Field
           id={`${member}.value.id`}
@@ -144,6 +146,4 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Pr
   };
 };
 
-const container = connect(mapStateToProps)(QuestionJumpConditionAdminForm);
-
-export default injectIntl(container);
+export default connect(mapStateToProps)(QuestionJumpConditionAdminForm);

@@ -15,7 +15,6 @@ type State = void;
 
 export class ProposalFormAdminPageTabs extends Component<Props, State> {
   static defaultProps: DefaultProps;
-
   render() {
     const { intl, proposalForm } = this.props;
     return (

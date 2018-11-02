@@ -19,7 +19,16 @@ Capco\AppBundle\Entity\ProposalCategory:
         id: pCategory5
         name: Ethnique
         form: '@proposalform9'
-    pCategory5:
-        id: pCategory5
-        name: Politique
-        form: '@proposalform10'
+    
+    pCategory6:
+        id: pCategory6
+        name: Escalade
+        form: '@proposalform13'
+    pCategory7:
+        id: pCategory7
+        name: Water Polo
+        form: '@proposalform13'
+    pCategory8:
+        id: pCategory8
+        name: Escrime
+        form: '@proposalform13'

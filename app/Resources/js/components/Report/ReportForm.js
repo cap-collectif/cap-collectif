@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import renderInput from '../Form/Field';
 
@@ -18,12 +18,11 @@ const validate = ({ status, body }) => {
 
 type Props = {
   handleSubmit: Function,
-  intl: IntlShape,
 };
 
 class ReportForm extends React.Component<Props> {
   render() {
-    const { handleSubmit, intl } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <form id={formName} onSubmit={handleSubmit}>
         <Field
@@ -35,11 +34,11 @@ class ReportForm extends React.Component<Props> {
           clearable={false}
           inputClassName={null}
           labelClassName={null}>
-          <option value={-1}>{intl.formatMessage({ id: 'global.select' })}</option>
-          <option value={1}>{intl.formatMessage({ id: 'reporting.status.offending' })}</option>
-          <option value={2}>{intl.formatMessage({ id: 'reporting.status.spam' })}</option>
-          <option value={3}>{intl.formatMessage({ id: 'reporting.status.error' })}</option>
-          <option value={4}>{intl.formatMessage({ id: 'reporting.status.off_topic' })}</option>
+          <option value={-1}>{<FormattedMessage id="global.select" />}</option>
+          <option value={1}>{<FormattedMessage id="reporting.status.offending" />}</option>
+          <option value={2}>{<FormattedMessage id="reporting.status.spam" />}</option>
+          <option value={3}>{<FormattedMessage id="reporting.status.error" />}</option>
+          <option value={4}>{<FormattedMessage id="reporting.status.off_topic" />}</option>
         </Field>
         <Field
           id="reportBody"
@@ -53,9 +52,7 @@ class ReportForm extends React.Component<Props> {
   }
 }
 
-const container = reduxForm({
+export default reduxForm({
   form: formName,
   validate,
 })(ReportForm);
-
-export default injectIntl(container);

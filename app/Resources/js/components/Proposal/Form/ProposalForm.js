@@ -216,7 +216,7 @@ const validate = (values: FormValues, { proposalForm, features, intl }: Props) =
     if (!values.title) {
       errors.title = 'proposal.constraints.title_for_draft';
     } else if (values.title.length <= 2) {
-      errors.title = 'proposal.constraints.title';
+      errors.title = 'proposal.constraints.title_min_value_for_draft';
     }
     if (values.summary && values.summary.length > 140) {
       errors.summary = 'proposal.constraints.summary';

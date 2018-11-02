@@ -6,25 +6,23 @@ type Props = {
   show: boolean,
   children: React.Node,
   divClassName: string,
-  message?: string,
 };
 
-export class PrivateBox extends React.Component<Props> {
+export class ProposalPrivateField extends React.Component<Props> {
   static defaultProps = {
     show: true,
     children: null,
     divClassName: '',
-    message: 'global.form.private',
   };
 
   render() {
-    const { children, show, divClassName, message } = this.props;
+    const { children, show, divClassName } = this.props;
     if (show) {
       return (
         <div>
           <p className="excerpt_private">
             <i className="cap cap-lock-2" />
-            {message && <FormattedMessage id={message} />}
+            <FormattedMessage id="global.form.private" />
           </p>
           <div className={`private-box ${divClassName}`}>{children}</div>
         </div>
@@ -39,4 +37,4 @@ export class PrivateBox extends React.Component<Props> {
   }
 }
 
-export default PrivateBox;
+export default ProposalPrivateField;

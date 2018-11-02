@@ -41,7 +41,6 @@ export class Cookie extends React.Component<Props, CookieState> {
       isAnalyticEnabled: value,
     });
   };
-
   toggleAdvertisingCookies = (value: boolean): void => {
     cookieMonster.toggleCookie(value, 'adCookieConsentValue');
     this.setState({
