@@ -283,9 +283,16 @@ form {
     }
 }
 
-.ql-editor .ql-size-small {
-    font-size: 12px;
+.ql-editor {
+    .ql-size-small {
+        font-size: 12px;
+    }
+
+    img {
+        max-width: 100%;
+    }
 }
+
 
 .cke_chrome {
     border: 1px solid $border-color !important;

@@ -5,7 +5,7 @@ import { injectIntl, type IntlShape } from 'react-intl';
 import classNames from 'classnames';
 import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
-import Fetcher, { json } from '../../services/Fetcher';
+import { selectLocalImage } from './EditorImageUpload';
 
 type Props = {
   intl: IntlShape,
@@ -52,60 +52,16 @@ class Editor extends React.Component<Props> {
     if (!disabled) {
       const quill = new Quill(this.editorRef.current, options);
 
-      /**
-       * Step3. insert image url to rich editor.
-       */
-      const insertToEditor = (url: string) => {
-        // push image url to rich editor.
-        const range = quill.getSelection();
-        quill.insertEmbed(range.index, 'image', url);
-      };
-
-      /**
-       * Step2. save to server
-       */
-      const saveToServer = (file: File) => {
-        const formData = new FormData();
-        formData.append('file', file);
-        Fetcher.postFormData('/files', formData)
-          .then(json)
-          .then(res => {
-            insertToEditor(res.url);
-          });
-      };
-
-      /**
-       * Step1. select local image
-       */
-      const selectLocalImage = () => {
-        const input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.click();
-
-        // Listen upload local image and save to server
-        input.onchange = () => {
-          const file = input.files[0];
-
-          // file type is only image.
-          if (/^image\//.test(file.type)) {
-            saveToServer(file);
-          } else {
-            console.warn('You could only upload images.');
-          }
-        };
-      };
-
-      // quill add image handler
       quill.getModule('toolbar').addHandler('image', () => {
-        selectLocalImage();
+        selectLocalImage(quill);
       });
 
-      const tooltip = quill.theme.tooltip.root;
+      const linkTooltip = quill.theme.tooltip.root;
 
-      if (tooltip) {
-        tooltip.setAttribute('data-content', `${intl.formatMessage({ id: 'editor.link' })} :`);
-        const actionLink = tooltip.querySelector('.ql-action');
-        const removeLink = tooltip.querySelector('.ql-remove');
+      if (linkTooltip) {
+        linkTooltip.setAttribute('data-content', `${intl.formatMessage({ id: 'editor.link' })} :`);
+        const actionLink = linkTooltip.querySelector('.ql-action');
+        const removeLink = linkTooltip.querySelector('.ql-remove');
 
         if (actionLink) {
           actionLink.setAttribute('data-content', intl.formatMessage({ id: 'action_edit' }));
@@ -141,7 +97,6 @@ class Editor extends React.Component<Props> {
           }
         });
         quill.on('text-change', () => {
-          console.log(quill.container.innerHTML);
           onChange(quill.container.innerHTML);
         });
       }
