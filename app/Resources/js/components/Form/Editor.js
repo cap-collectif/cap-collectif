@@ -1,13 +1,14 @@
 // @flow
 // Todo : ref Quill
 import React from 'react';
-// import { injectIntl, type IntlShape } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 import classNames from 'classnames';
 import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
+import Fetcher, { json } from '../../services/Fetcher';
 
 type Props = {
-  // intl: IntlShape,
+  intl: IntlShape,
   valueLink?: Object,
   value?: any,
   onChange: Function,
@@ -31,14 +32,12 @@ class Editor extends React.Component<Props> {
     this.toolbarRef = React.createRef();
   }
 
-  // $FlowFixMe
-  editorRef: { current: null | React.ElementRef<'div'> };
+  editorRef: { current: null | HTMLDivElement };
 
-  // $FlowFixMe
-  toolbarRef: { current: null | React.ElementRef<'div'> };
+  toolbarRef: { current: null | HTMLDivElement };
 
   componentDidMount() {
-    const { disabled, valueLink, onBlur, onChange, value } = this.props;
+    const { disabled, valueLink, onBlur, onChange, value, intl } = this.props;
 
     const options = {
       modules: {
@@ -47,72 +46,79 @@ class Editor extends React.Component<Props> {
         },
       },
       theme: 'snow',
-      bounds: '#proposal_form_description'
+      bounds: '#proposal_form_description',
     };
 
     if (!disabled) {
       const quill = new Quill(this.editorRef.current, options);
 
+      /**
+       * Step3. insert image url to rich editor.
+       */
+      const insertToEditor = (url: string) => {
+        // push image url to rich editor.
+        const range = quill.getSelection();
+        quill.insertEmbed(range.index, 'image', url);
+      };
+
+      /**
+       * Step2. save to server
+       */
+      const saveToServer = (file: File) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        Fetcher.postFormData('/files', formData)
+          .then(json)
+          .then(res => {
+            insertToEditor(res.url);
+          });
+      };
+
+      /**
+       * Step1. select local image
+       */
+      const selectLocalImage = () => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.click();
+
+        // Listen upload local image and save to server
+        input.onchange = () => {
+          const file = input.files[0];
+
+          // file type is only image.
+          if (/^image\//.test(file.type)) {
+            saveToServer(file);
+          } else {
+            console.warn('You could only upload images.');
+          }
+        };
+      };
+
+      // quill add image handler
+      quill.getModule('toolbar').addHandler('image', () => {
+        selectLocalImage();
+      });
+
       const tooltip = quill.theme.tooltip.root;
-      const preview = tooltip.getElementsByClassName('ql-preview')[0];
-      const action = tooltip.getElementsByClassName('ql-action')[0];
-      const remove = tooltip.getElementsByClassName('ql-remove')[0];
 
-      preview.innerHTML = "previewwww";
-      action.innerHTML = "actioon";
-      remove.innerHTML = "remooove";
+      if (tooltip) {
+        tooltip.setAttribute('data-content', `${intl.formatMessage({ id: 'editor.link' })} :`);
+        const actionLink = tooltip.querySelector('.ql-action');
+        const removeLink = tooltip.querySelector('.ql-remove');
 
-      // if (range === null || range.length === 0) {
-      //   return;
-      // }
-      // let preview = quill.getText(range);
-      // if (/^\S+@\S+\.\S+$/.test(preview) && preview.indexOf('mailto:') !== 0) {
-      //   console.warn(preview)
-      // }
-      // const tooltip = quill.theme.tooltip;
-      // tooltip.edit('link', 'https://');
-      // console.log(quill);
+        if (actionLink) {
+          actionLink.setAttribute('data-content', intl.formatMessage({ id: 'action_edit' }));
+          actionLink.setAttribute(
+            'data-editing-content',
+            intl.formatMessage({ id: 'global.save' }),
+          );
+        }
 
-      // console.warn(quill.getContents());
-
-      // const imageHandler = () => {
-      //   const range = quill.getSelection();
-      //   const test = window.prompt('imaage');
-      //   if (test) {
-      //     quill.insertEmbed(range.index, 'image', test, Quill.sources.USER);
-      //   }
-      // };
-
-      // const range = quill.getSelection();
-      // const tooltip = quill.theme.tooltip;
-      // console.log(tooltip.hasFocus());
-      // tooltip.position(range);
-      // tooltip.edit('link', 'https://');
-      // console.log(tooltip);
-
-      // const linkHandler = (val: boolean) => {
-      //
-      //   if(val) {
-      //     const test = window.prompt('lieeen');
-      //     if (test) {
-      //       quill.format('link', test);
-      //     }
-      //   } else {
-      //     quill.format('link', false);
-      //   }
-      // };
-
-      // const toolbar = quill.getModule('toolbar');
-      // toolbar.addHandler('link', linkHandler);
-      // toolbar.addHandler('image', imageHandler);
-
-      // quill.keyboard.addBinding({
-      //   key: '9',
-      //   shortKey: false,
-      //   // handler: (range, context) => {
-      //   //
-      //   // }
-      // });
+        if (removeLink) {
+          removeLink.setAttribute('data-content', intl.formatMessage({ id: 'global.remove' }));
+        }
+      }
 
       if (valueLink) {
         const defaultValue = valueLink.value;
@@ -135,6 +141,7 @@ class Editor extends React.Component<Props> {
           }
         });
         quill.on('text-change', () => {
+          console.log(quill.container.innerHTML);
           onChange(quill.container.innerHTML);
         });
       }
@@ -163,4 +170,4 @@ class Editor extends React.Component<Props> {
   }
 }
 
-export default Editor;
+export default injectIntl(Editor);

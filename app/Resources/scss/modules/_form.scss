@@ -271,14 +271,20 @@ form {
             font-size: 14px;
         }
     }
+
+    .ql-snow .ql-tooltip {
+        &:before, &[data-mode="link"]:before, .ql-action:after, .ql-remove:before  {
+            content: attr(data-content);
+        }
+
+        &.ql-editing .ql-action:after {
+            content: attr(data-editing-content);
+        }
+    }
 }
 
 .ql-editor .ql-size-small {
     font-size: 12px;
-}
-
-.ql-snow .ql-tooltip[data-mode="link"]::before {
-    content: "Your custom string here:";
 }
 
 .cke_chrome {
