@@ -58,7 +58,6 @@ class QuillToolbar extends React.Component<Props> {
         <span className="ql-formats">
           <button title={intl.formatMessage({ id: 'editor.link' })} className="ql-link" />
           <button title={intl.formatMessage({ id: 'editor.image' })} className="ql-image" />
-          {/* <button title={intl.formatMessage({id:'editor.image'})} id="custom-button">Image</button> */}
         </span>
       </React.Fragment>
     );

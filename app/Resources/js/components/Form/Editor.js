@@ -47,30 +47,64 @@ class Editor extends React.Component<Props> {
         },
       },
       theme: 'snow',
+      bounds: '#proposal_form_description'
     };
 
     if (!disabled) {
       const quill = new Quill(this.editorRef.current, options);
 
-      const imageHandler = () => {
-        const range = quill.getSelection();
-        const test = window.prompt('imaage');
-        if (test) {
-          quill.insertEmbed(range.index, 'image', test, Quill.sources.USER);
-        }
-      };
+      const tooltip = quill.theme.tooltip.root;
+      const preview = tooltip.getElementsByClassName('ql-preview')[0];
+      const action = tooltip.getElementsByClassName('ql-action')[0];
+      const remove = tooltip.getElementsByClassName('ql-remove')[0];
 
-      const linkHandler = () => {
-        const range = quill.getSelection();
-        const test = window.prompt('lieeen');
-        if (test) {
-          quill.insertEmbed(range.index, 'link', test, Quill.sources.USER);
-        }
-      };
+      preview.innerHTML = "previewwww";
+      action.innerHTML = "actioon";
+      remove.innerHTML = "remooove";
 
-      const toolbar = quill.getModule('toolbar');
-      toolbar.addHandler('link', linkHandler);
-      toolbar.addHandler('image', imageHandler);
+      // if (range === null || range.length === 0) {
+      //   return;
+      // }
+      // let preview = quill.getText(range);
+      // if (/^\S+@\S+\.\S+$/.test(preview) && preview.indexOf('mailto:') !== 0) {
+      //   console.warn(preview)
+      // }
+      // const tooltip = quill.theme.tooltip;
+      // tooltip.edit('link', 'https://');
+      // console.log(quill);
+
+      // console.warn(quill.getContents());
+
+      // const imageHandler = () => {
+      //   const range = quill.getSelection();
+      //   const test = window.prompt('imaage');
+      //   if (test) {
+      //     quill.insertEmbed(range.index, 'image', test, Quill.sources.USER);
+      //   }
+      // };
+
+      // const range = quill.getSelection();
+      // const tooltip = quill.theme.tooltip;
+      // console.log(tooltip.hasFocus());
+      // tooltip.position(range);
+      // tooltip.edit('link', 'https://');
+      // console.log(tooltip);
+
+      // const linkHandler = (val: boolean) => {
+      //
+      //   if(val) {
+      //     const test = window.prompt('lieeen');
+      //     if (test) {
+      //       quill.format('link', test);
+      //     }
+      //   } else {
+      //     quill.format('link', false);
+      //   }
+      // };
+
+      // const toolbar = quill.getModule('toolbar');
+      // toolbar.addHandler('link', linkHandler);
+      // toolbar.addHandler('image', imageHandler);
 
       // quill.keyboard.addBinding({
       //   key: '9',
@@ -101,7 +135,6 @@ class Editor extends React.Component<Props> {
           }
         });
         quill.on('text-change', () => {
-          console.warn(quill.container.innerHTML);
           onChange(quill.container.innerHTML);
         });
       }

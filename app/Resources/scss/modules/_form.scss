@@ -273,6 +273,14 @@ form {
     }
 }
 
+.ql-editor .ql-size-small {
+    font-size: 12px;
+}
+
+.ql-snow .ql-tooltip[data-mode="link"]::before {
+    content: "Your custom string here:";
+}
+
 .cke_chrome {
     border: 1px solid $border-color !important;
 }
