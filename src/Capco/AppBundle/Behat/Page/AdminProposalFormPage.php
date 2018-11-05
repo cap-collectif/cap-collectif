@@ -49,6 +49,8 @@ class AdminProposalFormPage extends Page
         'proposal form parameters save' => '#parameters-submit',
         'proposal form address selection' => '#proposal_form_using_address_field',
         'proposal form personal-section add' => '#js-btn-create-section',
+        'proposal form first question delete' => '#js-btn-delete-0',
+        'proposal form delete modale button' => '#js-delete-question',
     ];
 
     public function clickSaveProposalFormButton(string $tab)
