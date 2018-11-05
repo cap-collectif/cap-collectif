@@ -342,7 +342,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         return $this;
     }
 
-    public function getModals(): Collection
+    public function getModals(): ?Collection
     {
         return $this->modals;
     }
@@ -497,20 +497,16 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     public function canDisplay($user = null): bool
     {
-        return (
-            ($this->isPublished() && $this->getStep() && $this->getStep()->canDisplay($user)) ||
+        return ($this->isPublished() && $this->getStep() && $this->getStep()->canDisplay($user)) ||
             $this->getAuthor() === $user ||
-            ($user && $user->isAdmin())
-        );
+            ($user && $user->isAdmin());
     }
 
     public function canDisplayInBo($user = null): bool
     {
-        return (
-            ($this->getStep() && $this->getStep()->canDisplayInBO($user)) ||
+        return ($this->getStep() && $this->getStep()->canDisplayInBO($user)) ||
             $this->getAuthor() === $user ||
-            ($user && $user->isAdmin())
-        );
+            ($user && $user->isAdmin());
     }
 
     public function canContribute($viewer = null): bool
@@ -532,10 +528,8 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     {
         $iterator = $this->appendices->getIterator();
         $iterator->uasort(function ($a, $b) {
-            return (
-                $this->getPositionForAppendixType($a->getAppendixType()) <
-                    $this->getPositionForAppendixType($b->getAppendixType())
-            )
+            return $this->getPositionForAppendixType($a->getAppendixType()) <
+                $this->getPositionForAppendixType($b->getAppendixType())
                 ? -1
                 : 1;
         });

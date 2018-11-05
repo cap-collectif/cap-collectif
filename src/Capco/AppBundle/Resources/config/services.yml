@@ -50,7 +50,7 @@ parameters:
   env(SYMFONY_GOOGLE_APP_ID):
     ***REMOVED***
   env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
-  env(SYMFONY_JWT_TOKEN_TTL): 86400 # 24 hours
+  env(SYMFONY_JWT_TOKEN_TTL): 86400
   env(SYMFONY_LANGUAGE_ANALYZER): french
   env(SYMFONY_REMEMBER_SECRET): ***REMOVED***
   env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST): capco.dev
@@ -129,6 +129,7 @@ services:
   Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator:
     autowire: true
     public: true
+
   Capco\AppBundle\Normalizer\OpinionTypeNormalizer:
     tags: ['serializer.normalizer']
     autowire: true

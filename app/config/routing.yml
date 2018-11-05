@@ -69,13 +69,6 @@ capco_api_users:
   defaults:
     _format: json
 
-capco_api_selection_steps:
-  resource: '@CapcoAppBundle/Controller/Api/SelectionStepsController.php'
-  type: annotation
-  prefix: /api
-  defaults:
-    _format: json
-
 capco_api_collect_steps:
   resource: '@CapcoAppBundle/Controller/Api/CollectStepsController.php'
   type: annotation
@@ -92,13 +85,6 @@ capco_api_opinions:
 
 capco_api_opinion_types:
   resource: '@CapcoAppBundle/Controller/Api/OpinionTypesController.php'
-  type: annotation
-  prefix: /api
-  defaults:
-    _format: json
-
-capco_api_questionnaires:
-  resource: '@CapcoAppBundle/Controller/Api/QuestionnairesController.php'
   type: annotation
   prefix: /api
   defaults:

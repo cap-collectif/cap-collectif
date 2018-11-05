@@ -250,9 +250,7 @@ Scenario: API client wants to get synthesis elements
           "displayName": "sfavot",
           "uniqueId": "sfavot",
           "isAdmin": true,
-          "media": {
-            "url": @string@
-          },
+          "media": {},
           "vip": true,
           "_links": {
             "settings": @string@
@@ -310,9 +308,7 @@ Scenario: API client wants to get new synthesis elements
           "displayName": "sfavot",
           "uniqueId": "sfavot",
           "isAdmin": true,
-          "media": {
-            "url": @string@
-          },
+          "media": {},
           "vip": true,
           "_links": {
             "settings": @string@
@@ -635,9 +631,7 @@ Scenario: API client wants to get a synthesis element that is published
       "displayName": "sfavot",
       "uniqueId": "sfavot",
       "isAdmin": true,
-      "media": {
-        "url": @string@
-      },
+      "media": {},
       "vip": true,
       "_links": {
         "settings": @string@
@@ -789,9 +783,7 @@ Scenario: API client wants to update a synthesis element
       "displayName": "sfavot",
       "uniqueId": "sfavot",
       "isAdmin": true,
-      "media": {
-        "url": @string@
-      },
+      "media": {},
       "vip": true,
       "_links": {
         "settings": @string@

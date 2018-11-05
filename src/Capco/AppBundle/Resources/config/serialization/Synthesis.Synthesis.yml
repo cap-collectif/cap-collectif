@@ -10,18 +10,3 @@ Capco\AppBundle\Entity\Synthesis\Synthesis:
       groups: [Syntheses, SynthesisDetails, Elements]
     displayRules:
       groups: [Syntheses, SynthesisDetails]
-  relations:
-    - rel: self
-      href:
-        route: get_synthesis
-        parameters:
-          id: expr(object.getId())
-      exclusion:
-        groups: [Syntheses, SynthesisDetails]
-    - rel: elements
-      href:
-        route: get_synthesis_elements
-        parameters:
-          id: expr(object.getId())
-      exclusion:
-        groups: [Syntheses, SynthesisDetails]

@@ -50,20 +50,3 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
     hasLinkedData:
       serialized_name: hasLinkedData
       groups: [ElementsList, ElementsPublished, ElementDetails]
-  relations:
-    - rel: self
-      href:
-        route: get_synthesis_element
-        parameters:
-          synthesis_id: expr(object.getSynthesis().getId())
-          element_id: expr(object.getId())
-      exclusion:
-        groups: [Elements, ElementsList, ElementDetails]
-    - rel: history
-      href:
-        route: get_synthesis_element_history
-        parameters:
-          synthesis_id: expr(object.getSynthesis().getId())
-          element_id: expr(object.getId())
-      exclusion:
-        groups: [Elements, ElementsList, ElementDetails]

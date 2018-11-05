@@ -1,0 +1,25 @@
+services:
+  _defaults:
+    autowire: true
+
+  ##################### Normalizers
+  Capco\AppBundle\Normalizer\OpinionTypeNormalizer:
+    tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\ProjectNormalizer:
+    tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\ThemeNormalizer:
+    tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\UserNormalizer:
+    tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\SelectionStepNormalizer:
+    tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\SynthesisNormalizer:
+    tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\SynthesisElementNormalizer:
+    tags: ['serializer.normalizer']
