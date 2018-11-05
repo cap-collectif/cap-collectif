@@ -682,8 +682,10 @@ export const renderResponses = ({
                 );
               }
             }
+            // We want to overidde the HTML verification of the input type number
+            const inputType = field.type && field.type !== 'number' ? field.type : 'text';
             return (
-              <ProposalPrivateField key={field.id} show={field.private}>
+              <PrivateBox key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
                   id={`${form}-${member}`}
@@ -698,7 +700,7 @@ export const renderResponses = ({
                   disabled={disabled}
                   value={currentReplyValue}
                 />
-              </ProposalPrivateField>
+              </PrivateBox>
             );
           }
         }
