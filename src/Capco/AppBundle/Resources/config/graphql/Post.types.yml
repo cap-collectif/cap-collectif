@@ -12,8 +12,7 @@ Post:
         type: 'String'
       relatedContent:
         type: '[PostRelatedContent!]!'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentResolver", [value])'
       createdAt:
         type: 'DateTime!'
       updatedAt:
@@ -25,8 +24,7 @@ Post:
       publicationStatus:
         type: 'PostPublicationStatus!'
         description: 'The publication status for this post.'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
       commentable:
         type: 'Boolean!'
         resolve: '@=value.isCommentable()'
@@ -35,6 +33,11 @@ Post:
       abstract:
         type: 'String!'
         resolve: "@=resolver('post_abstract', [value])"
+      adminUrl:
+        type: 'URI!'
+        description: 'The admin url for this post.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAdminUrlResolver", [value])'
+        access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
       url:
         type: 'URI!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'

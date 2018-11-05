@@ -71,7 +71,7 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
                 bsStyle="warning"
                 className="btn-outline-warning"
                 disabled={false}
-                href="http://localhost/admin/capco/app/post/1/edit"
+                href="https://capco.dev/admin/capco/app/post/19/edit"
               >
                 <i
                   className="fa fa-pencil"
@@ -89,7 +89,7 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
                 bsStyle="danger"
                 className="btn-outline-danger"
                 disabled={false}
-                href="http://localhost/admin/capco/app/post/1/delete"
+                href="https://capco.dev/admin/capco/app/post/19/delete"
               >
                 <i
                   className="fa fa-trash"

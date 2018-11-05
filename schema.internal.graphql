@@ -2622,6 +2622,9 @@ type Post implements Node & Commentable {
   commentable: Boolean!
   displayedOnBlog: Boolean!
   abstract: String!
+
+  # The admin url for this post.
+  adminUrl: URI!
   url: URI!
   media: Media
   themes: [Theme!]!

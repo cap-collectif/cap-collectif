@@ -48,13 +48,13 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
                           <Button
                             bsStyle="warning"
                             className="btn-outline-warning"
-                            href={`${baseUrl}/admin/capco/app/post/${news.node.id}/edit`}>
+                            href={news.node.adminUrl}>
                             <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
                           </Button>
                           <Button
                             bsStyle="danger"
                             className="btn-outline-danger"
-                            href={`${baseUrl}/admin/capco/app/post/${news.node.id}/delete`}>
+                            href={news.node.adminUrl.replace('/edit', '/delete')}>
                             <i className="fa fa-trash" />
                           </Button>
                         </ButtonToolbar>
@@ -88,7 +88,7 @@ export default createFragmentContainer(
         edges {
           cursor
           node {
-            id
+            adminUrl
             title
           }
         }

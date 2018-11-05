@@ -16,7 +16,7 @@ describe('<ProposalAdminNewsForm />', () => {
           {
             cursor: 'curseurdepagination',
             node: {
-              id: '1',
+              adminUrl: 'https://capco.dev/admin/capco/app/post/19/edit',
               title: 'news-1',
             },
           },
