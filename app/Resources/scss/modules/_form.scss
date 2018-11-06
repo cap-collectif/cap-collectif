@@ -253,6 +253,10 @@ form {
 .editor {
     position: relative;
 
+    img {
+        max-width: 100%;
+    }
+
     .ql-toolbar, .ql-container {
         border: 1px solid $border-color;
     }
@@ -269,11 +273,6 @@ form {
         .ql-editor {
             min-height: 100px;
             font-size: 14px;
-            padding: 12px 15px;
-        }
-
-        img {
-            max-width: 100%;
         }
     }
 
@@ -289,8 +288,6 @@ form {
 }
 
 .ql-editor {
-    padding: 0;
-
     span {
         &.ql-size-small {
             font-size: 12px;
@@ -304,7 +301,6 @@ form {
             font-size: 18px;
         }
     }
-
 }
 
 .cke_chrome {
@@ -404,6 +400,10 @@ form {
 
 #reply-form .control-label {
     font-size: 18px;
+}
+
+#reply-form img {
+    max-width: 100%;
 }
 
 /*
