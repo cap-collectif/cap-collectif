@@ -109,6 +109,7 @@ class Editor extends React.Component<Props> {
 
   render() {
     const { className, disabled, id } = this.props;
+
     const classes = {
       editor: !disabled,
       'form-control': disabled,
