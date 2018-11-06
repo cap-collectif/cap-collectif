@@ -272,10 +272,6 @@ form {
             padding: 12px 15px;
         }
 
-        .ql-size-small {
-            font-size: 12px;
-        }
-
         img {
             max-width: 100%;
         }
@@ -294,6 +290,21 @@ form {
 
 .ql-editor {
     padding: 0;
+
+    span {
+        &.ql-size-small {
+            font-size: 12px;
+        }
+
+        &.ql-size-normal {
+            font-size: 14px;
+        }
+
+        &.ql-size-large {
+            font-size: 18px;
+        }
+    }
+
 }
 
 .cke_chrome {

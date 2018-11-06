@@ -51,13 +51,21 @@ class Editor extends React.Component<Props> {
     if (!disabled) {
       const quill = new Quill(this.editorRef.current, options);
 
+      const size = Quill.import('formats/size');
+      size.whitelist = ['small', 'normal', 'large'];
+      Quill.register(size, true);
+
       quill.getModule('toolbar').addHandler('image', () => {
         selectLocalImage(quill);
       });
 
+      quill.root.setAttribute('role', 'textbox');
+      quill.root.setAttribute('aria-multiline', 'true');
+
       const linkTooltip = quill.theme.tooltip.root;
 
       if (linkTooltip) {
+        linkTooltip.setAttribute('role', 'tooltip');
         linkTooltip.setAttribute('data-content', `${intl.formatMessage({ id: 'editor.link' })} :`);
         const actionLink = linkTooltip.querySelector('.ql-action');
         const removeLink = linkTooltip.querySelector('.ql-remove');
@@ -76,7 +84,7 @@ class Editor extends React.Component<Props> {
         }
 
         if (input) {
-          input.setAttribute('title', intl.formatMessage({ id: 'editor.add.link' }));
+          input.setAttribute('aria-label', intl.formatMessage({ id: 'editor.add.link' }));
         }
       }
 
