@@ -20,8 +20,9 @@ final class Version20181030172019 extends AbstractMigration
 
         $this->addSql(
             'ALTER TABLE questionnaire ADD type VARCHAR(255) NOT NULL DEFAULT "' .
-                QuestionnaireType::VOTING
-        ) . '"';
+                QuestionnaireType::VOTING .
+                '"'
+        );
     }
 
     public function down(Schema $schema): void

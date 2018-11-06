@@ -680,14 +680,12 @@ export const renderResponses = ({
                 );
               }
             }
-            // We want to overidde the HTML verification of the input type number
-            const inputType = field.type && field.type !== 'number' ? field.type : 'text';
             return (
               <PrivateBox key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
                   id={`${form}-${member}`}
-                  type={inputType}
+                  type={field.type}
                   component={component}
                   description={field.description}
                   help={field.helpText}
