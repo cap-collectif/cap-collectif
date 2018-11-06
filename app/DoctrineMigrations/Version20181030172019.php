@@ -4,7 +4,7 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-
+use Capco\AppBundle\Enum\QuestionnaireType;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
@@ -18,7 +18,10 @@ final class Version20181030172019 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('ALTER TABLE questionnaire ADD type VARCHAR(255) NOT NULL');
+        $this->addSql(
+            'ALTER TABLE questionnaire ADD type VARCHAR(255) NOT NULL DEFAULT "' .
+                QuestionnaireType::VOTING
+        ) . '"';
     }
 
     public function down(Schema $schema): void

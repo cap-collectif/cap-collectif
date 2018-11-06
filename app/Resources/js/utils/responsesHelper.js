@@ -312,7 +312,7 @@ export const formatSubmitResponses = (
         medias,
       };
     }
-    let value = res.value;
+    let { value } = res;
     if (questionType === 'ranking' || questionType === 'button') {
       value = answeredQuestionsIds.includes(question.id)
         ? JSON.stringify({
@@ -530,7 +530,6 @@ export const renderResponses = ({
   form,
   change,
   disabled,
-  reply,
 }: FieldArrayProps & {
   questions: Questions,
   responses: ResponsesInReduxForm,
@@ -553,9 +552,8 @@ export const renderResponses = ({
         if (!availableQuestions.includes(field.id)) {
           isAvailableQuestion = false;
         }
-        const currentReplyValue = reply && reply.responses ? reply.responses[index].value : null;
-        // We want to overidde the HTML verification of the input type number
-        const isOtherAllowed = field.isOtherAllowed;
+
+        const { isOtherAllowed } = field;
 
         const labelAppend = field.required
           ? strategy === 'minority_required'
@@ -698,7 +696,7 @@ export const renderResponses = ({
                   choices={choices}
                   label={label}
                   disabled={disabled}
-                  value={currentReplyValue}
+                  value={responses[index].value}
                 />
               </PrivateBox>
             );
