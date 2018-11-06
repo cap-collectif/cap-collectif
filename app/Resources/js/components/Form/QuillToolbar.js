@@ -13,17 +13,17 @@ class QuillToolbar extends React.Component<Props> {
     return (
       <React.Fragment>
         <span className="ql-formats">
-          <select title="Size" className="ql-size">
+          <select title={intl.formatMessage({ id: 'global.fontsize' })} className="ql-size">
             <option value="small">{intl.formatMessage({ id: 'editor.size.small' })}</option>
             <option selected>{intl.formatMessage({ id: 'editor.size.normal' })}</option>
             <option value="large">{intl.formatMessage({ id: 'editor.size.large' })}</option>
           </select>
         </span>
         <span className="ql-formats">
-          <button className="ql-bold" />
-          <button className="ql-italic" />
-          <button className="ql-underline" />
-          <button className="ql-strike" />
+          <button title={intl.formatMessage({ id: 'global.bold' })} className="ql-bold" />
+          <button title={intl.formatMessage({ id: 'global.italic' })} className="ql-italic" />
+          <button title={intl.formatMessage({ id: 'global.underline' })} className="ql-underline" />
+          <button title={intl.formatMessage({ id: 'global.strike' })} className="ql-strike" />
         </span>
         <span className="ql-formats">
           <button
@@ -40,13 +40,13 @@ class QuillToolbar extends React.Component<Props> {
             className="ql-indent"
             value="-1"
             // change title
-            title={intl.formatMessage({ id: 'editor.bullet' })}
+            title={intl.formatMessage({ id: 'global.delete.indent' })}
           />
           <button
             className="ql-indent"
             value="+1"
             // change title
-            title={intl.formatMessage({ id: 'editor.bullet' })}
+            title={intl.formatMessage({ id: 'global.indent' })}
           />
           <select title={intl.formatMessage({ id: 'editor.align.title' })} className="ql-align">
             <option label={intl.formatMessage({ id: 'editor.align.left' })} selected />

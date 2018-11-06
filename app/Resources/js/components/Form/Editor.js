@@ -1,5 +1,4 @@
 // @flow
-// Todo : ref Quill
 import React from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
 import classNames from 'classnames';
@@ -62,6 +61,7 @@ class Editor extends React.Component<Props> {
         linkTooltip.setAttribute('data-content', `${intl.formatMessage({ id: 'editor.link' })} :`);
         const actionLink = linkTooltip.querySelector('.ql-action');
         const removeLink = linkTooltip.querySelector('.ql-remove');
+        const input = linkTooltip.querySelector('input');
 
         if (actionLink) {
           actionLink.setAttribute('data-content', intl.formatMessage({ id: 'action_edit' }));
@@ -73,6 +73,10 @@ class Editor extends React.Component<Props> {
 
         if (removeLink) {
           removeLink.setAttribute('data-content', intl.formatMessage({ id: 'global.remove' }));
+        }
+
+        if (input) {
+          input.setAttribute('title', intl.formatMessage({ id: 'editor.add.link' }));
         }
       }
 
