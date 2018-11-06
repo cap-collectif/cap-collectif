@@ -49,6 +49,10 @@ export const CardContainer = styled.div`
     margin-top: 15px;
   }
 
+  .ql-toolbar button {
+    margin-top: 0;
+  }
+
   .card__actions {
     color: ${colors.darkGray};
     font-size: 14px;

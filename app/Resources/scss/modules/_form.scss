@@ -269,6 +269,15 @@ form {
         .ql-editor {
             min-height: 100px;
             font-size: 14px;
+            padding: 12px 15px;
+        }
+
+        .ql-size-small {
+            font-size: 12px;
+        }
+
+        img {
+            max-width: 100%;
         }
     }
 
@@ -284,13 +293,7 @@ form {
 }
 
 .ql-editor {
-    .ql-size-small {
-        font-size: 12px;
-    }
-
-    img {
-        max-width: 100%;
-    }
+    padding: 0;
 }
 
 

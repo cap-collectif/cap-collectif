@@ -25,6 +25,8 @@ class ButtonBody extends React.Component<Props, State> {
     const { body } = this.props;
     let text = '';
 
+    // console.log(body);
+
     if (!this.textShouldBeTruncated() || this.state.expanded) {
       text = body;
     } else {
@@ -59,6 +61,7 @@ class ButtonBody extends React.Component<Props, State> {
     return (
       <div className="opinion__text">
         <Linkify properties={{ className: 'external-link' }}>
+          FUHREHFEHRUIO
           <div dangerouslySetInnerHTML={{ __html: this.generateText() }} />
         </Linkify>
         {this.renderReadMoreOrLess()}
