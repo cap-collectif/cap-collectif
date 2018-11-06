@@ -39,13 +39,11 @@ class QuillToolbar extends React.Component<Props> {
           <button
             className="ql-indent"
             value="-1"
-            // change title
             title={intl.formatMessage({ id: 'global.delete.indent' })}
           />
           <button
             className="ql-indent"
             value="+1"
-            // change title
             title={intl.formatMessage({ id: 'global.indent' })}
           />
           <select title={intl.formatMessage({ id: 'editor.align.title' })} className="ql-align">
