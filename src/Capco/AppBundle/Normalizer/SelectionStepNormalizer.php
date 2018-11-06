@@ -26,6 +26,7 @@ class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInt
     {
         $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
         $project = $object->getProject();
+        $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Steps', $groups)) {
             $counters = [];
@@ -47,7 +48,6 @@ class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInt
                     }
                 }
             }
-            $data = $this->normalizer->normalize($object, $format, $context);
             $data['counters'] = $counters;
             if ($project) {
                 $data['_links']['show'] = $this->router->generate(
@@ -61,7 +61,7 @@ class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInt
             }
             return $data;
         }
-        return null;
+        return $data;
     }
 
     public function supportsNormalization($data, $format = null)

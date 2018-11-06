@@ -207,7 +207,7 @@ class Indexer
     {
         $json = [];
         try {
-            $json = $this->serializer->serialize($object, 'json', ['Elasticsearch']);
+            $json = $this->serializer->serialize($object, 'json', ['groups' => ['Elasticsearch']]);
         } catch (\Exception $exception) {
             $this->logger->error(__METHOD__ . $exception->getMessage());
         }

@@ -23,3 +23,12 @@ services:
 
   Capco\AppBundle\Normalizer\SynthesisElementNormalizer:
     tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\ProposalNormalizer:
+    tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\CollectStepNormalizer:
+    tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\CommentNormalizer:
+    tags: ['serializer.normalizer']

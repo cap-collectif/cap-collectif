@@ -23,12 +23,12 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface
     public function normalize($object, $format = null, array $context = array())
     {
         $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
+        $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups)) {
-            return;
+            return $data;
         }
 
-        $data = $this->normalizer->normalize($object, $format, $context);
         $data['_links'] = [
             'show' => $this->router->generate(
                 'app_theme_show',

@@ -42,6 +42,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
     public function normalize($object, $format = null, array $context = array())
     {
         $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
+        $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups) && !in_array('ElasticsearchProposal', $groups)) {
             $contributionsCountByProject = [];
@@ -78,7 +79,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
             $data['contributionsCountByProject'] = $contributionsCountByProject;
             $data['contributionsCountByStep'] = $contributionsCountByStep;
 
-            return;
+            return $data;
         }
 
         $links = [
@@ -93,7 +94,6 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
             );
         }
 
-        $data = $this->normalizer->normalize($object, $format, $context);
         $data['_links'] = $links;
 
         return $data;

@@ -38,9 +38,10 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
     public function normalize($object, $format = null, array $context = array())
     {
         $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
+        $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups)) {
-            return;
+            return $data;
         }
 
         $links = [
@@ -64,7 +65,6 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
             $steps[] = $this->normalizer->normalize($abstractStep, 'json', $newContext);
         }
 
-        $data = $this->normalizer->normalize($object, $format, $context);
         $data['_links'] = $links;
         if ($steps) {
             $data['steps'] = $steps;

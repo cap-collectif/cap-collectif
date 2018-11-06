@@ -29,9 +29,10 @@ class OpinionTypeNormalizer implements NormalizerInterface, SerializerAwareInter
     public function normalize($object, $format = null, array $context = array())
     {
         $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
+        $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups)) {
-            return;
+            return $data;
         }
         if (\in_array('OpinionTypeLinks', $groups)) {
             $availableTypes = $this->resolver->getAvailableLinkTypesForConsultationStepType(
@@ -43,7 +44,6 @@ class OpinionTypeNormalizer implements NormalizerInterface, SerializerAwareInter
                 $serializedTypes[] = $this->normalizer->normalize($type, $format, $context);
             }
 
-            $data = $this->normalizer->normalize($object, $format, $context);
             $data['availableLinkTypes'] = $serializedTypes;
 
             return $data;
