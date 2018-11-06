@@ -1,6 +1,6 @@
 /*eslint-disable */
 /* [Internationalization API] */
-!(function(e, n, t) {
+global.Modernizr = (function(e, n, t) {
   function r(e, n) {
     return typeof e === n;
   }
@@ -212,4 +212,6 @@
   Modernizr.addTest('intl', !!P('Intl', e)), o(), i(y), delete C.addTest, delete C.addAsyncTest;
   for (var T = 0; T < Modernizr._q.length; T++) Modernizr._q[T]();
   e.Modernizr = Modernizr;
+
+  return Modernizr;
 })(window, document);
