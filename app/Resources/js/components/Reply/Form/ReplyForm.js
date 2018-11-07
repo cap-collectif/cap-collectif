@@ -167,7 +167,7 @@ export class ReplyForm extends React.Component<Props> {
           <div id="create-reply-form">
             <form id="reply-form" ref="form" onSubmit={handleSubmit}>
               {questionnaire.description && (
-                <p dangerouslySetInnerHTML={{ __html: questionnaire.description }} />
+                <div dangerouslySetInnerHTML={{ __html: questionnaire.description }} />
               )}
               <FieldArray
                 name="responses"

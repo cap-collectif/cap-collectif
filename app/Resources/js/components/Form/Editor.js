@@ -96,7 +96,7 @@ class Editor extends React.Component<Props> {
         }
 
         quill.on('text-change', () => {
-          valueLink.requestChange(quill.root.innerHTML);
+          valueLink.requestChange(`<div class="ql-editor">${quill.root.innerHTML}</div>`);
         });
       } else {
         const defaultValue = value;
@@ -105,11 +105,11 @@ class Editor extends React.Component<Props> {
         }
         quill.on('selection-change', range => {
           if (!range) {
-            onBlur(quill.root.innerHTML);
+            onBlur(`<div class="ql-editor">${quill.root.innerHTML}</div>`);
           }
         });
         quill.on('text-change', () => {
-          onChange(quill.root.innerHTML);
+          onChange(`<div class="ql-editor">${quill.root.innerHTML}</div>`);
         });
       }
     }

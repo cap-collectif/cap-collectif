@@ -273,6 +273,7 @@ form {
         .ql-editor {
             min-height: 100px;
             font-size: 14px;
+            padding: 12px 15px;
         }
     }
 
@@ -288,6 +289,8 @@ form {
 }
 
 .ql-editor {
+    padding: 0;
+
     span {
         &.ql-size-small {
             font-size: 12px;
@@ -302,6 +305,24 @@ form {
         }
     }
 }
+
+//p {
+//    &.ql-align-right {
+//        text-align: right;
+//    }
+//
+//    &.ql-align-center {
+//        text-align: center;
+//    }
+//
+//    &.ql-indent-1 {
+//        text-align: right;
+//    }
+//
+//    &.ql-indent-1 {
+//        text-align: center;
+//    }
+//}
 
 .cke_chrome {
     border: 1px solid $border-color !important;
