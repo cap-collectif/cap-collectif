@@ -1,6 +1,0 @@
-Capco\AppBundle\Entity\Responses\ValueResponse:
-  exclusion_policy: ALL
-  properties:
-    value:
-      expose: true
-      groups: [Proposals, Replies]
