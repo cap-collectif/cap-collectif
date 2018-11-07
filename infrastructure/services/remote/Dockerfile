@@ -173,6 +173,7 @@ RUN set -eux; \
 ENV RABBITMQ_VERSION 3.7.8
 ENV RABBITMQ_GITHUB_TAG v3.7.8
 ENV RABBITMQ_DEBIAN_VERSION 3.7.8-1
+ENV RABBITMQ_GPG_KEY 0A9AF2115F4687BD29803A206B73A36E6026DFCA
 RUN apt-get update; \
 	wget -O rabbitmq-server.deb.asc "https://github.com/rabbitmq/rabbitmq-server/releases/download/$RABBITMQ_GITHUB_TAG/rabbitmq-server_${RABBITMQ_DEBIAN_VERSION}_all.deb.asc"; \
 	wget -O rabbitmq-server.deb     "https://github.com/rabbitmq/rabbitmq-server/releases/download/$RABBITMQ_GITHUB_TAG/rabbitmq-server_${RABBITMQ_DEBIAN_VERSION}_all.deb"; \
