@@ -46,7 +46,7 @@ class ProposalController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
         $urlResolver = $this->get(UrlResolver::class);
 
         $stepUrls = $project
@@ -78,9 +78,8 @@ class ProposalController extends Controller
                 'categories' => $proposalForm ? $proposalForm->getCategories() : [],
             ],
             'json',
-            SerializationContext::create()
-                ->setSerializeNull(true)
-                ->setGroups([
+            [
+                'groups' => [
                     'ProposalCategories',
                     'UserVotes',
                     'Districts',
@@ -90,8 +89,9 @@ class ProposalController extends Controller
                     'ThemeDetails',
                     'UserMedias',
                     'VoteThreshold',
-                    'Default', // force step_type serialization
-                ])
+                    'Default',
+                ],
+            ]
         );
         return $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,

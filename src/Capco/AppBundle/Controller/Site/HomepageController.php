@@ -96,14 +96,20 @@ class HomepageController extends Controller
      */
     public function highlightedContentAction(Section $section = null)
     {
-        $serializer = $this->get('jms_serializer');
+        $serializer = $this->get('serializer');
         $highlighteds = $this->get('capco.highlighted.repository')->getAllOrderedByPosition(4);
-        $props = $serializer->serialize(
-            ['highlighteds' => $highlighteds],
-            'json',
-            SerializationContext::create()->setSerializeNull(true)
-        );
-
+        $props = $serializer->serialize(['highlighteds' => $highlighteds], 'json', [
+            'groups' => [
+                'HighlightedContent',
+                'Posts',
+                'Events',
+                'Projects',
+                'Themes',
+                'ThemeDetails',
+                'Default',
+                'Proposals',
+            ],
+        ]);
         return ['props' => $props, 'section' => $section];
     }
 

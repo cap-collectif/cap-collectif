@@ -1,0 +1,4 @@
+Capco\AppBundle\Entity\HighlightedProject:
+  attributes:
+    project:
+      groups: [HighlightedContent]
