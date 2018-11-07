@@ -88,6 +88,8 @@ class Editor extends React.Component<Props> {
         }
       }
 
+      const quillValue = () => `<div class="ql-editor">${quill.root.innerHTML}</div>`;
+
       if (valueLink) {
         const defaultValue = valueLink.value;
 
@@ -96,7 +98,7 @@ class Editor extends React.Component<Props> {
         }
 
         quill.on('text-change', () => {
-          valueLink.requestChange(`<div class="ql-editor">${quill.root.innerHTML}</div>`);
+          valueLink.requestChange(quillValue());
         });
       } else {
         const defaultValue = value;
@@ -105,11 +107,11 @@ class Editor extends React.Component<Props> {
         }
         quill.on('selection-change', range => {
           if (!range) {
-            onBlur(`<div class="ql-editor">${quill.root.innerHTML}</div>`);
+            onBlur(quillValue());
           }
         });
         quill.on('text-change', () => {
-          onChange(`<div class="ql-editor">${quill.root.innerHTML}</div>`);
+          onChange(quillValue());
         });
       }
     }
