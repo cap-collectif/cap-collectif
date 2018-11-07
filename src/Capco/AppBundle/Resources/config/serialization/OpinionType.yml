@@ -6,8 +6,6 @@ Capco\AppBundle\Entity\OpinionType:
       groups: [Opinions, OpinionVersions, OpinionTypeDetails]
     subtitle:
       groups: [Opinions, OpinionVersions]
-    body:
-      groups: [Opinions, OpinionVersions]
     color:
       groups: [Opinions, OpinionVersions]
     sourceable:

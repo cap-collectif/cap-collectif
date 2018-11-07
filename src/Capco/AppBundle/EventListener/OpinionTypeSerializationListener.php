@@ -43,7 +43,7 @@ class OpinionTypeSerializationListener extends AbstractSerializationListener
             );
 
             $serializedTypes = $this->serializer->serialize(['data' => $availableTypes], 'json', [
-                'OpinionTypeDetails',
+                'groups' => ['OpinionTypeDetails'],
             ]);
 
             $event

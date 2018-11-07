@@ -17,17 +17,10 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
 {
     use SerializerAwareTrait;
     private $normalizer;
-    private $proposalSelectionVoteRepository;
-    private $proposalCollectVoteRepository;
 
-    public function __construct(
-        ObjectNormalizer $normalizer,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository
-    ) {
+    public function __construct(ObjectNormalizer $normalizer)
+    {
         $this->normalizer = $normalizer;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
     }
 
     public function normalize($object, $format = null, array $context = array())

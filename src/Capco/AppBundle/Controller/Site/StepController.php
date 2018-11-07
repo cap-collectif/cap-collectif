@@ -304,19 +304,21 @@ class StepController extends Controller
             ],
             'json',
             [
-                'Statuses',
-                'ProposalForms',
-                'Questions',
-                'ThemeDetails',
-                'Districts',
-                'DistrictDetails',
-                'Default',
-                'Steps',
-                'VoteThreshold',
-                'UserVotes',
-                'Proposals',
-                'UsersInfos',
-                'UserMedias',
+                'groups' => [
+                    'Statuses',
+                    'ProposalForms',
+                    'Questions',
+                    'ThemeDetails',
+                    'Districts',
+                    'DistrictDetails',
+                    'Default',
+                    'Steps',
+                    'VoteThreshold',
+                    'UserVotes',
+                    'Proposals',
+                    'UsersInfos',
+                    'UserMedias',
+                ],
             ]
         );
 
@@ -353,7 +355,9 @@ class StepController extends Controller
                     : null,
             ],
             'json',
-            ['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps']
+            [
+                'groups' => ['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps'],
+            ]
         );
 
         return ['project' => $project, 'currentStep' => $step, 'props' => $props];
@@ -392,17 +396,19 @@ class StepController extends Controller
             ],
             'json',
             [
-                'Steps',
-                'ProposalForms',
-                'UserVotes',
-                'Statuses',
-                'ThemeDetails',
-                'Districts',
-                'Default',
-                'Proposals',
-                'UsersInfos',
-                'UserMedias',
-                'VoteThreshold',
+                'groups' => [
+                    'Steps',
+                    'ProposalForms',
+                    'UserVotes',
+                    'Statuses',
+                    'ThemeDetails',
+                    'Districts',
+                    'Default',
+                    'Proposals',
+                    'UsersInfos',
+                    'UserMedias',
+                    'VoteThreshold',
+                ],
             ]
         );
 
@@ -470,9 +476,7 @@ class StepController extends Controller
         $serializer = $this->get('serializer');
 
         $stepProps = $serializer->serialize(['step' => $currentStep], 'json', [
-            'ConsultationSteps',
-            'Steps',
-            'UserVotes',
+            'groups' => ['ConsultationSteps', 'Steps', 'UserVotes'],
         ]);
 
         return ['project' => $project, 'currentStep' => $currentStep, 'stepProps' => $stepProps];

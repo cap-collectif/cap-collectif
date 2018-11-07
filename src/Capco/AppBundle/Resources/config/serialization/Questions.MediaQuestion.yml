@@ -1,4 +1,0 @@
-Capco\AppBundle\Entity\Questions\MediaQuestion:
-  attributes:
-    medias:
-      groups: [Questions, Proposals, Replies]
