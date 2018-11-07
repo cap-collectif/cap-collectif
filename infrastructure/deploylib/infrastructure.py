@@ -15,11 +15,11 @@ def build(use_cache='true'):
 
 
 @task(environments=['local', 'ci'])
-def up(force_recreate='false'):
+def up(force_recreate='false', no_cache='false'):
     "Ensure infrastructure is sync and running"
     ensure_vm_is_up()
     if env.build_at_up:
-        env.compose('build')
+        env.compose('build' + ('', '  --no-cache')[no_cache == 'true'])
     env.compose('up --remove-orphans -d' + ('', ' --force-recreate')[force_recreate == 'true'])
 
 

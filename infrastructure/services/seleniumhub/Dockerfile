@@ -1,1 +1,1 @@
-FROM selenium/hub:2.53.1-beryllium
+FROM selenium/hub:3.141.0-actinium

@@ -183,6 +183,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
           "_deferrableSelections": Array [],
           "_network": Object {
             "execute": [Function],
+            "executeWithEvents": [Function],
           },
           "_publishQueue": RelayPublishQueue {
             "_appliedOptimisticUpdates": Array [],

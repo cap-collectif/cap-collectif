@@ -1,1 +1,1 @@
-FROM selenium/node-chrome-debug:2.53.1-beryllium
+FROM selenium/node-chrome-debug:3.141.0-actinium

@@ -39,6 +39,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
             "_deferrableSelections": Array [],
             "_network": Object {
               "execute": [Function],
+              "executeWithEvents": [Function],
             },
             "_publishQueue": RelayPublishQueue {
               "_appliedOptimisticUpdates": Array [],

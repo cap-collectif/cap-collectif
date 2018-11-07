@@ -13,7 +13,7 @@ require('fancybox')($);
 // remove when Piechart is rendered by VotePiechart component everywhere
 require('./jsapi');
 require('./googleCharts');
-global.Modernizr = require('./modernizr');
+require('./modernizr');
 
 if (!Modernizr.intl) {
   require('./browserUpdate');

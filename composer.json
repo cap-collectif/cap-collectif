@@ -70,7 +70,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "symfony/symfony": "^3.4.6",
         "doctrine/doctrine-bundle": "^1.6",
         "twig/extensions": "~1.0",
@@ -202,5 +202,14 @@
         "symfony-bin-dir": "bin",
         "symfony-var-dir": "var",
         "symfony-web-dir": "web"
+    },
+    "replace": {
+        "symfony/polyfill-php54": "*",
+        "symfony/polyfill-php55": "*",
+        "symfony/polyfill-php56": "*",
+        "symfony/polyfill-php70": "*",
+        "symfony/polyfill-mbstring": "*",
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-apcu": "*"
     }
 }

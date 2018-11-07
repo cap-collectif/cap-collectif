@@ -35,7 +35,7 @@ class UsersController extends FOSRestController
         $anonymousComments = $this->get('capco.comment.repository')->getAnonymousCount();
 
         return [
-            'contributors' => $registeredContributorCount + $anonymousComments + $anonymousVoters,
+            'contributors' => $registeredContributorCount + $anonymousComments,
             'registeredContributors' => $registeredContributorCount,
             'anonymousComments' => $anonymousComments,
         ];
@@ -89,11 +89,9 @@ class UsersController extends FOSRestController
         if ($email) {
             $users = $this->container->get('capco.user.repository')->findBy(['email' => $email]);
         } else {
-            $users = $this->container->get('capco.user.repository')->getPublishedWith(
-                $userType,
-                $from,
-                $to
-            );
+            $users = $this->container
+                ->get('capco.user.repository')
+                ->getPublishedWith($userType, $from, $to);
         }
 
         return ['count' => \count($users), 'users' => $users];

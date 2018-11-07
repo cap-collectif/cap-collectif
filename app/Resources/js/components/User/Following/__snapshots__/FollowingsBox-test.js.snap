@@ -9,6 +9,7 @@ exports[`<FollowingsBox /> render 1`] = `
         "_deferrableSelections": Array [],
         "_network": Object {
           "execute": [Function],
+          "executeWithEvents": [Function],
         },
         "_publishQueue": RelayPublishQueue {
           "_appliedOptimisticUpdates": Array [],

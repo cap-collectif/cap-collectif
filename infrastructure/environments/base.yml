@@ -59,7 +59,8 @@ kibana:
     - '5601:5601'
 
 seleniumhub:
-  build: ../services/seleniumhub
+  build:
+    ../services/seleniumhub
     # https://github.com/SeleniumHQ/selenium/wiki/Grid2
     # GRID_TIMEOUT: 600 # (300 is default)
     # GRID_BROWSER_TIMEOUT: 300
@@ -78,11 +79,13 @@ chrome:
     SCREEN_WIDTH: 1920
     SCREEN_HEIGHT: 1080
     TZ: 'Europe/Paris'
+    HUB_HOST: seleniumhub
+    HUB_PORT: 4444
   volumes:
     - /dev/shm:/dev/shm
     - ../../:/var/www
   links:
-    - seleniumhub:hub
+    - seleniumhub:seleniumhub
     - application:capco.test
       # - /tmp
 #  shm_size: 1G

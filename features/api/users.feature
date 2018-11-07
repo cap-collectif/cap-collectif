@@ -127,8 +127,8 @@ Scenario: Anonymous API client wants to register with throwable email
   }
   """
 
-@security
-Scenario: Anonymous API client wants to register with additional data
+@security @database
+Scenario: Anonymous API client wants to register with unknown additional data
   Given feature "registration" is enabled
   When I send a POST request to "/api/users" with json:
   """
@@ -148,13 +148,13 @@ Scenario: Anonymous API client wants to register with additional data
     "code":400,
     "message": "Validation Failed",
     "errors": {
-      "errors": ["This form should not contain extra fields. {\"{{ extra_fields }}\":\"userType\\\", \\\"zipcode\"}"],
+      "errors": ["This form should not contain extra fields. {\"{{ extra_fields }}\":\"\\\"userType\\\", \\\"zipcode\\\"\"}"],
       "children":{
         "username":[],
         "email":[],
+        "captcha":[],
         "plainPassword":[],
         "consentExternalCommunication":[],
-        "captcha":[],
         "responses": []
       }
     }

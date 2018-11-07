@@ -354,8 +354,11 @@ class ApplicationContext extends UserContext
      * @param null|mixed $featureB
      * @param null|mixed $featureC
      */
-    public function activateFeatures(string $featureA, $featureB = null, $featureC = null)
-    {
+    public function activateFeatures(
+        string $featureA,
+        ?string $featureB = null,
+        ?string $featureC = null
+    ) {
         $this->getService(Manager::class)->activate($featureA);
         if ($featureB) {
             $this->getService(Manager::class)->activate($featureB);
