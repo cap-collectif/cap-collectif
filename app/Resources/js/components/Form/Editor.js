@@ -59,6 +59,7 @@ class Editor extends React.Component<Props> {
         selectLocalImage(quill);
       });
 
+      // See https://github.com/quilljs/quill/issues/2038 for accessibility
       quill.root.setAttribute('role', 'textbox');
       quill.root.setAttribute('aria-multiline', 'true');
 
