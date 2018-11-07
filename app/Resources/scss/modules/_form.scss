@@ -253,10 +253,6 @@ form {
 .editor {
     position: relative;
 
-    img {
-        max-width: 100%;
-    }
-
     .ql-toolbar, .ql-container {
         border: 1px solid $border-color;
     }
@@ -291,6 +287,10 @@ form {
 .ql-editor {
     padding: 0;
 
+    img {
+        max-width: 100%;
+    }
+
     span {
         &.ql-size-small {
             font-size: 12px;
@@ -305,24 +305,6 @@ form {
         }
     }
 }
-
-//p {
-//    &.ql-align-right {
-//        text-align: right;
-//    }
-//
-//    &.ql-align-center {
-//        text-align: center;
-//    }
-//
-//    &.ql-indent-1 {
-//        text-align: right;
-//    }
-//
-//    &.ql-indent-1 {
-//        text-align: center;
-//    }
-//}
 
 .cke_chrome {
     border: 1px solid $border-color !important;
@@ -421,10 +403,6 @@ form {
 
 #reply-form .control-label {
     font-size: 18px;
-}
-
-#reply-form img {
-    max-width: 100%;
 }
 
 /*
