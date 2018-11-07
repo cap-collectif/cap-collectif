@@ -4,11 +4,11 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Capco\AppBundle\Enum\QuestionnaireType;
+
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181030172019 extends AbstractMigration
+final class Version20181107102547 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -19,9 +19,7 @@ final class Version20181030172019 extends AbstractMigration
         );
 
         $this->addSql(
-            'ALTER TABLE questionnaire ADD type VARCHAR(255) NOT NULL DEFAULT "' .
-                QuestionnaireType::VOTING .
-                '"'
+            'ALTER TABLE questionnaire ADD type VARCHAR(255) DEFAULT \'VOTING\' NOT NULL'
         );
     }
 

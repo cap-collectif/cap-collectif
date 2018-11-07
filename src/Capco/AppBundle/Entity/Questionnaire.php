@@ -78,7 +78,7 @@ class Questionnaire implements DisplayableInBOInterface
 
     /**
      * @var string
-     * @ORM\Column(name="type", type="string", length=255, nullable=false)
+     * @ORM\Column(name="type", type="string", length=255, nullable=false, options={"default" = "VOTING"})
      */
     private $type = QuestionnaireType::VOTING;
 
