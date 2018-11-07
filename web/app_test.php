@@ -6,6 +6,12 @@ require __DIR__ . '/../vendor/autoload.php';
 Request::setTrustedProxies(
     [
         // ClouFlare IPs (https://www.cloudflare.com/ips/)
+        '2400:cb00::/32',
+        '2405:b500::/32',
+        '2606:4700::/32',
+        '2803:f800::/32',
+        '2c0f:f248::/32',
+        '2a06:98c0::/29',
         '103.21.244.0/22',
         '103.22.200.0/22',
         '103.31.4.0/22',
@@ -23,6 +29,7 @@ Request::setTrustedProxies(
         '172.17.0.0/16',
         '10.10.200.0/16',
         '127.0.0.1',
+        '::1',
     ],
     Request::HEADER_X_FORWARDED_ALL
 );

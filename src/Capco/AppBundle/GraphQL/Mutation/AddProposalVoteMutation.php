@@ -102,10 +102,8 @@ class AddProposalVoteMutation implements MutationInterface
         }
 
         // Check if user has reached limit of votes
-        if ($step->isNumberOfVotesLimitted()) {
-            if ($countUserVotes >= $step->getVotesLimit()) {
-                throw new UserError('You have reached the limit of votes.');
-            }
+        if ($step->isNumberOfVotesLimitted() && $countUserVotes >= $step->getVotesLimit()) {
+            throw new UserError('You have reached the limit of votes.');
         }
 
         $vote

@@ -34,14 +34,13 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * })
  * @CapcoAssert\HasAuthor
  */
-abstract class Comment
-    implements
-        Publishable,
-        Trashable,
-        Contribution,
-        VotableInterface,
-        HasAuthorInterface,
-        CommentableInterface
+abstract class Comment implements
+    Publishable,
+    Trashable,
+    Contribution,
+    VotableInterface,
+    HasAuthorInterface,
+    CommentableInterface
 {
     use VotableOkTrait;
     use PinnableTrait;
@@ -98,10 +97,8 @@ abstract class Comment
     protected $authorEmail;
 
     /**
-     * @var
-     *
      * @ORM\Column(name="author_ip", type="string", nullable=true)
-     * @Assert\Ip
+     * @Assert\Ip(version="all_public")
      */
     protected $authorIp;
 
@@ -355,11 +352,9 @@ abstract class Comment
 
     public function canContribute($user = null): bool
     {
-        return (
-            $this->isPublished() &&
+        return $this->isPublished() &&
             !$this->isTrashed() &&
-            $this->canContributeToRelatedObject($user)
-        );
+            $this->canContributeToRelatedObject($user);
     }
 
     public function canVote(): bool
