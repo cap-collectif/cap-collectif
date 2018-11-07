@@ -14,6 +14,8 @@ RUN apt-get update && \
         runit \
         wget \
         libicu-dev \
+        gnupg2 \
+        ca-certificates \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -70,13 +72,62 @@ COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
 COPY blackfire/blackfire-php.ini /etc/php/7.1/fpm/conf.d/92-blackfire-config.ini
 COPY blackfire/blackfire-php.ini /etc/php/7.1/cli/conf.d/92-blackfire-config.ini
 
+# RabbitMQ 3.6.15+ requires Erlang 19.3+ (and Stretch only has 19.2); https://www.rabbitmq.com/which-erlang.html
+# so we'll pull Erlang from Buster instead (not using Erlang Solutions since their multiarch support is extremely limited)
+RUN set -eux; \
+	sed 's/stretch/buster/g' /etc/apt/sources.list \
+		| tee /etc/apt/sources.list.d/buster.list; \
+	{ \
+		echo 'Package: *'; \
+		echo 'Pin: release n=buster*'; \
+		echo 'Pin-Priority: 1'; \
+		echo; \
+		echo 'Package: erlang*'; \
+		echo 'Pin: release n=buster*'; \
+		echo 'Pin-Priority: 999'; \
+		echo; \
+		echo 'Package: erlang*'; \
+		echo 'Pin: release n=stretch*'; \
+		echo 'Pin-Priority: -10'; \
+	} | tee /etc/apt/preferences.d/buster-erlang
+
+# install Erlang
+RUN set -eux; \
+	apt-get update; \
+	if apt-cache show erlang-base-hipe 2>/dev/null | grep -q 'Package: erlang-base-hipe'; then \
+		apt-get install -y --no-install-recommends \
+			erlang-base-hipe \
+		; \
+	fi; \
+	apt-get install -y --no-install-recommends \
+		erlang-asn1 \
+		erlang-crypto \
+		erlang-eldap \
+		erlang-inets \
+		erlang-mnesia \
+		erlang-nox \
+		erlang-os-mon \
+		erlang-public-key \
+		erlang-ssl \
+		erlang-xmerl \
+	; \
+	rm -rf /var/lib/apt/lists/*
+
 # Install rabbitmq
-RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
-    wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add - && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
-    rm -rf /var/lib/apt/lists/* && \
-    rabbitmq-plugins enable rabbitmq_management
+ENV RABBITMQ_VERSION 3.7.8
+ENV RABBITMQ_GITHUB_TAG v3.7.8
+ENV RABBITMQ_DEBIAN_VERSION 3.7.8-1
+RUN apt-get update; \
+	wget -O rabbitmq-server.deb.asc "https://github.com/rabbitmq/rabbitmq-server/releases/download/$RABBITMQ_GITHUB_TAG/rabbitmq-server_${RABBITMQ_DEBIAN_VERSION}_all.deb.asc"; \
+	wget -O rabbitmq-server.deb     "https://github.com/rabbitmq/rabbitmq-server/releases/download/$RABBITMQ_GITHUB_TAG/rabbitmq-server_${RABBITMQ_DEBIAN_VERSION}_all.deb"; \
+	export GNUPGHOME="$(mktemp -d)"; \
+	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$RABBITMQ_GPG_KEY"; \
+	gpg --batch --verify rabbitmq-server.deb.asc rabbitmq-server.deb; \
+	command -v gpgconf && gpgconf --kill all || :; \
+	rm -rf "$GNUPGHOME"; \
+	apt install -y --no-install-recommends ./rabbitmq-server.deb; \
+	dpkg -l | grep rabbitmq-server; \
+	rm -f rabbitmq-server.deb*
 
 # Install nginx, mysql client and redis client
 RUN apt-get update && \
