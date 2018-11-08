@@ -4,6 +4,7 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Capco\AppBundle\Enum\QuestionnaireType;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
