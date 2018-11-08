@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\VideoRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Video
+class Video implements DisplayableInBOInterface
 {
     use IdTrait;
 
@@ -308,5 +309,10 @@ class Video
     public function setColor($color)
     {
         $this->color = $color;
+    }
+
+    public function canDisplayInBo($user = null): bool
+    {
+        return true;
     }
 }
