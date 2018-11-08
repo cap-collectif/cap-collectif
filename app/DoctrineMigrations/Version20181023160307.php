@@ -21,8 +21,9 @@ final class Version20181023160307 extends AbstractMigration
 
         $this->addSql(
             'ALTER TABLE reply ADD is_draft TINYINT(1) NOT NULL DEFAULT "' .
-                QuestionnaireType::QUESTIONNAIRE
-        ) . '"';
+                QuestionnaireType::QUESTIONNAIRE .
+                '"'
+        );
     }
 
     public function down(Schema $schema): void

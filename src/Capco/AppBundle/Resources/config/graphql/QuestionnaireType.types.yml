@@ -1,11 +1,11 @@
 QuestionnaireType:
   type: enum
   config:
-    description: 'Available types'
+    description: 'Available questionnaire types.'
     values:
       QUESTIONNAIRE:
         value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireType::QUESTIONNAIRE")'
-        description: 'Draft are allowed'
+        description: 'Draft are allowed.'
       VOTING:
         value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireType::VOTING")'
-        description: 'Draft are not allowed'
+        description: 'Draft are not allowed.'
