@@ -26,6 +26,8 @@ export class ReplyModalButtons extends React.Component<Props, State> {
 
   render() {
     const { reply } = this.props;
+    console.log('********* REPLY');
+    console.log(reply);
     return (
       <span className="pull-left reply__buttons">
         {reply.viewerCanDelete && (

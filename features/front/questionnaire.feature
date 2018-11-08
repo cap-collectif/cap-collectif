@@ -95,7 +95,7 @@ Scenario: Logged in user wants to see the list of his replies
 
 ## Update
 
-@javascript
+@javascript @database
 Scenario: Logged in user wants to update a reply
   Given I am logged in as admin
   When I go to a questionnaire step
@@ -107,7 +107,7 @@ Scenario: Logged in user wants to update a reply
 
 ## Deletion
 
-@javascript @database 
+@javascript @database
 Scenario: Logged in user wants to remove a reply
   Given I am logged in as admin
   When I go to a questionnaire step

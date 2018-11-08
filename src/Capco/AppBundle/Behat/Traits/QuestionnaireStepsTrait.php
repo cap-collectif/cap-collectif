@@ -74,7 +74,7 @@ trait QuestionnaireStepsTrait
     {
         $this->fillField('CreateReplyForm-responses[0]', '');
         $this->selectOption(
-            'CreateReplyForm-responses[4]',
+            'CreateReplyForm-responses[3]',
             'Pas assez fort (Mon sonotone est en panne)'
         );
     }
@@ -88,8 +88,8 @@ trait QuestionnaireStepsTrait
             'CreateReplyForm-responses[0]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
-        $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice1');
-        $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice3');
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice3');
     }
 
     /**
@@ -156,9 +156,9 @@ trait QuestionnaireStepsTrait
     public function iShouldSeeMyReply()
     {
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
-        $userReplySelector = $this->navigationContext->getPage(
-            'questionnaire page'
-        )->getSelectorForUserReply();
+        $userReplySelector = $this->navigationContext
+            ->getPage('questionnaire page')
+            ->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
         $this->assertElementNotContainsText($userReplySelector, 'reply.private');
     }
@@ -169,9 +169,9 @@ trait QuestionnaireStepsTrait
     public function iShouldSeeMyAnonymousReply()
     {
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
-        $userReplySelector = $this->navigationContext->getPage(
-            'questionnaire page'
-        )->getSelectorForUserReply();
+        $userReplySelector = $this->navigationContext
+            ->getPage('questionnaire page')
+            ->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(1, $userReplySelector);
         $this->iWait(3);
         $this->assertElementContainsText($userReplySelector, 'reply.private');
@@ -182,9 +182,9 @@ trait QuestionnaireStepsTrait
      */
     public function iShouldNotSeeMyReplyAnymore()
     {
-        $userReplySelector = $this->navigationContext->getPage(
-            'questionnaire page'
-        )->getSelectorForUserReply();
+        $userReplySelector = $this->navigationContext
+            ->getPage('questionnaire page')
+            ->getSelectorForUserReply();
         $this->iShouldSeeNbElementOnPage(0, $userReplySelector);
     }
 
@@ -193,17 +193,17 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOneRankingChoiceRightArrow()
     {
-        $this->navigationContext->getPage(
-            'questionnaire page'
-        )->clickFirstRankingChoiceRightArrow();
+        $this->navigationContext
+            ->getPage('questionnaire page')
+            ->clickFirstRankingChoiceRightArrow();
         $this->iWait(1);
     }
 
     public function iClickOneRankingChoiceRightArrowUpdate()
     {
-        $this->navigationContext->getPage(
-            'questionnaire page'
-        )->clickFirstRankingChoiceRightArrowUpdate();
+        $this->navigationContext
+            ->getPage('questionnaire page')
+            ->clickFirstRankingChoiceRightArrowUpdate();
         $this->iWait(1);
     }
 
@@ -258,9 +258,9 @@ trait QuestionnaireStepsTrait
      */
     public function iShouldNotSeeTheDeleteReplyButton()
     {
-        $deleteButtonSelector = $this->navigationContext->getPage(
-            'questionnaire page'
-        )->getDeleteReplyButtonSelector();
+        $deleteButtonSelector = $this->navigationContext
+            ->getPage('questionnaire page')
+            ->getDeleteReplyButtonSelector();
         $this->assertElementNotOnPage($deleteButtonSelector);
     }
 
@@ -278,9 +278,9 @@ trait QuestionnaireStepsTrait
      */
     public function iShouldSeeMyFirstReply()
     {
-        $replyModalSelector = $this->navigationContext->getPage(
-            'questionnaire page'
-        )->getReplyModalSelector();
+        $replyModalSelector = $this->navigationContext
+            ->getPage('questionnaire page')
+            ->getReplyModalSelector();
         $this->assertElementOnPage($replyModalSelector);
         $this->assertElementContainsText($replyModalSelector, 'reply.show.link');
     }
@@ -298,9 +298,9 @@ trait QuestionnaireStepsTrait
                 'CreateReplyForm-responses[0]',
                 'Je pense que c\'est la ville parfaite pour organiser les JO'
             );
-            $this->checkOption('CreateReplyForm-responses[2]_choice-questionchoice1');
-            $this->checkOption('CreateReplyForm-responses[2]_choice-questionchoice2');
-            $this->checkOption('CreateReplyForm-responses[2]_choice-questionchoice3');
+            $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
+            $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice2');
+            $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice3');
 
             return;
         }
@@ -315,14 +315,11 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeElementOnPage('user reply modal', 'questionnaire page');
         $this->fillField(
             'UpdateReplyForm-reply2-responses[0]',
-            'En fait c\'est nul, je ne veux pas des JO à Paris'
-        );
-        $this->fillField(
-            'UpdateReplyForm-reply2-responses[0]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
-        $this->checkOption('UpdateReplyForm-reply2-responses[2]_choice-questionchoice1');
+        $this->checkOption('UpdateReplyForm-reply2-responses[1]_choice-questionchoice1');
 
+        $this->iClickOneRankingChoiceRightArrowUpdate();
         $this->iClickOneRankingChoiceRightArrowUpdate();
     }
 }

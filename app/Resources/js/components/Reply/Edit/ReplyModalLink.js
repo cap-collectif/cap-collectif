@@ -74,11 +74,13 @@ export class ReplyModalLink extends React.Component<Props, State> {
               onClick={() => this.showModal('edit')}>
               <FormattedMessage id="glodal.edit" />
             </Button>
-            <Button
-              bsStyle="danger reply__delete-btn mt-5"
-              onClick={() => this.showModal('delete')}>
-              <FormattedMessage id="glodal.delete" />
-            </Button>
+            {reply.viewerCanDelete && (
+              <Button
+                bsStyle="danger reply__delete-btn mt-5"
+                onClick={() => this.showModal('delete')}>
+                <FormattedMessage id="glodal.delete" />
+              </Button>
+            )}
           </div>
         </ListGroupItem>
         {/* $FlowFixMe $refType */}
@@ -107,6 +109,7 @@ export default createFragmentContainer(ReplyModalLink, {
       id
       private
       publicationStatus
+      viewerCanDelete
       ...UpdateReplyModal_reply
       ...DeleteReplyModal_reply
       ...UnpublishedLabel_publishable
