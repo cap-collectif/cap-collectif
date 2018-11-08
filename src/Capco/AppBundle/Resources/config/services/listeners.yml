@@ -65,8 +65,29 @@ services:
     tags:
       - { name: doctrine.event_listener, event: preFlush, method: preFlush }
 
-#  capco.synthesis.synthesis_listener:
+  #  capco.synthesis.synthesis_listener:
   Capco\AppBundle\EventListener\SynthesisLoggableListener:
     public: true
     calls:
-    - [setAnnotationReader, ['@annotation_reader']]
+      - [setAnnotationReader, ['@annotation_reader']]
+
+  capco.listener.empty_username:
+    public: true
+    class: Capco\AppBundle\EventListener\EmptyUsernameListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+  capco.listener.feature_toggle:
+    class: Capco\AppBundle\EventListener\FeatureToggleListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+  capco.listener.locale:
+    class: Capco\AppBundle\EventListener\LocaleListener
+    tags:
+      - {
+          name: kernel.event_listener,
+          event: kernel.request,
+          method: onKernelRequest,
+          priority: 15,
+        }
