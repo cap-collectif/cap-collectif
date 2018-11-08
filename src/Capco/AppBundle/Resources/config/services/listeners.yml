@@ -26,3 +26,14 @@ services:
   capco.form.transformer.html_purifier:
     class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
     arguments: ['@exercise_html_purifier.default']
+
+  capco.listener.moderation_token:
+    public: true
+    class: Capco\AppBundle\EventListener\ModerationTokenListener
+    tags:
+      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
+
+  capco.diff.subscriber:
+    class: Capco\AppBundle\EventListener\DiffSubscriber
+    tags:
+      - { name: doctrine.event_subscriber, connection: default }
