@@ -91,6 +91,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('bundles/sonatacore/vendor/bootstrap/js/carousel.js') }}"></script>
     <script type="text/javascript">
         $(window).on('load', function() {
             App.equalheight('.theme');

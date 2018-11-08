@@ -109,6 +109,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('bundles/sonatacore/vendor/bootstrap/js/dropdown.js') }}"></script>
     <script type="text/javascript">
         $(window).on('load', function() {
             App.equalheight('.event-js');

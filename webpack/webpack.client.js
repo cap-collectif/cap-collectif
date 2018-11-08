@@ -16,19 +16,8 @@ const devConf = {
     vendor: [
       path.join(webpackConfig.bowerDir, 'ckeditor/ckeditor.js'),
 
-      path.join(webpackConfig.bowerDir, 'bootstrap-sass/assets/javascripts/bootstrap/affix.js'),
       path.join(webpackConfig.bowerDir, 'bootstrap-sass/assets/javascripts/bootstrap/alert.js'),
-      path.join(webpackConfig.bowerDir, 'bootstrap-sass/assets/javascripts/bootstrap/button.js'),
-      path.join(webpackConfig.bowerDir, 'bootstrap-sass/assets/javascripts/bootstrap/carousel.js'),
-      path.join(webpackConfig.bowerDir, 'bootstrap-sass/assets/javascripts/bootstrap/collapse.js'),
-      path.join(webpackConfig.bowerDir, 'bootstrap-sass/assets/javascripts/bootstrap/modal.js'),
       path.join(webpackConfig.bowerDir, 'bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'),
-      path.join(webpackConfig.bowerDir, 'bootstrap-sass/assets/javascripts/bootstrap/popover.js'),
-      path.join(webpackConfig.bowerDir, 'bootstrap-sass/assets/javascripts/bootstrap/tab.js'),
-      path.join(
-        webpackConfig.bowerDir,
-        'bootstrap-sass/assets/javascripts/bootstrap/transition.js',
-      ),
 
       path.join(webpackConfig.bowerDir, 'es6-promise/promise.js'),
       path.join(webpackConfig.bowerDir, 'intl/Intl.js'),
