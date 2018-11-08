@@ -1,0 +1,28 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: false
+
+  Capco\AppBundle\Publishable\DoctrineListener:
+    public: true
+    tags:
+      - { name: doctrine.event_subscriber, connection: default }
+
+  Capco\AppBundle\EventListener\ProjectAccessDeniedExceptionListener:
+    public: true
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, priority: 250 }
+
+  Capco\AppBundle\GraphQL\EventListener\ErrorHandler:
+    autowire: true
+    tags:
+      - { name: kernel.event_listener, event: graphql.post_executor, method: onPostExecutor }
+
+  Overblog\GraphQLBundle\Error\ErrorHandler:
+    autowire: true
+    autoconfigure: true
+
+  capco.form.transformer.html_purifier:
+    class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
+    arguments: ['@exercise_html_purifier.default']

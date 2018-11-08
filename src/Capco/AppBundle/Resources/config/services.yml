@@ -1,4 +1,5 @@
 imports:
+  - { resource: services/listeners.yml }
   - { resource: services/normalizers.yml }
   - { resource: services/listeners.yml }
   - { resource: services/repositories.yml }
@@ -48,8 +49,7 @@ parameters:
   env(SYMFONY_USE_ASSETIC_CONTROLLER): true
   env(SYMFONY_FACEBOOK_APP_ID): ***REMOVED***
   env(SYMFONY_FACEBOOK_APP_SECRET): ***REMOVED***
-  env(SYMFONY_GOOGLE_APP_ID):
-    ***REMOVED***
+  env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
   env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
   env(SYMFONY_JWT_TOKEN_TTL): 86400
   env(SYMFONY_LANGUAGE_ANALYZER): french

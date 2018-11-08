@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "677189e65e9998fdbf1cfbc3cb4d8f6b",
+    "content-hash": "626b120a42f87d362d36d76886b859b0",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10776,7 +10776,11 @@
                     "**/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "files": [
+                    "src/Symfony/Component/VarDumper/Resources/functions/dump.php"
+                ]
+            },
             "license": [
                 "MIT"
             ],
