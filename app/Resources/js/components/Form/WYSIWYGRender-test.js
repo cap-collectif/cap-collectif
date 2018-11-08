@@ -6,11 +6,18 @@ import WYSIWYGRender from './WYSIWYGRender';
 
 const props = {
   value: '<div>Little test</div>',
+  className: 'myClass',
 };
 
 describe('<WYSIWYGRender />', () => {
-  it('should render a colored spot when drop is allowed and hovering', () => {
+  it('should render correctly', () => {
     const wrapper = shallow(<WYSIWYGRender {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly with tagName', () => {
+    const wrapper = shallow(<WYSIWYGRender {...props} />);
+    wrapper.setProps({ tagName: 'i' });
     expect(wrapper).toMatchSnapshot();
   });
 });

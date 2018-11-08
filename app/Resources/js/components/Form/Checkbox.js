@@ -145,6 +145,7 @@ class Checkbox extends React.Component<Props, State> {
                   <WYSIWYGRender
                     className="mb-20 pl-20 choice-description"
                     value={choice.description}
+                    tagName="i"
                   />
                 )}
               </div>

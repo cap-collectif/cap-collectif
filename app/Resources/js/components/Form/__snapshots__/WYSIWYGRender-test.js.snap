@@ -1,12 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<WYSIWYGRender /> should render a colored spot when drop is allowed and hovering 1`] = `
+exports[`<WYSIWYGRender /> should render correctly 1`] = `
 <div
-  className=" ql-editor"
+  className="myClass ql-editor"
   dangerouslySetInnerHTML={
     Object {
       "__html": "<div>Little test</div>",
     }
   }
 />
+`;
+
+exports[`<WYSIWYGRender /> should render correctly with tagName 1`] = `
+<div
+  className="myClass ql-editor"
+>
+  <i
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<div>Little test</div>",
+      }
+    }
+  />
+</div>
 `;

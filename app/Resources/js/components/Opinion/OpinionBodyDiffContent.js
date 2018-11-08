@@ -58,9 +58,9 @@ class OpinionBodyDiffContent extends React.Component<Props> {
           }
           return (
             <p key={index}>
-              <WYSIWYGRender value={part.before} />
+              <WYSIWYGRender value={part.before} tagName="span" />
               <OpinionBodyDiffModal link={part.link} modal={part.modal} />
-              <WYSIWYGRender value={part.after} />
+              <WYSIWYGRender value={part.after} tagName="span" />
             </p>
           );
         })}
