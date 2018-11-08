@@ -37,3 +37,36 @@ services:
     class: Capco\AppBundle\EventListener\DiffSubscriber
     tags:
       - { name: doctrine.event_subscriber, connection: default }
+
+  capco.doctrine.subscriber.dynamic_relation:
+    class: Capco\AppBundle\EventListener\DynamicRelationSubscriber
+    tags:
+      - { name: doctrine.event_subscriber, event: loadClassMetadata }
+    arguments: ['%traits%']
+
+  capco.listener.paris_authentication_exception:
+    class: Capco\AppBundle\EventListener\ParisAuthenticationExceptionListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }
+
+  capco.listener.reference:
+    public: true
+    class: Capco\AppBundle\EventListener\ReferenceEventListener
+    tags:
+      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
+
+  capco.listener.shield:
+    class: Capco\AppBundle\EventListener\ShieldListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+  capco.listener.soft_delete:
+    class: Capco\AppBundle\EventListener\SoftDeleteEventListener
+    tags:
+      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
+
+#  capco.synthesis.synthesis_listener:
+  Capco\AppBundle\EventListener\SynthesisLoggableListener:
+    public: true
+    calls:
+    - [setAnnotationReader, ['@annotation_reader']]
