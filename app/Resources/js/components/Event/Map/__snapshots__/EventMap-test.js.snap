@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventMap /> renders correcty 1`] = `
+<Connect(LeafletMap)
+  defaultMapOptions={
+    Object {
+      "zoom": 12,
+    }
+  }
+  markers={
+    Object {
+      "$refType": null,
+      "edges": Array [
+        Object {
+          "node": Object {
+            "address": "Ici et ailleur",
+            "endAt": "2019-09-27T03:00:00+01:00",
+            "id": "event1",
+            "lat": 47.12345789,
+            "lng": 1.23456789,
+            "startAt": "2018-09-27T03:00:00+01:00",
+            "title": "Evenement des gens perdu",
+            "url": "http://perdu.com",
+          },
+        },
+        Object {
+          "node": Object {
+            "address": "Nul part et ailleur",
+            "endAt": "2019-10-27T03:00:00+01:00",
+            "id": "event2",
+            "lat": 47.1235444789,
+            "lng": 1.23477789,
+            "startAt": "2018-10-07T03:00:00+01:00",
+            "title": "Evenement des gens pas perdu",
+            "url": "http://perdu.com",
+          },
+        },
+      ],
+      "totalCount": 2,
+    }
+  }
+/>
+`;

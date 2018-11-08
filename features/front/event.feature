@@ -1,27 +1,30 @@
+#TODO tests to display/hide map, test on pagination
 @events
 Feature: Events
 
 Background:
   Given feature "calendar" is enabled
 
-@parallel-scenario
+@parallel-scenario @javascript
 Scenario: Anonymous wants to list events
   Given I visited "events page"
-  Then I should see 8 ".event" elements
+  And I wait ".event" to appear on current page
+  Then I should see 10 ".event" elements
 
-@parallel-scenario
+@javascript
 Scenario: Anonymous wants to list archived events
   Given I visited "events page"
-  And I should see 'event.index.appendices.archived.number {"%count%":"2"}'
+  And I should see 'event.index.appendices.archived.number {"%count%":3}'
   And I follow "event.see_archived"
-  Then I should see 2 ".event" elements
+  Then I should see 3 ".event" elements
 
 @javascript
 Scenario: Events can be filtered by projects
-  Given I visited "events page"
-  And I select "Croissance, innovation, disruption" from "event_search_project"
-  And I wait 2 seconds
-  Then I should see 2 ".event" elements
+  Given feature "projects_form" is enabled
+  And I visited "events page"
+  And I click the "#event-button-filter" element
+  And I select "Croissance, innovation, disruption" from react "#project"
+  Then I should see 3 ".event" elements
   And I should see "Event with registrations"
   # And I should see "Event without registrations"
 
@@ -32,16 +35,17 @@ Scenario: Archived events can be filtered by projects
   And I select "Croissance, innovation, disruption" from "event_search_project"
   And I wait 2 seconds
   Then I should see 1 ".event" elements
-  And I should see "PHPTour2014"
+  And I should see "evenementPasseSansDateDeFin"
   And I should not see "ParisWeb2014"
 
 @javascript
 Scenario: Events can be filtered by theme
   Given feature "themes" is enabled
   And I visited "events page"
-  And I select "Justice" from "event_search_theme"
+  And I click the "#event-button-filter" element
+  And I select "Justice" from react "#theme"
   And I wait 1 seconds
-  Then I should see 1 ".event" elements
+  Then I should see 2 ".event" elements
   And I should see "Event with registrations"
   And I should not see "ParisWeb2015"
 
@@ -53,15 +57,14 @@ Scenario: Archived events can be filtered by theme
   And I select "Justice" from "event_search_theme"
   And I wait 1 seconds
   Then I should see 1 ".event" elements
-  And I should see "PHPTour2014"
-  And I should not see "ParisWeb2014"
+  And I should see "evenementPasseSansDateDeFin"
+  And I should not see "PHPTourDuFuture"
 
 @javascript
 Scenario: Events can be filtered by title
   Given I visited "events page"
   When I fill in the following:
-    | event_search_term | without |
-  And I click the ".filter__search .btn" element
+    | event-search-input | without |
   And I wait 1 seconds
   Then I should see 1 ".event" elements
   And I should see "Event without registrations"
@@ -77,7 +80,7 @@ Scenario: Archived events can be filtered by title
   And I wait 1 seconds
   Then I should see 1 ".event" elements
   And I should see "ParisWeb2014"
-  And I should not see "PHPTour2014"
+  And I should not see "evenementPasseSansDateDeFin"
 
 @database @javascript
 Scenario: Anonymous wants to comment an event

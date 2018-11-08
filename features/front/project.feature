@@ -97,7 +97,7 @@ Scenario: Events menu for project should display correct number of events
     | stepSlug    | collecte-des-avis                |
   And I follow "Présentation"
   And I follow "project-events"
-  And I should see 3 ".event" elements
+  And I should see 4 ".event" elements
 
 @javascript
 Scenario: Posts menu for project should display correct number of posts

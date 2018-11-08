@@ -4,11 +4,19 @@ import { intlShape, injectIntl } from 'react-intl';
 import L from 'leaflet';
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min';
 
-export class LocateControl extends MapControl {
+type Props = {
+  position: ?string,
+};
+
+export class LocateControl extends MapControl<Props> {
+  static defaultProps = {
+    position: 'topleft',
+  };
+
   componentWillMount() {
-    const { intl } = this.props;
+    const { intl, position } = this.props;
     this.leafletElement = L.control.locate({
-      position: 'topleft',
+      position,
       flyTo: true,
       icon: 'cap-map-target-1',
       strings: {

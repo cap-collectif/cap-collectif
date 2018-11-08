@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventPreview /> renders correctly and highlighted 1`] = `
+<Fragment>
+  <div
+    className="event block  block--bordered highlighted-comment"
+  >
+    <div
+      className="col-md-2 col-sm-2 hidden-xs"
+    >
+      <DateIcon
+        startAt="2018-09-27T03:00:00+01:00"
+      />
+    </div>
+    <div
+      className="col-md-10 col-sm-10 col-xs-12 event__body box event-js"
+    >
+      <h3
+        className="event__title"
+      >
+        <a
+          href="http://impossible.com"
+          title="Un super evenement"
+        >
+          Un super evenement
+        </a>
+      </h3>
+      <p />
+      <p
+        className="excerpt"
+      >
+        <i
+          className="cap-calendar-1 mr-10"
+        />
+        <DatesInterval
+          endAt="2019-09-27T03:00:00+01:00"
+          fullDay={true}
+          startAt="2018-09-27T03:00:00+01:00"
+        />
+      </p>
+      <p
+        className="excerpt"
+      >
+        <div>
+          <i
+            className="cap-marker-1 mr-10"
+          />
+           
+          21 rue george 5, 75012 Paris
+        </div>
+      </p>
+    </div>
+  </div>
+</Fragment>
+`;
+
+exports[`<EventPreview /> renders correctly and not highlighted 1`] = `
+<Fragment>
+  <div
+    className="event block  block--bordered "
+  >
+    <div
+      className="col-md-2 col-sm-2 hidden-xs"
+    >
+      <DateIcon
+        startAt="2018-09-27T03:00:00+01:00"
+      />
+    </div>
+    <div
+      className="col-md-10 col-sm-10 col-xs-12 event__body box event-js"
+    >
+      <h3
+        className="event__title"
+      >
+        <a
+          href="http://impossible.com"
+          title="Un super evenement"
+        >
+          Un super evenement
+        </a>
+      </h3>
+      <p />
+      <p
+        className="excerpt"
+      >
+        <i
+          className="cap-calendar-1 mr-10"
+        />
+        <DatesInterval
+          endAt="2019-09-27T03:00:00+01:00"
+          fullDay={true}
+          startAt="2018-09-27T03:00:00+01:00"
+        />
+      </p>
+      <p
+        className="excerpt"
+      >
+        <div>
+          <i
+            className="cap-marker-1 mr-10"
+          />
+           
+          21 rue george 5, 75012 Paris
+        </div>
+      </p>
+    </div>
+  </div>
+</Fragment>
+`;

@@ -24,6 +24,18 @@ final class InternalEventType extends ObjectType implements GeneratedTypeInterfa
             'description' => 'An event.',
             'fields' => function () use ($globalVariable) {
                 return [
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'comments' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CommentConnection')),
                     'args' => [
@@ -131,18 +143,6 @@ final class InternalEventType extends ObjectType implements GeneratedTypeInterfa
                     ],
                     'resolve' => null,
                     'description' => 'Identifies the body of the event.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -270,6 +270,18 @@ final class InternalEventType extends ObjectType implements GeneratedTypeInterfa
                     'public' => null,
                     'access' => null,
                 ],
+                'fullAddress' => [
+                    'type' => Type::string(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'zipCode' => [
                     'type' => Type::string(),
                     'args' => [
@@ -324,6 +336,20 @@ final class InternalEventType extends ObjectType implements GeneratedTypeInterfa
                     ],
                     'resolve' => null,
                     'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'url' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventUrlResolver", array(0 => $value)]);
+                    },
+                    'description' => 'The url of the event',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

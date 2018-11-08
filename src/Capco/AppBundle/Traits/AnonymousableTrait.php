@@ -11,7 +11,7 @@ trait AnonymousableTrait
      * @var
      *
      * @ORM\Column(name="ip_address", type="string", nullable=true)
-     * @Assert\Ip(version="all_public")
+     * @Assert\Ip(version="all")
      */
     protected $ipAddress;
     /**

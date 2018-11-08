@@ -6,11 +6,16 @@ import config from '../../../config';
 
 type Props = {
   intl: IntlShape,
+  messageSearch: ?string
 };
 
 export class LeafletSearch extends MapControl<Props> {
+  static defaultProps = {
+    messageSearch: 'search_placeholder',
+  };
+
   createLeafletElement() {
-    const { intl } = this.props;
+    const { intl, messageSearch } = this.props;
 
     const googleProvider = new GoogleProvider({
       params: {
@@ -28,7 +33,7 @@ export class LeafletSearch extends MapControl<Props> {
       autoClose: false,
       keepResult: false,
       searchLabel: intl.formatMessage({
-        id: 'search_placeholder',
+        id: messageSearch,
       }),
       retainZoomLevel: false,
       animateZoom: true,

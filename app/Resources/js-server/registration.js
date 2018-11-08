@@ -45,6 +45,7 @@ import ProjectRestrictedAccessAlertApp from '../js/startup/ProjectRestrictedAcce
 import ProjectRestrictedAccessApp from '../js/startup/ProjectRestrictedAccessApp';
 import ArgumentListApp from '../js/startup/ArgumentListApp';
 import VoteListApp from '../js/startup/VoteListApp';
+import EventApp from '../js/startup/EventApp';
 
 const emptyFunction = () => {};
 
@@ -100,4 +101,5 @@ ReactOnRails.register({
   QuestionnaireCreateButtonApp,
   ArgumentListApp,
   VoteListApp,
+  EventApp,
 });

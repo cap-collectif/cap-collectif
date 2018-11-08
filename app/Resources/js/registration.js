@@ -57,6 +57,7 @@ import ProjectRestrictedAccessApp from './startup/ProjectRestrictedAccessApp';
 import QuestionnaireCreateButtonApp from './startup/QuestionnaireCreateButtonApp';
 import ArgumentListApp from './startup/ArgumentListApp';
 import VoteListApp from './startup/VoteListApp';
+import EventApp from './startup/EventApp';
 
 import appStore from './stores/AppStore';
 
@@ -131,4 +132,5 @@ ReactOnRails.register({
   ProjectRestrictedAccessApp,
   ArgumentListApp,
   VoteListApp,
+  EventApp
 });

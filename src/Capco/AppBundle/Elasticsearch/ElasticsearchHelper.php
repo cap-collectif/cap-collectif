@@ -5,12 +5,12 @@ namespace Capco\AppBundle\Elasticsearch;
 use Elastica\Query;
 use Symfony\Component\Yaml\Dumper;
 
-class ElasticsearchHelper
+final class ElasticsearchHelper
 {
     /**
      * return executed ES query as json or yaml
      */
-    public function debugQuery(Query $query, bool $asYaml = false): ?string
+    public static function debugQuery(Query $query, bool $asYaml = false): ?string
     {
         $debug = ['query' => $query->getQuery()->toArray()];
 

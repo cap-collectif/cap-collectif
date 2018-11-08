@@ -3,7 +3,7 @@ import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
-import type { GlobalState, Dispatch } from '../../../types';
+import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import ProposalListSearch from './ProposalListSearch';
 import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
@@ -20,7 +20,7 @@ type Props = {
   orderByComments?: boolean,
   orderByCost?: boolean,
   defaultSort?: string,
-  features: Object,
+  features: FeatureToggles,
   showThemes: boolean,
   filters: Object,
   dispatch: Dispatch,

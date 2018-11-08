@@ -14,6 +14,7 @@ import {
 import { reducer as opinionReducer } from '../redux/modules/opinion';
 import { reducer as userReducer } from '../redux/modules/user';
 import { reducer as defaultReducer } from '../redux/modules/default';
+import { reducer as eventReducer } from '../redux/modules/event';
 import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
 import type { Store } from '../types';
 
@@ -72,6 +73,7 @@ export default function configureStore(initialState: Object): Store {
     default: defaultReducer,
     proposal: proposalReducer,
     project: projectReducer,
+    event: eventReducer,
     report: reportReducer,
     user: userReducer,
     opinion: opinionReducer,

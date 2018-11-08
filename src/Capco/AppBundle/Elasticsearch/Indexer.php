@@ -128,7 +128,6 @@ class Indexer
         if (!$object instanceof IndexableInterface) {
             return;
         }
-
         if ($object->isIndexable()) {
             $document = $this->buildDocument($object);
             $this->addToBulk($document);
@@ -208,6 +207,7 @@ class Indexer
     {
         $context = SerializationContext::create();
         $context->setGroups($object::getElasticsearchSerializationGroups());
+        $context->setSerializeNull(true);
         $json = [];
         try {
             $json = $this->serializer->serialize($object, 'json', $context);

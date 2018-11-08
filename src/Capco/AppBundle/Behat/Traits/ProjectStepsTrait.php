@@ -47,9 +47,9 @@ trait ProjectStepsTrait
      */
     public function iShouldSeeThemeStats()
     {
-        $selector = $this->navigationContext->getPage(
-            'project stats page'
-        )->getThemeStatsItemsSelector();
+        $selector = $this->navigationContext
+            ->getPage('project stats page')
+            ->getThemeStatsItemsSelector();
         $this->assertNumElements(4, $selector);
     }
 
@@ -58,9 +58,9 @@ trait ProjectStepsTrait
      */
     public function iShouldSeeDistrictsStats()
     {
-        $selector = $this->navigationContext->getPage(
-            'project stats page'
-        )->getDistrictStatsItemsSelector();
+        $selector = $this->navigationContext
+            ->getPage('project stats page')
+            ->getDistrictStatsItemsSelector();
         $this->assertNumElements(10, $selector);
     }
 
@@ -69,9 +69,9 @@ trait ProjectStepsTrait
      */
     public function iShouldSeeUserTypeStats()
     {
-        $selector = $this->navigationContext->getPage(
-            'project stats page'
-        )->getUserTypeStatsItemsSelector();
+        $selector = $this->navigationContext
+            ->getPage('project stats page')
+            ->getUserTypeStatsItemsSelector();
         $this->assertNumElements(4, $selector);
     }
 
@@ -80,9 +80,9 @@ trait ProjectStepsTrait
      */
     public function iShouldSeeCostsStats()
     {
-        $selector = $this->navigationContext->getPage(
-            'project stats page'
-        )->getCostsStatsItemsSelector();
+        $selector = $this->navigationContext
+            ->getPage('project stats page')
+            ->getCostsStatsItemsSelector();
         $this->assertNumElements(3, $selector);
     }
 
@@ -91,9 +91,9 @@ trait ProjectStepsTrait
      */
     public function iShouldSeeVotesStats()
     {
-        $selector = $this->navigationContext->getPage(
-            'project stats page'
-        )->getVotesStatsItemsSelector();
+        $selector = $this->navigationContext
+            ->getPage('project stats page')
+            ->getVotesStatsItemsSelector();
         $this->assertNumElements(3, $selector);
     }
 
@@ -176,10 +176,10 @@ trait ProjectStepsTrait
      */
     public function iShouldSeeAllDistrictsStats()
     {
-        $selector = $this->navigationContext->getPage(
-            'project stats page'
-        )->getDistrictStatsModalItemsSelector();
-        $this->assertNumElements(13, $selector);
+        $selector = $this->navigationContext
+            ->getPage('project stats page')
+            ->getDistrictStatsModalItemsSelector();
+        $this->assertNumElements(16, $selector);
     }
 
     /**
@@ -207,9 +207,9 @@ trait ProjectStepsTrait
      */
     public function theVotesStatsShouldBeFilteredByCategory($number)
     {
-        $selector = $this->navigationContext->getPage(
-            'project stats page'
-        )->getVotesStatsItemsSelector();
+        $selector = $this->navigationContext
+            ->getPage('project stats page')
+            ->getVotesStatsItemsSelector();
         $this->assertNumElements($number, $selector);
     }
 

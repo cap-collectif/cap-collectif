@@ -12,6 +12,10 @@ services:
     class: Capco\AppBundle\Search\GlobalSearch
     public: true
 
+  Capco\AppBundle\Search\EventSearch:
+    class: Capco\AppBundle\Search\EventSearch
+    public: true
+
   capco.search.user_search:
     class: Capco\AppBundle\Search\UserSearch
     public: true

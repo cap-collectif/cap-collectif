@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
-import { Row } from 'react-bootstrap';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import {connect, type MapStateToProps} from 'react-redux';
+import {Row} from 'react-bootstrap';
+import {QueryRenderer, graphql, type ReadyState} from 'react-relay';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import UnpublishedProposalListView from '../Proposal/List/UnpublishedProposalListView';
 import DraftProposalList from '../Proposal/List/DraftProposalList';
@@ -10,9 +10,9 @@ import Loader from '../Ui/Loader';
 import ProposalStepPageHeader from './ProposalStepPageHeader';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
 import LeafletMap from '../Proposal/Map/LeafletMap';
-import environment, { graphqlError } from '../../createRelayEnvironment';
-import ProposalListView, { queryVariables } from '../Proposal/List/ProposalListView';
-import type { State } from '../../types';
+import environment, {graphqlError} from '../../createRelayEnvironment';
+import ProposalListView, {queryVariables} from '../Proposal/List/ProposalListView';
+import type {FeatureToggles, State} from '../../types';
 import type {
   ProposalStepPageQueryResponse,
   ProposalStepPageQueryVariables,
@@ -30,6 +30,7 @@ type Props = {
   categories: Array<Object>,
   isAuthenticated: boolean,
   selectedViewByStep: string,
+  features: FeatureToggles,
 };
 
 export class ProposalStepPage extends React.Component<Props> {
@@ -51,13 +52,14 @@ export class ProposalStepPage extends React.Component<Props> {
       defaultSort,
       isAuthenticated,
       selectedViewByStep,
+      features,
     } = this.props;
 
     let geoJsons = [];
     try {
       geoJsons = form.districts
         .filter(d => d.geojson && d.displayedOnMap)
-        .map(d => ({ district: JSON.parse(d.geojson), style: d.geojsonStyle }));
+        .map(d => ({district: JSON.parse(d.geojson), style: d.geojsonStyle}));
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error("Can't parse your geojsons !", e);
@@ -65,7 +67,7 @@ export class ProposalStepPage extends React.Component<Props> {
 
     return (
       <div className="proposal__step-page">
-        <StepPageHeader step={step} />
+        <StepPageHeader step={step}/>
         <QueryRenderer
           environment={environment}
           query={graphql`
@@ -115,7 +117,7 @@ export class ProposalStepPage extends React.Component<Props> {
               ...this.initialRenderVars,
             }: ProposalStepPageQueryVariables)
           }
-          render={({ error, props }: { props: ?ProposalStepPageQueryResponse } & ReadyState) => {
+          render={({error, props}: { props: ?ProposalStepPageQueryResponse } & ReadyState) => {
             if (error) {
               return graphqlError;
             }
@@ -127,14 +129,14 @@ export class ProposalStepPage extends React.Component<Props> {
               return (
                 <div id="proposal__step-page-rendered">
                   {isAuthenticated &&
-                    // $FlowFixMe
-                    props.step.kind === 'collect' && <DraftProposalList step={props.step} />}
+                  // $FlowFixMe
+                  props.step.kind === 'collect' && <DraftProposalList step={props.step}/>}
                   {isAuthenticated && (
                     // $FlowFixMe
-                    <UnpublishedProposalListView step={props.step} viewer={props.viewer} />
+                    <UnpublishedProposalListView step={props.step} viewer={props.viewer}/>
                   )}
                   {/* $FlowFixMe */}
-                  <ProposalStepPageHeader step={props.step} />
+                  <ProposalStepPageHeader step={props.step}/>
                   <ProposalListFilters
                     statuses={statuses}
                     categories={categories}
@@ -146,16 +148,18 @@ export class ProposalStepPage extends React.Component<Props> {
                     showThemes={form.usingThemes}
                     showDistrictFilter={form.usingDistrict}
                     showCategoriesFilter={form.usingCategories}
-                    showMapButton={form.usingAddress && !props.step.private}
+                    showMapButton={form.usingAddress && !props.step.private && features.display_map}
                   />
-                  <LeafletMap
-                    geoJsons={geoJsons}
-                    defaultMapOptions={{
-                      center: { lat: form.latMap, lng: form.lngMap },
-                      zoom: form.zoomMap,
-                    }}
-                    visible={selectedViewByStep === 'map' && !props.step.private}
-                  />
+                  {features.display_map ?
+                    <LeafletMap
+                      geoJsons={geoJsons}
+                      defaultMapOptions={{
+                        center: {lat: form.latMap, lng: form.lngMap},
+                        zoom: form.zoomMap,
+                      }}
+                      visible={selectedViewByStep === 'map' && !props.step.private}
+                    /> : null
+                  }
                   {/* $FlowFixMe */}
                   <ProposalListView
                     step={props.step}
@@ -168,7 +172,7 @@ export class ProposalStepPage extends React.Component<Props> {
             }
             return (
               <Row>
-                <Loader />
+                <Loader/>
               </Row>
             );
           }}
@@ -188,5 +192,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) 
     state.project.currentProjectById &&
     state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],
   selectedViewByStep: state.proposal.selectedViewByStep || 'mosaic',
+  features: state.default.features,
 });
 export default connect(mapStateToProps)(ProposalStepPage);

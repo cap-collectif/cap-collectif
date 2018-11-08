@@ -145,3 +145,7 @@ div.geosearch div.results > :hover {
     -moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
     -o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
     transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in; }
+
+.popup-hidden {
+    display: none;
+}

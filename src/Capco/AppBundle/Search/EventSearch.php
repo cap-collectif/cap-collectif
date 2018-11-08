@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -9,6 +10,7 @@ use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
 use Capco\AppBundle\Entity\Event;
+use Psr\Log\LoggerInterface;
 
 class EventSearch extends Search
 {
@@ -52,14 +54,35 @@ class EventSearch extends Search
             'phrase_prefix'
         );
 
+        if (isset($providedFilters['isFuture'])) {
+            switch ($providedFilters['isFuture']) {
+                // PASSED only
+                case self::OLD:
+                    $dateBoolQuery = new Query\BoolQuery();
+                    $endDateIsNullQuery = new Query\BoolQuery();
+                    $dateBoolQuery->addShould(new Query\Range('endAt', ['lt' => 'now/d']));
+                    $endDateIsNullQuery->addMustNot(new Query\Exists('endAt'));
+                    $dateBoolQuery->addShould($endDateIsNullQuery);
+                    $boolQuery->addMust($dateBoolQuery);
+                    $boolQuery->addMust(new Query\Range('startAt', ['lt' => 'now/d']));
+                    break;
+                // FUTURE and current
+                case self::LAST:
+                    $dateBoolQuery = new Query\BoolQuery();
+                    $dateBoolQuery->addShould(new Query\Range('startAt', ['gte' => 'now/d']));
+                    $dateBoolQuery->addShould(new Query\Range('endAt', ['gte' => 'now/d']));
+                    $boolQuery->addMust($dateBoolQuery);
+                    break;
+                // FUTURE and PASSED
+                default:
+                    break;
+            }
+        }
+
         $filters = $this->getFilters($providedFilters);
 
         foreach ($filters as $key => $value) {
-            if ('endAt' == $key || 'startAt' == $key) {
-                $boolQuery->addMust(new Query\Range($key, $value));
-            } else {
-                $boolQuery->addMust(new Term([$key => ['value' => $value]]));
-            }
+            $boolQuery->addMust(new Term([$key => ['value' => $value]]));
         }
         $boolQuery->addMust(new Exists('id'));
 
@@ -77,6 +100,7 @@ class EventSearch extends Search
             ->setFrom($offset)
             ->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
+
         $events = $this->getHydratedResults(
             array_map(function (Result $result) {
                 return $result->getData()['id'];
@@ -132,24 +156,7 @@ class EventSearch extends Search
     private function getFilters(array $providedFilters): array
     {
         $filters = [];
-        $now = "now/d";
-        if (isset($providedFilters['isFuture'])) {
-            switch ($providedFilters['isFuture']) {
-                // PASSED only
-                case self::OLD:
-                    $filters['endAt'] = ['lt' => $now];
-                    $filters['startAt'] = ['lt' => $now];
-                    break;
-                // FUTURE and current
-                case self::LAST:
-                    $filters['endAt'] = ['gte' => $now];
-                    $filters['startAt'] = ['lte' => $now];
-                    break;
-                // FUTURE and PASSED
-                default:
-                    break;
-            }
-        }
+
         if (isset($providedFilters['themes'])) {
             $filters['themes.id'] = $providedFilters['themes'];
         }

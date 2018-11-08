@@ -98,7 +98,7 @@ abstract class Comment implements
 
     /**
      * @ORM\Column(name="author_ip", type="string", nullable=true)
-     * @Assert\Ip(version="all_public")
+     * @Assert\Ip(version="all")
      */
     protected $authorIp;
 

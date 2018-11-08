@@ -23,8 +23,14 @@ Capco\AppBundle\Entity\Event:
     themes: ['@theme1', '@theme2']
   event2:
     id: event2
-    title: PHPTour2014
+    title: PHPTourDuFuture
     isEnabled: true
+    lat: 48.858243
+    lng: 2.294515
+    address: Tour Eiffel
+    zipCode: 75007
+    city: Paris
+
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
       <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
@@ -34,18 +40,21 @@ Capco\AppBundle\Entity\Event:
          <h2>Pulvinar odio volutpat</h2>
          <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
             Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
-    startAt: <dateTimeBetween('-30 days', '-10 days')>
-    endAt: <dateTimeBetween('-9 days', 'now')>
+    startAt: <dateTimeBetween('now', '+10 days')>
+    endAt: <dateTimeBetween('+12 days', '+30 days')>
     Author: '@user<numberBetween(1, 5)>'
-    address: 11 Avenue George 5
-    city: Paris
     link: http://www.phptour2014.fr
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
   event3:
     id: event3
-    title: Event without registrations
+    title: GrenobleWeb2015
     isEnabled: true
+    lat: 45.178658
+    lng: 5.725499
+    address: Optique Moreau, 48 Rue de Stalingrad
+    city: Grenoble
+    zipCode: 38000
     body: |
       <p>Idque Caesaéàris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
       <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
@@ -58,8 +67,6 @@ Capco\AppBundle\Entity\Event:
     startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
     Author: '@user<numberBetween(1, 5)>'
-    address: 457 Rue de Picardie
-    city: Bordeaux
     media: '@MediaProject3'
     registrationEnable: true
     projects: ['@p1']
@@ -67,6 +74,8 @@ Capco\AppBundle\Entity\Event:
     id: event4
     title: EventOnOneDay
     isEnabled: true
+    lat: 45.747947
+    lng: 4.838041
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
       <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
@@ -84,6 +93,11 @@ Capco\AppBundle\Entity\Event:
   event5:
     id: event5
     title: ParisWeb2014
+    lat: 45.748041
+    lng: 4.840284
+    address: 101 rue d'Angers
+    city: Lyon
+    zipCode: 69007
     isEnabled: true
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
@@ -100,7 +114,12 @@ Capco\AppBundle\Entity\Event:
     link: http://www.parisweb2014.fr
   event6:
     id: event6
-    title: ParisWeb2015
+    title: Event without registrations
+    lat: 45.781327
+    lng: 4.830676
+    address: 103 Grande Rue de la Croix-Rousse
+    zipCode: 69004
+    city: Lyon
     isEnabled: true
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
@@ -140,3 +159,53 @@ Capco\AppBundle\Entity\Event:
     endAt: <dateTimeBetween('+12 days', '+30 days')>
     Author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
+  event12:
+    id: evenementSansDateDeFin
+    title: EvenementPresentSansDateDeFin
+    isEnabled: true
+    body: |
+      <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+      <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+         Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+         Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+         Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+         <h2>Pulvinar odio volutpat</h2>
+         <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+            Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+    startAt: <dateTime('now')>
+    Author: '@user<numberBetween(1, 5)>'
+    link: http://www.lavie.fr
+  event13:
+    id: evenementPasseSansDateDeFin
+    title: evenementPasseSansDateDeFin
+    isEnabled: true
+    body: |
+      <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+      <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+         Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+         Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+         Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+         <h2>Pulvinar odio volutpat</h2>
+         <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+            Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+    startAt: <dateTimeBetween('-10 days', '-2 days')>
+    Author: '@user<numberBetween(1, 5)>'
+    link: http://www.lavie.fr
+    projects: ['@p1']
+    themes: ['@theme1', '@theme2']
+  event14:
+    id: evenementFutureSansDateDeFin
+    title: evenementFutureSansDateDeFin
+    isEnabled: true
+    body: |
+      <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
+      <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
+         Quae vero auctorem tractata ab fiducia dicuntur. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Quam diu etiam furor iste tuus nos eludet? Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Qui ipsorum lingua Celtae, nostra Galli appellantur.
+         Quae vero auctorem tractata ab fiducia dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Prima luce, cum quibus mons aliud  consensu ab eo. Prima luce, cum quibus mons aliud  consensu ab eo.
+         Nec dubitamus multa iter quae et nos invenerat. Inmensae subtilitatis, obscuris et malesuada fames. Quam diu etiam furor iste tuus nos eludet? Integer legentibus erat a ante historiarum dapibus.</p>
+         <h2>Pulvinar odio volutpat</h2>
+         <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
+            Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
+    startAt: <dateTimeBetween('+10 days', '+50 days')>
+    Author: '@user<numberBetween(1, 5)>'
+    link: http://www.lavie.fr

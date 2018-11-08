@@ -10,6 +10,7 @@ use Capco\AppBundle\Form\EventSearchType;
 use Capco\AppBundle\Helper\EventHelper;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\EventResolver;
+use Capco\AppBundle\Search\EventSearch;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -36,14 +37,10 @@ class EventController extends Controller
     {
         $currentUrl = $this->generateUrl('app_event');
 
-        $form = $this->createForm(
-            EventSearchType::class,
-            null,
-            [
-                'action' => $currentUrl,
-                'method' => 'POST',
-            ]
-        );
+        $form = $this->createForm(EventSearchType::class, null, [
+            'action' => $currentUrl,
+            'method' => 'POST',
+        ]);
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
@@ -52,30 +49,24 @@ class EventController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect(
-                    $this->generateUrl(
-                        'app_event_search_term',
-                        [
-                            'theme' => isset($data['theme']) && $data['theme']
+                    $this->generateUrl('app_event_search_term', [
+                        'theme' =>
+                            isset($data['theme']) && $data['theme']
                                 ? $data['theme']->getSlug()
                                 : Theme::FILTER_ALL,
-                            'project' => $data['project']
-                                ? $data['project']->getSlug()
-                                : Project::FILTER_ALL,
-                            'term' => $data['term'],
-                        ]
-                    )
+                        'project' => $data['project']
+                            ? $data['project']->getSlug()
+                            : Project::FILTER_ALL,
+                        'term' => $data['term'],
+                    ])
                 );
             }
         } else {
-            $form->setData(
-                [
-                    'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                    'project' => $this->get(
-                        ProjectRepository::class
-                    )->findOneBySlug($project),
-                    'term' => $term,
-                ]
-            );
+            $form->setData([
+                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
+                'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
+                'term' => $term,
+            ]);
         }
 
         $groupedEvents = $this->get(EventResolver::class)->getEventsGroupedByYearAndMonth(
@@ -84,17 +75,13 @@ class EventController extends Controller
             $project,
             $term
         );
-        $archivedEventsNb = $this->get(EventResolver::class)->countEvents(
-            true,
-            $theme,
-            $project,
-            $term
-        );
-
+        $archivedEvents = $this->get(EventSearch::class)->searchEvents(0, 100, 'asc', null, [
+            'isFuture' => false,
+        ]);
         return [
             'years' => $groupedEvents,
             'form' => $form->createView(),
-            'archivedEventsNb' => $archivedEventsNb,
+            'archivedEventsNb' => $archivedEvents['count'],
         ];
     }
 
@@ -117,14 +104,10 @@ class EventController extends Controller
     ) {
         $currentUrl = $this->generateUrl('app_event_archived');
 
-        $form = $this->createForm(
-            EventSearchType::class,
-            null,
-            [
-                'action' => $currentUrl,
-                'method' => 'POST',
-            ]
-        );
+        $form = $this->createForm(EventSearchType::class, null, [
+            'action' => $currentUrl,
+            'method' => 'POST',
+        ]);
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
@@ -133,28 +116,23 @@ class EventController extends Controller
                 $data = $form->getData();
 
                 return $this->redirect(
-                    $this->generateUrl(
-                        'app_event_archived_term',
-                        [
-                            'theme' => isset($data['theme'])
-                                ? $data['theme']->getSlug()
-                                : Theme::FILTER_ALL,
-                            'project' => $data['project']
-                                ? $data['project']->getSlug()
-                                : Project::FILTER_ALL,
-                            'term' => $data['term'],
-                        ]
-                    )
+                    $this->generateUrl('app_event_archived_term', [
+                        'theme' => isset($data['theme'])
+                            ? $data['theme']->getSlug()
+                            : Theme::FILTER_ALL,
+                        'project' => $data['project']
+                            ? $data['project']->getSlug()
+                            : Project::FILTER_ALL,
+                        'term' => $data['term'],
+                    ])
                 );
             }
         } else {
-            $form->setData(
-                [
-                    'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                    'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
-                    'term' => $term,
-                ]
-            );
+            $form->setData([
+                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
+                'project' => $this->get(ProjectRepository::class)->findOneBySlug($project),
+                'term' => $term,
+            ]);
         }
 
         $groupedEvents = $this->get(EventResolver::class)->getEventsGroupedByYearAndMonth(
@@ -187,13 +165,9 @@ class EventController extends Controller
 
         $user = $this->getUser();
         $registration = $eventHelper->findUserRegistrationOrCreate($event, $user);
-        $form = $this->createForm(
-            EventRegistrationType::class,
-            $registration,
-            [
-                'registered' => $registration->isConfirmed(),
-            ]
-        );
+        $form = $this->createForm(EventRegistrationType::class, $registration, [
+            'registered' => $registration->isConfirmed(),
+        ]);
 
         if ('POST' === $request->getMethod()) {
             $registration->setIpAddress($request->getClientIp());

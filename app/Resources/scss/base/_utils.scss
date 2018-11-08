@@ -123,7 +123,13 @@
 .w-100 {
     width: 100%;
 }
+.w-25 {
+    width: 25%;
+}
 
+.w-260 {
+    width: 260px;
+}
 /* =====
   Border
 ==== */
@@ -194,4 +200,8 @@
     position: sticky;
     position: -webkit-sticky;
     top: 0;
+}
+.sticky-t-60 {
+    @extend .sticky;
+    top: 60px;
 }

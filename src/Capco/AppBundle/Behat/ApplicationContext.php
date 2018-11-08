@@ -956,4 +956,21 @@ class ApplicationContext extends UserContext
         $element->keyPress($key);
         $element->keyUp($key);
     }
+
+    /**
+     * Selects option in select created by our react Field component with specified id
+     * Example: When I select "Bats" from react "user_fears"
+     * Example: And I select "Bats" from  react "user_fears"
+     *
+     * @When /^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from react "(?P<select>(?:[^"]|\\")*)"$/
+     */
+    public function selectOptionFromReact($select, $option)
+    {
+        // Select a project
+        $this->getSession()
+            ->getPage()
+            ->find('css', "$select .Select-input input")
+            ->setValue($option);
+        $this->iWait(3);
+    }
 }

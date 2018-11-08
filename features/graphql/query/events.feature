@@ -19,40 +19,40 @@ Scenario: GraphQL client wants to list events
   """
   Then the JSON response should match:
   """
-  {
-     "data":{
-        "events":{
-           "totalCount":10,
-           "edges":[
-              {
-                 "node":{
-                    "id":"event1"
-                 }
-              },
-              {
-                 "node":{
-                    "id":"event10"
-                 }
-              },
-              {
-                 "node":{
-                    "id":"event2"
-                 }
-              },
-              {
-                 "node":{
-                    "id":"event3"
-                 }
-              },
-              {
-                 "node":{
-                    "id":"event4"
-                 }
-              }
-           ]
-        }
-     }
-  }
+{
+   "data":{
+      "events":{
+         "totalCount":13,
+         "edges":[
+            {
+               "node":{
+                  "id":"evenementFutureSansDateDeFin"
+               }
+            },
+            {
+               "node":{
+                  "id":"evenementPasseSansDateDeFin"
+               }
+            },
+            {
+               "node":{
+                  "id":"evenementSansDateDeFin"
+               }
+            },
+            {
+               "node":{
+                  "id":"event1"
+               }
+            },
+            {
+               "node":{
+                  "id":"event10"
+               }
+            }
+         ]
+      }
+   }
+}
   """
 
 Scenario: GraphQL client wants to list current and future events
@@ -76,26 +76,31 @@ Scenario: GraphQL client wants to list current and future events
 {
    "data":{
       "events":{
-         "totalCount":4,
+         "totalCount":10,
          "edges":[
             {
                "node":{
-                  "id":"event8"
+                  "id":"evenementFutureSansDateDeFin"
                }
             },
             {
                "node":{
-                  "id":"event10"
+                  "id":"event1"
                }
             },
             {
                "node":{
-                  "id":"event7"
+                  "id":"event4"
                }
             },
             {
                "node":{
-                  "id":"event9"
+                  "id":"event6"
+               }
+            },
+            {
+               "node":{
+                  "id":"event3"
                }
             }
          ]
@@ -122,25 +127,30 @@ Scenario: GraphQL client wants to list passed events
   """
   Then the JSON response should match:
   """
-  {
-     "data":{
-        "events":{
-           "totalCount":2,
-           "edges":[
-              {
-                 "node":{
-                    "id":"event2"
-                 }
-              },
-              {
-                 "node":{
-                    "id":"event5"
-                 }
-              }
-           ]
-        }
-     }
-  }
+{
+   "data":{
+      "events":{
+         "totalCount":3,
+         "edges":[
+            {
+               "node":{
+                  "id":"evenementPasseSansDateDeFin"
+               }
+            },
+            {
+               "node":{
+                  "id":"evenementSansDateDeFin"
+               }
+            },
+            {
+               "node":{
+                  "id":"event5"
+               }
+            }
+         ]
+      }
+   }
+}
   """
 
 Scenario: GraphQL client wants to list event in project
@@ -167,64 +177,82 @@ Scenario: GraphQL client wants to list event in project
   """
   Then the JSON response should match:
   """
-  {
-     "data":{
-        "events":{
-           "totalCount":3,
-           "edges":[
-              {
-                 "node":{
-                    "id":"event1",
-                    "themes":[
-                       {
-                          "id":"theme1"
-                       },
-                       {
-                          "id":"theme2"
-                       }
-                    ],
-                    "projects":[
-                       {
-                          "id":"project1"
-                       }
-                    ]
-                 }
-              },
-              {
-                 "node":{
-                    "id":"event2",
-                    "themes":[
-                       {
-                          "id":"theme1"
-                       },
-                       {
-                          "id":"theme2"
-                       }
-                    ],
-                    "projects":[
-                       {
-                          "id":"project1"
-                       }
-                    ]
-                 }
-              },
-              {
-                 "node":{
-                    "id":"event3",
-                    "themes":[
+{
+   "data":{
+      "events":{
+         "totalCount":4,
+         "edges":[
+            {
+               "node":{
+                  "id":"evenementPasseSansDateDeFin",
+                  "themes":[
+                     {
+                        "id":"theme1"
+                     },
+                     {
+                        "id":"theme2"
+                     }
+                  ],
+                  "projects":[
+                     {
+                        "id":"project1"
+                     }
+                  ]
+               }
+            },
+            {
+               "node":{
+                  "id":"event1",
+                  "themes":[
+                     {
+                        "id":"theme1"
+                     },
+                     {
+                        "id":"theme2"
+                     }
+                  ],
+                  "projects":[
+                     {
+                        "id":"project1"
+                     }
+                  ]
+               }
+            },
+            {
+               "node":{
+                  "id":"event2",
+                  "themes":[
+                     {
+                        "id":"theme1"
+                     },
+                     {
+                        "id":"theme2"
+                     }
+                  ],
+                  "projects":[
+                     {
+                        "id":"project1"
+                     }
+                  ]
+               }
+            },
+            {
+               "node":{
+                  "id":"event3",
+                  "themes":[
 
-                    ],
-                    "projects":[
-                       {
-                          "id":"project1"
-                       }
-                    ]
-                 }
-              }
-           ]
-        }
-     }
-  }
+                  ],
+                  "projects":[
+                     {
+                        "id":"project1"
+                     }
+                  ]
+               }
+            }
+         ]
+      }
+   }
+}
   """
 
 Scenario: GraphQL client wants to list events with theme2
@@ -252,41 +280,54 @@ Scenario: GraphQL client wants to list events with theme2
   """
   Then the JSON response should match:
   """
-  {
-     "data":{
-        "events":{
-           "totalCount":2,
-           "edges":[
-              {
-                 "node":{
-                    "id":"event1",
-                    "themes":[
-                       {
-                          "id":"theme1"
-                       },
-                       {
-                          "id":"theme2"
-                       }
-                    ]
-                 }
-              },
-              {
-                 "node":{
-                    "id":"event2",
-                    "themes":[
-                       {
-                          "id":"theme1"
-                       },
-                       {
-                          "id":"theme2"
-                       }
-                    ]
-                 }
-              }
-           ]
-        }
-     }
-  }
+{
+   "data":{
+      "events":{
+         "totalCount":3,
+         "edges":[
+            {
+               "node":{
+                  "id":"evenementPasseSansDateDeFin",
+                  "themes":[
+                     {
+                        "id":"theme1"
+                     },
+                     {
+                        "id":"theme2"
+                     }
+                  ]
+               }
+            },
+            {
+               "node":{
+                  "id":"event1",
+                  "themes":[
+                     {
+                        "id":"theme1"
+                     },
+                     {
+                        "id":"theme2"
+                     }
+                  ]
+               }
+            },
+            {
+               "node":{
+                  "id":"event2",
+                  "themes":[
+                     {
+                        "id":"theme1"
+                     },
+                     {
+                        "id":"theme2"
+                     }
+                  ]
+               }
+            }
+         ]
+      }
+   }
+}
   """
 
 Scenario: GraphQL client wants to list events with a search
@@ -322,7 +363,7 @@ Scenario: GraphQL client wants to list events with a search
               },
               {
                  "node":{
-                    "id":"event3"
+                    "id":"event6"
                  }
               }
            ]

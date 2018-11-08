@@ -1,8 +1,10 @@
 <?php
+
 namespace Capco\AdminBundle\Resolver;
 
 use Capco\AppBundle\Helper\EnvHelper;
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class FeaturesCategoryResolver
 {
@@ -51,10 +53,12 @@ class FeaturesCategoryResolver
     ];
 
     protected $manager;
+    protected $authorizationChecker;
 
-    public function __construct(Manager $manager)
+    public function __construct(Manager $manager, AuthorizationChecker $authorizationChecker)
     {
         $this->manager = $manager;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function isCategoryEnabled(string $category): bool
@@ -83,7 +87,17 @@ class FeaturesCategoryResolver
         $toggles = [];
         if (isset(self::$categories[$category])) {
             foreach (self::$categories[$category]['features'] as $feature) {
-                $toggles[$feature] = $this->manager->isActive($feature);
+                if (
+                    'display_map' === $feature &&
+                    $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')
+                ) {
+                    $toggles[$feature] = $this->manager->isActive($feature);
+                    continue;
+                }
+                if ('display_map' !== $feature) {
+                    $toggles[$feature] = $this->manager->isActive($feature);
+                    continue;
+                }
             }
         }
 

@@ -7,6 +7,7 @@ import type { State as UserState, UserAction } from './redux/modules/user';
 import type { State as ProjectState, ProjectAction } from './redux/modules/project';
 import type { State as ReportState, ReportAction } from './redux/modules/report';
 import type { State as DefaultState, DefaultAction } from './redux/modules/default';
+import type { State as EventState, EventAction } from './redux/modules/event';
 
 export type Exact<T> = T;
 export type Uuid = string;
@@ -85,6 +86,7 @@ export type Action =
   | ProjectAction
   | ReportAction
   | DefaultAction
+  | EventAction
   | ReduxFormAction
   | { type: '@@INIT' };
 
@@ -96,6 +98,7 @@ export type GlobalState = {
   report: ReportState,
   user: UserState,
   opinion: OpinionState,
+  event: EventState,
 };
 export type State = GlobalState;
 

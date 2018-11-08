@@ -22,6 +22,7 @@ class IndexationProcessor implements ProcessorInterface
         $this->logger->info('Asynchronous indexation of: {json}', ['json' => $message->getBody()]);
         $json = json_decode($message->getBody(), true);
         $this->indexer->index($json['class'], $json['id']);
+        $this->indexer->finishBulk();
 
         return true;
     }
