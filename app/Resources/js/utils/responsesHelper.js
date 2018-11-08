@@ -537,7 +537,6 @@ export const renderResponses = ({
   form: string,
   intl: IntlShape,
   disabled: boolean,
-  reply: any,
 }) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
