@@ -59,7 +59,7 @@ describe('<RankingItem />', () => {
     const description = wrapper.find('.ranking__item__description');
     expect(description).toHaveLength(1);
     expect(description.html()).toEqual(
-      '<p class="excerpt small ranking__item__description">Description</p>',
+      '<div class="excerpt small ranking__item__description ql-editor">Description</div>',
     );
     const image = wrapper.find('.ranking__item__image');
     expect(image).toHaveLength(1);

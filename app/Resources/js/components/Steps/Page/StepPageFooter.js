@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = {
   step: {
@@ -17,9 +18,7 @@ class StepPageFooter extends React.Component<Props> {
     return (
       <div>
         <div className="block block--bordered" style={{ marginTop: 30 }}>
-          <div style={{ padding: 10 }}>
-            <div dangerouslySetInnerHTML={{ __html: footer }} />
-          </div>
+          <WYSIWYGRender className="p-10" value={footer} />
         </div>
       </div>
     );

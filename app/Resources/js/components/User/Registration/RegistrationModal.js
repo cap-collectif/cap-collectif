@@ -10,6 +10,7 @@ import RegistrationForm, { form } from './RegistrationForm';
 import LoginSocialButtons from '../Login/LoginSocialButtons';
 import { closeRegistrationModal, hideChartModal } from '../../../redux/modules/user';
 import type { State, Dispatch } from '../../../types';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = {
   show: boolean,
@@ -54,7 +55,9 @@ export class RegistrationModal extends React.Component<Props> {
               {<FormattedMessage id="charter" />}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body dangerouslySetInnerHTML={{ __html: chartBody }} />
+          <Modal.Body>
+            <WYSIWYGRender value={chartBody} />
+          </Modal.Body>
           <Modal.Footer>
             <CloseButton label="global.close" onClose={onCloseChart} />
           </Modal.Footer>
@@ -78,7 +81,7 @@ export class RegistrationModal extends React.Component<Props> {
         <Modal.Body>
           {textTop && (
             <Alert bsStyle="info" className="text-center">
-              <div dangerouslySetInnerHTML={{ __html: textTop }} />
+              <WYSIWYGRender value={textTop} />
             </Alert>
           )}
           <LoginSocialButtons prefix="registration." />
@@ -92,11 +95,7 @@ export class RegistrationModal extends React.Component<Props> {
             onSubmitSuccess={this.handleSubmitSuccess}
           />
           {textBottom && (
-            <div
-              className="text-center small excerpt"
-              style={{ marginTop: '15px' }}
-              dangerouslySetInnerHTML={{ __html: textBottom }}
-            />
+            <WYSIWYGRender className="text-center small excerpt mt-15" value={textBottom} />
           )}
         </Modal.Body>
         <Modal.Footer>

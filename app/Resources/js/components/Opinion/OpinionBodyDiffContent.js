@@ -3,6 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionBodyDiffModal from './OpinionBodyDiffModal';
 import type { OpinionBodyDiffContent_opinion } from './__generated__/OpinionBodyDiffContent_opinion.graphql';
+import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {
   opinion: OpinionBodyDiffContent_opinion,
@@ -13,7 +14,7 @@ class OpinionBodyDiffContent extends React.Component<Props> {
     const opinion = this.props.opinion;
 
     if (!opinion.modals || opinion.modals.length < 1) {
-      return <div dangerouslySetInnerHTML={{ __html: opinion.body }} />;
+      return <WYSIWYGRender value={opinion.body} />;
     }
 
     const modals = opinion.modals;
@@ -53,13 +54,13 @@ class OpinionBodyDiffContent extends React.Component<Props> {
       <div>
         {parts.map((part, index) => {
           if (!part.link) {
-            return <p dangerouslySetInnerHTML={{ __html: part.content }} />;
+            return <WYSIWYGRender value={part.content} />;
           }
           return (
             <p key={index}>
-              <span dangerouslySetInnerHTML={{ __html: part.before }} />
+              <WYSIWYGRender value={part.before} />
               <OpinionBodyDiffModal link={part.link} modal={part.modal} />
-              <span dangerouslySetInnerHTML={{ __html: part.after }} />
+              <WYSIWYGRender value={part.after} />
             </p>
           );
         })}

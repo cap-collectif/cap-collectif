@@ -15,6 +15,7 @@ import {
 import { renderResponses, formatSubmitResponses } from '../../../utils/responsesHelper';
 import type { ProposalPageEvaluation_proposal } from './__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type FormValues = { responses: ResponsesValues };
 type RelayProps = {
@@ -82,10 +83,7 @@ export class ProposalPageEvaluation extends React.Component<Props> {
         <form onSubmit={handleSubmit}>
           <div>
             {evaluationForm.description && (
-              <div
-                style={{ color: 'black', marginBottom: 30 }}
-                dangerouslySetInnerHTML={{ __html: evaluationForm.description }}
-              />
+              <WYSIWYGRender className="mb-30" value={evaluationForm.description} />
             )}
             <FieldArray
               name="responses"

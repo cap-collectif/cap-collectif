@@ -5,6 +5,7 @@ import { Alert } from 'react-bootstrap';
 import LoginSocialButtons from './LoginSocialButtons';
 import LoginForm from './LoginForm';
 import type { State } from '../../../types';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = {
   textTop: string,
@@ -18,18 +19,12 @@ export class LoginBox extends Component<Props> {
       <div>
         {textTop && (
           <Alert bsStyle="info" className="text-center">
-            <div dangerouslySetInnerHTML={{ __html: textTop }} />
+            <WYSIWYGRender value={textTop} />
           </Alert>
         )}
         <LoginSocialButtons />
         <LoginForm />
-        {textBottom && (
-          <div
-            className="text-center excerpt"
-            style={{ marginTop: '15px' }}
-            dangerouslySetInnerHTML={{ __html: textBottom }}
-          />
-        )}
+        {textBottom && <WYSIWYGRender className="text-center excerpt mt-15" value={textBottom} />}
       </div>
     );
   }

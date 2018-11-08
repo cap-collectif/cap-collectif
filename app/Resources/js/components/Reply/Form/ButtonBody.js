@@ -2,6 +2,7 @@
 import * as React from 'react';
 import Linkify from 'react-linkify';
 import { FormattedMessage } from 'react-intl';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = {
   body: string,
@@ -59,7 +60,7 @@ class ButtonBody extends React.Component<Props, State> {
     return (
       <div className="opinion__text">
         <Linkify properties={{ className: 'external-link' }}>
-          <div dangerouslySetInnerHTML={{ __html: this.generateText() }} />
+          <WYSIWYGRender value={this.generateText()} />
         </Linkify>
         {this.renderReadMoreOrLess()}
       </div>

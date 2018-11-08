@@ -8,6 +8,7 @@ import ProposalsUserVotesTable from './ProposalsUserVotesTable';
 import SubmitButton from '../../Form/SubmitButton';
 import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
 import type { ProposalsUserVotesStep_step } from './__generated__/ProposalsUserVotesStep_step.graphql';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type RelayProps = {
   step: ProposalsUserVotesStep_step,
@@ -50,7 +51,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
                 <FormattedMessage id="admin.fields.step.votesHelpText" />
               </b>
             </p>
-            <div dangerouslySetInnerHTML={{ __html: step.votesHelpText }} />
+            <WYSIWYGRender value={step.votesHelpText} />
           </div>
         )}
         <div>

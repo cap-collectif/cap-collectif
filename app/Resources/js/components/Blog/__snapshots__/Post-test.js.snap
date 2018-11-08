@@ -70,13 +70,9 @@ exports[`<Post /> should render a post 1`] = `
         }
       />
     </p>
-    <p
+    <WYSIWYGRender
       className="media--news__text"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "azazazaz",
-        }
-      }
+      value="azazazaz"
     />
   </div>
 </li>

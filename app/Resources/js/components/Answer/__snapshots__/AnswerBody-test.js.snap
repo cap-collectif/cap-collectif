@@ -63,24 +63,16 @@ exports[`<AnswerBody /> renders correctly with an author 1`] = `
       </span>
     </div>
   </div>
-  <div
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "<div>My awesome content</div>",
-      }
-    }
+  <WYSIWYGRender
+    value="<div>My awesome content</div>"
   />
 </div>
 `;
 
 exports[`<AnswerBody /> renders correctly without author 1`] = `
 <div>
-  <div
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "<div>My awesome content</div>",
-      }
-    }
+  <WYSIWYGRender
+    value="<div>My awesome content</div>"
   />
 </div>
 `;

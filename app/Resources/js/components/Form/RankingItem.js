@@ -4,6 +4,7 @@ import { DragSource } from 'react-dnd';
 import classNames from 'classnames';
 import { ITEM_TYPE } from '../../constants/RankingConstants';
 import RankingArrows from './RankingArrows';
+import WYSIWYGRender from './WYSIWYGRender';
 
 const itemSource = {
   beginDrag(props) {
@@ -64,9 +65,9 @@ class RankingItem extends React.Component<Props> {
           </div>
         </div>
         {item.description && (
-          <p
+          <WYSIWYGRender
             className="excerpt small ranking__item__description"
-            dangerouslySetInnerHTML={{ __html: item.description }}
+            value={item.description}
           />
         )}
         {item.image && (

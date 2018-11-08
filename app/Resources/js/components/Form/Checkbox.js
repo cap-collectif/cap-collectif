@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Input from './Input';
 import Other from './Other';
 import ButtonBody from '../Reply/Form/ButtonBody';
+import WYSIWYGRender from './WYSIWYGRender';
 
 type Props = {
   id: string,
@@ -141,9 +142,10 @@ class Checkbox extends React.Component<Props, State> {
                   {choice.label}
                 </Input>
                 {choice.description && (
-                  <div className="mb-20 pl-20 choice-description">
-                    <i dangerouslySetInnerHTML={{ __html: choice.description }} />
-                  </div>
+                  <WYSIWYGRender
+                    className="mb-20 pl-20 choice-description"
+                    value={choice.description}
+                  />
                 )}
               </div>
             );

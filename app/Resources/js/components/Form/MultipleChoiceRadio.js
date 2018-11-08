@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
 import component from './Field';
 import ButtonBody from '../Reply/Form/ButtonBody';
+import WYSIWYGRender from './WYSIWYGRender';
 
 type Props = {
   name: string,
@@ -91,9 +92,11 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                   {choice.label}
                 </Field>
                 {choice.description && (
-                  <div className="mb-20 pl-20 choice-description">
-                    <i dangerouslySetInnerHTML={{ __html: choice.description }} />
-                  </div>
+                  <WYSIWYGRender
+                    className="mb-20 pl-20 choice-description"
+                    value={choice.description}
+                    tagName="i"
+                  />
                 )}
               </div>
             ))}

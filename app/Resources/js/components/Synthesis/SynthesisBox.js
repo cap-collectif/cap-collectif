@@ -11,6 +11,7 @@ import SynthesisStore from '../../stores/SynthesisStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import SynthesisActions from '../../actions/SynthesisActions';
 import { type GlobalState } from '../../types';
+import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {
   step: Object,
@@ -128,8 +129,7 @@ export class SynthesisBox extends React.Component<Props, State> {
               <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
             </div>
           )}
-
-          {step.body && <div className="block" dangerouslySetInnerHTML={{ __html: step.body }} />}
+          {step.body && <WYSIWYGRender className="block" value={step.body} />}
         </div>
       );
     }

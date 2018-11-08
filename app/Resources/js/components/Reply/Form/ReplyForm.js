@@ -29,6 +29,7 @@ import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import { CardContainer } from '../../Ui/Card/CardContainer';
 import UpdateReplyMutation from '../../../mutations/UpdateReplyMutation';
 import SubmitButton from '../../Form/SubmitButton';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = FormProps & {
   +questionnaire: ReplyForm_questionnaire,
@@ -166,9 +167,7 @@ export class ReplyForm extends React.Component<Props> {
         <div className="card__body">
           <div id="create-reply-form">
             <form id="reply-form" ref="form" onSubmit={handleSubmit}>
-              {questionnaire.description && (
-                <div dangerouslySetInnerHTML={{ __html: questionnaire.description }} />
-              )}
+              {questionnaire.description && <WYSIWYGRender value={questionnaire.description} />}
               <FieldArray
                 name="responses"
                 change={change}

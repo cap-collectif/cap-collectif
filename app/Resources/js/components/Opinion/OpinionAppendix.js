@@ -4,6 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button, Panel } from 'react-bootstrap';
 import type { OpinionAppendix_appendix } from './__generated__/OpinionAppendix_appendix.graphql';
+import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {
   appendix: OpinionAppendix_appendix,
@@ -47,7 +48,7 @@ class OpinionAppendix extends React.Component<Props, State> {
         className="opinion__appendix__content">
         <Panel.Collapse>
           <Panel.Body>
-            <div dangerouslySetInnerHTML={{ __html: appendix.body }} />
+            <WYSIWYGRender value={appendix.body} />
           </Panel.Body>
         </Panel.Collapse>
       </Panel>

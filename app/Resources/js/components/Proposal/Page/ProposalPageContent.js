@@ -19,6 +19,7 @@ import config from '../../../config';
 import type { ProposalPageContent_proposal } from './__generated__/ProposalPageContent_proposal.graphql';
 import type { ProposalPageContent_viewer } from './__generated__/ProposalPageContent_viewer.graphql';
 import type { ProposalPageContent_step } from './__generated__/ProposalPageContent_step.graphql';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 let L;
 
@@ -87,7 +88,7 @@ export class ProposalPageContent extends React.Component<Props> {
               <h3 className="h3">
                 <FormattedMessage id="proposal.description" />
               </h3>
-              <div dangerouslySetInnerHTML={{ __html: proposal.body }} />
+              <WYSIWYGRender value={proposal.body} />
             </div>
           )}
         </div>

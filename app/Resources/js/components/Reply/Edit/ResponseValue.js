@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { type ResponseValue_response } from './__generated__/ResponseValue_response.graphql';
 import { getValueFromResponse } from '../../../utils/responsesHelper';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = {
   response: ResponseValue_response,
@@ -23,11 +24,7 @@ export class ResponseValue extends React.Component<Props> {
       return <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>;
     }
     if (response.question.type === 'editor') {
-      return (
-        <p>
-          <div dangerouslySetInnerHTML={{ __html: responseValue }} />
-        </p>
-      );
+      return <WYSIWYGRender value={responseValue} />;
     }
     if (response.question.type === 'medias' && response.medias) {
       return (

@@ -16,6 +16,7 @@ import RequirementsForm, { formName } from '../../Requirements/RequirementsForm'
 import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
 import type { ProposalVoteModal_proposal } from './__generated__/ProposalVoteModal_proposal.graphql';
 import type { ProposalVoteModal_step } from './__generated__/ProposalVoteModal_step.graphql';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type ParentProps = {
   proposal: ProposalVoteModal_proposal,
@@ -209,7 +210,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
                   <FormattedMessage id="admin.fields.step.votesHelpText" />
                 </b>
               </p>
-              <div dangerouslySetInnerHTML={{ __html: step.votesHelpText }} />
+              <WYSIWYGRender value={step.votesHelpText} />
             </div>
           )}
         </Modal.Body>

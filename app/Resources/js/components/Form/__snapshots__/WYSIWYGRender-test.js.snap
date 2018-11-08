@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WYSIWYGRender /> should render a colored spot when drop is allowed and hovering 1`] = `
+<div
+  className=" ql-editor"
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<div>Little test</div>",
+    }
+  }
+/>
+`;

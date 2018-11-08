@@ -5,6 +5,7 @@ import ProposalMediaResponse from './ProposalMediaResponse';
 import TitleInvertContrast from '../../Ui/TitleInvertContrast';
 import type { ProposalResponse_response } from './__generated__/ProposalResponse_response.graphql';
 import PrivateBox from '../../Ui/PrivateBox';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = {
   response: ProposalResponse_response,
@@ -83,11 +84,7 @@ class ProposalResponse extends React.PureComponent<Props> {
         value = (
           <div>
             <h3 className="h3">{response.question.title}</h3>
-            {this.isHTML() ? (
-              <div dangerouslySetInnerHTML={{ __html: response.value }} />
-            ) : (
-              <p>{responseValue}</p>
-            )}
+            {this.isHTML() ? <WYSIWYGRender value={response.value} /> : <p>{responseValue}</p>}
           </div>
         );
       }

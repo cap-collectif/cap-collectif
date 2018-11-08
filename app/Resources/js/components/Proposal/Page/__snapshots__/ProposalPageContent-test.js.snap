@@ -27,12 +27,8 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
           values={Object {}}
         />
       </h3>
-      <div
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "lorem ipsum dolor",
-          }
-        }
+      <WYSIWYGRender
+        value="lorem ipsum dolor"
       />
     </div>
   </div>

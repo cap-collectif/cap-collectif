@@ -10,6 +10,7 @@ import { checkOnlyNumbers } from '../services/Validator';
 import component from '../components/Form/Field';
 import PrivateBox from '../components/Ui/PrivateBox';
 import ConditionalJumps from './ConditionalJumps';
+import WYSIWYGRender from '../components/Form/WYSIWYGRender';
 
 type Question = {|
   +id: string,
@@ -580,7 +581,7 @@ export const renderResponses = ({
             return (
               <div key={field.id} className="form__section">
                 <TitleInvertContrast>{field.title}</TitleInvertContrast>
-                <div dangerouslySetInnerHTML={{ __html: field.description }} />
+                <WYSIWYGRender value={field.description} />
               </div>
             );
           }

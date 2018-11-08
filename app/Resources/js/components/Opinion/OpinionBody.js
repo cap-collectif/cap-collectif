@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
 import FormattedText from '../../services/FormattedText';
 import type { OpinionBody_opinion } from './__generated__/OpinionBody_opinion.graphql';
+import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {
   opinion: OpinionBody_opinion,
@@ -24,11 +25,11 @@ class OpinionBody extends React.Component<Props> {
                 <FormattedMessage id="opinion.version_comment" />
               </p>
               <Well bsSize="small">
-                <div dangerouslySetInnerHTML={{ __html: opinion.comment }} />
+                <WYSIWYGRender value={opinion.comment} />
               </Well>
             </div>
           ) : null}
-          <div className="diff" dangerouslySetInnerHTML={{ __html: opinion.diff }} />
+          <WYSIWYGRender className="diff" value={opinion.diff} />
         </div>
       );
     }

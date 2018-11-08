@@ -49,6 +49,7 @@ import {
 } from '../../../utils/responsesHelper';
 import environment from '../../../createRelayEnvironment';
 import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -339,9 +340,7 @@ export class ProposalForm extends React.Component<Props, State> {
     );
     return (
       <form id="proposal-form">
-        <div className="mb-15">
-          <div dangerouslySetInnerHTML={{ __html: proposalForm.description }} />
-        </div>
+        <WYSIWYGRender className="mb-15" value={proposalForm.description} />
         {error && (
           <Alert bsStyle="danger">
             <i className="icon ion-ios-close-outline" />{' '}

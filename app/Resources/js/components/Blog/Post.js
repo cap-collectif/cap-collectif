@@ -5,6 +5,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import moment from 'moment';
 import type { Post_post } from './__generated__/Post_post.graphql';
+import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {
   post: Post_post,
@@ -225,7 +226,7 @@ export class Post extends React.Component<Props> {
               />
             )}
           </p>
-          <p className="media--news__text" dangerouslySetInnerHTML={{ __html: post.abstract }} />
+          <WYSIWYGRender className="media--news__text" value={post.abstract} />
         </div>
       </li>
     );

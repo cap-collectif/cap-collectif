@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import type { OpinionBodyDiffModal_modal } from './__generated__/OpinionBodyDiffModal_modal.graphql';
+import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {
   link: string,
@@ -49,7 +50,7 @@ class OpinionBodyDiffModal extends React.Component<Props, State> {
             <p className="small excerpt">
               <FormattedMessage id="opinion.diff.infos" />
             </p>
-            <div className="diff" dangerouslySetInnerHTML={{ __html: modal.diff }} />
+            <WYSIWYGRender className="diff" value={modal.diff} />
           </Modal.Body>
           <Modal.Footer>
             <Button bsStyle="primary" onClick={() => this.close()}>

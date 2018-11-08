@@ -14,6 +14,7 @@ import DivideButton from './../Divide/DivideButton';
 import IgnoreButton from './../Ignore/IgnoreButton';
 import PublishModal from './../Publish/PublishModal';
 import DivideModal from './../Divide/DivideModal';
+import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 class EditElement extends React.Component {
   static propTypes = {
@@ -105,10 +106,7 @@ class EditElement extends React.Component {
                 <ElementBlock element={element} />
               </div>
               {this.renderDescription()}
-              <div
-                className="element__description box has-chart"
-                dangerouslySetInnerHTML={{ __html: element.body }}
-              />
+              <WYSIWYGRender className="element__description box has-chart" value={element.body} />
               {this.renderElementButtons()}
             </div>
           </div>

@@ -6,6 +6,7 @@ import moment from 'moment';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import type { AnswerBody_answer } from './__generated__/AnswerBody_answer.graphql';
+import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {
   answer: AnswerBody_answer,
@@ -35,7 +36,7 @@ export class AnswerBody extends React.Component<Props> {
             </div>
           </div>
         ) : null}
-        <div dangerouslySetInnerHTML={{ __html: answer.body }} />
+        <WYSIWYGRender value={answer.body} />
       </div>
     );
   }
