@@ -39,6 +39,7 @@ class SynthesisElementNormalizer implements NormalizerInterface, SerializerAware
             ],
             true
         );
+        $data['logs'] = [];
 
         return $data;
     }

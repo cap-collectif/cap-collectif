@@ -19,7 +19,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       max_depth: 1
     children:
       groups: [ElementsTree, ElementDetails]
-      max_depth: 2
+      max_depth: 1
     displayType:
       groups: [ElementsTree, ElementsList, ElementsPublished, ElementDetails]
     title:
