@@ -10279,16 +10279,16 @@
         },
         {
             "name": "swarrot/swarrot-bundle",
-            "version": "v1.5.1",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swarrot/SwarrotBundle.git",
-                "reference": "ff440b04805a3e61768a2746e54f2a5471f2c827"
+                "reference": "1020707bef87d4610eb2afed2fde991f38dbff91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/ff440b04805a3e61768a2746e54f2a5471f2c827",
-                "reference": "ff440b04805a3e61768a2746e54f2a5471f2c827",
+                "url": "https://api.github.com/repos/swarrot/SwarrotBundle/zipball/1020707bef87d4610eb2afed2fde991f38dbff91",
+                "reference": "1020707bef87d4610eb2afed2fde991f38dbff91",
                 "shasum": ""
             },
             "require": {
@@ -10302,8 +10302,9 @@
             "require-dev": {
                 "doctrine/common": "~2.2",
                 "doctrine/dbal": "~2.2",
-                "phpunit/phpunit": "~6.4",
-                "symfony/phpunit-bridge": "~2.8|~3.0|~4.0"
+                "phpunit/phpunit": "~6.5",
+                "sentry/sentry-symfony": ">=0.1.0",
+                "symfony/phpunit-bridge": "~4.0"
             },
             "suggest": {
                 "php-amqplib/php-amqplib": "Required if using amqp_lib"
@@ -10311,7 +10312,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -10334,7 +10335,7 @@
                 "bundle",
                 "swarrot"
             ],
-            "time": "2017-12-25T11:23:25+00:00"
+            "time": "2018-10-17T06:16:22+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
