@@ -350,7 +350,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->summaryHelpText;
     }
 
-    public function setSummaryHelpText(string $summaryHelpText = null): self
+    public function setSummaryHelpText(?string $summaryHelpText = null): self
     {
         $this->summaryHelpText = $summaryHelpText;
 
@@ -479,7 +479,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->descriptionHelpText;
     }
 
-    public function setDescriptionHelpText(string $descriptionHelpText = null): self
+    public function setDescriptionHelpText(?string $descriptionHelpText = null): self
     {
         $this->descriptionHelpText = $descriptionHelpText;
 
@@ -774,7 +774,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->illustrationHelpText;
     }
 
-    public function setIllustrationHelpText(string $illustrationHelpText = null): self
+    public function setIllustrationHelpText(?string $illustrationHelpText = null): self
     {
         $this->illustrationHelpText = $illustrationHelpText;
 
@@ -817,7 +817,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function setIsProposal(bool $isProposal): self
+    public function setIsProposalForm(bool $isProposal): self
     {
         $this->objectType =
             $isProposal === true
@@ -827,9 +827,14 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function isProposal(): bool
+    public function isProposalForm(): bool
     {
         return $this->objectType === ProposalFormObjectType::PROPOSAL;
+    }
+
+    public function getIsProposalForm(): bool
+    {
+        return $this->isProposalForm();
     }
 
     public function getUsingDescription(): bool

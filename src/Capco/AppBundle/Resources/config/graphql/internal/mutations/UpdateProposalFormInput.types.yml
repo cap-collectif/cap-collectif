@@ -59,7 +59,7 @@ UpdateProposalFormInput:
         type: '[QuestionnaireAbstractQuestionInput!]'
       allowAknowledge:
         type: 'Boolean'
-      isProposal:
+      isProposalForm:
         type: 'Boolean'
       usingDescription:
         type: 'Boolean'

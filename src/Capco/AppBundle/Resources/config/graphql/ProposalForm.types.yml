@@ -94,7 +94,7 @@ ProposalForm:
         description: 'Identifies the step that use the proposal form.'
       allowAknowledge:
         type: 'Boolean!'
-      isProposal:
+      isProposalForm:
         type: 'Boolean!'
         description: 'Proposal form is type of Proposal or Question'
       usingDescription:

@@ -3173,7 +3173,7 @@ type ProposalForm implements Node {
   allowAknowledge: Boolean!
 
   # Proposal form is type of Proposal or Question
-  isProposal: Boolean!
+  isProposalForm: Boolean!
   usingDescription: Boolean!
   usingIllustration: Boolean!
   usingSummary: Boolean!
@@ -5010,7 +5010,7 @@ input UpdateProposalFormInput {
   districts: [DistrictInput!]
   questions: [QuestionnaireAbstractQuestionInput!]
   allowAknowledge: Boolean
-  isProposal: Boolean
+  isProposalForm: Boolean
   usingDescription: Boolean
   usingSummary: Boolean
   usingIllustration: Boolean

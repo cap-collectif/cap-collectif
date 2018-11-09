@@ -584,7 +584,7 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
-                'isProposal' => [
+                'isProposalForm' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
