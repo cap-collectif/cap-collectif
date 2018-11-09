@@ -28,6 +28,7 @@ export class ProposalCreate extends React.Component<Props> {
     return (
       <div>
         <ProposalCreateButton
+          proposalForm={this.props.proposalForm}
           disabled={!proposalForm.contribuable}
           handleClick={() => dispatch(openCreateModal())}
         />
@@ -103,6 +104,7 @@ export default createFragmentContainer(container, {
       id
       contribuable
       ...ProposalForm_proposalForm
+      ...ProposalCreateButton_proposalForm
     }
   `,
 });
