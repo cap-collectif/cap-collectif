@@ -14,7 +14,7 @@ class OpinionBodyDiffContent extends React.Component<Props> {
     const opinion = this.props.opinion;
 
     if (!opinion.modals || opinion.modals.length < 1) {
-      return <WYSIWYGRender className="mb-15" value={opinion.body} />;
+      return <WYSIWYGRender value={opinion.body} />;
     }
 
     const modals = opinion.modals;

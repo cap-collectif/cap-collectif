@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
@@ -6,6 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Enum\ProposalFormObjectType;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -208,6 +210,41 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
      */
     private $evaluationForm;
 
+    /**
+     * @ORM\Column(name="object_type", nullable=false, type="string")
+     */
+    private $objectType = ProposalFormObjectType::PROPOSAL;
+
+    /**
+     * @ORM\Column(name="using_description", type="boolean", nullable=false)
+     */
+    private $usingDescription = false;
+
+    /**
+     * @ORM\Column(name="description_mandatory", type="boolean", nullable=false)
+     */
+    private $descriptionMandatory = false;
+
+    /**
+     * @ORM\Column(name="using_summary", type="boolean", nullable=false)
+     */
+    private $usingSummary = false;
+
+    /**
+     * @ORM\Column(name="summary_mandatory", type="boolean", nullable=false)
+     */
+    private $summaryMandatory = false;
+
+    /**
+     * @ORM\Column(name="using_illustration", type="boolean", nullable=false)
+     */
+    private $usingIllustration = false;
+
+    /**
+     * @ORM\Column(name="illustration_mandatory", type="boolean", nullable=false)
+     */
+    private $illustrationMandatory = false;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -335,11 +372,13 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     public function getRealQuestions(): Collection
     {
         return $this->getQuestions()
-            ? $this->getQuestions()->map(function (
-                QuestionnaireAbstractQuestion $questionnaireAbstractQuestion
-            ) {
-                return $questionnaireAbstractQuestion->getQuestion();
-            })
+            ? $this->getQuestions()->map(
+                function (
+                    QuestionnaireAbstractQuestion $questionnaireAbstractQuestion
+                ) {
+                    return $questionnaireAbstractQuestion->getQuestion();
+                }
+            )
             : new ArrayCollection();
     }
 
@@ -627,7 +666,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     {
         $label = $this->getTitle();
         if ($this->getStep()) {
-            $label = $this->getStep()->getTitle() . ' - ' . $label;
+            $label = $this->getStep()->getTitle().' - '.$label;
         }
 
         return $label;
@@ -762,6 +801,105 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     public function setAllowAknowledge(bool $allowAknowledge): self
     {
         $this->allowAknowledge = $allowAknowledge;
+
+        return $this;
+    }
+
+    public function getObjectType(): string
+    {
+        return $this->objectType;
+    }
+
+    public function setObjectType(string $objectType): self
+    {
+        $this->objectType = $objectType;
+
+        return $this;
+    }
+
+    public function setIsProposal(bool $isProposal): self
+    {
+        $this->objectType =
+            $isProposal === true
+                ? ProposalFormObjectType::PROPOSAL
+                : ProposalFormObjectType::QUESTION;
+
+        return $this;
+    }
+
+    public function isProposal(): bool
+    {
+        return $this->objectType === ProposalFormObjectType::PROPOSAL;
+    }
+
+    public function getUsingDescription(): bool
+    {
+        return $this->usingDescription;
+    }
+
+    public function setUsingDescription(bool $usingDescription): self
+    {
+        $this->usingDescription = $usingDescription;
+
+        return $this;
+    }
+
+    public function getUsingSummary(): bool
+    {
+        return $this->usingSummary;
+    }
+
+    public function setUsingSummary(bool $usingSummary): self
+    {
+        $this->usingSummary = $usingSummary;
+
+        return $this;
+    }
+
+    public function getUsingIllustration(): bool
+    {
+        return $this->usingIllustration;
+    }
+
+    public function setUsingIllustration(bool $usingIllustration): self
+    {
+        $this->usingIllustration = $usingIllustration;
+
+        return $this;
+    }
+
+    public function getDescriptionMandatory(): bool
+    {
+        return $this->descriptionMandatory;
+    }
+
+    public function setDescriptionMandatory(bool $descriptionMandatory): self
+    {
+        $this->descriptionMandatory = $descriptionMandatory;
+
+        return $this;
+    }
+
+    public function getSummaryMandatory(): bool
+    {
+        return $this->summaryMandatory;
+    }
+
+    public function setSummaryMandatory(bool $summaryMandatory): self
+    {
+        $this->summaryMandatory = $summaryMandatory;
+
+        return $this;
+    }
+
+    public function getIllustrationMandatory(): bool
+    {
+        return $this->illustrationMandatory;
+    }
+
+    public function setIllustrationMandatory(bool $illustrationMandatory): self
+    {
+        $this->illustrationMandatory = $illustrationMandatory;
 
         return $this;
     }

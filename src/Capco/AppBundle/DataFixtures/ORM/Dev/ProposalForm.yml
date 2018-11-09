@@ -12,9 +12,15 @@ Capco\AppBundle\Entity\ProposalForm:
     categoryHelpText: Sélectionnez une catégorie.
     usingThemes: true
     usingDistrict: true
+    usingDescription: true
+    usingIllustration: false
+    usingSummary: false
     districtMandatory: true
     usingCategories: true
     themeMandatory: false
+    illustrationMandatory: false
+    summaryMandatory: false
+    descriptionMandatory: false
     categoryMandatory: true
     usingAddress: true
     proposalInAZoneRequired: true
@@ -89,7 +95,13 @@ Capco\AppBundle\Entity\ProposalForm:
     categoryHelpText: Sélectionnez une catégorie.
     usingThemes: true
     usingDistrict: true
+    usingDescription: true
+    usingIllustration: false
+    usingSummary: false
     districtMandatory: true
+    illustrationMandatory: false
+    summaryMandatory: false
+    descriptionMandatory: false
     usingCategories: true
     themeMandatory: false
     reference: 666
@@ -118,6 +130,12 @@ Capco\AppBundle\Entity\ProposalForm:
     categoryHelpText: Sélectionnez une catégorie.
     usingThemes: true
     usingDistrict: true
+    usingDescription: true
+    illustrationMandatory: false
+    summaryMandatory: false
+    descriptionMandatory: false
+    usingIllustration: false
+    usingSummary: false
     districtMandatory: true
     usingCategories: true
     themeMandatory: false
@@ -143,6 +161,12 @@ Capco\AppBundle\Entity\ProposalForm:
     categoryHelpText: Sélectionnez une catégorie.
     usingThemes: true
     usingDistrict: false
+    usingDescription: true
+    usingIllustration: false
+    illustrationMandatory: false
+    summaryMandatory: false
+    descriptionMandatory: false
+    usingSummary: false
     districtMandatory: false
     usingCategories: true
     themeMandatory: false
@@ -163,6 +187,12 @@ Capco\AppBundle\Entity\ProposalForm:
     categoryHelpText: Sélectionnez une catégorie.
     usingThemes: true
     usingDistrict: false
+    usingDescription: true
+    usingIllustration: false
+    usingSummary: false
+    illustrationMandatory: false
+    summaryMandatory: false
+    descriptionMandatory: false
     districtMandatory: false
     usingCategories: true
     themeMandatory: false
@@ -183,6 +213,12 @@ Capco\AppBundle\Entity\ProposalForm:
     categoryHelpText: Sélectionnez une catégorie.
     usingThemes: true
     usingDistrict: false
+    usingDescription: true
+    usingIllustration: false
+    usingSummary: false
+    illustrationMandatory: false
+    summaryMandatory: false
+    descriptionMandatory: false
     districtMandatory: false
     usingCategories: true
     themeMandatory: false
@@ -201,6 +237,12 @@ Capco\AppBundle\Entity\ProposalForm:
     categoryHelpText: Sélectionnez une catégorie.
     usingThemes: true
     usingDistrict: true
+    usingDescription: true
+    illustrationMandatory: false
+    summaryMandatory: false
+    descriptionMandatory: false
+    usingIllustration: false
+    usingSummary: false
     districtMandatory: false
     usingCategories: true
     themeMandatory: false

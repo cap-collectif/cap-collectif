@@ -59,3 +59,17 @@ UpdateProposalFormInput:
         type: '[QuestionnaireAbstractQuestionInput!]'
       allowAknowledge:
         type: 'Boolean'
+      isProposal:
+        type: 'Boolean'
+      usingDescription:
+        type: 'Boolean'
+      usingSummary:
+        type: 'Boolean'
+      usingIllustration:
+        type: 'Boolean'
+      descriptionMandatory:
+        type: 'Boolean'
+      illustrationMandatory:
+        type: 'Boolean'
+      summaryMandatory:
+        type: 'Boolean'
