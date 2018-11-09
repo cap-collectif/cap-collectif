@@ -32,3 +32,6 @@ services:
 
   Capco\AppBundle\Normalizer\CommentNormalizer:
     tags: ['serializer.normalizer']
+
+  Capco\AppBundle\Normalizer\LogEntryNormalizer:
+    tags: ['serializer.normalizer']

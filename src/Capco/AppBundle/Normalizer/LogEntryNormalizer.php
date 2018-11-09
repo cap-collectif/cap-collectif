@@ -3,13 +3,14 @@ namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Manager\LogManager;
+use Gedmo\Loggable\Entity\LogEntry;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 
-class SynthesisElementNormalizer implements NormalizerInterface, SerializerAwareInterface
+class LogEntryNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     use SerializerAwareTrait;
     private $router;
@@ -28,36 +29,20 @@ class SynthesisElementNormalizer implements NormalizerInterface, SerializerAware
 
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = $this->normalizer->normalize($object, $format, $context);
+        $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
 
-        $serializedLogs = $this->serializer->serialize(
-            $this->logManager->getLogEntries($object),
-            'json',
-            ['groups' => ['LogDetails']]
-        );
-        $data['logs'] = $serializedLogs ? json_decode($serializedLogs) : [];
-        $data['_links']['self']['href'] = $this->router->generate(
-            'get_synthesis_element',
-            [
-                'synthesis_id' => $object->getSynthesis()->getId(),
-                'element_id' => $object->getId(),
-            ],
-            true
-        );
-        $data['_links']['history']['href'] = $this->router->generate(
-            'get_synthesis_element_history',
-            [
-                'synthesis_id' => $object->getSynthesis()->getId(),
-                'element_id' => $object->getId(),
-            ],
-            true
-        );
+        $data = $this->normalizer->normalize($object, $format, $context);
+        if (\in_array('Elasticsearch', $groups)) {
+            return $data;
+        }
+
+        $data['sentences'] = $this->logManager->getSentencesForLog($object);
 
         return $data;
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof SynthesisElement;
+        return $data instanceof LogEntry;
     }
 }

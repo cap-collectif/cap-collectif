@@ -1,0 +1,11 @@
+# Used to configure serialization for Gedmo LogEntry
+Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry:
+  attributes:
+    id:
+      groups: [Logs, LogDetails]
+    action:
+      groups: [LogDetails]
+    loggedAt:
+      groups: [LogDetails]
+    version:
+      groups: [LogDetails]
