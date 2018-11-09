@@ -1,17 +1,17 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
-import { isSubmitting, change, submit, isPristine } from 'redux-form';
-import { Modal } from 'react-bootstrap';
+import {type IntlShape, injectIntl, FormattedMessage} from 'react-intl';
+import {createFragmentContainer, graphql} from 'react-relay';
+import {connect, type MapStateToProps} from 'react-redux';
+import {isSubmitting, change, submit, isPristine} from 'redux-form';
+import {Modal} from 'react-bootstrap';
 import ProposalCreateButton from './ProposalCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-import ProposalForm, { formName } from '../Form/ProposalForm';
-import { openCreateModal, closeCreateModal } from '../../../redux/modules/proposal';
-import type { Dispatch, GlobalState } from '../../../types';
-import type { ProposalCreate_proposalForm } from './__generated__/ProposalCreate_proposalForm.graphql';
+import ProposalForm, {formName} from '../Form/ProposalForm';
+import {openCreateModal, closeCreateModal} from '../../../redux/modules/proposal';
+import type {Dispatch, GlobalState} from '../../../types';
+import type {ProposalCreate_proposalForm} from './__generated__/ProposalCreate_proposalForm.graphql';
 
 type Props = {
   intl: IntlShape,
@@ -24,7 +24,9 @@ type Props = {
 
 export class ProposalCreate extends React.Component<Props> {
   render() {
-    const { intl, proposalForm, showModal, pristine, submitting, dispatch } = this.props;
+    const {intl, proposalForm, showModal, pristine, submitting, dispatch} = this.props;
+    const modalTitleTradKey = proposalForm.isProposalForm ? "proposal.add" : "submit-a-question";
+
     return (
       <div>
         <ProposalCreateButton
@@ -38,7 +40,7 @@ export class ProposalCreate extends React.Component<Props> {
           onHide={() => {
             if (
               // eslint-disable-next-line no-alert
-              window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
+              window.confirm(intl.formatMessage({id: 'proposal.confirm_close_modal'}))
             ) {
               dispatch(closeCreateModal());
             }
@@ -47,14 +49,14 @@ export class ProposalCreate extends React.Component<Props> {
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id="proposal.add" />
+              <FormattedMessage id={modalTitleTradKey}/>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProposalForm proposalForm={this.props.proposalForm} proposal={null} />
+            <ProposalForm proposalForm={this.props.proposalForm} proposal={null}/>
           </Modal.Body>
           <Modal.Footer>
-            <CloseButton onClose={() => dispatch(closeCreateModal())} />
+            <CloseButton onClose={() => dispatch(closeCreateModal())}/>
             <SubmitButton
               id="confirm-proposal-create-as-draft"
               isSubmitting={submitting}
@@ -103,6 +105,7 @@ export default createFragmentContainer(container, {
     fragment ProposalCreate_proposalForm on ProposalForm {
       id
       contribuable
+      isProposalForm
       ...ProposalForm_proposalForm
       ...ProposalCreateButton_proposalForm
     }

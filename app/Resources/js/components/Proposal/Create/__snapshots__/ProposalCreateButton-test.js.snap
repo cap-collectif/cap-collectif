@@ -22,6 +22,28 @@ exports[`<ProposalCreateButton /> should render correctly 1`] = `
 </Connect(LoginOverlay)>
 `;
 
+exports[`<ProposalCreateButton /> should render correctly as Question 1`] = `
+<Connect(LoginOverlay)>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    disabled={false}
+    id="add-proposal"
+    onClick={[MockFunction]}
+  >
+    <i
+      className="cap cap-add-1"
+    />
+    <FormattedMessage
+      id=" submit-a-question"
+      values={Object {}}
+    />
+  </Button>
+</Connect(LoginOverlay)>
+`;
+
 exports[`<ProposalCreateButton /> should render correctly when disabled 1`] = `
 <Connect(LoginOverlay)>
   <Button

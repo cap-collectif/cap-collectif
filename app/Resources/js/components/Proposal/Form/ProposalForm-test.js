@@ -7,12 +7,7 @@ import { intlMock, formMock } from '../../../mocks';
 import { features } from '../../../redux/modules/default';
 
 describe('<ProposalForm />', () => {
-  const props = {
-    intl: intlMock,
-    ...formMock,
-    responses: [],
-    // $FlowFixMe $refType
-    proposalForm: {
+  const proposalForm = {
       id: 'proposalForm1',
       description: 'Description 1',
       step: {
@@ -54,11 +49,18 @@ describe('<ProposalForm />', () => {
           isOtherAllowed: false,
         },
       ],
+      isProposalForm: true,
       usingDistrict: true,
+      usingDescription: true,
+      usingSummary: true,
+      usingIllustration: true,
       districtMandatory: true,
       districtHelpText: 'District help',
       usingThemes: true,
       themeMandatory: true,
+      descriptionMandatory: true,
+      summaryMandatory: true,
+      illustrationMandatory: true,
       usingCategories: true,
       categoryMandatory: true,
       categoryHelpText: 'Category help',
@@ -70,6 +72,15 @@ describe('<ProposalForm />', () => {
       descriptionHelpText: 'Description help',
       addressHelpText: 'Address help',
       proposalInAZoneRequired: true,
+  };
+
+  const props = {
+    intl: intlMock,
+    ...formMock,
+    responses: [],
+    // $FlowFixMe $refType
+    proposalForm: {
+      ...proposalForm
     },
     themes: [{ id: 'theme1', title: 'Theme 1' }],
     submitting: false,
@@ -114,8 +125,21 @@ describe('<ProposalForm />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a create form', () => {
+  it('should render a create Proposal form', () => {
     const wrapper = shallow(<ProposalForm {...props} proposal={null} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a create Question form', () => {
+    const questionProps = {
+      ...props,
+      // $FlowFixMe $refType
+      proposalForm: {
+        ...proposalForm,
+        isProposalForm: false
+      }
+    };
+    const wrapper = shallow(<ProposalForm {...questionProps} proposal={null} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

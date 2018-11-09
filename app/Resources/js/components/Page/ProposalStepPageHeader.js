@@ -17,10 +17,11 @@ export class ProposalStepPageHeader extends React.Component<Props> {
 
     const total = step.allProposals.totalCount;
     const fusionCount = step.allProposals.fusionCount;
+    const tradKeyForCount = step.form.isProposalForm && step.form.isProposalForm === true ? 'proposal.count' : 'count-questions';
 
     return (
       <React.Fragment>
-        <h3 className="h3 d-ib" style={{ marginBottom: '15px' }}>
+        <h3 className="h3 d-ib mb-15">
           {total !== queryCount ? (
             <FormattedMessage
               id="proposal.count_with_total"
@@ -31,7 +32,7 @@ export class ProposalStepPageHeader extends React.Component<Props> {
             />
           ) : (
             <FormattedMessage
-              id="proposal.count"
+              id={tradKeyForCount}
               values={{
                 num: total,
               }}
@@ -40,7 +41,7 @@ export class ProposalStepPageHeader extends React.Component<Props> {
           {step.form &&
             step.kind === 'collect' &&
             fusionCount > 0 && (
-              <span style={{ color: '#999', fontWeight: 300 }}>
+              <span className="font-weight-300 color-dark-gray" >
                 {' '}
                 <FormattedMessage
                   id="proposal.count_fusions"
@@ -92,6 +93,7 @@ export default createFragmentContainer(ProposalStepPageHeader, {
         kind
         form {
           id
+          isProposalForm
           ...ProposalCreate_proposalForm
         }
         voteThreshold

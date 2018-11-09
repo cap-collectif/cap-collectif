@@ -45,7 +45,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
             values={Object {}}
           />
         }
-        name="isProposal"
+        name="isProposalForm"
         options={
           Array [
             Object {

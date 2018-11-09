@@ -304,7 +304,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
         <div className="box-content">
           <form onSubmit={handleSubmit}>
             <Field
-              name="isProposal"
+              name="isProposalForm"
               component={select}
               id="proposal_form_isProposal"
               label={<FormattedMessage id="object-deposited" />}
@@ -703,6 +703,7 @@ export default createFragmentContainer(
       districtHelpText
       districtMandatory
       allowAknowledge
+      isProposalForm
       districts {
         id
         name

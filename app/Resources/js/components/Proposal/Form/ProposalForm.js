@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, injectIntl, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import {type IntlShape, injectIntl, FormattedHTMLMessage, FormattedMessage} from 'react-intl';
+import {connect, type MapStateToProps} from 'react-redux';
 import {
   type FormProps,
   change,
@@ -11,8 +11,8 @@ import {
   FieldArray,
   formValueSelector,
 } from 'redux-form';
-import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
-import { debounce } from 'lodash';
+import {createFragmentContainer, fetchQuery, graphql} from 'react-relay';
+import {debounce} from 'lodash';
 import {
   Alert,
   Collapse,
@@ -31,9 +31,9 @@ import type {
   ProposalFormAvailableDistrictsForLocalisationQueryResponse,
   ProposalFormAvailableDistrictsForLocalisationQueryVariables,
 } from './__generated__/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
-import type { ProposalForm_proposal } from './__generated__/ProposalForm_proposal.graphql';
-import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_proposalForm.graphql';
-import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
+import type {ProposalForm_proposal} from './__generated__/ProposalForm_proposal.graphql';
+import type {ProposalForm_proposalForm} from './__generated__/ProposalForm_proposalForm.graphql';
+import type {GlobalState, Dispatch, FeatureToggles} from '../../../types';
 import CreateProposalMutation from '../../../mutations/CreateProposalMutation';
 import {
   closeCreateModal,
@@ -53,9 +53,9 @@ import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
-    $proposalFormId: ID!
-    $latitude: Float!
-    $longitude: Float!
+  $proposalFormId: ID!
+  $latitude: Float!
+  $longitude: Float!
   ) {
     availableDistrictsForLocalisation(
       proposalFormId: $proposalFormId
@@ -100,18 +100,18 @@ type RelayProps = {
 
 type Props = FormProps &
   RelayProps & {
-    +intl: IntlShape,
-    +themes: Array<Object>,
-    +dispatch: Dispatch,
-    +features: FeatureToggles,
-    +titleValue: ?string,
-    +addressValue: ?string,
-    +responses: ResponsesInReduxForm,
-  };
+  +intl: IntlShape,
+  +themes: Array<Object>,
+  +dispatch: Dispatch,
+  +features: FeatureToggles,
+  +titleValue: ?string,
+  +addressValue: ?string,
+  +responses: ResponsesInReduxForm,
+};
 
 type FormValues = {|
   title: ?string,
-  summary: ?string,
+  summary?: ?string,
   author?: ?string,
   body: ?string,
   address?: ?string,
@@ -147,7 +147,7 @@ const onUnload = e => {
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { proposalForm, proposal } = props;
+  const {proposalForm, proposal} = props;
   const data = {
     title: values.title,
     summary: values.summary,
@@ -167,7 +167,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
   if (proposal) {
     return ChangeProposalContentMutation.commit({
-      input: { ...data, id: proposal.id },
+      input: {...data, id: proposal.id},
     })
       .then(response => {
         if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
@@ -189,7 +189,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
 
   return CreateProposalMutation.commit({
-    input: { ...data, proposalFormId: proposalForm.id },
+    input: {...data, proposalFormId: proposalForm.id},
   })
     .then(response => {
       if (!response.createProposal || !response.createProposal.proposal) {
@@ -210,7 +210,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     });
 };
 
-const validate = (values: FormValues, { proposalForm, features, intl }: Props) => {
+const validate = (values: FormValues, {proposalForm, features, intl}: Props) => {
   const errors = {};
 
   if (values.draft) {
@@ -252,9 +252,9 @@ export class ProposalForm extends React.Component<Props, State> {
     window.addEventListener('beforeunload', onUnload);
   }
 
-  componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
+  componentWillReceiveProps({titleValue, addressValue, proposalForm}: Props) {
     if (this.props.titleValue !== titleValue) {
-      this.setState({ titleSuggestions: [] });
+      this.setState({titleSuggestions: []});
       if (titleValue && titleValue.length > 3) {
         this.loadTitleSuggestions(titleValue);
       }
@@ -272,7 +272,7 @@ export class ProposalForm extends React.Component<Props, State> {
 
   loadTitleSuggestions = debounce((title: string) => {
     const currentProposal = this.props.proposal;
-    this.setState({ isLoadingTitleSuggestions: true });
+    this.setState({isLoadingTitleSuggestions: true});
     fetchQuery(
       environment,
       searchProposalsQuery,
@@ -325,7 +325,9 @@ export class ProposalForm extends React.Component<Props, State> {
   };
 
   render() {
-    const { intl, titleValue, proposalForm, features, themes, error, form, responses } = this.props;
+    const {intl, titleValue, proposalForm, features, themes, error, form, responses} = this.props;
+    const titleFieldTradKey = proposalForm.isProposalForm ? "proposal.title" : "title";
+
     const {
       districtIdsFilteredByAddress,
       isLoadingTitleSuggestions,
@@ -335,7 +337,7 @@ export class ProposalForm extends React.Component<Props, State> {
     const optional = (
       <span className="excerpt">
         {' '}
-        <FormattedMessage id="global.form.optional" />
+        <FormattedMessage id="global.form.optional"/>
       </span>
     );
     return (
@@ -343,8 +345,8 @@ export class ProposalForm extends React.Component<Props, State> {
         <WYSIWYGRender className="mb-15" value={proposalForm.description} />
         {error && (
           <Alert bsStyle="danger">
-            <i className="icon ion-ios-close-outline" />{' '}
-            <FormattedHTMLMessage id="global.error.server.form" />
+            <i className="icon ion-ios-close-outline"/>{' '}
+            <FormattedHTMLMessage id="global.error.server.form"/>
           </Alert>
         )}
         <Field
@@ -354,7 +356,7 @@ export class ProposalForm extends React.Component<Props, State> {
           id="proposal_title"
           autoComplete="off"
           help={proposalForm.titleHelpText}
-          label={<FormattedMessage id="proposal.title" />}
+          label={<FormattedMessage id={titleFieldTradKey}/>}
           addonAfter={
             <Glyphicon
               glyph="refresh"
@@ -377,9 +379,9 @@ export class ProposalForm extends React.Component<Props, State> {
                   style={{ marginTop: -5 }}
                   className="pull-right"
                   onClick={() => {
-                    this.setState({ titleSuggestions: [] });
+                    this.setState({titleSuggestions: []});
                   }}>
-                  <FormattedMessage id="global.close" />
+                  <FormattedMessage id="global.close"/>
                 </Button>
               </Panel.Title>
             </Panel.Heading>
@@ -394,6 +396,7 @@ export class ProposalForm extends React.Component<Props, State> {
             </ListGroup>
           </Panel>
         </Collapse>
+        {proposalForm.usingSummary &&
         <Field
           name="summary"
           component={component}
@@ -404,67 +407,68 @@ export class ProposalForm extends React.Component<Props, State> {
           help={proposalForm.summaryHelpText}
           label={
             <span>
-              <FormattedMessage id="proposal.summary" />
-              {optional}
+              <FormattedMessage id="proposal.summary"/>
+              {!proposalForm.summaryMandatory && optional}
             </span>
           }
         />
+        }
         {features.themes &&
-          proposalForm.usingThemes && (
-            <Field
-              name="theme"
-              type="select"
-              id="proposal_theme"
-              component={component}
-              help={proposalForm.themeHelpText}
-              label={
-                <span>
-                  <FormattedMessage id="proposal.theme" />
-                  {!proposalForm.themeMandatory && optional}
+        proposalForm.usingThemes && (
+          <Field
+            name="theme"
+            type="select"
+            id="proposal_theme"
+            component={component}
+            help={proposalForm.themeHelpText}
+            label={
+              <span>
+                  <FormattedMessage id="proposal.theme"/>
+                {!proposalForm.themeMandatory && optional}
                 </span>
-              }>
-              <FormattedMessage id="proposal.select.theme">
-                {message => (
-                  <option value="" disabled>
-                    {message}
-                  </option>
-                )}
-              </FormattedMessage>
-              {themes.map(theme => (
-                <option key={theme.id} value={theme.id}>
-                  {theme.title}
+            }>
+            <FormattedMessage id="proposal.select.theme">
+              {message => (
+                <option value="" disabled>
+                  {message}
                 </option>
-              ))}
-            </Field>
-          )}
+              )}
+            </FormattedMessage>
+            {themes.map(theme => (
+              <option key={theme.id} value={theme.id}>
+                {theme.title}
+              </option>
+            ))}
+          </Field>
+        )}
         {proposalForm.categories.length > 0 &&
-          proposalForm.usingCategories && (
-            <Field
-              id="proposal_category"
-              type="select"
-              name="category"
-              component={component}
-              help={proposalForm.categoryHelpText}
-              label={
-                <span>
-                  <FormattedMessage id="proposal.category" />
-                  {!proposalForm.categoryMandatory && optional}
+        proposalForm.usingCategories && (
+          <Field
+            id="proposal_category"
+            type="select"
+            name="category"
+            component={component}
+            help={proposalForm.categoryHelpText}
+            label={
+              <span>
+                  <FormattedMessage id="proposal.category"/>
+                {!proposalForm.categoryMandatory && optional}
                 </span>
-              }>
-              <FormattedMessage id="proposal.select.category">
-                {message => (
-                  <option value="" disabled>
-                    {message}
-                  </option>
-                )}
-              </FormattedMessage>
-              {proposalForm.categories.map(category => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
+            }>
+            <FormattedMessage id="proposal.select.category">
+              {message => (
+                <option value="" disabled>
+                  {message}
                 </option>
-              ))}
-            </Field>
-          )}
+              )}
+            </FormattedMessage>
+            {proposalForm.categories.map(category => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </Field>
+        )}
         {proposalForm.usingAddress && (
           <Field
             id="proposal_address"
@@ -473,43 +477,50 @@ export class ProposalForm extends React.Component<Props, State> {
             help={proposalForm.addressHelpText}
             name="addressText"
             formName={formName}
-            label={<FormattedMessage id="proposal.map.form.field" />}
+            label={<FormattedMessage id="proposal.map.form.field"/>}
             placeholder="proposal.map.form.placeholder"
           />
         )}
         {features.districts &&
-          proposalForm.usingDistrict &&
-          proposalForm.districts.length > 0 && (
-            <Field
-              id="proposal_district"
-              type="select"
-              name="district"
-              component={component}
-              help={proposalForm.districtHelpText}
-              label={
-                <span>
-                  <FormattedMessage id="proposal.district" />
-                  {!proposalForm.districtMandatory && optional}
+        proposalForm.usingDistrict &&
+        proposalForm.districts.length > 0 && (
+          <Field
+            id="proposal_district"
+            type="select"
+            name="district"
+            component={component}
+            help={proposalForm.districtHelpText}
+            label={
+              <span>
+                  <FormattedMessage id="proposal.district"/>
+                {!proposalForm.districtMandatory && optional}
                 </span>
-              }>
-              <FormattedMessage id="proposal.select.district">
-                {message => <option value="">{message}</option>}
-              </FormattedMessage>
-              {districtIdsFilteredByAddress.map(districtId => (
-                <option key={districtId} value={districtId}>
-                  {proposalForm.districts.filter(district => district.id === districtId)[0].name}
-                </option>
-              ))}
-            </Field>
-          )}
+            }>
+            <FormattedMessage id="proposal.select.district">
+              {message => <option value="">{message}</option>}
+            </FormattedMessage>
+            {districtIdsFilteredByAddress.map(districtId => (
+              <option key={districtId} value={districtId}>
+                {proposalForm.districts.filter(district => district.id === districtId)[0].name}
+              </option>
+            ))}
+          </Field>
+        )}
+        {proposalForm.usingDescription &&
         <Field
           id="proposal_body"
           type="editor"
           name="body"
           component={component}
-          label={<FormattedMessage id="proposal.body" />}
+          label={
+            <span>
+                  <FormattedMessage id="proposal.body"/>
+              {!proposalForm.descriptionMandatory && optional}
+                </span>
+          }
           help={proposalForm.descriptionHelpText}
         />
+        }
         <FieldArray
           name="responses"
           component={renderResponses}
@@ -519,6 +530,7 @@ export class ProposalForm extends React.Component<Props, State> {
           change={this.props.change}
           responses={responses}
         />
+        {proposalForm.usingIllustration &&
         <Field
           id="proposal_media"
           name="media"
@@ -526,12 +538,13 @@ export class ProposalForm extends React.Component<Props, State> {
           type="image"
           label={
             <span>
-              <FormattedMessage id="proposal.media" />
-              {optional}
+              <FormattedMessage id="proposal.media"/>
+              {!proposalForm.illustrationMandatory && optional}
             </span>
           }
           help={proposalForm.illustrationHelpText}
         />
+        }
       </form>
     );
   }
@@ -541,7 +554,7 @@ const selector = formValueSelector(formName);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: GlobalState,
-  { proposal, proposalForm }: Props,
+  {proposal, proposalForm}: Props,
 ) => ({
   initialValues: {
     draft: proposal ? proposal.publicationStatus === 'DRAFT' : true,
@@ -697,6 +710,13 @@ export default createFragmentContainer(container, {
       descriptionHelpText
       addressHelpText
       proposalInAZoneRequired
+      isProposalForm
+      usingDescription
+      descriptionMandatory
+      usingSummary
+      summaryMandatory
+      usingIllustration
+      illustrationMandatory
     }
   `,
 });
