@@ -6,6 +6,10 @@ InternalQuery:
     name: Query
     description: 'Root of the schema.'
     fields:
+      registrationForm:
+        type: 'InternalRegistrationForm'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
       events:
         type: 'InternalEventConnection!'
       viewer:

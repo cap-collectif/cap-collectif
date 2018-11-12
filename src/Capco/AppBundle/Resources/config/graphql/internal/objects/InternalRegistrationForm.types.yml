@@ -1,0 +1,21 @@
+InternalRegistrationForm:
+  type: object
+  inherits:
+    - Node
+  config:
+    name: RegistrationForm
+    interfaces: [Node]
+    fields:
+      bottomTextDisplayed:
+        type: 'Boolean!'
+      topTextDisplayed:
+        type: 'Boolean!'
+      topText:
+        type: 'String'
+      bottomText:
+        type: 'String'
+      domains:
+        type: '[InternalEmailDomain!]'
+      questions:
+        type: '[Question!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\RegistrationForm\\RegistrationFormQuestionsResolver", [value])'
