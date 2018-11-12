@@ -1346,7 +1346,7 @@ input CreateQuestionnaireInput {
   title: String!
 
   # The questionnaire type
-  type: String! = "QUESTIONNAIRE"
+  type: QuestionnaireType! = QUESTIONNAIRE
   clientMutationId: String
 }
 
@@ -1546,6 +1546,15 @@ input DistrictInput {
 enum DistrictOrderField {
   ALPHABETICAL
   CREATED_AT
+}
+
+# Entities that can be drafted.
+interface Draftable {
+  # The ID of an object
+  id: ID!
+
+  # Is the object a draft.
+  draft: Boolean!
 }
 
 # A contribution with an author
@@ -2776,7 +2785,7 @@ enum ProjectVisibility {
 }
 
 # A budget contribution
-type Proposal implements Node & Contribution & Commentable & Publishable & Reportable & Trashable {
+type Proposal implements Node & Contribution & Commentable & Publishable & Draftable & Reportable & Trashable {
   # Followers connection
   followers(
     # Returns the elements in the list that come after the specified global ID.
@@ -2803,6 +2812,9 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Repor
 
   # The id of the contribution.
   id: ID!
+
+  # Identifies proposals as draft.
+  draft: Boolean!
 
   # The comments related to the commentable.
   comments(
@@ -2947,9 +2959,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Repor
 
   # Identifies the answers to an evaluation form.
   evaluation: ProposalEvaluation
-
-  # Identifies proposals as draft.
-  draft: Boolean!
 
   # Count number of comments for the proposal.
   commentsCount: Int!
@@ -3702,6 +3711,9 @@ type Questionnaire implements Node {
   questions: [Question!]!
   viewerReplies: [Reply!]!
   acknowledgeReplies: Boolean!
+
+  # The questionnaire type
+  type: QuestionnaireType!
   phoneConfirmation: Boolean!
 }
 
@@ -3740,6 +3752,15 @@ type QuestionnaireStep implements Node & Step {
     # Returns the last `n` elements from the list.
     last: Int
   ): UserConnection!
+}
+
+# Available questionnaire types.
+enum QuestionnaireType {
+  # Draft are allowed.
+  QUESTIONNAIRE
+
+  # Draft are not allowed.
+  VOTING
 }
 
 # A step inside a project.
@@ -3829,9 +3850,12 @@ type RemoveSourceVotePayload {
 }
 
 # A Reply
-type Reply implements Node & Publishable & Contribution {
+type Reply implements Node & Publishable & Draftable & Contribution {
   # The id of the contribution.
   id: ID!
+
+  # Is the object a draft.
+  draft: Boolean!
 
   # `true` if the object is published.
   published: Boolean!

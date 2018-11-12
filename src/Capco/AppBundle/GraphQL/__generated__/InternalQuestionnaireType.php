@@ -208,6 +208,18 @@ final class InternalQuestionnaireType extends ObjectType implements GeneratedTyp
                     'public' => null,
                     'access' => null,
                 ],
+                'type' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('QuestionnaireType')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The questionnaire type',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'phoneConfirmation' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [

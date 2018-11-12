@@ -24,16 +24,16 @@ final class QuestionnaireTypeType extends EnumType implements GeneratedTypeInter
                     'name' => 'QUESTIONNAIRE',
                     'value' => \constant("Capco\\AppBundle\\Enum\\QuestionnaireType::QUESTIONNAIRE"),
                     'deprecationReason' => null,
-                    'description' => 'Draft are allowed',
+                    'description' => 'Draft are allowed.',
                 ],
                 'VOTING' => [
                     'name' => 'VOTING',
                     'value' => \constant("Capco\\AppBundle\\Enum\\QuestionnaireType::VOTING"),
                     'deprecationReason' => null,
-                    'description' => 'Draft are not allowed',
+                    'description' => 'Draft are not allowed.',
                 ],
             ],
-            'description' => 'Available types',
+            'description' => 'Available questionnaire types.',
         ];
         };
         $config = $configProcessor->process(LazyConfig::create($configLoader, $globalVariables))->load();
