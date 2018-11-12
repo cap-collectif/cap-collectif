@@ -37,7 +37,7 @@ exports[`<ProposalCreateButton /> should render correctly as Question 1`] = `
       className="cap cap-add-1"
     />
     <FormattedMessage
-      id=" submit-a-question"
+      id="submit-a-question"
       values={Object {}}
     />
   </Button>
