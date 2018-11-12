@@ -34,7 +34,6 @@ export class ProposalCreateButton extends React.Component<Props> {
 export default createFragmentContainer(ProposalCreateButton, {
   proposalForm: graphql`
     fragment ProposalCreateButton_proposalForm on ProposalForm {
-      id
       isProposalForm
     }
   `,

@@ -211,7 +211,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     private $evaluationForm;
 
     /**
-     * @ORM\Column(name="object_type", nullable=false, type="string")
+     * @ORM\Column(name="object_type", nullable=false, type="string", options={"default": "proposal"})
      */
     private $objectType = ProposalFormObjectType::PROPOSAL;
 
@@ -372,13 +372,11 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     public function getRealQuestions(): Collection
     {
         return $this->getQuestions()
-            ? $this->getQuestions()->map(
-                function (
-                    QuestionnaireAbstractQuestion $questionnaireAbstractQuestion
-                ) {
-                    return $questionnaireAbstractQuestion->getQuestion();
-                }
-            )
+            ? $this->getQuestions()->map(function (
+                QuestionnaireAbstractQuestion $questionnaireAbstractQuestion
+            ) {
+                return $questionnaireAbstractQuestion->getQuestion();
+            })
             : new ArrayCollection();
     }
 
@@ -666,7 +664,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     {
         $label = $this->getTitle();
         if ($this->getStep()) {
-            $label = $this->getStep()->getTitle().' - '.$label;
+            $label = $this->getStep()->getTitle() . ' - ' . $label;
         }
 
         return $label;

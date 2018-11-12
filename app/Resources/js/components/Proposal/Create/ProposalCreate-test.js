@@ -9,13 +9,12 @@ describe('<ProposalCreate />', () => {
   it('should render correctly', () => {
     const defaultProps = {
       intl: intlMock,
-      // $FlowFixMe $refType
       proposalForm: {
         $fragmentRefs,
         $refType,
         contribuable: true,
         id: '2',
-        isProposalForm: true
+        isProposalForm: true,
       },
       showModal: true,
       submitting: true,
@@ -29,13 +28,12 @@ describe('<ProposalCreate />', () => {
   it('should render correctly as QuestionForm', () => {
     const defaultProps = {
       intl: intlMock,
-      // $FlowFixMe $refType
       proposalForm: {
         $fragmentRefs,
         $refType,
         contribuable: true,
         id: '2',
-        isProposalForm: false
+        isProposalForm: false,
       },
       showModal: true,
       submitting: true,

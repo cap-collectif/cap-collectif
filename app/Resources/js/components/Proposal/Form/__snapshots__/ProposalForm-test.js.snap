@@ -287,17 +287,10 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
 <form
   id="proposal-form"
 >
-  <div
+  <WYSIWYGRender
     className="mb-15"
-  >
-    <div
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Description 1",
-        }
-      }
-    />
-  </div>
+    value="Description 1"
+  />
   <Field
     addonAfter={
       <Glyphicon
