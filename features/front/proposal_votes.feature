@@ -13,12 +13,11 @@ Scenario: Logged in user wants to vote and unvote for a proposal in a selection 
   Then the proposal should have 2 votes
   And I reload the page
   Then the proposal should have 2 votes
-  # TODO
-  # Then I click the proposal unvote button
-  # And I should see "proposal.request.delete_vote.success" in the "#global-alert-box" element
-  # Then the proposal should have 1 votes
-  # And I reload the page
-  # Then the proposal should have 1 votes
+  Then I click the proposal unvote button
+  And I should see "proposal.request.delete_vote.success" in the "#global-alert-box" element
+  Then the proposal should have 1 votes
+  And I reload the page
+  Then the proposal should have 1 votes
 
 @javascript @security @elasticsearch @votes_from_selection_step
 Scenario: Logged in user wants to vote when he has not enough credits left in a selection step
