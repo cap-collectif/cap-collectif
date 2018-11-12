@@ -249,3 +249,30 @@ Capco\AppBundle\Entity\ProposalForm:
     categoryMandatory: true
     reference: 112
     allowAknowledge: true
+  proposalform14:
+    id: proposalForm14
+    title: Poser une question
+    description: <p><text(100)></p>
+    step: '@collectQuestionVoteAvecClassement'
+    notificationsConfiguration: '@proposalFormNotificationConfiguration15'
+    titleHelpText: Choisissez un titre pour votre question
+    themeHelpText: Sélectionnez un thème
+    descriptionHelpText: Pourquoi cette question ?
+    categoryHelpText: Sélectionnez une catégorie.
+    usingThemes: true
+    usingDistrict: false
+    usingDescription: true
+    usingIllustration: false
+    usingSummary: true
+    districtMandatory: false
+    usingCategories: true
+    themeMandatory: false
+    illustrationMandatory: false
+    summaryMandatory: false
+    descriptionMandatory: true
+    categoryMandatory: true
+    usingAddress: true
+    proposalInAZoneRequired: false
+    reference: 113
+    allowAknowledge: true
+    isProposalForm: false

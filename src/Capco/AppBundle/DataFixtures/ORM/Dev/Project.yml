@@ -189,7 +189,7 @@ Capco\AppBundle\Entity\Project:
     restrictedViewerGroups: ['@group2', '@group3']
   p21:
     id: 'project21'
-    title: BP avec vote classement
+    title: Questions/Responses
     projectType: '@projectType4'
     Author: '@user4'
     themes: []

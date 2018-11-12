@@ -458,3 +458,21 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform12'
     reference: 47
+  question1:
+    id: question1
+    title: Comment faire de l'électricité ?
+    body: <p><text(100)></p>
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    author: '@user1'
+    proposalForm: '@proposalform14'
+    reference: 48
+    status: '@status2'
+  question2:
+    id: question2
+    title: Et chez Youpie c'est mieux ?
+    body: <p><text(100)></p>
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    author: '@user1'
+    proposalForm: '@proposalform14'
+    reference: 49
+    status: '@status2'
