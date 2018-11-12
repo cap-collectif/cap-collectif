@@ -193,6 +193,7 @@ trait QuestionnaireStepsTrait
      */
     public function iClickOneRankingChoiceRightArrow()
     {
+        $this->scrollToElement('CreateReplyForm-responses[4]');
         $this->navigationContext
             ->getPage('questionnaire page')
             ->clickFirstRankingChoiceRightArrow();
@@ -201,6 +202,7 @@ trait QuestionnaireStepsTrait
 
     public function iClickOneRankingChoiceRightArrowUpdate()
     {
+        $this->scrollToElement('UpdateReplyForm-reply2-responses[4]');
         $this->navigationContext
             ->getPage('questionnaire page')
             ->clickFirstRankingChoiceRightArrowUpdate();

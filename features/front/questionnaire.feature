@@ -20,6 +20,7 @@ Scenario: Logged in user wants to add a private reply to a questionnaire
   Given I am logged in as user
   And I go to a questionnaire step
   And I fill the questionnaire form
+  And I scroll to the bottom
   And I check the reply private checkbox
   And I submit my reply
   And I wait "#global-alert-box" to appear on current page

@@ -614,6 +614,17 @@ class ApplicationContext extends UserContext
         }
     }
 
+    //
+    /**
+     * @When I scroll to element :elementId
+     */
+    public function scrollToElement(string $elementId)
+    {
+        $this->getSession()
+            ->getDriver()
+            ->executeScript("document.getElementById('$elementId').scrollIntoView()");
+    }
+
     /**
      * @Given /^I wait for debug$/
      */
