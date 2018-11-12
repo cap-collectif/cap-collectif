@@ -7,7 +7,7 @@ swarrot:
       port: 5672
       login: '%rabbitmq_login%'
       password: '%rabbitmq_password%'
-      vhost: 'capco'
+      vhost: /
   messages_types:
     elasticsearch.indexation:
       exchange: capco_direct_exchange

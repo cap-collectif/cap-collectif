@@ -94,8 +94,10 @@ class RabbitMQContext implements KernelAwareContext
     /**
      * @Then /^the queue associated to "([^"]*)" should have (?P<num>\d+) messages$/
      */
-    public function theQueueAssociatedToProducerShouldHave(string $producerName, int $messagesCount)
-    {
+    public function theQueueAssociatedToProducerShouldHave(
+        string $producerName,
+        int $messagesCount
+    ) {
         $queuedMessages = $this->getQueuedMessages($producerName);
         Assert::assertCount(
             $messagesCount,
@@ -158,7 +160,12 @@ class RabbitMQContext implements KernelAwareContext
     {
         $container = $this->kernel->getContainer();
 
-        return $container->get('swarrot.factory.pecl');
+        return $container->get('swarrot.factory.default');
+    }
+
+    private function getQueueName(string $producerName): string
+    {
+        return sprintf('%s_queue', $producerName);
     }
 
     private function replaceDynamicValues(string $data): string
