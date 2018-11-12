@@ -25,6 +25,7 @@ trait QuestionnaireStepsTrait
     public function iGoToAQuestionnaireStep()
     {
         $this->visitPageWithParams('questionnaire page', self::$questionnaireStepParams);
+        $this->iWait(1);
     }
 
     /**
@@ -33,6 +34,7 @@ trait QuestionnaireStepsTrait
     public function iGoToAClosedQuestionnaireStep()
     {
         $this->visitPageWithParams('questionnaire page', self::$questionnaireStepClosedParams);
+        $this->iWait(1);
     }
 
     /**
@@ -44,6 +46,7 @@ trait QuestionnaireStepsTrait
             'questionnaire page',
             self::$questionnaireStepWithNoMultipleReplies
         );
+        $this->iWait(1);
     }
 
     /**
@@ -55,6 +58,7 @@ trait QuestionnaireStepsTrait
             'questionnaire page',
             self::$questionnaireStepWithNoMultipleReplies
         );
+        $this->iWait(1);
     }
 
     // ************************************************** Creation ***********************************************************
