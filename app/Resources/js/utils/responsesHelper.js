@@ -680,22 +680,24 @@ export const renderResponses = ({
               }
             }
             return (
-              <PrivateBox key={field.id} show={field.private}>
-                <Field
-                  name={`${member}.value`}
-                  id={`${form}-${member}`}
-                  type={field.type}
-                  component={component}
-                  description={field.description}
-                  help={field.helpText}
-                  isOtherAllowed={isOtherAllowed}
-                  placeholder="reply.your_response"
-                  choices={choices}
-                  label={label}
-                  disabled={disabled}
-                  value={responses[index].value}
-                />
-              </PrivateBox>
+              <div className={isAvailableQuestion === false && 'visible-print-block'}>
+                <PrivateBox key={field.id} show={field.private}>
+                  <Field
+                    name={`${member}.value`}
+                    id={`${form}-${member}`}
+                    type={field.type}
+                    component={component}
+                    description={field.description}
+                    help={field.helpText}
+                    isOtherAllowed={isOtherAllowed}
+                    placeholder="reply.your_response"
+                    choices={choices}
+                    label={label}
+                    disabled={disabled}
+                    value={responses[index].value}
+                  />
+                </PrivateBox>
+              </div>
             );
           }
         }
