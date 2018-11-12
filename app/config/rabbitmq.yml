@@ -1,4 +1,4 @@
-capco:
+'capco':
   exchanges:
     capco_direct_exchange:
       type: direct

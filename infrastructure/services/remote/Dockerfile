@@ -129,14 +129,13 @@ RUN cd / && \
 RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 
 # Install rabbitmq
-RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
+ENV RABBITMQ_VERSION_DEB=3.6.16-2
+RUN echo 'deb https://dl.bintray.com/rabbitmq/debian stretch main erlang-20.x' | tee /etc/apt/sources.list.d/bintray.rabbitmq.list && \
     wget -O- https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | apt-key add - && \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server=$RABBITMQ_VERSION_DEB && \
     rm -rf /var/lib/apt/lists/* && \
-    rabbitmq-plugins enable rabbitmq_management && \
-    chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie && \
-    chmod 600 /var/lib/rabbitmq/.erlang.cookie
+    rabbitmq-plugins enable rabbitmq_management
 
 # Install mariadb
 RUN set -x \
@@ -185,7 +184,7 @@ COPY infrastructure/services/remote/php-fpm/fpm.conf               /etc/service/
 COPY infrastructure/services/remote/cron/crontab                   /etc/cron.d/crontab
 COPY infrastructure/services/remote/elasticsearch/capco.yml        /etc/elasticsearch/config/elasticsearch.yml
 COPY infrastructure/services/remote/varnish/capco.vcl              /etc/varnish/capco.vcl
-COPY infrastructure/services/remote/rabbitmq/rabbitmq.conf         /etc/rabbitmq/rabbitmq.conf
+COPY infrastructure/services/remote/rabbitmq/rabbitmq.config         /etc/rabbitmq/rabbitmq.config
 COPY infrastructure/services/remote/logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
 COPY infrastructure/services/remote/supervisord/                   /etc/supervisord
 
