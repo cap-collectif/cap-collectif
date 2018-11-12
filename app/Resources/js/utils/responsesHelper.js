@@ -249,7 +249,10 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
   return Array.from(new Set([...questionsWithJumpsIds, ...firstQuestionsIds]));
 };
 
-export const getAvailableQuestionsIds = (questions: Questions, responses: ResponsesInReduxForm) => {
+export const getAvailableQuestionsIds = (
+  questions: Questions,
+  responses: ?ResponsesInReduxForm,
+) => {
   // If no jump in questionnaire every question is available
   const hasLogicJumps = questionsHaveLogicJump(questions);
   if (!hasLogicJumps) {
@@ -532,7 +535,7 @@ export const renderResponses = ({
   disabled,
 }: FieldArrayProps & {
   questions: Questions,
-  responses: ResponsesInReduxForm,
+  responses: ?ResponsesInReduxForm,
   change: (field: string, value: any) => void,
   form: string,
   intl: IntlShape,
@@ -641,11 +644,10 @@ export const renderResponses = ({
             );
           }
           default: {
-            let response;
-            if (responses) {
-              response = responses[index].value;
-            }
-
+            const response =
+              responses && responses[index] && responses[index].value
+                ? responses[index].value
+                : null;
             let choices = [];
             if (
               field.type === 'ranking' ||
@@ -679,6 +681,7 @@ export const renderResponses = ({
                 );
               }
             }
+
             return (
               <div className={isAvailableQuestion === false && 'visible-print-block'}>
                 <PrivateBox key={field.id} show={field.private}>
@@ -694,7 +697,7 @@ export const renderResponses = ({
                     choices={choices}
                     label={label}
                     disabled={disabled}
-                    value={responses[index].value}
+                    value={response}
                   />
                 </PrivateBox>
               </div>
