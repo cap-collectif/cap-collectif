@@ -19,6 +19,7 @@ type ParentProps = {
   proposal: ProposalVoteButton_proposal,
   step: Step,
   user: { +id: string },
+  isHovering: boolean,
   id: string,
 };
 
@@ -28,28 +29,27 @@ type Props = ParentProps & {
   disabled: boolean,
 };
 
-type State = {
-  isHovering: boolean,
-};
-
 // Should only be used via ProposalVoteButtonWrapper
-export class ProposalVoteButton extends React.Component<Props, State> {
-  static defaultProps = { disabled: false };
-
-  state = { isHovering: false };
+export class ProposalVoteButton extends React.Component<Props> {
+  static defaultProps = { disabled: false, isHovering: false };
 
   target: null;
 
-  handleHovering = () => {
-    if (this.props.proposal.viewerHasVote) {
-      this.setState({ isHovering: true });
+  getButtonStyle = () => {
+    const { isHovering, proposal } = this.props;
+    if (proposal.viewerVote && isHovering) {
+      return 'btn btn-danger';
     }
+    return 'btn btn-success';
   };
 
-  handleBlur = () => {
-    if (this.props.proposal.viewerHasVote) {
-      this.setState({ isHovering: false });
+  getButtonText = () => {
+    const { isHovering, proposal } = this.props;
+
+    if (proposal.viewerVote) {
+      return isHovering ? 'proposal.vote.delete' : 'proposal.vote.hasVoted';
     }
+    return 'proposal.vote.add';
   };
 
   render() {
@@ -64,22 +64,6 @@ export class ProposalVoteButton extends React.Component<Props, State> {
         : () => {
             dispatch(openVoteModal(proposal.id));
           };
-    let buttonText = '';
-    let style = 'btn btn-success';
-    if (proposal.viewerVote && this.state.isHovering) {
-      buttonText = 'proposal.vote.delete';
-      style = 'btn btn-danger';
-    }
-
-    if (proposal.viewerVote && !this.state.isHovering) {
-      buttonText = 'proposal.vote.hasVoted';
-      style = 'btn btn-success';
-    }
-
-    if (!proposal.viewerVote) {
-      buttonText = 'proposal.vote.add';
-      style = 'btn btn-success';
-    }
 
     return (
       <Button
@@ -87,11 +71,7 @@ export class ProposalVoteButton extends React.Component<Props, State> {
         ref={button => {
           this.target = button;
         }}
-        className={`mr-15 proposal__button__vote ${style} ${classes} `}
-        onFocus={this.handleHovering}
-        onMouseOver={this.handleHovering}
-        onBlur={this.handleBlur}
-        onMouseOut={this.handleBlur}
+        className={`mr-15 proposal__button__vote ${this.getButtonStyle()} ${classes} `}
         onClick={disabled ? null : action}
         active={proposal.viewerHasVote}
         disabled={disabled || isDeleting}>
@@ -101,7 +81,7 @@ export class ProposalVoteButton extends React.Component<Props, State> {
             publishable={proposal.viewerVote}
           />
         )}
-        <FormattedMessage id={buttonText} />
+        <FormattedMessage id={this.getButtonText()} />
       </Button>
     );
   }

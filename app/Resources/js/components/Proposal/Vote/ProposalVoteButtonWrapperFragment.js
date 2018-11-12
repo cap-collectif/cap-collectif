@@ -8,6 +8,7 @@ import VoteButtonOverlay from './VoteButtonOverlay';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import type { ProposalVoteButtonWrapperFragment_proposal } from './__generated__/ProposalVoteButtonWrapperFragment_proposal.graphql';
 import type { ProposalVoteButtonWrapperFragment_step } from './__generated__/ProposalVoteButtonWrapperFragment_step.graphql';
+import HoverObserver from '../../Utils/HoverObserver';
 import type { ProposalVoteButtonWrapperFragment_viewer } from './__generated__/ProposalVoteButtonWrapperFragment_viewer.graphql';
 
 type Props = {
@@ -64,14 +65,16 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
           hasReachedLimit={
             !proposal.viewerHasVote && step.votesLimit && step.votesLimit - viewerVotesCount <= 0
           }>
-          {/* $FlowFixMe */}
-          <ProposalVoteButton
-            id={id}
-            proposal={proposal}
-            step={step}
-            user={viewer}
-            disabled={false}
-          />
+          <HoverObserver>
+            {/* $FlowFixMe */}
+            <ProposalVoteButton
+              id={id}
+              proposal={proposal}
+              step={step}
+              user={viewer}
+              disabled={false}
+            />
+          </HoverObserver>
         </VoteButtonOverlay>
       );
     }
@@ -84,14 +87,16 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
         userHasVote={proposal.viewerHasVote}
         hasReachedLimit={step.votesLimit && step.votesLimit - viewerVotesCount <= 0}
         hasUserEnoughCredits={this.userHasEnoughCredits()}>
-        <ProposalVoteButton
-          id={id}
-          proposal={proposal}
-          step={step}
-          user={viewer}
-          className={className}
-          disabled={!proposal.viewerHasVote && !this.userHasEnoughCredits()}
-        />
+        <HoverObserver>
+          <ProposalVoteButton
+            id={id}
+            proposal={proposal}
+            step={step}
+            user={viewer}
+            className={className}
+            disabled={!proposal.viewerHasVote && !this.userHasEnoughCredits()}
+          />
+        </HoverObserver>
       </VoteButtonOverlay>
     );
   }

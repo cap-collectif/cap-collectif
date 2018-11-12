@@ -38,4 +38,18 @@ describe('<ProposalVoteButton />', () => {
     const wrapper = shallow(<ProposalVoteButton proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders viewer has voted and hovering', () => {
+    const proposal = {
+      $refType,
+      id: 'proposal1',
+      viewerHasVote: true,
+      viewerVote: {
+        id: 'vote1',
+        $fragmentRefs,
+      },
+    };
+    const wrapper = shallow(<ProposalVoteButton isHovering proposal={proposal} {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
