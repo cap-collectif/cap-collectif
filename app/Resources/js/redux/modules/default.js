@@ -5,7 +5,6 @@ import type { Exact, Action, Dispatch, FeatureToggle, FeatureToggles } from '../
 import {
   addRegistrationFieldSucceeded,
   updateRegistrationFieldSucceeded,
-  deleteRegistrationFieldSucceeded,
 } from './user';
 
 type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
@@ -140,18 +139,6 @@ export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
       throw new SubmissionError({ _error: 'Un problème est survenu' });
     },
   );
-};
-
-export const deleteRegistrationField = (id: number, dispatch: Dispatch) => {
-  // eslint-disable-next-line no-alert
-  if (window.confirm('Confirmez la suppression ?')) {
-    return Fetcher.delete(`/registration_form/questions/${id}`).then(
-      () => {
-        dispatch(deleteRegistrationFieldSucceeded(id));
-      },
-      () => {},
-    );
-  }
 };
 
 export const toggleFeature = (

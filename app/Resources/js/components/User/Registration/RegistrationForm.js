@@ -260,7 +260,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
-  dynamicFields: state.user.registration_form.questions,
+  dynamicFields: [],
   shieldEnabled: state.default.features.shield_mode,
 });
 

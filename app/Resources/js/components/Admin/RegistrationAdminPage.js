@@ -238,8 +238,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  dynamicFields: state.user.registration_form.questions,
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onToggle: (feature: FeatureToggle, value: boolean) => {
