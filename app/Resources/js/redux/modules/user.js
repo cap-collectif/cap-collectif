@@ -389,6 +389,10 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, displayChartModal: true };
     case 'HIDE_CHART_MODAL':
       return { ...state, displayChartModal: false };
+    case 'SHOW_REGISTRATION_MODAL':
+      return { ...state, showRegistrationModal: true };
+    case 'CLOSE_REGISTRATION_MODAL':
+      return { ...state, showRegistrationModal: false };
     case 'SHOW_LOGIN_MODAL':
       return { ...state, showLoginModal: true };
     case 'CLOSE_LOGIN_MODAL':
