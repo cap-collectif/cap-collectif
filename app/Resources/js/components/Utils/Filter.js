@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 
 type Props = {
   value: any,
   values?: Array<$FlowFixMe>,
   show?: boolean,
   onChange: Function,
-};
+} & { intl: IntlShape };
 
 class Filter extends React.Component<Props> {
   static defaultProps = {
@@ -16,7 +16,7 @@ class Filter extends React.Component<Props> {
   };
 
   render() {
-    const { onChange, show, value, values } = this.props;
+    const { onChange, show, value, values, intl } = this.props;
     if (show) {
       return (
         <select className="form-control pull-right" value={value} onBlur={onChange}>
@@ -24,7 +24,7 @@ class Filter extends React.Component<Props> {
             values.map(
               (val: number, index: number): ?React.Element<any> => (
                 <option value={val} key={index}>
-                  <FormattedMessage id={`global.filter_${val}`} />
+                  {intl.formatMessage({ id: `global.filter_${val}` })}
                 </option>
               ),
             )}
@@ -35,4 +35,4 @@ class Filter extends React.Component<Props> {
   }
 }
 
-export default Filter;
+export default injectIntl(Filter);

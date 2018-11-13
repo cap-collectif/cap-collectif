@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Alert } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
@@ -31,7 +31,7 @@ type RelayProps = {
   source: OpinionSourceForm_source,
   sourceable: OpinionSourceForm_sourceable,
 };
-type Props = RelayProps & FormProps & { user: { isEmailConfirmed: boolean } };
+type Props = RelayProps & FormProps & { user: { isEmailConfirmed: boolean } } & { intl: IntlShape };
 
 const validate = ({ title, body, category, link, check }: FormValues) => {
   const errors = {};
@@ -105,7 +105,7 @@ export const formName = 'opinion-source-form';
 
 class OpinionSourceForm extends React.Component<Props> {
   render() {
-    const { error, dispatch, source, sourceable } = this.props;
+    const { error, dispatch, source, sourceable, intl } = this.props;
     return (
       <form id="source-form">
         {error && (
@@ -147,7 +147,7 @@ class OpinionSourceForm extends React.Component<Props> {
           label={<FormattedMessage id="source.type" />}>
           {!source && (
             <option value="" disabled>
-              <FormattedMessage id="global.select" />
+              {intl.formatMessage({ id: 'global.select' })}
             </option>
           )}
           {sourceable.availableSourceCategories &&
@@ -202,7 +202,9 @@ const container = connect(mapStateToProps)(
   })(OpinionSourceForm),
 );
 
-export default createFragmentContainer(container, {
+const containerWithIntl = injectIntl(container);
+
+export default createFragmentContainer(containerWithIntl, {
   source: graphql`
     fragment OpinionSourceForm_source on Source {
       id

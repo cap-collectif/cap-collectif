@@ -76,6 +76,7 @@ export class OpinionSourceBox extends React.Component<Props, State> {
               </Col>
               {totalCount > 1 && (
                 <Col xs={12} sm={6} md={6}>
+                  {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                   <Filter show value={order} onChange={this.handleFilterChange} />
                 </Col>
               )}

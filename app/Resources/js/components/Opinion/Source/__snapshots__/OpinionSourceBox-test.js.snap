@@ -161,17 +161,10 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
           sm={6}
           xs={12}
         >
-          <Filter
+          <InjectIntl(Filter)
             onChange={[Function]}
             show={true}
             value="last"
-            values={
-              Array [
-                "popular",
-                "last",
-                "old",
-              ]
-            }
           />
         </Col>
       </Row>
