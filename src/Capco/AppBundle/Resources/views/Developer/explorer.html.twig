@@ -27,14 +27,14 @@ iframe#graphiql {
     {% include 'CapcoAppBundle:Developer:menu.html.twig' with {'active': 'explorer'} %}
 </div>
 
+<div class="row">
 <div class="col-md-12">
-
-    <div class="graphiql-wrapper">
-    {# <iframe id="graphiql" scrolling="no" src="{{url('overblog_graphiql_endpoint')}}">
+  <div class="graphiql-wrapper" style="margin-top: 15px">
+    <iframe id="graphiql" scrolling="no" src="{{url('graphiql_endpoint')}}">
       <p>You must have iframes enabled to use this feature.</p>
-    </iframe> #}
-    </div>
-    
+    </iframe>
+  </div>
+</div>
 </div>
 
 </div>

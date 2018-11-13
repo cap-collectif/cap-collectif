@@ -23,14 +23,13 @@
 <body>
 {% block body %}
   <div style="width: 100%; height: 100%">
-    {# <h2>Cap Collectif GraphQL API</h2>
     <p>
     {% if app.user %}
-    Signed in as spyl94. You’re ready to explore! 
+    Signed in as <strong>{{app.user.username}}</strong>. You’re ready to explore! 
     {% else %}
-       Start exploring GraphQL API queries using your account’s data now. 
+       Start exploring GraphQL API queries using your account by logging in. 
     {% endif %}
-    </p> #}
+    </p>
     {# <p>
         Cap Collectif's GraphQL Explorer makes use of your real, live, production data.
     </p> #}
@@ -50,6 +49,9 @@
             // Preview is enabled by default, maybe we should add a toggle
             "Accept": "application/vnd.cap-collectif.preview+json",
             "Content-Type": "application/json",
+            {% if app.user %}
+            "Authorization": "Bearer {{jwtManager.create(app.user)}}",
+            {% endif %}
           }
           {% endblock graphql_fetcher_headers %}
 
