@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean, select, text, withKnobs, number } from '@storybook/addon-knobs';
+import { boolean, select, text, number } from '@storybook/addon-knobs';
 import { Alert, ProgressBar } from 'react-bootstrap';
 import { storiesOf } from '@storybook/react';
 import { AlertForm } from '../components/Alert/AlertForm';
@@ -23,7 +23,6 @@ const classNameOptions = {
 const doFunction = () => {};
 
 storiesOf('Feedbacks indicators', module)
-  .addDecorator(withKnobs)
   .add(
     'Alert',
     () => {

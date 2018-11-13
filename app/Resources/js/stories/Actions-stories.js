@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, boolean, select, withKnobs } from '@storybook/addon-knobs';
+import { text, boolean, select } from '@storybook/addon-knobs';
 import { Button, ButtonGroup, ButtonToolbar, DropdownButton, MenuItem } from 'react-bootstrap';
 
 const bsStyleOptions = {
@@ -22,7 +22,6 @@ const bsSizeOptions = {
 };
 
 storiesOf('Actions', module)
-  .addDecorator(withKnobs)
   .add(
     'Buttons',
     () => {

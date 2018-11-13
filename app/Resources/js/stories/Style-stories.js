@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 import { FontStyle } from './FontStyle';
 
-export const ColorContainer = styled.div`
+export const ColorContainers = styled.div`
   height: 50px;
   width: 100%;
   margin-bottom: 20px;
@@ -54,7 +54,7 @@ storiesOf('UI', module)
       <div className="row">
         {colors.map(color => (
           <div className="col-sm-2 col-xs-12 mb-20">
-            <ColorContainer hex={color.hex} />
+            <ColorContainers hex={color.hex} />
             <div className="text-center">
               <b>{color.hex}</b>
               <br />
