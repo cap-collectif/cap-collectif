@@ -35,7 +35,6 @@ Scenario: GraphQL client wants to retrieve questions
     }
   }
   """
-
 Scenario: GraphQL client wants to retrieve replies
   Given I am logged in to graphql as admin
   When I send a GraphQL request:
@@ -113,15 +112,7 @@ Scenario: GraphQL client wants to retrieve replies
                 "value":"{\"labels\":[\"Natation\"],\"other\":null}"
               },
               {
-                "question": {"id":"301"},
-                "value": @null@
-              },
-              {
                 "question": {"id":"2"},
-                "value": @null@
-              },
-              {
-                "question": {"id":"302"},
                 "value": @null@
               },
               {
@@ -143,6 +134,14 @@ Scenario: GraphQL client wants to retrieve replies
               {
                 "question": {"id":"19"},
                 "value":"{\"labels\":[],\"other\":null}"
+              },
+              {
+                "question": {"id":"301"},
+                "value": @null@
+              },
+              {
+                "question": {"id":"302"},
+                "value": @null@
               }
             ]
           }
