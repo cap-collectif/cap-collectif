@@ -1,30 +1,45 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { QueryRenderer, graphql } from 'react-relay'
 import type { Connector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Alert, Well, Col, Button } from 'react-bootstrap';
 import Toggle from 'react-toggle';
-import { arrayMove } from 'react-sortable-hoc';
+import environment, { graphqlError } from '../../createRelayEnvironment';
 import { toggleFeature, showNewFieldModal } from '../../redux/modules/default';
 import { reorderRegistrationQuestions } from '../../redux/modules/user';
 import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
 import RegistrationCommunicationForm from './RegistrationCommunicationForm';
-import RegistrationQuestionSortableList from './RegistrationQuestionSortableList';
 import RegistrationEmailDomainsForm from './RegistrationEmailDomainsForm';
+import Loader from "../Ui/Loader";
+import RegistrationFormQuestions from "./RegistrationFormQuestions";
 
 type Props = {
   features: FeatureToggles,
   onToggle: (feature: FeatureToggle, value: boolean) => void,
   addNewField: () => void,
   isSuperAdmin: boolean,
-  reorder: Function,
-  dynamicFields: Array<Object>,
 };
+
+const dynamicFieldsComponent = ({error, props}) => {
+  if (error) {
+    console.log(error); // eslint-disable-line no-console
+    return graphqlError;
+  }
+  if (props) {
+    // eslint-disable-next-line
+    if (props.registrationForm) {
+      return <RegistrationFormQuestions {...props} />;
+    }
+    return graphqlError;
+  }
+  return <Loader />;
+}
 
 export class RegistrationAdminPage extends React.Component<Props> {
   render() {
-    const { reorder, isSuperAdmin, onToggle, addNewField, features, dynamicFields } = this.props;
+    const { isSuperAdmin, onToggle, addNewField, features } = this.props;
     return (
       <div className="box-content">
         <div className="row">
@@ -140,16 +155,18 @@ export class RegistrationAdminPage extends React.Component<Props> {
               <FormattedMessage id="more-fields" />
             </strong>
           </p>
-          {dynamicFields.length > 0 && (
-            <RegistrationQuestionSortableList
-              items={dynamicFields}
-              onSortEnd={({ oldIndex, newIndex }) => {
-                reorder(arrayMove(dynamicFields, oldIndex, newIndex));
-              }}
-              lockAxis="y"
-              useDragHandle
-            />
-          )}
+          <QueryRenderer
+            query={graphql`
+                query RegistrationAdminPageQuery {
+                    registrationForm {
+                        ...RegistrationFormQuestions_registrationForm
+                    }
+                }
+            `}
+            environment={environment}
+            variables={{}}
+            render={dynamicFieldsComponent}
+          />
           <Button
             className="box-content__toolbar"
             disabled={!isSuperAdmin}

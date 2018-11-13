@@ -1009,6 +1009,27 @@ final class InternalMutationType extends ObjectType implements GeneratedTypeInte
                         return ($globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_SUPER_ADMIN") || ($globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER") && $globalVariable->get('container')->get("Capco\\AppBundle\\Helper\\ProposalHelper")->isAuthor($args["input"]["proposalId"], \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))));
                     },
                 ],
+                'updateRegistrationForm' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('UpdateRegistrationFormQuestionsPayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('UpdateRegistrationFormQuestionsInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRegistrationFormQuestionsMutation", array(0 => $value)]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_SUPER_ADMIN");
+                    },
+                ],
                 'createProposalForm' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('CreateProposalFormPayload'),
                     'args' => [

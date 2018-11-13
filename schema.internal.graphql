@@ -2138,6 +2138,7 @@ type Mutation {
   changeCollectStatus(input: ChangeCollectStatusInput!): ChangeCollectStatusPayload
   changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
   deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
+  updateRegistrationForm(input: UpdateRegistrationFormQuestionsInput!): UpdateRegistrationFormQuestionsPayload
   createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
   changeDistrict(input: ChangeDistrictInput!): ChangeDistrictPayload
   updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
@@ -5035,6 +5036,16 @@ input UpdateQuestionnaireParametersInput {
 
 type UpdateQuestionnaireParametersPayload {
   questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input UpdateRegistrationFormQuestionsInput {
+  questions: [QuestionnaireAbstractQuestionInput!]
+  clientMutationId: String
+}
+
+type UpdateRegistrationFormQuestionsPayload {
+  registrationForm: RegistrationForm
   clientMutationId: String
 }
 

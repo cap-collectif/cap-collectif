@@ -1,0 +1,6 @@
+UpdateRegistrationFormQuestionsInput:
+  type: relay-mutation-input
+  config:
+    fields:
+      questions:
+        type: '[QuestionnaireAbstractQuestionInput!]'
