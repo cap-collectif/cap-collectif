@@ -3163,9 +3163,17 @@ type ProposalForm implements Node {
 
   # Proposal form is type of Proposal or Question
   isProposalForm: Boolean!
+
+  # Proposal form using description field
   usingDescription: Boolean!
+
+  # Proposal form using illustration field
   usingIllustration: Boolean!
+
+  # Proposal form using summary field
   usingSummary: Boolean!
+
+  # Proposal form is description field is mandatory or not
   descriptionMandatory: Boolean!
 }
 
@@ -4968,10 +4976,20 @@ input UpdateProposalFormInput {
   districts: [DistrictInput!]
   questions: [QuestionnaireAbstractQuestionInput!]
   allowAknowledge: Boolean
+
+  # Proposal form is type of Proposal or Question
   isProposalForm: Boolean!
+
+  # Proposal form using description field
   usingDescription: Boolean
-  usingSummary: Boolean
+
+  # Proposal form using illustration field
   usingIllustration: Boolean
+
+  # Proposal form using summary field
+  usingSummary: Boolean
+
+  # Proposal form is description field is mandatory or not
   descriptionMandatory: Boolean
   clientMutationId: String
 }

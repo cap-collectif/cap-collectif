@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Traits;
 
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,21 +20,35 @@ trait SummarizableTrait
         return $this->summary;
     }
 
-    public function getProposalFormSummaryOrBodyExcerpt(): ?string
+    public function getProposalSummaryOrBodyExcerpt(): ?string
     {
-        if (!($proposalForm = $this->getProposalForm())) {
+        /** @var ProposalForm $proposalForm */
+        $proposalForm = $this->getProposalForm();
+        if (!$proposalForm) {
             return null;
         }
 
-        if (!$proposalForm->getSummary()) {
+        if (
+            $proposalForm->getUsingSummary() &&
+            $proposalForm->getUsingDescription() &&
+            $proposalForm->getDescriptionMandatory()
+        ) {
+            return $this->getBodyTextExcerpt(140);
+        }
+
+        if (
+            $proposalForm->getUsingSummary() &&
+            $proposalForm->getUsingDescription() &&
+            !$proposalForm->getDescriptionMandatory()
+        ) {
             return $this->summary ?? $this->getBodyTextExcerpt(140);
         }
 
-        if (!$proposalForm->usingSumary() && !$proposalForm->usingDescription()) {
+        if (!$proposalForm->getUsingSummary() && !$proposalForm->getUsingDescription()) {
             return null;
         }
 
-        if ($proposalForm->getUsingSummary() && !$proposalForm->usingDescription()) {
+        if ($proposalForm->getUsingSummary() && !$proposalForm->getUsingDescription()) {
             return $this->summary ? $this->summary : null;
         }
 
@@ -45,8 +61,8 @@ trait SummarizableTrait
 
     public function getSummaryOrBodyExcerpt(): ?string
     {
-        if (property_exists($this, 'getProposalForm')) {
-            return $this->getProposalFormSummaryOrBodyExcerpt();
+        if ($this instanceof Proposal) {
+            return $this->getProposalSummaryOrBodyExcerpt();
         }
 
         return $this->summary ?? $this->getBodyTextExcerpt(140);

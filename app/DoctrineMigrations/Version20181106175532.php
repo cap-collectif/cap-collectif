@@ -40,11 +40,11 @@ final class Version20181106175532 extends AbstractMigration
     public function postUp(Schema $schema)
     {
         $proposalForms = $this->connection->fetchAll(
-            'SELECT id, description_help_text, summary_help_text, illustration_help_text from proposal_form'
+            'SELECT id, summary_help_text, illustration_help_text from proposal_form'
         );
         foreach ($proposalForms as $proposalForm) {
             $data = ['object_type' => ProposalFormObjectType::PROPOSAL];
-            $data['using_description'] = !empty($proposalForm['description_help_text']);
+            $data['using_description'] = true;
             $data['description_mandatory'] = true;
             $data['using_summary'] = !empty($proposalForm['summary_help_text']);
             $data['using_illustration'] = !empty($proposalForm['illustration_help_text']);

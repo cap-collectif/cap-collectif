@@ -601,7 +601,7 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'Proposal form using description field',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -613,7 +613,7 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'Proposal form using illustration field',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -625,7 +625,7 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'Proposal form using summary field',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -637,7 +637,7 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'Proposal form is description field is mandatory or not',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
