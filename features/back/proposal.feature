@@ -53,6 +53,7 @@ Scenario: Logged in admin wants to evaluate a proposal
   And I wait 1 seconds
   And I save the custom evaluation
   And I wait ".alert__form_succeeded-message" to appear on current page
+  And I reload the page, I should see a confirm popup 
 
 @database @elasticsearch
 Scenario: Logged in admin, wants to change the proposal's status
