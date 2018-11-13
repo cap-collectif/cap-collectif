@@ -76,8 +76,9 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithWrongValues()
     {
-        $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice1');
-        $this->checkOption('CreateReplyForm-responses[3]_choice-questionchoice2');
+        $this->scrollToElement('CreateReplyForm-responses[0]');
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
+        $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice2');
     }
 
     /**
@@ -85,7 +86,7 @@ trait QuestionnaireStepsTrait
      */
     public function iFillTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
-        $this->fillField('CreateReplyForm-responses[1]', '');
+        $this->fillField('CreateReplyForm-responses[0]', '');
         $this->selectOption(
             'CreateReplyForm-responses[3]',
             'Pas assez fort (Mon sonotone est en panne)'
@@ -97,8 +98,8 @@ trait QuestionnaireStepsTrait
      */
     public function iUpdateTheQuestionnaireFormWithoutTheRequiredQuestions()
     {
-        $this->fillField('UpdateReplyForm-reply5-responses[1]', 'This biscuit bless your soul');
-        $this->checkOption('UpdateReplyForm-reply5-responses[3]_choice-questionchoice3');
+        $this->fillField('UpdateReplyForm-reply5-responses[0]', 'This biscuit bless your soul');
+        $this->checkOption('UpdateReplyForm-reply5-responses[1]_choice-questionchoice3');
     }
 
     /**
@@ -107,7 +108,7 @@ trait QuestionnaireStepsTrait
     public function iFillTheQuestionnaireFormWithNotEnoughChoicesForRequiredQuestion()
     {
         $this->fillField(
-            'CreateReplyForm-responses[1]',
+            'CreateReplyForm-responses[0]',
             'Je pense que c\'est la ville parfaite pour organiser les JO'
         );
         $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
@@ -265,6 +266,7 @@ trait QuestionnaireStepsTrait
      */
     public function iUpdateTheQuestionnaireFormWithWrongValues()
     {
+        $this->scrollToElement('UpdateReplyForm-reply2-responses[2]');
         $this->fillField(
             'UpdateReplyForm-reply2-responses[2]',
             'I am not the right answer you are looking for'
@@ -276,6 +278,7 @@ trait QuestionnaireStepsTrait
      */
     public function iUpdateTheDraftFormWithWrongValues()
     {
+        $this->scrollToElement('UpdateReplyForm-reply5-responses[2]');
         $this->fillField(
             'UpdateReplyForm-reply5-responses[2]',
             'I am not the right answer you are looking for'
@@ -308,13 +311,20 @@ trait QuestionnaireStepsTrait
         $this->navigationContext->getPage('questionnaire page')->clickDeleteReplyButton();
     }
 
-
     /**
      * @Then I confirm reply deletion
      */
     public function iConfirmReplyDeletion()
     {
         $this->navigationContext->getPage('questionnaire page')->clickConfirmDeleteReplyButton();
+    }
+
+    /**
+     * @Then I click the delete reply draft button
+     */
+    public function iClickDeleteReplyDraftButton()
+    {
+        $this->navigationContext->getPage('questionnaire page')->clickDeleteReplyDraftButton();
     }
 
     /**
@@ -368,7 +378,7 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeElementOnPage('questionnaire form', 'questionnaire page');
         if (!$edition) {
             $this->fillField(
-                'CreateReplyForm-responses[1]',
+                'CreateReplyForm-responses[0]',
                 'Je pense que c\'est la ville parfaite pour organiser les JO'
             );
             $this->checkOption('CreateReplyForm-responses[1]_choice-questionchoice1');
@@ -378,7 +388,7 @@ trait QuestionnaireStepsTrait
             return;
         }
         $this->fillField(
-            'CreateReplyForm-responses[1]',
+            'CreateReplyForm-responses[0]',
             'En fait c\'est nul, je ne veux pas des JO à Paris'
         );
     }

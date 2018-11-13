@@ -60,7 +60,6 @@ Scenario: Logged in user wants to add a reply to a questionnaire with not enough
 Scenario: Logged in user wants to answer with a ranking
   Given I am logged in as user
   And I go to a questionnaire step
-  When I wait 1 seconds
   When I click one ranking choice right arrow
   When I wait 1 seconds
   Then the ranking choice should be in the choice box
@@ -79,7 +78,7 @@ Scenario: Logged in user wants to add a reply to a closed questionnaire step
   Then I should see "step.questionnaire.alert.ended.title" in the "#main" element
   And the questionnaire form should be disabled
 
-@javascript @database
+@javascript
 Scenario: Logged in user wants to add another reply when multiple replies is allowed
   Given I am logged in as admin
   When I go to a questionnaire step
@@ -104,7 +103,6 @@ Scenario: Logged in user wants to add another reply when multiple replies is not
 Scenario: Logged in user wants to see the list of his replies
   Given I am logged in as admin
   When I go to a questionnaire step
-  When I wait 1 seconds
   Then I should see my reply
 
 ## Update
@@ -113,7 +111,6 @@ Scenario: Logged in user wants to see the list of his replies
 Scenario: Logged in user wants to update a reply
   Given I am logged in as admin
   When I go to a questionnaire step
-  When I wait 1 seconds
   And I click on the update reply button
   When I wait 1 seconds
   And I update the questionnaire form
@@ -136,34 +133,7 @@ Scenario: Logged in user wants to add a draft to a questionnaire with wrong valu
   When I wait 1 seconds
   And I should see my reply
   
-@javascript @draft
-Scenario: Logged in user wants to update a draft to a questionnaire with wrong values
-  Given I am logged in as admin
-  And I go to a questionnaire step
-  When I wait 1 seconds
-  And I click on the update reply draft button
-  When I wait 1 seconds
-  When I update the draft form without the required questions
-  And I submit my updated draft
-  And I wait "#global-alert-box .alert-success" to appear on current page
-  Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
-  When I wait 1 seconds
-  And I should see my reply
-
-# Draft
-
 @javascript @database @draft
-Scenario: Logged in user wants to add a draft to a questionnaire with wrong values
-  Given I am logged in as user
-  And I go to a questionnaire step
-  When I fill the questionnaire form with wrong values
-  And I submit my draft
-  And I wait "#global-alert-box .alert-success" to appear on current page
-  Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
-  When I wait 1 seconds
-  And I should see my reply
-  
-@javascript @draft
 Scenario: Logged in user wants to update a draft to a questionnaire with wrong values
   Given I am logged in as admin
   And I go to a questionnaire step
@@ -172,6 +142,7 @@ Scenario: Logged in user wants to update a draft to a questionnaire with wrong v
   When I wait 1 seconds
   When I update the draft form without the required questions
   And I submit my updated draft
+  When I wait 1 seconds
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "your-answer-has-been-saved-as-a-draft" in the "#global-alert-box" element
   When I wait 1 seconds
@@ -190,6 +161,7 @@ Scenario: Logged in user wants to remove a reply
   Then I should see "reply.request.delete.success" in the "#global-alert-box" element
   When I wait 1 seconds  
   And I click the delete reply draft button
+  When I wait 1 seconds
   And I confirm reply draft deletion
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.delete.success" in the "#global-alert-box" element
