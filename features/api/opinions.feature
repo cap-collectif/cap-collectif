@@ -19,7 +19,7 @@ Scenario: logged in API client wants to add an opinion to a not enabled opinionT
   }
   """
 
-@database @rabbitmq @test
+@database @rabbitmq
 Scenario: logged in API client wants to add an opinion
   Given I am logged in to api as user
   When I send a POST request to "/api/projects/project5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
