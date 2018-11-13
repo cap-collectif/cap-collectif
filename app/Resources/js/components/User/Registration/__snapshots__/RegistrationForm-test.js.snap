@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
+exports[`<RegistrationForm /> renders a form with dynamic questions from registration form 1`] = `
 <form
   id="registration-form"
   onSubmit={[MockFunction]}
@@ -62,19 +62,22 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     }
     type="password"
   />
-  <Field
+  <FieldArray
     component={[Function]}
-    id="dynamic-6"
-    key="0"
-    label={
-      <span>
-        Champ pas facultatif
-         
-      </span>
+    form="registration-form"
+    name="responses"
+    questions={
+      Array [
+        Object {
+          "id": 6,
+          "private": false,
+          "question": "Champ pas facultatif",
+          "required": true,
+          "slug": "champ-pas-facultatif",
+          "type": "text",
+        },
+      ]
     }
-    labelClassName="font-weight-normal"
-    name="dynamic-6"
-    type="text"
   />
   <Field
     component={[Function]}
@@ -183,6 +186,12 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
       }
     }
     type="password"
+  />
+  <FieldArray
+    component={[Function]}
+    form="registration-form"
+    name="responses"
+    questions={Array []}
   />
   <Field
     component={[Function]}
@@ -329,6 +338,12 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
       type_1
     </option>
   </Field>
+  <FieldArray
+    component={[Function]}
+    form="registration-form"
+    name="responses"
+    questions={Array []}
+  />
   <Field
     component={[Function]}
     id="charte"
@@ -461,6 +476,12 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     labelClassName="font-weight-normal"
     name="zipcode"
     type="text"
+  />
+  <FieldArray
+    component={[Function]}
+    form="registration-form"
+    name="responses"
+    questions={Array []}
   />
   <Field
     component={[Function]}

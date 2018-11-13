@@ -14,7 +14,10 @@ describe('<RegistrationForm />', () => {
     userTypes: [],
     cguName: 'la charte',
     cguLink: '/charte',
-    dynamicFields: [],
+    registrationForm: {
+      id: "1",
+      questions: []
+    },
     organizationName: 'Cap Collectif',
     dispatch: jest.fn(),
     shieldEnabled: false,
@@ -38,20 +41,23 @@ describe('<RegistrationForm />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders a form with dynamic fields', () => {
+  it('renders a form with dynamic questions from registration form', () => {
     const wrapper = shallow(
       <RegistrationForm
         {...props}
-        dynamicFields={[
-          {
-            type: 'text',
-            required: true,
-            private: false,
-            question: 'Champ pas facultatif',
-            slug: 'champ-pas-facultatif',
-            id: 6,
-          },
-        ]}
+        registrationForm={{
+          id: "1",
+          questions: [
+            {
+              type: 'text',
+              required: true,
+              private: false,
+              question: 'Champ pas facultatif',
+              slug: 'champ-pas-facultatif',
+              id: 6,
+            },
+          ]
+        }}
       />,
     );
     expect(wrapper).toMatchSnapshot();

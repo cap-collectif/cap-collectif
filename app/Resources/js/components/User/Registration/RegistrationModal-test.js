@@ -32,8 +32,6 @@ describe('<RegistrationModal />', () => {
 
   it('renders a form', () => {
     const wrapper = shallow(<RegistrationModal show features={{}} {...props} />);
-    const form = wrapper.find(RegistrationForm);
-    expect(form).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });
 

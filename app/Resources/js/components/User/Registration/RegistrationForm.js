@@ -1,14 +1,21 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { isEmail } from '../../../services/Validator';
-import type { Dispatch, State } from '../../../types';
-import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
+import {createFragmentContainer, graphql} from 'react-relay';
+import {FormattedMessage, injectIntl, IntlShape} from 'react-intl';
+import {connect, type MapStateToProps} from 'react-redux';
+import {Field, FieldArray, reduxForm, type FormProps} from 'redux-form';
+import {isEmail} from '../../../services/Validator';
+import type {Dispatch, State} from '../../../types';
+import type {RegistrationForm_registrationForm} from './__generated__/RegistrationForm_registrationForm.graphql'
+import {register as onSubmit, displayChartModal} from '../../../redux/modules/user';
 import renderComponent from '../../Form/Field';
+import {formatInitialResponsesValues, renderResponses} from "../../../utils/responsesHelper";
+import type {ResponsesInReduxForm} from "../../../utils/responsesHelper";
 
-type Props = {
+type Props = FormProps & {
+  registrationForm: RegistrationForm_registrationForm,
+  intl: IntlShape,
+  responses: ResponsesInReduxForm,
   addUserTypeField: boolean,
   addZipcodeField: boolean,
   addCaptchaField: boolean,
@@ -17,7 +24,6 @@ type Props = {
   cguLink: string,
   cguName: string,
   handleSubmit: Function,
-  dynamicFields: Array<Object>,
   organizationName: string,
   shieldEnabled: boolean,
   dispatch: Dispatch,
@@ -47,21 +53,20 @@ export const validate = (values: Object, props: Object) => {
   ) {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
-  for (const field of props.dynamicFields) {
-    if (field.required && !values[`dynamic-${field.id}`]) {
-      errors[`dynamic-${field.id}`] = 'global.required';
-    }
-  }
   return errors;
 };
 
 export const form = 'registration-form';
+
 export class RegistrationForm extends React.Component<Props> {
   render() {
     const {
       cguLink,
       cguName,
-      dynamicFields,
+      registrationForm,
+      responses,
+      change,
+      intl,
       addZipcodeField,
       addUserTypeField,
       addConsentExternalCommunicationField,
@@ -107,7 +112,7 @@ export class RegistrationForm extends React.Component<Props> {
           id="username"
           component={renderComponent}
           type="text"
-          label={<FormattedMessage id="registration.username" />}
+          label={<FormattedMessage id="registration.username"/>}
           labelClassName="font-weight-normal"
         />
         <Field
@@ -115,11 +120,11 @@ export class RegistrationForm extends React.Component<Props> {
           id="email"
           component={renderComponent}
           type="email"
-          label={<FormattedMessage id="global.email" />}
+          label={<FormattedMessage id="global.email"/>}
           labelClassName="font-weight-normal"
           popover={{
             id: 'registration-email-tooltip',
-            message: <FormattedMessage id="registration.tooltip.email" />,
+            message: <FormattedMessage id="registration.tooltip.email"/>,
           }}
         />
         <Field
@@ -127,11 +132,11 @@ export class RegistrationForm extends React.Component<Props> {
           id="password"
           component={renderComponent}
           type="password"
-          label={<FormattedMessage id="registration.password" />}
+          label={<FormattedMessage id="registration.password"/>}
           labelClassName="font-weight-normal"
           popover={{
             id: 'registration-password-tooltip',
-            message: <FormattedMessage id="registration.tooltip.password" />,
+            message: <FormattedMessage id="registration.tooltip.password"/>,
           }}
         />
         {addUserTypeField && (
@@ -143,9 +148,9 @@ export class RegistrationForm extends React.Component<Props> {
             labelClassName="font-weight-normal"
             label={
               <span>
-                <FormattedMessage id="registration.type" />{' '}
+                <FormattedMessage id="registration.type"/>{' '}
                 <span className="excerpt">
-                  <FormattedMessage id="global.form.optional" />
+                  <FormattedMessage id="global.form.optional"/>
                 </span>
               </span>
             }>
@@ -168,56 +173,24 @@ export class RegistrationForm extends React.Component<Props> {
             labelClassName="font-weight-normal"
             label={
               <span>
-                <FormattedMessage id="registration.zipcode" />{' '}
+                <FormattedMessage id="registration.zipcode"/>{' '}
                 <span className="excerpt">
-                  <FormattedMessage id="global.form.optional" />
+                  <FormattedMessage id="global.form.optional"/>
                 </span>
               </span>
             }
             autoComplete="postal-code"
           />
         )}
-        {dynamicFields.map((field, key) => {
-          let children;
-          if (field.choices) {
-            const choices = field.choices.map((choice, i) => (
-              <option key={i + 1} value={choice.label}>
-                {choice.label}
-              </option>
-            ));
-            children = [
-              <FormattedMessage id="global.select">
-                {message => (
-                  <option key={0} value="">
-                    {message}
-                  </option>
-                )}
-              </FormattedMessage>,
-              ...choices,
-            ];
-          }
-          return (
-            <Field
-              id={`dynamic-${field.id}`}
-              key={key}
-              name={`dynamic-${field.id}`}
-              component={renderComponent}
-              type={field.type}
-              labelClassName="font-weight-normal"
-              label={
-                <span>
-                  {field.question}{' '}
-                  {!field.required && (
-                    <span className="excerpt">
-                      <FormattedMessage id="global.form.optional" />
-                    </span>
-                  )}
-                </span>
-              }
-              children={children}
-            />
-          );
-        })}
+        <FieldArray
+          name="responses"
+          change={change}
+          responses={responses}
+          form={form}
+          component={renderResponses}
+          questions={registrationForm.questions}
+          intl={intl}
+        />
         <Field
           id="charte"
           name="charte"
@@ -244,14 +217,14 @@ export class RegistrationForm extends React.Component<Props> {
           />
         )}
         {addCaptchaField && (
-          <Field id="captcha" component={renderComponent} name="captcha" type="captcha" />
+          <Field id="captcha" component={renderComponent} name="captcha" type="captcha"/>
         )}
       </form>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,
   addZipcodeField: state.default.features.zipcode_at_register,
@@ -260,15 +233,82 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
-  dynamicFields: [],
+  responses: formatInitialResponsesValues(
+    props.registrationForm.questions,
+    []
+  ),
+  initialValues: {
+    registrationForm: props.registrationForm,
+    responses: formatInitialResponsesValues(
+      props.registrationForm.questions,
+      []
+    )
+  },
   shieldEnabled: state.default.features.shield_mode,
 });
 
-const connector = connect(mapStateToProps);
-export default connector(
-  reduxForm({
-    form,
-    validate,
-    onSubmit,
-  })(RegistrationForm),
-);
+const formContainer = reduxForm({
+  form,
+  validate,
+  onSubmit,
+})(RegistrationForm)
+
+
+const container = connect(mapStateToProps)(injectIntl(formContainer));
+
+export default createFragmentContainer(container,
+  graphql`
+    fragment RegistrationForm_registrationForm on RegistrationForm {
+      id
+      questions {
+        id
+        number
+        title
+        position
+        private
+        required
+        description
+        helpText
+        jumps {
+          id
+          always
+          destination {
+            id
+            title
+            number
+          }
+          conditions {
+            id
+            operator
+            question {
+              id
+              title
+            }
+            ... on MultipleChoiceQuestionLogicJumpCondition {
+              value {
+                id
+                title
+              }
+            }
+          }
+        }
+        type
+        ... on MultipleChoiceQuestion {
+          isOtherAllowed
+          validationRule {
+            type
+            number
+          }
+          choices(randomize: true) {
+            id
+            title
+            description
+            color
+            image {
+              url
+            }
+          }
+        }
+      }
+    }
+  `)
