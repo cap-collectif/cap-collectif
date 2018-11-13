@@ -4968,7 +4968,7 @@ input UpdateProposalFormInput {
   districts: [DistrictInput!]
   questions: [QuestionnaireAbstractQuestionInput!]
   allowAknowledge: Boolean
-  isProposalForm: Boolean
+  isProposalForm: Boolean!
   usingDescription: Boolean
   usingSummary: Boolean
   usingIllustration: Boolean

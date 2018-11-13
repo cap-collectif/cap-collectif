@@ -60,7 +60,7 @@ UpdateProposalFormInput:
       allowAknowledge:
         type: 'Boolean'
       isProposalForm:
-        type: 'Boolean'
+        type: 'Boolean!'
       usingDescription:
         type: 'Boolean'
       usingSummary:
