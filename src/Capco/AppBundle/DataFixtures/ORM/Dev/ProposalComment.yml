@@ -86,4 +86,3 @@ Capco\AppBundle\Entity\ProposalComment:
     body: <text(300)>
     publishedAt: '<dateTimeBetween("-2 days", "now")>'
     createdAt: <dateTimeBetween('-50 days', '-1 days')>
-
