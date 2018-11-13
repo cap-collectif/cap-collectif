@@ -37,6 +37,7 @@ Scenario: Logged in admin wants to add some analyst groups
   And I fill "ag" and "Utilisateurs" to the analyst select
   And I save the current proposal evaluation analysts groupes
   And I wait ".alert__form_succeeded-message" to appear on current page
+  And I reload the page, I should see a confirm popup 
 
 @database @elasticsearch
 Scenario: Logged in admin wants to evaluate a proposal
