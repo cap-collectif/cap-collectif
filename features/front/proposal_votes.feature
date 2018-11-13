@@ -92,7 +92,7 @@ Scenario: Proposal should stay voted after user refresh the page
   And I submit the proposal vote form
   And I wait "#global-alert-box" to appear on current page
   And I should see "proposal.request.vote.success" in the "#global-alert-box" element
-  And I should see "proposal.vote.delete"
+  # And I should see "proposal.vote.delete"
   Then I go to a collect step with vote
   And I should see "proposal.vote.hasVoted"
 
