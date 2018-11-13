@@ -257,17 +257,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           >
             <Field
               component={[Function]}
-              id="proposal_form_summary_mandatory"
-              name="summaryMandatory"
-              type="checkbox"
-            >
-              <FormattedMessage
-                id="proposal_form.required"
-                values={Object {}}
-              />
-            </Field>
-            <Field
-              component={[Function]}
               id="proposal_form_summary_help_text"
               label={
                 <span>
@@ -334,17 +323,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
             bsClass="panel"
             collapsible={false}
           >
-            <Field
-              component={[Function]}
-              id="proposal_form_illustration_mandatory"
-              name="illustrationMandatory"
-              type="checkbox"
-            >
-              <FormattedMessage
-                id="proposal_form.required"
-                values={Object {}}
-              />
-            </Field>
             <Field
               component={[Function]}
               id="proposal_form_illustration_help_text"

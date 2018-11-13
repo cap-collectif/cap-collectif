@@ -31,11 +31,9 @@ class ProposalFormUpdateType extends AbstractType
             ->add('descriptionHelpText', PurifiedTextType::class)
 
             ->add('usingSummary', CheckboxType::class)
-            ->add('summaryMandatory', CheckboxType::class)
             ->add('summaryHelpText', PurifiedTextType::class)
 
             ->add('usingIllustration', CheckboxType::class)
-            ->add('illustrationMandatory', CheckboxType::class)
             ->add('illustrationHelpText', PurifiedTextType::class)
 
             ->add('proposalInAZoneRequired', CheckboxType::class)

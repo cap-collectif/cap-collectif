@@ -69,7 +69,3 @@ UpdateProposalFormInput:
         type: 'Boolean'
       descriptionMandatory:
         type: 'Boolean'
-      illustrationMandatory:
-        type: 'Boolean'
-      summaryMandatory:
-        type: 'Boolean'

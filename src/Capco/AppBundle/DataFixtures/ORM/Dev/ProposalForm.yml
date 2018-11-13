@@ -18,8 +18,6 @@ Capco\AppBundle\Entity\ProposalForm:
     districtMandatory: true
     usingCategories: true
     themeMandatory: false
-    illustrationMandatory: false
-    summaryMandatory: false
     descriptionMandatory: false
     categoryMandatory: true
     usingAddress: true
@@ -99,8 +97,6 @@ Capco\AppBundle\Entity\ProposalForm:
     usingIllustration: false
     usingSummary: false
     districtMandatory: true
-    illustrationMandatory: false
-    summaryMandatory: false
     descriptionMandatory: false
     usingCategories: true
     themeMandatory: false
@@ -131,8 +127,6 @@ Capco\AppBundle\Entity\ProposalForm:
     usingThemes: true
     usingDistrict: true
     usingDescription: true
-    illustrationMandatory: false
-    summaryMandatory: false
     descriptionMandatory: false
     usingIllustration: false
     usingSummary: false
@@ -163,8 +157,6 @@ Capco\AppBundle\Entity\ProposalForm:
     usingDistrict: false
     usingDescription: true
     usingIllustration: false
-    illustrationMandatory: false
-    summaryMandatory: false
     descriptionMandatory: false
     usingSummary: false
     districtMandatory: false
@@ -190,8 +182,6 @@ Capco\AppBundle\Entity\ProposalForm:
     usingDescription: true
     usingIllustration: false
     usingSummary: false
-    illustrationMandatory: false
-    summaryMandatory: false
     descriptionMandatory: false
     districtMandatory: false
     usingCategories: true
@@ -216,8 +206,6 @@ Capco\AppBundle\Entity\ProposalForm:
     usingDescription: true
     usingIllustration: false
     usingSummary: false
-    illustrationMandatory: false
-    summaryMandatory: false
     descriptionMandatory: false
     districtMandatory: false
     usingCategories: true
@@ -238,8 +226,6 @@ Capco\AppBundle\Entity\ProposalForm:
     usingThemes: true
     usingDistrict: true
     usingDescription: true
-    illustrationMandatory: false
-    summaryMandatory: false
     descriptionMandatory: false
     usingIllustration: false
     usingSummary: false
@@ -267,8 +253,6 @@ Capco\AppBundle\Entity\ProposalForm:
     districtMandatory: false
     usingCategories: true
     themeMandatory: false
-    illustrationMandatory: false
-    summaryMandatory: false
     descriptionMandatory: true
     categoryMandatory: true
     usingAddress: true

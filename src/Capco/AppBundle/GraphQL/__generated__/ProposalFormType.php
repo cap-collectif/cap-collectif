@@ -24,18 +24,6 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
             'description' => 'A budget form',
             'fields' => function () use ($globalVariable) {
                 return [
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'proposals' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
                     'args' => [
@@ -165,6 +153,18 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
+                ],
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
                 ],
                 'reference' => [
                     'type' => Type::nonNull(Type::string()),
@@ -621,30 +621,6 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'access' => null,
                 ],
                 'usingSummary' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'illustrationMandatory' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'summaryMandatory' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],

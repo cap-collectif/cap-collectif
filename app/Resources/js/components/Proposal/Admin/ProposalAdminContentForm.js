@@ -101,7 +101,6 @@ export const validateProposalContent = (
   }
   if (
     proposalForm.usingSummary &&
-    proposalForm.summaryMandatory &&
     (values.summary && (values.summary.length > 140 || values.summary.length < 2))
   ) {
     errors.summary = 'proposal.constraints.summary';
@@ -640,7 +639,6 @@ export default createFragmentContainer(
         usingDescription
         usingSummary
         descriptionMandatory
-        summaryMandatory
         districtMandatory
         districtHelpText
         usingThemes

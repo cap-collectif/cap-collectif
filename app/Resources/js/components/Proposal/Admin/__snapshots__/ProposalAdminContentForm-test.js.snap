@@ -63,7 +63,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
             "id": "step1",
           },
           "summaryHelpText": "Summary Help",
-          "summaryMandatory": true,
           "themeHelpText": "Theme Help",
           "themeMandatory": true,
           "titleHelpText": "Title help",

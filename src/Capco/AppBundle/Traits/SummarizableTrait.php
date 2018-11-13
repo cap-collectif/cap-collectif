@@ -24,7 +24,7 @@ trait SummarizableTrait
             return null;
         }
 
-        if (!$proposalForm->getSummaryMandatory()) {
+        if (!$proposalForm->getSummary()) {
             return $this->summary ?? $this->getBodyTextExcerpt(140);
         }
 
@@ -32,11 +32,7 @@ trait SummarizableTrait
             return null;
         }
 
-        if (
-            $proposalForm->getUsingSummary() &&
-            !$proposalForm->getSummaryMandatory() &&
-            !$proposalForm->usingDescription()
-        ) {
+        if ($proposalForm->getUsingSummary() && !$proposalForm->usingDescription()) {
             return $this->summary ? $this->summary : null;
         }
 

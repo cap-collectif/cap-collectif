@@ -155,14 +155,6 @@ final class UpdateProposalFormInputType extends InputObjectType implements Gener
                     'type' => Type::boolean(),
                     'description' => null,
                 ],
-                'illustrationMandatory' => [
-                    'type' => Type::boolean(),
-                    'description' => null,
-                ],
-                'summaryMandatory' => [
-                    'type' => Type::boolean(),
-                    'description' => null,
-                ],
                 'clientMutationId' => [
                     'type' => Type::string(),
                     'description' => null,

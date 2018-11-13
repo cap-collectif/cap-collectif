@@ -389,7 +389,6 @@ export default createFragmentContainer(ProposalListTable, {
         usingDescription
         usingSummary
         descriptionMandatory
-        summaryMandatory
         isProposalForm
       }
     }

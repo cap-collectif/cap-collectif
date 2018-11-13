@@ -15,7 +15,6 @@ describe('<ProposalListTable />', () => {
       usingSummary: true,
       isProposalForm: true,
       descriptionMandatory: true,
-      summaryMandatory: true,
     },
     $refType,
   };
@@ -29,7 +28,6 @@ describe('<ProposalListTable />', () => {
       usingSummary: false,
       isProposalForm: false,
       descriptionMandatory: false,
-      summaryMandatory: false,
     },
     $refType,
   };

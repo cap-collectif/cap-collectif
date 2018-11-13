@@ -93,6 +93,15 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
           id="proposal.summary"
           values={Object {}}
         />
+        <span
+          className="excerpt"
+        >
+           
+          <FormattedMessage
+            id="global.form.optional"
+            values={Object {}}
+          />
+        </span>
       </span>
     }
     maxLength="140"
@@ -275,6 +284,15 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
           id="proposal.media"
           values={Object {}}
         />
+        <span
+          className="excerpt"
+        >
+           
+          <FormattedMessage
+            id="global.form.optional"
+            values={Object {}}
+          />
+        </span>
       </span>
     }
     name="media"
@@ -376,6 +394,15 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
           id="proposal.summary"
           values={Object {}}
         />
+        <span
+          className="excerpt"
+        >
+           
+          <FormattedMessage
+            id="global.form.optional"
+            values={Object {}}
+          />
+        </span>
       </span>
     }
     maxLength="140"
@@ -558,6 +585,15 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
           id="proposal.media"
           values={Object {}}
         />
+        <span
+          className="excerpt"
+        >
+           
+          <FormattedMessage
+            id="global.form.optional"
+            values={Object {}}
+          />
+        </span>
       </span>
     }
     name="media"
@@ -659,6 +695,15 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
           id="proposal.summary"
           values={Object {}}
         />
+        <span
+          className="excerpt"
+        >
+           
+          <FormattedMessage
+            id="global.form.optional"
+            values={Object {}}
+          />
+        </span>
       </span>
     }
     maxLength="140"
@@ -841,6 +886,15 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
           id="proposal.media"
           values={Object {}}
         />
+        <span
+          className="excerpt"
+        >
+           
+          <FormattedMessage
+            id="global.form.optional"
+            values={Object {}}
+          />
+        </span>
       </span>
     }
     name="media"

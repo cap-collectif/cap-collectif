@@ -103,9 +103,5 @@ ProposalForm:
         type: 'Boolean!'
       usingSummary:
         type: 'Boolean!'
-      illustrationMandatory:
-        type: 'Boolean!'
-      summaryMandatory:
-        type: 'Boolean!'
       descriptionMandatory:
         type: 'Boolean!'

@@ -129,57 +129,48 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'viewerHasReport' => [
+                'trashed' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->userHasReport(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable));
-                    },
-                    'description' => 'Does the viewer already submitted a report ?',
+                    'resolve' => null,
+                    'description' => '`true` if the contribution is trashed.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
+                    'access' => null,
                 ],
-                'reportings' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ReportingConnection')),
+                'trashedStatus' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
                     'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                            'defaultValue' => 30,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('ReportingOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
-                        ],
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReportingsResolver", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => 'The reportings related to the reportable.',
+                    'resolve' => null,
+                    'description' => 'The status.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The moment the moderator trashed the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'trashedReason' => [
+                    'type' => Type::string(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The reason the moderator trashed the contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -327,48 +318,57 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
                 ],
-                'trashed' => [
+                'viewerHasReport' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
-                    'resolve' => null,
-                    'description' => '`true` if the contribution is trashed.',
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->userHasReport(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable));
+                    },
+                    'description' => 'Does the viewer already submitted a report ?',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
-                'trashedStatus' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('TrashableStatus'),
+                'reportings' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ReportingConnection')),
                     'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                            'defaultValue' => 30,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last `n` elements from the list.',
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('ReportingOrder'),
+                            'description' => null,
+                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                        ],
                     ],
-                    'resolve' => null,
-                    'description' => 'The status.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'trashedAt' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The moment the moderator trashed the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'trashedReason' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The reason the moderator trashed the contribution.',
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReportingsResolver", array(0 => $value, 1 => $args)]);
+                    },
+                    'description' => 'The reportings related to the reportable.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

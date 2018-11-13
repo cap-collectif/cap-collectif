@@ -231,19 +231,9 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     private $usingSummary = false;
 
     /**
-     * @ORM\Column(name="summary_mandatory", type="boolean", nullable=false)
-     */
-    private $summaryMandatory = false;
-
-    /**
      * @ORM\Column(name="using_illustration", type="boolean", nullable=false)
      */
     private $usingIllustration = false;
-
-    /**
-     * @ORM\Column(name="illustration_mandatory", type="boolean", nullable=false)
-     */
-    private $illustrationMandatory = false;
 
     public function __construct()
     {
@@ -879,30 +869,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     public function setDescriptionMandatory(bool $descriptionMandatory): self
     {
         $this->descriptionMandatory = $descriptionMandatory;
-
-        return $this;
-    }
-
-    public function getSummaryMandatory(): bool
-    {
-        return $this->summaryMandatory;
-    }
-
-    public function setSummaryMandatory(bool $summaryMandatory): self
-    {
-        $this->summaryMandatory = $summaryMandatory;
-
-        return $this;
-    }
-
-    public function getIllustrationMandatory(): bool
-    {
-        return $this->illustrationMandatory;
-    }
-
-    public function setIllustrationMandatory(bool $illustrationMandatory): self
-    {
-        $this->illustrationMandatory = $illustrationMandatory;
 
         return $this;
     }

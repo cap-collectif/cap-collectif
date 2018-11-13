@@ -389,13 +389,6 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               <Panel.Collapse>
                 <Panel.Body>
                   <Field
-                    name="summaryMandatory"
-                    component={component}
-                    type="checkbox"
-                    id="proposal_form_summary_mandatory">
-                    <FormattedMessage id="proposal_form.required" />
-                  </Field>
-                  <Field
                     name="summaryHelpText"
                     component={component}
                     type="text"
@@ -417,13 +410,6 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               <Panel.Heading>{headerPanelUsingIllustration}</Panel.Heading>
               <Panel.Collapse>
                 <Panel.Body>
-                  <Field
-                    name="illustrationMandatory"
-                    component={component}
-                    type="checkbox"
-                    id="proposal_form_illustration_mandatory">
-                    <FormattedMessage id="proposal_form.required" />
-                  </Field>
                   <Field
                     name="illustrationHelpText"
                     component={component}
@@ -685,8 +671,6 @@ export default createFragmentContainer(
       usingDescription
       usingSummary
       usingIllustration
-      illustrationMandatory
-      summaryMandatory
       descriptionMandatory
       latMap
       lngMap

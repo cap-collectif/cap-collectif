@@ -59,8 +59,6 @@ describe('<ProposalForm />', () => {
     usingThemes: true,
     themeMandatory: true,
     descriptionMandatory: true,
-    summaryMandatory: true,
-    illustrationMandatory: true,
     usingCategories: true,
     categoryMandatory: true,
     categoryHelpText: 'Category help',

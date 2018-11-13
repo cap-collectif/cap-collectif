@@ -66,7 +66,6 @@ describe('<ProposalAdminContentForm />', () => {
         usingSummary: true,
         themeMandatory: true,
         descriptionMandatory: true,
-        summaryMandatory: true,
         usingCategories: true,
         categoryMandatory: true,
         categoryHelpText: 'Category Help',
