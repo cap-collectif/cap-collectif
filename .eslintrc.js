@@ -7,6 +7,7 @@ module.exports = {
     'plugin:flowtype/recommended',
     'plugin:jest/recommended',
     'plugin:jsx-a11y/recommended',
+    'plugin:relay/recommended',
   ],
   parser: 'babel-eslint',
   plugins: ['flowtype', 'import', 'react', 'jsx-a11y', 'jest', 'relay', 'graphql'],
@@ -88,14 +89,8 @@ module.exports = {
     // Maybe we could use a different syntax
     // Such as import * as generated from …
     camelcase: 'off',
-    // Relay config
-    'relay/graphql-syntax': 'error',
-    'relay/graphql-naming': 'error',
     // Fix doesn't seem to work yet
     'relay/generated-flow-types': ['error', { fix: true }],
-    'relay/unused-fields': 'warn',
-    'relay/no-future-added-value': 'warn',
-
     // TODO: https://github.com/cap-collectif/platform/issues/5966
     'react/require-default-props': 'off',
     // TODO: https://github.com/cap-collectif/platform/issues/5967
