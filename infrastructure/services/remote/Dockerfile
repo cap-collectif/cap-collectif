@@ -148,7 +148,7 @@ RUN echo 'deb https://dl.bintray.com/rabbitmq/debian stretch main' >> /etc/apt/s
 
 # Install mariadb
 RUN set -x \
-    && apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8 \
+    && apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8 --no-tty \
     && add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mariadb.mirrors.ovh.net/MariaDB/repo/10.1/debian stretch main' \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install mariadb-server -y -qq \
