@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { Modal, Alert } from 'react-bootstrap';
-import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
@@ -88,41 +87,14 @@ export class RegistrationModal extends React.Component<Props> {
             </Alert>
           )}
           <LoginSocialButtons prefix="registration." />
-          <QueryRenderer
-            query={graphql`
-                query RegistrationModalQuery {
-                    registrationForm {
-                      ...RegistrationForm_registrationForm
-                    }
-                }
-            `}
-            environment={environment}
-            variables={{}}
-            render={({error, props}) => {
-              const { stopSubmit, handleSubmitSuccess } = this
-              if (error) {
-                console.log(error); // eslint-disable-line no-console
-                return graphqlError;
-              }
-              if (props) {
-                if (props.registrationForm) {
-
-                  return <RegistrationForm
-                    ref={c => {
-                      this.form = c;
-                    }}
-                    registrationForm={props.registrationForm}
-                    // $FlowFixMe
-                    onSubmitFail={stopSubmit}
-                    // $FlowFixMe
-                    onSubmitSuccess={handleSubmitSuccess}
-                  />
-                }
-
-                return graphqlError;
-              }
-              return <Loader />;
+          <RegistrationForm
+            ref={c => {
+              this.form = c;
             }}
+            // $FlowFixMe
+            onSubmitFail={this.stopSubmit}
+            // $FlowFixMe
+            onSubmitSuccess={this.handleSubmitSuccess}
           />
           {textBottom && (
             <WYSIWYGRender className="text-center small excerpt mt-15" value={textBottom} />

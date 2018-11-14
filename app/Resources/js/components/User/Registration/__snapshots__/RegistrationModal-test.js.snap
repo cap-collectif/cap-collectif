@@ -51,61 +51,7 @@ exports[`<RegistrationModal /> renders a form 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <ReactRelayQueryRenderer
-      environment={
-        RelayModernEnvironment {
-          "__setNet": [Function],
-          "_deferrableSelections": Array [],
-          "_network": Object {
-            "execute": [Function],
-            "executeWithEvents": [Function],
-          },
-          "_publishQueue": RelayPublishQueue {
-            "_appliedOptimisticUpdates": Array [],
-            "_backup": Object {},
-            "_handlerProvider": [Function],
-            "_pendingBackupRebase": false,
-            "_pendingData": Array [],
-            "_pendingOptimisticUpdates": Array [],
-            "_pendingUpdaters": Array [],
-            "_store": RelayMarkSweepStore {
-              "_gcEnabled": true,
-              "_hasScheduledGC": false,
-              "_index": 0,
-              "_recordSource": Object {},
-              "_roots": Array [],
-              "_subscriptions": Array [],
-              "_updatedRecordIDs": Object {},
-            },
-          },
-          "_store": RelayMarkSweepStore {
-            "_gcEnabled": true,
-            "_hasScheduledGC": false,
-            "_index": 0,
-            "_recordSource": Object {},
-            "_roots": Array [],
-            "_subscriptions": Array [],
-            "_updatedRecordIDs": Object {},
-          },
-          "configName": undefined,
-          "unstable_internal": Object {
-            "areEqualSelectors": [Function],
-            "createFragmentSpecResolver": [Function],
-            "createOperationSelector": [Function],
-            "getDataIDsFromObject": [Function],
-            "getFragment": [Function],
-            "getRequest": [Function],
-            "getSelector": [Function],
-            "getSelectorList": [Function],
-            "getSelectorsFromObject": [Function],
-            "getVariablesFromObject": [Function],
-          },
-        }
-      }
-      query={[Function]}
-      render={[Function]}
-      variables={Object {}}
-    />
+    <Connect(InjectIntl(ReduxForm)) />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"
@@ -190,61 +136,7 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <ReactRelayQueryRenderer
-      environment={
-        RelayModernEnvironment {
-          "__setNet": [Function],
-          "_deferrableSelections": Array [],
-          "_network": Object {
-            "execute": [Function],
-            "executeWithEvents": [Function],
-          },
-          "_publishQueue": RelayPublishQueue {
-            "_appliedOptimisticUpdates": Array [],
-            "_backup": Object {},
-            "_handlerProvider": [Function],
-            "_pendingBackupRebase": false,
-            "_pendingData": Array [],
-            "_pendingOptimisticUpdates": Array [],
-            "_pendingUpdaters": Array [],
-            "_store": RelayMarkSweepStore {
-              "_gcEnabled": true,
-              "_hasScheduledGC": false,
-              "_index": 0,
-              "_recordSource": Object {},
-              "_roots": Array [],
-              "_subscriptions": Array [],
-              "_updatedRecordIDs": Object {},
-            },
-          },
-          "_store": RelayMarkSweepStore {
-            "_gcEnabled": true,
-            "_hasScheduledGC": false,
-            "_index": 0,
-            "_recordSource": Object {},
-            "_roots": Array [],
-            "_subscriptions": Array [],
-            "_updatedRecordIDs": Object {},
-          },
-          "configName": undefined,
-          "unstable_internal": Object {
-            "areEqualSelectors": [Function],
-            "createFragmentSpecResolver": [Function],
-            "createOperationSelector": [Function],
-            "getDataIDsFromObject": [Function],
-            "getFragment": [Function],
-            "getRequest": [Function],
-            "getSelector": [Function],
-            "getSelectorList": [Function],
-            "getSelectorsFromObject": [Function],
-            "getVariablesFromObject": [Function],
-          },
-        }
-      }
-      query={[Function]}
-      render={[Function]}
-      variables={Object {}}
-    />
+    <Connect(InjectIntl(ReduxForm)) />
     <div
       className="text-center small excerpt"
       dangerouslySetInnerHTML={
@@ -328,61 +220,7 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <ReactRelayQueryRenderer
-      environment={
-        RelayModernEnvironment {
-          "__setNet": [Function],
-          "_deferrableSelections": Array [],
-          "_network": Object {
-            "execute": [Function],
-            "executeWithEvents": [Function],
-          },
-          "_publishQueue": RelayPublishQueue {
-            "_appliedOptimisticUpdates": Array [],
-            "_backup": Object {},
-            "_handlerProvider": [Function],
-            "_pendingBackupRebase": false,
-            "_pendingData": Array [],
-            "_pendingOptimisticUpdates": Array [],
-            "_pendingUpdaters": Array [],
-            "_store": RelayMarkSweepStore {
-              "_gcEnabled": true,
-              "_hasScheduledGC": false,
-              "_index": 0,
-              "_recordSource": Object {},
-              "_roots": Array [],
-              "_subscriptions": Array [],
-              "_updatedRecordIDs": Object {},
-            },
-          },
-          "_store": RelayMarkSweepStore {
-            "_gcEnabled": true,
-            "_hasScheduledGC": false,
-            "_index": 0,
-            "_recordSource": Object {},
-            "_roots": Array [],
-            "_subscriptions": Array [],
-            "_updatedRecordIDs": Object {},
-          },
-          "configName": undefined,
-          "unstable_internal": Object {
-            "areEqualSelectors": [Function],
-            "createFragmentSpecResolver": [Function],
-            "createOperationSelector": [Function],
-            "getDataIDsFromObject": [Function],
-            "getFragment": [Function],
-            "getRequest": [Function],
-            "getSelector": [Function],
-            "getSelectorList": [Function],
-            "getSelectorsFromObject": [Function],
-            "getVariablesFromObject": [Function],
-          },
-        }
-      }
-      query={[Function]}
-      render={[Function]}
-      variables={Object {}}
-    />
+    <Connect(InjectIntl(ReduxForm)) />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"
@@ -453,61 +291,7 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <ReactRelayQueryRenderer
-      environment={
-        RelayModernEnvironment {
-          "__setNet": [Function],
-          "_deferrableSelections": Array [],
-          "_network": Object {
-            "execute": [Function],
-            "executeWithEvents": [Function],
-          },
-          "_publishQueue": RelayPublishQueue {
-            "_appliedOptimisticUpdates": Array [],
-            "_backup": Object {},
-            "_handlerProvider": [Function],
-            "_pendingBackupRebase": false,
-            "_pendingData": Array [],
-            "_pendingOptimisticUpdates": Array [],
-            "_pendingUpdaters": Array [],
-            "_store": RelayMarkSweepStore {
-              "_gcEnabled": true,
-              "_hasScheduledGC": false,
-              "_index": 0,
-              "_recordSource": Object {},
-              "_roots": Array [],
-              "_subscriptions": Array [],
-              "_updatedRecordIDs": Object {},
-            },
-          },
-          "_store": RelayMarkSweepStore {
-            "_gcEnabled": true,
-            "_hasScheduledGC": false,
-            "_index": 0,
-            "_recordSource": Object {},
-            "_roots": Array [],
-            "_subscriptions": Array [],
-            "_updatedRecordIDs": Object {},
-          },
-          "configName": undefined,
-          "unstable_internal": Object {
-            "areEqualSelectors": [Function],
-            "createFragmentSpecResolver": [Function],
-            "createOperationSelector": [Function],
-            "getDataIDsFromObject": [Function],
-            "getFragment": [Function],
-            "getRequest": [Function],
-            "getSelector": [Function],
-            "getSelectorList": [Function],
-            "getSelectorsFromObject": [Function],
-            "getVariablesFromObject": [Function],
-          },
-        }
-      }
-      query={[Function]}
-      render={[Function]}
-      variables={Object {}}
-    />
+    <Connect(InjectIntl(ReduxForm)) />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"

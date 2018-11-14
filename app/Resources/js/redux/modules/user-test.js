@@ -19,6 +19,7 @@ const initialState: State = {
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
   registration_form: {
+    hasQuestions: false,
     bottomTextDisplayed: false,
     topTextDisplayed: false,
     bottomText: '',

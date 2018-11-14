@@ -57,7 +57,7 @@ type Question = {|
   |}>,
 |};
 
-type Questions = $ReadOnlyArray<Question>;
+export type Questions = $ReadOnlyArray<Question>;
 
 type ResponsesFromAPI = $ReadOnlyArray<?{|
   +question: {|

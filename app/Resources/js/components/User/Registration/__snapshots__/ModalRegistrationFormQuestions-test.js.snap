@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalRegistrationFormQuestions/> renders a form with dynamic fields 1`] = `
+<FieldArray
+  change={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "responses",
+          Array [
+            Object {
+              "question": 6,
+              "value": null,
+            },
+          ],
+        ],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  component={[Function]}
+  form="registration-form"
+  intl={
+    Object {
+      "formatDate": [Function],
+      "formatHTMLMessage": [Function],
+      "formatMessage": [Function],
+      "formatNumber": [Function],
+      "formatPlural": [Function],
+      "formatRelative": [Function],
+      "formatTime": [Function],
+      "formats": Object {},
+      "locale": "fr-FR",
+      "messages": Object {},
+      "now": [Function],
+    }
+  }
+  name="responses"
+  questions={
+    Array [
+      Object {
+        "id": 6,
+        "private": false,
+        "question": "Champ pas facultatif",
+        "required": true,
+        "slug": "champ-pas-facultatif",
+        "type": "text",
+      },
+    ]
+  }
+  responses={Array []}
+/>
+`;

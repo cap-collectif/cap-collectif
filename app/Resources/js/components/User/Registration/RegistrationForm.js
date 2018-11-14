@@ -1,21 +1,20 @@
 // @flow
 import * as React from 'react';
-import {createFragmentContainer, graphql} from 'react-relay';
-import {FormattedMessage, injectIntl, IntlShape} from 'react-intl';
+import {QueryRenderer, graphql} from 'react-relay'
+import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
 import {connect, type MapStateToProps} from 'react-redux';
-import {Field, FieldArray, reduxForm, type FormProps} from 'redux-form';
+import {Field, reduxForm, type FormProps} from 'redux-form';
 import {isEmail} from '../../../services/Validator';
 import type {Dispatch, State} from '../../../types';
-import type {RegistrationForm_registrationForm} from './__generated__/RegistrationForm_registrationForm.graphql'
 import {register as onSubmit, displayChartModal} from '../../../redux/modules/user';
+import environment, {graphqlError} from "../../../createRelayEnvironment";
 import renderComponent from '../../Form/Field';
-import {formatInitialResponsesValues, renderResponses} from "../../../utils/responsesHelper";
-import type {ResponsesInReduxForm} from "../../../utils/responsesHelper";
+import ModalRegistrationFormQuestions from "./ModalRegistrationFormQuestions";
 
 type Props = FormProps & {
-  registrationForm: RegistrationForm_registrationForm,
   intl: IntlShape,
-  responses: ResponsesInReduxForm,
+  responses: Array<Object>,
+  hasQuestions: boolean,
   addUserTypeField: boolean,
   addZipcodeField: boolean,
   addCaptchaField: boolean,
@@ -63,7 +62,7 @@ export class RegistrationForm extends React.Component<Props> {
     const {
       cguLink,
       cguName,
-      registrationForm,
+      hasQuestions,
       responses,
       change,
       intl,
@@ -182,15 +181,83 @@ export class RegistrationForm extends React.Component<Props> {
             autoComplete="postal-code"
           />
         )}
-        <FieldArray
-          name="responses"
-          change={change}
-          responses={responses}
-          form={form}
-          component={renderResponses}
-          questions={registrationForm.questions}
-          intl={intl}
-        />
+        {hasQuestions && <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query RegistrationFormQuery {
+                registrationForm {
+                    id
+                    questions {
+                      id
+                      number
+                      title
+                      position
+                      private
+                      required
+                      description
+                      helpText
+                      jumps {
+                        id
+                        always
+                        destination {
+                          id
+                          title
+                          number
+                        }
+                        conditions {
+                          id
+                          operator
+                          question {
+                            id
+                            title
+                          }
+                          ... on MultipleChoiceQuestionLogicJumpCondition {
+                            value {
+                              id
+                              title
+                            }
+                          }
+                        }
+                      }
+                      type
+                      ... on MultipleChoiceQuestion {
+                        isOtherAllowed
+                        validationRule {
+                          type
+                          number
+                        }
+                        choices(randomize: true) {
+                          id
+                          title
+                          description
+                          color
+                          image {
+                            url
+                          }
+                        }
+                      }
+                    }
+                }
+            }
+          `}
+          variables={{}}
+          render={({error, props}) => {
+            if (error) {
+              console.log(error); // eslint-disable-line no-console
+              return graphqlError;
+            }
+            if (props && props.registrationForm && props.registrationForm.questions) {
+              return <ModalRegistrationFormQuestions change={change}
+                                                     responses={responses}
+                                                     form={form}
+                                                     questions={props.registrationForm.questions}
+                                                     intl={intl}
+              />
+            }
+
+            return null
+          }}
+        />}
         <Field
           id="charte"
           name="charte"
@@ -224,7 +291,8 @@ export class RegistrationForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  hasQuestions: state.user.registration_form.hasQuestions,
   addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,
   addZipcodeField: state.default.features.zipcode_at_register,
@@ -233,18 +301,11 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
-  responses: formatInitialResponsesValues(
-    props.registrationForm.questions,
-    []
-  ),
-  initialValues: {
-    registrationForm: props.registrationForm,
-    responses: formatInitialResponsesValues(
-      props.registrationForm.questions,
-      []
-    )
-  },
   shieldEnabled: state.default.features.shield_mode,
+  responses: [],
+  initialValues: {
+    responses: []
+  },
 });
 
 const formContainer = reduxForm({
@@ -254,61 +315,5 @@ const formContainer = reduxForm({
 })(RegistrationForm)
 
 
-const container = connect(mapStateToProps)(injectIntl(formContainer));
+export default connect(mapStateToProps)(injectIntl(formContainer));
 
-export default createFragmentContainer(container,
-  graphql`
-    fragment RegistrationForm_registrationForm on RegistrationForm {
-      id
-      questions {
-        id
-        number
-        title
-        position
-        private
-        required
-        description
-        helpText
-        jumps {
-          id
-          always
-          destination {
-            id
-            title
-            number
-          }
-          conditions {
-            id
-            operator
-            question {
-              id
-              title
-            }
-            ... on MultipleChoiceQuestionLogicJumpCondition {
-              value {
-                id
-                title
-              }
-            }
-          }
-        }
-        type
-        ... on MultipleChoiceQuestion {
-          isOtherAllowed
-          validationRule {
-            type
-            number
-          }
-          choices(randomize: true) {
-            id
-            title
-            description
-            color
-            image {
-              url
-            }
-          }
-        }
-      }
-    }
-  `)

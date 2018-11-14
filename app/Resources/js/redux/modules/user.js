@@ -39,6 +39,7 @@ export type State = {
     +topTextDisplayed: boolean,
     +bottomText: string,
     +topText: string,
+    +hasQuestions: boolean,
     +domains: Array<string>,
   },
   +user: ?{
@@ -124,6 +125,7 @@ const initialState: State = {
   showConfirmPasswordModal: false,
   user: null,
   registration_form: {
+    hasQuestions: false,
     bottomText: '',
     topText: '',
     bottomTextDisplayed: false,
