@@ -304,7 +304,17 @@ svg.avatar-group {
 .storybook-container {
     margin: 0 35px;
 
-    &, h1, h2, th, td {
+    //&, h1, h2, th, td {
+    //    font-family: "OpenSans", sans-serif;
+    //}
+
+    code {
+        background-color: #eee;
+        color: #333;
+        font-weight: 300;
+    }
+
+    th, td {
         font-family: "OpenSans", sans-serif;
     }
 
