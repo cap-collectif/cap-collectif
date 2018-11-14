@@ -9,7 +9,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181106175532 extends AbstractMigration
+final class Version20181114175532 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -20,7 +20,7 @@ final class Version20181106175532 extends AbstractMigration
         );
 
         $this->addSql(
-            'ALTER TABLE proposal_form ADD object_type VARCHAR(255) NOT NULL, ADD using_description TINYINT(1) NOT NULL, ADD description_mandatory TINYINT(1) NOT NULL, ADD using_summary TINYINT(1) NOT NULL, ADD using_illustration TINYINT(1) NOT NULL'
+            'ALTER TABLE proposal_form ADD object_type VARCHAR(255) DEFAULT \'proposal\' NOT NULL, ADD using_description TINYINT(1) NOT NULL, ADD description_mandatory TINYINT(1) NOT NULL, ADD using_summary TINYINT(1) NOT NULL, ADD using_illustration TINYINT(1) NOT NULL'
         );
     }
 
