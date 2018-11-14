@@ -78,7 +78,7 @@ Scenario: Logged in user wants to add a reply to a closed questionnaire step
   Then I should see "step.questionnaire.alert.ended.title" in the "#main" element
   And the questionnaire form should be disabled
 
-@javascript
+@javascript @database
 Scenario: Logged in user wants to add another reply when multiple replies is allowed
   Given I am logged in as admin
   When I go to a questionnaire step
