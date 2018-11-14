@@ -22,13 +22,6 @@ graphiql_endpoint:
   defaults:
     _controller: Overblog\GraphiQLBundle\Controller\GraphiQLController::indexAction
 
-graphiql_multiple_endpoint:
-  path: /graphiql/{schemaName}
-  requirements:
-    schemaName: public|internal
-  defaults:
-    _controller: Overblog\GraphiQLBundle\Controller\GraphiQLController::indexAction
-
 # API
 
 capco_api_login_check:
