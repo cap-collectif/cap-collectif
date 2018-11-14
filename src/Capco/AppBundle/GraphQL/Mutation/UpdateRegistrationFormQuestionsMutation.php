@@ -10,7 +10,7 @@ use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateRegistrationFormQuestionsMutation implements MutationInterface
 {
@@ -24,7 +24,7 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         RegistrationFormRepository $registrationFormRepository,
         QuestionnaireAbstractQuestionRepository $questionRepo,
         AbstractQuestionRepository $abstractQuestionRepo
@@ -41,14 +41,21 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
         $arguments = $input->getRawArguments();
         $registrationForm = $this->registrationFormRepository->findCurrent();
 
-        if($registrationForm) {
-            $form = $this->formFactory->create(RegistrationFormQuestionsUpdateType::class, $registrationForm);
+        if ($registrationForm) {
+            $form = $this->formFactory->create(
+                RegistrationFormQuestionsUpdateType::class,
+                $registrationForm
+            );
 
-            $questionsOrderedByBase = $registrationForm
-                ->getRealQuestions()
-                ->toArray();
+            $questionsOrderedByBase = $registrationForm->getRealQuestions()->toArray();
 
-            $this->handleQuestions($questionsOrderedByBase, $arguments, $dataQuestion, $registrationForm, $questionsOrderedById);
+            $this->handleQuestions(
+                $questionsOrderedByBase,
+                $arguments,
+                $dataQuestion,
+                $registrationForm,
+                $questionsOrderedById
+            );
             $form->submit($arguments, false);
             $this->handleQuestionsPersisting($registrationForm, $questionsOrderedById);
 
@@ -56,6 +63,5 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
 
             return compact('registrationForm');
         }
-
     }
 }

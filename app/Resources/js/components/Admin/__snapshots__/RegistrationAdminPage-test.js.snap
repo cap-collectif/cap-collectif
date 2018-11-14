@@ -329,25 +329,6 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       render={[Function]}
       variables={Object {}}
     />
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
-      className="box-content__toolbar"
-      disabled={false}
-      onClick={[Function]}
-      style={
-        Object {
-          "marginBottom": 10,
-        }
-      }
-    >
-      <FormattedMessage
-        id="link_action_create"
-        values={Object {}}
-      />
-    </Button>
   </Well>
   <div
     className="row"
@@ -777,25 +758,6 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       render={[Function]}
       variables={Object {}}
     />
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
-      className="box-content__toolbar"
-      disabled={true}
-      onClick={null}
-      style={
-        Object {
-          "marginBottom": 10,
-        }
-      }
-    >
-      <FormattedMessage
-        id="link_action_create"
-        values={Object {}}
-      />
-    </Button>
   </Well>
   <div
     className="row"

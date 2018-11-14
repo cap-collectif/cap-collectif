@@ -14,23 +14,18 @@ class RegistrationFormQuestionsUpdateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('questions', CollectionType::class, [
-                'allow_add' => true,
-                'allow_delete' => true,
-                'entry_type' => QuestionnaireAbstractQuestionType::class,
-                'by_reference' => false,
-                'delete_empty' => function (
-                    QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
-                ) {
-                    return null === $questionnaireAbstractQuestion ||
-                        empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
-                },
-            ])
-            ->add('domains')
-            ->add('bottomTextDisplayed')
-            ->add('topTextDisplayed')
-            ->add('topText');
+        $builder->add('questions', CollectionType::class, [
+            'allow_add' => true,
+            'allow_delete' => true,
+            'entry_type' => QuestionnaireAbstractQuestionType::class,
+            'by_reference' => false,
+            'delete_empty' => function (
+                QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
+            ) {
+                return null === $questionnaireAbstractQuestion ||
+                    empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
+            },
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

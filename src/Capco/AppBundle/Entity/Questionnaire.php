@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -18,7 +19,7 @@ use Capco\AppBundle\Enum\QuestionnaireType;
  * @ORM\Table(name="questionnaire")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireRepository")
  */
-class Questionnaire implements DisplayableInBOInterface
+class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -178,7 +179,7 @@ class Questionnaire implements DisplayableInBOInterface
         return $questions;
     }
 
-    public function getQuestions(): iterable
+    public function getQuestions(): Collection
     {
         return $this->questions;
     }

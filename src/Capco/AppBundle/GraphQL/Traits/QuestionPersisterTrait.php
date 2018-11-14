@@ -1,6 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Traits;
 
+use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\RegistrationForm;
@@ -49,27 +51,32 @@ trait QuestionPersisterTrait
         }
     }
 
-    private function handleQuestionsPersisting($form, $questionsOrderedById): void
-    {
+    private function handleQuestionsPersisting(
+        QuestionnableForm $form,
+        ?array $questionsOrderedById
+    ): void {
         $qaq = $form->getQuestions();
 
         // We make sure a question position by questionnaire is unique
-        if($form instanceof ProposalForm) {
-            $delta =
-                $this->questionRepo->getCurrentMaxPositionForProposalForm($form->getId()) +
-                1;
+        if ($form instanceof ProposalForm) {
+            $delta = $this->questionRepo->getCurrentMaxPositionForProposalForm($form->getId()) + 1;
+
+            $this->persistQuestion($qaq, $this->em, $delta, $questionsOrderedById);
         } elseif ($form instanceof RegistrationForm) {
             $delta =
-                $this->questionRepo->getCurrentMaxPositionForRegistrationForm($form->getId()) +
-                1;
-        }
+                $this->questionRepo->getCurrentMaxPositionForRegistrationForm($form->getId()) + 1;
 
-        $this->persistQuestion($qaq, $this->em, $delta, $questionsOrderedById);
+            $this->persistQuestion($qaq, $this->em, $delta, $questionsOrderedById);
+        }
     }
 
-    private function handleQuestions($questions, $arguments, &$dataQuestion, $form, &$questionsOrderedById): void
-    {
-
+    private function handleQuestions(
+        array $questions,
+        array $arguments,
+        ?array &$dataQuestion,
+        QuestionnableForm $form,
+        ?array &$questionsOrderedById
+    ): void {
         $questionsOrderedByIdInDb = [];
         foreach ($questions as $question) {
             $questionsOrderedByIdInDb[] = $question->getId();
@@ -102,21 +109,15 @@ trait QuestionPersisterTrait
                     }
                 }
 
-                foreach (
-                    $abstractQuestion->getQuestionChoices()
-                    as $position => $questionChoice
-                ) {
+                foreach ($abstractQuestion->getQuestionChoices() as $position => $questionChoice) {
                     if (!in_array($questionChoice->getId(), $dataQuestionChoicesIds)) {
                         $deletedChoice = [
                             'id' => $abstractQuestion->getId(),
                             'title' => null,
                         ];
-                        array_splice(
-                            $dataQuestion['question']['questionChoices'],
-                            $position,
-                            0,
-                            [$deletedChoice]
-                        );
+                        array_splice($dataQuestion['question']['questionChoices'], $position, 0, [
+                            $deletedChoice,
+                        ]);
                     }
                 }
             } else {
@@ -132,12 +133,16 @@ trait QuestionPersisterTrait
                     array_search($b['question']['id'], $questionsOrderedByIdInDb);
             }
             //respect the user order, for now we just put new items at the end
-            return isset($a['question']['id']) ? false : true;
+            return !isset($a['question']['id']);
         });
 
         foreach ($form->getQuestions() as $position => $proposalFormQuestion) {
             if (
-            !in_array($proposalFormQuestion->getQuestion()->getId(), $argumentsQuestionsId)
+                !\in_array(
+                    $proposalFormQuestion->getQuestion()->getId(),
+                    $argumentsQuestionsId,
+                    true
+                )
             ) {
                 // Put the title to null to be delete from delete_empty CollectionType field
                 $deletedQuestion = [
@@ -152,5 +157,4 @@ trait QuestionPersisterTrait
             }
         }
     }
-
 }

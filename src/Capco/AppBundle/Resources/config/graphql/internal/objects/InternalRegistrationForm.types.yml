@@ -7,15 +7,21 @@ InternalRegistrationForm:
     interfaces: [Node]
     fields:
       bottomTextDisplayed:
+        description: 'Does the bottom text is displayed?'
         type: 'Boolean!'
       topTextDisplayed:
+        description: 'Does the top text is displayed?'
         type: 'Boolean!'
       topText:
+        description: 'The bottom text to display'
         type: 'String'
       bottomText:
+        description: 'The bottom text to display'
         type: 'String'
       domains:
+        description: 'A whitelist of authorized domains that can register'
         type: '[InternalEmailDomain!]'
       questions:
+        description: 'The available questions'
         type: '[Question!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\RegistrationForm\\RegistrationFormQuestionsResolver", [value])'
