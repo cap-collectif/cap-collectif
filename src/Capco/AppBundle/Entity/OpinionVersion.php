@@ -360,6 +360,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         if ($this->parent) {
             return $this->parent->getOpinionType();
         }
+        return null;
     }
 
     public function getCommentSystem()
@@ -367,34 +368,29 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         if ($this->parent) {
             return $this->parent->getCommentSystem();
         }
+        return null;
     }
 
     public function canDisplay($user = null): bool
     {
-        return (
-            ($this->isPublished() && $this->getParent()->canDisplay($user)) ||
-            $this->getAuthor() === $user
-        );
+        return ($this->isPublished() && $this->getParent()->canDisplay($user)) ||
+            $this->getAuthor() === $user;
     }
 
     public function canContribute($user = null): bool
     {
-        return (
-            $this->isPublished() &&
-                !$this->isTrashed() &&
-                $this->getParent()->canContribute($user) ||
-            $this->getAuthor() === $user
-        );
+        return ($this->isPublished() &&
+            !$this->isTrashed() &&
+            $this->getParent()->canContribute($user)) ||
+            $this->getAuthor() === $user;
     }
 
     public function canBeDeleted($user = null): bool
     {
-        return (
-            $this->isPublished() &&
-                !$this->isTrashed() &&
-                $this->getParent()->canBeDeleted($user) ||
-            $this->getAuthor() === $user
-        );
+        return ($this->isPublished() &&
+            !$this->isTrashed() &&
+            $this->getParent()->canBeDeleted($user)) ||
+            $this->getAuthor() === $user;
     }
 
     public function increaseArgumentsCount()
