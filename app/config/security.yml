@@ -18,6 +18,8 @@ security:
       id: capco_user.user_provider.email
     simple_preauth:
       id: Capco\UserBundle\Security\Core\User\SimplePreAuthenticatorUserProvider
+    public_api_key_user_provider:
+      id: Capco\AppBundle\PublicApi\PublicApiKeyUserProvider
 
   firewalls:
     dev:
@@ -29,8 +31,10 @@ security:
       stateless: true
       gfreeau_get_jwt: ~ # form_login is never stateless, that's why we use this bundle
 
-    graphql:
-      pattern: ^/graphql
+
+    # This is our Internal API authenticated with JWT provided by app_get_api_token
+    graphql_internal:
+      pattern: ^/graphql/internal
       provider: fos_userbundle
       stateless: true
       anonymous: true
@@ -41,6 +45,16 @@ security:
         query_parameter:
           enabled: false
 
+    # This is our Public/Preview API authenticated with Personal Access Token
+    graphql_public:
+      pattern: ^/graphql
+      provider: public_api_key_user_provider
+      stateless: true
+      anonymous: true # Right now anonymous are allowed
+      simple_preauth:
+        authenticator: Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator
+
+    # This is our Internal REST API (deprecated) authenticated with JWT provided by app_get_api_token
     api:
       pattern: ^/api
       provider: fos_userbundle
@@ -52,6 +66,7 @@ security:
           prefix: Bearer
         query_parameter:
           enabled: false
+    
     main:
       pattern: ^/
       provider: fos_userbundle

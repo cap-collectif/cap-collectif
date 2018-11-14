@@ -138,6 +138,7 @@ twig:
     proposalPublicationResolver: '@Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalPublicationStatusResolver'
     replyPublicationStatusResolver: '@Capco\AppBundle\GraphQL\Resolver\Reply\ReplyPublicationStatusResolver'
     jwtManager: '@lexik_jwt_authentication.jwt_manager'
+    publicApiKeyRepo: '@Capco\AppBundle\Repository\PublicApiTokenRepository'
   paths:
     '%kernel.root_dir%/../src/Capco/AppBundle/Mailer/templates': CapcoMail
 

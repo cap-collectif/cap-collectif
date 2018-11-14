@@ -22,18 +22,35 @@
 </head>
 <body>
 {% block body %}
+
+  {% set authorization = null %}
+  {% if app.user %}  
+    {% set publicApiToken = publicApiKeyRepo.findPublicApiTokensByUser(app.user) is not empty ? publicApiKeyRepo.findPublicApiTokensByUser(app.user)[0] : null %}
+    {% set authorization = app.request.attributes.get('_route_params') is not empty and app.request.attributes.get('_route_params').schemaName == 'internal' ? jwtManager.create(app.user) : publicApiToken ? publicApiToken.value : null %}
+  {% endif %}
+
   <div style="width: 100%; height: 100%">
-    <p>
-    {% if app.user %}
-    Signed in as <strong>{{app.user.username}}</strong>. You’re ready to explore! 
+    <p style="margin-left: 15px">
+    {% if authorization %}
+      <div style="margin-left: 15px">
+       Signed in as <strong>{{app.user.username}}</strong>. You’re ready to explore real, live, production data!
+      </div>
     {% else %}
-       Start exploring GraphQL API queries using your account by logging in. 
+      {% if app.user %}
+        Sorry, we could not find an API key for your account <strong>{{app.user.username}}</strong>. Contact <email>coucou@cap-collectif.com</email>. Your API requests are not authenticated.
+       {% else %}
+        Start exploring GraphQL API queries using your account by logging in. 
+       {% endif %}
     {% endif %}
+      <div style="margin-left: 15px">
+      {% if app.request.attributes.get('_route_params').schemaName is defined and app.request.attributes.get('_route_params').schemaName == 'internal' %}
+         Hello capco dev ! You are querying <strong>Internal</strong> schema.
+      {% else %}
+         Schema Previews are <strong>enabled</strong> by default.
+      {% endif %}
+      </div>
     </p>
-    {# <p>
-        Cap Collectif's GraphQL Explorer makes use of your real, live, production data.
-    </p> #}
-    <div id="graphiql-render" style="width: 100%; height: 100%"></div>
+    <div id="graphiql-render" style="width: 100%; height: 100%; border-top: 1px solid #ddd"></div>
   </div>
   {% block body_loading %}Loading...{% endblock body_loading %}
   {% block body_script %}
@@ -46,11 +63,13 @@
 
           {% block graphql_fetcher_headers %}
           headers = {
-            // Preview is enabled by default, maybe we should add a toggle
+            {# Preview schema is enabled by default, maybe we should add a toggle #}
             "Accept": "application/vnd.cap-collectif.preview+json",
             "Content-Type": "application/json",
             {% if app.user %}
-            "Authorization": "Bearer {{jwtManager.create(app.user)}}",
+            {% if authorization %}
+              "Authorization": "Bearer {{authorization}}",
+            {% endif %}
             {% endif %}
           }
           {% endblock graphql_fetcher_headers %}

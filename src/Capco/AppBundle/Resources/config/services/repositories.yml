@@ -400,3 +400,8 @@ services:
     class: Capco\AppBundle\Repository\Synthesis\SynthesisRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Synthesis']
+
+  Capco\AppBundle\Repository\PublicApiTokenRepository:
+    public: true
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:PublicApiToken']

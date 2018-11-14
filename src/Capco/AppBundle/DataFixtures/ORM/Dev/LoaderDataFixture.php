@@ -92,6 +92,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/MultipleChoiceQuestionLogicJumpCondition.yml',
             __DIR__ . '/LogicJump.yml',
             __DIR__ . '/SectionQuestion.yml',
+            __DIR__ . '/PublicApiToken.yml',
         ];
     }
 }

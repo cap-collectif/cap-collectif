@@ -134,29 +134,64 @@
 
     Cap Collectif provides an API to read and write data.
 
-    <h4>Endpoints</h4>
-    This is an HTTPS-only API. All API requests are made to <strong>{{ url('graphql_endpoint') }}</strong>.
+    <h3>Endpoint</h3>
+    
+    <p>
+        This is an HTTPS-only and POST-only API. All API requests are made to <strong>{{ url('graphql_endpoint') }}</strong>.
+    </p>
 
-    <h4>Authentication</h4>
-    Documentation coming soon.
+    <h3>Authentication</h3>
 
-    <span class="label label-info">ROLE_USER</span> Indicates that this field can only be access if authenticated.
+    <p>Authentication is based on API Keys. Each API Key is associated with a user. Results returned from various responses are based upon the role of the user to which the API key is tied.</p>
 
-    {# Authentication is based on API Keys. Each API Key is associated with a Help Scout user. Results returned from various responses are based upon the role of the user to which the API key is tied. #}
+    <ul>
+    <li>
+        <span class="label label-info">ROLE_USER</span> indicates that this field can only be access if authenticated.
+    </li>
+    <li>
+        <span class="label label-info">ROLE_ADMIN</span> indicates that this field can only be access if authenticated as an administrator.
+    </li>
+    </ul>
 
-    <h4>Rate limits</h4>
-    Coming soon.
+    <h4>Your API Keys</h4>
+        
+    {% if app.user and publicApiKeyRepo.findPublicApiTokensByUser(app.user) is not empty %}
+    <p>These tokens are like passwords; guard them carefully.</p>
+    <p>Right now, you can't revoke an API Key. Contact <a href="mailto:coucou@cap-collectif.com">coucou@cap-collectif.com</a> if needed.</p>
+    <ul>
+        {% for token in publicApiKeyRepo.findPublicApiTokensByUser(app.user) %}
+        <li>
+            API Key created at {{ token.createdAt|date }} : <strong>{{ token.value }}</strong>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
-    <h4>About the GraphQL schema reference</h4>
-    The docs in the sidebar are generated from Cap Collectif GraphQL schema. All calls are validated and executed against the schema. Use these docs to find out what data you can call:
+    <p>Right now, you can't generate an API Key. Contact <a href="mailto:coucou@cap-collectif.com">coucou@cap-collectif.com</a> if needed.</p>
+
+    <h4>How to use an API Key</h4>
+
+    <p>
+        To make an authenticated query, add an <code>Authorization</code> header with content <code>"Bearer token"</code>.
+        Example using <strong>cURL</strong> :
+    </p>
+    
+    <div>
+    <code>
+    curl -H "Content-Type: application/json" -H "Authorization: Bearer <strong>token</strong>" -X POST -d '{"query":"query viewer {\n  viewer {\n    id\n    username\n  }\n}"}' {{ url('graphql_endpoint') }}
+    </code>
+    </div>
+
+    <h3>Rate limits</h3>
+    We currently have no rate limits, but this might be coming soon.
+
+    <h3>About the GraphQL schema reference</h3>
+    The docs in the sidebar are generated from our GraphQL schema. All calls are validated and executed against the schema. Use these docs to find out what data you can call:
 
     <ul>
         <li>Allowed operations: queries and mutations.</li>
         <li>Schema-defined types: scalars, objects, enums, interfaces, unions, and input objects.</li>
     </ul>
-
-{# You can access this same content via the Explorer Docs sidebar. Note that you may need to rely on both the docs and the schema validation to successfully call the GraphQL API. #}
-{# For other information, such as authentication and rate limit details, check out the guides. #}
 
     {% endif %}
 
@@ -278,7 +313,7 @@
         <h3>Values</h3>
         {% for value in enum.values %}
             <div>
-             <h4>{{ value.name }}</h4>
+             <h3>{{ value.name }}</h3>
              <p>{{ value.description }}</p>
             </div>
         {% endfor %}
@@ -291,7 +326,7 @@
         <p>{{union.description}}</p>
         <h3>Possible Types</h3>
         {% for type in union.getTypes() %}
-             <h4>{{ type.name }}</h4>
+             <h3>{{ type.name }}</h3>
         {% endfor %}
       {% endfor %}
     {% endif %}

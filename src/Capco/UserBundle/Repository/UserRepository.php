@@ -1,26 +1,38 @@
 <?php
 namespace Capco\UserBundle\Repository;
 
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Entity\Group;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\UserBundle\Entity\UserType;
+use Capco\AppBundle\Entity\PublicApiToken;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Entity\UserType;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 
 class UserRepository extends EntityRepository
 {
+    public function findUserByPublicApiKey(string $apiKey): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->innerJoin(PublicApiToken::class, 't', Expr\Join::WITH, 't.user = u.id')
+            ->where("t.value = :apiKey")
+            ->setParameter('apiKey', $apiKey)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function countUsersInGroup(Group $group): int
     {
         $qb = $this->createQueryBuilder('u');

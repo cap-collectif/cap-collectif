@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\PublicApiToken:
+  token1:
+    __construct: ['@user4', 'iamthetokenofadmin']
+  token2:
+    __construct: ['@user5', 'iamthetokenofuser']
