@@ -76,9 +76,6 @@ export class OpinionBox extends React.Component<Props> {
         {/* $FlowFixMe */}
         <OpinionAppendices opinion={opinion} />
         <div className="opinion__description">
-          <p className="h4" style={{ marginTop: '0' }}>
-            {opinion.title}
-          </p>
           {/* $FlowFixMe */}
           <OpinionBody opinion={opinion} />
           {/* $FlowFixMe */}

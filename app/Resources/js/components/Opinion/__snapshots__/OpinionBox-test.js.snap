@@ -106,16 +106,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
   <div
     className="opinion__description"
   >
-    <p
-      className="h4"
-      style={
-        Object {
-          "marginTop": "0",
-        }
-      }
-    >
-      title
-    </p>
     <ForwardRef(Relay(OpinionBody))
       opinion={
         Object {
