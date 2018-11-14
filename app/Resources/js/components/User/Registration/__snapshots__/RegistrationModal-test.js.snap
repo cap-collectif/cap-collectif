@@ -125,30 +125,17 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
       className="text-center"
       closeLabel="Close alert"
     >
-      <div
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Texte du haut",
-          }
-        }
+      <WYSIWYGRender
+        value="Texte du haut"
       />
     </Alert>
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
     <Connect(InjectIntl(ReduxForm)) />
-    <div
-      className="text-center small excerpt"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Texte du bas",
-        }
-      }
-      style={
-        Object {
-          "marginTop": "15px",
-        }
-      }
+    <WYSIWYGRender
+      className="text-center small excerpt mt-15"
+      value="Texte du bas"
     />
   </ModalBody>
   <ModalFooter
