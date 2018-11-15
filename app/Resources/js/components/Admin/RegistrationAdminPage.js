@@ -26,7 +26,6 @@ const dynamicFieldsComponent = ({ error, props }) => {
     return graphqlError;
   }
   if (props) {
-    // eslint-disable-next-line
     if (props.registrationForm) {
       return <RegistrationFormQuestions {...props} />;
     }
