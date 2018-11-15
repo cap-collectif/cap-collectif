@@ -144,6 +144,7 @@
   .list-group-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     p {
       margin: 0;
@@ -296,22 +297,55 @@ svg.avatar-group {
 
 /* ======================= Storybook ============================*/
 
-.storybook-container {
-  hr {
-    margin: 20px 0;
-  }
-
-  a {
-    color: $brand-color-2;
-
-    &:hover {
-      color: $brand-color-1;
-    }
-  }
+.sb-show-main {
+    padding-top: 0;
 }
 
-.b-none {
-  border: 0;
+.storybook-container {
+    margin: 0 35px;
+
+    code {
+        background-color: $border-color;
+        color: $dark-text;
+        font-weight: 300;
+    }
+
+    th, td {
+        font-family: "OpenSans", sans-serif;
+    }
+
+    .avatar {
+        background-color: blue; // TODO add default bgc avatar
+    }
+
+    table {
+        border-spacing: 0;
+        padding: 2rem 0;
+        font-size: 14px;
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    thead {
+        background-color: $page-bgc;
+    }
+
+    th {
+        text-transform: capitalize;
+    }
+
+    th, td {
+        padding: 10px;
+        border-color: $border-color;
+    }
+
+    thead {
+        border: none;
+    }
+
+    pre button {
+        line-height: 16px;
+    }
 }
 
 /* =============================== Comment ================================ */

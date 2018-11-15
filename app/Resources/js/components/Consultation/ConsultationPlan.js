@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import Loader from '../Ui/Loader';
+import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { ConsultationPlanQueryResponse } from './__generated__/ConsultationPlanQuery.graphql';
 import ConsultationPlanRecursiveItems from './ConsultationPlanRecursiveItems';
 

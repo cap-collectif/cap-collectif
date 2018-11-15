@@ -7,7 +7,7 @@ import { isDirty } from 'redux-form';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalAdminPageTabs from './ProposalAdminPageTabs';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { State } from '../../../types';
 
 type Props = { proposalId: number, dirty: boolean };

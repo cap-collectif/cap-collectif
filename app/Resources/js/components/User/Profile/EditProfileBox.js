@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import EditProfileTabs from './EditProfileTabs';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { FeatureToggles, State } from '../../../types';
 

@@ -29,7 +29,7 @@ import AutosizedTextarea from './AutosizedTextarea';
 import Address from './Address';
 import ButtonBody from '../Reply/Form/ButtonBody';
 import QuestionPrintHelpText from './QuestionPrintHelpText';
-import Notepad from '../Ui/Notepad';
+import Notepad from '../Ui/Form/Notepad';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -417,12 +417,11 @@ class ReactBootstrapInput extends React.Component<Props> {
           helpPrint={this.props.helpPrint}
         />
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
-        {props.description &&
-          props.description !== '<div><br /></div>' && (
-            <div className="pb-15">
-              <ButtonBody body={props.description || ''} />
-            </div>
-          )}
+        {props.description && props.description !== '<div><br /></div>' && (
+          <div className="pb-15">
+            <ButtonBody body={props.description || ''} />
+          </div>
+        )}
         {this.renderInputGroup(props)}
         {props.errors && <span className="error-block hidden-print">{props.errors}</span>}
       </FormGroup>

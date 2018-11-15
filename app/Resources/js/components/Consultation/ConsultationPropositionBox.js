@@ -6,7 +6,7 @@ import type { GlobalState, Dispatch } from '../../types';
 import { changeConsultationPlanActiveItems } from '../../redux/modules/project';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import SectionRecursiveList from './SectionRecursiveList';
-import Loader from '../Ui/Loader';
+import Loader from '../Ui/FeedbacksIndicators/Loader';
 import RemainingTime from '../Utils/RemainingTime';
 import DatesInterval from '../Utils/DatesInterval';
 import StepInfos from '../Steps/Page/StepInfos';
@@ -136,13 +136,11 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
                 <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
               </div>
             )}
-            {step.endAt &&
-              step.status === 'open' &&
-              !step.timeless && (
-                <div className="mr-15 d-ib">
-                  <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
-                </div>
-              )}
+            {step.endAt && step.status === 'open' && !step.timeless && (
+              <div className="mr-15 d-ib">
+                <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
+              </div>
+            )}
           </div>
           <StepInfos step={step} />
           <QueryRenderer

@@ -6,7 +6,7 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import type { VoteListProfile_voteList } from './__generated__/VoteListProfile_voteList.graphql';
 import VoteItem from './VoteItem';
 
-import Loader from '../Ui/Loader';
+import Loader from '../Ui/FeedbacksIndicators/Loader';
 
 const VOTE_PAGINATION = 5;
 

@@ -5,7 +5,7 @@ import { Button, Modal, ListGroup } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import ProjectStatsListItem from './ProjectStatsListItem';
 import ProjectStatsActions from '../../../actions/ProjectStatsActions';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
 
 type Props = {
   type: string,
