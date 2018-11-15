@@ -5415,6 +5415,21 @@ type User implements Node {
     last: Int
   ): ArgumentConnection!
 
+  # The arguments created by user.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ResponseConnection!
+
   # The HTTP URL for this user, null if feature `profiles` is disabled.
   show_url: URI @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
 }

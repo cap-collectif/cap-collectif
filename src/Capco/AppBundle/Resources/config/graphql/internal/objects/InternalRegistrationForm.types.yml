@@ -6,6 +6,10 @@ InternalRegistrationForm:
     name: RegistrationForm
     interfaces: [Node]
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: RegistrationForm
       bottomTextDisplayed:
         description: 'Does the bottom text is displayed?'
         type: 'Boolean!'

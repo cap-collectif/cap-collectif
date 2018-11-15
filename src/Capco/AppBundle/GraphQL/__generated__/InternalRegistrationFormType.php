@@ -28,7 +28,9 @@ final class InternalRegistrationFormType extends ObjectType implements Generated
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
                     ],
-                    'resolve' => null,
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_globalid_field", array(0 => $value, 1 => $info, 2 => null, 3 => "RegistrationForm")]);
+                    },
                     'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,

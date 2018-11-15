@@ -15,6 +15,7 @@ type Props = {
 class ModalRegistrationFormQuestions extends React.Component<Props> {
   componentDidMount() {
     const { change, questions } = this.props;
+    change('questions', questions);
     change('responses', formatInitialResponsesValues(questions, []));
   }
 

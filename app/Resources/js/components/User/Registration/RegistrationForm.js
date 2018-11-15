@@ -1,15 +1,15 @@
 // @flow
 import * as React from 'react';
-import {QueryRenderer, graphql} from 'react-relay'
-import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
-import {connect, type MapStateToProps} from 'react-redux';
-import {Field, reduxForm, type FormProps} from 'redux-form';
-import {isEmail} from '../../../services/Validator';
-import type {Dispatch, State} from '../../../types';
-import {register as onSubmit, displayChartModal} from '../../../redux/modules/user';
-import environment, {graphqlError} from "../../../createRelayEnvironment";
+import { QueryRenderer, graphql } from 'react-relay';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { connect, type MapStateToProps } from 'react-redux';
+import { Field, reduxForm, type FormProps } from 'redux-form';
+import { isEmail } from '../../../services/Validator';
+import type { Dispatch, State } from '../../../types';
+import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
-import ModalRegistrationFormQuestions from "./ModalRegistrationFormQuestions";
+import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
 
 type Props = FormProps & {
   intl: IntlShape,
@@ -111,7 +111,7 @@ export class RegistrationForm extends React.Component<Props> {
           id="username"
           component={renderComponent}
           type="text"
-          label={<FormattedMessage id="registration.username"/>}
+          label={<FormattedMessage id="registration.username" />}
           labelClassName="font-weight-normal"
         />
         <Field
@@ -119,11 +119,11 @@ export class RegistrationForm extends React.Component<Props> {
           id="email"
           component={renderComponent}
           type="email"
-          label={<FormattedMessage id="global.email"/>}
+          label={<FormattedMessage id="global.email" />}
           labelClassName="font-weight-normal"
           popover={{
             id: 'registration-email-tooltip',
-            message: <FormattedMessage id="registration.tooltip.email"/>,
+            message: <FormattedMessage id="registration.tooltip.email" />,
           }}
         />
         <Field
@@ -131,11 +131,11 @@ export class RegistrationForm extends React.Component<Props> {
           id="password"
           component={renderComponent}
           type="password"
-          label={<FormattedMessage id="registration.password"/>}
+          label={<FormattedMessage id="registration.password" />}
           labelClassName="font-weight-normal"
           popover={{
             id: 'registration-password-tooltip',
-            message: <FormattedMessage id="registration.tooltip.password"/>,
+            message: <FormattedMessage id="registration.tooltip.password" />,
           }}
         />
         {addUserTypeField && (
@@ -147,9 +147,9 @@ export class RegistrationForm extends React.Component<Props> {
             labelClassName="font-weight-normal"
             label={
               <span>
-                <FormattedMessage id="registration.type"/>{' '}
+                <FormattedMessage id="registration.type" />{' '}
                 <span className="excerpt">
-                  <FormattedMessage id="global.form.optional"/>
+                  <FormattedMessage id="global.form.optional" />
                 </span>
               </span>
             }>
@@ -172,92 +172,97 @@ export class RegistrationForm extends React.Component<Props> {
             labelClassName="font-weight-normal"
             label={
               <span>
-                <FormattedMessage id="registration.zipcode"/>{' '}
+                <FormattedMessage id="registration.zipcode" />{' '}
                 <span className="excerpt">
-                  <FormattedMessage id="global.form.optional"/>
+                  <FormattedMessage id="global.form.optional" />
                 </span>
               </span>
             }
             autoComplete="postal-code"
           />
         )}
-        {hasQuestions && <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query RegistrationFormQuery {
+        {hasQuestions && (
+          <QueryRenderer
+            environment={environment}
+            query={graphql`
+              query RegistrationFormQuery {
                 registrationForm {
+                  id
+                  questions {
                     id
-                    questions {
+                    number
+                    title
+                    position
+                    private
+                    required
+                    description
+                    helpText
+                    jumps {
                       id
-                      number
-                      title
-                      position
-                      private
-                      required
-                      description
-                      helpText
-                      jumps {
+                      always
+                      destination {
                         id
-                        always
-                        destination {
+                        title
+                        number
+                      }
+                      conditions {
+                        id
+                        operator
+                        question {
                           id
                           title
-                          number
                         }
-                        conditions {
-                          id
-                          operator
-                          question {
+                        ... on MultipleChoiceQuestionLogicJumpCondition {
+                          value {
                             id
                             title
-                          }
-                          ... on MultipleChoiceQuestionLogicJumpCondition {
-                            value {
-                              id
-                              title
-                            }
-                          }
-                        }
-                      }
-                      type
-                      ... on MultipleChoiceQuestion {
-                        isOtherAllowed
-                        validationRule {
-                          type
-                          number
-                        }
-                        choices(randomize: true) {
-                          id
-                          title
-                          description
-                          color
-                          image {
-                            url
                           }
                         }
                       }
                     }
+                    type
+                    ... on MultipleChoiceQuestion {
+                      isOtherAllowed
+                      validationRule {
+                        type
+                        number
+                      }
+                      choices(randomize: true) {
+                        id
+                        title
+                        description
+                        color
+                        image {
+                          url
+                        }
+                      }
+                    }
+                  }
                 }
-            }
-          `}
-          variables={{}}
-          render={({error, props}) => {
-            if (error) {
-              console.log(error); // eslint-disable-line no-console
-              return graphqlError;
-            }
-            if (props && props.registrationForm && props.registrationForm.questions) {
-              return <ModalRegistrationFormQuestions change={change}
-                                                     responses={responses}
-                                                     form={form}
-                                                     questions={props.registrationForm.questions}
-                                                     intl={intl}
-              />
-            }
+              }
+            `}
+            variables={{}}
+            render={({ error, props }) => {
+              if (error) {
+                console.log(error); // eslint-disable-line no-console
+                return graphqlError;
+              }
+              if (props && props.registrationForm && props.registrationForm.questions) {
+                return (
+                  <ModalRegistrationFormQuestions
+                    change={change}
+                    responses={responses}
+                    form={form}
+                    questions={props.registrationForm.questions}
+                    intl={intl}
+                  />
+                );
+              }
 
-            return null
-          }}
-        />}
+              return null;
+            }}
+          />
+        )}
         <Field
           id="charte"
           name="charte"
@@ -284,7 +289,7 @@ export class RegistrationForm extends React.Component<Props> {
           />
         )}
         {addCaptchaField && (
-          <Field id="captcha" component={renderComponent} name="captcha" type="captcha"/>
+          <Field id="captcha" component={renderComponent} name="captcha" type="captcha" />
         )}
       </form>
     );
@@ -302,9 +307,8 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
   shieldEnabled: state.default.features.shield_mode,
-  responses: [],
   initialValues: {
-    responses: []
+    responses: [],
   },
 });
 
@@ -312,8 +316,6 @@ const formContainer = reduxForm({
   form,
   validate,
   onSubmit,
-})(RegistrationForm)
-
+})(RegistrationForm);
 
 export default connect(mapStateToProps)(injectIntl(formContainer));
-

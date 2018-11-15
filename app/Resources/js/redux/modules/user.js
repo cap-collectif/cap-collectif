@@ -4,6 +4,7 @@ import Fetcher from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
+import { formatSubmitResponses } from '../../utils/responsesHelper';
 
 export type User = {
   +id: string,
@@ -23,7 +24,6 @@ export type User = {
 };
 
 type Props = {
-  dynamicFields: Object,
   shieldEnabled: boolean,
 };
 
@@ -211,37 +211,12 @@ export const login = (
       }
     });
 
-export const register = (
-  values: Object,
-  dispatch: Dispatch,
-  { dynamicFields, shieldEnabled }: Props,
-) => {
-  const form = { ...values };
-  delete form.charte;
-  const responses = [];
-  const apiForm = {};
-  Object.keys(form).map(key => {
-    if (key.startsWith('dynamic-')) {
-      const question = key.split('-')[1];
-      if (typeof form[key] !== 'undefined' && form[key].length > 0) {
-        const field = dynamicFields.find(fi => String(fi.id) === question);
-        let value = form[key];
-        if (field.type === 'select') {
-          value = { labels: [form[key]], other: null };
-        }
-        responses.push({
-          question,
-          value,
-        });
-      }
-    } else {
-      apiForm[key] = form[key];
-    }
-  });
-  if (responses.length) {
-    apiForm.responses = responses;
+export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: Props) => {
+  const form = { ...values, questions: undefined, charte: undefined };
+  if (values.questions && values.questions.length > 0) {
+    form.responses = formatSubmitResponses(values.responses, values.questions);
   }
-  return Fetcher.post('/users', apiForm)
+  return Fetcher.post('/users', form)
     .then(() => {
       if (shieldEnabled) {
         FluxDispatcher.dispatch({

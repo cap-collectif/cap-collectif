@@ -6,6 +6,19 @@ exports[`<ModalRegistrationFormQuestions/> renders a form with dynamic fields 1`
     [MockFunction] {
       "calls": Array [
         Array [
+          "questions",
+          Array [
+            Object {
+              "id": 6,
+              "private": false,
+              "question": "Champ pas facultatif",
+              "required": true,
+              "slug": "champ-pas-facultatif",
+              "type": "text",
+            },
+          ],
+        ],
+        Array [
           "responses",
           Array [
             Object {
@@ -16,6 +29,10 @@ exports[`<ModalRegistrationFormQuestions/> renders a form with dynamic fields 1`
         ],
       ],
       "results": Array [
+        Object {
+          "isThrow": false,
+          "value": undefined,
+        },
         Object {
           "isThrow": false,
           "value": undefined,
