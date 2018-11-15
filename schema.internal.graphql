@@ -3488,6 +3488,8 @@ type Query {
     # The list of node IDs.
     ids: [ID!]!
   ): [Node]!
+
+  # Get the current registration form
   registrationForm: RegistrationForm
   users(
     # Returns the elements in the list that come after the specified cursor.
@@ -3799,11 +3801,23 @@ type RankingStep implements Step {
 type RegistrationForm implements Node {
   # The ID of an object
   id: ID!
+
+  # Does the bottom text is displayed?
   bottomTextDisplayed: Boolean!
+
+  # Does the top text is displayed?
   topTextDisplayed: Boolean!
+
+  # The bottom text to display
   topText: String
+
+  # The bottom text to display
   bottomText: String
+
+  # A whitelist of authorized domains that can register
   domains: [EmailDomain!]
+
+  # The available questions
   questions: [Question!]!
 }
 

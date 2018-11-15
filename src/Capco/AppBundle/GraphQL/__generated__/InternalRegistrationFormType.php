@@ -41,7 +41,7 @@ final class InternalRegistrationFormType extends ObjectType implements Generated
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'Does the bottom text is displayed?',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -53,7 +53,7 @@ final class InternalRegistrationFormType extends ObjectType implements Generated
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'Does the top text is displayed?',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -65,7 +65,7 @@ final class InternalRegistrationFormType extends ObjectType implements Generated
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'The bottom text to display',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -77,7 +77,7 @@ final class InternalRegistrationFormType extends ObjectType implements Generated
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'The bottom text to display',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -89,7 +89,7 @@ final class InternalRegistrationFormType extends ObjectType implements Generated
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'A whitelist of authorized domains that can register',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -103,7 +103,7 @@ final class InternalRegistrationFormType extends ObjectType implements Generated
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\RegistrationForm\\RegistrationFormQuestionsResolver", array(0 => $value)]);
                     },
-                    'description' => null,
+                    'description' => 'The available questions',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

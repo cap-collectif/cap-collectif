@@ -145,7 +145,7 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver", []]);
                     },
-                    'description' => null,
+                    'description' => 'Get the current registration form',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

@@ -11,8 +11,6 @@ import LoginSocialButtons from '../Login/LoginSocialButtons';
 import { closeRegistrationModal, hideChartModal } from '../../../redux/modules/user';
 import type { State, Dispatch } from '../../../types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
-import Loader from "../../Ui/Loader";
 
 type Props = {
   show: boolean,

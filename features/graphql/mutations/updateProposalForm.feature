@@ -321,8 +321,7 @@ Scenario: GraphQL client wants to delete the first question
               "jumps": []
             }
           }
-        ],
-        "proposalFormId": "proposalform13"
+        ]
       }
     }
   }

@@ -2,11 +2,9 @@
 
 namespace Capco\AppBundle\Entity\Interfaces;
 
-use Doctrine\Common\Collections\Collection;
-
 interface QuestionnableForm
 {
-    public function getRealQuestions(): Collection;
+    public function getRealQuestions(): iterable;
 
-    public function getQuestions(): Collection;
+    public function getQuestions(): iterable;
 }

@@ -332,18 +332,16 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function getRealQuestions(): Collection
+    public function getRealQuestions(): iterable
     {
         return $this->getQuestions()
-            ? $this->getQuestions()->map(function (
-                QuestionnaireAbstractQuestion $questionnaireAbstractQuestion
-            ) {
+            ? array_map(function (QuestionnaireAbstractQuestion $questionnaireAbstractQuestion) {
                 return $questionnaireAbstractQuestion->getQuestion();
-            })
+            }, iterator_to_array($this->getQuestions()))
             : new ArrayCollection();
     }
 
-    public function getQuestions(): Collection
+    public function getQuestions(): iterable
     {
         return $this->questions;
     }
