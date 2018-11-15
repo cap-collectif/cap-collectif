@@ -539,6 +539,11 @@ class Project implements IndexableInterface
         return $this;
     }
 
+    /**
+     * @param Event $event
+     *
+     * @return $this
+     */
     public function removeEvent(Event $event)
     {
         $this->events->removeElement($event);
@@ -718,9 +723,9 @@ class Project implements IndexableInterface
         $count = 0;
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
-                $count +=
-                    $step->getStep()->getOpinionCount() +
-                    $step->getStep()->getTrashedOpinionCount();
+                $count += (
+                    $step->getStep()->getOpinionCount() + $step->getStep()->getTrashedOpinionCount()
+                );
             }
         }
 
@@ -750,9 +755,10 @@ class Project implements IndexableInterface
         $count = 0;
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
-                $count +=
+                $count += (
                     $step->getStep()->getOpinionVersionsCount() +
-                    $step->getStep()->getTrashedOpinionVersionsCount();
+                    $step->getStep()->getTrashedOpinionVersionsCount()
+                );
             }
         }
 
@@ -767,9 +773,10 @@ class Project implements IndexableInterface
         $count = 0;
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
-                $count +=
+                $count += (
                     $step->getStep()->getArgumentCount() +
-                    $step->getStep()->getTrashedArgumentCount();
+                    $step->getStep()->getTrashedArgumentCount()
+                );
             }
         }
 
@@ -781,8 +788,9 @@ class Project implements IndexableInterface
         $count = 0;
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
-                $count +=
-                    $step->getStep()->getSourcesCount() + $step->getStep()->getTrashedSourceCount();
+                $count += (
+                    $step->getStep()->getSourcesCount() + $step->getStep()->getTrashedSourceCount()
+                );
             }
         }
 
@@ -797,7 +805,7 @@ class Project implements IndexableInterface
         $count = 0;
         foreach ($this->steps as $step) {
             if ($step->getStep()->isQuestionnaireStep()) {
-                $count += $step->getStep()->getRepliesCount();
+                $count += ($step->getStep()->getRepliesCount());
             }
         }
 
@@ -858,7 +866,6 @@ class Project implements IndexableInterface
                 return $step->getStep();
             }
         }
-        return null;
     }
 
     public function getFirstCollectStep(): ?CollectStep
@@ -1028,7 +1035,7 @@ class Project implements IndexableInterface
             return true;
         }
 
-        if (($viewer && $viewer->isSuperAdmin()) || $this->getAuthor() === $viewer) {
+        if ($viewer && $viewer->isSuperAdmin() || $this->getAuthor() === $viewer) {
             return true;
         }
 
@@ -1044,7 +1051,9 @@ class Project implements IndexableInterface
         }
         $viewerVisibility = $this->getVisibilityForViewer($viewer);
 
-        return in_array($this->getVisibility(), $viewerVisibility) &&
-            $this->getVisibility() < ProjectVisibilityMode::VISIBILITY_CUSTOM;
+        return (
+            in_array($this->getVisibility(), $viewerVisibility) &&
+            $this->getVisibility() < ProjectVisibilityMode::VISIBILITY_CUSTOM
+        );
     }
 }

@@ -49,14 +49,15 @@ use Capco\AppBundle\Entity\Interfaces\Trashable;
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
  * @CapcoAssert\HasAddressIfMandatory()
  */
-class Proposal implements
-    Publishable,
-    Contribution,
-    Trashable,
-    CommentableInterface,
-    SelfLinkableInterface,
-    SoftDeleteable,
-    DisplayableInBOInterface
+class Proposal
+    implements
+        Publishable,
+        Contribution,
+        Trashable,
+        CommentableInterface,
+        SelfLinkableInterface,
+        SoftDeleteable,
+        DisplayableInBOInterface
 {
     use UuidTrait;
     use ReferenceTrait;
@@ -515,19 +516,23 @@ class Proposal implements
 
     public function canContribute($viewer = null): bool
     {
-        return ($this->isPublished() || $this->isDraft()) &&
+        return (
+            ($this->isPublished() || $this->isDraft()) &&
             !$this->isTrashed() &&
             $this->getStep() &&
-            $this->getStep()->canContribute($viewer);
+            $this->getStep()->canContribute($viewer)
+        );
     }
 
     public function acceptNewComments(): bool
     {
-        return $this->isPublished() &&
+        return (
+            $this->isPublished() &&
             !$this->isTrashed() &&
             $this->proposalForm &&
             $this->proposalForm->isCommentable() &&
-            $this->isCommentable();
+            $this->isCommentable()
+        );
     }
 
     public function userHasReport(User $user): bool
@@ -553,7 +558,7 @@ class Proposal implements
         return $this;
     }
 
-    public function getLikers(): iterable
+    public function getLikers(): Collection
     {
         return $this->likers;
     }
@@ -597,7 +602,6 @@ class Proposal implements
                 ->getStep()
                 ->getProject();
         }
-        return null;
     }
 
     public function getProjectId()
@@ -613,7 +617,6 @@ class Proposal implements
                 ->getStep()
                 ->getProjectId();
         }
-        return null;
     }
 
     public function getSelectionStepsIds(): array
@@ -733,8 +736,10 @@ class Proposal implements
             ->getProject()
             ->getSteps()
             ->exists(function ($key, $step) {
-                return $step->getStep()->isSelectionStep() &&
-                    $step->getStep()->isAllowingProgressSteps();
+                return (
+                    $step->getStep()->isSelectionStep() &&
+                    $step->getStep()->isAllowingProgressSteps()
+                );
             });
     }
 

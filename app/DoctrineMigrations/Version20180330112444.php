@@ -46,7 +46,7 @@ class Version20180330112444 extends AbstractMigration
         foreach ($followers as $follower) {
             $this->connection->update(
                 'user_following_proposal',
-                ['notified_of' => FollowerNotifiedOfInterface::ALL],
+                ['notified_of' => FollowerNotifiedOfInterface::DEFAULT],
                 ['id' => $follower['id']]
             );
         }

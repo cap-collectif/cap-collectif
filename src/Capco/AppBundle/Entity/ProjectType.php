@@ -2,9 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\IdTrait;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Project Type.
@@ -77,7 +76,7 @@ class ProjectType
         return $this;
     }
 
-    public function getProjects(): Collection
+    public function getProjects()
     {
         return $this->projects;
     }
