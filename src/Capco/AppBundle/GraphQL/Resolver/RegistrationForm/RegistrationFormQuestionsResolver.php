@@ -7,18 +7,14 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class RegistrationFormQuestionsResolver implements ResolverInterface
 {
-
     public function __invoke(RegistrationForm $form): array
     {
-        $questions = iterator_to_array($form->getRealQuestions());
+        $questions = $form->getRealQuestions()->toArray();
         usort($questions, function ($a, $b) {
-            return (
-                $a->getQuestionnaireAbstractQuestion()->getPosition() <=>
-                $b->getQuestionnaireAbstractQuestion()->getPosition()
-            );
+            return $a->getQuestionnaireAbstractQuestion()->getPosition() <=>
+                $b->getQuestionnaireAbstractQuestion()->getPosition();
         });
 
         return $questions;
     }
-
 }

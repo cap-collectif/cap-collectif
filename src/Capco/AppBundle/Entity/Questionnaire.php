@@ -169,7 +169,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         return true;
     }
 
-    public function getRealQuestions(): iterable
+    public function getRealQuestions(): Collection
     {
         $questions = new ArrayCollection();
         foreach ($this->questions as $qaq) {
@@ -179,7 +179,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm
         return $questions;
     }
 
-    public function getQuestions(): iterable
+    public function getQuestions(): Collection
     {
         return $this->questions;
     }

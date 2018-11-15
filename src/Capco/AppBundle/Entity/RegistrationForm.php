@@ -101,7 +101,7 @@ class RegistrationForm implements QuestionnableForm
         return $this->bottomText;
     }
 
-    public function getRealQuestions(): iterable
+    public function getRealQuestions(): Collection
     {
         $questions = new ArrayCollection();
         foreach ($this->questions as $qaq) {
@@ -111,7 +111,7 @@ class RegistrationForm implements QuestionnableForm
         return $questions;
     }
 
-    public function getQuestions(): iterable
+    public function getQuestions(): Collection
     {
         return $this->questions;
     }

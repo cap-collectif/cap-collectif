@@ -46,7 +46,7 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         $question1->isRequired()->willReturn(true);
         $question1->getId()->willReturn(1);
         $aq1->getQuestion()->willReturn($question1);
-        $questionnaire->getQuestions()->willReturn([$aq1]);
+        $questionnaire->getQuestions()->willReturn(new ArrayCollection([$aq1]));
         $reply->getQuestionnaire()->willReturn($questionnaire);
         $reply->getResponses()->willReturn(new ArrayCollection([$response1]));
         $builder->setParameter('missing', 1)->willReturn($builder);

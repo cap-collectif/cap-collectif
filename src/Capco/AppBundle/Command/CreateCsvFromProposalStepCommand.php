@@ -462,14 +462,12 @@ EOF;
             return;
         }
 
-        if ($project = $this->getProject($input)) {
+        if (($project = $this->getProject($input))) {
             $steps = $project
                 ->getSteps()
                 ->filter(function (ProjectAbstractStep $projectAbstractStep) {
-                    return (
-                        $projectAbstractStep->getStep() instanceof SelectionStep ||
-                        $projectAbstractStep->getStep() instanceof CollectStep
-                    );
+                    return $projectAbstractStep->getStep() instanceof SelectionStep ||
+                        $projectAbstractStep->getStep() instanceof CollectStep;
                 })
                 ->map(function (ProjectAbstractStep $projectAbstractStep) {
                     return $projectAbstractStep->getStep();
@@ -501,10 +499,12 @@ EOF;
         }
 
         $proposalsQuery = $this->getContributionsGraphQLQueryByProposalStep($this->currentStep);
-        $proposals = $this->executor->execute('internal', [
-            'query' => $proposalsQuery,
-            'variables' => [],
-        ])->toArray();
+        $proposals = $this->executor
+            ->execute('internal', [
+                'query' => $proposalsQuery,
+                'variables' => [],
+            ])
+            ->toArray();
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
 
         // Prepare the export file.
@@ -569,10 +569,12 @@ EOF;
         $this->writer->addRow($row);
 
         $reportingsQuery = $this->getProposalReportingsGraphQLQuery($proposal['id']);
-        $proposalWithReportings = $this->executor->execute('internal', [
-            'query' => $reportingsQuery,
-            'variables' => [],
-        ])->toArray();
+        $proposalWithReportings = $this->executor
+            ->execute('internal', [
+                'query' => $reportingsQuery,
+                'variables' => [],
+            ])
+            ->toArray();
 
         $totalCount = Arr::path($proposalWithReportings, 'data.node.reportings.totalCount');
         $progress = new ProgressBar($output, $totalCount);
@@ -602,10 +604,12 @@ EOF;
             $proposal['id'],
             $this->currentStep->getId()
         );
-        $proposalsWithVotes = $this->executor->execute('internal', [
-            'query' => $votesQuery,
-            'variables' => [],
-        ])->toArray();
+        $proposalsWithVotes = $this->executor
+            ->execute('internal', [
+                'query' => $votesQuery,
+                'variables' => [],
+            ])
+            ->toArray();
 
         $totalCount = Arr::path($proposalsWithVotes, 'data.node.votes.totalCount');
         $progress = new ProgressBar($output, $totalCount);
@@ -633,10 +637,12 @@ EOF;
         $progress->clear();
 
         $commentsQuery = $this->getProposalCommentsGraphQLQuery($proposal['id']);
-        $proposalsWithComments = $this->executor->execute('internal', [
-            'query' => $commentsQuery,
-            'variables' => [],
-        ])->toArray();
+        $proposalsWithComments = $this->executor
+            ->execute('internal', [
+                'query' => $commentsQuery,
+                'variables' => [],
+            ])
+            ->toArray();
 
         $totalCount = Arr::path($proposalsWithComments, 'data.node.comments.totalCount');
         $progress = new ProgressBar($output, $totalCount);
@@ -663,10 +669,12 @@ EOF;
         $progress->clear();
 
         $newsQuery = $this->getProposalNewsGraphQLQuery($proposal['id']);
-        $proposalWithNews = $this->executor->execute('internal', [
-            'query' => $newsQuery,
-            'variables' => [],
-        ])->toArray();
+        $proposalWithNews = $this->executor
+            ->execute('internal', [
+                'query' => $newsQuery,
+                'variables' => [],
+            ])
+            ->toArray();
 
         $totalCount = Arr::path($proposalWithNews, 'data.node.news.totalCount');
         $progress = new ProgressBar($output, $totalCount);
@@ -745,10 +753,12 @@ EOF;
         $this->writer->addRow($row);
 
         $commentReportings = $this->getProposalCommentReportingsGraphQLQuery($comment['id']);
-        $commentWithReportings = $this->executor->execute('internal', [
-            'query' => $commentReportings,
-            'variables' => [],
-        ])->toArray();
+        $commentWithReportings = $this->executor
+            ->execute('internal', [
+                'query' => $commentReportings,
+                'variables' => [],
+            ])
+            ->toArray();
 
         $this->connectionTraversor->traverse(
             $commentWithReportings,
@@ -766,10 +776,12 @@ EOF;
         );
 
         $commentVotesQuery = $this->getProposalCommentVotesGraphQLQuery($comment['id']);
-        $commentWithVotes = $this->executor->execute('internal', [
-            'query' => $commentVotesQuery,
-            'variables' => [],
-        ])->toArray();
+        $commentWithVotes = $this->executor
+            ->execute('internal', [
+                'query' => $commentVotesQuery,
+                'variables' => [],
+            ])
+            ->toArray();
 
         $this->connectionTraversor->traverse(
             $commentWithVotes,
@@ -1122,9 +1134,9 @@ EOF;
         /** @var Questionnaire $evaluationForm */
         if (
             $this->currentStep->getProposalForm() &&
-            $evaluationForm = $this->currentStep->getProposalForm()->getEvaluationForm()
+            ($evaluationForm = $this->currentStep->getProposalForm()->getEvaluationForm())
         ) {
-            $evaluationFormAsArray = iterator_to_array($evaluationForm->getRealQuestions());
+            $evaluationFormAsArray = $evaluationForm->getRealQuestions()->toArray();
             /** @var AbstractQuestion $question */
             foreach (\array_reverse($evaluationFormAsArray) as $question) {
                 $result = $this->insert(

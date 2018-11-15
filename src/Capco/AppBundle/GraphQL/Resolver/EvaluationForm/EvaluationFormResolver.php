@@ -21,7 +21,7 @@ class EvaluationFormResolver implements ResolverInterface
 
     public function __invoke(Questionnaire $evaluationForm, $user): Collection
     {
-        $questions = iterator_to_array($evaluationForm->getRealQuestions());
+        $questions = $evaluationForm->getRealQuestions();
         $isEvaluer = false;
         if ($user instanceof User) {
             $proposalForm = $evaluationForm->getProposalForm();
@@ -32,7 +32,7 @@ class EvaluationFormResolver implements ResolverInterface
         }
         $viewerCanSeePrivateQuestion = $isEvaluer || ($user instanceof User && $user->isAdmin());
 
-        return array_filter($questions, function ($question) use ($viewerCanSeePrivateQuestion) {
+        return $questions->filter(function ($question) use ($viewerCanSeePrivateQuestion) {
             return !$question->isPrivate() || $viewerCanSeePrivateQuestion;
         });
     }
