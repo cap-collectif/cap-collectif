@@ -14,7 +14,7 @@ export class ProposalStepPageHeader extends React.Component<Props> {
     const { step } = this.props;
 
     const queryCount = step.proposals.totalCount;
-
+    console.log(this.props);
     const total = step.allProposals.totalCount;
     const fusionCount = step.allProposals.fusionCount;
     const tradKeyForTotalCount =
@@ -107,6 +107,9 @@ export default createFragmentContainer(ProposalStepPageHeader, {
       }
       ... on SelectionStep {
         kind
+        form {
+          isProposalForm
+        }
       }
     }
   `,

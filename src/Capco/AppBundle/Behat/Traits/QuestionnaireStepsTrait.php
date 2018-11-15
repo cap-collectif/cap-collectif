@@ -221,6 +221,8 @@ trait QuestionnaireStepsTrait
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
             ->getSelectorForUserReply();
+        $this->getSession()->wait(2000, "$('" . $userReplySelector . "').length == 0");
+
         $this->iShouldSeeNbElementOnPage(0, $userReplySelector);
     }
 
