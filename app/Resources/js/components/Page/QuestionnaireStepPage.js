@@ -9,7 +9,7 @@ import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
 import UserReplies from '../Reply/UserReplies';
 import { type GlobalState } from '../../types';
 import { type QuestionnaireStepPageQueryResponse } from './__generated__/QuestionnaireStepPageQuery.graphql';
-import { Loader } from '../Ui/FeedbacksIndicators/Loader';
+import { Loader } from '../Ui/Loader';
 
 type Props = {
   step: Object,

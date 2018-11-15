@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import type { ArgumentListView_argumentable } from './__generated__/ArgumentListView_argumentable.graphql';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import Loader from '../Ui/Loader';
 import ArgumentListViewPaginated from './ArgumentListViewPaginated';
 
 export type ArgumentOrder = 'old' | 'last' | 'popular';

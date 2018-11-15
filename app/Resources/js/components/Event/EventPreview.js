@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import DatesInterval from '../Utils/DatesInterval';
 import EventPreview_event from './__generated__/EventPreview_event.graphql';
-import DateIcon from '../Ui/Dates/DateIcon';
+import DateIcon from '../Ui/DateIcon';
 
 type Props = {
   event: EventPreview_event,

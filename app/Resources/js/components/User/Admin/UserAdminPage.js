@@ -6,7 +6,7 @@ import type { MapStateToProps } from 'react-redux';
 import { isDirty } from 'redux-form';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import UserAdminPageTabs from './UserAdminPageTabs';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import Loader from '../../Ui/Loader';
 import type { State } from '../../../types';
 import type {
   UserAdminPageQueryResponse,

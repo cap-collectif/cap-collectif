@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import { type MapStateToProps, connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import Loader from '../../Ui/Loader';
 import EventListPaginated from './EventListPaginated';
 import type { GlobalState } from '../../../types';
 import type EventRefetch_query from './__generated__/EventRefetch_query.graphql';

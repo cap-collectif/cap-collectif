@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import Loader from '../Ui/Loader';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type {
   EventPageQueryResponse,
