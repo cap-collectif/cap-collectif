@@ -136,7 +136,7 @@ final class UpdateProposalFormInputType extends InputObjectType implements Gener
                     'description' => null,
                 ],
                 'isProposalForm' => [
-                    'type' => Type::nonNull(Type::boolean()),
+                    'type' => Type::boolean(),
                     'description' => 'Proposal form is type of Proposal or Question',
                 ],
                 'usingDescription' => [

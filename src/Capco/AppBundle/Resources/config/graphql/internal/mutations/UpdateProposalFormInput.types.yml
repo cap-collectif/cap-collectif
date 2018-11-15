@@ -60,7 +60,7 @@ UpdateProposalFormInput:
       allowAknowledge:
         type: 'Boolean'
       isProposalForm:
-        type: 'Boolean!'
+        type: 'Boolean'
         description: 'Proposal form is type of Proposal or Question'
       usingDescription:
         type: 'Boolean'

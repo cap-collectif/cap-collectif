@@ -2814,9 +2814,6 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   # The id of the contribution.
   id: ID!
 
-  # Identifies proposals as draft.
-  draft: Boolean!
-
   # The comments related to the commentable.
   comments(
     # Returns the elements in the list that come after the specified cursor.
@@ -2844,6 +2841,9 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
 
   # The reason the moderator trashed the contribution.
   trashedReason: String
+
+  # Identifies proposals as draft.
+  draft: Boolean!
 
   # `true` if the object is published.
   published: Boolean!
@@ -3781,7 +3781,7 @@ enum QuestionnaireType {
   VOTING
 }
 
-# A step inside a project.
+# Fetches an object given its ID
 type RankingStep implements Step {
   # The kind of the step
   kind: String!
@@ -4978,7 +4978,7 @@ input UpdateProposalFormInput {
   allowAknowledge: Boolean
 
   # Proposal form is type of Proposal or Question
-  isProposalForm: Boolean!
+  isProposalForm: Boolean
 
   # Proposal form using description field
   usingDescription: Boolean

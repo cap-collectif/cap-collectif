@@ -202,6 +202,13 @@ class ApplicationContext extends UserContext
         }
     }
 
+    //    public function maximizeWindow()
+    //    {
+    //        $this->getSession()
+    //            ->getDriver()
+    //            ->maximizeWindow();
+    //    }
+
     /**
      * @Given I visited :pageName
      */

@@ -651,6 +651,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
   usingDescription: selector(state, 'usingDescription'),
   usingSummary: selector(state, 'usingSummary'),
   usingIllustration: selector(state, 'usingIllustration'),
+  isProposalForm: selector(state, 'isProposalForm'),
   features: state.default.features,
 });
 
