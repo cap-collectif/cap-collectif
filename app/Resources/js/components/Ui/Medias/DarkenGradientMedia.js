@@ -3,10 +3,12 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 type Props = {
+  children?: any,
   url: string,
-  width: string,
-  height: string,
+  width?: string,
+  height?: string,
   linearGradient?: boolean,
+  alt?: string,
 };
 
 export const Container = styled.div`
@@ -24,11 +26,23 @@ export const Container = styled.div`
 export default class DarkenGradientMedia extends PureComponent<Props> {
   static defaultProps = {
     linearGradient: true,
+    width: '100%',
+    height: '100%',
   };
 
   render() {
-    const { url, width, height, linearGradient } = this.props;
+    const { url, width, height, linearGradient, alt, children } = this.props;
 
-    return <Container url={url} width={width} height={height} linearGradient={linearGradient} />;
+    return (
+      <Container
+        url={url}
+        width={width}
+        height={height}
+        linearGradient={linearGradient}
+        role={alt ? 'img' : null}
+        aria-label={alt}>
+        {children}
+      </Container>
+    );
   }
 }
