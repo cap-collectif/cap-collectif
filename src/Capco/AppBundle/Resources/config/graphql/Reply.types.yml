@@ -10,14 +10,12 @@ Reply:
       publicationStatus:
         type: 'ReplyPublicationStatus!'
         description: 'The reply status.'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyPublicationStatusResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyPublicationStatusResolver", [value])'
       createdAt:
         type: 'DateTime!'
       responses:
         type: '[Response]!'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value])'
       author:
         type: 'InternalUser!'
         description: 'The author of the contribution.'
@@ -27,13 +25,15 @@ Reply:
       questionnaire:
         type: 'InternalQuestionnaire!'
         description: 'Identifies the form where the contribution was submitted.'
+      viewerCanUpdate:
+        type: 'Boolean!'
+        access: "@=hasRole('ROLE_USER')"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanUpdateResolver", [value, getUser()])'
       viewerCanDelete:
         type: 'Boolean!'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", [value, getUser()])'
+        access: "@=hasRole('ROLE_USER')"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", [value, getUser()])'
       show_url:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
       url:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'

@@ -12,7 +12,6 @@ import DeleteReplyModal from '../Delete/DeleteReplyModal';
 
 type Props = {
   reply: ReplyModalLink_reply,
-  questionnaire: Object,
 };
 
 type CurrentOpenModal = 'edit' | 'delete' | null;
@@ -35,7 +34,8 @@ export class ReplyModalLink extends React.Component<Props, State> {
   };
 
   render() {
-    const { reply, questionnaire } = this.props;
+    const { reply } = this.props;
+    const { currentOpenModal } = this.state;
 
     return (
       <Fragment>
@@ -70,13 +70,14 @@ export class ReplyModalLink extends React.Component<Props, State> {
           <div>
             <Button
               className="mr-10 reply__update-btn mt-5"
-              bsStyle="warning"
+              bsStyle={reply.viewerCanUpdate ? 'warning' : 'primary'}
               onClick={() => this.showModal('edit')}>
-              <FormattedMessage id="glodal.edit" />
+              <FormattedMessage id={reply.viewerCanUpdate ? 'glodal.edit' : 'global.see'} />
             </Button>
             {reply.viewerCanDelete && (
               <Button
-                bsStyle="danger reply__delete-btn mt-5"
+                bsStyle="danger"
+                className="reply__delete-btn mt-5"
                 onClick={() => this.showModal('delete')}>
                 <FormattedMessage id="glodal.delete" />
               </Button>
@@ -85,15 +86,14 @@ export class ReplyModalLink extends React.Component<Props, State> {
         </ListGroupItem>
         {/* $FlowFixMe $refType */}
         <UpdateReplyModal
-          show={this.state.currentOpenModal === 'edit'}
+          show={currentOpenModal === 'edit'}
           onClose={this.hideModal}
           reply={reply}
-          questionnaire={questionnaire}
         />
         {/* $FlowFixMe $refType */}
         <DeleteReplyModal
           reply={reply}
-          show={this.state.currentOpenModal === 'delete'}
+          show={currentOpenModal === 'delete'}
           onClose={this.hideModal}
         />
       </Fragment>
@@ -109,6 +109,7 @@ export default createFragmentContainer(ReplyModalLink, {
       id
       private
       draft
+      viewerCanUpdate
       viewerCanDelete
       ...UpdateReplyModal_reply
       ...DeleteReplyModal_reply

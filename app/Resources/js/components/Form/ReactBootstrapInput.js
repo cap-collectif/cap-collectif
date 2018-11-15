@@ -63,7 +63,7 @@ type Props = {
   id: ?string,
   children?: any,
   help?: string | any,
-  helpPrint?: boolean,
+  helpPrint: boolean,
   description?: string | any,
   bsSize?: string,
   wrapperClassName?: ?string,
@@ -397,6 +397,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       standalone, // eslint-disable-line
       validationState, // eslint-disable-line
       validationRule, // eslint-disable-line
+      helpPrint,
       ...props
     } = this.props;
 
@@ -414,7 +415,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           validationRule={validationRule || null}
           questionType={props.type}
           choices={this.props.choices}
-          helpPrint={this.props.helpPrint}
+          helpPrint={helpPrint}
         />
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
         {props.description && props.description !== '<div><br /></div>' && (

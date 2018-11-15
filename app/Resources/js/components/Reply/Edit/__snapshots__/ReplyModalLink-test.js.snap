@@ -1,0 +1,550 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReplyModalLink /> render a draft reply in a closed questionnaire 1`] = `
+<Fragment>
+  <ListGroupItem
+    bsClass="list-group-item"
+    className="reply align-items-center"
+    id="reply-link-replay1"
+    listItem={false}
+  >
+    <div>
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={null}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={null}
+            />,
+          }
+        }
+      />
+      <ReplyDraftLabel
+        draft={true}
+      />
+      <ForwardRef(Relay(Connect(UnpublishedLabel)))
+        publishable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "createdAt": "",
+            "draft": true,
+            "id": "replay1",
+            "private": false,
+            "publishedAt": "",
+            "viewerCanDelete": false,
+            "viewerCanUpdate": false,
+          }
+        }
+      />
+    </div>
+    <div>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        className="mr-10 reply__update-btn mt-5"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.see"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  </ListGroupItem>
+  <ForwardRef(Relay(UpdateReplyModal))
+    onClose={[Function]}
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "createdAt": "",
+        "draft": true,
+        "id": "replay1",
+        "private": false,
+        "publishedAt": "",
+        "viewerCanDelete": false,
+        "viewerCanUpdate": false,
+      }
+    }
+    show={false}
+  />
+  <ForwardRef(Relay(DeleteReplyModal))
+    onClose={[Function]}
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "createdAt": "",
+        "draft": true,
+        "id": "replay1",
+        "private": false,
+        "publishedAt": "",
+        "viewerCanDelete": false,
+        "viewerCanUpdate": false,
+      }
+    }
+    show={false}
+  />
+</Fragment>
+`;
+
+exports[`<ReplyModalLink /> render a draft reply in a contribuable questionnaire 1`] = `
+<Fragment>
+  <ListGroupItem
+    bsClass="list-group-item"
+    className="reply align-items-center"
+    id="reply-link-replay1"
+    listItem={false}
+  >
+    <div>
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={null}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={null}
+            />,
+          }
+        }
+      />
+      <ReplyDraftLabel
+        draft={true}
+      />
+      <ForwardRef(Relay(Connect(UnpublishedLabel)))
+        publishable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "createdAt": "",
+            "draft": true,
+            "id": "replay1",
+            "private": false,
+            "publishedAt": "",
+            "viewerCanDelete": true,
+            "viewerCanUpdate": true,
+          }
+        }
+      />
+    </div>
+    <div>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="warning"
+        className="mr-10 reply__update-btn mt-5"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="glodal.edit"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="reply__delete-btn mt-5"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="glodal.delete"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  </ListGroupItem>
+  <ForwardRef(Relay(UpdateReplyModal))
+    onClose={[Function]}
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "createdAt": "",
+        "draft": true,
+        "id": "replay1",
+        "private": false,
+        "publishedAt": "",
+        "viewerCanDelete": true,
+        "viewerCanUpdate": true,
+      }
+    }
+    show={false}
+  />
+  <ForwardRef(Relay(DeleteReplyModal))
+    onClose={[Function]}
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "createdAt": "",
+        "draft": true,
+        "id": "replay1",
+        "private": false,
+        "publishedAt": "",
+        "viewerCanDelete": true,
+        "viewerCanUpdate": true,
+      }
+    }
+    show={false}
+  />
+</Fragment>
+`;
+
+exports[`<ReplyModalLink /> render a private reply in a contribuable questionnaire 1`] = `
+<Fragment>
+  <ListGroupItem
+    bsClass="list-group-item"
+    className="reply align-items-center"
+    id="reply-link-replay1"
+    listItem={false}
+  >
+    <div>
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={null}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={null}
+            />,
+          }
+        }
+      />
+      <span>
+         
+        <FormattedMessage
+          id="reply.private"
+          values={Object {}}
+        />
+      </span>
+      <ReplyDraftLabel
+        draft={false}
+      />
+      <ForwardRef(Relay(Connect(UnpublishedLabel)))
+        publishable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "createdAt": "",
+            "draft": false,
+            "id": "replay1",
+            "private": true,
+            "publishedAt": "",
+            "viewerCanDelete": true,
+            "viewerCanUpdate": true,
+          }
+        }
+      />
+    </div>
+    <div>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="warning"
+        className="mr-10 reply__update-btn mt-5"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="glodal.edit"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="reply__delete-btn mt-5"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="glodal.delete"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  </ListGroupItem>
+  <ForwardRef(Relay(UpdateReplyModal))
+    onClose={[Function]}
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "createdAt": "",
+        "draft": false,
+        "id": "replay1",
+        "private": true,
+        "publishedAt": "",
+        "viewerCanDelete": true,
+        "viewerCanUpdate": true,
+      }
+    }
+    show={false}
+  />
+  <ForwardRef(Relay(DeleteReplyModal))
+    onClose={[Function]}
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "createdAt": "",
+        "draft": false,
+        "id": "replay1",
+        "private": true,
+        "publishedAt": "",
+        "viewerCanDelete": true,
+        "viewerCanUpdate": true,
+      }
+    }
+    show={false}
+  />
+</Fragment>
+`;
+
+exports[`<ReplyModalLink /> render a reply in a closed questionnaire 1`] = `
+<Fragment>
+  <ListGroupItem
+    bsClass="list-group-item"
+    className="reply align-items-center"
+    id="reply-link-replay1"
+    listItem={false}
+  >
+    <div>
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={null}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={null}
+            />,
+          }
+        }
+      />
+      <ReplyDraftLabel
+        draft={false}
+      />
+      <ForwardRef(Relay(Connect(UnpublishedLabel)))
+        publishable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "createdAt": "",
+            "draft": false,
+            "id": "replay1",
+            "private": false,
+            "publishedAt": "",
+            "viewerCanDelete": false,
+            "viewerCanUpdate": false,
+          }
+        }
+      />
+    </div>
+    <div>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        className="mr-10 reply__update-btn mt-5"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.see"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  </ListGroupItem>
+  <ForwardRef(Relay(UpdateReplyModal))
+    onClose={[Function]}
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "createdAt": "",
+        "draft": false,
+        "id": "replay1",
+        "private": false,
+        "publishedAt": "",
+        "viewerCanDelete": false,
+        "viewerCanUpdate": false,
+      }
+    }
+    show={false}
+  />
+  <ForwardRef(Relay(DeleteReplyModal))
+    onClose={[Function]}
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "createdAt": "",
+        "draft": false,
+        "id": "replay1",
+        "private": false,
+        "publishedAt": "",
+        "viewerCanDelete": false,
+        "viewerCanUpdate": false,
+      }
+    }
+    show={false}
+  />
+</Fragment>
+`;
+
+exports[`<ReplyModalLink /> render a reply in a contribuable questionnaire 1`] = `
+<Fragment>
+  <ListGroupItem
+    bsClass="list-group-item"
+    className="reply align-items-center"
+    id="reply-link-replay1"
+    listItem={false}
+  >
+    <div>
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={null}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={null}
+            />,
+          }
+        }
+      />
+      <ReplyDraftLabel
+        draft={false}
+      />
+      <ForwardRef(Relay(Connect(UnpublishedLabel)))
+        publishable={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "createdAt": "",
+            "draft": false,
+            "id": "replay1",
+            "private": false,
+            "publishedAt": "",
+            "viewerCanDelete": true,
+            "viewerCanUpdate": true,
+          }
+        }
+      />
+    </div>
+    <div>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="warning"
+        className="mr-10 reply__update-btn mt-5"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="glodal.edit"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="reply__delete-btn mt-5"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="glodal.delete"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  </ListGroupItem>
+  <ForwardRef(Relay(UpdateReplyModal))
+    onClose={[Function]}
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "createdAt": "",
+        "draft": false,
+        "id": "replay1",
+        "private": false,
+        "publishedAt": "",
+        "viewerCanDelete": true,
+        "viewerCanUpdate": true,
+      }
+    }
+    show={false}
+  />
+  <ForwardRef(Relay(DeleteReplyModal))
+    onClose={[Function]}
+    reply={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "createdAt": "",
+        "draft": false,
+        "id": "replay1",
+        "private": false,
+        "publishedAt": "",
+        "viewerCanDelete": true,
+        "viewerCanUpdate": true,
+      }
+    }
+    show={false}
+  />
+</Fragment>
+`;

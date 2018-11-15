@@ -31,7 +31,7 @@ export class UserReplies extends React.Component<Props> {
         <ListGroup className="list-group-custom">
           {questionnaire.viewerReplies.map((reply, index) => (
             // $FlowFixMe $refType
-            <ReplyModalLink key={index} reply={reply} questionnaire={questionnaire} />
+            <ReplyModalLink key={index} reply={reply} />
           ))}
         </ListGroup>
         <hr />

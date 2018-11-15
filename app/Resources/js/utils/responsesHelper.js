@@ -586,7 +586,7 @@ export const renderResponses = ({
           }
           case 'medias': {
             return (
-              <div className={isAvailableQuestion === false && 'visible-print-block'}>
+              <div className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
                 <PrivateBox key={field.id} show={field.private}>
                   <Field
                     name={`${member}.value`}
@@ -607,7 +607,7 @@ export const renderResponses = ({
           case 'select': {
             if (!('choices' in field)) return null;
             return (
-              <div className={isAvailableQuestion === false && 'visible-print-block'}>
+              <div className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
                 <PrivateBox key={field.id} show={field.private}>
                   <Field
                     name={`${member}.value`}
@@ -657,7 +657,7 @@ export const renderResponses = ({
 
               if (field.type === 'radio') {
                 return (
-                  <div className={isAvailableQuestion === false && 'visible-print-block'}>
+                  <div className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
                     <PrivateBox key={field.id} show={field.private}>
                       <div key={`${member}-container`}>
                         <MultipleChoiceRadio
@@ -681,7 +681,7 @@ export const renderResponses = ({
             }
 
             return (
-              <div className={isAvailableQuestion === false && 'visible-print-block'}>
+              <div className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
                 <PrivateBox key={field.id} show={field.private}>
                   <Field
                     name={`${member}.value`}

@@ -3935,6 +3935,7 @@ type Reply implements Node & Publishable & Draftable & Contribution {
 
   # Identifies the form where the contribution was submitted.
   questionnaire: Questionnaire!
+  viewerCanUpdate: Boolean!
   viewerCanDelete: Boolean!
 }
 

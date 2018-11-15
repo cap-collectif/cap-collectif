@@ -211,35 +211,37 @@ export class ReplyForm extends React.Component<Props> {
                   />
                 </div>
               )}
-              <div className="btn-toolbar btn-box sticky">
-                {(!reply || isDraft) &&
-                  questionnaire.type === 'QUESTIONNAIRE' && (
-                    <div className="btn-group">
-                      <SubmitButton
-                        type="submit"
-                        id={`${form}-submit-create-draft-reply`}
-                        disabled={pristine || submitting || disabled}
-                        bsStyle="primary"
-                        label={submitting ? 'global.loading' : 'global.save_as_draft'}
-                        onSubmit={() => {
-                          dispatch(changeRedux(form, 'draft', true));
-                        }}
-                      />
-                    </div>
-                  )}
-                <div className="btn-group">
-                  <SubmitButton
-                    type="submit"
-                    id={`${form}-submit-create-reply`}
-                    bsStyle="info"
-                    disabled={(!isDraft && pristine) || invalid || submitting || disabled}
-                    label={submitting ? 'global.loading' : 'validate'}
-                    onSubmit={() => {
-                      dispatch(changeRedux(form, 'draft', false));
-                    }}
-                  />
+              {(!reply || reply.viewerCanUpdate) && (
+                <div className="btn-toolbar btn-box sticky">
+                  {(!reply || isDraft) &&
+                    questionnaire.type === 'QUESTIONNAIRE' && (
+                      <div className="btn-group">
+                        <SubmitButton
+                          type="submit"
+                          id={`${form}-submit-create-draft-reply`}
+                          disabled={pristine || submitting || disabled}
+                          bsStyle="primary"
+                          label={submitting ? 'global.loading' : 'global.save_as_draft'}
+                          onSubmit={() => {
+                            dispatch(changeRedux(form, 'draft', true));
+                          }}
+                        />
+                      </div>
+                    )}
+                  <div className="btn-group">
+                    <SubmitButton
+                      type="submit"
+                      id={`${form}-submit-create-reply`}
+                      bsStyle="info"
+                      disabled={(!isDraft && pristine) || invalid || submitting || disabled}
+                      label={submitting ? 'global.loading' : 'validate'}
+                      onSubmit={() => {
+                        dispatch(changeRedux(form, 'draft', false));
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
               {!disabled &&
                 !pristine && (
                   <AlertForm
@@ -289,6 +291,7 @@ export default createFragmentContainer(container, {
       private
       publicationStatus
       draft
+      viewerCanUpdate
       responses {
         question {
           id
