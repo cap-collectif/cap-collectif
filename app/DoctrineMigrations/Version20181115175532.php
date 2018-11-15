@@ -9,7 +9,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181114175532 extends AbstractMigration
+final class Version20181115175532 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -46,8 +46,8 @@ final class Version20181114175532 extends AbstractMigration
             $data = ['object_type' => ProposalFormObjectType::PROPOSAL];
             $data['using_description'] = true;
             $data['description_mandatory'] = true;
-            $data['using_summary'] = !empty($proposalForm['summary_help_text']);
-            $data['using_illustration'] = !empty($proposalForm['illustration_help_text']);
+            $data['using_summary'] = true;
+            $data['using_illustration'] = true;
 
             $this->connection->update('proposal_form', $data, ['id' => $proposalForm['id']]);
         }
