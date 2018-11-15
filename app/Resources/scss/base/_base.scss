@@ -304,13 +304,9 @@ svg.avatar-group {
 .storybook-container {
     margin: 0 35px;
 
-    //&, h1, h2, th, td {
-    //    font-family: "OpenSans", sans-serif;
-    //}
-
     code {
-        background-color: #eee;
-        color: #333;
+        background-color: $border-color;
+        color: $dark-text;
         font-weight: 300;
     }
 
@@ -319,7 +315,7 @@ svg.avatar-group {
     }
 
     .avatar {
-        background-color: blue; // add default bgc avatar
+        background-color: blue; // TODO add default bgc avatar
     }
 
     table {
