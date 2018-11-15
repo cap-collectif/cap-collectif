@@ -1,40 +1,45 @@
 // @flow
-import React, {Component} from 'react'
-import { connect} from "react-redux";
-import {type FormProps, reduxForm, FieldArray} from 'redux-form'
-import {createFragmentContainer, graphql} from "react-relay";
-import {Button} from "react-bootstrap";
-import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
-import type {MapStateToProps} from "react-redux";
-import type {RegistrationFormQuestions_registrationForm} from './__generated__/RegistrationFormQuestions_registrationForm.graphql'
-import type {State} from "../../types";
-import ProposalFormAdminQuestions from "../ProposalForm/ProposalFormAdminQuestions";
-import UpdateRegistrationFormQuestionsMutation from "../../mutations/UpdateRegistrationFormQuestionsMutation";
-import AlertForm from "../Alert/AlertForm";
-import {submitQuestion} from "../../utils/submitQuestion";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { type FormProps, reduxForm, FieldArray } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { Button } from 'react-bootstrap';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import type { MapStateToProps } from 'react-redux';
+import type { RegistrationFormQuestions_registrationForm } from './__generated__/RegistrationFormQuestions_registrationForm.graphql';
+import type { State } from '../../types';
+import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestions';
+import UpdateRegistrationFormQuestionsMutation from '../../mutations/UpdateRegistrationFormQuestionsMutation';
+import AlertForm from '../Alert/AlertForm';
+import { submitQuestion } from '../../utils/submitQuestion';
 
 type Props = FormProps & {
   registrationForm: RegistrationFormQuestions_registrationForm,
-  intl: IntlShape
+  intl: IntlShape,
 };
 
-const formName = 'registration-form-questions'
+const formName = 'registration-form-questions';
 const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 const onSubmit = (values: Object) => {
   const input = {
-    questions: submitQuestion(values.questions, multipleChoiceQuestions)
-  }
+    questions: submitQuestion(values.questions, multipleChoiceQuestions),
+  };
 
-  return UpdateRegistrationFormQuestionsMutation.commit({input})
-}
+  return UpdateRegistrationFormQuestionsMutation.commit({ input });
+};
 
 class RegistrationFormQuestions extends Component<Props> {
-
   render() {
     const {
-      invalid, pristine, submitting, handleSubmit, valid, submitSucceeded, submitFailed
-    } = this.props
+      invalid,
+      pristine,
+      submitting,
+      handleSubmit,
+      valid,
+      submitSucceeded,
+      submitFailed,
+    } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -49,28 +54,31 @@ class RegistrationFormQuestions extends Component<Props> {
           type="submit"
           bsStyle="primary"
           id="proposal-form-admin-content-save">
-          <FormattedMessage id={submitting ? 'global.loading' : 'global.save'}/>
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
         </Button>
-        <AlertForm valid={valid} invalid={invalid} submitting={submitting} submitSucceeded={submitSucceeded}
-                   submitFailed={submitFailed}/>
+        <AlertForm
+          valid={valid}
+          invalid={invalid}
+          submitting={submitting}
+          submitSucceeded={submitSucceeded}
+          submitFailed={submitFailed}
+        />
       </form>
-    )
+    );
   }
-
 }
 
 const form = reduxForm({
   onSubmit,
-
   enableReinitialize: true,
   form: formName,
 })(RegistrationFormQuestions);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   initialValues: props.registrationForm,
-})
+});
 
-const container = connect(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(
   container,
@@ -109,5 +117,4 @@ export default createFragmentContainer(
       }
     }
   `,
-)
-
+);
