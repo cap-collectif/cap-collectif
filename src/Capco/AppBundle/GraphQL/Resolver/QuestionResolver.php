@@ -89,7 +89,7 @@ class QuestionResolver implements ResolverInterface
 
     public function resolveQuestionnaireQuestions(Questionnaire $questionnaire)
     {
-        $questions = $questionnaire->getRealQuestions()->toArray();
+        $questions = iterator_to_array($questionnaire->getRealQuestions());
         usort($questions, function ($a, $b) {
             return (
                 $a->getQuestionnaireAbstractQuestion()->getPosition() <=>

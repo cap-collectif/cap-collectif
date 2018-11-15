@@ -1124,7 +1124,7 @@ EOF;
             $this->currentStep->getProposalForm() &&
             $evaluationForm = $this->currentStep->getProposalForm()->getEvaluationForm()
         ) {
-            $evaluationFormAsArray = $evaluationForm->getRealQuestions()->toArray();
+            $evaluationFormAsArray = iterator_to_array($evaluationForm->getRealQuestions());
             /** @var AbstractQuestion $question */
             foreach (\array_reverse($evaluationFormAsArray) as $question) {
                 $result = $this->insert(

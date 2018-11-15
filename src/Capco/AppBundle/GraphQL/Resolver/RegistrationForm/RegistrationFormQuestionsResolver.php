@@ -10,7 +10,7 @@ class RegistrationFormQuestionsResolver implements ResolverInterface
 
     public function __invoke(RegistrationForm $form): array
     {
-        $questions = $form->getRealQuestions()->toArray();
+        $questions = iterator_to_array($form->getRealQuestions());
         usort($questions, function ($a, $b) {
             return (
                 $a->getQuestionnaireAbstractQuestion()->getPosition() <=>
