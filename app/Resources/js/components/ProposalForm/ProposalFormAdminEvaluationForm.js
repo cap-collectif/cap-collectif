@@ -11,7 +11,7 @@ import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
 import type { ProposalFormAdminEvaluationForm_proposalForm } from './__generated__/ProposalFormAdminEvaluationForm_proposalForm.graphql';
 import SetEvaluationFormInProposalFormMutation from '../../mutations/SetEvaluationFormInProposalFormMutation';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import Loader from '../Ui/Loader';
 
 type RelayProps = { proposalForm: ProposalFormAdminEvaluationForm_proposalForm };
 type Props = RelayProps & {

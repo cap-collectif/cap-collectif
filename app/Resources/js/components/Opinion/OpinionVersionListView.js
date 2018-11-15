@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import Loader from '../Ui/Loader';
 import OpinionVersionListViewPaginated from './OpinionVersionListViewPaginated';
 import type { OpinionVersionListView_opinion } from './__generated__/OpinionVersionListView_opinion.graphql';
 

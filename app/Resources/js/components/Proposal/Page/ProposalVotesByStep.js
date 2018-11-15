@@ -3,7 +3,7 @@ import * as React from 'react';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalVotes from './ProposalVotes';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import Loader from '../../Ui/Loader';
 import type {
   ProposalVotesByStepQueryResponse,
   ProposalVotesByStepQueryVariables,

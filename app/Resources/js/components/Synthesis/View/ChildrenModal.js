@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import ElementsList from './../List/ElementsList';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import Loader from '../../Ui/Loader';
 
 class ChildrenModal extends React.Component {
   static propTypes = {

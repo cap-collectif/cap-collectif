@@ -6,7 +6,7 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import type { ArgumentListProfile_argumentList } from './__generated__/ArgumentListProfile_argumentList.graphql';
 
 import ArgumentItem from './ArgumentItem';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import Loader from '../Ui/Loader';
 
 const ARGUMENTS_PAGINATION = 5;
 

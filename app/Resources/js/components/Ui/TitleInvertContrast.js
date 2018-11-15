@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import withColors from '../../Utils/withColors';
+import withColors from '../Utils/withColors';
 
 type Props = {
   children: any,

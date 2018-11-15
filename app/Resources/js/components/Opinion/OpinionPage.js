@@ -6,7 +6,7 @@ import { Alert, Glyphicon } from 'react-bootstrap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import OpinionBox from './OpinionBox';
 import OpinionTabs from './OpinionTabs';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import Loader from '../Ui/Loader';
 import type {
   OpinionPageQueryVariables,
   OpinionPageQueryResponse,

@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import OpinionVersionListView, { type VersionOrder } from './OpinionVersionListView';
 import OpinionVersionCreateButton from './OpinionVersionCreateButton';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import Loader from '../Ui/Loader';
 import OpinionVersion from './OpinionVersion';
 import OpinionVersionCreateModal from './OpinionVersionCreateModal';
 import type {

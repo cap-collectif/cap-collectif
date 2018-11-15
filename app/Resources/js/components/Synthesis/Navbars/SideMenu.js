@@ -9,7 +9,7 @@ import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 
 import CreateModal from './../Create/CreateModal';
 import ElementsFinder from './../ElementsFinder';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import Loader from '../../Ui/Loader';
 
 class SideMenu extends React.Component {
   static propTypes = {

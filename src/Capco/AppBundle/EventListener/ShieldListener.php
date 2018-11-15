@@ -27,15 +27,18 @@ class ShieldListener
         'api_login_check',
         'hwi_oauth_service_redirect',
 
-        // API documentation
+        // Public API
+        'graphql_endpoint',
         'graphiql_endpoint',
         'nelmio_api_doc_index',
+        // Internal API
+        'graphql_multiple_endpoint',
 
         // Account confirmation
         'account_confirm_email',
         'account_confirm_new_email',
 
-        // Registration
+        // API Registration
         'capco_app_api_users_postuser',
 
         // Password reset

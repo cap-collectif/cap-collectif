@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { NAV_DEPTH } from '../../../constants/SynthesisElementConstants';
 
 import ViewElement from './ViewElement';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import Loader from '../../Ui/Loader';
 
 import SynthesisStore from '../../../stores/SynthesisStore';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';

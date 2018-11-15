@@ -5,10 +5,10 @@ import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
 import { MultipleChoiceRadio } from '../components/Form/MultipleChoiceRadio';
-import TitleInvertContrast from '../components/Ui/Typography/TitleInvertContrast';
+import TitleInvertContrast from '../components/Ui/TitleInvertContrast';
 import { checkOnlyNumbers } from '../services/Validator';
 import component from '../components/Form/Field';
-import PrivateBox from '../components/Ui/Boxes/PrivateBox';
+import PrivateBox from '../components/Ui/PrivateBox';
 import ConditionalJumps from './ConditionalJumps';
 import WYSIWYGRender from '../components/Form/WYSIWYGRender';
 
@@ -234,8 +234,10 @@ const getAvailableQuestionsIdsAfter = (afterQuestion, questions, responses) => {
       .map(question => question.id);
   }
 
-  let questionsWithJumpsIds = populateQuestionsJump(responses, questions, questionWithJump =>
-    questionWithJump ? [questionWithJump.id] : [],
+  let questionsWithJumpsIds = populateQuestionsJump(
+    responses,
+    questions,
+    questionWithJump => (questionWithJump ? [questionWithJump.id] : []),
   );
 
   [questionsWithJumpsIds, firstQuestionsIds] = filterQuestions(
@@ -562,10 +564,10 @@ export const renderResponses = ({
               })}</span>`
             : ''
           : strategy === 'majority_required' || strategy === 'half_required'
-          ? ` <span class="excerpt small"> ${intl.formatMessage({
-              id: 'global.optional',
-            })}</span>`
-          : '';
+            ? ` <span class="excerpt small"> ${intl.formatMessage({
+                id: 'global.optional',
+              })}</span>`
+            : '';
 
         const labelMessage = field.title + labelAppend;
 

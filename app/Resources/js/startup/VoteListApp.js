@@ -7,7 +7,7 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import type { VoteListAppQueryResponse } from './__generated__/VoteListAppQuery.graphql';
 import VoteListProfile from '../components/Vote/VoteListProfile';
-import Loader from '../components/Ui/FeedbacksIndicators/Loader';
+import Loader from '../components/Ui/Loader';
 
 export default ({ userId }: { userId: string }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>

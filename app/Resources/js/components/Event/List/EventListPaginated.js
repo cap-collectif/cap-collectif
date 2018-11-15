@@ -6,7 +6,7 @@ import { graphql, createPaginationContainer, type RelayPaginationProp } from 're
 import classNames from 'classnames';
 import { connect, type MapStateToProps } from 'react-redux';
 import EventPreview from '../EventPreview';
-import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import Loader from '../../Ui/Loader';
 import EventMap from '../Map/EventMap';
 import EventListPaginated_query from './__generated__/EventListPaginatedQuery.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';

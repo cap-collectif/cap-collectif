@@ -6,7 +6,7 @@ import { ListGroup, Panel } from 'react-bootstrap';
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import Loader from '../Ui/Loader';
 import type { OpinionList_section } from './__generated__/OpinionList_section.graphql';
 import type { OpinionList_consultation } from './__generated__/OpinionList_consultation.graphql';
 

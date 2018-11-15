@@ -1,6 +1,6 @@
 import React from 'react';
 import { Treebeard, decorators, theme } from 'react-treebeard';
-import Loader from '../Ui/FeedbacksIndicators/Loader';
+import Loader from '../Ui/Loader';
 import SynthesisStore from '../../stores/SynthesisStore';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../actions/SynthesisElementActions';
