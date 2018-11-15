@@ -48,6 +48,7 @@ javascript:
         default:
           selenium2:
             capabilities:
+              args: [start-maximized]
               version: ''
               acceptSslCerts: true
             wd_host: http://selenium:4444/wd/hub

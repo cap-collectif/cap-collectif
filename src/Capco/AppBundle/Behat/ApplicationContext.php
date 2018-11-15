@@ -5,8 +5,10 @@ namespace Capco\AppBundle\Behat;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
@@ -189,9 +191,15 @@ class ApplicationContext extends UserContext
      */
     public function maximizeWindow()
     {
-        $this->getSession()
-            ->getDriver()
-            ->maximizeWindow();
+        try {
+            $this->getSession()
+                ->getDriver()
+                ->maximizeWindow();
+        } catch (\Exception $e) {
+            $this->getSession()
+                ->getDriver()
+                ->resizeWindow(1920, 1080);
+        }
     }
 
     /**
