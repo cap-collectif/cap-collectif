@@ -31,18 +31,18 @@ class OpinionType
         'opinion_type.colors.bluedark' => 'bluedark',
         'opinion_type.colors.white' => 'white',
         'opinion_type.colors.default' => 'default',
-   ];
+    ];
 
     public static $voteWidgetLabels = [
-         'opinion_type.widget_type.disabled' => self::VOTE_WIDGET_DISABLED,
-         'opinion_type.widget_type.ok' => self::VOTE_WIDGET_OK,
-         'opinion_type.widget_type.both' => self::VOTE_WIDGET_BOTH,
+        'opinion_type.widget_type.disabled' => self::VOTE_WIDGET_DISABLED,
+        'opinion_type.widget_type.ok' => self::VOTE_WIDGET_OK,
+        'opinion_type.widget_type.both' => self::VOTE_WIDGET_BOTH,
     ];
 
     public static $commentSystemLabels = [
-         'opinion_type.comment_system.disabled' => self::COMMENT_SYSTEM_DISABLED,
-         'opinion_type.comment_system.ok' => self::COMMENT_SYSTEM_OK,
-         'opinion_type.comment_system.both' => self::COMMENT_SYSTEM_BOTH,
+        'opinion_type.comment_system.disabled' => self::COMMENT_SYSTEM_DISABLED,
+        'opinion_type.comment_system.ok' => self::COMMENT_SYSTEM_OK,
+        'opinion_type.comment_system.both' => self::COMMENT_SYSTEM_BOTH,
     ];
 
     /**
@@ -77,6 +77,11 @@ class OpinionType
      * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
      */
     private $subtitle;
+
+    /**
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
 
     /**
      * @Gedmo\Slug(handlers={
@@ -200,7 +205,9 @@ class OpinionType
 
     public function getStep()
     {
-        return $this->getConsultationStepType() ? $this->getConsultationStepType()->getStep() : null;
+        return $this->getConsultationStepType()
+            ? $this->getConsultationStepType()->getStep()
+            : null;
     }
 
     /**
@@ -621,5 +628,17 @@ class OpinionType
         }
 
         return $types;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 }

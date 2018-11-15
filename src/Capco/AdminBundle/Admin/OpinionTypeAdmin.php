@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -100,6 +101,11 @@ class OpinionTypeAdmin extends AbstractAdmin
             ])
             ->add('subtitle', null, [
                 'label' => 'admin.fields.opinion_type.subtitle',
+            ])
+            ->add('description', CKEditorType::class, [
+                'config_name' => 'admin_editor',
+                'label' => 'proposal.description',
+                'required' => false,
             ])
             ->add('parent', 'sonata_type_model', [
                 'label' => 'admin.fields.opinion_type.parent',

@@ -14,6 +14,7 @@ describe('<Section />', () => {
       contributionsCount: 0,
       slug: 'slug',
       subtitle: 'subtitle',
+      description: 'description',
       title: 'title',
     },
     consultation: {

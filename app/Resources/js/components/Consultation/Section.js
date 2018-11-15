@@ -4,6 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionList from './OpinionList';
 import type { Section_section } from './__generated__/Section_section.graphql';
 import type { Section_consultation } from './__generated__/Section_consultation.graphql';
+import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {
   section: Section_section,
@@ -21,6 +22,9 @@ export class Section extends React.Component<Props> {
         {section.title}
         <br />
         {section.subtitle && <span className="small excerpt">{section.subtitle}</span>}
+        {section.description && (
+          <WYSIWYGRender className="opinion-type__description" value={section.description} />
+        )}
         {(section.contributionsCount > 0 || section.contribuable) && (
           <div style={{ marginTop: 15 }}>
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
@@ -38,6 +42,7 @@ export default createFragmentContainer(Section, {
       title
       slug
       subtitle
+      description
       contribuable
       contributionsCount
       ...OpinionList_section

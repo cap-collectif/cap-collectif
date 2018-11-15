@@ -19,6 +19,9 @@ Section:
             subtitle:
                 type: "String"
                 description: "The subtitle of the section."
+            description:
+              type: "String"
+              description: "The description of the section."
             contributionsCount:
                 type: "Int!"
                 resolve: "@=resolver('section_contributionsCount', [value])"

@@ -49,18 +49,22 @@ class OpinionInfos extends React.Component<Props> {
       return null;
     }
 
+    const sameYear =
+      !moment(opinion.updatedAt).isBefore(Date.now(), 'year') &&
+      !moment(opinion.updatedAt).isAfter(Date.now(), 'year');
+
     return (
       <span className="excerpt">
         {' - '}
         {<FormattedMessage id="global.edited" />}{' '}
-        <FormattedDate
-          value={moment(opinion.updatedAt).toDate()}
-          day="numeric"
-          month="long"
-          year="numeric"
-          hour="numeric"
-          minute="numeric"
-        />
+        <span title={moment(opinion.updatedAt).format('LLL')}>
+          <FormattedDate
+            value={moment(opinion.updatedAt).toDate()}
+            day="numeric"
+            month="short"
+            {...(sameYear ? {} : { year: 'numeric' })}
+          />
+        </span>
       </span>
     );
   };

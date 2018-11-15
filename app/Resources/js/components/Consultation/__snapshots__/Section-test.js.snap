@@ -12,6 +12,10 @@ exports[`<Section /> renders correcty 1`] = `
   >
     subtitle
   </span>
+  <WYSIWYGRender
+    className="opinion-type__description"
+    value="description"
+  />
   <div
     style={
       Object {
@@ -32,6 +36,7 @@ exports[`<Section /> renders correcty 1`] = `
           "$refType": null,
           "contribuable": true,
           "contributionsCount": 0,
+          "description": "description",
           "slug": "slug",
           "subtitle": "subtitle",
           "title": "title",
