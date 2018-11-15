@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { boolean, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import PrivateBox from '../components/Ui/PrivateBox';
+import PrivateBox from '../components/Ui/Boxes/PrivateBox';
 
 storiesOf('Boxes', module).add(
   'Private box',

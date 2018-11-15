@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { DatesInterval } from '../Utils/DatesInterval';
-import DarkenGradientMedia from '../Ui/DarkenGradientMedia';
-import SixteenNineMedia from '../Ui/SixteenNineMedia';
+import DarkenGradientMedia from '../Ui/Medias/DarkenGradientMedia';
+import SixteenNineMedia from '../Ui/Medias/SixteenNineMedia';
 
 type Props = {
   highlighteds: Array<Object>,
@@ -180,36 +180,33 @@ export class CarouselMobile extends PureComponent<Props, State> {
                     </a>
                     <br />
                     <span className="carousel__date">
-                      {type === 'event' &&
-                        item.startAt &&
-                        item.endAt && <DatesInterval startAt={item.startAt} endAt={item.endAt} />}
-                      {type === 'project' &&
-                        item.startAt && (
-                          <FormattedDate
-                            value={moment(item.startAt).toDate()}
-                            day="numeric"
-                            month="long"
-                            year="numeric"
-                          />
-                        )}
-                      {type === 'idea' &&
-                        item.createdAt && (
-                          <FormattedDate
-                            value={moment(item.createdAt).toDate()}
-                            day="numeric"
-                            month="long"
-                            year="numeric"
-                          />
-                        )}
-                      {type === 'post' &&
-                        item.publishedAt && (
-                          <FormattedDate
-                            value={moment(item.publishedAt).toDate()}
-                            day="numeric"
-                            month="long"
-                            year="numeric"
-                          />
-                        )}
+                      {type === 'event' && item.startAt && item.endAt && (
+                        <DatesInterval startAt={item.startAt} endAt={item.endAt} />
+                      )}
+                      {type === 'project' && item.startAt && (
+                        <FormattedDate
+                          value={moment(item.startAt).toDate()}
+                          day="numeric"
+                          month="long"
+                          year="numeric"
+                        />
+                      )}
+                      {type === 'idea' && item.createdAt && (
+                        <FormattedDate
+                          value={moment(item.createdAt).toDate()}
+                          day="numeric"
+                          month="long"
+                          year="numeric"
+                        />
+                      )}
+                      {type === 'post' && item.publishedAt && (
+                        <FormattedDate
+                          value={moment(item.publishedAt).toDate()}
+                          day="numeric"
+                          month="long"
+                          year="numeric"
+                        />
+                      )}
                     </span>
                   </p>
                 </div>

@@ -8,7 +8,7 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 import CommentListView, { type CommentOrderBy } from './CommentListView';
 import CommentForm from './CommentForm';
 import type { CommentSectionQueryResponse } from './__generated__/CommentSectionQuery.graphql';
-import Loader from '../Ui/Loader';
+import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { GlobalState } from '../../types';
 
 type Props = {

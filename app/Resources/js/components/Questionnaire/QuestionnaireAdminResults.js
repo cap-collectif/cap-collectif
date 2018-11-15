@@ -7,7 +7,7 @@ import QuestionnaireAdminResultsRanking from './QuestionnaireAdminResultsRanking
 import QuestionnaireAdminResultsPieChart from './QuestionnaireAdminResultsPieChart';
 import type { QuestionnaireAdminResults_questionnaire } from './__generated__/QuestionnaireAdminResults_questionnaire.graphql';
 import withColors from '../Utils/withColors';
-import PrivateBox from '../Ui/PrivateBox';
+import PrivateBox from '../Ui/Boxes/PrivateBox';
 
 type Props = {
   questionnaire: QuestionnaireAdminResults_questionnaire,

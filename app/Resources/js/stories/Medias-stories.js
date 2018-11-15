@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, withKnobs, number, text } from '@storybook/addon-knobs';
-import DarkenGradientMedia from '../components/Ui/DarkenGradientMedia';
-import SixteenNineMedia from '../components/Ui/SixteenNineMedia';
+import DarkenGradientMedia from '../components/Ui/Medias/DarkenGradientMedia';
+import SixteenNineMedia from '../components/Ui/Medias/SixteenNineMedia';
 import { UserAvatar } from '../components/User/UserAvatar';
 
 storiesOf('Medias', module)

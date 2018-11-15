@@ -4,8 +4,8 @@ import { boolean, select, text, number } from '@storybook/addon-knobs';
 import { Alert, ProgressBar } from 'react-bootstrap';
 import { storiesOf } from '@storybook/react';
 import { AlertForm } from '../components/Alert/AlertForm';
-import { Loader } from '../components/Ui/Loader';
-import { Progress } from '../components/Ui/Progress';
+import { Loader } from '../components/Ui/FeedbacksIndicators/Loader';
+import { Progress } from '../components/Ui/FeedbacksIndicators/Progress';
 
 const bsStyleOptions = {
   Warning: 'warning',

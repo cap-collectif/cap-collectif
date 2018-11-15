@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import QuestionnaireAdminPageTabs from './QuestionnaireAdminPageTabs';
-import Loader from '../Ui/Loader';
+import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { QuestionnaireAdminPageQueryResponse } from './__generated__/QuestionnaireAdminPageQuery.graphql';
 import type { Uuid } from '../../types';
 

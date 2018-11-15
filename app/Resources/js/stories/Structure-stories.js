@@ -1,4 +1,4 @@
 // @flow
 import { storiesOf } from '@storybook/react';
 
-storiesOf('Form', module);
+storiesOf('Structure', module);

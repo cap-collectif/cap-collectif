@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { ProgressBar } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { Progress } from '../../Ui/Progress';
+import { Progress } from '../../Ui/FeedbacksIndicators/Progress';
 
 type Props = {
   project: Object,

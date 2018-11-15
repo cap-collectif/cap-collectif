@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
 import ProgressList from '../../Ui/List/ProgressList';
-import CroppedLabel from '../../Ui/CroppedLabel';
+import CroppedLabel from '../../Ui/Labels/CroppedLabel';
 import ImplementationStepTitle from '../ImplementationStepTitle';
 import ProgressListItem from '../../Ui/List/ProgressListItem';
 import type { ImplementationStepTitle_progressSteps } from '../__generated__/ImplementationStepTitle_progressSteps.graphql';
@@ -71,19 +71,18 @@ export class ProposalListTableMobile extends React.Component<Props> {
                     </div>
                   )}
                 </div>
-                {item.implementationPhase.value &&
-                  item.implementationPhase.value.list.length > 0 && (
-                    <div className="m-auto">
-                      <div className="mb-5 mt-10">
-                        <span>{this.getPhaseTitle(item.implementationPhase.value.list)}</span>
-                      </div>
-                      <ProgressList>
-                        {list.map((element, liKey) => (
-                          <ProgressListItem key={liKey} item={element} />
-                        ))}
-                      </ProgressList>
+                {item.implementationPhase.value && item.implementationPhase.value.list.length > 0 && (
+                  <div className="m-auto">
+                    <div className="mb-5 mt-10">
+                      <span>{this.getPhaseTitle(item.implementationPhase.value.list)}</span>
                     </div>
-                  )}
+                    <ProgressList>
+                      {list.map((element, liKey) => (
+                        <ProgressListItem key={liKey} item={element} />
+                      ))}
+                    </ProgressList>
+                  </div>
+                )}
               </div>
             </ListGroupItem>
           );
