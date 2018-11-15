@@ -71,7 +71,7 @@ while ! curl -sSf http://127.0.0.1:15672 > /dev/null;
 done
 
 echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
-while ! rabbitmqctl ping | grep 'Ping succeed' > /dev/null;
+while ! rabbitmqctl status > /dev/null;
   do sleep 0.1
 done
 
