@@ -8,12 +8,16 @@ import OpinionPreviewCounters from './OpinionPreviewCounters';
 import type { OpinionPreview_opinion } from './__generated__/OpinionPreview_opinion.graphql';
 
 type Props = {
-  showUpdatedDate?: boolean,
+  showUpdatedDate: boolean,
   opinion: OpinionPreview_opinion,
   rankingThreshold?: ?number,
 };
 
 class OpinionPreview extends React.Component<Props> {
+  defaultProps = {
+    showUpdatedDate: false,
+  };
+
   render() {
     const { opinion, rankingThreshold, showUpdatedDate } = this.props;
 

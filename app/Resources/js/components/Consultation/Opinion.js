@@ -8,10 +8,14 @@ import type { Opinion_opinion } from './__generated__/Opinion_opinion.graphql';
 
 type Props = {
   opinion: Opinion_opinion,
-  showUpdatedDate?: boolean,
+  showUpdatedDate: boolean,
 };
 
 export class Opinion extends React.Component<Props> {
+  defaultProps = {
+    showUpdatedDate: false,
+  };
+
   render() {
     const { opinion, showUpdatedDate } = this.props;
     const author = opinion.author;

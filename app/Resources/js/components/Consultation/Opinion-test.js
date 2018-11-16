@@ -7,6 +7,7 @@ import { $refType, $fragmentRefs } from '../../mocks';
 
 describe('<Opinion />', () => {
   const props = {
+    showUpdatedDate: false,
     opinion: {
       $refType,
       $fragmentRefs,

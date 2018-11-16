@@ -20,7 +20,7 @@ Section:
                 type: "String"
                 description: "The subtitle of the section."
             description:
-              type: "String"
+              type: "HTML"
               description: "The description of the section."
             contributionsCount:
                 type: "Int!"

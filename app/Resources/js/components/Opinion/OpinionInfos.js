@@ -11,12 +11,16 @@ import type { OpinionInfos_opinion } from './__generated__/OpinionInfos_opinion.
 
 type Props = {
   opinion: OpinionInfos_opinion,
-  showUpdatedDate?: boolean,
+  showUpdatedDate: boolean,
   rankingThreshold?: ?number,
   opinionTerm?: number,
 };
 
 class OpinionInfos extends React.Component<Props> {
+  defaultProps = {
+    showUpdatedDate: false,
+  };
+
   renderDate = () => {
     const { opinion } = this.props;
     if (!Modernizr.intl || !opinion.createdAt) {
@@ -27,9 +31,7 @@ class OpinionInfos extends React.Component<Props> {
       return null;
     }
 
-    const sameYear =
-      !moment(opinion.publishedAt).isBefore(Date.now(), 'year') &&
-      !moment(opinion.publishedAt).isAfter(Date.now(), 'year');
+    const sameYear = moment(opinion.publishedAt).isSame(Date.now(), 'year');
 
     return (
       <span className="excerpt" title={moment(opinion.publishedAt).format('LLL')}>
