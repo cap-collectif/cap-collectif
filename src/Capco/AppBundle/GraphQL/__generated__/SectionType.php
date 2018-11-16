@@ -85,7 +85,7 @@ final class SectionType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'description' => [
-                    'type' => Type::string(),
+                    'type' => $globalVariable->get('typeResolver')->resolve('HTML'),
                     'args' => [
                     ],
                     'resolve' => null,

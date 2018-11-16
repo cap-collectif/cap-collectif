@@ -26,7 +26,6 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                 return [
                 'events' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalEventConnection')),
-<<<<<<< master
                     'args' => [
                         [
                             'name' => 'after',
@@ -141,68 +140,12 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                 ],
                 'registrationForm' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('InternalRegistrationForm'),
-=======
->>>>>>> - Added description to OpinionType entity - Added description in section
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver", []]);
                     },
                     'description' => 'Get the current registration form',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'viewer' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable);
-                    },
-                    'description' => 'The currently authenticated user.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
-                ],
-                'node' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Node'),
-                    'args' => [
-                        [
-                            'name' => 'id',
-                            'type' => Type::nonNull(Type::id()),
-                            'description' => 'The ID of an object',
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["relay_node_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('resolverResolver')->resolve(["query_node", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
-                    },
-                    'description' => 'The ID of an object.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'nodes' => [
-                    'type' => Type::nonNull(Type::listOf($globalVariable->get('typeResolver')->resolve('Node'))),
-                    'args' => [
-                        [
-                            'name' => 'ids',
-                            'type' => Type::nonNull(Type::listOf(Type::nonNull(Type::id()))),
-                            'description' => 'The list of node IDs.',
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["query_nodes", array(0 => $args["ids"], 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
-                    },
-                    'description' => 'Lookup nodes by a list of IDs.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

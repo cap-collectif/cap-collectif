@@ -1257,7 +1257,7 @@ final class InternalUserType extends ObjectType implements GeneratedTypeInterfac
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserResponsesResolver", array(0 => $value)]);
                     },
-                    'description' => 'The arguments created by user.',
+                    'description' => 'The responses answered by user.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

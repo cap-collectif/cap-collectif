@@ -2236,11 +2236,6 @@ type NotificationsConfiguration {
 # A contribution
 type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & Trashable & ContributionWithAuthor & EditableContribution {
   contribuable: Boolean!
-<<<<<<< master
-
-  # The arguments related to the argumentable.
-  arguments(
-=======
 
   # The arguments related to the argumentable.
   arguments(
@@ -2325,113 +2320,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # The author of the contribution.
   author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The sources related to the sourceable.
-  sources(
->>>>>>> - Added description to OpinionType entity - Added description in section
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}
-  ): SourceConnection!
-
-  # The viewer unpublished sources related to the sourceable (only visible by viewer).
-  viewerSourcesUnpublished(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): SourceConnection!
-
-<<<<<<< master
-    # If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): ArgumentConnection
-
-  # The ID of an object
-  id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
-
-  # Url of the contribution
-  url: URI!
-
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-=======
-  # The available sources categories of to the sourceable.
-  availableSourceCategories: [SourceCategory]
->>>>>>> - Added description to OpinionType entity - Added description in section
-
-  # Followers connection
-  followers(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-<<<<<<< master
-    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
-  ): ReportingConnection!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
-  # The author of the contribution.
-  author: User!
-=======
-    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
-  ): FollowerConnection
-
-  # Identifies the viewer following configuration on the entity.
-  viewerFollowingConfiguration: SubscriptionTypeValue
-
-  # Identifies if the viewer is following the entity.
-  viewerIsFollowing: Boolean!
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
->>>>>>> - Added description to OpinionType entity - Added description in section
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
@@ -3600,12 +3488,9 @@ type Query {
     # The list of node IDs.
     ids: [ID!]!
   ): [Node]!
-<<<<<<< master
 
   # Get the current registration form
   registrationForm: RegistrationForm
-=======
->>>>>>> - Added description to OpinionType entity - Added description in section
   users(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4277,7 +4162,7 @@ type Section implements Node {
   subtitle: String
 
   # The description of the section.
-  description: String
+  description: HTML
   contributionsCount: Int!
   contributionConnection(
     # Ordering options for contributions returned from the connection.
@@ -5533,7 +5418,7 @@ type User implements Node {
     last: Int
   ): ArgumentConnection!
 
-  # The arguments created by user.
+  # The responses answered by user.
   responses(
     # Returns the elements in the list that come after the specified cursor.
     after: String
