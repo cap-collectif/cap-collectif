@@ -12,7 +12,7 @@ trait NullableTextableTrait
      */
     private $body;
 
-    public function getBody()
+    public function getBody(): ?string
     {
         return $this->body;
     }

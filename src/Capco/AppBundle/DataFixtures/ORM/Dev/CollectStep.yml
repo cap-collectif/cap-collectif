@@ -87,8 +87,7 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     voteType: 1
     votesLimit: 3
     votesRanking: true
-    requirementsReason:
-      Vous devez habiter sur l'une des 49 communes de la Métropole grenobloise et avoir au minimum 16 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.
+    requirementsReason: Vous devez habiter sur l'une des 49 communes de la Métropole grenobloise et avoir au minimum 16 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.
   collectstep9:
     id: collectstep9
     title: Collecte des propositions pour La Force
@@ -116,6 +115,14 @@ Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep12:
     id: collectstep12
     title: Collecte des propositions libérer les nains de jardin
+    label: Dépôt
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
+    voteType: 0
+  collectQuestionVoteAvecClassement:
+    id: collectQuestionVoteAvecClassement
+    title: Collecte des questions chez youpie
     label: Dépôt
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>

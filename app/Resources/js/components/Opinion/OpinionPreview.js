@@ -14,7 +14,7 @@ type Props = {
 };
 
 class OpinionPreview extends React.Component<Props> {
-  static defaultProps = {
+  defaultProps = {
     showUpdatedDate: false,
   };
 

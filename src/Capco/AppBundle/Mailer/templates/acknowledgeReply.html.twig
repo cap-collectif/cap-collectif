@@ -16,7 +16,7 @@
     {% for response in reply.responses %}
         <p>
             <strong>{{ response.question.title }}</strong><br>
-            {% if response.type == 'value' and (response.value is null or (response.value is iterable and response.value | length == 0)) %}
+            {% if response.value is null or (response.value is iterable and response.value | length == 0) %}
                 <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
             {% elseif response.question.type == 'editor' %}
                 <span>{{ response.value | raw }}</span>
@@ -30,7 +30,7 @@
                 {% else %}
                     <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
                 {% endif %}
-            {% elseif response.type == 'value' and response.value is iterable %}
+            {% elseif response.value is iterable %}
                 {% set labels = response.value.labels %}
                 {% if response.value.other is defined and response.value.other is not null %}
                     {% set labels = labels | merge([response.value.other]) %}
@@ -40,7 +40,7 @@
                 {% else %}
                     <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
                 {% endif %}
-            {% elseif response.type == 'value' %}
+            {% else %}
                 <span>{{ response.value }}</span>
             {% endif %}
         </p>
