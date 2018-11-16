@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="registration_form")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\RegistrationFormRepository")
  */
-class RegistrationForm
+class RegistrationForm implements QuestionnableForm
 {
     use UuidTrait;
 

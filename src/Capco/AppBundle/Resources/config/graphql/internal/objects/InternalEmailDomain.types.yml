@@ -1,0 +1,14 @@
+InternalEmailDomain:
+  type: object
+  inherits:
+    - Node
+  config:
+    name: EmailDomain
+    interfaces: [Node]
+    fields:
+      value:
+        type: 'String!'
+        description: 'The email domain value'
+      registrationForm:
+        type: 'InternalRegistrationForm'
+        description: 'The associated registration form for this email domain'

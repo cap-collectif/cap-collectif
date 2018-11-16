@@ -190,6 +190,8 @@
 
     // Special cases : add an argument
     &.opinion--add-argument {
+        background-color: $page-bgc;
+
         .form-group {
             margin: 0;
         }
@@ -210,6 +212,7 @@
     // Special case : argument
     &.opinion--argument {
         position: relative;
+        //background-color: $page-bgc;
 
         .opinion__text {
             padding-top: 10px;

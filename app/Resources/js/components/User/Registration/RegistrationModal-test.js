@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationModal } from './RegistrationModal';
-import RegistrationForm from './RegistrationForm';
 
 describe('<RegistrationModal />', () => {
   const props = {
@@ -32,8 +31,6 @@ describe('<RegistrationModal />', () => {
 
   it('renders a form', () => {
     const wrapper = shallow(<RegistrationModal show features={{}} {...props} />);
-    const form = wrapper.find(RegistrationForm);
-    expect(form).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });
 

@@ -4,6 +4,7 @@ import Fetcher from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import type { Exact, Dispatch, Action } from '../../types';
+import { formatSubmitResponses } from '../../utils/responsesHelper';
 
 export type User = {
   +id: string,
@@ -23,7 +24,6 @@ export type User = {
 };
 
 type Props = {
-  dynamicFields: Object,
   shieldEnabled: boolean,
 };
 
@@ -39,7 +39,7 @@ export type State = {
     +topTextDisplayed: boolean,
     +bottomText: string,
     +topText: string,
-    +questions: Array<Object>,
+    +hasQuestions: boolean,
     +domains: Array<string>,
   },
   +user: ?{
@@ -84,10 +84,6 @@ export type SubmitConfirmPasswordAction = {
   password: string,
 };
 type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
-type DeleteRegistrationFieldSucceededAction = {
-  type: 'DELETE_REGISTRATION_FIELD_SUCCEEDED',
-  id: number,
-};
 type ReorderSucceededAction = { type: 'REORDER_REGISTRATION_QUESTIONS', questions: Array<Object> };
 type GroupAdminUsersUserDeletionSuccessfulAction = {
   type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL',
@@ -113,7 +109,6 @@ export type UserAction =
   | CancelEmailChangeSucceedAction
   | CloseConfirmPasswordModalAction
   | UserRequestEmailChangeAction
-  | DeleteRegistrationFieldSucceededAction
   | ReorderSucceededAction
   | AddRegistrationFieldAction
   | SubmitConfirmPasswordAction
@@ -130,6 +125,7 @@ const initialState: State = {
   showConfirmPasswordModal: false,
   user: null,
   registration_form: {
+    hasQuestions: false,
     bottomText: '',
     topText: '',
     bottomTextDisplayed: false,
@@ -149,9 +145,7 @@ export const updateRegistrationFieldSucceeded = (
   id: number,
   element: Object,
 ): UpdateRegistrationFieldAction => ({ type: 'UPDATE_REGISTRATION_FIELD_SUCCEEDED', element, id });
-export const deleteRegistrationFieldSucceeded = (
-  id: number,
-): DeleteRegistrationFieldSucceededAction => ({ type: 'DELETE_REGISTRATION_FIELD_SUCCEEDED', id });
+
 export const showRegistrationModal = (): ShowRegistrationModalAction => ({
   type: 'SHOW_REGISTRATION_MODAL',
 });
@@ -217,37 +211,12 @@ export const login = (
       }
     });
 
-export const register = (
-  values: Object,
-  dispatch: Dispatch,
-  { dynamicFields, shieldEnabled }: Props,
-) => {
-  const form = { ...values };
-  delete form.charte;
-  const responses = [];
-  const apiForm = {};
-  Object.keys(form).map(key => {
-    if (key.startsWith('dynamic-')) {
-      const question = key.split('-')[1];
-      if (typeof form[key] !== 'undefined' && form[key].length > 0) {
-        const field = dynamicFields.find(fi => String(fi.id) === question);
-        let value = form[key];
-        if (field.type === 'select') {
-          value = { labels: [form[key]], other: null };
-        }
-        responses.push({
-          question,
-          value,
-        });
-      }
-    } else {
-      apiForm[key] = form[key];
-    }
-  });
-  if (responses.length) {
-    apiForm.responses = responses;
+export const register = (values: Object, dispatch: Dispatch, { shieldEnabled }: Props) => {
+  const form = { ...values, questions: undefined, charte: undefined };
+  if (values.questions && values.questions.length > 0) {
+    form.responses = formatSubmitResponses(values.responses, values.questions);
   }
-  return Fetcher.post('/users', apiForm)
+  return Fetcher.post('/users', form)
     .then(() => {
       if (shieldEnabled) {
         FluxDispatcher.dispatch({
@@ -393,59 +362,14 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
   switch (action.type) {
     case '@@INIT':
       return { ...initialState, ...state };
-    case 'DELETE_REGISTRATION_FIELD_SUCCEEDED': {
-      const index = state.registration_form.questions.findIndex(el => el.id === action.id);
-      return {
-        ...state,
-        registration_form: {
-          ...state.registration_form,
-          questions: [
-            ...state.registration_form.questions.slice(0, index),
-            ...state.registration_form.questions.slice(index + 1),
-          ],
-        },
-      };
-    }
-    case 'UPDATE_REGISTRATION_FIELD_SUCCEEDED': {
-      const index = state.registration_form.questions.findIndex(el => el.id === action.id);
-      return {
-        ...state,
-        registration_form: {
-          ...state.registration_form,
-          questions: [
-            ...state.registration_form.questions.slice(0, index),
-            action.element,
-            ...state.registration_form.questions.slice(index + 1),
-          ],
-        },
-      };
-    }
-    case 'ADD_REGISTRATION_FIELD_SUCCEEDED': {
-      return {
-        ...state,
-        registration_form: {
-          ...state.registration_form,
-          questions: [...state.registration_form.questions, action.element],
-        },
-      };
-    }
-    case 'REORDER_REGISTRATION_QUESTIONS': {
-      return {
-        ...state,
-        registration_form: {
-          ...state.registration_form,
-          questions: action.questions,
-        },
-      };
-    }
-    case 'SHOW_REGISTRATION_MODAL':
-      return { ...state, showRegistrationModal: true };
-    case 'CLOSE_REGISTRATION_MODAL':
-      return { ...state, showRegistrationModal: false };
     case 'DISPLAY_CHART_MODAL':
       return { ...state, displayChartModal: true };
     case 'HIDE_CHART_MODAL':
       return { ...state, displayChartModal: false };
+    case 'SHOW_REGISTRATION_MODAL':
+      return { ...state, showRegistrationModal: true };
+    case 'CLOSE_REGISTRATION_MODAL':
+      return { ...state, showRegistrationModal: false };
     case 'SHOW_LOGIN_MODAL':
       return { ...state, showLoginModal: true };
     case 'CLOSE_LOGIN_MODAL':

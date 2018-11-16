@@ -96,10 +96,7 @@ class UpdateProposalFormMutation implements MutationInterface
         }
 
         if (isset($arguments['questions'])) {
-            $questionsOrderedByBase = $form
-                ->getData()
-                ->getRealQuestions()
-                ->toArray();
+            $questionsOrderedByBase = $form->getData()->getRealQuestions();
 
             $questionsOrderedByIdInDb = [];
             foreach ($questionsOrderedByBase as $question) {
@@ -182,7 +179,6 @@ class UpdateProposalFormMutation implements MutationInterface
                     array_splice($arguments['questions'], $position, 0, [$deletedQuestion]);
                 }
             }
-
             $form->submit($arguments, false);
             $qaq = $proposalForm->getQuestions();
 

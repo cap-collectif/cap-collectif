@@ -2,14 +2,14 @@
 namespace Capco\AppBundle\GraphQL\Traits;
 
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\PersistentCollection;
 
 trait QuestionPersisterTrait
 {
     public function persistQuestion(
         PersistentCollection $questionnaireAbstractQuestions,
-        EntityManager $em,
+        EntityManagerInterface $em,
         int $delta,
         ?array $questionsOrdered
     ): void {

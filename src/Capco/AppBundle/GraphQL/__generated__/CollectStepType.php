@@ -21,7 +21,7 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'CollectStep',
-            'description' => 'A step inside a project.',
+            'description' => 'A proposal step',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [
