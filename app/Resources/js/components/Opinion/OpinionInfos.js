@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import UserLink from '../User/UserLink';
@@ -10,6 +11,7 @@ import type { OpinionInfos_opinion } from './__generated__/OpinionInfos_opinion.
 
 type Props = {
   opinion: OpinionInfos_opinion,
+  showUpdatedDate?: boolean,
   rankingThreshold?: ?number,
   opinionTerm?: number,
 };
@@ -24,23 +26,31 @@ class OpinionInfos extends React.Component<Props> {
     if (!date) {
       return null;
     }
+
+    const sameYear =
+      !moment(opinion.publishedAt).isBefore(Date.now(), 'year') &&
+      !moment(opinion.publishedAt).isAfter(Date.now(), 'year');
+
     return (
-      <span className="excerpt">
+      <span className="excerpt" title={moment(opinion.publishedAt).format('LLL')}>
         {' • '}
         <FormattedDate
-          value={moment(date).toDate()}
+          value={moment(opinion.publishedAt).toDate()}
           day="numeric"
-          month="long"
-          year="numeric"
-          hour="numeric"
-          minute="numeric"
+          month="short"
+          {...(sameYear ? {} : { year: 'numeric' })}
         />
       </span>
     );
   };
 
   renderEditionDate = () => {
-    const { opinion } = this.props;
+    const { opinion, showUpdatedDate } = this.props;
+
+    if (!showUpdatedDate) {
+      return null;
+    }
+
     if (!Modernizr.intl || !opinion.updatedAt) {
       return null;
     }
@@ -49,22 +59,26 @@ class OpinionInfos extends React.Component<Props> {
       return null;
     }
 
-    const sameYear =
-      !moment(opinion.updatedAt).isBefore(Date.now(), 'year') &&
-      !moment(opinion.updatedAt).isAfter(Date.now(), 'year');
+    const OpinionUpdatedTooltip = (
+      <Tooltip placement="top" id="tooltip-top">
+        <FormattedMessage id="opinion-updated-at-the" />{' '}
+        <FormattedDate
+          value={moment(opinion.updatedAt).toDate()}
+          day="numeric"
+          hour="2-digit"
+          minute="2-digit"
+          month="long"
+          year="numeric"
+        />
+      </Tooltip>
+    );
 
     return (
       <span className="excerpt">
-        {' - '}
-        {<FormattedMessage id="global.edited" />}{' '}
-        <span title={moment(opinion.updatedAt).format('LLL')}>
-          <FormattedDate
-            value={moment(opinion.updatedAt).toDate()}
-            day="numeric"
-            month="short"
-            {...(sameYear ? {} : { year: 'numeric' })}
-          />
-        </span>
+        {' • '}
+        <OverlayTrigger placement="top" overlay={OpinionUpdatedTooltip}>
+          <FormattedMessage id="opinion-updated-at" />
+        </OverlayTrigger>
       </span>
     );
   };
@@ -114,7 +128,7 @@ class OpinionInfos extends React.Component<Props> {
   render() {
     const { opinion } = this.props;
     return (
-      <p className="opinion__user">
+      <div className="opinion__user">
         {opinion.author && <UserLink user={opinion.author} className="author-name" />}
         {this.renderDate()}
         {this.renderEditionDate()}
@@ -122,7 +136,7 @@ class OpinionInfos extends React.Component<Props> {
         {this.renderRankingLabel()}
         {/* $FlowFixMe */}
         <UnpublishedLabel publishable={opinion} />
-      </p>
+      </div>
     );
   }
 }

@@ -67,6 +67,7 @@ export class OpinionBox extends React.Component<Props> {
                   rankingThreshold={rankingThreshold}
                   opinionTerm={opinionTerm}
                   opinion={opinion}
+                  showUpdatedDate
                   link={false}
                 />
               </div>

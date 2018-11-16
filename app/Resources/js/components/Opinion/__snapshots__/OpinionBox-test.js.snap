@@ -83,6 +83,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
             }
             opinionTerm={0}
             rankingThreshold={0}
+            showUpdatedDate={true}
           />
         </div>
       </ListGroupItem>

@@ -8,20 +8,25 @@ import OpinionPreviewCounters from './OpinionPreviewCounters';
 import type { OpinionPreview_opinion } from './__generated__/OpinionPreview_opinion.graphql';
 
 type Props = {
+  showUpdatedDate?: boolean,
   opinion: OpinionPreview_opinion,
   rankingThreshold?: ?number,
 };
 
 class OpinionPreview extends React.Component<Props> {
   render() {
-    const { opinion, rankingThreshold } = this.props;
+    const { opinion, rankingThreshold, showUpdatedDate } = this.props;
 
     return (
       <React.Fragment>
         <UserAvatar user={opinion.author} />
         <div>
           {/* $FlowFixMe */}
-          <OpinionInfos rankingThreshold={rankingThreshold} opinion={opinion} />
+          <OpinionInfos
+            rankingThreshold={rankingThreshold}
+            opinion={opinion}
+            showUpdatedDate={showUpdatedDate}
+          />
           {/* $FlowFixMe */}
           <OpinionPreviewTitle opinion={opinion} showTypeLabel={false} />
           {/* $FlowFixMe */}

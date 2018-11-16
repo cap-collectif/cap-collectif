@@ -26,7 +26,7 @@ const renderOpinionList = ({
       <React.Fragment>
         {// eslint-disable-next-line react/prop-types
         props.contributionsBySection.map((opinion, index) => (
-          <Opinion key={index} opinion={opinion} />
+          <Opinion key={index} opinion={opinion} showUpdatedDate={false} />
         ))}
       </React.Fragment>
     );
