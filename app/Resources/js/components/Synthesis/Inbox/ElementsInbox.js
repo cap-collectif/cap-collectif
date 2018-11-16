@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ElementsList from './../List/ElementsList';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 

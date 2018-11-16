@@ -2,9 +2,9 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalMediaResponse from './ProposalMediaResponse';
-import TitleInvertContrast from '../../Ui/TitleInvertContrast';
+import TitleInvertContrast from '../../Ui/Typography/TitleInvertContrast';
 import type { ProposalResponse_response } from './__generated__/ProposalResponse_response.graphql';
-import PrivateBox from '../../Ui/PrivateBox';
+import PrivateBox from '../../Ui/Boxes/PrivateBox';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
 type Props = {

@@ -4,7 +4,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import type { ProposalListView_step } from './__generated__/ProposalListView_step.graphql';
 import type { ProposalListView_viewer } from './__generated__/ProposalListView_viewer.graphql';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { GlobalState } from '../../../types';
 import ProposalListViewPaginated from './ProposalListViewPaginated';
 
@@ -65,8 +65,8 @@ export const queryVariables = (filters: Filters, order: ?string) => {
       filters.districts && filters.districts !== '0'
         ? filters.districts
         : isMontreuil
-          ? defaultDistrictId
-          : null,
+        ? defaultDistrictId
+        : null,
     theme: filters.themes && filters.themes !== '0' ? filters.themes : null,
     category: filters.categories && filters.categories !== '0' ? filters.categories : null,
     userType: filters.types && filters.types !== '0' ? filters.types : null,
