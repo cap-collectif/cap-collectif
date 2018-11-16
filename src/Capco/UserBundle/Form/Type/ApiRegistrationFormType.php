@@ -1,11 +1,13 @@
 <?php
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Form\MediaResponseType;
 use Capco\AppBundle\Form\ValueResponseType;
 use Capco\AppBundle\Toggle\Manager;
+use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,12 +43,13 @@ class ApiRegistrationFormType extends AbstractType
 
         $builder
             ->add('consentExternalCommunication', CheckboxType::class, ['required' => false])
-            ->add('responses', CollectionType::class, [
+            ->add('responses', PolyCollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => false,
                 'by_reference' => false,
-                'entry_type' => ValueResponseType::class,
-                'required' => false,
+                // Suppression d'index_property lors de l'inscription car il posait problème, pourquoi ? Seul le mystère nous le dira
+                'types' => [ValueResponseType::class, MediaResponseType::class],
+                'type_name' => AbstractResponse::TYPE_FIELD_NAME,
             ]);
     }
 

@@ -19,9 +19,6 @@ describe('<ProposalPageHeader />', () => {
     publicationStatus: 'PUBLISHED',
     show_url: 'true',
     project: { opinionCanBeFollowed: true },
-    form: {
-      isProposalForm: true,
-    },
   };
 
   const proposalWithoutTheme = {
@@ -37,9 +34,6 @@ describe('<ProposalPageHeader />', () => {
     publicationStatus: 'PUBLISHED',
     show_url: 'true',
     project: { opinionCanBeFollowed: true },
-    form: {
-      isProposalForm: false,
-    },
   };
 
   const props = {
@@ -47,14 +41,14 @@ describe('<ProposalPageHeader />', () => {
     referer: 'http://capco.test',
   };
 
-  it('should render a proposal header as ProposalFrom', () => {
+  it('should render a proposal header', () => {
     const wrapper = shallow(
       <ProposalPageHeader step={null} proposal={proposal} viewer={null} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should not render theme if proposal has none and form type is question', () => {
+  it('should not render theme if proposal has none', () => {
     const wrapper = shallow(
       <ProposalPageHeader proposal={proposalWithoutTheme} step={null} viewer={null} {...props} />,
     );

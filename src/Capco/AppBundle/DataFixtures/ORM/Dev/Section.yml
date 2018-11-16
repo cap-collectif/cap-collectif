@@ -117,13 +117,3 @@ Capco\AppBundle\Entity\Section:
     enabled: true
     associatedFeatures: []
     step: '@collectstep1'
-  SectionQuestion:
-    type: proposals
-    title: Mise en avant d'une étape de collecte de questions
-    position: 11
-    teaser: null
-    body: null
-    nbObjects: 8
-    enabled: true
-    associatedFeatures: []
-    step: '@collectQuestionVoteAvecClassement'

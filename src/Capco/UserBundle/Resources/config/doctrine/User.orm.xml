@@ -105,8 +105,11 @@
         <one-to-many field="arguments" target-entity="Capco\AppBundle\Entity\Argument" mapped-by="Author" />
         <one-to-many field="sources" target-entity="Capco\AppBundle\Entity\Source" mapped-by="author" />
         <one-to-many field="votes" target-entity="Capco\AppBundle\Entity\AbstractVote" mapped-by="user" />
-        <one-to-many field="responses" target-entity="Capco\AppBundle\Entity\Responses\AbstractResponse" mapped-by="user">
-          <cascade><cascade-persist /></cascade>
+        <one-to-many field="responses" target-entity="Capco\AppBundle\Entity\Responses\AbstractResponse" mapped-by="user" orphan-removal="true">
+          <cascade>
+              <cascade-persist/>
+              <cascade-remove/>
+          </cascade>
         </one-to-many>
 
         <field name="postCommentsCount" column="post_comments_count" type="integer" nullable="false" />

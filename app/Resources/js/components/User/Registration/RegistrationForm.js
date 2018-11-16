@@ -3,7 +3,7 @@ import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import { Field, reduxForm, type FormProps } from 'redux-form';
+import { Field, reduxForm, type FormProps, formValueSelector } from 'redux-form';
 import { isEmail } from '../../../services/Validator';
 import type { Dispatch, State } from '../../../types';
 import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
@@ -307,6 +307,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
   shieldEnabled: state.default.features.shield_mode,
+  responses: formValueSelector(form)(state, 'responses'),
   initialValues: {
     responses: [],
   },

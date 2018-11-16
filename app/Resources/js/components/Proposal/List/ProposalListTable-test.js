@@ -11,10 +11,6 @@ describe('<ProposalListTable />', () => {
       usingThemes: true,
       usingDistrict: true,
       usingCategories: true,
-      usingDescription: true,
-      usingSummary: true,
-      isProposalForm: true,
-      descriptionMandatory: true,
     },
     $refType,
   };
@@ -24,10 +20,6 @@ describe('<ProposalListTable />', () => {
       usingThemes: false,
       usingDistrict: false,
       usingCategories: false,
-      usingDescription: false,
-      usingSummary: false,
-      isProposalForm: false,
-      descriptionMandatory: false,
     },
     $refType,
   };
@@ -84,7 +76,7 @@ describe('<ProposalListTable />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders mobile version with formatted data & hidden values && proposalForm as question', () => {
+  it('renders mobile version with formatted data & hidden values', () => {
     const wrapper = shallow(<ProposalListTable step={stepFalseValues} proposals={proposals} />);
     wrapper.setState({ windowWidth: 400 });
     expect(wrapper).toMatchSnapshot();

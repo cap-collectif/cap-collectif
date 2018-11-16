@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalListTable /> renders mobile version with formatted data & hidden values && proposalForm as question 1`] = `
+exports[`<ProposalListTable /> renders mobile version with formatted data & hidden values 1`] = `
 <ProposalListTableMobile
   data={
     Array [
@@ -68,7 +68,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
           "value": "Justice",
         },
         "title": Object {
-          "text": "question-title",
+          "text": "admin.fields.selection.proposal",
           "value": Object {
             "displayTitle": "Installation de bancs",
             "url": null,
@@ -143,7 +143,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
           "value": "Justice",
         },
         "title": Object {
-          "text": "question-title",
+          "text": "admin.fields.selection.proposal",
           "value": Object {
             "displayTitle": "Proposition plus votable",
             "url": null,

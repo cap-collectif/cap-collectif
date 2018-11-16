@@ -111,7 +111,7 @@ type Props = FormProps &
 
 type FormValues = {|
   title: ?string,
-  summary?: ?string,
+  summary: ?string,
   author?: ?string,
   body: ?string,
   address?: ?string,
@@ -326,8 +326,6 @@ export class ProposalForm extends React.Component<Props, State> {
 
   render() {
     const { intl, titleValue, proposalForm, features, themes, error, form, responses } = this.props;
-    const titleFieldTradKey = proposalForm.isProposalForm ? 'proposal.title' : 'title';
-
     const {
       districtIdsFilteredByAddress,
       isLoadingTitleSuggestions,
@@ -356,7 +354,7 @@ export class ProposalForm extends React.Component<Props, State> {
           id="proposal_title"
           autoComplete="off"
           help={proposalForm.titleHelpText}
-          label={<FormattedMessage id={titleFieldTradKey} />}
+          label={<FormattedMessage id="proposal.title" />}
           addonAfter={
             <Glyphicon
               glyph="refresh"
@@ -396,23 +394,21 @@ export class ProposalForm extends React.Component<Props, State> {
             </ListGroup>
           </Panel>
         </Collapse>
-        {proposalForm.usingSummary && (
-          <Field
-            name="summary"
-            component={component}
-            type="textarea"
-            id="proposal_summary"
-            maxLength="140"
-            autoComplete="off"
-            help={proposalForm.summaryHelpText}
-            label={
-              <span>
-                <FormattedMessage id="proposal.summary" />
-                {optional}
-              </span>
-            }
-          />
-        )}
+        <Field
+          name="summary"
+          component={component}
+          type="textarea"
+          id="proposal_summary"
+          maxLength="140"
+          autoComplete="off"
+          help={proposalForm.summaryHelpText}
+          label={
+            <span>
+              <FormattedMessage id="proposal.summary" />
+              {optional}
+            </span>
+          }
+        />
         {features.themes &&
           proposalForm.usingThemes && (
             <Field
@@ -506,21 +502,14 @@ export class ProposalForm extends React.Component<Props, State> {
               ))}
             </Field>
           )}
-        {proposalForm.usingDescription && (
-          <Field
-            id="proposal_body"
-            type="editor"
-            name="body"
-            component={component}
-            label={
-              <span>
-                <FormattedMessage id="proposal.body" />
-                {!proposalForm.descriptionMandatory && optional}
-              </span>
-            }
-            help={proposalForm.descriptionHelpText}
-          />
-        )}
+        <Field
+          id="proposal_body"
+          type="editor"
+          name="body"
+          component={component}
+          label={<FormattedMessage id="proposal.body" />}
+          help={proposalForm.descriptionHelpText}
+        />
         <FieldArray
           name="responses"
           component={renderResponses}
@@ -530,21 +519,19 @@ export class ProposalForm extends React.Component<Props, State> {
           change={this.props.change}
           responses={responses}
         />
-        {proposalForm.usingIllustration && (
-          <Field
-            id="proposal_media"
-            name="media"
-            component={component}
-            type="image"
-            label={
-              <span>
-                <FormattedMessage id="proposal.media" />
-                {optional}
-              </span>
-            }
-            help={proposalForm.illustrationHelpText}
-          />
-        )}
+        <Field
+          id="proposal_media"
+          name="media"
+          component={component}
+          type="image"
+          label={
+            <span>
+              <FormattedMessage id="proposal.media" />
+              {optional}
+            </span>
+          }
+          help={proposalForm.illustrationHelpText}
+        />
       </form>
     );
   }
@@ -710,11 +697,6 @@ export default createFragmentContainer(container, {
       descriptionHelpText
       addressHelpText
       proposalInAZoneRequired
-      isProposalForm
-      usingDescription
-      descriptionMandatory
-      usingSummary
-      usingIllustration
     }
   `,
 });

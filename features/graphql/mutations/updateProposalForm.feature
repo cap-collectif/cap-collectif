@@ -29,11 +29,6 @@ Scenario: GraphQL client wants to update a proposal form
               categoryHelpText
               usingAddress
               addressHelpText
-              usingDescription
-              usingSummary
-              usingIllustration
-              descriptionMandatory
-              isProposalForm
               proposalInAZoneRequired
               latMap
               lngMap
@@ -84,11 +79,6 @@ Scenario: GraphQL client wants to update a proposal form
         "categoryHelpText": "Category Help",
         "usingAddress": true,
         "addressHelpText": "Address help",
-        "usingDescription": true,
-        "usingSummary": true,
-        "usingIllustration": true,
-        "descriptionMandatory": true,
-        "isProposalForm": true,
         "latMap": 0.0,
         "lngMap": 0.0,
         "zoomMap": 0,
@@ -126,72 +116,67 @@ Scenario: GraphQL client wants to update a proposal form
   """
   Then the JSON response should match:
   """
-{
-   "data":{
-      "updateProposalForm":{
-         "proposalForm":{
-            "id":"proposalForm1",
-            "title":"New title",
-            "titleHelpText":"Title help",
-            "allowAknowledge":true,
-            "description":"New description",
-            "descriptionHelpText":"Description help",
-            "summaryHelpText":"Summary Help",
-            "illustrationHelpText":"Illustration Help",
-            "usingThemes":true,
-            "themeMandatory":true,
-            "themeHelpText":"Theme Help",
-            "usingDistrict":true,
-            "districtMandatory":true,
-            "districtHelpText":"District Help",
-            "usingCategories":true,
-            "categoryMandatory":true,
-            "categoryHelpText":"Category Help",
-            "usingAddress":true,
-            "addressHelpText":"Address help",
-            "usingDescription":true,
-            "usingSummary":true,
-            "usingIllustration":true,
-            "descriptionMandatory":true,
-            "isProposalForm":true,
-            "proposalInAZoneRequired":true,
-            "latMap":0,
-            "lngMap":0,
-            "zoomMap":0,
-            "commentable":true,
-            "costable":true,
-            "categories":[
-               {
-                  "id":"pCategory1",
-                  "name":"Aménagement"
-               },
-               {
-                  "id":"@string@",
-                  "name":"New category"
-               },
-               {
-                  "id":"pCategory2",
-                  "name":"Politique"
-               }
-            ],
-            "districts":[
-               {
-                  "id":"@string@",
-                  "name":"Beauregard",
-                  "geojson":null,
-                  "geojsonStyle":null,
-                  "displayedOnMap":false
-               },
-               {
-                  "id":"@string@",
-                  "name":"Other district",
-                  "geojson":null,
-                  "geojsonStyle":null,
-                  "displayedOnMap":true
-               }
-            ],
-            "questions":[]
-         }
+  {
+   "data": {
+      "updateProposalForm": {
+        "proposalForm": {
+          "id": "proposalForm1",
+          "title": "New title",
+          "titleHelpText": "Title help",
+          "allowAknowledge": true,
+          "description": "New description",
+          "descriptionHelpText": "Description help",
+          "summaryHelpText": "Summary Help",
+          "illustrationHelpText": "Illustration Help",
+          "usingThemes": true,
+          "themeMandatory": true,
+          "themeHelpText": "Theme Help",
+          "usingDistrict": true,
+          "districtMandatory": true,
+          "districtHelpText": "District Help",
+          "usingCategories": true,
+          "categoryMandatory": true,
+          "categoryHelpText": "Category Help",
+          "usingAddress": true,
+          "addressHelpText": "Address help",
+          "proposalInAZoneRequired": true,
+          "latMap": 0,
+          "lngMap": 0,
+          "zoomMap": 0,
+          "commentable": true,
+          "costable": true,
+          "categories": [
+            {
+              "id": "pCategory1",
+              "name": "Aménagement"
+            },
+            {
+              "id": @string@,
+              "name": "New category"
+            },
+            {
+              "id": "pCategory2",
+              "name": "Politique"
+            }
+          ],
+          "districts": [
+            {
+              "id": @string@,
+              "name": "Beauregard",
+              "geojson": null,
+              "geojsonStyle": null,
+              "displayedOnMap": false
+            },
+            {
+              "id": @string@,
+              "name": "Other district",
+              "geojson": null,
+              "geojsonStyle": null,
+              "displayedOnMap": true
+            }
+          ],
+          "questions": []
+        }
       }
     }
   }

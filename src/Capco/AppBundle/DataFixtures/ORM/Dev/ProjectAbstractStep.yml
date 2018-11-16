@@ -224,13 +224,3 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: '@collectstep12'
     project: '@p20'
     position: 2
-  pas44:
-    id: pas44
-    step: '@collectQuestionVoteAvecClassement'
-    project: '@p21'
-    position: 1
-  pas45:
-    id: pas45
-    step: '@selectionQuestionStepVoteClassement'
-    project: '@p21'
-    position: 2

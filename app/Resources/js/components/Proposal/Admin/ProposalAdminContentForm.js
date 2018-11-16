@@ -99,17 +99,10 @@ export const validateProposalContent = (
   if (!values.title || values.title.length <= 2) {
     errors.title = 'proposal.constraints.title';
   }
-  if (
-    proposalForm.usingSummary &&
-    (values.summary && (values.summary.length > 140 || values.summary.length < 2))
-  ) {
+  if (values.summary && (values.summary.length > 140 || values.summary.length < 2)) {
     errors.summary = 'proposal.constraints.summary';
   }
-  if (
-    proposalForm.usingDescription &&
-    proposalForm.descriptionMandaotry &&
-    (!values.body || values.body.length <= 2)
-  ) {
+  if (!values.body || values.body.length <= 2) {
     errors.body = 'proposal.constraints.body';
   }
   if (proposalForm.usingAddress && !values.address) {
@@ -636,9 +629,6 @@ export default createFragmentContainer(
           }
         }
         usingDistrict
-        usingDescription
-        usingSummary
-        descriptionMandatory
         districtMandatory
         districtHelpText
         usingThemes
