@@ -15,6 +15,8 @@ type Props = {
 class ModalRegistrationFormQuestions extends React.Component<Props> {
   componentDidMount() {
     const { change, questions } = this.props;
+    // TODO: Pour le moment, je passe par redux form pour injecter les questions depuis la réponse GraphQL.
+    //  Idéalement, il faudrait que tout le système soit refait en GraphQL pour ne pas avoir cette bidouille
     change('questions', questions);
     change('responses', formatInitialResponsesValues(questions, []));
   }
