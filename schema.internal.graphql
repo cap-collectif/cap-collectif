@@ -1567,6 +1567,18 @@ interface EditableContribution {
 # A string containing an email.
 scalar Email
 
+# Fetches an object given its ID
+type EmailDomain implements Node {
+  # The ID of an object
+  id: ID!
+
+  # The email domain value
+  value: String!
+
+  # The associated registration form for this email domain
+  registrationForm: RegistrationForm
+}
+
 # A Evaluation form (question)
 type EvaluationForm {
   # The id of evaluation form (question)
@@ -2139,6 +2151,7 @@ type Mutation {
   changeCollectStatus(input: ChangeCollectStatusInput!): ChangeCollectStatusPayload
   changeProposalProgressSteps(input: ChangeProposalProgressStepsInput!): ChangeProposalProgressStepsPayload
   deleteProposal(input: DeleteProposalInput!): DeleteProposalPayload
+  updateRegistrationForm(input: UpdateRegistrationFormQuestionsInput!): UpdateRegistrationFormQuestionsPayload
   createProposalForm(input: CreateProposalFormInput!): CreateProposalFormPayload
   changeDistrict(input: ChangeDistrictInput!): ChangeDistrictPayload
   updateProposalForm(input: UpdateProposalFormInput!): UpdateProposalFormPayload
@@ -3493,6 +3506,9 @@ type Query {
     # If non-null, filters events with the given string to look for.
     search: String
   ): EventConnection!
+
+  # Get the current registration form
+  registrationForm: RegistrationForm
   users(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -3799,6 +3815,30 @@ type RankingStep implements Step {
   id: ID!
 }
 
+# Fetches an object given its ID
+type RegistrationForm implements Node {
+  # The ID of an object
+  id: ID!
+
+  # Does the bottom text is displayed?
+  bottomTextDisplayed: Boolean!
+
+  # Does the top text is displayed?
+  topTextDisplayed: Boolean!
+
+  # The bottom text to display
+  topText: String
+
+  # The bottom text to display
+  bottomText: String
+
+  # A whitelist of authorized domains that can register
+  domains: [EmailDomain!]
+
+  # The available questions
+  questions: [Question!]!
+}
+
 input RemoveArgumentVoteInput {
   # The Node ID of the argument to unvote.
   argumentId: ID!
@@ -3913,6 +3953,7 @@ type Reply implements Node & Publishable & Draftable & Contribution {
 
   # Identifies the form where the contribution was submitted.
   questionnaire: Questionnaire!
+  viewerCanUpdate: Boolean!
   viewerCanDelete: Boolean!
 }
 
@@ -4138,6 +4179,9 @@ type Section implements Node {
 
   # The subtitle of the section.
   subtitle: String
+
+  # The description of the section.
+  description: HTML
   contributionsCount: Int!
   contributionConnection(
     # Ordering options for contributions returned from the connection.
@@ -5074,6 +5118,16 @@ type UpdateQuestionnaireParametersPayload {
   clientMutationId: String
 }
 
+input UpdateRegistrationFormQuestionsInput {
+  questions: [QuestionnaireAbstractQuestionInput!]
+  clientMutationId: String
+}
+
+type UpdateRegistrationFormQuestionsPayload {
+  registrationForm: RegistrationForm
+  clientMutationId: String
+}
+
 input UpdateReplyInput {
   # The id of the reply
   replyId: ID!
@@ -5398,6 +5452,21 @@ type User implements Node {
     # Returns the last `n` elements from the list.
     last: Int
   ): ArgumentConnection!
+
+  # The responses answered by user.
+  responses(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ResponseConnection!
 
   # The HTTP URL for this user, null if feature `profiles` is disabled.
   show_url: URI @deprecated(reason: "Use `url` instead. This field does not respect naming consistency. Removal on 2019-01-01 UTC.")
