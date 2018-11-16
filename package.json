@@ -261,6 +261,7 @@
     "styled-components": "^3.1.6",
     "styled-spinkit": "^0.2.1",
     "terser-webpack-plugin": "^1.1.0",
+    "uglifyjs-3-webpack-plugin": "^1.2.4",
     "webpack": "^4.19.1",
     "webpack-bundle-analyzer": "^3.0.2",
     "webpack-cli": "^3.1.1",
