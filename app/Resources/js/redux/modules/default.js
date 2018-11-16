@@ -2,6 +2,11 @@
 import { SubmissionError } from 'redux-form';
 import Fetcher from '../../services/Fetcher';
 import type { Exact, Action, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
+import {
+  addRegistrationFieldSucceeded,
+  updateRegistrationFieldSucceeded,
+  deleteRegistrationFieldSucceeded,
+} from './user';
 
 type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
 type HideNewFieldModalAction = { type: 'default/HIDE_NEW_FIELD_MODAL' };
@@ -85,6 +90,34 @@ export const toggleFeatureSucceeded = (
   feature,
   enabled,
 });
+export const showNewFieldModal = (): ShowNewFieldModalAction => ({
+  type: 'default/SHOW_NEW_FIELD_MODAL',
+});
+export const hideNewFieldModal = (): HideNewFieldModalAction => ({
+  type: 'default/HIDE_NEW_FIELD_MODAL',
+});
+export const updateRegistrationFieldModal = (id: number): ShowUpdateFieldModalAction => ({
+  type: 'default/SHOW_UPDATE_FIELD_MODAL',
+  id,
+});
+export const hideRegistrationFieldModal = (): HideUpdateFieldModalAction => ({
+  type: 'default/HIDE_UPDATE_FIELD_MODAL',
+});
+
+export const requestUpdateRegistrationField = (
+  values: Object,
+  dispatch: Dispatch,
+  { fieldId }: { fieldId: number },
+) =>
+  Fetcher.putToJson(`/registration_form/questions/${fieldId}`, values).then(
+    (question: Object) => {
+      dispatch(hideRegistrationFieldModal());
+      dispatch(updateRegistrationFieldSucceeded(fieldId, question));
+    },
+    () => {
+      throw new SubmissionError({ _error: 'Un problème est survenu' });
+    },
+  );
 
 export const updateRegistrationCommunicationForm = (values: Object) =>
   Fetcher.put('/registration_form', values).then(
@@ -93,6 +126,33 @@ export const updateRegistrationCommunicationForm = (values: Object) =>
       throw new SubmissionError({ _error: 'Un problème est survenu' });
     },
   );
+
+export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
+  if (values.type !== '4') {
+    delete values.choices;
+  }
+  return Fetcher.postToJson('/registration_form/questions', values).then(
+    (question: Object) => {
+      dispatch(hideNewFieldModal());
+      dispatch(addRegistrationFieldSucceeded(question));
+    },
+    () => {
+      throw new SubmissionError({ _error: 'Un problème est survenu' });
+    },
+  );
+};
+
+export const deleteRegistrationField = (id: number, dispatch: Dispatch) => {
+  // eslint-disable-next-line no-alert
+  if (window.confirm('Confirmez la suppression ?')) {
+    return Fetcher.delete(`/registration_form/questions/${id}`).then(
+      () => {
+        dispatch(deleteRegistrationFieldSucceeded(id));
+      },
+      () => {},
+    );
+  }
+};
 
 export const toggleFeature = (
   dispatch: Dispatch,

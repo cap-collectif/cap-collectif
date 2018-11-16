@@ -24,66 +24,6 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
             'description' => 'Root of the schema.',
             'fields' => function () use ($globalVariable) {
                 return [
-                'events' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalEventConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
-                        ],
-                        [
-                            'name' => 'isFuture',
-                            'type' => Type::boolean(),
-                            'description' => 'If non-null, filters events by comparing the start date with present.',
-                        ],
-                        [
-                            'name' => 'theme',
-                            'type' => Type::id(),
-                            'description' => 'If non-null, filters events with the given theme.',
-                        ],
-                        [
-                            'name' => 'project',
-                            'type' => Type::id(),
-                            'description' => 'If non-null, filters events with the given project.',
-                        ],
-                        [
-                            'name' => 'author',
-                            'type' => Type::id(),
-                            'description' => 'If non-null, filters events with the given author.',
-                        ],
-                        [
-                            'name' => 'search',
-                            'type' => Type::string(),
-                            'description' => 'If non-null, filters events with the given string to look for.',
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", array(0 => $args)]);
-                    },
-                    'description' => 'Lookup events.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'viewer' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
                     'args' => [
@@ -138,14 +78,60 @@ final class InternalQueryType extends ObjectType implements GeneratedTypeInterfa
                     'public' => null,
                     'access' => null,
                 ],
-                'registrationForm' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('InternalRegistrationForm'),
+                'events' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalEventConnection')),
                     'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last `n` elements from the list.',
+                        ],
+                        [
+                            'name' => 'isFuture',
+                            'type' => Type::boolean(),
+                            'description' => 'If non-null, filters events by comparing the start date with present.',
+                        ],
+                        [
+                            'name' => 'theme',
+                            'type' => Type::id(),
+                            'description' => 'If non-null, filters events with the given theme.',
+                        ],
+                        [
+                            'name' => 'project',
+                            'type' => Type::id(),
+                            'description' => 'If non-null, filters events with the given project.',
+                        ],
+                        [
+                            'name' => 'author',
+                            'type' => Type::id(),
+                            'description' => 'If non-null, filters events with the given author.',
+                        ],
+                        [
+                            'name' => 'search',
+                            'type' => Type::string(),
+                            'description' => 'If non-null, filters events with the given string to look for.',
+                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver", []]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", array(0 => $args)]);
                     },
-                    'description' => 'Get the current registration form',
+                    'description' => 'Lookup events.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

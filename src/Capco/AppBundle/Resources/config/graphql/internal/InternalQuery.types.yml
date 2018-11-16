@@ -6,10 +6,6 @@ InternalQuery:
     name: Query
     description: 'Root of the schema.'
     fields:
-      registrationForm:
-        type: 'InternalRegistrationForm'
-        description: 'Get the current registration form'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
       events:
         type: 'InternalEventConnection!'
       viewer:
@@ -22,12 +18,14 @@ InternalQuery:
             type: 'Boolean'
             defaultValue: false
             description: 'Remove super admin from export.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserQueryResolver", [args])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserQueryResolver", [args])'
       consultations:
         type: '[InternalConsultation!]!'
         args:
           id:
-            description: 'If omitted, returns all consultations. If provided, returns the consultation of the particular id.'
+            description:
+              'If omitted, returns all consultations. If provided, returns the consultation of the particular id.'
             type: 'ID'
         resolve: "@=resolver('consultation', [args])"
       groups:
@@ -38,7 +36,8 @@ InternalQuery:
       proposalForms:
         description: 'Lookup forms.'
         type: '[ProposalForm]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver")'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver")'
       availableDistrictsForLocalisation:
         type: '[District!]!'
         description: 'Lookup availables districts on a proposalForm for a given address.'
@@ -49,7 +48,8 @@ InternalQuery:
             type: 'Float!'
           longitude:
             type: 'Float!'
-        resolve: "@=resolver('query_available_districts_for_location', [args['proposalFormId'], args['latitude'], args['longitude']])"
+        resolve:
+          "@=resolver('query_available_districts_for_location', [args['proposalFormId'], args['latitude'], args['longitude']])"
       votesByContribution:
         type: '[ProposalVote!]!'
         description: 'TO BE REMOVED'

@@ -82,7 +82,7 @@ export class ArgumentList extends React.Component<Props, State> {
               const totalCount = argumentable.allArguments.totalCount;
               const htmlFor = `filter-arguments-${type}`;
               return (
-                <Panel className="panel-custom">
+                <Panel className="panel--white panel-custom">
                   <Panel.Heading>
                     <Panel.Title componentClass="h4" className="opinion__header__title d-flex">
                       {type === 'SIMPLE' ? (

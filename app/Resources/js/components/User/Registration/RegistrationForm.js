@@ -1,20 +1,14 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import { Field, reduxForm, type FormProps } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { isEmail } from '../../../services/Validator';
 import type { Dispatch, State } from '../../../types';
 import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
-import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
 
-type Props = FormProps & {
-  intl: IntlShape,
-  responses: Array<Object>,
-  hasQuestions: boolean,
+type Props = {
   addUserTypeField: boolean,
   addZipcodeField: boolean,
   addCaptchaField: boolean,
@@ -23,6 +17,7 @@ type Props = FormProps & {
   cguLink: string,
   cguName: string,
   handleSubmit: Function,
+  dynamicFields: Array<Object>,
   organizationName: string,
   shieldEnabled: boolean,
   dispatch: Dispatch,
@@ -52,20 +47,21 @@ export const validate = (values: Object, props: Object) => {
   ) {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
+  for (const field of props.dynamicFields) {
+    if (field.required && !values[`dynamic-${field.id}`]) {
+      errors[`dynamic-${field.id}`] = 'global.required';
+    }
+  }
   return errors;
 };
 
 export const form = 'registration-form';
-
 export class RegistrationForm extends React.Component<Props> {
   render() {
     const {
       cguLink,
       cguName,
-      hasQuestions,
-      responses,
-      change,
-      intl,
+      dynamicFields,
       addZipcodeField,
       addUserTypeField,
       addConsentExternalCommunicationField,
@@ -181,88 +177,47 @@ export class RegistrationForm extends React.Component<Props> {
             autoComplete="postal-code"
           />
         )}
-        {hasQuestions && (
-          <QueryRenderer
-            environment={environment}
-            query={graphql`
-              query RegistrationFormQuery {
-                registrationForm {
-                  id
-                  questions {
-                    id
-                    number
-                    title
-                    position
-                    private
-                    required
-                    description
-                    helpText
-                    jumps {
-                      id
-                      always
-                      destination {
-                        id
-                        title
-                        number
-                      }
-                      conditions {
-                        id
-                        operator
-                        question {
-                          id
-                          title
-                        }
-                        ... on MultipleChoiceQuestionLogicJumpCondition {
-                          value {
-                            id
-                            title
-                          }
-                        }
-                      }
-                    }
-                    type
-                    ... on MultipleChoiceQuestion {
-                      isOtherAllowed
-                      validationRule {
-                        type
-                        number
-                      }
-                      choices(randomize: true) {
-                        id
-                        title
-                        description
-                        color
-                        image {
-                          url
-                        }
-                      }
-                    }
-                  }
-                }
+        {dynamicFields.map((field, key) => {
+          let children;
+          if (field.choices) {
+            const choices = field.choices.map((choice, i) => (
+              <option key={i + 1} value={choice.label}>
+                {choice.label}
+              </option>
+            ));
+            children = [
+              <FormattedMessage id="global.select">
+                {message => (
+                  <option key={0} value="">
+                    {message}
+                  </option>
+                )}
+              </FormattedMessage>,
+              ...choices,
+            ];
+          }
+          return (
+            <Field
+              id={`dynamic-${field.id}`}
+              key={key}
+              name={`dynamic-${field.id}`}
+              component={renderComponent}
+              type={field.type}
+              labelClassName="font-weight-normal"
+              label={
+                <span>
+                  {field.question}{' '}
+                  {!field.required && (
+                    <span className="excerpt">
+                      <FormattedMessage id="global.form.optional" />
+                    </span>
+                  )}
+                </span>
               }
-            `}
-            variables={{}}
-            render={({ error, props }) => {
-              if (error) {
-                console.log(error); // eslint-disable-line no-console
-                return graphqlError;
-              }
-              if (props && props.registrationForm && props.registrationForm.questions) {
-                return (
-                  <ModalRegistrationFormQuestions
-                    change={change}
-                    responses={responses}
-                    form={form}
-                    questions={props.registrationForm.questions}
-                    intl={intl}
-                  />
-                );
-              }
-
-              return null;
-            }}
-          />
-        )}
+              children={children}
+            />
+          );
+        })}
         <Field
           id="charte"
           name="charte"
@@ -297,7 +252,6 @@ export class RegistrationForm extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  hasQuestions: state.user.registration_form.hasQuestions,
   addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,
   addZipcodeField: state.default.features.zipcode_at_register,
@@ -306,16 +260,15 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
+  dynamicFields: state.user.registration_form.questions,
   shieldEnabled: state.default.features.shield_mode,
-  initialValues: {
-    responses: [],
-  },
 });
 
-const formContainer = reduxForm({
-  form,
-  validate,
-  onSubmit,
-})(RegistrationForm);
-
-export default connect(mapStateToProps)(injectIntl(formContainer));
+const connector = connect(mapStateToProps);
+export default connector(
+  reduxForm({
+    form,
+    validate,
+    onSubmit,
+  })(RegistrationForm),
+);
