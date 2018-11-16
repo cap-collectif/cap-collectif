@@ -11,6 +11,7 @@ setTimeout(function() {
 
 {% block form %}
     {% include '@CapcoApp/redux_store.html.twig' %}
+    {{ react_render_component('AdminModalsApp') }}
     <div class="col-xs-12 col-md-12">
         <div class="box box-primary">
             <div class="box-header">

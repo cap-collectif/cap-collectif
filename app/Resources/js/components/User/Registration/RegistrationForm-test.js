@@ -2,7 +2,6 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock, formMock } from '../../../mocks';
 import { RegistrationForm } from './RegistrationForm';
 
 describe('<RegistrationForm />', () => {
@@ -13,12 +12,9 @@ describe('<RegistrationForm />', () => {
     addConsentExternalCommunicationField: true,
     handleSubmit: jest.fn(),
     userTypes: [],
-    ...formMock,
-    intl: intlMock,
     cguName: 'la charte',
     cguLink: '/charte',
-    hasQuestions: false,
-    responses: [],
+    dynamicFields: [],
     organizationName: 'Cap Collectif',
     dispatch: jest.fn(),
     shieldEnabled: false,
@@ -46,7 +42,16 @@ describe('<RegistrationForm />', () => {
     const wrapper = shallow(
       <RegistrationForm
         {...props}
-        hasQuestions
+        dynamicFields={[
+          {
+            type: 'text',
+            required: true,
+            private: false,
+            question: 'Champ pas facultatif',
+            slug: 'champ-pas-facultatif',
+            id: 6,
+          },
+        ]}
       />,
     );
     expect(wrapper).toMatchSnapshot();

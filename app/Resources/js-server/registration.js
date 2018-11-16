@@ -30,6 +30,7 @@ import QuestionnaireAdminPageApp from '../js/startup/QuestionnaireAdminPageApp';
 import QuestionnaireCreateButtonApp from '../js/startup/QuestionnaireCreateButtonApp';
 import ShieldApp from '../js/startup/ShieldApp';
 import RegistrationAdminApp from '../js/startup/RegistrationAdminApp';
+import AdminModalsApp from '../js/startup/AdminModalsApp';
 import GroupAdminPageApp from '../js/startup/GroupAdminPageApp';
 import EvaluationsIndexPageApp from '../js/startup/EvaluationsIndexPageApp';
 import ChooseAUsernameApp from '../js/startup/ChooseAUsernameApp';
@@ -58,6 +59,7 @@ moment.locale(global.locale);
 ReactOnRails.registerStore({ appStore });
 ReactOnRails.register({
   AccountProfileFollowingsApp,
+  AdminModalsApp,
   RegistrationAdminApp,
   ShieldApp,
   ChooseAUsernameApp,

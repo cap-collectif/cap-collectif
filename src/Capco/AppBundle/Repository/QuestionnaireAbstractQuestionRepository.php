@@ -20,27 +20,12 @@ class QuestionnaireAbstractQuestionRepository extends EntityRepository
         return $query->getSingleScalarResult();
     }
 
-    public function getCurrentMaxPositionForRegistrationForm(string $id): int
-    {
-        $qb = $this->createQueryBuilder('qaq');
-        $qb
-            ->select('COALESCE(MAX(qaq.position),0)')
-            ->where('qaq.registrationForm = :registrationForm')
-            ->setParameter('registrationForm', $id);
-        $query = $qb->getQuery();
-        $query->useQueryCache(false);
-        $query->useResultCache(false);
-
-        return $query->getSingleScalarResult();
-    }
-
-
     public function getCurrentMaxPositionForProposalForm(string $id): int
     {
-        $qb = $this->createQueryBuilder('qaq');
+        $qb = $this->createQueryBuilder('n');
         $qb
-            ->select('COALESCE(MAX(qaq.position),0)')
-            ->where('qaq.proposalForm = :proposalForm')
+            ->select('COALESCE(MAX(n.position),0)')
+            ->where('n.proposalForm = :proposalForm')
             ->setParameter('proposalForm', $id);
         $query = $qb->getQuery();
         $query->useQueryCache(false);

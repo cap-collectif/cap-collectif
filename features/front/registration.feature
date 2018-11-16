@@ -11,12 +11,12 @@ Scenario: Anonymous wants to register with user type and zipcode
   | email                | naruto42@gmail.com   |
   | password             | narutoisthebest      |
   | zipcode              | 94123                |
-  | responses[0].value   | plop                 |
+  | dynamic-6            | plop                 |
   And I select "Citoyen" from "user_type"
-  And I select "Sangohan" from "responses[2].value"
+  And I select "Sangohan" from "dynamic-17"
   And I check "charte"
   And I press "global.register"
-  Then I wait 6 seconds
+  Then I wait 5 seconds
   Then I can see I am logged in as "Naruto42"
 
 @database @javascript
@@ -25,14 +25,14 @@ Scenario: Anonymous wants to register
   And I visited "home page"
   When I press "global.registration"
   And I fill in the following:
-  | username             | Naruto42             |
-  | email                | naruto42@gmail.com   |
-  | password             | narutoisthebest      |
-  | responses[0].value   | plop                 |
-  And I select "Sangohan" from "responses[2].value"
+    | username             | Naruto42             |
+    | email                | naruto42@gmail.com   |
+    | password             | narutoisthebest      |
+    | dynamic-6            | plop                 |
+  And I select "Sangohan" from "dynamic-17"
   And I check "charte"
   And I press "global.register"
-  Then I wait 6 seconds
+  Then I wait 5 seconds
   Then I can see I am logged in as "Naruto42"
   And I open mail with subject "email-subject-registration-confirmation"
   And I should see "email-content-registration-confirmation" in mail
@@ -59,13 +59,13 @@ Scenario: Anonymous wants to register with the consent of external communication
   And I visited "home page"
   When I press "global.registration"
   And I fill in the following:
-  | username             | Naruto42             |
-  | email                | naruto42@gmail.com   |
-  | password             | narutoisthebest      |
-  | responses[0].value   | plop                 |
-  And I select "Sangohan" from "responses[2].value"
+    | username             | Naruto42             |
+    | email                | naruto42@gmail.com   |
+    | password             | narutoisthebest      |
+    | dynamic-6            | plop                 |
+  And I select "Sangohan" from "dynamic-17"
   And I check "charte"
   And I check "consentExternalCommunication"
   And I press "global.register"
-  Then I wait 6 seconds
+  Then I wait 5 seconds
   Then I can see I am logged in as "Naruto42"

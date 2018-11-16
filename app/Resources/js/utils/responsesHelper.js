@@ -57,7 +57,7 @@ type Question = {|
   |}>,
 |};
 
-export type Questions = $ReadOnlyArray<Question>;
+type Questions = $ReadOnlyArray<Question>;
 
 type ResponsesFromAPI = $ReadOnlyArray<?{|
   +question: {|
@@ -546,6 +546,7 @@ export const renderResponses = ({
     <div>
       {fields.map((member, index) => {
         const field = questions[index];
+
         let isAvailableQuestion = true;
 
         if (!availableQuestions.includes(field.id)) {
@@ -605,7 +606,6 @@ export const renderResponses = ({
             );
           }
           case 'select': {
-            if (!('choices' in field)) return null;
             return (
               <div className={isAvailableQuestion === false && 'visible-print-block'}>
                 <PrivateBox key={field.id} show={field.private}>

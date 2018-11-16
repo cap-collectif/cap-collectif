@@ -1,42 +1,30 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { QueryRenderer, graphql } from 'react-relay';
 import type { Connector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Alert, Well, Col } from 'react-bootstrap';
+import { Alert, Well, Col, Button } from 'react-bootstrap';
 import Toggle from 'react-toggle';
-import environment, { graphqlError } from '../../createRelayEnvironment';
-import { toggleFeature } from '../../redux/modules/default';
+import { arrayMove } from 'react-sortable-hoc';
+import { toggleFeature, showNewFieldModal } from '../../redux/modules/default';
+import { reorderRegistrationQuestions } from '../../redux/modules/user';
 import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
 import RegistrationCommunicationForm from './RegistrationCommunicationForm';
+import RegistrationQuestionSortableList from './RegistrationQuestionSortableList';
 import RegistrationEmailDomainsForm from './RegistrationEmailDomainsForm';
-import Loader from '../Ui/Loader';
-import RegistrationFormQuestions from './RegistrationFormQuestions';
 
 type Props = {
   features: FeatureToggles,
   onToggle: (feature: FeatureToggle, value: boolean) => void,
+  addNewField: () => void,
   isSuperAdmin: boolean,
-};
-
-const dynamicFieldsComponent = ({ error, props }) => {
-  if (error) {
-    console.log(error); // eslint-disable-line no-console
-    return graphqlError;
-  }
-  if (props) {
-    if (props.registrationForm) {
-      return <RegistrationFormQuestions {...props} />;
-    }
-    return graphqlError;
-  }
-  return <Loader />;
+  reorder: Function,
+  dynamicFields: Array<Object>,
 };
 
 export class RegistrationAdminPage extends React.Component<Props> {
   render() {
-    const { isSuperAdmin, onToggle, features } = this.props;
+    const { reorder, isSuperAdmin, onToggle, addNewField, features, dynamicFields } = this.props;
     return (
       <div className="box-content">
         <div className="row">
@@ -152,18 +140,29 @@ export class RegistrationAdminPage extends React.Component<Props> {
               <FormattedMessage id="more-fields" />
             </strong>
           </p>
-          <QueryRenderer
-            query={graphql`
-              query RegistrationAdminPageQuery {
-                registrationForm {
-                  ...RegistrationFormQuestions_registrationForm
-                }
-              }
-            `}
-            environment={environment}
-            variables={{}}
-            render={dynamicFieldsComponent}
-          />
+          {dynamicFields.length > 0 && (
+            <RegistrationQuestionSortableList
+              items={dynamicFields}
+              onSortEnd={({ oldIndex, newIndex }) => {
+                reorder(arrayMove(dynamicFields, oldIndex, newIndex));
+              }}
+              lockAxis="y"
+              useDragHandle
+            />
+          )}
+          <Button
+            className="box-content__toolbar"
+            disabled={!isSuperAdmin}
+            style={{ marginBottom: 10 }}
+            onClick={
+              !isSuperAdmin
+                ? null
+                : () => {
+                    addNewField();
+                  }
+            }>
+            <FormattedMessage id="link_action_create" />
+          </Button>
         </Well>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
@@ -223,10 +222,17 @@ export class RegistrationAdminPage extends React.Component<Props> {
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  dynamicFields: state.user.registration_form.questions,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onToggle: (feature: FeatureToggle, value: boolean) => {
     toggleFeature(dispatch, feature, value);
+  },
+  addNewField: () => {
+    dispatch(showNewFieldModal());
+  },
+  reorder: (list: Array<Object>) => {
+    reorderRegistrationQuestions(list, dispatch);
   },
 });
 

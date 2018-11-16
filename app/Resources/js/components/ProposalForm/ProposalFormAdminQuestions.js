@@ -24,7 +24,6 @@ type Props = {
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
   questions: Array<Object>,
-  hideSections: boolean,
   formName: string,
   intl: IntlShape,
 };
@@ -204,7 +203,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
   };
 
   render() {
-    const { fields, questions, formName, hideSections } = this.props;
+    const { fields, questions, formName } = this.props;
     const { editIndex, showDeleteModal, editIndexSection, deleteType, flashMessages } = this.state;
 
     return (
@@ -270,14 +269,13 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
             </Droppable>
           </DragDropContext>
         </ListGroup>
-        {!hideSections &&
         <Button
           id="js-btn-create-section"
           bsStyle="primary"
           className="btn-outline-primary box-content__toolbar"
           onClick={this.handleCreateSection}>
           <i className="cap cap-small-caps-1" /> <FormattedMessage id="create-section" />
-        </Button>}
+        </Button>
         <Button
           id="js-btn-create-question"
           bsStyle="primary"
