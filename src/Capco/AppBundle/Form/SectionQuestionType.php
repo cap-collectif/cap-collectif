@@ -19,6 +19,7 @@ class SectionQuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('id', IntegerType::class);
+        $builder->add('temporaryId', PurifiedTextType::class);
         $builder->add('title', PurifiedTextType::class);
         $builder->add('description', PurifiedTextType::class);
         $builder->add('helpText', PurifiedTextType::class);

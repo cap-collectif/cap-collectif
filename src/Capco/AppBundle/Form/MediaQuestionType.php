@@ -15,6 +15,7 @@ class MediaQuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('id');
+        $builder->add('temporaryId', PurifiedTextType::class);
         $builder->add('title', PurifiedTextType::class);
         $builder->add('helpText', PurifiedTextType::class);
         $builder->add('description', PurifiedTextType::class);

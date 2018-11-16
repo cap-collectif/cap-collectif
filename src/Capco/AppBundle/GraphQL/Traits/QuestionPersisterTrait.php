@@ -17,12 +17,9 @@ trait QuestionPersisterTrait
             $question = $abstractQuestion->getQuestion();
             if (!empty($questionsOrdered)) {
                 $newPosition = 0;
+                // we use the temporary id to update the questions position
                 foreach ($questionsOrdered as $key => $questionOrdered) {
-                    //it compare string to int
-                    if ($questionOrdered == $question->getId()) {
-                        $newPosition = $key;
-                    } elseif (trim($questionOrdered) === $question->getTitle()) {
-                        //if the question is not in db, she doesn't have id
+                    if ($questionOrdered === $question->getTemporaryId()) {
                         $newPosition = $key;
                     }
                 }

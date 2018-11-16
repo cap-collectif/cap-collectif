@@ -117,6 +117,9 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
      */
     protected $responses;
 
+    //field used to the position assignation
+    public $temporaryId;
+
     public function __toString()
     {
         if ($this->getId()) {
@@ -124,6 +127,18 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         }
 
         return 'New Question';
+    }
+
+    public function getTemporaryId(): ?string
+    {
+        return $this->temporaryId;
+    }
+
+    public function setTemporaryId($temporaryId): self
+    {
+        $this->temporaryId = $temporaryId;
+
+        return $this;
     }
 
     /**
