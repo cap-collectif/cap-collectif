@@ -38,29 +38,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
     >
       <Field
         component={[Function]}
-        id="proposal_form_isProposal"
-        label={
-          <FormattedMessage
-            id="object-deposited"
-            values={Object {}}
-          />
-        }
-        name="isProposalForm"
-        options={
-          Array [
-            Object {
-              "label": "opinion.header.opinion",
-              "value": true,
-            },
-            Object {
-              "label": "admin.fields.response.question",
-              "value": false,
-            },
-          ]
-        }
-      />
-      <Field
-        component={[Function]}
         id="proposal_form_description"
         label={
           <FormattedMessage
@@ -87,7 +64,12 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         className="panel panel-default"
       >
         <h4
-          className="panel-heading m-0"
+          className="panel-heading"
+          style={
+            Object {
+              "margin": 0,
+            }
+          }
         >
           <FormattedMessage
             id="proposal_form.title"
@@ -123,6 +105,138 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         </div>
       </div>
       <div
+        className="panel panel-default"
+      >
+        <h4
+          className="panel-heading"
+          style={
+            Object {
+              "margin": 0,
+            }
+          }
+        >
+          <FormattedMessage
+            id="proposal_form.summary"
+            values={Object {}}
+          />
+        </h4>
+        <div
+          className="panel-body"
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_summary_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="proposal_form.help_text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                   
+                  <FormattedMessage
+                    id="global.form.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="summaryHelpText"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="panel panel-default"
+      >
+        <h4
+          className="panel-heading"
+          style={
+            Object {
+              "margin": 0,
+            }
+          }
+        >
+          <FormattedMessage
+            id="proposal_form.description"
+            values={Object {}}
+          />
+        </h4>
+        <div
+          className="panel-body"
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_description_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="proposal_form.help_text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                   
+                  <FormattedMessage
+                    id="global.form.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="descriptionHelpText"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="panel panel-default"
+      >
+        <h4
+          className="panel-heading"
+          style={
+            Object {
+              "margin": 0,
+            }
+          }
+        >
+          <FormattedMessage
+            id="proposal_form.illustration"
+            values={Object {}}
+          />
+        </h4>
+        <div
+          className="panel-body"
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_illustration_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="proposal_form.help_text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                   
+                  <FormattedMessage
+                    id="global.form.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="illustrationHelpText"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
         className="box-header"
       >
         <h3
@@ -134,221 +248,6 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           />
         </h3>
       </div>
-      <Uncontrolled(Panel)
-        expanded={true}
-        id="proposal_form_admin_description_panel_body"
-        onToggle={[Function]}
-      >
-        <PanelHeading
-          bsClass="panel"
-          componentClass="div"
-        >
-          <div
-            id="description"
-          >
-            <h4
-              className="pull-left"
-            >
-              <FormattedMessage
-                id="proposal_form.description"
-                values={Object {}}
-              />
-            </h4>
-            <div
-              className="pull-right"
-            >
-              <Field
-                component={[Function]}
-                id="proposal_form_using_description_field"
-                name="usingDescription"
-                normalize={[Function]}
-              />
-            </div>
-            <div
-              className="clearfix"
-            />
-          </div>
-        </PanelHeading>
-        <PanelCollapse
-          bsClass="panel"
-        >
-          <PanelBody
-            bsClass="panel"
-            collapsible={false}
-          >
-            <Field
-              component={[Function]}
-              id="proposal_form_description_mandatory"
-              name="descriptionMandatory"
-              type="checkbox"
-            >
-              <FormattedMessage
-                id="proposal_form.required"
-                values={Object {}}
-              />
-            </Field>
-            <Field
-              component={[Function]}
-              id="proposal_form_description_help_text"
-              label={
-                <span>
-                  <FormattedMessage
-                    id="proposal_form.help_text"
-                    values={Object {}}
-                  />
-                  <span
-                    className="excerpt"
-                  >
-                     
-                    <FormattedMessage
-                      id="global.form.optional"
-                      values={Object {}}
-                    />
-                  </span>
-                </span>
-              }
-              name="descriptionHelpText"
-              type="text"
-            />
-          </PanelBody>
-        </PanelCollapse>
-      </Uncontrolled(Panel)>
-      <Uncontrolled(Panel)
-        expanded={false}
-        id="proposal_form_admin_summary_panel_body"
-        onToggle={[Function]}
-      >
-        <PanelHeading
-          bsClass="panel"
-          componentClass="div"
-        >
-          <div
-            id="summary"
-          >
-            <h4
-              className="pull-left"
-            >
-              <FormattedMessage
-                id="proposal_form.summary"
-                values={Object {}}
-              />
-            </h4>
-            <div
-              className="pull-right"
-            >
-              <Field
-                component={[Function]}
-                id="proposal_form_using_summary_field"
-                name="usingSummary"
-                normalize={[Function]}
-              />
-            </div>
-            <div
-              className="clearfix"
-            />
-          </div>
-        </PanelHeading>
-        <PanelCollapse
-          bsClass="panel"
-        >
-          <PanelBody
-            bsClass="panel"
-            collapsible={false}
-          >
-            <Field
-              component={[Function]}
-              id="proposal_form_summary_help_text"
-              label={
-                <span>
-                  <FormattedMessage
-                    id="proposal_form.help_text"
-                    values={Object {}}
-                  />
-                  <span
-                    className="excerpt"
-                  >
-                     
-                    <FormattedMessage
-                      id="global.form.optional"
-                      values={Object {}}
-                    />
-                  </span>
-                </span>
-              }
-              name="summaryHelpText"
-              type="text"
-            />
-          </PanelBody>
-        </PanelCollapse>
-      </Uncontrolled(Panel)>
-      <Uncontrolled(Panel)
-        expanded={false}
-        id="proposal_form_admin_illustration_panel_body"
-        onToggle={[Function]}
-      >
-        <PanelHeading
-          bsClass="panel"
-          componentClass="div"
-        >
-          <div
-            id="illustration"
-          >
-            <h4
-              className="pull-left"
-            >
-              <FormattedMessage
-                id="proposal_form.illustration"
-                values={Object {}}
-              />
-            </h4>
-            <div
-              className="pull-right"
-            >
-              <Field
-                component={[Function]}
-                id="proposal_form_using_illustration_field"
-                name="usingIllustration"
-                normalize={[Function]}
-              />
-            </div>
-            <div
-              className="clearfix"
-            />
-          </div>
-        </PanelHeading>
-        <PanelCollapse
-          bsClass="panel"
-        >
-          <PanelBody
-            bsClass="panel"
-            collapsible={false}
-          >
-            <Field
-              component={[Function]}
-              id="proposal_form_illustration_help_text"
-              label={
-                <span>
-                  <FormattedMessage
-                    id="proposal_form.help_text"
-                    values={Object {}}
-                  />
-                  <span
-                    className="excerpt"
-                  >
-                     
-                    <FormattedMessage
-                      id="global.form.optional"
-                      values={Object {}}
-                    />
-                  </span>
-                </span>
-              }
-              name="illustrationHelpText"
-              type="text"
-            />
-          </PanelBody>
-        </PanelCollapse>
-      </Uncontrolled(Panel)>
       <Uncontrolled(Panel)
         expanded={true}
         id="proposal_form_admin_category_panel_body"
@@ -504,11 +403,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 bsClass="glyphicon"
                 glyph="info-sign"
               />
-               
-              <FormattedMessage
-                id="the-proposals-will-be-posted-on-a-map"
-                values={Object {}}
-              />
+               Les propositions seront affichées sur une carte
             </p>
             <Field
               component={[Function]}
@@ -522,12 +417,14 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               />
             </Field>
             <h5
-              className="mt-20 font-weight-bold"
+              style={
+                Object {
+                  "fontWeight": "bold",
+                  "marginTop": 20,
+                }
+              }
             >
-              <FormattedMessage
-                id="initial-position-of-the-map"
-                values={Object {}}
-              />
+              Position initiale de la carte
             </h5>
             <Row
               bsClass="row"

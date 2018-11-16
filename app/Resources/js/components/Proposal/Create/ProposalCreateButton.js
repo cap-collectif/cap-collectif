@@ -2,20 +2,16 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import { createFragmentContainer, graphql } from 'react-relay';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import type { ProposalCreateButton_proposalForm } from './__generated__/ProposalCreateButton_proposalForm.graphql';
 
 type Props = {
   handleClick: Function,
   disabled: boolean,
-  proposalForm: ProposalCreateButton_proposalForm,
 };
 
 export class ProposalCreateButton extends React.Component<Props> {
   render() {
-    const { disabled, handleClick, proposalForm } = this.props;
-    const buttonTradKey = proposalForm.isProposalForm ? 'proposal.add' : 'submit-a-question';
+    const { disabled, handleClick } = this.props;
     return (
       <LoginOverlay>
         <Button
@@ -24,17 +20,11 @@ export class ProposalCreateButton extends React.Component<Props> {
           bsStyle="primary"
           onClick={disabled ? null : handleClick}>
           <i className="cap cap-add-1" />
-          <FormattedMessage id={buttonTradKey} />
+          <FormattedMessage id="proposal.add" />
         </Button>
       </LoginOverlay>
     );
   }
 }
 
-export default createFragmentContainer(ProposalCreateButton, {
-  proposalForm: graphql`
-    fragment ProposalCreateButton_proposalForm on ProposalForm {
-      isProposalForm
-    }
-  `,
-});
+export default ProposalCreateButton;

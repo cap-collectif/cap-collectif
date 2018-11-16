@@ -26,17 +26,3 @@ Capco\AppBundle\Entity\ProposalCollectVote:
     user: '@user5'
     position: 1
     publishedAt: <(new \DateTime('2015-03-01'))>
-  questionCollectVote54:
-    id: 2054
-    proposal: '@question1'
-    collectStep: '@collectQuestionVoteAvecClassement'
-    user: '@user5'
-    position: 1
-    publishedAt: <(new \DateTime('2015-03-01'))>
-  questionCollectVote55:
-    id: 2055
-    proposal: '@question2'
-    collectStep: '@collectQuestionVoteAvecClassement'
-    user: '@user5'
-    position: 2
-    publishedAt: <(new \DateTime('2015-03-01'))>

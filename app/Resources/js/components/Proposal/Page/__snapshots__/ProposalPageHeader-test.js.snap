@@ -1,169 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalPageHeader /> should not render theme if proposal has none and form type is question 1`] = `
-<div
-  className="proposal__header "
->
-  <div>
-    <a
-      href="http://capco.test"
-      style={
-        Object {
-          "textDecoration": "none",
-        }
-      }
-    >
-      <i
-        className="cap cap-arrow-65-1 icon--black"
-      />
-       
-      <FormattedMessage
-        id="questions-list"
-        values={Object {}}
-      />
-    </a>
-  </div>
-  <h1
-    className="consultation__header__title h1"
-  >
-    titre
-  </h1>
-  <div
-    className="media mb-15"
-  >
-    <Connect(UserAvatar)
-      className="pull-left"
-      user={
-        Object {
-          "displayName": "userAdmin",
-          "media": Object {
-            "url": "http://media.url",
-          },
-          "username": "userAdmin",
-        }
-      }
-    />
-    <div
-      className="media-body"
-    >
-      <p
-        className="media--aligned excerpt"
-      >
-        <FormattedMessage
-          id="proposal.infos.header"
-          values={
-            Object {
-              "createdDate": <FormattedDate
-                day="numeric"
-                hour="numeric"
-                minute="numeric"
-                month="long"
-                value={"2014-12-31T23:00:00.000Z"}
-                year="numeric"
-              />,
-              "user": <UserLink
-                className=""
-                user={
-                  Object {
-                    "displayName": "userAdmin",
-                    "media": Object {
-                      "url": "http://media.url",
-                    },
-                    "username": "userAdmin",
-                  }
-                }
-              />,
-            }
-          }
-        />
-        <span>
-           • 
-          <FormattedMessage
-            id="global.edited_on"
-            values={
-              Object {
-                "updated": <FormattedDate
-                  day="numeric"
-                  hour="numeric"
-                  minute="numeric"
-                  month="long"
-                  value={"2015-01-04T23:00:00.000Z"}
-                  year="numeric"
-                />,
-              }
-            }
-          />
-        </span>
-        <ForwardRef(Relay(Connect(UnpublishedLabel)))
-          publishable={
-            Object {
-              "$fragmentRefs": null,
-              "$refType": null,
-              "author": Object {
-                "displayName": "userAdmin",
-                "media": Object {
-                  "url": "http://media.url",
-                },
-                "username": "userAdmin",
-              },
-              "createdAt": "2015-01-01 00:00:00",
-              "form": Object {
-                "isProposalForm": false,
-              },
-              "id": "1",
-              "project": Object {
-                "opinionCanBeFollowed": true,
-              },
-              "publicationStatus": "PUBLISHED",
-              "publishedAt": "2015-01-01 00:00:00",
-              "show_url": "true",
-              "theme": null,
-              "title": "titre",
-              "updatedAt": "2015-01-05 00:00:00",
-            }
-          }
-        />
-      </p>
-    </div>
-  </div>
-  <div
-    className="proposal__buttons"
-  >
-    <ForwardRef(Relay(ProposalFollowButton))
-      isAuthenticated={false}
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "author": Object {
-            "displayName": "userAdmin",
-            "media": Object {
-              "url": "http://media.url",
-            },
-            "username": "userAdmin",
-          },
-          "createdAt": "2015-01-01 00:00:00",
-          "form": Object {
-            "isProposalForm": false,
-          },
-          "id": "1",
-          "project": Object {
-            "opinionCanBeFollowed": true,
-          },
-          "publicationStatus": "PUBLISHED",
-          "publishedAt": "2015-01-01 00:00:00",
-          "show_url": "true",
-          "theme": null,
-          "title": "titre",
-          "updatedAt": "2015-01-05 00:00:00",
-        }
-      }
-    />
-  </div>
-</div>
-`;
-
-exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 1`] = `
+exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`] = `
 <div
   className="proposal__header "
 >
@@ -270,9 +107,163 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
                 "username": "userAdmin",
               },
               "createdAt": "2015-01-01 00:00:00",
-              "form": Object {
-                "isProposalForm": true,
+              "id": "1",
+              "project": Object {
+                "opinionCanBeFollowed": true,
               },
+              "publicationStatus": "PUBLISHED",
+              "publishedAt": "2015-01-01 00:00:00",
+              "show_url": "true",
+              "theme": null,
+              "title": "titre",
+              "updatedAt": "2015-01-05 00:00:00",
+            }
+          }
+        />
+      </p>
+    </div>
+  </div>
+  <div
+    className="proposal__buttons"
+  >
+    <ForwardRef(Relay(ProposalFollowButton))
+      isAuthenticated={false}
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "displayName": "userAdmin",
+            "media": Object {
+              "url": "http://media.url",
+            },
+            "username": "userAdmin",
+          },
+          "createdAt": "2015-01-01 00:00:00",
+          "id": "1",
+          "project": Object {
+            "opinionCanBeFollowed": true,
+          },
+          "publicationStatus": "PUBLISHED",
+          "publishedAt": "2015-01-01 00:00:00",
+          "show_url": "true",
+          "theme": null,
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:00:00",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
+<div
+  className="proposal__header "
+>
+  <div>
+    <a
+      href="http://capco.test"
+      style={
+        Object {
+          "textDecoration": "none",
+        }
+      }
+    >
+      <i
+        className="cap cap-arrow-65-1 icon--black"
+      />
+       
+      <FormattedMessage
+        id="proposal.back"
+        values={Object {}}
+      />
+    </a>
+  </div>
+  <h1
+    className="consultation__header__title h1"
+  >
+    titre
+  </h1>
+  <div
+    className="media mb-15"
+  >
+    <Connect(UserAvatar)
+      className="pull-left"
+      user={
+        Object {
+          "displayName": "userAdmin",
+          "media": Object {
+            "url": "http://media.url",
+          },
+          "username": "userAdmin",
+        }
+      }
+    />
+    <div
+      className="media-body"
+    >
+      <p
+        className="media--aligned excerpt"
+      >
+        <FormattedMessage
+          id="proposal.infos.header"
+          values={
+            Object {
+              "createdDate": <FormattedDate
+                day="numeric"
+                hour="numeric"
+                minute="numeric"
+                month="long"
+                value={"2014-12-31T23:00:00.000Z"}
+                year="numeric"
+              />,
+              "user": <UserLink
+                className=""
+                user={
+                  Object {
+                    "displayName": "userAdmin",
+                    "media": Object {
+                      "url": "http://media.url",
+                    },
+                    "username": "userAdmin",
+                  }
+                }
+              />,
+            }
+          }
+        />
+        <span>
+           • 
+          <FormattedMessage
+            id="global.edited_on"
+            values={
+              Object {
+                "updated": <FormattedDate
+                  day="numeric"
+                  hour="numeric"
+                  minute="numeric"
+                  month="long"
+                  value={"2015-01-04T23:00:00.000Z"}
+                  year="numeric"
+                />,
+              }
+            }
+          />
+        </span>
+        <ForwardRef(Relay(Connect(UnpublishedLabel)))
+          publishable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "userAdmin",
+                "media": Object {
+                  "url": "http://media.url",
+                },
+                "username": "userAdmin",
+              },
+              "createdAt": "2015-01-01 00:00:00",
               "id": "1",
               "project": Object {
                 "opinionCanBeFollowed": true,
@@ -308,9 +299,6 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             "username": "userAdmin",
           },
           "createdAt": "2015-01-01 00:00:00",
-          "form": Object {
-            "isProposalForm": true,
-          },
           "id": "1",
           "project": Object {
             "opinionCanBeFollowed": true,

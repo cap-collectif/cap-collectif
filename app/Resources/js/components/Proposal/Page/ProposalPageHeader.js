@@ -58,13 +58,11 @@ export class ProposalPageHeader extends React.Component<Props> {
       [className]: true,
     };
 
-    const tradKeyToBack = proposal.form.isProposalForm ? 'proposal.back' : 'questions-list';
-
     return (
       <div className={classNames(classes)}>
         <div>
           <a style={{ textDecoration: 'none' }} href={referer || proposal.show_url}>
-            <i className="cap cap-arrow-65-1 icon--black" /> <FormattedMessage id={tradKeyToBack} />
+            <i className="cap cap-arrow-65-1 icon--black" /> <FormattedMessage id="proposal.back" />
           </a>
         </div>
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
@@ -169,9 +167,6 @@ export default createFragmentContainer(container, {
       show_url
       project {
         opinionCanBeFollowed
-      }
-      form {
-        isProposalForm
       }
     }
   `,

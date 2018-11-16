@@ -18,9 +18,6 @@ Scenario: User wants to see proposals in a proposal step
                 }
               }
             }
-            form {
-              isProposalForm
-            }
          }
       }
     }",
@@ -45,69 +42,8 @@ Scenario: User wants to see proposals in a proposal step
                     },
                     @...@
                 ]
-            },
-           "form":{
-              "isProposalForm":true
-           }
+            }
         }
     }
-  }
-  """
-
-@database @questionAnswer
-Scenario: User wants to see questions in a question step
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "query ($questionStepId: ID!) {
-      step: node(id: $questionStepId) {
-        ... on ProposalStep {
-            proposals {
-              totalCount
-              edges {
-                node {
-                   id
-                   published
-                }
-              }
-            }
-            form {
-              isProposalForm
-            }
-         }
-      }
-    }",
-    "variables": {
-      "questionStepId": "collectQuestionVoteAvecClassement"
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-     "data":{
-        "step":{
-           "proposals":{
-              "totalCount":2,
-              "edges":[
-                 {
-                    "node":{
-                       "id":"question1",
-                       "published":true
-                    }
-                 },
-                 {
-                    "node":{
-                       "id":"question2",
-                       "published":true
-                    }
-                 }
-              ]
-           },
-           "form":{
-              "isProposalForm":false
-           }
-        }
-     }
   }
   """

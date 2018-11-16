@@ -31,26 +31,25 @@ Scenario: GraphQL client wants to get list of users who following a proposal
   Then the JSON response should match:
   """
   {
-     "data":{
-        "proposal":{
-           "followers":{
-              "edges":[
-                 {
-                    "cursor":"@string@",
-                    "node":{
-                       "id":"user1"
-                    }
-                 },
-                 {
-                    "cursor":"@string@",
-                    "node":{
-                       "id":"user2"
-                    }
-                 }
-              ]
-           }
+    "data": {
+      "proposal": {
+        "followers": {
+          "edges": [
+            {
+              "cursor": @string@,
+              "node": {
+                "id": "user2"
+              }
+            },{
+              "cursor": @string@,
+              "node": {
+                "id": "user1"
+              }
+            }
+          ]
         }
-     }
+      }
+    }
   }
   """
 

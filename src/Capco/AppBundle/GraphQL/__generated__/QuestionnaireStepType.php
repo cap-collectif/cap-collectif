@@ -21,7 +21,7 @@ final class QuestionnaireStepType extends ObjectType implements GeneratedTypeInt
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'QuestionnaireStep',
-            'description' => 'Fetches an object given its ID',
+            'description' => 'A step inside a project.',
             'fields' => function () use ($globalVariable) {
                 return [
                 'id' => [

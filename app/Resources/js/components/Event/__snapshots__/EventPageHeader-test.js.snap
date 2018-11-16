@@ -1,28 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventPageHeader /> renders correcty 1`] = `
-<Jumbotron
-  bsClass="jumbotron"
-  className="jumbotron--custom  jumbotron--bg-1 text-center"
-  componentClass="div"
+<div
+  className="container text-center"
 >
-  <div
-    className="container"
-  >
-    <h1>
-      <FormattedMessage
-        id="events-list"
-        values={Object {}}
-      />
-    </h1>
+  <h1>
     <FormattedMessage
-      id="number-of-events"
-      values={
-        Object {
-          "num": 10,
-        }
-      }
+      id="events-list"
+      values={Object {}}
     />
-  </div>
-</Jumbotron>
+  </h1>
+  <FormattedMessage
+    id="number-of-events"
+    values={
+      Object {
+        "num": 10,
+      }
+    }
+  />
+</div>
 `;

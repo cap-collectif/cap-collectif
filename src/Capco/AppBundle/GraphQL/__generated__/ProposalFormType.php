@@ -24,6 +24,18 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
             'description' => 'A budget form',
             'fields' => function () use ($globalVariable) {
                 return [
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'proposals' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
                     'args' => [
@@ -153,18 +165,6 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
-                ],
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
                 ],
                 'reference' => [
                     'type' => Type::nonNull(Type::string()),
@@ -578,66 +578,6 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     ],
                     'resolve' => null,
                     'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'isProposalForm' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Proposal form is type of Proposal or Question',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'usingDescription' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Proposal form using description field',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'usingIllustration' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Proposal form using illustration field',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'usingSummary' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Proposal form using summary field',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'descriptionMandatory' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Proposal form is description field is mandatory or not',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
