@@ -37,7 +37,6 @@ class Version20150427184111 extends AbstractMigration
                     break;
                 default:
                     die('unknown step type for step : ' . $step['id']);
-                    break;
             }
         }
 
@@ -198,7 +197,6 @@ class Version20150427184111 extends AbstractMigration
                     break;
                 default:
                     die('unknown step type for step : ' . $step['id']);
-                    break;
             }
         }
 
