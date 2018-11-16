@@ -310,6 +310,7 @@
 .opinion-type__description {
     color: $icon-gray-color;
     font-size: 16px;
+    overflow-y: visible;
 }
 
 @for $i from 0 through 2 {
