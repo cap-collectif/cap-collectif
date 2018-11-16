@@ -77,7 +77,9 @@ class OpinionInfos extends React.Component<Props> {
       <span className="excerpt">
         {' • '}
         <OverlayTrigger placement="top" overlay={OpinionUpdatedTooltip}>
-          <FormattedMessage id="opinion-updated-at" />
+          <span>
+            <FormattedMessage id="opinion-updated-at" />
+          </span>
         </OverlayTrigger>
       </span>
     );
