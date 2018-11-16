@@ -147,6 +147,9 @@ export class ProposalVoteModal extends React.Component<Props, State> {
 
   render() {
     const { dispatch, showModal, proposal, step, invalid, isSubmitting } = this.props;
+
+    const keyTradForModalVote =
+      step.form && step.form.isProposalForm ? 'project.votes.nb' : 'count-questions';
     return (
       <Modal
         animation={false}
@@ -190,7 +193,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
           </h3>
           <h4 className="excerpt d-ib mt-15">
             <FormattedMessage
-              id="project.votes.nb"
+              id={keyTradForModalVote}
               values={{
                 num: step.viewerVotes.totalCount,
               }}
@@ -261,6 +264,9 @@ export default createFragmentContainer(container, {
         viewerMeetsTheRequirements
         reason
         totalCount
+      }
+      form {
+        isProposalForm
       }
       ...RequirementsForm_step
       ...ProposalsUserVotesTable_step

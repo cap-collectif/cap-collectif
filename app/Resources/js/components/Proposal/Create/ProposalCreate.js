@@ -25,9 +25,13 @@ type Props = {
 export class ProposalCreate extends React.Component<Props> {
   render() {
     const { intl, proposalForm, showModal, pristine, submitting, dispatch } = this.props;
+    const modalTitleTradKey = proposalForm.isProposalForm ? 'proposal.add' : 'submit-a-question';
+
     return (
       <div>
+        {/* $FlowFixMe $refType */}
         <ProposalCreateButton
+          proposalForm={this.props.proposalForm}
           disabled={!proposalForm.contribuable}
           handleClick={() => dispatch(openCreateModal())}
         />
@@ -46,7 +50,7 @@ export class ProposalCreate extends React.Component<Props> {
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id="proposal.add" />
+              <FormattedMessage id={modalTitleTradKey} />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -102,7 +106,9 @@ export default createFragmentContainer(container, {
     fragment ProposalCreate_proposalForm on ProposalForm {
       id
       contribuable
+      isProposalForm
       ...ProposalForm_proposalForm
+      ...ProposalCreateButton_proposalForm
     }
   `,
 });

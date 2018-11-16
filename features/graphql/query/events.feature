@@ -19,40 +19,40 @@ Scenario: GraphQL client wants to list events
   """
   Then the JSON response should match:
   """
-{
-   "data":{
-      "events":{
-         "totalCount":13,
-         "edges":[
-            {
-               "node":{
-                  "id":"evenementFutureSansDateDeFin"
-               }
-            },
-            {
-               "node":{
-                  "id":"evenementPasseSansDateDeFin"
-               }
-            },
-            {
-               "node":{
-                  "id":"evenementSansDateDeFin"
-               }
-            },
-            {
-               "node":{
-                  "id":"event1"
-               }
-            },
-            {
-               "node":{
-                  "id":"event10"
-               }
-            }
-         ]
-      }
-   }
-}
+  {
+     "data":{
+        "events":{
+           "totalCount":13,
+           "edges":[
+              {
+                 "node":{
+                    "id":"evenementFutureSansDateDeFin"
+                 }
+              },
+              {
+                 "node":{
+                    "id":"evenementPasseSansDateDeFin"
+                 }
+              },
+              {
+                 "node":{
+                    "id":"evenementSansDateDeFin"
+                 }
+              },
+              {
+                 "node":{
+                    "id":"event1"
+                 }
+              },
+              {
+                 "node":{
+                    "id":"event10"
+                 }
+              }
+           ]
+        }
+     }
+  }
   """
 
 Scenario: GraphQL client wants to list current and future events
@@ -73,40 +73,40 @@ Scenario: GraphQL client wants to list current and future events
   """
   Then the JSON response should match:
   """
-{
-   "data":{
-      "events":{
-         "totalCount":10,
-         "edges":[
-            {
-               "node":{
-                  "id":"evenementFutureSansDateDeFin"
-               }
-            },
-            {
-               "node":{
-                  "id":"event1"
-               }
-            },
-            {
-               "node":{
-                  "id":"event4"
-               }
-            },
-            {
-               "node":{
-                  "id":"event6"
-               }
-            },
-            {
-               "node":{
-                  "id":"event3"
-               }
-            }
-         ]
-      }
-   }
-}
+  {
+     "data":{
+        "events":{
+           "totalCount":10,
+           "edges":[
+              {
+                 "node":{
+                    "id":"evenementFutureSansDateDeFin"
+                 }
+              },
+              {
+                 "node":{
+                    "id":"event4"
+                 }
+              },
+              {
+                 "node":{
+                    "id":"event3"
+                 }
+              },
+              {
+                 "node":{
+                    "id":"event1"
+                 }
+              },
+              {
+                 "node":{
+                    "id":"event6"
+                 }
+              }
+           ]
+        }
+     }
+  }
   """
 
 Scenario: GraphQL client wants to list passed events

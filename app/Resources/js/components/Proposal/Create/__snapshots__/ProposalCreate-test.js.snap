@@ -2,9 +2,18 @@
 
 exports[`<ProposalCreate /> should render correctly 1`] = `
 <div>
-  <ProposalCreateButton
+  <ForwardRef(Relay(ProposalCreateButton))
     disabled={false}
     handleClick={[Function]}
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "contribuable": true,
+        "id": "2",
+        "isProposalForm": true,
+      }
+    }
   />
   <Modal
     animation={false}
@@ -61,6 +70,109 @@ exports[`<ProposalCreate /> should render correctly 1`] = `
             "$refType": null,
             "contribuable": true,
             "id": "2",
+            "isProposalForm": true,
+          }
+        }
+      />
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[Function]}
+      />
+      <Connect(SubmitButton)
+        disabled={true}
+        id="confirm-proposal-create-as-draft"
+        isSubmitting={true}
+        label="global.save_as_draft"
+        onSubmit={[Function]}
+      />
+      <Connect(SubmitButton)
+        disabled={true}
+        id="confirm-proposal-create"
+        isSubmitting={true}
+        label="global.submit"
+        onSubmit={[Function]}
+      />
+    </ModalFooter>
+  </Modal>
+</div>
+`;
+
+exports[`<ProposalCreate /> should render correctly as QuestionForm 1`] = `
+<div>
+  <ForwardRef(Relay(ProposalCreateButton))
+    disabled={false}
+    handleClick={[Function]}
+    proposalForm={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "contribuable": true,
+        "id": "2",
+        "isProposalForm": false,
+      }
+    }
+  />
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="large"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="submit-a-question"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
+        proposal={null}
+        proposalForm={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "contribuable": true,
+            "id": "2",
+            "isProposalForm": false,
           }
         }
       />
