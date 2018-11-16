@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -33,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *   message="proposal_form.reference.not_unique"
  * )
  */
-class ProposalForm implements DisplayableInBOInterface
+class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
 {
     use UuidTrait;
     use ReferenceTrait;
@@ -639,26 +640,20 @@ class ProposalForm implements DisplayableInBOInterface
 
     public function isNotifyingCommentOnCreate(): bool
     {
-        return (
-            $this->notificationsConfiguration &&
-            $this->notificationsConfiguration->isOnCommentCreate()
-        );
+        return $this->notificationsConfiguration &&
+            $this->notificationsConfiguration->isOnCommentCreate();
     }
 
     public function isNotifyingCommentOnUpdate(): bool
     {
-        return (
-            $this->notificationsConfiguration &&
-            $this->notificationsConfiguration->isOnCommentUpdate()
-        );
+        return $this->notificationsConfiguration &&
+            $this->notificationsConfiguration->isOnCommentUpdate();
     }
 
     public function isNotifyingCommentOnDelete(): bool
     {
-        return (
-            $this->notificationsConfiguration &&
-            $this->notificationsConfiguration->isOnCommentDelete()
-        );
+        return $this->notificationsConfiguration &&
+            $this->notificationsConfiguration->isOnCommentDelete();
     }
 
     public function getNotificationsConfiguration(): ProposalFormNotificationConfiguration

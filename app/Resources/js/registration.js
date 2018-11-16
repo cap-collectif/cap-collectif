@@ -40,7 +40,6 @@ import ProposalAdminPageApp from './startup/ProposalAdminPageApp';
 import ProposalFormAdminPageApp from './startup/ProposalFormAdminPageApp';
 import QuestionnaireAdminPageApp from './startup/QuestionnaireAdminPageApp';
 import RegistrationAdminApp from './startup/RegistrationAdminApp';
-import AdminModalsApp from './startup/AdminModalsApp';
 import ShieldApp from './startup/ShieldApp';
 import GroupAdminPageApp from './startup/GroupAdminPageApp';
 import GroupCreateButtonApp from './startup/GroupCreateButtonApp';
@@ -87,7 +86,6 @@ ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
   AccountProfileFollowingsApp,
-  AdminModalsApp,
   RegistrationAdminApp,
   ChooseAUsernameApp,
   ParisUserNotValidApp,

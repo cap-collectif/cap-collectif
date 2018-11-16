@@ -274,25 +274,61 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         />
       </strong>
     </p>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
-      className="box-content__toolbar"
-      disabled={false}
-      onClick={[Function]}
-      style={
-        Object {
-          "marginBottom": 10,
+    <ReactRelayQueryRenderer
+      environment={
+        RelayModernEnvironment {
+          "__setNet": [Function],
+          "_deferrableSelections": Array [],
+          "_network": Object {
+            "execute": [Function],
+            "executeWithEvents": [Function],
+          },
+          "_publishQueue": RelayPublishQueue {
+            "_appliedOptimisticUpdates": Array [],
+            "_backup": Object {},
+            "_handlerProvider": [Function],
+            "_pendingBackupRebase": false,
+            "_pendingData": Array [],
+            "_pendingOptimisticUpdates": Array [],
+            "_pendingUpdaters": Array [],
+            "_store": RelayMarkSweepStore {
+              "_gcEnabled": true,
+              "_hasScheduledGC": false,
+              "_index": 0,
+              "_recordSource": Object {},
+              "_roots": Array [],
+              "_subscriptions": Array [],
+              "_updatedRecordIDs": Object {},
+            },
+          },
+          "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
+            "_hasScheduledGC": false,
+            "_index": 0,
+            "_recordSource": Object {},
+            "_roots": Array [],
+            "_subscriptions": Array [],
+            "_updatedRecordIDs": Object {},
+          },
+          "configName": undefined,
+          "unstable_internal": Object {
+            "areEqualSelectors": [Function],
+            "createFragmentSpecResolver": [Function],
+            "createOperationSelector": [Function],
+            "getDataIDsFromObject": [Function],
+            "getFragment": [Function],
+            "getRequest": [Function],
+            "getSelector": [Function],
+            "getSelectorList": [Function],
+            "getSelectorsFromObject": [Function],
+            "getVariablesFromObject": [Function],
+          },
         }
       }
-    >
-      <FormattedMessage
-        id="link_action_create"
-        values={Object {}}
-      />
-    </Button>
+      query={[Function]}
+      render={[Function]}
+      variables={Object {}}
+    />
   </Well>
   <div
     className="row"
@@ -667,25 +703,61 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         />
       </strong>
     </p>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
-      className="box-content__toolbar"
-      disabled={true}
-      onClick={null}
-      style={
-        Object {
-          "marginBottom": 10,
+    <ReactRelayQueryRenderer
+      environment={
+        RelayModernEnvironment {
+          "__setNet": [Function],
+          "_deferrableSelections": Array [],
+          "_network": Object {
+            "execute": [Function],
+            "executeWithEvents": [Function],
+          },
+          "_publishQueue": RelayPublishQueue {
+            "_appliedOptimisticUpdates": Array [],
+            "_backup": Object {},
+            "_handlerProvider": [Function],
+            "_pendingBackupRebase": false,
+            "_pendingData": Array [],
+            "_pendingOptimisticUpdates": Array [],
+            "_pendingUpdaters": Array [],
+            "_store": RelayMarkSweepStore {
+              "_gcEnabled": true,
+              "_hasScheduledGC": false,
+              "_index": 0,
+              "_recordSource": Object {},
+              "_roots": Array [],
+              "_subscriptions": Array [],
+              "_updatedRecordIDs": Object {},
+            },
+          },
+          "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
+            "_hasScheduledGC": false,
+            "_index": 0,
+            "_recordSource": Object {},
+            "_roots": Array [],
+            "_subscriptions": Array [],
+            "_updatedRecordIDs": Object {},
+          },
+          "configName": undefined,
+          "unstable_internal": Object {
+            "areEqualSelectors": [Function],
+            "createFragmentSpecResolver": [Function],
+            "createOperationSelector": [Function],
+            "getDataIDsFromObject": [Function],
+            "getFragment": [Function],
+            "getRequest": [Function],
+            "getSelector": [Function],
+            "getSelectorList": [Function],
+            "getSelectorsFromObject": [Function],
+            "getVariablesFromObject": [Function],
+          },
         }
       }
-    >
-      <FormattedMessage
-        id="link_action_create"
-        values={Object {}}
-      />
-    </Button>
+      query={[Function]}
+      render={[Function]}
+      variables={Object {}}
+    />
   </Well>
   <div
     className="row"

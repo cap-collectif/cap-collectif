@@ -51,7 +51,7 @@ exports[`<RegistrationModal /> renders a form 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(ReduxForm) />
+    <Connect(InjectIntl(ReduxForm)) />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"
@@ -132,7 +132,7 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(ReduxForm) />
+    <Connect(InjectIntl(ReduxForm)) />
     <WYSIWYGRender
       className="text-center small excerpt mt-15"
       value="Texte du bas"
@@ -207,7 +207,7 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(ReduxForm) />
+    <Connect(InjectIntl(ReduxForm)) />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"
@@ -278,7 +278,7 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
     <Connect(LoginSocialButtons)
       prefix="registration."
     />
-    <Connect(ReduxForm) />
+    <Connect(InjectIntl(ReduxForm)) />
   </ModalBody>
   <ModalFooter
     bsClass="modal-footer"

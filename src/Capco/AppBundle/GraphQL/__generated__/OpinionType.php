@@ -24,103 +24,6 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
             'description' => 'A contribution',
             'fields' => function () use ($globalVariable) {
                 return [
-                'followers' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('FollowerConnection'),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('FollowerOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'FOLLOWED_AT', 'direction' => 'DESC'],
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionFollowersConnection", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => 'Followers connection',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'viewerFollowingConfiguration' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('SubscriptionTypeValue'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionResolver", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
-                    },
-                    'description' => 'Identifies the viewer following configuration on the entity.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
-                ],
-                'viewerIsFollowing' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowOpinionResolver", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
-                    },
-                    'description' => 'Identifies if the viewer is following the entity.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
-                ],
-                'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The author of the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The id of the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'contribuable' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
@@ -129,110 +32,6 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         return $value->canContribute();
                     },
                     'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'sources' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('SourceOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => 'The sources related to the sourceable.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'viewerSourcesUnpublished' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified cursor.',
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => 'Returns the first `n` elements from the list.',
-                            'defaultValue' => 100,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified cursor.',
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => 'Returns the last `n` elements from the list.',
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableViewerSourcesUnpublishedResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
-                    },
-                    'description' => 'The viewer unpublished sources related to the sourceable (only visible by viewer).',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
-                ],
-                'availableSourceCategories' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('SourceCategory')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableAvailableCategoriesResolver", array()]);
-                    },
-                    'description' => 'The available sources categories of to the sourceable.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'updatedAt' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Identifies the date and time when the object was last updated.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -326,6 +125,70 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
+                ],
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'kind' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The kind of contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'related' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Return the related contribution if the contribution is related to another.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'show_url' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", array(0 => $value)]);
+                    },
+                    'description' => 'The HTTP show url for this contribution.',
+                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'url' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", array(0 => $value)]);
+                    },
+                    'description' => 'Url of the contribution',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
                 ],
                 'viewerHasReport' => [
                     'type' => Type::nonNull(Type::boolean()),
@@ -440,57 +303,194 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'kind' => [
-                    'type' => Type::nonNull(Type::string()),
+                'author' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The kind of contribution.',
+                    'description' => 'The author of the contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'related' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
+                'updatedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'Return the related contribution if the contribution is related to another.',
+                    'description' => 'Identifies the date and time when the object was last updated.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'show_url' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                'sources' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
                     'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last `n` elements from the list.',
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('SourceOrder'),
+                            'description' => null,
+                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", array(0 => $value)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args)]);
                     },
-                    'description' => 'The HTTP show url for this contribution.',
-                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'url' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", array(0 => $value)]);
-                    },
-                    'description' => 'Url of the contribution',
+                    'description' => 'The sources related to the sourceable.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
+                ],
+                'viewerSourcesUnpublished' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last `n` elements from the list.',
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableViewerSourcesUnpublishedResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'The viewer unpublished sources related to the sourceable (only visible by viewer).',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
+                'availableSourceCategories' => [
+                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('SourceCategory')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableAvailableCategoriesResolver", array()]);
+                    },
+                    'description' => 'The available sources categories of to the sourceable.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'followers' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('FollowerConnection'),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last `n` elements from the list.',
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('FollowerOrder'),
+                            'description' => null,
+                            'defaultValue' => ['field' => 'FOLLOWED_AT', 'direction' => 'DESC'],
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionFollowersConnection", array(0 => $value, 1 => $args)]);
+                    },
+                    'description' => 'Followers connection',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'viewerFollowingConfiguration' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('SubscriptionTypeValue'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowingConfigurationOpinionResolver", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'Identifies the viewer following configuration on the entity.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
+                'viewerIsFollowing' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowOpinionResolver", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'Identifies if the viewer is following the entity.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
                 'trashed' => [
                     'type' => Type::nonNull(Type::boolean()),

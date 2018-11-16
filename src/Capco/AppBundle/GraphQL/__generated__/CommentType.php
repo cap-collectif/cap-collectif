@@ -24,18 +24,6 @@ final class CommentType extends ObjectType implements GeneratedTypeInterface
             'description' => 'A comment',
             'fields' => function () use ($globalVariable) {
                 return [
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The id of the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'comments' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('CommentConnection')),
                     'args' => [
@@ -71,6 +59,70 @@ final class CommentType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableCommentsResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
                     },
                     'description' => 'The comments related to the commentable.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'kind' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The kind of contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'related' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Return the related contribution if the contribution is related to another.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'show_url' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", array(0 => $value)]);
+                    },
+                    'description' => 'The HTTP show url for this contribution.',
+                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'url' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", array(0 => $value)]);
+                    },
+                    'description' => 'Url of the contribution',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -184,58 +236,6 @@ final class CommentType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
                     },
                     'description' => 'Reason that the entity is not published.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'kind' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The kind of contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'related' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Return the related contribution if the contribution is related to another.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'show_url' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", array(0 => $value)]);
-                    },
-                    'description' => 'The HTTP show url for this contribution.',
-                    'deprecationReason' => $globalVariable->get('container')->get("Capco\\AppBundle\\GraphQL\\Deprecation")->toString(array("startAt" => "2019-01-01", "reason" => "This field does not respect naming consistency.", "supersededBy" => "Use `url` instead.")),
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'url' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", array(0 => $value)]);
-                    },
-                    'description' => 'Url of the contribution',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

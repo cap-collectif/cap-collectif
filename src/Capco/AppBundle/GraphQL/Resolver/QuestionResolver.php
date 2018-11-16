@@ -50,10 +50,8 @@ class QuestionResolver implements ResolverInterface
         return $form->isProposalInAZoneRequired()
             ? $districts
                 ->filter(function ($district) use ($longitude, $latitude) {
-                    return (
-                        $district->getGeojson() &&
-                        GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson())
-                    );
+                    return $district->getGeojson() &&
+                        GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson());
                 }, [])
                 ->toArray()
             : $districts->toArray();
@@ -91,10 +89,8 @@ class QuestionResolver implements ResolverInterface
     {
         $questions = $questionnaire->getRealQuestions()->toArray();
         usort($questions, function ($a, $b) {
-            return (
-                $a->getQuestionnaireAbstractQuestion()->getPosition() <=>
-                $b->getQuestionnaireAbstractQuestion()->getPosition()
-            );
+            return $a->getQuestionnaireAbstractQuestion()->getPosition() <=>
+                $b->getQuestionnaireAbstractQuestion()->getPosition();
         });
         return $questions;
     }
