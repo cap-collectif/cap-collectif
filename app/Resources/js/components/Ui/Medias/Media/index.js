@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Media as MediaBtsp } from 'react-bootstrap';
 import Body from './Body';
-import Left from './Left';
 import Heading from './Heading';
+import Left from './Left';
 
 type Props = {
   children?: any,

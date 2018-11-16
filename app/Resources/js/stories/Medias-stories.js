@@ -6,6 +6,7 @@ import DarkenGradientMedia from '../components/Ui/Medias/DarkenGradientMedia';
 import { UserAvatar } from '../components/User/UserAvatar';
 import RatioMediaContainer from '../components/Ui/Medias/RatioMediaContainer';
 import Media from '../components/Ui/Medias/Media/index';
+import Image from '../components/Ui/Medias/Image';
 
 storiesOf('Medias', module)
   .addDecorator(withKnobs)
@@ -90,7 +91,11 @@ storiesOf('Medias', module)
   .add(
     'Media',
     () => {
-      const url = text('Url', 'https://source.unsplash.com/collection/181462');
+      const src = text('Src', 'https://source.unsplash.com/collection/181462');
+      const alt = text('Alt', 'My alternative');
+      const width = number('Width', 45);
+      const height = number('Height', 45);
+      const headingComponentClass = text('Heading component class', 'h1');
 
       Media.Left.displayName = 'Media.Left';
       Media.Body.displayName = 'Media.Body';
@@ -99,10 +104,10 @@ storiesOf('Medias', module)
       return (
         <Media>
           <Media.Left>
-            <img src={url} width={45} height={45} alt="" />
+            <Image src={src} width={width} height={height} alt={alt} />
           </Media.Left>
           <Media.Body>
-            <Media.Heading componentClass="h1">Media Heading</Media.Heading>
+            <Media.Heading componentClass={headingComponentClass}>Media Heading</Media.Heading>
             <p>
               Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
               sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra
@@ -112,6 +117,25 @@ storiesOf('Medias', module)
           </Media.Body>
         </Media>
       );
+    },
+    {
+      info: {
+        text: `
+            <p>Lorem</p>
+        `,
+      },
+    },
+  )
+  .add(
+    'Image',
+    () => {
+      const src = text('Src', 'https://source.unsplash.com/collection/181462');
+      const alt = text('Alt', 'My alternative');
+      const width = text('Width', '400px');
+      const height = text('Height', '300px');
+      const objectFit = text('Object fit', 'cover');
+
+      return <Image src={src} width={width} height={height} objectFit={objectFit} alt={alt} />;
     },
     {
       info: {

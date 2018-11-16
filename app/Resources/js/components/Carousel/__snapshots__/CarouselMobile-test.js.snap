@@ -17,11 +17,14 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       className="item"
       key="0"
     >
-      <SixteenNineMedia>
+      <RatioMediaContainer
+        height={9}
+        width={16}
+      >
         <div
           className="bg--default bg--project"
         />
-      </SixteenNineMedia>
+      </RatioMediaContainer>
       <div
         className="carousel__content"
       >
@@ -59,15 +62,17 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       className="item"
       key="1"
     >
-      <SixteenNineMedia>
+      <RatioMediaContainer
+        height={9}
+        width={16}
+      >
         <DarkenGradientMedia
           height="100%"
           linearGradient={true}
-          title="Croissance, Innovation, Disruption"
           url="/media/croissance.jpg"
           width="100%"
         />
-      </SixteenNineMedia>
+      </RatioMediaContainer>
       <div
         className="carousel__content"
       >
@@ -105,11 +110,14 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       className="item"
       key="2"
     >
-      <SixteenNineMedia>
+      <RatioMediaContainer
+        height={9}
+        width={16}
+      >
         <div
           className="bg--default bg--project"
         />
-      </SixteenNineMedia>
+      </RatioMediaContainer>
       <div
         className="carousel__content"
       >
@@ -145,11 +153,14 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       className="item"
       key="3"
     >
-      <SixteenNineMedia>
+      <RatioMediaContainer
+        height={9}
+        width={16}
+      >
         <div
           className="bg--default bg--project"
         />
-      </SixteenNineMedia>
+      </RatioMediaContainer>
       <div
         className="carousel__content"
       >

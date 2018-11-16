@@ -5,14 +5,15 @@ import { Media as MediaBtsp } from 'react-bootstrap';
 
 type Props = {
   children?: any,
+  componentClass?: string,
 };
 
 export const Container = styled(MediaBtsp.Heading)``;
 
 export default class Heading extends PureComponent<Props> {
   render() {
-    const { children } = this.props;
+    const { children, componentClass } = this.props;
 
-    return <Container>{children}</Container>;
+    return <Container componentClass={componentClass}>{children}</Container>;
   }
 }

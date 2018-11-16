@@ -158,7 +158,10 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
   <div
     className="carousel__content"
   >
-    <SixteenNineMedia>
+    <RatioMediaContainer
+      height={9}
+      width={16}
+    >
       <div
         className="carousel-inner"
         id="carousel-inner"
@@ -363,7 +366,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
           Next
         </span>
       </a>
-    </SixteenNineMedia>
+    </RatioMediaContainer>
   </div>
 </div>
 `;
