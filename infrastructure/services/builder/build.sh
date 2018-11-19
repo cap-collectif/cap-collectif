@@ -28,6 +28,7 @@ if [ "$PRODUCTION" ]; then
 
   php bin/console translation:download --env=prod
   yarn run update-js-translation
+  yarn run relay
   yarn run build:prod
 
   # For now SSR is disabled, so we skip this to avoid extra work
@@ -62,6 +63,9 @@ else
 
   echo "Downloading translations…"
   yarn run trad
+
+  echo "Generating GraphQL stuff…"
+  yarn run relay
 
   if [ -n "CI" ]; then
     yarn run build:prod
