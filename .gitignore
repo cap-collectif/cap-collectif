@@ -1,3 +1,6 @@
+# Generated files
+**/__generated__/**
+
 # Symfony directories
 /web/bundles/
 /web/images/*
