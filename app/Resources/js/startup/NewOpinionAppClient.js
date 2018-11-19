@@ -6,6 +6,7 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import environment from '../createRelayEnvironment';
 import NewOpinionButton from '../components/Opinion/NewOpinionButton';
+import type { NewOpinionAppClientQueryVariables } from './__generated__/NewOpinionAppClientQuery.graphql';
 
 export default ({
   sectionId,
@@ -30,10 +31,12 @@ export default ({
             }
           }
         `}
-        variables={{
-          sectionId,
-          consultationId,
-        }}
+        variables={
+          ({
+            sectionId,
+            consultationId,
+          }: NewOpinionAppClientQueryVariables)
+        }
         render={readyState => {
           if (readyState.props) {
             return (
