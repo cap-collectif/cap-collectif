@@ -3,6 +3,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -19,7 +20,7 @@ class SectionQuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('id', IntegerType::class);
-        $builder->add('temporaryId', PurifiedTextType::class);
+        $builder->add('temporaryId', TextType::class);
         $builder->add('title', PurifiedTextType::class);
         $builder->add('description', PurifiedTextType::class);
         $builder->add('helpText', PurifiedTextType::class);

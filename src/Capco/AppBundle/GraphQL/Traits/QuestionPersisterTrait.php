@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Traits;
 
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\PersistentCollection;
@@ -15,18 +16,20 @@ trait QuestionPersisterTrait
         ?array $questionsOrdered
     ): void {
         foreach ($questionnaireAbstractQuestions as $index => $abstractQuestion) {
+            /** @var AbstractQuestion $abstractQuestion **/
             $question = $abstractQuestion->getQuestion();
+
             if (!empty($questionsOrdered)) {
                 $newPosition = 0;
                 // we use the temporary id to update the questions position
                 foreach ($questionsOrdered as $key => $questionOrdered) {
-                    if ($questionOrdered === $question->getTemporaryId()) {
+                    if ($questionOrdered === $question->temporaryId) {
                         $newPosition = $key;
                     }
                 }
                 $abstractQuestion->setPosition($newPosition + $delta);
             } else {
-                //no previous question so we just put the index
+                //no question existing in DB so we just have to set index value
                 $abstractQuestion->setPosition($index);
             }
 
@@ -44,8 +47,17 @@ trait QuestionPersisterTrait
         }
     }
 
-    public function handleQuestions(FormInterface $form, $entity, array $arguments, string $type)
-    {
+    /**
+        Handle the update of the questions and some painful issues :
+        - Positionning
+        - Deleting/Updating QuestionChoice
+    **/
+    public function handleQuestions(
+        FormInterface $form,
+        $entity,
+        array $arguments,
+        string $type
+    ): void {
         $questionsOrderedByBase = $form
             ->getData()
             ->getRealQuestions()
@@ -128,8 +140,8 @@ trait QuestionPersisterTrait
 
         $form->submit($arguments, false);
         $qaq = $entity->getQuestions();
-        // We make sure a question position by questionnaire is unique
 
+        // We make sure a question position by questionnaire is unique
         if ($type === 'questionnaire') {
             $delta =
                 $this->questionRepo->getCurrentMaxPositionForQuestionnaire($entity->getId()) + 1;
