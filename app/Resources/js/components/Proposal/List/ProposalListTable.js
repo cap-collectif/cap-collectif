@@ -79,7 +79,7 @@ export class ProposalListTable extends React.Component<Props, State> {
 
           return {
             title: {
-              text: step.form.isProposalForm ? 'admin.fields.selection.proposal' : 'question-title',
+              text: 'admin.fields.selection.proposal',
               value: { displayTitle: getProposalTitle, url: node.url && node.url },
               width: '250px',
             },
@@ -356,23 +356,23 @@ export class ProposalListTable extends React.Component<Props, State> {
     return (
       <Table bordered hover tableLayoutFixed>
         <thead>
-          <tr>
-            {columns.map((column, key) => (
-              <th
-                style={{
-                  width: column.style.width ? column.style.width : '200px',
-                  display: column.hidden === true ? 'none' : 'table-cell',
-                }}
-                key={key}>
-                <FormattedMessage id={column.text || 'global.non_applicable'} />
-              </th>
-            ))}
-          </tr>
+        <tr>
+          {columns.map((column, key) => (
+            <th
+              style={{
+                width: column.style.width ? column.style.width : '200px',
+                display: column.hidden === true ? 'none' : 'table-cell',
+              }}
+              key={key}>
+              <FormattedMessage id={column.text || 'global.non_applicable'} />
+            </th>
+          ))}
+        </tr>
         </thead>
         <tbody>
-          {data.map((rows, key) => (
-            <tr key={key}>{this.getCell(rows)}</tr>
-          ))}
+        {data.map((rows, key) => (
+          <tr key={key}>{this.getCell(rows)}</tr>
+        ))}
         </tbody>
       </Table>
     );
@@ -386,10 +386,6 @@ export default createFragmentContainer(ProposalListTable, {
         usingThemes
         usingDistrict
         usingCategories
-        usingDescription
-        usingSummary
-        descriptionMandatory
-        isProposalForm
       }
     }
   `,

@@ -6,7 +6,6 @@ import { reduxForm, formValueSelector, Field, FieldArray, type FormProps } from 
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
 import { submitQuestion } from '../../utils/submitQuestion';
-import select from '../Form/Select';
 import ProposalFormAdminCategories from './ProposalFormAdminCategories';
 import ProposalFormAdminQuestions from './ProposalFormAdminQuestions';
 import ProposalFormAdminDistricts from './ProposalFormAdminDistricts';
@@ -24,9 +23,6 @@ type Props = RelayProps &
     usingAddress: boolean,
     usingCategories: boolean,
     usingThemes: boolean,
-    usingDescription: boolean,
-    usingIllustration: boolean,
-    usingSummary: boolean,
     usingDistrict: boolean,
     features: FeatureToggles,
   };
@@ -197,56 +193,6 @@ const headerPanelUsingDistrict = (
   </div>
 );
 
-const headerPanelUsingDescription = (
-  <div id="description">
-    <h4 className="pull-left">
-      <FormattedMessage id="proposal_form.description" />
-    </h4>
-    <div className="pull-right">
-      <Field
-        id="proposal_form_using_description_field"
-        name="usingDescription"
-        component={toggle}
-        normalize={val => !!val}
-      />
-    </div>
-    <div className="clearfix" />
-  </div>
-);
-
-const headerPanelUsingSummary = (
-  <div id="summary">
-    <h4 className="pull-left">
-      <FormattedMessage id="proposal_form.summary" />
-    </h4>
-    <div className="pull-right">
-      <Field
-        id="proposal_form_using_summary_field"
-        name="usingSummary"
-        component={toggle}
-        normalize={val => !!val}
-      />
-    </div>
-    <div className="clearfix" />
-  </div>
-);
-
-const headerPanelUsingIllustration = (
-  <div id="illustration">
-    <h4 className="pull-left">
-      <FormattedMessage id="proposal_form.illustration" />
-    </h4>
-    <div className="pull-right">
-      <Field
-        id="proposal_form_using_illustration_field"
-        name="usingIllustration"
-        component={toggle}
-        normalize={val => !!val}
-      />
-    </div>
-    <div className="clearfix" />
-  </div>
-);
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const input = {
     ...values,
@@ -274,9 +220,6 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
       usingAddress,
       usingThemes,
       usingCategories,
-      usingDescription,
-      usingSummary,
-      usingIllustration,
       usingDistrict,
       features,
     } = this.props;
@@ -304,19 +247,6 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
         <div className="box-content">
           <form onSubmit={handleSubmit}>
             <Field
-              name="isProposalForm"
-              component={select}
-              id="proposal_form_isProposal"
-              label={<FormattedMessage id="object-deposited" />}
-              options={[
-                { value: true, label: intl.formatMessage({ id: 'opinion.header.opinion' }) },
-                {
-                  value: false,
-                  label: intl.formatMessage({ id: 'admin.fields.response.question' }),
-                },
-              ]}
-            />
-            <Field
               name="description"
               component={component}
               type="editor"
@@ -329,7 +259,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               </h3>
             </div>
             <div className="panel panel-default">
-              <h4 className="panel-heading m-0">
+              <h4 className="panel-heading" style={{ margin: 0 }}>
                 <FormattedMessage id="proposal_form.title" />
               </h4>
               <div className="panel-body">
@@ -347,84 +277,68 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                 />
               </div>
             </div>
+            <div className="panel panel-default">
+              <h4 className="panel-heading" style={{ margin: 0 }}>
+                <FormattedMessage id="proposal_form.summary" />
+              </h4>
+              <div className="panel-body">
+                <Field
+                  name="summaryHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_summary_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="proposal_form.help_text" />
+                      {optional}
+                    </span>
+                  }
+                />
+              </div>
+            </div>
+            <div className="panel panel-default">
+              <h4 className="panel-heading" style={{ margin: 0 }}>
+                <FormattedMessage id="proposal_form.description" />
+              </h4>
+              <div className="panel-body">
+                <Field
+                  name="descriptionHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_description_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="proposal_form.help_text" />
+                      {optional}
+                    </span>
+                  }
+                />
+              </div>
+            </div>
+            <div className="panel panel-default">
+              <h4 className="panel-heading" style={{ margin: 0 }}>
+                <FormattedMessage id="proposal_form.illustration" />
+              </h4>
+              <div className="panel-body">
+                <Field
+                  name="illustrationHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_illustration_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="proposal_form.help_text" />
+                      {optional}
+                    </span>
+                  }
+                />
+              </div>
+            </div>
             <div className="box-header">
               <h3 className="box-title">
                 <FormattedMessage id="proposal_form.admin.configuration.optional_field" />
               </h3>
             </div>
-            <Panel
-              id="proposal_form_admin_description_panel_body"
-              expanded={usingDescription}
-              onToggle={() => {}}>
-              <Panel.Heading>{headerPanelUsingDescription}</Panel.Heading>
-              <Panel.Collapse>
-                <Panel.Body>
-                  <Field
-                    name="descriptionMandatory"
-                    component={component}
-                    type="checkbox"
-                    id="proposal_form_description_mandatory">
-                    <FormattedMessage id="proposal_form.required" />
-                  </Field>
-                  <Field
-                    name="descriptionHelpText"
-                    component={component}
-                    type="text"
-                    id="proposal_form_description_help_text"
-                    label={
-                      <span>
-                        <FormattedMessage id="proposal_form.help_text" />
-                        {optional}
-                      </span>
-                    }
-                  />
-                </Panel.Body>
-              </Panel.Collapse>
-            </Panel>
-            <Panel
-              id="proposal_form_admin_summary_panel_body"
-              expanded={usingSummary}
-              onToggle={() => {}}>
-              <Panel.Heading>{headerPanelUsingSummary}</Panel.Heading>
-              <Panel.Collapse>
-                <Panel.Body>
-                  <Field
-                    name="summaryHelpText"
-                    component={component}
-                    type="text"
-                    id="proposal_form_summary_help_text"
-                    label={
-                      <span>
-                        <FormattedMessage id="proposal_form.help_text" />
-                        {optional}
-                      </span>
-                    }
-                  />
-                </Panel.Body>
-              </Panel.Collapse>
-            </Panel>
-            <Panel
-              id="proposal_form_admin_illustration_panel_body"
-              expanded={usingIllustration}
-              onToggle={() => {}}>
-              <Panel.Heading>{headerPanelUsingIllustration}</Panel.Heading>
-              <Panel.Collapse>
-                <Panel.Body>
-                  <Field
-                    name="illustrationHelpText"
-                    component={component}
-                    type="text"
-                    id="proposal_form_illustration_help_text"
-                    label={
-                      <span>
-                        <FormattedMessage id="proposal_form.help_text" />
-                        {optional}
-                      </span>
-                    }
-                  />
-                </Panel.Body>
-              </Panel.Collapse>
-            </Panel>
             {features.themes && (
               <Panel expanded={usingThemes} onToggle={() => {}}>
                 <Panel.Heading>{headerPanelUsingThemes}</Panel.Heading>
@@ -500,8 +414,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                     }
                   />
                   <p className="link">
-                    <Glyphicon glyph="info-sign" />{' '}
-                    <FormattedMessage id="the-proposals-will-be-posted-on-a-map" />
+                    <Glyphicon glyph="info-sign" /> Les propositions seront affichées sur une carte
                   </p>
                   <Field
                     name="proposalInAZoneRequired"
@@ -510,8 +423,8 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                     id="proposal_form_district_proposalInAZoneRequired">
                     <FormattedMessage id="proposal_form.proposalInAZoneRequired" />
                   </Field>
-                  <h5 className="mt-20 font-weight-bold">
-                    <FormattedMessage id="initial-position-of-the-map" />
+                  <h5 style={{ fontWeight: 'bold', marginTop: 20 }}>
+                    Position initiale de la carte
                   </h5>
                   <Row>
                     <Col xs={12} md={4}>
@@ -648,10 +561,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
   usingCategories: selector(state, 'usingCategories'),
   usingThemes: selector(state, 'usingThemes'),
   usingDistrict: selector(state, 'usingDistrict'),
-  usingDescription: selector(state, 'usingDescription'),
-  usingSummary: selector(state, 'usingSummary'),
-  usingIllustration: selector(state, 'usingIllustration'),
-  isProposalForm: selector(state, 'isProposalForm'),
   features: state.default.features,
 });
 
@@ -669,10 +578,6 @@ export default createFragmentContainer(
       usingCategories
       categoryMandatory
       usingAddress
-      usingDescription
-      usingSummary
-      usingIllustration
-      descriptionMandatory
       latMap
       lngMap
       zoomMap
@@ -688,7 +593,6 @@ export default createFragmentContainer(
       districtHelpText
       districtMandatory
       allowAknowledge
-      isProposalForm
       districts {
         id
         name

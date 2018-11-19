@@ -28,16 +28,16 @@ Scenario: Logged in API client wants to remove a vote for an comment
   Then the JSON response should match:
   """
   {
-     "data":{
-        "removeCommentVote":{
-           "contribution":{
-              "id":"eventComment1",
-              "votes":{
-                 "totalCount":2
-              }
-           },
-           "deletedVoteId":"Q29tbWVudFZvdGU6NTAwMTE="
-        }
-     }
+    "data": {
+      "removeCommentVote": {
+        "contribution": {
+          "id": "eventComment1",
+          "votes": {
+            "totalCount": 0
+          }
+        },
+        "deletedVoteId": "Q29tbWVudFZvdGU6NTAwMTE="
+      }
+    }
   }
   """

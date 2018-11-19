@@ -3171,21 +3171,6 @@ type ProposalForm implements Node {
   # Identifies the step that use the proposal form.
   step: CollectStep
   allowAknowledge: Boolean!
-
-  # Proposal form is type of Proposal or Question
-  isProposalForm: Boolean!
-
-  # Proposal form using description field
-  usingDescription: Boolean!
-
-  # Proposal form using illustration field
-  usingIllustration: Boolean!
-
-  # Proposal form using summary field
-  usingSummary: Boolean!
-
-  # Proposal form is description field is mandatory or not
-  descriptionMandatory: Boolean!
 }
 
 # Ways in which proposal connections can be ordered.
@@ -5016,21 +5001,6 @@ input UpdateProposalFormInput {
   districts: [DistrictInput!]
   questions: [QuestionnaireAbstractQuestionInput!]
   allowAknowledge: Boolean
-
-  # Proposal form is type of Proposal or Question
-  isProposalForm: Boolean
-
-  # Proposal form using description field
-  usingDescription: Boolean
-
-  # Proposal form using illustration field
-  usingIllustration: Boolean
-
-  # Proposal form using summary field
-  usingSummary: Boolean
-
-  # Proposal form is description field is mandatory or not
-  descriptionMandatory: Boolean
   clientMutationId: String
 }
 

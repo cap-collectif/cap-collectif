@@ -1,6 +1,9 @@
 exports.config = {
   overrides: {
     production: {
+      plugins: {
+        off: ['eslint-brunch'],
+      },
       optimize: true,
       sourceMaps: true,
     },

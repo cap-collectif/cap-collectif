@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
@@ -7,7 +6,6 @@ use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Enum\ProposalFormObjectType;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -210,31 +208,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
      */
     private $evaluationForm;
 
-    /**
-     * @ORM\Column(name="object_type", nullable=false, type="string", options={"default": "proposal"})
-     */
-    private $objectType = ProposalFormObjectType::PROPOSAL;
-
-    /**
-     * @ORM\Column(name="using_description", type="boolean", nullable=false)
-     */
-    private $usingDescription = false;
-
-    /**
-     * @ORM\Column(name="description_mandatory", type="boolean", nullable=false)
-     */
-    private $descriptionMandatory = false;
-
-    /**
-     * @ORM\Column(name="using_summary", type="boolean", nullable=false)
-     */
-    private $usingSummary = false;
-
-    /**
-     * @ORM\Column(name="using_illustration", type="boolean", nullable=false)
-     */
-    private $usingIllustration = false;
-
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -340,7 +313,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->summaryHelpText;
     }
 
-    public function setSummaryHelpText(?string $summaryHelpText = null): self
+    public function setSummaryHelpText(string $summaryHelpText = null): self
     {
         $this->summaryHelpText = $summaryHelpText;
 
@@ -467,7 +440,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->descriptionHelpText;
     }
 
-    public function setDescriptionHelpText(?string $descriptionHelpText = null): self
+    public function setDescriptionHelpText(string $descriptionHelpText = null): self
     {
         $this->descriptionHelpText = $descriptionHelpText;
 
@@ -762,7 +735,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->illustrationHelpText;
     }
 
-    public function setIllustrationHelpText(?string $illustrationHelpText = null): self
+    public function setIllustrationHelpText(string $illustrationHelpText = null): self
     {
         $this->illustrationHelpText = $illustrationHelpText;
 
@@ -789,86 +762,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     public function setAllowAknowledge(bool $allowAknowledge): self
     {
         $this->allowAknowledge = $allowAknowledge;
-
-        return $this;
-    }
-
-    public function getObjectType(): string
-    {
-        return $this->objectType;
-    }
-
-    public function setObjectType(string $objectType): self
-    {
-        $this->objectType = $objectType;
-
-        return $this;
-    }
-
-    public function setIsProposalForm(bool $isProposal): self
-    {
-        $this->objectType =
-            $isProposal === true
-                ? ProposalFormObjectType::PROPOSAL
-                : ProposalFormObjectType::QUESTION;
-
-        return $this;
-    }
-
-    public function isProposalForm(): bool
-    {
-        return $this->objectType === ProposalFormObjectType::PROPOSAL;
-    }
-
-    public function getIsProposalForm(): bool
-    {
-        return $this->isProposalForm();
-    }
-
-    public function getUsingDescription(): bool
-    {
-        return $this->usingDescription;
-    }
-
-    public function setUsingDescription(bool $usingDescription): self
-    {
-        $this->usingDescription = $usingDescription;
-
-        return $this;
-    }
-
-    public function getUsingSummary(): bool
-    {
-        return $this->usingSummary;
-    }
-
-    public function setUsingSummary(bool $usingSummary): self
-    {
-        $this->usingSummary = $usingSummary;
-
-        return $this;
-    }
-
-    public function getUsingIllustration(): bool
-    {
-        return $this->usingIllustration;
-    }
-
-    public function setUsingIllustration(bool $usingIllustration): self
-    {
-        $this->usingIllustration = $usingIllustration;
-
-        return $this;
-    }
-
-    public function getDescriptionMandatory(): bool
-    {
-        return $this->descriptionMandatory;
-    }
-
-    public function setDescriptionMandatory(bool $descriptionMandatory): self
-    {
-        $this->descriptionMandatory = $descriptionMandatory;
 
         return $this;
     }

@@ -30,8 +30,6 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
 
   render() {
     const { step, dirty, submitting, dispatch } = this.props;
-    const keyTradProjectCount = step.form.isProposalForm ? 'project.votes.nb' : 'count-questions';
-
     if (!step.viewerVotes) {
       return null;
     }
@@ -62,7 +60,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
           </h3>
           <h4 className="excerpt d-ib">
             <FormattedMessage
-              id={keyTradProjectCount}
+              id="project.votes.nb"
               values={{
                 num: step.viewerVotes.totalCount,
               }}
@@ -115,9 +113,6 @@ export default createFragmentContainer(container, {
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         totalCount
         ...ProposalsUserVotesTable_votes
-      }
-      form {
-        isProposalForm
       }
     }
   `,

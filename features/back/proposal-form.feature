@@ -5,8 +5,6 @@ Feature: Edit a proposal form
 Scenario: Logged in admin wants edit a proposal form page content
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
-  And I check a proposal form checkbox "summary toggle"
-  And I check a proposal form checkbox "illustration toggle"
   And I fill in the following:
     | proposal_form_description | test intro text |
     | titleHelpText | test help text |
@@ -64,7 +62,7 @@ Scenario: Logged in admin wants edit a proposal form on notification tab
   And I wait 2 seconds
   Then I should see "global.saved"
 
-@database @javascript
+@database
 Scenario: Logged in admin wants edit a proposal form on settings tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"

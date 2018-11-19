@@ -1,7 +1,3 @@
-# Generated files
-**/__generated__/**
-schema.internal.json
-
 # Symfony directories
 /web/bundles/
 /web/images/*
