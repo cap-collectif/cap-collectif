@@ -141,10 +141,10 @@ export class EventListFilters extends React.Component<Props> {
             className="w-25"
             id="event-list-filters-d">
             <Button className="btn--outline btn-dark-gray" id="event-button-filter">
-              <i className="cap-filter-1 mr-5" />
+              <i className="cap cap-filter-1 small mr-5 r-0" />
               <FormattedMessage id="link_filters" />
               {filterCount()}
-              <i className="cap-arrow-60 ml-5" />
+              <i className="cap cap-triangle-down ml-5 r-0" />
             </Button>
           </OverlayTrigger>
           {config.isMobile && addToggleViewButton && features.display_map ? (
