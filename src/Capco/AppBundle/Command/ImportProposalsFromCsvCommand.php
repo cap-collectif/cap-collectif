@@ -2,25 +2,29 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\District;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
-use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Repository\DistrictRepository;
+use Capco\AppBundle\Repository\ProposalCategoryRepository;
+use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Utils\Map;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 {
-    const HEADERS = [
+    private static $headers = [
         'name',
         'author',
         'district_name',
@@ -31,6 +35,8 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         'summary',
         'body',
     ];
+    private const OPTIONNAL_PROPOSAL_ILLUSTRATION_HEADER_NAME = 'proposal_illustration';
+
     private $filePath;
     private $delimiter;
     private $om;
@@ -38,10 +44,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     private $questionsMap;
     private $newUsersMap;
 
-    protected function configure()
+    protected static $defaultName = 'capco:import:proposals-from-csv';
+
+    protected function configure(): void
     {
-        $this->setName('capco:import:proposals-from-csv')
-            ->setDescription('Import proposals from CSV file with specified proposal form id')
+        $this->setDescription('Import proposals from CSV file with specified proposal form id')
             ->addArgument(
                 'filePath',
                 InputArgument::REQUIRED,
@@ -52,10 +59,21 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 InputArgument::REQUIRED,
                 'Please provide the proposal form id where you want to import proposals.'
             )
-            ->addArgument('delimiter', InputArgument::OPTIONAL, ', or ;');
+            ->addArgument(
+                'illustrations-path',
+                InputArgument::OPTIONAL,
+                'Please provide the path where are located illustrations (if any)'
+            )
+            ->addOption(
+                'illustrations',
+                'i',
+                InputOption::VALUE_NONE,
+                'Does the csv has illustrations path ?'
+            )
+            ->addArgument('delimiter', InputArgument::OPTIONAL, ', or ;', ';');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         return $this->import($input, $output);
     }
@@ -73,7 +91,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
         /* @var ProposalForm $proposalForm */
         $this->proposalForm = $this->getContainer()
-            ->get('capco.proposal_form.repository')
+            ->get(ProposalFormRepository::class)
             ->find($proposalFormId);
         $this->questionsMap = [];
         $this->newUsersMap = [];
@@ -110,11 +128,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         foreach ($rows as $row) {
             // if first line : check if headers are valid
             if (1 === $loop) {
-                if (!$this->isValidHeaders($row, $output)) {
+                if (!$this->isValidHeaders($row, $output, $input)) {
                     return $this->generateContentException($output);
                 }
             } else {
-                if (!$this->isValidRow($row, $output)) {
+                if (!$this->isValidRow($row, $output, $input)) {
                     return $this->generateContentException($output);
                 }
 
@@ -123,7 +141,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
                 /** @var User $author */
                 $author = $this->getContainer()
-                    ->get('capco.user.repository')
+                    ->get(UserRepository::class)
                     ->findOneBy([
                         'email' => $row[1],
                     ]);
@@ -150,14 +168,14 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                 }
 
                 $district = $this->getContainer()
-                    ->get('capco.district.repository')
+                    ->get(DistrictRepository::class)
                     ->findOneBy([
                         'name' => trim($row[2]),
                         'form' => $this->proposalForm,
                     ]);
 
                 $status = $this->getContainer()
-                    ->get('capco.status.repository')
+                    ->get(StatusRepository::class)
                     ->findOneBy([
                         'name' => trim($row[4]),
                         'step' => $this->proposalForm->getStep(),
@@ -181,7 +199,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
                 if ('' !== $row[6]) {
                     $proposalCategory = $this->getContainer()
-                        ->get('capco.proposal_category.repository')
+                        ->get(ProposalCategoryRepository::class)
                         ->findOneBy([
                             'name' => trim($row[6]),
                             'form' => $this->proposalForm,
@@ -195,8 +213,23 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
 
                 $proposal->setBody(Text::escapeHtml($row[8]));
 
-                if (\count($row) > \count(self::HEADERS)) {
-                    for ($i = \count(self::HEADERS); isset($row[$i]); ++$i) {
+                if ($input->hasOption('illustrations')) {
+                    try {
+                        $filePath =
+                            $input->getArgument('illustrations-path') . '/' . $row[9] . '.jpg';
+                        if ('' !== $row[9] && file_exists($filePath)) {
+                            $thumbnail = $this->getContainer()
+                                ->get(MediaManager::class)
+                                ->createImageFromPath($filePath);
+                            $proposal->setMedia($thumbnail);
+                        }
+                    } catch (\Exception $exception) {
+                        $output->writeln('<info>' . $filePath . '</info> not found.');
+                    }
+                }
+
+                if (\count($row) > \count(self::$headers)) {
+                    for ($i = \count(self::$headers); isset($row[$i]); ++$i) {
                         $reponse = (new ValueResponse())
                             ->setQuestion($this->questionsMap[$i])
                             ->setValue($row[$i]);
@@ -248,7 +281,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     protected function isValidRow($row, $output): bool
     {
         $hasError = false;
-        if (\count($row) < \count(self::HEADERS)) {
+        if (\count($row) < \count(self::$headers)) {
             $hasError = true;
         }
 
@@ -264,11 +297,15 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         return true;
     }
 
-    protected function isValidHeaders($row, $output): bool
+    protected function isValidHeaders($row, $output, InputInterface $input): bool
     {
-        if (self::HEADERS !== $row) {
-            if (\count($row) > \count(self::HEADERS)) {
-                for ($i = \count(self::HEADERS); isset($row[$i]); ++$i) {
+        $hasIllustrations = $input->getOption('illustrations');
+        if ($hasIllustrations) {
+            self::$headers[] = self::OPTIONNAL_PROPOSAL_ILLUSTRATION_HEADER_NAME;
+        }
+        if (self::$headers !== $row) {
+            if (\count($row) > \count(self::$headers)) {
+                for ($i = \count(self::$headers); isset($row[$i]); ++$i) {
                     $found = false;
                     foreach ($this->proposalForm->getRealQuestions() as $question) {
                         if ($question->getTitle() === $row[$i]) {
