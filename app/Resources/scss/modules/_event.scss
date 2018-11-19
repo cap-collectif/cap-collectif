@@ -5,7 +5,10 @@
     overflow: hidden;
     background-color: $page-bgc;
     text-align: center;
-    border-radius: 4px;
+
+    &:hover .event__body {
+        background-color: $page-bgc;
+    }
 
     .event__title {
         margin-top: 0;

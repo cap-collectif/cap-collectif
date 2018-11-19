@@ -59,3 +59,18 @@ UpdateProposalFormInput:
         type: '[QuestionnaireAbstractQuestionInput!]'
       allowAknowledge:
         type: 'Boolean'
+      isProposalForm:
+        type: 'Boolean'
+        description: 'Proposal form is type of Proposal or Question'
+      usingDescription:
+        type: 'Boolean'
+        description: 'Proposal form using description field'
+      usingIllustration:
+        type: 'Boolean'
+        description: 'Proposal form using illustration field'
+      usingSummary:
+        type: 'Boolean'
+        description: 'Proposal form using summary field'
+      descriptionMandatory:
+        type: 'Boolean'
+        description: 'Proposal form is description field is mandatory or not'

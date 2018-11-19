@@ -79,3 +79,10 @@ Capco\AppBundle\Entity\ProposalComment:
     body: <text(300)>
     publishedAt: '<dateTimeBetween("-2 days", "now")>'
     createdAt: <dateTimeBetween('-50 days', '-1 days')>
+  propComment{61..70}:
+    id: 'proposalComment<current()>'
+    proposal: '@question1'
+    Author: '@user<numberBetween(1, 5)>'
+    body: <text(300)>
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    createdAt: <dateTimeBetween('-50 days', '-1 days')>

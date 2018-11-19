@@ -67,7 +67,7 @@ export class EventPage extends React.Component<Props> {
             if (props) {
               return (
                 <div>
-                  <section className="jumbotron--bg-1 ">
+                  <section className="section--custom">
                     <EventPageHeader query={props} />
                   </section>
                   <section className="section--custom">

@@ -112,7 +112,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
         id="event-button-filter"
       >
         <i
-          className="cap cap-filter-1 small mr-5 r-0"
+          className="cap-filter-1 mr-5"
         />
         <FormattedMessage
           id="link_filters"
@@ -126,7 +126,7 @@ exports[`<EventListFilters /> renders correctly 1`] = `
           ) 
         </span>
         <i
-          className="cap cap-triangle-down ml-5 r-0"
+          className="cap-arrow-60 ml-5"
         />
       </Button>
     </OverlayTrigger>
@@ -226,7 +226,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
         id="event-button-filter"
       >
         <i
-          className="cap cap-filter-1 small mr-5 r-0"
+          className="cap-filter-1 mr-5"
         />
         <FormattedMessage
           id="link_filters"
@@ -240,7 +240,7 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
           ) 
         </span>
         <i
-          className="cap cap-triangle-down ml-5 r-0"
+          className="cap-arrow-60 ml-5"
         />
       </Button>
     </OverlayTrigger>

@@ -1,6 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
@@ -47,6 +49,7 @@ class UpdateProposalFormMutation implements MutationInterface
         $arguments = $input->getRawArguments();
         $id = $arguments['proposalFormId'];
 
+        /** @var ProposalForm $proposalForm */
         $proposalForm = $this->proposalFormRepo->find($id);
 
         if (!$proposalForm) {
@@ -64,7 +67,7 @@ class UpdateProposalFormMutation implements MutationInterface
                 }
             }
 
-            foreach ($proposalForm->getdistricts() as $position => $district) {
+            foreach ($proposalForm->getDistricts() as $position => $district) {
                 if (!in_array($district->getId(), $districtsIds)) {
                     $deletedDistrict = [
                         'id' => $district->getId(),
@@ -198,6 +201,7 @@ class UpdateProposalFormMutation implements MutationInterface
         }
 
         $this->em->flush();
+
         return ['proposalForm' => $proposalForm];
     }
 }

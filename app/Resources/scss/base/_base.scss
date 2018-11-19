@@ -351,7 +351,10 @@ svg.avatar-group {
 /* =============================== Comment ================================ */
 
 .highlighted-comment {
-  border: 1px solid $primary-color;
+  border: 1px solid #0488CC;
+  box-shadow: 0 0 5px 1.5px rgba(8, 121, 180, 0.46);
+  border-radius: 4px;
+  padding: 5px;
 }
 
 /* ======================= Consultation plan ============================*/
