@@ -213,7 +213,7 @@ trait QuestionnaireStepsTrait
         $this->assertElementContainsText($userReplySelector, 'reply.private');
     }
 
-    /**section--custom
+    /**
      * @Then I should not see my reply anymore
      */
     public function iShouldNotSeeMyReplyAnymore()
