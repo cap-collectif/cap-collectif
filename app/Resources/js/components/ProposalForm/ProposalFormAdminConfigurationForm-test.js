@@ -19,9 +19,6 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       usingCategories: true,
       categoryMandatory: true,
       usingAddress: true,
-      usingDescription: true,
-      usingIllustration: false,
-      usingSummary: false,
       latMap: 0,
       lngMap: 0,
       zoomMap: 0,
@@ -49,7 +46,7 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           title: 'Titre 1',
           required: false,
           helpText: null,
-          description: 'des cryptes Sion',
+          description: 'des cripte sion',
           type: 'text',
           private: false,
           kind: 'simple',
@@ -60,9 +57,6 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
     usingCategories: true,
     usingThemes: true,
     usingDistrict: true,
-    usingDescription: true,
-    usingIllustration: false,
-    usingSummary: false,
     features,
   };
 

@@ -5,7 +5,6 @@ use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use TweedeGolf\PrometheusClient\CollectorRegistry;
 use TweedeGolf\PrometheusClient\Format\TextFormatter;
@@ -15,16 +14,8 @@ class MetricsController extends Controller
     /**
      * @Route("/metrics", name="capco_metrics")
      */
-    public function metricsAction(Request $request): Response
+    public function metricsAction(): Response
     {
-        if (
-            $this->getParameter('kernel.environment') === 'prod' &&
-            $request->headers->get('Authorization') !==
-                $this->getParameter('prometheus_bearer_token')
-        ) {
-            $this->createAccessDeniedException();
-        }
-
         $registry = $this->get(CollectorRegistry::class);
         $formatter = new TextFormatter();
 
@@ -130,7 +121,6 @@ class MetricsController extends Controller
         $registry->getGauge('followerCount')->set($followerCount);
         $registry->getGauge('contributionTrashedCount')->set($contributionTrashedCount);
         $registry->getGauge('contributionUnpublishedCount')->set($contributionUnpublishedCount);
-        $registry->getGauge('newsletterSubscriptionCount')->set($newsletterSubscriptionCount);
 
         return new Response($formatter->format($registry->collect()), 200, [
             'Content-Type' => $formatter->getMimeType(),

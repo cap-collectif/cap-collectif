@@ -51,7 +51,6 @@ parameters:
   openid_authorization_url: '%env(SYMFONY_OPENID_AUTHORIZATION_URL)%'
   openid_access_token_url: '%env(SYMFONY_OPENID_ACCESS_TOKEN_URL)%'
   openid_userinfo_url: '%env(SYMFONY_OPENID_USERINFO_URL)%'
-  prometheus_bearer_token: '%env(SYMFONY_PROMETHEUS_BEARER_TOKEN)%'
 
   # Default values
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
@@ -93,7 +92,6 @@ parameters:
   env(SYMFONY_OPENID_AUTHORIZATION_URL): ~
   env(SYMFONY_OPENID_ACCESS_TOKEN_URL): ~
   env(SYMFONY_OPENID_USERINFO_URL): ~
-  env(SYMFONY_PROMETHEUS_BEARER_TOKEN): ~
 
 framework:
   secret: '%secret%'
@@ -334,9 +332,6 @@ tweede_golf_prometheus:
     contributionTrashedCount:
       gauge:
         help: Number of contributions which has been trashed
-    newsletterSubscriptionCount:
-      gauge:
-        help: Number of newsletter subscribers
 
 hautelook_alice:
   locale: '%locale%'

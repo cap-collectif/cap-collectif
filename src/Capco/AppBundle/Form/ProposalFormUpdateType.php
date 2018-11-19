@@ -25,15 +25,9 @@ class ProposalFormUpdateType extends AbstractType
             ->add('titleHelpText', PurifiedTextType::class)
 
             ->add('description', PurifiedTextType::class)
-
-            ->add('usingDescription', CheckboxType::class)
-            ->add('descriptionMandatory', CheckboxType::class)
             ->add('descriptionHelpText', PurifiedTextType::class)
 
-            ->add('usingSummary', CheckboxType::class)
             ->add('summaryHelpText', PurifiedTextType::class)
-
-            ->add('usingIllustration', CheckboxType::class)
             ->add('illustrationHelpText', PurifiedTextType::class)
 
             ->add('proposalInAZoneRequired', CheckboxType::class)
@@ -94,8 +88,7 @@ class ProposalFormUpdateType extends AbstractType
                 },
             ])
 
-            ->add('allowAknowledge', CheckboxType::class)
-            ->add('isProposalForm', CheckboxType::class);
+            ->add('allowAknowledge', CheckboxType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

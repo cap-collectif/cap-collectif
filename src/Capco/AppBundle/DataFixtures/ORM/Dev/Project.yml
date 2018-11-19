@@ -187,12 +187,3 @@ Capco\AppBundle\Entity\Project:
     publishedAt: <dateTimeBetween('-1 days', 'now')>
     visibility: 3
     restrictedViewerGroups: ['@group2', '@group3']
-  p21:
-    id: 'project21'
-    title: Questions/Responses
-    projectType: '@projectType4'
-    Author: '@user4'
-    themes: []
-    exportable: true
-    publishedAt: <dateTimeBetween('-50 days', 'now')>
-    visibility: 2

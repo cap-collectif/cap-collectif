@@ -15,9 +15,6 @@ describe('<ProposalVoteModal />', () => {
     id: 'step1',
     votesRanking: false,
     votesHelpText: 'Help',
-    form: {
-      isProposalForm: true,
-    },
     requirements: {
       viewerMeetsTheRequirements: false,
       reason: 'We need to collect',
@@ -41,28 +38,6 @@ describe('<ProposalVoteModal />', () => {
         invalid={false}
         proposal={proposal}
         step={step}
-        dispatch={jest.fn()}
-      />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly as Question', () => {
-    const questionStepForm = {
-      ...step,
-      form: {
-        isProposalForm: false,
-      },
-    };
-
-    const wrapper = shallow(
-      <ProposalVoteModal
-        showModal
-        viewerIsConfirmedByEmail
-        isSubmitting={false}
-        invalid={false}
-        proposal={proposal}
-        step={questionStepForm}
         dispatch={jest.fn()}
       />,
     );

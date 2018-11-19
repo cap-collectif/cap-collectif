@@ -12,12 +12,12 @@ trait TextableTrait
      */
     private $body;
 
-    public function getBody(): ?string
+    public function getBody()
     {
         return $this->body;
     }
 
-    public function getBodyText(): ?string
+    public function getBodyText()
     {
         return Text::htmlToString($this->body);
     }

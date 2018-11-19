@@ -11,8 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MediasController extends FOSRestController
 {
+    //TODO: Sécurité : Penser à sécuriser l'API d'upload de fichier désormais publique (un utilisateur non enregistré doit
+    // pouvoir uploader un fichier dans le formulaire d'inscription s'il y a un type de question média
     /**
-     * @Security("has_role('ROLE_USER')")
      * @Post("/files")
      * @View(statusCode=201, serializerGroups={"Default"})
      */
@@ -42,6 +43,6 @@ class MediasController extends FOSRestController
         $units = ['O', 'Ko', 'Mo', 'Go', 'To'];
         $power = $bytes > 0 ? floor(log($bytes, 1024)) : 0;
 
-        return number_format($bytes / (1024 ** $power), 1) . ' ' . $units[$power];
+        return number_format($bytes / 1024 ** $power, 1) . ' ' . $units[$power];
     }
 }
