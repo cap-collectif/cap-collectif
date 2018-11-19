@@ -54,3 +54,11 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     user: '@user4'
     createdAt: <(new \DateTime('yesterday'))>
     published: false
+  questionSelectionVote56:
+    id: 1057
+    proposal: '@question1'
+    selectionStep: '@selectionQuestionStepVoteClassement'
+    user: '@user4'
+    createdAt: <(new \DateTime('yesterday'))>
+    publishedAt: <(new \DateTime('yesterday'))>
+    private: false

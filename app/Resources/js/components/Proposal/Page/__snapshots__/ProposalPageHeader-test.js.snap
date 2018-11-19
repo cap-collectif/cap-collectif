@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`] = `
+exports[`<ProposalPageHeader /> should not render theme if proposal has none and form type is question 1`] = `
 <div
   className="proposal__header "
 >
@@ -18,7 +18,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
       />
        
       <FormattedMessage
-        id="proposal.back"
+        id="questions-list"
         values={Object {}}
       />
     </a>
@@ -107,6 +107,9 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
                 "username": "userAdmin",
               },
               "createdAt": "2015-01-01 00:00:00",
+              "form": Object {
+                "isProposalForm": false,
+              },
               "id": "1",
               "project": Object {
                 "opinionCanBeFollowed": true,
@@ -140,6 +143,9 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
             "username": "userAdmin",
           },
           "createdAt": "2015-01-01 00:00:00",
+          "form": Object {
+            "isProposalForm": false,
+          },
           "id": "1",
           "project": Object {
             "opinionCanBeFollowed": true,
@@ -157,7 +163,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
 </div>
 `;
 
-exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
+exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 1`] = `
 <div
   className="proposal__header "
 >
@@ -264,6 +270,9 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
                 "username": "userAdmin",
               },
               "createdAt": "2015-01-01 00:00:00",
+              "form": Object {
+                "isProposalForm": true,
+              },
               "id": "1",
               "project": Object {
                 "opinionCanBeFollowed": true,
@@ -299,6 +308,9 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
             "username": "userAdmin",
           },
           "createdAt": "2015-01-01 00:00:00",
+          "form": Object {
+            "isProposalForm": true,
+          },
           "id": "1",
           "project": Object {
             "opinionCanBeFollowed": true,

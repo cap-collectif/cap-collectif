@@ -1,7 +1,6 @@
 <?php
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
@@ -114,7 +113,6 @@ class UsersController extends FOSRestController
      */
     public function postUserAction(Request $request)
     {
-        $submittedData = $request->request->all();
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
 
@@ -124,13 +122,7 @@ class UsersController extends FOSRestController
             ? ApiAdminRegistrationFormType::class
             : ApiRegistrationFormType::class;
         $form = $this->createForm($formClass, $user);
-        if (isset($submittedData['responses'])) {
-            $submittedData['responses'] = $this->get(ResponsesFormatter::class)->format(
-                $submittedData['responses']
-            );
-        }
-
-        $form->submit($submittedData, false);
+        $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
             return $form;

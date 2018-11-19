@@ -78,6 +78,40 @@ Scenario: Logged in API client without all requirements wants to vote for a prop
   """
 
 @database
+Scenario: Logged in API client wants to vote for a question in a step with requirements
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: AddProposalVoteInput!) {
+      addProposalVote(input: $input) {
+        vote {
+          id
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "stepId": "selectionQuestionStepVoteClassement",
+        "proposalId": "question1"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+     "data":{
+        "addProposalVote":{
+           "vote":{
+              "id":"@string@"
+           }
+        }
+     }
+  }
+  """
+
+@database
 Scenario: Logged in API client wants to vote for a proposal
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:

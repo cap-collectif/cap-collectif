@@ -13,32 +13,27 @@ ProposalForm:
         type: 'String'
       summaryHelpText:
         type: 'String'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormSummaryHelpTextResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormSummaryHelpTextResolver", [value])'
       illustrationHelpText:
         type: 'String'
       title:
         type: 'String!'
       proposals:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, getUser(), serv("request_stack")])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, getUser(), serv("request_stack")])'
       viewerProposalsUnpublished:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerProposalsUnpublishedResolver", [value, args, getUser()])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerProposalsUnpublishedResolver", [value, args, getUser()])'
       categories:
         type: '[ProposalCategory!]!'
         args:
           order:
             type: 'CategoryOrderField'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", [value, args["order"]])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", [value, args["order"]])'
         description: 'Available categories for proposals of this form.'
       usingThemes:
         type: 'Boolean!'
       contribuable:
         type: 'Boolean!'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerCanContributeResolver", [value, getUser()])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerCanContributeResolver", [value, getUser()])'
         description: 'Viewer can contribute to the form'
       themeMandatory:
         type: 'Boolean!'
@@ -57,8 +52,7 @@ ProposalForm:
         args:
           order:
             type: 'DistrictOrderField'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormDistrictsResolver", [value, args["order"]])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormDistrictsResolver", [value, args["order"]])'
       districtMandatory:
         type: 'Boolean!'
       districtHelpText:
@@ -79,8 +73,7 @@ ProposalForm:
         type: 'String'
       questions:
         type: '[Question!]!'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value])'
       latMap:
         type: 'Float'
       lngMap:
@@ -90,8 +83,7 @@ ProposalForm:
       url:
         type: 'URI!'
         description: 'The HTTP url for this proposal form.'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormUrlResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormUrlResolver", [value])'
       notificationsConfiguration:
         type: 'NotificationsConfiguration!'
       evaluationForm:
@@ -102,3 +94,18 @@ ProposalForm:
         description: 'Identifies the step that use the proposal form.'
       allowAknowledge:
         type: 'Boolean!'
+      isProposalForm:
+        type: 'Boolean!'
+        description: 'Proposal form is type of Proposal or Question'
+      usingDescription:
+        type: 'Boolean!'
+        description: 'Proposal form using description field'
+      usingIllustration:
+        type: 'Boolean!'
+        description: 'Proposal form using illustration field'
+      usingSummary:
+        type: 'Boolean!'
+        description: 'Proposal form using summary field'
+      descriptionMandatory:
+        type: 'Boolean!'
+        description: 'Proposal form is description field is mandatory or not'
