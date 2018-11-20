@@ -25,6 +25,20 @@ while ! (mysqladmin ping --host=127.0.0.1)
   do sleep 0.1
 done
 
+echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ Admin..."
+while ! curl -sSf http://127.0.0.1:15672 > /dev/null;
+  do sleep 0.1
+done
+
+echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
+while ! rabbitmqctl status > /dev/null;
+  do sleep 0.1
+done
+
+echo "[$(date -u)][PHP-FPM] Updating RabbitMQ vhost to match schema..."
+gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml --erase-vhost --quiet
+echo "[$(date -u)][PHP-FPM] RabbitMQ vhost updated!"
+
 echo "[$(date -u)][PHP-FPM] Warming up cache and install bundle assets..."
 chmod -R 777 var/ && chown -R capco:capco var/
 gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
@@ -64,21 +78,6 @@ else
   fi
 fi
 echo "[$(date -u)][PHP-FPM] Database is ready!"
-
-echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ Admin..."
-while ! curl -sSf http://127.0.0.1:15672 > /dev/null;
-  do sleep 0.1
-done
-
-echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
-while ! rabbitmqctl status > /dev/null;
-  do sleep 0.1
-done
-
-echo "[$(date -u)][PHP-FPM] Updating RabbitMQ vhost to match schema..."
-gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml --erase-vhost --quiet
-echo "[$(date -u)][PHP-FPM] RabbitMQ vhost updated!"
-
 
 echo "[$(date -u)][PHP-FPM] Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &
