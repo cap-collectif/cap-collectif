@@ -3,7 +3,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
-use Doctrine\DBAL\Types\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
