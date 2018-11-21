@@ -9,6 +9,7 @@ use Box\Spout\Common\Type;
 use Box\Spout\Reader\CSV\Reader;
 use Box\Spout\Reader\ReaderFactory;
 use Box\Spout\Reader\ReaderInterface;
+use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class ExportContext implements KernelAwareContext
@@ -74,6 +75,25 @@ class ExportContext implements KernelAwareContext
     }
 
     /**
+     * @Then /^exported file with name "([^"]*)" should have header:$/
+     */
+    public function exportedFileWithNameShouldHaveHeader(
+        string $name,
+        PyStringNode $behatInput
+    ): void {
+        $path = $this->getExportDir() . "/$name";
+        $delimiter = $this->getConfigParameter('delimiter');
+        $csvLines = $this->getFileLines($path);
+        $csvHeader = array_shift($csvLines);
+        $behatLines = $behatInput->getStrings();
+        $behatHeader = explode($delimiter, array_shift($behatLines));
+
+        $output = $this->getCleanOutput($csvHeader, $csvLines, $behatHeader, $behatLines);
+
+        $this->compareHeader($output['behat']['header'], $output['csv']['header']);
+    }
+
+    /**
      * @Then /^exported file with name "([^"]*)" should contain:$/
      */
     public function exportedFileWithNameShouldCountain(string $name, PyStringNode $behatInput): void
@@ -127,6 +147,17 @@ class ExportContext implements KernelAwareContext
                 )
             );
         }
+
+        $this->compareHeaderOrder($expected, $actual);
+    }
+
+    private function compareHeaderOrder(array $expected, array $actual): void
+    {
+        Assert::assertEquals(
+            $expected,
+            $actual,
+            sprintf('Expecting to see headers order like %d , found %d', $expected, $actual)
+        );
     }
 
     private function compareLines(array $expected, array $actual): void
