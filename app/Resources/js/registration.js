@@ -10,8 +10,6 @@ import 'moment/locale/en-gb';
 import enLocaleData from 'react-intl/locale-data/en';
 import 'moment/locale/es';
 import esLocaleData from 'react-intl/locale-data/es';
-import 'moment/locale/de';
-import deLocaleData from 'react-intl/locale-data/de';
 
 import ProjectsListApp from './startup/ProjectsListAppClient';
 import ProposalStepPageApp from './startup/ProposalStepPageApp';
@@ -68,28 +66,18 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-// Use window.locale to set the current locale data
-const { locale } = window;
-if (locale) {
-  let localeData = frLocaleData;
-  switch (locale) {
-    case 'fr-FR':
-      localeData = frLocaleData;
-      break;
-    case 'en-GB':
-      localeData = enLocaleData;
-      break;
-    case 'es-ES':
-      localeData = esLocaleData;
-      break;
-    case 'de-DE':
-      localeData = deLocaleData;
-      break;
-    default:
-      break;
-  }
-  addLocaleData(localeData);
-  moment.locale(locale);
+const locale = window.locale;
+if (locale === 'fr-FR') {
+  addLocaleData(frLocaleData);
+  moment.locale('fr-FR');
+}
+if (locale === 'en-GB') {
+  addLocaleData(enLocaleData);
+  moment.locale('en-GB');
+}
+if (locale === 'es-ES') {
+  addLocaleData(esLocaleData);
+  moment.locale('es-ES');
 }
 
 window.__SERVER__ = false;
@@ -142,5 +130,5 @@ ReactOnRails.register({
   ProjectRestrictedAccessApp,
   ArgumentListApp,
   VoteListApp,
-  EventApp,
+  EventApp
 });

@@ -6,7 +6,7 @@ Scenario: GraphQL client wants question's choices and the number of answers to e
   When I send a GraphQL request:
   """
   {
-    questionnaire: node(id: "questionnaire4") {
+    questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlNA==") {
       ... on Questionnaire {
         questions {
           type

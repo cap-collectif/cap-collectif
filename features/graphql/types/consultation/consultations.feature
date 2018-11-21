@@ -108,7 +108,7 @@ Scenario: GraphQL client wants to list contributions in a consultation
   When I send a GraphQL request:
   """
   query {
-     consultations(id: "cstep5") {
+     consultations(id: "Q29uc3VsdGF0aW9uOmNzdGVwNQ==") {
       id
       title
       contributionConnection(first: 5, orderBy: {field: VOTE_COUNT, direction: DESC}) {
@@ -132,7 +132,7 @@ Scenario: GraphQL client wants to list contributions in a consultation
   "data": {
     "consultations": [
       {
-        "id": "cstep5",
+        "id": "Q29uc3VsdGF0aW9uOmNzdGVwNQ==",
         "title": "Elaboration de la Loi",
         "contributionConnection": {
           "totalCount": 12,

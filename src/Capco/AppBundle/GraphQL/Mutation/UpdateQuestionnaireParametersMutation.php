@@ -9,6 +9,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\Form\FormFactory;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class UpdateQuestionnaireParametersMutation implements MutationInterface
 {
@@ -29,11 +30,13 @@ class UpdateQuestionnaireParametersMutation implements MutationInterface
     public function __invoke(Argument $input): array
     {
         $arguments = $input->getRawArguments();
-        $id = $arguments['questionnaireId'];
-        $questionnaire = $this->questionnaireRepository->find($id);
+
+        $questionnaireId = GlobalId::fromGlobalId($arguments['questionnaireId'])['id'];
+        /** @var Questionnaire $questionnaire */
+        $questionnaire = $this->questionnaireRepository->find($questionnaireId);
 
         if (!$questionnaire) {
-            throw new UserError(sprintf('Unknown questionnaire with id "%s"', $id));
+            throw new UserError(sprintf('Unknown questionnaire with id "%s"', $questionnaireId));
         }
         unset($arguments['questionnaireId']);
 

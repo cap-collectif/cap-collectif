@@ -35,7 +35,7 @@ Scenario: GraphQL client wants to create a fusion
       "createProposalFusion": {
         "proposal": {
           "author": {
-            "id": "userAdmin"
+            "id": "VXNlcjp1c2VyQWRtaW4="
           },
           "title": "untitled-proposal",
           "adminUrl": @string@,

@@ -24,7 +24,7 @@ Scenario: User who decide to soft delete his account should have his contents an
   {
     "data": {
       "deleteAccount": {
-         "userId": "user5"
+         "userId": "VXNlcjp1c2VyNQ=="
       }
     }
   }
@@ -53,7 +53,7 @@ Scenario: User who decide to hard delete his account should have his contents an
   {
     "data": {
       "deleteAccount": {
-         "userId": "user5"
+         "userId": "VXNlcjp1c2VyNQ=="
       }
     }
   }

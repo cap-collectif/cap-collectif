@@ -3,13 +3,13 @@ Feature: Opinions
 
 @security
 Scenario: Anonymous API client wants to add an opinion
-  When I send a POST request to "/api/projects/project5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
+  When I send a POST request to "/api/projects/project5/steps/Q29uc3VsdGF0aW9uOmNzdGVwNQ==/opinion_types/opinionType10/opinions" with a valid opinion json
   Then the JSON response status code should be 401
 
 @security
 Scenario: logged in API client wants to add an opinion to a not enabled opinionType
   Given I am logged in to api as user
-  When I send a POST request to "/api/projects/project1/steps/cstep4/opinion_types/opinionType1/opinions" with a valid opinion json
+  When I send a POST request to "/api/projects/project1/steps/Q29uc3VsdGF0aW9uOmNzdGVwNA==/opinion_types/opinionType1/opinions" with a valid opinion json
   Then the JSON response status code should be 400
   And the JSON response should match:
   """
@@ -22,7 +22,7 @@ Scenario: logged in API client wants to add an opinion to a not enabled opinionT
 @database @rabbitmq
 Scenario: logged in API client wants to add an opinion
   Given I am logged in to api as user
-  When I send a POST request to "/api/projects/project5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
+  When I send a POST request to "/api/projects/project5/steps/Q29uc3VsdGF0aW9uOmNzdGVwNQ==/opinion_types/opinionType10/opinions" with a valid opinion json
   Then the JSON response status code should be 201
   Then the queue associated to "opinion_create" producer has messages below:
   | 0 | {"opinionId": "@uuid@"} |
@@ -30,11 +30,11 @@ Scenario: logged in API client wants to add an opinion
 @security @database
 Scenario: logged in API client can not add more than 2 opinions in a minute
   Given I am logged in to api as user
-  And I send a POST request to "/api/projects/project5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
+  And I send a POST request to "/api/projects/project5/steps/Q29uc3VsdGF0aW9uOmNzdGVwNQ==/opinion_types/opinionType10/opinions" with a valid opinion json
   And the JSON response status code should be 201
-  And I send a POST request to "/api/projects/project5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
+  And I send a POST request to "/api/projects/project5/steps/Q29uc3VsdGF0aW9uOmNzdGVwNQ==/opinion_types/opinionType10/opinions" with a valid opinion json
   And the JSON response status code should be 201
-  When I send a POST request to "/api/projects/project5/steps/cstep5/opinion_types/opinionType10/opinions" with a valid opinion json
+  When I send a POST request to "/api/projects/project5/steps/Q29uc3VsdGF0aW9uOmNzdGVwNQ==/opinion_types/opinionType10/opinions" with a valid opinion json
   Then the JSON response status code should be 400
   And the JSON response should match:
   """
@@ -47,7 +47,7 @@ Scenario: logged in API client can not add more than 2 opinions in a minute
 @database @rabbitmq
 Scenario: logged in API client wants to add an opinion with appendices
   Given I am logged in to api as user
-  When I send a POST request to "/api/projects/project5/steps/cstep5/opinion_types/opinionType5/opinions" with json:
+  When I send a POST request to "/api/projects/project5/steps/Q29uc3VsdGF0aW9uOmNzdGVwNQ==/opinion_types/opinionType5/opinions" with json:
   """ 
   {
     "title": "Nouveau titre",
@@ -71,7 +71,7 @@ Scenario: logged in API client wants to add an opinion with appendices
 @security
 Scenario: logged in API client wants to add an opinion with an appendixType from a wrong opinionType
   Given I am logged in to api as user
-  When I send a POST request to "/api/projects/project5/steps/cstep5/opinion_types/opinionType7/opinions" with json:
+  When I send a POST request to "/api/projects/project5/steps/Q29uc3VsdGF0aW9uOmNzdGVwNQ==/opinion_types/opinionType7/opinions" with json:
   """
   {
     "title": "Nouveau titre",
@@ -100,7 +100,7 @@ Scenario: logged in API client wants to add an opinion with an appendixType from
 @security
 Scenario: logged in API client wants to add an opinion with unknown appendixType
   Given I am logged in to api as user
-  When I send a POST request to "/api/projects/project5/steps/cstep5/opinion_types/opinionType7/opinions" with json:
+  When I send a POST request to "/api/projects/project5/steps/Q29uc3VsdGF0aW9uOmNzdGVwNQ==/opinion_types/opinionType7/opinions" with json:
   """
   {
     "title": "Nouveau titre",

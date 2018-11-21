@@ -14,6 +14,7 @@ export class ProposalStepPageHeader extends React.Component<Props> {
     const { step } = this.props;
 
     const queryCount = step.proposals.totalCount;
+    console.log(this.props);
     const total = step.allProposals.totalCount;
     const fusionCount = step.allProposals.fusionCount;
     const tradKeyForTotalCount =
@@ -44,23 +45,26 @@ export class ProposalStepPageHeader extends React.Component<Props> {
               }}
             />
           )}
-          {step.form && step.kind === 'collect' && fusionCount > 0 && (
-            <span className="font-weight-300 color-dark-gray">
-              {' '}
-              <FormattedMessage
-                id="proposal.count_fusions"
-                values={{
-                  num: fusionCount,
-                }}
-              />
+          {step.form &&
+            step.kind === 'collect' &&
+            fusionCount > 0 && (
+              <span className="font-weight-300 color-dark-gray">
+                {' '}
+                <FormattedMessage
+                  id="proposal.count_fusions"
+                  values={{
+                    num: fusionCount,
+                  }}
+                />
+              </span>
+            )}
+        </h3>
+        {step.form &&
+          step.kind === 'collect' && (
+            <span className="pull-right mb-20 mt-20">
+              <ProposalCreate proposalForm={step.form} />
             </span>
           )}
-        </h3>
-        {step.form && step.kind === 'collect' && (
-          <span className="pull-right mb-20 mt-20">
-            <ProposalCreate proposalForm={step.form} />
-          </span>
-        )}
       </React.Fragment>
     );
   }

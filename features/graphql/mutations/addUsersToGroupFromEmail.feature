@@ -9,7 +9,7 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
     "query": "mutation ($input: AddUsersToGroupFromEmailInput!) {
       addUsersToGroupFromEmail(input: $input) {
         importedUsers {
-          id
+          _id
           email
         }
         notFoundEmails
@@ -40,15 +40,15 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
       "addUsersToGroupFromEmail": {
         "importedUsers": [
           {
-            "id": "user1",
+            "_id": "user1",
             "email": "lbrunet@jolicode.com"
           },
           {
-            "id": "user2",
+            "_id": "user2",
             "email": "sfavot@jolicode.com"
           },
           {
-            "id": "user505",
+            "_id": "user505",
             "email": "pierre@cap-collectif.com"
           }
         ],
@@ -105,7 +105,7 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
     "query": "mutation ($input: AddUsersToGroupFromEmailInput!) {
       addUsersToGroupFromEmail(input: $input) {
         importedUsers {
-          id
+          _id
           email
         }
         notFoundEmails
@@ -135,15 +135,15 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
       "addUsersToGroupFromEmail": {
         "importedUsers": [
           {
-            "id": "user1",
+            "_id": "user1",
             "email": "lbrunet@jolicode.com"
           },
           {
-            "id": "user2",
+            "_id": "user2",
             "email": "sfavot@jolicode.com"
           },
           {
-            "id": "user505",
+            "_id": "user505",
             "email": "pierre@cap-collectif.com"
           }
         ],
@@ -165,7 +165,7 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
             totalCount
             edges {
               node {
-                id
+                _id
               }
             }
           }
@@ -185,9 +185,9 @@ Scenario: An admin wants to add a list of emails to a group with some wrong emai
         "users": {
           "totalCount": 3,
           "edges": [
-            { "node": {"id":"user1"} },
-            { "node": {"id":"user2"} },
-            { "node": {"id":"user505"} }
+            { "node": {"_id":"user1"} },
+            { "node": {"_id":"user2"} },
+            { "node": {"_id":"user505"} }
           ]
         }
       }

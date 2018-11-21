@@ -6,7 +6,7 @@ Scenario: GraphQL client wants to see the ranking of the choices answered
   When I send a GraphQL request:
   """
     {
-      questionnaire: node(id: "questionnaire4") {
+      questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlNA==") {
         ... on Questionnaire {
           questions {
             ... on MultipleChoiceQuestion {

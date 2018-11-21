@@ -44,10 +44,7 @@ const devConf = {
     // Moment.js is an extremely popular library that bundles large locale files
     // by default due to how Webpack interprets its code.
     new MomentLocalesPlugin({
-      // Locale names follow Moment.js behavior 
-      // – if a specific locale name (e.g. ru-ru) is absent, but a more generic locale (ru) is available,
-      // the generic one will be kept bundled.
-      localesToKeep: ['fr', 'en-gb', 'es', 'de'],
+      localesToKeep: ['fr', 'en-gb', 'es'],
     }),
     // Copy some legacy deps
     new CopyWebpackPlugin([

@@ -25,7 +25,7 @@ Scenario: GraphQL client wants to request his personal archive
     "data": {
       "requestUserArchive": {
         "viewer": {
-          "id": "userAdmin",
+          "id": "VXNlcjp1c2VyQWRtaW4=",
           "isArchiveDeleted": false,
           "isArchiveReady": false,
           "firstArchive": false
