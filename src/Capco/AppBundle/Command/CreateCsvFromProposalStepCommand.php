@@ -108,6 +108,7 @@ fragment voteInfos on ProposalVote{
   createdAt
   publishedAt
   anonymous
+  ranking
   author {
     ... authorInfos
   }
@@ -194,6 +195,7 @@ EOF;
         'proposal_votes_anonymous',
         'proposal_votes_author_id',
         'proposal_votes_author_username',
+        'proposal_votes_ranking',
         'proposal_votes_author_userType_id',
         'proposal_votes_author_userType_name',
         'proposal_comments_id',
@@ -333,6 +335,7 @@ EOF;
 
     protected const PROPOSAL_VOTE_HEADER_MAP = [
         'proposal_votes_id' => 'id',
+        'proposal_votes_ranking' => 'ranking',
         'proposal_votes_createdAt' => 'createdAt',
         'proposal_votes_publishedAt' => 'publishedAt',
         'proposal_votes_anonymous' => 'anonymous',

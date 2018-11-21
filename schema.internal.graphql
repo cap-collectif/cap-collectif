@@ -3409,6 +3409,9 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
 
   # Return the step.
   step: ProposalStep!
+
+  # Return the ranking of the vote (if any)
+  ranking: Int
 }
 
 # A connection to a list of items.

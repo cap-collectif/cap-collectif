@@ -19,6 +19,10 @@ ProposalVote:
       step:
         type: 'ProposalStep!'
         description: 'Return the step.'
+      ranking:
+        type: 'Int'
+        description: 'Return the ranking of the vote (if any)'
+        resolve: '@=value.getPosition() === null ? null : value.getPosition() + 1'
       author:
         type: 'InternalUser'
         description: 'The author of the contribution. If null, the vote is anonymous.'
