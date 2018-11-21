@@ -9,7 +9,6 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
-use Capco\UserBundle\Entity\User;
 
 class ProjectsResolver implements ResolverInterface
 {
@@ -22,14 +21,13 @@ class ProjectsResolver implements ResolverInterface
         $this->projectSearch = $projectSearch;
     }
 
-    public function __invoke(Argument $args, ?User $user = null): Connection
+    public function __invoke(Argument $args): Connection
     {
         $totalCount = 0;
 
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use (
                 $args,
-                $user,
                 &$totalCount
             ) {
 
@@ -46,15 +44,8 @@ class ProjectsResolver implements ResolverInterface
                     $term,
                     $this->getFilters($args)
                 );
-                $result = [];
-                /** @var Project $project */
-                foreach ($results['projects'] as $project) {
-                    if($project instanceof Project && $project->canDisplay($user)) {
-                        $result[] = $project;
-                    }
-                }
-                $totalCount = count($result);
-                return $result;
+                $totalCount = $results['count'];
+                return $results['projects'];
             });
             $connection = $paginator->auto($args, $totalCount);
             $connection->totalCount = $totalCount;

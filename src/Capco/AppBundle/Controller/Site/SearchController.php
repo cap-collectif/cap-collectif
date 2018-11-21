@@ -1,14 +1,13 @@
 <?php
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Proposal;
-use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Elasticsearch\HybridResult;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\SearchType as SearchForm;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class SearchController extends Controller
 {
@@ -59,16 +58,6 @@ class SearchController extends Controller
                     continue;
                 }
                 if (!$proposal->canDisplay($this->getUser())) {
-                    unset($searchResults['results'][$key]);
-                    --$searchResults['count'];
-                }
-            }
-            /** @var Project $project */
-            if (
-                $searchResult->getTransformed() instanceof Project &&
-                $project = $searchResult->getTransformed()
-            ) {
-                if (!$project->canDisplay($this->getUser())) {
                     unset($searchResults['results'][$key]);
                     --$searchResults['count'];
                 }
