@@ -2,7 +2,7 @@
 Feature: Events
 
 Scenario: GraphQL client wants to list events
-  Given I send a GraphQL POST request:
+  Given I send a preview GraphQL POST request:
   """
   {
     "query": "{
@@ -10,7 +10,7 @@ Scenario: GraphQL client wants to list events
         totalCount
         edges {
           node {
-            _id
+            id
           }
         }
       }
@@ -26,27 +26,27 @@ Scenario: GraphQL client wants to list events
            "edges":[
               {
                  "node":{
-                    "_id":"evenementFutureSansDateDeFin"
+                    "id":"evenementFutureSansDateDeFin"
                  }
               },
               {
                  "node":{
-                    "_id":"evenementPasseSansDateDeFin"
+                    "id":"evenementPasseSansDateDeFin"
                  }
               },
               {
                  "node":{
-                    "_id":"evenementSansDateDeFin"
+                    "id":"evenementSansDateDeFin"
                  }
               },
               {
                  "node":{
-                    "_id":"event1"
+                    "id":"event1"
                  }
               },
               {
                  "node":{
-                    "_id":"event10"
+                    "id":"event10"
                  }
               }
            ]
@@ -56,7 +56,7 @@ Scenario: GraphQL client wants to list events
   """
 
 Scenario: GraphQL client wants to list current and future events
-  Given I send a GraphQL POST request:
+  Given I send a preview GraphQL POST request:
   """
   {
     "query": "{
@@ -64,7 +64,7 @@ Scenario: GraphQL client wants to list current and future events
         totalCount
         edges {
           node {
-            _id
+            id
           }
         }
       }
@@ -80,27 +80,27 @@ Scenario: GraphQL client wants to list current and future events
            "edges":[
               {
                  "node":{
-                    "_id":"evenementFutureSansDateDeFin"
+                    "id":"evenementFutureSansDateDeFin"
                  }
               },
               {
                  "node":{
-                    "_id":"event4"
+                    "id":"event4"
                  }
               },
               {
                  "node":{
-                    "_id":"event3"
+                    "id":"event3"
                  }
               },
               {
                  "node":{
-                    "_id":"event1"
+                    "id":"event1"
                  }
               },
               {
                  "node":{
-                    "_id":"event6"
+                    "id":"event6"
                  }
               }
            ]
@@ -110,7 +110,7 @@ Scenario: GraphQL client wants to list current and future events
   """
 
 Scenario: GraphQL client wants to list passed events
-  Given I send a GraphQL POST request:
+  Given I send a preview GraphQL POST request:
   """
   {
     "query": "{
@@ -118,7 +118,7 @@ Scenario: GraphQL client wants to list passed events
         totalCount
         edges {
           node {
-            _id
+            id
           }
         }
       }
@@ -134,17 +134,17 @@ Scenario: GraphQL client wants to list passed events
          "edges":[
             {
                "node":{
-                  "_id":"evenementPasseSansDateDeFin"
+                  "id":"evenementPasseSansDateDeFin"
                }
             },
             {
                "node":{
-                  "_id":"evenementSansDateDeFin"
+                  "id":"evenementSansDateDeFin"
                }
             },
             {
                "node":{
-                  "_id":"event5"
+                  "id":"event5"
                }
             }
          ]
@@ -162,7 +162,8 @@ Scenario: GraphQL client wants to list event in project
       totalCount
         edges {
           node {
-            _id
+            id
+            themes { id }
             projects { id }
           }
         }
@@ -183,7 +184,15 @@ Scenario: GraphQL client wants to list event in project
          "edges":[
             {
                "node":{
-                  "_id":"evenementPasseSansDateDeFin",
+                  "id":"evenementPasseSansDateDeFin",
+                  "themes":[
+                     {
+                        "id":"theme1"
+                     },
+                     {
+                        "id":"theme2"
+                     }
+                  ],
                   "projects":[
                      {
                         "id":"project1"
@@ -193,7 +202,15 @@ Scenario: GraphQL client wants to list event in project
             },
             {
                "node":{
-                  "_id":"event1",
+                  "id":"event1",
+                  "themes":[
+                     {
+                        "id":"theme1"
+                     },
+                     {
+                        "id":"theme2"
+                     }
+                  ],
                   "projects":[
                      {
                         "id":"project1"
@@ -203,7 +220,15 @@ Scenario: GraphQL client wants to list event in project
             },
             {
                "node":{
-                  "_id":"event2",
+                  "id":"event2",
+                  "themes":[
+                     {
+                        "id":"theme1"
+                     },
+                     {
+                        "id":"theme2"
+                     }
+                  ],
                   "projects":[
                      {
                         "id":"project1"
@@ -213,7 +238,10 @@ Scenario: GraphQL client wants to list event in project
             },
             {
                "node":{
-                  "_id":"event3",
+                  "id":"event3",
+                  "themes":[
+
+                  ],
                   "projects":[
                      {
                         "id":"project1"
@@ -236,7 +264,7 @@ Scenario: GraphQL client wants to list events with theme2
       totalCount
         edges {
           node {
-            _id
+            id
             themes {
               id
             }
@@ -259,7 +287,7 @@ Scenario: GraphQL client wants to list events with theme2
          "edges":[
             {
                "node":{
-                  "_id":"evenementPasseSansDateDeFin",
+                  "id":"evenementPasseSansDateDeFin",
                   "themes":[
                      {
                         "id":"theme1"
@@ -272,7 +300,7 @@ Scenario: GraphQL client wants to list events with theme2
             },
             {
                "node":{
-                  "_id":"event1",
+                  "id":"event1",
                   "themes":[
                      {
                         "id":"theme1"
@@ -285,7 +313,7 @@ Scenario: GraphQL client wants to list events with theme2
             },
             {
                "node":{
-                  "_id":"event2",
+                  "id":"event2",
                   "themes":[
                      {
                         "id":"theme1"
@@ -311,7 +339,7 @@ Scenario: GraphQL client wants to list events with a search
       totalCount
         edges {
           node {
-            _id
+            id
           }
         }
       }
@@ -330,12 +358,12 @@ Scenario: GraphQL client wants to list events with a search
            "edges":[
               {
                  "node":{
-                    "_id":"event1"
+                    "id":"event1"
                  }
               },
               {
                  "node":{
-                    "_id":"event6"
+                    "id":"event6"
                  }
               }
            ]

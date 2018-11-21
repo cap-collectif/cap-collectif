@@ -16,7 +16,6 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserErrors;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
@@ -56,11 +55,8 @@ class AddReplyMutation implements MutationInterface
     public function __invoke(Argument $input, User $user): array
     {
         $values = $input->getRawArguments();
-
-        $questionnaireId = GlobalId::fromGlobalId($values['questionnaireId'])['id'];
-
         /** @var Questionnaire $questionnaire */
-        $questionnaire = $this->questionnaireRepo->find($questionnaireId);
+        $questionnaire = $this->questionnaireRepo->find($values['questionnaireId']);
         unset($values['questionnaireId']);
 
         if (!$questionnaire->canContribute($user)) {

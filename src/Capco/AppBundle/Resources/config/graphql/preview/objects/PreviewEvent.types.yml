@@ -8,10 +8,6 @@ PreviewEvent:
     name: Event
     description: 'An event.'
     fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Event
       title:
         type: 'String!'
         description: 'The title of the event.'

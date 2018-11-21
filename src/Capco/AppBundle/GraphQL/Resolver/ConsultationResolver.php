@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Answer;
 use Capco\AppBundle\Entity\Source;
@@ -16,13 +17,12 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Entity\OpinionVersionVote;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -30,7 +30,6 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 
@@ -139,9 +138,7 @@ class ConsultationResolver implements ContainerAwareInterface
     {
         $repo = $this->container->get('capco.consultation_step.repository');
         if (isset($args['id'])) {
-            $stepId = GlobalId::fromGlobalId($args['id'])['id'];
-            $consultation = $repo->find($stepId);
-            return [$consultation];
+            return [$repo->find($args['id'])];
         }
 
         return $repo->findAll();
@@ -172,15 +169,17 @@ class ConsultationResolver implements ContainerAwareInterface
         $step = $type->getStep();
         $project = $step->getProject();
 
-        return $this->container->get('router')->generate(
-            'app_consultation_show_opinions',
-            [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $step->getSlug(),
-                'opinionTypeSlug' => $type->getSlug(),
-            ],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        ) . '/1';
+        return (
+            $this->container->get('router')->generate(
+                'app_consultation_show_opinions',
+                [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                    'opinionTypeSlug' => $type->getSlug(),
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            ) . '/1'
+        );
     }
 
     public function getSectionOpinions(OpinionType $type, Arg $arg)
@@ -260,9 +259,11 @@ class ConsultationResolver implements ContainerAwareInterface
     {
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
-            return $this->container->get(OpinionUrlResolver::class)->__invoke($parent) .
+            return (
+                $this->container->get(OpinionUrlResolver::class)->__invoke($parent) .
                 '#arg-' .
-                $argument->getId();
+                $argument->getId()
+            );
         } elseif ($parent instanceof OpinionVersion) {
             return $this->resolveVersionUrl($parent) . '#arg-' . $argument->getId();
         }

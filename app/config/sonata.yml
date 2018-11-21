@@ -118,6 +118,7 @@ sonata_intl:
       default: Europe/Paris
       fr-FR: Europe/Paris
       en-GB: Europe/London
+      de-DE: Europe/Berlin
 
 sonata_media:
   class:

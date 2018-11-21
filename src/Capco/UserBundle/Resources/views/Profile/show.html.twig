@@ -57,7 +57,7 @@
         <section class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.arguments' | trans({}, 'CapcoAppBundle') }}</h2>
-                {{ react_render_component('ArgumentListApp', { 'props': { 'userId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+                {{ react_render_component('ArgumentListApp', { 'props': { 'userId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
             </div>
         </section>
     {% endif %}
@@ -102,7 +102,7 @@
         <section class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.votes' | trans({}, 'CapcoAppBundle') }}</h2>
-                {{ react_render_component('VoteListApp', { 'props': { 'userId': user.id|toGlobalId('User'), 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+                {{ react_render_component('VoteListApp', { 'props': { 'userId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
             </div>
         </section>
     {% endif %}

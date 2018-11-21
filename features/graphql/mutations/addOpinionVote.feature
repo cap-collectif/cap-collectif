@@ -16,7 +16,7 @@ Scenario: Logged in API client wants to vote for an opinion
             id
           }
           author {
-            _id
+            id
           }
         }
       }
@@ -41,7 +41,7 @@ Scenario: Logged in API client wants to vote for an opinion
             "id": "opinion57"
           },
           "author": {
-            "_id": "user5"
+            "id": "user5"
           }
         }
       }

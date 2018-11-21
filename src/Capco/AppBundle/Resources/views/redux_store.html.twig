@@ -16,7 +16,7 @@
     'registration_form': registration_form_serialize(),
     'user': app.user
       ? {
-        'id': app.user.id|toGlobalId('User'),
+        'id': app.user.id,
         'username': app.user.username,
         'isEmailConfirmed': app.user.isEmailConfirmed,
         'isPhoneConfirmed': app.user.isPhoneConfirmed,

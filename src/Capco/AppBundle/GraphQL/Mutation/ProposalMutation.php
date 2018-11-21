@@ -2,26 +2,23 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Elastica\Index;
-use Swarrot\Broker\Message;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\Form;
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Toggle\Manager;
+use Elastica\Index;
+use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Form\ProposalType;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Form\ProposalAdminType;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Error\UserErrors;
 use Capco\AppBundle\Form\ProposalEvaluersType;
 use Capco\AppBundle\Form\ProposalNotationType;
-use Capco\AppBundle\Helper\ResponsesFormatter;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Form\ProposalProgressStepType;
@@ -29,6 +26,8 @@ use Capco\AppBundle\Enum\ProposalPublicationStatus;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\Form\Form;
+use Capco\AppBundle\Helper\ResponsesFormatter;
 
 class ProposalMutation implements ContainerAwareInterface
 {
@@ -49,11 +48,6 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
         unset($values['proposalId']); // This only useful to retrieve the proposal
 
-        $likers = [];
-        foreach ($values['likers'] as $liker) {
-            $likers[] = GlobalId::fromGlobalId($liker)['id'];
-        }
-        $values['likers'] = $likers;
         $form = $formFactory->create(ProposalNotationType::class, $proposal);
         $form->submit($values);
 

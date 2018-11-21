@@ -13,7 +13,7 @@ Scenario: User wants to add a version on an opinion
                     id
                     published
                     author {
-                        _id
+                        id
                     }
                 }
                 versionEdge {
@@ -43,7 +43,7 @@ Scenario: User wants to add a version on an opinion
                     "id": @uuid@,
                     "published": true,
                     "author": {
-                        "_id": "user5"
+                        "id": "user5"
                     }
                 },
                 "versionEdge": {

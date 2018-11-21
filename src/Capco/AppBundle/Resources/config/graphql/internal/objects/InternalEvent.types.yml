@@ -3,7 +3,6 @@ InternalEvent:
   inherits:
     - PreviewEvent
     - Commentable
-    - InternalPrimaryKey
   config:
     description: 'An event.'
     interfaces: [Node, Commentable]
@@ -12,7 +11,8 @@ InternalEvent:
       participants:
         type: 'ParticipantConnection!'
         description: 'A list of Users that are participating to the event.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", [value, args])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", [value, args])'
         argsBuilder: 'Relay::Connection'
       themes:
         type: '[Theme!]!'

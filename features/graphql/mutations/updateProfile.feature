@@ -28,7 +28,7 @@ Scenario: User should be able to update his username
     "data": {
       "updateProfile": {
         "viewer": {
-          "id": "VXNlcjp1c2VyNQ==",
+          "id": "user5",
           "username": "Nouveau username"
         }
       }
@@ -79,7 +79,7 @@ Scenario: User should be able to update his personal data
     "data": {
       "updateProfilePersonalData": {
         "user": {
-          "id": "VXNlcjp1c2VyNQ==",
+          "id": "user5",
           "firstname": "New firstname",
           "lastname": "new lastname",
           "gender": "OTHER",
@@ -119,7 +119,7 @@ Scenario: A super admin wants to update personal data of an other user
     }",
     "variables": {
       "input": {
-        "userId": "VXNlcjp1c2VyNTE2",
+        "userId": "user516",
         "firstname": "New firstname",
         "lastname": "new lastname",
         "gender": "OTHER",
@@ -139,7 +139,7 @@ Scenario: A super admin wants to update personal data of an other user
     "data": {
       "updateProfilePersonalData": {
         "user": {
-          "id": "VXNlcjp1c2VyNTE2",
+          "id": "user516",
           "firstname": "New firstname",
           "lastname": "new lastname",
           "gender": "OTHER",
@@ -179,7 +179,7 @@ Scenario: User should not be able to update personal data of an other user
     }",
     "variables": {
       "input": {
-        "userId": "VXNlcjp1c2VyNTE2",
+        "userId": "user516",
         "firstname": "New firstname",
         "lastname": "new lastname",
         "gender": "OTHER",
@@ -231,7 +231,7 @@ Scenario: User should be able to update his public data
     "data": {
       "updateProfilePublicData": {
         "user": {
-          "id": "VXNlcjp1c2VyNQ==",
+          "id": "user5",
           "username": "New username",
           "website": "http://perdu.com",
           "biography": null
@@ -259,7 +259,7 @@ Scenario: Super Admin should be able to update public data of an other user
     }",
     "variables": {
       "input": {
-        "userId": "VXNlcjp1c2VyNTE2",
+        "userId": "user516",
         "username": "New username",
         "website": "http://perdu.com",
         "biography": null
@@ -273,7 +273,7 @@ Scenario: Super Admin should be able to update public data of an other user
     "data": {
       "updateProfilePublicData": {
         "user": {
-          "id": "VXNlcjp1c2VyNTE2",
+          "id": "user516",
           "username": "New username",
           "website": "http://perdu.com",
           "biography": null
@@ -301,7 +301,7 @@ Scenario: User should not be able to update personal data of an other user
     }",
     "variables": {
       "input": {
-        "userId": "VXNlcjp1c2VyNTE2",
+        "userId": "user516",
         "username": "New username",
         "website": "http://perdu.com",
         "biography": null
@@ -372,7 +372,7 @@ Scenario: User should be able to update his password
     "data": {
       "updateProfilePassword": {
         "user": {
-          "id": "VXNlcjp1c2VyNQ==",
+          "id": "user5",
           "username": "user"
         },
         "error": null
@@ -410,7 +410,7 @@ Scenario: User should be able to update his password, but give a bad current pas
     "data":{
       "updateProfilePassword":{
         "user":{
-          "id":"VXNlcjp1c2VyNQ==",
+          "id":"user5",
           "username":"user"
         },
         "error":"fos_user.password.not_current"
@@ -437,7 +437,7 @@ Scenario: Super admin should be able to update other user account
     }",
     "variables": {
       "input": {
-        "userId": "VXNlcjp1c2VyNTE2",
+        "userId": "user516",
         "vip": true,
         "enabled": true,
         "roles": ["ROLE_ADMIN", "ROLE_USER", "ROLE_SUPER_ADMIN"]
@@ -451,7 +451,7 @@ Scenario: Super admin should be able to update other user account
     "data":{
       "updateUserAccount":{
         "user":{
-          "id":"VXNlcjp1c2VyNTE2",
+          "id":"user516",
           "vip":true,
           "enabled":true,
           "roles":["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]
@@ -479,7 +479,7 @@ Scenario: Admin should be able to update other user account
     }",
     "variables": {
       "input": {
-        "userId": "VXNlcjp1c2VyNTE2",
+        "userId": "user516",
         "vip": true,
         "enabled": true,
         "roles": ["ROLE_ADMIN", "ROLE_USER"]
@@ -493,7 +493,7 @@ Scenario: Admin should be able to update other user account
     "data":{
       "updateUserAccount":{
         "user":{
-          "id":"VXNlcjp1c2VyNTE2",
+          "id":"user516",
           "vip":true,
           "enabled":true,
           "roles":["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]
@@ -521,7 +521,7 @@ Scenario: Admin should not be able to update other/own user as super admin
     }",
     "variables": {
       "input": {
-        "userId": "VXNlcjp1c2VyQWRtaW4=",
+        "userId": "userAdmin",
         "vip": true,
         "enabled": true,
         "roles": ["ROLE_ADMIN", "ROLE_SUPER_ADMIN", "ROLE_USER"]
