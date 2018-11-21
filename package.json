@@ -44,10 +44,10 @@
   "flow-coverage-report": {
     "threshold": 70,
     "outputDir": "coverage/flow/",
-    "includeGlob": [
+    "globIncludePatterns": [
       "app/Resources/js/**/*.js"
     ],
-    "type": [
+    "reportTypes": [
       "text",
       "html",
       "json"

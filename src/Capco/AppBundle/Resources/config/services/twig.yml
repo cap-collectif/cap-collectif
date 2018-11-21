@@ -6,7 +6,6 @@ services:
 
   Capco\AppBundle\Twig\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Twig/*'
-  #    exclude: '%kernel.root_dir%/../src/Capco/AppBundle/{}'
 
   capco.twig.theme:
     class: Capco\AppBundle\Twig\ThemeExtension
