@@ -47,7 +47,7 @@ export class ProposalVoteButton extends React.Component<Props> {
     const { isHovering, proposal } = this.props;
 
     if (proposal.viewerVote) {
-      return isHovering ? 'proposal.vote.delete' : 'proposal.vote.hasVoted';
+      return isHovering ? 'proposal.vote.delete' : 'proposal.vote.voted';
     }
     return 'proposal.vote.add';
   };
@@ -58,12 +58,12 @@ export class ProposalVoteButton extends React.Component<Props> {
     const action = !user
       ? null
       : proposal.viewerHasVote
-        ? () => {
-            deleteVote(step, proposal);
-          }
-        : () => {
-            dispatch(openVoteModal(proposal.id));
-          };
+      ? () => {
+          deleteVote(step, proposal);
+        }
+      : () => {
+          dispatch(openVoteModal(proposal.id));
+        };
 
     return (
       <Button
@@ -71,7 +71,7 @@ export class ProposalVoteButton extends React.Component<Props> {
         ref={button => {
           this.target = button;
         }}
-        className={`mr-15 proposal__button__vote ${this.getButtonStyle()} ${classes} `}
+        className={`mr-10 proposal__button__vote ${this.getButtonStyle()} ${classes} `}
         onClick={disabled ? null : action}
         active={proposal.viewerHasVote}
         disabled={disabled || isDeleting}>

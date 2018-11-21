@@ -94,7 +94,7 @@ Scenario: Proposal should stay voted after user refresh the page
   And I should see "proposal.request.vote.success" in the "#global-alert-box" element
   # And I should see "proposal.vote.delete"
   Then I go to a collect step with vote
-  And I should see "proposal.vote.hasVoted"
+  And I should see "proposal.vote.voted"
 
 @javascript @security @votes_from_proposal
 Scenario: Anonymous user wants to vote for a proposal that is not votable yet

@@ -914,7 +914,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalUnvoteButton()
     {
-        $this->clickProposalVoteButtonWithLabel('proposal.vote.hasVoted');
+        $this->clickProposalVoteButtonWithLabel('proposal.vote.voted');
     }
 
     /**

@@ -6,7 +6,7 @@ exports[`<ProposalVoteButton /> renders viewer has not voted 1`] = `
   block={false}
   bsClass="btn"
   bsStyle="default"
-  className="mr-15 proposal__button__vote btn btn-success  "
+  className="mr-10 proposal__button__vote btn btn-success  "
   disabled={false}
   id="buttonID"
   onClick={[Function]}
@@ -24,7 +24,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
   block={false}
   bsClass="btn"
   bsStyle="default"
-  className="mr-15 proposal__button__vote btn btn-success  "
+  className="mr-10 proposal__button__vote btn btn-success  "
   disabled={false}
   id="buttonID"
   onClick={[Function]}
@@ -39,7 +39,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
     target={[Function]}
   />
   <FormattedMessage
-    id="proposal.vote.hasVoted"
+    id="proposal.vote.voted"
     values={Object {}}
   />
 </Button>
@@ -51,7 +51,7 @@ exports[`<ProposalVoteButton /> renders viewer has voted and hovering 1`] = `
   block={false}
   bsClass="btn"
   bsStyle="default"
-  className="mr-15 proposal__button__vote btn btn-danger  "
+  className="mr-10 proposal__button__vote btn btn-danger  "
   disabled={false}
   id="buttonID"
   onClick={[Function]}

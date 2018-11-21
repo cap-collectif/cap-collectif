@@ -2,6 +2,7 @@
 
 exports[`<HoverObserver /> renders correctly 1`] = `
 <div
+  className="d-ib"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   onMouseOut={[Function]}

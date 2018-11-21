@@ -127,7 +127,8 @@ class HoverObserver extends React.Component<Props, State> {
           onMouseLeave: this.onMouseLeave,
           onMouseOver: this.onMouseOver,
           onMouseOut: this.onMouseOut,
-        }}>
+        }}
+        className="d-ib">
         {this.renderChildrenWithProps(children, childProps)}
       </div>
     );
