@@ -17,7 +17,7 @@ Scenario: Logged in API client wants to vote for an argument
                     id
                 }
                 author {
-                    _id
+                    id
                 }
             }
         }
@@ -43,7 +43,7 @@ Scenario: Logged in API client wants to vote for an argument
                     "id": "argument1"
                 },
                 "author": {
-                    "_id": "user5"
+                    "id": "user5"
                 }
             }
         }

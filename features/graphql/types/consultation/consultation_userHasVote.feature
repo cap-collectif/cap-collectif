@@ -16,7 +16,7 @@ Scenario: API client wants to know if a user has voted on the consultation
       }
     }",
     "variables": {
-      "consultationId": "Q29uc3VsdGF0aW9uOmNzdGVwMQ==",
+      "consultationId": "cstep1",
       "loginA": "aurelien@cap-collectif.com",
       "loginB": "lbrunet@jolicode.com",
       "loginC": "unknown@gmail.com"

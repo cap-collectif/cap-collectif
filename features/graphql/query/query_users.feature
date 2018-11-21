@@ -12,7 +12,7 @@ Scenario: GraphQL admin want to get users including superadmin
           totalCount
           edges {
             node {
-              _id
+              id
             }
           }
         }
@@ -28,27 +28,27 @@ Scenario: GraphQL admin want to get users including superadmin
           "edges": [
             {
               "node": {
-                "_id": "adminCapco"
+                "id": "adminCapco"
               }
             },
             {
               "node": {
-                "_id": "user_drupal"
+                "id": "user_drupal"
               }
             },
             {
               "node": {
-                "_id": "user1"
+                "id": "user1"
               }
             },
             {
               "node": {
-                "_id": "user10"
+                "id": "user10"
               }
             },
             {
               "node": {
-                "_id": "user100"
+                "id": "user100"
               }
             }
           ]

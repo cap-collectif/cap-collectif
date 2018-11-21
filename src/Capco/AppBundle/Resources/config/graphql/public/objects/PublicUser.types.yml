@@ -6,13 +6,10 @@ PublicUser:
     interfaces: [Node]
     name: User
     fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: User
       url:
         type: 'URI'
-        description: 'The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.'
+        description:
+          'The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.'
         resolve: "@=resolver('user_show_url', [value])"
       username:
         type: 'String'
@@ -20,5 +17,6 @@ PublicUser:
       isViewer:
         type: 'Boolean!'
         access: "@=hasRole('ROLE_USER')"
-        resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(getUser(), value)'
+        resolve:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(getUser(), value)'
         description: 'Whether or not this user is the authenticated user.'

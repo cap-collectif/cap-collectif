@@ -98,7 +98,7 @@ exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
       </div>
       <Field
         component={[Function]}
-        disabled={false}
+        disabled={true}
         id="newsletter"
         name="newsletter"
         type="checkbox"
@@ -163,19 +163,10 @@ exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
         handleClose={[Function]}
         redirectToAdminUrl={true}
         show={false}
-        userDeletedIsNotViewer={false}
+        userDeletedIsNotViewer={true}
         viewer={
           Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "enabled": true,
-            "id": "user1",
-            "isSubscribedToNewsLetter": true,
-            "isViewer": true,
-            "locked": false,
-            "roles": Array [],
             "subscribedToNewsLetterAt": "2018-05-03 11:11:11",
-            "vip": false,
           }
         }
       />

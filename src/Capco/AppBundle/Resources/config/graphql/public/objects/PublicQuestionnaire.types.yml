@@ -3,13 +3,9 @@ PublicQuestionnaire:
   inherits: [Node]
   config:
     name: Questionnaire
-    description: 'A questionnaire is a series of questions that users can answer.'
+    description: 'A questionnaire is a form.'
     interfaces: [Node]
     fields:
-      id:
-        builder: 'Relay::GlobalId'
-        builderConfig:
-          typeName: Questionnaire
       title:
         description: 'Identifies the questionnaire title.'
         type: 'String!'
@@ -20,9 +16,11 @@ PublicQuestionnaire:
           login:
             type: 'String!'
             description: "The user's login (for example, an email)."
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\UserHasReplyResolver", [value, args])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\UserHasReplyResolver", [value, args])'
       participants:
         type: 'PublicUserConnection!'
         argsBuilder: 'Relay::Connection'
         description: 'A list of users that have replied to the questionnaire.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireParticipantsResolver", [value, args])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireParticipantsResolver", [value, args])'

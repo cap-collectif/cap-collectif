@@ -15,7 +15,7 @@ Scenario: User wants to add an argument on an opinion
           body
           type
           author {
-            _id
+            id
           }
         }
         argumentEdge {
@@ -41,18 +41,18 @@ Scenario: User wants to add an argument on an opinion
     "data": {
       "addArgument": {
           "argument": {
-              "id": @string@,
+              "id": @uuid@,
               "published": true,
               "body": "Tololo",
               "type": "FOR",
               "author": {
-                "_id": "user5"
+                "id": "user5"
               }
           },
           "argumentEdge": {
               "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
               "node": {
-                "id": @string@
+                "id": @uuid@
               }
           }
        }
@@ -93,7 +93,7 @@ Scenario: User wants to add an argument on an uncontibuable opinion
     "data": {
       "addArgument": {
         "argument": null,
-        "userErrors": [{"message":"Can\u0027t add an argument to an uncontribuable argumentable."}]
+        "userErrors": [{"message":"Can\u0027t add an argument to an uncontributable argumentable."}]
       }
     }
   }

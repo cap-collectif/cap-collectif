@@ -24,7 +24,7 @@ Scenario: GraphQL client wants to remove a user from group
       "variables": {
         "input": {
           "groupId": "group2",
-          "userId": "VXNlcjp1c2VyMQ=="
+          "userId": "user1"
         }
       }
   }
@@ -40,7 +40,7 @@ Scenario: GraphQL client wants to remove a user from group
               "edges": [
               {
                 "node": {
-                  "id": "VXNlcjp1c2VyNTAz"
+                  "id": "user503"
                 }
               }
               ]

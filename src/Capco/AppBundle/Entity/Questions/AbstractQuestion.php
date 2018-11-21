@@ -117,9 +117,6 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
      */
     protected $responses;
 
-    //field used to the position assignation
-    public $temporaryId;
-
     public function __toString()
     {
         if ($this->getId()) {

@@ -6,7 +6,6 @@ use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -16,7 +15,6 @@ class MediaQuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('id');
-        $builder->add('temporaryId', TextType::class);
         $builder->add('title', PurifiedTextType::class);
         $builder->add('helpText', PurifiedTextType::class);
         $builder->add('description', PurifiedTextType::class);

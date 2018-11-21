@@ -2,7 +2,6 @@ InternalUser:
   type: object
   inherits:
     - PublicUser
-    - InternalPrimaryKey
   config:
     description: "A user is an individual's account."
     interfaces: [Node]

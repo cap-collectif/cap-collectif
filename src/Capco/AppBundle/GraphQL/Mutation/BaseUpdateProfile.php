@@ -2,15 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use GraphQL\Error\UserError;
-use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Form\FormFactory;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactory;
 
 abstract class BaseUpdateProfile implements MutationInterface
 {
@@ -36,21 +35,24 @@ abstract class BaseUpdateProfile implements MutationInterface
         $this->userRepository = $userRepository;
     }
 
-    public function __invoke(Argument $input, User $viewer)
+    public function __invoke(Argument $input, User $user)
     {
         $this->arguments = $input->getRawArguments();
 
-        if (!$viewer->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID])) {
+        if (!$user->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID])) {
             throw new UserError(
                 'Only a SUPER_ADMIN can edit data from another user. Or the account owner'
             );
         }
-        $this->user = $viewer;
+        $this->user = $user;
 
-        if ($viewer->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID])) {
-            $userId = GlobalId::fromGlobalId($this->arguments[self::USER_ID])['id'];
-            $user = $this->userRepository->find($userId);
-            if ($user && $user->getId() !== $viewer->getId()) {
+        if (
+            $user->hasRole(self::ROLE_SUPER_ADMIN) &&
+            !empty($this->arguments[self::USER_ID]) &&
+            $user->getId() !== $this->arguments[self::USER_ID]
+        ) {
+            $user = $this->userRepository->find($this->arguments[self::USER_ID]);
+            if ($user) {
                 $this->user = $user;
             }
         }

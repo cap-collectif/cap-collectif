@@ -30,7 +30,7 @@ Scenario: User can delete his reply
     "data": {
       "deleteReply": {
         "questionnaire": {
-          "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+          "id": "questionnaire1",
           "viewerReplies": [{"id":"reply5"}]
         }
       }

@@ -151,7 +151,7 @@ class SiteParameterAdmin extends Admin
             $formMapper->add('value', ChoiceType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'choices' => ['Français' => 'fr-FR', 'English' => 'en-GB'],
+                'choices' => ['Français' => 'fr-FR', 'English' => 'en-GB', 'Deutch' => 'de-DE'],
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ('global.timezone' === $subject->getKeyname()) {

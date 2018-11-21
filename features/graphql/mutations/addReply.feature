@@ -25,7 +25,7 @@ Scenario: User wants to add a reply
     }",
     "variables": {
       "input": {
-        "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+        "questionnaireId": "questionnaire1",
         "draft": false,
         "responses": [
             {

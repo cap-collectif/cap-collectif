@@ -70,7 +70,7 @@ type Query {
   ): [Node]!
 }
 
-# A questionnaire is a series of questions that users can answer.
+# A questionnaire is a form.
 type Questionnaire implements Node {
   # The ID of an object
   id: ID!
