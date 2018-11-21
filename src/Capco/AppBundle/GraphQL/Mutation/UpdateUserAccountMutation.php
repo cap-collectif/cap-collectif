@@ -36,7 +36,7 @@ class UpdateUserAccountMutation extends BaseUpdateProfile
         }
 
         // If the viewer is ROLE_ADMIN but update a user with ROLE_SUPER_ADMIN
-        // we have to make sur the user doesn't lose his ROLE_SUPER_ADMIN
+        // we have to make sure the user doesn't lose his ROLE_SUPER_ADMIN
         if (
             !$viewer->hasRole(self::ROLE_SUPER_ADMIN) &&
             !\in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'], true) &&
