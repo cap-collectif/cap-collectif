@@ -2,14 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\FormFactory;
+use Doctrine\ORM\EntityManagerInterface;
+use Capco\UserBundle\Repository\UserRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 abstract class BaseUpdateProfile implements MutationInterface
 {
@@ -35,24 +36,21 @@ abstract class BaseUpdateProfile implements MutationInterface
         $this->userRepository = $userRepository;
     }
 
-    public function __invoke(Argument $input, User $user)
+    public function __invoke(Argument $input, User $viewer)
     {
         $this->arguments = $input->getRawArguments();
 
-        if (!$user->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID])) {
+        if (!$viewer->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID])) {
             throw new UserError(
                 'Only a SUPER_ADMIN can edit data from another user. Or the account owner'
             );
         }
-        $this->user = $user;
+        $this->user = $viewer;
 
-        if (
-            $user->hasRole(self::ROLE_SUPER_ADMIN) &&
-            !empty($this->arguments[self::USER_ID]) &&
-            $user->getId() !== $this->arguments[self::USER_ID]
-        ) {
-            $user = $this->userRepository->find($this->arguments[self::USER_ID]);
-            if ($user) {
+        if ($viewer->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID])) {
+            $userId = GlobalId::fromGlobalId($this->arguments[self::USER_ID])['id'];
+            $user = $this->userRepository->find($userId);
+            if ($user && $user->getId() !== $viewer->getId()) {
                 $this->user = $user;
             }
         }
