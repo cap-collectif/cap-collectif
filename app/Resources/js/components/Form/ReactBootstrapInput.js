@@ -15,7 +15,6 @@ import {
   Popover,
   Radio,
 } from 'react-bootstrap';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import type { IntlShape } from 'react-intl';
 import DateTime from './DateTime';
 import Editor from './Editor';
@@ -30,6 +29,7 @@ import Address from './Address';
 import ButtonBody from '../Reply/Form/ButtonBody';
 import QuestionPrintHelpText from './QuestionPrintHelpText';
 import Notepad from '../Ui/Form/Notepad';
+import RadioButtons from './RadioButtons';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -85,6 +85,7 @@ type Props = {
   radioChecked?: boolean,
   checkedValue?: ?string,
   maxLength?: ?string,
+  backgroundColor: ?string,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
@@ -108,21 +109,6 @@ class ReactBootstrapInput extends React.Component<Props> {
 
     if (inputNode instanceof HTMLInputElement) {
       return inputNode.value;
-    }
-  };
-
-  getColor = (color: string) => {
-    switch (color) {
-      case 'SUCCESS':
-        return '#5cb85c';
-      case 'INFO':
-        return '#5bc0de';
-      case 'WARNING':
-        return '#f0ad4e';
-      case 'DANGER':
-        return '#d9534f';
-      default:
-        return '#fffff';
     }
   };
 
@@ -261,35 +247,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       field.id = props.id;
       field.choices = props.choices;
 
-      return (
-        <React.Fragment>
-          <RadioGroup
-            key={props.id}
-            horizontal
-            className="hidden-print form-fields"
-            id={props.id}
-            onChange={props.onChange}>
-            {field.choices.map(choice => (
-              <RadioButton
-                key={choice.id}
-                disabled={props.disabled}
-                value={choice.label}
-                iconSize={20}
-                pointColor={this.getColor(choice.color)}
-                checked={value === choice.label}>
-                {choice.label}
-              </RadioButton>
-            ))}
-          </RadioGroup>
-          <div className="visible-print-block form-fields">
-            {field.choices.map(choice => (
-              <div key={choice.id} className="radio">
-                {choice.label}
-              </div>
-            ))}
-          </div>
-        </React.Fragment>
-      );
+      return <RadioButtons value={value} field={field} {...props} />;
     }
 
     if (type === 'radio') {
