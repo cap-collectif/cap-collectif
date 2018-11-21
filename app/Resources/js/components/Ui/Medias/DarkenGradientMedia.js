@@ -11,7 +11,9 @@ type Props = {
   alt?: string,
 };
 
-export const Container = styled.div`
+export const Container = styled.div.attrs({
+  className: 'darken-gradient-media',
+})`
   background: ${props =>
     props.linearGradient
       ? `linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)),
@@ -28,6 +30,7 @@ export default class DarkenGradientMedia extends PureComponent<Props> {
     linearGradient: true,
     width: '100%',
     height: '100%',
+    alt: '',
   };
 
   render() {
@@ -39,7 +42,7 @@ export default class DarkenGradientMedia extends PureComponent<Props> {
         width={width}
         height={height}
         linearGradient={linearGradient}
-        role={alt ? 'img' : null}
+        role="img"
         aria-label={alt}>
         {children}
       </Container>

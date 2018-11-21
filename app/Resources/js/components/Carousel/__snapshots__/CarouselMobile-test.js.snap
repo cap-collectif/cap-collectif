@@ -67,6 +67,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
         width={16}
       >
         <DarkenGradientMedia
+          alt=""
           height="100%"
           linearGradient={true}
           url="/media/croissance.jpg"

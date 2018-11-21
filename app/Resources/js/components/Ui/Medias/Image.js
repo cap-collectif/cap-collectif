@@ -6,7 +6,7 @@ type Props = {
   width?: number,
   height?: number,
   objectFit?: string,
-  alt: string,
+  alt?: string,
   src: string,
 };
 
@@ -21,6 +21,7 @@ export default class Image extends PureComponent<Props> {
     objectFit: 'cover',
     width: 'auto',
     height: 'auto',
+    alt: ''
   };
 
   render() {

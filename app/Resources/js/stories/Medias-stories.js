@@ -16,6 +16,7 @@ storiesOf('Medias', module)
       const width = text('Width', '600px');
       const height = text('Height', '400px');
       const url = text('Url', 'https://source.unsplash.com/collection/1353633');
+      const alt = text('Alt', '');
       const linearGradient = boolean('Linear Gradient', true);
       const content = text('Content', null);
 
@@ -24,6 +25,7 @@ storiesOf('Medias', module)
           width={width}
           height={height}
           url={url}
+          alt={alt}
           linearGradient={linearGradient}>
           {content}
         </DarkenGradientMedia>
@@ -34,6 +36,7 @@ storiesOf('Medias', module)
         text: `
           <p>Ce composant permet d'ajouter un léger dégradé noir sur une image.</p>
           <p>Ce dégradé peut être utile afin d'améliorer le contraste de l'image et ainsi permettre une meilleure lecture d'un texte superposé.</p>
+          <p>Si l'image n'est pas à but décoratif, veuillez préciser l'attribut <code>alt</code>.</p>
         `,
       },
     },
@@ -64,18 +67,19 @@ storiesOf('Medias', module)
   .add(
     'Avatar',
     () => {
-      const url = text('Url', 'https://source.unsplash.com/collection/181462');
+      const userInclude = boolean('Include a user', true);
       const imageUrlIsDisplay = boolean('Display url of image', true);
+      const profileLinkIsDisplay = boolean('Display Profile link', true);
+      const url = text('Image link for user', 'https://source.unsplash.com/collection/181462');
       const name = text('User name', 'Karim');
       const profile = text('Profile link', 'https://ui.cap-collectif.com/');
-      const profileLinkIsDisplay = boolean('Display Profile link', true);
       const size = number('Size', 45);
 
-      const author = {
+      const author = userInclude ? {
         username: name,
         media: imageUrlIsDisplay ? { url } : null,
         _links: profileLinkIsDisplay ? { profile } : {},
-      };
+      } : null;
 
       return <UserAvatar user={author} size={size} />;
     },
@@ -83,7 +87,7 @@ storiesOf('Medias', module)
       info: {
         text: `
           <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
-          <p>Si vous avez besoin de placer du texte à sa droite, veuillez plutôt utiliser le composant <a href="">Media</a>.</p>
+          <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
         `,
       },
     },
@@ -140,7 +144,7 @@ storiesOf('Medias', module)
     {
       info: {
         text: `
-            <p>Lorem</p>
+            <p>L'attribut <code>alt</code> de l'image peut rester vide (valeur par défaut) dans le cas des images à but uniquement décoratif et sans intérêt prioritaire pour la communication.</p>
         `,
       },
     },
