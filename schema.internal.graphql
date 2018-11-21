@@ -1617,6 +1617,17 @@ type Event implements Node & Commentable {
   # The ID of an object
   id: ID!
 
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
+
   # The title of the event.
   title: String!
 
