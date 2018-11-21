@@ -21,7 +21,6 @@ type RelayProps = { proposal: ProposalAdminStatusForm_proposal };
 type Props = RelayProps & {
   publicationStatus: string,
   isSuperAdmin: boolean,
-  isAuthor: boolean,
   pristine: boolean,
   invalid: boolean,
   valid: boolean,
@@ -65,7 +64,6 @@ export class ProposalAdminStatusForm extends Component<Props> {
   render() {
     const {
       isSuperAdmin,
-      isAuthor,
       proposal,
       pristine,
       invalid,
@@ -78,6 +76,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
       dispatch,
       intl,
     } = this.props;
+    const isAuthor = proposal.author.isViewer;
     return (
       <div className="box box-primary container-fluid">
         <div className="box-header">
@@ -164,22 +163,21 @@ export class ProposalAdminStatusForm extends Component<Props> {
               <Button disabled={pristine || invalid || submitting} type="submit" bsStyle="primary">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
-              {(isSuperAdmin || isAuthor) &&
-                !proposal.deletedAt && (
-                  <Button
-                    bsStyle="danger"
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          intl.formatMessage({ id: 'proposal.admin.status.delete.confirmation' }),
-                        )
-                      ) {
-                        onDelete(proposal.id);
-                      }
-                    }}>
-                    <FormattedMessage id="global.delete" />
-                  </Button>
-                )}
+              {(isSuperAdmin || isAuthor) && !proposal.deletedAt && (
+                <Button
+                  bsStyle="danger"
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        intl.formatMessage({ id: 'proposal.admin.status.delete.confirmation' }),
+                      )
+                    ) {
+                      onDelete(proposal.id);
+                    }
+                  }}>
+                  <FormattedMessage id="global.delete" />
+                </Button>
+              )}
               <AlertForm
                 valid={valid}
                 invalid={invalid}
@@ -202,7 +200,6 @@ const form = reduxForm({
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { proposal }: RelayProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  isAuthor: !!(state.user.user && state.user.user.id === proposal.author.id),
   onSubmit,
   initialValues: {
     publicationStatus: proposal.publicationStatus,
@@ -225,6 +222,7 @@ export default createFragmentContainer(
         id
         isEmailConfirmed
         email
+        isViewer
       }
     }
   `,
