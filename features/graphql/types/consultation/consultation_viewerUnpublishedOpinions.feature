@@ -24,7 +24,7 @@ Scenario: Viewer wants to get his unpublished opinions
       }
     }",
     "variables": {
-      "consultationId": "cstep1"
+      "consultationId": "Q29uc3VsdGF0aW9uOmNzdGVwMQ=="
     }
   }
   """

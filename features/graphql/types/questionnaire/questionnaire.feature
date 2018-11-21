@@ -6,7 +6,7 @@ Scenario: GraphQL client wants to retrieve questions
   When I send a GraphQL request:
   """
   {
-      questionnaire: node(id: "questionnaire1") {
+      questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==") {
         ... on Questionnaire {
           questions {
             id
@@ -40,7 +40,7 @@ Scenario: GraphQL client wants to retrieve replies
   When I send a GraphQL request:
   """
   {
-      questionnaire: node(id: "questionnaire1") {
+      questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==") {
         ... on Questionnaire {
           viewerReplies {
             id
@@ -156,7 +156,7 @@ Scenario: GraphQL client wants to get question's participants
   When I send a GraphQL request:
   """
   {
-      questionnaire: node(id: "questionnaire4") {
+      questionnaire: node(id: "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlNA==") {
         ... on Questionnaire {
           participants {
             totalCount

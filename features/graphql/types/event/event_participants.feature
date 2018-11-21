@@ -16,7 +16,7 @@ Scenario: GraphQL client want to get the list of participants of an event
             edges {
               node {
                 ... on User {
-                  id
+                  _id
                 }
                 ... on NotRegistered {
                   username
@@ -29,7 +29,7 @@ Scenario: GraphQL client want to get the list of participants of an event
       }
     }",
     "variables": {
-      "event": "event1"
+      "event": "RXZlbnQ6ZXZlbnQx"
     }
   }
   """
@@ -44,7 +44,7 @@ Scenario: GraphQL client want to get the list of participants of an event
             "hasNextPage": true
           },
           "edges": [
-            { "node": { "id":"user1" } },
+            { "node": { "_id":"user1" } },
             { "node": { "username": @string@, "email": @string@ }},
             { "node": { "username": @string@, "email": @string@ }},
             { "node": { "username": @string@, "email": @string@ }},
