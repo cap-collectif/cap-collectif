@@ -8,6 +8,7 @@ type Props = {
   objectFit?: string,
   alt?: string,
   src: string,
+  className?: string,
 };
 
 export const Container = styled.img`
@@ -21,12 +22,21 @@ export default class Image extends PureComponent<Props> {
     objectFit: 'cover',
     width: 'auto',
     height: 'auto',
-    alt: ''
+    alt: '',
   };
 
   render() {
-    const { width, height, objectFit, alt, src } = this.props;
+    const { width, height, objectFit, alt, src, className } = this.props;
 
-    return <Container src={src} width={width} height={height} objectFit={objectFit} alt={alt} />;
+    return (
+      <Container
+        className={className}
+        src={src}
+        width={width}
+        height={height}
+        objectFit={objectFit}
+        alt={alt}
+      />
+    );
   }
 }

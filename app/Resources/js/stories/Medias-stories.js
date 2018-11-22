@@ -3,10 +3,13 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { boolean, withKnobs, number, text } from '@storybook/addon-knobs';
 import DarkenGradientMedia from '../components/Ui/Medias/DarkenGradientMedia';
-import { UserAvatar } from '../components/User/UserAvatar';
 import RatioMediaContainer from '../components/Ui/Medias/RatioMediaContainer';
 import Media from '../components/Ui/Medias/Media/index';
 import Image from '../components/Ui/Medias/Image';
+import { Avatar } from '../components/Ui/Medias/Avatar';
+import AvatarGroup from '../components/Ui/Medias/AvatarGroup';
+import DefaultAvatarGroup from '../components/Ui/Medias/DefaultAvatarGroup';
+import DefaultAvatar from '../components/Ui/Medias/DefaultAvatar';
 
 storiesOf('Medias', module)
   .addDecorator(withKnobs)
@@ -67,21 +70,111 @@ storiesOf('Medias', module)
   .add(
     'Avatar',
     () => {
-      const userInclude = boolean('Include a user', true);
-      const imageUrlIsDisplay = boolean('Display url of image', true);
-      const profileLinkIsDisplay = boolean('Display Profile link', true);
-      const url = text('Image link for user', 'https://source.unsplash.com/collection/181462');
-      const name = text('User name', 'Karim');
-      const profile = text('Profile link', 'https://ui.cap-collectif.com/');
       const size = number('Size', 45);
+      const src = text('Src', 'https://source.unsplash.com/collection/181462');
+      const alt = text('Alt', 'My alternative');
 
-      const author = userInclude ? {
-        username: name,
-        media: imageUrlIsDisplay ? { url } : null,
-        _links: profileLinkIsDisplay ? { profile } : {},
-      } : null;
+      return <Avatar size={size} src={src} alt={alt} />;
+    },
+    {
+      info: {
+        text: `
+          <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
+          <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
+        `,
+      },
+    },
+  )
+  .add(
+    'Avatar Group',
+    () => {
+      const childrenSize = number('Children size', 45);
+      const src = text('Src', 'https://source.unsplash.com/collection/181462');
+      const alt = text('Alt', 'My alternative');
 
-      return <UserAvatar user={author} size={size} />;
+      return (
+        <AvatarGroup childrenSize={childrenSize}>
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <DefaultAvatarGroup size={childrenSize} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <Avatar size={childrenSize} src={src} alt={alt} />
+          <DefaultAvatar size={childrenSize} />
+        </AvatarGroup>
+      );
+    },
+    {
+      info: {
+        text: `
+          <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
+          <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
+        `,
+        propTablesExclude: [Avatar],
+      },
+    },
+  )
+  .add(
+    'Default avatar group',
+    () => {
+      const size = number('size', 45);
+
+      return <DefaultAvatarGroup size={size} />;
+    },
+    {
+      info: {
+        text: `
+          <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
+          <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
+        `,
+        propTablesExclude: [Avatar],
+      },
+    },
+  )
+  .add(
+    'Default avatar',
+    () => {
+      const size = number('size', 45);
+
+      return <DefaultAvatar size={size} />;
     },
     {
       info: {
