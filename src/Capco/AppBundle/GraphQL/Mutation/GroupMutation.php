@@ -3,13 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Group;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Form\GroupCreateType;
-use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 class GroupMutation implements ContainerAwareInterface
 {
@@ -25,7 +26,9 @@ class GroupMutation implements ContainerAwareInterface
 
         if (!$form->isValid()) {
             $logger = $this->container->get('logger');
-            $logger->error(\get_class($this) . ' create: ' . (string) $form->getErrors(true, false));
+            $logger->error(
+                \get_class($this) . ' create: ' . (string) $form->getErrors(true, false)
+            );
             throw new UserError('Can\'t create this group.');
         }
 
@@ -53,7 +56,9 @@ class GroupMutation implements ContainerAwareInterface
 
         if (!$form->isValid()) {
             $logger = $this->container->get('logger');
-            $logger->error(\get_class($this) . ' update: ' . (string) $form->getErrors(true, false));
+            $logger->error(
+                \get_class($this) . ' update: ' . (string) $form->getErrors(true, false)
+            );
             throw new UserError('Can\'t update this group.');
         }
 
@@ -85,6 +90,7 @@ class GroupMutation implements ContainerAwareInterface
 
     public function deleteUserInGroup(string $userId, string $groupId): array
     {
+        $userId = GlobalId::fromGlobalId($userId)['id'];
         $userGroup = $this->container->get('capco.user_group.repository')->findOneBy([
             'user' => $userId,
             'group' => $groupId,
@@ -122,6 +128,7 @@ class GroupMutation implements ContainerAwareInterface
 
         try {
             foreach ($users as $userId) {
+                $userId = GlobalId::fromGlobalId($userId)['id'];
                 /** @var User $user */
                 $user = $this->container->get('capco.user.repository')->find($userId);
 
@@ -133,9 +140,7 @@ class GroupMutation implements ContainerAwareInterface
 
                     if (!$userGroup) {
                         $userGroup = new UserGroup();
-                        $userGroup
-                            ->setUser($user)
-                            ->setGroup($group);
+                        $userGroup->setUser($user)->setGroup($group);
 
                         $om->persist($userGroup);
                     }
@@ -146,7 +151,11 @@ class GroupMutation implements ContainerAwareInterface
 
             return ['group' => $group];
         } catch (\Exception $e) {
-            $logger->error(\get_class($this) . ' addUsersInGroup: ' . sprintf('Cannot add users in group with id "%g"', $groupId));
+            $logger->error(
+                \get_class($this) .
+                    ' addUsersInGroup: ' .
+                    sprintf('Cannot add users in group with id "%g"', $groupId)
+            );
             throw new UserError('Can\'t add users in group.');
         }
     }

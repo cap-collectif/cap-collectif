@@ -10,7 +10,7 @@
     } %}
     {{ react_render_component('UserAdminPageApp', {
         'props': {
-            'userId': admin.subject.id,
+            'userId': admin.subject.id|toGlobalId('User'),
         },
         'rendering': 'client_side'
     }) }}

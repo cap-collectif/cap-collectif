@@ -146,7 +146,7 @@
                     <section class="section--custom">
                         <div class="container container--thinner">
                             {% if capco_comment_can_show(event) %}
-                                {{ react_render_component('CommentSectionApp', {'props': { 'commentableId': event.id }}) }}
+                                {{ react_render_component('CommentSectionApp', {'props': { 'commentableId': event.id|toGlobalId('Event') }}) }}
                             {% endif %}
                         </div>
                     </section>

@@ -1,40 +1,41 @@
 <?php
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Entity\Follower;
-use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\OpinionVersionVote;
-use Capco\AppBundle\Entity\OpinionVote;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Form\OpinionForm;
-use Capco\AppBundle\Form\OpinionVersionType;
-use Capco\AppBundle\Form\ReportingType;
-use Doctrine\DBAL\Exception\DriverException;
-use FOS\RestBundle\Controller\Annotations\Delete;
-use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Swarrot\Broker\Message;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Form\OpinionForm;
+use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\OpinionVote;
+use Capco\AppBundle\Form\ReportingType;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Capco\AppBundle\Form\OpinionVersionType;
+use Doctrine\DBAL\Exception\DriverException;
 use Symfony\Component\HttpFoundation\Request;
+use Capco\AppBundle\Entity\OpinionVersionVote;
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Put;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\View;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class OpinionsController extends FOSRestController
 {
@@ -50,7 +51,6 @@ class OpinionsController extends FOSRestController
      *
      * @Post("/projects/{projectId}/steps/{stepId}/opinion_types/{typeId}/opinions")
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
-     * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
      * @ParamConverter("type", options={"mapping": {"typeId": "id"}})
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
@@ -58,12 +58,18 @@ class OpinionsController extends FOSRestController
     public function postOpinionAction(
         Request $request,
         Project $project,
-        ConsultationStep $step,
+        string $stepId,
         OpinionType $type
     ) {
         if (!$type->getIsEnabled()) {
             throw new BadRequestHttpException('This opinionType is not enabled.');
         }
+        $uuid = GlobalId::fromGlobalId($stepId)['id'];
+        $step = $this->get('capco.consultation_step.repository')->find($uuid);
+        if (!$step) {
+            throw new BadRequestHttpException('Unknown step.');
+        }
+
         $author = $this->getUser();
 
         if (!$step->canContribute($author)) {

@@ -44,10 +44,10 @@
   "flow-coverage-report": {
     "threshold": 70,
     "outputDir": "coverage/flow/",
-    "includeGlob": [
+    "globIncludePatterns": [
       "app/Resources/js/**/*.js"
     ],
-    "type": [
+    "reportTypes": [
       "text",
       "html",
       "json"
@@ -217,8 +217,8 @@
     "react-dropzone": "^5.0.1",
     "react-google-charts": "^1.0.2",
     "react-google-recaptcha": "^0.9.6",
-    "react-intl": "https://github.com/cap-collectif/react-intl.git",
-    "react-intl-redux": "^2.0.2",
+    "react-intl": "https://github.com/cap-collectif/react-intl/tarball/2395c315a2b7cb87c18a14fcc46b8855becdccb0",
+    "react-intl-redux": "^0.6.0",
     "react-leaflet": "^1.9.1",
     "react-leaflet-markercluster": "^1.1.8",
     "react-leaflet-universal": "^1.1.2",

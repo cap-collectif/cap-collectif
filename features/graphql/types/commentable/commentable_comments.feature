@@ -21,7 +21,7 @@ Scenario: Anonymous wants to get comments from commentables
     }",
     "variables": {
       "proposalId": "proposal1",
-      "eventId": "event1",
+      "eventId": "RXZlbnQ6ZXZlbnQx",
       "postId": "UG9zdDox"
     }
   }

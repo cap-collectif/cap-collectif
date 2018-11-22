@@ -1,6 +1,7 @@
 InternalConsultation:
   type: object
   inherits:
+    - InternalPrimaryKey
     - PublicConsultation
     - Node
     - Step
@@ -42,8 +43,7 @@ InternalConsultation:
         access: "@=hasRole('ROLE_USER')"
         type: 'OpinionConnection'
         argsBuilder: 'Relay::Connection'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", [value, args, getUser()])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", [value, args, getUser()])'
       # TODO rename to `contributions`
       contributionConnection:
         type: 'ContributionConnection'

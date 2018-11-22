@@ -25,6 +25,7 @@ parameters:
         - %currentWorkingDirectory%/src/Capco/MediaBundle/Entity/Media.php
         - %currentWorkingDirectory%/src/Capco/AppBundle/Command/Maker/templates/*
         - %currentWorkingDirectory%/src/Capco/AppBundle/Command/Paris/*
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Command/Nantes/*
         - %currentWorkingDirectory%/src/Capco/AppBundle/Notifier/ContributionNotifier
         - %currentWorkingDirectory%/src/Capco/AppBundle/Mailer/Message/Contribution/ContributionModerationMessage
         - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/__generated__/*
