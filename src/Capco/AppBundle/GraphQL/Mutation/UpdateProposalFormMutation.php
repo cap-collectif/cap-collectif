@@ -110,7 +110,7 @@ class UpdateProposalFormMutation implements MutationInterface
             $questionsOrderedById = [];
             // We need an array of questions ids from arguments
             $argumentsQuestionsId = [];
-            foreach ($arguments['questions'] as $key => &$dataQuestion) {
+            foreach ($arguments['questions'] as &$dataQuestion) {
                 //we are updating a question
                 if (isset($dataQuestion['question']['id'])) {
                     $dataQuestionId = $dataQuestion['question']['id'];

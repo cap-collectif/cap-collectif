@@ -104,10 +104,6 @@ class BlogController extends Controller
             throw new NotFoundHttpException('Could not find a published article for this slug.');
         }
 
-        $props = [
-            'commentableId' => GlobalId::toGlobalId('Post', $post->getId()),
-        ];
-
-        return ['post' => $post, 'props' => $props];
+        return ['post' => $post];
     }
 }

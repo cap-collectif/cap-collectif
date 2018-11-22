@@ -72,10 +72,10 @@ class AddArgumentMutation implements MutationInterface
 
         if (!$argumentable->canContribute($author)) {
             $this->logger->error(
-                'Can\'t add an argument to an uncontributable argumentable with id: ' .
+                'Can\'t add an argument to an uncontribuable argumentable with id: ' .
                     $argumentableId
             );
-            $error = ['message' => 'Can\'t add an argument to an uncontributable argumentable.'];
+            $error = ['message' => 'Can\'t add an argument to an uncontribuable argumentable.'];
             return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 

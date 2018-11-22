@@ -126,7 +126,7 @@ Scenario: Logged in API client wants to vote for a proposal
             id
           }
           author {
-            id
+            _id
           }
         }
       }
@@ -151,7 +151,7 @@ Scenario: Logged in API client wants to vote for a proposal
             "id": "proposal2"
           },
           "author": {
-            "id": "user5"
+            "_id": "user5"
           }
         }
       }

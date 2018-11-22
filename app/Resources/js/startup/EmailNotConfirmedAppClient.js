@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
-import IntlProvider from './IntlProvider';
+import { IntlProvider } from 'react-intl-redux';
 import EmailNotConfirmedAlert from '../components/User/EmailNotConfirmedAlert';
 import NewEmailNotConfirmedAlert from '../components/User/NewEmailNotConfirmedAlert';
 

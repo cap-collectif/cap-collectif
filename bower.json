@@ -22,7 +22,8 @@
     "compass-mixins": "~1.0.2",
     "es6-promise": "~2.2.0",
     "fetch": "~0.10.1",
-    "jquery-minicolors": "~2.3.1"
+    "jquery-minicolors": "~2.3.1",
+    "react-intl": "~1.2.0"
   },
   "overrides": {
     "fancybox": {
@@ -30,6 +31,12 @@
     },
     "ckeditor": {
       "main": "ckeditor.js"
+    },
+    "intl": {
+      "main": [
+        "Intl.js",
+        "locale-data/jsonp/fr.js"
+      ]
     },
     "bootstrap-sass": {
       "main": [
@@ -45,6 +52,9 @@
         "assets/javascripts/bootstrap/transition.js",
         "assets/stylesheets/_bootstrap.scss"
       ]
+    },
+    "react-intl": {
+      "main": []
     }
   }
 }

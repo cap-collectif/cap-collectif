@@ -14,7 +14,7 @@ Scenario: GraphQL client wants to get list of users who following an opinion
             edges {
               cursor
               node {
-                id
+                _id
               }
             }
             totalCount
@@ -39,12 +39,12 @@ Scenario: GraphQL client wants to get list of users who following an opinion
             {
               "cursor": @string@,
               "node": {
-                "id": "user45"
+                "_id": "user45"
               }
             },{
               "cursor": @string@,
               "node": {
-                "id": "user34"
+                "_id": "user34"
               }
             }
           ],

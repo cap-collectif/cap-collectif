@@ -25,7 +25,7 @@ Scenario: GraphQL client wants to add a user in group
       "input": {
         "groupId": "group2",
         "users": [
-          "user101"
+          "VXNlcjp1c2VyMTAx"
         ]
       }
     }
@@ -42,7 +42,7 @@ Scenario: GraphQL client wants to add a user in group
               "edges": [
                 {
                   "node": {
-                    "id": "user101"
+                    "id": "VXNlcjp1c2VyMTAx"
                   }
                 },
                 @...@
@@ -78,8 +78,8 @@ Scenario: GraphQL client wants to add multiple users in group
       "input": {
         "groupId": "group2",
         "users": [
-          "user101",
-          "user107"
+          "VXNlcjp1c2VyMTAx",
+          "VXNlcjp1c2VyMTA3"
         ]
       }
     }
@@ -96,12 +96,12 @@ Scenario: GraphQL client wants to add multiple users in group
             "edges": [
               {
                 "node": {
-                  "id": "user101"
+                  "id": "VXNlcjp1c2VyMTAx"
                 }
               },
               {
                 "node": {
-                  "id": "user107"
+                  "id": "VXNlcjp1c2VyMTA3"
                 }
               },
               @...@

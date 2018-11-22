@@ -25,7 +25,7 @@ Scenario: GraphQL client want to get the list of contributors of a consultation
       }
     }",
     "variables": {
-      "consultation": "cstep1"
+      "consultation": "Q29uc3VsdGF0aW9uOmNzdGVwMQ=="
     }
   }
   """
@@ -70,7 +70,7 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
             }
             edges {
               node {
-                id
+                _id
               }
             }
           }
@@ -95,10 +95,10 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
             "endCursor": "YXJyYXljb25uZWN0aW9uOjM="
           },
           "edges": [
-            { "node": {"id":"user5"} },
-            { "node": {"id":"user502"} },
-            { "node": {"id":"user7"} },
-            { "node": {"id":"userAdmin"} }
+            { "node": {"_id":"user5"} },
+            { "node": {"_id":"user502"} },
+            { "node": {"_id":"user7"} },
+            { "node": {"_id":"userAdmin"} }
           ]
         }
       }
@@ -122,7 +122,7 @@ Scenario: GraphQL client want to get the list of contributors of a selectionStep
             }
             edges {
               node {
-                id
+                _id
               }
             }
           }
@@ -146,11 +146,11 @@ Scenario: GraphQL client want to get the list of contributors of a selectionStep
             "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
           },
           "edges": [
-            {"node":{"id":"user10"}},
-            {"node":{"id":"user11"}},
-            {"node":{"id":"user12"}},
-            {"node":{"id":"user13"}},
-            {"node":{"id":"user14"}}
+            {"node":{"_id":"user10"}},
+            {"node":{"_id":"user11"}},
+            {"node":{"_id":"user12"}},
+            {"node":{"_id":"user13"}},
+            {"node":{"_id":"user14"}}
           ]
         }
       }
@@ -174,7 +174,7 @@ Scenario: GraphQL client want to get the list of contributors of a questionnaire
             }
             edges {
               node {
-                id
+                _id
               }
             }
           }
@@ -198,8 +198,8 @@ Scenario: GraphQL client want to get the list of contributors of a questionnaire
             "endCursor": "YXJyYXljb25uZWN0aW9uOjE="
           },
           "edges": [
-            {"node":{"id":"user502"}},
-            {"node":{"id":"userAdmin"}}
+            {"node":{"_id":"user502"}},
+            {"node":{"_id":"userAdmin"}}
           ]
         }
       }

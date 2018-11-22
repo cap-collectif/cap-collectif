@@ -53,8 +53,8 @@ Scenario: GraphQL client want to get a node of all available types
       "projectId": "project1",
       "groupId": "group1",
       "proposalFormId": "proposalForm1",
-      "questionnaireId": "questionnaire1",
-      "eventId": "event1",
+      "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
+      "eventId": "RXZlbnQ6ZXZlbnQx",
       "requirementId": "requirement1"
     }
   }

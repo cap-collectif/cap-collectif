@@ -19,7 +19,7 @@ Scenario: User wants to add a source on an opinion
             id
           }
           author {
-            id
+            _id
           }
         }
         sourceEdge {
@@ -60,7 +60,7 @@ Scenario: User wants to add a source on an opinion
           },
           "body": "\u003Cdiv\u003EJai un corps mais pas de bras :\u0027(\u003C\/div\u003E",
           "author": {
-            "id": "user5"
+            "_id": "user5"
           }
         },
         "sourceEdge": {

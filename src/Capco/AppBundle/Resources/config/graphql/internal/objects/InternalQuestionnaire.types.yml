@@ -3,6 +3,7 @@ InternalQuestionnaire:
   inherits:
     - Node
     - PublicQuestionnaire
+    - InternalPrimaryKey
   config:
     name: Questionnaire
     interfaces: [Node]
@@ -26,8 +27,7 @@ InternalQuestionnaire:
       viewerReplies:
         type: '[Reply!]!'
         access: '@=isAuthenticated()'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
       acknowledgeReplies:
         type: 'Boolean!'
       type:

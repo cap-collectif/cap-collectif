@@ -9,7 +9,7 @@ import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import type { GlobalState, Dispatch } from '../../../types';
 import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutation';
-import UserAdminAccount_user from './__generated__/UserAdminAccount_user.graphql';
+import type { UserAdminAccount_user } from './__generated__/UserAdminAccount_user.graphql';
 import DeleteAccountModal from '../DeleteAccountModal';
 import SelectUserRole from '../../Form/SelectUserRole';
 import DatesInterval from '../../Utils/DatesInterval';
@@ -21,7 +21,6 @@ type Props = FormProps &
   RelayProps & {
     intl: IntlShape,
     isViewerOrSuperAdmin: boolean,
-    userDeletedIsNotViewer: boolean,
   };
 
 const formName = 'user-admin-edit-account';
@@ -89,7 +88,6 @@ export class UserAdminAccount extends React.Component<Props, State> {
       submitting,
       handleSubmit,
       isViewerOrSuperAdmin,
-      userDeletedIsNotViewer,
     } = this.props;
 
     return (
@@ -179,10 +177,11 @@ export class UserAdminAccount extends React.Component<Props, State> {
               />
             </ButtonToolbar>
             {isViewerOrSuperAdmin && (
+              // $FlowFixMe
               <DeleteAccountModal
                 viewer={user}
                 redirectToAdminUrl
-                userDeletedIsNotViewer={userDeletedIsNotViewer}
+                userDeletedIsNotViewer={!user.isViewer}
                 show={this.state.showDeleteAccountModal}
                 handleClose={() => {
                   this.setState({ showDeleteAccountModal: false });
@@ -213,7 +212,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, { user }:
   },
   isViewerOrSuperAdmin:
     user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  userDeletedIsNotViewer: user.id !== (state.user.user && state.user.user.id),
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -223,13 +221,13 @@ export default createFragmentContainer(
   graphql`
     fragment UserAdminAccount_user on User {
       id
+      isViewer
       roles
       locked
       vip
       enabled
       isSubscribedToNewsLetter
       subscribedToNewsLetterAt
-      isViewer
       ...DeleteAccountModal_viewer
     }
   `,
