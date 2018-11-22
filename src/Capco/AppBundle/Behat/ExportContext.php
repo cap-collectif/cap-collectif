@@ -16,6 +16,8 @@ class ExportContext implements KernelAwareContext
 {
     use KernelDictionary;
 
+    private const SNAPSHOTS_DIRNAME = '__snapshots__';
+
     private $config = [
         'readerType' => Type::CSV,
         'delimiter' => ',',
@@ -30,6 +32,13 @@ class ExportContext implements KernelAwareContext
     private function getExportDir(): string
     {
         return $this->getKernel()->getRootDir() . '/../web/export';
+    }
+
+    private function getSnapshotsDir(): string
+    {
+        return $this->getKernel()->getRootDir() .
+            '/../features/commands/' .
+            self::SNAPSHOTS_DIRNAME;
     }
 
     private function getConfig(): array
@@ -88,9 +97,36 @@ class ExportContext implements KernelAwareContext
         $behatLines = $behatInput->getStrings();
         $behatHeader = explode($delimiter, array_shift($behatLines));
 
-        $output = $this->getCleanOutput($csvHeader, $csvLines, $behatHeader, $behatLines);
+        $output = $this->getCleanOutput($behatHeader, $behatLines, $csvHeader, $csvLines);
 
-        $this->compareHeader($output['behat']['header'], $output['csv']['header']);
+        $this->compareHeader($output['expected']['header'], $output['actual']['header']);
+    }
+
+    /**
+     * @Then /^exported file with name "([^"]*)" should have (?P<num>\d+) rows$/
+     */
+    public function exportedFileWithNameShouldHaveRows(string $name, int $rows): void
+    {
+        $path = $this->getExportDir() . "/$name";
+        $csvLines = $this->getFileLines($path);
+        Assert::assertCount($rows, $csvLines);
+    }
+
+    /**
+     * @Then /^exported file with name "([^"]*)" should match its snapshot$/
+     */
+    public function exportedFileWithNameShouldLooksLikeItsSnapshot(string $name): void
+    {
+        $realPath = $this->getExportDir() . "/$name";
+        $snapshotPath = $this->getSnapshotsDir() . "/$name";
+        $csvLines = $this->getFileLines($realPath);
+        $csvHeader = array_shift($csvLines);
+        $snapshotLines = $this->getFileLines($snapshotPath);
+        $snapshotHeader = array_shift($snapshotLines);
+
+        $output = $this->getCleanOutput($snapshotHeader, $snapshotLines, $csvHeader, $csvLines);
+
+        $this->compareOutput($output);
     }
 
     /**
@@ -109,10 +145,9 @@ class ExportContext implements KernelAwareContext
             return explode($delimiter, $behatLine);
         }, $behatLines);
 
-        $output = $this->getCleanOutput($csvHeader, $csvLines, $behatHeader, $behatLines);
+        $output = $this->getCleanOutput($behatHeader, $behatLines, $csvHeader, $csvLines);
 
-        $this->compareHeader($output['behat']['header'], $output['csv']['header']);
-        $this->compareLines($output['behat']['lines'], $output['csv']['lines']);
+        $this->compareOutput($output);
     }
 
     private function compareHeader(array $expected, array $actual): void
@@ -180,33 +215,39 @@ class ExportContext implements KernelAwareContext
     }
 
     private function getCleanOutput(
-        array $csvHeader,
-        array $csvLines,
-        array $behatHeader,
-        array $behatLines
+        array $expectedHeader,
+        array $expectedLines,
+        array $actualHeader,
+        array $actualLines
     ): array {
-        $output['csv'] = [
-            'header' => $csvHeader,
-            'lines' => array_map(function (array $csvLine) use ($csvHeader) {
+        $output['expected'] = [
+            'header' => $expectedHeader,
+            'lines' => array_map(function (array $expectedLine) use ($expectedHeader) {
                 $result = [];
-                foreach ($csvLine as $i => $csvField) {
-                    $result[$csvHeader[$i]] = $csvField;
+                foreach ($expectedLine as $i => $csvField) {
+                    $result[$expectedHeader[$i]] = $csvField;
                 }
                 return $result;
-            }, $csvLines),
+            }, $expectedLines),
         ];
 
-        $output['behat'] = [
-            'header' => $behatHeader,
-            'lines' => array_map(function (array $behatLine) use ($behatHeader) {
+        $output['actual'] = [
+            'header' => $actualHeader,
+            'lines' => array_map(function (array $actualLine) use ($actualHeader) {
                 $result = [];
-                foreach ($behatLine as $i => $csvField) {
-                    $result[$behatHeader[$i]] = $csvField;
+                foreach ($actualLine as $i => $field) {
+                    $result[$actualHeader[$i]] = $field;
                 }
                 return $result;
-            }, $behatLines),
+            }, $actualLines),
         ];
 
         return $output;
+    }
+
+    private function compareOutput(array $output): void
+    {
+        $this->compareHeader($output['expected']['header'], $output['actual']['header']);
+        $this->compareLines($output['expected']['lines'], $output['actual']['lines']);
     }
 }
