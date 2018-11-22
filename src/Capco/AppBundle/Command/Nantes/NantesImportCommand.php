@@ -296,10 +296,15 @@ class NantesImportCommand extends ContainerAwareCommand
             $proposals = $this->proposals[$oldProjectId];
             $progress = new ProgressBar($output, \count($proposals));
             $count = 1;
+            $defaultAuthor = $this->em->getRepository(User::class)->findOneBy([
+                'email' => $this->nantesAuthor,
+            ]);
             foreach ($proposals as $proposal) {
-                $author = $this->em->getRepository(User::class)->findOneBy([
-                    'openId' => $proposal['userUuid'],
-                ]);
+                $author =
+                    $this->em->getRepository(User::class)->findOneBy([
+                        'openId' => $proposal['userUuid'],
+                    ]) ?? $defaultAuthor;
+
                 $description =
                     '' !== $proposal['videoLink']
                         ? $proposal['description'] .
