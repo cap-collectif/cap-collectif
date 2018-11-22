@@ -14,7 +14,7 @@ Scenario: GraphQL client wants to get list of users who following a proposal
             edges {
               cursor
               node {
-                _id
+                id
               }
             }
           }
@@ -31,26 +31,26 @@ Scenario: GraphQL client wants to get list of users who following a proposal
   Then the JSON response should match:
   """
   {
-    "data": {
-        "proposal": {
-           "followers": {
+     "data":{
+        "proposal":{
+           "followers":{
               "edges":[
                  {
                     "cursor":"@string@",
                     "node":{
-                       "_id":"user1"
+                       "id":"user1"
                     }
                  },
                  {
                     "cursor":"@string@",
                     "node":{
-                       "_id":"user2"
+                       "id":"user2"
                     }
                  }
               ]
-          }
-      }
-    }
+           }
+        }
+     }
   }
   """
 

@@ -59,7 +59,7 @@ Scenario: Anonymous GraphQL client want to get the personal data of a user
       }
     }",
     "variables": {
-      "userId": "VXNlcjp1c2VyNQ=="
+      "userId": "user5"
     }
   }
   """
@@ -120,7 +120,7 @@ Scenario: Admin GraphQL client want to get the personal data of a user
       }
     }",
     "variables": {
-      "userId": "VXNlcjp1c2VyNQ=="
+      "userId": "user5"
     }
   }
   """
@@ -163,7 +163,7 @@ Scenario: GraphQL client want to get the personal data of user authenticated as 
       }
     }",
     "variables": {
-      "userId": "VXNlcjp1c2VyNQ=="
+      "userId": "user5"
     }
   }
   """

@@ -15,7 +15,7 @@
     "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build -p && webpack --config webpack/webpack.prod.client.js",
     "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack/webpack.config.serverside.legacy.js",
     "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack/webpack.config.serverside.legacy.js",
-    "build-relay-schema": "relay-compiler --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums",
+    "build-relay-schema": "relay-compiler --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums --quiet",
     "build-relay-schema:watch": "relay-compiler --watch --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums",
     "download-translations": "bin/console translation:download --no-debug",
     "update-js-translation": "node --experimental-modules ./xlf2-to-json.mjs",
@@ -44,10 +44,10 @@
   "flow-coverage-report": {
     "threshold": 70,
     "outputDir": "coverage/flow/",
-    "globIncludePatterns": [
+    "includeGlob": [
       "app/Resources/js/**/*.js"
     ],
-    "reportTypes": [
+    "type": [
       "text",
       "html",
       "json"
@@ -137,7 +137,6 @@
     "babel-loader": "^8.0.4",
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-react-docgen": "^2.0.0",
-    "babel-plugin-react-intl": "^3.0.1",
     "babel-plugin-relay": "^1.6.2",
     "babel-plugin-styled-components": "^1.8.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -178,6 +177,7 @@
     "graphql-schema-linter": "^0.1.6",
     "ignore-loader": "^0.1.2",
     "imports-loader": "^0.7.0",
+    "intl-relativeformat": "^2.1.0",
     "jest": "^23.6.0",
     "jest-styled-components": "^4.11.0-1",
     "jquery": "^3.3.1",
@@ -217,8 +217,8 @@
     "react-dropzone": "^5.0.1",
     "react-google-charts": "^1.0.2",
     "react-google-recaptcha": "^0.9.6",
-    "react-intl": "https://github.com/cap-collectif/react-intl/tarball/2395c315a2b7cb87c18a14fcc46b8855becdccb0",
-    "react-intl-redux": "^0.6.0",
+    "react-intl": "https://github.com/cap-collectif/react-intl.git",
+    "react-intl-redux": "^2.0.2",
     "react-leaflet": "^1.9.1",
     "react-leaflet-markercluster": "^1.1.8",
     "react-leaflet-universal": "^1.1.2",
@@ -241,7 +241,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.2.0",
     "redux-saga": "v0.14.0",
-    "regenerator-runtime": "^0.12.1",
+    "regenerator-runtime": "^0.13.1",
     "relay-compiler": "^1.1.0",
     "relay-devtools": "^1.4.0",
     "relay-runtime": "^1.6.0",

@@ -119,6 +119,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @When /^I send a preview GraphQL POST request:$/
+     */
+    public function iSendAPreviewGraphQLPostRequest(PyStringNode $string)
+    {
+        $this->iSendAGraphQLPostRequest('preview', $string);
+    }
+
+    /**
      * @When /^I send a GraphQL POST request:$/
      */
     public function iSendAnInternalGraphQLPostRequest(PyStringNode $string)

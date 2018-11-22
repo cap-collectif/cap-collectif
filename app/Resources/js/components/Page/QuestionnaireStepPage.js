@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import StepPageFooter from '../Steps/Page/StepPageFooter';
@@ -13,7 +13,7 @@ import { Loader } from '../Ui/FeedbacksIndicators/Loader';
 
 type Props = {
   step: Object,
-  questionnaireId: ?string,
+  form: { id: string },
   isAuthenticated: boolean,
 };
 
@@ -21,13 +21,15 @@ const component = ({
   error,
   props,
 }: {
+  error: ?Error,
   props: ?QuestionnaireStepPageQueryResponse,
-} & ReadyState) => {
+}) => {
   if (error) {
     return graphqlError;
   }
 
   if (props) {
+    // eslint-disable-next-line
     if (props.questionnaire !== null) {
       return (
         <div>
@@ -44,30 +46,28 @@ const component = ({
 
 export class QuestionnaireStepPage extends React.Component<Props> {
   render() {
-    const { questionnaireId, step, isAuthenticated } = this.props;
+    const { form, step } = this.props;
 
     return (
       <div>
         <StepPageHeader step={step} />
-        {questionnaireId ? (
-          <QueryRenderer
-            environment={environment}
-            query={graphql`
-              query QuestionnaireStepPageQuery($id: ID!, $isAuthenticated: Boolean!) {
-                questionnaire: node(id: $id) {
-                  ...ReplyCreateFormWrapper_questionnaire
-                    @arguments(isAuthenticated: $isAuthenticated)
-                  ...UserReplies_questionnaire @arguments(isAuthenticated: $isAuthenticated)
-                }
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query QuestionnaireStepPageQuery($id: ID!, $isAuthenticated: Boolean!) {
+              questionnaire: node(id: $id) {
+                ...ReplyCreateFormWrapper_questionnaire
+                  @arguments(isAuthenticated: $isAuthenticated)
+                ...UserReplies_questionnaire @arguments(isAuthenticated: $isAuthenticated)
               }
-            `}
-            variables={{
-              id: questionnaireId,
-              isAuthenticated,
-            }}
-            render={component}
-          />
-        ) : null}
+            }
+          `}
+          variables={{
+            id: form.id,
+            isAuthenticated: this.props.isAuthenticated,
+          }}
+          render={component}
+        />
         <StepPageFooter step={step} />
       </div>
     );

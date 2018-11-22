@@ -2,33 +2,31 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Event;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\CommentVote;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\NewsletterSubscription;
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\UserGroup;
-use Capco\AppBundle\Entity\CommentVote;
-use Capco\AppBundle\Entity\AbstractVote;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\UserBundle\Doctrine\UserManager;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\RedisStorageHelper;
-use Sonata\MediaBundle\Provider\ImageProvider;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Repository\UserGroupRepository;
+use Capco\MediaBundle\Entity\Media;
+use Capco\UserBundle\Doctrine\UserManager;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Symfony\Component\Translation\TranslatorInterface;
-use Sonata\MediaBundle\Provider\MediaProviderInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Sonata\MediaBundle\Provider\ImageProvider;
+use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class DeleteAccountMutation implements MutationInterface
 {
@@ -62,13 +60,12 @@ class DeleteAccountMutation implements MutationInterface
     {
         $deleteType = $input['type'];
         $user = $viewer;
-
-        if ($viewer->isSuperAdmin() && isset($input['userId'])) {
-            $userId = GlobalId::fromGlobalId($input['userId'])['id'];
-            $user = $this->userRepository->find($userId);
-            if (!$user) {
-                throw new UserError('Can not find this userId !');
-            }
+        if (
+            isset($input['userId']) &&
+            !empty($input['userId']) &&
+            $input['userId'] !== $user->getId()
+        ) {
+            $user = $this->userRepository->find($input['userId']);
         }
 
         $this->hardDeleteUserContributionsInActiveSteps($user);
@@ -80,7 +77,7 @@ class DeleteAccountMutation implements MutationInterface
 
         $this->em->flush();
 
-        return ['userId' => GlobalId::toGlobalId('User', $user->getId())];
+        return ['userId' => $user->getId()];
     }
 
     public function anonymizeUser(User $user): void
@@ -142,9 +139,9 @@ class DeleteAccountMutation implements MutationInterface
         $user->setTimezone(null);
         $user->setLocked(true);
         if ($user->getMedia()) {
-            $media = $this->em
-                ->getRepository('CapcoMediaBundle:Media')
-                ->find($user->getMedia()->getId());
+            $media = $this->em->getRepository('CapcoMediaBundle:Media')->find(
+                $user->getMedia()->getId()
+            );
             $this->removeMedia($media);
             $user->setMedia(null);
         }
@@ -189,19 +186,21 @@ class DeleteAccountMutation implements MutationInterface
             }
 
             if (
-                ($contribution instanceof Proposal ||
-                    $contribution instanceof Opinion ||
-                    $contribution instanceof Source ||
-                    $contribution instanceof Argument) &&
+                (
+                    $contribution instanceof Proposal ||
+                        $contribution instanceof Opinion ||
+                        $contribution instanceof Source ||
+                        $contribution instanceof Argument
+                ) &&
                 $contribution->getStep()->canContribute($user)
             ) {
                 $toDeleteList[] = $contribution;
             }
 
             if (!$dryRun && method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                $media = $this->em
-                    ->getRepository('CapcoMediaBundle:Media')
-                    ->find($contribution->getMedia()->getId());
+                $media = $this->em->getRepository('CapcoMediaBundle:Media')->find(
+                    $contribution->getMedia()->getId()
+                );
                 $this->removeMedia($media);
                 $contribution->setMedia(null);
             }
@@ -243,9 +242,9 @@ class DeleteAccountMutation implements MutationInterface
                 $contribution->setSummary(null);
             }
             if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                $media = $this->em
-                    ->getRepository('CapcoMediaBundle:Media')
-                    ->find($contribution->getMedia()->getId());
+                $media = $this->em->getRepository('CapcoMediaBundle:Media')->find(
+                    $contribution->getMedia()->getId()
+                );
                 $this->removeMedia($media);
                 $contribution->setMedia(null);
             }

@@ -11,12 +11,7 @@ describe('<ProposalAdminStatusForm />', () => {
       id: 'proposal1',
       $refType,
       trashedReason: null,
-      author: {
-        id: 'author1',
-        isViewer: false,
-        isEmailConfirmed: false,
-        email: 'soon@yopmail.com',
-      },
+      author: { id: 'author1', isEmailConfirmed: false, email: 'soon@yopmail.com' },
       deletedAt: null,
       publicationStatus: 'UNPUBLISHED',
     };
@@ -24,12 +19,14 @@ describe('<ProposalAdminStatusForm />', () => {
       <ProposalAdminStatusForm
         publicationStatus="UNPUBLISHED"
         isSuperAdmin
+        isAuthor={false}
         pristine
         invalid={false}
         valid={false}
         submitSucceeded={false}
         submitFailed={false}
         submitting={false}
+        relay={{}}
         dispatch={jest.fn()}
         proposal={proposalUnpulished}
         handleSubmit={jest.fn()}
@@ -46,7 +43,6 @@ describe('<ProposalAdminStatusForm />', () => {
       author: {
         id: 'author1',
         isEmailConfirmed: true,
-        isViewer: false,
         email: 'soon@yopmail.com',
       },
       trashedReason: null,
@@ -56,7 +52,9 @@ describe('<ProposalAdminStatusForm />', () => {
     const wrapper = shallow(
       <ProposalAdminStatusForm
         publicationStatus="PUBLISHED"
+        relay={{}}
         isSuperAdmin
+        isAuthor={false}
         pristine
         invalid={false}
         valid={false}

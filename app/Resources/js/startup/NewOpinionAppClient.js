@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql, QueryRenderer } from 'react-relay';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
-import { IntlProvider } from 'react-intl-redux';
+import IntlProvider from './IntlProvider';
 import environment from '../createRelayEnvironment';
 import NewOpinionButton from '../components/Opinion/NewOpinionButton';
 import type { NewOpinionAppClientQueryVariables } from './__generated__/NewOpinionAppClientQuery.graphql';

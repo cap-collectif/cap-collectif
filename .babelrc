@@ -41,11 +41,5 @@
         "react-docgen",
         "relay",
         "transform-class-properties",
-        [
-            "react-intl",
-            {
-                "messagesDir": "./intl/react/"
-            }
-        ]
     ]
 }

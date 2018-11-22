@@ -77,7 +77,7 @@ Scenario: Anonymous wants to get votes "YES" for an opinion
               node {
                 id
                 author {
-                  _id
+                  id
                 }
                 value
               }
@@ -103,7 +103,7 @@ Scenario: Anonymous wants to get votes "YES" for an opinion
           "node":{
             "id":"@string@",
           "author":{
-            "_id":"user3"
+            "id":"user3"
           },
           "value":"YES"
           }},
@@ -112,7 +112,7 @@ Scenario: Anonymous wants to get votes "YES" for an opinion
           "node":{
             "id":"@string@",
             "author":{
-              "_id":"userAdmin"
+              "id":"userAdmin"
             },
             "value":"YES"
           }}]

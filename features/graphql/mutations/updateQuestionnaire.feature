@@ -28,7 +28,7 @@ Scenario: GraphQL client wants to update a questionnaire
     }",
     "variables": {
       "input": {
-        "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
+        "questionnaireId": "questionnaire2",
         "title": "New title",
         "description": "New description"
       }
@@ -41,7 +41,7 @@ Scenario: GraphQL client wants to update a questionnaire
      "data":{
         "updateQuestionnaireConfiguration":{
            "questionnaire":{
-              "id":"UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
+              "id":"questionnaire2",
               "title":"New title",
               "description":"New description",
               "questions":[
@@ -105,7 +105,7 @@ Scenario: GraphQL admin wants to reorder questions
     }",
     "variables": {
       "input": {
-        "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMg==",
+        "questionnaireId": "questionnaire2",
         "questions": [
           {
             "question": {
@@ -185,7 +185,7 @@ Scenario: GraphQL admin wants to delete first question
     }",
     "variables": {
       "input": {
-        "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+        "questionnaireId": "questionnaire10",
         "title": "Questionnaire non rattaché",
         "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
         "questions": [
@@ -272,7 +272,7 @@ Scenario: GraphQL admin wants to delete first question choice
     }",
     "variables": {
       "input": {
-        "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMTA=",
+        "questionnaireId": "questionnaire10",
         "title": "Questionnaire non rattaché",
         "description": "<p>Excepturi esse similique laudantium quis. Minus sint fugit voluptatem voluptas.</p>",
         "questions": [

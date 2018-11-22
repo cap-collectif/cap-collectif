@@ -15,7 +15,7 @@ Scenario: User wants to add a comment on a proposal
             published
             body
             author {
-              _id
+              id
             }
           }
         }
@@ -40,7 +40,7 @@ Scenario: User wants to add a comment on a proposal
                   "published": true,
                   "body": "Tololo",
                   "author": {
-                    "_id": "user5"
+                    "id": "user5"
                   }
               }
           }

@@ -46,6 +46,7 @@ class UserSerializationListener extends AbstractSerializationListener
     public function onPostUserSerialize(ObjectEvent $event)
     {
         $user = $event->getObject();
+
         // We skip if we are serializing for Elasticsearch
         if (
             isset($this->getIncludedGroups($event)['Elasticsearch']) &&

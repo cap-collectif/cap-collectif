@@ -213,7 +213,7 @@ Scenario: Super Admin GraphQL client wants to update a proposal
           title
           body
           author {
-            _id
+            id
           }
           theme {
             id
@@ -245,7 +245,7 @@ Scenario: Super Admin GraphQL client wants to update a proposal
         "title": "NewTitle",
         "body": "NewBody",
         "theme": "theme1",
-        "author": "VXNlcjp1c2VyQWRtaW4=",
+        "author": "userAdmin",
         "district": "district2",
         "category": "pCategory2",
         "responses": [
@@ -280,7 +280,7 @@ Scenario: Super Admin GraphQL client wants to update a proposal
           "id":"proposal2",
           "title":"NewTitle",
           "body":"NewBody",
-          "author":{"_id":"user5"},
+          "author":{"id":"userAdmin"},
           "theme":{"id":"theme1"},
           "district":{"id":"district2"},
           "category":{"id":"pCategory2"},

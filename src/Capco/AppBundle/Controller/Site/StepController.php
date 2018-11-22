@@ -2,30 +2,29 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
-use JMS\Serializer\SerializationContext;
-use Capco\AppBundle\Helper\ProjectHelper;
-use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\RankingStep;
-use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\RankingStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
+use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Resolver\EventResolver;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use JMS\Serializer\SerializationContext;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class StepController extends Controller
 {
@@ -79,11 +78,11 @@ class StepController extends Controller
         );
 
         $contributorsList =
-            $contributorsConnection->totalCount >
-            0
-            /** @var User $user */
+            $contributorsConnection->totalCount > 0
                 ? array_merge(
-                    ...array_map(function (Edge $edge) {
+                ...array_map(
+                    function (Edge $edge) {
+                        /** @var User $user */
                         $user = $edge->node;
 
                         return [
@@ -96,8 +95,10 @@ class StepController extends Controller
                                 'votes' => $user->getVotesCount(),
                             ],
                         ];
-                    }, $contributorsConnection->edges)
+                    },
+                    $contributorsConnection->edges
                 )
+            )
                 : [];
 
         $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
@@ -288,9 +289,9 @@ class StepController extends Controller
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
 
-        $countFusions = $proposalForm
-            ? $this->get('capco.proposal.repository')->countFusionsByProposalForm($proposalForm)
-            : 0;
+        $countFusions = $this->get('capco.proposal.repository')->countFusionsByProposalForm(
+            $proposalForm
+        );
 
         $serializer = $this->get('serializer');
         $props = $serializer->serialize(
@@ -304,21 +305,23 @@ class StepController extends Controller
                 'countFusions' => $countFusions,
             ],
             'json',
-            SerializationContext::create()->setGroups([
-                'Statuses',
-                'ProposalForms',
-                'Questions',
-                'ThemeDetails',
-                'Districts',
-                'DistrictDetails',
-                'Default',
-                'Steps',
-                'VoteThreshold',
-                'UserVotes',
-                'Proposals',
-                'UsersInfos',
-                'UserMedias',
-            ])
+            SerializationContext::create()->setGroups(
+                [
+                    'Statuses',
+                    'ProposalForms',
+                    'Questions',
+                    'ThemeDetails',
+                    'Districts',
+                    'DistrictDetails',
+                    'Default',
+                    'Steps',
+                    'VoteThreshold',
+                    'UserVotes',
+                    'Proposals',
+                    'UsersInfos',
+                    'UserMedias',
+                ]
+            )
         );
 
         return [
@@ -347,14 +350,16 @@ class StepController extends Controller
 
         $serializer = $this->get('serializer');
         $props = $serializer->serialize(
-            [
-                'step' => $step,
-                'questionnaireId' => $step->getQuestionnaire()
-                    ? GlobalId::toGlobalId('Questionnaire', $step->getQuestionnaire()->getId())
-                    : null,
-            ],
+            ['step' => $step, 'form' => $step->getQuestionnaire() ?: null],
             'json',
-            SerializationContext::create()->setGroups(['Steps'])
+            SerializationContext::create()->setGroups(
+                [
+                    'Questionnaires',
+                    'Questions',
+                    'QuestionnaireSteps',
+                    'Steps',
+                ]
+            )
         );
 
         return ['project' => $project, 'currentStep' => $step, 'props' => $props];
@@ -367,8 +372,11 @@ class StepController extends Controller
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Step:selection.html.twig")
      */
-    public function showSelectionStepAction(Request $request, Project $project, SelectionStep $step)
-    {
+    public function showSelectionStepAction(
+        Request $request,
+        Project $project,
+        SelectionStep $step
+    ) {
         if (!$project->canDisplay($this->getUser())) {
             throw new ProjectAccessDeniedException();
         }
@@ -392,19 +400,21 @@ class StepController extends Controller
                 'showThemes' => $showThemes,
             ],
             'json',
-            SerializationContext::create()->setGroups([
-                'Steps',
-                'ProposalForms',
-                'UserVotes',
-                'Statuses',
-                'ThemeDetails',
-                'Districts',
-                'Default',
-                'Proposals',
-                'UsersInfos',
-                'UserMedias',
-                'VoteThreshold',
-            ])
+            SerializationContext::create()->setGroups(
+                [
+                    'Steps',
+                    'ProposalForms',
+                    'UserVotes',
+                    'Statuses',
+                    'ThemeDetails',
+                    'Districts',
+                    'Default',
+                    'Proposals',
+                    'UsersInfos',
+                    'UserMedias',
+                    'VoteThreshold',
+                ]
+            )
         );
 
         return ['project' => $project, 'currentStep' => $step, 'props' => $props];

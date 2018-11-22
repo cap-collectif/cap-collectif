@@ -69,7 +69,7 @@
         <section class="section--custom">
             <div class="container container--thinner">
                 {% if capco_comment_can_show(post) %}
-                    {{ react_render_component('CommentSectionApp', {'props': { 'commentableId': post.id|toGlobalId('Post') }}) }}
+                    {{ react_render_component('CommentSectionApp', { 'props': props }) }}
                 {% endif %}
             </div>
         </section>
