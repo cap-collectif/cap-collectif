@@ -13,7 +13,31 @@ Scenario: Admin wants to export consultation steps
 Scenario: Admin wants to export collect steps
   Given I run "capco:export:proposalStep"
   Then the command exit code should be 0
+  And exported file with name "budget-participatif-rennes_depot-avec-vote.csv" should match its snapshot
+  And exported file with name "appel-a-projets_collecte-des-propositions-avec-vote-simple.csv" should match its snapshot
+  And exported file with name "bp-avec-vote-classement_collecte-avec-vote-classement-limite.csv" should match its snapshot
+  And exported file with name "bp-avec-vote-classement_selection-avec-vote-classement-limite.csv" should match its snapshot
   And exported file with name "budget-avec-vote-limite_collecte-avec-vote-simple-limite.csv" should match its snapshot
+  And exported file with name "budget-avec-vote-limite_selection-avec-vote-budget-limite.csv" should match its snapshot
+  And exported file with name "budget-participatif-rennes_collecte-des-propositions-fermee.csv" should match its snapshot
+  And exported file with name "budget-participatif-rennes_collecte-des-propositions-privee.csv" should match its snapshot
+  And exported file with name "budget-participatif-rennes_collecte-des-propositions.csv" should match its snapshot
+  And exported file with name "budget-participatif-rennes_fermee.csv" should match its snapshot
+  And exported file with name "budget-participatif-rennes_realisation.csv" should match its snapshot
+  And exported file with name "budget-participatif-rennes_selection-a-venir.csv" should match its snapshot
+  And exported file with name "budget-participatif-rennes_selection.csv" should match its snapshot
+  And exported file with name "budget-participatif-rennes_vainqueur.csv" should match its snapshot
+  And exported file with name "depot-avec-selection-vote-budget_collecte-des-propositions-1.csv" should match its snapshot
+  And exported file with name "depot-avec-selection-vote-budget_selection-avec-vote-selon-le-budget.csv" should match its snapshot
+  And exported file with name "depot-avec-selection-vote-simple_depot-ferme.csv" should match its snapshot
+  And exported file with name "depot-avec-selection-vote-simple_selection-avec-vote-simple.csv" should match its snapshot
+  And exported file with name "project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement_collecte-des-propositions-pour-la-capcobeer.csv" should match its snapshot
+  And exported file with name "project-pour-la-force-visible-par-mauriau-seulement_collecte-des-propositions-pour-la-force.csv" should match its snapshot
+  And exported file with name "projet-avec-une-etape-de-participation-en-continue_collecte-avec-vote-simple-limite-1.csv" should match its snapshot
+  And exported file with name "questions-responses_collecte-des-questions-chez-youpie.csv" should match its snapshot
+  And exported file with name "questions-responses_selection-de-questions-avec-vote-classement-limite.csv" should match its snapshot
+  And exported file with name "qui-doit-conquerir-le-monde-visible-par-les-admins-seulement_collecte-des-propositions-pour-conquerir-le-monde.csv" should match its snapshot
+  And exported file with name "un-avenir-meilleur-pour-les-nains-de-jardins-custom-access_collecte-des-propositions-liberer-les-nains-de-jardin.csv" should match its snapshot
   
 @parallel-scenario
 Scenario: Admin wants to export questionnaire steps
