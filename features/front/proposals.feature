@@ -6,7 +6,7 @@ Feature: Proposals
 Scenario: Anonymous user wants to see proposals in a collect step and apply filters
   Given features themes, districts are enabled
   And I go to an open collect step
-  Then there should be 6 proposals
+  Then there should be 7 proposals
   And I change the proposals theme filter
   Then there should be 5 proposals
 
@@ -14,9 +14,9 @@ Scenario: Anonymous user wants to see proposals in a collect step and apply filt
 Scenario: Anonymous user wants to see proposals in a collect step and apply status filters
   Given features themes, districts are enabled
   And I go to an open collect step
-  Then there should be 6 proposals
+  Then there should be 7 proposals
   And I change the proposals status filter to "Approuvé"
-  Then there should be 1 proposals
+  Then there should be 2 proposals
   And I change the proposals status filter to "En cours"
   Then there should be 4 proposals
 
@@ -24,9 +24,9 @@ Scenario: Anonymous user wants to see proposals in a collect step and apply stat
 Scenario: Anonymous user wants to see proposals in a collect step and apply contributor type filters
   Given features themes, districts, user_type are enabled
   And I go to an open collect step
-  Then there should be 6 proposals
+  Then there should be 7 proposals
   And I change the proposals contributor type filter to "Citoyen"
-  Then there should be 6 proposals
+  Then there should be 7 proposals
   And I change the proposals contributor type filter to "Institution"
   Then there should be 0 proposals
 
@@ -46,7 +46,7 @@ Scenario: Anonymous user wants to see proposals in a collect step and sort them
   Given I go to an open collect step
   Then proposals should be ordered randomly
   When I sort proposals by date
-  Then proposals should be ordered by date
+  Then proposal "Ravalement de la façade de la bibliothèque municipale" should be before proposal "Proposition pas encore votable"
   When I sort proposals by comments
   Then proposals should be ordered by comments
 
@@ -69,15 +69,15 @@ Scenario: Anonymous user wants to search a proposal with the random filter
 @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and search by term
   Given I go to an open collect step
-  Then there should be 6 proposals
+  Then there should be 7 proposals
   When I search for proposals with terms "proposition"
-  Then there should be 2 proposals
+  Then there should be 3 proposals
   Then proposals should be filtered by terms
 
 @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and search by reference
   Given I go to an open collect step
-  Then there should be 6 proposals
+  Then there should be 7 proposals
   When I search for proposals with terms "1-7"
   Then there should be 1 proposals
   Then proposals should be filtered by references
@@ -85,7 +85,7 @@ Scenario: Anonymous user wants to see proposals in a collect step and search by 
 @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and search by term but find no ones
   Given I go to an open collect step
-  Then there should be 6 proposals
+  Then there should be 7 proposals
   When I search for proposals with terms "toto"
   Then there should be 0 proposals
   Then proposals should have no results
@@ -95,11 +95,11 @@ Scenario: Anonymous user combine search, filters and sorting on proposals in a c
   Given features themes, districts are enabled
   And I am logged in as user
   And I go to an open collect step
-  Then there should be 6 proposals
+  Then there should be 7 proposals
   When I sort proposals by comments
   And I search for proposals with terms "proposition"
   And I change the proposals theme filter
-  Then there should be 2 proposals
+  Then there should be 3 proposals
   Then proposals should be filtered by theme and terms and sorted by comments
 
 Scenario: Anonymous user wants to see proposals likers
@@ -113,7 +113,7 @@ Scenario: Logged in user wants to create a proposal with theme
   Given features themes, districts are enabled
   And I am logged in as user
   And I go to an open collect step
-  Then there should be 6 proposals
+  Then there should be 7 proposals
   When I click the create proposal button
   And I fill the proposal form with a theme
   And I attach the file "/var/www/features/files/document.pdf" to "proposal-form-responses[3]_field"
@@ -172,13 +172,13 @@ Scenario: Non author of a proposal wants to update it
 Scenario: Author of a proposal wants to delete it
   Given I am logged in as user
   And I go to an open collect step
-  Then there should be 6 proposals
+  Then there should be 7 proposals
   And I go to a proposal
   When I click the delete proposal button
   And I confirm proposal deletion
   And I wait 2 seconds
   And I should not see my proposal anymore
-  Then there should be 5 proposals
+  Then there should be 6 proposals
 
 @database
 Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal
@@ -270,7 +270,7 @@ Scenario: Anonymous user wants to see proposals in a selection step and sort the
   Given I go to a selection step with simple vote enabled
   Then proposals should be ordered randomly
   When I sort proposals by date
-  Then proposals should be ordered by date
+  Then proposal "Ravalement de la façade de la bibliothèque municipale" should be before proposal "Rénovation du gymnase"
   When I sort proposals by comments
   Then proposals should be ordered by comments
 
