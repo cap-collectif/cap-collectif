@@ -224,34 +224,35 @@ EOF;
         'contributions_reportings_createdAt' => 'createdAt',
     ];
 
-    protected $contributionHeaderMap = [
-        'contributions_id' => 'id',
-        'contributions_author_id' => 'author.id',
-        'contributions_section_title' => 'section.title',
-        'contributions_title' => 'title',
-        'contributions_bodyText' => 'bodyText',
-        'contributions_createdAt' => 'createdAt',
-        'contributions_updatedAt' => 'updatedAt',
-        'contributions_url' => 'url',
-        'contributions_published' => 'published',
-        'contributions_trashed' => 'trashed',
-        'contributions_trashedAt' => 'trashedAt',
-        'contributions_trashedReason' => 'trashedReason',
-        'contributions_votesCount' => 'votes.totalCount',
-        'contributions_votesCountOk' => 'votesOk.totalCount',
-        'contributions_votesCountMitige' => 'votesMitige.totalCount',
-        'contributions_votesCountNok' => 'votesNo.totalCount',
-        'contributions_argumentsCount' => 'arguments.totalCount',
-        'contributions_argumentsCountFor' => 'argumentsFor.totalCount',
-        'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
-        'contributions_sourcesCount' => 'sources.totalCount',
-        'contributions_versionsCount' => 'versions.totalCount',
-    ] +
-    self::ARGUMENT_HEADER_MAP +
-    self::VOTES_HEADER_MAP +
-    self::REPORTING_HEADER_MAP +
-    self::SOURCE_HEADER_MAP +
-    self::VERSION_HEADER_MAP;
+    protected $contributionHeaderMap =
+        [
+            'contributions_id' => 'id',
+            'contributions_author_id' => 'author.id',
+            'contributions_section_title' => 'section.title',
+            'contributions_title' => 'title',
+            'contributions_bodyText' => 'bodyText',
+            'contributions_createdAt' => 'createdAt',
+            'contributions_updatedAt' => 'updatedAt',
+            'contributions_url' => 'url',
+            'contributions_published' => 'published',
+            'contributions_trashed' => 'trashed',
+            'contributions_trashedAt' => 'trashedAt',
+            'contributions_trashedReason' => 'trashedReason',
+            'contributions_votesCount' => 'votes.totalCount',
+            'contributions_votesCountOk' => 'votesOk.totalCount',
+            'contributions_votesCountMitige' => 'votesMitige.totalCount',
+            'contributions_votesCountNok' => 'votesNo.totalCount',
+            'contributions_argumentsCount' => 'arguments.totalCount',
+            'contributions_argumentsCountFor' => 'argumentsFor.totalCount',
+            'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
+            'contributions_sourcesCount' => 'sources.totalCount',
+            'contributions_versionsCount' => 'versions.totalCount',
+        ] +
+        self::ARGUMENT_HEADER_MAP +
+        self::VOTES_HEADER_MAP +
+        self::REPORTING_HEADER_MAP +
+        self::SOURCE_HEADER_MAP +
+        self::VERSION_HEADER_MAP;
 
     protected static $defaultName = 'capco:export:consultation';
 
@@ -322,10 +323,12 @@ EOF;
             $this->currentStep
         );
 
-        $contributions = $this->executor->execute('internal', [
-            'query' => $contributionsQuery,
-            'variables' => [],
-        ])->toArray();
+        $contributions = $this->executor
+            ->execute('internal', [
+                'query' => $contributionsQuery,
+                'variables' => [],
+            ])
+            ->toArray();
 
         $totalCount = Arr::path($contributions, 'data.node.contributionConnection.totalCount');
         $progress = new ProgressBar($output, $totalCount);
@@ -378,7 +381,7 @@ ${sourceFragment}
 {
   node(id: "{$consultationStep->getId()}") {
     ... on Consultation {
-      contributionConnection(first: ${contributionPerPage}${contributionAfter}) {
+      contributionConnection(orderBy: {field: PUBLISHED_AT, direction: DESC}, first: ${contributionPerPage}${contributionAfter}) {
         totalCount
         pageInfo {
           startCursor

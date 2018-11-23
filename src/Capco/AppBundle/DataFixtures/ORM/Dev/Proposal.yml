@@ -3,42 +3,44 @@ Capco\AppBundle\Entity\Proposal:
     id: proposal1
     title: Ravalement de la façade de la bibliothèque municipale
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user502'
     proposalForm: '@proposalform1'
     theme: '@theme2'
     district: '@district1'
     status: '@status1'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
     likers: ['@user1', '@user2', '@user3', '@user4', '@user5']
     category: '@pCategory2'
     address: '[{"address_components":[{"long_name":"10","short_name":"10","types":["street_number"]},{"long_name":"Cours des Alliés","short_name":"Cours des Alliés","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"10 Cours des Alliés, 35000 Rennes, France","geometry":{"location":{"lat":48.1051781,"lng":-1.6744521},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.1065270802915,"lng":-1.673103119708498},"southwest":{"lat":48.1038291197085,"lng":-1.675801080291502}}},"place_id":"ChIJ59pcgLXfDkgR8WJ9mp5A204","types":["establishment","library","point_of_interest"]}]'
     reference: 1
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     evaluers: ['@group1']
   deletedProposal1:
     id: deletedProposal1
     title: Hélas j'étais trop violent pour être en ligne
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user502'
     proposalForm: '@proposalform1'
     theme: '@theme2'
     district: '@district1'
     status: '@status1'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
     deletedAt: <(new \DateTime('2018-01-01'))>
     likers: ['@user1', '@user2']
     category: '@pCategory2'
     address: '[{"address_components":[{"long_name":"10","short_name":"10","types":["street_number"]},{"long_name":"Cours des Alliés","short_name":"Cours des Alliés","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"10 Cours des Alliés, 35000 Rennes, France","geometry":{"location":{"lat":48.1051781,"lng":-1.6744521},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.1065270802915,"lng":-1.673103119708498},"southwest":{"lat":48.1038291197085,"lng":-1.675801080291502}}},"place_id":"ChIJ59pcgLXfDkgR8WJ9mp5A204","types":["establishment","library","point_of_interest"]}]'
     reference: 666
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     evaluers: ['@group1']
   proposal2:
     id: proposal2
     title: Rénovation du gymnase
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 4
     annotation: Lancer l'appel d'offre
     author: '@user5'
@@ -46,21 +48,20 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme3'
     district: '@district2'
     status: '@status2'
-    updatedAt: <(new \DateTime('2016-12-05'))>
     updateAuthor: '@user5'
-    publishedAt: <(new \DateTime('2015-02-01'))>
-    createdAt: <(new \DateTime('2015-02-01'))>
     likers: ['@user504']
     category: '@pCategory1'
     address: '[{"address_components":[{"long_name":"263","short_name":"263","types":["street_number"]},{"long_name":"Avenue Général Leclerc","short_name":"Avenue Général Leclerc","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35700","short_name":"35700","types":["postal_code"]}],"formatted_address":"263 Avenue Général Leclerc, 35700 Rennes, France","geometry":{"location":{"lat":48.11910899999999,"lng":-1.6447289},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.1204579802915,"lng":-1.643379919708498},"southwest":{"lat":48.1177600197085,"lng":-1.646077880291502}}},"place_id":"ChIJv1LUaPDeDkgRETcBpBBwDpc","types":["establishment","gym","health","point_of_interest"]}]'
     reference: 2
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     evaluers: ['@group1']
   proposal3:
     id: proposal3
     title: Installation de bancs sur la place de la mairie
     summary: Un beau résumé
-    body: |
-      <p>On va en faire un beau gymnase, promis :)</p>
+    body: <p>On va en faire un beau gymnase, promis :)</p>
     rating: 3
     annotation: Vérifier les normes de sécurité
     author: '@user502'
@@ -68,63 +69,69 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district4'
     status: '@status1'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
     category: '@pCategory2'
     address: '[{"address_components":[{"long_name":"Place de la Mairie","short_name":"Place de la Mairie","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"Place de la Mairie, 35000 Rennes, France","geometry":{"bounds":{"northeast":{"lat":48.1117581,"lng":-1.6785747},"southwest":{"lat":48.1109686,"lng":-1.6792841}},"location":{"lat":48.1113828,"lng":-1.6792624},"location_type":"GEOMETRIC_CENTER","viewport":{"northeast":{"lat":48.1127123302915,"lng":-1.677580419708498},"southwest":{"lat":48.1100143697085,"lng":-1.680278380291502}}},"partial_match":true,"place_id":"ChIJe-lPbDTeDkgR6WnOjk_3Lgk","types":["route"]}]'
     reference: 3
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal4:
     id: proposal4
     title: Plantation de tulipes dans les jardinière du parking de l'église avec un titre très long pour tester la césure
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 1
     annotation: Renvoyer l'idée à l'église
     author: '@user7'
     proposalForm: '@proposalform1'
     theme: '@theme2'
     district: '@district2'
-    publishedAt: <(new \DateTime('2015-03-01'))>
     address: '[{"address_components":[{"long_name":"45","short_name":"45","types":["street_number"]},{"long_name":"Rue de Brest","short_name":"Rue de Brest","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"45 Rue de Brest, 35000 Rennes, France","geometry":{"location":{"lat":48.1133495,"lng":-1.6984153},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.11469848029149,"lng":-1.697066319708498},"southwest":{"lat":48.1120005197085,"lng":-1.699764280291502}}},"place_id":"ChIJ1wi1uoPgDkgREYKb8YA-iqY","types":["church","establishment","place_of_worship","point_of_interest"]}]'
     reference: 4
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal5:
     id: proposal5
     title: Proposition à la corbeille (visible)
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     trashedStatus: 'visible'
     rating: 1
     author: '@user7'
-    publishedAt: <(new \DateTime('2015-03-01'))>
     proposalForm: '@proposalform1'
     theme: '@theme4'
     district: '@district3'
     status: '@status3'
     trashedReason: 'Pub'
     reference: 5
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal6:
     id: proposal6
     title: Proposition à la corbeille (invisible)
     trashedStatus: invisible
     trashedReason: Raciste
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3
     author: '@user4'
-    publishedAt: <(new \DateTime('2015-03-01'))>
     proposalForm: '@proposalform1'
     theme: '@theme2'
     district: '@district3'
     status: '@status1'
     reference: 6
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal7:
     id: proposal7
     title: Proposition très chère
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3
     author: '@user4'
-    publishedAt: <(new \DateTime('2015-03-01'))>
     proposalForm: '@proposalform3'
     theme: '@theme2'
     district: '@district3'
@@ -132,11 +139,14 @@ Capco\AppBundle\Entity\Proposal:
     estimation: 2999999
     category: '@pCategory3'
     reference: 1
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal8:
     id: proposal8
     title: Proposition pas chère
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3
     likers: ['@user1', '@user2', '@user3']
     author: '@user4'
@@ -147,13 +157,14 @@ Capco\AppBundle\Entity\Proposal:
     estimation: 100
     category: '@pCategory3'
     reference: 2
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal9:
     id: proposal9
     title: Proposition gratuite
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3
     author: '@user4'
     proposalForm: '@proposalform3'
@@ -162,12 +173,14 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     category: '@pCategory4'
     reference: 3
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal10:
     id: proposal10
     title: Proposition pas encore votable
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3
     author: '@user4'
     proposalForm: '@proposalform1'
@@ -176,13 +189,14 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     reference: 7
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-09-20'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal11:
     id: proposal11
     title: Proposition plus votable
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3
     author: '@user4'
     proposalForm: '@proposalform1'
@@ -191,12 +205,14 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     reference: 8
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal12:
     id: proposal12
     title: Proposition plus votable
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3
     author: '@user5'
     proposalForm: '@proposalform4'
@@ -205,12 +221,14 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status7'
     estimation: 100
     reference: 1
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal13:
     id: proposal13
     title: Proposition plus votable 2
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     rating: 3
     author: '@user5'
     proposalForm: '@proposalform4'
@@ -219,12 +237,14 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     reference: 2
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal14:
     id: proposal14
     title: Mon super projet
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user1'
     proposalForm: '@proposalform5'
     theme: '@theme2'
@@ -232,196 +252,260 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     reference: 1
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal15:
     id: proposal15
     title: Proposition 15
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user1'
     proposalForm: '@proposalform6'
     reference: 1
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal16:
     id: proposal16
     title: Proposition 16
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user1'
     proposalForm: '@proposalform6'
     reference: 2
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal17:
     id: proposal17
     title: Proposition 17
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user5'
     proposalForm: '@proposalform7'
     reference: 1
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal18:
     id: proposal18
     title: Proposition 18
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user1'
     proposalForm: '@proposalform7'
     reference: 2
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal19:
     id: proposal19
     title: Proposition brouillon 1
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     draft: true
     author: '@user501'
     proposalForm: '@proposalform1'
     theme: '@theme2'
     district: '@district3'
     reference: 9
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal20:
     id: proposal20
     title: Proposition brouillon 2
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     draft: true
     author: '@user1'
     proposalForm: '@proposalform1'
     theme: '@theme2'
     district: '@district3'
     reference: 10
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal21:
     id: proposal21
     title: Proposition brouillon 3
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     draft: true
     author: '@user4'
     proposalForm: '@proposalform1'
     theme: '@theme2'
     district: '@district3'
     reference: 11
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal22:
     id: proposal22
     title: Proposition vraiment intéressante
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 666
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal23:
     id: proposal23
     title: Proposition vraiment intéressante 2
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 667
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal24:
     id: proposal24
     title: Proposition 1
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 1
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal25:
     id: proposal25
     title: Proposition 2
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 2
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal26:
     id: proposal26
     title: Proposition 3
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 3
-    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal27:
     id: proposal27
     title: Operation génétique pour avoir la force
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user1'
     proposalForm: '@proposalform9'
     reference: 10
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal28:
     id: proposal28
     title: Transfusion de midi-chloriens
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     draft: true
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 11
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal29:
     id: proposal29
     title: Annuler les prochains Star-Wars
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 666
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal30:
     id: proposal30
     title: Trouver un anti dote à la force
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user4'
     proposalForm: '@proposalform9'
     reference: 667
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal31:
     id: proposal31
     title: Minus et Cortex
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user5'
     proposalForm: '@proposalform10'
     reference: 42
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal32:
     id: proposal32
     title: Les chats
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user2'
     proposalForm: '@proposalform10'
     reference: 44
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal33:
     id: proposal33
     title: Batman
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user4'
     proposalForm: '@proposalform10'
     reference: 43
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal34:
     id: proposal34
     title: Quel type de bière ?
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user1'
     proposalForm: '@proposalform11'
     reference: 45
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal35:
     id: proposal35
     title: Proposition 35 non publiée
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user_not_confirmed_with_contributions'
     proposalForm: '@proposalform1'
     theme: '@theme3'
     district: '@district2'
     status: '@status2'
-    createdAt: <(new \DateTime('2015-02-01'))>
     category: '@pCategory1'
     address: '[{"address_components":[{"long_name":"263","short_name":"263","types":["street_number"]},{"long_name":"Avenue Général Leclerc","short_name":"Avenue Général Leclerc","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35700","short_name":"35700","types":["postal_code"]}],"formatted_address":"263 Avenue Général Leclerc, 35700 Rennes, France","geometry":{"location":{"lat":48.11910899999999,"lng":-1.6447289},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.1204579802915,"lng":-1.643379919708498},"southwest":{"lat":48.1177600197085,"lng":-1.646077880291502}}},"place_id":"ChIJv1LUaPDeDkgRETcBpBBwDpc","types":["establishment","gym","health","point_of_interest"]}]'
     reference: 35
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal36:
     id: proposal36
     title: Proposition non publiée à temps
     body: |
-      <p><text(100)></p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     author: '@user5'
     proposalForm: '@proposalform2'
     createdAt: <dateTimeBetween('-30 days', '-29 days')>
@@ -430,31 +514,41 @@ Capco\AppBundle\Entity\Proposal:
   proposal37:
     id: proposal37
     title: Libérons les nains de jardin
-    body: <p><text(100)></p>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform12'
     reference: 45
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal38:
     id: proposal38
     title: Libérons blanche neige
-    body: <p><text(100)></p>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform12'
     reference: 46
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal39:
     id: proposal39
     title: Donnons leur un village dédié
-    body: <p><text(100)></p>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform12'
     reference: 47
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   question1:
     id: question1
     title: Comment faire de l'électricité ?
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     publishedAt: '<dateTimeBetween("-2 days", "now")>'
     author: '@user1'
     proposalForm: '@proposalform14'
@@ -463,7 +557,8 @@ Capco\AppBundle\Entity\Proposal:
   question2:
     id: question2
     title: Et chez Youpie c'est mieux ?
-    body: <p><text(100)></p>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
     publishedAt: '<dateTimeBetween("-2 days", "now")>'
     author: '@user1'
     proposalForm: '@proposalform14'
