@@ -254,6 +254,3 @@ declare module 'moment/locale/en-gb' {
 declare module 'moment/locale/es' {
   declare module.exports: any;
 }
-declare module 'moment/locale/de' {
-  declare module.exports: any;
-}

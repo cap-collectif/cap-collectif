@@ -18,11 +18,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 
-class User extends BaseUser implements
-    EncoderAwareInterface,
-    SynthesisUserInterface,
-    EquatableInterface,
-    IndexableInterface
+class User extends BaseUser
+    implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface, IndexableInterface
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
@@ -388,9 +385,11 @@ class User extends BaseUser implements
     /*  We check the account is not deleted in case of the user has multiple accounts sessions and just deleted his account */
     public function isEqualTo(RealUserInterface $user)
     {
-        return $user instanceof self &&
+        return (
+            $user instanceof self &&
             $this->id === $user->getId() &&
-            null === $user->getDeletedAccountAt();
+            null === $user->getDeletedAccountAt()
+        );
     }
 
     public function addResponse(AbstractResponse $response): self
@@ -1246,22 +1245,26 @@ class User extends BaseUser implements
 
     public function getContributionsCount()
     {
-        return $this->sourcesCount +
+        return (
+            $this->sourcesCount +
             $this->argumentsCount +
             $this->opinionsCount +
             $this->opinionVersionsCount +
             $this->getCommentsCount() +
-            $this->proposalsCount;
+            $this->proposalsCount
+        );
     }
 
     public function getVotesCount()
     {
-        return $this->commentVotesCount +
+        return (
+            $this->commentVotesCount +
             $this->opinionVotesCount +
             $this->opinionVersionVotesCount +
             $this->argumentVotesCount +
             $this->sourceVotesCount +
-            $this->proposalVotesCount;
+            $this->proposalVotesCount
+        );
     }
 
     public function getCommentsCount()

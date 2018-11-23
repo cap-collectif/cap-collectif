@@ -288,9 +288,9 @@ class StepController extends Controller
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
 
-        $countFusions = $proposalForm
-            ? $this->get('capco.proposal.repository')->countFusionsByProposalForm($proposalForm)
-            : 0;
+        $countFusions = $this->get('capco.proposal.repository')->countFusionsByProposalForm(
+            $proposalForm
+        );
 
         $serializer = $this->get('serializer');
         $props = $serializer->serialize(

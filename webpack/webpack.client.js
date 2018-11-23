@@ -20,6 +20,8 @@ const devConf = {
       path.join(webpackConfig.bowerDir, 'bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'),
 
       path.join(webpackConfig.bowerDir, 'es6-promise/promise.js'),
+      path.join(webpackConfig.bowerDir, 'intl/Intl.js'),
+      path.join(webpackConfig.bowerDir, 'intl/locale-data/jsonp/fr.js'),
 
       path.join(webpackConfig.bowerDir, 'fetch/fetch.js'),
       path.join(webpackConfig.appDir, 'Resources/js/jsapi.js'),
@@ -42,10 +44,7 @@ const devConf = {
     // Moment.js is an extremely popular library that bundles large locale files
     // by default due to how Webpack interprets its code.
     new MomentLocalesPlugin({
-      // Locale names follow Moment.js behavior
-      // – if a specific locale name (e.g. ru-ru) is absent, but a more generic locale (ru) is available,
-      // the generic one will be kept bundled.
-      localesToKeep: webpackConfig.locales,
+      localesToKeep: ['fr', 'en-gb', 'es'],
     }),
     // Copy some legacy deps
     new CopyWebpackPlugin([
