@@ -99,7 +99,7 @@ Scenario: Anonymous user combine search, filters and sorting on proposals in a c
   When I sort proposals by comments
   And I search for proposals with terms "proposition"
   And I change the proposals theme filter
-  Then there should be 3 proposals
+  Then there should be 2 proposals
   Then proposals should be filtered by theme and terms and sorted by comments
 
 Scenario: Anonymous user wants to see proposals likers
