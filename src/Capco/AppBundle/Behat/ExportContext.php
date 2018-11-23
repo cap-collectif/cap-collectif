@@ -206,7 +206,7 @@ class ExportContext implements KernelAwareContext
                             $i + 1,
                             implode(' | ', $actual[$i]),
                             implode(' | ', $expected[$i]),
-                            $cellValue
+                            "$cellValue ($columnName)"
                         )
                     );
                 }
