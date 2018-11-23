@@ -108,6 +108,7 @@ Capco\AppBundle\Entity\Proposal:
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    trashedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal6:
     id: proposal6
     title: Proposition à la corbeille (invisible)
@@ -125,6 +126,7 @@ Capco\AppBundle\Entity\Proposal:
     publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    trashedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposal7:
     id: proposal7
     title: Proposition très chère
@@ -549,7 +551,9 @@ Capco\AppBundle\Entity\Proposal:
     title: Comment faire de l'électricité ?
     body: |
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform14'
     reference: 48
@@ -559,7 +563,9 @@ Capco\AppBundle\Entity\Proposal:
     title: Et chez Youpie c'est mieux ?
     body: |
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     author: '@user1'
     proposalForm: '@proposalform14'
     reference: 49
