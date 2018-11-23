@@ -11,6 +11,7 @@ const config = {
   bowerDir: path.join(ABSOLUTE_BASE, 'bower_components'),
   appDir: path.join(ABSOLUTE_BASE, 'app'),
   webpackDir: path.join(ABSOLUTE_BASE, 'webpack'),
+  locales: ['fr-FR', 'es-ES', 'en-GB', 'de-DE'],
 };
 
 module.exports = config;

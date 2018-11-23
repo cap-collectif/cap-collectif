@@ -240,3 +240,6 @@ declare module 'react-intl/locale-data/en' {
 declare module 'react-intl/locale-data/es' {
   declare module.exports: any;
 }
+declare module 'react-intl/locale-data/de' {
+  declare module.exports: any;
+}
