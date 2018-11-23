@@ -91,6 +91,9 @@ class ExportContext implements KernelAwareContext
         PyStringNode $behatInput
     ): void {
         $path = $this->getExportDir() . "/$name";
+
+        Assert::assertFileExists($path);
+
         $delimiter = $this->getConfigParameter('delimiter');
         $csvLines = $this->getFileLines($path);
         $csvHeader = array_shift($csvLines);
@@ -108,6 +111,9 @@ class ExportContext implements KernelAwareContext
     public function exportedFileWithNameShouldHaveRows(string $name, int $rows): void
     {
         $path = $this->getExportDir() . "/$name";
+
+        Assert::assertFileExists($path);
+
         $csvLines = $this->getFileLines($path);
         Assert::assertCount($rows, $csvLines);
     }
@@ -119,6 +125,10 @@ class ExportContext implements KernelAwareContext
     {
         $realPath = $this->getExportDir() . "/$name";
         $snapshotPath = $this->getSnapshotsDir() . "/$name";
+
+        Assert::assertFileExists($realPath);
+        Assert::assertFileExists($snapshotPath);
+
         $csvLines = $this->getFileLines($realPath);
         $csvHeader = array_shift($csvLines);
         $snapshotLines = $this->getFileLines($snapshotPath);
@@ -135,6 +145,9 @@ class ExportContext implements KernelAwareContext
     public function exportedFileWithNameShouldCountain(string $name, PyStringNode $behatInput): void
     {
         $path = $this->getExportDir() . "/$name";
+
+        Assert::assertFileExists($path);
+
         $delimiter = $this->getConfigParameter('delimiter');
 
         $csvLines = $this->getFileLines($path);
