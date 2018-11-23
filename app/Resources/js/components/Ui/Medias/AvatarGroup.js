@@ -4,22 +4,24 @@ import styled, { css } from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {
-  children?: Array<React.Node>,
+  children?: Array<React.Element<any>>,
   childrenSize: number,
 };
 
 const createCSS = (props: Props) => {
-  const { childrenSize } = props;
+  const { childrenSize, children } = props;
 
   let styles = '';
 
-  for (let i = 1; i < 6; i += 1) {
-    styles += `
+  if (children) {
+    for (let i = 1; i < children.length; i += 1) {
+      styles += `
        & > *:nth-child(${i + 1}) {
-         z-index: ${6 - i};
+         z-index: ${children.length - i};
          left: ${(childrenSize / 2 + 10) * i}px;
        }
      `;
+    }
   }
 
   return css`
@@ -31,10 +33,11 @@ export const Container = styled.div.attrs({
   className: 'avatar-group',
 })`
   position: relative;
+  overflow: hidden;
 
   & > *:first-child {
     position: relative;
-    z-index: 7;
+    z-index: ${props => props.length};
   }
 
   & > *:not(:first-child) {
@@ -57,7 +60,11 @@ export class AvatarGroup extends React.Component<Props> {
   render() {
     const { children, childrenSize } = this.props;
 
-    return <Container childrenSize={childrenSize}>{children}</Container>;
+    return (
+      <Container childrenSize={childrenSize} length={children && children.length}>
+        {children}
+      </Container>
+    );
   }
 }
 

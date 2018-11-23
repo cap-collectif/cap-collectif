@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { boolean, withKnobs, number, text } from '@storybook/addon-knobs';
 import DarkenGradientMedia from '../components/Ui/Medias/DarkenGradientMedia';
 import RatioMediaContainer from '../components/Ui/Medias/RatioMediaContainer';
-import Media from '../components/Ui/Medias/Media/index';
+import Media from '../components/Ui/Medias/Media/Media';
 import Image from '../components/Ui/Medias/Image';
 import { Avatar } from '../components/Ui/Medias/Avatar';
 import AvatarGroup from '../components/Ui/Medias/AvatarGroup';
@@ -96,47 +96,6 @@ storiesOf('Medias', module)
         <AvatarGroup childrenSize={childrenSize}>
           <Avatar size={childrenSize} src={src} alt={alt} />
           <DefaultAvatarGroup size={childrenSize} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
-          <Avatar size={childrenSize} src={src} alt={alt} />
           <Avatar size={childrenSize} src={src} alt={alt} />
           <DefaultAvatar size={childrenSize} />
         </AvatarGroup>
