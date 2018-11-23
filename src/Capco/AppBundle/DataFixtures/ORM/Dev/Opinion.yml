@@ -70,7 +70,6 @@ Capco\AppBundle\Entity\Opinion:
     step: '@cstep1'
     title: Opinion <current()>
     createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>

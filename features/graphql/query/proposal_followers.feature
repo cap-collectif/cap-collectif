@@ -38,13 +38,13 @@ Scenario: GraphQL client wants to get list of users who following a proposal
                  {
                     "cursor":"@string@",
                     "node":{
-                       "_id":"user1"
+                       "id":"user2"
                     }
                  },
                  {
                     "cursor":"@string@",
                     "node":{
-                       "_id":"user2"
+                       "id":"user1"
                     }
                  }
               ]
