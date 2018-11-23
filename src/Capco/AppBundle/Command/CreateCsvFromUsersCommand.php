@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
@@ -8,9 +7,13 @@ use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\exportUtils;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\GraphQL\GraphQLToCsv;
+use Capco\AppBundle\GraphQL\InfoResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Arr;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Request\Executor;
+use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,15 +26,12 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
     protected $executor;
     protected $projectRootDir;
 
-    private const VALUE_RESPONSE_TYPENAME = 'ValueResponse';
-    private const MEDIA_RESPONSE_TYPENAME = 'MediaResponse';
-
     /**
      * @var WriterInterface
      */
     protected $writer;
 
-    private $sheetHeader = [
+    protected const SHEET_HEADER = [
         'id',
         'email',
         'username',
@@ -151,20 +151,15 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         }
         $fileName = 'users.csv';
 
-        $requestString = $this->getUsersGraphQLQuery(null);
-        $datas = $this->executor
-            ->execute('internal', [
-                'query' => $requestString,
-                'variables' => [],
-            ])
-            ->toArray();
-
-        $userSample = $datas["data"]["users"]["edges"][0]["node"];
-
         $this->writer = WriterFactory::create(Type::CSV);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
-        $header = $this->generateSheetHeader($userSample);
-        $this->writer->addRow($header);
+        $this->writer->addRow(self::SHEET_HEADER);
+
+        $requestString = $this->getUsersGraphQLQuery(null);
+        $datas = $this->executor->execute('internal', [
+            'query' => $requestString,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($datas, 'data.users.totalCount');
         $progress = new ProgressBar($output, $totalCount);
@@ -194,16 +189,6 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
             $row[] = isset($this->userHeaderMap[$path])
                 ? exportUtils::parseCellValue(Arr::path($user, $this->userHeaderMap[$path]))
                 : '';
-        }
-        $customQuestions = $this->generateSheetHeaderQuestions($user);
-        if (\count($customQuestions) > 0) {
-            $responses = array_map(function ($edge) {
-                return $edge['node'];
-            }, Arr::path($user, 'responses.edges'));
-
-            foreach ($responses as $response) {
-                $row[] = exportUtils::parseCellValue($this->addCustomResponse($response));
-            }
         }
         $this->writer->addRow($row);
     }
@@ -241,24 +226,6 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         userType {
           name
         }
-        responses {
-          edges {
-            node {
-              __typename
-              question {
-                title
-              }
-              ... on ValueResponse {
-                formattedValue
-              }
-              ... on MediaResponse {
-                medias {
-                  url
-                }
-              }
-            }
-          }
-        }
         consentExternalCommunication
         gender
         firstname
@@ -294,40 +261,5 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
   }
 }
 EOF;
-    }
-
-    private function generateSheetHeaderQuestions(array $sampleUser): array
-    {
-        $responses = array_map(function (array $edge) {
-            return $edge['node'];
-        }, $sampleUser['responses']["edges"]);
-
-        return array_map(function (array $response) {
-            return $response['question']['title'];
-        }, $responses);
-    }
-
-    private function generateSheetHeader(array $sampleUser): array
-    {
-        return array_merge($this->sheetHeader, $this->generateSheetHeaderQuestions($sampleUser));
-    }
-
-    private function addCustomResponse(array $response): ?string
-    {
-        switch ($response['__typename']) {
-            case self::VALUE_RESPONSE_TYPENAME:
-                return $response['formattedValue'];
-                break;
-            case self::MEDIA_RESPONSE_TYPENAME:
-                return implode(
-                    ", ",
-                    array_map(function (array $media) {
-                        return $media['url'];
-                    }, $response['medias'])
-                );
-                break;
-            default:
-                throw new \LogicException('Unknown response typename');
-        }
     }
 }

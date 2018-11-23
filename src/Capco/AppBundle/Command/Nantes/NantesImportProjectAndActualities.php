@@ -41,7 +41,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
-class NantesImportCommand extends ContainerAwareCommand
+class NantesImportProjectAndActualities extends ContainerAwareCommand
 {
     protected const PROPOSAL_BATCH_SIZE = 50;
 
@@ -74,20 +74,6 @@ class NantesImportCommand extends ContainerAwareCommand
         'concertations',
     ];
 
-    protected const CONTRIBUTION_HEADER = [
-        'id',
-        'globalId',
-        'description',
-        'districtUuid',
-        'concertationUuid',
-        'videoLink',
-        'userUuid',
-        'role',
-        'files',
-        'createdDate',
-        'lastPublishedDate',
-    ];
-
     protected const ACTUALITY_HEADER = [
         'id',
         'subtitle',
@@ -113,13 +99,12 @@ class NantesImportCommand extends ContainerAwareCommand
     protected $em;
 
     protected $projects = [];
-    protected $proposals = [];
     protected $actualities = [];
     protected $nantesAuthor;
 
     protected function configure(): void
     {
-        $this->setName('capco:import:nantes')
+        $this->setName('capco:import:nantes-projects')
             ->addArgument('email', InputArgument::OPTIONAL, 'The nantes admin email')
             ->setDescription('Import data from nantes');
     }
@@ -131,16 +116,12 @@ class NantesImportCommand extends ContainerAwareCommand
             ->getConnection()
             ->getConfiguration()
             ->setSQLLogger(null);
-        $this->proposals = $this->createProposals();
         $this->actualities = $this->createActualities();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $this->nantesAuthor = $input->getArgument('email') ?? 'admin@test.com';
-        $importUsersCommand = $this->getApplication()->find('capco:import:nantes-users');
-        $usersInput = new ArrayInput(['command' => 'capco:import:nantes-users']);
-        $importUsersCommand->run($usersInput, $output);
         $this->disableListeners($output);
         $stopwatch = new Stopwatch();
         $stopwatch->start('import');
@@ -153,14 +134,14 @@ class NantesImportCommand extends ContainerAwareCommand
                 round($event->getMemory() / 1000000, 2) .
                 ' MB</info>'
         );
-        $usersInput = new ArrayInput(['command' => 'capco:import:nantes-users-reset']);
-        $importUsersCommand->run($usersInput, $output);
     }
 
     protected function importProjects(OutputInterface $output): void
     {
         $rows = [];
-
+        $type = $this->em
+            ->getRepository(ProjectType::class)
+            ->findOneBy(['title' => 'project.types.consultation']);
         foreach (self::PROJECTS as $filename => $projectHeader) {
             $csv = Reader::createFromPath(__DIR__ . '/' . $filename);
             $csv->setDelimiter(';');
@@ -195,6 +176,7 @@ class NantesImportCommand extends ContainerAwareCommand
             $project = (new Project())
                 ->setTitle(isset($row['titre']) ? $row['titre'] : $row['id'])
                 ->setAuthor($author)
+                ->setProjectType($type)
                 ->setCreatedAt(new \DateTime())
                 ->setPublishedAt(new \DateTime())
                 ->setVisibility(2)
@@ -229,40 +211,18 @@ class NantesImportCommand extends ContainerAwareCommand
             $this->em->flush();
 
             $this->projects[$row['id']] = $project;
-            $proposalForm = $this->createProposalForm($output, $project, $key + 2000);
-
-            $collectStep->setProposalForm($proposalForm);
-
-            $this->em->persist($collectStep);
         }
         $this->em->flush();
         $this->em->clear();
 
         if (\count($this->projects) > 0) {
             foreach ($this->projects as $oldProjectId => $project) {
-                $this->importProposals($output, $oldProjectId, $project->getId());
                 $this->importActualities($output, $oldProjectId, $project->getId());
             }
         }
         $output->writeln(
             "\n<info>Successfully imported " . \count($this->projects) . ' projects.</info>'
         );
-    }
-
-    protected function createProposals(): array
-    {
-        $csv = Reader::createFromPath(__DIR__ . '/' . self::CONTRIBUTION_FILE);
-        $csv->setDelimiter(';');
-        $iterator = $csv->setOffset(1)->fetchAssoc(self::CONTRIBUTION_HEADER);
-        $proposals = [];
-        foreach ($iterator as $item) {
-            $proposals[] = $item;
-        }
-        $proposals = $this->arrayGroupBy($proposals, function ($i) {
-            return $i['concertationUuid'];
-        });
-
-        return $proposals;
     }
 
     protected function createActualities(): array
@@ -279,61 +239,6 @@ class NantesImportCommand extends ContainerAwareCommand
         });
 
         return $actualities;
-    }
-
-    protected function importProposals(
-        OutputInterface $output,
-        string $oldProjectId,
-        string $projectId
-    ): void {
-        $project = $this->em->getRepository(Project::class)->find($projectId);
-        $step = $project->getFirstCollectStep();
-        if ($step && isset($this->proposals[$oldProjectId])) {
-            $output->writeln(
-                "\n<info>Importing proposals for project \"" . $project->getTitle() . '"...</info>'
-            );
-            $proposals = $this->proposals[$oldProjectId];
-            $progress = new ProgressBar($output, \count($proposals));
-            $count = 1;
-            $defaultAuthor = $this->em->getRepository(User::class)->findOneBy([
-                'email' => $this->nantesAuthor,
-            ]);
-            foreach ($proposals as $proposal) {
-                $author =
-                    $this->em->getRepository(User::class)->findOneBy([
-                        'openId' => $proposal['userUuid'],
-                    ]) ?? $defaultAuthor;
-
-                $description =
-                    '' !== $proposal['videoLink']
-                        ? $proposal['description'] .
-                            "<br/><a href=\"" .
-                            $proposal['videoLink'] .
-                            "\">Vidéo</a>"
-                        : $proposal['description'];
-                $proposal = (new Proposal())
-                    ->setTitle('Contribution n° ' . $count)
-                    ->setAuthor($author)
-                    ->setReference($count)
-                    ->setPublishedAt(new \DateTime())
-                    ->setProposalForm($step->getProposalForm())
-                    ->setReference($count)
-                    ->setBody(html_entity_decode($description));
-                $this->em->persist($proposal);
-                if (0 === $count % self::PROPOSAL_BATCH_SIZE) {
-                    $this->printMemoryUsage($output);
-                    $this->em->flush();
-                }
-                $progress->advance();
-                ++$count;
-            }
-            $progress->finish();
-            $output->writeln("\n<info>Successfully imported proposals.</info>");
-        } else {
-            $output->writeln(
-                "\n<info>No proposals found for project \"" . $project->getTitle() . '"</info>'
-            );
-        }
     }
 
     protected function importActualities(
@@ -425,28 +330,6 @@ class NantesImportCommand extends ContainerAwareCommand
                 "\n<info>No actualities found for project \"" . $project->getTitle() . '"</info>'
             );
         }
-    }
-
-    protected function createProposalForm(
-        OutputInterface $output,
-        Project $project,
-        int $uniqueId
-    ): ProposalForm {
-        $formName = 'Formulaire pour "' . $project->getTitle() . '"';
-        $output->writeln('<info>Creating "' . $formName . '" form...</info>');
-
-        $proposalForm = (new ProposalForm())
-            ->setTitle($formName)
-            ->setTitleHelpText('Choisissez un titre pour votre proposition')
-            ->setReference($uniqueId)
-            ->setDescriptionHelpText('Décrivez votre proposition');
-
-        $this->em->persist($proposalForm);
-        $this->em->flush();
-
-        $output->writeln('<info>Successfully added "' . $formName . '" form.</info>');
-
-        return $proposalForm;
     }
 
     private function disableListeners(OutputInterface $output): void

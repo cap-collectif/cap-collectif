@@ -247,6 +247,7 @@ RUN chown -R capco:capco . \
 # Build JS
 RUN yarn global add bower@1.8.4 babel-cli \
     && gosu capco yarn install --pure-lockfile \
+    && gosu capco yarn cache clean \
     && gosu capco bower install --config.interactive=false \
     && gosu capco npm rebuild node-sass > /dev/null \
     && gosu capco php bin/console translation:download --env=prod \
@@ -255,8 +256,6 @@ RUN yarn global add bower@1.8.4 babel-cli \
     ## SSR is disabled
     #&& gosu capco yarn run build-server-bundle:prod \
     && gosu capco yarn run build:prod \
-    ## Clean everything not needed
-    && gosu capco yarn cache clean \
     && rm -rf node_modules bower_components
 
 CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]

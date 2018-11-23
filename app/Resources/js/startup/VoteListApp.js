@@ -2,8 +2,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
+import { IntlProvider } from 'react-intl-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
-import IntlProvider from './IntlProvider';
 import environment, { graphqlError } from '../createRelayEnvironment';
 import type { VoteListAppQueryResponse } from './__generated__/VoteListAppQuery.graphql';
 import VoteListProfile from '../components/Vote/VoteListProfile';
