@@ -26,7 +26,7 @@ export class DefaultAvatarGroup extends React.Component<Props> {
     return (
       <Container
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="-6 -6 37 37"
+        viewBox="-8 -7 40 40"
         width={`${size}px`}
         height={`${size}px`}
         role="img"

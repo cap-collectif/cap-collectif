@@ -33,7 +33,7 @@ export class DefaultAvatar extends React.Component<Props> {
         y="0px"
         width={`${size}px`}
         height={`${size}px`}
-        viewBox="-10 -8 44 44">
+        viewBox="-11 -9 46 46">
         <path
           fill="none"
           stroke="#FFFFFF"
