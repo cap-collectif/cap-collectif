@@ -43,7 +43,7 @@ parameters:
   sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
   google_maps_key: ***REMOVED***
   loco_key: 5TYY2LOJxU7WgnDpreCQYXkXLAS_hsDII
-  locales: ['en-GB', 'fr-FR', 'es-ES']
+  locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE']
   google_maps_key_server: '***REMOVED***'
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
   openid_client_id: '%env(SYMFONY_OPENID_CLIENT_ID)%'
