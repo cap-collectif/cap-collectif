@@ -36,7 +36,7 @@ while ! rabbitmqctl status > /dev/null;
 done
 
 echo "[$(date -u)][PHP-FPM] Updating RabbitMQ vhost to match schema..."
-gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml --erase-vhost --quiet
+gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml --quiet
 echo "[$(date -u)][PHP-FPM] RabbitMQ vhost updated!"
 
 echo "[$(date -u)][PHP-FPM] Warming up cache and install bundle assets..."
