@@ -10,6 +10,8 @@ import { Avatar } from '../components/Ui/Medias/Avatar';
 import AvatarGroup from '../components/Ui/Medias/AvatarGroup';
 import DefaultAvatarGroup from '../components/Ui/Medias/DefaultAvatarGroup';
 import DefaultAvatar from '../components/Ui/Medias/DefaultAvatar';
+import DefaultImage from '../components/Ui/Medias/DefaultImage';
+import ProjectIcon from '../components/Ui/Icons/ProjectIcon';
 
 storiesOf('Medias', module)
   .addDecorator(withKnobs)
@@ -107,7 +109,7 @@ storiesOf('Medias', module)
           <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
           <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
         `,
-        propTablesExclude: [Avatar],
+        propTablesExclude: [Avatar, DefaultAvatarGroup, DefaultAvatar],
       },
     },
   )
@@ -124,7 +126,6 @@ storiesOf('Medias', module)
           <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
           <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
         `,
-        propTablesExclude: [Avatar],
       },
     },
   )
@@ -145,12 +146,32 @@ storiesOf('Medias', module)
     },
   )
   .add(
+    'Default image',
+    () => {
+      const width = text('Width', '100%');
+      const height = text('Height', '100%');
+
+      return (
+        <DefaultImage width={width} height={height}>
+          <ProjectIcon />
+        </DefaultImage>
+      );
+    },
+    {
+      info: {
+        text: `
+          <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
+          <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
+        `,
+      },
+    },
+  )
+  .add(
     'Media',
     () => {
       const src = text('Src', 'https://source.unsplash.com/collection/181462');
       const alt = text('Alt', 'My alternative');
-      const width = number('Width', 45);
-      const height = number('Height', 45);
+      const size = number('Size', 45);
       const headingComponentClass = text('Heading component class', 'h1');
 
       Media.Left.displayName = 'Media.Left';
@@ -160,7 +181,7 @@ storiesOf('Medias', module)
       return (
         <Media>
           <Media.Left>
-            <Image src={src} width={width} height={height} alt={alt} />
+            <Avatar size={size} src={src} alt={alt} />
           </Media.Left>
           <Media.Body>
             <Media.Heading componentClass={headingComponentClass}>Media Heading</Media.Heading>
@@ -179,6 +200,7 @@ storiesOf('Medias', module)
         text: `
             <p>Lorem</p>
         `,
+        propTablesExclude: [Avatar],
       },
     },
   )
