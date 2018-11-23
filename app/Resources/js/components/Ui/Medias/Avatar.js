@@ -14,8 +14,6 @@ export const Container = styled(Image).attrs({
   className: 'avatar',
 })`
   border-radius: 50%;
-  height: ${props => props.size}px;
-  width: ${props => props.size}px;
 `;
 
 export class Avatar extends React.Component<Props> {

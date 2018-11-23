@@ -12,6 +12,7 @@ import DefaultAvatarGroup from '../components/Ui/Medias/DefaultAvatarGroup';
 import DefaultAvatar from '../components/Ui/Medias/DefaultAvatar';
 import DefaultImage from '../components/Ui/Medias/DefaultImage';
 import ProjectIcon from '../components/Ui/Icons/ProjectIcon';
+import { AvatarCount } from '../components/Ui/Medias/AvatarCount';
 
 storiesOf('Medias', module)
   .addDecorator(withKnobs)
@@ -81,7 +82,6 @@ storiesOf('Medias', module)
     {
       info: {
         text: `
-          <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
           <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
         `,
       },
@@ -105,14 +105,16 @@ storiesOf('Medias', module)
     },
     {
       info: {
-        text: `
-          <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
-          <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
-        `,
         propTablesExclude: [Avatar, DefaultAvatarGroup, DefaultAvatar],
       },
     },
   )
+  .add('Avatar Count', () => {
+    const size = number('Size', 45);
+    const numberContent = text('Number', '8');
+
+    return <AvatarCount size={size}>{numberContent}</AvatarCount>;
+  })
   .add(
     'Default avatar group',
     () => {
@@ -160,9 +162,9 @@ storiesOf('Medias', module)
     {
       info: {
         text: `
-          <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
-          <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
+          <p>La couleur de fond par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
         `,
+        propTablesExclude: [ProjectIcon],
       },
     },
   )
@@ -197,9 +199,6 @@ storiesOf('Medias', module)
     },
     {
       info: {
-        text: `
-            <p>Lorem</p>
-        `,
         propTablesExclude: [Avatar],
       },
     },

@@ -18,7 +18,7 @@ export const Container = styled.div.attrs({
     display: block;
     content: ' ';
     width: 100%;
-    padding-top: ${props => (props.height / props.width) * 100}%;
+    padding-top: ${props => `${(props.height / props.width) * 100}%`};
   }
 
   .ratio-media-container__content {
