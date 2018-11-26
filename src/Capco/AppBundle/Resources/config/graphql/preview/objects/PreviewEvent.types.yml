@@ -28,5 +28,8 @@ PreviewEvent:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'
       body:
-        type: 'HTML'
+        type: 'HTML!'
         description: 'Identifies the body of the event.'
+      enabled:
+        type: 'Boolean!'
+        description: 'Identifies if the event is published.'
