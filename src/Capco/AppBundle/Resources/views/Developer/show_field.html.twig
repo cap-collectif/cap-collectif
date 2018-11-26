@@ -1,6 +1,6 @@
 <div style="margin-bottom: 32px">
     <strong>{{ field.name }} (<code><a href="#">{{field.type}}</a></code>)</strong>
-    {% if field.config.access %}
+    {% if field.config.access|default(false) %}
         {# We need a way to get info about the required access #}
         <span class="label label-info">ROLE_USER</span>
     {% endif %}
@@ -9,7 +9,7 @@
     {% endif %}
     <p>{{ field.description|default('') }}</p>
 
-    {% if field.deprecated %}
+    {% if field.deprecated|default(false) %}
       <div class="alert alert-danger">
         <strong>Deprecation notice</strong>
         <p>
