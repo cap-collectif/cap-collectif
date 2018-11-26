@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AvatarGroup /> should render correctly 1`] = `
+<AvatarGroup__Container
+  childrenSize={45}
+  length={2}
+>
+  <div />
+  <div />
+</AvatarGroup__Container>
+`;
+
+exports[`<AvatarGroup /> should render correctly with other size 1`] = `
+<AvatarGroup__Container
+  childrenSize={75}
+  length={null}
+>
+  <div />
+</AvatarGroup__Container>
+`;

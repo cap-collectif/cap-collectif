@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Avatar /> should render correctly 1`] = `
+<Avatar__Container
+  alt="my alternative"
+  height="45px"
+  src="https://source.unsplash.com/collection/181462"
+  width="45px"
+/>
+`;
+
+exports[`<Avatar /> should render correctly with other size & className 1`] = `
+<Avatar__Container
+  alt="my alternative"
+  className="myClass"
+  height="70px"
+  src="https://source.unsplash.com/collection/181462"
+  width="70px"
+/>
+`;

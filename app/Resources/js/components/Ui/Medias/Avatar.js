@@ -24,7 +24,15 @@ export class Avatar extends React.Component<Props> {
   render() {
     const { size, src, className, alt } = this.props;
 
-    return <Container width={size} height={size} src={src} alt={alt} className={className} />;
+    return (
+      <Container
+        width={`${size || 45}px`}
+        height={`${size || 45}px`}
+        src={src}
+        alt={alt}
+        className={className}
+      />
+    );
   }
 }
 

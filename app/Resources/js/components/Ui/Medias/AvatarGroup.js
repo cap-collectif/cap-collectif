@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {
-  children?: Array<React.Element<any>>,
+  children?: React.Element<any> | Array<React.Element<any>>,
   childrenSize: number,
 };
 
@@ -13,7 +13,7 @@ const createCSS = (props: Props) => {
 
   let styles = '';
 
-  if (children) {
+  if (children && Array.isArray(children)) {
     for (let i = 1; i < children.length; i += 1) {
       styles += `
        & > *:nth-child(${i + 1}) {
@@ -61,7 +61,9 @@ export class AvatarGroup extends React.Component<Props> {
     const { children, childrenSize } = this.props;
 
     return (
-      <Container childrenSize={childrenSize} length={children && children.length}>
+      <Container
+        childrenSize={childrenSize}
+        length={children && Array.isArray(children) ? children.length : null}>
         {children}
       </Container>
     );

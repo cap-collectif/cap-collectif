@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 type Props = {
-  width?: number,
-  height?: number,
+  width?: string,
+  height?: string,
   objectFit?: string,
   alt?: string,
   src: string,
@@ -17,7 +17,7 @@ export const Container = styled.img`
   object-fit: ${props => props.objectFit};
 `;
 
-export default class Image extends PureComponent<Props> {
+export class Image extends PureComponent<Props> {
   static defaultProps = {
     objectFit: 'cover',
     width: 'auto',
@@ -40,3 +40,5 @@ export default class Image extends PureComponent<Props> {
     );
   }
 }
+
+export default Image;

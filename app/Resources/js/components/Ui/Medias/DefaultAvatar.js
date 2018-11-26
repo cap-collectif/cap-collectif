@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {
-  className?: string,
   size: number,
 };
 
@@ -21,11 +20,10 @@ export class DefaultAvatar extends React.Component<Props> {
   };
 
   render() {
-    const { className, size } = this.props;
+    const { size } = this.props;
 
     return (
       <Container
-        className={className}
         role="img"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"

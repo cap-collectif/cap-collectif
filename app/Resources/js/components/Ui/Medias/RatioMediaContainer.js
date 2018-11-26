@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 type Props = {
   children: any,
-  width?: number,
-  height?: number,
+  ratioX?: number,
+  ratioY?: number,
 };
 
 export const Container = styled.div.attrs({
@@ -18,7 +18,7 @@ export const Container = styled.div.attrs({
     display: block;
     content: ' ';
     width: 100%;
-    padding-top: ${props => `${(props.height / props.width) * 100}%`};
+    padding-top: ${props => `${(props.ratioY / props.ratioX) * 100}%`};
   }
 
   .ratio-media-container__content {
@@ -40,19 +40,21 @@ export const Container = styled.div.attrs({
   }
 `;
 
-export default class RatioMediaContainer extends PureComponent<Props> {
+export class RatioMediaContainer extends PureComponent<Props> {
   static defaultProps = {
-    width: 16,
-    height: 9,
+    ratioX: 16,
+    ratioY: 9,
   };
 
   render() {
-    const { children, width, height } = this.props;
+    const { children, ratioX, ratioY } = this.props;
 
     return (
-      <Container width={width} height={height}>
+      <Container ratioX={ratioX} ratioY={ratioY}>
         <div className="ratio-media-container__content">{children}</div>
       </Container>
     );
   }
 }
+
+export default RatioMediaContainer;

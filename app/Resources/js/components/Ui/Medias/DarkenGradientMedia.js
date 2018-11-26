@@ -25,7 +25,7 @@ export const Container = styled.div.attrs({
   height: ${props => props.height};
 `;
 
-export default class DarkenGradientMedia extends PureComponent<Props> {
+export class DarkenGradientMedia extends PureComponent<Props> {
   static defaultProps = {
     linearGradient: true,
     width: '100%',
@@ -49,3 +49,5 @@ export default class DarkenGradientMedia extends PureComponent<Props> {
     );
   }
 }
+
+export default DarkenGradientMedia;

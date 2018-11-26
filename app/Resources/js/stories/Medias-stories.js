@@ -53,11 +53,11 @@ storiesOf('Medias', module)
     () => {
       const url = text('Url', 'https://source.unsplash.com/collection/1353633');
       const alt = text('Alternative', 'My alternative');
-      const width = number('Width (ratio)', 16);
-      const height = number('Height (ratio)', 9);
+      const ratioX = number('ratio (x)', 16);
+      const ratioY = number('ratio (y)', 9);
 
       return (
-        <RatioMediaContainer width={width} height={height}>
+        <RatioMediaContainer ratioX={ratioX} ratioY={ratioY}>
           <img src={url} alt={alt} />
         </RatioMediaContainer>
       );

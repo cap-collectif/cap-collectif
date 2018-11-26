@@ -159,8 +159,8 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
     className="carousel__content"
   >
     <RatioMediaContainer
-      height={9}
-      width={16}
+      ratioX={16}
+      ratioY={9}
     >
       <div
         className="carousel-inner"

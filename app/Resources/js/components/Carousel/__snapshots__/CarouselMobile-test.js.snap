@@ -18,8 +18,8 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       key="0"
     >
       <RatioMediaContainer
-        height={9}
-        width={16}
+        ratioX={16}
+        ratioY={9}
       >
         <div
           className="bg--default bg--project"
@@ -63,8 +63,8 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       key="1"
     >
       <RatioMediaContainer
-        height={9}
-        width={16}
+        ratioX={16}
+        ratioY={9}
       >
         <DarkenGradientMedia
           alt=""
@@ -112,8 +112,8 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       key="2"
     >
       <RatioMediaContainer
-        height={9}
-        width={16}
+        ratioX={16}
+        ratioY={9}
       >
         <div
           className="bg--default bg--project"
@@ -155,8 +155,8 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       key="3"
     >
       <RatioMediaContainer
-        height={9}
-        width={16}
+        ratioX={16}
+        ratioY={9}
       >
         <div
           className="bg--default bg--project"
