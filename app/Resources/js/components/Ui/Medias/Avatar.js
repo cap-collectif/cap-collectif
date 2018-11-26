@@ -27,3 +27,5 @@ export class Avatar extends React.Component<Props> {
     return <Container width={size} height={size} src={src} alt={alt} className={className} />;
   }
 }
+
+export default Avatar;

@@ -32,3 +32,5 @@ export class AvatarCount extends React.Component<Props> {
     return <Container size={size}>{children}</Container>;
   }
 }
+
+export default AvatarCount;

@@ -6,13 +6,13 @@ import DarkenGradientMedia from '../components/Ui/Medias/DarkenGradientMedia';
 import RatioMediaContainer from '../components/Ui/Medias/RatioMediaContainer';
 import Media from '../components/Ui/Medias/Media/Media';
 import Image from '../components/Ui/Medias/Image';
-import { Avatar } from '../components/Ui/Medias/Avatar';
+import Avatar from '../components/Ui/Medias/Avatar';
 import AvatarGroup from '../components/Ui/Medias/AvatarGroup';
 import DefaultAvatarGroup from '../components/Ui/Medias/DefaultAvatarGroup';
 import DefaultAvatar from '../components/Ui/Medias/DefaultAvatar';
 import DefaultImage from '../components/Ui/Medias/DefaultImage';
 import ProjectIcon from '../components/Ui/Icons/ProjectIcon';
-import { AvatarCount } from '../components/Ui/Medias/AvatarCount';
+import AvatarCount from '../components/Ui/Medias/AvatarCount';
 
 storiesOf('Medias', module)
   .addDecorator(withKnobs)
@@ -43,6 +43,7 @@ storiesOf('Medias', module)
           <p>Ce composant permet d'ajouter un léger dégradé noir sur une image.</p>
           <p>Ce dégradé peut être utile afin d'améliorer le contraste de l'image et ainsi permettre une meilleure lecture d'un texte superposé.</p>
           <p>Si l'image n'est pas à but décoratif, veuillez préciser l'attribut <code>alt</code>.</p>
+          <p>Emplacement : <code>import DarkenGradientMedia from '../Ui/Medias/DarkenGradientMedia';</code></p>
         `,
       },
     },
@@ -64,8 +65,9 @@ storiesOf('Medias', module)
     {
       info: {
         text: `
-          <p>Ce composant permet d'ajouter des images avec un ratio spécifique (comme par exemple <code>16/9</code>.</p>
+          <p>Ce composant permet d'ajouter des images avec un ratio spécifique (comme par exemple <code>16/9</code>).</p>
           <p> Il est important pour l'accessibilité d'indiquer le texte alternative (<code>alt</code>) dans la balise <code>img</code> que vous allez ajouter.</p>
+          <p>Emplacement : <code>import RatioMediaContainer from '../Ui/Medias/RatioMediaContainer';</code></p>
         `,
       },
     },
@@ -83,6 +85,7 @@ storiesOf('Medias', module)
       info: {
         text: `
           <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
+          <p>Emplacement : <code>import Avatar from '../Ui/Medias/Avatar';</code></p>
         `,
       },
     },
@@ -105,16 +108,30 @@ storiesOf('Medias', module)
     },
     {
       info: {
+        text: `
+          <p><code>AvatarGroup</code> reçoit en enfant tout type d'avatar.</p>
+          <p>Emplacement : <code>import AvatarGroup from '../Ui/Medias/AvatarGroup';</code></p>
+        `,
         propTablesExclude: [Avatar, DefaultAvatarGroup, DefaultAvatar],
       },
     },
   )
-  .add('Avatar Count', () => {
-    const size = number('Size', 45);
-    const numberContent = text('Number', '8');
+  .add(
+    'Avatar Count',
+    () => {
+      const size = number('Size', 45);
+      const numberContent = text('Number', '8');
 
-    return <AvatarCount size={size}>{numberContent}</AvatarCount>;
-  })
+      return <AvatarCount size={size}>{numberContent}</AvatarCount>;
+    },
+    {
+      info: {
+        text: `
+          <p>Emplacement : <code>import AvatarCount from '../Ui/Medias/AvatarCount';</code></p>
+        `,
+      },
+    },
+  )
   .add(
     'Default avatar group',
     () => {
@@ -127,6 +144,7 @@ storiesOf('Medias', module)
         text: `
           <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
           <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
+          <p>Emplacement : <code>import DefaultAvatarGroup from '../Ui/Medias/DefaultAvatarGroup';</code></p>
         `,
       },
     },
@@ -143,6 +161,7 @@ storiesOf('Medias', module)
         text: `
           <p>La couleur de l'avatar par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
           <p>Si vous avez besoin de placer du texte à sa droite, vous pouvez utiliser le composant <a href="https://ui.cap-collectif.com/?selectedKind=Medias&selectedStory=Media">Media</a>.</p>
+          <p>Emplacement : <code>import DefaultImage from '../Ui/Medias/DefaultImage';</code></p>
         `,
       },
     },
@@ -152,6 +171,8 @@ storiesOf('Medias', module)
     () => {
       const width = text('Width', '100%');
       const height = text('Height', '100%');
+
+      ProjectIcon.displayName = 'ProjectIcon';
 
       return (
         <DefaultImage width={width} height={height}>
@@ -163,6 +184,7 @@ storiesOf('Medias', module)
       info: {
         text: `
           <p>La couleur de fond par défaut est la <code>Couleur primaire</code>. Celle ci est personnalisable par le client dans le back office.</p>
+          <p>Emplacement : <code>import DefaultImage from '../Ui/Medias/DefaultImage';</code></p>
         `,
         propTablesExclude: [ProjectIcon],
       },
@@ -199,6 +221,9 @@ storiesOf('Medias', module)
     },
     {
       info: {
+        text: `
+            <p>Emplacement : <code>import Media from '../Ui/Medias/Media/Media';</code></p>
+        `,
         propTablesExclude: [Avatar],
       },
     },
@@ -217,7 +242,8 @@ storiesOf('Medias', module)
     {
       info: {
         text: `
-            <p>L'attribut <code>alt</code> de l'image peut rester vide (valeur par défaut) dans le cas des images à but uniquement décoratif et sans intérêt prioritaire pour la communication.</p>
+            <p>Le texte alternatif <code>alt</code> de l'image peut rester vide (valeur par défaut) dans le cas des images à but uniquement décoratif et sans intérêt prioritaire pour la communication.</p>
+            <p>Emplacement : <code>import Image from '../Ui/Medias/Image';</code></p>
         `,
       },
     },
