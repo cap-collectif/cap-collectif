@@ -35,9 +35,16 @@ while ! rabbitmqctl status > /dev/null;
   do sleep 0.1
 done
 
-echo "[$(date -u)][PHP-FPM] Updating RabbitMQ vhost to match schema..."
-gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml --quiet
-echo "[$(date -u)][PHP-FPM] RabbitMQ vhost updated!"
+# When we have fresh instance, capco vhost is not created
+if rabbitmqctl list_vhosts | grep -q capco; then
+    echo "[$(date -u)][PHP-FPM] Updating RabbitMQ vhost to match schema..."
+    gosu capco php bin/rabbit vhost:mapping:create --user=guest --password=guest app/config/rabbitmq.yml --quiet
+    echo "[$(date -u)][PHP-FPM] RabbitMQ vhost updated!"
+else
+    echo "[$(date -u)][PHP-FPM] Creating RabbitMQ vhost schema..."
+    gosu capco php bin/rabbit vhost:mapping:create --erase-vhost --user=guest --password=guest app/config/rabbitmq.yml --quiet
+    echo "[$(date -u)][PHP-FPM] RabbitMQ vhost created!"
+fi
 
 echo "[$(date -u)][PHP-FPM] Warming up cache and install bundle assets..."
 chmod -R 777 var/ && chown -R capco:capco var/
