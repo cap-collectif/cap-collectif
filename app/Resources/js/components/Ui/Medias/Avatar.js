@@ -17,10 +17,6 @@ export const Container = styled(Image).attrs({
 `;
 
 export class Avatar extends React.Component<Props> {
-  static defaultProps = {
-    size: 45,
-  };
-
   render() {
     const { size, src, className, alt } = this.props;
 
