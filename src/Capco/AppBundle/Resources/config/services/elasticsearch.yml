@@ -34,7 +34,7 @@ services:
     calls:
       - ['setPropertyAccessor', ['@property_accessor']]
 
-  Capco\AppBundle\Elasticsearch\DoctrineUpdateListener:
+  Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener:
     autowire: true
     public: true
     tags:
