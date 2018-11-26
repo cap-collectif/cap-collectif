@@ -79,7 +79,7 @@ input AddEventInput {
   # The contents of the event startAt.
   startAt: DateTime!
 
-  # The contents of the event startAt.
+  # The contents of the event endAt.
   endAt: DateTime!
 
   # Is the event published ?
@@ -566,7 +566,7 @@ input ChangeEventInput {
   # The contents of the event startAt.
   startAt: DateTime!
 
-  # The contents of the event startAt.
+  # The contents of the event endAt.
   endAt: DateTime!
 
   # Is the event published ?

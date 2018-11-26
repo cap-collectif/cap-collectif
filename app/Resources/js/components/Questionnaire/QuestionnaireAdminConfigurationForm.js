@@ -223,59 +223,7 @@ export default createFragmentContainer(
       description
       questions {
         id
-        title
-        helpText
-        description
-        type
-        private
-        required
-        jumps {
-          id
-          always
-          origin {
-            id
-            title
-          }
-          destination {
-            id
-            title
-          }
-          conditions {
-            id
-            operator
-            question {
-              id
-              title
-            }
-            ... on MultipleChoiceQuestionLogicJumpCondition {
-              value {
-                id
-                title
-              }
-            }
-          }
-        }
-        kind
-        ... on MultipleChoiceQuestion {
-          isRandomQuestionChoices
-          isOtherAllowed
-          validationRule {
-            type
-            number
-          }
-          questionChoices {
-            id
-            title
-            description
-            color
-            image {
-              id
-              url
-              name
-              size
-            }
-          }
-        }
+        ...responsesHelper_question @relay(mask: false)
       }
     }
   `,

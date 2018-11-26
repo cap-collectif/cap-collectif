@@ -413,62 +413,60 @@ export class ProposalForm extends React.Component<Props, State> {
             }
           />
         )}
-        {features.themes &&
-          proposalForm.usingThemes && (
-            <Field
-              name="theme"
-              type="select"
-              id="proposal_theme"
-              component={component}
-              help={proposalForm.themeHelpText}
-              label={
-                <span>
-                  <FormattedMessage id="proposal.theme" />
-                  {!proposalForm.themeMandatory && optional}
-                </span>
-              }>
-              <FormattedMessage id="proposal.select.theme">
-                {message => (
-                  <option value="" disabled>
-                    {message}
-                  </option>
-                )}
-              </FormattedMessage>
-              {themes.map(theme => (
-                <option key={theme.id} value={theme.id}>
-                  {theme.title}
+        {features.themes && proposalForm.usingThemes && (
+          <Field
+            name="theme"
+            type="select"
+            id="proposal_theme"
+            component={component}
+            help={proposalForm.themeHelpText}
+            label={
+              <span>
+                <FormattedMessage id="proposal.theme" />
+                {!proposalForm.themeMandatory && optional}
+              </span>
+            }>
+            <FormattedMessage id="proposal.select.theme">
+              {message => (
+                <option value="" disabled>
+                  {message}
                 </option>
-              ))}
-            </Field>
-          )}
-        {proposalForm.categories.length > 0 &&
-          proposalForm.usingCategories && (
-            <Field
-              id="proposal_category"
-              type="select"
-              name="category"
-              component={component}
-              help={proposalForm.categoryHelpText}
-              label={
-                <span>
-                  <FormattedMessage id="proposal.category" />
-                  {!proposalForm.categoryMandatory && optional}
-                </span>
-              }>
-              <FormattedMessage id="proposal.select.category">
-                {message => (
-                  <option value="" disabled>
-                    {message}
-                  </option>
-                )}
-              </FormattedMessage>
-              {proposalForm.categories.map(category => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
+              )}
+            </FormattedMessage>
+            {themes.map(theme => (
+              <option key={theme.id} value={theme.id}>
+                {theme.title}
+              </option>
+            ))}
+          </Field>
+        )}
+        {proposalForm.categories.length > 0 && proposalForm.usingCategories && (
+          <Field
+            id="proposal_category"
+            type="select"
+            name="category"
+            component={component}
+            help={proposalForm.categoryHelpText}
+            label={
+              <span>
+                <FormattedMessage id="proposal.category" />
+                {!proposalForm.categoryMandatory && optional}
+              </span>
+            }>
+            <FormattedMessage id="proposal.select.category">
+              {message => (
+                <option value="" disabled>
+                  {message}
                 </option>
-              ))}
-            </Field>
-          )}
+              )}
+            </FormattedMessage>
+            {proposalForm.categories.map(category => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </Field>
+        )}
         {proposalForm.usingAddress && (
           <Field
             id="proposal_address"
@@ -481,31 +479,29 @@ export class ProposalForm extends React.Component<Props, State> {
             placeholder="proposal.map.form.placeholder"
           />
         )}
-        {features.districts &&
-          proposalForm.usingDistrict &&
-          proposalForm.districts.length > 0 && (
-            <Field
-              id="proposal_district"
-              type="select"
-              name="district"
-              component={component}
-              help={proposalForm.districtHelpText}
-              label={
-                <span>
-                  <FormattedMessage id="proposal.district" />
-                  {!proposalForm.districtMandatory && optional}
-                </span>
-              }>
-              <FormattedMessage id="proposal.select.district">
-                {message => <option value="">{message}</option>}
-              </FormattedMessage>
-              {districtIdsFilteredByAddress.map(districtId => (
-                <option key={districtId} value={districtId}>
-                  {proposalForm.districts.filter(district => district.id === districtId)[0].name}
-                </option>
-              ))}
-            </Field>
-          )}
+        {features.districts && proposalForm.usingDistrict && proposalForm.districts.length > 0 && (
+          <Field
+            id="proposal_district"
+            type="select"
+            name="district"
+            component={component}
+            help={proposalForm.districtHelpText}
+            label={
+              <span>
+                <FormattedMessage id="proposal.district" />
+                {!proposalForm.districtMandatory && optional}
+              </span>
+            }>
+            <FormattedMessage id="proposal.select.district">
+              {message => <option value="">{message}</option>}
+            </FormattedMessage>
+            {districtIdsFilteredByAddress.map(districtId => (
+              <option key={districtId} value={districtId}>
+                {proposalForm.districts.filter(district => district.id === districtId)[0].name}
+              </option>
+            ))}
+          </Field>
+        )}
         {proposalForm.usingDescription && (
           <Field
             id="proposal_body"
@@ -608,20 +604,7 @@ export default createFragmentContainer(container, {
         id
       }
       responses {
-        question {
-          id
-        }
-        ... on ValueResponse {
-          value
-        }
-        ... on MediaResponse {
-          medias {
-            id
-            name
-            size
-            url
-          }
-        }
+        ...responsesHelper_response @relay(mask: false)
       }
       media {
         id
@@ -648,51 +631,7 @@ export default createFragmentContainer(container, {
       }
       questions {
         id
-        title
-        private
-        position
-        required
-        helpText
-        jumps {
-          id
-          always
-          destination {
-            id
-            title
-          }
-          conditions {
-            id
-            operator
-            question {
-              id
-              title
-            }
-            ... on MultipleChoiceQuestionLogicJumpCondition {
-              value {
-                id
-                title
-              }
-            }
-          }
-        }
-        description
-        type
-        ... on MultipleChoiceQuestion {
-          isOtherAllowed
-          validationRule {
-            type
-            number
-          }
-          choices {
-            id
-            title
-            description
-            color
-            image {
-              url
-            }
-          }
-        }
+        ...responsesHelper_question @relay(mask: false)
       }
       usingDistrict
       districtMandatory

@@ -99,10 +99,7 @@ export default createFragmentContainer(
   graphql`
     fragment ProposalResponse_response on Response {
       question {
-        id
-        type
-        title
-        private
+        ...responsesHelper_question @relay(mask: false)
       }
       ... on ValueResponse {
         value

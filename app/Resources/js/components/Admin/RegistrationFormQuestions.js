@@ -87,33 +87,7 @@ export default createFragmentContainer(
       id
       questions {
         id
-        title
-        helpText
-        description
-        type
-        private
-        required
-        kind
-        ... on MultipleChoiceQuestion {
-          isRandomQuestionChoices
-          isOtherAllowed
-          validationRule {
-            type
-            number
-          }
-          questionChoices {
-            id
-            title
-            description
-            color
-            image {
-              id
-              url
-              name
-              size
-            }
-          }
-        }
+        ...responsesHelper_question @relay(mask: false)
       }
     }
   `,

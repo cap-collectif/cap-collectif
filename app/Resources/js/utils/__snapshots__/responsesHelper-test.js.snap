@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validateResponses Should render correctly when empty 1`] = `
+<div>
+  <div
+    className=""
+  >
+    <PrivateBox
+      divClassName=""
+      message="global.form.private"
+      show={false}
+    >
+      <Field
+        choices={Array []}
+        component={[Function]}
+        description={null}
+        disabled={false}
+        help={null}
+        id="toto-form-[object Object]"
+        label={
+          <React.Fragment>
+            <span
+              className="visible-print-block"
+            >
+              2
+              .
+            </span>
+             
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "ça roule ? <span class=\\"excerpt small\\"> global.optional</span>",
+                }
+              }
+            />
+          </React.Fragment>
+        }
+        name="[object Object].value"
+        placeholder="reply.your_response"
+        type="textarea"
+        value={null}
+      />
+    </PrivateBox>
+  </div>
+  <div
+    className=""
+  >
+    <PrivateBox
+      divClassName=""
+      message="global.form.private"
+      show={false}
+    >
+      <Field
+        choices={Array []}
+        component={[Function]}
+        description={null}
+        disabled={false}
+        help={null}
+        id="toto-form-[object Object]"
+        label={
+          <React.Fragment>
+            <span
+              className="visible-print-block"
+            >
+              1
+              .
+            </span>
+             
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Un nombre stp",
+                }
+              }
+            />
+          </React.Fragment>
+        }
+        name="[object Object].value"
+        placeholder="reply.your_response"
+        type="number"
+        value={null}
+      />
+    </PrivateBox>
+  </div>
+  <div
+    className=""
+  >
+    <PrivateBox
+      divClassName=""
+      message="global.form.private"
+      show={true}
+    >
+      <Field
+        component={[Function]}
+        description={null}
+        disabled={false}
+        help={null}
+        id="toto-form-[object Object]"
+        label={
+          <React.Fragment>
+            <span
+              className="visible-print-block"
+            >
+              3
+              .
+            </span>
+             
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Un héro stp (secret)",
+                }
+              }
+            />
+          </React.Fragment>
+        }
+        name="[object Object].value"
+        placeholder="reply.your_response"
+        type="select"
+      >
+        <option
+          disabled={true}
+          value=""
+        >
+          global.select
+        </option>
+        <option
+          value="Choice 1"
+        >
+          Choice 1
+        </option>
+        <option
+          value="Choice 2"
+        >
+          Choice 2
+        </option>
+      </Field>
+      <div
+        className="visible-print-block form-fields"
+      >
+        <div
+          className="radio"
+        >
+          Choice 1
+        </div>
+        <div
+          className="radio"
+        >
+          Choice 2
+        </div>
+      </div>
+      <ConditionalJumps
+        jumps={Array []}
+      />
+    </PrivateBox>
+  </div>
+  <div
+    className=""
+  >
+    <PrivateBox
+      divClassName=""
+      message="global.form.private"
+      show={false}
+    >
+      <Field
+        component={[Function]}
+        description={null}
+        disabled={false}
+        help={null}
+        id="toto-form-[object Object]"
+        label={
+          <React.Fragment>
+            <span
+              className="visible-print-block"
+            >
+              4
+              .
+            </span>
+             
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Envoyez-nous l'estimation financière de votre projet",
+                }
+              }
+            />
+          </React.Fragment>
+        }
+        name="[object Object].value"
+        placeholder="reply.your_response"
+        type="medias"
+      />
+      <ConditionalJumps
+        jumps={Array []}
+      />
+    </PrivateBox>
+  </div>
+</div>
+`;

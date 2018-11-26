@@ -190,53 +190,7 @@ export class RegistrationForm extends React.Component<Props> {
                   id
                   questions {
                     id
-                    number
-                    title
-                    position
-                    private
-                    required
-                    description
-                    helpText
-                    jumps {
-                      id
-                      always
-                      destination {
-                        id
-                        title
-                        number
-                      }
-                      conditions {
-                        id
-                        operator
-                        question {
-                          id
-                          title
-                        }
-                        ... on MultipleChoiceQuestionLogicJumpCondition {
-                          value {
-                            id
-                            title
-                          }
-                        }
-                      }
-                    }
-                    type
-                    ... on MultipleChoiceQuestion {
-                      isOtherAllowed
-                      validationRule {
-                        type
-                        number
-                      }
-                      choices(randomize: true) {
-                        id
-                        title
-                        description
-                        color
-                        image {
-                          url
-                        }
-                      }
-                    }
+                    ...responsesHelper_question @relay(mask: false)
                   }
                 }
               }
