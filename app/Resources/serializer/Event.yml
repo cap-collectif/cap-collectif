@@ -33,9 +33,10 @@ Capco\AppBundle\Entity\Event:
       expose: true
       type: string
       groups: [Events]
-    author:
+    Author:
       expose: true
       type: Capco\UserBundle\Entity\User
+      serialized_name: author
       groups: [Events, Elasticsearch]
     projects:
       expose: true

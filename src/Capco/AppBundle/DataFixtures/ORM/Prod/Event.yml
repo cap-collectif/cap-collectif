@@ -2,10 +2,10 @@ Capco\AppBundle\Entity\Event:
   event1:
     id: event1
     title: Exemple d’événement
-    enabled: true
+    isEnabled: true
     body: <p> Ceci est le détail de l’événement</p>
     startAt: <(new \DateTime('2030-01-01'))>
-    author: '@user1'
+    Author: '@user1'
     media: '@MediaProject3'
     address: '25, rue Claude Tillier'
     city: Paris

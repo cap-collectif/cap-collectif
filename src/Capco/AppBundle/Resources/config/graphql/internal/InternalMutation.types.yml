@@ -1,149 +1,153 @@
 InternalMutation:
   type: object
-  inherits:
-    - PreviewMutation
+    # - PublicMutation
+  # inherits:
   config:
     name: Mutation
     fields:
-      addEvent:
-        access: "@=hasRole('ROLE_ADMIN')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: InternalAddEventInput
-          payloadType: InternalAddEventPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventMutation", [value, getUser()])'
-      changeEvent:
-        access: "@=hasRole('ROLE_ADMIN')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: InternalChangeEventInput
-          payloadType: InternalChangeEventPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeEventMutation", [value, getUser()])'
       addComment:
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: AddCommentInput
           payloadType: AddCommentPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddCommentMutation", [value, getUser(), serv("request_stack")])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddCommentMutation", [value, getUser(), serv("request_stack")])'
       addSourceVote:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: AddSourceVoteInput
           payloadType: AddSourceVotePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddSourceVoteMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddSourceVoteMutation", [value, getUser()])'
       addCommentVote:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: AddCommentVoteInput
           payloadType: AddCommentVotePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddCommentVoteMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddCommentVoteMutation", [value, getUser()])'
       addArgument:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: AddArgumentInput
           payloadType: AddArgumentPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddArgumentMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddArgumentMutation", [value, getUser()])'
       addArgumentVote:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: AddArgumentVoteInput
           payloadType: AddArgumentVotePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddArgumentVoteMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddArgumentVoteMutation", [value, getUser()])'
       addSource:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: AddSourceInput
           payloadType: AddSourcePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddSourceMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddSourceMutation", [value, getUser()])'
       addVersion:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: AddVersionInput
           payloadType: AddVersionPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddVersionMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddVersionMutation", [value, getUser()])'
       changeArgument:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: ChangeArgumentInput
           payloadType: ChangeArgumentPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeArgumentMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeArgumentMutation", [value, getUser()])'
       changeVersion:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: ChangeVersionInput
           payloadType: ChangeVersionPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeVersionMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeVersionMutation", [value, getUser()])'
       changeSource:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: ChangeSourceInput
           payloadType: ChangeSourcePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeSourceMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeSourceMutation", [value, getUser()])'
       deleteArgument:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: DeleteArgumentInput
           payloadType: DeleteArgumentPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteArgumentMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteArgumentMutation", [value, getUser()])'
       deleteComment:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: DeleteCommentInput
           payloadType: DeleteCommentPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteCommentMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteCommentMutation", [value, getUser()])'
       deleteSource:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: DeleteSourceInput
           payloadType: DeleteSourcePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteSourceMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteSourceMutation", [value, getUser()])'
       deleteOpinion:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: DeleteOpinionInput
           payloadType: DeleteOpinionPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteOpinionMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteOpinionMutation", [value, getUser()])'
       deleteVersion:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: DeleteVersionInput
           payloadType: DeleteVersionPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteVersionMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteVersionMutation", [value, getUser()])'
       addReply:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: AddReplyInput
           payloadType: AddReplyPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddReplyMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddReplyMutation", [value, getUser()])'
       updateReply:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateReplyInput
           payloadType: UpdateReplyPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateReplyMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateReplyMutation", [value, getUser()])'
       deleteReply:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: DeleteReplyInput
           payloadType: DeleteReplyPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteReplyMutation", [value["id"], getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteReplyMutation", [value["id"], getUser()])'
       # User notifications
       changeUserNotificationsConfiguration:
         access: "@=hasRole('ROLE_USER')"
@@ -151,42 +155,48 @@ InternalMutation:
         builderConfig:
           inputType: ChangeUserNotificationsConfigurationInput
           payloadType: ChangeUserNotificationsConfigurationPayload
-          mutateAndGetPayload: "@=mutation('changeUserNotificationsConfiguration', [value, getUser()])"
+          mutateAndGetPayload:
+            "@=mutation('changeUserNotificationsConfiguration', [value, getUser()])"
       addOpinionVote:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: AddOpinionVoteInput
           payloadType: AddOpinionVotePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddOpinionVoteMutation", [value, getUser(), serv("request_stack")])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddOpinionVoteMutation", [value, getUser(), serv("request_stack")])'
       removeOpinionVote:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: RemoveOpinionVoteInput
           payloadType: RemoveOpinionVotePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveOpinionVoteMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveOpinionVoteMutation", [value, getUser()])'
       removeArgumentVote:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: RemoveArgumentVoteInput
           payloadType: RemoveArgumentVotePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveArgumentVoteMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveArgumentVoteMutation", [value, getUser()])'
       removeCommentVote:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: RemoveCommentVoteInput
           payloadType: RemoveCommentVotePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveCommentVoteMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveCommentVoteMutation", [value, getUser()])'
       removeSourceVote:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: RemoveSourceVoteInput
           payloadType: RemoveSourceVotePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveSourceVoteMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveSourceVoteMutation", [value, getUser()])'
       # Proposal
       addProposalVote:
         access: "@=hasRole('ROLE_USER')"
@@ -194,21 +204,24 @@ InternalMutation:
         builderConfig:
           inputType: AddProposalVoteInput
           payloadType: AddProposalVotePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalVoteMutation", [value, getUser(), serv("request_stack")])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalVoteMutation", [value, getUser(), serv("request_stack")])'
       removeProposalVote:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: RemoveProposalVoteInput
           payloadType: RemoveProposalVotePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveProposalVoteMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveProposalVoteMutation", [value, getUser()])'
       updateProposalVotes:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateProposalVotesInput
           payloadType: UpdateProposalVotesPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalVotesMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalVotesMutation", [value, getUser()])'
       # User
       requestUserArchive:
         access: "@=hasRole('ROLE_USER')"
@@ -216,7 +229,8 @@ InternalMutation:
         builderConfig:
           inputType: RequestUserArchiveInput
           payloadType: RequestUserArchivePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RequestUserArchiveMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RequestUserArchiveMutation", [value, getUser()])'
       # Proposal
       changeProposalPublicationStatus:
         access: "@=hasRole('ROLE_ADMIN')"
@@ -245,14 +259,16 @@ InternalMutation:
         builderConfig:
           inputType: CreateProposalFusionInput
           payloadType: CreateProposalFusionPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalFusionMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalFusionMutation", [value, getUser()])'
       updateProposalFusion:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateProposalFusionInput
           payloadType: UpdateProposalFusionPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalFusionMutation", [value])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalFusionMutation", [value])'
       changeProposalNotation:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
@@ -273,70 +289,80 @@ InternalMutation:
         builderConfig:
           inputType: FollowProposalInput
           payloadType: FollowProposalPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FollowProposalMutation", [value["proposalId"], value["notifiedOf"], getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FollowProposalMutation", [value["proposalId"], value["notifiedOf"], getUser()])'
       followOpinion:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: FollowOpinionInput
           payloadType: FollowOpinionPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FollowOpinionMutation", [value["opinionId"], value["notifiedOf"], getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FollowOpinionMutation", [value["opinionId"], value["notifiedOf"], getUser()])'
       updateFollowProposal:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateFollowProposalInput
           payloadType: UpdateFollowProposalPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFollowProposalMutation", [value["proposalId"], value["notifiedOf"], getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFollowProposalMutation", [value["proposalId"], value["notifiedOf"], getUser()])'
       updateFollowOpinion:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateFollowOpinionInput
           payloadType: UpdateFollowOpinionPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFollowOpinionMutation", [value["opinionId"], value["notifiedOf"], getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFollowOpinionMutation", [value["opinionId"], value["notifiedOf"], getUser()])'
       unfollowProposal:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UnfollowProposalInput
           payloadType: UnfollowProposalPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnfollowProposalMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnfollowProposalMutation", [value, getUser()])'
       unfollowOpinion:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UnfollowOpinionInput
           payloadType: UnfollowOpinionPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnfollowOpinionMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnfollowOpinionMutation", [value, getUser()])'
       selectProposal:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: SelectProposalInput
           payloadType: SelectProposalPayload
-          mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId'], value['statusId']])"
+          mutateAndGetPayload:
+            "@=mutation('selectProposal', [value['proposalId'], value['stepId'], value['statusId']])"
       unselectProposal:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UnselectProposalInput
           payloadType: UnselectProposalPayload
-          mutateAndGetPayload: "@=mutation('unselectProposal', [value['proposalId'], value['stepId']])"
+          mutateAndGetPayload:
+            "@=mutation('unselectProposal', [value['proposalId'], value['stepId']])"
       changeSelectionStatus:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: ChangeSelectionStatusInput
           payloadType: ChangeSelectionStatusPayload
-          mutateAndGetPayload: "@=mutation('changeSelectionStatus', [ value['proposalId'], value['stepId'], value['statusId'] ])"
+          mutateAndGetPayload:
+            "@=mutation('changeSelectionStatus', [ value['proposalId'], value['stepId'], value['statusId'] ])"
       changeCollectStatus:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: ChangeCollectStatusInput
           payloadType: ChangeCollectStatusPayload
-          mutateAndGetPayload: "@=mutation('changeCollectStatus', [value['proposalId'], value['statusId'] ])"
+          mutateAndGetPayload:
+            "@=mutation('changeCollectStatus', [value['proposalId'], value['statusId'] ])"
       changeProposalProgressSteps:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
@@ -345,19 +371,22 @@ InternalMutation:
           payloadType: ChangeProposalProgressStepsPayload
           mutateAndGetPayload: "@=mutation('changeProgressSteps', [value])"
       deleteProposal:
-        access: '@=hasRole("ROLE_SUPER_ADMIN") or (hasRole("ROLE_USER") and service("Capco\\AppBundle\\Helper\\ProposalHelper").isAuthor(args["input"]["proposalId"], getUser()))'
+        access:
+          '@=hasRole("ROLE_SUPER_ADMIN") or (hasRole("ROLE_USER") and service("Capco\\AppBundle\\Helper\\ProposalHelper").isAuthor(args["input"]["proposalId"], getUser()))'
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: DeleteProposalInput
           payloadType: DeleteProposalPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProposalMutation", [value["proposalId"], getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProposalMutation", [value["proposalId"], getUser()])'
       updateRegistrationForm:
         access: "@=hasRole('ROLE_SUPER_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateRegistrationFormQuestionsInput
           payloadType: UpdateRegistrationFormQuestionsPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRegistrationFormQuestionsMutation", [value])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRegistrationFormQuestionsMutation", [value])'
       # Proposal Form
       createProposalForm:
         access: "@=hasRole('ROLE_ADMIN')"
@@ -379,7 +408,8 @@ InternalMutation:
         builderConfig:
           inputType: UpdateProposalFormInput
           payloadType: UpdateProposalFormPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalFormMutation", [value])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalFormMutation", [value])'
       updateProposalFormNotificationsConfiguration:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
@@ -430,7 +460,8 @@ InternalMutation:
         builderConfig:
           inputType: DeleteUserInGroupInput
           payloadType: DeleteUserInGroupPayload
-          mutateAndGetPayload: "@=mutation('deleteUserInGroup', [value['userId'], value['groupId']])"
+          mutateAndGetPayload:
+            "@=mutation('deleteUserInGroup', [value['userId'], value['groupId']])"
       addUsersInGroup:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
@@ -444,28 +475,33 @@ InternalMutation:
         builderConfig:
           inputType: UpdateProfileInput
           payloadType: UpdateProfilePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfileMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfileMutation", [value, getUser()])'
       updateProfilePassword:
         access: '@=isAuthenticated()'
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateProfilePasswordInput
           payloadType: UpdateProfilePasswordPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePasswordMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePasswordMutation", [value, getUser()])'
       updateProfilePersonalData:
         access: '@=hasRole("ROLE_USER")'
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateProfilePersonalDataInput
           payloadType: UpdateProfilePersonalDataPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePersonalDataMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePersonalDataMutation", [value, getUser()])'
       updateProfilePublicData:
-        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(), value, context, ["ROLE_SUPER_ADMIN"])'
+        access:
+          '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(), value, context, ["ROLE_SUPER_ADMIN"])'
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateProfilePublicDataInput
           payloadType: UpdateProfilePublicDataPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePublicDataMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePublicDataMutation", [value, getUser()])'
       # Contributions
       deleteAccount:
         access: "@=hasRole('ROLE_USER')"
@@ -473,35 +509,40 @@ InternalMutation:
         builderConfig:
           inputType: DeleteAccountInput
           payloadType: DeleteAccountPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountMutation", [value, getUser()])'
       updateRequirement:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateRequirementInput
           payloadType: UpdateRequirementPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRequirementMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRequirementMutation", [value, getUser()])'
       createUser:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: CreateUserInput
           payloadType: CreateUserPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateUserMutation", [value])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateUserMutation", [value])'
       updateUserAccount:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateUserAccountInput
           payloadType: UpdateUserAccountPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserAccountMutation", [value, getUser()])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserAccountMutation", [value, getUser()])'
       addUsersToGroupFromEmail:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: AddUsersToGroupFromEmailInput
           payloadType: AddUsersToGroupFromEmailPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddUsersToGroupFromEmailMutation", [value["emails"], value["dryRun"], value["groupId"]])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddUsersToGroupFromEmailMutation", [value["emails"], value["dryRun"], value["groupId"]])'
       # Questionnaire
       createQuestionnaire:
         access: "@=hasRole('ROLE_ADMIN')"
@@ -509,18 +550,21 @@ InternalMutation:
         builderConfig:
           inputType: CreateQuestionnaireInput
           payloadType: CreateQuestionnairePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateQuestionnaireMutation", [value])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateQuestionnaireMutation", [value])'
       updateQuestionnaireParameters:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateQuestionnaireParametersInput
           payloadType: UpdateQuestionnaireParametersPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireParametersMutation", [value])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireParametersMutation", [value])'
       updateQuestionnaireConfiguration:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UpdateQuestionnaireConfigurationInput
           payloadType: UpdateQuestionnaireConfigurationPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireConfigurationMutation", [value])'
+          mutateAndGetPayload:
+            '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireConfigurationMutation", [value])'

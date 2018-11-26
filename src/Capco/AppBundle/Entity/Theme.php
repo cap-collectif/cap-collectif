@@ -378,7 +378,12 @@ class Theme implements IndexableInterface
         return $this->events;
     }
 
-    public function addEvent(Event $event): self
+    /**
+     * @param Event $event
+     *
+     * @return Theme
+     */
+    public function addEvent(Event $event)
     {
         if (!$this->events->contains($event)) {
             $this->events->add($event);
@@ -387,7 +392,12 @@ class Theme implements IndexableInterface
         return $this;
     }
 
-    public function removeEvent(Event $event): self
+    /**
+     * @param Event $event
+     *
+     * @return $this
+     */
+    public function removeEvent(Event $event)
     {
         $this->events->removeElement($event);
 
@@ -499,20 +509,16 @@ class Theme implements IndexableInterface
 
     public function countEnabledPosts(): int
     {
-        return $this->posts
-            ->map(function (Post $post) {
-                return $post->canDisplay() && $post->getIsPublished();
-            })
-            ->count();
+        return $this->posts->map(function (Post $post) {
+            return $post->canDisplay() && $post->getIsPublished();
+        })->count();
     }
 
     public function countEnabledEvents(): int
     {
-        return $this->events
-            ->map(function (Event $event) {
-                return $event->isEnabled();
-            })
-            ->count();
+        return $this->events->map(function (Event $event) {
+            return $event->getIsEnabled();
+        })->count();
     }
 
     public function isOpened()

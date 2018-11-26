@@ -113,7 +113,8 @@ class ParisImportUsersCommand extends ContainerAwareCommand
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $this->em->getConnection()
+        $this->em
+            ->getConnection()
             ->getConfiguration()
             ->setSQLLogger(null);
         $this->users = $this->createUsers();
@@ -201,15 +202,15 @@ class ParisImportUsersCommand extends ContainerAwareCommand
                     return $type->getName() === self::PROFILES_TYPES[$userRow['user_type']];
                 })
                 ->first();
-            $firstName = ('' === $userRow['firstname'] || !$userRow['firstname'])
-                ? null
-                : $userRow['firstname'];
-            $lastName = ('' === $userRow['lastname'] || !$userRow['lastname'])
-                ? null
-                : $userRow['lastname'];
+            $firstName =
+                '' === $userRow['firstname'] || !$userRow['firstname']
+                    ? null
+                    : $userRow['firstname'];
+            $lastName =
+                '' === $userRow['lastname'] || !$userRow['lastname'] ? null : $userRow['lastname'];
             $email = '' === $userRow['email'] ? $userRow['email_init'] : $userRow['email'];
             $address = '' === $userRow['address'] ? null : $userRow['address'];
-            $zipCode = '' === $userRow['zipcode'] ? null : (int) $userRow['zipcode'];
+            $zipCode = '' === $userRow['zipcode'] ? null : $userRow['zipcode'];
             $user = (new User())
                 ->setFirstname($firstName)
                 ->setLastname($lastName)
@@ -308,10 +309,9 @@ class ParisImportUsersCommand extends ContainerAwareCommand
                     continue;
                 }
                 if (method_exists($listener, 'getSubscribedEvents')) {
-                    $this->em->getEventManager()->removeEventListener(
-                        $listener->getSubscribedEvents(),
-                        $listener
-                    );
+                    $this->em
+                        ->getEventManager()
+                        ->removeEventListener($listener->getSubscribedEvents(), $listener);
                     $output->writeln('Disabled <info>' . \get_class($listener) . '</info>');
                 }
             }
@@ -323,10 +323,9 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         foreach ($this->events as $event => $listeners) {
             foreach ($listeners as $key => $listener) {
                 if (method_exists($listener, 'getSubscribedEvents')) {
-                    $this->em->getEventManager()->addEventListener(
-                        $listener->getSubscribedEvents(),
-                        $listener
-                    );
+                    $this->em
+                        ->getEventManager()
+                        ->addEventListener($listener->getSubscribedEvents(), $listener);
                     $output->writeln('Enabled <info>' . \get_class($listener) . '</info>');
                 }
             }

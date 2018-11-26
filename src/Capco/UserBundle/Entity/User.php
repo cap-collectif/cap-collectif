@@ -110,9 +110,6 @@ class User extends BaseUser implements
      */
     protected $address2;
 
-    /**
-     * @var int
-     */
     protected $zipCode;
 
     /**
@@ -663,15 +660,12 @@ class User extends BaseUser implements
         $this->address2 = $address2;
     }
 
-    /**
-     * @return int
-     */
-    public function getZipCode(): ?int
+    public function getZipCode(): ?string
     {
         return $this->zipCode;
     }
 
-    public function setZipCode(?int $zipCode): self
+    public function setZipCode(?string $zipCode): self
     {
         $this->zipCode = $zipCode;
 

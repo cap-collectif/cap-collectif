@@ -10,4 +10,9 @@ class EventSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Capco\AppBundle\Entity\Event');
     }
+
+    function it_has_class_name()
+    {
+        $this->getClassName()->shouldReturn('Event');
+    }
 }

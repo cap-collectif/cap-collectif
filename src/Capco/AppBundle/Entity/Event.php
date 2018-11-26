@@ -29,12 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface
 {
-    use DateHelperTrait,
-        CommentableTrait,
-        UuidTrait,
-        TextableTrait,
-        MetaDescriptionCustomCodeTrait,
-        SluggableTitleTrait;
+    use DateHelperTrait, CommentableTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait, SluggableTitleTrait;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -51,7 +46,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     /**
      * @ORM\Column(name="is_enabled", type="boolean")
      */
-    private $enabled = true;
+    private $isEnabled = true;
 
     /**
      * @ORM\Column(name="start_at", type="datetime")
@@ -123,7 +118,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      * @Assert\NotNull()
      */
-    private $author;
+    private $Author;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EventComment", mappedBy="Event",  cascade={"persist", "remove"})
@@ -225,14 +220,14 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
 
     public function setAuthor(User $author): self
     {
-        $this->author = $author;
+        $this->Author = $author;
 
         return $this;
     }
 
     public function getAuthor(): ?User
     {
-        return $this->author;
+        return $this->Author;
     }
 
     public function setZipCode(int $zipCode): self
@@ -316,28 +311,38 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this;
     }
 
-    public function setLink(?string $link = null): self
+    /**
+     * Set link.
+     *
+     * @param string $link
+     *
+     * @return Event
+     */
+    public function setLink($link)
     {
         $this->link = $link;
 
         return $this;
     }
 
-    public function getLink(): ?string
+    /**
+     * Get link.
+     *
+     * @return string
+     */
+    public function getLink()
     {
         return $this->link;
     }
 
-    public function isEnabled(): bool
+    public function getIsEnabled(): bool
     {
-        return $this->enabled;
+        return $this->isEnabled;
     }
 
-    public function setEnabled(bool $enabled): self
+    public function setIsEnabled(bool $isEnabled)
     {
-        $this->enabled = $enabled;
-
-        return $this;
+        $this->isEnabled = $isEnabled;
     }
 
     public function getStartAt(): ?\DateTime
@@ -379,14 +384,19 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
 
     // **************** Custom methods ***************
 
+    public function getClassName()
+    {
+        return 'Event';
+    }
+
     public function canDisplay(): bool
     {
-        return $this->enabled;
+        return $this->isEnabled;
     }
 
     public function canContribute(): bool
     {
-        return $this->enabled;
+        return $this->isEnabled;
     }
 
     public function lastOneDay()
@@ -457,7 +467,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
 
     public function isIndexable(): bool
     {
-        return $this->isEnabled();
+        return $this->getIsEnabled();
     }
 
     public static function getElasticsearchTypeName(): string

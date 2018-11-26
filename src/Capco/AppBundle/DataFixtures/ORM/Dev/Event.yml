@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Event:
   event1:
     id: event1
     title: Event with registrations
-    enabled: true
+    isEnabled: true
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
       <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\Event:
          <p>Etiam habebis sem dicantur magna mollis euismod.</p>
     startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
     address: 111 Avenue Clémenceau
     city: Lyon
     registrationEnable: true
@@ -24,7 +24,7 @@ Capco\AppBundle\Entity\Event:
   event2:
     id: event2
     title: PHPTourDuFuture
-    enabled: true
+    isEnabled: true
     lat: 48.858243
     lng: 2.294515
     address: Tour Eiffel
@@ -42,14 +42,14 @@ Capco\AppBundle\Entity\Event:
             Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
     startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
     link: http://www.phptour2014.fr
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
   event3:
     id: event3
     title: GrenobleWeb2015
-    enabled: true
+    isEnabled: true
     lat: 45.178658
     lng: 5.725499
     address: Optique Moreau, 48 Rue de Stalingrad
@@ -66,14 +66,14 @@ Capco\AppBundle\Entity\Event:
             Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
     startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
     media: '@MediaProject3'
     registrationEnable: true
     projects: ['@p1']
   event4:
     id: event4
     title: EventOnOneDay
-    enabled: true
+    isEnabled: true
     lat: 45.747947
     lng: 4.838041
     body: |
@@ -87,7 +87,7 @@ Capco\AppBundle\Entity\Event:
             Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
     startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
     link: http://www.symfonyLive2015.fr
     media: '@MediaIdea1'
   event5:
@@ -98,7 +98,7 @@ Capco\AppBundle\Entity\Event:
     address: 101 rue d'Angers
     city: Lyon
     zipCode: 69007
-    enabled: true
+    isEnabled: true
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
       <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
@@ -110,7 +110,7 @@ Capco\AppBundle\Entity\Event:
             Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
     startAt: <(new \DateTime('2014-02-11'))>
     endAt: <(new \DateTime('2014-02-12'))>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
   event6:
     id: event6
@@ -120,7 +120,7 @@ Capco\AppBundle\Entity\Event:
     address: 103 Grande Rue de la Croix-Rousse
     zipCode: 69004
     city: Lyon
-    enabled: true
+    isEnabled: true
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
       <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
@@ -132,20 +132,20 @@ Capco\AppBundle\Entity\Event:
             Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
     startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
   event{7..10}:
     id: 'event<current()>'
     title: <text(30)>
-    enabled: true
+    isEnabled: true
     body: <text(1000)>
     startAt: <dateTimeBetween('-40 days', '-10 days')>
     endAt: <dateTimeBetween('+1 days', '+40 days')>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
   event11:
     id: event11
     title: ParisWeb2016
-    enabled: false
+    isEnabled: false
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
       <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
@@ -157,12 +157,12 @@ Capco\AppBundle\Entity\Event:
             Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
     startAt: <dateTimeBetween('now', '+10 days')>
     endAt: <dateTimeBetween('+12 days', '+30 days')>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
   event12:
     id: evenementSansDateDeFin
     title: EvenementPresentSansDateDeFin
-    enabled: true
+    isEnabled: true
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
       <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
@@ -173,12 +173,12 @@ Capco\AppBundle\Entity\Event:
          <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
             Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
     startAt: <dateTime('now')>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
     link: http://www.lavie.fr
   event13:
     id: evenementPasseSansDateDeFin
     title: evenementPasseSansDateDeFin
-    enabled: true
+    isEnabled: true
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
       <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
@@ -189,14 +189,14 @@ Capco\AppBundle\Entity\Event:
          <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
             Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
     startAt: <dateTimeBetween('-10 days', '-2 days')>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
     link: http://www.lavie.fr
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
   event14:
     id: evenementFutureSansDateDeFin
     title: evenementFutureSansDateDeFin
-    enabled: true
+    isEnabled: true
     body: |
       <p>Idque Caesaris facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</p>
       <p>Etiam habebis sem dicantur magna mollis euismod. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Mercedem aut nummos unde unde extricat, amaras.
@@ -207,5 +207,5 @@ Capco\AppBundle\Entity\Event:
          <p>Fictum,  deserunt mollit anim laborum astutumque! Phasellus laoreet lorem vel dolor tempus vehicula. Cras mattis iudicium purus sit amet fermentum. Cum ceteris in veneratione tui montes, nascetur mus.
             Hi omnes lingua, institutis, legibus inter se differunt. Unam incolunt Belgae, aliam Aquitani, tertiam. Integer legentibus erat a ante historiarum dapibus. Morbi fringilla convallis sapien, id pulvinar odio volutpat. Paullum deliquit, ponderibus modulisque suis ratio utitur.</p>
     startAt: <dateTimeBetween('+10 days', '+50 days')>
-    author: '@user<numberBetween(1, 5)>'
+    Author: '@user<numberBetween(1, 5)>'
     link: http://www.lavie.fr

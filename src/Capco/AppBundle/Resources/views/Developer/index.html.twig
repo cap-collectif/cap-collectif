@@ -235,15 +235,7 @@
     
     {% if mutation and category == "mutation" and selection is not null %}
     {% for field in mutation.fields if field.name == selection %}
-        <h2>{{field.name}}
-        {% if field.config.access|default(false) %}
-            {# We need a way to get info about the required access #}
-        <span class="label label-info">ROLE_ADMIN</span>
-        {% endif %}
-        </h2>
-        {% if field.type.getNullableType(field.type).preview is defined and field.type.getNullableType(field.type).preview %}
-            {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
-        {% endif %}        
+        <h2>{{field.name}}</h2>
         <p>{{field.description}}</p>
         <h3>
            Input fields
@@ -315,7 +307,7 @@
     {% endif %}
 
     {% if category == "enum" %}
-      {% for enum in enums|sort if enum.name == selection %}
+      {% for enum in enums if enum.name == selection|sort %}
         <h2>{{enum.name}}</h2>
         <p>{{enum.description}}</p>
         <h3>Values</h3>
@@ -329,7 +321,7 @@
     {% endif %}
 
     {% if category == "union" %}
-      {% for union in unions|sort if union.name == selection %}
+      {% for union in unions if union.name == selection|sort %}
         <h2>{{union.name}}</h2>
         <p>{{union.description}}</p>
         <h3>Possible Types</h3>
@@ -340,11 +332,8 @@
     {% endif %}
 
     {% if category == "input_object" %}
-      {% for input_object in input_objects|sort if input_object.name == selection %}
+      {% for input_object in input_objects if input_object.name == selection|sort %}
         <h2>{{input_object.name}}</h2>
-        {% if input_object.getNullableType(input_object).preview is defined and input_object.getNullableType(input_object).preview %}
-            {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
-        {% endif %}        
         <p>{{input_object.description}}</p>
         <h3>Input Fields</h3>
         {% for field in input_object.fields|sort %}

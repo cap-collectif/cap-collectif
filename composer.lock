@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a84bc9cd057eef0b009900d8d2695eb",
+    "content-hash": "1993b28c465d7fe7d9d4bd9ef47d44fc",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -6177,13 +6177,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/GraphQLBundle.git",
-                "reference": "5d65a1d0167d6467fac089f4b332a2ce470f1dd4"
+                "url": "https://github.com/ptondereau/GraphQLBundle.git",
+                "reference": "9158e02b2e7027b147a24048817406ac6f6c0f30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/GraphQLBundle/zipball/5d65a1d0167d6467fac089f4b332a2ce470f1dd4",
-                "reference": "5d65a1d0167d6467fac089f4b332a2ce470f1dd4",
+                "url": "https://api.github.com/repos/ptondereau/GraphQLBundle/zipball/9158e02b2e7027b147a24048817406ac6f6c0f30",
+                "reference": "9158e02b2e7027b147a24048817406ac6f6c0f30",
                 "shasum": ""
             },
             "require": {
@@ -6287,9 +6287,9 @@
                 "Relay"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/GraphQLBundle/tree/master"
+                "source": "https://github.com/ptondereau/GraphQLBundle/tree/master"
             },
-            "time": "2018-11-23T10:23:45+00:00"
+            "time": "2018-10-02T13:05:39+00:00"
         },
         {
             "name": "overblog/graphql-php-generator",

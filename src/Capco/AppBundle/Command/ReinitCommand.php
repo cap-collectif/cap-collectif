@@ -2,7 +2,8 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
+// use Capco\AppBundle\Elasticsearch\DoctrineUpdateListener;
+use Capco\AppBundle\Elasticsearch\DoctrineUpdateListener;
 use Doctrine\DBAL\ConnectionException;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
@@ -68,7 +69,7 @@ class ReinitCommand extends ContainerAwareCommand
             ->get('doctrine')
             ->getManager()
             ->getEventManager();
-        $elasticsearchListener = $this->getContainer()->get(ElasticsearchDoctrineListener::class);
+        $elasticsearchListener = $this->getContainer()->get(DoctrineUpdateListener::class);
         $publishableListener = $this->getContainer()->get(DoctrineListener::class);
 
         $eventManager->removeEventListener(
