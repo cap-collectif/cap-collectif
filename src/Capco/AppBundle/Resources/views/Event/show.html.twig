@@ -34,13 +34,13 @@
                     <div class="container  container--thinner">
                         <h1 class="h1"> {{ event.title }}</h1>
                         <div class="media">
-                            {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': event.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
+                            {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': event.author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                             <div class="media-body">
                                 <p class="media--aligned  excerpt">
                                     {% if is_feature_enabled('profiles') %}
-                                        <a href="{{ path('capco_user_profile_show_all', {'slug': event.Author.slug}) }}">{{ event.Author.username }}</a>
+                                        <a href="{{ path('capco_user_profile_show_all', {'slug': event.author.slug}) }}">{{ event.author.username }}</a>
                                     {% else %}
-                                        {{ event.Author.username }}
+                                        {{ event.author.username }}
                                     {% endif %}
                                     {% if is_feature_enabled('themes') and event.themes | length > 0 %}
                                         {{ 'event.show.in_theme'|trans({}, 'CapcoAppBundle') }}
