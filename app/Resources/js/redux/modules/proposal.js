@@ -193,7 +193,7 @@ export const deleteProposal = (proposalId: string, dispatch: Dispatch): void => 
     .then(response => {
       dispatch(closeDeleteProposalModal());
       if (response.deleteProposal) {
-        window.location.href = response.deleteProposal.step.show_url;
+        window.location.href = response.deleteProposal.step.url;
       }
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
