@@ -42,11 +42,11 @@ exports[`<DefaultAvatarGroup /> should render correctly 1`] = `
 
 exports[`<DefaultAvatarGroup /> should render correctly with other size 1`] = `
 <DefaultAvatarGroup__Container
-  height="30px"
+  height="34px"
   role="img"
   version="1.1"
   viewBox="-8 -7 40 40"
-  width="30px"
+  width="34px"
   x="0px"
   xmlns="http://www.w3.org/2000/svg"
   y="0px"

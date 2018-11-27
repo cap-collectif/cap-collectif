@@ -10,7 +10,7 @@ exports[`<AvatarCount /> should render correctly 1`] = `
 
 exports[`<AvatarCount /> should render correctly with other size 1`] = `
 <AvatarCount__Container
-  size={75}
+  size={34}
 >
   9
 </AvatarCount__Container>

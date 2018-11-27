@@ -13,8 +13,8 @@ exports[`<Avatar /> should render correctly with other size & className 1`] = `
 <Avatar__Container
   alt="my alternative"
   className="myClass"
-  height="70px"
+  height="34px"
   src="https://source.unsplash.com/collection/181462"
-  width="70px"
+  width="34px"
 />
 `;

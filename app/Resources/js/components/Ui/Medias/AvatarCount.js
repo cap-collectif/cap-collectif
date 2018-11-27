@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {
-  size?: number,
+  size: 45 | 34,
   children: React.Node,
 };
 

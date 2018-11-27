@@ -5,10 +5,10 @@ import styled from 'styled-components';
 type Props = {
   children?: any,
   url: string,
-  width?: string,
-  height?: string,
-  linearGradient?: boolean,
-  alt?: string,
+  width: string,
+  height: string,
+  linearGradient: boolean,
+  alt: string,
 };
 
 export const Container = styled.div.attrs({

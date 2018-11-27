@@ -18,7 +18,7 @@ describe('<Avatar />', () => {
 
   it('should render correctly with other size & className', () => {
     const wrapper = shallow(<Avatar {...props} />);
-    wrapper.setProps({ size: 70, className: 'myClass' });
+    wrapper.setProps({ size: 34, className: 'myClass' });
     expect(wrapper).toMatchSnapshot();
   });
 });

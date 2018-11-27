@@ -5,8 +5,8 @@ import colors from '../../../utils/colors';
 
 type Props = {
   children: React.Node,
-  width?: string,
-  height?: string,
+  width: string,
+  height: string,
 };
 
 export const Container = styled.div.attrs({

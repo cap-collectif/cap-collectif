@@ -12,9 +12,11 @@ exports[`<AvatarGroup /> should render correctly 1`] = `
 
 exports[`<AvatarGroup /> should render correctly with other size 1`] = `
 <AvatarGroup__Container
-  childrenSize={75}
-  length={null}
+  childrenSize={34}
+  length={3}
 >
+  <div />
+  <div />
   <div />
 </AvatarGroup__Container>
 `;

@@ -6,7 +6,7 @@ import { shallow } from 'enzyme';
 import { AvatarGroup } from './AvatarGroup';
 
 const props = {
-  childrenSize: 75,
+  childrenSize: 34,
 };
 
 describe('<AvatarGroup />', () => {
@@ -23,6 +23,8 @@ describe('<AvatarGroup />', () => {
   it('should render correctly with other size', () => {
     const wrapper = shallow(
       <AvatarGroup {...props}>
+        <div />
+        <div />
         <div />
       </AvatarGroup>,
     );

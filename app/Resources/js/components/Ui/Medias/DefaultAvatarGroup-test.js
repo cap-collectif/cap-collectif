@@ -6,7 +6,7 @@ import { shallow } from 'enzyme';
 import { DefaultAvatarGroup } from './DefaultAvatarGroup';
 
 const props = {
-  size: 30,
+  size: 34,
 };
 
 describe('<DefaultAvatarGroup />', () => {

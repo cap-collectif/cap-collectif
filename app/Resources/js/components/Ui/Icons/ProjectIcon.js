@@ -2,18 +2,22 @@
 import * as React from 'react';
 
 type Props = {
-  size?: number,
+  size: number,
 };
 
 export class DefaultImage extends React.Component<Props> {
+  static defaultProps = {
+    size: 110,
+  };
+
   render() {
     const { size } = this.props;
 
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width={`${size || '110'}px`}
-        height={`${size || '110'}px`}
+        width={`${size}px`}
+        height={`${size}px`}
         viewBox="0 0 24 24">
         <path
           fill="none"

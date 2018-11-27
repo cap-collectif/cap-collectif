@@ -3,10 +3,10 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 type Props = {
-  width?: string,
-  height?: string,
-  objectFit?: string,
-  alt?: string,
+  width: string,
+  height: string,
+  objectFit: string,
+  alt: string,
   src: string,
   className?: string,
 };

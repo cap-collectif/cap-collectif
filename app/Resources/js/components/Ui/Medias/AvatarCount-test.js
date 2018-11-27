@@ -6,7 +6,7 @@ import { shallow } from 'enzyme';
 import { AvatarCount } from './AvatarCount';
 
 const props = {
-  size: 75,
+  size: 34,
 };
 
 describe('<AvatarCount />', () => {

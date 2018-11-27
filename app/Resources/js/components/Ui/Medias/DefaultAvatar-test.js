@@ -6,7 +6,7 @@ import { shallow } from 'enzyme';
 import { DefaultAvatar } from './DefaultAvatar';
 
 const props = {
-  size: 30,
+  size: 34,
 };
 
 describe('<DefaultAvatar />', () => {

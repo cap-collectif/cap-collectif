@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 type Props = {
   children: any,
-  ratioX?: number,
-  ratioY?: number,
+  ratioX: number,
+  ratioY: number,
 };
 
 export const Container = styled.div.attrs({
