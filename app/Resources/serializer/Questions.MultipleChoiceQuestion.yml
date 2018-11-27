@@ -11,9 +11,8 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
       type: boolean
       groups: [Questions]
       serialized_name: isOtherAllowed
-    questionChoices:
+    choices:
       expose: true
-      serialized_name: choices
       groups: [Questions]
       type: array
     validationRule:

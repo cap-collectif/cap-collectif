@@ -69,10 +69,10 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
       if (
         question.kind !== 'simple' &&
         question.id &&
-        question.questionChoices &&
-        question.questionChoices.length > 0
+        question.choices &&
+        question.choices.length > 0
       ) {
-        arrayQuestions[question.id] = question.questionChoices;
+        arrayQuestions[question.id] = question.choices;
       }
     });
     return (
@@ -106,8 +106,8 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
             if (
               question.kind !== 'simple' &&
               question.id &&
-              question.questionChoices &&
-              question.questionChoices.length > 0
+              question.choices &&
+              question.choices.length > 0
             ) {
               return (
                 <option value={question.id}>

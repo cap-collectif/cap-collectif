@@ -37,7 +37,7 @@ trait QuestionPersisterTrait
                 $em->persist($question);
             }
             if ($question instanceof MultipleChoiceQuestion) {
-                foreach ($question->getQuestionChoices() as $key => $questionChoice) {
+                foreach ($question->getChoices() as $key => $questionChoice) {
                     $questionChoice->setQuestion($question);
                     $questionChoice->setPosition($key);
                     $em->persist($questionChoice);
@@ -88,22 +88,19 @@ trait QuestionPersisterTrait
                 }
 
                 $dataQuestionChoicesIds = [];
-                foreach (
-                    $dataQuestion['question']['questionChoices']
-                    as $key => $dataQuestionChoice
-                ) {
+                foreach ($dataQuestion['question']['choices'] as $key => $dataQuestionChoice) {
                     if (isset($dataQuestionChoice['id'])) {
                         $dataQuestionChoicesIds[] = $dataQuestionChoice['id'];
                     }
                 }
 
-                foreach ($abstractQuestion->getQuestionChoices() as $position => $questionChoice) {
+                foreach ($abstractQuestion->getChoices() as $position => $questionChoice) {
                     if (!in_array($questionChoice->getId(), $dataQuestionChoicesIds)) {
                         $deletedChoice = [
                             'id' => $abstractQuestion->getId(),
                             'title' => null,
                         ];
-                        array_splice($dataQuestion['question']['questionChoices'], $position, 0, [
+                        array_splice($dataQuestion['question']['choices'], $position, 0, [
                             $deletedChoice,
                         ]);
                     }

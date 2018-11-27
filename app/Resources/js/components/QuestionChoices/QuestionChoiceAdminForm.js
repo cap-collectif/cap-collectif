@@ -18,7 +18,7 @@ type QuestionChoices = $ReadOnlyArray<{|
 type Props = {
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
-  questionChoices: QuestionChoices,
+  choices: QuestionChoices,
   formName: string,
   oldMember: string,
   type: string,
@@ -33,8 +33,8 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
   };
 
   handleClose = (index: number) => {
-    const { fields, questionChoices } = this.props;
-    if (!questionChoices[index].id) {
+    const { fields, choices } = this.props;
+    if (!choices[index].id) {
       fields.remove(index);
     }
     this.handleSubmit();
@@ -45,7 +45,7 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
   };
 
   render() {
-    const { dispatch, fields, questionChoices, formName, oldMember, type, intl } = this.props;
+    const { dispatch, fields, choices, formName, oldMember, type, intl } = this.props;
     const { editIndex } = this.state;
     return (
       <div className="form-group" id="questions_choice_panel_personal">
@@ -53,7 +53,7 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
           {fields.map((member, index) => (
             <ListGroupItem key={index}>
               <QuestionChoiceAdminModal
-                isCreating={!!questionChoices[index].id}
+                isCreating={!!choices[index].id}
                 onClose={() => {
                   this.handleClose(index);
                 }}
@@ -66,7 +66,7 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
               <Row>
                 <Col xs={8}>
                   <div>
-                    <strong>{questionChoices[index].title}</strong>
+                    <strong>{choices[index].title}</strong>
                   </div>
                 </Col>
                 <Col xs={4}>
@@ -104,7 +104,7 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
           bsStyle="primary"
           className="btn--outline box-content__toolbar"
           onClick={() => {
-            dispatch(arrayPush(this.props.formName, `${oldMember}.questionChoices`, {}));
+            dispatch(arrayPush(this.props.formName, `${oldMember}.choices`, {}));
             this.setState({ editIndex: fields.length });
           }}>
           <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
@@ -117,7 +117,7 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => {
   const selector = formValueSelector(props.formName);
   return {
-    questionChoices: selector(state, `${props.oldMember}.questionChoices`),
+    choices: selector(state, `${props.oldMember}.choices`),
   };
 };
 

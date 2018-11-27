@@ -308,7 +308,7 @@ Scenario: GraphQL client wants to delete the first question
               "private": false,
               "required": false,
               "validationRule": null,
-              "questionChoices": [
+              "choices": [
                 {
                   "id": "questionchoice32",
                   "title": "Oui",
@@ -376,7 +376,7 @@ Scenario: GraphQL client wants to delete the first question choice
             title
             type
             ... on MultipleChoiceQuestion {
-              questionChoices {
+              choices {
                 id
                 title
                 description
@@ -410,7 +410,7 @@ Scenario: GraphQL client wants to delete the first question choice
               "private": false,
               "required": false,
               "validationRule": null,
-              "questionChoices": [
+              "choices": [
                 {
                   "id": "questionchoice33",
                   "title": "Non",
@@ -454,7 +454,7 @@ Scenario: GraphQL client wants to delete the first question choice
               "id": "48",
               "title": "Question Multiple?",
               "type": "radio",
-              "questionChoices": [
+              "choices": [
                 {
                   "id": "questionchoice33",
                   "title": "Non",

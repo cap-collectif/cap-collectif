@@ -2132,9 +2132,8 @@ type MultipleChoiceQuestion implements Question {
     # Randomize the order of the choices.
     randomize: Boolean
   ): [QuestionChoice!]
-  questionChoices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
-  isRandomQuestionChoices: Boolean!
+  randomQuestionChoices: Boolean!
 }
 
 # A particular condition in a logic jump in a multiple choice question.
@@ -3758,7 +3757,7 @@ input QuestionInput {
   randomQuestionChoices: Boolean
   otherAllowed: Boolean
   validationRule: MultipleChoiceQuestionValidationRuleInput
-  questionChoices: [QuestionChoiceInput]
+  choices: [QuestionChoiceInput]
   description: String
   jumps: [LogicJumpInput]
 }

@@ -13,7 +13,7 @@ describe('<QuestionnaireAdminResultsBarChart />', () => {
       $refType,
       isOtherAllowed: true,
       otherResponses: { totalCount: 6 },
-      questionChoices: [
+      choices: [
         { title: "C'est pas faux", responses: { totalCount: 97 } },
         { title: "C'est vrai", responses: { totalCount: 0 } },
         { title: 'Oui', responses: { totalCount: 7 } },
@@ -29,7 +29,7 @@ describe('<QuestionnaireAdminResultsBarChart />', () => {
       $refType,
       isOtherAllowed: false,
       otherResponses: { totalCount: 0 },
-      questionChoices: [
+      choices: [
         { title: "C'est pas faux", responses: { totalCount: 76 } },
         { title: 'Oui', responses: { totalCount: 3 } },
         { title: 'Non', responses: { totalCount: 1 } },

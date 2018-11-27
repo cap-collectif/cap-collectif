@@ -148,72 +148,14 @@ export default createFragmentContainer(
         evaluationForm {
           description
           questions {
-            id
-            title
-            private
-            position
-            required
-            helpText
-            jumps {
-              id
-              always
-              destination {
-                id
-                title
-              }
-              conditions {
-                id
-                operator
-                question {
-                  id
-                  title
-                }
-                ... on MultipleChoiceQuestionLogicJumpCondition {
-                  value {
-                    id
-                    title
-                  }
-                }
-              }
-            }
-            description
-            type
-            ... on MultipleChoiceQuestion {
-              isOtherAllowed
-              validationRule {
-                type
-                number
-              }
-              choices {
-                id
-                title
-                description
-                color
-                image {
-                  url
-                }
-              }
-            }
+            ...responsesHelper_question @relay(mask: false)
           }
         }
       }
       evaluation {
         version
         responses {
-          question {
-            id
-          }
-          ... on ValueResponse {
-            value
-          }
-          ... on MediaResponse {
-            medias {
-              id
-              name
-              size
-              url
-            }
-          }
+          ...responsesHelper_response @relay(mask: false)
         }
       }
     }

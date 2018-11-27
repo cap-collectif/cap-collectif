@@ -158,7 +158,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                 <FormattedMessage id="admin.fields.question.group_question_choices" />
               </h4>
               <FieldArray
-                name={`${member}.questionChoices`}
+                name={`${member}.choices`}
                 component={QuestionChoiceAdminForm}
                 formName={formName}
                 oldMember={member}
@@ -169,27 +169,25 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                   <FormattedMessage id="conditional-jumps" />
                 </span>
               </h4>
-              {currentQuestion.id &&
-                type !== 'ranking' && (
-                  <FieldArray
-                    name={`${member}.jumps`}
-                    component={QuestionsJumpAdmin}
-                    formName={formName}
-                    oldMember={member}
-                  />
-                )}
-              {!currentQuestion.id &&
-                type !== 'ranking' && (
-                  <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
-                )}
+              {currentQuestion.id && type !== 'ranking' && (
+                <FieldArray
+                  name={`${member}.jumps`}
+                  component={QuestionsJumpAdmin}
+                  formName={formName}
+                  oldMember={member}
+                />
+              )}
+              {!currentQuestion.id && type !== 'ranking' && (
+                <FormattedMessage id="save-question-before-adding-conditional-jump" tagName="p" />
+              )}
               <h4 style={{ fontWeight: 'bold' }}>
                 <span>
                   <FormattedMessage id="group.admin.parameters" />
                 </span>
               </h4>
               <Field
-                id={`${member}.isRandomQuestionChoices`}
-                name={`${member}.isRandomQuestionChoices`}
+                id={`${member}.randomQuestionChoices`}
+                name={`${member}.randomQuestionChoices`}
                 type="checkbox"
                 normalize={val => !!val}
                 children={<FormattedMessage id="admin.fields.question.random_question_choices" />}

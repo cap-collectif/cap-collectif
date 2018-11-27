@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape } from 'react-intl';
+import { graphql } from 'react-relay';
 import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import type { LogicJumpConditionOperator } from '../components/Reply/Form/__generated__/ReplyForm_questionnaire.graphql';
@@ -11,23 +12,107 @@ import component from '../components/Form/Field';
 import PrivateBox from '../components/Ui/Boxes/PrivateBox';
 import ConditionalJumps from './ConditionalJumps';
 import WYSIWYGRender from '../components/Form/WYSIWYGRender';
+import type {
+  MultipleChoiceQuestionValidationRulesTypes,
+  QuestionChoiceColor,
+} from './__generated__/responsesHelper_question.graphql';
 
+// eslint-disable-next-line no-unused-vars
+const ResponseFragment = graphql`
+  fragment responsesHelper_response on Response {
+    question {
+      id
+    }
+    ... on ValueResponse {
+      value
+    }
+    ... on MediaResponse {
+      medias {
+        id
+        name
+        size
+        url
+      }
+    }
+  }
+`;
+
+// eslint-disable-next-line no-unused-vars
+const QuestionFragment = graphql`
+  fragment responsesHelper_question on Question {
+    id
+    title
+    number
+    private
+    position
+    required
+    helpText
+    jumps {
+      id
+      always
+      origin {
+        id
+      }
+      destination {
+        id
+        title
+      }
+      conditions {
+        id
+        operator
+        question {
+          id
+          title
+        }
+        ... on MultipleChoiceQuestionLogicJumpCondition {
+          value {
+            id
+            title
+          }
+        }
+      }
+    }
+    description
+    type
+    ... on MultipleChoiceQuestion {
+      isOtherAllowed
+      validationRule {
+        type
+        number
+      }
+      choices {
+        id
+        title
+        description
+        color
+        image {
+          id
+          url
+        }
+      }
+    }
+  }
+`;
+
+// This is a cp/paster of
+// responsesHelper_question without $refType
 type Question = {|
   +id: string,
   +title: string,
-  +number?: number,
-  +position: number,
+  +number: number,
   +private: boolean,
+  +position: number,
   +required: boolean,
   +helpText: ?string,
-  +description: ?string,
   +jumps: ?$ReadOnlyArray<?{|
     +id: ?string,
     +always: boolean,
+    +origin: {|
+      +id: string,
+    |},
     +destination: {|
       +id: string,
       +title: string,
-      +number?: number,
     |},
     +conditions: ?$ReadOnlyArray<?{|
       +id: ?string,
@@ -36,27 +121,30 @@ type Question = {|
         +id: string,
         +title: string,
       |},
-      +value: ?{|
+      +value?: ?{|
         +id: string,
         +title: string,
       |},
     |}>,
   |}>,
+  +description: ?string,
   +type: QuestionTypeValue,
   +isOtherAllowed?: boolean,
   +validationRule?: ?{|
-    +type: ?string,
-    +number: ?number,
+    +type: MultipleChoiceQuestionValidationRulesTypes,
+    +number: number,
   |},
   +choices?: ?$ReadOnlyArray<{|
     +id: string,
     +title: string,
     +description: ?string,
-    +color: ?string,
-    +image: ?Object,
+    +color: ?QuestionChoiceColor,
+    +image: ?{|
+      +id: string,
+      +url: string,
+    |},
   |}>,
 |};
-
 export type Questions = $ReadOnlyArray<Question>;
 
 type ResponsesFromAPI = $ReadOnlyArray<?{|
@@ -586,8 +674,10 @@ export const renderResponses = ({
           }
           case 'medias': {
             return (
-              <div className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                <PrivateBox key={field.id} show={field.private}>
+              <div
+                key={field.id}
+                className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
+                <PrivateBox show={field.private}>
                   <Field
                     name={`${member}.value`}
                     id={`${form}-${member}`}
@@ -607,8 +697,10 @@ export const renderResponses = ({
           case 'select': {
             if (!('choices' in field)) return null;
             return (
-              <div className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                <PrivateBox key={field.id} show={field.private}>
+              <div
+                key={field.id}
+                className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
+                <PrivateBox show={field.private}>
                   <Field
                     name={`${member}.value`}
                     id={`${form}-${member}`}
@@ -657,8 +749,10 @@ export const renderResponses = ({
 
               if (field.type === 'radio') {
                 return (
-                  <div className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                    <PrivateBox key={field.id} show={field.private}>
+                  <div
+                    key={field.id}
+                    className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
+                    <PrivateBox show={field.private}>
                       <div key={`${member}-container`}>
                         <MultipleChoiceRadio
                           id={`${form}-${member}`}
@@ -681,8 +775,10 @@ export const renderResponses = ({
             }
 
             return (
-              <div className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
-                <PrivateBox key={field.id} show={field.private}>
+              <div
+                key={field.id}
+                className={isAvailableQuestion === false ? 'visible-print-block' : ''}>
+                <PrivateBox show={field.private}>
                   <Field
                     name={`${member}.value`}
                     id={`${form}-${member}`}

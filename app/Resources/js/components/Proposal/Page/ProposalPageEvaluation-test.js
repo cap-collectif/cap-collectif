@@ -18,6 +18,7 @@ describe('<ProposalPageEvaluation />', () => {
             id: 'question1',
             title: 'Question 1',
             position: 0,
+            number: 0,
             private: false,
             required: true,
             helpText: null,
