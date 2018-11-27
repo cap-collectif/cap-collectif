@@ -4,7 +4,9 @@ namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Selection;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAdminUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeMessage;
@@ -22,25 +24,31 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ProposalNotifier extends BaseNotifier
 {
-    protected $proposalResolver;
+    protected $proposalAdminUrlResolver;
+    protected $proposalUrlResolver;
     protected $urlResolver;
     protected $router;
     private $translator;
+    private $userUrlResolver;
 
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
         UserResolver $userResolver,
-        ProposalResolver $proposalResolver,
+        ProposalAdminUrlResolver $proposalAdminUrlResolver,
+        ProposalUrlResolver $proposalUrlResolver,
         UrlResolver $urlResolver,
         Router $router,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        UserUrlResolver $userUrlResolver
     ) {
         parent::__construct($mailer, $siteParams, $userResolver);
-        $this->proposalResolver = $proposalResolver;
+        $this->proposalAdminUrlResolver = $proposalAdminUrlResolver;
+        $this->proposalUrlResolver = $proposalUrlResolver;
         $this->urlResolver = $urlResolver;
         $this->router = $router;
         $this->translator = $translator;
+        $this->userUrlResolver = $userUrlResolver;
     }
 
     public function onCreate(Proposal $proposal)
@@ -52,9 +60,9 @@ class ProposalNotifier extends BaseNotifier
                     $proposal->getSummary() ??
                         $this->translator->trans('project.votes.widget.no_value'),
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    $this->proposalResolver->resolveShowUrl($proposal),
-                    $this->proposalResolver->resolveAdminUrl($proposal),
-                    $this->userResolver->resolveShowUrl($proposal->getAuthor())
+                    $this->proposalUrlResolver->__invoke($proposal),
+                    $this->proposalAdminUrlResolver->__invoke($proposal),
+                    $this->userUrlResolver->__invoke($proposal->getAuthor())
                 )
             );
         }
@@ -78,7 +86,7 @@ class ProposalNotifier extends BaseNotifier
                     $proposal,
                     $proposal->getAuthor()->getEmail(),
                     $stepUrl,
-                    $this->proposalResolver->resolveShowUrl($proposal),
+                    $this->proposalUrlResolver->__invoke($proposal),
                     $this->router->generate(
                         'app_homepage',
                         [],
@@ -98,9 +106,9 @@ class ProposalNotifier extends BaseNotifier
                 ProposalDeleteAdminMessage::create(
                     $proposal,
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    $this->proposalResolver->resolveShowUrl($proposal),
-                    $this->proposalResolver->resolveAdminUrl($proposal),
-                    $this->userResolver->resolveShowUrl($proposal->getAuthor())
+                    $this->proposalUrlResolver->__invoke($proposal),
+                    $this->proposalAdminUrlResolver->__invoke($proposal),
+                    $this->userUrlResolver->__invoke($proposal->getAuthor())
                 )
             );
         }
@@ -119,9 +127,9 @@ class ProposalNotifier extends BaseNotifier
                 ProposalUpdateAdminMessage::create(
                     $proposal,
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                    $this->proposalResolver->resolveShowUrl($proposal),
-                    $this->proposalResolver->resolveAdminUrl($proposal),
-                    $this->userResolver->resolveShowUrl($proposal->getAuthor())
+                    $this->proposalUrlResolver->__invoke($proposal),
+                    $this->proposalAdminUrlResolver->__invoke($proposal),
+                    $this->userUrlResolver->__invoke($proposal->getAuthor())
                 )
             );
         }
@@ -143,7 +151,7 @@ class ProposalNotifier extends BaseNotifier
                     $proposal,
                     $proposal->getAuthor()->getEmail(),
                     $stepUrl,
-                    $this->proposalResolver->resolveShowUrl($proposal),
+                    $this->proposalUrlResolver->__invoke($proposal),
                     $this->router->generate(
                         'app_homepage',
                         [],
