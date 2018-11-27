@@ -2,6 +2,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import colors from '../../../utils/colors';
+import { avatarNb } from '../../../utils/sizes';
 
 type Props = {
   children?: Array<React.Element<any>>,
@@ -65,7 +66,7 @@ export class AvatarGroup extends React.Component<Props> {
   render() {
     const { children, childrenSize } = this.props;
 
-    const getChildrenSize = childrenSize === 'normal' ? 45 : 34;
+    const getChildrenSize = avatarNb[childrenSize];
 
     if (!children) {
       return null;

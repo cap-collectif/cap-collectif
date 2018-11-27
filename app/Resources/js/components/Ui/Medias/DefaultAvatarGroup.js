@@ -2,6 +2,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import colors from '../../../utils/colors';
+import { avatarPx } from '../../../utils/sizes';
 
 type Props = {
   size: 'small' | 'normal',
@@ -23,7 +24,7 @@ export class DefaultAvatarGroup extends React.Component<Props> {
   render() {
     const { size } = this.props;
 
-    const getSize = size === 'normal' ? '45px' : '34px';
+    const getSize = avatarPx[size];
 
     return (
       <Container
