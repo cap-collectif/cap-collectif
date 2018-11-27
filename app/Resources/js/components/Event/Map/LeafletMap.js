@@ -88,9 +88,9 @@ export class LeafletMap extends Component<Props> {
           zoom={defaultMapOptions.zoom}
           maxZoom={18}
           id="event-map"
-          scrollWheelZoom={!config.isMobile}>
+          scrollWheelZoom={false}>
           <TileLayer
-            attribution="&copy; <a href=&quot;https://www.mapbox.com/about/maps/&quot;>Mapbox</a> &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> <a href=&quot;https://www.mapbox.com/map-feedback/#/-74.5/40/10&quot;>Improve this map</a>"
+            attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
             url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${token}`}
           />
           <MarkerClusterGroup
@@ -106,47 +106,46 @@ export class LeafletMap extends Component<Props> {
                 .filter(Boolean)
                 .map(edge => edge.node)
                 .filter(Boolean)
-                .map(
-                  (marker, key) =>
-                    marker.lat && marker.lng ? (
-                      <Marker
-                        key={key}
-                        id={`marker_${marker.id}`}
-                        position={[marker.lat, marker.lng]}
-                        icon={this.getMarkerIcon(marker)}>
-                        <Popup
-                          className={
-                            eventSelected && eventSelected === marker.id
-                              ? 'event-map-popup'
-                              : 'popup-hidden'
-                          }>
-                          {/* We call the provider because react leaflet need it to call DatesInterval  react-leaflet.js.org/docs/en/intro.html#dom-rendering
+                .map((marker, key) =>
+                  marker.lat && marker.lng ? (
+                    <Marker
+                      key={key}
+                      id={`marker_${marker.id}`}
+                      position={[marker.lat, marker.lng]}
+                      icon={this.getMarkerIcon(marker)}>
+                      <Popup
+                        className={
+                          eventSelected && eventSelected === marker.id
+                            ? 'event-map-popup'
+                            : 'popup-hidden'
+                        }>
+                        {/* We call the provider because react leaflet need it to call DatesInterval  react-leaflet.js.org/docs/en/intro.html#dom-rendering
                             @Todo find an other way to render this without IntlProvider
                           */}
-                          <Provider store={ReactOnRails.getStore('appStore')}>
-                            <IntlProvider>
-                              <div>
-                                <h2>
-                                  <a href={marker.url}>{marker.title}</a>
-                                </h2>
-                                <p className="excerpt">
-                                  <i className="cap-calendar-1 mr-10" />
-                                  <DatesInterval
-                                    endAt={marker.endAt}
-                                    startAt={marker.startAt}
-                                    fullDay
-                                  />
-                                </p>
-                                <p className="excerpt">
-                                  <i className="cap-marker-1 mr-10" />
-                                  {marker.address}
-                                </p>
-                              </div>
-                            </IntlProvider>
-                          </Provider>
-                        </Popup>
-                      </Marker>
-                    ) : null,
+                        <Provider store={ReactOnRails.getStore('appStore')}>
+                          <IntlProvider>
+                            <div>
+                              <h2>
+                                <a href={marker.url}>{marker.title}</a>
+                              </h2>
+                              <p className="excerpt">
+                                <i className="cap-calendar-1 mr-10" />
+                                <DatesInterval
+                                  endAt={marker.endAt}
+                                  startAt={marker.startAt}
+                                  fullDay
+                                />
+                              </p>
+                              <p className="excerpt">
+                                <i className="cap-marker-1 mr-10" />
+                                {marker.address}
+                              </p>
+                            </div>
+                          </IntlProvider>
+                        </Provider>
+                      </Popup>
+                    </Marker>
+                  ) : null,
                 )}
           </MarkerClusterGroup>
           <LocateControl />

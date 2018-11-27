@@ -6,7 +6,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
     bounds={Object {}}
     id="event-map"
     maxZoom={18}
-    scrollWheelZoom={true}
+    scrollWheelZoom={false}
     zoom={12}
   >
     <LeafletUnivTileLayer
