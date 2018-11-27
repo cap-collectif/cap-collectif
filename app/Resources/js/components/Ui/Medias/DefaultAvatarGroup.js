@@ -24,7 +24,7 @@ export class DefaultAvatarGroup extends React.Component<Props> {
   render() {
     const { size } = this.props;
 
-    const getSize = avatarPx[size];
+    const getSize = avatarPx[size] || '45px';
 
     return (
       <Container

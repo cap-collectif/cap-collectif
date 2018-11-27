@@ -66,7 +66,7 @@ export class AvatarGroup extends React.Component<Props> {
   render() {
     const { children, childrenSize } = this.props;
 
-    const getChildrenSize = avatarNb[childrenSize];
+    const getChildrenSize = avatarNb[childrenSize] || '45px';
 
     if (!children) {
       return null;

@@ -25,7 +25,7 @@ export class Avatar extends React.Component<Props> {
   render() {
     const { size, src, className, alt } = this.props;
 
-    const getSize = avatarPx[size];
+    const getSize = avatarPx[size] || '45px';
 
     return <Container width={getSize} height={getSize} src={src} alt={alt} className={className} />;
   }
