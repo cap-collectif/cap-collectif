@@ -427,7 +427,11 @@ export class ProposalForm extends React.Component<Props, State> {
               </span>
             }>
             <FormattedMessage id="proposal.select.theme">
-              {message => <option disabled>{message}</option>}
+              {message => (
+                <option value="" disabled>
+                  {message}
+                </option>
+              )}
             </FormattedMessage>
             {themes.map(theme => (
               <option key={theme.id} value={theme.id}>
@@ -450,7 +454,11 @@ export class ProposalForm extends React.Component<Props, State> {
               </span>
             }>
             <FormattedMessage id="proposal.select.category">
-              {message => <option disabled>{message}</option>}
+              {message => (
+                <option value="" disabled>
+                  {message}
+                </option>
+              )}
             </FormattedMessage>
             {proposalForm.categories.map(category => (
               <option key={category.id} value={category.id}>
