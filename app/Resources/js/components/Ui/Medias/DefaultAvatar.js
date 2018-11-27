@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {
-  size: 45 | 34,
+  size: 'small' | 'normal',
 };
 
 export const Container = styled.svg.attrs({
@@ -16,11 +16,13 @@ export const Container = styled.svg.attrs({
 
 export class DefaultAvatar extends React.Component<Props> {
   static defaultProps = {
-    size: 45,
+    size: 'normal',
   };
 
   render() {
     const { size } = this.props;
+
+    const getSize = size === 'normal' ? '45px' : '34px';
 
     return (
       <Container
@@ -29,8 +31,8 @@ export class DefaultAvatar extends React.Component<Props> {
         xmlns="http://www.w3.org/2000/svg"
         x="0px"
         y="0px"
-        width={`${size}px`}
-        height={`${size}px`}
+        width={getSize}
+        height={getSize}
         viewBox="-11 -9 46 46">
         <path
           fill="none"

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean, withKnobs, number, text } from '@storybook/addon-knobs';
+import { boolean, withKnobs, number, text, select } from '@storybook/addon-knobs';
 import DarkenGradientMedia from '../components/Ui/Medias/DarkenGradientMedia';
 import RatioMediaContainer from '../components/Ui/Medias/RatioMediaContainer';
 import Media from '../components/Ui/Medias/Media/Media';
@@ -13,6 +13,11 @@ import DefaultAvatar from '../components/Ui/Medias/DefaultAvatar';
 import DefaultImage from '../components/Ui/Medias/DefaultImage';
 import ProjectIcon from '../components/Ui/Icons/ProjectIcon';
 import AvatarCount from '../components/Ui/Medias/AvatarCount';
+
+const sizeOption = {
+  Small: 'small',
+  Normal: 'normal',
+};
 
 storiesOf('Medias', module)
   .addDecorator(withKnobs)
@@ -75,7 +80,7 @@ storiesOf('Medias', module)
   .add(
     'Avatar',
     () => {
-      const size = number('Size', 45);
+      const size = select('Size', sizeOption, 'normal');
       const src = text('Src', 'https://source.unsplash.com/collection/181462');
       const alt = text('Alt', 'My alternative');
 
@@ -93,7 +98,7 @@ storiesOf('Medias', module)
   .add(
     'Avatar Group',
     () => {
-      const childrenSize = number('Children size', 45);
+      const childrenSize = select('Children size', sizeOption, 'normal');
       const src = text('Src', 'https://source.unsplash.com/collection/181462');
       const alt = text('Alt', 'My alternative');
 
@@ -119,7 +124,7 @@ storiesOf('Medias', module)
   .add(
     'Avatar Count',
     () => {
-      const size = number('Size', 45);
+      const size = select('Size', sizeOption, 'normal');
       const numberContent = text('Number', '8');
 
       return <AvatarCount size={size}>{numberContent}</AvatarCount>;
@@ -135,7 +140,7 @@ storiesOf('Medias', module)
   .add(
     'Default avatar group',
     () => {
-      const size = number('size', 45);
+      const size = select('Size', sizeOption, 'normal');
 
       return <DefaultAvatarGroup size={size} />;
     },
@@ -152,7 +157,7 @@ storiesOf('Medias', module)
   .add(
     'Default avatar',
     () => {
-      const size = number('size', 45);
+      const size = select('Size', sizeOption, 'normal');
 
       return <DefaultAvatar size={size} />;
     },
@@ -195,7 +200,6 @@ storiesOf('Medias', module)
     () => {
       const src = text('Src', 'https://source.unsplash.com/collection/181462');
       const alt = text('Alt', 'My alternative');
-      const size = number('Size', 45);
       const headingComponentClass = text('Heading component class', 'h1');
 
       Media.Left.displayName = 'Media.Left';
@@ -205,7 +209,7 @@ storiesOf('Medias', module)
       return (
         <Media>
           <Media.Left>
-            <Avatar size={size} src={src} alt={alt} />
+            <Avatar src={src} alt={alt} />
           </Media.Left>
           <Media.Body>
             <Media.Heading componentClass={headingComponentClass}>Media Heading</Media.Heading>

@@ -5,10 +5,15 @@ import colors from '../../../utils/colors';
 
 type Props = {
   children?: Array<React.Element<any>>,
-  childrenSize: 45 | 34,
+  childrenSize: 'small' | 'normal',
 };
 
-const createCSS = (props: Props) => {
+type CssProps = {
+  children?: Array<React.Element<any>>,
+  childrenSize: number,
+};
+
+const createCSS = (props: CssProps) => {
   const { childrenSize, children } = props;
 
   let styles = '';
@@ -54,18 +59,20 @@ export const Container = styled.div.attrs({
 
 export class AvatarGroup extends React.Component<Props> {
   static defaultProps = {
-    childrenSize: 45,
+    childrenSize: 'normal',
   };
 
   render() {
     const { children, childrenSize } = this.props;
+
+    const getChildrenSize = childrenSize === 'normal' ? 45 : 34;
 
     if (!children) {
       return null;
     }
 
     return (
-      <Container childrenSize={childrenSize} length={children.length}>
+      <Container childrenSize={getChildrenSize} length={children.length}>
         {children}
       </Container>
     );

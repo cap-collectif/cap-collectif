@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Image from './Image';
 
 type Props = {
-  size: 45 | 34,
+  size: 'small' | 'normal',
   className?: string,
   src: string,
   alt: string,
@@ -18,21 +18,15 @@ export const Container = styled(Image).attrs({
 
 export class Avatar extends React.Component<Props> {
   static defaultProps = {
-    size: 45,
+    size: 'normal',
   };
 
   render() {
     const { size, src, className, alt } = this.props;
 
-    return (
-      <Container
-        width={`${size}px`}
-        height={`${size}px`}
-        src={src}
-        alt={alt}
-        className={className}
-      />
-    );
+    const getSize = size === 'normal' ? '45px' : '34px';
+
+    return <Container width={getSize} height={getSize} src={src} alt={alt} className={className} />;
   }
 }
 

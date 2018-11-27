@@ -6,7 +6,7 @@ import { shallow } from 'enzyme';
 import { AvatarGroup } from './AvatarGroup';
 
 const props = {
-  childrenSize: 34,
+  childrenSize: 'small',
 };
 
 describe('<AvatarGroup />', () => {

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {
-  size: 45 | 34,
+  size: 'small' | 'normal',
   children: React.Node,
 };
 
@@ -12,8 +12,8 @@ export const Container = styled.div.attrs({
   className: 'avatar-count',
 })`
   border-radius: 50%;
-  height: ${props => `${props.size}px`};
-  width: ${props => `${props.size}px`};
+  height: ${props => props.size};
+  width: ${props => props.size};
   background-color: ${colors.borderColor};
   color: ${colors.darkGray};
   display: flex;
@@ -23,13 +23,15 @@ export const Container = styled.div.attrs({
 
 export class AvatarCount extends React.Component<Props> {
   static defaultProps = {
-    size: 45,
+    size: 'normal',
   };
 
   render() {
     const { size, children } = this.props;
 
-    return <Container size={size}>{children}</Container>;
+    const getSize = size === 'normal' ? '45px' : '34px';
+
+    return <Container size={getSize}>{children}</Container>;
   }
 }
 
