@@ -53,7 +53,7 @@ export class UserAvatar extends React.Component<Props> {
       );
     }
 
-    if (user && defaultAvatar && defaultAvatar !== null) {
+    if (user && defaultAvatar) {
       return (
         <img
           src={defaultAvatar}
