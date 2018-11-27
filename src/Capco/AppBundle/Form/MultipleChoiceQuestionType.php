@@ -25,7 +25,7 @@ class MultipleChoiceQuestionType extends AbstractType
         $builder->add('private', CheckboxType::class);
         $builder->add('required', CheckboxType::class);
         $builder->add('type', IntegerType::class);
-        $builder->add('questionChoices', CollectionType::class, [
+        $builder->add('choices', CollectionType::class, [
             'allow_add' => true,
             'allow_delete' => true,
             'by_reference' => false,

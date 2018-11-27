@@ -23,7 +23,7 @@ QuestionInput:
         type: 'Boolean'
       validationRule:
         type: 'MultipleChoiceQuestionValidationRuleInput'
-      questionChoices:
+      choices:
         type: '[QuestionChoiceInput]'
       description:
         type: 'String'

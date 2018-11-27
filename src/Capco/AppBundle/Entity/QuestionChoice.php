@@ -40,7 +40,7 @@ class QuestionChoice
 
     /**
      * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion", inversedBy="questionChoices")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion", inversedBy="choices")
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false)
      */
     private $question;

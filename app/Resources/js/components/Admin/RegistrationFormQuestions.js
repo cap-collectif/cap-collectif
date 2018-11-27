@@ -19,11 +19,10 @@ type Props = FormProps & {
 };
 
 const formName = 'registration-form-questions';
-const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 const onSubmit = (values: Object) => {
   const input = {
-    questions: submitQuestion(values.questions, multipleChoiceQuestions),
+    questions: submitQuestion(values.questions),
   };
 
   return UpdateRegistrationFormQuestionsMutation.commit({ input });

@@ -1,36 +1,57 @@
-export const submitQuestion = (questions, multipleChoiceQuestions) =>
-  questions.map(question => {
+// @flow
+import type { responsesHelper_question } from './__generated__/responsesHelper_question.graphql';
+
+// Easyfix: We should rely on __typename MultipleChoiceQuestion instead
+const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
+
+export type QuestionsInReduxForm = $ReadOnlyArray<responsesHelper_question>;
+
+export const submitQuestion = (questions: QuestionsInReduxForm) =>
+  questions.filter(Boolean).map(question => {
     const questionInput = {
       question: {
         ...question,
-        kind: undefined,
+        // Easyfix: this should be refactored
         otherAllowed: question.isOtherAllowed,
-        randomQuestionChoices: question.isRandomQuestionChoices,
         isOtherAllowed: undefined,
-        isRandomQuestionChoices: undefined,
-        jumps: question.jumps ? question.jumps : [],
+        // List of not send properties to server
+        kind: undefined,
+        number: undefined,
+        position: undefined,
+        choices: undefined,
       },
     };
-    if (multipleChoiceQuestions.indexOf(question.type) !== -1 && question.questionChoices) {
-      questionInput.question.questionChoices = question.questionChoices.map(choice => ({
-        ...choice,
-        kind: undefined,
-        image: choice.image ? choice.image.id : null,
-      }));
-      if (question.jumps) {
-        questionInput.question.jumps = question.jumps.map(jump => ({
-          ...jump,
-          origin: parseInt(jump.origin.id, 10),
-          destination: parseInt(jump.destination.id, 10),
-          conditions: jump.conditions
-            ? jump.conditions.map(condition => ({
-                ...condition,
-                question: parseInt(condition.question.id, 10),
-                value: condition.value.id,
-              }))
-            : null,
-        }));
-      }
+    if (
+      multipleChoiceQuestions.indexOf(question.type) !== -1 &&
+      typeof question.choices !== 'undefined'
+    ) {
+      questionInput.question.choices = question.choices
+        ? question.choices.map(choice => ({
+            ...choice,
+            // We only send ids to the server
+            image: choice.image ? choice.image.id : null,
+            // List of not send properties to server
+            kind: undefined,
+          }))
+        : [];
+
+      // For now we can only jump fo multiple questions
+      questionInput.question.jumps = question.jumps
+        ? question.jumps.filter(Boolean).map(jump => ({
+            ...jump,
+            // We only send ids to the server
+            origin: jump.origin ? parseInt(jump.origin.id, 10) : null,
+            destination: jump.destination ? parseInt(jump.destination.id, 10) : null,
+            conditions: jump.conditions
+              ? jump.conditions.filter(Boolean).map(condition => ({
+                  ...condition,
+                  question: parseInt(condition.question.id, 10),
+                  value: condition.value ? condition.value.id : null,
+                }))
+              : null,
+          }))
+        : [];
     }
+
     return questionInput;
   });

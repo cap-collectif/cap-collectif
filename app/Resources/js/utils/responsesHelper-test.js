@@ -132,20 +132,7 @@ describe('validateResponses', () => {
         touched: false,
         valid: true,
       },
-      fields: [
-        {
-          ...textQuestion,
-        },
-        {
-          ...numberQuestion,
-        },
-        {
-          ...selectQuestion,
-        },
-        {
-          ...mediaQuestion,
-        },
-      ],
+      fields: [textQuestion, numberQuestion, selectQuestion, mediaQuestion],
     });
     expect(component).toMatchSnapshot();
   });

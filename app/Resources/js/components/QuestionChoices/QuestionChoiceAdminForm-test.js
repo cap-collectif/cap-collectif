@@ -8,7 +8,7 @@ import { intlMock } from '../../mocks';
 const props = {
   dispatch: jest.fn(),
   fields: { length: 1, map: jest.fn(), remove: jest.fn() },
-  questionChoices: [
+  choices: [
     {
       id: '1',
       title: 'test',
@@ -29,10 +29,10 @@ describe('<ProposalUserVoteItem />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly without questionChoices', () => {
+  it('should render correctly without choices', () => {
     const propsNoQuestionChoices = {
       ...props,
-      questionChoices: [],
+      choices: [],
     };
     const wrapper = shallow(<QuestionChoiceAdminForm {...propsNoQuestionChoices} />);
     expect(wrapper).toMatchSnapshot();

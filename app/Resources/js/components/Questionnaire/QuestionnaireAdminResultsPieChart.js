@@ -131,7 +131,7 @@ const container = injectIntl(QuestionnaireAdminResultsPieChart);
 export default createFragmentContainer(container, {
   multipleChoiceQuestion: graphql`
     fragment QuestionnaireAdminResultsPieChart_multipleChoiceQuestion on MultipleChoiceQuestion {
-      questionChoices {
+      choices {
         title
         responses {
           totalCount

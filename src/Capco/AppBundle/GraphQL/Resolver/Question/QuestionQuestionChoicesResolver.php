@@ -19,11 +19,11 @@ class QuestionQuestionChoicesResolver implements ResolverInterface
         }
 
         if ($args['randomize'] && $question->isRandomQuestionChoices()) {
-            $choices = $question->getQuestionChoices()->toArray();
+            $choices = $question->getChoices()->toArray();
             shuffle($choices);
             return new ArrayCollection($choices);
         }
 
-        return $question->getQuestionChoices();
+        return $question->getChoices();
     }
 }

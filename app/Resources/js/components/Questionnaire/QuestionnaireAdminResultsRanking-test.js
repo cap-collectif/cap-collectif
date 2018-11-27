@@ -8,7 +8,7 @@ import { $refType } from '../../mocks';
 describe('<QuestionnaireAdminResultsRanking />', () => {
   const props = {
     $refType,
-    questionChoices: [
+    choices: [
       { title: 'choix1', ranking: [] },
       { title: 'choix2', ranking: [] },
       { title: 'choix3', ranking: [] },

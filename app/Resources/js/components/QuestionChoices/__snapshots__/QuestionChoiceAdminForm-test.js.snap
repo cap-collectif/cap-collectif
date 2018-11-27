@@ -29,7 +29,7 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
 </div>
 `;
 
-exports[`<ProposalUserVoteItem /> should render correctly without questionChoices 1`] = `
+exports[`<ProposalUserVoteItem /> should render correctly without choices 1`] = `
 <div
   className="form-group"
   id="questions_choice_panel_personal"

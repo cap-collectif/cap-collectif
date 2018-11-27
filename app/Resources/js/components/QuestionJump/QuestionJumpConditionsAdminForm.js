@@ -24,10 +24,10 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
       if (
         question.kind !== 'simple' &&
         question.id &&
-        question.questionChoices &&
-        question.questionChoices.length > 0
+        question.choices &&
+        question.choices.length > 0
       ) {
-        arrayQuestions[question.id] = question.questionChoices;
+        arrayQuestions[question.id] = question.choices;
       }
     });
 
@@ -43,12 +43,11 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
               index={index}
               oldMember={member}
             />
-            {fields.length > 1 &&
-              index + 1 < fields.length && (
-                <p>
-                  <FormattedMessage id="and-or-conditions" tagName="b" />
-                </p>
-              )}
+            {fields.length > 1 && index + 1 < fields.length && (
+              <p>
+                <FormattedMessage id="and-or-conditions" tagName="b" />
+              </p>
+            )}
           </div>
         ))}
         <div>

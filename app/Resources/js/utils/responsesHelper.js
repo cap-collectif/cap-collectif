@@ -12,6 +12,10 @@ import component from '../components/Form/Field';
 import PrivateBox from '../components/Ui/Boxes/PrivateBox';
 import ConditionalJumps from './ConditionalJumps';
 import WYSIWYGRender from '../components/Form/WYSIWYGRender';
+import type {
+  MultipleChoiceQuestionValidationRulesTypes,
+  QuestionChoiceColor,
+} from './__generated__/responsesHelper_question.graphql';
 
 // eslint-disable-next-line no-unused-vars
 const ResponseFragment = graphql`
@@ -46,6 +50,9 @@ const QuestionFragment = graphql`
     jumps {
       id
       always
+      origin {
+        id
+      }
       destination {
         id
         title
@@ -79,6 +86,7 @@ const QuestionFragment = graphql`
         description
         color
         image {
+          id
           url
         }
       }
@@ -86,22 +94,25 @@ const QuestionFragment = graphql`
   }
 `;
 
+// This is a cp/paster of
+// responsesHelper_question without $refType
 type Question = {|
   +id: string,
   +title: string,
-  +number?: number,
-  +position: number,
+  +number: number,
   +private: boolean,
+  +position: number,
   +required: boolean,
   +helpText: ?string,
-  +description: ?string,
   +jumps: ?$ReadOnlyArray<?{|
     +id: ?string,
     +always: boolean,
+    +origin: {|
+      +id: string,
+    |},
     +destination: {|
       +id: string,
       +title: string,
-      +number?: number,
     |},
     +conditions: ?$ReadOnlyArray<?{|
       +id: ?string,
@@ -110,27 +121,30 @@ type Question = {|
         +id: string,
         +title: string,
       |},
-      +value: ?{|
+      +value?: ?{|
         +id: string,
         +title: string,
       |},
     |}>,
   |}>,
+  +description: ?string,
   +type: QuestionTypeValue,
   +isOtherAllowed?: boolean,
   +validationRule?: ?{|
-    +type: ?string,
-    +number: ?number,
+    +type: MultipleChoiceQuestionValidationRulesTypes,
+    +number: number,
   |},
   +choices?: ?$ReadOnlyArray<{|
     +id: string,
     +title: string,
     +description: ?string,
-    +color: ?string,
-    +image: ?Object,
+    +color: ?QuestionChoiceColor,
+    +image: ?{|
+      +id: string,
+      +url: string,
+    |},
   |}>,
 |};
-
 export type Questions = $ReadOnlyArray<Question>;
 
 type ResponsesFromAPI = $ReadOnlyArray<?{|
