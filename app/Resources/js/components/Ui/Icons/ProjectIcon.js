@@ -2,23 +2,21 @@
 import * as React from 'react';
 
 type Props = {
-  size: number,
+  size: 'normal',
 };
 
 export class DefaultImage extends React.Component<Props> {
   static defaultProps = {
-    size: 110,
+    size: 'normal',
   };
 
   render() {
     const { size } = this.props;
 
+    const getSize = size === 'normal' ? '110px' : null;
+
     return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={`${size}px`}
-        height={`${size}px`}
-        viewBox="0 0 24 24">
+      <svg xmlns="http://www.w3.org/2000/svg" width={getSize} height={getSize} viewBox="0 0 24 24">
         <path
           fill="none"
           stroke="#FFFFFF"
