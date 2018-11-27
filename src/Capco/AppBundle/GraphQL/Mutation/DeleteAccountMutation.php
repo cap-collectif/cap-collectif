@@ -230,7 +230,7 @@ class DeleteAccountMutation implements MutationInterface
         $deletedTitleText = $this->translator->trans('deleted-title', [], 'CapcoAppBundle');
 
         $reports = $this->em->getRepository(Reporting::class)->findBy(['Reporter' => $user]);
-        $events = $this->em->getRepository(Event::class)->findBy(['Author' => $user]);
+        $events = $this->em->getRepository(Event::class)->findBy(['author' => $user]);
 
         foreach ($contributions as $contribution) {
             if (method_exists($contribution, 'setTitle')) {

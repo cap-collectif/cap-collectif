@@ -34,11 +34,10 @@ class EventRepository extends EntityRepository
     ) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'c')
-            ->leftJoin('e.Author', 'a')
+            ->leftJoin('e.author', 'a')
             ->leftJoin('a.media', 'm')
-            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
+            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = true')
             ->leftJoin('e.projects', 'c', 'WITH', 'c.visibility = :visibility')
-            ->setParameter('enabled', true)
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
             ->orderBy('e.startAt', 'ASC');
         if (null !== $archived) {
@@ -65,7 +64,7 @@ class EventRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return new Paginator($qb, $fetchJoin = true);
+        return new Paginator($qb, ($fetchJoin = true));
     }
 
     public function countAllByUser(User $user): int
@@ -73,7 +72,7 @@ class EventRepository extends EntityRepository
         $qb = $this->createQueryBuilder('e');
         $qb
             ->select('count(DISTINCT e)')
-            ->andWhere('e.Author = :user')
+            ->andWhere('e.author = :user')
             ->setParameter('user', $user);
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -81,7 +80,7 @@ class EventRepository extends EntityRepository
     public function findAllByUser(User $user): array
     {
         $qb = $this->createQueryBuilder('e');
-        $qb->andWhere('e.Author = :user')->setParameter('user', $user);
+        $qb->andWhere('e.author = :user')->setParameter('user', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -109,9 +108,8 @@ class EventRepository extends EntityRepository
 
         if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
             $qb
-                ->innerJoin('e.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
+                ->innerJoin('e.themes', 't', 'WITH', 't.isEnabled = true')
                 ->andWhere('t.slug = :theme')
-                ->setParameter('tEnabled', true)
                 ->setParameter('theme', $themeSlug);
         }
 
@@ -143,13 +141,12 @@ class EventRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 't', 'media', 'registration', 'c')
-            ->leftJoin('e.Author', 'a')
+            ->leftJoin('e.author', 'a')
             ->leftJoin('e.media', 'media')
-            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
+            ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = true')
             ->leftJoin('e.projects', 'c', 'WITH', 'c.visibility = :visibility')
             ->leftJoin('e.registrations', 'registration', 'WITH', 'registration.confirmed = true')
             ->andWhere('e.slug = :slug')
-            ->setParameter('tEnabled', true)
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
             ->setParameter('slug', $slug)
             ->orderBy('e.startAt', 'ASC')
@@ -169,7 +166,7 @@ class EventRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 't', 'media', 'c')
-            ->leftJoin('e.Author', 'a')
+            ->leftJoin('e.author', 'a')
             ->leftJoin('e.themes', 't')
             ->leftJoin('e.projects', 'c')
             ->leftJoin('e.media', 'media')
@@ -185,7 +182,7 @@ class EventRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return new Paginator($qb, $fetchJoin = true);
+        return new Paginator($qb, ($fetchJoin = true));
     }
 
     /**
@@ -202,7 +199,7 @@ class EventRepository extends EntityRepository
             ->addSelect('a', 'media', 't', 'c')
             ->leftJoin('e.themes', 't')
             ->leftJoin('e.projects', 'c')
-            ->leftJoin('e.Author', 'a')
+            ->leftJoin('e.author', 'a')
             ->leftJoin('e.media', 'media')
             ->andWhere('t.id = :theme')
             ->setParameter('theme', $theme)
@@ -213,9 +210,7 @@ class EventRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
+        return $this->createQueryBuilder('e')->andWhere('e.enabled = true');
     }
 
     protected function whereIsFuture(QueryBuilder $qb, string $alias = 'e'): QueryBuilder

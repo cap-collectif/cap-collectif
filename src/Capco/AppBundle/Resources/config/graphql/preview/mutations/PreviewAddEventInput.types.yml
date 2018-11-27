@@ -1,0 +1,22 @@
+PreviewAddEventInput:
+  type: relay-mutation-input
+  config:
+    name: AddEventInput
+    description: 'Input type of addEvent'
+    fields:
+      title:
+        type: 'String!'
+        description: 'The contents of the event title.'
+      body:
+        type: 'HTML!'
+        description: 'The contents of the event body.'
+      startAt:
+        type: 'DateTime!'
+        description: 'The contents of the event startAt.'
+      endAt:
+        type: 'DateTime!'
+        description: 'The contents of the event endAt.'
+      enabled:
+        type: 'Boolean'
+        defaultValue: true
+        description: 'Is the event published ?'

@@ -121,7 +121,7 @@ class EventSearch extends Search
         return array_values(
             array_filter(
                 array_map(function (string $id) {
-                    return $this->eventRepository->findOneBy(['id' => $id, 'isEnabled' => true]);
+                    return $this->eventRepository->findOneBy(['id' => $id, 'enabled' => true]);
                 }, $ids),
                 function (?Event $event) {
                     return null !== $event;
@@ -161,7 +161,7 @@ class EventSearch extends Search
             $filters['themes.id'] = $providedFilters['themes'];
         }
         if (isset($providedFilters['author'])) {
-            $filters['Author.id'] = $providedFilters['author'];
+            $filters['author.id'] = $providedFilters['author'];
         }
         if (isset($providedFilters['projects'])) {
             $filters['projects.id'] = $providedFilters['projects'];

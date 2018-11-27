@@ -1,0 +1,6 @@
+InternalAddEventInput:
+  type: relay-mutation-input
+  inherits:
+    - PreviewAddEventInput
+  config:
+    name: AddEventInput

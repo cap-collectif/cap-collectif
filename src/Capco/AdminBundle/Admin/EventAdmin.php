@@ -64,7 +64,7 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.projects',
             ])
             ->add(
-                'Author',
+                'author',
                 'doctrine_orm_model_autocomplete',
                 [
                     'label' => 'admin.fields.event.author',
@@ -74,7 +74,7 @@ class EventAdmin extends Admin
                     'property' => 'username',
                 ]
             )
-            ->add('isEnabled', null, [
+            ->add('enabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
             ])
             ->add('isCommentable', null, [
@@ -91,9 +91,6 @@ class EventAdmin extends Admin
             ]);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -121,10 +118,10 @@ class EventAdmin extends Admin
             ->add('projects', null, [
                 'label' => 'admin.fields.event.projects',
             ])
-            ->add('Author', 'sonata_type_model', [
+            ->add('author', 'sonata_type_model', [
                 'label' => 'admin.fields.event.author',
             ])
-            ->add('isEnabled', null, [
+            ->add('enabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
                 'editable' => true,
             ])
@@ -150,9 +147,6 @@ class EventAdmin extends Admin
             ]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         // define group zoning
@@ -173,7 +167,7 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.body',
                 'config_name' => 'admin_editor',
             ])
-            ->add('Author', 'sonata_type_model_autocomplete', [
+            ->add('author', 'sonata_type_model_autocomplete', [
                 'label' => 'admin.fields.event.author',
                 'property' => 'username',
             ])
@@ -246,7 +240,7 @@ class EventAdmin extends Admin
                 'by_reference' => false,
                 'choices_as_values' => true,
             ])
-            ->add('isEnabled', null, [
+            ->add('enabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
                 'required' => false,
             ])
@@ -322,7 +316,7 @@ class EventAdmin extends Admin
             ->add('project', null, [
                 'label' => 'admin.fields.event.project',
             ])
-            ->add('Author', null, [
+            ->add('author', null, [
                 'label' => 'admin.fields.event.author',
             ])
             ->add('media', 'sonata_media_type', [
@@ -330,7 +324,7 @@ class EventAdmin extends Admin
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'admin.fields.event.media',
             ])
-            ->add('isEnabled', null, [
+            ->add('enabled', null, [
                 'label' => 'admin.fields.event.is_enabled',
             ])
             ->add('isCommentable', null, [

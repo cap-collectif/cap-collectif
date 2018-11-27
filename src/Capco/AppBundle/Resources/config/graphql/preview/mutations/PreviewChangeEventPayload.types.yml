@@ -1,0 +1,11 @@
+PreviewChangeEventPayload:
+  type: relay-mutation-payload
+  config:
+    name: ChangeEventPayload
+    fields:
+      eventEdge:
+        type: 'PreviewEventEdge'
+        description: 'The edge from the events connection.'
+      userErrors:
+        type: '[UserError!]!'
+        description: 'An unsuccessful mutation will return one or more `UserError` objects.'
