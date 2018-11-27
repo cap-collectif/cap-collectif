@@ -41,7 +41,6 @@ describe('<ProposalForm />', () => {
         description: null,
         type: 'text',
         position: 1,
-        number: 1,
         jumps: [],
         private: true,
         required: true,

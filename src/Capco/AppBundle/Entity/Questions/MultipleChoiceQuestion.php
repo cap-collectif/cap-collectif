@@ -23,7 +23,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
-    protected $choices;
+    protected $questionChoices;
 
     /**
      * @ORM\Column(name="random_question_choices", type="boolean", nullable=false)
@@ -49,30 +49,30 @@ class MultipleChoiceQuestion extends AbstractQuestion
     public function __construct()
     {
         parent::__construct();
-        $this->choices = new ArrayCollection();
+        $this->questionChoices = new ArrayCollection();
     }
 
-    public function getChoices(): Collection
+    public function getQuestionChoices(): Collection
     {
-        return $this->choices instanceof Collection
-            ? $this->choices
-            : new ArrayCollection($this->choices);
+        return ($this->questionChoices instanceof Collection)
+            ? $this->questionChoices
+            : new ArrayCollection($this->questionChoices);
     }
 
-    public function setChoices(Collection $choices): self
+    public function setQuestionChoices(Collection $questionChoices): self
     {
-        foreach ($choices as $qc) {
+        foreach ($questionChoices as $qc) {
             $qc->setQuestion($this);
         }
-        $this->choices = $choices;
+        $this->questionChoices = $questionChoices;
 
         return $this;
     }
 
     public function addQuestionChoice(QuestionChoice $questionChoice): self
     {
-        if (!$this->getChoices()->contains($questionChoice)) {
-            $this->getChoices()->add($questionChoice);
+        if (!$this->getQuestionChoices()->contains($questionChoice)) {
+            $this->getQuestionChoices()->add($questionChoice);
         }
         $questionChoice->setQuestion($this);
 
@@ -81,7 +81,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
 
     public function removeQuestionChoice(QuestionChoice $questionChoice): self
     {
-        $this->getChoices()->removeElement($questionChoice);
+        $this->getQuestionChoices()->removeElement($questionChoice);
         $questionChoice->setQuestion(null);
 
         return $this;

@@ -79,7 +79,7 @@ input AddEventInput {
   # The contents of the event startAt.
   startAt: DateTime!
 
-  # The contents of the event endAt.
+  # The contents of the event startAt.
   endAt: DateTime!
 
   # Is the event published ?
@@ -566,7 +566,7 @@ input ChangeEventInput {
   # The contents of the event startAt.
   startAt: DateTime!
 
-  # The contents of the event endAt.
+  # The contents of the event startAt.
   endAt: DateTime!
 
   # Is the event published ?
@@ -2131,8 +2131,9 @@ type MultipleChoiceQuestion implements Question {
     # Randomize the order of the choices.
     randomize: Boolean
   ): [QuestionChoice!]
+  questionChoices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
-  randomQuestionChoices: Boolean!
+  isRandomQuestionChoices: Boolean!
 }
 
 # A particular condition in a logic jump in a multiple choice question.
@@ -3754,7 +3755,7 @@ input QuestionInput {
   randomQuestionChoices: Boolean
   otherAllowed: Boolean
   validationRule: MultipleChoiceQuestionValidationRuleInput
-  choices: [QuestionChoiceInput]
+  questionChoices: [QuestionChoiceInput]
   description: String
   jumps: [LogicJumpInput]
 }

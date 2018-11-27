@@ -34,8 +34,8 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
   render() {
     const { multipleChoiceQuestion } = this.props;
 
-    const choicesNumber = multipleChoiceQuestion.choices
-      ? multipleChoiceQuestion.choices.length
+    const choicesNumber = multipleChoiceQuestion.questionChoices
+      ? multipleChoiceQuestion.questionChoices.length
       : 0;
 
     return (
@@ -44,8 +44,8 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
           <tr>{this.getHead(choicesNumber)}</tr>
         </thead>
         <tbody>
-          {multipleChoiceQuestion.choices &&
-            multipleChoiceQuestion.choices.map((choice, key) => (
+          {multipleChoiceQuestion.questionChoices &&
+            multipleChoiceQuestion.questionChoices.map((choice, key) => (
               <QuestionnaireAdminResultsRankingLine
                 key={key}
                 choice={choice}
@@ -61,7 +61,7 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
 export default createFragmentContainer(QuestionnaireAdminResultsRanking, {
   multipleChoiceQuestion: graphql`
     fragment QuestionnaireAdminResultsRanking_multipleChoiceQuestion on MultipleChoiceQuestion {
-      choices {
+      questionChoices {
         title
         ranking {
           position

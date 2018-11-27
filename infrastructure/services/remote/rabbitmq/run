@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "[$(date -u)][RABBITMQ] Fix permissions on files!"
+chown -R rabbitmq:rabbitmq /var/lib/rabbitmq
+
 echo "[$(date -u)][RABBITMQ] Started!"
 
 exec rabbitmq-server

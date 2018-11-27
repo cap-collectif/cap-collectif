@@ -39,6 +39,7 @@ class RadioButtons extends Component<Props> {
 
   render() {
     const { field, value, id, onChange, disabled } = this.props;
+    console.log(this.props);
     return (
       <React.Fragment>
         <RadioGroup

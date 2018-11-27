@@ -195,7 +195,7 @@ Scenario: GraphQL admin wants to delete first question
               "private": false,
               "otherAllowed": false,
               "randomQuestionChoices": false,
-              "choices": [
+              "questionChoices": [
                 {
                   "color": null,
                   "description": null,
@@ -261,7 +261,7 @@ Scenario: GraphQL admin wants to delete first question choice
             title
             type
             ... on MultipleChoiceQuestion {
-              choices {
+              questionChoices {
                 id
                 title
               }
@@ -292,7 +292,7 @@ Scenario: GraphQL admin wants to delete first question choice
               "otherAllowed": false,
               "randomQuestionChoices": false,
               "validationRule": null,
-              "choices": [
+              "questionChoices": [
                 {
                   "color": null,
                   "description": null,
@@ -335,7 +335,7 @@ Scenario: GraphQL admin wants to delete first question choice
               "id": "49",
               "title": "J'ai plusieurs choix?",
               "type": "radio",
-              "choices": [
+              "questionChoices": [
                 {
                   "id": "questionchoice36",
                   "title": "deuxième choix"

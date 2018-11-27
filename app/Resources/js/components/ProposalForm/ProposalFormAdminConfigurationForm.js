@@ -54,6 +54,7 @@ const zoomLevels = [
   { id: 20, name: '20 - Immeubles' },
 ];
 const formName = 'proposal-form-admin-configuration';
+const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 const validate = (values: Object) => {
   const errors = {};
@@ -253,7 +254,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     proposalFormId: props.proposalForm.id,
     districts: values.districts.map(district => ({ ...district })),
     categories: values.categories.map(category => ({ ...category })),
-    questions: submitQuestion(values.questions),
+    questions: submitQuestion(values.questions, multipleChoiceQuestions),
   };
 
   return UpdateProposalFormMutation.commit({ input });
@@ -701,7 +702,33 @@ export default createFragmentContainer(
       }
       questions {
         id
-        ...responsesHelper_question @relay(mask: false)
+        title
+        helpText
+        description
+        type
+        private
+        required
+        kind
+        ... on MultipleChoiceQuestion {
+          isRandomQuestionChoices
+          isOtherAllowed
+          validationRule {
+            type
+            number
+          }
+          questionChoices {
+            id
+            title
+            description
+            color
+            image {
+              id
+              url
+              name
+              size
+            }
+          }
+        }
       }
     }
   `,

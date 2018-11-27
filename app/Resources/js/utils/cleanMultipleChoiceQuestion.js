@@ -2,7 +2,7 @@
 import { type IntlShape } from 'react-intl';
 
 type MultipleChoiceQuestion = {
-  +choices: ?$ReadOnlyArray<{|
+  +questionChoices: ?$ReadOnlyArray<{|
     +title: string,
     +responses: {|
       +totalCount: number,
@@ -20,8 +20,8 @@ export const cleanMultipleChoiceQuestion = (
   intl: IntlShape,
 ) => {
   let data =
-    multipleChoiceQuestion.choices &&
-    multipleChoiceQuestion.choices
+    multipleChoiceQuestion.questionChoices &&
+    multipleChoiceQuestion.questionChoices
       .filter(choice => choice.responses.totalCount > 0)
       .reduce((acc, curr) => {
         acc.push({

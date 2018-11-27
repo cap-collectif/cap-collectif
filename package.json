@@ -57,14 +57,6 @@
     "schema.public.graphql": {
       "ref": "heads/master",
       "schemaPath": "schema.public.graphql"
-    },
-    "schema.preview.graphql": {
-      "ref": "heads/master",
-      "schemaPath": "schema.preview.graphql"
-    },
-    "schema.internal.graphql": {
-      "ref": "heads/master",
-      "schemaPath": "schema.internal.graphql"
     }
   },
   "lint-staged": {

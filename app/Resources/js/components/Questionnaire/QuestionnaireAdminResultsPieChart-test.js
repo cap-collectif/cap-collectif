@@ -11,7 +11,7 @@ describe('<QuestionnaireAdminResultsPieChart />', () => {
     multipleChoiceQuestion: {
       isOtherAllowed: true,
       otherResponses: { totalCount: 6 },
-      choices: [
+      questionChoices: [
         { title: "C'est pas faux", responses: { totalCount: 97 } },
         { title: "C'est vrai", responses: { totalCount: 0 } },
         { title: 'Oui', responses: { totalCount: 7 } },
@@ -30,7 +30,7 @@ describe('<QuestionnaireAdminResultsPieChart />', () => {
     multipleChoiceQuestion: {
       isOtherAllowed: false,
       otherResponses: { totalCount: 0 },
-      choices: [
+      questionChoices: [
         { title: "C'est pas faux", responses: { totalCount: 76 } },
         { title: 'Oui', responses: { totalCount: 3 } },
         { title: 'Non', responses: { totalCount: 1 } },

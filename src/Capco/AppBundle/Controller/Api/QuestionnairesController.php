@@ -45,7 +45,7 @@ class QuestionnairesController extends FOSRestController
                 $scores = [];
                 $type = $question->getInputType();
                 if ('ranking' === $type) {
-                    $questionChoices = $question->getChoices();
+                    $questionChoices = $question->getQuestionChoices();
                     $choices = $questionChoices
                         ->map(function ($choice) {
                             return $choice->getTitle();
@@ -66,7 +66,7 @@ class QuestionnairesController extends FOSRestController
                             // 2 replies with maximum 4 gives 4 3 points
                             $score = $question->getValidationRule()
                                 ? $question->getValidationRule()->getNumber()
-                                : $question->getChoices()->count();
+                                : $question->getQuestionChoices()->count();
                             foreach ($responseValue['labels'] as $label) {
                                 $scores[$label] += $score;
                                 --$score;
@@ -76,7 +76,7 @@ class QuestionnairesController extends FOSRestController
                 }
                 if ('radio' === $type || 'select' === $type || 'checkbox' === $type) {
                     $choices = $question
-                        ->getChoices()
+                        ->getQuestionChoices()
                         ->map(function ($choice) {
                             return $choice->getTitle();
                         })

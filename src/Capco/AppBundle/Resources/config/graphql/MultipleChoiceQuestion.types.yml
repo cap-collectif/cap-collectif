@@ -15,18 +15,23 @@ MultipleChoiceQuestion:
       otherResponses:
         type: 'ResponseConnection!'
         argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", [value, args])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", [value, args])'
         description: 'Responses of the `other` question choice.'
       choices:
         type: '[QuestionChoice!]'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQuestionChoicesResolver", [value, args])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQuestionChoicesResolver", [value, args])'
         args:
           randomize:
             type: 'Boolean'
             description: 'Randomize the order of the choices.'
+      questionChoices:
+        type: '[QuestionChoice!]'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQuestionChoicesResolver", [value, args])'
       validationRule:
         type: 'MultipleChoiceQuestionValidationRule'
         resolve: "@=resolver('question_validation_rule', [value])"
-      randomQuestionChoices:
+      isRandomQuestionChoices:
         type: 'Boolean!'
-        resolve: '@=value.isRandomQuestionChoices()'

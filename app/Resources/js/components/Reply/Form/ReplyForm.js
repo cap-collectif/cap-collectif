@@ -213,20 +213,21 @@ export class ReplyForm extends React.Component<Props> {
               )}
               {(!reply || reply.viewerCanUpdate) && (
                 <div className="btn-toolbar btn-box sticky">
-                  {(!reply || isDraft) && questionnaire.type === 'QUESTIONNAIRE' && (
-                    <div className="btn-group">
-                      <SubmitButton
-                        type="submit"
-                        id={`${form}-submit-create-draft-reply`}
-                        disabled={pristine || submitting || disabled}
-                        bsStyle="primary"
-                        label={submitting ? 'global.loading' : 'global.save_as_draft'}
-                        onSubmit={() => {
-                          dispatch(changeRedux(form, 'draft', true));
-                        }}
-                      />
-                    </div>
-                  )}
+                  {(!reply || isDraft) &&
+                    questionnaire.type === 'QUESTIONNAIRE' && (
+                      <div className="btn-group">
+                        <SubmitButton
+                          type="submit"
+                          id={`${form}-submit-create-draft-reply`}
+                          disabled={pristine || submitting || disabled}
+                          bsStyle="primary"
+                          label={submitting ? 'global.loading' : 'global.save_as_draft'}
+                          onSubmit={() => {
+                            dispatch(changeRedux(form, 'draft', true));
+                          }}
+                        />
+                      </div>
+                    )}
                   <div className="btn-group">
                     <SubmitButton
                       type="submit"
@@ -241,15 +242,16 @@ export class ReplyForm extends React.Component<Props> {
                   </div>
                 </div>
               )}
-              {!disabled && !pristine && (
-                <AlertForm
-                  valid={valid}
-                  invalid={invalid}
-                  submitSucceeded={submitSucceeded}
-                  submitFailed={submitFailed}
-                  submitting={submitting}
-                />
-              )}
+              {!disabled &&
+                !pristine && (
+                  <AlertForm
+                    valid={valid}
+                    invalid={invalid}
+                    submitSucceeded={submitSucceeded}
+                    submitFailed={submitFailed}
+                    submitting={submitting}
+                  />
+                )}
             </form>
           </div>
         </div>
@@ -291,7 +293,20 @@ export default createFragmentContainer(container, {
       draft
       viewerCanUpdate
       responses {
-        ...responsesHelper_response @relay(mask: false)
+        question {
+          id
+        }
+        ... on ValueResponse {
+          value
+        }
+        ... on MediaResponse {
+          medias {
+            id
+            name
+            size
+            url
+          }
+        }
       }
     }
   `,
@@ -311,7 +326,53 @@ export default createFragmentContainer(container, {
       id
       questions {
         id
-        ...responsesHelper_question @relay(mask: false)
+        number
+        title
+        position
+        private
+        required
+        description
+        helpText
+        jumps {
+          id
+          always
+          destination {
+            id
+            title
+            number
+          }
+          conditions {
+            id
+            operator
+            question {
+              id
+              title
+            }
+            ... on MultipleChoiceQuestionLogicJumpCondition {
+              value {
+                id
+                title
+              }
+            }
+          }
+        }
+        type
+        ... on MultipleChoiceQuestion {
+          isOtherAllowed
+          validationRule {
+            type
+            number
+          }
+          choices(randomize: true) {
+            id
+            title
+            description
+            color
+            image {
+              url
+            }
+          }
+        }
       }
     }
   `,

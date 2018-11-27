@@ -19,10 +19,11 @@ type Props = FormProps & {
 };
 
 const formName = 'registration-form-questions';
+const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 const onSubmit = (values: Object) => {
   const input = {
-    questions: submitQuestion(values.questions),
+    questions: submitQuestion(values.questions, multipleChoiceQuestions),
   };
 
   return UpdateRegistrationFormQuestionsMutation.commit({ input });
@@ -86,7 +87,33 @@ export default createFragmentContainer(
       id
       questions {
         id
-        ...responsesHelper_question @relay(mask: false)
+        title
+        helpText
+        description
+        type
+        private
+        required
+        kind
+        ... on MultipleChoiceQuestion {
+          isRandomQuestionChoices
+          isOtherAllowed
+          validationRule {
+            type
+            number
+          }
+          questionChoices {
+            id
+            title
+            description
+            color
+            image {
+              id
+              url
+              name
+              size
+            }
+          }
+        }
       }
     }
   `,

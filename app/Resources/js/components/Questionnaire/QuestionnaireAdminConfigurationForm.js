@@ -5,7 +5,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field, FieldArray, type FormProps } from 'redux-form';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { submitQuestion, type QuestionsInReduxForm } from '../../utils/submitQuestion';
+import { submitQuestion } from '../../utils/submitQuestion';
 import AlertForm from '../Alert/AlertForm';
 import component from '../Form/Field';
 import UpdateQuestionnaireConfigurationMutation from '../../mutations/UpdateQuestionnaireConfigurationMutation';
@@ -49,9 +49,37 @@ type FormValues = {
   questionnaireId: string,
   title: string,
   description: ?string,
-  questions: QuestionsInReduxForm,
+  questions: $ReadOnlyArray<{|
+    id: string,
+    title: string,
+    private: boolean,
+    required: boolean,
+    helpText: ?string,
+    description: ?string,
+    type: QuestionTypeValue,
+    isOtherAllowed?: boolean,
+    isRandomQuestionChoices?: boolean,
+    validationRule?: ?{|
+      type: MultipleChoiceQuestionValidationRulesTypes,
+      number: number,
+    |},
+    jumps: Jumps,
+    questionChoices?: ?$ReadOnlyArray<{|
+      id: string,
+      title: string,
+      description: ?string,
+      color: ?QuestionChoiceColor,
+      image: ?{|
+        id: string,
+        url: string,
+        name: string,
+        size: number,
+      |},
+    |}>,
+  |}>,
 };
 const formName = 'questionnaire-admin-configuration';
+const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 const validate = (values: FormValues) => {
   const errors = {};
@@ -87,7 +115,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     ...values,
     id: undefined,
     questionnaireId: props.questionnaire.id,
-    questions: submitQuestion(values.questions),
+    questions: submitQuestion(values.questions, multipleChoiceQuestions),
   };
 
   // $FlowFixMe
@@ -195,7 +223,59 @@ export default createFragmentContainer(
       description
       questions {
         id
-        ...responsesHelper_question @relay(mask: false)
+        title
+        helpText
+        description
+        type
+        private
+        required
+        jumps {
+          id
+          always
+          origin {
+            id
+            title
+          }
+          destination {
+            id
+            title
+          }
+          conditions {
+            id
+            operator
+            question {
+              id
+              title
+            }
+            ... on MultipleChoiceQuestionLogicJumpCondition {
+              value {
+                id
+                title
+              }
+            }
+          }
+        }
+        kind
+        ... on MultipleChoiceQuestion {
+          isRandomQuestionChoices
+          isOtherAllowed
+          validationRule {
+            type
+            number
+          }
+          questionChoices {
+            id
+            title
+            description
+            color
+            image {
+              id
+              url
+              name
+              size
+            }
+          }
+        }
       }
     }
   `,
