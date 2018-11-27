@@ -351,7 +351,7 @@ export default createFragmentContainer(
         size
         url
       }
-      show_url
+      url
       username
       biography
       website

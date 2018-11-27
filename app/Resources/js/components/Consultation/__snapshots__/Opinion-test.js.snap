@@ -19,7 +19,7 @@ exports[`<Opinion /> renders correcty 1`] = `
             "media": Object {
               "url": "",
             },
-            "show_url": "",
+            "url": "",
             "vip": false,
           },
           "votes": Object {

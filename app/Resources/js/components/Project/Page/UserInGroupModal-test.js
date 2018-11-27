@@ -32,7 +32,7 @@ describe('<UserInGroupModal />', () => {
           node: {
             id: 'user1',
             username: 'Perlinpinpin',
-            show_url: 'http://poudre.de/perlinpinpin',
+            url: 'http://poudre.de/perlinpinpin',
             media: {
               id: 'media1',
               name: 'perl1',
@@ -46,7 +46,7 @@ describe('<UserInGroupModal />', () => {
           node: {
             id: 'user2',
             username: 'Toto',
-            show_url: 'htp://toto.com',
+            url: 'htp://toto.com',
             media: {
               id: 'media2',
               name: 'toto',
@@ -76,7 +76,7 @@ describe('<UserInGroupModal />', () => {
           node: {
             id: 'user1',
             username: 'Perlinpinpin',
-            show_url: 'http://poudre.de/perlinpinpin',
+            url: 'http://poudre.de/perlinpinpin',
             media: {
               id: 'media1',
               name: 'perl1',
@@ -90,7 +90,7 @@ describe('<UserInGroupModal />', () => {
           node: {
             id: 'user2',
             username: 'Toto',
-            show_url: 'htp://toto.com',
+            url: 'htp://toto.com',
             media: {
               id: 'media2',
               name: 'toto',

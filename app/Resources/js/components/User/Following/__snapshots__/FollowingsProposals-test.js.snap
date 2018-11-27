@@ -69,8 +69,8 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
-                      "show_url": "http://carte.perdu.com",
                       "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
@@ -79,8 +79,8 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
-                      "show_url": "http://gps.perdu.com",
                       "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
@@ -89,8 +89,8 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
                       "project": Object {
                         "id": "project2",
                       },
-                      "show_url": "https://randomstreetview.com/",
                       "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
@@ -115,8 +115,8 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
-                      "show_url": "http://carte.perdu.com",
                       "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
@@ -125,8 +125,8 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
-                      "show_url": "http://gps.perdu.com",
                       "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
@@ -135,8 +135,8 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
                       "project": Object {
                         "id": "project2",
                       },
-                      "show_url": "https://randomstreetview.com/",
                       "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
@@ -237,8 +237,8 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
-                      "show_url": "http://carte.perdu.com",
                       "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
@@ -247,8 +247,8 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
-                      "show_url": "http://gps.perdu.com",
                       "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
@@ -257,8 +257,8 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
                       "project": Object {
                         "id": "project2",
                       },
-                      "show_url": "https://randomstreetview.com/",
                       "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
@@ -283,8 +283,8 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
-                      "show_url": "http://carte.perdu.com",
                       "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
@@ -293,8 +293,8 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
-                      "show_url": "http://gps.perdu.com",
                       "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
@@ -303,8 +303,8 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
                       "project": Object {
                         "id": "project2",
                       },
-                      "show_url": "https://randomstreetview.com/",
                       "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],

@@ -104,8 +104,8 @@ exports[`<OpinionProjectRow /> should render the project 1 with its proposal dis
             "project": Object {
               "id": "project1",
             },
-            "show_url": "https://www.2rconsulting.fr/",
             "title": "Recrutez Hervé !",
+            "url": "https://www.2rconsulting.fr/",
           }
         }
       />
@@ -117,8 +117,8 @@ exports[`<OpinionProjectRow /> should render the project 1 with its proposal dis
             "project": Object {
               "id": "project1",
             },
-            "show_url": "https://www.2rconsulting.fr/",
             "title": "Virer Julie",
+            "url": "https://www.2rconsulting.fr/",
           }
         }
       />
@@ -181,8 +181,8 @@ exports[`<OpinionProjectRow /> should render the project 2 with its proposal dis
             "project": Object {
               "id": "project2",
             },
-            "show_url": "https://www.2rconsulting.fr/",
             "title": "Faire des sessions de recrutement basé sur la destruction des autres parce que cest comme ça le monde du travail.",
+            "url": "https://www.2rconsulting.fr/",
           }
         }
       />

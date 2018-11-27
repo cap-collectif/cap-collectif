@@ -32,7 +32,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                   "media": Object {
                     "url": "http://monimage.com/image1.jpg",
                   },
-                  "show_url": "http://monprofil/profil",
+                  "url": "http://monprofil/profil",
                   "username": "user",
                 }
               }
@@ -45,7 +45,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                   "media": Object {
                     "url": "http://monimage.com/image1.jpg",
                   },
-                  "show_url": "http://monprofil/profil",
+                  "url": "http://monprofil/profil",
                   "username": "user",
                 }
               }
@@ -208,7 +208,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }
@@ -225,7 +225,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }
@@ -242,7 +242,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }
@@ -265,7 +265,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }
@@ -282,7 +282,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }
@@ -326,7 +326,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   "media": Object {
                     "url": "http://monimage.com/image1.jpg",
                   },
-                  "show_url": "http://monprofil/profil",
+                  "url": "http://monprofil/profil",
                   "username": "user",
                 }
               }
@@ -339,7 +339,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   "media": Object {
                     "url": "http://monimage.com/image1.jpg",
                   },
-                  "show_url": "http://monprofil/profil",
+                  "url": "http://monprofil/profil",
                   "username": "user",
                 }
               }
@@ -453,7 +453,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }
@@ -474,7 +474,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }
@@ -491,7 +491,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }
@@ -535,7 +535,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   "media": Object {
                     "url": "http://monimage.com/image1.jpg",
                   },
-                  "show_url": "http://monprofil/profil",
+                  "url": "http://monprofil/profil",
                   "username": "user",
                 }
               }
@@ -548,7 +548,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   "media": Object {
                     "url": "http://monimage.com/image1.jpg",
                   },
-                  "show_url": "http://monprofil/profil",
+                  "url": "http://monprofil/profil",
                   "username": "user",
                 }
               }
@@ -662,7 +662,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }
@@ -683,7 +683,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }
@@ -700,7 +700,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                 "media": Object {
                   "url": "http://monimage.com/image1.jpg",
                 },
-                "show_url": "http://monprofil/profil",
+                "url": "http://monprofil/profil",
                 "username": "user",
               }
             }

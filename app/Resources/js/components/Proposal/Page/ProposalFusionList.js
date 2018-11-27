@@ -25,7 +25,7 @@ export class ProposalFusionList extends React.Component<Props> {
             <Panel.Body>
               {proposal.mergedFrom.map(child => (
                 <div key={child.id}>
-                  <a href={child.show_url}>{child.title}</a>
+                  <a href={child.url}>{child.title}</a>
                 </div>
               ))}
             </Panel.Body>
@@ -42,7 +42,7 @@ export class ProposalFusionList extends React.Component<Props> {
             <Panel.Body>
               {proposal.mergedIn.map(parent => (
                 <div key={parent.id}>
-                  <a href={parent.show_url}>{parent.title}</a>
+                  <a href={parent.url}>{parent.title}</a>
                 </div>
               ))}
             </Panel.Body>
@@ -60,12 +60,12 @@ export default createFragmentContainer(
       id
       mergedFrom {
         id
-        show_url
+        url
         title
       }
       mergedIn {
         id
-        show_url
+        url
         title
       }
     }

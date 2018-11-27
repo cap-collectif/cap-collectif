@@ -6,7 +6,7 @@ import { OpinionRow } from './OpinionRow';
 
 describe('<OpinionRow />', () => {
   const opinion = {
-    show_url: 'http://perdu.com',
+    url: 'http://perdu.com',
     id: 'opinion1',
     title: 'perdu sur internet ?',
   };

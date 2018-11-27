@@ -13,8 +13,8 @@ exports[`<VoteItem /> renders correcty for mitigated vote 1`] = `
         "media": Object {
           "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
         },
-        "show_url": "https://capco.dev/profile/lbrunet",
         "slug": "lbrunet",
+        "url": "https://capco.dev/profile/lbrunet",
         "vip": false,
       }
     }
@@ -34,8 +34,8 @@ exports[`<VoteItem /> renders correcty for mitigated vote 1`] = `
             "media": Object {
               "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
             },
-            "show_url": "https://capco.dev/profile/lbrunet",
             "slug": "lbrunet",
+            "url": "https://capco.dev/profile/lbrunet",
             "vip": false,
           }
         }
@@ -97,8 +97,8 @@ exports[`<VoteItem /> renders correcty for vote against 1`] = `
         "media": Object {
           "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
         },
-        "show_url": "https://capco.dev/profile/lbrunet",
         "slug": "lbrunet",
+        "url": "https://capco.dev/profile/lbrunet",
         "vip": false,
       }
     }
@@ -118,8 +118,8 @@ exports[`<VoteItem /> renders correcty for vote against 1`] = `
             "media": Object {
               "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
             },
-            "show_url": "https://capco.dev/profile/lbrunet",
             "slug": "lbrunet",
+            "url": "https://capco.dev/profile/lbrunet",
             "vip": false,
           }
         }
@@ -181,8 +181,8 @@ exports[`<VoteItem /> renders correcty for vote for 1`] = `
         "media": Object {
           "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
         },
-        "show_url": "https://capco.dev/profile/lbrunet",
         "slug": "lbrunet",
+        "url": "https://capco.dev/profile/lbrunet",
         "vip": false,
       }
     }
@@ -202,8 +202,8 @@ exports[`<VoteItem /> renders correcty for vote for 1`] = `
             "media": Object {
               "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
             },
-            "show_url": "https://capco.dev/profile/lbrunet",
             "slug": "lbrunet",
+            "url": "https://capco.dev/profile/lbrunet",
             "vip": false,
           }
         }
@@ -265,8 +265,8 @@ exports[`<VoteItem /> renders correcty for vote without value 1`] = `
         "media": Object {
           "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
         },
-        "show_url": "https://capco.dev/profile/lbrunet",
         "slug": "lbrunet",
+        "url": "https://capco.dev/profile/lbrunet",
         "vip": false,
       }
     }
@@ -286,8 +286,8 @@ exports[`<VoteItem /> renders correcty for vote without value 1`] = `
             "media": Object {
               "url": "https://capco.dev/media/default/0001/01/32618f20c0942f89316be7f88d1bfa3489e2dcef.jpeg",
             },
-            "show_url": "https://capco.dev/profile/lbrunet",
             "slug": "lbrunet",
+            "url": "https://capco.dev/profile/lbrunet",
             "vip": false,
           }
         }

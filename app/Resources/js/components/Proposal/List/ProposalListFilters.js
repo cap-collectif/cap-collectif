@@ -81,12 +81,6 @@ export class ProposalListFilters extends React.Component<Props, State> {
     } = this.props;
     const { displayedFilters } = this.state;
 
-    // TO update for prod values, and delete after
-    const isMontreuil =
-      window.location.href ===
-      'https://budgetparticipatif.montreuil.fr/project/budget-participatif-2017/selection/vote-par-quartier-2';
-    const defaultDistrictId = '51dad909-6e3e-11e8-a324-0242ac110005';
-
     return (
       <div className="mb-15 mt-30">
         <Row>
@@ -118,10 +112,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
                 onChange={e => {
                   dispatch(changeFilter(filterName, e.target.value));
                 }}
-                value={
-                  filters[filterName] ||
-                  (isMontreuil && filterName === 'districts' ? defaultDistrictId : 0)
-                }>
+                value={filters[filterName]}>
                 <FormattedMessage id={`global.select_${filterName}`}>
                   {message => <option value="0">{message}</option>}
                 </FormattedMessage>

@@ -11,12 +11,12 @@ describe('<ProposalFusionList />', () => {
     mergedIn: [
       {
         id: 'proposal2',
-        show_url: true,
+        url: true,
         title: 'Title Proposal 2',
       },
       {
         id: 'proposal3',
-        show_url: true,
+        url: true,
         title: 'Title Proposal 3',
       },
     ],
@@ -29,12 +29,12 @@ describe('<ProposalFusionList />', () => {
     mergedFrom: [
       {
         id: 'proposal2',
-        show_url: true,
+        url: true,
         title: 'Title Proposal 2',
       },
       {
         id: 'proposal3',
-        show_url: true,
+        url: true,
         title: 'Title Proposal 3',
       },
     ],

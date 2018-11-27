@@ -53,20 +53,9 @@ export const queryVariables = (filters: Filters, order: ?string) => {
       break;
   }
 
-  // TO update for prod values, and delete after
-  const isMontreuil =
-    window.location.href ===
-    'https://budgetparticipatif.montreuil.fr/project/budget-participatif-2017/selection/vote-par-quartier-2';
-  const defaultDistrictId = '51dad909-6e3e-11e8-a324-0242ac110005';
-
   return {
     orderBy: { field, direction },
-    district:
-      filters.districts && filters.districts !== '0'
-        ? filters.districts
-        : isMontreuil
-        ? defaultDistrictId
-        : null,
+    district: filters.districts && filters.districts !== '0' ? filters.districts : null,
     theme: filters.themes && filters.themes !== '0' ? filters.themes : null,
     category: filters.categories && filters.categories !== '0' ? filters.categories : null,
     userType: filters.types && filters.types !== '0' ? filters.types : null,

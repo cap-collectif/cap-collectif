@@ -63,7 +63,7 @@ export class ProposalPageHeader extends React.Component<Props> {
     return (
       <div className={classNames(classes)}>
         <div>
-          <a style={{ textDecoration: 'none' }} href={referer || proposal.show_url}>
+          <a style={{ textDecoration: 'none' }} href={referer || proposal.url}>
             <i className="cap cap-arrow-65-1 icon--black" /> <FormattedMessage id={tradKeyToBack} />
           </a>
         </div>
@@ -112,9 +112,9 @@ export class ProposalPageHeader extends React.Component<Props> {
             )}
           </div>
         )}
-        {viewer &&
-          proposal.publicationStatus !== 'DRAFT' &&
-          step && <ProposalVoteModal proposal={proposal} step={step} />}
+        {viewer && proposal.publicationStatus !== 'DRAFT' && step && (
+          <ProposalVoteModal proposal={proposal} step={step} />
+        )}
       </div>
     );
   }
@@ -166,7 +166,7 @@ export default createFragmentContainer(container, {
       publishedAt
       updatedAt
       publicationStatus
-      show_url
+      url
       project {
         opinionCanBeFollowed
       }

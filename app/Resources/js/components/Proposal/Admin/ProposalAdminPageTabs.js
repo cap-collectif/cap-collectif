@@ -23,7 +23,7 @@ export class ProposalAdminPageTabs extends Component<Props> {
           <strong>
             <FormattedMessage id="permalink" /> :{' '}
           </strong>{' '}
-          <a href={proposal.show_url}>{proposal.show_url}</a> |{' '}
+          <a href={proposal.url}>{proposal.url}</a> |{' '}
           <b>{intl.formatMessage({ id: 'proposal.admin.reference' })} :</b> {proposal.reference}
         </p>
         <Tabs defaultActiveKey={1} id="proposal-admin-page-tabs">
@@ -68,7 +68,7 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment ProposalAdminPageTabs_proposal on Proposal {
-      show_url
+      url
       reference
       ...ProposalAdminStatusForm_proposal
       ...ProposalAdminSelections_proposal

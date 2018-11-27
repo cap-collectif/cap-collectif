@@ -41,7 +41,7 @@ export class ProposalRow extends Component<Props, State> {
         <ListGroupItem id={`item-proposal-${proposal.id}`}>
           <h4>
             <a
-              href={proposal.show_url}
+              href={proposal.url}
               title={proposal.title}
               id={`item-proposal-link-${proposal.id}`}
               className="profile__proposal__open__link">
@@ -66,7 +66,7 @@ export default createFragmentContainer(
     fragment ProposalRow_proposal on Proposal {
       id
       title
-      show_url
+      url
     }
   `,
 );
