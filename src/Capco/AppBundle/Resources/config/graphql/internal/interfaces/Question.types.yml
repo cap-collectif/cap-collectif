@@ -1,0 +1,45 @@
+Question:
+  type: interface
+  config:
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
+    fields:
+      id:
+        type: 'ID!'
+      title:
+        type: 'String!'
+      number:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
+        type: 'Int!'
+      type:
+        type: 'QuestionTypeValue!'
+        resolve: "@=resolver('question_type', [value])"
+      #need it for conditional jumps
+      position:
+        type: 'Int!'
+        resolve: "@=resolver('question_position', [value])"
+        description: 'The position of the question'
+      private:
+        type: 'Boolean!'
+      required:
+        type: 'Boolean!'
+      helpText:
+        type: 'String'
+      description:
+        type: 'String'
+      kind:
+        type: 'String!'
+      slug:
+        type: 'String!'
+      participants:
+        type: 'ParticipantConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", [value, args])'
+        description: 'Return users who answered the question'
+      responses:
+        type: 'ResponseConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionResponsesResolver", [value, args])'
+        description: 'Return users who answered the question'
+      jumps:
+        description: 'The associated logic jumps to this question.'
+        type: '[LogicJump]'

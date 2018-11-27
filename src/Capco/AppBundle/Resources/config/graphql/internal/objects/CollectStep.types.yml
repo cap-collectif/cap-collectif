@@ -1,0 +1,31 @@
+CollectStep:
+  type: object
+  inherits: [Node, Step, ProposalStep]
+  config:
+    interfaces: [Node, Step, ProposalStep]
+    fields:
+      kind:
+        resolve: 'collect'
+      requirements:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
+      statuses:
+        type: '[Status!]!'
+      private:
+        type: 'Boolean!'
+      form:
+        type: 'ProposalForm!'
+        resolve: '@=value.getProposalForm()'
+      contributors:
+        type: 'InternalUserConnection!'
+        description: 'A list of contributor associated with the step.'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+      viewerProposalDrafts:
+        type: 'ProposalConnection!'
+        access: "@=hasRole('ROLE_USER')"
+        argsBuilder: 'Relay::Connection'
+        resolve: "@=resolver('query_get_draft_proposals_for_user_in_step', [value, getUser(), args])"
+      proposals:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\CollectStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
+      viewerProposalsUnpublished:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CollectStep\\CollectStepViewerProposalsUnpublishedResolver", [value, args, getUser()])'

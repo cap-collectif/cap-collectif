@@ -1,0 +1,12 @@
+FirstnameRequirement:
+  type: object
+  inherits: [Node, Requirement]
+  config:
+    interfaces: [Node, Requirement]
+    description: 'Require a firstname'
+    fields:
+      viewerValue:
+        type: 'String'
+        access: "@hasRole('ROLE_USER')"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
+        description: 'The firstname of the viewer.'

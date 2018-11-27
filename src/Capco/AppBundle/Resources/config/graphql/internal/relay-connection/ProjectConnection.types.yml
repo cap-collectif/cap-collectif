@@ -1,0 +1,7 @@
+ProjectConnection:
+  type: relay-connection
+  config:
+    nodeType: Project!
+    connectionFields:
+      totalCount:
+        type: Int!

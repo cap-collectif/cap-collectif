@@ -1,0 +1,8 @@
+UserNotificationsConfiguration:
+  type: object
+  config:
+    description: "A user's notifications configuration"
+    fields:
+      onProposalCommentMail:
+        type: 'Boolean!'
+        description: 'A boolean representing if the user wants to receive notifications by mail when someone commented his proposal'

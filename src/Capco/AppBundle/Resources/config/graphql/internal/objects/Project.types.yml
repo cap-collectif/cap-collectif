@@ -1,0 +1,34 @@
+Project:
+  type: object
+  inherits: [Node, UniformResourceLocatable, UniformResourceAdminLocatable]
+  config:
+    interfaces: [Node, UniformResourceLocatable, UniformResourceAdminLocatable]
+    description: 'A participatory project.'
+    fields:
+      steps:
+        type: '[Step!]!'
+        resolve: "@=resolver('project_steps', [value])"
+      title:
+        type: 'String!'
+      contributors:
+        type: 'InternalUserConnection!'
+        description: 'A list of contributor associated with the project.'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", [value, args])'
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectUrlResolver", [value])'
+      votableSteps:
+        type: '[ProposalStep!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'
+      visibility:
+        type: 'ProjectVisibility!'
+        description: 'The visibility of project'
+      adminUrl:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminUrlResolver", [value])'
+      opinionCanBeFollowed:
+        type: 'Boolean!'
+        description: 'State of activation of Opinion subscription.'
+      restrictedViewers:
+        type: 'GroupConnection'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'

@@ -487,7 +487,7 @@ class Proposal implements
 
     public function canDisplayInBo($user = null): bool
     {
-        if ($this->isPublished()) {
+        if ($this->isPublished() && !$this->isTrashed()) {
             return $this->getStep() ? $this->getStep()->canDisplayInBO($user) : false;
         }
 
