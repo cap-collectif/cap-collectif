@@ -30,7 +30,7 @@ export class AvatarCount extends React.Component<Props> {
   render() {
     const { size, children } = this.props;
 
-    const getSize = avatarPx[size] || '45px';
+    const getSize = avatarPx[size];
 
     return <Container size={getSize}>{children}</Container>;
   }

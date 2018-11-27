@@ -80,8 +80,7 @@ storiesOf('Medias', module)
   .add(
     'Avatar',
     () => {
-      // const size = select('Size', sizeOption, 'normal');
-      const size = text('Size', 'normal');
+      const size = select('Size', sizeOption, 'normal');
       const src = text('Src', 'https://source.unsplash.com/collection/181462');
       const alt = text('Alt', 'My alternative');
 

@@ -23,7 +23,7 @@ export class DefaultAvatar extends React.Component<Props> {
   render() {
     const { size } = this.props;
 
-    const getSize = avatarPx[size] || '45px';
+    const getSize = avatarPx[size];
 
     return (
       <Container
