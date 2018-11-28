@@ -35,7 +35,7 @@ exports[`<LoginOverlay /> renders popover if user is not logged 1`] = `
           />
         </p>
         <p>
-          <InjectIntl(Connect(LoginButton))
+          <Connect(LoginButton)
             bsStyle="success"
             className="center-block btn-block"
           />

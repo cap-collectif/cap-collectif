@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
-import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import RegistrationModal from './RegistrationModal';
 import { showRegistrationModal } from '../../../redux/modules/user';
@@ -16,7 +16,6 @@ type Props = {
   buttonStyle: ?Object,
   openRegistrationModal: () => void,
   chartBody?: ?string,
-  intl: IntlShape,
 };
 
 export class RegistrationButton extends React.Component<Props> {
@@ -37,7 +36,6 @@ export class RegistrationButton extends React.Component<Props> {
       features,
       style,
       user,
-      intl,
       openRegistrationModal,
       chartBody,
     } = this.props;
@@ -50,9 +48,8 @@ export class RegistrationButton extends React.Component<Props> {
           style={buttonStyle}
           onClick={openRegistrationModal}
           bsStyle={bsStyle}
-          aria-label={intl.formatMessage({ id: 'open.inscription_modal' })}
           className={`btn--registration ${className}`}>
-          <FormattedMessage id="global.registration" />
+          {<FormattedMessage id="global.registration" />}
         </Button>
         {/* $FlowFixMe please fix */}
         <RegistrationModal chartBody={chartBody} />
@@ -71,9 +68,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const container = injectIntl(RegistrationButton);
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(container);
+)(RegistrationButton);

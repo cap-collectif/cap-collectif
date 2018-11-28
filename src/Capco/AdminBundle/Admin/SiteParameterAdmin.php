@@ -127,7 +127,7 @@ class SiteParameterAdmin extends Admin
             $formMapper->add('value', ChoiceType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'choices' => ['1' => 'Activé', '0' => 'Désactivé'],
+                'choices' => ['1' => 'global.enabled', '0' => 'global.disabled'],
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif (
