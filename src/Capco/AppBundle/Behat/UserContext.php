@@ -1,10 +1,8 @@
 <?php
 namespace Capco\AppBundle\Behat;
 
-use PHPUnit\Framework\Assert;
-use Capco\UserBundle\Doctrine\UserManager;
 use Capco\AppBundle\Entity\EventRegistration;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use PHPUnit\Framework\Assert;
 
 class UserContext extends DefaultContext
 {
@@ -23,7 +21,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInAsNoName()
     {
-        $this->iAmAuthenticatedAs('no_name@cap-collectif.com');
+        $this->logInWith('no_name@cap-collectif.com', 'no_name');
     }
 
     /**
@@ -31,7 +29,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInAsUserNotConfirmed()
     {
-        $this->iAmAuthenticatedAs('user_not_confirmed@test.com');
+        $this->logInWith('user_not_confirmed@test.com', 'user_not_confirmed');
     }
 
     /**
@@ -96,7 +94,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInAsAdmin()
     {
-        $this->iAmAuthenticatedAs('admin@test.com');
+        $this->logInWith('admin@test.com', 'admin');
     }
 
     /**
@@ -104,7 +102,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInToGraphQLAsSfavot()
     {
-        $this->iAmAuthenticatedAs('sfavot@jolicode.com');
+        $this->logInWith('sfavot@jolicode.com', 'toto');
     }
 
     /**
@@ -112,7 +110,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInAsDrupal()
     {
-        $this->iAmAuthenticatedAs('drupal@gmail.com');
+        $this->logInWith('drupal@gmail.com', 'toto');
     }
 
     /**
@@ -120,7 +118,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInAsPierre()
     {
-        $this->iAmAuthenticatedAs('pierre@cap-collectif.com');
+        $this->logInWith('pierre@cap-collectif.com', 'toto');
     }
 
     /**
@@ -128,7 +126,7 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInAsMauriau()
     {
-        $this->iAmAuthenticatedAs('maxime.auriau@cap-collectif.com');
+        $this->logInWith('maxime.auriau@cap-collectif.com', 'toto');
     }
 
     /**
@@ -136,49 +134,15 @@ class UserContext extends DefaultContext
      */
     public function iAmLoggedInAsUser()
     {
-        $this->iAmAuthenticatedAs('user@test.com');
-    }
-
-    /**
-     * Almost all our testing scenarios needs to be authenticated.
-     * We could go threw the login process everytime but it would take a lot of time !
-     * And we also don't need to test the login process multiple times (login.feature is enough).
-     *
-     * That's why we are simulating an HTTP authentication here :
-     */
-    private function iAmAuthenticatedAs(string $email): void
-    {
-        $user = $this->getService(UserManager::class)->findUserByEmail($email);
-        if (!$user) {
-            throw new \RuntimeException(
-                'Could not find user associated with username:' . $username
-            );
-        }
-
-        // We create a new server session
-        $serverSession = $this->getService('session');
-
-        // We populate the server session with a token
-        $providerKey = $this->getParameter('fos_user.firewall_name');
-        $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
-        $serverSession->set('_security_' . $providerKey, serialize($token));
-        $serverSession->save();
-
-        // We navigate to any page to launch brower
-        // We used /confidentialite because it's very fast to load
-        $this->navigationContext->iVisitedPage('ConfidentialitePage');
-
-        // We manually set the client PHPSESSID
-        $this->getSession()->setCookie($serverSession->getName(), $serverSession->getId());
-
-        // Reload the page to authenticate user
-        $this->getSession()->reload();
+        $this->logInWith('user@test.com', 'user');
     }
 
     /**
      * @Then I can see I am logged in as :username
+     *
+     * @param mixed $username
      */
-    public function iCanSeeIamLoggedInAs(string $username)
+    public function iCanSeeIamLoggedInAs($username)
     {
         $this->assertElementContainsText('#navbar-username', $username);
     }
@@ -204,8 +168,10 @@ class UserContext extends DefaultContext
 
     /**
      * @Then I should be asked to confirm my email :email
+     *
+     * @param mixed $email
      */
-    public function iShouldBeAskedToConfirmMyEmail(string $email)
+    public function iShouldBeAskedToConfirmMyEmail($email)
     {
         $this->getSession()->wait(3000, "$('#alert-email-not-confirmed').length > 0");
         $this->assertSession()->elementExists('css', '#alert-email-not-confirmed');
@@ -222,8 +188,11 @@ class UserContext extends DefaultContext
 
     /**
      * @Then :username phone number should be :phone
+     *
+     * @param mixed $username
+     * @param mixed $phone
      */
-    public function phoneNumberShouldBe(string $username, string $phone)
+    public function phoneNumberShouldBe($username, $phone)
     {
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
         Assert::assertSame($user->getPhone(), $phone);
@@ -242,8 +211,10 @@ class UserContext extends DefaultContext
 
     /**
      * @Then :username should not be sms confirmed
+     *
+     * @param mixed $username
      */
-    public function phoneConfirmedShouldBeFalse(string $username)
+    public function phoneConfirmedShouldBeFalse($username)
     {
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
         Assert::assertFalse($user->isPhoneConfirmed());
@@ -251,8 +222,10 @@ class UserContext extends DefaultContext
 
     /**
      * @Then :username should have an sms code to confirm
+     *
+     * @param mixed $username
      */
-    public function shouldHaveAnSmsCodeToConfirm(string $username)
+    public function shouldHaveAnSmsCodeToConfirm($username)
     {
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
         Assert::assertNotNull($user->getSmsConfirmationCode());
@@ -262,8 +235,10 @@ class UserContext extends DefaultContext
 
     /**
      * @Then :username should be sms confirmed
+     *
+     * @param mixed $username
      */
-    public function shouldBePhoneConfirmed(string $username)
+    public function shouldBePhoneConfirmed($username)
     {
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($username);
         Assert::assertTrue($user->isPhoneConfirmed());
@@ -271,8 +246,11 @@ class UserContext extends DefaultContext
 
     /**
      * @Given :email is registered to event :slug
+     *
+     * @param mixed $email
+     * @param mixed $slug
      */
-    public function isRegisteredToEvent(string $email, string $slug)
+    public function isRegisteredToEvent($email, $slug)
     {
         $event = $this->getRepository('CapcoAppBundle:Event')->findOneBySlug($slug);
         $registration = (new EventRegistration($event))
@@ -281,5 +259,15 @@ class UserContext extends DefaultContext
             ->setPrivate(false);
         $this->getEntityManager()->persist($registration);
         $this->getEntityManager()->flush();
+    }
+
+    private function logInWith($email, $pwd)
+    {
+        $this->iOpenLoginModal();
+        $this->fillField('username', $email);
+        $this->fillField('password', $pwd);
+        $this->pressButton('global.login_me');
+        // TODO !!
+        sleep(4);
     }
 }

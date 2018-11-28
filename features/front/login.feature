@@ -23,8 +23,7 @@ Scenario: A logged user wants to logout
   When I logout
   Then I should see "global.login"
 
-@javascript
-@database
+@javascript @database
 Scenario: User has lost password
   Given I open login modal
   When I follow "global.forgot_password"
@@ -32,8 +31,7 @@ Scenario: User has lost password
   And I press "resetting.request.submit"
   Then I should see 'resetting.check_email {"%email%":"user@test.com"}'
 
-@javascript
-@database
+@javascript @database
 Scenario: User has lost password and email should be sent
   Given I open login modal
   When I follow "global.forgot_password"
@@ -43,8 +41,7 @@ Scenario: User has lost password and email should be sent
   And I open mail with subject "email-subject-resetting-password"
   And I should see "email-content-resetting-password" in mail
 
-@javascript
-@database
+@javascript @database
 Scenario: Admin wants to enable his account and set his password
   Given features "registration", "profiles" are enabled
   And I go to "/account/email_confirmation/check-my-email-token"
