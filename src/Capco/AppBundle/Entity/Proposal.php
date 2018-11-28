@@ -478,7 +478,7 @@ class Proposal implements
 
     public function canDisplay($user = null): bool
     {
-        if ($this->isPublished() && !$this->isTrashed()) {
+        if ($this->isPublished()) {
             return $this->getStep() ? $this->getStep()->canDisplay($user) : false;
         }
 
