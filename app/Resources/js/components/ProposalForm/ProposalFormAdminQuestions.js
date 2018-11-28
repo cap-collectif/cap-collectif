@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector, arrayPush, arrayMove } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Button, ButtonToolbar } from 'react-bootstrap';
 import {
   DragDropContext,
   Droppable,
@@ -270,24 +270,25 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
             </Droppable>
           </DragDropContext>
         </ListGroup>
-        {!hideSections && (
+        <ButtonToolbar>
+          {!hideSections && (
+            <Button
+              id="js-btn-create-section"
+              bsStyle="primary"
+              className="btn-outline-primary box-content__toolbar"
+              onClick={this.handleCreateSection}>
+              <i className="cap cap-small-caps-1" /> <FormattedMessage id="create-section" />
+            </Button>
+          )}
           <Button
-            id="js-btn-create-section"
+            id="js-btn-create-question"
             bsStyle="primary"
             className="btn-outline-primary box-content__toolbar"
-            onClick={this.handleCreateSection}>
-            <i className="cap cap-small-caps-1" /> <FormattedMessage id="create-section" />
+            onClick={this.handleCreateQuestion}>
+            <i className="cap cap-bubble-add-2" />{' '}
+            <FormattedMessage id="question_modal.create.title" />
           </Button>
-        )}
-        <Button
-          id="js-btn-create-question"
-          bsStyle="primary"
-          className="btn-outline-primary box-content__toolbar ml-5"
-          onClick={this.handleCreateQuestion}>
-          <i className="cap cap-bubble-add-2" />{' '}
-          <FormattedMessage id="question_modal.create.title" />
-        </Button>
-
+        </ButtonToolbar>
         <FlashMessages style={{ marginTop: '15px' }} success={flashMessages} />
       </div>
     );
