@@ -38,7 +38,7 @@ const USER_FRAGMENT = '
   zipCode
   city
   phone
-  url
+  show_url
 ';
 
 const USER_HEADERS = [
@@ -180,7 +180,7 @@ query {
                         $participant['zipCode'],
                         $participant['city'],
                         $participant['phone'],
-                        $participant['url'],
+                        $participant['show_url'],
                     ]);
                 } else {
                     $writer->addRow([
@@ -291,7 +291,7 @@ query {
                     $contributor['zipCode'],
                     $contributor['city'],
                     $contributor['phone'],
-                    $contributor['url'],
+                    $contributor['show_url'],
                 ]);
             }
             $writer->close();
@@ -407,7 +407,7 @@ query {
                     $contributor['zipCode'],
                     $contributor['city'],
                     $contributor['phone'],
-                    $contributor['url'],
+                    $contributor['show_url'],
                 ]);
             }
             $writer->close();

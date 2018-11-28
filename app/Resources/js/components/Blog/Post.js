@@ -213,7 +213,7 @@ export class Post extends React.Component<Props> {
                       {post.authors.map((author, i) => (
                         <span key={i}>
                           {features.profiles ? (
-                            <a href={author.url}>{author.displayName}</a>
+                            <a href={author.show_url}>{author.displayName}</a>
                           ) : (
                             author.displayName
                           )}
@@ -257,7 +257,7 @@ export default createFragmentContainer(
       }
       authors {
         id
-        url
+        show_url
         vip
         displayName
       }

@@ -1,9 +1,0 @@
-SourceCategory:
-  type: object
-  config:
-    description: 'A source category.'
-    fields:
-      id:
-        type: 'ID!'
-      title:
-        type: 'String!'

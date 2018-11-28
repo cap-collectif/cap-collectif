@@ -3,10 +3,9 @@ InternalUser:
   inherits:
     - PublicUser
     - InternalPrimaryKey
-    - UniformResourceLocatable
   config:
     description: "A user is an individual's account."
-    interfaces: [Node, UniformResourceLocatable]
+    interfaces: [Node]
     name: User
     fields:
       # TODO We need to check with RGPD if we can expose this data
@@ -278,6 +277,7 @@ InternalUser:
             description: 'Returns the last n elements from the list.'
         description: "Return the user's contributions of the type requested."
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", [value, args])'
+
       isSubscribedToNewsLetter:
         type: 'Boolean'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value])'
@@ -302,5 +302,8 @@ InternalUser:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserResponsesResolver", [value])'
         description: 'The responses answered by user.'
         argsBuilder: 'Relay::Connection'
-      url:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", [value])'
+      show_url:
+        type: 'URI'
+        resolve: "@=resolver('user_show_url', [value])"
+        description: 'The HTTP URL for this user, null if feature `profiles` is disabled.'
+        deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-01-01", reason: "This field does not respect naming consistency.", supersededBy: "Use `url` instead."})'

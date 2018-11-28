@@ -13,7 +13,7 @@ export default class UserLink extends React.Component<Props, State> {
     const { user, className } = this.props; // eslint-disable-line react/prop-types
     let userUrl = user && user._links && user._links.profile ? user._links.profile : null;
     if (!userUrl) {
-      userUrl = user && user.url ? user.url : null;
+      userUrl = user && user.show_url ? user.show_url : null;
     }
     if (!userUrl) {
       userUrl = user && user.url ? user.url : null;

@@ -17,8 +17,8 @@ exports[`<ProposalFormEvaluationRow /> renders correcty 1`] = `
       proposal={
         Object {
           "reference": "1-1",
+          "show_url": "http://capco.dev/proposal",
           "title": "Title",
-          "url": "http://capco.dev/proposal",
         }
       }
     />
@@ -28,8 +28,8 @@ exports[`<ProposalFormEvaluationRow /> renders correcty 1`] = `
       proposal={
         Object {
           "reference": "1-1",
+          "show_url": "http://capco.dev/proposal",
           "title": "Title",
-          "url": "http://capco.dev/proposal",
         }
       }
     />

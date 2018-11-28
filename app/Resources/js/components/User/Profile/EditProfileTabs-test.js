@@ -37,7 +37,7 @@ describe('<EditProfileTabs />', () => {
     media: {
       url: 'http://monimage.com/image1.jpg',
     },
-    url: 'http://monprofil/profil',
+    show_url: 'http://monprofil/profil',
   };
 
   it('should render all tabs', () => {

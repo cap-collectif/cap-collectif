@@ -14,7 +14,7 @@ const mutation = graphql`
         ...ProposalAdminStatusForm_proposal
       }
       step {
-        url
+        show_url
       }
     }
   }

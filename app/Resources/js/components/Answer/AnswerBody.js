@@ -53,7 +53,7 @@ export default createFragmentContainer(AnswerBody, {
           media {
             url
           }
-          url
+          show_url
         }
       }
       ... on Post {

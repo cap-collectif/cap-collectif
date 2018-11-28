@@ -1,0 +1,64 @@
+Comment:
+  type: object
+  inherits: [Node, Trashable, Reportable, Publishable, Contribution, Commentable]
+  config:
+    description: 'A comment'
+    interfaces: [Node, Publishable, Reportable, Contribution, Commentable]
+    fields:
+      body:
+        type: 'String!'
+      createdAt:
+        type: 'DateTime!'
+      updatedAt:
+        type: 'DateTime'
+      author:
+        type: 'InternalUser'
+      parent:
+        type: 'Comment'
+      pinned:
+        type: 'Boolean!'
+      contribuable:
+        type: 'Boolean!'
+        resolve: '@=value.canContribute()'
+      show_url:
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
+      url:
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
+      answers:
+        type: '[Comment]!'
+      authorName:
+        type: 'String'
+      authorEmail:
+        type: 'String'
+      authorIp:
+        type: 'IP'
+      publicationStatus:
+        type: 'CommentPublicationStatus!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentPublicationStatusResolver", [value])'
+      votes:
+        type: 'CommentVoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 30
+          orderBy:
+            type: 'VoteOrder'
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'
+      viewerHasVote:
+        type: 'Boolean!'
+        resolve: '@=value.userHasVote(getUser())'
+      viewerVote:
+        type: 'CommentVote'
+        resolve: '@=value.userGetVote(getUser())'
+      editUrl:
+        type: 'URI'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentEditUrlResolver", [value])'
+      viewerHasReport:
+        resolve: '@=value.userHasReport(getUser())'

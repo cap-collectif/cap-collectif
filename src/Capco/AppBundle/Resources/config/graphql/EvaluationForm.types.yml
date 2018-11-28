@@ -1,0 +1,19 @@
+EvaluationForm:
+  type: object
+  config:
+    description: 'A Evaluation form (question)'
+    fields:
+      id:
+        type: 'String!'
+        description: 'The id of evaluation form (question)'
+      title:
+        type: 'String!'
+        description: 'The title of evaluation form (question)'
+      description:
+        type: 'String'
+        description: 'The description of evaluation form'
+      questions:
+        type: '[Question!]!'
+        description: 'List of questions in the evaluation form'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EvaluationForm\\EvaluationFormResolver", [value, getUser()])'

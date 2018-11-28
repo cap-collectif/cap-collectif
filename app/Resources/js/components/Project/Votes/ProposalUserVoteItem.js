@@ -129,7 +129,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
         <Col className="proposals-user-votes__col" md={colTitleWidth()} sm={12} xs={12}>
           <div className="proposals-user-votes__content">
             <div>
-              <a href={proposal.url} className="proposals-user-votes__title">
+              <a href={proposal.show_url} className="proposals-user-votes__title">
                 {getTitle(proposal.title)}
               </a>
               <br />
@@ -236,7 +236,7 @@ export default createFragmentContainer(container, {
       proposal {
         id
         title
-        url
+        show_url
         ...ProposalDetailEstimation_proposal
       }
     }

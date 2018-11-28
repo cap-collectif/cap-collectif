@@ -1,0 +1,26 @@
+QuestionChoice:
+  type: object
+  config:
+    description: 'A possible choice of a question'
+    fields:
+      id:
+        type: 'ID!'
+      title:
+        type: 'String!'
+      description:
+        type: 'String'
+      color:
+        type: 'QuestionChoiceColor'
+      image:
+        type: 'Media'
+      responses:
+        type: 'ResponseConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceResponseResolver", [value, args])'
+        description: 'Select all the responses of the given question choice'
+      ranking:
+        type: '[QuestionChoiceRanking]'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResolver", [value])'
+        description: 'Return the ranking of the given question choice'

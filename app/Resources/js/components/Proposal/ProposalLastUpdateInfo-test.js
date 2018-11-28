@@ -17,7 +17,7 @@ describe('<ProposalLastUpdateInfo />', () => {
     // $FlowFixMe $refType
     proposal: {
       updatedAt: '2017-07-10T18:53:58+0200',
-      updatedBy: { url: 'http://capco.dev', displayName: 'Paul' },
+      updatedBy: { show_url: 'http://capco.dev', displayName: 'Paul' },
     },
   };
 

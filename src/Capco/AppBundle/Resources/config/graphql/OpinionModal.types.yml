@@ -1,0 +1,18 @@
+OpinionModal:
+    type: object
+    config:
+        description: "A contribution"
+        fields:
+            key:
+                type: "String!"
+                description: "Identifies the contribution title."
+            after:
+                type: "String!"
+                description: "Identifies the contribution title."
+            before:
+                type: "String!"
+                description: "Identifies the contribution title."
+            title:
+                type: "String!"
+            diff:
+                type: "HTML"

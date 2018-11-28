@@ -8,7 +8,7 @@ describe('<ProposalFormEvaluationRow />', () => {
   const props = {
     // $FlowFixMe $refType
     proposal: {
-      url: 'http://capco.dev/proposal',
+      show_url: 'http://capco.dev/proposal',
       reference: '1-1',
       title: 'Title',
     },

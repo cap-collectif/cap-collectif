@@ -76,28 +76,30 @@ export class EditProfileTabs extends Component<Props> {
                       </ListGroupItem>
                     </NavItem>
                   )}
-                  {!features.login_paris && !features.login_openid && (
-                    <NavItem eventKey="account" href="#account">
-                      <ListGroupItem>
-                        <span className="icon cap-setting-gear" />
-                        <FormattedMessage id="user.profile.edit.account" />
-                      </ListGroupItem>
-                    </NavItem>
-                  )}
+                  {!features.login_paris &&
+                    !features.login_openid && (
+                      <NavItem eventKey="account" href="#account">
+                        <ListGroupItem>
+                          <span className="icon cap-setting-gear" />
+                          <FormattedMessage id="user.profile.edit.account" />
+                        </ListGroupItem>
+                      </NavItem>
+                    )}
                   <NavItem eventKey="personal-data" href="#personal-data">
                     <ListGroupItem>
                       <span className="icon cap-id-1" />
                       <FormattedMessage id="data" />
                     </ListGroupItem>
                   </NavItem>
-                  {!features.login_paris && !features.login_openid && (
-                    <NavItem eventKey="password" href="#password">
-                      <ListGroupItem>
-                        <span className="icon cap-key-1" />
-                        <FormattedMessage id="user.profile.edit.password" />
-                      </ListGroupItem>
-                    </NavItem>
-                  )}
+                  {!features.login_paris &&
+                    !features.login_openid && (
+                      <NavItem eventKey="password" href="#password">
+                        <ListGroupItem>
+                          <span className="icon cap-key-1" />
+                          <FormattedMessage id="user.profile.edit.password" />
+                        </ListGroupItem>
+                      </NavItem>
+                    )}
                   <NavItem href="#notifications" eventKey="notifications" className="tab">
                     <ListGroupItem>
                       <span className="icon cap-bell" />
@@ -162,7 +164,7 @@ export default createFragmentContainer(
       media {
         url
       }
-      url
+      show_url
     }
   `,
 );

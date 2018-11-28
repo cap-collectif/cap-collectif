@@ -11,7 +11,7 @@ describe('<Opinion />', () => {
     opinion: {
       $refType,
       $fragmentRefs,
-      author: { displayName: '', url: '', vip: false, media: { url: '' } },
+      author: { displayName: '', show_url: '', vip: false, media: { url: '' } },
       votes: { totalCount: 0 },
       votesMitige: { totalCount: 0 },
       votesNok: { totalCount: 0 },

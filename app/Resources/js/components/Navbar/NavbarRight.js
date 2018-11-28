@@ -63,6 +63,7 @@ export class NavbarRight extends React.Component<Props> {
             )}
             {user.isEvaluer && (
               <MenuItem key={3.3} eventKey={3.3} href="/evaluations">
+                <i className="cap cap-edit-write mr-10" />
                 <FormattedMessage id="evaluations.index.page_title" />
               </MenuItem>
             )}

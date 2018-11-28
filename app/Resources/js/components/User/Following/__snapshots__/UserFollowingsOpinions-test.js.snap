@@ -70,8 +70,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                       "project": Object {
                         "id": "project1",
                       },
+                      "show_url": "http://carte.perdu.com",
                       "title": "Une carte de l'internet",
-                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
@@ -80,8 +80,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                       "project": Object {
                         "id": "project1",
                       },
+                      "show_url": "http://gps.perdu.com",
                       "title": "Un GPS de l'internet",
-                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
@@ -90,8 +90,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                       "project": Object {
                         "id": "project2",
                       },
+                      "show_url": "https://randomstreetview.com/",
                       "title": "Go  nowhere",
-                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
@@ -117,8 +117,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                       "project": Object {
                         "id": "project1",
                       },
+                      "show_url": "http://carte.perdu.com",
                       "title": "Une carte de l'internet",
-                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
@@ -127,8 +127,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                       "project": Object {
                         "id": "project1",
                       },
+                      "show_url": "http://gps.perdu.com",
                       "title": "Un GPS de l'internet",
-                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
@@ -137,8 +137,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = 
                       "project": Object {
                         "id": "project2",
                       },
+                      "show_url": "https://randomstreetview.com/",
                       "title": "Go  nowhere",
-                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
@@ -240,8 +240,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
+                      "show_url": "http://carte.perdu.com",
                       "title": "Une carte de l'internet",
-                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
@@ -250,8 +250,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
+                      "show_url": "http://gps.perdu.com",
                       "title": "Un GPS de l'internet",
-                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
@@ -260,8 +260,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                       "project": Object {
                         "id": "project2",
                       },
+                      "show_url": "https://randomstreetview.com/",
                       "title": "Go  nowhere",
-                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],
@@ -287,8 +287,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
+                      "show_url": "http://carte.perdu.com",
                       "title": "Une carte de l'internet",
-                      "url": "http://carte.perdu.com",
                     },
                   },
                   Object {
@@ -297,8 +297,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                       "project": Object {
                         "id": "project1",
                       },
+                      "show_url": "http://gps.perdu.com",
                       "title": "Un GPS de l'internet",
-                      "url": "http://gps.perdu.com",
                     },
                   },
                   Object {
@@ -307,8 +307,8 @@ exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
                       "project": Object {
                         "id": "project2",
                       },
+                      "show_url": "https://randomstreetview.com/",
                       "title": "Go  nowhere",
-                      "url": "https://randomstreetview.com/",
                     },
                   },
                 ],

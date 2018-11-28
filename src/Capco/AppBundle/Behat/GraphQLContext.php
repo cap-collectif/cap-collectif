@@ -93,7 +93,10 @@ class GraphQLContext implements Context
         ]);
         Assert::assertSame(200, (int) $response->getStatusCode());
         $this->response = (string) $response->getBody();
-        Assert::assertFalse(isset(json_decode($this->response, true)['errors']), $this->response);
+        Assert::assertFalse(
+            array_key_exists('errors', json_decode($this->response, true)),
+            $this->response
+        );
     }
 
     /**

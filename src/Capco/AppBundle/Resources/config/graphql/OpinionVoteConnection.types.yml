@@ -1,0 +1,7 @@
+OpinionVoteConnection:
+    type: relay-connection
+    config:
+        nodeType: OpinionVote
+        connectionFields:
+            totalCount:
+                type: Int!

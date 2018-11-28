@@ -1,9 +1,0 @@
-UniformResourceLocatable:
-  type: interface
-  config:
-    description: 'Represents a type that can be retrieved by a URL.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\NodeTypeResolver", [value])'
-    fields:
-      url:
-        type: 'URI!'
-        description: 'The URL to this resource.'

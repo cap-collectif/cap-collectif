@@ -27,7 +27,7 @@ export class ProposalLastUpdateInfo extends React.PureComponent<Props> {
         {proposal.updatedBy && (
           <div>
             <FormattedMessage id="admin.global.by" />{' '}
-            <a href={proposal.updatedBy.url}>{proposal.updatedBy.displayName}</a>
+            <a href={proposal.updatedBy.show_url}>{proposal.updatedBy.displayName}</a>
           </div>
         )}
       </div>
@@ -40,7 +40,7 @@ export default createFragmentContainer(ProposalLastUpdateInfo, {
     fragment ProposalLastUpdateInfo_proposal on Proposal {
       updatedAt
       updatedBy {
-        url
+        show_url
         displayName
       }
     }

@@ -1,0 +1,17 @@
+ValueResponse:
+  type: object
+  config:
+    interfaces: [Response]
+    description: 'A response'
+    fields:
+      question:
+        type: 'Question!'
+      value:
+        type: 'String'
+        description: 'The value, can be a JSON'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\ResponseValueResolver", [value])'
+      formattedValue:
+        type: 'String'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedValueResponseTypeResolver", [value])'

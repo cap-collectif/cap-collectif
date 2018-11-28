@@ -20,7 +20,7 @@ const mutation = graphql`
       followerEdge {
         node {
           id
-          url
+          show_url
           displayName
           username
           media {

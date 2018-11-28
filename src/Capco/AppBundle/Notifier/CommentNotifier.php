@@ -6,8 +6,6 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\EventListener\CommentSubscriber;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;
@@ -25,23 +23,12 @@ class CommentNotifier extends BaseNotifier
 {
     protected $commentResolver;
     protected $proposalResolver;
-    protected $proposalUrlResolver;
-    protected $userUrlResolver;
 
-    public function __construct(
-        MailerService $mailer,
-        Resolver $siteParams,
-        UserResolver $userResolver,
-        CommentResolver $commentResolver,
-        ProposalResolver $proposalResolver,
-        ProposalUrlResolver $proposalUrlResolver,
-        UserUrlResolver $userUrlResolver
-    ) {
+    public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver, CommentResolver $commentResolver, ProposalResolver $proposalResolver)
+    {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->commentResolver = $commentResolver;
         $this->proposalResolver = $proposalResolver;
-        $this->proposalUrlResolver = $proposalUrlResolver;
-        $this->userUrlResolver = $userUrlResolver;
     }
 
     public function onCreate(Comment $comment)
@@ -49,60 +36,45 @@ class CommentNotifier extends BaseNotifier
         if ($comment instanceof ProposalComment) {
             $isAnonymous = null === $comment->getAuthor();
 
-            if (
-                $comment
-                    ->getProposal()
-                    ->getProposalForm()
-                    ->isNotifyingCommentOnCreate()
-            ) {
+            if ($comment->getProposal()->getProposalForm()->isNotifyingCommentOnCreate()) {
                 if ($isAnonymous) {
-                    $this->mailer->sendMessage(
-                        CommentCreateAdminAnonymousMessage::create(
-                            $comment,
-                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
-                            $this->commentResolver->getAdminUrl($comment, true)
-                        )
-                    );
+                    $this->mailer->sendMessage(CommentCreateAdminAnonymousMessage::create(
+                        $comment,
+                        $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                        $this->commentResolver->getUrlOfRelatedObject($comment, true),
+                        $this->commentResolver->getAdminUrl($comment, true)
+                    ));
                 } else {
-                    $this->mailer->sendMessage(
-                        CommentCreateAdminMessage::create(
-                            $comment,
-                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
-                            $this->commentResolver->getAdminUrl($comment, true),
-                            $this->userUrlResolver->__invoke($comment->getAuthor())
-                        )
-                    );
+                    $this->mailer->sendMessage(CommentCreateAdminMessage::create(
+                        $comment,
+                        $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                        $this->commentResolver->getUrlOfRelatedObject($comment, true),
+                        $this->commentResolver->getAdminUrl($comment, true),
+                        $this->userResolver->resolveShowUrl($comment->getAuthor())
+                    ));
                 }
             }
 
             $user = $comment->getProposal()->getAuthor();
-            if (
-                $user->getNotificationsConfiguration()->isOnProposalCommentMail() &&
-                $user !== $comment->getAuthor()
-            ) {
+            if ($user->getNotificationsConfiguration()->isOnProposalCommentMail() &&
+                $user !== $comment->getAuthor()) {
                 if ($isAnonymous) {
-                    $this->mailer->sendMessage(
-                        CommentCreateAuthorAnonymousMessage::create(
-                            $comment,
-                            $user->getEmail(),
-                            $this->proposalUrlResolver->__invoke($comment->getProposal()),
-                            $this->userResolver->resolveDisableNotificationsUrl($user),
-                            $this->userResolver->resolveShowNotificationsPreferencesUrl()
-                        )
-                    );
+                    $this->mailer->sendMessage(CommentCreateAuthorAnonymousMessage::create(
+                        $comment,
+                        $user->getEmail(),
+                        $this->proposalResolver->resolveShowUrl($comment->getProposal()),
+                        $this->userResolver->resolveDisableNotificationsUrl($user),
+                        $this->userResolver->resolveShowNotificationsPreferencesUrl()
+                    ));
                 } else {
-                    $this->mailer->sendMessage(
-                        CommentCreateAuthorMessage::create(
-                            $comment,
-                            $user->getEmail(),
-                            $this->proposalUrlResolver->__invoke($comment->getProposal()),
-                            $this->userResolver->resolveDisableNotificationsUrl($user),
-                            $this->userResolver->resolveShowNotificationsPreferencesUrl(),
-                            $this->userUrlResolver->__invoke($comment->getAuthor())
-                        )
-                    );
+                    $this->mailer->sendMessage(CommentCreateAuthorMessage::create(
+                        $comment,
+                        $user->getEmail(),
+                        $this->proposalResolver->resolveShowUrl($comment->getProposal()),
+                        $this->userResolver->resolveDisableNotificationsUrl($user),
+                        $this->userResolver->resolveShowNotificationsPreferencesUrl(),
+                        $this->userResolver->resolveShowUrl($comment->getAuthor())
+                    ));
                 }
             }
         }
@@ -131,34 +103,26 @@ class CommentNotifier extends BaseNotifier
             switch ($comment['notifyTo']) {
                 case CommentSubscriber::NOTIFY_TO_ADMIN:
                     if ($comment['anonymous']) {
-                        $this->mailer->sendMessage(
-                            CommentDeleteAdminAnonymousMessage::create(
-                                $comment,
-                                $this->siteParams->getValue(
-                                    'admin.mail.notifications.receive_address'
-                                ),
-                                $this->proposalResolver->resolveShowUrlBySlug(
-                                    $comment['projectSlug'],
-                                    $comment['stepSlug'],
-                                    $comment['proposalSlug']
-                                )
+                        $this->mailer->sendMessage(CommentDeleteAdminAnonymousMessage::create(
+                            $comment,
+                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                            $this->proposalResolver->resolveShowUrlBySlug(
+                                $comment['projectSlug'],
+                                $comment['stepSlug'],
+                                $comment['proposalSlug']
                             )
-                        );
+                        ));
                     } else {
-                        $this->mailer->sendMessage(
-                            CommentDeleteAdminMessage::create(
-                                $comment,
-                                $this->siteParams->getValue(
-                                    'admin.mail.notifications.receive_address'
-                                ),
-                                $this->proposalResolver->resolveShowUrlBySlug(
-                                    $comment['projectSlug'],
-                                    $comment['stepSlug'],
-                                    $comment['proposalSlug']
-                                ),
-                                $this->userResolver->resolveShowUrlBySlug($comment['userSlug'])
-                            )
-                        );
+                        $this->mailer->sendMessage(CommentDeleteAdminMessage::create(
+                            $comment,
+                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                            $this->proposalResolver->resolveShowUrlBySlug(
+                                $comment['projectSlug'],
+                                $comment['stepSlug'],
+                                $comment['proposalSlug']
+                            ),
+                            $this->userResolver->resolveShowUrlBySlug($comment['userSlug'])
+                        ));
                     }
                     break;
             }
@@ -170,31 +134,22 @@ class CommentNotifier extends BaseNotifier
         if ($comment instanceof ProposalComment) {
             $isAnonymous = null === $comment->getAuthor();
 
-            if (
-                $comment
-                    ->getProposal()
-                    ->getProposalForm()
-                    ->isNotifyingCommentOnUpdate()
-            ) {
+            if ($comment->getProposal()->getProposalForm()->isNotifyingCommentOnUpdate()) {
                 if ($isAnonymous) {
-                    $this->mailer->sendMessage(
-                        CommentUpdateAdminAnonymousMessage::create(
-                            $comment,
-                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
-                            $this->commentResolver->getAdminUrl($comment, true)
-                        )
-                    );
+                    $this->mailer->sendMessage(CommentUpdateAdminAnonymousMessage::create(
+                        $comment,
+                        $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                        $this->commentResolver->getUrlOfRelatedObject($comment, true),
+                        $this->commentResolver->getAdminUrl($comment, true)
+                    ));
                 } else {
-                    $this->mailer->sendMessage(
-                        CommentUpdateAdminMessage::create(
-                            $comment,
-                            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
-                            $this->commentResolver->getAdminUrl($comment, true),
-                            $this->userUrlResolver->__invoke($comment->getAuthor())
-                        )
-                    );
+                    $this->mailer->sendMessage(CommentUpdateAdminMessage::create(
+                        $comment,
+                        $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+                        $this->commentResolver->getUrlOfRelatedObject($comment, true),
+                        $this->commentResolver->getAdminUrl($comment, true),
+                        $this->userResolver->resolveShowUrl($comment->getAuthor())
+                    ));
                 }
             }
         }

@@ -36,7 +36,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
             </h4>
           ) : (
             <React.Fragment>
-              <a href={proposal.url}>
+              <a href={proposal.show_url}>
                 <h2 className="card__title">
                   <Truncate lines={3}>{proposal.title}</Truncate>
                 </h2>
@@ -45,24 +45,27 @@ export class ProposalPreviewBody extends React.Component<Props> {
             </React.Fragment>
           )}
           <TagsList>
-            {features.themes && showThemes && proposal.theme && (
-              <div className="tags-list__tag">
-                <i className="cap cap-tag-1-1 icon--blue" />
-                {proposal.theme.title}
-              </div>
-            )}
+            {features.themes &&
+              showThemes &&
+              proposal.theme && (
+                <div className="tags-list__tag">
+                  <i className="cap cap-tag-1-1 icon--blue" />
+                  {proposal.theme.title}
+                </div>
+              )}
             {proposal.category && (
               <div className="tags-list__tag">
                 <i className="cap cap-tag-1-1 icon--blue" />
                 {proposal.category.name}
               </div>
             )}
-            {features.districts && proposal.district && (
-              <div className="tags-list__tag">
-                <i className="cap cap-marker-1-1 icon--blue" />
-                {proposal.district.name}
-              </div>
-            )}
+            {features.districts &&
+              proposal.district && (
+                <div className="tags-list__tag">
+                  <i className="cap cap-marker-1-1 icon--blue" />
+                  {proposal.district.name}
+                </div>
+              )}
             {/* $FlowFixMe */}
             <ProposalDetailEstimation
               showNullEstimation={step && step.voteType === 'BUDGET'}
@@ -74,10 +77,12 @@ export class ProposalPreviewBody extends React.Component<Props> {
         </div>
         <div className="proposal__buttons">
           {/* $FlowFixMe */
-          step && proposal.currentVotableStep && step.id === proposal.currentVotableStep.id && (
-            /* $FlowFixMe */
-            <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
-          )}
+          step &&
+            proposal.currentVotableStep &&
+            step.id === proposal.currentVotableStep.id && (
+              /* $FlowFixMe */
+              <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
+            )}
           {/* $FlowFixMe */}
           <ProposalFollowButton proposal={proposal} />
         </div>
@@ -117,7 +122,7 @@ export default createFragmentContainer(container, {
       title
       trashed
       trashedStatus
-      url
+      show_url
       summaryOrBodyExcerpt
       district {
         name

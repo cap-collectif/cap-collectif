@@ -22,7 +22,7 @@ type FormValues = {
     +size: string,
     +url: string,
   },
-  +url: ?any,
+  +show_url: ?any,
   +username: string,
   +biography: ?string,
   +website: ?string,
@@ -326,7 +326,7 @@ export default createFragmentContainer(
         size
         url
       }
-      url
+      show_url
       username
       biography
       website

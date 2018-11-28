@@ -1,0 +1,11 @@
+TrashableStatus:
+  type: enum
+  config:
+    description: 'Different trashable status.'
+    values:
+      INVISIBLE:
+        value: '@=constant("Capco\\AppBundle\\Entity\\Interfaces\\Trashable::STATUS_INVISIBLE")'
+        description: 'Content is not visible.'
+      VISIBLE:
+        value: '@=constant("Capco\\AppBundle\\Entity\\Interfaces\\Trashable::STATUS_VISIBLE")'
+        description: 'Content is visible.'

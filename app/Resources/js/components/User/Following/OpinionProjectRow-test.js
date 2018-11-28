@@ -23,7 +23,7 @@ describe('<OpinionProjectRow />', () => {
       edges: [
         {
           node: {
-            url: 'https://www.2rconsulting.fr/',
+            show_url: 'https://www.2rconsulting.fr/',
             id: 'opinion1',
             title: 'Recrutez Hervé !',
             project: {
@@ -33,7 +33,7 @@ describe('<OpinionProjectRow />', () => {
         },
         {
           node: {
-            url: 'https://www.2rconsulting.fr/',
+            show_url: 'https://www.2rconsulting.fr/',
             id: 'opinion2',
             title: 'Virer Julie',
             project: {
@@ -43,7 +43,7 @@ describe('<OpinionProjectRow />', () => {
         },
         {
           node: {
-            url: 'https://www.2rconsulting.fr/',
+            show_url: 'https://www.2rconsulting.fr/',
             id: 'opinion3',
             title:
               'Faire des sessions de recrutement basé sur la destruction des autres parce que cest comme ça le monde du travail.',

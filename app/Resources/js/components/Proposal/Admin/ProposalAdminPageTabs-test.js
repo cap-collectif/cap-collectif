@@ -12,7 +12,7 @@ describe('<ProposalAdminPageTabs />', () => {
       $refType,
       $fragmentRefs,
       reference: '1-1',
-      url: '',
+      show_url: '',
       allFollowers: {
         totalCount: 169,
       },

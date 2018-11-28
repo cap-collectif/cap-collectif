@@ -52,27 +52,28 @@ export class ProposalPageContent extends React.Component<Props> {
     return (
       <div className={classNames(classes)}>
         <div className="block">
-          {viewer && viewer.id === proposal.author.id && (
-            <div className="actions">
-              <EditButton
-                id="proposal-edit-button"
-                author={{ uniqueId: proposal.author.slug }}
-                onClick={() => {
-                  dispatch(openEditProposalModal());
-                }}
-                editable={proposalForm.contribuable}
-              />
-              <DeleteButton
-                id="proposal-delete-button"
-                author={{ uniqueId: proposal.author.slug }}
-                onClick={() => {
-                  dispatch(openDeleteProposalModal());
-                }}
-                style={{ marginLeft: '15px' }}
-                deletable={proposalForm.contribuable}
-              />
-            </div>
-          )}
+          {viewer &&
+            viewer.id === proposal.author.id && (
+              <div className="actions">
+                <EditButton
+                  id="proposal-edit-button"
+                  author={{ uniqueId: proposal.author.slug }}
+                  onClick={() => {
+                    dispatch(openEditProposalModal());
+                  }}
+                  editable={proposalForm.contribuable}
+                />
+                <DeleteButton
+                  id="proposal-delete-button"
+                  author={{ uniqueId: proposal.author.slug }}
+                  onClick={() => {
+                    dispatch(openDeleteProposalModal());
+                  }}
+                  style={{ marginLeft: '15px' }}
+                  deletable={proposalForm.contribuable}
+                />
+              </div>
+            )}
           {proposal.media && (
             <img
               id="proposal-media"
@@ -91,42 +92,43 @@ export class ProposalPageContent extends React.Component<Props> {
             </div>
           )}
         </div>
-        {address && config.canUseDOM && (
-          <div className="block proposal-map__block">
-            <h3 className="h3">
-              <FormattedMessage id="proposal.map.form.field" />
-            </h3>
-            <p>{address[0].formatted_address}</p>
-            <Map
-              center={{
-                lat: address[0].geometry.location.lat,
-                lng: address[0].geometry.location.lng,
-              }}
-              zoom={16}
-              maxZoom={18}
-              style={{
-                width: '100%',
-                height: 175,
-              }}>
-              <TileLayer
-                attribution='&copy; <a href"https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href"https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-                url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${
-                  config.mapboxApiKey
-                }`}
-              />
-              <Marker
-                position={[address[0].geometry.location.lat, address[0].geometry.location.lng]}
-                icon={L.icon({
-                  // eslint-disable-line
-                  iconUrl: '/svg/marker.svg',
-                  iconSize: [40, 40],
-                  iconAnchor: [20, 40],
-                  popupAnchor: [0, -40],
-                })}
-              />
-            </Map>
-          </div>
-        )}
+        {address &&
+          config.canUseDOM && (
+            <div className="block proposal-map__block">
+              <h3 className="h3">
+                <FormattedMessage id="proposal.map.form.field" />
+              </h3>
+              <p>{address[0].formatted_address}</p>
+              <Map
+                center={{
+                  lat: address[0].geometry.location.lat,
+                  lng: address[0].geometry.location.lng,
+                }}
+                zoom={16}
+                maxZoom={18}
+                style={{
+                  width: '100%',
+                  height: 175,
+                }}>
+                <TileLayer
+                  attribution="&copy; <a href&quot;https://www.mapbox.com/about/maps/&quot;>Mapbox</a> &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> <a href&quot;https://www.mapbox.com/map-feedback/#/-74.5/40/10&quot;>Improve this map</a>"
+                  url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${
+                    config.mapboxApiKey
+                  }`}
+                />
+                <Marker
+                  position={[address[0].geometry.location.lat, address[0].geometry.location.lng]}
+                  icon={L.icon({
+                    // eslint-disable-line
+                    iconUrl: '/svg/marker.svg',
+                    iconSize: [40, 40],
+                    iconAnchor: [20, 40],
+                    popupAnchor: [0, -40],
+                  })}
+                />
+              </Map>
+            </div>
+          )}
         {proposal.responses.map((response, index) => (
           /* $FlowFixMe */
           <ProposalResponse key={index} response={response} />
@@ -145,7 +147,7 @@ export class ProposalPageContent extends React.Component<Props> {
               )}
               <ShareButtonDropdown
                 id="proposal-share-button"
-                url={proposal.url}
+                url={proposal.show_url}
                 title={proposal.title}
               />
               <ProposalReportButton proposal={proposal} />
@@ -206,7 +208,7 @@ export default createFragmentContainer(container, {
       ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       publicationStatus
       title
-      url
+      show_url
       currentVotableStep {
         id
         open

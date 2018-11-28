@@ -1,0 +1,111 @@
+ProposalForm:
+  type: object
+  inherits:
+    - 'Node'
+    - 'WithProposals'
+  config:
+    description: 'A budget form'
+    interfaces: [Node]
+    fields:
+      reference:
+        type: 'String!'
+      description:
+        type: 'String'
+      summaryHelpText:
+        type: 'String'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormSummaryHelpTextResolver", [value])'
+      illustrationHelpText:
+        type: 'String'
+      title:
+        type: 'String!'
+      proposals:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, getUser(), serv("request_stack")])'
+      viewerProposalsUnpublished:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerProposalsUnpublishedResolver", [value, args, getUser()])'
+      categories:
+        type: '[ProposalCategory!]!'
+        args:
+          order:
+            type: 'CategoryOrderField'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", [value, args["order"]])'
+        description: 'Available categories for proposals of this form.'
+      usingThemes:
+        type: 'Boolean!'
+      contribuable:
+        type: 'Boolean!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerCanContributeResolver", [value, getUser()])'
+        description: 'Viewer can contribute to the form'
+      themeMandatory:
+        type: 'Boolean!'
+      themeHelpText:
+        type: 'String'
+      usingDistrict:
+        type: 'Boolean!'
+      commentable:
+        type: 'Boolean!'
+      costable:
+        type: 'Boolean!'
+      proposalInAZoneRequired:
+        type: 'Boolean!'
+      districts:
+        type: '[District!]!'
+        args:
+          order:
+            type: 'DistrictOrderField'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormDistrictsResolver", [value, args["order"]])'
+      districtMandatory:
+        type: 'Boolean!'
+      districtHelpText:
+        type: 'String'
+      usingCategories:
+        type: 'Boolean!'
+      categoryMandatory:
+        type: 'Boolean!'
+      categoryHelpText:
+        type: 'String'
+      usingAddress:
+        type: 'Boolean!'
+      titleHelpText:
+        type: 'String'
+      descriptionHelpText:
+        type: 'String'
+      addressHelpText:
+        type: 'String'
+      questions:
+        type: '[Question!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value])'
+      latMap:
+        type: 'Float'
+      lngMap:
+        type: 'Float'
+      zoomMap:
+        type: 'Int'
+      url:
+        type: 'URI!'
+        description: 'The HTTP url for this proposal form.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormUrlResolver", [value])'
+      notificationsConfiguration:
+        type: 'NotificationsConfiguration!'
+      evaluationForm:
+        type: 'EvaluationForm'
+        description: 'Get the evaluation form of the proposal form'
+      step:
+        type: 'CollectStep'
+        description: 'Identifies the step that use the proposal form.'
+      allowAknowledge:
+        type: 'Boolean!'
+      isProposalForm:
+        type: 'Boolean!'
+        description: 'Proposal form is type of Proposal or Question'
+      usingDescription:
+        type: 'Boolean!'
+        description: 'Proposal form using description field'
+      usingIllustration:
+        type: 'Boolean!'
+        description: 'Proposal form using illustration field'
+      usingSummary:
+        type: 'Boolean!'
+        description: 'Proposal form using summary field'
+      descriptionMandatory:
+        type: 'Boolean!'
+        description: 'Proposal form is description field is mandatory or not'

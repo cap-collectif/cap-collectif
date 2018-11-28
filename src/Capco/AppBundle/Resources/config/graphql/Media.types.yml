@@ -1,0 +1,32 @@
+Media:
+  type: object
+  config:
+    description: 'A media'
+    fields:
+      id:
+        type: 'ID!'
+        description: 'The id of the media.'
+      url:
+        type: 'String!'
+        description: 'The url of the media.'
+        resolve: "@=resolver('media_url', [value, args])"
+        args:
+          format:
+            type: 'String'
+            description: 'The format of the media'
+      name:
+        type: 'String!'
+      size:
+        type: 'String!'
+      enabled:
+        type: 'Boolean!'
+      authorName:
+        type: 'String'
+      description:
+        type: 'String'
+      copyright:
+        type: 'String'
+      contentType:
+        type: 'String!'
+      providerReference:
+        type: 'String!'

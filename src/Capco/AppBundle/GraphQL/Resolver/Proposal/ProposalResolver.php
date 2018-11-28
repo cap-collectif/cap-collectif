@@ -131,6 +131,34 @@ class ProposalResolver implements ResolverInterface
         throw new UserError('Could not resolve type of Response.');
     }
 
+    public function resolveShowUrl(Proposal $proposal): string
+    {
+        $step = $proposal->getStep();
+        $project = $step->getProject();
+        if (!$project) {
+            return '';
+        }
+
+        return $this->router->generate(
+            'app_project_show_proposal',
+            [
+                'proposalSlug' => $proposal->getSlug(),
+                'projectSlug' => $project->getSlug(),
+                'stepSlug' => $step->getSlug(),
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+    }
+
+    public function resolveAdminUrl(Proposal $proposal): string
+    {
+        return $this->router->generate(
+            'admin_capco_app_proposal_edit',
+            ['id' => $proposal->getId()],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+    }
+
     public function resolveReference(Proposal $proposal): string
     {
         return $proposal->getFullReference();
@@ -176,7 +204,9 @@ class ProposalResolver implements ResolverInterface
     {
         $evalForm = $proposal->getProposalForm()->getEvaluationForm();
 
-        return null !== $evalForm &&
-            (!$evalForm->isFullyPrivate() || $this->resolveViewerIsEvaluer($proposal, $user));
+        return (
+            null !== $evalForm &&
+            (!$evalForm->isFullyPrivate() || $this->resolveViewerIsEvaluer($proposal, $user))
+        );
     }
 }

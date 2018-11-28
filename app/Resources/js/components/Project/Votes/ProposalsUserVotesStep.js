@@ -39,7 +39,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
     return (
       <div className="block">
         <h2>{step.title}</h2>
-        <a className="btn btn-default" href={step.url}>
+        <a className="btn btn-default" href={step.show_url}>
           <i className="cap cap-arrow-1-1" />
           <span>
             {' '}
@@ -111,7 +111,7 @@ export default createFragmentContainer(container, {
       voteType
       votesHelpText
       open
-      url
+      show_url
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         totalCount
         ...ProposalsUserVotesTable_votes

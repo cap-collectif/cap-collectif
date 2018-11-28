@@ -1,0 +1,76 @@
+Section:
+    type: object
+    config:
+        description: "A section"
+        interfaces: [Node]
+        fields:
+            id:
+                type: "ID!"
+                description: "The id of the section."
+            slug:
+                type: "String!"
+                description: "The slug of the section."
+            title:
+                type: "String!"
+                description: "The title of the section."
+            color:
+                type: "String!"
+                description: "The color of the section."
+            subtitle:
+                type: "String"
+                description: "The subtitle of the section."
+            description:
+              type: "HTML"
+              description: "The description of the section."
+            contributionsCount:
+                type: "Int!"
+                resolve: "@=resolver('section_contributionsCount', [value])"
+            contributionConnection:
+                type: "ContributionConnection!"
+                args:
+                    orderBy:
+                      type: "ContributionOrder"
+                      description: "Ordering options for contributions returned from the connection."
+                    after:
+                      type: "String"
+                      description: "Returns the elements in the list that come after the specified global ID."
+                    first:
+                      type: "Int"
+                      defaultValue: 10
+                      description: "Returns the first n elements from the list."
+                    before:
+                      type: "String"
+                      description: "Returns the elements in the list that come before the specified global ID."
+                    last:
+                      type: "Int"
+                      description: "Returns the last n elements from the list."
+                resolve: '@=resolver("sectionContributionsRelay", [value, args])'
+            appendixTypes:
+                type: "[SectionAppendixType]"
+                description: "Array of appendix types (possibly empty)."
+            sections:
+                type: "[Section]"
+                description: "Array of subsections (possibly empty)."
+                resolve: "@=resolver('section_sections', [value, args])"
+            voteWidgetType:
+                type: "Int!"
+            commentSystem:
+                type: "Int!"
+            contribuable:
+                type: "Boolean!"
+            versionable:
+                type: "Boolean!"
+            sourceable:
+                type: "Boolean!"
+            linkable:
+                type: "Boolean!"
+            votesHelpText:
+                type: "String"
+            votesThreshold:
+                type: "Int"
+            votesThresholdHelpText:
+                type: "String"
+            url:
+                type: "URI!"
+                description: "The url of the section."
+                resolve: "@=resolver('section_url', [value])"

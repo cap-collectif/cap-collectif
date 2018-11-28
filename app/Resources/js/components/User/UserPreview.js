@@ -53,7 +53,7 @@ export default createFragmentContainer(UserPreview, {
   user: graphql`
     fragment UserPreview_user on User {
       ...UserNotConfirmedLabel_user
-      url
+      show_url
       displayName
       username
       contributionsCount

@@ -17,7 +17,7 @@ describe('<ArgumentItem />', () => {
         id: 'user1',
         slug: 'lbrunet',
         displayName: 'lbrunet',
-        url: 'https://capco.dev/profile/lbrunet',
+        show_url: 'https://capco.dev/profile/lbrunet',
         vip: false,
         media: {
           url:

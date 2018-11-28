@@ -1,0 +1,25 @@
+Step:
+  type: interface
+  inherits: [Node]
+  config:
+    description: 'A step inside a project.'
+    resolveType: "@=resolver('step_type', [value])"
+    # interfaces: [Node]
+    fields:
+      # TODO remove
+      kind:
+        description: 'The kind of the step'
+        type: 'String!'
+      title:
+        description: 'The title of the step.'
+        type: 'String!'
+      show_url:
+        type: 'String!'
+        description: 'The url of the step'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
+        deprecationReason:
+          '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2019-01-01", reason: "This field does not respect naming consistency.", supersededBy: "Use `url` instead."})'
+      url:
+        type: 'String!'
+        description: 'The url of the step'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'

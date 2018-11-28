@@ -16,7 +16,7 @@ describe('<AnswerBody />', () => {
         media: {
           url: 'https://capco.dev/media',
         },
-        url: 'https://capco.dev/url',
+        show_url: 'https://capco.dev/url',
       },
     };
     const wrapper = shallow(<AnswerBody answer={answerWithAuthor} />);

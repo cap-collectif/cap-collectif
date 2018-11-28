@@ -72,8 +72,9 @@ module.exports = {
         schemaJson: require('./schema.internal.json'),
       },
     ],
+    // TODO set this to `error`:  https://github.com/cap-collectif/platform/issues/6095
     'graphql/no-deprecated-fields': [
-      'error',
+      'warn',
       {
         env: 'relay',
         tagName: 'graphql',

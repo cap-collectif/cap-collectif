@@ -17,7 +17,7 @@ describe('<ProposalPageHeader />', () => {
     createdAt: '2015-01-01 00:00:00',
     updatedAt: '2015-01-05 00:00:00',
     publicationStatus: 'PUBLISHED',
-    url: 'true',
+    show_url: 'true',
     project: { opinionCanBeFollowed: true },
     form: {
       isProposalForm: true,
@@ -35,7 +35,7 @@ describe('<ProposalPageHeader />', () => {
     publishedAt: '2015-01-01 00:00:00',
     updatedAt: '2015-01-05 00:00:00',
     publicationStatus: 'PUBLISHED',
-    url: 'true',
+    show_url: 'true',
     project: { opinionCanBeFollowed: true },
     form: {
       isProposalForm: false,

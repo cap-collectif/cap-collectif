@@ -35,8 +35,7 @@ abstract class Message
         string $senderEmail = null,
         string $senderName = null,
         string $replyTo = null
-    )
-    {
+    ) {
         $this->subject = $subject;
         $this->subjectVars = $subjectVars;
         $this->template = $template;
@@ -82,17 +81,12 @@ abstract class Message
         return $this->template;
     }
 
-    public function getReplyTo()
+    public function getReplyTo()//: ?string
     {
-        //: ?string
         return $this->replyTo;
     }
 
-    final public function addRecipient(
-        string $recipientEmail,
-        string $recipientName = null,
-        array $vars = [] //: void
-    )
+    final public function addRecipient(string $recipientEmail, string $recipientName = null, array $vars = [])//: void
     {
         $key = mb_strtolower($recipientEmail);
 
@@ -104,17 +98,13 @@ abstract class Message
         return array_values($this->recipients);
     }
 
-    final public function getRecipient(
-        $key //:?MessageRecipient
-    )
+    final public function getRecipient($key) //:?MessageRecipient
     {
         if (!\is_int($key) && !\is_string($key)) {
-            throw new \InvalidArgumentException(
-                'Recipient key must be an integer index or valid email address string.'
-            );
+            throw new \InvalidArgumentException('Recipient key must be an integer index or valid email address string.');
         }
 
-        if (\is_string($key) && isset($this->recipients[($key = mb_strtolower($key))])) {
+        if (\is_string($key) && array_key_exists($key = mb_strtolower($key), $this->recipients)) {
             return $this->recipients[$key];
         }
 

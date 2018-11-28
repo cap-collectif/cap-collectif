@@ -61,6 +61,8 @@ services:
           alias: 'proposal_viewer_is_evaluer',
           method: 'resolveViewerIsEvaluer',
         }
+      - { name: overblog_graphql.resolver, alias: 'proposal_show_url', method: 'resolveShowUrl' }
+      - { name: overblog_graphql.resolver, alias: 'proposal_admin_url', method: 'resolveAdminUrl' }
       - { name: overblog_graphql.resolver, alias: 'post_abstract', method: 'resolvePostAbstract' }
       - { name: overblog_graphql.resolver, alias: 'proposal_news', method: 'resolveNews' }
       - { name: overblog_graphql.resolver, alias: 'project_steps', method: 'resolveProjectSteps' }
@@ -166,6 +168,7 @@ services:
           method: 'resolveReportingAuthor',
         }
       - { name: overblog_graphql.resolver, alias: 'reporting_type', method: 'resolveReportingType' }
+      - { name: overblog_graphql.resolver, alias: 'version_url', method: 'resolveVersionUrl' }
       - {
           name: overblog_graphql.resolver,
           alias: 'contribution_type',
@@ -176,6 +179,7 @@ services:
     class: Capco\AppBundle\GraphQL\Resolver\UserResolver
     tags:
       - { name: overblog_graphql.resolver, alias: 'user_email', method: 'resolveEmail' }
+      - { name: overblog_graphql.resolver, alias: 'user_show_url', method: 'resolveShowUrl' }
       - {
           name: overblog_graphql.resolver,
           alias: 'user_phoneConfirmationSentAt',

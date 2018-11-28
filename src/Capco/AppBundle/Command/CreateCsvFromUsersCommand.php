@@ -57,7 +57,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         'zipCode',
         'city',
         'phone',
-        'url',
+        'show_url',
         'googleId',
         'facebookId',
         'samlId',
@@ -103,7 +103,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         'zipCode' => 'zipCode',
         'city' => 'city',
         'phone' => 'phone',
-        'url' => 'url',
+        'show_url' => 'show_url',
         'googleId' => 'googleId',
         'facebookId' => 'facebookId',
         'samlId' => 'samlId',
@@ -271,7 +271,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         zipCode
         city
         phone
-        url
+        show_url
         googleId
         facebookId
         samlId

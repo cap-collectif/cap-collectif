@@ -16,7 +16,7 @@ export class ProposalFormEvaluationRow extends React.Component<Props> {
       <tr>
         <td>{proposal.reference}</td>
         <td>
-          <a href={proposal.url}>{proposal.title}</a>
+          <a href={proposal.show_url}>{proposal.title}</a>
         </td>
         <td>
           {/* $FlowFixMe $fragmentRefs is missing */}
@@ -28,10 +28,10 @@ export class ProposalFormEvaluationRow extends React.Component<Props> {
         </td>
         <td>
           <ButtonToolbar>
-            <Button href={proposal.url}>
+            <Button href={proposal.show_url}>
               <FormattedMessage id="global.see" />
             </Button>
-            <Button bsStyle="primary" href={`${proposal.url}#evaluation`}>
+            <Button bsStyle="primary" href={`${proposal.show_url}#evaluation`}>
               <FormattedMessage id="global.eval" />
             </Button>
           </ButtonToolbar>
@@ -44,7 +44,7 @@ export class ProposalFormEvaluationRow extends React.Component<Props> {
 export default createFragmentContainer(ProposalFormEvaluationRow, {
   proposal: graphql`
     fragment ProposalFormEvaluationRow_proposal on Proposal {
-      url
+      show_url
       reference
       title
       ...ProposalCollectStatus_proposal

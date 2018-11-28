@@ -15,7 +15,7 @@ describe('<ProposalUserVoteItem />', () => {
       id: '1',
       $fragmentRefs,
       title: 'proposal',
-      url: 'http://capco.test/proposal',
+      show_url: 'http://capco.test/proposal',
     },
   };
   const step = {

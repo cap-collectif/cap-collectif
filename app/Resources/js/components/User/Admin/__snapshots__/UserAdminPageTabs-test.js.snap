@@ -30,7 +30,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
         user={
           Object {
-            "url": "https://fr.wikipedia.org/wiki/Dahu",
+            "show_url": "https://fr.wikipedia.org/wiki/Dahu",
             "username": "dahu",
           }
         }
@@ -43,7 +43,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
         user={
           Object {
-            "url": "https://fr.wikipedia.org/wiki/Dahu",
+            "show_url": "https://fr.wikipedia.org/wiki/Dahu",
             "username": "dahu",
           }
         }
@@ -56,7 +56,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       <ForwardRef(Relay(Connect(InjectIntl(ReduxForm))))
         user={
           Object {
-            "url": "https://fr.wikipedia.org/wiki/Dahu",
+            "show_url": "https://fr.wikipedia.org/wiki/Dahu",
             "username": "dahu",
           }
         }
@@ -69,7 +69,7 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
       <ForwardRef(Relay(InjectIntl(ReduxForm)))
         user={
           Object {
-            "url": "https://fr.wikipedia.org/wiki/Dahu",
+            "show_url": "https://fr.wikipedia.org/wiki/Dahu",
             "username": "dahu",
           }
         }

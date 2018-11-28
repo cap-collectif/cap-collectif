@@ -25,7 +25,7 @@ describe('<ProposalPageContent />', () => {
     },
     responses: [],
     publicationStatus: 'PUBLISHED',
-    url: true,
+    show_url: true,
     summary: 'Summary',
     currentVotableStep: null,
   };
