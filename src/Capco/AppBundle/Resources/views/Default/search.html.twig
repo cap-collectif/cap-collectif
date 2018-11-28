@@ -80,6 +80,8 @@
 
                                 {% if result.result.hit['_type'] == 'user' %}
                                     {% set title = result.result.hit['_source']['displayName'] is defined ? result.result.hit['_source']['displayName'] : result.transformed.displayName %}
+                                {% elseif result.result.hit['_type'] == 'comment' %}
+                                    {% set title = result.result.hit['_source']['body'] is defined ? result.result.hit['_source']['body']|truncate(30) : result.result.hit['_type'] %}
                                 {% else %}
                                     {% set title = result.result.hit['_source']['title'] is defined ? result.result.hit['_source']['title'] : ( result.transformed.title is defined ? result.transformed.title : default_title) %}
                                 {% endif %}
