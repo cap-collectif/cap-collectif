@@ -157,6 +157,12 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               ) : (
                 <FormattedMessage id="notification-subject-new-vote" />
               )}
+              {!vote.published && (
+                <div>
+                  {/* $FlowFixMe */}
+                  <UnpublishedLabel publishable={vote} />
+                </div>
+              )}
             </div>
           </div>
         </Col>
@@ -186,12 +192,6 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               {/* $FlowFixMe */}
               <ProposalDetailEstimation proposal={proposal} showNullEstimation />
             </div>
-          </Col>
-        )}
-        {!vote.published && (
-          <Col md={2} sm={12} xs={12}>
-            {/* $FlowFixMe */}
-            <UnpublishedLabel publishable={vote} />
           </Col>
         )}
         {onDelete && (

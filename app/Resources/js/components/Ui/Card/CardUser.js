@@ -12,6 +12,10 @@ export const CardUser = styled.div`
     color: #707070;
   }
 
+  .ellipsis {
+    color: white;
+  }
+
   .card__user__avatar {
     float: left;
     margin-right: 10px;
