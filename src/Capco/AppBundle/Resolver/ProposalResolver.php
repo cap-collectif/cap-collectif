@@ -8,6 +8,7 @@ use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -22,31 +23,29 @@ class ProposalResolver
         'lastname',
         'followedAt',
         'userType_name',
-        'show_url',
+        'url',
     ];
     const FOLLOWER_FILE_EXPORT_NAME = 'followers_%proposal%_%date%';
 
     protected $em;
     protected $rootDir;
-    protected $userResolver;
+    protected $userUrlResolver;
     protected $logger;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         string $rootDir,
-        UserResolver $userResolver,
+        UserUrlResolver $userUrlResolver,
         LoggerInterface $logger
     ) {
         $this->em = $entityManager;
         $this->rootDir = $rootDir;
-        $this->userResolver = $userResolver;
+        $this->userUrlResolver = $userUrlResolver;
         $this->logger = $logger;
     }
 
-    public function exportProposalFollowers(
-        Proposal $proposal,
-        string $fileType = Type::CSV
-    ): array {
+    public function exportProposalFollowers(Proposal $proposal, string $fileType = Type::CSV): array
+    {
         $proposalFollowers = $proposal->getFollowers();
         $followers = [];
         /** @var Follower $follower */
@@ -62,7 +61,7 @@ class ProposalResolver
                 null !== $userFollower->getUserType()
                     ? $userFollower->getUserType()->getName()
                     : 'NONE';
-            $followers[$key]['show_url'] = $this->userResolver->resolveShowUrl($userFollower);
+            $followers[$key]['url'] = $this->userUrlResolver->__invoke($userFollower);
         }
         $path = $this->rootDir . '/../web/export/';
         $proposalSlug = $proposal->getSlug();

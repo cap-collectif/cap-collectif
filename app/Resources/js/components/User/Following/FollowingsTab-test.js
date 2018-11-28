@@ -12,7 +12,7 @@ describe('<FollowingsTab />', () => {
       edges: [
         {
           node: {
-            show_url: 'http://carte.perdu.com',
+            url: 'http://carte.perdu.com',
             id: 'opinion1',
             title: "Une carte de l'internet",
             project: {
@@ -22,7 +22,7 @@ describe('<FollowingsTab />', () => {
         },
         {
           node: {
-            show_url: 'http://gps.perdu.com',
+            url: 'http://gps.perdu.com',
             id: 'opinion2',
             title: "Un GPS de l'internet",
             project: {
@@ -32,7 +32,7 @@ describe('<FollowingsTab />', () => {
         },
         {
           node: {
-            show_url: 'https://randomstreetview.com/',
+            url: 'https://randomstreetview.com/',
             id: 'opinion3',
             title: 'Go  nowhere',
             project: {
@@ -46,7 +46,7 @@ describe('<FollowingsTab />', () => {
       edges: [
         {
           node: {
-            show_url: 'http://carte.perdu.com',
+            url: 'http://carte.perdu.com',
             id: 'proposal1',
             title: "Une carte de l'internet",
             project: {
@@ -56,7 +56,7 @@ describe('<FollowingsTab />', () => {
         },
         {
           node: {
-            show_url: 'http://gps.perdu.com',
+            url: 'http://gps.perdu.com',
             id: 'proposal2',
             title: "Un GPS de l'internet",
             project: {
@@ -66,7 +66,7 @@ describe('<FollowingsTab />', () => {
         },
         {
           node: {
-            show_url: 'https://randomstreetview.com/',
+            url: 'https://randomstreetview.com/',
             id: 'proposal3',
             title: 'Go  nowhere',
             project: {

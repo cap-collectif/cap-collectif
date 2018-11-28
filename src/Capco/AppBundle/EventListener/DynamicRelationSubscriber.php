@@ -24,9 +24,7 @@ class DynamicRelationSubscriber implements EventSubscriber
      */
     public function getSubscribedEvents(): array
     {
-        return [
-            'loadClassMetadata',
-        ];
+        return ['loadClassMetadata'];
     }
 
     /**
@@ -40,7 +38,14 @@ class DynamicRelationSubscriber implements EventSubscriber
         foreach ($this->traits as $trait => $params) {
             switch ($trait) {
                 case 'selflinkable':
-                    if (\count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
+                    if (
+                        \count(
+                            array_intersect(
+                                class_implements($metadata->getName()),
+                                $params['interfaces']
+                            )
+                        ) > 0
+                    ) {
                         $metadata->mapManyToMany([
                             'targetEntity' => $metadata->getName(),
                             'fieldName' => 'childConnections',
@@ -57,14 +62,23 @@ class DynamicRelationSubscriber implements EventSubscriber
                             'mappedBy' => 'childConnections',
                         ]);
                     }
-                break;
+                    break;
                 case 'votable':
-                    if (\count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
-                        if (array_key_exists('votes', $metadata->getReflectionProperties())) {
+                    if (
+                        \count(
+                            array_intersect(
+                                class_implements($metadata->getName()),
+                                $params['interfaces']
+                            )
+                        ) > 0
+                    ) {
+                        if (isset($metadata->getReflectionProperties()['votes'])) {
                             break;
                         }
 
-                        $fieldName = lcfirst(substr($metadata->getName(), strrpos($metadata->getName(), '\\') + 1));
+                        $fieldName = lcfirst(
+                            substr($metadata->getName(), strrpos($metadata->getName(), '\\') + 1)
+                        );
 
                         $metadata->mapOneToMany([
                             'targetEntity' => $metadata->getName() . 'Vote',
@@ -74,7 +88,7 @@ class DynamicRelationSubscriber implements EventSubscriber
                             'mappedBy' => $fieldName,
                         ]);
                     }
-                break;
+                    break;
             }
         }
     }

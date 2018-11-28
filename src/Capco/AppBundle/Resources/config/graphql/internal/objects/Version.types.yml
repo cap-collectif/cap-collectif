@@ -1,0 +1,82 @@
+Version:
+  type: object
+  inherits:
+    [
+      Contribution,
+      Sourceable,
+      Reportable,
+      Argumentable,
+      Trashable,
+      Publishable,
+      ContributionWithAuthor,
+      EditableContribution,
+      UniformResourceLocatable,
+    ]
+  config:
+    description: 'A version of contribution'
+    interfaces:
+      [
+        Node,
+        Contribution,
+        Sourceable,
+        Reportable,
+        Publishable,
+        Argumentable,
+        Trashable,
+        ContributionWithAuthor,
+        EditableContribution,
+        UniformResourceLocatable,
+      ]
+    fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      url:
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", [value])'
+      viewerHasReport:
+        resolve: '@=value.userHasReport(getUser())'
+      comment:
+        type: 'String'
+        description: 'Explenation.'
+      votes:
+        type: 'YesNoPairedVoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", [value, args])'
+        args:
+          orderBy:
+            type: 'ProposalVotesOrder'
+            defaultValue: { field: PUBLISHED_AT, direction: DESC }
+          value:
+            type: 'YesNoPairedVoteValue'
+            description: 'Filters vote by value'
+      kind:
+        resolve: 'version'
+      title:
+        type: 'String!'
+        description: 'The title of the contribution.'
+      body:
+        type: 'HTML!'
+        description: 'The content of the contribution.'
+      bodyText:
+        type: 'HTML!'
+        description: 'The content of the contribution.'
+      section:
+        type: 'Section!'
+        description: 'The section of the parent opinion.'
+        resolve: "@=resolver('proposition_section', [value])"
+      answer:
+        type: 'Answer'
+        resolve: '@=value.getAnswer()'
+      contribuable:
+        resolve: '@=value.canContribute()'
+      parent:
+        type: 'Opinion!'
+      viewerVote:
+        type: 'OpinionVote'
+        description: 'The viewer vote.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVoteResolver", [value, getUser()])'
+      diff:
+        type: 'HTML'
+      project:
+        type: 'Project'
+        description: 'The related project.'

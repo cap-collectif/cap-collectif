@@ -77,7 +77,7 @@ const searchProposalsQuery = graphql`
             node {
               id
               title
-              show_url
+              url
             }
           }
         }
@@ -200,7 +200,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         addProposalInRandomResultsByStep(createdProposal, proposalForm.step.id);
       }
       window.removeEventListener('beforeunload', onUnload);
-      window.location.href = createdProposal.show_url;
+      window.location.href = createdProposal.url;
       dispatch(closeCreateModal());
     })
     .catch(() => {
@@ -232,7 +232,7 @@ type State = {
   titleSuggestions: Array<{|
     +id: string,
     +title: string,
-    +show_url: any,
+    +url: any,
   |}>,
   isLoadingTitleSuggestions: boolean,
   districtIdsFilteredByAddress: Array<string>,
@@ -388,7 +388,7 @@ export class ProposalForm extends React.Component<Props, State> {
             <ListGroup>
               {titleSuggestions.slice(0, 5).map(suggestion => (
                 <ListGroupItem>
-                  <a href={suggestion.show_url} className="external-link">
+                  <a href={suggestion.url} className="external-link">
                     {suggestion.title}
                   </a>
                 </ListGroupItem>

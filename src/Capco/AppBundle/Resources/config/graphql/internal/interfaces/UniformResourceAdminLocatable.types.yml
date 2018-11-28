@@ -1,0 +1,9 @@
+UniformResourceAdminLocatable:
+  type: interface
+  config:
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\NodeTypeResolver", [value])'
+    description: 'Represents a type that can be retrieved by a URL on the admin.'
+    fields:
+      adminUrl:
+        type: 'URI!'
+        description: 'The admin URL to this resource.'

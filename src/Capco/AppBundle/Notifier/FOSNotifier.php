@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Notifier;
 
+use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserRegistrationConfirmationMessage;
@@ -12,12 +13,16 @@ use FOS\UserBundle\Model\UserInterface;
 
 class FOSNotifier extends BaseNotifier implements MailerInterface
 {
+    private $userUrlResolver;
+
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
-        UserResolver $userResolver
+        UserResolver $userResolver,
+        UserUrlResolver $userUrlResolver
     ) {
         parent::__construct($mailer, $siteParams, $userResolver);
+        $this->userUrlResolver = $userUrlResolver;
     }
 
     /**
@@ -34,7 +39,7 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
                 $this->userResolver->resolveRegistrationConfirmationUrl($user),
                 $this->siteParams->getValue('global.site.fullname'),
                 'Cap Collectif',
-                $this->userResolver->resolveShowUrl($user)
+                $this->userUrlResolver->__invoke($user)
             )
         );
     }

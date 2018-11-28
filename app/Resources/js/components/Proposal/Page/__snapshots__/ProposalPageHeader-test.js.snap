@@ -116,10 +116,10 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
               },
               "publicationStatus": "PUBLISHED",
               "publishedAt": "2015-01-01 00:00:00",
-              "show_url": "true",
               "theme": null,
               "title": "titre",
               "updatedAt": "2015-01-05 00:00:00",
+              "url": "true",
             }
           }
         />
@@ -152,10 +152,10 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
           },
           "publicationStatus": "PUBLISHED",
           "publishedAt": "2015-01-01 00:00:00",
-          "show_url": "true",
           "theme": null,
           "title": "titre",
           "updatedAt": "2015-01-05 00:00:00",
+          "url": "true",
         }
       }
     />
@@ -279,12 +279,12 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
               },
               "publicationStatus": "PUBLISHED",
               "publishedAt": "2015-01-01 00:00:00",
-              "show_url": "true",
               "theme": Object {
                 "title": "titre du theme",
               },
               "title": "titre",
               "updatedAt": "2015-01-05 00:00:00",
+              "url": "true",
             }
           }
         />
@@ -317,12 +317,12 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           },
           "publicationStatus": "PUBLISHED",
           "publishedAt": "2015-01-01 00:00:00",
-          "show_url": "true",
           "theme": Object {
             "title": "titre du theme",
           },
           "title": "titre",
           "updatedAt": "2015-01-05 00:00:00",
+          "url": "true",
         }
       }
     />

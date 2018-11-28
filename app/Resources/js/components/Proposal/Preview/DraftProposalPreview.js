@@ -13,7 +13,7 @@ export class DraftProposalPreview extends React.Component<Props> {
 
     return (
       <li className="list-group-item">
-        <a href={proposal.show_url}>{proposal.title}</a>
+        <a href={proposal.url}>{proposal.title}</a>
       </li>
     );
   }
@@ -24,7 +24,7 @@ export default createFragmentContainer(
   graphql`
     fragment DraftProposalPreview_proposal on Proposal {
       title
-      show_url
+      url
     }
   `,
 );

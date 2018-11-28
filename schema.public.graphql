@@ -103,13 +103,19 @@ type Questionnaire implements Node {
 # An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string.
 scalar URI
 
+# Represents a type that can be retrieved by a URL.
+interface UniformResourceLocatable {
+  # The URL to this resource.
+  url: URI!
+}
+
 # A user is an individual's account.
-type User implements Node {
+type User implements Node & UniformResourceLocatable {
+  # The URL to this resource.
+  url: URI!
+
   # The ID of an object
   id: ID!
-
-  # The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.
-  url: URI
 
   # The user's public name.
   username: String

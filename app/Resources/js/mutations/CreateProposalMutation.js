@@ -12,7 +12,7 @@ const mutation = graphql`
     createProposal(input: $input) {
       proposal {
         id
-        show_url
+        url
         publicationStatus
       }
     }

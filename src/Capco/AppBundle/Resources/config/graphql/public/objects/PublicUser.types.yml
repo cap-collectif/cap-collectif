@@ -1,9 +1,9 @@
 PublicUser:
   type: object
-  inherits: [Node]
+  inherits: [Node, UniformResourceLocatable]
   config:
     description: "A user is an individual's account."
-    interfaces: [Node]
+    interfaces: [Node, UniformResourceLocatable]
     name: User
     fields:
       id:
@@ -11,9 +11,7 @@ PublicUser:
         builderConfig:
           typeName: User
       url:
-        type: 'URI'
-        description: 'The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.'
-        resolve: "@=resolver('user_show_url', [value])"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", [value])'
       username:
         type: 'String'
         description: "The user's public name."

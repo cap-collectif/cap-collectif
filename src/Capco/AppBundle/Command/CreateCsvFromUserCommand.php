@@ -293,9 +293,6 @@ class CreateCsvFromUserCommand extends Command
         $infoResolver = new InfoResolver();
         $header = array_map(function ($item) use ($type) {
             $item = str_replace('data_node_', '', $item);
-            if ('show_url' !== $item) {
-                $item = str_replace('_', '.', $item);
-            }
 
             if ('medias' === $type) {
                 $item = str_replace('medias.', '', $item);
@@ -360,7 +357,7 @@ class CreateCsvFromUserCommand extends Command
       zipCode
       city
       phone
-      show_url
+      url
       samlId
       googleId
       facebookId

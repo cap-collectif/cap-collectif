@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\GraphQL\Resolver\ConsultationResolver;
 use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Opinion\NewOpinionModeratorMessage;
@@ -17,17 +18,20 @@ class OpinionNotifier extends BaseNotifier
 {
     protected $consultationResolver;
     protected $router;
+    protected $userUrlResolver;
 
     public function __construct(
         MailerService $mailer,
         Resolver $siteParams,
         UserResolver $userResolver,
         OpinionUrlResolver $consultationResolver,
-        RouterInterface $router
+        RouterInterface $router,
+        UserUrlResolver $userUrlResolver
     ) {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->consultationResolver = $consultationResolver;
         $this->router = $router;
+        $this->userUrlResolver = $userUrlResolver;
     }
 
     public function onCreation(Opinion $opinion)
@@ -41,7 +45,7 @@ class OpinionNotifier extends BaseNotifier
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     null,
                     $this->consultationResolver->__invoke($opinion),
-                    $this->userResolver->resolveShowUrl($opinion->getAuthor()),
+                    $this->userUrlResolver->__invoke($opinion->getAuthor()),
                     $this->router
                 )
             );
@@ -59,7 +63,7 @@ class OpinionNotifier extends BaseNotifier
                     $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                     null,
                     $this->consultationResolver->__invoke($opinion),
-                    $this->userResolver->resolveShowUrl($opinion->getAuthor()),
+                    $this->userUrlResolver->__invoke($opinion->getAuthor()),
                     $this->router
                 )
             );

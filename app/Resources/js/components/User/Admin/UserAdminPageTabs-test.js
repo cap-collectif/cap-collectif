@@ -12,7 +12,7 @@ describe('<UserAdminPageTabs/>', () => {
   };
 
   const user = {
-    show_url: 'https://fr.wikipedia.org/wiki/Dahu',
+    url: 'https://fr.wikipedia.org/wiki/Dahu',
     username: 'dahu',
   };
 

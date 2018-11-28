@@ -103,7 +103,7 @@ export default createFragmentContainer(
         id
         slug
         displayName
-        show_url
+        url
         vip
         media {
           url

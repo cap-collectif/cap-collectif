@@ -53,49 +53,47 @@ export class UserInGroupModal extends React.Component<Props, State> {
               <b>{group.title}</b>
             </Modal.Title>
           </Modal.Header>
-          {group.users !== null &&
-            group.users.edges &&
-            group.users.edges.length > 0 && (
-              <ListGroupFlush>
-                {group.users.edges
-                  .filter(Boolean)
-                  .map(edge => edge && edge.node)
-                  .filter(Boolean)
-                  .map(user => (
-                    <ListGroupItem className="d-flex text-left" key={user.id} id={user.id}>
-                      {/* $FlowFixMe */}
-                      <UserAvatar
-                        user={{
-                          username: user.username,
-                          media: user.media,
-                          _links: { profile: user.show_url },
-                        }}
-                        defaultAvatar={null}
-                      />
-                      <a
-                        href={user.show_url}
-                        className="align-self-center"
-                        title={intl.formatMessage(
-                          { id: 'usernames-profile' },
-                          { userName: user.username },
-                        )}>
-                        {user.username}
-                      </a>
-                    </ListGroupItem>
-                  ))}
-                {relay.hasMore() && (
-                  <div className="text-center mt-15 mb-10">
-                    <Button
-                      id="load-more"
-                      bsStyle="primary"
-                      disabled={this.state.loading}
-                      onClick={this.loadMore}>
-                      <FormattedMessage id={relay.isLoading() ? 'global.loading' : 'global.more'} />
-                    </Button>
-                  </div>
-                )}
-              </ListGroupFlush>
-            )}
+          {group.users !== null && group.users.edges && group.users.edges.length > 0 && (
+            <ListGroupFlush>
+              {group.users.edges
+                .filter(Boolean)
+                .map(edge => edge && edge.node)
+                .filter(Boolean)
+                .map(user => (
+                  <ListGroupItem className="d-flex text-left" key={user.id} id={user.id}>
+                    {/* $FlowFixMe */}
+                    <UserAvatar
+                      user={{
+                        username: user.username,
+                        media: user.media,
+                        _links: { profile: user.url },
+                      }}
+                      defaultAvatar={null}
+                    />
+                    <a
+                      href={user.url}
+                      className="align-self-center"
+                      title={intl.formatMessage(
+                        { id: 'usernames-profile' },
+                        { userName: user.username },
+                      )}>
+                      {user.username}
+                    </a>
+                  </ListGroupItem>
+                ))}
+              {relay.hasMore() && (
+                <div className="text-center mt-15 mb-10">
+                  <Button
+                    id="load-more"
+                    bsStyle="primary"
+                    disabled={this.state.loading}
+                    onClick={this.loadMore}>
+                    <FormattedMessage id={relay.isLoading() ? 'global.loading' : 'global.more'} />
+                  </Button>
+                </div>
+              )}
+            </ListGroupFlush>
+          )}
           <Modal.Footer>
             <CloseButton label="global.close" onClose={this.closeModal} />
           </Modal.Footer>
@@ -128,7 +126,7 @@ export default createPaginationContainer(
               size
               url
             }
-            show_url
+            url
             username
           }
         }

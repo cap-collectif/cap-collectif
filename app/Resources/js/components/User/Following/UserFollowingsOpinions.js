@@ -97,7 +97,7 @@ export default createFragmentContainer(
           node {
             id
             title
-            show_url
+            url
             project {
               id
               title

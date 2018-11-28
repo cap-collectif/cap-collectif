@@ -1,0 +1,19 @@
+Step:
+  type: interface
+  inherits: [Node]
+  config:
+    description: 'A step inside a project.'
+    resolveType: "@=resolver('step_type', [value])"
+    # interfaces: [Node]
+    fields:
+      # TODO remove
+      kind:
+        description: 'The kind of the step'
+        type: 'String!'
+      title:
+        description: 'The title of the step.'
+        type: 'String!'
+      url:
+        type: 'String!'
+        description: 'The url of the step'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'

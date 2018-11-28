@@ -141,7 +141,7 @@ class Manager
         }
 
         foreach ($features as $feature) {
-            if (array_key_exists($feature, $this->all(true))) {
+            if (isset($this->all(true)[$feature])) {
                 return true;
             }
         }

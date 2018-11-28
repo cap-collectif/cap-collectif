@@ -68,8 +68,8 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
               },
               "neighborhood": "DTC",
               "profilePageIndexed": false,
-              "show_url": "http://linkedin.com/user/dqkfjdsmq",
               "twitterUrl": "http://twitter.com/cuicui",
+              "url": "http://linkedin.com/user/dqkfjdsmq",
               "userType": Object {
                 "id": 1,
               },
@@ -488,8 +488,8 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
               },
               "neighborhood": "DTC",
               "profilePageIndexed": false,
-              "show_url": "http://linkedin.com/user/dqkfjdsmq",
               "twitterUrl": "http://twitter.com/cuicui",
+              "url": "http://linkedin.com/user/dqkfjdsmq",
               "userType": Object {
                 "id": 1,
               },

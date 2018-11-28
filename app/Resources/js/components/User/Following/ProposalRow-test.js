@@ -6,7 +6,7 @@ import { ProposalRow } from './ProposalRow';
 
 describe('<ProposalRow />', () => {
   const proposal = {
-    show_url: 'http://perdu.com',
+    url: 'http://perdu.com',
     id: 'proposal1',
     title: 'perdu sur internet ?',
   };

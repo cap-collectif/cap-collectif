@@ -183,33 +183,6 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
             $em->persist($opinion);
 
-            // if (array_key_exists('contexte', $row)) {
-            //     $opinionTypeAppendixType = $em
-            //         ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
-            //         ->findOneBy([
-            //             'opinionType' => $opinion->getOpinionType(),
-            //         ])
-            //     ;
-            //     if (!is_object($opinionTypeAppendixType)) {
-            //         $output->writeln(
-            //             '<error>No appendix type defined for opinion type '
-            //             . $opinion->getOpinionType()->getTitle() .
-            //             '.</error>'
-            //         );
-            //         $output->writeln('<error>Import cancelled. No opinions created.</error>');
-            //
-            //         return 1;
-            //     }
-            //
-            //     if (0 === count($opinion->getAppendices())) {
-            //         $appendix = new OpinionAppendix();
-            //         $appendix->setAppendixType($opinionTypeAppendixType->getAppendixType());
-            //         $opinion->addAppendice($appendix);
-            //     } else {
-            //         $appendix = $opinion->getAppendices()[0];
-            //     }
-            //     $appendix->setBody('<p>' . nl2br(htmlspecialchars($row['contexte'])) . '</p>');
-            // }
             $progress->advance();
         }
 

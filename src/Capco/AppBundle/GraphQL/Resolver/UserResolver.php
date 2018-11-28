@@ -72,15 +72,6 @@ class UserResolver implements ResolverInterface
         return $object->getCreatedAt();
     }
 
-    public function resolveShowUrl(User $user): string
-    {
-        return $this->router->generate(
-            'capco_user_profile_show_all',
-            ['slug' => $user->getSlug()],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );
-    }
-
     public function resolveShowNotificationsPreferencesUrl(): string
     {
         return $this->router->generate(

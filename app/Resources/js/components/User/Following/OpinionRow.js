@@ -41,7 +41,7 @@ export class OpinionRow extends Component<Props, State> {
         <ListGroupItem id={`item-opinion-${opinion.id}`}>
           <h4>
             <a
-              href={opinion.show_url}
+              href={opinion.url}
               title={opinion.title}
               id={`item-opinion-link-${opinion.id}`}
               className="profile__opinion__open__link">
@@ -67,7 +67,7 @@ export default createFragmentContainer(
     fragment OpinionRow_opinion on Opinion {
       id
       title
-      show_url
+      url
     }
   `,
 );
