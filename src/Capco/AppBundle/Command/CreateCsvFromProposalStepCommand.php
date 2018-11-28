@@ -134,6 +134,7 @@ EOF;
 fragment authorInfos on User {
   id
   username
+  isEmailConfirmed
   email
   userType {
 		...userTypeInfos
@@ -176,6 +177,7 @@ EOF;
         'proposal_link',
         'proposal_author_id',
         'proposal_author_username',
+        'proposal_author_isEmailConfirmed',
         'proposal_author_email',
         'proposal_author_userType_id',
         'proposal_author_userType_name',
@@ -195,6 +197,7 @@ EOF;
         'proposal_votes_anonymous',
         'proposal_votes_author_id',
         'proposal_votes_author_username',
+        'proposal_votes_author_isEmailConfirmed',
         'proposal_votes_ranking',
         'proposal_votes_author_userType_id',
         'proposal_votes_author_userType_name',
@@ -206,6 +209,7 @@ EOF;
         'proposal_comments_updatedAt',
         'proposal_comments_author_id',
         'proposal_comments_author_username',
+        'proposal_comments_author_isEmailConfirmed',
         'proposal_comments_author_userType_id',
         'proposal_comments_author_userType_name',
         'proposal_comments_author_email',
@@ -217,6 +221,7 @@ EOF;
         'proposal_comments_vote_published',
         'proposal_comments_vote_author_id',
         'proposal_comments_vote_author_username',
+        'proposal_comments_vote_author_isEmailConfirmed',
         'proposal_comments_vote_author_userType_id',
         'proposal_comments_vote_author_userType_name',
         'proposal_news_id',
@@ -232,6 +237,7 @@ EOF;
         'proposal_news_displayedOnBlog',
         'proposal_news_authors_id',
         'proposal_news_authors_username',
+        'proposal_news_authors_isEmailConfirmed',
         'proposal_news_authors_userType_id',
         'proposal_news_authors_userType_name',
         'proposal_news_comments_id',
@@ -241,6 +247,7 @@ EOF;
         'proposal_news_comments_updatedAt',
         'proposal_news_comments_author_id',
         'proposal_news_comments_author_username',
+        'proposal_news_comments_author_isEmailConfirmed',
         'proposal_news_comments_author_userType_id',
         'proposal_news_comments_author_userType_name',
         'proposal_news_comments_author_email',
@@ -252,6 +259,7 @@ EOF;
         'proposal_news_comments_vote_published',
         'proposal_news_comments_vote_author_id',
         'proposal_news_comments_vote_author_username',
+        'proposal_news_comments_vote_author_isEmailConfirmed',
         'proposal_news_comments_vote_author_userType_id',
         'proposal_news_comments_vote_author_userType_name',
         'proposal_news_comments_reportings_id',
@@ -259,6 +267,7 @@ EOF;
         'proposal_news_comments_reportings_published',
         'proposal_news_comments_reportings_author_id',
         'proposal_news_comments_reportings_author_username',
+        'proposal_news_comments_reportings_author_isEmailConfirmed',
         'proposal_news_comments_reportings_author_userType_id',
         'proposal_news_comments_reportings_author_userType_name',
         'proposal_reportings_id',
@@ -266,6 +275,7 @@ EOF;
         'proposal_reportings_createdAt',
         'proposal_reportings_author_id',
         'proposal_reportings_author_username',
+        'proposal_reportings_author_isEmailConfirmed',
         'proposal_reportings_author_userType_id',
         'proposal_reportings_author_userType_name',
     ];
@@ -275,6 +285,7 @@ EOF;
         'proposal_news_comments_reportings_createdAt' => 'createdAt',
         'proposal_news_comments_reportings_author_id' => 'author.id',
         'proposal_news_comments_reportings_author_username' => 'author.username',
+        'proposal_news_comments_reportings_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_news_comments_reportings_author_userType_id' => 'author.userType.id',
         'proposal_news_comments_reportings_author_userType_name' => 'author.userType.name',
     ];
@@ -285,6 +296,7 @@ EOF;
         'proposal_reportings_createdAt' => 'createdAt',
         'proposal_reportings_author_id' => 'author.id',
         'proposal_reportings_author_username' => 'author.username',
+        'proposal_reportings_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_reportings_author_userType_id' => 'author.userType.id',
         'proposal_reportings_author_userType_name' => 'author.userType.name',
     ];
@@ -303,6 +315,7 @@ EOF;
         'proposal_news_displayedOnBlog' => 'displayedOnBlog',
         'proposal_news_authors_id' => 'authors.id',
         'proposal_news_authors_username' => 'authors.username',
+        'proposal_news_authors_isEmailConfirmed' => 'authors.isEmailConfirmed',
         'proposal_news_authors_userType_id' => 'authors.userType.id',
         'proposal_news_authors_userType_name' => 'authors.userType.name',
     ];
@@ -316,6 +329,7 @@ EOF;
         'proposal_news_comments_updatedAt' => 'updatedAt',
         'proposal_news_comments_author_id' => 'author.id',
         'proposal_news_comments_author_username' => 'author.username',
+        'proposal_news_comments_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_news_comments_author_userType_id' => 'author.userType.id',
         'proposal_news_comments_author_userType_name' => 'author.userType.name',
         'proposal_news_comments_author_email' => 'author.email',
@@ -329,6 +343,7 @@ EOF;
         'proposal_news_comments_vote_publishedAt' => 'publishedAt',
         'proposal_news_comments_vote_author_id' => 'author.id',
         'proposal_news_comments_vote_author_username' => 'author.username',
+        'proposal_news_comments_vote_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_news_comments_vote_author_userType_id' => 'author.userType.id',
         'proposal_news_comments_vote_author_userType_name' => 'author.userType.name',
     ];
@@ -341,6 +356,7 @@ EOF;
         'proposal_votes_anonymous' => 'anonymous',
         'proposal_votes_author_id' => 'author.id',
         'proposal_votes_author_username' => 'author.username',
+        'proposal_votes_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_votes_author_userType_id' => 'author.userType.id',
         'proposal_votes_author_userType_name' => 'author.userType.name',
     ];
@@ -351,6 +367,7 @@ EOF;
         'proposal_comments_vote_publishedAt' => 'publishedAt',
         'proposal_comments_vote_author_id' => 'author.id',
         'proposal_comments_vote_author_username' => 'author.username',
+        'proposal_comments_vote_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_comments_vote_author_userType_id' => 'author.userType.id',
         'proposal_comments_vote_author_userType_name' => 'author.userType.name',
     ];
@@ -363,6 +380,7 @@ EOF;
         'proposal_comments_updatedAt' => 'updatedAt',
         'proposal_comments_author_id' => 'author.id',
         'proposal_comments_author_username' => 'author.username',
+        'proposal_comments_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_comments_author_userType_id' => 'author.userType.id',
         'proposal_comments_author_userType_name' => 'author.userType.name',
         'proposal_comments_author_email' => 'author.email',
@@ -399,6 +417,7 @@ EOF;
         'proposal_link' => 'url',
         'proposal_author_id' => 'author.id',
         'proposal_author_username' => 'author.username',
+        'proposal_author_isEmailConfirmed' => 'author.isEmailConfirmed',
         'proposal_author_email' => 'author.email',
         'proposal_author_userType_id' => 'author.userType.id',
         'proposal_author_userType_name' => 'author.userType.name',
