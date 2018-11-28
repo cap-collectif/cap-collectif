@@ -144,29 +144,22 @@ class ProposalAdmin extends AbstractAdmin
 
         /** @var QueryBuilder $query */
         $query = parent::createQuery($context);
-        // Not published are not visible
-        // Others depends on project visibility
         $query
             ->leftJoin($query->getRootAliases()[0] . '.proposalForm', 'pF')
             ->leftJoin('pF.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
             ->leftJoin('pAs.project', 'p')
-            ->andWhere($query->getRootAliases()[0] . '.published = true')
-            ->andWhere(
+            ->orWhere(
                 $query
                     ->expr()
-                    ->orX(
-                        $query
-                            ->expr()
-                            ->andX(
-                                $query->expr()->eq('p.Author', ':author'),
-                                $query
-                                    ->expr()
-                                    ->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
-                            ),
-                        $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+                    ->andX(
+                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
             );
+        $query->orWhere(
+            $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+        );
         $query->setParameter('author', $user);
 
         return $query;
