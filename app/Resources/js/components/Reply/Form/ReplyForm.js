@@ -26,7 +26,7 @@ import renderComponent from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import AddReplyMutation from '../../../mutations/AddReplyMutation';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import {CardContainer} from '../../Ui/Card/CardContainer';
+import { Card } from '../../Ui/Card/Card';
 import UpdateReplyMutation from '../../../mutations/UpdateReplyMutation';
 import SubmitButton from '../../Form/SubmitButton';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
@@ -195,7 +195,7 @@ export class ReplyForm extends React.Component<Props> {
     const disabled = this.formIsDisabled();
     const isDraft = reply && reply.draft;
     return (
-      <CardContainer>
+      <Card>
         <div className="card__body">
           <div id="create-reply-form">
             <form id="reply-form" ref="form" onSubmit={handleSubmit}>
@@ -271,7 +271,7 @@ export class ReplyForm extends React.Component<Props> {
             </form>
           </div>
         </div>
-      </CardContainer>
+      </Card>
     );
   }
 }

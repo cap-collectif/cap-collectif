@@ -5,7 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import UserAvatar from './UserAvatar';
 import UserLink from './UserLink';
-import { CardContainer } from '../Ui/Card/CardContainer';
+import { Card } from '../Ui/Card/Card';
 import { CardUser } from '../Ui/Card/CardUser';
 import type { UserPreview_user } from './__generated__/UserPreview_user.graphql';
 import UserNotConfirmedLabel from './UserNotConfirmedLabel';
@@ -23,7 +23,7 @@ export class UserPreview extends React.Component<Props> {
     };
 
     return (
-      <CardContainer className={classNames(classes)}>
+      <Card className={classNames(classes)}>
         <CardUser>
           <div className="card__user__avatar">
             {/* $FlowFixMe */}
@@ -51,7 +51,7 @@ export class UserPreview extends React.Component<Props> {
             {user ? <UserNotConfirmedLabel user={user} /> : null}
           </div>
         </CardUser>
-      </CardContainer>
+      </Card>
     );
   }
 }

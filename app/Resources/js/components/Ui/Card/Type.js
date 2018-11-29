@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
-const CardType = styled.div`
+const Type = styled.div`
   background-color: ${props => props.color};
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
@@ -12,4 +12,4 @@ const CardType = styled.div`
   color: ${colors.white};
 `;
 
-export default CardType;
+export default Type;

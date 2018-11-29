@@ -1,7 +1,7 @@
 // @flow
 import styled from 'styled-components';
 
-const CardType = styled.div`
+const Cover = styled.div`
   overflow: hidden;
   width: 100%;
   height: 175px;
@@ -13,4 +13,4 @@ const CardType = styled.div`
   }
 `;
 
-export default CardType;
+export default Cover;

@@ -1,7 +1,7 @@
 // @flow
 import styled from 'styled-components';
 
-const CardStatus = styled.div.attrs({
+const Status = styled.div.attrs({
   className: 'ellipsis',
 })`
   border-bottom-right-radius: 3px;
@@ -13,4 +13,4 @@ const CardStatus = styled.div.attrs({
   text-align: center;
 `;
 
-export default CardStatus;
+export default Status;

@@ -2,10 +2,8 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { text, withKnobs } from '@storybook/addon-knobs';
-import { CardContainer } from '../components/Ui/Card/CardContainer';
-import CardType from '../components/Ui/Card/CardType';
-import CardCover from '../components/Ui/Card/CardCover';
-import CardStatus from '../components/Ui/Card/CardStatus';
+import Card from '../components/Ui/Card/Card';
+import Image from '../components/Ui/Medias/Image';
 
 storiesOf('Cards', module)
   .addDecorator(withKnobs)
@@ -19,21 +17,26 @@ storiesOf('Cards', module)
       const titleLink = text('Title link', 'https://ui.cap-collectif.com');
       const title = text('Title', 'Project title');
 
+      Card.Cover.displayName = 'Card.Cover';
+      Card.Type.displayName = 'Card.Type';
+      Card.Status.displayName = 'Card.Status';
+      Card.Body.displayName = 'Card.Body';
+
       return (
-        <CardContainer>
-          <CardType color="#707070">{type}</CardType>
-          <CardCover>
-            <img src={coverImg} alt={coverTitle} />
-          </CardCover>
-          <div className="card__body">
-            <div className="card__body__infos">
-              <h3 className="card__title">
+        <Card>
+          <Card.Type color="#707070">{type}</Card.Type>
+          <Card.Cover>
+            <Image src={coverImg} alt={coverTitle} />
+          </Card.Cover>
+          <Card.Body>
+            <div className="flex-1">
+              <Card.Title tagName="h3">
                 <a href={titleLink}>{title}</a>
-              </h3>
+              </Card.Title>
             </div>
-          </div>
-          <CardStatus className="status--primary">{status}</CardStatus>
-        </CardContainer>
+          </Card.Body>
+          <Card.Status className="status--primary">{status}</Card.Status>
+        </Card>
       );
     },
     {
@@ -41,6 +44,7 @@ storiesOf('Cards', module)
         text: `
           Ce composant est utilisé ...
         `,
+        propTablesExclude: [Image],
       },
     },
   );

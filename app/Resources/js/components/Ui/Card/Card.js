@@ -1,8 +1,18 @@
 // @flow
 import styled from 'styled-components';
+import React from 'react';
 import colors from '../../../utils/colors';
+import Cover from './Cover';
+import Type from './Type';
+import Status from './Status';
+import Body from './Body';
+import Title from './Title';
 
-export const CardContainer = styled.div`
+type Props = {
+  children?: any,
+};
+
+export const Container = styled.div`
   border: 1px solid ${colors.borderColor};
   background-color: ${colors.white};
   margin-bottom: 30px;
@@ -29,16 +39,16 @@ export const CardContainer = styled.div`
   }
 
   .card__title {
-    font-size: 18px;
-    line-height: 1.2;
-    margin: 0 0 10px;
+    // font-size: 18px;
+    // line-height: 1.2;
+    // margin: 0 0 10px;
   }
 
   .card__body {
-    display: flex;
-    padding: 15px;
-    flex: 1 0 auto;
-    flex-direction: column;
+    // display: flex;
+    // padding: 15px;
+    // flex: 1 0 auto;
+    // flex-direction: column;
 
     &__infos {
       flex: 1 0 auto;
@@ -100,3 +110,23 @@ export const CardContainer = styled.div`
     }
   }
 `;
+
+export class Card extends React.PureComponent<Props> {
+  static Cover = Cover;
+
+  static Type = Type;
+
+  static Status = Status;
+
+  static Body = Body;
+
+  static Title = Title;
+
+  render() {
+    const { children } = this.props;
+
+    return <Container>{children}</Container>;
+  }
+}
+
+export default Card;
