@@ -1,10 +1,11 @@
 <?php
-
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
+use Infinite\FormBundle\Form\Type\PolyCollectionType;
+use pmill\Doctrine\Hydrator\ArrayHydrator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,7 +28,6 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
                     QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
                 ) {
                     return null === $questionnaireAbstractQuestion ||
-                        null === $questionnaireAbstractQuestion->getQuestion() ||
                         empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
                 },
             ]);

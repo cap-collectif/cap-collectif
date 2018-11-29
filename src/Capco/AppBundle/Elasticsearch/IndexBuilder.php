@@ -37,9 +37,7 @@ class IndexBuilder
         $index = $this->client->getIndex($this->generateIndexName());
 
         if ($index->exists()) {
-            throw new \RuntimeException(
-                sprintf('Index %s is already created, something is wrong.', $index->getName())
-            );
+            throw new \RuntimeException(sprintf('Index %s is already created, something is wrong.', $index->getName()));
         }
 
         $index->create($mapping);
@@ -52,7 +50,7 @@ class IndexBuilder
         return sprintf('capco_%s', date('Y-m-d-H:i:s'));
     }
 
-    public function cleanOldIndices(int $afterLiveLimit = 2): array
+    public function cleanOldIndices(): array
     {
         $indexes = $this->client->requestEndpoint(new Get());
         $indexes = $indexes->getData();
@@ -64,10 +62,7 @@ class IndexBuilder
                 continue;
             }
 
-            $date = \DateTime::createFromFormat(
-                'Y-m-d-H:i:s',
-                str_replace('capco_', '', $indexName)
-            );
+            $date = \DateTime::createFromFormat('Y-m-d-H:i:s', str_replace('capco_', '', $indexName));
 
             $data['date'] = $date;
             $data['is_live'] = isset($data['aliases'][$this->getLiveSearchIndexName()]);
@@ -89,7 +84,7 @@ class IndexBuilder
                 $livePassed = true;
             }
 
-            if ($livePassed && $afterLiveCounter > $afterLiveLimit) {
+            if ($livePassed && $afterLiveCounter > 2) {
                 // Remove!
                 $this->client->getIndex($indexName)->delete();
                 $deleted[] = $indexName;
@@ -118,18 +113,10 @@ class IndexBuilder
     {
         $data = ['actions' => []];
 
-        $data['actions'][] = [
-            'remove' => ['index' => '*', 'alias' => $this->getLiveIndexingIndexName()],
-        ];
-        $data['actions'][] = [
-            'remove' => ['index' => '*', 'alias' => $this->getLiveSearchIndexName()],
-        ];
-        $data['actions'][] = [
-            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveIndexingIndexName()],
-        ];
-        $data['actions'][] = [
-            'add' => ['index' => $index->getName(), 'alias' => $this->getLiveSearchIndexName()],
-        ];
+        $data['actions'][] = ['remove' => ['index' => '*', 'alias' => $this->getLiveIndexingIndexName()]];
+        $data['actions'][] = ['remove' => ['index' => '*', 'alias' => $this->getLiveSearchIndexName()]];
+        $data['actions'][] = ['add' => ['index' => $index->getName(), 'alias' => $this->getLiveIndexingIndexName()]];
+        $data['actions'][] = ['add' => ['index' => $index->getName(), 'alias' => $this->getLiveSearchIndexName()]];
 
         return $this->client->request('_aliases', Request::POST, $data);
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\QuestionChoice;
@@ -55,7 +54,9 @@ class MultipleChoiceQuestion extends AbstractQuestion
 
     public function getChoices(): Collection
     {
-        return $this->choices;
+        return $this->choices instanceof Collection
+            ? $this->choices
+            : new ArrayCollection($this->choices);
     }
 
     public function setChoices(Collection $choices): self
@@ -68,7 +69,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
         return $this;
     }
 
-    public function addChoice(QuestionChoice $questionChoice): self
+    public function addQuestionChoice(QuestionChoice $questionChoice): self
     {
         if (!$this->getChoices()->contains($questionChoice)) {
             $this->getChoices()->add($questionChoice);
@@ -78,7 +79,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
         return $this;
     }
 
-    public function removeChoice(QuestionChoice $questionChoice): self
+    public function removeQuestionChoice(QuestionChoice $questionChoice): self
     {
         $this->getChoices()->removeElement($questionChoice);
         $questionChoice->setQuestion(null);
