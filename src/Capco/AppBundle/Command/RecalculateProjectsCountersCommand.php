@@ -2,12 +2,14 @@
 
 namespace Capco\AppBundle\Command;
 
+use Overblog\GraphQLBundle\Definition\Argument;
+use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
 
 class RecalculateProjectsCountersCommand extends ContainerAwareCommand
 {
@@ -38,12 +40,10 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
 
         foreach ($projects as $p) {
             if (!$p->isClosed() || $this->force) {
-                // Participants count
-                $anonymousParticipants = $this->getContainer()
-                    ->get('capco.user.repository')
-                    ->countProjectProposalAnonymousVotersWithCount($p);
-                $participants =
-                    $contributionResolver->countProjectContributors($p) + $anonymousParticipants;
+                $connection = $container
+                    ->get(ProjectContributorResolver::class)
+                    ->__invoke($p, new Argument(['first' => 1]));
+                $participants = $connection->totalCount + $connection->anonymousCount;
                 $query = $em->createQuery(
                     'UPDATE CapcoAppBundle:Project p
                 SET p.participantsCount = ' .

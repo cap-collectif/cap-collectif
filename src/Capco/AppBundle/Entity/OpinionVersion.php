@@ -409,7 +409,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function isIndexable(): bool
     {
-        return $this->isPublished() && $this->getProject()->isIndexable();
+        return $this->isPublished() && $this->getProject() && $this->getProject()->isIndexable();
     }
 
     public static function getElasticsearchTypeName(): string
