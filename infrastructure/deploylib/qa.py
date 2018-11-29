@@ -34,14 +34,14 @@ def graphql_schemas(checkSame=False):
 
 @task(environments=['local', 'ci'])
 def behat(fast_failure='true', profile=False, suite='false', tags='false', timer='true'):
-    "Run Gerhkin Tests"
+    "Run Gherkin Tests"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     if profile:
-        jobs = [profile]
+        profiles = [profile]
     else:
-        jobs = ['rest', 'commands', 'front', 'graphql', 'bo']
+        profiles = ['api', 'commands', 'e2e']
 
-    for job in jobs:
+    for job in profiles:
         command = ('php -d memory_limit=-1 ./bin/behat'
             + ('', ' --log-step-times')[timer != 'false'] 
             + ' -p ' + job 

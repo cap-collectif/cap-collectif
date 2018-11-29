@@ -2,14 +2,8 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Elastica\Client;
-use Elastica\Snapshot;
-use PHPUnit\Framework\Assert;
 use Behat\Testwork\Suite\Suite;
-use Joli\JoliNotif\Notification;
 use Behat\Gherkin\Node\TableNode;
-use Capco\AppBundle\Toggle\Manager;
-use Joli\JoliNotif\NotifierFactory;
 use Behat\Mink\Driver\Selenium2Driver;
 use Symfony\Component\Process\Process;
 use WebDriver\Exception\ElementNotVisible;
@@ -20,7 +14,6 @@ use Behat\Mink\Exception\ExpectationException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Capco\AppBundle\Behat\Traits\CookiesTrait;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Capco\AppBundle\Elasticsearch\IndexBuilder;
 use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
@@ -30,17 +23,17 @@ use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
 use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
-use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
 use Capco\AppBundle\Elasticsearch\IndexBuilder;
 use Capco\AppBundle\Toggle\Manager;
 use Elastica\Client;
 use Elastica\Snapshot;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
-use Symfony\Component\Process\Process;
-use WebDriver\Exception\ElementNotVisible;
 use PHPUnit\Framework\Assert;
-use Behat\Mink\Driver\Selenium2Driver;
+use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
+use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
+use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
+use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 
 const REPOSITORY_NAME = 'repository_qa';
 const SNAPSHOT_NAME = 'snap_qa';

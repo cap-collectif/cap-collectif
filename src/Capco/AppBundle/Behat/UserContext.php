@@ -182,8 +182,7 @@ class UserContext extends DefaultContext
             if (Text::startsWith($e->getMessage(), 'unable to set cookie')) {
                 // We have to navigate to a page to launch browser
                 // Maybe we can find a better way to start the browser with initial cookies…
-                // We used "/confidentialite" because it's very fast to load
-                $this->navigationContext->iVisitedPage('ConfidentialitePage');
+                $this->navigationContext->iVisitedPage('HomePage');
 
                 // We manually set the client cookie (again)
                 $driver->getWebDriverSession()->setCookie($cookie);
