@@ -1,3 +1,4 @@
+// @flow
 export const avatarNb = {
   small: 34,
   normal: 45,
