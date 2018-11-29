@@ -1,12 +1,14 @@
 <?php
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Resolver\ContributionResolver;
 use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Console\Input\InputOption;
+use Capco\AppBundle\Resolver\ContributionResolver;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepContributorResolver;
 
 class RecalculateCountersCommand extends ContainerAwareCommand
 {
@@ -328,14 +330,25 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )'
         );
 
+        $this->executeQuery(
+            'UPDATE CapcoAppBundle:Steps\CollectStep ss set ss.votesCount = (
+          select count(DISTINCT pv.id)
+          from CapcoAppBundle:ProposalCollectVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
+          where pv.collectStep = ss AND pv.published = 1 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.published = 1
+          group by pv.collectStep
+        )'
+        );
+
         $collectSteps = $container->get('capco.collect_step.repository')->findAll();
         foreach ($collectSteps as $cs) {
             if ($cs->isOpen() || $this->force) {
-                $participants = $contributionResolver->countStepContributors($cs);
+                $connection = $container
+                    ->get(StepContributorResolver::class)
+                    ->__invoke($cs, new Argument(['first' => 0]));
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\CollectStep cs
                     set cs.contributorsCount = ' .
-                        $participants .
+                        $connection->totalCount .
                         '
                     where cs.id = \'' .
                         $cs->getId() .

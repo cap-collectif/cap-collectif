@@ -184,8 +184,7 @@
         "leanphp/phpspec-code-coverage": "dev-patch-1",
         "bossa/phpspec2-expect": "@dev",
         "phpunit/phpunit": "^7.3",
-        "bex/behat-step-time-logger": "^1.0",
-        "friendsofphp/php-cs-fixer": "^2.13"
+        "bex/behat-step-time-logger": "^1.0"
     },
     "scripts": {
         "post-install-cmd": [
