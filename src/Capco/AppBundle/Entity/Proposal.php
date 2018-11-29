@@ -494,23 +494,6 @@ class Proposal implements
         return $this->getAuthor() === $user;
     }
 
-    public function viewerCanSee(User $user = null): bool
-    {
-        // SuperAdmin can access everything
-        if ($user && $user->isSuperAdmin()) {
-            return true;
-        }
-
-        if ($this->isPublished()) {
-            if (!$this->isDeleted()) {
-                return $this->getStep() ? $this->getStep()->canDisplay($user) : false;
-            }
-            return $user && $user->isAdmin();
-        }
-
-        return $this->getAuthor() === $user;
-    }
-
     public function isPrivate(): bool
     {
         return $this->getProposalForm() && $this->getProposalForm()->getStep()

@@ -66,7 +66,7 @@ class ProjectListFilter extends React.Component<Props, State> {
           dispatch(fetchProjects());
         }}>
         <option key="date" value="date">
-          {intl.formatMessage({ id: 'project.sort.last' })}
+          {intl.formatMessage({ id: 'global.filter_f_last' })}
         </option>
         <option key="popularity" value="popularity">
           {intl.formatMessage({ id: 'global.filter_f_popular' })}
@@ -132,7 +132,7 @@ class ProjectListFilter extends React.Component<Props, State> {
               <i className="cap cap-magnifier" />
             </Button>
           }
-          groupClassName="project-search-group pull-right w-100"
+          groupClassName="project-search-group pull-right"
           value={this.state.value}
           onChange={this.handleChangeTermInput}
         />

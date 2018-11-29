@@ -38,14 +38,9 @@ class GlobalIdResolver
         return $results;
     }
 
-    public function resolve(string $uuidOrGlobalId, $userOrAnon)
+    public function resolve(string $uuidOrGlobalId, $user)
     {
-        $user = null;
-        if ($userOrAnon instanceof User) {
-            $user = $userOrAnon;
-        }
-
-        if ($user && $user->isAdmin()) {
+        if ($user instanceof User && $user->isAdmin()) {
             $em = $this->container->get('doctrine.orm.default_entity_manager');
             // If user is an admin, we allow to retrieve softdeleted nodes
             if ($em->getFilters()->isEnabled('softdeleted')) {
@@ -179,7 +174,7 @@ class GlobalIdResolver
         return $node;
     }
 
-    private function viewerCanSee($node, User $user = null): bool
+    private function viewerCanSee($node, $user = null): bool
     {
         $projectContributionClass = [
             Project::class,
@@ -194,9 +189,6 @@ class GlobalIdResolver
         ];
 
         foreach ($projectContributionClass as $object) {
-            if ($node instanceof Proposal) {
-                return $node->viewerCanSee($user);
-            }
             if ($node instanceof $object) {
                 return $node->canDisplay($user);
             }

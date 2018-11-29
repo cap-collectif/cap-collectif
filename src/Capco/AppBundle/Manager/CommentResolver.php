@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
-use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
@@ -57,15 +56,15 @@ class CommentResolver
     public function getCommentsByObject($object)
     {
         if ($object instanceof Event) {
-            return $this->em
-                ->getRepository('CapcoAppBundle:EventComment')
-                ->getEnabledByEvent($object);
+            return $this->em->getRepository('CapcoAppBundle:EventComment')->getEnabledByEvent(
+                $object
+            );
         }
 
         if ($object instanceof Post) {
-            return $this->em
-                ->getRepository('CapcoAppBundle:PostComment')
-                ->getEnabledByPost($object);
+            return $this->em->getRepository('CapcoAppBundle:PostComment')->getEnabledByPost(
+                $object
+            );
         }
     }
 
@@ -73,11 +72,12 @@ class CommentResolver
     {
         try {
             $relatedObject = $comment->getRelatedObject();
-            if ($relatedObject && $relatedObject instanceof SoftDeleteable) {
-                return !$relatedObject->isDeleted() ? $relatedObject : null;
-            }
         } catch (EntityNotFoundException $e) {
             $relatedObject = null;
+        }
+
+        if ($relatedObject && $relatedObject instanceof SoftDeleteable) {
+            return !$relatedObject->isDeleted() ? $relatedObject : null;
         }
 
         return $relatedObject;
