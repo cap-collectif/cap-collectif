@@ -55,6 +55,13 @@ class ReinitCommand extends ContainerAwareCommand
             $output->writeln(
                 '<error>Database could not be deleted - maybe it didn\'t exist?</error>'
             );
+            if ($notifier) {
+                $notifier->send(
+                    (new Notification())
+                        ->setTitle('Warning')
+                        ->setBody('Database could not be deleted.')
+                );
+            }
         }
 
         $eventManager = $this->getContainer()
@@ -88,27 +95,16 @@ class ReinitCommand extends ContainerAwareCommand
             $this->loadToggles($output);
         }
 
-        $output->writeln('<info>Database loaded !</info>');
-
         $this->getContainer()
             ->get('doctrine')
             ->getManager()
             ->clear();
-
-        $this->populateElasticsearch($output);
-
-        $this->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->clear();
-
         $this->recalculateCounters($output);
-
-        $output->writeln('<info>Counters updated !</info>');
-
         $this->updateSyntheses($output);
 
-        $output->writeln('<info>Synthesis updated !</info>');
+        $this->populateElastica($output);
+
+        $output->writeln('Reinit completed');
 
         if ($notifier) {
             $notifier->send(
@@ -202,7 +198,7 @@ class ReinitCommand extends ContainerAwareCommand
         );
     }
 
-    protected function populateElasticsearch(OutputInterface $output)
+    protected function populateElastica(OutputInterface $output)
     {
         $this->runCommands(
             [
