@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\Behat;
 
 use PHPUnit\Framework\Assert;
+use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\AppBundle\Entity\EventRegistration;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -15,6 +16,8 @@ class UserContext extends DefaultContext
     {
         $home = $this->navigationContext->getPage('HomePage');
         $home->clickLogout();
+
+        // Called only once, so it's ok
         sleep(2);
     }
 
@@ -158,18 +161,36 @@ class UserContext extends DefaultContext
         // We create a new server session
         $serverSession = $this->getService('session');
 
-        // We populate the server session with a token
+        // We populate the server session with an authenticated token
         $providerKey = $this->getParameter('fos_user.firewall_name');
         $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
         $serverSession->set('_security_' . $providerKey, serialize($token));
         $serverSession->save();
 
-        // We navigate to any page to launch brower
-        // We used /confidentialite because it's very fast to load
-        $this->navigationContext->iVisitedPage('ConfidentialitePage');
+        $driver = $this->getSession()->getDriver();
+        $cookie = [
+            "domain" => "capco.test",
+            "name" => $serverSession->getName(),
+            "value" => $serverSession->getId(),
+            "path" => "/",
+            "secure" => true,
+        ];
+        try {
+            // We manually set the client cookie
+            $driver->getWebDriverSession()->setCookie($cookie);
+        } catch (\Exception $e) {
+            if (Text::startsWith($e->getMessage(), 'unable to set cookie')) {
+                // We have to navigate to a page to launch browser
+                // Maybe we can find a better way to start the browser with initial cookies…
+                // We used "/confidentialite" because it's very fast to load
+                $this->navigationContext->iVisitedPage('ConfidentialitePage');
 
-        // We manually set the client PHPSESSID
-        $this->getSession()->setCookie($serverSession->getName(), $serverSession->getId());
+                // We manually set the client cookie (again)
+                $driver->getWebDriverSession()->setCookie($cookie);
+            } else {
+                throw $e;
+            }
+        }
 
         // Reload the page to authenticate user
         $this->getSession()->reload();
