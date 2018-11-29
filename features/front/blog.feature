@@ -8,7 +8,6 @@ Scenario: Anonymous wants to list published posts
   And I visited "blog page"
   Then I should see 10 ".media--news" elements
 
-@javascript
 Scenario: Posts can be filtered by projects
   And I visited "blog page"
   And I select "Croissance, innovation, disruption" from "post_search_project"
@@ -16,7 +15,6 @@ Scenario: Posts can be filtered by projects
   And I should see "Post 5"
   And I should not see "Post 8"
 
-@javascript
 Scenario: Post can be filtered by theme
   And feature "themes" is enabled
   And I visited "blog page"
@@ -26,7 +24,7 @@ Scenario: Post can be filtered by theme
   And I should see "Post 8"
   And I should not see "Post 2"
 
-@database @javascript
+@database
 Scenario: Anonymous wants to comment a blogpost
   And I visited "blog article page" with:
     | articleSlug | post-2 |
@@ -41,7 +39,7 @@ Scenario: Anonymous wants to comment a blogpost
   Then I should see "comment.submit_success" in the "#global-alert-box" element
   And I should see "J'ai un truc à dire" in the ".comments__section" element
 
-@database @javascript
+@database
 Scenario: Logged in user wants to comment a blogpost
   And I am logged in as user
   And I visited "blog article page" with:

@@ -1,7 +1,7 @@
 @consultation @sources
 Feature: Source
 
-@javascript @database
+@database
 Scenario: User wants to add a source in a contribuable opinion
   Given I am logged in as user
   And I go to an opinion with no sources
@@ -11,7 +11,6 @@ Scenario: User wants to add a source in a contribuable opinion
   Then I should see "alert.success.add.source" in the "#global-alert-box" element
   And I should see my new source
 
-@javascript
 Scenario: Can not create a source in non-contribuable project
   Given I am logged in as user
   And I go to an opinion in a closed step
@@ -19,7 +18,7 @@ Scenario: Can not create a source in non-contribuable project
   And I go on the sources tab
   Then the create source button should be disabled
 
-@javascript @database
+@database
 Scenario: Can vote for a source
   Given I am logged in as admin
   And I go to an opinion
@@ -28,7 +27,7 @@ Scenario: Can vote for a source
   When I delete my vote for the first source
 
 # Update
-@javascript @database
+@database
 Scenario: Author of a source loose their votes when updating it
   Given I am logged in as user
   And I go to an opinion
@@ -37,7 +36,7 @@ Scenario: Author of a source loose their votes when updating it
   Then I should see "alert.success.update.source" in the "#global-alert-box" element
   And my source should have lost its votes
 
-@javascript @database
+@database
 Scenario: Author of a source try to update without checking the confirm checkbox
   Given I am logged in as user
   And I go to an opinion
@@ -45,7 +44,6 @@ Scenario: Author of a source try to update without checking the confirm checkbox
   When I edit my source without confirming my votes lost
   Then I should see "source.constraints.check"
 
-@javascript
 Scenario: Non author of a source can not update or delete
   Given I am logged in as admin
   And I go to an opinion
@@ -54,7 +52,7 @@ Scenario: Non author of a source can not update or delete
   Then I should not see the source delete button
 
 # Delete
-@javascript @database
+@database
 Scenario: Author of a source wants to delete it
   Given I am logged in as user
   And I go to an opinion
@@ -64,7 +62,7 @@ Scenario: Author of a source wants to delete it
   And I should not see my source anymore
 
 # Reporting
-@javascript @security
+@security
 Scenario: Author of a source can not report it
   Given feature "reporting" is enabled
   And I am logged in as user
@@ -72,7 +70,6 @@ Scenario: Author of a source can not report it
   And I go on the sources tab
   And I should not see the source report button
 
-@javascript
 Scenario: Non author of a source can report it
   Given feature "reporting" is enabled
   And I am logged in as admin
