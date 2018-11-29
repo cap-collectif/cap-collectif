@@ -3,9 +3,10 @@ application:
   ports:
     - '80:80'
     - '443:443'
-    - '8686:8686'
-    - '1664:1664'
     - '1337:1337'
+    - '1664:1664'
+    - '8181:8181'
+    - '8686:8686'
   environment:
     SYMFONY_DATABASE_HOST: database
     SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
