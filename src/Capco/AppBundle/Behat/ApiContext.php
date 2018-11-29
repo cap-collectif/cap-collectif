@@ -471,18 +471,6 @@ EOF;
     }
 
     /**
-     * I do nothing for x seconds.
-     *
-     * @Given I do nothing for :seconds seconds
-     *
-     * @param mixed $seconds
-     */
-    public function iDoNothingForXSeconds($seconds)
-    {
-        sleep($seconds);
-    }
-
-    /**
      * @Then proposal with id :id should be deleted
      */
     public function proposalWithIdShouldBeSoftDeleted(string $id)
