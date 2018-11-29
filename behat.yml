@@ -1,34 +1,4 @@
-frontend:
-  extensions:
-    Behat\Symfony2Extension:
-      kernel:
-        env: test
-        debug: false
-    Tonic\Behat\ParallelScenarioExtension: ~
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mailcatchersmtp
-      purge_before_scenario: true
-    SensioLabs\Behat\PageObjectExtension:
-      namespaces:
-        page: [Capco\AppBundle\Behat\Page]
-    Behat\MinkExtension:
-      base_url: 'https://capco.test'
-      sessions:
-        default:
-          symfony2: ~
-    Bex\Behat\StepTimeLoggerExtension:
-      output: [console, csv]
-  suites:
-    front:
-      paths: ['%paths.base%/features/front']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
-      filters:
-        tags: '~@javascript'
-
-javascript:
+front:
   extensions:
     Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
       url: http://mailcatchersmtp
@@ -116,7 +86,7 @@ commands:
         - Alex\MailCatcher\Behat\MailCatcherContext
         - SamParkinson\Behat\Context\FileSystemContext
 
-api:
+rest:
   extensions:
     Tonic\Behat\ParallelScenarioExtension: ~
     Behat\Symfony2Extension: ~
@@ -126,7 +96,7 @@ api:
     Bex\Behat\StepTimeLoggerExtension:
       output: [console, csv]
   suites:
-    api:
+    rest:
       paths: ['%paths.base%/features/api']
       contexts:
         - Capco\AppBundle\Behat\ApiContext
@@ -153,7 +123,7 @@ graphql:
         - Capco\AppBundle\Behat\RabbitMQContext
         - Alex\MailCatcher\Behat\MailCatcherContext
 
-back:
+bo:
   extensions:
     Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
       url: http://mailcatchersmtp
@@ -178,7 +148,7 @@ back:
     Bex\Behat\StepTimeLoggerExtension:
       output: [console, csv]
   suites:
-    javascript:
+    bo:
       paths: ['%paths.base%/features/back']
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext

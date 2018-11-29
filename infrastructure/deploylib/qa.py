@@ -39,7 +39,7 @@ def behat(fast_failure='true', profile=False, suite='false', tags='false', timer
     if profile:
         jobs = [profile]
     else:
-        jobs = ['api', 'commands', 'frontend', 'javascript', 'graphql', 'back']
+        jobs = ['rest', 'commands', 'front', 'graphql', 'bo']
 
     for job in jobs:
         command = ('php -d memory_limit=-1 ./bin/behat'
