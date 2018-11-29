@@ -65,9 +65,74 @@ fragment commentInfos on Comment {
     }
   }
   kind
+  answers {
+      id
+      body
+      parent {
+        id
+      }
+      createdAt
+      publishedAt
+      updatedAt
+      author {
+        ... authorInfos
+        email
+      }
+      pinned
+      publicationStatus
+      reportings {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            ... reportingInfos
+          }
+        }
+      }
+      kind
+  }
 }
 EOF;
     protected const NEWS_INFO_FRAGMENT = <<<'EOF'
+fragment newsInfo on Post {
+  id
+  title
+  authors {
+    ... authorInfos
+  }
+  relatedContent {
+    __typename
+    ... on Proposal {
+      title
+    }
+    ... on Theme {
+      title
+    }
+    ... on Project {
+      title
+    }
+  }
+  comments {
+    edges {
+      node {
+        ... commentInfos
+      }
+    }
+  }
+  createdAt
+  updatedAt
+  commentable
+  displayedOnBlog
+  publishedAt
+  abstract
+  publicationStatus
+}
+EOF;
+    protected const COMMENTS_COMMENT = <<<'EOF'
 fragment newsInfo on Post {
   id
   title
@@ -678,6 +743,11 @@ EOF;
             function ($edge) use ($proposal, $progress) {
                 $comment = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalCommentRow($comment, $proposal);
+                if (isset($comment['answers']) && !empty($comment['answers'])) {
+                    foreach ($comment['answers'] as $answer) {
+                        $this->addProposalCommentRow($answer, $proposal);
+                    }
+                }
                 $progress->advance();
             },
             function ($pageInfo) use ($proposal) {

@@ -796,6 +796,13 @@ class UserRepository extends EntityRepository
 
     /**
      * Get search results.
+     *
+     * @param int $nbByPage
+     * @param int $page
+     * @param null $sort
+     * @param null $type
+     *
+     * @return Paginator
      */
     public function getSearchResults(
         $nbByPage = 8,
@@ -818,14 +825,13 @@ class UserRepository extends EntityRepository
             $qb->andWhere('ut.slug = :type')->setParameter('type', $type);
         }
 
-        if (!$sort || $sort === 'activity') {
-            $qb
-                ->addSelect(
-                    '(u.proposalsCount + u.proposalCommentsCount + u.opinionsCount + u.opinionVersionsCount + u.argumentsCount + u.sourcesCount + u.postCommentsCount + u.eventCommentsCount) AS HIDDEN contributionsCount'
-                )
-                ->addOrderBy('contributionsCount', 'DESC');
+        if (
+            isset(User::$sortOrder[$sort]) &&
+            User::SORT_ORDER_CONTRIBUTIONS_COUNT === User::$sortOrder[$sort]
+        ) {
+            $qb = $this->orderByContributionsCount($qb, 'DESC');
         } else {
-            $qb->addOrderBy('u.createdAt', 'DESC');
+            $qb->orderBy('u.createdAt', 'DESC');
         }
 
         if ($nbByPage > 0) {
@@ -833,6 +839,15 @@ class UserRepository extends EntityRepository
         }
 
         return new Paginator($qb);
+    }
+
+    public function orderByContributionsCount(QueryBuilder $qb, $order = 'DESC'): QueryBuilder
+    {
+        return $qb
+            ->addSelect(
+                '(u.opinionsCount + u.opinionVersionsCount + u.argumentsCount + u.sourcesCount + u.postCommentsCount + u.eventCommentsCount) AS HIDDEN contributionsCount'
+            )
+            ->orderBy('contributionsCount', $order);
     }
 
     public function findUsersFollowingAProposal(
