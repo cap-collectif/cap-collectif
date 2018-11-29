@@ -67,7 +67,7 @@ class ApplicationContext extends UserContext
     {
         // We reset everything
         $jobs = [
-            new Process('curl -sS -XBAN http://capco.test/'),
+            new Process('curl -sS -XBAN http://capco.test:8181'),
             new Process('redis-cli -h redis FLUSHALL'),
         ];
 

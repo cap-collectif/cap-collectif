@@ -8,7 +8,6 @@ backend default {
 
 # Called at the beginning of a request, after the complete request has been received and parsed.
 sub vcl_recv {
-
   # Delete cookie for static files
   if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css)$") {
     unset req.http.Cookie;

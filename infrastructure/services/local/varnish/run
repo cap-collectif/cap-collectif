@@ -2,4 +2,4 @@
 
 echo "Starting varnish..."
 
-exec varnishd -F -f /etc/varnish/capco.vcl -s malloc,${VARNISH_MEMORY} -a 0.0.0.0:80
+exec varnishd -F -f /etc/varnish/capco.vcl -s malloc,${VARNISH_MEMORY} -a 0.0.0.0:8181
