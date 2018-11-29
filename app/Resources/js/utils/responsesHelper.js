@@ -37,76 +37,6 @@ const ResponseFragment = graphql`
   }
 `;
 
-/**
- * Ok we have two shared fragment for questions :
- * - responsesHelper_adminQuestion
- * - responsesHelper_question
- *
- * Because we need different configurations depending on frontend or backend…
- * We could use a variable (eg: isOnAdmin)
- * But this is currently not supported on shared fragment:
- * https://github.com/facebook/relay/issues/2118
- */
-
-// eslint-disable-next-line no-unused-vars
-const QuestionAdminFragment = graphql`
-  fragment responsesHelper_adminQuestion on Question {
-    id
-    title
-    number
-    private
-    position
-    required
-    helpText
-    jumps {
-      id
-      always
-      origin {
-        id
-      }
-      destination {
-        id
-        title
-      }
-      conditions {
-        id
-        operator
-        question {
-          id
-          title
-        }
-        ... on MultipleChoiceQuestionLogicJumpCondition {
-          value {
-            id
-            title
-          }
-        }
-      }
-    }
-    description
-    type
-    ... on MultipleChoiceQuestion {
-      isOtherAllowed
-      randomQuestionChoices
-      validationRule {
-        type
-        number
-      }
-      choices(allowRandomize: false) {
-        # this is updated
-        id
-        title
-        description
-        color
-        image {
-          id
-          url
-        }
-      }
-    }
-  }
-`;
-
 // eslint-disable-next-line no-unused-vars
 const QuestionFragment = graphql`
   fragment responsesHelper_question on Question {
@@ -146,12 +76,11 @@ const QuestionFragment = graphql`
     type
     ... on MultipleChoiceQuestion {
       isOtherAllowed
-      randomQuestionChoices
       validationRule {
         type
         number
       }
-      choices(allowRandomize: true) {
+      choices {
         id
         title
         description
@@ -201,7 +130,6 @@ type Question = {|
   +description: ?string,
   +type: QuestionTypeValue,
   +isOtherAllowed?: boolean,
-  +randomQuestionChoices?: boolean,
   +validationRule?: ?{|
     +type: MultipleChoiceQuestionValidationRulesTypes,
     +number: number,

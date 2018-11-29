@@ -2,8 +2,10 @@
 Feature: Questionnaire
 
 ## Questionnaire page
+
 # Create
-@database
+
+@javascript @database
 Scenario: Logged in user wants to add a reply to a questionnaire
   Given I am logged in as user
   And I go to a questionnaire step
@@ -14,7 +16,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire
   When I wait 1 seconds
   And I should see my reply
 
-@database
+@javascript @database
 Scenario: Logged in user wants to add a private reply to a questionnaire
   Given I am logged in as user
   And I go to a questionnaire step
@@ -26,7 +28,7 @@ Scenario: Logged in user wants to add a private reply to a questionnaire
   Then I should see "reply.request.create.success" in the "#global-alert-box" element
   And I should see my anonymous reply
 
-@security
+@javascript @security
 Scenario: Logged in user wants to add a reply to a questionnaire without filling the required questions
   Given I am logged in as user
   And I go to a questionnaire step
@@ -35,7 +37,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire without filling
   Then I should see "reply.constraints.field_mandatory" in the "#reply-form" element
   And I reload the page, I should see a confirm popup
 
-@security
+@javascript @security
 Scenario: Logged in user wants to add a reply to a questionnaire with not enough choices for required question
   Given I am logged in as user
   And I go to a questionnaire step
@@ -45,7 +47,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire with not enough
   Then I should see 'reply.constraints.choices_equal {"nb":3}'
   And I reload the page, I should see a confirm popup
 
-@security
+@javascript @security
 Scenario: Logged in user wants to add a reply to a questionnaire with not enough choices for optional question
   Given I am logged in as user
   And I go to a questionnaire step
@@ -54,7 +56,7 @@ Scenario: Logged in user wants to add a reply to a questionnaire with not enough
   Then I should see 'reply.constraints.choices_min {"nb":2}'
   And I reload the page, I should see a confirm popup
 
-@database
+@javascript @database
 Scenario: Logged in user wants to answer with a ranking
   Given I am logged in as user
   And I go to a questionnaire step
@@ -63,20 +65,20 @@ Scenario: Logged in user wants to answer with a ranking
   Then the ranking choice should be in the choice box
   And I reload the page, I should see a confirm popup
 
-@security
+@javascript @security
 Scenario: Anonymous user wants to add a reply to a questionnaire
   Given I go to a questionnaire step
   Then I should see "reply.not_logged_in.error" in the "#main" element
   And the questionnaire form should be disabled
 
-@security
+@javascript @security
 Scenario: Logged in user wants to add a reply to a closed questionnaire step
   Given I am logged in as user
   When I go to a closed questionnaire step
   Then I should see "step.questionnaire.alert.ended.title" in the "#main" element
   And the questionnaire form should be disabled
 
-@database
+@javascript @database
 Scenario: Logged in user wants to add another reply when multiple replies is allowed
   Given I am logged in as admin
   When I go to a questionnaire step
@@ -87,7 +89,7 @@ Scenario: Logged in user wants to add another reply when multiple replies is all
   When I wait 1 seconds  
   And I should see my reply
 
-@security
+@javascript @security
 Scenario: Logged in user wants to add another reply when multiple replies is not allowed
   Given I am logged in as admin
   When I wait 1 seconds
@@ -97,13 +99,15 @@ Scenario: Logged in user wants to add another reply when multiple replies is not
 
 ## Replies list
 
+@javascript
 Scenario: Logged in user wants to see the list of his replies
   Given I am logged in as admin
   When I go to a questionnaire step
   Then I should see my reply
 
 ## Update
-@database
+
+@javascript @database
 Scenario: Logged in user wants to update a reply
   Given I am logged in as admin
   When I go to a questionnaire step
@@ -116,7 +120,9 @@ Scenario: Logged in user wants to update a reply
   When I wait 1 seconds
   And I should see my reply
 
-@database @draft
+# Draft
+
+@javascript @database @draft
 Scenario: Logged in user wants to add a draft to a questionnaire with wrong values
   Given I am logged in as user
   And I go to a questionnaire step
@@ -127,7 +133,7 @@ Scenario: Logged in user wants to add a draft to a questionnaire with wrong valu
   When I wait 1 seconds
   And I should see my reply
   
-@database @draft
+@javascript @database @draft
 Scenario: Logged in user wants to update a draft to a questionnaire with wrong values
   Given I am logged in as admin
   And I go to a questionnaire step
@@ -143,7 +149,8 @@ Scenario: Logged in user wants to update a draft to a questionnaire with wrong v
   And I should see my reply
 
 ## Deletion
-@database
+
+@javascript @database
 Scenario: Logged in user wants to remove a reply
   Given I am logged in as admin
   When I go to a questionnaire step
@@ -160,7 +167,7 @@ Scenario: Logged in user wants to remove a reply
   Then I should see "reply.request.delete.success" in the "#global-alert-box" element
   And I should not see my reply anymore
 
-@security
+@javascript @security
 Scenario: Logged in user wants to remove a reply in a closed questionnaire step
   Given I am logged in as admin
   When I go to a closed questionnaire step

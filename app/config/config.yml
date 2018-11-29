@@ -665,7 +665,6 @@ overblog_graphql:
     show_debug_info: '%kernel.debug%'
     # internal_error_message: "An error occurred, please retry later or contact us!"
     config_validation: '%kernel.debug%'
-    # disable listener of the bundle out of box classLoader
     use_classloader_listener: false
     # We generate types manually with "graphql:compile" command.
     auto_compile: false

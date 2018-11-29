@@ -135,11 +135,6 @@ abstract class Comment implements
         return null;
     }
 
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -152,11 +147,6 @@ abstract class Comment implements
         return $this;
     }
 
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
@@ -174,11 +164,6 @@ abstract class Comment implements
         return $this->Author;
     }
 
-    /**
-     * @param User $Author
-     *
-     * @return $this
-     */
     public function setAuthor($Author)
     {
         $this->Author = $Author;
@@ -192,9 +177,6 @@ abstract class Comment implements
         return $this->parent;
     }
 
-    /**
-     * @param mixed $parent
-     */
     public function setParent($parent)
     {
         $this->parent = $parent;
@@ -203,17 +185,11 @@ abstract class Comment implements
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAuthorName()
     {
         return $this->authorName;
     }
 
-    /**
-     * @param mixed $authorName
-     */
     public function setAuthorName($authorName)
     {
         $this->authorName = $authorName;
@@ -221,17 +197,11 @@ abstract class Comment implements
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAuthorEmail()
     {
         return $this->authorEmail;
     }
 
-    /**
-     * @param mixed $authorEmail
-     */
     public function setAuthorEmail($authorEmail)
     {
         $this->authorEmail = $authorEmail;
@@ -239,17 +209,11 @@ abstract class Comment implements
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAuthorIp()
     {
         return $this->authorIp;
     }
 
-    /**
-     * @param mixed $authorIp
-     */
     public function setAuthorIp($authorIp)
     {
         $this->authorIp = $authorIp;
@@ -257,19 +221,11 @@ abstract class Comment implements
         return $this;
     }
 
-    /**
-     * @return ArrayCollection
-     */
     public function getAnswers()
     {
         return $this->answers;
     }
 
-    /**
-     * @param $answer
-     *
-     * @return $this
-     */
     public function addAnswer($answer)
     {
         if (!$this->answers->contains($answer)) {
@@ -279,11 +235,6 @@ abstract class Comment implements
         return $this;
     }
 
-    /**
-     * @param $answer
-     *
-     * @return $this
-     */
     public function removeAnswer($answer)
     {
         $this->answers->removeElement($answer);
@@ -291,19 +242,11 @@ abstract class Comment implements
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getReports()
     {
         return $this->Reports;
     }
 
-    /**
-     * @param Reporting $report
-     *
-     * @return $this
-     */
     public function addReport(Reporting $report)
     {
         if (!$this->Reports->contains($report)) {
@@ -313,11 +256,6 @@ abstract class Comment implements
         return $this;
     }
 
-    /**
-     * @param Reporting $report
-     *
-     * @return $this
-     */
     public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
@@ -327,11 +265,6 @@ abstract class Comment implements
 
     // ************************ Custom methods *********************************
 
-    /**
-     * @param User $user
-     *
-     * @return bool
-     */
     public function userHasReport(User $user = null)
     {
         if (null !== $user) {
@@ -376,9 +309,6 @@ abstract class Comment implements
         return $this->getRelatedObject()->canDisplay($user);
     }
 
-    /**
-     * @return bool
-     */
     public function canContributeToRelatedObject($user = null)
     {
         return $this->getRelatedObject()->canContribute($user);
@@ -386,16 +316,8 @@ abstract class Comment implements
 
     // ********************** Abstract methods **********************************
 
-    /**
-     * @return mixed
-     */
     abstract public function getRelatedObject();
 
-    /**
-     * @param $object
-     *
-     * @return mixed
-     */
     abstract public function setRelatedObject($object);
 
     // ************************* Lifecycle ***********************************

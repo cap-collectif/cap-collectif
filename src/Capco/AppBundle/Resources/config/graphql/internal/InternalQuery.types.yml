@@ -6,14 +6,14 @@ InternalQuery:
     name: Query
     description: 'Root of the schema.'
     fields:
-      viewer:
-        type: 'InternalUser!'
       registrationForm:
         type: 'InternalRegistrationForm'
         description: 'Get the current registration form'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
       events:
         type: 'InternalEventConnection!'
+      viewer:
+        type: 'InternalUser!'
       users:
         type: 'InternalUserConnection!'
         argsBuilder: 'Relay::Connection'

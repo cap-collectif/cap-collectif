@@ -4,7 +4,7 @@ Feature: Newsletter
 Background:
   Given feature "newsletter" is enabled
 
-@database
+@database @javascript
 Scenario: Can subscribe to the Newsletter
   Given I visited "home page"
   When I fill in the following:

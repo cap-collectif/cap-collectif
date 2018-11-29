@@ -1,7 +1,7 @@
 @consultation @versions
 Feature: Opinion Versions
 
-@database
+@javascript @database
 Scenario: Author of a version wants to delete it
   Given I am logged in as user
   And I go to a version
@@ -9,17 +9,18 @@ Scenario: Author of a version wants to delete it
   And I confirm version deletion
   And I should not see my version anymore
 
-@security
+@javascript @security
 Scenario: Non author of a version wants to delete it
   Given I am logged in as admin
   And I go to a version
   Then I should not see the delete version button
 
-@security
+@javascript @security
 Scenario: Anonymous wants to delete a version
   Given I go to a version
   Then I should not see the delete version button
 
+@javascript
 Scenario: Anonymous user wants to see all votes of a version
   Given I go to an opinion version with loads of votes
   When I click the show all opinion version votes button

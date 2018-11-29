@@ -4,7 +4,7 @@ Feature: User Admin
 Background:
   Given feature "profiles" is enabled
 
-@database
+@database @javascript
 Scenario: Logged in super admin wants to edit a user profile
   Given I am logged in as admin
   Then I go to the admin user page with userId "user516"
@@ -22,7 +22,7 @@ Scenario: Logged in super admin wants to edit a user profile
   And I wait 2 seconds
   And I should see "global.saved"
 
-@database
+@database @javascript
 Scenario: Logged in super admin wants to edit a user profile
   Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
@@ -35,7 +35,7 @@ Scenario: Logged in super admin wants to edit a user profile
   And I wait 2 seconds
   And I should see "global.saved"
 
-@database
+@database @javascript
 Scenario: Logged in super admin wants to edit a user data
   Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
@@ -46,7 +46,7 @@ Scenario: Logged in super admin wants to edit a user data
   And I wait 2 seconds
   And I should see "global.saved"
 
-@database
+@database @javascript
 Scenario: Logged in super admin wants to edit a user password
   Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
@@ -56,7 +56,7 @@ Scenario: Logged in super admin wants to edit a user password
   And The element "#password-form-current" should be disabled
   And the button "user-admin-password-save" should be disabled
 
-@database
+@database @javascript
 Scenario: Logged in admin wants to edit my password in back office
   Given I am logged in as admin
   Then I go to the admin user page with userId "userAdmin"
@@ -73,7 +73,7 @@ Scenario: Logged in admin wants to edit my password in back office
   And I wait 2 seconds
   And I should see "global.saved"
 
-@database
+@database @javascript
 Scenario: Logged in super admin wants delete a user
   Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
@@ -85,7 +85,7 @@ Scenario: Logged in super admin wants delete a user
   Then I should be redirected to "/admin/capco/user/user/list"
   And I should see "deleted-user"
 
-@database
+@database @javascript
 Scenario: Logged in super admin wants to create a user
   Given I am logged in as super admin
   Then I go to the admin user list page

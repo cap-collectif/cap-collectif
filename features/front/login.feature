@@ -1,24 +1,29 @@
 @core @login
 Feature: Login
 
+@javascript
 Scenario: A user wants to login and see he has successfully logged in.
   Given I am logged in as user
   Then I can see I am logged in as "user"
 
+@javascript
 Scenario: A drupal user wants to login and see he has successfully logged in.
   Given I am logged in as drupal
   Then I can see I am logged in as "drupal"
 
+@javascript
 Scenario: An admin wants to login and see he has successfully logged in.
   Given I am logged in as admin
   Then I can see I am logged in as "admin"
   And I can access admin in navbar
 
+@javascript
 Scenario: A logged user wants to logout
   Given I am logged in as user
   When I logout
   Then I should see "global.login"
 
+@javascript
 @database
 Scenario: User has lost password
   Given I open login modal
@@ -27,6 +32,7 @@ Scenario: User has lost password
   And I press "resetting.request.submit"
   Then I should see 'resetting.check_email {"%email%":"user@test.com"}'
 
+@javascript
 @database
 Scenario: User has lost password and email should be sent
   Given I open login modal
@@ -37,6 +43,7 @@ Scenario: User has lost password and email should be sent
   And I open mail with subject "email-subject-resetting-password"
   And I should see "email-content-resetting-password" in mail
 
+@javascript
 @database
 Scenario: Admin wants to enable his account and set his password
   Given features "registration", "profiles" are enabled

@@ -4,7 +4,7 @@ Feature: Profil
 Background:
   Given feature "profiles" is enabled
 
-@database
+@javascript @database
 Scenario: Logged in user wants to change his username
   Given feature "user_type" is enabled
   Given I am logged in as user
@@ -17,7 +17,7 @@ Scenario: Logged in user wants to change his username
   And I wait 1 seconds
   Then I should see "global.saved"
 
-@database
+@javascript @database
 Scenario: Logged in user wants to change his user type
   Given feature "user_type" is enabled
   And I am logged in as user
@@ -28,7 +28,7 @@ Scenario: Logged in user wants to change his user type
   And I wait 1 seconds
   Then I should see "global.saved"
 
-@database
+@javascript @database
 Scenario: Logged in user wants to change his password with a wrong current password
   Given I am logged in as user
   And I visited "change password page"
@@ -40,7 +40,7 @@ Scenario: Logged in user wants to change his password with a wrong current passw
   And I should see "fos_user.password.mismatch"
   And I should see "global.invalid.form"
 
-@database
+@javascript @database
 Scenario: Logged in user wants to change his password to a too short password
   Given I am logged in as user
   And I visited "change password page"
@@ -52,7 +52,7 @@ Scenario: Logged in user wants to change his password to a too short password
   And I should see "fos_user.new_password.short"
   And I should see "global.invalid.form"
 
-@database
+@javascript @database
 Scenario: Logged in user wants to change his password
   Given I am logged in as user
   And I visited "change password page"
@@ -65,7 +65,7 @@ Scenario: Logged in user wants to change his password
   And I wait 2 seconds
   Then I should see "global.saved"
 
-@database
+@javascript @database
 Scenario: Logged in user wants to manage his followings and unfollow all and stay unfollow after refresh
   Given I am logged in as user
   And I visited "manage followings page"
@@ -76,7 +76,7 @@ Scenario: Logged in user wants to manage his followings and unfollow all and sta
   And I wait 2 seconds
   And I should see "no-following"
 
-@database
+@javascript @database
 Scenario: Logged in user wants to manage his followings and unfollow the first project and stay unfollow after refresh
   Given I am logged in as user
   And I visited "manage followings page"
@@ -87,7 +87,7 @@ Scenario: Logged in user wants to manage his followings and unfollow the first p
   And I reload the page
   Then I should not see an "#profile-project-collapse-project6" element
 
-@database
+@javascript @database
 Scenario: Logged in user wants to manage his followings and unfollow the first proposal and stay unfollow after refresh
   Given I am logged in as user
   And I visited "manage followings page"
@@ -98,7 +98,7 @@ Scenario: Logged in user wants to manage his followings and unfollow the first p
   And I reload the page
   Then I should not see an "#profile-proposal-unfollow-button-proposal1" element
 
-@database
+@javascript @database
 Scenario: Logged in user wants to manage his followings and click on a proposal
   Given I am logged in as user
   And I visited "manage followings page"
@@ -106,7 +106,7 @@ Scenario: Logged in user wants to manage his followings and click on a proposal
   When I follow "Ravalement de la façade de la bibliothèque municipale"
   And I should be redirected to "/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale"
 
-@database
+@javascript @database
 Scenario: Logged in user wants to manage his followings and click on a project
   Given I am logged in as user
   And I visited "manage followings page"
@@ -114,7 +114,7 @@ Scenario: Logged in user wants to manage his followings and click on a project
   When I click the "#profile-project-link-project6" element
   Then I should be redirected to "/project/budget-participatif-rennes/collect/collecte-des-propositions"
 
-@database
+@javascript @database
 Scenario: Logged in user wants to soft delete his account
   Given I am logged in as user
   And I visited "edit profile page"
@@ -127,7 +127,7 @@ Scenario: Logged in user wants to soft delete his account
   Then I should be redirected to "/"
   Then I should see "account-and-contents-anonymized" in the "#symfony-flash-messages" element
 
-@database
+@javascript @database
 Scenario: Logged as user, I want to delete my firstname, but I cancel it
   Given I am logged in as user
   And I visited "manage personal data page"
@@ -139,7 +139,7 @@ Scenario: Logged as user, I want to delete my firstname, but I cancel it
   Then I click on button "#btn-cancel-delete-field"
   And I should see "form.label_firstname"
 
-@database
+@javascript @database
 Scenario: Logged as user, I want to delete my firstname
   Given I am logged in as user
   And I visited "manage personal data page"
@@ -151,7 +151,7 @@ Scenario: Logged as user, I want to delete my firstname
   Then I click on button "#btn-confirm-delete-field"
   And I should not see "form.label_firstname"
 
-@database
+@javascript @database
 Scenario: Logged as user, I want to update my firstname
   Given I am logged in as user
   And I visited "manage personal data page"
@@ -176,7 +176,7 @@ Scenario: Logged as user, I want to update my firstname
   And I wait 2 seconds
   And the "firstname" field should contain "myNewFirstname"
 
-@database
+@javascript @database
 Scenario: Logged as user, I want to delete my address
   Given I am logged in as user
   And I visited "manage personal data page"
@@ -207,7 +207,7 @@ Scenario: Logged as user, I want to delete my address
   And I should not see "form.label_city"
   And I should not see "form.label_zip_code"
 
-@database
+@javascript @database
 Scenario: Logged as user, I want to update my profile
   Given feature "user_type" is enabled
   And I am logged in as user
@@ -219,7 +219,7 @@ Scenario: Logged as user, I want to update my profile
   And I wait 1 seconds
   Then I should see "global.saved"
 
-@database
+@javascript @database
 Scenario: Logged as user, I want to update my profile
   Given feature "user_type" is disabled
   And I am logged in as user

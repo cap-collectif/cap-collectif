@@ -20,6 +20,7 @@ use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class CommentNotifier extends BaseNotifier
 {
@@ -27,6 +28,7 @@ class CommentNotifier extends BaseNotifier
     protected $proposalResolver;
     protected $proposalUrlResolver;
     protected $userUrlResolver;
+    protected $translator;
 
     public function __construct(
         MailerService $mailer,
@@ -35,13 +37,15 @@ class CommentNotifier extends BaseNotifier
         CommentResolver $commentResolver,
         ProposalResolver $proposalResolver,
         ProposalUrlResolver $proposalUrlResolver,
-        UserUrlResolver $userUrlResolver
+        UserUrlResolver $userUrlResolver,
+        TranslatorInterface $translator
     ) {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->commentResolver = $commentResolver;
         $this->proposalResolver = $proposalResolver;
         $this->proposalUrlResolver = $proposalUrlResolver;
         $this->userUrlResolver = $userUrlResolver;
+        $this->translator = $translator;
     }
 
     public function onCreate(Comment $comment)
@@ -56,6 +60,9 @@ class CommentNotifier extends BaseNotifier
                     ->isNotifyingCommentOnCreate()
             ) {
                 if ($isAnonymous) {
+                    $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
+                    $comment->setAuthorName($author);
+
                     $this->mailer->sendMessage(
                         CommentCreateAdminAnonymousMessage::create(
                             $comment,
@@ -83,6 +90,8 @@ class CommentNotifier extends BaseNotifier
                 $user !== $comment->getAuthor()
             ) {
                 if ($isAnonymous) {
+                    $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
+                    $comment->setAuthorName($author);
                     $this->mailer->sendMessage(
                         CommentCreateAuthorAnonymousMessage::create(
                             $comment,
@@ -131,6 +140,10 @@ class CommentNotifier extends BaseNotifier
             switch ($comment['notifyTo']) {
                 case CommentSubscriber::NOTIFY_TO_ADMIN:
                     if ($comment['anonymous']) {
+                        $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
+                        $comment['username'] = empty($comment['username'])
+                            ? $author
+                            : $comment['username'];
                         $this->mailer->sendMessage(
                             CommentDeleteAdminAnonymousMessage::create(
                                 $comment,
@@ -160,6 +173,7 @@ class CommentNotifier extends BaseNotifier
                             )
                         );
                     }
+
                     break;
             }
         }
@@ -177,6 +191,9 @@ class CommentNotifier extends BaseNotifier
                     ->isNotifyingCommentOnUpdate()
             ) {
                 if ($isAnonymous) {
+                    $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
+                    $comment->setAuthorName($author);
+
                     $this->mailer->sendMessage(
                         CommentUpdateAdminAnonymousMessage::create(
                             $comment,
