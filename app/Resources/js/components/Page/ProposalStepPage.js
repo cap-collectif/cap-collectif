@@ -65,7 +65,6 @@ export class ProposalStepPage extends React.Component<Props> {
             border: d.border,
             background: d.background,
           },
-          styleLegacy: d.geojsonStyle,
         }));
     } catch (e) {
       // eslint-disable-next-line no-console

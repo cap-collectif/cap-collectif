@@ -22,7 +22,11 @@ type PropsSubmit = Props & {
   handleRefresh: () => void,
 };
 
-const validate = (values: Object) => {
+type FormValues = {
+  projectDistrict: Object,
+};
+
+const validate = (values: FormValues) => {
   const errors = {
     projectDistrict: {},
   };
@@ -70,7 +74,7 @@ const validate = (values: Object) => {
   return errors;
 };
 
-const onSubmit = (values: Object, dispatch: Function, props: PropsSubmit) => {
+const onSubmit = (values: FormValues, dispatch: Function, props: PropsSubmit) => {
   const input = {
     ...values.projectDistrict,
   };

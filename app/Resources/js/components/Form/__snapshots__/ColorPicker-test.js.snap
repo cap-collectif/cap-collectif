@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ColorPicker /> renders correcty 1`] = `
+<ColorPicker
+  color="#DDAADD"
+  disableAlpha={false}
+  onChangeComplete={[Function]}
+/>
+`;
