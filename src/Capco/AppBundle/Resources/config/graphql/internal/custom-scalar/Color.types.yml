@@ -1,0 +1,7 @@
+Color:
+  type: custom-scalar
+  config:
+    description: 'A color on hexadecimal format (#DDDDDD).'
+    serialize: ["Capco\\AppBundle\\GraphQL\\Type\\ColorType", 'serialize']
+    parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\ColorType", 'parseValue']
+    parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\ColorType", 'parseLiteral']

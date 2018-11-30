@@ -524,3 +524,26 @@ InternalMutation:
           inputType: UpdateQuestionnaireConfigurationInput
           payloadType: UpdateQuestionnaireConfigurationPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireConfigurationMutation", [value])'
+
+      # Project District
+      createProjectDistrict:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: CreateProjectDistrictInput
+          payloadType: CreateProjectDistrictPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\CreateProjectDistrictMutation", [value])'
+      deleteProjectDistrict:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: DeleteProjectDistrictInput
+          payloadType: CreateProjectDistrictPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\DeleteProjectDistrictMutation", [value])'
+      updateProjectDistrict:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: UpdateProjectDistrictInput
+          payloadType: CreateProjectDistrictPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UpdateProjectDistrictMutation", [value])'

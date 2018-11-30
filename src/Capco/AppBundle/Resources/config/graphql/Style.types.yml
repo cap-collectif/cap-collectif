@@ -1,0 +1,15 @@
+Style:
+  type: object
+  config:
+    description: 'A object style.'
+    fields:
+      id:
+        type: ID
+      isEnable:
+        type: Boolean
+      color:
+        type: Color
+      opacity:
+        type: Float
+      size:
+        type: Int

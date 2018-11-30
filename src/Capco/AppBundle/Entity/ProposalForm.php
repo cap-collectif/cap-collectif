@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
 
 /**
  * @ORM\Table(
@@ -89,13 +90,13 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalCategory", mappedBy="form", cascade={"persist"}, orphanRemoval=true)
      * @ORM\OrderBy({"name" = "ASC"})
-     **/
+     */
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District", mappedBy="form", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProposalDistrict", mappedBy="form", cascade={"persist"}, orphanRemoval=true)
      * @ORM\OrderBy({"name" = "ASC"})
-     **/
+     */
     private $districts;
 
     /**
@@ -525,7 +526,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this->districts;
     }
 
-    public function addDistrict(District $district): self
+    public function addDistrict(ProposalDistrict $district): self
     {
         if (!$this->districts->contains($district)) {
             $this->districts->add($district);
@@ -535,7 +536,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
         return $this;
     }
 
-    public function removeDistrict(District $district): self
+    public function removeDistrict(ProposalDistrict $district): self
     {
         $this->districts->removeElement($district);
 
@@ -808,7 +809,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
     public function setIsProposalForm(bool $isProposal): self
     {
         $this->objectType =
-            $isProposal === true
+            true === $isProposal
                 ? ProposalFormObjectType::PROPOSAL
                 : ProposalFormObjectType::QUESTION;
 
@@ -817,7 +818,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm
 
     public function isProposalForm(): bool
     {
-        return $this->objectType === ProposalFormObjectType::PROPOSAL;
+        return ProposalFormObjectType::PROPOSAL === $this->objectType;
     }
 
     public function getIsProposalForm(): bool

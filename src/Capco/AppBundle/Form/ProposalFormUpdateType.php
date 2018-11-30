@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
-use Capco\AppBundle\Entity\District;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\ProposalCategory;
 
 class ProposalFormUpdateType extends AbstractType
@@ -66,7 +66,7 @@ class ProposalFormUpdateType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'delete_empty' => function (ProposalCategory $category = null) {
-                    return null === $category || $category->getName() === "NULL";
+                    return null === $category || 'NULL' === $category->getName();
                 },
             ])
 
@@ -75,8 +75,8 @@ class ProposalFormUpdateType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'delete_empty' => function (District $district = null) {
-                    return null === $district || $district->getName() === "NULL";
+                'delete_empty' => function (ProposalDistrict $district = null) {
+                    return null === $district || 'NULL' === $district->getName();
                 },
             ])
 
@@ -89,8 +89,8 @@ class ProposalFormUpdateType extends AbstractType
                     QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
                 ) {
                     return null === $questionnaireAbstractQuestion ||
-                        $questionnaireAbstractQuestion->getQuestion()->getTitle() === null ||
-                        $questionnaireAbstractQuestion->getQuestion()->getTitle() === "";
+                        null === $questionnaireAbstractQuestion->getQuestion()->getTitle() ||
+                        '' === $questionnaireAbstractQuestion->getQuestion()->getTitle();
                 },
             ])
 

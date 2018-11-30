@@ -158,6 +158,7 @@ Scenario: Logged in user wants to remove a reply
   And I confirm reply draft deletion
   And I wait "#global-alert-box .alert-success" to appear on current page
   Then I should see "reply.request.delete.success" in the "#global-alert-box" element
+  And I wait 1 seconds
   And I should not see my reply anymore
 
 @security

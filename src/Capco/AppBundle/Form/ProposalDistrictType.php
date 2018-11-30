@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\District;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,14 +17,16 @@ class ProposalDistrictType extends AbstractType
         $builder->add('name', TextType::class);
         $builder->add('displayedOnMap', CheckboxType::class);
         $builder->add('geojson', TextType::class);
-        $builder->add('geojsonStyle', TextType::class, ['required' => false]);
+        $builder->add('border', BorderStyleType::class, ['required' => false]);
+        $builder->add('background', BackgroundStyleType::class, ['required' => false]);
+        $builder->addEventSubscriber(new CleanDistrictFieldSubscriber());
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => District::class,
+            'data_class' => ProposalDistrict::class,
         ]);
     }
 }

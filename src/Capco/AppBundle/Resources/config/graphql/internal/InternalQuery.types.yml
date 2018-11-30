@@ -48,7 +48,7 @@ InternalQuery:
         type: '[ProposalForm]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver")'
       availableDistrictsForLocalisation:
-        type: '[District!]!'
+        type: '[ProposalDistrict!]!'
         description: 'Lookup availables districts on a proposalForm for a given address.'
         args:
           proposalFormId:
@@ -93,3 +93,8 @@ InternalQuery:
       availableQuestionnaires:
         type: '[InternalQuestionnaire!]!'
         resolve: "@=resolver('query_get_available_questionnaires')"
+      projectDistricts:
+        description: 'List of all districts in project.'
+        type: '[ProjectDistrict!]!'
+        access: "@=hasRole('ROLE_ADMIN')"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryProjectDistrictResolver")'

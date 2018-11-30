@@ -8,8 +8,10 @@ DistrictInput:
         type: 'String!'
       geojson:
         type: 'GeoJSON'
-      geojsonStyle:
-        type: 'CssJSON'
       displayedOnMap:
         type: 'Boolean'
         defaultValue: false
+      border:
+        type: BorderStyleInput
+      background:
+        type: BackgroundStyleInput

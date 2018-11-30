@@ -2,8 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\District;
-use Capco\AppBundle\Form\DistrictAdminType;
+use Capco\AppBundle\Form\ProposalDistrictAdminType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -21,13 +20,13 @@ class DistrictMutation implements ContainerAwareInterface, MutationInterface
 
         $values = $input->getRawArguments();
 
-        $district = $em->find('CapcoAppBundle:District', $values['districtId']);
+        $district = $em->find('CapcoAppBundle:District\ProposalDistrict', $values['districtId']);
         if (!$district) {
             throw new UserError(sprintf('Unknown district with id "%d"', $values['districtId']));
         }
         unset($values['districtId']); // This only usefull to retrieve the district
 
-        $form = $formFactory->create(DistrictAdminType::class, $district);
+        $form = $formFactory->create(ProposalDistrictAdminType::class, $district);
         $form->submit($values);
 
         if (!$form->isValid()) {

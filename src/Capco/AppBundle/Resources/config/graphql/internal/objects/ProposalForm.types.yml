@@ -49,7 +49,7 @@ ProposalForm:
       proposalInAZoneRequired:
         type: 'Boolean!'
       districts:
-        type: '[District!]!'
+        type: '[ProposalDistrict!]!'
         args:
           order:
             type: 'DistrictOrderField'

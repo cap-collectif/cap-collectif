@@ -91,7 +91,7 @@ Proposal:
       category:
         type: 'ProposalCategory'
       district:
-        type: 'District'
+        type: 'ProposalDistrict'
       address:
         type: 'Address'
       formattedAddress:

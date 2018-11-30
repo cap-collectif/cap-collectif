@@ -3,9 +3,8 @@
 namespace Capco\AppBundle\Command\Paris;
 
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\District;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalComment;
@@ -115,7 +114,8 @@ class ParisImportCommand extends ContainerAwareCommand
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $this->em->getConnection()
+        $this->em
+            ->getConnection()
             ->getConfiguration()
             ->setSQLLogger(null);
         $this->categories = $this->createCategories();
@@ -181,6 +181,7 @@ class ParisImportCommand extends ContainerAwareCommand
                 ->setCreatedAt(new \DateTime($row['created_at']))
                 ->setPublishedAt(new \DateTime($row['created_at']))
                 ->setUpdatedAt(new \DateTime($row['updated_at']));
+
             try {
                 if (
                     '' !== $row['filename'] &&
@@ -245,7 +246,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
         $json = \GuzzleHttp\json_decode(file_get_contents(__DIR__ . '/districts.geojson'), true);
         foreach ($json['features'] as $district) {
-            $entity = (new District())
+            $entity = (new ProposalDistrict())
                 ->setName($district['properties']['nom'])
                 ->setGeojson(\GuzzleHttp\json_encode($district))
                 ->setForm($proposalForm);
@@ -274,6 +275,7 @@ class ParisImportCommand extends ContainerAwareCommand
                 if ('' === $proposal['author_name']) {
                     $progress->advance();
                     ++$count;
+
                     continue;
                 }
                 $author = $this->getContainer()
@@ -296,13 +298,11 @@ class ParisImportCommand extends ContainerAwareCommand
                     ->first();
                 $status = $statuses
                     ->filter(function (Status $status) use ($proposal) {
-                        return (
-                            false !==
+                        return false !==
                             stripos(
                                 Slugify::create()->slugify($status->getName()),
                                 $proposal['status']
-                            )
-                        );
+                            );
                     })
                     ->first();
                 $proposal = (new Proposal())
@@ -363,6 +363,7 @@ class ParisImportCommand extends ContainerAwareCommand
             foreach ($comments as $comment) {
                 if ('' === $comment['author_name']) {
                     $progress->advance();
+
                     continue;
                 }
                 $author = $this->getContainer()

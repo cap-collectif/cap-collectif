@@ -510,6 +510,19 @@ interface Argumentable {
   ): ArgumentConnection
 }
 
+input BackgroundStyleInput {
+  isEnable: Boolean
+  color: Color
+  opacity: Float
+}
+
+input BorderStyleInput {
+  isEnable: Boolean
+  color: Color
+  opacity: Float
+  size: Int
+}
+
 # Ordering options for categories.
 enum CategoryOrderField {
   ALPHABETICAL
@@ -552,7 +565,7 @@ input ChangeDistrictInput {
 }
 
 type ChangeDistrictPayload {
-  district: District!
+  district: ProposalDistrict!
   clientMutationId: String
 }
 
@@ -935,6 +948,9 @@ type CollectStep implements Node & Step & ProposalStep {
     last: Int
   ): ProposalConnection!
 }
+
+# A color on hexadecimal format (#DDDDDD).
+scalar Color
 
 # A comment
 type Comment implements Node & Publishable & Reportable & Contribution & Commentable & UniformResourceLocatable {
@@ -1359,6 +1375,20 @@ type CreateGroupPayload {
   clientMutationId: String
 }
 
+input CreateProjectDistrictInput {
+  id: ID
+  name: String!
+  geojson: GeoJSON
+  displayedOnMap: Boolean = false
+  border: BorderStyleInput
+  background: BackgroundStyleInput
+}
+
+type CreateProjectDistrictPayload {
+  district: ProjectDistrict!
+  clientMutationId: String
+}
+
 input CreateProposalFormInput {
   # The proposal form title
   title: String!
@@ -1552,6 +1582,10 @@ type DeleteOpinionPayload {
   clientMutationId: String
 }
 
+input DeleteProjectDistrictInput {
+  id: ID
+}
+
 input DeleteProposalInput {
   # The proposal id
   proposalId: ID!
@@ -1620,20 +1654,23 @@ type DeleteVersionPayload {
 }
 
 # A district
-type District {
+interface District {
   id: ID!
   name: String!
   geojson: GeoJSON
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
+  border: Style
+  background: Style
 }
 
 input DistrictInput {
   id: ID
   name: String!
   geojson: GeoJSON
-  geojsonStyle: CssJSON
   displayedOnMap: Boolean = false
+  border: BorderStyleInput
+  background: BackgroundStyleInput
 }
 
 # Ordering options for districts.
@@ -2275,6 +2312,9 @@ type Mutation {
   createQuestionnaire(input: CreateQuestionnaireInput!): CreateQuestionnairePayload
   updateQuestionnaireParameters(input: UpdateQuestionnaireParametersInput!): UpdateQuestionnaireParametersPayload
   updateQuestionnaireConfiguration(input: UpdateQuestionnaireConfigurationInput!): UpdateQuestionnaireConfigurationPayload
+  createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
+  deleteProjectDistrict(input: DeleteProjectDistrictInput!): CreateProjectDistrictPayload
+  updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload
 }
 
 # A connection to a list of items.
@@ -3126,7 +3166,7 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   media: Media
   theme: Theme
   category: ProposalCategory
-  district: District
+  district: ProposalDistrict
   address: Address
   formattedAddress: String
 
@@ -3240,6 +3280,17 @@ type ProposalConnection {
   edges: [ProposalEdge]
 }
 
+# A proposal district
+type ProposalDistrict implements District {
+  id: ID!
+  name: String!
+  geojson: GeoJSON
+  geojsonStyle: CssJSON
+  displayedOnMap: Boolean!
+  border: Style
+  background: Style
+}
+
 # An edge in a connection.
 type ProposalEdge {
   # The item at the end of the edge.
@@ -3345,7 +3396,7 @@ type ProposalForm implements Node & UniformResourceLocatable {
   commentable: Boolean!
   costable: Boolean!
   proposalInAZoneRequired: Boolean!
-  districts(order: DistrictOrderField): [District!]!
+  districts(order: DistrictOrderField): [ProposalDistrict!]!
   districtMandatory: Boolean!
   districtHelpText: String
   usingCategories: Boolean!
@@ -3779,7 +3830,7 @@ type Query {
   proposalForms: [ProposalForm]!
 
   # Lookup availables districts on a proposalForm for a given address.
-  availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
+  availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [ProposalDistrict!]!
 
   # TO BE REMOVED
   votesByContribution(contribution: ID!): [ProposalVote!]!
@@ -3801,6 +3852,9 @@ type Query {
   # TO BE REMOVED
   question(id: Int!): Question!
   availableQuestionnaires: [Questionnaire!]!
+
+  # List of all districts in project.
+  projectDistricts: [ProjectDistrict!]!
 }
 
 interface Question {
@@ -5299,6 +5353,15 @@ type UpdateProfilePublicDataPayload {
   # The user who just have been updated
   user: User!
   clientMutationId: String
+}
+
+input UpdateProjectDistrictInput {
+  id: ID
+  name: String!
+  geojson: GeoJSON
+  displayedOnMap: Boolean = false
+  border: BorderStyleInput
+  background: BackgroundStyleInput
 }
 
 input UpdateProposalFormInput {
