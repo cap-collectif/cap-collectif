@@ -14,6 +14,7 @@ import ProposalFollowButton from '../Follow/ProposalFollowButton';
 import type { ProposalPreviewBody_proposal } from './__generated__/ProposalPreviewBody_proposal.graphql';
 import type { ProposalPreviewBody_step } from './__generated__/ProposalPreviewBody_step.graphql';
 import type { ProposalPreviewBody_viewer } from './__generated__/ProposalPreviewBody_viewer.graphql';
+import Card from '../../Ui/Card/Card';
 
 type Props = {
   proposal: ProposalPreviewBody_proposal,
@@ -28,8 +29,9 @@ export class ProposalPreviewBody extends React.Component<Props> {
 
     const showThemes = true;
     return (
-      <div className="card__body">
-        <div className="card__body__infos">
+      <Card.Body>
+        <div className="flex-1">
+          <hr />
           {proposal.trashed && proposal.trashedStatus === 'INVISIBLE' ? (
             <h4>
               <FormattedMessage id="proposal.show.trashed.contentDeleted" />
@@ -37,9 +39,9 @@ export class ProposalPreviewBody extends React.Component<Props> {
           ) : (
             <React.Fragment>
               <a href={proposal.url}>
-                <h4 className="card__title">
+                <Card.Title tagName="h4">
                   <Truncate lines={3}>{proposal.title}</Truncate>
-                </h4>
+                </Card.Title>
               </a>
               <div className="excerpt small">{proposal.summaryOrBodyExcerpt}</div>
             </React.Fragment>
@@ -92,7 +94,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
               <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
             </div>
           )}
-      </div>
+      </Card.Body>
     );
   }
 }

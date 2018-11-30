@@ -16,11 +16,13 @@ storiesOf('Cards', module)
       const coverTitle = text('Cover title', 'Project title');
       const titleLink = text('Title link', 'https://ui.cap-collectif.com');
       const title = text('Title', 'Project title');
+      const titleTagName = text('Title tag name', 'h2');
 
       Card.Cover.displayName = 'Card.Cover';
       Card.Type.displayName = 'Card.Type';
       Card.Status.displayName = 'Card.Status';
       Card.Body.displayName = 'Card.Body';
+      Card.Title.displayName = 'Card.Title';
 
       return (
         <Card>
@@ -30,7 +32,7 @@ storiesOf('Cards', module)
           </Card.Cover>
           <Card.Body>
             <div className="flex-1">
-              <Card.Title tagName="h3">
+              <Card.Title tagName={titleTagName}>
                 <a href={titleLink}>{title}</a>
               </Card.Title>
             </div>

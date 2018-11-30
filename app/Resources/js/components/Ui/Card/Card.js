@@ -12,7 +12,9 @@ type Props = {
   children?: any,
 };
 
-export const Container = styled.div`
+export const Container = styled.div.attrs({
+  className: 'card',
+})`
   border: 1px solid ${colors.borderColor};
   background-color: ${colors.white};
   margin-bottom: 30px;
@@ -21,10 +23,6 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   border-radius: 4px;
-
-  .small {
-    font-size: 14px;
-  }
 
   ul {
     margin-bottom: 5px;
@@ -36,24 +34,6 @@ export const Container = styled.div`
 
   .card__threshold .progress {
     margin-bottom: 0;
-  }
-
-  .card__title {
-    // font-size: 18px;
-    // line-height: 1.2;
-    // margin: 0 0 10px;
-  }
-
-  .card__body {
-    // display: flex;
-    // padding: 15px;
-    // flex: 1 0 auto;
-    // flex-direction: column;
-
-    &__infos {
-      flex: 1 0 auto;
-      word-wrap: break-word;
-    }
   }
 
   button {
@@ -103,11 +83,6 @@ export const Container = styled.div`
     display: block;
     margin-bottom: 0;
     margin-top: 15pt;
-
-    .card__body {
-      display: block;
-      padding: 0;
-    }
   }
 `;
 
