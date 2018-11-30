@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import ProjectDistrictsList from './ProjectDistrictsList';
+import type { ProjectDistrictAdminPageQueryResponse } from './__generated__/ProjectDistrictAdminPageQuery.graphql';
 
 type Props = {};
 
@@ -21,7 +22,10 @@ export class ProjectDistrictAdminPage extends React.Component<Props> {
           }
         `}
         variables={{}}
-        render={({ error, props }) => {
+        render={({
+          error,
+          props,
+        }: { props: ?ProjectDistrictAdminPageQueryResponse } & ReadyState) => {
           if (error) {
             return graphqlError;
           }
