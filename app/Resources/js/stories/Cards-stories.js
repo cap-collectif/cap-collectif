@@ -1,9 +1,18 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, withKnobs } from '@storybook/addon-knobs';
+import { select, text, withKnobs } from '@storybook/addon-knobs';
 import Card from '../components/Ui/Card/Card';
 import Image from '../components/Ui/Medias/Image';
+
+const statusColorOption = {
+  Warning: 'warning',
+  Danger: 'danger',
+  Success: 'success',
+  Info: 'info',
+  Primary: 'primary',
+  Default: 'default',
+};
 
 storiesOf('Cards', module)
   .addDecorator(withKnobs)
@@ -11,9 +20,9 @@ storiesOf('Cards', module)
     'Card',
     () => {
       const type = text('Type', 'My type');
+      const colorType = text('Type color', '#707070');
       const status = text('Status', 'My status');
-      const coverImg = text('Cover image', 'https://source.unsplash.com/collection/1127828');
-      const coverTitle = text('Cover title', 'Project title');
+      const statusBgColor = select('Status background color', statusColorOption, 'default');
       const titleLink = text('Title link', 'https://ui.cap-collectif.com');
       const title = text('Title', 'Project title');
       const titleTagName = text('Title tag name', 'h2');
@@ -26,18 +35,16 @@ storiesOf('Cards', module)
 
       return (
         <Card>
-          <Card.Type color="#707070">{type}</Card.Type>
+          <Card.Type bgColor={colorType}>{type}</Card.Type>
           <Card.Cover>
-            <Image src={coverImg} alt={coverTitle} />
+            <Image src="https://source.unsplash.com/collection/1127828" alt="Project title" />
           </Card.Cover>
           <Card.Body>
-            <div className="flex-1">
-              <Card.Title tagName={titleTagName}>
-                <a href={titleLink}>{title}</a>
-              </Card.Title>
-            </div>
+            <Card.Title tagName={titleTagName}>
+              <a href={titleLink}>{title}</a>
+            </Card.Title>
           </Card.Body>
-          <Card.Status className="status--primary">{status}</Card.Status>
+          <Card.Status bgColor={statusBgColor}>{status}</Card.Status>
         </Card>
       );
     },

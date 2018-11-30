@@ -2,7 +2,7 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import ProposalPreviewHeader from './ProposalPreviewHeader';
+// import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
@@ -28,8 +28,6 @@ export class ProposalPreview extends React.Component<Props> {
           className={
             proposal.author && proposal.author.vip ? 'bg-vip proposal-preview' : 'proposal-preview'
           }>
-          {/* $FlowFixMe */}
-          <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
           {/* $FlowFixMe */}
           {step && <ProposalPreviewFooter step={step} proposal={proposal} />}
@@ -64,7 +62,7 @@ export default createFragmentContainer(ProposalPreview, {
       author {
         vip
       }
-      ...ProposalPreviewHeader_proposal
+      
       ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       ...ProposalPreviewBody_proposal
         @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)

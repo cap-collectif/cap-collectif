@@ -15,6 +15,7 @@ import type { ProposalPreviewBody_proposal } from './__generated__/ProposalPrevi
 import type { ProposalPreviewBody_step } from './__generated__/ProposalPreviewBody_step.graphql';
 import type { ProposalPreviewBody_viewer } from './__generated__/ProposalPreviewBody_viewer.graphql';
 import Card from '../../Ui/Card/Card';
+import ProposalPreviewUser from './ProposalPreviewUser';
 
 type Props = {
   proposal: ProposalPreviewBody_proposal,
@@ -31,6 +32,8 @@ export class ProposalPreviewBody extends React.Component<Props> {
     return (
       <Card.Body>
         <div className="flex-1">
+          {/* $FlowFixMe */}
+          <ProposalPreviewUser proposal={proposal} />
           <hr />
           {proposal.trashed && proposal.trashedStatus === 'INVISIBLE' ? (
             <h4>
@@ -132,6 +135,7 @@ export default createFragmentContainer(container, {
       category {
         name
       }
+      ...ProposalPreviewUser_proposal
       ...ProposalPreviewVote_proposal
         @arguments(isAuthenticated: $isAuthenticated)
         @skip(if: $isProfileView)

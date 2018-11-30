@@ -31,10 +31,10 @@ export class ProposalStatus extends React.Component<Props> {
     if (!status) {
       return null;
     }
-    const statusClasses = {};
-    statusClasses[`status--${status.color}`] = true;
+    // const statusClasses = {};
+    // statusClasses[`status--${status.color}`] = true;
 
-    return <Card.Status className={classNames(statusClasses)}>{status && status.name}</Card.Status>;
+    return <Card.Status bgColor={status.color}>{status && status.name}</Card.Status>;
   }
 }
 

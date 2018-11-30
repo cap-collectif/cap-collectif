@@ -8,7 +8,9 @@ type Props = {
 };
 
 export const Container = styled(MediaBtsp.Left)`
-  padding-right: 10px;
+  img, svg {
+    margin-right: 10px;
+  }
 `;
 
 export default class Left extends PureComponent<Props> {

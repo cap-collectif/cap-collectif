@@ -1,7 +1,9 @@
 // @flow
 import styled from 'styled-components';
 
-const Cover = styled.div`
+const Cover = styled.div.attrs({
+  className: 'card-cover',
+})`
   overflow: hidden;
   width: 100%;
   height: 175px;

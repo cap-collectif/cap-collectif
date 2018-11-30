@@ -196,7 +196,7 @@ export class ReplyForm extends React.Component<Props> {
     const isDraft = reply && reply.draft;
     return (
       <Card>
-        <div className="card__body">
+        <Card.Body>
           <div id="create-reply-form">
             <form id="reply-form" ref="form" onSubmit={handleSubmit}>
               {questionnaire.description && (
@@ -270,7 +270,7 @@ export class ReplyForm extends React.Component<Props> {
               )}
             </form>
           </div>
-        </div>
+        </Card.Body>
       </Card>
     );
   }

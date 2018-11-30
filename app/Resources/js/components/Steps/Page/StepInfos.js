@@ -15,9 +15,9 @@ export class StepInfos extends React.Component<Props> {
     const { body } = step;
     return body ? (
       <Card>
-        <div className="card__body">
+        <Card.Body>
           <StepText text={body} />
-        </div>
+        </Card.Body>
       </Card>
     ) : null;
   }
