@@ -5,7 +5,9 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import ProjectDistrictAdminPage from '../components/ProjectDistrict/ProjectDistrictAdminPage';
 
-export default (props: Object) => (
+type Props = {};
+
+export default (props: Props) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <ProjectDistrictAdminPage {...props} />
