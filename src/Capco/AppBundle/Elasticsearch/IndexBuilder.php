@@ -52,7 +52,7 @@ class IndexBuilder
         return sprintf('capco_%s', date('Y-m-d-H:i:s'));
     }
 
-    public function cleanOldIndices($afterLiveLimit = 2): array
+    public function cleanOldIndices(int $afterLiveLimit = 2): array
     {
         $indexes = $this->client->requestEndpoint(new Get());
         $indexes = $indexes->getData();
