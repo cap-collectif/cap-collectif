@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Box\Spout\Common\Type;
@@ -13,32 +14,33 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
 
 const USER_FRAGMENT = '
-  id
-  email
-  username
-  userType {
-    name
-  }
-  createdAt
-  updatedAt
-  lastLogin
-  rolesText
-  consentExternalCommunication
-  enabled
-  isEmailConfirmed
-  locked
-  phoneConfirmed
-  gender
-  dateOfBirth
-  website
-  biography
-  address
-  zipCode
-  city
-  phone
-  url
+id
+email
+username
+userType {
+  name
+}
+createdAt
+updatedAt
+lastLogin
+rolesText
+consentExternalCommunication
+enabled
+isEmailConfirmed
+locked
+phoneConfirmed
+gender
+dateOfBirth
+website
+biography
+address
+zipCode
+city
+phone
+url
 ';
 
 const USER_HEADERS = [
@@ -229,30 +231,15 @@ query {
         Project $project,
         Request $request
     ): StreamedResponse {
-        $requestString =
-            '
-query {
-  node(id: "' .
-            $project->getId() .
-            '") {
-    ... on Project {
-      contributors(first: 1000) {
-        edges {
-          node {
-            ' .
-            USER_FRAGMENT .
-            '
-          }
-        }
-      }
-    }
-  }
-}';
         $this->get(GraphQlAclListener::class)->disableAcl();
         $executor = $this->get('overblog_graphql.request_executor');
+        $connectionTraversor = $this->get(ConnectionTraversor::class);
 
         $data = $executor
-            ->execute('internal', ['query' => $requestString, 'variables' => []])
+            ->execute('internal', [
+                'query' => $this->getProjectContributorsGraphQLQuery($project->getId()),
+                'variables' => [],
+            ])
             ->toArray();
 
         if (!isset($data['data'])) {
@@ -264,36 +251,51 @@ query {
             (new \DateTime())->format('Y-m-d') . '_participants_' . $project->getSlug() . '.csv';
         $writer = WriterFactory::create(Type::CSV);
 
-        $response = new StreamedResponse(function () use ($writer, $data) {
+        $response = new StreamedResponse(function () use (
+            $writer,
+            $data,
+            $project,
+            $connectionTraversor
+        ) {
             $writer->openToFile('php://output');
             $writer->addRow(USER_HEADERS);
-            foreach ($data['data']['node']['contributors']['edges'] as $edge) {
-                $contributor = $edge['node'];
-                $writer->addRow([
-                    $contributor['id'],
-                    $contributor['email'],
-                    $contributor['username'],
-                    $contributor['userType'] ? $contributor['userType']['name'] : null,
-                    $contributor['createdAt'],
-                    $contributor['updatedAt'],
-                    $contributor['lastLogin'],
-                    $contributor['rolesText'],
-                    $contributor['consentExternalCommunication'],
-                    $contributor['enabled'],
-                    $contributor['isEmailConfirmed'],
-                    $contributor['locked'],
-                    $contributor['phoneConfirmed'],
-                    $contributor['gender'],
-                    $contributor['dateOfBirth'],
-                    $contributor['website'],
-                    $contributor['biography'],
-                    $contributor['address'],
-                    $contributor['zipCode'],
-                    $contributor['city'],
-                    $contributor['phone'],
-                    $contributor['url'],
-                ]);
-            }
+            $connectionTraversor->traverse(
+                $data,
+                'data.node.contributors',
+                function ($edge) use ($writer) {
+                    $contributor = $edge['node'];
+                    $writer->addRow([
+                        $contributor['id'],
+                        $contributor['email'],
+                        $contributor['username'],
+                        $contributor['userType'] ? $contributor['userType']['name'] : null,
+                        $contributor['createdAt'],
+                        $contributor['updatedAt'],
+                        $contributor['lastLogin'],
+                        $contributor['rolesText'],
+                        $contributor['consentExternalCommunication'],
+                        $contributor['enabled'],
+                        $contributor['isEmailConfirmed'],
+                        $contributor['locked'],
+                        $contributor['phoneConfirmed'],
+                        $contributor['gender'],
+                        $contributor['dateOfBirth'],
+                        $contributor['website'],
+                        $contributor['biography'],
+                        $contributor['address'],
+                        $contributor['zipCode'],
+                        $contributor['city'],
+                        $contributor['phone'],
+                        $contributor['url'],
+                    ]);
+                },
+                function ($pageInfo) use ($project) {
+                    return $this->getProjectContributorsGraphQLQuery(
+                        $project->getId(),
+                        $pageInfo['endCursor']
+                    );
+                }
+            );
             $writer->close();
         });
 
@@ -417,5 +419,38 @@ query {
         $response->headers->set('Content-Disposition', 'attachment; filename="' . $fileName . '"');
 
         return $response;
+    }
+
+    private function getProjectContributorsGraphQLQuery(
+        string $projectId,
+        ?string $userCursor = null
+    ): string {
+        if ($userCursor) {
+            $userCursor = sprintf(', after: "%s"', $userCursor);
+        }
+
+        $USER_FRAGMENT = USER_FRAGMENT;
+
+        return <<<EOF
+        query {
+          node(id: "${projectId}") {
+            ... on Project {
+              contributors(first: 50  ${userCursor}) {
+                edges {
+                  cursor
+                  node {
+                   ${USER_FRAGMENT}
+                  }
+                }
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }
+              }
+            }
+          }
+        }
+EOF;
     }
 }
