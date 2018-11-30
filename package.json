@@ -215,6 +215,7 @@
     "react-axe": "^3.0.2",
     "react-beautiful-dnd": "^8.0.2",
     "react-bootstrap": "^0.32.1",
+    "react-color": "^2.14.1",
     "react-datetime": "^2.9.0",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",

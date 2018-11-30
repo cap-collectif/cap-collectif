@@ -80,6 +80,7 @@
                                 {% endfor %}
                             {% endif %}<span>,</span>
                             {{ 'project.show.on_date' | trans({'%date%': project.publishedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
+                            {% include '@CapcoApp/Project/show_districts.html.twig' with {'project': project} %}
                         {% endspaceless %}
                     </p>
                 </div>

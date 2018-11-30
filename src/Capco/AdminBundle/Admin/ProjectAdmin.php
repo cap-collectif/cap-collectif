@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Project;
@@ -16,6 +17,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class ProjectAdmin extends CapcoAdmin
 {
+    protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'publishedAt'];
+
+    protected $formOptions = ['cascade_validation' => true];
     private $tokenStorage;
 
     public function __construct(
@@ -27,10 +31,6 @@ class ProjectAdmin extends CapcoAdmin
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
     }
-
-    protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'publishedAt'];
-
-    protected $formOptions = ['cascade_validation' => true];
 
     // For mosaic view
     public function getObjectMetadata($object)
@@ -61,6 +61,32 @@ class ProjectAdmin extends CapcoAdmin
         }
 
         return $this->getTemplateRegistry()->getTemplate($name);
+    }
+
+    /**
+     * if user is supper admin return all else return only what I can see.
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query->andWhere(
+            $query
+                ->expr()
+                ->andX(
+                    $query->expr()->eq($query->getRootAliases()[0] . '.Author', ':author'),
+                    $query->expr()->eq($query->getRootAliases()[0] . '.visibility', 0)
+                )
+        );
+        $query->orWhere($query->expr()->gte($query->getRootAliases()[0] . '.visibility', 1));
+        $query->setParameter('author', $user);
+
+        return $query;
     }
 
     /**
@@ -262,6 +288,9 @@ class ProjectAdmin extends CapcoAdmin
                 ],
                 ['link_parameters' => ['context' => 'project']]
             )
+            ->add('districts', null, [
+                'label' => 'proposal_form.districts',
+            ])
             ->end()
 
             ->with('admin.fields.project.group_ranking')
@@ -381,31 +410,5 @@ class ProjectAdmin extends CapcoAdmin
     {
         $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete', 'show']);
         $collection->add('preview', $this->getRouterIdParameter() . '/preview');
-    }
-
-    /**
-     * if user is supper admin return all else return only what I can see
-     */
-    public function createQuery($context = 'list')
-    {
-        $user = $this->tokenStorage->getToken()->getUser();
-        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
-        }
-
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
-        $query->andWhere(
-            $query
-                ->expr()
-                ->andX(
-                    $query->expr()->eq($query->getRootAliases()[0] . '.Author', ':author'),
-                    $query->expr()->eq($query->getRootAliases()[0] . '.visibility', 0)
-                )
-        );
-        $query->orWhere($query->expr()->gte($query->getRootAliases()[0] . '.visibility', 1));
-        $query->setParameter('author', $user);
-
-        return $query;
     }
 }

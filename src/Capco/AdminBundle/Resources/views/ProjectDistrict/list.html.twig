@@ -1,0 +1,9 @@
+{% extends 'CapcoAdminBundle::standard_layout.html.twig' %}
+
+{% block content %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    <section class="content-header"></section>
+    <section class="content">
+        {{ react_render_component('ProjectDistrictAdminApp') }}
+    </section>
+{% endblock %}
