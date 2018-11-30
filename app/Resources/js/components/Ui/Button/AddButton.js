@@ -3,11 +3,11 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 
-const AddButton = ({ handleOnClick }: { handleOnClick: () => void }) => (
+const AddButton = ({ onClick }: { onClick: () => void }) => (
   <Button
     bsStyle="primary"
     className="btn-outline-primary box-content__toolbar mb-5"
-    onClick={handleOnClick}>
+    onClick={onClick}>
     <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
   </Button>
 );

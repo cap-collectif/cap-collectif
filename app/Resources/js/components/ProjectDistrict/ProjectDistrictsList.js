@@ -20,7 +20,7 @@ type Props = RelayProps & {
 type State = {
   isModalOpen: boolean,
   isCreating: boolean,
-  editeDistrictId: ?string,
+  editDistrictId: ?string,
 };
 
 export class ProjectDistrictsList extends React.Component<Props, State> {
@@ -30,14 +30,14 @@ export class ProjectDistrictsList extends React.Component<Props, State> {
     this.state = {
       isModalOpen: false,
       isCreating: true,
-      editeDistrictId: null,
+      editDistrictId: null,
     };
   }
 
   openModal = () => {
     this.setState({
       isModalOpen: true,
-      editeDistrictId: null,
+      editDistrictId: null,
     });
   };
 
@@ -45,7 +45,7 @@ export class ProjectDistrictsList extends React.Component<Props, State> {
     this.setState({
       isModalOpen: false,
       isCreating: true,
-      editeDistrictId: null,
+      editDistrictId: null,
     });
   };
 
@@ -53,7 +53,7 @@ export class ProjectDistrictsList extends React.Component<Props, State> {
     this.setState({
       isModalOpen: true,
       isCreating: true,
-      editeDistrictId: null,
+      editDistrictId: null,
     });
   };
 
@@ -71,7 +71,7 @@ export class ProjectDistrictsList extends React.Component<Props, State> {
     this.setState({
       isCreating: false,
       isModalOpen: true,
-      editeDistrictId: editeId,
+      editDistrictId: editeId,
     });
   };
 
@@ -82,7 +82,7 @@ export class ProjectDistrictsList extends React.Component<Props, State> {
 
   render() {
     const { districts } = this.props;
-    const { isModalOpen, isCreating, editeDistrictId } = this.state;
+    const { isModalOpen, isCreating, editDistrictId } = this.state;
 
     return (
       <>
@@ -92,7 +92,7 @@ export class ProjectDistrictsList extends React.Component<Props, State> {
           isCreating={isCreating}
           handleClose={this.closeModal}
           handleRefresh={this._refetch}
-          district={districts.filter(district => district.id === editeDistrictId).shift()}
+          district={districts.filter(district => district.id === editDistrictId).shift()}
         />
         <ListGroup>
           {districts.map(district => (
@@ -103,7 +103,7 @@ export class ProjectDistrictsList extends React.Component<Props, State> {
                 </Col>
                 <Col xs={4}>
                   <ButtonToolbar className="pull-right">
-                    <EditButton handleOnClick={() => this.handleEdit(district.id)} />
+                    <EditButton onClick={() => this.handleEdit(district.id)} />
                     <DeleteButtonPopover handleValidate={() => this.handleDelete(district.id)} />
                   </ButtonToolbar>
                 </Col>
@@ -111,7 +111,7 @@ export class ProjectDistrictsList extends React.Component<Props, State> {
             </ListGroupItem>
           ))}
         </ListGroup>
-        <AddButton handleOnClick={this.handleCreate} />
+        <AddButton onClick={this.handleCreate} />
       </>
     );
   }
