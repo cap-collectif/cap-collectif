@@ -1,24 +1,30 @@
 // @flow
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { Field } from 'redux-form';
+import { connect, type MapStateToProps } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
-import component from '../Form/Field';
+import type { State } from '../../types';
+import DistrictAdminFields from '../District/DistrictAdminFields';
+
+type RelayProps = {
+  index: string,
+};
 
 type Props = {
   show: boolean,
-  onClose: Function,
-  onSubmit: Function,
+  onClose: () => void,
+  onSubmit: () => void,
   member: string,
   isCreating: boolean,
+  district: Object,
 };
 
 export class ProposalFormAdminDistrictModal extends React.Component<Props> {
   render() {
-    const { member, show, isCreating, onClose, onSubmit } = this.props;
+    const { member, show, isCreating, onClose, onSubmit, district } = this.props;
     return (
       <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg">
         <Modal.Header closeButton>
@@ -32,38 +38,7 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props> {
           />
         </Modal.Header>
         <Modal.Body>
-          <Field
-            label="Titre"
-            id={`${member}.name`}
-            name={`${member}.name`}
-            type="text"
-            component={component}
-          />
-          <Field
-            label={<FormattedMessage id="admin.fields.proposal.map.zone" />}
-            help={<FormattedMessage id="admin.fields.proposal.map.helpFormatGeojson" />}
-            id={`${member}.geojson`}
-            name={`${member}.geojson`}
-            type="textarea"
-            component={component}
-          />
-          <p>Options</p>
-          <Field
-            children={<FormattedMessage id="admin.fields.proposal.map.displayZones" />}
-            id={`${member}.displayedOnMap`}
-            name={`${member}.displayedOnMap`}
-            type="checkbox"
-            normalize={val => !!val}
-            component={component}
-          />
-          <Field
-            label={<FormattedMessage id="admin.fields.proposal.map.style" />}
-            help={<FormattedMessage id="admin.fields.proposal.map.helpFormatCSS" />}
-            id={`${member}.geojsonStyle`}
-            name={`${member}.geojsonStyle`}
-            type="textarea"
-            component={component}
-          />
+          <DistrictAdminFields member={member} district={district} />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
@@ -74,4 +49,13 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props> {
   }
 }
 
-export default connect()(ProposalFormAdminDistrictModal);
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
+  const selector = formValueSelector('proposal-form-admin-configuration');
+  const districts = selector(state, 'districts');
+  const index = props.index ? props.index : null;
+  return {
+    district: districts[index] ? districts[index] : {},
+  };
+};
+
+export default connect(mapStateToProps)(ProposalFormAdminDistrictModal);

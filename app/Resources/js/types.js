@@ -104,3 +104,25 @@ export type State = GlobalState;
 
 export type Store = ReduxStore<State, Action>;
 export type Dispatch = ReduxDispatch<Action>;
+
+export type BorderStyle = {
+  isEnable: boolean,
+  color: string,
+  opacity: number,
+  size: number,
+};
+
+export type BackgroundStyle = {
+  isEnable: boolean,
+  color: string,
+  opacity: number,
+};
+
+export type District = {
+  id: string,
+  name: string,
+  geojson: ?string,
+  displayedOnMap: boolean,
+  border: ?BorderStyle,
+  background: ?BackgroundStyle,
+};
