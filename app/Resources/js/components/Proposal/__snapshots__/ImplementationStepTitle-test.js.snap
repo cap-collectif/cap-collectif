@@ -1,27 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ImplementationStepTitle /> should render correctly 1`] = `
-<Fragment>
-  This is a StepTitle
-</Fragment>
+<span>
+  this.getStepTitle(progressSteps)
+</span>
 `;
 
 exports[`<ImplementationStepTitle /> should render null with ended steps 1`] = `
-<Fragment>
-  This is a StepTitle
-</Fragment>
+<span>
+  this.getStepTitle(progressSteps)
+</span>
 `;
 
 exports[`<ImplementationStepTitle /> should render null with invalid step 1`] = `
-<Fragment>
-  This is a StepTitle
-</Fragment>
+<span>
+  this.getStepTitle(progressSteps)
+</span>
 `;
 
 exports[`<ImplementationStepTitle /> should render null with no open steps 1`] = `
-<Fragment>
-  This is a StepTitle
-</Fragment>
+<span>
+  this.getStepTitle(progressSteps)
+</span>
 `;
 
-exports[`<ImplementationStepTitle /> should render null with no steps 1`] = `<Fragment />`;
+exports[`<ImplementationStepTitle /> should render null with no steps 1`] = `
+<span>
+  this.getStepTitle(progressSteps)
+</span>
+`;

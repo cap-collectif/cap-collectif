@@ -237,15 +237,17 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
 
     public function canDisplay($user = null): bool
     {
-        return ($this->isPublished() && $this->getParent()->canDisplay($user)) ||
-            ($user && $user->isAdmin());
+        return (
+            $this->isPublished() && $this->getParent()->canDisplay($user) ||
+            ($user && $user->isAdmin())
+        );
     }
 
     public function canContribute($user = null): bool
     {
-        return $this->isPublished() &&
-            !$this->isTrashed() &&
-            $this->getParent()->canContribute($user);
+        return (
+            $this->isPublished() && !$this->isTrashed() && $this->getParent()->canContribute($user)
+        );
     }
 
     public function canBeDeleted($user = null): bool
@@ -289,7 +291,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
 
     public function isIndexable(): bool
     {
-        return $this->isPublished() && $this->getProject() && $this->getProject()->isIndexable();
+        return $this->isPublished() && $this->getProject()->isIndexable();
     }
 
     public static function getElasticsearchTypeName(): string
