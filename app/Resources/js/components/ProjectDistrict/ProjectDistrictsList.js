@@ -9,11 +9,11 @@ import AddButton from '../Ui/Button/AddButton';
 import ProjectDistrictForm from './ProjectDistrictForm';
 import DeleteProjectDistrictMutation from '../../mutations/DeleteProjectDistrictMutation';
 
-type DefaultProps = {
+type RelayProps = {
   districts: ProjectDistrictsList_districts,
 };
 
-type Props = DefaultProps & {
+type Props = RelayProps & {
   relay: RelayRefetchProp,
 };
 
