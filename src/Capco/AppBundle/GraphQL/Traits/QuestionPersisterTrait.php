@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Traits;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -9,44 +10,6 @@ use Symfony\Component\Form\FormInterface;
 
 trait QuestionPersisterTrait
 {
-    public function persistQuestion(
-        PersistentCollection $questionnaireAbstractQuestions,
-        EntityManagerInterface $em,
-        int $delta,
-        ?array $questionsOrdered
-    ): void {
-        foreach ($questionnaireAbstractQuestions as $index => $abstractQuestion) {
-            /** @var AbstractQuestion $abstractQuestion **/
-            $question = $abstractQuestion->getQuestion();
-
-            if (!empty($questionsOrdered)) {
-                $newPosition = 0;
-                // we use the temporary id to update the questions position
-                foreach ($questionsOrdered as $key => $questionOrdered) {
-                    if ($questionOrdered === $question->temporaryId) {
-                        $newPosition = $key;
-                    }
-                }
-                $abstractQuestion->setPosition($newPosition + $delta);
-            } else {
-                //no question existing in DB so we just have to set index value
-                $abstractQuestion->setPosition($index);
-            }
-
-            if (!$question->getId()) {
-                $em->persist($question);
-            }
-            if ($question instanceof MultipleChoiceQuestion) {
-                foreach ($question->getChoices() as $key => $questionChoice) {
-                    $questionChoice->setQuestion($question);
-                    $questionChoice->setPosition($key);
-                    $em->persist($questionChoice);
-                }
-            }
-            $em->persist($abstractQuestion);
-        }
-    }
-
     //  Handle the update of the questions and some painful issues :
     //   - Positionning
     //   - Deleting/Updating QuestionChoice
@@ -95,7 +58,7 @@ trait QuestionPersisterTrait
                 }
 
                 foreach ($abstractQuestion->getChoices() as $position => $questionChoice) {
-                    if (!in_array($questionChoice->getId(), $dataQuestionChoicesIds)) {
+                    if (!\in_array($questionChoice->getId(), $dataQuestionChoicesIds, false)) {
                         $deletedChoice = [
                             'id' => $abstractQuestion->getId(),
                             'title' => null,
@@ -111,15 +74,21 @@ trait QuestionPersisterTrait
         // we must reorder arguments datas to match database order (used in the symfony form)
         usort($arguments['questions'], function ($a, $b) use ($questionsOrderedByIdInDb) {
             if (isset($a['question']['id'], $b['question']['id'])) {
-                return array_search($a['question']['id'], $questionsOrderedByIdInDb) >
-                    array_search($b['question']['id'], $questionsOrderedByIdInDb);
+                return array_search($a['question']['id'], $questionsOrderedByIdInDb, false) >
+                    array_search($b['question']['id'], $questionsOrderedByIdInDb, false);
             }
             //@todo respect the user order, for now we just put new items at the end
             return isset($a['question']['id']) ? false : true;
         });
 
         foreach ($entity->getQuestions() as $position => $questionnaireQuestion) {
-            if (!in_array($questionnaireQuestion->getQuestion()->getId(), $argumentsQuestionsId)) {
+            if (
+                !\in_array(
+                    $questionnaireQuestion->getQuestion()->getId(),
+                    $argumentsQuestionsId,
+                    false
+                )
+            ) {
                 // Put the title to null to be delete from delete_empty CollectionType field
                 $deletedQuestion = [
                     'question' => [
@@ -134,13 +103,14 @@ trait QuestionPersisterTrait
         }
 
         $form->submit($arguments, false);
+
         $qaq = $entity->getQuestions();
 
         // We make sure a question position by questionnaire is unique
-        if ($type === 'questionnaire') {
+        if ('questionnaire' === $type) {
             $delta =
                 $this->questionRepo->getCurrentMaxPositionForQuestionnaire($entity->getId()) + 1;
-        } elseif ($type === 'proposal') {
+        } elseif ('proposal' === $type) {
             $delta =
                 $this->questionRepo->getCurrentMaxPositionForProposalForm($entity->getId()) + 1;
         } else {
@@ -149,5 +119,51 @@ trait QuestionPersisterTrait
         }
 
         $this->persistQuestion($qaq, $this->em, $delta, $questionsOrderedById);
+    }
+
+    public function persistQuestion(
+        PersistentCollection $questionnaireAbstractQuestions,
+        EntityManagerInterface $em,
+        int $delta,
+        ?array $questionsOrdered
+    ): void {
+        foreach ($questionnaireAbstractQuestions as $index => $abstractQuestion) {
+            /** @var AbstractQuestion $abstractQuestion * */
+            $question = $abstractQuestion->getQuestion();
+
+            if (!empty($questionsOrdered)) {
+                $newPosition = 0;
+                // we use the temporary id to update the questions position
+                foreach ($questionsOrdered as $key => $questionOrdered) {
+                    if ($questionOrdered === $question->temporaryId) {
+                        $newPosition = $key;
+                    }
+                }
+                $abstractQuestion->setPosition($newPosition + $delta);
+            } else {
+                //no question existing in DB so we just have to set index value
+                $abstractQuestion->setPosition($index);
+            }
+
+            if (!$question->getId()) {
+                $em->persist($question);
+            }
+            if ($question instanceof MultipleChoiceQuestion) {
+                $this->persistQuestionMultiChoice($question, $em);
+            }
+
+            $em->persist($abstractQuestion);
+        }
+    }
+
+    private function persistQuestionMultiChoice(
+        MultipleChoiceQuestion &$question,
+        EntityManagerInterface $em
+    ) {
+        foreach ($question->getChoices() as $key => $questionChoice) {
+            $questionChoice->setQuestion($question);
+            $questionChoice->setPosition($key);
+            $em->persist($questionChoice);
+        }
     }
 }

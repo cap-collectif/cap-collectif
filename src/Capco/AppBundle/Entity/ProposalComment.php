@@ -35,12 +35,10 @@ class ProposalComment extends Comment
     public function isCommentable(): bool
     {
         try {
-            return (
-                !$this->getRelatedObject()->isDeleted() &&
+            return !$this->getRelatedObject()->isDeleted() &&
                 $this->getProposal()
                     ->getProposalForm()
-                    ->isCommentable()
-            );
+                    ->isCommentable();
         } catch (EntityNotFoundException $e) {
             return false;
         }
@@ -49,12 +47,10 @@ class ProposalComment extends Comment
     public function acceptNewComments(): bool
     {
         try {
-            return (
-                $this->isCommentable() &&
+            return $this->isCommentable() &&
                 $this->isPublished() &&
                 !$this->isTrashed() &&
-                !$this->getProposal()->isDeleted()
-            );
+                !$this->getProposal()->isDeleted();
         } catch (EntityNotFoundException $e) {
             return false;
         }
@@ -63,13 +59,12 @@ class ProposalComment extends Comment
     public function isIndexable(): bool
     {
         try {
-            return (
-                $this->isPublished() &&
+            return $this->isPublished() &&
                 !$this->getRelatedObject()->isDeleted() &&
+                $this->getProposal()->getProject() &&
                 $this->getProposal()
                     ->getProject()
-                    ->isIndexable()
-            );
+                    ->isIndexable();
         } catch (EntityNotFoundException $e) {
             return false;
         }
