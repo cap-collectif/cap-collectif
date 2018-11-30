@@ -413,7 +413,7 @@ enum ArgumentValue {
   FOR
 }
 
-# Entities that can be published.
+# Fetches an object given its ID
 type ArgumentVote implements Vote & Publishable {
   # The ID of an object
   id: ID!
@@ -960,8 +960,8 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   # `true` if the contribution is trashed.
   trashed: Boolean!
 
-  # The status.
-  trashedStatus: TrashableStatus
+  # The id of the contribution.
+  id: ID!
 
   # The moment the moderator trashed the contribution.
   trashedAt: DateTime
@@ -976,15 +976,17 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   reportings(
     # Returns the elements in the list that come after the specified cursor.
     after: String
-    first: Int = 30
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
 
     # Returns the elements in the list that come before the specified cursor.
     before: String
 
     # Returns the last `n` elements from the list.
     last: Int
-    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
-  ): ReportingConnection!
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
 
   # `true` if the object is published.
   published: Boolean!
@@ -1105,7 +1107,7 @@ enum CommentPublicationStatus {
   TRASHED_NOT_VISIBLE
 }
 
-# Entities that can be published.
+# Fetches an object given its ID
 type CommentVote implements Node & Vote & Publishable {
   # The ID of an object
   id: ID!
@@ -2437,11 +2439,11 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     # Returns the elements in the list that come after the specified cursor.
     after: String
 
-    # Returns the first `n` elements from the list.
-    first: Int = 100
+  # The kind of contribution.
+  kind: String!
 
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
 
     # Returns the last `n` elements from the list.
     last: Int
@@ -2486,11 +2488,13 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   # The kind of contribution.
   kind: String!
 
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
 
-  # Url of the contribution
-  url: URI!
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): SourceConnection!
 
   # `true` if the contribution is trashed.
   trashed: Boolean!
@@ -2647,7 +2651,7 @@ type OpinionModal {
 
 union OpinionOrVersion = Opinion | Version
 
-# Entities that can be published.
+# Fetches an object given its ID
 type OpinionVote implements YesNoPairedVote & Publishable & Vote {
   # The ID of an object
   id: ID!
@@ -2856,7 +2860,7 @@ type PresentationStep implements Step {
   url: String!
 }
 
-# Entities that can be published.
+# Fetches an object given its ID
 interface PrivatableVote {
   # The ID of an object
   id: ID!
@@ -3629,7 +3633,7 @@ enum ProposalTrashedStatus {
   NOT_TRASHED
 }
 
-# Entities that can be published.
+# Fetches an object given its ID
 type ProposalVote implements Vote & Publishable & PrivatableVote {
   # The ID of an object
   id: ID!
@@ -3797,6 +3801,21 @@ type Query {
     # If non-null, filters events with the given string to look for.
     search: String
   ): EventConnection!
+
+  # The currently authenticated user.
+  viewer: User!
+
+  # The ID of an object.
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+
+  # Lookup nodes by a list of IDs.
+  nodes(
+    # The list of node IDs.
+    ids: [ID!]!
+  ): [Node]!
 
   # Get the current registration form
   registrationForm: RegistrationForm
@@ -4963,7 +4982,7 @@ enum SourceOrderField {
   VOTES
 }
 
-# Entities that can be published.
+# Fetches an object given its ID
 type SourceVote implements Vote & Publishable {
   # The ID of an object
   id: ID!
@@ -5558,6 +5577,9 @@ type User implements Node & UniformResourceLocatable {
   # The URL to this resource.
   url: URI!
 
+  # The ID of an object
+  id: ID!
+
   # The user's public name.
   username: String
 
@@ -5928,8 +5950,8 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   url: URI!
   contribuable: Boolean!
 
-  # The sources related to the sourceable.
-  sources(
+  # The arguments related to the argumentable.
+  arguments(
     # Returns the elements in the list that come after the specified cursor.
     after: String
 
@@ -5941,11 +5963,14 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
     # Returns the last `n` elements from the list.
     last: Int
-    orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}
-  ): SourceConnection!
+    orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
 
-  # The viewer unpublished sources related to the sourceable (only visible by viewer).
-  viewerSourcesUnpublished(
+    # If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection!
+
+  # The unpublished arguments of to the viewer.
+  viewerArgumentsUnpublished(
     # Returns the elements in the list that come after the specified cursor.
     after: String
 
@@ -5957,10 +5982,10 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
     # Returns the last `n` elements from the list.
     last: Int
-  ): SourceConnection!
 
-  # The available sources categories of to the sourceable.
-  availableSourceCategories: [SourceCategory]
+    # If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
@@ -5992,7 +6017,8 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
     # Returns the last `n` elements from the list.
     last: Int
-    orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
+    orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): SourceConnection!
 
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
@@ -6014,10 +6040,10 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
     # Returns the last `n` elements from the list.
     last: Int
+  ): SourceConnection!
 
-    # If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): ArgumentConnection
+  # The available sources categories of to the sourceable.
+  availableSourceCategories: [SourceCategory]
 
   # `true` if the contribution is trashed.
   trashed: Boolean!
@@ -6142,7 +6168,7 @@ enum VersionOrderField {
   RANDOM
 }
 
-# Entities that can be published.
+# Fetches an object given its ID
 type VersionVote implements YesNoPairedVote & Publishable & Vote {
   # The ID of an object
   id: ID!
@@ -6233,7 +6259,7 @@ enum VoteOrderField {
   POSITION
 }
 
-# Entities that can be published.
+# Fetches an object given its ID
 interface YesNoPairedVote {
   # The ID of an object
   id: ID!

@@ -8,13 +8,13 @@ import ProjectDistrictsList from './ProjectDistrictsList';
 
 type Props = {};
 
-export class ProjectDistrictPage extends React.Component<Props> {
+export class ProjectDistrictAdminPage extends React.Component<Props> {
   render() {
     return (
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query ProjectDistrictPageQuery {
+          query ProjectDistrictAdminPageQuery {
             districts: projectDistricts {
               ...ProjectDistrictsList_districts
             }
@@ -46,4 +46,4 @@ export class ProjectDistrictPage extends React.Component<Props> {
   }
 }
 
-export default ProjectDistrictPage;
+export default ProjectDistrictAdminPage;
