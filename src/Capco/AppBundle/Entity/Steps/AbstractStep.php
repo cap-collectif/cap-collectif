@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
@@ -11,6 +10,7 @@ use Capco\AppBundle\Traits\RequirementTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -301,9 +301,9 @@ abstract class AbstractStep implements DisplayableInBOInterface
 
     public function getPosition(): ?int
     {
-        return $this->getProjectAbstractStep()
-            ? $this->getProjectAbstractStep()->getPosition()
-            : null;
+        if ($this->projectAbstractStep) {
+            return $this->projectAbstractStep->getPosition();
+        }
     }
 
     public function canDisplay($user = null): bool
@@ -323,9 +323,11 @@ abstract class AbstractStep implements DisplayableInBOInterface
 
     public function isActive($user = null): bool
     {
-        return $this->getProject() &&
+        return (
+            $this->getProject() &&
             $this->getProject()->canContribute($user) &&
-            $this->getIsEnabled();
+            $this->getIsEnabled()
+        );
     }
 
     public function isConsultationStep(): bool
@@ -379,10 +381,7 @@ abstract class AbstractStep implements DisplayableInBOInterface
             }
 
             if ($time) {
-                return [
-                    'days' => (int) $time->format('%a'),
-                    'hours' => (int) $time->format('%h'),
-                ];
+                return ['days' => (int) $time->format('%a'), 'hours' => (int) $time->format('%h')];
             }
         }
     }

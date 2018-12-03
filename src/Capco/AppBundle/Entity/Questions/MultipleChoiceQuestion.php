@@ -55,9 +55,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
 
     public function getChoices(): Collection
     {
-        return $this->choices instanceof Collection
-            ? $this->choices
-            : new ArrayCollection($this->choices);
+        return $this->choices;
     }
 
     public function setChoices(Collection $choices): self
