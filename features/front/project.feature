@@ -10,7 +10,7 @@ Scenario: Project can be sorted by published date
   Given feature "projects_form" is enabled
   And I visited "projects page"
   And I wait "#project-preview-project1" to appear on current page
-  And I select "global.filter_f_last" from "project-sorting"
+  And I select "project.sort.last" from "project-sorting"
   And I wait "#project-preview-project1" to appear on current page
   Then "Projet vide" should be before "Dépot avec selection vote budget" for selector ".project-preview .card__title a"
 

@@ -281,23 +281,8 @@ type AppendixType {
 
 # An argument
 type Argument implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution & UniformResourceLocatable {
-  # The id of the contribution.
-  id: ID!
-
-  # Url of the contribution
-  url: URI!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # `true` if the contribution is trashed.
   trashed: Boolean!
@@ -310,6 +295,21 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
 
   # The reason the moderator trashed the contribution.
   trashedReason: String
+
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution (argument).
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The URL to this resource.
+  url: URI!
+
+  # The author of the contribution.
+  author: User!
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
@@ -328,17 +328,17 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
+  # `true` if the object is published.
+  published: Boolean!
 
-  # The author of the contribution.
-  author: User!
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
 
-  # The kind of contribution (argument).
-  kind: String!
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
 
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -418,18 +418,6 @@ type ArgumentVote implements Vote & Publishable {
   # The ID of an object
   id: ID!
 
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
   # Date of vote.
   createdAt: DateTime!
 
@@ -441,6 +429,18 @@ type ArgumentVote implements Vote & Publishable {
 
   # Returns Type of vote
   kind: String!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 }
 
 # A connection to a list of items.
@@ -554,10 +554,6 @@ type ChangeDistrictPayload {
 }
 
 input ChangeEventInput {
-  # The id of the event to update.
-  id: ID!
-  clientMutationId: String
-
   # The contents of the event title.
   title: String!
 
@@ -572,6 +568,10 @@ input ChangeEventInput {
 
   # Is the event published ?
   enabled: Boolean = true
+  clientMutationId: String
+
+  # The id of the event to update.
+  id: ID!
 }
 
 type ChangeEventPayload {
@@ -773,10 +773,56 @@ type CheckboxRequirement implements Node & Requirement {
   label: String!
 }
 
-# A proposal step
+# Fetches an object given its ID
 type CollectStep implements Node & Step & ProposalStep {
-  # The ID of an object
-  id: ID!
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
+  project: Project
+  votesLimit: Int
+  budget: Int
+  voteType: ProposalStepVoteType!
+  votesHelpText: String
+  voteThreshold: Int
+  open: Boolean!
+
+  # If enabled, allow voters to order their votes by preferences.
+  votesRanking: Boolean!
+
+  # A list of viewer votes associated with the step.
+  viewerVotes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100000
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProposalVotesOrder = {direction: DESC}
+  ): ProposalVoteConnection!
+  form: ProposalForm!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  url: String!
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -837,54 +883,8 @@ type CollectStep implements Node & Step & ProposalStep {
     last: Int
   ): ProposalConnection
 
-  # The kind of the step
-  kind: String!
-
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
-
-  # The requirements to vote on this step.
-  requirements(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): RequirementConnection!
-  project: Project
-  votesLimit: Int
-  budget: Int
-  voteType: ProposalStepVoteType!
-  votesHelpText: String
-  voteThreshold: Int
-  open: Boolean!
-
-  # If enabled, allow voters to order their votes by preferences.
-  votesRanking: Boolean!
-
-  # A list of viewer votes associated with the step.
-  viewerVotes(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-    first: Int = 100000
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: ProposalVotesOrder = {direction: DESC}
-  ): ProposalVoteConnection!
-  form: ProposalForm!
+  # The ID of an object
+  id: ID!
   statuses: [Status!]!
   private: Boolean!
 
@@ -919,23 +919,21 @@ type CollectStep implements Node & Step & ProposalStep {
 
 # A comment
 type Comment implements Node & Publishable & Reportable & Contribution & Commentable & UniformResourceLocatable {
-  # The ID of an object
-  id: ID!
+  # The comments related to the commentable.
+  comments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
 
-  # Url of the contribution
-  url: URI!
+    # Returns the first `n` elements from the list.
+    first: Int = 100
 
-  # `true` if the object is published.
-  published: Boolean!
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
 
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
 
   # `true` if the contribution is trashed.
   trashed: Boolean!
@@ -948,6 +946,18 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
 
   # The reason the moderator trashed the contribution.
   trashedReason: String
+
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The URL to this resource.
+  url: URI!
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
@@ -966,27 +976,17 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  # The kind of contribution.
-  kind: String!
+  # `true` if the object is published.
+  published: Boolean!
 
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
 
-  # The comments related to the commentable.
-  comments(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
 
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
-  ): CommentConnection!
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
   body: String!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -1075,18 +1075,6 @@ type CommentVote implements Node & Vote & Publishable {
   # The ID of an object
   id: ID!
 
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
   # Date of vote.
   createdAt: DateTime!
 
@@ -1098,6 +1086,18 @@ type CommentVote implements Node & Vote & Publishable {
 
   # Returns 'commentVote'.
   kind: String!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
   contribution: Comment!
 }
 
@@ -1148,6 +1148,18 @@ type Consultation implements Node & Step {
   # The ID of an object
   id: ID!
 
+  # The kind of the step
+  kind: String!
+
+  # The title of the consultation.
+  title: String!
+
+  # The url of the step
+  url: String!
+
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID
+
   # A list of contributor associated with the consultation.
   contributors(
     # Returns the elements in the list that come after the specified cursor.
@@ -1163,9 +1175,6 @@ type Consultation implements Node & Step {
     last: Int
   ): UserConnection!
 
-  # The title of the step.
-  title: String!
-
   # Whether the user has vote for a contribution in this consultation.
   userHasVote(
     # The user's login (for example, an email).
@@ -1174,15 +1183,6 @@ type Consultation implements Node & Step {
 
   # The number of votes in this consultation.
   votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
-
-  # The kind of the step
-  kind: String!
-
-  # The url of the step
-  url: String!
-
-  # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID
   opinionCountShownBySection: Int
 
   # The project
@@ -1640,6 +1640,25 @@ type EvaluationForm {
 
 # An event.
 type Event implements Node & Commentable {
+  # The comments related to the commentable.
+  comments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
+
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID
+
   # The ID of an object
   id: ID!
 
@@ -1663,25 +1682,6 @@ type Event implements Node & Commentable {
 
   # Identifies if the event is published.
   enabled: Boolean!
-
-  # The comments related to the commentable.
-  comments(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
-  ): CommentConnection!
-
-  # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID
 
   # A list of Users that are participating to the event.
   participants(
@@ -2287,54 +2287,11 @@ type NotificationsConfiguration {
 
 # A contribution
 type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & Trashable & ContributionWithAuthor & EditableContribution {
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
   # The ID of an object
   id: ID!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
-  # Followers connection
-  followers(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
-  ): FollowerConnection
-
-  # Identifies the viewer following configuration on the entity.
-  viewerFollowingConfiguration: SubscriptionTypeValue
-
-  # Identifies if the viewer is following the entity.
-  viewerIsFollowing: Boolean!
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
   contribuable: Boolean!
 
   # The sources related to the sourceable.
@@ -2370,38 +2327,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
-
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # The reportings related to the reportable.
-  reportings(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-    first: Int = 30
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
-  ): ReportingConnection!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The author of the contribution.
-  author: User!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # Url of the contribution
-  url: URI!
 
   # The arguments related to the argumentable.
   arguments(
@@ -2439,6 +2364,81 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # Url of the contribution
+  url: URI!
+
+  # The author of the contribution.
+  author: User!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  # Followers connection
+  followers(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
+  ): FollowerConnection
+
+  # Identifies the viewer following configuration on the entity.
+  viewerFollowingConfiguration: SubscriptionTypeValue
+
+  # Identifies if the viewer is following the entity.
+  viewerIsFollowing: Boolean!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -2557,20 +2557,10 @@ union OpinionOrVersion = Opinion | Version
 
 # Entities that can be published.
 type OpinionVote implements YesNoPairedVote & Publishable & Vote {
+  value: YesNoPairedVoteValue!
+
   # The ID of an object
   id: ID!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
 
   # Date of vote.
   createdAt: DateTime!
@@ -2583,7 +2573,18 @@ type OpinionVote implements YesNoPairedVote & Publishable & Vote {
 
   # Returns 'opinionVote'.
   kind: String!
-  value: YesNoPairedVoteValue!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 }
 
 # Possible directions in which to order a list of items when provided an orderBy argument.
@@ -2595,11 +2596,8 @@ enum OrderDirection {
   DESC
 }
 
-# A step inside a project.
+# Fetches an object given its ID
 type OtherStep implements Step {
-  # The ID of an object
-  id: ID!
-
   # The kind of the step
   kind: String!
 
@@ -2608,6 +2606,9 @@ type OtherStep implements Step {
 
   # The url of the step
   url: String!
+
+  # The ID of an object
+  id: ID!
 }
 
 # Information about pagination in a connection.
@@ -2664,14 +2665,8 @@ type PhoneRequirement implements Node & Requirement {
   viewerValue: String
 }
 
-# A commentable
+# Represents a type that can be retrieved by a URL.
 type Post implements Node & Commentable & UniformResourceLocatable & UniformResourceAdminLocatable {
-  # The ID of an object
-  id: ID!
-
-  # The URL to this resource.
-  url: URI!
-
   # The admin url for this post.
   adminUrl: URI!
 
@@ -2690,6 +2685,12 @@ type Post implements Node & Commentable & UniformResourceLocatable & UniformReso
     last: Int
     orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
   ): CommentConnection!
+
+  # The ID of an object
+  id: ID!
+
+  # The URL to this resource.
+  url: URI!
   title: String
   relatedContent: [PostRelatedContent!]!
   createdAt: DateTime!
@@ -2719,11 +2720,8 @@ enum PostPublicationStatus {
 # A related content for a post
 union PostRelatedContent = Theme | Proposal | Project
 
-# A step inside a project.
+# Fetches an object given its ID
 type PresentationStep implements Step {
-  # The ID of an object
-  id: ID!
-
   # The kind of the step
   kind: String!
 
@@ -2732,24 +2730,15 @@ type PresentationStep implements Step {
 
   # The url of the step
   url: String!
+
+  # The ID of an object
+  id: ID!
 }
 
 # Entities that can be published.
 interface PrivatableVote {
   # The ID of an object
   id: ID!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
 
   # Date of vote.
   createdAt: DateTime!
@@ -2762,6 +2751,18 @@ interface PrivatableVote {
 
   # Returns Type of vote
   kind: String!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 
   # Anonymous or not.
   private: Boolean
@@ -2783,14 +2784,14 @@ input ProgressStepInput {
 
 # A participatory project.
 type Project implements Node & UniformResourceLocatable & UniformResourceAdminLocatable {
+  # The admin URL to this resource.
+  adminUrl: URI!
+
   # The ID of an object
   id: ID!
 
   # The URL to this resource.
   url: URI!
-
-  # The admin URL to this resource.
-  adminUrl: URI!
   steps: [Step!]!
   title: String!
 
@@ -2847,26 +2848,65 @@ enum ProjectVisibility {
 
 # A budget contribution
 type Proposal implements Node & Contribution & Commentable & Publishable & Draftable & Reportable & Trashable & UniformResourceLocatable & UniformResourceAdminLocatable {
+  # The admin URL to this resource.
+  adminUrl: URI!
+
+  # The comments related to the commentable.
+  comments(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+
   # The ID of an object
   id: ID!
 
-  # Url of the contribution
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The URL to this resource.
   url: URI!
 
-  # Identifies proposals as draft.
-  draft: Boolean!
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
 
-  # `true` if the object is published.
-  published: Boolean!
+  # The reportings related to the reportable.
+  reportings(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
 
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
 
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
 
   # Followers connection
   followers(
@@ -2892,59 +2932,20 @@ type Proposal implements Node & Contribution & Commentable & Publishable & Draft
   # View follow current proposal
   viewerIsFollowing: Boolean!
 
-  # The admin URL to this resource.
-  adminUrl: URI!
+  # Identifies proposals as draft.
+  draft: Boolean!
 
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
+  # `true` if the object is published.
+  published: Boolean!
 
-  # The status.
-  trashedStatus: TrashableStatus
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
 
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
 
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # The reportings related to the reportable.
-  reportings(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-    first: Int = 30
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
-  ): ReportingConnection!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The comments related to the commentable.
-  comments(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
-  ): CommentConnection!
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
   currentVotableStep: ProposalStep
@@ -3112,11 +3113,6 @@ type ProposalEvaluation {
 
 # A budget form
 type ProposalForm implements Node & UniformResourceLocatable {
-  # The ID of an object
-  id: ID!
-
-  # The URL to this resource.
-  url: URI!
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -3176,6 +3172,12 @@ type ProposalForm implements Node & UniformResourceLocatable {
     # Returns the last `n` elements from the list.
     last: Int
   ): ProposalConnection
+
+  # The ID of an object
+  id: ID!
+
+  # The URL to this resource.
+  url: URI!
   reference: String!
   description: String
   summaryHelpText: String
@@ -3285,6 +3287,15 @@ enum ProposalPublicationStatus {
 interface ProposalStep {
   # The ID of an object
   id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  url: String!
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -3345,15 +3356,6 @@ interface ProposalStep {
     last: Int
   ): ProposalConnection
 
-  # The kind of the step
-  kind: String!
-
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
-
   # The requirements to vote on this step.
   requirements(
     # Returns the elements in the list that come after the specified cursor.
@@ -3413,20 +3415,11 @@ enum ProposalTrashedStatus {
 
 # Entities that can be published.
 type ProposalVote implements Vote & Publishable & PrivatableVote {
+  # Anonymous or not.
+  private: Boolean
+
   # The ID of an object
   id: ID!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
 
   # Date of vote.
   createdAt: DateTime!
@@ -3440,8 +3433,17 @@ type ProposalVote implements Vote & Publishable & PrivatableVote {
   # Returns 'proposalVote'.
   kind: String!
 
-  # Anonymous or not.
-  private: Boolean
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 
   # Is the vote anonymous ?
   anonymous: Boolean!
@@ -3749,8 +3751,11 @@ enum QuestionTypeValue {
   section
 }
 
-# Fetches an object given its ID
+# A questionnaire is a series of questions that users can answer.
 type Questionnaire implements Node {
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID
+
   # The ID of an object
   id: ID!
 
@@ -3777,9 +3782,6 @@ type Questionnaire implements Node {
     # Returns the last `n` elements from the list.
     last: Int
   ): UserConnection!
-
-  # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID
   anonymousAllowed: Boolean!
   description: String
   multipleRepliesAllowed: Boolean!
@@ -3800,11 +3802,8 @@ input QuestionnaireAbstractQuestionInput {
   question: QuestionInput!
 }
 
-# A step inside a project.
+# Fetches an object given its ID
 type QuestionnaireStep implements Node & Step {
-  # The ID of an object
-  id: ID!
-
   # The kind of the step
   kind: String!
 
@@ -3813,6 +3812,9 @@ type QuestionnaireStep implements Node & Step {
 
   # The url of the step
   url: String!
+
+  # The ID of an object
+  id: ID!
 
   # A list of contributor associated with the step.
   contributors(
@@ -3839,11 +3841,8 @@ enum QuestionnaireType {
   VOTING
 }
 
-# A step inside a project.
+# Fetches an object given its ID
 type RankingStep implements Step {
-  # The ID of an object
-  id: ID!
-
   # The kind of the step
   kind: String!
 
@@ -3852,6 +3851,9 @@ type RankingStep implements Step {
 
   # The url of the step
   url: String!
+
+  # The ID of an object
+  id: ID!
 }
 
 # Fetches an object given its ID
@@ -3948,10 +3950,16 @@ type RemoveSourceVotePayload {
 
 # A Reply
 type Reply implements Node & Publishable & Draftable & Contribution & UniformResourceLocatable {
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
 
-  # Url of the contribution
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The URL to this resource.
   url: URI!
 
   # Is the object a draft.
@@ -3968,12 +3976,6 @@ type Reply implements Node & Publishable & Draftable & Contribution & UniformRes
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
   private: Boolean!
 
   # The reply status.
@@ -4044,9 +4046,6 @@ interface Reportable {
 
 # A report
 type Reporting implements Contribution & ContributionWithAuthor {
-  # The author of the contribution.
-  author: User!
-
   # The id of the contribution.
   id: ID!
 
@@ -4058,6 +4057,9 @@ type Reporting implements Contribution & ContributionWithAuthor {
 
   # Url of the contribution
   url: URI!
+
+  # The author of the contribution.
+  author: User!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -4334,8 +4336,54 @@ type Selection {
 
 # A budget contribution
 type SelectionStep implements Node & Step & ProposalStep {
-  # The ID of an object
-  id: ID!
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
+  project: Project
+  votesLimit: Int
+  budget: Int
+  voteType: ProposalStepVoteType!
+  votesHelpText: String
+  voteThreshold: Int
+  open: Boolean!
+
+  # If enabled, allow voters to order their votes by preferences.
+  votesRanking: Boolean!
+
+  # A list of viewer votes associated with the step.
+  viewerVotes(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 100000
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProposalVotesOrder = {direction: DESC}
+  ): ProposalVoteConnection!
+  form: ProposalForm!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step.
+  title: String!
+
+  # The url of the step
+  url: String!
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4396,54 +4444,8 @@ type SelectionStep implements Node & Step & ProposalStep {
     last: Int
   ): ProposalConnection
 
-  # The kind of the step
-  kind: String!
-
-  # The title of the step.
-  title: String!
-
-  # The url of the step
-  url: String!
-
-  # The requirements to vote on this step.
-  requirements(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): RequirementConnection!
-  project: Project
-  votesLimit: Int
-  budget: Int
-  voteType: ProposalStepVoteType!
-  votesHelpText: String
-  voteThreshold: Int
-  open: Boolean!
-
-  # If enabled, allow voters to order their votes by preferences.
-  votesRanking: Boolean!
-
-  # A list of viewer votes associated with the step.
-  viewerVotes(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-    first: Int = 100000
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: ProposalVotesOrder = {direction: DESC}
-  ): ProposalVoteConnection!
-  form: ProposalForm!
+  # The ID of an object
+  id: ID!
   position: Int!
   statuses: [Status!]!
 
@@ -4529,23 +4531,8 @@ type SimpleQuestion implements Question {
 
 # A source
 type Source implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution & UniformResourceLocatable {
-  # The id of the contribution.
-  id: ID!
-
-  # Url of the contribution
-  url: URI!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # `true` if the contribution is trashed.
   trashed: Boolean!
@@ -4558,6 +4545,21 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
 
   # The reason the moderator trashed the contribution.
   trashedReason: String
+
+  # The ID of an object
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The URL to this resource.
+  url: URI!
+
+  # The author of the contribution.
+  author: User!
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
@@ -4576,17 +4578,17 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
     orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
   ): ReportingConnection!
 
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
+  # `true` if the object is published.
+  published: Boolean!
 
-  # The author of the contribution.
-  author: User!
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
 
-  # The kind of contribution.
-  kind: String!
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
 
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -4667,18 +4669,6 @@ type SourceVote implements Vote & Publishable {
   # The ID of an object
   id: ID!
 
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
   # Date of vote.
   createdAt: DateTime!
 
@@ -4690,6 +4680,18 @@ type SourceVote implements Vote & Publishable {
 
   # Returns 'sourceVote'.
   kind: String!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 }
 
 # A connection to a list of items.
@@ -5215,6 +5217,9 @@ type UpdateUserAccountPayload {
 
 # A user is an individual's account.
 type User implements Node & UniformResourceLocatable {
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID
+
   # The ID of an object
   id: ID!
 
@@ -5226,9 +5231,6 @@ type User implements Node & UniformResourceLocatable {
 
   # Whether or not this user is the authenticated user.
   isViewer: Boolean!
-
-  # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -5578,35 +5580,11 @@ type ValueResponse implements Response {
 
 # A version of contribution
 type Version implements Node & Contribution & Sourceable & Reportable & Publishable & Argumentable & Trashable & ContributionWithAuthor & EditableContribution & UniformResourceLocatable {
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
   # The ID of an object
   id: ID!
-
-  # Url of the contribution
-  url: URI!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
-  # `true` if the contribution is trashed.
-  trashed: Boolean!
-
-  # The status.
-  trashedStatus: TrashableStatus
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: DateTime
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
   contribuable: Boolean!
 
   # The sources related to the sourceable.
@@ -5642,35 +5620,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
-
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # The reportings related to the reportable.
-  reportings(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-    first: Int = 30
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
-  ): ReportingConnection!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The author of the contribution.
-  author: User!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
 
   # The arguments related to the argumentable.
   arguments(
@@ -5708,6 +5657,59 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection
+
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
+
+  # The status.
+  trashedStatus: TrashableStatus
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The URL to this resource.
+  url: URI!
+
+  # The author of the contribution.
+  author: User!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # The reportings related to the reportable.
+  reportings(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -5804,20 +5806,10 @@ enum VersionOrderField {
 
 # Entities that can be published.
 type VersionVote implements YesNoPairedVote & Publishable & Vote {
+  value: YesNoPairedVoteValue!
+
   # The ID of an object
   id: ID!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
 
   # Date of vote.
   createdAt: DateTime!
@@ -5830,7 +5822,18 @@ type VersionVote implements YesNoPairedVote & Publishable & Vote {
 
   # Returns 'vote'.
   kind: String!
-  value: YesNoPairedVoteValue!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
 }
 
 interface Vote {
@@ -5898,18 +5901,6 @@ interface YesNoPairedVote {
   # The ID of an object
   id: ID!
 
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
-
   # Date of vote.
   createdAt: DateTime!
 
@@ -5921,6 +5912,18 @@ interface YesNoPairedVote {
 
   # Returns Type of vote
   kind: String!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
   value: YesNoPairedVoteValue!
 }
 
