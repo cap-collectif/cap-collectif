@@ -1,0 +1,11 @@
+ProjectOrderField:
+  type: enum
+  config:
+    description: 'Ordering projects.'
+    values:
+      POPULAR:
+        value: 'POPULAR'
+        description: 'Allows ordering a list of projects by there number of votes.'
+      LATEST:
+        value: 'LATEST'
+        description: 'Allows ordering a list of projects by when they were published.'

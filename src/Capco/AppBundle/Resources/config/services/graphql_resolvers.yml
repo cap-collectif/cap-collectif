@@ -63,8 +63,7 @@ services:
         }
       - { name: overblog_graphql.resolver, alias: 'post_abstract', method: 'resolvePostAbstract' }
       - { name: overblog_graphql.resolver, alias: 'proposal_news', method: 'resolveNews' }
-      - { name: overblog_graphql.resolver, alias: 'project_steps', method: 'resolveProjectSteps' }
-      - { name: overblog_graphql.resolver, alias: 'step_type', method: 'resolveStepType' }
+   
       - { name: overblog_graphql.resolver, alias: 'response_type', method: 'resolveResponseType' }
       - { name: overblog_graphql.resolver, alias: 'proposal_reference', method: 'resolveReference' }
       - {
@@ -199,6 +198,11 @@ services:
           alias: 'group_users_connection',
           method: 'resolveUsersConnection',
         }
+
+  capco.resolver.projects:
+    class: Capco\AppBundle\GraphQL\Resolver\Project\ProjectsResolver
+    tags:
+      - { name: overblog_graphql.resolver, alias: 'project_links', method: 'resolveProjectLinks' }
 
   # This is not a resolver but a voter, rename and move this elsewhere
   Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:

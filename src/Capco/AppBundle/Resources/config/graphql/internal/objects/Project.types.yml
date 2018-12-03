@@ -7,15 +7,40 @@ Project:
     fields:
       steps:
         type: '[Step!]!'
-        resolve: "@=resolver('project_steps', [value])"
+        resolve: '@=value.getRealSteps()'
       title:
         type: 'String!'
+      author:
+        type: 'InternalUser'
+      video:
+        type: 'String'
+      cover:
+        type: 'Media'
+        resolve: '@=value.getCover()'
+      participantsCount:
+        type: 'Int!'
+      contributionsCount:
+        type: 'Int!'
+      votesCount:
+        type: 'Int!'
+      hasParticipativeStep:
+        type: Boolean
+        resolve: '@=value.hasParticipativeStep()'
+      links:
+        type: 'ProjectLinks!'
+        resolve: "@=resolver('project_links', [value])"
+      type:
+        type: 'ProjectType'
+        resolve: '@=value.getProjectType()'
+      themes:
+        type: '[Theme!]'
       contributors:
         type: 'InternalUserConnection!'
         description: 'A list of contributor associated with the project.'
         argsBuilder: 'Relay::Connection'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", [value, args])'
       url:
+        type: 'URI!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectUrlResolver", [value])'
       votableSteps:
         type: '[ProposalStep!]!'
@@ -24,6 +49,7 @@ Project:
         type: 'ProjectVisibility!'
         description: 'The visibility of project'
       adminUrl:
+        type: 'URI!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminUrlResolver", [value])'
       opinionCanBeFollowed:
         type: 'Boolean!'
