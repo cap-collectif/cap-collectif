@@ -23,34 +23,38 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="panel"
           componentClass="div"
         >
-          <CardUser>
-            <Connect(UserAvatar)
-              className="pull-left"
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+          <Media>
+            <Left>
+              <Connect(UserAvatar)
+                className="pull-left"
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-            <UserLink
-              className=""
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+              />
+            </Left>
+            <Body>
+              <UserLink
+                className="excerpt"
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-          </CardUser>
+              />
+            </Body>
+          </Media>
         </PanelHeading>
         <ListGroup
           bsClass="list-group"
@@ -317,34 +321,38 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="panel"
           componentClass="div"
         >
-          <CardUser>
-            <Connect(UserAvatar)
-              className="pull-left"
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+          <Media>
+            <Left>
+              <Connect(UserAvatar)
+                className="pull-left"
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-            <UserLink
-              className=""
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+              />
+            </Left>
+            <Body>
+              <UserLink
+                className="excerpt"
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-          </CardUser>
+              />
+            </Body>
+          </Media>
         </PanelHeading>
         <ListGroup
           bsClass="list-group"
@@ -526,34 +534,38 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           bsClass="panel"
           componentClass="div"
         >
-          <CardUser>
-            <Connect(UserAvatar)
-              className="pull-left"
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+          <Media>
+            <Left>
+              <Connect(UserAvatar)
+                className="pull-left"
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-            <UserLink
-              className=""
-              user={
-                Object {
-                  "displayName": "iAmAUser",
-                  "media": Object {
-                    "url": "http://monimage.com/image1.jpg",
-                  },
-                  "url": "http://monprofil/profil",
-                  "username": "user",
+              />
+            </Left>
+            <Body>
+              <UserLink
+                className="excerpt"
+                user={
+                  Object {
+                    "displayName": "iAmAUser",
+                    "media": Object {
+                      "url": "http://monimage.com/image1.jpg",
+                    },
+                    "url": "http://monprofil/profil",
+                    "username": "user",
+                  }
                 }
-              }
-            />
-          </CardUser>
+              />
+            </Body>
+          </Media>
         </PanelHeading>
         <ListGroup
           bsClass="list-group"

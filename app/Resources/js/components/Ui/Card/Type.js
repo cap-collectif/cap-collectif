@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import colors from '../../../utils/colors';
 
 type Props = {
-  bgColor: string,
-  children: React.Node
+  bgColor?: string,
+  children: React.Node,
 };
 
 const Container = styled.div.attrs({
@@ -20,16 +20,14 @@ const Container = styled.div.attrs({
   color: ${colors.white};
 `;
 
-export class Type extends React.PureComponent<Props> {
-  static defaultProps = {
-    bgColor: '#707070',
-  };
+export const Type = (props: Props) => {
+  const { bgColor, children } = props;
 
-  render() {
-    const { bgColor, children } = this.props;
+  return <Container bgColor={bgColor}>{children}</Container>;
+};
 
-    return <Container bgColor={bgColor}>{children}</Container>;
-  }
-}
+Type.defaultProps = {
+  bgColor: '#707070',
+};
 
 export default Type;

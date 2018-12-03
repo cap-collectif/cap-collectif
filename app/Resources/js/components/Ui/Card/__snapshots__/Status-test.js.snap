@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Status /> should render correctly 1`] = `
+<Status__Container
+  bgColor="#707070"
+>
+  My Status
+</Status__Container>
+`;
+
+exports[`<Status /> should render correctly with other bgColor 1`] = `
+<Status__Container
+  bgColor="#dc3545"
+>
+  My Status
+</Status__Container>
+`;

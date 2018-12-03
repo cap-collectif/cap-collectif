@@ -79,21 +79,21 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
     if (step.status === 'OPENED' && this.actualStepIsParticipative()) {
       return (
-        <a href={step.url}>
+        <a href={step.url} className="text-uppercase  mr-10">
           <FormattedMessage id="project.preview.action.participe" />
         </a>
       );
     }
     if ((!this.actualStepIsParticipative() && step.status === 'OPENED') || isCurrentStep) {
       return (
-        <a href={step.url}>
+        <a href={step.url} className="text-uppercase  mr-10">
           <FormattedMessage id="project.preview.action.seeStep" />
         </a>
       );
     }
     if (step.status === 'CLOSED') {
       return (
-        <a href={step.url}>
+        <a href={step.url} className="text-uppercase  mr-10">
           <FormattedMessage id="project.preview.action.seeResult" />
         </a>
       );
@@ -199,7 +199,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
             isCurrentStep={isCurrentStep}
           />
         )}
-        <div className="card__actions">
+        <div className="small excerpt">
           {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep &&
             actualStep.status === 'OPENED' &&

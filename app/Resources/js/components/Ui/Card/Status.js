@@ -4,10 +4,9 @@ import * as React from 'react';
 import { StatusColors } from '../../../utils/colors';
 
 type Props = {
-  bgColor: 'string',
-  // bgColor: 'info' | 'primary' | 'success' | 'warning' | 'danger' | 'default',
+  bgColor?: 'info' | 'primary' | 'success' | 'warning' | 'danger' | 'default',
   children: React.Node,
-}
+};
 
 const Container = styled.div.attrs({
   className: 'ellipsis card-status',
@@ -22,18 +21,16 @@ const Container = styled.div.attrs({
   background-color: ${props => props.bgColor};
 `;
 
-export class Status extends React.Component<Props> {
-  static defaultProps = {
-    color: 'default',
-  };
+export const Status = (props: Props) => {
+  const { bgColor, children } = props;
 
-  render() {
-    const { bgColor, children } = this.props;
+  const getBgColor = StatusColors[bgColor];
 
-    const getBgColor = StatusColors[bgColor];
+  return <Container bgColor={getBgColor}>{children}</Container>;
+};
 
-    return <Container bgColor={getBgColor}>{children}</Container>;
-  }
-}
+Status.defaultProps = {
+  bgColor: 'default',
+};
 
 export default Status;

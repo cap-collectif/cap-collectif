@@ -46,7 +46,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
                   <Truncate lines={3}>{proposal.title}</Truncate>
                 </Card.Title>
               </a>
-              <div className="excerpt small">{proposal.summaryOrBodyExcerpt}</div>
+              <p className="excerpt small">{proposal.summaryOrBodyExcerpt}</p>
             </React.Fragment>
           )}
           <TagsList>

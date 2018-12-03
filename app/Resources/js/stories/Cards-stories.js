@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { select, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import Card from '../components/Ui/Card/Card';
 import Image from '../components/Ui/Medias/Image';
 
@@ -19,32 +19,58 @@ storiesOf('Cards', module)
   .add(
     'Card',
     () => {
+      const cardType = boolean('Display card type', false);
       const type = text('Type', 'My type');
       const colorType = text('Type color', '#707070');
+      const cardCover = boolean('Display card cover', false);
       const status = text('Status', 'My status');
       const statusBgColor = select('Status background color', statusColorOption, 'default');
+      const cardStatus = boolean('Display card status', false);
+      const cardCounters = boolean('Display card countersw', false);
       const titleLink = text('Title link', 'https://ui.cap-collectif.com');
       const title = text('Title', 'Project title');
       const titleTagName = text('Title tag name', 'h2');
 
+      const cardBody = boolean('Display card body', true);
+
       Card.Cover.displayName = 'Card.Cover';
+      // $FlowFixMe
       Card.Type.displayName = 'Card.Type';
+      // $FlowFixMe
       Card.Status.displayName = 'Card.Status';
       Card.Body.displayName = 'Card.Body';
+      // $FlowFixMe
       Card.Title.displayName = 'Card.Title';
+      Card.Counters.displayName = 'Card.Counters';
 
       return (
         <Card>
-          <Card.Type bgColor={colorType}>{type}</Card.Type>
-          <Card.Cover>
-            <Image src="https://source.unsplash.com/collection/1127828" alt="Project title" />
-          </Card.Cover>
-          <Card.Body>
-            <Card.Title tagName={titleTagName}>
-              <a href={titleLink}>{title}</a>
-            </Card.Title>
-          </Card.Body>
-          <Card.Status bgColor={statusBgColor}>{status}</Card.Status>
+          {cardType && <Card.Type bgColor={colorType}>{type}</Card.Type>}
+          {cardCover && (
+            <Card.Cover>
+              <Image src="https://source.unsplash.com/collection/1127828" alt="Project title" />
+            </Card.Cover>
+          )}
+          {cardBody && (
+            <Card.Body>
+              <Card.Title tagName={titleTagName}>
+                <a href={titleLink}>{title}</a>
+              </Card.Title>
+            </Card.Body>
+          )}
+          {cardCounters && (
+            <Card.Counters>
+              <div className="card-counters__item">
+                <div className="card-counters__value">0</div>
+                <div>Lorem ipsum</div>
+              </div>
+              <div className="card-counters__item">
+                <div className="card-counters__value">40</div>
+                <div>Lorem ipsum</div>
+              </div>
+            </Card.Counters>
+          )}
+          {cardStatus && <Card.Status bgColor={statusBgColor}>{status}</Card.Status>}
         </Card>
       );
     },
@@ -53,7 +79,7 @@ storiesOf('Cards', module)
         text: `
           Ce composant est utilisé ...
         `,
-        propTablesExclude: [Image],
+        propTablesExclude: [Image, Card.Cover, Card.Counters, Card.Body],
       },
     },
   );

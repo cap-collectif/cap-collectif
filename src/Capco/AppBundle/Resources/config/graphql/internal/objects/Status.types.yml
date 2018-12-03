@@ -7,4 +7,4 @@ Status:
       name:
         type: 'String!'
       color:
-        type: 'String!'
+        type: 'StatusType!'

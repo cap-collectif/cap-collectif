@@ -1,10 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ReplyForm /> should render correctly with equal required and facultative fields 1`] = `
-<CardContainer>
-  <div
-    className="card__body"
-  >
+<Card>
+  <Body>
     <div
       id="create-reply-form"
     >
@@ -237,15 +235,13 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
         </div>
       </form>
     </div>
-  </div>
-</CardContainer>
+  </Body>
+</Card>
 `;
 
 exports[`<ReplyForm /> should render correctly with majority of required fields 1`] = `
-<CardContainer>
-  <div
-    className="card__body"
-  >
+<Card>
+  <Body>
     <div
       id="create-reply-form"
     >
@@ -441,15 +437,13 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
         </div>
       </form>
     </div>
-  </div>
-</CardContainer>
+  </Body>
+</Card>
 `;
 
 exports[`<ReplyForm /> should render correctly with minority of required fields 1`] = `
-<CardContainer>
-  <div
-    className="card__body"
-  >
+<Card>
+  <Body>
     <div
       id="create-reply-form"
     >
@@ -726,15 +720,13 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
         </div>
       </form>
     </div>
-  </div>
-</CardContainer>
+  </Body>
+</Card>
 `;
 
 exports[`<ReplyForm /> should render correctly with only facultatives fields 1`] = `
-<CardContainer>
-  <div
-    className="card__body"
-  >
+<Card>
+  <Body>
     <div
       id="create-reply-form"
     >
@@ -952,15 +944,13 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
         </div>
       </form>
     </div>
-  </div>
-</CardContainer>
+  </Body>
+</Card>
 `;
 
 exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
-<CardContainer>
-  <div
-    className="card__body"
-  >
+<Card>
+  <Body>
     <div
       id="create-reply-form"
     >
@@ -1119,6 +1109,6 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
         </div>
       </form>
     </div>
-  </div>
-</CardContainer>
+  </Body>
+</Card>
 `;
