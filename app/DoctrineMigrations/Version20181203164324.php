@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181121160622 extends AbstractMigration implements ContainerAwareInterface
+final class Version20181203164324 extends AbstractMigration implements ContainerAwareInterface
 {
     public function setContainer(ContainerInterface $container = null)
     {
@@ -33,7 +33,7 @@ final class Version20181121160622 extends AbstractMigration implements Container
             'CREATE TABLE project_district (project_id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', projectdistrict_id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', INDEX IDX_C8FDF5C166D1F9C (project_id), INDEX IDX_C8FDF5CCB622938 (projectdistrict_id), PRIMARY KEY(project_id, projectdistrict_id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
         );
         $this->addSql(
-            'CREATE TABLE style (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', is_enable TINYINT(1) NOT NULL, color VARCHAR(7) NOT NULL, opacity DOUBLE PRECISION NOT NULL, style_type VARCHAR(255) NOT NULL, size INT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
+            'CREATE TABLE style (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', opacity DOUBLE PRECISION NOT NULL, enabled TINYINT(1) NOT NULL, color VARCHAR(255) NOT NULL, style_type VARCHAR(255) NOT NULL, size INT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
         );
         $this->addSql(
             'ALTER TABLE project_district ADD CONSTRAINT FK_C8FDF5C166D1F9C FOREIGN KEY (project_id) REFERENCES project (id) ON DELETE CASCADE'
@@ -70,14 +70,14 @@ final class Version20181121160622 extends AbstractMigration implements Container
                     'color' => isset($jsonStyle->color) ? $jsonStyle->color : null,
                     'opacity' => isset($jsonStyle->opacity) ? $jsonStyle->opacity : null,
                     'size' => isset($jsonStyle->weight) ? $jsonStyle->weight : null,
-                    'is_enable' => 1,
+                    'enabled' => 1,
                     'id' => $uuidBorderStyle,
                 ]);
                 $style = $this->connection->insert('style', [
                     'style_type' => 'background',
                     'color' => isset($jsonStyle->color) ? $jsonStyle->color : null,
                     'opacity' => 0.2,
-                    'is_enable' => 1,
+                    'enabled' => 1,
                     'id' => $uuidBackgroundStyle,
                 ]);
             } else {

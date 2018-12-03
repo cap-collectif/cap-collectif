@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Entity\Styles;
 
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\EnableTrait;
+use Capco\AppBundle\Traits\ColorableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,45 +20,13 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class AbstractStyle
 {
     use UuidTrait;
-
-    /**
-     * @ORM\Column(name="is_enable", type="boolean")
-     */
-    private $isEnable = false;
-
-    /**
-     * @ORM\Column(name="color", type="string", length=7)
-     */
-    private $color;
+    use EnableTrait;
+    use ColorableTrait;
 
     /**
      * @ORM\Column(name="opacity", type="float")
      */
     private $opacity;
-
-    public function getIsEnable(): bool
-    {
-        return $this->isEnable;
-    }
-
-    public function setIsEnable(bool $isEnable): self
-    {
-        $this->isEnable = $isEnable;
-
-        return $this;
-    }
-
-    public function getColor(): ?string
-    {
-        return $this->color;
-    }
-
-    public function setColor(string $color): self
-    {
-        $this->color = $color;
-
-        return $this;
-    }
 
     public function getOpacity(): ?float
     {
