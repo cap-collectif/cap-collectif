@@ -27,7 +27,7 @@ Scenario: Project can be filtered by theme
   And feature "projects_form" is enabled
   And I visited "projects page"
   And I wait ".project-preview" to appear on current page
-  Then I should see 16 ".project-preview" elements
+  Then I should see 17 ".project-preview" elements
   And I select "Transport" from "project-theme"
   And I wait ".project-preview" to appear on current page
   Then I should see 9 ".project-preview" elements

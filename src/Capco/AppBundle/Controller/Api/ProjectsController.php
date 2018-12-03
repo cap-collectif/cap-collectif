@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Project;
@@ -6,18 +7,13 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ProjectType;
-use Capco\AppBundle\Resolver\Project\ProjectSearchParameters;
-use Capco\AppBundle\Resolver\Project\ProjectSearchResolver;
 use Capco\AppBundle\Resolver\ProjectStatsResolver;
-use Capco\AppBundle\SiteParameter\Resolver;
-use Capco\AppBundle\Toggle\Manager;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,41 +21,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectsController extends FOSRestController
 {
-    /**
-     * @Get("/projects")
-     * @QueryParam(name="limit", requirements="\d+", nullable=true)
-     * @QueryParam(name="page", requirements="\d+", nullable=true)
-     * @QueryParam(name="theme", requirements="[a-z0-9]+(?:-[a-z0-9]+)*", default="all")
-     * @QueryParam(name="orderBy", requirements="(date|popularity)", default="date")
-     * @QueryParam(name="type", requirements="[a-z0-9]+(?:-[a-z0-9]+)*", nullable=true)
-     * @QueryParam(name="term", nullable=true)
-     * @View(serializerGroups={"Projects", "Steps", "UserDetails", "UserVotes", "ThemeDetails", "ProjectType"})
-     * @Cache(smaxage="60", public=true)
-     */
-    public function getProjectsAction(ParamFetcherInterface $paramFetcher)
-    {
-        $shouldLimit =
-            !$paramFetcher->get('limit') && $this->get(Manager::class)->isActive('projects_form');
-        $projectSearchParameters = ProjectSearchParameters::createFromRequest(
-            $paramFetcher,
-            $shouldLimit
-        );
-        if (
-            $shouldLimit &&
-            !$paramFetcher->get('limit') &&
-            $this->get(Manager::class)->isActive('projects_form')
-        ) {
-            $projectSearchParameters->setElements(
-                $this->get(Resolver::class)->getValue('projects.pagination')
-            );
-        }
-
-        return $this->get(ProjectSearchResolver::class)->search(
-            $projectSearchParameters,
-            $this->getUser()
-        );
-    }
-
     /**
      * @Post("/projects")
      * @Security("has_role('ROLE_ADMIN')")
@@ -140,6 +101,7 @@ class ProjectsController extends FOSRestController
             $district,
             $category
         );
+
         return ['data' => $data];
     }
 
