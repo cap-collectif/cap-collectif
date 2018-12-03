@@ -10,9 +10,7 @@ import type {
 const mutation = graphql`
   mutation DeleteProjectDistrictMutation($input: DeleteProjectDistrictInput!) {
     deleteProjectDistrict(input: $input) {
-      district {
-        id
-      }
+      deletedDistrictId
     }
   }
 `;

@@ -1,9 +1,9 @@
-CreateProjectDistrictPayload:
+DeleteProjectDistrictPayload:
   type: relay-mutation-payload
   config:
     fields:
-      district:
-        type: 'ProjectDistrict'
+      deletedDistrictId:
+        type: 'ID'
       userErrors:
         type: '[UserError!]!'
         description: 'An unsuccessful mutation will return one or more `UserError` objects.'

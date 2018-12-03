@@ -9,12 +9,7 @@ Scenario: Admin wants to delete a district in projects
    {
     "query": "mutation ($input: DeleteProjectDistrictInput!) {
       deleteProjectDistrict(input: $input) {
-        district {
-          id
-          name
-          geojson
-          displayedOnMap
-        }
+        deletedDistrictId
       }
     }",
     "variables": {
@@ -29,12 +24,7 @@ Scenario: Admin wants to delete a district in projects
   {
     "data": {
       "deleteProjectDistrict": {
-          "district": {
-            "id": "projectDistrict1",
-            "name": "Premier Quartier",
-            "geojson": null,
-            "displayedOnMap": true
-          }
+          "deletedDistrictId": "projectDistrict1"
        }
      }
   }
@@ -71,11 +61,9 @@ Scenario: Admin wants to receive error during deleting a district in projects
    {
     "query": "mutation ($input: DeleteProjectDistrictInput!) {
       deleteProjectDistrict(input: $input) {
-        district {
-          id
-          name
-          geojson
-          displayedOnMap
+        deletedDistrictId
+        userErrors {
+          message
         }
       }
     }",
@@ -88,24 +76,16 @@ Scenario: Admin wants to receive error during deleting a district in projects
   """
   Then the JSON response should match:
   """
-  {
-    "errors": [
-      {
-        "message": "Unknown project district with id: wrongDistrictId",
-        "category": "user",
-        "locations": [
-          {
-            "line": 1,
-            "column": 52
-          }
-        ],
-        "path": [
-          "deleteProjectDistrict"
-        ]
+  {  
+   "data":{  
+      "deleteProjectDistrict":{  
+         "deletedDistrictId":null,
+         "userErrors":[  
+            {  
+              "message":"Unknown project district with id: wrongDistrictId"
+            }
+         ]
       }
-    ],
-    "data": {
-      "deleteProjectDistrict": null
-    }
+   }
   }
   """

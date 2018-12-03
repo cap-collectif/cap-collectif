@@ -1387,7 +1387,10 @@ input CreateProjectDistrictInput {
 }
 
 type CreateProjectDistrictPayload {
-  district: ProjectDistrict!
+  district: ProjectDistrict
+
+  # An unsuccessful mutation will return one or more `UserError` objects.
+  userErrors: [UserError!]!
   clientMutationId: String
 }
 
@@ -1586,6 +1589,14 @@ type DeleteOpinionPayload {
 
 input DeleteProjectDistrictInput {
   id: ID
+}
+
+type DeleteProjectDistrictPayload {
+  deletedDistrictId: ID
+
+  # An unsuccessful mutation will return one or more `UserError` objects.
+  userErrors: [UserError!]!
+  clientMutationId: String
 }
 
 input DeleteProposalInput {
@@ -2315,7 +2326,7 @@ type Mutation {
   updateQuestionnaireParameters(input: UpdateQuestionnaireParametersInput!): UpdateQuestionnaireParametersPayload
   updateQuestionnaireConfiguration(input: UpdateQuestionnaireConfigurationInput!): UpdateQuestionnaireConfigurationPayload
   createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
-  deleteProjectDistrict(input: DeleteProjectDistrictInput!): CreateProjectDistrictPayload
+  deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
   updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload
 }
 

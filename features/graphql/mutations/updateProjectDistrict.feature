@@ -84,6 +84,9 @@ Scenario: Admin wants to receive error during updating a district in projects
           geojson
           displayedOnMap
         }
+        userErrors {
+          message
+        }
       }
     }",
     "variables": {
@@ -98,24 +101,16 @@ Scenario: Admin wants to receive error during updating a district in projects
   """
   Then the JSON response should match:
   """
-  {
-    "errors": [
-      {
-        "message": "Unknown project district with id: wrongDistrictId",
-        "category": "user",
-        "locations": [
-          {
-            "line": 1,
-            "column": 52
-          }
-        ],
-        "path": [
-          "updateProjectDistrict"
-        ]
+  {  
+   "data":{  
+      "updateProjectDistrict":{  
+         "district":null,
+         "userErrors":[  
+            {  
+              "message":"Unknown project district with id: wrongDistrictId"
+            }
+         ]
       }
-    ],
-    "data": {
-      "updateProjectDistrict": null
-    }
+   }
   }
   """
