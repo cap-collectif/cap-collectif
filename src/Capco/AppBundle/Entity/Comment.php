@@ -1,6 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -135,7 +137,7 @@ abstract class Comment implements
         return null;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
@@ -147,7 +149,7 @@ abstract class Comment implements
         return $this;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
@@ -159,12 +161,12 @@ abstract class Comment implements
         return $this;
     }
 
-    public function getAuthor()
+    public function getAuthor(): ?User
     {
         return $this->Author;
     }
 
-    public function setAuthor($Author)
+    public function setAuthor(User $Author): self
     {
         $this->Author = $Author;
         $this->setPinned($Author && $Author->isVip() && !$this->parent);
@@ -177,7 +179,7 @@ abstract class Comment implements
         return $this->parent;
     }
 
-    public function setParent($parent)
+    public function setParent(?self $parent): self
     {
         $this->parent = $parent;
         $this->setPinned($this->pinned && !$parent);
@@ -185,48 +187,48 @@ abstract class Comment implements
         return $this;
     }
 
-    public function getAuthorName()
+    public function getAuthorName(): ?string
     {
         return $this->authorName;
     }
 
-    public function setAuthorName($authorName)
+    public function setAuthorName(string $authorName): self
     {
         $this->authorName = $authorName;
 
         return $this;
     }
 
-    public function getAuthorEmail()
+    public function getAuthorEmail(): string
     {
         return $this->authorEmail;
     }
 
-    public function setAuthorEmail($authorEmail)
+    public function setAuthorEmail(string $authorEmail): self
     {
         $this->authorEmail = $authorEmail;
 
         return $this;
     }
 
-    public function getAuthorIp()
+    public function getAuthorIp(): string
     {
         return $this->authorIp;
     }
 
-    public function setAuthorIp($authorIp)
+    public function setAuthorIp(string $authorIp): self
     {
         $this->authorIp = $authorIp;
 
         return $this;
     }
 
-    public function getAnswers()
+    public function getAnswers(): Collection
     {
         return $this->answers;
     }
 
-    public function addAnswer($answer)
+    public function addAnswer(self $answer): self
     {
         if (!$this->answers->contains($answer)) {
             $this->answers->add($answer);
@@ -235,19 +237,19 @@ abstract class Comment implements
         return $this;
     }
 
-    public function removeAnswer($answer)
+    public function removeAnswer(self $answer): self
     {
         $this->answers->removeElement($answer);
 
         return $this;
     }
 
-    public function getReports()
+    public function getReports(): ?Collection
     {
         return $this->Reports;
     }
 
-    public function addReport(Reporting $report)
+    public function addReport(Reporting $report): self
     {
         if (!$this->Reports->contains($report)) {
             $this->Reports->add($report);
@@ -256,7 +258,7 @@ abstract class Comment implements
         return $this;
     }
 
-    public function removeReport(Reporting $report)
+    public function removeReport(Reporting $report): self
     {
         $this->Reports->removeElement($report);
 
@@ -265,7 +267,7 @@ abstract class Comment implements
 
     // ************************ Custom methods *********************************
 
-    public function userHasReport(User $user = null)
+    public function userHasReport(User $user = null): bool
     {
         if (null !== $user) {
             foreach ($this->Reports as $report) {
@@ -295,23 +297,25 @@ abstract class Comment implements
         return $this->isPublished() && !$this->isTrashed();
     }
 
-    public function removeCommentFromRelatedObject()
+    public function removeCommentFromRelatedObject(): void
     {
-        $this->getRelatedObject()->removeComment($this);
+        if ($this->getRelatedObject()) {
+            $this->getRelatedObject()->removeComment($this);
+        }
     }
 
-    public function canDisplayRelatedObject($user = null): bool
+    public function canDisplayRelatedObject(?User $user = null): bool
     {
         if ($this->getRelatedObject() instanceof ProposalComment) {
             return $this->getRelatedObject()->canDisplay($user);
         }
 
-        return $this->getRelatedObject()->canDisplay($user);
+        return $this->getRelatedObject() ? $this->getRelatedObject()->canDisplay($user) : false;
     }
 
-    public function canContributeToRelatedObject($user = null)
+    public function canContributeToRelatedObject(?User $user = null): bool
     {
-        return $this->getRelatedObject()->canContribute($user);
+        return $this->getRelatedObject() ? $this->getRelatedObject()->canDisplay($user) : false;
     }
 
     // ********************** Abstract methods **********************************
@@ -325,7 +329,7 @@ abstract class Comment implements
     /**
      * @ORM\PreRemove
      */
-    public function deleteComment()
+    public function deleteComment(): void
     {
         $this->removeCommentFromRelatedObject();
     }

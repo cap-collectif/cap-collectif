@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\EventListener\CommentSubscriber;
+use Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
@@ -29,6 +30,7 @@ class CommentNotifier extends BaseNotifier
     protected $proposalUrlResolver;
     protected $userUrlResolver;
     protected $translator;
+    protected $commentShowUrlResolver;
 
     public function __construct(
         MailerService $mailer,
@@ -38,13 +40,15 @@ class CommentNotifier extends BaseNotifier
         ProposalResolver $proposalResolver,
         ProposalUrlResolver $proposalUrlResolver,
         UserUrlResolver $userUrlResolver,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        CommentShowUrlResolver $commentShowUrlResolver
     ) {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->commentResolver = $commentResolver;
         $this->proposalResolver = $proposalResolver;
         $this->proposalUrlResolver = $proposalUrlResolver;
         $this->userUrlResolver = $userUrlResolver;
+        $this->commentShowUrlResolver = $commentShowUrlResolver;
         $this->translator = $translator;
     }
 
@@ -67,7 +71,7 @@ class CommentNotifier extends BaseNotifier
                         CommentCreateAdminAnonymousMessage::create(
                             $comment,
                             $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
+                            $this->commentShowUrlResolver->__invoke($comment),
                             $this->commentResolver->getAdminUrl($comment, true)
                         )
                     );
@@ -76,7 +80,7 @@ class CommentNotifier extends BaseNotifier
                         CommentCreateAdminMessage::create(
                             $comment,
                             $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
+                            $this->commentShowUrlResolver->__invoke($comment),
                             $this->commentResolver->getAdminUrl($comment, true),
                             $this->userUrlResolver->__invoke($comment->getAuthor())
                         )
@@ -96,7 +100,7 @@ class CommentNotifier extends BaseNotifier
                         CommentCreateAuthorAnonymousMessage::create(
                             $comment,
                             $user->getEmail(),
-                            $this->proposalUrlResolver->__invoke($comment->getProposal()),
+                            $this->commentShowUrlResolver->__invoke($comment),
                             $this->userResolver->resolveDisableNotificationsUrl($user),
                             $this->userResolver->resolveShowNotificationsPreferencesUrl()
                         )
@@ -106,7 +110,7 @@ class CommentNotifier extends BaseNotifier
                         CommentCreateAuthorMessage::create(
                             $comment,
                             $user->getEmail(),
-                            $this->proposalUrlResolver->__invoke($comment->getProposal()),
+                            $this->commentShowUrlResolver->__invoke($comment),
                             $this->userResolver->resolveDisableNotificationsUrl($user),
                             $this->userResolver->resolveShowNotificationsPreferencesUrl(),
                             $this->userUrlResolver->__invoke($comment->getAuthor())
@@ -198,7 +202,7 @@ class CommentNotifier extends BaseNotifier
                         CommentUpdateAdminAnonymousMessage::create(
                             $comment,
                             $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
+                            $this->commentShowUrlResolver->__invoke($comment),
                             $this->commentResolver->getAdminUrl($comment, true)
                         )
                     );
@@ -207,7 +211,7 @@ class CommentNotifier extends BaseNotifier
                         CommentUpdateAdminMessage::create(
                             $comment,
                             $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
+                            $this->commentShowUrlResolver->__invoke($comment),
                             $this->commentResolver->getAdminUrl($comment, true),
                             $this->userUrlResolver->__invoke($comment->getAuthor())
                         )

@@ -10,7 +10,7 @@ final class CommentCreateAuthorAnonymousMessage extends ExternalMessage
     public static function create(
         Comment $comment,
         string $recipentEmail,
-        string $proposalUrl,
+        string $commentUrl,
         string $disableNotificationsUrl,
         string $notificationsUrl,
         string $recipientName = null
@@ -27,7 +27,7 @@ final class CommentCreateAuthorAnonymousMessage extends ExternalMessage
                 $comment->getCreatedAt()->format('d/m/Y'),
                 $comment->getCreatedAt()->format('H:i:s'),
                 $comment->getBodyTextExcerpt(),
-                $proposalUrl,
+                $commentUrl,
                 $disableNotificationsUrl,
                 $notificationsUrl
             )
@@ -42,7 +42,7 @@ final class CommentCreateAuthorAnonymousMessage extends ExternalMessage
         string $date,
         string $time,
         string $comment,
-        string $proposalUrl,
+        string $commentUrl,
         string $disableNotificationsUrl,
         string $notificationsUrl
     ): array {
@@ -52,7 +52,7 @@ final class CommentCreateAuthorAnonymousMessage extends ExternalMessage
             '%date%' => $date,
             '%time%' => $time,
             '%comment%' => self::escape($comment),
-            '%proposalUrl%' => $proposalUrl,
+            '%proposalUrl%' => $commentUrl,
             '%disableNotificationsUrl%' => $disableNotificationsUrl,
             '%notificationsUrl%' => $notificationsUrl,
         ];
