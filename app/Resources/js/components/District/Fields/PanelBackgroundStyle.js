@@ -31,8 +31,8 @@ const PanelBackgroundStyle = ({ member, isPanelOpen, opacities, handlePanelToggl
               component={toggle}
               type="checkbox"
               labelSide="RIGHT"
-              id="isEnable"
-              name="isEnable"
+              id="enabled"
+              name="enabled"
               onChange={handlePanelToggle}
               normalize={val => !!val}
               format={val => !!val}

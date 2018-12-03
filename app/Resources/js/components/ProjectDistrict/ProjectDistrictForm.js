@@ -38,7 +38,7 @@ const validate = (values: FormValues) => {
   const borderEnable =
     values.projectDistrict &&
     values.projectDistrict.border &&
-    values.projectDistrict.border.isEnable;
+    values.projectDistrict.border.enabled;
 
   if (borderEnable) {
     errors.projectDistrict.border = {};
@@ -58,7 +58,7 @@ const validate = (values: FormValues) => {
   const backgroundEnable =
     values.projectDistrict &&
     values.projectDistrict.background &&
-    values.projectDistrict.background.isEnable;
+    values.projectDistrict.background.enabled;
 
   if (backgroundEnable) {
     errors.projectDistrict.background = {};

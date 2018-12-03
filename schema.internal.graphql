@@ -511,13 +511,13 @@ interface Argumentable {
 }
 
 input BackgroundStyleInput {
-  isEnable: Boolean
+  enabled: Boolean
   color: Color
   opacity: Float
 }
 
 input BorderStyleInput {
-  isEnable: Boolean
+  enabled: Boolean
   color: Color
   opacity: Float
   size: Int

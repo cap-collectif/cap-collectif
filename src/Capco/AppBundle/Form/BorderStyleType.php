@@ -14,7 +14,7 @@ class BorderStyleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('isEnable', CheckboxType::class);
+        $builder->add('enabled', CheckboxType::class);
         $builder->add('color', TextType::class);
         $builder->add('opacity', TextType::class);
         $builder->add('size', IntegerType::class);

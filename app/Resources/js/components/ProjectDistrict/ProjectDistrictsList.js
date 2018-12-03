@@ -127,13 +127,13 @@ export default createRefetchContainer(
         geojson
         displayedOnMap
         border {
-          isEnable
+          enabled
           color
           opacity
           size
         }
         background {
-          isEnable
+          enabled
           color
           opacity
         }

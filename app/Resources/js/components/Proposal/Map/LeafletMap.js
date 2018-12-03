@@ -27,7 +27,7 @@ type Style = {
   border: {
     color: string,
     id: string,
-    isEnable: boolean,
+    enabled: boolean,
     opacity: number,
     size: number,
     style_type: string,
@@ -35,7 +35,7 @@ type Style = {
   background: {
     color: string,
     id: string,
-    isEnable: boolean,
+    enabled: boolean,
     opacity: number,
     style_type: string,
   },

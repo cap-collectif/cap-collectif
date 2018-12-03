@@ -106,14 +106,14 @@ export type Store = ReduxStore<State, Action>;
 export type Dispatch = ReduxDispatch<Action>;
 
 export type BorderStyle = {
-  isEnable: boolean,
+  enabled: boolean,
   color: string,
   opacity: number,
   size: number,
 };
 
 export type BackgroundStyle = {
-  isEnable: boolean,
+  enabled: boolean,
   color: string,
   opacity: number,
 };

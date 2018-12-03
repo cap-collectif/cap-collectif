@@ -2,7 +2,7 @@ BorderStyleInput:
   type: input-object
   config:
     fields:
-      isEnable:
+      enabled:
         type: Boolean
       color:
         type: Color

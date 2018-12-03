@@ -5,7 +5,7 @@ Style:
     fields:
       id:
         type: ID
-      isEnable:
+      enabled:
         type: Boolean
       color:
         type: Color

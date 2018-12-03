@@ -32,13 +32,13 @@ Scenario: Admin wants to create a district in projects
         "geojson": null,
         "displayedOnMap": true,
         "border": {
-          "isEnable": true,
+          "enabled": true,
           "color": "#AADDAA",
           "opacity": 0.6,
           "size": 2
         },
         "background": {
-          "isEnable": true,
+          "enabled": true,
           "color": "#AAEEAA",
           "opacity": 0.1
         }

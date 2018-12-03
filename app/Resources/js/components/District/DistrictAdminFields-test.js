@@ -13,13 +13,13 @@ describe('<DistrictAdminFields />', () => {
         geojson: null,
         displayedOnMap: false,
         border: {
-          isEnable: true,
+          enabled: true,
           color: '#AAAAAA',
           opacity: 0.2,
           size: 1,
         },
         background: {
-          isEnable: true,
+          enabled: true,
           color: '#AAAAAA',
           opacity: 0.3,
         },

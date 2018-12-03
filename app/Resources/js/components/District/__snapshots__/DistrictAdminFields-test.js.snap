@@ -54,7 +54,7 @@ exports[`<DistrictAdminFields /> renders correcty 1`] = `
       xs={12}
     >
       <_class2
-        isEnable={true}
+        isEnabled={true}
         member="form"
       />
     </Col>
@@ -65,7 +65,7 @@ exports[`<DistrictAdminFields /> renders correcty 1`] = `
       xs={12}
     >
       <_class2
-        isEnable={true}
+        isEnabled={true}
         member="form"
       />
     </Col>

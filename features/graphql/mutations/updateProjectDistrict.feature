@@ -15,13 +15,13 @@ Scenario: Admin wants to update a district in projects
           geojson
           displayedOnMap
           border {
-            isEnable
+            enabled
             color
             opacity
             size
           }
           background {
-            isEnable
+            enabled
           }
         }
       }
@@ -33,13 +33,13 @@ Scenario: Admin wants to update a district in projects
         "geojson": null,
         "displayedOnMap": true,
         "border": {
-          "isEnable": true,
+          "enabled": true,
           "color": "#FFFFFF",
           "opacity": 0.8,
           "size": 1
         },
         "background": {
-          "isEnable": false
+          "enabled": false
         }
       }
     }
@@ -56,13 +56,13 @@ Scenario: Admin wants to update a district in projects
             "geojson": null,
             "displayedOnMap": true,
             "border": {
-              "isEnable": true,
+              "enabled": true,
               "color": "#FFFFFF",
               "opacity": 0.8,
               "size": 1
             },
             "background": {
-              "isEnable": false
+              "enabled": false
             }
           }
         }

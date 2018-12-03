@@ -694,13 +694,13 @@ export default createFragmentContainer(
         displayedOnMap
         geojson
         border {
-          isEnable
+          enabled
           size
           color
           opacity
         }
         background {
-          isEnable
+          enabled
           color
           opacity
         }

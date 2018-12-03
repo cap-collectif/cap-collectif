@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 type Props = {
-  isEnable: boolean,
+  isEnabled: boolean,
 };
 
 type State = {
@@ -24,7 +24,7 @@ const withPanelStyle = (Component: React.ComponentType<any>) =>
       super(props);
 
       this.state = {
-        isPanelOpen: !!props.isEnable,
+        isPanelOpen: !!props.isEnabled,
       };
     }
 
