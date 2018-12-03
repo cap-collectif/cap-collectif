@@ -2,22 +2,24 @@
 import * as React from 'react';
 import moment from 'moment';
 import Truncate from 'react-truncate';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import RemainingTime from '../../Utils/RemainingTime';
 import ProjectPreviewThemes from './ProjectPreviewThemes';
 import ProjectPreviewProgressBar from './ProjectPreviewProgressBar';
 import ProjectPreviewCounters from './ProjectPreviewCounters';
+import type { ProjectPreviewBody_project } from './__generated__/ProjectPreviewBody_project.graphql';
 
 type Props = {
-  project: Object,
+  project: ProjectPreviewBody_project,
   hasSecondTitle?: boolean,
 };
 
-const getStepsFilter = (project: Object) => {
-  const projectStep = project.steps.sort((a, b) => {
-    const dateA = new Date(a.startAt);
-    const dateB = new Date(b.startAt);
+const getStepsFilter = (project: ProjectPreviewBody_project) => {
+  const projectStep = project.steps.slice(0).sort((a, b) => {
+    const dateA = a.startAt ? new Date(a.startAt) : 0;
+    const dateB = b.startAt ? new Date(b.startAt) : 0;
     return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
   });
 
@@ -34,8 +36,9 @@ const getStepsFilter = (project: Object) => {
   };
 };
 
-const getCurrentStep = (project: Object) => {
-  const { stepOpen, stepClosed, stepFuture } = getStepsFilter(project);
+const getCurrentStep = (project: ProjectPreviewBody_project) => {
+  const filters = getStepsFilter(project);
+  const { stepOpen, stepClosed, stepFuture } = filters;
 
   if (stepClosed.length > 0 && stepFuture.length > 0 && stepOpen.length === 0) {
     return true;
@@ -47,7 +50,7 @@ const getCurrentStep = (project: Object) => {
   return null;
 };
 
-const getActualStep = (project: Object) => {
+const getActualStep = (project: ProjectPreviewBody_project) => {
   const { stepContinuousParticipation, stepOpen, stepClosed, stepFuture } = getStepsFilter(project);
 
   if (stepContinuousParticipation.length > 0) {
@@ -68,7 +71,7 @@ const getActualStep = (project: Object) => {
   }
 };
 
-export class ProjectPreviewBody extends React.Component<Props> {
+class ProjectPreviewBody extends React.Component<Props> {
   getAction = (step: Object) => {
     const { project } = this.props;
 
@@ -76,21 +79,21 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
     if (step.status === 'open' && this.actualStepIsParticipative()) {
       return (
-        <a href={step._links && step._links.show}>
+        <a href={step.url}>
           <FormattedMessage id="project.preview.action.participe" />
         </a>
       );
     }
     if ((!this.actualStepIsParticipative() && step.status === 'open') || isCurrentStep) {
       return (
-        <a href={step._links && step._links.show}>
+        <a href={step.url}>
           <FormattedMessage id="project.preview.action.seeStep" />
         </a>
       );
     }
     if (step.status === 'closed') {
       return (
-        <a href={step._links && step._links.show}>
+        <a href={step.url}>
           <FormattedMessage id="project.preview.action.seeResult" />
         </a>
       );
@@ -114,8 +117,8 @@ export class ProjectPreviewBody extends React.Component<Props> {
 
   getTitleContent = () => {
     const { project } = this.props;
-    const externalLink = project._links.external;
-    const link = externalLink || project._links.show;
+    const externalLink = project.links ? project.links.external : null;
+    const link = externalLink || project.url;
     const tooltip = <Tooltip id={`project-${project.id}-tooltip`}>{project.title}</Tooltip>;
 
     return (
@@ -189,6 +192,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
         <div className="card__body__infos">
           <ProjectPreviewThemes project={project} />
           {this.getTitle()}
+          {/* $FlowFixMe $fragmentRefs */}
           {project.hasParticipativeStep && <ProjectPreviewCounters project={project} />}
         </div>
         {actualStep && (
@@ -203,6 +207,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
           {actualStep &&
             actualStep.status === 'open' &&
             !actualStep.timeless &&
+            actualStep.endAt &&
             this.actualStepIsParticipative() && <RemainingTime endAt={actualStep.endAt} />}
         </div>
       </div>
@@ -210,4 +215,30 @@ export class ProjectPreviewBody extends React.Component<Props> {
   }
 }
 
-export default ProjectPreviewBody;
+export default createFragmentContainer(ProjectPreviewBody, {
+  project: graphql`
+    fragment ProjectPreviewBody_project on Project {
+      id
+      title
+      hasParticipativeStep
+      links {
+        external
+      }
+      url
+      steps {
+        title
+        timeless
+        status
+        startAt
+        endAt
+        type
+        url
+        ... on ProposalStep {
+          votable
+        }
+      }
+      ...ProjectPreviewCounters_project
+      ...ProjectPreviewThemes_project
+    }
+  `,
+});

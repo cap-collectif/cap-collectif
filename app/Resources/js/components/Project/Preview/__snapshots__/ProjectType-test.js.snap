@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectPreview /> should render correctly project type 1`] = `
+<ContainerConstructor
+  componentRef={null}
+  project={
+    Object {
+      "$refType": null,
+      "type": Object {
+        "color": "#337ab7",
+        "title": "presentation",
+      },
+    }
+  }
+/>
+`;
+
+exports[`<ProjectPreview /> should render correctly project with null type 1`] = `
+<ContainerConstructor
+  componentRef={null}
+  project={
+    Object {
+      "$refType": null,
+      "type": null,
+    }
+  }
+/>
+`;
