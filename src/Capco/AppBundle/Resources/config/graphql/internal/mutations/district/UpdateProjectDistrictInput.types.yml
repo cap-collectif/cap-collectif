@@ -3,15 +3,20 @@ UpdateProjectDistrictInput:
   config:
     fields:
       id:
-        type: ID
+        type: ID!
       name:
         type: String!
+        description: 'The new name of the district.'
       geojson:
         type: GeoJSON
+        description: 'A GeoJSON format to display in map after.'
       displayedOnMap:
         type: Boolean
         defaultValue: false
+        description: 'Should I display this on map?'
       border:
         type: BorderStyleInput
+        description: 'The border style attached to this district.'
       background:
         type: BackgroundStyleInput
+        description: 'The background style attached to this district.'

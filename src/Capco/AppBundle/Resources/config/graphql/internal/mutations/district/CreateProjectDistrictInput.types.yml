@@ -2,8 +2,6 @@ CreateProjectDistrictInput:
   type: input-object
   config:
     fields:
-      id:
-        type: ID
       name:
         type: String!
       geojson:

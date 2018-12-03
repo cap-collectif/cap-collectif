@@ -3,4 +3,4 @@ DeleteProjectDistrictInput:
   config:
     fields:
       id:
-        type: ID
+        type: ID!

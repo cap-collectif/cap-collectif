@@ -1378,7 +1378,6 @@ type CreateGroupPayload {
 }
 
 input CreateProjectDistrictInput {
-  id: ID
   name: String!
   geojson: GeoJSON
   displayedOnMap: Boolean = false
@@ -1588,7 +1587,7 @@ type DeleteOpinionPayload {
 }
 
 input DeleteProjectDistrictInput {
-  id: ID
+  id: ID!
 }
 
 type DeleteProjectDistrictPayload {
@@ -3883,7 +3882,7 @@ type Query {
   question(id: Int!): Question!
   availableQuestionnaires: [Questionnaire!]!
 
-  # List of all districts in project.
+  # List all the district project in the platform.
   projectDistricts: [ProjectDistrict!]!
 }
 
@@ -5386,11 +5385,21 @@ type UpdateProfilePublicDataPayload {
 }
 
 input UpdateProjectDistrictInput {
-  id: ID
+  id: ID!
+
+  # The new name of the district.
   name: String!
+
+  # A GeoJSON format to display in map after.
   geojson: GeoJSON
+
+  # Should I display this on map?
   displayedOnMap: Boolean = false
+
+  # The border style attached to this district.
   border: BorderStyleInput
+
+  # The background style attached to this district.
   background: BackgroundStyleInput
 }
 

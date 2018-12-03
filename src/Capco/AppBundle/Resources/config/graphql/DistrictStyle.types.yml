@@ -1,9 +1,0 @@
-DistrictStyle:
-  type: object
-  config:
-    description: 'District style for the map'
-    fields:
-      border:
-        type: 'Style'
-      background:
-        type: 'Style'

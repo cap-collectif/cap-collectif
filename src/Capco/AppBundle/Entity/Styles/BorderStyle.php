@@ -19,7 +19,7 @@ class BorderStyle extends AbstractStyle
         return $this->size;
     }
 
-    public function setSize($size): self
+    public function setSize(int $size): self
     {
         $this->size = $size;
 
