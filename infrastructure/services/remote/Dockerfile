@@ -251,7 +251,7 @@ RUN yarn global add bower@1.8.4 babel-cli \
     && gosu capco npm rebuild node-sass > /dev/null \
     && gosu capco php bin/console translation:download --env=prod \
     && gosu capco yarn run update-js-translation \
-    && gosu capco yarn run relay \
+    && gosu capco yarn run build-relay-schema \
     ## SSR is disabled
     #&& gosu capco yarn run build-server-bundle:prod \
     && gosu capco yarn run build:prod \
