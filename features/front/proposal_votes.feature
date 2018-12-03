@@ -1,4 +1,4 @@
-@proposal_votes
+@bp @proposal_votes
 Feature: Proposal votes
 
 # Votes from selection step page

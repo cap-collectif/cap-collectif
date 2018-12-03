@@ -1,4 +1,4 @@
-@registration
+@core @registration
 Feature: Registration
 
 @database @javascript

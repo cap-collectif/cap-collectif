@@ -1,4 +1,4 @@
-@event_registration
+@core @event_registration
 Feature: Event Registration
 
 Background:

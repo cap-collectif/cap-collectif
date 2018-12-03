@@ -117,7 +117,7 @@ COPY cron/run                   /etc/service/cron/run
 COPY varnish/run                /etc/service/varnish/run
 COPY blackfire/run              /etc/service/blackfire/run
 COPY rabbitmq/run               /etc/service/rabbitmq/run
-COPY nodejs/run                 /etc/service/nodejs/run
+# COPY nodejs/run                 /etc/service/nodejs/run
 
 # Configuration
 COPY nginx/ssl/capco.crt            /etc/ssl/certs/capco.crt

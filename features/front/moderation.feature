@@ -1,4 +1,4 @@
-@moderation
+@core @moderation
 Feature: Moderation
 
 @security

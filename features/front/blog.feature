@@ -1,4 +1,4 @@
-@blog
+@core @blog
 Feature: Blog
 
 Background:

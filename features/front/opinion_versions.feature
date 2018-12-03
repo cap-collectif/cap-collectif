@@ -1,4 +1,4 @@
-@versions
+@consultation @versions
 Feature: Opinion Versions
 
 @javascript @database

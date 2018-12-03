@@ -11,6 +11,7 @@ fi
 
 mkdir -m 777 -p /var/www/var
 chown -R capco:capco /var/www/var
+chown -R capco:capco /var/www/web/export
 
 function test_mysqldatabase {
   mysql -h "${SYMFONY_DATABASE_HOST}" -uroot symfony > /dev/null

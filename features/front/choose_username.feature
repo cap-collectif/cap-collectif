@@ -1,3 +1,4 @@
+@core
 Feature: Choose username
 
 @javascript @database

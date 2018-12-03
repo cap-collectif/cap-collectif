@@ -1,4 +1,4 @@
-@rgpd
+@core @rgpd
 Feature: RGPD
 
 @javascript

@@ -1,4 +1,4 @@
-@proposal_evaluation
+@bp @proposal_evaluation
 Feature: Proposals Evaluations
 
 @javascript

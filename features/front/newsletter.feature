@@ -1,4 +1,4 @@
-@newsletter
+@core @newsletter
 Feature: Newsletter
 
 Background:

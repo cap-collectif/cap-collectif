@@ -54,7 +54,7 @@ javascript:
     Bex\Behat\StepTimeLoggerExtension:
       output: [console, csv]
   suites:
-    javascript:
+    core:
       paths: ['%paths.base%/features/front']
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext
@@ -62,7 +62,34 @@ javascript:
         - Capco\AppBundle\Behat\NavigationContext
         - Alex\MailCatcher\Behat\MailCatcherContext
       filters:
-        tags: '@javascript&&~@event_registration'
+        tags: '@core&&@javascript&&~@event_registration'
+    consultation:
+      paths: ['%paths.base%/features/front']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\RabbitMQContext
+        - Capco\AppBundle\Behat\NavigationContext
+        - Alex\MailCatcher\Behat\MailCatcherContext
+      filters:
+        tags: '@consultation&&@javascript'
+    bp:
+      paths: ['%paths.base%/features/front']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\RabbitMQContext
+        - Capco\AppBundle\Behat\NavigationContext
+        - Alex\MailCatcher\Behat\MailCatcherContext
+      filters:
+        tags: '@bp&&@javascript'
+    questionnaire:
+      paths: ['%paths.base%/features/front']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\RabbitMQContext
+        - Capco\AppBundle\Behat\NavigationContext
+        - Alex\MailCatcher\Behat\MailCatcherContext
+      filters:
+        tags: '@questionnaire&&@javascript'
 
 commands:
   formatters:
