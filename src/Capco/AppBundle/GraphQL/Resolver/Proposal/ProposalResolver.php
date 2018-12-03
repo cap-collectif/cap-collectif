@@ -7,29 +7,17 @@ use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Steps\OtherStep;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\RankingStep;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Symfony\Component\Routing\Router;
 
@@ -62,11 +50,6 @@ class ProposalResolver implements ResolverInterface
             : false;
     }
 
-    public function resolveProjectSteps(Project $project): array
-    {
-        return $project->getRealSteps();
-    }
-
     public function resolveShowUrlBySlug(
         string $projectSlug,
         string $stepSlug,
@@ -87,36 +70,6 @@ class ProposalResolver implements ResolverInterface
     public function resolveNews(Proposal $proposal)
     {
         return $this->postRepository->getPublishedPostsByProposal($proposal);
-    }
-
-    public function resolveStepType(AbstractStep $step)
-    {
-        if ($step instanceof SelectionStep) {
-            return $this->typeResolver->resolve('SelectionStep');
-        }
-        if ($step instanceof CollectStep) {
-            return $this->typeResolver->resolve('CollectStep');
-        }
-        if ($step instanceof PresentationStep) {
-            return $this->typeResolver->resolve('PresentationStep');
-        }
-        if ($step instanceof QuestionnaireStep) {
-            return $this->typeResolver->resolve('QuestionnaireStep');
-        }
-        if ($step instanceof ConsultationStep) {
-            return $this->typeResolver->resolve('InternalConsultation');
-        }
-        if ($step instanceof OtherStep) {
-            return $this->typeResolver->resolve('OtherStep');
-        }
-        if ($step instanceof SynthesisStep) {
-            return $this->typeResolver->resolve('SynthesisStep');
-        }
-        if ($step instanceof RankingStep) {
-            return $this->typeResolver->resolve('RankingStep');
-        }
-
-        throw new UserError('Could not resolve type of Step.');
     }
 
     public function resolveResponseType(AbstractResponse $response)
