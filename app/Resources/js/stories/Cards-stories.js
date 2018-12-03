@@ -19,19 +19,17 @@ storiesOf('Cards', module)
   .add(
     'Card',
     () => {
-      const cardType = boolean('Display card type', false);
+      const cardType = boolean('Display card type', true);
       const type = text('Type', 'My type');
       const colorType = text('Type color', '#707070');
-      const cardCover = boolean('Display card cover', false);
-      const status = text('Status', 'My status');
-      const statusBgColor = select('Status background color', statusColorOption, 'default');
-      const cardStatus = boolean('Display card status', false);
-      const cardCounters = boolean('Display card countersw', false);
-      const titleLink = text('Title link', 'https://ui.cap-collectif.com');
+      const cardCover = boolean('Display card cover', true);
+      const cardBody = boolean('Display card body', true);
       const title = text('Title', 'Project title');
       const titleTagName = text('Title tag name', 'h2');
-
-      const cardBody = boolean('Display card body', true);
+      const cardCounters = boolean('Display card counters', true);
+      const cardStatus = boolean('Display card status', true);
+      const status = text('Status', 'My status');
+      const statusBgColor = select('Status background color', statusColorOption, 'default');
 
       Card.Cover.displayName = 'Card.Cover';
       // $FlowFixMe
@@ -54,7 +52,7 @@ storiesOf('Cards', module)
           {cardBody && (
             <Card.Body>
               <Card.Title tagName={titleTagName}>
-                <a href={titleLink}>{title}</a>
+                <a href="https://ui.cap-collectif.com">{title}</a>
               </Card.Title>
             </Card.Body>
           )}
