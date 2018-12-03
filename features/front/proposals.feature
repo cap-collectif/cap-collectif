@@ -1,4 +1,4 @@
-@bp @proposals
+@proposals
 Feature: Proposals
 
 # Collect step : See proposals with filters, sorting and search term

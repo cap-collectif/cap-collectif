@@ -1,4 +1,4 @@
-@consultation @synthesis
+@synthesis
 Feature: Synthesis
 
 # View

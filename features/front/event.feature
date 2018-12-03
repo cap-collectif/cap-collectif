@@ -1,5 +1,5 @@
 #TODO tests to display/hide map, test on pagination
-@core @events
+@events
 Feature: Events
 
 Background:

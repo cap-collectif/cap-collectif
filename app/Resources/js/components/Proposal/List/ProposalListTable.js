@@ -131,7 +131,7 @@ export class ProposalListTable extends React.Component<Props, State> {
               width: '250px',
             },
             lastActivity: {
-              text: 'last-activity',
+              text: 'project_download.label.updated',
               value: {
                 date: node.updatedAt,
                 user: node.updatedBy && node.updatedBy.displayName,

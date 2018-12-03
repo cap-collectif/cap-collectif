@@ -808,7 +808,6 @@ trait ProposalStepsTrait
         $this->checkOption('requirement2');
         $this->iWait(1);
         $this->checkOption('requirement3');
-        $this->iWait(1);
     }
 
     /**

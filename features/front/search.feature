@@ -1,4 +1,4 @@
-@core @search
+@search
 Feature: Search
 
 Background:

@@ -77,9 +77,8 @@ mailcatcher:
 chrome:
   build: ../services/chrome
   environment:
-    # Right now, we maximize screen using `maximizeWindow()`
-    # SCREEN_WIDTH: 1920
-    # SCREEN_HEIGHT: 1080
+    SCREEN_WIDTH: 1920
+    SCREEN_HEIGHT: 1080
     TZ: 'Europe/Paris'
     HUB_HOST: seleniumhub
     HUB_PORT: 4444

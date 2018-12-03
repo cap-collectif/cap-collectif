@@ -1,4 +1,4 @@
-@core @confirmation
+@confirmation
 Feature: Confirmation
 
 @javascript

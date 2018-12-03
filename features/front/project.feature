@@ -1,4 +1,4 @@
-@core @project
+@project
 Feature: Project
 
 Scenario: Can not sort or filter if feature projects_form is disabled

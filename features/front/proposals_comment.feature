@@ -1,4 +1,4 @@
-@bp @proposal_comments
+@proposal_comments
 Feature: Proposal comments
 
 @javascript @database @rabbitmq

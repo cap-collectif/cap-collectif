@@ -1,4 +1,4 @@
-@bp @proposal_follow
+@proposal_follow
 Feature: Proposal Follow
 
 @database @javascript

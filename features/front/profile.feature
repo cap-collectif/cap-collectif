@@ -1,4 +1,4 @@
-@core @profile
+@profile
 Feature: Profil
 
 Background:

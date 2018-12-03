@@ -1,4 +1,3 @@
-@core
 Feature: Homepage
 
 @parallel-scenario

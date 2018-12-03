@@ -1,4 +1,4 @@
-@core @notifications
+@notifications
 Feature: Notifications
 
 @javascript

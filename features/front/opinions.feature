@@ -1,4 +1,4 @@
-@consultation @opinions
+@opinions
 Feature: Opinions
 
 @javascript @database

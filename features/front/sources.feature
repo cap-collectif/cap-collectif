@@ -1,4 +1,4 @@
-@consultation @sources
+@sources
 Feature: Source
 
 @javascript @database

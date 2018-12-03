@@ -1,4 +1,4 @@
-@consultation @arguments
+@arguments
 Feature: Arguments
 
 ## CRUD

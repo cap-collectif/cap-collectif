@@ -1,4 +1,4 @@
-@core @emails
+@emails
 Feature: Email
 
 @database @javascript

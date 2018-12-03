@@ -543,7 +543,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                         component={component}
                         type="select"
                         id="proposal_form_zoom_map"
-                        normalize={val => val && parseInt(val, 10)}
+                        normalize={val => (val ? parseInt(val, 10) : null)}
                         label={<FormattedMessage id="proposal_form.zoom" />}>
                         <FormattedMessage id="proposal_form.select.zoom">
                           {message => <option value="">{message}</option>}
