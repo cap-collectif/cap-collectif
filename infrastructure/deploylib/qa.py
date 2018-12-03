@@ -11,56 +11,11 @@ capcobot = {
 
 
 @task(environments=['local', 'ci'])
-def scan_vulnerabilities():
-    "Check dependencies"
-    env.compose_run('composer validate', 'qarunner', '.', no_deps=True)
-    env.service_command('bin/console security:check', 'application', env.www_app)
-
-
-@task(environments=['local', 'ci'])
-def check_codestyle():
-    "Check code style"
-    env.compose_run('yarn run checkcs', 'qarunner', '.')
-    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501,W605', 'qarunner', '.', no_deps=True)
-    env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
-
-
-@task(environments=['local'])
-def lint():
-    "Lint all files"
-    env.compose_run('yarn run lint', 'qarunner', '.', no_deps=True)
-    env.compose_run('yarn run graphql:lint:public', 'qarunner', '.', no_deps=True)
-    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501,W605', 'qarunner', '.', no_deps=True)
-
-
-@task(environments=['local', 'ci'])
-def static_analysis():
-    "Run static analysis tools"
-    env.compose_run('yarn run flow', 'qarunner', '.', no_deps=True)
-    env.compose_run('yarn run flow:coverage', 'qarunner', '.', no_deps=True)
-    env.service_command('php -d memory_limit=-1 bin/phpstan analyse src -l 2 -c phpstan.neon', 'application', env.www_app)
-
-
-@task(environments=['local', 'ci'])
 def phpspec():
     "Run PHP Unit Tests"
     env.service_command('phpenmod xdebug', 'application', env.www_app, 'root')
     env.service_command('php -d memory_limit=-1 bin/phpspec run --no-code-generation --no-coverage', 'application', env.www_app)
     env.service_command('phpdismod xdebug', 'application', env.www_app, 'root')
-
-
-@task(environments=['local', 'ci'])
-def phpspec_coverage():
-    "Run PHP Unit Tests"
-    env.service_command('phpenmod xdebug', 'application', env.www_app, 'root')
-    env.service_command('php -d memory_limit=-1 bin/phpspec run --no-code-generation', 'application', env.www_app)
-    env.service_command('phpdismod xdebug', 'application', env.www_app, 'root')
-
-
-@task(environments=['local', 'ci'])
-def jest():
-    "Run JS Unit Tests"
-    env.compose('run -e CI=true qarunner yarn test:ci')
 
 
 @task(environments=['ci'])
@@ -69,18 +24,8 @@ def perf():
     env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run bundlesize')
 
 
-@task(environments=['ci'])
-def codecov():
-    "Upload code coverage"
-    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov --file=coverage/php/clover.xml --flags=graphql')
-    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov --file=coverage/php/clover.xml --flags=php')
-    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov --file=coverage/js/lcov.info --flags=jest')
-# TODO:  https://github.com/rpl/flow-coverage-report/issues/67
-#    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run codecov -f ./coverage/flow/index.html -c --flags=flow')
-
-
 @task(environments=['local', 'ci'])
-def behat(fast_failure='true', profile=False, tags='false', feature='false', parallel='false', timer='true'):
+def behat(fast_failure='true', profile=False, suite='false', tags='false', timer='true'):
     "Run Gerhkin Tests"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     if profile:
@@ -89,7 +34,12 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false', par
         jobs = ['api', 'commands', 'frontend', 'javascript', 'graphql', 'back']
 
     for job in jobs:
-        command = 'php -d memory_limit=-1 ./bin/behat' + ('', ' --log-step-times')[timer != 'false'] + ('', ' --parallel-process 10')[parallel != 'false'] + ' -p ' + job + ('', '  --tags=' + tags)[tags != 'false'] + ('', '  --stop-on-failure')[fast_failure == 'true'] + ('', ' --name ' + feature)[feature != 'false']
+        command = ('php -d memory_limit=-1 ./bin/behat'
+            + ('', ' --log-step-times')[timer != 'false'] 
+            + ' -p ' + job 
+            + ('', '  --suite=' + suite)[suite != 'false'] 
+            + ('', '  --tags=' + tags)[tags != 'false'] 
+            + ('', '  --stop-on-failure')[fast_failure == 'true'])
         env.service_command(command, 'application', env.www_app)
 
 

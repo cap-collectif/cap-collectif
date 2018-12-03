@@ -1,4 +1,4 @@
-@contact
+@core @contact
 Feature: Contact
 
 @javascript

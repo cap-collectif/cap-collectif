@@ -60,7 +60,6 @@ module.exports = {
       {
         env: 'relay',
         tagName: 'graphql',
-        schemaJson: require('./schema.internal.json'),
       },
     ],
     // TODO set this to `error`:  https://github.com/cap-collectif/platform/issues/6094
@@ -69,7 +68,6 @@ module.exports = {
       {
         env: 'relay',
         tagName: 'graphql',
-        schemaJson: require('./schema.internal.json'),
       },
     ],
     'graphql/no-deprecated-fields': [
@@ -77,7 +75,6 @@ module.exports = {
       {
         env: 'relay',
         tagName: 'graphql',
-        schemaJson: require('./schema.internal.json'),
       },
     ],
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/issues/396

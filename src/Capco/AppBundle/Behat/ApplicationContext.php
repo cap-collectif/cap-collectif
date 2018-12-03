@@ -2,38 +2,38 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Behat\Behat\Hook\Scope\AfterScenarioScope;
-use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Exception\DriverException;
-use Behat\Mink\Exception\ElementNotFoundException;
-use Behat\Mink\Exception\ExpectationException;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
-use Behat\Testwork\Hook\Scope\AfterSuiteScope;
-use Behat\Testwork\Tester\Result\TestResult;
-use Capco\AppBundle\Behat\Traits\AdminTrait;
-use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
-use Capco\AppBundle\Behat\Traits\CookiesTrait;
-use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
-use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
-use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
-use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
-use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
-use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
-use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
-use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
-use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
-use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
-use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
-use Capco\AppBundle\Elasticsearch\IndexBuilder;
-use Capco\AppBundle\Toggle\Manager;
 use Elastica\Client;
 use Elastica\Snapshot;
+use PHPUnit\Framework\Assert;
+use Behat\Testwork\Suite\Suite;
 use Joli\JoliNotif\Notification;
+use Behat\Gherkin\Node\TableNode;
+use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\NotifierFactory;
+use Behat\Mink\Driver\Selenium2Driver;
 use Symfony\Component\Process\Process;
 use WebDriver\Exception\ElementNotVisible;
-use PHPUnit\Framework\Assert;
+use Behat\Testwork\Tester\Result\TestResult;
+use Capco\AppBundle\Behat\Traits\AdminTrait;
+use Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Mink\Exception\ExpectationException;
+use Behat\Testwork\Hook\Scope\AfterSuiteScope;
+use Capco\AppBundle\Behat\Traits\CookiesTrait;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Capco\AppBundle\Elasticsearch\IndexBuilder;
+use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
+use Behat\Mink\Exception\ElementNotFoundException;
+use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
+use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
+use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
+use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
+use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
+use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
+use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
+use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
+use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
+use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
+use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
 
 const REPOSITORY_NAME = 'repository_qa';
 const SNAPSHOT_NAME = 'snap_qa';
@@ -96,6 +96,7 @@ class ApplicationContext extends UserContext
                 'php -d memory_limit=-1 bin/console capco:reinit --force --env=test'
             );
         }
+
         foreach ($jobs as $job) {
             echo $job->getCommandLine() . PHP_EOL;
             $job->mustRun();
@@ -162,44 +163,19 @@ class ApplicationContext extends UserContext
         $indexManager->markAsLive($indexManager->getLiveSearchIndex());
     }
 
-    // public function resetUsingDocker()
-    // {
-    // This is the real docker way, but not that easy
-    // We need to use something like https://github.com/jwilder/nginx-proxy
-    // To reload containers, because we can't do reload on runtime with links
-    // So we have to make sure it's supported on Circle-CI...
-    // $docker = new Docker(new Client('unix:///run/docker.sock'));
-    // $manager = $docker->getContainerManager();
-    //
-    // if (null !== $this->dbContainer && $this->dbContainer->exists()) {
-    //     try {
-    //         $manager->stop($this->dbContainer)->remove($this->dbContainer, true, true);
-    //     } catch (UnexpectedStatusCodeException $e) {
-    //         if (!strpos($e->getMessage(), 'Driver btrfs failed to remove root filesystem')) {
-    //             throw $e;
-    //         }
-    //         // We don't care about this error that happen only because of Circle-CI bad support of Docker
-    //     }
-    // }
-    //
-    // $this->dbContainer = new Container(['Image' => 'capco/fixtures']);
-    // $manager->create($this->dbContainer)->start($this->dbContainer);
-    // }
-
     /**
-     * @BeforeScenario @javascript
+     * @BeforeScenario
      */
-    public function maximizeWindow()
+    public function maximizeWindow(BeforeScenarioScope $scope)
     {
-        try {
-            $this->getSession()
-                ->getDriver()
-                ->maximizeWindow();
-        } catch (\Exception $e) {
-            $this->getSession()
-                ->getDriver()
-                ->resizeWindow(1920, 1080);
+        if (!$this->isSuiteWithJS($scope->getSuite())) {
+            return;
         }
+        $driver = $this->getSession()->getDriver();
+        if (!$driver instanceof Selenium2Driver) {
+            return;
+        }
+        $driver->maximizeWindow();
     }
 
     /**
@@ -230,7 +206,7 @@ class ApplicationContext extends UserContext
         // Make sure we are not using virtual file system, because here we want to see real files in path
         $directory = str_replace('vfs://', '', rtrim($directory, '/\\'));
         $filename = str_replace('vfs://', '', $filename);
-        Assert::assertFileExists("$directory/$filename");
+        Assert::assertFileExists("${directory}/${filename}");
     }
 
     /**
@@ -276,16 +252,17 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @AfterScenario @javascript
+     * @AfterScenario
      */
-    public function clearLocalStorage()
+    public function clearLocalStorage(AfterScenarioScope $scope)
     {
-        $this->getSession()
-            ->getDriver()
-            ->evaluateScript('window.sessionStorage.clear();');
-        $this->getSession()
-            ->getDriver()
-            ->evaluateScript('window.localStorage.clear();');
+        if (!$this->isSuiteWithJS($scope->getSuite())) {
+            return;
+        }
+
+        $driver = $this->getSession()->getDriver();
+        $driver->evaluateScript('window.sessionStorage.clear();');
+        $driver->evaluateScript('window.localStorage.clear();');
     }
 
     /**
@@ -540,7 +517,7 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I fill the element :element with empty value
-     **/
+     */
     public function ifillElementWithEmptyValue(string $element)
     {
         $element = $this->getSession()
@@ -552,7 +529,7 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I fill the element :element with value :value
-     **/
+     */
     public function ifillElementWithValue(string $element, string $value)
     {
         $element = $this->getSession()
@@ -573,6 +550,7 @@ class ApplicationContext extends UserContext
     {
         $field = $this->fixStepArgument($field);
         $value = $this->fixStepArgument($value);
+
         try {
             $this->getSession()
                 ->getPage()
@@ -622,7 +600,6 @@ class ApplicationContext extends UserContext
         }
     }
 
-    //
     /**
      * @When I scroll to element :elementId
      */
@@ -630,7 +607,7 @@ class ApplicationContext extends UserContext
     {
         $this->getSession()
             ->getDriver()
-            ->executeScript("document.getElementById('$elementId').scrollIntoView()");
+            ->executeScript("document.getElementById('${elementId}').scrollIntoView()");
     }
 
     /**
@@ -681,7 +658,7 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeCookieNamed(string $cookieName)
     {
-        Assert::assertTrue($this->getSession()->getCookie($cookieName) !== null);
+        Assert::assertTrue(null !== $this->getSession()->getCookie($cookieName));
     }
 
     /**
@@ -689,7 +666,7 @@ class ApplicationContext extends UserContext
      */
     public function iShouldNotSeeCookieNamed(string $cookieName)
     {
-        Assert::assertTrue($this->getSession()->getCookie($cookieName) === null);
+        Assert::assertTrue(null === $this->getSession()->getCookie($cookieName));
     }
 
     /**
@@ -699,7 +676,7 @@ class ApplicationContext extends UserContext
     {
         \assert(
             \in_array($header, $this->headers, true),
-            "Did not see \"$header\" in the headers."
+            "Did not see \"${header}\" in the headers."
         );
     }
 
@@ -895,6 +872,44 @@ class ApplicationContext extends UserContext
         Assert::assertTrue($input->hasAttribute('disabled'));
     }
 
+    /**
+     * @When I scroll to the bottom
+     */
+    public function iScrollBot()
+    {
+        $this->scrollTo('bot');
+    }
+
+    /**
+     * @When I scroll to the top
+     */
+    public function iScrollTop()
+    {
+        $this->scrollTo('top');
+    }
+
+    /**
+     * Selects option in select created by our react Field component with specified id
+     * Example: When I select "Bats" from react "user_fears"
+     * Example: And I select "Bats" from  react "user_fears".
+     *
+     * @When /^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from react "(?P<select>(?:[^"]|\\")*)"$/
+     */
+    public function selectOptionFromReact($select, $option)
+    {
+        // Select a project
+        $this->getSession()
+            ->getPage()
+            ->find('css', "${select} .Select-input input")
+            ->setValue($option);
+        $this->iWait(3);
+    }
+
+    private function isSuiteWithJS(Suite $suite): bool
+    {
+        return \in_array($suite->getName(), ['core', 'consultation', 'bp', 'bo']);
+    }
+
     private function visitPageWithParams($page, array $params = [], bool $cookiesConsent = true)
     {
         $this->currentPage = $page;
@@ -944,28 +959,12 @@ class ApplicationContext extends UserContext
         $element->keyUp($spaceBar);
     }
 
-    /**
-     * @When I scroll to the bottom
-     */
-    public function iScrollBot()
-    {
-        $this->scrollTo('bot');
-    }
-
-    /**
-     * @When I scroll to the top
-     */
-    public function iScrollTop()
-    {
-        $this->scrollTo('top');
-    }
-
     private function scrollTo(string $direction = 'bot')
     {
         // http://keycode.info/
         // pageDown = 34
         $key = 34;
-        if ($direction == 'top') {
+        if ('top' == $direction) {
             $key = 33;
         }
 
@@ -974,22 +973,5 @@ class ApplicationContext extends UserContext
         $element->keyDown($key);
         $element->keyPress($key);
         $element->keyUp($key);
-    }
-
-    /**
-     * Selects option in select created by our react Field component with specified id
-     * Example: When I select "Bats" from react "user_fears"
-     * Example: And I select "Bats" from  react "user_fears"
-     *
-     * @When /^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from react "(?P<select>(?:[^"]|\\")*)"$/
-     */
-    public function selectOptionFromReact($select, $option)
-    {
-        // Select a project
-        $this->getSession()
-            ->getPage()
-            ->find('css', "$select .Select-input input")
-            ->setValue($option);
-        $this->iWait(3);
     }
 }

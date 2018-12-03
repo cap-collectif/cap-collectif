@@ -1,4 +1,4 @@
-@stats
+@bp @stats
 Feature: Stats
 
 @javascript

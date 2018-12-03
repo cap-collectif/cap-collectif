@@ -1,4 +1,4 @@
-@shield
+@core @shield
 Feature: Shield Mode
 
 Background:

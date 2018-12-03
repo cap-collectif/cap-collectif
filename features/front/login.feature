@@ -1,4 +1,4 @@
-@login
+@core @login
 Feature: Login
 
 @javascript
