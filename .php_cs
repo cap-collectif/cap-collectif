@@ -47,8 +47,8 @@ return PhpCsFixer\Config::create()
         'return_assignment' => true,
         'semicolon_after_instruction' => true,
         'single_line_comment_style' => true,
-        'strict_comparison' => true,
-        'strict_param' => true,
+        'strict_comparison' => false,
+        'strict_param' => false,
         'string_line_ending' => true,
         'yoda_style' => true,
     ])

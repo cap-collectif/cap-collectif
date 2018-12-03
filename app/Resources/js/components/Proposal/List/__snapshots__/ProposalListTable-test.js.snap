@@ -33,7 +33,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
           "width": "250px",
         },
         "lastActivity": Object {
-          "text": "project_download.label.updated",
+          "text": "last-activity",
           "value": Object {
             "date": null,
             "user": null,
@@ -105,7 +105,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
           "width": "250px",
         },
         "lastActivity": Object {
-          "text": "project_download.label.updated",
+          "text": "last-activity",
           "value": Object {
             "date": null,
             "user": null,
@@ -314,7 +314,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         }
       >
         <FormattedMessage
-          id="project_download.label.updated"
+          id="last-activity"
           values={Object {}}
         />
       </th>
