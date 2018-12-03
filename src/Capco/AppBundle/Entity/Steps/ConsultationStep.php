@@ -81,7 +81,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStepType", mappedBy="step")
      */
-    private $consultationStepType = null;
+    private $consultationStepType;
 
     /**
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
@@ -399,16 +399,14 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
      */
     public function getContributionsCount()
     {
-        return (
-            $this->argumentCount +
-            $this->opinionCount +
-            $this->trashedArgumentCount +
+        return $this->opinionCount +
             $this->trashedOpinionCount +
+            $this->argumentCount +
+            $this->trashedArgumentCount +
             $this->opinionVersionsCount +
             $this->trashedOpinionVersionsCount +
             $this->sourcesCount +
-            $this->trashedSourceCount
-        );
+            $this->trashedSourceCount;
     }
 
     public function getLabelTitle()

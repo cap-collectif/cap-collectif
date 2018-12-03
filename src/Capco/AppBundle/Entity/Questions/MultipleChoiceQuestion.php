@@ -70,7 +70,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
         return $this;
     }
 
-    public function addChoice(QuestionChoice $questionChoice): self
+    public function addQuestionChoice(QuestionChoice $questionChoice): self
     {
         if (!$this->getChoices()->contains($questionChoice)) {
             $this->getChoices()->add($questionChoice);
@@ -80,7 +80,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
         return $this;
     }
 
-    public function removeChoice(QuestionChoice $questionChoice): self
+    public function removeQuestionChoice(QuestionChoice $questionChoice): self
     {
         $this->getChoices()->removeElement($questionChoice);
         $questionChoice->setQuestion(null);

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Model\Sourceable;
@@ -31,6 +32,7 @@ class SourceRepository extends EntityRepository
             )
             ->leftJoin('s.author', 'a')
             ->leftJoin('a.userType', 'ut');
+
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -54,6 +56,7 @@ class SourceRepository extends EntityRepository
     {
         $qb = $this->getByContributionQB($sourceable);
         $qb->select('COUNT(s.id)');
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -93,6 +96,7 @@ class SourceRepository extends EntityRepository
         }
 
         $qb->setFirstResult($first)->setMaxResults($limit);
+
         return new Paginator($qb);
     }
 
@@ -112,6 +116,7 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.author', 'a')
             ->where('s.id = :id')
             ->setParameter('id', $id);
+
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
@@ -130,6 +135,7 @@ class SourceRepository extends EntityRepository
             ->andWhere('s.author = :author')
             ->setParameter('project', $project)
             ->setParameter('author', $author);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -144,6 +150,7 @@ class SourceRepository extends EntityRepository
             ->andWhere('s.author = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -154,6 +161,7 @@ class SourceRepository extends EntityRepository
             ->select('count(DISTINCT s)')
             ->andWhere('s.author = :author')
             ->setParameter('author', $user);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -211,7 +219,46 @@ class SourceRepository extends EntityRepository
             ->andWhere('s.trashedAt IS NOT NULL')
             ->setParameter('project', $project)
             ->orderBy('s.trashedAt', 'DESC');
+
         return $qb->getQuery()->getResult();
+    }
+
+    public function countPublishedSourcesByStep(ConsultationStep $cs): int
+    {
+        $query = $this->createQueryBuilder('s');
+        $query
+            ->select('count(DISTINCT s.id)')
+            ->leftJoin('s.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('s.opinion', 'o')
+            ->andWhere('s.published = 1')
+            ->andWhere('s.trashedAt IS NULL')
+            ->andWhere('s.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs')
+            ->andWhere(
+                's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs'
+            )
+            ->setParameter('cs', $cs);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countTrashedSourcesByStep(ConsultationStep $cs): int
+    {
+        $query = $this->createQueryBuilder('s');
+        $query
+            ->select('count(DISTINCT s.id)')
+            ->leftJoin('s.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('s.opinion', 'o')
+            ->andWhere('s.published = 1')
+            ->andWhere('s.trashedAt IS NOT NULL')
+            ->andWhere('s.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs')
+            ->andWhere(
+                's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs'
+            )
+            ->setParameter('cs', $cs);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     protected function getPublishedQueryBuilder()

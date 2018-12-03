@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -37,6 +38,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c');
+
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -60,6 +62,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('cas.project', 'c')
             ->where('a.id = :id')
             ->setParameter('id', $id);
+
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
@@ -89,9 +92,9 @@ class ArgumentRepository extends EntityRepository
 
     public function getByContributionAndType(
         Argumentable $contribution,
-        ?int $type = null,
-        ?int $limit = null,
-        ?int $first = null,
+        ?int $type,
+        ?int $limit,
+        ?int $first,
         string $field,
         string $direction
     ): Paginator {
@@ -164,6 +167,7 @@ class ArgumentRepository extends EntityRepository
             ->select('count(DISTINCT version)')
             ->andWhere('version.Author = :author')
             ->setParameter('author', $user);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -248,24 +252,62 @@ class ArgumentRepository extends EntityRepository
         return new Paginator($query);
     }
 
+    public function countAgainstPublishedBetweenByOpinion(
+        \DateTime $from,
+        \DateTime $to,
+        string $opinionId
+    ): int {
+        return $this->countPublishedBetweenByOpinion(
+            $from,
+            $to,
+            $opinionId,
+            Argument::TYPE_AGAINST
+        );
+    }
+
+    public function countForPublishedBetweenByOpinion(
+        \DateTime $from,
+        \DateTime $to,
+        string $opinionId
+    ): int {
+        return $this->countPublishedBetweenByOpinion($from, $to, $opinionId, Argument::TYPE_FOR);
+    }
+
+    public function countPublishedArgumentsByStep(ConsultationStep $cs): int
+    {
+        return $this->getIsEnabledQueryBuilder()
+            ->select('count(DISTINCT a.id)')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('a.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->andWhere('a.published = 1 AND a.trashedAt IS NULL')
+            ->andWhere(
+                '(a.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs) OR (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs)'
+            )
+            ->setParameter('cs', $cs)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countTrashedArgumentsByStep(ConsultationStep $cs): int
+    {
+        return $this->getIsEnabledQueryBuilder()
+            ->select('count(DISTINCT a.id)')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('a.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->andWhere('a.published = 1 AND a.trashedAt IS NOT NULL')
+            ->andWhere(
+                '(a.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs) OR (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs)'
+            )
+            ->setParameter('cs', $cs)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('a')->andWhere('a.published = true');
-    }
-
-    private function getByContributionQB(Argumentable $contribution)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()->andWhere('a.trashedAt IS NULL');
-        if ($contribution instanceof Opinion) {
-            $qb->andWhere('a.opinion = :opinion')->setParameter('opinion', $contribution);
-        }
-        if ($contribution instanceof OpinionVersion) {
-            $qb
-                ->andWhere('a.opinionVersion = :opinionVersion')
-                ->setParameter('opinionVersion', $contribution);
-        }
-
-        return $qb;
     }
 
     protected function countPublishedBetweenByOpinion(
@@ -291,24 +333,18 @@ class ArgumentRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countAgainstPublishedBetweenByOpinion(
-        \DateTime $from,
-        \DateTime $to,
-        string $opinionId
-    ): int {
-        return $this->countPublishedBetweenByOpinion(
-            $from,
-            $to,
-            $opinionId,
-            Argument::TYPE_AGAINST
-        );
-    }
+    private function getByContributionQB(Argumentable $contribution)
+    {
+        $qb = $this->getIsEnabledQueryBuilder()->andWhere('a.trashedAt IS NULL');
+        if ($contribution instanceof Opinion) {
+            $qb->andWhere('a.opinion = :opinion')->setParameter('opinion', $contribution);
+        }
+        if ($contribution instanceof OpinionVersion) {
+            $qb
+                ->andWhere('a.opinionVersion = :opinionVersion')
+                ->setParameter('opinionVersion', $contribution);
+        }
 
-    public function countForPublishedBetweenByOpinion(
-        \DateTime $from,
-        \DateTime $to,
-        string $opinionId
-    ): int {
-        return $this->countPublishedBetweenByOpinion($from, $to, $opinionId, Argument::TYPE_FOR);
+        return $qb;
     }
 }
