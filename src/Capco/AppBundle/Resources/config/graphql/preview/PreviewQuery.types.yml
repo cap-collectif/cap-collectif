@@ -10,7 +10,7 @@ PreviewQuery:
         description: 'Lookup projects.'
         argsBuilder: 'Relay::Connection'
         args:
-          order:
+          orderBy:
             type: 'ProjectOrder'
           term:
             type: 'String'
