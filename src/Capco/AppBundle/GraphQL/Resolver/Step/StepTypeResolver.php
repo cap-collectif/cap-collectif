@@ -24,7 +24,7 @@ class StepTypeResolver implements ResolverInterface
         $this->typeResolver = $typeResolver;
     }
 
-    public function __invoke(AbstractStep $step)
+    public function __invoke(AbstractStep $step): AbstractStep
     {
         if ($step instanceof SelectionStep) {
             return $this->typeResolver->resolve('SelectionStep');
