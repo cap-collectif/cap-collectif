@@ -24,6 +24,14 @@ def perf():
     env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run bundlesize')
 
 
+@task(environments=['local','ci'])
+def graphql_schemas(checkSame=False):
+    "Generate GraphQL schemas"
+    for schema in ['public', 'preview', 'internal']:
+        env.compose('run qarunner bin/console graphql:dump-schema --schema ' + schema + ' --no-debug --file schema.'+schema+'.graphql --format graphql')
+    if checkSame:
+        local('if [[ $(git diff --name-only *.graphql | wc -c) -ne 0 ]]; then exit 1; fi')
+
 @task(environments=['local', 'ci'])
 def behat(fast_failure='true', profile=False, suite='false', tags='false', timer='true'):
     "Run Gerhkin Tests"
