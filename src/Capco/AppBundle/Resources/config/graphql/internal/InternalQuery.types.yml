@@ -20,7 +20,7 @@ InternalQuery:
         type: '[InternalUser!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAuthorsResolver", [args, getUser()])'
       projectTypes:
-        type: '[ProjectType!]'
+        type: '[ProjectType!]!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectTypesResolver", [args, getUser()])'
       users:
         type: 'InternalUserConnection!'
