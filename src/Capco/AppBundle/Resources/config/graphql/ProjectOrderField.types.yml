@@ -5,7 +5,7 @@ ProjectOrderField:
     values:
       POPULAR:
         value: 'POPULAR'
-        description: 'Allows ordering a list of projects by there number of votes.'
+        description: 'Allows ordering a list of projects by there number of contributions.'
       LATEST:
         value: 'LATEST'
         description: 'Allows ordering a list of projects by when they were published.'
