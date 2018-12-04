@@ -11,7 +11,7 @@ Project:
       title:
         type: 'String!'
       author:
-        type: 'InternalUser'
+        type: 'InternalUser!'
       video:
         type: 'String'
       cover:
