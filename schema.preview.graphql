@@ -34,7 +34,7 @@ type Consultation implements Node {
 # A string containing a datetime.
 scalar DateTime
 
-# An event.
+# Fetches an object given its ID
 type Event implements Node {
   # The ID of an object
   id: ID!
@@ -55,10 +55,7 @@ type Event implements Node {
   createdAt: DateTime!
 
   # Identifies the body of the event.
-  body: HTML!
-
-  # Identifies if the event is published.
-  enabled: Boolean!
+  body: HTML
 }
 
 # A connection to a list of items.
@@ -136,7 +133,7 @@ type Query {
     # Returns the last `n` elements from the list.
     last: Int
 
-    # If non-null, filters events by comparing the start date with present.
+    # If null, get all, if false get passed, if true get current and future
     isFuture: Boolean
 
     # If non-null, filters events with the given theme.
@@ -149,11 +146,11 @@ type Query {
     author: ID
 
     # If non-null, filters events with the given string to look for.
-    search: String
-  ): EventConnection!
+    term: String
+  ): EventConnection
 }
 
-# A questionnaire is a series of questions that users can answer.
+# A questionnaire is a form.
 type Questionnaire implements Node {
   # The ID of an object
   id: ID!
@@ -186,19 +183,13 @@ type Questionnaire implements Node {
 # An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string.
 scalar URI
 
-# Represents a type that can be retrieved by a URL.
-interface UniformResourceLocatable {
-  # The URL to this resource.
-  url: URI!
-}
-
 # A user is an individual's account.
-type User implements Node & UniformResourceLocatable {
-  # The URL to this resource.
-  url: URI!
-
+type User implements Node {
   # The ID of an object
   id: ID!
+
+  # The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.
+  url: URI
 
   # The user's public name.
   username: String

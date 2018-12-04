@@ -16,10 +16,6 @@ if [ "$PRODUCTION" ]; then
   rm -rf vendor/simplesamlphp/simplesamlphp/cert
   cp -R app/config/simplesamlphp vendor/simplesamlphp
 
-  # We generate GraphQL/__generated__
-  echo "Generating GraphQL PHP files…"
-  bin/console graphql:compile
-
   # We build bootstrap.php.cache in the `var` directory
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var
 
@@ -32,7 +28,7 @@ if [ "$PRODUCTION" ]; then
 
   php bin/console translation:download --env=prod
   yarn run update-js-translation
-  yarn run build-relay-schema
+  yarn run relay
   yarn run build:prod
 
   # For now SSR is disabled, so we skip this to avoid extra work
@@ -52,10 +48,6 @@ else
   rm -rf vendor/simplesamlphp/simplesamlphp/cert
   cp -R app/config/simplesamlphp vendor/simplesamlphp
 
-  # We generate GraphQL/__generated__
-  echo "Generating GraphQL PHP files…"
-  bin/console graphql:compile
-  
   composer dump-autoload
 
   # Frontend deps
@@ -72,8 +64,8 @@ else
   echo "Downloading translations…"
   yarn run trad
 
-  echo "Generating Relay files…"
-  yarn run build-relay-schema
+  echo "Generating GraphQL stuff…"
+  yarn run relay
 
   if [ -n "CI" ]; then
     yarn run build:prod
