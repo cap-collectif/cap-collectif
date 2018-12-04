@@ -59,7 +59,7 @@ class ProjectSerializationListener extends AbstractSerializationListener
             $event
                 ->getVisitor()
                 ->addData(
-                    'contributionCount',
+                    'contributionsCount',
                     $this->contributionResolver->countProjectContributions($project)
                 );
 
