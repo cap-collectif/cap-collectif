@@ -24,7 +24,7 @@ Project:
       votesCount:
         type: 'Int!'
       hasParticipativeStep:
-        type: Boolean
+        type: Boolean!
         resolve: '@=value.hasParticipativeStep()'
       links:
         type: 'ProjectLinks!'
