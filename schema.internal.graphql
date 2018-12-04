@@ -415,6 +415,18 @@ enum ArgumentValue {
 
 # Fetches an object given its ID
 type ArgumentVote implements Vote & Publishable {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
   # The ID of an object
   id: ID!
 
@@ -429,18 +441,6 @@ type ArgumentVote implements Vote & Publishable {
 
   # Returns Type of vote
   kind: String!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
 }
 
 # A connection to a list of items.
@@ -976,26 +976,24 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   reportings(
     # Returns the elements in the list that come after the specified cursor.
     after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
+    first: Int = 30
 
     # Returns the elements in the list that come before the specified cursor.
     before: String
 
     # Returns the last `n` elements from the list.
     last: Int
-    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
-  ): CommentConnection!
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
 
-  # `true` if the object is published.
-  published: Boolean!
+  # `true` if the contribution is trashed.
+  trashed: Boolean!
 
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
+  # The status.
+  trashedStatus: TrashableStatus
 
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
+  # The moment the moderator trashed the contribution.
+  trashedAt: DateTime
 
   # Reason that the entity is not published.
   notPublishedReason: NotPublishedReason
@@ -1109,6 +1107,18 @@ enum CommentPublicationStatus {
 
 # Fetches an object given its ID
 type CommentVote implements Node & Vote & Publishable {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
   # The ID of an object
   id: ID!
 
@@ -1123,18 +1133,6 @@ type CommentVote implements Node & Vote & Publishable {
 
   # Returns 'commentVote'.
   kind: String!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
   contribution: Comment!
 }
 
@@ -2464,9 +2462,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   viewerSourcesUnpublished(
     # Returns the elements in the list that come after the specified cursor.
     after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
+    first: Int = 30
 
     # Returns the elements in the list that come before the specified cursor.
     before: String
@@ -2665,6 +2661,7 @@ union OpinionOrVersion = Opinion | Version
 type OpinionVote implements YesNoPairedVote & Publishable & Vote {
   # The ID of an object
   id: ID!
+  value: YesNoPairedVoteValue!
 
   # Date of vote.
   createdAt: DateTime!
@@ -2790,6 +2787,9 @@ type Post implements Node & Commentable & UniformResourceLocatable & UniformReso
   # The ID of an object
   id: ID!
 
+  # The ID of an object
+  id: ID!
+
   # The comments related to the commentable.
   comments(
     # Returns the elements in the list that come after the specified cursor.
@@ -2872,6 +2872,18 @@ type PresentationStep implements Step {
 
 # Fetches an object given its ID
 interface PrivatableVote {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
   # The ID of an object
   id: ID!
 
@@ -2886,18 +2898,6 @@ interface PrivatableVote {
 
   # Returns Type of vote
   kind: String!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
 
   # Anonymous or not.
   private: Boolean
@@ -4994,6 +4994,18 @@ enum SourceOrderField {
 
 # Fetches an object given its ID
 type SourceVote implements Vote & Publishable {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
   # The ID of an object
   id: ID!
 
@@ -5008,18 +5020,6 @@ type SourceVote implements Vote & Publishable {
 
   # Returns 'sourceVote'.
   kind: String!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
 }
 
 # A connection to a list of items.
@@ -6028,6 +6028,26 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   arguments(
     # Returns the elements in the list that come after the specified cursor.
     after: String
+    first: Int = 30
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
+  # The sources related to the sourceable.
+  sources(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
 
     # Returns the first `n` elements from the list.
     first: Int = 100
@@ -6192,6 +6212,7 @@ enum VersionOrderField {
 type VersionVote implements YesNoPairedVote & Publishable & Vote {
   # The ID of an object
   id: ID!
+  value: YesNoPairedVoteValue!
 
   # Date of vote.
   createdAt: DateTime!
@@ -6281,6 +6302,18 @@ enum VoteOrderField {
 
 # Fetches an object given its ID
 interface YesNoPairedVote {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity can no more be published.
+  publishableUntil: DateTime
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity is not published.
+  notPublishedReason: NotPublishedReason
+
   # The ID of an object
   id: ID!
 
@@ -6295,18 +6328,6 @@ interface YesNoPairedVote {
 
   # Returns Type of vote
   kind: String!
-
-  # `true` if the object is published.
-  published: Boolean!
-
-  # Identifies when the entity can no more be published.
-  publishableUntil: DateTime
-
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
-
-  # Reason that the entity is not published.
-  notPublishedReason: NotPublishedReason
   value: YesNoPairedVoteValue!
 }
 
