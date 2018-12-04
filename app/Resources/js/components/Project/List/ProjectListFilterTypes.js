@@ -2,14 +2,14 @@
 import React from 'react';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import { FormControl } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, type IntlShape } from 'react-intl';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type { ProjectListFilterTypesQueryResponse } from './__generated__/ProjectListFilterTypesQuery.graphql';
 import { changeType } from '../../../redux/modules/project';
 
 type Props = {
   dispatch: Function,
-  intl: Object,
+  intl: IntlShape,
   type: ?string,
 };
 
