@@ -14,12 +14,13 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
+use GraphQL\Type\Definition\Type;
 
 class StepTypeResolver implements ResolverInterface
 {
     private $typeResolver;
 
-    public function __construct(TypeResolver $typeResolver)
+    public function __construct(TypeResolver $typeResolver): Type
     {
         $this->typeResolver = $typeResolver;
     }

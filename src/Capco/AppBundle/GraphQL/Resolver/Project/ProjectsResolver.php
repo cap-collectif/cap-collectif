@@ -64,11 +64,6 @@ class ProjectsResolver implements ResolverInterface
         }
     }
 
-    public function resolveProjectLinks(Project $project): array
-    {
-        return isset($project->_links) ? $project->_links : [];
-    }
-
     private function getFilters(Argument $args): array
     {
         $filters = [];

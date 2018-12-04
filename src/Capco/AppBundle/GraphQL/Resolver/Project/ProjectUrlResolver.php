@@ -23,7 +23,7 @@ class ProjectUrlResolver implements ResolverInterface
         $this->router = $router;
     }
 
-    public function __invoke(Project $project): ?string
+    public function __invoke(Project $project): string
     {
         $projectSlug = $project->getSlug();
         $firstStep = $project->getFirstStep();

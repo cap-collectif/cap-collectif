@@ -26,9 +26,6 @@ Project:
       hasParticipativeStep:
         type: Boolean!
         resolve: '@=value.hasParticipativeStep()'
-      links:
-        type: 'ProjectLinks!'
-        resolve: "@=resolver('project_links', [value])"
       type:
         type: 'ProjectType'
         resolve: '@=value.getProjectType()'
