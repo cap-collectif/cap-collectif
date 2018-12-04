@@ -24,7 +24,7 @@ Comment:
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
       answers:
-        type: '[Comment]!'
+        type: '[Comment!]!'
       authorName:
         type: 'String'
       authorEmail:

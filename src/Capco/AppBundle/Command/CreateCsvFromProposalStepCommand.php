@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
@@ -29,6 +30,33 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromProposalStepCommand extends Command
 {
+    const PROPOSAL_HEADER_MAP = [
+        'proposal_id' => 'id',
+        'proposal_reference' => 'reference',
+        'proposal_title' => 'title',
+        'proposal_createdAt' => 'createdAt',
+        'proposal_publishedAt' => 'publishedAt',
+        'proposal_updatedAt' => 'updatedAt',
+        'proposal_publicationStatus' => 'publicationStatus',
+        'proposal_trashedAt' => 'trashedAt',
+        'proposal_trashedReason' => 'trashedReason',
+        'proposal_link' => 'url',
+        'proposal_author_id' => 'author.id',
+        'proposal_author_username' => 'author.username',
+        'proposal_author_isEmailConfirmed' => 'author.isEmailConfirmed',
+        'proposal_author_email' => 'author.email',
+        'proposal_author_userType_id' => 'author.userType.id',
+        'proposal_author_userType_name' => 'author.userType.name',
+        'proposal_status_name' => 'status.name',
+        'proposal_estimation' => 'estimation',
+        'proposal_category_name' => 'category.name',
+        'proposal_theme_title' => 'theme.title',
+        'proposal_formattedAddress' => 'formattedAddress',
+        'proposal_district_name' => 'district.name',
+        'proposal_illustration' => 'media.url',
+        'proposal_summary' => 'summary',
+        'proposal_description' => 'bodyText',
+    ];
     protected const PROPOSALS_PER_PAGE = 10;
     protected const VOTES_PER_PAGE = 150;
     protected const COMMENTS_PER_PAGE = 150;
@@ -51,6 +79,13 @@ fragment commentInfos on Comment {
   }
   pinned
   publicationStatus
+  votes {
+    edges {
+      node {
+         ... commentVoteInfos
+      }
+    }
+  }
   reportings {
     pageInfo {
       startCursor
@@ -167,7 +202,7 @@ fragment authorInfos on User {
   isEmailConfirmed
   email
   userType {
-		...userTypeInfos
+    ...userTypeInfos
   }
 }
 EOF;
@@ -434,34 +469,6 @@ EOF;
     protected $commentCursor;
     protected $headersMap = [];
 
-    const PROPOSAL_HEADER_MAP = [
-        'proposal_id' => 'id',
-        'proposal_reference' => 'reference',
-        'proposal_title' => 'title',
-        'proposal_createdAt' => 'createdAt',
-        'proposal_publishedAt' => 'publishedAt',
-        'proposal_updatedAt' => 'updatedAt',
-        'proposal_publicationStatus' => 'publicationStatus',
-        'proposal_trashedAt' => 'trashedAt',
-        'proposal_trashedReason' => 'trashedReason',
-        'proposal_link' => 'url',
-        'proposal_author_id' => 'author.id',
-        'proposal_author_username' => 'author.username',
-        'proposal_author_isEmailConfirmed' => 'author.isEmailConfirmed',
-        'proposal_author_email' => 'author.email',
-        'proposal_author_userType_id' => 'author.userType.id',
-        'proposal_author_userType_name' => 'author.userType.name',
-        'proposal_status_name' => 'status.name',
-        'proposal_estimation' => 'estimation',
-        'proposal_category_name' => 'category.name',
-        'proposal_theme_title' => 'theme.title',
-        'proposal_formattedAddress' => 'formattedAddress',
-        'proposal_district_name' => 'district.name',
-        'proposal_illustration' => 'media.url',
-        'proposal_summary' => 'summary',
-        'proposal_description' => 'bodyText',
-    ];
-
     protected $proposalHeaderMap = [];
 
     protected $currentProposalIndex;
@@ -631,7 +638,9 @@ EOF;
         $totalCount = Arr::path($proposalWithReportings, 'data.node.reportings.totalCount');
         $progress = new ProgressBar($output, $totalCount);
         $output->writeln(
-            "<info>Importing $totalCount reportings for proposal " . $proposal['title'] . '</info>'
+            "<info>Importing ${totalCount} reportings for proposal " .
+                $proposal['title'] .
+                '</info>'
         );
 
         $this->connectionTraversor->traverse(
@@ -667,7 +676,7 @@ EOF;
         $progress = new ProgressBar($output, $totalCount);
 
         $output->writeln(
-            "<info>Importing $totalCount votes for proposal " . $proposal['title'] . '</info>'
+            "<info>Importing ${totalCount} votes for proposal " . $proposal['title'] . '</info>'
         );
         $this->connectionTraversor->traverse(
             $proposalsWithVotes,
@@ -700,7 +709,7 @@ EOF;
         $progress = new ProgressBar($output, $totalCount);
 
         $output->writeln(
-            "<info>Importing $totalCount comments for proposal " . $proposal['title'] . '</info>'
+            "<info>Importing ${totalCount} comments for proposal " . $proposal['title'] . '</info>'
         );
         $this->connectionTraversor->traverse(
             $proposalsWithComments,
@@ -737,7 +746,7 @@ EOF;
         $progress = new ProgressBar($output, $totalCount);
 
         $output->writeln(
-            "<info>Importing $totalCount news for proposal " . $proposal['title'] . '</info>'
+            "<info>Importing ${totalCount} news for proposal " . $proposal['title'] . '</info>'
         );
 
         $this->connectionTraversor->traverse(
@@ -795,6 +804,7 @@ EOF;
     protected function addProposalCommentRow(array $comment, array $proposal): void
     {
         $row = [$comment['kind']];
+
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
                 $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
@@ -1081,6 +1091,7 @@ EOF;
                     } else {
                         $row[] = '';
                     }
+
                     break;
                 }
             }
@@ -1101,6 +1112,7 @@ EOF;
                     } else {
                         $row[] = '';
                     }
+
                     break;
                 }
             }
@@ -1600,24 +1612,17 @@ ${COMMENT_VOTE_INFOS}
           node {
             id
             comments(first: ${COMMENTS_PER_PAGE}{$commentsAfter}) {
-            pageInfo {
-              startCursor
-              endCursor
-              hasNextPage
-            }
-            edges {
-              cursor
-              node {
-                ... commentInfos
-                votes {
-                  edges {
-                    node {
-                      ... commentVoteInfos
-                    }
-                  }
-                  }
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
                 }
-              }
+                edges {
+                  cursor
+                      node {
+                        ... commentInfos
+                      }  
+                  }
             }
             reference
             id

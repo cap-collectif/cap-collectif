@@ -4,7 +4,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { DatesInterval } from '../Utils/DatesInterval';
 import DarkenGradientMedia from '../Ui/Medias/DarkenGradientMedia';
-import RatioMediaContainer from '../Ui/Medias/RatioMediaContainer';
+import SixteenNineMedia from '../Ui/Medias/SixteenNineMedia';
 
 type Props = {
   highlighteds: Array<Object>,
@@ -140,8 +140,11 @@ export class CarouselMobile extends PureComponent<Props, State> {
               if (highlighted[type].media) {
                 return (
                   <DarkenGradientMedia
+                    width="100%"
+                    height="100%"
                     linearGradient={hadLinearGradient}
                     url={highlighted[type].media.url}
+                    title={highlighted[type].title}
                   />
                 );
               }
@@ -149,8 +152,11 @@ export class CarouselMobile extends PureComponent<Props, State> {
               if (highlighted[type].cover) {
                 return (
                   <DarkenGradientMedia
+                    width="100%"
+                    height="100%"
                     linearGradient={hadLinearGradient}
                     url={highlighted[type].cover.url}
+                    title={highlighted[type].title}
                   />
                 );
               }
@@ -160,7 +166,7 @@ export class CarouselMobile extends PureComponent<Props, State> {
 
             return (
               <div className="item" key={index}>
-                <RatioMediaContainer>{getMedia()}</RatioMediaContainer>
+                <SixteenNineMedia>{getMedia()}</SixteenNineMedia>
                 <div className="carousel__content">
                   <p>
                     <span className="carousel__type">

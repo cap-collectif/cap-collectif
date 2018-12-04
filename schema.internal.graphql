@@ -994,7 +994,7 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   parent: Comment
   pinned: Boolean!
   contribuable: Boolean!
-  answers: [Comment]!
+  answers: [Comment!]!
   authorName: String
   authorEmail: String
   authorIp: IP

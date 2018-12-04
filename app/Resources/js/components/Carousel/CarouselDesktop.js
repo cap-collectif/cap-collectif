@@ -4,7 +4,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { DatesInterval } from '../Utils/DatesInterval';
 import DarkenGradientMedia from '../Ui/Medias/DarkenGradientMedia';
-import RatioMediaContainer from '../Ui/Medias/RatioMediaContainer';
+import SixteenNineMedia from '../Ui/Medias/SixteenNineMedia';
 
 type Props = {
   highlighteds: Array<Object>,
@@ -145,7 +145,7 @@ export class CarouselDesktop extends PureComponent<Props, State> {
           </ul>
         </div>
         <div className="carousel__content">
-          <RatioMediaContainer>
+          <SixteenNineMedia>
             <div className="carousel-inner" id="carousel-inner" role="listbox">
               {highlighteds.map((highlighted, index) => {
                 const highlightedType = highlighted.object_type;
@@ -216,7 +216,7 @@ export class CarouselDesktop extends PureComponent<Props, State> {
               <i className="cap-arrow-38" />
               <span className="sr-only">Next</span>
             </a>
-          </RatioMediaContainer>
+          </SixteenNineMedia>
         </div>
       </div>
     );
