@@ -1,9 +1,9 @@
 <?php
+
 namespace Capco\UserBundle\Repository;
 
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
-use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Query\Expr\Join;
@@ -14,12 +14,10 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\UserBundle\Entity\UserType;
 use Capco\AppBundle\Entity\PublicApiToken;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 
 class UserRepository extends EntityRepository
 {
@@ -27,7 +25,7 @@ class UserRepository extends EntityRepository
     {
         return $this->createQueryBuilder('u')
             ->innerJoin(PublicApiToken::class, 't', Expr\Join::WITH, 't.user = u.id')
-            ->where("t.value = :apiKey")
+            ->where('t.value = :apiKey')
             ->setParameter('apiKey', $apiKey)
             ->getQuery()
             ->getOneOrNullResult();
@@ -91,23 +89,6 @@ class UserRepository extends EntityRepository
             ->setParameter('group', $group);
 
         return $qb->getQuery()->getResult();
-    }
-
-    public function getRegisteredParticipantsInEvent(Event $event): array
-    {
-        $qb = $this->createQueryBuilder('u');
-
-        return $qb
-            ->innerJoin(
-                EventRegistration::class,
-                'registration',
-                'WITH',
-                'registration.user = u.id'
-            )
-            ->andWhere('registration.event = :event')
-            ->setParameter('event', $event)
-            ->getQuery()
-            ->getResult();
     }
 
     public function getRegisteredCount(): int
@@ -818,7 +799,7 @@ class UserRepository extends EntityRepository
             $qb->andWhere('ut.slug = :type')->setParameter('type', $type);
         }
 
-        if (!$sort || $sort === 'activity') {
+        if (!$sort || 'activity' === $sort) {
             $qb
                 ->addSelect(
                     '(u.proposalsCount + u.proposalCommentsCount + u.opinionsCount + u.opinionVersionsCount + u.argumentsCount + u.sourcesCount + u.postCommentsCount + u.eventCommentsCount) AS HIDDEN contributionsCount'
@@ -928,14 +909,18 @@ class UserRepository extends EntityRepository
             case 'NAME':
             case 'USERNAME':
                 $qb->addOrderBy('u.username', $direction);
+
                 break;
             case 'RANDOM':
                 $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
+
                 break;
             case 'FOLLOWED_AT':
                 $qb->addOrderBy('f.followedAt', $direction);
+            // no break
             default:
                 $qb->addOrderBy('u.username', $direction);
+
                 break;
         }
         $query = $qb
@@ -1039,12 +1024,8 @@ class UserRepository extends EntityRepository
             ->andWhere('u.remindedAccountConfirmationAfter24Hours = false')
             ->setParameter('oneDayAgo', new \DateTime('-1 day'))
             ->setParameter('oneWeekAgo', new \DateTime('-7 day'));
-        return $qb->getQuery()->getResult();
-    }
 
-    protected function getIsEnabledQueryBuilder(): QueryBuilder
-    {
-        return $this->createQueryBuilder('u')->andWhere('u.enabled = true');
+        return $qb->getQuery()->getResult();
     }
 
     public function countAllowedViewersForProject(Project $project): int
@@ -1058,5 +1039,10 @@ class UserRepository extends EntityRepository
             ->setParameter('project', $project->getId());
 
         return $query->getQuery()->getSingleScalarResult();
+    }
+
+    protected function getIsEnabledQueryBuilder(): QueryBuilder
+    {
+        return $this->createQueryBuilder('u')->andWhere('u.enabled = true');
     }
 }

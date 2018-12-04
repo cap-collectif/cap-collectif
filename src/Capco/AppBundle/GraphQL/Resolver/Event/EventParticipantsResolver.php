@@ -29,26 +29,32 @@ class EventParticipantsResolver implements ResolverInterface
 
     public function __invoke(Event $event, Arg $args): Connection
     {
-        $registered = $this->userRepository->getRegisteredParticipantsInEvent($event);
-        foreach ($registered as &$user) {
-            $user->registeredEvent = $event;
-        }
-        $notRegistered = $this->eventRegistrationRepository->getNotRegisteredParticipantsInEvent(
-            $event
-        );
-
-        $participants = $registered + $notRegistered;
-        $totalCount = \count($participants);
-
-        $paginator = new Paginator(function (int $offset, int $limit) use ($participants) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($event) {
             try {
-                return $participants;
+                $registrationEvents = $this->eventRegistrationRepository
+                    ->getParticipantsInEvent($event, $limit, $offset)
+                    ->getIterator()
+                    ->getArrayCopy();
+
+                foreach ($registrationEvents as $key => $registration) {
+                    if ($registration && $registration->getUser()) {
+                        $user = $registration->getUser();
+                        $user->registeredEvent = $event;
+                        $registrationEvents[$key] = $user;
+                    }
+                }
+
+                return $registrationEvents;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
                 throw new \RuntimeException($exception->getMessage());
             }
         });
 
-        return $paginator->auto($args, $totalCount);
+        return $paginator->auto(
+            $args,
+            $this->eventRegistrationRepository->countAllParticipantsInEvent($event)
+        );
     }
 }

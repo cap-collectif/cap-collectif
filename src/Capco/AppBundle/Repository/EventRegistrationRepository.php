@@ -6,20 +6,38 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class EventRegistrationRepository extends EntityRepository
 {
-    public function getNotRegisteredParticipantsInEvent(Event $event): array
+    public function countAllParticipantsInEvent(Event $event): int
     {
         $qb = $this->createQueryBuilder('registration');
 
         return $qb
-            ->andWhere('registration.user IS NULL')
+            ->select('COUNT(registration.id)')
             ->andWhere('registration.confirmed = true')
             ->andWhere('registration.event = :event')
             ->setParameter('event', $event)
             ->getQuery()
-            ->getResult();
+            ->getSingleScalarResult();
+    }
+
+    public function getParticipantsInEvent(
+        Event $event,
+        int $limit = 50,
+        int $offset = 0
+    ): Paginator {
+        $qb = $this->createQueryBuilder('registration');
+
+        $qb
+            ->andWhere('registration.confirmed = true')
+            ->andWhere('registration.event = :event')
+            ->setParameter('event', $event)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($qb);
     }
 
     public function getOneByUserAndEvent(User $user, Event $event): ?EventRegistration
