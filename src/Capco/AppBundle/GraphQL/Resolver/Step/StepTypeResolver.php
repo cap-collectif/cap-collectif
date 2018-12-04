@@ -20,12 +20,12 @@ class StepTypeResolver implements ResolverInterface
 {
     private $typeResolver;
 
-    public function __construct(TypeResolver $typeResolver): Type
+    public function __construct(TypeResolver $typeResolver)
     {
         $this->typeResolver = $typeResolver;
     }
 
-    public function __invoke(AbstractStep $step)
+    public function __invoke(AbstractStep $step): Type
     {
         if ($step instanceof SelectionStep) {
             return $this->typeResolver->resolve('SelectionStep');

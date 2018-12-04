@@ -26,6 +26,9 @@ Project:
       hasParticipativeStep:
         type: Boolean!
         resolve: '@=value.hasParticipativeStep()'
+      links:
+        type: 'ProjectLinks!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectLinksResolver", [value])'
       type:
         type: 'ProjectType'
         resolve: '@=value.getProjectType()'

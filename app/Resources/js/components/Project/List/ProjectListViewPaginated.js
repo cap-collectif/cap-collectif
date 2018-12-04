@@ -80,7 +80,7 @@ export default createPaginationContainer(
           first: $count
           after: $cursor
           theme: $theme
-          order: $orderBy
+          orderBy: $orderBy
           type: $type
           term: $term
         ) @connection(key: "ProjectListViewPaginated_projects", filters: []) {
