@@ -10,7 +10,7 @@ const Body = styled.div.attrs({
   flex-direction: column;
 
   hr {
-    margin: 20px 0 15px;
+    margin: 15px 0 10px;
   }
 
   @media print {

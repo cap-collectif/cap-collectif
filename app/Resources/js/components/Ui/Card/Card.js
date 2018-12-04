@@ -8,6 +8,7 @@ import Status from './Status';
 import Body from './Body';
 import Title from './Title';
 import Counters from './Counters';
+import { Header } from './Header';
 
 type Props = {
   children?: any,
@@ -42,17 +43,19 @@ export const Container = styled.div.attrs({
 `;
 
 export class Card extends React.PureComponent<Props> {
-  static Cover = Cover;
-
   static Type = Type;
 
-  static Status = Status;
+  static Header = Header;
+
+  static Cover = Cover;
 
   static Body = Body;
 
   static Title = Title;
 
   static Counters = Counters;
+
+  static Status = Status;
 
   render() {
     const { children } = this.props;

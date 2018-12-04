@@ -1,7 +1,7 @@
 // @flow
 import styled from 'styled-components';
 import * as React from 'react';
-import { StatusColors } from '../../../utils/colors';
+import { BsStyleColors } from '../../../utils/colors';
 
 type Props = {
   bgColor?: 'info' | 'primary' | 'success' | 'warning' | 'danger' | 'default',
@@ -9,7 +9,10 @@ type Props = {
 };
 
 const Container = styled.div.attrs({
-  className: 'ellipsis card-status',
+  className: props =>
+    props.bsStyle === 'primary'
+      ? 'ellipsis card-status custom-primary-bgcolor'
+      : 'ellipsis card-status',
 })`
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -24,9 +27,13 @@ const Container = styled.div.attrs({
 export const Status = (props: Props) => {
   const { bgColor, children } = props;
 
-  const getBgColor = StatusColors[bgColor];
+  const getBgColor = BsStyleColors[bgColor];
 
-  return <Container bgColor={getBgColor}>{children}</Container>;
+  return (
+    <Container bsStyle={bgColor} bgColor={getBgColor}>
+      {children}
+    </Container>
+  );
 };
 
 Status.defaultProps = {

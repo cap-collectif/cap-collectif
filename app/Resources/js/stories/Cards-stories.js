@@ -5,7 +5,7 @@ import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import Card from '../components/Ui/Card/Card';
 import Image from '../components/Ui/Medias/Image';
 
-const statusColorOption = {
+const bsStyleOption = {
   Warning: 'warning',
   Danger: 'danger',
   Success: 'success',
@@ -14,26 +14,46 @@ const statusColorOption = {
   Default: 'default',
 };
 
-storiesOf('Cards', module)
+const headerOption = {
+  Gray: 'gray',
+  White: 'white',
+  Green: 'green',
+  BlueDark: 'blueDark',
+  Blue: 'blue',
+  Orange: 'orange',
+  Red: 'red',
+  Default: 'default',
+};
+
+storiesOf('Card', module)
   .addDecorator(withKnobs)
   .add(
     'Card',
     () => {
-      const cardType = boolean('Display card type', true);
-      const type = text('Type', 'My type');
-      const colorType = text('Type color', '#707070');
-      const cardCover = boolean('Display card cover', true);
-      const cardBody = boolean('Display card body', true);
-      const title = text('Title', 'Project title');
-      const titleTagName = text('Title tag name', 'h2');
-      const cardCounters = boolean('Display card counters', true);
-      const cardStatus = boolean('Display card status', true);
-      const status = text('Status', 'My status');
-      const statusBgColor = select('Status background color', statusColorOption, 'default');
+      const cardType = boolean('Display card type', false, 'Type');
+      const type = text('Type', 'My type', 'Type');
+      const colorType = text('Type color', '#707070', 'Type');
+      const cardHeader = boolean('Display card header', true, 'Header');
+      const header = text('Header', 'My header', 'Header');
+      const headerBgColor = select('Header background color', headerOption, 'default', 'Header');
+      const cardCover = boolean('Display card cover', true, 'Cover');
+      const coverHeight = text('Cover height', '175px', 'Cover');
+      const leftCover = boolean('Display card cover on left', false, 'Cover');
+      const coverWidth = text('Cover width if is display on left', 'auto', 'Cover');
+      const cardBody = boolean('Display card body', true, 'Body');
+      const title = text('Title', 'Project title', 'Title');
+      const titleTagName = text('Title tag name', 'h2', 'Title');
+      const cardCounters = boolean('Display card counters', false, 'Counters');
+      const cardStatus = boolean('Display card status', true, 'Status');
+      const status = text('Status', 'My status', 'Status');
+      const statusBgColor = select('Status background color', bsStyleOption, 'default', 'Status');
 
+      // $FlowFixMe
       Card.Cover.displayName = 'Card.Cover';
       // $FlowFixMe
       Card.Type.displayName = 'Card.Type';
+      // $FlowFixMe
+      Card.Header.displayName = 'Card.Header';
       // $FlowFixMe
       Card.Status.displayName = 'Card.Status';
       Card.Body.displayName = 'Card.Body';
@@ -44,12 +64,29 @@ storiesOf('Cards', module)
       return (
         <Card>
           {cardType && <Card.Type bgColor={colorType}>{type}</Card.Type>}
-          {cardCover && (
-            <Card.Cover>
+          {cardHeader && <Card.Header bgColor={headerBgColor}>{header}</Card.Header>}
+          {leftCover && (
+            <div className="d-flex">
+              {cardCover && (
+                <Card.Cover height={coverHeight} width={coverWidth}>
+                  <Image src="https://source.unsplash.com/collection/1127828" alt="Project title" />
+                </Card.Cover>
+              )}
+              {cardBody && (
+                <Card.Body>
+                  <Card.Title tagName={titleTagName}>
+                    <a href="https://ui.cap-collectif.com">{title}</a>
+                  </Card.Title>
+                </Card.Body>
+              )}
+            </div>
+          )}
+          {!leftCover && cardCover && (
+            <Card.Cover height={coverHeight}>
               <Image src="https://source.unsplash.com/collection/1127828" alt="Project title" />
             </Card.Cover>
           )}
-          {cardBody && (
+          {!leftCover && cardBody && (
             <Card.Body>
               <Card.Title tagName={titleTagName}>
                 <a href="https://ui.cap-collectif.com">{title}</a>
@@ -74,10 +111,50 @@ storiesOf('Cards', module)
     },
     {
       info: {
-        text: `
-          Ce composant est utilisé ...
+        text: `          
+          <p>Emplacement : <code>import Avatar from ‘../Ui/Card/Card’;</code></p>
+         
+          <p class="mb-20">
+            <h5><b>Project card</b></h5>
+            Cette carte est composée des éléments suivant : 
+            <ul>
+              <li>Card.Type,</li>
+              <li>Card.Cover,</li>
+              <li>Card.Body avec à l'intérieur : InlineList, Card.Title, TagsList, ProgressBar.</li>
+            </ul>
+          </p>
+          
+          <p class="mb-20">
+            <h5><b>Proposal card</b></h5>
+            Cette carte est composée des éléments suivant : 
+            <ul>
+              <li>Card.Body avec à l'intérieur : Media, Card.Title, TagsList, ButtonToolbar.</li>
+              <li>Card.Counters</li>
+              <li>Card.Status</li>
+            </ul>
+          </p>
+          
+          
+          <p class="mb-20">
+            <h5><b>Theme card</b></h5>
+            Cette carte est composée des éléments suivant : 
+            <ul>
+              <li>Card.Cover</li>
+              <li>Card.Body avec à l'intérieur : Card.Title, InlineList, Label.</li>
+            </ul>
+          </p>
+          
+          
+          <p class="mb-20">
+            <h5><b>Event card</b></h5>
+            Cette carte est composée des éléments suivant : 
+            <ul>
+              <li>Card.Cover</li>
+              <li>Card.Body avec à l'intérieur : Card.Title, InlineList, Label.</li>
+            </ul>
+          </p>
         `,
-        propTablesExclude: [Image, Card.Cover, Card.Counters, Card.Body],
+        propTablesExclude: [Image, Card.Counters, Card.Body],
       },
     },
   );
