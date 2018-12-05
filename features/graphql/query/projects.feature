@@ -52,7 +52,7 @@ Scenario: GraphQL client wants to list projects order by popularity
   """
   {
     "query": "{
-      projects(order: {field: POPULAR, direction: ASC}) {
+      projects(orderBy: {field: POPULAR, direction: ASC}) {
         totalCount
         edges {
           node {

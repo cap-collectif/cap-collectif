@@ -57,7 +57,7 @@ class ProjectSearch extends Search
         $boolQuery->addMust(new Exists('id'));
 
         $query = new Query($boolQuery);
-
+      
         if (isset($order['field'])) {
             $query->setSort($this->getSort($order['field']));
         }
@@ -73,6 +73,7 @@ class ProjectSearch extends Search
                 return $result->getData()['id'];
             }, $resultSet->getResults())
         );
+        
 
         return [
             'projects' => $results,
@@ -115,7 +116,7 @@ class ProjectSearch extends Search
 
                 break;
         }
-
+        
         return [$sortField => ['order' => $sortOrder]];
     }
 }

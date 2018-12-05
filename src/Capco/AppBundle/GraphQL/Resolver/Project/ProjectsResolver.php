@@ -31,8 +31,8 @@ class ProjectsResolver implements ResolverInterface
             $term = $args->offsetGet('term');
         }
 
-        if ($args->offsetExists('order')) {
-            $order = $args->offsetGet('order');
+        if ($args->offsetExists('orderBy')) {
+            $order = $args->offsetGet('orderBy');
         }
 
         try {
