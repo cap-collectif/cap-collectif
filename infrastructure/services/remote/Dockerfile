@@ -227,21 +227,21 @@ RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$
 
 # Download PHP dependencies
 COPY composer.json composer.lock /var/www/
-RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress --apcu-autoloader
+RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --ignore-platform-reqs --no-progress
 
-# Then add source code, build autoloader and initialize Symfony (including creating bootstrap.php.cache).
+# Then add source code, build autoloader and initialize Symfony
 COPY . /var/www
 RUN chown -R capco:capco . \
     && mkdir -p var/cache/prod \
     && chown -R capco:capco var \
     && chmod -R 777 var \
-    && gosu capco composer dump-autoload --no-dev --optimize \
-    && gosu capco php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var \
     && rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
     && rm -rf vendor/simplesamlphp/simplesamlphp/metadata/* \
     && rm -rf vendor/simplesamlphp/simplesamlphp/cert \
     && cp -r app/config/simplesamlphp /var/www/vendor/simplesamlphp \
-    && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
+    && gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
+    && gosu capco composer dump-autoload --no-dev --optimize --apcu \
+    && gosu capco php -d memory_limit=2048M bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
     && gosu capco php bin/console assets:install --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
 
 # Build JS
@@ -249,7 +249,6 @@ RUN yarn global add bower@1.8.4 babel-cli \
     && gosu capco yarn install --pure-lockfile \
     && gosu capco bower install --config.interactive=false \
     && gosu capco npm rebuild node-sass > /dev/null \
-    && gosu capco php bin/console graphql:compile --env=prod \
     && gosu capco php bin/console translation:download --env=prod \
     && gosu capco yarn run update-js-translation \
     && gosu capco yarn run build-relay-schema \
