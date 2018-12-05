@@ -314,14 +314,18 @@ class ArgumentRepository extends EntityRepository
 
         public function countPublishedArgumentsByStep(ConsultationStep $cs): int
     {
-        return $this->getIsEnabledQueryBuilder()
+        $qb =  $this->getIsEnabledQueryBuilder();
+        return $qb
             ->select('count(DISTINCT a.id)')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
             ->andWhere('a.published = 1 AND a.trashedAt IS NULL')
-            ->andWhere(
-                '(a.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs) OR (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs)'
+              ->andWhere(
+                $qb->expr()->orX(
+                '(a.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs)',
+                '(a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs)'
+                )
             )
             ->setParameter('cs', $cs)
             ->getQuery()
@@ -329,14 +333,20 @@ class ArgumentRepository extends EntityRepository
     }
     public function countTrashedArgumentsByStep(ConsultationStep $cs): int
     {
-        return $this->getIsEnabledQueryBuilder()
+        $qb =  $this->getIsEnabledQueryBuilder();
+        return $qb
             ->select('count(DISTINCT a.id)')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
             ->andWhere('a.published = 1 AND a.trashedAt IS NOT NULL')
             ->andWhere(
-                '(a.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs) OR (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs)'
+            )
+            ->andWhere(
+                $qb->expr()->orX(
+                '(a.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs)',
+                '(a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs)'
+                )
             )
             ->setParameter('cs', $cs)
             ->getQuery()

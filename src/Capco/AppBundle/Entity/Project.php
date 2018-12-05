@@ -169,13 +169,6 @@ class Project implements IndexableInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="contributions_count", type="integer")
-     */
-    private $contributionsCount = 0;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="votes_count", type="integer")
      */
     private $votesCount = 0;
@@ -601,22 +594,6 @@ class Project implements IndexableInterface
     public function setParticipantsCount($participantsCount)
     {
         $this->participantsCount = $participantsCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getContributionsCount()
-    {
-        return $this->contributionsCount;
-    }
-
-    /**
-     * @param int $contributionsCount
-     */
-    public function setContributionsCount($contributionsCount)
-    {
-        $this->contributionsCount = $contributionsCount;
     }
 
     /**
