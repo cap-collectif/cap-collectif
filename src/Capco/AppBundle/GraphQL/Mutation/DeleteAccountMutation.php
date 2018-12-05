@@ -189,7 +189,6 @@ class DeleteAccountMutation implements MutationInterface
                     $contribution instanceof Opinion ||
                     $contribution instanceof Source ||
                     $contribution instanceof Argument) &&
-                $contribution->getStep() &&
                 $contribution->getStep()->canContribute($user)
             ) {
                 $toDeleteList[] = $contribution;

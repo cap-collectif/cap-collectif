@@ -61,7 +61,7 @@ export class QuestionnaireAdminResultsRanking extends React.Component<Props> {
 export default createFragmentContainer(QuestionnaireAdminResultsRanking, {
   multipleChoiceQuestion: graphql`
     fragment QuestionnaireAdminResultsRanking_multipleChoiceQuestion on MultipleChoiceQuestion {
-      choices(allowRandomize: false) {
+      choices {
         title
         ranking {
           position

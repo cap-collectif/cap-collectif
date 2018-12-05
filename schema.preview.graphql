@@ -90,15 +90,6 @@ interface Node {
   id: ID!
 }
 
-# Possible directions in which to order a list of items when provided an orderBy argument.
-enum OrderDirection {
-  # Specifies an ascending order for a given orderBy argument.
-  ASC
-
-  # Specifies a descending order for a given orderBy argument.
-  DESC
-}
-
 # Information about pagination in a connection.
 type PageInfo {
   # When paginating forwards, are there more items?
@@ -112,24 +103,6 @@ type PageInfo {
 
   # When paginating forwards, the cursor to continue.
   endCursor: String
-}
-
-# Ways in which project can be ordered.
-input ProjectOrder {
-  # The field in which to order nodes by.
-  field: ProjectOrderField
-
-  # The direction in which to order nodes.
-  direction: OrderDirection
-}
-
-# Ordering projects.
-enum ProjectOrderField {
-  # Allows ordering a list of projects by there number of contributions.
-  POPULAR
-
-  # Allows ordering a list of projects by when they were published.
-  LATEST
 }
 
 # Root of the schema.
@@ -148,37 +121,6 @@ type Query {
     # The list of node IDs.
     ids: [ID!]!
   ): [Node]!
-
-  # Lookup projects.
-  projects(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-    orderBy: ProjectOrder = {field: LATEST, direction: DESC}
-
-    # If non-null, projects with the given string to look for.
-    term: String
-
-    # If non-null, filter projects by statuses.
-    status: ID
-
-    # If non-null, filter projects by themes
-    theme: ID
-
-    # If non-null, filter projects by types
-    type: ID
-
-    # If non-null, filter projects by author
-    author: ID
-  ): 
 
   # Lookup events.
   events(
@@ -252,11 +194,11 @@ interface UniformResourceLocatable {
 
 # A user is an individual's account.
 type User implements Node & UniformResourceLocatable {
-  # The ID of an object
-  id: ID!
-
   # The URL to this resource.
   url: URI!
+
+  # The ID of an object
+  id: ID!
 
   # The user's public name.
   username: String

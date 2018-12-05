@@ -1,7 +1,7 @@
 @core @registration
 Feature: Registration
 
-@database
+@database @javascript
 Scenario: Anonymous wants to register with user type and zipcode
   Given features "registration", "user_type", "zipcode_at_register" are enabled
   And I visited "home page"
@@ -19,7 +19,7 @@ Scenario: Anonymous wants to register with user type and zipcode
   Then I wait 6 seconds
   Then I can see I am logged in as "Naruto42"
 
-@database
+@database @javascript
 Scenario: Anonymous wants to register
   Given feature "registration" is enabled
   And I visited "home page"
@@ -37,7 +37,7 @@ Scenario: Anonymous wants to register
   And I open mail with subject "email-subject-registration-confirmation"
   And I should see "email-content-registration-confirmation" in mail
 
-@security
+@javascript @security
 Scenario: Anonymous wants to register with every possible errors
   Given features "registration", "user_type", "zipcode_at_register" are enabled
   And I visited "home page"
@@ -52,7 +52,7 @@ Scenario: Anonymous wants to register with every possible errors
   And I should see "registration.constraints.email.invalid"
   And I should see "registration.constraints.password.min"
 
-@database
+@database @javascript
 Scenario: Anonymous wants to register with the consent of external communication
   Given feature "registration" is enabled
   Given feature "consent_external_communication" is enabled

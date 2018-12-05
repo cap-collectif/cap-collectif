@@ -54,7 +54,18 @@ class RecalculateProjectsCountersCommand extends ContainerAwareCommand
                         '\''
                 );
                 $query->execute();
-
+                // Contributions count
+                $contributions = $contributionResolver->countProjectContributions($p);
+                $query = $em->createQuery(
+                    'UPDATE CapcoAppBundle:Project p
+                SET p.contributionsCount = ' .
+                        $contributions .
+                        '
+                WHERE p.externalLink IS NULL AND p.id = \'' .
+                        $p->getId() .
+                        '\''
+                );
+                $query->execute();
                 // Votes count
                 $votes = $contributionResolver->countProjectVotes($p);
                 $query = $em->createQuery(

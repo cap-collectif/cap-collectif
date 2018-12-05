@@ -147,7 +147,7 @@
         "php-http/httplug-bundle": "^1.8",
         "php-http/curl-client": "^1.7",
         "symfony/polyfill-apcu": "^1.7",
-        "overblog/graphql-bundle": "dev-master#2cdc6e286f3a7f5f702b1eb5ec2b2c2363997009",
+        "overblog/graphql-bundle": "dev-master#5d65a1d0167d6467fac089f4b332a2ce470f1dd4",
         "imagine/imagine": "^0.6",
         "knplabs/knp-menu-bundle": "2.2.1",
         "sensio/generator-bundle": "3.1.7",

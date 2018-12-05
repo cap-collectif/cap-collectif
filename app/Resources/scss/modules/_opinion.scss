@@ -302,7 +302,6 @@
 // Opinion types title
 .opinion-type__title {
     font-size: 18px;
-    margin-bottom: 20px;
 }
 
 .opinion-type__description {
@@ -314,7 +313,6 @@
 @for $i from 0 through 2 {
     .opinion-type__title.level--#{$i} {
         font-size: 30px - $i * 4px;
-        line-height: (30px - $i * 4px) + (5+$i);
     }
 }
 

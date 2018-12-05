@@ -1,7 +1,7 @@
 @core
 Feature: Choose username
 
-@database
+@javascript @database
 Scenario: A username with no name should see be ask to set a username
   Given I am logged in as no_name
   And I fill in the following:

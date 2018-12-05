@@ -26,7 +26,7 @@ export class Section extends React.Component<Props> {
           <WYSIWYGRender className="opinion-type__description" value={section.description} />
         )}
         {(section.contributionsCount > 0 || section.contribuable) && (
-          <div className="mt-15">
+          <div style={{ marginTop: 15 }}>
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionList consultation={consultation} section={section} />
           </div>

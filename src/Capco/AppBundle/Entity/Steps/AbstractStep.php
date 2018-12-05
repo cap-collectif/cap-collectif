@@ -40,17 +40,13 @@ abstract class AbstractStep implements DisplayableInBOInterface
 {
     use DateHelperTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait, RequirementTrait;
 
-    public const OPENING_STATUS_FUTURE = 'FUTURE';
-    public const OPENING_STATUS_OPENED = 'OPENED';
-    public const OPENING_STATUS_ENDED = 'ENDED';
-
     /**
      * @var array
      */
     public static $stepStatus = [
-        'closed' => self::OPENING_STATUS_ENDED,
-        'open' => self::OPENING_STATUS_OPENED,
-        'future' => self::OPENING_STATUS_FUTURE,
+        'closed' => 'step.status.closed',
+        'open' => 'step.status.open',
+        'future' => 'step.status.future',
     ];
 
     /**

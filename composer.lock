@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5ed03af42fb2e010203e72772a13273",
+    "content-hash": "fc2743e247eb075cfa813d1222580cdc",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5980,7 +5980,7 @@
                     "name": "Andreas Heigl",
                     "email": "andreas@heigl.org",
                     "homepage": "http://andreas.heigl.org",
-                    "role": "Developer"
+                    "role": "developer"
                 }
             ],
             "description": "Word-Hyphenation for PHP based on the TeX-Hyphenation algorithm",
@@ -6178,12 +6178,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cap-collectif/GraphQLBundle.git",
-                "reference": "2cdc6e286f3a7f5f702b1eb5ec2b2c2363997009"
+                "reference": "5d65a1d0167d6467fac089f4b332a2ce470f1dd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/GraphQLBundle/zipball/2cdc6e286f3a7f5f702b1eb5ec2b2c2363997009",
-                "reference": "2cdc6e286f3a7f5f702b1eb5ec2b2c2363997009",
+                "url": "https://api.github.com/repos/cap-collectif/GraphQLBundle/zipball/5d65a1d0167d6467fac089f4b332a2ce470f1dd4",
+                "reference": "5d65a1d0167d6467fac089f4b332a2ce470f1dd4",
                 "shasum": ""
             },
             "require": {
@@ -6289,7 +6289,7 @@
             "support": {
                 "source": "https://github.com/cap-collectif/GraphQLBundle/tree/master"
             },
-            "time": "2018-12-05T16:36:02+00:00"
+            "time": "2018-11-23T10:23:45+00:00"
         },
         {
             "name": "overblog/graphql-php-generator",

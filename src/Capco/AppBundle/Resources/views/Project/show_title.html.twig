@@ -95,7 +95,7 @@
         {% endif %}
 
         {% set votesCount = project.votesCount %}
-        {% set contributionsCount = projectContributionResolver.__invoke(project) %}
+        {% set contributionsCount = project.contributionsCount %}
         {% set contributorsCount = project.participantsCount %}
 
         {% if project.hasParticipativeStep %}

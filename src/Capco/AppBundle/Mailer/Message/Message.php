@@ -27,7 +27,7 @@ abstract class Message
 
     final public function __construct(
         string $recipientEmail,
-        string $recipientName = null,
+        ?string $recipientName,
         string $subject,
         array $subjectVars,
         string $template, // twig or trad key
@@ -54,13 +54,9 @@ abstract class Message
         $this->addRecipient($recipientEmail, $recipientName, []);
     }
 
-    abstract public function getFooterTemplate();
+    abstract public function getFooterTemplate(): ?string;
 
-    //:?string;
-
-    abstract public function getFooterVars();
-
-    //:?array;
+    abstract public function getFooterVars(): ?array;
 
     public function getTemplateVars(): array
     {

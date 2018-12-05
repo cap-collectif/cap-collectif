@@ -1,7 +1,7 @@
 @bp @proposal_follow
 Feature: Proposal Follow
 
-@database
+@database @javascript
 Scenario: Logged, I want to follow a proposal and change the type of following
   Given I am logged in as user
   And I go to a proposal
@@ -21,7 +21,7 @@ Scenario: Logged, I want to follow a proposal and change the type of following
   Then I go to the proposal followers tab
   And I should see my subscription as "user" in the proposal followers list
 
-@database
+@database @javascript
 Scenario: Logged, I want to unfollow a proposal
   Given I am logged in as user
   And I go to a proposal followed by user
@@ -34,7 +34,7 @@ Scenario: Logged, I want to unfollow a proposal
 #  Then I go to the proposal followers tab
 #  And I should not see my subscription on the proposal followers list
 
-#@database
+#@database @javascript
 #Scenario: Logged, I want to follow then unfollow a proposal
 #  Given I am logged in as user
 #  And I go to a proposal
@@ -46,7 +46,7 @@ Scenario: Logged, I want to unfollow a proposal
 #  And I wait 2 seconds
 #  And I should not see my subscription as "user" in the proposal followers list
 #
-#@database
+#@database @javascript
 #Scenario: Logged, I want to unfollow then follow a proposal
 #  Given I am logged in as user
 #  And I go to a proposal followed by user
@@ -58,13 +58,13 @@ Scenario: Logged, I want to unfollow a proposal
 #  And I wait 2 seconds
 #  And I should see my subscription as "user" in the proposal followers list
 
-@database
+@database @javascript
 Scenario: Anonymous user want to follow a proposal
   Given I go to a proposal
   When I click the proposal follow button on "proposal2"
   Then I should see a "#login-popover" element
 
-@security @elasticsearch @database
+@javascript @security @elasticsearch @database
 Scenario: On Proposal Preview, Proposal should stay followed after user refresh the page
   Given I am logged in as user
   And I go to a collect step with vote
@@ -74,13 +74,13 @@ Scenario: On Proposal Preview, Proposal should stay followed after user refresh 
   Then I go to a collect step with vote
   And I should see "following"
 
-@security @elasticsearch @database
+@javascript @security @elasticsearch @database
 Scenario: On Proposal Preview, I want to follow a proposal and change the type of following
   Given I go to a collect step with vote
   And I follow the first proposal
   Then I should see a "#login-popover" element
 
-@security @elasticsearch @database
+@javascript @security @elasticsearch @database
 Scenario: On Proposal Preview, I want to follow a proposal and change the type of following and proposal should stay followed with same status after refresh, finally I unfollow and refresh
   Given I am logged in as user
   And I go to a collect step with vote
@@ -103,6 +103,7 @@ Scenario: On Proposal Preview, I want to follow a proposal and change the type o
   And I go to a collect step with vote
   Then I should see "follow"
 
+@javascript
 Scenario: User with true unfollow token wants to connect via email activities link
   When I go to an email notifications preferences link with token "TzbDnxtD-QnB_q3Tvx0m9Wv6lPO25SuV9KmpLOhAY4Q"
   Then I should not be redirected to "/profile/followings"

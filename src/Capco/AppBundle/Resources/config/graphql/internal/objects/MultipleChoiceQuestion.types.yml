@@ -21,10 +21,9 @@ MultipleChoiceQuestion:
         type: '[QuestionChoice!]'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQuestionChoicesResolver", [value, args])'
         args:
-          allowRandomize:
-            type: 'Boolean!'
-            defaultValue: false
-            description: 'If the question has `randomQuestionChoices: true` will return choices in a random order.'
+          randomize:
+            type: 'Boolean'
+            description: 'Randomize the order of the choices.'
       validationRule:
         type: 'MultipleChoiceQuestionValidationRule'
         resolve: "@=resolver('question_validation_rule', [value])"

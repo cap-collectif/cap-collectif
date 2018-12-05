@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -33,7 +32,6 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c');
-
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -57,7 +55,6 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('cas.project', 'c')
             ->where('o.id = :id')
             ->setParameter('id', $id);
-
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
@@ -72,7 +69,6 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.appendices', 'appendix')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id);
-
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -95,7 +91,6 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.step', 's')
             ->andWhere('o.slug = :opinion')
             ->setParameter('opinion', $opinion);
-
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -146,7 +141,6 @@ class OpinionRepository extends EntityRepository
                 ->getQuery()
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit);
-
             return new Paginator($query);
         }
 
@@ -186,7 +180,6 @@ class OpinionRepository extends EntityRepository
                 }, $project->getRealSteps())
             )
             ->setParameter('author', $user);
-
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -198,7 +191,6 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.Author = :author')
             ->setParameter('author', $user)
             ->setParameter('step', $step);
-
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -209,7 +201,6 @@ class OpinionRepository extends EntityRepository
             ->select('count(DISTINCT o)')
             ->andWhere('o.Author = :author')
             ->setParameter('author', $user);
-
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -277,10 +268,10 @@ class OpinionRepository extends EntityRepository
             ->setParameter('opinionTypeId', $opinionTypeId);
 
         return // ->useResultCache(true, 60)
-            $qb
-                ->getQuery()
-                ->useQueryCache(true)
-                ->getSingleScalarResult();
+        $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getSingleScalarResult();
     }
 
     public function getByCriteriaOrdered(
@@ -453,7 +444,6 @@ class OpinionRepository extends EntityRepository
         }
 
         $qb->orderBy('o.votesCountOk', 'DESC');
-
         return $qb->getQuery()->getResult();
     }
 
@@ -469,6 +459,11 @@ class OpinionRepository extends EntityRepository
             ->setParameter('step', $step)
             ->getQuery()
             ->getResult();
+    }
+
+    protected function getIsEnabledQueryBuilder($alias = 'o')
+    {
+        return $this->createQueryBuilder($alias)->andWhere($alias . '.published = true');
     }
 
     public function findFollowingOpinionByUser(
@@ -506,36 +501,5 @@ class OpinionRepository extends EntityRepository
             ->setParameter('user', $user);
 
         return (int) $query->getQuery()->getSingleScalarResult();
-    }
-
-    public function countPublishedContributionsByStep(ConsultationStep $cs): int
-    {
-        $query = $this->createQueryBuilder('o');
-        $query
-            ->select('COUNT(o.id)')
-            ->andWhere('o.step = :cs')
-            ->andWhere('o.published = 1')
-            ->andWhere('o.trashedAt IS NULL')
-            ->setParameter('cs', $cs);
-
-        return (int) $query->getQuery()->getSingleScalarResult();
-    }
-
-    public function countTrashedContributionsByStep(ConsultationStep $cs): int
-    {
-        $query = $this->createQueryBuilder('o');
-        $query
-            ->select('COUNT(o.id)')
-            ->andWhere('o.step = :cs')
-            ->andWhere('o.published = 1')
-            ->andWhere('o.trashedAt IS NOT NULL')
-            ->setParameter('cs', $cs);
-
-        return (int) $query->getQuery()->getSingleScalarResult();
-    }
-
-    protected function getIsEnabledQueryBuilder($alias = 'o')
-    {
-        return $this->createQueryBuilder($alias)->andWhere($alias . '.published = true');
     }
 }

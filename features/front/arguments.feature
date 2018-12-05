@@ -5,7 +5,7 @@ Feature: Arguments
 
 ## Create in opinion
 
-@database
+@database @javascript
 Scenario: A confirmed user can create an argument in a contribuable opinion
   Given I am logged in as user
   And I go to an opinion
@@ -13,7 +13,7 @@ Scenario: A confirmed user can create an argument in a contribuable opinion
   Then I should see "alert.success.add.argument" in the "#global-alert-box" element
   And I should see my new published argument
 
-@database
+@database @javascript
 Scenario: An unconfirmed user can create an argument in a contribuable opinion
   Given I am logged in as user_not_confirmed
   And I go to an opinion
@@ -21,7 +21,7 @@ Scenario: An unconfirmed user can create an argument in a contribuable opinion
   Then I should see "alert.success.add.argument" in the "#global-alert-box" element
   And I should see my new unpublished argument
 
-@security
+@javascript @security
 Scenario: Can not create an argument in opinion when step is closed
   Given I am logged in as user
   And I go to an opinion in a closed step
@@ -29,7 +29,7 @@ Scenario: Can not create an argument in opinion when step is closed
 
 ## Create in version
 
-@database
+@database @javascript
 Scenario: A confirmed user can create an argument in a contribuable version
   Given I am logged in as user
   And I go to a version
@@ -37,7 +37,7 @@ Scenario: A confirmed user can create an argument in a contribuable version
   Then I should see "alert.success.add.argument" in the "#global-alert-box" element
   And I should see my new published argument
 
-@database
+@database @javascript
 Scenario: An unconfirmed user can create an argument in a contribuable version
   Given I am logged in as user_not_confirmed
   And I go to a version
@@ -45,7 +45,7 @@ Scenario: An unconfirmed user can create an argument in a contribuable version
   Then I should see "alert.success.add.argument" in the "#global-alert-box" element
   And I should see my new unpublished argument
 
-@security
+@javascript @security
 Scenario: Can not create an argument in a version when step is closed
   Given I am logged in as user
   And I go to an opinion version in a closed step
@@ -53,7 +53,7 @@ Scenario: Can not create an argument in a version when step is closed
 
 ## Update in opinion
 
-@database
+@javascript @database
 Scenario: Author of an argument on an opinion looses his votes when updating it
   Given I am logged in as user
   And I go to an opinion
@@ -63,27 +63,27 @@ Scenario: Author of an argument on an opinion looses his votes when updating it
   And my argument should have changed
   And my argument should have lost its votes
 
-@security
+@javascript @security
 Scenario: Author of an argument on an opinion wants to update it without checking the confirm checkbox
   Given I am logged in as user
   And I go to an opinion
   When I edit my argument without confirming my votes lost
   Then I should see "argument.constraints.confirm" in the "#argument-form" element
 
-@security
+@javascript @security
 Scenario: Non author of an argument on an opinion wants to update it
   Given I am logged in as admin
   And I go to an opinion
   Then I should not see the argument edit button
 
-@security
+@javascript @security
 Scenario: Anonymous wants to update an argument on an opinion
   Given I go to an opinion
   Then I should not see the argument edit button
 
 ## Update in version
 
-@database
+@javascript @database
 Scenario: Author of an argument on a version looses his votes when updating it
   Given I am logged in as user
   And I go to a version
@@ -92,27 +92,27 @@ Scenario: Author of an argument on a version looses his votes when updating it
   And my argument should have changed
   And my argument should have lost its votes
 
-@security
+@javascript @security
 Scenario: Author of an argument on a version wants to update it without checking the confirm checkbox
   Given I am logged in as user
   And I go to a version
   When I edit my argument without confirming my votes lost
   Then I should see "argument.constraints.confirm" in the "#argument-form" element
 
-@security
+@javascript @security
 Scenario: Non author of an argument on a version wants to update it
   Given I am logged in as admin
   And I go to a version
   Then I should not see the argument edit button
 
-@security
+@javascript @security
 Scenario: Anonymous wants to update an argument on a version
   Given I go to a version
   Then I should not see the argument edit button
 
 ## Delete from opinion
 
-@security @database
+@javascript @security @database
 Scenario: Author of an argument on an opinion wants to delete it
   Given I am logged in as user
   And I go to an opinion
@@ -121,20 +121,20 @@ Scenario: Author of an argument on an opinion wants to delete it
   Then I should see "alert.success.delete.argument" in the "#global-alert-box" element
   And I should not see my argument anymore
 
-@security
+@javascript @security
 Scenario: Non author of an argument on an opinion wants to delete it
   Given I am logged in as admin
   And I go to an opinion
   Then I should not see the argument delete button
 
-@security
+@javascript @security
 Scenario: Anonymous wants to delete an argument on an opinion
   Given I go to an opinion
   Then I should not see the argument delete button
 
 ## Delete from version
 
-@database
+@javascript @database
 Scenario: Author of an argument on a version wants to delete it
   Given I am logged in as user
   And I go to a version
@@ -143,20 +143,20 @@ Scenario: Author of an argument on a version wants to delete it
   Then I should see "alert.success.delete.argument" in the "#global-alert-box" element
   And I should not see my argument anymore
 
-@security
+@javascript @security
 Scenario: Non author of an argument on a version wants to delete it
   Given I am logged in as admin
   And I go to a version
   Then I should not see the argument delete button
 
-@security
+@javascript @security
 Scenario: Anonymous wants to delete an argument on a version
   Given I go to a version
   Then I should not see the argument delete button
 
 ## Votes from opinion
 
-@database
+@javascript @database
 Scenario: Logged in user wants to vote for an argument on an opinion then delete his vote
   Given I am logged in as admin
   And I go to an opinion
@@ -165,19 +165,19 @@ Scenario: Logged in user wants to vote for an argument on an opinion then delete
   When I delete my vote on the argument
   Then I should see "alert.success.delete.vote" in the "#global-alert-box" element
 
-@security
+@javascript @security
 Scenario: Logged in user wants to vote for his own argument on an opinion
   Given I am logged in as user
   And I go to an opinion
   Then the argument vote button should be disabled
 
-@security
+@javascript @security
 Scenario: Logged in user wants to vote for an argument on an opinion in a closed step
   Given I am logged in as user
   And I go to an opinion in a closed step
   Then the argument vote button should be disabled
 
-@security
+@javascript @security
 Scenario: Anonymous user wants to vote for an argument on an opinion
   Given I go to an opinion
   When I click the argument vote button
@@ -185,7 +185,7 @@ Scenario: Anonymous user wants to vote for an argument on an opinion
 
 ## Votes from version
 
-@database
+@javascript @database
 Scenario: Logged in user wants to vote for an argument on a version then delete his vote
   Given I am logged in as admin
   And I go to a version
@@ -194,19 +194,19 @@ Scenario: Logged in user wants to vote for an argument on a version then delete 
   When I delete my vote on the argument
   Then I should see "alert.success.delete.vote" in the "#global-alert-box" element
 
-@security
+@javascript @security
 Scenario: Logged in user wants to vote for his own argument on a version
   Given I am logged in as user
   And I go to a version
   Then the argument vote button should be disabled
 
-@security
+@javascript @security
 Scenario: Logged in user wants to vote for an argument on a version in a closed step
   Given I am logged in as user
   And I go to an opinion version in a closed step
   Then the argument vote button should be disabled
 
-@security
+@javascript @security
 Scenario: Anonymous user wants to vote for an argument on a version
   Given I go to a version
   When I click the argument vote button
@@ -214,7 +214,7 @@ Scenario: Anonymous user wants to vote for an argument on a version
 
 # Reporting
 
-@database
+@javascript @database
 Scenario: Non author of an argument can report it
   Given feature "reporting" is enabled
   And I am logged in as admin

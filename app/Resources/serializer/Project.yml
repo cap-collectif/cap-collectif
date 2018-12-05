@@ -11,8 +11,13 @@ Capco\AppBundle\Entity\Project:
       groups: [Projects, Elasticsearch]
     Author:
       expose: true
-      groups: [Projects, Elasticsearch]
+      groups: [Projects]
       serialized_name: author
+    contributionsCount:
+      expose: true
+      type: integer
+      groups: [Projects]
+      serialized_name: contributionsCount
     participantsCount:
       expose: true
       type: integer
@@ -32,11 +37,6 @@ Capco\AppBundle\Entity\Project:
       type: DateTime
       groups: [Projects, Elasticsearch]
       serialized_name: createdAt
-    publishedAt:
-      expose: true
-      type: DateTime
-      groups: [Projects, Elasticsearch]
-      serialized_name: publishedAt
     updatedAt:
       expose: true
       type: DateTime
@@ -47,10 +47,11 @@ Capco\AppBundle\Entity\Project:
       groups: [Projects]
     themes:
       expose: true
-      groups: [Projects, Elasticsearch]
+      groups: [Projects]
     projectType:
       expose: true
-      groups: [Projects, Elasticsearch]
+      groups: [Projects]
+      serialized_name: projectType
     video:
       expose: true
       groups: [Projects]

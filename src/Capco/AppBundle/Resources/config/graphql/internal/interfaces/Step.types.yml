@@ -3,29 +3,13 @@ Step:
   inherits: [Node]
   config:
     description: 'A step inside a project.'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
+    resolveType: "@=resolver('step_type', [value])"
     # interfaces: [Node]
     fields:
       # TODO remove
       kind:
         description: 'The kind of the step'
         type: 'String!'
-      status:
-        description: 'The status of the step'
-        type: 'StepStatus'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepStatusResolver", [value])'
-      type:
-        description: 'The type of the step'
-        type: 'String'
-      timeless:
-        description: 'Does the step have a end date ?'
-        type: 'Boolean'
-      startAt:
-        description: 'Start date of the step.'
-        type: 'DateTime'
-      endAt:
-        description: 'End date of the step.'
-        type: 'DateTime'
       title:
         description: 'The title of the step.'
         type: 'String!'

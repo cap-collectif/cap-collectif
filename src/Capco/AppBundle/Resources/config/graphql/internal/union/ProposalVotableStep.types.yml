@@ -1,5 +1,5 @@
 ProposalVotableStep:
   type: union
   config:
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
+    resolveType: "@=resolver('step_type', [value])"
     types: [CollectStep, SelectionStep]

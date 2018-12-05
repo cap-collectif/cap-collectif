@@ -1,19 +1,17 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
 import ProjectRestrictedAccess from '../Page/ProjectRestrictedAccess';
-import type { ProjectPreviewCounters_project } from './__generated__/ProjectPreviewCounters_project.graphql';
 
 type Props = {
-  project: ProjectPreviewCounters_project,
+  project: Object,
 };
 
 class ProjectPreviewCounters extends React.Component<Props> {
   getNbCounters = () => {
     const { project } = this.props;
-    const { votesCount } = project;
+    const votesCount = project.votesCount;
     let nb = 2;
     nb += votesCount ? 1 : 0;
     return nb;
@@ -24,7 +22,7 @@ class ProjectPreviewCounters extends React.Component<Props> {
     return (
       <TagsList>
         <ProjectPreviewCounter
-          value={project.contributionsCount ? project.contributionsCount : 0}
+          value={project.contributionsCount}
           label="project.preview.counters.contributions"
           showZero
           icon="cap-baloon-1"
@@ -48,13 +46,4 @@ class ProjectPreviewCounters extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(ProjectPreviewCounters, {
-  project: graphql`
-    fragment ProjectPreviewCounters_project on Project {
-      id
-      participantsCount
-      contributionsCount
-      votesCount
-    }
-  `,
-});
+export default ProjectPreviewCounters;

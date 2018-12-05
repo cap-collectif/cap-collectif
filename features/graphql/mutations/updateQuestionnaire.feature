@@ -261,7 +261,7 @@ Scenario: GraphQL admin wants to delete first question choice
             title
             type
             ... on MultipleChoiceQuestion {
-              choices(allowRandomize: false) {
+              choices {
                 id
                 title
               }

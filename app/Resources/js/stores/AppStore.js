@@ -5,7 +5,7 @@ import { reducer as formReducer } from 'redux-form';
 import { intlReducer } from 'react-intl-redux';
 import LocalStorageService from '../services/LocalStorageService';
 import { reducer as reportReducer } from '../redux/modules/report';
-import { reducer as projectReducer } from '../redux/modules/project';
+import { reducer as projectReducer, saga as projectSaga } from '../redux/modules/project';
 import {
   reducer as proposalReducer,
   saga as proposalSaga,
@@ -107,6 +107,7 @@ export default function configureStore(initialState: Object): Store {
   );
 
   sagaMiddleware.run(proposalSaga);
+  sagaMiddleware.run(projectSaga);
 
   return store;
 }

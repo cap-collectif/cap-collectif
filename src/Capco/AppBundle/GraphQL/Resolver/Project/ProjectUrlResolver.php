@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Entity\Project;
@@ -29,7 +28,7 @@ class ProjectUrlResolver implements ResolverInterface
         $firstStep = $project->getFirstStep();
         // if no step, so we redirect to projects list page
         if (!$firstStep) {
-            return $this->router->generate('app_project', [], UrlGeneratorInterface::ABSOLUTE_URL);
+            return $this->router->generate('app_project', UrlGeneratorInterface::ABSOLUTE_URL);
         }
         $routeName = 'app_consultation_show_presentation';
         if ($firstStep instanceof CollectStep) {

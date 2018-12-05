@@ -28,20 +28,20 @@ def perf():
 def graphql_schemas(checkSame=False):
     "Generate GraphQL schemas"
     for schema in ['public', 'preview', 'internal']:
-        env.service_command('bin/console graphql:dump-schema --schema ' + schema + ' --no-debug --file schema.'+schema+'.graphql --format graphql', 'application', env.www_app)
+        env.compose('run qarunner bin/console graphql:dump-schema --schema ' + schema + ' --no-debug --file schema.'+schema+'.graphql --format graphql')
     if checkSame:
-        local('if [[ $(git diff -G. --name-only *.graphql | wc -c) -ne 0 ]]; then git --no-pager diff *.graphql && echo "\n\033[31mThe following schemas are not up to date:\033[0m" && git diff --name-only *.graphql && echo "\033[31mYou should run \'yarn generate-graphql-files\' to update your *.graphql files !\033[0m" && exit 1; fi',  capture=False, shell='/bin/bash')
+        local('if [[ $(git diff --name-only *.graphql | wc -c) -ne 0 ]]; then exit 1; fi')
 
 @task(environments=['local', 'ci'])
 def behat(fast_failure='true', profile=False, suite='false', tags='false', timer='true'):
-    "Run Gherkin Tests"
+    "Run Gerhkin Tests"
     env.service_command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', env.www_app)
     if profile:
-        profiles = [profile]
+        jobs = [profile]
     else:
-        profiles = ['api', 'commands', 'e2e']
+        jobs = ['api', 'commands', 'frontend', 'javascript', 'graphql', 'back']
 
-    for job in profiles:
+    for job in jobs:
         command = ('php -d memory_limit=-1 ./bin/behat'
             + ('', ' --log-step-times')[timer != 'false'] 
             + ' -p ' + job 

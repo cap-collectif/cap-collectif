@@ -8,7 +8,7 @@ if [ "$PRODUCTION" ]; then
   # We install vendors with composer
   # We don't use `--no-scripts` or `--no-plugins` because a script in a composer plugin
   # will generate the file vendor/ocramius/package-versions/src/PackageVersions/Versions.php
-  composer install --no-dev --prefer-dist --no-interaction --ignore-platform-reqs --no-progress
+  composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress --apcu-autoloader
 
   echo "Configure simplesamlphp library"
   rm -rf vendor/simplesamlphp/simplesamlphp/config/*
@@ -20,8 +20,8 @@ if [ "$PRODUCTION" ]; then
   echo "Generating GraphQL PHP files…"
   bin/console graphql:compile
 
-  echo "Generating Composer autoload…"
-  composer dump-autoload --no-dev --optimize --apcu
+  # We build bootstrap.php.cache in the `var` directory
+  php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var
 
   # Frontend deps
   yarn install --pure-lockfile --production=false
@@ -41,7 +41,7 @@ else
   echo "Building for development/testing"
   # Symfony deps
   if [ -n "CI" ]; then
-      composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress
+      composer install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress --apcu-autoloader
   else
       composer install --prefer-dist --no-interaction --ignore-platform-reqs
   fi
@@ -56,8 +56,7 @@ else
   echo "Generating GraphQL PHP files…"
   bin/console graphql:compile
   
-  echo "Generating Composer autoload…"
-  composer dump-autoload --optimize --apcu
+  composer dump-autoload
 
   # Frontend deps
   yarn install --pure-lockfile --production=false

@@ -7,19 +7,18 @@ use Capco\AppBundle\Mailer\Message\AdminMessage;
 
 final class CommentUpdateAdminAnonymousMessage extends AdminMessage
 {
-    public static function create(Comment $comment,
-                                  string $recipentEmail,
-                                  string $proposalUrl,
-                                  string $commentAdminUrl,
-                                  string $recipientName = null): self
-    {
+    public static function create(
+        Comment $comment,
+        string $recipentEmail,
+        string $commentUrl,
+        string $commentAdminUrl,
+        string $recipientName = null
+    ): self {
         $message = new self(
             $recipentEmail,
             $recipientName,
             'notification.email.anonymous.comment.update.subject',
-            static::getMySubjectVars(
-                $comment->getAuthorName()
-            ),
+            static::getMySubjectVars($comment->getAuthorName()),
             'notification.email.anonymous.comment.update.body',
             static::getMyTemplateVars(
                 $comment->getAuthorName(),
@@ -27,7 +26,7 @@ final class CommentUpdateAdminAnonymousMessage extends AdminMessage
                 $comment->getUpdatedAt()->format('d/m/Y'),
                 $comment->getUpdatedAt()->format('H:i:s'),
                 $comment->getBodyTextExcerpt(),
-                $proposalUrl,
+                $commentUrl,
                 $commentAdminUrl
             )
         );
@@ -41,7 +40,7 @@ final class CommentUpdateAdminAnonymousMessage extends AdminMessage
         string $date,
         string $time,
         string $comment,
-        string $proposalUrl,
+        string $commentUrl,
         string $proposalAdminUrl
     ): array {
         return [
@@ -50,14 +49,13 @@ final class CommentUpdateAdminAnonymousMessage extends AdminMessage
             '%date%' => $date,
             '%time%' => $time,
             '%comment%' => self::escape($comment),
-            '%proposalUrl%' => $proposalUrl,
+            '%proposalUrl%' => $commentUrl,
             '%commentUrlBack%' => $proposalAdminUrl,
         ];
     }
 
-    private static function getMySubjectVars(
-        string $username
-    ): array {
+    private static function getMySubjectVars(string $username): array
+    {
         return [
             '%username%' => self::escape($username),
         ];

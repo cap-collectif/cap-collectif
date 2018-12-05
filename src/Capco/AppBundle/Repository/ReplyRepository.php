@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
@@ -24,7 +23,6 @@ class ReplyRepository extends EntityRepository
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.id = :questionnaireId')
             ->setParameter('questionnaireId', $questionnaire->getId());
-
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -35,7 +33,6 @@ class ReplyRepository extends EntityRepository
             ->andWhere('reply.author = :user')
             ->setParameter('questionnaire', $questionnaire)
             ->setParameter('user', $user);
-
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -55,7 +52,6 @@ class ReplyRepository extends EntityRepository
             ->select('count(DISTINCT r)')
             ->andWhere('r.author = :author')
             ->setParameter('author', $user);
-
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -93,7 +89,6 @@ class ReplyRepository extends EntityRepository
             ->leftJoin('reply.author', 'author')
             ->andWhere('reply.questionnaire = :questionnaire')
             ->setParameter('questionnaire', $questionnaire);
-
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -111,7 +106,6 @@ class ReplyRepository extends EntityRepository
                 }, $project->getRealSteps())
             )
             ->setParameter('author', $author);
-
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -124,18 +118,6 @@ class ReplyRepository extends EntityRepository
             ->andWhere('reply.author = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function countRepliesByStep(QuestionnaireStep $step): int
-    {
-        $qb = $this->getPublishedQueryBuilder()
-            ->select('COUNT(DISTINCT reply)')
-            ->leftJoin('reply.questionnaire', 'questionnaire')
-            ->andWhere('questionnaire.step = :step')
-            ->setParameter('step', $step);
-
         return $qb->getQuery()->getSingleScalarResult();
     }
 

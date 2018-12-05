@@ -15,7 +15,7 @@
     "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build -p && webpack --config webpack/webpack.prod.client.js",
     "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack/webpack.config.serverside.legacy.js",
     "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack/webpack.config.serverside.legacy.js",
-    "build-relay-schema": "relay-compiler --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums",
+    "build-relay-schema": "relay-compiler --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums --quiet",
     "build-relay-schema:watch": "relay-compiler --watch --src ./app/Resources/js --schema schema.internal.graphql --noFutureProofEnums",
     "download-translations": "bin/console translation:download --no-debug",
     "update-js-translation": "node --experimental-modules ./xlf2-to-json.mjs",

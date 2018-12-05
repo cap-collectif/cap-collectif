@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectsList /> should render correctly 1`] = `
+<div
+  className="d-flex flex-wrap"
+>
+  <ProjectPreview
+    key="0"
+    project={
+      Object {
+        "hasParticipativeStep": false,
+        "title": "project without participative step",
+      }
+    }
+  />
+  <ProjectPreview
+    key="1"
+    project={
+      Object {
+        "hasParticipativeStep": true,
+        "title": "project with participative step",
+      }
+    }
+  />
+</div>
+`;

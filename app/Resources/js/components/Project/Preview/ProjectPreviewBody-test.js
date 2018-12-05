@@ -2,187 +2,183 @@
 /* eslint-env jest */
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { $refType, $fragmentRefs } from '../../../mocks';
 
-import ProjectPreviewBody from './ProjectPreviewBody';
-
-const defaultStep = {
-  startAt: null,
-  endAt: null,
-  timeless: null,
-  type: null,
-  url: '',
-};
-
-const defaultClosedStep = {
-  ...defaultStep,
-  title: 'Closed step',
-  status: 'ENDED',
-};
-
-const closedStepComplete1 = {
-  ...defaultClosedStep,
-  startAt: '2016-12-20T09:00:24+01:00',
-  endAt: '2016-12-28T09:00:24+01:00',
-  type: 'presentation',
-  url: 'http://capco/closed-step1/show-link',
-};
-
-const closedStepComplete2 = {
-  ...defaultClosedStep,
-  title: 'closed step 2',
-  status: 'ENDED',
-  startAt: '2017-01-20T09:00:24+01:00',
-  endAt: '2017-01-28T09:00:24+01:00',
-  type: 'presentation',
-  url: 'http://capco/closed-step2/show-link',
-};
-
-const openStep1 = {
-  ...defaultStep,
-  title: 'Open step 1',
-  status: 'OPENED',
-  startAt: '2017-01-10T09:00:24+01:00',
-  endAt: '2017-11-25T09:00:24+01:00',
-  timeless: false,
-  type: 'collect',
-  url: 'http://capco/step1/show-link',
-};
-
-const openStep2 = {
-  ...defaultStep,
-  title: 'Open step 2',
-  status: 'OPENED',
-  startAt: '2017-11-20T09:00:24+01:00',
-  endAt: '2018-11-28T09:00:24+01:00',
-  timeless: false,
-  type: 'collect',
-  url: 'http://capco/step2/show-link',
-};
-
-const defaultFutureStep = {
-  ...defaultStep,
-  title: 'Future step',
-  status: 'FUTURE',
-};
-
-const futureStep1 = {
-  ...defaultStep,
-  title: 'Future step 1',
-  status: 'FUTURE',
-  type: 'presentation',
-  startAt: '2017-12-20T09:00:24+01:00',
-  endAt: '2017-12-28T09:00:24+01:00',
-  url: 'http://capco/future-step1/show-link',
-};
-
-const futureStep2 = {
-  ...defaultStep,
-  title: 'Future step 2',
-  status: 'FUTURE',
-  startAt: '2018-01-20T09:00:24+01:00',
-  endAt: '2018-01-28T09:00:24+01:00',
-  type: 'presentation',
-  url: 'http://capco/future-step2/show-link',
-};
+import { ProjectPreviewBody } from './ProjectPreviewBody';
 
 const firstTest = {
   project: {
-    $refType,
-    $fragmentRefs,
-    id: '1',
     title: 'Name of my project',
-    links: { external: null },
+    _links: { show: 'http://capco/show-link' },
     hasParticipativeStep: true,
-    steps: [defaultClosedStep, openStep2, openStep1, defaultFutureStep],
-    url: 'http://capco/show-link',
+    steps: [
+      { title: 'Closed step', status: 'closed' },
+      {
+        title: 'Open step 2',
+        status: 'open',
+        startAt: '2017-11-20T09:00:24+01:00',
+        endAt: '2018-11-28T09:00:24+01:00',
+        timeless: false,
+        type: 'collect',
+        _links: { show: 'http://capco/step2/show-link' },
+      },
+      {
+        title: 'Open step 1',
+        status: 'open',
+        startAt: '2017-01-10T09:00:24+01:00',
+        endAt: '2017-11-25T09:00:24+01:00',
+        timeless: false,
+        type: 'collect',
+        _links: { show: 'http://capco/step1/show-link' },
+      },
+      { title: 'Future step', status: 'future' },
+    ],
   },
 };
 
 const secondTest = {
   project: {
-    $refType,
-    $fragmentRefs,
-    id: '1',
     title: 'Name of my project',
-    links: { external: 'http://capco/external-link' },
-    url: 'http://capco/show-link',
+    _links: { show: 'http://capco/show-link', external: 'http://capco/external-link' },
     hasParticipativeStep: false,
     steps: [
-      defaultClosedStep,
+      { title: 'Closed step', status: 'closed' },
       {
         title: 'Open step',
-        status: 'OPENED',
+        status: 'open',
         startAt: '2017-11-10T09:00:24+01:00',
         endAt: '2017-11-25T09:00:24+01:00',
         timeless: false,
         type: 'presentation',
-        url: 'http://capco/step/show-link',
+        _links: { show: 'http://capco/step/show-link' },
       },
       {
         title: 'timeless step',
-        status: 'OPENED',
+        status: 'open',
         startAt: null,
         endAt: null,
         timeless: true,
         type: 'collect',
-        url: 'http://capco/timeless-step/show-link',
+        _links: { show: 'http://capco/timeless-step/show-link' },
       },
-      defaultFutureStep,
+      { title: 'Future step', status: 'future' },
     ],
   },
 };
 
 const thirdTest = {
   project: {
-    $refType,
-    $fragmentRefs,
-    id: '1',
     title: 'Name of my project',
-    links: { external: null },
-    url: 'http://capco/show-link',
+    _links: { show: 'http://capco/show-link' },
     hasParticipativeStep: false,
-    steps: [futureStep1, futureStep2],
+    steps: [
+      {
+        title: 'Future step 2',
+        status: 'future',
+        startAt: '2018-01-20T09:00:24+01:00',
+        endAt: '2018-01-28T09:00:24+01:00',
+        type: 'presentation',
+        _links: { show: 'http://capco/future-step2/show-link' },
+      },
+      {
+        title: 'Future step 1',
+        status: 'future',
+        type: 'presentation',
+        startAt: '2017-12-20T09:00:24+01:00',
+        endAt: '2017-12-28T09:00:24+01:00',
+        _links: { show: 'http://capco/future-step1/show-link' },
+      },
+    ],
   },
 };
 
 const fourthTest = {
   project: {
-    $refType,
-    $fragmentRefs,
-    id: '1',
     title: 'Name of my project',
-    links: { external: null },
-    url: 'http://capco/show-link',
+    _links: { show: 'http://capco/show-link' },
     hasParticipativeStep: false,
-    steps: [closedStepComplete1, closedStepComplete2],
+    steps: [
+      {
+        title: 'closed step 1',
+        status: 'closed',
+        startAt: '2016-12-20T09:00:24+01:00',
+        endAt: '2016-12-28T09:00:24+01:00',
+        type: 'presentation',
+        _links: { show: 'http://capco/closed-step1/show-link' },
+      },
+      {
+        title: 'closed step 2',
+        status: 'closed',
+        startAt: '2017-01-20T09:00:24+01:00',
+        endAt: '2017-01-28T09:00:24+01:00',
+        type: 'presentation',
+        _links: { show: 'http://capco/closed-step2/show-link' },
+      },
+    ],
   },
   hasSecondTitle: true,
 };
 
 const fifthTest = {
   project: {
-    $refType,
-    $fragmentRefs,
-    id: '1',
     title: 'Name of my project',
-    links: { external: null },
-    url: 'http://capco/show-link',
+    _links: { show: 'http://capco/show-link' },
     hasParticipativeStep: true,
-    steps: [defaultClosedStep, openStep2, openStep1, defaultFutureStep],
+    steps: [
+      { title: 'Closed step', status: 'closed' },
+      {
+        title: 'Open step 2',
+        status: 'open',
+        startAt: '2017-11-20T09:00:24+01:00',
+        endAt: '2018-11-28T09:00:24+01:00',
+        timeless: false,
+        type: 'collect',
+        _links: { show: 'http://capco/step2/show-link' },
+      },
+      {
+        title: 'Open step 1',
+        status: 'open',
+        startAt: '2017-01-10T09:00:24+01:00',
+        endAt: '2017-11-26T09:00:24+01:00',
+        timeless: false,
+        type: 'presentation',
+        _links: { show: 'http://capco/step1/show-link' },
+      },
+      { title: 'Future step', status: 'future' },
+    ],
   },
 };
 
 const sixthTest = {
   project: {
-    $refType,
-    $fragmentRefs,
-    id: '1',
     title: 'Name of my project',
-    links: { external: null },
-    url: 'http://capco/show-link',
+    _links: { show: 'http://capco/show-link' },
     hasParticipativeStep: false,
-    steps: [closedStepComplete1, closedStepComplete2, futureStep1],
+    steps: [
+      {
+        title: 'closed step 1',
+        status: 'closed',
+        startAt: '2016-12-20T09:00:24+01:00',
+        endAt: '2016-12-28T09:00:24+01:00',
+        type: 'presentation',
+        _links: { show: 'http://capco/closed-step1/show-link' },
+      },
+      {
+        title: 'closed step 2',
+        status: 'closed',
+        startAt: '2017-01-20T09:00:24+01:00',
+        endAt: '2017-01-28T09:00:24+01:00',
+        type: 'presentation',
+        _links: { show: 'http://capco/closed-step2/show-link' },
+      },
+      {
+        title: 'future step',
+        status: 'future',
+        startAt: '2018-01-20T09:00:24+01:00',
+        endAt: '2018-01-28T09:00:24+01:00',
+        type: 'presentation',
+        _links: { show: 'http://capco/closed-step2/show-link' },
+      },
+    ],
   },
 };
 

@@ -14,30 +14,135 @@ exports[`<ProjectPreview /> should render correctly project with participative s
     className="project-preview"
     id="project-preview-project1"
   >
-    <ForwardRef(Relay(ProjectType))
+    <ProjectCover
       project={
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
+          "hasParticipativeStep": true,
           "id": "project1",
+          "title": "project with participative step",
         }
       }
     />
-    <ForwardRef(Relay(ProjectCover))
+    <ProjectPreviewBody
       project={
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
+          "hasParticipativeStep": true,
           "id": "project1",
+          "title": "project with participative step",
         }
       }
     />
-    <ForwardRef(Relay(ProjectPreviewBody))
+  </CardContainer>
+</Col>
+`;
+
+exports[`<ProjectPreview /> should render correctly project without participative step (all projects have not participative steps) 1`] = `
+<Col
+  bsClass="col"
+  className="d-flex"
+  componentClass="div"
+  lg={3}
+  md={4}
+  sm={6}
+  xs={12}
+>
+  <CardContainer
+    className="project-preview"
+    id="project-preview-project1"
+  >
+    <ProjectType
       project={
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
+          "hasParticipativeStep": false,
           "id": "project1",
+          "projectType": Object {
+            "color": "#337ab7",
+            "title": "presentation",
+          },
+          "title": "project without participative step 2",
+        }
+      }
+    />
+    <ProjectCover
+      project={
+        Object {
+          "hasParticipativeStep": false,
+          "id": "project1",
+          "projectType": Object {
+            "color": "#337ab7",
+            "title": "presentation",
+          },
+          "title": "project without participative step 2",
+        }
+      }
+    />
+    <ProjectPreviewBody
+      project={
+        Object {
+          "hasParticipativeStep": false,
+          "id": "project1",
+          "projectType": Object {
+            "color": "#337ab7",
+            "title": "presentation",
+          },
+          "title": "project without participative step 2",
+        }
+      }
+    />
+  </CardContainer>
+</Col>
+`;
+
+exports[`<ProjectPreview /> should render correctly project without participative step 1`] = `
+<Col
+  bsClass="col"
+  className="d-flex"
+  componentClass="div"
+  lg={3}
+  md={4}
+  sm={6}
+  xs={12}
+>
+  <CardContainer
+    className="project-preview"
+    id="project-preview-project1"
+  >
+    <ProjectType
+      project={
+        Object {
+          "hasParticipativeStep": false,
+          "id": "project1",
+          "projectType": Object {
+            "color": "#337ab7",
+            "title": "presentation",
+          },
+          "title": "project without participative step",
+        }
+      }
+    />
+    <ProjectCover
+      project={
+        Object {
+          "hasParticipativeStep": false,
+          "id": "project1",
+          "projectType": Object {
+            "color": "#337ab7",
+            "title": "presentation",
+          },
+          "title": "project without participative step",
+        }
+      }
+    />
+    <ProjectPreviewBody
+      project={
+        Object {
+          "hasParticipativeStep": false,
+          "id": "project1",
+          "projectType": Object {
+            "color": "#337ab7",
+            "title": "presentation",
+          },
+          "title": "project without participative step",
         }
       }
     />

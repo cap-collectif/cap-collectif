@@ -86,7 +86,7 @@ export default createFragmentContainer(
       id
       questions {
         id
-        ...responsesHelper_adminQuestion @relay(mask: false)
+        ...responsesHelper_question @relay(mask: false)
       }
     }
   `,

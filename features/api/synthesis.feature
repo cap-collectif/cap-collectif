@@ -1141,7 +1141,7 @@ Scenario: After commenting an element, there should be a 'comment' log
 Scenario: After updating an opinion, I want to get the updated synthesis
   Given I am logged in to api as admin
   And there is a synthesis with id "48" based on consultation step "cstep2"
-  And I wait 2 seconds
+  And I do nothing for 2 seconds
   When I update opinion "51" with values:
     | title | Je suis le nouveau titre |
   And I send a GET request to "api/syntheses/48/updated"
