@@ -2113,8 +2113,8 @@ type MultipleChoiceQuestion implements Question {
     last: Int
   ): ResponseConnection!
   choices(
-    # Randomize the order of the choices.
-    randomize: Boolean
+    # If the question has `randomQuestionChoices: true` will return choices in a random order.
+    allowRandomize: Boolean! = false
   ): [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
   randomQuestionChoices: Boolean!
