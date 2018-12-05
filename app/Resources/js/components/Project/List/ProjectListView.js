@@ -99,7 +99,7 @@ export default createRefetchContainer(
       $count: Int
       $cursor: String
       $theme: ID
-      $orderBy: ProjectOrder
+      $orderBy: ProjectOrder!
       $type: ID
       $term: String
     ) {

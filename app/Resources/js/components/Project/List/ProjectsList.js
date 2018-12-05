@@ -55,7 +55,7 @@ class ProjectsList extends React.Component<Props> {
               $count: Int
               $cursor: String
               $theme: ID
-              $orderBy: ProjectOrder
+              $orderBy: ProjectOrder!
               $type: ID
               $term: String
             ) {
