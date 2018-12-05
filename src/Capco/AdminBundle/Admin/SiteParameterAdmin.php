@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\SiteParameter;
@@ -127,7 +128,8 @@ class SiteParameterAdmin extends Admin
             $formMapper->add('value', ChoiceType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'choices' => ['1' => 'global.enabled', '0' => 'global.disabled'],
+                'translation_domain' => 'CapcoAppBundle',
+                'choices' => ['global.enabled' => '1', 'global.disabled' => '0'],
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif (
