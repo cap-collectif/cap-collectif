@@ -12,7 +12,7 @@ final class ElasticsearchHelper
      */
     public static function debugQuery(Query $query, bool $asYaml = false): ?string
     {
-        $debug = ['query' => $query->getQuery()->toArray(), 'sort' => $query->getParam('sort')];
+        $debug = $query->hasParam('sort') ? ['query' => $query->getQuery()->toArray(), 'sort' => $query->getParam('sort')] :  ['query' => $query->getQuery()->toArray()];
 
         if (false === $asYaml) {
             return json_encode($debug, JSON_PRETTY_PRINT);
