@@ -24,7 +24,7 @@ class ProjectPreviewCounters extends React.Component<Props> {
     return (
       <TagsList>
         <ProjectPreviewCounter
-          value={project.contributionsCount}
+          value={project.contributionsCount ? project.contributionsCount : 0}
           label="project.preview.counters.contributions"
           showZero
           icon="cap-baloon-1"

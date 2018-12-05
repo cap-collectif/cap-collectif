@@ -139,7 +139,7 @@ twig:
     # Register here any services accessibles in templates
     proposalPublicationResolver: '@Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalPublicationStatusResolver'
     replyPublicationStatusResolver: '@Capco\AppBundle\GraphQL\Resolver\Reply\ReplyPublicationStatusResolver'
-    contributionResolver: '@Capco\AppBundle\Resolver\ContributionResolver'
+    projectContributionResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributionResolver'
     jwtManager: '@lexik_jwt_authentication.jwt_manager'
     publicApiKeyRepo: '@Capco\AppBundle\Repository\PublicApiTokenRepository'
   paths:

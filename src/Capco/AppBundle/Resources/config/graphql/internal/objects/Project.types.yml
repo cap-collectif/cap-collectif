@@ -21,6 +21,7 @@ Project:
         type: 'Int!'
       contributionsCount:
         type: 'Int!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", [value])'
       votesCount:
         type: 'Int!'
       hasParticipativeStep:

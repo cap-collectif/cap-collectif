@@ -72,7 +72,7 @@ export default createPaginationContainer(
           count: { type: "Int", defaultValue: 50 }
           cursor: { type: "String", defaultValue: null }
           theme: { type: "ID" }
-          orderBy: { type: "ProjectOrder!" }
+          orderBy: { type: "ProjectOrder" }
           type: { type: "ID" }
           term: { type: "String" }
         ) {
@@ -121,7 +121,7 @@ export default createPaginationContainer(
         $count: Int
         $cursor: String
         $theme: ID
-        $orderBy: ProjectOrder!
+        $orderBy: ProjectOrder
         $type: ID
         $term: String
       ) {

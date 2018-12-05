@@ -11,8 +11,8 @@ PreviewQuery:
         argsBuilder: 'Relay::Connection'
         args:
           orderBy:
-            type: 'ProjectOrder!'
-            defaultValue: { field: POPULAR, direction: DESC }
+            type: 'ProjectOrder'
+            defaultValue: { field: LATEST, direction: DESC }
           term:
             type: 'String'
             description: 'If non-null, projects with the given string to look for.'
