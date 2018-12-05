@@ -8,6 +8,7 @@ application:
     - '8181:8181'
     - '8686:8686'
   environment:
+    TERM: xterm
     SYMFONY_DATABASE_HOST: database
     SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
     SYMFONY_ELASTICSEARCH_HOST: elasticsearch

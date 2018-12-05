@@ -10,7 +10,7 @@ Scenario: GraphQL client wants to see the ranking of the choices answered
         ... on Questionnaire {
           questions {
             ... on MultipleChoiceQuestion {
-              choices {
+              choices(allowRandomize: false) {
                 title
                 ranking {
                   position

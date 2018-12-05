@@ -28,9 +28,9 @@ def perf():
 def graphql_schemas(checkSame=False):
     "Generate GraphQL schemas"
     for schema in ['public', 'preview', 'internal']:
-        env.compose('run qarunner bin/console graphql:dump-schema --schema ' + schema + ' --no-debug --file schema.'+schema+'.graphql --format graphql')
+        env.service_command('bin/console graphql:dump-schema --schema ' + schema + ' --no-debug --file schema.'+schema+'.graphql --format graphql', 'application', env.www_app)
     if checkSame:
-        local('if [[ $(git diff --name-only *.graphql | wc -c) -ne 0 ]]; then exit 1; fi')
+        local('if [[ $(git diff -G. --name-only *.graphql | wc -c) -ne 0 ]]; then git --no-pager diff *.graphql && echo "\n\033[31mThe following schemas are not up to date:\033[0m" && git diff --name-only *.graphql && echo "\033[31mYou should run \'yarn generate-graphql-files\' to update your *.graphql files !\033[0m" && exit 1; fi',  capture=False, shell='/bin/bash')
 
 @task(environments=['local', 'ci'])
 def behat(fast_failure='true', profile=False, suite='false', tags='false', timer='true'):

@@ -4,8 +4,7 @@ Publishable:
     - Node
   config:
     description: 'Entities that can be published.'
-    resolveType:
-      '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableTypeResolver", [value])'
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableTypeResolver", [value])'
     fields:
       published:
         type: 'Boolean!'
@@ -22,5 +21,4 @@ Publishable:
       notPublishedReason:
         type: 'NotPublishedReason'
         description: 'Reason that the entity is not published.'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", [value])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", [value])'
