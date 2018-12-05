@@ -350,7 +350,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
           componentClass="div"
         >
           <FormattedMessage
-            id="proposal.suggest_header"
+            id="question.suggest_header"
             values={
               Object {
                 "matches": 0,

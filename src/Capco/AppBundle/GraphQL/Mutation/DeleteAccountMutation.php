@@ -11,6 +11,7 @@ use Capco\MediaBundle\Entity\Media;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\AbstractVote;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,7 +25,10 @@ use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Translation\TranslatorInterface;
+use Sonata\MediaBundle\Provider\MediaProviderInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 class DeleteAccountMutation implements MutationInterface
 {
@@ -189,7 +193,6 @@ class DeleteAccountMutation implements MutationInterface
                     $contribution instanceof Opinion ||
                     $contribution instanceof Source ||
                     $contribution instanceof Argument) &&
-                $contribution->getStep() &&
                 $contribution->getStep()->canContribute($user)
             ) {
                 $toDeleteList[] = $contribution;

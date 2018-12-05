@@ -257,7 +257,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
                   name={`${member}.validationRule.number`}
                   type="number"
                   component={component}
-                  normalize={val => parseInt(val, 10)}
+                  normalize={val => (val && !isNaN(val) ? parseInt(val, 10) : null)}
                 />
               )}
             </div>
