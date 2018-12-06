@@ -7,26 +7,27 @@ use Capco\AppBundle\Mailer\Message\AdminMessage;
 
 final class CommentCreateAdminAnonymousMessage extends AdminMessage
 {
-    public static function create(
-        Comment $comment,
-        string $recipentEmail,
-        string $commentUrl,
-        string $commentAdminUrl,
-        string $recipientName = null
-    ): self {
+    public static function create(Comment $comment,
+                                  string $recipentEmail,
+                                  string $proposalUrl,
+                                  string $commentAdminUrl,
+                                  string $recipientName = null): self
+    {
         $message = new self(
             $recipentEmail,
             $recipientName,
-            'notification.email.anonymous_comment.create.subject',
-            static::getMySubjectVars($comment->getAuthorName()),
-            'notification.email.anonymous_comment.create.body',
+            'notification.email.anonymous.comment.create.subject',
+            static::getMySubjectVars(
+                $comment->getAuthorName()
+            ),
+            'notification.email.anonymous.comment.create.body',
             static::getMyTemplateVars(
                 $comment->getAuthorName(),
-                $comment->getRelatedObject() ? $comment->getRelatedObject()->getTitle() : 'none',
+                $comment->getRelatedObject()->getTitle(),
                 $comment->getCreatedAt()->format('d/m/Y'),
                 $comment->getCreatedAt()->format('H:i:s'),
                 $comment->getBodyTextExcerpt(),
-                $commentUrl,
+                $proposalUrl,
                 $commentAdminUrl
             )
         );
@@ -54,8 +55,9 @@ final class CommentCreateAdminAnonymousMessage extends AdminMessage
         ];
     }
 
-    private static function getMySubjectVars(string $username): array
-    {
+    private static function getMySubjectVars(
+        string $username
+    ): array {
         return [
             '%username%' => self::escape($username),
         ];

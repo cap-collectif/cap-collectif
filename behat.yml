@@ -1,34 +1,5 @@
-frontend:
-  extensions:
-    Behat\Symfony2Extension:
-      kernel:
-        env: test
-        debug: false
-    Tonic\Behat\ParallelScenarioExtension: ~
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mailcatchersmtp
-      purge_before_scenario: true
-    SensioLabs\Behat\PageObjectExtension:
-      namespaces:
-        page: [Capco\AppBundle\Behat\Page]
-    Behat\MinkExtension:
-      base_url: 'https://capco.test'
-      sessions:
-        default:
-          symfony2: ~
-    Bex\Behat\StepTimeLoggerExtension:
-      output: [console, csv]
-  suites:
-    front:
-      paths: ['%paths.base%/features/front']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
-      filters:
-        tags: '~@javascript'
-
-javascript:
+# List of profiles
+e2e:
   extensions:
     Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
       url: http://mailcatchersmtp
@@ -42,7 +13,6 @@ javascript:
         page: [Capco\AppBundle\Behat\Page]
     Behat\MinkExtension:
       base_url: 'https://capco.test'
-      # browser_name: firefox
       browser_name: chrome
       sessions:
         default:
@@ -90,15 +60,16 @@ javascript:
         - Alex\MailCatcher\Behat\MailCatcherContext
       filters:
         tags: '@questionnaire&&@javascript'
+    bo:
+      paths: ['%paths.base%/features/back']
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\NavigationContext
+        - Alex\MailCatcher\Behat\MailCatcherContext
 
 commands:
-  formatters:
-    pretty:
-      verbose: true
-      paths: false
-      snippets: true
   extensions:
-    Tonic\Behat\ParallelScenarioExtension: ~
+    # Tonic\Behat\ParallelScenarioExtension: ~
     Behat\Symfony2Extension: ~
     Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
       url: http://mailcatchersmtp
@@ -118,7 +89,7 @@ commands:
 
 api:
   extensions:
-    Tonic\Behat\ParallelScenarioExtension: ~
+    # Tonic\Behat\ParallelScenarioExtension: ~
     Behat\Symfony2Extension: ~
     Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
       url: http://mailcatchersmtp
@@ -126,23 +97,13 @@ api:
     Bex\Behat\StepTimeLoggerExtension:
       output: [console, csv]
   suites:
-    api:
+    rest:
       paths: ['%paths.base%/features/api']
       contexts:
         - Capco\AppBundle\Behat\ApiContext
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Alex\MailCatcher\Behat\MailCatcherContext
-
-graphql:
-  extensions:
-    Behat\Symfony2Extension: ~
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mailcatchersmtp
-      purge_before_scenario: true
-    Bex\Behat\StepTimeLoggerExtension:
-      output: [console, csv]
-  suites:
     graphql:
       paths:
         - '%paths.base%/features/graphql'
@@ -151,36 +112,4 @@ graphql:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\GraphQLContext
         - Capco\AppBundle\Behat\RabbitMQContext
-        - Alex\MailCatcher\Behat\MailCatcherContext
-
-back:
-  extensions:
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mailcatchersmtp
-      purge_before_scenario: true
-    Behat\Symfony2Extension:
-      kernel:
-        env: test
-        debug: false
-    SensioLabs\Behat\PageObjectExtension:
-      namespaces:
-        page: [Capco\AppBundle\Behat\Page]
-    Behat\MinkExtension:
-      base_url: 'https://capco.test'
-      browser_name: chrome
-      sessions:
-        default:
-          selenium2:
-            capabilities:
-              version: ''
-              acceptSslCerts: true
-            wd_host: http://selenium:4444/wd/hub
-    Bex\Behat\StepTimeLoggerExtension:
-      output: [console, csv]
-  suites:
-    javascript:
-      paths: ['%paths.base%/features/back']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\NavigationContext
         - Alex\MailCatcher\Behat\MailCatcherContext

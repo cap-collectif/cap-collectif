@@ -2,7 +2,7 @@
 Feature: Proposal votes
 
 # Votes from selection step page
-@javascript @database @elasticsearch @votes_from_selection_step
+@database @elasticsearch @votes_from_selection_step
 Scenario: Logged in user wants to vote and unvote for a proposal in a selection step
   Given I am logged in as user
   And I go to a selection step with simple vote enabled
@@ -19,7 +19,7 @@ Scenario: Logged in user wants to vote and unvote for a proposal in a selection 
   And I reload the page
   Then the proposal should have 1 votes
 
-@javascript @security @elasticsearch @votes_from_selection_step
+@security @elasticsearch @votes_from_selection_step
 Scenario: Logged in user wants to vote when he has not enough credits left in a selection step
   Given I am logged in as admin
   When I go to a selection step with budget vote enabled
@@ -28,13 +28,13 @@ Scenario: Logged in user wants to vote when he has not enough credits left in a 
   # When I click the proposal "proposal8" vote button
   # And I should see the proposal vote tooltip
 
-@javascript @security @elasticsearch @votes_from_selection_step
+@security @elasticsearch @votes_from_selection_step
 Scenario: Anonymous user wants to vote on a selection step that has budget vote in a selection step
   Given I go to a selection step with budget vote enabled
   When I click the proposal vote button
   Then I should see a "#login-popover" element
 
-@javascript @security @elasticsearch @votes_from_selection_step
+@security @elasticsearch @votes_from_selection_step
 Scenario: Logged in user wants to vote when he has reached limit in a selection step
   Given I am logged in as user
   And "user" has voted for proposal "proposal17" in selection step "selection-avec-vote-budget-limite"
@@ -45,7 +45,7 @@ Scenario: Logged in user wants to vote when he has reached limit in a selection 
   # And I should see the proposal vote limited tooltip
 
 # Votes from proposal page
-@javascript @database @votes_from_proposal
+@database @votes_from_proposal
 Scenario: Logged in user wants to vote and unvote for a proposal
   Given I am logged in as user
   And I go to a proposal
@@ -64,7 +64,7 @@ Scenario: Logged in user wants to vote and unvote for a proposal
   And the proposal should have 1 votes
   And I should not see my vote in the proposal votes list
 
-@javascript @database @votes_from_proposal
+@database @votes_from_proposal
 Scenario: Logged in user wants to vote for a proposal anonymously
   Given I am logged in as user
   And I go to a proposal
@@ -78,13 +78,13 @@ Scenario: Logged in user wants to vote for a proposal anonymously
   And I go to the proposal votes tab
   And I should see my anonymous vote in the proposal votes list
 
-@javascript @security @votes_from_proposal
+@security @votes_from_proposal
 Scenario: Logged in user wants to vote when he has not enough credits left
   Given I am logged in as admin
   When I go to a proposal with budget vote enabled
   Then the proposal vote button must be disabled
 
-@javascript @elasticsearch @database @votes_from_proposal
+@elasticsearch @database @votes_from_proposal
 Scenario: Proposal should stay voted after user refresh the page
   Given I am logged in as user
   And I go to a collect step with vote
@@ -96,18 +96,18 @@ Scenario: Proposal should stay voted after user refresh the page
   Then I go to a collect step with vote
   And I should see "proposal.vote.voted"
 
-@javascript @security @votes_from_proposal
+@security @votes_from_proposal
 Scenario: Anonymous user wants to vote for a proposal that is not votable yet
   Given I go to a proposal not yet votable
   Then the proposal vote button must not be present
 
-@javascript @security @votes_from_proposal
+@security @votes_from_proposal
 Scenario: Anonymous user wants to vote for a proposal that is not votable anymore
   Given I go to a proposal not votable anymore
   Then the proposal vote button must not be present
 
 # Votes page
-@javascript @database
+@database
 Scenario: Logged in user wants to see his votes on a project and remove one
   Given I am logged in as admin
   When I go to the votes details page
@@ -117,7 +117,7 @@ Scenario: Logged in user wants to see his votes on a project and remove one
   And I should see 'project.votes.nb {"num":0}'
   And I should have 2 votes
 
-@javascript @database
+@database
 Scenario: Logged in as user who doesn't full fill requirements and want to vote...
   Given I am logged in as pierre
   When I go to a project with requirement condition to vote and ranking
@@ -136,7 +136,7 @@ Scenario: Logged in as user who doesn't full fill requirements and want to vote.
   And the button "global.validate" should not be disabled
   Then I click on button "#confirm-proposal-vote"
 
-@javascript @database
+@database
 Scenario: Logged in user wants to reorder my vote for a project
   Given I am logged in as user
   When I got to the votes details page of project with requirements
@@ -145,7 +145,7 @@ Scenario: Logged in user wants to reorder my vote for a project
   And I wait 2 seconds
   Then I click on button "#confirm-update-votes"
 
-@javascript @database
+@database
 Scenario: Logged in user wants to set a vote as anonymous
   Given I am logged in as user
   When I got to the votes details page of project with requirements
@@ -160,7 +160,7 @@ Scenario: Logged in user wants to set a vote as anonymous
   And I wait 1 seconds
   And I should see "admin.fields.idea_vote.private"
 
-@javascript @database
+@database
 Scenario: Logged in user wants to delete a vote
   Given I am logged in as user
   When I got to the votes details page of project with requirements

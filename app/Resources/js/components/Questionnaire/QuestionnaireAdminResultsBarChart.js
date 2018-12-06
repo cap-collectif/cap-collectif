@@ -38,7 +38,7 @@ const container = injectIntl(QuestionnaireAdminResultsBarChart);
 export default createFragmentContainer(container, {
   multipleChoiceQuestion: graphql`
     fragment QuestionnaireAdminResultsBarChart_multipleChoiceQuestion on MultipleChoiceQuestion {
-      choices {
+      choices(allowRandomize: false) {
         title
         responses {
           totalCount

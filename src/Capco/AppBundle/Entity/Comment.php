@@ -1,8 +1,6 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -137,7 +135,12 @@ abstract class Comment implements
         return null;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    /**
+     * Get createdAt.
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
@@ -149,7 +152,12 @@ abstract class Comment implements
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    /**
+     * Get updatedAt.
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
@@ -161,12 +169,17 @@ abstract class Comment implements
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor()
     {
         return $this->Author;
     }
 
-    public function setAuthor(User $Author): self
+    /**
+     * @param User $Author
+     *
+     * @return $this
+     */
+    public function setAuthor($Author)
     {
         $this->Author = $Author;
         $this->setPinned($Author && $Author->isVip() && !$this->parent);
@@ -179,7 +192,10 @@ abstract class Comment implements
         return $this->parent;
     }
 
-    public function setParent(?self $parent): self
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent)
     {
         $this->parent = $parent;
         $this->setPinned($this->pinned && !$parent);
@@ -187,48 +203,74 @@ abstract class Comment implements
         return $this;
     }
 
-    public function getAuthorName(): ?string
+    /**
+     * @return mixed
+     */
+    public function getAuthorName()
     {
         return $this->authorName;
     }
 
-    public function setAuthorName(string $authorName): self
+    /**
+     * @param mixed $authorName
+     */
+    public function setAuthorName($authorName)
     {
         $this->authorName = $authorName;
 
         return $this;
     }
 
-    public function getAuthorEmail(): string
+    /**
+     * @return mixed
+     */
+    public function getAuthorEmail()
     {
         return $this->authorEmail;
     }
 
-    public function setAuthorEmail(string $authorEmail): self
+    /**
+     * @param mixed $authorEmail
+     */
+    public function setAuthorEmail($authorEmail)
     {
         $this->authorEmail = $authorEmail;
 
         return $this;
     }
 
-    public function getAuthorIp(): string
+    /**
+     * @return mixed
+     */
+    public function getAuthorIp()
     {
         return $this->authorIp;
     }
 
-    public function setAuthorIp(string $authorIp): self
+    /**
+     * @param mixed $authorIp
+     */
+    public function setAuthorIp($authorIp)
     {
         $this->authorIp = $authorIp;
 
         return $this;
     }
 
-    public function getAnswers(): Collection
+    /**
+     * @return ArrayCollection
+     */
+    public function getAnswers()
     {
         return $this->answers;
     }
 
-    public function addAnswer(self $answer): self
+    /**
+     * @param $answer
+     *
+     * @return $this
+     */
+    public function addAnswer($answer)
     {
         if (!$this->answers->contains($answer)) {
             $this->answers->add($answer);
@@ -237,19 +279,32 @@ abstract class Comment implements
         return $this;
     }
 
-    public function removeAnswer(self $answer): self
+    /**
+     * @param $answer
+     *
+     * @return $this
+     */
+    public function removeAnswer($answer)
     {
         $this->answers->removeElement($answer);
 
         return $this;
     }
 
-    public function getReports(): ?Collection
+    /**
+     * @return string
+     */
+    public function getReports()
     {
         return $this->Reports;
     }
 
-    public function addReport(Reporting $report): self
+    /**
+     * @param Reporting $report
+     *
+     * @return $this
+     */
+    public function addReport(Reporting $report)
     {
         if (!$this->Reports->contains($report)) {
             $this->Reports->add($report);
@@ -258,7 +313,12 @@ abstract class Comment implements
         return $this;
     }
 
-    public function removeReport(Reporting $report): self
+    /**
+     * @param Reporting $report
+     *
+     * @return $this
+     */
+    public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
 
@@ -267,7 +327,12 @@ abstract class Comment implements
 
     // ************************ Custom methods *********************************
 
-    public function userHasReport(User $user = null): bool
+    /**
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function userHasReport(User $user = null)
     {
         if (null !== $user) {
             foreach ($this->Reports as $report) {
@@ -297,31 +362,40 @@ abstract class Comment implements
         return $this->isPublished() && !$this->isTrashed();
     }
 
-    public function removeCommentFromRelatedObject(): void
+    public function removeCommentFromRelatedObject()
     {
-        if ($this->getRelatedObject()) {
-            $this->getRelatedObject()->removeComment($this);
-        }
+        $this->getRelatedObject()->removeComment($this);
     }
 
-    public function canDisplayRelatedObject(?User $user = null): bool
+    public function canDisplayRelatedObject($user = null): bool
     {
         if ($this->getRelatedObject() instanceof ProposalComment) {
             return $this->getRelatedObject()->canDisplay($user);
         }
 
-        return $this->getRelatedObject() ? $this->getRelatedObject()->canDisplay($user) : false;
+        return $this->getRelatedObject()->canDisplay($user);
     }
 
-    public function canContributeToRelatedObject(?User $user = null): bool
+    /**
+     * @return bool
+     */
+    public function canContributeToRelatedObject($user = null)
     {
-        return $this->getRelatedObject() ? $this->getRelatedObject()->canDisplay($user) : false;
+        return $this->getRelatedObject()->canContribute($user);
     }
 
     // ********************** Abstract methods **********************************
 
+    /**
+     * @return mixed
+     */
     abstract public function getRelatedObject();
 
+    /**
+     * @param $object
+     *
+     * @return mixed
+     */
     abstract public function setRelatedObject($object);
 
     // ************************* Lifecycle ***********************************
@@ -329,7 +403,7 @@ abstract class Comment implements
     /**
      * @ORM\PreRemove
      */
-    public function deleteComment(): void
+    public function deleteComment()
     {
         $this->removeCommentFromRelatedObject();
     }

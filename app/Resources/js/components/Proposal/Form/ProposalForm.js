@@ -327,6 +327,9 @@ export class ProposalForm extends React.Component<Props, State> {
   render() {
     const { intl, titleValue, proposalForm, features, themes, error, form, responses } = this.props;
     const titleFieldTradKey = proposalForm.isProposalForm ? 'proposal.title' : 'title';
+    const titleSuggestHeader = proposalForm.isProposalForm
+      ? 'proposal.suggest_header'
+      : 'question.suggest_header';
 
     const {
       districtIdsFilteredByAddress,
@@ -369,7 +372,7 @@ export class ProposalForm extends React.Component<Props, State> {
             <Panel.Heading>
               <Panel.Title>
                 <FormattedMessage
-                  id="proposal.suggest_header"
+                  id={titleSuggestHeader}
                   values={{
                     matches: titleSuggestions.length,
                     terms: titleValue ? titleValue.split(' ').length : '',

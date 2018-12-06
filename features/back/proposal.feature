@@ -1,7 +1,7 @@
 @proposal_page_admin
 Feature: Edit a proposal
 
-@database @elasticsearch @javascript
+@database @elasticsearch
 Scenario: Logged in admin wants edit a proposal content
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"

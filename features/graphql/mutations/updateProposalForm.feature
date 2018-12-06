@@ -376,7 +376,7 @@ Scenario: GraphQL client wants to delete the first question choice
             title
             type
             ... on MultipleChoiceQuestion {
-              choices {
+              choices(allowRandomize: false) {
                 id
                 title
                 description

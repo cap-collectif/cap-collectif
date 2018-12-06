@@ -2,7 +2,7 @@
 Feature: Synthesis
 
 # View
-@javascript
+
 Scenario: Anonymous wants to see synthesis view
   Given I go to a synthesis page
   Then I should see the synthesis
@@ -11,41 +11,35 @@ Scenario: Anonymous wants to see synthesis view
 
   # Access
 
-@javascript
 Scenario: User can not access synthesis edition
   Given I am logged in as user
   And I go to a synthesis page
   Then I should not see "synthesis.edit.button"
 
-@javascript
 Scenario: Anonymous can not access synthesis edition
   Given I go to a synthesis page
   Then I should not see "synthesis.edit.button"
 
   # Lists
 
-@javascript
 Scenario: Admin wants to see archived elements list
   Given I am logged in as admin
   And I go to a synthesis edition page
   When I go to the archived inbox
   Then I should see the archived synthesis elements
 
-@javascript
 Scenario: Admin wants to see published elements list
   Given I am logged in as admin
   And I go to a synthesis edition page
   When I go to the published inbox
   Then I should see the published synthesis elements
 
-@javascript
 Scenario: Admin wants to see unpublished elements list
   Given I am logged in as admin
   And I go to a synthesis edition page
   When I go to the unpublished inbox
   Then I should see the unpublished synthesis elements
 
-@javascript
 Scenario: Admin wants to see all elements list
   Given I am logged in as admin
   And I go to a synthesis edition page
@@ -54,7 +48,6 @@ Scenario: Admin wants to see all elements list
 
   # Element details
 
-@javascript
 Scenario: Admin wants to see an element details
   Given I am logged in as admin
   And I go to a synthesis edition page
@@ -64,7 +57,7 @@ Scenario: Admin wants to see an element details
 
   # Actions
 
-@javascript @database
+@database
 Scenario: Admin wants to ignore an element
   Given I am logged in as admin
   And I go to a synthesis edition page
@@ -75,7 +68,7 @@ Scenario: Admin wants to ignore an element
   Then I should see "synthesis.common.success.archive_success"
   #And I should see the synthesis element in the unpublished inbox
 
-@javascript @database
+@database
 Scenario: Admin wants to publish an element without note, comment or parent
   Given I am logged in as admin
   And I go to a synthesis edition page
@@ -86,7 +79,7 @@ Scenario: Admin wants to publish an element without note, comment or parent
   Then I should see "synthesis.common.success.archive_success"
   #And I should see the synthesis element in the archived inbox
 
-@javascript @database
+@database
 Scenario: Admin wants to publish an element with note
   Given I am logged in as admin
   And I go to a synthesis edition page
@@ -101,7 +94,7 @@ Scenario: Admin wants to publish an element with note
   #When I click on a synthesis element
   #Then the synthesis element should have the correct note
 
-@javascript @database
+@database
 Scenario: Admin wants to publish an element with parent
   Given I am logged in as admin
   And I go to a synthesis edition page
@@ -113,7 +106,7 @@ Scenario: Admin wants to publish an element with parent
   Then I should see "synthesis.common.success.archive_success"
   #And I should see the synthesis element in the archived inbox
 
-@javascript @database
+@database
 Scenario: Admin wants to publish an element with comment
   Given I am logged in as admin
   And I go to a synthesis edition page
@@ -125,7 +118,6 @@ Scenario: Admin wants to publish an element with comment
   Then I should see "synthesis.common.success.archive_success"
   #And I should see the synthesis element in the archived inbox
 
-@javascript
 Scenario: Admin wants to divide an element without selecting text
   Given I am logged in as admin
   And I go to a synthesis edition page
@@ -135,7 +127,6 @@ Scenario: Admin wants to divide an element without selecting text
   And I click the create element division button
   Then I should see "synthesis.edition.action.divide.help.message"
 
-@javascript
 Scenario: Admin wants to create an element
   Given I am logged in as admin
   And I go to a synthesis edition page

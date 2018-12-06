@@ -4,6 +4,12 @@ namespace Capco\AppBundle\Utils;
 
 final class Text
 {
+    public static function startsWith(string $haystack, string $needle): bool
+    {
+        // search backwards starting from haystack length characters from the end
+        return $needle === '' || strrpos($haystack, $needle, -strlen($haystack)) !== false;
+    }
+
     public static function escapeHtml($str): string
     {
         return htmlspecialchars($str, ENT_QUOTES | ENT_SUBSTITUTE);
@@ -14,7 +20,7 @@ final class Text
         return substr(
             str_shuffle(
                 str_repeat(
-                    $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                    ($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
                     ceil($length / \strlen($x))
                 )
             ),

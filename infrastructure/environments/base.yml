@@ -8,6 +8,7 @@ application:
     - '8181:8181'
     - '8686:8686'
   environment:
+    TERM: xterm
     SYMFONY_DATABASE_HOST: database
     SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
     SYMFONY_ELASTICSEARCH_HOST: elasticsearch
@@ -80,6 +81,7 @@ chrome:
     # Right now, we maximize screen using `maximizeWindow()`
     # SCREEN_WIDTH: 1920
     # SCREEN_HEIGHT: 1080
+    # SCREEN_DEPTH: 24
     TZ: 'Europe/Paris'
     HUB_HOST: seleniumhub
     HUB_PORT: 4444

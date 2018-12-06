@@ -7,19 +7,20 @@ use Capco\AppBundle\Mailer\Message\AdminMessage;
 
 final class CommentCreateAdminMessage extends AdminMessage
 {
-    public static function create(
-        Comment $comment,
-        string $recipentEmail,
-        string $commentUrl,
-        string $commentAdminUrl,
-        string $authorUrl,
-        string $recipientName = null
-    ): self {
+    public static function create(Comment $comment,
+                                  string $recipentEmail,
+                                  string $proposalUrl,
+                                  string $commentAdminUrl,
+                                  string $authorUrl,
+                                  string $recipientName = null): self
+    {
         $message = new self(
             $recipentEmail,
             $recipientName,
             'notification.email.comment.create.subject',
-            static::getMySubjectVars($comment->getAuthor()->getDisplayName()),
+            static::getMySubjectVars(
+                $comment->getAuthor()->getDisplayName()
+            ),
             'notification.email.comment.create.body',
             static::getMyTemplateVars(
                 $authorUrl,
@@ -28,7 +29,7 @@ final class CommentCreateAdminMessage extends AdminMessage
                 $comment->getCreatedAt()->format('d/m/Y'),
                 $comment->getCreatedAt()->format('H:i:s'),
                 $comment->getBodyTextExcerpt(),
-                $commentUrl,
+                $proposalUrl,
                 $commentAdminUrl
             )
         );
@@ -58,8 +59,9 @@ final class CommentCreateAdminMessage extends AdminMessage
         ];
     }
 
-    private static function getMySubjectVars(string $username): array
-    {
+    private static function getMySubjectVars(
+        string $username
+    ): array {
         return [
             '%username%' => self::escape($username),
         ];

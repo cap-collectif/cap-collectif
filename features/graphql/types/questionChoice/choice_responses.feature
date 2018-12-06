@@ -14,7 +14,7 @@ Scenario: GraphQL client wants question's choices and the number of answers to e
             otherResponses {
               totalCount
             }
-            choices {
+            choices(allowRandomize: false) {
               title
               responses {
                 totalCount
