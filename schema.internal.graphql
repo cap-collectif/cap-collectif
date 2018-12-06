@@ -781,6 +781,21 @@ type CollectStep implements Node & Step & ProposalStep {
   # The kind of the step
   kind: String!
 
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
+
   # The title of the step.
   title: String!
 
@@ -864,6 +879,7 @@ type CollectStep implements Node & Step & ProposalStep {
   votesLimit: Int
   budget: Int
   voteType: ProposalStepVoteType!
+  votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
   open: Boolean!
@@ -1180,6 +1196,21 @@ type Consultation implements Node & Step {
 
   # The kind of the step
   kind: String!
+
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
 
   # The url of the step
   url: String!
@@ -2603,6 +2634,21 @@ type OtherStep implements Step {
   # The kind of the step
   kind: String!
 
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
+
   # The title of the step.
   title: String!
 
@@ -2727,6 +2773,21 @@ type PresentationStep implements Step {
   # The kind of the step
   kind: String!
 
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
+
   # The title of the step.
   title: String!
 
@@ -2793,6 +2854,16 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   adminUrl: URI!
   steps: [Step!]!
   title: String!
+  author: User!
+  video: String
+  cover: Media
+  participantsCount: Int!
+  contributionsCount: Int!
+  votesCount: Int!
+  hasParticipativeStep: Boolean!
+  links: ProjectLinks!
+  type: ProjectType
+  themes: [Theme!]
 
   # A list of contributor associated with the project.
   contributors(
@@ -2828,6 +2899,65 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     # Returns the last `n` elements from the list.
     last: Int
   ): GroupConnection
+}
+
+# A connection to a list of items.
+type ProjectConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ProjectEdge]
+}
+
+# An edge in a connection.
+type ProjectEdge {
+  # The item at the end of the edge.
+  node: Project!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Links
+type ProjectLinks {
+  show: String
+  external: String
+}
+
+# Ways in which project can be ordered.
+input ProjectOrder {
+  # The field in which to order nodes by.
+  field: ProjectOrderField
+
+  # The direction in which to order nodes.
+  direction: OrderDirection
+}
+
+# Ordering projects.
+enum ProjectOrderField {
+  # Allows ordering a list of projects by there number of contributions.
+  POPULAR
+
+  # Allows ordering a list of projects by when they were published.
+  LATEST
+}
+
+# Type of Project
+type ProjectType {
+  # Id of project Type
+  id: ID!
+
+  # Title of project Type
+  title: String!
+
+  # Slug of project Type
+  slug: String!
+
+  # Color of project Type
+  color: String!
 }
 
 # 4 possible values
@@ -3289,6 +3419,21 @@ interface ProposalStep {
   # The kind of the step
   kind: String!
 
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
+
   # The title of the step.
   title: String!
 
@@ -3372,6 +3517,7 @@ interface ProposalStep {
   votesLimit: Int
   budget: Int
   voteType: ProposalStepVoteType!
+  votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
   open: Boolean!
@@ -3519,6 +3665,37 @@ type Query {
     ids: [ID!]!
   ): [Node]!
 
+  # Lookup projects.
+  projects(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+    orderBy: ProjectOrder = {field: LATEST, direction: DESC}
+
+    # If non-null, projects with the given string to look for.
+    term: String
+
+    # If non-null, filter projects by statuses.
+    status: ID
+
+    # If non-null, filter projects by themes
+    theme: ID
+
+    # If non-null, filter projects by types
+    type: ID
+
+    # If non-null, filter projects by author
+    author: ID
+  ): ProjectConnection!
+
   # Lookup events.
   events(
     # Returns the elements in the list that come after the specified cursor.
@@ -3551,6 +3728,8 @@ type Query {
 
   # Get the current registration form
   registrationForm: RegistrationForm
+  projectAuthors: [User!]!
+  projectTypes: [ProjectType!]!
   users(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -3808,6 +3987,21 @@ type QuestionnaireStep implements Node & Step {
   # The kind of the step
   kind: String!
 
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
+
   # The title of the step.
   title: String!
 
@@ -3846,6 +4040,21 @@ type RankingStep implements Step {
 
   # The kind of the step
   kind: String!
+
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
 
   # The title of the step.
   title: String!
@@ -4340,6 +4549,21 @@ type SelectionStep implements Node & Step & ProposalStep {
   # The kind of the step
   kind: String!
 
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
+
   # The title of the step.
   title: String!
 
@@ -4423,6 +4647,7 @@ type SelectionStep implements Node & Step & ProposalStep {
   votesLimit: Int
   budget: Int
   voteType: ProposalStepVoteType!
+  votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
   open: Boolean!
@@ -4766,11 +4991,38 @@ interface Step {
   # The kind of the step
   kind: String!
 
+  # The status of the step
+  status: StepStatus
+
+  # The type of the step
+  type: String
+
+  # Does the step have a end date ?
+  timeless: Boolean
+
+  # Start date of the step.
+  startAt: DateTime
+
+  # End date of the step.
+  endAt: DateTime
+
   # The title of the step.
   title: String!
 
   # The url of the step
   url: String!
+}
+
+# Step statuses
+enum StepStatus {
+  # The step has not started yet.
+  FUTURE
+
+  # The step is currently open.
+  OPENED
+
+  # The step has been closed.
+  ENDED
 }
 
 # 3 possible values for a subscription.
