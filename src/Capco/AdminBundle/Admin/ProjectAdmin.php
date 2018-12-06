@@ -209,9 +209,6 @@ class ProjectAdmin extends CapcoAdmin
                 ->add('participantsCount', null, [
                     'label' => 'admin.fields.project.participantsCount',
                 ])
-                ->add('contributionsCount', null, [
-                    'label' => 'admin.fields.project.contributionsCount',
-                ])
                 ->add('votesCount', null, ['label' => 'admin.fields.project.votesCount']);
         }
 

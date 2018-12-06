@@ -1115,9 +1115,6 @@ EOF;
                     break;
                 }
             }
-        } elseif ('reference' === $this->proposalHeaderMap[$columnName]) {
-            $value = Arr::path($proposal, $this->proposalHeaderMap[$columnName]);
-            $row[] = '"' . $value . '"';
         } else {
             $value = Arr::path($proposal, $this->proposalHeaderMap[$columnName]);
             $row[] = exportUtils::parseCellValue($value);
