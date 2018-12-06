@@ -311,4 +311,46 @@ class ArgumentRepository extends EntityRepository
     ): int {
         return $this->countPublishedBetweenByOpinion($from, $to, $opinionId, Argument::TYPE_FOR);
     }
+
+        public function countPublishedArgumentsByStep(ConsultationStep $cs): int
+    {
+        $qb =  $this->getIsEnabledQueryBuilder();
+        return $qb
+            ->select('count(DISTINCT a.id)')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('a.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->andWhere('a.published = 1 AND a.trashedAt IS NULL')
+              ->andWhere(
+                $qb->expr()->orX(
+                '(a.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs)',
+                '(a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs)'
+                )
+            )
+            ->setParameter('cs', $cs)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+    public function countTrashedArgumentsByStep(ConsultationStep $cs): int
+    {
+        $qb =  $this->getIsEnabledQueryBuilder();
+        return $qb
+            ->select('count(DISTINCT a.id)')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('a.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->andWhere('a.published = 1 AND a.trashedAt IS NOT NULL')
+            ->andWhere(
+            )
+            ->andWhere(
+                $qb->expr()->orX(
+                '(a.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs)',
+                '(a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs)'
+                )
+            )
+            ->setParameter('cs', $cs)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

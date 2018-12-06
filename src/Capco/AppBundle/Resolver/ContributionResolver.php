@@ -3,20 +3,26 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\UserBundle\Repository\UserRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepContributionsResolver;
 
 class ContributionResolver
 {
     protected $repository;
+    protected $stepContributionsResolver;
 
-    public function __construct(UserRepository $repository)
-    {
+    public function __construct(
+        UserRepository $repository,
+        StepContributionsResolver $stepContributionsResolver
+    ) {
         $this->repository = $repository;
+        $this->stepContributionsResolver = $stepContributionsResolver;
     }
 
     // Code may looks ugly but in fact it's highly optimized !
@@ -267,15 +273,10 @@ class ContributionResolver
     {
         $count = 0;
         foreach ($project->getSteps() as $step) {
-            if ($step->getStep()->isConsultationStep()) {
-                $count += $step->getStep()->getContributionsCount();
-            }
-            if ($step->getStep()->isCollectStep()) {
-                $count += $step->getStep()->getProposalsCount();
-            }
-            if ($step->getStep()->isQuestionnaireStep()) {
-                $count += $step->getStep()->getRepliesCount();
-            }
+            $count += $this->stepContributionsResolver->__invoke(
+                $step->getStep(),
+                new Argument(['first' => 0])
+            )->totalCount;
         }
 
         return $count;

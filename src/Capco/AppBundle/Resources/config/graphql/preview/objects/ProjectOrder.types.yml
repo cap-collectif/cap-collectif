@@ -1,0 +1,11 @@
+ProjectOrder:
+  type: input-object
+  config:
+    description: 'Ways in which project can be ordered.'
+    fields:
+      field:
+        type: 'ProjectOrderField'
+        description: 'The field in which to order nodes by.'
+      direction:
+        type: 'OrderDirection'
+        description: 'The direction in which to order nodes.'

@@ -90,4 +90,5 @@ php-cs-fixer
 .php_cs.cache
 
 # divers
-nohup.out
+.nohup
+.out

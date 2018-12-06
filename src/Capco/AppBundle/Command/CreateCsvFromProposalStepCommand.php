@@ -258,7 +258,6 @@ EOF;
         'proposal_votes_id',
         'proposal_votes_createdAt',
         'proposal_votes_publishedAt',
-        'proposal_votes_published',
         'proposal_votes_anonymous',
         'proposal_votes_author_id',
         'proposal_votes_author_username',
@@ -1328,6 +1327,7 @@ EOF;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
         $USER_TYPE_INFOS_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
+        $COMMENT_VOTE_INFOS = self::COMMENT_VOTE_INFOS;
 
         if ($commentsAfter) {
             $commentsAfter = ', after: "' . $commentsAfter . '"';
@@ -1338,6 +1338,8 @@ ${COMMENTS_INFO_FRAGMENT}
 ${AUTHOR_INFOS_FRAGMENT}
 ${REPORTING_INFOS_FRAGMENT}
 ${USER_TYPE_INFOS_FRAGMENT}
+${COMMENT_VOTE_INFOS}
+
 {
   node(id: "${proposalId}") {
     ... on Proposal {

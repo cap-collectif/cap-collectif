@@ -5,7 +5,7 @@ Scenario: Can not sort or filter if feature projects_form is disabled
   Given I visited "projects page"
   Then I should not see "project-theme"
 
-@javascript @elasticsearch
+@elasticsearch
 Scenario: Project can be sorted by published date
   Given feature "projects_form" is enabled
   And I visited "projects page"
@@ -14,7 +14,7 @@ Scenario: Project can be sorted by published date
   And I wait "#project-preview-project1" to appear on current page
   Then "Projet vide" should be before "Dépot avec selection vote budget" for selector ".project-preview .card__title a"
 
-@javascript @elasticsearch
+@elasticsearch
 Scenario: Project can be sorted by contributions number
   Given feature "projects_form" is enabled
   And I visited "projects page"
@@ -22,13 +22,12 @@ Scenario: Project can be sorted by contributions number
   And I wait "#project-preview-project1" to appear on current page
   Then "Croissance, innovation, disruption" should be before "Projet de loi Renseignement" for selector ".project-preview .card__title a"
 
-@javascript
 Scenario: Project can be filtered by theme
   Given feature "themes" is enabled
   And feature "projects_form" is enabled
   And I visited "projects page"
   And I wait ".project-preview" to appear on current page
-  Then I should see 16 ".project-preview" elements
+  Then I should see 17 ".project-preview" elements
   And I select "Transport" from "project-theme"
   And I wait ".project-preview" to appear on current page
   Then I should see 9 ".project-preview" elements
@@ -36,7 +35,6 @@ Scenario: Project can be filtered by theme
   And I should see "Dépot avec selection vote budget"
   And I should not see "Croissance, innovation, disruption"
 
-@javascript
 Scenario: Project can be filtered by theme and sorted by contributions number at the same time
   Given feature "themes" is enabled
   And feature "projects_form" is enabled
@@ -51,7 +49,6 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
   And I should not see "Croissance, innovation, disruption"
   And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".project-preview .card__title a"
 
-@javascript
 Scenario: Project can be filtered by type and sorted by contributions number at the same time
   And feature "projects_form" is enabled
   And I visited "projects page"
@@ -65,7 +62,6 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I should not see "Croissance, innovation, disruption"
   And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".project-preview .card__title a"
 
-@javascript
 Scenario: Project can be filtered by title
   Given feature "projects_form" is enabled
   And I visited "projects page"
@@ -78,7 +74,6 @@ Scenario: Project can be filtered by title
   And I should not see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Projet vide"
 
-@javascript
 Scenario: Presentation step should display correct number of element
   Given feature "calendar" is enabled
   And feature "blog" is enabled
@@ -89,7 +84,6 @@ Scenario: Presentation step should display correct number of element
   Then I should see 2 ".media--news" elements
   And I should see 2 ".event" elements
 
-@javascript
 Scenario: Events menu for project should display correct number of events
   Given feature "calendar" is enabled
   And I visited "consultation page" with:
@@ -99,7 +93,6 @@ Scenario: Events menu for project should display correct number of events
   And I follow "project-events"
   And I should see 4 ".event" elements
 
-@javascript
 Scenario: Posts menu for project should display correct number of posts
   Given feature "blog" is enabled
   And I visited "consultation page" with:
@@ -109,7 +102,6 @@ Scenario: Posts menu for project should display correct number of posts
   And I follow "project-posts"
   And I should see 5 ".media--news" elements
 
-@javascript
 Scenario: Project header should display correct number of votes
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
@@ -122,13 +114,11 @@ Scenario: Can not have access to download if export is disabled
     | stepSlug      | collecte-des-avis-pour-une-meilleur-strategie        |
   Then I should not see "project.download.button" in the "#main" element
 
-@javascript
 Scenario: Can not download a project if export is disabled
   Given I visited "home page"
   When I try to download "projets/strategie-technologique-de-letat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
   Then I should see "error.404.title"
 
-@javascript
 Scenario: Can not access trash if feature is disabled
   Given I am logged in as user
   And I visited "consultation page" with:
@@ -136,13 +126,11 @@ Scenario: Can not access trash if feature is disabled
     | stepSlug    | collecte-des-avis                |
   Then I should not see "project.show.trashed.short_name" in the "#main" element
 
-@javascript
 Scenario: Users can't see privates project
   Given feature "projects_form" is enabled
   And I visited "projects page"
   Then I should not see "Qui doit conquérir le monde ? | Visible par les admins seulement"
 
-@javascript
 Scenario: Anonymous can't access to a private project
   Given feature "projects_form" is enabled
   And I visited "collect page" with:
@@ -153,7 +141,6 @@ Scenario: Anonymous can't access to a private project
   When I follow "error.to_homepage"
   Then I should be redirected to "/"
 
-@javascript
 Scenario: Anonymous try to access to a wrong page
   Given feature "projects_form" is enabled
   And I visited "collect page" with:
@@ -161,7 +148,6 @@ Scenario: Anonymous try to access to a wrong page
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
   Then I should see "error.404.title"
 
-@javascript
 Scenario: user try to access to a project with restricted access
   Given feature "projects_form" is enabled
   When I visited "collect page" with:
@@ -170,7 +156,6 @@ Scenario: user try to access to a project with restricted access
   And I wait ".error-page" to appear on current page
   Then I should see 'restricted-access'
 
-@javascript
 Scenario: Not allowed user can't access to a private project
   Given feature "projects_form" is enabled
   And I am logged in as user
@@ -182,7 +167,6 @@ Scenario: Not allowed user can't access to a private project
   When I follow "error.report"
   Then I should be redirected to "/contact"
 
-@javascript
 Scenario: user try to access to a project with restricted access
   Given feature "projects_form" is enabled
   And I am logged in as user
@@ -192,7 +176,6 @@ Scenario: user try to access to a project with restricted access
   And I wait ".error-page" to appear on current page
   Then I should see 'restricted-access'
 
-@javascript
 Scenario: Super Admin can access to all private projects
   Given feature "projects_form" is enabled
   And I am logged in as super admin
@@ -220,7 +203,6 @@ Scenario: Super Admin can access to all private projects
   And I wait "#proposal__step-page-rendered" to appear on current page
   Then I should see "Un avenir meilleur pour les nains de jardins (custom access)"
 
-@javascript
 Scenario: An admin can't access a private project of an other admin
   Given feature "projects_form" is enabled
   And I am logged in as admin
@@ -229,7 +211,6 @@ Scenario: An admin can't access a private project of an other admin
     | stepSlug    | collecte-des-propositions-pour-la-force             |
   Then I should see 'restricted-access'
 
-@javascript
 Scenario: Admin access to a project accessible for admins only
   Given feature "projects_form" is enabled
   And I am logged in as admin
@@ -240,7 +221,6 @@ Scenario: Admin access to a project accessible for admins only
   Then I should see "Collecte des propositions pour conquérir le monde"
   And I should see "only-visible-by-administrators"
 
-@javascript
 Scenario: Admin access to his project and click to edit it
   Given feature "projects_form" is enabled
   And I am logged in as admin
@@ -253,7 +233,6 @@ Scenario: Admin access to his project and click to edit it
   Then I follow "action_edit"
   And I should be redirected to "/admin/capco/app/project/ProjectAccessibleForMeOnlyByAdmin/edit"
 
-@javascript
 Scenario: Pierre can access to a restricted project to his user group
   Given feature "projects_form" is enabled
   And I am logged in as pierre

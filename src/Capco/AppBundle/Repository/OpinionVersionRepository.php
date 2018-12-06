@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -17,6 +18,7 @@ class OpinionVersionRepository extends EntityRepository
     public function getAllIds()
     {
         $qb = $this->createQueryBuilder('o')->select('o.id');
+
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -30,6 +32,7 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('o.sources', 'source', 'WITH', 'source.trashedStatus IS NULL')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id);
+
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -51,6 +54,7 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('op.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c');
+
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -75,6 +79,7 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('cas.project', 'c')
             ->where('o.id = :id')
             ->setParameter('id', $id);
+
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
@@ -101,18 +106,18 @@ class OpinionVersionRepository extends EntityRepository
 
     public function getByContributionQB(Opinion $opinion)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        return $this->getIsEnabledQueryBuilder()
             ->select('o', '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
             ->andWhere('o.parent = :opinion')
             ->andWhere('o.trashedAt IS NULL')
             ->setParameter('opinion', $opinion);
-        return $qb;
     }
 
     public function countByContribution(Opinion $opinion): int
     {
         $qb = $this->getByContributionQB($opinion);
         $qb->select('COUNT(o.id)');
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -158,6 +163,7 @@ class OpinionVersionRepository extends EntityRepository
         }
 
         $qb->setFirstResult($first)->setMaxResults($limit);
+
         return new Paginator($qb);
     }
 
@@ -190,6 +196,7 @@ class OpinionVersionRepository extends EntityRepository
                 }, $project->getRealSteps())
             )
             ->setParameter('author', $author);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -202,6 +209,7 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('version.author = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -212,6 +220,7 @@ class OpinionVersionRepository extends EntityRepository
             ->select('count(DISTINCT version)')
             ->andWhere('version.author = :author')
             ->setParameter('author', $user);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -271,6 +280,7 @@ class OpinionVersionRepository extends EntityRepository
                 ->getQuery()
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit);
+
             return new Paginator($query);
         }
 
@@ -303,7 +313,36 @@ class OpinionVersionRepository extends EntityRepository
         }
 
         $qb->orderBy('ov.votesCountOk', 'DESC');
+
         return $qb->getQuery()->getResult();
+    }
+
+    public function countPublishedOpinionVersionByStep(ConsultationStep $cs): int
+    {
+        $query = $this->createQueryBuilder('ov');
+        $query
+            ->select('count(DISTINCT ov.id)')
+            ->innerJoin('ov.parent', 'o')
+            ->andWhere('o.step = :cs')
+            ->andWhere('ov.published = 1')
+            ->andWhere('o.trashedAt IS NULL')
+            ->setParameter('cs', $cs);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countTrashedOpinionVersionByStep(ConsultationStep $cs): int
+    {
+        $query = $this->createQueryBuilder('ov');
+        $query
+            ->select('count(DISTINCT ov.id)')
+            ->innerJoin('ov.parent', 'o')
+            ->andWhere('o.step = :cs')
+            ->andWhere('ov.published = 1')
+            ->andWhere('o.trashedAt IS NOT NULL')
+            ->setParameter('cs', $cs);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder($alias = 'o')

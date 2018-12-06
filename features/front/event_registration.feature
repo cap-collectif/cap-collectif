@@ -4,7 +4,7 @@ Feature: Event Registration
 Background:
   Given feature "calendar" is enabled
 
-@database @javascript
+@database
 Scenario: Anonymous user wants to register an event anonymously
   Given I visited eventpage with:
   | slug | event-without-registrations |
@@ -15,7 +15,7 @@ Scenario: Anonymous user wants to register an event anonymously
   And I press "event_registration.create.submit"
   Then I should see "event_registration.listing.anonymous" in the "#eventRegistrationModal" element
 
-@database @javascript
+@database
 Scenario: Anonymous wants to register an event
   Given I visited eventpage with:
   | slug | event-without-registrations |
@@ -25,7 +25,7 @@ Scenario: Anonymous wants to register an event
   And I press "event_registration.create.submit"
   Then I should see "Naruto42" in the "#eventRegistrationModal" element
 
-@database @javascript
+@database
 Scenario: Anonymous wants to register an event with existing email
   Given "naruto42@gmail.com" is registered to event "event-without-registrations"
   Given I visited eventpage with:
@@ -36,7 +36,7 @@ Scenario: Anonymous wants to register an event with existing email
   And I press "event_registration.create.submit"
   Then I should see "event_registration.create.listed_email" in the '#main' element
 
-@javascript @database
+@database
 Scenario: logged user wants to register an event anonymously
   Given I am logged in as user
   And I visited eventpage with:
@@ -45,7 +45,7 @@ Scenario: logged user wants to register an event anonymously
   When I press "event_registration.create.register"
   Then I should see "event_registration.listing.anonymous" in the "#eventRegistrationModal" element
 
-@javascript @database
+@database
 Scenario: logged user wants to register an event
   Given I am logged in as user
   And I visited eventpage with:

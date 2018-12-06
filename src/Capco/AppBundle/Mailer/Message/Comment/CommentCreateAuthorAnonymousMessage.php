@@ -7,27 +7,28 @@ use Capco\AppBundle\Mailer\Message\ExternalMessage;
 
 final class CommentCreateAuthorAnonymousMessage extends ExternalMessage
 {
-    public static function create(
-        Comment $comment,
-        string $recipentEmail,
-        string $commentUrl,
-        string $disableNotificationsUrl,
-        string $notificationsUrl,
-        string $recipientName = null
-    ): self {
+    public static function create(Comment $comment,
+                                  string $recipentEmail,
+                                  string $proposalUrl,
+                                  string $disableNotificationsUrl,
+                                  string $notificationsUrl,
+                                  string $recipientName = null): self
+    {
         $message = new self(
             $recipentEmail,
             $recipientName,
             'notification.email.anonymous_comment.to_user.create.subject',
-            static::getMySubjectVars($comment->getAuthorName()),
+            static::getMySubjectVars(
+                $comment->getAuthorName()
+            ),
             'notification.email.anonymous_comment.to_user.create.body',
             static::getMyTemplateVars(
                 $comment->getAuthorName(),
-                $comment->getRelatedObject() ? $comment->getRelatedObject()->getTitle() : 'none',
+                $comment->getRelatedObject()->getTitle(),
                 $comment->getCreatedAt()->format('d/m/Y'),
                 $comment->getCreatedAt()->format('H:i:s'),
                 $comment->getBodyTextExcerpt(),
-                $commentUrl,
+                $proposalUrl,
                 $disableNotificationsUrl,
                 $notificationsUrl
             )
@@ -42,7 +43,7 @@ final class CommentCreateAuthorAnonymousMessage extends ExternalMessage
         string $date,
         string $time,
         string $comment,
-        string $commentUrl,
+        string $proposalUrl,
         string $disableNotificationsUrl,
         string $notificationsUrl
     ): array {
@@ -52,14 +53,15 @@ final class CommentCreateAuthorAnonymousMessage extends ExternalMessage
             '%date%' => $date,
             '%time%' => $time,
             '%comment%' => self::escape($comment),
-            '%proposalUrl%' => $commentUrl,
+            '%proposalUrl%' => $proposalUrl,
             '%disableNotificationsUrl%' => $disableNotificationsUrl,
             '%notificationsUrl%' => $notificationsUrl,
         ];
     }
 
-    private static function getMySubjectVars(string $username): array
-    {
+    private static function getMySubjectVars(
+        string $username
+    ): array {
         return [
             '%username%' => self::escape($username),
         ];

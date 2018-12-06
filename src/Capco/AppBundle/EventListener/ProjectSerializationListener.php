@@ -2,16 +2,17 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use JMS\Serializer\Serializer;
 use Capco\AppBundle\Entity\Project;
+use Symfony\Component\Routing\Router;
+use JMS\Serializer\SerializationContext;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Resolver\StepResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use JMS\Serializer\SerializationContext;
-use JMS\Serializer\Serializer;
+use Capco\AppBundle\Resolver\ContributionResolver;
 use Sonata\MediaBundle\Twig\Extension\MediaExtension;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class ProjectSerializationListener extends AbstractSerializationListener
 {
@@ -20,12 +21,14 @@ class ProjectSerializationListener extends AbstractSerializationListener
     private $serializer;
     private $helper;
     private $router;
+    private $contributionResolver;
 
     public function __construct(
         StepResolver $stepResolver,
         MediaExtension $mediaExtension,
         Serializer $serializer,
         ProjectHelper $helper,
+        ContributionResolver $contributionResolver,
         Router $router
     ) {
         $this->stepResolver = $stepResolver;
@@ -33,6 +36,7 @@ class ProjectSerializationListener extends AbstractSerializationListener
         $this->serializer = $serializer;
         $this->helper = $helper;
         $this->router = $router;
+        $this->contributionResolver = $contributionResolver;
     }
 
     public static function getSubscribedEvents(): array
@@ -48,12 +52,20 @@ class ProjectSerializationListener extends AbstractSerializationListener
 
     public function onPostProject(ObjectEvent $event)
     {
+        $project = $event->getObject();
         // We skip if we are serializing for Elasticsearch
         if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            $event->getVisitor()->addData('projectStatus', $project->getCurrentStepStatus());
+            $event
+                ->getVisitor()
+                ->addData(
+                    'contributionsCount',
+                    $this->contributionResolver->countProjectContributions($project)
+                );
+
             return;
         }
 
-        $project = $event->getObject();
         $links = [
             'show' => $this->stepResolver->getFirstStepLinkForProject($project),
             'external' => $project->getExternalLink(),

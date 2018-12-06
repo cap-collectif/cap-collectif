@@ -1,36 +1,89 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import ProjectPreview from '../Preview/ProjectPreview';
-import type { State } from '../../../types';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import type { ProjectsListQueryResponse } from './__generated__/ProjectsListQuery.graphql';
+import { type GlobalState } from '../../../types';
+import ProjectListView from './ProjectListView';
 
-type Props = {
-  projects: Array<Object>,
-  hasSecondTitle?: boolean,
+const renderProjectList = ({
+  error,
+  props,
+}: {
+  props: ?ProjectsListQueryResponse,
+} & ReadyState) => {
+  if (error) {
+    console.log(error); // eslint-disable-line no-console
+    return graphqlError;
+  }
+  if (props) {
+    return <ProjectListView query={props} />;
+  }
+  return <Loader />;
 };
 
-export class ProjectsList extends React.Component<Props> {
+type Props = {
+  orderBy: ?string,
+  type: ?string,
+  theme: ?string,
+  term: ?string,
+};
+
+class ProjectsList extends React.Component<Props> {
+  initialRenderVars = {};
+
+  constructor(props: Props) {
+    super(props);
+    this.initialRenderVars = {
+      theme: props.theme,
+      orderBy: props.orderBy,
+      type: props.type,
+      term: props.term,
+    };
+  }
+
   render() {
-    const { projects, hasSecondTitle } = this.props;
-    if (projects.length > 0) {
-      return (
-        <div className="d-flex flex-wrap">
-          {projects.map((project, index) => (
-            <ProjectPreview key={index} project={project} hasSecondTitle={hasSecondTitle} />
-          ))}
-        </div>
-      );
-    }
+    const { orderBy, type, theme, term } = this.initialRenderVars;
     return (
-      <p>
-        <FormattedMessage id="project.none" />
-      </p>
+      <div className="flex-wrap">
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query ProjectsListQuery(
+              $count: Int
+              $cursor: String
+              $theme: ID
+              $orderBy: ProjectOrder
+              $type: ID
+              $term: String
+            ) {
+              ...ProjectListView_query
+                @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term)
+            }
+          `}
+          variables={{
+            orderBy: {
+              field: orderBy,
+              direction: 'ASC',
+            },
+            type,
+            theme,
+            term,
+          }}
+          render={renderProjectList}
+        />
+      </div>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
-  projects: props.projects.map(project => state.project.projectsById[project.id]),
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+  theme: state.project.theme,
+  orderBy: state.project.orderBy || 'LATEST',
+  type: state.project.type,
+  term: state.project.term,
 });
+
 export default connect(mapStateToProps)(ProjectsList);

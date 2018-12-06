@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
@@ -43,6 +44,17 @@ class ProjectRepository extends EntityRepository
             ->andWhere('p.Author = :user')
             ->setParameter('user', $user)
             ->orderBy('p.updatedAt', 'DESC');
+
+        return $qb->getQuery()->execute();
+    }
+
+    public function getAuthors($viewer = null, $order = 'DESC'): array
+    {
+        $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
+            ->select('a.id')
+            ->leftJoin('p.Author', 'a')
+            ->groupBy('a.id')
+            ->orderBy('a.createdAt', $order);
 
         return $qb->getQuery()->execute();
     }
@@ -122,7 +134,7 @@ class ProjectRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        $results = new Paginator($qb, $fetchJoin = true);
+        $results = new Paginator($qb, ($fetchJoin = true));
         $projects = [];
         foreach ($results as $project) {
             $projects[] = $project;
@@ -160,14 +172,14 @@ class ProjectRepository extends EntityRepository
 
         $qb = $this->createQueryBuilder('p')
             ->leftJoin('p.restrictedViewerGroups', 'pvg')
-            ->orWhere("p.visibility IN (:visibility)")
+            ->orWhere('p.visibility IN (:visibility)')
             ->setParameter('visibility', $visibility);
 
         // https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730
         /** @var User $viewer */
-        $viewerGroups = $viewer && is_object($viewer) ? $viewer->getUserGroupIds() : [];
+        $viewerGroups = $viewer && \is_object($viewer) ? $viewer->getUserGroupIds() : [];
 
-        if ($viewer && is_object($viewer) && !$viewer->isSuperAdmin()) {
+        if ($viewer && \is_object($viewer) && !$viewer->isSuperAdmin()) {
             if ($viewerGroups) {
                 $qb->orWhere(
                     $qb

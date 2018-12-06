@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Mailer\Message\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
@@ -13,7 +12,7 @@ final class ProposalAknowledgeMessage extends Message
         string $stepLink,
         string $proposalLink,
         string $homepageUrl,
-        ?string $confirmationUrl,
+        ?string $confirmationUrl = null,
         string $typeOfMail,
         string $recipientName = null
     ): self {
@@ -35,14 +34,12 @@ final class ProposalAknowledgeMessage extends Message
         );
     }
 
-    public function getFooterTemplate(): ?string
+    public function getFooterTemplate()
     {
-        return null;
     }
 
-    public function getFooterVars(): ?array
+    public function getFooterVars()
     {
-        return null;
     }
 
     private static function getMyTemplateVars(

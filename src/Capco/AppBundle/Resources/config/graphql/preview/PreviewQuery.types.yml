@@ -6,6 +6,29 @@ PreviewQuery:
     name: Query
     description: 'Root of the schema.'
     fields:
+      projects:
+        description: 'Lookup projects.'
+        argsBuilder: 'Relay::Connection'
+        args:
+          orderBy:
+            type: 'ProjectOrder'
+            defaultValue: { field: LATEST, direction: DESC }
+          term:
+            type: 'String'
+            description: 'If non-null, projects with the given string to look for.'
+          status:
+            type: 'ID'
+            description: 'If non-null, filter projects by statuses.'
+          theme:
+            type: 'ID'
+            description: 'If non-null, filter projects by themes'
+          type:
+            type: 'ID'
+            description: 'If non-null, filter projects by types'
+          author:
+            type: 'ID'
+            description: 'If non-null, filter projects by author'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectsResolver", [args])'
       events:
         type: 'PreviewEventConnection!'
         argsBuilder: 'Relay::Connection'
@@ -26,5 +49,4 @@ PreviewQuery:
           search:
             type: 'String'
             description: 'If non-null, filters events with the given string to look for.'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", [args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", [args])'

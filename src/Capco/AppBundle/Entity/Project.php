@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
@@ -164,13 +165,6 @@ class Project implements IndexableInterface
      * @ORM\Column(name="participants_count", type="integer")
      */
     private $participantsCount = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="contributions_count", type="integer")
-     */
-    private $contributionsCount = 0;
 
     /**
      * @var int
@@ -605,22 +599,6 @@ class Project implements IndexableInterface
     /**
      * @return int
      */
-    public function getContributionsCount()
-    {
-        return $this->contributionsCount;
-    }
-
-    /**
-     * @param int $contributionsCount
-     */
-    public function setContributionsCount($contributionsCount)
-    {
-        $this->contributionsCount = $contributionsCount;
-    }
-
-    /**
-     * @return int
-     */
     public function getVotesCount()
     {
         return $this->votesCount;
@@ -846,6 +824,24 @@ class Project implements IndexableInterface
         return null;
     }
 
+    public function getCurrentStepStatus(): int
+    {
+        $currentStep = $this->getCurrentStep();
+        if ($currentStep) {
+            if ($currentStep->isClosed()) {
+                return self::$openingStatuses['ended'];
+            }
+            if ($currentStep->isOpen()) {
+                return self::$openingStatuses['opened'];
+            }
+            if ($currentStep->isFuture()) {
+                return self::$openingStatuses['future'];
+            }
+        }
+
+        return -1;
+    }
+
     public function isClosed(): bool
     {
         return $this->getCurrentStep() ? $this->getCurrentStep()->isClosed() : true;
@@ -858,6 +854,7 @@ class Project implements IndexableInterface
                 return $step->getStep();
             }
         }
+
         return null;
     }
 
@@ -994,7 +991,7 @@ class Project implements IndexableInterface
     {
         if ($restrictedViewerGroups instanceof Collection) {
             $this->restrictedViewerGroups = $restrictedViewerGroups;
-        } elseif (is_array($restrictedViewerGroups)) {
+        } elseif (\is_array($restrictedViewerGroups)) {
             foreach ($restrictedViewerGroups as $group) {
                 $this->addAccessToUserGroup($group);
             }
@@ -1020,11 +1017,11 @@ class Project implements IndexableInterface
     }
 
     /**
-     * check if viewer is allowed the project
+     * check if viewer is allowed the project.
      */
     protected function viewerCanSee($viewer = null): bool
     {
-        if ($this->getVisibility() === ProjectVisibilityMode::VISIBILITY_PUBLIC) {
+        if (ProjectVisibilityMode::VISIBILITY_PUBLIC === $this->getVisibility()) {
             return true;
         }
 
@@ -1033,18 +1030,18 @@ class Project implements IndexableInterface
         }
 
         /** @var $viewer User */
-        if ($this->getVisibility() === ProjectVisibilityMode::VISIBILITY_CUSTOM && $viewer) {
+        if (ProjectVisibilityMode::VISIBILITY_CUSTOM === $this->getVisibility() && $viewer) {
             $viewerGroups = $viewer->getUserGroups()->toArray();
             $allowedGroups = $this->getRestrictedViewerGroups()->toArray();
             foreach ($viewerGroups as $userGroup) {
-                if (in_array($userGroup->getGroup(), $allowedGroups)) {
+                if (\in_array($userGroup->getGroup(), $allowedGroups)) {
                     return true;
                 }
             }
         }
         $viewerVisibility = $this->getVisibilityForViewer($viewer);
 
-        return in_array($this->getVisibility(), $viewerVisibility) &&
+        return \in_array($this->getVisibility(), $viewerVisibility) &&
             $this->getVisibility() < ProjectVisibilityMode::VISIBILITY_CUSTOM;
     }
 }

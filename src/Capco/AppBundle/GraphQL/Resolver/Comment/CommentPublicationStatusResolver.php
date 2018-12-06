@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Comment;
 
 use Capco\AppBundle\Entity\Comment;
@@ -10,7 +11,7 @@ class CommentPublicationStatusResolver implements ResolverInterface
     public function __invoke(Comment $comment): string
     {
         if ($comment->isTrashed()) {
-            if ($comment->getTrashedStatus() === Trashable::STATUS_VISIBLE) {
+            if (Trashable::STATUS_VISIBLE === $comment->getTrashedStatus()) {
                 return 'TRASHED';
             }
 
@@ -18,7 +19,7 @@ class CommentPublicationStatusResolver implements ResolverInterface
         }
 
         if (!$comment->isPublished()) {
-            return 'NOT_PUBLISHED';
+            return 'UNPUBLISHED';
         }
 
         return 'PUBLISHED';

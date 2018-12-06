@@ -16,7 +16,7 @@ type Props = {
   },
   size?: number,
   className?: string,
-  defaultAvatar: ?string,
+  defaultAvatar?: ?string,
   style?: any,
   anchor?: boolean,
   onBlur?: Function,
@@ -53,7 +53,7 @@ export class UserAvatar extends React.Component<Props> {
       );
     }
 
-    if (user && defaultAvatar !== null) {
+    if (user && defaultAvatar) {
       return (
         <img
           src={defaultAvatar}

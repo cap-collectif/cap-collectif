@@ -585,7 +585,7 @@ export default createFragmentContainer(
         }
         questions {
           id
-          ...responsesHelper_question @relay(mask: false)
+          ...responsesHelper_adminQuestion @relay(mask: false)
         }
         usingDistrict
         usingDescription

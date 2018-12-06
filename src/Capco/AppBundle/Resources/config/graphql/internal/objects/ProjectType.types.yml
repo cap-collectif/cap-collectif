@@ -1,0 +1,17 @@
+ProjectType:
+  type: object
+  config:
+    description: 'Type of Project'
+    fields:
+      id:
+        type: 'ID!'
+        description: 'Id of project Type'
+      title:
+        type: 'String!'
+        description: 'Title of project Type'
+      slug:
+        type: 'String!'
+        description: 'Slug of project Type'
+      color:
+        type: 'String!'
+        description: 'Color of project Type'

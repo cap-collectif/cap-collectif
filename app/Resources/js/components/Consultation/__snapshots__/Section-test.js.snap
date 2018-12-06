@@ -17,11 +17,7 @@ exports[`<Section /> renders correcty 1`] = `
     value="description"
   />
   <div
-    style={
-      Object {
-        "marginTop": 15,
-      }
-    }
+    className="mt-15"
   >
     <ForwardRef(Relay(InjectIntl(OpinionList)))
       consultation={

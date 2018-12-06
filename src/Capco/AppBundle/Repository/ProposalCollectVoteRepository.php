@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\UserBundle\Entity\User;
@@ -18,6 +19,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->andWhere('pv.private = true')
             ->andWhere('pv.collectStep = :step')
             ->setParameter('step', $step);
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -286,12 +288,12 @@ class ProposalCollectVoteRepository extends EntityRepository
                 ->setParameter('districtId', $districtId);
         }
 
-        return (int) ($qb->getQuery()->getSingleScalarResult());
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getVotesForProposal(
         Proposal $proposal,
-        ?int $limit = null,
+        ?int $limit,
         ?string $field,
         int $offset = 0,
         ?string $direction = 'ASC'
@@ -310,6 +312,18 @@ class ProposalCollectVoteRepository extends EntityRepository
         }
 
         return new Paginator($query);
+    }
+
+    public function countPublishedCollectVoteByStep(CollectStep $step): int
+    {
+        return $this->createQueryBuilder('pv')
+            ->select('COUNT(DISTINCT pv)')
+            ->andWhere('pv.collectStep = :step')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     private function getCountsByProposalGroupedBySteps(
@@ -346,7 +360,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         $results = $qb->getQuery()->getResult();
         $votesBySteps = [];
         foreach ($results as $result) {
-            $votesBySteps[$result['stepId']] = (int) ($result['votesCount']);
+            $votesBySteps[$result['stepId']] = (int) $result['votesCount'];
         }
 
         if (!isset($votesBySteps[$index])) {

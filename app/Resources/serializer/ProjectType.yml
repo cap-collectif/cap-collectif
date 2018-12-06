@@ -1,10 +1,14 @@
 Capco\AppBundle\Entity\ProjectType:
   exclusion_policy: ALL
   properties:
+    id:
+      expose: true
+      type: string
+      groups: [ProjectType, Elasticsearch]
     title:
       expose: true
       type: string
-      groups: [ProjectType]
+      groups: [ProjectType, Elasticsearch]
     slug:
       expose: true
       type: string

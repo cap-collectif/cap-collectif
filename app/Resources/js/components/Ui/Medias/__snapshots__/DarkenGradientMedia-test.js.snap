@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DarkenGradientMedia /> should render correctly default darkenGradientMedia 1`] = `
+<DarkenGradientMedia__Container
+  aria-label=""
+  height="100%"
+  linearGradient={true}
+  role="img"
+  url="https://source.unsplash.com/collection/1353633"
+  width="100%"
+/>
+`;
+
+exports[`<DarkenGradientMedia /> should render correctly with other props 1`] = `
+<DarkenGradientMedia__Container
+  aria-label="my alternative"
+  height="400px"
+  linearGradient={false}
+  role="img"
+  url="https://source.unsplash.com/collection/1353633"
+  width="600px"
+>
+  <p>
+    Test
+  </p>
+</DarkenGradientMedia__Container>
+`;

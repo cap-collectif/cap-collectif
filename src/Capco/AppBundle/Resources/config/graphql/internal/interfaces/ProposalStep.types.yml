@@ -5,7 +5,7 @@ ProposalStep:
     - WithProposals
   config:
     description: 'A proposal step'
-    resolveType: "@=resolver('step_type', [value])"
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
     fields:
       requirements:
         type: 'RequirementConnection!'
@@ -20,6 +20,8 @@ ProposalStep:
         type: 'Int'
       voteType:
         type: 'ProposalStepVoteType!'
+      votable:
+        type: 'Boolean!'
       votesHelpText:
         type: 'String'
       voteThreshold:

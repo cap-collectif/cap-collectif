@@ -1,17 +1,14 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\District;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -71,34 +68,30 @@ class ProposalRepository extends EntityRepository
 
     public function isViewerAnEvaluer(Proposal $proposal, User $user): bool
     {
-        return (
-            $this->createQueryBuilder('proposal')
-                ->select('COUNT(proposal.id)')
-                ->leftJoin('proposal.evaluers', 'group')
-                ->leftJoin('group.userGroups', 'userGroup')
-                ->andWhere('proposal.id = :id')
-                ->andWhere('userGroup.user = :user')
-                ->setParameter('id', $proposal->getId())
-                ->setParameter('user', $user)
-                ->getQuery()
-                ->getSingleScalarResult() > 0
-        );
+        return $this->createQueryBuilder('proposal')
+            ->select('COUNT(proposal.id)')
+            ->leftJoin('proposal.evaluers', 'group')
+            ->leftJoin('group.userGroups', 'userGroup')
+            ->andWhere('proposal.id = :id')
+            ->andWhere('userGroup.user = :user')
+            ->setParameter('id', $proposal->getId())
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult() > 0;
     }
 
     public function isViewerAnEvaluerOfAProposalOnForm(ProposalForm $form, User $user): bool
     {
-        return (
-            $this->createQueryBuilder('proposal')
-                ->select('COUNT(proposal.id)')
-                ->leftJoin('proposal.evaluers', 'group')
-                ->leftJoin('group.userGroups', 'userGroup')
-                ->andWhere('proposal.proposalForm = :form')
-                ->andWhere('userGroup.user = :user')
-                ->setParameter('form', $form)
-                ->setParameter('user', $user)
-                ->getQuery()
-                ->getSingleScalarResult() > 0
-        );
+        return $this->createQueryBuilder('proposal')
+            ->select('COUNT(proposal.id)')
+            ->leftJoin('proposal.evaluers', 'group')
+            ->leftJoin('group.userGroups', 'userGroup')
+            ->andWhere('proposal.proposalForm = :form')
+            ->andWhere('userGroup.user = :user')
+            ->setParameter('form', $form)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult() > 0;
     }
 
     public function getUnpublishedByFormAndAuthor(ProposalForm $form, User $author): array
@@ -170,6 +163,7 @@ class ProposalRepository extends EntityRepository
             ->select('count(DISTINCT p)')
             ->andWhere('p.author = :author')
             ->setParameter('author', $user);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -264,6 +258,7 @@ class ProposalRepository extends EntityRepository
             )
             ->andWhere('proposal.author = :author')
             ->setParameter('author', $author);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -276,6 +271,7 @@ class ProposalRepository extends EntityRepository
             ->andWhere('f.step =:step')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -530,6 +526,22 @@ class ProposalRepository extends EntityRepository
             ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId]);
 
         return $qb->getQuery()->getArrayResult();
+    }
+
+    public function countPublishedProposalByStep(CollectStep $cs): int
+    {
+        $query = $this->createQueryBuilder('p');
+        $query
+            ->select('count(DISTINCT p.id)')
+            ->leftJoin('p.proposalForm', 'pf')
+            ->andWhere('pf.step = :cs')
+            ->andWhere('p.draft = 0')
+            ->andWhere('p.trashedAt IS NULL')
+            ->andWhere('p.deletedAt IS NULL')
+            ->andWhere('p.published = 1')
+            ->setParameter('cs', $cs);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder

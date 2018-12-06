@@ -1,14 +1,12 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class QuestionQuestionChoicesResolver implements ResolverInterface
 {
@@ -18,9 +16,10 @@ class QuestionQuestionChoicesResolver implements ResolverInterface
             return [];
         }
 
-        if ($args['randomize'] && $question->isRandomQuestionChoices()) {
+        if (true === $args['allowRandomize'] && $question->isRandomQuestionChoices()) {
             $choices = $question->getChoices()->toArray();
             shuffle($choices);
+
             return new ArrayCollection($choices);
         }
 
