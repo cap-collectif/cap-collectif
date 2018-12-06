@@ -15,12 +15,25 @@ const mutation = graphql`
   }
 `;
 
+const getOptimisticResponse = variables => ({
+  deleteProjectDistrict: {
+    id: variables.input.id,
+  },
+});
+
 const commit = (
   variables: DeleteProjectDistrictMutationVariables,
 ): Promise<DeleteProjectDistrictMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
+    optimisticResponse: getOptimisticResponse(variables),
+    configs: [
+      {
+        type: 'NODE_DELETE',
+        deletedIDFieldName: 'deletedDistrictId',
+      },
+    ],
   });
 
 export default { commit };

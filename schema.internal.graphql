@@ -1386,6 +1386,9 @@ input CreateProjectDistrictInput {
 type CreateProjectDistrictPayload {
   district: ProjectDistrict
 
+  # The edge from the project district connection.
+  districtEdge: ProjectDistrictEdge
+
   # An unsuccessful mutation will return one or more `UserError` objects.
   userErrors: [UserError!]!
   clientMutationId: String
@@ -3035,6 +3038,26 @@ type ProjectType {
   color: String!
 }
 
+# A connection to a list of items.
+type ProjectDistrictConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ProjectDistrictEdge]
+}
+
+# An edge in a connection.
+type ProjectDistrictEdge {
+  # The item at the end of the edge.
+  node: ProjectDistrict!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
 # 4 possible values
 enum ProjectVisibility {
   # visible for group admin
@@ -3883,7 +3906,17 @@ type Query {
   availableQuestionnaires: [Questionnaire!]!
 
   # List all the district project in the platform.
-  projectDistricts: [ProjectDistrict!]!
+  projectDistricts(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+    first: Int = 1000
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): ProjectDistrictConnection!
 }
 
 interface Question {

@@ -10,6 +10,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Form\ProjectDistrictType;
 use Symfony\Component\Form\FormFactory;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class CreateProjectDistrictMutation implements MutationInterface
 {
@@ -43,6 +45,9 @@ class CreateProjectDistrictMutation implements MutationInterface
         $this->em->persist($projectDistrict);
         $this->em->flush();
 
-        return ['district' => $projectDistrict];
+        $totalCount = 0;
+        $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $projectDistrict);
+
+        return ['district' => $projectDistrict, 'districtEdge' => $edge, 'userErrors' => []];
     }
 }

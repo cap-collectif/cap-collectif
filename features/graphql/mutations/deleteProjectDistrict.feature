@@ -34,8 +34,12 @@ Scenario: Admin wants to delete a district in projects
   {
     "query": "query {
       projectDistricts {
-        id
-        name
+        edges {
+          node {
+            id
+            name
+          }
+        }
       }
     }"
   }
@@ -44,12 +48,16 @@ Scenario: Admin wants to delete a district in projects
   """
   {
    "data":{
-      "projectDistricts": [
-        {
-          "id": "projectDistrict2",
-          "name": "Deuxième Quartier"
-        }
-      ]
+      "projectDistricts": {
+        "edges": [
+          {
+            "node": {
+              "id": "projectDistrict2",
+              "name": "Deuxième Quartier"
+            }
+          }
+        ]
+      }
     }
   }
   """

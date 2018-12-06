@@ -16,11 +16,13 @@ const mutation = graphql`
         geojson
         displayedOnMap
         border {
+          enabled
           color
           opacity
           size
         }
         background {
+          enabled
           color
           opacity
         }

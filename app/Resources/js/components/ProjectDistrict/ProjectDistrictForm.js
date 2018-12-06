@@ -8,19 +8,15 @@ import CreateProjectDistrictMutation from '../../mutations/CreateProjectDistrict
 import UpdateProjectDistrictMutation from '../../mutations/UpdateProjectDistrictMutation';
 import CloseButton from '../Form/CloseButton';
 import DistrictAdminFields from '../District/DistrictAdminFields';
-import type { GlobalState, District } from '../../types';
+import type { GlobalState } from '../../types';
 
 type Props = {
   show: boolean,
   handleClose: () => void,
   member: string,
   isCreating: boolean,
-  district: District,
+  district: Object,
 } & FormProps;
-
-type PropsSubmit = Props & {
-  handleRefresh: () => void,
-};
 
 type FormValues = {
   projectDistrict: Object,
@@ -74,19 +70,19 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const onSubmit = (values: FormValues, dispatch: Function, props: PropsSubmit) => {
+const onSubmit = (values: FormValues) => {
+  // Clean the __typename field automatically added with @connection
+  delete values.projectDistrict.__typename;
+
   const input = {
     ...values.projectDistrict,
   };
 
   if (Object.prototype.hasOwnProperty.call(values.projectDistrict, 'id')) {
-    return UpdateProjectDistrictMutation.commit({ input }).then(() => {
-      props.handleRefresh();
-    });
+    return UpdateProjectDistrictMutation.commit({ input });
   }
-  return CreateProjectDistrictMutation.commit({ input }).then(() => {
-    props.handleRefresh();
-  });
+
+  return CreateProjectDistrictMutation.commit({ input });
 };
 
 export class ProjectDistrictForm extends React.Component<Props> {
@@ -95,7 +91,8 @@ export class ProjectDistrictForm extends React.Component<Props> {
     const { handleSubmit, handleClose } = this.props;
 
     // $FlowFixMe
-    handleSubmit().then(() => handleClose());
+    handleSubmit();
+    handleClose();
   };
 
   render() {
@@ -128,6 +125,7 @@ export class ProjectDistrictForm extends React.Component<Props> {
             />
           </Modal.Header>
           <Modal.Body>
+            {/* $FlowFixMe */}
             <DistrictAdminFields member={member} district={district} />
           </Modal.Body>
           <Modal.Footer>

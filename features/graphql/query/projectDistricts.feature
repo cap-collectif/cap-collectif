@@ -8,8 +8,12 @@ Scenario: GraphQL client wants to list project district
   {
     "query": "query {
       projectDistricts {
-        id
-        name
+        edges {
+          node {
+            id
+            name
+          }
+        }
       }
     }"
   }
@@ -18,16 +22,22 @@ Scenario: GraphQL client wants to list project district
   """
   {
    "data":{
-      "projectDistricts": [
-        {
-          "id": "projectDistrict2",
-          "name": "Deuxième Quartier"
-        },
-        {
-          "id": "projectDistrict1",
-          "name": "Premier Quartier"
-        }
-      ]
+      "projectDistricts": {
+        "edges": [
+          {
+            "node": {
+              "id": "projectDistrict2",
+              "name": "Deuxième Quartier"
+            }
+          },
+          {
+            "node": {
+              "id": "projectDistrict1",
+              "name": "Premier Quartier"
+            }
+          }
+        ]
+      }
     }
   }
   """

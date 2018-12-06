@@ -4,6 +4,9 @@ CreateProjectDistrictPayload:
     fields:
       district:
         type: 'ProjectDistrict'
+      districtEdge:
+        type: 'ProjectDistrictEdge'
+        description: 'The edge from the project district connection.'
       userErrors:
         type: '[UserError!]!'
         description: 'An unsuccessful mutation will return one or more `UserError` objects.'
