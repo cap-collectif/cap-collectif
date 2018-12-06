@@ -54,7 +54,7 @@ class ProjectRepository extends EntityRepository
             ->select('a.id')
             ->leftJoin('p.Author', 'a')
             ->groupBy('a.id')
-            ->orderBy('p.updatedAt', $order);
+            ->orderBy('a.createdAt', $order);
 
         return $qb->getQuery()->execute();
     }
