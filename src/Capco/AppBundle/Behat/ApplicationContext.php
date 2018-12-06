@@ -261,8 +261,13 @@ class ApplicationContext extends UserContext
         }
 
         $driver = $this->getSession()->getDriver();
-        $driver->evaluateScript('window.sessionStorage.clear();');
-        $driver->evaluateScript('window.localStorage.clear();');
+
+        try {
+            $driver->evaluateScript('window.sessionStorage.clear();');
+            $driver->evaluateScript('window.localStorage.clear();');
+        } catch (\Exception $e) {
+            echo 'Failed to clear localStorage !' . PHP_EOL;
+        }
     }
 
     /**
