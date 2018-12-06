@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DefaultImage /> should render correctly 1`] = `
+<DefaultImage__Container
+  height="100%"
+  width="100%"
+>
+  <img
+    alt=""
+    src=""
+  />
+</DefaultImage__Container>
+`;
+
+exports[`<DefaultImage /> should render correctly with other size 1`] = `
+<DefaultImage__Container
+  height="400px"
+  width="600px"
+>
+  <img
+    alt=""
+    src=""
+  />
+</DefaultImage__Container>
+`;

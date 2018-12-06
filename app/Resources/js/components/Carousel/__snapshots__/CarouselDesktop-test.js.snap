@@ -158,7 +158,10 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
   <div
     className="carousel__content"
   >
-    <SixteenNineMedia>
+    <RatioMediaContainer
+      ratioX={16}
+      ratioY={9}
+    >
       <div
         className="carousel-inner"
         id="carousel-inner"
@@ -211,6 +214,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
           key="1"
         >
           <DarkenGradientMedia
+            alt=""
             height="100%"
             linearGradient={true}
             title="Croissance, Innovation, Disruption"
@@ -363,7 +367,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
           Next
         </span>
       </a>
-    </SixteenNineMedia>
+    </RatioMediaContainer>
   </div>
 </div>
 `;

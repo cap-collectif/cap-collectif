@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DefaultAvatar /> should render correctly 1`] = `
+<DefaultAvatar__Container
+  height="45px"
+  role="img"
+  version="1.1"
+  viewBox="-11 -9 46 46"
+  width="45px"
+  x="0px"
+  xmlns="http://www.w3.org/2000/svg"
+  y="0px"
+>
+  <path
+    d="M.5,23a10.135,10.135,0,0,1,1-4.057c.705-1.41,3.65-2.387,7.347-3.756,1-.371.836-2.981.393-3.468C8.2,10.576,7.32,9.235,7.32,6c0-3.265,2.13-5,4.68-5s4.68,1.735,4.68,5c0,3.235-.881,4.576-1.92,5.719-.443.487-.607,3.1.393,3.468,3.7,1.369,6.642,2.346,7.347,3.756A10.135,10.135,0,0,1,23.5,23Z"
+    fill="none"
+    stroke="#FFFFFF"
+    strokeLinejoin="round"
+    strokeMiterlimit="10"
+    strokeWidth="1"
+  />
+</DefaultAvatar__Container>
+`;
+
+exports[`<DefaultAvatar /> should render correctly with other size 1`] = `
+<DefaultAvatar__Container
+  height="34px"
+  role="img"
+  version="1.1"
+  viewBox="-11 -9 46 46"
+  width="34px"
+  x="0px"
+  xmlns="http://www.w3.org/2000/svg"
+  y="0px"
+>
+  <path
+    d="M.5,23a10.135,10.135,0,0,1,1-4.057c.705-1.41,3.65-2.387,7.347-3.756,1-.371.836-2.981.393-3.468C8.2,10.576,7.32,9.235,7.32,6c0-3.265,2.13-5,4.68-5s4.68,1.735,4.68,5c0,3.235-.881,4.576-1.92,5.719-.443.487-.607,3.1.393,3.468,3.7,1.369,6.642,2.346,7.347,3.756A10.135,10.135,0,0,1,23.5,23Z"
+    fill="none"
+    stroke="#FFFFFF"
+    strokeLinejoin="round"
+    strokeMiterlimit="10"
+    strokeWidth="1"
+  />
+</DefaultAvatar__Container>
+`;

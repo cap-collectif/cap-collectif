@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RatioMediaContainer /> should render correctly default RatioMediaContainer 1`] = `
+<RatioMediaContainer__Container
+  ratioX={16}
+  ratioY={9}
+>
+  <div
+    className="ratio-media-container__content"
+  >
+    <img
+      alt=""
+      src=""
+    />
+  </div>
+</RatioMediaContainer__Container>
+`;
+
+exports[`<RatioMediaContainer /> should render correctly with other props 1`] = `
+<RatioMediaContainer__Container
+  ratioX={9}
+  ratioY={3}
+>
+  <div
+    className="ratio-media-container__content"
+  >
+    <img
+      alt=""
+      src=""
+    />
+  </div>
+</RatioMediaContainer__Container>
+`;
