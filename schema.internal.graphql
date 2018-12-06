@@ -281,7 +281,7 @@ type AppendixType {
 
 # An argument
 type Argument implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution & UniformResourceLocatable {
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
 
   # Url of the contribution
@@ -994,7 +994,7 @@ type Comment implements Node & Publishable & Reportable & Contribution & Comment
   parent: Comment
   pinned: Boolean!
   contribuable: Boolean!
-  answers: [Comment]!
+  answers: [Comment!]!
   authorName: String
   authorEmail: String
   authorIp: IP
@@ -1231,7 +1231,7 @@ type Consultation implements Node & Step {
 
 # A contribution with an author
 interface Contribution {
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
 
   # The kind of contribution.
@@ -2113,8 +2113,8 @@ type MultipleChoiceQuestion implements Question {
     last: Int
   ): ResponseConnection!
   choices(
-    # Randomize the order of the choices.
-    randomize: Boolean
+    # If the question has `randomQuestionChoices: true` will return choices in a random order.
+    allowRandomize: Boolean! = false
   ): [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
   randomQuestionChoices: Boolean!
@@ -3948,7 +3948,7 @@ type RemoveSourceVotePayload {
 
 # A Reply
 type Reply implements Node & Publishable & Draftable & Contribution & UniformResourceLocatable {
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
 
   # Url of the contribution
@@ -4044,11 +4044,11 @@ interface Reportable {
 
 # A report
 type Reporting implements Contribution & ContributionWithAuthor {
+  # The ID of an object
+  id: ID!
+
   # The author of the contribution.
   author: User!
-
-  # The id of the contribution.
-  id: ID!
 
   # The kind of contribution.
   kind: String!
@@ -4529,7 +4529,7 @@ type SimpleQuestion implements Question {
 
 # A source
 type Source implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution & UniformResourceLocatable {
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
 
   # Url of the contribution
