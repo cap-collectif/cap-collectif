@@ -11,6 +11,7 @@ Capco\UserBundle\Entity\User:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser2'
     enabled: true
+    createdAt: '<dateTimeBetween("-2 days", "-1 days")>'
 
   user2:
     id: 'user2'
@@ -31,6 +32,7 @@ Capco\UserBundle\Entity\User:
     phone: '+3300000000'
     phoneConfirmed: true
     enabled: true
+    createdAt: '<dateTimeBetween("-4 days", "-3 days")>'
 
   user3:
     id: 'user3'
@@ -44,6 +46,7 @@ Capco\UserBundle\Entity\User:
       - 'ROLE_SUPER_ADMIN'
     media: '@MediaUser3'
     enabled: true
+    createdAt: '<dateTimeBetween("-6 days", "-5 days")>'
 
   user4:
     id: 'userAdmin'
@@ -60,6 +63,7 @@ Capco\UserBundle\Entity\User:
     phoneConfirmed: true
     phone: '+33675492871'
     enabled: true
+    createdAt: '<dateTimeBetween("-8 days", "-7 days")>'
 
   user666:
     id: 'adminCapco'
@@ -149,6 +153,7 @@ Capco\UserBundle\Entity\User:
     media: '@MediaUser5'
     vip: true
     enabled: true
+    createdAt: '<dateTimeBetween("-10 days", "-9 days")>'
 
   user503:
     id: 'user503'
