@@ -3842,7 +3842,7 @@ copycat-brunch@^1.1.0:
   resolved "https://registry.yarnpkg.com/copycat-brunch/-/copycat-brunch-1.1.0.tgz#10e17b85909e0e129981dfb9030b9866483d66bd"
   integrity sha1-EOF7hZCeDhKZgd+5AwuYZkg9Zr0=
   dependencies:
-    loggy "~0.2.2"
+    loggy "^1.0.4"
     mkdirp "^0.5.1"
     quickly-copy-file "^0.1.0"
 
