@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5ed03af42fb2e010203e72772a13273",
+    "content-hash": "8c021f8198b5fdc66919cf963eae1cf7",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10644,16 +10644,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.18",
+            "version": "v3.4.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "ee054aa62e535b7905c5b8e90cb49a1ad65dbfd8"
+                "reference": "f6b8ddc362b1cf3fb06548693c3adbb736092412"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/ee054aa62e535b7905c5b8e90cb49a1ad65dbfd8",
-                "reference": "ee054aa62e535b7905c5b8e90cb49a1ad65dbfd8",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/f6b8ddc362b1cf3fb06548693c3adbb736092412",
+                "reference": "f6b8ddc362b1cf3fb06548693c3adbb736092412",
                 "shasum": ""
             },
             "require": {
@@ -10795,7 +10795,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-11-03T10:03:29+00:00"
+            "time": "2018-12-06T15:24:36+00:00"
         },
         {
             "name": "tilleuls/ckeditor-sonata-media-bundle",
