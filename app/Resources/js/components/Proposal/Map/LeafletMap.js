@@ -42,7 +42,6 @@ type Style = {
 };
 
 type GeoJson = {
-  styleLegacy: string,
   district: string,
   style: Style,
 };

@@ -6,6 +6,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
+/**
+ * We need to clean the `border`and `background` value from datas
+ * before submitting the form if there are `null`
+ * in order to prevent error durring the form processing datas.
+ */
 class CleanDistrictFieldSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array

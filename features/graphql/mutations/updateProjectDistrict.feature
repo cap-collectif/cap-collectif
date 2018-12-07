@@ -1,7 +1,7 @@
 @udpateProjectDistrict
 Feature: Update a district in projects
 
-@database @rabbitmq
+@database
 Scenario: Admin wants to update a district in projects
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:

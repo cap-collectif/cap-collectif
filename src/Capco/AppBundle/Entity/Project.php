@@ -541,12 +541,7 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    /**
-     * @param Event $event
-     *
-     * @return $this
-     */
-    public function removeEvent(Event $event)
+    public function removeEvent(Event $event): self
     {
         $this->events->removeElement($event);
 

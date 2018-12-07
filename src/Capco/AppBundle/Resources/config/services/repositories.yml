@@ -403,3 +403,8 @@ services:
     public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:PublicApiToken']
+
+  Capco\AppBundle\Repository\ProjectDistrictRepository:
+    public: true
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:District\ProjectDistrict']

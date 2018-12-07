@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity\District;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\Project;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectDistrictRepository")
  */
-class ProjectDistrict extends AbstractDistrict implements IndexableInterface
+class ProjectDistrict extends AbstractDistrict
 {
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", mappedBy="districts")

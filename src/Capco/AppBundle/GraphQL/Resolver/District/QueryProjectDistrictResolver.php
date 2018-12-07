@@ -31,9 +31,7 @@ class QueryProjectDistrictResolver implements ResolverInterface
                 return $results->getIterator()->getArrayCopy();
             });
 
-            return $paginator->auto($args, function () {
-                return $this->projectDistrictRepository->countAll();
-            });
+            return $paginator->auto($args, $this->projectDistrictRepository->countAll());
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 

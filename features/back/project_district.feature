@@ -6,7 +6,7 @@ Background:
   Given I visited "admin project district page"
   And I wait 1 seconds
 
-@database @javascript
+@database
 Scenario: Loggin admin want to add district in project.
   When I click the add button
   Then I should see "district_modal.create.title"
@@ -21,7 +21,7 @@ Scenario: Loggin admin want to add district in project.
   And I wait 1 seconds
   Then I should see "troisième-quartier"
 
-@database @javascript
+@database
 Scenario: Loggin admin want to delete district from project.
   When I click the delete button
   Then I should see "are-you-sure-you-want-to-delete-this-item"
@@ -29,7 +29,7 @@ Scenario: Loggin admin want to delete district from project.
   And I wait 1 seconds
   Then I should not see "Deuxième Quartier"
 
-@database @javascript
+@database
 Scenario: Loggin admin want to edit district in project.
   When I click the edit button
   And I wait 1 seconds

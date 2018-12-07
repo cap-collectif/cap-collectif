@@ -13,10 +13,10 @@ type Props = {
   district: District,
 };
 
-const isBorderEnable = district => district && !!district.border && district.border.enabled;
+const isBorderEnable = district => district && district.border && district.border.enabled;
 
 const isBackgroundEnable = district =>
-  district && !!district.background && district.background.enabled;
+  district && district.background && district.background.enabled;
 
 const DistrictAdminFields = ({ member, district }: Props) => (
   <>
@@ -47,11 +47,11 @@ const DistrictAdminFields = ({ member, district }: Props) => (
     <hr />
     <Row>
       <Col xs={12} md={6}>
-        <PanelBorderStyle member={member} isEnabled={isBorderEnable(district)} />
+        <PanelBorderStyle member={member} isEnabled={!!isBorderEnable(district)} />
       </Col>
 
       <Col xs={12} md={6}>
-        <PanelBackgroundStyle member={member} isEnabled={isBackgroundEnable(district)} />
+        <PanelBackgroundStyle member={member} isEnabled={!!isBackgroundEnable(district)} />
       </Col>
     </Row>
   </>

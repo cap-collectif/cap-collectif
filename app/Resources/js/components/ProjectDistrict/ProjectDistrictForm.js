@@ -8,18 +8,18 @@ import CreateProjectDistrictMutation from '../../mutations/CreateProjectDistrict
 import UpdateProjectDistrictMutation from '../../mutations/UpdateProjectDistrictMutation';
 import CloseButton from '../Form/CloseButton';
 import DistrictAdminFields from '../District/DistrictAdminFields';
-import type { GlobalState } from '../../types';
+import type { GlobalState, District } from '../../types';
 
 type Props = {
   show: boolean,
   handleClose: () => void,
   member: string,
   isCreating: boolean,
-  district: Object,
+  district: District,
 } & FormProps;
 
 type FormValues = {
-  projectDistrict: Object,
+  projectDistrict: District,
 };
 
 const validate = (values: FormValues) => {
@@ -40,13 +40,17 @@ const validate = (values: FormValues) => {
     errors.projectDistrict.border = {};
   }
 
+  // $FlowFixMe
   if (borderEnable && !values.projectDistrict.border.size) {
     errors.projectDistrict.border.size = 'global.admin.required';
   }
 
+  // $FlowFixMe
   if (borderEnable && !values.projectDistrict.border.opacity) {
     errors.projectDistrict.border.opacity = 'global.admin.required';
   }
+
+  // $FlowFixMe
   if (borderEnable && !values.projectDistrict.border.color) {
     errors.projectDistrict.border.color = 'global.admin.required';
   }
@@ -60,9 +64,12 @@ const validate = (values: FormValues) => {
     errors.projectDistrict.background = {};
   }
 
+  // $FlowFixMe
   if (backgroundEnable && !values.projectDistrict.background.opacity) {
     errors.projectDistrict.background.opacity = 'global.admin.required';
   }
+
+  // $FlowFixMe
   if (backgroundEnable && !values.projectDistrict.background.color) {
     errors.projectDistrict.background.color = 'global.admin.required';
   }
@@ -71,14 +78,13 @@ const validate = (values: FormValues) => {
 };
 
 const onSubmit = (values: FormValues) => {
-  // Clean the __typename field automatically added with @connection
-  delete values.projectDistrict.__typename;
-
   const input = {
     ...values.projectDistrict,
+    __typename: undefined,
   };
 
   if (Object.prototype.hasOwnProperty.call(values.projectDistrict, 'id')) {
+    // $FlowFixMe
     return UpdateProjectDistrictMutation.commit({ input });
   }
 
@@ -90,7 +96,6 @@ export class ProjectDistrictForm extends React.Component<Props> {
     event.preventDefault();
     const { handleSubmit, handleClose } = this.props;
 
-    // $FlowFixMe
     handleSubmit();
     handleClose();
   };

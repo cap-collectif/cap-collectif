@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation\District;
 use Capco\AppBundle\Form\ProjectDistrictType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Symfony\Component\Form\FormFactory;
+use Psr\Log\LoggerInterface;
 
 class UpdateProjectDistrictMutation implements MutationInterface
 {
@@ -18,10 +18,10 @@ class UpdateProjectDistrictMutation implements MutationInterface
     protected $formFactory;
 
     public function __construct(
-        LoggerInterface $logger,
         EntityManagerInterface $em,
         ProjectDistrictRepository $projectDistrictRepository,
-        FormFactory $formFactory
+        FormFactory $formFactory,
+        LoggerInterface $logger
     ) {
         $this->logger = $logger;
         $this->em = $em;
@@ -40,6 +40,9 @@ class UpdateProjectDistrictMutation implements MutationInterface
             $error = [
                 'message' => sprintf('Unknown project district with id: %s', $projectDistrictId),
             ];
+            $this->logger->error(
+                sprintf('Unknown project district with id: %s', $projectDistrictId)
+            );
 
             return ['district' => null, 'userErrors' => [$error]];
         }
@@ -51,6 +54,7 @@ class UpdateProjectDistrictMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $error = ['message' => 'Error during form validation.'];
+            $this->logger->error('Error during form validation.');
 
             return ['district' => null, 'userErrors' => [$error]];
         }

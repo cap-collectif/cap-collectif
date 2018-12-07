@@ -34,15 +34,15 @@ class DeleteProjectDistrictMutation implements MutationInterface
             $error = [
                 'message' => sprintf('Unknown project district with id: %s', $projectDistrictId),
             ];
+            $this->logger->error(
+                sprintf('Unknown project district with id: %s', $projectDistrictId)
+            );
 
             return ['deletedDistrictId' => null, 'userErrors' => [$error]];
         }
 
         $this->em->remove($projectDistrict);
         $this->em->flush();
-
-        // Set the id back into the object before return it.
-        $projectDistrict->setId($projectDistrictId);
 
         return ['deletedDistrictId' => $projectDistrictId, 'userErrors' => []];
     }

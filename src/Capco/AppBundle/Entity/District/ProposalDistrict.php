@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity\District;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -11,7 +10,7 @@ use Capco\AppBundle\Entity\Proposal;
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalDistrictRepository")
  */
-class ProposalDistrict extends AbstractDistrict implements IndexableInterface
+class ProposalDistrict extends AbstractDistrict
 {
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="districts")
@@ -45,7 +44,7 @@ class ProposalDistrict extends AbstractDistrict implements IndexableInterface
         }
     }
 
-    public function getForm()
+    public function getForm(): ProposalForm
     {
         return $this->form;
     }
@@ -57,7 +56,7 @@ class ProposalDistrict extends AbstractDistrict implements IndexableInterface
         return $this;
     }
 
-    public function getProposals()
+    public function getProposals(): ArrayCollection
     {
         return $this->proposals;
     }
