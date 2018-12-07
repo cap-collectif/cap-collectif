@@ -162,6 +162,9 @@ type Query {
 
     # Returns the last `n` elements from the list.
     last: Int
+
+    # Maximum of projects displayed
+    limit: Int = 50
     orderBy: ProjectOrder = {field: LATEST, direction: DESC}
 
     # If non-null, projects with the given string to look for.
