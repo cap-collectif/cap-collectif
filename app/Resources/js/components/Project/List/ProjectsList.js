@@ -29,6 +29,7 @@ type Props = {
   type: ?string,
   theme: ?string,
   term: ?string,
+  limit?: ?number,
 };
 
 class ProjectsList extends React.Component<Props> {
@@ -41,11 +42,14 @@ class ProjectsList extends React.Component<Props> {
       orderBy: props.orderBy,
       type: props.type,
       term: props.term,
+      limit: props.limit,
     };
   }
 
   render() {
-    const { orderBy, type, theme, term } = this.initialRenderVars;
+    const { orderBy, type, theme, term, limit } = this.initialRenderVars;
+    console.log('this.props ******************');
+    console.log(this.props);
     return (
       <div className="flex-wrap">
         <QueryRenderer
@@ -58,9 +62,16 @@ class ProjectsList extends React.Component<Props> {
               $orderBy: ProjectOrder
               $type: ID
               $term: String
+              $limit: Int
             ) {
               ...ProjectListView_query
-                @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term)
+                @arguments(
+                  theme: $theme
+                  orderBy: $orderBy
+                  type: $type
+                  term: $term
+                  limit: $limit
+                )
             }
           `}
           variables={{
@@ -71,6 +82,7 @@ class ProjectsList extends React.Component<Props> {
             type,
             theme,
             term,
+            limit,
           }}
           render={renderProjectList}
         />

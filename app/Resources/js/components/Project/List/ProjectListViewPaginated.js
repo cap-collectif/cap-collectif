@@ -70,6 +70,7 @@ export default createPaginationContainer(
       fragment ProjectListViewPaginated_query on Query
         @argumentDefinitions(
           count: { type: "Int", defaultValue: 50 }
+          limit: { type: "Int", defaultValue: 50 }
           cursor: { type: "String", defaultValue: null }
           theme: { type: "ID" }
           orderBy: { type: "ProjectOrder" }
@@ -83,6 +84,7 @@ export default createPaginationContainer(
           orderBy: $orderBy
           type: $type
           term: $term
+          limit: $limit
         ) @connection(key: "ProjectListViewPaginated_projects", filters: []) {
           edges {
             node {
@@ -119,6 +121,7 @@ export default createPaginationContainer(
     query: graphql`
       query ProjectListViewPaginatedQuery(
         $count: Int
+        $limit: Int
         $cursor: String
         $theme: ID
         $orderBy: ProjectOrder
@@ -128,6 +131,7 @@ export default createPaginationContainer(
         ...ProjectListViewPaginated_query
           @arguments(
             count: $count
+            limit: $limit
             cursor: $cursor
             theme: $theme
             orderBy: $orderBy

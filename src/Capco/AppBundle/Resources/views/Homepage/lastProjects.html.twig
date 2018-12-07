@@ -12,7 +12,7 @@
             {% endif %}
 
             <div class="row">
-                {{ react_render_component('ProjectsListApp', { 'props': props }) }}
+                {{ react_render_component('ProjectsListApp', { 'props': {'limit': max} }) }}
             </div>
 
             {% if count > max %}

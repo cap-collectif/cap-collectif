@@ -10,6 +10,10 @@ PreviewQuery:
         description: 'Lookup projects.'
         argsBuilder: 'Relay::Connection'
         args:
+          limit:
+            type: 'Int'
+            defaultValue: 50
+            description: 'Maximum of projects displayed'
           orderBy:
             type: 'ProjectOrder'
             defaultValue: { field: LATEST, direction: DESC }

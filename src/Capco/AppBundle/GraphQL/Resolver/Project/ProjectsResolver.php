@@ -24,24 +24,19 @@ class ProjectsResolver implements ResolverInterface
     public function __invoke(Argument $args): Connection
     {
         $totalCount = 0;
-        $term = null;
-        $order = null;
-
-        if ($args->offsetExists('term')) {
-            $term = $args->offsetGet('term');
-        }
-
-        if ($args->offsetExists('orderBy')) {
-            $order = $args->offsetGet('orderBy');
-        }
 
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use (
                 $args,
-                $term,
-                &$totalCount,
-                $order
+                &$totalCount
             ) {
+
+                $term = $args->offsetExists('term') ? $args->offsetGet('term') : null;
+
+                $limit = $args->offsetExists('limit') ?$args->offsetGet('limit') : 50;
+
+                $order = $args->offsetExists('orderBy') ? $args->offsetGet('orderBy') : null;
+
                 $results = $this->projectSearch->searchProjects(
                     $offset,
                     $limit,
