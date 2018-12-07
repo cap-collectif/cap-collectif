@@ -48,8 +48,6 @@ class ProjectsList extends React.Component<Props> {
 
   render() {
     const { orderBy, type, theme, term, limit } = this.initialRenderVars;
-    console.log('this.props ******************');
-    console.log(this.props);
     return (
       <div className="flex-wrap">
         <QueryRenderer
