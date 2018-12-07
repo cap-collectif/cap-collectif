@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Form\ProjectDistrictType;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
@@ -22,7 +22,7 @@ class CreateProjectDistrictMutation implements MutationInterface
     public function __construct(
         LoggerInterface $logger,
         EntityManagerInterface $em,
-        FormFactory $formFactory
+        FormFactoryInterface $formFactory
     ) {
         $this->logger = $logger;
         $this->em = $em;

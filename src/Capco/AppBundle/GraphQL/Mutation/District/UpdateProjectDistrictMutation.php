@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Psr\Log\LoggerInterface;
 
 class UpdateProjectDistrictMutation implements MutationInterface
@@ -20,7 +20,7 @@ class UpdateProjectDistrictMutation implements MutationInterface
     public function __construct(
         EntityManagerInterface $em,
         ProjectDistrictRepository $projectDistrictRepository,
-        FormFactory $formFactory,
+        FormFactoryInterface $formFactory,
         LoggerInterface $logger
     ) {
         $this->logger = $logger;
