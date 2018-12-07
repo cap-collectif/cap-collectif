@@ -32,6 +32,7 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
         month="04"
         name="day"
         onChange={[Function]}
+        optionClasses="option classes"
         value="25"
         year="1990"
       />
@@ -51,6 +52,7 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
         locale="FR"
         name="month"
         onChange={[Function]}
+        optionClasses="option classes"
         value="04"
         year="1990"
       />
@@ -69,6 +71,7 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
         id="year"
         name="year"
         onChange={[Function]}
+        optionClasses="option classes"
         value="1990"
       />
     </Col>
@@ -108,6 +111,7 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
         month={null}
         name="day"
         onChange={[Function]}
+        optionClasses="option classes"
         value={null}
         year={null}
       />
@@ -127,6 +131,7 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
         locale="FR"
         name="month"
         onChange={[Function]}
+        optionClasses="option classes"
         value={null}
         year={null}
       />
@@ -145,6 +150,7 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
         id="year"
         name="year"
         onChange={[Function]}
+        optionClasses="option classes"
         value={null}
       />
     </Col>

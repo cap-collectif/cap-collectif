@@ -409,14 +409,17 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 <Field
                   component={[Function]}
                   componentId="personal-data-date-of-birth"
+                  dayDefaultValue="Jour"
                   dayId="personal-data-date-of-birth-day"
                   divClassName="col-sm-6"
                   id="dateOfBirth"
                   label="form.label_date_of_birth"
                   labelClassName="col-sm-3 control-label"
                   locale="fr-FR"
+                  monthDefaultValue="Mois"
                   monthId="personal-data-date-of-birth-month"
                   name="dateOfBirth"
+                  yearDefaultValue="Année"
                   yearId="personal-data-date-of-birth-year"
                 />
               </div>
@@ -1704,14 +1707,17 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 <Field
                   component={[Function]}
                   componentId="personal-data-date-of-birth"
+                  dayDefaultValue="Jour"
                   dayId="personal-data-date-of-birth-day"
                   divClassName="col-sm-6"
                   id="dateOfBirth"
                   label="form.label_date_of_birth"
                   labelClassName="col-sm-3 control-label"
                   locale="fr-FR"
+                  monthDefaultValue="Mois"
                   monthId="personal-data-date-of-birth-month"
                   name="dateOfBirth"
+                  yearDefaultValue="Année"
                   yearId="personal-data-date-of-birth-year"
                 />
               </div>

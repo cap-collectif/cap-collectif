@@ -1,4 +1,6 @@
-// @flow
+// flow-typed signature: 9ce9170c17b4c83a6311778ecc6fb318
+// flow-typed version: <<STUB>>/redux-form_v7.1.2/flow_v0.54.1
+
 import type { Dispatch } from 'redux';
 
 type GetFormErrorInterface = (state: any) => any

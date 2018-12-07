@@ -813,15 +813,11 @@ trait ProposalStepsTrait
     {
         $this->fillField('mobile-phone', '0123456789');
         $this->iWait(1);
-        $this->fillField('day', '24');
-        $this->fillField('month', '3');
-        $this->fillField('year', '1992');
+        $this->checkOption('requirement1');
         $this->iWait(1);
-        $this->checkOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
+        $this->checkOption('requirement2');
         $this->iWait(1);
-        $this->checkOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy');
-        $this->iWait(1);
-        $this->checkOption('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz');
+        $this->checkOption('requirement3');
         $this->iWait(1);
     }
 

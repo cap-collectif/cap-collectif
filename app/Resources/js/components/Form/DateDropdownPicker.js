@@ -130,6 +130,7 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               id="day"
               name="day"
               classes="form-control"
+              optionClasses="option classes"
               disabled={disabled}
             />
           </Col>
@@ -145,6 +146,7 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               id="month"
               name="month"
               classes="form-control"
+              optionClasses="option classes"
               disabled={disabled}
             />
           </Col>
@@ -158,6 +160,7 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               id="year"
               name="year"
               classes="form-control"
+              optionClasses="option classes"
               disabled={disabled}
             />
           </Col>
