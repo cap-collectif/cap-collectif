@@ -32,7 +32,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Alex\MailCatcher\Behat\MailCatcherContext
       filters:
-        tags: '@core&&@javascript&&~@event_registration'
+        tags: '@core&&~@event_registration'
     consultation:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -41,7 +41,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Alex\MailCatcher\Behat\MailCatcherContext
       filters:
-        tags: '@consultation&&@javascript'
+        tags: '@consultation'
     bp:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -50,7 +50,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Alex\MailCatcher\Behat\MailCatcherContext
       filters:
-        tags: '@bp&&@javascript'
+        tags: '@bp'
     questionnaire:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -59,7 +59,7 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Alex\MailCatcher\Behat\MailCatcherContext
       filters:
-        tags: '@questionnaire&&@javascript'
+        tags: '@questionnaire'
     bo:
       paths: ['%paths.base%/features/back']
       contexts:
