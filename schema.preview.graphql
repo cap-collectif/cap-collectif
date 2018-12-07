@@ -252,11 +252,11 @@ interface UniformResourceLocatable {
 
 # A user is an individual's account.
 type User implements Node & UniformResourceLocatable {
-  # The ID of an object
-  id: ID!
-
   # The URL to this resource.
   url: URI!
+
+  # The ID of an object
+  id: ID!
 
   # The user's public name.
   username: String
