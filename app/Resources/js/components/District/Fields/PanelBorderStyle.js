@@ -21,12 +21,12 @@ const PanelBorderStyle = ({ member, isPanelOpen, opacities, handlePanelToggle }:
     <FormSection name={`${member}.border`}>
       <Panel.Heading>
         <Row>
-          <Col md={6}>
+          <Col md={8} xs={6}>
             <h4>
               <FormattedMessage id="border" />
             </h4>
           </Col>
-          <Col md={6}>
+          <Col md={4} xs={6} style={{ paddingLeft: '50px' }}>
             <Field
               component={toggle}
               type="checkbox"
