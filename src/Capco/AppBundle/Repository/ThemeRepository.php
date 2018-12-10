@@ -1,7 +1,9 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -62,12 +64,7 @@ class ThemeRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    /**
-     * @param $slug
-     *
-     * @return mixed
-     */
-    public function getOneBySlug($slug)
+    public function getOneBySlug(string $slug): ?Theme
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'am', 'm', 'p', 'post', 'e')
@@ -76,11 +73,12 @@ class ThemeRepository extends EntityRepository
             ->leftJoin('t.media', 'm')
             ->leftJoin('t.projects', 'p')
             ->leftJoin('t.posts', 'post', 'WITH', 'post.isPublished = :enabled')
-            ->leftJoin('t.events', 'e', 'WITH', 'e.isEnabled = :enabled')
+            ->leftJoin('t.events', 'e', 'WITH', 'e.enabled = :enabled')
             ->andWhere('t.slug = :slug')
             ->setParameter('enabled', true)
             ->setParameter('slug', $slug)
             ->orderBy('t.updatedAt', 'DESC');
+
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -114,6 +112,7 @@ class ThemeRepository extends EntityRepository
     public function countAll()
     {
         $qb = $this->getIsEnabledQueryBuilder()->select('COUNT(t.id)');
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
