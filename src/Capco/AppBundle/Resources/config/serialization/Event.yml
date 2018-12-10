@@ -39,7 +39,7 @@ Capco\AppBundle\Entity\Event:
       groups: [Default]
     comments:
       groups: [Events]
-    getIsEnabled:
+    isEnabled:
       groups: [Events]
       serialized_name: enabled
     fullAddress:

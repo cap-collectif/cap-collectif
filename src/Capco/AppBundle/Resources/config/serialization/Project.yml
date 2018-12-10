@@ -5,7 +5,7 @@ Capco\AppBundle\Entity\Project:
     title:
       groups: [Projects, Elasticsearch]
     Author:
-      groups: [Projects]
+      groups: [Projects, Elasticsearch]
       serialized_name: author
     participantsCount:
       groups: [Projects]
@@ -18,9 +18,9 @@ Capco\AppBundle\Entity\Project:
     updatedAt:
       groups: [Default]
     themes:
-      groups: [Projects]
+      groups: [Projects, Elasticsearch]
     projectType:
-      groups: [Projects]
+      groups: [Projects, Elasticsearch]
     video:
       groups: [Projects]
     Cover:
@@ -32,3 +32,5 @@ Capco\AppBundle\Entity\Project:
     startAt:
       groups: [Projects]
       serialized_name: startAt
+    publishedAt:
+      groups: [Projects, Elasticsearch]

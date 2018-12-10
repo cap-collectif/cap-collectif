@@ -1,7 +1,7 @@
 @projects @read-only
 Feature: Projects
 
-Scenario: GraphQL client wants to list projects by latest 
+Scenario: GraphQL client wants to list projects by latest
   Given I send a GraphQL POST request:
   """
   {
