@@ -7,21 +7,20 @@ use Capco\AppBundle\Mailer\Message\ExternalMessage;
 
 final class CommentCreateAuthorMessage extends ExternalMessage
 {
-    public static function create(Comment $comment,
-                                  string $recipentEmail,
-                                  string $proposalUrl,
-                                  string $disableNotificationsUrl,
-                                  string $notificationsUrl,
-                                  string $authorUrl,
-                                  string $recipientName = null): self
-    {
+    public static function create(
+        Comment $comment,
+        string $recipentEmail,
+        string $commentUrl,
+        string $disableNotificationsUrl,
+        string $notificationsUrl,
+        string $authorUrl,
+        string $recipientName = null
+    ): self {
         $message = new self(
             $recipentEmail,
             $recipientName,
             'notification.email.comment.to_user.create.subject',
-            static::getMySubjectVars(
-                $comment->getAuthor()->getDisplayName()
-            ),
+            static::getMySubjectVars($comment->getAuthor()->getDisplayName()),
             'notification.email.comment.to_user.create.body',
             static::getMyTemplateVars(
                 $authorUrl,
@@ -30,7 +29,7 @@ final class CommentCreateAuthorMessage extends ExternalMessage
                 $comment->getCreatedAt()->format('d/m/Y'),
                 $comment->getCreatedAt()->format('H:i:s'),
                 $comment->getBodyTextExcerpt(),
-                $proposalUrl,
+                $commentUrl,
                 $disableNotificationsUrl,
                 $notificationsUrl
             )
@@ -46,7 +45,7 @@ final class CommentCreateAuthorMessage extends ExternalMessage
         string $date,
         string $time,
         string $comment,
-        string $proposalUrl,
+        string $commentUrl,
         string $disableNotificationsUrl,
         string $notificationsUrl
     ): array {
@@ -57,15 +56,14 @@ final class CommentCreateAuthorMessage extends ExternalMessage
             '%date%' => $date,
             '%time%' => $time,
             '%comment%' => self::escape($comment),
-            '%proposalUrl%' => $proposalUrl,
+            '%proposalUrl%' => $commentUrl,
             '%disableNotificationsUrl%' => $disableNotificationsUrl,
             '%notificationsUrl%' => $notificationsUrl,
         ];
     }
 
-    private static function getMySubjectVars(
-        string $username
-    ): array {
+    private static function getMySubjectVars(string $username): array
+    {
         return [
             '%username%' => self::escape($username),
         ];

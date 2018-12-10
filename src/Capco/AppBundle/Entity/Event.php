@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
@@ -60,7 +61,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     /**
      * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
-    private $endAt;
+    private $endAt = null;
 
     /**
      * @ORM\Column(name="zipCode", type="integer", nullable=true)
@@ -286,7 +287,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     }
 
     /**
-     * @param string|float|int $lat
+     * @param mixed $lat
      */
     public function setLat($lat): self
     {
@@ -296,7 +297,6 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         }
 
         $this->lat = $lat;
-
         return $this;
     }
 
@@ -345,7 +345,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this->startAt;
     }
 
-    public function setStartAt(?\DateTime $startAt = null)
+    public function setStartAt(\DateTime $startAt = null)
     {
         $this->startAt = $startAt;
     }
@@ -355,7 +355,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this->endAt;
     }
 
-    public function setEndAt(?\DateTime $endAt = null)
+    public function setEndAt(\DateTime $endAt = null)
     {
         $this->endAt = $endAt;
     }
