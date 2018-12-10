@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\EventListener\CommentSubscriber;
-use Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
@@ -21,7 +20,6 @@ use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminAnonymousMessage;
 use Capco\AppBundle\Mailer\Message\Comment\CommentUpdateAdminMessage;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class CommentNotifier extends BaseNotifier
 {
@@ -29,8 +27,6 @@ class CommentNotifier extends BaseNotifier
     protected $proposalResolver;
     protected $proposalUrlResolver;
     protected $userUrlResolver;
-    protected $translator;
-    protected $commentShowUrlResolver;
 
     public function __construct(
         MailerService $mailer,
@@ -39,17 +35,13 @@ class CommentNotifier extends BaseNotifier
         CommentResolver $commentResolver,
         ProposalResolver $proposalResolver,
         ProposalUrlResolver $proposalUrlResolver,
-        UserUrlResolver $userUrlResolver,
-        TranslatorInterface $translator,
-        CommentShowUrlResolver $commentShowUrlResolver
+        UserUrlResolver $userUrlResolver
     ) {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->commentResolver = $commentResolver;
         $this->proposalResolver = $proposalResolver;
         $this->proposalUrlResolver = $proposalUrlResolver;
         $this->userUrlResolver = $userUrlResolver;
-        $this->commentShowUrlResolver = $commentShowUrlResolver;
-        $this->translator = $translator;
     }
 
     public function onCreate(Comment $comment)
@@ -64,14 +56,11 @@ class CommentNotifier extends BaseNotifier
                     ->isNotifyingCommentOnCreate()
             ) {
                 if ($isAnonymous) {
-                    $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
-                    $comment->setAuthorName($author);
-
                     $this->mailer->sendMessage(
                         CommentCreateAdminAnonymousMessage::create(
                             $comment,
                             $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentShowUrlResolver->__invoke($comment),
+                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
                             $this->commentResolver->getAdminUrl($comment, true)
                         )
                     );
@@ -80,7 +69,7 @@ class CommentNotifier extends BaseNotifier
                         CommentCreateAdminMessage::create(
                             $comment,
                             $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentShowUrlResolver->__invoke($comment),
+                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
                             $this->commentResolver->getAdminUrl($comment, true),
                             $this->userUrlResolver->__invoke($comment->getAuthor())
                         )
@@ -94,13 +83,11 @@ class CommentNotifier extends BaseNotifier
                 $user !== $comment->getAuthor()
             ) {
                 if ($isAnonymous) {
-                    $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
-                    $comment->setAuthorName($author);
                     $this->mailer->sendMessage(
                         CommentCreateAuthorAnonymousMessage::create(
                             $comment,
                             $user->getEmail(),
-                            $this->commentShowUrlResolver->__invoke($comment),
+                            $this->proposalUrlResolver->__invoke($comment->getProposal()),
                             $this->userResolver->resolveDisableNotificationsUrl($user),
                             $this->userResolver->resolveShowNotificationsPreferencesUrl()
                         )
@@ -110,7 +97,7 @@ class CommentNotifier extends BaseNotifier
                         CommentCreateAuthorMessage::create(
                             $comment,
                             $user->getEmail(),
-                            $this->commentShowUrlResolver->__invoke($comment),
+                            $this->proposalUrlResolver->__invoke($comment->getProposal()),
                             $this->userResolver->resolveDisableNotificationsUrl($user),
                             $this->userResolver->resolveShowNotificationsPreferencesUrl(),
                             $this->userUrlResolver->__invoke($comment->getAuthor())
@@ -144,10 +131,6 @@ class CommentNotifier extends BaseNotifier
             switch ($comment['notifyTo']) {
                 case CommentSubscriber::NOTIFY_TO_ADMIN:
                     if ($comment['anonymous']) {
-                        $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
-                        $comment['username'] = empty($comment['username'])
-                            ? $author
-                            : $comment['username'];
                         $this->mailer->sendMessage(
                             CommentDeleteAdminAnonymousMessage::create(
                                 $comment,
@@ -177,7 +160,6 @@ class CommentNotifier extends BaseNotifier
                             )
                         );
                     }
-
                     break;
             }
         }
@@ -195,14 +177,11 @@ class CommentNotifier extends BaseNotifier
                     ->isNotifyingCommentOnUpdate()
             ) {
                 if ($isAnonymous) {
-                    $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
-                    $comment->setAuthorName($author);
-
                     $this->mailer->sendMessage(
                         CommentUpdateAdminAnonymousMessage::create(
                             $comment,
                             $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentShowUrlResolver->__invoke($comment),
+                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
                             $this->commentResolver->getAdminUrl($comment, true)
                         )
                     );
@@ -211,7 +190,7 @@ class CommentNotifier extends BaseNotifier
                         CommentUpdateAdminMessage::create(
                             $comment,
                             $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                            $this->commentShowUrlResolver->__invoke($comment),
+                            $this->commentResolver->getUrlOfRelatedObject($comment, true),
                             $this->commentResolver->getAdminUrl($comment, true),
                             $this->userUrlResolver->__invoke($comment->getAuthor())
                         )
