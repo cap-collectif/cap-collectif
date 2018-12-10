@@ -62,7 +62,10 @@ export class DeleteButtonPopover extends React.Component<Props> {
           </Popover>
         }>
         <Button bsStyle="danger" className="btn-outline-danger">
-          <i className="cap cap-times" /> <FormattedMessage id="global.delete" />
+          <i className="cap cap-times" />{' '}
+          <span className="hidden-xs">
+            <FormattedMessage id="global.delete" />
+          </span>
         </Button>
       </OverlayTrigger>
     );

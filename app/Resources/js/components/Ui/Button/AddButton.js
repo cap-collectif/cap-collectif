@@ -8,7 +8,7 @@ const AddButton = ({ onClick }: { onClick: () => void }) => (
     bsStyle="primary"
     className="btn-outline-primary box-content__toolbar mb-5"
     onClick={onClick}>
-    <i className="fa fa-plus-circle" /> <FormattedMessage id="global.add" />
+    <i className="fa fa-plus-circle" /> <FormattedMessage id="global.create" />
   </Button>
 );
 

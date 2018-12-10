@@ -1,12 +1,13 @@
 {% set districtsCount = project.districts|length %}
 {% if districtsCount < 3 %}
     {% for district in project.districts %}
+        {% if loop.first %}·{% endif %}
         {{district.name}}{% if not loop.last %}, {% endif %}
     {% endfor %}
 {% else %}
     <button class="btn-link project__district-modal-link" data-toggle="modal" data-target="#modal-district-list">
-    {{project.districts[0].name}} {{ 'and-count-other-areas' | trans({'{count}': districtsCount - 1 }, 'CapcoAppBundle') }}
-        </button>
+        {{project.districts[0].name}} {{ 'and-count-other-areas' | trans({'{count}': districtsCount - 1 }, 'CapcoAppBundle') }}
+    </button>
 {% endif %}
 <div class="modal fade  modal--custom" id="modal-district-list" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
