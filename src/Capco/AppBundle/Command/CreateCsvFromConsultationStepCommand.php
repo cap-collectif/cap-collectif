@@ -303,7 +303,7 @@ EOF;
         $steps = $this->consultationStepRepository->getAllStepsWithAProject();
         foreach ($steps as $key => $step) {
             $output->writeln(
-                "\n<info>Exporting step " . ($key + 1) . "/" . \count($steps) . "</info>"
+                "\n<info>Exporting step " . ($key + 1) . '/' . \count($steps) . '</info>'
             );
             $this->currentStep = $step;
             $this->generateSheet($step, $output);
@@ -630,7 +630,7 @@ EOF;
         });
 
         // we add Opinion's arguments rows.
-        $this->connectionTraversor->traverseMutatePath(
+        $this->connectionTraversor->traverse(
             $contribution,
             'arguments',
             function ($edge) use ($contribution) {
@@ -641,7 +641,8 @@ EOF;
                     $contribution['id'],
                     $pageInfo['endCursor']
                 );
-            }
+            },
+            true
         );
 
         // We add Opinion's versions rows.
