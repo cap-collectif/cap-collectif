@@ -10,7 +10,8 @@ type Props = {
 export const WYSIWYGRender = (props: Props) => {
   const { value, tagName, className } = props;
 
-  if (!value) {
+  // sorry for that: https://github.com/quilljs/quill/issues/1235
+  if (!value || value === '<p><br /></p>') {
     return null;
   }
 
