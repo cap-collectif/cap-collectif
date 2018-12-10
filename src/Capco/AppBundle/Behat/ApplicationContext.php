@@ -72,6 +72,7 @@ class ApplicationContext extends UserContext
         ];
 
         $scenario = $scope->getScenario();
+        $suite = $scope->getSuite();
 
         // This tag make sure queues are empty at the begining of a test
         if ($scenario->hasTag('rabbitmq')) {
@@ -119,7 +120,7 @@ class ApplicationContext extends UserContext
             ['indices' => $this->indexManager->getLiveSearchIndexName()],
             true
         );
-        $this->cookieConsented = !$scenario->hasTag('javascript');
+        $this->cookieConsented = !$this->isSuiteWithJS($suite);
     }
 
     /**

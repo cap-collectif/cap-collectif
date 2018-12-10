@@ -11,10 +11,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-// TODO: remove when we use Symfony 3.0
-// This avoid failure because of deprecated warnings
-error_reporting(0);
-
 abstract class DefaultContext extends MinkContext implements Context, KernelAwareContext
 {
     protected $navigationContext;
@@ -29,7 +25,9 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     {
         $environment = $scope->getEnvironment();
 
-        $this->navigationContext = $environment->getContext('Capco\AppBundle\Behat\NavigationContext');
+        $this->navigationContext = $environment->getContext(
+            'Capco\AppBundle\Behat\NavigationContext'
+        );
     }
 
     /**
@@ -133,6 +131,8 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
      */
     protected function generateUrl($route, array $parameters = [], $absolute = false)
     {
-        return $this->locatePath($this->getService('router')->generate($route, $parameters, $absolute));
+        return $this->locatePath(
+            $this->getService('router')->generate($route, $parameters, $absolute)
+        );
     }
 }
