@@ -7,8 +7,6 @@ Capco\AppBundle\Entity\Project:
     Author:
       groups: [Projects]
       serialized_name: author
-    contributionsCount:
-      groups: [Projects]
     participantsCount:
       groups: [Projects]
     votesCount:

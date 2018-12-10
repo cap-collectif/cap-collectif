@@ -6,8 +6,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     otherAllowed:
       groups: [Questions]
       serialized_name: isOtherAllowed
-    questionChoices:
-      serialized_name: choices
+    choices:
       groups: [Questions]
     validationRule:
       groups: [Questions]
