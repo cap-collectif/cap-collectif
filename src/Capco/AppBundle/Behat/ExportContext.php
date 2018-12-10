@@ -29,6 +29,103 @@ class ExportContext implements KernelAwareContext
         $this->kernel = $kernel;
     }
 
+    /**
+     * @Then /^exported "([^"]*)" file with name "([^"]*)" should have header:$/
+     */
+    public function exportedFileTypeFileWithNameShouldHaveHeader(
+        string $fileType,
+        string $name,
+        PyStringNode $behatInput
+    ): void {
+        $this->setConfigParameter('readerType', $fileType);
+
+        $path = $this->getExportDir() . "/${name}";
+
+        Assert::assertFileExists($path);
+
+        $delimiter = $this->getConfigParameter('delimiter');
+        $csvLines = $this->getFileLines($path);
+        $csvHeader = array_shift($csvLines);
+        $behatLines = $behatInput->getStrings();
+        $behatHeader = explode($delimiter, array_shift($behatLines));
+
+        $output = $this->getCleanOutput($behatHeader, $behatLines, $csvHeader, $csvLines);
+
+        $this->compareHeader($output['expected']['header'], $output['actual']['header']);
+    }
+
+    /**
+     * @Then /^exported "([^"]*)" file with name "([^"]*)" should have (?P<num>\d+) rows$/
+     */
+    public function exportedFileTypeFileWithNameShouldHaveRows(
+        string $fileType,
+        string $name,
+        int $rows
+    ): void {
+        $this->setConfigParameter('readerType', $fileType);
+
+        $path = $this->getExportDir() . "/${name}";
+
+        Assert::assertFileExists($path);
+
+        $lines = $this->getFileLines($path);
+        Assert::assertCount($rows, $lines);
+    }
+
+    /**
+     * @Then /^exported "([^"]*)" file with name "([^"]*)" should match its snapshot$/
+     */
+    public function exportedFileTypeFileWithNameShouldLooksLikeItsSnapshot(
+        string $fileType,
+        string $name
+    ): void {
+        $this->setConfigParameter('readerType', $fileType);
+
+        $realPath = $this->getExportDir() . "/${name}";
+        $snapshotPath = $this->getSnapshotsDir() . "/${name}";
+
+        Assert::assertFileExists($realPath);
+        Assert::assertFileExists($snapshotPath);
+
+        $csvLines = $this->getFileLines($realPath);
+        $csvHeader = array_shift($csvLines);
+        $snapshotLines = $this->getFileLines($snapshotPath);
+        $snapshotHeader = array_shift($snapshotLines);
+
+        $output = $this->getCleanOutput($snapshotHeader, $snapshotLines, $csvHeader, $csvLines);
+
+        $this->compareOutput($output);
+    }
+
+    /**
+     * @Then /^exported "([^"]*)" file with name "([^"]*)" should contain:$/
+     */
+    public function exportedFileTypeFileWithNameShouldCountain(
+        string $fileType,
+        string $name,
+        PyStringNode $behatInput
+    ): void {
+        $this->setConfigParameter('readerType', $fileType);
+
+        $path = $this->getExportDir() . "/${name}";
+
+        Assert::assertFileExists($path);
+
+        $delimiter = $this->getConfigParameter('delimiter');
+
+        $csvLines = $this->getFileLines($path);
+        $csvHeader = array_shift($csvLines);
+        $behatLines = $behatInput->getStrings();
+        $behatHeader = explode($delimiter, array_shift($behatLines));
+        $behatLines = array_map(function (string $behatLine) use ($delimiter) {
+            return explode($delimiter, $behatLine);
+        }, $behatLines);
+
+        $output = $this->getCleanOutput($behatHeader, $behatLines, $csvHeader, $csvLines);
+
+        $this->compareOutput($output);
+    }
+
     private function getExportDir(): string
     {
         return $this->getKernel()->getRootDir() . '/../web/export';
@@ -62,10 +159,12 @@ class ExportContext implements KernelAwareContext
     {
         $readerType = $this->getConfigParameter('readerType');
         $reader = ReaderFactory::create($readerType);
-        if ($readerType === Type::CSV && $reader instanceof Reader) {
+        if (Type::CSV === $readerType && $reader instanceof Reader) {
             $reader
                 ->setFieldDelimiter($this->getConfigParameter('delimiter'))
                 ->setFieldEnclosure($this->getConfigParameter('enclosure'));
+        } elseif (Type::XLSX === $readerType && $reader instanceof \Box\Spout\Reader\XLSX\Reader) {
+            $reader->setShouldPreserveEmptyRows(true);
         }
 
         return $reader;
@@ -81,86 +180,6 @@ class ExportContext implements KernelAwareContext
         $reader->close();
 
         return $lines;
-    }
-
-    /**
-     * @Then /^exported file with name "([^"]*)" should have header:$/
-     */
-    public function exportedFileWithNameShouldHaveHeader(
-        string $name,
-        PyStringNode $behatInput
-    ): void {
-        $path = $this->getExportDir() . "/$name";
-
-        Assert::assertFileExists($path);
-
-        $delimiter = $this->getConfigParameter('delimiter');
-        $csvLines = $this->getFileLines($path);
-        $csvHeader = array_shift($csvLines);
-        $behatLines = $behatInput->getStrings();
-        $behatHeader = explode($delimiter, array_shift($behatLines));
-
-        $output = $this->getCleanOutput($behatHeader, $behatLines, $csvHeader, $csvLines);
-
-        $this->compareHeader($output['expected']['header'], $output['actual']['header']);
-    }
-
-    /**
-     * @Then /^exported file with name "([^"]*)" should have (?P<num>\d+) rows$/
-     */
-    public function exportedFileWithNameShouldHaveRows(string $name, int $rows): void
-    {
-        $path = $this->getExportDir() . "/$name";
-
-        Assert::assertFileExists($path);
-
-        $csvLines = $this->getFileLines($path);
-        Assert::assertCount($rows, $csvLines);
-    }
-
-    /**
-     * @Then /^exported file with name "([^"]*)" should match its snapshot$/
-     */
-    public function exportedFileWithNameShouldLooksLikeItsSnapshot(string $name): void
-    {
-        $realPath = $this->getExportDir() . "/$name";
-        $snapshotPath = $this->getSnapshotsDir() . "/$name";
-
-        Assert::assertFileExists($realPath);
-        Assert::assertFileExists($snapshotPath);
-
-        $csvLines = $this->getFileLines($realPath);
-        $csvHeader = array_shift($csvLines);
-        $snapshotLines = $this->getFileLines($snapshotPath);
-        $snapshotHeader = array_shift($snapshotLines);
-
-        $output = $this->getCleanOutput($snapshotHeader, $snapshotLines, $csvHeader, $csvLines);
-
-        $this->compareOutput($output);
-    }
-
-    /**
-     * @Then /^exported file with name "([^"]*)" should contain:$/
-     */
-    public function exportedFileWithNameShouldCountain(string $name, PyStringNode $behatInput): void
-    {
-        $path = $this->getExportDir() . "/$name";
-
-        Assert::assertFileExists($path);
-
-        $delimiter = $this->getConfigParameter('delimiter');
-
-        $csvLines = $this->getFileLines($path);
-        $csvHeader = array_shift($csvLines);
-        $behatLines = $behatInput->getStrings();
-        $behatHeader = explode($delimiter, array_shift($behatLines));
-        $behatLines = array_map(function (string $behatLine) use ($delimiter) {
-            return explode($delimiter, $behatLine);
-        }, $behatLines);
-
-        $output = $this->getCleanOutput($behatHeader, $behatLines, $csvHeader, $csvLines);
-
-        $this->compareOutput($output);
     }
 
     private function compareHeader(array $expected, array $actual): void
@@ -219,7 +238,7 @@ class ExportContext implements KernelAwareContext
                             $i + 1,
                             implode(' | ', $actual[$i]),
                             implode(' | ', $expected[$i]),
-                            "$cellValue ($columnName)"
+                            "${cellValue} (${columnName})"
                         )
                     );
                 }
@@ -240,6 +259,7 @@ class ExportContext implements KernelAwareContext
                 foreach ($expectedLine as $i => $csvField) {
                     $result[$expectedHeader[$i]] = $csvField;
                 }
+
                 return $result;
             }, $expectedLines),
         ];
@@ -251,6 +271,7 @@ class ExportContext implements KernelAwareContext
                 foreach ($actualLine as $i => $field) {
                     $result[$actualHeader[$i]] = $field;
                 }
+
                 return $result;
             }, $actualLines),
         ];
