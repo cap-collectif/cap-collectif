@@ -18,15 +18,15 @@ type Props = {
 
 const PanelBorderStyle = ({ member, isPanelOpen, opacities, handlePanelToggle }: Props) => (
   <Panel expanded={isPanelOpen} onToggle={() => {}}>
-    <FormSection name={`${member}.border`}>
-      <Panel.Heading>
-        <Row>
-          <Col md={8} xs={6}>
-            <h4>
-              <FormattedMessage id="border" />
-            </h4>
-          </Col>
-          <Col md={4} xs={6} style={{ paddingLeft: '50px' }}>
+    <Panel.Heading>
+      <Row>
+        <Col md={8} xs={6}>
+          <h4>
+            <FormattedMessage id="border" />
+          </h4>
+        </Col>
+        <Col md={4} xs={6} style={{ paddingLeft: '50px' }}>
+          <FormSection name={`${member}.border`}>
             <Field
               component={toggle}
               type="checkbox"
@@ -37,11 +37,13 @@ const PanelBorderStyle = ({ member, isPanelOpen, opacities, handlePanelToggle }:
               normalize={val => !!val}
               format={val => !!val}
             />
-          </Col>
-        </Row>
-      </Panel.Heading>
-      <Panel.Collapse>
-        <Panel.Body>
+          </FormSection>
+        </Col>
+      </Row>
+    </Panel.Heading>
+    <Panel.Collapse>
+      <Panel.Body>
+        <FormSection name={`${member}.border`}>
           <Field
             component={component}
             type="number"
@@ -71,9 +73,9 @@ const PanelBorderStyle = ({ member, isPanelOpen, opacities, handlePanelToggle }:
             name="color"
             label={<FormattedMessage id="color" />}
           />
-        </Panel.Body>
-      </Panel.Collapse>
-    </FormSection>
+        </FormSection>
+      </Panel.Body>
+    </Panel.Collapse>
   </Panel>
 );
 

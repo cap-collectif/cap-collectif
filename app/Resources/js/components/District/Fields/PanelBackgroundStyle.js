@@ -18,15 +18,15 @@ type Props = {
 
 const PanelBackgroundStyle = ({ member, isPanelOpen, opacities, handlePanelToggle }: Props) => (
   <Panel expanded={isPanelOpen} onToggle={() => {}}>
-    <FormSection name={`${member}.background`}>
-      <Panel.Heading>
-        <Row>
-          <Col md={8} xs={6}>
-            <h4>
-              <FormattedMessage id="background" />
-            </h4>
-          </Col>
-          <Col md={4} xs={6} style={{ paddingLeft: '50px' }}>
+    <Panel.Heading>
+      <Row>
+        <Col md={8} xs={6}>
+          <h4>
+            <FormattedMessage id="background" />
+          </h4>
+        </Col>
+        <Col md={4} xs={6} style={{ paddingLeft: '50px' }}>
+          <FormSection name={`${member}.background`}>
             <Field
               component={toggle}
               type="checkbox"
@@ -37,11 +37,13 @@ const PanelBackgroundStyle = ({ member, isPanelOpen, opacities, handlePanelToggl
               normalize={val => !!val}
               format={val => !!val}
             />
-          </Col>
-        </Row>
-      </Panel.Heading>
-      <Panel.Collapse>
-        <Panel.Body>
+          </FormSection>
+        </Col>
+      </Row>
+    </Panel.Heading>
+    <Panel.Collapse>
+      <Panel.Body>
+        <FormSection name={`${member}.background`}>
           <Field
             component={component}
             type="select"
@@ -63,9 +65,9 @@ const PanelBackgroundStyle = ({ member, isPanelOpen, opacities, handlePanelToggl
             name="color"
             label={<FormattedMessage id="color" />}
           />
-        </Panel.Body>
-      </Panel.Collapse>
-    </FormSection>
+        </FormSection>
+      </Panel.Body>
+    </Panel.Collapse>
   </Panel>
 );
 
