@@ -14,7 +14,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           "endAt": "2014-09-27T00:00:00+0200",
           "id": "stepId",
           "startAt": "2014-08-14T00:00:00+0200",
-          "status": "OPENED",
+          "status": "open",
           "timeless": false,
           "title": "stepTitle",
         }
@@ -64,7 +64,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
           "endAt": "2014-09-27T00:00:00+0200",
           "id": "stepId",
           "startAt": "2014-08-14T00:00:00+0200",
-          "status": "OPENED",
+          "status": "open",
           "timeless": false,
           "title": "stepTitle",
         }
@@ -180,7 +180,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
           "endAt": "2014-09-27T00:00:00+0200",
           "id": "stepId",
           "startAt": "2014-08-14T00:00:00+0200",
-          "status": "OPENED",
+          "status": "open",
           "timeless": false,
           "title": "stepTitle",
         }

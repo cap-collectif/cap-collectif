@@ -84,7 +84,9 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     // move left
     if (activeTabRight > barRight) {
       const diffRight = barRight - activeTabRight;
-      this.setState({ translateX: diffRight - stepTabsSvgWidth });
+      this.setState({
+        translateX: diffRight - stepTabsSvgWidth,
+      });
     }
 
     // if it doesn't move
@@ -94,7 +96,9 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
         scrollNavWidth > stepTabsBarWidth) ||
       (scrollNavWidth > stepTabsBarWidth && !activeTab)
     ) {
-      this.setState({ showArrowRight: true });
+      this.setState({
+        showArrowRight: true,
+      });
     }
   };
 
@@ -108,13 +112,18 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
 
     if (preState.translateX === 0 && this.state.translateX !== 0) {
       if (this.state.translateX < 0) {
-        this.setState({ showArrowLeft: true });
+        this.setState({
+          showArrowLeft: true,
+        });
       }
     }
 
     if (firstArrowDisplay) {
       if (scrollNavRight + translateX > barRight) {
-        this.setState({ showArrowRight: true, firstArrowDisplay: false });
+        this.setState({
+          showArrowRight: true,
+          firstArrowDisplay: false,
+        });
       }
     }
 
@@ -124,7 +133,9 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       preState.showArrowRight === false &&
       this.state.showArrowRight !== false
     ) {
-      this.setState({ translateX: translateX - nextArrowWidth });
+      this.setState({
+        translateX: translateX - nextArrowWidth,
+      });
     }
   };
 
@@ -196,18 +207,6 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     }
   };
 
-  renderStepStatus(step: Object) {
-    if (step.status === 'OPENED') {
-      return <FormattedMessage id="step.status.open" />;
-    }
-    if (step.status === 'FUTURE') {
-      return <FormattedMessage id="step.status.future" />;
-    }
-    if (step.status === 'CLOSED') {
-      return <FormattedMessage id="step.status.closed" />;
-    }
-  }
-
   render() {
     const { steps } = this.props;
 
@@ -238,47 +237,47 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
             )}
             <div className="step-tabs__list" id="step-tabs-list">
               <ul className="nav" id="step-tabs-scroll-nav" style={{ transform: translation }}>
-                {steps
-                  .filter(step => step.enabled)
-                  .map((step, key) => (
-                    <li className={this.getClass(step.id)} key={key}>
-                      <a href={step._links.show} className="d-flex">
-                        <div className="navbar__step-nb">
-                          <span>{key + 1}</span>
-                        </div>
+                {steps.filter(step => step.enabled).map((step, key) => (
+                  <li className={this.getClass(step.id)} key={key}>
+                    <a href={step._links.show} className="d-flex">
+                      <div className="navbar__step-nb">
+                        <span>{key + 1}</span>
+                      </div>
 
-                        <div className="navbar__step">
-                          <span className="navbar__step-title">
-                            <span className="navbar__step-nb_small">{key + 1}.</span>
-                            {step.label}
-                          </span>
-                          <p className="excerpt">
-                            {step.type !== 'presentation' && this.renderStepStatus(step)}
-                          </p>
-                        </div>
-                      </a>
-                      <svg
-                        id="step-tabs-svg"
-                        height="80"
-                        width="21"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          <filter id="f1" x="0" y="0" width="200%" height="200%">
-                            <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
-                            <feColorMatrix
-                              result="matrixOut"
-                              in="offOut"
-                              type="matrix"
-                              values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
-                            />
-                            <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1" />
-                            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-                          </filter>
-                        </defs>
-                        <polygon points="0,0, 0,80,20 40" filter="url(#f1)" />
-                      </svg>
-                    </li>
-                  ))}
+                      <div className="navbar__step">
+                        <span className="navbar__step-title">
+                          <span className="navbar__step-nb_small">{key + 1}.</span>
+                          {step.label}
+                        </span>
+                        <p className="excerpt">
+                          {step.type !== 'presentation' && (
+                            <FormattedMessage id={`step.status.${step.status}`} />
+                          )}
+                        </p>
+                      </div>
+                    </a>
+                    <svg
+                      id="step-tabs-svg"
+                      height="80"
+                      width="21"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <filter id="f1" x="0" y="0" width="200%" height="200%">
+                          <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
+                          <feColorMatrix
+                            result="matrixOut"
+                            in="offOut"
+                            type="matrix"
+                            values="0.60 0 0 0 0 0 0.60 0 0 0 0 0 0.60 0 0 0 0 0 1 0 "
+                          />
+                          <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="1" />
+                          <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                        </filter>
+                      </defs>
+                      <polygon points="0,0, 0,80,20 40" filter="url(#f1)" />
+                    </svg>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

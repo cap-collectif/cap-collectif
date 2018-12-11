@@ -629,6 +629,14 @@ class ApplicationContext extends UserContext
      */
     public function iTryToDownload(string $path)
     {
+        // Fix SSL problem.
+        stream_context_set_default([
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+            ],
+        ]);
+
         $url = $this->getSession()->getCurrentUrl() . $path;
         $this->headers = get_headers($url);
         $this->getSession()->visit($url);

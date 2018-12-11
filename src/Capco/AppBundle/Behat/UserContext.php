@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Behat;
 
 use PHPUnit\Framework\Assert;
@@ -143,59 +144,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * Almost all our testing scenarios needs to be authenticated.
-     * We could go threw the login process everytime but it would take a lot of time !
-     * And we also don't need to test the login process multiple times (login.feature is enough).
-     *
-     * That's why we are simulating an HTTP authentication here :
-     */
-    private function iAmAuthenticatedAs(string $email): void
-    {
-        $user = $this->getService(UserManager::class)->findUserByEmail($email);
-        if (!$user) {
-            throw new \RuntimeException(
-                'Could not find user associated with username:' . $username
-            );
-        }
-
-        // We create a new server session
-        $serverSession = $this->getService('session');
-
-        // We populate the server session with an authenticated token
-        $providerKey = $this->getParameter('fos_user.firewall_name');
-        $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
-        $serverSession->set('_security_' . $providerKey, serialize($token));
-        $serverSession->save();
-
-        $driver = $this->getSession()->getDriver();
-        $cookie = [
-            "domain" => "capco.test",
-            "name" => $serverSession->getName(),
-            "value" => $serverSession->getId(),
-            "path" => "/",
-            "secure" => true,
-        ];
-        try {
-            // We manually set the client cookie
-            $driver->getWebDriverSession()->setCookie($cookie);
-        } catch (\Exception $e) {
-            if (Text::startsWith($e->getMessage(), 'unable to set cookie')) {
-                // We have to navigate to a page to launch browser
-                // Maybe we can find a better way to start the browser with initial cookies…
-                $this->navigationContext->iVisitedPage('HomePage');
-
-                // We manually set the client cookie (again)
-                $driver->getWebDriverSession()->setCookie($cookie);
-            } else {
-                throw $e;
-            }
-        }
-
-        // Reload the page to authenticate user
-        $this->getSession()->reload();
-    }
-
-    /**
      * @Then I can see I am logged in as :username
      */
     public function iCanSeeIamLoggedInAs(string $username)
@@ -301,5 +249,67 @@ class UserContext extends DefaultContext
             ->setPrivate(false);
         $this->getEntityManager()->persist($registration);
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given I am on the home page
+     */
+    public function IAmOnTheHomePage()
+    {
+        $this->navigationContext->iVisitedPage('HomePage');
+    }
+
+    /**
+     * Almost all our testing scenarios needs to be authenticated.
+     * We could go threw the login process everytime but it would take a lot of time !
+     * And we also don't need to test the login process multiple times (login.feature is enough).
+     *
+     * That's why we are simulating an HTTP authentication here :
+     */
+    private function iAmAuthenticatedAs(string $email): void
+    {
+        $user = $this->getService(UserManager::class)->findUserByEmail($email);
+        if (!$user) {
+            throw new \RuntimeException(
+                'Could not find user associated with username:' . $username
+            );
+        }
+
+        // We create a new server session
+        $serverSession = $this->getService('session');
+
+        // We populate the server session with an authenticated token
+        $providerKey = $this->getParameter('fos_user.firewall_name');
+        $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+        $serverSession->set('_security_' . $providerKey, serialize($token));
+        $serverSession->save();
+
+        $driver = $this->getSession()->getDriver();
+        $cookie = [
+            'domain' => 'capco.test',
+            'name' => $serverSession->getName(),
+            'value' => $serverSession->getId(),
+            'path' => '/',
+            'secure' => true,
+        ];
+
+        try {
+            // We manually set the client cookie
+            $driver->getWebDriverSession()->setCookie($cookie);
+        } catch (\Exception $e) {
+            if (Text::startsWith($e->getMessage(), 'unable to set cookie')) {
+                // We have to navigate to a page to launch browser
+                // Maybe we can find a better way to start the browser with initial cookies…
+                $this->navigationContext->iVisitedPage('HomePage');
+
+                // We manually set the client cookie (again)
+                $driver->getWebDriverSession()->setCookie($cookie);
+            } else {
+                throw $e;
+            }
+        }
+
+        // Reload the page to authenticate user
+        $this->getSession()->reload();
     }
 }

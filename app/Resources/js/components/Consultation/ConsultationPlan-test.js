@@ -13,7 +13,7 @@ describe('<ConsultationPlan />', () => {
       startAt: '2018-09-01T17:08:44+0200',
       endAt: '2018-09-29T13:23:45+0200',
       timeless: false,
-      status: 'OPENED',
+      status: 'open',
       $refType,
       $fragmentRefs,
     },
