@@ -193,7 +193,7 @@ class ConnectionTraversorSpec extends ObjectBehavior
 
         $this->getWrappedObject()->traverse(
             $initialData,
-            'data.node.contributionConnection',
+            'contributionConnection',
             function ($edge) {
                 Assert::assertNotNull($edge);
             },
