@@ -145,19 +145,21 @@ Scenario: Anonymous API client wants to register with unknown additional data
   Then the JSON response should match:
   """
   {
-    "code":400,
-    "message": "Validation Failed",
-    "errors": {
-      "errors": ["This form should not contain extra fields. {\"{{ extra_fields }}\":\"\\\"userType\\\", \\\"zipcode\\\"\"}"],
-      "children":{
-        "username":[],
-        "email":[],
-        "captcha":[],
-        "plainPassword":[],
-        "consentExternalCommunication":[],
-        "responses": []
-      }
-    }
+     "code":400,
+     "message":"Validation Failed",
+     "errors":{
+        "errors":[
+           "This form should not contain extra fields. {\"{{ extra_fields }}\":\"userType\\\", \\\"zipcode\"}"
+        ],
+        "children":{
+           "plainPassword":[],
+           "username":[],
+           "email":[],
+           "captcha":[],
+           "consentExternalCommunication":[],
+           "responses":[]
+        }
+     }
   }
   """
 

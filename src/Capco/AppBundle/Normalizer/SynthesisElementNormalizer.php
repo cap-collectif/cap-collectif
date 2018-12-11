@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
@@ -26,16 +27,20 @@ class SynthesisElementNormalizer implements NormalizerInterface, SerializerAware
         $this->logManager = $logManager;
     }
 
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         $data = $this->normalizer->normalize($object, $format, $context);
+        $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
 
-        $serializedLogs = $this->serializer->serialize(
-            $this->logManager->getLogEntries($object),
-            'json',
-            ['groups' => ['LogDetails']]
-        );
-        $data['logs'] = $serializedLogs ? json_decode($serializedLogs) : [];
+        if (\in_array('LogDetails', $groups)) {
+            $serializedLogs = $this->serializer->serialize(
+                $this->logManager->getLogEntries($object),
+                'json',
+                ['groups' => ['LogDetails']]
+            );
+            $data['logs'] = $serializedLogs ? json_decode($serializedLogs) : [];
+        }
+
         $data['_links']['self']['href'] = $this->router->generate(
             'get_synthesis_element',
             [
