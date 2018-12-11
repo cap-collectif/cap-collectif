@@ -50,8 +50,7 @@ const getCurrentStep = (project: ProjectPreviewBody_project) => {
 };
 
 const getActualStep = (project: ProjectPreviewBody_project) => {
-  const step = getStepsFilter(project);
-  const { stepContinuousParticipation, stepOpen, stepClosed, stepFuture } = step;
+  const { stepContinuousParticipation, stepOpen, stepClosed, stepFuture } = getStepsFilter(project);
 
   if (stepContinuousParticipation.length > 0) {
     return stepContinuousParticipation[0];
