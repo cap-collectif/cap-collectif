@@ -190,8 +190,6 @@ class ProjectPreviewBody extends React.Component<Props> {
 
     return (
       <div className="card__body">
-        {actualStep ? actualStep.type : 'type'}
-        {actualStep ? actualStep.status : 'status'}
         <div className="card__body__infos">
           <ProjectPreviewThemes project={project} />
           {this.getTitle()}
