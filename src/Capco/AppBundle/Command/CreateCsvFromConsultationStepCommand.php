@@ -420,7 +420,7 @@ EOF;
         $totalCount = Arr::path($contributions, 'data.node.contributionConnection.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
-        $this->connectionTraversor->traverseGood(
+        $this->connectionTraversor->traverse(
             $contributions,
             'contributionConnection',
             function ($edge) use ($progress) {
@@ -628,7 +628,7 @@ EOF;
         $this->writer->addRow($row);
 
         // we add Opinion's votes rows.
-        $this->connectionTraversor->traverseGood(
+        $this->connectionTraversor->traverse(
             $contribution,
             'votes',
             function ($edge) use ($contribution) {
@@ -643,7 +643,7 @@ EOF;
         );
 
         // we add Opinion's sources rows.
-        $this->connectionTraversor->traverseGood(
+        $this->connectionTraversor->traverse(
             $contribution,
             'sources',
             function ($edge) use ($contribution) {
@@ -658,7 +658,7 @@ EOF;
         );
 
         // we add Opinion's reportings rows.
-        $this->connectionTraversor->traverseGood(
+        $this->connectionTraversor->traverse(
             $contribution,
             'reportings',
             function ($edge) use ($contribution) {
@@ -673,7 +673,7 @@ EOF;
         );
 
         // we add Opinion's arguments rows.
-        $this->connectionTraversor->traverseGood(
+        $this->connectionTraversor->traverse(
             $contribution,
             'arguments',
             function ($edge) use ($contribution) {
@@ -688,7 +688,7 @@ EOF;
         );
 
         // We add Opinion's versions rows.
-        $this->connectionTraversor->traverseGood(
+        $this->connectionTraversor->traverse(
             $contribution,
             'versions',
             function ($edge) use ($contribution) {

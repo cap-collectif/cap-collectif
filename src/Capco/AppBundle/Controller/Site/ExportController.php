@@ -135,7 +135,7 @@ class ExportController extends Controller
             $writer->addRow(USER_HEADERS_EVENTS);
             $connectionTraversor->traverse(
                 $data,
-                'data.node.participants',
+                'participants',
                 function ($edge) use ($writer) {
                     $contributor = $edge['node'];
                     if (isset($contributor['id'])) {
@@ -250,7 +250,7 @@ class ExportController extends Controller
             $writer->addRow(USER_HEADERS);
             $connectionTraversor->traverse(
                 $data,
-                'data.node.contributors',
+                'contributors',
                 function ($edge) use ($writer) {
                     $contributor = $edge['node'];
                     $writer->addRow([
@@ -330,7 +330,7 @@ class ExportController extends Controller
             $writer->addRow(USER_HEADERS);
             $connectionTraversor->traverse(
                 $data,
-                'data.node.contributors',
+                'contributors',
                 function ($edge) use ($writer) {
                     $contributor = $edge['node'];
                     $writer->addRow([
