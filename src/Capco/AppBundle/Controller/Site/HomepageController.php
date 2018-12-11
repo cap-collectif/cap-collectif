@@ -167,22 +167,9 @@ class HomepageController extends Controller
         Section $section = null
     ) {
         $max = $max ?? 3;
-        $offset = $offset ?? 0;
-        $serializer = $this->get('jms_serializer');
         $projectRepo = $this->get(ProjectRepository::class);
         $count = $projectRepo->countPublished($this->getUser());
-        $props = $serializer->serialize(
-            ['projects' => $projectRepo->getLastPublished($max, $offset, $this->getUser())],
-            'json',
-            SerializationContext::create()->setGroups([
-                'Projects',
-                'UserDetails',
-                'Steps',
-                'Themes',
-                'ProjectType',
-            ])
-        );
-        return ['max' => $max, 'props' => $props, 'count' => $count, 'section' => $section];
+        return ['max' => $max, 'count' => $count, 'section' => $section];
     }
 
     /**

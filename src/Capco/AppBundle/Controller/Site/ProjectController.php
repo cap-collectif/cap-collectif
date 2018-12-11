@@ -318,8 +318,9 @@ class ProjectController extends Controller
         $parameters['projectTypes'] = $this->get(
             'Capco\AppBundle\Repository\ProjectTypeRepository'
         )->findAll();
+        $limit = (int) $this->get(Resolver::class)->getValue('projects.pagination');
 
-        return ['params' => $parameters];
+        return ['params' => $parameters, 'limit' => $limit];
     }
 
     /**
