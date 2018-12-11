@@ -1,8 +1,10 @@
 <?php
+
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Resolver\ContributionResolver;
 use Capco\AppBundle\Resolver\StepResolver;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -20,27 +22,35 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
     private $helper;
     private $mediaExtension;
     private $stepResolver;
+    private $contributionResolver;
 
     public function __construct(
         UrlGeneratorInterface $router,
         ObjectNormalizer $normalizer,
         ProjectHelper $helper,
         MediaExtension $mediaExtension,
-        StepResolver $stepResolver
+        StepResolver $stepResolver,
+        ContributionResolver $contributionResolver
     ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
         $this->helper = $helper;
         $this->mediaExtension = $mediaExtension;
         $this->stepResolver = $stepResolver;
+        $this->contributionResolver = $contributionResolver;
     }
 
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups)) {
+            $data['projectStatus'] = $object->getCurrentStepStatus();
+            $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
+                $object
+            );
+
             return $data;
         }
 
@@ -80,6 +90,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
                 }
             }
         }
+
         return $data;
     }
 

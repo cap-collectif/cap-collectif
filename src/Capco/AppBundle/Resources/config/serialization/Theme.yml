@@ -4,6 +4,8 @@ Capco\AppBundle\Entity\Theme:
       groups: [ThemeDetails, Elasticsearch]
     title:
       groups: [Themes, ThemeDetails, Elasticsearch]
+    slug:
+      groups: [Themes, ThemeDetails, Elasticsearch]
     media:
       groups: [Default]
     isEnabled:
