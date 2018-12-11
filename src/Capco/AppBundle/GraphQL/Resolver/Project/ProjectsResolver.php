@@ -33,7 +33,7 @@ class ProjectsResolver implements ResolverInterface
 
                 $term = $args->offsetExists('term') ? $args->offsetGet('term') : null;
 
-                $limit = $args->offsetExists('limit') ?$args->offsetGet('limit') : 50;
+                $limit = $args->offsetExists('count') ?$args->offsetGet('count') : 50;
 
                 $order = $args->offsetExists('orderBy') ? $args->offsetGet('orderBy') : null;
 

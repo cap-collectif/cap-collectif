@@ -90,7 +90,6 @@ export default createRefetchContainer(
           theme: { type: "ID" }
           orderBy: { type: "ProjectOrder" }
           type: { type: "ID" }
-          limit: { type: "Int" }
           term: { type: "String" }
         ) {
         ...ProjectListViewPaginated_query
