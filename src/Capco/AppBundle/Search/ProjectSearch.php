@@ -38,7 +38,7 @@ class ProjectSearch extends Search
 
     public function searchProjects(
         int $offset,
-        int $limit = null,
+        ?int $limit = null,
         array $order = null,
         string $term = null,
         array $providedFilters
