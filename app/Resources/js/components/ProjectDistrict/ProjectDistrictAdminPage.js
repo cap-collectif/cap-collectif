@@ -144,10 +144,10 @@ export class ProjectDistrictAdminPage extends React.Component<Props, State> {
                     .map(district => (
                       <ListGroupItem key={district.id}>
                         <Row>
-                          <Col xs={7}>
+                          <Col xs={6} sm={7}>
                             <strong>{district.name}</strong>
                           </Col>
-                          <Col xs={5}>
+                          <Col xs={6} sm={5}>
                             <ButtonToolbar className="pull-right">
                               <EditButton onClick={() => this.handleEdit(district.id)} />
                               <DeleteButtonPopover
