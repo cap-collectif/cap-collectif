@@ -14,7 +14,7 @@ export class ProjectType extends React.Component<Props> {
     const { project } = this.props;
 
     return project.type ? (
-      <Card.Type color={project.type.color}>
+      <Card.Type bgColor={project.type.color}>
         <FormattedMessage id={project.type.title} />
       </Card.Type>
     ) : null;
