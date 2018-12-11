@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
 use Capco\AppBundle\Repository\ConsultationStepRepository;
@@ -30,10 +31,11 @@ class OpinionUrlResolver implements ResolverInterface
         $project = $step->getProject();
 
         if (
+            $project &&
             $project->getSlug() &&
             $step->getSlug() &&
-            $contribution->getOpinionType()->getSlug() &&
-            $contribution->getSlug()
+            $contribution->getSlug() &&
+            $contribution->getOpinionType()->getSlug()
         ) {
             return $this->router->generate(
                 'app_consultation_show_opinion',
@@ -49,6 +51,7 @@ class OpinionUrlResolver implements ResolverInterface
         $this->logger->warning(
             'Opinion ' . $contribution->getId() . ' cannot have his url generated.'
         );
+
         return '';
     }
 }
