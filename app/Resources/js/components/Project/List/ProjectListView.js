@@ -14,8 +14,6 @@ type Props = {
   type: ?string,
   theme: ?string,
   term: ?string,
-  limit: number,
-  paginate: boolean,
   relay: RelayRefetchProp,
 };
 type State = {
@@ -45,7 +43,6 @@ export class ProjectListView extends React.Component<Props, State> {
       orderBy: { field: this.props.orderBy, direction: 'ASC' },
       type: this.props.type,
       theme: this.props.theme,
-      limit: this.props.limit,
       term: this.props.term,
     });
 
@@ -60,13 +57,13 @@ export class ProjectListView extends React.Component<Props, State> {
   };
 
   render() {
-    const { query, limit, paginate } = this.props;
+    const { query } = this.props;
     const { isRefetching } = this.state;
     if (isRefetching) {
       return <Loader />;
     }
     /* $FlowFixMe */
-    return <ProjectListViewPaginated query={query} limit={limit} paginate={paginate} />;
+    return <ProjectListViewPaginated query={query} />;
   }
 }
 
@@ -93,7 +90,7 @@ export default createRefetchContainer(
           term: { type: "String" }
         ) {
         ...ProjectListViewPaginated_query
-          @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term, count: $count)
+          @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term)
       }
     `,
   },
@@ -107,7 +104,7 @@ export default createRefetchContainer(
       $term: String
     ) {
       ...ProjectListView_query
-        @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term, count: $count)
+        @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term)
     }
   `,
 );

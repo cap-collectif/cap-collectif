@@ -38,7 +38,7 @@ class ProjectSearch extends Search
 
     public function searchProjects(
         int $offset,
-        ?int $limit = null,
+        int $limit,
         array $order = null,
         string $term = null,
         array $providedFilters
@@ -74,6 +74,7 @@ class ProjectSearch extends Search
             }, $resultSet->getResults())
         );
         
+
         return [
             'projects' => $results,
             'count' => $resultSet->getTotalHits(),

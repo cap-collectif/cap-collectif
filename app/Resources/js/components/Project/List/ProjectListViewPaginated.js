@@ -9,8 +9,6 @@ import ProjectPreview from '../Preview/ProjectPreview';
 type Props = {
   relay: RelayPaginationProp,
   query: ProjectListViewPaginated_query,
-  limit: number,
-  paginate: boolean,
 };
 
 type State = {
@@ -23,7 +21,7 @@ export class ProjectListViewPaginated extends React.Component<Props, State> {
   };
 
   render() {
-    const { relay, query, limit, paginate } = this.props;
+    const { relay, query } = this.props;
     const { loading } = this.state;
     if (query.projects && query.projects.edges) {
       if (query.projects.edges.length > 0) {
@@ -39,19 +37,20 @@ export class ProjectListViewPaginated extends React.Component<Props, State> {
                   <ProjectPreview key={index} project={node} />
                 ))}
             </div>
-            {paginate && relay.hasMore() && (
-              <Button
-                className="see-more-projects-button"
-                disabled={loading}
-                onClick={() => {
-                  this.setState({ loading: true });
-                  relay.loadMore(limit, () => {
-                    this.setState({ loading: false });
-                  });
-                }}>
-                <FormattedMessage id="see-more-projects" />
-              </Button>
-            )}
+            <div>
+              {relay.hasMore() && (
+                <Button
+                  disabled={loading}
+                  onClick={() => {
+                    this.setState({ loading: true });
+                    relay.loadMore(50, () => {
+                      this.setState({ loading: false });
+                    });
+                  }}>
+                  <FormattedMessage id="see-more-projects" />
+                </Button>
+              )}
+            </div>
           </div>
         );
       }
@@ -70,7 +69,7 @@ export default createPaginationContainer(
     query: graphql`
       fragment ProjectListViewPaginated_query on Query
         @argumentDefinitions(
-          count: { type: "Int" }
+          count: { type: "Int", defaultValue: 50 }
           cursor: { type: "String", defaultValue: null }
           theme: { type: "ID" }
           orderBy: { type: "ProjectOrder" }

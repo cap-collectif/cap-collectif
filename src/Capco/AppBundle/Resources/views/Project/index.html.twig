@@ -56,7 +56,9 @@
 
     <section class="section--custom">
         <div class="container">
-            {{ react_render_component('ProjectListPageApp', {'props': {'limit': limit }}) }}
+            {{
+               react_render_component('ProjectListPageApp')
+            }}
         </div>
     </section>
 {% endblock %}

@@ -8,22 +8,31 @@ import type { ProjectsListQueryResponse } from './__generated__/ProjectsListQuer
 import { type GlobalState } from '../../../types';
 import ProjectListView from './ProjectListView';
 
+const renderProjectList = ({
+  error,
+  props,
+}: {
+  props: ?ProjectsListQueryResponse,
+} & ReadyState) => {
+  if (error) {
+    console.log(error); // eslint-disable-line no-console
+    return graphqlError;
+  }
+  if (props) {
+    return <ProjectListView query={props} />;
+  }
+  return <Loader />;
+};
+
 type Props = {
   orderBy: ?string,
   type: ?string,
   theme: ?string,
   term: ?string,
-  limit: number,
-  paginate: boolean,
 };
 
 class ProjectsList extends React.Component<Props> {
   initialRenderVars = {};
-
-  static defaultProps = {
-    limit: 50,
-    paginate: true,
-  };
 
   constructor(props: Props) {
     super(props);
@@ -32,29 +41,11 @@ class ProjectsList extends React.Component<Props> {
       orderBy: props.orderBy,
       type: props.type,
       term: props.term,
-      limit: props.limit,
     };
   }
 
-  renderProjectList = ({
-    error,
-    props,
-  }: {
-    props: ?ProjectsListQueryResponse,
-  } & ReadyState) => {
-    const { limit, paginate } = this.props;
-    if (error) {
-      console.log(error); // eslint-disable-line no-console
-      return graphqlError;
-    }
-    if (props) {
-      return <ProjectListView query={props} limit={limit} paginate={paginate} />;
-    }
-    return <Loader />;
-  };
-
   render() {
-    const { orderBy, type, theme, term, limit } = this.initialRenderVars;
+    const { orderBy, type, theme, term } = this.initialRenderVars;
     return (
       <div className="flex-wrap">
         <QueryRenderer
@@ -69,13 +60,7 @@ class ProjectsList extends React.Component<Props> {
               $term: String
             ) {
               ...ProjectListView_query
-                @arguments(
-                  theme: $theme
-                  orderBy: $orderBy
-                  type: $type
-                  term: $term
-                  count: $count
-                )
+                @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term)
             }
           `}
           variables={{
@@ -86,9 +71,8 @@ class ProjectsList extends React.Component<Props> {
             type,
             theme,
             term,
-            count: limit,
           }}
-          render={this.renderProjectList}
+          render={renderProjectList}
         />
       </div>
     );
