@@ -20,8 +20,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromConsultationStepCommand extends Command
 {
+    protected const CONTRIBUTION_PER_PAGE = 100;
+    protected const VOTE_PER_PAGE = 100;
     protected const ARGUMENT_PER_PAGE = 100;
     protected const SOURCE_PER_PAGE = 100;
+    protected const VERSION_PER_PAGE = 100;
+    protected const REPORTING_PER_PAGE = 100;
 
     protected const ARGUMENT_FRAGMENT = <<<'EOF'
 fragment argumentInfos on Argument {
@@ -102,6 +106,87 @@ fragment sourceInfos on Source {
 }
 EOF;
 
+    protected const VERSION_FRAGMENT = <<<'EOF'
+fragment versionInfos on Version {
+    ...relatedInfos
+    id
+    ...authorInfos
+    title
+    bodyText
+    comment
+    createdAt
+    updatedAt
+    url
+    published
+    ...trashableInfos
+    votesOk: votes(first: 0, value: YES) {
+      totalCount
+    }
+    votesMitige: votes(first: 0, value: MITIGE) {
+        totalCount
+    }
+    votesNo: votes(first: 0, value: NO) {
+        totalCount
+    }
+    argumentsFor: arguments(first: 0, type: FOR) {
+        totalCount
+    }
+    argumentsAgainst: arguments(first: 0, type: AGAINST) {
+        totalCount
+    }
+    arguments {
+      totalCount
+      edges {
+        node {
+          ...argumentInfos
+        }
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+      }
+    }
+    sources {
+      totalCount
+      edges {
+        node {
+          ...sourceInfos
+        }
+      }
+      pageInfo {
+          endCursor
+          hasNextPage
+      }
+    }
+    reportings {
+      totalCount
+      edges {
+        node {
+          ...reportInfos
+        }
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+      }
+    }
+    votes {
+        totalCount
+        edges {
+            node {
+              ...voteInfos
+            }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+    }
+}
+EOF;
+
     protected const SHEET_HEADER = [
         'type',
         'contributions_id',
@@ -168,6 +253,7 @@ EOF;
         'contribution_versions_createdAt',
         'contribution_versions_updatedAt',
     ];
+
     protected const SOURCE_HEADER_MAP = [
         'contributions_sources_id' => 'id',
         'contributions_sources_related_id' => 'related.id',
@@ -189,6 +275,7 @@ EOF;
         'contributions_votes_value' => 'value',
         'contributions_votes_createdAt' => 'createdAt',
     ];
+
     protected const ARGUMENT_HEADER_MAP = [
         'contributions_arguments_related_id' => 'related.id',
         'contributions_arguments_related_kind' => 'related.kind',
@@ -333,9 +420,9 @@ EOF;
         $totalCount = Arr::path($contributions, 'data.node.contributionConnection.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
-        $this->connectionTraversor->traverse(
+        $this->connectionTraversor->traverseGood(
             $contributions,
-            'data.node.contributionConnection',
+            'contributionConnection',
             function ($edge) use ($progress) {
                 $progress->advance();
                 $contribution = $edge['node'];
@@ -356,7 +443,12 @@ EOF;
     private function getContributionsGraphQLQueryByConsultationStep(
         ConsultationStep $consultationStep,
         ?string $contributionAfter = null,
-        int $contributionPerPage = 100
+        int $contributionPerPage = self::CONTRIBUTION_PER_PAGE,
+        int $argumentPerPage = self::ARGUMENT_PER_PAGE,
+        int $sourcePerPage = self::SOURCE_PER_PAGE,
+        int $reportingPerPage = self::REPORTING_PER_PAGE,
+        int $votePerPage = self::VOTE_PER_PAGE,
+        int $versionPerPage = self::VERSION_PER_PAGE
     ): string {
         $argumentFragment = self::ARGUMENT_FRAGMENT;
         $authorFragment = self::AUTHOR_FRAGMENT;
@@ -365,6 +457,7 @@ EOF;
         $reportingFragment = self::REPORTING_FRAGMENT;
         $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
         $sourceFragment = self::SOURCE_FRAGMENT;
+        $versionFragment = self::VERSION_FRAGMENT;
 
         if ($contributionAfter) {
             $contributionAfter = sprintf(', after: "%s"', $contributionAfter);
@@ -378,6 +471,7 @@ ${voteFragment}
 ${reportingFragment}
 ${trashableFragment}
 ${sourceFragment}
+${versionFragment}
 {
   node(id: "{$consultationStep->getId()}") {
     ... on Consultation {
@@ -419,7 +513,7 @@ ${sourceFragment}
             argumentsAgainst: arguments(first: 0, type: AGAINST) {
                 totalCount
             }
-            votes(first: 100) {
+            votes(first: ${votePerPage}) {
                 totalCount
                 edges {
                     cursor
@@ -433,7 +527,7 @@ ${sourceFragment}
                     hasNextPage
                 }
             }
-            arguments(first: 100) {
+            arguments(first: ${argumentPerPage}) {
               totalCount
               edges {
                 cursor
@@ -447,7 +541,7 @@ ${sourceFragment}
                 hasNextPage
               }
             }
-            sources(first: 100) {
+            sources(first: ${sourcePerPage}) {
                 totalCount
                 edges {
                     cursor
@@ -461,7 +555,7 @@ ${sourceFragment}
                     hasNextPage
                 }
             }
-            reportings(first: 100) {
+            reportings(first: ${reportingPerPage}) {
               totalCount
               edges {
               cursor
@@ -475,87 +569,12 @@ ${sourceFragment}
                 hasNextPage
               }
             }
-            versions(first: 100) {
+            versions(first: ${versionPerPage}) {
                 totalCount
                 edges {
                     cursor
                     node {
-                        ...relatedInfos
-                        id
-                        ...authorInfos
-                        title
-                        bodyText
-                        comment
-                        createdAt
-                        updatedAt
-                        url
-                        published
-                        ...trashableInfos
-                        votesOk: votes(first: 0, value: YES) {
-                          totalCount
-                        }
-                        votesMitige: votes(first: 0, value: MITIGE) {
-                            totalCount
-                        }
-                        votesNo: votes(first: 0, value: NO) {
-                            totalCount
-                        }
-                        argumentsFor: arguments(first: 0, type: FOR) {
-                            totalCount
-                        }
-                        argumentsAgainst: arguments(first: 0, type: AGAINST) {
-                            totalCount
-                        }
-                        arguments {
-                          totalCount
-                          edges {
-                            node {
-                              ...argumentInfos
-                            }
-                          }
-                          pageInfo {
-                            startCursor
-                            endCursor
-                            hasNextPage
-                          }
-                        }
-                        sources {
-                          totalCount
-                          edges {
-                            node {
-                              ...sourceInfos
-                            }
-                          }
-                          pageInfo {
-                              endCursor
-                              hasNextPage
-                          }
-                        }
-                        reportings {
-                          totalCount
-                          edges {
-                            node {
-                              ...reportInfos
-                            }
-                          }
-                          pageInfo {
-                            startCursor
-                            endCursor
-                            hasNextPage
-                          }
-                        }
-                        votes {
-                            totalCount
-                            edges {
-                                node {
-                                  ...voteInfos
-                                }
-                            }
-                            pageInfo {
-                              endCursor
-                              hasNextPage
-                            }
-                        }
+                        ...versionInfos
                     }
                 }
             }
@@ -609,48 +628,249 @@ EOF;
         $this->writer->addRow($row);
 
         // we add Opinion's votes rows.
-        $this->connectionTraversor->traverse($contribution, 'votes', function ($edge) use (
-            $contribution
-        ) {
-            $this->addContributionVotesRow($contribution, $edge['node']);
-        });
+        $this->connectionTraversor->traverseGood(
+            $contribution,
+            'votes',
+            function ($edge) use ($contribution) {
+                $this->addContributionVotesRow($contribution, $edge['node']);
+            },
+            function ($pageInfos) use ($contribution) {
+                return $this->getOpinionVotesGraphQLQuery(
+                    $contribution['id'],
+                    $pageInfos['endCursor']
+                );
+            }
+        );
 
         // we add Opinion's sources rows.
-        $this->connectionTraversor->traverse($contribution, 'sources', function ($edge) use (
-            $contribution
-        ) {
-            $this->addContributionSourcesRow($contribution, $edge['node']);
-        });
+        $this->connectionTraversor->traverseGood(
+            $contribution,
+            'sources',
+            function ($edge) use ($contribution) {
+                $this->addContributionSourcesRow($contribution, $edge['node']);
+            },
+            function ($pageInfos) use ($contribution) {
+                return $this->getOpinionSourcesGraphQLQuery(
+                    $contribution['id'],
+                    $pageInfos['endCursor']
+                );
+            }
+        );
 
         // we add Opinion's reportings rows.
-        $this->connectionTraversor->traverse($contribution, 'reportings', function ($edge) use (
-            $contribution
-        ) {
-            $this->addContributionReportingsRow($contribution, $edge['node']);
-        });
+        $this->connectionTraversor->traverseGood(
+            $contribution,
+            'reportings',
+            function ($edge) use ($contribution) {
+                $this->addContributionReportingsRow($contribution, $edge['node']);
+            },
+            function ($pageInfos) use ($contribution) {
+                return $this->getOpinionReportingsGraphQLQuery(
+                    $contribution['id'],
+                    $pageInfos['endCursor']
+                );
+            }
+        );
 
         // we add Opinion's arguments rows.
-        $this->connectionTraversor->traverse(
+        $this->connectionTraversor->traverseGood(
             $contribution,
             'arguments',
             function ($edge) use ($contribution) {
-                $this->addContributionArgumentRow($edge['node'], $contribution);
+                $this->addContributionArgumentRow($contribution, $edge['node']);
             },
             function ($pageInfo) use ($contribution) {
                 return $this->getContributionsArgumentsGraphQLQuery(
                     $contribution['id'],
                     $pageInfo['endCursor']
                 );
-            },
-            true
+            }
         );
 
         // We add Opinion's versions rows.
-        $this->connectionTraversor->traverse($contribution, 'versions', function ($edge) use (
-            $contribution
-        ) {
-            $this->addContributionVersionRow($edge['node'], $contribution);
-        });
+        $this->connectionTraversor->traverseGood(
+            $contribution,
+            'versions',
+            function ($edge) use ($contribution) {
+                $this->addContributionVersionRow($contribution, $edge['node']);
+            },
+            function ($pageInfos) use ($contribution) {
+                return $this->getOpinionVersionsGraphQLQuery(
+                    $contribution['id'],
+                    $pageInfos['endCursor']
+                );
+            }
+        );
+    }
+
+    private function getOpinionVotesGraphQLQuery(
+        string $opinionId,
+        ?string $votesAfterCursor = null,
+        int $votesPerPage = self::VOTE_PER_PAGE
+    ): string {
+        $authorFragment = self::AUTHOR_FRAGMENT;
+        $voteFragment = self::VOTE_FRAGMENT;
+
+        if ($votesAfterCursor) {
+            $votesAfterCursor = sprintf(', after: "%s"', $votesAfterCursor);
+        }
+
+        return <<<EOF
+${authorFragment}
+${voteFragment}
+{
+  node(id: "${opinionId}") {
+    ... on Opinion {
+      votes(first: ${votesPerPage}${votesAfterCursor}) {
+        totalCount
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            ...voteInfos
+          }
+        }
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    private function getOpinionSourcesGraphQLQuery(
+        string $opinionId,
+        ?string $sourcesAfterCursor = null,
+        int $sourcesPerPage = self::SOURCE_PER_PAGE
+    ): string {
+        $authorFragment = self::AUTHOR_FRAGMENT;
+        $relatedFragment = self::CONTRIBUTION_FRAGMENT;
+        $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
+        $sourceFragment = self::SOURCE_FRAGMENT;
+
+        if ($sourcesAfterCursor) {
+            $sourcesAfterCursor = sprintf(', after: "%s"', $sourcesAfterCursor);
+        }
+
+        return <<<EOF
+${authorFragment}
+${relatedFragment}
+${trashableFragment}
+${sourceFragment}
+{
+  node(id: "${opinionId}") {
+    ... on Opinion {
+      sources(first: ${sourcesPerPage}${sourcesAfterCursor}) {
+        totalCount
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            ...sourceInfos
+          }
+        }
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    private function getOpinionReportingsGraphQLQuery(
+        string $opinionId,
+        ?string $reportingsAfterCursor = null,
+        int $reportingPerPage = self::REPORTING_PER_PAGE
+    ): string {
+        $authorFragment = self::AUTHOR_FRAGMENT;
+        $relatedFragment = self::CONTRIBUTION_FRAGMENT;
+        $reportingFragment = self::REPORTING_FRAGMENT;
+
+        if ($reportingsAfterCursor) {
+            $reportingsAfterCursor = sprintf(', after: "%s"', $reportingsAfterCursor);
+        }
+
+        return <<<EOF
+${authorFragment}
+${relatedFragment}
+${reportingFragment}
+{
+  node(id: "${opinionId}") {
+    ... on Opinion {
+      sources(first: ${reportingPerPage}${reportingsAfterCursor}) {
+        totalCount
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            ...reportInfos
+          }
+        }
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    private function getOpinionVersionsGraphQLQuery(
+        string $opinionId,
+        ?string $versionsAfterCursor = null,
+        int $versionPerPage = self::VERSION_PER_PAGE
+    ): string {
+        $authorFragment = self::AUTHOR_FRAGMENT;
+        $relatedFragment = self::CONTRIBUTION_FRAGMENT;
+        $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
+        $argumentFragment = self::ARGUMENT_FRAGMENT;
+        $sourceFragment = self::SOURCE_FRAGMENT;
+        $reportingFragment = self::REPORTING_FRAGMENT;
+        $voteFragment = self::VOTE_FRAGMENT;
+        $versionFragment = self::VERSION_FRAGMENT;
+
+        if ($versionsAfterCursor) {
+            $versionsAfterCursor = sprintf(', after: "%s"', $versionsAfterCursor);
+        }
+
+        return <<<EOF
+${authorFragment}
+${relatedFragment}
+${trashableFragment}
+${argumentFragment}
+${sourceFragment}
+${reportingFragment}
+${voteFragment}
+${versionFragment}
+{
+  node(id: "${opinionId}") {
+    ... on Opinion {
+      sources(first: ${versionPerPage}${versionsAfterCursor}) {
+        totalCount
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            ...versionInfos
+          }
+        }
+      }
+    }
+  }
+}
+EOF;
     }
 
     private function getContributionsArgumentsGraphQLQuery(
@@ -695,12 +915,12 @@ ${trashableFragment}
 EOF;
     }
 
-    private function addContributionArgumentRow($argument, $contribution): void
+    private function addContributionArgumentRow($contribution, $argument): void
     {
         $this->addContributionRow('argument', $argument, $contribution, self::ARGUMENT_HEADER_MAP);
     }
 
-    private function addContributionVersionRow($version, $contribution): void
+    private function addContributionVersionRow($contribution, $version): void
     {
         $this->addContributionRow('version', $version, $contribution, self::VERSION_HEADER_MAP);
     }
