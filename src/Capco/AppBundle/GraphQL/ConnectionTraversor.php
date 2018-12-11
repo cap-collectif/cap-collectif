@@ -32,7 +32,7 @@ class ConnectionTraversor
             if (\count($edges) > 0) {
                 foreach ($edges as $edge) {
                     $callback($edge);
-                    if ($edge['cursor'] === $endCursor) {
+                    if ($edge['cursor'] === $endCursor && true === $pageInfo['hasNextPage']) {
                         if (!$renewalQuery) {
                             return;
                         }
