@@ -21,7 +21,7 @@ class ConnectionTraversorSpec extends ObjectBehavior
         $this->shouldHaveType(ConnectionTraversor::class);
     }
 
-    public function it_should_correctly_traverse_a_simple_connection(
+    public function it_should_correctly_traverse_a_connection(
         Executor $executor,
         ExecutionResult $initialResult,
         ExecutionResult $middleResut,
