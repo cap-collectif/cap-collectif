@@ -61,13 +61,9 @@ export class EditProfileTabs extends Component<Props> {
           <Col sm={4} md={3}>
             <Panel id="panel-account">
               <Panel.Heading>
-                {/*<CardUser>*/}
-                  {/*<UserAvatar className="pull-left" user={viewer} />*/}
-                  {/*<UserLink user={viewer} />*/}
-                {/*</CardUser>*/}
                 <Media>
                   <Media.Left>
-                    <UserAvatar className="pull-left" user={viewer} />
+                    <UserAvatar user={viewer} />
                   </Media.Left>
                   <Media.Body>
                     <UserLink className="excerpt" user={viewer} />

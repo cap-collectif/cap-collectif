@@ -2,7 +2,6 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-// import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
@@ -62,7 +61,7 @@ export default createFragmentContainer(ProposalPreview, {
       author {
         vip
       }
-      
+
       ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       ...ProposalPreviewBody_proposal
         @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)

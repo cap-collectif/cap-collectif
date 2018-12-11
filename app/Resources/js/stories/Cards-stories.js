@@ -66,18 +66,25 @@ storiesOf('Card', module)
           {cardType && <Card.Type bgColor={colorType}>{type}</Card.Type>}
           {cardHeader && <Card.Header bgColor={headerBgColor}>{header}</Card.Header>}
           {leftCover && (
-            <div className="d-flex">
+            <div>
               {cardCover && (
-                <Card.Cover height={coverHeight} width={coverWidth}>
-                  <Image src="https://source.unsplash.com/collection/1127828" alt="Project title" />
-                </Card.Cover>
+                <div className="col-xs-4 p-0">
+                  <Card.Cover height={coverHeight} width={coverWidth}>
+                    <Image
+                      src="https://source.unsplash.com/collection/1127828"
+                      alt="Project title"
+                    />
+                  </Card.Cover>
+                </div>
               )}
               {cardBody && (
-                <Card.Body>
-                  <Card.Title tagName={titleTagName}>
-                    <a href="https://ui.cap-collectif.com">{title}</a>
-                  </Card.Title>
-                </Card.Body>
+                <div className="col-xs-8 p-0">
+                  <Card.Body>
+                    <Card.Title tagName={titleTagName}>
+                      <a href="https://ui.cap-collectif.com">{title}</a>
+                    </Card.Title>
+                  </Card.Body>
+                </div>
               )}
             </div>
           )}

@@ -26,7 +26,6 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           <Media>
             <Left>
               <Connect(UserAvatar)
-                className="pull-left"
                 user={
                   Object {
                     "displayName": "iAmAUser",
@@ -324,7 +323,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           <Media>
             <Left>
               <Connect(UserAvatar)
-                className="pull-left"
                 user={
                   Object {
                     "displayName": "iAmAUser",
@@ -537,7 +535,6 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
           <Media>
             <Left>
               <Connect(UserAvatar)
-                className="pull-left"
                 user={
                   Object {
                     "displayName": "iAmAUser",

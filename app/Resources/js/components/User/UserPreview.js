@@ -16,34 +16,6 @@ export class UserPreview extends React.Component<Props> {
   render() {
     const { user } = this.props;
     const contributionsCount = user && user.contributionsCount ? user.contributionsCount : 0;
-    // const classes = {
-    //   'pb-10': true,
-    // };
-
-    // return (
-    //   <Card className={classNames(classes)}>
-    //     <CardUser>
-    //       <div className="card__user__avatar">
-    //         <UserAvatar user={user} />
-    //       </div>
-    //       <div className="ellipsis">
-    //         {user ? <UserLink user={user} /> : <FormattedMessage id="global.anonymous" />}
-    //         <p className="excerpt small">
-    //           {user ? (
-    //             <span>
-    //               <FormattedMessage
-    //                 id="global.counters.contributions"
-    //                 values={{ num: contributionsCount }}
-    //               />
-    //             </span>
-    //           ) : null}
-    //         </p>
-    //         {/* $FlowFixMe */}
-    //         {user ? <UserNotConfirmedLabel user={user} /> : null}
-    //       </div>
-    //     </CardUser>
-    //   </Card>
-    // );
 
     return (
       <Media>
@@ -60,15 +32,14 @@ export class UserPreview extends React.Component<Props> {
             </span>
           )}
           <p className="excerpt small">
-           {user ? (
+            {user ? (
               <span>
                 <FormattedMessage
                   id="global.counters.contributions"
                   values={{ num: contributionsCount }}
                 />
               </span>
-             ) : null
-           }
+            ) : null}
           </p>
           {/* $FlowFixMe */}
           {user ? <UserNotConfirmedLabel user={user} /> : null}
