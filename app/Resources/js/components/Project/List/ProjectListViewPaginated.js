@@ -39,20 +39,19 @@ export class ProjectListViewPaginated extends React.Component<Props, State> {
                   <ProjectPreview key={index} project={node} />
                 ))}
             </div>
-            <div>
-              {paginate && relay.hasMore() && (
-                <Button
-                  disabled={loading}
-                  onClick={() => {
-                    this.setState({ loading: true });
-                    relay.loadMore(limit, () => {
-                      this.setState({ loading: false });
-                    });
-                  }}>
-                  <FormattedMessage id="see-more-projects" />
-                </Button>
-              )}
-            </div>
+            {paginate && relay.hasMore() && (
+              <Button
+                className="see-more-projects-button"
+                disabled={loading}
+                onClick={() => {
+                  this.setState({ loading: true });
+                  relay.loadMore(limit, () => {
+                    this.setState({ loading: false });
+                  });
+                }}>
+                <FormattedMessage id="see-more-projects" />
+              </Button>
+            )}
           </div>
         );
       }
