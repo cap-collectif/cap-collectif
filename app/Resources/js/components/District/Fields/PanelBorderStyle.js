@@ -49,7 +49,7 @@ const PanelBorderStyle = ({ member, isPanelOpen, opacities, handlePanelToggle }:
             type="number"
             id="size"
             name="size"
-            normalize={value => (!value || isNaN(value) ? 1 : parseInt(value, 10))}
+            normalize={val => (val && !isNaN(parseInt(val, 10)) ? parseInt(val, 10) : null)}
             label={<FormattedMessage id="thickness" />}
           />
           <Field
