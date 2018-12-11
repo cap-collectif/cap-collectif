@@ -5,7 +5,12 @@ import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
 import ProjectsList from '../components/Project/List/ProjectsList';
 
-export default (props: Object) => (
+type Props = {
+  limit?: ?number,
+  paginate?: ?boolean,
+};
+
+export default (props: Props) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <ProjectsList {...props} />

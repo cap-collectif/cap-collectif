@@ -15,6 +15,7 @@ type Props = {
   theme: ?string,
   term: ?string,
   limit: number,
+  paginate: boolean,
   relay: RelayRefetchProp,
 };
 type State = {
@@ -59,13 +60,13 @@ export class ProjectListView extends React.Component<Props, State> {
   };
 
   render() {
-    const { query, limit } = this.props;
+    const { query, limit, paginate } = this.props;
     const { isRefetching } = this.state;
     if (isRefetching) {
       return <Loader />;
     }
     /* $FlowFixMe */
-    return <ProjectListViewPaginated query={query} limit={limit} />;
+    return <ProjectListViewPaginated query={query} limit={limit} paginate={paginate} />;
   }
 }
 

@@ -10,6 +10,7 @@ type Props = {
   relay: RelayPaginationProp,
   query: ProjectListViewPaginated_query,
   limit: number,
+  paginate: boolean,
 };
 
 type State = {
@@ -22,10 +23,8 @@ export class ProjectListViewPaginated extends React.Component<Props, State> {
   };
 
   render() {
-    const { relay, query, limit } = this.props;
+    const { relay, query, limit, paginate } = this.props;
     const { loading } = this.state;
-    console.log('* * * * * * * relay.hasMore');
-    console.log(relay.hasMore());
     if (query.projects && query.projects.edges) {
       if (query.projects.edges.length > 0) {
         return (
@@ -41,7 +40,7 @@ export class ProjectListViewPaginated extends React.Component<Props, State> {
                 ))}
             </div>
             <div>
-              {relay.hasMore() && (
+              {paginate && relay.hasMore() && (
                 <Button
                   disabled={loading}
                   onClick={() => {

@@ -14,6 +14,7 @@ type Props = {
   theme: ?string,
   term: ?string,
   limit: number,
+  paginate: boolean,
 };
 
 class ProjectsList extends React.Component<Props> {
@@ -21,6 +22,7 @@ class ProjectsList extends React.Component<Props> {
 
   static defaultProps = {
     limit: 50,
+    paginate: true,
   };
 
   constructor(props: Props) {
@@ -40,13 +42,13 @@ class ProjectsList extends React.Component<Props> {
   }: {
     props: ?ProjectsListQueryResponse,
   } & ReadyState) => {
-    const { limit } = this.props;
+    const { limit, paginate } = this.props;
     if (error) {
       console.log(error); // eslint-disable-line no-console
       return graphqlError;
     }
     if (props) {
-      return <ProjectListView query={props} limit={limit} />;
+      return <ProjectListView query={props} limit={limit} paginate={paginate} />;
     }
     return <Loader />;
   };
