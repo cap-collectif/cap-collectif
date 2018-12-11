@@ -6,6 +6,7 @@ use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use GraphQL\Executor\ExecutionResult;
 use Overblog\GraphQLBundle\Request\Executor;
 use PhpSpec\ObjectBehavior;
+use PHPUnit\Framework\Assert;
 use Psr\Log\LoggerInterface;
 
 class ConnectionTraversorSpec extends ObjectBehavior
@@ -194,7 +195,7 @@ class ConnectionTraversorSpec extends ObjectBehavior
             $initialData,
             'data.node.contributionConnection',
             function ($edge) {
-                var_dump($edge);
+                Assert::assertNotNull($edge);
             },
             function ($pageInfo) {
                 return $this->getContributionsGraphqlQuery($pageInfo['endCursor']);
