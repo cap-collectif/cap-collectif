@@ -913,7 +913,7 @@ class ApplicationContext extends UserContext
 
     private function isSuiteWithJS(Suite $suite): bool
     {
-        return \in_array($suite->getName(), ['core', 'consultation', 'bp', 'bo']);
+        return \in_array($suite->getName(), ['core', 'consultation', 'questionnaire', 'bp', 'bo']);
     }
 
     private function visitPageWithParams($page, array $params = [], bool $cookiesConsent = true)
