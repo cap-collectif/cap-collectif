@@ -14,7 +14,7 @@ type Props = {
   type: ?string,
   theme: ?string,
   term: ?string,
-  limit: ?number,
+  limit: number,
   relay: RelayRefetchProp,
 };
 type State = {
@@ -31,7 +31,6 @@ export class ProjectListView extends React.Component<Props, State> {
       prevProps.orderBy !== this.props.orderBy ||
       prevProps.type !== this.props.type ||
       prevProps.theme !== this.props.theme ||
-      prevProps.limit !== this.props.limit ||
       prevProps.term !== this.props.term
     ) {
       this._refetch();
@@ -60,13 +59,13 @@ export class ProjectListView extends React.Component<Props, State> {
   };
 
   render() {
-    const { query } = this.props;
+    const { query, limit } = this.props;
     const { isRefetching } = this.state;
     if (isRefetching) {
       return <Loader />;
     }
     /* $FlowFixMe */
-    return <ProjectListViewPaginated query={query} />;
+    return <ProjectListViewPaginated query={query} limit={limit} />;
   }
 }
 
@@ -94,7 +93,7 @@ export default createRefetchContainer(
           term: { type: "String" }
         ) {
         ...ProjectListViewPaginated_query
-          @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term, limit: $limit)
+          @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term, count: $count)
       }
     `,
   },
@@ -106,10 +105,9 @@ export default createRefetchContainer(
       $orderBy: ProjectOrder
       $type: ID
       $term: String
-      $limit: Int
     ) {
       ...ProjectListView_query
-        @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term, limit: $limit)
+        @arguments(theme: $theme, orderBy: $orderBy, type: $type, term: $term, count: $count)
     }
   `,
 );

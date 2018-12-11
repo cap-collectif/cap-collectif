@@ -45,7 +45,6 @@ class ProjectsResolver implements ResolverInterface
                     $this->getFilters($args)
                 );
                 $totalCount = $results['count'];
-
                 return $results['projects'];
             });
             $connection = $paginator->auto($args, $totalCount);

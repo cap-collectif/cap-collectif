@@ -8,32 +8,20 @@ import type { ProjectsListQueryResponse } from './__generated__/ProjectsListQuer
 import { type GlobalState } from '../../../types';
 import ProjectListView from './ProjectListView';
 
-const renderProjectList = ({
-  error,
-  props,
-}: {
-  props: ?ProjectsListQueryResponse,
-} & ReadyState) => {
-  if (error) {
-    console.log(error); // eslint-disable-line no-console
-    return graphqlError;
-  }
-  if (props) {
-    return <ProjectListView query={props} />;
-  }
-  return <Loader />;
-};
-
 type Props = {
   orderBy: ?string,
   type: ?string,
   theme: ?string,
   term: ?string,
-  limit?: ?number,
+  limit: number,
 };
 
 class ProjectsList extends React.Component<Props> {
   initialRenderVars = {};
+
+  static defaultProps = {
+    limit: 50,
+  };
 
   constructor(props: Props) {
     super(props);
@@ -45,6 +33,23 @@ class ProjectsList extends React.Component<Props> {
       limit: props.limit,
     };
   }
+
+  renderProjectList = ({
+    error,
+    props,
+  }: {
+    props: ?ProjectsListQueryResponse,
+  } & ReadyState) => {
+    const { limit } = this.props;
+    if (error) {
+      console.log(error); // eslint-disable-line no-console
+      return graphqlError;
+    }
+    if (props) {
+      return <ProjectListView query={props} limit={limit} />;
+    }
+    return <Loader />;
+  };
 
   render() {
     const { orderBy, type, theme, term, limit } = this.initialRenderVars;
@@ -60,7 +65,6 @@ class ProjectsList extends React.Component<Props> {
               $orderBy: ProjectOrder
               $type: ID
               $term: String
-              $limit: Int
             ) {
               ...ProjectListView_query
                 @arguments(
@@ -68,7 +72,7 @@ class ProjectsList extends React.Component<Props> {
                   orderBy: $orderBy
                   type: $type
                   term: $term
-                  limit: $limit
+                  count: $count
                 )
             }
           `}
@@ -80,9 +84,9 @@ class ProjectsList extends React.Component<Props> {
             type,
             theme,
             term,
-            limit,
+            count: limit,
           }}
-          render={renderProjectList}
+          render={this.renderProjectList}
         />
       </div>
     );

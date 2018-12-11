@@ -9,6 +9,7 @@ import ProjectPreview from '../Preview/ProjectPreview';
 type Props = {
   relay: RelayPaginationProp,
   query: ProjectListViewPaginated_query,
+  limit: number,
 };
 
 type State = {
@@ -21,8 +22,10 @@ export class ProjectListViewPaginated extends React.Component<Props, State> {
   };
 
   render() {
-    const { relay, query } = this.props;
+    const { relay, query, limit } = this.props;
     const { loading } = this.state;
+    console.log('* * * * * * * relay.hasMore');
+    console.log(relay.hasMore());
     if (query.projects && query.projects.edges) {
       if (query.projects.edges.length > 0) {
         return (
@@ -43,7 +46,7 @@ export class ProjectListViewPaginated extends React.Component<Props, State> {
                   disabled={loading}
                   onClick={() => {
                     this.setState({ loading: true });
-                    relay.loadMore(50, () => {
+                    relay.loadMore(limit, () => {
                       this.setState({ loading: false });
                     });
                   }}>
@@ -69,8 +72,7 @@ export default createPaginationContainer(
     query: graphql`
       fragment ProjectListViewPaginated_query on Query
         @argumentDefinitions(
-          count: { type: "Int", defaultValue: 50 }
-          limit: { type: "Int", defaultValue: 50 }
+          count: { type: "Int" }
           cursor: { type: "String", defaultValue: null }
           theme: { type: "ID" }
           orderBy: { type: "ProjectOrder" }
@@ -84,7 +86,6 @@ export default createPaginationContainer(
           orderBy: $orderBy
           type: $type
           term: $term
-          limit: $limit
         ) @connection(key: "ProjectListViewPaginated_projects", filters: []) {
           edges {
             node {
@@ -121,7 +122,6 @@ export default createPaginationContainer(
     query: graphql`
       query ProjectListViewPaginatedQuery(
         $count: Int
-        $limit: Int
         $cursor: String
         $theme: ID
         $orderBy: ProjectOrder
@@ -131,7 +131,6 @@ export default createPaginationContainer(
         ...ProjectListViewPaginated_query
           @arguments(
             count: $count
-            limit: $limit
             cursor: $cursor
             theme: $theme
             orderBy: $orderBy
