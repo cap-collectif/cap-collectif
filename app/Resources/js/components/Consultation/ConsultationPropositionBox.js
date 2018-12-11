@@ -136,7 +136,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
                 <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
               </div>
             )}
-            {step.endAt && step.status === 'open' && !step.timeless && (
+            {step.endAt && step.status === 'OPENED' && !step.timeless && (
               <div className="mr-15 d-ib">
                 <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
               </div>

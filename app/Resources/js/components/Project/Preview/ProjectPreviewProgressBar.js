@@ -14,7 +14,7 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
   getStyle = (stepStatus: string) => {
     const { isCurrentStep } = this.props;
 
-    if (stepStatus === 'open' || isCurrentStep) {
+    if (stepStatus === 'OPENED' || isCurrentStep) {
       return 'success';
     }
   };
@@ -22,10 +22,10 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
   getClass = (stepStatus: string) => {
     const { isCurrentStep } = this.props;
 
-    if (stepStatus === 'future') {
+    if (stepStatus === 'FUTURE') {
       return 'progress-bar_empty';
     }
-    if (stepStatus === 'closed' && !isCurrentStep) {
+    if (stepStatus === 'CLOSED' && !isCurrentStep) {
       return 'progress-bar_grey';
     }
   };
@@ -36,13 +36,13 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
     if (step.timeless === true) {
       return <FormattedMessage id="step.timeless" />;
     }
-    if (step.status === 'open' || isCurrentStep) {
+    if (step.status === 'OPENED' || isCurrentStep) {
       return <FormattedMessage id="step.status.open" />;
     }
-    if (step.status === 'future') {
+    if (step.status === 'FUTURE') {
       return <FormattedMessage id="step.status.future" />;
     }
-    if (step.status === 'closed' && !isCurrentStep) {
+    if (step.status === 'CLOSED' && !isCurrentStep) {
       return <FormattedMessage id="step.status.closed" />;
     }
   };
@@ -51,13 +51,13 @@ export class ProjectPreviewProgressBar extends React.Component<Props> {
     const { isCurrentStep } = this.props;
 
     if (
-      (step.status === 'closed' && !isCurrentStep) ||
-      step.status === 'future' ||
+      (step.status === 'CLOSED' && !isCurrentStep) ||
+      step.status === 'FUTURE' ||
       step.timeless === true
     ) {
       return 100;
     }
-    if (step.status === 'open' || isCurrentStep) {
+    if (step.status === 'OPENED' || isCurrentStep) {
       return 50;
     }
 
