@@ -38,6 +38,11 @@ services:
     tags:
       - { name: doctrine.event_subscriber, connection: default }
 
+  Capco\AppBundle\EventListener\CommentSubscriber:
+    autowire: true
+    tags:
+      - { name: kernel.event_subscriber }
+
   capco.doctrine.subscriber.dynamic_relation:
     class: Capco\AppBundle\EventListener\DynamicRelationSubscriber
     tags:

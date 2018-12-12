@@ -1,5 +1,4 @@
 imports:
-  - { resource: services/listeners.yml }
   - { resource: services/normalizers.yml }
   - { resource: services/listeners.yml }
   - { resource: services/repositories.yml }
