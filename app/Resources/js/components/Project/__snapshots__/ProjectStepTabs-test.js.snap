@@ -131,12 +131,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                 </span>
                 <p
                   className="excerpt"
-                >
-                  <FormattedMessage
-                    id="step.status.open"
-                    values={Object {}}
-                  />
-                </p>
+                />
               </div>
             </a>
             <svg
@@ -214,12 +209,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                 </span>
                 <p
                   className="excerpt"
-                >
-                  <FormattedMessage
-                    id="step.status.open"
-                    values={Object {}}
-                  />
-                </p>
+                />
               </div>
             </a>
             <svg
@@ -296,12 +286,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
                 </span>
                 <p
                   className="excerpt"
-                >
-                  <FormattedMessage
-                    id="step.status.closed"
-                    values={Object {}}
-                  />
-                </p>
+                />
               </div>
             </a>
             <svg

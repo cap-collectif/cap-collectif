@@ -197,13 +197,13 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
   };
 
   renderStepStatus(step: Object) {
-    if (step.status === 'OPENED') {
+    if (step.status === 'open') {
       return <FormattedMessage id="step.status.open" />;
     }
-    if (step.status === 'FUTURE') {
+    if (step.status === 'future') {
       return <FormattedMessage id="step.status.future" />;
     }
-    if (step.status === 'CLOSED') {
+    if (step.status === 'closed') {
       return <FormattedMessage id="step.status.closed" />;
     }
   }
