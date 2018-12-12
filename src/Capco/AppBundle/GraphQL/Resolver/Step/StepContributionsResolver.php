@@ -65,9 +65,10 @@ class StepContributionsResolver implements ResolverInterface
             $totalCount += $this->sourceRepository->countTrashedSourcesByStep($step);
         } elseif ($step instanceof CollectStep) {
             $totalCount += $this->proposalRepository->countPublishedProposalByStep($step);
-            $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
-                $step
-            );
+            // We do not account votes as a contribution, maybe this will change
+            // $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
+            //     $step
+            // );
         } elseif ($step instanceof QuestionnaireStep) {
             $totalCount += $this->replyRepository->countRepliesByStep($step);
         }
