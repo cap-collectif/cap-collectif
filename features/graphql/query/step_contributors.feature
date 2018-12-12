@@ -95,11 +95,11 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
             "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
           },
           "edges": [
-            { "node": {"id":"user5"} },
-            { "node": {"id":"user502"} },
-            { "node": {"id":"user508"} },
-            { "node": {"id":"user7"} },
-            { "node": {"id":"userAdmin"} }
+            { "node": {"_id":"user5"} },
+            { "node": {"_id":"user502"} },
+            { "node": {"_id":"user508"} },
+            { "node": {"_id":"user7"} },
+            { "node": {"_id":"userAdmin"} }
           ]
         }
       }
