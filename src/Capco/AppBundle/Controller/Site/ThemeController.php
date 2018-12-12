@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Theme;
@@ -70,7 +71,7 @@ class ThemeController extends Controller
 
     /**
      * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flags" = "themes"})
-     * @ParamConverter("theme", class="CapcoAppBundle:Theme", options={"repository_method" = "getOneBySlug"})
+     * @ParamConverter("theme", class="CapcoAppBundle:Theme", options={"mapping": {"slug": "slug"}, "repository_method" = "getOneBySlug", "map_method_signature" = true})
      * @Template("CapcoAppBundle:Theme:show.html.twig")
      */
     public function showAction(Theme $theme)
