@@ -3,9 +3,11 @@ Capco\AppBundle\Entity\ArgumentVote:
     id: 500<current()>
     argument: '@argument1'
     user (unique): '@user<current()>'
-    publishedAt: <(new \DateTime('yesterday'))>
+    publishedAt: <(new \DateTime('2015-01-01'))>
+    createdAt: <(new \DateTime('2015-01-01'))>
   argumentVote{6..10}:
     id: 500<current()>
     argument: '@argument204'
     user (unique): '@user<current()>'
-    publishedAt: <(new \DateTime('yesterday'))>
+    publishedAt: <(new \DateTime('2015-01-01'))>
+    createdAt: <(new \DateTime('2015-01-01'))>

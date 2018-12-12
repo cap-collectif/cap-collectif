@@ -172,6 +172,7 @@ Capco\UserBundle\Entity\User:
       - 'ROLE_USER'
     media: '@MediaUser1'
     vip: false
+    createdAt: <(new \DateTime('2015-01-01'))>
 
   user504:
     id: 'user504'

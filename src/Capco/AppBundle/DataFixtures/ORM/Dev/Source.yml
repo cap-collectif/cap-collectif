@@ -8,6 +8,8 @@ Capco\AppBundle\Entity\Source:
     opinion: '@opinion3'
     category: '@Category2'
     publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
     link: http://www.google.fr
   source{2..6}:
     id: 'source<current()>'
@@ -17,6 +19,8 @@ Capco\AppBundle\Entity\Source:
     opinion: '@opinion3'
     category: '@Category<numberBetween(1,5)>'
     publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
     link: http://www.cap-collectif.com/
   source{7..10}:
     id: 'source<current()>'
@@ -26,6 +30,8 @@ Capco\AppBundle\Entity\Source:
     opinion: '@opinion4'
     category: '@Category<numberBetween(1,5)>'
     publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
     link: http://www.cap-collectif.com/
   source{11..30}:
     id: 'source<current()>'
@@ -35,6 +41,8 @@ Capco\AppBundle\Entity\Source:
     opinion: '@opinion4'
     category: '@Category<numberBetween(1,5)>'
     publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
     link: https://www.parlement-et-citoyens.fr/
 
   ## Sources on versions
@@ -46,6 +54,8 @@ Capco\AppBundle\Entity\Source:
     opinionVersion: '@version1'
     category: '@Category<numberBetween(1,5)>'
     publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
     link: https://www.parlement-et-citoyens.fr/
   source32:
     id: 'source32'
@@ -54,9 +64,12 @@ Capco\AppBundle\Entity\Source:
     author: '@user4'
     opinionVersion: '@version1'
     category: '@Category<numberBetween(1,5)>'
-    publishedAt: <(new \DateTime('2016-03-01'))>
     link: https://toto.fr/
     trashedStatus: 'visible'
+    publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
+    trashedAt: <(new \DateTime('2017-03-01'))>
 
   source33:
     id: 'source33'
@@ -65,9 +78,12 @@ Capco\AppBundle\Entity\Source:
     author: '@user<numberBetween(1,4)>'
     opinion: '@opinion59'
     category: '@Category<numberBetween(1,5)>'
-    publishedAt: <(new \DateTime('2016-03-01'))>
     link: https://www.parlement-et-citoyens.fr/
     trashedStatus: 'invisible'
+    publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
+    trashedAt: <(new \DateTime('2017-03-01'))>
   source34:
     id: 'source34'
     title: <text(20)>
@@ -76,6 +92,8 @@ Capco\AppBundle\Entity\Source:
     opinion: '@opinion59'
     category: '@Category<numberBetween(1,5)>'
     publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
     link: https://toto.fr/
   source35:
     id: 'source35'
@@ -85,6 +103,8 @@ Capco\AppBundle\Entity\Source:
     opinion: '@opinion2'
     category: '@Category2'
     publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
     link: http://www.google.fr
   source36:
     id: 'source36'
@@ -94,6 +114,8 @@ Capco\AppBundle\Entity\Source:
     opinion: '@opinion2'
     category: '@Category2'
     publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
     link: http://www.bing.com
 
   source{37..40}:
@@ -102,5 +124,8 @@ Capco\AppBundle\Entity\Source:
     body: blablablabla-blablablabla
     link: http://www.bing.com
     author: '@user_not_confirmed_with_contributions'
+    publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
     opinion: '@opinion3'
     category: '@Category2'
