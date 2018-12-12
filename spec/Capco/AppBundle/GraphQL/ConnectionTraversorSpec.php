@@ -2,11 +2,11 @@
 
 namespace spec\Capco\AppBundle\GraphQL;
 
+use Akamon\MockeryCallableMock\MockeryCallableMock;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use GraphQL\Executor\ExecutionResult;
 use Overblog\GraphQLBundle\Request\Executor;
 use PhpSpec\ObjectBehavior;
-use PHPUnit\Framework\Assert;
 use Psr\Log\LoggerInterface;
 
 class ConnectionTraversorSpec extends ObjectBehavior
@@ -25,7 +25,8 @@ class ConnectionTraversorSpec extends ObjectBehavior
         Executor $executor,
         ExecutionResult $initialResult,
         ExecutionResult $middleResut,
-        ExecutionResult $finalResult
+        ExecutionResult $finalResult,
+        MockeryCallableMock $onEdgeTraversed
     ): void {
         $initialData = [
             'data' => [
@@ -191,16 +192,58 @@ class ConnectionTraversorSpec extends ObjectBehavior
             ])
             ->willReturn($finalResult);
 
-        $this->getWrappedObject()->traverse(
-            $initialData,
-            'contributionConnection',
-            function ($edge) {
-                Assert::assertNotNull($edge);
-            },
-            function ($pageInfo) {
-                return $this->getContributionsGraphqlQuery($pageInfo['endCursor']);
-            }
-        );
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor1',
+            'node' => ['id' => 'opinion1', 'title' => 'la 1', 'kind' => 'opinion'],
+        ]);
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor2',
+            'node' => ['id' => 'opinion2', 'title' => 'la 2', 'kind' => 'opinion'],
+        ]);
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor3',
+            'node' => ['id' => 'opinion3', 'title' => 'la 3', 'kind' => 'opinion'],
+        ]);
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor4',
+            'node' => ['id' => 'opinion4', 'title' => 'la 4', 'kind' => 'opinion'],
+        ]);
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor5',
+            'node' => ['id' => 'opinion5', 'title' => 'la 5', 'kind' => 'opinion'],
+        ]);
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor6',
+            'node' => ['id' => 'opinion6', 'title' => 'la 6', 'kind' => 'opinion'],
+        ]);
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor7',
+            'node' => ['id' => 'opinion7', 'title' => 'la 7', 'kind' => 'opinion'],
+        ]);
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor8',
+            'node' => ['id' => 'opinion8', 'title' => 'la 8', 'kind' => 'opinion'],
+        ]);
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor9',
+            'node' => ['id' => 'opinion9', 'title' => 'la 9', 'kind' => 'opinion'],
+        ]);
+
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor9',
+            'node' => ['id' => 'opinion10', 'title' => 'la 10', 'kind' => 'opinion'],
+        ]);
+
+        $onEdgeTraversed->shouldBeCalled()->withArguments([
+            'cursor' => 'cursor9',
+            'node' => ['id' => 'opinion11', 'title' => 'la 11', 'kind' => 'opinion'],
+        ]);
+
+        $this->traverse($initialData, 'contributionConnection', $onEdgeTraversed, function (
+            $pageInfos
+        ) {
+            return $this->getContributionsGraphqlQuery($pageInfos['endCursor']);
+        });
     }
 
     private function getContributionsGraphqlQuery(
