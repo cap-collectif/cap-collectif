@@ -64,8 +64,10 @@ class CommentNotifier extends BaseNotifier
                     ->isNotifyingCommentOnCreate()
             ) {
                 if ($isAnonymous) {
-                    $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
-                    $comment->setAuthorName($author);
+                    if (empty($comment->getAuthorName())) {
+                        $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
+                        $comment->setAuthorName($author);
+                    }
 
                     $this->mailer->sendMessage(
                         CommentCreateAdminAnonymousMessage::create(
@@ -94,8 +96,10 @@ class CommentNotifier extends BaseNotifier
                 $user !== $comment->getAuthor()
             ) {
                 if ($isAnonymous) {
-                    $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
-                    $comment->setAuthorName($author);
+                    if (empty($comment->getAuthorName())) {
+                        $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
+                        $comment->setAuthorName($author);
+                    }
                     $this->mailer->sendMessage(
                         CommentCreateAuthorAnonymousMessage::create(
                             $comment,
@@ -144,10 +148,15 @@ class CommentNotifier extends BaseNotifier
             switch ($comment['notifyTo']) {
                 case CommentSubscriber::NOTIFY_TO_ADMIN:
                     if ($comment['anonymous']) {
-                        $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
-                        $comment['username'] = empty($comment['username'])
-                            ? $author
-                            : $comment['username'];
+                        if (empty($comment['username'])) {
+                            $author = $this->translator->trans(
+                                'anonymous-user',
+                                [],
+                                'CapcoAppBundle'
+                            );
+                            $comment['username'] = $author;
+                        }
+
                         $this->mailer->sendMessage(
                             CommentDeleteAdminAnonymousMessage::create(
                                 $comment,
@@ -195,8 +204,10 @@ class CommentNotifier extends BaseNotifier
                     ->isNotifyingCommentOnUpdate()
             ) {
                 if ($isAnonymous) {
-                    $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
-                    $comment->setAuthorName($author);
+                    if (empty($comment->getAuthorName())) {
+                        $author = $this->translator->trans('anonymous-user', [], 'CapcoAppBundle');
+                        $comment->setAuthorName($author);
+                    }
 
                     $this->mailer->sendMessage(
                         CommentUpdateAdminAnonymousMessage::create(
