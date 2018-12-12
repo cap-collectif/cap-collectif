@@ -35,14 +35,11 @@ export class StepPageHeader extends React.Component<Props> {
               <DatesInterval startAt={step.startAt} endAt={step.endAt} fullDay />
             </div>
           )}
-          {step.endAt &&
-            step.status === 'open' &&
-            !step.timeless &&
-            this.stepIsParticipative() && (
-              <div className="mr-15 d-ib hidden-print">
-                <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
-              </div>
-            )}
+          {step.endAt && step.status === 'OPENED' && !step.timeless && this.stepIsParticipative() && (
+            <div className="mr-15 d-ib hidden-print">
+              <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
+            </div>
+          )}
           {step.type !== 'questionnaire' && (
             <div className="d-ib">
               <i className="cap cap-business-chart-2-1" />{' '}
@@ -52,18 +49,17 @@ export class StepPageHeader extends React.Component<Props> {
             </div>
           )}
         </div>
-        {step.type === 'selection' &&
-          step.voteThreshold > 0 && (
-            <h4 style={{ marginBottom: '20px' }}>
-              <i className="cap cap-hand-like-2-1" style={{ fontSize: '22px', color: '#377bb5' }} />{' '}
-              <FormattedMessage
-                id="proposal.vote.threshold.step"
-                values={{
-                  num: step.voteThreshold,
-                }}
-              />
-            </h4>
-          )}
+        {step.type === 'selection' && step.voteThreshold > 0 && (
+          <h4 style={{ marginBottom: '20px' }}>
+            <i className="cap cap-hand-like-2-1" style={{ fontSize: '22px', color: '#377bb5' }} />{' '}
+            <FormattedMessage
+              id="proposal.vote.threshold.step"
+              values={{
+                num: step.voteThreshold,
+              }}
+            />
+          </h4>
+        )}
         <StepInfos step={step} />
       </div>
     );

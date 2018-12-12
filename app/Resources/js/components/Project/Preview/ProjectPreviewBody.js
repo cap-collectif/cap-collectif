@@ -22,10 +22,9 @@ const getStepsFilter = (project: ProjectPreviewBody_project) => {
     const dateB = b.startAt ? new Date(b.startAt) : 0;
     return dateA < dateB ? -1 : dateA > dateB ? 1 : 0;
   });
-
-  const stepClosed = projectStep.filter(step => step.status === 'closed');
-  const stepFuture = projectStep.filter(step => step.status === 'future');
-  const stepOpen = projectStep.filter(step => step.status === 'open');
+  const stepClosed = projectStep.filter(step => step.status === 'CLOSED');
+  const stepFuture = projectStep.filter(step => step.status === 'FUTURE');
+  const stepOpen = projectStep.filter(step => step.status === 'OPENED');
   const stepContinuousParticipation = projectStep.filter(step => step.timeless === true);
 
   return {
@@ -77,21 +76,21 @@ class ProjectPreviewBody extends React.Component<Props> {
 
     const isCurrentStep = getCurrentStep(project);
 
-    if (step.status === 'open' && this.actualStepIsParticipative()) {
+    if (step.status === 'OPENED' && this.actualStepIsParticipative()) {
       return (
         <a href={step.url}>
           <FormattedMessage id="project.preview.action.participe" />
         </a>
       );
     }
-    if ((!this.actualStepIsParticipative() && step.status === 'open') || isCurrentStep) {
+    if ((!this.actualStepIsParticipative() && step.status === 'OPENED') || isCurrentStep) {
       return (
         <a href={step.url}>
           <FormattedMessage id="project.preview.action.seeStep" />
         </a>
       );
     }
-    if (step.status === 'closed') {
+    if (step.status === 'CLOSED') {
       return (
         <a href={step.url}>
           <FormattedMessage id="project.preview.action.seeResult" />
@@ -106,7 +105,7 @@ class ProjectPreviewBody extends React.Component<Props> {
       <FormattedDate value={startAtDate} day="numeric" month="long" year="numeric" />
     );
 
-    if (step.status === 'future') {
+    if (step.status === 'FUTURE') {
       return (
         <span className="excerpt-dark">
           <FormattedMessage id="date.startAt" /> {startDay}
@@ -187,6 +186,7 @@ class ProjectPreviewBody extends React.Component<Props> {
     const { project } = this.props;
     const actualStep = getActualStep(project);
     const isCurrentStep = getCurrentStep(project);
+
     return (
       <div className="card__body">
         <div className="card__body__infos">
@@ -205,7 +205,7 @@ class ProjectPreviewBody extends React.Component<Props> {
         <div className="card__actions">
           {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep &&
-            actualStep.status === 'open' &&
+            actualStep.status === 'OPENED' &&
             !actualStep.timeless &&
             actualStep.endAt &&
             this.actualStepIsParticipative() && <RemainingTime endAt={actualStep.endAt} />}

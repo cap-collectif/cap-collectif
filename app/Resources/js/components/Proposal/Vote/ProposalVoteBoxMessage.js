@@ -14,10 +14,10 @@ export class ProposalVoteBoxMessage extends React.Component<Props> {
     if (!enoughCredits && !submitting) {
       return <FormattedMessage id="proposal.vote.not_enough_credits" />;
     }
-    if (step.status === 'future') {
+    if (step.status === 'FUTURE') {
       return <FormattedMessage id="proposal.vote.step_not_yet_open" />;
     }
-    if (step.status === 'closed') {
+    if (step.status === 'CLOSED') {
       return <FormattedMessage id="proposal.vote.step_closed" />;
     }
     return null;
