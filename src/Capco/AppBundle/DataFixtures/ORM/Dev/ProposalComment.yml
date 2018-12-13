@@ -3,86 +3,110 @@ Capco\AppBundle\Entity\ProposalComment:
     id: 'proposalComment<current()>'
     proposal: '@proposal1'
     Author: '@user<numberBetween(2, 3)>'
-    body: <text(300)>
-    createdAt: '<dateTimeBetween("-2 days", "now")>'
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
   propComment5:
     id: 'proposalComment5'
     proposal: '@proposal1'
     parent: '@propComment1'
     Author: '@user<numberBetween(1, 3)>'
-    body: <text(300)>
-    createdAt: '<dateTimeBetween("-2 days", "now")>'
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
   anonComment1:
     id: 'proposalComment6'
     proposal: '@proposal1'
     author_name: Marie Lopez
     author_email: enjoyphoenix@gmail.com
     author_ip: 192.168.1.1
-    body: <text(300)>
-    createdAt: '<dateTimeBetween("-2 days", "now")>'
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
   propComment{7..20}:
     id: 'proposalComment<current()>'
     proposal: '@proposal1'
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
-    createdAt: '<dateTimeBetween("-2 days", "now")>'
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
   propComment{21..27}:
     id: 'proposalComment<current()>'
     proposal: '@proposal27'
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
-    createdAt: <dateTimeBetween('-50 days', '-1 days')>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   propComment{28..32}:
     id: 'proposalComment<current()>'
     proposal: '@proposal28'
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
-    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
   propComment{33..37}:
     id: 'proposalComment<current()>'
     proposal: '@proposal31'
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
-    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
   propComment{37..42}:
     id: 'proposalComment<current()>'
     proposal: '@proposal32'
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
-    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
   propComment{43..49}:
     id: 'proposalComment<current()>'
     proposal: '@proposal35'
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
-    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
   propComment{50..55}:
     id: 'proposalComment<current()>'
     proposal: '@proposal36'
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
-    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
   propComment{56..60}:
     id: 'proposalComment<current()>'
     proposal: '@proposal37'
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
-    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
   propComment{61..70}:
     id: 'proposalComment<current()>'
     proposal: '@question1'
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>
-    publishedAt: '<dateTimeBetween("-2 days", "now")>'
-    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+    body: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>

@@ -40,6 +40,12 @@ Scenario: GraphQL client want to order proposals by COMMENTS
                 },
                 {
                   "node": {
+                    "id": "proposal35",
+                    "commentsCount": 7
+                  }
+                },
+                {
+                  "node": {
                     "id": "proposal10",
                     "commentsCount": 0
                   }

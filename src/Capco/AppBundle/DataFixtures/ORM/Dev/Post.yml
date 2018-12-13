@@ -54,9 +54,11 @@ Capco\AppBundle\Entity\Post:
     title: Réponses officielle
     body: Très bien tout ça je valide
     isPublished: true
-    publishedAt: <dateTimeBetween('-100 days', '-10 days')>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <(new \DateTime('2018-02-01 00:00:00'))>
     Authors:
-      - '@user<numberBetween(1,5)>'
+      - '@user3'
     themes: ['@theme1', '@theme2']
     media: null
     proposals: ['@proposal1']

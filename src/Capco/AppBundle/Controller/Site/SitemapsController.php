@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -108,7 +107,7 @@ class SitemapsController extends Controller
                 'priority' => '1.0',
             ];
             foreach (
-                $this->get('capco.event.repository')->findBy(['enabled' => true])
+                $this->get('capco.event.repository')->findBy(['isEnabled' => true])
                 as $event
             ) {
                 $urls[] = [
@@ -148,7 +147,7 @@ class SitemapsController extends Controller
 
         /** @var Opinion $opinion */
         foreach (
-            $this->get('capco.opinion.repository')->findBy(['published' => true])
+            $this->get('capco.opinion.repository')->findBy(['isEnabled' => true])
             as $opinion
         ) {
             if ($opinion->canDisplay($this->getUser())) {
@@ -163,7 +162,7 @@ class SitemapsController extends Controller
                         'opinionSlug' => $opinion->getSlug(),
                     ]),
                     'priority' => '2.0',
-                    'lastmod' => $opinion->getUpdatedAt() ? $opinion->getUpdatedAt()->format(\DateTime::W3C) : null,
+                    'lastmod' => $opinion->getUpdatedAt()->format(\DateTime::W3C),
                     'changefreq' => 'hourly',
                 ];
             }

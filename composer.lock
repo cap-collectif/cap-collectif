@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c021f8198b5fdc66919cf963eae1cf7",
+    "content-hash": "677189e65e9998fdbf1cfbc3cb4d8f6b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10856,6 +10856,55 @@
                 "upload"
             ],
             "time": "2018-01-05T13:37:05+00:00"
+        },
+        {
+            "name": "tmarsteel/mockery-callable-mock",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tmarsteel/mockery-callable-mock.git",
+                "reference": "edfa0aaedadb7f0885e1adb27b76912b2ec11732"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tmarsteel/mockery-callable-mock/zipball/edfa0aaedadb7f0885e1adb27b76912b2ec11732",
+                "reference": "edfa0aaedadb7f0885e1adb27b76912b2ec11732",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": ">=0.9",
+                "phpunit/phpunit": ">=3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Akamon\\MockeryCallableMock\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo Díez",
+                    "email": "pablodip@gmail.com"
+                },
+                {
+                    "name": "Tobias Marstaller",
+                    "email": "tobias.marstaller@gmail.com"
+                }
+            ],
+            "description": "Mockery Callable Mock",
+            "keywords": [
+                "callable",
+                "mock",
+                "mockery"
+            ],
+            "time": "2017-09-15T13:22:25+00:00"
         },
         {
             "name": "tweedegolf/prometheus-bundle",

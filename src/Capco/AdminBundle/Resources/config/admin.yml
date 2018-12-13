@@ -246,7 +246,7 @@ services:
 
   capco_admin.admin.opinion_type:
     class: Capco\AdminBundle\Admin\OpinionTypeAdmin
-    arguments: [~, Capco\AppBundle\Entity\OpinionType, CapcoAdminBundle:OpinionType, '@security.token_storage']
+    arguments: [~, Capco\AppBundle\Entity\OpinionType, CapcoAdminBundle:OpinionType]
     tags:
       - {
           name: sonata.admin,

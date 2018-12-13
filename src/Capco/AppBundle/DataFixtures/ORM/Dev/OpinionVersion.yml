@@ -40,6 +40,8 @@ Capco\AppBundle\Entity\OpinionVersion:
   version{4...10}:
     id: 'version<current()>'
     publishedAt: <(new \DateTime('2015-01-03'))>
+    createdAt: <(new \DateTime('2015-01-03'))>
+    trashedAt: <(new \DateTime('2016-01-03'))>
     title: Modification <current()>
     body: |
       <p><text(100)></p>
@@ -52,6 +54,7 @@ Capco\AppBundle\Entity\OpinionVersion:
   version11:
     id: 'version11'
     publishedAt: <(new \DateTime('2015-01-03'))>
+    createdAt: <(new \DateTime('2015-01-03'))>
     title: Version sur une étape fermée
     body: |
       <p><text(100)></p>
@@ -62,6 +65,7 @@ Capco\AppBundle\Entity\OpinionVersion:
   version{12..15}:
     id: 'version<current()>'
     title: Version non publiée n°<current()>
+    createdAt: <(new \DateTime('2015-01-03'))>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
