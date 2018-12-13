@@ -169,6 +169,23 @@ EOF;
     }
 
     /**
+     * @When /^(?:I )?send a ([A-Z]+) request to xml "([^"]+)"$/
+     *
+     * @param mixed $method
+     * @param mixed $url
+     */
+    public function iSendAXmlRequest($method, $url)
+    {
+        $this->response = $this->client->request($method, $url, [
+            'headers' => [
+                'Authorization' => sprintf('Bearer %s', $this->token),
+                'Content-Type' => 'application/xml',
+            ],
+            'exceptions' => false,
+        ]);
+    }
+
+    /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with values:$/
      *
      * @param mixed $method
@@ -263,6 +280,18 @@ EOF;
             (int) $this->response->getStatusCode(),
             (string) $this->response->getBody()
         );
+    }
+
+    /**
+     * Checks that response has specific status code.
+     *
+     * @param string $code status code
+     *
+     * @Then /^(?:the )?XML response status code should be (\d+)$/
+     */
+    public function theXmlResponseStatusCodeShouldBe(int $code)
+    {
+        $this->theJsonResponseStatusCodeShouldBe($code);
     }
 
     /**
