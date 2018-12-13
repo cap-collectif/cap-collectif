@@ -88,16 +88,15 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
     "data": {
       "collectStep": {
         "contributors": {
-          "totalCount": 5,
+          "totalCount": 4,
           "anonymousCount": 0,
           "pageInfo": {
             "hasNextPage": false,
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+            "endCursor": "YXJyYXljb25uZWN0aW9uOjM="
           },
           "edges": [
             { "node": {"_id":"user5"} },
             { "node": {"_id":"user502"} },
-            { "node": {"_id":"user508"} },
             { "node": {"_id":"user7"} },
             { "node": {"_id":"userAdmin"} }
           ]

@@ -2,15 +2,12 @@ Capco\AppBundle\Entity\CommentVote:
   evCommentVote1:
     comment: '@evComment1'
     user: '@user1'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
+    publishedAt: <(new \DateTime('yesterday'))>
   evCommentVote{2..50}:
     comment: '@evComment<numberBetween(1, 50)>'
     user: '@user<current()>'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
+    publishedAt: <(new \DateTime('yesterday'))>
   pCommentVote{1..150}:
     comment: '@pComment<numberBetween(1, 50)>'
     user: '@user<current()>'
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
+    publishedAt: <(new \DateTime('yesterday'))>

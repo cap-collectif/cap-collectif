@@ -4,8 +4,8 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion1'
     step: '@cstep1'
     title: Opinion 1
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <dateTimeBetween("-2 days", "now")>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: On va bientôt me mettre à la corbeille
     Author: '@user1'
     OpinionType: '@opinionType8'
@@ -14,8 +14,8 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion2'
     step: '@cstep1'
     title: Opinion 2
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <dateTimeBetween("-2 days", "now")>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>
     Author: '@user1'
@@ -24,8 +24,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion3'
     step: '@cstep1'
     title: Opinion 3
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
@@ -35,8 +34,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion4'
     step: '@cstep1'
     title: Opinion 4
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
@@ -46,8 +44,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion5'
     step: '@cstep1'
     title: Opinion sans sources
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
@@ -56,8 +53,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion{6..40}:
     id: 'opinion<current()>'
     step: '@cstep1'
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion <current()>
     body: |
       <p><text(100)></p>
@@ -69,7 +65,6 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion<current()>'
     step: '@cstep1'
     title: Opinion <current()>
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
@@ -80,8 +75,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion51:
     id: 'opinion51'
     step: '@cstep2'
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 51
     body: |
       <p><text(100)></p>
@@ -92,19 +86,17 @@ Capco\AppBundle\Entity\Opinion:
   opinion52:
     id: 'opinion52'
     step: '@cstep2'
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 52
     body: Contenu de ma super opinion !
     Author: '@user4'
     OpinionType: '@opinionType11'
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    updatedAt: <dateTimeBetween('+40 days', '+60 days')>
 
   opinion53:
     id: 'opinion53'
     step: '@cstep2'
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 53
     body: |
       <p><text(100)></p>
@@ -115,8 +107,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion54:
     id: 'opinion54'
     step: '@cstep3'
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 54
     body: |
       <p><text(100)></p>
@@ -127,8 +118,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion55:
     id: 'opinion55'
     step: '@cstep3'
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 55
     body: |
       <p><text(100)></p>
@@ -138,8 +128,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion56:
     id: 'opinion56'
     step: '@cstep3'
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 56
     body: |
       <p><text(100)></p>
@@ -150,8 +139,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion57:
     id: 'opinion57'
     step: '@cstep5'
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Article 1
     body: |
       <p><text(100)></p>
@@ -163,8 +151,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion58:
     id: 'opinion58'
     step: '@cstep5'
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Article 3
     body: |
       <p><text(100)></p>
@@ -176,8 +163,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion59:
     id: 'opinion59'
     step: '@cstep5'
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Article 2
     body: |
       <p><text(100)></p>
@@ -189,10 +175,10 @@ Capco\AppBundle\Entity\Opinion:
   opinion60:
     id: 'opinion60'
     step: '@cstep5'
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Article
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2017-03-01'))>
     body: Super opinion de malade
     Author: '@user2'
     OpinionType: '@opinionType6'
@@ -203,8 +189,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion61:
     id: 'opinion61'
     step: '@cstep5'
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Lié à article
     body: |
       <p><text(100)></p>
@@ -217,7 +202,8 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion62'
     step: '@cstep5'
     title: Très lié à article
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <dateTimeBetween('+1 days', '+10 days')>
+    createdAt: <dateTimeBetween('+1 days', '+10 days')>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
@@ -229,12 +215,12 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion63'
     step: '@cstep5'
     title: Article visible à la corbeille
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2016-03-01'))>
     body: Je suis du spam
     trashedStatus: 'visible'
     trashedReason: reporting.status.spam
-    trashedAt: <(new \DateTime('2018-03-02 00:00:00'))>
+    trashedAt: <(new \DateTime('2017-03-01'))>
     Author: '@user2'
     OpinionType: '@opinionType6'
     position: 1
@@ -242,7 +228,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion{64..67}:
     id: 'opinion<current()>'
     step: '@cstep2'
-    createdAt: <(new \DateTime('2018-02-01 00:00:00'))>
+    createdAt: <dateTimeBetween("-50 days", "-40 days")>
     title: Opinion <current()> non publié à temps
     body: |
       <p><text(100)></p>
@@ -253,9 +239,9 @@ Capco\AppBundle\Entity\Opinion:
   opinion{68...74}:
     id: 'opinion<current()>'
     step: '@cstep5'
-    createdAt: <(new \DateTime('2018-02-20 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-20 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-02-20 00:00:00'))>
+    createdAt: <(new \DateTime('yesterday'))>
+    updatedAt: <(new \DateTime('yesterday'))>
+    publishedAt: <(new \DateTime('yesterday'))>
     title: 'Opinion d hier <current()>'
     body: |
       <p><text(100)></p>
@@ -267,10 +253,10 @@ Capco\AppBundle\Entity\Opinion:
   opinion{74...80}:
     id: 'opinion<current()>'
     step: '@cstep5'
-    createdAt: <(new \DateTime('2018-02-16 00:00:00'))>
-    updatedAt: <(new \DateTime('2018-02-16 00:00:00'))>
-    publishedAt: <(new \DateTime('2018-02-16 00:00:00'))>
-    trashedAt: <(new \DateTime('2018-02-20 00:00:00'))>
+    createdAt: <(new \DateTime('-12 days'))>
+    updatedAt: <(new \DateTime('-12 days'))>
+    publishedAt: <(new \DateTime('-12 days'))>
+    trashedAt: <(new \DateTime('yesterday'))>
     trashedStatus: 'visible'
     trashedReason: reporting.status.spam
     title: 'Opinion mis a la corbeille hier <current()>'
