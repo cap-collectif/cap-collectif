@@ -29,6 +29,9 @@ Scenario: Project can be filtered by theme
   And I wait ".project-preview" to appear on current page
   # /!\ this test the number of projects visible set in the admin.
   Then I should see 16 ".project-preview" elements
+  Then I should see 15 ".progress" elements
+  And I should see "project.preview.action.participe"
+  And I should see "project.preview.action.seeResult"
   And I select "Transport" from "project-theme"
   And I wait ".project-preview" to appear on current page
   Then I should see 9 ".project-preview" elements

@@ -17,7 +17,7 @@ const defaultStep = {
 const defaultClosedStep = {
   ...defaultStep,
   title: 'Closed step',
-  status: 'ENDED',
+  status: 'CLOSED',
 };
 
 const closedStepComplete1 = {
@@ -31,7 +31,7 @@ const closedStepComplete1 = {
 const closedStepComplete2 = {
   ...defaultClosedStep,
   title: 'closed step 2',
-  status: 'ENDED',
+  status: 'CLOSED',
   startAt: '2017-01-20T09:00:24+01:00',
   endAt: '2017-01-28T09:00:24+01:00',
   type: 'presentation',
