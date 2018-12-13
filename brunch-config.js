@@ -64,5 +64,10 @@ exports.config = {
       toplevel: true,
       compress: true,
     },
+    copycat: {
+      css: ['bower_components/jquery-minicolors/jquery.minicolors.png'],
+      verbose: false,
+      onlyChanged: false,
+    },
   },
 };

@@ -39,7 +39,7 @@ def local():
                 print "Using dinghy"
                 localmac_dinghy()
             else:
-                print "Dinghy not found !"
+                localmac_dockermachine()
     env.host_string = 'docker@localhost'
     env.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/development.yml']
     env.shell = "/bin/sh -c"
@@ -52,6 +52,15 @@ def localmac_dinghy():
     env.host_string = 'docker@192.168.99.100'
     env.key_filename = '~/.docker/machine/machines/capco/id_rsa'
     env.dinghy = True
+    env.local_ip = '192.168.99.100'
+
+
+def localmac_dockermachine():
+    env.run = lrun
+    env.local = True
+    env.host_string = 'docker@192.168.99.100'
+    env.key_filename = '~/.docker/machine/machines/capco/id_rsa'
+    env.docker_machine = True
     env.local_ip = '192.168.99.100'
 
 
