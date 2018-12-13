@@ -19,6 +19,10 @@ services:
     tags:
       - { name: kernel.event_listener, event: graphql.post_executor, method: onPostExecutor }
 
+  Capco\AppBundle\EventListener\GraphQlAclListener:
+    tags:
+      - { name: kernel.event_listener, event: graphql.pre_executor, method: onPreExecutor }
+
   Overblog\GraphQLBundle\Error\ErrorHandler:
     autowire: true
     autoconfigure: true
