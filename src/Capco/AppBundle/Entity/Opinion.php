@@ -63,7 +63,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     /**
      * @ORM\Column(name="position", type="integer", nullable=true)
      */
-    protected $position = null;
+    protected $position;
 
     /**
      * @ORM\Column(name="versions_count", type="integer")
@@ -342,7 +342,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         return $this;
     }
 
-    public function getModals(): ?Collection
+    public function getModals(): Collection
     {
         return $this->modals;
     }

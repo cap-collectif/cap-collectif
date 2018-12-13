@@ -31,6 +31,11 @@ class ShieldListener
         'graphiql_endpoint',
         'nelmio_api_doc_index',
 
+        // Internal API and file upload
+        // for custom fields at registration
+        'graphql_multiple_endpoint',
+        'capco_app_api_medias_postmedia',
+
         // Account confirmation
         'account_confirm_email',
         'account_confirm_new_email',

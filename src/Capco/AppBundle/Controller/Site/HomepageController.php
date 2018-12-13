@@ -7,16 +7,12 @@ use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
-use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Resolver\SectionResolver;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class HomepageController extends Controller
@@ -96,9 +92,8 @@ class HomepageController extends Controller
      */
     public function highlightedContentAction(Section $section = null)
     {
-        $serializer = $this->get('serializer');
         $highlighteds = $this->get('capco.highlighted.repository')->getAllOrderedByPosition(4);
-        $props = $serializer->serialize(['highlighteds' => $highlighteds], 'json', [
+        $props = $this->serializer->serialize(['highlighteds' => $highlighteds], 'json', [
             'groups' => [
                 'HighlightedContent',
                 'Posts',
@@ -110,6 +105,7 @@ class HomepageController extends Controller
                 'Proposals',
             ],
         ]);
+
         return ['props' => $props, 'section' => $section];
     }
 
@@ -184,6 +180,7 @@ class HomepageController extends Controller
         $max = $max ?? 3;
         $projectRepo = $this->get(ProjectRepository::class);
         $count = $projectRepo->countPublished($this->getUser());
+
         return ['max' => $max, 'count' => $count, 'section' => $section];
     }
 
