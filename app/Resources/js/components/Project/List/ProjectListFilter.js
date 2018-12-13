@@ -6,7 +6,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { changeOrderBy, changeTerm, changeTheme } from '../../../redux/modules/project';
 import Input from '../../Form/ReactBootstrapInput';
 import type { GlobalState } from '../../../types';
-import ProjectsListFilterTypes from './ProjectListFilterTypes';
+import ProjectListFilterTypesContainer from './ProjectListFilterTypesContainer';
 
 type Props = {
   dispatch: Function,
@@ -43,7 +43,7 @@ class ProjectListFilter extends React.Component<Props, State> {
 
   renderTypeFilter() {
     const { dispatch, type, intl } = this.props;
-    return <ProjectsListFilterTypes dispatch={dispatch} intl={intl} type={type} />;
+    return <ProjectListFilterTypesContainer dispatch={dispatch} intl={intl} type={type} />;
   }
 
   renderThemeFilter() {

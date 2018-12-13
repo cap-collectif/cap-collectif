@@ -1,76 +1,46 @@
 // @flow
 import React from 'react';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import { FormControl } from 'react-bootstrap';
-import { FormattedMessage, type IntlShape } from 'react-intl';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
-import type { ProjectListFilterTypesQueryResponse } from './__generated__/ProjectListFilterTypesQuery.graphql';
+import { FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
+import { connect, type MapStateToProps } from 'react-redux';
 import { changeType } from '../../../redux/modules/project';
+import type { GlobalState } from '../../../types';
 
 type Props = {
   dispatch: Function,
   intl: IntlShape,
   type: ?string,
+  projectTypes: any,
 };
 
-export default class ProjectsListFilterTypes extends React.Component<Props> {
-  renderProjectsListFilterTypes = ({
-    error,
-    props,
-  }: {
-    props: ?ProjectListFilterTypesQueryResponse,
-  } & ReadyState) => {
-    if (error) {
-      console.log(error); // eslint-disable-line no-console
-      return graphqlError;
-    }
-    if (props) {
-      if (props.projectTypes) {
-        const { dispatch, intl, type } = this.props;
-        const { projectTypes } = props;
-        if (projectTypes.length > 0) {
-          return (
-            <FormControl
-              id="project-type"
-              componentClass="select"
-              type="select"
-              name="type"
-              value={type}
-              onChange={e => {
-                dispatch(changeType(e.target.value));
-              }}>
-              <option key="all" value="">
-                {intl.formatMessage({ id: 'global.select_project_types' })}
-              </option>
-              {projectTypes.map(projectType => (
-                <FormattedMessage id={projectType.title} key={projectType.slug}>
-                  {message => <option value={projectType.id}>{message}</option>}
-                </FormattedMessage>
-              ))}
-            </FormControl>
-          );
-        }
-      }
-    }
-    return null;
-  };
-
+class ProjectsListFilterTypes extends React.Component<Props> {
   render() {
+    const { type, projectTypes, intl, dispatch } = this.props;
     return (
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
-          query ProjectListFilterTypesQuery {
-            projectTypes {
-              id
-              title
-              slug
-            }
-          }
-        `}
-        variables={{}}
-        render={this.renderProjectsListFilterTypes}
-      />
+      <FormControl
+        id="project-type"
+        componentClass="select"
+        type="select"
+        name="type"
+        value={type}
+        onChange={e => {
+          dispatch(changeType(e.target.value));
+        }}>
+        <option key="all" value="">
+          {intl.formatMessage({ id: 'global.select_project_types' })}
+        </option>
+        {projectTypes.map(projectType => (
+          <FormattedMessage id={projectType.title} key={projectType.slug}>
+            {message => <option value={projectType.id}>{message}</option>}
+          </FormattedMessage>
+        ))}
+      </FormControl>
     );
   }
 }
+
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+  type: state.project.type,
+});
+
+export default connect(mapStateToProps)(injectIntl(ProjectsListFilterTypes));
