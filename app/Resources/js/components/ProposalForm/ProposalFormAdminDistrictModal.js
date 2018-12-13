@@ -26,7 +26,7 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props> {
   render() {
     const { member, show, isCreating, onClose, onSubmit, district } = this.props;
     return (
-      <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg">
+      <Modal show={show} onHide={onClose} aria-labelledby="report-modal-title-lg" bsSize="large">
         <Modal.Header closeButton>
           <Modal.Title
             id="report-modal-title-lg"
