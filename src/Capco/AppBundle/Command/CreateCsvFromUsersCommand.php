@@ -18,63 +18,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromUsersCommand extends ContainerAwareCommand
 {
-    private const VALUE_RESPONSE_TYPENAME = 'ValueResponse';
-    private const MEDIA_RESPONSE_TYPENAME = 'MediaResponse';
     protected $connectionTraversor;
     protected $listener;
     protected $executor;
     protected $projectRootDir;
 
+    private const VALUE_RESPONSE_TYPENAME = 'ValueResponse';
+    private const MEDIA_RESPONSE_TYPENAME = 'MediaResponse';
+
     /**
      * @var WriterInterface
      */
     protected $writer;
-
-    protected $userHeaderMap = [
-        'id' => 'id',
-        'email' => 'email',
-        'username' => 'username',
-        'createdAt' => 'createdAt',
-        'updatedAt' => 'updatedAt',
-        'lastLogin' => 'lastLogin',
-        'rolesText' => 'rolesText',
-        'enabled' => 'enabled',
-        'isEmailConfirmed' => 'emailConfirmed',
-        'locked' => 'locked',
-        'phoneConfirmed' => 'phoneConfirmed',
-        'phoneConfirmationSentAt' => 'phoneConfirmationSentAt',
-        'userType.name' => 'userType.name',
-        'consentExternalCommunication' => 'consentExternalCommunication',
-        'gender' => 'gender',
-        'firstname' => 'firstname',
-        'lastname' => 'lastname',
-        'dateOfBirth' => 'dateOfBirth',
-        'website' => 'website',
-        'biography' => 'biography',
-        'address' => 'address',
-        'address2' => 'address2',
-        'zipCode' => 'zipCode',
-        'city' => 'city',
-        'phone' => 'phone',
-        'url' => 'url',
-        'googleId' => 'googleId',
-        'facebookId' => 'facebookId',
-        'samlId' => 'samlId',
-        'opinionsCount' => 'opinionsCount',
-        'opinionVotesCount' => 'opinionVotesCount',
-        'opinionVersionsCount' => 'opinionVersionsCount',
-        'argumentsCount' => 'argumentsCount',
-        'argumentVotesCount' => 'argumentVotesCount',
-        'proposalsCount' => 'proposalsCount',
-        'proposalVotesCount' => 'proposalVotesCount',
-        'commentVotesCount' => 'commentVotesCount',
-        'sourcesCount' => 'sourcesCount',
-        'repliesCount' => 'repliesCount',
-        'postCommentsCount' => 'postCommentsCount',
-        'eventCommentsCount' => 'eventCommentsCount',
-        'projectsCount' => 'projectsCount',
-        'deletedAccountAt' => 'deletedAccountAt',
-    ];
 
     private $sheetHeader = [
         'id',
@@ -122,6 +77,52 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         'deletedAccountAt',
     ];
 
+    protected $userHeaderMap = [
+        'id' => 'id',
+        'email' => 'email',
+        'username' => 'username',
+        'createdAt' => 'createdAt',
+        'updatedAt' => 'updatedAt',
+        'lastLogin' => 'lastLogin',
+        'rolesText' => 'rolesText',
+        'enabled' => 'enabled',
+        'isEmailConfirmed' => 'emailConfirmed',
+        'locked' => 'locked',
+        'phoneConfirmed' => 'phoneConfirmed',
+        'phoneConfirmationSentAt' => 'phoneConfirmationSentAt',
+        'userType.name' => 'userType.name',
+        'consentExternalCommunication' => 'consentExternalCommunication',
+        'gender' => 'gender',
+        'firstname' => 'firstname',
+        'lastname' => 'lastname',
+        'dateOfBirth' => 'dateOfBirth',
+        'website' => 'website',
+        'biography' => 'biography',
+        'address' => 'address',
+        'address2' => 'address2',
+        'zipCode' => 'zipCode',
+        'city' => 'city',
+        'phone' => 'phone',
+        'url' => 'url',
+        'googleId' => 'googleId',
+        'facebookId' => 'facebookId',
+        'samlId' => 'samlId',
+        'opinionsCount' => 'opinionsCount',
+        'opinionVotesCount' => 'opinionVotesCount',
+        'opinionVersionsCount' => 'opinionVersionsCount',
+        'argumentsCount' => 'argumentsCount',
+        'argumentVotesCount' => 'argumentVotesCount',
+        'proposalsCount' => 'proposalsCount',
+        'proposalVotesCount' => 'proposalVotesCount',
+        'commentVotesCount' => 'commentVotesCount',
+        'sourcesCount' => 'sourcesCount',
+        'repliesCount' => 'repliesCount',
+        'postCommentsCount' => 'postCommentsCount',
+        'eventCommentsCount' => 'eventCommentsCount',
+        'projectsCount' => 'projectsCount',
+        'deletedAccountAt' => 'deletedAccountAt',
+    ];
+
     public function __construct(
         GraphQlAclListener $listener,
         ConnectionTraversor $connectionTraversor,
@@ -158,7 +159,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
             ])
             ->toArray();
 
-        $userSample = $datas['data']['users']['edges'][0]['node'];
+        $userSample = $datas["data"]["users"]["edges"][0]["node"];
 
         $this->writer = WriterFactory::create(Type::CSV);
         $this->writer->openToFile(sprintf('%s/web/export/%s', $this->projectRootDir, $fileName));
@@ -170,7 +171,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
 
         $this->connectionTraversor->traverse(
             $datas,
-            'users',
+            'data.users',
             function ($edge) use ($progress) {
                 $progress->advance();
                 $user = $edge['node'];
@@ -215,7 +216,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
 
         return <<<EOF
 {
-  users(superAdmin: false, first: 100 ${userCursor}) {
+  users(superAdmin: false, first: 100 $userCursor) {
     totalCount
     pageInfo {
       startCursor
@@ -299,7 +300,7 @@ EOF;
     {
         $responses = array_map(function (array $edge) {
             return $edge['node'];
-        }, $sampleUser['responses']['edges']);
+        }, $sampleUser['responses']["edges"]);
 
         return array_map(function (array $response) {
             return $response['question']['title'];
@@ -316,16 +317,14 @@ EOF;
         switch ($response['__typename']) {
             case self::VALUE_RESPONSE_TYPENAME:
                 return $response['formattedValue'];
-
                 break;
             case self::MEDIA_RESPONSE_TYPENAME:
                 return implode(
-                    ', ',
+                    ", ",
                     array_map(function (array $media) {
                         return $media['url'];
                     }, $response['medias'])
                 );
-
                 break;
             default:
                 throw new \LogicException('Unknown response typename');

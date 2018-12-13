@@ -25,7 +25,7 @@ Capco\AppBundle\Entity\Proposal:
     commentsCount:
       expose: true
       type: integer
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
       serialized_name: commentsCount
     canContribute:
       expose: true

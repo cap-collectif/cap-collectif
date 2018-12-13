@@ -4,10 +4,11 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class OpinionTypeAdmin extends AbstractAdmin
 {
@@ -15,6 +16,18 @@ class OpinionTypeAdmin extends AbstractAdmin
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
+
+    private $tokenStorage;
+
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        TokenStorageInterface $tokenStorage
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->tokenStorage = $tokenStorage;
+    }
 
     public function getPersistentParameters()
     {
@@ -73,11 +86,14 @@ class OpinionTypeAdmin extends AbstractAdmin
         }
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $commentSystemChoices = OpinionType::$commentSystemLabels;
+        $user = $this->tokenStorage->getToken()->getUser();
+        if (!$user->isSuperAdmin()) {
+            unset($commentSystemChoices['opinion_type.comment_system.ok']);
+        }
+
         $formMapper
             ->with('admin.fields.opinion_type.group_info', ['class' => 'col-md-12'])
             ->end()
@@ -172,7 +188,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             ])
             ->add('commentSystem', 'choice', [
                 'label' => 'admin.fields.opinion_type.comment_system',
-                'choices' => OpinionType::$commentSystemLabels,
+                'choices' => $commentSystemChoices,
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
             ])

@@ -579,7 +579,7 @@ EOF;
             $progress = new ProgressBar($output, $totalCount);
             $this->connectionTraversor->traverse(
                 $proposals,
-                'proposals',
+                'data.node.proposals',
                 function ($edge) use ($progress, $output) {
                     $proposal = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                     $this->addProposalRow($proposal, $output);
@@ -644,7 +644,7 @@ EOF;
 
         $this->connectionTraversor->traverse(
             $proposalWithReportings,
-            'reportings',
+            'data.node.reportings',
             function ($edge) use ($proposal, $progress) {
                 $report = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalReportRow($report, $proposal);
@@ -679,7 +679,7 @@ EOF;
         );
         $this->connectionTraversor->traverse(
             $proposalsWithVotes,
-            'votes',
+            'data.node.votes',
             function ($edge) use ($proposal, $progress) {
                 $vote = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalVotesRow($vote, $proposal);
@@ -712,7 +712,7 @@ EOF;
         );
         $this->connectionTraversor->traverse(
             $proposalsWithComments,
-            'comments',
+            'data.node.comments',
             function ($edge) use ($proposal, $progress) {
                 $comment = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalCommentRow($comment, $proposal);
@@ -750,7 +750,7 @@ EOF;
 
         $this->connectionTraversor->traverse(
             $proposalWithNews,
-            'news',
+            'data.node.news',
             function ($edge) use ($proposal, $progress) {
                 $news = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsRow($news, $proposal, $edge['cursor']);
@@ -828,7 +828,7 @@ EOF;
 
         $this->connectionTraversor->traverse(
             $commentWithReportings,
-            'reportings',
+            'data.node.reportings',
             function ($edge) use ($proposal, $comment) {
                 $report = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalCommentReportRow($report, $proposal, $comment);
@@ -851,7 +851,7 @@ EOF;
 
         $this->connectionTraversor->traverse(
             $commentWithVotes,
-            'votes',
+            'data.node.votes',
             function ($edge) use ($proposal, $comment) {
                 $vote = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalCommentVotesRow($vote, $proposal, $comment);

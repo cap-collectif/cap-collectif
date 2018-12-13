@@ -17,11 +17,11 @@ Scenario: GraphQL client wants to list projects authors
   {
     "data":{
       "projectAuthors":[
-        {"username":"lbrunet"},
-        {"username":"sfavot"},
-        {"username":"admin"},
         {"username":"welcomattic"},
-        {"username":"xlacot"}
+        {"username":"admin"},
+        {"username":"xlacot"},
+        {"username":"sfavot"},
+        {"username":"lbrunet"}
       ]
     }
   }
