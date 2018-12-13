@@ -552,7 +552,6 @@ fos_rest:
     empty_content: 204
     formats:
       json: true
-      xml: true #used for sitemap
   format_listener:
     enabled: false # We support only json
   # versioning: false
