@@ -152,6 +152,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         $this->appendices = new ArrayCollection();
         $this->followers = new ArrayCollection();
         $this->createdAt = new \Datetime();
+        $this->modals = new ArrayCollection();
     }
 
     public function __toString()
