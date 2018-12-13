@@ -1656,8 +1656,8 @@ type EmailDomain implements Node {
 
 # A Evaluation form (question)
 type EvaluationForm {
-  # The id of evaluation form (question)
-  id: String!
+  # The ID of an object
+  id: ID!
 
   # The title of evaluation form (question)
   title: String!

@@ -4,8 +4,9 @@ EvaluationForm:
     description: 'A Evaluation form (question)'
     fields:
       id:
-        type: 'String!'
-        description: 'The id of evaluation form (question)'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Questionnaire
       title:
         type: 'String!'
         description: 'The title of evaluation form (question)'
