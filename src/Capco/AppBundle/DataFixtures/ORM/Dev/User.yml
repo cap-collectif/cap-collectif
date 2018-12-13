@@ -217,7 +217,7 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: azertyuiop
     enabled: true
-    createdAt: <(new \DateTime('2015-01-01'))>
+    createdAt: '<dateTimeBetween("-3 days", "-1 days")>'
 
   user_not_confirmed_with_contributions:
     id: 'user508'
@@ -232,7 +232,7 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: oklmoklm
     enabled: true
-    createdAt: <(new \DateTime('2015-01-01'))>
+    createdAt: '<dateTimeBetween("-3 days", "-1 days")>'
 
   user_without_phone:
     id: 'user511'
@@ -292,7 +292,7 @@ Capco\UserBundle\Entity\User:
     media: null
     confirmationToken: check-my-email-token
     resetPasswordToken: reset-my-password-token
-    createdAt: <(new \DateTime('2015-01-01'))>
+    createdAt: '<dateTimeBetween("-3 days", "-1 days")>'
 
   user_updating_email:
     id: 'user515'

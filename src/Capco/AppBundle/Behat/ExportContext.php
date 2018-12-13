@@ -231,6 +231,11 @@ class ExportContext implements KernelAwareContext
     {
         foreach ($expected as $i => $expectedLine) {
             foreach ($expectedLine as $columnName => $cellValue) {
+                $suffix = strtolower(substr($columnName, -2));
+                // We skip date values because they can be dynamic
+                if ('at' === $suffix) {
+                    continue;
+                }
                 if ($actual[$i][$columnName] !== $cellValue) {
                     throw new \RuntimeException(
                         sprintf(
