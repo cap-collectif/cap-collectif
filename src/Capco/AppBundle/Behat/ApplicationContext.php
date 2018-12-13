@@ -176,7 +176,21 @@ class ApplicationContext extends UserContext
         if (!$driver instanceof Selenium2Driver) {
             return;
         }
-        $driver->maximizeWindow();
+
+        try {
+            $driver->maximizeWindow();
+        } catch (\Exception $e) {
+            if (
+                Text::startsWith(
+                    $e->getMessage(),
+                    'unknown error: failed to change window state to maximized, current state is normal'
+                )
+            ) {
+                echo 'Failed to maximizeWindow';
+            } else {
+                throw $e;
+            }
+        }
     }
 
     /**

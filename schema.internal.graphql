@@ -5022,7 +5022,7 @@ enum StepStatus {
   OPENED
 
   # The step has been closed.
-  CLOSED
+  ENDED
 }
 
 # 3 possible values for a subscription.

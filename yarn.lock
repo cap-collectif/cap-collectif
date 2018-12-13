@@ -3837,15 +3837,6 @@ copy-webpack-plugin@^4.6.0:
     p-limit "^1.0.0"
     serialize-javascript "^1.4.0"
 
-copycat-brunch@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/copycat-brunch/-/copycat-brunch-1.1.0.tgz#10e17b85909e0e129981dfb9030b9866483d66bd"
-  integrity sha1-EOF7hZCeDhKZgd+5AwuYZkg9Zr0=
-  dependencies:
-    loggy "~0.2.2"
-    mkdirp "^0.5.1"
-    quickly-copy-file "^0.1.0"
-
 core-js@2.5.7, core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.7, core-js@~2.5.1:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
@@ -8471,7 +8462,7 @@ log-update@^2.3.0:
     cli-cursor "^2.0.0"
     wrap-ansi "^3.0.1"
 
-loggy@^1, loggy@^1.0.3, loggy@^1.0.4, loggy@~0.2.2, loggy@~1.0.3:
+loggy@^1, loggy@^1.0.3, loggy@~1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/loggy/-/loggy-1.0.4.tgz#651ed6cc27d5cf5057501ce6fb4a089f5e41d9a2"
   integrity sha512-cNqUcV6oNLa1kemACNB420Hze4xREnnxfJZ2/EV6aGG6WXW481//DatmJTCyrfEICN0rOLV2NhR/3OFRJcJR7A==
@@ -10516,13 +10507,6 @@ querystringify@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.0.tgz#7ded8dfbf7879dcc60d0a644ac6754b283ad17ef"
   integrity sha512-sluvZZ1YiTLD5jsqZcDmFyV2EwToyXZBfpoVOmktMmW+VEnhgakFHnasVph65fOjGPTWN0Nw3+XQaSeMayr0kg==
-
-quickly-copy-file@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/quickly-copy-file/-/quickly-copy-file-0.1.0.tgz#d14063ff659f68697e7cbfee817a07bb635237c2"
-  integrity sha1-0UBj/2WfaGl+fL/ugXoHu2NSN8I=
-  dependencies:
-    mkdirp "~0.5.0"
 
 quill-delta@^3.6.2:
   version "3.6.3"

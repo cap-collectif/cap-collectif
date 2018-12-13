@@ -18,27 +18,13 @@ def linux_docker_install(force=False):
     local('curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose')
     local('sudo apt-get install unrar')
 
-
-@task(environments=['local'])
-def docker_machine_install(force=False):
-    """
-    Install docker-machine
-    """
-    if not env.docker_machine:
-        return
-
-    with settings(warn_only=True):
-        result = local('which docker-machine')
-        if force or not result.succeeded:
-            docker_toolbox_install()
-
-    with settings(warn_only=True):
-        local('docker-machine create --driver virtualbox --virtualbox-memory 4096 --virtualbox-disk-size 30000 --virtualbox-cpu-count 8 --virtualbox-hostonly-nictype "Am79C973" capco')
-
-
-def docker_toolbox_install():
-    local('brew install caskroom/cask/brew-cask')
-    local('brew cask install dockertoolbox')
+def dinghy_deps():
+    local('brew install docker docker-machine')
+    local('brew install docker-machine-nfs xhyve docker-machine-driver-xhyve')
+    local('brew tap codekitchen/dinghy')
+    local('brew install dinghy')
+    local('sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve')
+    local('sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve')
 
 
 @task(environments=['local'])
@@ -49,12 +35,9 @@ def dinghy_install(force=False):
     with settings(warn_only=True):
         result = local('which dinghy')
         if force or not result.succeeded:
-            docker_toolbox_install()
-            local('brew tap codekitchen/dinghy')
-            local('brew install dinghy')
-
+            dinghy_deps()
     with settings(warn_only=True):
-        local('dinghy create --provider=virtualbox --memory=4096 --disk=30000 --cpus=8')
+        local('dinghy create --provider=xhyve --memory=4096 --cpus=8 --boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v18.06.1-ce/boot2docker.iso')
 
 
 @task(environments=['local'])
@@ -91,6 +74,8 @@ def configure_vhosts():
         'capco.dev',
         'capco.prod',
         'capco.test',
+        # To test paris login
+        'capco.paris.fr',
     ]
 
     for domain in domains:
