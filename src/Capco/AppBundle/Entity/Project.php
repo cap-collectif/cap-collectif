@@ -929,7 +929,7 @@ class Project implements IndexableInterface
 
     public function isIndexable(): bool
     {
-        return $this->isPublic();
+        return true;
     }
 
     public static function getElasticsearchTypeName(): string

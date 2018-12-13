@@ -8,7 +8,6 @@ Capco\AppBundle\Entity\Reporting:
     proposal: '@proposal1'
     status: 2
     isArchived: false
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   reporting3:
     id: 3
     body: |
@@ -18,7 +17,6 @@ Capco\AppBundle\Entity\Reporting:
     Source: '@source1'
     status: 2
     isArchived: false
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   reporting4:
     id: 4
     body: |
@@ -28,7 +26,6 @@ Capco\AppBundle\Entity\Reporting:
     opinionVersion: '@version1'
     status: 2
     isArchived: false
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   reporting5:
     id: 5
     body: |
@@ -38,7 +35,6 @@ Capco\AppBundle\Entity\Reporting:
     Argument: '@argument1'
     status: 2
     isArchived: false
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
   reporting6:
     id: 6
     body: |
@@ -48,4 +44,3 @@ Capco\AppBundle\Entity\Reporting:
     Comment: '@evComment1'
     status: 2
     isArchived: false
-    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>

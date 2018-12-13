@@ -7,8 +7,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user5'
     body: Coucou, je suis un bel argument !
     publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
     moderationToken: 'argument1ModerationToken'
   argument2:
     id: 'argument2'
@@ -16,8 +14,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user4'
     body: <text(300)>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
 
   argument{3..95}:
@@ -25,9 +21,7 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion3'
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
-    body: <text(300)>`
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
+    body: <text(300)>
     publishedAt: <(new \DateTime('2015-01-01'))>
 
   argument{96..99}:
@@ -36,8 +30,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user_not_confirmed_with_contributions'
     body: <text(300)>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
 
   argument100:
     id: 'argument100'
@@ -45,8 +37,6 @@ Capco\AppBundle\Entity\Argument:
     type: 1
     Author: '@user_not_confirmed_with_contributions'
     body: <text(300)>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
 
   argument{101..150}:
     id: 'argument<current()>'
@@ -54,8 +44,6 @@ Capco\AppBundle\Entity\Argument:
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
     trashedStatus: 'visible'
 
@@ -64,8 +52,6 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion<numberBetween(3, 50)>'
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
     body: <text(300)>
     trashedStatus: 'invisible'
@@ -75,8 +61,6 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion<numberBetween(3, 50)>'
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
     body: <text(300)>
 
@@ -86,8 +70,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user1'
     body: <text(300)>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
   argument202:
     id: 'argument202'
@@ -95,8 +77,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user2'
     body: <text(300)>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
 
   argument203:
@@ -105,8 +85,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
 
   # Argument on versions
@@ -116,8 +94,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user5'
     body: <text(300)>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
   argument205:
     id: 'argument205'
@@ -125,8 +101,6 @@ Capco\AppBundle\Entity\Argument:
     type: 1
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
 
   argument206:
@@ -137,7 +111,6 @@ Capco\AppBundle\Entity\Argument:
     body: 'Que la force soit avec toi.'
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
-    updatedAt: <(new \DateTime('2017-03-01'))>
     moderationToken: 'argument206ModerationToken'
 
   argument207:
@@ -160,7 +133,6 @@ Capco\AppBundle\Entity\Argument:
     trashedStatus: 'visible'
     publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
-    updatedAt: <(new \DateTime('2017-03-01'))>
     trashedAt: <(new \DateTime('2017-03-01'))>
     trashedReason: 'moderation-guideline-violation'
 
@@ -170,8 +142,6 @@ Capco\AppBundle\Entity\Argument:
     type: 1
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    createdAt: <(new \DateTime('2016-03-01'))>
-    updatedAt: <(new \DateTime('2017-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
 
   argument211:
@@ -180,8 +150,6 @@ Capco\AppBundle\Entity\Argument:
     type: 1
     Author: '@user1'
     body: <text(300)>
-    createdAt: <(new \DateTime('2016-03-01'))>
-    updatedAt: <(new \DateTime('2017-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
 
   argument212:
@@ -189,8 +157,6 @@ Capco\AppBundle\Entity\Argument:
     opinionVersion: '@version11'
     type: 1
     Author: '@user1'
-    createdAt: <(new \DateTime('2016-03-01'))>
-    updatedAt: <(new \DateTime('2017-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
     body: <text(300)>
 
@@ -200,6 +166,5 @@ Capco\AppBundle\Entity\Argument:
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    createdAt: <(new \DateTime('2016-03-01'))>
-    updatedAt: <(new \DateTime('2017-03-01'))>
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('yesterday'))>
+    publishedAt: <(new \DateTime('yesterday'))>

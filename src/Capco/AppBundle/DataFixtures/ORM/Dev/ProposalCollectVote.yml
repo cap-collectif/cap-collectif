@@ -5,7 +5,6 @@ Capco\AppBundle\Entity\ProposalCollectVote:
     collectStep: '@collectstep5'
     user (unique): '@user<current()>'
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
   proposalCollectVote51:
     id: 2051
     proposal: '@proposal24'
@@ -13,7 +12,6 @@ Capco\AppBundle\Entity\ProposalCollectVote:
     user: '@user5'
     position: 3
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
   proposalCollectVote52:
     id: 2052
     proposal: '@proposal25'
@@ -21,7 +19,6 @@ Capco\AppBundle\Entity\ProposalCollectVote:
     user: '@user5'
     position: 2
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
   proposalCollectVote53:
     id: 2053
     proposal: '@proposal26'
@@ -29,7 +26,6 @@ Capco\AppBundle\Entity\ProposalCollectVote:
     user: '@user5'
     position: 1
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
   questionCollectVote54:
     id: 2054
     proposal: '@question1'
@@ -37,7 +33,6 @@ Capco\AppBundle\Entity\ProposalCollectVote:
     user: '@user5'
     position: 1
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
   questionCollectVote55:
     id: 2055
     proposal: '@question2'
@@ -45,4 +40,3 @@ Capco\AppBundle\Entity\ProposalCollectVote:
     user: '@user5'
     position: 2
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>

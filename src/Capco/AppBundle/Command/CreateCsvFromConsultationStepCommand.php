@@ -20,12 +20,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromConsultationStepCommand extends Command
 {
-    protected const CONTRIBUTION_PER_PAGE = 100;
-    protected const VOTE_PER_PAGE = 100;
     protected const ARGUMENT_PER_PAGE = 100;
     protected const SOURCE_PER_PAGE = 100;
-    protected const VERSION_PER_PAGE = 100;
-    protected const REPORTING_PER_PAGE = 100;
 
     protected const ARGUMENT_FRAGMENT = <<<'EOF'
 fragment argumentInfos on Argument {
@@ -106,87 +102,6 @@ fragment sourceInfos on Source {
 }
 EOF;
 
-    protected const VERSION_FRAGMENT = <<<'EOF'
-fragment versionInfos on Version {
-    ...relatedInfos
-    id
-    ...authorInfos
-    title
-    bodyText
-    comment
-    createdAt
-    updatedAt
-    url
-    published
-    ...trashableInfos
-    votesOk: votes(first: 0, value: YES) {
-      totalCount
-    }
-    votesMitige: votes(first: 0, value: MITIGE) {
-        totalCount
-    }
-    votesNo: votes(first: 0, value: NO) {
-        totalCount
-    }
-    argumentsFor: arguments(first: 0, type: FOR) {
-        totalCount
-    }
-    argumentsAgainst: arguments(first: 0, type: AGAINST) {
-        totalCount
-    }
-    arguments {
-      totalCount
-      edges {
-        node {
-          ...argumentInfos
-        }
-      }
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-    }
-    sources {
-      totalCount
-      edges {
-        node {
-          ...sourceInfos
-        }
-      }
-      pageInfo {
-          endCursor
-          hasNextPage
-      }
-    }
-    reportings {
-      totalCount
-      edges {
-        node {
-          ...reportInfos
-        }
-      }
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-    }
-    votes {
-        totalCount
-        edges {
-            node {
-              ...voteInfos
-            }
-        }
-        pageInfo {
-          endCursor
-          hasNextPage
-        }
-    }
-}
-EOF;
-
     protected const SHEET_HEADER = [
         'type',
         'contributions_id',
@@ -253,7 +168,6 @@ EOF;
         'contribution_versions_createdAt',
         'contribution_versions_updatedAt',
     ];
-
     protected const SOURCE_HEADER_MAP = [
         'contributions_sources_id' => 'id',
         'contributions_sources_related_id' => 'related.id',
@@ -275,7 +189,6 @@ EOF;
         'contributions_votes_value' => 'value',
         'contributions_votes_createdAt' => 'createdAt',
     ];
-
     protected const ARGUMENT_HEADER_MAP = [
         'contributions_arguments_related_id' => 'related.id',
         'contributions_arguments_related_kind' => 'related.kind',
@@ -311,35 +224,34 @@ EOF;
         'contributions_reportings_createdAt' => 'createdAt',
     ];
 
-    protected $contributionHeaderMap =
-        [
-            'contributions_id' => 'id',
-            'contributions_author_id' => 'author.id',
-            'contributions_section_title' => 'section.title',
-            'contributions_title' => 'title',
-            'contributions_bodyText' => 'bodyText',
-            'contributions_createdAt' => 'createdAt',
-            'contributions_updatedAt' => 'updatedAt',
-            'contributions_url' => 'url',
-            'contributions_published' => 'published',
-            'contributions_trashed' => 'trashed',
-            'contributions_trashedAt' => 'trashedAt',
-            'contributions_trashedReason' => 'trashedReason',
-            'contributions_votesCount' => 'votes.totalCount',
-            'contributions_votesCountOk' => 'votesOk.totalCount',
-            'contributions_votesCountMitige' => 'votesMitige.totalCount',
-            'contributions_votesCountNok' => 'votesNo.totalCount',
-            'contributions_argumentsCount' => 'arguments.totalCount',
-            'contributions_argumentsCountFor' => 'argumentsFor.totalCount',
-            'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
-            'contributions_sourcesCount' => 'sources.totalCount',
-            'contributions_versionsCount' => 'versions.totalCount',
-        ] +
-        self::ARGUMENT_HEADER_MAP +
-        self::VOTES_HEADER_MAP +
-        self::REPORTING_HEADER_MAP +
-        self::SOURCE_HEADER_MAP +
-        self::VERSION_HEADER_MAP;
+    protected $contributionHeaderMap = [
+        'contributions_id' => 'id',
+        'contributions_author_id' => 'author.id',
+        'contributions_section_title' => 'section.title',
+        'contributions_title' => 'title',
+        'contributions_bodyText' => 'bodyText',
+        'contributions_createdAt' => 'createdAt',
+        'contributions_updatedAt' => 'updatedAt',
+        'contributions_url' => 'url',
+        'contributions_published' => 'published',
+        'contributions_trashed' => 'trashed',
+        'contributions_trashedAt' => 'trashedAt',
+        'contributions_trashedReason' => 'trashedReason',
+        'contributions_votesCount' => 'votes.totalCount',
+        'contributions_votesCountOk' => 'votesOk.totalCount',
+        'contributions_votesCountMitige' => 'votesMitige.totalCount',
+        'contributions_votesCountNok' => 'votesNo.totalCount',
+        'contributions_argumentsCount' => 'arguments.totalCount',
+        'contributions_argumentsCountFor' => 'argumentsFor.totalCount',
+        'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
+        'contributions_sourcesCount' => 'sources.totalCount',
+        'contributions_versionsCount' => 'versions.totalCount',
+    ] +
+    self::ARGUMENT_HEADER_MAP +
+    self::VOTES_HEADER_MAP +
+    self::REPORTING_HEADER_MAP +
+    self::SOURCE_HEADER_MAP +
+    self::VERSION_HEADER_MAP;
 
     protected static $defaultName = 'capco:export:consultation';
 
@@ -390,7 +302,7 @@ EOF;
         $steps = $this->consultationStepRepository->getAllStepsWithAProject();
         foreach ($steps as $key => $step) {
             $output->writeln(
-                "\n<info>Exporting step " . ($key + 1) . '/' . \count($steps) . '</info>'
+                "\n<info>Exporting step " . ($key + 1) . "/" . \count($steps) . "</info>"
             );
             $this->currentStep = $step;
             $this->generateSheet($step, $output);
@@ -410,19 +322,17 @@ EOF;
             $this->currentStep
         );
 
-        $contributions = $this->executor
-            ->execute('internal', [
-                'query' => $contributionsQuery,
-                'variables' => [],
-            ])
-            ->toArray();
+        $contributions = $this->executor->execute('internal', [
+            'query' => $contributionsQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($contributions, 'data.node.contributionConnection.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
         $this->connectionTraversor->traverse(
             $contributions,
-            'contributionConnection',
+            'data.node.contributionConnection',
             function ($edge) use ($progress) {
                 $progress->advance();
                 $contribution = $edge['node'];
@@ -443,12 +353,7 @@ EOF;
     private function getContributionsGraphQLQueryByConsultationStep(
         ConsultationStep $consultationStep,
         ?string $contributionAfter = null,
-        int $contributionPerPage = self::CONTRIBUTION_PER_PAGE,
-        int $argumentPerPage = self::ARGUMENT_PER_PAGE,
-        int $sourcePerPage = self::SOURCE_PER_PAGE,
-        int $reportingPerPage = self::REPORTING_PER_PAGE,
-        int $votePerPage = self::VOTE_PER_PAGE,
-        int $versionPerPage = self::VERSION_PER_PAGE
+        int $contributionPerPage = 100
     ): string {
         $argumentFragment = self::ARGUMENT_FRAGMENT;
         $authorFragment = self::AUTHOR_FRAGMENT;
@@ -457,7 +362,6 @@ EOF;
         $reportingFragment = self::REPORTING_FRAGMENT;
         $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
         $sourceFragment = self::SOURCE_FRAGMENT;
-        $versionFragment = self::VERSION_FRAGMENT;
 
         if ($contributionAfter) {
             $contributionAfter = sprintf(', after: "%s"', $contributionAfter);
@@ -471,11 +375,10 @@ ${voteFragment}
 ${reportingFragment}
 ${trashableFragment}
 ${sourceFragment}
-${versionFragment}
 {
   node(id: "{$consultationStep->getId()}") {
     ... on Consultation {
-      contributionConnection(orderBy: {field: PUBLISHED_AT, direction: DESC}, first: ${contributionPerPage}${contributionAfter}) {
+      contributionConnection(first: ${contributionPerPage}${contributionAfter}) {
         totalCount
         pageInfo {
           startCursor
@@ -513,7 +416,7 @@ ${versionFragment}
             argumentsAgainst: arguments(first: 0, type: AGAINST) {
                 totalCount
             }
-            votes(first: ${votePerPage}) {
+            votes(first: 100) {
                 totalCount
                 edges {
                     cursor
@@ -527,7 +430,7 @@ ${versionFragment}
                     hasNextPage
                 }
             }
-            arguments(first: ${argumentPerPage}) {
+            arguments(first: 100) {
               totalCount
               edges {
                 cursor
@@ -541,7 +444,7 @@ ${versionFragment}
                 hasNextPage
               }
             }
-            sources(first: ${sourcePerPage}) {
+            sources(first: 100) {
                 totalCount
                 edges {
                     cursor
@@ -555,7 +458,7 @@ ${versionFragment}
                     hasNextPage
                 }
             }
-            reportings(first: ${reportingPerPage}) {
+            reportings(first: 100) {
               totalCount
               edges {
               cursor
@@ -569,12 +472,87 @@ ${versionFragment}
                 hasNextPage
               }
             }
-            versions(first: ${versionPerPage}) {
+            versions(first: 100) {
                 totalCount
                 edges {
                     cursor
                     node {
-                        ...versionInfos
+                        ...relatedInfos
+                        id
+                        ...authorInfos
+                        title
+                        bodyText
+                        comment
+                        createdAt
+                        updatedAt
+                        url
+                        published
+                        ...trashableInfos
+                        votesOk: votes(first: 0, value: YES) {
+                          totalCount
+                        }
+                        votesMitige: votes(first: 0, value: MITIGE) {
+                            totalCount
+                        }
+                        votesNo: votes(first: 0, value: NO) {
+                            totalCount
+                        }
+                        argumentsFor: arguments(first: 0, type: FOR) {
+                            totalCount
+                        }
+                        argumentsAgainst: arguments(first: 0, type: AGAINST) {
+                            totalCount
+                        }
+                        arguments {
+                          totalCount
+                          edges {
+                            node {
+                              ...argumentInfos
+                            }
+                          }
+                          pageInfo {
+                            startCursor
+                            endCursor
+                            hasNextPage
+                          }
+                        }
+                        sources {
+                          totalCount
+                          edges {
+                            node {
+                              ...sourceInfos
+                            }
+                          }
+                          pageInfo {
+                              endCursor
+                              hasNextPage
+                          }
+                        }
+                        reportings {
+                          totalCount
+                          edges {
+                            node {
+                              ...reportInfos
+                            }
+                          }
+                          pageInfo {
+                            startCursor
+                            endCursor
+                            hasNextPage
+                          }
+                        }
+                        votes {
+                            totalCount
+                            edges {
+                                node {
+                                  ...voteInfos
+                                }
+                            }
+                            pageInfo {
+                              endCursor
+                              hasNextPage
+                            }
+                        }
                     }
                 }
             }
@@ -628,56 +606,32 @@ EOF;
         $this->writer->addRow($row);
 
         // we add Opinion's votes rows.
-        $this->connectionTraversor->traverse(
-            $contribution,
-            'votes',
-            function ($edge) use ($contribution) {
-                $this->addContributionVotesRow($contribution, $edge['node']);
-            },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionVotesGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
-        );
+        $this->connectionTraversor->traverse($contribution, 'votes', function ($edge) use (
+            $contribution
+        ) {
+            $this->addContributionVotesRow($contribution, $edge['node']);
+        });
 
         // we add Opinion's sources rows.
-        $this->connectionTraversor->traverse(
-            $contribution,
-            'sources',
-            function ($edge) use ($contribution) {
-                $this->addContributionSourcesRow($contribution, $edge['node']);
-            },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionSourcesGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
-        );
+        $this->connectionTraversor->traverse($contribution, 'sources', function ($edge) use (
+            $contribution
+        ) {
+            $this->addContributionSourcesRow($contribution, $edge['node']);
+        });
 
         // we add Opinion's reportings rows.
-        $this->connectionTraversor->traverse(
-            $contribution,
-            'reportings',
-            function ($edge) use ($contribution) {
-                $this->addContributionReportingsRow($contribution, $edge['node']);
-            },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionReportingsGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
-        );
+        $this->connectionTraversor->traverse($contribution, 'reportings', function ($edge) use (
+            $contribution
+        ) {
+            $this->addContributionReportingsRow($contribution, $edge['node']);
+        });
 
         // we add Opinion's arguments rows.
-        $this->connectionTraversor->traverse(
+        $this->connectionTraversor->traverseMutatePath(
             $contribution,
             'arguments',
             function ($edge) use ($contribution) {
-                $this->addContributionArgumentRow($contribution, $edge['node']);
+                $this->addContributionArgumentRow($edge['node'], $contribution);
             },
             function ($pageInfo) use ($contribution) {
                 return $this->getContributionsArgumentsGraphQLQuery(
@@ -688,189 +642,11 @@ EOF;
         );
 
         // We add Opinion's versions rows.
-        $this->connectionTraversor->traverse(
-            $contribution,
-            'versions',
-            function ($edge) use ($contribution) {
-                $this->addContributionVersionRow($contribution, $edge['node']);
-            },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionVersionsGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
-        );
-    }
-
-    private function getOpinionVotesGraphQLQuery(
-        string $opinionId,
-        ?string $votesAfterCursor = null,
-        int $votesPerPage = self::VOTE_PER_PAGE
-    ): string {
-        $authorFragment = self::AUTHOR_FRAGMENT;
-        $voteFragment = self::VOTE_FRAGMENT;
-
-        if ($votesAfterCursor) {
-            $votesAfterCursor = sprintf(', after: "%s"', $votesAfterCursor);
-        }
-
-        return <<<EOF
-${authorFragment}
-${voteFragment}
-{
-  node(id: "${opinionId}") {
-    ... on Opinion {
-      votes(first: ${votesPerPage}${votesAfterCursor}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...voteInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
-    }
-
-    private function getOpinionSourcesGraphQLQuery(
-        string $opinionId,
-        ?string $sourcesAfterCursor = null,
-        int $sourcesPerPage = self::SOURCE_PER_PAGE
-    ): string {
-        $authorFragment = self::AUTHOR_FRAGMENT;
-        $relatedFragment = self::CONTRIBUTION_FRAGMENT;
-        $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
-        $sourceFragment = self::SOURCE_FRAGMENT;
-
-        if ($sourcesAfterCursor) {
-            $sourcesAfterCursor = sprintf(', after: "%s"', $sourcesAfterCursor);
-        }
-
-        return <<<EOF
-${authorFragment}
-${relatedFragment}
-${trashableFragment}
-${sourceFragment}
-{
-  node(id: "${opinionId}") {
-    ... on Opinion {
-      sources(first: ${sourcesPerPage}${sourcesAfterCursor}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...sourceInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
-    }
-
-    private function getOpinionReportingsGraphQLQuery(
-        string $opinionId,
-        ?string $reportingsAfterCursor = null,
-        int $reportingPerPage = self::REPORTING_PER_PAGE
-    ): string {
-        $authorFragment = self::AUTHOR_FRAGMENT;
-        $relatedFragment = self::CONTRIBUTION_FRAGMENT;
-        $reportingFragment = self::REPORTING_FRAGMENT;
-
-        if ($reportingsAfterCursor) {
-            $reportingsAfterCursor = sprintf(', after: "%s"', $reportingsAfterCursor);
-        }
-
-        return <<<EOF
-${authorFragment}
-${relatedFragment}
-${reportingFragment}
-{
-  node(id: "${opinionId}") {
-    ... on Opinion {
-      sources(first: ${reportingPerPage}${reportingsAfterCursor}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...reportInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
-    }
-
-    private function getOpinionVersionsGraphQLQuery(
-        string $opinionId,
-        ?string $versionsAfterCursor = null,
-        int $versionPerPage = self::VERSION_PER_PAGE
-    ): string {
-        $authorFragment = self::AUTHOR_FRAGMENT;
-        $relatedFragment = self::CONTRIBUTION_FRAGMENT;
-        $trashableFragment = self::TRASHABLE_CONTRIBUTION_FRAGMENT;
-        $argumentFragment = self::ARGUMENT_FRAGMENT;
-        $sourceFragment = self::SOURCE_FRAGMENT;
-        $reportingFragment = self::REPORTING_FRAGMENT;
-        $voteFragment = self::VOTE_FRAGMENT;
-        $versionFragment = self::VERSION_FRAGMENT;
-
-        if ($versionsAfterCursor) {
-            $versionsAfterCursor = sprintf(', after: "%s"', $versionsAfterCursor);
-        }
-
-        return <<<EOF
-${authorFragment}
-${relatedFragment}
-${trashableFragment}
-${argumentFragment}
-${sourceFragment}
-${reportingFragment}
-${voteFragment}
-${versionFragment}
-{
-  node(id: "${opinionId}") {
-    ... on Opinion {
-      sources(first: ${versionPerPage}${versionsAfterCursor}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...versionInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+        $this->connectionTraversor->traverse($contribution, 'versions', function ($edge) use (
+            $contribution
+        ) {
+            $this->addContributionVersionRow($edge['node'], $contribution);
+        });
     }
 
     private function getContributionsArgumentsGraphQLQuery(
@@ -915,12 +691,12 @@ ${trashableFragment}
 EOF;
     }
 
-    private function addContributionArgumentRow($contribution, $argument): void
+    private function addContributionArgumentRow($argument, $contribution): void
     {
         $this->addContributionRow('argument', $argument, $contribution, self::ARGUMENT_HEADER_MAP);
     }
 
-    private function addContributionVersionRow($contribution, $version): void
+    private function addContributionVersionRow($version, $contribution): void
     {
         $this->addContributionRow('version', $version, $contribution, self::VERSION_HEADER_MAP);
     }

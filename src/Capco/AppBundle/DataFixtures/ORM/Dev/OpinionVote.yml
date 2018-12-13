@@ -4,54 +4,39 @@ Capco\AppBundle\Entity\OpinionVote:
     value: <numberBetween(-1, 1)>
     user: '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote2:
     Opinion: '@opinion57'
     value: -1
     user (unique): '@user2'
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote3:
     Opinion: '@opinion57'
     value: 1
     user (unique): '@user3'
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote4:
     Opinion: '@opinion57'
     value: 1
     user (unique): '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote5:
     Opinion: '@opinion57'
     value: 0
     user (unique): '@user5'
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote{6...50}:
     Opinion: '@opinion59'
     value: <numberBetween(-1, 1)>
     user (unique): '@user<current()>'
     publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
   opinionVote51:
     Opinion: '@opinion59'
     value: <numberBetween(-1, 1)>
     user: '@user_not_confirmed_with_contributions'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+
   opinionVote{52...80}:
     Opinion: '@opinion69'
     value: <numberBetween(-1, 1)>
     user (unique): '@user<current()>'
-    publishedAt: <(new \DateTime('2015-03-01'))>
-    createdAt: <(new \DateTime('2015-03-01'))>
-    updatedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('yesterday'))>
+    publishedAt: <(new \DateTime('yesterday'))>

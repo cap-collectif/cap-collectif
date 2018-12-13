@@ -145,10 +145,10 @@ trait OpinionStepsTrait
             3000,
             "$('.opinion__votes__more__modal .opinion__votes__userbox').length > 0"
         );
-        $votesInModalSelector = $this->navigationContext
-            ->getPage('opinion page')
-            ->getVotesInModalSelector();
-        $this->assertNumElements(45, $votesInModalSelector);
+        $votesInModalSelector = $this->navigationContext->getPage(
+            'opinion page'
+        )->getVotesInModalSelector();
+        $this->assertNumElements(44, $votesInModalSelector);
     }
 
     /**
@@ -249,9 +249,9 @@ trait OpinionStepsTrait
      */
     public function iShouldSeeMyNewUnpublishedArgument()
     {
-        $selector = $this->navigationContext
-            ->getPage('opinion page')
-            ->getUnpublishedArgumentsYesBoxSelector();
+        $selector = $this->navigationContext->getPage(
+            'opinion page'
+        )->getUnpublishedArgumentsYesBoxSelector();
         $this->assertElementContainsText($selector, 'Texte de mon argument');
     }
 
@@ -712,9 +712,9 @@ trait OpinionStepsTrait
      */
     public function iShouldNotSeeTheDeleteVersionButton()
     {
-        $buttonSelector = $this->navigationContext
-            ->getPage('opinion version page')
-            ->getDeleteButtonSelector();
+        $buttonSelector = $this->navigationContext->getPage(
+            'opinion version page'
+        )->getDeleteButtonSelector();
         $this->assertElementNotOnPage($buttonSelector);
     }
 
@@ -726,7 +726,7 @@ trait OpinionStepsTrait
     public function iClickTheDeleteVersionButton()
     {
         $link = 'a.btn.btn-danger[href*="/delete"]';
-        $this->getSession()->wait(3000, "$('${link}').length > 0");
+        $this->getSession()->wait(3000, "$('$link').length > 0");
         $this->navigationContext->getPage('opinion version page')->clickDeleteButton();
     }
 
@@ -770,9 +770,9 @@ trait OpinionStepsTrait
      */
     public function iShouldSeeAllOpinionVersionVotes()
     {
-        $votesInModalSelector = $this->navigationContext
-            ->getPage('opinion version page')
-            ->getVotesInModalSelector();
+        $votesInModalSelector = $this->navigationContext->getPage(
+            'opinion version page'
+        )->getVotesInModalSelector();
         $this->assertNumElements(49, $votesInModalSelector);
     }
 
@@ -783,16 +783,16 @@ trait OpinionStepsTrait
 
     protected function opinionPageInClosedStepIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('opinion page')
-            ->isOpen(self::$opinionInClosedStep);
+        return $this->navigationContext->getPage('opinion page')->isOpen(
+            self::$opinionInClosedStep
+        );
     }
 
     protected function opinionWithNoSourcesPageIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('opinion page')
-            ->isOpen(self::$opinionWithNoSources);
+        return $this->navigationContext->getPage('opinion page')->isOpen(
+            self::$opinionWithNoSources
+        );
     }
 
     protected function clickArgumentVoteButtonWithLabel($label)
@@ -830,8 +830,8 @@ trait OpinionStepsTrait
 
     protected function versionPageInClosedStepIsOpen()
     {
-        return $this->navigationContext
-            ->getPage('opinion version page')
-            ->isOpen(self::$versionInClosedStep);
+        return $this->navigationContext->getPage('opinion version page')->isOpen(
+            self::$versionInClosedStep
+        );
     }
 }
