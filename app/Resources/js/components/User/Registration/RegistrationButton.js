@@ -48,8 +48,9 @@ export class RegistrationButton extends React.Component<Props> {
           style={buttonStyle}
           onClick={openRegistrationModal}
           bsStyle={bsStyle}
+          // aria-label="Ouvrir la modal d'inscription"
           className={`btn--registration ${className}`}>
-          {<FormattedMessage id="global.registration" />}
+          <FormattedMessage id="global.registration" />
         </Button>
         {/* $FlowFixMe please fix */}
         <RegistrationModal chartBody={chartBody} />
