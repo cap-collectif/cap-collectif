@@ -28,7 +28,7 @@ PreviewQuery:
           author:
             type: 'ID'
             description: 'If non-null, filter projects by author'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectsResolver", [args, getUser()])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectsResolver", [args])'
       events:
         type: 'PreviewEventConnection!'
         argsBuilder: 'Relay::Connection'
