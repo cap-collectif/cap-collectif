@@ -9,6 +9,6 @@ ProjectStatus:
       OPENED:
         value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::OPENED")'
         description: 'The project is currently open.'
-      CLOSED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::CLOSED")'
+      ENDED:
+        value: '@=constant("Capco\\AppBundle\\Enum\\ProjectStatus::ENDED")'
         description: 'The project has been closed.'

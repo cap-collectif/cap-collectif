@@ -42,13 +42,13 @@ abstract class AbstractStep implements DisplayableInBOInterface
 
     public const OPENING_STATUS_FUTURE = 'FUTURE';
     public const OPENING_STATUS_OPENED = 'OPENED';
-    public const OPENING_STATUS_CLOSED = 'CLOSED';
+    public const OPENING_STATUS_ENDED = 'ENDED';
 
     /**
      * @var array
      */
     public static $stepStatus = [
-        'closed' => self::OPENING_STATUS_CLOSED,
+        'closed' => self::OPENING_STATUS_ENDED,
         'open' => self::OPENING_STATUS_OPENED,
         'future' => self::OPENING_STATUS_FUTURE,
     ];

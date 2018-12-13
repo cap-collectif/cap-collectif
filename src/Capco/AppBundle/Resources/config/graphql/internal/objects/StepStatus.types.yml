@@ -9,6 +9,6 @@ StepStatus:
       OPENED:
         value: '@=constant("Capco\\AppBundle\\Enum\\StepStatus::OPENED")'
         description: 'The step is currently open.'
-      CLOSED:
-        value: '@=constant("Capco\\AppBundle\\Enum\\StepStatus::CLOSED")'
+      ENDED:
+        value: '@=constant("Capco\\AppBundle\\Enum\\StepStatus::ENDED")'
         description: 'The step has been closed.'

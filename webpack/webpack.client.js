@@ -56,6 +56,13 @@ const devConf = {
         ),
         to: path.resolve(__dirname, '../web/js/jquery.minicolors.js'),
       },
+      {
+        from: path.resolve(
+          __dirname,
+          '../bower_components/jquery-minicolors/jquery.minicolors.png',
+        ),
+        to: path.resolve(__dirname, '../web/css/jquery.minicolors.png'),
+      },
     ]),
   ],
   module: {

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionAppendix;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -189,7 +190,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
         $progress->finish();
 
         $output->writeln(
-            '<info>' . (\count($opinions) - 1) . ' opinions successfully created.</info>'
+            '<info>' . \count($opinions) - 1 . ' opinions successfully created.</info>'
         );
 
         return 0;

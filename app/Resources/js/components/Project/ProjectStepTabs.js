@@ -5,17 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { type GlobalState } from '../../types';
 
-type stepStatus = 'open' | 'closed' | 'future';
-
 type Props = {
-  steps: Array<{
-    _links: { show: string },
-    id: string,
-    enabled: boolean,
-    label: string,
-    type?: string,
-    status?: ?stepStatus,
-  }>,
+  steps: Array<Object>,
   currentStepId: ?string,
   // eslint-disable-next-line react/no-unused-prop-types
   projectId: string,
@@ -206,13 +197,13 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
   };
 
   renderStepStatus(step: Object) {
-    if (step.status === 'open') {
+    if (step.status === 'OPENED') {
       return <FormattedMessage id="step.status.open" />;
     }
-    if (step.status === 'future') {
+    if (step.status === 'FUTURE') {
       return <FormattedMessage id="step.status.future" />;
     }
-    if (step.status === 'closed') {
+    if (step.status === 'CLOSED') {
       return <FormattedMessage id="step.status.closed" />;
     }
   }

@@ -37,7 +37,7 @@ class Project implements IndexableInterface
 
     public const OPENING_STATUS_FUTURE = 0;
     public const OPENING_STATUS_OPENED = 1;
-    public const OPENING_STATUS_CLOSED = 2;
+    public const OPENING_STATUS_ENDED = 2;
 
     public const OPINION_TERM_OPINION = 0;
     public const OPINION_TERM_ARTICLE = 1;
@@ -55,7 +55,7 @@ class Project implements IndexableInterface
     public static $openingStatuses = [
         'future' => self::OPENING_STATUS_FUTURE,
         'opened' => self::OPENING_STATUS_OPENED,
-        'closed' => self::OPENING_STATUS_CLOSED,
+        'ended' => self::OPENING_STATUS_ENDED,
     ];
 
     public static $opinionTermsLabels = [
@@ -829,7 +829,7 @@ class Project implements IndexableInterface
         $currentStep = $this->getCurrentStep();
         if ($currentStep) {
             if ($currentStep->isClosed()) {
-                return self::$openingStatuses['closed'];
+                return self::$openingStatuses['ended'];
             }
             if ($currentStep->isOpen()) {
                 return self::$openingStatuses['opened'];

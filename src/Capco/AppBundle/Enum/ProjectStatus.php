@@ -8,5 +8,5 @@ final class ProjectStatus
 {
     public const FUTURE = Project::OPENING_STATUS_FUTURE;
     public const OPENED = Project::OPENING_STATUS_OPENED;
-    public const CLOSED = Project::OPENING_STATUS_CLOSED;
+    public const ENDED = Project::OPENING_STATUS_ENDED;
 }
