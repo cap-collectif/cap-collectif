@@ -78,6 +78,19 @@ Scenario: Project can be filtered by title
   And I should not see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Projet vide"
 
+Scenario: Restricted project should display in projects list
+  Given feature "projects_form" is enabled
+  And I visited "projects page"
+  And I am logged in as super admin
+  When I fill in the following:
+    | project-search-input | custom |
+  And I click the "#project-search-button" element
+  And I wait ".project-preview" to appear on current page
+  Then I should see 1 ".project-preview" elements
+  And I should see "Un avenir meilleur pour les nains de jardins (custom access)"
+  And I should not see "Stratégie technologique de l'Etat et services publics"
+  And I should not see "Croissance, innovation, disruption"
+
 Scenario: Presentation step should display correct number of element
   Given feature "calendar" is enabled
   And feature "blog" is enabled
