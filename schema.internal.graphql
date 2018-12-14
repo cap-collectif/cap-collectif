@@ -1458,6 +1458,18 @@ type CreateUserPayload {
 # A string containing CSS.
 scalar CssJSON
 
+# Require a date of birth
+type DateOfBirthRequirement implements Node & Requirement {
+  # The ID of an object
+  id: ID!
+
+  # Does the viewer meets the requirement ?
+  viewerMeetsTheRequirement: Boolean!
+
+  # The date of birth of the viewer.
+  viewerDateOfBirth: DateTime
+}
+
 # A string containing a datetime.
 scalar DateTime
 
@@ -4334,6 +4346,7 @@ type RequestUserArchivePayload {
 
 # A requirement
 interface Requirement {
+  # The ID of an object
   id: ID!
 
   # Does the viewer meets the requirement ?

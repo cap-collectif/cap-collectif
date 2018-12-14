@@ -5,7 +5,9 @@ Requirement:
     resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementTypeResolver", [value])'
     fields:
       id:
-        type: 'ID!'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Requirement
       viewerMeetsTheRequirement:
         type: 'Boolean!'
         access: "@hasRole=('ROLE_USER')"

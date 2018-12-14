@@ -417,9 +417,6 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               id="dateOfBirth"
                               component={DateDropdownPicker}
                               locale={wLocale}
-                              dayDefaultValue="Jour"
-                              monthDefaultValue="Mois"
-                              yearDefaultValue="Année"
                               dayId="personal-data-date-of-birth-day"
                               monthId="personal-data-date-of-birth-month"
                               yearId="personal-data-date-of-birth-year"
