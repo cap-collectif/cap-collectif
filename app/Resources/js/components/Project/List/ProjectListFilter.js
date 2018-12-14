@@ -6,7 +6,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { changeOrderBy, changeTerm, changeTheme } from '../../../redux/modules/project';
 import Input from '../../Form/ReactBootstrapInput';
 import type { GlobalState } from '../../../types';
-import ProjectsListFilterTypes from './ProjectListFilterTypes';
+import ProjectListFilterTypesContainer from './ProjectListFilterTypesContainer';
 
 type Props = {
   dispatch: Function,
@@ -15,10 +15,11 @@ type Props = {
   type: ?string,
   themes: Array<{ id: string, slug: string, title: string }>,
   features: { themes: boolean },
+  term: ?string,
+  theme: ?string,
 };
 
 type State = {
-  termInputValue: string,
   value?: string,
 };
 
@@ -26,30 +27,27 @@ class ProjectListFilter extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    this.state = {
-      termInputValue: '',
-    };
+    this.state = { value: props.term || '' };
   }
 
   handleChangeTermInput = event => {
-    this.setState({ termInputValue: event.target.value });
+    this.setState({ value: event.target.value });
   };
 
   handleSubmit = e => {
     const { dispatch } = this.props;
-    const { termInputValue } = this.state;
+    const { value } = this.state;
     e.preventDefault();
-    const value = termInputValue.length > 0 ? termInputValue : null;
-    dispatch(changeTerm(value));
+    dispatch(changeTerm(value && value.length > 0 ? value : null));
   };
 
   renderTypeFilter() {
     const { dispatch, type, intl } = this.props;
-    return <ProjectsListFilterTypes dispatch={dispatch} intl={intl} type={type} />;
+    return <ProjectListFilterTypesContainer dispatch={dispatch} intl={intl} type={type} />;
   }
 
   renderThemeFilter() {
-    const { features, themes, dispatch, intl } = this.props;
+    const { features, themes, theme, dispatch, intl } = this.props;
     if (features.themes) {
       return (
         <FormControl
@@ -59,13 +57,14 @@ class ProjectListFilter extends React.Component<Props, State> {
           name="theme"
           onChange={e => {
             dispatch(changeTheme(e.target.value));
-          }}>
+          }}
+          value={theme}>
           <option key="all" value="">
             {intl.formatMessage({ id: 'global.select_themes' })}
           </option>
-          {themes.map(theme => (
-            <option key={theme.slug} value={theme.id}>
-              {theme.title}
+          {themes.map(t => (
+            <option key={t.slug} value={t.id}>
+              {t.title}
             </option>
           ))}
         </FormControl>
@@ -142,6 +141,8 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   themes: state.default.themes,
   orderBy: state.project.orderBy || 'LATEST',
   type: state.project.type,
+  theme: state.project.theme,
+  term: state.project.term,
 });
 
 export default connect(mapStateToProps)(injectIntl(ProjectListFilter));
