@@ -18,10 +18,10 @@ Scenario: GraphQL client wants to list projects authors
     "data":{
       "projectAuthors":[
         {"username":"welcomattic"},
-        {"username":"admin"},
         {"username":"xlacot"},
+        {"username":"lbrunet"},
         {"username":"sfavot"},
-        {"username":"lbrunet"}
+        {"username":"admin"}
       ]
     }
   }

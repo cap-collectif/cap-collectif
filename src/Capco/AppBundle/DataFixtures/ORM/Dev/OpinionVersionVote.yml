@@ -4,7 +4,12 @@ Capco\AppBundle\Entity\OpinionVersionVote:
     value: <numberBetween(-1, 1)>
     user (unique): '@user<current()>'
     publishedAt: <(new \DateTime('2015-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2015-01-01'))>
   opinionVersionVote51:
     opinionVersion: '@version11'
     value: <numberBetween(-1, 1)>
     user: '@user_not_confirmed_with_contributions'
+    publishedAt: <(new \DateTime('2015-01-01'))>
+    updatedAt: <(new \DateTime('2016-01-01'))>
+    createdAt: <(new \DateTime('2015-01-01'))>

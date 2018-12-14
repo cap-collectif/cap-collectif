@@ -363,6 +363,16 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @Then proposal :proposal1 should be before proposal :proposal2
+     */
+    public function proposalShouldBeBeforeProposal(string $proposal1, string $proposal2): void
+    {
+        $option = $this->getCurrentPage()->getSelectedSortingOption();
+        Assert::assertEquals('last', $option);
+        $this->proposalBeforeProposal($proposal1, $proposal2);
+    }
+
+    /**
      * @Then proposals should be ordered by date
      */
     public function proposalsShouldBeOrderedByDate()
@@ -370,8 +380,8 @@ trait ProposalStepsTrait
         $option = $this->getCurrentPage()->getSelectedSortingOption();
         Assert::assertEquals('last', $option);
         $this->proposalBeforeProposal(
-            'Rénovation du gymnase',
-            'Ravalement de la façade de la bibliothèque municipale'
+            'Ravalement de la façade de la bibliothèque municipale',
+            'Proposition pas encore votable'
         );
     }
 

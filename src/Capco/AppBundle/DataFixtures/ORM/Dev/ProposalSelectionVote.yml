@@ -5,60 +5,62 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     selectionStep: '@selectionstep1'
     user: '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
   proposalSelectionVote{4...50}:
     id (unique): '<numberBetween(1001, 1050)>'
     proposal: '@proposal3'
     selectionStep: '@selectionstep1'
     user (unique): '@user<current()>'
     publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
   proposalSelectionVote51:
     id: 1051
     proposal: '@proposal7'
     selectionStep: '@selectionstep4'
     user: '@user4'
-    createdAt: <(new \DateTime('yesterday'))>
-    publishedAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposalSelectionVote52:
     id: 1052
     proposal: '@proposal11'
     selectionStep: '@selectionstep3'
     user: '@user4'
-    createdAt: <(new \DateTime('yesterday'))>
-    publishedAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposalSelectionVote53:
     id: 1053
     proposal: '@proposal17'
     selectionStep: '@selectionstep8'
     user: '@user5'
     private: false
-    createdAt: <(new \DateTime('yesterday'))>
-    publishedAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposalSelectionVote54:
     id: 1054
     proposal: '@proposal1'
     selectionStep: '@selectionstep8'
     user: '@user2'
-    createdAt: <(new \DateTime('yesterday'))>
-    publishedAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposalSelectionVote55:
     id: 1055
     proposal: '@proposal1'
     selectionStep: '@selectionstep8'
     user: '@user1'
-    createdAt: <(new \DateTime('yesterday'))>
-    publishedAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
   proposalSelectionVote56:
     id: 1056
     proposal: '@proposal1'
     selectionStep: '@selectionstep8'
     user: '@user4'
-    createdAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
     published: false
   questionSelectionVote56:
     id: 1057
     proposal: '@question1'
     selectionStep: '@selectionQuestionStepVoteClassement'
     user: '@user4'
-    createdAt: <(new \DateTime('yesterday'))>
-    publishedAt: <(new \DateTime('yesterday'))>
+    createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    publishedAt: <(new \DateTime('2018-03-01 00:00:00'))>
     private: false

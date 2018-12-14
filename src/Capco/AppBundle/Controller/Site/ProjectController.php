@@ -306,15 +306,18 @@ class ProjectController extends Controller
 
         if ($form->isValid()) {
             $parameters = $form->getData();
-            $parameters['type'] = $parameters['type'] ? $parameters['type']->getId() : null;
+            $parameters['type'] = $parameters['type'] ? $parameters['type']->getSlug() : null;
 
             if (isset($parameters['theme'])) {
                 $parameters['theme'] = $parameters['theme']
-                    ? $parameters['theme']->getId()
+                    ? $parameters['theme']->getSlug()
                     : null;
             }
         }
 
+        $parameters['projectTypes'] = $this->get(
+            'Capco\AppBundle\Repository\ProjectTypeRepository'
+        )->findAll();
         $limit = (int) $this->get(Resolver::class)->getValue('projects.pagination');
 
         return ['params' => $parameters, 'limit' => $limit];
