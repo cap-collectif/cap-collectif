@@ -2184,7 +2184,7 @@ type MultipleChoiceQuestion implements Question {
   ): ResponseConnection!
   choices(
     # If the question has `randomQuestionChoices: true` will return choices in a random order.
-    allowRandomize: Boolean! = false
+    allowRandomize: Boolean = false
   ): [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
   randomQuestionChoices: Boolean!
@@ -5118,7 +5118,7 @@ enum StepStatus {
   OPENED
 
   # The step has been closed.
-  ENDED
+  CLOSED
 }
 
 # 3 possible values for a subscription.
