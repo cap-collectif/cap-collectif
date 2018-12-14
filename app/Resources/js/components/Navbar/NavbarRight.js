@@ -31,10 +31,10 @@ export class NavbarRight extends React.Component<Props> {
     return (
       <Nav pullRight>
         {features.search && (
-          <NavItem eventKey={1} className="navbar__search" href="/search">
+          <NavItem eventKey={1} className="navbar__search" href="/search" role="search" aria-label="Rechercher sur le site">
             <i className="cap cap-magnifier" />{' '}
             <span className="visible-xs-inline" style={{ whiteSpace: 'nowrap' }}>
-              {<FormattedMessage id="navbar.search" />}
+              <FormattedMessage id="navbar.search" />
             </span>
           </NavItem>
         )}

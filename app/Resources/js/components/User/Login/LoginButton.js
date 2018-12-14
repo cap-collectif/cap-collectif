@@ -45,7 +45,7 @@ export class LoginButton extends React.Component<Props> {
       <span style={style}>
         <Button
           bsStyle={bsStyle}
-          // aria-label="Ouvrir la modal de connexion"
+          aria-label="Ouvrir la modal de connexion"
           onClick={() => {
             if (loginWithMonCompteParis) {
               const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';

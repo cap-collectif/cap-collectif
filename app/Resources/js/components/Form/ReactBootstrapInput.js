@@ -336,7 +336,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     return (
-      <InputGroup className="form-fields" bsClass={cx('input-group', wrapperClassName)}>
+      <InputGroup className="form-fields" bsClass={cx('input-group', wrapperClassName)} aria-describedby={`${props.id ? props.id : ''}-error`}>
         {this.renderAddon(addonBefore)}
         {this.renderButton(buttonBefore)}
         {formControl}
@@ -358,6 +358,8 @@ class ReactBootstrapInput extends React.Component<Props> {
       helpPrint,
       ...props
     } = this.props;
+
+    console.log(props);
 
     return (
       <FormGroup
@@ -382,7 +384,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           </div>
         )}
         {this.renderInputGroup(props)}
-        {props.errors && <span className="error-block hidden-print">{props.errors}</span>}
+        {props.errors && <span className="error-block hidden-print" id={`${props.id ? props.id : ''}-error`}>{props.errors}</span>}
       </FormGroup>
     );
   }

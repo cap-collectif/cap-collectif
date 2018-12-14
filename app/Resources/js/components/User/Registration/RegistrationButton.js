@@ -48,7 +48,7 @@ export class RegistrationButton extends React.Component<Props> {
           style={buttonStyle}
           onClick={openRegistrationModal}
           bsStyle={bsStyle}
-          // aria-label="Ouvrir la modal d'inscription"
+          aria-label="Ouvrir la modal d'inscription"
           className={`btn--registration ${className}`}>
           <FormattedMessage id="global.registration" />
         </Button>
