@@ -134,7 +134,6 @@ export class ProposalListTable extends React.Component<Props, State> {
               text: 'project_download.label.updated',
               value: {
                 date: node.updatedAt,
-                user: node.updatedBy && node.updatedBy.displayName,
               },
             },
             publishedOn: {
@@ -290,20 +289,6 @@ export class ProposalListTable extends React.Component<Props, State> {
 
       if (keyName === 'lastActivity' && value) {
         if (value.date) {
-          if (value.user) {
-            return (
-              <td key={key}>
-                <FormattedMessage
-                  id="last-activity-date"
-                  values={{
-                    date: <FormattedDate value={moment(value.date).toDate()} />,
-                    user: value.user,
-                  }}
-                />
-              </td>
-            );
-          }
-
           return (
             <td key={key}>
               <FormattedDate value={moment(value.date).toDate()} />
@@ -436,9 +421,6 @@ export default createFragmentContainer(ProposalListTable, {
             displayName
           }
           updatedAt
-          updatedBy {
-            displayName
-          }
           publishedAt
         }
       }
