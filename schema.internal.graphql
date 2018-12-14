@@ -3890,6 +3890,12 @@ type Query {
   # Get the available map tokens
   mapTokens: [MapToken!]!
 
+  # Search a particular map token by its provider
+  mapToken(
+    # The map provider
+    provider: MapTokenProvider!
+  ): MapToken
+
   # Get the current registration form
   registrationForm: RegistrationForm
   projectAuthors: [User!]!
