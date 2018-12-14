@@ -1,3 +1,4 @@
+// @flow
 export default [
   '9online.fr',
   'aliceadsl.fr',
