@@ -17,9 +17,9 @@ class MapToken
     use TimestampableTrait;
 
     /**
-     * @ORM\Column(name="base_token", type="string", nullable=false)
+     * @ORM\Column(name="fallback_token", type="string", nullable=false)
      */
-    protected $baseToken;
+    protected $fallbackToken;
 
     /**
      * @ORM\Column(name="client_token", type="string", nullable=true)
@@ -31,14 +31,14 @@ class MapToken
      */
     protected $provider = MapProviderEnum::MAPBOX;
 
-    public function getBaseToken(): ?string
+    public function getFallbackToken(): ?string
     {
-        return $this->baseToken;
+        return $this->fallbackToken;
     }
 
-    public function setBaseToken(string $baseToken): self
+    public function setFallbackToken(string $fallbackToken): self
     {
-        $this->baseToken = $baseToken;
+        $this->fallbackToken = $fallbackToken;
 
         return $this;
     }

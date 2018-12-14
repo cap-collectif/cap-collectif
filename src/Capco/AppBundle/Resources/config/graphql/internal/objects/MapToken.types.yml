@@ -11,9 +11,9 @@ MapToken:
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: MapToken
-      baseToken:
+      fallbackToken:
         type: 'String!'
-        description: 'The base token correspond to our main provider token. It is used by default if no clientToken is set, and is managed directly by us'
+        description: 'The fallback token correspond to our main provider token. It is used by default if no clientToken is set, and is managed directly by us'
       clientToken:
         type: 'String'
         description: 'The client token correspond to a per-client provider token. It allows a client to manage his own provider with his own token'
