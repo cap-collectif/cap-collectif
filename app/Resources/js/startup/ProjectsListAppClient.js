@@ -8,7 +8,6 @@ import ProjectsList from '../components/Project/List/ProjectsList';
 type Props = {
   limit?: ?number,
   paginate?: ?boolean,
-  themeId?: ?string,
 };
 
 export default (props: Props) => (

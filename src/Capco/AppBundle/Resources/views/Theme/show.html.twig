@@ -54,8 +54,8 @@
             <h2 class="h2">{{ 'theme.show.projects.title'|trans({}, 'CapcoAppBundle') }}</h2>
             {% set projectsCount = theme.projects | length %}
             {% if projectsCount > 0 %}
-                {{ react_render_component('ProjectsListApp', {'props': {'limit': max, 'themeId': themeId} }) }}
-                {% if projectsCount > max %}
+                {{ react_render_component('ProjectsListApp', {'props': projectProps }) }}
+                {% if projectsCount > maxProjectsDisplayed %}
                     <a href="{{ path('app_project', {'theme': theme.slug, 'sort': 'date'}) }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
                 {% endif %}
             {% else %}

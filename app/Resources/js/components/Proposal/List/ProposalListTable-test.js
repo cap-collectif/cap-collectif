@@ -51,7 +51,6 @@ describe('<ProposalListTable />', () => {
           status: null,
           likers: [],
           url: null,
-          updatedBy: null,
         },
       },
       {
@@ -71,7 +70,6 @@ describe('<ProposalListTable />', () => {
           updatedAt: null,
           likers: [],
           url: null,
-          updatedBy: null,
         },
       },
     ],
