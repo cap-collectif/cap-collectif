@@ -3361,15 +3361,6 @@ copy-webpack-plugin@^4.6.0:
     p-limit "^1.0.0"
     serialize-javascript "^1.4.0"
 
-copycat-brunch@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/copycat-brunch/-/copycat-brunch-1.1.0.tgz#10e17b85909e0e129981dfb9030b9866483d66bd"
-  integrity sha1-EOF7hZCeDhKZgd+5AwuYZkg9Zr0=
-  dependencies:
-    loggy "~0.2.2"
-    mkdirp "^0.5.1"
-    quickly-copy-file "^0.1.0"
-
 core-js@2.5.7, core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.7, core-js@~2.5.1:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
@@ -7375,7 +7366,7 @@ log-update@^2.3.0:
     cli-cursor "^2.0.0"
     wrap-ansi "^3.0.1"
 
-loggy@1.0.4, loggy@^1, loggy@^1.0.3, loggy@~0.2.2, loggy@~1.0.3:
+loggy@^1, loggy@^1.0.3, loggy@~1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/loggy/-/loggy-1.0.4.tgz#651ed6cc27d5cf5057501ce6fb4a089f5e41d9a2"
   dependencies:
@@ -9143,13 +9134,6 @@ querystringify@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.0.tgz#7ded8dfbf7879dcc60d0a644ac6754b283ad17ef"
 
-quickly-copy-file@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/quickly-copy-file/-/quickly-copy-file-0.1.0.tgz#d14063ff659f68697e7cbfee817a07bb635237c2"
-  integrity sha1-0UBj/2WfaGl+fL/ugXoHu2NSN8I=
-  dependencies:
-    mkdirp "~0.5.0"
-
 quill-delta@^3.6.2:
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/quill-delta/-/quill-delta-3.6.3.tgz#b19fd2b89412301c60e1ff213d8d860eac0f1032"
@@ -10797,6 +10781,11 @@ split-string@^3.0.1, split-string@^3.0.2:
   dependencies:
     extend-shallow "^3.0.0"
 
+sprintf-js@^1.0.3:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.2.tgz#da1765262bf8c0f571749f2ad6c26300207ae673"
+  integrity sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -11486,10 +11475,13 @@ uncontrollable@^5.0.0:
   dependencies:
     invariant "^2.2.4"
 
-underscore.string@~2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-2.4.0.tgz#8cdd8fbac4e2d2ea1e7e2e8097c42f442280f85b"
-  integrity sha1-jN2PusTi0uoefi6Al8QvRCKA+Fs=
+underscore.string@3.3.5, underscore.string@~2.4.0:
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-3.3.5.tgz#fc2ad255b8bd309e239cbc5816fd23a9b7ea4023"
+  integrity sha512-g+dpmgn+XBneLmXXo+sGlW5xQEt4ErkS3mgeN2GFbremYeMBSJKr9Wf2KJplQVaiPY/f7FN6atosWYNm9ovrYg==
+  dependencies:
+    sprintf-js "^1.0.3"
+    util-deprecate "^1.0.2"
 
 underscore@~1.4.4:
   version "1.4.4"
