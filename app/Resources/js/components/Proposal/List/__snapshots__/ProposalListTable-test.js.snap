@@ -36,6 +36,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
           "text": "project_download.label.updated",
           "value": Object {
             "date": null,
+            "user": null,
           },
         },
         "likers": Object {
@@ -107,6 +108,7 @@ exports[`<ProposalListTable /> renders mobile version with formatted data & hidd
           "text": "project_download.label.updated",
           "value": Object {
             "date": null,
+            "user": null,
           },
         },
         "likers": Object {

@@ -57,7 +57,7 @@ class ThemeController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if (null !== $pagination && 0 !== $pagination) {
+        if (null !== $pagination && 0 > $pagination && 0 !== count($themes)) {
             $nbPage = ceil(\count($themes) / $pagination);
         }
 
@@ -111,8 +111,8 @@ class ThemeController extends Controller
 
         return [
             'theme' => $theme,
-            'maxProjectsDisplayed' => 12,
-            'projectProps' => $projectProps,
+            'themeId' => $theme->getId(),
+            'max' => 12,
             'ideaCreationProps' => $ideaCreationProps,
         ];
     }

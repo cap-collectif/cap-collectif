@@ -12,6 +12,8 @@ type Props = {
   orderBy: ?string,
   type: ?string,
   theme: ?string,
+  // Used only on /themes page
+  themeId?: ?string,
   term: ?string,
   limit: number,
   paginate: boolean,
@@ -28,7 +30,7 @@ class ProjectsList extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     this.initialRenderVars = {
-      theme: props.theme,
+      theme: props.theme || props.themeId,
       orderBy: props.orderBy,
       type: props.type,
       term: props.term,

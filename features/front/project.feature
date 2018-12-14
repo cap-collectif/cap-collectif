@@ -39,6 +39,13 @@ Scenario: Project can be filtered by theme
   And I should see "Dépot avec selection vote budget"
   And I should not see "Croissance, innovation, disruption"
 
+Scenario: Project can be filtered with theme page
+  Given feature "themes" is enabled
+  And feature "projects_form" is enabled
+  When I go to a theme page
+  And I wait ".project-preview" to appear on current page
+  Then I should see 5 ".project-preview" elements
+
 Scenario: Project can be filtered by theme and sorted by contributions number at the same time
   Given feature "themes" is enabled
   And feature "projects_form" is enabled
