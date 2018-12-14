@@ -149,7 +149,7 @@ Scenario: Anonymous API client wants to register with unknown additional data
      "message":"Validation Failed",
      "errors":{
         "errors":[
-           "This form should not contain extra fields. {\"{{ extra_fields }}\":\"userType\\\", \\\"zipcode\"}"
+           "This form should not contain extra fields. {\"{{ extra_fields }}\":\"\\\"userType\\\", \\\"zipcode\\\"\"}"
         ],
         "children":{
            "plainPassword":[],
