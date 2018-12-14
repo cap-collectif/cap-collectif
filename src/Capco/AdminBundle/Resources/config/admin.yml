@@ -230,6 +230,14 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
+  capco_admin.admin.map:
+    class: Capco\AdminBundle\Admin\MapTokenAdmin
+    arguments: [~, Capco\AppBundle\Entity\MapToken, SonataAdminBundle:CRUD]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: admin.group.parameters, label: admin-settings-map, }
+    calls:
+      - [setTranslationDomain, [CapcoAppBundle]]
+
   capco_admin.admin.project_district:
     class: Capco\AdminBundle\Admin\ProjectDistrictAdmin
     arguments: [~, Capco\AppBundle\Entity\District\ProjectDistrict, SonataAdminBundle:CRUD]
