@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e0fc8fd01e2296eeccee3713688554b",
+    "content-hash": "dfce90af8835e6c0d0c1fc0e2842e51a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10648,12 +10648,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cap-collectif/symfony.git",
-                "reference": "9ddf374eb387bd1887deef3b78383074f63b7285"
+                "reference": "0bad88f9a0621b6717d705f874032532bf0f0a80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/symfony/zipball/9ddf374eb387bd1887deef3b78383074f63b7285",
-                "reference": "9ddf374eb387bd1887deef3b78383074f63b7285",
+                "url": "https://api.github.com/repos/cap-collectif/symfony/zipball/0bad88f9a0621b6717d705f874032532bf0f0a80",
+                "reference": "0bad88f9a0621b6717d705f874032532bf0f0a80",
                 "shasum": ""
             },
             "require": {
@@ -10803,7 +10803,7 @@
                 "source": "https://github.com/cap-collectif/symfony/tree/waiting-42",
                 "issues": "https://github.com/cap-collectif/symfony/issues"
             },
-            "time": "2018-12-13T17:06:04+00:00"
+            "time": "2018-12-14T14:39:52+00:00"
         },
         {
             "name": "tilleuls/ckeditor-sonata-media-bundle",
@@ -15587,8 +15587,8 @@
     ],
     "aliases": [
         {
-            "alias": "3.4.17",
-            "alias_normalized": "3.4.17.0",
+            "alias": "3.4.20",
+            "alias_normalized": "3.4.20.0",
             "version": "dev-waiting-42",
             "package": "symfony/symfony"
         },
