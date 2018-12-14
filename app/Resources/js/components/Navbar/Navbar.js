@@ -18,9 +18,11 @@ class Navbar extends React.Component<Props> {
 
     const navbarLgSize = (
       <Nav id="navbar-content" className="visible-lg-block">
-        {items.filter((item, index) => index < 6).map((header, index) => (
-          <NavbarItem key={index} item={header} />
-        ))}
+        {items
+          .filter((item, index) => index < 6)
+          .map((header, index) => (
+            <NavbarItem key={index} item={header} />
+          ))}
         {items.length > 6 && (
           <NavbarItem
             item={{
@@ -37,16 +39,18 @@ class Navbar extends React.Component<Props> {
 
     const navbarMdSize = (
       <Nav id="navbar-content" className="visible-md-block">
-        {items.filter((item, index) => index < 3).map((header, index) => (
-          <NavbarItem key={index} item={header} />
-        ))}
-        {items.length > 3 && (
+        {items
+          .filter((item, index) => index < 2)
+          .map((header, index) => (
+            <NavbarItem key={index} item={header} />
+          ))}
+        {items.length > 2 && (
           <NavbarItem
             item={{
               id: 'see-more',
               title: intl.formatMessage({ id: 'global.navbar.see_more' }),
               hasEnabledFeature: true,
-              children: items.filter((item, index) => index >= 3),
+              children: items.filter((item, index) => index >= 2),
             }}
             className="navbar-dropdown-more"
           />
@@ -56,9 +60,11 @@ class Navbar extends React.Component<Props> {
 
     const navbarSmSize = (
       <Nav id="navbar-content" className="visible-sm-block">
-        {items.filter((item, index) => index < 1).map((header, index) => (
-          <NavbarItem key={index} item={header} />
-        ))}
+        {items
+          .filter((item, index) => index < 1)
+          .map((header, index) => (
+            <NavbarItem key={index} item={header} />
+          ))}
         {items.length > 1 && (
           <NavbarItem
             item={{
