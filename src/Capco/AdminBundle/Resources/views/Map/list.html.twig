@@ -8,6 +8,11 @@
         'data' : {
         }
     } %}
+    {{
+        react_render_component('MapAdminPageApp', {
+            'rendering': 'client_side'
+        })
+    }}
 {% endblock %}
 
 {% block list_table %}

@@ -234,7 +234,12 @@ services:
     class: Capco\AdminBundle\Admin\MapTokenAdmin
     arguments: [~, Capco\AppBundle\Entity\MapToken, SonataAdminBundle:CRUD]
     tags:
-      - { name: sonata.admin, manager_type: orm, group: admin.group.parameters, label: admin-settings-map, }
+      - {
+          name: sonata.admin,
+          manager_type: orm,
+          group: admin.group.parameters,
+          label: admin-settings-map,
+        }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
@@ -266,7 +271,13 @@ services:
 
   capco_admin.admin.opinion_type:
     class: Capco\AdminBundle\Admin\OpinionTypeAdmin
-    arguments: [~, Capco\AppBundle\Entity\OpinionType, CapcoAdminBundle:OpinionType, '@security.token_storage']
+    arguments:
+      [
+        ~,
+        Capco\AppBundle\Entity\OpinionType,
+        CapcoAdminBundle:OpinionType,
+        '@security.token_storage',
+      ]
     tags:
       - {
           name: sonata.admin,
