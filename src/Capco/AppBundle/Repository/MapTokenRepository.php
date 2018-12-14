@@ -4,11 +4,17 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Enum\MapProviderEnum;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class MapTokenRepository extends EntityRepository
+class MapTokenRepository extends ServiceEntityRepository
 {
+    public function __construct(RegistryInterface $registry)
+    {
+        parent::__construct($registry, MapToken::class);
+    }
+
     public function getCurrentMapTokenForProvider(string $provider): ?MapToken
     {
         if (!MapProviderEnum::isProviderValid($provider)) {
