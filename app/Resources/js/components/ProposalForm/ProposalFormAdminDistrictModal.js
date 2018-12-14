@@ -52,9 +52,8 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
   const selector = formValueSelector('proposal-form-admin-configuration');
   const districts = selector(state, 'districts');
-  const index = props.index ? props.index : null;
   return {
-    district: districts[index] ? districts[index] : {},
+    district: districts[props.index] ? districts[props.index] : {},
   };
 };
 
