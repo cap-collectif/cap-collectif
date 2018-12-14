@@ -1,0 +1,4 @@
+Capco\AppBundle\Entity\MapToken:
+  mapboxMapToken:
+    baseToken: ***REMOVED***
+    provider: mapbox
