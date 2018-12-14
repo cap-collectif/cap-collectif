@@ -2091,6 +2091,34 @@ input LogicJumpInput {
   conditions: [LogicJumpConditionInput]
 }
 
+# A map token used for connecting external services with our maps
+type MapToken implements Node {
+  # The ID of an object
+  id: ID!
+
+  # Expose Primary Key, do not use it, except for testing purpose.
+  _id: ID
+
+  # The base token correspond to our main provider token. It is used by default if
+  # no clientToken is set, and is managed directly by us
+  baseToken: String!
+
+  # The client token correspond to a per-client provider token. It allows a client
+  # to manage his own provider with his own token
+  clientToken: String
+
+  # The corresponding provider in which belongs the token
+  provider: MapTokenProvider
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# The provider for a map token
+enum MapTokenProvider {
+  # Used for Mapbox service provider
+  MAPBOX
+}
+
 # A media
 type Media implements UniformResourceLocatable {
   # The URL to this resource.
@@ -3858,6 +3886,9 @@ type Query {
     # If non-null, filters events with the given string to look for.
     search: String
   ): EventConnection!
+
+  # Get the available map tokens
+  mapTokens: [MapToken!]!
 
   # Get the current registration form
   registrationForm: RegistrationForm

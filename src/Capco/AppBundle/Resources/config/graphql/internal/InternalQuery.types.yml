@@ -8,6 +8,10 @@ InternalQuery:
     fields:
       viewer:
         type: 'InternalUser!'
+      mapTokens:
+        type: '[MapToken!]!'
+        description: 'Get the available map tokens'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokensResolver")'
       registrationForm:
         type: 'InternalRegistrationForm'
         description: 'Get the current registration form'

@@ -1,0 +1,27 @@
+MapToken:
+  type: object
+  inherits:
+    - Node
+    - InternalPrimaryKey
+  config:
+    interfaces: [Node]
+    description: 'A map token used for connecting external services with our maps'
+    fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: MapToken
+      baseToken:
+        type: 'String!'
+        description: 'The base token correspond to our main provider token. It is used by default if no clientToken is set, and is managed directly by us'
+      clientToken:
+        type: 'String'
+        description: 'The client token correspond to a per-client provider token. It allows a client to manage his own provider with his own token'
+      provider:
+        type: 'MapTokenProvider'
+        description: 'The corresponding provider in which belongs the token'
+      createdAt:
+        type: 'DateTime!'
+      updatedAt:
+        type: 'DateTime'
+
