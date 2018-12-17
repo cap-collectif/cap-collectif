@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\District:
+Capco\AppBundle\Entity\District\ProposalDistrict:
   attributes:
     id:
       groups: [Districts, Proposals, Elasticsearch]

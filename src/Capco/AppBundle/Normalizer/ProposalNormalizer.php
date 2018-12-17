@@ -1,16 +1,17 @@
 <?php
+
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\Resolver\Commentable\CommentableCommentsResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Capco\AppBundle\Resolver\OpinionTypesResolver;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Overblog\GraphQLBundle\Definition\Argument;
 
 class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
@@ -18,18 +19,24 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
     private $normalizer;
     private $proposalSelectionVoteRepository;
     private $proposalCollectVoteRepository;
+    private $commentableCommentsResolver;
+    private $tokenStorage;
 
     public function __construct(
         ObjectNormalizer $normalizer,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        CommentableCommentsResolver $commentableCommentsResolver,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->normalizer = $normalizer;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
+        $this->commentableCommentsResolver = $commentableCommentsResolver;
+        $this->tokenStorage = $tokenStorage;
     }
 
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
@@ -56,8 +63,21 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
                     'count' => $value,
                 ];
             }
+
             $data['votesCountByStep'] = $stepCounter;
+
+            $args = new Argument([
+                'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+            ]);
+            $commentsConnection = $this->commentableCommentsResolver->__invoke(
+                $object,
+                $args,
+                $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null
+            );
+
+            $data['commentsCount'] = $commentsConnection->{'totalCountWithAnswers'};
         }
+
         return $data;
     }
 
