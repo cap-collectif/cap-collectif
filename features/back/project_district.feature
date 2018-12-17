@@ -9,6 +9,7 @@ Background:
 @database
 Scenario: Loggin admin want to add district in project.
   When I click the add button
+  And I wait 1 seconds
   Then I should see "district_modal.create.title"
   And I wait 1 seconds
   When I enable the border checkbox
