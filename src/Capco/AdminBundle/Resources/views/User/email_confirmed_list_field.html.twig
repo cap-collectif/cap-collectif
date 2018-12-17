@@ -2,7 +2,7 @@
 
 {% block field %}
     {% spaceless %}
-            {% if value == true %}
+            {% if value %}
                 <span class="label label-success">{{ 'label_type_yes'|trans }}</span>
             {% else %}
                 <span class="label label-danger">{{ 'label_type_no'|trans }}</span>
