@@ -24,7 +24,7 @@ export class ProposalPageLastNews extends React.Component<{
     }
     const post = edge.node;
     const classes = {
-      'bg-vip': post.authors[0] && post.authors[0].vip,
+      'bg-vip p-10': post.authors[0] && post.authors[0].vip,
       block: true,
       className: false,
     };

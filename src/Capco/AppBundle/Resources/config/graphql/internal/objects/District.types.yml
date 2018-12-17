@@ -1,15 +1,20 @@
 District:
-  type: object
+  type: interface
   config:
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictTypeResolver", [value])'
     description: 'A district'
     fields:
       id:
-        type: 'ID!'
+        type: ID!
       name:
-        type: 'String!'
+        type: String!
       geojson:
-        type: 'GeoJSON'
+        type: GeoJSON
       geojsonStyle:
-        type: 'CssJSON'
+        type: CssJSON
       displayedOnMap:
-        type: 'Boolean!'
+        type: Boolean!
+      border:
+        type: 'Style'
+      background:
+        type: 'Style'

@@ -32,6 +32,10 @@ class RequirementTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('PhoneRequirement');
         }
 
+        if (Requirement::DATE_OF_BIRTH === $requirement->getType()) {
+            return $this->typeResolver->resolve('DateOfBirthRequirement');
+        }
+
         throw new UserError('Could not resolve type of Requirement.');
     }
 }

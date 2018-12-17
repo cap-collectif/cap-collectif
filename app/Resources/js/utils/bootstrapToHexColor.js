@@ -1,4 +1,5 @@
-export const bootstrapToHex = key => {
+// @flow
+export const bootstrapToHex = (key: string) => {
   switch (key) {
     case 'warning':
       return '#f0ad4e';

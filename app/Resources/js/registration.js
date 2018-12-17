@@ -59,6 +59,7 @@ import QuestionnaireCreateButtonApp from './startup/QuestionnaireCreateButtonApp
 import ArgumentListApp from './startup/ArgumentListApp';
 import VoteListApp from './startup/VoteListApp';
 import EventApp from './startup/EventApp';
+import ProjectDistrictAdminApp from './startup/ProjectDistrictAdminApp';
 
 import appStore from './stores/AppStore';
 
@@ -143,4 +144,5 @@ ReactOnRails.register({
   ArgumentListApp,
   VoteListApp,
   EventApp,
+  ProjectDistrictAdminApp,
 });

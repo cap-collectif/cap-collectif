@@ -48,7 +48,6 @@ Scenario: GraphQL client wants to update a proposal form
                 id
                 name
                 geojson
-                geojsonStyle
                 displayedOnMap
               }
               questions {
@@ -109,14 +108,12 @@ Scenario: GraphQL client wants to update a proposal form
         "districts": [{
             "name": "Beauregard",
             "displayedOnMap": false,
-            "geojson": "",
-            "geojsonStyle": ""
+            "geojson": ""
           },
           {
             "name": "Other district",
             "displayedOnMap": true,
-            "geojson": "",
-            "geojsonStyle": ""
+            "geojson": ""
           }
         ],
         "questions": []
@@ -179,14 +176,12 @@ Scenario: GraphQL client wants to update a proposal form
                   "id":"@string@",
                   "name":"Beauregard",
                   "geojson":null,
-                  "geojsonStyle":null,
                   "displayedOnMap":false
                },
                {
                   "id":"@string@",
                   "name":"Other district",
                   "geojson":null,
-                  "geojsonStyle":null,
                   "displayedOnMap":true
                }
             ],
@@ -501,15 +496,13 @@ Scenario: GraphQL client wants to delete the first district
             "id": "district15",
             "name": "Quartier 2",
             "displayedOnMap": true,
-            "geojson": null,
-            "geojsonStyle": null
+            "geojson": null
           },
           {
             "id": "district16",
             "name": "Quartier 3",
             "displayedOnMap": true,
-            "geojson": null,
-            "geojsonStyle": null
+            "geojson": null
           }
         ]
       }

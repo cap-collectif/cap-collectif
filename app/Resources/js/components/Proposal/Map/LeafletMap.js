@@ -23,9 +23,27 @@ type ComponentState = {
   loaded: boolean,
 };
 
+type Style = {
+  border: {
+    color: string,
+    id: string,
+    enabled: boolean,
+    opacity: number,
+    size: number,
+    style_type: string,
+  },
+  background: {
+    color: string,
+    id: string,
+    enabled: boolean,
+    opacity: number,
+    style_type: string,
+  },
+};
+
 type GeoJson = {
-  style: string,
   district: string,
+  style: Style,
 };
 
 type Props = {
@@ -39,6 +57,33 @@ type Props = {
 };
 
 let L;
+
+function convertToGeoJsonStyle(style: Style) {
+  const defaultDistrictStyle = {
+    color: '#ff0000',
+    weight: 1,
+    opacity: 0.3,
+  };
+
+  if (!style.border && !style.background) {
+    return defaultDistrictStyle;
+  }
+
+  const districtStyle = {};
+
+  if (style.border) {
+    districtStyle.color = style.border.color;
+    districtStyle.weight = style.border.size;
+    districtStyle.opacity = style.border.opacity;
+  }
+
+  if (style.background) {
+    districtStyle.fillColor = style.background.color;
+    districtStyle.fillOpacity = style.background.opacity;
+  }
+
+  return districtStyle || defaultDistrictStyle;
+}
 
 export class LeafletMap extends Component<Props, ComponentState> {
   static defaultProps = {
@@ -85,12 +130,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
 
     const token = config.mapboxApiKey;
 
-    const defaultDistrictStyle = {
-      color: '#ff0000',
-      weight: 1,
-      opacity: 0.3,
-    };
-
     return (
       <Map
         center={defaultMapOptions.center}
@@ -101,7 +140,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
           height: '50vw',
         }}>
         <TileLayer
-          attribution="&copy; <a href=&quot;https://www.mapbox.com/about/maps/&quot;>Mapbox</a> &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> <a href=&quot;https://www.mapbox.com/map-feedback/#/-74.5/40/10&quot;>Improve this map</a>"
+          attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
           url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${token}`}
         />
         <MarkerClusterGroup
@@ -135,7 +174,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
         {geoJsons &&
           geoJsons.map((geoJson, key) => (
             <GeoJSON
-              style={geoJson.style ? JSON.parse(geoJson.style) : defaultDistrictStyle}
+              style={convertToGeoJsonStyle(geoJson.style)}
               key={key}
               data={geoJson.district}
             />

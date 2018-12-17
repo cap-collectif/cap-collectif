@@ -55,7 +55,7 @@ Scenario: GraphQL client want to get a node of all available types
       "proposalFormId": "proposalForm1",
       "questionnaireId": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlMQ==",
       "eventId": "RXZlbnQ6ZXZlbnQx",
-      "requirementId": "requirement1"
+      "requirementId": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx"
     }
   }
   """
@@ -85,7 +85,7 @@ Scenario: GraphQL client want to get a node of all available types
         "title": "Event with registrations"
       },
       "requirement": {
-        "id": "requirement1"
+        "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx"
       }
     }
   }

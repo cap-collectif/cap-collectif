@@ -53,4 +53,8 @@ InternalConsultation:
             type: 'ContributionOrder'
             description: 'Ordering options for contributions returned from the connection.'
             defaultValue: { field: POSITION, direction: DESC }
-        resolve: '@=resolver("consultationContributionsRelay", [value, args])'
+          includeTrashed:
+            type: 'Boolean'
+            description: 'The connection will return the trashed results too.'
+            defaultValue: false
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsConnectionResolver", [value, args])'

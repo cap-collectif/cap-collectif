@@ -1,0 +1,19 @@
+Style:
+  type: object
+  config:
+    description: 'A object style.'
+    fields:
+      id:
+        type: ID
+      enabled:
+        type: Boolean!
+        description: 'Specify if the style is activated or not.'
+      color:
+        type: Color
+        description: 'The color value in hexadecimal format for the border or background.'
+      opacity:
+        type: Float
+        description: 'The value of the opacity of the border or the background.'
+      size:
+        type: Int
+        description: 'The value of the border size.'

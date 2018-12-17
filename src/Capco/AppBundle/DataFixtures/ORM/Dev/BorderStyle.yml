@@ -1,0 +1,25 @@
+Capco\AppBundle\Entity\Styles\BorderStyle:
+  borderStyle1:
+    id: borderStyle1
+    color: '#AADDFF'
+    size: 1
+    opacity: 1
+    enabled: 1
+  borderStyle2:
+    id: borderStyle2
+    color: '#F434FF'
+    size: 1
+    opacity: 1
+    enabled: 1
+  borderStyle3:
+    id: borderStyle3
+    color: '#2BFF27'
+    size: 1
+    opacity: 1
+    enabled: 1
+  borderStyle4:
+    id: borderStyle4
+    color: '#000000'
+    size: 1
+    opacity: 1
+    enabled: 1

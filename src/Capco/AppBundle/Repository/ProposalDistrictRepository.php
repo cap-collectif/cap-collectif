@@ -1,10 +1,11 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\EntityRepository;
 
-class DistrictRepository extends EntityRepository
+class ProposalDistrictRepository extends EntityRepository
 {
     public function getDistrictsWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
@@ -35,6 +36,7 @@ class DistrictRepository extends EntityRepository
     public function countAll(): int
     {
         $qb = $this->createQueryBuilder('d')->select('COUNT(d.id)');
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 }

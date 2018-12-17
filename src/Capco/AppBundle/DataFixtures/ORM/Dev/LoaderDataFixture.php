@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\DataFixtures\ORM;
 
 use Hautelook\AliceBundle\Doctrine\DataFixtures\AbstractLoader;
@@ -58,7 +59,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/ProposalCategory.yml',
             __DIR__ . '/Questionnaire.yml',
             __DIR__ . '/Status.yml',
-            __DIR__ . '/District.yml',
+            __DIR__ . '/ProposalDistrict.yml',
             __DIR__ . '/QuestionChoice.yml',
             __DIR__ . '/SimpleQuestion.yml',
             __DIR__ . '/MediaQuestion.yml',
@@ -93,6 +94,9 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/LogicJump.yml',
             __DIR__ . '/SectionQuestion.yml',
             __DIR__ . '/PublicApiToken.yml',
+            __DIR__ . '/BorderStyle.yml',
+            __DIR__ . '/BackgroundStyle.yml',
+            __DIR__ . '/ProjectDistrict.yml',
         ];
     }
 }

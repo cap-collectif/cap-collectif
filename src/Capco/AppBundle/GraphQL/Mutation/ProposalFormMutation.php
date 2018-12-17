@@ -1,47 +1,25 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFormCreateType;
 use Capco\AppBundle\Form\ProposalFormNotificationsConfigurationType;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
-use Capco\AppBundle\Repository\ProposalFormRepository;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Form\FormFactory;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class ProposalFormMutation
+class ProposalFormMutation implements ContainerAwareInterface
 {
-    private $formFactory;
-    private $em;
-    private $logger;
-    private $proposalFormRepository;
-    private $questionnaireRepository;
-
-    public function __construct(
-        FormFactory $formFactory,
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        ProposalFormRepository $proposalFormRepository,
-        QuestionnaireRepository $questionnaireRepository
-    ) {
-        $this->formFactory = $formFactory;
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->proposalFormRepository = $proposalFormRepository;
-        $this->questionnaireRepository = $questionnaireRepository;
-    }
+    use ContainerAwareTrait;
 
     public function create(Argument $input): array
     {
+        $formFactory = $this->container->get('form.factory');
         $proposalForm = new ProposalForm();
 
-        $form = $this->formFactory->create(ProposalFormCreateType::class, $proposalForm);
+        $form = $formFactory->create(ProposalFormCreateType::class, $proposalForm);
 
         $form->submit($input->getRawArguments(), false);
 
@@ -49,8 +27,10 @@ class ProposalFormMutation
             throw new UserError('Input not valid : ' . (string) $form->getErrors(true, false));
         }
 
-        $this->em->persist($proposalForm);
-        $this->em->flush();
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+
+        $em->persist($proposalForm);
+        $em->flush();
 
         return ['proposalForm' => $proposalForm];
     }
@@ -59,7 +39,8 @@ class ProposalFormMutation
     {
         $arguments = $input->getRawArguments();
         $id = $arguments['proposalFormId'];
-        $proposalForm = $this->proposalFormRepository->find($id);
+        $proposalFormRepository = $this->container->get('capco.proposal_form.repository');
+        $proposalForm = $proposalFormRepository->find($id);
 
         if (!$proposalForm) {
             throw new UserError(
@@ -67,29 +48,34 @@ class ProposalFormMutation
             );
         }
 
+        $formFactory = $this->container->get('form.factory');
+        $logger = $this->container->get('logger');
+
         unset($arguments['proposalFormId']);
 
-        $form = $this->formFactory->create(ProposalFormUpdateType::class, $proposalForm);
+        $form = $formFactory->create(ProposalFormUpdateType::class, $proposalForm);
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
-            $this->logger->error(
+            $logger->error(
                 \get_class($this) . ' update: ' . (string) $form->getErrors(true, false)
             );
-
             throw new UserError('Can\'t update this proposal form!');
         }
 
-        $this->em->flush();
-        $this->em->clear();
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $em->flush();
+        $em->clear();
 
-        return ['proposalForm' => $this->proposalFormRepository->find($id)];
+        return ['proposalForm' => $proposalFormRepository->find($id)];
     }
 
     public function updateNotificationsConfiguration(Argument $input)
     {
         $arguments = $input->getRawArguments();
-        $proposalForm = $this->proposalFormRepository->find($arguments['proposalFormId']);
+        $proposalForm = $this->container->get('capco.proposal_form.repository')->find(
+            $arguments['proposalFormId']
+        );
 
         if (!$proposalForm) {
             throw new UserError(
@@ -97,9 +83,11 @@ class ProposalFormMutation
             );
         }
 
+        $formFactory = $this->container->get('form.factory');
+        $logger = $this->container->get('logger');
         unset($arguments['proposalFormId']);
 
-        $form = $this->formFactory->create(
+        $form = $formFactory->create(
             ProposalFormNotificationsConfigurationType::class,
             $proposalForm->getNotificationsConfiguration()
         );
@@ -107,16 +95,15 @@ class ProposalFormMutation
         $form->submit($arguments, false);
 
         if (!$form->isValid()) {
-            $this->logger->error(
+            $logger->error(
                 \get_class($this) .
                     ' updateNotificationsConfiguration: ' .
                     (string) $form->getErrors(true, false)
             );
-
             throw new UserError('Can\'t change the notification config!');
         }
 
-        $this->em->flush();
+        $this->container->get('doctrine.orm.default_entity_manager')->flush();
 
         return ['proposalForm' => $proposalForm];
     }
@@ -124,7 +111,9 @@ class ProposalFormMutation
     public function setEvaluationForm(Argument $input): array
     {
         $arguments = $input->getRawArguments();
-        $proposalForm = $this->proposalFormRepository->find($arguments['proposalFormId']);
+        $proposalForm = $this->container->get('capco.proposal_form.repository')->find(
+            $arguments['proposalFormId']
+        );
 
         if (!$proposalForm) {
             throw new UserError(
@@ -132,13 +121,13 @@ class ProposalFormMutation
             );
         }
 
-        $evaluationForm = $this->questionnaireRepository->find(
-            GlobalId::fromGlobalId($arguments['evaluationFormId'])['id']
+        $evaluationForm = $this->container->get('capco.questionnaire.repository')->find(
+            $arguments['evaluationFormId']
         );
 
         $proposalForm->setEvaluationForm($evaluationForm);
 
-        $this->em->flush();
+        $this->container->get('doctrine.orm.default_entity_manager')->flush();
 
         return ['proposalForm' => $proposalForm];
     }

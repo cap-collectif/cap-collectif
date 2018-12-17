@@ -20,6 +20,9 @@ Scenario: User wants to see requirements to vote in a proposal step
                   ... on FirstnameRequirement {
                     viewerValue
                   }
+                  ... on DateOfBirthRequirement {
+                    viewerDateOfBirth
+                  }
                   ... on LastnameRequirement {
                     viewerValue
                   }
@@ -47,7 +50,7 @@ Scenario: User wants to see requirements to vote in a proposal step
     "data": {
         "step": {
             "requirements": {
-                "totalCount": 6,
+                "totalCount": 7,
                 "viewerMeetsTheRequirements": false,
                 "reason": @string@,
                 "edges": [
@@ -72,22 +75,28 @@ Scenario: User wants to see requirements to vote in a proposal step
                     {
                         "node": {
                             "viewerMeetsTheRequirement": true,
-                            "id": "requirement1",
+                            "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx",
                             "label": @string@
                         }
                     },
                     {
                         "node": {
                             "viewerMeetsTheRequirement": false,
-                            "id": "requirement2",
+                            "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy",
                             "label": @string@
                         }
                     },
                     {
                         "node": {
                             "viewerMeetsTheRequirement": false,
-                            "id": "requirement3",
+                            "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
                             "label": @string@
+                        }
+                    },
+                    {
+                        "node": {
+                            "viewerMeetsTheRequirement": true,
+                            "viewerDateOfBirth": @string@
                         }
                     }
                 ]

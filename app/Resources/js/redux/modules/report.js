@@ -5,9 +5,9 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher from '../../services/Fetcher';
 
 export type State = {
-  +currentReportingModal: ?number,
+  +currentReportingModal: ?number | ?string,
   +isLoading: boolean,
-  +elements: Array<*>,
+  +elements: Array<?number | ?string>,
 };
 
 const baseUrl = (opinion: { parent: ?{ id: number } }) =>

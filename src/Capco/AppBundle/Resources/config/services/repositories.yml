@@ -61,9 +61,9 @@ services:
 
   capco.district.repository:
     public: true
-    class: Capco\AppBundle\Repository\DistrictRepository
+    class: Capco\AppBundle\Repository\ProposalDistrictRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:District']
+    arguments: ['CapcoAppBundle:District\ProposalDistrict']
 
   capco.event.repository:
     public: true
@@ -371,15 +371,13 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserArchive']
 
-  capco.requirement.repository:
+  Capco\AppBundle\Repository\RequirementRepository:
     public: true
-    class: Capco\AppBundle\Repository\RequirementRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Requirement']
 
-  capco.user_requirement.repository:
+  Capco\AppBundle\Repository\UserRequirementRepository:
     public: true
-    class: Capco\AppBundle\Repository\UserRequirementRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserRequirement']
 
@@ -405,3 +403,8 @@ services:
     public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:PublicApiToken']
+
+  Capco\AppBundle\Repository\ProjectDistrictRepository:
+    public: true
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:District\ProjectDistrict']

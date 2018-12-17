@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Traits\AddressableTrait;
-use Capco\AppBundle\Utils\Map;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\MediaBundle\Entity\Media;
@@ -35,6 +34,7 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Steps\CollectStep as StepsCollectStep;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
 
 /**
  * @ORM\Table(name="proposal", uniqueConstraints={
@@ -133,25 +133,25 @@ class Proposal implements
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $theme = null;
+    private $theme;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District", inversedBy="proposals", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProposalDistrict", inversedBy="proposals", cascade={"persist"})
      * @ORM\JoinColumn(name="district_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $district = null;
+    private $district;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"}, inversedBy="proposals")
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $status = null;
+    private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalCategory", cascade={"persist"}, inversedBy="proposals")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $category = null;
+    private $category;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalComment", mappedBy="proposal", cascade={"persist"})
@@ -175,7 +175,7 @@ class Proposal implements
     /**
      * @ORM\Column(name="estimation", type="float", nullable=true)
      */
-    private $estimation = null;
+    private $estimation;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist","remove"},  orphanRemoval=true)
@@ -357,7 +357,7 @@ class Proposal implements
         return $this->district;
     }
 
-    public function setDistrict(District $district = null, bool $add = true): self
+    public function setDistrict(ProposalDistrict $district = null, bool $add = true): self
     {
         $this->district = $district;
         if ($district && $add) {
@@ -505,6 +505,7 @@ class Proposal implements
             if (!$this->isDeleted()) {
                 return $this->getStep() ? $this->getStep()->canDisplay($user) : false;
             }
+
             return $user && $user->isAdmin();
         }
 
@@ -614,6 +615,7 @@ class Proposal implements
                 ->getStep()
                 ->getProject();
         }
+
         return null;
     }
 
@@ -630,6 +632,7 @@ class Proposal implements
                 ->getStep()
                 ->getProjectId();
         }
+
         return null;
     }
 

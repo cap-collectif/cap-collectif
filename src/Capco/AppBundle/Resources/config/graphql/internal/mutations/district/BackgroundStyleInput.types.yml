@@ -1,0 +1,10 @@
+BackgroundStyleInput:
+  type: input-object
+  config:
+    fields:
+      enabled:
+        type: Boolean
+      color:
+        type: Color
+      opacity:
+        type: Float
