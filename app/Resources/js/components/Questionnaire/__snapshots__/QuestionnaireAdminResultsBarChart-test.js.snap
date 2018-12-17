@@ -1,253 +1,259 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other responses & empty response 1`] = `
-<ResponsiveContainer
-  debounce={0}
-  height={340}
-  width="100%"
->
-  <BarChart
-    barCategoryGap="10%"
-    barGap={4}
-    data={
-      Array [
-        Object {
-          "name": "C'est pas faux",
-          "value": 97,
-        },
-        Object {
-          "name": "Oui",
-          "value": 7,
-        },
-        Object {
-          "name": "Non",
-          "value": 25,
-        },
-        Object {
-          "name": "global.question.types.other",
-          "value": 6,
-        },
-      ]
-    }
-    layout="vertical"
-    margin={
-      Object {
-        "bottom": 15,
-        "left": 5,
-        "right": 5,
-        "top": 15,
-      }
-    }
-    reverseStackOrder={false}
-    stackOffset="none"
+<div>
+  <ResponsiveContainer
+    debounce={0}
+    height={300}
+    width="100%"
   >
-    <XAxis
-      allowDataOverflow={false}
-      allowDecimals={false}
-      allowDuplicatedCategory={true}
-      domain={
+    <BarChart
+      barCategoryGap="10%"
+      barGap={4}
+      data={
         Array [
-          0,
-          "auto",
+          Object {
+            "name": "C'est pas faux",
+            "value": 97,
+          },
+          Object {
+            "name": "Oui",
+            "value": 7,
+          },
+          Object {
+            "name": "Non",
+            "value": 25,
+          },
+          Object {
+            "name": "global.question.types.other",
+            "value": 6,
+          },
         ]
       }
-      height={30}
-      hide={false}
-      mirror={false}
-      orientation="bottom"
-      padding={
-        Object {
-          "left": 0,
-          "right": 0,
-        }
-      }
-      reversed={false}
-      scale="auto"
-      tickCount={5}
-      tickLine={false}
-      type="number"
-      width={0}
-      xAxisId={0}
-    />
-    <YAxis
-      allowDataOverflow={false}
-      allowDecimals={true}
-      allowDuplicatedCategory={true}
-      dataKey="name"
-      domain={
-        Array [
-          0,
-          "auto",
-        ]
-      }
-      height={0}
-      hide={false}
-      mirror={false}
-      orientation="left"
-      padding={
-        Object {
-          "bottom": 0,
-          "top": 0,
-        }
-      }
-      reversed={false}
-      scale="auto"
-      tickCount={5}
-      tickLine={false}
-      type="category"
-      width={120}
-      yAxisId={0}
-    />
-     
-    <Bar
-      animationBegin={0}
-      animationDuration={400}
-      animationEasing="ease"
-      data={Array []}
-      dataKey="value"
-      fill="#128085"
-      hide={false}
-      isAnimationActive={true}
       layout="vertical"
-      legendType="rect"
-      maxBarSize={30}
-      minPointSize={0}
-      onAnimationEnd={[Function]}
-      onAnimationStart={[Function]}
-      xAxisId={0}
-      yAxisId={0}
+      margin={
+        Object {
+          "bottom": 15,
+          "left": 5,
+          "right": 5,
+          "top": 15,
+        }
+      }
+      reverseStackOrder={false}
+      stackOffset="none"
     >
-       
-      <LabelList
-        dataKey="value"
-        position="right"
-        valueAccessor={[Function]}
+      <XAxis
+        allowDataOverflow={false}
+        allowDecimals={false}
+        allowDuplicatedCategory={true}
+        domain={
+          Array [
+            0,
+            "auto",
+          ]
+        }
+        height={30}
+        hide={false}
+        mirror={false}
+        orientation="bottom"
+        padding={
+          Object {
+            "left": 0,
+            "right": 0,
+          }
+        }
+        reversed={false}
+        scale="auto"
+        tickCount={5}
+        tickLine={false}
+        type="number"
+        width={0}
+        xAxisId={0}
       />
-    </Bar>
-  </BarChart>
-</ResponsiveContainer>
+      <YAxis
+        allowDataOverflow={false}
+        allowDecimals={true}
+        allowDuplicatedCategory={true}
+        dataKey="name"
+        domain={
+          Array [
+            0,
+            "auto",
+          ]
+        }
+        height={0}
+        hide={false}
+        minTickGap={10}
+        mirror={false}
+        orientation="left"
+        padding={
+          Object {
+            "bottom": 0,
+            "top": 0,
+          }
+        }
+        reversed={false}
+        scale="auto"
+        tickCount={5}
+        tickLine={false}
+        type="category"
+        width={54}
+        yAxisId={0}
+      />
+       
+      <Bar
+        animationBegin={0}
+        animationDuration={400}
+        animationEasing="ease"
+        data={Array []}
+        dataKey="value"
+        fill="#128085"
+        hide={false}
+        isAnimationActive={true}
+        layout="vertical"
+        legendType="rect"
+        maxBarSize={30}
+        minPointSize={0}
+        onAnimationEnd={[Function]}
+        onAnimationStart={[Function]}
+        xAxisId={0}
+        yAxisId={0}
+      >
+         
+        <LabelList
+          dataKey="value"
+          position="right"
+          valueAccessor={[Function]}
+        />
+      </Bar>
+    </BarChart>
+  </ResponsiveContainer>
+</div>
 `;
 
 exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other responses & on mobile 1`] = `
-<ResponsiveContainer
-  debounce={0}
-  height={340}
-  width="100%"
->
-  <BarChart
-    barCategoryGap="10%"
-    barGap={4}
-    data={
-      Array [
-        Object {
-          "name": "C'est pas faux",
-          "value": 76,
-        },
-        Object {
-          "name": "Oui",
-          "value": 3,
-        },
-        Object {
-          "name": "Non",
-          "value": 1,
-        },
-      ]
-    }
-    layout="vertical"
-    margin={
-      Object {
-        "bottom": 15,
-        "left": 5,
-        "right": 5,
-        "top": 15,
-      }
-    }
-    reverseStackOrder={false}
-    stackOffset="none"
+<div>
+  <ResponsiveContainer
+    debounce={0}
+    height={225}
+    width="100%"
   >
-    <XAxis
-      allowDataOverflow={false}
-      allowDecimals={false}
-      allowDuplicatedCategory={true}
-      domain={
+    <BarChart
+      barCategoryGap="10%"
+      barGap={4}
+      data={
         Array [
-          0,
-          "auto",
+          Object {
+            "name": "C'est pas faux",
+            "value": 76,
+          },
+          Object {
+            "name": "Oui",
+            "value": 3,
+          },
+          Object {
+            "name": "Non",
+            "value": 1,
+          },
         ]
       }
-      height={30}
-      hide={false}
-      mirror={false}
-      orientation="bottom"
-      padding={
-        Object {
-          "left": 0,
-          "right": 0,
-        }
-      }
-      reversed={false}
-      scale="auto"
-      tickCount={5}
-      tickLine={false}
-      type="number"
-      width={0}
-      xAxisId={0}
-    />
-    <YAxis
-      allowDataOverflow={false}
-      allowDecimals={true}
-      allowDuplicatedCategory={true}
-      dataKey="name"
-      domain={
-        Array [
-          0,
-          "auto",
-        ]
-      }
-      height={0}
-      hide={false}
-      mirror={false}
-      orientation="left"
-      padding={
-        Object {
-          "bottom": 0,
-          "top": 0,
-        }
-      }
-      reversed={false}
-      scale="auto"
-      tickCount={5}
-      tickLine={false}
-      type="category"
-      width={120}
-      yAxisId={0}
-    />
-     
-    <Bar
-      animationBegin={0}
-      animationDuration={400}
-      animationEasing="ease"
-      data={Array []}
-      dataKey="value"
-      fill="#128085"
-      hide={false}
-      isAnimationActive={true}
       layout="vertical"
-      legendType="rect"
-      maxBarSize={30}
-      minPointSize={0}
-      onAnimationEnd={[Function]}
-      onAnimationStart={[Function]}
-      xAxisId={0}
-      yAxisId={0}
+      margin={
+        Object {
+          "bottom": 15,
+          "left": 5,
+          "right": 5,
+          "top": 15,
+        }
+      }
+      reverseStackOrder={false}
+      stackOffset="none"
     >
-       
-      <LabelList
-        dataKey="value"
-        position="right"
-        valueAccessor={[Function]}
+      <XAxis
+        allowDataOverflow={false}
+        allowDecimals={false}
+        allowDuplicatedCategory={true}
+        domain={
+          Array [
+            0,
+            "auto",
+          ]
+        }
+        height={30}
+        hide={false}
+        mirror={false}
+        orientation="bottom"
+        padding={
+          Object {
+            "left": 0,
+            "right": 0,
+          }
+        }
+        reversed={false}
+        scale="auto"
+        tickCount={5}
+        tickLine={false}
+        type="number"
+        width={0}
+        xAxisId={0}
       />
-    </Bar>
-  </BarChart>
-</ResponsiveContainer>
+      <YAxis
+        allowDataOverflow={false}
+        allowDecimals={true}
+        allowDuplicatedCategory={true}
+        dataKey="name"
+        domain={
+          Array [
+            0,
+            "auto",
+          ]
+        }
+        height={0}
+        hide={false}
+        minTickGap={10}
+        mirror={false}
+        orientation="left"
+        padding={
+          Object {
+            "bottom": 0,
+            "top": 0,
+          }
+        }
+        reversed={false}
+        scale="auto"
+        tickCount={5}
+        tickLine={false}
+        type="category"
+        width={28}
+        yAxisId={0}
+      />
+       
+      <Bar
+        animationBegin={0}
+        animationDuration={400}
+        animationEasing="ease"
+        data={Array []}
+        dataKey="value"
+        fill="#128085"
+        hide={false}
+        isAnimationActive={true}
+        layout="vertical"
+        legendType="rect"
+        maxBarSize={30}
+        minPointSize={0}
+        onAnimationEnd={[Function]}
+        onAnimationStart={[Function]}
+        xAxisId={0}
+        yAxisId={0}
+      >
+         
+        <LabelList
+          dataKey="value"
+          position="right"
+          valueAccessor={[Function]}
+        />
+      </Bar>
+    </BarChart>
+  </ResponsiveContainer>
+</div>
 `;
