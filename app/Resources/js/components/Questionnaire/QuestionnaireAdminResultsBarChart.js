@@ -21,7 +21,7 @@ export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
 
     const maxLength = Math.max(...test);
 
-    if (test.length > 0) {
+    if (test.length > 0 && maxLength > 50) {
       return maxLength * 2;
     }
 
