@@ -34,27 +34,22 @@ export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
     const data = cleanMultipleChoiceQuestion(multipleChoiceQuestion, intl);
 
     return (
-      <div>
-        <ResponsiveContainer height={data.length * 75}>
-          <BarChart
-            data={data}
-            layout="vertical"
-            margin={{ top: 15, right: 5, bottom: 15, left: 5 }}>
-            <XAxis type="number" allowDecimals={false} tickLine={false} />
-            <YAxis
-              dataKey="name"
-              minTickGap={10}
-              type="category"
-              tickLine={false}
-              width={this.getYAxisWidth(data)}
-            />{' '}
-            <Bar dataKey="value" maxBarSize={30} fill={backgroundColor}>
-              {' '}
-              <LabelList dataKey="value" position="right" />
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      <ResponsiveContainer height={data.length * 75}>
+        <BarChart data={data} layout="vertical" margin={{ top: 15, right: 5, bottom: 15, left: 5 }}>
+          <XAxis type="number" allowDecimals={false} tickLine={false} />
+          <YAxis
+            dataKey="name"
+            minTickGap={10}
+            type="category"
+            tickLine={false}
+            width={this.getYAxisWidth(data)}
+          />{' '}
+          <Bar dataKey="value" maxBarSize={30} fill={backgroundColor}>
+            {' '}
+            <LabelList dataKey="value" position="right" />
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
     );
   }
 }
