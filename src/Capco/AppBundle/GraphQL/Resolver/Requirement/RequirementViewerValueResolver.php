@@ -16,10 +16,7 @@ class RequirementViewerValueResolver implements ResolverInterface
         $this->userRequirementsRepo = $userRequirementsRepo;
     }
 
-    /**
-     * Returns a string or a bool.
-     */
-    public function __invoke(Requirement $requirement, User $user)
+    public function __invoke(Requirement $requirement, User $user)// : ?string|bool
     {
         if (Requirement::FIRSTNAME === $requirement->getType()) {
             return $user->getFirstname();
@@ -30,15 +27,9 @@ class RequirementViewerValueResolver implements ResolverInterface
         if (Requirement::PHONE === $requirement->getType()) {
             return $user->getPhone();
         }
-        if (Requirement::DATE_OF_BIRTH === $requirement->getType()) {
-            return $user->getDateOfBirth();
-        }
 
         if (Requirement::CHECKBOX === $requirement->getType()) {
-            $found = $this->userRequirementsRepo->findOneBy([
-                'requirement' => $requirement,
-                'user' => $user,
-            ]);
+            $found = $this->userRequirementsRepo->findOneBy(['requirement' => $requirement, 'user' => $user]);
 
             return $found ? $found->getValue() : false;
         }

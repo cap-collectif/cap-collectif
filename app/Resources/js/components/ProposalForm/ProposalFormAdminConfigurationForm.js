@@ -693,17 +693,7 @@ export default createFragmentContainer(
         name
         displayedOnMap
         geojson
-        border {
-          enabled
-          size
-          color
-          opacity
-        }
-        background {
-          enabled
-          color
-          opacity
-        }
+        geojsonStyle
       }
       categories {
         id

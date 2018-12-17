@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\CollectStepRepository;
-use Capco\AppBundle\Repository\ProposalDistrictRepository;
+use Capco\AppBundle\Repository\DistrictRepository;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -27,14 +27,14 @@ class ProjectStatsResolver
     protected $proposalSelectionVoteRepo;
 
     public function __construct(
-        SelectionStepRepository $selectionStepRepo,
-        CollectStepRepository $collectStepRepo,
-        ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
-        ProposalCategoryRepository $categoryRepo,
-        UserTypeRepository $userTypeRepo,
-        ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepo
+      SelectionStepRepository $selectionStepRepo,
+      CollectStepRepository $collectStepRepo,
+      ThemeRepository $themeRepo,
+      DistrictRepository $districtRepo,
+      ProposalCategoryRepository $categoryRepo,
+      UserTypeRepository $userTypeRepo,
+      ProposalRepository $proposalRepo,
+      ProposalSelectionVoteRepository $proposalSelectionVoteRepo
     ) {
         $this->selectionStepRepo = $selectionStepRepo;
         $this->collectStepRepo = $collectStepRepo;
@@ -48,14 +48,15 @@ class ProjectStatsResolver
 
     public function getStepsWithStatsForProject(Project $project)
     {
-        $selectionSteps = $this->selectionStepRepo->getVotableStepsForProject($project);
-        $collectSteps = $this->collectStepRepo->getCollectStepsForProject($project);
+        $selectionSteps = $this->selectionStepRepo
+            ->getVotableStepsForProject($project)
+        ;
+        $collectSteps = $this->collectStepRepo
+            ->getCollectStepsForProject($project)
+        ;
         $steps = array_merge($collectSteps, $selectionSteps);
         usort($steps, function ($a, $b) {
-            return $a->getProjectAbstractStep()->getPosition() >
-                $b->getProjectAbstractStep()->getPosition()
-                ? 1
-                : -1;
+            return $a->getProjectAbstractStep()->getPosition() > $b->getProjectAbstractStep()->getPosition() ? 1 : -1;
         });
 
         $stepsWithData = [];
@@ -94,14 +95,8 @@ class ProjectStatsResolver
         return $stats;
     }
 
-    public function getStatsForStepByKey(
-        AbstractStep $step,
-        $key,
-        $limit = null,
-        $themeId = null,
-        $districtId = null,
-        $categoryId = null
-    ) {
+    public function getStatsForStepByKey(AbstractStep $step, $key, $limit = null, $themeId = null, $districtId = null, $categoryId = null)
+    {
         $data = [];
 
         switch ($key) {
@@ -110,51 +105,34 @@ class ProjectStatsResolver
                     $data['total'] = $this->countThemes();
                     $data['values'] = $this->getThemesWithProposalsCountForStep($step, $limit);
                 }
-
                 break;
             case 'districts':
                 if ('collect' === $step->getType()) {
                     $data['values'] = $this->getDistrictsWithProposalsCountForStep($step, $limit);
                     $data['total'] = $this->countDistricts();
                 }
-
                 break;
             case 'userTypes':
                 if ('collect' === $step->getType()) {
                     $data['values'] = $this->getUserTypesWithProposalsCountForStep($step, $limit);
                     $data['total'] = $this->countUserTypes();
                 }
-
                 break;
             case 'costs':
                 if ('collect' === $step->getType()) {
                     $data['values'] = $this->getProposalsWithCostsForStep($step, $limit);
                     $data['total'] = $step->getProposalsCount();
                 }
-
                 break;
             case 'votes':
                 if ('selection' === $step->getType()) {
-                    $data['values'] = $this->getProposalsWithVotesCountForSelectionStep(
-                        $step,
-                        $limit,
-                        $themeId,
-                        $districtId,
-                        $categoryId
-                    );
-                    $data['total'] = $this->getProposalsCountForSelectionStep(
-                        $step,
-                        $themeId,
-                        $districtId,
-                        $categoryId
-                    );
+                    $data['values'] = $this->getProposalsWithVotesCountForSelectionStep($step, $limit, $themeId, $districtId, $categoryId);
+                    $data['total'] = $this->getProposalsCountForSelectionStep($step, $themeId, $districtId, $categoryId);
                 }
-
                 break;
-            case 'categories':
+           case 'categories':
                 $data['values'] = $this->getCategoriesWithProposalsCountForStep($step, $limit);
                 $data['total'] = $this->categoryRepo->countAll();
-
                 break;
         }
 
@@ -163,106 +141,98 @@ class ProjectStatsResolver
 
     public function getCategoriesWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
-        $data = $this->categoryRepo->getCategoriesWithProposalsCountForStep($step, $limit);
+        $data = $this->categoryRepo
+            ->getCategoriesWithProposalsCountForStep($step, $limit)
+        ;
 
         return $this->addPercentages($data, $step->getProposalsCount());
     }
 
     public function getThemesWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
-        $data = $this->themeRepo->getThemesWithProposalsCountForStep($step, $limit);
+        $data = $this->themeRepo
+            ->getThemesWithProposalsCountForStep($step, $limit)
+        ;
 
         return $this->addPercentages($data, $step->getProposalsCount());
     }
 
     public function countThemes()
     {
-        return $this->themeRepo->countAll();
+        return $this->themeRepo
+            ->countAll()
+        ;
     }
 
     public function getDistrictsWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
-        $data = $this->districtRepo->getDistrictsWithProposalsCountForStep($step, $limit);
+        $data = $this->districtRepo
+            ->getDistrictsWithProposalsCountForStep($step, $limit)
+        ;
 
         return $this->addPercentages($data, $step->getProposalsCount());
     }
 
     public function countDistricts()
     {
-        return $this->districtRepo->countAll();
+        return $this->districtRepo
+            ->countAll()
+            ;
     }
 
     public function getUserTypesWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
-        $data = $this->userTypeRepo->getUserTypesWithProposalsCountForStep($step, $limit);
+        $data = $this->userTypeRepo
+            ->getUserTypesWithProposalsCountForStep($step, $limit)
+        ;
 
         return $this->addPercentages($data, $step->getProposalsCount());
     }
 
     public function countUserTypes()
     {
-        return $this->userTypeRepo->countAll();
+        return $this->userTypeRepo
+            ->countAll()
+            ;
     }
 
     public function getProposalsWithCostsForStep(CollectStep $step, $limit = null)
     {
-        $data = $this->proposalRepo->getProposalsWithCostsForStep($step, $limit);
+        $data = $this->proposalRepo
+            ->getProposalsWithCostsForStep($step, $limit)
+        ;
 
         return $this->addPercentages($data, $this->getTotalCostForStep($step));
     }
 
     public function getTotalCostForStep(CollectStep $step)
     {
-        return $this->proposalRepo->getTotalCostForStep($step);
+        return $this->proposalRepo
+            ->getTotalCostForStep($step)
+        ;
     }
 
-    public function getProposalsWithVotesCountForSelectionStep(
-        SelectionStep $step,
-        $limit = null,
-        $themeId = null,
-        $districtId = null,
-        $categoryId = null
-    ) {
-        $data = $this->proposalRepo->getProposalsWithVotesCountForSelectionStep(
-            $step,
-            $limit,
-            $themeId,
-            $districtId,
-            $categoryId
-        );
+    public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, $limit = null, $themeId = null, $districtId = null, $categoryId = null)
+    {
+        $data = $this->proposalRepo
+            ->getProposalsWithVotesCountForSelectionStep($step, $limit, $themeId, $districtId, $categoryId)
+        ;
 
-        return $this->addPercentages(
-            $data,
-            $this->getVotesCountForSelectionStep($step, $themeId, $districtId, $categoryId)
-        );
+        return $this->addPercentages($data, $this->getVotesCountForSelectionStep($step, $themeId, $districtId, $categoryId));
     }
 
-    public function getVotesCountForSelectionStep(
-        SelectionStep $step,
-        $themeId = null,
-        $districtId = null,
-        $categoryId = null
-    ) {
-        return $this->proposalSelectionVoteRepo->getVotesCountForSelectionStep(
-            $step,
-            $themeId,
-            $districtId,
-            $categoryId
-        );
+    public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null, $categoryId = null)
+    {
+        return $this->proposalSelectionVoteRepo
+            ->getVotesCountForSelectionStep($step, $themeId, $districtId, $categoryId)
+        ;
     }
 
-    public function getProposalsCountForSelectionStep(
-        SelectionStep $step,
-        $themeId = null,
-        $districtId = null,
-        $categoryId = null
-    ) {
-        return $this->proposalRepo->countForSelectionStep(
-            $step,
-            $themeId,
-            $districtId,
-            $categoryId
-        );
+    public function getProposalsCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null, $categoryId = null)
+    {
+        return $this->proposalRepo
+            ->countForSelectionStep($step, $themeId, $districtId, $categoryId)
+        ;
     }
 
     public function addPercentages(array $values, $base)
@@ -271,7 +241,7 @@ class ProjectStatsResolver
         foreach ($values as $value) {
             $percentage = 0;
             if ($base && $value['value']) {
-                $percentage = round(($value['value'] / $base) * 100, 2);
+                $percentage = round($value['value'] / $base * 100, 2);
             }
             $value['percentage'] = $percentage;
             $newValues[] = $value;
@@ -282,8 +252,12 @@ class ProjectStatsResolver
 
     public function hasStepsWithStats(Project $project)
     {
-        $selectionSteps = $this->selectionStepRepo->getVotableStepsForProject($project);
-        $collectSteps = $this->collectStepRepo->getCollectStepsForProject($project);
+        $selectionSteps = $this->selectionStepRepo
+            ->getVotableStepsForProject($project)
+        ;
+        $collectSteps = $this->collectStepRepo
+            ->getCollectStepsForProject($project)
+        ;
         $steps = array_merge($collectSteps, $selectionSteps);
 
         return \count($steps) > 0;

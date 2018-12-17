@@ -102,6 +102,11 @@ services:
         }
       - {
           name: overblog_graphql.resolver,
+          alias: 'consultationContributionsRelay',
+          method: 'getConsultationContributionsConnection',
+        }
+      - {
+          name: overblog_graphql.resolver,
           alias: 'sectionContributionsRelay',
           method: 'getSectionContributionsConnection',
         }

@@ -231,19 +231,6 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.project_district:
-    class: Capco\AdminBundle\Admin\ProjectDistrictAdmin
-    arguments: [~, Capco\AppBundle\Entity\District\ProjectDistrict, SonataAdminBundle:CRUD]
-    tags:
-      - {
-          name: sonata.admin,
-          manager_type: orm,
-          group: admin.group.parameters,
-          label: admin.label.project_district,
-        }
-    calls:
-      - [setTranslationDomain, [CapcoAppBundle]]
-
   capco_admin.admin.newsletter_subscription:
     class: Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin
     arguments: [~, Capco\AppBundle\Entity\NewsletterSubscription, SonataAdminBundle:CRUD]

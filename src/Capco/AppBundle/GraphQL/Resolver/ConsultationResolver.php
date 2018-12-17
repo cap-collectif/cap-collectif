@@ -21,6 +21,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Entity\OpinionVersionVote;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
@@ -37,7 +38,7 @@ class ConsultationResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public $project;
+    public $project = null;
 
     public function resolveContributionType($data)
     {
@@ -78,7 +79,6 @@ class ConsultationResolver implements ContainerAwareInterface
         if ($data instanceof Post) {
             return $typeResolver->resolve('Post');
         }
-
         throw new UserError('Could not resolve type of Contribution.');
     }
 
@@ -90,6 +90,29 @@ class ConsultationResolver implements ContainerAwareInterface
     public function getSectionAppendixTitle(OpinionTypeAppendixType $type)
     {
         return $type->getAppendixTypeTitle();
+    }
+
+    public function getConsultationContributionsConnection(
+        ConsultationStep $consultation,
+        Arg $args
+    ): Connection {
+        $paginator = new Paginator(function ($offset, $limit) use ($consultation, $args) {
+            $repo = $this->container->get('capco.opinion.repository');
+            $criteria = ['step' => $consultation, 'trashed' => false];
+            $field = $args->offsetGet('orderBy')['field'];
+            $direction = $args->offsetGet('orderBy')['direction'];
+
+            $orderBy = [$field => $direction];
+
+            return $repo
+                ->getByCriteriaOrdered($criteria, $orderBy, null, $offset)
+                ->getIterator()
+                ->getArrayCopy();
+        });
+
+        $totalCount = $consultation->getOpinionCount();
+
+        return $paginator->auto($args, $totalCount);
     }
 
     public function getSectionContributionsConnection(OpinionType $section, Arg $args): Connection
@@ -118,7 +141,6 @@ class ConsultationResolver implements ContainerAwareInterface
         if (isset($args['id'])) {
             $stepId = GlobalId::fromGlobalId($args['id'])['id'];
             $consultation = $repo->find($stepId);
-
             return [$consultation];
         }
 
@@ -170,13 +192,14 @@ class ConsultationResolver implements ContainerAwareInterface
         }
 
         $opinionRepo = $this->container->get('capco.opinion.repository');
-
-        return $opinionRepo->getByOpinionTypeOrdered(
+        $opinions = $opinionRepo->getByOpinionTypeOrdered(
             $type->getId(),
             $limit,
             1,
             $type->getDefaultFilter()
         );
+
+        return $opinions;
     }
 
     public function getSectionOpinionsCount(OpinionType $type): int
@@ -240,8 +263,7 @@ class ConsultationResolver implements ContainerAwareInterface
             return $this->container->get(OpinionUrlResolver::class)->__invoke($parent) .
                 '#arg-' .
                 $argument->getId();
-        }
-        if ($parent instanceof OpinionVersion) {
+        } elseif ($parent instanceof OpinionVersion) {
             return $this->resolveVersionUrl($parent) . '#arg-' . $argument->getId();
         }
 

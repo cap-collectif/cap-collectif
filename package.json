@@ -21,9 +21,9 @@
     "update-js-translation": "node --experimental-modules ./xlf2-to-json.mjs",
     "trad": "yarn run download-translations && yarn run update-js-translation",
     "fonts": "cd app/Resources; rm -rf fonts; git clone --depth 1 git@github.com:cap-collectif/fonts.git; cp -r fonts/fonts/. assets/fonts",
-    "compile-graphql": "fab local.app.cmd:'graphql:compile --no-debug' && composer dump-autoload",
+    "clean-cache": "rm -rf var/cache/*",
+    "compile-graphql": "bin/console graphql:compile --no-debug && composer dump-autoload",
     "dump-graphql-schemas": "fab local.qa.graphql_schemas",
-    "clean-cache": "rm -rf var/cache/*",    
     "generate-graphql-files": "yarn run clean-cache && yarn run compile-graphql && yarn run dump-graphql-schemas",
     "relay": "yarn run generate-graphql-files && yarn run build-relay-schema",
     "relay:watch": "yarn run generate-graphql-files && yarn run build-relay-schema:watch",
@@ -106,7 +106,7 @@
     },
     {
       "path": "./web/js/app.js",
-      "maxSize": "1040 KB"
+      "maxSize": "1010 KB"
     },
     {
       "path": "./web/js/vendor.js",
@@ -215,7 +215,6 @@
     "react-axe": "^3.0.2",
     "react-beautiful-dnd": "^8.0.2",
     "react-bootstrap": "^0.32.1",
-    "react-color": "^2.14.1",
     "react-datetime": "^2.9.0",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",

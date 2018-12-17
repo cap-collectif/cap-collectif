@@ -3,4 +3,4 @@ ChangeDistrictPayload:
   config:
     fields:
       district:
-        type: 'ProposalDistrict!'
+        type: 'District!'

@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
@@ -282,23 +281,6 @@ class OpinionRepository extends EntityRepository
                 ->getQuery()
                 ->useQueryCache(true)
                 ->getSingleScalarResult();
-    }
-
-    public function countByStep(AbstractStep $step, bool $includeTrashed = false): int
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(o)')
-            ->andWhere('o.step = :step')
-            ->setParameter('step', $step);
-
-        if (!$includeTrashed) {
-            $qb->andWhere('o.trashedAt IS NULL');
-        }
-
-        return $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->getSingleScalarResult();
     }
 
     public function getByCriteriaOrdered(

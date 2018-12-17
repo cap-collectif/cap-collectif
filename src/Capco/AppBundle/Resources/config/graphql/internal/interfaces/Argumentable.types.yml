@@ -20,10 +20,6 @@ Argumentable:
           type:
             description: 'If provided, returns the arguments of this particular type.'
             type: 'ArgumentValue'
-          includeTrashed:
-            type: 'Boolean'
-            description: 'The connection will return the trashed results too.'
-            defaultValue: false
       viewerArgumentsUnpublished:
         access: "@=hasRole('ROLE_USER')"
         description: 'The unpublished arguments of to the viewer.'

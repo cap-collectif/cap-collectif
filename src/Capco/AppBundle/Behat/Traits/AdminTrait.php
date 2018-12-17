@@ -7,7 +7,6 @@ trait AdminTrait
     use AdminProposalTrait;
     use AdminProposalFormTrait;
     use AdminUserTrait;
-    use AdminProjectDistrictTrait;
 
     /**
      * @When I go to the admin proposals list page
@@ -139,6 +138,6 @@ trait AdminTrait
      */
     public function iDuplicateProposalForm(string $proposalFormId)
     {
-        $this->visitPath("/admin/capco/app/proposalform/duplicate?id=${proposalFormId}");
+        $this->visitPath("/admin/capco/app/proposalform/duplicate?id=$proposalFormId");
     }
 }

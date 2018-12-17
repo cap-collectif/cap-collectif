@@ -72,7 +72,6 @@ sonata_admin:
           - capco_admin.admin.menu_item
           - capco_admin.admin.social_network
           - capco_admin.admin.footer_social_network
-          - capco_admin.admin.project_district
       admin.group.pages:
         items:
           - capco_admin.admin.section

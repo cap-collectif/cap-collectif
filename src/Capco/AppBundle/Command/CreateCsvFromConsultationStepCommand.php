@@ -66,7 +66,6 @@ EOF;
     protected const TRASHABLE_CONTRIBUTION_FRAGMENT = <<<'EOF'
 fragment trashableInfos on Trashable {
   trashed
-  trashedStatus
   trashedAt
   trashedReason
 }
@@ -129,10 +128,10 @@ fragment versionInfos on Version {
     votesNo: votes(first: 0, value: NO) {
         totalCount
     }
-    argumentsFor: arguments(first: 0, type: FOR, includeTrashed: true) {
+    argumentsFor: arguments(first: 0, type: FOR) {
         totalCount
     }
-    argumentsAgainst: arguments(first: 0, type: AGAINST, includeTrashed: true) {
+    argumentsAgainst: arguments(first: 0, type: AGAINST) {
         totalCount
     }
     arguments {
@@ -200,7 +199,6 @@ EOF;
         'contributions_url',
         'contributions_published',
         'contributions_trashed',
-        'contributions_trashedStatus',
         'contributions_trashedAt',
         'contributions_trashedReason',
         'contributions_votesCount',
@@ -223,7 +221,6 @@ EOF;
         'contributions_arguments_url',
         'contributions_arguments_published',
         'contributions_arguments_trashed',
-        'contributions_arguments_trashedStatus',
         'contributions_arguments_trashedAt',
         'contributions_arguments_trashedReason',
         'contributions_arguments_votesCount',
@@ -243,7 +240,6 @@ EOF;
         'contributions_sources_related_kind',
         'contributions_sources_author_id',
         'contributions_sources_trashed',
-        'contributions_sources_trashedStatus',
         'contributions_sources_trashedAt',
         'contributions_sources_trashedReason',
         'contributions_sources_body',
@@ -257,13 +253,13 @@ EOF;
         'contribution_versions_createdAt',
         'contribution_versions_updatedAt',
     ];
+
     protected const SOURCE_HEADER_MAP = [
         'contributions_sources_id' => 'id',
         'contributions_sources_related_id' => 'related.id',
         'contributions_sources_related_kind' => 'related.kind',
         'contributions_sources_author_id' => 'author.id',
         'contributions_sources_trashed' => 'trashed',
-        'contributions_sources_trashedStatus' => 'trashedStatus',
         'contributions_sources_trashedAt' => 'trashedAt',
         'contributions_sources_trashedReason' => 'trashedReason',
         'contributions_sources_body' => 'body',
@@ -292,7 +288,6 @@ EOF;
         'contributions_arguments_url' => 'url',
         'contributions_arguments_published' => 'published',
         'contributions_arguments_trashed' => 'trashed',
-        'contributions_arguments_trashedStatus' => 'trashedStatus',
         'contributions_arguments_trashedAt' => 'trashedAt',
         'contributions_arguments_trashedReason' => 'trashedReason',
         'contributions_arguments_votesCount' => 'votes.totalCount',
@@ -328,7 +323,6 @@ EOF;
             'contributions_url' => 'url',
             'contributions_published' => 'published',
             'contributions_trashed' => 'trashed',
-            'contributions_trashedStatus' => 'trashedStatus',
             'contributions_trashedAt' => 'trashedAt',
             'contributions_trashedReason' => 'trashedReason',
             'contributions_votesCount' => 'votes.totalCount',
@@ -481,7 +475,7 @@ ${versionFragment}
 {
   node(id: "{$consultationStep->getId()}") {
     ... on Consultation {
-      contributionConnection(orderBy: {field: PUBLISHED_AT, direction: DESC}, first: ${contributionPerPage}${contributionAfter}, includeTrashed: true) {
+      contributionConnection(orderBy: {field: PUBLISHED_AT, direction: DESC}, first: ${contributionPerPage}${contributionAfter}) {
         totalCount
         pageInfo {
           startCursor
@@ -513,10 +507,10 @@ ${versionFragment}
             votesNo: votes(first: 0, value: NO) {
                 totalCount
             }
-            argumentsFor: arguments(first: 0, type: FOR, includeTrashed: true) {
+            argumentsFor: arguments(first: 0, type: FOR) {
                 totalCount
             }
-            argumentsAgainst: arguments(first: 0, type: AGAINST, includeTrashed: true) {
+            argumentsAgainst: arguments(first: 0, type: AGAINST) {
                 totalCount
             }
             votes(first: ${votePerPage}) {
@@ -533,7 +527,7 @@ ${versionFragment}
                     hasNextPage
                 }
             }
-            arguments(first: ${argumentPerPage}, includeTrashed: true) {
+            arguments(first: ${argumentPerPage}) {
               totalCount
               edges {
                 cursor
@@ -901,7 +895,7 @@ ${trashableFragment}
 {
   node(id: "${contributionId}") {
     ... on Argumentable {
-      arguments(first: ${argumentsPerPage}${argumentAfter}, includeTrashed: true) {
+      arguments(first: ${argumentsPerPage}${argumentAfter}) {
         totalCount
         pageInfo {
           startCursor

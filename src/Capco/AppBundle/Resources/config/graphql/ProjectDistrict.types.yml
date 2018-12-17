@@ -1,6 +1,0 @@
-ProjectDistrict:
-  type: object
-  inherits: [District]
-  config:
-    interfaces: [District]
-    description: 'A project district'

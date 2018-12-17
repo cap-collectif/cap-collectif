@@ -16,17 +16,3 @@
         }
     }
 }
-
-.project__district-modal-item {
-    border-bottom: 1px solid $border-color;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    &:last-child {
-        border: none;
-        padding-bottom: 0px;
-    }
-}
-
-.project__district-modal-link {
-    color: $brand-color-2;
-}

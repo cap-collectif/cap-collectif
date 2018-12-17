@@ -1,29 +1,29 @@
 <?php
 
-namespace Capco\AppBundle\Entity\District;
+namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Entity\Styles\BorderStyle;
-use Capco\AppBundle\Entity\Styles\BackgroundStyle;
 
 /**
  * @ORM\Table(name="district")
- * @ORM\Entity
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name = "district_type", type = "string")
- * @ORM\DiscriminatorMap({
- *      "proposal"        = "ProposalDistrict",
- *      "project"         = "ProjectDistrict",
- * })
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DistrictRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
-abstract class AbstractDistrict implements IndexableInterface
+class District implements IndexableInterface
 {
-    use UuidTrait;
     use TimestampableTrait;
+    use UuidTrait;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="districts")
+     * @ORM\JoinColumn(name="form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     */
+    private $form;
 
     /**
      * @ORM\Column(name="name", type="string", length=100)
@@ -52,20 +52,41 @@ abstract class AbstractDistrict implements IndexableInterface
     private $updatedAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Styles\BorderStyle", fetch="LAZY", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="border_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     * @ORM\OneToMany(
+     *  targetEntity="Capco\AppBundle\Entity\Proposal",
+     *  mappedBy="district"
+     *  )
      */
-    private $border;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Styles\BackgroundStyle", fetch="LAZY", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="background_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     */
-    private $background;
+    private $proposals;
 
     public function __construct()
     {
         $this->updatedAt = new \Datetime();
+        $this->proposals = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getId() ? $this->getName() : 'New district';
+    }
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+        }
+    }
+
+    public function getForm()
+    {
+        return $this->form;
+    }
+
+    public function setForm(ProposalForm $form): self
+    {
+        $this->form = $form;
+
+        return $this;
     }
 
     public function getGeojson(): ?string
@@ -116,28 +137,23 @@ abstract class AbstractDistrict implements IndexableInterface
         return $this;
     }
 
-    public function getBorder(): ?BorderStyle
+    public function getProposals()
     {
-        return $this->border;
+        return $this->proposals;
     }
 
-    public function setBorder(?BorderStyle $border): self
+    public function addProposal(Proposal $proposal)
     {
-        $this->border = $border;
+        if (!$this->proposals->contains($proposal)) {
+            $this->proposals[] = $proposal;
+        }
 
         return $this;
     }
 
-    public function getBackground(): ?BackgroundStyle
+    public function removeProposal(Proposal $proposal)
     {
-        return $this->background;
-    }
-
-    public function setBackground(?BackgroundStyle $background): self
-    {
-        $this->background = $background;
-
-        return $this;
+        $this->proposals->removeElement($proposal);
     }
 
     public function isIndexable(): bool

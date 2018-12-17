@@ -1,6 +1,0 @@
-DeleteProjectDistrictInput:
-  type: input-object
-  config:
-    fields:
-      id:
-        type: ID!

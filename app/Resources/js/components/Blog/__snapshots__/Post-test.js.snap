@@ -7,7 +7,6 @@ exports[`<Post /> should render a post 1`] = `
   <a
     alt="Post 8"
     className="pull-left"
-    href=""
   >
     <img
       alt=""
@@ -23,7 +22,6 @@ exports[`<Post /> should render a post 1`] = `
     >
       <a
         alt="title"
-        href=""
       >
         title
       </a>
@@ -35,7 +33,6 @@ exports[`<Post /> should render a post 1`] = `
         key="0"
       >
         <a
-          href=""
           key="0"
         >
           <span
@@ -64,9 +61,7 @@ exports[`<Post /> should render a post 1`] = `
           Object {
             "author": <span>
               <span>
-                <a
-                  href=""
-                >
+                <a>
                   
                 </a>
               </span>

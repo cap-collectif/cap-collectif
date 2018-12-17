@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\CollectStepRepository;
-use Capco\AppBundle\Repository\ProposalDistrictRepository;
+use Capco\AppBundle\Repository\DistrictRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -17,15 +17,15 @@ use PhpSpec\ObjectBehavior;
 
 class ProjectStatsResolverSpec extends ObjectBehavior
 {
-    public function let(
-        SelectionStepRepository $selectionStepRepo,
-        CollectStepRepository $collectStepRepo,
-        ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
-        ProposalCategoryRepository $categoryRepo,
-        UserTypeRepository $userTypeRepo,
-        ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepo
+    function let(
+      SelectionStepRepository $selectionStepRepo,
+      CollectStepRepository $collectStepRepo,
+      ThemeRepository $themeRepo,
+      DistrictRepository $districtRepo,
+      ProposalCategoryRepository $categoryRepo,
+      UserTypeRepository $userTypeRepo,
+      ProposalRepository $proposalRepo,
+      ProposalSelectionVoteRepository $proposalSelectionVoteRepo
     ) {
         $this->beConstructedWith(
             $selectionStepRepo,
@@ -49,22 +49,23 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
+        DistrictRepository $districtRepo,
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
         $cs->getProposalsCount()->willReturn(100);
-        $themeRepo->getThemesWithProposalsCountForStep($cs, null)->willReturn([
-            [
-                'name' => 'Thème 1',
-                'value' => 40,
-            ],
-            [
-                'name' => 'Thème 2',
-                'value' => 60,
-            ],
+        $themeRepo->getThemesWithProposalsCountForStep($cs, null)
+            ->willReturn([
+                [
+                    'name' => 'Thème 1',
+                    'value' => 40,
+                ],
+                [
+                    'name' => 'Thème 2',
+                    'value' => 60,
+                ],
         ]);
         $this->beConstructedWith(
             $selectionStepRepo,
@@ -76,17 +77,18 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo
         );
-        $this->getThemesWithProposalsCountForStep($cs)->shouldReturn([
-            [
-                'name' => 'Thème 1',
-                'value' => 40,
-                'percentage' => 40.0,
-            ],
-            [
-                'name' => 'Thème 2',
-                'value' => 60,
-                'percentage' => 60.0,
-            ],
+        $this->getThemesWithProposalsCountForStep($cs)
+            ->shouldReturn([
+                [
+                    'name' => 'Thème 1',
+                    'value' => 40,
+                    'percentage' => 40.0,
+                ],
+                [
+                    'name' => 'Thème 2',
+                    'value' => 60,
+                    'percentage' => 60.0,
+                ],
         ]);
     }
 
@@ -94,13 +96,14 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
+        DistrictRepository $districtRepo,
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
-        $themeRepo->countAll()->willReturn(12);
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
+        $themeRepo->countAll()
+            ->willReturn(12);
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,
@@ -119,23 +122,24 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
+        DistrictRepository $districtRepo,
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
         $cs->getProposalsCount()->willReturn(100);
-        $districtRepo->getDistrictsWithProposalsCountForStep($cs, null)->willReturn([
-            [
-                'name' => 'Quartier 1',
-                'value' => 40,
-            ],
-            [
-                'name' => 'Quartier 2',
-                'value' => 60,
-            ],
-        ]);
+        $districtRepo->getDistrictsWithProposalsCountForStep($cs, null)
+            ->willReturn([
+                [
+                    'name' => 'Quartier 1',
+                    'value' => 40,
+                ],
+                [
+                    'name' => 'Quartier 2',
+                    'value' => 60,
+                ],
+            ]);
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,
@@ -146,31 +150,33 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo
         );
-        $this->getDistrictsWithProposalsCountForStep($cs)->shouldReturn([
-            [
-                'name' => 'Quartier 1',
-                'value' => 40,
-                'percentage' => 40.0,
-            ],
-            [
-                'name' => 'Quartier 2',
-                'value' => 60,
-                'percentage' => 60.0,
-            ],
-        ]);
+        $this->getDistrictsWithProposalsCountForStep($cs)
+            ->shouldReturn([
+                [
+                    'name' => 'Quartier 1',
+                    'value' => 40,
+                    'percentage' => 40.0,
+                ],
+                [
+                    'name' => 'Quartier 2',
+                    'value' => 60,
+                    'percentage' => 60.0,
+                ],
+            ]);
     }
 
     public function it_can_count_districts(
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
+        DistrictRepository $districtRepo,
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
-        $districtRepo->countAll()->willReturn(12);
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
+        $districtRepo->countAll()
+            ->willReturn(12);
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,
@@ -189,23 +195,24 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
+        DistrictRepository $districtRepo,
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
         $cs->getProposalsCount()->willReturn(100);
-        $userTypeRepo->getUserTypesWithProposalsCountForStep($cs, null)->willReturn([
-            [
-                'name' => 'User type 1',
-                'value' => 40,
-            ],
-            [
-                'name' => 'User type 2',
-                'value' => 60,
-            ],
-        ]);
+        $userTypeRepo->getUserTypesWithProposalsCountForStep($cs, null)
+            ->willReturn([
+                [
+                    'name' => 'User type 1',
+                    'value' => 40,
+                ],
+                [
+                    'name' => 'User type 2',
+                    'value' => 60,
+                ],
+            ]);
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,
@@ -216,31 +223,33 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo
         );
-        $this->getUserTypesWithProposalsCountForStep($cs)->shouldReturn([
-            [
-                'name' => 'User type 1',
-                'value' => 40,
-                'percentage' => 40.0,
-            ],
-            [
-                'name' => 'User type 2',
-                'value' => 60,
-                'percentage' => 60.0,
-            ],
-        ]);
+        $this->getUserTypesWithProposalsCountForStep($cs)
+            ->shouldReturn([
+                [
+                    'name' => 'User type 1',
+                    'value' => 40,
+                    'percentage' => 40.0,
+                ],
+                [
+                    'name' => 'User type 2',
+                    'value' => 60,
+                    'percentage' => 60.0,
+                ],
+            ]);
     }
 
     public function it_can_count_userTypes(
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
+        DistrictRepository $districtRepo,
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
-        $userTypeRepo->countAll()->willReturn(12);
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
+        $userTypeRepo->countAll()
+            ->willReturn(12);
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,
@@ -259,86 +268,14 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
+        DistrictRepository $districtRepo,
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
         $proposalRepo->getTotalCostForStep($cs)->willReturn(100);
-        $proposalRepo->getProposalsWithCostsForStep($cs, null)->willReturn([
-            [
-                'name' => 'Proposal 1',
-                'value' => 40,
-            ],
-            [
-                'name' => 'Proposal 2',
-                'value' => 60,
-            ],
-        ]);
-        $this->beConstructedWith(
-            $selectionStepRepo,
-            $collectStepRepo,
-            $themeRepo,
-            $districtRepo,
-            $categoryRepo,
-            $userTypeRepo,
-            $proposalRepo,
-            $proposalVoteRepo
-        );
-        $this->getProposalsWithCostsForStep($cs)->shouldReturn([
-            [
-                'name' => 'Proposal 1',
-                'value' => 40,
-                'percentage' => 40.0,
-            ],
-            [
-                'name' => 'Proposal 2',
-                'value' => 60,
-                'percentage' => 60.0,
-            ],
-        ]);
-    }
-
-    public function it_can_get_total_cost_for_step(
-        CollectStep $cs,
-        SelectionStepRepository $selectionStepRepo,
-        CollectStepRepository $collectStepRepo,
-        ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
-        ProposalCategoryRepository $categoryRepo,
-        UserTypeRepository $userTypeRepo,
-        ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
-        $proposalRepo->getTotalCostForStep($cs)->willReturn(100);
-        $this->beConstructedWith(
-            $selectionStepRepo,
-            $collectStepRepo,
-            $themeRepo,
-            $districtRepo,
-            $categoryRepo,
-            $userTypeRepo,
-            $proposalRepo,
-            $proposalVoteRepo
-        );
-        $this->getTotalCostForStep($cs)->shouldReturn(100);
-    }
-
-    public function it_can_get_proposals_with_votes_count_for_selection_step(
-        SelectionStep $ss,
-        SelectionStepRepository $selectionStepRepo,
-        CollectStepRepository $collectStepRepo,
-        ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
-        ProposalCategoryRepository $categoryRepo,
-        UserTypeRepository $userTypeRepo,
-        ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
-        $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null, null)->willReturn(100);
-        $proposalRepo
-            ->getProposalsWithVotesCountForSelectionStep($ss, null, null, null, null)
+        $proposalRepo->getProposalsWithCostsForStep($cs, null)
             ->willReturn([
                 [
                     'name' => 'Proposal 1',
@@ -359,18 +296,92 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             $proposalRepo,
             $proposalVoteRepo
         );
-        $this->getProposalsWithVotesCountForSelectionStep($ss)->shouldReturn([
-            [
-                'name' => 'Proposal 1',
-                'value' => 40,
-                'percentage' => 40.0,
-            ],
-            [
-                'name' => 'Proposal 2',
-                'value' => 60,
-                'percentage' => 60.0,
-            ],
-        ]);
+        $this->getProposalsWithCostsForStep($cs)
+            ->shouldReturn([
+                [
+                    'name' => 'Proposal 1',
+                    'value' => 40,
+                    'percentage' => 40.0,
+                ],
+                [
+                    'name' => 'Proposal 2',
+                    'value' => 60,
+                    'percentage' => 60.0,
+                ],
+            ]);
+    }
+
+    public function it_can_get_total_cost_for_step(
+        CollectStep $cs,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
+        $proposalRepo->getTotalCostForStep($cs)->willReturn(100);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $categoryRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->getTotalCostForStep($cs)->shouldReturn(100);
+    }
+
+    public function it_can_get_proposals_with_votes_count_for_selection_step(
+        SelectionStep $ss,
+        SelectionStepRepository $selectionStepRepo,
+        CollectStepRepository $collectStepRepo,
+        ThemeRepository $themeRepo,
+        DistrictRepository $districtRepo,
+        ProposalCategoryRepository $categoryRepo,
+        UserTypeRepository $userTypeRepo,
+        ProposalRepository $proposalRepo,
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
+        $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null, null)->willReturn(100);
+        $proposalRepo->getProposalsWithVotesCountForSelectionStep($ss, null, null, null, null)
+            ->willReturn([
+                [
+                    'name' => 'Proposal 1',
+                    'value' => 40,
+                ],
+                [
+                    'name' => 'Proposal 2',
+                    'value' => 60,
+                ],
+            ]);
+        $this->beConstructedWith(
+            $selectionStepRepo,
+            $collectStepRepo,
+            $themeRepo,
+            $districtRepo,
+            $categoryRepo,
+            $userTypeRepo,
+            $proposalRepo,
+            $proposalVoteRepo
+        );
+        $this->getProposalsWithVotesCountForSelectionStep($ss)
+            ->shouldReturn([
+                [
+                    'name' => 'Proposal 1',
+                    'value' => 40,
+                    'percentage' => 40.0,
+                ],
+                [
+                    'name' => 'Proposal 2',
+                    'value' => 60,
+                    'percentage' => 60.0,
+                ],
+            ]);
     }
 
     public function it_can_get_votes_count_for_selection_step(
@@ -378,12 +389,12 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
+        DistrictRepository $districtRepo,
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
         $proposalVoteRepo->getVotesCountForSelectionStep($ss, null, null, null)->willReturn(100);
         $this->beConstructedWith(
             $selectionStepRepo,
@@ -403,12 +414,12 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
+        DistrictRepository $districtRepo,
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
         $proposalRepo->countForSelectionStep($ss, null, null, null)->willReturn(100);
         $this->beConstructedWith(
             $selectionStepRepo,
@@ -425,8 +436,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
 
     public function it_can_add_percentage_to_array()
     {
-        $this->addPercentages(
-            [
+        $this->addPercentages([
                 [
                     'name' => 'Nom 1',
                     'value' => 40,
@@ -435,9 +445,8 @@ class ProjectStatsResolverSpec extends ObjectBehavior
                     'name' => 'Nom 2',
                     'value' => 30,
                 ],
-            ],
-            100
-        )->shouldReturn([
+            ], 100)
+        ->shouldReturn([
             [
                 'name' => 'Nom 1',
                 'value' => 40,
@@ -450,30 +459,28 @@ class ProjectStatsResolverSpec extends ObjectBehavior
             ],
         ]);
 
-        $this->addPercentages(
-            [
-                [
-                    'name' => 'Nom 1',
-                    'value' => 58,
-                ],
-                [
-                    'name' => 'Nom 2',
-                    'value' => 376,
-                ],
-            ],
-            960
-        )->shouldReturn([
+        $this->addPercentages([
             [
                 'name' => 'Nom 1',
                 'value' => 58,
-                'percentage' => 6.04,
             ],
             [
                 'name' => 'Nom 2',
                 'value' => 376,
-                'percentage' => 39.17,
             ],
-        ]);
+        ], 960)
+            ->shouldReturn([
+                [
+                    'name' => 'Nom 1',
+                    'value' => 58,
+                    'percentage' => 6.04,
+                ],
+                [
+                    'name' => 'Nom 2',
+                    'value' => 376,
+                    'percentage' => 39.17,
+                ],
+            ]);
     }
 
     public function it_can_tell_if_project_has_steps_with_stats(
@@ -484,16 +491,24 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         SelectionStepRepository $selectionStepRepo,
         CollectStepRepository $collectStepRepo,
         ThemeRepository $themeRepo,
-        ProposalDistrictRepository $districtRepo,
+        DistrictRepository $districtRepo,
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
-    ) {
-        $selectionStepRepo->getVotableStepsForProject($projectWithSteps)->willReturn([$ss]);
-        $selectionStepRepo->getVotableStepsForProject($projectWithNoSteps)->willReturn([]);
-        $collectStepRepo->getCollectStepsForProject($projectWithSteps)->willReturn([$cs]);
-        $collectStepRepo->getCollectStepsForProject($projectWithNoSteps)->willReturn([]);
+        ProposalSelectionVoteRepository $proposalVoteRepo)
+    {
+        $selectionStepRepo
+            ->getVotableStepsForProject($projectWithSteps)
+            ->willReturn([$ss]);
+        $selectionStepRepo
+            ->getVotableStepsForProject($projectWithNoSteps)
+            ->willReturn([]);
+        $collectStepRepo
+            ->getCollectStepsForProject($projectWithSteps)
+            ->willReturn([$cs]);
+        $collectStepRepo
+            ->getCollectStepsForProject($projectWithNoSteps)
+            ->willReturn([]);
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,

@@ -18,7 +18,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
 
 /**
  * Project.
@@ -220,12 +219,6 @@ class Project implements IndexableInterface
      */
     private $restrictedViewerGroups;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrict", inversedBy="projects", cascade={"persist"})
-     * @ORM\JoinTable(name="project_district")
-     */
-    private $districts;
-
     public function __construct()
     {
         $this->restrictedViewerGroups = new ArrayCollection();
@@ -233,9 +226,8 @@ class Project implements IndexableInterface
         $this->steps = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = new \Datetime();
         $this->publishedAt = new \DateTime();
-        $this->districts = new ArrayCollection();
     }
 
     public function __toString()
@@ -541,7 +533,7 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    public function removeEvent(Event $event): self
+    public function removeEvent(Event $event)
     {
         $this->events->removeElement($event);
 
@@ -682,29 +674,6 @@ class Project implements IndexableInterface
     public function setOpinionTerm($opinionTerm)
     {
         $this->opinionTerm = $opinionTerm;
-    }
-
-    public function getDistricts(): Collection
-    {
-        return $this->districts;
-    }
-
-    public function addDistrict(ProjectDistrict $district): self
-    {
-        if (!$this->districts->contains($district)) {
-            $this->districts->add($district);
-        }
-        $district->addProject($this);
-
-        return $this;
-    }
-
-    public function removeDistrict(ProjectDistrict $district): self
-    {
-        $this->districts->removeElement($district);
-        $district->removeProject($this);
-
-        return $this;
     }
 
     // ******************** Custom methods ******************************

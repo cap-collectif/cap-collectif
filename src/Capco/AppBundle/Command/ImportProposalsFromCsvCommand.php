@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Manager\MediaManager;
-use Capco\AppBundle\Repository\ProposalDistrictRepository;
+use Capco\AppBundle\Repository\DistrictRepository;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\StatusRepository;
@@ -40,8 +40,6 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         'proposal_illustration',
     ];
 
-    protected static $defaultName = 'capco:import:proposals-from-csv';
-
     private $filePath;
     private $delimiter;
     private $proposalForm;
@@ -59,9 +57,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
     private $fosUserManager;
     private $map;
 
+    protected static $defaultName = 'capco:import:proposals-from-csv';
+
     public function __construct(
         MediaManager $mediaManager,
-        ProposalDistrictRepository $districtRepository,
+        DistrictRepository $districtRepository,
         ProposalCategoryRepository $proposalCategoryRepository,
         ProposalFormRepository $proposalFormRepository,
         StatusRepository $statusRepository,
@@ -121,7 +121,7 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
         $this->delimiter = $input->getArgument('delimiter');
         $proposalFormId = $input->getArgument('proposal-form');
 
-        // @var ProposalForm $proposalForm
+        /* @var ProposalForm $proposalForm */
         $this->proposalForm = $this->proposalFormRepository->find($proposalFormId);
         $this->questionsMap = [];
         $this->newUsersMap = [];
@@ -239,11 +239,11 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
                     try {
                         $filePath =
                             $input->getArgument('illustrations-path') .
-                            \DIRECTORY_SEPARATOR .
+                            DIRECTORY_SEPARATOR .
                             $row['proposal_illustration'];
                         $info = pathinfo($filePath);
                         if (!isset($info['extension'])) {
-                            $filePath .= '.jpg';
+                            $filePath .= ".jpg";
                         }
                         if ('' !== $row['proposal_illustration'] && file_exists($filePath)) {
                             $thumbnail = $this->mediaManager->createImageFromPath($filePath);
@@ -352,7 +352,6 @@ class ImportProposalsFromCsvCommand extends ContainerAwareCommand
             ->fetchOne();
         $this->questionsHeader = array_values(array_diff($fileHeaders, self::HEADERS));
         $finalHeader = array_merge(self::HEADERS, $this->questionsHeader);
-
         return Reader::createFromPath($this->filePath)
             ->setDelimiter($this->delimiter ?? ';')
             ->fetchAssoc($finalHeader);

@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\District\ProposalDistrict:
+Capco\AppBundle\Entity\District:
   exclusion_policy: ALL
   properties:
     id:

@@ -45,7 +45,6 @@ import ProjectRestrictedAccessApp from '../js/startup/ProjectRestrictedAccessApp
 import ArgumentListApp from '../js/startup/ArgumentListApp';
 import VoteListApp from '../js/startup/VoteListApp';
 import EventApp from '../js/startup/EventApp';
-import ProjectDistrictAdminApp from '../js/startup/ProjectDistrictAdminApp';
 
 const emptyFunction = () => {};
 
@@ -101,5 +100,4 @@ ReactOnRails.register({
   ArgumentListApp,
   VoteListApp,
   EventApp,
-  ProjectDistrictAdminApp,
 });
