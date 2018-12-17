@@ -4,26 +4,28 @@ namespace spec\Capco\AppBundle\GraphQL\Resolver;
 
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Event;
+use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Requirement;
+use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Repository\EventRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityRepository;
-use Overblog\GraphQLBundle\Error\UserError;
 
 class GlobalIdResolverSpec extends ObjectBehavior
 {
-    function it_is_initializable(ContainerInterface $container)
+    public function it_is_initializable(ContainerInterface $container)
     {
         $this->beConstructedWith($container);
         $this->shouldHaveType(GlobalIdResolver::class);
     }
 
-    function it_can_resolve_a_global_id(
+    public function it_can_resolve_a_global_id(
         ContainerInterface $container,
         EventRepository $eventRepo,
         Event $event
@@ -37,7 +39,20 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $this->resolve($globalId, null)->shouldReturn($event);
     }
 
-    function it_can_not_resolve_an_unknown_global_id(
+    public function it_can_resolve_a_requirement(
+        ContainerInterface $container,
+        RequirementRepository $repository,
+        Requirement $requirement
+    ) {
+        $repository->find('requirement1')->willReturn($requirement);
+        $container->get(RequirementRepository::class)->willReturn($repository);
+        $this->beConstructedWith($container);
+        $globalId = GlobalId::toGlobalId('Requirement', 'requirement1');
+
+        $this->resolve($globalId, null)->shouldReturn($requirement);
+    }
+
+    public function it_can_not_resolve_an_unknown_global_id(
         ContainerInterface $container,
         LoggerInterface $logger
     ) {
@@ -50,7 +65,7 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $this->resolve($globalId, null)->shouldReturn(null);
     }
 
-    function it_can_resolve_an_uuid(
+    public function it_can_resolve_an_uuid(
         ContainerInterface $container,
         OpinionRepository $opinionRepo,
         Opinion $opinion
@@ -63,7 +78,7 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $this->resolve($uuid, null)->shouldReturn($opinion);
     }
 
-    function it_can_not_resolve_an_unknown_uuid(
+    public function it_can_not_resolve_an_unknown_uuid(
         EntityRepository $repository,
         ContainerInterface $container,
         LoggerInterface $logger

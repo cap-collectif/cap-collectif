@@ -1,0 +1,12 @@
+DateOfBirthRequirement:
+  type: object
+  inherits: [Node, Requirement]
+  config:
+    interfaces: [Node, Requirement]
+    description: 'Require a date of birth'
+    fields:
+      viewerDateOfBirth:
+        type: 'DateTime'
+        access: "@hasRole('ROLE_USER')"
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
+        description: 'The date of birth of the viewer.'

@@ -17,7 +17,7 @@ Scenario: Logged in API client wants to accept a requirement
     }",
     "variables": {
       "input": {
-        "requirement": "requirement3",
+        "requirement": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
         "value": true
       }
     }
@@ -29,7 +29,7 @@ Scenario: Logged in API client wants to accept a requirement
     "data": {
       "updateRequirement": {
         "requirement": {
-          "id": "requirement3",
+          "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
           "viewerMeetsTheRequirement": true
         }
       }
@@ -53,7 +53,7 @@ Scenario: Logged in API client wants to decline a requirement
     }",
     "variables": {
       "input": {
-        "requirement": "requirement3",
+        "requirement": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
         "value": false
       }
     }
@@ -65,7 +65,7 @@ Scenario: Logged in API client wants to decline a requirement
     "data": {
       "updateRequirement": {
         "requirement": {
-          "id": "requirement3",
+          "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
           "viewerMeetsTheRequirement": false
         }
       }

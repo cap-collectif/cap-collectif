@@ -1,23 +1,24 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Event;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Model\ModerableInterface;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Model\ModerableInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\RequirementRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class GlobalIdResolver
 {
@@ -58,7 +59,7 @@ class GlobalIdResolver
 
         if (
             isset($decodeGlobalId['type'], $decodeGlobalId['id']) &&
-            $decodeGlobalId['id'] !== null
+            null !== $decodeGlobalId['id']
         ) {
             // Good news, it's a GraphQL Global id !
             $uuid = $decodeGlobalId['id'];
@@ -67,20 +68,29 @@ class GlobalIdResolver
             switch ($decodeGlobalId['type']) {
                 case 'Post':
                     $node = $this->container->get('capco.blog.post.repository')->find($uuid);
+
                     break;
                 case 'Event':
                     $node = $this->container->get('capco.event.repository')->find($uuid);
+
                     break;
                 case 'User':
                     $node = $this->container->get('capco.user.repository')->find($uuid);
+
                     break;
                 case 'Questionnaire':
                     $node = $this->container->get('capco.questionnaire.repository')->find($uuid);
+
                     break;
                 case 'Consultation':
                     $node = $this->container
                         ->get('capco.consultation_step.repository')
                         ->find($uuid);
+
+                    break;
+                case 'Requirement':
+                    $node = $this->container->get(RequirementRepository::class)->find($uuid);
+
                     break;
                 default:
                     break;
@@ -89,6 +99,7 @@ class GlobalIdResolver
             if (!$node) {
                 $error = 'Could not resolve node with id ' . $uuid;
                 $this->container->get('logger')->warning($error);
+
                 return null;
             }
 
@@ -138,15 +149,13 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.requirement.repository')->find($uuid);
-        }
-        if (!$node) {
             $node = $this->container->get('capco.follower.repository')->find($uuid);
         }
 
         if (!$node) {
             $error = 'Could not resolve node with id ' . $uuid;
             $this->container->get('logger')->warning($error);
+
             throw new UserError($error);
         }
 
@@ -173,6 +182,7 @@ class GlobalIdResolver
             $this->container
                 ->get('logger')
                 ->warn(__METHOD__ . ' : Unknown moderation_token: ' . $token);
+
             throw new NotFoundHttpException();
         }
 

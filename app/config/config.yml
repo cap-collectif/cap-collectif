@@ -708,6 +708,7 @@ overblog_graphql:
           - CheckboxRequirement
           - FirstnameRequirement
           - LastnameRequirement
+          - DateOfBirthRequirement
           - MediaQuestion
           - MediaResponse
           - MultipleChoiceQuestion

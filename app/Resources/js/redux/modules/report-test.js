@@ -1,35 +1,40 @@
+// @flow
 /* eslint-env jest */
 
 import { reducer } from './report';
 
+const defaultInitialState = { currentReportingModal: null, isLoading: false, elements: [] };
+
 describe('Report Reducer', () => {
   it('Should handle OPEN_MODAL', () => {
-    const initialState = { currentReportingModal: null };
-    const newState = reducer(initialState, { type: 'report/OPEN_MODAL', id: 1 });
-    expect(newState).toEqual({ currentReportingModal: 1 });
+    const newState = reducer(defaultInitialState, { type: 'report/OPEN_MODAL', id: 1 });
+    expect(newState).toMatchSnapshot();
   });
 
   it('Should handle CLOSE_MODAL', () => {
-    const initialState = { currentReportingModal: 'lalaa' };
+    const initialState = { ...defaultInitialState, currentReportingModal: 'lalaa' };
     const newState = reducer(initialState, { type: 'report/CLOSE_MODAL' });
-    expect(newState).toEqual({ currentReportingModal: null });
+    expect(newState).toMatchSnapshot();
   });
 
   it('Should handle START_LOADING', () => {
-    const initialState = { isLoading: false };
-    const newState = reducer(initialState, { type: 'report/START_LOADING' });
-    expect(newState).toEqual({ isLoading: true });
+    const newState = reducer(defaultInitialState, { type: 'report/START_LOADING' });
+    expect(newState).toMatchSnapshot();
   });
 
   it('Should handle STOP_LOADING', () => {
-    const initialState = { isLoading: true };
+    const initialState = { ...defaultInitialState, isLoading: true };
     const newState = reducer(initialState, { type: 'report/STOP_LOADING' });
-    expect(newState).toEqual({ isLoading: false });
+    expect(newState).toMatchSnapshot();
   });
 
   it('Should handle ADD_REPORTED', () => {
-    const initialState = { currentReportingModal: 'foo', elements: ['bar'] };
+    const initialState = {
+      ...defaultInitialState,
+      currentReportingModal: 'foo',
+      elements: ['bar'],
+    };
     const newState = reducer(initialState, { type: 'report/ADD_REPORTED' });
-    expect(newState).toEqual({ currentReportingModal: 'foo', elements: ['bar', 'foo'] });
+    expect(newState).toMatchSnapshot();
   });
 });
