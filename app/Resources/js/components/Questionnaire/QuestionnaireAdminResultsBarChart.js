@@ -39,7 +39,6 @@ export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
           <XAxis type="number" allowDecimals={false} tickLine={false} />
           <YAxis
             dataKey="name"
-            minTickGap={10}
             type="category"
             tickLine={false}
             width={this.getYAxisWidth(data)}

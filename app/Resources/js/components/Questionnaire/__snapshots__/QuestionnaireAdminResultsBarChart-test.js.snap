@@ -82,7 +82,6 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other resp
       }
       height={0}
       hide={false}
-      minTickGap={10}
       mirror={false}
       orientation="left"
       padding={
@@ -207,7 +206,6 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other r
       }
       height={0}
       hide={false}
-      minTickGap={10}
       mirror={false}
       orientation="left"
       padding={
