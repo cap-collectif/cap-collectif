@@ -120,3 +120,15 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
     question: '@multiplequestion1'
     reply: '@reply5'
     value: { 'labels': ['Natation'], 'other': null }
+  response29:
+    question: '@simplequestion6'
+    value: 'Champ obligatoire inscription'
+    user: '@user666'
+  response30:
+    question: '@simplequestion7'
+    value: 'Champ non obligatoire inscription'
+    user: '@user666'
+  response31:
+    question: '@multiplequestion5'
+    value: 'Sangohan'
+    user: '@user666'
