@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Report Reducer Should handle ADD_REPORTED 1`] = `
+Object {
+  "currentReportingModal": "foo",
+  "elements": Array [
+    "bar",
+    "foo",
+  ],
+  "isLoading": false,
+}
+`;
+
+exports[`Report Reducer Should handle CLOSE_MODAL 1`] = `
+Object {
+  "currentReportingModal": null,
+  "elements": Array [],
+  "isLoading": false,
+}
+`;
+
+exports[`Report Reducer Should handle OPEN_MODAL 1`] = `
+Object {
+  "currentReportingModal": 1,
+  "elements": Array [],
+  "isLoading": false,
+}
+`;
+
+exports[`Report Reducer Should handle START_LOADING 1`] = `
+Object {
+  "currentReportingModal": null,
+  "elements": Array [],
+  "isLoading": true,
+}
+`;
+
+exports[`Report Reducer Should handle STOP_LOADING 1`] = `
+Object {
+  "currentReportingModal": null,
+  "elements": Array [],
+  "isLoading": false,
+}
+`;

@@ -5,42 +5,64 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { reduxForm, Field, startSubmit, stopSubmit, type FormProps } from 'redux-form';
 import component from '../Form/Field';
-import type { RequirementsForm_step } from './__generated__/RequirementsForm_step.graphql';
 import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
 import UpdateProfilePersonalDataMutation from '../../mutations/UpdateProfilePersonalDataMutation';
 import type { Dispatch, State } from '../../types';
+import DateDropdownPicker from '../Form/DateDropdownPicker';
 
 export const formName = 'requirements-form';
-type Requirement = {|
-  +__typename: string,
-  +id: string,
-  +viewerMeetsTheRequirement: boolean,
-  +viewerValue?: ?string,
-  +label?: string,
+
+// We can not use __generated__ relay flow type because it's wrong
+type Requirement =
+  | {
+      +__typename: 'DateOfBirthRequirement',
+      +id: string,
+      +viewerMeetsTheRequirement: boolean,
+      +viewerDateOfBirth: ?string,
+    }
+  | {
+      +__typename: 'CheckboxRequirement',
+      +id: string,
+      +viewerMeetsTheRequirement: boolean,
+      +label: string,
+    }
+  | {
+      +__typename: 'FirstnameRequirement' | 'LastnameRequirement' | 'PhoneRequirement',
+      +id: string,
+      +viewerMeetsTheRequirement: boolean,
+      +viewerValue: ?string,
+    };
+type RequirementsForm_step = {|
+  +requirements: {|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: Requirement,
+    |}>,
+  |},
 |};
+
 type FormValues = { [key: string]: ?string | boolean };
-type Props = FormProps & {
+type Props = {
+  ...FormProps,
   step: RequirementsForm_step,
 };
 
-const validate = (values: FormValues, props: Props) => {
+export const validate = (values: FormValues, props: Props) => {
   const errors = {};
-  if (!props.step.requirements.edges) {
+  const edges = props.step.requirements.edges;
+  if (!edges) {
     return errors;
   }
-  for (const edge of props.step.requirements.edges) {
-    if (edge) {
-      const requirement = edge.node;
-      if (!values[requirement.id]) {
-        errors[requirement.id] = 'global.required';
-      } else if (requirement.__typename === 'PhoneRequirement') {
-        const phone = values[requirement.id];
-        if (
-          typeof phone === 'string' &&
-          (!/^[0-9]+$/.test(phone) || phone.length < 9 || phone.length > 10)
-        ) {
-          errors[requirement.id] = 'profile.constraints.phone.invalid';
-        }
+  for (const edge of edges.filter(Boolean)) {
+    const requirement = edge.node;
+    if (!values[requirement.id]) {
+      errors[requirement.id] = 'global.required';
+    } else if (requirement.__typename === 'PhoneRequirement') {
+      const phone = values[requirement.id];
+      if (
+        typeof phone === 'string' &&
+        (!/^[0-9]+$/.test(phone) || phone.length < 9 || phone.length > 10)
+      ) {
+        errors[requirement.id] = 'profile.constraints.phone.invalid';
       }
     }
   }
@@ -48,12 +70,13 @@ const validate = (values: FormValues, props: Props) => {
 };
 
 const callApiTimeout: { [key: string]: TimeoutID } = {};
-const onChange = (
+
+export const onChange = (
   values: FormValues,
   dispatch: Dispatch,
   props: Props,
   previousValues: FormValues,
-) => {
+): void => {
   Object.keys(values).forEach(element => {
     if (previousValues[element] !== values[element]) {
       const requirementEdge =
@@ -76,21 +99,24 @@ const onChange = (
 
       dispatch(startSubmit(formName));
       const newValue = values[element];
-      if (requirement.__typename === 'CheckboxRequirement' && typeof newValue === 'boolean') {
-        // The user just (un-)checked a box, so we can call our API directly
-        return UpdateRequirementMutation.commit({
-          input: {
-            requirement: requirement.id,
-            value: newValue,
-          },
-        }).then(() => {
-          dispatch(stopSubmit(formName));
-        });
-      }
       if (typeof newValue !== 'string') {
+        if (requirement.__typename === 'CheckboxRequirement' && typeof newValue === 'boolean') {
+          // The user just (un-)checked a box, so we can call our API directly
+          return UpdateRequirementMutation.commit({
+            input: {
+              requirement: requirement.id,
+              value: newValue,
+            },
+          }).then(() => {
+            dispatch(stopSubmit(formName));
+          });
+        }
         return;
       }
       const input = {};
+      if (requirement.__typename === 'DateOfBirthRequirement') {
+        input.dateOfBirth = newValue;
+      }
       if (requirement.__typename === 'FirstnameRequirement') {
         input.firstname = newValue;
       }
@@ -127,14 +153,24 @@ const getLabel = (requirement: Requirement) => {
   if (requirement.__typename === 'PhoneRequirement') {
     return <FormattedMessage id="mobile-phone" />;
   }
+  if (requirement.__typename === 'DateOfBirthRequirement') {
+    return <FormattedMessage id="user.profile.edit.birthday" />;
+  }
   return '';
 };
 
-const getType = (requirement: Requirement) => {
-  if (requirement.__typename === 'CheckboxRequirement') {
-    return 'checkbox';
+const getFormProps = (requirement: Requirement) => {
+  if (requirement.__typename === 'DateOfBirthRequirement') {
+    return {
+      component: DateDropdownPicker,
+      globalClassName: 'col-sm-12 col-xs-12',
+      divClassName: 'row',
+    };
   }
-  return 'text';
+  if (requirement.__typename === 'CheckboxRequirement') {
+    return { component, type: 'checkbox', divClassName: 'col-sm-12 col-xs-12' };
+  }
+  return { component, type: 'text', divClassName: 'col-sm-12 col-xs-12' };
 };
 
 export class RequirementsForm extends React.Component<Props> {
@@ -167,17 +203,11 @@ export class RequirementsForm extends React.Component<Props> {
                 addonBefore={
                   requirement.__typename === 'PhoneRequirement' ? 'France +33' : undefined
                 }
-                divClassName={
-                  requirement.__typename !== 'CheckboxRequirement'
-                    ? 'col-sm-12 col-xs-12'
-                    : 'col-sm-12 col-xs-12'
-                }
                 id={requirement.id}
                 key={requirement.id}
                 name={requirement.id}
                 label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
-                component={component}
-                type={getType(requirement)}>
+                {...getFormProps(requirement)}>
                 {requirement.__typename === 'CheckboxRequirement' ? requirement.label : null}
               </Field>
             ))}
@@ -192,6 +222,20 @@ const form = reduxForm({
   form: formName,
 })(RequirementsForm);
 
+const getRequirementInitialValue = (requirement: Requirement): ?string | boolean => {
+  if (requirement.__typename === 'CheckboxRequirement') {
+    return requirement.viewerMeetsTheRequirement;
+  }
+  if (requirement.__typename === 'PhoneRequirement') {
+    return requirement.viewerValue ? requirement.viewerValue.replace('+33', '') : null;
+  }
+  if (requirement.__typename === 'DateOfBirthRequirement') {
+    return requirement.viewerDateOfBirth;
+  }
+
+  return requirement.viewerValue;
+};
+
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { step }: Props) => ({
   initialValues: step.requirements.edges
     ? step.requirements.edges
@@ -200,14 +244,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { step }: Props
         .reduce(
           (initialValues, requirement) => ({
             ...initialValues,
-            [requirement.id]:
-              typeof requirement.viewerValue !== 'undefined'
-                ? requirement.__typename !== 'PhoneRequirement'
-                  ? requirement.viewerValue
-                  : requirement.viewerValue
-                    ? requirement.viewerValue.replace('+33', '')
-                    : null
-                : requirement.viewerMeetsTheRequirement,
+            [requirement.id]: getRequirementInitialValue(requirement),
           }),
           {},
         )
@@ -225,6 +262,9 @@ export default createFragmentContainer(container, {
             __typename
             id
             viewerMeetsTheRequirement
+            ... on DateOfBirthRequirement {
+              viewerDateOfBirth
+            }
             ... on FirstnameRequirement {
               viewerValue
             }

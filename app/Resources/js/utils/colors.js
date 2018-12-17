@@ -1,3 +1,4 @@
+// @flow
 const colors = {
   black: '#000000',
   primaryColor: '#007c91',

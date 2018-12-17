@@ -21,6 +21,11 @@ class ViewerMeetsTheRequirementResolver implements ResolverInterface
         if (null === $value) {
             return false;
         }
+
+        if (Requirement::DATE_OF_BIRTH === $requirement->getType()) {
+            return true;
+        }
+
         if (\is_string($value)) {
             return true;
         }
