@@ -66,7 +66,7 @@ class ProjectsList extends React.Component<Props> {
             query ProjectsListQuery(
               $count: Int
               $cursor: String
-              $theme: ID
+              $theme: String
               $orderBy: ProjectOrder
               $type: ID
               $term: String

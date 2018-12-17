@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\ThemeSearchType;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -57,7 +56,7 @@ class ThemeController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if (null !== $pagination && 0 > $pagination && 0 !== count($themes)) {
+        if (null !== $pagination && 0 > $pagination && 0 !== \count($themes)) {
             $nbPage = ceil(\count($themes) / $pagination);
         }
 
@@ -83,24 +82,13 @@ class ThemeController extends Controller
         }
 
         $serializer = $this->get('serializer');
-
-        $projectProps = $serializer->serialize(
-            [
-                'projects' => $this->get(
-                    'Capco\AppBundle\Repository\ProjectRepository'
-                )->getProjectsByTheme($theme, $this->getUser()),
-            ],
-            'json',
-            ['Projects', 'UserDetails', 'Steps', 'Themes', 'ProjectType']
-        );
-
         $ideaCreationProps = $serializer->serialize(
             [
                 'themes' => $this->get('capco.theme.repository')->findAll(),
                 'themeId' => $theme->getId(),
             ],
             'json',
-            ['ThemeDetails']
+            ['groups' => ['ThemeDetails']]
         );
 
         return [
