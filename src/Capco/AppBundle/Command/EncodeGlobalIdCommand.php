@@ -21,11 +21,10 @@ class EncodeGlobalIdCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $availableTypes = ['Questionnaire', 'User', 'Consultation', 'Event', 'Requirement'];
+        $availableTypes = ['Questionnaire', 'User', 'Consultation', 'Event'];
         $type = $input->getArgument('type');
-        if (!\in_array($type, $availableTypes)) {
-            $output->writeln('<comment>Unknown type : ' . $type . '</comment>');
-            $output->writeln('<comment>You may need to add it to the list ?</comment>');
+        if (!in_array($type, $availableTypes)) {
+            $output->writeln('Unknown type : ' . $type);
         }
 
         $id = $input->getArgument('id');

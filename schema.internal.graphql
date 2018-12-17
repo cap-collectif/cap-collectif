@@ -486,6 +486,9 @@ interface Argumentable {
 
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
+
+    # The connection will return the trashed results too.
+    includeTrashed: Boolean = false
   ): ArgumentConnection!
 
   # The unpublished arguments of to the viewer.
@@ -1257,6 +1260,9 @@ type Consultation implements Node & Step {
 
     # Ordering options for contributions returned from the connection.
     orderBy: ContributionOrder = {field: POSITION, direction: DESC}
+
+    # The connection will return the trashed results too.
+    includeTrashed: Boolean = false
   ): ContributionConnection
 }
 
@@ -1457,18 +1463,6 @@ type CreateUserPayload {
 
 # A string containing CSS.
 scalar CssJSON
-
-# Require a date of birth
-type DateOfBirthRequirement implements Node & Requirement {
-  # The ID of an object
-  id: ID!
-
-  # Does the viewer meets the requirement ?
-  viewerMeetsTheRequirement: Boolean!
-
-  # The date of birth of the viewer.
-  viewerDateOfBirth: DateTime
-}
 
 # A string containing a datetime.
 scalar DateTime
@@ -2363,6 +2357,9 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
+
+    # The connection will return the trashed results too.
+    includeTrashed: Boolean = false
   ): ArgumentConnection!
 
   # The unpublished arguments of to the viewer.
@@ -4346,7 +4343,6 @@ type RequestUserArchivePayload {
 
 # A requirement
 interface Requirement {
-  # The ID of an object
   id: ID!
 
   # Does the viewer meets the requirement ?
@@ -5924,6 +5920,9 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
+
+    # The connection will return the trashed results too.
+    includeTrashed: Boolean = false
   ): ArgumentConnection!
 
   # The unpublished arguments of to the viewer.

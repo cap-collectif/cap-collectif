@@ -51,6 +51,38 @@ Scenario: Anonymous wants to get arguments for an opinion
   """
 
 @read-only
+Scenario: Anonymous wants to get all arguments including trashed ones for an opinion
+  Given I send a GraphQL POST request:
+  """
+  {
+    "query": "query ($opinionId: ID!) {
+      opinion: node(id: $opinionId) {
+          ... on Argumentable {
+              arguments(first: 5, includeTrashed: true) {
+                  totalCount
+              }
+          }
+      }
+    }",
+    "variables": {
+      "opinionId": "opinion2"
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+        "opinion": {
+            "arguments": {
+              "totalCount": 3
+            }
+        }
+    }
+  }
+  """
+
+@read-only
 Scenario: Anonymous wants to get arguments for a version
   Given I send a GraphQL POST request:
   """

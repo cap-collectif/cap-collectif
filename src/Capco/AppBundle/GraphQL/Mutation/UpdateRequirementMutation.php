@@ -2,17 +2,16 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Requirement;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\UserRequirement;
-use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\AppBundle\Repository\UserRequirementRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Psr\Log\LoggerInterface;
 
 class UpdateRequirementMutation implements MutationInterface
 {
@@ -22,11 +21,11 @@ class UpdateRequirementMutation implements MutationInterface
     private $logger;
 
     public function __construct(
-        EntityManagerInterface $em,
-        RequirementRepository $requirementRepository,
-        UserRequirementRepository $userRequirementRepository,
-        LoggerInterface $logger
-    ) {
+      EntityManagerInterface $em,
+      RequirementRepository $requirementRepository,
+      UserRequirementRepository $userRequirementRepository,
+      LoggerInterface $logger)
+    {
         $this->em = $em;
         $this->requirementRepository = $requirementRepository;
         $this->userRequirementRepository = $userRequirementRepository;
@@ -35,23 +34,17 @@ class UpdateRequirementMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
+        $requirementId = $input->offsetGet('requirement');
         $value = $input->offsetGet('value');
 
         // Requirement
-        $requirementId = GlobalId::fromGlobalId($input->offsetGet('requirement'))['id'];
         $requirement = $this->requirementRepository->find($requirementId);
 
         if (!$requirement) {
-            $error = sprintf('Unknown requirement with id "%s"', $requirementId);
-            $this->logger->error($error);
-
-            throw new UserError($error);
+            throw new UserError(sprintf('Unknown requirement with id "%s"', $requirementId));
         }
 
-        $userRequirement = $this->userRequirementRepository->findOneBy([
-            'requirement' => $requirement,
-            'user' => $user,
-        ]);
+        $userRequirement = $this->userRequirementRepository->findOneBy(['requirement' => $requirement, 'user' => $user]);
 
         if (!$userRequirement) {
             $userRequirement = new UserRequirement($user, $requirement, $value);

@@ -10,6 +10,7 @@ Capco\AppBundle\Entity\Argument:
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     moderationToken: 'argument1ModerationToken'
+
   argument2:
     id: 'argument2'
     Opinion: '@opinion2'
@@ -19,6 +20,17 @@ Capco\AppBundle\Entity\Argument:
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
+
+  argument3trashed:
+    id: 'argument3trashed'
+    Opinion: '@opinion2'
+    type: 0
+    Author: '@user4'
+    body: <text(300)>
+    publishedAt: <(new \DateTime('2015-01-01'))>
+    trashedStatus: 'invisible'
+    trashedAt: <(new \DateTime('2017-03-01'))>
+    trashedReason: 'moderation-guideline-violation'
 
   argument{3..95}:
     id: 'argument<current()>'
@@ -89,6 +101,7 @@ Capco\AppBundle\Entity\Argument:
     createdAt: <(new \DateTime('2015-01-01'))>
     updatedAt: <(new \DateTime('2017-01-01'))>
     publishedAt: <(new \DateTime('2015-01-01'))>
+
   argument202:
     id: 'argument202'
     Opinion: '@opinion51'

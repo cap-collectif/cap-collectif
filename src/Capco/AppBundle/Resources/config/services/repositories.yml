@@ -371,13 +371,15 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserArchive']
 
-  Capco\AppBundle\Repository\RequirementRepository:
+  capco.requirement.repository:
     public: true
+    class: Capco\AppBundle\Repository\RequirementRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Requirement']
 
-  Capco\AppBundle\Repository\UserRequirementRepository:
+  capco.user_requirement.repository:
     public: true
+    class: Capco\AppBundle\Repository\UserRequirementRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserRequirement']
 

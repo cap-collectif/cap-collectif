@@ -153,6 +153,36 @@ Scenario: GraphQL client wants to list contributions in a consultation
   }
   """
 
+Scenario: GraphQL client wants to list contributions in a consultation including trashed ones
+  When I send a GraphQL request:
+  """
+  query {
+     consultations(id: "Q29uc3VsdGF0aW9uOmNzdGVwNQ==") {
+      id
+      title
+      contributionConnection(first: 5, orderBy: {field: VOTE_COUNT, direction: DESC}, includeTrashed: true) {
+        totalCount
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+  "data": {
+    "consultations": [
+      {
+        "id": "Q29uc3VsdGF0aW9uOmNzdGVwNQ==",
+        "title": "Elaboration de la Loi",
+        "contributionConnection": {
+          "totalCount": 18
+        }
+      }
+    ]
+  }
+  }
+  """
+
 Scenario: GraphQL client wants to list contributions in a section
   When I send a GraphQL request:
   """
