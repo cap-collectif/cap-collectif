@@ -3,7 +3,7 @@
 exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other responses & empty response 1`] = `
 <ResponsiveContainer
   debounce={0}
-  height={340}
+  height={300}
   width="100%"
 >
   <BarChart
@@ -131,7 +131,7 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other resp
 exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other responses & on mobile 1`] = `
 <ResponsiveContainer
   debounce={0}
-  height={340}
+  height={225}
   width="100%"
 >
   <BarChart
