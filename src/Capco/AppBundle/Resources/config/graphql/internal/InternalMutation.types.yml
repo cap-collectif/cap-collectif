@@ -12,6 +12,13 @@ InternalMutation:
           inputType: ChangeMapProviderTokenInput
           payloadType: ChangeMapProviderTokenPayload
           mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeMapProviderTokenMutation", [value])'
+      changeMapStyle:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: ChangeMapStyleInput
+          payloadType: ChangeMapStylePayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeMapStyleMutation", [value])'
       addEvent:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'

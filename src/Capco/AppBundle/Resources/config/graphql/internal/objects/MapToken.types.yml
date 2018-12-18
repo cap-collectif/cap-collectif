@@ -20,6 +20,12 @@ MapToken:
       provider:
         type: 'MapTokenProvider'
         description: 'The corresponding provider in which belongs the token'
+      styleId:
+        type: 'ID'
+        description: 'The style id associated to this map token (available only if a style is applied)'
+      styleOwner:
+        type: 'String'
+        description: 'The style owner associated to this map token (available only if a style is applied)'
       styles:
         type: '[MapTokenStyle]'
         description: 'The available styles associated to this map token'

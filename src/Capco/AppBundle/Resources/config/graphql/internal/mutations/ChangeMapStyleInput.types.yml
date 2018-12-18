@@ -1,0 +1,14 @@
+ChangeMapStyleInput:
+  type: relay-mutation-input
+  config:
+    description: 'Input type of ChangeMapStyle.'
+    fields:
+      mapTokenId:
+        type: 'ID!'
+        description: 'The ID of the map token to modify the style'
+      styleOwner:
+        type: 'String!'
+        description: 'The new style owner'
+      styleId:
+        type: 'ID!'
+        description: 'The new style ID'

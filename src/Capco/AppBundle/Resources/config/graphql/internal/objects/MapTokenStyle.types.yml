@@ -4,7 +4,7 @@ MapTokenStyle:
     description: 'A map token style'
     fields:
       id:
-        type: 'String!'
+        type: 'ID!'
       name:
         type: 'String!'
         description: 'The name of the style'
