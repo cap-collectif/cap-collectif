@@ -1,10 +1,10 @@
 <?php
+
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\CoreBundle\Model\Metadata;
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
 
 class UserAdmin extends BaseAdmin
@@ -29,6 +29,7 @@ class UserAdmin extends BaseAdmin
             'translation_domain' => 'SonataAdminBundle',
             'ask_confirmation' => false,
         ];
+
         return $actions;
     }
 
@@ -44,7 +45,7 @@ class UserAdmin extends BaseAdmin
             ->addIdentifier('username', null, ['label' => 'registration.username'])
             ->add('email')
             ->add('enabled', null)
-            ->add('confirmationToken', null, [
+            ->add('isEmailConfirmed', null, [
                 'label' => 'confirmed-by-email',
                 'template' => 'CapcoAdminBundle:User:email_confirmed_list_field.html.twig',
             ])
