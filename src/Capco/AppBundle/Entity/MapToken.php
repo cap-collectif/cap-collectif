@@ -15,6 +15,8 @@ class MapToken
 {
     use UuidTrait;
     use TimestampableTrait;
+    public const DEFAULT_STYLE_OWNER = 'capcollectif';
+    public const DEFAULT_STYLE_ID = 'cj4zmeym20uhr2smcmgbf49cz';
 
     /**
      * @ORM\Column(name="public_token", type="string", nullable=false)
@@ -43,7 +45,7 @@ class MapToken
 
     public function getStyleOwner(): ?string
     {
-        return $this->styleOwner;
+        return $this->styleOwner ?: self::DEFAULT_STYLE_OWNER;
     }
 
     public function setStyleOwner(?string $styleOwner): self
@@ -55,7 +57,7 @@ class MapToken
 
     public function getStyleId(): ?string
     {
-        return $this->styleId;
+        return $this->styleId ?: self::DEFAULT_STYLE_ID;
     }
 
     public function setStyleId(?string $styleId): self

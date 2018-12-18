@@ -7,6 +7,13 @@ Object {
   "groupAdminUsersUserDeletionFailed": false,
   "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
+  "mapTokens": Object {
+    "mapbox": Object {
+      "publicToken": "***REMOVED***",
+      "styleId": "***REMOVED***",
+      "styleOwner": "capcollectif",
+    },
+  },
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
@@ -32,6 +39,13 @@ Object {
   "groupAdminUsersUserDeletionFailed": false,
   "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
+  "mapTokens": Object {
+    "mapbox": Object {
+      "publicToken": "***REMOVED***",
+      "styleId": "***REMOVED***",
+      "styleOwner": "capcollectif",
+    },
+  },
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
@@ -55,6 +69,13 @@ Object {
   "groupAdminUsersUserDeletionFailed": false,
   "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
+  "mapTokens": Object {
+    "mapbox": Object {
+      "publicToken": "***REMOVED***",
+      "styleId": "***REMOVED***",
+      "styleOwner": "capcollectif",
+    },
+  },
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
@@ -78,6 +99,13 @@ Object {
   "groupAdminUsersUserDeletionFailed": false,
   "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
+  "mapTokens": Object {
+    "mapbox": Object {
+      "publicToken": "***REMOVED***",
+      "styleId": "***REMOVED***",
+      "styleOwner": "capcollectif",
+    },
+  },
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
@@ -101,6 +129,13 @@ Object {
   "groupAdminUsersUserDeletionFailed": false,
   "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": true,
+  "mapTokens": Object {
+    "mapbox": Object {
+      "publicToken": "***REMOVED***",
+      "styleId": "***REMOVED***",
+      "styleOwner": "capcollectif",
+    },
+  },
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
@@ -124,6 +159,13 @@ Object {
   "groupAdminUsersUserDeletionFailed": false,
   "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
+  "mapTokens": Object {
+    "mapbox": Object {
+      "publicToken": "***REMOVED***",
+      "styleId": "***REMOVED***",
+      "styleOwner": "capcollectif",
+    },
+  },
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,
@@ -147,6 +189,13 @@ Object {
   "groupAdminUsersUserDeletionFailed": false,
   "groupAdminUsersUserDeletionSuccessful": false,
   "isSubmittingAccountForm": false,
+  "mapTokens": Object {
+    "mapbox": Object {
+      "publicToken": "***REMOVED***",
+      "styleId": "***REMOVED***",
+      "styleOwner": "capcollectif",
+    },
+  },
   "registration_form": Object {
     "bottomText": "",
     "bottomTextDisplayed": false,

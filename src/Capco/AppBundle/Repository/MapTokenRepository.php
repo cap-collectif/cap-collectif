@@ -30,6 +30,19 @@ class MapTokenRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
+    /**
+     * @return MapToken[]
+     */
+    public function getMapTokensGroupByProvider(): array
+    {
+        $qb = $this->getQueryBuilder();
+
+        return $qb
+            ->groupBy('mt.provider')
+            ->getQuery()
+            ->getResult();
+    }
+
     private function getQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('mt');

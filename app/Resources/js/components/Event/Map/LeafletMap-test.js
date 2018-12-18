@@ -44,6 +44,14 @@ describe('<LeafletMap />', () => {
   const props = {
     dispatch: jest.fn(),
     eventSelected: 'event2',
+    mapTokens: {
+      mapbox: {
+        publicToken:
+          '***REMOVED***',
+        styleOwner: 'capcollectif',
+        styleId: '***REMOVED***',
+      },
+    },
   };
 
   it('should render a map with markers', () => {

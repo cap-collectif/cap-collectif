@@ -6,8 +6,8 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from './LocateControl';
 import LeafletSearch from './LeafletSearch';
 import { loadMarkers } from '../../../redux/modules/proposal';
-import config from '../../../config';
 import type { Dispatch, State } from '../../../types';
+import type { MapTokens } from '../../../redux/modules/user';
 
 type MapCenterObject = {
   lat: number,
@@ -48,6 +48,7 @@ type GeoJson = {
 
 type Props = {
   markers: ?Object,
+  mapTokens: MapTokens,
   geoJsons?: Array<GeoJson>,
   defaultMapOptions: MapOptions,
   visible: boolean,
@@ -122,13 +123,18 @@ export class LeafletMap extends Component<Props, ComponentState> {
   }
 
   render() {
-    const { geoJsons, defaultMapOptions, markers, visible } = this.props;
+    const { geoJsons, defaultMapOptions, markers, visible, mapTokens } = this.props;
+    const { publicToken, styleId, styleOwner } = mapTokens.mapbox;
 
     if (!visible || !this.state.loaded) {
       return null;
     }
 
-    const token = config.mapboxApiKey;
+    const defaultDistrictStyle = {
+      color: '#ff0000',
+      weight: 1,
+      opacity: 0.3,
+    };
 
     return (
       <Map
@@ -141,7 +147,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
         }}>
         <TileLayer
           attribution='&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-          url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${token}`}
+          url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
         />
         <MarkerClusterGroup
           spiderfyOnMaxZoom
@@ -174,7 +180,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
         {geoJsons &&
           geoJsons.map((geoJson, key) => (
             <GeoJSON
-              style={convertToGeoJsonStyle(geoJson.style)}
+              style={geoJson.style ? JSON.parse(geoJson.style) : defaultDistrictStyle}
               key={key}
               data={geoJson.district}
             />
@@ -188,6 +194,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
 
 const mapStateToProps = (state: State) => ({
   markers: state.proposal.markers || {},
+  mapTokens: state.user.mapTokens,
   stepId: state.project.currentProjectStepById || '',
   stepType:
     state.project.projectsById[state.project.currentProjectById || ''].stepsById[
