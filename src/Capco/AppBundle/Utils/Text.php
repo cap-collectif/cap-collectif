@@ -7,7 +7,7 @@ final class Text
     public static function startsWith(string $haystack, string $needle): bool
     {
         // search backwards starting from haystack length characters from the end
-        return $needle === '' || strrpos($haystack, $needle, -strlen($haystack)) !== false;
+        return '' === $needle || false !== strrpos($haystack, $needle, -\strlen($haystack));
     }
 
     public static function escapeHtml($str): string
@@ -49,9 +49,8 @@ final class Text
         // uppercase the first character of each word
         $str = ucwords($str);
         $str = str_replace(' ', '', $str);
-        $str = lcfirst($str);
 
-        return $str;
+        return lcfirst($str);
     }
 
     public static function snakeCase(string $str): string
