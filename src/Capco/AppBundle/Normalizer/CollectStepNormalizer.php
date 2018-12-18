@@ -1,13 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Capco\AppBundle\Resolver\OpinionTypesResolver;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
@@ -23,9 +18,10 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
         $this->normalizer = $normalizer;
     }
 
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
+        $groups =
+            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
 
         $data = $this->normalizer->normalize($object, $format, $context);
         if (\in_array('Elasticsearch', $groups)) {

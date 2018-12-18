@@ -41,7 +41,8 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
+        $groups =
+            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
         if (\in_array('Elasticsearch', $groups)) {

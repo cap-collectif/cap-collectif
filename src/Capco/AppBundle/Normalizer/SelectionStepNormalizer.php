@@ -1,9 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -22,9 +21,10 @@ class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInt
         $this->normalizer = $normalizer;
     }
 
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
+        $groups =
+            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $project = $object->getProject();
         $data = $this->normalizer->normalize($object, $format, $context);
 
@@ -59,8 +59,10 @@ class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInt
                     true
                 );
             }
+
             return $data;
         }
+
         return $data;
     }
 

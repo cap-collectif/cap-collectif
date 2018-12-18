@@ -1,7 +1,7 @@
 <?php
+
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
 use Capco\AppBundle\Manager\LogManager;
 use Gedmo\Loggable\Entity\LogEntry;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -27,10 +27,10 @@ class LogEntryNormalizer implements NormalizerInterface, SerializerAwareInterfac
         $this->logManager = $logManager;
     }
 
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
-
+        $groups =
+            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
         if (\in_array('Elasticsearch', $groups)) {
             return $data;

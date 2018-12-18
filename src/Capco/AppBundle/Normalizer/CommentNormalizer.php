@@ -1,15 +1,10 @@
 <?php
+
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\EventComment;
-use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\PostComment;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Capco\AppBundle\Resolver\OpinionTypesResolver;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -34,9 +29,10 @@ class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
-        $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
+        $groups =
+            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
         if (\in_array('Elasticsearch', $groups)) {
             return $data;
@@ -57,7 +53,14 @@ class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
         return $data;
     }
 
-    private function canEdit($comment)
+    public function supportsNormalization($data, $format = null)
+    {
+        return $data instanceof PostComment ||
+            $data instanceof EventComment ||
+            $data instanceof ProposalComment;
+    }
+
+    private function canEdit($comment): bool
     {
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
@@ -88,12 +91,5 @@ class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
         }
 
         return $comment->userHasReport($user);
-    }
-
-    public function supportsNormalization($data, $format = null)
-    {
-        return $data instanceof PostComment ||
-            $data instanceof EventComment ||
-            $data instanceof ProposalComment;
     }
 }

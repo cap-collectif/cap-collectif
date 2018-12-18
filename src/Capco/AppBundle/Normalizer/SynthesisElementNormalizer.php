@@ -30,7 +30,8 @@ class SynthesisElementNormalizer implements NormalizerInterface, SerializerAware
     public function normalize($object, $format = null, array $context = [])
     {
         $data = $this->normalizer->normalize($object, $format, $context);
-        $groups = array_key_exists('groups', $context) ? $context['groups'] : [];
+        $groups =
+            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
 
         if (\in_array('LogDetails', $groups)) {
             $serializedLogs = $this->serializer->serialize(
