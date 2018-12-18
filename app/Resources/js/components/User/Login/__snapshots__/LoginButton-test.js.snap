@@ -6,6 +6,7 @@ exports[`<LoginButton /> renders a button 1`] = `
 >
   <Button
     active={false}
+    aria-label="Ouvrir la modal de connexion"
     block={false}
     bsClass="btn"
     bsStyle="default"

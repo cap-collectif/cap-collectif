@@ -145,6 +145,8 @@ class ReactBootstrapInput extends React.Component<Props> {
       props.placeholder = intl.formatMessage({ id: props.placeholder });
     }
 
+    const ariaDescribedBy = `${props.id ? props.id : ''}-error`;
+
     if (type === 'editor') {
       return (
         <React.Fragment>
@@ -202,6 +204,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         ref={c => {
           this.refFormControl = c;
         }}
+        aria-describedby={ariaDescribedBy}
         type={props.componentClass ? undefined : type !== 'number' ? type : 'text'}
         value={value}
         {...props}>
@@ -210,7 +213,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     );
 
     if (type === 'datetime') {
-      formControl = <DateTime value={value} {...props} />;
+      formControl = <DateTime value={value} {...props} aria-describedby={ariaDescribedBy} />;
     }
 
     if (type === 'checkbox') {
@@ -226,6 +229,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           <MultipleChoiceCheckbox
             value={value}
             field={field}
+            aria-describedby={ariaDescribedBy}
             label={null}
             renderFormErrors={() => {}}
             getGroupStyle={() => {}}
@@ -247,12 +251,19 @@ class ReactBootstrapInput extends React.Component<Props> {
       field.id = props.id;
       field.choices = props.choices;
 
-      return <RadioButtons value={value} field={field} {...props} />;
+      return (
+        <RadioButtons value={value} field={field} {...props} aria-describedby={ariaDescribedBy} />
+      );
     }
 
     if (type === 'radio') {
       formControl = (
-        <Radio value={value} {...props} checked={radioChecked} isOtherAllowed={isOtherAllowed}>
+        <Radio
+          value={value}
+          {...props}
+          checked={radioChecked}
+          isOtherAllowed={isOtherAllowed}
+          aria-describedby={`${props.id ? props.id : ''}-error`}>
           {children}
         </Radio>
       );
@@ -290,6 +301,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         <Ranking
           formName={formName}
           field={field}
+          aria-describedby={ariaDescribedBy}
           label={null}
           renderFormErrors={() => {}}
           getGroupStyle={() => {}}
@@ -301,13 +313,18 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'email') {
-      formControl = <EmailInput value={value} {...props} />;
+      formControl = <EmailInput value={value} {...props} aria-describedby={ariaDescribedBy} />;
     }
 
     if (type === 'textarea') {
       formControl = (
         <React.Fragment>
-          <AutosizedTextarea maxLength={props.maxLength} value={value} {...props} />
+          <AutosizedTextarea
+            maxLength={props.maxLength}
+            value={value}
+            {...props}
+            aria-describedby={ariaDescribedBy}
+          />
           <Notepad />
         </React.Fragment>
       );
@@ -336,7 +353,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     return (
-      <InputGroup className="form-fields" bsClass={cx('input-group', wrapperClassName)} aria-describedby={`${props.id ? props.id : ''}-error`}>
+      <InputGroup className="form-fields" bsClass={cx('input-group', wrapperClassName)}>
         {this.renderAddon(addonBefore)}
         {this.renderButton(buttonBefore)}
         {formControl}
@@ -358,8 +375,6 @@ class ReactBootstrapInput extends React.Component<Props> {
       helpPrint,
       ...props
     } = this.props;
-
-    console.log(props);
 
     return (
       <FormGroup
@@ -384,7 +399,11 @@ class ReactBootstrapInput extends React.Component<Props> {
           </div>
         )}
         {this.renderInputGroup(props)}
-        {props.errors && <span className="error-block hidden-print" id={`${props.id ? props.id : ''}-error`}>{props.errors}</span>}
+        {props.errors && (
+          <span className="error-block hidden-print" id={`${props.id ? props.id : ''}-error`}>
+            {props.errors}
+          </span>
+        )}
       </FormGroup>
     );
   }
