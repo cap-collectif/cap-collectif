@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Field, reduxForm, formValueSelector, isDirty } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import component from '../Form/Field';
+import FieldComponent from '../Form/Field';
 import { updateRegistrationCommunicationForm as onSubmit } from '../../redux/modules/default';
 import type { State } from '../../types';
 
@@ -26,17 +26,17 @@ export class RegistrationCommunicationForm extends React.Component<Props> {
           type="checkbox"
           divClassName="pl-20"
           children={<FormattedMessage id="registration.admin.topText" />}
-          component={component}
+          component={FieldComponent}
         />
-        {useTopText && <Field name="topText" type="editor" component={component} />}
+        {useTopText && <Field name="topText" type="editor" component={FieldComponent} />}
         <Field
           name="bottomTextDisplayed"
           type="checkbox"
           divClassName="pl-20"
           children={<FormattedMessage id="registration.admin.bottomText" />}
-          component={component}
+          component={FieldComponent}
         />
-        {useBottomText && <Field name="bottomText" type="editor" component={component} />}
+        {useBottomText && <Field name="bottomText" type="editor" component={FieldComponent} />}
         <div className="box-content__toolbar btn-toolbar">
           <Button type="submit" disabled={submitting} className="btn btn-primary">
             {submitting ? (
