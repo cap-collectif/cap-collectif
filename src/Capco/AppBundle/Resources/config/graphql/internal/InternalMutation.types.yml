@@ -5,6 +5,13 @@ InternalMutation:
   config:
     name: Mutation
     fields:
+      changeMapProviderToken:
+        access: "@=hasRole('ROLE_ADMIN')"
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: ChangeMapProviderTokenInput
+          payloadType: ChangeMapProviderTokenPayload
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeMapProviderTokenMutation", [value])'
       addEvent:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'

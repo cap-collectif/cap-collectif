@@ -599,6 +599,24 @@ type ChangeEventPayload {
   clientMutationId: String
 }
 
+input ChangeMapProviderTokenInput {
+  # The name of the provider the new token will be set
+  provider: MapTokenProvider!
+
+  # The new public token
+  publicToken: String!
+
+  # The new secret token
+  secretToken: String
+  clientMutationId: String
+}
+
+type ChangeMapProviderTokenPayload {
+  # The newly map token
+  mapToken: MapToken
+  clientMutationId: String
+}
+
 input ChangeProposalContentInput {
   # The proposal id
   id: ID!
@@ -2099,16 +2117,20 @@ type MapToken implements Node {
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID
 
-  # The fallback token correspond to our main provider token. It is used by
-  # default if no clientToken is set, and is managed directly by us
-  fallbackToken: String!
+  # The public token
+  publicToken: String!
 
-  # The client token correspond to a per-client provider token. It allows a client
-  # to manage his own provider with his own token
-  clientToken: String
+  # The secret token
+  secretToken: String
 
   # The corresponding provider in which belongs the token
   provider: MapTokenProvider
+
+  # The available styles associated to this map token
+  styles(
+    # Filter the styles by its visibility
+    visibility: MapTokenStyleVisibility
+  ): [MapTokenStyle]
   createdAt: DateTime!
   updatedAt: DateTime
 }
@@ -2117,6 +2139,40 @@ type MapToken implements Node {
 enum MapTokenProvider {
   # Used for Mapbox service provider
   MAPBOX
+}
+
+# A map token style
+type MapTokenStyle {
+  id: String!
+
+  # The name of the style
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+
+  # The version of the style
+  version: Int!
+
+  # The preview url of the style
+  previewUrl: URI!
+
+  # Does the style is the current one applied to the whole website?
+  isCurrent: Boolean!
+
+  # The owner of the style
+  owner: String!
+
+  # The visibility of the style
+  visibility: MapTokenStyleVisibility!
+}
+
+# The visibility of a style for a map token
+enum MapTokenStyleVisibility {
+  # The style is public
+  PUBLIC
+
+  # The style is private
+  PRIVATE
 }
 
 # A media
@@ -2304,6 +2360,7 @@ enum MultipleChoiceQuestionValidationRulesTypes {
 type Mutation {
   addEvent(input: AddEventInput!): AddEventPayload
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
+  changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload

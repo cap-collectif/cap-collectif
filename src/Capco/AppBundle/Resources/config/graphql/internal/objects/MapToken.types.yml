@@ -11,17 +11,24 @@ MapToken:
         builder: 'Relay::GlobalId'
         builderConfig:
           typeName: MapToken
-      fallbackToken:
+      publicToken:
         type: 'String!'
-        description: 'The fallback token correspond to our main provider token. It is used by default if no clientToken is set, and is managed directly by us'
-      clientToken:
+        description: 'The public token'
+      secretToken:
         type: 'String'
-        description: 'The client token correspond to a per-client provider token. It allows a client to manage his own provider with his own token'
+        description: 'The secret token'
       provider:
         type: 'MapTokenProvider'
         description: 'The corresponding provider in which belongs the token'
+      styles:
+        type: '[MapTokenStyle]'
+        description: 'The available styles associated to this map token'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MapToken\\MapTokenStylesResolver", [args, value])'
+        args:
+          visibility:
+            type: 'MapTokenStyleVisibility'
+            description: 'Filter the styles by its visibility'
       createdAt:
         type: 'DateTime!'
       updatedAt:
         type: 'DateTime'
-
