@@ -31,6 +31,40 @@ class MapToken
      */
     protected $provider = MapProviderEnum::MAPBOX;
 
+    /**
+     * @ORM\Column(name="style_owner", type="string", nullable=true)
+     */
+    protected $styleOwner;
+
+    /**
+     * @ORM\Column(name="style_id", type="string", nullable=true)
+     */
+    protected $styleId;
+
+    public function getStyleOwner(): ?string
+    {
+        return $this->styleOwner;
+    }
+
+    public function setStyleOwner(?string $styleOwner): self
+    {
+        $this->styleOwner = $styleOwner;
+
+        return $this;
+    }
+
+    public function getStyleId(): ?string
+    {
+        return $this->styleId;
+    }
+
+    public function setStyleId(?string $styleId): self
+    {
+        $this->styleId = $styleId;
+
+        return $this;
+    }
+
     public function getPublicToken(): ?string
     {
         return $this->publicToken;

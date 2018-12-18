@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Capco\AppBundle\GraphQL\Mutation;
-
 
 use Capco\AppBundle\Client\MapboxClient;
 use Capco\AppBundle\Enum\MapProviderEnum;
@@ -15,11 +13,15 @@ use Psr\Log\LoggerInterface;
 
 class ChangeMapProviderTokenMutation implements MutationInterface
 {
-
     public const ERROR_INVALID_PUBLIC_TOKEN = 'Invalid public token';
     public const ERROR_INVALID_SECRET_TOKEN = 'Invalid secret token';
 
-    private const MAPBOX_INVALID_TOKEN_CODES = ['TokenMalformed', 'TokenInvalid', 'TokenExpired', 'TokenRevoked'];
+    private const MAPBOX_INVALID_TOKEN_CODES = [
+        'TokenMalformed',
+        'TokenInvalid',
+        'TokenExpired',
+        'TokenRevoked',
+    ];
 
     private $em;
     private $logger;
@@ -31,8 +33,7 @@ class ChangeMapProviderTokenMutation implements MutationInterface
         MapboxClient $mapboxClient,
         MapTokenRepository $repository,
         LoggerInterface $logger
-    )
-    {
+    ) {
         $this->em = $em;
         $this->logger = $logger;
         $this->repository = $repository;
@@ -41,19 +42,21 @@ class ChangeMapProviderTokenMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
-        [$provider, $publicToken, $secretToken] = [
+        list($provider, $publicToken, $secretToken) = [
             $input->offsetGet('provider'),
             $input->offsetGet('publicToken'),
             $input->offsetGet('secretToken'),
         ];
 
-        if ($provider === MapProviderEnum::MAPBOX) {
+        if (MapProviderEnum::MAPBOX === $provider) {
             return $this->mutateAndGetMapboxTokenPayload($publicToken, $secretToken);
         }
     }
 
-    private function mutateAndGetMapboxTokenPayload(string $publicToken, ?string $secretToken): array
-    {
+    private function mutateAndGetMapboxTokenPayload(
+        string $publicToken,
+        ?string $secretToken
+    ): array {
         $mapboxMapToken = $this->repository->getCurrentMapTokenForProvider(MapProviderEnum::MAPBOX);
 
         if (!$mapboxMapToken) {
@@ -61,22 +64,31 @@ class ChangeMapProviderTokenMutation implements MutationInterface
         }
 
         if (!$this->isValidToken($publicToken)) {
-            $this->logger->error('Invalid public token given for provider ' . MapProviderEnum::MAPBOX);
+            $this->logger->error(
+                'Invalid public token given for provider ' . MapProviderEnum::MAPBOX
+            );
+
             throw new UserError(self::ERROR_INVALID_PUBLIC_TOKEN);
         }
 
-        if ($secretToken && $secretToken !== "" && !$this->isValidToken($secretToken)) {
-            $this->logger->error('Invalid secret token given for provider ' . MapProviderEnum::MAPBOX);
+        if ($secretToken && '' !== $secretToken && !$this->isValidToken($secretToken)) {
+            $this->logger->error(
+                'Invalid secret token given for provider ' . MapProviderEnum::MAPBOX
+            );
+
             throw new UserError(self::ERROR_INVALID_SECRET_TOKEN);
         }
 
         $mapboxMapToken->setPublicToken($publicToken);
         $mapboxMapToken->setSecretToken($secretToken);
 
+        if (null === $mapboxMapToken->getSecretToken()) {
+            $mapboxMapToken->setStyleId(null)->setStyleOwner(null);
+        }
+
         $this->em->flush();
 
         return ['mapToken' => $mapboxMapToken];
-
     }
 
     private function isValidToken(string $token): bool
@@ -88,5 +100,4 @@ class ChangeMapProviderTokenMutation implements MutationInterface
 
         return !\in_array($code, self::MAPBOX_INVALID_TOKEN_CODES, true);
     }
-
 }
