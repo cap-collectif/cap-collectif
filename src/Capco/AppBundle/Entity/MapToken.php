@@ -17,40 +17,43 @@ class MapToken
     use TimestampableTrait;
 
     /**
-     * @ORM\Column(name="fallback_token", type="string", nullable=false)
+     * @ORM\Column(name="public_token", type="string", nullable=false)
      */
-    protected $fallbackToken;
+    protected $publicToken;
 
     /**
-     * @ORM\Column(name="client_token", type="string", nullable=true)
+     * @ORM\Column(name="secret_token", type="string", nullable=true)
      */
-    protected $clientToken;
+    protected $secretToken;
 
     /**
      * @ORM\Column(name="provider", type="string", columnDefinition="ENUM('mapbox')", nullable=false)
      */
     protected $provider = MapProviderEnum::MAPBOX;
 
-    public function getFallbackToken(): ?string
+    public function getPublicToken(): ?string
     {
-        return $this->fallbackToken;
+        return $this->publicToken;
     }
 
-    public function setFallbackToken(string $fallbackToken): self
+    public function setPublicToken(string $publicToken): self
     {
-        $this->fallbackToken = $fallbackToken;
+        $this->publicToken = $publicToken;
 
         return $this;
     }
 
-    public function getClientToken(): ?string
+    public function getSecretToken(): ?string
     {
-        return $this->clientToken;
+        return $this->secretToken;
     }
 
-    public function setClientToken(string $clientToken): self
+    public function setSecretToken(?string $secretToken): self
     {
-        $this->clientToken = $clientToken;
+        $this->secretToken = $secretToken ?
+            $secretToken !== "" ?
+                $secretToken : null
+            : null;
 
         return $this;
     }

@@ -436,3 +436,16 @@ Capco\AppBundle\Entity\SiteParameter:
     position: 3
     type: 3
     helpText: reserved-for-ad-scripts  script-desactivatable-by-user
+
+  SiteParameterMapCurrentUser:
+    keyname: map-setting-current-user
+    category: map
+    value: capcollectif
+    position: 3
+    type: 0
+  SiteParameterMapCurrentStyleId:
+    keyname: map-setting-current-style-id
+    category: map
+    value: cj4zmeym20uhr2smcmgbf49cz
+    position: 3
+    type: 0

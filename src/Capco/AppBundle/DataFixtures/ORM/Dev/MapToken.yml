@@ -1,5 +1,6 @@
 Capco\AppBundle\Entity\MapToken:
   mapboxMapToken:
     id: mapboxToken
-    fallbackToken: ***REMOVED***
+    publicToken: ***REMOVED***
+    secretToken: ***REMOVED***
     provider: mapbox
