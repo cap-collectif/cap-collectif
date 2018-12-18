@@ -28,10 +28,6 @@ trait RequirementTrait
     {
         if ($this->requirements->contains($requirement)) {
             $this->requirements->removeElement($requirement);
-            // set the owning side to null (unless already changed)
-            if ($requirement->getStep() === $this) {
-                $requirement->setStep(null);
-            }
         }
 
         return $this;

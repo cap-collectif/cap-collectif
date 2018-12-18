@@ -13,38 +13,16 @@ type Props = {
 };
 
 export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {
-  getYAxisWidth = (data: Array<Object>): number => {
-    const test = data.reduce((acc, curr) => {
-      acc.push(curr.name.length);
-      return acc;
-    }, []);
-
-    const maxLength = Math.max(...test);
-
-    if (test.length > 0 && maxLength > 50) {
-      return maxLength * 2;
-    }
-
-    return 120;
-  };
-
   render() {
     const { multipleChoiceQuestion, backgroundColor, intl } = this.props;
 
     const data = cleanMultipleChoiceQuestion(multipleChoiceQuestion, intl);
 
-    const containerHeight = data.length * 75;
-
     return (
-      <ResponsiveContainer height={containerHeight}>
+      <ResponsiveContainer height={340}>
         <BarChart data={data} layout="vertical" margin={{ top: 15, right: 5, bottom: 15, left: 5 }}>
           <XAxis type="number" allowDecimals={false} tickLine={false} />
-          <YAxis
-            dataKey="name"
-            type="category"
-            tickLine={false}
-            width={this.getYAxisWidth(data)}
-          />{' '}
+          <YAxis dataKey="name" type="category" tickLine={false} width={120} />{' '}
           <Bar dataKey="value" maxBarSize={30} fill={backgroundColor}>
             {' '}
             <LabelList dataKey="value" position="right" />
