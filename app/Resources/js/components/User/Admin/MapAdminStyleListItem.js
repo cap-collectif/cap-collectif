@@ -1,31 +1,40 @@
 // @flow
 import * as React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { ListGroupItem } from 'react-bootstrap';
+import ChangeMapStyleMutation from '../../../mutations/ChangeMapStyleMutation';
 
 type Props = {
+  +mapTokenId: string,
   +style: {
     +id: string,
     +owner: string,
     +name: string,
     +previewUrl: string,
-    +createdAt: any,
-    +updatedAt: ?any,
+    +createdAt: Date,
+    +updatedAt: ?Date,
     +isCurrent: boolean,
   },
 };
 
 const MapAdminStyleListItem = (props: Props) => {
-  const { style } = props;
+  const { style, mapTokenId } = props;
+
+  const handleItemClick = async () => {
+    console.log('clicked on', style);
+    const { owner, id } = style;
+    const input = {
+      mapTokenId,
+      styleOwner: owner,
+      styleId: id,
+    };
+    await ChangeMapStyleMutation.commit({ input });
+  };
 
   return (
-    <Row className={style.isCurrent ? 'current' : ''}>
-      <Col lg={4}>
-        <img src={style.previewUrl} alt={`${style.name} preview`} />
-      </Col>
-      <Col lg={8}>
-        <p>{style.name}</p>
-      </Col>
-    </Row>
+    <ListGroupItem active={style.isCurrent} onClick={handleItemClick}>
+      <img src={style.previewUrl} alt={`${style.name} preview`} />
+      <p>{style.name}</p>
+    </ListGroupItem>
   );
 };
 

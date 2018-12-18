@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button } from 'react-bootstrap';
+import { Button, ListGroup } from 'react-bootstrap';
 import { type MapStateToProps, connect } from 'react-redux';
 import { Field, reduxForm, type FormProps, SubmissionError } from 'redux-form';
 import { graphql, createFragmentContainer } from 'react-relay';
-import Row from 'react-bootstrap/es/Row';
 import type { MapboxAdminConfig_mapToken } from './__generated__/MapAdminPageQuery.graphql';
 import ChangeMapProviderTokenMutation from '../../../mutations/ChangeMapProviderTokenMutation';
 import type { GlobalState } from '../../../types';
@@ -55,11 +54,13 @@ const onSubmit = async (values: FormValues) => {
 };
 
 const MapboxAdminConfig = (props: Props) => {
-  console.log(props.mapToken.styles);
   const {
-    mapToken: { styles },
+    mapToken: { styles, id },
+    invalid,
+    submitting,
+    handleSubmit,
+    error,
   } = props;
-  const { invalid, submitting, handleSubmit, error } = props;
   return (
     <form className="mapbox__config" onSubmit={handleSubmit}>
       <img src="/svg/mapbox_logo.svg" width={32} height={32} alt="Mapbox" />
@@ -92,9 +93,12 @@ const MapboxAdminConfig = (props: Props) => {
         <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
       </Button>
       <div className="clearfix" />
-      <Row>
-        {styles && styles.map(style => <MapAdminStyleListItem key={style.id} style={style} />)}
-      </Row>
+      <ListGroup>
+        {styles &&
+          styles.map(style => (
+            <MapAdminStyleListItem key={style.id} style={style} mapTokenId={id} />
+          ))}
+      </ListGroup>
     </form>
   );
 };
@@ -123,6 +127,8 @@ export default createFragmentContainer(
       publicToken
       secretToken
       provider
+      styleOwner
+      styleId
       styles {
         id
         owner
