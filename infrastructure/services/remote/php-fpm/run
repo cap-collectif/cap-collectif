@@ -86,6 +86,9 @@ else
 fi
 echo "[$(date -u)][PHP-FPM] Database is ready!"
 
+echo "[$(date -u)][PHP-FPM] Generating map token for Mapbox"
+gosu capco php bin/console capco:generate:map-token mapbox --no-debug --env=prod --no-interaction --quiet
+
 echo "[$(date -u)][PHP-FPM] Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &
 echo "[$(date -u)][PHP-FPM] Daemon started!"
