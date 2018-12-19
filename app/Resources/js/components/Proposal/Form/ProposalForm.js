@@ -99,8 +99,6 @@ type RelayProps = {|
 |};
 
 type Props = {|
-  proposalForm: ProposalForm_proposalForm,
-  proposal: ProposalForm_proposal,
   ...FormProps,
   ...RelayProps,
   +intl: IntlShape,

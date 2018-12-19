@@ -15,6 +15,10 @@ type OwnProps = {|
   stepId: string,
 |};
 
+type RelayProps = {|
+  consultation: ConsultationPlanRecursiveItems_consultation,
+|};
+
 type StateProps = {|
   showConsultationPlan: boolean,
 |};
@@ -28,7 +32,7 @@ type Props = {|
   ...OwnProps,
   ...StateProps,
   ...DispatchProps,
-  consultation: ConsultationPlanRecursiveItems_consultation,
+  ...RelayProps,
   intl: IntlShape,
 |};
 

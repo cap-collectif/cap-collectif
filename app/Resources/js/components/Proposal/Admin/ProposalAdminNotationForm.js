@@ -33,7 +33,6 @@ type FormValues = { responses: ResponsesValues } & Object;
 type MinimalRelayProps = {| proposal: ProposalPageEvaluation_proposal |};
 type RelayProps = {| proposal: ProposalAdminNotationForm_proposal |};
 type Props = {|
-  proposal: ProposalAdminNotationForm_proposal,
   ...RelayProps,
   ...FormProps,
   ...FormValues,

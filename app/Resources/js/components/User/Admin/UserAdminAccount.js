@@ -18,7 +18,6 @@ type RelayProps = {|
   user: UserAdminAccount_user,
 |};
 type Props = {|
-  user: UserAdminAccount_user,
   ...FormProps,
   ...RelayProps,
   intl: IntlShape,

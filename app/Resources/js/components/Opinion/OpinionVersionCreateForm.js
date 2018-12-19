@@ -25,7 +25,6 @@ type RelayProps = {|
   opinion: OpinionVersionCreateForm_opinion,
 |};
 type Props = {|
-  opinion: OpinionVersionCreateForm_opinion,
   ...RelayProps,
   initialValues: FormValues,
 |};

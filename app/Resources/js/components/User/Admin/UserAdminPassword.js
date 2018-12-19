@@ -12,7 +12,6 @@ import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePassw
 
 type RelayProps = {| user: UserAdminPassword_user |};
 type Props = {|
-  user: UserAdminPassword_user,
   ...FormProps,
   ...RelayProps,
   intl: IntlShape,

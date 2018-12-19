@@ -17,8 +17,6 @@ type RelayProps = {|
 |};
 type FormValues = Object;
 type Props = {|
-  consultation: OpinionCreateForm_consultation,
-  section: OpinionCreateForm_section,
   ...FormProps,
   ...RelayProps,
 |};

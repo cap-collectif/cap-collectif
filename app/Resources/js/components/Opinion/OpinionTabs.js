@@ -18,7 +18,6 @@ type RelayProps = {|
   opinion: OpinionTabs_opinion,
 |};
 type Props = {|
-  opinion: OpinionTabs_opinion,
   ...RelayProps,
   isAuthenticated: boolean,
 |};

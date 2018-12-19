@@ -52,7 +52,6 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
 };
 
 type Props = {|
-  opinion: OpinionEditForm_opinion,
   ...RelayProps,
   handleSubmit: Function,
   initialValues: Object,

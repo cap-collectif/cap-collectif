@@ -13,12 +13,12 @@ import type { ProposalAdminEvaluersForm_proposal } from './__generated__/Proposa
 import type { Dispatch, State } from '../../../types';
 
 type FormValues = {| evaluers: Array<{ value: string }> |};
-type RelayProps = {| proposal: ProposalAdminEvaluersForm_proposal, intl: IntlShape |};
+type RelayProps = {| proposal: ProposalAdminEvaluersForm_proposal |};
 type Props = {|
-  proposal: ProposalAdminEvaluersForm_proposal,
   ...RelayProps,
   ...FormProps,
   ...FormValues,
+  intl: IntlShape,
 |};
 
 const formName = 'proposal-admin-evaluers';

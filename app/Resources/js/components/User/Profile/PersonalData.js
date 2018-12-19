@@ -31,11 +31,10 @@ import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import config from '../../../config';
 import UserArchiveRequestButton from './UserArchiveRequestButton';
 
-type RelayProps = {| personalDataForm: PersonalData_viewer |};
+type RelayProps = {| viewer: PersonalData_viewer |};
 type Props = {|
   ...FormProps,
   ...RelayProps,
-  viewer: PersonalData_viewer,
   intl: IntlShape,
   initialValues: Object,
   currentValues: Object,

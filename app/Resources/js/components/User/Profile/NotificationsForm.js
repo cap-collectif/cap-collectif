@@ -19,7 +19,6 @@ type RelayProps = {|
 |};
 type FormValues = Object;
 type Props = {
-  viewer: NotificationsForm_viewer,
   ...RelayProps,
   invalid: boolean,
   pristine: boolean,

@@ -30,7 +30,6 @@ type FormValue = {
   dateOfBirth: string,
 };
 type Props = {|
-  user: UserAdminPersonalData_user,
   ...FormProps,
   ...RelayProps,
   intl: IntlShape,

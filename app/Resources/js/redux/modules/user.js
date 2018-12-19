@@ -68,7 +68,7 @@ type UpdateRegistrationFieldAction = {
   id: number,
   element: Object,
 };
-export type CloseRegistrationModalAction = {| type: 'CLOSE_REGISTRATION_MODAL' |};
+type CloseRegistrationModalAction = {| type: 'CLOSE_REGISTRATION_MODAL' |};
 type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
 type CloseLoginModalAction = { type: 'CLOSE_LOGIN_MODAL' };
 type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };

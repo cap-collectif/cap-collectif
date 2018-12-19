@@ -13,7 +13,6 @@ type RelayProps = {|
 |};
 
 type Props = {|
-  group: UserInGroupModal_group,
   ...RelayProps,
   show: boolean,
   handleClose: () => void,

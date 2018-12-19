@@ -20,19 +20,18 @@ import type { CommentForm_commentable } from './__generated__/CommentForm_commen
 type RelayProps = {| commentable: CommentForm_commentable |};
 
 type OwnProps = {|
-  ...RelayProps,
   isAnswer: boolean,
 |};
 
 type StateProps = {|
-  ...OwnProps,
   form: string,
   comment: ?string,
   user: ?Object,
 |};
 
 type Props = {|
-  commentable: CommentForm_commentable,
+  ...OwnProps,
+  ...RelayProps,
   ...StateProps,
   ...FormProps,
   intl: IntlShape,
@@ -253,7 +252,7 @@ export class CommentForm extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState, props: OwnProps) => ({
+const mapStateToProps = (state: GlobalState, props) => ({
   comment: formValueSelector(formName + props.commentable.id)(state, 'body'),
   user: state.user.user,
   form: formName + props.commentable.id,
@@ -261,7 +260,7 @@ const mapStateToProps = (state: GlobalState, props: OwnProps) => ({
 
 const container = injectIntl(CommentForm);
 
-const form = connect<StateProps, GlobalState, _>(mapStateToProps)(
+const form = connect<Props, GlobalState, _>(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,

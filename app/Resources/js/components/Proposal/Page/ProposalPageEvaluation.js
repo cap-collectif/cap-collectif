@@ -22,7 +22,6 @@ type RelayProps = {|
   proposal: ProposalPageEvaluation_proposal,
 |};
 type Props = {|
-  proposal: ProposalPageEvaluation_proposal,
   ...FormProps,
   ...FormValues,
   ...RelayProps,

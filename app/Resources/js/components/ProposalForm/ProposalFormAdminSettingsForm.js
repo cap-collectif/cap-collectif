@@ -18,7 +18,6 @@ type RelayProps = {|
 |};
 
 type Props = {|
-  proposalForm: ProposalFormAdminSettingsForm_proposalForm,
   intl: IntlShape,
   ...RelayProps,
   ...FormProps,

@@ -15,10 +15,10 @@ import type { OpinionSourceFormModal_source } from './__generated__/OpinionSourc
 import type { OpinionSourceFormModal_sourceable } from './__generated__/OpinionSourceFormModal_sourceable.graphql';
 
 type RelayProps = {|
-  source?: OpinionSourceFormModal_source,
+  source: ?OpinionSourceFormModal_source,
 |};
+
 type Props = {|
-  source: OpinionSourceFormModal_source,
   ...RelayProps,
   show: boolean,
   sourceable: OpinionSourceFormModal_sourceable,

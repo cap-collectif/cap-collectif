@@ -31,11 +31,9 @@ type RelayProps = {|
   votes: ProposalsUserVotesTable_votes,
 |};
 type Props = {|
-  step: ProposalsUserVotesTable_step,
-  votes: ProposalsUserVotesTable_votes,
   ...FormProps,
   ...RelayProps,
-  onSubmit: Function,
+  onSubmit: () => void,
   deletable: boolean,
   snapshot: DraggableStateSnapshot,
   intl: IntlShape,

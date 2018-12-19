@@ -15,7 +15,6 @@ import Loader from '../Ui/FeedbacksIndicators/Loader';
 
 type RelayProps = {| proposalForm: ProposalFormAdminEvaluationForm_proposalForm |};
 type Props = {|
-  proposalForm: ProposalFormAdminEvaluationForm_proposalForm,
   ...FormProps,
   ...RelayProps,
   intl: IntlShape,

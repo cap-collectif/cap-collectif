@@ -12,7 +12,6 @@ type OwnProps = {|
 |};
 
 type Props = {|
-  argument: ArgumentReportButton_argument,
   ...OwnProps,
   dispatch: Dispatch,
 |};

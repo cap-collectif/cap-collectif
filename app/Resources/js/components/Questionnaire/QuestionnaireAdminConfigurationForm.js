@@ -15,7 +15,6 @@ import type { State, FeatureToggles } from '../../types';
 
 type RelayProps = {| questionnaire: QuestionnaireAdminConfigurationForm_questionnaire |};
 type Props = {|
-  questionnaire: QuestionnaireAdminConfigurationForm_questionnaire,
   ...RelayProps,
   ...FormProps,
   intl: IntlShape,

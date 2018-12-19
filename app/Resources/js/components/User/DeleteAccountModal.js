@@ -15,7 +15,6 @@ type RelayProps = {|
 |};
 
 type Props = {|
-  viewer: DeleteAccountModal_viewer,
   ...RelayProps,
   show: boolean,
   handleClose: () => void,

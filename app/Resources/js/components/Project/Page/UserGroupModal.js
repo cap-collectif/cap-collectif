@@ -15,7 +15,6 @@ type RelayProps = {|
 |};
 
 type Props = {|
-  project: UserGroupModal_project,
   ...RelayProps,
   show: boolean,
   handleClose: () => void,

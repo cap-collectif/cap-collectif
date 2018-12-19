@@ -22,7 +22,6 @@ type FormValues = {
 };
 
 type Props = {|
-  proposal: ProposalFusionEditForm_proposal,
   ...RelayProps,
   // eslint-disable-next-line react/no-unused-prop-types
   onClose: () => void,

@@ -14,7 +14,6 @@ type RelayProps = {|
   step: ProposalsUserVotesStep_step,
 |};
 type Props = {|
-  step: ProposalsUserVotesStep_step,
   ...RelayProps,
   dispatch: Function,
   dirty: boolean,

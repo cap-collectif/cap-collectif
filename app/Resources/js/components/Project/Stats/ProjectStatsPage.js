@@ -6,15 +6,17 @@ import { Nav, NavItem } from 'react-bootstrap';
 import ProjectStatsList from './ProjectStatsList';
 import type { GlobalState } from '../../../types';
 
-type OwnProps = {
+type OwnProps = {|
   steps: Array<Object>,
-};
+  projectId: string,
+|};
 
-type Props = OwnProps & {
+type Props = {|
+  ...OwnProps,
   themes: Array<Object>,
   districts: Array<Object>,
   categories: Array<Object>,
-};
+|};
 
 type State = { selectedStepIndex: number };
 

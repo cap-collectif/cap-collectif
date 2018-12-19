@@ -36,7 +36,6 @@ type FormValues = {
 };
 
 type Props = {|
-  user: UserAdminProfile_user,
   ...FormProps,
   ...RelayProps,
   intl: IntlShape,

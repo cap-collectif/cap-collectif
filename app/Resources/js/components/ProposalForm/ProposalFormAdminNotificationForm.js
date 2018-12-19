@@ -16,7 +16,6 @@ type RelayProps = {|
   proposalForm: ProposalFormAdminNotificationForm_proposalForm,
 |};
 type Props = {|
-  proposalForm: ProposalFormAdminNotificationForm_proposalForm,
   ...RelayProps,
   intl: IntlShape,
   handleSubmit: () => void,

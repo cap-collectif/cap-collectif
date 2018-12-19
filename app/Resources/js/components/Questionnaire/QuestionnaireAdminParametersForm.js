@@ -15,7 +15,6 @@ type RelayProps = {|
   questionnaire: QuestionnaireAdminParametersForm_questionnaire,
 |};
 type Props = {|
-  questionnaire: QuestionnaireAdminParametersForm_questionnaire,
   ...RelayProps,
   ...FormProps,
 |};

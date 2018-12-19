@@ -19,7 +19,6 @@ import type { Dispatch, State } from '../../../types';
 type DefaultProps = void;
 type RelayProps = {| proposal: ProposalAdminStatusForm_proposal |};
 type Props = {|
-  proposal: ProposalAdminStatusForm_proposal,
   ...RelayProps,
   publicationStatus: string,
   isSuperAdmin: boolean,

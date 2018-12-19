@@ -33,8 +33,6 @@ type RelayProps = {|
   sourceable: OpinionSourceForm_sourceable,
 |};
 type Props = {|
-  sourceable: OpinionSourceForm_sourceable,
-  source: OpinionSourceForm_source,
   ...FormProps,
   ...RelayProps,
   user: { isEmailConfirmed: boolean },

@@ -19,7 +19,6 @@ import type { State, FeatureToggles } from '../../types';
 
 type RelayProps = {| proposalForm: ProposalFormAdminConfigurationForm_proposalForm |};
 type Props = {|
-  proposalForm: ProposalFormAdminConfigurationForm_proposalForm,
   ...RelayProps,
   ...FormProps,
   intl: IntlShape,

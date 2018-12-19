@@ -51,7 +51,6 @@ type RelayProps = {|
 |};
 
 type Props = {|
-  proposal: ProposalAdminContentForm_proposal,
   ...FormProps,
   ...RelayProps,
   +themes: Array<{ id: Uuid, title: string }>,

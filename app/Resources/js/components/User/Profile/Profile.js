@@ -12,11 +12,10 @@ import AlertForm from '../../Alert/AlertForm';
 import UserAvatar from '../UserAvatar';
 import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
 
-type RelayProps = {| profileForm: Profile_viewer |};
+type RelayProps = {| viewer: Profile_viewer |};
 type Props = {|
   ...FormProps,
   ...RelayProps,
-  viewer: Profile_viewer,
   intl: IntlShape,
   initialValues: Object,
   hasValue: Object,
