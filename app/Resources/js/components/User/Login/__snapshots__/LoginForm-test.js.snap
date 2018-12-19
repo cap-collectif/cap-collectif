@@ -5,11 +5,12 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
   className="form_no-bold-label"
 >
   <Field
+    ariaRequired={true}
     autoComplete="email"
     autoFocus={true}
     component={[Function]}
     disableValidation={true}
-    id="username"
+    id="email"
     label={
       <FormattedMessage
         id="global.email"
@@ -17,10 +18,11 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
       />
     }
     labelClassName="font-weight-normal"
-    name="username"
+    name="email"
     type="email"
   />
   <Field
+    ariaRequired={true}
     autoComplete="current-password"
     autoFocus={true}
     component={[Function]}

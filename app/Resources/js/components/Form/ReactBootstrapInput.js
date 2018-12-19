@@ -64,6 +64,7 @@ type Props = {
   children?: any,
   help?: string | any,
   helpPrint: boolean,
+  ariaRequired?: boolean,
   description?: string | any,
   backgroundColor?: ?string,
   bsSize?: string,
@@ -137,6 +138,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     image,
     medias,
     intl,
+    ariaRequired,
     isOtherAllowed,
     radioChecked,
     ...props
@@ -207,6 +209,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         }}
         aria-describedby={ariaDescribedBy}
         aria-invalid={ariaInvalid}
+        aria-required={ariaRequired}
         type={props.componentClass ? undefined : type !== 'number' ? type : 'text'}
         value={value}
         {...props}>
@@ -221,6 +224,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           {...props}
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
+          aria-required={ariaRequired}
         />
       );
     }
@@ -240,6 +244,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             field={field}
             aria-describedby={ariaDescribedBy}
             aria-invalid={ariaInvalid}
+            aria-required={ariaRequired}
             label={null}
             renderFormErrors={() => {}}
             getGroupStyle={() => {}}
@@ -268,6 +273,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           {...props}
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
+          aria-required={ariaRequired}
         />
       );
     }
@@ -280,6 +286,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           checked={radioChecked}
           isOtherAllowed={isOtherAllowed}
           aria-invalid={ariaInvalid}
+          aria-required={ariaRequired}
           aria-describedby={`${props.id ? props.id : ''}-error`}>
           {children}
         </Radio>
@@ -335,6 +342,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           {...props}
           aria-describedby={ariaDescribedBy}
           aria-invalid={ariaInvalid}
+          aria-required={ariaRequired}
         />
       );
     }
@@ -348,6 +356,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             {...props}
             aria-describedby={ariaDescribedBy}
             aria-invalid={ariaInvalid}
+            aria-required={ariaRequired}
           />
           <Notepad />
         </React.Fragment>
