@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Loader /> renders Loader 1`] = `
-<Loader__Container>
+<Loader__Container
+  inline={false}
+>
   <__styled-spinkit__Circle
     color="#333"
     size={40}

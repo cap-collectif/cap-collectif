@@ -22,7 +22,12 @@ class MapboxStyle implements MapTokenStyleInterface
 
         $instance
             ->setCreatedAt(new \DateTime($response['created']))
-            ->setUpdatedAt(new \DateTime($response['modified']))
+            ->setUpdatedAt(
+                $response['modified'] !== $response['created']
+                    ? new \DateTime($response['modified'])
+                    : null
+            )
+            ->setVersion((int) $response['version'])
             ->setPublicToken($publicToken)
             ->setVersion((int)$response['version'])
             ->setName($response['name'])
@@ -94,7 +99,7 @@ class MapboxStyle implements MapTokenStyleInterface
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

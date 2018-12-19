@@ -1,7 +1,47 @@
 // @flow
 import * as React from 'react';
 import { ListGroupItem } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
+import styled from 'styled-components';
+import classNames from 'classnames';
+import moment from 'moment';
 import ChangeMapStyleMutation from '../../../mutations/ChangeMapStyleMutation';
+
+const ListGroupItemInner = styled.div`
+  display: flex;
+  & .map__check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    margin: auto 1.5rem auto 0;
+    border: 1px solid #e3e3e3;
+    background: transparent;
+    & i {
+      color: white;
+      margin-left: 4px;
+      display: none;
+    }
+    &.checked {
+      background: #0d6aad;
+      & i {
+        display: block;
+      }
+    }
+  }
+  & .map__preview {
+    width: 64px;
+    height: 64px;
+    border-radius: 4px;
+    margin-right: 1.5rem;
+  }
+  & .map__title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+`;
 
 type Props = {
   +mapTokenId: string,
@@ -31,9 +71,22 @@ const MapAdminStyleListItem = (props: Props) => {
   };
 
   return (
-    <ListGroupItem active={style.isCurrent} onClick={handleItemClick}>
-      <img src={style.previewUrl} alt={`${style.name} preview`} />
-      <p>{style.name}</p>
+    <ListGroupItem onClick={handleItemClick}>
+      <ListGroupItemInner>
+        <div className={classNames('map__check', { checked: style.isCurrent })}>
+          <i className="cap cap-check-4" />
+        </div>
+        <img src={style.previewUrl} alt={`${style.name} preview`} className="map__preview" />
+        <div className="map__infos">
+          <p className="map__title">{style.name}</p>
+          <p className="help-block sonata-ba-field-help">
+            <FormattedMessage
+              id={style.updatedAt ? 'map-settings-style-updated' : 'map-settings-style-created'}
+            />{' '}
+            {moment(style.updatedAt ? style.updatedAt : style.createdAt).fromNow()}
+          </p>
+        </div>
+      </ListGroupItemInner>
     </ListGroupItem>
   );
 };

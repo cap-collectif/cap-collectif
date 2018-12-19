@@ -5,14 +5,20 @@ import { Circle } from 'styled-spinkit';
 
 type Props = {
   show: boolean,
+  inline: boolean,
+  size: number,
+  color: string,
   children?: ?React.Node,
 };
 
 export const Container = styled.div`
   text-align: center;
-  display: flex;
-  padding-top: 50px;
-  padding-bottom: 30px;
+  display: ${props => (props.inline ? 'inline-flex' : 'flex')};
+  ${props =>
+    !props.inline
+      ? `padding-top: 50px
+     padding-bottom: 30px`
+      : ''};
   width: 100%;
 
   div {
@@ -23,14 +29,17 @@ export const Container = styled.div`
 export class Loader extends React.Component<Props> {
   static defaultProps = {
     show: true,
+    inline: false,
+    size: 40,
+    color: '#333',
   };
 
   render() {
-    const { children, show } = this.props;
+    const { children, show, inline, size, color } = this.props;
     if (show) {
       return (
-        <Container>
-          <Circle />
+        <Container inline={inline}>
+          <Circle size={size} color={color} />
         </Container>
       );
     }
