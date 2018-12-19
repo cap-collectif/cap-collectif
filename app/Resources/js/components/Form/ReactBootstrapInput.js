@@ -146,6 +146,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     const ariaDescribedBy = `${props.id ? props.id : ''}-error`;
+    const ariaInvalid = !!errors;
 
     if (type === 'editor') {
       return (
@@ -205,6 +206,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           this.refFormControl = c;
         }}
         aria-describedby={ariaDescribedBy}
+        aria-invalid={ariaInvalid}
         type={props.componentClass ? undefined : type !== 'number' ? type : 'text'}
         value={value}
         {...props}>
@@ -213,7 +215,14 @@ class ReactBootstrapInput extends React.Component<Props> {
     );
 
     if (type === 'datetime') {
-      formControl = <DateTime value={value} {...props} aria-describedby={ariaDescribedBy} />;
+      formControl = (
+        <DateTime
+          value={value}
+          {...props}
+          aria-describedby={ariaDescribedBy}
+          aria-invalid={ariaInvalid}
+        />
+      );
     }
 
     if (type === 'checkbox') {
@@ -230,6 +239,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             value={value}
             field={field}
             aria-describedby={ariaDescribedBy}
+            aria-invalid={ariaInvalid}
             label={null}
             renderFormErrors={() => {}}
             getGroupStyle={() => {}}
@@ -252,7 +262,13 @@ class ReactBootstrapInput extends React.Component<Props> {
       field.choices = props.choices;
 
       return (
-        <RadioButtons value={value} field={field} {...props} aria-describedby={ariaDescribedBy} />
+        <RadioButtons
+          value={value}
+          field={field}
+          {...props}
+          aria-describedby={ariaDescribedBy}
+          aria-invalid={ariaInvalid}
+        />
       );
     }
 
@@ -263,6 +279,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           {...props}
           checked={radioChecked}
           isOtherAllowed={isOtherAllowed}
+          aria-invalid={ariaInvalid}
           aria-describedby={`${props.id ? props.id : ''}-error`}>
           {children}
         </Radio>
@@ -301,7 +318,6 @@ class ReactBootstrapInput extends React.Component<Props> {
         <Ranking
           formName={formName}
           field={field}
-          aria-describedby={ariaDescribedBy}
           label={null}
           renderFormErrors={() => {}}
           getGroupStyle={() => {}}
@@ -313,7 +329,14 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'email') {
-      formControl = <EmailInput value={value} {...props} aria-describedby={ariaDescribedBy} />;
+      formControl = (
+        <EmailInput
+          value={value}
+          {...props}
+          aria-describedby={ariaDescribedBy}
+          aria-invalid={ariaInvalid}
+        />
+      );
     }
 
     if (type === 'textarea') {
@@ -324,6 +347,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             value={value}
             {...props}
             aria-describedby={ariaDescribedBy}
+            aria-invalid={ariaInvalid}
           />
           <Notepad />
         </React.Fragment>
