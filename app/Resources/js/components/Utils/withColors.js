@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import type { GlobalState } from '../../types';
 
 type Props = {
@@ -16,7 +16,7 @@ const withColors = (Component: React.ComponentType<any>) => {
     }
   }
 
-  const mapStateToProps = (state: GlobalState) => ({
+  const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
     backgroundColor: state.default.parameters['color.btn.primary.bg'],
     labelColor: state.default.parameters['color.btn.primary.text'],
   });

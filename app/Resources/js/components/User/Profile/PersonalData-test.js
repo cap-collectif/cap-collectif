@@ -125,10 +125,7 @@ describe('<PersonalData />', () => {
   };
 
   it('should render with full user', () => {
-    const wrapper = shallow(
-      // $FlowFixMe
-      <PersonalData {...props1} viewer={viewer1} />,
-    );
+    const wrapper = shallow(<PersonalData {...props1} viewer={viewer1} />);
     wrapper.setState({
       showDeleteModal: false,
     });
@@ -136,10 +133,7 @@ describe('<PersonalData />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should render user withou address', () => {
-    const wrapper = shallow(
-      // $FlowFixMe
-      <PersonalData {...props2} viewer={viewer2} />,
-    );
+    const wrapper = shallow(<PersonalData {...props2} viewer={viewer2} />);
     wrapper.setState({
       showDeleteModal: false,
     });
@@ -147,10 +141,7 @@ describe('<PersonalData />', () => {
     expect(wrapper).toMatchSnapshot();
   });
   it('should render user without lastname, dateOfBirth, gender but with address', () => {
-    const wrapper = shallow(
-      // $FlowFixMe
-      <PersonalData {...props3} viewer={viewer3} />,
-    );
+    const wrapper = shallow(<PersonalData {...props3} viewer={viewer3} />);
     wrapper.setState({
       showDeleteModal: false,
     });

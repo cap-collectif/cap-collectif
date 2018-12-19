@@ -5,7 +5,7 @@ import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay
 import { ConnectionHandler } from 'relay-runtime';
 import { Modal, Panel, Label } from 'react-bootstrap';
 import { submit, isInvalid } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { closeVoteModal, vote } from '../../../redux/modules/proposal';
@@ -236,7 +236,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => ({
   showModal: !!(
     state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id
   ),

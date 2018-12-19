@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import {
   type FormProps,
   SubmissionError,
@@ -30,14 +30,9 @@ import type { Dispatch, State } from '../../../types';
 
 export type ResponsesValues = Array<Object>;
 type FormValues = { responses: ResponsesValues } & Object;
-type MinimalRelayProps = {| proposal: ProposalPageEvaluation_proposal |};
-type RelayProps = {| proposal: ProposalAdminNotationForm_proposal |};
-type Props = {|
-  ...RelayProps,
-  ...FormProps,
-  ...FormValues,
-  intl: IntlShape,
-|};
+type MinimalRelayProps = { proposal: ProposalPageEvaluation_proposal };
+type RelayProps = { proposal: ProposalAdminNotationForm_proposal };
+type Props = RelayProps & FormProps & FormValues & { intl: IntlShape };
 
 const formName = 'proposal-admin-evaluation';
 
@@ -305,7 +300,7 @@ export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) =>
         props.proposal.evaluation ? props.proposal.evaluation.responses : [],
       );
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     estimation: props.proposal.estimation,

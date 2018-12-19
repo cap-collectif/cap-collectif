@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { reduxForm, type FormProps } from 'redux-form';
 import { Modal, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import CreateProjectDistrictMutation from '../../mutations/CreateProjectDistrictMutation';
 import UpdateProjectDistrictMutation from '../../mutations/UpdateProjectDistrictMutation';
@@ -156,7 +156,7 @@ const form = reduxForm({
   form: 'projectDistrictForm',
 })(ProjectDistrictForm);
 
-const mapStateToProps = (state: GlobalState, props: Props) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => {
   if (!props.district) {
     return {};
   }

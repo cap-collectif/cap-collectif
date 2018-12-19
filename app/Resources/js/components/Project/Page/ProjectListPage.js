@@ -13,10 +13,8 @@ export default class ProjectListPage extends React.Component<Props> {
     const { limit } = this.props;
     return (
       <div>
-        {/* $FlowFixMe please use mapDispatchToProps */}
         <ProjectListFilter />
         <Row>
-          {/* $FlowFixMe defaultProps not working */}
           <ProjectList limit={limit} />
         </Row>
       </div>

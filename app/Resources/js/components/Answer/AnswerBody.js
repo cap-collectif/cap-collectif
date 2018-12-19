@@ -20,7 +20,6 @@ export class AnswerBody extends React.Component<Props> {
       <div>
         {author ? (
           <div className="media media--user-thumbnail" style={{ marginBottom: '10px' }}>
-            {/* $FlowFixMe Will be a fragment soon */}
             <UserAvatar className="pull-left" user={author} style={{ paddingRight: '10px' }} />
             <div className="media-body">
               <p className="media-heading media--macro__user" style={{ marginBottom: '0' }}>

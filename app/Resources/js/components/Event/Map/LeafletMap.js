@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet-universal';
-import { Provider, connect } from 'react-redux';
+import { Provider, connect, type MapStateToProps } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
@@ -156,7 +156,7 @@ export class LeafletMap extends Component<Props> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   eventSelected: state.event.eventSelected,
 });
 

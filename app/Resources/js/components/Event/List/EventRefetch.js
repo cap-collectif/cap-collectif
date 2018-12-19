@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
-import { connect } from 'react-redux';
+import { type MapStateToProps, connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import EventListPaginated from './EventListPaginated';
@@ -69,7 +69,7 @@ export class EventRefetch extends React.Component<Props, State> {
 
 const selector = formValueSelector('EventListFilters');
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   theme: selector(state, 'theme'),
   project: selector(state, 'project'),
   search: selector(state, 'search'),

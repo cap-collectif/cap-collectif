@@ -67,7 +67,6 @@ const QuestionAdminFragment = graphql`
       destination {
         id
         title
-        number
       }
       conditions {
         id
@@ -127,7 +126,6 @@ const QuestionFragment = graphql`
       destination {
         id
         title
-        number
       }
       conditions {
         id
@@ -186,7 +184,6 @@ type Question = {|
     +destination: {|
       +id: string,
       +title: string,
-      +number: number,
     |},
     +conditions: ?$ReadOnlyArray<?{|
       +id: ?string,
@@ -417,7 +414,6 @@ export const getAvailableQuestionsIds = (
   // If no jump in questionnaire every question is available
   const hasLogicJumps = questionsHaveLogicJump(questions);
   if (!hasLogicJumps) {
-    // $FlowFixMe
     return questions.map(q => q.id);
   }
 
@@ -551,7 +547,6 @@ export const formatInitialResponsesValues = (
   });
 
 const formattedChoicesInField = field =>
-  field.choices &&
   field.choices.map(choice => ({
     id: choice.id,
     label: choice.title,
@@ -696,15 +691,14 @@ export const renderResponses = ({
   form,
   change,
   disabled,
-}: {|
-  ...FieldArrayProps,
+}: FieldArrayProps & {
   questions: Questions,
   responses: ?ResponsesInReduxForm,
   change: (field: string, value: any) => void,
   form: string,
   intl: IntlShape,
   disabled: boolean,
-|}) => {
+}) => {
   const strategy = getRequiredFieldIndicationStrategy(questions);
   const availableQuestions = getAvailableQuestionsIds(questions, responses);
 
@@ -767,7 +761,6 @@ export const renderResponses = ({
                     label={label}
                     disabled={disabled}
                   />
-                  {/* $FlowFixMe please fix this */}
                   <ConditionalJumps jumps={field.jumps} />
                 </PrivateBox>
               </div>
@@ -794,22 +787,19 @@ export const renderResponses = ({
                     <option value="" disabled>
                       {intl.formatMessage({ id: 'global.select' })}
                     </option>
-                    {field.choices &&
-                      field.choices.map(choice => (
-                        <option key={choice.id} value={choice.title}>
-                          {choice.title}
-                        </option>
-                      ))}
+                    {field.choices.map(choice => (
+                      <option key={choice.id} value={choice.title}>
+                        {choice.title}
+                      </option>
+                    ))}
                   </Field>
                   <div className="visible-print-block form-fields">
-                    {field.choices &&
-                      field.choices.map(choice => (
-                        <div key={choice.id} className="radio">
-                          {choice.title}
-                        </div>
-                      ))}
+                    {field.choices.map(choice => (
+                      <div key={choice.id} className="radio">
+                        {choice.title}
+                      </div>
+                    ))}
                   </div>
-                  {/* $FlowFixMe please fix this */}
                   <ConditionalJumps jumps={field.jumps} />
                 </PrivateBox>
               </div>
@@ -849,7 +839,6 @@ export const renderResponses = ({
                           disabled={disabled}
                         />
                       </div>
-                      {/* $FlowFixMe please fix this */}
                       <ConditionalJumps jumps={field.jumps} />
                     </PrivateBox>
                   </div>

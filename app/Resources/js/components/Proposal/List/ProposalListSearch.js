@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { changeTerm } from '../../../redux/modules/proposal';
 import Input from '../../Form/Input';
@@ -66,7 +66,7 @@ class ProposalListSearch extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   terms: state.proposal.terms ? state.proposal.terms : '',
 });
 

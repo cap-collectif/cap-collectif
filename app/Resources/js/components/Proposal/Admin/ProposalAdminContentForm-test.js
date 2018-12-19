@@ -4,7 +4,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminContentForm } from './ProposalAdminContentForm';
 import { features } from '../../../redux/modules/default';
-import { $refType, $fragmentRefs, intlMock, formMock } from '../../../mocks';
+import { intlMock, formMock } from '../../../mocks';
 
 describe('<ProposalAdminContentForm />', () => {
   const props = {
@@ -14,12 +14,10 @@ describe('<ProposalAdminContentForm />', () => {
     intl: intlMock,
     isSuperAdmin: true,
     themes: [{ id: 'theme-1', title: 'Theme 1' }, { id: 'theme-2', title: 'Theme 2' }],
+    // $FlowFixMe $refType
     proposal: {
-      $refType,
-      $fragmentRefs,
       id: '1',
       title: 'title-1',
-      formattedAddress: null,
       summary: 'summary',
       body: 'body',
       publicationStatus: 'DRAFT',

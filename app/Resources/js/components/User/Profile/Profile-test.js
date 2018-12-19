@@ -86,7 +86,6 @@ describe('<Profile />', () => {
 
   it('should render my profile with features user_type', () => {
     const wrapper = shallow(
-      // $FlowFixMe
       <Profile viewer={viewer} userTypes={[{ id: 1, name: 'type_1' }]} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
@@ -94,7 +93,6 @@ describe('<Profile />', () => {
 
   it('should render my profile without features user_type', () => {
     const wrapper = shallow(
-      // $FlowFixMe
       <Profile viewer={viewer} userTypes={[{ id: 1, name: 'type_1' }]} {...props2} />,
     );
     expect(wrapper).toMatchSnapshot();

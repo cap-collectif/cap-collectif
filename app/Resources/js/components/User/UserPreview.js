@@ -26,7 +26,6 @@ export class UserPreview extends React.Component<Props> {
       <CardContainer className={classNames(classes)}>
         <CardUser>
           <div className="card__user__avatar">
-            {/* $FlowFixMe */}
             <UserAvatar user={user} />
           </div>
           <div className="ellipsis">

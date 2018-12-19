@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
 import ProposalListSearch from './ProposalListSearch';
 import Input from '../../Form/Input';
@@ -19,7 +19,7 @@ type Props = {
   orderByVotes?: boolean,
   orderByComments?: boolean,
   orderByCost?: boolean,
-  defaultSort?: ?string,
+  defaultSort?: string,
   features: FeatureToggles,
   showThemes: boolean,
   filters: Object,
@@ -93,11 +93,9 @@ export class ProposalListFilters extends React.Component<Props, State> {
             />
           </Col>
           <Col xs={12} sm={6} md={4} lg={3}>
-            {/* $FlowFixMe please use mapDispatchToProps */}
             <ProposalListSearch />
           </Col>
           <Col xs={12} sm={6} md={4} lg={3}>
-            {/* $FlowFixMe please use mapDispatchToProps */}
             <ProposalListOrderSorting
               orderByCost={orderByCost}
               orderByComments={orderByComments}
@@ -116,7 +114,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
                 }}
                 value={filters[filterName]}>
                 <FormattedMessage id={`global.select_${filterName}`}>
-                  {(message: string) => <option value="0">{message}</option>}
+                  {message => <option value="0">{message}</option>}
                 </FormattedMessage>
                 {this.props[filterName].map(choice => (
                   <option key={choice.id} value={choice.id}>
@@ -132,7 +130,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   features: state.default.features,
   themes: state.default.themes,
   types: state.default.userTypes,

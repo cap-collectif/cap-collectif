@@ -2,41 +2,27 @@
 import * as React from 'react';
 import { Modal, Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm, { form } from './RegistrationForm';
 import LoginSocialButtons from '../Login/LoginSocialButtons';
 import { closeRegistrationModal, hideChartModal } from '../../../redux/modules/user';
-import type { State } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
-type OwnProps = {|
-  +chartBody?: ?string,
-|};
-
-type StateProps = {|
-  +show: boolean,
-  +textTop: ?string,
-  +textBottom: ?string,
-  +submitting: boolean,
-  +displayChartModal: boolean,
-|};
-
-type DispatchProps = {|
-  +onClose: typeof closeRegistrationModal,
-  +onSubmit: typeof submit,
-  +onCloseChart: typeof hideChartModal,
-|};
-
-type Props = {|
-  ...OwnProps,
-  ...StateProps,
-  ...DispatchProps,
-|};
-
-type Action = typeof closeRegistrationModal | typeof submit | typeof hideChartModal;
+type Props = {
+  show: boolean,
+  onClose: Function,
+  textTop?: string,
+  textBottom?: string,
+  submitting: boolean,
+  onSubmit: Function,
+  displayChartModal: boolean,
+  onCloseChart: Function,
+  chartBody: string,
+};
 
 export class RegistrationModal extends React.Component<Props> {
   form: ?React.Component<*>;
@@ -126,7 +112,7 @@ export class RegistrationModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   textTop: state.user.registration_form.topTextDisplayed
     ? state.user.registration_form.topText
     : null,
@@ -138,13 +124,19 @@ const mapStateToProps = state => ({
   submitting: isSubmitting(form)(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  onClose: () => dispatch(closeRegistrationModal()),
-  onSubmit: () => dispatch(submit(form)),
-  onCloseChart: () => dispatch(hideChartModal()),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onClose: () => {
+    dispatch(closeRegistrationModal());
+  },
+  onSubmit: () => {
+    dispatch(submit(form));
+  },
+  onCloseChart: () => {
+    dispatch(hideChartModal());
+  },
 });
 
-export default connect<Props, State, Action, _, _>(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(RegistrationModal);

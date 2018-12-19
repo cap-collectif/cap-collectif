@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import UnpublishedArgumentList from './UnpublishedArgumentList';
@@ -57,7 +57,7 @@ export class UnpublishedArgumentListRenderer extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   isAuthenticated: !!state.user.user,
 });
 const container = connect(mapStateToProps)(UnpublishedArgumentListRenderer);

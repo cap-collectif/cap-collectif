@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import type { State } from '../../types';
 
 type Props = {
@@ -54,7 +54,7 @@ class DeleteButton extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
 });
 

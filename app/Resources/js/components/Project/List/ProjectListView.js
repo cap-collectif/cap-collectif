@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
@@ -70,7 +70,7 @@ export class ProjectListView extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   theme: state.project.theme,
   orderBy: state.project.orderBy || 'LATEST',
   type: state.project.type,

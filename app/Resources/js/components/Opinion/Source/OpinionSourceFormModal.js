@@ -2,7 +2,7 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionSourceFormInfos from './OpinionSourceFormInfos';
 import OpinionSourceFormModalTitle from './OpinionSourceFormModalTitle';
@@ -14,17 +14,13 @@ import type { State } from '../../../types';
 import type { OpinionSourceFormModal_source } from './__generated__/OpinionSourceFormModal_source.graphql';
 import type { OpinionSourceFormModal_sourceable } from './__generated__/OpinionSourceFormModal_sourceable.graphql';
 
-type RelayProps = {|
-  source: ?OpinionSourceFormModal_source,
-|};
-
-type Props = {|
-  ...RelayProps,
+type Props = {
   show: boolean,
+  source?: OpinionSourceFormModal_source,
   sourceable: OpinionSourceFormModal_sourceable,
   submitting: boolean,
   dispatch: Function,
-|};
+};
 
 class OpinionSourceFormModal extends React.Component<Props> {
   render() {
@@ -74,7 +70,7 @@ class OpinionSourceFormModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
   show:
     (!props.source && state.opinion.showSourceCreateModal) ||
     (props.source && state.opinion.showSourceEditModal === props.source.id) ||

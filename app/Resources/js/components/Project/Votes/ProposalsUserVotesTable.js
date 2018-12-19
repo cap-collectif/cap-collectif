@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { reduxForm, FieldArray, arrayMove, type FieldArrayProps, type FormProps } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import {
   DragDropContext,
@@ -26,26 +26,24 @@ import type { ProposalsUserVotesTable_votes } from './__generated__/ProposalsUse
 import type { State } from '../../../types';
 import config from '../../../config';
 
-type RelayProps = {|
+type RelayProps = {
   step: ProposalsUserVotesTable_step,
   votes: ProposalsUserVotesTable_votes,
-|};
-type Props = {|
-  ...FormProps,
-  ...RelayProps,
-  onSubmit: () => void,
-  deletable: boolean,
-  snapshot: DraggableStateSnapshot,
-  intl: IntlShape,
-  disabledKeyboard?: Function,
-  activeKeyboard?: Function,
-|};
+};
+type Props = FormProps &
+  RelayProps & {
+    onSubmit: Function,
+    deletable: boolean,
+    snapshot: DraggableStateSnapshot,
+    intl: IntlShape,
+    disabledKeyboard?: Function,
+    activeKeyboard?: Function,
+  };
 
-type VotesProps = {|
-  ...FieldArrayProps,
-  ...RelayProps,
-  deletable: boolean,
-|};
+type VotesProps = FieldArrayProps &
+  RelayProps & {
+    deletable: boolean,
+  };
 
 const Wrapper = styled.div`
   #background-color: ${({ isDraggingOver }) => (isDraggingOver ? 'blue' : 'grey')};
@@ -81,7 +79,7 @@ const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => (
         key={index}
         member={member}
         isVoteVisibilityPublic={fields.get(index).public}
-        vote={votes.edges && votes.edges[index] && votes.edges[index].node}
+        vote={votes.edges && votes.edges[index].node}
         step={step}
         onDelete={deletable ? () => fields.remove(index) : null}
       />
@@ -290,7 +288,7 @@ const form = reduxForm({
   enableReinitialize: true,
 })(ProposalsUserVotesTable);
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   form: `proposal-user-vote-form-step-${props.step.id}`,
   initialValues: {
     votes:

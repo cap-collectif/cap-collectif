@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { type GlobalState } from '../../types';
 
 type stepStatus = 'open' | 'closed' | 'future';
@@ -297,7 +297,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState, props: Props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
   steps: state.project.projectsById[props.projectId].steps,
   currentStepId: state.project.currentProjectStepById,
 });

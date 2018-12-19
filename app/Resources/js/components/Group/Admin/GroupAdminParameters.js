@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -9,18 +9,17 @@ import type { GroupAdminParameters_group } from './__generated__/GroupAdminParam
 import AlertForm from '../../Alert/AlertForm';
 import DeleteGroupMutation from '../../../mutations/DeleteGroupMutation';
 import SubmitButton from '../../Form/SubmitButton';
-import type { Dispatch, GlobalState } from '../../../types';
+import type { Dispatch } from '../../../types';
 import UpdateGroupMutation from '../../../mutations/UpdateGroupMutation';
 import GroupForm from '../GroupForm';
 import DeleteModal from '../../Modal/DeleteModal';
 
 type State = { showDeleteModal: boolean };
-type RelayProps = {|
+type RelayProps = {
   group: GroupAdminParameters_group,
-|};
+};
 
-type Props = {|
-  ...RelayProps,
+type Props = RelayProps & {
   group: GroupAdminParameters_group,
   submitting: boolean,
   submit: Function,
@@ -29,7 +28,7 @@ type Props = {|
   valid: boolean,
   submitSucceeded: boolean,
   submitFailed: boolean,
-|};
+};
 
 type FormValues = Object;
 const formName = 'group-edit';
@@ -140,7 +139,7 @@ const form = reduxForm({
   form: formName,
 })(GroupAdminParameters);
 
-const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: {
     title: props.group.title,
     description: props.group.description,

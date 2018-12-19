@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import type { GlobalState, Dispatch } from '../../types';
 import { changeConsultationPlanActiveItems } from '../../redux/modules/project';
@@ -163,7 +163,7 @@ export class ConsultationPropositionBox extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState, props: Props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
   showConsultationPlan:
     props.step.id in state.project.showConsultationPlanById
       ? state.project.showConsultationPlanById[props.step.id]

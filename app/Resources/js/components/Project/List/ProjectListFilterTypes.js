@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormControl } from 'react-bootstrap';
 import { FormattedMessage, type IntlShape, injectIntl } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { changeType } from '../../../redux/modules/project';
 import type { GlobalState } from '../../../types';
 
@@ -31,7 +31,7 @@ class ProjectsListFilterTypes extends React.Component<Props> {
         </option>
         {projectTypes.map(projectType => (
           <FormattedMessage id={projectType.title} key={projectType.slug}>
-            {(message: string) => <option value={projectType.id}>{message}</option>}
+            {message => <option value={projectType.id}>{message}</option>}
           </FormattedMessage>
         ))}
       </FormControl>
@@ -39,7 +39,7 @@ class ProjectsListFilterTypes extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   type: state.project.type,
 });
 

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { formValueSelector, Field, FieldArray } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
@@ -94,7 +94,7 @@ export class QuestionJumpConditionsAdminForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: GlobalState, props: Props) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => {
   const selector = formValueSelector(props.formName);
   return {
     questions: selector(state, 'questions'),

@@ -1,19 +1,19 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import type { Dispatch, State } from '../../../types';
-import type { UserAdminPersonalData_user } from './__generated__/UserAdminPersonalData_user.graphql';
 import component from '../../Form/Field';
 import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
+import UserAdminPersonalData_user from './__generated__/UserAdminPersonalData_user.graphql';
 import DatesInterval from '../../Utils/DatesInterval';
 
-type RelayProps = {| user: UserAdminPersonalData_user |};
+type RelayProps = { user: UserAdminPersonalData_user };
 type GenderValue = 'FEMALE' | 'MALE' | 'OTHER';
 type FormValue = {
   address: string,
@@ -29,13 +29,12 @@ type FormValue = {
   gender: GenderValue,
   dateOfBirth: string,
 };
-type Props = {|
-  ...FormProps,
-  ...RelayProps,
-  intl: IntlShape,
-  initialValues: FormValue,
-  isViewerOrSuperAdmin: boolean,
-|};
+type Props = FormProps &
+  RelayProps & {
+    intl: IntlShape,
+    initialValues: FormValue,
+    isViewerOrSuperAdmin: boolean,
+  };
 
 const formName = 'user-admin-edit-personal-data';
 
@@ -284,7 +283,7 @@ const form = reduxForm({
   form: formName,
 })(UserAdminPersonalData);
 
-const mapStateToProps = (state: State, { user }: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { user }: RelayProps) => ({
   initialValues: {
     email: user.email ? user.email : null,
     firstname: user.firstname ? user.firstname : null,

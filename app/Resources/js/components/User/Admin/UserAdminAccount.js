@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { type FormProps, SubmissionError, reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -14,15 +14,14 @@ import DeleteAccountModal from '../DeleteAccountModal';
 import SelectUserRole from '../../Form/SelectUserRole';
 import DatesInterval from '../../Utils/DatesInterval';
 
-type RelayProps = {|
+type RelayProps = {
   user: UserAdminAccount_user,
-|};
-type Props = {|
-  ...FormProps,
-  ...RelayProps,
-  intl: IntlShape,
-  isViewerOrSuperAdmin: boolean,
-|};
+};
+type Props = FormProps &
+  RelayProps & {
+    intl: IntlShape,
+    isViewerOrSuperAdmin: boolean,
+  };
 
 const formName = 'user-admin-edit-account';
 type FormValues = {
@@ -203,7 +202,7 @@ const form = reduxForm({
   form: formName,
 })(UserAdminAccount);
 
-const mapStateToProps = (state: GlobalState, { user }: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, { user }: RelayProps) => ({
   initialValues: {
     vip: user.vip,
     enabled: user.enabled,

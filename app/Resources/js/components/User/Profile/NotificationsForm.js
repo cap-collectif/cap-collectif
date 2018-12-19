@@ -6,20 +6,19 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button, Table, Panel } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import component from '../../Form/Field';
 import { AlertForm } from '../../Alert/AlertForm';
 import ChangeUserNotificationsConfigurationMutation from '../../../mutations/ChangeUserNotificationsConfigurationMutation';
 import type { NotificationsForm_viewer } from './__generated__/NotificationsForm_viewer.graphql';
 import type { State } from '../../../types';
 
-type RelayProps = {|
+type RelayProps = {
   // eslint-disable-next-line react/no-unused-prop-types
   viewer: NotificationsForm_viewer,
-|};
+};
 type FormValues = Object;
-type Props = {
-  ...RelayProps,
+type Props = RelayProps & {
   invalid: boolean,
   pristine: boolean,
   submitting: boolean,
@@ -128,7 +127,7 @@ const form = reduxForm({
   enableReinitialize: true,
 })(NotificationsForm);
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: props.viewer.notificationsConfiguration,
 });
 

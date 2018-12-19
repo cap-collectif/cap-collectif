@@ -1,40 +1,24 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import type { Dispatch, GlobalState } from '../../types';
+import type { Dispatch, GlobalState, Uuid } from '../../types';
 import type { ConsultationPlanRecursiveItems_consultation } from './__generated__/ConsultationPlanRecursiveItems_consultation.graphql';
 import ConsultationPlanItems from './ConsultationPlanItems';
 import { closeConsultationPlan, openConsultationPlan } from '../../redux/modules/project';
 import config from '../../config';
 import StackedNav from '../Ui/Nav/StackedNav';
 
-type OwnProps = {|
-  stepId: string,
-|};
-
-type RelayProps = {|
+type Props = {
   consultation: ConsultationPlanRecursiveItems_consultation,
-|};
-
-type StateProps = {|
+  stepId: string,
+  closePlan: (stepId: Uuid) => void,
+  openPlan: (stepId: Uuid) => void,
   showConsultationPlan: boolean,
-|};
-
-type DispatchProps = {|
-  closePlan: typeof closeConsultationPlan,
-  openPlan: typeof openConsultationPlan,
-|};
-
-type Props = {|
-  ...OwnProps,
-  ...StateProps,
-  ...DispatchProps,
-  ...RelayProps,
   intl: IntlShape,
-|};
+};
 
 export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   componentDidMount() {
@@ -121,7 +105,7 @@ export class ConsultationPlanRecursiveItems extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: GlobalState, props: OwnProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
   showConsultationPlan:
     state.project && state.project.showConsultationPlanById
       ? props.stepId in state.project.showConsultationPlanById

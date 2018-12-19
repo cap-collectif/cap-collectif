@@ -4,7 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { isSubmitting, submit, change, isInvalid, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm, { formName } from '../Form/ProposalForm';
@@ -92,7 +92,7 @@ export class ProposalEditModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   show: state.proposal.showEditModal,
   submitting: isSubmitting(formName)(state),
   pristine: isPristine(formName)(state),

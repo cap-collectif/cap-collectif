@@ -33,12 +33,11 @@ const onSubmit = values => {
   });
 };
 
-type Props = {|
-  ...FormProps,
+type Props = FormProps & {
   submitting: boolean,
   handleSubmit: () => void,
   submit: Function,
-|};
+};
 
 type State = {
   showModal: boolean,

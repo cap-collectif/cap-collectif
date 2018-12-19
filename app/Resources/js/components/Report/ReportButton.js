@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 import { type State } from '../../types';
 
@@ -47,7 +47,7 @@ export class ReportButton extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
   reported: props.reported || state.report.elements.includes(props.id),
 });
 

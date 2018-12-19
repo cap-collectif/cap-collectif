@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -11,12 +11,11 @@ import UpdateProposalFormNotificationsConfigurationMutation from '../../mutation
 import type { ProposalFormAdminNotificationForm_proposalForm } from './__generated__/ProposalFormAdminNotificationForm_proposalForm.graphql';
 import type { State } from '../../types';
 
-type RelayProps = {|
+type RelayProps = {
   // eslint-disable-next-line react/no-unused-prop-types
   proposalForm: ProposalFormAdminNotificationForm_proposalForm,
-|};
-type Props = {|
-  ...RelayProps,
+};
+type Props = RelayProps & {
   intl: IntlShape,
   handleSubmit: () => void,
   invalid: boolean,
@@ -25,7 +24,7 @@ type Props = {|
   valid: boolean,
   submitSucceeded: boolean,
   submitFailed: boolean,
-|};
+};
 
 const formName = 'proposal-form-admin-notification';
 const validate = () => ({});
@@ -147,7 +146,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalFormAdminNotificationForm);
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: props.proposalForm.notificationsConfiguration,
 });
 

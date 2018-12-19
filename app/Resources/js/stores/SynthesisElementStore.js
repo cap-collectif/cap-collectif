@@ -1,4 +1,3 @@
-// @noflow
 import * as Actions from '../constants/SynthesisElementActionsConstants';
 import BaseStore from './BaseStore';
 import { DISMISS_MESSAGE } from '../constants/MessageConstants';
@@ -195,7 +194,7 @@ class SynthesisElementStore extends BaseStore {
         break;
       case DISMISS_MESSAGE:
         this._messages[action.type] = this._messages[action.type].filter(
-          (message: string) => message !== action.message,
+          message => message !== action.message,
         );
         this.emitChange();
         break;

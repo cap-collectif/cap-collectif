@@ -68,12 +68,12 @@ type UpdateRegistrationFieldAction = {
   id: number,
   element: Object,
 };
-type CloseRegistrationModalAction = {| type: 'CLOSE_REGISTRATION_MODAL' |};
+type CloseRegistrationModalAction = { type: 'CLOSE_REGISTRATION_MODAL' };
 type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
 type CloseLoginModalAction = { type: 'CLOSE_LOGIN_MODAL' };
 type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };
 type DisplayChartModalAction = { type: 'DISPLAY_CHART_MODAL' };
-type HideChartModalAction = {| type: 'HIDE_CHART_MODAL' |};
+type HideChartModalAction = { type: 'HIDE_CHART_MODAL' };
 type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };
 type StartSubmittingAccountFormAction = { type: 'SUBMIT_ACCOUNT_FORM' };
 type StopSubmittingAccountFormAction = { type: 'STOP_SUBMIT_ACCOUNT_FORM' };

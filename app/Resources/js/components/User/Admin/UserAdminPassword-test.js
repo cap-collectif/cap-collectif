@@ -6,7 +6,7 @@ import { intlMock, formMock } from '../../../mocks';
 import { UserAdminPassword } from './UserAdminPassword';
 
 describe('<UserAdminPassword/>', () => {
-  const props = {
+  const props1 = {
     ...formMock,
     intl: intlMock,
   };
@@ -20,17 +20,11 @@ describe('<UserAdminPassword/>', () => {
   };
 
   it('should render, with viewer as user', () => {
-    const wrapper = shallow(
-      // $FlowFixMe
-      <UserAdminPassword {...props} user={userIsViewer} />,
-    );
+    const wrapper = shallow(<UserAdminPassword {...props1} user={userIsViewer} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render, with viewer as other user', () => {
-    const wrapper = shallow(
-      // $FlowFixMe
-      <UserAdminPassword {...props} user={userIsNotViewer} />,
-    );
+    const wrapper = shallow(<UserAdminPassword {...props1} user={userIsNotViewer} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

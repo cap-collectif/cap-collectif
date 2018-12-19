@@ -78,14 +78,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     <Connect(InjectIntl(GroupAdminModalAddUsers))
       group={
         Object {
-          "$refType": null,
           "id": "group4",
           "title": "Comité de suvi",
           "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
-                  "$fragmentRefs": null,
                   "id": "id1",
                 },
               },
@@ -99,14 +97,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     <Connect(InjectIntl(GroupAdminModalImportUsers))
       group={
         Object {
-          "$refType": null,
           "id": "group4",
           "title": "Comité de suvi",
           "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
-                  "$fragmentRefs": null,
                   "id": "id1",
                 },
               },
@@ -126,7 +122,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         key="id1"
         user={
           Object {
-            "$fragmentRefs": null,
             "id": "id1",
           }
         }
@@ -212,14 +207,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     <Connect(InjectIntl(GroupAdminModalAddUsers))
       group={
         Object {
-          "$refType": null,
           "id": "group4",
           "title": "Comité de suvi",
           "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
-                  "$fragmentRefs": null,
                   "id": "id1",
                 },
               },
@@ -233,14 +226,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     <Connect(InjectIntl(GroupAdminModalImportUsers))
       group={
         Object {
-          "$refType": null,
           "id": "group4",
           "title": "Comité de suvi",
           "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
-                  "$fragmentRefs": null,
                   "id": "id1",
                 },
               },
@@ -260,7 +251,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         key="id1"
         user={
           Object {
-            "$fragmentRefs": null,
             "id": "id1",
           }
         }
@@ -348,14 +338,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     <Connect(InjectIntl(GroupAdminModalAddUsers))
       group={
         Object {
-          "$refType": null,
           "id": "group4",
           "title": "Comité de suvi",
           "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
-                  "$fragmentRefs": null,
                   "id": "id1",
                 },
               },
@@ -369,14 +357,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     <Connect(InjectIntl(GroupAdminModalImportUsers))
       group={
         Object {
-          "$refType": null,
           "id": "group4",
           "title": "Comité de suvi",
           "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
-                  "$fragmentRefs": null,
                   "id": "id1",
                 },
               },
@@ -396,7 +382,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         key="id1"
         user={
           Object {
-            "$fragmentRefs": null,
             "id": "id1",
           }
         }
@@ -484,14 +469,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     <Connect(InjectIntl(GroupAdminModalAddUsers))
       group={
         Object {
-          "$refType": null,
           "id": "group4",
           "title": "Comité de suvi",
           "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
-                  "$fragmentRefs": null,
                   "id": "id1",
                 },
               },
@@ -505,14 +488,12 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     <Connect(InjectIntl(GroupAdminModalImportUsers))
       group={
         Object {
-          "$refType": null,
           "id": "group4",
           "title": "Comité de suvi",
           "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
-                  "$fragmentRefs": null,
                   "id": "id1",
                 },
               },
@@ -532,7 +513,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         key="id1"
         user={
           Object {
-            "$fragmentRefs": null,
             "id": "id1",
           }
         }

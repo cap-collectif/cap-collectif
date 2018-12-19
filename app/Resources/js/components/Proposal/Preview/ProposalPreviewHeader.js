@@ -18,7 +18,6 @@ export class ProposalPreviewHeader extends React.Component<Props> {
     return (
       <CardUser>
         <div className="card__user__avatar">
-          {/* $FlowFixMe Will be a fragment soon */}
           <UserAvatar user={proposal.author} />
         </div>
         <div className="ellipsis">

@@ -51,7 +51,6 @@ export class Comment extends React.Component<Props, State> {
       <li className={classes}>
         <div className="opinion__body">
           <div className="opinion__content">
-            {/* $FlowFixMe Will be a fragment soon */}
             <UserAvatar user={comment.author} />
             <div className="comment__detail">
               <div className={detailClasses} id={`comment_${comment.id}`}>

@@ -10,7 +10,7 @@ import {
   SubmissionError,
   change as changeRedux,
 } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Dispatch, State } from '../../../types';
 import type { ReplyForm_questionnaire } from './__generated__/ReplyForm_questionnaire.graphql';
@@ -31,15 +31,14 @@ import UpdateReplyMutation from '../../../mutations/UpdateReplyMutation';
 import SubmitButton from '../../Form/SubmitButton';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
-type Props = {|
-  ...FormProps,
+type Props = FormProps & {
   +questionnaire: ReplyForm_questionnaire,
   +reply: ?ReplyForm_reply,
   +responses: ResponsesInReduxForm,
   +user: ?Object,
   +intl: IntlShape,
   +onClose?: () => void,
-|};
+};
 
 type FormValues = {|
   responses: ResponsesInReduxForm,
@@ -259,7 +258,7 @@ export class ReplyForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   responses: formValueSelector(
     props.reply ? `Update${formName}-${props.reply.id}` : `Create${formName}`,
   )(state, 'responses'),

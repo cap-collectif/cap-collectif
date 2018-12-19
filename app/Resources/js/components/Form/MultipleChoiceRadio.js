@@ -10,10 +10,10 @@ import WYSIWYGRender from './WYSIWYGRender';
 
 type Props = {
   name: string,
-  choices: ?Array<Object>,
+  choices: Array<Object>,
   helpText: ?string,
   label?: string | any,
-  description?: ?string,
+  description?: string,
   isOtherAllowed?: ?boolean,
   labelClassName?: ?string,
   disabled?: ?boolean,
@@ -51,9 +51,6 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
 
   render() {
     const { disabled, name, choices, helpText, label, value, ...props } = this.props;
-    if (!choices) {
-      return null;
-    }
 
     const finalValue = value && Array.isArray(value.labels) ? value.labels[0] : undefined;
     const otherValue = value ? value.other : undefined;

@@ -68,12 +68,7 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
-          <SubmitButton
-            id="ProposalAdminRealisationStepModal-submit"
-            label="global.validate"
-            isSubmitting={false}
-            onSubmit={onClose}
-          />
+          <SubmitButton label="global.validate" isSubmitting={false} onSubmit={onClose} />
         </Modal.Footer>
       </Modal>
     );

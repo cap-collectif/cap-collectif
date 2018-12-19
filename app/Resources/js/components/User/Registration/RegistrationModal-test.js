@@ -7,31 +7,30 @@ import { RegistrationModal } from './RegistrationModal';
 describe('<RegistrationModal />', () => {
   const props = {
     onClose: jest.fn(),
-    textTop: null,
-    textBottom: null,
     onSubmit: jest.fn(),
     submitting: false,
+    dispatch: jest.fn(),
     displayChartModal: false,
     onCloseChart: jest.fn(),
     chartBody: 'Super charte !!',
   };
 
   it('renders hidden modal if not shown', () => {
-    const wrapper = shallow(<RegistrationModal {...props} show={false} />);
+    const wrapper = shallow(<RegistrationModal show={false} features={{}} {...props} />);
     expect(wrapper.find('Modal')).toHaveLength(1);
     expect(wrapper.find('Modal').prop('show')).toEqual(false);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders modal if shown', () => {
-    const wrapper = shallow(<RegistrationModal {...props} show />);
+    const wrapper = shallow(<RegistrationModal show features={{}} {...props} />);
     expect(wrapper.find('Modal')).toHaveLength(1);
     expect(wrapper.find('Modal').prop('show')).toEqual(true);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders a form', () => {
-    const wrapper = shallow(<RegistrationModal {...props} show />);
+    const wrapper = shallow(<RegistrationModal show features={{}} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -39,7 +38,7 @@ describe('<RegistrationModal />', () => {
     const top = 'Texte du haut';
     const bottom = 'Texte du bas';
     const wrapper = shallow(
-      <RegistrationModal {...props} show textTop={top} textBottom={bottom} />,
+      <RegistrationModal show features={{}} textTop={top} textBottom={bottom} {...props} />,
     );
     const topText = wrapper.find('Alert');
     expect(topText).toHaveLength(1);

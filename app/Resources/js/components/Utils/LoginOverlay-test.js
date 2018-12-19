@@ -6,6 +6,7 @@ import { LoginOverlay } from './LoginOverlay';
 
 describe('<LoginOverlay />', () => {
   const props = {
+    openLoginModal: jest.fn(),
     isLoginOrRegistrationModalOpen: false,
     showRegistrationButton: false,
     openRegistrationModal: jest.fn(),

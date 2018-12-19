@@ -43,10 +43,7 @@ class UserSearch extends Search
 
         $resultSet = $this->index->getType($this->type)->search($query);
 
-        return [
-            'users' => $this->getHydratedResults($resultSet->getResults()),
-            'count' => $resultSet->getTotalHits(),
-        ];
+        return $this->getHydratedResults($resultSet->getResults());
     }
 
     public function getContributorByProject(Project $project, int $offset, int $limit): array

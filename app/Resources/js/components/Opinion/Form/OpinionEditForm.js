@@ -3,16 +3,16 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import Fetcher, { json } from '../../../services/Fetcher';
 import type { State, Dispatch } from '../../../types';
 import renderInput from '../../Form/Field';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
 import type { OpinionEditForm_opinion } from './__generated__/OpinionEditForm_opinion.graphql';
 
-type RelayProps = {|
+type RelayProps = {
   opinion: OpinionEditForm_opinion,
-|};
+};
 
 export const formName = 'opinion-edit-form';
 const validate = ({ title, body, check }: Object) => {
@@ -51,11 +51,9 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
     });
 };
 
-type Props = {|
-  ...RelayProps,
+type Props = RelayProps & {
   handleSubmit: Function,
-  initialValues: Object,
-|};
+};
 
 export class OpinionEditForm extends React.Component<Props> {
   render() {
@@ -107,7 +105,7 @@ export class OpinionEditForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: RelayProps) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
   const dynamicsInitialValues = {};
   if (props.opinion.appendices) {
     for (const appendix of props.opinion.appendices) {

@@ -2,85 +2,59 @@
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 
-type LogicJumpConditionOperator = 'IS' | 'IS_NOT';
-type Conditions = ?$ReadOnlyArray<?{|
-  +id: ?string,
-  +operator: LogicJumpConditionOperator,
-  +question: {|
-    +id: string,
-    +title: string,
-  |},
-  +value?: ?{|
-    +id: string,
-    +title: string,
-  |},
-|}>;
-
 type Props = {
-  jumps: ?$ReadOnlyArray<?{|
-    +id: ?string,
-    +always: boolean,
-    +origin: {|
-      +id: string,
-    |},
-    +destination: {|
-      +id: string,
-      +title: string,
-      +number: number,
-    |},
-    +conditions: Conditions,
-  |}>,
+  jumps: Array<Object>,
 };
 
 export const ConditionalJumps = (props: Props) => {
   const { jumps } = props;
 
-  const getConditionsValues = (conditions: Conditions) => {
-    if (!conditions || conditions.length === 0) {
-      return null;
-    }
+  const getConditionsValues = (conditions: Array<Object>) => {
     const conditionsLength = conditions.length;
 
-    return conditions
-      .filter(Boolean)
-      .map(condition => condition.value)
-      .filter(Boolean)
-      .map((conditionValue, conditionKey) => (
-        <span key={conditionKey}>
-          {conditionKey === 0 && (
-            <FormattedMessage
-              id="if-you-have-answered"
-              values={{ responseTitle: conditionValue.title }}
-            />
+    if (conditionsLength === 0) {
+      return null;
+    }
+
+    return conditions.map((condition, conditionKey) => (
+      <span key={conditionKey}>
+        {conditionKey === 0 && (
+          <FormattedMessage
+            id="if-you-have-answered"
+            values={{ responseTitle: condition.value.title }}
+          />
+        )}
+        {conditionKey > 0 &&
+          conditionKey + 1 !== conditionsLength && (
+            <React.Fragment>, {`"${condition.value.title}"`}</React.Fragment>
           )}
-          {conditionKey > 0 && conditionKey + 1 !== conditionsLength && (
-            <React.Fragment>, {`"${conditionValue.title}"`}</React.Fragment>
-          )}
-          {conditionKey > 0 && conditionKey + 1 === conditionsLength && (
+        {conditionKey > 0 &&
+          conditionKey + 1 === conditionsLength && (
             <React.Fragment>
               {' '}
-              <FormattedMessage id="event.and" /> {`"${conditionValue.title}"`}
+              <FormattedMessage id="event.and" /> {`"${condition.value.title}"`}
             </React.Fragment>
           )}
-        </span>
-      ));
+      </span>
+    ));
   };
 
-  if (!jumps || jumps.length === 0) {
+  if (jumps.length === 0) {
     return null;
   }
 
   return (
     <div className="visible-print-block conditional-jumps">
-      {jumps.filter(Boolean).map((jump, jumpKey) => (
+      {jumps.map((jump, jumpKey) => (
         <div key={jumpKey}>
           {getConditionsValues(jump.conditions)},{' '}
-          {jump.destination && jump.destination.number && (
-            <FormattedHTMLMessage
-              id="go-to-question-number"
-              values={{ questionNumber: jump.destination.number }}
-            />
-          )}
+          {jump.destination &&
+            jump.destination.number && (
+              <FormattedHTMLMessage
+                id="go-to-question-number"
+                values={{ questionNumber: jump.destination.number }}
+              />
+            )}
         </div>
       ))}
     </div>

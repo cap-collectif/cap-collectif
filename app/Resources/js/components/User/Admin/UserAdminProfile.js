@@ -1,17 +1,17 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import type { Dispatch, State, GlobalState } from '../../../types';
-import type { UserAdminProfile_user } from './__generated__/UserAdminProfile_user.graphql';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
+import UserAdminProfile_user from './__generated__/UserAdminProfile_user.graphql';
 
-type RelayProps = {| user: UserAdminProfile_user |};
+type RelayProps = { user: UserAdminProfile_user };
 
 type FormValues = {
   +id: string,
@@ -35,16 +35,15 @@ type FormValues = {
   +isViewer: boolean,
 };
 
-type Props = {|
-  ...FormProps,
-  ...RelayProps,
-  intl: IntlShape,
-  initialValues: FormValues,
-  hasValue: Object,
-  userTypes: Array<Object>,
-  features: Object,
-  isViewerOrSuperAdmin: boolean,
-|};
+type Props = FormProps &
+  RelayProps & {
+    intl: IntlShape,
+    initialValues: FormValues,
+    hasValue: Object,
+    userTypes: Array<Object>,
+    features: Object,
+    isViewerOrSuperAdmin: boolean,
+  };
 
 const formName = 'user-admin-edit-profile';
 
@@ -169,7 +168,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
                 disabled={!isViewerOrSuperAdmin}
                 label={<FormattedMessage id="registration.type" />}>
                 <FormattedMessage id="registration.select.type">
-                  {(message: string) => <option value="">{message}</option>}
+                  {message => <option value="">{message}</option>}
                 </FormattedMessage>
                 {userTypes.map((type, i) => (
                   <option key={i + 1} value={type.id}>
@@ -292,7 +291,7 @@ const form = reduxForm({
   form: formName,
 })(UserAdminProfile);
 
-const mapStateToProps = (state: GlobalState, { user }: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, { user }: RelayProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   currentUser: state.user.user,
   initialValues: {

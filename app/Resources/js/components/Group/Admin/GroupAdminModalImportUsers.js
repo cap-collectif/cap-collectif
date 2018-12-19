@@ -1,12 +1,13 @@
 // @flow
 import * as React from 'react';
-import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
-import { connect } from 'react-redux';
+import { injectIntl, FormattedMessage } from 'react-intl';
+import type { IntlShape } from 'react-intl';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import { submit, isSubmitting, isPristine } from 'redux-form';
 import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
 import CloseButton from '../../Form/CloseButton';
-import type { Dispatch, State } from '../../../types';
+import type { Dispatch } from '../../../types';
 import GroupAdminImportUsersForm, { formName } from './GroupAdminImportUsersForm';
 
 type Props = {
@@ -51,7 +52,7 @@ export class GroupAdminModalImportUsers extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   submitting: isSubmitting(formName)(state),
   pristine: isPristine(formName)(state),
 });

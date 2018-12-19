@@ -96,7 +96,6 @@ exports[`<ProposalAdminRealisationStepModal /> render correctly 1`] = `
       onClose={[MockFunction]}
     />
     <Connect(SubmitButton)
-      id="ProposalAdminRealisationStepModal-submit"
       isSubmitting={false}
       label="global.validate"
       onSubmit={[MockFunction]}

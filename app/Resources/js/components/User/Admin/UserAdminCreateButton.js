@@ -15,10 +15,9 @@ import { type UserRole } from '../../../mutations/__generated__/CreateUserMutati
 
 const formName = 'user-admin-create';
 
-type Props = {|
-  ...FormProps,
+type Props = FormProps & {
   intl: IntlShape,
-|};
+};
 
 type State = {
   showModal: boolean,

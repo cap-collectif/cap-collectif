@@ -1,28 +1,21 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginModal from './LoginModal';
 import { baseUrl } from '../../../config';
 import { showLoginModal } from '../../../redux/modules/user';
-import type { State } from '../../../types';
+import type { Dispatch, State } from '../../../types';
 
-type Action = typeof showLoginModal;
-
-type StateProps = {|
+type Props = {
+  bsStyle: string,
+  dispatch: Dispatch,
+  className: ?string,
+  style: ?Object,
   loginWithMonCompteParis: boolean,
   loginWithOpenId: boolean,
-  openLoginModal: typeof showLoginModal,
-|};
-
-type Props = {|
-  ...StateProps,
-  // default props not working
-  bsStyle?: string,
-  className?: ?string,
-  style?: ?Object,
-|};
+};
 
 export class LoginButton extends React.Component<Props> {
   static defaultProps = {
@@ -33,7 +26,7 @@ export class LoginButton extends React.Component<Props> {
 
   render() {
     const {
-      openLoginModal,
+      dispatch,
       loginWithMonCompteParis,
       loginWithOpenId,
       style,
@@ -45,7 +38,6 @@ export class LoginButton extends React.Component<Props> {
       <span style={style}>
         <Button
           bsStyle={bsStyle}
-          aria-label="Ouvrir la modal de connexion"
           onClick={() => {
             if (loginWithMonCompteParis) {
               const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
@@ -60,7 +52,7 @@ export class LoginButton extends React.Component<Props> {
             } else if (loginWithOpenId) {
               window.location.href = `/login/openid?_destination=${window && window.location.href}`;
             } else {
-              openLoginModal();
+              dispatch(showLoginModal());
             }
           }}
           className={className}>
@@ -72,16 +64,10 @@ export class LoginButton extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   loginWithMonCompteParis: state.default.features.login_paris,
   loginWithOpenId: state.default.features.login_openid,
 });
 
-const mapDispatchToProps = dispatch => ({
-  openLoginModal: () => dispatch(showLoginModal()),
-});
-
-export default connect<Props, State, Action, _, _>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LoginButton);
+const connector = connect(mapStateToProps);
+export default connector(LoginButton);

@@ -2,7 +2,7 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import { Col, Row, FormControl, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { changeOrderBy, changeTerm, changeTheme } from '../../../redux/modules/project';
 import Input from '../../Form/ReactBootstrapInput';
 import type { GlobalState } from '../../../types';
@@ -136,7 +136,7 @@ class ProjectListFilter extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   features: state.default.features,
   themes: state.default.themes,
   orderBy: state.project.orderBy || 'LATEST',

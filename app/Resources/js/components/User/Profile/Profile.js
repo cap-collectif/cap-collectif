@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import type Profile_viewer from './__generated__/Profile_viewer.graphql';
@@ -12,16 +12,16 @@ import AlertForm from '../../Alert/AlertForm';
 import UserAvatar from '../UserAvatar';
 import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
 
-type RelayProps = {| viewer: Profile_viewer |};
-type Props = {|
-  ...FormProps,
-  ...RelayProps,
-  intl: IntlShape,
-  initialValues: Object,
-  hasValue: Object,
-  userTypes: Array<Object>,
-  features: Object,
-|};
+type RelayProps = { profileForm: Profile_viewer };
+type Props = FormProps &
+  RelayProps & {
+    viewer: Profile_viewer,
+    intl: IntlShape,
+    initialValues: Object,
+    hasValue: Object,
+    userTypes: Array<Object>,
+    features: Object,
+  };
 
 const formName = 'viewerProfileForm';
 
@@ -175,7 +175,7 @@ export class Profile extends Component<Props> {
                     type="select"
                     divClassName="col-sm-6">
                     <FormattedMessage id="registration.select.type">
-                      {(message: string) => <option value="">{message}</option>}
+                      {message => <option value="">{message}</option>}
                     </FormattedMessage>
                     {userTypes.map((type, i) => (
                       <option key={i + 1} value={type.id}>
@@ -321,7 +321,7 @@ const form = reduxForm({
   form: formName,
 })(Profile);
 
-const mapStateToProps = (state: State, props: Props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   initialValues: {
     username: props.viewer.username ? props.viewer.username : null,
     biography: props.viewer.biography ? props.viewer.biography : null,

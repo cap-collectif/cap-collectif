@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
@@ -108,7 +108,7 @@ export class ProposalFormAdminDistricts extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   districts: selector(state, 'districts'),
 });
 

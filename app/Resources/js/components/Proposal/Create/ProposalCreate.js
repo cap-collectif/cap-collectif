@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { isSubmitting, change, submit, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import ProposalCreateButton from './ProposalCreateButton';
@@ -93,7 +93,7 @@ export class ProposalCreate extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
   pristine: isPristine(formName)(state),
   showModal: state.proposal.showCreateModal,

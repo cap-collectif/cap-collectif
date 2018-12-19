@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Field, formValueSelector, FieldArray, getFormSyncErrors } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
@@ -277,7 +277,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: GlobalState, props: ParentProps) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);
   return {
     currentQuestion: selector(state, `${props.member}`),

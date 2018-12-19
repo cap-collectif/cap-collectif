@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import type { ConsultationPlanItem_section } from './__generated__/ConsultationPlanItem_section.graphql';
 import config from '../../config';
 import type { State } from '../../types';
@@ -77,7 +77,7 @@ export class ConsultationPlanItem extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   activeItems: state.project.selectedActiveItems,
 });
 

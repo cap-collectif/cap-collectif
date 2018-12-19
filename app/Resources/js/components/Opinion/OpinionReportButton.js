@@ -12,7 +12,7 @@ type Props = {
 };
 
 class OpinionReportButton extends React.Component<Props> {
-  handleReport = (data: Object) => {
+  handleReport = data => {
     const { opinion, dispatch } = this.props;
     return submitOpinionReport(opinion, data, dispatch);
   };

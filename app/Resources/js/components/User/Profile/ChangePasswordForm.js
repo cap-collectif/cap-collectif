@@ -10,7 +10,7 @@ import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
 import type { Dispatch } from '../../../types';
 
-type Props = {| ...FormProps, intl: IntlShape |};
+type Props = FormProps & { intl: IntlShape };
 
 const formName = 'profileChangePassword';
 

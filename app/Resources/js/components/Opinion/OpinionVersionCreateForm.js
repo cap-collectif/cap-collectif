@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import renderInput from '../Form/Field';
 import {
@@ -20,14 +20,11 @@ type FormValues = {
   title: string,
   comment: string,
 };
-type RelayProps = {|
+type RelayProps = {
   // eslint-disable-next-line react/no-unused-prop-types
   opinion: OpinionVersionCreateForm_opinion,
-|};
-type Props = {|
-  ...RelayProps,
-  initialValues: FormValues,
-|};
+};
+type Props = RelayProps & { initialValues: FormValues };
 
 const onSubmit = (data: FormValues, dispatch: Dispatch, { opinion }: Props): Promise<*> => {
   dispatch(startCreatingOpinionVersion());
@@ -93,7 +90,7 @@ class OpinionVersionCreateForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: {
     title: '',
     body: props.opinion.body,

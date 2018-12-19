@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { reduxForm, Field, startSubmit, stopSubmit, type FormProps } from 'redux-form';
 import component from '../Form/Field';
@@ -236,7 +236,7 @@ const getRequirementInitialValue = (requirement: Requirement): ?string | boolean
   return requirement.viewerValue;
 };
 
-const mapStateToProps = (state: State, { step }: Props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { step }: Props) => ({
   initialValues: step.requirements.edges
     ? step.requirements.edges
         .filter(Boolean)

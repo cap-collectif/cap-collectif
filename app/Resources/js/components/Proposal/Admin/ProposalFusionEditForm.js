@@ -4,7 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { fetchQuery } from 'relay-runtime';
 import { Field, SubmissionError, reduxForm } from 'redux-form';
 import { injectIntl, type IntlShape } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import environment from '../../../createRelayEnvironment';
 import select from '../../Form/Select';
 import UpdateProposalFusionMutation from '../../../mutations/UpdateProposalFusionMutation';
@@ -13,20 +13,19 @@ import type { ProposalFusionEditForm_proposal } from './__generated__/ProposalFu
 
 export const formName = 'update-proposal-fusion';
 
-type RelayProps = {|
+type RelayProps = {
   proposal: ProposalFusionEditForm_proposal,
-|};
+};
 
 type FormValues = {
   fromProposals: $ReadOnlyArray<{ value: Uuid, title: string }>,
 };
 
-type Props = {|
-  ...RelayProps,
+type Props = RelayProps & {
   // eslint-disable-next-line react/no-unused-prop-types
   onClose: () => void,
   intl: IntlShape,
-|};
+};
 
 const validate = (values: FormValues, props: Props) => {
   const { intl } = props;
@@ -123,7 +122,7 @@ const form = reduxForm({
   onSubmit,
 })(ProposalFusionEditForm);
 
-const mapStateToProps = (state: State, props: RelayProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: {
     fromProposals: props.proposal.mergedFrom.map(p => ({
       value: p.id,

@@ -64,9 +64,7 @@ type Props = {
   children?: any,
   help?: string | any,
   helpPrint: boolean,
-  ariaRequired?: boolean,
   description?: string | any,
-  backgroundColor?: ?string,
   bsSize?: string,
   wrapperClassName?: ?string,
   groupClassName?: ?string,
@@ -76,7 +74,7 @@ type Props = {
   buttonBefore?: any,
   buttonAfter?: any,
   standalone?: boolean,
-  validationState?: ?string,
+  validationState?: string,
   validationRule?: Object,
   isOtherAllowed?: boolean,
   label?: string | any,
@@ -87,6 +85,7 @@ type Props = {
   radioChecked?: boolean,
   checkedValue?: ?string,
   maxLength?: ?string,
+  backgroundColor: ?string,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
@@ -138,7 +137,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     image,
     medias,
     intl,
-    ariaRequired,
     isOtherAllowed,
     radioChecked,
     ...props
@@ -146,9 +144,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
       props.placeholder = intl.formatMessage({ id: props.placeholder });
     }
-
-    const ariaDescribedBy = `${props.id ? props.id : ''}-error`;
-    const ariaInvalid = !!errors;
 
     if (type === 'editor') {
       return (
@@ -207,9 +202,6 @@ class ReactBootstrapInput extends React.Component<Props> {
         ref={c => {
           this.refFormControl = c;
         }}
-        aria-describedby={ariaDescribedBy}
-        aria-invalid={ariaInvalid}
-        aria-required={ariaRequired}
         type={props.componentClass ? undefined : type !== 'number' ? type : 'text'}
         value={value}
         {...props}>
@@ -218,15 +210,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     );
 
     if (type === 'datetime') {
-      formControl = (
-        <DateTime
-          value={value}
-          {...props}
-          aria-describedby={ariaDescribedBy}
-          aria-invalid={ariaInvalid}
-          aria-required={ariaRequired}
-        />
-      );
+      formControl = <DateTime value={value} {...props} />;
     }
 
     if (type === 'checkbox') {
@@ -242,9 +226,6 @@ class ReactBootstrapInput extends React.Component<Props> {
           <MultipleChoiceCheckbox
             value={value}
             field={field}
-            aria-describedby={ariaDescribedBy}
-            aria-invalid={ariaInvalid}
-            aria-required={ariaRequired}
             label={null}
             renderFormErrors={() => {}}
             getGroupStyle={() => {}}
@@ -266,28 +247,12 @@ class ReactBootstrapInput extends React.Component<Props> {
       field.id = props.id;
       field.choices = props.choices;
 
-      return (
-        <RadioButtons
-          value={value}
-          field={field}
-          {...props}
-          aria-describedby={ariaDescribedBy}
-          aria-invalid={ariaInvalid}
-          aria-required={ariaRequired}
-        />
-      );
+      return <RadioButtons value={value} field={field} {...props} />;
     }
 
     if (type === 'radio') {
       formControl = (
-        <Radio
-          value={value}
-          {...props}
-          checked={radioChecked}
-          isOtherAllowed={isOtherAllowed}
-          aria-invalid={ariaInvalid}
-          aria-required={ariaRequired}
-          aria-describedby={`${props.id ? props.id : ''}-error`}>
+        <Radio value={value} {...props} checked={radioChecked} isOtherAllowed={isOtherAllowed}>
           {children}
         </Radio>
       );
@@ -336,28 +301,13 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'email') {
-      formControl = (
-        <EmailInput
-          value={value}
-          {...props}
-          aria-describedby={ariaDescribedBy}
-          aria-invalid={ariaInvalid}
-          aria-required={ariaRequired}
-        />
-      );
+      formControl = <EmailInput value={value} {...props} />;
     }
 
     if (type === 'textarea') {
       formControl = (
         <React.Fragment>
-          <AutosizedTextarea
-            maxLength={props.maxLength}
-            value={value}
-            {...props}
-            aria-describedby={ariaDescribedBy}
-            aria-invalid={ariaInvalid}
-            aria-required={ariaRequired}
-          />
+          <AutosizedTextarea maxLength={props.maxLength} value={value} {...props} />
           <Notepad />
         </React.Fragment>
       );
@@ -432,11 +382,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           </div>
         )}
         {this.renderInputGroup(props)}
-        {props.errors && (
-          <span className="error-block hidden-print" id={`${props.id ? props.id : ''}-error`}>
-            {props.errors}
-          </span>
-        )}
+        {props.errors && <span className="error-block hidden-print">{props.errors}</span>}
       </FormGroup>
     );
   }

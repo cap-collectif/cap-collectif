@@ -117,6 +117,7 @@ describe('validateResponses', () => {
     const component = renderResponses({
       questions: [textQuestion, numberQuestion, selectQuestion, mediaQuestion],
       responses: [],
+      className,
       intl: intlMock,
       disabled: false,
       change: jest.fn(),

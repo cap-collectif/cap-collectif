@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Jumbotron } from 'react-bootstrap';
 import classNames from 'classnames';
 import LoginButton from '../User/Login/LoginButton';
@@ -56,7 +56,7 @@ export class VisibilityBox extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
 });
 

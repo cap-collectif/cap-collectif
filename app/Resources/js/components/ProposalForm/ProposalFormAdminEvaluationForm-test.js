@@ -3,14 +3,14 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormAdminEvaluationForm } from './ProposalFormAdminEvaluationForm';
-import { $refType, intlMock, formMock } from '../../mocks';
+import { intlMock, formMock } from '../../mocks';
 
 describe('<ProposalFormAdminEvaluationForm />', () => {
   const props = {
     intl: intlMock,
     ...formMock,
+    // $FlowFixMe $refType
     proposalForm: {
-      $refType,
       id: 'proposalFormId',
       evaluationForm: null,
     },

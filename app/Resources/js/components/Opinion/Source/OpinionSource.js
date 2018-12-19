@@ -25,7 +25,6 @@ export class OpinionSource extends React.Component<Props> {
         }`}
         id={`source-${source.id}`}>
         <div className="left-block">
-          {/* $FlowFixMe Will be a fragment soon */}
           <UserAvatar user={source.author} />
           <div>
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}

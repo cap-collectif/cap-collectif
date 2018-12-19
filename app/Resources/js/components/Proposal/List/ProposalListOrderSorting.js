@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import Input from '../../Form/Input';
 import LocalStorage from '../../../services/LocalStorageService';
 import { changeOrder } from '../../../redux/modules/proposal';
@@ -14,7 +14,7 @@ type Props = {
   orderByCost?: boolean,
   dispatch: Dispatch,
   order?: string,
-  defaultSort?: ?string,
+  defaultSort?: string,
   stepId?: string,
   intl: IntlShape,
 };
@@ -68,7 +68,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
           value={order}>
           {displayedOrders.map(choice => (
             <FormattedMessage key={choice} id={`global.filter_f_${choice}`}>
-              {(message: string) => <option value={choice}>{message}</option>}
+              {message => <option value={choice}>{message}</option>}
             </FormattedMessage>
           ))}
         </Input>
@@ -77,7 +77,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   order: state.proposal.order,
   stepId: state.project.currentProjectStepById || null,
 });

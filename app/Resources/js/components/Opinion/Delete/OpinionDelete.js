@@ -2,24 +2,23 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import DeleteVersionMutation from '../../../mutations/DeleteVersionMutation';
 import DeleteOpinionMutation from '../../../mutations/DeleteOpinionMutation';
 import type { OpinionDelete_opinion } from './__generated__/OpinionDelete_opinion.graphql';
-import type { GlobalState } from '../../../types';
 
 type Props = {
   opinion: OpinionDelete_opinion,
   user?: Object,
 };
 
-type State = {|
+type State = {
   showModal: boolean,
   isSubmitting: boolean,
-|};
+};
 
 class OpinionDelete extends React.Component<Props, State> {
   static defaultProps = {
@@ -110,7 +109,7 @@ class OpinionDelete extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   user: state.user.user,
 });
 

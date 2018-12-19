@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
@@ -67,7 +67,7 @@ export class ProposalDeleteModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   isDeleting: state.proposal.isDeleting,
   show: state.proposal.showDeleteModal,
 });

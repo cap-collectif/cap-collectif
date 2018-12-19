@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import Input from '../../Form/Input';
 import type { State } from '../../../types';
 
@@ -104,7 +104,7 @@ export class ProjectStatsFilters extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   showThemes: state.default.features.themes && props.showThemes,
   showDistricts: state.default.features.districts && props.showDistricts,
 });

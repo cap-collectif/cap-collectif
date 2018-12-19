@@ -5,16 +5,11 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import ReportBox from '../Report/ReportBox';
 import { submitArgumentReport } from '../../redux/modules/report';
 import type { ArgumentReportButton_argument } from './__generated__/ArgumentReportButton_argument.graphql';
-import type { Dispatch } from '../../types';
 
-type OwnProps = {|
+type Props = {
+  dispatch: Function,
   argument: ArgumentReportButton_argument,
-|};
-
-type Props = {|
-  ...OwnProps,
-  dispatch: Dispatch,
-|};
+};
 
 class ArgumentReportButton extends React.Component<Props> {
   handleReport = (data: Object) => {
@@ -41,7 +36,6 @@ class ArgumentReportButton extends React.Component<Props> {
 }
 
 const container = connect()(ArgumentReportButton);
-
 export default createFragmentContainer(
   container,
   graphql`

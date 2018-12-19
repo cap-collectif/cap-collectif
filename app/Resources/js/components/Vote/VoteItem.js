@@ -52,7 +52,6 @@ export class VoteItem extends React.Component<Props> {
 
     return (
       <ListVoteItem id={`vote-${vote.id}`}>
-        {/* $FlowFixMe */}
         <UserAvatar user={vote.author} className="pull-left" />
         <div className="opinion__data">
           <p className="h5 opinion__user">

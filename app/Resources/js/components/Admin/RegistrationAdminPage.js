@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
+import type { Connector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Alert, Well, Col } from 'react-bootstrap';
 import Toggle from 'react-toggle';
@@ -229,7 +230,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const connector = connect(
+const connector: Connector<{}, Props> = connect(
   mapStateToProps,
   mapDispatchToProps,
 );

@@ -75,8 +75,8 @@ export class CommentListView extends React.Component<Props, State> {
 
     const { commentable } = this.props;
 
+    // $FlowFixMe
     return (
-      // $FlowFixMe
       <CommentListViewPaginated
         commentable={commentable}
         highlightedComment={this.state.highlightedComment}

@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import RegistrationButton from '../User/Registration/RegistrationButton';
@@ -31,10 +31,10 @@ export class NavbarRight extends React.Component<Props> {
     return (
       <Nav pullRight>
         {features.search && (
-          <NavItem eventKey={1} className="navbar__search" href="/search" role="search" aria-label="Rechercher sur le site">
+          <NavItem eventKey={1} className="navbar__search" href="/search">
             <i className="cap cap-magnifier" />{' '}
             <span className="visible-xs-inline" style={{ whiteSpace: 'nowrap' }}>
-              <FormattedMessage id="navbar.search" />
+              {<FormattedMessage id="navbar.search" />}
             </span>
           </NavItem>
         )}
@@ -94,7 +94,7 @@ export class NavbarRight extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   features: state.default.features,
   user: state.user.user,
 });

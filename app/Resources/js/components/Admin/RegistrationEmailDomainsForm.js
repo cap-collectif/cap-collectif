@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Row, Col, Button } from 'react-bootstrap';
 import { Field, FieldArray, reduxForm, isSubmitting } from 'redux-form';
 import renderInput from '../Form/Field';
@@ -53,7 +53,7 @@ export class RegistrationEmailDomainsForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   submitting: isSubmitting('registration-email-domains')(state),
   initialValues: {
     domains: state.user.registration_form.domains,

@@ -15,6 +15,7 @@ describe('<ConsultationPlanRecursiveItems />', () => {
     closePlan: jest.fn(),
     openPlan: jest.fn(),
     showConsultationPlan: true,
+    scrollSpy: jest.fn(),
     intl: intlMock,
   };
 

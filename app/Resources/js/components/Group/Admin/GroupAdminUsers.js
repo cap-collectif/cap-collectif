@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button, ListGroup, ButtonToolbar } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import {
   isValid,
   isInvalid,
@@ -18,19 +18,18 @@ import AlertFormSucceededMessage from '../../Alert/AlertFormSucceededMessage';
 import GroupAdminUsersListGroupItem from './GroupAdminUsersListGroupItem';
 import GroupAdminModalAddUsers from './GroupAdminModalAddUsers';
 import GroupAdminModalImportUsers from './GroupAdminModalImportUsers';
-import type { GlobalState } from '../../../types';
 
-type Props = {|
-  ...FormProps,
+type Props = FormProps & {
   group: GroupAdminUsers_group,
-  userIsDeleted: boolean,
-  userIsNotDeleted: boolean,
-  intl: IntlShape,
-|};
+  userIsDeleted: ?boolean,
+  userIsNotDeleted: ?boolean,
+  intl: Object,
+};
 
 type State = {
   showAddUsersModal: boolean,
   showImportUsersModal: boolean,
+  user: Object,
 };
 
 export const formName = 'group-admin-users';
@@ -39,6 +38,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
   state = {
     showAddUsersModal: false,
     showImportUsersModal: false,
+    user: {},
   };
 
   getAlertForm() {
@@ -129,7 +129,6 @@ export class GroupAdminUsers extends React.Component<Props, State> {
             onClose={this.handleClose}
             group={group}
           />
-          {/* $FlowFixMe please use mapDispatchToProps */}
           <GroupAdminModalImportUsers
             show={showImportUsersModal}
             onClose={this.handleClose}
@@ -156,7 +155,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   valid: isValid('group-users-add')(state),
   invalid: isInvalid('group-users-add')(state),
   submitting: isSubmitting('group-users-add')(state),

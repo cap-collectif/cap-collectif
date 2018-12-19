@@ -4,47 +4,24 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { showRegistrationModal } from '../../redux/modules/user';
-import type { State } from '../../types';
+import type { State, Dispatch } from '../../types';
 import LoginButton from '../User/Login/LoginButton';
 
-type Action = {|
-  type: 'SHOW_REGISTRATION_MODAL',
-|};
-
-type OwnProps = {|
+type Props = {
+  user?: ?Object,
   children: $FlowFixMe,
-  // DefaultProps not working right now
   enabled?: boolean,
-|};
-
-type DispatchProps = {|
-  openRegistrationModal: typeof showRegistrationModal,
-|};
-
-type StateProps = {|
-  user: ?Object,
   isLoginOrRegistrationModalOpen: boolean,
   showRegistrationButton: boolean,
-  loginWithMonCompteParis: boolean,
-  loginWithOpenId: boolean,
-|};
-
-type Props = {|
-  ...OwnProps,
-  ...StateProps,
-  ...DispatchProps,
-|};
+  openRegistrationModal: Function,
+  loginWithMonCompteParis?: boolean,
+  loginWithOpenId?: boolean,
+};
 
 export class LoginOverlay extends React.Component<Props> {
   static displayName = 'LoginOverlay';
 
-  static defaultProps = {
-    user: null,
-    enabled: true,
-    isLoginOrRegistrationModalOpen: false,
-    loginWithMonCompteParis: false,
-    loginWithOpenId: false,
-  };
+  static defaultProps = { user: null, enabled: true, loginWithMonCompteParis: false };
 
   // We add Popover if user is not connected
   render() {
@@ -68,13 +45,15 @@ export class LoginOverlay extends React.Component<Props> {
         <p>
           <FormattedMessage id="vote.popover.body" />
         </p>
-        {showRegistrationButton && !loginWithMonCompteParis && !loginWithOpenId && (
-          <p>
-            <Button onClick={openRegistrationModal} className="center-block btn-block">
-              {<FormattedMessage id="global.registration" />}
-            </Button>
-          </p>
-        )}
+        {showRegistrationButton &&
+          !loginWithMonCompteParis &&
+          !loginWithOpenId && (
+            <p>
+              <Button onClick={openRegistrationModal} className="center-block btn-block">
+                {<FormattedMessage id="global.registration" />}
+              </Button>
+            </p>
+          )}
         <p>
           <LoginButton bsStyle="success" className="center-block btn-block" />
         </p>
@@ -95,7 +74,7 @@ export class LoginOverlay extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   user: state.user.user,
   showRegistrationButton: state.default.features.registration,
   isLoginOrRegistrationModalOpen:
@@ -103,12 +82,14 @@ const mapStateToProps = state => ({
   loginWithMonCompteParis: state.default.features.login_paris,
   loginWithOpenId: state.default.features.login_openid,
 });
-
-const mapDispatchToProps = dispatch => ({
-  openRegistrationModal: () => dispatch(showRegistrationModal()),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  openRegistrationModal: () => {
+    dispatch(showRegistrationModal());
+  },
 });
 
-export default connect<Props, State, Action, _, _>(
+const connector = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LoginOverlay);
+);
+export default connector(LoginOverlay);

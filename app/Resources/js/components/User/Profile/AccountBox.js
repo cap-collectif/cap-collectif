@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Panel, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { isInvalid } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -72,7 +72,6 @@ export class AccountBox extends React.Component<Props, State> {
               <FormattedMessage id="profile.account.title" />
             </h2>
             <AccountForm />
-            {/* $FlowFixMe please use mapDispatchToProps */}
             <ConfirmPasswordModal />
           </Panel.Body>
           <Panel.Footer>{footer}</Panel.Footer>
@@ -90,7 +89,7 @@ export class AccountBox extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   submitting: state.user.isSubmittingAccountForm,
   invalid: isInvalid('account')(state),
 });

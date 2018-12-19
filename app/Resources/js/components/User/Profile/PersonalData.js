@@ -11,7 +11,7 @@ import {
   OverlayTrigger,
   Tooltip,
 } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import {
   reduxForm,
   type FormProps,
@@ -31,14 +31,14 @@ import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import config from '../../../config';
 import UserArchiveRequestButton from './UserArchiveRequestButton';
 
-type RelayProps = {| viewer: PersonalData_viewer |};
-type Props = {|
-  ...FormProps,
-  ...RelayProps,
-  intl: IntlShape,
-  initialValues: Object,
-  currentValues: Object,
-|};
+type RelayProps = { personalDataForm: PersonalData_viewer };
+type Props = FormProps &
+  RelayProps & {
+    viewer: PersonalData_viewer,
+    intl: IntlShape,
+    initialValues: Object,
+    currentValues: Object,
+  };
 
 const formName = 'profilePersonalData';
 
@@ -629,7 +629,7 @@ const form = reduxForm({
   form: formName,
 })(PersonalData);
 
-const mapStateToProps = (state: State, props: Props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   initialValues: {
     firstname: props.viewer.firstname ? props.viewer.firstname : null,
     lastname: props.viewer.lastname ? props.viewer.lastname : null,

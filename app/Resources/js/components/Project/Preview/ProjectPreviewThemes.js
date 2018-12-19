@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import type { State } from '../../../types';
 import InlineList from '../../Ui/List/InlineList';
 import type { ProjectPreviewThemes_project } from './__generated__/ProjectPreviewThemes_project.graphql';
@@ -29,7 +29,7 @@ class ProjectPreviewThemes extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   features: state.default.features,
 });
 
