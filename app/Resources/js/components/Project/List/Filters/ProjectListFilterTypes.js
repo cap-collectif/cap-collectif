@@ -2,7 +2,7 @@
 import React from 'react';
 import { type IntlShape, injectIntl } from 'react-intl';
 import { Field } from 'redux-form';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import type { GlobalState } from '../../../../types';
 import { selector } from './ProjectListFilters';
 import select from '../../../Form/Select';
@@ -38,7 +38,7 @@ class ProjectsListFilterTypes extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   type: selector(state, 'type'),
 });
 

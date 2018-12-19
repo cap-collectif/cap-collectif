@@ -2,9 +2,9 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import { FormControl } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { changeOrderBy } from '../../../../redux/modules/project';
-import type { GlobalState, Dispatch } from '../../../../types';
+import type { GlobalState } from '../../../../types';
 
 type Props = {
   dispatch: Dispatch,
@@ -36,7 +36,7 @@ class ProjectListFilterOrder extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   orderBy: state.project.orderBy || 'LATEST',
 });
 

@@ -1,27 +1,25 @@
 // @flow
 import React from 'react';
 import { Col } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
-import { reduxForm, formValueSelector, type FormProps } from 'redux-form';
+import { connect } from 'react-redux';
+import { reduxForm, formValueSelector } from 'redux-form';
 import { type IntlShape } from 'react-intl';
 
-import type { GlobalState, Dispatch } from '../../../../types';
+import type { GlobalState } from '../../../../types';
 import ProjectsListFilterTypes from './ProjectListFilterTypes';
 import ProjectsListFilterAuthors from './ProjectListFilterAuthors';
 import ProjectsListFilterThemes from './ProjectListFilterThemes';
 import ProjectsListFilterStatus from './ProjectListFilterStatus';
 import type { ProjectType, ProjectAuthor, ProjectTheme } from './ProjectListFiltersContainer';
 
-type Props = FormProps & {
+type Props = {
   author: ?string,
-  dispatch: Dispatch,
   features: { themes: boolean },
   intl: IntlShape,
   projectTypes: ProjectType[],
   projectAuthors: ProjectAuthor[],
   theme: ?string,
   themes: ProjectTheme[],
-  type: ?string,
 };
 
 class ProjectListFilters extends React.Component<Props> {
@@ -74,7 +72,7 @@ class ProjectListFilters extends React.Component<Props> {
 const formName = 'ProjectListFilters';
 export const selector = formValueSelector(formName);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   author: selector(state, 'author'),
   theme: selector(state, 'theme'),
   type: selector(state, 'type'),

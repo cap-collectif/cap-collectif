@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { fetchQuery, graphql } from 'react-relay';
 
 import ProjectListFilters, { selector } from './ProjectListFilters';
@@ -108,6 +108,7 @@ class ProjectListFiltersContainer extends React.Component<Props, State> {
     return (
       <Row className={config.isMobile ? 'mb-10 ml-0' : 'mb-10'}>
         <Col md={2}>
+          {/* $FlowFixMe */}
           <ProjectListFilterOrder />
         </Col>
         {this.renderFilters()}
@@ -119,7 +120,7 @@ class ProjectListFiltersContainer extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
   themes: state.default.themes,
   author: selector(state, 'author'),
