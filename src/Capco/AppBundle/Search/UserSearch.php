@@ -25,7 +25,7 @@ class UserSearch extends Search
         $this->type = 'user';
     }
 
-    public function searchAllUsers($terms = null, $notInIds = []): array
+    public function searchAllUsers($terms = null, $notInIds = [], $onlyUsers = false): array
     {
         $query = new Query\BoolQuery();
 
@@ -43,7 +43,14 @@ class UserSearch extends Search
 
         $resultSet = $this->index->getType($this->type)->search($query);
 
-        return $this->getHydratedResults($resultSet->getResults());
+        if ($onlyUsers) {
+            return $this->getHydratedResults($resultSet->getResults());
+        }
+
+        return [
+            'users' => $this->getHydratedResults($resultSet->getResults()),
+            'count' => $resultSet->getTotalHits(),
+        ];
     }
 
     public function getContributorByProject(Project $project, int $offset, int $limit): array

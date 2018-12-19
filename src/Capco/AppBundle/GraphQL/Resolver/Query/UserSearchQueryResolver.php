@@ -17,6 +17,6 @@ class UserSearchQueryResolver implements ResolverInterface
 
     public function __invoke(Argument $args): array
     {
-        return $this->userSearch->searchAllUsers($args['displayName'], $args['notInIds']);
+        return $this->userSearch->searchAllUsers($args['displayName'], $args['notInIds'], true);
     }
 }
