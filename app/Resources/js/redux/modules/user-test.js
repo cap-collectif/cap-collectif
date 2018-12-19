@@ -20,6 +20,8 @@ const initialState: State = {
   showConfirmPasswordModal: false,
   mapTokens: {
     mapbox: {
+      initialPublicToken:
+        '***REMOVED***',
       publicToken:
         '***REMOVED***',
       styleOwner: 'capcollectif',

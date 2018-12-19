@@ -34,12 +34,18 @@ class MapTokensExtension extends \Twig_Extension
     {
         $mapTokens = [];
         foreach ($this->repository->getMapTokensGroupByProvider() as $mapToken) {
-            list($styleId, $styleOwner, $publicToken) = [
+            list($styleId, $styleOwner, $initialPublicToken, $publicToken) = [
                 $mapToken->getStyleId(),
                 $mapToken->getStyleOwner(),
+                $mapToken->getInitialPublicToken(),
                 $mapToken->getPublicToken(),
             ];
-            $mapTokens[$mapToken->getProvider()] = compact('styleId', 'styleOwner', 'publicToken');
+            $mapTokens[$mapToken->getProvider()] = compact(
+                'styleId',
+                'styleOwner',
+                'initialPublicToken',
+                'publicToken'
+            );
         }
 
         return $mapTokens;

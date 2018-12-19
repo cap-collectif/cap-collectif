@@ -604,7 +604,7 @@ input ChangeMapProviderTokenInput {
   provider: MapTokenProvider!
 
   # The new public token
-  publicToken: String!
+  publicToken: String
 
   # The new secret token
   secretToken: String

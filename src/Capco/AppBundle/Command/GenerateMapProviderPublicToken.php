@@ -104,7 +104,9 @@ class GenerateMapProviderPublicToken extends Command
             ]);
 
         if (isset($response['token'])) {
-            $provider->setPublicToken($response['token']);
+            $provider
+                ->setInitialPublicToken($response['token'])
+                ->setPublicToken($response['token']);
             $this->em->flush();
             $this->io->success(
                 sprintf(

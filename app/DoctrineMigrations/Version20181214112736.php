@@ -21,7 +21,7 @@ final class Version20181214112736 extends AbstractMigration
         );
 
         $this->addSql(
-            'CREATE TABLE map_token (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', public_token VARCHAR(255) DEFAULT NULL, secret_token VARCHAR(255) DEFAULT NULL, style_owner VARCHAR(255) DEFAULT NULL, ADD style_id VARCHAR(255) DEFAULT NULL, provider ENUM(\'mapbox\'), created_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
+            'CREATE TABLE map_token (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', initial_public_token VARCHAR(255) DEFAULT NULL, public_token VARCHAR(255) DEFAULT NULL, secret_token VARCHAR(255) DEFAULT NULL, style_owner VARCHAR(255) DEFAULT NULL, ADD style_id VARCHAR(255) DEFAULT NULL, provider ENUM(\'mapbox\'), created_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
         );
     }
 

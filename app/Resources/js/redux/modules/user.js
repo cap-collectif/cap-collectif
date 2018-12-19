@@ -32,6 +32,7 @@ export type MapTokens = {
     +styleId: string,
     +styleOwner: string,
     +publicToken: string,
+    +initialPublicToken: string,
   },
 };
 
@@ -135,6 +136,8 @@ const initialState: State = {
   user: null,
   mapTokens: {
     mapbox: {
+      initialPublicToken:
+        '***REMOVED***',
       publicToken:
         '***REMOVED***',
       styleOwner: 'capcollectif',

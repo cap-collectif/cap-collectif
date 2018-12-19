@@ -46,6 +46,8 @@ describe('<LeafletMap />', () => {
     eventSelected: 'event2',
     mapTokens: {
       mapbox: {
+        initialPublicToken:
+          '***REMOVED***',
         publicToken:
           '***REMOVED***',
         styleOwner: 'capcollectif',

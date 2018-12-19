@@ -9,6 +9,7 @@ Object {
   "isSubmittingAccountForm": false,
   "mapTokens": Object {
     "mapbox": Object {
+      "initialPublicToken": "***REMOVED***",
       "publicToken": "***REMOVED***",
       "styleId": "***REMOVED***",
       "styleOwner": "capcollectif",
@@ -41,6 +42,7 @@ Object {
   "isSubmittingAccountForm": false,
   "mapTokens": Object {
     "mapbox": Object {
+      "initialPublicToken": "***REMOVED***",
       "publicToken": "***REMOVED***",
       "styleId": "***REMOVED***",
       "styleOwner": "capcollectif",
@@ -71,6 +73,7 @@ Object {
   "isSubmittingAccountForm": false,
   "mapTokens": Object {
     "mapbox": Object {
+      "initialPublicToken": "***REMOVED***",
       "publicToken": "***REMOVED***",
       "styleId": "***REMOVED***",
       "styleOwner": "capcollectif",
@@ -101,6 +104,7 @@ Object {
   "isSubmittingAccountForm": false,
   "mapTokens": Object {
     "mapbox": Object {
+      "initialPublicToken": "***REMOVED***",
       "publicToken": "***REMOVED***",
       "styleId": "***REMOVED***",
       "styleOwner": "capcollectif",
@@ -131,6 +135,7 @@ Object {
   "isSubmittingAccountForm": true,
   "mapTokens": Object {
     "mapbox": Object {
+      "initialPublicToken": "***REMOVED***",
       "publicToken": "***REMOVED***",
       "styleId": "***REMOVED***",
       "styleOwner": "capcollectif",
@@ -161,6 +166,7 @@ Object {
   "isSubmittingAccountForm": false,
   "mapTokens": Object {
     "mapbox": Object {
+      "initialPublicToken": "***REMOVED***",
       "publicToken": "***REMOVED***",
       "styleId": "***REMOVED***",
       "styleOwner": "capcollectif",
@@ -191,6 +197,7 @@ Object {
   "isSubmittingAccountForm": false,
   "mapTokens": Object {
     "mapbox": Object {
+      "initialPublicToken": "***REMOVED***",
       "publicToken": "***REMOVED***",
       "styleId": "***REMOVED***",
       "styleOwner": "capcollectif",

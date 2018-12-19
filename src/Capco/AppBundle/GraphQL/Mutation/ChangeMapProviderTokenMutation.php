@@ -54,7 +54,7 @@ class ChangeMapProviderTokenMutation implements MutationInterface
     }
 
     private function mutateAndGetMapboxTokenPayload(
-        string $publicToken,
+        ?string $publicToken,
         ?string $secretToken
     ): array {
         $mapboxMapToken = $this->repository->getCurrentMapTokenForProvider(MapProviderEnum::MAPBOX);
@@ -63,7 +63,7 @@ class ChangeMapProviderTokenMutation implements MutationInterface
             throw new \RuntimeException('Map Token not found!');
         }
 
-        if (!$this->isValidToken($publicToken)) {
+        if ($publicToken && '' !== $publicToken && !$this->isValidToken($publicToken)) {
             $this->logger->error(
                 'Invalid public token given for provider ' . MapProviderEnum::MAPBOX
             );
@@ -79,7 +79,10 @@ class ChangeMapProviderTokenMutation implements MutationInterface
             throw new UserError(self::ERROR_INVALID_SECRET_TOKEN);
         }
 
-        $mapboxMapToken->setPublicToken($publicToken);
+        if (null !== $publicToken && '' !== $publicToken) {
+            $mapboxMapToken->setPublicToken($publicToken);
+        }
+
         $mapboxMapToken->setSecretToken($secretToken);
 
         if (null === $mapboxMapToken->getSecretToken()) {

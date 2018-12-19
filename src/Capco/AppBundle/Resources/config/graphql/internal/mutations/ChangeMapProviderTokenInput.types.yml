@@ -7,7 +7,7 @@ ChangeMapProviderTokenInput:
         type: 'MapTokenProvider!'
         description: 'The name of the provider the new token will be set'
       publicToken:
-        type: 'String!'
+        type: 'String'
         description: 'The new public token'
       secretToken:
         type: 'String'

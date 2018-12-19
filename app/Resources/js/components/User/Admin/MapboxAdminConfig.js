@@ -46,22 +46,6 @@ const SubmitButtonInner = styled.span`
 
 const formName = 'mapbox-admin-config';
 
-const validate = (values: FormValues) => {
-  const errors = {};
-  const fields = ['publicToken'];
-
-  fields.forEach(field => {
-    if (
-      (field === 'publicToken' && !values[field]) ||
-      (values[field] && values[field].length === 0)
-    ) {
-      errors[field] = 'fill-field';
-    }
-  });
-
-  return errors;
-};
-
 const onSubmit = async (values: FormValues) => {
   const input = {
     ...values,
@@ -206,7 +190,7 @@ class MapboxAdminConfig extends React.Component<Props, State> {
 
 const form = reduxForm({
   onSubmit,
-  validate,
+  validate: () => ({}),
   enableReinitialize: true,
   form: formName,
 })(MapboxAdminConfig);
@@ -214,7 +198,11 @@ const form = reduxForm({
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, { mapToken }: Props) => ({
   initialValues: {
     secretToken: mapToken ? mapToken.secretToken : '',
-    publicToken: mapToken ? mapToken.publicToken : '',
+    publicToken: mapToken
+      ? mapToken.publicToken !== state.user.mapTokens.mapbox.initialPublicToken
+        ? mapToken.publicToken
+        : ''
+      : '',
   },
 });
 
