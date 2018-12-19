@@ -19,7 +19,7 @@ class MapToken
     public const DEFAULT_STYLE_ID = 'cj4zmeym20uhr2smcmgbf49cz';
 
     /**
-     * @ORM\Column(name="public_token", type="string", nullable=false)
+     * @ORM\Column(name="public_token", type="string", nullable=true)
      */
     protected $publicToken;
 
@@ -72,9 +72,9 @@ class MapToken
         return $this->publicToken;
     }
 
-    public function setPublicToken(string $publicToken): self
+    public function setPublicToken(?string $publicToken): self
     {
-        $this->publicToken = $publicToken;
+        $this->publicToken = $publicToken ? ('' !== $publicToken ? $publicToken : null) : null;
 
         return $this;
     }

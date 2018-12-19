@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Client;
 
+use GuzzleHttp\RequestOptions;
+
 class MapboxClient
 {
     private const BASE_URL = 'https://api.mapbox.com';
@@ -13,23 +15,10 @@ class MapboxClient
     private $_uri;
     private $_path;
 
-    private function prepareUri(): void
-    {
-        $this->_uri = self::BASE_URL . "/";
-        if ($this->_endpoint) {
-            $this->_uri .= $this->_endpoint . "/";
-        }
-        $this->_uri .= $this->_version . "/";
-
-        if($this->_path) {
-            $this->_uri .= $this->_path . "/";
-        }
-    }
-
     public function __construct()
     {
         $this->_client = new \GuzzleHttp\Client([
-            'headers' => [ 'Content-Type' => 'application/json' ]
+            'headers' => ['Content-Type' => 'application/json'],
         ]);
     }
 
@@ -66,14 +55,34 @@ class MapboxClient
         $this->prepareUri();
 
         $response = $this->_client->get($this->_uri, [
-            'query' => $this->_parameters
+            'query' => $this->_parameters,
         ]);
 
-        return json_decode(
-            (string)$response->getBody(),
-            true
-        );
+        return json_decode((string) $response->getBody(), true);
     }
 
+    public function post(array $data): array
+    {
+        $this->prepareUri();
 
+        $response = $this->_client->post($this->_uri, [
+            'query' => $this->_parameters,
+            RequestOptions::JSON => $data,
+        ]);
+
+        return json_decode((string) $response->getBody(), true);
+    }
+
+    private function prepareUri(): void
+    {
+        $this->_uri = self::BASE_URL . '/';
+        if ($this->_endpoint) {
+            $this->_uri .= $this->_endpoint . '/';
+        }
+        $this->_uri .= $this->_version . '/';
+
+        if ($this->_path) {
+            $this->_uri .= $this->_path . '/';
+        }
+    }
 }

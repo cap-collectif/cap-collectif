@@ -62,6 +62,7 @@ parameters:
   disable_mail_delivery: '%env(SYMFONY_DISABLE_MAIL_DELIVERY)%'
   sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
   google_maps_key: ***REMOVED***
+  mapbox_secret_key: '%env(SYMFONY_MAPBOX_SECRET_KEY)%'
   loco_key: 5TYY2LOJxU7WgnDpreCQYXkXLAS_hsDII
   locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE']
   google_maps_key_server: '***REMOVED***'
@@ -96,6 +97,7 @@ parameters:
   env(SYMFONY_FACEBOOK_APP_SECRET): ***REMOVED***
   env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
   env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
+  env(SYMFONY_MAPBOX_SECRET_KEY): ***REMOVED***
   env(SYMFONY_JWT_TOKEN_TTL): 86400
   env(SYMFONY_LANGUAGE_ANALYZER): french
   env(SYMFONY_REMEMBER_SECRET): ***REMOVED***
