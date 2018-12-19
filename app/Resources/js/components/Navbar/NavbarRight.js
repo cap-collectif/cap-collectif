@@ -38,7 +38,7 @@ export class NavbarRight extends React.Component<Props> {
             href="/search"
             role="search"
             aria-label={intl.formatMessage({ id: 'search.title' })}>
-            <i className="cap cap-magnifier" />{' '}
+            <i aria-hidden="true" className="cap cap-magnifier" />{' '}
             <span className="visible-xs-inline" style={{ whiteSpace: 'nowrap' }}>
               <FormattedMessage id="navbar.search" />
             </span>
