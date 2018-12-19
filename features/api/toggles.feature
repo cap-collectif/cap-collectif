@@ -9,10 +9,10 @@ Scenario: Anonymous API client wants to receive a confirmation sms
     "enabled": true
   }
   """
-  Then the JSON response status code should be 403
+  Then the JSON response status code should be 401
   And the JSON response should match:
   """
-  {"code":403,"message":"Not authorized."}
+  {"code":401,"message":"Bad credentials"}
   """
 
 @security
@@ -27,7 +27,7 @@ Scenario: Anonymous API client wants to receive a confirmation sms
   Then the JSON response status code should be 403
   And the JSON response should match:
   """
-  {"code":403,"message":"Not authorized."}
+  {"code":403,"message":"Expression \"has_role('ROLE_ADMIN')\" denied access."}
   """
 
 @security

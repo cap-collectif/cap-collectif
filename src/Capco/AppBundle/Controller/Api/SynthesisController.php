@@ -2,24 +2,31 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Symfony\Component\HttpFoundation\Request;
-use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Put;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Synthesis\Synthesis;
+use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
+use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
+use Capco\AppBundle\Form\Api\SynthesisType as SynthesisForm;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use Capco\AppBundle\Entity\Synthesis\SynthesisElement;
-use Capco\AppBundle\Form\Api\SynthesisType as SynthesisForm;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Capco\AppBundle\Form\Api\SynthesisElementType as SynthesisElementForm;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class SynthesisController extends FOSRestController
 {
@@ -37,16 +44,12 @@ class SynthesisController extends FOSRestController
      *    404 = "No syntheses",
      *  }
      * )
+     * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses")
      * @View(serializerGroups={"Syntheses", "Elements"})
      */
     public function getSynthesesAction()
     {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
         return $this->get('capco.synthesis.synthesis_handler')->getAllSyntheses();
     }
 
@@ -62,16 +65,12 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses")
      * @View(statusCode=201, serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function createSynthesisAction(Request $request)
     {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
         $synthesis = new Synthesis();
         $form = $this->createForm(SynthesisForm::class, $synthesis);
         $form->submit($request->request->all(), false);
@@ -80,7 +79,9 @@ class SynthesisController extends FOSRestController
             return $form;
         }
 
-        return $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
+        $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesis($synthesis);
+
+        return $synthesis;
     }
 
     /**
@@ -95,6 +96,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/from-consultation-step/{id}")
      * @ParamConverter("consultationStep", options={"mapping": {"id": "id"}})
      * @View(statusCode=201, serializerGroups={"SynthesisDetails", "Elements"})
@@ -103,10 +105,6 @@ class SynthesisController extends FOSRestController
         Request $request,
         ConsultationStep $consultationStep
     ) {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
         $synthesis = new Synthesis();
         $form = $this->createForm(SynthesisForm::class, $synthesis);
         $form->submit($request->request->all(), false);
@@ -115,10 +113,11 @@ class SynthesisController extends FOSRestController
             return $form;
         }
 
-        return $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep(
-            $synthesis,
-            $consultationStep
-        );
+        $synthesis = $this->get(
+            'capco.synthesis.synthesis_handler'
+        )->createSynthesisFromConsultationStep($synthesis, $consultationStep);
+
+        return $synthesis;
     }
 
     /**
@@ -161,21 +160,21 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Put("/syntheses/{id}")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"SynthesisDetails", "Elements"})
      */
     public function updateSynthesisAction(Request $request, Synthesis $synthesis)
     {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
         $form = $this->createForm(SynthesisForm::class, $synthesis);
         $form->submit($request->request->all(), false);
         if ($form->isValid()) {
-            return $this->get('capco.synthesis.synthesis_handler')->updateSynthesis($synthesis);
+            $synthesis = $this->get('capco.synthesis.synthesis_handler')->updateSynthesis(
+                $synthesis
+            );
+
+            return $synthesis;
         }
 
         return $form;
@@ -193,6 +192,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses/{id}/updated")
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"SynthesisDetails", "Elements"})
      *
@@ -200,11 +200,6 @@ class SynthesisController extends FOSRestController
      */
     public function getUpdatedSynthesisAction($id)
     {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
         return $this->get('capco.synthesis.synthesis_handler')->getUpdatedSynthesis($id);
     }
 
@@ -286,9 +281,11 @@ class SynthesisController extends FOSRestController
             $this->createAccessDeniedException();
         }
 
-        return $this->get(
+        $tree = $this->get(
             'capco.synthesis.synthesis_element_handler'
         )->getElementsTreeFromSynthesisByType($synthesis, $type, $parent);
+
+        return $tree;
     }
 
     /**
@@ -319,7 +316,7 @@ class SynthesisController extends FOSRestController
             ('published' !== $type || !$synthesis->isEnabled()) &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
         ) {
-            throw new AccessDeniedHttpException('Not authorized.');
+            throw new AccessDeniedException();
         }
 
         return [
@@ -352,7 +349,7 @@ class SynthesisController extends FOSRestController
             (!$synthesis->isEnabled() || !$element->isPublished()) &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
         ) {
-            throw new AccessDeniedHttpException('Not authorized.');
+            throw new AccessDeniedException();
         }
 
         return $element;
@@ -370,17 +367,13 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Post("/syntheses/{id}/elements")
      * @ParamConverter("synthesis", options={"mapping": {"id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(statusCode="201", serializerEnableMaxDepthChecks=true, serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
     public function createSynthesisElementAction(Request $request, Synthesis $synthesis)
     {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
         $element = new SynthesisElement();
         $form = $this->createForm(SynthesisElementForm::class, $element, ['hasDivision' => false]);
         $form->submit($request->request->all(), false);
@@ -389,11 +382,11 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($form->getErrors(true));
         }
 
-        return $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis(
-            $element,
-            $synthesis,
-            $this->getUser()
-        );
+        $element = $this->get(
+            'capco.synthesis.synthesis_element_handler'
+        )->createElementInSynthesis($element, $synthesis, $this->getUser());
+
+        return $element;
     }
 
     /**
@@ -408,6 +401,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Put("/syntheses/{synthesisId}/elements/{elementId}")
      * @ParamConverter("synthesis", options={"mapping": {"synthesisId": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("element", options={"mapping": {"elementId": "id"}})
@@ -418,11 +412,6 @@ class SynthesisController extends FOSRestController
         Synthesis $synthesis,
         SynthesisElement $element
     ) {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
         $form = $this->createForm(SynthesisElementForm::class, $element, ['hasDivision' => true]);
         $form->submit($request->request->all(), false);
 
@@ -430,10 +419,11 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($form->getErrors(true));
         }
 
-        return $this->get('capco.synthesis.synthesis_element_handler')->updateElementInSynthesis(
-            $element,
-            $synthesis
-        );
+        $element = $this->get(
+            'capco.synthesis.synthesis_element_handler'
+        )->updateElementInSynthesis($element, $synthesis);
+
+        return $element;
     }
 
     /**
@@ -448,6 +438,7 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Get("/syntheses/{synthesis_id}/elements/{element_id}/history", name="get_synthesis_element_history")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
@@ -458,12 +449,11 @@ class SynthesisController extends FOSRestController
         Synthesis $synthesis,
         SynthesisElement $element
     ) {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
+        $logs = $this->get('capco.synthesis.synthesis_element_handler')->getLogsForElement(
+            $element
+        );
 
-        return $this->get('capco.synthesis.synthesis_element_handler')->getLogsForElement($element);
+        return $logs;
     }
 
     /**
@@ -478,17 +468,13 @@ class SynthesisController extends FOSRestController
      *  }
      * )
      *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Put("/syntheses/{synthesis_id}/display")
      * @ParamConverter("synthesis", options={"mapping": {"synthesis_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
      * @View(serializerGroups={"Syntheses", "Elements"})
      */
     public function updateSynthesisDisplayRulesAction(Request $request, Synthesis $synthesis)
     {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
         $synthesis->setDisplayRules($request->request->get('rules'));
         $this->getDoctrine()
             ->getManager()

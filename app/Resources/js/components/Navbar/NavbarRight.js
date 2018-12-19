@@ -5,6 +5,7 @@ import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
+import LoginActions from '../../actions/LoginActions';
 import UserAvatar from '../User/UserAvatar';
 import type { State } from '../../types';
 
@@ -20,6 +21,8 @@ export class NavbarRight extends React.Component<Props> {
   };
 
   logout = () => {
+    // suppress jwt
+    LoginActions.logoutUser();
     // We redirect to /logout page to invalidate session on the server
     window.location.href = `${window.location.protocol}//${window.location.host}/logout`;
   };

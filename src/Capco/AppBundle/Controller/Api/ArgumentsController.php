@@ -1,23 +1,27 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class ArgumentsController extends FOSRestController
 {
     /**
+     * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/arguments/{argumentId}/reports")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("argument", options={"mapping": {"argumentId": "id"}})
@@ -28,9 +32,8 @@ class ArgumentsController extends FOSRestController
         Opinion $opinion,
         Argument $argument
     ) {
-        $viewer = $this->getUser();
-        if (!$viewer || 'anon.' === $viewer || $viewer === $argument->getAuthor()) {
-            throw new AccessDeniedHttpException('Not authorized.');
+        if ($this->getUser() === $argument->getAuthor()) {
+            throw new AccessDeniedHttpException();
         }
 
         if ($argument->getOpinion() !== $opinion) {
@@ -41,6 +44,7 @@ class ArgumentsController extends FOSRestController
     }
 
     /**
+     * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/versions/{versionId}/arguments/{argumentId}/reports")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
@@ -53,9 +57,8 @@ class ArgumentsController extends FOSRestController
         OpinionVersion $version,
         Argument $argument
     ) {
-        $viewer = $this->getUser();
-        if (!$viewer || 'anon.' === $viewer || $viewer === $argument->getAuthor()) {
-            throw new AccessDeniedHttpException('Not authorized.');
+        if ($this->getUser() === $argument->getAuthor()) {
+            throw new AccessDeniedHttpException();
         }
 
         if ($argument->getOpinionVersion() !== $version) {

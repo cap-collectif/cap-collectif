@@ -222,10 +222,10 @@ Scenario: API client wants to update his phone
     "phone": "+33628353290"
   }
   """
-  Then the JSON response status code should be 403
+  Then the JSON response status code should be 401
   Then the JSON response should match:
   """
-  {"code":403,"message":"Not authorized."}
+  {"code":401,"message":"Bad credentials"}
   """
 
 @database

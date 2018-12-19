@@ -18,21 +18,20 @@ class ProjectRepository extends EntityRepository
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOneWithoutVisibility(string $slug): ?Project
+    public function getOneWithoutVisibility($slug)
     {
         $qb = $this->createQueryBuilder('p')
-            ->addSelect('t', 'cover', 'author')
-            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
-            ->leftJoin('p.Cover', 'cover')
-            ->leftJoin('p.Author', 'author')
+            ->addSelect('t', 'pas', 's', 'pov')
+            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = :enabled')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 's')
+            ->leftJoin('p.Cover', 'pov')
             ->andWhere('p.slug = :slug')
+            ->andWhere('s.isEnabled = :enabled')
+            ->setParameter('enabled', true)
             ->setParameter('slug', $slug);
 
-        return $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->useResultCache(true, 60)
-            ->getOneOrNullResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function getByUser(User $user, $viewer = null)

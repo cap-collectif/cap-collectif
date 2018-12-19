@@ -102,7 +102,7 @@ Scenario: Anonymous API client wants to create a synthesis
     "enabled": true
   }
   """
-  Then the JSON response status code should be 403
+  Then the JSON response status code should be 401
 
 @database
 Scenario: API client wants to create a synthesis from a consultation step
@@ -227,7 +227,7 @@ Scenario: Anonymous API client wants to update a synthesis
     "enabled": false
   }
   """
-  Then the JSON response status code should be 403
+  Then the JSON response status code should be 401
 
 @database
 Scenario: API client wants to get synthesis elements
@@ -610,7 +610,7 @@ Scenario: API client wants to get a synthesis element that is not published
   Given there is a synthesis with id "42" and elements:
     | 43 |
   And I send a GET request to "/api/syntheses/42/elements/43"
-  Then the JSON response status code should be 403
+  Then the JSON response status code should be 401
 
 @database
 Scenario: API client wants to get a synthesis element that is published
@@ -753,7 +753,7 @@ Scenario: Anonymous API client wants to create a synthesis element
     "notation": 5
   }
   """
-  Then the JSON response status code should be 403
+  Then the JSON response status code should be 401
 
 @database 
 Scenario: API client wants to update a synthesis element
@@ -836,7 +836,7 @@ Scenario: Anonymous API client wants to update a synthesis element
     "notation": 2
   }
   """
-  Then the JSON response status code should be 403
+  Then the JSON response status code should be 401
 
 #@database
 #Scenario: API client wants to divide a synthesis element
@@ -1005,7 +1005,7 @@ Scenario: Anonymous API client wants to divide a synthesis element
     }
   }
   """
-  Then the JSON response status code should be 403
+  Then the JSON response status code should be 401
 
 @database
 Scenario: API client wants to get a synthesis element history

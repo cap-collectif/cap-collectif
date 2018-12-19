@@ -3,35 +3,31 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Form\ProjectType;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use FOS\RestBundle\Controller\Annotations\Get;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Form\ProjectType;
+use Capco\AppBundle\Resolver\ProjectStatsResolver;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Capco\AppBundle\Resolver\ProjectStatsResolver;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectsController extends FOSRestController
 {
     /**
      * @Post("/projects")
+     * @Security("has_role('ROLE_ADMIN')")
      * @View(statusCode=201, serializerGroups={"ProjectAdmin"})
      */
     public function postProjectAction(Request $request)
     {
-        $viewer = $this->getUser();
-        if (!$viewer || !$viewer->isAdmin()) {
-            throw new AccessDeniedHttpException('Not authorized.');
-        }
-
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
         $form->submit($request->request->all(), false);

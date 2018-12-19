@@ -33,7 +33,7 @@ Scenario: Logged in API client wants to remove a vote for an comment
            "contribution":{
               "id":"eventComment1",
               "votes":{
-                 "totalCount": 0
+                 "totalCount":1
               }
            },
            "deletedVoteId":"Q29tbWVudFZvdGU6NTAwMTE="

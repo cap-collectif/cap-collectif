@@ -39,10 +39,10 @@ class GraphQLController extends BaseController
 
     public function endpointAction(Request $request, string $schemaName = null)
     {
+        if (self::PREVIEW_HEADER === $request->headers->get('accept')) {
+            $schemaName = 'preview';
+        }
         if (!$schemaName) {
-            if (self::PREVIEW_HEADER === $request->headers->get('accept')) {
-                $schemaName = 'preview';
-            }
             $schemaName = 'public';
         }
 

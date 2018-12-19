@@ -5,7 +5,7 @@ Feature: Proposal Restful Api
 @database
 Scenario: Anonymous API client wants to report a proposal
   When I send a POST request to "/api/proposals/proposal1/reports" with a valid report json
-  Then the JSON response status code should be 403
+  Then the JSON response status code should be 401
 
 @database
 Scenario: Logged in API client wants to report an proposal

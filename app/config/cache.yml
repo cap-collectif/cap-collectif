@@ -1,6 +1,6 @@
 # HTTP caching (with Varnish)
 fos_http_cache:
-  debug:
+  debug: 
     enabled: false
   tags:
     enabled: false
@@ -12,19 +12,21 @@ fos_http_cache:
       overwrite: false
     rules:
       # 1/ No cache in bo
-      - match:
+      -
+        match:
           path: ^/admin$
         headers:
           cache_control:
             public: false
             s_maxage: 0
-      # 2/ Internal GraphQL API cache is done in GraphQLController
+      # 2/ Internal GraphQL API cache is done in GraphQLController 
       # because fos_http_cache does not support caching POST requests
 
       # 3/ Match everything to set defaults
-      - match:
+      -
+        match:
           path: ^/
-          methods:
+          methods: 
             - GET
         headers:
           cache_control:
@@ -41,6 +43,7 @@ fos_http_cache:
           - 172.17.0.1 # Used in prod ? See with @ptondereau
         base_url: 127.0.0.1
 
+
 # Disable @Cache annotation, please use fos_http_cache
 sensio_framework_extra:
-  cache: { annotations: false }
+    cache:       { annotations: false }

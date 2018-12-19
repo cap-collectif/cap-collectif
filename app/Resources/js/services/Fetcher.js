@@ -1,5 +1,7 @@
 // @flow
 import config from '../config';
+import AuthService from './AuthService';
+import LocalStorageService from './LocalStorageService';
 
 const status = (response: Object): Object | Error => {
   if (response.status >= 200 && response.status < 300) {
@@ -19,112 +21,149 @@ export const createHeaders = (): { [string]: string } => {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
+
+  if (LocalStorageService.isValid('jwt')) {
+    headers.Authorization = `Bearer ${LocalStorageService.get('jwt')}`;
+  }
+
   return headers;
 };
 
 export const createFormDataHeaders = () => {
   const headers = {};
 
+  if (LocalStorageService.isValid('jwt')) {
+    headers.Authorization = `Bearer ${LocalStorageService.get('jwt')}`;
+  }
+
   return headers;
+};
+
+// If shield mode is activated, Safari will override the Authorization header, so we need this
+const addAuthorization = req => {
+  if (LocalStorageService.isValid('jwt')) {
+    const header = `Bearer ${LocalStorageService.get('jwt')}`;
+    req.setRequestHeader('Authorization', header);
+  }
 };
 
 class Fetcher {
   get(uri: string): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'GET',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-    })
-      .then(status)
-      .then(json);
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
+        method: 'GET',
+        headers: createHeaders(),
+        beforeSend: addAuthorization,
+      })
+        .then(status)
+        .then(json),
+    );
   }
 
   graphqlFormData(body: FormData): Promise<*> {
-    return fetch(config.graphql, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: createFormDataHeaders(),
-      body,
-    })
-      .then(status)
-      .then(json);
+    return AuthService.login().then(() =>
+      fetch(config.graphql, {
+        method: 'POST',
+        headers: createFormDataHeaders(),
+        beforeSend: addAuthorization,
+        body,
+      })
+        .then(status)
+        .then(json),
+    );
   }
 
   graphql(body: Object) {
-    return fetch(config.graphql, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-      body: JSON.stringify(body),
-    })
-      .then(status)
-      .then(json);
+    return AuthService.login().then(() =>
+      fetch(config.graphql, {
+        method: 'POST',
+        headers: createHeaders(),
+        beforeSend: addAuthorization,
+        body: JSON.stringify(body),
+      })
+        .then(status)
+        .then(json),
+    );
   }
 
   postFormData(uri: string, body: FormData): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: createFormDataHeaders(),
-      body,
-    }).then(status);
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
+        method: 'POST',
+        headers: createFormDataHeaders(),
+        beforeSend: addAuthorization,
+        body,
+      }).then(status),
+    );
   }
 
   post(uri: string, body: ?Object = {}) {
-    return fetch(config.api + uri, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-      body: JSON.stringify(body),
-    }).then(status);
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
+        method: 'POST',
+        headers: createHeaders(),
+        beforeSend: addAuthorization,
+        body: JSON.stringify(body),
+      }).then(status),
+    );
   }
 
   postToJson(uri: string, body: Object) {
-    return fetch(config.api + uri, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-      body: JSON.stringify(body),
-    })
-      .then(status)
-      .then(json);
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
+        method: 'POST',
+        headers: createHeaders(),
+        beforeSend: addAuthorization,
+        body: JSON.stringify(body),
+      })
+        .then(status)
+        .then(json),
+    );
   }
 
   put(uri: string, body: Object): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'PUT',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-      body: JSON.stringify(body),
-    }).then(status);
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
+        method: 'PUT',
+        headers: createHeaders(),
+        beforeSend: addAuthorization,
+        body: JSON.stringify(body),
+      }).then(status),
+    );
   }
 
   putToJson(uri: string, body: Object): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'PUT',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-      body: JSON.stringify(body),
-    })
-      .then(status)
-      .then(json);
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
+        method: 'PUT',
+        headers: createHeaders(),
+        beforeSend: addAuthorization,
+        body: JSON.stringify(body),
+      })
+        .then(status)
+        .then(json),
+    );
   }
 
   patch(uri: string, body: Object): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'PATCH',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-      body: JSON.stringify(body),
-    }).then(status);
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
+        method: 'PATCH',
+        headers: createHeaders(),
+        beforeSend: addAuthorization,
+        body: JSON.stringify(body),
+      }).then(status),
+    );
   }
 
   delete(uri: string): Promise<*> {
-    return fetch(config.api + uri, {
-      method: 'DELETE',
-      credentials: 'same-origin',
-      headers: createHeaders(),
-    }).then(status);
+    return AuthService.login().then(() =>
+      fetch(config.api + uri, {
+        method: 'DELETE',
+        headers: createHeaders(),
+        beforeSend: addAuthorization,
+      }).then(status),
+    );
   }
 }
 

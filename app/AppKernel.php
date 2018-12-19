@@ -65,6 +65,9 @@ class AppKernel extends Kernel
             // API
             new \FOS\RestBundle\FOSRestBundle(),
             new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new \Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+            new Gfreeau\Bundle\GetJWTBundle\GfreeauGetJWTBundle(),
+            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             // GraphQL
             new Overblog\GraphQLBundle\OverblogGraphQLBundle(),
             // Swarrot to publish and consume rabbitmq messages

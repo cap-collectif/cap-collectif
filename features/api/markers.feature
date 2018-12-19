@@ -47,3 +47,8 @@ Scenario: Anonymous API client wants to get all markers from a selection step
     @...@
   ]
   """
+
+@parallel-scenario
+Scenario: Anonymous API client wants to get all markers from a private collect step
+  When I send a GET request to "/api/collect_step/collectstep4/markers"
+  Then the JSON response status code should be 401

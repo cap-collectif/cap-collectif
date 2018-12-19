@@ -19,6 +19,7 @@ class ApiContext extends ApplicationContext
      * @var Client
      */
     public $client;
+    public $token;
     public $response;
 
     /**
@@ -26,7 +27,12 @@ class ApiContext extends ApplicationContext
      */
     public function createClient()
     {
-        $this->resetClient();
+        $this->client = new Client([
+            'base_uri' => 'https://capco.test/',
+            'cert' => '/etc/ssl/certs/capco.pem',
+            'verify' => false,
+        ]);
+        $this->token = null;
     }
 
     /**
@@ -155,6 +161,7 @@ EOF;
     {
         $this->response = $this->client->request($method, $url, [
             'headers' => [
+                'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
             ],
             'exceptions' => false,
@@ -171,6 +178,7 @@ EOF;
     {
         $this->response = $this->client->request($method, $url, [
             'headers' => [
+                'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/xml',
             ],
             'exceptions' => false,
@@ -188,7 +196,7 @@ EOF;
         $this->response = $this->client->request($method, $url, [
             'json' => $table->getHash(),
             'exceptions' => false,
-            'headers' => [],
+            'headers' => ['Authorization' => sprintf('Bearer %s', $this->token)],
         ]);
     }
 
@@ -204,6 +212,7 @@ EOF;
             'json' => json_decode($string->getRaw(), true),
             'exceptions' => false,
             'headers' => [
+                'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
             ],
         ]);
@@ -242,17 +251,17 @@ EOF;
 
         $body[] = [
             'name' => 'responses.2.value.0',
-            'contents' => fopen('/var/www/features/files/document.pdf', 'rb'),
+            'contents' => fopen('/var/www/features/files/document.pdf', 'r'),
             'filename' => 'document.pdf',
         ];
         $body[] = [
             'name' => 'media',
-            'contents' => fopen('/var/www/features/files/image.jpg', 'rb'),
+            'contents' => fopen('/var/www/features/files/image.jpg', 'r'),
             'filename' => 'image.jpg',
         ];
 
         $this->response = $this->client->request($method, $url, [
-            'headers' => [],
+            'headers' => ['Authorization' => sprintf('Bearer %s', $this->token)],
             'multipart' => $body,
         ]);
     }
@@ -419,7 +428,6 @@ EOF;
             )->getSentencesForLog($log);
             if (\in_array($sentence, $sentences, true)) {
                 $logExists = true;
-
                 break;
             }
         }
@@ -504,30 +512,18 @@ EOF;
     }
 
     /**
-     * Create a client with an authenticated cookie.
+     * Create a client with a an Authorization header.
      */
     protected function createAuthenticatedClient(
         string $username = 'test',
         string $password = 'test'
     ) {
-        $this->resetClient();
-        $response = $this->client->request('POST', '/login_check', [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ],
+        $response = $this->client->request('POST', '/api/login_check', [
+            'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
             'json' => ['username' => $username, 'password' => $password],
         ]);
-    }
-
-    private function resetClient()
-    {
-        $this->client = new Client([
-            'base_uri' => 'https://capco.test/',
-            'cert' => '/etc/ssl/certs/capco.pem',
-            'verify' => false,
-            'cookies' => true,
-        ]);
+        $body = (string) $response->getBody();
+        $this->token = json_decode($body, true)['token'];
     }
 
     private function iSendARequestWithJson(string $method, string $url, string $body)
@@ -536,6 +532,7 @@ EOF;
             'json' => json_decode($body, true),
             'exceptions' => false,
             'headers' => [
+                'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
             ],
