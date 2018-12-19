@@ -10,7 +10,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     autoFocus={true}
     component={[Function]}
     disableValidation={true}
-    id="email"
+    id="username"
     label={
       <FormattedMessage
         id="global.email"
@@ -18,7 +18,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
       />
     }
     labelClassName="font-weight-normal"
-    name="email"
+    name="username"
     type="email"
   />
   <Field

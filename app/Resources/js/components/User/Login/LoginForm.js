@@ -17,8 +17,8 @@ type LoginValues = {
 export const validate = (values: Object) => {
   const errors = {};
 
-  if (!values.email || !isEmail(values.email)) {
-    errors.email = 'registration.constraints.email.invalid';
+  if (!values.username || !isEmail(values.username)) {
+    errors.username = 'registration.constraints.email.invalid';
   }
 
   return errors;
@@ -48,12 +48,12 @@ export class LoginForm extends React.Component<Props> {
           </Alert>
         )}
         <Field
-          name="email"
+          name="username"
           type="email"
           autoFocus
           disableValidation
           ariaRequired
-          id="email"
+          id="username"
           label={<FormattedMessage id="global.email" />}
           autoComplete="email"
           labelClassName="font-weight-normal"
