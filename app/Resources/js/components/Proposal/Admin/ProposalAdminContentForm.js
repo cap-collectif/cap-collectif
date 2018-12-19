@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import {
   type FormProps,
   SubmissionError,
@@ -45,17 +45,21 @@ type FormValues = {|
   district?: ?Uuid,
   address?: ?string,
 |};
-type RelayProps = {
+
+type RelayProps = {|
   +proposal: ProposalAdminContentForm_proposal,
-};
-type Props = FormProps &
-  RelayProps & {
-    +themes: Array<{ id: Uuid, title: string }>,
-    +features: FeatureToggles,
-    +intl: IntlShape,
-    +isSuperAdmin: boolean,
-    +responses: ResponsesInReduxForm,
-  };
+|};
+
+type Props = {|
+  proposal: ProposalAdminContentForm_proposal,
+  ...FormProps,
+  ...RelayProps,
+  +themes: Array<{ id: Uuid, title: string }>,
+  +features: FeatureToggles,
+  +intl: IntlShape,
+  +isSuperAdmin: boolean,
+  +responses: ResponsesInReduxForm,
+|};
 
 const formName = 'proposal-admin-edit';
 
@@ -349,7 +353,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   </span>
                 }>
                 <FormattedMessage id="proposal.select.theme">
-                  {message => <option value="">{message}</option>}
+                  {(message: string) => <option value="">{message}</option>}
                 </FormattedMessage>
                 {themes.map(theme => (
                   <option key={theme.id} value={theme.id}>
@@ -371,7 +375,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   </span>
                 }>
                 <FormattedMessage id="proposal.select.category">
-                  {message => <option value="">{message}</option>}
+                  {(message: string) => <option value="">{message}</option>}
                 </FormattedMessage>
                 {categories.map(category => (
                   <option key={category.id} value={category.id}>
@@ -393,7 +397,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                   </span>
                 }>
                 <FormattedMessage id="proposal.select.district">
-                  {message => <option value="">{message}</option>}
+                  {(message: string) => <option value="">{message}</option>}
                 </FormattedMessage>
                 {form.districts.map(district => (
                   <option key={district.id} value={district.id}>
@@ -472,10 +476,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalAdminContentForm);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: GlobalState,
-  { proposal }: RelayProps,
-) => ({
+const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   features: state.default.features,
   themes: state.default.themes,

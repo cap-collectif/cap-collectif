@@ -2,7 +2,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import type { MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Alert } from 'react-bootstrap';
 import renderInput from '../../Form/Field';
@@ -64,7 +63,7 @@ export class LoginForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   shieldEnabled: state.default.features.shield_mode,
 });
 

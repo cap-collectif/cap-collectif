@@ -11,12 +11,17 @@ import type { Dispatch } from '../../../types';
 import type { OpinionCreateForm_section } from './__generated__/OpinionCreateForm_section.graphql';
 import type { OpinionCreateForm_consultation } from './__generated__/OpinionCreateForm_consultation.graphql';
 
-type RelayProps = {
+type RelayProps = {|
   section: OpinionCreateForm_section,
   consultation: OpinionCreateForm_consultation,
-};
+|};
 type FormValues = Object;
-type Props = FormProps & RelayProps;
+type Props = {|
+  consultation: OpinionCreateForm_consultation,
+  section: OpinionCreateForm_section,
+  ...FormProps,
+  ...RelayProps,
+|};
 
 export const formName = 'opinion-create-form';
 const onSubmit = (data: FormValues, dispatch: Dispatch, props: Props) => {

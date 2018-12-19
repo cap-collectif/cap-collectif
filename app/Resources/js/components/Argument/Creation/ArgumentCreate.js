@@ -11,7 +11,7 @@ import {
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Button, Alert } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import component from '../../Form/Field';
 import AddArgumentMutation from '../../../mutations/AddArgumentMutation';
@@ -21,14 +21,15 @@ import type { ArgumentCreate_argumentable } from './__generated__/ArgumentCreate
 type FormValues = { body: ?string };
 type FormValidValues = { body: string };
 
-type Props = FormProps & {
+type Props = {|
+  ...FormProps,
   type: 'FOR' | 'AGAINST' | 'SIMPLE',
   argumentable: ArgumentCreate_argumentable,
   user: { id: string, isEmailConfirmed: boolean },
   submitting: boolean,
   form: string,
   dispatch: Dispatch,
-};
+|};
 
 const onSubmit = (
   values: FormValidValues,
@@ -135,7 +136,7 @@ export class ArgumentCreate extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
 

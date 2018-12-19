@@ -3,22 +3,23 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { GroupAdminUsers } from './GroupAdminUsers';
-import { intlMock, formMock } from '../../../mocks';
+import { $refType, $fragmentRefs, intlMock, formMock } from '../../../mocks';
 
 describe('<GroupAdminUsers />', () => {
   const props = {
     ...formMock,
     intl: intlMock,
-    // $FlowFixMe $refType
+    dispatch: jest.fn(),
     group: {
+      $refType,
       id: 'group4',
       title: 'Comité de suvi',
       users: {
         edges: [
           {
-            // $FlowFixMe $fragmentRefs
             node: {
               id: 'id1',
+              $fragmentRefs,
             },
           },
         ],

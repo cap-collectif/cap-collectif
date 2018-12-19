@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { submit, isSubmitting, isInvalid, isPristine } from 'redux-form';
 import type { Dispatch, GlobalState } from '../../../types';
 import ChooseAUsernameForm, { formName } from './ChooseAUsernameForm';
@@ -49,7 +49,7 @@ export class ChooseAUsernameModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
   invalid: isInvalid(formName)(state),
   pristine: isPristine(formName)(state),

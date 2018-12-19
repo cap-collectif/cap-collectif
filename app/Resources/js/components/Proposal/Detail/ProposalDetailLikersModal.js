@@ -46,6 +46,7 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
         <ListGroupFlush>
           {proposal.likers.map((liker, key) => (
             <ListGroupItem key={key} className={`${liker.vip ? 'bg-vip' : ''} d-flex text-left`}>
+              {/* $FlowFixMe Will be a fragment soon */}
               <UserAvatar
                 user={{
                   username: liker.username,

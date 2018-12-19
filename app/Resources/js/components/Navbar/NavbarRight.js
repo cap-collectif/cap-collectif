@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import RegistrationButton from '../User/Registration/RegistrationButton';
@@ -94,7 +94,7 @@ export class NavbarRight extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   features: state.default.features,
   user: state.user.user,
 });

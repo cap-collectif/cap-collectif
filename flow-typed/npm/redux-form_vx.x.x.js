@@ -340,7 +340,7 @@ export type StopSubmitAction = {
   error: boolean
 }
 export type StopSubmit = { (form: string, errors: ?Object): StopSubmitAction }
-export type SubmitAction = { type: "@@redux-form/SUBMIT", meta: { form: string } }
+export type SubmitAction = {| type: "@@redux-form/SUBMIT", meta: { form: string } |}
 export type Submit = { (form: string): SubmitAction }
 export type SetSubmitFailedAction = {
   type: "@@redux-form/SET_SUBMIT_FAILED",
@@ -521,7 +521,7 @@ declare module 'redux-form' {
   withRef?: boolean
 }>
 
- declare export type FieldArrayProps = {
+ declare export type FieldArrayProps = {|
   fields: Fields,
   meta: {
     dirty: boolean,
@@ -536,7 +536,7 @@ declare module 'redux-form' {
     warning?: any
   },
   ref?: (ref: ?React.Component<*, *>) => void
- }
+ |}
 
 
  declare export var FieldArray: React.ComponentType<{
@@ -549,7 +549,7 @@ declare module 'redux-form' {
   withRef?: boolean
 }>
 
- declare export type FormProps = {
+ declare export type FormProps = {|
   anyTouched: boolean,
   array: {
     insert: (field: string, index: number, value: any) => void,
@@ -594,7 +594,7 @@ declare module 'redux-form' {
   untouch: (...fields: string[]) => void,
   valid: boolean,
   warning: any
-}
+|}
 
 declare export function formValueSelector(
   form: string,

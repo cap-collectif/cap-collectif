@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalPageHeader from './ProposalPageHeader';
@@ -104,7 +104,7 @@ export class ProposalPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   isAuthenticated: state.user.user !== null,
   features: state.default.features,
 });

@@ -5,7 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
-import { type MapStateToProps, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { openVoteModal, deleteVote } from '../../../redux/modules/proposal';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import type { Uuid, Dispatch, GlobalState } from '../../../types';
@@ -87,7 +87,7 @@ export class ProposalVoteButton extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => ({
+const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
   isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
 });
 

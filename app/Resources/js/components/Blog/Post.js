@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import moment from 'moment';
 import type { Post_post } from './__generated__/Post_post.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
+import type { State } from '../../types';
 
 type Props = {
   post: Post_post,
@@ -233,7 +234,7 @@ export class Post extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 

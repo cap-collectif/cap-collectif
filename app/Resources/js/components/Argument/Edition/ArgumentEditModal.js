@@ -3,21 +3,24 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import ArgumentForm, { formName } from './ArgumentForm';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { closeArgumentEditModal } from '../../../redux/modules/opinion';
-import type { State } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 import type { ArgumentEditModal_argument } from './__generated__/ArgumentEditModal_argument.graphql';
 
-type Props = {
-  show: boolean,
+type RelayProps = {| argument: ArgumentEditModal_argument |};
+
+type Props = {|
   argument: ArgumentEditModal_argument,
-  dispatch: Function,
+  ...RelayProps,
+  show: boolean,
+  dispatch: Dispatch,
   submitting: boolean,
-};
+|};
 
 class ArgumentEditModal extends React.Component<Props> {
   render() {
@@ -59,7 +62,7 @@ class ArgumentEditModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { argument }) => ({
+const mapStateToProps = (state: State, { argument }: RelayProps) => ({
   show: argument ? state.opinion.showArgumentEditModal === argument.id : false,
   submitting: isSubmitting(formName)(state),
 });

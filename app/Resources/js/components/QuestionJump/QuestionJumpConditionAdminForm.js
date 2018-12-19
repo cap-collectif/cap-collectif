@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { formValueSelector, Field, arrayRemove } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import type { GlobalState, Dispatch } from '../../types';
@@ -44,7 +44,8 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
     }
 
     return choiceList
-      ? choiceList.map((questionChoice, questionChoiceIndex) => (
+      ? // $FlowFixMe Missing type annotation for U.
+        choiceList.map((questionChoice, questionChoiceIndex) => (
           <option value={questionChoice.id}>
             {questionChoiceIndex}. {questionChoice.title}
           </option>
@@ -137,7 +138,7 @@ export class QuestionJumpConditionAdminForm extends React.Component<Props, State
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => {
+const mapStateToProps = (state: GlobalState, props: Props) => {
   const selector = formValueSelector(props.formName);
   return {
     selectedQuestion: selector(state, `${props.member}.question.id`),

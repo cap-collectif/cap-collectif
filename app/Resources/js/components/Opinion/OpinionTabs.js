@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { connect, type Connector, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
@@ -14,12 +14,14 @@ import { scrollToAnchor } from '../../services/ScrollToAnchor';
 import type { OpinionTabs_opinion } from './__generated__/OpinionTabs_opinion.graphql';
 import OpinionFollowersBox from './OpinionFollowersBox';
 
-type RelayProps = {
+type RelayProps = {|
   opinion: OpinionTabs_opinion,
-};
-type Props = RelayProps & {
+|};
+type Props = {|
+  opinion: OpinionTabs_opinion,
+  ...RelayProps,
   isAuthenticated: boolean,
-};
+|};
 
 class OpinionTabs extends React.Component<Props> {
   componentDidMount() {
@@ -65,10 +67,10 @@ class OpinionTabs extends React.Component<Props> {
     return this.isVersionable()
       ? 'versions'
       : this.isCommentable()
-        ? 'arguments'
-        : this.isSourceable()
-          ? 'sources'
-          : null;
+      ? 'arguments'
+      : this.isSourceable()
+      ? 'sources'
+      : null;
   };
 
   isSourceable = () => this.props.opinion.section && this.props.opinion.section.sourceable;
@@ -208,11 +210,11 @@ class OpinionTabs extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   isAuthenticated: !!state.user.user,
 });
 
-const connector: Connector<RelayProps, Props> = connect(mapStateToProps);
+const connector = connect(mapStateToProps);
 const container = connector(OpinionTabs);
 
 export default createFragmentContainer(container, {

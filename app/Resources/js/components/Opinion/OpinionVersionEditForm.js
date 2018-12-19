@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import ChangeVersionMutation from '../../mutations/ChangeVersionMutation';
 import { closeOpinionVersionEditModal } from '../../redux/modules/opinion';
@@ -95,7 +95,7 @@ class OpinionVersionEditForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: {
     title: props.version.title,
     body: props.version.body,

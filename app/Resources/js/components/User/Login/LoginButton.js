@@ -1,21 +1,28 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginModal from './LoginModal';
 import { baseUrl } from '../../../config';
 import { showLoginModal } from '../../../redux/modules/user';
-import type { Dispatch, State } from '../../../types';
+import type { State } from '../../../types';
 
-type Props = {
-  bsStyle: string,
-  dispatch: Dispatch,
-  className: ?string,
-  style: ?Object,
+type Action = typeof showLoginModal;
+
+type StateProps = {|
   loginWithMonCompteParis: boolean,
   loginWithOpenId: boolean,
-};
+  openLoginModal: typeof showLoginModal,
+|};
+
+type Props = {|
+  ...StateProps,
+  // default props not working
+  bsStyle?: string,
+  className?: ?string,
+  style?: ?Object,
+|};
 
 export class LoginButton extends React.Component<Props> {
   static defaultProps = {
@@ -26,7 +33,7 @@ export class LoginButton extends React.Component<Props> {
 
   render() {
     const {
-      dispatch,
+      openLoginModal,
       loginWithMonCompteParis,
       loginWithOpenId,
       style,
@@ -52,7 +59,7 @@ export class LoginButton extends React.Component<Props> {
             } else if (loginWithOpenId) {
               window.location.href = `/login/openid?_destination=${window && window.location.href}`;
             } else {
-              dispatch(showLoginModal());
+              openLoginModal();
             }
           }}
           className={className}>
@@ -64,10 +71,16 @@ export class LoginButton extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = state => ({
   loginWithMonCompteParis: state.default.features.login_paris,
   loginWithOpenId: state.default.features.login_openid,
 });
 
-const connector = connect(mapStateToProps);
-export default connector(LoginButton);
+const mapDispatchToProps = dispatch => ({
+  openLoginModal: () => dispatch(showLoginModal()),
+});
+
+export default connect<Props, State, Action, _, _>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LoginButton);

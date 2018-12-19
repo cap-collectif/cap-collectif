@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
-import type { Connector } from 'react-redux';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import type { Dispatch } from '../../types';
 
@@ -82,7 +81,7 @@ const mapDispatchToProps = (dispatch: Dispatch, props: PassedProps) => ({
   },
 });
 
-const connector: Connector<PassedProps, Props> = connect(
+const connector = connect(
   null,
   mapDispatchToProps,
 );

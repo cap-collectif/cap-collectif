@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import Truncate from 'react-truncate';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -95,7 +95,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 

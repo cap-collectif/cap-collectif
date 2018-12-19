@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { State } from '../../../types';
 
@@ -42,7 +42,7 @@ export class EventListToggleMobileViewBtn extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   isMobileListView: state.event.isMobileListView,
 });
 

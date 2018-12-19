@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { MenuItem, DropdownButton, Modal } from 'react-bootstrap';
 import type { GlobalState } from '../../types';
 
@@ -60,7 +60,7 @@ class ShareButtonDropdown extends React.Component<Props, State> {
     );
   };
 
-  openSharer = (href, name) => {
+  openSharer = (href: string, name: string) => {
     const height = 500;
     const width = 700;
     const top = screen.height / 2 - height / 2;
@@ -144,7 +144,7 @@ class ShareButtonDropdown extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   enabled: state.default.features.share_buttons,
 });
 

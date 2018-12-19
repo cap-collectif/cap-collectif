@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { reduxForm, Field, type FormProps } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../Form/Field';
@@ -11,21 +11,18 @@ import ChangeProposalFormParametersMutation from '../../mutations/ChangeProposal
 import type { ProposalFormAdminSettingsForm_proposalForm } from './__generated__/ProposalFormAdminSettingsForm_proposalForm.graphql';
 import type { State } from '../../types';
 
-type RelayProps = {
+type RelayProps = {|
   isSuperAdmin: boolean,
   // eslint-disable-next-line react/no-unused-prop-types
   proposalForm: ProposalFormAdminSettingsForm_proposalForm,
-};
-type Props = RelayProps & {
+|};
+
+type Props = {|
+  proposalForm: ProposalFormAdminSettingsForm_proposalForm,
   intl: IntlShape,
-  handleSubmit: () => void,
-  invalid: boolean,
-  pristine: boolean,
-  submitting: boolean,
-  valid: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
-};
+  ...RelayProps,
+  ...FormProps,
+|};
 
 const formName = 'proposal-form-admin-settings';
 const validate = () => ({});
@@ -134,7 +131,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalFormAdminSettingsForm);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
+const mapStateToProps = (state: State, props: RelayProps) => {
   const { proposalForm } = props;
   return {
     isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),

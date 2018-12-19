@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { FieldArray, formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { ListGroup, Button } from 'react-bootstrap';
-import type { MapStateToProps } from 'react-redux';
 import QuestionJumpConditionsAdminForm from './QuestionJumpConditionsAdminForm';
 import type { GlobalState } from '../../types';
 
@@ -82,7 +81,7 @@ export class QuestionsJumpAdminForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => {
+const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   const selector = formValueSelector(props.formName);
   return {
     currentQuestion: selector(state, `${props.oldMember}`),

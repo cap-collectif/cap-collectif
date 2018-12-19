@@ -65,6 +65,7 @@ type Props = {
   help?: string | any,
   helpPrint: boolean,
   description?: string | any,
+  backgroundColor?: ?string,
   bsSize?: string,
   wrapperClassName?: ?string,
   groupClassName?: ?string,
@@ -74,7 +75,7 @@ type Props = {
   buttonBefore?: any,
   buttonAfter?: any,
   standalone?: boolean,
-  validationState?: string,
+  validationState?: ?string,
   validationRule?: Object,
   isOtherAllowed?: boolean,
   label?: string | any,
@@ -85,7 +86,6 @@ type Props = {
   radioChecked?: boolean,
   checkedValue?: ?string,
   maxLength?: ?string,
-  backgroundColor: ?string,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {

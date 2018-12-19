@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
 import type { ProposalListView_step } from './__generated__/ProposalListView_step.graphql';
 import type { ProposalListView_viewer } from './__generated__/ProposalListView_viewer.graphql';
@@ -129,7 +129,7 @@ export class ProposalListView extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   filters: state.proposal.filters || {},
   term: state.proposal.terms,
   order: state.proposal.order,

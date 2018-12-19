@@ -11,6 +11,7 @@ type Props = {
 export class EventMap extends React.Component<Props> {
   render() {
     const { events } = this.props;
+    /* $FlowFixMe please use mapDispatchToProps */
     return <LeafletMap markers={events} defaultMapOptions={{ zoom: 12 }} />;
   }
 }

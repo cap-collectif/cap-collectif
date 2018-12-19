@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { submit, isDirty, isSubmitting } from 'redux-form';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalsUserVotesTable from './ProposalsUserVotesTable';
 import SubmitButton from '../../Form/SubmitButton';
@@ -10,14 +10,16 @@ import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesM
 import type { ProposalsUserVotesStep_step } from './__generated__/ProposalsUserVotesStep_step.graphql';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
-type RelayProps = {
+type RelayProps = {|
   step: ProposalsUserVotesStep_step,
-};
-type Props = RelayProps & {
+|};
+type Props = {|
+  step: ProposalsUserVotesStep_step,
+  ...RelayProps,
   dispatch: Function,
   dirty: boolean,
   submitting: boolean,
-};
+|};
 
 export class ProposalsUserVotesStep extends React.Component<Props> {
   onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) =>
@@ -95,7 +97,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state, props: RelayProps) => ({
+const mapStateToProps = (state, props: RelayProps) => ({
   dirty: isDirty(`proposal-user-vote-form-step-${props.step.id}`)(state),
   submitting: isSubmitting(`proposal-user-vote-form-step-${props.step.id}`)(state),
 });

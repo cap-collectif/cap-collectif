@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import {
   type FormProps,
   change,
@@ -93,21 +93,24 @@ type LatLng = {
 
 export const formName = 'proposal-form';
 
-type RelayProps = {
+type RelayProps = {|
   +proposalForm: ProposalForm_proposalForm,
   +proposal: ?ProposalForm_proposal,
-};
+|};
 
-type Props = FormProps &
-  RelayProps & {
-    +intl: IntlShape,
-    +themes: Array<Object>,
-    +dispatch: Dispatch,
-    +features: FeatureToggles,
-    +titleValue: ?string,
-    +addressValue: ?string,
-    +responses: ResponsesInReduxForm,
-  };
+type Props = {|
+  proposalForm: ProposalForm_proposalForm,
+  proposal: ProposalForm_proposal,
+  ...FormProps,
+  ...RelayProps,
+  +intl: IntlShape,
+  +themes: Array<Object>,
+  +dispatch: Dispatch,
+  +features: FeatureToggles,
+  +titleValue: ?string,
+  +addressValue: ?string,
+  +responses: ResponsesInReduxForm,
+|};
 
 type FormValues = {|
   title: ?string,
@@ -430,7 +433,7 @@ export class ProposalForm extends React.Component<Props, State> {
               </span>
             }>
             <FormattedMessage id="proposal.select.theme">
-              {message => (
+              {(message: string) => (
                 <option value="" disabled>
                   {message}
                 </option>
@@ -457,7 +460,7 @@ export class ProposalForm extends React.Component<Props, State> {
               </span>
             }>
             <FormattedMessage id="proposal.select.category">
-              {message => (
+              {(message: string) => (
                 <option value="" disabled>
                   {message}
                 </option>
@@ -496,7 +499,7 @@ export class ProposalForm extends React.Component<Props, State> {
               </span>
             }>
             <FormattedMessage id="proposal.select.district">
-              {message => <option>{message}</option>}
+              {(message: string) => <option>{message}</option>}
             </FormattedMessage>
             {districtIdsFilteredByAddress.map(districtId => (
               <option key={districtId} value={districtId}>
@@ -551,10 +554,7 @@ export class ProposalForm extends React.Component<Props, State> {
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: GlobalState,
-  { proposal, proposalForm }: Props,
-) => ({
+const mapStateToProps = (state: GlobalState, { proposal, proposalForm }: Props) => ({
   initialValues: {
     draft: proposal ? proposal.publicationStatus === 'DRAFT' : true,
     title: proposal ? proposal.title : null,

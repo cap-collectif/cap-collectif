@@ -23,6 +23,7 @@ export default class ProjectsListFilterTypesContainer extends React.Component<Pr
       if (props.projectTypes) {
         const { projectTypes } = props;
         if (projectTypes.length > 0) {
+          /* $FlowFixMe please use mapDispatchToProps */
           return <ProjectsListFilterTypes projectTypes={projectTypes} />;
         }
       }

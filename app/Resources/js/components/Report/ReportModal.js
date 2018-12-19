@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
@@ -50,7 +50,7 @@ class ReportModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
+const mapStateToProps = (state: State, props) => ({
   isLoading: state.report.currentReportingModal === props.id && isSubmitting(formName)(state),
 });
 

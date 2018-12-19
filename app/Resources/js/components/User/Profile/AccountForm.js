@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import { reduxForm, Field, type FormProps } from 'redux-form';
 import {
@@ -34,12 +34,13 @@ const validate = (
   return errors;
 };
 
-type Props = FormProps & {
+type Props = {|
+  ...FormProps,
   newEmailToConfirm?: ?string,
   initialValues: Object,
   confirmationEmailResent: boolean,
   dispatch: Dispatch,
-};
+|};
 
 export class AccountForm extends Component<Props> {
   render() {
@@ -117,7 +118,7 @@ export class AccountForm extends Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   newEmailToConfirm: state.user.user && state.user.user.newEmailToConfirm,
   confirmationEmailResent: state.user.confirmationEmailResent,
   initialValues: {

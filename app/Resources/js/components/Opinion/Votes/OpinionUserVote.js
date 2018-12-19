@@ -24,6 +24,7 @@ class OpinionUserVote extends React.Component<Props> {
         overlay={
           <Tooltip id={`opinion-vote-tooltip-${vote.id}`}>{vote.author.displayName}</Tooltip>
         }>
+        {/* $FlowFixMe Will be a fragment soon */}
         <UserAvatar user={vote.author} style={style} />
       </OverlayTrigger>
     );

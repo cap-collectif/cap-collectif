@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import StepPageFooter from '../Steps/Page/StepPageFooter';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
@@ -74,7 +74,7 @@ export class QuestionnaireStepPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
+const mapStateToProps = (state: GlobalState, props: Props) => ({
   isAuthenticated: state.user.user !== null,
   step:
     state.project.currentProjectById &&

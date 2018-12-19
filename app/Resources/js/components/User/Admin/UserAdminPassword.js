@@ -5,16 +5,18 @@ import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import type { Dispatch, State } from '../../../types';
+import type { UserAdminPassword_user } from './__generated__/UserAdminPassword_user.graphql';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
-import UserAdminPassword_user from './__generated__/UserAdminPassword_user.graphql';
 
-type RelayProps = { user: UserAdminPassword_user };
-type Props = FormProps &
-  RelayProps & {
-    intl: IntlShape,
-  };
+type RelayProps = {| user: UserAdminPassword_user |};
+type Props = {|
+  user: UserAdminPassword_user,
+  ...FormProps,
+  ...RelayProps,
+  intl: IntlShape,
+|};
 type FormValues = {
   current_password: string,
   new_password: string,

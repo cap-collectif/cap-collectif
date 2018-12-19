@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Field, reduxForm, type FormProps, formValueSelector } from 'redux-form';
 import { isEmail } from '../../../services/Validator';
 import type { Dispatch, State } from '../../../types';
@@ -11,7 +11,8 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
 import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
 
-type Props = FormProps & {
+type Props = {|
+  ...FormProps,
   intl: IntlShape,
   responses: Array<Object>,
   hasQuestions: boolean,
@@ -26,7 +27,7 @@ type Props = FormProps & {
   organizationName: string,
   shieldEnabled: boolean,
   dispatch: Dispatch,
-};
+|};
 
 export const validate = (values: Object, props: Object) => {
   const errors = {};
@@ -154,7 +155,7 @@ export class RegistrationForm extends React.Component<Props> {
               </span>
             }>
             <FormattedMessage id="registration.select.type">
-              {message => <option value="">{message}</option>}
+              {(message: string) => <option value="">{message}</option>}
             </FormattedMessage>
             {userTypes.map((type, i) => (
               <option key={i + 1} value={type.id}>
@@ -250,7 +251,7 @@ export class RegistrationForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   hasQuestions: state.user.registration_form.hasQuestions,
   addCaptchaField: state.default.features.captcha,
   addUserTypeField: state.default.features.user_type,

@@ -64,6 +64,7 @@ exports[`<ProposalFormAdminCategoriesStepModal /> render correctly 1`] = `
       onClose={[MockFunction]}
     />
     <Connect(SubmitButton)
+      id="ProposalFormAdminCategoriesStepModal-submit"
       isSubmitting={false}
       label="global.validate"
       onSubmit={[MockFunction]}

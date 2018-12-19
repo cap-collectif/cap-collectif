@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import DefaultAvatar from './DefaultAvatar';
 import type { State } from '../../types';
 
@@ -92,7 +92,7 @@ export class UserAvatar extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   defaultAvatar: state.default.images && state.default.images.avatar,
 });
 

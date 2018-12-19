@@ -1,132 +1,301 @@
-// flow-typed signature: 59b0c4be0e1408f21e2446be96c79804
-// flow-typed version: 9092387fd2/react-redux_v5.x.x/flow_>=v0.54.x
+// see here for details
+// https://medium.com/@samgoldman/ville-saukkonen-thanks-and-thanks-for-your-thoughtful-questions-24aedcfed518
+// https://github.com/facebook/flow/issues/7125
 
-import type { Dispatch, Store } from "redux";
+// react-redux merges props as in:
+// Object.assign({}, ownProps, stateProps, dispatchProps)
+
+/*
+  WC = Component being wrapped
+  S = State
+  A = Action
+  OP = OwnProps
+  SP = StateProps
+  DP = DispatchProps
+  MP = Merge props
+  MDP = Map dispatch to props object
+  RSP = Returned state props
+  RDP = Returned dispatch props
+  RMP = Returned merge props
+  CP = Props for returned component
+  Com = React Component
+  ST = Static properties of Com
+  EFO = Extra factory options (used only in connectAdvanced)
+*/
 
 declare module "react-redux" {
-  /*
+  // ------------------------------------------------------------
+  // Typings for connect()
+  // ------------------------------------------------------------
 
-    S = State
-    A = Action
-    OP = OwnProps
-    SP = StateProps
-    DP = DispatchProps
+  declare type Equal<T: {}> = (next: T, prev: T) => boolean;
+  declare export type Options<S, OP, SP, MP> = {|
+    pure?: boolean,
+    withRef?: boolean,
+    areStatesEqual?: Equal<S>,
+    areOwnPropsEqual?: Equal<OP>,
+    areStatePropsEqual?: Equal<SP>,
+    areMergedPropsEqual?: Equal<MP>,
+    storeKey?: string,
+  |};
 
-  */
+  // A connected component wraps some component WC. Note that S (State) and D (Action)
+  // are "phantom" type parameters, as they are not constrained by the definition but
+  // rather by the context at the use site.
+  declare class ConnectedComponent<OP, +WC> extends React$Component<OP> {
+    static +WrappedComponent: WC;
+    getWrappedInstance(): React$ElementRef<WC>;
+  }
 
-  declare type MapStateToProps<S, OP: Object, SP: Object> = (
-    state: S,
-    ownProps: OP
-  ) => ((state: S, ownProps: OP) => SP) | SP;
+  declare type Dispatch<A> = (action: A) => A;
 
-  declare type MapDispatchToProps<A, OP: Object, DP: Object> =
-    | ((dispatch: Dispatch<A>, ownProps: OP) => DP)
-    | DP;
+  declare type MapStateToProps<-S, -OP, +SP> = (state: S, ownProps: OP) => SP;
+  declare type MapDispatchToPropsFn<A, -OP, +DP> = (
+    dispatch: Dispatch<A>,
+    ownProps: OP,
+  ) => DP;
 
-  declare type MergeProps<SP, DP: Object, OP: Object, P: Object> = (
+  // The connector function actaully perfoms the wrapping,
+  // returning a connected component.
+  declare type Connector<OP, C> = <WC: C>(
+    WC,
+  ) => Class<React$Component<OP>> & WC;
+
+  // Putting it all together.
+  // Adding $Shape<P> everywhere makes error messages clearer.
+
+  // ------------------------------------------------------------
+  // Simple case without the super powered `mergeProps` argument
+  // ------------------------------------------------------------
+
+  // Own Props only.
+
+  declare export function connect<-P, -A>(
+    mapStateToProps?: null,
+    mapDispatchToProps?: null,
+    mergeProps?: null,
+    options?: ?Options<{||}, P, {||}, P>,
+  ): Connector<$Diff<P, { dispatch: Dispatch<A> }>, React$ComponentType<P>>;
+
+  // State only.
+
+  declare export function connect<-P, -S, SP: $Shape<P>>(
+    mapStateToProps: MapStateToProps<S, $Diff<P, SP>, SP>,
+    mapDispatchToProps?: null,
+    mergeProps?: null,
+    options?: ?Options<S, $Diff<P, SP>, SP, P>,
+  ): Connector<$Diff<P, SP>, React$ComponentType<P>>;
+
+  // State and dispatch.
+
+  // map version
+  declare export function connect<
+    -P,
+    -S,
+    -A,
+    SP: $Shape<P>,
+    DP: $Shape<P> & { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: MapStateToProps<S, $Diff<$Diff<P, SP>, DP>, SP>,
+    mapDispatchToProps: DP,
+    mergeProps?: null,
+    options?: ?Options<S, $Diff<$Diff<P, SP>, DP>, SP, P>,
+  ): Connector<$Diff<$Diff<P, SP>, DP>, React$ComponentType<P>>;
+
+  // function version
+  declare export function connect<
+    -P,
+    -S,
+    -A,
+    SP: $Shape<P>,
+    DP: $Shape<P> & { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: MapStateToProps<S, $Diff<$Diff<P, SP>, DP>, SP>,
+    mapDispatchToProps: MapDispatchToPropsFn<A, $Diff<$Diff<P, SP>, DP>, DP>,
+    mergeProps?: null,
+    options?: ?Options<S, $Diff<$Diff<P, SP>, DP>, SP, P>,
+  ): Connector<$Diff<$Diff<P, SP>, DP>, React$ComponentType<P>>;
+
+  // Dispatch only.
+
+  // map version
+  declare export function connect<
+    -P,
+    -A,
+    DP: $Shape<P> & { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: null,
+    mapDispatchToProps: DP,
+    mergeProps?: null,
+    options?: ?Options<{||}, $Diff<P, DP>, {||}, P>,
+  ): Connector<$Diff<P, DP>, React$ComponentType<P>>;
+
+  // function version
+  declare export function connect<
+    -P,
+    -A,
+    DP: $Shape<P> & { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: null,
+    mapDispatchToProps: MapDispatchToPropsFn<A, $Diff<P, DP>, DP>,
+    mergeProps?: null,
+    options?: ?Options<{||}, $Diff<P, DP>, {||}, P>,
+  ): Connector<$Diff<P, DP>, React$ComponentType<P>>;
+
+  // ------------------------------------------------------------
+  // Harder case with the super powered `mergeProps` argument
+  // ------------------------------------------------------------
+
+  declare type MergeProps<+P, -OP: {}, -SP: {}, -DP: {}> = (
     stateProps: SP,
     dispatchProps: DP,
-    ownProps: OP
+    ownProps: OP,
   ) => P;
 
-  declare type Context = { store: Store<*, *> };
+  // Own Props only.
 
-  declare type ComponentWithDefaultProps<DP: {}, P: {}, CP: P> = Class<
-    React$Component<CP>
-  > & { defaultProps: DP };
+  declare export function connect<-P, -OP: {}, -A: {}>(
+    mapStateToProps?: null,
+    mapDispatchToProps?: null,
+    mergeProps: MergeProps<P, OP, {||}, {||}>,
+    options?: ?Options<{||}, P, {||}, P>,
+  ): Connector<P, React$ComponentType<P>>;
 
-  declare class ConnectedComponentWithDefaultProps<
-    OP,
-    DP,
-    CP
-  > extends React$Component<OP> {
-    static defaultProps: DP, // <= workaround for https://github.com/facebook/flow/issues/4644
-    static WrappedComponent: Class<React$Component<CP>>,
-    getWrappedInstance(): React$Component<CP>,
-    props: OP,
-    state: void
-  }
+  // State only.
 
-  declare class ConnectedComponent<OP, P> extends React$Component<OP> {
-    static WrappedComponent: Class<React$Component<P>>,
-    getWrappedInstance(): React$Component<P>,
-    props: OP,
-    state: void
-  }
+  declare export function connect<-P: {}, -OP: {}, -S, SP: {}>(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps?: null,
+    mergeProps: MergeProps<P, OP, SP, {||}>,
+    options?: ?Options<S, OP, SP, P>,
+  ): Connector<OP, React$ComponentType<P>>;
 
-  declare type ConnectedComponentWithDefaultPropsClass<OP, DP, CP> = Class<
-    ConnectedComponentWithDefaultProps<OP, DP, CP>
-  >;
+  // State and dispatch.
 
-  declare type ConnectedComponentClass<OP, P> = Class<
-    ConnectedComponent<OP, P>
-  >;
+  // map version
+  declare export function connect<
+    -P: {},
+    -OP: {},
+    -S,
+    -A,
+    SP: {},
+    DP: { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps: DP,
+    mergeProps: MergeProps<P, OP, SP, DP>,
+    options?: ?Options<S, OP, SP, P>,
+  ): Connector<OP, React$ComponentType<P>>;
 
-  declare type Connector<OP, P> = (<DP: {}, CP: {}>(
-    component: ComponentWithDefaultProps<DP, P, CP>
-  ) => ConnectedComponentWithDefaultPropsClass<OP, DP, CP>) &
-    ((component: React$ComponentType<P>) => ConnectedComponentClass<OP, P>);
+  // function version
+  declare export function connect<
+    -P: {},
+    -OP: {},
+    -S,
+    -A,
+    SP: {},
+    DP: { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP>,
+    mergeProps: MergeProps<P, OP, SP, DP>,
+    options?: ?Options<S, OP, SP, P>,
+  ): Connector<OP, React$ComponentType<P>>;
 
-  declare class Provider<S, A> extends React$Component<{
-    store: Store<S, A>,
-    children?: any
+  // Dispatch only.
+
+  // map version
+  declare export function connect<
+    -P: {},
+    -OP: {},
+    -A,
+    DP: $Shape<P> & { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: null,
+    mapDispatchToProps: DP,
+    mergeProps: MergeProps<P, OP, {||}, DP>,
+    options?: ?Options<{||}, OP, {||}, P>,
+  ): Connector<OP, React$ComponentType<P>>;
+
+  // function version
+  declare export function connect<
+    -P: {},
+    -OP: {},
+    -A,
+    DP: $Shape<P> & { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: null,
+    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP>,
+    mergeProps: MergeProps<P, OP, {||}, DP>,
+    options?: ?Options<{||}, OP, {||}, P>,
+  ): Connector<OP, React$ComponentType<P>>;
+
+  // ------------------------------------------------------------
+  // Typings for Provider
+  // ------------------------------------------------------------
+
+  declare export class Provider<Store> extends React$Component<{
+    store: Store,
+    children?: React$Node,
   }> {}
 
-  declare function createProvider(
+  declare export function createProvider(
     storeKey?: string,
-    subKey?: string
-  ): Provider<*, *>;
+    subKey?: string,
+  ): Class<Provider<*>>;
 
-  declare type ConnectOptions = {
-    pure?: boolean,
-    withRef?: boolean
+  // ------------------------------------------------------------
+  // Typings for connectAdvanced()
+  // ------------------------------------------------------------
+
+  declare type ConnectAdvancedOptions = {
+    getDisplayName?: (name: string) => string,
+    methodName?: string,
+    renderCountProp?: string,
+    shouldHandleStateChanges?: boolean,
+    storeKey?: string,
+    withRef?: boolean,
   };
 
-  declare type Null = null | void;
+  declare type SelectorFactoryOptions<Com> = {
+    getDisplayName: (name: string) => string,
+    methodName: string,
+    renderCountProp: ?string,
+    shouldHandleStateChanges: boolean,
+    storeKey: string,
+    withRef: boolean,
+    displayName: string,
+    wrappedComponentName: string,
+    WrappedComponent: Com,
+  };
 
-  declare function connect<A, OP>(
-    ...rest: Array<void> // <= workaround for https://github.com/facebook/flow/issues/2360
-  ): Connector<OP, $Supertype<{ dispatch: Dispatch<A> } & OP>>;
+  declare type MapStateToPropsEx<S: Object, SP: Object, RSP: Object> = (
+    state: S,
+    props: SP,
+  ) => RSP;
 
-  declare function connect<A, OP>(
-    mapStateToProps: Null,
-    mapDispatchToProps: Null,
-    mergeProps: Null,
-    options: ConnectOptions
-  ): Connector<OP, $Supertype<{ dispatch: Dispatch<A> } & OP>>;
+  declare type SelectorFactory<
+    Com: React$ComponentType<*>,
+    Dispatch,
+    S: Object,
+    OP: Object,
+    EFO: Object,
+    CP: Object,
+  > = (
+    dispatch: Dispatch,
+    factoryOptions: SelectorFactoryOptions<Com> & EFO,
+  ) => MapStateToPropsEx<S, OP, CP>;
 
-  declare function connect<S, A, OP, SP>(
-    mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: Null,
-    mergeProps: Null,
-    options?: ConnectOptions
-  ): Connector<OP, $Supertype<SP & { dispatch: Dispatch<A> } & OP>>;
-
-  declare function connect<A, OP, DP>(
-    mapStateToProps: Null,
-    mapDispatchToProps: MapDispatchToProps<A, OP, DP>,
-    mergeProps: Null,
-    options?: ConnectOptions
-  ): Connector<OP, $Supertype<DP & OP>>;
-
-  declare function connect<S, A, OP, SP, DP>(
-    mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: MapDispatchToProps<A, OP, DP>,
-    mergeProps: Null,
-    options?: ConnectOptions
-  ): Connector<OP, $Supertype<SP & DP & OP>>;
-
-  declare function connect<S, A, OP, SP, DP, P>(
-    mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: Null,
-    mergeProps: MergeProps<SP, DP, OP, P>,
-    options?: ConnectOptions
-  ): Connector<OP, P>;
-
-  declare function connect<S, A, OP, SP, DP, P>(
-    mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: MapDispatchToProps<A, OP, DP>,
-    mergeProps: MergeProps<SP, DP, OP, P>,
-    options?: ConnectOptions
-  ): Connector<OP, P>;
+  declare export function connectAdvanced<
+    Com: React$ComponentType<*>,
+    A,
+    S: Object,
+    OP: Object,
+    CP: Object,
+    EFO: Object,
+    ST: { [_: $Keys<Com>]: any },
+  >(
+    selectorFactory: SelectorFactory<Com, A, S, OP, EFO, CP>,
+    connectAdvancedOptions: ?(ConnectAdvancedOptions & EFO),
+  ): (component: Com) => React$ComponentType<OP> & $Shape<ST>;
 }

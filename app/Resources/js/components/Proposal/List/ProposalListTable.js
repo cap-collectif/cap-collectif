@@ -194,6 +194,7 @@ export class ProposalListTable extends React.Component<Props, State> {
       .filter(column => column.hidden === true)
       .reduce((prev, curr) => [...prev, curr.key], []);
 
+    // $FlowFixMe Missing type annotation for U
     return Object.entries(rows).map(([keyName, cell], key) => {
       const value = cell && cell.value;
 

@@ -27,7 +27,11 @@ export class QuestionnaireAdminPageTabs extends Component<Props> {
             <QuestionnaireAdminParametersForm questionnaire={questionnaire} />
           </Tab>
           <Tab eventKey={3} title={intl.formatMessage({ id: 'results' })}>
-            <QuestionnaireAdminResults questionnaire={questionnaire} />
+            <QuestionnaireAdminResults
+              labelColor="#fff"
+              backgroundColor="#FFF"
+              questionnaire={questionnaire}
+            />
           </Tab>
         </Tabs>
       </div>

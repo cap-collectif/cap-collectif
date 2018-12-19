@@ -8,15 +8,17 @@ describe('<ConditionalJumps />', () => {
     jumps: [
       {
         id: 'jump1',
+        always: true,
         conditions: [
-          { value: { id: '15', title: 'First question' } },
-          { value: { id: '16', title: 'Second question' } },
+          { value: { id: '15', title: 'First question', number: 15 } },
+          { value: { id: '16', title: 'Second question', number: 16 } },
         ],
-        destination: { number: 6, title: 'other question' },
+        destination: { id: 'destination1', number: 6, title: 'other question' },
       },
-      { id: 'jump2', conditions: [], destination: {} },
+      { id: 'jump2', always: true, conditions: [], destination: {} },
       {
         id: 'jump3',
+        always: true,
         conditions: [
           { value: { id: '17', title: 'Question 6' } },
           { value: { id: '18', title: 'Question 7' } },
@@ -26,6 +28,7 @@ describe('<ConditionalJumps />', () => {
       },
       {
         id: 'jump4',
+        always: true,
         conditions: [{ value: { id: '20', title: 'Question 9' } }],
         destination: { number: 2, title: 'other question' },
       },
@@ -37,6 +40,7 @@ describe('<ConditionalJumps />', () => {
   };
 
   it('should render correctly', () => {
+    // $FlowFixMe please fix this
     const wrapper = shallow(<ConditionalJumps {...props} />);
     expect(wrapper).toMatchSnapshot();
   });

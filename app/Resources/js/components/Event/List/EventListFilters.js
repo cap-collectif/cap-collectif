@@ -2,7 +2,7 @@
 import React from 'react';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { Button, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm, Field, formValueSelector, type FormProps } from 'redux-form';
 import select from '../../Form/Select';
 import type { GlobalState, Dispatch, FeatureToggles, Uuid } from '../../../types';
@@ -13,7 +13,8 @@ import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
 
 type Theme = { id: Uuid, title: string };
 
-type Props = FormProps & {
+type Props = {|
+  ...FormProps,
   themes: Array<Theme>,
   projects: {},
   features: FeatureToggles,
@@ -23,7 +24,7 @@ type Props = FormProps & {
   search: ?string,
   intl: IntlShape,
   addToggleViewButton: ?boolean,
-};
+|};
 
 const countFilters = (theme: ?string, project: ?string, search: ?string): number => {
   let nbFilter = 0;
@@ -177,7 +178,7 @@ export class EventListFilters extends React.Component<Props> {
 
 const selector = formValueSelector('EventListFilters');
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
   themes: state.default.themes,
   theme: selector(state, 'theme'),

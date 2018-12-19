@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm, Field, FieldArray, type FormProps } from 'redux-form';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -13,12 +13,14 @@ import ProposalFormAdminQuestions from '../ProposalForm/ProposalFormAdminQuestio
 import type { QuestionnaireAdminConfigurationForm_questionnaire } from './__generated__/QuestionnaireAdminConfigurationForm_questionnaire.graphql';
 import type { State, FeatureToggles } from '../../types';
 
-type RelayProps = { questionnaire: QuestionnaireAdminConfigurationForm_questionnaire };
-type Props = RelayProps &
-  FormProps & {
-    intl: IntlShape,
-    features: FeatureToggles,
-  };
+type RelayProps = {| questionnaire: QuestionnaireAdminConfigurationForm_questionnaire |};
+type Props = {|
+  questionnaire: QuestionnaireAdminConfigurationForm_questionnaire,
+  ...RelayProps,
+  ...FormProps,
+  intl: IntlShape,
+  features: FeatureToggles,
+|};
 
 export type Jumps = ?$ReadOnlyArray<{|
   +id?: string,
@@ -179,7 +181,7 @@ const form = reduxForm({
   enableReinitialize: true,
 })(QuestionnaireAdminConfigurationForm);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: { ...props.questionnaire, id: undefined },
 });
 

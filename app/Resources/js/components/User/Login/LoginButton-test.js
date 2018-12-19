@@ -7,9 +7,9 @@ import { LoginButton } from './LoginButton';
 describe('<LoginButton />', () => {
   const props = {
     className: 'btn-darkest-gray navbar-btn btn--connection',
-    dispatch: jest.fn(),
     loginWithMonCompteParis: false,
     loginWithOpenId: false,
+    openLoginModal: jest.fn(),
   };
 
   it('renders a button', () => {

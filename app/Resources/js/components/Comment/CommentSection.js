@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -101,6 +101,7 @@ export class CommentSection extends React.Component<Props, State> {
                           </Col>
                         )}
                     </Row>
+                    {/* $FlowFixMe */}
                     <CommentForm commentable={props.commentable} />
                     {/* $FlowFixMe */}
                     <CommentListView
@@ -121,7 +122,7 @@ export class CommentSection extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 });
 

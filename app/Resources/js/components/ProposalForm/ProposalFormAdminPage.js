@@ -22,6 +22,7 @@ const component = ({
   if (props) {
     // eslint-disable-next-line
     if (props.proposalForm !== null) {
+      // $FlowFixMe
       return <ProposalFormAdminPageTabs {...props} />;
     }
     return graphqlError;

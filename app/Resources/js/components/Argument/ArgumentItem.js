@@ -58,6 +58,7 @@ export class ArgumentItem extends React.Component<Props> {
     return (
       <ListGroupItem className={classes} id={`arg-${argument.id}`}>
         <div className="opinion__body">
+          {/* $FlowFixMe Will be a fragment soon */}
           <UserAvatar user={argument.author} className="pull-left" />
           <div className="opinion__data">
             <p className="h5 opinion__user">
@@ -90,6 +91,7 @@ export class ArgumentItem extends React.Component<Props> {
             }}>
             <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
           </p>
+          {/* $FlowFixMe */}
           <ArgumentButtons argument={argument} />
         </div>
       </ListGroupItem>

@@ -2,14 +2,15 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import LoginOverlay from '../Utils/LoginOverlay';
 import type { State } from '../../types';
 
 type Props = {
-  id: string,
-  onSubmit: () => any,
-  isSubmitting: boolean,
+  id?: ?string,
+  onSubmit: Function,
+  // Default props not working
+  isSubmitting?: boolean,
   label: string,
   bsStyle: string,
   className: string,
@@ -57,7 +58,7 @@ class SubmitButton extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   user: state.user.user,
 });
 

@@ -23,6 +23,7 @@ class OpinionPreview extends React.Component<Props> {
 
     return (
       <React.Fragment>
+        {/* $FlowFixMe Will be a fragment soon */}
         <UserAvatar user={opinion.author} />
         <div>
           {/* $FlowFixMe */}

@@ -10,16 +10,18 @@ import DeleteAccountMutation from '../../mutations/DeleteAccountMutation';
 
 const formName = 'delete-user';
 
-type RelayProps = {
+type RelayProps = {|
   viewer: DeleteAccountModal_viewer,
-};
+|};
 
-type Props = RelayProps & {
+type Props = {|
+  viewer: DeleteAccountModal_viewer,
+  ...RelayProps,
   show: boolean,
   handleClose: () => void,
   redirectToAdminUrl: boolean,
   userDeletedIsNotViewer: boolean,
-};
+|};
 
 type ModalState = {
   removalType: string,

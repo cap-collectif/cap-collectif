@@ -10,6 +10,7 @@ type Props = {
     pristine?: boolean,
     error?: any,
   },
+  backgroundColor?: ?string,
   labelClassName?: string,
   divClassName?: string,
   wrapperClassName?: string,

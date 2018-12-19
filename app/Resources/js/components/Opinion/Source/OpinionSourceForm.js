@@ -3,7 +3,7 @@ import React from 'react';
 import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Alert } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError, clearSubmitErrors, type FormProps } from 'redux-form';
 import renderComponent from '../../Form/Field';
 import { isUrl } from '../../../services/Validator';
@@ -13,6 +13,7 @@ import ChangeSourceMutation from '../../../mutations/ChangeSourceMutation';
 import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
 import type { OpinionSourceForm_source } from './__generated__/OpinionSourceForm_source.graphql';
 import type { OpinionSourceForm_sourceable } from './__generated__/OpinionSourceForm_sourceable.graphql';
+import type { State } from '../../../types';
 
 type FormValues = {
   title: ?string,
@@ -27,11 +28,18 @@ type FormValidValues = {
   category: string,
   link: string,
 };
-type RelayProps = {
+type RelayProps = {|
   source: OpinionSourceForm_source,
   sourceable: OpinionSourceForm_sourceable,
-};
-type Props = RelayProps & FormProps & { user: { isEmailConfirmed: boolean } } & { intl: IntlShape };
+|};
+type Props = {|
+  sourceable: OpinionSourceForm_sourceable,
+  source: OpinionSourceForm_source,
+  ...FormProps,
+  ...RelayProps,
+  user: { isEmailConfirmed: boolean },
+  intl: IntlShape,
+|};
 
 const validate = ({ title, body, category, link, check }: FormValues) => {
   const errors = {};
@@ -184,13 +192,13 @@ class OpinionSourceForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state, { source }) => ({
+const mapStateToProps = (state: State, { source }: RelayProps) => ({
   user: state.user.user,
   initialValues: {
     link: source ? source.link : '',
     title: source ? source.title : '',
     body: source ? source.body : '',
-    category: source ? source.category.id : null,
+    category: source && source.category ? source.category.id : null,
     check: !source,
   },
 });

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm, Field, type FormProps } from 'redux-form';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -11,10 +11,14 @@ import type { QuestionnaireAdminParametersForm_questionnaire } from './__generat
 import type { State } from '../../types';
 import UpdateQuestionnaireParametersMutation from '../../mutations/UpdateQuestionnaireParametersMutation';
 
-type RelayProps = {
+type RelayProps = {|
   questionnaire: QuestionnaireAdminParametersForm_questionnaire,
-};
-type Props = RelayProps & FormProps;
+|};
+type Props = {|
+  questionnaire: QuestionnaireAdminParametersForm_questionnaire,
+  ...RelayProps,
+  ...FormProps,
+|};
 
 const formName = 'questionnaire-admin-parameters';
 
@@ -120,7 +124,7 @@ const form = reduxForm({
   form: formName,
 })(QuestionnaireAdminParametersForm);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
+const mapStateToProps = (state: State, props: RelayProps) => {
   const { questionnaire } = props;
   return {
     initialValues: {

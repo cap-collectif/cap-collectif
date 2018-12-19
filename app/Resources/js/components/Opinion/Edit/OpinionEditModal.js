@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
-import { connect, type Connector, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionEditForm, { formName } from '../Form/OpinionEditForm';
 import CloseButton from '../../Form/CloseButton';
@@ -12,15 +12,17 @@ import type { State, Dispatch } from '../../../types';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
 import type { OpinionEditModal_opinion } from './__generated__/OpinionEditModal_opinion.graphql';
 
-type RelayProps = {
+type RelayProps = {|
   opinion: OpinionEditModal_opinion,
-};
+|};
 
-type Props = RelayProps & {
+type Props = {|
+  ...RelayProps,
+  intl: IntlShape,
   show: boolean,
   submitting: boolean,
   dispatch: Dispatch,
-};
+|};
 
 export class OpinionEditModal extends React.Component<Props & { intl: IntlShape }> {
   render() {
@@ -68,12 +70,12 @@ export class OpinionEditModal extends React.Component<Props & { intl: IntlShape 
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   show: !!(state.opinion.showOpinionEditModal === props.opinion.id),
   submitting: isSubmitting(formName)(state),
 });
 
-const connector: Connector<RelayProps, Props> = connect(mapStateToProps);
+const connector = connect(mapStateToProps);
 
 const container = connector(injectIntl(OpinionEditModal));
 

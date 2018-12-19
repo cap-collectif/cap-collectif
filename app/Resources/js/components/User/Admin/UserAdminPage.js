@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
-import type { MapStateToProps } from 'react-redux';
 import { isDirty } from 'redux-form';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import UserAdminPageTabs from './UserAdminPageTabs';
@@ -73,7 +72,7 @@ export class UserAdminPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   dirty:
     isDirty('user-admin-edit')(state) ||
     isDirty('user-admin-selections')(state) ||

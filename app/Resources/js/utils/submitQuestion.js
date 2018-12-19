@@ -7,6 +7,7 @@ const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranki
 export type QuestionsInReduxForm = $ReadOnlyArray<responsesHelper_question>;
 
 export const submitQuestion = (questions: QuestionsInReduxForm) =>
+  // $FlowFixMe Missing type annotation for U.
   questions.filter(Boolean).map(question => {
     const questionInput = {
       question: {

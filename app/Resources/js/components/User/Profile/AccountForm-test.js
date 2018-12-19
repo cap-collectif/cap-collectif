@@ -8,8 +8,8 @@ import { formMock } from '../../../mocks';
 describe('<AccountForm />', () => {
   const props = {
     ...formMock,
-    dispatch: () => {},
-    handleSubmit: () => {},
+    dispatch: jest.fn(),
+    handleSubmit: jest.fn(),
     initialValues: { email: 'initial-email@gmail.fr' },
   };
 

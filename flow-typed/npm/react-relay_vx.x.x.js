@@ -717,10 +717,10 @@ declare module "react-relay" {
      * when data has been committed to the store that would cause the results of
      * the snapshot's selector to change.
      */
-    subscribe(
-      snapshot: CSnapshot<TNode>,
-      callback: (snapshot: CSnapshot<TNode>) => void
-    ): Disposable;
+    // subscribe(
+    //   snapshot: CSnapshot<TNode>,
+    //   callback: (snapshot: CSnapshot<TNode>) => void
+    // ): Disposable;
 
     /**
      * Ensure that all the records necessary to fulfill the given selector are

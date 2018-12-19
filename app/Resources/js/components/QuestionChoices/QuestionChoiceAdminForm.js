@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap';
@@ -114,7 +114,7 @@ export class QuestionChoiceAdminForm extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => {
+const mapStateToProps = (state: GlobalState, props: Props) => {
   const selector = formValueSelector(props.formName);
   return {
     choices: selector(state, `${props.oldMember}.choices`),
