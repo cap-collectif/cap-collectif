@@ -13,8 +13,8 @@ use Psr\Log\LoggerInterface;
 
 class ChangeMapProviderTokenMutation implements MutationInterface
 {
-    public const ERROR_INVALID_PUBLIC_TOKEN = 'Invalid public token';
-    public const ERROR_INVALID_SECRET_TOKEN = 'Invalid secret token';
+    public const ERROR_INVALID_PUBLIC_TOKEN = 'error-map-api-public-token-invalid';
+    public const ERROR_INVALID_SECRET_TOKEN = 'error-map-api-secret-token-invalid';
 
     private const MAPBOX_INVALID_TOKEN_CODES = [
         'TokenMalformed',

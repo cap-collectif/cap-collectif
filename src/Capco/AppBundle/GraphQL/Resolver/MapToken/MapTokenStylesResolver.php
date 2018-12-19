@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class MapTokenStylesResolver implements ResolverInterface
 {
+    public const ERROR_SECRET_API_KEY_REQUIRED = 'error-map-secret-api-key-required';
 
     private $mapboxClient;
 
@@ -23,7 +24,7 @@ class MapTokenStylesResolver implements ResolverInterface
     public function __invoke(Argument $args, MapToken $mapToken)
     {
         $visibility = $args->offsetGet('visibility');
-        if ($mapToken->getProvider() === MapProviderEnum::MAPBOX) {
+        if (MapProviderEnum::MAPBOX === $mapToken->getProvider()) {
             return $this->getMapboxStyles($mapToken, $visibility);
         }
     }
@@ -31,7 +32,7 @@ class MapTokenStylesResolver implements ResolverInterface
     private function getMapboxStyles(MapToken $mapToken, ?string $visibility): array
     {
         if (!$mapToken->getSecretToken()) {
-            throw new UserError('A secret API key is required to list styles');
+            throw new UserError(self::ERROR_SECRET_API_KEY_REQUIRED);
         }
 
         $owner = $this->mapboxClient
@@ -46,8 +47,10 @@ class MapTokenStylesResolver implements ResolverInterface
             ->addParameter('access_token', $mapToken->getSecretToken())
             ->get();
 
-        $styles = array_map(function(array $apiStyle) use ($mapToken) {
-            return MapboxStyle::fromMapboxApi($apiStyle, $mapToken->getPublicToken());
+        $styles = array_map(function (array $apiStyle) use ($mapToken) {
+            return MapboxStyle::fromMapboxApi($apiStyle)
+                ->setPublicToken($mapToken->getPublicToken())
+                ->setMapToken($mapToken);
         }, $apiStyles);
 
         if ($visibility) {
@@ -58,5 +61,4 @@ class MapTokenStylesResolver implements ResolverInterface
 
         return $styles;
     }
-
 }

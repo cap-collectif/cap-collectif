@@ -6,9 +6,13 @@ import styled from 'styled-components';
 import classNames from 'classnames';
 import moment from 'moment';
 import ChangeMapStyleMutation from '../../../mutations/ChangeMapStyleMutation';
+import type { ChangeMapStyleMutationResponse } from '../../../mutations/ChangeMapStyleMutation';
 
 const ListGroupItemInner = styled.div`
   display: flex;
+  &.disabled img {
+    filter: grayscale(100%);
+  }
   & .map__check {
     display: flex;
     justify-content: center;
@@ -45,6 +49,10 @@ const ListGroupItemInner = styled.div`
 
 type Props = {
   +mapTokenId: string,
+  +disabled: boolean,
+  +onMutationStart?: () => void,
+  +onMutationEnd?: (response: ChangeMapStyleMutationResponse) => void,
+  +onMutationFailed?: (e: Object) => void,
   +style: {
     +id: string,
     +owner: string,
@@ -57,22 +65,37 @@ type Props = {
 };
 
 const MapAdminStyleListItem = (props: Props) => {
-  const { style, mapTokenId } = props;
+  const { style, mapTokenId, onMutationEnd, onMutationFailed, onMutationStart, disabled } = props;
 
   const handleItemClick = async () => {
-    console.log('clicked on', style);
+    if (disabled || style.isCurrent) {
+      return;
+    }
+
     const { owner, id } = style;
     const input = {
       mapTokenId,
       styleOwner: owner,
       styleId: id,
     };
-    await ChangeMapStyleMutation.commit({ input });
+    try {
+      if (onMutationStart) {
+        onMutationStart();
+      }
+      const response = await ChangeMapStyleMutation.commit({ input });
+      if (onMutationEnd) {
+        onMutationEnd(response);
+      }
+    } catch (e) {
+      if (onMutationFailed) {
+        onMutationFailed(e);
+      }
+    }
   };
 
   return (
-    <ListGroupItem onClick={handleItemClick}>
-      <ListGroupItemInner>
+    <ListGroupItem onClick={handleItemClick} disabled={disabled}>
+      <ListGroupItemInner className={classNames({ disabled })}>
         <div className={classNames('map__check', { checked: style.isCurrent })}>
           <i className="cap cap-check-4" />
         </div>
