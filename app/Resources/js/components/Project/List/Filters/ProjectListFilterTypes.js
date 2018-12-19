@@ -6,11 +6,12 @@ import { connect } from 'react-redux';
 import type { GlobalState } from '../../../../types';
 import { selector } from './ProjectListFilters';
 import select from '../../../Form/Select';
+import type { ProjectType } from './ProjectListFiltersContainer';
 
 type Props = {
   intl: IntlShape,
   type: ?string,
-  projectTypes: any,
+  projectTypes: ProjectType[],
 };
 
 class ProjectsListFilterTypes extends React.Component<Props> {

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { injectIntl } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeOrderBy } from '../../../../redux/modules/project';
@@ -9,7 +9,7 @@ import type { GlobalState } from '../../../../types';
 type Props = {
   dispatch: Dispatch,
   orderBy: string,
-  intl: Object,
+  intl: IntlShape,
 };
 
 class ProjectListFilterOrder extends React.Component<Props> {

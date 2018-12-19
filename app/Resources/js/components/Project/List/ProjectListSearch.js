@@ -4,9 +4,10 @@ import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { changeTerm } from '../../../redux/modules/project';
 import Input from '../../Form/ReactBootstrapInput';
+import type { Dispatch } from '../../../types';
 
 type Props = {
-  dispatch: Function,
+  dispatch: Dispatch,
 };
 
 type State = {
