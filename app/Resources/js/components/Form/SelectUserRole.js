@@ -1,19 +1,24 @@
 // @flow
 import React, { Component } from 'react';
-import { connect, type MapStateToProps, type Connector } from 'react-redux';
+import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import type { GlobalState } from '../../types';
 import component from './Field';
 
-type Props = {
-  isSuperAdmin: boolean,
+type OwnProps = {|
   id: string,
   name: string,
   label: string,
-};
+|};
 
-export class SelectUserRole extends Component<Props & { intl: IntlShape }> {
+type Props = {|
+  ...OwnProps,
+  isSuperAdmin: boolean,
+  intl: IntlShape,
+|};
+
+export class SelectUserRole extends Component<Props> {
   render() {
     const { isSuperAdmin, intl, id, name, label } = this.props;
 
@@ -51,16 +56,10 @@ export class SelectUserRole extends Component<Props & { intl: IntlShape }> {
   }
 }
 
-type ParentProps = {
-  id: string,
-  name: string,
-  label: string,
-};
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 
-const connector: Connector<ParentProps, Props> = connect(mapStateToProps);
+const connector = connect(mapStateToProps);
 
 export default connector(injectIntl(SelectUserRole));

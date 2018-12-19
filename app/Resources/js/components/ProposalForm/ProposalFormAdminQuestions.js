@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { formValueSelector, arrayPush, arrayMove } from 'redux-form';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
@@ -270,14 +270,15 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
             </Droppable>
           </DragDropContext>
         </ListGroup>
-        {!hideSections &&
-        <Button
-          id="js-btn-create-section"
-          bsStyle="primary"
-          className="btn-outline-primary box-content__toolbar"
-          onClick={this.handleCreateSection}>
-          <i className="cap cap-small-caps-1" /> <FormattedMessage id="create-section" />
-        </Button>}
+        {!hideSections && (
+          <Button
+            id="js-btn-create-section"
+            bsStyle="primary"
+            className="btn-outline-primary box-content__toolbar"
+            onClick={this.handleCreateSection}>
+            <i className="cap cap-small-caps-1" /> <FormattedMessage id="create-section" />
+          </Button>
+        )}
         <Button
           id="js-btn-create-question"
           bsStyle="primary"
@@ -293,7 +294,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => {
+const mapStateToProps = (state: GlobalState, props: Props) => {
   const selector = formValueSelector(props.formName);
   return {
     questions: selector(state, 'questions'),

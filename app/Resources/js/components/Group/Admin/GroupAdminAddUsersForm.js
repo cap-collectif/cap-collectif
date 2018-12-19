@@ -2,13 +2,12 @@
 import React from 'react';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
-import { fetchQuery, graphql } from 'react-relay';
 import type { Dispatch } from '../../../types';
 import GroupAdminUsers_group from './__generated__/GroupAdminUsers_group.graphql';
 import { groupAdminUsersUserDeletionReset } from '../../../redux/modules/user';
 import AddUsersInGroupMutation from '../../../mutations/AddUsersInGroupMutation';
+import Fetcher from '../../../services/Fetcher';
 import select from '../../Form/Select';
-import environment from '../../../createRelayEnvironment';
 
 type Props = {
   group: GroupAdminUsers_group,
@@ -23,15 +22,6 @@ type DefaultProps = void;
 type FormValues = {
   users: Array<Object>,
 };
-
-const getUsersList = graphql`
-  query GroupAdminAddUsersFormUsersListQuery($notInIds: [String], $displayName: String) {
-    userSearch(notInIds: $notInIds, displayName: $displayName) {
-      id
-      displayName
-    }
-  }
-`;
 
 export const formName = 'group-users-add';
 
@@ -68,17 +58,6 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
       usersInGroup.push(edge.node.id);
     });
 
-    const retrieveUsersList = (usersIds: Array<string>, terms: ?string) =>
-      fetchQuery(environment, getUsersList, {
-        notInIds: usersIds,
-        displayName: terms,
-      }).then(data => ({
-        options: data.userSearch.map(u => ({
-          value: u.id,
-          label: u.displayName,
-        })),
-      }));
-
     return (
       <form onSubmit={handleSubmit}>
         <div>
@@ -92,7 +71,14 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
             clearable
             multi
             autoload
-            loadOptions={terms => retrieveUsersList(usersInGroup, terms)}
+            loadOptions={terms =>
+              Fetcher.postToJson(`/users/search`, { terms, notInIds: usersInGroup }).then(res => ({
+                options: res.users.map(u => ({
+                  value: u.id,
+                  label: u.displayName,
+                })),
+              }))
+            }
           />
         </div>
       </form>

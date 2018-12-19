@@ -7,7 +7,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
 import { Row, Col, Button } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import renderComponent from '../Form/Field';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
@@ -17,18 +17,29 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import type { GlobalState, Dispatch } from '../../types';
 import type { CommentForm_commentable } from './__generated__/CommentForm_commentable.graphql';
 
-type RelayProps = { commentable: CommentForm_commentable };
-type Props = FormProps &
-  RelayProps & {
-    isAnswer: boolean,
-    comment: ?string,
-    user: ?Object,
-    intl: IntlShape,
-  };
+type RelayProps = {| commentable: CommentForm_commentable |};
 
-type State = {
+type OwnProps = {|
+  isAnswer: boolean,
+|};
+
+type StateProps = {|
+  form: string,
+  comment: ?string,
+  user: ?Object,
+|};
+
+type Props = {|
+  ...OwnProps,
+  ...RelayProps,
+  ...StateProps,
+  ...FormProps,
+  intl: IntlShape,
+|};
+
+type State = {|
   expanded: boolean,
-};
+|};
 
 type FormValues = {
   authorName: string,
@@ -241,7 +252,7 @@ export class CommentForm extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: RelayProps) => ({
+const mapStateToProps = (state: GlobalState, props) => ({
   comment: formValueSelector(formName + props.commentable.id)(state, 'body'),
   user: state.user.user,
   form: formName + props.commentable.id,
@@ -249,7 +260,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Re
 
 const container = injectIntl(CommentForm);
 
-const form = connect(mapStateToProps)(
+const form = connect<Props, GlobalState, _>(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,

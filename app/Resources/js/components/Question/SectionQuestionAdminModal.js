@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Field, getFormSyncErrors } from 'redux-form';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import type { GlobalState } from '../../types';
 import component from '../Form/Field';
 import CloseButton from '../Form/CloseButton';
@@ -79,7 +79,7 @@ const SectionQuestionAdminModal = (props: Props) => {
   );
 };
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => ({
+const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
   disabled: getFormSyncErrors(props.formName)(state).questions !== undefined,
 });
 

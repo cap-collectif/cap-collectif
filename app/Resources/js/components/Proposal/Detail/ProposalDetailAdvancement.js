@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment-timezone';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
 import type { ProposalDetailAdvancement_proposal } from './__generated__/ProposalDetailAdvancement_proposal.graphql';
@@ -158,8 +158,8 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
                 index + 1 === displayedSteps.length
                   ? null
                   : displayedSteps[index + 1].isCurrent || displayedSteps[index + 1].isPast
-                    ? green
-                    : grey
+                  ? green
+                  : grey
               }
               children={
                 step.isCurrent &&
@@ -192,7 +192,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   project: state.project.projectsById[state.project.currentProjectById],
 });
 

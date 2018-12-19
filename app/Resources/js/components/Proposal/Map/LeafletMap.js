@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Map, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet-universal';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from './LocateControl';
 import LeafletSearch from './LeafletSearch';
@@ -186,7 +186,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   markers: state.proposal.markers || {},
   stepId: state.project.currentProjectStepById || '',
   stepType:

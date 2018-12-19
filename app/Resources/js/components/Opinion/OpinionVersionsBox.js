@@ -53,22 +53,22 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
             value={this.state.order}
             onBlur={() => this.updateSelectedValue()}>
             <FormattedMessage id="global.filter_random">
-              {message => <option value="random">{message}</option>}
+              {(message: string) => <option value="random">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_last">
-              {message => <option value="last">{message}</option>}
+              {(message: string) => <option value="last">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_old">
-              {message => <option value="old">{message}</option>}
+              {(message: string) => <option value="old">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_favorable">
-              {message => <option value="favorable">{message}</option>}
+              {(message: string) => <option value="favorable">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_votes">
-              {message => <option value="votes">{message}</option>}
+              {(message: string) => <option value="votes">{message}</option>}
             </FormattedMessage>
             <FormattedMessage id="global.filter_comments">
-              {message => <option value="comments">{message}</option>}
+              {(message: string) => <option value="comments">{message}</option>}
             </FormattedMessage>
           </select>
         </form>

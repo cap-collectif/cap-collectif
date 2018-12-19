@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
-import type { MapStateToProps } from 'react-redux';
 import { isDirty } from 'redux-form';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalAdminPageTabs from './ProposalAdminPageTabs';
@@ -70,7 +69,7 @@ export class ProposalAdminPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   dirty:
     isDirty('proposal-admin-edit')(state) ||
     isDirty('proposal-admin-selections')(state) ||

@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { reduxForm, Field, type FormProps } from 'redux-form';
 import { createFragmentContainer, graphql, QueryRenderer, type ReadyState } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -13,19 +13,13 @@ import type { ProposalFormAdminEvaluationForm_proposalForm } from './__generated
 import SetEvaluationFormInProposalFormMutation from '../../mutations/SetEvaluationFormInProposalFormMutation';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 
-type RelayProps = { proposalForm: ProposalFormAdminEvaluationForm_proposalForm };
-type Props = RelayProps & {
+type RelayProps = {| proposalForm: ProposalFormAdminEvaluationForm_proposalForm |};
+type Props = {|
+  ...FormProps,
+  ...RelayProps,
   intl: IntlShape,
-  handleSubmit: () => void,
-  invalid: boolean,
-  pristine: boolean,
-  submitting: boolean,
-  valid: boolean,
-  submitSucceeded: boolean,
-  submitFailed: boolean,
-};
+|};
 
-type DefaultProps = void;
 type FormValues = Object;
 
 export const formName = 'proposal-form-admin-evaluation';
@@ -43,8 +37,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposalForm }: Prop
 };
 
 export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
-  static defaultProps: DefaultProps;
-
   render() {
     const {
       intl,
@@ -100,7 +92,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
                       id="evaluation-form"
                       label={<FormattedMessage id="proposal_form.evaluation_form" />}>
                       <FormattedMessage id="proposal_form.select_evaluation_form">
-                        {message => <option value="">{message}</option>}
+                        {(message: string) => <option value="">{message}</option>}
                       </FormattedMessage>
 
                       {proposalForm.evaluationForm && (
@@ -155,7 +147,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalFormAdminEvaluationForm);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: {
     evaluationForm: props.proposalForm.evaluationForm ? props.proposalForm.evaluationForm.id : null,
   },

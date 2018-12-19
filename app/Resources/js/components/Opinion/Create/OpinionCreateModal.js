@@ -3,7 +3,7 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Modal } from 'react-bootstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import type { IntlShape } from 'react-intl';
 import OpinionCreateForm, { formName } from '../Form/OpinionCreateForm';
@@ -73,7 +73,7 @@ export class OpinionCreateModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
+const mapStateToProps = (state: State, props: Object) => ({
   show: state.opinion.showOpinionCreateModal === props.section.id,
   submitting: isSubmitting(formName)(state),
 });

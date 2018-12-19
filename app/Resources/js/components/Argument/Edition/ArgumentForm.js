@@ -2,7 +2,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect, type MapStateToProps, type Connector } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import component from '../../Form/Field';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
@@ -21,10 +21,10 @@ type FormValidValues = {
   body: string,
   confirm?: boolean,
 };
-type Props = {
+type Props = {|
   // eslint-disable-next-line react/no-unused-prop-types
   argument: ArgumentForm_argument,
-};
+|};
 
 const validate = ({ body, confirm }: FormValues) => {
   const errors = {};
@@ -84,13 +84,13 @@ class ArgumentForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
+const mapStateToProps = (state: State, props: Props) => ({
   initialValues: {
     body: props.argument.body,
     confirm: false,
   },
 });
-const connector: Connector<Props, {}> = connect(mapStateToProps);
+const connector = connect(mapStateToProps);
 
 const container = connector(
   reduxForm({

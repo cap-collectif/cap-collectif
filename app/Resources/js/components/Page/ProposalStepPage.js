@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
@@ -143,6 +143,7 @@ export class ProposalStepPage extends React.Component<Props> {
                   )}
                   {/* $FlowFixMe */}
                   <ProposalStepPageHeader step={props.step} />
+                  {/* $FlowFixMe please use mapDispatchToProps */}
                   <ProposalListFilters
                     statuses={statuses}
                     categories={categories}
@@ -157,6 +158,7 @@ export class ProposalStepPage extends React.Component<Props> {
                     showMapButton={form.usingAddress && !props.step.private && features.display_map}
                   />
                   {features.display_map ? (
+                    /* $FlowFixMe please use mapDispatchToProps */
                     <LeafletMap
                       geoJsons={geoJsons}
                       defaultMapOptions={{
@@ -188,7 +190,7 @@ export class ProposalStepPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
+const mapStateToProps = (state: State, props: Object) => ({
   stepId: undefined,
   isAuthenticated: state.user.user !== null,
   filters: state.proposal.filters || {},

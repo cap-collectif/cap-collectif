@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import EditProfileTabs from './EditProfileTabs';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
@@ -45,7 +45,7 @@ export class EditProfileBox extends Component<Props> {
     );
   }
 }
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   features: state.default.features,
 });
 export default connect(mapStateToProps)(EditProfileBox);

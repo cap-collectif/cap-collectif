@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
@@ -10,6 +10,7 @@ import UserAvatar from '../User/UserAvatar';
 import type { State } from '../../types';
 
 type Props = {
+  intl: IntlShape,
   user?: Object,
   features: Object,
 };
@@ -27,14 +28,19 @@ export class NavbarRight extends React.Component<Props> {
   };
 
   render() {
-    const { user, features } = this.props;
+    const { user, features, intl } = this.props;
     return (
       <Nav pullRight>
         {features.search && (
-          <NavItem eventKey={1} className="navbar__search" href="/search">
+          <NavItem
+            eventKey={1}
+            className="navbar__search"
+            href="/search"
+            role="search"
+            aria-label={intl.formatMessage({ id: 'search.title' })}>
             <i className="cap cap-magnifier" />{' '}
             <span className="visible-xs-inline" style={{ whiteSpace: 'nowrap' }}>
-              {<FormattedMessage id="navbar.search" />}
+              <FormattedMessage id="navbar.search" />
             </span>
           </NavItem>
         )}
@@ -52,13 +58,13 @@ export class NavbarRight extends React.Component<Props> {
             {user.isAdmin && (
               <MenuItem key={3.1} eventKey={3.1} href="/admin">
                 <i className="cap-setting-gears-1" style={{ marginRight: 10 }} />
-                {<FormattedMessage id="navbar.admin" />}
+                <FormattedMessage id="navbar.admin" />
               </MenuItem>
             )}
             {features.profiles && (
               <MenuItem key={3.2} eventKey={3.2} href={`/profile/${user.uniqueId}`}>
                 <i className="cap cap-id-8" style={{ marginRight: 10 }} />
-                {<FormattedMessage id="navbar.profile" />}
+                <FormattedMessage id="navbar.profile" />
               </MenuItem>
             )}
             {user.isEvaluer && (
@@ -71,14 +77,14 @@ export class NavbarRight extends React.Component<Props> {
               <React.Fragment>
                 <MenuItem key={3.4} eventKey={3.4} href="/profile/edit-profile">
                   <i className="cap cap-setting-adjustment" style={{ marginRight: 10 }} />
-                  {<FormattedMessage id="navbar.user_settings" />}
+                  <FormattedMessage id="navbar.user_settings" />
                 </MenuItem>
                 <MenuItem key={3.5} divider />
               </React.Fragment>
             )}
             <MenuItem key={3.6} eventKey={3.6} id="logout-button" onClick={this.logout}>
               <i className="cap cap-power-1" style={{ marginRight: 10 }} />
-              {<FormattedMessage id="global.logout" />}
+              <FormattedMessage id="global.logout" />
             </MenuItem>
           </NavDropdown>
         ) : (
@@ -94,14 +100,16 @@ export class NavbarRight extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   features: state.default.features,
   user: state.user.user,
 });
+
+const container = injectIntl(NavbarRight);
 
 export default connect(
   mapStateToProps,
   null,
   null,
   { withRef: true },
-)(NavbarRight);
+)(container);

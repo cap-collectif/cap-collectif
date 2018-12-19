@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { ButtonToolbar } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import OpinionVersionEditButton from './OpinionVersionEditButton';
@@ -63,22 +63,20 @@ class OpinionButtons extends React.Component<Props> {
         {/* $FlowFixMe $fragmentRefs is missing */}
         {opinion.project.opinionCanBeFollowed && <OpinionFollowButton opinion={opinion} />}
         <OpinionReportButton opinion={opinion} />
-        {opinion.title &&
-          opinion.section &&
-          opinion.section.url && (
-            <ShareButtonDropdown
-              id="opinion-share-button"
-              className="ml-5"
-              title={opinion.title}
-              url={opinion.section.url}
-            />
-          )}
+        {opinion.title && opinion.section && opinion.section.url && (
+          <ShareButtonDropdown
+            id="opinion-share-button"
+            className="ml-5"
+            title={opinion.title}
+            url={opinion.section.url}
+          />
+        )}
       </ButtonToolbar>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   features: state.default.features,
   user: state.user.user,
 });

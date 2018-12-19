@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import ReportModal from './ReportModal';
 import ReportButton from './ReportButton';
 import { openModal } from '../../redux/modules/report';
@@ -64,7 +64,7 @@ export class ReportBox extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
+const mapStateToProps = (state: State, props) => ({
   features: state.default.features,
   user: state.user.user,
   showModal: state.report.currentReportingModal === props.id,

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm, formValueSelector, Field, FieldArray, type FormProps } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Panel, Col, Row, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
@@ -17,19 +17,20 @@ import AlertForm from '../Alert/AlertForm';
 import type { ProposalFormAdminConfigurationForm_proposalForm } from './__generated__/ProposalFormAdminConfigurationForm_proposalForm.graphql';
 import type { State, FeatureToggles } from '../../types';
 
-type RelayProps = { proposalForm: ProposalFormAdminConfigurationForm_proposalForm };
-type Props = RelayProps &
-  FormProps & {
-    intl: IntlShape,
-    usingAddress: boolean,
-    usingCategories: boolean,
-    usingThemes: boolean,
-    usingDescription: boolean,
-    usingIllustration: boolean,
-    usingSummary: boolean,
-    usingDistrict: boolean,
-    features: FeatureToggles,
-  };
+type RelayProps = {| proposalForm: ProposalFormAdminConfigurationForm_proposalForm |};
+type Props = {|
+  ...RelayProps,
+  ...FormProps,
+  intl: IntlShape,
+  usingAddress: boolean,
+  usingCategories: boolean,
+  usingThemes: boolean,
+  usingDescription: boolean,
+  usingIllustration: boolean,
+  usingSummary: boolean,
+  usingDistrict: boolean,
+  features: FeatureToggles,
+|};
 
 const zoomLevels = [
   { id: 1, name: '1 - Le monde' },
@@ -546,7 +547,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                         normalize={val => (val ? parseInt(val, 10) : null)}
                         label={<FormattedMessage id="proposal_form.zoom" />}>
                         <FormattedMessage id="proposal_form.select.zoom">
-                          {message => <option value="">{message}</option>}
+                          {(message: string) => <option value="">{message}</option>}
                         </FormattedMessage>
                         {zoomLevels.map(level => (
                           <option key={level.id} value={level.id}>
@@ -641,7 +642,7 @@ const form = reduxForm({
 
 const selector = formValueSelector(formName);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: props.proposalForm,
   usingAddress: selector(state, 'usingAddress'),
   usingCategories: selector(state, 'usingCategories'),

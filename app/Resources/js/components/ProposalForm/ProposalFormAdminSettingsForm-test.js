@@ -3,21 +3,15 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormAdminSettingsForm } from './ProposalFormAdminSettingsForm';
-import { intlMock } from '../../mocks';
+import { $refType, intlMock, formMock } from '../../mocks';
 
 describe('<ProposalFormAdminSettingsForm />', () => {
   const props = {
-    handleSubmit: jest.fn(),
     intl: intlMock,
-    invalid: false,
-    valid: false,
-    submitSucceeded: false,
-    submitFailed: false,
-    pristine: false,
-    submitting: false,
+    ...formMock,
     isSuperAdmin: true,
-    // $FlowFixMe $refType
     proposalForm: {
+      $refType,
       id: 'proposalFormId',
       title: 'title',
       commentable: true,

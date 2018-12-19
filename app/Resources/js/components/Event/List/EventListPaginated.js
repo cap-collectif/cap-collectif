@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Row, Col } from 'react-bootstrap';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import classNames from 'classnames';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import EventPreview from '../EventPreview';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import EventMap from '../Map/EventMap';
@@ -135,7 +135,7 @@ export class EventListPaginated extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   eventSelected: state.event.eventSelected,
   features: state.default.features,
   isMobileListView: state.event.isMobileListView,

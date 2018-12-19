@@ -3862,13 +3862,6 @@ type Query {
     # Remove super admin from export.
     superAdmin: Boolean = false
   ): UserConnection!
-  userSearch(
-    # Filter by displayName.
-    displayName: String = null
-
-    # Return all users except the ones in the array.
-    notInIds: [String] = null
-  ): [User]
   consultations(
     # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     id: ID

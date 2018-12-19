@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { formValueSelector, reduxForm, Field, FieldArray } from 'redux-form';
 import { ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
@@ -190,31 +190,30 @@ export class ProposalAdminSelections extends Component<Props> {
                     component={toggle}
                     normalize={val => !!val}
                   />
-                  {selectionValues[index] &&
-                    selectionValues[index].selected && (
-                      <div>
-                        <Field
-                          type="select"
-                          label="Statut"
-                          id={`selections[${index}].status`}
-                          name={`selections[${index}].status`}
-                          normalize={val => (val === '-1' ? null : val)}
-                          component={component}>
-                          <option value="-1">
-                            {intl.formatMessage({ id: 'proposal.no_status' })}
-                          </option>
-                          {step.statuses &&
-                            step.statuses.map(status => (
-                              <option key={status.id} value={status.id}>
-                                {status.name}
-                              </option>
-                            ))}
-                        </Field>
-                        {step.allowingProgressSteps && (
-                          <FieldArray name="progressSteps" component={ProposalAdminProgressSteps} />
-                        )}
-                      </div>
-                    )}
+                  {selectionValues[index] && selectionValues[index].selected && (
+                    <div>
+                      <Field
+                        type="select"
+                        label="Statut"
+                        id={`selections[${index}].status`}
+                        name={`selections[${index}].status`}
+                        normalize={val => (val === '-1' ? null : val)}
+                        component={component}>
+                        <option value="-1">
+                          {intl.formatMessage({ id: 'proposal.no_status' })}
+                        </option>
+                        {step.statuses &&
+                          step.statuses.map(status => (
+                            <option key={status.id} value={status.id}>
+                              {status.name}
+                            </option>
+                          ))}
+                      </Field>
+                      {step.allowingProgressSteps && (
+                        <FieldArray name="progressSteps" component={ProposalAdminProgressSteps} />
+                      )}
+                    </div>
+                  )}
                 </ListGroupItem>
               ))}
             </ListGroup>
@@ -248,7 +247,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalAdminSelections);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: PassedProps) => {
+const mapStateToProps = (state: State, props: PassedProps) => {
   const steps = props.proposal.project.steps;
   const selectionSteps = steps.filter(step => step.kind === 'selection');
   return {

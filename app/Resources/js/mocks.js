@@ -12,13 +12,15 @@ export const intlMock: IntlShape = {
   formats: {},
   messages: {},
   now: () => 0,
-  formatHTMLMessage: message => String(message),
-  formatPlural: message => String(message),
-  formatNumber: message => String(message),
-  formatRelative: message => String(message),
-  formatTime: message => String(message),
-  formatDate: message => String(message),
-  formatMessage: message => String(message.id),
+  // $FlowFixMe
+  formatHTMLMessage: (message: string) => String(message),
+  formatPlural: (message: string) => String(message),
+  formatNumber: (message: string) => String(message),
+  formatRelative: (message: string) => String(message),
+  formatTime: (message: string) => String(message),
+  formatDate: (message: string) => String(message),
+  // $FlowFixMe
+  formatMessage: (message: string) => String(message.id),
 };
 
 export const formMock: FormProps = {

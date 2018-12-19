@@ -22,7 +22,6 @@ describe('<RegistrationForm />', () => {
     organizationName: 'Cap Collectif',
     dispatch: jest.fn(),
     shieldEnabled: false,
-    chartBody: 'Super charte !!',
   };
 
   it('renders a form with inputs and a captcha', () => {
@@ -43,12 +42,7 @@ describe('<RegistrationForm />', () => {
   });
 
   it('renders a form with dynamic fields', () => {
-    const wrapper = shallow(
-      <RegistrationForm
-        {...props}
-        hasQuestions
-      />,
-    );
+    const wrapper = shallow(<RegistrationForm {...props} hasQuestions />);
     expect(wrapper).toMatchSnapshot();
   });
 });

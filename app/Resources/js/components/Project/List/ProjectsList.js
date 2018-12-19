@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
@@ -9,14 +9,15 @@ import { type GlobalState } from '../../../types';
 import ProjectListView from './ProjectListView';
 
 type Props = {
-  orderBy: ?string,
-  type: ?string,
-  theme: ?string,
+  type?: ?string,
+  theme?: ?string,
   // Used only on /themes page
   themeId?: ?string,
-  term: ?string,
-  limit: number,
-  paginate: boolean,
+  term?: ?string,
+  // Default props not working
+  orderBy?: ?string,
+  limit?: ?number,
+  paginate?: ?boolean,
 };
 
 class ProjectsList extends React.Component<Props> {
@@ -97,7 +98,7 @@ class ProjectsList extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   theme: state.project.theme,
   orderBy: state.project.orderBy || 'LATEST',
   type: state.project.type,

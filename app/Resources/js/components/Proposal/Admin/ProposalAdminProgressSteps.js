@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-alert */
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { formValueSelector, arrayPush } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
@@ -121,7 +121,7 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   progressSteps: selector(state, 'progressSteps'),
 });
 

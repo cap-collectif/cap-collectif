@@ -15,6 +15,7 @@ describe('<UserAdminProfile/>', () => {
 
   it('should render, with user confirmed by email adn viewer is super admin ', () => {
     const wrapper = shallow(
+      // $FlowFixMe
       <UserAdminProfile
         {...props1}
         userTypes={[{ id: 1, name: 'type_1' }]}
@@ -26,6 +27,7 @@ describe('<UserAdminProfile/>', () => {
   });
   it('should render, with user not confirmed by email adn viewer not super admin', () => {
     const wrapper = shallow(
+      // $FlowFixMe
       <UserAdminProfile
         {...props1}
         userTypes={[{ id: 1, name: 'type_1' }]}

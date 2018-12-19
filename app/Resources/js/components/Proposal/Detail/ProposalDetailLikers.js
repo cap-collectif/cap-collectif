@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { openDetailLikersModal } from '../../../redux/modules/proposal';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
@@ -52,7 +52,7 @@ export class ProposalDetailLikers extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
+const mapStateToProps = (state: State, props: Props) => ({
   showModal:
     state.proposal.showDetailLikersModal &&
     state.proposal.showDetailLikersModal === props.proposal.id,

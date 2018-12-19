@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ToggleButton, Button, ButtonToolbar } from 'react-bootstrap';
@@ -17,8 +17,9 @@ import type {
 import type { Dispatch, State } from '../../../types';
 
 type DefaultProps = void;
-type RelayProps = { proposal: ProposalAdminStatusForm_proposal };
-type Props = RelayProps & {
+type RelayProps = {| proposal: ProposalAdminStatusForm_proposal |};
+type Props = {|
+  ...RelayProps,
   publicationStatus: string,
   isSuperAdmin: boolean,
   pristine: boolean,
@@ -30,7 +31,7 @@ type Props = RelayProps & {
   dispatch: Dispatch,
   handleSubmit: () => void,
   intl: IntlShape,
-};
+|};
 type FormValues = {
   publicationStatus: ProposalPublicationStatus,
   trashedReason: ?string,
@@ -198,7 +199,7 @@ const form = reduxForm({
   form: formName,
 })(componentIntl);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { proposal }: RelayProps) => ({
+const mapStateToProps = (state: State, { proposal }: RelayProps) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   onSubmit,
   initialValues: {

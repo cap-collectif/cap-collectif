@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { FormattedMessage, FormattedDate } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
 import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -69,6 +69,7 @@ export class ProposalPageHeader extends React.Component<Props> {
         </div>
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
         <div className="media mb-15">
+          {/* $FlowFixMe Will be a fragment soon */}
           <UserAvatar className="pull-left" user={proposal.author} />
           <div className="media-body">
             <p className="media--aligned excerpt">
@@ -120,7 +121,7 @@ export class ProposalPageHeader extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   referer: state.proposal.referer,
 });
 

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Panel } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
 import Input from '../Form/Input';
@@ -10,6 +10,7 @@ import ArgumentListView, { type ArgumentOrder } from './ArgumentListView';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { ArgumentListQueryResponse } from './__generated__/ArgumentListQuery.graphql';
 import type { ArgumentList_argumentable } from './__generated__/ArgumentList_argumentable.graphql';
+import type { GlobalState } from '../../types';
 
 type Props = {
   argumentable: ArgumentList_argumentable,
@@ -109,13 +110,13 @@ export class ArgumentList extends React.Component<Props, State> {
                           value={this.state.order}
                           onChange={this.updateOrderBy}>
                           <FormattedMessage id="global.filter_last">
-                            {message => <option value="last">{message}</option>}
+                            {(message: string) => <option value="last">{message}</option>}
                           </FormattedMessage>
                           <FormattedMessage id="global.filter_old">
-                            {message => <option value="old">{message}</option>}
+                            {(message: string) => <option value="old">{message}</option>}
                           </FormattedMessage>
                           <FormattedMessage id="global.filter_popular">
-                            {message => <option value="popular">{message}</option>}
+                            {(message: string) => <option value="popular">{message}</option>}
                           </FormattedMessage>
                         </Input>
                       </div>
@@ -134,7 +135,7 @@ export class ArgumentList extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 });
 const container = connect(mapStateToProps)(ArgumentList);

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { type FormProps, reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -12,9 +12,14 @@ import Fetcher from '../../../services/Fetcher';
 import type { ProposalAdminEvaluersForm_proposal } from './__generated__/ProposalAdminEvaluersForm_proposal.graphql';
 import type { Dispatch, State } from '../../../types';
 
-type FormValues = { evaluers: Array<{ value: string }> };
-type RelayProps = { proposal: ProposalAdminEvaluersForm_proposal, intl: IntlShape };
-type Props = RelayProps & FormProps & FormValues;
+type FormValues = {| evaluers: Array<{ value: string }> |};
+type RelayProps = {| proposal: ProposalAdminEvaluersForm_proposal |};
+type Props = {|
+  ...RelayProps,
+  ...FormProps,
+  ...FormValues,
+  intl: IntlShape,
+|};
 
 const formName = 'proposal-admin-evaluers';
 
@@ -112,7 +117,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalAdminEvaluersForm);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   initialValues: {
     evaluers: props.proposal.evaluers.map(u => ({
       value: u.id,

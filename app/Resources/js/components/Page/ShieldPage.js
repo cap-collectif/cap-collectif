@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { submit, isSubmitting } from 'redux-form';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import type { Connector } from 'react-redux';
 import type { Dispatch, State } from '../../types';
 import LoginButton from '../User/Login/LoginButton';
 import LoginBox from '../User/Login/LoginBox';
@@ -68,7 +67,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(submit('login'));
   },
 });
-const connector: Connector<{}, Props> = connect(
+const connector = connect(
   mapStateToProps,
   mapDispatchToProps,
 );

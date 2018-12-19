@@ -21,12 +21,14 @@ describe('<UserAdminPersonalData/>', () => {
 
   it('should render when user is confirmed by email and viewer is super admin', () => {
     const wrapper = shallow(
+      // $FlowFixMe
       <UserAdminPersonalData {...props1} user={userIsConfirmed} isViewerOrSuperAdmin />,
     );
     expect(wrapper).toMatchSnapshot();
   });
   it('should render when user is not confirmed by email and viewer is not super admin', () => {
     const wrapper = shallow(
+      // $FlowFixMe
       <UserAdminPersonalData {...props1} user={userIsNotConfirmed} isViewerOrSuperAdmin={false} />,
     );
     expect(wrapper).toMatchSnapshot();

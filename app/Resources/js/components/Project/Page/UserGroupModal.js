@@ -10,16 +10,17 @@ import GroupAvatar from '../../User/GroupAvatar';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
 import type { Uuid } from '../../../types';
 
-type RelayProps = {
+type RelayProps = {|
   project: UserGroupModal_project,
-};
+|};
 
-type Props = RelayProps & {
+type Props = {|
+  ...RelayProps,
   show: boolean,
   handleClose: () => void,
   relay: RelayPaginationProp,
   intl: IntlShape,
-};
+|};
 type State = {
   currentShownGroupModalId: ?string,
   loading: boolean,

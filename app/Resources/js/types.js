@@ -90,16 +90,18 @@ export type Action =
   | ReduxFormAction
   | { type: '@@INIT' };
 
-export type GlobalState = {
-  form: Object,
-  default: DefaultState,
-  proposal: ProposalState,
-  project: ProjectState,
-  report: ReportState,
-  user: UserState,
-  opinion: OpinionState,
-  event: EventState,
-};
+export type GlobalState = {|
+  +form: Object,
+  +intl: Object,
+  +default: DefaultState,
+  +proposal: ProposalState,
+  +project: ProjectState,
+  +report: ReportState,
+  +user: UserState,
+  +opinion: OpinionState,
+  +event: EventState,
+|};
+
 export type State = GlobalState;
 
 export type Store = ReduxStore<State, Action>;

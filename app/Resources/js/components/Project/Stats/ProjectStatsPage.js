@@ -1,17 +1,22 @@
 // @flow
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
 import ProjectStatsList from './ProjectStatsList';
 import type { GlobalState } from '../../../types';
 
-type Props = {
+type OwnProps = {|
   steps: Array<Object>,
+  projectId: string,
+|};
+
+type Props = {|
+  ...OwnProps,
   themes: Array<Object>,
   districts: Array<Object>,
   categories: Array<Object>,
-};
+|};
 
 type State = { selectedStepIndex: number };
 
@@ -83,7 +88,7 @@ export class ProjectStatsPage extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props) => {
+const mapStateToProps = (state: GlobalState, props: OwnProps) => {
   const collectSteps = props.steps.filter(step => step.type === 'collect');
   return {
     themes: state.default.themes,

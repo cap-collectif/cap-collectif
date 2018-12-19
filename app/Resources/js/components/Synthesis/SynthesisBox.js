@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import DatesInterval from './../Utils/DatesInterval';
 import ViewBox from './ViewBox';
@@ -109,18 +109,15 @@ export class SynthesisBox extends React.Component<Props, State> {
         <div>
           <h2>
             {step.title}
-            {synthesis &&
-              synthesis.editable &&
-              user &&
-              user.isAdmin && (
-                <a
-                  className="btn btn-primary pull-right"
-                  href={step._links.editSynthesis}
-                  title="{{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}">
-                  <i className="cap cap-pencil-1" />
-                  <FormattedMessage id="synthesis.edit.button" />
-                </a>
-              )}
+            {synthesis && synthesis.editable && user && user.isAdmin && (
+              <a
+                className="btn btn-primary pull-right"
+                href={step._links.editSynthesis}
+                title="{{ 'synthesis.edit.button' | trans({}, 'CapcoAppBundle') }}">
+                <i className="cap cap-pencil-1" />
+                <FormattedMessage id="synthesis.edit.button" />
+              </a>
+            )}
           </h2>
 
           {(step.startAt || step.endAt) && (
@@ -150,7 +147,7 @@ export class SynthesisBox extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   step:
     state.project.currentProjectById &&
     state.project.projectsById[state.project.currentProjectById].stepsById[

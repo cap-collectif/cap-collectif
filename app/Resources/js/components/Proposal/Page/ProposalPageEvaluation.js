@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { type FormProps, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -17,11 +17,16 @@ import type { ProposalPageEvaluation_proposal } from './__generated__/ProposalPa
 import type { Dispatch, State } from '../../../types';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
 
-type FormValues = { responses: ResponsesValues };
-type RelayProps = {
+type FormValues = {| responses: ResponsesValues |};
+type RelayProps = {|
   proposal: ProposalPageEvaluation_proposal,
-};
-type Props = FormProps & FormValues & RelayProps & { intl: IntlShape };
+|};
+type Props = {|
+  ...FormProps,
+  ...FormValues,
+  ...RelayProps,
+  intl: IntlShape,
+|};
 
 const formName = 'proposal-evaluation';
 
@@ -128,7 +133,7 @@ const form = injectIntl(
   })(ProposalPageEvaluation),
 );
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
+const mapStateToProps = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,

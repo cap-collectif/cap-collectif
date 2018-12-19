@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
@@ -49,7 +49,7 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
+const mapStateToProps = (state: State, props: RelayProps) => {
   const selector = formValueSelector('proposal-form-admin-configuration');
   const districts = selector(state, 'districts');
   return {

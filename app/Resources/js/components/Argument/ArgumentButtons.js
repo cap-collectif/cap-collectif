@@ -11,15 +11,20 @@ import EditButton from '../Form/EditButton';
 import DeleteButton from '../Form/DeleteButton';
 import { openArgumentEditModal } from '../../redux/modules/opinion';
 import type { ArgumentButtons_argument } from './__generated__/ArgumentButtons_argument.graphql';
+import type { Dispatch } from '../../types';
 
-type Props = {
+type OwnProps = {|
   argument: ArgumentButtons_argument,
-  dispatch: Function,
-};
+|};
 
-type State = {
+type Props = {|
+  ...OwnProps,
+  dispatch: Dispatch,
+|};
+
+type State = {|
   isDeleting: boolean,
-};
+|};
 
 class ArgumentButtons extends React.Component<Props, State> {
   state = {
@@ -40,6 +45,7 @@ class ArgumentButtons extends React.Component<Props, State> {
       <div>
         {/* $FlowFixMe */}
         <ArgumentVoteBox argument={argument} />
+        {/* $FlowFixMe */}
         <ArgumentReportButton argument={argument} />
         <EditButton
           onClick={() => {

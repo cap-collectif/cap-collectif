@@ -8,16 +8,17 @@ import { UserAvatar } from '../../User/UserAvatar';
 import CloseButton from '../../Form/CloseButton';
 import ListGroupFlush from '../../Ui/List/ListGroupFlush';
 
-type RelayProps = {
+type RelayProps = {|
   group: UserInGroupModal_group,
-};
+|};
 
-type Props = RelayProps & {
+type Props = {|
+  ...RelayProps,
   show: boolean,
   handleClose: () => void,
   relay: RelayPaginationProp,
   intl: IntlShape,
-};
+|};
 type State = {
   loading: boolean,
 };
