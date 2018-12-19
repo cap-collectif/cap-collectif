@@ -617,6 +617,24 @@ type ChangeMapProviderTokenPayload {
   clientMutationId: String
 }
 
+input ChangeMapStyleInput {
+  # The ID of the map token to modify the style
+  mapTokenId: ID!
+
+  # The new style owner
+  styleOwner: String!
+
+  # The new style ID
+  styleId: ID!
+  clientMutationId: String
+}
+
+type ChangeMapStylePayload {
+  # The newly map token
+  mapToken: MapToken
+  clientMutationId: String
+}
+
 input ChangeProposalContentInput {
   # The proposal id
   id: ID!
@@ -2126,6 +2144,12 @@ type MapToken implements Node {
   # The corresponding provider in which belongs the token
   provider: MapTokenProvider
 
+  # The style id associated to this map token (available only if a style is applied)
+  styleId: ID
+
+  # The style owner associated to this map token (available only if a style is applied)
+  styleOwner: String
+
   # The available styles associated to this map token
   styles(
     # Filter the styles by its visibility
@@ -2143,7 +2167,7 @@ enum MapTokenProvider {
 
 # A map token style
 type MapTokenStyle {
-  id: String!
+  id: ID!
 
   # The name of the style
   name: String!
@@ -2361,6 +2385,7 @@ type Mutation {
   addEvent(input: AddEventInput!): AddEventPayload
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
   changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
+  changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload

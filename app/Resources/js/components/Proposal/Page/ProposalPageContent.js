@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import { Map, Marker, TileLayer } from 'react-leaflet-universal';
-import type { MapStateToProps } from 'react-redux';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
 import ProposalEditModal from '../Edit/ProposalEditModal';
 import ProposalDeleteModal from '../Delete/ProposalDeleteModal';
@@ -168,7 +167,7 @@ export class ProposalPageContent extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps = (state: GlobalState) => ({
   mapTokens: state.user.mapTokens,
 });
 

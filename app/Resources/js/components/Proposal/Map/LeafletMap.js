@@ -130,12 +130,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
       return null;
     }
 
-    const defaultDistrictStyle = {
-      color: '#ff0000',
-      weight: 1,
-      opacity: 0.3,
-    };
-
     return (
       <Map
         center={defaultMapOptions.center}
@@ -180,7 +174,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
         {geoJsons &&
           geoJsons.map((geoJson, key) => (
             <GeoJSON
-              style={geoJson.style ? JSON.parse(geoJson.style) : defaultDistrictStyle}
+              style={convertToGeoJsonStyle(geoJson.style)}
               key={key}
               data={geoJson.district}
             />

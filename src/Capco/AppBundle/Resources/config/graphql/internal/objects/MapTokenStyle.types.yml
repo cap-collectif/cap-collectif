@@ -21,7 +21,6 @@ MapTokenStyle:
       isCurrent:
         type: 'Boolean!'
         description: 'Does the style is the current one applied to the whole website?'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MapToken\\MapTokenStyleIsCurrentResolver", [value])'
       owner:
         type: 'String!'
         description: 'The owner of the style'

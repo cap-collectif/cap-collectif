@@ -2,8 +2,11 @@
 
 namespace Capco\AppBundle\DTO;
 
+use Capco\AppBundle\Entity\MapToken;
+
 class MapboxStyle implements MapTokenStyleInterface
 {
+    private const PREVIEW_URL = 'https://api.mapbox.com/styles/v1/{owner}/{style_id}/tiles/256/14/8114/5686?access_token=';
 
     protected $id;
     protected $name;
@@ -13,10 +16,9 @@ class MapboxStyle implements MapTokenStyleInterface
     protected $createdAt;
     protected $updatedAt;
     protected $visibility;
+    protected $mapToken;
 
-    private const PREVIEW_URL = 'https://api.mapbox.com/styles/v1/{owner}/{style_id}/tiles/256/14/8114/5686?access_token=';
-
-    public static function fromMapboxApi(array $response, string $publicToken): self
+    public static function fromMapboxApi(array $response): self
     {
         $instance = new self();
 
@@ -28,8 +30,6 @@ class MapboxStyle implements MapTokenStyleInterface
                     : null
             )
             ->setVersion((int) $response['version'])
-            ->setPublicToken($publicToken)
-            ->setVersion((int)$response['version'])
             ->setName($response['name'])
             ->setOwner($response['owner'])
             ->setVisibility($response['visibility'])
@@ -142,4 +142,23 @@ class MapboxStyle implements MapTokenStyleInterface
         return $this;
     }
 
+    public function getMapToken(): ?MapToken
+    {
+        return $this->mapToken;
+    }
+
+    public function setMapToken(MapToken $mapToken): self
+    {
+        $this->mapToken = $mapToken;
+
+        return $this;
+    }
+
+    public function isCurrent(): bool
+    {
+        return $this->getMapToken()
+            ? $this->getMapToken()->getStyleOwner() === $this->getOwner() &&
+                    $this->getMapToken()->getStyleId() === $this->getId()
+            : false;
+    }
 }

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, ListGroup } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Field, type FormProps, reduxForm, SubmissionError } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled from 'styled-components';
@@ -195,7 +195,7 @@ const form = reduxForm({
   form: formName,
 })(MapboxAdminConfig);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, { mapToken }: Props) => ({
+const mapStateToProps = (state: GlobalState, { mapToken }: Props) => ({
   initialValues: {
     secretToken: mapToken ? mapToken.secretToken : '',
     publicToken: mapToken
