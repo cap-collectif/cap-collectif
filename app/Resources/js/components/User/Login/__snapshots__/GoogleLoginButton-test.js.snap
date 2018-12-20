@@ -4,12 +4,6 @@ exports[`<GoogleLoginButton /> renders a button if feature is active 1`] = `
 <a
   className="btn login__social-btn login__social-btn--googleplus"
   href="/login/google?_destination=http://localhost/"
-  title={
-    <FormattedMessage
-      id="login.google"
-      values={Object {}}
-    />
-  }
 >
   <FormattedMessage
     id="login.google"
@@ -22,12 +16,6 @@ exports[`<GoogleLoginButton /> renders a button with correct label 1`] = `
 <a
   className="btn login__social-btn login__social-btn--googleplus"
   href="/login/google?_destination=http://localhost/"
-  title={
-    <FormattedMessage
-      id="registration.google"
-      values={Object {}}
-    />
-  }
 >
   <FormattedMessage
     id="registration.google"

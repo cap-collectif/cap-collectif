@@ -54,7 +54,7 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
   <div
     className="panel-body"
   >
-    <Connect(LoginButton)
+    <InjectIntl(Connect(LoginButton))
       className="btn--connection btn-block"
     />
     <div
@@ -64,7 +64,7 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
         }
       }
     />
-    <Connect(RegistrationButton)
+    <Connect(InjectIntl(RegistrationButton))
       chartBody="Super charte !!"
       className="btn-block"
     />

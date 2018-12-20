@@ -16,6 +16,7 @@ type Props = {
   wrapperClassName?: string,
   help?: string,
   helpPrint?: boolean,
+  ariaRequired?: boolean,
   description?: string,
   formName?: string,
   autoComplete?: string,
@@ -87,6 +88,7 @@ class Field extends React.Component<Props> {
       disabled,
       help,
       helpPrint,
+      ariaRequired,
       description,
       formName,
       addonAfter,
@@ -120,6 +122,7 @@ class Field extends React.Component<Props> {
         name={name}
         help={help}
         helpPrint={helpPrint}
+        ariaRequired={ariaRequired}
         description={description}
         formName={formName}
         disabled={disabled}
