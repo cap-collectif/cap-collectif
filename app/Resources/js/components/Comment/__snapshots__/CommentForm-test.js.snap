@@ -46,9 +46,9 @@ exports[`<CommentForm /> should render correctly 1`] = `
                   values={Object {}}
                 />
               </p>
-              <Connect(RegistrationButton) />
+              <Connect(InjectIntl(RegistrationButton)) />
                
-              <Connect(LoginButton)
+              <InjectIntl(Connect(LoginButton))
                 className="btn-darkest-gray navbar-btn btn--connection"
               />
               <h5>

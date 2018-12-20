@@ -111,6 +111,8 @@ export class RegistrationForm extends React.Component<Props> {
           name="username"
           id="username"
           component={renderComponent}
+          ariaRequired
+          autoComplete="username"
           type="text"
           label={<FormattedMessage id="registration.username" />}
           labelClassName="font-weight-normal"
@@ -120,6 +122,8 @@ export class RegistrationForm extends React.Component<Props> {
           id="email"
           component={renderComponent}
           type="email"
+          autoComplete="email"
+          ariaRequired
           label={<FormattedMessage id="global.email" />}
           labelClassName="font-weight-normal"
           popover={{
@@ -132,6 +136,8 @@ export class RegistrationForm extends React.Component<Props> {
           id="password"
           component={renderComponent}
           type="password"
+          ariaRequired
+          autoComplete="new-password"
           label={<FormattedMessage id="registration.password" />}
           labelClassName="font-weight-normal"
           popover={{
@@ -222,6 +228,7 @@ export class RegistrationForm extends React.Component<Props> {
           id="charte"
           name="charte"
           component={renderComponent}
+          ariaRequired
           type="checkbox"
           labelClassName="font-weight-normal"
           children={chartLinkComponent}

@@ -5,6 +5,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
   className="form_no-bold-label"
 >
   <Field
+    ariaRequired={true}
     autoComplete="email"
     autoFocus={true}
     component={[Function]}
@@ -21,6 +22,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     type="email"
   />
   <Field
+    ariaRequired={true}
     autoComplete="current-password"
     autoFocus={true}
     component={[Function]}

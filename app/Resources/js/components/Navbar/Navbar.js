@@ -88,7 +88,7 @@ class Navbar extends React.Component<Props> {
     );
 
     return (
-      <Navigation id="main-navbar" className="navbar navbar-default navbar-fixed-top">
+      <Navigation id="main-navbar" className="navbar navbar-default navbar-fixed-top" role="navigation">
         <div className="skip-links js-skip-links" role="banner">
           <div className="skip-links-container">
             <ul className="skip-links-list clearfix">
