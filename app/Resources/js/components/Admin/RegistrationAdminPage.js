@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Alert, Well, Col } from 'react-bootstrap';
+import { Alert, Well } from 'react-bootstrap';
 import Toggle from 'react-toggle';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import { toggleFeature } from '../../redux/modules/default';
@@ -37,18 +37,14 @@ export class RegistrationAdminPage extends React.Component<Props> {
   render() {
     const { isSuperAdmin, onToggle, features } = this.props;
     return (
-      <div className="box-content">
-        <div className="row">
-          <Col xs={1}>
-            <Toggle
-              icons
-              checked={features.registration}
-              onChange={() => onToggle('registration', !features.registration)}
-            />
-          </Col>
-          <Col xs={11}>
-            <FormattedMessage id="allow-registration" />
-          </Col>
+      <div className="box-content box-content__content-form">
+        <div className="d-flex align-items-center mb-15">
+          <Toggle
+            icons
+            checked={features.registration}
+            onChange={() => onToggle('registration', !features.registration)}
+          />
+          <FormattedMessage id="allow-registration" />
         </div>
         <h4>
           <FormattedMessage id="social-medias" />
@@ -56,89 +52,65 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <p>
           <FormattedMessage id="allow-registration-with" />
         </p>
-        <div className="row" style={{ padding: '10px 0' }}>
-          <Col xs={1}>
-            <Toggle
-              icons
-              checked={features.login_facebook}
-              onChange={() => onToggle('login_facebook', !features.login_facebook)}
-            />
-          </Col>
-          <Col xs={11}>Facebook</Col>
+        <div className="d-flex align-items-center mb-15 mt-15">
+          <Toggle
+            icons
+            checked={features.login_facebook}
+            onChange={() => onToggle('login_facebook', !features.login_facebook)}
+          />
+          Facebook
         </div>
-        <div className="row" style={{ padding: '10px 0' }}>
-          <Col xs={1}>
-            <Toggle
-              icons
-              checked={features.login_gplus}
-              onChange={() => onToggle('login_gplus', !features.login_gplus)}
-            />
-          </Col>
-          <Col xs={11}>Google</Col>
+        <div className="d-flex align-items-center mb-15 mt-15">
+          <Toggle
+            icons
+            checked={features.login_gplus}
+            onChange={() => onToggle('login_gplus', !features.login_gplus)}
+          />
+          Google
         </div>
         <h4>
           <FormattedMessage id="allow" />
         </h4>
-        <div className="row" style={{ padding: '10px 0' }}>
-          <Col xs={1}>
-            <Toggle
-              icons
-              checked={features.restrict_registration_via_email_domain}
-              onChange={() =>
-                onToggle(
-                  'restrict_registration_via_email_domain',
-                  !features.restrict_registration_via_email_domain,
-                )
-              }
-            />
-          </Col>
-          <Col xs={11}>
-            <FormattedMessage id="limit-registration-to-some-domains" />
-          </Col>
+        <div className="d-flex align-items-center mb-15 mt-15">
+          <Toggle
+            icons
+            checked={features.restrict_registration_via_email_domain}
+            onChange={() =>
+              onToggle(
+                'restrict_registration_via_email_domain',
+                !features.restrict_registration_via_email_domain,
+              )
+            }
+          />
+          <FormattedMessage id="limit-registration-to-some-domains" />
         </div>
         {features.restrict_registration_via_email_domain && <RegistrationEmailDomainsForm />}
         <h4>
           <FormattedMessage id="received-data" />
         </h4>
-        <div className="row" style={{ padding: '10px 0' }}>
-          <Col xs={1}>
-            <Toggle checked icons disabled />
-          </Col>
-          <Col xs={11}>
-            <FormattedMessage id="user.register.username.username" />
-          </Col>
+        <div className="d-flex align-items-center mb-15 mt-15">
+          <Toggle checked icons disabled />
+          <FormattedMessage id="user.register.username.username" />
         </div>
-        <div className="row" style={{ padding: '10px 0' }}>
-          <Col xs={1}>
-            <Toggle checked icons disabled />
-          </Col>
-          <Col xs={11}>
-            <FormattedMessage id="form.new_password" />
-          </Col>
+        <div className="d-flex align-items-center mb-15 mt-15">
+          <Toggle checked icons disabled />
+          <FormattedMessage id="form.new_password" />
         </div>
-        <div className="row" style={{ padding: '10px 0' }}>
-          <Col xs={1}>
-            <Toggle
-              icons
-              checked={features.zipcode_at_register}
-              onChange={() => onToggle('zipcode_at_register', !features.zipcode_at_register)}
-            />
-          </Col>
-          <Col xs={11}>
-            <FormattedMessage id="user.register.zipcode" />
-          </Col>
+        <div className="d-flex align-items-center mb-15 mt-15">
+          <Toggle
+            icons
+            checked={features.zipcode_at_register}
+            onChange={() => onToggle('zipcode_at_register', !features.zipcode_at_register)}
+          />
+          <FormattedMessage id="user.register.zipcode" />
         </div>
-        <div className="row" style={{ padding: '10px 0' }}>
-          <Col xs={1}>
-            <Toggle
-              icons
-              checked={features.user_type}
-              onChange={() => onToggle('user_type', !features.user_type)}
-            />
-          </Col>
-          <Col xs={11}>
-            <FormattedMessage id="registration.type" />
-          </Col>
+        <div className="d-flex align-items-center mb-15">
+          <Toggle
+            icons
+            checked={features.user_type}
+            onChange={() => onToggle('user_type', !features.user_type)}
+          />
+          <FormattedMessage id="registration.type" />
         </div>
         <Well bsClass={isSuperAdmin ? 'div' : 'well'}>
           <p style={{ marginTop: 10 }}>
@@ -164,51 +136,43 @@ export class RegistrationAdminPage extends React.Component<Props> {
             render={dynamicFieldsComponent}
           />
         </Well>
-        <div className="row" style={{ padding: '10px 0' }}>
-          <Col xs={1}>
-            <Toggle
-              icons
-              checked={features.consent_external_communication}
-              onChange={() =>
-                onToggle('consent_external_communication', !features.consent_external_communication)
-              }
+        <div className="d-flex align-items-center mb-15 mt-15">
+          <Toggle
+            icons
+            checked={features.consent_external_communication}
+            onChange={() =>
+              onToggle('consent_external_communication', !features.consent_external_communication)
+            }
+          />
+          <span>
+            <strong>
+              <FormattedMessage id="registration.enable_consent_external_communication.title" />
+            </strong>
+            <br />
+            <FormattedMessage
+              id="registration.enable_consent_external_communication.subtitle"
+              values={{
+                link: (
+                  <a
+                    className="external-link"
+                    href={`${window.location.protocol}//${
+                      window.location.host
+                    }/admin/settings/settings.global/list`}>
+                    <FormattedMessage id="proposal.admin.general" />
+                  </a>
+                ),
+              }}
             />
-          </Col>
-          <Col xs={11}>
-            <p>
-              <strong>
-                <FormattedMessage id="registration.enable_consent_external_communication.title" />
-              </strong>
-              <br />
-              <FormattedMessage
-                id="registration.enable_consent_external_communication.subtitle"
-                values={{
-                  link: (
-                    <a
-                      className="external-link"
-                      href={`${window.location.protocol}//${
-                        window.location.host
-                      }/admin/settings/settings.global/list`}>
-                      <FormattedMessage id="proposal.admin.general" />
-                    </a>
-                  ),
-                }}
-              />
-            </p>
-          </Col>
+          </span>
         </div>
-        <div className="row" style={{ padding: '10px 0' }}>
-          <Col xs={1}>
-            <Toggle
-              icons
-              disabled={!isSuperAdmin}
-              checked={features.captcha}
-              onChange={() => onToggle('captcha', !features.captcha)}
-            />
-          </Col>
-          <Col xs={11}>
-            <FormattedMessage id="i-am-not-a-bot" />
-          </Col>
+        <div className="d-flex align-items-center mb-15 mt-15">
+          <Toggle
+            icons
+            disabled={!isSuperAdmin}
+            checked={features.captcha}
+            onChange={() => onToggle('captcha', !features.captcha)}
+          />
+          <FormattedMessage id="i-am-not-a-bot" />
         </div>
         <h3>
           <FormattedMessage id="communication" />
