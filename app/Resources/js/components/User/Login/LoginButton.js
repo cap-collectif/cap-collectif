@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginModal from './LoginModal';
@@ -22,6 +22,7 @@ type Props = {|
   bsStyle?: string,
   className?: ?string,
   style?: ?Object,
+  intl: IntlShape,
 |};
 
 export class LoginButton extends React.Component<Props> {
@@ -39,12 +40,14 @@ export class LoginButton extends React.Component<Props> {
       style,
       bsStyle,
       className,
+      intl,
     } = this.props;
 
     return (
       <span style={style}>
         <Button
           bsStyle={bsStyle}
+          aria-label={intl.formatMessage({ id: 'open.connection_modal' })}
           onClick={() => {
             if (loginWithMonCompteParis) {
               const monCompteBaseUrl = 'https://moncompte.paris.fr/moncompte/';
@@ -80,7 +83,9 @@ const mapDispatchToProps = dispatch => ({
   openLoginModal: () => dispatch(showLoginModal()),
 });
 
-export default connect<Props, State, Action, _, _>(
+const container = connect<Props, State, Action, _, _>(
   mapStateToProps,
   mapDispatchToProps,
 )(LoginButton);
+
+export default injectIntl(container);

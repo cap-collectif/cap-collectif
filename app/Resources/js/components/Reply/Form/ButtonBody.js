@@ -57,12 +57,6 @@ class ButtonBody extends React.Component<Props, State> {
   };
 
   render() {
-    const { body } = this.props;
-
-    if (!body || body === '<p><br /></p>') {
-      return null;
-    }
-
     return (
       <div className="opinion__text">
         <Linkify properties={{ className: 'external-link' }}>

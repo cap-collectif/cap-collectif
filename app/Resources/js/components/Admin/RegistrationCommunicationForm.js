@@ -24,6 +24,7 @@ export class RegistrationCommunicationForm extends React.Component<Props> {
         <Field
           name="topTextDisplayed"
           type="checkbox"
+          divClassName="pl-20"
           children={<FormattedMessage id="registration.admin.topText" />}
           component={renderInput}
         />
@@ -31,6 +32,7 @@ export class RegistrationCommunicationForm extends React.Component<Props> {
         <Field
           name="bottomTextDisplayed"
           type="checkbox"
+          divClassName="pl-20"
           children={<FormattedMessage id="registration.admin.bottomText" />}
           component={renderInput}
         />

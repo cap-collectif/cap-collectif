@@ -3,10 +3,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationButton } from './RegistrationButton';
+import { intlMock } from '../../../mocks';
 
 describe('<RegistrationButton />', () => {
   const props = {
     openRegistrationModal: jest.fn(),
+    intl: intlMock,
   };
 
   const style = { marginTop: '0' };

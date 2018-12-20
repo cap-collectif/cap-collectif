@@ -19,7 +19,6 @@ class FacebookLoginButton extends React.Component<Props> {
     return (
       <a
         href={`/login/facebook?_destination=${window && window.location.href}`}
-        title={<FormattedMessage id={label} />}
         className="btn login__social-btn login__social-btn--facebook">
         <FormattedMessage id={label} />
       </a>

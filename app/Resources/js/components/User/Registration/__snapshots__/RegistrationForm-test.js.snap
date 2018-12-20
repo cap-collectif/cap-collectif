@@ -6,6 +6,8 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   onSubmit={[MockFunction]}
 >
   <Field
+    ariaRequired={true}
+    autoComplete="username"
     component={[Function]}
     id="username"
     label={
@@ -19,6 +21,8 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     type="text"
   />
   <Field
+    ariaRequired={true}
+    autoComplete="email"
     component={[Function]}
     id="email"
     label={
@@ -41,6 +45,8 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     type="email"
   />
   <Field
+    ariaRequired={true}
+    autoComplete="new-password"
     component={[Function]}
     id="password"
     label={
@@ -118,6 +124,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     variables={Object {}}
   />
   <Field
+    ariaRequired={true}
     component={[Function]}
     id="charte"
     labelClassName="font-weight-normal"
@@ -169,6 +176,8 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   onSubmit={[MockFunction]}
 >
   <Field
+    ariaRequired={true}
+    autoComplete="username"
     component={[Function]}
     id="username"
     label={
@@ -182,6 +191,8 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     type="text"
   />
   <Field
+    ariaRequired={true}
+    autoComplete="email"
     component={[Function]}
     id="email"
     label={
@@ -204,6 +215,8 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     type="email"
   />
   <Field
+    ariaRequired={true}
+    autoComplete="new-password"
     component={[Function]}
     id="password"
     label={
@@ -226,6 +239,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     type="password"
   />
   <Field
+    ariaRequired={true}
     component={[Function]}
     id="charte"
     labelClassName="font-weight-normal"
@@ -277,6 +291,8 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   onSubmit={[MockFunction]}
 >
   <Field
+    ariaRequired={true}
+    autoComplete="username"
     component={[Function]}
     id="username"
     label={
@@ -290,6 +306,8 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     type="text"
   />
   <Field
+    ariaRequired={true}
+    autoComplete="email"
     component={[Function]}
     id="email"
     label={
@@ -312,6 +330,8 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     type="email"
   />
   <Field
+    ariaRequired={true}
+    autoComplete="new-password"
     component={[Function]}
     id="password"
     label={
@@ -371,6 +391,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     </option>
   </Field>
   <Field
+    ariaRequired={true}
     component={[Function]}
     id="charte"
     labelClassName="font-weight-normal"
@@ -422,6 +443,8 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
   onSubmit={[MockFunction]}
 >
   <Field
+    ariaRequired={true}
+    autoComplete="username"
     component={[Function]}
     id="username"
     label={
@@ -435,6 +458,8 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     type="text"
   />
   <Field
+    ariaRequired={true}
+    autoComplete="email"
     component={[Function]}
     id="email"
     label={
@@ -457,6 +482,8 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     type="email"
   />
   <Field
+    ariaRequired={true}
+    autoComplete="new-password"
     component={[Function]}
     id="password"
     label={
@@ -504,6 +531,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     type="text"
   />
   <Field
+    ariaRequired={true}
     component={[Function]}
     id="charte"
     labelClassName="font-weight-normal"
