@@ -27,6 +27,14 @@ class MapTokenStylesResolver implements ResolverInterface
         if (MapProviderEnum::MAPBOX === $mapToken->getProvider()) {
             return $this->getMapboxStyles($mapToken, $visibility);
         }
+
+        throw new \LogicException(
+            sprintf(
+                'Trying to get styles for unknown provider "%s". Available providers : %s',
+                $mapToken->getProvider(),
+                implode(' | ', MapProviderEnum::getAvailableProviders())
+            )
+        );
     }
 
     private function getMapboxStyles(MapToken $mapToken, ?string $visibility): array
@@ -35,17 +43,7 @@ class MapTokenStylesResolver implements ResolverInterface
             throw new UserError(self::ERROR_SECRET_API_KEY_REQUIRED);
         }
 
-        $owner = $this->mapboxClient
-            ->setEndpoint('tokens')
-            ->addParameter('access_token', $mapToken->getSecretToken())
-            ->get()['token']['user'];
-
-        $apiStyles = $this->mapboxClient
-            ->setVersion('v1')
-            ->setEndpoint('styles')
-            ->setPath($owner)
-            ->addParameter('access_token', $mapToken->getSecretToken())
-            ->get();
+        $apiStyles = $this->mapboxClient->getStylesForToken($mapToken->getSecretToken());
 
         $styles = array_map(function (array $apiStyle) use ($mapToken) {
             return MapboxStyle::fromMapboxApi($apiStyle)

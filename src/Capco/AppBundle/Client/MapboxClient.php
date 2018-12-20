@@ -8,6 +8,12 @@ use GuzzleHttp\RequestOptions;
 class MapboxClient
 {
     private const BASE_URL = 'https://api.mapbox.com';
+    private const MAPBOX_INVALID_TOKEN_CODES = [
+        'TokenMalformed',
+        'TokenInvalid',
+        'TokenExpired',
+        'TokenRevoked',
+    ];
 
     private $client;
     private $version = 'v2';
@@ -72,6 +78,40 @@ class MapboxClient
         ]);
 
         return json_decode((string) $response->getBody(), true);
+    }
+
+    public function getOwnerForToken(string $token): ?string
+    {
+        return $this->setEndpoint('tokens')
+            ->addParameter('access_token', $token)
+            ->get()['token']['user'];
+    }
+
+    public function getStylesForToken(string $token): ?array
+    {
+        $owner = $this->getOwnerForToken($token);
+
+        return $this->setVersion('v1')
+            ->setEndpoint('styles')
+            ->setPath($owner)
+            ->addParameter('access_token', $token)
+            ->get();
+    }
+
+    public function isValidToken(string $token, ?bool $isSecret = false): bool
+    {
+        if ($isSecret && 0 !== strpos($token, 'sk')) {
+            return false;
+        }
+
+        if (!$isSecret && 0 !== strpos($token, 'pk')) {
+            return false;
+        }
+        $code = $this->setEndpoint('tokens')
+            ->addParameter('access_token', $token)
+            ->get()['code'];
+
+        return !\in_array($code, self::MAPBOX_INVALID_TOKEN_CODES, true);
     }
 
     private function prepareUri(): void

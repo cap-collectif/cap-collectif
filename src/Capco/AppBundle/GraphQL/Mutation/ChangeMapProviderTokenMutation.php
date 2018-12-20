@@ -17,13 +17,6 @@ class ChangeMapProviderTokenMutation implements MutationInterface
     public const ERROR_INVALID_PUBLIC_TOKEN = 'error-map-api-public-token-invalid';
     public const ERROR_INVALID_SECRET_TOKEN = 'error-map-api-secret-token-invalid';
 
-    private const MAPBOX_INVALID_TOKEN_CODES = [
-        'TokenMalformed',
-        'TokenInvalid',
-        'TokenExpired',
-        'TokenRevoked',
-    ];
-
     private $em;
     private $logger;
     private $repository;
@@ -68,7 +61,11 @@ class ChangeMapProviderTokenMutation implements MutationInterface
             throw new UserError(self::ERROR_PROVIDE_TOKENS);
         }
 
-        if ($publicToken && '' !== $publicToken && !$this->isValidMapboxToken($publicToken)) {
+        if (
+            $publicToken &&
+            '' !== $publicToken &&
+            !$this->mapboxClient->isValidToken($publicToken)
+        ) {
             $this->logger->error(
                 'Invalid public token given for provider ' . MapProviderEnum::MAPBOX
             );
@@ -76,7 +73,11 @@ class ChangeMapProviderTokenMutation implements MutationInterface
             throw new UserError(self::ERROR_INVALID_PUBLIC_TOKEN);
         }
 
-        if ($secretToken && '' !== $secretToken && !$this->isValidMapboxToken($secretToken, true)) {
+        if (
+            $secretToken &&
+            '' !== $secretToken &&
+            !$this->mapboxClient->isValidToken($secretToken, true)
+        ) {
             $this->logger->error(
                 'Invalid secret token given for provider ' . MapProviderEnum::MAPBOX
             );
@@ -93,22 +94,5 @@ class ChangeMapProviderTokenMutation implements MutationInterface
         $this->em->flush();
 
         return ['mapToken' => $mapboxMapToken];
-    }
-
-    private function isValidMapboxToken(string $token, ?bool $isSecret = false): bool
-    {
-        if ($isSecret && 0 !== strpos($token, 'sk')) {
-            return false;
-        }
-
-        if (!$isSecret && 0 !== strpos($token, 'pk')) {
-            return false;
-        }
-        $code = $this->mapboxClient
-            ->setEndpoint('tokens')
-            ->addParameter('access_token', $token)
-            ->get()['code'];
-
-        return !\in_array($code, self::MAPBOX_INVALID_TOKEN_CODES, true);
     }
 }
