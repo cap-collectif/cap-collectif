@@ -19,7 +19,7 @@ const initialState: State = {
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
   mapTokens: {
-    mapbox: {
+    MAPBOX: {
       initialPublicToken:
         '***REMOVED***',
       publicToken:

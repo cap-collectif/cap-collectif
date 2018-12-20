@@ -38,7 +38,7 @@ describe('<ProposalPageContent />', () => {
     },
     categories: [],
     mapTokens: {
-      mapbox: {
+      MAPBOX: {
         initialPublicToken:
           '***REMOVED***',
         publicToken:

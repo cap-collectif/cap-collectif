@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import classNames from 'classnames';
 import moment from 'moment';
+import colors from '../../../utils/colors';
 import ChangeMapStyleMutation from '../../../mutations/ChangeMapStyleMutation';
 import type { ChangeMapStyleMutationResponse } from '../../../mutations/ChangeMapStyleMutation';
 
@@ -21,7 +22,7 @@ const ListGroupItemInner = styled.div`
     width: 32px;
     height: 32px;
     margin: auto 1.5rem auto 0;
-    border: 1px solid #e3e3e3;
+    border: 1px solid ${colors.borderColor};
     background: transparent;
     & i {
       color: white;
@@ -47,7 +48,7 @@ const ListGroupItemInner = styled.div`
   }
 `;
 
-type Props = {
+type Props = {|
   +mapTokenId: string,
   +disabled: boolean,
   +onMutationStart?: () => void,
@@ -62,7 +63,7 @@ type Props = {
     +updatedAt: ?Date,
     +isCurrent: boolean,
   },
-};
+|};
 
 const MapAdminStyleListItem = (props: Props) => {
   const { style, mapTokenId, onMutationEnd, onMutationFailed, onMutationStart, disabled } = props;

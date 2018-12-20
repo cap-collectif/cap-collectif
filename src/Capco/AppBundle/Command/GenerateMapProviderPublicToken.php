@@ -78,18 +78,23 @@ class GenerateMapProviderPublicToken extends Command
 
     private function handleMapbox(): ?int
     {
-        $MAPBOX = MapProviderEnum::MAPBOX;
         $sitename = $this->siteParameterResolver->getValue('global.site.fullname');
-        $provider = $this->mapTokenRepository->getCurrentMapTokenForProvider($MAPBOX);
+        $provider = $this->mapTokenRepository->getCurrentMapTokenForProvider(
+            MapProviderEnum::MAPBOX
+        );
         if (!$provider) {
-            $this->io->text('No map token provider found for "' . $MAPBOX . '", creating one...');
-            $provider = (new MapToken())->setProvider($MAPBOX);
+            $this->io->text(
+                'No map token provider found for "' . MapProviderEnum::MAPBOX . '", creating one...'
+            );
+            $provider = (new MapToken())->setProvider(MapProviderEnum::MAPBOX);
             $this->em->persist($provider);
             $this->io->text('Successfully created a token provider');
         }
 
         if ($provider->getPublicToken()) {
-            $this->io->success('The provider for ' . $MAPBOX . ' already have a public token.');
+            $this->io->success(
+                'The provider for ' . MapProviderEnum::MAPBOX . ' already have a public token.'
+            );
 
             return 0;
         }

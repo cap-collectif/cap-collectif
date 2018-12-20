@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Button, ListGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Field, type FormProps, reduxForm, SubmissionError } from 'redux-form';
@@ -16,12 +16,13 @@ import AlertForm from '../../Alert/AlertForm';
 
 type FormValues = {
   +publicToken: string,
-  +secretToken: ?string,
+  +secretToken: string,
 };
 
-type Props = FormProps & {
+type Props = {|
+  ...FormProps,
   mapToken: MapboxAdminConfig_mapToken,
-};
+|};
 
 type State = {
   loading: boolean,
@@ -45,6 +46,23 @@ const SubmitButtonInner = styled.span`
 `;
 
 const formName = 'mapbox-admin-config';
+
+const validate = (values: FormValues) => {
+  const errors = {};
+  const fields = ['publicToken', 'secretToken'];
+
+  fields.forEach(field => {
+    if (
+      (field === 'publicToken' && !values[field]) ||
+      (field === 'secretToken' && !values[field]) ||
+      (values[field] && values[field].length === 0)
+    ) {
+      errors[field] = 'fill-field';
+    }
+  });
+
+  return errors;
+};
 
 const onSubmit = async (values: FormValues) => {
   const input = {
@@ -119,7 +137,7 @@ class MapboxAdminConfig extends React.Component<Props, State> {
           component={component}
           type="text"
           id="token"
-          help={<FormattedMessage id="helptext-api-key" />}
+          help={<FormattedHTMLMessage id="helptext-api-key" />}
           label={<FormattedMessage id="public-api-key" />}
         />
         <div className="clearfix" />
@@ -128,7 +146,7 @@ class MapboxAdminConfig extends React.Component<Props, State> {
           component={component}
           type="text"
           id="token"
-          help={<FormattedMessage id="helptext-api-key" />}
+          help={<FormattedHTMLMessage id="helptext-api-key" />}
           label={<FormattedMessage id="secret-api-key" />}
         />
         <div className="clearfix" />
@@ -148,7 +166,7 @@ class MapboxAdminConfig extends React.Component<Props, State> {
         </Button>
         <AlertForm
           valid={valid}
-          invalid={invalid}
+          invalid={false}
           submitting={submitting}
           submitSucceeded={submitSucceeded}
           submitFailed={submitFailed}
@@ -190,7 +208,7 @@ class MapboxAdminConfig extends React.Component<Props, State> {
 
 const form = reduxForm({
   onSubmit,
-  validate: () => ({}),
+  validate,
   enableReinitialize: true,
   form: formName,
 })(MapboxAdminConfig);
@@ -199,7 +217,7 @@ const mapStateToProps = (state: GlobalState, { mapToken }: Props) => ({
   initialValues: {
     secretToken: mapToken ? mapToken.secretToken : '',
     publicToken: mapToken
-      ? mapToken.publicToken !== state.user.mapTokens.mapbox.initialPublicToken
+      ? mapToken.publicToken !== state.user.mapTokens.MAPBOX.initialPublicToken
         ? mapToken.publicToken
         : ''
       : '',

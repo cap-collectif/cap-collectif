@@ -33,7 +33,7 @@ class MapTokenRepository extends EntityRepository
     /**
      * @return MapToken[]
      */
-    public function getMapTokensGroupByProvider(): array
+    public function getMapTokensGroupByProviders(): array
     {
         $qb = $this->getQueryBuilder();
 

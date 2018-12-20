@@ -34,7 +34,7 @@ class MapToken
     protected $secretToken;
 
     /**
-     * @ORM\Column(name="provider", type="string", columnDefinition="ENUM('mapbox')", nullable=false)
+     * @ORM\Column(name="provider", type="string", columnDefinition="ENUM('MAPBOX')", nullable=false)
      */
     protected $provider = MapProviderEnum::MAPBOX;
 

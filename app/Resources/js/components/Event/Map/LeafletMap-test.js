@@ -45,7 +45,7 @@ describe('<LeafletMap />', () => {
     dispatch: jest.fn(),
     eventSelected: 'event2',
     mapTokens: {
-      mapbox: {
+      MAPBOX: {
         initialPublicToken:
           '***REMOVED***',
         publicToken:

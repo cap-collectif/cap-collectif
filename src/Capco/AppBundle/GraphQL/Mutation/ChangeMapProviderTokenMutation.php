@@ -13,6 +13,7 @@ use Psr\Log\LoggerInterface;
 
 class ChangeMapProviderTokenMutation implements MutationInterface
 {
+    public const ERROR_PROVIDE_TOKENS = 'error-map-api-provide-tokens';
     public const ERROR_INVALID_PUBLIC_TOKEN = 'error-map-api-public-token-invalid';
     public const ERROR_INVALID_SECRET_TOKEN = 'error-map-api-secret-token-invalid';
 
@@ -61,6 +62,10 @@ class ChangeMapProviderTokenMutation implements MutationInterface
 
         if (!$mapboxMapToken) {
             throw new \RuntimeException('Map Token not found!');
+        }
+
+        if ((!$publicToken || '' === $publicToken) && (!$secretToken || '' === $secretToken)) {
+            throw new UserError(self::ERROR_PROVIDE_TOKENS);
         }
 
         if ($publicToken && '' !== $publicToken && !$this->isValidMapboxToken($publicToken)) {

@@ -62,7 +62,7 @@ export class LeafletMap extends Component<Props> {
 
   render() {
     const { markers, defaultMapOptions, eventSelected, mapTokens } = this.props;
-    const { publicToken, styleId, styleOwner } = mapTokens.mapbox;
+    const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
 
     if (config.canUseDOM) {
       L = require('leaflet'); // eslint-disable-line global-require

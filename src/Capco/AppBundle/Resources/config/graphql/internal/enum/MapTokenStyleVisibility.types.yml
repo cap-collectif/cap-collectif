@@ -4,8 +4,8 @@ MapTokenStyleVisibility:
     description: 'The visibility of a style for a map token'
     values:
       PUBLIC:
-        value: 'public'
+        value: '@=constant("Capco\\AppBundle\\Enum\\MapTokenStyleVisibilityEnum::PUBLIC")'
         description: 'The style is public'
       PRIVATE:
-        value: 'private'
+        value: '@=constant("Capco\\AppBundle\\Enum\\MapTokenStyleVisibilityEnum::PRIVATE")'
         description: 'The style is private'

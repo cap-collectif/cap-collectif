@@ -135,7 +135,7 @@ const initialState: State = {
   showConfirmPasswordModal: false,
   user: null,
   mapTokens: {
-    mapbox: {
+    MAPBOX: {
       initialPublicToken:
         '***REMOVED***',
       publicToken:

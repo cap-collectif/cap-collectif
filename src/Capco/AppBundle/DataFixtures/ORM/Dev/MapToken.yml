@@ -4,4 +4,4 @@ Capco\AppBundle\Entity\MapToken:
     initialPublicToken: ***REMOVED***
     publicToken: ***REMOVED***
     secretToken: ***REMOVED***
-    provider: mapbox
+    provider: MAPBOX

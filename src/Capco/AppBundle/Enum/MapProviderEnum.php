@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Enum;
 
 final class MapProviderEnum
 {
-    public const MAPBOX = 'mapbox';
+    public const MAPBOX = 'MAPBOX';
 
     private static $providers = [self::MAPBOX];
 

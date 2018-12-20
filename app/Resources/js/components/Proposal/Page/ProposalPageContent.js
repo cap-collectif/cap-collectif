@@ -41,7 +41,7 @@ export class ProposalPageContent extends React.Component<Props> {
 
   render() {
     const { proposal, step, className, dispatch, viewer, mapTokens } = this.props;
-    const { publicToken, styleId, styleOwner } = mapTokens.mapbox;
+    const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
 
     const classes = {
       proposal__content: true,

@@ -15,7 +15,7 @@ describe('<LeafletMap />', () => {
     stepId: 'step1',
     stepType: 'collect',
     mapTokens: {
-      mapbox: {
+      MAPBOX: {
         initialPublicToken:
           '***REMOVED***',
         publicToken:

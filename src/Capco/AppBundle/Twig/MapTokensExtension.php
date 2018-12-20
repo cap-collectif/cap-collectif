@@ -27,7 +27,7 @@ class MapTokensExtension extends \Twig_Extension
     public function getMapTokens(): array
     {
         $mapTokens = [];
-        foreach ($this->repository->getMapTokensGroupByProvider() as $mapToken) {
+        foreach ($this->repository->getMapTokensGroupByProviders() as $mapToken) {
             list($styleId, $styleOwner, $initialPublicToken, $publicToken) = [
                 $mapToken->getStyleId(),
                 $mapToken->getStyleOwner(),

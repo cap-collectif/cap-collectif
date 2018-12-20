@@ -2,6 +2,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Circle } from 'styled-spinkit';
+import colors from '../../../utils/colors';
 
 type Props = {
   show: boolean,
@@ -15,10 +16,9 @@ export const Container = styled.div`
   text-align: center;
   display: ${props => (props.inline ? 'inline-flex' : 'flex')};
   ${props =>
-    !props.inline
-      ? `padding-top: 50px
-     padding-bottom: 30px`
-      : ''};
+    !props.inline &&
+    `padding-top: 50px;
+       padding-bottom: 30px;`};
   width: 100%;
 
   div {
@@ -31,7 +31,7 @@ export class Loader extends React.Component<Props> {
     show: true,
     inline: false,
     size: 40,
-    color: '#333',
+    color: colors.darkText,
   };
 
   render() {

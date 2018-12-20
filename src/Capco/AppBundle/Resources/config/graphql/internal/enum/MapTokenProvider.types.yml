@@ -4,5 +4,5 @@ MapTokenProvider:
     description: 'The provider for a map token'
     values:
       MAPBOX:
-        value: 'mapbox'
+        value: '@=constant("Capco\\AppBundle\\Enum\\MapProviderEnum::MAPBOX")'
         description: 'Used for Mapbox service provider'

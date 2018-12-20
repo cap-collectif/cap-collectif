@@ -32,7 +32,7 @@ class MapboxStyle implements MapTokenStyleInterface
             ->setVersion((int) $response['version'])
             ->setName($response['name'])
             ->setOwner($response['owner'])
-            ->setVisibility($response['visibility'])
+            ->setVisibility(strtoupper($response['visibility']))
             ->setId($response['id']);
 
         return $instance;
@@ -62,7 +62,7 @@ class MapboxStyle implements MapTokenStyleInterface
         return $this;
     }
 
-    public function getPreviewUrl(): ?string
+    public function getPreviewUrl(): string
     {
         $uri = str_replace(['{owner}', '{style_id}'], [$this->owner, $this->id], self::PREVIEW_URL);
         $uri .= $this->publicToken;

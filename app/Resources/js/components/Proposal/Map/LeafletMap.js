@@ -124,9 +124,10 @@ export class LeafletMap extends Component<Props, ComponentState> {
 
   render() {
     const { geoJsons, defaultMapOptions, markers, visible, mapTokens } = this.props;
-    const { publicToken, styleId, styleOwner } = mapTokens.mapbox;
+    const { loaded } = this.state;
+    const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
 
-    if (!visible || !this.state.loaded) {
+    if (!visible || !loaded) {
       return null;
     }
 
