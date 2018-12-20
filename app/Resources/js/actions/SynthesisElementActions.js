@@ -66,18 +66,15 @@ const createElementFromData = (
     });
 
 const fetchElementById = (synthesis, element) =>
-  Fetcher.get(`/syntheses/${synthesis}/elements/${element}`).then(data => {
-    AppDispatcher.dispatch({
-      actionType: Actions.RECEIVE_ELEMENT,
-      elementId: element,
-    });
-
-    AppDispatcher.dispatch({
-      actionType: Actions.RECEIVE_ELEMENT_SUCCESS,
-      element: data,
-    });
-    return true;
-  });
+  Fetcher.get(`/syntheses/${synthesis}/elements/${element}`)
+    .then(data => {
+      AppDispatcher.dispatch({
+        actionType: Actions.RECEIVE_ELEMENT_SUCCESS,
+        element: data,
+      });
+      return true;
+    })
+    .catch(() => false);
 
 export default {
   create: (synthesis, data) => {
@@ -97,6 +94,10 @@ export default {
   },
 
   loadElementFromServer: (synthesis, element) => {
+    AppDispatcher.dispatch({
+      actionType: Actions.RECEIVE_ELEMENT,
+      elementId: element,
+    });
     fetchElementById(synthesis, element);
   },
 

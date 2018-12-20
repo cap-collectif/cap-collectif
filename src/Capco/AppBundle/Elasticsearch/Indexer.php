@@ -10,7 +10,7 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
 use JMS\Serializer\SerializationContext;
-use Symfony\Component\Serializer\SerializerInterface;
+use JMS\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -205,9 +205,12 @@ class Indexer
 
     protected function buildDocument(IndexableInterface $object): Document
     {
+        $context = SerializationContext::create();
+        $context->setGroups($object::getElasticsearchSerializationGroups());
+        $context->setSerializeNull(true);
         $json = [];
         try {
-            $json = $this->serializer->serialize($object, 'json', ['groups' => ['Elasticsearch']]);
+            $json = $this->serializer->serialize($object, 'json', $context);
         } catch (\Exception $exception) {
             $this->logger->error(__METHOD__ . $exception->getMessage());
         }

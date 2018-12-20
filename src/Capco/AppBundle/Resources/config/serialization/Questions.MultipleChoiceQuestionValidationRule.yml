@@ -1,6 +1,0 @@
-Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule:
-  attributes:
-    type:
-      groups: [Questions]
-    number:
-      groups: [Questions]

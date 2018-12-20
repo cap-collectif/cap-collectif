@@ -1,9 +1,0 @@
-Capco\AppBundle\Entity\OpinionAppendix:
-  attributes:
-    id:
-      type: integer
-    body:
-      groups: [Opinions, OpinionVersions]
-    appendixType:
-      groups: [Opinions, OpinionVersions]
-      serialized_name: type

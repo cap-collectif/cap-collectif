@@ -1,0 +1,28 @@
+Capco\AppBundle\Entity\ProposalSelectionVote:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: integer
+      groups: [ProposalSelectionVotes]
+    selectionStep:
+      expose: true
+      type: Capco\AppBundle\Entity\Steps\SelectionStep
+      groups: [ProposalSelectionVotes]
+      serialized_name: selectionStep
+    proposal:
+      expose: true
+      type: Capco\AppBundle\Entity\Proposal
+      groups: [ProposalSelectionVotes]
+    user:
+      expose: true
+      type: Capco\UserBundle\Entity\User
+      groups: [ProposalSelectionVotes]
+    username:
+      expose: true
+      type: string
+      groups: [ProposalSelectionVotes]
+    private:
+      expose: true
+      type: boolean
+      groups: [ProposalSelectionVotes]

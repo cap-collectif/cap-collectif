@@ -78,8 +78,9 @@ class ProposalController extends Controller
                 'categories' => $proposalForm ? $proposalForm->getCategories() : [],
             ],
             'json',
-            [
-                'groups' => [
+            SerializationContext::create()
+                ->setSerializeNull(true)
+                ->setGroups([
                     'ProposalCategories',
                     'UserVotes',
                     'Districts',
@@ -89,9 +90,8 @@ class ProposalController extends Controller
                     'ThemeDetails',
                     'UserMedias',
                     'VoteThreshold',
-                    'Default',
-                ],
-            ]
+                    'Default', // force step_type serialization
+                ])
         );
         return $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,

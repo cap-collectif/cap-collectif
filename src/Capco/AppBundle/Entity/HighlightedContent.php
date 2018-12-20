@@ -42,23 +42,6 @@ abstract class HighlightedContent
         return $this->position;
     }
 
-    //To delete when we'll upgrade symfony to 4.1+ because discriminator map not working with serialization atm
-    public function getCurrentObjectType()
-    {
-        if ($this instanceof HighlightedPost) {
-            return 'post';
-        }
-        if ($this instanceof HighlightedTheme) {
-            return 'theme';
-        }
-        if ($this instanceof HighlightedProject) {
-            return 'project';
-        }
-        if ($this instanceof HighlightedEvent) {
-            return 'event';
-        }
-    }
-
     /**
      * Sets the value of position.
      *

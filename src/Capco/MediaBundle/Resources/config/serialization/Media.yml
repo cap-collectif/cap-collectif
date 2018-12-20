@@ -1,4 +1,0 @@
-Capco\MediaBundle\Entity\Media:
-  attributes:
-    id:
-      groups: [Default]

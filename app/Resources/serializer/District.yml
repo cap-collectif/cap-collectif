@@ -1,0 +1,25 @@
+Capco\AppBundle\Entity\District\ProposalDistrict:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: string
+      groups: [Districts, Proposals, Elasticsearch]
+    name:
+      expose: true
+      type: string
+      groups: [Districts, Proposals, Elasticsearch]
+    geojson:
+      expose: true
+      type: string
+      groups: [DistrictDetails]
+    geojsonStyle:
+      expose: true
+      type: string
+      groups: [DistrictDetails]
+      serialized_name: geojsonStyle
+    displayedOnMap:
+      expose: true
+      type: boolean
+      groups: [DistrictDetails]
+      serialized_name: displayedOnMap

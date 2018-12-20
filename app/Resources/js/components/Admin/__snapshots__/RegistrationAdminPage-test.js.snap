@@ -2,32 +2,20 @@
 
 exports[`<RegistrationAdminPage /> renders correctly 1`] = `
 <div
-  className="box-content"
+  className="box-content box-content__content-form"
 >
   <div
-    className="row"
+    className="d-flex align-items-center mb-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="allow-registration"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <FormattedMessage
+      id="allow-registration"
+      values={Object {}}
+    />
   </div>
   <h4>
     <FormattedMessage
@@ -42,58 +30,24 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     />
   </p>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      Facebook
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    Facebook
   </div>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      Google
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    Google
   </div>
   <h4>
     <FormattedMessage
@@ -102,34 +56,17 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     />
   </h4>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="limit-registration-to-some-domains"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <FormattedMessage
+      id="limit-registration-to-some-domains"
+      values={Object {}}
+    />
   </div>
   <h4>
     <FormattedMessage
@@ -138,124 +75,56 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     />
   </h4>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={true}
-        disabled={true}
-        icons={true}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="user.register.username.username"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={true}
+      disabled={true}
+      icons={true}
+    />
+    <FormattedMessage
+      id="user.register.username.username"
+      values={Object {}}
+    />
   </div>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={true}
-        disabled={true}
-        icons={true}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="form.new_password"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={true}
+      disabled={true}
+      icons={true}
+    />
+    <FormattedMessage
+      id="form.new_password"
+      values={Object {}}
+    />
   </div>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="user.register.zipcode"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <FormattedMessage
+      id="user.register.zipcode"
+      values={Object {}}
+    />
   </div>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="registration.type"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <FormattedMessage
+      id="registration.type"
+      values={Object {}}
+    />
   </div>
   <Well
     bsClass="div"
@@ -331,86 +200,52 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     />
   </Well>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <p>
-        <strong>
-          <FormattedMessage
-            id="registration.enable_consent_external_communication.title"
-            values={Object {}}
-          />
-        </strong>
-        <br />
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <span>
+      <strong>
         <FormattedMessage
-          id="registration.enable_consent_external_communication.subtitle"
-          values={
-            Object {
-              "link": <a
-                className="external-link"
-                href="http://localhost/admin/settings/settings.global/list"
-              >
-                <FormattedMessage
-                  id="proposal.admin.general"
-                  values={Object {}}
-                />
-              </a>,
-            }
-          }
+          id="registration.enable_consent_external_communication.title"
+          values={Object {}}
         />
-      </p>
-    </Col>
+      </strong>
+      <br />
+      <FormattedMessage
+        id="registration.enable_consent_external_communication.subtitle"
+        values={
+          Object {
+            "link": <a
+              className="external-link"
+              href="http://localhost/admin/settings/settings.global/list"
+            >
+              <FormattedMessage
+                id="proposal.admin.general"
+                values={Object {}}
+              />
+            </a>,
+          }
+        }
+      />
+    </span>
   </div>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        disabled={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="i-am-not-a-bot"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={false}
+      disabled={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <FormattedMessage
+      id="i-am-not-a-bot"
+      values={Object {}}
+    />
   </div>
   <h3>
     <FormattedMessage
@@ -424,32 +259,20 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
 
 exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = `
 <div
-  className="box-content"
+  className="box-content box-content__content-form"
 >
   <div
-    className="row"
+    className="d-flex align-items-center mb-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="allow-registration"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <FormattedMessage
+      id="allow-registration"
+      values={Object {}}
+    />
   </div>
   <h4>
     <FormattedMessage
@@ -464,58 +287,24 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     />
   </p>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      Facebook
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    Facebook
   </div>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      Google
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    Google
   </div>
   <h4>
     <FormattedMessage
@@ -524,34 +313,17 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     />
   </h4>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="limit-registration-to-some-domains"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <FormattedMessage
+      id="limit-registration-to-some-domains"
+      values={Object {}}
+    />
   </div>
   <h4>
     <FormattedMessage
@@ -560,124 +332,56 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     />
   </h4>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={true}
-        disabled={true}
-        icons={true}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="user.register.username.username"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={true}
+      disabled={true}
+      icons={true}
+    />
+    <FormattedMessage
+      id="user.register.username.username"
+      values={Object {}}
+    />
   </div>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={true}
-        disabled={true}
-        icons={true}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="form.new_password"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={true}
+      disabled={true}
+      icons={true}
+    />
+    <FormattedMessage
+      id="form.new_password"
+      values={Object {}}
+    />
   </div>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="user.register.zipcode"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <FormattedMessage
+      id="user.register.zipcode"
+      values={Object {}}
+    />
   </div>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="registration.type"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <FormattedMessage
+      id="registration.type"
+      values={Object {}}
+    />
   </div>
   <Well
     bsClass="well"
@@ -760,86 +464,52 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
     />
   </Well>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <p>
-        <strong>
-          <FormattedMessage
-            id="registration.enable_consent_external_communication.title"
-            values={Object {}}
-          />
-        </strong>
-        <br />
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <span>
+      <strong>
         <FormattedMessage
-          id="registration.enable_consent_external_communication.subtitle"
-          values={
-            Object {
-              "link": <a
-                className="external-link"
-                href="http://localhost/admin/settings/settings.global/list"
-              >
-                <FormattedMessage
-                  id="proposal.admin.general"
-                  values={Object {}}
-                />
-              </a>,
-            }
-          }
+          id="registration.enable_consent_external_communication.title"
+          values={Object {}}
         />
-      </p>
-    </Col>
+      </strong>
+      <br />
+      <FormattedMessage
+        id="registration.enable_consent_external_communication.subtitle"
+        values={
+          Object {
+            "link": <a
+              className="external-link"
+              href="http://localhost/admin/settings/settings.global/list"
+            >
+              <FormattedMessage
+                id="proposal.admin.general"
+                values={Object {}}
+              />
+            </a>,
+          }
+        }
+      />
+    </span>
   </div>
   <div
-    className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
+    className="d-flex align-items-center mb-15 mt-15"
   >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={1}
-    >
-      <Toggle
-        checked={false}
-        disabled={true}
-        icons={true}
-        onChange={[Function]}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      xs={11}
-    >
-      <FormattedMessage
-        id="i-am-not-a-bot"
-        values={Object {}}
-      />
-    </Col>
+    <Toggle
+      checked={false}
+      disabled={true}
+      icons={true}
+      onChange={[Function]}
+    />
+    <FormattedMessage
+      id="i-am-not-a-bot"
+      values={Object {}}
+    />
   </div>
   <h3>
     <FormattedMessage

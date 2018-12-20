@@ -446,7 +446,7 @@ class User extends BaseUser implements
         return $this;
     }
 
-    public function getNewEmailConfirmationToken(): ?string
+    public function getNewEmailConfirmationToken(): string
     {
         return $this->newEmailConfirmationToken;
     }

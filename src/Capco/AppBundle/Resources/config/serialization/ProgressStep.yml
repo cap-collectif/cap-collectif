@@ -1,8 +1,0 @@
-Capco\AppBundle\Entity\ProgressStep:
-  attributes:
-    title:
-      groups: [Proposals, Elasticsearch]
-    startAt:
-      groups: [Proposals, Elasticsearch]
-    endAt:
-      groups: [Proposals, Elasticsearch]

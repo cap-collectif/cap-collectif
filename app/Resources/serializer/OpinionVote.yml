@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\OpinionVote:
+  exclusion_policy: ALL
+  properties:
+    value:
+      expose: true
+      type: integer
+      groups: [Opinions]

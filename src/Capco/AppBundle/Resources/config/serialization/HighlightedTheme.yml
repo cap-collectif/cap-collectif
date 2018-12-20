@@ -1,4 +1,0 @@
-Capco\AppBundle\Entity\HighlightedTheme:
-  attributes:
-    theme:
-      groups: [HighlightedContent]

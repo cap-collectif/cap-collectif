@@ -1,0 +1,38 @@
+Capco\AppBundle\Entity\Steps\CollectStep:
+  exclusion_policy: ALL
+  properties:
+    private:
+      expose: true
+      serialized_name: isPrivate
+      groups: [Steps]
+    voteType:
+      expose: true
+      type: integer
+      groups: [Steps]
+      serialized_name: voteType
+    defaultOrder:
+      expose: true
+      type: string
+      groups: [Steps]
+      serialized_name: defaultOrder
+    voteThreshold:
+      expose: true
+      groups: [VoteThreshold]
+      type: integer
+      serialized_name: voteThreshold
+    votesLimit:
+      expose: true
+      groups: [Steps]
+      type: integer
+    budget:
+      expose: true
+      type: float
+      groups: [Steps]
+    statuses:
+      expose: true
+      groups: [Steps, Statuses]
+  virtual_properties:
+    getProposalFormId:
+      serialized_name: proposalFormId
+      expose: true
+      groups: [Steps]

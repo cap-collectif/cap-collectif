@@ -1,0 +1,14 @@
+Capco\AppBundle\Entity\ProgressStep:
+  exclusion_policy: ALL
+  properties:
+    title:
+      expose: true
+      groups: [Proposals, Elasticsearch]
+    startAt:
+      expose: true
+      groups: [Proposals, Elasticsearch]
+      serialized_name: startAt
+    endAt:
+      expose: true
+      groups: [Proposals, Elasticsearch]
+      serialized_name: endAt

@@ -1,4 +1,0 @@
-Capco\AppBundle\Entity\OpinionVote:
-  attributes:
-    value:
-      groups: [Opinions]
