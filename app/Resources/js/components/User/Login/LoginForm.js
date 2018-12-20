@@ -7,23 +7,11 @@ import { Alert } from 'react-bootstrap';
 import renderInput from '../../Form/Field';
 import { login as onSubmit } from '../../../redux/modules/user';
 import type { State } from '../../../types';
-import { isEmail } from '../../../services/Validator';
 
 type LoginValues = {
   username: string,
   password: string,
 };
-
-export const validate = (values: Object) => {
-  const errors = {};
-
-  if (!values.username || !isEmail(values.username)) {
-    errors.username = 'registration.constraints.email.invalid';
-  }
-
-  return errors;
-};
-
 const formName = 'login';
 
 const initialValues: LoginValues = {
@@ -52,7 +40,6 @@ export class LoginForm extends React.Component<Props> {
           type="email"
           autoFocus
           disableValidation
-          ariaRequired
           id="username"
           label={<FormattedMessage id="global.email" />}
           autoComplete="email"
@@ -64,7 +51,6 @@ export class LoginForm extends React.Component<Props> {
           type="password"
           autoFocus
           disableValidation
-          ariaRequired
           id="password"
           label={<FormattedMessage id="global.password" />}
           labelClassName="w-100 font-weight-normal"
@@ -85,7 +71,6 @@ const connector = connect(mapStateToProps);
 export default connector(
   reduxForm({
     initialValues,
-    validate,
     onSubmit,
     form: formName,
     destroyOnUnmount: true,

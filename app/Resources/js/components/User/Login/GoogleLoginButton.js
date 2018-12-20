@@ -19,8 +19,9 @@ export class GoogleLoginButton extends React.Component<Props> {
     return (
       <a
         href={`/login/google?_destination=${window && window.location.href}`}
+        title={<FormattedMessage id={label} />}
         className="btn login__social-btn login__social-btn--googleplus">
-        <FormattedMessage id={label} />
+        {<FormattedMessage id={label} />}
       </a>
     );
   }

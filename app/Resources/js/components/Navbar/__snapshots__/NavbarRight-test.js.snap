@@ -9,7 +9,6 @@ exports[`<NavbarRight /> should render correctly 1`] = `
   stacked={false}
 >
   <NavDropdown
-    aria-label="user.account.menu"
     className="navbar__dropdown"
     eventKey={3}
     id="navbar-username"
@@ -37,7 +36,6 @@ exports[`<NavbarRight /> should render correctly 1`] = `
       onClick={[Function]}
     >
       <i
-        aria-hidden="true"
         className="cap cap-power-1"
         style={
           Object {
