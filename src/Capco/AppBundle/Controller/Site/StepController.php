@@ -261,8 +261,7 @@ class StepController extends Controller
 
         $props = $serializer->serialize(
             ['synthesis_id' => $step->getSynthesis()->getId(), 'mode' => 'view'],
-            'json',
-            SerializationContext::create()
+            'json'
         );
 
         return ['project' => $project, 'currentStep' => $step, 'props' => $props];
@@ -304,21 +303,23 @@ class StepController extends Controller
                 'countFusions' => $countFusions,
             ],
             'json',
-            SerializationContext::create()->setGroups([
-                'Statuses',
-                'ProposalForms',
-                'Questions',
-                'ThemeDetails',
-                'Districts',
-                'DistrictDetails',
-                'Default',
-                'Steps',
-                'VoteThreshold',
-                'UserVotes',
-                'Proposals',
-                'UsersInfos',
-                'UserMedias',
-            ])
+            [
+                'groups' => [
+                    'Statuses',
+                    'ProposalForms',
+                    'Questions',
+                    'ThemeDetails',
+                    'Districts',
+                    'DistrictDetails',
+                    'Default',
+                    'Steps',
+                    'VoteThreshold',
+                    'UserVotes',
+                    'Proposals',
+                    'UsersInfos',
+                    'UserMedias',
+                ],
+            ]
         );
 
         return [
@@ -354,7 +355,9 @@ class StepController extends Controller
                     : null,
             ],
             'json',
-            SerializationContext::create()->setGroups(['Steps'])
+            [
+                'groups' => ['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps'],
+            ]
         );
 
         return ['project' => $project, 'currentStep' => $step, 'props' => $props];
@@ -392,19 +395,21 @@ class StepController extends Controller
                 'showThemes' => $showThemes,
             ],
             'json',
-            SerializationContext::create()->setGroups([
-                'Steps',
-                'ProposalForms',
-                'UserVotes',
-                'Statuses',
-                'ThemeDetails',
-                'Districts',
-                'Default',
-                'Proposals',
-                'UsersInfos',
-                'UserMedias',
-                'VoteThreshold',
-            ])
+            [
+                'groups' => [
+                    'Steps',
+                    'ProposalForms',
+                    'UserVotes',
+                    'Statuses',
+                    'ThemeDetails',
+                    'Districts',
+                    'Default',
+                    'Proposals',
+                    'UsersInfos',
+                    'UserMedias',
+                    'VoteThreshold',
+                ],
+            ]
         );
 
         return ['project' => $project, 'currentStep' => $step, 'props' => $props];
@@ -436,8 +441,7 @@ class StepController extends Controller
 
         $props = $serializer->serialize(
             ['synthesis_id' => $step->getSynthesis()->getId(), 'mode' => 'edit'],
-            'json',
-            SerializationContext::create()
+            'json'
         );
 
         return ['project' => $project, 'currentStep' => $step, 'props' => $props];
@@ -471,11 +475,9 @@ class StepController extends Controller
 
         $serializer = $this->get('serializer');
 
-        $stepProps = $serializer->serialize(
-            ['step' => $currentStep],
-            'json',
-            SerializationContext::create()->setGroups(['ConsultationSteps', 'Steps', 'UserVotes'])
-        );
+        $stepProps = $serializer->serialize(['step' => $currentStep], 'json', [
+            'groups' => ['ConsultationSteps', 'Steps', 'UserVotes'],
+        ]);
 
         return ['project' => $project, 'currentStep' => $currentStep, 'stepProps' => $stepProps];
     }

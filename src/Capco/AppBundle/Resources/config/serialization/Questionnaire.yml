@@ -1,0 +1,21 @@
+Capco\AppBundle\Entity\Questionnaire:
+  attributes:
+    id:
+      groups: [Questionnaires]
+    title:
+      groups: [Questionnaires]
+    description:
+      groups: [Questionnaires]
+    multipleRepliesAllowed:
+      groups: [Questionnaires]
+    anonymousAllowed:
+      groups: [Questionnaires]
+    canContribute:
+      serialized_name: contribuable
+      groups: [Questionnaires]
+    getRealQuestions:
+      serialized_name: fields
+      groups: [Questionnaires, Questions]
+    isPhoneConfirmationRequired:
+      serialized_name: phoneConfirmationRequired
+      groups: [Questionnaires]

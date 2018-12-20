@@ -1,0 +1,13 @@
+Capco\AppBundle\Entity\Theme:
+  attributes:
+    id:
+      groups: [ThemeDetails, Elasticsearch]
+    title:
+      groups: [Themes, ThemeDetails, Elasticsearch]
+    slug:
+      groups: [Themes, ThemeDetails, Elasticsearch]
+    media:
+      groups: [Default]
+    isEnabled:
+      groups: [ThemeDetails]
+      serialized_name: enabled

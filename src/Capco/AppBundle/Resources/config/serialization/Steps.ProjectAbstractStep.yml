@@ -1,0 +1,10 @@
+Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
+  attributes:
+    id:
+      groups: [ProjectAbstractSteps]
+    project:
+      groups: [ProjectAbstractSteps]
+    step:
+      groups: [ProjectAbstractSteps, Steps]
+    position:
+      groups: [ProjectAbstractSteps, Steps]

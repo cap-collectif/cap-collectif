@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+        http://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="FOS\UserBundle\Model\User">
+        <attribute name="email">
+            <group>sonata_api_read</group>
+            <group>sonata_api_write</group>
+            <group>sonata_search</group>
+        </attribute>
+        <attribute name="emailCanonical">
+            <group>sonata_api_read</group>
+            <group>sonata_search</group>
+        </attribute>
+        <attribute name="enabled">
+            <group>sonata_api_read</group>
+            <group>sonata_api_write</group>
+            <group>sonata_search</group>
+        </attribute>
+        <attribute name="plainPassword">
+            <group>sonata_api_write</group>
+        </attribute>
+        <attribute name="lastLogin">
+            <group>sonata_api_read</group>
+            <group>sonata_search</group>
+        </attribute>
+        <attribute name="locked">
+            <group>sonata_api_read</group>
+            <group>sonata_api_write</group>
+            <group>sonata_search</group>
+        </attribute>
+        <attribute name="confirmationToken">
+            <group>sonata_api_read</group>
+            <group>sonata_search</group>
+        </attribute>
+        <attribute name="passwordRequestedAt">
+            <group>sonata_api_read</group>
+            <group>sonata_api_write</group>
+            <group>sonata_search</group>
+        </attribute>
+        <attribute name="roles">
+            <group>sonata_api_read</group>
+            <group>sonata_api_write</group>
+            <group>sonata_search</group>
+        </attribute>
+        <attribute name="credentialsExpired">
+            <group>sonata_api_read</group>
+            <group>sonata_api_write</group>
+            <group>sonata_search</group>
+        </attribute>
+        <attribute name="credentialsExpireAt">
+            <group>sonata_api_read</group>
+            <group>sonata_api_write</group>
+            <group>sonata_search</group>
+        </attribute>
+    </class>
+</serializer>

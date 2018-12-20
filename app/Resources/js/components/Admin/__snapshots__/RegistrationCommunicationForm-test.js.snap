@@ -6,7 +6,6 @@ exports[`<RegistrationCommunicationForm /> renders correctly 1`] = `
 >
   <Field
     component={[Function]}
-    divClassName="pl-20"
     name="topTextDisplayed"
     type="checkbox"
   >
@@ -22,7 +21,6 @@ exports[`<RegistrationCommunicationForm /> renders correctly 1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="pl-20"
     name="bottomTextDisplayed"
     type="checkbox"
   >

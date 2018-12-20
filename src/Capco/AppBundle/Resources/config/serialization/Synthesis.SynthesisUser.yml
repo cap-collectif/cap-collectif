@@ -1,0 +1,10 @@
+Capco\AppBundle\Entity\Synthesis\SynthesisUser:
+  attributes:
+    id:
+      groups: [Users, UserInfos]
+    displayName:
+      groups: [Users, UsersInfos]
+    uniqueIdentifier:
+      groups: [Users, UserInfos]
+    isAdmin:
+      groups: [UserInfos]

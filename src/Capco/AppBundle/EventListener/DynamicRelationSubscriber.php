@@ -72,7 +72,7 @@ class DynamicRelationSubscriber implements EventSubscriber
                             )
                         ) > 0
                     ) {
-                        if (isset($metadata->getReflectionProperties()['votes'])) {
+                        if (array_key_exists('votes', $metadata->getReflectionProperties())) {
                             break;
                         }
 

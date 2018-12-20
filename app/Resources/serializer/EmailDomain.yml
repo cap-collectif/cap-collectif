@@ -1,7 +1,0 @@
-Capco\AppBundle\Entity\EmailDomain:
-  exclusion_policy: ALL
-  properties:
-    value:
-      expose: true
-      type: string
-      groups: [EmailDomain]

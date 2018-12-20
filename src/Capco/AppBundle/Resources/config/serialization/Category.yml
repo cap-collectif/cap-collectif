@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\Category:
+  attributes:
+    id:
+      groups: [Categories, Elasticsearch]
+    title:
+      groups: [Categories]
+    slug:
+      groups: [Categories]

@@ -20,9 +20,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class SynthesisController extends FOSRestController
 {
@@ -97,8 +101,10 @@ class SynthesisController extends FOSRestController
      * @ParamConverter("consultationStep", options={"mapping": {"id": "id"}})
      * @View(statusCode=201, serializerGroups={"SynthesisDetails", "Elements"})
      */
-    public function createSynthesisFromConsultationStepAction(Request $request, ConsultationStep $consultationStep)
-    {
+    public function createSynthesisFromConsultationStepAction(
+        Request $request,
+        ConsultationStep $consultationStep
+    ) {
         $synthesis = new Synthesis();
         $form = $this->createForm(SynthesisForm::class, $synthesis);
         $form->submit($request->request->all(), false);
@@ -107,7 +113,9 @@ class SynthesisController extends FOSRestController
             return $form;
         }
 
-        $synthesis = $this->get('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
+        $synthesis = $this->get(
+            'capco.synthesis.synthesis_handler'
+        )->createSynthesisFromConsultationStep($synthesis, $consultationStep);
 
         return $synthesis;
     }
@@ -130,7 +138,10 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesisAction(Synthesis $synthesis)
     {
-        if (!$synthesis->isEnabled() && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (
+            !$synthesis->isEnabled() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
             throw new AccessDeniedException();
         }
 
@@ -159,7 +170,9 @@ class SynthesisController extends FOSRestController
         $form = $this->createForm(SynthesisForm::class, $synthesis);
         $form->submit($request->request->all(), false);
         if ($form->isValid()) {
-            $synthesis = $this->get('capco.synthesis.synthesis_handler')->updateSynthesis($synthesis);
+            $synthesis = $this->get('capco.synthesis.synthesis_handler')->updateSynthesis(
+                $synthesis
+            );
 
             return $synthesis;
         }
@@ -212,18 +225,25 @@ class SynthesisController extends FOSRestController
      * @Get("/syntheses/{id}/elements", name="get_synthesis_elements")
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementsList", "UserDetails"})
      */
-    public function getSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
-    {
+    public function getSynthesisElementsAction(
+        ParamFetcherInterface $paramFetcher,
+        Synthesis $synthesis
+    ) {
         $type = $paramFetcher->get('type');
         $term = $paramFetcher->get('term');
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
 
-        if (('published' !== $type || !$synthesis->isEnabled()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (
+            ('published' !== $type || !$synthesis->isEnabled()) &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
             throw new AccessDeniedException();
         }
 
-        return $this->get('capco.synthesis.synthesis_element_handler')->getElementsFromSynthesisByType($synthesis, $type, $term, $offset, $limit);
+        return $this->get(
+            'capco.synthesis.synthesis_element_handler'
+        )->getElementsFromSynthesisByType($synthesis, $type, $term, $offset, $limit);
     }
 
     /**
@@ -246,17 +266,24 @@ class SynthesisController extends FOSRestController
      * @Get("/syntheses/{id}/elements/tree")
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementsTree"})
      */
-    public function getSynthesisElementsTreeAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
-    {
+    public function getSynthesisElementsTreeAction(
+        ParamFetcherInterface $paramFetcher,
+        Synthesis $synthesis
+    ) {
         $type = $paramFetcher->get('type');
         $parent = $paramFetcher->get('parent');
 
         $isVisibleOnlyByAdmin = 'published' !== $type || !$synthesis->isEnabled();
-        if ($isVisibleOnlyByAdmin && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (
+            $isVisibleOnlyByAdmin &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
             $this->createAccessDeniedException();
         }
 
-        $tree = $this->get('capco.synthesis.synthesis_element_handler')->getElementsTreeFromSynthesisByType($synthesis, $type, $parent);
+        $tree = $this->get(
+            'capco.synthesis.synthesis_element_handler'
+        )->getElementsTreeFromSynthesisByType($synthesis, $type, $parent);
 
         return $tree;
     }
@@ -280,14 +307,23 @@ class SynthesisController extends FOSRestController
      * @Get("/syntheses/{id}/elements/count")
      * @View()
      */
-    public function countSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
-    {
+    public function countSynthesisElementsAction(
+        ParamFetcherInterface $paramFetcher,
+        Synthesis $synthesis
+    ) {
         $type = $paramFetcher->get('type');
-        if (('published' !== $type || !$synthesis->isEnabled()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (
+            ('published' !== $type || !$synthesis->isEnabled()) &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
             throw new AccessDeniedException();
         }
 
-        return ['count' => $this->get('capco.synthesis.synthesis_element_handler')->countElementsFromSynthesisByType($synthesis, $type)];
+        return [
+            'count' => $this->get(
+                'capco.synthesis.synthesis_element_handler'
+            )->countElementsFromSynthesisByType($synthesis, $type),
+        ];
     }
 
     /**
@@ -309,7 +345,10 @@ class SynthesisController extends FOSRestController
      */
     public function getSynthesisElementAction(Synthesis $synthesis, SynthesisElement $element)
     {
-        if ((!$synthesis->isEnabled() || !$element->isPublished()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (
+            (!$synthesis->isEnabled() || !$element->isPublished()) &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
             throw new AccessDeniedException();
         }
 
@@ -343,11 +382,9 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($form->getErrors(true));
         }
 
-        $element = $this->get('capco.synthesis.synthesis_element_handler')->createElementInSynthesis(
-            $element,
-            $synthesis,
-            $this->getUser()
-        );
+        $element = $this->get(
+            'capco.synthesis.synthesis_element_handler'
+        )->createElementInSynthesis($element, $synthesis, $this->getUser());
 
         return $element;
     }
@@ -370,8 +407,11 @@ class SynthesisController extends FOSRestController
      * @ParamConverter("element", options={"mapping": {"elementId": "id"}})
      * @View(serializerEnableMaxDepthChecks=true, serializerGroups={"ElementDetails", "UserDetails", "LogDetails"})
      */
-    public function updateSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
-    {
+    public function updateSynthesisElementAction(
+        Request $request,
+        Synthesis $synthesis,
+        SynthesisElement $element
+    ) {
         $form = $this->createForm(SynthesisElementForm::class, $element, ['hasDivision' => true]);
         $form->submit($request->request->all(), false);
 
@@ -379,10 +419,9 @@ class SynthesisController extends FOSRestController
             throw new BadRequestHttpException($form->getErrors(true));
         }
 
-        $element = $this->get('capco.synthesis.synthesis_element_handler')->updateElementInSynthesis(
-            $element,
-            $synthesis
-        );
+        $element = $this->get(
+            'capco.synthesis.synthesis_element_handler'
+        )->updateElementInSynthesis($element, $synthesis);
 
         return $element;
     }
@@ -405,9 +444,14 @@ class SynthesisController extends FOSRestController
      * @ParamConverter("element", options={"mapping": {"element_id": "id"}})
      * @View(serializerGroups={"Elements", "LogDetails"})
      */
-    public function getSynthesisElementHistoryAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
-    {
-        $logs = $this->get('capco.synthesis.synthesis_element_handler')->getLogsForElement($element);
+    public function getSynthesisElementHistoryAction(
+        Request $request,
+        Synthesis $synthesis,
+        SynthesisElement $element
+    ) {
+        $logs = $this->get('capco.synthesis.synthesis_element_handler')->getLogsForElement(
+            $element
+        );
 
         return $logs;
     }
@@ -432,7 +476,9 @@ class SynthesisController extends FOSRestController
     public function updateSynthesisDisplayRulesAction(Request $request, Synthesis $synthesis)
     {
         $synthesis->setDisplayRules($request->request->get('rules'));
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
 
         return $synthesis;
     }

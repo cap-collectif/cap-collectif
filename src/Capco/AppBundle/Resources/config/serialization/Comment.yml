@@ -1,0 +1,10 @@
+Capco\AppBundle\Entity\Comment:
+  attributes:
+    id:
+      groups: [Elasticsearch]
+    body:
+      groups: [Elasticsearch]
+    createdAt:
+      groups: [Elasticsearch]
+    authorName:
+      groups: [Elasticsearch]

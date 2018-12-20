@@ -1,0 +1,14 @@
+Capco\AppBundle\Entity\Reply:
+  attributes:
+    id:
+      groups: [Replies]
+    responses:
+      groups: [Replies]
+    author:
+      groups: [Replies]
+    createdAt:
+      groups: [Replies]
+    updatedAt:
+      groups: [Replies]
+    private:
+      groups: [Replies]
