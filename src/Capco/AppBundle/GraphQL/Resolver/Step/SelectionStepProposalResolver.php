@@ -72,6 +72,9 @@ class SelectionStepProposalResolver implements ResolverInterface
                 if ($args->offsetExists('status')) {
                     $filters['statuses'] = $args->offsetGet('status');
                 }
+                if ($args->offsetExists('trashedStatus')) {
+                    $filters['trashedStatus'] = $args->offsetGet('trashedStatus');
+                }
 
                 $order = ProposalFormProposalsResolver::findOrderFromFieldAndDirection(
                     $field,
