@@ -3,7 +3,6 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -93,6 +92,7 @@ class ConsultationStepTypeAdmin extends AbstractAdmin
                 'required' => true,
                 'tree' => true,
                 'choices_as_values' => true,
+                'disabled' => true,
             ]);
         }
     }
