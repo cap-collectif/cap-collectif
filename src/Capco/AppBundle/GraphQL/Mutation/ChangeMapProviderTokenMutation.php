@@ -84,15 +84,11 @@ class ChangeMapProviderTokenMutation implements MutationInterface
             throw new UserError(self::ERROR_INVALID_SECRET_TOKEN);
         }
 
-        if (null !== $publicToken && '' !== $publicToken) {
-            $mapboxMapToken->setPublicToken($publicToken);
-        }
-
-        $mapboxMapToken->setSecretToken($secretToken);
-
-        if (null === $mapboxMapToken->getSecretToken()) {
-            $mapboxMapToken->setStyleId(null)->setStyleOwner(null);
-        }
+        $mapboxMapToken
+            ->setPublicToken($publicToken)
+            ->setSecretToken($secretToken)
+            ->setStyleId(null)
+            ->setStyleOwner(null);
 
         $this->em->flush();
 
