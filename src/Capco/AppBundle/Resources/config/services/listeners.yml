@@ -4,66 +4,10 @@ services:
     autowire: true
     public: false
 
-  Capco\AppBundle\EventListener\:
-    resource: '%kernel.root_dir%/../src/Capco/AppBundle/EventListener/*'
-
-  capco.listener.soft_delete:
-    class: Capco\AppBundle\EventListener\SoftDeleteEventListener
-    tags:
-      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
-
-  capco.listener.feature_toggle:
-    class: Capco\AppBundle\EventListener\FeatureToggleListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-
-  capco.listener.paris_authentication_exception:
-    class: Capco\AppBundle\EventListener\ParisAuthenticationExceptionListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.exception }
-
-  capco.listener.locale:
-    class: Capco\AppBundle\EventListener\LocaleListener
-    tags:
-      - {
-          name: kernel.event_listener,
-          event: kernel.request,
-          method: onKernelRequest,
-          priority: 15,
-        }
-
-  capco.listener.shield:
-    class: Capco\AppBundle\EventListener\ShieldListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-
-  capco.listener.empty_username:
-    public: true
-    class: Capco\AppBundle\EventListener\EmptyUsernameListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-
   Capco\AppBundle\Publishable\DoctrineListener:
     public: true
     tags:
       - { name: doctrine.event_subscriber, connection: default }
-
-  capco.diff.subscriber:
-    class: Capco\AppBundle\EventListener\DiffSubscriber
-    tags:
-      - { name: doctrine.event_subscriber, connection: default }
-
-  capco.listener.reference:
-    public: true
-    class: Capco\AppBundle\EventListener\ReferenceEventListener
-    tags:
-      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
-
-  capco.listener.moderation_token:
-    public: true
-    class: Capco\AppBundle\EventListener\ModerationTokenListener
-    tags:
-      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
 
   Capco\AppBundle\EventListener\ProjectAccessDeniedExceptionListener:
     public: true
@@ -75,126 +19,74 @@ services:
     tags:
       - { name: kernel.event_listener, event: graphql.post_executor, method: onPostExecutor }
 
+  Capco\AppBundle\EventListener\GraphQlAclListener:
+    tags:
+      - { name: kernel.event_listener, event: graphql.pre_executor, method: onPreExecutor }
+
   Overblog\GraphQLBundle\Error\ErrorHandler:
     autowire: true
     autoconfigure: true
 
-  capco.form.transformer.html_purifier:
+  Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer:
     class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
     arguments: ['@exercise_html_purifier.default']
 
-  capco.doctrine.subscriber.dynamic_relation:
-    class: Capco\AppBundle\EventListener\DynamicRelationSubscriber
+  Capco\AppBundle\EventListener\ModerationTokenListener:
+    public: true
+    tags:
+      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
+
+  Capco\AppBundle\EventListener\DiffSubscriber:
+    tags:
+      - { name: doctrine.event_subscriber, connection: default }
+
+  Capco\AppBundle\EventListener\CommentSubscriber:
+    autowire: true
+    tags:
+      - { name: kernel.event_subscriber }
+
+  Capco\AppBundle\EventListener\DynamicRelationSubscriber:
     tags:
       - { name: doctrine.event_subscriber, event: loadClassMetadata }
     arguments: ['%traits%']
 
-  Capco\AppBundle\EventListener\ProjectSerializationListener:
+  Capco\AppBundle\EventListener\ParisAuthenticationExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }
+
+  Capco\AppBundle\EventListener\ReferenceEventListener:
     public: true
     tags:
-      - { name: 'jms_serializer.event_subscriber' }
+      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
 
-  Capco\AppBundle\EventListener\SerializationListener:
-    public: true
+  Capco\AppBundle\EventListener\ShieldListener:
     tags:
-    - { name: 'jms_serializer.event_subscriber' }
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-  Capco\AppBundle\EventListener\ThemeSerializationListener:
-    public: true
+  Capco\AppBundle\EventListener\SoftDeleteEventListener:
     tags:
-    - { name: 'jms_serializer.event_subscriber' }
+      - { name: doctrine.event_listener, event: preFlush, method: preFlush }
 
-  Capco\AppBundle\EventListener\ProposalSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.event.serialization_listener:
-  Capco\AppBundle\EventListener\EventSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.media_response.serialization_listener:
-  Capco\AppBundle\EventListener\MediaResponseSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.source.serialization_listener:
-  Capco\AppBundle\EventListener\SourceSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.opinion.serialization_listener:
-  Capco\AppBundle\EventListener\OpinionSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.user.serialization_listener:
-  Capco\AppBundle\EventListener\UserSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.post.serialization_listener:
-  Capco\AppBundle\EventListener\PostSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.synthesis.synthesis_listener:
+  #  capco.synthesis.synthesis_listener:
   Capco\AppBundle\EventListener\SynthesisLoggableListener:
     public: true
     calls:
-    - [setAnnotationReader, ['@annotation_reader']]
+      - [setAnnotationReader, ['@annotation_reader']]
 
-#  capco.opinion_type.serialization_listener:
-  Capco\AppBundle\EventListener\OpinionTypeSerializationListener:
+  Capco\AppBundle\EventListener\EmptyUsernameListener:
     public: true
     tags:
-    - { name: 'jms_serializer.event_subscriber' }
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-#  capco.proposal_vote.serialization_listener:
-  Capco\AppBundle\EventListener\ProposalVoteSerializationListener:
-    public: true
+  Capco\AppBundle\EventListener\FeatureToggleListener:
     tags:
-    - { name: 'jms_serializer.event_subscriber' }
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-#  capco.selection_step.serialization_listener:
-  Capco\AppBundle\EventListener\SelectionStepSerializationListener:
-    public: true
+  Capco\AppBundle\EventListener\LocaleListener:
     tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.consultation_step.serialization_listener:
-  Capco\AppBundle\EventListener\ConsultationStepSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.collect_step.serialization_listener:
-  Capco\AppBundle\EventListener\CollectStepSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.questionnaire_step.serialization_listener:
-  Capco\AppBundle\EventListener\QuestionnaireStepSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.abstract_step.serialization_listener:
-  Capco\AppBundle\EventListener\AbstractStepSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
-
-#  capco.question_choice.serialization_listener:
-  Capco\AppBundle\EventListener\QuestionChoiceSerializationListener:
-    public: true
-    tags:
-    - { name: 'jms_serializer.event_subscriber' }
+      - {
+          name: kernel.event_listener,
+          event: kernel.request,
+          method: onKernelRequest,
+          priority: 15,
+        }

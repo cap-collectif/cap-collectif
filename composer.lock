@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "677189e65e9998fdbf1cfbc3cb4d8f6b",
+    "content-hash": "c0837de47caa80d8d62243863aea56da",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10644,16 +10644,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.20",
+            "version": "dev-waiting-42",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/symfony.git",
-                "reference": "f6b8ddc362b1cf3fb06548693c3adbb736092412"
+                "url": "https://github.com/cap-collectif/symfony.git",
+                "reference": "0bad88f9a0621b6717d705f874032532bf0f0a80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/f6b8ddc362b1cf3fb06548693c3adbb736092412",
-                "reference": "f6b8ddc362b1cf3fb06548693c3adbb736092412",
+                "url": "https://api.github.com/repos/cap-collectif/symfony/zipball/0bad88f9a0621b6717d705f874032532bf0f0a80",
+                "reference": "0bad88f9a0621b6717d705f874032532bf0f0a80",
                 "shasum": ""
             },
             "require": {
@@ -10776,7 +10776,11 @@
                     "**/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "files": [
+                    "src/Symfony/Component/VarDumper/Resources/functions/dump.php"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -10795,7 +10799,11 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2018-12-06T15:24:36+00:00"
+            "support": {
+                "source": "https://github.com/cap-collectif/symfony/tree/waiting-42",
+                "issues": "https://github.com/cap-collectif/symfony/issues"
+            },
+            "time": "2018-12-14T14:39:52+00:00"
         },
         {
             "name": "tilleuls/ckeditor-sonata-media-bundle",
@@ -15579,6 +15587,12 @@
     ],
     "aliases": [
         {
+            "alias": "3.4.20",
+            "alias_normalized": "3.4.20.0",
+            "version": "dev-waiting-42",
+            "package": "symfony/symfony"
+        },
+        {
             "alias": "3.13.1",
             "alias_normalized": "3.13.1.0",
             "version": "dev-bugfix-3.11.1",
@@ -15599,6 +15613,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "symfony/symfony": 20,
         "sonata-project/media-bundle": 20,
         "sonata-project/datagrid-bundle": 20,
         "friendsofsymfony/elastica-bundle": 20,

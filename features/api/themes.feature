@@ -10,6 +10,7 @@ Scenario: Anonymous API client wants to get all themes
   {
     "id": @string@,
     "title": @string@,
+    "slug": @string@,
     "enabled": @boolean@,
     "_links": {
       "show": @string@

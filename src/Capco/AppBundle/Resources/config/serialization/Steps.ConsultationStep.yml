@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\Steps\ConsultationStep:
+  attributes:
+    titleHelpText:
+      groups: [ConsultationSteps]
+    descriptionHelpText:
+      groups: [ConsultationSteps]
+    opinionCountShownBySection:
+      groups: [ConsultationSteps]
+    getProjectId:
+      serialized_name: projectId
+      groups: [Opinions, ConsultationSteps]

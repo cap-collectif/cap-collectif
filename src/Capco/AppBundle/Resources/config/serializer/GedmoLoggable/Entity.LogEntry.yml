@@ -1,3 +1,0 @@
-# Used to configure serialization for Gedmo LogEntry
-Gedmo\Loggable\Entity\LogEntry:
-  exclusion_policy: ALL

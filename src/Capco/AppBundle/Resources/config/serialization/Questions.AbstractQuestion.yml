@@ -1,0 +1,28 @@
+Capco\AppBundle\Entity\Questions\AbstractQuestion:
+  discriminator:
+    field_name: question_type
+    map:
+      simple: Capco\AppBundle\Entity\Questions\SimpleQuestion
+      multiple_choice: Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion
+      media: Capco\AppBundle\Entity\Questions\MediaQuestion
+      section: Capco\AppBundle\Entity\Questions\SectionQuestion
+  attributes:
+    id:
+      groups: [Questions, Proposals, Replies]
+    title:
+      groups: [Questions, Proposals, Replies]
+      serialized_name: question
+    slug:
+      groups: [Questions, Proposals, Replies]
+    helpText:
+      serialized_name: helpText
+      groups: [Questions, Proposals, Replies]
+    required:
+      groups: [Questions, Proposals, Replies]
+    private:
+      groups: [Questions, Proposals, Replies]
+    description:
+      groups: [Questions, Proposals, Replies]
+    getInputType:
+      serialized_name: type
+      groups: [Questions, Proposals, Replies]

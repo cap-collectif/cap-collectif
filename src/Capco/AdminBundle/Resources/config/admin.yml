@@ -1,5 +1,4 @@
 imports:
-  - { resource: listeners.yml }
   - { resource: services/validators.yml }
 
 services:

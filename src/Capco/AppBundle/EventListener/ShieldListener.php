@@ -29,6 +29,8 @@ class ShieldListener
 
         // Public API
         'graphql_endpoint',
+
+        // API documentation
         'graphiql_endpoint',
         'nelmio_api_doc_index',
 
@@ -41,7 +43,7 @@ class ShieldListener
         'account_confirm_email',
         'account_confirm_new_email',
 
-        // API Registration
+        // Registration
         'capco_app_api_users_postuser',
 
         // Password reset

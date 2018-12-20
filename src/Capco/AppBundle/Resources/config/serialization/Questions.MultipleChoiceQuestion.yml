@@ -1,0 +1,14 @@
+Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
+  attributes:
+    randomQuestionChoices:
+      serialized_name: randomChoices
+      groups: [Questions]
+    otherAllowed:
+      groups: [Questions]
+      serialized_name: isOtherAllowed
+    choices:
+      groups: [Questions]
+    validationRule:
+      groups: [Questions]
+    description:
+      groups: [Questions]

@@ -1,0 +1,36 @@
+Capco\AppBundle\Entity\Project:
+  attributes:
+    id:
+      groups: [Projects, Elasticsearch]
+    title:
+      groups: [Projects, Elasticsearch]
+    Author:
+      groups: [Projects, Elasticsearch]
+      serialized_name: author
+    participantsCount:
+      groups: [Projects]
+    votesCount:
+      groups: [Projects]
+    canContribute:
+      groups: [Projects]
+    createdAt:
+      groups: [Projects, Elasticsearch]
+    updatedAt:
+      groups: [Default]
+    themes:
+      groups: [Projects, Elasticsearch]
+    projectType:
+      groups: [Projects, Elasticsearch]
+    video:
+      groups: [Projects]
+    Cover:
+      groups: [Default]
+      serialized_name: cover
+    participativeStep:
+      groups: [Projects]
+      serialized_name: hasParticipativeStep
+    startAt:
+      groups: [Projects]
+      serialized_name: startAt
+    publishedAt:
+      groups: [Projects, Elasticsearch]

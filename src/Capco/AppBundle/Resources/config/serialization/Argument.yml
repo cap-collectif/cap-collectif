@@ -1,0 +1,15 @@
+Capco\AppBundle\Entity\Argument:
+  attributes:
+    id:
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+    body:
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+    type:
+      groups: [Opinions, OpinionVersions]
+    createdAt:
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+    updatedAt:
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+    Author:
+      serialized_name: author
+      groups: [Opinions, OpinionVersions, UserMedias]

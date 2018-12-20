@@ -1,0 +1,10 @@
+Capco\AppBundle\Entity\ProjectType:
+  attributes:
+    id:
+      groups: [ProjectType, Elasticsearch]
+    title:
+      groups: [ProjectType, Elasticsearch]
+    slug:
+      groups: [ProjectType]
+    color:
+      groups: [ProjectType]

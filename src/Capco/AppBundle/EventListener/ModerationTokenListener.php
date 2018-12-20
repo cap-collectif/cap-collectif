@@ -24,7 +24,10 @@ class ModerationTokenListener
             $classMetaData = $om->getClassMetadata(\get_class($entityInsertion));
 
             // if entity has Moderabble Trait & has not already a moderation_token (specific case in fixtures)
-            if ($this->hasTrait($classMetaData->getReflectionClass()) && !$entityInsertion->getModerationToken()) {
+            if (
+                $this->hasTrait($classMetaData->getReflectionClass()) &&
+                !$entityInsertion->getModerationToken()
+            ) {
                 $token = $this->tokenGenerator->generateToken();
                 $entityInsertion->setModerationToken($token);
             }

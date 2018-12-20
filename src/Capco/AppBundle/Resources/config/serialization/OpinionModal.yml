@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\OpinionModal:
+  attributes:
+    key:
+      groups: [Opinions, OpinionVersions]
+    title:
+      groups: [Opinions, OpinionVersions]
+    diff:
+      groups: [Opinions, OpinionVersions]

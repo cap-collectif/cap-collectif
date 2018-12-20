@@ -1,0 +1,58 @@
+Capco\AppBundle\Entity\Proposal:
+  exclusion_policy: ALL
+  attributes:
+    id:
+      groups: [Proposals, Elasticsearch]
+    title:
+      groups: [Proposals, Elasticsearch]
+    summary:
+      groups: [Proposals, Elasticsearch]
+    body:
+      groups: [Proposals, Elasticsearch]
+    author:
+      groups: [Proposals, Elasticsearch]
+    commentsCount:
+      groups: [Proposals]
+    canContribute:
+      groups: [Proposals]
+    createdAt:
+      groups: [Proposals, Elasticsearch]
+    updatedAt:
+      groups: [Proposals, Elasticsearch]
+    theme:
+      groups: [Proposals, Elasticsearch]
+    district:
+      groups: [Proposals, Elasticsearch]
+    status:
+      groups: [Proposals, Elasticsearch]
+    category:
+      groups: [Proposals, Elasticsearch]
+    estimation:
+      groups: [Proposals, Elasticsearch]
+    comments:
+      groups: [Proposals]
+    draft:
+      serialized_name: isDraft
+      groups: [Proposals]
+    proposalForm:
+      groups: [Proposals, Elasticsearch]
+    progressSteps:
+      groups: [Proposals]
+    selections:
+      groups: [Proposals, Statuses, Elasticsearch]
+    likers:
+      groups: [Proposals]
+    address:
+      groups: [Proposals]
+    isVisible:
+      groups: [PrivateProposals]
+      serialized_name: visible
+    getSummaryOrBodyExcerpt:
+      groups: [Proposals]
+      serialized_name: summaryOrBodyExcerpt
+    getFullReference:
+      groups: [Proposals, Elasticsearch]
+      serialized_name: reference
+    isTrashed:
+      serialized_name: trashed
+      groups: [Proposals, Elasticsearch]

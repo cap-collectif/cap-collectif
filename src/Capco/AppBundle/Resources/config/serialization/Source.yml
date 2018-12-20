@@ -1,0 +1,12 @@
+Capco\AppBundle\Entity\Source:
+  attributes:
+    id:
+      groups: [Elasticsearch]
+    body:
+      groups: [Elasticsearch]
+    title:
+      groups: [Elasticsearch]
+    createdAt:
+      groups: [Elasticsearch]
+    updatedAt:
+      groups: [Elasticsearch]

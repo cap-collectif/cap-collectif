@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\HighlightedContent:
+  attributes:
+    position:
+      groups: [HighlightedContent]
+    id:
+      groups: [HighlightedContent]
+    getCurrentObjectType:
+      groups: [HighlightedContent]
+      serialized_name: object_type

@@ -1,0 +1,10 @@
+Capco\AppBundle\Entity\OpinionTypeAppendixType:
+  attributes:
+    position:
+      groups: [Opinions, OpinionTypeDetails]
+    getAppendixTypeTitle:
+      serialized_name: title
+      groups: [Opinions, OpinionTypeDetails]
+    getAppendixTypeId:
+      serialized_name: id
+      groups: [Opinions, OpinionTypeDetails]

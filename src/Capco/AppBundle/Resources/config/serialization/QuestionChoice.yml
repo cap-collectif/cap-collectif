@@ -1,0 +1,13 @@
+Capco\AppBundle\Entity\QuestionChoice:
+  attributes:
+    id:
+      groups: [QuestionChoices, Questions, Questionnaires]
+    title:
+      groups: [QuestionChoices, Questions, Questionnaires]
+      serialized_name: label
+    position:
+      groups: [QuestionChoices, Questions, Questionnaires]
+    description:
+      groups: [QuestionChoices, Questions, Questionnaires]
+    color:
+      groups: [QuestionChoices, Questions, Questionnaires]
