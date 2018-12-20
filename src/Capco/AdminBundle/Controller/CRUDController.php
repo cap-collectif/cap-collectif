@@ -3,8 +3,6 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -17,12 +15,169 @@ use Symfony\Bridge\Twig\Form\TwigRenderer;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
 class CRUDController extends Controller
 {
+    public function editAction($id = null)
+    {
+        $request = $this->getRequest();
+        // the key used to lookup the template
+        $templateKey = 'edit';
+
+        $id = $request->get($this->admin->getIdParameter());
+        $existingObject = $this->admin->getObject($id);
+
+        if (!$existingObject) {
+            throw $this->createNotFoundException(
+                sprintf('unable to find the object with id: %s', $id)
+            );
+        }
+
+        if (\is_object($existingObject)) {
+            if (
+                $existingObject instanceof DisplayableInBOInterface &&
+                !$existingObject->canDisplayInBO($this->getUser())
+            ) {
+                throw new ProjectAccessDeniedException();
+            }
+            if (
+                !$existingObject instanceof DisplayableInBOInterface &&
+                !$existingObject->canDisplay($this->getUser())
+            ) {
+                throw new ProjectAccessDeniedException();
+            }
+        }
+
+        $this->checkParentChildAssociation($request, $existingObject);
+
+        $this->admin->checkAccess('edit', $existingObject);
+
+        $preResponse = $this->preEdit($request, $existingObject);
+        if (null !== $preResponse) {
+            return $preResponse;
+        }
+
+        $this->admin->setSubject($existingObject);
+        $objectId = $this->admin->getNormalizedIdentifier($existingObject);
+
+        /** @var $form Form */
+        $form = $this->admin->getForm();
+        $form->setData($existingObject);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $isFormValid = $form->isValid();
+
+            // persist if the form was valid and if in preview mode the preview was approved
+            if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
+                $submittedObject = $form->getData();
+                $this->admin->setSubject($submittedObject);
+
+                try {
+                    $existingObject = $this->admin->update($submittedObject);
+
+                    if ($this->isXmlHttpRequest()) {
+                        return $this->renderJson(
+                            [
+                                'result' => 'ok',
+                                'objectId' => $objectId,
+                                'objectName' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                            ],
+                            200,
+                            []
+                        );
+                    }
+
+                    $this->addFlash(
+                        'sonata_flash_success',
+                        $this->trans(
+                            'flash_edit_success',
+                            [
+                                '%name%' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                            ],
+                            'SonataAdminBundle'
+                        )
+                    );
+
+                    // redirect to edit mode
+                    return $this->redirectTo($existingObject);
+                } catch (ModelManagerException $e) {
+                    $this->handleModelManagerException($e);
+
+                    $isFormValid = false;
+                } catch (LockException $e) {
+                    $this->addFlash(
+                        'sonata_flash_error',
+                        $this->trans(
+                            'flash_lock_error',
+                            [
+                                '%name%' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                                '%link_start%' =>
+                                    '<a href="' .
+                                        $this->admin->generateObjectUrl('edit', $existingObject) .
+                                        '">',
+                                '%link_end%' => '</a>',
+                            ],
+                            'SonataAdminBundle'
+                        )
+                    );
+                }
+            }
+
+            // show an error message if the form failed validation
+            if (!$isFormValid) {
+                if (!$this->isXmlHttpRequest()) {
+                    $this->addFlash(
+                        'sonata_flash_error',
+                        $this->trans(
+                            'flash_edit_error',
+                            [
+                                '%name%' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                            ],
+                            'SonataAdminBundle'
+                        )
+                    );
+                }
+            } elseif ($this->isPreviewRequested()) {
+                // enable the preview template if the form was valid and preview was requested
+                $templateKey = 'preview';
+                $this->admin->getShow();
+            }
+        }
+
+        $formView = $form->createView();
+        // set the theme for the current Admin Form
+        $this->setFormTheme($formView, $this->admin->getFormTheme());
+
+        // NEXT_MAJOR: Remove this line and use commented line below it instead
+        $template = $this->admin->getTemplate($templateKey);
+
+        // $template = $this->templateRegistry->getTemplate($templateKey);
+
+        return $this->renderWithExtraParams(
+            $template,
+            [
+                'action' => 'edit',
+                'form' => $formView,
+                'object' => $existingObject,
+                'objectId' => $objectId,
+            ],
+            null
+        );
+    }
+
     /**
      * @param Request $request
      * @param $conditions
@@ -233,6 +388,77 @@ class CRUDController extends Controller
         return $fieldDescription;
     }
 
+    /**
+     * @throws \Exception
+     */
+    protected function handleModelManagerException(\Exception $e)
+    {
+        if ($this->get('kernel')->isDebug()) {
+            throw $e;
+        }
+
+        $context = ['exception' => $e];
+        if ($e->getPrevious()) {
+            $context['previous_exception_message'] = $e->getPrevious()->getMessage();
+        }
+        $this->getLogger()->error($e->getMessage(), $context);
+    }
+
+    /**
+     * Redirect the user depend on this choice.
+     *
+     * @param object $object
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectTo($object)
+    {
+        $request = $this->getRequest();
+
+        $url = false;
+
+        if (null !== $request->get('btn_update_and_list')) {
+            return $this->redirectToList();
+        }
+        if (null !== $request->get('btn_create_and_list')) {
+            return $this->redirectToList();
+        }
+
+        if (null !== $request->get('btn_create_and_create')) {
+            $params = [];
+            if ($this->admin->hasActiveSubClass()) {
+                $params['subclass'] = $request->get('subclass');
+            }
+            $url = $this->admin->generateUrl('create', $params);
+        }
+
+        if ('DELETE' === $this->getRestMethod()) {
+            if (
+                'admin_capco_app_steps_abstractstep_delete' === $request->attributes->get('_route')
+            ) {
+                return $this->redirectToRoute('admin_capco_app_project_list');
+            }
+
+            return $this->redirectToList();
+        }
+
+        if (!$url) {
+            foreach (['edit', 'show'] as $route) {
+                if ($this->admin->hasRoute($route) && $this->admin->hasAccess($route, $object)) {
+                    $url = $this->admin->generateObjectUrl($route, $object);
+
+                    break;
+                }
+            }
+        }
+
+        if (!$url) {
+            return $this->redirectToList();
+        }
+
+        return new RedirectResponse($url);
+    }
+
     private function checkParentChildAssociation(Request $request, $object)
     {
         if (!($parentAdmin = $this->admin->getParent())) {
@@ -263,22 +489,6 @@ class CRUDController extends Controller
     }
 
     /**
-     * @throws \Exception
-     */
-    protected function handleModelManagerException(\Exception $e)
-    {
-        if ($this->get('kernel')->isDebug()) {
-            throw $e;
-        }
-
-        $context = ['exception' => $e];
-        if ($e->getPrevious()) {
-            $context['previous_exception_message'] = $e->getPrevious()->getMessage();
-        }
-        $this->getLogger()->error($e->getMessage(), $context);
-    }
-
-    /**
      * Sets the admin form theme to form view. Used for compatibility between Symfony versions.
      *
      * @param string $theme
@@ -302,160 +512,5 @@ class CRUDController extends Controller
         }
 
         $twig->getRuntime(FormRenderer::class)->setTheme($formView, $theme);
-    }
-
-    public function editAction($id = null)
-    {
-        $request = $this->getRequest();
-        // the key used to lookup the template
-        $templateKey = 'edit';
-
-        $id = $request->get($this->admin->getIdParameter());
-        $existingObject = $this->admin->getObject($id);
-
-        if (!$existingObject) {
-            throw $this->createNotFoundException(
-                sprintf('unable to find the object with id: %s', $id)
-            );
-        }
-
-        if (is_object($existingObject)) {
-            if (
-                $existingObject instanceof DisplayableInBOInterface &&
-                !$existingObject->canDisplayInBO($this->getUser())
-            ) {
-                throw new ProjectAccessDeniedException();
-            } elseif (
-                !$existingObject instanceof DisplayableInBOInterface &&
-                !$existingObject->canDisplay($this->getUser())
-            ) {
-                throw new ProjectAccessDeniedException();
-            }
-        }
-
-        $this->checkParentChildAssociation($request, $existingObject);
-
-        $this->admin->checkAccess('edit', $existingObject);
-
-        $preResponse = $this->preEdit($request, $existingObject);
-        if (null !== $preResponse) {
-            return $preResponse;
-        }
-
-        $this->admin->setSubject($existingObject);
-        $objectId = $this->admin->getNormalizedIdentifier($existingObject);
-
-        /** @var $form Form */
-        $form = $this->admin->getForm();
-        $form->setData($existingObject);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            $isFormValid = $form->isValid();
-
-            // persist if the form was valid and if in preview mode the preview was approved
-            if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
-                $submittedObject = $form->getData();
-                $this->admin->setSubject($submittedObject);
-
-                try {
-                    $existingObject = $this->admin->update($submittedObject);
-
-                    if ($this->isXmlHttpRequest()) {
-                        return $this->renderJson(
-                            [
-                                'result' => 'ok',
-                                'objectId' => $objectId,
-                                'objectName' => $this->escapeHtml(
-                                    $this->admin->toString($existingObject)
-                                ),
-                            ],
-                            200,
-                            []
-                        );
-                    }
-
-                    $this->addFlash(
-                        'sonata_flash_success',
-                        $this->trans(
-                            'flash_edit_success',
-                            [
-                                '%name%' => $this->escapeHtml(
-                                    $this->admin->toString($existingObject)
-                                ),
-                            ],
-                            'SonataAdminBundle'
-                        )
-                    );
-
-                    // redirect to edit mode
-                    return $this->redirectTo($existingObject);
-                } catch (ModelManagerException $e) {
-                    $this->handleModelManagerException($e);
-
-                    $isFormValid = false;
-                } catch (LockException $e) {
-                    $this->addFlash(
-                        'sonata_flash_error',
-                        $this->trans(
-                            'flash_lock_error',
-                            [
-                                '%name%' => $this->escapeHtml(
-                                    $this->admin->toString($existingObject)
-                                ),
-                                '%link_start%' =>
-                                    '<a href="' .
-                                        $this->admin->generateObjectUrl('edit', $existingObject) .
-                                        '">',
-                                '%link_end%' => '</a>',
-                            ],
-                            'SonataAdminBundle'
-                        )
-                    );
-                }
-            }
-
-            // show an error message if the form failed validation
-            if (!$isFormValid) {
-                if (!$this->isXmlHttpRequest()) {
-                    $this->addFlash(
-                        'sonata_flash_error',
-                        $this->trans(
-                            'flash_edit_error',
-                            [
-                                '%name%' => $this->escapeHtml(
-                                    $this->admin->toString($existingObject)
-                                ),
-                            ],
-                            'SonataAdminBundle'
-                        )
-                    );
-                }
-            } elseif ($this->isPreviewRequested()) {
-                // enable the preview template if the form was valid and preview was requested
-                $templateKey = 'preview';
-                $this->admin->getShow();
-            }
-        }
-
-        $formView = $form->createView();
-        // set the theme for the current Admin Form
-        $this->setFormTheme($formView, $this->admin->getFormTheme());
-
-        // NEXT_MAJOR: Remove this line and use commented line below it instead
-        $template = $this->admin->getTemplate($templateKey);
-
-        // $template = $this->templateRegistry->getTemplate($templateKey);
-
-        return $this->renderWithExtraParams(
-            $template,
-            [
-                'action' => 'edit',
-                'form' => $formView,
-                'object' => $existingObject,
-                'objectId' => $objectId,
-            ],
-            null
-        );
     }
 }
