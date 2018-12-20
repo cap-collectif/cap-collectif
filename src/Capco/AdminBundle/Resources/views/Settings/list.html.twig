@@ -69,11 +69,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% if parameter.keyname == 'homepage.jumbotron.darken' %}
-                                        {{ parameter.value == '0' ? 'global.disabled'|trans({}, 'CapcoAppBundle') : 'global.enabled'|trans({}, 'CapcoAppBundle') }}
-                                    {% else %}
-                                        {{ parameter.value  }}
-                                    {% endif %}
+                                    {{ parameter.value }}
                                 </td>
                                 <td class="sonata-ba-list-field sonata-ba-list-field-actions">
                                     <div class="btn-group">

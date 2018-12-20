@@ -236,6 +236,15 @@ class ExportContext implements KernelAwareContext
                 if ('at' === $suffix) {
                     continue;
                 }
+                if (!isset($actual[$i])) {
+                    throw new \RuntimeException(
+                        sprintf(
+                            "\n\nMissing line %s. \n\n\t%s\n\n",
+                            $i + 1,
+                            implode(' | ', $expected[$i])
+                        )
+                    );
+                }
                 if ($actual[$i][$columnName] !== $cellValue) {
                     throw new \RuntimeException(
                         sprintf(
