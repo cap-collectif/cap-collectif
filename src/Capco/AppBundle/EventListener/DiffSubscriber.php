@@ -18,7 +18,10 @@ class DiffSubscriber implements EventSubscriber
 
     public function getSubscribedEvents(): array
     {
-        return ['prePersist', 'preUpdate'];
+        return [
+            'prePersist',
+            'preUpdate',
+        ];
     }
 
     public function prePersist(LifecycleEventArgs $args)

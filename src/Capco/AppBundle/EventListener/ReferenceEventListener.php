@@ -21,10 +21,7 @@ class ReferenceEventListener
             $classMetaData = $om->getClassMetadata(\get_class($entityInsertion));
 
             // if entity has Reference Trait & has not already a reference (specific case in fixtures)
-            if (
-                $this->hasTrait($classMetaData->getReflectionClass()) &&
-                !$entityInsertion->getReference()
-            ) {
+            if ($this->hasTrait($classMetaData->getReflectionClass()) && !$entityInsertion->getReference()) {
                 $this->updateReferenceIsNecessary($om, $entityInsertion);
             }
         }
@@ -53,9 +50,7 @@ class ReferenceEventListener
             return;
         }
 
-        $lastEntity = $om
-            ->getRepository(\get_class($entity))
-            ->findOneBy([], ['reference' => 'DESC']);
+        $lastEntity = $om->getRepository(\get_class($entity))->findOneBy([], ['reference' => 'DESC']);
 
         if (null === $lastEntity) {
             $entity->setReference(1);

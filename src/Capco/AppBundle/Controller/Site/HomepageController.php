@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\NewsletterSubscription;
@@ -7,23 +6,16 @@ use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
+use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Resolver\SectionResolver;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class HomepageController extends Controller
 {
-    private $serializer;
-
-    public function __construct(SerializerInterface $serializer)
-    {
-        $this->serializer = $serializer;
-    }
-
     /**
      * @Route("/", name="app_homepage")
      * @Cache(smaxage="60", public=true)
@@ -92,19 +84,13 @@ class HomepageController extends Controller
      */
     public function highlightedContentAction(Section $section = null)
     {
+        $serializer = $this->get('jms_serializer');
         $highlighteds = $this->get('capco.highlighted.repository')->getAllOrderedByPosition(4);
-        $props = $this->serializer->serialize(['highlighteds' => $highlighteds], 'json', [
-            'groups' => [
-                'HighlightedContent',
-                'Posts',
-                'Events',
-                'Projects',
-                'Themes',
-                'ThemeDetails',
-                'Default',
-                'Proposals',
-            ],
-        ]);
+        $props = $serializer->serialize(
+            ['highlighteds' => $highlighteds],
+            'json',
+            SerializationContext::create()->setSerializeNull(true)
+        );
 
         return ['props' => $props, 'section' => $section];
     }
@@ -175,12 +161,14 @@ class HomepageController extends Controller
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProjects.html.twig")
      */
-    public function lastProjectsAction(int $max = null, int $offset = null, Section $section = null)
-    {
+    public function lastProjectsAction(
+        int $max = null,
+        int $offset = null,
+        Section $section = null
+    ) {
         $max = $max ?? 3;
         $projectRepo = $this->get(ProjectRepository::class);
         $count = $projectRepo->countPublished($this->getUser());
-
         return ['max' => $max, 'count' => $count, 'section' => $section];
     }
 

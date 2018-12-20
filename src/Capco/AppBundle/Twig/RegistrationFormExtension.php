@@ -3,17 +3,16 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Repository\RegistrationFormRepository;
-use Symfony\Component\Serializer\SerializerInterface;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 
 class RegistrationFormExtension extends \Twig_Extension
 {
     protected $formRepo;
     protected $serializer;
 
-    public function __construct(
-        RegistrationFormRepository $formRepo,
-        SerializerInterface $serializer
-    ) {
+    public function __construct(RegistrationFormRepository $formRepo, Serializer $serializer)
+    {
         $this->formRepo = $formRepo;
         $this->serializer = $serializer;
     }
@@ -28,20 +27,11 @@ class RegistrationFormExtension extends \Twig_Extension
     public function serializeFields(): array
     {
         $form = $this->formRepo->findCurrent();
-        $serializedQuestions = $this->serializer->serialize(
-            $form ? $form->getRealQuestions() : [],
-            'json',
-            [
-                'groups' => ['Questions'],
-            ]
-        );
 
         $serializedDomains = $this->serializer->serialize(
             $form ? $form->getDomains() : [],
             'json',
-            [
-                'groups' => ['EmailDomain'],
-            ]
+            (new SerializationContext())->setGroups(['EmailDomain'])
         );
 
         return [

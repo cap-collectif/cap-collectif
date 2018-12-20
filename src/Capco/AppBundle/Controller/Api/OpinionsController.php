@@ -53,7 +53,7 @@ class OpinionsController extends FOSRestController
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @ParamConverter("type", options={"mapping": {"typeId": "id"}})
      * @Security("has_role('ROLE_USER')")
-     * @View(statusCode=201, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
+     * @View(statusCode=201, serializerGroups={})
      */
     public function postOpinionAction(
         Request $request,

@@ -1,0 +1,15 @@
+Capco\AppBundle\Entity\Synthesis\SynthesisUser:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      groups: [Users, UserInfos]
+    displayName:
+      expose: true
+      groups: [Users, UsersInfos]
+    uniqueIdentifier:
+      expose: true
+      groups: [Users, UserInfos]
+    isAdmin:
+      expose: true
+      groups: [UserInfos]

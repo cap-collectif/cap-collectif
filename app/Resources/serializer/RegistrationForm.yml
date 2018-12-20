@@ -1,0 +1,2 @@
+Capco\AppBundle\Entity\RegistrationForm:
+  exclusion_policy: ALL

@@ -9,7 +9,6 @@ use Capco\AppBundle\Resolver\UrlResolver;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Routing\Router;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class ThemeExtension extends \Twig_Extension
 {
@@ -25,7 +24,7 @@ class ThemeExtension extends \Twig_Extension
         ThemeRepository $themeRepo,
         ProjectRepository $projectRepo,
         \Twig_Extensions_Extension_Intl $twig,
-        SerializerInterface $serializer,
+        Serializer $serializer,
         Router $router,
         StepHelper $stepHelper,
         UrlResolver $urlResolver
@@ -113,10 +112,15 @@ class ThemeExtension extends \Twig_Extension
                 $projectStepsData[] = $stepData;
                 $projectStepsByIdData[$realStep->getId()] = $stepData;
             }
-
-            $projectSerialized = $this->serializer->serialize($project, 'json', [
-                'groups' => ['Projects', 'UserDetails', 'UserVotes', 'ThemeDetails', 'ProjectType'],
+            $context = new SerializationContext();
+            $context->setGroups([
+                'Projects',
+                'UserDetails',
+                'UserVotes',
+                'ThemeDetails',
+                'ProjectType',
             ]);
+            $projectSerialized = $this->serializer->serialize($project, 'json', $context);
 
             $projectData = json_decode($projectSerialized, true);
             $projectData['steps'] = $projectStepsData;

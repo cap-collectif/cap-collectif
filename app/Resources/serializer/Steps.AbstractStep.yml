@@ -1,0 +1,68 @@
+Capco\AppBundle\Entity\Steps\AbstractStep:
+  exclusion_policy: ALL
+  discriminator:
+    field_name: step_type
+    map:
+      consultation: Capco\AppBundle\Entity\Steps\ConsultationStep
+      presentation: Capco\AppBundle\Entity\Steps\PresentationStep
+      other: Capco\AppBundle\Entity\Steps\OtherStep
+      synthesis: Capco\AppBundle\Entity\Steps\SynthesisStep
+      collect: Capco\AppBundle\Entity\Steps\CollectStep
+      ranking: Capco\AppBundle\Entity\Steps\RankingStep
+      selection: Capco\AppBundle\Entity\Steps\SelectionStep
+      questionnaire: Capco\AppBundle\Entity\Steps\QuestionnaireStep
+  properties:
+    id:
+      expose: true
+      type: string
+      groups: [Opinions, Proposals, Steps, SelectionStepId, Elasticsearch]
+    title:
+      expose: true
+      type: string
+      groups: [Steps]
+    isEnabled:
+      expose: true
+      type: boolean
+      groups: [Steps]
+      serialized_name: enabled
+    startAt:
+      expose: true
+      type: DateTime
+      groups: [Steps]
+      serialized_name: startAt
+    endAt:
+      expose: true
+      type: DateTime
+      groups: [Steps]
+      serialized_name: endAt
+    body:
+      expose: true
+      type: string
+      groups: [Steps]
+    statuses:
+      expose: true
+      groups: [SelectionSteps, Statuses]
+  virtual_properties:
+    getProjectId:
+      expose: true
+      type: string
+      groups: [Steps]
+      serialized_name: projectId
+    getPosition:
+      expose: true
+      type: integer
+      groups: [Steps]
+      serialized_name: position
+    isOpen:
+      expose: true
+      type: boolean
+      groups: [Steps]
+      serialized_name: open
+    getType:
+      expose: true
+      groups: [StepTypes]
+      seriealized_name: type
+    isTimeless:
+      expose: true
+      groups: [Steps]
+      serialized_name: timeless

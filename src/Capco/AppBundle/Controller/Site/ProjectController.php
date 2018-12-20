@@ -36,14 +36,21 @@ class ProjectController extends Controller
      */
     public function lastProjectsAction($max = 4, $offset = 0)
     {
-        $props = $this->get('serializer')->serialize(
+        $props = $this->get('jms_serializer')->serialize(
             [
                 'projects' => $this->get(
                     'Capco\AppBundle\Repository\ProjectRepository'
                 )->getLastPublished($max, $offset, $this->getUser()),
             ],
             'json',
-            ['Projects', 'Steps', 'UserDetails', 'StepTypes', 'ThemeDetails', 'ProjectType']
+            SerializationContext::create()->setGroups([
+                'Projects',
+                'Steps',
+                'UserDetails',
+                'StepTypes',
+                'ThemeDetails',
+                'ProjectType',
+            ])
         );
 
         return ['props' => $props];

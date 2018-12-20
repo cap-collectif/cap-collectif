@@ -1,0 +1,29 @@
+Capco\AppBundle\Entity\Argument:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: string
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+    body:
+      expose: true
+      type: string
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+    type:
+      expose: true
+      groups: [Opinions, OpinionVersions]
+    createdAt:
+      expose: true
+      type: DateTime
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+      serialized_name: createdAt
+    updatedAt:
+      expose: true
+      type: DateTime
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+      serialized_name: updatedAt
+    Author:
+      expose: true
+      type: Capco\UserBundle\Entity\User
+      serialized_name: author
+      groups: [Opinions, OpinionVersions, UserMedias]

@@ -1,0 +1,23 @@
+Capco\AppBundle\Entity\Steps\ConsultationStep:
+  exclusion_policy: ALL
+  properties:
+    titleHelpText:
+      expose: true
+      type: string
+      groups: [ConsultationSteps]
+      serialized_name: titleHelpText
+    descriptionHelpText:
+      expose: true
+      type: string
+      groups: [ConsultationSteps]
+      serialized_name: descriptionHelpText
+    opinionCountShownBySection:
+      expose: true
+      type: integer
+      groups: [ConsultationSteps]
+      serialized_name: opinionCountShownBySection
+  virtual_properties:
+    getProjectId:
+      serialized_name: projectId
+      groups: [Opinions, ConsultationSteps]
+      type: string

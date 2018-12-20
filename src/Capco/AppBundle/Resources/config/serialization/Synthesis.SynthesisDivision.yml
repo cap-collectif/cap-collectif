@@ -1,8 +1,0 @@
-Capco\AppBundle\Entity\Synthesis\SynthesisDivision:
-  attributes:
-    id:
-      groups: [ElementDetails]
-    originalElement:
-      groups: [ElementDetails]
-    elements:
-      groups: [ElementDetails]

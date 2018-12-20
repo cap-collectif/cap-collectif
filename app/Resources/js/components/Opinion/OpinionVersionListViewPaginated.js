@@ -7,24 +7,18 @@ import OpinionVersion from './OpinionVersion';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { OpinionVersionListViewPaginated_opinion } from './__generated__/OpinionVersionListViewPaginated_opinion.graphql';
 
-type Props = {|
+type Props = {
   relay: RelayPaginationProp,
   opinion: OpinionVersionListViewPaginated_opinion,
-|};
-type State = {|
+};
+type State = {
   loading: boolean,
-|};
+};
 
 class OpinionVersionListViewPaginated extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  };
-
   render() {
     const { opinion, relay } = this.props;
-    const { loading } = this.state;
-    const { edges } = opinion.versions;
-    if (!edges || edges.length === 0) {
+    if (!opinion.versions.edges || opinion.versions.edges.length === 0) {
       return (
         <Panel.Body className="text-center">
           <i className="cap-32 cap-baloon-1" />
@@ -36,7 +30,7 @@ class OpinionVersionListViewPaginated extends React.Component<Props, State> {
 
     return (
       <ListGroup id="versions-list" className="list-group-custom">
-        {edges
+        {opinion.versions.edges
           .filter(Boolean)
           .map(edge => edge.node)
           .filter(Boolean)
@@ -46,7 +40,7 @@ class OpinionVersionListViewPaginated extends React.Component<Props, State> {
           ))}
         {relay.hasMore() && (
           <ListGroupItem style={{ textAlign: 'center' }}>
-            {loading ? (
+            {this.state.loading ? (
               <Loader />
             ) : (
               <Button

@@ -40,48 +40,32 @@ class CommentSubscriber implements EventSubscriberInterface
                 $comment = [
                     'notifyTo' => self::NOTIFY_TO_ADMIN,
                     'anonymous' => $isAnonymous,
-                    'notifying' => $comment
-                        ->getProposal()
-                        ->getProposalForm()
-                        ->isNotifyingCommentOnDelete(),
-                    'username' => $isAnonymous
-                        ? $comment->getAuthorName()
-                        : $comment->getAuthor()->getDisplayName(),
+                    'notifying' => $comment->getProposal()->getProposalForm()->isNotifyingCommentOnDelete(),
+                    'username' => $isAnonymous ? $comment->getAuthorName() : $comment->getAuthor()->getDisplayName(),
                     'userSlug' => $isAnonymous ? null : $comment->getAuthor()->getSlug(),
                     'body' => $comment->getBodyTextExcerpt(),
                     'proposal' => $comment->getProposal()->getTitle(),
-                    'projectSlug' => $comment
-                        ->getProposal()
-                        ->getProject()
-                        ->getSlug(),
-                    'stepSlug' => $comment
-                        ->getProposal()
-                        ->getProposalForm()
-                        ->getStep()
-                        ->getSlug(),
+                    'projectSlug' => $comment->getProposal()->getProject()->getSlug(),
+                    'stepSlug' => $comment->getProposal()->getProposalForm()->getStep()->getSlug(),
                     'proposalSlug' => $comment->getProposal()->getSlug(),
                 ];
-                $this->publisher->publish('comment.delete', new Message(json_encode($comment)));
+                $this->publisher->publish('comment.delete', new Message(
+                    json_encode($comment)
+                ));
             }
         } elseif ('add' === $action) {
             $entity->increaseCommentsCount(1);
-            $this->publisher->publish(
-                'comment.create',
-                new Message(
-                    json_encode([
-                        'commentId' => $comment->getId(),
-                    ])
-                )
-            );
+            $this->publisher->publish('comment.create', new Message(
+                json_encode([
+                    'commentId' => $comment->getId(),
+                ])
+            ));
         } elseif ('update' === $action) {
-            $this->publisher->publish(
-                'comment.update',
-                new Message(
-                    json_encode([
-                        'commentId' => $comment->getId(),
-                    ])
-                )
-            );
+            $this->publisher->publish('comment.update', new Message(
+                json_encode([
+                    'commentId' => $comment->getId(),
+                ])
+            ));
         }
     }
 }

@@ -1,4 +1,0 @@
-Capco\AppBundle\Entity\EmailDomain:
-  attributes:
-    value:
-      groups: [EmailDomain]

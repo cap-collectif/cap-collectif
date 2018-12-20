@@ -1,6 +1,0 @@
-Capco\AppBundle\Entity\AppendixType:
-  attributes:
-    id:
-      groups: [Opinions, OpinionVersions]
-    title:
-      groups: [Opinions, OpinionVersions, OpinionTypeDetails]

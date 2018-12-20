@@ -31,18 +31,6 @@ InternalQuery:
             defaultValue: false
             description: 'Remove super admin from export.'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserQueryResolver", [args])'
-      userSearch:
-        type: '[InternalUser]'
-        args:
-          displayName:
-            type: 'String'
-            defaultValue: null
-            description: 'Filter by displayName.'
-          notInIds:
-            type: '[String]'
-            defaultValue: null
-            description: 'Return all users except the ones in the array.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserSearchQueryResolver", [args])'
       consultations:
         type: '[InternalConsultation!]!'
         args:

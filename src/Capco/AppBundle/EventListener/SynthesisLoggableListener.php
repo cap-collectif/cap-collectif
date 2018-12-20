@@ -25,9 +25,7 @@ class SynthesisLoggableListener extends LoggableListener
         if (\is_object($user) && method_exists($user, 'getSlug')) {
             $this->username = (string) $user->getSlug();
         } else {
-            throw new \Gedmo\Exception\InvalidArgumentException(
-                'User must have a getSlug method or a JWTToken object'
-            );
+            throw new \Gedmo\Exception\InvalidArgumentException('User must have a getSlug method or a JWTToken object');
         }
     }
 }
