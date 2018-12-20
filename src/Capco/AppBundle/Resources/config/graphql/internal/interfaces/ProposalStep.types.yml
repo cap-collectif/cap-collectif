@@ -26,6 +26,10 @@ ProposalStep:
         type: 'String'
       voteThreshold:
         type: 'Int'
+      statuses:
+        type: '[Status!]!'
+      defaultSort:
+        type: 'String' # should be an enum
       open:
         type: 'Boolean!'
       votesRanking:

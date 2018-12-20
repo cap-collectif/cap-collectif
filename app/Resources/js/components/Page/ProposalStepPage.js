@@ -19,24 +19,25 @@ import type {
 } from './__generated__/ProposalStepPageQuery.graphql';
 import config from '../../config';
 
-type Props = {
-  step: Object,
-  defaultSort: ?string,
-  form: Object,
+type OwnProps = {|
+  stepId: string,
+|};
+
+type Props = {|
+  step: { id: string },
   filters: Object,
   order: ?string,
   terms: ?string,
-  statuses: Array<Object>,
-  categories: Array<Object>,
   isAuthenticated: boolean,
   selectedViewByStep: string,
   features: FeatureToggles,
-};
+|};
 
 export class ProposalStepPage extends React.Component<Props> {
+  initialRenderVars: Object;
+
   constructor(props: Props) {
     super(props);
-    // $FlowFixMe
     this.initialRenderVars = {
       term: props.terms,
       ...queryVariables(props.filters, props.order),
@@ -44,32 +45,7 @@ export class ProposalStepPage extends React.Component<Props> {
   }
 
   render() {
-    const {
-      categories,
-      form,
-      statuses,
-      step,
-      defaultSort,
-      isAuthenticated,
-      selectedViewByStep,
-      features,
-    } = this.props;
-
-    let geoJsons = [];
-    try {
-      geoJsons = form.districts
-        .filter(d => d.geojson && d.displayedOnMap)
-        .map(d => ({
-          district: JSON.parse(d.geojson),
-          style: {
-            border: d.border,
-            background: d.background,
-          },
-        }));
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error("Can't parse your geojsons !", e);
-    }
+    const { step, isAuthenticated, selectedViewByStep, features } = this.props;
 
     return (
       <div className="proposal__step-page">
@@ -95,31 +71,56 @@ export class ProposalStepPage extends React.Component<Props> {
                 ...UnpublishedProposalListView_viewer
               }
               step: node(id: $stepId) {
-                id
-                ...ProposalListView_step @arguments(count: $count)
-                ...UnpublishedProposalListView_step @arguments(isAuthenticated: $isAuthenticated)
-                ...ProposalStepPageHeader_step
-                ... on Step {
-                  kind
-                }
-                ... on CollectStep {
-                  private
-                  ...DraftProposalList_step @arguments(isAuthenticated: $isAuthenticated)
-                }
                 ... on ProposalStep {
+                  id
+                  defaultSort
                   voteType
+                  statuses {
+                    id
+                    name
+                  }
+                  form {
+                    latMap
+                    lngMap
+                    zoomMap
+                    districts(order: ALPHABETICAL) {
+                      displayedOnMap
+                      geojson
+                      border {
+                        id
+                        enabled
+                        color
+                        opacity
+                        size
+                      }
+                      background {
+                        id
+                        enabled
+                        color
+                        opacity
+                        size
+                      }
+                    }
+                  }
+                  kind
+                  ...ProposalListFilters_step
+                  ...ProposalListView_step @arguments(count: $count)
+                  ...UnpublishedProposalListView_step @arguments(isAuthenticated: $isAuthenticated)
+                  ...ProposalStepPageHeader_step
+                  ... on CollectStep {
+                    private
+                    ...DraftProposalList_step @arguments(isAuthenticated: $isAuthenticated)
+                  }
                 }
               }
             }
           `}
           variables={
-            // $FlowFixMe
             ({
-              stepId: this.props.step.id,
-              isAuthenticated: this.props.isAuthenticated,
+              stepId: step.id,
+              isAuthenticated,
               count: config.isMobile ? 25 : 50,
               cursor: null,
-              // $FlowFixMe
               ...this.initialRenderVars,
             }: ProposalStepPageQueryVariables)
           }
@@ -132,43 +133,50 @@ export class ProposalStepPage extends React.Component<Props> {
               if (!props.step) {
                 return graphqlError;
               }
+              const form = props.step.form;
+              if (!form) return;
+
+              let geoJsons = [];
+              try {
+                geoJsons = form.districts
+                  .filter(d => d.geojson && d.displayedOnMap)
+                  .map(d => ({
+                    // $FlowFixMe geojson is string
+                    district: JSON.parse(d.geojson),
+                    style: {
+                      border: d.border,
+                      background: d.background,
+                    },
+                  }));
+              } catch (e) {
+                // eslint-disable-next-line no-console
+                console.error("Can't parse your geojsons !", e);
+              }
               return (
                 <div id="proposal__step-page-rendered">
                   {isAuthenticated &&
-                    // $FlowFixMe
+                    // $FlowFixMe $refType
                     props.step.kind === 'collect' && <DraftProposalList step={props.step} />}
                   {isAuthenticated && (
-                    // $FlowFixMe
+                    // $FlowFixMe $refType
                     <UnpublishedProposalListView step={props.step} viewer={props.viewer} />
                   )}
-                  {/* $FlowFixMe */}
+                  {/* $FlowFixMe $refType */}
                   <ProposalStepPageHeader step={props.step} />
                   {/* $FlowFixMe please use mapDispatchToProps */}
-                  <ProposalListFilters
-                    statuses={statuses}
-                    categories={categories}
-                    districts={form.districts}
-                    defaultSort={defaultSort}
-                    orderByVotes={props.step.voteType !== 'DISABLED'}
-                    orderByComments={form.commentable}
-                    orderByCost={form.costable}
-                    showThemes={form.usingThemes}
-                    showDistrictFilter={form.usingDistrict}
-                    showCategoriesFilter={form.usingCategories}
-                    showMapButton={form.usingAddress && !props.step.private && features.display_map}
-                  />
-                  {features.display_map ? (
+                  <ProposalListFilters step={props.step} />
+                  {props.step && !props.step.private && features.display_map ? (
                     /* $FlowFixMe please use mapDispatchToProps */
                     <LeafletMap
                       geoJsons={geoJsons}
                       defaultMapOptions={{
-                        center: { lat: form.latMap, lng: form.lngMap },
-                        zoom: form.zoomMap,
+                        center: { lat: form.latMap ?? 48.8586047, lng: form.lngMap ?? 2.3137325 },
+                        zoom: form.zoomMap ?? 10,
                       }}
-                      visible={selectedViewByStep === 'map' && !props.step.private}
+                      visible={selectedViewByStep === 'map'}
                     />
                   ) : null}
-                  {/* $FlowFixMe */}
+                  {/* $FlowFixMe $refType */}
                   <ProposalListView
                     step={props.step}
                     viewer={props.viewer || null}
@@ -190,7 +198,7 @@ export class ProposalStepPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State, props: Object) => ({
+const mapStateToProps = (state: State, props: OwnProps) => ({
   stepId: undefined,
   isAuthenticated: state.user.user !== null,
   filters: state.proposal.filters || {},

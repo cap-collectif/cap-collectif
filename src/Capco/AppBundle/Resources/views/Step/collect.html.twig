@@ -46,7 +46,7 @@
             </p>
         </div>
     {% else %}
-        {{ react_render_component('ProposalStepPageApp', { 'props': props }) }}
+        {{ react_render_component('ProposalStepPageApp', { 'props': { stepId: currentStep.id } }) }}
     {% endif %}
 
 {% endblock %}
