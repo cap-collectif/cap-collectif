@@ -2,50 +2,51 @@
 
 namespace Capco\AppBundle\Client;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 
 class MapboxClient
 {
     private const BASE_URL = 'https://api.mapbox.com';
 
-    private $_client;
-    private $_version = 'v2';
-    private $_endpoint;
-    private $_parameters = [];
-    private $_uri;
-    private $_path;
+    private $client;
+    private $version = 'v2';
+    private $endpoint;
+    private $parameters = [];
+    private $uri;
+    private $path;
 
     public function __construct()
     {
-        $this->_client = new \GuzzleHttp\Client([
+        $this->client = new Client([
             'headers' => ['Content-Type' => 'application/json'],
         ]);
     }
 
-    public function endpoint(string $endpoint): self
+    public function setEndpoint(string $endpoint): self
     {
-        $this->_endpoint = $endpoint;
+        $this->endpoint = $endpoint;
 
         return $this;
     }
 
-    public function path(string $path): self
+    public function setPath(string $path): self
     {
-        $this->_path = $path;
+        $this->path = $path;
 
         return $this;
     }
 
-    public function version(string $version): self
+    public function setVersion(string $version): self
     {
-        $this->_version = $version;
+        $this->version = $version;
 
         return $this;
     }
 
     public function addParameter(string $parameter, $value): self
     {
-        $this->_parameters[$parameter] = $value;
+        $this->parameters[$parameter] = $value;
 
         return $this;
     }
@@ -54,8 +55,8 @@ class MapboxClient
     {
         $this->prepareUri();
 
-        $response = $this->_client->get($this->_uri, [
-            'query' => $this->_parameters,
+        $response = $this->client->get($this->uri, [
+            'query' => $this->parameters,
         ]);
 
         return json_decode((string) $response->getBody(), true);
@@ -65,8 +66,8 @@ class MapboxClient
     {
         $this->prepareUri();
 
-        $response = $this->_client->post($this->_uri, [
-            'query' => $this->_parameters,
+        $response = $this->client->post($this->uri, [
+            'query' => $this->parameters,
             RequestOptions::JSON => $data,
         ]);
 
@@ -75,14 +76,14 @@ class MapboxClient
 
     private function prepareUri(): void
     {
-        $this->_uri = self::BASE_URL . '/';
-        if ($this->_endpoint) {
-            $this->_uri .= $this->_endpoint . '/';
+        $this->uri = self::BASE_URL . '/';
+        if ($this->endpoint) {
+            $this->uri .= $this->endpoint . '/';
         }
-        $this->_uri .= $this->_version . '/';
+        $this->uri .= $this->version . '/';
 
-        if ($this->_path) {
-            $this->_uri .= $this->_path . '/';
+        if ($this->path) {
+            $this->uri .= $this->path . '/';
         }
     }
 }

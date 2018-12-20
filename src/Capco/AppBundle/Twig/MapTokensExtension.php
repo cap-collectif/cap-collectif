@@ -3,20 +3,14 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Repository\MapTokenRepository;
-use JMS\Serializer\SerializerInterface;
 
 class MapTokensExtension extends \Twig_Extension
 {
     private $repository;
-    /**
-     * @var SerializerInterface
-     */
-    private $serializer;
 
-    public function __construct(MapTokenRepository $repository, SerializerInterface $serializer)
+    public function __construct(MapTokenRepository $repository)
     {
         $this->repository = $repository;
-        $this->serializer = $serializer;
     }
 
     public function getFunctions(): array

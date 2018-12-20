@@ -36,14 +36,14 @@ class MapTokenStylesResolver implements ResolverInterface
         }
 
         $owner = $this->mapboxClient
-            ->endpoint('tokens')
-            ->addParameter('access_token', $mapToken->getPublicToken())
+            ->setEndpoint('tokens')
+            ->addParameter('access_token', $mapToken->getSecretToken())
             ->get()['token']['user'];
 
         $apiStyles = $this->mapboxClient
-            ->version('v1')
-            ->endpoint('styles')
-            ->path($owner)
+            ->setVersion('v1')
+            ->setEndpoint('styles')
+            ->setPath($owner)
             ->addParameter('access_token', $mapToken->getSecretToken())
             ->get();
 
@@ -54,7 +54,7 @@ class MapTokenStylesResolver implements ResolverInterface
         }, $apiStyles);
 
         if ($visibility) {
-            $styles = array_filter($styles, function(MapboxStyle $style) use ($visibility) {
+            $styles = array_filter($styles, function (MapboxStyle $style) use ($visibility) {
                 return $style->getVisibility() === $visibility;
             });
         }

@@ -63,7 +63,7 @@ class ChangeMapProviderTokenMutation implements MutationInterface
             throw new \RuntimeException('Map Token not found!');
         }
 
-        if ($publicToken && '' !== $publicToken && !$this->isValidToken($publicToken)) {
+        if ($publicToken && '' !== $publicToken && !$this->isValidMapboxToken($publicToken)) {
             $this->logger->error(
                 'Invalid public token given for provider ' . MapProviderEnum::MAPBOX
             );
@@ -71,7 +71,7 @@ class ChangeMapProviderTokenMutation implements MutationInterface
             throw new UserError(self::ERROR_INVALID_PUBLIC_TOKEN);
         }
 
-        if ($secretToken && '' !== $secretToken && !$this->isValidToken($secretToken)) {
+        if ($secretToken && '' !== $secretToken && !$this->isValidMapboxToken($secretToken, true)) {
             $this->logger->error(
                 'Invalid secret token given for provider ' . MapProviderEnum::MAPBOX
             );
@@ -94,10 +94,17 @@ class ChangeMapProviderTokenMutation implements MutationInterface
         return ['mapToken' => $mapboxMapToken];
     }
 
-    private function isValidToken(string $token): bool
+    private function isValidMapboxToken(string $token, ?bool $isSecret = false): bool
     {
+        if ($isSecret && 0 !== strpos($token, 'sk')) {
+            return false;
+        }
+
+        if (!$isSecret && 0 !== strpos($token, 'pk')) {
+            return false;
+        }
         $code = $this->mapboxClient
-            ->endpoint('tokens')
+            ->setEndpoint('tokens')
             ->addParameter('access_token', $token)
             ->get()['code'];
 

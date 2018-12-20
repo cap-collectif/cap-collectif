@@ -17,18 +17,21 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class GenerateMapProviderPublicToken extends Command
 {
     public const MAPBOX_USERNAME = 'capcollectif';
+    const MAPBOX_SECRET_TOKEN_SCOPES = [
+        'styles:tiles',
+        'styles:read',
+        'fonts:read',
+        'datasets:read',
+    ];
 
     protected static $defaultName = 'capco:generate:map-token';
-    private $siteParameterResolver;
     /**
      * @var SymfonyStyle
      */
     private $io;
+    private $siteParameterResolver;
     private $mapboxClient;
     private $mapTokenRepository;
-    /**
-     * @var EntityManagerInterface
-     */
     private $em;
     private $mapboxSecretKey;
 
@@ -95,11 +98,11 @@ class GenerateMapProviderPublicToken extends Command
         $this->io->text('Requesting <info>Mapbox API</info>...');
 
         $response = $this->mapboxClient
-            ->endpoint('tokens')
-            ->path(self::MAPBOX_USERNAME)
+            ->setEndpoint('tokens')
+            ->setPath(self::MAPBOX_USERNAME)
             ->addParameter('access_token', $this->mapboxSecretKey)
             ->post([
-                'scopes' => ['styles:tiles', 'styles:read', 'fonts:read', 'datasets:read'],
+                'scopes' => self::MAPBOX_SECRET_TOKEN_SCOPES,
                 'note' => 'Public token for ' . $sitename,
             ]);
 

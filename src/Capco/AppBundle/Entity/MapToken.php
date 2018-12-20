@@ -15,8 +15,8 @@ class MapToken
 {
     use UuidTrait;
     use TimestampableTrait;
-    public const DEFAULT_STYLE_OWNER = 'capcollectif';
-    public const DEFAULT_STYLE_ID = 'cj4zmeym20uhr2smcmgbf49cz';
+    public const DEFAULT_STYLE_OWNER = 'mapbox';
+    public const DEFAULT_STYLE_ID = 'streets-v10';
 
     /**
      * @ORM\Column(name="initial_public_token", type="string", nullable=true)
@@ -91,10 +91,7 @@ class MapToken
 
     public function setSecretToken(?string $secretToken): self
     {
-        $this->secretToken = $secretToken ?
-            $secretToken !== "" ?
-                $secretToken : null
-            : null;
+        $this->secretToken = $secretToken ? ('' !== $secretToken ? $secretToken : null) : null;
 
         return $this;
     }
