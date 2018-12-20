@@ -34,7 +34,9 @@ class MapToken
     protected $secretToken;
 
     /**
-     * @ORM\Column(name="provider", type="string", columnDefinition="ENUM('MAPBOX')", nullable=false)
+     * Should not be nullable, but was causing issues when differing schemas and was always altering table.
+     *
+     * @ORM\Column(name="provider", type="string", columnDefinition="ENUM('MAPBOX')", nullable=true)
      */
     protected $provider = MapProviderEnum::MAPBOX;
 

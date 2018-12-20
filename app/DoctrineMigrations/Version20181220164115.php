@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20181214112736 extends AbstractMigration
+final class Version20181220164115 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
@@ -21,7 +21,7 @@ final class Version20181214112736 extends AbstractMigration
         );
 
         $this->addSql(
-            'CREATE TABLE map_token (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', initial_public_token VARCHAR(255) DEFAULT NULL, public_token VARCHAR(255) DEFAULT NULL, secret_token VARCHAR(255) DEFAULT NULL, style_owner VARCHAR(255) DEFAULT NULL, ADD style_id VARCHAR(255) DEFAULT NULL, provider ENUM(\'MAPBOX\'), created_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
+            'CREATE TABLE map_token (id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\', initial_public_token VARCHAR(255) DEFAULT NULL, public_token VARCHAR(255) DEFAULT NULL, secret_token VARCHAR(255) DEFAULT NULL, provider ENUM(\'MAPBOX\'), style_owner VARCHAR(255) DEFAULT NULL, style_id VARCHAR(255) DEFAULT NULL, created_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB'
         );
     }
 
