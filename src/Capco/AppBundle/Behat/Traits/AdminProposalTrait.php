@@ -23,18 +23,18 @@ trait AdminProposalTrait
 
     /**
      * @When I go to the admin proposal :tab tab
-     *
-     * @param mixed $tab
      */
-    public function iGoToTheAdminProposalTab($tab)
+    public function iGoToTheAdminProposalTab(string $tab)
     {
         $page = $this->getCurrentPage();
-        $this->iWait(3); // Wait alert to disappear
+        // Wait alert to disappear
+        $this->iWait(3);
+        // Wait tab to appear
         $this->getSession()->wait(
-            3000,
+            5000,
             "$('" . $page->getSelector('proposal ' . $tab . ' tab') . "').length > 0"
         );
-        $page->clickOnTab("proposal $tab");
+        $page->clickOnTab("proposal ${tab}");
         $this->iWait(1);
     }
 
@@ -129,7 +129,7 @@ trait AdminProposalTrait
 
     /**
      * @When I fill the proposal element :element with value :value
-     **/
+     */
     public function iFillTheProposalElementWithValue(string $element, string $value)
     {
         $this->getCurrentPage()->fillElementWithValue($element, $value);
