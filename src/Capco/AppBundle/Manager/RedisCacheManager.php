@@ -1,16 +1,11 @@
 <?php
-
-namespace Capco\AppBundle\Cache;
+namespace Capco\AppBundle\Manager;
 
 use Predis\ClientInterface;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 
-class RedisCache extends RedisAdapter
+class RedisCacheManager extends RedisAdapter
 {
-    public const ONE_MINUTE = 60;
-    public const ONE_HOUR = 3600;
-    public const ONE_DAY = 50400;
-
     private $client;
 
     public function __construct(

@@ -6,15 +6,13 @@ use Capco\AppBundle\Helper\StepHelper;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Serializer\SerializerInterface;
-use Capco\AppBundle\Cache\RedisCache;
 
 class ThemeExtension extends \Twig_Extension
 {
-    public const LIST_PROJECTS_CACHE_KEY = 'listProjects';
-    public const LIST_THEMES_CACHE_KEY = 'listThemes';
-
     protected $themeRepo;
     protected $projectRepo;
     protected $twig;
@@ -22,7 +20,6 @@ class ThemeExtension extends \Twig_Extension
     private $serializer;
     private $router;
     private $urlResolver;
-    private $cache;
 
     public function __construct(
         ThemeRepository $themeRepo,
@@ -31,8 +28,7 @@ class ThemeExtension extends \Twig_Extension
         SerializerInterface $serializer,
         Router $router,
         StepHelper $stepHelper,
-        UrlResolver $urlResolver,
-        RedisCache $cache
+        UrlResolver $urlResolver
     ) {
         $this->themeRepo = $themeRepo;
         $this->projectRepo = $projectRepo;
@@ -41,7 +37,6 @@ class ThemeExtension extends \Twig_Extension
         $this->router = $router;
         $this->stepHelper = $stepHelper;
         $this->urlResolver = $urlResolver;
-        $this->cache = $cache;
     }
 
     public function getFunctions(): array
@@ -52,122 +47,98 @@ class ThemeExtension extends \Twig_Extension
         ];
     }
 
-    /*
-     * This inject lot of projects data in redux-store
-     * Should be refactored when we can use APIs everywhere
-     */
     public function listProjects(): array
     {
-        $cachedItem = $this->cache->getItem(self::LIST_PROJECTS_CACHE_KEY);
+        $projects = $this->projectRepo->findAll();
+        $data = [];
 
-        if (!$cachedItem->isHit()) {
-            $projects = $this->projectRepo->findAll();
-            $data = [];
-
-            foreach ($projects as $project) {
-                $projectStepsData = [];
-                $projectStepsByIdData = [];
-                foreach ($project->getSteps() as $step) {
-                    $realStep = $step->getStep();
-                    $projectStepsStatus = [];
-                    foreach ($realStep->getStatuses() as $status) {
-                        $projectStepsStatus[] = [
-                            'id' => $status->getId(),
-                            'name' => $status->getName(),
-                        ];
-                    }
-
-                    $stepData = [
-                        'id' => $realStep->getId(),
-                        'title' => $realStep->getTitle(),
-                        'label' => $realStep->getLabel(),
-                        'body' => $realStep->getBody(),
-                        'slug' => $realStep->getSlug(),
-                        'startAt' => $realStep->getStartAt()
-                            ? $realStep->getStartAt()->format(\DateTime::ATOM)
-                            : null,
-                        'endAt' => $realStep->getEndAt()
-                            ? $realStep->getEndAt()->format(\DateTime::ATOM)
-                            : null,
-                        'position' => $realStep->getPosition(),
-                        'type' => $realStep->getType(),
-                        'enabled' => $realStep->getIsEnabled(),
-                        'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps')
-                            ? $realStep->isAllowingProgressSteps()
-                            : false,
-                        'statuses' => $projectStepsStatus,
-                        'status' => $this->stepHelper->getStatus($realStep),
-                        'open' => $realStep->isOpen(),
-                        'timeless' => $realStep->isTimeless(),
-                        'titleHelpText' => method_exists($realStep, 'getTitleHelpText')
-                            ? $realStep->getTitleHelpText()
-                            : null,
-                        'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText')
-                            ? $realStep->getDescriptionHelpText()
-                            : null,
-                        '_links' => [
-                            'show' => $this->urlResolver->getStepUrl($realStep, true),
-                            'stats' => $this->router->generate(
-                                'app_project_show_stats',
-                                ['projectSlug' => $project->getSlug()],
-                                true
-                            ),
-                            'editSynthesis' => $this->router->generate(
-                                'app_project_edit_synthesis',
-                                [
-                                    'projectSlug' => $project->getSlug(),
-                                    'stepSlug' => $realStep->getSlug(),
-                                ],
-                                true
-                            ),
-                        ],
+        foreach ($projects as $project) {
+            $projectStepsData = [];
+            $projectStepsByIdData = [];
+            foreach ($project->getSteps() as $step) {
+                $realStep = $step->getStep();
+                $projectStepsStatus = [];
+                foreach ($realStep->getStatuses() as $status) {
+                    $projectStepsStatus[] = [
+                        'id' => $status->getId(),
+                        'name' => $status->getName(),
                     ];
-                    $projectStepsData[] = $stepData;
-                    $projectStepsByIdData[$realStep->getId()] = $stepData;
                 }
 
-                $projectSerialized = $this->serializer->serialize($project, 'json', [
-                    'groups' => [
-                        'Projects',
-                        'UserDetails',
-                        'UserVotes',
-                        'ThemeDetails',
-                        'ProjectType',
+                $stepData = [
+                    'id' => $realStep->getId(),
+                    'title' => $realStep->getTitle(),
+                    'label' => $realStep->getLabel(),
+                    'body' => $realStep->getBody(),
+                    'slug' => $realStep->getSlug(),
+                    'startAt' => $realStep->getStartAt()
+                        ? $realStep->getStartAt()->format(\DateTime::ATOM)
+                        : null,
+                    'endAt' => $realStep->getEndAt()
+                        ? $realStep->getEndAt()->format(\DateTime::ATOM)
+                        : null,
+                    'position' => $realStep->getPosition(),
+                    'type' => $realStep->getType(),
+                    'enabled' => $realStep->getIsEnabled(),
+                    'showProgressSteps' => method_exists($realStep, 'isAllowingProgressSteps')
+                        ? $realStep->isAllowingProgressSteps()
+                        : false, //|default(false),
+                    'statuses' => $projectStepsStatus,
+                    'status' => $this->stepHelper->getStatus($realStep),
+                    'open' => $realStep->isOpen(),
+                    'timeless' => $realStep->isTimeless(),
+                    'titleHelpText' => method_exists($realStep, 'getTitleHelpText')
+                        ? $realStep->getTitleHelpText()
+                        : null,
+                    'descriptionHelpText' => method_exists($realStep, 'getDescriptionHelpText')
+                        ? $realStep->getDescriptionHelpText()
+                        : null,
+                    '_links' => [
+                        'show' => $this->urlResolver->getStepUrl($realStep, true),
+                        'stats' => $this->router->generate(
+                            'app_project_show_stats',
+                            ['projectSlug' => $project->getSlug()],
+                            true
+                        ),
+                        'editSynthesis' => $this->router->generate(
+                            'app_project_edit_synthesis',
+                            [
+                                'projectSlug' => $project->getSlug(),
+                                'stepSlug' => $realStep->getSlug(),
+                            ],
+                            true
+                        ),
                     ],
-                ]);
-
-                $projectData = json_decode($projectSerialized, true);
-                $projectData['steps'] = $projectStepsData;
-                $projectData['stepsById'] = $projectStepsByIdData;
-                $data[$project->getId()] = $projectData;
+                ];
+                $projectStepsData[] = $stepData;
+                $projectStepsByIdData[$realStep->getId()] = $stepData;
             }
 
-            $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
-            $this->cache->save($cachedItem);
+            $projectSerialized = $this->serializer->serialize($project, 'json', [
+                'groups' => ['Projects', 'UserDetails', 'UserVotes', 'ThemeDetails', 'ProjectType'],
+            ]);
+
+            $projectData = json_decode($projectSerialized, true);
+            $projectData['steps'] = $projectStepsData;
+            $projectData['stepsById'] = $projectStepsByIdData;
+            $data[$project->getId()] = $projectData;
         }
 
-        return $cachedItem->get();
+        return $data;
     }
 
     public function listThemes(): array
     {
-        $cachedItem = $this->cache->getItem(self::LIST_THEMES_CACHE_KEY);
-
-        if (!$cachedItem->isHit()) {
-            $themes = $this->themeRepo->findBy(['isEnabled' => true]);
-            $data = [];
-            foreach ($themes as $theme) {
-                $data[] = [
-                    'id' => $theme->getId(),
-                    'title' => $theme->getTitle(),
-                    'slug' => $theme->getSlug(),
-                ];
-            }
-
-            $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
-            $this->cache->save($cachedItem);
+        $themes = $this->themeRepo->findBy(['isEnabled' => true]);
+        $list = [];
+        foreach ($themes as $theme) {
+            $list[] = [
+                'id' => $theme->getId(),
+                'title' => $theme->getTitle(),
+                'slug' => $theme->getSlug(),
+            ];
         }
 
-        return $cachedItem->get();
+        return $list;
     }
 }

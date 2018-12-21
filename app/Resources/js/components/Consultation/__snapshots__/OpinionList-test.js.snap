@@ -42,6 +42,7 @@ exports[`<OpinionList /> renders correcty 1`] = `
               "color": "red",
               "contribuable": true,
               "contributionsCount": 0,
+              "defaultOrderBy": "positions",
               "id": "id",
               "slug": "slug",
               "url": "https://capco.dev",
