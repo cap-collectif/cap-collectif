@@ -27,6 +27,14 @@ final class Version20181221140354 extends AbstractMigration
         $this->addSql('CREATE INDEX idx_author ON proposal (id, author_id)');
         $this->addSql('CREATE INDEX idx_author ON reply (id, author_id)');
         $this->addSql('CREATE INDEX collectstep_voter_idx ON votes (voter_id, collect_step_id)');
+        $this->addSql(
+            'CREATE INDEX proposal_collectstep_idx ON votes (proposal_id, collect_step_id)'
+        );
+        $this->addSql('CREATE INDEX proposal_comment_idx ON comment (id, proposal_id)');
+        $this->addSql('CREATE INDEX event_comment_idx ON comment (id, event_id)');
+        $this->addSql('CREATE INDEX parent_comment_idx ON comment (id, parent_id)');
+        $this->addSql('CREATE INDEX author_comment_idx ON comment (id, author_id)');
+        $this->addSql('CREATE INDEX post_comment_idx ON comment (id, post_id)');
     }
 
     public function down(Schema $schema): void
@@ -44,5 +52,11 @@ final class Version20181221140354 extends AbstractMigration
         $this->addSql('DROP INDEX idx_author ON reply');
         $this->addSql('DROP INDEX idx_author ON source');
         $this->addSql('DROP INDEX collectstep_voter_idx ON votes');
+        $this->addSql('DROP INDEX proposal_collectstep_idx ON votes');
+        $this->addSql('DROP INDEX proposal_comment_idx ON comment');
+        $this->addSql('DROP INDEX event_comment_idx ON comment');
+        $this->addSql('DROP INDEX parent_comment_idx ON comment');
+        $this->addSql('DROP INDEX author_comment_idx ON comment');
+        $this->addSql('DROP INDEX post_comment_idx ON comment');
     }
 }
