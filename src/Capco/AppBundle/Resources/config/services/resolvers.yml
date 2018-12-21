@@ -82,7 +82,3 @@ services:
 
   Capco\AppBundle\Toggle\Manager:
     public: true
-
-  Capco\AppBundle\Manager\RedisCacheManager:
-    arguments:
-      $redisClient: '@snc_redis.default'

@@ -1,7 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\DataLoader;
 
-use Capco\AppBundle\Manager\RedisCacheManager;
+use Capco\AppBundle\Cache\RedisCache;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\DataLoader\DataLoader;
 use Overblog\DataLoader\Option;
@@ -21,31 +22,29 @@ abstract class BatchDataLoader extends DataLoader
         callable $batchFunction,
         PromiseAdapterInterface $promiseFactory,
         LoggerInterface $logger,
-        RedisCacheManager $cache,
+        RedisCache $cache,
         string $cachePrefix,
-        int $cacheTtl = 60
+        int $cacheTtl = RedisCache::ONE_MINUTE
     ) {
         $this->cachePrefix = $cachePrefix;
         $this->cache = $cache;
         $this->logger = $logger;
         $this->cacheTtl = $cacheTtl;
         $options = new Option([
-            'cacheKeyFn' =>
-                function ($key) {
-                    $serializedKey = $this->serializeKey($key);
-                    return str_replace(
-                        ':',
-                        '',
-                        $this->cachePrefix .
-                            '-[' .
-                            (
-                                \is_string($serializedKey)
-                                    ? $serializedKey
-                                    : base64_encode(var_export($this->serializeKey($key), true))
-                            ) .
-                            ']-'
-                    );
-                },
+            'cacheKeyFn' => function ($key) {
+                $serializedKey = $this->serializeKey($key);
+
+                return str_replace(
+                    ':',
+                    '',
+                    $this->cachePrefix .
+                        '-[' .
+                        (\is_string($serializedKey)
+                            ? $serializedKey
+                            : base64_encode(var_export($this->serializeKey($key), true))) .
+                        ']-'
+                );
+            },
         ]);
         parent::__construct(
             function ($ids) use ($batchFunction) {
@@ -61,25 +60,6 @@ abstract class BatchDataLoader extends DataLoader
         $this->cache->deleteItems($this->getCacheKeys());
     }
 
-    protected function getCacheKeys(): array
-    {
-        return $this->cache->getKeysByPattern('*' . $this->cachePrefix . '*');
-    }
-
-    protected function getDecodedKeyFromKey(string $key): string
-    {
-        $replace = str_replace(['-[', ']-', $this->cachePrefix], '', $key);
-        return base64_decode($replace);
-    }
-
-    /**
-     * The serializeKey function is used to serialize into the cache the array of parameters.
-     *
-     * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
-     * @return array|string
-     */
-    abstract protected function serializeKey($key);
-
     /**
      * The load function overrides the base load function from DataLoader and extends it to support caching.
      * Given an array of parameters, it should return a promise that when resolved, return the value from
@@ -87,9 +67,11 @@ abstract class BatchDataLoader extends DataLoader
      * from cache to immediatly get it.
      *
      * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
+     *
      * @return mixed
      *
      * @see DataLoader
+     *
      * @throws \Psr\Cache\InvalidArgumentException
      */
     public function load($key)
@@ -104,13 +86,35 @@ abstract class BatchDataLoader extends DataLoader
                     $this->prime($key, $value);
                     $cacheItem->set($value);
                     $this->cache->save($cacheItem);
-                    $this->logger->info("Saved key into cache");
+                    $this->logger->info('Saved key into cache');
                 });
             }
+
             return $promise;
         }
-        $this->logger->info("Get key from cache");
+        $this->logger->info('Get key from cache');
 
         return $this->getPromiseAdapter()->createFulfilled($cacheItem->get());
     }
+
+    protected function getCacheKeys(): array
+    {
+        return $this->cache->getKeysByPattern('*' . $this->cachePrefix . '*');
+    }
+
+    protected function getDecodedKeyFromKey(string $key): string
+    {
+        $replace = str_replace(['-[', ']-', $this->cachePrefix], '', $key);
+
+        return base64_decode($replace);
+    }
+
+    /**
+     * The serializeKey function is used to serialize into the cache the array of parameters.
+     *
+     * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
+     *
+     * @return array|string
+     */
+    abstract protected function serializeKey($key);
 }
