@@ -62,6 +62,7 @@ def ssh(user='capco'):
 def clear_cache(environment='dev'):
     "Clear cache"
     env.service_command('rm -rf var/cache/' + environment, 'application', env.www_app, 'root')
+    env.service_command('bin/console cache:pool:clear cache.app', 'application', env.www_app, 'capco')
 
 
 @task(environments=['local'])

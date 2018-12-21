@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { QueryRenderer, graphql, createFragmentContainer, type ReadyState } from 'react-relay';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { ListGroup, Panel } from 'react-bootstrap';
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
@@ -9,29 +9,23 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import type { OpinionList_section } from './__generated__/OpinionList_section.graphql';
 import type { OpinionList_consultation } from './__generated__/OpinionList_consultation.graphql';
-import type {
-  OpinionListQueryResponse,
-  OpinionListQueryVariables,
-} from './__generated__/OpinionListQuery.graphql';
 
 const renderOpinionList = ({
   error,
   props,
 }: {
-  props: ?OpinionListQueryResponse,
-} & ReadyState) => {
+  error: ?Error,
+  props: ?{ contributionsBySection: Array<Object> },
+}) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
   }
   if (props) {
-    if (!props.section || !props.section.opinions) {
-      return graphqlError;
-    }
     return (
       <React.Fragment>
-        {props.section.opinions.map((opinion, index) => (
-          // $FlowFixMe $refType
+        {// eslint-disable-next-line react/prop-types
+        props.contributionsBySection.map((opinion, index) => (
           <Opinion key={index} opinion={opinion} showUpdatedDate={false} />
         ))}
       </React.Fragment>
@@ -43,7 +37,7 @@ const renderOpinionList = ({
 type Props = {
   section: OpinionList_section,
   consultation: OpinionList_consultation,
-  intl: IntlShape,
+  intl: Object,
 };
 
 export class OpinionList extends React.Component<Props> {
@@ -62,7 +56,6 @@ export class OpinionList extends React.Component<Props> {
             <div className="panel-heading__actions">
               {section.contributionsCount > 1 && (
                 <select
-                  defaultValue={section.defaultOrderBy}
                   className="form-control"
                   aria-label={intl.formatMessage({ id: 'global.filter' })}
                   onBlur={(event: SyntheticInputEvent<>) => {
@@ -102,21 +95,15 @@ export class OpinionList extends React.Component<Props> {
                 environment={environment}
                 query={graphql`
                   query OpinionListQuery($sectionId: ID!, $limit: Int!) {
-                    section: node(id: $sectionId) {
-                      ... on Section {
-                        opinions(limit: $limit) {
-                          ...Opinion_opinion
-                        }
-                      }
+                    contributionsBySection(sectionId: $sectionId, limit: $limit) {
+                      ...Opinion_opinion
                     }
                   }
                 `}
-                variables={
-                  ({
-                    sectionId: section.id,
-                    limit: consultation.opinionCountShownBySection ?? 10,
-                  }: OpinionListQueryVariables)
-                }
+                variables={{
+                  sectionId: section.id,
+                  limit: consultation.opinionCountShownBySection,
+                }}
                 render={renderOpinionList}
               />
             </ListGroup>
@@ -147,7 +134,6 @@ export default createFragmentContainer(container, {
       ...NewOpinionButton_section
       id
       url
-      defaultOrderBy
       slug
       color
       contribuable

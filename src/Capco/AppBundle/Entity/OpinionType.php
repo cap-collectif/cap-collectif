@@ -55,7 +55,7 @@ class OpinionType
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="children", cascade={"persist"})
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected $parent;
+    protected $parent = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="parent", cascade={"persist"})
@@ -107,7 +107,7 @@ class OpinionType
     /**
      * @ORM\Column(name="help_text", type="string", length=255, nullable=true)
      */
-    private $votesHelpText;
+    private $votesHelpText = null;
 
     /**
      * @ORM\Column(name="comment_system", type="integer")
@@ -143,6 +143,8 @@ class OpinionType
     private $color;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="default_filter", type="string", length=50)
      */
     private $defaultFilter;
@@ -178,14 +180,14 @@ class OpinionType
      *
      * @ORM\Column(name="votes_threshold", type="integer", nullable=true)
      */
-    private $votesThreshold;
+    private $votesThreshold = null;
 
     /**
      * @var string
      *
      * @ORM\Column(name="threshold_help_text", type="string", length=255, nullable=true)
      */
-    private $votesThresholdHelpText;
+    private $votesThresholdHelpText = null;
 
     public function __construct()
     {
@@ -304,7 +306,7 @@ class OpinionType
         return $this;
     }
 
-    public function getDefaultFilter(): ?string
+    public function getDefaultFilter()
     {
         return $this->defaultFilter;
     }

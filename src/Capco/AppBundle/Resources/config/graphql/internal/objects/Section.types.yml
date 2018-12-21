@@ -28,15 +28,23 @@ Section:
         resolve: "@=resolver('section_contributionsCount', [value])"
       contributionConnection:
         type: 'ContributionConnection!'
-        argsBuilder: 'Relay::Connection'
         args:
           orderBy:
             type: 'ContributionOrder'
             description: 'Ordering options for contributions returned from the connection.'
+          after:
+            type: 'String'
+            description: 'Returns the elements in the list that come after the specified global ID.'
           first:
             type: 'Int'
             defaultValue: 10
             description: 'Returns the first n elements from the list.'
+          before:
+            type: 'String'
+            description: 'Returns the elements in the list that come before the specified global ID.'
+          last:
+            type: 'Int'
+            description: 'Returns the last n elements from the list.'
         resolve: '@=resolver("sectionContributionsRelay", [value, args])'
       appendixTypes:
         type: '[SectionAppendixType]'
@@ -65,14 +73,3 @@ Section:
         type: 'String'
       url:
         resolve: "@=resolver('section_url', [value])"
-      defaultOrderBy:
-        type: 'String' # should be an enum
-        resolve: '@=value.getDefaultFilter()'
-      opinions:
-        type: '[Opinion!]!'
-        description: 'TO BE REMOVED'
-        args:
-          limit:
-            description: 'Max depth.'
-            type: 'Int!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionOpinionsResolver", [value, args])'

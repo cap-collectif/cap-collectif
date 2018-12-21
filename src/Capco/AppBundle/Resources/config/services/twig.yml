@@ -7,15 +7,13 @@ services:
   Capco\AppBundle\Twig\:
     resource: '%kernel.root_dir%/../src/Capco/AppBundle/Twig/*'
 
-  capco.twig.theme:
-    class: Capco\AppBundle\Twig\ThemeExtension
+  Capco\AppBundle\Twig\ThemeExtension:
     arguments:
       $twig: '@twig.extension.intl'
     tags:
       - { name: twig.extension }
 
-  capco.react_intl.twig:
-    class: Capco\AppBundle\Twig\ReactIntlExtension
+  Capco\AppBundle\Twig\ReactIntlExtension:
     arguments:
       $translationFolder: '%kernel.root_dir%/../translations/'
       $env: '%kernel.environment%'
