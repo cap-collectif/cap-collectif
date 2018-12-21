@@ -50,6 +50,7 @@ parameters:
   facebook_app_secret: '%env(SYMFONY_FACEBOOK_APP_SECRET)%'
   google_app_id: '%env(SYMFONY_GOOGLE_APP_ID)%'
   google_app_secret: '%env(SYMFONY_GOOGLE_APP_SECRET)%'
+  real_favicon_secret: '%env(SYMFONY_REAL_FAVICON_SECRET)%'
   language_analyzer: '%env(SYMFONY_LANGUAGE_ANALYZER)%'
   remember_secret: '%env(SYMFONY_REMEMBER_SECRET)%'
   router.request_context.host: '%env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST)%'
@@ -98,6 +99,7 @@ parameters:
   env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
   env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
   env(SYMFONY_MAPBOX_SECRET_KEY): ***REMOVED***
+  env(SYMFONY_REAL_FAVICON_SECRET): ***REMOVED***
   env(SYMFONY_JWT_TOKEN_TTL): 86400
   env(SYMFONY_LANGUAGE_ANALYZER): french
   env(SYMFONY_REMEMBER_SECRET): ***REMOVED***

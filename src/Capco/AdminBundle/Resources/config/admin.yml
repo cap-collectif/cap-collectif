@@ -397,6 +397,12 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
+  capco_admin.admin.site_favicon:
+    class: Capco\AdminBundle\Admin\SiteFaviconAdmin
+    arguments: [~, ~, CapcoAdminBundle:SiteFavicon]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: website-icon }
+
   capco_admin.admin.category:
     class: Capco\AdminBundle\Admin\CategoryAdmin
     arguments: [~, Capco\AppBundle\Entity\Category, SonataAdminBundle:CRUD]

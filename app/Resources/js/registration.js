@@ -60,6 +60,7 @@ import ArgumentListApp from './startup/ArgumentListApp';
 import VoteListApp from './startup/VoteListApp';
 import EventApp from './startup/EventApp';
 import ProjectDistrictAdminApp from './startup/ProjectDistrictAdminApp';
+import SiteFaviconAdminPageApp from './startup/SiteFaviconAdminPageApp';
 
 import appStore from './stores/AppStore';
 import MapAdminPageApp from './startup/MapAdminPageApp';
@@ -131,6 +132,7 @@ ReactOnRails.register({
   ProposalListApp,
   ProposalsUserVotesPageApp,
   ShareButtonDropdownApp,
+  SiteFaviconAdminPageApp,
   ProposalFormAdminPageApp,
   QuestionnaireAdminPageApp,
   QuestionnaireCreateButtonApp,

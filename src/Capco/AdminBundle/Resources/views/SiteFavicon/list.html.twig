@@ -1,0 +1,26 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+
+{% block list_filters %}{% endblock %}
+{% block list_filters_actions %}{% endblock %}
+{% block tab_menu %}{% endblock %}
+{% block actions %}{% endblock %}
+
+{% block sonata_breadcrumb %}
+{% endblock %}
+
+{% block form %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    {{
+    react_render_component('SiteFaviconAdminPageApp', {
+        'rendering': 'client_side'
+    })
+    }}
+{% endblock %}
+
+{% block list_table %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
