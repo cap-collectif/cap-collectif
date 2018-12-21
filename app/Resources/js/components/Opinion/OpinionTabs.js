@@ -145,16 +145,16 @@ class OpinionTabs extends React.Component<Props> {
               )} */}
             </Nav>
             <Tab.Content animation={false}>
-              {this.isVersionable() && (
-                <Tab.Pane eventKey="versions" style={marginTop}>
-                  {/* $FlowFixMe */}
-                  <OpinionVersionsBox opinion={opinion} isAuthenticated={isAuthenticated} />
-                </Tab.Pane>
-              )}
               {this.isCommentable() && (
                 <Tab.Pane eventKey="arguments" style={marginTop}>
                   {/* $FlowFixMe */}
                   <ArgumentsBox opinion={opinion} />
+                </Tab.Pane>
+              )}
+              {this.isVersionable() && (
+                <Tab.Pane eventKey="versions" style={marginTop}>
+                  {/* $FlowFixMe */}
+                  <OpinionVersionsBox opinion={opinion} isAuthenticated={isAuthenticated} />
                 </Tab.Pane>
               )}
               {this.isSourceable() && (
@@ -197,6 +197,7 @@ class OpinionTabs extends React.Component<Props> {
       /* $FlowFixMe */
       return <ArgumentsBox opinion={opinion} />;
     }
+    
     if (this.isFollowable()) {
       /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
       return <OpinionFollowersBox opinion={opinion} pageAdmin={false} />;
