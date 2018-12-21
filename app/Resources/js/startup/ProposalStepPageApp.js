@@ -5,7 +5,11 @@ import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
 import ProposalStepPage from '../components/Page/ProposalStepPage';
 
-const mainNode = (props: Object) => {
+type Props = {|
+  stepId: string,
+|};
+
+const mainNode = (props: Props) => {
   const store = ReactOnRails.getStore('appStore');
 
   return (

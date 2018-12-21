@@ -12,16 +12,15 @@ import DatesInterval from '../../Utils/DatesInterval';
 import type { GlobalState, Dispatch } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 
-type MapOptions = {
-  zoom: number,
-};
-
-type Props = {
+type Props = {|
   markers: Object | '',
-  defaultMapOptions: MapOptions,
+  defaultMapOptions: {|
+    zoom: number,
+    center: { lat: number, lng: number },
+  |},
   eventSelected: ?string,
   dispatch: Dispatch,
-};
+|};
 
 let L;
 
