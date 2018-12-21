@@ -122,7 +122,8 @@
                     </li>
                 {% endif %}
                 <li id="contributors-counter-pill">
-                    <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}">
+                    {# Restore link when fixed {{ path('app_project_show_contributors', {'projectSlug': project.slug}) }} #}
+                    <a href="#">
                         <i class="cap cap-contacts-1"></i>
                         <span class="value">{{ contributorsCount }}</span>
                         <span class="excerpt category">
