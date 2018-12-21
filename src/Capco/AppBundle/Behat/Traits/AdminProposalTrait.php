@@ -28,13 +28,14 @@ trait AdminProposalTrait
     {
         $page = $this->getCurrentPage();
         // Wait alert to disappear
-        $this->iWait(3);
+        $this->iWait(5);
         // Wait tab to appear
         $this->getSession()->wait(
             5000,
             "$('" . $page->getSelector('proposal ' . $tab . ' tab') . "').length > 0"
         );
         $page->clickOnTab("proposal ${tab}");
+        // Wait delay of tab being shown
         $this->iWait(1);
     }
 
