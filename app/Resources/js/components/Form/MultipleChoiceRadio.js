@@ -72,11 +72,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
             <FormattedMessage id="one-possible-answer" />
           </span>
           {helpText && <HelpBlock>{helpText}</HelpBlock>}
-          {props.description && (
-            <div className="pb-15">
-              <ButtonBody body={props.description || ''} />
-            </div>
-          )}
+          {props.description && <ButtonBody body={props.description} />}
           <div className="form-fields">
             {choices.map((choice, index) => (
               <div className="radio-field" key={index}>

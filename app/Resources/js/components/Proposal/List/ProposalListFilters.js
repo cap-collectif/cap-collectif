@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
@@ -10,47 +9,77 @@ import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
 import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';
 import ProposalListToggleViewBtn from './ProposalListToggleViewBtn';
-import type { ProposalListFilters_step } from './__generated__/ProposalListFilters_step.graphql';
 
-type Props = {|
-  step: ProposalListFilters_step,
+type Props = {
+  themes: Array<$FlowFixMe>,
+  types: Array<$FlowFixMe>,
+  districts: Array<$FlowFixMe>,
+  statuses: Array<$FlowFixMe>,
+  categories: Array<$FlowFixMe>,
+  orderByVotes?: boolean,
+  orderByComments?: boolean,
+  orderByCost?: boolean,
+  defaultSort?: ?string,
   features: FeatureToggles,
-  dispatch: Dispatch,
+  showThemes: boolean,
   filters: Object,
-  types: Array<Object>,
-  themes: Array<Object>,
-  intl: IntlShape,
-|};
+  dispatch: Dispatch,
+  showDistrictFilter: boolean,
+  showCategoriesFilter: boolean,
+  showMapButton: boolean,
+  intl: Object,
+};
 
-export class ProposalListFilters extends React.Component<Props> {
-  render() {
-    const { dispatch, features, intl, step, filters } = this.props;
+type State = {
+  displayedFilters: Array<$FlowFixMe>,
+};
 
-    const form = step.form;
+export class ProposalListFilters extends React.Component<Props, State> {
+  static defaultProps = {
+    orderByVotes: false,
+    orderByComments: false,
+    orderByCost: false,
+    showMapButton: false,
+  };
 
-    const options = {
-      types: this.props.types,
-      categories: form.categories,
-      districts: form.districts,
-      themes: this.props.themes,
-      statuses: step.statuses,
+  constructor(props: Props) {
+    super(props);
+    const {
+      categories,
+      features,
+      showThemes,
+      statuses,
+      districts,
+      themes,
+      types,
+      showDistrictFilter,
+      showCategoriesFilter,
+    } = props;
+
+    this.state = {
+      displayedFilters: []
+        .concat(features.user_type && types.length > 0 ? ['types'] : [])
+        .concat(
+          features.districts && districts.length > 0 && showDistrictFilter ? ['districts'] : [],
+        )
+        .concat(features.themes && showThemes && themes.length > 0 ? ['themes'] : [])
+        .concat(showCategoriesFilter && categories.length > 1 ? ['categories'] : [])
+        .concat(statuses.length > 0 ? ['statuses'] : []),
     };
+  }
 
-    const displayedFilters = []
-      .concat(features.user_type && options.types.length > 0 ? ['types'] : [])
-      .concat(
-        features.districts && options.districts.length > 0 && form.usingDistrict
-          ? ['districts']
-          : [],
-      )
-      .concat(features.themes && form.usingThemes && options.themes.length > 0 ? ['themes'] : [])
-      .concat(form.usingCategories && options.categories.length > 1 ? ['categories'] : [])
-      .concat(options.statuses.length > 0 ? ['statuses'] : []);
-
-    const orderByVotes = step.voteType !== 'DISABLED';
-    const orderByComments = form.commentable;
-    const orderByCost = form.costable;
-    const showMapButton = form.usingAddress && !step.private && features.display_map;
+  render() {
+    const {
+      dispatch,
+      filters,
+      orderByComments,
+      orderByCost,
+      orderByVotes,
+      showMapButton,
+      defaultSort,
+      intl,
+    } = this.props;
+    const { displayedFilters } = this.state;
 
     return (
       <div className="mb-15 mt-30">
@@ -73,7 +102,7 @@ export class ProposalListFilters extends React.Component<Props> {
               orderByCost={orderByCost}
               orderByComments={orderByComments}
               orderByVotes={orderByVotes}
-              defaultSort={step.defaultSort}
+              defaultSort={defaultSort}
             />
           </Col>
           {displayedFilters.map((filterName, index) => (
@@ -89,7 +118,7 @@ export class ProposalListFilters extends React.Component<Props> {
                 <FormattedMessage id={`global.select_${filterName}`}>
                   {(message: string) => <option value="0">{message}</option>}
                 </FormattedMessage>
-                {options[filterName].map(choice => (
+                {this.props[filterName].map(choice => (
                   <option key={choice.id} value={choice.id}>
                     {choice.title || choice.name}
                   </option>
@@ -110,42 +139,6 @@ const mapStateToProps = (state: GlobalState) => ({
   filters: state.proposal.filters || {},
 });
 
-const withIntl = injectIntl(ProposalListFilters);
+const container = injectIntl(ProposalListFilters);
 
-const container = connect(mapStateToProps)(withIntl);
-
-export default createFragmentContainer(container, {
-  step: graphql`
-    fragment ProposalListFilters_step on ProposalStep {
-      id
-      ... on CollectStep {
-        private
-      }
-      defaultSort
-      voteType
-      statuses {
-        id
-        name
-      }
-      form {
-        latMap
-        lngMap
-        zoomMap
-        usingDistrict
-        usingAddress
-        usingThemes
-        commentable
-        costable
-        usingCategories
-        districts(order: ALPHABETICAL) {
-          id
-          name
-        }
-        categories(order: ALPHABETICAL) {
-          id
-          name
-        }
-      }
-    }
-  `,
-});
+export default connect(mapStateToProps)(container);
