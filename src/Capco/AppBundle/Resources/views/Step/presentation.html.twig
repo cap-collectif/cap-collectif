@@ -79,7 +79,7 @@
             {% endif %}
         </h2>
 
-        {% if contributors | length > 0 %}
+        {# {% if contributors | length > 0 %}
             <div class="row">
                 {% for contributor in contributors|slice(0,9) %}
                     {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': contributor.user, 'contributions': contributor.contributions, votes: contributor.votes, showVotes: showVotes, 'col': 4} only %}
@@ -102,7 +102,7 @@
             <a href="{{ path('app_project_show_contributors', {'projectSlug': project.slug}) }}" class="btn  btn-primary  btn--outline">
                 {{ 'step.presentation.contributors.see_all'|trans({}, 'CapcoAppBundle') }}
             </a>
-        {% endif %}
+        {% endif %} #}
     </div>
 
 {% endblock %}

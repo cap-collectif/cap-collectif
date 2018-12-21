@@ -37,13 +37,13 @@
     : null,
   },
   'project': {
-    'showConsultationPlanById': {},
+    'visibleProjects': [],
     'selectedActiveItems': [],
-
     'currentProjectStepById': currentStep.id|default(null),
     'currentProjectById': project.id|default(null),
+    'showConsultationPlanById': {},
     'projectsById': list_projectsById(),
-
+    'page': projectReducerData.page|default(null),
     'limit': projectReducerData.limit|default(null),
     'orderBy': projectReducerData.orderBy|default(null),
     'term': projectReducerData.term|default(null),

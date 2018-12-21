@@ -8,11 +8,11 @@ import type { ProposalPageFollowers_proposal } from './__generated__/ProposalPag
 import { graphqlError } from '../../../createRelayEnvironment';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 
-type Props = {|
+type Props = {
   proposal: ProposalPageFollowers_proposal,
   relay: RelayPaginationProp,
   pageAdmin: boolean,
-|};
+};
 
 export class ProposalPageFollowers extends React.Component<Props> {
   render() {
@@ -31,12 +31,14 @@ export class ProposalPageFollowers extends React.Component<Props> {
               />{' '}
             </h3>
           </div>
-        ) : null}
+        ) : (
+          ''
+        )}
 
         {proposal.followers.edges.length !== 0 ? (
           <Row>
             {proposal.followers.edges.filter(Boolean).map((edge, key) => (
-              // $FlowFixMe $refType
+              // $FlowFixMe
               <UserBox key={key} user={edge.node} className="proposal__follower" />
             ))}
           </Row>
@@ -80,10 +82,8 @@ export default createPaginationContainer(
           }
         }
         pageInfo {
-          hasPreviousPage
           hasNextPage
           endCursor
-          startCursor
         }
         totalCount
       }
@@ -91,7 +91,7 @@ export default createPaginationContainer(
   `,
   {
     direction: 'forward',
-    getConnectionFromProps(props: Props) {
+    getConnectionFromProps(props) {
       return props.proposal && props.proposal.followers;
     },
     getFragmentVariables(prevVars, totalCount) {
@@ -100,7 +100,7 @@ export default createPaginationContainer(
         count: totalCount,
       };
     },
-    getVariables(props: Props, { count, cursor }) {
+    getVariables(props, { count, cursor }) {
       return {
         count,
         cursor,

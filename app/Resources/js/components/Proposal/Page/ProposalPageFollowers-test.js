@@ -3,12 +3,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageFollowers } from './ProposalPageFollowers';
-import { $refType, $fragmentRefs, relayPaginationMock } from '../../../mocks';
+import { $fragmentRefs, relayPaginationMock } from '../../../mocks';
 
 describe('<ProposalPageFollowers />', () => {
   const pageAdmin = false;
+  // $FlowFixMe $refType
   const proposalWithUsers = {
-    $refType,
     id: 'proposal1',
     followers: {
       edges: [
@@ -16,31 +16,25 @@ describe('<ProposalPageFollowers />', () => {
         { cursor: 'YXJyYXljb25uZWN0aW9uOjE=', node: { id: 'user137', $fragmentRefs } },
         { cursor: 'YXJyYXljb25uZWN0aW9uOjI=', node: { id: 'user70', $fragmentRefs } },
       ],
-      pageInfo: {
-        hasPreviousPage: false,
-        hasNextPage: true,
-        endCursor: 'YXJyYXljb25uZWN0aW9uOjI=',
-        startCursor: 'YXJyYXljb25uZWN0aW9uOjA',
-      },
+      pageInfo: { hasNextPage: true, endCursor: 'YXJyYXljb25uZWN0aW9uOjI=' },
       totalCount: 3,
     },
   };
-
+  // $FlowFixMe $refType
   const proposalWithoutUsers = {
-    $refType,
     id: 'proposal1',
     followers: {
       edges: [],
       pageInfo: {
-        hasPreviousPage: false,
         hasNextPage: false,
-        endCursor: null,
-        startCursor: null,
+        endCursor: 'null',
       },
       totalCount: 0,
     },
   };
   const props = {
+    className: '',
+    referer: 'http://capco.test',
     relay: relayPaginationMock,
   };
 

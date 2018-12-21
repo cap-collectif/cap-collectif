@@ -898,8 +898,6 @@ type CollectStep implements Node & Step & ProposalStep {
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
-  statuses: [Status!]!
-  defaultSort: String
   open: Boolean!
 
   # If enabled, allow voters to order their votes by preferences.
@@ -919,6 +917,7 @@ type CollectStep implements Node & Step & ProposalStep {
     orderBy: ProposalVotesOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm!
+  statuses: [Status!]!
   private: Boolean!
 
   # A list of contributor associated with the step.
@@ -3637,8 +3636,6 @@ interface ProposalStep {
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
-  statuses: [Status!]!
-  defaultSort: String
   open: Boolean!
 
   # If enabled, allow voters to order their votes by preferences.
@@ -4790,8 +4787,6 @@ type SelectionStep implements Node & Step & ProposalStep {
   votable: Boolean!
   votesHelpText: String
   voteThreshold: Int
-  statuses: [Status!]!
-  defaultSort: String
   open: Boolean!
 
   # If enabled, allow voters to order their votes by preferences.
@@ -4812,6 +4807,7 @@ type SelectionStep implements Node & Step & ProposalStep {
   ): ProposalVoteConnection!
   form: ProposalForm!
   position: Int!
+  statuses: [Status!]!
 
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!

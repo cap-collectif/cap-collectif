@@ -6,15 +6,16 @@ import { MenuItem, DropdownButton } from 'react-bootstrap';
 import type { ProposalAdminFollowers_proposal } from './__generated__/ProposalAdminFollowers_proposal.graphql';
 import ProposalPageFollowers from '../Page/ProposalPageFollowers';
 
-type Props = {|
+type Props = {
   proposal: ProposalAdminFollowers_proposal,
   intl: IntlShape,
-|};
+};
 
 export class ProposalAdminFollowers extends React.Component<Props> {
   render() {
     const { proposal, intl } = this.props;
     const totalCount = proposal.allFollowers ? proposal.allFollowers.totalCount : 0;
+    const isAdmin = true;
     return (
       <div className="box box-primary container-fluid">
         <div className="box-header">
@@ -74,7 +75,7 @@ export class ProposalAdminFollowers extends React.Component<Props> {
           </div>
           <div className="clearfix" />
           {/* $FlowFixMe */}
-          <ProposalPageFollowers proposal={proposal} pageAdmin />
+          <ProposalPageFollowers proposal={proposal} pageAdmin={isAdmin} />
         </div>
       </div>
     );
