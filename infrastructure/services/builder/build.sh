@@ -71,8 +71,11 @@ else
   echo "Binding ready!"
 
   echo "Downloading translations…"
-  yarn run trad
-
+  yarn run download-translations
+  
+  echo "Generating translations for JS files…"
+  yarn run update-js-translation
+  
   echo "Generating Relay files…"
   yarn run build-relay-schema
 
