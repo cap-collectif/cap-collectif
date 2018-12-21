@@ -11,6 +11,7 @@ use Capco\AppBundle\Helper\EventHelper;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Search\EventSearch;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -24,7 +25,12 @@ class EventController extends Controller
      * @Route("/events/filter/{theme}", name="app_event_search_theme", defaults={"_feature_flags" = "calendar", "theme" = "all"} )
      * @Route("/events/filter/{theme}/{project}", name="app_event_search_project", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
      * @Route("/events/filter/{theme}/{project}/{term}", name="app_event_search_term", defaults={"_feature_flags" = "calendar", "theme" = "all", "project"="all"} )
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Event:index.html.twig")
+     *
+     * @param null|mixed $theme
+     * @param null|mixed $project
+     * @param null|mixed $term
      */
     public function indexAction(Request $request, $theme = null, $project = null, $term = null)
     {
@@ -206,6 +212,7 @@ class EventController extends Controller
     }
 
     /**
+     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Event:lastEvents.html.twig")
      */
     public function lastEventsAction(int $max = 3, int $offset = 0)

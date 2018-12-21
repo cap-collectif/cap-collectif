@@ -132,9 +132,9 @@ class SourceRepository extends EntityRepository
             ->leftJoin('ostep.projectAbstractStep', 'opas')
             ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
             ->andWhere('opas.project = :project OR ovopas.project = :project')
-            ->andWhere('s.author = :author')
+            ->leftJoin('s.author', 'a', Query\Expr\Join::WITH, 'a.id = :author')
             ->setParameter('project', $project)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author->getId());
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -234,10 +234,12 @@ class SourceRepository extends EntityRepository
             ->andWhere('s.published = 1')
             ->andWhere('s.trashedAt IS NULL')
             ->andWhere(
-                $query->expr()->orX(
-                    's.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs',
-                    's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs'
-                )
+                $query
+                    ->expr()
+                    ->orX(
+                        's.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs',
+                        's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs'
+                    )
             )
             ->setParameter('cs', $cs);
 
@@ -255,10 +257,12 @@ class SourceRepository extends EntityRepository
             ->andWhere('s.published = 1')
             ->andWhere('s.trashedAt IS NOT NULL')
             ->andWhere(
-                $query->expr()->orX(
-                    's.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs',
-                    's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs'
-                )
+                $query
+                    ->expr()
+                    ->orX(
+                        's.opinion IS NOT NULL AND o.published = 1 AND o.step = :cs',
+                        's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.step = :cs'
+                    )
             )
             ->setParameter('cs', $cs);
 

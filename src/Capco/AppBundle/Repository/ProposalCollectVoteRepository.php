@@ -6,6 +6,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -74,7 +75,7 @@ class ProposalCollectVoteRepository extends EntityRepository
     {
         return $this->createQueryBuilder('pv')
             ->select('COUNT(DISTINCT pv)')
-            ->andWhere('pv.user = :author')
+            ->leftJoin('pv.user', 'a', Join::WITH, 'a.id = :author')
             ->andWhere('pv.published = true')
             ->leftJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
@@ -85,7 +86,7 @@ class ProposalCollectVoteRepository extends EntityRepository
                     return $step;
                 }, $project->getRealSteps())
             )
-            ->setParameter('author', $author)
+            ->setParameter('author', $author->getId())
             ->getQuery()
             ->getSingleScalarResult();
     }

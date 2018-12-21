@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Page;
 use Capco\AppBundle\SiteParameter\Resolver;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -19,6 +20,7 @@ class PageController extends Controller
      * @Route("/{slug}", name="app_page_show")
      * @ParamConverter("page", class="CapcoAppBundle:Page", options={"mapping": {"slug": "slug"}})
      * @Template("CapcoAppBundle:Page:show.html.twig")
+     * @Cache(smaxage=60, public=true)
      */
     public function showAction(Request $request, Page $page = null)
     {

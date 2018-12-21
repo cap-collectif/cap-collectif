@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
@@ -7,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 
@@ -18,7 +20,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
     {
         return $this->createQueryBuilder('pv')
             ->select('COUNT(DISTINCT pv)')
-            ->andWhere('pv.user = :author')
+            ->leftJoin('pv.user', 'a', Join::WITH, 'a.id = :author')
             ->andWhere('pv.published = true')
             ->leftJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
@@ -115,10 +117,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->getResult();
     }
 
-    public function getUserVotesGroupedByStepIds(
-        array $selectionStepsIds,
-        User $user = null
-    ): array {
+    public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null): array
+    {
         $userVotes = [];
         if ($user) {
             foreach ($selectionStepsIds as $id) {
@@ -172,7 +172,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
     public function getVotesForProposal(
         Proposal $proposal,
-        ?int $limit = null,
+        ?int $limit,
         string $field,
         int $offset = 0,
         string $direction = 'ASC'
@@ -317,6 +317,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('pv.private = true')
             ->andWhere('pv.selectionStep = :selectionStep')
             ->setParameter('selectionStep', $selectionStep);
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 

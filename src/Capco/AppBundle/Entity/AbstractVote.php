@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping\Index;
@@ -16,6 +17,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
  * @ORM\Table(
  *   name="votes",
  *   indexes={
+ *        @Index(name="collectstep_voter_idx", columns={"voter_id", "collect_step_id"}),
  *        @Index(name="selectionstep_voter_idx", columns={"voter_id", "selection_step_id"}),
  *        @Index(name="proposal_selectionstep_idx", columns={"proposal_id", "selection_step_id"}),
  *   },

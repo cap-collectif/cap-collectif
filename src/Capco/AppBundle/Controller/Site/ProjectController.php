@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -27,6 +28,7 @@ use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 class ProjectController extends Controller
 {
     /**
+     * @Cache(smaxage="60", public="true")
      * @Template("CapcoAppBundle:Project:lastProjects.html.twig")
      */
     public function lastProjectsAction(int $max = 4, int $offset = 0)
@@ -60,6 +62,7 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{projectSlug}/stats", name="app_project_show_stats")
      * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
+     * @Cache(smaxage="60", public="true")
      * @Template("CapcoAppBundle:Project:show_stats.html.twig")
      */
     public function showStatsAction(Project $project)
@@ -183,6 +186,7 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/events", name="app_consultation_show_events", defaults={"_feature_flags" = "calendar"})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_events.html.twig")
+     * @Cache(smaxage="60", public=true)
      */
     public function showEventsAction(Project $project)
     {
@@ -212,6 +216,7 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_posts.html.twig")
+     * @Cache(smaxage="60", public=true)
      */
     public function showPostsAction(Project $project, $page)
     {
@@ -244,6 +249,7 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/participants/{page}", name="app_consultation_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1} )
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_contributors.html.twig")
+     * @Cache(smaxage="120", public=true)
      */
     public function showContributorsAction(Project $project, $page)
     {
@@ -278,6 +284,7 @@ class ProjectController extends Controller
     /**
      * @Route("/projects", name="app_project")
      * @Template("CapcoAppBundle:Project:index.html.twig")
+     * @Cache(smaxage="60", public=true)
      */
     public function indexAction(Request $request)
     {

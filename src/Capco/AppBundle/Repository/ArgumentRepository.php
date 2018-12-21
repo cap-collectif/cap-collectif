@@ -211,15 +211,15 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
+            ->leftJoin('a.Author', 'auth', Query\Expr\Join::WITH, 'auth.id = :author')
             ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
-            ->andWhere('a.Author = :author')
             ->setParameter(
                 'steps',
                 array_map(function ($step) {
                     return $step;
                 }, $project->getRealSteps())
             )
-            ->setParameter('author', $author)
+            ->setParameter('author', $author->getId())
             ->getQuery()
             ->getSingleScalarResult();
     }

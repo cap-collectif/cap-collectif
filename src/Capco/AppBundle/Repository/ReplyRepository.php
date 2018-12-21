@@ -11,6 +11,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 
 class ReplyRepository extends EntityRepository
@@ -103,14 +104,14 @@ class ReplyRepository extends EntityRepository
             ->select('COUNT(DISTINCT reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step IN (:steps)')
-            ->andWhere('reply.author = :author')
+            ->leftJoin('reply.author', 'a', Join::WITH, 'a.id = :author')
             ->setParameter(
                 'steps',
                 array_map(function ($step) {
                     return $step;
                 }, $project->getRealSteps())
             )
-            ->setParameter('author', $author);
+            ->setParameter('author', $author->getId());
 
         return $qb->getQuery()->getSingleScalarResult();
     }
