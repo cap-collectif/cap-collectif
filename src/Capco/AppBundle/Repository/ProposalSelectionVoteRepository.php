@@ -33,6 +33,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             )
             ->setParameter('author', $author)
             ->getQuery()
+            ->useQueryCache(true)
             ->getSingleScalarResult();
     }
 
@@ -342,7 +343,10 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('proposal', $proposal)
             ->groupBy('pv.selectionStep');
 
-        $results = $qb->getQuery()->getResult();
+        $results = $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getResult();
         $votesBySteps = [];
         foreach ($results as $result) {
             $votesBySteps[$result['selectionStep']] = (int) $result['votesCount'];

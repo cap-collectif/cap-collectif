@@ -221,6 +221,7 @@ class ArgumentRepository extends EntityRepository
             )
             ->setParameter('author', $author->getId())
             ->getQuery()
+            ->useQueryCache(true)
             ->getSingleScalarResult();
     }
 

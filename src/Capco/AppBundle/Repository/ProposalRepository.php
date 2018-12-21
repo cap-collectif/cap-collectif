@@ -261,7 +261,10 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.author = :author')
             ->setParameter('author', $author->getId());
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $author, CollectStep $step): int

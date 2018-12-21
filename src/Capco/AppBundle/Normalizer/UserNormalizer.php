@@ -57,7 +57,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                     $object,
                     $project,
                     new Argument([
-                        'first' => 1,
+                        'first' => 0,
                     ])
                 )->totalCount;
                 $contributionsCountByProject[] = [
@@ -74,7 +74,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                                     $object,
                                     $step,
                                     new Argument([
-                                        'first' => 1,
+                                        'first' => 0,
                                     ])
                                 )->totalCount,
                     ];

@@ -69,6 +69,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
 
             $args = new Argument([
                 'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+                'first' => 0,
             ]);
             $commentsConnection = $this->commentableCommentsResolver->__invoke(
                 $object,

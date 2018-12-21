@@ -197,7 +197,10 @@ class OpinionVersionRepository extends EntityRepository
             )
             ->setParameter('author', $author);
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int

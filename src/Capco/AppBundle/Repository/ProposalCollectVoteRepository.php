@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\UserBundle\Entity\User;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -75,7 +75,7 @@ class ProposalCollectVoteRepository extends EntityRepository
     {
         return $this->createQueryBuilder('pv')
             ->select('COUNT(DISTINCT pv)')
-            ->leftJoin('pv.user', 'a', Join::WITH, 'a.id = :author')
+            ->andWhere('pv.user = :author')
             ->andWhere('pv.published = true')
             ->leftJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
@@ -86,8 +86,9 @@ class ProposalCollectVoteRepository extends EntityRepository
                     return $step;
                 }, $project->getRealSteps())
             )
-            ->setParameter('author', $author->getId())
+            ->setParameter('author', $author, Type::GUID)
             ->getQuery()
+            ->useQueryCache(true)
             ->getSingleScalarResult();
     }
 
@@ -358,7 +359,10 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->setParameter('proposal', $proposal)
             ->groupBy('pv.collectStep');
 
-        $results = $qb->getQuery()->getResult();
+        $results = $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getResult();
         $votesBySteps = [];
         foreach ($results as $result) {
             $votesBySteps[$result['stepId']] = (int) $result['votesCount'];
