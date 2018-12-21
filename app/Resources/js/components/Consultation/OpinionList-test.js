@@ -13,6 +13,7 @@ describe('<OpinionList />', () => {
       color: 'red',
       contribuable: true,
       contributionsCount: 0,
+      defaultOrderBy: 'positions',
       id: 'id',
       slug: 'slug',
       url: 'https://capco.dev',

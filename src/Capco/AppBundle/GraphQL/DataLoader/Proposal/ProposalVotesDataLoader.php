@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
@@ -7,7 +6,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Manager\RedisCacheManager;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -22,12 +21,12 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisCache $cache,
+        RedisCacheManager $cache,
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl = 60
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -45,32 +44,12 @@ class ProposalVotesDataLoader extends BatchDataLoader
     {
         foreach ($this->getCacheKeys() as $cacheKey) {
             $decoded = $this->getDecodedKeyFromKey($cacheKey);
-            if (false !== strpos($decoded, $proposal->getId())) {
+            if (strpos($decoded, $proposal->getId()) !== false) {
                 $this->cache->deleteItem($cacheKey);
                 $this->clear($cacheKey);
                 $this->logger->info('Invalidated cache for proposal ' . $proposal->getId());
             }
         }
-    }
-
-    public function all(array $keys)
-    {
-        $connections = [];
-
-        foreach ($keys as $key) {
-            $this->logger->info(
-                __METHOD__ . ' called with ' . var_export($this->serializeKey($key), true)
-            );
-
-            $connections[] = $this->resolve(
-                $key['proposal'],
-                $key['args'],
-                $key['includeUnpublished'],
-                $key['step'] ?? null
-            );
-        }
-
-        return $this->getPromiseAdapter()->createAll($connections);
     }
 
     protected function serializeKey($key)
@@ -105,16 +84,15 @@ class ProposalVotesDataLoader extends BatchDataLoader
                     $includeUnpublished,
                     $direction
                 ) {
-                    return $this->proposalSelectionVoteRepository
-                        ->getByProposalAndStep(
-                            $proposal,
-                            $step,
-                            $limit,
-                            $offset,
-                            $field,
-                            $direction,
-                            $includeUnpublished
-                        )
+                    return $this->proposalSelectionVoteRepository->getByProposalAndStep(
+                        $proposal,
+                        $step,
+                        $limit,
+                        $offset,
+                        $field,
+                        $direction,
+                        $includeUnpublished
+                    )
                         ->getIterator()
                         ->getArrayCopy();
                 });
@@ -135,16 +113,15 @@ class ProposalVotesDataLoader extends BatchDataLoader
                     $includeUnpublished,
                     $direction
                 ) {
-                    return $this->proposalCollectVoteRepository
-                        ->getByProposalAndStep(
-                            $proposal,
-                            $step,
-                            $limit,
-                            $offset,
-                            $field,
-                            $direction,
-                            $includeUnpublished
-                        )
+                    return $this->proposalCollectVoteRepository->getByProposalAndStep(
+                        $proposal,
+                        $step,
+                        $limit,
+                        $offset,
+                        $field,
+                        $direction,
+                        $includeUnpublished
+                    )
                         ->getIterator()
                         ->getArrayCopy();
                 });
@@ -157,7 +134,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
                 return $paginator->auto($args, $totalCount);
             }
-
             throw new \RuntimeException('Unknown step type.');
         }
 
@@ -173,7 +149,26 @@ class ProposalVotesDataLoader extends BatchDataLoader
             $proposal,
             $includeUnpublished
         );
-
         return $paginator->auto($args, $totalCount);
+    }
+
+    public function all(array $keys)
+    {
+        $connections = [];
+
+        foreach ($keys as $key) {
+            $this->logger->info(
+                __METHOD__ . " called with " . var_export($this->serializeKey($key), true)
+            );
+
+            $connections[] = $this->resolve(
+                $key['proposal'],
+                $key['args'],
+                $key['includeUnpublished'],
+                $key['step'] ?? null
+            );
+        }
+
+        return $this->getPromiseAdapter()->createAll($connections);
     }
 }

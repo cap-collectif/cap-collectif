@@ -1,5 +1,0 @@
-services:
-  Capco\AppBundle\Cache\RedisCache:
-    autowire: true
-    arguments:
-      $redisClient: '@snc_redis.cache'

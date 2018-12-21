@@ -19,7 +19,6 @@ imports:
   - { resource: services/data_fixtures.yml }
   - { resource: services/helpers.yml }
   - { resource: services/synthesis.yml }
-  - { resource: services/cache.yml }
 
 parameters:
   traits:
@@ -82,6 +81,11 @@ services:
   redis_adapter:
     class: Capco\AppBundle\Adapter\RedisAdapter
     arguments: ['@snc_redis.default']
+
+  Capco\AppBundle\Manager\RedisCacheManager:
+    autowire: true
+    arguments:
+      $redisClient: '@snc_redis.default'
 
   Capco\AppBundle\Mailer\MailerService:
     autowire: true

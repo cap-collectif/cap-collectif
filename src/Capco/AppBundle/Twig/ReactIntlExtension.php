@@ -3,26 +3,21 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\SiteParameter\Resolver;
-use Capco\AppBundle\Cache\RedisCache;
 
 class ReactIntlExtension extends \Twig_Extension
 {
-    public const CACHE_KEY_PREFIX = 'getIntlMessages';
     private $translationFolder;
     private $resolver;
     private $env;
-    private $cache;
 
     public function __construct(
-        string $translationFolder,
-        string $env,
+        ?string $translationFolder = '',
         Resolver $resolver,
-        RedisCache $cache
+        ?string $env = ''
     ) {
         $this->translationFolder = $translationFolder;
-        $this->env = $env;
         $this->resolver = $resolver;
-        $this->cache = $cache;
+        $this->env = $env;
     }
 
     public function getFunctions()
@@ -38,28 +33,14 @@ class ReactIntlExtension extends \Twig_Extension
         return $this->resolver->getValue('global.locale');
     }
 
-    public function getTranslations(string $filename): array
-    {
-        return json_decode(file_get_contents($this->translationFolder . $filename), true);
-    }
-
     public function getIntlMessages()
     {
         if ('test' === $this->env) {
             return json_decode('{}');
         }
-
         $locale = $this->getLocale();
         $filename = 'messages.' . $locale . '.json';
 
-        $cacheKey = self::CACHE_KEY_PREFIX . '-' . $filename;
-        $cacheItem = $this->cache->getItem($cacheKey);
-
-        if (!$cacheItem->isHit()) {
-            $cacheItem->set($this->getTranslations($filename))->expiresAfter(RedisCache::ONE_DAY);
-            $this->cache->save($cacheItem);
-        }
-
-        return $cacheItem->get();
+        return json_decode(file_get_contents($this->translationFolder . $filename), true);
     }
 }

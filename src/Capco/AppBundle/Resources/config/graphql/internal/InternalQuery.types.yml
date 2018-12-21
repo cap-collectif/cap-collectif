@@ -85,16 +85,6 @@ InternalQuery:
             description: 'Returns all contributions of the provided consultation.'
             type: 'ID!'
         resolve: "@=resolver('contributions', [args])"
-      contributionsBySection:
-        type: '[Opinion!]!'
-        description: 'TO BE REMOVED'
-        args:
-          sectionId:
-            type: 'ID!'
-          limit:
-            description: 'Max depth.'
-            type: 'Int!'
-        resolve: "@=resolver('contributionsBySection', [args])"
       question:
         type: 'Question!'
         description: 'TO BE REMOVED'
