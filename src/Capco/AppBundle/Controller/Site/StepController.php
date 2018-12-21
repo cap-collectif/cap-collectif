@@ -81,7 +81,7 @@ class StepController extends Controller
         $contributorsList =
             $contributorsConnection->totalCount >
             0
-            /** @var User $user */
+            // @var User $user
                 ? array_merge(
                     ...array_map(function (Edge $edge) {
                         $user = $edge->node;
@@ -284,49 +284,9 @@ class StepController extends Controller
             $this->createNotFoundException();
         }
 
-        $proposalForm = $step->getProposalForm();
-        $searchResults = ['proposals' => [], 'count' => 0];
-
-        $countFusions = $proposalForm
-            ? $this->get('capco.proposal.repository')->countFusionsByProposalForm($proposalForm)
-            : 0;
-
-        $serializer = $this->get('serializer');
-        $props = $serializer->serialize(
-            [
-                'statuses' => $step->getStatuses(),
-                'form' => $proposalForm,
-                'categories' => $proposalForm ? $proposalForm->getCategories() : [],
-                'stepId' => $step->getId(),
-                'defaultSort' => $step->getDefaultSort() ?: null,
-                'count' => $searchResults['count'],
-                'countFusions' => $countFusions,
-            ],
-            'json',
-            [
-                'groups' => [
-                    'Statuses',
-                    'ProposalForms',
-                    'Questions',
-                    'ThemeDetails',
-                    'Districts',
-                    'DistrictDetails',
-                    'Default',
-                    'Steps',
-                    'VoteThreshold',
-                    'UserVotes',
-                    'Proposals',
-                    'UsersInfos',
-                    'UserMedias',
-                ],
-            ]
-        );
-
         return [
             'project' => $project,
             'currentStep' => $step,
-            'proposalsCount' => $searchResults['count'],
-            'props' => $props,
         ];
     }
 
@@ -376,43 +336,7 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        $searchResults = ['proposals' => [], 'count' => 0];
-
-        $form = $step->getProposalForm();
-        $showThemes = $form->isUsingThemes();
-        $categories = $form->getCategories();
-
-        $serializer = $this->get('serializer');
-
-        $props = $serializer->serialize(
-            [
-                'stepId' => $step->getId(),
-                'statuses' => $step->getStatuses(),
-                'categories' => $categories,
-                'count' => $searchResults['count'],
-                'defaultSort' => $step->getDefaultSort() ?: null,
-                'form' => $form,
-                'showThemes' => $showThemes,
-            ],
-            'json',
-            [
-                'groups' => [
-                    'Steps',
-                    'ProposalForms',
-                    'UserVotes',
-                    'Statuses',
-                    'ThemeDetails',
-                    'Districts',
-                    'Default',
-                    'Proposals',
-                    'UsersInfos',
-                    'UserMedias',
-                    'VoteThreshold',
-                ],
-            ]
-        );
-
-        return ['project' => $project, 'currentStep' => $step, 'props' => $props];
+        return ['project' => $project, 'currentStep' => $step];
     }
 
     /**
@@ -470,6 +394,7 @@ class StepController extends Controller
                 [],
                 'CapcoAppBundle'
             );
+
             throw new ProjectAccessDeniedException($error);
         }
 
