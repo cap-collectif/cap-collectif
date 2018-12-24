@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class SiteImageRepository extends EntityRepository
 {
-    public function getSiteFavicon(): SiteImage
+    public function getSiteFavicon(): ?SiteImage
     {
         $qb = $this->createQueryBuilder('si');
 

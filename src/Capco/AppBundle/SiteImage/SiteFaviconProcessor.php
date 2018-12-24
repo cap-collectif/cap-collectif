@@ -14,12 +14,14 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class SiteFaviconProcessor
 {
+    public const DEFAULT_COLOR = '#ffffff';
+    public const DEFAULT_NAME = 'Cap Collectif';
     public const WEB_MANIFEST_FILENAME = 'manifest.json';
     public const BROWSERCONFIG_FILENAME = 'browserconfig.xml';
 
     private $webManifest = [
-        'name' => 'Cap Collectif',
-        'short_name' => 'Cap Collectif',
+        'name' => self::DEFAULT_NAME,
+        'short_name' => self::DEFAULT_NAME,
         'icons' => [
             [
                 'src' => '/android-icon-36x36.png',
@@ -58,8 +60,8 @@ class SiteFaviconProcessor
                 'density' => '4.0',
             ],
         ],
-        'theme_color' => '#ffffff',
-        'background_color' => '#ffffff',
+        'theme_color' => self::DEFAULT_COLOR,
+        'background_color' => self::DEFAULT_COLOR,
         'display' => 'standalone',
     ];
 
@@ -75,7 +77,7 @@ class SiteFaviconProcessor
                 'square310x310logo' => [
                     '@src' => '/ms-icon-310x310.png',
                 ],
-                'TileColor' => '#ffffff',
+                'TileColor' => self::DEFAULT_COLOR,
             ],
         ],
     ];
@@ -107,10 +109,15 @@ class SiteFaviconProcessor
     {
         if ($siteFavicon->getMedia()) {
             $siteFavicons = $this->siteFaviconExtension->getSiteFavicons();
-            list($r, $g, $b) = ColorThief::getColor(
-                $this->getSourceImageFromMedia($siteFavicon->getMedia())
-            );
-            $color = Text::rgbToHex($r, $g, $b);
+
+            try {
+                list($r, $g, $b) = ColorThief::getColor(
+                    $this->getSourceImageFromMedia($siteFavicon->getMedia())
+                );
+                $color = Text::rgbToHex($r, $g, $b);
+            } catch (\Exception $exception) {
+                $color = self::DEFAULT_COLOR;
+            }
 
             $this->generateWebManifestFile($siteFavicons, $siteFavicon, $color);
             $this->generateBrowserConfigFile($siteFavicons, $color);
@@ -129,7 +136,7 @@ class SiteFaviconProcessor
 
     private function generateBrowserConfigFile(
         array $siteFavicons,
-        ?string $color = '#ffffff'
+        ?string $color = self::DEFAULT_COLOR
     ): void {
         foreach (['favicon_70', 'favicon_150', 'favicon_310'] as $filter) {
             $path = $siteFavicons[$filter];
@@ -148,7 +155,7 @@ class SiteFaviconProcessor
     private function generateWebManifestFile(
         array $siteFavicons,
         SiteImage $siteFavicon,
-        ?string $color = '#ffffff'
+        ?string $color = self::DEFAULT_COLOR
     ): void {
         $siteName = $this->siteResolver->getValue('global.site.fullname');
 
