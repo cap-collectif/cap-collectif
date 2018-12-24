@@ -12,11 +12,11 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20181224142858 extends AbstractMigration
 {
-    public function up(Schema $schema): void
+    public function postUp(Schema $schema): void
     {
         if (
             !$this->connection->fetchAssoc(
-                 "SELECT id FROM site_image WHERE site_image.keyname = 'favicon'"
+                "SELECT id FROM site_image WHERE site_image.keyname = 'favicon'"
             )
         ) {
             $this->connection->insert('site_image', [
@@ -28,16 +28,24 @@ final class Version20181224142858 extends AbstractMigration
         }
     }
 
-    public function down(Schema $schema): void
+    public function postDown(Schema $schema): void
     {
         if (
             $this->connection->fetchAssoc(
-                 "SELECT id FROM site_image WHERE site_image.keyname = 'favicon'"
+                "SELECT id FROM site_image WHERE site_image.keyname = 'favicon'"
             )
         ) {
             $this->connection->delete('site_image', [
                 'keyname' => 'favicon',
             ]);
         }
+    }
+
+    public function up(Schema $schema): void
+    {
+    }
+
+    public function down(Schema $schema): void
+    {
     }
 }
