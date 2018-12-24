@@ -111,7 +111,7 @@ class SiteFaviconProcessor
             $siteFavicons = $this->siteFaviconExtension->getSiteFavicons();
 
             try {
-                list($r, $g, $b) = ColorThief::getColor(
+                [$r, $g, $b] = ColorThief::getColor(
                     $this->getSourceImageFromMedia($siteFavicon->getMedia())
                 );
                 $color = Text::rgbToHex($r, $g, $b);

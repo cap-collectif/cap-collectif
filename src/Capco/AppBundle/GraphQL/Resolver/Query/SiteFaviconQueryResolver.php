@@ -15,7 +15,7 @@ class SiteFaviconQueryResolver implements ResolverInterface
         $this->repository = $repository;
     }
 
-    public function __invoke(): SiteImage
+     public function __invoke(): ?SiteImage
     {
         return $this->repository->getSiteFavicon();
     }
