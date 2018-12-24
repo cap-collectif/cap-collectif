@@ -69,6 +69,8 @@ RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
     tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
     mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so
 COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
+COPY blackfire/blackfire-agent.ini /etc/php/7.1/fpm/conf.d/90-blackfire-agent.ini
+COPY blackfire/blackfire-agent.ini /etc/php/7.1/cli/conf.d/90-blackfire-agent.ini
 COPY blackfire/blackfire-php.ini /etc/php/7.1/fpm/conf.d/92-blackfire-config.ini
 COPY blackfire/blackfire-php.ini /etc/php/7.1/cli/conf.d/92-blackfire-config.ini
 

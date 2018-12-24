@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
-use JMS\Serializer\SerializationContext;
 use Symfony\Component\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -74,6 +74,10 @@ class Indexer
         $classes = $this->getClassesToIndex();
 
         foreach ($classes as $class) {
+            if (User::class !== $class) {
+                continue;
+            }
+
             $repository = $this->em->getRepository($class);
 
             $query = $repository->createQueryBuilder('a')->getQuery();
@@ -85,12 +89,16 @@ class Indexer
                     ->select('count(a)')
                     ->getQuery()
                     ->getSingleScalarResult();
-                $output->writeln(PHP_EOL . "<info> Indexing $count $class</info>");
+                $output->writeln(PHP_EOL . "<info> Indexing ${count} ${class}</info>");
                 $progress = new ProgressBar($output, $count);
                 $progress->start();
             }
 
+            $i = 0;
             foreach ($iterableResult as $row) {
+                if (10 === $i) {
+                    break;
+                }
                 /** @var IndexableInterface $object */
                 $object = $row[0];
 
@@ -108,10 +116,14 @@ class Indexer
                     $progress->advance();
                 }
                 $this->em->detach($row[0]);
+
+                ++$i;
             }
             if (isset($progress)) {
                 $progress->finish();
             }
+
+            break;
         }
     }
 
@@ -206,6 +218,7 @@ class Indexer
     protected function buildDocument(IndexableInterface $object): Document
     {
         $json = [];
+
         try {
             $json = $this->serializer->serialize($object, 'json', ['groups' => ['Elasticsearch']]);
         } catch (\Exception $exception) {
