@@ -61,8 +61,6 @@ class AppKernel extends Kernel
             // CKEditor
             new \CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
             new \Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-            // NewRelic
-            new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
             new Caxy\HtmlDiffBundle\CaxyHtmlDiffBundle(),
             // API
             new \FOS\RestBundle\FOSRestBundle(),
