@@ -59,4 +59,9 @@ final class Text
 
         return strtolower(preg_replace($separatorPattern, '_$1', $str));
     }
+
+    public static function rgbToHex(string $r, string $g, string $b): string
+    {
+        return sprintf('#%02x%02x%02x', $r, $g, $b);
+    }
 }

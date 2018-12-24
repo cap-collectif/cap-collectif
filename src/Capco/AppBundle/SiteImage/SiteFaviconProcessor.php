@@ -3,8 +3,12 @@
 namespace Capco\AppBundle\SiteImage;
 
 use Capco\AppBundle\Entity\SiteImage;
+use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Twig\SiteFaviconExtension;
+use Capco\AppBundle\Utils\Text;
+use Capco\MediaBundle\Entity\Media;
+use ColorThief\ColorThief;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -81,10 +85,12 @@ class SiteFaviconProcessor
     private $webDir;
     private $filesystem;
     private $siteResolver;
+    private $urlResolver;
 
     public function __construct(
         SiteFaviconExtension $siteFaviconExtension,
         SerializerInterface $serializer,
+        UrlResolver $urlResolver,
         Resolver $siteResolver,
         Filesystem $filesystem,
         string $webDir
@@ -94,51 +100,62 @@ class SiteFaviconProcessor
         $this->webDir = $webDir;
         $this->filesystem = $filesystem;
         $this->siteResolver = $siteResolver;
+        $this->urlResolver = $urlResolver;
     }
 
     public function process(SiteImage $siteFavicon): void
     {
         if ($siteFavicon->getMedia()) {
-            $siteName = $this->siteResolver->getValue('global.site.fullname');
             $siteFavicons = $this->siteFaviconExtension->getSiteFavicons();
+            list($r, $g, $b) = ColorThief::getColor(
+                $this->getSourceImageFromMedia($siteFavicon->getMedia())
+            );
+            $color = Text::rgbToHex($r, $g, $b);
 
-            $this->generateWebManifestFile($siteName, $siteFavicons);
-            $this->generateBrowserConfigFile($siteFavicons);
+            $this->generateWebManifestFile($siteFavicons, $siteFavicon, $color);
+            $this->generateBrowserConfigFile($siteFavicons, $color);
         } else {
             $this->dumpWebManifestFile();
             $this->dumpBrowserConfigFile();
         }
     }
 
-    private function getSizeAndExtension(string $filter, string $path): array
+    private function getSizeFromFilter(string $filter): string
     {
         $exploded = explode('_', $filter);
-        $size = end($exploded);
-        $exploded = explode('/', $path);
-        $ext = end($exploded);
 
-        return [$size, $ext];
+        return end($exploded);
     }
 
-    private function generateBrowserConfigFile(array $siteFavicons): void
-    {
+    private function generateBrowserConfigFile(
+        array $siteFavicons,
+        ?string $color = '#ffffff'
+    ): void {
         foreach (['favicon_70', 'favicon_150', 'favicon_310'] as $filter) {
             $path = $siteFavicons[$filter];
-            list($size) = $this->getSizeAndExtension($filter, $path);
+            $size = $this->getSizeFromFilter($filter);
 
             $tilename = sprintf('square%sx%slogo', $size, $size);
             $this->browserConfig['msapplication']['tile'][$tilename]['@src'] = $path;
         }
+        $this->browserConfig['msapplication']['tile']['TileColor'] = $color;
         $this->browserConfig['msapplication']['tile']['square150x150logo']['@src'] =
             $siteFavicons['favicon_150'];
 
         $this->dumpBrowserConfigFile();
     }
 
-    private function generateWebManifestFile(string $siteName, array $siteFavicons): void
-    {
+    private function generateWebManifestFile(
+        array $siteFavicons,
+        SiteImage $siteFavicon,
+        ?string $color = '#ffffff'
+    ): void {
+        $siteName = $this->siteResolver->getValue('global.site.fullname');
+
         $this->webManifest['name'] = $siteName;
         $this->webManifest['short_name'] = $siteName;
+        $this->webManifest['background_color'] = $color;
+        $this->webManifest['theme_color'] = $color;
         $this->webManifest['icons'] = [];
         foreach (
             [
@@ -152,12 +169,12 @@ class SiteFaviconProcessor
             as $filter => $density
         ) {
             $path = $siteFavicons[$filter];
-            list($size, $ext) = $this->getSizeAndExtension($filter, $path);
+            $size = $this->getSizeFromFilter($filter);
 
             $this->webManifest['icons'][] = [
                 'src' => $path,
                 'sizes' => $size . 'x' . $size,
-                'type' => "image/${ext}",
+                'type' => $siteFavicon->getMedia()->getContentType(),
                 'density' => $density,
             ];
         }
@@ -181,5 +198,17 @@ class SiteFaviconProcessor
             $this->webDir . self::WEB_MANIFEST_FILENAME,
             $this->serializer->serialize($this->webManifest, 'json')
         );
+    }
+
+    private function getSourceImageFromMedia(Media $media)
+    {
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+            ],
+        ]);
+
+        return file_get_contents($this->urlResolver->getMediaUrl($media), false, $context);
     }
 }

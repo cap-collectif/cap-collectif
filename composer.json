@@ -164,7 +164,8 @@
         "overblog/graphiql-bundle": "^0.1.1",
         "nelmio/cors-bundle": "^1.5",
         "tmarsteel/mockery-callable-mock": "^2.1",
-        "friendsofsymfony/http-cache-bundle": "^2.6"
+        "friendsofsymfony/http-cache-bundle": "^2.6",
+        "ksubileau/color-thief-php": "^1.4"
     },
     "require-dev": {
         "behat/behat": "^3.3",
