@@ -146,8 +146,6 @@ class SiteFaviconProcessor
             $this->browserConfig['msapplication']['tile'][$tilename]['@src'] = $path;
         }
         $this->browserConfig['msapplication']['tile']['TileColor'] = $color;
-        $this->browserConfig['msapplication']['tile']['square150x150logo']['@src'] =
-            $siteFavicons['favicon_150'];
 
         $this->dumpBrowserConfigFile();
     }
