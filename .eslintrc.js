@@ -86,7 +86,8 @@ module.exports = {
     // Such as import * as generated from …
     camelcase: 'off',
     // Fix doesn't seem to work yet
-    'relay/generated-flow-types': ['error', { fix: true }],
+    // Spread in Flow types declaration seems not work yet (See OpinionTabs.js for example).
+    'relay/generated-flow-types': ['warn', { fix: false }],
     // TODO: https://github.com/cap-collectif/platform/issues/5966
     'react/require-default-props': 'off',
     // TODO: https://github.com/cap-collectif/platform/issues/5967

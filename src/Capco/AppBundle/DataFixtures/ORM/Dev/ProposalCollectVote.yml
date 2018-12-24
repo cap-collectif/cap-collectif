@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\ProposalCollectVote:
     id (unique): '<numberBetween(2000, 2050)>'
     proposal: '@proposal14'
     collectStep: '@collectstep5'
-    user: '@user<current()>'
+    user (unique): '@user<current()>'
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
   proposalCollectVote51:

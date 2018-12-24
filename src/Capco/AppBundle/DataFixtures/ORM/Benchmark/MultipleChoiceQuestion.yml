@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule:
+Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule (local):
   validationRule1:
     __construct: { create: [min, 2] }
 

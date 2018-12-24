@@ -19,7 +19,7 @@ Capco\UserBundle\Entity\User:
     password: $2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe
     confirmationToken: ~
     phoneConfirmed: true
-  user{1..500}:
+  user{1..5000}:
     username: user<current()>
     email: user<current()>@cap-collectif.com
     enabled: true

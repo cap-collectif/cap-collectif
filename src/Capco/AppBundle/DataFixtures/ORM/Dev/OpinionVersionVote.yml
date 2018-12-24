@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\OpinionVersionVote:
   opinionVersionVote{1...50}:
     opinionVersion: '@version2'
     value: <numberBetween(-1, 1)>
-    user: '@user<current()>'
+    user (unique): '@user<current()>'
     publishedAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>

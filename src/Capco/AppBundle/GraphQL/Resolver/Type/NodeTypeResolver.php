@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Argument;
@@ -54,9 +55,10 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('Project');
         }
         if ($node instanceof Questionnaire) {
-            if ($currentSchemaName === 'public') {
+            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
                 return $this->typeResolver->resolve('PublicQuestionnaire');
             }
+
             return $this->typeResolver->resolve('InternalQuestionnaire');
         }
         if ($node instanceof Opinion) {
@@ -81,9 +83,10 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('Reporting');
         }
         if ($node instanceof User) {
-            if ($currentSchemaName === 'public') {
+            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
                 return $this->typeResolver->resolve('PublicUser');
             }
+
             return $this->typeResolver->resolve('InternalUser');
         }
 
@@ -112,9 +115,10 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('QuestionnaireStep');
         }
         if ($node instanceof ConsultationStep) {
-            if ($currentSchemaName === 'public') {
+            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
                 return $this->typeResolver->resolve('PublicConsultation');
             }
+
             return $this->typeResolver->resolve('InternalConsultation');
         }
         if ($node instanceof OtherStep) {
@@ -127,9 +131,10 @@ class NodeTypeResolver implements ResolverInterface
             return $this->typeResolver->resolve('RankingStep');
         }
         if ($node instanceof Event) {
-            if ($currentSchemaName === 'preview') {
+            if ('preview' === $currentSchemaName) {
                 return $this->typeResolver->resolve('PreviewEvent');
             }
+
             return $this->typeResolver->resolve('InternalEvent');
         }
         if ($node instanceof Reply) {
