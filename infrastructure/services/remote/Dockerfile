@@ -160,6 +160,14 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# NewRelic PHP Probe
+RUN wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
+    echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' | tee /etc/apt/sources.list.d/newrelic.list && \
+    apt-get update && \
+    apt-get install newrelic-php5 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 # Move mysql elsewhere because /var/lib/mysql will be a volume after build (see mysql/run)
 RUN mv /var/lib/mysql /var/lib/mysql_save
 
