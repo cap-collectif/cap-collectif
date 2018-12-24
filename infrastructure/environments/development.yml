@@ -44,7 +44,6 @@ database:
 chrome:
   ports:
     - '5900:5900'
-
 # You can also test on a different browser
 # firefox:
 #   image: selenium/node-firefox-debug:latest
