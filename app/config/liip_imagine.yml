@@ -102,6 +102,11 @@ liip_imagine:
       filters:
         thumbnail: { size: [60, 60], mode: inbound }
 
+    favicon_70:
+      quality: 70
+      filters:
+        thumbnail: { size: [70, 70], mode: inbound }
+
     favicon_72:
       quality: 70
       filters:
@@ -132,6 +137,11 @@ liip_imagine:
       filters:
         thumbnail: { size: [144, 144], mode: inbound }
 
+    favicon_150:
+      quality: 70
+      filters:
+        thumbnail: { size: [150, 150], mode: inbound }
+
     favicon_152:
       quality: 70
       filters:
@@ -141,6 +151,11 @@ liip_imagine:
       quality: 70
       filters:
         thumbnail: { size: [180, 180], mode: inbound }
+
+    favicon_310:
+      quality: 70
+      filters:
+        thumbnail: { size: [310, 310], mode: inbound }
 
     default_socialIcon:
       quality: 70

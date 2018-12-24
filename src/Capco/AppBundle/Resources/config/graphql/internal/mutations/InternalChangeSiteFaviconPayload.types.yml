@@ -1,0 +1,7 @@
+InternalChangeSiteFaviconPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      siteFavicon:
+        type: 'SiteImage!'
+        description: 'The newly updated site image favicon'

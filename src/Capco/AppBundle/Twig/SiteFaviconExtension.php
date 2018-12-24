@@ -18,10 +18,10 @@ class SiteFaviconExtension extends \Twig_Extension
 
     public function getFunctions(): array
     {
-        return [new \Twig_SimpleFunction('site_favicon', [$this, 'getSiteFavicon'])];
+        return [new \Twig_SimpleFunction('site_favicons', [$this, 'getSiteFavicons'])];
     }
 
-    public function getSiteFavicon(): ?array
+    public function getSiteFavicons(): ?array
     {
         $mediaFavicon = $this->repository->getSiteFavicon()->getMedia();
 
@@ -38,14 +38,17 @@ class SiteFaviconExtension extends \Twig_Extension
                 'favicon_32',
                 'favicon_57',
                 'favicon_60',
+                'favicon_70',
                 'favicon_72',
                 'favicon_76',
                 'favicon_96',
                 'favicon_114',
                 'favicon_120',
                 'favicon_144',
+                'favicon_150',
                 'favicon_152',
                 'favicon_180',
+                'favicon_310',
             ]
             as $filter
         ) {
