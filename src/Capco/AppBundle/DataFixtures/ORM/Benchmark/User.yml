@@ -1,22 +1,30 @@
 Capco\UserBundle\Entity\User:
-    user{1..5000}:
-        username: <current()>
-        firstname: <current()>
-        lastname: <current()>
-        email: user<current()>@yopmail.com
-        enabled: true
-        userType: ~
-        salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
-        password: $2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe
-        confirmationToken: ~
-        phoneConfirmed: true
-    admin:
-        username: admin
-        email: admin@cap-collectif.com
-        enabled: true
-        userType: ~
-        salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
-        password: $2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        confirmationToken: ~
+  admin:
+    username: admin
+    email: admin@cap-collectif.com
+    enabled: true
+    userType: ~
+    salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
+    password: $2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    confirmationToken: ~
+    phoneConfirmed: true
+  voter{1..1000}:
+    username: voter<current()>
+    email: voter<current()>@cap-collectif.com
+    enabled: true
+    userType: ~
+    salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
+    password: $2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe
+    confirmationToken: ~
+    phoneConfirmed: true
+  user{1..5000}:
+    username: user<current()>
+    email: user<current()>@cap-collectif.com
+    enabled: true
+    userType: ~
+    salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
+    password: $2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe
+    confirmationToken: ~
+    phoneConfirmed: true

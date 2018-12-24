@@ -367,8 +367,10 @@ tweede_golf_prometheus:
         help: Number of newsletter subscribers
 
 hautelook_alice:
-  locale: '%locale%'
-  loading_limit: 1
+  # Locale to used for faker; must be a valid Faker locale otherwise will fallback to en_US
+  locale: "%locale%"
+  # Maximum number of time the loader will try to load the files passed
+  loading_limit: 100
 
 fos_user:
   db_driver: orm
@@ -728,7 +730,7 @@ overblog_graphql:
           - ValueResponse
           - VersionVote
           - SectionQuestion
-          
+
 limenius_react:
   default_rendering: 'both'
   serverside_rendering:

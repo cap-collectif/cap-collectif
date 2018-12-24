@@ -2,12 +2,18 @@ Capco\AppBundle\Entity\Project:
   project1:
     id: project1
     title: project-1
-    Author: '@user1'
+    Author: "@voter1"
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     exportable: true
   project2:
     id: project2
     title: project-2
-    Author: '@user1'
+    Author: "@voter1"
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+    exportable: true
+  project3:
+    id: project3
+    title: project-proposals
+    Author: "@voter1"
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     exportable: true

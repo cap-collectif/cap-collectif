@@ -48,7 +48,7 @@ class OpinionTabs extends React.Component<Props> {
   };
 
   getCommentSystem = () => {
-    const { opinion } = this.props;
+    const opinion = this.props.opinion;
     return opinion.section && opinion.section.commentSystem;
   };
 
@@ -58,7 +58,7 @@ class OpinionTabs extends React.Component<Props> {
       : 'global.simple_arguments';
 
   getDefaultKey = () => {
-    const { hash } = window.location;
+    const hash = window.location.hash;
     if (hash) {
       return this.getHashKey(hash);
     }
@@ -106,19 +106,19 @@ class OpinionTabs extends React.Component<Props> {
         <Tab.Container id="opinion-page-tabs" defaultActiveKey={this.getDefaultKey()}>
           <div>
             <Nav bsStyle="tabs">
-              {this.isCommentable() && (
-                <NavItem className="opinion-tabs" eventKey="arguments">
-                  <FormattedMessage
-                    id={this.getArgumentsTrad()}
-                    values={{ num: opinion.allArguments ? opinion.allArguments.totalCount : 0 }}
-                  />
-                </NavItem>
-              )}
               {this.isVersionable() && (
                 <NavItem eventKey="versions" className="opinion-tabs">
                   <FormattedMessage
                     id="global.versions"
                     values={{ num: opinion.allVersions ? opinion.allVersions.totalCount : 0 }}
+                  />
+                </NavItem>
+              )}
+              {this.isCommentable() && (
+                <NavItem className="opinion-tabs" eventKey="arguments">
+                  <FormattedMessage
+                    id={this.getArgumentsTrad()}
+                    values={{ num: opinion.allArguments ? opinion.allArguments.totalCount : 0 }}
                   />
                 </NavItem>
               )}
@@ -197,7 +197,7 @@ class OpinionTabs extends React.Component<Props> {
       /* $FlowFixMe */
       return <ArgumentsBox opinion={opinion} />;
     }
-
+    
     if (this.isFollowable()) {
       /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
       return <OpinionFollowersBox opinion={opinion} pageAdmin={false} />;

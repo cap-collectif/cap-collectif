@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\Steps\SelectionStep:
+  selectionstep1:
+    id: selectionstep1
+    title: Sélection
+    label: Sélection
+    isEnabled: true
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('now', '+40 days')>
+    body: <p><text(1000)></p>
+    voteType: 1
+    votesHelpText: <p><text(1000)></p>

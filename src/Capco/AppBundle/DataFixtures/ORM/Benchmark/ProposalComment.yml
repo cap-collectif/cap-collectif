@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\ProposalComment:
+  propComment{1..1000}:
+    id: 'proposalComment<current()>'
+    proposal: '@proposal<numberBetween(1, 1000)>'
+    Author: '@voter<numberBetween(1, 1000)>'
+    body: <text(300)>
+    createdAt: '<dateTimeBetween("-2 days", "now")>'
