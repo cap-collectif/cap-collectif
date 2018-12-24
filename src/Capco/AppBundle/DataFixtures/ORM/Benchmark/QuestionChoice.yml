@@ -3,15 +3,19 @@ Capco\AppBundle\Entity\QuestionChoice:
     title: Choix 1
     position: 1
     description: Description
+    question: '@multiplequestion1'
   questionchoice2:
     title: Choix 2
     position: 2
     description: Description
+    question: '@multiplequestion1'
   questionchoice3:
     title: Choix 3
     position: 3
     description: Description
+    question: '@multiplequestion1'
   questionchoice4:
     title: Choix 4
     position: 4
     description: Description
+    question: '@multiplequestion1'

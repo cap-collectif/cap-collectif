@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Reply:
-  reply{1..5000}:
-    author: '@user<current()>'
+  reply{1..100}:
+    author: '@voter<current()>'
     questionnaire: '@questionnaire1'
     createdAt: <(new \DateTime('2016-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
