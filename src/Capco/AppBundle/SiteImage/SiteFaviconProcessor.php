@@ -9,6 +9,7 @@ use Capco\AppBundle\Twig\SiteFaviconExtension;
 use Capco\AppBundle\Utils\Text;
 use Capco\MediaBundle\Entity\Media;
 use ColorThief\ColorThief;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -88,10 +89,15 @@ class SiteFaviconProcessor
     private $filesystem;
     private $siteResolver;
     private $urlResolver;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     public function __construct(
         SiteFaviconExtension $siteFaviconExtension,
         SerializerInterface $serializer,
+        LoggerInterface $logger,
         UrlResolver $urlResolver,
         Resolver $siteResolver,
         Filesystem $filesystem,
@@ -103,6 +109,7 @@ class SiteFaviconProcessor
         $this->filesystem = $filesystem;
         $this->siteResolver = $siteResolver;
         $this->urlResolver = $urlResolver;
+        $this->logger = $logger;
     }
 
     public function process(SiteImage $siteFavicon): void
@@ -111,7 +118,7 @@ class SiteFaviconProcessor
             $siteFavicons = $this->siteFaviconExtension->getSiteFavicons();
 
             try {
-                [$r, $g, $b] = ColorThief::getColor(
+                list($r, $g, $b) = ColorThief::getColor(
                     $this->getSourceImageFromMedia($siteFavicon->getMedia())
                 );
                 $color = Text::rgbToHex($r, $g, $b);
@@ -189,20 +196,32 @@ class SiteFaviconProcessor
 
     private function dumpBrowserConfigFile(): void
     {
-        $this->filesystem->dumpFile(
-            $this->webDir . self::BROWSERCONFIG_FILENAME,
-            $this->serializer->serialize($this->browserConfig, 'xml', [
-                'xml_root_node_name' => 'browserconfig',
-            ])
-        );
+        try {
+            $this->filesystem->dumpFile(
+                $this->webDir . self::BROWSERCONFIG_FILENAME,
+                $this->serializer->serialize($this->browserConfig, 'xml', [
+                    'xml_root_node_name' => 'browserconfig',
+                ])
+            );
+        } catch (\Exception $exception) {
+            $this->logger->error(
+                'Could not write browserconfig file into web root. Please check your permissions'
+            );
+        }
     }
 
     private function dumpWebManifestFile(): void
     {
-        $this->filesystem->dumpFile(
-            $this->webDir . self::WEB_MANIFEST_FILENAME,
-            $this->serializer->serialize($this->webManifest, 'json')
-        );
+        try {
+            $this->filesystem->dumpFile(
+                $this->webDir . self::WEB_MANIFEST_FILENAME,
+                $this->serializer->serialize($this->webManifest, 'json')
+            );
+        } catch (\Exception $exception) {
+            $this->logger->error(
+                'Could not write manifest file into web root. Please check your permissions'
+            );
+        }
     }
 
     private function getSourceImageFromMedia(Media $media)
