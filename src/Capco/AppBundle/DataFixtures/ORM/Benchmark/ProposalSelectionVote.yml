@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\ProposalSelectionVote:
-  proposalSelectionVote{1...1000}:
+  proposalSelectionVote{1..500}:
     id: '<current()>'
     proposal: '@proposal<current()>'
     selectionStep: '@selectionstep1'

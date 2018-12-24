@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     use SerializerAwareTrait;
+
     private $normalizer;
 
     public function __construct(ObjectNormalizer $normalizer)

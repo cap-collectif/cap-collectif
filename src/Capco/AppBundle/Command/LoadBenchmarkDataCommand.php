@@ -2,11 +2,13 @@
 
 namespace Capco\AppBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Capco\AppBundle\Publishable\DoctrineListener;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 class LoadBenchmarkDataCommand extends ContainerAwareCommand
 {
@@ -26,12 +28,31 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
     {
         if (!$input->getOption('force')) {
             $output->writeln(
-                'This command will clear your databse and populate it with lots of data, if you\'re sure that you want those data, go ahead and add --force'
+                'This command will clear your database and populate it with lots of data, if you\'re sure that you want those data, go ahead and add --force'
             );
             $output->writeln('Please set the --force option to run this command');
 
             return;
         }
+
+        $eventManager = $this->getContainer()
+            ->get('doctrine')
+            ->getManager()
+            ->getEventManager();
+        $elasticsearchListener = $this->getContainer()->get(ElasticsearchDoctrineListener::class);
+        $publishableListener = $this->getContainer()->get(DoctrineListener::class);
+
+        $eventManager->removeEventListener(
+            $elasticsearchListener->getSubscribedEvents(),
+            $elasticsearchListener
+        );
+        $output->writeln('Disabled <info>' . \get_class($elasticsearchListener) . '</info>.');
+
+        $eventManager->removeEventListener(
+            $publishableListener->getSubscribedEvents(),
+            $publishableListener
+        );
+        $output->writeln('Disabled <info>' . \get_class($publishableListener) . '</info>.');
 
         $this->loadFixtures($output);
         $this->loadToggles($output);
