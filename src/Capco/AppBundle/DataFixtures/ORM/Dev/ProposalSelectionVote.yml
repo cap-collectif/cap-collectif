@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     id (unique): '<numberBetween(1001, 1050)>'
     proposal: '@proposal3'
     selectionStep: '@selectionstep1'
-    user (unique): '@user<current()>'
+    user: '@user<current()>'
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
   proposalSelectionVote51:

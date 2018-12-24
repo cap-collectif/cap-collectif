@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\Proposal:
-  proposal{1..5000}:
+  proposal{1..500}:
     id: 'proposal<current()>'
     title: 'proposal<current()>'
     body: |
@@ -10,3 +10,4 @@ Capco\AppBundle\Entity\Proposal:
     likers: ['@voter1', '@voter2', '@voter3', '@voter4', '@voter5']
     publishedAt: <(new \DateTime())>
     createdAt: <(new \DateTime())>
+    reference: <current()>

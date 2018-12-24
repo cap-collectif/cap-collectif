@@ -26,7 +26,7 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/cap-collectif/serializer"
+            "url": "https://github.com/ArteGEIE/serializer"
         },
         {
             "type": "vcs",
@@ -131,9 +131,9 @@
         "php-http/httplug": "^1.1",
         "php-http/client-common": "^1.7",
         "php-http/guzzle6-adapter": "^1.1",
-        "simplesamlphp/simplesamlphp": "^1.16",
+        "simplesamlphp/simplesamlphp": "^1.15",
         "hslavich/simplesamlphp-bundle": "dev-master",
-        "simplesamlphp/saml2": "^3.3",
+        "simplesamlphp/saml2": "^3.1",
         "cap-collectif/id-to-uuid": "^1.1",
         "jolicode/jolitypo-bundle": "^1.0",
         "caxy/htmldiff-bundle": "0.1.2",
