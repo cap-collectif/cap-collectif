@@ -20,6 +20,10 @@ InternalQuery:
           provider:
             type: 'MapTokenProvider!'
             description: 'The map provider'
+      siteFavicon:
+        type: 'SiteImage!'
+        description: 'Get the current favicon'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteFaviconQueryResolver")'
       registrationForm:
         type: 'InternalRegistrationForm'
         description: 'Get the current registration form'
