@@ -12,6 +12,7 @@ import DatesInterval from '../../Utils/DatesInterval';
 import type { GlobalState, Dispatch } from '../../../types';
 import { changeEventSelected } from '../../../redux/modules/event';
 import type { MapTokens } from '../../../redux/modules/user';
+import type { MapOptions } from '../../Proposal/Map/LeafletMap';
 
 type Props = {|
   markers: Object | '',

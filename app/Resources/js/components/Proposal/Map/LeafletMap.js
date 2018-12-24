@@ -14,7 +14,7 @@ type MapCenterObject = {
   lng: number,
 };
 
-type MapOptions = {
+export type MapOptions = {
   center: MapCenterObject,
   zoom: number,
 };
