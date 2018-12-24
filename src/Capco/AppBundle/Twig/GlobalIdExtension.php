@@ -1,19 +1,15 @@
 <?php
+
 namespace Capco\AppBundle\Twig;
 
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class GlobalIdExtension extends \Twig_Extension
 {
-    public function getName()
-    {
-        return 'globalId';
-    }
-
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            'toGlobalId' => new \Twig_Filter_Method($this, 'toGlobalId'),
+            'toGlobalId' => new \Twig_SimpleFilter($this, 'toGlobalId'),
         ];
     }
 
