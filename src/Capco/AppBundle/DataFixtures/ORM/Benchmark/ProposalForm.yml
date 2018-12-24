@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\ProposalForm:
   proposalForm1:
     id: proposalForm1
-    title: Collecte des propositions pour le budget 2016 de la Ville de Rennes
+    title: Le grand débat
     description: <p><text(100)></p>
     step: "@collectstep1"
     notificationsConfiguration: "@proposalFormNotificationConfiguration1"
@@ -16,8 +16,8 @@ Capco\AppBundle\Entity\ProposalForm:
     usingCategories: true
     themeMandatory: false
     categoryMandatory: true
-    usingAddress: true
-    proposalInAZoneRequired: true
+    usingAddress: false
+    proposalInAZoneRequired: false
     zoomMap: 12
     latMap: 48.1159675
     lngMap: -1.7234738

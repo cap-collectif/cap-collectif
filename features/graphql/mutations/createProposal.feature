@@ -67,9 +67,27 @@ Scenario: GraphQL client wants to create a proposal
         "title": "Acheter un sauna pour Capco",
         "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
         "theme": "theme1",
-        "district": "district11",
-        "address": "[{\"address_components\":[{\"long_name\":\"36\",\"short_name\":\"36\",\"types\":[\"street_number\"]},{\"long_name\":\"Rue de Dunkerque\",\"short_name\":\"Rue de Dunkerque\",\"types\":[\"route\"]},{\"long_name\":\"Paris\",\"short_name\":\"Paris\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Paris\",\"short_name\":\"Paris\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"\u00CEle-de-France\",\"short_name\":\"\u00CEle-de-France\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"75010\",\"short_name\":\"75010\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"36 Rue de Dunkerque, 75010 Paris, France\",\"geometry\":{\"location\":{\"lat\":48.8810636,\"lng\":2.3502134000000297},\"location_type\":\"ROOFTOP\",\"viewport\":{\"south\":48.8797146197085,\"west\":2.348864419708434,\"north\":48.8824125802915,\"east\":2.3515623802915115}},\"place_id\":\"ChIJ10eV2Gtu5kcRbdjSIdhzkZc\",\"types\":[\"street_address\"]}]",
-        "responses": []
+        "district": "district1",
+        "category": "pCategory1",
+        "address": "[{\"address_components\":[{\"long_name\":\"262\",\"short_name\":\"262\",\"types\":[\"street_number\"]},{\"long_name\":\"Avenue Général Leclerc\",\"short_name\":\"Avenue Général Leclerc\",\"types\":[\"route\"]},{\"long_name\":\"Rennes\",\"short_name\":\"Rennes\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Ille-et-Vilaine\",\"short_name\":\"Ille-et-Vilaine\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"Bretagne\",\"short_name\":\"Bretagne\",\"types\":[\"administrative_area_level_1\",\"political\"]},{\"long_name\":\"France\",\"short_name\":\"FR\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"35700\",\"short_name\":\"35700\",\"types\":[\"postal_code\"]}],\"formatted_address\":\"262 Avenue Général Leclerc, 35700 Rennes, France\",\"geometry\":{\"bounds\":{\"northeast\":{\"lat\":48.1140978,\"lng\":-1.6404985},\"southwest\":{\"lat\":48.1140852,\"lng\":-1.640499}},\"location\":{\"lat\":48.1140852,\"lng\":-1.6404985},\"location_type\":\"RANGE_INTERPOLATED\",\"viewport\":{\"northeast\":{\"lat\":48.1154404802915,\"lng\":-1.639149769708498},\"southwest\":{\"lat\":48.1127425197085,\"lng\":-1.641847730291502}}},\"place_id\":\"EjIyNjIgQXZlbnVlIEfDqW7DqXJhbCBMZWNsZXJjLCAzNTcwMCBSZW5uZXMsIEZyYW5jZQ\",\"types\":[\"street_address\"]}]",
+        "responses": [
+          {
+            "question": "1",
+            "value": ""
+          },
+          {
+            "question": "3",
+            "value": "Réponse à la question obligatoire"
+          },
+          {
+            "question": "11",
+            "medias": ["media10"]
+          },
+          {
+            "question": "12",
+            "medias": ["media10"]
+          }
+        ]
       }
     }
   }

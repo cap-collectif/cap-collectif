@@ -1,7 +1,7 @@
 Capco\AppBundle\Entity\Steps\CollectStep:
   collectstep1:
     id: collectstep1
-    title: Collecte des propositions
+    title: Collecte du grand débat
     label: Dépôt
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>

@@ -5029,6 +5029,7 @@ flow-annotation-check@1.8.1:
 flow-bin@^0.89.0:
   version "0.89.0"
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.89.0.tgz#6bd29c2af7e0f429797f820662f33749105c32fa"
+  integrity sha512-DkO4PsXYrl53V6G5+t5HbRMC5ajYUQej2LEGPUZ+j9okTb41Sn5j9vfxsCpXMEAslYnQoysHhYu4GUZsQX/DrQ==
 
 flow-coverage-report@^0.6.0:
   version "0.6.0"
@@ -7926,7 +7927,7 @@ node-dir@^0.1.10:
   dependencies:
     minimatch "^3.0.2"
 
-node-expat@^2.3.15, node-expat@^2.3.16:
+node-expat@^2.3.15:
   version "2.3.17"
   resolved "https://registry.yarnpkg.com/node-expat/-/node-expat-2.3.17.tgz#5fab92c16737ec5b9beafdeba99ecdaba1ebc466"
   dependencies:
@@ -10798,6 +10799,7 @@ split-string@^3.0.1, split-string@^3.0.2:
 sprintf-js@^1.0.3:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.2.tgz#da1765262bf8c0f571749f2ad6c26300207ae673"
+  integrity sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -11491,6 +11493,7 @@ uncontrollable@^5.0.0:
 underscore.string@3.3.5, underscore.string@~2.4.0:
   version "3.3.5"
   resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-3.3.5.tgz#fc2ad255b8bd309e239cbc5816fd23a9b7ea4023"
+  integrity sha512-g+dpmgn+XBneLmXXo+sGlW5xQEt4ErkS3mgeN2GFbremYeMBSJKr9Wf2KJplQVaiPY/f7FN6atosWYNm9ovrYg==
   dependencies:
     sprintf-js "^1.0.3"
     util-deprecate "^1.0.2"

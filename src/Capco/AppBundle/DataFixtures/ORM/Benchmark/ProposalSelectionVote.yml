@@ -3,4 +3,4 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     id: '<current()>'
     proposal: '@proposal<current()>'
     selectionStep: '@selectionstep1'
-    user: '@user<current()>'
+    user: '@voter<current()>'
