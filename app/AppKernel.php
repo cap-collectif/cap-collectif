@@ -1,4 +1,5 @@
 <?php
+
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -44,7 +45,7 @@ class AppKernel extends Kernel
             new Sonata\MediaBundle\SonataMediaBundle(),
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            # Prometheus
+            // Prometheus
             new TweedeGolf\PrometheusBundle\TweedeGolfPrometheusBundle(),
             // project bundles
             new Capco\AppBundle\CapcoAppBundle(),
@@ -88,6 +89,8 @@ class AppKernel extends Kernel
             new Overblog\GraphiQLBundle\OverblogGraphiQLBundle(),
             // CORS
             new Nelmio\CorsBundle\NelmioCorsBundle(),
+            // NewRelic
+            new Ekino\NewRelicBundle\EkinoNewRelicBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -5,6 +5,7 @@ imports:
   - { resource: swarrot.yml }
   - { resource: joli/jolitypo.yml }
   - { resource: cors.yml }
+  - { resource: newrelic.yml }
 
 parameters:
   database_driver: '%env(SYMFONY_DATABASE_DRIVER)%'

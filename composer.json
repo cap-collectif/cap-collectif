@@ -115,7 +115,7 @@
         "nelmio/api-doc-bundle": "^2.13",
         "willdurand/hateoas-bundle": "~1.1",
         "snc/redis-bundle": "^2.0",
-        "ekino/newrelic-bundle": "^1.3",
+        "ekino/newrelic-bundle": "^2.0",
         "google/recaptcha": "^1.1",
         "mattketmo/email-checker": "^1.5",
         "twilio/sdk": "^4.10",
