@@ -41,10 +41,10 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
 
     protected function loadFixtures(OutputInterface $output)
     {
-        $command = $this->getApplication()->find('hautelook_alice:doctrine:fixtures:load');
+        $command = $this->getApplication()->find('doctrine:fixtures:load');
         $input = new ArrayInput([
-            'command' => 'hautelook_alice:doctrine:fixtures:load',
-            '--fixtures' => 'src/Capco/AppBundle/DataFixtures/ORM/Benchmark',
+            'command' => 'doctrine:fixtures:load',
+            '--fixtures' => 'src/Capco/AppBundle/DataBenchmark/ORM',
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
