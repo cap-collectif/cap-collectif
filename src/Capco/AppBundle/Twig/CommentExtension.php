@@ -15,7 +15,7 @@ class CommentExtension extends \Twig_Extension
         $this->resolver = $resolver;
     }
 
-    public function getFunctions(): array
+    public function getFunctions()
     {
         return [
             new \Twig_SimpleFunction('capco_comment_can_show', [$this, 'canShowCommentOnObject']),
@@ -44,12 +44,12 @@ class CommentExtension extends \Twig_Extension
         return $this->resolver->getRelatedObject($comment);
     }
 
-    public function canShowCommentOnObject(CommentableInterface $object): bool
+    public function canShowCommentOnObject(CommentableInterface $object)
     {
         return $object->isCommentable();
     }
 
-    public function canAddCommentOnObject(CommentableInterface $object): bool
+    public function canAddCommentOnObject(CommentableInterface $object)
     {
         return $object->acceptNewComments();
     }

@@ -55,7 +55,17 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
         $output->writeln('Disabled <info>' . \get_class($publishableListener) . '</info>.');
 
         $this->loadFixtures($output);
+
+        $output->writeln('<info>Database loaded !</info>');
+
         $this->loadToggles($output);
+
+        $this->getContainer()
+            ->get('doctrine')
+            ->getManager()
+            ->clear();
+
+        $this->populateElasticsearch($output);
 
         $output->writeln('Load benchmark data completed');
     }
@@ -79,5 +89,33 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
+    }
+
+    protected function populateElasticsearch(OutputInterface $output)
+    {
+        $this->runCommands(
+            [
+                'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
+            ],
+            $output
+        );
+
+        $this->runCommands(
+            [
+                'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
+            ],
+            $output
+        );
+    }
+
+    private function runCommands(array $commands, $output)
+    {
+        foreach ($commands as $key => $value) {
+            $input = new ArrayInput($value);
+            $input->setInteractive(false);
+            $this->getApplication()
+                ->find($key)
+                ->run($input, $output);
+        }
     }
 }

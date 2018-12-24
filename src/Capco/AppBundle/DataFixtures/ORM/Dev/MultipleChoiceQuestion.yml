@@ -31,8 +31,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestion4:
     id: 16
     title: Classez vos choix
-    helpText:
-      Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
     required: false
     type: 6
     randomQuestionChoices: true
@@ -80,8 +79,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestion11:
     id: 23
     title: Classez vos choix
-    helpText:
-      Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
     required: false
     type: 6
     randomQuestionChoices: false

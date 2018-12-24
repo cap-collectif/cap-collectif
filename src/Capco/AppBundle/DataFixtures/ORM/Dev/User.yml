@@ -118,12 +118,13 @@ Capco\UserBundle\Entity\User:
 
   user{6..200}:
     id: 'user<current()>'
-    username (unique): <username()>
+    username: user<current()>
+    email: user<current()>@cap-collectif.com
     firstname: <firstname()>
     lastname: <lastname()>
-    email (unique): <email()>
     userType: '@UserType1'
-    password: <password()>
+    salt: avqhrb1jee8gw8c48gw8c8g4w4w4okk
+    password: $2y$13$avqhrb1jee8gw8c48gw8cuLpm5DfMXyE2mOJIAXgkxnxnYAiwldNe
     roles:
       - 'ROLE_USER'
     enabled: true
