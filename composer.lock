@@ -6,6 +6,7 @@
     ],
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "content-hash": "5b2c835e0e662d126741da04a8570d62",
 =======
     "content-hash": "a03665ce42b70a5b57a4988f91354fbd",
@@ -13,6 +14,9 @@
 =======
     "content-hash": "3824b80aed65dd4f499177e42820932d",
 >>>>>>> - Fixed composer.lock causing failing tests
+=======
+    "content-hash": "a03665ce42b70a5b57a4988f91354fbd",
+>>>>>>> - Composer update --lock
     "packages": [
         {
             "name": "behat/transliterator",
