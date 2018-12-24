@@ -36,6 +36,8 @@ class SiteFaviconExtension extends \Twig_Extension
             [
                 'favicon_16',
                 'favicon_32',
+                'favicon_36',
+                'favicon_48',
                 'favicon_57',
                 'favicon_60',
                 'favicon_70',
@@ -48,6 +50,7 @@ class SiteFaviconExtension extends \Twig_Extension
                 'favicon_150',
                 'favicon_152',
                 'favicon_180',
+                'favicon_192',
                 'favicon_310',
             ]
             as $filter

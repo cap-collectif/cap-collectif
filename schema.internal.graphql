@@ -2047,6 +2047,28 @@ scalar HTML
 # A string containing an IP address.
 scalar IP
 
+input InternalChangeSiteFaviconInput {
+  # The media id to associate for the website favicon
+  mediaId: ID!
+  clientMutationId: String
+}
+
+type InternalChangeSiteFaviconPayload {
+  # The newly updated site image favicon
+  siteFavicon: SiteImage!
+  clientMutationId: String
+}
+
+input InternalRemoveSiteFaviconInput {
+  clientMutationId: String
+}
+
+type InternalRemoveSiteFaviconPayload {
+  # The newly updated site image favicon
+  siteFavicon: SiteImage!
+  clientMutationId: String
+}
+
 # A string containing JSON code.
 scalar JSON
 
@@ -2386,6 +2408,8 @@ type Mutation {
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
   changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
   changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
+  removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload
+  changeSiteFavicon(input: InternalChangeSiteFaviconInput!): InternalChangeSiteFaviconPayload
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
@@ -3978,6 +4002,9 @@ type Query {
     provider: MapTokenProvider!
   ): MapToken
 
+  # Get the current favicon
+  siteFavicon: SiteImage!
+
   # Get the current registration form
   registrationForm: RegistrationForm
   projectAuthors: [User!]!
@@ -5049,6 +5076,31 @@ type SimpleQuestion implements Question {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
+}
+
+# A site image
+type SiteImage {
+  # The creation date
+  createdAt: DateTime!
+
+  # The updated date
+  updatedAt: DateTime
+  id: ID!
+
+  # A unique key to distinguish site image
+  keyname: String!
+
+  # Does the site image is currently enabled?
+  isEnabled: Boolean!
+
+  # The position of the site image
+  position: Int!
+
+  # The category of the site image
+  category: String!
+
+  # The associated media of the site image
+  media: Media
 }
 
 # A source

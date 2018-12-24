@@ -1,16 +1,38 @@
 {% spaceless %}
-<link rel="apple-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}"/>
-<link rel="apple-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}"/>
-<link rel="apple-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}"/>
-<link rel="apple-icon" sizes="76x76" href="{{ asset('apple-icon-76x76.png') }}"/>
-<link rel="apple-icon" sizes="114x114" href="{{ asset('apple-icon-114x114.png') }}"/>
-<link rel="apple-icon" sizes="120x120" href="{{ asset('apple-icon-120x120.png') }}"/>
-<link rel="apple-icon" sizes="144x144" href="{{ asset('apple-icon-144x144.png') }}"/>
-<link rel="apple-icon" sizes="152x152" href="{{ asset('apple-icon-152x152.png') }}"/>
-<link rel="apple-icon" sizes="180x180" href="{{ asset('apple-icon-180x180.png') }}"/>
-<link rel="icon" type="image/png" href="{{ asset('favicon-16x16.png') }}" sizes="16x16">
-<link rel="icon" type="image/png" href="{{ asset('favicon-32x32.png') }}" sizes="32x32">
-<link rel="icon" type="image/png" href="{{ asset('favicon-96x96.png') }}" sizes="96x96">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-TileImage" content="{{ asset('ms-icon-144x144.png') }}">
+    {% set favicons = site_favicons() %}
+    {% if favicons is not null %}
+        <link rel="icon" type="image/png" href="{{ favicons['favicon_16'] }}" sizes="16x16">
+        <link rel="icon" type="image/png" href="{{ favicons['favicon_32'] }}" sizes="32x32">
+        <link rel="icon" type="image/png" href="{{ favicons['favicon_96'] }}" sizes="96x96">
+        <link rel="apple-icon" sizes="57x57" href="{{ favicons['favicon_57'] }}"/>
+        <link rel="apple-icon" sizes="60x60" href="{{ favicons['favicon_60'] }}"/>
+        <link rel="apple-icon" sizes="72x72" href="{{ favicons['favicon_72'] }}"/>
+        <link rel="apple-icon" sizes="76x76" href="{{ favicons['favicon_76'] }}"/>
+        <link rel="apple-icon" sizes="114x114" href="{{ favicons['favicon_114'] }}"/>
+        <link rel="apple-icon" sizes="120x120" href="{{ favicons['favicon_120'] }}"/>
+        <link rel="apple-icon" sizes="144x144" href="{{ favicons['favicon_144'] }}"/>
+        <link rel="apple-icon" sizes="152x152" href="{{ favicons['favicon_152'] }}"/>
+        <link rel="apple-icon" sizes="180x180" href="{{ favicons['favicon_180'] }}"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ favicons['favicon_180'] }}">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="{{ favicons['favicon_144'] }}">
+    {% else %}
+        <link rel="apple-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}"/>
+        <link rel="apple-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}"/>
+        <link rel="apple-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}"/>
+        <link rel="apple-icon" sizes="76x76" href="{{ asset('apple-icon-76x76.png') }}"/>
+        <link rel="apple-icon" sizes="114x114" href="{{ asset('apple-icon-114x114.png') }}"/>
+        <link rel="apple-icon" sizes="120x120" href="{{ asset('apple-icon-120x120.png') }}"/>
+        <link rel="apple-icon" sizes="144x144" href="{{ asset('apple-icon-144x144.png') }}"/>
+        <link rel="apple-icon" sizes="152x152" href="{{ asset('apple-icon-152x152.png') }}"/>
+        <link rel="apple-icon" sizes="180x180" href="{{ asset('apple-icon-180x180.png') }}"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-icon-180x180.png') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('favicon-16x16.png') }}" sizes="16x16">
+        <link rel="icon" type="image/png" href="{{ asset('favicon-32x32.png') }}" sizes="32x32">
+        <link rel="icon" type="image/png" href="{{ asset('favicon-96x96.png') }}" sizes="96x96">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="{{ asset('ms-icon-144x144.png') }}">
+    {% endif %}
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-config" content="/browserconfig.xml" />
 {% endspaceless %}
