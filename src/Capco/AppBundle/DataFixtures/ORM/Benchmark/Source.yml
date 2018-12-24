@@ -7,3 +7,11 @@ Capco\AppBundle\Entity\Source:
     Opinion: '@opinion217'
     Category: '@Category<numberBetween(1,5)>'
     link: http://www.cap-collectif.com/
+  source{201..2000}:
+    id: 'source<current()>'
+    title: <text(20)>
+    body: <text(1000)>
+    Author: '@user<numberBetween(1,3)>'
+    Opinion: '@opinion<numberBetween(1,2000)>'
+    Category: '@Category<numberBetween(1,5)>'
+    link: http://www.cap-collectif.com/
