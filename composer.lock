@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9967a72783fa743f7dc3e939da9f0899",
+    "content-hash": "2ef413f22120e354fd44d572215fab4b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1974,49 +1974,43 @@
         },
         {
             "name": "ekino/newrelic-bundle",
-            "version": "2.0.1",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ekino/EkinoNewRelicBundle.git",
-                "reference": "17c140db645439d973e69181713555158a69ae16"
+                "reference": "92877a9ba014401d635da4890ca0f5b2d9df1c59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ekino/EkinoNewRelicBundle/zipball/17c140db645439d973e69181713555158a69ae16",
-                "reference": "17c140db645439d973e69181713555158a69ae16",
+                "url": "https://api.github.com/repos/ekino/EkinoNewRelicBundle/zipball/92877a9ba014401d635da4890ca0f5b2d9df1c59",
+                "reference": "92877a9ba014401d635da4890ca0f5b2d9df1c59",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1",
-                "symfony/config": "^3.4 || ^4.0",
-                "symfony/console": "^3.4 || ^4.0",
-                "symfony/dependency-injection": "^3.4 || ^4.0",
-                "symfony/event-dispatcher": "^3.4 || ^4.0",
-                "symfony/http-kernel": "^3.4 || ^4.0"
+                "php": ">=5.3"
             },
             "conflict": {
-                "twig/twig": "<1.32"
+                "twig/twig": "<1.26"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.11",
-                "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-                "nyholm/symfony-bundle-test": "^1.4",
-                "symfony/monolog-bundle": "^3.2",
-                "symfony/phpunit-bridge": "^4.0",
-                "twig/twig": "^1.32 || ^2.4"
+                "phpunit/phpunit": "^4.8",
+                "silex/silex": "^1.0",
+                "symfony/console": "^2.7|^3.0",
+                "symfony/framework-bundle": "^2.7|^3.0",
+                "twig/twig": "^1.26|^2.0"
             },
             "suggest": {
-                "symfony/monolog-bundle": "^3.2"
+                "sonata-project/block-bundle": "2.2.*@dev"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Ekino\\NewRelicBundle\\": ""
+                    "Ekino\\Bundle\\NewRelicBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2037,7 +2031,7 @@
                 "monitoring",
                 "performance"
             ],
-            "time": "2018-08-01T09:57:44+00:00"
+            "time": "2017-11-18T15:48:56+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",

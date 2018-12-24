@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\MenuItem;
@@ -86,11 +87,8 @@ class DefaultController extends Controller
     /**
      * @Cache(smaxage=60, public=true)
      * @Template("CapcoAppBundle:Default:footer.html.twig")
-     *
-     * @param mixed $max
-     * @param mixed $offset
      */
-    public function footerAction($max = 4, $offset = 0)
+    public function footerAction()
     {
         $footerLinks = $this->get('capco.menu_item.repository')->getParentItems(
             MenuItem::TYPE_FOOTER

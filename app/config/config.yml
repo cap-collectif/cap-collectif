@@ -5,7 +5,6 @@ imports:
   - { resource: swarrot.yml }
   - { resource: joli/jolitypo.yml }
   - { resource: cors.yml }
-  - { resource: newrelic.yml }
 
 parameters:
   database_driver: '%env(SYMFONY_DATABASE_DRIVER)%'
@@ -172,6 +171,10 @@ twig:
     publicApiKeyRepo: '@Capco\AppBundle\Repository\PublicApiTokenRepository'
   paths:
     '%kernel.root_dir%/../src/Capco/AppBundle/Mailer/templates': CapcoMail
+
+ekino_new_relic:
+  enabled: true
+  log_exceptions: true
 
 # Fetch xlf files from Loco: CapcoAppBundle.{locale}.xlf and validators.{locale}.xlf
 translation_adapter_loco:

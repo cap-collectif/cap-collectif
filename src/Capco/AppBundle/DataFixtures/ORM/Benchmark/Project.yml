@@ -5,15 +5,18 @@ Capco\AppBundle\Entity\Project:
     Author: '@voter1'
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     exportable: true
+    visibility: 2
   project2:
     id: project2
     title: project-2
     Author: '@voter1'
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     exportable: true
+    visibility: 2
   project3:
     id: project3
     title: project-proposals
     Author: '@voter1'
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     exportable: true
+    visibility: 2
