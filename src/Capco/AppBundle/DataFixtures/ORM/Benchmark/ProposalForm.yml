@@ -2,6 +2,7 @@ Capco\AppBundle\Entity\ProposalForm:
   proposalForm1:
     id: proposalForm1
     title: Le grand débat
+    slug: 'le-grand-debat'
     description: <p><text(100)></p>
     step: '@collectstep1'
     notificationsConfiguration: '@proposalFormNotificationConfiguration1'

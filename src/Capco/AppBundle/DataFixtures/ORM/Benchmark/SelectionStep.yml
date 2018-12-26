@@ -2,6 +2,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
   selectionstep1:
     id: selectionstep1
     title: Sélection
+    slug: selection
     label: Sélection
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>

@@ -2,45 +2,44 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Form\ProjectSearchType;
-use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Helper\ProjectHelper;
-use Capco\AppBundle\Resolver\ContributionResolver;
+use Capco\AppBundle\Form\ProjectSearchType;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use JMS\Serializer\SerializationContext;
+use Symfony\Component\HttpFoundation\Request;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Symfony\Component\HttpFoundation\Response;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Resolver\ContributionResolver;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 
 class ProjectController extends Controller
 {
     /**
-     * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
+     * @Cache(smaxage="60", public="true")
      * @Template("CapcoAppBundle:Project:lastProjects.html.twig")
-     *
-     * @param mixed $max
-     * @param mixed $offset
      */
-    public function lastProjectsAction($max = 4, $offset = 0)
+    public function lastProjectsAction(int $max = 4, int $offset = 0)
     {
         $props = $this->get('serializer')->serialize(
             [
-                'projects' => $this->get(
-                    'Capco\AppBundle\Repository\ProjectRepository'
-                )->getLastPublished($max, $offset, $this->getUser()),
+                'projects' => $this->get(ProjectRepository::class)->getLastPublished(
+                    $max,
+                    $offset,
+                    $this->getUser()
+                ),
             ],
             'json',
             ['Projects', 'Steps', 'UserDetails', 'StepTypes', 'ThemeDetails', 'ProjectType']
@@ -86,10 +85,6 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/trashed", name="app_consultation_show_trashed", defaults={"_feature_flags" = "project_trash"} )
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_trashed.html.twig")
-     *
-     * @param Project $project
-     *
-     * @return array
      */
     public function showTrashedAction(Project $project)
     {
@@ -190,12 +185,16 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/events", name="app_consultation_show_events", defaults={"_feature_flags" = "calendar"})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_events.html.twig")
+     * @Cache(smaxage="60", public=true)
      */
     public function showEventsAction(Project $project)
     {
-        $groupedEvents = $this->get(
-            'Capco\AppBundle\Resolver\EventResolver'
-        )->getEventsGroupedByYearAndMonth(null, null, $project->getSlug(), null);
+        $groupedEvents = $this->get(EventResolver::class)->getEventsGroupedByYearAndMonth(
+            null,
+            null,
+            $project->getSlug(),
+            null
+        );
         $nbEvents = $this->get(EventResolver::class)->countEvents(
             null,
             null,
@@ -216,11 +215,7 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_posts.html.twig")
-     *
-     * @param $page
-     * @param $project
-     *
-     * @return array
+     * @Cache(smaxage="60", public=true)
      */
     public function showPostsAction(Project $project, $page)
     {
@@ -254,8 +249,6 @@ class ProjectController extends Controller
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_contributors.html.twig")
      * @Cache(smaxage="120", public=true)
-     *
-     * @param mixed $page
      */
     public function showContributorsAction(Project $project, $page)
     {
@@ -290,6 +283,7 @@ class ProjectController extends Controller
     /**
      * @Route("/projects", name="app_project")
      * @Template("CapcoAppBundle:Project:index.html.twig")
+     * @Cache(smaxage="60", public=true)
      */
     public function indexAction(Request $request)
     {
@@ -302,9 +296,7 @@ class ProjectController extends Controller
             $parameters['type'] = $parameters['type'] ? $parameters['type']->getId() : null;
 
             if (isset($parameters['theme'])) {
-                $parameters['theme'] = $parameters['theme']
-                    ? $parameters['theme']->getId()
-                    : null;
+                $parameters['theme'] = $parameters['theme'] ? $parameters['theme']->getId() : null;
             }
         }
 

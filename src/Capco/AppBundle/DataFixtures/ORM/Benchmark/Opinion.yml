@@ -3,6 +3,7 @@ Capco\AppBundle\Entity\Opinion:
         id: 'opinion<current()>'
         step: '@cstep1'
         title: 'Opinion <current()>'
+        slug: 'opinion-<current()>'
         body: |
              <p><text(100)></p>
              <p><text(300)></p>

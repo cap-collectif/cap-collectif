@@ -1,6 +1,7 @@
 Capco\AppBundle\Entity\Steps\QuestionnaireStep:
   questionnaireStep1:
     title: questionnaire-step-1
+    slug: questionnaire-step-1
     label: Questionnaire
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>

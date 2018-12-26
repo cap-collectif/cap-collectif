@@ -33,7 +33,9 @@ class ProposalController extends Controller
         CollectStep $currentStep,
         Proposal $proposal
     ) {
-        if ($proposal->isDraft() && $proposal->getAuthor() !== $this->getUser()) {
+        $viewer = $this->getUser();
+
+        if ($proposal->isDraft() && $proposal->getAuthor() !== $viewer) {
             throw new NotFoundHttpException(
                 sprintf(
                     'The proposal `%s` is in draft state and current user is not the creator.',
@@ -42,7 +44,7 @@ class ProposalController extends Controller
             );
         }
 
-        if (!$proposal->canDisplay($this->getUser())) {
+        if (!$proposal->canDisplay($viewer)) {
             throw new ProjectAccessDeniedException();
         }
 
@@ -70,6 +72,7 @@ class ProposalController extends Controller
         $votableStep = $this->get(
             'capco\appbundle\graphql\resolver\proposal\proposalcurrentvotablestepresolver'
         )->__invoke($proposal);
+
         $props = $serializer->serialize(
             [
                 'proposalId' => $proposal->getId(),
@@ -93,12 +96,12 @@ class ProposalController extends Controller
             ]
         );
 
-        return $this->render('CapcoAppBundle:Proposal:show.html.twig', [
+        return [
             'project' => $project,
             'currentStep' => $currentStep,
             'props' => $props,
             'proposal' => $proposal,
             'referer' => $refererUri,
-        ]);
+        ];
     }
 }

@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Command;
 
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
-use Capco\AppBundle\Publishable\DoctrineListener;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Gedmo\Sluggable\SluggableListener;
+use Gedmo\Timestampable\TimestampableListener;
 
 class LoadBenchmarkDataCommand extends ContainerAwareCommand
 {
@@ -35,24 +35,7 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
             return;
         }
 
-        $eventManager = $this->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->getEventManager();
-        $elasticsearchListener = $this->getContainer()->get(ElasticsearchDoctrineListener::class);
-        $publishableListener = $this->getContainer()->get(DoctrineListener::class);
-
-        $eventManager->removeEventListener(
-            $elasticsearchListener->getSubscribedEvents(),
-            $elasticsearchListener
-        );
-        $output->writeln('Disabled <info>' . \get_class($elasticsearchListener) . '</info>.');
-
-        $eventManager->removeEventListener(
-            $publishableListener->getSubscribedEvents(),
-            $publishableListener
-        );
-        $output->writeln('Disabled <info>' . \get_class($publishableListener) . '</info>.');
+        $this->disableListeners($output, [TimestampableListener::class, SluggableListener::class]);
 
         $this->loadFixtures($output);
 
@@ -116,6 +99,26 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
             $this->getApplication()
                 ->find($key)
                 ->run($input, $output);
+        }
+    }
+
+    private function disableListeners(OutputInterface $output, array $whitelist): void
+    {
+        $eventManager = $this->getContainer()
+            ->get('doctrine')
+            ->getManager()
+            ->getEventManager();
+
+        foreach ($eventManager->getListeners() as $event => $listeners) {
+            foreach ($listeners as $key => $listener) {
+                if (\is_string($listener) || \in_array(\get_class($listener), $whitelist, true)) {
+                    continue;
+                }
+                if (method_exists($listener, 'getSubscribedEvents')) {
+                    $eventManager->removeEventListener($listener->getSubscribedEvents(), $listener);
+                    $output->writeln('Disabled <info>' . \get_class($listener) . '</info>');
+                }
+            }
         }
     }
 }

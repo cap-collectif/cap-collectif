@@ -2,20 +2,25 @@ Capco\AppBundle\Entity\Category:
     Category1:
         id: category1
         title: Études
+        slug: etudes
         isEnabled: true
     Category2:
         id: category2
+        slug: politique
         title: Politique
         isEnabled: true
     Category3:
         id: category3
         title: Commerces
+        slug: commerces
         isEnabled: true
     Category4:
         id: category4
         title: Financements
+        slug: financements
         isEnabled: true
     Category5:
         id: category5
         title: Transports
+        slug: transports
         isEnabled: true

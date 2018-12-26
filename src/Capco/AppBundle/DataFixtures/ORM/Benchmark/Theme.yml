@@ -2,6 +2,7 @@ Capco\AppBundle\Entity\Theme:
   theme1:
     id: theme1
     title: Theme 1
+    slug: theme-1
     teaser: <sentence(3)>
     isEnabled: true
     position: 1
@@ -13,6 +14,7 @@ Capco\AppBundle\Entity\Theme:
   theme2:
     id: theme2
     title: Theme 2
+    slug: theme-2
     teaser: <sentence(3)>
     isEnabled: true
     position: 1

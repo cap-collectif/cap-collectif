@@ -2,6 +2,7 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
   cstep1:
     id: cstep1
     title: Collecte des avis
+    slug: collect-des-avis
     label: Consultation
     isEnabled: true
     startAt: <dateTimeBetween('-40 days', 'now')>

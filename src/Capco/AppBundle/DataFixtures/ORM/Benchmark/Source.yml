@@ -2,8 +2,9 @@ Capco\AppBundle\Entity\Source:
   source{1..200}:
     id: 'source<current()>'
     title: <text(20)>
+    slug: 'source-<current()>'
     body: <text(1000)>
-    Author: '@user<numberBetween(1,3)>'
+    Author: '@voter<numberBetween(1,3)>'
     Opinion: '@opinion217'
     Category: '@Category<numberBetween(1,5)>'
     link: http://www.cap-collectif.com/
