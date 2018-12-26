@@ -32,7 +32,7 @@ class MenuItemResolver
         $this->cache = $cache;
     }
 
-    public function getEnabledMenuItemsWithChildren($menu, $currentUrl = null)
+    public function getEnabledMenuItemsWithChildren($menu, $currentUrl = null): array
     {
         if (!$menu) {
             return [];

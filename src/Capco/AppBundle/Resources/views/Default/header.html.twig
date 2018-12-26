@@ -7,7 +7,9 @@
   })
 }}
 
-{{ react_render_component('EmailNotConfirmedApp', { 'rendering': 'client_side' }) }}
+{% if app.user %}
+    {{ react_render_component('EmailNotConfirmedApp', { 'rendering': 'client_side' }) }}
+{% endif %}
 
 <div style="position: fixed; width: 60%; left: 20%; z-index: 1030;">
     {{ react_render_component('AlertBoxApp') }}

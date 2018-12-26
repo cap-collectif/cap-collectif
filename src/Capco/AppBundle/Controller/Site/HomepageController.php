@@ -50,7 +50,6 @@ class HomepageController extends Controller
         // Subscription to newsletter
         if ($newsletterActive) {
             $subscription = new NewsletterSubscription();
-            $flashBag = $this->get('session')->getFlashBag();
 
             $form = $this->createForm(NewsletterSubscriptionType::class, $subscription);
             $form->handleRequest($request);
@@ -62,6 +61,8 @@ class HomepageController extends Controller
                         $subscription->getEmail()
                     );
 
+                    // We create a session only if form is submitted
+                    $flashBag = $this->get('session')->getFlashBag();
                     if ($email) {
                         $flashBag->add(
                             'info',
