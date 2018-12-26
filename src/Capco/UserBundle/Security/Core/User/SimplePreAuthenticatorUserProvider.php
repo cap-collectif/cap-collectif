@@ -1,9 +1,12 @@
 <?php
+
 namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class SimplePreAuthenticatorUserProvider implements UserProviderInterface
 {
@@ -23,17 +26,31 @@ class SimplePreAuthenticatorUserProvider implements UserProviderInterface
 
     public function loadUserByUsername($id)
     {
-        return $this->getCurrentProvider()->loadUserByUsername($id);
+        $provider = $this->getCurrentProvider();
+
+        if (!$provider) {
+            throw new UsernameNotFoundException();
+        }
+
+        return $provider->loadUserByUsername($id);
     }
 
     public function refreshUser(UserInterface $user)
     {
-        return $this->getCurrentProvider()->refreshUser($user);
+        $provider = $this->getCurrentProvider();
+
+        if (!$provider) {
+            throw new UnsupportedUserException();
+        }
+
+        return $provider->refreshUser($user);
     }
 
     public function supportsClass($class): bool
     {
-        return $this->getCurrentProvider()->supportsClass($class);
+        $provider = $this->getCurrentProvider();
+
+        return $provider && $provider->supportsClass($class);
     }
 
     private function getCurrentProvider(): ?UserProviderInterface

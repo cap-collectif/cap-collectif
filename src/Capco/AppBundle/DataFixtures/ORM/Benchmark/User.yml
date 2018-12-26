@@ -1,6 +1,7 @@
 Capco\UserBundle\Entity\User:
   admin:
     username: admin
+    slug: admin
     email: admin@cap-collectif.com
     enabled: true
     userType: ~
@@ -12,6 +13,7 @@ Capco\UserBundle\Entity\User:
     phoneConfirmed: true
   voter{1..1000}:
     username: voter<current()>
+    slug: voter<current()>
     email: voter<current()>@cap-collectif.com
     enabled: true
     userType: ~
@@ -21,6 +23,7 @@ Capco\UserBundle\Entity\User:
     phoneConfirmed: true
   user{1..500}:
     username: user<current()>
+    slug: user<current()>
     email: user<current()>@cap-collectif.com
     enabled: true
     userType: ~
