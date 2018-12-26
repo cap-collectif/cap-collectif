@@ -83,7 +83,7 @@ class ProjectListFiltersContainer extends React.Component<Props, State> {
     const { intl, dispatch, themes, features } = this.props;
     if (projectTypes.length > 0 && projectAuthors.length > 0 && themes.length > 0) {
       return (
-        <Col md={7}>
+        <Col md={7} className={config.isMobile ? 'mt-10 mb-5' : ''}>
           <FiltersContainer
             type="project"
             overlay={
@@ -106,7 +106,7 @@ class ProjectListFiltersContainer extends React.Component<Props, State> {
 
   render() {
     return (
-      <Row className={config.isMobile ? 'mb-10 ml-0' : 'mb-10'}>
+      <Row>
         <Col md={2}>
           {/* $FlowFixMe */}
           <ProjectListFilterOrder />
