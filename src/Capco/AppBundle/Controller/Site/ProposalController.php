@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
@@ -7,7 +8,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -75,7 +75,6 @@ class ProposalController extends Controller
                 'proposalId' => $proposal->getId(),
                 'currentVotableStepId' => $votableStep ? $votableStep->getId() : null,
                 'form' => $proposalForm,
-                'categories' => $proposalForm ? $proposalForm->getCategories() : [],
             ],
             'json',
             [
@@ -93,6 +92,7 @@ class ProposalController extends Controller
                 ],
             ]
         );
+
         return $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,
             'currentStep' => $currentStep,

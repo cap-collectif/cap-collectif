@@ -4,9 +4,6 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-/**
- * SiteParameterRepository.
- */
 class SiteParameterRepository extends EntityRepository
 {
     public function getValuesIfEnabled(): array

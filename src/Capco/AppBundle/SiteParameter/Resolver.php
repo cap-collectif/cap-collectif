@@ -23,6 +23,7 @@ class Resolver
         if (!$this->parameters) {
             $this->parameters = $this->repository->getValuesIfEnabled();
         }
+
         if (!isset($this->parameters[$key])) {
             return $value;
         }
