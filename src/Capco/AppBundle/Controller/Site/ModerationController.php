@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Resolver\UrlResolver;
@@ -35,6 +36,7 @@ class ModerationController extends Controller
             !\in_array($reason, $hiddenReasons, true)
         ) {
             $this->get('logger')->warn('Unknown trash reason: ' . $reason);
+
             throw new NotFoundHttpException('This trash reason is not available.');
         }
 
@@ -81,9 +83,9 @@ class ModerationController extends Controller
             );
         }
 
-        $this->get('session')
-            ->getFlashBag()
-            ->add('success', $trashedMessage);
+        // We create a session for flashBag
+        $flashBag = $this->get('session')->getFlashBag();
+        $flashBag->add('success', $trashedMessage);
 
         return $this->redirect($redirectUrl);
     }

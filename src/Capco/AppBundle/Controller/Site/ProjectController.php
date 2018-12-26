@@ -151,12 +151,13 @@ class ProjectController extends Controller
         $xlsxFile = $filename . '.xlsx';
 
         if (!file_exists($path . $csvFile) && !file_exists($path . $xlsxFile)) {
-            $this->get('session')
-                ->getFlashBag()
-                ->add(
-                    'danger',
-                    $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
-                );
+            // We create a session for flashBag
+            $flashBag = $this->get('session')->getFlashBag();
+
+            $flashBag->add(
+                'danger',
+                $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
+            );
 
             return $this->redirect($request->headers->get('referer'));
         }

@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Controller;
 
-use Capco\AppBundle\Helper\EnvHelper;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Manager\ContributionManager;
 use FOS\UserBundle\Model\UserManager;
@@ -22,16 +21,17 @@ class ConfirmationController extends Controller
     {
         /** @var UserManager $manager */
         $manager = $this->container->get('fos_user.user_manager');
-        $session = $this->container->get('session');
+
+        // We create a session for flashBag
+        $flashBag = $this->container->get('session')->getFlashBag();
+
         /** @var User $user */
         $user = $manager->findUserByConfirmationToken($token);
         $response = new RedirectResponse($this->container->get('router')->generate('app_homepage'));
 
         if (!$user) {
             // We could not find a user with this token
-            $session
-                ->getFlashBag()
-                ->set('sonata_user_success', 'global.alert.already_email_confirmed');
+            $flashBag->set('sonata_user_success', 'global.alert.already_email_confirmed');
 
             return $response;
         }
@@ -68,11 +68,9 @@ class ConfirmationController extends Controller
         );
 
         if ($hasPulishedContributions) {
-            $session
-                ->getFlashBag()
-                ->set('sonata_user_success', 'global.alert.email_confirmed_with_republish');
+            $flashBag->set('sonata_user_success', 'global.alert.email_confirmed_with_republish');
         } else {
-            $session->getFlashBag()->set('sonata_user_success', 'global.alert.email_confirmed');
+            $flashBag->set('sonata_user_success', 'global.alert.email_confirmed');
         }
 
         return $response;
@@ -88,9 +86,9 @@ class ConfirmationController extends Controller
         $redirectResponse = new RedirectResponse(
             $this->container->get('router')->generate('app_homepage')
         );
-        $user = $this->container->get('capco.user.repository')->findUserByNewEmailConfirmationToken(
-            $token
-        );
+        $user = $this->container
+            ->get('capco.user.repository')
+            ->findUserByNewEmailConfirmationToken($token);
         if (!$user) {
             return $redirectResponse;
         }
@@ -112,9 +110,13 @@ class ConfirmationController extends Controller
             $redirectResponse
         );
 
-        $this->get('session')
-            ->getFlashBag()
-            ->add('success', $this->get('translator')->trans('global.alert.new_email_confirmed'));
+        // We create a session for flashBag
+        $flashBag = $this->container->get('session')->getFlashBag();
+
+        $flashBag->add(
+            'success',
+            $this->get('translator')->trans('global.alert.new_email_confirmed')
+        );
 
         return $redirectResponse;
     }

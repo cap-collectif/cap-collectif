@@ -52,6 +52,7 @@ class CommentController extends Controller
      * @Template("CapcoAppBundle:Comment:update.html.twig")
      * @ParamConverter("comment", class="CapcoAppBundle:Comment", options={"mapping" = {"commentId": "id"}, "repository_method"= "find", "map_method_signature" = true})
      * @Security("has_role('ROLE_USER')")
+     *
      * @throws ProjectAccessDeniedException
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
@@ -77,6 +78,9 @@ class CommentController extends Controller
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
+            // We create a session for flashBag
+            $flashBag = $this->get('session')->getFlashBag();
+
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $comment->resetVotes();
@@ -86,17 +90,17 @@ class CommentController extends Controller
                     CapcoAppBundleEvents::COMMENT_CHANGED,
                     new CommentChangedEvent($comment, 'update')
                 );
-                $this->get('session')
-                    ->getFlashBag()
-                    ->add('success', $this->get('translator')->trans('comment.update.success'));
+
+                $flashBag->add(
+                    'success',
+                    $this->get('translator')->trans('comment.update.success')
+                );
 
                 return $this->redirect(
                     $this->get(CommentResolver::class)->getUrlOfRelatedObject($comment)
                 );
             }
-            $this->get('session')
-                ->getFlashBag()
-                ->add('danger', $this->get('translator')->trans('comment.update.error'));
+            $flashBag->add('danger', $this->get('translator')->trans('comment.update.error'));
         }
 
         return ['form' => $form->createView(), 'comment' => $comment];
@@ -134,6 +138,9 @@ class CommentController extends Controller
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
 
+            // We create a session for flashBag
+            $flashBag = $this->get('session')->getFlashBag();
+
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($comment);
@@ -144,17 +151,13 @@ class CommentController extends Controller
                 );
                 $em->flush();
 
-                $this->get('session')
-                    ->getFlashBag()
-                    ->add('info', $this->get('translator')->trans('comment.delete.success'));
+                $flashBag->add('info', $this->get('translator')->trans('comment.delete.success'));
 
                 return $this->redirect(
                     $this->get(CommentResolver::class)->getUrlOfRelatedObject($comment)
                 );
             }
-            $this->get('session')
-                ->getFlashBag()
-                ->add('danger', $this->get('translator')->trans('comment.delete.error'));
+            $flashBag->add('danger', $this->get('translator')->trans('comment.delete.error'));
         }
 
         return ['form' => $form->createView(), 'comment' => $comment];

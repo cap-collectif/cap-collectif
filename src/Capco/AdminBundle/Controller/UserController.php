@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -43,12 +44,12 @@ class UserController extends Controller
         $filename = 'users.csv';
 
         if (!file_exists($path . $filename)) {
-            $this->get('session')
-                ->getFlashBag()
-                ->add(
-                    'danger',
-                    $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
-                );
+            // We create a session for flashBag
+            $flashBag = $this->get('session')->getFlashBag();
+            $flashBag->add(
+                'danger',
+                $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
+            );
 
             return $this->redirect($request->headers->get('referer'));
         }

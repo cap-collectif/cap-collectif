@@ -11,7 +11,6 @@ use Capco\AppBundle\Helper\EventHelper;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Search\EventSearch;
-use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -78,6 +77,7 @@ class EventController extends Controller
         $archivedEvents = $this->get(EventSearch::class)->searchEvents(0, 100, 'asc', null, [
             'isFuture' => false,
         ]);
+
         return [
             'years' => $groupedEvents,
             'form' => $form->createView(),
@@ -179,24 +179,24 @@ class EventController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($registration);
                 $em->flush();
+
+                // We create a session for flashBag
+                $flashBag = $this->get('session')->getFlashBag();
+
                 if ($registration->isConfirmed()) {
-                    $this->get('session')
-                        ->getFlashBag()
-                        ->add(
-                            'success',
-                            $this->get('translator')->trans(
-                                'event_registration.create.register_success'
-                            )
-                        );
+                    $flashBag->add(
+                        'success',
+                        $this->get('translator')->trans(
+                            'event_registration.create.register_success'
+                        )
+                    );
                 } else {
-                    $this->get('session')
-                        ->getFlashBag()
-                        ->add(
-                            'info',
-                            $this->get('translator')->trans(
-                                'event_registration.create.unregister_success'
-                            )
-                        );
+                    $flashBag->add(
+                        'info',
+                        $this->get('translator')->trans(
+                            'event_registration.create.unregister_success'
+                        )
+                    );
                 }
 
                 return $this->redirect(

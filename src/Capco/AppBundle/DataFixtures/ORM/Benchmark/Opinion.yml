@@ -1,12 +1,12 @@
 Capco\AppBundle\Entity\Opinion:
-    opinion{1..220}:
-        id: 'opinion<current()>'
-        step: '@cstep1'
-        title: 'Opinion <current()>'
-        slug: 'opinion-<current()>'
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        publishedAt: <dateTime()>
-        Author: '@user<numberBetween(1, 100)>'
-        OpinionType: '@opinionType1'
+  opinion{1..220}:
+    id: 'opinion<current()>'
+    step: '@cstep1'
+    title: 'Opinion <current()>'
+    slug: 'opinion-<current()>'
+    body: |
+      <p><text(100)></p>
+      <p><text(300)></p>
+    publishedAt: <dateTime()>
+    Author: '@user<numberBetween(1, 100)>'
+    OpinionType: '@opinionType1'

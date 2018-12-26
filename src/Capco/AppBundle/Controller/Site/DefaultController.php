@@ -48,11 +48,12 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 $data = $form->getData();
 
+                // We create a session for flashBag
+                $flashBag = $this->get('session')->getFlashBag();
+
                 $adminEmail = $this->get(Resolver::class)->getValue('admin.mail.contact');
                 if (null === $adminEmail) {
-                    $this->get('session')
-                        ->getFlashBag()
-                        ->add('danger', 'contact.email.sent_error');
+                    $flashBag->add('danger', 'contact.email.sent_error');
 
                     return $this->redirect($this->generateUrl('app_homepage'));
                 }
@@ -64,9 +65,7 @@ class DefaultController extends Controller
                     $data['message'],
                     $this->generateUrl('app_homepage')
                 );
-                $this->get('session')
-                    ->getFlashBag()
-                    ->add('success', 'contact.email.sent_success');
+                $flashBag->add('success', 'contact.email.sent_success');
 
                 return $this->redirect($this->generateUrl('app_homepage'));
             }
