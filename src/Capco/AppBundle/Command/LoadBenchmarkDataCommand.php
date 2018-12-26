@@ -2,13 +2,14 @@
 
 namespace Capco\AppBundle\Command;
 
+use Gedmo\Timestampable\TimestampableListener;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Sonata\EasyExtendsBundle\Mapper\DoctrineORMMapper;
+use Sonata\MediaBundle\Listener\ORM\MediaEventSubscriber;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Gedmo\Sluggable\SluggableListener;
-use Gedmo\Timestampable\TimestampableListener;
 
 class LoadBenchmarkDataCommand extends ContainerAwareCommand
 {
@@ -35,7 +36,11 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
             return;
         }
 
-        $this->disableListeners($output, [TimestampableListener::class, SluggableListener::class]);
+        $this->disableListeners($output, [
+            TimestampableListener::class,
+            MediaEventSubscriber::class,
+            DoctrineORMMapper::class,
+        ]);
 
         $this->loadFixtures($output);
 

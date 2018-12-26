@@ -5,6 +5,7 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestionValidationRule:
 Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestion1:
     title: Classez vos choix
+    slug: classez-vos-choix
     helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
     required: true
     type: 6
