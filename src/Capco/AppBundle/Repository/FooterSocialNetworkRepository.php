@@ -19,8 +19,6 @@ class FooterSocialNetworkRepository extends EntityRepository
 
         return $qb
             ->getQuery()
-            ->useQueryCache(true)
-            ->useResultCache(true, 60)
             ->getArrayResult();
     }
 }

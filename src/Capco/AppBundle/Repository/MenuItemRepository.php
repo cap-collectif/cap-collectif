@@ -23,8 +23,6 @@ class MenuItemRepository extends EntityRepository
 
         return $qb
             ->getQuery()
-            ->useQueryCache(true)
-            ->useResultCache(true, 60)
             ->getResult();
     }
 
@@ -40,16 +38,15 @@ class MenuItemRepository extends EntityRepository
 
         $qb = $this->whereIsEnabled($qb);
 
-        return $qb->getQuery()->getResult();
+        return $qb
+            ->getQuery()
+            ->getResult();
     }
 
     private function whereIsEnabled(QueryBuilder $qb)
     {
-        $qb
-            ->leftJoin('i.Page', 'page')
-            ->andWhere(
-                'i.isEnabled = :isEnabled AND (page.id IS NULL OR (page.id IS NOT NULL AND page.isEnabled = :isEnabled))'
-            )
+        $qb->leftJoin('i.Page', 'page')
+            ->andWhere('i.isEnabled = :isEnabled AND (page.id IS NULL OR (page.id IS NOT NULL AND page.isEnabled = :isEnabled))')
             ->setParameter('isEnabled', true);
 
         return $qb;
