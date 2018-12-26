@@ -63,10 +63,10 @@ class OpinionTabs extends React.Component<Props> {
       return this.getHashKey(hash);
     }
 
-    return this.isVersionable()
-      ? 'versions'
-      : this.isCommentable()
+    return this.isCommentable()
       ? 'arguments'
+      : this.isVersionable()
+      ? 'versions'
       : this.isSourceable()
       ? 'sources'
       : null;
@@ -82,7 +82,7 @@ class OpinionTabs extends React.Component<Props> {
     this.getCommentSystem() === COMMENT_SYSTEM_BOTH;
 
   isVersionable = () => {
-    const opinion = this.props.opinion;
+    const { opinion } = this.props;
     return opinion.__typename === 'Opinion' && opinion.section && opinion.section.versionable;
   };
 
@@ -185,6 +185,10 @@ class OpinionTabs extends React.Component<Props> {
       );
     }
 
+    if (this.isCommentable()) {
+      /* $FlowFixMe */
+      return <ArgumentsBox opinion={opinion} />;
+    }
     if (this.isSourceable()) {
       /* $FlowFixMe */
       return <OpinionSourceBox isAuthenticated={isAuthenticated} sourceable={opinion} />;
@@ -192,10 +196,6 @@ class OpinionTabs extends React.Component<Props> {
     if (this.isVersionable()) {
       /* $FlowFixMe */
       return <OpinionVersionsBox opinion={opinion} isAuthenticated={isAuthenticated} />;
-    }
-    if (this.isCommentable()) {
-      /* $FlowFixMe */
-      return <ArgumentsBox opinion={opinion} />;
     }
 
     if (this.isFollowable()) {
