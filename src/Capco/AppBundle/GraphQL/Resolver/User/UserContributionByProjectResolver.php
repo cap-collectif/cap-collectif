@@ -148,7 +148,7 @@ class UserContributionByProjectResolver implements ResolverInterface
                     $item['hasCollectOrSelectStep'] = true;
                 }
             }
-            $projectStepsTypeCachedItem->set($item)->expiresAfter($this->cache::ONE_MINUTE);
+            $projectStepsTypeCachedItem->set($item)->expiresAfter(RedisCache::ONE_MINUTE);
         }
 
         return $projectStepsTypeCachedItem->get();
