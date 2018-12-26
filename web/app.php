@@ -1,4 +1,5 @@
 <?php
+
 use Symfony\Component\HttpFoundation\Request;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -26,6 +27,7 @@ Request::setTrustedProxies(
         '190.93.240.0/20',
         '197.234.240.0/22',
         '198.41.128.0/17',
+        // Make Symfony Trust the Reverse Proxy
         '172.17.0.0/16',
         '10.10.200.0/16',
         '127.0.0.1',

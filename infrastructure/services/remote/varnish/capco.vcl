@@ -12,6 +12,9 @@ acl invalidators {
     "localhost";
 }
 
+# https://feryn.eu/blog/varnishlog-measure-varnish-cache-performance/
+
+
 # Called at the beginning of a request, after the complete request has been received and parsed.
 sub vcl_recv {
 
@@ -37,9 +40,12 @@ sub vcl_recv {
       }
       return (purge);
   }
+
+  # Allow to disable cache if allowed
   if (req.http.Cache-Control ~ "no-cache" && client.ip ~ invalidators) {
     set req.hash_always_miss = true;
   }
+
   if (req.method == "BAN") {
       if (!client.ip ~ invalidators) {
           return (synth(405, "Not allowed"));
@@ -63,6 +69,7 @@ sub vcl_recv {
   # Only cache GET or HEAD requests. This makes sure the POST requests are always passed.
   if (req.method != "GET" && req.method != "HEAD") {
     return (pass);
+    # Maybe use https://docs.varnish-software.com/tutorials/caching-post-requests/
   }
 
   # Remove all cookies except the Symfony or SimpleSAML session or Paris (mcpAuth) session.

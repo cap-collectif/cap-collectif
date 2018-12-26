@@ -5,7 +5,8 @@ nelmio_cors:
     allow_headers: []
     allow_methods: []
     expose_headers: []
-    max_age: 0
+    # Cache for browser CORS checks
+    max_age: 3600
     hosts: []
     origin_regex: false
     forced_allow_origin_value: ~
@@ -32,7 +33,6 @@ nelmio_cors:
         ]
       # GraphQL uses only POST, OPTIONS is used by browsers to get CORS.
       allow_methods: ['POST', 'OPTIONS']
-      # Cache for CORS checks
       max_age: 3600
     # Internal endpoint
     '^/graphql/internal':
