@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use FOS\UserBundle\Doctrine\UserListener;
 use Gedmo\Timestampable\TimestampableListener;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
@@ -40,6 +41,7 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
             TimestampableListener::class,
             MediaEventSubscriber::class,
             DoctrineORMMapper::class,
+            UserListener::class,
         ]);
 
         $this->loadFixtures($output);
