@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
@@ -74,7 +75,11 @@ class OpinionsController extends FOSRestController
         $stepRequirementsResolver = $this->get(StepRequirementsResolver::class);
 
         if (!$stepRequirementsResolver->viewerMeetsTheRequirementsResolver($author, $step)) {
+<<<<<<< HEAD
             throw new BadRequestHttpException('You dont meets all the requirements.');
+=======
+            throw new UserError('You dont meets all the requirements.');
+>>>>>>> [6705-REQUIREMENT] Add requirement to opinionVote.
         }
 
         $repo = $this->get('capco.opinion.repository');
