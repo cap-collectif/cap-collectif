@@ -1,14 +1,14 @@
 #!/bin/bash
 
-#variables=( "BLACKFIRE_SERVER_ID" "BLACKFIRE_SERVER_TOKEN" "BLACKFIRE_CLIENT_ID" "BLACKFIRE_CLIENT_TOKEN" "BLACKFIRE_LOG_LEVEL" "BLACKFIRE_LOG_FILE")
+variables=( "BLACKFIRE_SERVER_ID" "BLACKFIRE_SERVER_TOKEN" "BLACKFIRE_CLIENT_ID" "BLACKFIRE_CLIENT_TOKEN" "BLACKFIRE_LOG_LEVEL" "BLACKFIRE_LOG_FILE")
 
-#for var in "${variables[@]}"
-#do
-#   :
-#   sed -i "s|%$var%|${!var}|g" /etc/blackfire/agent
-#   sed -i "s|%$var%|${!var}|g" /etc/php/7.1/fpm/conf.d/92-blackfire-config.ini
-#   sed -i "s|%$var%|${!var}|g" /etc/php/7.1/cli/conf.d/92-blackfire-config.ini
-#done
+for var in "${variables[@]}"
+do
+   :
+   sed -i "s|%$var%|${!var}|g" /etc/blackfire/agent
+   sed -i "s|%$var%|${!var}|g" /etc/php/7.1/fpm/conf.d/92-blackfire-config.ini
+   sed -i "s|%$var%|${!var}|g" /etc/php/7.1/cli/conf.d/92-blackfire-config.ini
+done
 
 # To enable it again when we'll have a licence
 # exec /usr/bin/blackfire-agent

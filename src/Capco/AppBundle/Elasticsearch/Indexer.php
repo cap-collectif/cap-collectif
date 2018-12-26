@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Entity\Comment;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Elastica\Bulk;
@@ -74,10 +73,6 @@ class Indexer
         $classes = $this->getClassesToIndex();
 
         foreach ($classes as $class) {
-            if (User::class !== $class) {
-                continue;
-            }
-
             $repository = $this->em->getRepository($class);
 
             $query = $repository->createQueryBuilder('a')->getQuery();
@@ -94,11 +89,7 @@ class Indexer
                 $progress->start();
             }
 
-            $i = 0;
             foreach ($iterableResult as $row) {
-                if (10 === $i) {
-                    break;
-                }
                 /** @var IndexableInterface $object */
                 $object = $row[0];
 
@@ -116,14 +107,10 @@ class Indexer
                     $progress->advance();
                 }
                 $this->em->detach($row[0]);
-
-                ++$i;
             }
             if (isset($progress)) {
                 $progress->finish();
             }
-
-            break;
         }
     }
 

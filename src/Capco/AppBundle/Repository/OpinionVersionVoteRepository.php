@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\OpinionVersionVote;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class OpinionVersionVoteRepository extends EntityRepository
@@ -95,14 +94,14 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->andWhere('o.step IN (:steps)')
             ->andWhere('ov.published = 1')
             ->andWhere('o.published = 1')
-            ->leftJoin('v.user', 'a', Join::WITH, 'a.id = :author')
+            ->andWhere('v.user = :author')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isConsultationStep();
+                })
             )
-            ->setParameter('author', $author->getId());
+            ->setParameter('author', $author);
 
         return $qb
             ->getQuery()

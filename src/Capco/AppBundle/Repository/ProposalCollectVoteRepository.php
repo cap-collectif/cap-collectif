@@ -82,9 +82,9 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->andWhere('pv.collectStep IN (:steps)')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isCollectStep() || $step->isSelectionStep();
+                })
             )
             ->setParameter('author', $author, Type::GUID)
             ->getQuery()

@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ArgumentVote;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
@@ -24,12 +23,12 @@ class ArgumentVoteRepository extends EntityRepository
             ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isConsultationStep();
+                })
             )
-            ->leftJoin('v.user', 'a', Join::WITH, 'a.id = :author')
-            ->setParameter('author', $author->getId());
+            ->andWhere('v.user = :author')
+            ->setParameter('author', $author);
 
         return $qb
             ->getQuery()

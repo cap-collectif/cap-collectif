@@ -10,7 +10,6 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -251,15 +250,14 @@ class ProposalRepository extends EntityRepository
             ->select('COUNT(DISTINCT proposal)')
             ->leftJoin('proposal.proposalForm', 'form')
             ->andWhere('form.step IN (:steps)')
-            ->leftJoin('proposal.author', 'a', Join::WITH, 'a.id = :author')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isCollectStep() || $step->isSelectionStep();
+                })
             )
             ->andWhere('proposal.author = :author')
-            ->setParameter('author', $author->getId());
+            ->setParameter('author', $author);
 
         return $qb
             ->getQuery()

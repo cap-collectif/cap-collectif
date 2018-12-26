@@ -191,9 +191,9 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('opinion.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isConsultationStep();
+                })
             )
             ->setParameter('author', $author);
 

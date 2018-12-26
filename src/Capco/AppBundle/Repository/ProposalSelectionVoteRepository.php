@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 
@@ -20,16 +19,16 @@ class ProposalSelectionVoteRepository extends EntityRepository
     {
         return $this->createQueryBuilder('pv')
             ->select('COUNT(DISTINCT pv)')
-            ->leftJoin('pv.user', 'a', Join::WITH, 'a.id = :author')
+            ->andWhere('pv.user = :author')
             ->andWhere('pv.published = true')
             ->leftJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
             ->andWhere('pv.selectionStep IN (:steps)')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isCollectStep() || $step->isSelectionStep();
+                })
             )
             ->setParameter('author', $author)
             ->getQuery()

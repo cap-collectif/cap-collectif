@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class OpinionVoteRepository extends EntityRepository
@@ -20,14 +19,14 @@ class OpinionVoteRepository extends EntityRepository
             ->leftJoin('v.opinion', 'o')
             ->andWhere('o.step IN (:steps)')
             ->andWhere('o.published = 1')
-            ->leftJoin('v.user', 'a', Join::WITH, 'a.id = :author')
+            ->andWhere('v.user = :author')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isConsultationStep();
+                })
             )
-            ->setParameter('author', $author->getId());
+            ->setParameter('author', $author);
 
         return $qb
             ->getQuery()

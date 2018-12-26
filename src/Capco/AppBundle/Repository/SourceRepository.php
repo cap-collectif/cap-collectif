@@ -132,9 +132,9 @@ class SourceRepository extends EntityRepository
             ->leftJoin('ostep.projectAbstractStep', 'opas')
             ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
             ->andWhere('opas.project = :project OR ovopas.project = :project')
-            ->leftJoin('s.author', 'a', Query\Expr\Join::WITH, 'a.id = :author')
+            ->andWhere('s.author = :author')
             ->setParameter('project', $project)
-            ->setParameter('author', $author->getId());
+            ->setParameter('author', $author);
 
         return $qb
             ->getQuery()

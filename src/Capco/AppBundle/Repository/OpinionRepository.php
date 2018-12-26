@@ -178,15 +178,15 @@ class OpinionRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('count(DISTINCT o)')
-            ->leftJoin('o.Author', 'a', Query\Expr\Join::WITH, 'a.id = :author')
+            ->andWhere('o.Author = :author')
             ->andWhere('o.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isConsultationStep();
+                })
             )
-            ->setParameter('author', $user->getId());
+            ->setParameter('author', $user);
 
         return $qb
             ->getQuery()
