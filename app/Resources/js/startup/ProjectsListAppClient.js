@@ -14,7 +14,6 @@ type Props = {
 export default (props: Props) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      {/* $FlowFixMe */}
       <ProjectsList {...props} />
     </IntlProvider>
   </Provider>

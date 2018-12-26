@@ -15,30 +15,28 @@ import type { GlobalState } from '../../../../types';
 import config from '../../../../config';
 
 export type ProjectType = {
-  id: string,
-  title: string,
-  slug: string,
+  +id: string,
+  +title: string,
+  +slug: string,
 };
 
 export type ProjectAuthor = {
-  id: string,
-  username: ?string,
+  +id: string,
+  +username: ?string,
 };
 
 export type ProjectTheme = { id: string, slug: string, title: string };
 
 type Props = {
-  dispatch: Function,
   intl: IntlShape,
   type: ?string,
   author: ?string,
   themes: ProjectTheme[],
-  features: { themes: boolean },
   theme: ?string,
 };
 type State = {
-  projectTypes: ProjectType[],
-  projectAuthors: ProjectAuthor[],
+  projectTypes: $ReadOnlyArray<ProjectType>,
+  projectAuthors: $ReadOnlyArray<ProjectAuthor>,
 };
 
 const getAvailableProjectTypesAndAuthors = graphql`
@@ -61,12 +59,8 @@ class ProjectListFiltersContainer extends React.Component<Props, State> {
   componentDidMount() {
     fetchQuery(environment, getAvailableProjectTypesAndAuthors, {}).then(
       (data: ProjectListFiltersContainerQueryResponse) => {
-        // $FlowFixMe
         this.setState({
           projectTypes: data.projectTypes,
-        });
-        // $FlowFixMe
-        this.setState({
           projectAuthors: data.projectAuthors,
         });
       },
@@ -80,7 +74,7 @@ class ProjectListFiltersContainer extends React.Component<Props, State> {
 
   renderFilters() {
     const { projectTypes, projectAuthors } = this.state;
-    const { intl, dispatch, themes, features } = this.props;
+    const { intl, themes } = this.props;
     if (projectTypes.length > 0 && projectAuthors.length > 0 && themes.length > 0) {
       return (
         <Col md={7} className={config.isMobile ? 'mt-10 mb-5' : ''}>
@@ -88,8 +82,6 @@ class ProjectListFiltersContainer extends React.Component<Props, State> {
             type="project"
             overlay={
               <ProjectListFilters
-                dispatch={dispatch}
-                features={features}
                 intl={intl}
                 projectAuthors={projectAuthors}
                 projectTypes={projectTypes}
@@ -121,7 +113,6 @@ class ProjectListFiltersContainer extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: GlobalState) => ({
-  features: state.default.features,
   themes: state.default.themes,
   author: selector(state, 'author'),
   theme: selector(state, 'theme'),

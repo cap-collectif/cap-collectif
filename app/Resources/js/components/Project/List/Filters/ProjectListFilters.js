@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { reduxForm, formValueSelector } from 'redux-form';
 import { type IntlShape } from 'react-intl';
 
-import type { GlobalState } from '../../../../types';
+import type { GlobalState, FeatureToggles } from '../../../../types';
 import ProjectsListFilterTypes from './ProjectListFilterTypes';
 import ProjectsListFilterAuthors from './ProjectListFilterAuthors';
 import ProjectsListFilterThemes from './ProjectListFilterThemes';
@@ -14,7 +14,7 @@ import type { ProjectType, ProjectAuthor, ProjectTheme } from './ProjectListFilt
 
 type Props = {
   author: ?string,
-  features: { themes: boolean },
+  features: FeatureToggles,
   intl: IntlShape,
   projectTypes: ProjectType[],
   projectAuthors: ProjectAuthor[],
@@ -73,6 +73,7 @@ const formName = 'ProjectListFilters';
 export const selector = formValueSelector(formName);
 
 const mapStateToProps = (state: GlobalState) => ({
+  features: state.default.features,
   author: selector(state, 'author'),
   theme: selector(state, 'theme'),
   type: selector(state, 'type'),

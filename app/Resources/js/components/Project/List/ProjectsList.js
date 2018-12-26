@@ -10,11 +10,11 @@ import ProjectListView from './ProjectListView';
 import { selector } from './Filters/ProjectListFilters';
 
 type Props = {
-  author: ?string,
+  author?: ?string,
   orderBy: ?string,
   type?: ?string,
   theme?: ?string,
-  status: ?string,
+  status?: ?string,
   // Used only on /themes page
   themeId?: ?string,
   term?: ?string,
