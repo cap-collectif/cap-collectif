@@ -2,6 +2,7 @@ Capco\AppBundle\Entity\OpinionType:
   opinionType1:
     id: 'opinionType1'
     title: Le problème constaté
+    slug: le-probleme-constate
     position: 1
     color: red
     isEnabled: false
@@ -13,6 +14,7 @@ Capco\AppBundle\Entity\OpinionType:
   opinionType2:
     id: 'opinionType2'
     title: Les causes
+    slug: les-causes
     position: 2
     color: orange
     defaultFilter: votes
@@ -21,6 +23,7 @@ Capco\AppBundle\Entity\OpinionType:
   opinionType3:
     id: 'opinionType3'
     title: Les enjeux
+    slug: les-enjeux
     position: 3
     color: bluedark
     defaultFilter: votes
@@ -30,6 +33,7 @@ Capco\AppBundle\Entity\OpinionType:
   opinionType4:
     id: 'opinionType4'
     title: Les solutions
+    slug: les-solutions
     position: 4
     color: green
     defaultFilter: votes
@@ -38,6 +42,7 @@ Capco\AppBundle\Entity\OpinionType:
   opinionType5:
     id: 'opinionType5'
     title: Titre Ier
+    slug: titre-ier
     subtitle: La circulation des données et du savoir
     position: 1
     color: blue
