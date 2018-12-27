@@ -4,6 +4,7 @@ InternalConsultation:
     - InternalPrimaryKey
     - PublicConsultation
     - Node
+    - RequirementStep
     - Step
   config:
     interfaces: [Node, Step]
