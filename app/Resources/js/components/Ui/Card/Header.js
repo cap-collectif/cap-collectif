@@ -5,7 +5,7 @@ import { darken } from 'polished';
 import colors, { CardHeaderColors } from '../../../utils/colors';
 
 type Props = {
-  bgColor?: 'gray' | 'white' | 'green' | 'blueDark' | 'blue' | 'orange' | 'red' | 'default',
+  bgColor: 'gray' | 'white' | 'green' | 'blueDark' | 'blue' | 'orange' | 'red' | 'default',
   children: React.Node,
 };
 
@@ -29,6 +29,7 @@ export const Header = (props: Props) => {
 };
 
 Header.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
   bgColor: 'default',
 };
 

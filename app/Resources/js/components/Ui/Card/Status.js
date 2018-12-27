@@ -4,7 +4,7 @@ import * as React from 'react';
 import { BsStyleColors } from '../../../utils/colors';
 
 type Props = {
-  bgColor?: 'info' | 'primary' | 'success' | 'warning' | 'danger' | 'default',
+  bgColor: 'info' | 'primary' | 'success' | 'warning' | 'danger' | 'default',
   children: React.Node,
 };
 
@@ -37,6 +37,7 @@ export const Status = (props: Props) => {
 };
 
 Status.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
   bgColor: 'default',
 };
 
