@@ -12,6 +12,7 @@ import { Header } from './Header';
 
 type Props = {
   children?: any,
+  className?: string,
 };
 
 export const Container = styled.div.attrs({
@@ -58,9 +59,9 @@ export class Card extends React.PureComponent<Props> {
   static Status = Status;
 
   render() {
-    const { children } = this.props;
+    const { children, className } = this.props;
 
-    return <Container>{children}</Container>;
+    return <Container className={className}>{children}</Container>;
   }
 }
 
