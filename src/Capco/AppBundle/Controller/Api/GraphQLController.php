@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class GraphQLController extends BaseController
 {
+    public const PREVIEW_HEADER = 'application/vnd.cap-collectif.preview+json';
     /**
      * @var GraphQLRequest\BatchParser
      */
@@ -24,8 +25,6 @@ class GraphQLController extends BaseController
      * @var GraphQLRequest\Parser
      */
     private $requestParser;
-
-    public const PREVIEW_HEADER = 'application/vnd.cap-collectif.preview+json';
 
     public function __construct(
         GraphQLRequest\ParserInterface $batchParser,
@@ -40,9 +39,11 @@ class GraphQLController extends BaseController
 
     public function endpointAction(Request $request, string $schemaName = null)
     {
-        $schemaName = 'public';
-        if ($request->headers->get('accept') === self::PREVIEW_HEADER) {
+        if (self::PREVIEW_HEADER === $request->headers->get('accept')) {
             $schemaName = 'preview';
+        }
+        if (!$schemaName) {
+            $schemaName = 'public';
         }
 
         return $this->createResponse($request, $schemaName, false);
@@ -73,6 +74,10 @@ class GraphQLController extends BaseController
         }
         $this->addCORSHeadersIfNeeded($response, $request);
 
+        // We had Cache headers here
+        $response->setSharedMaxAge(60);
+        $response->setPublic();
+
         return $response;
     }
 
@@ -97,6 +102,7 @@ class GraphQLController extends BaseController
 
         return $payload;
     }
+
     /**
      * @param Request     $request
      * @param string|null $schemaName
@@ -122,6 +128,7 @@ class GraphQLController extends BaseController
 
         return $payloads;
     }
+
     /**
      * @param Request     $request
      * @param string|null $schemaName

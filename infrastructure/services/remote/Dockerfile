@@ -147,11 +147,16 @@ RUN set -x \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install varnish
-RUN apt-get update && cd /tmp \
-    && wget --content-disposition https://packagecloud.io/varnishcache/varnish41/packages/debian/stretch/varnish_4.1.10-1~stretch_amd64.deb/download.deb \
-    && dpkg -i varnish_4.1.10-1~stretch_amd64.deb \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get update -y && \
+	    apt-get install -y build-essential automake libtool curl git python-docutils && \
+	    curl -s https://packagecloud.io/install/repositories/varnishcache/varnish60/script.deb.sh | bash && \
+	    apt-get install -y varnish-dev && \
+	    git clone https://github.com/varnish/varnish-modules.git /tmp/vm && \
+	    cd /tmp/vm && \
+	    ./bootstrap && \
+	    ./configure && \
+	    make && \
+	    make install
 
 # Install Supervisor
 RUN apt-get update && \

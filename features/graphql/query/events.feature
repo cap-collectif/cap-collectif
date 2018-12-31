@@ -85,7 +85,12 @@ Scenario: GraphQL client wants to list current and future events
               },
               {
                  "node":{
-                    "_id":"event4"
+                    "_id":"event1"
+                 }
+              },
+              {
+                 "node":{
+                    "_id":"event6"
                  }
               },
               {
@@ -95,12 +100,7 @@ Scenario: GraphQL client wants to list current and future events
               },
               {
                  "node":{
-                    "_id":"event1"
-                 }
-              },
-              {
-                 "node":{
-                    "_id":"event6"
+                    "_id":"event4"
                  }
               }
            ]

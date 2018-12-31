@@ -12,7 +12,6 @@ Scenario: Admin wants to change an event
         eventEdge {
           node {
             id
-            _id
             title
             body
             author {
@@ -41,11 +40,10 @@ Scenario: Admin wants to change an event
           "eventEdge": {
               "node": {
                 "id": "RXZlbnQ6ZXZlbnQx",
-                "_id": "event1",
                 "title": "Rencontre avec les habitants",
                 "body": "Tout le monde est invité",
                 "author": {
-                  "_id": "user1"
+                  "_id": "userAdmin"
                 }
               }
           }

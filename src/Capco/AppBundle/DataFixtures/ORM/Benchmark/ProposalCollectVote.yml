@@ -1,31 +1,25 @@
 Capco\AppBundle\Entity\ProposalCollectVote:
   proposal1votes{1..500}:
-    id: 'proposal1votes<current()>'
     proposal: '@proposal1'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
   proposal2votes{1..400}:
-    id: 'proposal2votes<current()>'
     proposal: '@proposal2'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
   proposal3votes{1..100}:
-    id: 'proposal3votes<current()>'
     proposal: '@proposal3'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
   proposal4votes{1..200}:
-    id: 'proposal4votes<current()>'
     proposal: '@proposal4'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
   proposal5votes{1..200}:
-    id: 'proposal5votes<current()>'
     proposal: '@proposal5'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
   proposalVotesRandom{1..200}:
-    id: 'proposalVotesRandom<current()>'
     proposal (unique): '@proposal<numberBetween(6, 500)>'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
