@@ -46,7 +46,8 @@ class ProjectContributorResolver implements ResolverInterface
                 return $contributors;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-                throw new \RuntimeException($exception->getMessage());
+                $contributors = [];
+                $totalCount = 0;
             }
         });
 
@@ -70,6 +71,7 @@ class ProjectContributorResolver implements ResolverInterface
                 $anonymousCount += $this->proposalCollectVoteRepository->getAnonymousVotesCountByStep(
                     $step
                 );
+
                 continue;
             }
 
@@ -77,6 +79,7 @@ class ProjectContributorResolver implements ResolverInterface
                 $anonymousCount += $this->proposalSelectionVoteRepository->getAnonymousVotesCountByStep(
                     $step
                 );
+
                 continue;
             }
         }

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,6 +26,7 @@ class HomepageController extends Controller
 
     /**
      * @Route("/", name="app_homepage")
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:homepage.html.twig")
      */
     public function homepageAction(Request $request)
@@ -121,6 +123,7 @@ class HomepageController extends Controller
     }
 
     /**
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProposals.html.twig")
      */
     public function lastProposalsAction(
@@ -144,6 +147,7 @@ class HomepageController extends Controller
     }
 
     /**
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastThemes.html.twig")
      */
     public function lastThemesAction(int $max = null, int $offset = null, Section $section = null)
@@ -156,6 +160,7 @@ class HomepageController extends Controller
     }
 
     /**
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastPosts.html.twig")
      */
     public function lastPostsAction(int $max = null, int $offset = null, Section $section = null)
@@ -168,6 +173,7 @@ class HomepageController extends Controller
     }
 
     /**
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProjects.html.twig")
      */
     public function lastProjectsAction(int $max = null, int $offset = null, Section $section = null)
@@ -180,6 +186,7 @@ class HomepageController extends Controller
     }
 
     /**
+     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastEvents.html.twig")
      */
     public function lastEventsAction(int $max = null, int $offset = null, Section $section = null)

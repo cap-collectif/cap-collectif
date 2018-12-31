@@ -125,7 +125,3 @@ services:
   Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator:
     autowire: true
     public: true
-
-  Capco\AppBundle\NewRelic\CapcoNamingStrategy:
-    autowire: true
-    public: true
