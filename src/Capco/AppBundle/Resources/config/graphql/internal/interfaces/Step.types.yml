@@ -33,6 +33,3 @@ Step:
         type: 'String!'
         description: 'The url of the step'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
-      body:
-        type: 'HTML'
-        description: 'The introduction text of the step.'
