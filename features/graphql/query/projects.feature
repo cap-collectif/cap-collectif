@@ -139,7 +139,7 @@ Scenario: GraphQL client wants to get a project with specify term, theme and typ
               "author":{"username":"admin"},
               "type":{"id":"3"},
               "url":"https:\/\/capco.test\/consultation\/croissance-innovation-disruption\/presentation\/presentation",
-              "contributionsCount":246
+              "contributionsCount":244
             }
           }
         ]
