@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\UserBundle\Entity\User;
-use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
@@ -82,13 +81,12 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->andWhere('pv.collectStep IN (:steps)')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isCollectStep() || $step->isSelectionStep();
-                })
+                array_map(function ($step) {
+                    return $step;
+                }, $project->getRealSteps())
             )
-            ->setParameter('author', $author, Type::GUID)
+            ->setParameter('author', $author)
             ->getQuery()
-            ->useQueryCache(true)
             ->getSingleScalarResult();
     }
 
@@ -359,10 +357,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->setParameter('proposal', $proposal)
             ->groupBy('pv.collectStep');
 
-        $results = $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->getResult();
+        $results = $qb->getQuery()->getResult();
         $votesBySteps = [];
         foreach ($results as $result) {
             $votesBySteps[$result['stepId']] = (int) $result['votesCount'];

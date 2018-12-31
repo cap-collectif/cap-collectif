@@ -1,16 +1,13 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\VoteContribution;
-use Capco\AppBundle\Traits\DraftableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -20,11 +17,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Enum\ReplyPublicationStatus;
+use Capco\AppBundle\Traits\DraftableTrait;
 
 /**
- * @ORM\Table(name="reply", indexes={
- *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
- * })
+ * @ORM\Table(name="reply")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */

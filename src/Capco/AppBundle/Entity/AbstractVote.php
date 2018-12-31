@@ -1,26 +1,23 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\HasAuthorInterface;
-use Capco\AppBundle\Model\Publishable;
-use Capco\AppBundle\Model\VoteContribution;
-use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
+use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Model\Publishable;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use Capco\AppBundle\Model\VoteContribution;
+use Capco\AppBundle\Traits\PublishableTrait;
+use Capco\AppBundle\Model\HasAuthorInterface;
+use Capco\AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Table(
  *   name="votes",
  *   indexes={
- *        @Index(name="collectstep_voter_idx", columns={"voter_id", "collect_step_id"}),
  *        @Index(name="selectionstep_voter_idx", columns={"voter_id", "selection_step_id"}),
  *        @Index(name="proposal_selectionstep_idx", columns={"proposal_id", "selection_step_id"}),
- *        @Index(name="proposal_collectstep_idx", columns={"proposal_id", "collect_step_id"}),
  *   },
  *   uniqueConstraints={
  *        @UniqueConstraint(

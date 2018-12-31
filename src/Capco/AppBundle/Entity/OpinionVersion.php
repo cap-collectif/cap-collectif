@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
@@ -21,9 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table(name="opinion_version", indexes={
- *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
- * })
+ * @ORM\Table(name="opinion_version")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVersionRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -80,7 +77,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     /**
      * @ORM\Column(name="ranking", type="integer", nullable=true)
      */
-    protected $ranking;
+    protected $ranking = null;
 
     /**
      * @ORM\Column(name="comment", type="text", nullable=true)
@@ -363,7 +360,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         if ($this->parent) {
             return $this->parent->getOpinionType();
         }
-
         return null;
     }
 
@@ -372,7 +368,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         if ($this->parent) {
             return $this->parent->getCommentSystem();
         }
-
         return null;
     }
 

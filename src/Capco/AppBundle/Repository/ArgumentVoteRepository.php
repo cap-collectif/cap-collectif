@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\UserBundle\Entity\User;
@@ -23,17 +22,13 @@ class ArgumentVoteRepository extends EntityRepository
             ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isConsultationStep();
-                })
+                array_map(function ($step) {
+                    return $step;
+                }, $project->getRealSteps())
             )
             ->andWhere('v.user = :author')
             ->setParameter('author', $author);
-
-        return $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
@@ -53,7 +48,6 @@ class ArgumentVoteRepository extends EntityRepository
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
-
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -64,7 +58,6 @@ class ArgumentVoteRepository extends EntityRepository
             ->andWhere('v.user = :author')
             ->setParameter('argument', $argument)
             ->setParameter('author', $author);
-
         return $qb->getQuery()->getOneOrNullResult();
     }
 

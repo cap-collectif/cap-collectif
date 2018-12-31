@@ -1,8 +1,6 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\QueryBuilder;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -13,6 +11,26 @@ use Capco\AppBundle\Model\CommentableInterface;
 
 class ProposalCommentRepository extends EntityRepository
 {
+    private function getByCommentableQueryBuilder(
+        CommentableInterface $commentable,
+        bool $excludeAnswers = true,
+        ?User $viewer = null
+    ): QueryBuilder {
+        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
+        if ($excludeAnswers && $commentable instanceof Proposal) {
+            $qb->andWhere('c.parent is NULL');
+        }
+        if ($commentable instanceof Proposal) {
+            $qb->andWhere('c.proposal = :proposal')->setParameter('proposal', $commentable);
+        }
+
+        if ($commentable instanceof ProposalComment) {
+            $qb->andWhere('c.parent = :comment')->setParameter('comment', $commentable);
+        }
+
+        return $qb;
+    }
+
     public function getByCommentable(
         CommentableInterface $commentable,
         ?int $offset,
@@ -51,10 +69,7 @@ class ProposalCommentRepository extends EntityRepository
             'count(c.id)'
         );
 
-        return (int) $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countCommentsAndAnswersByCommentable(
@@ -64,11 +79,7 @@ class ProposalCommentRepository extends EntityRepository
         $qb = $this->getByCommentableQueryBuilder($commentable, false, $viewer)->select(
             'count(c.id)'
         );
-
-        return (int) $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getPublishedNotTrashedQueryBuilder(?User $viewer): QueryBuilder
@@ -83,28 +94,6 @@ class ProposalCommentRepository extends EntityRepository
             $qb
                 ->orWhere('c.Author = :viewer AND c.published = false')
                 ->setParameter('viewer', $viewer);
-        }
-
-        return $qb;
-    }
-
-    private function getByCommentableQueryBuilder(
-        CommentableInterface $commentable,
-        bool $excludeAnswers = true,
-        ?User $viewer = null
-    ): QueryBuilder {
-        $qb = $this->getPublishedNotTrashedQueryBuilder($viewer);
-        if ($excludeAnswers && $commentable instanceof Proposal) {
-            $qb->andWhere('c.parent is NULL');
-        }
-        if ($commentable instanceof Proposal) {
-            $qb
-                ->andWhere('c.proposal = :proposal')
-                ->setParameter('proposal', $commentable, Type::GUID);
-        }
-
-        if ($commentable instanceof ProposalComment) {
-            $qb->andWhere('c.parent = :comment')->setParameter('comment', $commentable, Type::GUID);
         }
 
         return $qb;
