@@ -6,8 +6,6 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
-use JMS\Serializer\SerializationContext;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -89,12 +87,10 @@ class ProfileController extends Controller
             throw new NotFoundHttpException('Export not found');
         }
 
-        $response = (new BinaryFileResponse($file))->setContentDisposition(
+        return (new BinaryFileResponse($file))->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             'export.zip'
         );
-
-        return $response;
     }
 
     /**
@@ -169,7 +165,6 @@ class ProfileController extends Controller
      * @Route("/", name="capco_user_profile_show", defaults={"_feature_flags" = "profiles"})
      * @Route("/{slug}", name="capco_user_profile_show_all", defaults={"_feature_flags" = "profiles"})
      * @Template()
-     * @Cache(smaxage="120", public=true)
      */
     public function showAction(string $slug = null)
     {

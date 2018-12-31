@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -25,7 +24,6 @@ class ProposalController extends Controller
      * @ParamConverter("currentStep", options={"mapping": {"stepSlug": "slug"}})
      * @ParamConverter("proposal", options={"mapping": {"proposalSlug": "slug"}})
      * @Template("CapcoAppBundle:Proposal:show.html.twig")
-     * @Cache(smaxage="60", public=true)
      */
     public function showProposalAction(
         Request $request,
