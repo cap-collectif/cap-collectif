@@ -95,7 +95,7 @@ sub vcl_recv {
   }
 }
 
-# Change the hashing functio
+# Change the hashing function to handle POST request
 sub vcl_hash {
     # To cache POST requests
     if (req.http.X-Body-Len) {
@@ -112,23 +112,6 @@ sub vcl_backend_fetch {
     if (bereq.http.X-Body-Len) {
         set bereq.method = "POST";
     }
-}
-
-# Handle Cache-Control: no-cache and private
-sub vcl_backend_response {
-    if (beresp.ttl <= 0s ||
-      beresp.http.Set-Cookie ||
-      beresp.http.Surrogate-control ~ "no-store" ||
-      (!beresp.http.Surrogate-Control &&
-        beresp.http.Cache-Control ~ "no-cache|no-store|private") ||
-      beresp.http.Vary == "*") {
-        /*
-        * Mark as "Hit-For-Pass" for the next 2 minutes
-        */
-        set beresp.ttl = 120s;
-        set beresp.uncacheable = true;
-    }
-    return (deliver);
 }
 
 sub vcl_deliver {
