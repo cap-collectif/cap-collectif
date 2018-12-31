@@ -25,7 +25,13 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
- * @ORM\Table(name="comment")
+ * @ORM\Table(name="comment", indexes={
+ *    @ORM\Index(name="proposal_comment_idx", columns={"id", "proposal_id"}),
+ *    @ORM\Index(name="event_comment_idx", columns={"id", "event_id"}),
+ *    @ORM\Index(name="parent_comment_idx", columns={"id", "parent_id"}),
+ *    @ORM\Index(name="author_comment_idx", columns={"id", "author_id"}),
+ *    @ORM\Index(name="post_comment_idx", columns={"id", "post_id"}),
+ * })
  * @ORM\HasLifecycleCallbacks()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "objectType", type = "string")

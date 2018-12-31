@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
@@ -25,12 +26,13 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep IN (:steps)')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isCollectStep() || $step->isSelectionStep();
+                })
             )
             ->setParameter('author', $author)
             ->getQuery()
+            ->useQueryCache(true)
             ->getSingleScalarResult();
     }
 
@@ -115,10 +117,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->getResult();
     }
 
-    public function getUserVotesGroupedByStepIds(
-        array $selectionStepsIds,
-        User $user = null
-    ): array {
+    public function getUserVotesGroupedByStepIds(array $selectionStepsIds, User $user = null): array
+    {
         $userVotes = [];
         if ($user) {
             foreach ($selectionStepsIds as $id) {
@@ -172,7 +172,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
     public function getVotesForProposal(
         Proposal $proposal,
-        ?int $limit = null,
+        ?int $limit,
         string $field,
         int $offset = 0,
         string $direction = 'ASC'
@@ -317,6 +317,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('pv.private = true')
             ->andWhere('pv.selectionStep = :selectionStep')
             ->setParameter('selectionStep', $selectionStep);
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -341,7 +342,10 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('proposal', $proposal)
             ->groupBy('pv.selectionStep');
 
-        $results = $qb->getQuery()->getResult();
+        $results = $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getResult();
         $votesBySteps = [];
         foreach ($results as $result) {
             $votesBySteps[$result['selectionStep']] = (int) $result['votesCount'];

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -21,12 +22,16 @@ class OpinionVoteRepository extends EntityRepository
             ->andWhere('v.user = :author')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isConsultationStep();
+                })
             )
             ->setParameter('author', $author);
-        return $qb->getQuery()->getSingleScalarResult();
+
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getSingleScalarResult();
     }
 
     public function getByAuthorAndOpinion(User $author, Opinion $opinion): ?OpinionVote
@@ -36,6 +41,7 @@ class OpinionVoteRepository extends EntityRepository
             ->andWhere('v.user = :author')
             ->setParameter('author', $author)
             ->setParameter('opinion', $opinion);
+
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -49,6 +55,7 @@ class OpinionVoteRepository extends EntityRepository
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -56,6 +63,7 @@ class OpinionVoteRepository extends EntityRepository
     {
         $qb = $this->getPublishedQueryBuilder();
         $qb->andWhere('v.opinion = :opinion')->setParameter('opinion', $votable->getId());
+
         return $qb;
     }
 
@@ -67,6 +75,7 @@ class OpinionVoteRepository extends EntityRepository
             ->setParameter('opinion', $votable->getId())
             ->andWhere('v.value = :value')
             ->setParameter('value', $value);
+
         return $qb;
     }
 
@@ -74,6 +83,7 @@ class OpinionVoteRepository extends EntityRepository
     {
         $qb = $this->getByContributionQB($votable);
         $qb->select('COUNT(v.id)');
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -81,6 +91,7 @@ class OpinionVoteRepository extends EntityRepository
     {
         $qb = $this->getByContributionAndValueQB($votable, $value);
         $qb->select('COUNT(v.id)');
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -99,6 +110,7 @@ class OpinionVoteRepository extends EntityRepository
         }
 
         $qb->setFirstResult($first)->setMaxResults($limit);
+
         return new Paginator($qb);
     }
 
@@ -116,6 +128,7 @@ class OpinionVoteRepository extends EntityRepository
         }
 
         $qb->setFirstResult($first)->setMaxResults($limit);
+
         return new Paginator($qb);
     }
 
@@ -153,32 +166,8 @@ class OpinionVoteRepository extends EntityRepository
             ->select('count(ov.id)')
             ->where('ov.opinion = :opinion')
             ->setParameter('opinion', $opinion);
+
         return (int) $qb->getQuery()->getSingleScalarResult();
-    }
-
-    /**
-     * countPublishedBetweenByOpinionByVote
-     */
-    protected function countPublishedBetweenByOpinionByVote(
-        \DateTime $from,
-        \DateTime $to,
-        string $opinionId,
-        int $voteValue
-    ): int {
-        $query = $this->getPublishedQueryBuilder();
-        $query
-            ->select('COUNT(v.id)')
-            ->andWhere($query->expr()->between('v.publishedAt', ':from', ':to'))
-            ->andWhere('v.opinion = :id')
-            ->andWhere('v.value = :vote')
-            ->setParameters([
-                'from' => $from,
-                'to' => $to,
-                'id' => $opinionId,
-                'vote' => $voteValue,
-            ]);
-
-        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -227,6 +216,31 @@ class OpinionVoteRepository extends EntityRepository
             $opinionId,
             OpinionVote::VOTE_MITIGE
         );
+    }
+
+    /**
+     * countPublishedBetweenByOpinionByVote.
+     */
+    protected function countPublishedBetweenByOpinionByVote(
+        \DateTime $from,
+        \DateTime $to,
+        string $opinionId,
+        int $voteValue
+    ): int {
+        $query = $this->getPublishedQueryBuilder();
+        $query
+            ->select('COUNT(v.id)')
+            ->andWhere($query->expr()->between('v.publishedAt', ':from', ':to'))
+            ->andWhere('v.opinion = :id')
+            ->andWhere('v.value = :vote')
+            ->setParameters([
+                'from' => $from,
+                'to' => $to,
+                'id' => $opinionId,
+                'vote' => $voteValue,
+            ]);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     protected function getPublishedQueryBuilder()

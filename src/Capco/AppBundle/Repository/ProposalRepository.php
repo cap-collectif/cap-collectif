@@ -252,14 +252,17 @@ class ProposalRepository extends EntityRepository
             ->andWhere('form.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isCollectStep() || $step->isSelectionStep();
+                })
             )
             ->andWhere('proposal.author = :author')
             ->setParameter('author', $author);
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $author, CollectStep $step): int

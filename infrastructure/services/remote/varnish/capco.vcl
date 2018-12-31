@@ -1,7 +1,5 @@
 vcl 4.0;
 import std;
-import bodyaccess;
-import cookie;
 
 backend default {
   .host = "localhost";
@@ -22,9 +20,6 @@ sub vcl_recv {
 
   # https://httpoxy.org/#fix-now
   unset req.http.proxy;
-
-  # This is to make sure that clients can not change the caching behavior of our VCL by sending non-standard headers with the request.
-  unset req.http.X-Body-Len;
 
   # Delete cookie for static files
   if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css|woff|ott)$") {
@@ -71,63 +66,23 @@ sub vcl_recv {
       return (synth(200, "Banned"));
   }
 
+  # Only cache GET or HEAD requests. This makes sure the POST requests are always passed.
+  if (req.method != "GET" && req.method != "HEAD") {
+    return (pass);
+    # Maybe use https://docs.varnish-software.com/tutorials/caching-post-requests/
+  }
+
   # Remove all cookies except the Symfony or SimpleSAML session or Paris (mcpAuth) session.
   if (req.http.Cookie) {
-    cookie.parse(req.http.Cookie);
-    cookie.filter_except("PHPSESSID,SimpleSAMLAuthToken,SimpleSAMLSessionID,mcpAuth");
-    set req.http.cookie = cookie.get_string();
+    set req.http.Cookie = ";" + req.http.Cookie;
+    set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
+    set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID|SimpleSAMLAuthToken|SimpleSAMLSessionID|mcpAuth)=", "; \1=");
+    set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
+    set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
 
     if (req.http.Cookie == "") {
       # If there are no more cookies, remove the header to get page cached.
       unset req.http.Cookie;
     }
   }
-
-  # Only cache POST GraphQL API requests.
-  if (req.method == "POST" && req.url ~ "graphql/internal$") {
-
-        # Skip cache if viewer is authenticated.
-        if (req.http.Authorization) {
-            # std.log("Skipping cache because viewer is authenticated.");
-            return (pass);
-        }
-
-        # Will store up to 500 kilobytes of request body.
-        std.cache_req_body(500KB);
-        set req.http.X-Body-Len = bodyaccess.len_req_body();
-
-        # If a client supplies a very big request (more than 500KB)
-        if (req.http.X-Body-Len == "-1") {
-            # Too big to cache
-            # std.log("Skipping cache because body is too big.");
-            return (pass);
-        }
-
-        return (hash);
-  }
-
-  # Only cache GET or HEAD requests. 
-  # This makes sure the POST requests are always passed.
-  if (req.method != "GET" && req.method != "HEAD") {
-    return (pass);
-  }
-}
-
-# Change the hashing function to handle POST request
-sub vcl_hash {
-    # To cache POST requests
-    if (req.http.X-Body-Len) {
-        bodyaccess.hash_req_body();
-    } else {
-        hash_data("");
-    }
-}
-
-# The default behavior of Varnish is to pass POST requests to the backend.
-# When we override this in vcl_recv, Varnish will still change the request method to GET before calling sub vcl_backend_fetch.
-# We need to undo this, like this:
-sub vcl_backend_fetch {
-    if (bereq.http.X-Body-Len) {
-        set bereq.method = "POST";
-    }
 }
