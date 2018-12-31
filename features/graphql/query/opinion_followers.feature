@@ -39,12 +39,12 @@ Scenario: GraphQL client wants to get list of users who following an opinion
             {
               "cursor": @string@,
               "node": {
-                "_id": "user5"
+                "_id": "user45"
               }
             },{
               "cursor": @string@,
               "node": {
-                "_id": "user10"
+                "_id": "user34"
               }
             }
           ],

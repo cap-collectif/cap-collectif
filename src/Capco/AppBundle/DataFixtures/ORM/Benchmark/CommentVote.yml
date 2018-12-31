@@ -1,4 +1,4 @@
 Capco\AppBundle\Entity\CommentVote:
-  proposal1CommentVote{1..1000}:
-    comment: '@proposal1CommentVote<current()>'
-    user: '@voter1'
+  proposalComment{1..1000}:
+    comment: '@propComment<current()>'
+    user: '@voter<current()>'
