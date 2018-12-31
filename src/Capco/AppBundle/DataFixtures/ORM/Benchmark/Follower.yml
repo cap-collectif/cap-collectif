@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\Follower:
+  # Proposal
+  followerProposal1{1..500}:
+    proposal: '@proposal1'
+    user: '@voter<current()>'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 'ALL'
