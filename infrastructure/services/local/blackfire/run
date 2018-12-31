@@ -11,4 +11,4 @@ do
 done
 
 # To enable it again when we'll have a licence
-# exec /usr/bin/blackfire-agent
+exec /usr/bin/blackfire-agent
