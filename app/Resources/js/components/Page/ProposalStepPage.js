@@ -133,7 +133,7 @@ export class ProposalStepPage extends React.Component<Props> {
               if (!props.step) {
                 return graphqlError;
               }
-              const form = props.step.form;
+              const { form } = props.step;
               if (!form) return;
 
               let geoJsons = [];
