@@ -9,7 +9,6 @@ use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
-use JMS\Serializer\SerializationContext;
 use Symfony\Component\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -85,7 +84,7 @@ class Indexer
                     ->select('count(a)')
                     ->getQuery()
                     ->getSingleScalarResult();
-                $output->writeln(PHP_EOL . "<info> Indexing $count $class</info>");
+                $output->writeln(PHP_EOL . "<info> Indexing ${count} ${class}</info>");
                 $progress = new ProgressBar($output, $count);
                 $progress->start();
             }
@@ -206,6 +205,7 @@ class Indexer
     protected function buildDocument(IndexableInterface $object): Document
     {
         $json = [];
+
         try {
             $json = $this->serializer->serialize($object, 'json', ['groups' => ['Elasticsearch']]);
         } catch (\Exception $exception) {

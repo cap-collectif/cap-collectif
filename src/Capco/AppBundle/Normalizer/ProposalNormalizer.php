@@ -42,7 +42,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (\in_array('Elasticsearch', $groups)) {
+        if (\in_array('Elasticsearch', $groups, true)) {
             $selectionVotesCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
                 $object
             );
@@ -69,6 +69,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
 
             $args = new Argument([
                 'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+                'first' => 0,
             ]);
             $commentsConnection = $this->commentableCommentsResolver->__invoke(
                 $object,
@@ -82,7 +83,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof Proposal;
     }

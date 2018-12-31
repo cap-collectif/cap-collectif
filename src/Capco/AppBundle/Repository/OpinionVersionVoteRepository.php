@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -15,6 +16,7 @@ class OpinionVersionVoteRepository extends EntityRepository
     {
         $qb = $this->getPublishedQueryBuilder();
         $qb->andWhere('v.opinionVersion = :opinion')->setParameter('opinion', $votable->getId());
+
         return $qb;
     }
 
@@ -26,6 +28,7 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->setParameter('opinion', $votable->getId())
             ->andWhere('v.value = :value')
             ->setParameter('value', $value);
+
         return $qb;
     }
 
@@ -33,6 +36,7 @@ class OpinionVersionVoteRepository extends EntityRepository
     {
         $qb = $this->getByContributionQB($votable);
         $qb->select('COUNT(v.id)');
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -40,6 +44,7 @@ class OpinionVersionVoteRepository extends EntityRepository
     {
         $qb = $this->getByContributionAndValueQB($votable, $value);
         $qb->select('COUNT(v.id)');
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -58,6 +63,7 @@ class OpinionVersionVoteRepository extends EntityRepository
         }
 
         $qb->setFirstResult($first)->setMaxResults($limit);
+
         return new Paginator($qb);
     }
 
@@ -75,6 +81,7 @@ class OpinionVersionVoteRepository extends EntityRepository
         }
 
         $qb->setFirstResult($first)->setMaxResults($limit);
+
         return new Paginator($qb);
     }
 
@@ -90,12 +97,16 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->andWhere('v.user = :author')
             ->setParameter(
                 'steps',
-                array_map(function ($step) {
-                    return $step;
-                }, $project->getRealSteps())
+                array_filter($project->getRealSteps(), function ($step) {
+                    return $step->isConsultationStep();
+                })
             )
             ->setParameter('author', $author);
-        return $qb->getQuery()->getSingleScalarResult();
+
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
@@ -110,6 +121,7 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -163,6 +175,7 @@ class OpinionVersionVoteRepository extends EntityRepository
             ->select('count(ov.id)')
             ->where('ov.opinionVersion = :version')
             ->setParameter('version', $version);
+
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
