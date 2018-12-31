@@ -1,17 +1,17 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Model\Publishable;
+use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Traits\ModerableTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,9 +19,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="argument", indexes={
- *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
- * })
+ * @ORM\Table(name="argument")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -34,9 +32,9 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
     use PublishableTrait;
     use TrashableTrait;
 
-    public const TYPE_AGAINST = 0;
-    public const TYPE_FOR = 1;
-    public const TYPE_SIMPLE = 2;
+    const TYPE_AGAINST = 0;
+    const TYPE_FOR = 1;
+    const TYPE_SIMPLE = 2;
 
     public static $argumentTypes = [
         self::TYPE_FOR => 'yes',

@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Form\ContactType;
 use Capco\AppBundle\SiteParameter\Resolver;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -84,7 +83,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Cache(smaxage=60, public=true)
      * @Template("CapcoAppBundle:Default:footer.html.twig")
      */
     public function footerAction()

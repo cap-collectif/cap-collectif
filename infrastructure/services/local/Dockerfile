@@ -69,8 +69,6 @@ RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
     tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && \
     mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so
 COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
-COPY blackfire/blackfire-agent.ini /etc/php/7.1/fpm/conf.d/90-blackfire-agent.ini
-COPY blackfire/blackfire-agent.ini /etc/php/7.1/cli/conf.d/90-blackfire-agent.ini
 COPY blackfire/blackfire-php.ini /etc/php/7.1/fpm/conf.d/92-blackfire-config.ini
 COPY blackfire/blackfire-php.ini /etc/php/7.1/cli/conf.d/92-blackfire-config.ini
 
@@ -95,12 +93,18 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+
 # Install varnish
-RUN apt-get update && cd /tmp \
-    && wget --content-disposition https://packagecloud.io/varnishcache/varnish41/packages/debian/stretch/varnish_4.1.10-1~stretch_amd64.deb/download.deb \
-    && dpkg -i varnish_4.1.10-1~stretch_amd64.deb \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get update -y && \
+	    apt-get install -y build-essential automake libtool curl git python-docutils && \
+	    curl -s https://packagecloud.io/install/repositories/varnishcache/varnish60/script.deb.sh | bash && \
+	    apt-get install -y varnish-dev && \
+	    git clone https://github.com/varnish/varnish-modules.git /tmp/vm && \
+	    cd /tmp/vm && \
+	    ./bootstrap && \
+	    ./configure && \
+	    make && \
+	    make install
 
 # Install Supervisor
 RUN apt-get update && \

@@ -211,17 +211,16 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('a.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
-            ->andWhere('a.Author = :author')
             ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
+            ->andWhere('a.Author = :author')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isConsultationStep();
-                })
+                array_map(function ($step) {
+                    return $step;
+                }, $project->getRealSteps())
             )
             ->setParameter('author', $author)
             ->getQuery()
-            ->useQueryCache(true)
             ->getSingleScalarResult();
     }
 

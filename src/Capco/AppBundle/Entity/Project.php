@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -837,18 +836,18 @@ class Project implements IndexableInterface
     public function getCurrentStep(): ?AbstractStep
     {
         foreach ($this->steps as $step) {
-            if ($step->getStep() && $step->getStep()->isOpen()) {
+            if ($step->getStep()->isOpen()) {
                 return $step->getStep();
             }
         }
         foreach ($this->steps as $step) {
-            if ($step->getStep() && $step->getStep()->isFuture()) {
+            if ($step->getStep()->isFuture()) {
                 return $step->getStep();
             }
         }
         $reversedSteps = array_reverse($this->steps->toArray());
         foreach ($reversedSteps as $step) {
-            if ($step->getStep() && $step->getStep()->isClosed()) {
+            if ($step->getStep()->isClosed()) {
                 return $step->getStep();
             }
         }
@@ -897,7 +896,6 @@ class Project implements IndexableInterface
                 return $step->getStep();
             }
         }
-
         return null;
     }
 
@@ -924,7 +922,7 @@ class Project implements IndexableInterface
     {
         foreach ($this->steps as $pas) {
             $step = $pas->getStep();
-            if ($step instanceof ParticipativeStepInterface && $step->isParticipative()) {
+            if ($step->isParticipative()) {
                 return true;
             }
         }

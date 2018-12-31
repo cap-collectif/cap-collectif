@@ -191,16 +191,13 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('opinion.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isConsultationStep();
-                })
+                array_map(function ($step) {
+                    return $step;
+                }, $project->getRealSteps())
             )
             ->setParameter('author', $author);
 
-        return $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int

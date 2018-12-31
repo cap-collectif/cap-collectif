@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -10,6 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
@@ -19,9 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 /**
- * @ORM\Table(name="source", indexes={
- *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
- * })
+ * @ORM\Table(name="source")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -34,9 +32,9 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
     use PublishableTrait;
     use TrashableTrait;
 
-    public const TYPE_FOR = 1;
-    public const LINK = 0;
-    public const FILE = 1;
+    const TYPE_FOR = 1;
+    const LINK = 0;
+    const FILE = 1;
 
     public static $TypesLabels = [
         self::LINK => 'source.type.link',
@@ -333,15 +331,17 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
 
     public function canDisplay($user = null): bool
     {
-        return ($this->isPublished() && $this->getParent()->canDisplay($user)) ||
-            ($user && $user->isAdmin());
+        return (
+            $this->isPublished() && $this->getParent()->canDisplay($user) ||
+            ($user && $user->isAdmin())
+        );
     }
 
     public function canContribute($user = null): bool
     {
-        return $this->isPublished() &&
-            !$this->isTrashed() &&
-            $this->getParent()->canContribute($user);
+        return (
+            $this->isPublished() && !$this->isTrashed() && $this->getParent()->canContribute($user)
+        );
     }
 
     // ******************** Lifecycle ************************************

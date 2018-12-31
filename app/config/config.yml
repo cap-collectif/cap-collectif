@@ -5,6 +5,7 @@ imports:
   - { resource: swarrot.yml }
   - { resource: joli/jolitypo.yml }
   - { resource: cors.yml }
+  - { resource: cache.yml }
   - { resource: newrelic.yml }
 
 parameters:
@@ -736,39 +737,10 @@ limenius_react:
     trace: false
     server_socket_path: 'unix:///var/node_ssr.sock'
 
-fos_http_cache:
-  debug: 
-    enabled: false
-  user_context:
-    enabled: false
-  cache_control:
-    defaults:
-      overwrite: false
-    rules:
-      -
-        match:
-          path: ^/
-        headers:
-          cache_control:
-            public: true
-            #max_age: 64000
-            s_maxage: 60
-          # vary: [Accept-Encoding, Accept-Language]
-
-  # The proxy client sends invalidation requests to your caching proxy.
-  proxy_client:
-    default: varnish
-    varnish:
-      http:
-        servers:
-          - 127.0.0.1
-          - 172.17.0.1 # Used in prod ? See with @ptondereau
-        base_url: 127.0.0.1
 
 sensio_framework_extra:
     router:      { annotations: true }
     request:     { converters: true, auto_convert: true }
     view:        { annotations: true }
-    cache:       { annotations: true }
     security:    { annotations: true }
     psr_message: { enabled: false }

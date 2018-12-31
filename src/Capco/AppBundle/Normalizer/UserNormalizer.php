@@ -46,10 +46,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        if (
-            \in_array('Elasticsearch', $groups, true) &&
-            !\in_array('ElasticsearchProposal', $groups, true)
-        ) {
+        if (\in_array('Elasticsearch', $groups) && !\in_array('ElasticsearchProposal', $groups)) {
             $contributionsCountByProject = [];
             $contributionsCountByStep = [];
             foreach ($this->projectRepository->findAll() as $project) {
@@ -57,7 +54,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                     $object,
                     $project,
                     new Argument([
-                        'first' => 0,
+                        'first' => 1,
                     ])
                 )->totalCount;
                 $contributionsCountByProject[] = [
@@ -74,7 +71,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
                                     $object,
                                     $step,
                                     new Argument([
-                                        'first' => 0,
+                                        'first' => 1,
                                     ])
                                 )->totalCount,
                     ];
@@ -104,7 +101,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
         return $data;
     }
 
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, $format = null)
     {
         return $data instanceof User;
     }

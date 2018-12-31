@@ -106,17 +106,13 @@ class ReplyRepository extends EntityRepository
             ->andWhere('reply.author = :author')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isCollectStep() || $step->isSelectionStep();
-                })
+                array_map(function ($step) {
+                    return $step;
+                }, $project->getRealSteps())
             )
             ->setParameter('author', $author);
 
-        return $qb
-            ->getQuery()
-            ->useQueryCache(true)
-
-            ->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $author, QuestionnaireStep $step): int

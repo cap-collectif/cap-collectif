@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
-use JMS\Serializer\SerializationContext;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Resolver\EventResolver;
@@ -20,7 +19,6 @@ use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -33,7 +31,6 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
-     * @Cache(smaxage="60", public=true)
      * @ParamConverter("project", class="Capco\AppBundle\Entity\Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\OtherStep", options={"mapping": {"stepSlug": "slug"}})
      */
@@ -52,7 +49,6 @@ class StepController extends Controller
      * @Template("CapcoAppBundle:Step:presentation.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\PresentationStep", options={"mapping" = {"stepSlug": "slug"}})
-     * @Cache(smaxage="60", public=true)
      */
     public function showPresentationAction(
         Request $request,
@@ -121,7 +117,6 @@ class StepController extends Controller
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
-     * @Cache(smaxage="60", public=true)
      */
     public function showRankingAction(Request $request, Project $project, RankingStep $step)
     {
@@ -167,9 +162,6 @@ class StepController extends Controller
      * @Template("CapcoAppBundle:Step:opinions_ranking.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
-     * @Cache(smaxage="60", public=true)
-     *
-     * @param mixed $page
      */
     public function showOpinionsRankingAction(
         Request $request,
@@ -208,9 +200,6 @@ class StepController extends Controller
      * @Template("CapcoAppBundle:Step:versions_ranking.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
-     * @Cache(smaxage="60", public=true)
-     *
-     * @param mixed $page
      */
     public function showVersionsRankingAction(
         Request $request,
@@ -249,7 +238,6 @@ class StepController extends Controller
      * @Template("CapcoAppBundle:Step:synthesis.html.twig")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
-     * @Cache(smaxage="60", public=true)
      */
     public function showSynthesisAction(Request $request, Project $project, SynthesisStep $step)
     {
@@ -271,7 +259,6 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\CollectStep", options={"mapping" = {"stepSlug": "slug"}})
-     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Step:collect.html.twig")
      */
     public function showCollectStepAction(Request $request, Project $project, CollectStep $step)
@@ -294,7 +281,6 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/questionnaire/{stepSlug}", name="app_project_show_questionnaire")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\QuestionnaireStep", options={"mapping" = {"stepSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
-     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Step:questionnaire.html.twig")
      */
     public function showQuestionnaireStepAction(
@@ -327,7 +313,6 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/selection/{stepSlug}", name="app_project_show_selection")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\SelectionStep", options={"mapping" = {"stepSlug": "slug"}})
-     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Step:selection.html.twig")
      */
     public function showSelectionStepAction(Request $request, Project $project, SelectionStep $step)
@@ -383,7 +368,6 @@ class StepController extends Controller
      *    "method"="getOne",
      *    "map_method_signature"=true
      * })
-     * @Cache(smaxage=60, public=true)
      * @Template("CapcoAppBundle:Consultation:show.html.twig")
      */
     public function showConsultationAction(Project $project, ConsultationStep $currentStep)
