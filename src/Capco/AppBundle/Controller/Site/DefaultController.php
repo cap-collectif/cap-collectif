@@ -7,11 +7,20 @@ use Capco\AppBundle\SiteParameter\Resolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+    /**
+     * @Route("/login_check", name="login_check")
+     */
+    public function loginAction(Request $request)
+    {
+        return $this->json([
+            'success' => true,
+        ]);
+    }
+
     /**
      * @Route("/login-saml", name="saml_login")
      */
@@ -79,20 +88,5 @@ class DefaultController extends Controller
     public function confidentialiteAction(Request $request)
     {
         return [];
-    }
-
-    /**
-     * @Route("/get_api_token", name="app_get_api_token")
-     */
-    public function getTokenAction()
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            return new JsonResponse(['message' => 'You are not authenticated.'], 200);
-        }
-
-        $user = $this->getUser();
-        $token = $this->get('lexik_jwt_authentication.jwt_manager')->create($user);
-
-        return new JsonResponse(['token' => $token]);
     }
 }

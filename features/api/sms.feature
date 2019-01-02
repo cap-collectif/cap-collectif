@@ -17,12 +17,12 @@ Scenario: Anonymous API client wants to receive a confirmation sms
 Scenario: Anonymous API client wants to receive a confirmation sms
   Given feature "phone_confirmation" is enabled
   When I send a POST request to "/api/send-sms-confirmation"
-  Then the JSON response status code should be 401
+  Then the JSON response status code should be 403
   And the JSON response should match:
   """
   {
-    "code": 401,
-    "message": "Bad credentials"
+    "code": 403,
+    "message": "Not authorized."
   }
   """
 

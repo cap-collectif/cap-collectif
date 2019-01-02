@@ -1,36 +1,20 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Event\CommentChangedEvent;
-use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Form\ReportingType;
+use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Form\Form;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class ProposalsController extends FOSRestController
 {
-    /**
-     * @Get("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
-     */
-    public function getProposalAction()
-    {
-        throw new BadRequestHttpException('Not supported anymore, use GraphQL API instead.');
-    }
-
     /**
      * @Get("/proposals/{proposalId}/selections")
      * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
@@ -42,48 +26,18 @@ class ProposalsController extends FOSRestController
     }
 
     /**
-     * @Security("has_role('ROLE_USER')")
-     * @Post("/proposal_forms/{proposal_form_id}/proposals")
-     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @View(statusCode=201, serializerGroups={"ProposalForms", "Proposals", "UsersInfos", "UserMedias"})
-     */
-    public function postProposalAction(Request $request, ProposalForm $proposalForm)
-    {
-        throw new BadRequestHttpException(
-            'Not supported anymore, use GraphQL mutation "createProposal" instead.'
-        );
-    }
-
-    /**
-     * @Security("has_role('ROLE_USER')")
-     * @Post("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
-     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
-     * @View(statusCode=200)
-     */
-    public function putProposalAction(
-        Request $request,
-        ProposalForm $proposalForm,
-        Proposal $proposal
-    ) {
-        throw new BadRequestHttpException(
-            'Not supported anymore, use GraphQL mutation "changeProposalContent" instead.'
-        );
-    }
-
-    /**
-     * @Security("has_role('ROLE_USER')")
      * @Post("/proposals/{proposal_id}/reports")
      * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postProposalReportAction(Request $request, Proposal $proposal)
     {
-        if ($this->getUser() === $proposal->getAuthor()) {
-            throw $this->createAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$viewer || 'anon.' === $viewer || $viewer === $proposal->getAuthor()) {
+            throw new AccessDeniedHttpException('Not authorized.');
         }
 
-        $report = (new Reporting())->setReporter($this->getUser())->setProposal($proposal);
+        $report = (new Reporting())->setReporter($viewer)->setProposal($proposal);
         $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 

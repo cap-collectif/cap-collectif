@@ -17,12 +17,12 @@ Scenario: Registration is disabled and API client wants to resend an email
 Scenario: Anonymou API client wants resend an email
   Given feature "registration" is enabled
   When I send a POST request to "/api/account/resend_confirmation_email"
-  Then the JSON response status code should be 401
+  Then the JSON response status code should be 403
   And the JSON response should match:
   """
   {
-    "code": 401,
-    "message": "Bad credentials"
+    "code": 403,
+    "message": "Not authorized."
   }
   """
 

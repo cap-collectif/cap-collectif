@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98078195b1427607ad9540f25a547cd3",
+    "content-hash": "5b2c835e0e662d126741da04a8570d62",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -656,16 +656,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "v2.9.0",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "a210246d286c77d2b89040f8691ba7b3a713d2c1"
+                "reference": "30e33f60f64deec87df728c02b107f82cdafad9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/a210246d286c77d2b89040f8691ba7b3a713d2c1",
-                "reference": "a210246d286c77d2b89040f8691ba7b3a713d2c1",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/30e33f60f64deec87df728c02b107f82cdafad9d",
+                "reference": "30e33f60f64deec87df728c02b107f82cdafad9d",
                 "shasum": ""
             },
             "require": {
@@ -675,7 +675,7 @@
                 "doctrine/event-manager": "^1.0",
                 "doctrine/inflector": "^1.0",
                 "doctrine/lexer": "^1.0",
-                "doctrine/persistence": "^1.0",
+                "doctrine/persistence": "^1.1",
                 "doctrine/reflection": "^1.0",
                 "php": "^7.1"
             },
@@ -688,7 +688,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.9.x-dev"
+                    "dev-master": "2.10.x-dev"
                 }
             },
             "autoload": {
@@ -726,16 +726,14 @@
                     "email": "ocramius@gmail.com"
                 }
             ],
-            "description": "Common Library for Doctrine projects",
-            "homepage": "https://www.doctrine-project.org",
+            "description": "PHP Doctrine Common project is a library that provides additional functionality that other Doctrine projects depend on such as better reflection support, persistence interfaces, proxies, event system and much more.",
+            "homepage": "https://www.doctrine-project.org/projects/common.html",
             "keywords": [
-                "annotations",
-                "collections",
-                "eventmanager",
-                "persistence",
-                "spl"
+                "common",
+                "doctrine",
+                "php"
             ],
-            "time": "2018-07-12T21:16:12+00:00"
+            "time": "2018-11-21T01:24:55+00:00"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -1574,16 +1572,16 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "af1ec238659a83e320f03e0e454e200f689b4b97"
+                "reference": "c0f1c17602afc18b4cbd8e1c8125f264c9cf7d38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/af1ec238659a83e320f03e0e454e200f689b4b97",
-                "reference": "af1ec238659a83e320f03e0e454e200f689b4b97",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/c0f1c17602afc18b4cbd8e1c8125f264c9cf7d38",
+                "reference": "c0f1c17602afc18b4cbd8e1c8125f264c9cf7d38",
                 "shasum": ""
             },
             "require": {
@@ -1595,17 +1593,17 @@
                 "php": "^7.1"
             },
             "conflict": {
-                "doctrine/common": "<2.9@dev"
+                "doctrine/common": "<2.10@dev"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^4.0",
+                "doctrine/coding-standard": "^5.0",
                 "phpstan/phpstan": "^0.8",
                 "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -1643,12 +1641,16 @@
                     "email": "ocramius@gmail.com"
                 }
             ],
-            "description": "Doctrine Persistence abstractions.",
+            "description": "The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.",
             "homepage": "https://doctrine-project.org/projects/persistence.html",
             "keywords": [
+                "mapper",
+                "object",
+                "odm",
+                "orm",
                 "persistence"
             ],
-            "time": "2018-07-12T12:37:50+00:00"
+            "time": "2018-11-21T00:33:13+00:00"
         },
         {
             "name": "doctrine/reflection",
@@ -3001,59 +3003,6 @@
                 "unicode"
             ],
             "time": "2018-11-13T22:06:07+00:00"
-        },
-        {
-            "name": "gfreeau/get-jwt-bundle",
-            "version": "dev-dev",
-            "target-dir": "Gfreeau/Bundle/GetJWTBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gfreeau/GfreeauGetJWTBundle.git",
-                "reference": "fee13315b4b99c18adf86e4cbe0525072453c59a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gfreeau/GfreeauGetJWTBundle/zipball/fee13315b4b99c18adf86e4cbe0525072453c59a",
-                "reference": "fee13315b4b99c18adf86e4cbe0525072453c59a",
-                "shasum": ""
-            },
-            "require": {
-                "lexik/jwt-authentication-bundle": "^1.4.3|^2.0.0@dev",
-                "php": ">=5.3.3",
-                "symfony/framework-bundle": "~2.3|~3.0",
-                "symfony/symfony": "~2.6|~3.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Gfreeau\\Bundle\\GetJWTBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Greg Freeman",
-                    "homepage": "http://www.gregfreeman.org"
-                }
-            ],
-            "description": "This Symfony2 bundle provides a security listener to return a JWT",
-            "homepage": "https://github.com/gfreeau/GfreeauGetJWTBundle",
-            "keywords": [
-                "Authentication",
-                "JWS",
-                "Symfony2",
-                "bundle",
-                "jwt"
-            ],
-            "time": "2017-05-03T19:09:07+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -4677,64 +4626,6 @@
             "time": "2018-03-19T10:34:40+00:00"
         },
         {
-            "name": "lcobucci/jwt",
-            "version": "3.2.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "c9704b751315d21735dc98d78d4f37bd73596da7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/c9704b751315d21735dc98d78d4f37bd73596da7",
-                "reference": "c9704b751315d21735dc98d78d4f37bd73596da7",
-                "shasum": ""
-            },
-            "require": {
-                "ext-openssl": "*",
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "mdanter/ecc": "~0.3.1",
-                "mikey179/vfsstream": "~1.5",
-                "phpmd/phpmd": "~2.2",
-                "phpunit/php-invoker": "~1.1",
-                "phpunit/phpunit": "~4.5",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "suggest": {
-                "mdanter/ecc": "Required to use Elliptic Curves based algorithms."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lcobucci\\JWT\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Luís Otávio Cobucci Oblonczyk",
-                    "email": "lcobucci@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A simple library to work with JSON Web Token and JSON Web Signature",
-            "keywords": [
-                "JWS",
-                "jwt"
-            ],
-            "time": "2018-08-03T11:23:50+00:00"
-        },
-        {
             "name": "league/csv",
             "version": "8.2.3",
             "source": {
@@ -4790,102 +4681,6 @@
                 "write"
             ],
             "time": "2018-02-06T08:27:03+00:00"
-        },
-        {
-            "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.5.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "f1c8c9a33c55eeb6105de5a2aedb9ba44a6efbed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/f1c8c9a33c55eeb6105de5a2aedb9ba44a6efbed",
-                "reference": "f1c8c9a33c55eeb6105de5a2aedb9ba44a6efbed",
-                "shasum": ""
-            },
-            "require": {
-                "lcobucci/jwt": "^3.2",
-                "namshi/jose": "^7.2",
-                "php": "^5.5|^7.0",
-                "symfony/framework-bundle": "^3.4|^4.0",
-                "symfony/security-bundle": "^3.4|^4.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^1.1|^2.8",
-                "symfony/browser-kit": "^3.4|^4.0",
-                "symfony/console": "^3.4|^4.0",
-                "symfony/dom-crawler": "^3.4|^4.0",
-                "symfony/phpunit-bridge": "^3.4|^4.0",
-                "symfony/var-dumper": "^3.4|^4.0",
-                "symfony/yaml": "^3.4|^4.0"
-            },
-            "suggest": {
-                "gesdinet/jwt-refresh-token-bundle": "Implements a refresh token system over Json Web Tokens in Symfony",
-                "spomky-labs/lexik-jose-bridge": "Provides a JWT Token encoder with encryption support"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lexik\\Bundle\\JWTAuthenticationBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Robin Chalas",
-                    "email": "robin.chalas@gmail.com",
-                    "homepage": "https://github.com/chalasr"
-                },
-                {
-                    "name": "Jeremy Barthe",
-                    "email": "j.barthe@lexik.fr",
-                    "homepage": "https://github.com/jeremyb"
-                },
-                {
-                    "name": "Nicolas Cabot",
-                    "email": "n.cabot@lexik.fr",
-                    "homepage": "https://github.com/slashfan"
-                },
-                {
-                    "name": "Cedric Girard",
-                    "email": "c.girard@lexik.fr",
-                    "homepage": "https://github.com/cedric-g"
-                },
-                {
-                    "name": "Lexik Community",
-                    "homepage": "https://github.com/lexik/LexikJWTAuthenticationBundle/graphs/contributors"
-                },
-                {
-                    "name": "Dev Lexik",
-                    "email": "dev@lexik.fr",
-                    "homepage": "https://github.com/lexik"
-                }
-            ],
-            "description": "This bundle provides JWT authentication for your Symfony REST API",
-            "homepage": "https://github.com/lexik/LexikJWTAuthenticationBundle",
-            "keywords": [
-                "Authentication",
-                "JWS",
-                "api",
-                "bundle",
-                "jwt",
-                "rest",
-                "symfony"
-            ],
-            "time": "2018-08-02T19:32:29+00:00"
         },
         {
             "name": "liip/imagine-bundle",
@@ -5434,69 +5229,6 @@
             ],
             "description": "Run JavaScript code from PHP",
             "time": "2017-11-22T11:12:15+00:00"
-        },
-        {
-            "name": "namshi/jose",
-            "version": "7.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/namshi/jose.git",
-                "reference": "89a24d7eb3040e285dd5925fcad992378b82bcff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/namshi/jose/zipball/89a24d7eb3040e285dd5925fcad992378b82bcff",
-                "reference": "89a24d7eb3040e285dd5925fcad992378b82bcff",
-                "shasum": ""
-            },
-            "require": {
-                "ext-date": "*",
-                "ext-hash": "*",
-                "ext-json": "*",
-                "ext-pcre": "*",
-                "ext-spl": "*",
-                "php": ">=5.5",
-                "symfony/polyfill-php56": "^1.0"
-            },
-            "require-dev": {
-                "phpseclib/phpseclib": "^2.0",
-                "phpunit/phpunit": "^4.5|^5.0",
-                "satooshi/php-coveralls": "^1.0"
-            },
-            "suggest": {
-                "ext-openssl": "Allows to use OpenSSL as crypto engine.",
-                "phpseclib/phpseclib": "Allows to use Phpseclib as crypto engine, use version ^2.0."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Namshi\\JOSE\\": "src/Namshi/JOSE/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alessandro Nadalin",
-                    "email": "alessandro.nadalin@gmail.com"
-                },
-                {
-                    "name": "Alessandro Cinelli (cirpo)",
-                    "email": "alessandro.cinelli@gmail.com"
-                }
-            ],
-            "description": "JSON Object Signing and Encryption library for PHP.",
-            "keywords": [
-                "JSON Web Signature",
-                "JSON Web Token",
-                "JWS",
-                "json",
-                "jwt",
-                "token"
-            ],
-            "time": "2016-12-05T07:27:31+00:00"
         },
         {
             "name": "nelmio/alice",
@@ -11462,124 +11194,6 @@
             "time": "2015-12-06T20:17:20+00:00"
         },
         {
-            "name": "willdurand/hateoas",
-            "version": "2.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/willdurand/Hateoas.git",
-                "reference": "ada89d867e47040f8c4be3be2c8e7930a3d01189"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/ada89d867e47040f8c4be3be2c8e7930a3d01189",
-                "reference": "ada89d867e47040f8c4be3be2c8e7930a3d01189",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/annotations": "~1.0",
-                "doctrine/common": "~2.0",
-                "jms/metadata": "~1.1",
-                "jms/serializer": "~1.0",
-                "php": ">=5.4",
-                "phpoption/phpoption": ">=1.1.0,<2.0-dev",
-                "symfony/expression-language": "~2.4 || ~3.0"
-            },
-            "require-dev": {
-                "pagerfanta/pagerfanta": "~1.0",
-                "phpunit/phpunit": "~4.5",
-                "symfony/dependency-injection": "~2.4 || ~3.0",
-                "symfony/routing": "~2.4 || ~3.0",
-                "symfony/yaml": "~2.4 || ~3.0",
-                "twig/twig": "~1.12"
-            },
-            "suggest": {
-                "symfony/routing": "To use the SymfonyRouteFactory.",
-                "symfony/yaml": "To use yaml based configuration.",
-                "twig/twig": "To use the Twig extensions."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.10-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Hateoas": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adrien Brault",
-                    "email": "adrien.brault@gmail.com"
-                },
-                {
-                    "name": "William DURAND",
-                    "email": "william.durand1@gmail.com"
-                }
-            ],
-            "description": "A PHP library to support implementing representations for HATEOAS REST web services",
-            "time": "2016-05-19T11:30:35+00:00"
-        },
-        {
-            "name": "willdurand/hateoas-bundle",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/willdurand/BazingaHateoasBundle.git",
-                "reference": "d1f915fd4f8a7cd43a88a0ce97ffb28abe3a94fa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/d1f915fd4f8a7cd43a88a0ce97ffb28abe3a94fa",
-                "reference": "d1f915fd4f8a7cd43a88a0ce97ffb28abe3a94fa",
-                "shasum": ""
-            },
-            "require": {
-                "jms/serializer-bundle": "~1.0 || ^2.0",
-                "php": ">5.4 |^7.0",
-                "symfony/framework-bundle": "~2.3 || ~3.0 || ~4.0",
-                "willdurand/hateoas": "^2.10.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.5 || ~5.0",
-                "symfony/expression-language": "~2.4 || ~3.0 || ~4.0",
-                "symfony/stopwatch": "~2.4 || ~3.0 || ~4.0",
-                "twig/twig": "~1.12"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Bazinga\\Bundle\\HateoasBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "William DURAND",
-                    "email": "william.durand1@gmail.com"
-                }
-            ],
-            "description": "Integration of Hateoas into Symfony2.",
-            "keywords": [
-                "HATEOAS",
-                "rest"
-            ],
-            "time": "2018-01-27T13:03:07+00:00"
-        },
-        {
             "name": "willdurand/jsonp-callback-validator",
             "version": "v1.1.0",
             "source": {
@@ -15643,7 +15257,6 @@
         "friendsofsymfony/elastica-bundle": 20,
         "jms/serializer": 20,
         "hslavich/simplesamlphp-bundle": 20,
-        "gfreeau/get-jwt-bundle": 20,
         "cocur/slugify": 20,
         "phayes/geophp": 20,
         "webonyx/graphql-php": 20,

@@ -87,7 +87,7 @@ sub vcl_recv {
   if (req.method == "POST" && req.url ~ "graphql/internal$") {
 
         # Skip cache if viewer is authenticated.
-        if (req.http.Authorization) {
+        if (req.http.Cookie) {
             # std.log("Skipping cache because viewer is authenticated.");
             return (pass);
         }

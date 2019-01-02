@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Api;
 
 use Swarrot\Broker\Message;
@@ -8,33 +9,20 @@ use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\OpinionForm;
 use Capco\AppBundle\Entity\OpinionType;
-use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Form\ReportingType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Capco\AppBundle\Form\OpinionVersionType;
-use Doctrine\DBAL\Exception\DriverException;
 use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Entity\OpinionVersionVote;
-use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Put;
-use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Delete;
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class OpinionsController extends FOSRestController
@@ -52,7 +40,6 @@ class OpinionsController extends FOSRestController
      * @Post("/projects/{projectId}/steps/{stepId}/opinion_types/{typeId}/opinions")
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @ParamConverter("type", options={"mapping": {"typeId": "id"}})
-     * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
     public function postOpinionAction(
@@ -61,6 +48,11 @@ class OpinionsController extends FOSRestController
         string $stepId,
         OpinionType $type
     ) {
+        $viewer = $this->getUser();
+        if (!$viewer || 'anon.' === $viewer) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
+
         if (!$type->getIsEnabled()) {
             throw new BadRequestHttpException('This opinionType is not enabled.');
         }
@@ -120,13 +112,13 @@ class OpinionsController extends FOSRestController
      *  "repository_method": "getOne",
      *  "map_method_signature" = true
      * })
-     * @Security("has_role('ROLE_USER')")
      * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
     public function putOpinionAction(Request $request, Opinion $opinion)
     {
-        if ($this->getUser() !== $opinion->getAuthor()) {
-            throw new AccessDeniedHttpException();
+        $viewer = $this->getUser();
+        if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
+            throw new AccessDeniedHttpException('Not authorized.');
         }
 
         if (!$opinion->canContribute($this->getUser())) {
@@ -166,37 +158,36 @@ class OpinionsController extends FOSRestController
      *  }
      * )
      *
-     * @Security("has_role('ROLE_USER')")
      * @Delete("/opinions/{opinionId}")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @View(statusCode=204, serializerGroups={})
      */
     public function deleteOpinionAction(Request $request, Opinion $opinion)
     {
-        $user = $this->getUser();
-        if ($user !== $opinion->getAuthor()) {
-            throw new AccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
+            throw new AccessDeniedHttpException('Not authorized.');
         }
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($opinion);
         $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+        $this->get('redis_storage.helper')->recomputeUserCounters($viewer);
     }
 
     /**
-     * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/reports")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionReportAction(Request $request, Opinion $opinion)
     {
-        if ($this->getUser() === $opinion->getAuthor()) {
-            throw $this->createAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
+            throw new AccessDeniedHttpException('Not authorized.');
         }
 
-        $report = (new Reporting())->setReporter($this->getUser())->setOpinion($opinion);
+        $report = (new Reporting())->setReporter($viewer)->setOpinion($opinion);
         $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 
@@ -216,18 +207,18 @@ class OpinionsController extends FOSRestController
     }
 
     /**
-     * @Security("has_role('ROLE_USER')")
      * @Post("/versions/{versionId}/reports")
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
      * @View(statusCode=201, serializerGroups={"Default"})
      */
     public function postOpinionVersionReportAction(Request $request, OpinionVersion $version)
     {
-        if ($this->getUser() === $version->getAuthor()) {
-            throw $this->createAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$viewer || 'anon.' === $viewer || $viewer !== $opinion->getAuthor()) {
+            throw new AccessDeniedHttpException('Not authorized.');
         }
 
-        $report = (new Reporting())->setReporter($this->getUser())->setOpinionVersion($version);
+        $report = (new Reporting())->setReporter($viewer)->setOpinionVersion($version);
         $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 

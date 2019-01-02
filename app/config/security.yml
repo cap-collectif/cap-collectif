@@ -26,47 +26,16 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
 
-    api_login:
-      pattern: ^/api/login_check
-      stateless: true
-      gfreeau_get_jwt: ~ # form_login is never stateless, that's why we use this bundle
-
-
-    # This is our Internal API authenticated with JWT provided by app_get_api_token
-    graphql_internal:
-      pattern: ^/graphql/internal
-      provider: fos_userbundle
-      stateless: true
-      anonymous: true
-      lexik_jwt:
-        authorization_header:
-          enabled: true
-          prefix: Bearer
-        query_parameter:
-          enabled: false
-
-    # This is our Public/Preview API authenticated with Personal Access Token
+    # This is our Public API authenticated with Personal Access Token
     graphql_public:
-      pattern: ^/graphql
+      pattern: ^/graphql$
       provider: public_api_key_user_provider
       stateless: true
       anonymous: true # Right now anonymous are allowed
       simple_preauth:
         authenticator: Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator
 
-    # This is our Internal REST API (deprecated) authenticated with JWT provided by app_get_api_token
-    api:
-      pattern: ^/api
-      provider: fos_userbundle
-      stateless: true
-      anonymous: true
-      lexik_jwt:
-        authorization_header:
-          enabled: true
-          prefix: Bearer
-        query_parameter:
-          enabled: false
-    
+    # The rest is authenticated with cookies
     main:
       pattern: ^/
       provider: fos_userbundle
@@ -74,11 +43,8 @@ security:
       simple_preauth:
         authenticator: Capco\UserBundle\Authenticator\SimplePreAuthenticator
         provider: simple_preauth
-      form_login:
+      json_login:
         check_path: /login_check
-        username_parameter: username
-        password_parameter: password
-        require_previous_session: false
         remember_me: true
       oauth:
         resource_owners:

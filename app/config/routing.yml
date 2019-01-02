@@ -24,9 +24,6 @@ graphiql_endpoint:
 
 # API
 
-capco_api_login_check:
-  path: /api/login_check
-
 capco_api_toggles:
   resource: '@CapcoAppBundle/Controller/Api/FeaturesController.php'
   type: annotation
@@ -238,9 +235,6 @@ google_login:
 
 openid_login:
   path: /login/check-openid
-
-api_login_check:
-  path: /api/login_check
 
 # nelmio doc
 NelmioApiDocBundle:
