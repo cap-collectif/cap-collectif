@@ -2,7 +2,7 @@ SelectionStep:
   type: object
   inherits: [Node, Step, ProposalStep, RequirementStep]
   config:
-    interfaces: [Node, Step, ProposalStep,RequirementStep]
+    interfaces: [Node, Step, ProposalStep, RequirementStep]
     description: 'A budget contribution'
     fields:
       kind:
