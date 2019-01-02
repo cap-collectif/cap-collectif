@@ -2,21 +2,28 @@
 
 namespace Capco\AppBundle\Twig;
 
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
 use Capco\AppBundle\Repository\MenuItemRepository;
 
 class FooterExtension extends \Twig_Extension
 {
-    private $menuItemRepository;
-    private $footerSocialNetworkRepository;
+    public const CACHE_KEY_LINKS = 'getFooterLinks';
+    public const CACHE_KEY_SOCIAL_NETWORKS = 'getFooterSocialNetworks';
+
+    protected $menuItemRepository;
+    protected $footerSocialNetworkRepository;
+    protected $cache;
 
     public function __construct(
         MenuItemRepository $menuItemRepository,
-        FooterSocialNetworkRepository $footerSocialNetworkRepository
+        FooterSocialNetworkRepository $footerSocialNetworkRepository,
+        RedisCache $cache
     ) {
         $this->menuItemRepository = $menuItemRepository;
         $this->footerSocialNetworkRepository = $footerSocialNetworkRepository;
+        $this->cache = $cache;
     }
 
     public function getFunctions(): array
@@ -29,11 +36,27 @@ class FooterExtension extends \Twig_Extension
 
     public function getFooterLinks(): array
     {
-        return $this->menuItemRepository->getParentItems(MenuItem::TYPE_FOOTER);
+        $cachedItem = $this->cache->getItem(self::CACHE_KEY_LINKS);
+
+        if (!$cachedItem->isHit()) {
+            $data = $this->menuItemRepository->getParentItems(MenuItem::TYPE_FOOTER);
+            $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
+            $this->cache->save($cachedItem);
+        }
+
+        return $cachedItem->get();
     }
 
     public function getFooterSocialNetworks(): array
     {
-        return $this->footerSocialNetworkRepository->getEnabled();
+        $cachedItem = $this->cache->getItem(self::CACHE_KEY_SOCIAL_NETWORKS);
+
+        if (!$cachedItem->isHit()) {
+            $data = $this->footerSocialNetworkRepository->getEnabled();
+            $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
+            $this->cache->save($cachedItem);
+        }
+
+        return $cachedItem->get();
     }
 }
