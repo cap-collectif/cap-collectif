@@ -20,15 +20,15 @@ class ProposalController extends Controller
 {
     /**
      * @Route("/projects/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}", name="app_project_show_proposal")
-     * @ParamConverter("project", options={"mapping": {"projectSlug": "slug"}})
-     * @ParamConverter("currentStep", options={"mapping": {"stepSlug": "slug"}})
-     * @ParamConverter("proposal", options={"mapping": {"proposalSlug": "slug"}})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @ParamConverter("collectStep", class="CapcoAppBundle:Steps\CollectStep", options={"mapping" = {"stepSlug": "slug"}, "repository_method"= "getOneBySlug", "map_method_signature" = true})
+     * @ParamConverter("proposal", class="CapcoAppBundle:Proposal", options={"mapping" = {"proposalSlug": "slug"}, "repository_method"= "getOneBySlug", "map_method_signature" = true})
      * @Template("CapcoAppBundle:Proposal:show.html.twig")
      */
     public function showProposalAction(
         Request $request,
         Project $project,
-        CollectStep $currentStep,
+        CollectStep $collectStep,
         Proposal $proposal
     ) {
         $viewer = $this->getUser();
@@ -64,9 +64,9 @@ class ProposalController extends Controller
             false !== filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) &&
             \in_array($request->headers->get('referer'), $stepUrls, true)
                 ? $request->headers->get('referer')
-                : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL);
+                : $urlResolver->getStepUrl($collectStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
-        $proposalForm = $currentStep->getProposalForm();
+        $proposalForm = $collectStep->getProposalForm();
         $votableStep = $this->get(
             'capco\appbundle\graphql\resolver\proposal\proposalcurrentvotablestepresolver'
         )->__invoke($proposal);
@@ -96,7 +96,7 @@ class ProposalController extends Controller
 
         return [
             'project' => $project,
-            'currentStep' => $currentStep,
+            'currentStep' => $collectStep,
             'props' => $props,
             'proposal' => $proposal,
             'referer' => $refererUri,

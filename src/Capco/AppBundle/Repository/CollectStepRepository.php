@@ -2,12 +2,31 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 
 class CollectStepRepository extends EntityRepository
 {
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOneBySlug(string $slug): ?CollectStep
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('proposalForm')
+            ->leftJoin('cs.proposalForm', 'proposalForm')
+            ->andWhere('cs.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->useResultCache(true, 60)
+            ->getOneOrNullResult();
+    }
+
     /**
      * Get last enabled collect steps.
      *
@@ -27,19 +46,17 @@ class CollectStepRepository extends EntityRepository
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);
 
-        return new Paginator($qb, $fetchJoin = true);
+        return new Paginator($qb, ($fetchJoin = true));
     }
 
     public function getCollectStepsForProject(Project $project): array
     {
-        $qb = $this
-            ->getIsEnabledQueryBuilder()
+        $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('pas')
             ->leftJoin('cs.projectAbstractStep', 'pas')
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
-            ->orderBy('pas.position', 'ASC')
-        ;
+            ->orderBy('pas.position', 'ASC');
 
         return $qb->getQuery()->getResult();
     }
