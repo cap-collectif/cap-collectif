@@ -34,7 +34,8 @@
         </div>
     </div>
 
-    {% include '@CapcoApp/Default/footer.html.twig' %}
+    {# Should not be a subrequest but an include https://github.com/cap-collectif/platform/issues/6696 #}
+    {{ render(controller('CapcoAppBundle:Site/Default:footer')) }}
 
 {% endblock %}
 

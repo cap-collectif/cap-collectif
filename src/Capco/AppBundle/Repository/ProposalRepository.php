@@ -17,6 +17,22 @@ class ProposalRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
 
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOneBySlug(string $slug): ?Proposal
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->andWhere('proposal.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->useResultCache(true, 60)
+            ->getOneOrNullResult();
+    }
+
     public function getProposalsGroupedByCollectSteps(User $user, bool $onlyVisible = false): array
     {
         $qb = $this->getIsEnabledQueryBuilder()
