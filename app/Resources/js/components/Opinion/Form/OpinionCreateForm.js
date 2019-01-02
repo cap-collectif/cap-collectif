@@ -10,7 +10,7 @@ import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { Dispatch } from '../../../types';
 import type { OpinionCreateForm_section } from './__generated__/OpinionCreateForm_section.graphql';
 import type { OpinionCreateForm_consultation } from './__generated__/OpinionCreateForm_consultation.graphql';
-import RequirementsFormConsultation from '../../Requirements/RequirementsFormConsultation';
+import RequirementsForm from '../../Requirements/RequirementsForm';
 
 type RelayProps = {|
   section: OpinionCreateForm_section,
@@ -135,7 +135,7 @@ export class OpinionCreateForm extends React.Component<Props> {
             {!consultation.requirements.viewerMeetsTheRequirements && (
               <Panel.Body>
                 <p>{consultation.requirements.reason}</p>
-                <RequirementsFormConsultation step={consultation} />
+                <RequirementsForm step={consultation} />
               </Panel.Body>
             )}
           </Panel>

@@ -1,6 +1,7 @@
 RequirementStep:
   type: interface
   config:
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
     fields:
       requirements:
         type: 'RequirementConnection!'
