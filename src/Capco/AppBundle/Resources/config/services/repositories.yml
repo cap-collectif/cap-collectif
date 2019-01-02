@@ -408,3 +408,8 @@ services:
     public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:District\ProjectDistrict']
+
+  Capco\AppBundle\Repository\FooterSocialNetworkRepository:
+    public: true
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:FooterSocialNetwork']

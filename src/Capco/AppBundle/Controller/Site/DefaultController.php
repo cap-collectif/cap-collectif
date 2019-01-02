@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Form\ContactType;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -80,22 +79,6 @@ class DefaultController extends Controller
     public function confidentialiteAction(Request $request)
     {
         return [];
-    }
-
-    /**
-     * @Template("CapcoAppBundle:Default:footer.html.twig")
-     */
-    public function footerAction()
-    {
-        $footerLinks = $this->get('capco.menu_item.repository')->getParentItems(
-            MenuItem::TYPE_FOOTER
-        );
-
-        $socialNetworks = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:FooterSocialNetwork')
-            ->getEnabled();
-
-        return ['socialNetworks' => $socialNetworks, 'footerLinks' => $footerLinks];
     }
 
     /**
