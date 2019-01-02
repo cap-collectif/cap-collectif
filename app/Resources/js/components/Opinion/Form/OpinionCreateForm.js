@@ -67,6 +67,29 @@ const validate = ({ title, body }: FormValues) => {
 };
 
 export class OpinionCreateForm extends React.Component<Props> {
+  renderRequirements() {
+    const { consultation } = this.props;
+
+    return (
+      <Panel id="required-conditions" bsStyle="primary">
+        <Panel.Heading>
+          <FormattedMessage id="requirements" />{' '}
+          {consultation.requirements.viewerMeetsTheRequirements && (
+            <Label bsStyle="primary">
+              <FormattedMessage id="filled" />
+            </Label>
+          )}
+        </Panel.Heading>
+        {!consultation.requirements.viewerMeetsTheRequirements && (
+          <Panel.Body>
+            <p>{consultation.requirements.reason}</p>
+            <RequirementsForm step={consultation} />
+          </Panel.Body>
+        )}
+      </Panel>
+    );
+  }
+
   render() {
     const { section, consultation, handleSubmit, error, dispatch } = this.props;
     if (!section) return null;
@@ -92,6 +115,7 @@ export class OpinionCreateForm extends React.Component<Props> {
             )}
           </Alert>
         )}
+        {consultation.requirements.totalCount > 0 && this.renderRequirements()}
         <Field
           name="title"
           type="text"
@@ -122,24 +146,6 @@ export class OpinionCreateForm extends React.Component<Props> {
                 id={`appendix_${index}`}
               />
             ))}
-        {consultation.requirements.totalCount > 0 && (
-          <Panel id="required-conditions" bsStyle="primary">
-            <Panel.Heading>
-              <FormattedMessage id="requirements" />{' '}
-              {consultation.requirements.viewerMeetsTheRequirements && (
-                <Label bsStyle="primary">
-                  <FormattedMessage id="filled" />
-                </Label>
-              )}
-            </Panel.Heading>
-            {!consultation.requirements.viewerMeetsTheRequirements && (
-              <Panel.Body>
-                <p>{consultation.requirements.reason}</p>
-                <RequirementsForm step={consultation} />
-              </Panel.Body>
-            )}
-          </Panel>
-        )}
       </form>
     );
   }
