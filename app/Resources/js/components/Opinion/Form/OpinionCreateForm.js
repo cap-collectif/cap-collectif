@@ -163,7 +163,7 @@ export default createFragmentContainer(container, {
   `,
   consultation: graphql`
     fragment OpinionCreateForm_consultation on Consultation {
-      ...RequirementsFormConsultation_step
+      ...RequirementsForm_step
       id
       titleHelpText
       descriptionHelpText
