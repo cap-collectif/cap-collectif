@@ -13,7 +13,7 @@ import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants
 import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
 
 type Props = {
-  form: Object,
+  // form: Object,
   proposalId: Uuid,
   currentVotableStepId: ?Uuid,
   features: FeatureToggles,
@@ -22,7 +22,7 @@ type Props = {
 
 export class ProposalPage extends React.Component<Props> {
   render() {
-    const { proposalId, features, form } = this.props;
+    const { proposalId, features } = this.props;
     return (
       <div>
         <QueryRenderer
@@ -49,6 +49,9 @@ export class ProposalPage extends React.Component<Props> {
                 ...ProposalPageAlert_proposal
                 ...ProposalPageTabs_proposal
                 ...ProposalPageHeader_proposal @arguments(isAuthenticated: $isAuthenticated)
+              }
+              proposalForm: node(id: $proposalId) {
+                ...ProposalPageTabs_proposalForm
               }
             }
           `}
@@ -87,7 +90,7 @@ export class ProposalPage extends React.Component<Props> {
                         step={props.step || null}
                         viewer={props.viewer || null}
                         features={features}
-                        form={form}
+                        form={props.proposalForm}
                       />
                     </section>
                   </div>

@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import type { ProposalPageTabs_proposal } from './__generated__/ProposalPageTabs_proposal.graphql';
 import type { ProposalPageTabs_viewer } from './__generated__/ProposalPageTabs_viewer.graphql';
 import type { ProposalPageTabs_step } from './__generated__/ProposalPageTabs_step.graphql';
+import type { ProposalPageTabs_proposalForm } from './__generated__/ProposalPageTabs_proposalForm.graphql';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageLastNews from './ProposalPageLastNews';
 import ProposalVotesByStep from './ProposalVotesByStep';
@@ -22,7 +23,7 @@ type Props = {
   viewer: ?ProposalPageTabs_viewer,
   step: ?ProposalPageTabs_step,
   proposal: ProposalPageTabs_proposal,
-  form: Object,
+  form: ProposalPageTabs_proposalForm,
   features: FeatureToggles,
 };
 
@@ -224,6 +225,12 @@ export default createFragmentContainer(ProposalPageTabs, {
       allFollowers: followers(first: 0) {
         totalCount
       }
+    }
+  `,
+  proposalForm: graphql`
+    fragment ProposalPageTabs_proposalForm on ProposalForm {
+      usingCategories
+      usingThemes
     }
   `,
 });
