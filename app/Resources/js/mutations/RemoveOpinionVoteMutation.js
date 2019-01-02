@@ -1,5 +1,6 @@
 // @flow
 import { graphql } from 'react-relay';
+import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
@@ -73,13 +74,25 @@ const commit = (
           },
         ],
         pathToConnection: ['opinion', 'previewVotes'],
-        deletedIDFieldName: 'previousVoteId',
-      },
-      {
-        type: 'NODE_DELETE',
         deletedIDFieldName: 'deletedVoteId',
       },
     ],
+    updater: (store: any) => {
+      const opinionProxy = store.get(variables.input.opinionId);
+      if (!opinionProxy) return;
+      const opinionVotesProxy = opinionProxy.getLinkedRecord('votes', { first: 0 });
+      if (!opinionVotesProxy) return;
+      const previousValue = parseInt(opinionVotesProxy.getValue('totalCount'), 10);
+      opinionVotesProxy.setValue(previousValue + 1, 'totalCount');
+
+      const connection = ConnectionHandler.getConnection(
+        opinionProxy,
+        'OpinionVotesBar_previewVotes',
+      );
+      if (connection) {
+        connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
+      }
+    },
   });
 
 export default { commit };
