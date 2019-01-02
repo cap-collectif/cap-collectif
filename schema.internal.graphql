@@ -838,6 +838,9 @@ type CollectStep implements Node & Step & ProposalStep {
 
   # The url of the step
   url: String!
+
+  # The introduction text of the step.
+  body: HTML
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -1255,6 +1258,9 @@ type Consultation implements Node & Step {
 
   # The url of the step
   url: String!
+
+  # The introduction text of the step.
+  body: HTML
   opinionCountShownBySection: Int
 
   # The project
@@ -2773,6 +2779,9 @@ type OtherStep implements Step {
 
   # The url of the step
   url: String!
+
+  # The introduction text of the step.
+  body: HTML
 }
 
 # Information about pagination in a connection.
@@ -2912,6 +2921,9 @@ type PresentationStep implements Step {
 
   # The url of the step
   url: String!
+
+  # The introduction text of the step.
+  body: HTML
 }
 
 # Entities that can be published.
@@ -3600,6 +3612,9 @@ interface ProposalStep {
 
   # The url of the step
   url: String!
+
+  # The introduction text of the step.
+  body: HTML
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -4186,6 +4201,9 @@ type QuestionnaireStep implements Node & Step {
   # The url of the step
   url: String!
 
+  # The introduction text of the step.
+  body: HTML
+
   # A list of contributor associated with the step.
   contributors(
     # Returns the elements in the list that come after the specified cursor.
@@ -4239,6 +4257,9 @@ type RankingStep implements Step {
 
   # The url of the step
   url: String!
+
+  # The introduction text of the step.
+  body: HTML
 }
 
 # Fetches an object given its ID
@@ -4767,6 +4788,9 @@ type SelectionStep implements Node & Step & ProposalStep {
 
   # The url of the step
   url: String!
+
+  # The introduction text of the step.
+  body: HTML
   proposals(
     # Returns the elements in the list that come after the specified cursor.
     after: String
@@ -5247,6 +5271,9 @@ interface Step {
 
   # The url of the step
   url: String!
+
+  # The introduction text of the step.
+  body: HTML
 }
 
 # Step statuses
