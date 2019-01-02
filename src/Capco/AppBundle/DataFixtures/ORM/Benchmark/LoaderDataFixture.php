@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\DataFixtures\ORM;
+namespace Capco\AppBundle\DataFixtures\ORM\Benchmark;
 
 use Hautelook\AliceBundle\Doctrine\DataFixtures\AbstractLoader;
 
