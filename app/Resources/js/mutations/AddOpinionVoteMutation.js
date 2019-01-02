@@ -75,6 +75,17 @@ const commit = (
         type: 'NODE_DELETE',
         deletedIDFieldName: 'previousVoteId',
       },
+      {
+        type: 'RANGE_DELETE',
+        parentID: variables.input.opinionId,
+        connectionKeys: [
+          {
+            key: 'OpinionVotesBar_previewVotes',
+          },
+        ],
+        pathToConnection: ['opinion', 'previewVotes'],
+        deletedIDFieldName: 'previousVoteId',
+      },
       // Add the new vote
       {
         type: 'RANGE_ADD',

@@ -65,6 +65,17 @@ const commit = (
     variables,
     configs: [
       {
+        type: 'RANGE_DELETE',
+        parentID: variables.input.opinionId,
+        connectionKeys: [
+          {
+            key: 'OpinionVotesBar_previewVotes',
+          },
+        ],
+        pathToConnection: ['opinion', 'previewVotes'],
+        deletedIDFieldName: 'previousVoteId',
+      },
+      {
         type: 'NODE_DELETE',
         deletedIDFieldName: 'deletedVoteId',
       },
