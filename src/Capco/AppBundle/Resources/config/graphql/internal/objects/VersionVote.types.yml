@@ -9,6 +9,10 @@ VersionVote:
       - Publishable
       - Vote
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: VersionVote
       kind:
         type: 'String!'
         description: "Returns 'vote'."

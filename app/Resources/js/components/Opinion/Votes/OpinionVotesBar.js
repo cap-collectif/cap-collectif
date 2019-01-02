@@ -75,6 +75,7 @@ export default createFragmentContainer(OpinionVotesBar, {
           totalCount
           edges {
             node {
+              id
               ...OpinionUserVote_vote
             }
           }
@@ -93,6 +94,7 @@ export default createFragmentContainer(OpinionVotesBar, {
           totalCount
           edges {
             node {
+              id
               ...OpinionUserVote_vote
             }
           }

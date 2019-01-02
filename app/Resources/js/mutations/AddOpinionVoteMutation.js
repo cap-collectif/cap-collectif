@@ -72,15 +72,12 @@ const commit = (
     configs: [
       // If the is previous vote, we remove it
       {
-        type: 'NODE_DELETE',
-        deletedIDFieldName: 'previousVoteId',
-      },
-      {
         type: 'RANGE_DELETE',
         parentID: variables.input.opinionId,
         connectionKeys: [
           {
             key: 'OpinionVotesBar_previewVotes',
+            // filters: {},
           },
         ],
         pathToConnection: ['opinion', 'previewVotes'],
@@ -94,7 +91,7 @@ const commit = (
           {
             key: 'OpinionVotesBar_previewVotes',
             rangeBehavior: 'prepend',
-            filters: {},
+            // filters: {},
           },
         ],
         edgeName: 'voteEdge',
