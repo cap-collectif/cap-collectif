@@ -65,6 +65,7 @@ export class ProposalStepPage extends React.Component<Props> {
               $status: ID
               $theme: ID
               $userType: ID
+              $isMapDisplay: Boolean!
             ) {
               viewer @include(if: $isAuthenticated) {
                 ...ProposalListView_viewer
@@ -83,7 +84,7 @@ export class ProposalStepPage extends React.Component<Props> {
                     latMap
                     lngMap
                     zoomMap
-                    districts(order: ALPHABETICAL) {
+                    districts(order: ALPHABETICAL) @include(if: $isMapDisplay) {
                       displayedOnMap
                       geojson
                       border {
@@ -122,6 +123,7 @@ export class ProposalStepPage extends React.Component<Props> {
               count: config.isMobile ? 25 : 50,
               cursor: null,
               ...this.initialRenderVars,
+              isMapDisplay: features.display_map,
             }: ProposalStepPageQueryVariables)
           }
           render={({ error, props }: { props: ?ProposalStepPageQueryResponse } & ReadyState) => {
@@ -137,20 +139,22 @@ export class ProposalStepPage extends React.Component<Props> {
               if (!form) return;
 
               let geoJsons = [];
-              try {
-                geoJsons = form.districts
-                  .filter(d => d.geojson && d.displayedOnMap)
-                  .map(d => ({
-                    // $FlowFixMe geojson is string
-                    district: JSON.parse(d.geojson),
-                    style: {
-                      border: d.border,
-                      background: d.background,
-                    },
-                  }));
-              } catch (e) {
-                // eslint-disable-next-line no-console
-                console.error("Can't parse your geojsons !", e);
+              if (features.display_map && form.districts) {
+                try {
+                  geoJsons = form.districts
+                    .filter(d => d.geojson && d.displayedOnMap)
+                    .map(d => ({
+                      // $FlowFixMe geojson is string
+                      district: JSON.parse(d.geojson),
+                      style: {
+                        border: d.border,
+                        background: d.background,
+                      },
+                    }));
+                } catch (e) {
+                  // eslint-disable-next-line no-console
+                  console.error("Can't parse your geojsons !", e);
+                }
               }
               return (
                 <div id="proposal__step-page-rendered">
