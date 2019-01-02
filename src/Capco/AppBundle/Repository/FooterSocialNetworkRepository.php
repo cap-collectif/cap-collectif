@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class FooterSocialNetworkRepository extends EntityRepository
 {
-    public function getEnabled()
+    public function getEnabled(): array
     {
         $qb = $this->createQueryBuilder('s')
             ->select('s.title, s.link, s.style')
