@@ -45,15 +45,23 @@ type Props = {
   value: YesNoPairedVoteValue,
 } & RelayProps;
 
-export class OpinionVotesButton extends React.Component<Props> {
+type State = {
+  isLoading: boolean,
+};
+
+export class OpinionVotesButton extends React.Component<Props, State> {
   static defaultProps = { style: {} };
 
-  target: null;
+  state = { isLoading: false };
+
+  target = null;
 
   vote = () => {
     const { opinion, value } = this.props;
     if (opinion.__typename === 'Version' || opinion.__typename === 'Opinion') {
       const input = { opinionId: opinion.id, value };
+      this.setState({ isLoading: true });
+      console.log(this.state);
       AddOpinionVoteMutation.commit({ input })
         .then(res => {
           if (!res.addOpinionVote) {
@@ -66,6 +74,7 @@ export class OpinionVotesButton extends React.Component<Props> {
               content: 'opinion.request.create_vote.success',
             },
           });
+          this.setState({ isLoading: false });
         })
         .catch(() => {
           FluxDispatcher.dispatch({
@@ -75,6 +84,7 @@ export class OpinionVotesButton extends React.Component<Props> {
               content: 'opinion.request.failure',
             },
           });
+          this.setState({ isLoading: false });
         });
     }
   };
@@ -83,6 +93,8 @@ export class OpinionVotesButton extends React.Component<Props> {
     const { opinion } = this.props;
     if (opinion.__typename === 'Version' || opinion.__typename === 'Opinion') {
       const input = { opinionId: opinion.id };
+      this.setState({ isLoading: true });
+      console.log(this.state);
       RemoveOpinionVoteMutation.commit({ input })
         .then(res => {
           if (!res.removeOpinionVote) {
@@ -95,6 +107,7 @@ export class OpinionVotesButton extends React.Component<Props> {
               content: 'opinion.request.delete_vote.success',
             },
           });
+          this.setState({ isLoading: false });
         })
         .catch(() => {
           FluxDispatcher.dispatch({
@@ -104,6 +117,7 @@ export class OpinionVotesButton extends React.Component<Props> {
               content: 'opinion.request.failure',
             },
           });
+          this.setState({ isLoading: false });
         });
     }
   };
@@ -128,6 +142,7 @@ export class OpinionVotesButton extends React.Component<Props> {
 
   render() {
     const { opinion, value, style } = this.props;
+    const { isLoading } = this.state;
     if (
       !this.voteIsEnabled() ||
       (opinion.__typename !== 'Opinion' && opinion.__typename !== 'Version')
@@ -153,9 +168,8 @@ export class OpinionVotesButton extends React.Component<Props> {
               id={active ? `vote.aria_label_active.${data.str}` : `vote.aria_label.${data.str}`}
             />
           }
-          disabled={disabled}>
-          {active && (
-            /* $FlowFixMe */
+          disabled={disabled || isLoading}>
+          {active /* $FlowFixMe */ && (
             <UnpublishedTooltip
               target={() => ReactDOM.findDOMNode(this.target)}
               publishable={opinion.viewerVote}
