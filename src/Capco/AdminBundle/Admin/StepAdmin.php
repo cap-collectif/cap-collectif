@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
@@ -194,20 +193,6 @@ class StepAdmin extends CapcoAdmin
                 ->add('moderatingOnCreate', null, ['label' => 'admin.fields.synthesis.enabled'])
                 ->add('moderatingOnUpdate', null, [
                     'label' => 'admin.fields.proposal_form.notification.on_update',
-                ])
-                ->end()
-                ->with('requirements')
-                ->add(
-                    'requirements',
-                    'sonata_type_collection',
-                    ['label' => 'fields', 'by_reference' => false],
-                    ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
-                )
-                ->add('requirementsReason', PurifiedTextareaType::class, [
-                    'translation_domain' => 'CapcoAppBundle',
-                    'label' => 'reason-for-collection',
-                    'required' => false,
-                    'help' => 'help-text-for-reason-for-collection-field',
                 ])
                 ->end();
         } elseif ($subject instanceof SynthesisStep) {
@@ -480,7 +465,6 @@ class StepAdmin extends CapcoAdmin
             ->createQueryBuilder('q')
             ->where('q.step IS NULL OR q.step = :step')
             ->setParameter('step', $subject);
-
         return $qb->getQuery();
     }
 
@@ -493,7 +477,6 @@ class StepAdmin extends CapcoAdmin
             ->createQueryBuilder('s')
             ->where('s.step = :step')
             ->setParameter('step', $subject);
-
         return $qb->getQuery();
     }
 

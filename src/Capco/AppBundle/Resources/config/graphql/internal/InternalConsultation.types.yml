@@ -4,10 +4,9 @@ InternalConsultation:
     - InternalPrimaryKey
     - PublicConsultation
     - Node
-    - RequirementStep
     - Step
   config:
-    interfaces: [Node, Step, RequirementStep]
+    interfaces: [Node, Step]
     description: 'A consultation'
     name: Consultation
     fields:
