@@ -8,6 +8,7 @@ Capco\AppBundle\Entity\Steps\ConsultationStep:
     endAt: <dateTimeBetween('now', '+10 days')>
     body: <p><text(1000)></p>
     opinionCount: 0
+    requirementsReason: Vous devez avoir un numéro de téléphone.
   cstep2:
     id: cstep2
     title: Collecte des avis pour une meilleur stratégie

@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { Modal } from 'react-bootstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { submit, isSubmitting } from 'redux-form';
+import { isInvalid, submit, isSubmitting } from 'redux-form';
 import type { IntlShape } from 'react-intl';
 import OpinionCreateForm, { formName } from '../Form/OpinionCreateForm';
 import CloseButton from '../../Form/CloseButton';
@@ -13,6 +13,7 @@ import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { State, Dispatch } from '../../../types';
 import type { OpinionCreateModal_section } from './__generated__/OpinionCreateModal_section.graphql';
 import type { OpinionCreateModal_consultation } from './__generated__/OpinionCreateModal_consultation.graphql';
+import { formName as requirementsFormName } from '../../Requirements/RequirementsForm';
 
 type Props = {
   intl: IntlShape,
@@ -21,11 +22,20 @@ type Props = {
   consultation: OpinionCreateModal_consultation,
   submitting: boolean,
   dispatch: Dispatch,
+  invalidRequirements: boolean,
 };
 
 export class OpinionCreateModal extends React.Component<Props> {
   render() {
-    const { section, consultation, submitting, dispatch, show, intl } = this.props;
+    const {
+      section,
+      consultation,
+      submitting,
+      dispatch,
+      show,
+      intl,
+      invalidRequirements,
+    } = this.props;
     return (
       <Modal
         animation={false}
@@ -62,6 +72,7 @@ export class OpinionCreateModal extends React.Component<Props> {
           <SubmitButton
             label="global.create"
             id="confirm-opinion-create"
+            disabled={invalidRequirements}
             isSubmitting={submitting}
             onSubmit={() => {
               dispatch(submit(formName));
@@ -76,6 +87,7 @@ export class OpinionCreateModal extends React.Component<Props> {
 const mapStateToProps = (state: State, props: Object) => ({
   show: state.opinion.showOpinionCreateModal === props.section.id,
   submitting: isSubmitting(formName)(state),
+  invalidRequirements: isInvalid(requirementsFormName)(state),
 });
 
 const container = connect(mapStateToProps)(injectIntl(OpinionCreateModal));

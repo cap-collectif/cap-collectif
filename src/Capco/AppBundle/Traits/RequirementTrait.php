@@ -14,6 +14,23 @@ trait RequirementTrait
      */
     protected $requirements;
 
+    /**
+     * @ORM\Column(name="requirements_reason", type="string", nullable=true)
+     */
+    private $requirementsReason;
+
+    public function getRequirementsReason(): ?string
+    {
+        return $this->requirementsReason;
+    }
+
+    public function setRequirementsReason(string $requirementsReason = null): self
+    {
+        $this->requirementsReason = $requirementsReason;
+
+        return $this;
+    }
+
     public function addRequirement(Requirement $requirement): self
     {
         if (!$this->requirements->contains($requirement)) {

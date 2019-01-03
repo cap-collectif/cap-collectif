@@ -147,14 +147,15 @@ export class ProposalVoteModal extends React.Component<Props, State> {
 
   render() {
     const { dispatch, showModal, proposal, step, invalid, isSubmitting } = this.props;
+    const { keyboard } = this.state;
 
     const keyTradForModalVote =
       step.form && step.form.isProposalForm ? 'project.votes.nb' : 'count-questions';
-    return (
+    return step.requirements ? (
       <Modal
         animation={false}
         enforceFocus={false}
-        keyboard={this.state.keyboard}
+        keyboard={keyboard}
         show={showModal}
         onHide={this.onHide}
         bsSize="large"
@@ -232,7 +233,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
           />
         </Modal.Footer>
       </Modal>
-    );
+    ) : null;
   }
 }
 
@@ -260,10 +261,12 @@ export default createFragmentContainer(container, {
       id
       votesRanking
       votesHelpText
-      requirements {
-        viewerMeetsTheRequirements
-        reason
-        totalCount
+      ... on RequirementStep {
+        requirements {
+          viewerMeetsTheRequirements
+          reason
+          totalCount
+        }
       }
       form {
         isProposalForm
