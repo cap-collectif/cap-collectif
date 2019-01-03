@@ -28,18 +28,20 @@ export class ProjectListViewPaginated extends React.Component<Props, State> {
     if (query.projects && query.projects.edges) {
       if (query.projects.edges.length > 0) {
         return (
-          <div className="d-flex flex-wrap">
-            {query.projects.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map((node, index) => (
-                /* $FlowFixMe $fragmentRefs */
-                <ProjectPreview key={index} project={node} />
-              ))}
+          <div>
+            <div className="d-flex flex-wrap">
+              {query.projects.edges
+                .filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map((node, index) => (
+                  /* $FlowFixMe $fragmentRefs */
+                  <ProjectPreview key={index} project={node} />
+                ))}
+            </div>
             {paginate && relay.hasMore() && (
               <Button
-                className="see-more-projects-button ml-15"
+                className="see-more-projects-button"
                 disabled={loading}
                 onClick={() => {
                   this.setState({ loading: true });
@@ -68,23 +70,19 @@ export default createPaginationContainer(
     query: graphql`
       fragment ProjectListViewPaginated_query on Query
         @argumentDefinitions(
-          author: { type: "ID" }
           count: { type: "Int" }
           cursor: { type: "String", defaultValue: null }
           theme: { type: "ID" }
           orderBy: { type: "ProjectOrder" }
           type: { type: "ID" }
-          status: { type: "ID" }
           term: { type: "String" }
         ) {
         projects(
-          author: $author
           first: $count
           after: $cursor
           theme: $theme
           orderBy: $orderBy
           type: $type
-          status: $status
           term: $term
         ) @connection(key: "ProjectListViewPaginated_projects", filters: []) {
           edges {
@@ -126,7 +124,6 @@ export default createPaginationContainer(
         $theme: ID
         $orderBy: ProjectOrder
         $type: ID
-        $status: ID
         $term: String
       ) {
         ...ProjectListViewPaginated_query
@@ -136,7 +133,6 @@ export default createPaginationContainer(
             theme: $theme
             orderBy: $orderBy
             type: $type
-            status: $status
             term: $term
           )
       }

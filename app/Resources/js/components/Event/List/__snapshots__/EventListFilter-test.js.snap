@@ -13,8 +13,10 @@ exports[`<EventListFilters /> renders correctly 1`] = `
     md={8}
     xs={12}
   >
-    <FiltersContainer
-      filterCount={2}
+    <OverlayTrigger
+      className="w-25"
+      defaultOverlayShown={false}
+      id="event-list-filters-d"
       overlay={
         <Popover
           bsClass="popover"
@@ -97,8 +99,37 @@ exports[`<EventListFilters /> renders correctly 1`] = `
           </div>
         </Popover>
       }
-      type="event"
-    />
+      placement="bottom"
+      trigger="click"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        className="btn--outline btn-dark-gray"
+        disabled={false}
+        id="event-button-filter"
+      >
+        <i
+          className="cap cap-filter-1 small mr-5 r-0"
+        />
+        <FormattedMessage
+          id="link_filters"
+          values={Object {}}
+        />
+        <span
+          className="ml-5"
+        >
+           (
+          2
+          ) 
+        </span>
+        <i
+          className="cap cap-triangle-down ml-5 r-0"
+        />
+      </Button>
+    </OverlayTrigger>
   </Col>
   <Col
     bsClass="col"
@@ -139,8 +170,10 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
     md={8}
     xs={12}
   >
-    <FiltersContainer
-      filterCount={2}
+    <OverlayTrigger
+      className="w-25"
+      defaultOverlayShown={false}
+      id="event-list-filters-d"
       overlay={
         <Popover
           bsClass="popover"
@@ -180,8 +213,37 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
           </div>
         </Popover>
       }
-      type="event"
-    />
+      placement="bottom"
+      trigger="click"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        className="btn--outline btn-dark-gray"
+        disabled={false}
+        id="event-button-filter"
+      >
+        <i
+          className="cap cap-filter-1 small mr-5 r-0"
+        />
+        <FormattedMessage
+          id="link_filters"
+          values={Object {}}
+        />
+        <span
+          className="ml-5"
+        >
+           (
+          2
+          ) 
+        </span>
+        <i
+          className="cap cap-triangle-down ml-5 r-0"
+        />
+      </Button>
+    </OverlayTrigger>
   </Col>
   <Col
     bsClass="col"

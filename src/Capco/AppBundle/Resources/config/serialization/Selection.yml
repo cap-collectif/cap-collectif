@@ -1,7 +1,5 @@
 Capco\AppBundle\Entity\Selection:
   attributes:
-    proposal:
-      groups: [Proposals, SelectionSteps]
     selectionStep:
       groups: [Proposals, SelectionSteps, Statuses, Elasticsearch]
       serialized_name: step

@@ -2,14 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
-use Psr\Log\LoggerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Search\ProjectSearch;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Entity\Project;
 use Capco\UserBundle\Entity\User;
 
 class ProjectsResolver implements ResolverInterface
@@ -81,7 +80,7 @@ class ProjectsResolver implements ResolverInterface
             $filters['projectType.id'] = $args->offsetGet('type');
         }
         if ($args->offsetExists('author') && '' !== $args['author']) {
-            $filters['author.id'] = GlobalId::fromGlobalId($args->offsetGet('author'))['id'];
+            $filters['author.id'] = $args->offsetGet('author');
         }
 
         return $filters;
