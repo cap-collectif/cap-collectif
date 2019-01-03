@@ -3,28 +3,30 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepCountProposalDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepCountContributorDataLoader;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
 
-class CollectStepProposalCountResolver implements ResolverInterface
+class CollectStepContributorCountResolver implements ResolverInterface
 {
-    private $collectStepCountProposalDataLoader;
+    private $collectStepCountContributorDataLoader;
     private $logger;
 
     public function __construct(
         LoggerInterface $logger,
-        CollectStepCountProposalDataLoader $collectStepCountProposalDataLoader
+        CollectStepCountContributorDataLoader $collectStepCountContributorDataLoader
     ) {
-        $this->collectStepCountProposalDataLoader = $collectStepCountProposalDataLoader;
+        $this->collectStepCountContributorDataLoader = $collectStepCountContributorDataLoader;
         $this->logger = $logger;
     }
 
     public function __invoke(CollectStep $collectStep): Promise
     {
         try {
-            return $this->collectStepCountProposalDataLoader->load(['collectStep' => $collectStep]);
+            return $this->collectStepCountContributorDataLoader->load([
+                'collectStep' => $collectStep,
+            ]);
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 

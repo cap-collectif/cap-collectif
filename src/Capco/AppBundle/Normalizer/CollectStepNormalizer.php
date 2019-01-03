@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepContributorCountResolver;
 use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
@@ -17,17 +18,20 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
 
     private $normalizer;
     private $collectStepProposalCountResolver;
+    private $collectStepContributorCountResolver;
     private $adapter;
     private $logger;
 
     public function __construct(
         ObjectNormalizer $normalizer,
         CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        CollectStepContributorCountResolver $collectStepContributorCountResolver,
         PromiseAdapterInterface $adapter,
         LoggerInterface $logger
     ) {
         $this->normalizer = $normalizer;
         $this->collectStepProposalCountResolver = $collectStepProposalCountResolver;
+        $this->collectStepContributorCountResolver = $collectStepContributorCountResolver;
         $this->adapter = $adapter;
         $this->logger = $logger;
     }
@@ -41,18 +45,27 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
         if (\in_array('Elasticsearch', $groups)) {
             return $data;
         }
-        $count = 0;
-        $promise = $this->collectStepProposalCountResolver
+        $proposalsCount = 0;
+        $proposalPromise = $this->collectStepProposalCountResolver
             ->__invoke($object)
-            ->then(function ($value) use (&$count) {
-                $count += $value;
+            ->then(function ($value) use (&$proposalsCount) {
+                $proposalsCount += $value;
             });
 
-        $this->adapter->await($promise);
+        $this->adapter->await($proposalPromise);
+
+        $contributorsCount = 0;
+        $contributorPromise = $this->collectStepContributorCountResolver
+            ->__invoke($object)
+            ->then(function ($value) use (&$contributorsCount) {
+                $contributorsCount += $value;
+            });
+
+        $this->adapter->await($contributorPromise);
 
         $counters = [
-            'proposals' => $count,
-            'contributors' => $object->getContributorsCount(),
+            'proposals' => $proposalsCount,
+            'contributors' => $contributorsCount,
         ];
 
         $remainingTime = $object->getRemainingTime();

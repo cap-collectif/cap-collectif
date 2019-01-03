@@ -48,11 +48,6 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
     private $proposalForm;
 
     /**
-     * @ORM\Column(name="contributors_count", type="integer", nullable=false)
-     */
-    private $contributorsCount = 0;
-
-    /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="default_status_id", nullable=true)
      */
@@ -73,18 +68,6 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
     {
         parent::__construct();
         $this->requirements = new ArrayCollection();
-    }
-
-    public function getContributorsCount(): int
-    {
-        return $this->contributorsCount ?? 0;
-    }
-
-    public function setContributorsCount(int $contributorsCount): self
-    {
-        $this->contributorsCount = $contributorsCount;
-
-        return $this;
     }
 
     public function getDefaultStatus()

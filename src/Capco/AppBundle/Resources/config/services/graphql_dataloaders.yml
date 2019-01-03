@@ -30,3 +30,9 @@ services:
     arguments:
       $cachePrefix: collectStepProposalCount
       $cacheTtl: 60
+
+  Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepCountContributorDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: collectStepContributorCount
+      $cacheTtl: 60
