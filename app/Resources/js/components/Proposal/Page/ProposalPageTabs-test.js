@@ -26,6 +26,11 @@ describe('<ProposalPageTabs />', () => {
   };
 
   const props = {
+    form: {
+      $refType,
+      usingThemes: true,
+      usingCategories: true,
+    },
     categories: [],
     steps: [
       {
@@ -33,14 +38,6 @@ describe('<ProposalPageTabs />', () => {
         id: 'step1',
       },
     ],
-    step: {
-      $refType,
-      $fragmentRefs,
-      form: {
-        usingThemes: true,
-        usingCategories: true,
-      },
-    },
     features: {
       ...features,
       districts: true,
@@ -50,7 +47,7 @@ describe('<ProposalPageTabs />', () => {
   };
 
   it('should render Tabs with correct DOM structure', () => {
-    const wrapper = shallow(<ProposalPageTabs proposal={proposal} {...props} />);
+    const wrapper = shallow(<ProposalPageTabs step={null} proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
