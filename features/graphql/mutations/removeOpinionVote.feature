@@ -100,3 +100,38 @@ Scenario: Logged in API client wants to remove a vote
     }
   }
   """
+
+@database
+Scenario: Logged in API client wants to remove a vote without meeting requirements
+  Given I am logged in to graphql as jean
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: RemoveOpinionVoteInput!) {
+      removeOpinionVote(input: $input) {
+        contribution {
+          id
+        }
+        deletedVoteId
+      }
+    }",
+    "variables": {
+      "input": {
+        "opinionId": "opinion1"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+  "errors":[
+    {
+      "message":"You dont meets all the requirements.",
+      "category":"user","locations":[{"line":1,"column":49}],
+      "path":["removeOpinionVote"]
+    }
+  ],
+  "data":{"removeOpinionVote":null}
+  }
+  """

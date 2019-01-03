@@ -55,3 +55,10 @@ Capco\AppBundle\Entity\OpinionVote:
     publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
+  opinionVote81:
+    Opinion: '@opinion1'
+    value: <numberBetween(-1, 1)>
+    user: '@user519'
+    publishedAt: <(new \DateTime('2015-03-01'))>
+    createdAt: <(new \DateTime('2015-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
