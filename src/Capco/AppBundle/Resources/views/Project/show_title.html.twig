@@ -65,7 +65,7 @@
             <div class="media d-flex project__header__media" style="align-items: center">
                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with {'user': project.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                 <div class="media-body">
-                    <p class="media--aligned  excerpt">
+                    <span class="media--aligned  excerpt">
                         {% spaceless %}
                             {{ 'project.show.published_by' | trans({}, 'CapcoAppBundle') }}
                             {% if is_feature_enabled('profiles') %}
@@ -82,7 +82,7 @@
                             {{ 'project.show.on_date' | trans({'%date%': project.publishedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
                             {% include '@CapcoApp/Project/show_districts.html.twig' with {'project': project} %}
                         {% endspaceless %}
-                    </p>
+                    </span>
                 </div>
             </div>
         {% endif %}
