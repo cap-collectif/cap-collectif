@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
@@ -14,7 +13,6 @@ use Capco\AppBundle\Repository\OpinionVoteRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class RemoveOpinionVoteMutation implements MutationInterface
 {
@@ -24,7 +22,6 @@ class RemoveOpinionVoteMutation implements MutationInterface
     private $opinionRepo;
     private $versionRepo;
     private $redisStorageHelper;
-    private $stepRequirementsResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -32,8 +29,7 @@ class RemoveOpinionVoteMutation implements MutationInterface
         OpinionRepository $opinionRepo,
         OpinionVersionVoteRepository $versionVoteRepo,
         OpinionVersionRepository $versionRepo,
-        RedisStorageHelper $redisStorageHelper,
-        StepRequirementsResolver $stepRequirementsResolver
+        RedisStorageHelper $redisStorageHelper
     ) {
         $this->em = $em;
         $this->opinionVoteRepo = $opinionVoteRepo;
@@ -41,7 +37,6 @@ class RemoveOpinionVoteMutation implements MutationInterface
         $this->versionRepo = $versionRepo;
         $this->versionVoteRepo = $versionVoteRepo;
         $this->redisStorageHelper = $redisStorageHelper;
-        $this->stepRequirementsResolver = $stepRequirementsResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -67,11 +62,6 @@ class RemoveOpinionVoteMutation implements MutationInterface
 
         if (!$vote) {
             throw new UserError('You have not voted for this opinion.');
-        }
-
-        $step = $contribution->getStep();
-        if (!$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($viewer, $step)) {
-            throw new UserError('You dont meets all the requirements.');
         }
 
         $typeName = $contribution instanceof Opinion ? 'OpinionVote' : 'VersionVote';

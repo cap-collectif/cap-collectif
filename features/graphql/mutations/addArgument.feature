@@ -62,43 +62,6 @@ Scenario: User wants to add an argument on an opinion
   Then the queue associated to "argument_create" producer has messages below:
   | 0 | {"argumentId": "@uuid@"} |
 
-@database @rabbitmq
-Scenario: User wants to add an argument on an opinion without requirements
-  Given I am logged in to graphql as jean
-  And I send a GraphQL POST request:
-   """
-   {
-    "query": "mutation ($input: AddArgumentInput!) {
-      addArgument(input: $input) {
-        argument {
-          id
-        }
-        userErrors {
-          message
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "argumentableId": "opinion1",
-        "body": "Tololo",
-        "type": "FOR"
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "addArgument": {
-        "argument": null,
-        "userErrors": [{"message":"You dont meets all the requirements. "}]
-      }
-    }
-  }
-  """
-
 @security
 Scenario: User wants to add an argument on an uncontibuable opinion
   Given I am logged in to graphql as user

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Model;
 
 interface Argumentable
@@ -15,6 +14,4 @@ interface Argumentable
     public function getOpinionType();
 
     public function increaseArgumentsCount();
-
-    public function getStep();
 }

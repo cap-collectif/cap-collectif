@@ -1,6 +1,5 @@
 // @flow
 import { graphql } from 'react-relay';
-import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
@@ -73,14 +72,7 @@ const commit = (
     configs: [
       // If the is previous vote, we remove it
       {
-        type: 'RANGE_DELETE',
-        parentID: variables.input.opinionId,
-        connectionKeys: [
-          {
-            key: 'OpinionVotesBar_previewVotes',
-          },
-        ],
-        pathToConnection: ['opinion', 'previewVotes'],
+        type: 'NODE_DELETE',
         deletedIDFieldName: 'previousVoteId',
       },
       // Add the new vote
@@ -91,31 +83,12 @@ const commit = (
           {
             key: 'OpinionVotesBar_previewVotes',
             rangeBehavior: 'prepend',
+            filters: {},
           },
         ],
         edgeName: 'voteEdge',
       },
     ],
-    updater: (store: any) => {
-      const payload = store.getRootField('addOpinionVote');
-      if (payload.getValue('previousVoteId')) {
-        return;
-      }
-      const opinionProxy = store.get(variables.input.opinionId);
-      if (!opinionProxy) return;
-      const opinionVotesProxy = opinionProxy.getLinkedRecord('votes', { first: 0 });
-      if (!opinionVotesProxy) return;
-      const previousValue = parseInt(opinionVotesProxy.getValue('totalCount'), 10);
-      opinionVotesProxy.setValue(previousValue + 1, 'totalCount');
-
-      const connection = ConnectionHandler.getConnection(
-        opinionProxy,
-        'OpinionVotesBar_previewVotes',
-      );
-      if (connection) {
-        connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
-      }
-    },
   });
 
 export default { commit };

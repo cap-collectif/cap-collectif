@@ -67,14 +67,6 @@ class GraphQLContext implements Context
     }
 
     /**
-     * @Given I am logged in to graphql as jean
-     */
-    public function iAmLoggedInToGraphQLAsJean()
-    {
-        $this->createAuthenticatedClient('jean@cap-collectif.com', 'toto');
-    }
-
-    /**
      * @Given I am logged in to graphql as lbrunet
      */
     public function iAmLoggedInToGraphQLAsLbrunet()
