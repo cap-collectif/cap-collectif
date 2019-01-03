@@ -7,14 +7,10 @@ import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { ProjectsListQueryResponse } from './__generated__/ProjectsListQuery.graphql';
 import { type GlobalState } from '../../../types';
 import ProjectListView from './ProjectListView';
-import { selector } from './Filters/ProjectListFilters';
 
 type Props = {
-  author?: ?string,
-  orderBy: ?string,
   type?: ?string,
   theme?: ?string,
-  status?: ?string,
   // Used only on /themes page
   themeId?: ?string,
   term?: ?string,
@@ -35,11 +31,9 @@ class ProjectsList extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     this.initialRenderVars = {
-      author: props.author,
       theme: props.theme || props.themeId,
       orderBy: props.orderBy,
       type: props.type,
-      status: props.status,
       term: props.term,
       limit: props.limit,
     };
@@ -63,30 +57,26 @@ class ProjectsList extends React.Component<Props> {
   };
 
   render() {
-    const { author, orderBy, type, theme, term, limit, status } = this.initialRenderVars;
+    const { orderBy, type, theme, term, limit } = this.initialRenderVars;
     return (
       <div className="flex-wrap">
         <QueryRenderer
           environment={environment}
           query={graphql`
             query ProjectsListQuery(
-              $author: ID
               $count: Int
               $cursor: String
               $theme: ID
               $orderBy: ProjectOrder
               $type: ID
               $term: String
-              $status: ID
             ) {
               ...ProjectListView_query
                 @arguments(
                   theme: $theme
                   orderBy: $orderBy
-                  author: $author
                   type: $type
                   term: $term
-                  status: $status
                   count: $count
                 )
             }
@@ -96,12 +86,10 @@ class ProjectsList extends React.Component<Props> {
               field: orderBy,
               direction: 'ASC',
             },
-            author,
             type,
             theme,
             term,
             count: limit,
-            status,
           }}
           render={this.renderProjectList}
         />
@@ -111,10 +99,10 @@ class ProjectsList extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: GlobalState) => ({
+  theme: state.project.theme,
   orderBy: state.project.orderBy || 'LATEST',
-  author: selector(state, 'author'),
-  theme: selector(state, 'theme'),
-  type: selector(state, 'type'),
+  type: state.project.type,
+  term: state.project.term,
 });
 
 export default connect(mapStateToProps)(ProjectsList);

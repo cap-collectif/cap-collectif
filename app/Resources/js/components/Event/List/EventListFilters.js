@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
-import { Button, Row, Col, Popover } from 'react-bootstrap';
+import { Button, Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { reduxForm, Field, formValueSelector, type FormProps } from 'redux-form';
 import select from '../../Form/Select';
@@ -10,7 +10,6 @@ import config from '../../../config';
 import component from '../../Form/Field';
 import { changeEventMobileListView } from '../../../redux/modules/event';
 import EventListToggleMobileViewBtn from './EventListToggleMobileViewBtn';
-import FiltersContainer from '../../Filters/FiltersContainer';
 
 type Theme = { id: Uuid, title: string };
 
@@ -128,15 +127,27 @@ export class EventListFilters extends React.Component<Props> {
       </Popover>
     );
 
-    const filterCount = () => {
+    const filterCount = function() {
       if (nbFilter > 0) {
-        return nbFilter;
+        return <span className="ml-5"> ({nbFilter}) </span>;
       }
     };
     return (
       <Row className={config.isMobile ? 'mb-10 ml-0' : 'mb-10'}>
         <Col xs={12} md={8} className="pl-0">
-          <FiltersContainer type="event" overlay={popoverBottom} filterCount={filterCount()} />
+          <OverlayTrigger
+            trigger="click"
+            placement="bottom"
+            overlay={popoverBottom}
+            className="w-25"
+            id="event-list-filters-d">
+            <Button className="btn--outline btn-dark-gray" id="event-button-filter">
+              <i className="cap cap-filter-1 small mr-5 r-0" />
+              <FormattedMessage id="link_filters" />
+              {filterCount()}
+              <i className="cap cap-triangle-down ml-5 r-0" />
+            </Button>
+          </OverlayTrigger>
           {config.isMobile && addToggleViewButton && features.display_map ? (
             <EventListToggleMobileViewBtn
               showMapButton

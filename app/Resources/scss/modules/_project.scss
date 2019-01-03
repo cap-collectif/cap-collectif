@@ -30,18 +30,3 @@
 .project__district-modal-link {
     color: $brand-color-2;
 }
-
-#project__project-list-filters-d {
-    div.popover-content {
-        width: 260px;
-    }
-}
-
-.project-filters {
-    position: sticky;
-    top: 50px;
-    z-index: 1010;
-    background-color: white;
-    min-height: 60px;
-    padding: 10px 0;
-}

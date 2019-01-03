@@ -2,7 +2,7 @@
 import React from 'react';
 import { Row } from 'react-bootstrap';
 import ProjectList from '../List/ProjectsList';
-import ProjectListFiltersContainer from '../List/Filters/ProjectListFiltersContainer';
+import ProjectListFilter from '../List/ProjectListFilter';
 
 type Props = {
   limit?: ?number,
@@ -14,7 +14,7 @@ export default class ProjectListPage extends React.Component<Props> {
     return (
       <div>
         {/* $FlowFixMe please use mapDispatchToProps */}
-        <ProjectListFiltersContainer />
+        <ProjectListFilter />
         <Row>
           {/* $FlowFixMe defaultProps not working */}
           <ProjectList limit={limit} />
