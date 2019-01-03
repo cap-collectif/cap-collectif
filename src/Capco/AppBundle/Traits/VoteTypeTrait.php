@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,11 +10,6 @@ trait VoteTypeTrait
     public static $VOTE_TYPE_DISABLED = 0;
     public static $VOTE_TYPE_SIMPLE = 1;
     public static $VOTE_TYPE_BUDGET = 2;
-
-    /**
-     * @ORM\Column(name="requirements_reason", type="string", nullable=true)
-     */
-    private $requirementsReason;
 
     /**
      * @ORM\Column(name="votes_help_text", type="string", nullable=true)
@@ -34,30 +30,18 @@ trait VoteTypeTrait
     /**
      * @ORM\Column(name="budget", type="float", nullable=true)
      */
-    private $budget = null;
+    private $budget;
 
     /**
      * @ORM\Column(name="votes_limit", type="integer", nullable=true)
      * @Assert\Length(min=1)
      */
-    private $votesLimit = null;
+    private $votesLimit;
 
     /**
      * @ORM\Column(name="votes_ranking", type="boolean", nullable=false, options={"default": false})
      */
     private $votesRanking = false;
-
-    public function getRequirementsReason(): ?string
-    {
-        return $this->requirementsReason;
-    }
-
-    public function setRequirementsReason(string $requirementsReason = null): self
-    {
-        $this->requirementsReason = $requirementsReason;
-
-        return $this;
-    }
 
     public static function getVoteTypeLabels()
     {

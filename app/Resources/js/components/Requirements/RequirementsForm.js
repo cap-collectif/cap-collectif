@@ -255,7 +255,7 @@ const container = connect(mapStateToProps)(form);
 
 export default createFragmentContainer(container, {
   step: graphql`
-    fragment RequirementsForm_step on ProposalStep {
+    fragment RequirementsForm_step on RequirementStep {
       requirements {
         edges {
           node {

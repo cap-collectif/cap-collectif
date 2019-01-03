@@ -22,7 +22,6 @@ type Props = {
   viewer: ?ProposalPageTabs_viewer,
   step: ?ProposalPageTabs_step,
   proposal: ProposalPageTabs_proposal,
-  form: Object,
   features: FeatureToggles,
 };
 
@@ -55,7 +54,7 @@ export class ProposalPageTabs extends React.Component<Props> {
   }
 
   render() {
-    const { viewer, proposal, step, form, features } = this.props;
+    const { viewer, proposal, step, features } = this.props;
     const currentVotableStep = proposal.currentVotableStep;
     const votesCount = proposal.allVotes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
@@ -113,11 +112,11 @@ export class ProposalPageTabs extends React.Component<Props> {
                     <ProposalPageMetadata
                       proposal={proposal}
                       showDistricts={features.districts}
-                      showCategories={form.usingCategories}
+                      showCategories={step && step.form.usingCategories}
                       showNullEstimation={
                         !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
                       }
-                      showThemes={features.themes && form.usingThemes}
+                      showThemes={features.themes && (step && step.form.usingThemes)}
                     />
                     <br />
                     {currentVotableStep !== null &&
@@ -185,6 +184,10 @@ export default createFragmentContainer(ProposalPageTabs, {
   step: graphql`
     fragment ProposalPageTabs_step on ProposalStep {
       ...ProposalPageContent_step
+      form {
+        usingCategories
+        usingThemes
+      }
     }
   `,
   viewer: graphql`

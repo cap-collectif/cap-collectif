@@ -27,6 +27,27 @@ Scenario: logged in API client wants to add an opinion
   Then the queue associated to "opinion_create" producer has messages below:
   | 0 | {"opinionId": "@uuid@"} |
 
+@database @rabbitmq
+Scenario: logged in API client wants to add an opinion with requirements
+  Given I am logged in to api as user
+  When I send a POST request to "/api/projects/project1/steps/Q29uc3VsdGF0aW9uOmNzdGVwMQ==/opinion_types/opinionType9/opinions" with a valid opinion json
+  Then the JSON response status code should be 201
+  Then the queue associated to "opinion_create" producer has messages below:
+  | 0 | {"opinionId": "@uuid@"} |
+
+@database @rabbitmq
+Scenario: logged in API client wants to add an opinion without metting requirements
+  Given I am logged in to api as user_without_phone
+  When I send a POST request to "/api/projects/project1/steps/Q29uc3VsdGF0aW9uOmNzdGVwMQ==/opinion_types/opinionType9/opinions" with a valid opinion json
+  Then the JSON response status code should be 400
+  And the JSON response should match:
+  """
+    {
+      "code": 400,
+      "message": "You dont meets all the requirements."
+    }
+  """
+
 @security @database
 Scenario: logged in API client can not add more than 2 opinions in a minute
   Given I am logged in to api as user

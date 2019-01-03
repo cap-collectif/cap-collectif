@@ -106,6 +106,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     public function __construct()
     {
         parent::__construct();
+        $this->requirements = new ArrayCollection();
         $this->opinions = new ArrayCollection();
     }
 

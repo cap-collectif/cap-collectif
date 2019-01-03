@@ -83,6 +83,100 @@ exports[`<OpinionCreateModal /> renders correctly 1`] = `
       onClose={[Function]}
     />
     <Connect(SubmitButton)
+      disabled={false}
+      id="confirm-opinion-create"
+      isSubmitting={true}
+      label="global.create"
+      onSubmit={[Function]}
+    />
+  </ModalFooter>
+</Modal>
+`;
+
+exports[`<OpinionCreateModal /> renders correctly when requirements not meet 1`] = `
+<Modal
+  animation={false}
+  aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  bsSize="large"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="contained-modal-title-lg"
+    >
+      <FormattedMessage
+        id="opinion.add_new"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <div
+      className="modal-top bg-info"
+    >
+      <p>
+        <FormattedMessage
+          id="opinion.add_new_infos"
+          values={Object {}}
+        />
+      </p>
+    </div>
+    <ForwardRef(Relay(ReduxForm))
+      consultation={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
+      section={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "opinionTypeId",
+        }
+      }
+    />
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      label="global.cancel"
+      onClose={[Function]}
+    />
+    <Connect(SubmitButton)
+      disabled={true}
       id="confirm-opinion-create"
       isSubmitting={true}
       label="global.create"
