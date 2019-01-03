@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import type { ProposalPageTabs_proposal } from './__generated__/ProposalPageTabs_proposal.graphql';
 import type { ProposalPageTabs_viewer } from './__generated__/ProposalPageTabs_viewer.graphql';
 import type { ProposalPageTabs_step } from './__generated__/ProposalPageTabs_step.graphql';
-import type { ProposalPageTabs_proposalForm } from './__generated__/ProposalPageTabs_proposalForm.graphql';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageLastNews from './ProposalPageLastNews';
 import ProposalVotesByStep from './ProposalVotesByStep';
@@ -23,7 +22,6 @@ type Props = {
   viewer: ?ProposalPageTabs_viewer,
   step: ?ProposalPageTabs_step,
   proposal: ProposalPageTabs_proposal,
-  form: ProposalPageTabs_proposalForm,
   features: FeatureToggles,
 };
 
@@ -56,7 +54,7 @@ export class ProposalPageTabs extends React.Component<Props> {
   }
 
   render() {
-    const { viewer, proposal, step, form, features } = this.props;
+    const { viewer, proposal, step, features } = this.props;
     const currentVotableStep = proposal.currentVotableStep;
     const votesCount = proposal.allVotes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
@@ -114,11 +112,11 @@ export class ProposalPageTabs extends React.Component<Props> {
                     <ProposalPageMetadata
                       proposal={proposal}
                       showDistricts={features.districts}
-                      showCategories={form.usingCategories}
+                      showCategories={step && step.form && step.form.usingCategories}
                       showNullEstimation={
                         !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
                       }
-                      showThemes={features.themes && form.usingThemes}
+                      showThemes={features.themes && (step && step.form && step.form.usingThemes)}
                     />
                     <br />
                     {currentVotableStep !== null &&
@@ -186,6 +184,10 @@ export default createFragmentContainer(ProposalPageTabs, {
   step: graphql`
     fragment ProposalPageTabs_step on ProposalStep {
       ...ProposalPageContent_step
+      form {
+        usingCategories
+        usingThemes
+      }
     }
   `,
   viewer: graphql`
@@ -225,12 +227,6 @@ export default createFragmentContainer(ProposalPageTabs, {
       allFollowers: followers(first: 0) {
         totalCount
       }
-    }
-  `,
-  proposalForm: graphql`
-    fragment ProposalPageTabs_proposalForm on ProposalForm {
-      usingCategories
-      usingThemes
     }
   `,
 });

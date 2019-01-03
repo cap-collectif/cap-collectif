@@ -180,7 +180,16 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     "votableSteps": Array [],
                   }
                 }
-                step={null}
+                step={
+                  Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "form": Object {
+                      "usingCategories": true,
+                      "usingThemes": true,
+                    },
+                  }
+                }
                 viewer={null}
               />
             </Col>

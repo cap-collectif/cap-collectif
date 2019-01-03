@@ -30,6 +30,7 @@
 
 {% block body %}
     {{ react_render_component('ProposalPageApp', {'props': props}) }}
+    {{ dump(props) }}
 {% endblock %}
 
 {% block javascripts %}

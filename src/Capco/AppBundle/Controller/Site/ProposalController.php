@@ -75,7 +75,6 @@ class ProposalController extends Controller
             [
                 'proposalId' => $proposal->getId(),
                 'currentVotableStepId' => $votableStep ? $votableStep->getId() : null,
-                'form' => $proposalForm,
             ],
             'json',
             [

@@ -13,7 +13,6 @@ import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants
 import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
 
 type Props = {
-  // form: Object,
   proposalId: Uuid,
   currentVotableStepId: ?Uuid,
   features: FeatureToggles,
@@ -49,9 +48,6 @@ export class ProposalPage extends React.Component<Props> {
                 ...ProposalPageAlert_proposal
                 ...ProposalPageTabs_proposal
                 ...ProposalPageHeader_proposal @arguments(isAuthenticated: $isAuthenticated)
-              }
-              proposalForm: node(id: $proposalId) {
-                ...ProposalPageTabs_proposalForm
               }
             }
           `}
@@ -90,7 +86,6 @@ export class ProposalPage extends React.Component<Props> {
                         step={props.step || null}
                         viewer={props.viewer || null}
                         features={features}
-                        form={props.proposalForm}
                       />
                     </section>
                   </div>
