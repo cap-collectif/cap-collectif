@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Toggle\Manager;
 use FOS\UserBundle\Doctrine\UserListener;
 use Gedmo\Timestampable\TimestampableListener;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -80,9 +79,6 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
         ]);
         $input->setInteractive(false);
         $command->run($input, $output);
-
-        $toggleManager = $this->getContainer()->get(Manager::class);
-        $toggleManager->deactivate('shield_mode');
     }
 
     protected function populateElasticsearch(OutputInterface $output)

@@ -426,7 +426,11 @@ class ReactBootstrapInput extends React.Component<Props> {
           helpPrint={helpPrint}
         />
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
-        {props.description && <ButtonBody body={props.description || ''} />}
+        {props.description && props.description !== '<div><br /></div>' && (
+          <div className="pb-15">
+            <ButtonBody body={props.description || ''} />
+          </div>
+        )}
         {this.renderInputGroup(props)}
         {props.errors && (
           <span className="error-block hidden-print" id={`${props.id ? props.id : ''}-error`}>

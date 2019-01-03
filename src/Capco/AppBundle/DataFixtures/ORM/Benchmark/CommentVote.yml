@@ -2,4 +2,3 @@ Capco\AppBundle\Entity\CommentVote:
   proposal1CommentVote{1..1000}:
     comment: '@proposal1Comment<current()>'
     user: '@voter1'
-    publishedAt: <(new \DateTime())>

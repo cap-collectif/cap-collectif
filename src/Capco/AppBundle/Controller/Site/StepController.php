@@ -2,27 +2,28 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Resolver\EventResolver;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
+use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
-use Capco\AppBundle\Helper\ProjectHelper;
-use Capco\AppBundle\Resolver\EventResolver;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
 
 class StepController extends Controller
 {
@@ -127,7 +128,8 @@ class StepController extends Controller
             ? $project->getAuthor()->getId()
             : null;
 
-        $nbOpinionsToDisplay = $step->getNbOpinionsToDisplay() ?? 10;
+        $nbOpinionsToDisplay =
+            null !== $step->getNbOpinionsToDisplay() ? $step->getNbOpinionsToDisplay() : 10;
         $opinions = $this->get('capco.opinion.repository')->getEnabledByProject(
             $project,
             $excludedAuthor,
@@ -135,7 +137,8 @@ class StepController extends Controller
             $nbOpinionsToDisplay
         );
 
-        $nbVersionsToDisplay = $step->getNbVersionsToDisplay() ?? 10;
+        $nbVersionsToDisplay =
+            null !== $step->getNbVersionsToDisplay() ? $step->getNbVersionsToDisplay() : 10;
         $versions = $this->get('capco.opinion_version.repository')->getEnabledByProject(
             $project,
             $excludedAuthor,
@@ -358,8 +361,7 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/consultation/{stepSlug}", name="app_project_show_consultation")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={
      *    "mapping": {"projectSlug": "slug"},
-     *    "repository_method"="getOneWithoutVisibility",
-     *    "map_method_signature"=true
+     *    "repository_method"="getOneWithoutVisibility"
      * })
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={
      *    "mapping": {"stepSlug": "slug"},

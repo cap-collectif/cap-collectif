@@ -6,6 +6,7 @@ use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType as CommentForm;
+use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver;
 use Capco\AppBundle\Manager\CommentResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
@@ -108,6 +109,7 @@ class CommentController extends Controller
 
     /**
      * @Route("/comments/{commentId}/delete", name="app_comment_delete")
+     * @ParamConverter("comment", options={"mapping": {"commentId" : "id"}})
      * @Template("CapcoAppBundle:Comment:delete.html.twig")
      * @Security("has_role('ROLE_USER')")
      *
@@ -152,6 +154,10 @@ class CommentController extends Controller
                 $em->flush();
 
                 $flashBag->add('info', $this->get('translator')->trans('comment.delete.success'));
+
+                $this->get(CommentableCommentsDataLoader::class)->invalidate(
+                    $comment->getRelatedObject()->getId()
+                );
 
                 return $this->redirect(
                     $this->get(CommentResolver::class)->getUrlOfRelatedObject($comment)

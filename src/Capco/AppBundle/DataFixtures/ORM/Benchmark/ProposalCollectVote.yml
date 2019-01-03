@@ -3,49 +3,23 @@ Capco\AppBundle\Entity\ProposalCollectVote:
     proposal: '@proposal1'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
   proposal2votes{1..400}:
     proposal: '@proposal2'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
   proposal3votes{1..100}:
     proposal: '@proposal3'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
   proposal4votes{1..200}:
     proposal: '@proposal4'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
   proposal5votes{1..200}:
     proposal: '@proposal5'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposalVotesRandom1{1..500}:
-    proposal: '@proposal<numberBetween(6, 100)>'
+  proposalVotesRandom{1..200}:
+    proposal (unique): '@proposal<numberBetween(6, 500)>'
     collectStep: '@collectstep1'
     user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposalVotesRandom2{1..500}:
-    proposal: '@proposal<numberBetween(101, 200)>'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposalVotesRandom3{1..500}:
-    proposal: '@proposal<numberBetween(201, 300)>'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposalVotesRandom4{1..500}:
-    proposal: '@proposal<numberBetween(301, 400)>'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>
-  proposalVotesRandom5{1..500}:
-    proposal: '@proposal<numberBetween(401, 500)>'
-    collectStep: '@collectstep1'
-    user: '@voter<current()>'
-    publishedAt: <(new \DateTime())>

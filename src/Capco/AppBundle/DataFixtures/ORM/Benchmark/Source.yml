@@ -8,4 +8,3 @@ Capco\AppBundle\Entity\Source:
     Opinion: '@opinion217'
     Category: '@Category<numberBetween(1,5)>'
     link: http://www.cap-collectif.com/
-    publishedAt: <dateTime()>
