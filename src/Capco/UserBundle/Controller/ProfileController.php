@@ -190,11 +190,7 @@ class ProfileController extends Controller
         $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
 
         $projectsProps = $serializer->serialize(['projects' => $projectsRaw], 'json', [
-            'Projects',
-            'UserDetails',
-            'Steps',
-            'ThemeDetails',
-            'ProjectType',
+            'groups' => ['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType'],
         ]);
         $projectsCount = \count($projectsRaw);
 
@@ -242,9 +238,7 @@ class ProfileController extends Controller
         $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $this->getUser());
 
         $projectsProps = $serializer->serialize(['projects' => $projectsRaw], 'json', [
-            'Projects',
-            'Steps',
-            'ThemeDetails',
+            'groups' => ['Projects', 'Steps', 'ThemeDetails'],
         ]);
         $projectsCount = \count($projectsRaw);
 
@@ -407,12 +401,14 @@ class ProfileController extends Controller
         foreach ($proposalsWithStep as $key => $value) {
             $proposalsPropsBySteps[$key] = json_decode(
                 $this->get('serializer')->serialize($value, 'json', [
-                    'Steps',
-                    'Proposals',
-                    'PrivateProposals',
-                    'ProposalResponses',
-                    'UsersInfos',
-                    'UserMedias',
+                    'groups' => [
+                        'Steps',
+                        'Proposals',
+                        'PrivateProposals',
+                        'ProposalResponses',
+                        'UsersInfos',
+                        'UserMedias',
+                    ],
                 ]),
                 true
             );
