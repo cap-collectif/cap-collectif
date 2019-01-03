@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\Resolver;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -53,9 +54,10 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
+        ProposalSelectionVoteRepository $proposalVoteRepo,
+        CollectStepProposalCountResolver $collectStepProposalCountResolver
     ) {
-        $cs->getProposalsCount()->willReturn(100);
+        $collectStepProposalCountResolver->__invoke($cs)->willReturn(100);
         $themeRepo->getThemesWithProposalsCountForStep($cs, null)->willReturn([
             [
                 'name' => 'Thème 1',
@@ -123,9 +125,10 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
+        ProposalSelectionVoteRepository $proposalVoteRepo,
+        CollectStepProposalCountResolver $collectStepProposalCountResolver
     ) {
-        $cs->getProposalsCount()->willReturn(100);
+        $collectStepProposalCountResolver->__invoke($cs)->willReturn(100);
         $districtRepo->getDistrictsWithProposalsCountForStep($cs, null)->willReturn([
             [
                 'name' => 'Quartier 1',
@@ -193,9 +196,10 @@ class ProjectStatsResolverSpec extends ObjectBehavior
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalVoteRepo
+        ProposalSelectionVoteRepository $proposalVoteRepo,
+        CollectStepProposalCountResolver $collectStepProposalCountResolver
     ) {
-        $cs->getProposalsCount()->willReturn(100);
+        $collectStepProposalCountResolver->__invoke($cs)->willReturn(100);
         $userTypeRepo->getUserTypesWithProposalsCountForStep($cs, null)->willReturn([
             [
                 'name' => 'User type 1',

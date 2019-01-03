@@ -3,6 +3,9 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
@@ -13,10 +16,20 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
     use SerializerAwareTrait;
 
     private $normalizer;
+    private $collectStepProposalCountResolver;
+    private $adapter;
+    private $logger;
 
-    public function __construct(ObjectNormalizer $normalizer)
-    {
+    public function __construct(
+        ObjectNormalizer $normalizer,
+        CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        PromiseAdapterInterface $adapter,
+        LoggerInterface $logger
+    ) {
         $this->normalizer = $normalizer;
+        $this->collectStepProposalCountResolver = $collectStepProposalCountResolver;
+        $this->adapter = $adapter;
+        $this->logger = $logger;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -28,9 +41,17 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
         if (\in_array('Elasticsearch', $groups)) {
             return $data;
         }
+        $count = 0;
+        $promise = $this->collectStepProposalCountResolver
+            ->__invoke($object)
+            ->then(function ($value) use (&$count) {
+                $count += $value;
+            });
+
+        $this->adapter->await($promise);
 
         $counters = [
-            'proposals' => $object->getProposalsCount(),
+            'proposals' => $count,
             'contributors' => $object->getContributorsCount(),
         ];
 

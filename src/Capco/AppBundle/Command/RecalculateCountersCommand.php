@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Doctrine\ORM\EntityManager;
@@ -320,15 +321,15 @@ class RecalculateCountersCommand extends ContainerAwareCommand
 
         // ****************************** Collect step counters **************************************
 
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Steps\CollectStep cs set cs.proposalsCount = (
-          select count(DISTINCT p.id)
-          from CapcoAppBundle:Proposal p
-          INNER JOIN CapcoAppBundle:ProposalForm pf WITH p.proposalForm = pf
-          where pf.step = cs AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.published = 1
-          group by pf.step
-        )'
-        );
+        //        $this->executeQuery(
+        //            'UPDATE CapcoAppBundle:Steps\CollectStep cs set cs.proposalsCount = (
+        //          select count(DISTINCT p.id)
+        //          from CapcoAppBundle:Proposal p
+        //          INNER JOIN CapcoAppBundle:ProposalForm pf WITH p.proposalForm = pf
+        //          where pf.step = cs AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.published = 1
+        //          group by pf.step
+        //        )'
+        //        );
 
         $this->executeQuery(
             'UPDATE CapcoAppBundle:Steps\CollectStep ss set ss.votesCount = (

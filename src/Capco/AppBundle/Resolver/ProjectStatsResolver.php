@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
@@ -25,6 +26,7 @@ class ProjectStatsResolver
     protected $userTypeRepo;
     protected $proposalRepo;
     protected $proposalSelectionVoteRepo;
+    protected $collectStepProposalCountResolver;
 
     public function __construct(
         SelectionStepRepository $selectionStepRepo,
@@ -34,7 +36,8 @@ class ProjectStatsResolver
         ProposalCategoryRepository $categoryRepo,
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepo
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepo,
+        CollectStepProposalCountResolver $collectStepProposalCountResolver
     ) {
         $this->selectionStepRepo = $selectionStepRepo;
         $this->collectStepRepo = $collectStepRepo;
@@ -44,6 +47,7 @@ class ProjectStatsResolver
         $this->userTypeRepo = $userTypeRepo;
         $this->proposalRepo = $proposalRepo;
         $this->proposalSelectionVoteRepo = $proposalSelectionVoteRepo;
+        $this->collectStepProposalCountResolver = $collectStepProposalCountResolver;
     }
 
     public function getStepsWithStatsForProject(Project $project)
@@ -129,7 +133,7 @@ class ProjectStatsResolver
             case 'costs':
                 if ('collect' === $step->getType()) {
                     $data['values'] = $this->getProposalsWithCostsForStep($step, $limit);
-                    $data['total'] = $step->getProposalsCount();
+                    $data['total'] = $this->collectStepProposalCountResolver->__invoke($step);
                 }
 
                 break;
@@ -165,14 +169,20 @@ class ProjectStatsResolver
     {
         $data = $this->categoryRepo->getCategoriesWithProposalsCountForStep($step, $limit);
 
-        return $this->addPercentages($data, $step->getProposalsCount());
+        return $this->addPercentages(
+            $data,
+            $this->collectStepProposalCountResolver->__invoke($step)
+        );
     }
 
     public function getThemesWithProposalsCountForStep(CollectStep $step, $limit = null)
     {
         $data = $this->themeRepo->getThemesWithProposalsCountForStep($step, $limit);
 
-        return $this->addPercentages($data, $step->getProposalsCount());
+        return $this->addPercentages(
+            $data,
+            $this->collectStepProposalCountResolver->__invoke($step)
+        );
     }
 
     public function countThemes()
@@ -184,7 +194,10 @@ class ProjectStatsResolver
     {
         $data = $this->districtRepo->getDistrictsWithProposalsCountForStep($step, $limit);
 
-        return $this->addPercentages($data, $step->getProposalsCount());
+        return $this->addPercentages(
+            $data,
+            $this->collectStepProposalCountResolver->__invoke($step)
+        );
     }
 
     public function countDistricts()
@@ -196,7 +209,10 @@ class ProjectStatsResolver
     {
         $data = $this->userTypeRepo->getUserTypesWithProposalsCountForStep($step, $limit);
 
-        return $this->addPercentages($data, $step->getProposalsCount());
+        return $this->addPercentages(
+            $data,
+            $this->collectStepProposalCountResolver->__invoke($step)
+        );
     }
 
     public function countUserTypes()

@@ -1,5 +1,5 @@
-{% macro contributions_popover(project) %}{% spaceless %}
-    {% set opinions = project.totalOpinionsCount + project.totalProposalsCount %}
+{% macro contributions_popover(project, totalProposalsCount) %}{% spaceless %}
+    {% set opinions = project.totalOpinionsCount + totalProposalsCount %}
     {% if opinions > 0 %}
         {% set opinionLabel = project.opinionTerm == 0 ? 'project.show.meta.opinionsCount' : 'project.show.meta.articlesCount' %}
         {{ opinionLabel | transchoice(opinions, {}, 'CapcoAppBundle') }}
@@ -101,7 +101,7 @@
 
         {% if project.hasParticipativeStep %}
             <ul class="nav nav-pills counters-nav counters-nav--project hidden-print">
-                <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
+                <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project, totalProposalsCount) }}">
                     <i class="cap cap-file-edit-1"></i>
                     <span class="value">{{ contributionsCount }}</span>
                     <span class="excerpt category">

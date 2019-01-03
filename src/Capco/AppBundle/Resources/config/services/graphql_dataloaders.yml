@@ -24,3 +24,9 @@ services:
     arguments:
       $cachePrefix: ProposalFormProposalsDataLoader
       $cacheTtl: 60
+
+  Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepCountProposalDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: collectStepProposalCount
+      $cacheTtl: 60

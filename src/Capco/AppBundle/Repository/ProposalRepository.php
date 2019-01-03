@@ -564,16 +564,15 @@ class ProposalRepository extends EntityRepository
 
     public function countPublishedProposalByStep(CollectStep $cs): int
     {
-        $query = $this->createQueryBuilder('p');
-        $query
-            ->select('count(DISTINCT p.id)')
-            ->leftJoin('p.proposalForm', 'pf')
-            ->andWhere('pf.step = :cs')
-            ->andWhere('p.draft = 0')
-            ->andWhere('p.trashedAt IS NULL')
-            ->andWhere('p.deletedAt IS NULL')
-            ->andWhere('p.published = 1')
-            ->setParameter('cs', $cs);
+        $query = $this->getProposalQueryPublishedByStep($cs);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countPublishedProposalByStepGroupedByStep(CollectStep $collectStep): int
+    {
+        $query = $this->getProposalQueryPublishedByStep($collectStep);
+        $query->groupBy('pf.step');
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -585,6 +584,21 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.trashedAt IS NULL')
             ->andWhere($alias . '.deletedAt IS NULL')
             ->andWhere($alias . '.published = true');
+    }
+
+    private function getProposalQueryPublishedByStep(CollectStep $cs): QueryBuilder
+    {
+        $query = $this->createQueryBuilder('p');
+
+        return $query
+            ->select('count(DISTINCT p.id)')
+            ->leftJoin('p.proposalForm', 'pf')
+            ->andWhere('pf.step = :cs')
+            ->andWhere('p.draft = 0')
+            ->andWhere('p.trashedAt IS NULL')
+            ->andWhere('p.deletedAt IS NULL')
+            ->andWhere('p.published = 1')
+            ->setParameter('cs', $cs);
     }
 
     private function qbProposalsByFormAndEvaluer(ProposalForm $form, User $user): QueryBuilder

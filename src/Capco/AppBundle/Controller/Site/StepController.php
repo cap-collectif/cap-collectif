@@ -2,7 +2,15 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
+use GraphQL\Executor\Promise\Adapter\SyncPromise;
+use GraphQL\Executor\Promise\Promise;
+use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -268,8 +276,33 @@ class StepController extends Controller
             $this->createNotFoundException();
         }
 
+        $count = 0;
+        $collectStepResolver = $this->get(CollectStepProposalCountResolver::class);
+        $promiseAdapter = $this->get('capco.webonyx_graphql_sync_promise_adapter');
+
+        foreach ($project->getSteps() as $pStep) {
+            // @var $step ProjectAbstractStep
+            if ($pStep->getStep()->isCollectStep()) {
+                /** @var SyncPromise $promise */
+                $promise = $collectStepResolver
+                    ->__invoke($pStep->getStep())
+                    ->then(function ($value) use (&$count) {
+                        $count += $value;
+                    });
+
+                try {
+                    $value = $promiseAdapter->await($promise);
+                } catch (\RuntimeException $exception) {
+                    $this->get('monolog.logger_prototype')->error(
+                        json_encode($exception->getMessage())
+                    );
+                }
+            }
+        }
+
         return [
             'project' => $project,
+            'totalProposalsCount' => $count,
             'currentStep' => $step,
         ];
     }
@@ -318,7 +351,12 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        return ['project' => $project, 'currentStep' => $step];
+        return [
+            'project' => $project,
+            'currentStep' => $step,
+            'totalProposalsCount' => 0,
+            'proposalForm' => null,
+        ];
     }
 
     /**
