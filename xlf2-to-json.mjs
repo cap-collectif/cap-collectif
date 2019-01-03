@@ -20,7 +20,10 @@ for (const locale of config.locales) {
         }, {});
     }
 
-    const bundlePath = `web/js/${locale}.js`;
-    fs.mkdirSync('web/js');
+    const dir = 'web/js';
+    const bundlePath = `${dir}/${locale}.js`;
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
     fs.writeFileSync(bundlePath, `window.intl_messages=${JSON.stringify(translations, null, 2)};`);
 }
