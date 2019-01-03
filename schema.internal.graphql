@@ -790,7 +790,7 @@ type CheckboxRequirement implements Node & Requirement {
 }
 
 # A proposal step
-type CollectStep implements Node & Step & ProposalStep & RequirementStep {
+type CollectStep implements Node & Step & ProposalStep {
   # The ID of an object
   id: ID!
 
@@ -879,6 +879,21 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
   ): ProposalConnection
+
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -907,21 +922,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     orderBy: ProposalVotesOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm!
-
-  # The requirements to vote on this step.
-  requirements(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): RequirementConnection!
   private: Boolean!
 
   # A list of contributor associated with the step.
@@ -1183,7 +1183,7 @@ interface Commentable {
 }
 
 # A consultation
-type Consultation implements Node & Step & RequirementStep {
+type Consultation implements Node & Step {
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID
 
@@ -1216,21 +1216,6 @@ type Consultation implements Node & Step & RequirementStep {
 
   # The number of votes in this consultation.
   votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
-
-  # The requirements to vote on this step.
-  requirements(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): RequirementConnection!
 
   # The kind of the step
   kind: String!
@@ -3645,6 +3630,21 @@ interface ProposalStep {
     # Returns the last `n` elements from the list.
     last: Int
   ): ProposalConnection
+
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -4520,23 +4520,6 @@ type RequirementEdge {
   cursor: String!
 }
 
-interface RequirementStep {
-  # The requirements to vote on this step.
-  requirements(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): RequirementConnection!
-}
-
 # A contribution with an author
 interface Response {
   question: Question!
@@ -4719,7 +4702,7 @@ type Selection {
 }
 
 # A budget contribution
-type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
+type SelectionStep implements Node & Step & ProposalStep {
   # The ID of an object
   id: ID!
 
@@ -4808,6 +4791,21 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
   ): ProposalConnection
+
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -4836,21 +4834,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     orderBy: ProposalVotesOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm!
-
-  # The requirements to vote on this step.
-  requirements(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): RequirementConnection!
   position: Int!
 
   # Only one selection step inside a project can have realisation steps, true if this one

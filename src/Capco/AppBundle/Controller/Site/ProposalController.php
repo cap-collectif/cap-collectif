@@ -66,6 +66,7 @@ class ProposalController extends Controller
                 ? $request->headers->get('referer')
                 : $urlResolver->getStepUrl($collectStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
+        $proposalForm = $collectStep->getProposalForm();
         $votableStep = $this->get(
             'capco\appbundle\graphql\resolver\proposal\proposalcurrentvotablestepresolver'
         )->__invoke($proposal);
@@ -74,6 +75,7 @@ class ProposalController extends Controller
             [
                 'proposalId' => $proposal->getId(),
                 'currentVotableStepId' => $votableStep ? $votableStep->getId() : null,
+                'form' => $proposalForm,
             ],
             'json',
             [

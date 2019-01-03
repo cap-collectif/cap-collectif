@@ -38,6 +38,3 @@ services:
 
   Capco\AppBundle\Normalizer\OpinionNormalizer:
     tags: ['serializer.normalizer']
-
-  Capco\AppBundle\Normalizer\PostNormalizer:
-    tags: ['serializer.normalizer']

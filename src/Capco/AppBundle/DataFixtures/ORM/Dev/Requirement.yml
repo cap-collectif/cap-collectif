@@ -70,8 +70,3 @@ Capco\AppBundle\Entity\Requirement:
     type: PHONE
     position: 3
     step: '@selectionstepVoteClassement'
-  requirement16:
-    id: requirement16
-    type: PHONE
-    position: 1
-    step: '@cstep1'

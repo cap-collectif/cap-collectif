@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Alert, Panel, Label } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { reduxForm, Field, clearSubmitErrors, SubmissionError, type FormProps } from 'redux-form';
 import Fetcher, { json } from '../../../services/Fetcher';
 import renderInput from '../../Form/Field';
@@ -10,7 +10,6 @@ import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { Dispatch } from '../../../types';
 import type { OpinionCreateForm_section } from './__generated__/OpinionCreateForm_section.graphql';
 import type { OpinionCreateForm_consultation } from './__generated__/OpinionCreateForm_consultation.graphql';
-import RequirementsForm from '../../Requirements/RequirementsForm';
 
 type RelayProps = {|
   section: OpinionCreateForm_section,
@@ -67,29 +66,6 @@ const validate = ({ title, body }: FormValues) => {
 };
 
 export class OpinionCreateForm extends React.Component<Props> {
-  renderRequirements() {
-    const { consultation } = this.props;
-
-    return (
-      <Panel id="required-conditions" bsStyle="primary">
-        <Panel.Heading>
-          <FormattedMessage id="requirements" />{' '}
-          {consultation.requirements.viewerMeetsTheRequirements && (
-            <Label bsStyle="primary">
-              <FormattedMessage id="filled" />
-            </Label>
-          )}
-        </Panel.Heading>
-        {!consultation.requirements.viewerMeetsTheRequirements && (
-          <Panel.Body>
-            <p>{consultation.requirements.reason}</p>
-            <RequirementsForm step={consultation} />
-          </Panel.Body>
-        )}
-      </Panel>
-    );
-  }
-
   render() {
     const { section, consultation, handleSubmit, error, dispatch } = this.props;
     if (!section) return null;
@@ -115,7 +91,6 @@ export class OpinionCreateForm extends React.Component<Props> {
             )}
           </Alert>
         )}
-        {consultation.requirements.totalCount > 0 && this.renderRequirements()}
         <Field
           name="title"
           type="text"
@@ -169,17 +144,11 @@ export default createFragmentContainer(container, {
   `,
   consultation: graphql`
     fragment OpinionCreateForm_consultation on Consultation {
-      ...RequirementsForm_step
       id
       titleHelpText
       descriptionHelpText
       project {
         id
-      }
-      requirements {
-        viewerMeetsTheRequirements
-        reason
-        totalCount
       }
     }
   `,
