@@ -61,7 +61,6 @@ export class OpinionVotesButton extends React.Component<Props, State> {
     if (opinion.__typename === 'Version' || opinion.__typename === 'Opinion') {
       const input = { opinionId: opinion.id, value };
       this.setState({ isLoading: true });
-      console.log(this.state);
       AddOpinionVoteMutation.commit({ input })
         .then(res => {
           if (!res.addOpinionVote) {
@@ -94,7 +93,6 @@ export class OpinionVotesButton extends React.Component<Props, State> {
     if (opinion.__typename === 'Version' || opinion.__typename === 'Opinion') {
       const input = { opinionId: opinion.id };
       this.setState({ isLoading: true });
-      console.log(this.state);
       RemoveOpinionVoteMutation.commit({ input })
         .then(res => {
           if (!res.removeOpinionVote) {
