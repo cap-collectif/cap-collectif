@@ -186,11 +186,7 @@ export class ReplyForm extends React.Component<Props> {
         <div className="card__body">
           <div id="create-reply-form">
             <form id="reply-form" ref="form" onSubmit={handleSubmit}>
-              {questionnaire.description && (
-                <div className="pb-15">
-                  <WYSIWYGRender value={questionnaire.description} />
-                </div>
-              )}
+              {questionnaire.description && <WYSIWYGRender value={questionnaire.description} />}
               <FieldArray
                 name="responses"
                 change={change}

@@ -42,3 +42,70 @@ exports[`<OpinionCreateForm /> renders correctly 1`] = `
   />
 </form>
 `;
+
+exports[`<OpinionCreateForm /> renders correctly with requirements 1`] = `
+<form
+  id="opinion-create-form"
+  onSubmit={[MockFunction]}
+>
+  <Uncontrolled(Panel)
+    bsStyle="primary"
+    id="required-conditions"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <FormattedMessage
+        id="requirements"
+        values={Object {}}
+      />
+       
+      <Label
+        bsClass="label"
+        bsStyle="primary"
+      >
+        <FormattedMessage
+          id="filled"
+          values={Object {}}
+        />
+      </Label>
+    </PanelHeading>
+  </Uncontrolled(Panel)>
+  <Field
+    autoFocus={true}
+    component={[Function]}
+    help={null}
+    id="opinion_title"
+    label={
+      <FormattedMessage
+        id="opinion.title"
+        values={Object {}}
+      />
+    }
+    name="title"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    help={null}
+    id="opinion_body"
+    label={
+      <FormattedMessage
+        id="opinion.body"
+        values={Object {}}
+      />
+    }
+    name="body"
+    type="editor"
+  />
+  <Field
+    component={[Function]}
+    id="appendix_0"
+    key="0"
+    label="appendice"
+    name="appendice"
+    type="editor"
+  />
+</form>
+`;
