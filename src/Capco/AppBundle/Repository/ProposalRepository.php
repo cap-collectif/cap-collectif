@@ -22,7 +22,7 @@ class ProposalRepository extends EntityRepository
      */
     public function getOneBySlug(string $slug): ?Proposal
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->createQueryBuilder('proposal')
             ->andWhere('proposal.slug = :slug')
             ->setParameter('slug', $slug);
 
