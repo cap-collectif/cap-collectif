@@ -1,28 +1,26 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\SourceVote;
-use Capco\AppBundle\Form\ApiSourceType as SourceType;
 use Capco\AppBundle\Form\ReportingType;
-use FOS\RestBundle\Controller\Annotations\Delete;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class SourcesController extends FOSRestController
 {
     /**
-     * @Security("has_role('ROLE_USER')")
      * @Post("/sources/{sourceId}/votes")
      * @ParamConverter("source", options={"mapping": {"sourceId": "id"}})
      * @ParamConverter("vote", converter="fos_rest.request_body")
@@ -33,15 +31,19 @@ class SourcesController extends FOSRestController
         SourceVote $vote,
         ConstraintViolationListInterface $validationErrors
     ) {
-        if (!$source->canContribute($this->getUser())) {
+        $viewer = $this->getUser();
+        if (!$viewer || 'anon.' === $viewer) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
+
+        if (!$source->canContribute($viewer)) {
             throw new BadRequestHttpException('Uncontributable source.');
         }
 
-        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $previousVote = $this->get('capco.source_vote.repository')->findOneBy([
-            'user' => $user,
+            'user' => $viewer,
             'source' => $source,
         ]);
 
@@ -53,29 +55,33 @@ class SourcesController extends FOSRestController
             throw new BadRequestHttpException($validationErrors->__toString());
         }
 
-        $vote->setSource($source)->setUser($user);
+        $vote->setSource($source)->setUser($viewer);
         $source->incrementVotesCount();
         $em->persist($vote);
         $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+        $this->get('redis_storage.helper')->recomputeUserCounters($viewer);
     }
 
     /**
-     * @Security("has_role('ROLE_USER')")
      * @Delete("/sources/{sourceId}/votes")
      * @ParamConverter("source", options={"mapping": {"sourceId": "id"}})
      * @View()
      */
     public function deleteSourceVoteAction(Source $source)
     {
-        if (!$source->canContribute($this->getUser())) {
+        $viewer = $this->getUser();
+        if (!$viewer || 'anon.' === $viewer) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
+
+        if (!$source->canContribute($viewer)) {
             throw new BadRequestHttpException('Uncontributable source.');
         }
 
         $em = $this->getDoctrine()->getManager();
 
         $vote = $this->get('capco.source_vote.repository')->findOneBy([
-            'user' => $this->getUser(),
+            'user' => $viewer,
             'source' => $source,
         ]);
 
@@ -86,11 +92,10 @@ class SourcesController extends FOSRestController
         $source->decrementVotesCount();
         $em->remove($vote);
         $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
+        $this->get('redis_storage.helper')->recomputeUserCounters($viewer);
     }
 
     /**
-     * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/sources/{sourceId}/reports")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("source", options={"mapping": {"sourceId": "id"}})
@@ -101,7 +106,12 @@ class SourcesController extends FOSRestController
         Opinion $opinion,
         Source $source
     ) {
-        if ($this->getUser() === $source->getAuthor()) {
+        $viewer = $this->getUser();
+        if (!$viewer || 'anon.' === $viewer) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
+
+        if ($viewer === $source->getAuthor()) {
             throw $this->createAccessDeniedException();
         }
 
@@ -113,7 +123,6 @@ class SourcesController extends FOSRestController
     }
 
     /**
-     * @Security("has_role('ROLE_USER')")
      * @Post("/opinions/{opinionId}/versions/{versionId}/sources/{sourceId}/reports")
      * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
      * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
@@ -126,7 +135,12 @@ class SourcesController extends FOSRestController
         OpinionVersion $version,
         Source $source
     ) {
-        if ($this->getUser() === $source->getAuthor()) {
+        $viewer = $this->getUser();
+        if (!$viewer || 'anon.' === $viewer) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
+
+        if ($viewer === $source->getAuthor()) {
             throw $this->createAccessDeniedException();
         }
 

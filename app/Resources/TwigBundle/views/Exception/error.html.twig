@@ -13,7 +13,7 @@
 		<p><strong>{{ 'error.actions'|trans({}, 'CapcoAppBundle') }}</strong></p>
 		<p>
 			<a href="{{ path('app_homepage') }}">{{ 'error.to_homepage'|trans({}, 'CapcoAppBundle') }}</a><br/>
-			<a href="{{ menu_url('contact') }}">{{ 'error.report'|trans({}, 'CapcoAppBundle') }}</a>
+			<a href="{{ path('app_page_show', {'slug': 'contact'}) }}">{{ 'error.report'|trans({}, 'CapcoAppBundle') }}</a>
 		</p>
 	</div>
 

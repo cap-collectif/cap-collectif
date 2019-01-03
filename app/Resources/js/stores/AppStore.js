@@ -19,9 +19,6 @@ import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
 import type { Store } from '../types';
 
 export default function configureStore(initialState: Object): Store {
-  if (initialState.user.user === null) {
-    LocalStorageService.remove('jwt');
-  }
   if (
     initialState.project &&
     initialState.proposal &&

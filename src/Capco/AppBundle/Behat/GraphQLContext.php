@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Context\Context;
@@ -11,7 +12,6 @@ class GraphQLContext implements Context
 {
     public $client;
     public $response;
-    public $token;
 
     public $resultChecker = '';
 
@@ -20,12 +20,7 @@ class GraphQLContext implements Context
      */
     public function createClient()
     {
-        $this->client = new Client([
-            'base_uri' => 'https://capco.test/',
-            'cert' => '/etc/ssl/certs/capco.pem',
-            'verify' => false,
-        ]);
-        $this->token = null;
+        $this->resetClient();
     }
 
     /**
@@ -87,7 +82,6 @@ class GraphQLContext implements Context
         $response = $this->client->request('GET', '/graphql/internal', [
             'query' => ['query' => $query->getRaw()],
             'headers' => [
-                'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/graphql',
             ],
         ]);
@@ -123,27 +117,6 @@ class GraphQLContext implements Context
         $this->iSendAGraphQLPostRequest('internal', $string);
     }
 
-    private function iSendAGraphQLPostRequest(string $schemaName, PyStringNode $string)
-    {
-        $endpoint = $schemaName === 'internal' ? '/graphql/internal' : '/graphql';
-        $accept =
-            $schemaName === 'preview'
-                ? 'application/vnd.cap-collectif.preview+json'
-                : 'application/json';
-
-        // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
-        $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
-        $response = $this->client->request('POST', $endpoint, [
-            'json' => json_decode($string, true),
-            'headers' => [
-                'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
-                'Accept' => $accept,
-            ],
-        ]);
-        $this->response = (string) $response->getBody();
-    }
-
     /**
      * @Then /^the JSON response should match:$/
      */
@@ -160,11 +133,40 @@ class GraphQLContext implements Context
         string $username = 'test',
         string $password = 'test'
     ) {
-        $response = $this->client->request('POST', '/api/login_check', [
-            'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
+        $this->resetClient();
+        $response = $this->client->request('POST', '/login_check', [
+            'headers' => ['Content-Type' => 'application/json'],
             'json' => ['username' => $username, 'password' => $password],
         ]);
-        $body = (string) $response->getBody();
-        $this->token = json_decode($body, true)['token'];
+    }
+
+    private function resetClient()
+    {
+        $this->client = new Client([
+            'base_uri' => 'https://capco.test/',
+            'cert' => '/etc/ssl/certs/capco.pem',
+            'verify' => false,
+            'cookies' => true,
+        ]);
+    }
+
+    private function iSendAGraphQLPostRequest(string $schemaName, PyStringNode $string)
+    {
+        $endpoint = 'internal' === $schemaName ? '/graphql/internal' : '/graphql';
+        $accept =
+            'preview' === $schemaName
+                ? 'application/vnd.cap-collectif.preview+json'
+                : 'application/json';
+
+        // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
+        $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
+        $response = $this->client->request('POST', $endpoint, [
+            'json' => json_decode($string, true),
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept' => $accept,
+            ],
+        ]);
+        $this->response = (string) $response->getBody();
     }
 }

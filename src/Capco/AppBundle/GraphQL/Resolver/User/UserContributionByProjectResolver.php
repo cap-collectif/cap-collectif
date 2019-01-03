@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Cache\SameRequestCache;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\ArgumentRepository;
@@ -54,7 +54,7 @@ class UserContributionByProjectResolver implements ResolverInterface
         OpinionVersionVoteRepository $opinionVersionVoteRepository,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        RedisCache $cache
+        SameRequestCache $cache
     ) {
         $this->opinionRepository = $opinionRepository;
         $this->argumentRepository = $argumentRepository;
@@ -148,7 +148,7 @@ class UserContributionByProjectResolver implements ResolverInterface
                     $item['hasCollectOrSelectStep'] = true;
                 }
             }
-            $projectStepsTypeCachedItem->set($item)->expiresAfter(RedisCache::ONE_MINUTE);
+            $projectStepsTypeCachedItem->set($item);
         }
 
         return $projectStepsTypeCachedItem->get();

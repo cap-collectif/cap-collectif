@@ -1,26 +1,28 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
-use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
-use Capco\UserBundle\Form\Type\ApiProfileFormType;
-use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\HttpFoundation\Request;
+use Capco\AppBundle\Helper\ResponsesFormatter;
 use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Capco\UserBundle\Form\Type\ApiProfileFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
+use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
+use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UsersController extends FOSRestController
 {
@@ -158,11 +160,15 @@ class UsersController extends FOSRestController
 
     /**
      * @Put("/users/me")
-     * @Security("has_role('ROLE_USER')")
      * @View(statusCode=204, serializerGroups={})
      */
     public function putMeAction(Request $request)
     {
+        $user = $this->getUser();
+        if (!$user || 'anon.' === $user) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
+
         if ($request->request->has('phone')) {
             return $this->updatePhone($request);
         }
@@ -173,12 +179,15 @@ class UsersController extends FOSRestController
 
     /**
      * @Post("/account/cancel_email_change")
-     * @Security("has_role('ROLE_USER')")
      * @View(statusCode=200, serializerGroups={})
      */
     public function cancelEmailChangeAction()
     {
         $user = $this->getUser();
+        if (!$user || 'anon.' === $user) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
+
         $user->setNewEmailToConfirm(null);
         $user->setNewEmailConfirmationToken(null);
         $this->getDoctrine()
@@ -188,13 +197,16 @@ class UsersController extends FOSRestController
 
     /**
      * @Post("/account/resend_confirmation_email", defaults={"_feature_flags" = "registration"})
-     * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
     public function postResendEmailConfirmationAction()
     {
         /** @var User $user */
         $user = $this->getUser();
+        if (!$user || 'anon.' === $user) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
+
         if ($user->isEmailConfirmed() && !$user->getNewEmailToConfirm()) {
             throw new BadRequestHttpException('Already confirmed.');
         }
@@ -218,12 +230,14 @@ class UsersController extends FOSRestController
 
     /**
      * @Post("/send-sms-confirmation", defaults={"_feature_flags" = "phone_confirmation"})
-     * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
     public function postSendSmsConfirmationAction()
     {
         $user = $this->getUser();
+        if (!$user || 'anon.' === $user) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
         if ($user->isPhoneConfirmed()) {
             throw new BadRequestHttpException('Already confirmed.');
         }
@@ -244,6 +258,7 @@ class UsersController extends FOSRestController
             $this->get('sms.service')->confirm($user);
         } catch (\Services_Twilio_RestException $e) {
             $this->get('logger')->error($e->getMessage());
+
             throw new BadRequestHttpException('sms_failed_to_send');
         }
 
@@ -255,12 +270,14 @@ class UsersController extends FOSRestController
 
     /**
      * @Post("/sms-confirmation", defaults={"_feature_flags" = "phone_confirmation"})
-     * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
     public function postSmsConfirmationAction(Request $request)
     {
         $user = $this->getUser();
+        if (!$user || 'anon.' === $user) {
+            throw new AccessDeniedHttpException('Not authorized.');
+        }
         if ($user->isPhoneConfirmed()) {
             throw new BadRequestHttpException('Already confirmed.');
         }

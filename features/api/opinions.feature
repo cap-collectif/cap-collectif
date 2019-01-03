@@ -4,7 +4,7 @@ Feature: Opinions
 @security
 Scenario: Anonymous API client wants to add an opinion
   When I send a POST request to "/api/projects/project5/steps/Q29uc3VsdGF0aW9uOmNzdGVwNQ==/opinion_types/opinionType10/opinions" with a valid opinion json
-  Then the JSON response status code should be 401
+  Then the JSON response status code should be 403
 
 @security
 Scenario: logged in API client wants to add an opinion to a not enabled opinionType
@@ -130,7 +130,7 @@ Scenario: logged in API client wants to add an opinion with unknown appendixType
 @security
 Scenario: Anonymous API client wants to update an opinion
   When I send a PUT request to "/api/opinions/opinion3" with a valid opinion json
-  Then the JSON response status code should be 401
+  Then the JSON response status code should be 403
 
 @security
 Scenario: Logged in API client wants to update an opinion but is not the author

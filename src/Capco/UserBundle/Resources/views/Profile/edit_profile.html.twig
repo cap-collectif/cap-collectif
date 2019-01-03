@@ -10,15 +10,6 @@
     </div>
 {% endblock %}
 
-{% block javascripts %}
-  {{ parent() }}
-  <script>
-    window.localStorage.removeItem('jwt');
-    window.localStorage.removeItem('user');
-  </script>
-{% endblock %}
-
-
 {% block fos_user_content %}
     <section class="section--custom">
         <div class="container">

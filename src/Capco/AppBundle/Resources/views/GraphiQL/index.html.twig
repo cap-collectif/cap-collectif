@@ -23,15 +23,14 @@
 <body>
 {% block body %}
 
-  {% set authorization = null %}
+  {% set isInternal = app.request.attributes.get('_route_params') is not empty and app.request.attributes.get('_route_params').schemaName == 'internal' %}
   {% if app.user %}  
     {% set publicApiToken = publicApiKeyRepo.findPublicApiTokensByUser(app.user) is not empty ? publicApiKeyRepo.findPublicApiTokensByUser(app.user)[0] : null %}
-    {% set authorization = app.request.attributes.get('_route_params') is not empty and app.request.attributes.get('_route_params').schemaName == 'internal' ? jwtManager.create(app.user) : publicApiToken ? publicApiToken.value : null %}
   {% endif %}
 
   <div style="width: 100%; height: 100%">
     <p style="margin-left: 15px">
-    {% if authorization %}
+    {% if app.user and (isInternal or publicApiToken) %}
       <div style="margin-left: 15px">
        Signed in as <strong>{{app.user.username}}</strong>. You’re ready to explore real, live, production data!
       </div>
@@ -43,7 +42,7 @@
        {% endif %}
     {% endif %}
       <div style="margin-left: 15px">
-      {% if app.request.attributes.get('_route_params').schemaName is defined and app.request.attributes.get('_route_params').schemaName == 'internal' %}
+      {% if isInternal %}
          Hello capco dev ! You are querying <strong>Internal</strong> schema.
       {% else %}
          Schema Previews are <strong>enabled</strong> by default.
@@ -66,10 +65,8 @@
             {# Preview schema is enabled by default, maybe we should add a toggle #}
             "Accept": "application/vnd.cap-collectif.preview+json",
             "Content-Type": "application/json",
-            {% if app.user %}
-            {% if authorization %}
-              "Authorization": "Bearer {{authorization}}",
-            {% endif %}
+            {% if app.user and not isInternal and publicApiToken %}
+              "Authorization": "Bearer {{publicApiToken.value}}",
             {% endif %}
           }
           {% endblock graphql_fetcher_headers %}

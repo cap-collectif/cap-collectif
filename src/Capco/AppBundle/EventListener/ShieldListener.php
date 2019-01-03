@@ -13,18 +13,16 @@ class ShieldListener
 {
     const AVAILABLE_ROUTES = [
         // Basics
-        'app_get_api_token',
         'sonata_media_view',
         'sonata_media_download',
         'capco_metrics',
         '_wdt',
 
         // Login
-        'capco_api_login_check',
+        'login_check',
         'facebook_login',
         'google_login',
         'openid_login',
-        'api_login_check',
         'hwi_oauth_service_redirect',
 
         // Public API
