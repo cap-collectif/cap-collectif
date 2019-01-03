@@ -105,7 +105,11 @@ class Checkbox extends React.Component<Props, State> {
           </label>
         )}
         {field.helpText && <span className="help-block">{field.helpText}</span>}
-        {field.description && <ButtonBody body={field.description || ''} />}
+        {field.description && (
+          <div className="pb-15">
+            <ButtonBody body={field.description || ''} />
+          </div>
+        )}
 
         {field.choices &&
           field.choices.map(choice => {

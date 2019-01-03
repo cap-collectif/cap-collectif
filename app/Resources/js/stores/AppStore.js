@@ -19,6 +19,9 @@ import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
 import type { Store } from '../types';
 
 export default function configureStore(initialState: Object): Store {
+  initialState.intl = {};
+  initialState.intl.locale = window.locale;
+  initialState.intl.messages = window.intl_messages;
   if (
     initialState.project &&
     initialState.proposal &&

@@ -1,8 +1,8 @@
 CollectStep:
   type: object
-  inherits: [Node, Step, ProposalStep, RequirementStep]
+  inherits: [Node, Step, ProposalStep]
   config:
-    interfaces: [Node, Step, ProposalStep, RequirementStep]
+    interfaces: [Node, Step, ProposalStep]
     fields:
       kind:
         resolve: 'collect'
