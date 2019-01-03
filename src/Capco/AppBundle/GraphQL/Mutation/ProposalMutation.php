@@ -21,6 +21,7 @@ use Capco\AppBundle\Form\ProposalEvaluersType;
 use Capco\AppBundle\Form\ProposalNotationType;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Form\ProposalProgressStepType;
@@ -48,6 +49,11 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
         unset($values['proposalId']); // This only useful to retrieve the proposal
 
+        $likers = [];
+        foreach ($values['likers'] as $liker) {
+            $likers[] = GlobalId::fromGlobalId($liker)['id'];
+        }
+        $values['likers'] = $likers;
         $form = $formFactory->create(ProposalNotationType::class, $proposal);
         $form->submit($values);
 
@@ -261,7 +267,6 @@ class ProposalMutation implements ContainerAwareInterface
                     ->setTrashedStatus(Trashable::STATUS_VISIBLE)
                     ->setTrashedReason($values['trashedReason'])
                     ->setDeletedAt(null);
-
                 break;
             case ProposalPublicationStatus::PUBLISHED:
                 $proposal
@@ -269,21 +274,18 @@ class ProposalMutation implements ContainerAwareInterface
                     ->setDraft(false)
                     ->setTrashedStatus(null)
                     ->setDeletedAt(null);
-
                 break;
             case ProposalPublicationStatus::TRASHED_NOT_VISIBLE:
                 $proposal
                     ->setTrashedStatus(Trashable::STATUS_INVISIBLE)
                     ->setTrashedReason($values['trashedReason'])
                     ->setDeletedAt(null);
-
                 break;
             case ProposalPublicationStatus::DRAFT:
                 $proposal
                     ->setDraft(true)
                     ->setTrashedStatus(null)
                     ->setDeletedAt(null);
-
                 break;
             default:
                 break;
@@ -312,7 +314,6 @@ class ProposalMutation implements ContainerAwareInterface
         if (!$proposalForm) {
             $error = sprintf('Unknown proposalForm with id "%s"', $values['proposalFormId']);
             $this->logger->error($error);
-
             throw new UserError($error);
         }
         if (!$proposalForm->canContribute($user) && !$user->isAdmin()) {
@@ -392,7 +393,6 @@ class ProposalMutation implements ContainerAwareInterface
         if (!$proposal) {
             $error = sprintf('Unknown proposal with id "%s"', $values['id']);
             $this->logger->error($error);
-
             throw new UserError($error);
         }
         unset($values['id']); // This only useful to retrieve the proposal
@@ -401,14 +401,12 @@ class ProposalMutation implements ContainerAwareInterface
         if ($user !== $proposal->getAuthor() && !$user->isAdmin()) {
             $error = sprintf('You must be the author to update a proposal.');
             $this->logger->error($error);
-
             throw new UserError($error);
         }
 
         if (!$proposal->canContribute($user) && !$user->isAdmin()) {
             $error = sprintf('Sorry, you can\'t contribute to this proposal anymore.');
             $this->logger->error($error);
-
             throw new UserError($error);
         }
 
@@ -516,7 +514,7 @@ class ProposalMutation implements ContainerAwareInterface
                     $form->getName() .
                     ' ' .
                     'Extra data: ' .
-                    implode('', $form->getExtraData())
+                    implode($form->getExtraData())
             );
             $errors[] = (string) $error->getMessage();
         }
