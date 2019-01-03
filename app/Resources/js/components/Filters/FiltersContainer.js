@@ -25,9 +25,9 @@ export default class FiltersContainer extends React.Component<Props> {
         className="w-25"
         id={`${type}-list-filters-d`}>
         <Button className="btn--outline btn-dark-gray" id={`${type}-button-filter`}>
-          <i className="cap cap-filter-1 small mr-5 r-0" />
+          <i className="cap cap-filter-1 small mr-5" />
           <FormattedMessage id="link_filters" /> {this.renderFilterCount()}
-          <i className="cap cap-triangle-down ml-5 r-0" />
+          <i className="cap cap-triangle-down ml-5" />
         </Button>
       </OverlayTrigger>
     );
