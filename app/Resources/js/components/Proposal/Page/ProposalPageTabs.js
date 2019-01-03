@@ -112,11 +112,11 @@ export class ProposalPageTabs extends React.Component<Props> {
                     <ProposalPageMetadata
                       proposal={proposal}
                       showDistricts={features.districts}
-                      showCategories={step && step.form && step.form.usingCategories}
+                      showCategories={step && step.form.usingCategories}
                       showNullEstimation={
                         !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
                       }
-                      showThemes={features.themes && (step && step.form && step.form.usingThemes)}
+                      showThemes={features.themes && (step && step.form.usingThemes)}
                     />
                     <br />
                     {currentVotableStep !== null &&
