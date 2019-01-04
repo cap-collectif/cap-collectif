@@ -317,17 +317,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
             }
         }
 
-        // ****************************** Collect step counters **************************************
-
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Steps\CollectStep ss set ss.votesCount = (
-          select count(DISTINCT pv.id)
-          from CapcoAppBundle:ProposalCollectVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
-          where pv.collectStep = ss AND pv.published = 1 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.published = 1
-          group by pv.collectStep
-        )'
-        );
-
         // ****************************** Questionnaire step counters **************************************
 
         $this->executeQuery(
@@ -357,14 +346,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         }
 
         // ****************************** Selection steps counters **************************************
-        $this->executeQuery(
-            'UPDATE CapcoAppBundle:Steps\SelectionStep ss set ss.votesCount = (
-          select count(DISTINCT pv.id)
-          from CapcoAppBundle:ProposalSelectionVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
-          where pv.selectionStep = ss AND pv.published = 1 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.published = 1
-          group by pv.selectionStep
-        )'
-        );
 
         $selectionSteps = $container->get('capco.selection_step.repository')->findAll();
         foreach ($selectionSteps as $ss) {
