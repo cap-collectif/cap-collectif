@@ -64,7 +64,7 @@ class DeleteCommentMutation implements MutationInterface
 
         $this->em->remove($comment);
         $this->em->flush();
-        if ($comment->getRelated()) {
+        if ($comment->getRelatedObject()) {
             $this->commentableCommentsDataLoader->invalidate($comment->getRelatedObject()->getId());
         }
         $this->redisStorage->recomputeUserCounters($user);

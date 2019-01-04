@@ -86,7 +86,7 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         $commentId = '123456';
 
         $comment->getAuthor()->willReturn($viewer);
-        $comment->getRelated()->willReturn($commentable);
+        $comment->getRelatedObject()->willReturn($commentable);
         $comment
             ->getRelatedObject()
             ->getId()
