@@ -82,15 +82,10 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         ProposalComment $comment
     ) {
         $commentable = new EventComment();
-        $commentable->getId()->willReturn('098765');
         $commentId = '123456';
 
         $comment->getAuthor()->willReturn($viewer);
         $comment->getRelatedObject()->willReturn($commentable);
-        $comment
-            ->getRelatedObject()
-            ->getId()
-            ->willReturn($commentable->getId());
         $commentRepo->find('123456')->willReturn($comment);
         $arguments->offsetGet('id')->willReturn($commentId);
         $em->remove(Argument::any())->shouldBeCalled();
