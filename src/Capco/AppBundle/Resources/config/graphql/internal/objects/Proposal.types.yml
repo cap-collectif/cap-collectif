@@ -35,6 +35,7 @@ Proposal:
         access: "@=service('security.authorization_checker').isGranted('ROLE_ADMIN')"
       progressSteps:
         type: '[ProgressStep!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalProgressStepsResolver", [value])'
       evaluers:
         type: '[Group!]!'
       currentVotableStep:
