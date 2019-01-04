@@ -4,17 +4,18 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Symfony\Component\HttpFoundation\Request;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalCurrentVotableStepResolver;
 
 class ProposalController extends Controller
 {
@@ -66,36 +67,14 @@ class ProposalController extends Controller
                 ? $request->headers->get('referer')
                 : $urlResolver->getStepUrl($collectStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
-        $votableStep = $this->get(
-            'capco\appbundle\graphql\resolver\proposal\proposalcurrentvotablestepresolver'
-        )->__invoke($proposal);
+        $votableStep = $this->get(ProposalCurrentVotableStepResolver::class)->__invoke($proposal);
 
-        $props = $serializer->serialize(
-            [
-                'proposalId' => $proposal->getId(),
-                'currentVotableStepId' => $votableStep ? $votableStep->getId() : null,
-            ],
-            'json',
-            [
-                'groups' => [
-                    'ProposalCategories',
-                    'UserVotes',
-                    'Districts',
-                    'ProposalForms',
-                    'Questions',
-                    'Steps',
-                    'ThemeDetails',
-                    'UserMedias',
-                    'VoteThreshold',
-                    'Default',
-                ],
-            ]
-        );
+        $currentVotableStepId = $votableStep ? $votableStep->getId() : null;
 
         return [
             'project' => $project,
             'currentStep' => $collectStep,
-            'props' => $props,
+            'currentVotableStepId' => $currentVotableStepId,
             'proposal' => $proposal,
             'referer' => $refererUri,
         ];

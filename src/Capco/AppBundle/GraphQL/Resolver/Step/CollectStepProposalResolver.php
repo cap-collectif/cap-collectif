@@ -2,11 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
+use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
 
 class CollectStepProposalResolver implements ResolverInterface
 {
@@ -21,8 +22,8 @@ class CollectStepProposalResolver implements ResolverInterface
         CollectStep $collectStep,
         Argument $args,
         $user,
-        RequestStack $request //: Promise<Connection>
-    ) {
+        RequestStack $request
+    ): Promise {
         return $this->resolver->__invoke($collectStep->getProposalForm(), $args, $user, $request);
     }
 }

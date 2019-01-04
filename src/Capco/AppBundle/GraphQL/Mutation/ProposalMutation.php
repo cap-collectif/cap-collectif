@@ -28,6 +28,7 @@ use Capco\AppBundle\Enum\ProposalPublicationStatus;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 
 class ProposalMutation implements ContainerAwareInterface
 {
@@ -367,6 +368,8 @@ class ProposalMutation implements ContainerAwareInterface
         $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
+
+        $this->container->get(ProposalFormProposalsDataLoader::class)->invalidate($proposalForm);
 
         $this->container
             ->get('swarrot.publisher')

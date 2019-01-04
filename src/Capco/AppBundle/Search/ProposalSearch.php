@@ -1,14 +1,15 @@
 <?php
+
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Enum\ProposalTrashedStatus;
-use Capco\AppBundle\Repository\ProposalRepository;
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Query\Exists;
-use Elastica\Query\Term;
 use Elastica\Result;
+use Elastica\Query\Term;
+use Elastica\Query\Exists;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\ProposalTrashedStatus;
+use Capco\AppBundle\Repository\ProposalRepository;
 
 class ProposalSearch extends Search
 {
@@ -82,24 +83,56 @@ class ProposalSearch extends Search
                 }, $resultSet->getResults())
             ),
             'count' => $resultSet->getTotalHits(),
-            'order' => $order,
         ];
     }
 
     public function getHydratedResults(array $ids): array
     {
-        // We can't use findById because we would lost the correct order of ids
+        $proposals = $this->proposalRepo->hydrateFromIds($ids);
+        // We have to restore the correct order of ids, because Doctrine has lost it, see:
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        return array_values(
-            array_filter(
-                array_map(function (string $id) {
-                    return $this->proposalRepo->findOneBy(['id' => $id, 'deletedAt' => null]);
-                }, $ids),
-                function (?Proposal $proposal) {
-                    return null !== $proposal;
+        usort($proposals, function ($a, $b) use ($ids) {
+            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
+        });
+
+        return $proposals;
+    }
+
+    public static function findOrderFromFieldAndDirection(string $field, string $direction): string
+    {
+        $order = 'random';
+        switch ($field) {
+            case 'VOTES':
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'least-votes';
+                } else {
+                    $order = 'votes';
                 }
-            )
-        );
+
+                break;
+            case 'PUBLISHED_AT':
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'old';
+                } else {
+                    $order = 'last';
+                }
+
+                break;
+            case 'COMMENTS':
+                $order = 'comments';
+
+                break;
+            case 'COST':
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'cheap';
+                } else {
+                    $order = 'expensive';
+                }
+
+                break;
+        }
+
+        return $order;
     }
 
     private function getSort(string $order, string $stepId): array
@@ -108,10 +141,12 @@ class ProposalSearch extends Search
             case 'old':
                 $sortField = 'createdAt';
                 $sortOrder = 'asc';
+
                 break;
             case 'last':
                 $sortField = 'createdAt';
                 $sortOrder = 'desc';
+
                 break;
             case 'votes':
                 return [
@@ -121,6 +156,7 @@ class ProposalSearch extends Search
                         'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
                     ],
                 ];
+
                 break;
             case 'least-votes':
                 return [
@@ -130,21 +166,26 @@ class ProposalSearch extends Search
                         'nested_filter' => ['term' => ['votesCountByStep.step.id' => $stepId]],
                     ],
                 ];
+
                 break;
             case 'comments':
                 $sortField = 'commentsCount';
                 $sortOrder = 'desc';
+
                 break;
             case 'expensive':
                 $sortField = 'estimation';
                 $sortOrder = 'desc';
+
                 break;
             case 'cheap':
                 $sortField = 'estimation';
                 $sortOrder = 'asc';
+
                 break;
             default:
                 throw new \RuntimeException('Unknown order: ' . $order);
+
                 break;
         }
 

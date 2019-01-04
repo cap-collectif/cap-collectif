@@ -17,6 +17,21 @@ class ProposalRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
 
+    public function hydrateFromIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->addSelect('theme', 'district', 'category', 'likers')
+            ->leftJoin('p.theme', 'theme')
+            ->leftJoin('p.district', 'district')
+            ->leftJoin('p.category', 'category')
+            ->leftJoin('p.likers', 'likers')
+            ->where('p.id IN (:ids)')
+            ->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     /**
      * @throws \Doctrine\ORM\NonUniqueResultException
      */

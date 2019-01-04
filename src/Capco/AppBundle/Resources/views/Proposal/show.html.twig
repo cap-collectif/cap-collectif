@@ -29,7 +29,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('ProposalPageApp', {'props': props}) }}
+    {{ react_render_component('ProposalPageApp', {'props': {'currentVotableStepId': currentVotableStepId, 'proposalId': proposal.id }}) }}
 {% endblock %}
 
 {% block javascripts %}

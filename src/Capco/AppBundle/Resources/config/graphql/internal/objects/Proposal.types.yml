@@ -89,6 +89,7 @@ Proposal:
         type: 'Media'
       theme:
         type: 'Theme'
+        resolve: '@=value.getTheme()'
       category:
         type: 'ProposalCategory'
       district:

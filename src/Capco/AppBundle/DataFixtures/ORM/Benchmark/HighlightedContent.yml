@@ -1,0 +1,4 @@
+Capco\AppBundle\Entity\HighlightedProject:
+  highlightedProject1:
+    position: 1
+    project: '@project3'

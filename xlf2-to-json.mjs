@@ -9,6 +9,7 @@ for (const locale of config.locales) {
     fs.writeFileSync(`translations/SonataMediaBundle.${locale}.xlf`, xml);
     fs.writeFileSync(`translations/SonataUserBundle.${locale}.xlf`, xml);
     fs.writeFileSync(`translations/SonataCoreBundle.${locale}.xlf`, xml);
+    fs.writeFileSync(`translations/messages.${locale}.xlf`, xml);
 
     // Create JS locale files used to translate JavaScript using react-intl
     const json = JSON.parse(parser.toJson(xml));

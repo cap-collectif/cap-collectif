@@ -80,7 +80,7 @@ class Proposal implements
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
 
@@ -266,7 +266,7 @@ class Proposal implements
         $this->comments = new ArrayCollection();
         $this->responses = new ArrayCollection();
         $this->commentsCount = 0;
-        $this->updatedAt = new \Datetime();
+        $this->updatedAt = null;
         $this->selections = new ArrayCollection();
         $this->likers = new ArrayCollection();
         $this->evaluers = new ArrayCollection();
@@ -339,7 +339,7 @@ class Proposal implements
         return $this;
     }
 
-    public function getTheme()
+    public function getTheme(): ?Theme
     {
         return $this->theme;
     }
@@ -369,10 +369,7 @@ class Proposal implements
         return $this;
     }
 
-    /**
-     * @return null|User
-     */
-    public function getAuthor()
+    public function getAuthor(): ?User
     {
         return $this->author;
     }

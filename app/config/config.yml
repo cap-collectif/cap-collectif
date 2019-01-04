@@ -202,7 +202,8 @@ doctrine:
     mapping_types:
       enum: string
   orm:
-    auto_generate_proxy_classes: true # not the best production setting but otherwise cache:warmup fail
+    # not the best production setting but otherwise cache:warmup fail
+    auto_generate_proxy_classes: '%kernel.debug%' 
     auto_mapping: true
     # naming_strategy: doctrine.orm.naming_strategy.underscore
     filters:
@@ -237,39 +238,25 @@ snc_redis:
       alias: default
       dsn: redis://%redis_host%
       logging: '%kernel.debug%'
-    cache:
-      type: predis
-      alias: cache
-      dsn: redis://%redis_host%
-      logging: '%kernel.debug%'
-    session:
-      type: predis
-      alias: session
-      dsn: redis://%redis_host%
-      logging: '%kernel.debug%'
   session:
-    client: session
+    client: default
     ttl: 1209600 # Two weeks
     prefix: session_%kernel.environment%_ # We add env in prefix to allow multi environments sessions in dev
     locking: true # Not using locking improve performance, but may cause bugs
-# Can't succeed to have doctrine cache work inside redis, so for now we keep apc
-# doctrine:
-#     metadata_cache:
-#         client: cache
-#         entity_manager: default
-#         document_manager: default
-#         namespace: metadata_cache_%kernel.environment%_
-#     result_cache:
-#         client: cache
-#         entity_manager: default
-#         namespace: result_cache_%kernel.environment%_
-#     query_cache:
-#         client: cache
-#         entity_manager: default
-#         namespace: query_cache_%kernel.environment%_
-# second_level_cache:
-#     client: cache
-#     entity_manager: default
+  doctrine:
+    metadata_cache:
+        client: default
+        entity_manager: default
+        document_manager: default
+        namespace: metadata_cache_%kernel.environment%_
+    result_cache:
+        client: default
+        entity_manager: default
+        namespace: result_cache_%kernel.environment%_
+    query_cache:
+        client: default
+        entity_manager: default
+        namespace: query_cache_%kernel.environment%_
 
 swiftmailer:
   default_mailer: default
@@ -374,6 +361,7 @@ fos_user:
   user_class: Capco\UserBundle\Entity\User
   group:
     group_class: Capco\AppBundle\Entity\Group
+    group_manager: sonata.user.orm.group_manager
   service:
     user_manager: sonata.user.orm.user_manager
     email_canonicalizer: Capco\AppBundle\Utils\Canonicalizer

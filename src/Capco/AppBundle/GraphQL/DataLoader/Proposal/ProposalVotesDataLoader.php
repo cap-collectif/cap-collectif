@@ -2,18 +2,19 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Cache\RedisCache;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 
 class ProposalVotesDataLoader extends BatchDataLoader
 {
@@ -58,10 +59,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
         $connections = [];
 
         foreach ($keys as $key) {
-            $this->logger->info(
-                __METHOD__ . ' called with ' . var_export($this->serializeKey($key), true)
-            );
-
             $connections[] = $this->resolve(
                 $key['proposal'],
                 $key['args'],
@@ -75,14 +72,10 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
     protected function serializeKey($key)
     {
-        if (\is_string($key)) {
-            return $key;
-        }
-
         return [
             'proposalId' => $key['proposal']->getId(),
             'stepId' => isset($key['step']) ? $key['step']->getId() : null,
-            'args' => $key['args'],
+            'args' => $key['args']->getRawArguments(),
             'includeUnpublished' => $key['includeUnpublished'],
         ];
     }
@@ -92,7 +85,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
         Argument $args,
         bool $includeUnpublished,
         ?AbstractStep $step = null
-    ) {
+    ): Connection {
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
 

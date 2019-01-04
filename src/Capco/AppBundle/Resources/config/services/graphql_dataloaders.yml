@@ -18,4 +18,9 @@ services:
     autowire: true
     arguments:
       $cachePrefix: ProposalProgressStepDataLoader
+
+  Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProposalFormProposalsDataLoader
       $cacheTtl: 60

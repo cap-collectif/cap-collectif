@@ -19,4 +19,3 @@ Capco\AppBundle\Entity\FooterSocialNetwork:
     position: 3
     isEnabled: false
     style: linkedin
-
