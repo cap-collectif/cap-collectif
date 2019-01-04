@@ -13,3 +13,9 @@ services:
     arguments:
       $cachePrefix: CommentableCommentsDataLoader
       $cacheTtl: 60
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalProgressStepDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProposalProgressStepDataLoader
+      $cacheTtl: 60

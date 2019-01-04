@@ -3,28 +3,20 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Repository\ProgressStepRepository;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalProgressStepDataLoader;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Psr\Log\LoggerInterface;
 
 class ProposalProgressStepsResolver implements ResolverInterface
 {
-    private $logger;
+    private $proposalProgressStepDataLoader;
 
-    private $progressStepRepository;
-
-    public function __construct(
-        LoggerInterface $logger,
-        ProgressStepRepository $progressStepRepository
-    ) {
-        $this->logger = $logger;
-        $this->progressStepRepository = $progressStepRepository;
+    public function __construct(ProposalProgressStepDataLoader $proposalProgressStepDataLoader)
+    {
+        $this->proposalProgressStepDataLoader = $proposalProgressStepDataLoader;
     }
 
     public function __invoke(Proposal $proposal)
     {
-        // die('toto');
-        return $proposal->getProgressSteps();
-        // return $this->progressStepRepository->findAll();
+        return $this->proposalProgressStepDataLoader->load($proposal);
     }
 }
