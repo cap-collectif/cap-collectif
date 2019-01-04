@@ -9,7 +9,7 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
 
-class CollectStepCountProposalDataLoader extends BatchDataLoader
+class CollectStepProposalCountDataLoader extends BatchDataLoader
 {
     private $proposalRepository;
 
@@ -61,10 +61,6 @@ class CollectStepCountProposalDataLoader extends BatchDataLoader
 
     protected function serializeKey($key)
     {
-        if (\is_string($key)) {
-            return $key;
-        }
-
         return [
             'collectStepId' => $key['collectStep']->getId(),
         ];
@@ -72,6 +68,7 @@ class CollectStepCountProposalDataLoader extends BatchDataLoader
 
     private function resolve(CollectStep $step): int
     {
+        // We use mysql to avoid indexation
         return $this->proposalRepository->countPublishedProposalByStepGroupedByStep($step);
     }
 }

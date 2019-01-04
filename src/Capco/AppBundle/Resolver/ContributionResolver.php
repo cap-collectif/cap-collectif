@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\Step\VoteCountStepResolver;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;

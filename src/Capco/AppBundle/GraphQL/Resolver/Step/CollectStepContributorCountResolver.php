@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepCountContributorDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCountDataLoader;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
@@ -15,7 +15,7 @@ class CollectStepContributorCountResolver implements ResolverInterface
 
     public function __construct(
         LoggerInterface $logger,
-        CollectStepCountContributorDataLoader $collectStepCountContributorDataLoader
+        CollectStepContributorCountDataLoader $collectStepCountContributorDataLoader
     ) {
         $this->collectStepCountContributorDataLoader = $collectStepCountContributorDataLoader;
         $this->logger = $logger;

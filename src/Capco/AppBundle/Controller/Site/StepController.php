@@ -41,7 +41,11 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        return ['project' => $project, 'currentStep' => $step];
+        return [
+            'project' => $project,
+            'currentStep' => $step,
+            'totalProposalsCount' => 0,
+        ];
     }
 
     /**
@@ -109,6 +113,7 @@ class StepController extends Controller
             'contributors' => $contributorsList,
             'showVotes' => $showVotes,
             'anonymousCount' => $contributorsConnection->anonymousCount,
+            'totalProposalsCount' => 0,
         ];
     }
 
@@ -152,6 +157,7 @@ class StepController extends Controller
             'nbOpinionsToDisplay' => $nbOpinionsToDisplay,
             'versions' => $versions,
             'nbVersionsToDisplay' => $nbVersionsToDisplay,
+            'totalProposalsCount' => 0,
         ];
     }
 
@@ -190,6 +196,7 @@ class StepController extends Controller
             'opinions' => $opinions,
             'page' => $page,
             'nbPage' => ceil(\count($opinions) / 10),
+            'totalProposalsCount' => 0,
         ];
     }
 
@@ -228,6 +235,7 @@ class StepController extends Controller
             'versions' => $versions,
             'page' => $page,
             'nbPage' => ceil(\count($versions) / 10),
+            'totalProposalsCount' => 0,
         ];
     }
 
@@ -251,7 +259,12 @@ class StepController extends Controller
             'json'
         );
 
-        return ['project' => $project, 'currentStep' => $step, 'props' => $props];
+        return [
+            'project' => $project,
+            'currentStep' => $step,
+            'props' => $props,
+            'totalProposalsCount' => 0,
+        ];
     }
 
     /**
@@ -330,7 +343,12 @@ class StepController extends Controller
             ]
         );
 
-        return ['project' => $project, 'currentStep' => $step, 'props' => $props];
+        return [
+            'project' => $project,
+            'currentStep' => $step,
+            'props' => $props,
+            'totalProposalsCount' => 0,
+        ];
     }
 
     /**
@@ -382,7 +400,12 @@ class StepController extends Controller
             'json'
         );
 
-        return ['project' => $project, 'currentStep' => $step, 'props' => $props];
+        return [
+            'project' => $project,
+            'currentStep' => $step,
+            'props' => $props,
+            'totalProposalsCount' => 0,
+        ];
     }
 
     /**
@@ -418,6 +441,11 @@ class StepController extends Controller
             'groups' => ['ConsultationSteps', 'Steps', 'UserVotes'],
         ]);
 
-        return ['project' => $project, 'currentStep' => $currentStep, 'stepProps' => $stepProps];
+        return [
+            'project' => $project,
+            'currentStep' => $currentStep,
+            'stepProps' => $stepProps,
+            'totalProposalsCount' => 0,
+        ];
     }
 }

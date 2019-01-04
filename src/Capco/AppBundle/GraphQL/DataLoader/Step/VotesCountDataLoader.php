@@ -67,10 +67,6 @@ class VotesCountDataLoader extends BatchDataLoader
 
     protected function serializeKey($key)
     {
-        if (\is_string($key)) {
-            return $key;
-        }
-
         return [
             'stepId' => $key['step']->getId(),
         ];
@@ -86,6 +82,6 @@ class VotesCountDataLoader extends BatchDataLoader
             return $this->proposalSelectionVoteRepository->countPublishedSelectionVoteByStep($step);
         }
 
-        return 0;
+        throw new \RuntimeException('Access denied');
     }
 }

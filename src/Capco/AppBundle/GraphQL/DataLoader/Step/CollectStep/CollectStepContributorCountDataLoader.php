@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
 
-class CollectStepCountContributorDataLoader extends BatchDataLoader
+class CollectStepContributorCountDataLoader extends BatchDataLoader
 {
     private $stepContributorResolver;
 

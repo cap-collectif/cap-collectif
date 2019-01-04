@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\DataLoader\Step\VotesCountDataLoader;
