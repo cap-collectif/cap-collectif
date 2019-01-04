@@ -5,11 +5,11 @@ services:
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader:
     autowire: true
     arguments:
-      $cachePrefix: proposalVote
+      $cachePrefix: ProposalVotesDataLoader
       $cacheTtl: 60
 
   Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader:
     autowire: true
     arguments:
-      $cachePrefix: commentable
+      $cachePrefix: CommentableCommentsDataLoader
       $cacheTtl: 60
