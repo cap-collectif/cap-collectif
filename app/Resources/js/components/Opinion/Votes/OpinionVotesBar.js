@@ -18,14 +18,13 @@ class OpinionVotesBar extends React.Component<Props> {
     if (!opinion.section) return null;
     return (
       <div>
-        {opinion.section.votesThreshold &&
-          opinion.section.votesThreshold > 0 && (
-            <VotesBar
-              max={opinion.section.votesThreshold}
-              value={opinion.votesYes ? opinion.votesYes.totalCount : 0}
-              helpText={opinion.section.votesThresholdHelpText}
-            />
-          )}
+        {opinion.section.votesThreshold && opinion.section.votesThreshold > 0 && (
+          <VotesBar
+            max={opinion.section.votesThreshold}
+            value={opinion.votesYes ? opinion.votesYes.totalCount : 0}
+            helpText={opinion.section.votesThresholdHelpText}
+          />
+        )}
         <div style={{ paddingTop: '20px' }}>
           {opinion.previewVotes &&
             opinion.previewVotes.edges &&

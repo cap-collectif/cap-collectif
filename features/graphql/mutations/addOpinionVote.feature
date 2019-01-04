@@ -115,3 +115,38 @@ Scenario: Logged in API client wants to update an existing vote
     }
   }
   """
+
+@database
+Scenario: Logged in API client wants to vote for an opinion without requirement
+  Given I am logged in to graphql as jean
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: AddOpinionVoteInput!) {
+      addOpinionVote(input: $input) {
+        vote {
+          id
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "opinionId": "opinion1",
+        "value": "YES"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+  "errors":[
+    {
+      "message":"You dont meets all the requirements.",
+      "category":"user","locations":[{"line":1,"column":46}],
+      "path":["addOpinionVote"]
+    }
+  ],
+  "data":{"addOpinionVote":null}
+  }
+  """

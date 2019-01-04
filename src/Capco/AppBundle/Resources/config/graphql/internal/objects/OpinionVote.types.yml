@@ -9,6 +9,10 @@ OpinionVote:
       - Publishable
       - Vote
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: OpinionVote
       kind:
         type: 'String!'
         description: "Returns 'opinionVote'."

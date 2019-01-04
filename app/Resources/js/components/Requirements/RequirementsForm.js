@@ -4,11 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { reduxForm, Field, startSubmit, stopSubmit, type FormProps } from 'redux-form';
+import { fetchQuery } from 'relay-runtime';
 import component from '../Form/Field';
 import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
 import UpdateProfilePersonalDataMutation from '../../mutations/UpdateProfilePersonalDataMutation';
 import type { Dispatch, State } from '../../types';
 import DateDropdownPicker from '../Form/DateDropdownPicker';
+import environment from '../../createRelayEnvironment';
 
 export const formName = 'requirements-form';
 
@@ -32,7 +34,8 @@ type Requirement =
       +viewerMeetsTheRequirement: boolean,
       +viewerValue: ?string,
     };
-type RequirementsForm_step = {|
+
+export type RequirementsForm_step = {|
   +requirements: {|
     +edges: ?$ReadOnlyArray<?{|
       +node: Requirement,
@@ -43,8 +46,21 @@ type RequirementsForm_step = {|
 type FormValues = { [key: string]: ?string | boolean };
 type Props = {
   ...FormProps,
+  stepId?: ?string,
   step: RequirementsForm_step,
 };
+
+const refetchViewer = graphql`
+  query RequirementsForm_userQuery($stepId: ID!) {
+    step: node(id: $stepId) {
+      ... on RequirementStep {
+        requirements {
+          viewerMeetsTheRequirements
+        }
+      }
+    }
+  }
+`;
 
 export const validate = (values: FormValues, props: Props) => {
   const errors = {};
@@ -137,6 +153,11 @@ export const onChange = (
       callApiTimeout[requirement.id] = setTimeout(() => {
         UpdateProfilePersonalDataMutation.commit({ input }).then(() => {
           dispatch(stopSubmit(formName));
+          if (props.stepId) {
+            fetchQuery(environment, refetchViewer, {
+              stepId: props.stepId,
+            });
+          }
         });
       }, 1000);
     }
