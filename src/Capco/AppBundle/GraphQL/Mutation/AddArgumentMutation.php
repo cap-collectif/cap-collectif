@@ -49,13 +49,13 @@ class AddArgumentMutation implements MutationInterface
         StepRequirementsResolver $stepRequirementsResolver
     ) {
         $this->em = $em;
+        $this->logger = $logger;
+        $this->publisher = $publisher;
         $this->formFactory = $formFactory;
         $this->opinionRepo = $opinionRepo;
         $this->versionRepo = $versionRepo;
         $this->redisStorage = $redisStorage;
-        $this->publisher = $publisher;
         $this->argumentRepo = $argumentRepo;
-        $this->logger = $logger;
         $this->stepRequirementsResolver = $stepRequirementsResolver;
     }
 
@@ -93,13 +93,6 @@ class AddArgumentMutation implements MutationInterface
             return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
-        if (\count($this->argumentRepo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
-            $this->logger->error('You contributed too many times.');
-            $error = ['message' => 'You contributed too many times.'];
-
-            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
-        }
-
         $step = $argumentable->getStep();
 
         if (
@@ -108,6 +101,13 @@ class AddArgumentMutation implements MutationInterface
         ) {
             $this->logger->error('You dont meets all the requirements.');
             $error = ['message' => 'You dont meets all the requirements.'];
+
+            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
+        }
+
+        if (\count($this->argumentRepo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
+            $this->logger->error('You contributed too many times.');
+            $error = ['message' => 'You contributed too many times.'];
 
             return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
