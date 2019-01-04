@@ -45,7 +45,6 @@ class GraphQLController extends BaseController
             }
             $schemaName = 'public';
         }
-        $schemaName = 'internal';
 
         return $this->createResponse($request, $schemaName, false);
     }

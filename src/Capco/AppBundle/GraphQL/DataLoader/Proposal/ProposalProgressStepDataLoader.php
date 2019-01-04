@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProgressStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Cache\RedisCache;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
@@ -57,18 +58,14 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
-    protected function serializeKey($key)
+    protected function serializeKey($key): array
     {
-        if (\is_string($key)) {
-            return $key;
-        }
-
         return [
             'proposalId' => $key->getId(),
         ];
     }
 
-    private function resolve(Proposal $proposal)
+    private function resolve(Proposal $proposal): ProgressStep
     {
         return $proposal->getProgressSteps();
     }
