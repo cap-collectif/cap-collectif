@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Swarrot\Broker\Message;
@@ -22,6 +23,7 @@ use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddArgumentMutation implements MutationInterface
 {
@@ -33,6 +35,7 @@ class AddArgumentMutation implements MutationInterface
     private $publisher;
     private $argumentRepo;
     private $logger;
+    private $stepRequirementsResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -42,7 +45,8 @@ class AddArgumentMutation implements MutationInterface
         RedisStorageHelper $redisStorage,
         Publisher $publisher,
         ArgumentRepository $argumentRepo,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        StepRequirementsResolver $stepRequirementsResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -52,6 +56,7 @@ class AddArgumentMutation implements MutationInterface
         $this->publisher = $publisher;
         $this->argumentRepo = $argumentRepo;
         $this->logger = $logger;
+        $this->stepRequirementsResolver = $stepRequirementsResolver;
     }
 
     public function __invoke(Arg $input, User $author): array
@@ -67,6 +72,7 @@ class AddArgumentMutation implements MutationInterface
         if (!$argumentable || !$argumentable instanceof Argumentable) {
             $this->logger->error('Unknown argumentable with id: ' . $argumentableId);
             $error = ['message' => 'Unknown argumentable.'];
+
             return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
@@ -76,18 +82,33 @@ class AddArgumentMutation implements MutationInterface
                     $argumentableId
             );
             $error = ['message' => 'Can\'t add an argument to an uncontribuable argumentable.'];
+
             return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
         if (0 === $argumentable->getOpinionType()->getCommentSystem()) {
             $this->logger->error('Can\'t add argument to this opinion type.');
             $error = ['message' => "Can't add argument to this opinion type."];
+
             return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
         if (\count($this->argumentRepo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
             $this->logger->error('You contributed too many times.');
             $error = ['message' => 'You contributed too many times.'];
+
+            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
+        }
+
+        $step = $argumentable->getStep();
+
+        if (
+            $step &&
+            !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($author, $step)
+        ) {
+            $this->logger->error('You dont meets all the requirements.');
+            $error = ['message' => 'You dont meets all the requirements.'];
+
             return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
