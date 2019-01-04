@@ -104,6 +104,7 @@ class AddCommentMutationSpec extends ObjectBehavior
     }
 
     public function it_persists_new_comment(
+        $commentableCommentsDataLoader,
         EntityManagerInterface $em,
         FormFactory $formFactory,
         GlobalIdResolver $globalIdResolver,
@@ -136,6 +137,7 @@ class AddCommentMutationSpec extends ObjectBehavior
 
         $em->persist(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
+        $commentableCommentsDataLoader->invalidate('123456')->shouldBeCalled();
         $dispatcher
             ->dispatch(
                 'capco.comment_changed',

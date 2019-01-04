@@ -77,19 +77,21 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         $em,
         $commentRepo,
         $redisStorage,
+        $commentableCommentsDataLoader,
         Arg $arguments,
         User $viewer,
-        ProposalComment $comment
+        ProposalComment $comment,
+        Proposal $proposal
     ) {
-        $commentable = new Proposal();
         $commentId = '123456';
-
+        $proposal->getId()->willReturn('012234');
         $comment->getAuthor()->willReturn($viewer);
-        $comment->getRelatedObject()->willReturn($commentable);
+        $comment->getRelatedObject()->willReturn($proposal);
         $commentRepo->find('123456')->willReturn($comment);
         $arguments->offsetGet('id')->willReturn($commentId);
         $em->remove(Argument::any())->shouldBeCalled();
         $em->flush()->shouldBeCalled();
+        $commentableCommentsDataLoader->invalidate('012234')->shouldBeCalled();
         $redisStorage->recomputeUserCounters($viewer)->shouldBeCalled();
         $this->__invoke($arguments, $viewer)->shouldBe([
             'deletedCommentId' => $commentId,
