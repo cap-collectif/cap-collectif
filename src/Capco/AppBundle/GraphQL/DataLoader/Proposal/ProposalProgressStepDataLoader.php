@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProgressStep;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Cache\RedisCache;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Cache\RedisCache;
+use Doctrine\Common\Collections\Collection;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 
 class ProposalProgressStepDataLoader extends BatchDataLoader
 {
@@ -48,10 +48,6 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
         $connections = [];
 
         foreach ($keys as $key) {
-            $this->logger->info(
-                __METHOD__ . ' called with ' . var_export($this->serializeKey($key), true)
-            );
-
             $connections[] = $this->resolve($key);
         }
 
@@ -65,7 +61,7 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
         ];
     }
 
-    private function resolve(Proposal $proposal): ProgressStep
+    private function resolve(Proposal $proposal): Collection
     {
         return $proposal->getProgressSteps();
     }
