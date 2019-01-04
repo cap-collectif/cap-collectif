@@ -10,7 +10,6 @@ import { register as onSubmit, displayChartModal } from '../../../redux/modules/
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
 import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
-import { validateResponses } from '../../../utils/responsesHelper';
 
 type Props = {|
   ...FormProps,
@@ -30,25 +29,8 @@ type Props = {|
   dispatch: Dispatch,
 |};
 
-type FormValues = {
-  username: string,
-  email: string,
-  plainPassword: string,
-  charte: string,
-  captcha: boolean,
-  responses: Array<Object>,
-  questions: Array<Object>,
-};
-
-const getCustomFieldsErrors = (values: FormValues, props: Props) =>
-  values.questions && values.responses
-    ? // TODO: remove this parameter from the function or create a specific traduction key
-      validateResponses(values.questions, values.responses, 'reply', props.intl).responses
-    : [];
-
-export const validate = (values: FormValues, props: Props) => {
+export const validate = (values: Object, props: Object) => {
   const errors = {};
-
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
   }
@@ -71,8 +53,7 @@ export const validate = (values: FormValues, props: Props) => {
   ) {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
-
-  return { ...errors, responses: getCustomFieldsErrors(values, props) };
+  return errors;
 };
 
 export const form = 'registration-form';
