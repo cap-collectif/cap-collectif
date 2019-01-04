@@ -1,44 +1,42 @@
 <?php
-
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\Form;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Proposal;
+use Symfony\Component\Form\FormFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\ProposalComment;
+use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Repository\CommentRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Mutation\DeleteCommentMutation;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DeleteCommentMutationSpec extends ObjectBehavior
 {
-    public function let(
+    function let(
         EntityManagerInterface $em,
         CommentRepository $commentRepo,
         RedisStorageHelper $redisStorage,
-        LoggerInterface $logger,
-        CommentableCommentsDataLoader $commentableCommentsDataLoader
+        LoggerInterface $logger
     ) {
-        $this->beConstructedWith(
-            $em,
-            $commentRepo,
-            $redisStorage,
-            $logger,
-            $commentableCommentsDataLoader
-        );
+        $this->beConstructedWith($em, $commentRepo, $redisStorage, $logger);
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType(DeleteCommentMutation::class);
     }
 
-    public function it_returns_userError_if_not_found($commentRepo, Arg $arguments, User $viewer)
+    function it_returns_userError_if_not_found($commentRepo, Arg $arguments, User $viewer)
     {
         $arguments->offsetGet('id')->willReturn('123456');
         $commentRepo->find('123456')->willReturn(null);
@@ -52,7 +50,7 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         ]);
     }
 
-    public function it_returns_userError_if_not_author(
+    function it_returns_userError_if_not_author(
         $commentRepo,
         Arg $arguments,
         User $viewer,
@@ -73,25 +71,20 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         ]);
     }
 
-    public function it_removes_a_comment(
+    function it_removes_a_comment(
         $em,
         $commentRepo,
         $redisStorage,
-        $commentableCommentsDataLoader,
         Arg $arguments,
         User $viewer,
-        ProposalComment $comment,
-        Proposal $proposal
+        ProposalComment $comment
     ) {
-        $commentId = '123456';
-        $proposal->getId()->willReturn('012234');
         $comment->getAuthor()->willReturn($viewer);
-        $comment->getRelatedObject()->willReturn($proposal);
+        $commentId = '123456';
         $commentRepo->find('123456')->willReturn($comment);
         $arguments->offsetGet('id')->willReturn($commentId);
         $em->remove(Argument::any())->shouldBeCalled();
         $em->flush()->shouldBeCalled();
-        $commentableCommentsDataLoader->invalidate('012234')->shouldBeCalled();
         $redisStorage->recomputeUserCounters($viewer)->shouldBeCalled();
         $this->__invoke($arguments, $viewer)->shouldBe([
             'deletedCommentId' => $commentId,

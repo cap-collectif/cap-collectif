@@ -1,8 +1,6 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
@@ -16,8 +14,13 @@ use Capco\AppBundle\Entity\EventComment;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\ProposalComment;
+use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Event\CommentChangedEvent;
+use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -29,40 +32,40 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AddCommentMutation implements MutationInterface
 {
-    public const ERROR_NOT_FOUND_COMMENTABLE = 'Commentable not found.';
-    public const ERROR_NOT_COMMENTABLE = 'Can\'t add a comment to a not commentable.';
-    public const ERROR_NEW_COMMENTS_NOT_ACCEPTED = 'Comment\'s are not longer accepted';
     private $em;
     private $globalIdResolver;
     private $formFactory;
     private $logger;
     private $eventDispatcher;
-    private $commentableCommentsDataLoader;
+
+    public const ERROR_NOT_FOUND_COMMENTABLE = 'Commentable not found.';
+    public const ERROR_NOT_COMMENTABLE = 'Can\'t add a comment to a not commentable.';
+    public const ERROR_NEW_COMMENTS_NOT_ACCEPTED = 'Comment\'s are not longer accepted';
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactory $formFactory,
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
-        EventDispatcherInterface $dispatcher,
-        CommentableCommentsDataLoader $commentableCommentsDataLoader
+        EventDispatcherInterface $dispatcher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->globalIdResolver = $globalIdResolver;
         $this->logger = $logger;
         $this->eventDispatcher = $dispatcher;
-        $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
     }
 
-    public function __invoke(Arg $input, /*User|string*/ $viewer, RequestStack $requestStack): array
-    {
+    public function __invoke(
+        Arg $input,
+        /*User|string*/ $viewer,
+        RequestStack $requestStack
+    ): array {
         $commentableId = $input->offsetGet('commentableId');
         $commentable = $this->globalIdResolver->resolve($commentableId, $viewer);
 
         if (!$commentable || !$commentable instanceof CommentableInterface) {
             $this->logger->error('Unknown commentable with id: ' . $commentableId);
-
             return ['userErrors' => [['message' => self::ERROR_NOT_FOUND_COMMENTABLE]]];
         }
 
@@ -70,7 +73,6 @@ class AddCommentMutation implements MutationInterface
             $this->logger->error(
                 'Can\'t add an comment to a not commentable with id: ' . $commentableId
             );
-
             return ['userErrors' => [['message' => self::ERROR_NOT_COMMENTABLE]]];
         }
 
@@ -78,7 +80,6 @@ class AddCommentMutation implements MutationInterface
             $this->logger->error(
                 'Commentable with id: ' . $commentableId . ' doesnt accept new comments.'
             );
-
             return ['userErrors' => [['message' => self::ERROR_NEW_COMMENTS_NOT_ACCEPTED]]];
         }
 
@@ -89,13 +90,13 @@ class AddCommentMutation implements MutationInterface
         }
 
         if ($relatedCommentInstance instanceof Proposal) {
-            $comment = new ProposalComment();
+            $comment = (new ProposalComment());
         }
         if ($relatedCommentInstance instanceof Event) {
-            $comment = new EventComment();
+            $comment = (new EventComment());
         }
         if ($relatedCommentInstance instanceof Post) {
-            $comment = new PostComment();
+            $comment = (new PostComment());
         }
 
         $comment
@@ -115,7 +116,7 @@ class AddCommentMutation implements MutationInterface
 
         $this->em->persist($comment);
         $this->em->flush();
-        $this->commentableCommentsDataLoader->invalidate($commentableId);
+
         $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $comment);
 
         $this->eventDispatcher->dispatch(

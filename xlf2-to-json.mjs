@@ -10,7 +10,7 @@ for (const locale of config.locales) {
     fs.writeFileSync(`translations/SonataUserBundle.${locale}.xlf`, xml);
     fs.writeFileSync(`translations/SonataCoreBundle.${locale}.xlf`, xml);
 
-    // Create messages.{locale}.json used to translate JavaScript using react-intl
+    // Create JS locale files used to translate JavaScript using react-intl
     const json = JSON.parse(parser.toJson(xml));
     let translations = {};
     if (Array.isArray(json.xliff.file.unit)) {
@@ -20,6 +20,10 @@ for (const locale of config.locales) {
         }, {});
     }
 
-    const bundlePath = `translations/messages.${locale}.json`;
-    fs.writeFileSync(bundlePath, JSON.stringify(translations, null, 2));
+    const dir = 'web/js';
+    const bundlePath = `${dir}/${locale}.js`;
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+    fs.writeFileSync(bundlePath, `window.intl_messages=${JSON.stringify(translations, null, 2)};`);
 }

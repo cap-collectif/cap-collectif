@@ -1,8 +1,6 @@
 <?php
-
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
@@ -18,33 +16,26 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Mutation\AddCommentMutation;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Capco\AppBundle\Entity\ProposalComment;
 
 class AddCommentMutationSpec extends ObjectBehavior
 {
-    public function let(
+    function let(
         EntityManagerInterface $em,
         FormFactory $formFactory,
         GlobalIdResolver $globalIdResolver,
         LoggerInterface $logger,
-        EventDispatcherInterface $dispatcher,
-        CommentableCommentsDataLoader $commentableCommentsDataLoader
+        EventDispatcherInterface $dispatcher
     ) {
-        $this->beConstructedWith(
-            $em,
-            $formFactory,
-            $globalIdResolver,
-            $logger,
-            $dispatcher,
-            $commentableCommentsDataLoader
-        );
+        $this->beConstructedWith($em, $formFactory, $globalIdResolver, $logger, $dispatcher);
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType(AddCommentMutation::class);
     }
 
-    public function it_returns_userError_if_not_found(
+    function it_returns_userError_if_not_found(
         GlobalIdResolver $globalIdResolver,
         Arg $arguments,
         User $viewer,
@@ -62,7 +53,7 @@ class AddCommentMutationSpec extends ObjectBehavior
         ]);
     }
 
-    public function it_returns_userError_if_not_commentable(
+    function it_returns_userError_if_not_commentable(
         GlobalIdResolver $globalIdResolver,
         Arg $arguments,
         User $viewer,
@@ -82,7 +73,7 @@ class AddCommentMutationSpec extends ObjectBehavior
         ]);
     }
 
-    public function it_returns_userError_if_new_comments_are_not_accepted(
+    function it_returns_userError_if_new_comments_are_not_accepted(
         GlobalIdResolver $globalIdResolver,
         Arg $arguments,
         User $viewer,
@@ -103,8 +94,7 @@ class AddCommentMutationSpec extends ObjectBehavior
         ]);
     }
 
-    public function it_persists_new_comment(
-        $commentableCommentsDataLoader,
+    function it_persists_new_comment(
         EntityManagerInterface $em,
         FormFactory $formFactory,
         GlobalIdResolver $globalIdResolver,
@@ -116,15 +106,15 @@ class AddCommentMutationSpec extends ObjectBehavior
         Request $request,
         Form $form
     ) {
-        $formData = ['body' => 'My body'];
+        $formData = ["body" => "My body"];
         $form->submit($formData, false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $formFactory
-            ->create('Capco\\AppBundle\\Form\\CommentType', Argument::any())
+            ->create("Capco\AppBundle\Form\CommentType", Argument::any())
             ->willReturn($form);
         $arguments->getRawArguments()->willReturn($formData);
         $commentable
-            ->addComment(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))
+            ->addComment(Argument::type("Capco\AppBundle\Entity\ProposalComment"))
             ->willReturn($commentable);
 
         $request->getClientIp()->willReturn('1.1.1.1');
@@ -135,13 +125,12 @@ class AddCommentMutationSpec extends ObjectBehavior
         $arguments->offsetGet('commentableId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($commentable);
 
-        $em->persist(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))->shouldBeCalled();
+        $em->persist(Argument::type("Capco\AppBundle\Entity\ProposalComment"))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
-        $commentableCommentsDataLoader->invalidate('123456')->shouldBeCalled();
         $dispatcher
             ->dispatch(
-                'capco.comment_changed',
-                Argument::type('Capco\\AppBundle\\Event\\CommentChangedEvent')
+                "capco.comment_changed",
+                Argument::type("Capco\AppBundle\Event\CommentChangedEvent")
             )
             ->shouldBeCalled();
 

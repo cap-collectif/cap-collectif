@@ -1,0 +1,22 @@
+Capco\AppBundle\Entity\FooterSocialNetwork:
+  FooterSocialNetwork1:
+    title: Facebook
+    link: http://facebook.com
+    position: 1
+    isEnabled: false
+    style: facebook
+
+  FooterSocialNetwork2:
+    title: Twitter
+    link: https://twitter.com/CapCollectif
+    position: 2
+    isEnabled: true
+    style: twitter
+
+  FooterSocialNetwork3:
+    title: Linkedin
+    link: http://linkedin.com
+    position: 3
+    isEnabled: false
+    style: linkedin
+

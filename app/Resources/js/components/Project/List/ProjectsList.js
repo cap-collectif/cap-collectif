@@ -65,47 +65,45 @@ class ProjectsList extends React.Component<Props> {
   render() {
     const { author, orderBy, type, theme, term, limit, status } = this.initialRenderVars;
     return (
-      <div className="flex-wrap">
-        <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query ProjectsListQuery(
-              $author: ID
-              $count: Int
-              $cursor: String
-              $theme: ID
-              $orderBy: ProjectOrder
-              $type: ID
-              $term: String
-              $status: ID
-            ) {
-              ...ProjectListView_query
-                @arguments(
-                  theme: $theme
-                  orderBy: $orderBy
-                  author: $author
-                  type: $type
-                  term: $term
-                  status: $status
-                  count: $count
-                )
-            }
-          `}
-          variables={{
-            orderBy: {
-              field: orderBy,
-              direction: 'ASC',
-            },
-            author,
-            type,
-            theme,
-            term,
-            count: limit,
-            status,
-          }}
-          render={this.renderProjectList}
-        />
-      </div>
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query ProjectsListQuery(
+            $author: ID
+            $count: Int
+            $cursor: String
+            $theme: ID
+            $orderBy: ProjectOrder
+            $type: ID
+            $term: String
+            $status: ID
+          ) {
+            ...ProjectListView_query
+              @arguments(
+                theme: $theme
+                orderBy: $orderBy
+                author: $author
+                type: $type
+                term: $term
+                status: $status
+                count: $count
+              )
+          }
+        `}
+        variables={{
+          orderBy: {
+            field: orderBy,
+            direction: 'ASC',
+          },
+          author,
+          type,
+          theme,
+          term,
+          count: limit,
+          status,
+        }}
+        render={this.renderProjectList}
+      />
     );
   }
 }

@@ -28,15 +28,17 @@ export class ProjectListViewPaginated extends React.Component<Props, State> {
     if (query.projects && query.projects.edges) {
       if (query.projects.edges.length > 0) {
         return (
-          <div className="d-flex flex-wrap">
-            {query.projects.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map((node, index) => (
-                /* $FlowFixMe $fragmentRefs */
-                <ProjectPreview key={index} project={node} />
-              ))}
+          <div>
+            <div className="d-flex flex-wrap">
+              {query.projects.edges
+                .filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map((node, index) => (
+                  /* $FlowFixMe $fragmentRefs */
+                  <ProjectPreview key={index} project={node} />
+                ))}
+            </div>
             {paginate && relay.hasMore() && (
               <Button
                 className="see-more-projects-button ml-15"
