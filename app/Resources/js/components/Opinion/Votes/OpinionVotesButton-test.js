@@ -2,13 +2,22 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { $refType } from '../../../mocks';
+import { $refType, $fragmentRefs } from '../../../mocks';
 import { OpinionVotesButton } from './OpinionVotesButton';
 import {
   VOTE_WIDGET_DISABLED,
   VOTE_WIDGET_SIMPLE,
   VOTE_WIDGET_BOTH,
 } from '../../../constants/VoteConstants';
+
+const defaultStep = {
+  $fragmentRefs,
+  id: '1',
+  requirements: {
+    reason: 'On recolte les données',
+    viewerMeetsTheRequirements: true,
+  },
+};
 
 describe('<OpinionVotesButton />', () => {
   const defaultProps = {
@@ -20,9 +29,8 @@ describe('<OpinionVotesButton />', () => {
     id: '1',
     contribuable: true,
     viewerVote: null,
-    section: {
-      voteWidgetType: VOTE_WIDGET_BOTH,
-    },
+    section: { voteWidgetType: VOTE_WIDGET_BOTH },
+    step: defaultStep,
   };
 
   const opinionVoteSimple = {
@@ -32,6 +40,7 @@ describe('<OpinionVotesButton />', () => {
     contribuable: true,
     viewerVote: null,
     section: { voteWidgetType: VOTE_WIDGET_SIMPLE },
+    step: defaultStep,
   };
 
   const opinionVoteDisabled = {
@@ -41,6 +50,7 @@ describe('<OpinionVotesButton />', () => {
     contribuable: true,
     viewerVote: null,
     section: { voteWidgetType: VOTE_WIDGET_DISABLED },
+    step: defaultStep,
   };
 
   it('should render a green button when value is 1 and vote type is both', () => {
