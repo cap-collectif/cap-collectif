@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
@@ -20,6 +21,7 @@ use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddOpinionVoteMutation implements MutationInterface
 {
@@ -29,6 +31,7 @@ class AddOpinionVoteMutation implements MutationInterface
     private $opinionVoteRepo;
     private $versionRepo;
     private $versionVoteRepo;
+    private $stepRequirementsResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -36,7 +39,8 @@ class AddOpinionVoteMutation implements MutationInterface
         OpinionRepository $opinionRepo,
         OpinionVoteRepository $opinionVoteRepo,
         OpinionVersionRepository $versionRepo,
-        OpinionVersionVoteRepository $versionVoteRepo
+        OpinionVersionVoteRepository $versionVoteRepo,
+        StepRequirementsResolver $stepRequirementsResolver
     ) {
         $this->em = $em;
         $this->validator = $validator;
@@ -44,6 +48,7 @@ class AddOpinionVoteMutation implements MutationInterface
         $this->opinionVoteRepo = $opinionVoteRepo;
         $this->versionRepo = $versionRepo;
         $this->versionVoteRepo = $versionVoteRepo;
+        $this->stepRequirementsResolver = $stepRequirementsResolver;
     }
 
     public function __invoke(Argument $input, User $viewer, RequestStack $requestStack): array
@@ -65,6 +70,10 @@ class AddOpinionVoteMutation implements MutationInterface
 
         if (!$contribution->canContribute($viewer)) {
             throw new UserError('Uncontribuable opinion.');
+        }
+
+        if (!$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($viewer, $step)) {
+            throw new UserError('You dont meets all the requirements.');
         }
 
         $voteValue = $input->offsetGet('value');
