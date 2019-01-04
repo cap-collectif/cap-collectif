@@ -5,7 +5,9 @@ exports[`<ProposalVotes /> should render correctly proposal votes 1`] = `
   <div
     className="proposal__votes"
   >
-    <h2>
+    <h3
+      className="mb-20"
+    >
       <FormattedMessage
         id="proposal.vote.count"
         values={
@@ -14,7 +16,7 @@ exports[`<ProposalVotes /> should render correctly proposal votes 1`] = `
           }
         }
       />
-    </h2>
+    </h3>
     <Row
       bsClass="row"
       componentClass="div"
