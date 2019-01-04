@@ -17,7 +17,6 @@ import component from '../../Form/Field';
 import AddArgumentMutation from '../../../mutations/AddArgumentMutation';
 import type { State, Dispatch } from '../../../types';
 import type { ArgumentCreate_argumentable } from './__generated__/ArgumentCreate_argumentable.graphql';
-import RequirementsFormModal from '../../Requirements/RequirementsModal';
 
 type FormValues = { body: ?string };
 type FormValidValues = { body: string };
@@ -31,10 +30,6 @@ type Props = {|
   form: string,
   dispatch: Dispatch,
 |};
-
-type LocalState = {
-  openModal: boolean,
-};
 
 const onSubmit = (
   values: FormValidValues,
@@ -85,31 +80,12 @@ const validate = ({ body }: FormValues) => {
   return errors;
 };
 
-export class ArgumentCreate extends React.Component<Props, LocalState> {
-  state = { openModal: false };
-
-  openModal = () => {
-    this.setState({ openModal: true });
-  };
-
-  closeModal = () => {
-    this.setState({ openModal: false });
-  };
-
+export class ArgumentCreate extends React.Component<Props> {
   render() {
     const { user, argumentable, type, dispatch, form, submitting, error } = this.props;
-    const { openModal } = this.state;
     const disabled = !argumentable.contribuable || !user;
     return (
       <div className="opinion__body box">
-        {argumentable.step /* $FlowFixMe */ && (
-          <RequirementsFormModal
-            step={argumentable.step}
-            reason={argumentable.step.requirements.reason}
-            handleClose={this.closeModal}
-            show={openModal}
-          />
-        )}
         <div className="opinion__data">
           <form id={`argument-form--${type}`}>
             {error && (
@@ -147,14 +123,6 @@ export class ArgumentCreate extends React.Component<Props, LocalState> {
               <Button
                 disabled={submitting}
                 onClick={() => {
-                  if (
-                    argumentable.step &&
-                    argumentable.step.requirements &&
-                    !argumentable.step.requirements.viewerMeetsTheRequirements
-                  ) {
-                    this.openModal();
-                    return;
-                  }
                   dispatch(submit(form));
                 }}
                 bsStyle="primary">
@@ -184,26 +152,6 @@ export default createFragmentContainer(container, {
     fragment ArgumentCreate_argumentable on Argumentable {
       id
       contribuable
-      ... on Opinion {
-        step {
-          ...RequirementsForm_step
-          id
-          requirements {
-            viewerMeetsTheRequirements
-            reason
-          }
-        }
-      }
-      ... on Version {
-        step {
-          ...RequirementsForm_step
-          id
-          requirements {
-            viewerMeetsTheRequirements
-            reason
-          }
-        }
-      }
     }
   `,
 });

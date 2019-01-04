@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\GraphQL\Resolver\Commentable\CommentableCommentsResolver;
+use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -19,20 +19,20 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
     private $normalizer;
     private $proposalSelectionVoteRepository;
     private $proposalCollectVoteRepository;
-    private $commentableCommentsResolver;
+    private $commentableCommentsDataLoader;
     private $tokenStorage;
 
     public function __construct(
         ObjectNormalizer $normalizer,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        CommentableCommentsResolver $commentableCommentsResolver,
+        CommentableCommentsDataLoader $commentableCommentsDataLoader,
         TokenStorageInterface $tokenStorage
     ) {
         $this->normalizer = $normalizer;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->commentableCommentsResolver = $commentableCommentsResolver;
+        $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -71,7 +71,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
                 'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
                 'first' => 0,
             ]);
-            $commentsConnection = $this->commentableCommentsResolver->__invoke(
+            $commentsConnection = $this->commentableCommentsDataLoader->resolve(
                 $object,
                 $args,
                 $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null

@@ -6189,7 +6189,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   # Explenation.
   comment: String
-  step: Consultation!
   votes(
     # Returns the elements in the list that come after the specified cursor.
     after: String

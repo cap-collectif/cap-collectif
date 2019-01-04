@@ -38,8 +38,6 @@ Version:
       comment:
         type: 'String'
         description: 'Explenation.'
-      step:
-        type: 'InternalConsultation!'
       votes:
         type: 'YesNoPairedVoteConnection!'
         argsBuilder: 'Relay::Connection'

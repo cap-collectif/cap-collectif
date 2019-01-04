@@ -359,7 +359,7 @@ class StepController extends Controller
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={
      *    "mapping": {"projectSlug": "slug"},
      *    "repository_method"="getOneWithoutVisibility",
-     *    "map_method_signature" = true
+     *    "map_method_signature"=true
      * })
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={
      *    "mapping": {"stepSlug": "slug"},

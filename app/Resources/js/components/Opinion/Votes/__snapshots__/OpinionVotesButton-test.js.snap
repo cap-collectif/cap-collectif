@@ -11,144 +11,93 @@ exports[`<OpinionVotesButton /> should not render a button when value is 0 and v
 exports[`<OpinionVotesButton /> should not render a button when value is 1 and vote type is disabled 1`] = `""`;
 
 exports[`<OpinionVotesButton /> should render a green button when value is 1 and vote type is both 1`] = `
-<div>
-  <RequirementsModal
-    handleClose={[Function]}
-    reason="On recolte les données"
-    show={false}
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "id": "1",
-        "requirements": Object {
-          "reason": "On recolte les données",
-          "viewerMeetsTheRequirements": true,
-        },
-      }
-    }
-  />
-  <Connect(LoginOverlay)>
-    <Button
-      active={null}
-      aria-label={
-        <FormattedMessage
-          id="vote.aria_label.ok"
-          values={Object {}}
-        />
-      }
-      block={false}
-      bsClass="btn"
-      bsStyle="success"
-      className="btn--outline"
-      disabled={false}
-      onClick={[Function]}
-      style={Object {}}
-    >
-      <i
-        className="cap cap-hand-like-2-1"
-      />
-       
+<Connect(LoginOverlay)>
+  <Button
+    active={null}
+    aria-label={
       <FormattedMessage
-        id="vote.ok"
+        id="vote.aria_label.ok"
         values={Object {}}
       />
-    </Button>
-  </Connect(LoginOverlay)>
-</div>
+    }
+    block={false}
+    bsClass="btn"
+    bsStyle="success"
+    className="btn--outline"
+    disabled={false}
+    onClick={[Function]}
+    style={Object {}}
+  >
+    <i
+      className="cap cap-hand-like-2-1"
+    />
+     
+    <FormattedMessage
+      id="vote.ok"
+      values={Object {}}
+    />
+  </Button>
+</Connect(LoginOverlay)>
 `;
 
 exports[`<OpinionVotesButton /> should render a green button when value is 1 and vote type is simple 1`] = `""`;
 
 exports[`<OpinionVotesButton /> should render a red button when value is -1 and vote type is both 1`] = `
-<div>
-  <RequirementsModal
-    handleClose={[Function]}
-    reason="On recolte les données"
-    show={false}
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "id": "1",
-        "requirements": Object {
-          "reason": "On recolte les données",
-          "viewerMeetsTheRequirements": true,
-        },
-      }
-    }
-  />
-  <Connect(LoginOverlay)>
-    <Button
-      active={null}
-      aria-label={
-        <FormattedMessage
-          id="vote.aria_label.nok"
-          values={Object {}}
-        />
-      }
-      block={false}
-      bsClass="btn"
-      bsStyle="danger"
-      className="btn--outline"
-      disabled={false}
-      onClick={[Function]}
-      style={Object {}}
-    >
-      <i
-        className="cap cap-hand-unlike-2-1"
-      />
-       
+<Connect(LoginOverlay)>
+  <Button
+    active={null}
+    aria-label={
       <FormattedMessage
-        id="vote.nok"
+        id="vote.aria_label.nok"
         values={Object {}}
       />
-    </Button>
-  </Connect(LoginOverlay)>
-</div>
+    }
+    block={false}
+    bsClass="btn"
+    bsStyle="danger"
+    className="btn--outline"
+    disabled={false}
+    onClick={[Function]}
+    style={Object {}}
+  >
+    <i
+      className="cap cap-hand-unlike-2-1"
+    />
+     
+    <FormattedMessage
+      id="vote.nok"
+      values={Object {}}
+    />
+  </Button>
+</Connect(LoginOverlay)>
 `;
 
 exports[`<OpinionVotesButton /> should render an orange button when value is 0 and vote type is both 1`] = `
-<div>
-  <RequirementsModal
-    handleClose={[Function]}
-    reason="On recolte les données"
-    show={false}
-    step={
-      Object {
-        "$fragmentRefs": null,
-        "id": "1",
-        "requirements": Object {
-          "reason": "On recolte les données",
-          "viewerMeetsTheRequirements": true,
-        },
-      }
-    }
-  />
-  <Connect(LoginOverlay)>
-    <Button
-      active={null}
-      aria-label={
-        <FormattedMessage
-          id="vote.aria_label.mitige"
-          values={Object {}}
-        />
-      }
-      block={false}
-      bsClass="btn"
-      bsStyle="warning"
-      className="btn--outline"
-      disabled={false}
-      onClick={[Function]}
-      style={Object {}}
-    >
-      <i
-        className="cap cap-hand-like-2 icon-rotate"
-      />
-       
+<Connect(LoginOverlay)>
+  <Button
+    active={null}
+    aria-label={
       <FormattedMessage
-        id="vote.mitige"
+        id="vote.aria_label.mitige"
         values={Object {}}
       />
-    </Button>
-  </Connect(LoginOverlay)>
-</div>
+    }
+    block={false}
+    bsClass="btn"
+    bsStyle="warning"
+    className="btn--outline"
+    disabled={false}
+    onClick={[Function]}
+    style={Object {}}
+  >
+    <i
+      className="cap cap-hand-like-2 icon-rotate"
+    />
+     
+    <FormattedMessage
+      id="vote.mitige"
+      values={Object {}}
+    />
+  </Button>
+</Connect(LoginOverlay)>
 `;

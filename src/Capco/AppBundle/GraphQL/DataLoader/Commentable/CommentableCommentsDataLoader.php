@@ -78,20 +78,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
-    protected function serializeKey($key)
-    {
-        if (\is_string($key)) {
-            return $key;
-        }
-
-        return [
-            'commentableId' => $key['commentable']->getId(),
-            'isAdmin' => $key['viewer'] ? $key['viewer']->isAdmin() : false,
-            'args' => $key['args'],
-        ];
-    }
-
-    private function resolve(CommentableInterface $commentable, Argument $args, $viewer): Connection
+    public function resolve(CommentableInterface $commentable, Argument $args, $viewer): Connection
     {
         /** @var ProposalCommentRepository $repository */
         $repository = $this->getCommentableRepository($commentable);
@@ -126,6 +113,19 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         $connection->{'totalCountWithAnswers'} = $totalCountWithAnswers;
 
         return $connection;
+    }
+
+    protected function serializeKey($key)
+    {
+        if (\is_string($key)) {
+            return $key;
+        }
+
+        return [
+            'commentableId' => $key['commentable']->getId(),
+            'isAdmin' => $key['viewer'] ? $key['viewer']->isAdmin() : false,
+            'args' => $key['args'],
+        ];
     }
 
     private function getCommentableRepository(CommentableInterface $commentable): EntityRepository
