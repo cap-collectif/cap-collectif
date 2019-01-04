@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
@@ -80,8 +81,16 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         User $viewer,
         ProposalComment $comment
     ) {
-        $comment->getAuthor()->willReturn($viewer);
+        $commentable = new EventComment();
+        $commentableId = '543321';
         $commentId = '123456';
+
+        $comment->getAuthor()->willReturn($viewer);
+        $comment->getRelated()->willReturn($commentable);
+        $comment
+            ->getRelatedObject()
+            ->getId()
+            ->willReturn($commentableId);
         $commentRepo->find('123456')->willReturn($comment);
         $arguments->offsetGet('id')->willReturn($commentId);
         $em->remove(Argument::any())->shouldBeCalled();
