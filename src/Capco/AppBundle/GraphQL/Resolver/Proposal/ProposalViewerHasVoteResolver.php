@@ -8,19 +8,19 @@ use Capco\AppBundle\Entity\Proposal;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVotesDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 
 class ProposalViewerHasVoteResolver implements ResolverInterface
 {
     private $logger;
-    private $proposalViewerHasVotesDataLoader;
+    private $proposalViewerHasVoteDataLoader;
 
     public function __construct(
-        ProposalViewerHasVotesDataLoader $proposalViewerHasVotesDataLoader,
+        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         LoggerInterface $logger
     ) {
         $this->logger = $logger;
-        $this->proposalViewerHasVotesDataLoader = $proposalViewerHasVotesDataLoader;
+        $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
     }
 
     public function __invoke(Proposal $proposal, Arg $args, User $user): Promise
@@ -28,7 +28,7 @@ class ProposalViewerHasVoteResolver implements ResolverInterface
         try {
             $stepId = $args->offsetGet('step');
 
-            return $this->proposalViewerHasVotesDataLoader->load(
+            return $this->proposalViewerHasVoteDataLoader->load(
                 compact('proposal', 'stepId', 'user')
             );
         } catch (\RuntimeException $exception) {

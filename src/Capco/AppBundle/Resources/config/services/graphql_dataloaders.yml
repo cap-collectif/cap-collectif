@@ -51,20 +51,14 @@ services:
       $cachePrefix: StepVotesCountDataLoader
       $cacheTtl: 60
 
-  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader:
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader:
     autowire: true
     arguments:
-      $cachePrefix: ProposalAuthorDataLoader
+      $cachePrefix: ProposalViewerVoteDataLoader
       $cacheTtl: 60
 
-  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVotesDataLoader:
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader:
     autowire: true
     arguments:
-      $cachePrefix: ProposalViewerVotesDataLoader
-      $cacheTtl: 60
-
-  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVotesDataLoader:
-    autowire: true
-    arguments:
-      $cachePrefix: ProposalViewerHasVotesDataLoader
+      $cachePrefix: ProposalViewerHasVoteDataLoader
       $cacheTtl: 60

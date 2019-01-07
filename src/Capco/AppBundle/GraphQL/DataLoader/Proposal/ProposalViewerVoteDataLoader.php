@@ -16,7 +16,7 @@ use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 
-class ProposalViewerVotesDataLoader extends BatchDataLoader
+class ProposalViewerVoteDataLoader extends BatchDataLoader
 {
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
@@ -46,11 +46,10 @@ class ProposalViewerVotesDataLoader extends BatchDataLoader
         );
     }
 
-    // public function invalidate(Proposal $proposal): void
-    // {
-    //     // TODO
-    //     $this->invalidateAll();
-    // }
+    public function invalidate(Proposal $proposal): void
+    {
+        $this->cache->invalidateTags([$proposal->getId()]);
+    }
 
     public function all(array $keys)
     {
@@ -61,6 +60,11 @@ class ProposalViewerVotesDataLoader extends BatchDataLoader
         }
 
         return $this->getPromiseAdapter()->createAll($connections);
+    }
+
+    protected function getCacheTag($key): array
+    {
+        return [$key['proposal']->getId()];
     }
 
     protected function serializeKey($key): array
