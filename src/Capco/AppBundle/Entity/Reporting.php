@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CreatableInterface;
@@ -22,13 +23,11 @@ class Reporting implements CreatableInterface
     const SIGNALEMENT_OFF = 1;
     const SIGNALEMENT_SPAM = 2;
     const SIGNALEMENT_ERROR = 3;
-    const SIGNALEMENT_OFF_TOPIC = 4;
 
     public static $statusesLabels = [
         self::SIGNALEMENT_SPAM => 'reporting.status.spam',
         self::SIGNALEMENT_OFF => 'reporting.status.offending',
         self::SIGNALEMENT_ERROR => 'reporting.status.error',
-        self::SIGNALEMENT_OFF_TOPIC => 'reporting.status.off_topic',
         self::SIGNALEMENT_SEX => 'reporting.status.sexual',
     ];
 
@@ -255,15 +254,20 @@ class Reporting implements CreatableInterface
     {
         if (null !== $this->Opinion) {
             return $this->Opinion;
-        } elseif (null !== $this->Source) {
+        }
+        if (null !== $this->Source) {
             return $this->Source;
-        } elseif (null !== $this->Argument) {
+        }
+        if (null !== $this->Argument) {
             return $this->Argument;
-        } elseif (null !== $this->Comment) {
+        }
+        if (null !== $this->Comment) {
             return $this->Comment;
-        } elseif (null !== $this->opinionVersion) {
+        }
+        if (null !== $this->opinionVersion) {
             return $this->opinionVersion;
-        } elseif (null !== $this->proposal) {
+        }
+        if (null !== $this->proposal) {
             return $this->proposal;
         }
     }

@@ -33,8 +33,7 @@ class CommentVoteButton extends React.Component<Props> {
   };
 
   renderFormOrDisabled = () => {
-    const { comment } = this.props;
-    if (comment.author && comment.author.isViewer) {
+    if (!this.props.comment.author || this.props.comment.author.isViewer) {
       return (
         <button disabled="disabled" className="btn btn-dark-gray btn-sm">
           <i className="cap-hand-like-2" /> {<FormattedMessage id="comment.vote.submit" />}
