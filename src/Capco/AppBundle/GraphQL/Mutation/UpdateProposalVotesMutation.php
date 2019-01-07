@@ -47,7 +47,7 @@ class UpdateProposalVotesMutation implements MutationInterface
     public function __invoke(Argument $input, User $user): array
     {
         $stepId = $input->offsetGet('step');
-        $step = $this->globalIdResolver->resolve($input->offsetGet('stepId'), null);
+        $step = $this->globalIdResolver->resolve($stepId, null);
 
         if (!$step) {
             throw new UserError(sprintf('Unknown step with id "%s"', $stepId));

@@ -4,6 +4,10 @@ CollectStep:
   config:
     interfaces: [Node, Step, ProposalStep, RequirementStep]
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: CollectStep
       kind:
         resolve: 'collect'
       requirements:

@@ -19,7 +19,7 @@ Scenario: GraphQL client wants note a proposal
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal8",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw4",
         "estimation": 1000,
         "likers": ["VXNlcjp1c2VyMQ==", "VXNlcjp1c2VyMg==", "VXNlcjp1c2VyMw=="]
       }

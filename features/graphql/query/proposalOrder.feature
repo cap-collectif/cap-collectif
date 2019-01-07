@@ -1,4 +1,4 @@
-@proposals
+@proposals @dev
 Feature: Proposal Order By
 
 @elasticsearch
@@ -34,43 +34,43 @@ Scenario: GraphQL client want to order proposals by COMMENTS
               "edges":[
                  {
                   "node": {
-                    "id": "proposal1",
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
                     "commentsCount": 20
                   }
                 },
                 {
                   "node": {
-                    "id": "proposal35",
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
                     "commentsCount": 7
                   }
                 },
                 {
                   "node": {
-                    "id": "proposal10",
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
                     "commentsCount": 0
                   }
                 },
                 {
                   "node": {
-                    "id": "proposal11",
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
                     "commentsCount": 0
                   }
                 },
                 {
                   "node": {
-                    "id": "proposal2",
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
                     "commentsCount": 0
                   }
                 },
                 {
                   "node": {
-                    "id": "proposal3",
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
                     "commentsCount": 0
                   }
                 },
                 {
                   "node": {
-                    "id": "proposal4",
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
                     "commentsCount": 0
                   }
                 }

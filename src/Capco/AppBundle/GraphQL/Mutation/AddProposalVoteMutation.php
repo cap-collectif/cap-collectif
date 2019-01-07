@@ -12,8 +12,9 @@ use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
-use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -77,9 +78,8 @@ class AddProposalVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user, RequestStack $request): array
     {
-        $proposal = $this->globalIdResolver->resolve($input->offsetGet('proposalId'), '.anon');
-
-        $step = $this->globalIdResolver->resolve($input->offsetGet('stepId'), '.anon');
+        $proposal = $this->globalIdResolver->resolve($input->offsetGet('proposalId'), $user);
+        $step = $this->globalIdResolver->resolve($input->offsetGet('stepId'), $user);
 
         if (!$proposal) {
             throw new UserError('Unknown proposal with id: ' . $input->offsetGet('proposalId'));
@@ -87,7 +87,7 @@ class AddProposalVoteMutation implements MutationInterface
         if (!$step) {
             throw new UserError('Unknown step with id: ' . $input->offsetGet('stepId'));
         }
-
+        /** @var AbstractStep $step */
         if (!$this->resolver->viewerMeetsTheRequirementsResolver($user, $step)) {
             throw new UserError('You dont meets all the requirements.');
         }

@@ -5,6 +5,10 @@ SelectionStep:
     interfaces: [Node, Step, ProposalStep, RequirementStep]
     description: 'A budget contribution'
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: SelectionStep
       kind:
         resolve: 'selection'
       position:

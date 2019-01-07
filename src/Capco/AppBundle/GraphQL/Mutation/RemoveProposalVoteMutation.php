@@ -8,6 +8,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -42,7 +43,8 @@ class RemoveProposalVoteMutation implements MutationInterface
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
-        Indexer $indexer
+        Indexer $indexer,
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->em = $em;
         $this->stepRepo = $stepRepo;
@@ -53,13 +55,14 @@ class RemoveProposalVoteMutation implements MutationInterface
         $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
         $this->indexer = $indexer;
+        $this->globalIdResolver = $globalIdResolver;
         $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
     }
 
     public function __invoke(Argument $input, User $user): array
     {
-        $proposal = $this->proposalRepo->find($input->offsetGet('proposalId'));
-        $step = $this->stepRepo->find($input->offsetGet('stepId'));
+        $proposal = $this->globalIdResolver->resolve($input->offsetGet('proposalId'), $user);
+        $step = $this->globalIdResolver->resolve($input->offsetGet('stepId'), $user);
 
         if (!$proposal) {
             throw new UserError('Unknown proposal with id: ' . $input->offsetGet('proposalId'));

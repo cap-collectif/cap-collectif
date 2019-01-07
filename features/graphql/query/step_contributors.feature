@@ -78,7 +78,7 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
       }
     }",
     "variables": {
-      "collectStep": "collectstep1"
+      "collectStep": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx"
     }
   }
   """
@@ -131,7 +131,7 @@ Scenario: GraphQL client want to get the list of contributors of a selectionStep
       }
     }",
     "variables": {
-      "selectionStep": "selectionstep1"
+      "selectionStep": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
     }
   }
   """

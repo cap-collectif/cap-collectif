@@ -21,7 +21,7 @@ Scenario: GraphQL client wants to get list of draft proposals
       }
     }",
     "variables": {
-      "stepId": "collectstep1"
+      "stepId": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx"
     }
   }
   """

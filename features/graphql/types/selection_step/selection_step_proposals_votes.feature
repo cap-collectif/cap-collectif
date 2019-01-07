@@ -31,7 +31,7 @@ Scenario: Admin wants to get votes for a proposal in a selection step
       }
     }",
     "variables": {
-      "selectionStepId": "selectionstep1",
+      "selectionStepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
       "count": 3
     }
   }
@@ -41,7 +41,7 @@ Scenario: Admin wants to get votes for a proposal in a selection step
   {
     "data": {
         "selectionStep": {
-            "id": "selectionstep1",
+            "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
             "proposals": {
                 "totalCount": 3,
                 "edges": [

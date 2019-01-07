@@ -28,6 +28,10 @@ Proposal:
         UniformResourceAdminLocatable,
       ]
     fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Proposal
       url:
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalUrlResolver", [value])'
       adminUrl:

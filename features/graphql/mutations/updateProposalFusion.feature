@@ -22,8 +22,8 @@ Scenario: GraphQL client wants to update a fusion
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal1",
-        "fromProposals": ["proposal2", "proposal3"]
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwy", "UHJvcG9zYWw6cHJvcG9zYWwz"]
       }
     }
   }
@@ -34,13 +34,13 @@ Scenario: GraphQL client wants to update a fusion
     "data": {
       "updateProposalFusion": {
         "proposal": {
-          "id": "proposal1",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
           "mergedFrom": [
             {
-              "id": "proposal2"
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
             },
             {
-              "id": "proposal3"
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwz"
             }
           ]
         },
@@ -67,8 +67,8 @@ Scenario: GraphQL client wants to update a fusion
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal1",
-        "fromProposals": ["proposal3", "proposal4"]
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwz", "UHJvcG9zYWw6cHJvcG9zYWw0"]
       }
     }
   }
@@ -79,19 +79,19 @@ Scenario: GraphQL client wants to update a fusion
     "data": {
       "updateProposalFusion": {
         "proposal": {
-          "id": "proposal1",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
           "mergedFrom": [
             {
-              "id": "proposal3"
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwz"
             },
             {
-              "id": "proposal4"
+              "id": "UHJvcG9zYWw6cHJvcG9zYWw0"
             }
           ]
         },
         "removedMergedFrom": [
           {
-            "id": "proposal2"
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
           }
         ]
       }

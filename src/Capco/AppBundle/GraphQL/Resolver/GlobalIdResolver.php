@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Utils\Str;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Comment;
@@ -57,15 +56,13 @@ class GlobalIdResolver
         }
 
         // We try to decode the global id
-        $decodeGlobalId = Str::isBase64($uuidOrGlobalId)
-            ? GlobalId::fromGlobalId($uuidOrGlobalId)
-            : false;
+        $decodeGlobalId = self::isGlobalId($uuidOrGlobalId);
+        $this->container->get('logger')->info(str_repeat('*', 150));
+        $this->container->get('logger')->info('GlobalIdResolver : ');
+        $this->container->get('logger')->debug(json_encode($decodeGlobalId));
+        $this->container->get('logger')->debug(json_encode($uuidOrGlobalId));
 
-        if (
-            $decodeGlobalId &&
-            isset($decodeGlobalId['type'], $decodeGlobalId['id']) &&
-            null !== $decodeGlobalId['id']
-        ) {
+        if (\is_array($decodeGlobalId)) {
             // Good news, it's a GraphQL Global id !
             $uuid = $decodeGlobalId['id'];
             $node = null;
@@ -119,7 +116,7 @@ class GlobalIdResolver
             }
 
             if (!$node) {
-                $error = 'Could not resolve node with id ' . $uuid;
+                $error = 'Could not resolve node with globalId ' . $uuid;
                 $this->container->get('logger')->warning($error);
 
                 return null;
@@ -175,13 +172,27 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $error = "Could not resolve node with id ${uuid}";
+            $error = "Could not resolve node with uuid ${uuid}";
             $this->container->get('logger')->warning($error);
 
             throw new UserError($error);
         }
 
         return $this->viewerCanSee($node, $user) ? $node : null;
+    }
+
+    public static function isGlobalId(string $uuidOrGlobalId)
+    {
+        // We try to decode the global id
+        $decodeGlobalId = GlobalId::fromGlobalId($uuidOrGlobalId);
+        if (
+            isset($decodeGlobalId['type'], $decodeGlobalId['id']) &&
+            null !== $decodeGlobalId['id']
+        ) {
+            return $decodeGlobalId;
+        }
+
+        return $uuidOrGlobalId;
     }
 
     public function resolveByModerationToken(string $token): ModerableInterface

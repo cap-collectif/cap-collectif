@@ -19,7 +19,7 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
     }",
     "variables": {
       "input": {
-        "id": "proposal2",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "title": "Achetez un DOP à la madeleine",
         "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
         "responses": [
@@ -50,7 +50,7 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
     "data": {
       "changeProposalContent": {
         "proposal": {
-          "id": "proposal2",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "title": "Achetez un DOP à la madeleine",
           "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
           "publicationStatus": "PUBLISHED"
@@ -60,7 +60,7 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
   }
   """
   Then the queue associated to "proposal_update" producer has messages below:
-  | 0 | {"proposalId": "proposal2"} |
+  | 0 | {"proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy"} |
 
 @database
 Scenario: GraphQL client wants to edit his proposal
@@ -80,7 +80,7 @@ Scenario: GraphQL client wants to edit his proposal
     }",
     "variables": {
       "input": {
-        "id": "proposal2",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "title": "Acheter un sauna par personne pour Capco",
         "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit",
         "responses": [
@@ -111,7 +111,7 @@ Scenario: GraphQL client wants to edit his proposal
     "data": {
       "changeProposalContent": {
         "proposal": {
-          "id": "proposal2",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "title": "Acheter un sauna par personne pour Capco",
           "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit",
           "publicationStatus": "PUBLISHED"
@@ -148,7 +148,7 @@ Scenario: GraphQL client wants to edit his proposal
     }",
     "variables": {
       "input": {
-        "id": "proposal2",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "title": "New title",
         "body": "New body",
         "category": "pCategory3",
@@ -180,7 +180,7 @@ Scenario: GraphQL client wants to edit his proposal
     "data": {
       "changeProposalContent": {
         "proposal": {
-          "id": "proposal2",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "title": "New title",
           "body": "New body",
           "publicationStatus": "PUBLISHED",
@@ -264,7 +264,7 @@ Scenario: Super Admin GraphQL client wants to update a proposal
             "medias": ["media1"]
           }
         ],
-        "id": "proposal2"
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
       }
     }
   }
@@ -275,7 +275,7 @@ Scenario: Super Admin GraphQL client wants to update a proposal
     "data": {
       "changeProposalContent":{
         "proposal":{
-          "id":"proposal2",
+          "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
           "title":"NewTitle",
           "body":"NewBody",
           "author":{"_id":"user5"},
@@ -313,7 +313,7 @@ Scenario: GraphQL client wants to edit his proposal without required response
     }",
     "variables": {
       "input": {
-        "id": "proposal2",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "responses": [
           {
             "question": "1",

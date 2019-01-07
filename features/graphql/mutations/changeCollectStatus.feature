@@ -18,7 +18,7 @@ Scenario: GraphQL client wants to change proposal collect status
       }",
       "variables": {
         "input": {
-          "proposalId": "proposal2",
+          "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "statusId": "status3"
         }
       }
