@@ -41,6 +41,7 @@ class AddProposalVoteMutation implements MutationInterface
     private $proposalViewerHasVoteDataLoader;
     private $viewerProposalVotesDataLoader;
     private $indexer;
+    private $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -55,7 +56,8 @@ class AddProposalVoteMutation implements MutationInterface
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
-        Indexer $indexer
+        Indexer $indexer,
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->em = $em;
         $this->validator = $validator;
@@ -70,12 +72,14 @@ class AddProposalVoteMutation implements MutationInterface
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
         $this->indexer = $indexer;
         $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $input, User $user, RequestStack $request): array
     {
-        $proposal = $this->proposalRepo->find($input->offsetGet('proposalId'));
-        $step = $this->stepRepo->find($input->offsetGet('stepId'));
+        $proposal = $this->globalIdResolver->resolve($input->offsetGet('proposalId'), '.anon');
+
+        $step = $this->globalIdResolver->resolve($input->offsetGet('stepId'), '.anon');
 
         if (!$proposal) {
             throw new UserError('Unknown proposal with id: ' . $input->offsetGet('proposalId'));
@@ -132,7 +136,6 @@ class AddProposalVoteMutation implements MutationInterface
         $errors = $this->validator->validate($vote);
         foreach ($errors as $error) {
             $this->logger->error((string) $error->getMessage());
-
             throw new UserError((string) $error->getMessage());
         }
 

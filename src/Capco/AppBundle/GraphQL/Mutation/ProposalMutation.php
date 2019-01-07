@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Elastica\Index;
 use Swarrot\Broker\Message;
 use Psr\Log\LoggerInterface;
@@ -51,7 +50,7 @@ class ProposalMutation implements ContainerAwareInterface
         $formFactory = $this->container->get('form.factory');
 
         $values = $input->getRawArguments();
-        $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
+        $proposal = $this->getProposal($values['proposalId']);
         unset($values['proposalId']); // This only useful to retrieve the proposal
 
         $form = $formFactory->create(ProposalNotationType::class, $proposal);
@@ -73,7 +72,8 @@ class ProposalMutation implements ContainerAwareInterface
         $formFactory = $this->container->get('form.factory');
 
         $values = $input->getRawArguments();
-        $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
+        $proposal = $this->getProposal($values['proposalId']);
+
         unset($values['proposalId']);
 
         $form = $formFactory->create(ProposalEvaluersType::class, $proposal);
@@ -391,10 +391,9 @@ class ProposalMutation implements ContainerAwareInterface
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
-        $proposalRepo = $this->container->get('capco.proposal.repository');
 
         $values = $input->getRawArguments();
-        $proposal = $proposalRepo->find($values['id']);
+        $proposal = $this->getProposal($values['id']);
         // Save the previous draft status to send the good notif.
         $wasDraft = $proposal->isDraft();
 

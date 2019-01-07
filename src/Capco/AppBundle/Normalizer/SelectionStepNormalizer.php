@@ -8,17 +8,23 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
+use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
 
 class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     use SerializerAwareTrait;
     private $router;
     private $normalizer;
+    private $votesCountDataLoader;
 
-    public function __construct(UrlGeneratorInterface $router, ObjectNormalizer $normalizer)
-    {
+    public function __construct(
+        UrlGeneratorInterface $router,
+        ObjectNormalizer $normalizer,
+        StepVotesCountDataLoader $votesCountDataLoader
+    ) {
         $this->router = $router;
         $this->normalizer = $normalizer;
+        $this->votesCountDataLoader = $votesCountDataLoader;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -27,12 +33,12 @@ class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInt
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $project = $object->getProject();
         $data = $this->normalizer->normalize($object, $format, $context);
-
         if (\in_array('Steps', $groups)) {
             $counters = [];
             $counters['proposals'] = \count($object->getProposals());
+
             if ($object->isVotable()) {
-                $counters['votes'] = $object->getVotesCount();
+                $counters['votes'] = $this->votesCountDataLoader->resolve($object);
                 $counters['voters'] = $object->getContributorsCount();
             }
 

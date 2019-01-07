@@ -209,26 +209,26 @@ Capco\AppBundle\Entity\SiteParameter:
     position: 251
     type: 1
 
-    SiteParameterEventTitle:
-      keyname: events.jumbotron.title
-      category: pages.events
-      value: Évènements
-      position: 301
-      type: 0
-    SiteParameterEventContentPage:
-      keyname: events.content.body
-      category: pages.events
-      value: |
-        <p><text(100)></p>
-      position: 303
-      type: 1
+  SiteParameterEventTitle:
+    keyname: events.jumbotron.title
+    category: pages.events
+    value: Évènements
+    position: 301
+    type: 0
+  SiteParameterEventContentPage:
+    keyname: events.content.body
+    category: pages.events
+    value: |
+      <p><text(100)></p>
+    position: 303
+    type: 1
 
-    SiteParameterHomepageDarkening:
-      keyname: homepage.jumbotron.darken
-      category: pages.homepage
-      value: true
-      position: 160
-      type: 8
+  SiteParameterHomepageDarkening:
+    keyname: homepage.jumbotron.darken
+    category: pages.homepage
+    value: true
+    position: 160
+    type: 8
   # members list
   SiteParameterMembersPaginationSize:
     keyname: members.pagination.size

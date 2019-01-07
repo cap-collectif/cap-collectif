@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
@@ -23,6 +24,7 @@ class UpdateProposalVotesMutation implements MutationInterface
     private $stepRepo;
     private $logger;
     private $viewerProposalVotesDataLoader;
+    private $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -30,7 +32,8 @@ class UpdateProposalVotesMutation implements MutationInterface
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         AbstractStepRepository $stepRepo,
         ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->em = $em;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
@@ -38,12 +41,13 @@ class UpdateProposalVotesMutation implements MutationInterface
         $this->stepRepo = $stepRepo;
         $this->logger = $logger;
         $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $input, User $user): array
     {
         $stepId = $input->offsetGet('step');
-        $step = $this->stepRepo->find($stepId);
+        $step = $this->globalIdResolver->resolve($input->offsetGet('stepId'), null);
 
         if (!$step) {
             throw new UserError(sprintf('Unknown step with id "%s"', $stepId));

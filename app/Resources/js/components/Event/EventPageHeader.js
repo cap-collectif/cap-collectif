@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import EventPageHeader_query from './__generated__/EventPageHeader_query.graphql';
 
@@ -14,7 +14,9 @@ export class EventPageHeader extends React.Component<Props> {
     const { query, eventPageTitle } = this.props;
     return (
       <div className="container text-center">
-        <h1>{eventPageTitle || <FormattedMessage id="events-list" />}</h1>
+        <h1>
+          {<FormattedHTMLMessage id={eventPageTitle} /> || <FormattedMessage id="events-list" />}
+        </h1>
         <FormattedMessage id="number-of-events" values={{ num: query.events.totalCount }} />
       </div>
     );

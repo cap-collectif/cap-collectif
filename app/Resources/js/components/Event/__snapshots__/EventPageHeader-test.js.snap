@@ -5,7 +5,10 @@ exports[`<EventPageHeader /> renders correcty 1`] = `
   className="container text-center"
 >
   <h1>
-    Titre personnalisé
+    <FormattedHTMLMessage
+      id="<p>Titre personnalisé</p>"
+      values={Object {}}
+    />
   </h1>
   <FormattedMessage
     id="number-of-events"

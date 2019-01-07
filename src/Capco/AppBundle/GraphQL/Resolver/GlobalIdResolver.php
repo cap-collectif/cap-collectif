@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Utils\Str;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Comment;
@@ -56,9 +57,12 @@ class GlobalIdResolver
         }
 
         // We try to decode the global id
-        $decodeGlobalId = GlobalId::fromGlobalId($uuidOrGlobalId);
+        $decodeGlobalId = Str::isBase64($uuidOrGlobalId)
+            ? GlobalId::fromGlobalId($uuidOrGlobalId)
+            : false;
 
         if (
+            $decodeGlobalId &&
             isset($decodeGlobalId['type'], $decodeGlobalId['id']) &&
             null !== $decodeGlobalId['id']
         ) {
@@ -96,6 +100,18 @@ class GlobalIdResolver
                     break;
                 case 'Requirement':
                     $node = $this->container->get(RequirementRepository::class)->find($uuid);
+
+                    break;
+                case 'CollectStep':
+                    $node = $this->container->get('capco.collect_step.repository')->find($uuid);
+
+                    break;
+                case 'SelectionStep':
+                    $node = $this->container->get('capco.selection_step.repository')->find($uuid);
+
+                    break;
+                case 'Proposal':
+                    $node = $this->container->get('capco.proposal.repository')->find($uuid);
 
                     break;
                 default:
@@ -159,7 +175,7 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $error = 'Could not resolve node with id ' . $uuid;
+            $error = "Could not resolve node with id ${uuid}";
             $this->container->get('logger')->warning($error);
 
             throw new UserError($error);
@@ -187,7 +203,7 @@ class GlobalIdResolver
         if (!$node) {
             $this->container
                 ->get('logger')
-                ->warn(__METHOD__ . ' : Unknown moderation_token: ' . $token);
+                ->warning(__METHOD__ . ' : Unknown moderation_token: ' . $token);
 
             throw new NotFoundHttpException();
         }

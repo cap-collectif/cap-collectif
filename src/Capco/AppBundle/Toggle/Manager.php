@@ -20,7 +20,6 @@ class Manager
         'login_gplus',
         'login_saml',
         'login_paris',
-        'privacy_policy',
         'members_list',
         'newsletter',
         'profiles',
