@@ -321,23 +321,6 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countPublishedSelectionVoteByStep(SelectionStep $step): int
-    {
-        return $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv.id)')
-            ->andWhere('pv.selectionStep = :step')
-            ->innerJoin('pv.proposal', 'proposal')
-            ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.published = 1')
-            ->andWhere('proposal.draft = 0')
-            ->andWhere('proposal.trashedAt IS NULL')
-            ->andWhere('proposal.published = 1')
-            ->groupBy('pv.selectionStep')
-            ->setParameter('step', $step)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
     private function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
     {
         $items = array_map(function ($value) use ($asTitle) {

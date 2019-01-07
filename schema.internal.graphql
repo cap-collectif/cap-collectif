@@ -2959,8 +2959,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   author: User!
   video: String
   cover: Media
+  participantsCount: Int!
   contributionsCount: Int!
-  votes: VoteConnection!
+  votesCount: Int!
   hasParticipativeStep: Boolean!
   links: ProjectLinks!
   type: ProjectType

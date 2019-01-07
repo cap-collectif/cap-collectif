@@ -15,9 +15,8 @@ class CollectStepRepository extends EntityRepository
     public function getOneBySlug(string $slug): ?CollectStep
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('proposalForm', 'district')
+            ->addSelect('proposalForm')
             ->leftJoin('cs.proposalForm', 'proposalForm')
-            ->leftJoin('proposalForm.districts', 'district')
             ->andWhere('cs.slug = :slug')
             ->setParameter('slug', $slug);
 

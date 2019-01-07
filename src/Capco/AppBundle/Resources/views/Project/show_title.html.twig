@@ -1,6 +1,5 @@
 {% macro contributions_popover(project) %}{% spaceless %}
-    {% set totalProposalsCount = projectProposalsResolver.__invoke(project).totalCount %}
-    {% set opinions = project.totalOpinionsCount + totalProposalsCount %}
+    {% set opinions = project.totalOpinionsCount + project.totalProposalsCount %}
     {% if opinions > 0 %}
         {% set opinionLabel = project.opinionTerm == 0 ? 'project.show.meta.opinionsCount' : 'project.show.meta.articlesCount' %}
         {{ opinionLabel | transchoice(opinions, {}, 'CapcoAppBundle') }}
@@ -81,9 +80,7 @@
                                 {% endfor %}
                             {% endif %}<span>,</span>
                             {{ 'project.show.on_date' | trans({'%date%': project.publishedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
-                            {% if project.districts | length > 0 %}
-                                {% include '@CapcoApp/Project/show_districts.html.twig' with {'project': project} %}
-                            {% endif %}
+                            {% include '@CapcoApp/Project/show_districts.html.twig' with {'project': project} %}
                         {% endspaceless %}
                     </span>
                 </div>
@@ -98,10 +95,9 @@
             }}
         {% endif %}
 
-        {% set votesCount = projectVotesResolver.countProjectVotes(project) %}
+        {% set votesCount = project.votesCount %}
         {% set contributionsCount = projectContributionResolver.__invoke(project) %}
-        {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
-        {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount %}
+        {% set contributorsCount = project.participantsCount %}
 
         {% if project.hasParticipativeStep %}
             <ul class="nav nav-pills counters-nav counters-nav--project hidden-print">

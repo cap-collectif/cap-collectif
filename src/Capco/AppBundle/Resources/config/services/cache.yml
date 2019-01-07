@@ -3,5 +3,3 @@ services:
     autowire: true
     arguments:
       $redisClient: '@snc_redis.default'
-  Capco\AppBundle\Cache\RedisTagCache:
-    autowire: true

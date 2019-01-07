@@ -319,15 +319,10 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function countPublishedCollectVoteByStep(CollectStep $step): int
     {
         return $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv.id)')
+            ->select('COUNT(DISTINCT pv)')
             ->andWhere('pv.collectStep = :step')
-            ->innerJoin('pv.proposal', 'proposal')
+            ->leftJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.published = 1')
-            ->andWhere('proposal.draft = 0')
-            ->andWhere('proposal.trashedAt IS NULL')
-            ->andWhere('proposal.published = 1')
-            ->groupBy('pv.collectStep')
             ->setParameter('step', $step)
             ->getQuery()
             ->getSingleScalarResult();
