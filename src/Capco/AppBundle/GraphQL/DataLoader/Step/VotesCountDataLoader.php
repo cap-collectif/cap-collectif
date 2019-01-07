@@ -2,15 +2,16 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Psr\Log\LoggerInterface;
 
 class VotesCountDataLoader extends BatchDataLoader
 {
@@ -19,7 +20,7 @@ class VotesCountDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisCache $cache,
+        RedisTagCache $cache,
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,

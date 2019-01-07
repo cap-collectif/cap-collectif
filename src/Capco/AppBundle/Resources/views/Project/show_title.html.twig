@@ -1,4 +1,5 @@
-{% macro contributions_popover(project, totalProposalsCount) %}{% spaceless %}
+{% macro contributions_popover(project) %}{% spaceless %}
+    {% set totalProposalsCount = projectProposalsResolver.__invoke(project).totalCount %}
     {% set opinions = project.totalOpinionsCount + totalProposalsCount %}
     {% if opinions > 0 %}
         {% set opinionLabel = project.opinionTerm == 0 ? 'project.show.meta.opinionsCount' : 'project.show.meta.articlesCount' %}
@@ -80,7 +81,9 @@
                                 {% endfor %}
                             {% endif %}<span>,</span>
                             {{ 'project.show.on_date' | trans({'%date%': project.publishedAt | localizeddate('long', 'none')}, 'CapcoAppBundle') }}
-                            {% include '@CapcoApp/Project/show_districts.html.twig' with {'project': project} %}
+                            {% if project.districts | length > 0 %}
+                                {% include '@CapcoApp/Project/show_districts.html.twig' with {'project': project} %}
+                            {% endif %}
                         {% endspaceless %}
                     </span>
                 </div>
@@ -95,13 +98,14 @@
             }}
         {% endif %}
 
-        {% set votesCount = project.votesCount %}
+        {% set votesCount = projectVotesResolver.countProjectVotes(project) %}
         {% set contributionsCount = projectContributionResolver.__invoke(project) %}
-        {% set contributorsCount = project.participantsCount %}
+        {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
+        {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount %}
 
         {% if project.hasParticipativeStep %}
             <ul class="nav nav-pills counters-nav counters-nav--project hidden-print">
-                <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project, totalProposalsCount) }}">
+                <li id="contributions-counter-pill" data-toggle="tooltip" data-placement="top" data-html="true" data-title="{{ render.contributions_popover(project) }}">
                     <i class="cap cap-file-edit-1"></i>
                     <span class="value">{{ contributionsCount }}</span>
                     <span class="excerpt category">

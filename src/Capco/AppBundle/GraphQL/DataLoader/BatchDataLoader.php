@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\DataLoader;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Cache\RedisTagCache;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\DataLoader\DataLoader;
 use Overblog\DataLoader\Option;
@@ -22,7 +23,7 @@ abstract class BatchDataLoader extends DataLoader
         callable $batchFunction,
         PromiseAdapterInterface $promiseFactory,
         LoggerInterface $logger,
-        RedisCache $cache,
+        RedisTagCache $cache,
         string $cachePrefix,
         int $cacheTtl = RedisCache::ONE_MINUTE
     ) {
@@ -77,8 +78,8 @@ abstract class BatchDataLoader extends DataLoader
     public function load($key)
     {
         $cacheKey = $this->getCacheKeyFromKey($key);
-        $cacheItem = $this->cache->getItem($cacheKey)->expiresAfter($this->cacheTtl);
-        $this->logger->info(__METHOD__);
+        $cacheItem = $this->cache->getItem($cacheKey);
+
         if (!$cacheItem->isHit()) {
             $this->logger->info('Cache MISS for: ' . var_export($this->serializeKey($key), true));
 
@@ -87,7 +88,11 @@ abstract class BatchDataLoader extends DataLoader
                 $promise->then(function ($value) use ($key, $cacheItem) {
                     $this->prime($key, $value);
 
-                    $cacheItem->set($value);
+                    $cacheItem
+                        ->set($value)
+                        ->expiresAfter($this->cacheTtl)
+                        ->tag($this->getCacheTag($key));
+
                     $this->cache->save($cacheItem);
                     $this->logger->info('Saved key into cache');
                 });
@@ -120,4 +125,16 @@ abstract class BatchDataLoader extends DataLoader
      * @return array|string
      */
     abstract protected function serializeKey($key);
+
+    /**
+     * The getCacheTag function is used to set tags on cache item.
+     *
+     * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
+     *
+     * @return array
+     */
+    protected function getCacheTag($key): array
+    {
+        return [];
+    }
 }

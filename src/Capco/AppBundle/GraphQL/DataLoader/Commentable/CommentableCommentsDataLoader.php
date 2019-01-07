@@ -2,25 +2,26 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Commentable;
 
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\EventComment;
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\PostComment;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Cache\RedisCache;
-use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Repository\EventCommentRepository;
-use Capco\AppBundle\Repository\PostCommentRepository;
-use Capco\AppBundle\Repository\ProposalCommentRepository;
+use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Model\CommentableInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Repository\PostCommentRepository;
+use Capco\AppBundle\Repository\EventCommentRepository;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Repository\ProposalCommentRepository;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 
 class CommentableCommentsDataLoader extends BatchDataLoader
 {
@@ -30,7 +31,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisCache $cache,
+        RedisTagCache $cache,
         LoggerInterface $logger,
         ProposalCommentRepository $proposalCommentRepository,
         EventCommentRepository $eventCommentRepository,

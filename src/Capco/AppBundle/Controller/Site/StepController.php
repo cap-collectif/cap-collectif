@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 use Capco\AppBundle\Entity\Project;
-use GraphQL\Executor\Promise\Adapter\SyncPromise;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Resolver\EventResolver;
@@ -44,7 +42,6 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'totalProposalsCount' => 0,
         ];
     }
 
@@ -112,8 +109,6 @@ class StepController extends Controller
             'nbPosts' => $nbPosts,
             'contributors' => $contributorsList,
             'showVotes' => $showVotes,
-            'anonymousCount' => $contributorsConnection->anonymousCount,
-            'totalProposalsCount' => 0,
         ];
     }
 
@@ -157,7 +152,6 @@ class StepController extends Controller
             'nbOpinionsToDisplay' => $nbOpinionsToDisplay,
             'versions' => $versions,
             'nbVersionsToDisplay' => $nbVersionsToDisplay,
-            'totalProposalsCount' => 0,
         ];
     }
 
@@ -196,7 +190,6 @@ class StepController extends Controller
             'opinions' => $opinions,
             'page' => $page,
             'nbPage' => ceil(\count($opinions) / 10),
-            'totalProposalsCount' => 0,
         ];
     }
 
@@ -235,7 +228,6 @@ class StepController extends Controller
             'versions' => $versions,
             'page' => $page,
             'nbPage' => ceil(\count($versions) / 10),
-            'totalProposalsCount' => 0,
         ];
     }
 
@@ -263,7 +255,6 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'props' => $props,
-            'totalProposalsCount' => 0,
         ];
     }
 
@@ -283,33 +274,8 @@ class StepController extends Controller
             $this->createNotFoundException();
         }
 
-        $count = 0;
-        $collectStepResolver = $this->get(CollectStepProposalCountResolver::class);
-        $promiseAdapter = $this->get('capco.webonyx_graphql_sync_promise_adapter');
-
-        foreach ($project->getSteps() as $pStep) {
-            // @var $step ProjectAbstractStep
-            if ($pStep->getStep()->isCollectStep()) {
-                /** @var SyncPromise $promise */
-                $promise = $collectStepResolver
-                    ->__invoke($pStep->getStep())
-                    ->then(function ($value) use (&$count) {
-                        $count += $value;
-                    });
-
-                try {
-                    $value = $promiseAdapter->await($promise);
-                } catch (\RuntimeException $exception) {
-                    $this->get('monolog.logger_prototype')->error(
-                        json_encode($exception->getMessage())
-                    );
-                }
-            }
-        }
-
         return [
             'project' => $project,
-            'totalProposalsCount' => $count,
             'currentStep' => $step,
         ];
     }
@@ -347,7 +313,6 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'props' => $props,
-            'totalProposalsCount' => 0,
         ];
     }
 
@@ -366,7 +331,6 @@ class StepController extends Controller
         return [
             'project' => $project,
             'currentStep' => $step,
-            'totalProposalsCount' => 0,
             'proposalForm' => null,
         ];
     }
@@ -404,7 +368,6 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $step,
             'props' => $props,
-            'totalProposalsCount' => 0,
         ];
     }
 
@@ -445,7 +408,6 @@ class StepController extends Controller
             'project' => $project,
             'currentStep' => $currentStep,
             'stepProps' => $stepProps,
-            'totalProposalsCount' => 0,
         ];
     }
 }

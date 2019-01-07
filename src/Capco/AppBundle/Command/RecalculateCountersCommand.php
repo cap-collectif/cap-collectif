@@ -8,6 +8,7 @@ use Capco\AppBundle\Resolver\ContributionResolver;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotesResolver;
 
 class RecalculateCountersCommand extends ContainerAwareCommand
 {
@@ -36,6 +37,8 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $this->entityManager = $container->get('doctrine')->getManager();
         $contributionResolver = $container->get(ContributionResolver::class);
         $this->force = $input->getOption('force');
+
+        $projectVotesResolver = $container->get(ProjectVotesResolver::class);
 
         // ****************************** Opinion counters **********************************************
 
@@ -304,7 +307,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                         $cs->getId() .
                         '\''
                 );
-                $votes = $contributionResolver->countStepVotes($cs);
+                $votes = $projectVotesResolver->countStepVotes($cs);
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\ConsultationStep cs
                     set cs.votesCount = ' .

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -23,7 +24,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisCache $cache,
+        RedisTagCache $cache,
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
@@ -70,7 +71,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
-    protected function serializeKey($key)
+    protected function serializeKey($key): array
     {
         return [
             'proposalId' => $key['proposal']->getId(),

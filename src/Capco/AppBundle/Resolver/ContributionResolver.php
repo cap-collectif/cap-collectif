@@ -2,37 +2,27 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\Resolver\Step\VoteCountStepResolver;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepContributionsResolver;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class ContributionResolver
 {
     protected $repository;
     protected $stepContributionsResolver;
-    protected $voteCountStepResolver;
-    protected $adapter;
 
     public function __construct(
         UserRepository $repository,
-        StepContributionsResolver $stepContributionsResolver,
-        VoteCountStepResolver $voteCountStepResolver,
-        PromiseAdapterInterface $adapter
+        StepContributionsResolver $stepContributionsResolver
     ) {
         $this->repository = $repository;
         $this->stepContributionsResolver = $stepContributionsResolver;
-        $this->voteCountStepResolver = $voteCountStepResolver;
-        $this->adapter = $adapter;
     }
 
     // Code may looks ugly but in fact it's highly optimized !
@@ -287,56 +277,6 @@ class ContributionResolver
                 $step->getStep(),
                 new Argument(['first' => 0])
             )->totalCount;
-        }
-
-        return $count;
-    }
-
-    public function countStepVotes(AbstractStep $step): int
-    {
-        $count = 0;
-        if ($step instanceof ConsultationStep) {
-            foreach ($step->getOpinions() as $opinion) {
-                $count += $opinion->getVotesCountAll();
-                /** @var \Capco\AppBundle\Entity\Argument $argument */
-                foreach ($opinion->getArguments() as $argument) {
-                    $count += $argument->getVotesCount();
-                }
-                /** @var Source $source */
-                foreach ($opinion->getSources() as $source) {
-                    $count += $source->getVotesCount();
-                }
-                /** @var OpinionVersion $version */
-                foreach ($opinion->getVersions() as $version) {
-                    $count += $version->getVotesCountAll();
-                    /** @var \Capco\AppBundle\Entity\Argument $argument */
-                    foreach ($version->getArguments() as $argument) {
-                        $count += $argument->getVotesCount();
-                    }
-                    /** @var Source $source */
-                    foreach ($version->getSources() as $source) {
-                        $count += $source->getVotesCount();
-                    }
-                }
-            }
-        } elseif ($step instanceof SelectionStep || $step instanceof CollectStep) {
-            $promise = $this->voteCountStepResolver
-                ->__invoke($step)
-                ->then(function ($value) use (&$count) {
-                    $count += $value;
-                });
-
-            $this->adapter->await($promise);
-        }
-
-        return $count;
-    }
-
-    public function countProjectVotes(Project $project): int
-    {
-        $count = 0;
-        foreach ($project->getSteps() as $pas) {
-            $count += $this->countStepVotes($pas->getStep());
         }
 
         return $count;

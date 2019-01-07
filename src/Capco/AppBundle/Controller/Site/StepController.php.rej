@@ -1,0 +1,29 @@
+diff a/src/Capco/AppBundle/Controller/Site/StepController.php b/src/Capco/AppBundle/Controller/Site/StepController.php	(rejected hunks)
+@@ -295,27 +292,0 @@ class StepController extends Controller
+-    private function getProposalsCount(Project $project) {
+-        $count = 0;
+-        $collectStepResolver = $this->get(CollectStepProposalCountResolver::class);
+-        $promiseAdapter = $this->get('capco.webonyx_graphql_sync_promise_adapter');
+-
+-        foreach ($project->getSteps() as $pStep) {
+-            // @var $step ProjectAbstractStep
+-            if ($pStep->getStep()->isCollectStep()) {
+-                /** @var SyncPromise $promise */
+-                $promise = $collectStepResolver
+-                    ->__invoke($pStep->getStep())
+-                    ->then(function ($value) use (&$count) {
+-                        $count += $value;
+-                    });
+-
+-                try {
+-                    $value = $promiseAdapter->await($promise);
+-                } catch (\RuntimeException $exception) {
+-                    $this->get('monolog.logger_prototype')->error(
+-                        json_encode($exception->getMessage())
+-                    );
+-                }
+-            }
+-            return $count;
+-        }
+-    }
+-

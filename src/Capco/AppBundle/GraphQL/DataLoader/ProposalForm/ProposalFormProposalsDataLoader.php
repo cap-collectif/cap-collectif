@@ -2,17 +2,18 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\ProposalForm;
 
-use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Cache\RedisCache;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Search\ProposalSearch;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
@@ -23,7 +24,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisCache $cache,
+        RedisTagCache $cache,
         LoggerInterface $logger,
         ProposalRepository $proposalRepo,
         ProposalSearch $proposalSearch,
@@ -44,14 +45,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 
     public function invalidate(ProposalForm $form): void
     {
-        foreach ($this->getCacheKeys() as $cacheKey) {
-            $decoded = $this->getDecodedKeyFromKey($cacheKey);
-            if (false !== strpos($decoded, $form->getId())) {
-                $this->cache->deleteItem($cacheKey);
-                $this->clear($cacheKey);
-                $this->logger->info('Invalidated cache for form ' . $form->getId());
-            }
-        }
+        $this->cache->invalidateTags([$form->getId()]);
     }
 
     public function all(array $keys)
@@ -70,16 +64,25 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
-    protected function serializeKey($key)
+    protected function getCacheTag($key): array
     {
+        return [$key['form']->getId()];
+    }
+
+    protected function serializeKey($key): array
+    {
+        $proposalForm = $key['form'];
+        $viewer = $key['viewer'];
+        $args = $key['args'];
+
         $cacheKey = [
-            'formId' => $key['form']->getId(),
-            'args' => $key['args']->getRawArguments(),
+            'form' => $proposalForm->getId(),
+            'args' => $args->getRawArguments(),
         ];
 
-        if ($key['args']->offsetExists('affiliations') || $key['form']->getStep()->isPrivate()) {
+        if ($args->offsetExists('affiliations') || $proposalForm->getStep()->isPrivate()) {
             // we need viewer in cache key
-            $cacheKey['viewerId'] = $cacheKey ? $key['viewer']->getId() : null;
+            $cacheKey['viewerId'] = $viewer ? $viewer->getId() : null;
         }
 
         return $cacheKey;

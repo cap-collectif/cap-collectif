@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 
 class CollectStepProposalCountDataLoader extends BatchDataLoader
 {
@@ -15,7 +16,7 @@ class CollectStepProposalCountDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisCache $cache,
+        RedisTagCache $cache,
         LoggerInterface $logger,
         ProposalRepository $proposalRepository,
         string $cachePrefix,

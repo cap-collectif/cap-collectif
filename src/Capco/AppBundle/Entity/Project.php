@@ -164,20 +164,6 @@ class Project implements IndexableInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="participants_count", type="integer")
-     */
-    private $participantsCount = 0;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="votes_count", type="integer")
-     */
-    private $votesCount = 0;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="opinions_ranking_threshold", type="integer", nullable=true)
      */
     private $opinionsRankingThreshold;
@@ -587,38 +573,6 @@ class Project implements IndexableInterface
         $this->posts->removeElement($post);
 
         return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getParticipantsCount()
-    {
-        return $this->participantsCount;
-    }
-
-    /**
-     * @param int $participantsCount
-     */
-    public function setParticipantsCount($participantsCount)
-    {
-        $this->participantsCount = $participantsCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getVotesCount()
-    {
-        return $this->votesCount;
-    }
-
-    /**
-     * @param int $votesCount
-     */
-    public function setVotesCount($votesCount)
-    {
-        $this->votesCount = $votesCount;
     }
 
     /**

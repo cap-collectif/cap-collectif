@@ -7,10 +7,6 @@ Capco\AppBundle\Entity\Project:
     Author:
       groups: [Projects, Elasticsearch]
       serialized_name: author
-    participantsCount:
-      groups: [Projects]
-    votesCount:
-      groups: [Projects]
     canContribute:
       groups: [Projects]
     createdAt:
