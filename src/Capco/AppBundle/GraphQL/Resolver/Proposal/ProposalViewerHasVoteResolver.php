@@ -5,60 +5,35 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Repository\AbstractStepRepository;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVotesDataLoader;
 
 class ProposalViewerHasVoteResolver implements ResolverInterface
 {
     private $logger;
-    private $abstractStepRepository;
-    private $proposalCollectVoteRepository;
-    private $proposalSelectionVoteRepository;
+    private $proposalViewerHasVotesDataLoader;
 
     public function __construct(
-        AbstractStepRepository $repository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalViewerHasVotesDataLoader $proposalViewerHasVotesDataLoader,
         LoggerInterface $logger
     ) {
         $this->logger = $logger;
-        $this->abstractStepRepository = $repository;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $this->proposalViewerHasVotesDataLoader = $proposalViewerHasVotesDataLoader;
     }
 
-    public function __invoke(Proposal $proposal, Arg $args, User $user): bool
+    public function __invoke(Proposal $proposal, Arg $args, User $user): Promise
     {
         try {
-            $step = $this->abstractStepRepository->find($args->offsetGet('step'));
+            $stepId = $args->offsetGet('step');
 
-            if ($step instanceof CollectStep) {
-                return (
-                    $this->proposalCollectVoteRepository->getByProposalAndStepAndUser(
-                        $proposal,
-                        $step,
-                        $user
-                    ) !== null
-                );
-            }
-            if ($step instanceof SelectionStep) {
-                return (
-                    $this->proposalSelectionVoteRepository->getByProposalAndStepAndUser(
-                        $proposal,
-                        $step,
-                        $user
-                    ) !== null
-                );
-            }
-
-            return false;
+            return $this->proposalViewerHasVotesDataLoader->load(
+                compact('proposal', 'stepId', 'user')
+            );
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
             throw new \RuntimeException($exception->getMessage());
         }
     }

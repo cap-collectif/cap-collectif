@@ -56,3 +56,15 @@ services:
     arguments:
       $cachePrefix: ProposalAuthorDataLoader
       $cacheTtl: 60
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVotesDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProposalViewerVotesDataLoader
+      $cacheTtl: 60
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVotesDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProposalViewerHasVotesDataLoader
+      $cacheTtl: 60
