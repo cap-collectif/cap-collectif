@@ -35,14 +35,8 @@ class CollectStepProposalCountDataLoader extends BatchDataLoader
 
     public function invalidate(CollectStep $collectStep): void
     {
-        foreach ($this->getCacheKeys() as $cacheKey) {
-            $decoded = $this->getDecodedKeyFromKey($cacheKey);
-            if (false !== strpos($decoded, $collectStep->getId())) {
-                $this->cache->deleteItem($cacheKey);
-                $this->clear($cacheKey);
-                $this->logger->info('Invalidated cache for collectStep ' . $collectStep->getId());
-            }
-        }
+        // TODO
+        $this->invalidateAll();
     }
 
     public function all(array $keys)

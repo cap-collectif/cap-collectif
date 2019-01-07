@@ -54,14 +54,8 @@ class CommentableCommentsDataLoader extends BatchDataLoader
 
     public function invalidate(string $commentId): void
     {
-        foreach ($this->getCacheKeys() as $cacheKey) {
-            $decoded = $this->getDecodedKeyFromKey($cacheKey);
-            if (false !== strpos($decoded, $commentId)) {
-                $this->cache->deleteItem($cacheKey);
-                $this->clear($cacheKey);
-                $this->logger->info('Invalidated cache for commentable ' . $commentId);
-            }
-        }
+        // TODO
+        $this->invalidateAll();
     }
 
     public function all(array $keys)

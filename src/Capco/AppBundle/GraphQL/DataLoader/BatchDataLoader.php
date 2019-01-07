@@ -58,7 +58,7 @@ abstract class BatchDataLoader extends DataLoader
 
     public function invalidateAll(): void
     {
-        $this->cache->deleteItems($this->getCacheKeys());
+        $this->cache->invalidateTags([$this->cachePrefix]);
     }
 
     /**
@@ -91,7 +91,8 @@ abstract class BatchDataLoader extends DataLoader
                     $cacheItem
                         ->set($value)
                         ->expiresAfter($this->cacheTtl)
-                        ->tag($this->getCacheTag($key));
+                        ->tag($this->getCacheTag($key))
+                        ->tag($this->cachePrefix);
 
                     $this->cache->save($cacheItem);
                     $this->logger->info('Saved key into cache');
@@ -103,11 +104,6 @@ abstract class BatchDataLoader extends DataLoader
         $this->logger->info('Cache HIT for: ' . var_export($this->serializeKey($key), true));
 
         return $this->getPromiseAdapter()->createFulfilled($cacheItem->get());
-    }
-
-    protected function getCacheKeys(): array
-    {
-        return $this->cache->getKeysByPattern('*' . $this->cachePrefix . '*');
     }
 
     protected function getDecodedKeyFromKey(string $key): string

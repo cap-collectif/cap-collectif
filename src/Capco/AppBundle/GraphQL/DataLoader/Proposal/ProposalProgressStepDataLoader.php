@@ -29,20 +29,11 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
         );
     }
 
-    /**
-     * Not used at the moment.
-     */
-    // public function invalidate(Proposal $proposal): void
-    // {
-    //     foreach ($this->getCacheKeys() as $cacheKey) {
-    //         $decoded = $this->getDecodedKeyFromKey($cacheKey);
-    //         if (false !== strpos($decoded, $proposal->getId())) {
-    //             $this->cache->deleteItem($cacheKey);
-    //             $this->clear($cacheKey);
-    //             $this->logger->info('Invalidated cache for proposal ' . $proposal->getId());
-    //         }
-    //     }
-    // }
+    public function invalidate(Proposal $proposal): void
+    {
+        // TODO
+        $this->invalidateAll();
+    }
 
     public function all(array $keys)
     {
