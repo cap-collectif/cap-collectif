@@ -3,7 +3,6 @@
 # Recalculate counters that have changed every 2 minutes
 */2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --env=prod
 1-59/2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:counters --env=prod
-1-59/2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:projects-counters --env=prod
 
 # Recalculate rankings
 */5 * * * * /usr/bin/timeout 4m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:rankings --env=prod
@@ -14,7 +13,6 @@
 # Recalculate the counters from scratch
 0 4 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --force --env=prod
 0 5 * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:counters --force --env=prod
-0 6 * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:projects-counters --force --env=prod
 
 # Update synthesis data (disabled for now)
 #0 4 * * * /usr/bin/timeout 2h /usr/local/bin/gosu capco php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:update --env=prod

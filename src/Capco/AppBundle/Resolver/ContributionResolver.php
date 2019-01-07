@@ -279,45 +279,7 @@ class ContributionResolver
             )->totalCount;
         }
 
-        return $count;
-    }
-
-    public function countStepVotes(AbstractStep $step): int
-    {
-        $count = 0;
-        if ($step instanceof ConsultationStep) {
-            foreach ($step->getOpinions() as $opinion) {
-                $count += $opinion->getVotesCountAll();
-                foreach ($opinion->getArguments() as $argument) {
-                    $count += $argument->getVotesCount();
-                }
-                foreach ($opinion->getSources() as $source) {
-                    $count += $source->getVotesCount();
-                }
-                foreach ($opinion->getVersions() as $version) {
-                    $count += $version->getVotesCountAll();
-                    foreach ($version->getArguments() as $argument) {
-                        $count += $argument->getVotesCount();
-                    }
-                    foreach ($version->getSources() as $source) {
-                        $count += $source->getVotesCount();
-                    }
-                }
-            }
-        } elseif ($step instanceof SelectionStep || $step instanceof CollectStep) {
-            $count += $step->getVotesCount();
-        }
-
-        return $count;
-    }
-
-    public function countProjectVotes(Project $project): int
-    {
-        $count = 0;
-        foreach ($project->getSteps() as $pas) {
-            $count += $this->countStepVotes($pas->getStep());
-        }
-
+        // Also count project comments ?
         return $count;
     }
 }

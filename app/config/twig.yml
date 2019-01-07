@@ -9,6 +9,9 @@ twig:
     facebook_app_id: '%facebook_app_id%'
     google_maps_key: '%google_maps_key%'
     # Register here any services accessibles in templates
+    projectProposalsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectProposalsResolver'
+    projectVotesResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotesResolver'
+    projectContributorsResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver'
     proposalPublicationResolver: '@Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalPublicationStatusResolver'
     replyPublicationStatusResolver: '@Capco\AppBundle\GraphQL\Resolver\Reply\ReplyPublicationStatusResolver'
     projectContributionResolver: '@Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributionResolver'

@@ -129,3 +129,9 @@ services:
   Capco\AppBundle\NewRelic\CapcoNamingStrategy:
     autowire: true
     public: true
+
+  capco.webonyx_graphql_sync_promise_adapter:
+    public: true
+    class: Overblog\PromiseAdapter\Adapter\WebonyxGraphQLSyncPromiseAdapter
+    arguments:
+      - '@webonyx_graphql.sync_promise_adapter'

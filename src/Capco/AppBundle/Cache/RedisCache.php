@@ -21,9 +21,4 @@ class RedisCache extends RedisAdapter
         parent::__construct($redisClient, $namespace, $defaultLifetime);
         $this->client = $redisClient;
     }
-
-    public function getKeysByPattern(string $pattern): array
-    {
-        return $this->client->keys($pattern);
-    }
 }

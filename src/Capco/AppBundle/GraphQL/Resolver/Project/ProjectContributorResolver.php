@@ -33,9 +33,12 @@ class ProjectContributorResolver implements ResolverInterface
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
     }
 
-    public function __invoke(Project $project, Arg $args): Connection
+    public function __invoke(Project $project, ?Arg $args = null): Connection
     {
         $totalCount = 0;
+        if (!$args) {
+            $args = new Arg(['first' => 0]);
+        }
 
         $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount, $project) {
             try {

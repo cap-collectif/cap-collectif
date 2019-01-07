@@ -21,10 +21,13 @@ class ProjectRepository extends EntityRepository
     public function getOneWithoutVisibility(string $slug): ?Project
     {
         $qb = $this->createQueryBuilder('p')
-            ->addSelect('t', 'cover', 'author')
-            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
+            ->addSelect('theme', 'cover', 'author', 'district', 'pas', 'step')
+            ->leftJoin('p.themes', 'theme', 'WITH', 'theme.isEnabled = true')
+            ->leftJoin('p.districts', 'district')
             ->leftJoin('p.Cover', 'cover')
             ->leftJoin('p.Author', 'author')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 'step')
             ->andWhere('p.slug = :slug')
             ->setParameter('slug', $slug);
 

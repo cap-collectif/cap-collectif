@@ -20,13 +20,15 @@
 {% endblock %}
 
 {% block details %}
+    {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
+    {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount %}
     <div class="block">
         <h2 class="h2">{{ 'project.show.contributors.title' | trans({}, 'CapcoAppBundle') }}
             <span class="small excerpt">
-                {{ project.participantsCount }}
-                {%  set anonymousCount = project.participantsCount - (contributors | length) %}
+                {{ contributorsCount }}
+                {% set anonymousCount = contributorsConnection.anonymousCount %}
                 {% if anonymousCount > 0 %}
-                    {% transchoice anonymousCount with {'%count%': anonymousCount} from 'CapcoAppBundle' %}
+                    {% transchoice anonymousCount with {'%count%': contributorsConnection.anonymousCount} from 'CapcoAppBundle' %}
                         project.show.contributors.anonymous
                     {% endtranschoice %}
                 {% endif %}

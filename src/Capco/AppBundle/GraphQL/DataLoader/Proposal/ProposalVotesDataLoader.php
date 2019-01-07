@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -23,7 +24,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisCache $cache,
+        RedisTagCache $cache,
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
@@ -44,14 +45,8 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
     public function invalidate(Proposal $proposal): void
     {
-        foreach ($this->getCacheKeys() as $cacheKey) {
-            $decoded = $this->getDecodedKeyFromKey($cacheKey);
-            if (false !== strpos($decoded, $proposal->getId())) {
-                $this->cache->deleteItem($cacheKey);
-                $this->clear($cacheKey);
-                $this->logger->info('Invalidated cache for proposal ' . $proposal->getId());
-            }
-        }
+        // TODO
+        $this->invalidateAll();
     }
 
     public function all(array $keys)
@@ -70,7 +65,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
-    protected function serializeKey($key)
+    protected function serializeKey($key): array
     {
         return [
             'proposalId' => $key['proposal']->getId(),
