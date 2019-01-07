@@ -29,8 +29,8 @@ class Reporting implements CreatableInterface
         self::SIGNALEMENT_SPAM => 'reporting.status.spam',
         self::SIGNALEMENT_OFF => 'reporting.status.offending',
         self::SIGNALEMENT_ERROR => 'reporting.status.error',
-        self::SIGNALEMENT_SEX => 'reporting.status.sexual',
         self::SIGNALEMENT_OFF_TOPIC => 'reporting.status.off_topic',
+        self::SIGNALEMENT_SEX => 'reporting.status.sexual',
     ];
 
     /**
