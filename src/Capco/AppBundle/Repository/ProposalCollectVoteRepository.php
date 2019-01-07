@@ -74,7 +74,7 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function countByAuthorAndProject(User $author, Project $project): int
     {
         return $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv)')
+            ->select('COUNT(DISTINCT pv.id)')
             ->andWhere('pv.user = :author')
             ->andWhere('pv.published = true')
             ->leftJoin('pv.proposal', 'proposal')
@@ -95,7 +95,7 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function countByAuthorAndStep(User $author, CollectStep $step): int
     {
         return $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv)')
+            ->select('COUNT(DISTINCT pv.id)')
             ->andWhere('pv.collectStep = :step')
             ->andWhere('pv.user = :author')
             ->leftJoin('pv.proposal', 'proposal')
@@ -197,6 +197,27 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->setParameter('user', $user)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function countVotesByProposalIdsAndStep(
+        array $ids,
+        CollectStep $step,
+        bool $includeUnpublished
+    ): array {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('proposal.id, COUNT(pv.id) as total')
+            ->andWhere('pv.collectStep = :step')
+            ->andWhere('pv.proposal IN (:ids)')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->groupBy('pv.proposal')
+            ->setParameter('ids', $ids)
+            ->setParameter('step', $step);
+
+        if (!$includeUnpublished) {
+            $qb->andWhere('pv.published = true');
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     public function countVotesByProposalAndStep(

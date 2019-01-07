@@ -39,6 +39,7 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
     {
         $connections = [];
 
+        // TODO add some batching here
         foreach ($keys as $key) {
             $connections[] = $this->resolve($key);
         }

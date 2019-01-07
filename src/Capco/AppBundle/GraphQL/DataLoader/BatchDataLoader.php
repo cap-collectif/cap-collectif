@@ -80,7 +80,7 @@ abstract class BatchDataLoader extends DataLoader
         $cacheKey = $this->getCacheKeyFromKey($key);
         $cacheItem = $this->cache->getItem($cacheKey);
 
-        if (!$cacheItem->isHit()) {
+        // if (!$cacheItem->isHit()) {
             $this->logger->info('Cache MISS for: ' . var_export($this->serializeKey($key), true));
 
             $promise = parent::load($key);
@@ -100,7 +100,7 @@ abstract class BatchDataLoader extends DataLoader
             }
 
             return $promise;
-        }
+        // }
         $this->logger->info('Cache HIT for: ' . var_export($this->serializeKey($key), true));
 
         return $this->getPromiseAdapter()->createFulfilled($cacheItem->get());
