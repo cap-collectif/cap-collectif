@@ -30,8 +30,11 @@ class ProjectVotesResolver implements ResolverInterface
         $this->stepVotesCountResolver = $stepVotesCountResolver;
     }
 
-    public function __invoke(Project $project, Arg $args): Connection
+    public function __invoke(Project $project, ?Arg $args = null): Connection
     {
+        if (!$args) {
+            $args = new Arg(['first' => 0]);
+        }
         $totalCount = $this->countProjectVotes($project);
 
         $paginator = new Paginator(function (int $offset, int $limit) {
