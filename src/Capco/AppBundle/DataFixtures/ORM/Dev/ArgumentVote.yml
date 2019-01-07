@@ -11,3 +11,9 @@ Capco\AppBundle\Entity\ArgumentVote:
     user: '@user<current()>'
     publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
+  argumentVote11:
+    id: 50011
+    argument: '@argument252'
+    user: '@user519'
+    publishedAt: <(new \DateTime('2015-01-01'))>
+    createdAt: <(new \DateTime('2015-01-01'))>
