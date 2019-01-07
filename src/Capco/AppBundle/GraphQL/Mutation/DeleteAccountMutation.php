@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Comment;
@@ -35,6 +36,7 @@ class DeleteAccountMutation implements MutationInterface
     private $userManager;
     private $redisStorageHelper;
     private $mediaProvider;
+    private $proposalAuthorDataLoader;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -43,7 +45,8 @@ class DeleteAccountMutation implements MutationInterface
         UserGroupRepository $groupRepository,
         UserManager $userManager,
         RedisStorageHelper $redisStorageHelper,
-        ImageProvider $mediaProvider
+        ImageProvider $mediaProvider,
+        ProposalAuthorDataLoader $proposalAuthorDataLoader
     ) {
         $this->em = $em;
         $this->translator = $translator;
@@ -52,6 +55,7 @@ class DeleteAccountMutation implements MutationInterface
         $this->userManager = $userManager;
         $this->redisStorageHelper = $redisStorageHelper;
         $this->mediaProvider = $mediaProvider;
+        $this->proposalAuthorDataLoader = $proposalAuthorDataLoader;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -143,6 +147,13 @@ class DeleteAccountMutation implements MutationInterface
                 ->find($user->getMedia()->getId());
             $this->removeMedia($media);
             $user->setMedia(null);
+        }
+
+        $contributions = $user->getContributions();
+        foreach ($contributions as $contribution) {
+            if ($contribution instanceof Proposal) {
+                $this->proposalAuthorDataLoader->invalidate($contribution);
+            }
         }
 
         $this->userManager->updateUser($user);

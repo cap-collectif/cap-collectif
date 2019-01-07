@@ -42,3 +42,9 @@ services:
     arguments:
       $cachePrefix: StepVotesCountDataLoader
       $cacheTtl: 60
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProposalAuthorDataLoader
+      $cacheTtl: 60
