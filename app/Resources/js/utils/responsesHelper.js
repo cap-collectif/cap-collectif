@@ -746,7 +746,7 @@ export const renderResponses = ({
             return (
               <div key={field.id} className="form__section">
                 <TitleInvertContrast>{field.title}</TitleInvertContrast>
-                <div className="mb-15">
+                <div className="pb-15">
                   <WYSIWYGRender value={field.description} />
                 </div>
               </div>

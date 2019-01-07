@@ -40,14 +40,14 @@ export class ProposalVotes extends React.Component<Props, State> {
       <div>
         {proposal.votes.edges && votesCount !== 0 ? (
           <div className={classNames({ proposal__votes: true })}>
-            <h3 className="mb-20">
+            <h2>
               <FormattedMessage
                 id="proposal.vote.count"
                 values={{
                   num: votesCount,
                 }}
               />
-            </h3>
+            </h2>
             <Row>
               {proposal.votes.edges.filter(Boolean).map((edge, key) => (
                 // $FlowFixMe $refType
