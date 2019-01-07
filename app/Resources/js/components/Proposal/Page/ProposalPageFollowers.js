@@ -24,7 +24,7 @@ export class ProposalPageFollowers extends React.Component<Props> {
       <div>
         {pageAdmin === false ? (
           <div className="box-header">
-            <h3 className="box-title">
+            <h3 className="box-title mb-20">
               <FormattedMessage
                 values={{ num: proposal.followers.totalCount }}
                 id="proposal.follower.count"

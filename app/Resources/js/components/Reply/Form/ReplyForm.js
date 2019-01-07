@@ -187,7 +187,7 @@ export class ReplyForm extends React.Component<Props> {
           <div id="create-reply-form">
             <form id="reply-form" ref="form" onSubmit={handleSubmit}>
               {questionnaire.description && (
-                <div className="pb-15">
+                <div className="mb-15">
                   <WYSIWYGRender value={questionnaire.description} />
                 </div>
               )}

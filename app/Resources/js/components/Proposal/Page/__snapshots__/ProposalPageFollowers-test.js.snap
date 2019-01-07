@@ -6,7 +6,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
     className="box-header"
   >
     <h3
-      className="box-title"
+      className="box-title mb-20"
     >
       <FormattedMessage
         id="proposal.follower.count"
@@ -76,7 +76,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with u
     className="box-header"
   >
     <h3
-      className="box-title"
+      className="box-title mb-20"
     >
       <FormattedMessage
         id="proposal.follower.count"
@@ -133,7 +133,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower withou
     className="box-header"
   >
     <h3
-      className="box-title"
+      className="box-title mb-20"
     >
       <FormattedMessage
         id="proposal.follower.count"
