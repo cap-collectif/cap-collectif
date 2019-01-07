@@ -1,0 +1,53 @@
+fos_rest:
+  zone:
+    - { path: ^/api/* }
+  service:
+    serializer: fos_rest.serializer.symfony
+  view:
+    view_response_listener: true
+    failed_validation: HTTP_BAD_REQUEST
+    empty_content: 204
+    formats:
+      json: true
+      xml: true # used for sitemap
+  format_listener:
+    enabled: false # We support only json
+  # versioning: false
+  body_listener:
+    enabled: true
+    decoders:
+      json: fos_rest.decoder.json
+  # array_normalizer:
+  #     service: fos_rest.normalizer.camel_keys_with_leading_underscore
+  #     forms: true
+  # throw_exception_on_unsupported_content_type: false
+  access_denied_listener:
+    # all requests using the 'json' format will return a 403 on an access denied violation
+    json: true
+  body_converter:
+    enabled: true
+    validate: true
+    validation_errors_argument: validationErrors
+  param_fetcher_listener: true
+  allowed_methods_listener: true
+  serializer:
+    serialize_null: true
+  exception:
+    enabled: true
+    codes:
+      'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': 400
+      'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': 401
+      'Symfony\Component\Security\Core\Exception\AuthenticationException': 401
+      'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': 403
+      'Symfony\Component\Security\Core\Exception\AccessDeniedException': 403
+      'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': 404
+      'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+      'Doctrine\ORM\OptimisticLockException': 409
+    messages:
+      'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': true
+      'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': true
+      'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': true
+      'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': true
+      'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+      'Symfony\Component\Security\Core\Exception\AccessDeniedException': true
+      'Symfony\Component\Security\Core\Exception\AuthenticationException': true
