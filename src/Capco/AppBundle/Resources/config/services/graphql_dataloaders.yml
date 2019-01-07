@@ -37,8 +37,8 @@ services:
       $cachePrefix: CollectStepContributorCountDataLoader
       $cacheTtl: 60
 
-  Capco\AppBundle\GraphQL\DataLoader\Step\VotesCountDataLoader:
+  Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader:
     autowire: true
     arguments:
-      $cachePrefix: stepVotesCount
+      $cachePrefix: StepVotesCountDataLoader
       $cacheTtl: 60

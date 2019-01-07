@@ -279,6 +279,7 @@ class ContributionResolver
             )->totalCount;
         }
 
+        // Also count project comments ?
         return $count;
     }
 }

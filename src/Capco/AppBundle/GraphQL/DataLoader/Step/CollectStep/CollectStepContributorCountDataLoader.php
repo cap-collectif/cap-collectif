@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep;
 
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -21,7 +20,7 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         StepContributorResolver $stepContributorResolver,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl
     ) {
         $this->stepContributorResolver = $stepContributorResolver;
         parent::__construct(
@@ -45,22 +44,14 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
         $connections = [];
 
         foreach ($keys as $key) {
-            $this->logger->info(
-                __METHOD__ . ' called with ' . json_encode($this->serializeKey($key))
-            );
-
             $connections[] = $this->resolve($key['collectStep']);
         }
 
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
-    protected function serializeKey($key)
+    protected function serializeKey($key): array
     {
-        if (\is_string($key)) {
-            return $key;
-        }
-
         return [
             'collectStepId' => $key['collectStep']->getId(),
         ];

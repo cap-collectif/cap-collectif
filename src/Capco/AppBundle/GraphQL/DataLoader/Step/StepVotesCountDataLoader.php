@@ -13,7 +13,7 @@ use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 
-class VotesCountDataLoader extends BatchDataLoader
+class StepVotesCountDataLoader extends BatchDataLoader
 {
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
@@ -50,17 +50,13 @@ class VotesCountDataLoader extends BatchDataLoader
         $connections = [];
 
         foreach ($keys as $key) {
-            $this->logger->info(
-                __METHOD__ . ' called with ' . json_encode($this->serializeKey($key))
-            );
-
             $connections[] = $this->resolve($key['step']);
         }
 
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
-    protected function serializeKey($key)
+    protected function serializeKey($key): array
     {
         return [
             'stepId' => $key['step']->getId(),

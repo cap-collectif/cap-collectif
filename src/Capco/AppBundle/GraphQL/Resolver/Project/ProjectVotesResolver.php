@@ -14,20 +14,20 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Capco\AppBundle\GraphQL\Resolver\Step\VoteCountStepResolver;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepVotesCountResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProjectVotesResolver implements ResolverInterface
 {
     protected $adapter;
-    private $voteCountStepResolver;
+    private $stepVotesCountResolver;
 
     public function __construct(
-        VoteCountStepResolver $voteCountStepResolver,
+        StepVotesCountResolver $stepVotesCountResolver,
         PromiseAdapterInterface $adapter
     ) {
         $this->adapter = $adapter;
-        $this->voteCountStepResolver = $voteCountStepResolver;
+        $this->stepVotesCountResolver = $stepVotesCountResolver;
     }
 
     public function __invoke(Project $project, Arg $args): Connection
@@ -84,7 +84,7 @@ class ProjectVotesResolver implements ResolverInterface
                 }
             }
         } elseif ($step instanceof SelectionStep || $step instanceof CollectStep) {
-            $promise = $this->voteCountStepResolver
+            $promise = $this->stepVotesCountResolver
                 ->__invoke($step)
                 ->then(function ($value) use (&$count) {
                     $count += $value;
