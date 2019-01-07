@@ -22,6 +22,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/SelectionStep.yml',
             __DIR__ . '/SiteParameter.yml',
             __DIR__ . '/SiteColor.yml',
+            __DIR__ . '/SiteImage.yml',
             __DIR__ . '/QuestionnaireStep.yml',
             __DIR__ . '/ProjectAbstractStep.yml',
             __DIR__ . '/Opinion.yml',
