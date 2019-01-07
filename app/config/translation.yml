@@ -1,0 +1,14 @@
+# Fetch xlf files from Loco: CapcoAppBundle.{locale}.xlf and validators.{locale}.xlf
+translation_adapter_loco:
+  projects:
+    cap-collectif:
+      api_key: '%loco_key%'
+      domains: ['CapcoAppBundle', 'validators']
+
+translation:
+  locales: '%locales%'
+  configs:
+    app:
+      dirs: ['%kernel.project_dir%/src']
+      output_dir: '%kernel.project_dir%%/translations'
+      remote_storage: ['php_translation.adapter.loco']

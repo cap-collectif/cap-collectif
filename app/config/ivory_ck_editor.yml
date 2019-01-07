@@ -1,0 +1,101 @@
+ivory_ck_editor:
+  base_path: 'js/ckeditor/'
+  js_path: 'js/ckeditor/ckeditor.js'
+  default_config: user_editor
+  input_sync: true
+  configs:
+    user_editor:
+      removePlugins: 'elementspath'
+      toolbar: user_toolbar
+      language: fr
+      skin: minimalist
+      extraPlugins: autolink,autogrow
+      extraAllowedContent: 'a[!href,_src,target,class],iframe[data-type]'
+      entities: false
+    empty_editor:
+      removePlugins: 'toolbar,elementspath,resize'
+      language: fr
+      skin: minimalist
+      extraPlugins: autolink,autogrow
+      extraAllowedContent: 'a[!href,_src,target,class]'
+      entities: false
+    admin_editor:
+      toolbar: admin_toolbar
+      language: fr
+      skin: minimalist
+      extraPlugins: oembed,btgrid,autolink,autogrow
+      allowedContent: true
+      filebrowserBrowseRoute: admin_capco_media_media_browser
+      filebrowserImageBrowseRoute: admin_capco_media_media_browser
+      entities: false
+      # Display images by default when clicking the image dialog browse button
+      filebrowserImageBrowseRouteParameters:
+        provider: sonata.media.provider.image
+      filebrowserUploadRoute: admin_capco_media_media_upload
+      filebrowserUploadRouteParameters:
+        provider: sonata.media.provider.file
+      # Upload file as image when sending a file from the image dialog
+      filebrowserImageUploadRoute: admin_capco_media_media_upload
+      filebrowserImageUploadRouteParameters:
+        provider: sonata.media.provider.image
+        context: default
+      filebrowserWindowWidth: '50%'
+      filebrowserWindowHeight: '80%'
+  toolbars:
+    configs:
+      admin_toolbar:
+        [
+          '@clipboard',
+          '@styles',
+          '@basicstyles',
+          '@colors',
+          '@paragraph',
+          '@links',
+          '@insert',
+          '@document',
+          '@tools',
+        ]
+      user_toolbar:
+        [
+          '@clipboard',
+          '@user_styles',
+          '@basicstyles',
+          '@user_paragraph',
+          '@user_links',
+          '@user_insert',
+          '@tools',
+        ]
+    items:
+      clipboard: ['Undo', 'Redo']
+      styles: ['Format', 'FontSize']
+      user_styles: ['Format']
+      basicstyles: ['Bold', 'Italic', 'Underline', 'Strike']
+      colors: ['TextColor', 'BGColor']
+      paragraph:
+        [
+          'NumberedList',
+          'BulletedList',
+          '-',
+          'Outdent',
+          'Indent',
+          '-',
+          'Blockquote',
+          '-',
+          'JustifyLeft',
+          'JustifyCenter',
+          'JustifyRight',
+          'JustifyBlock',
+        ]
+      user_paragraph: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']
+      links: ['Link', 'Unlink', 'Anchor']
+      user_links: ['Link', 'Unlink']
+      insert: ['Image', 'oembed', 'Iframe', 'Table', 'btgrid', 'HorizontalRule']
+      user_insert: ['Image', 'Table', 'HorizontalRule']
+      document: ['Source']
+      tools: ['Maximize']
+
+coop_tilleuls_ck_editor_sonata_media:
+  templates:
+    layout: CoopTilleulsCKEditorSonataMediaBundle::layout.html.twig
+    browser: CapcoMediaBundle:MediaAdmin:browser.html.twig
+    upload: CoopTilleulsCKEditorSonataMediaBundle:MediaAdmin:upload.html.twig
