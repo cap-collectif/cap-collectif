@@ -80,6 +80,7 @@ Proposal:
         type: '[Selection!]!'
       likers:
         type: '[InternalUser!]!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalLikersResolver", [value])'
       estimation:
         type: 'Int'
       responses:
