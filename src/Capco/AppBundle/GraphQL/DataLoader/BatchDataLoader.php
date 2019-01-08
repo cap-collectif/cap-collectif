@@ -18,6 +18,7 @@ abstract class BatchDataLoader extends DataLoader
     protected $cacheDriver;
     protected $cacheTtl;
     protected $debug;
+    protected $enableCache = true;
 
     public function __construct(
         callable $batchFunction,
@@ -26,13 +27,15 @@ abstract class BatchDataLoader extends DataLoader
         RedisTagCache $cache,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug
+        bool $debug,
+        bool $enableCache = true
     ) {
         $this->cachePrefix = $cachePrefix;
         $this->cache = $cache;
         $this->logger = $logger;
         $this->cacheTtl = $cacheTtl;
         $this->debug = $debug;
+        $this->enableCache = $enableCache;
         $options = new Option([
             'cacheKeyFn' => function ($key) {
                 $serializedKey = $this->serializeKey($key);
@@ -82,7 +85,7 @@ abstract class BatchDataLoader extends DataLoader
         $cacheKey = $this->getCacheKeyFromKey($key);
         $cacheItem = $this->cache->getItem($cacheKey);
 
-        if (!$cacheItem->isHit()) {
+        if (!$this->enableCache || !$cacheItem->isHit()) {
             if ($this->debug) {
                 $this->logger->info(
                     'Cache MISS for: ' . var_export($this->serializeKey($key), true)

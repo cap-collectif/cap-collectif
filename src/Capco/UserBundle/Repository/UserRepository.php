@@ -1041,6 +1041,19 @@ class UserRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
+    public function getUserFromProposalIds(array $proposalsId): array
+    {
+        $query = $this->createQueryBuilder('u');
+
+        return $query
+            ->select('u as user, p.id')
+            ->leftJoin('u.proposals', 'p')
+            ->where('p.id IN (:ids)')
+            ->setParameter('ids', $proposalsId)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');

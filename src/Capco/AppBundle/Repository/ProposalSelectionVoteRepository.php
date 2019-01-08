@@ -358,22 +358,6 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getByProposalIdsAndStepAndUser(
-        array $ids,
-        SelectionStep $step,
-        User $author
-    ): array {
-        return $this->createQueryBuilder('pv')
-            ->andWhere('pv.user = :author')
-            ->andWhere('pv.selectionStep = :step')
-            ->andWhere('pv.proposal IN (:ids)')
-            ->setParameter('author', $author)
-            ->setParameter('step', $step)
-            ->setParameter('ids', $ids)
-            ->getQuery()
-            ->getResult();
-    }
-
     private function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
     {
         $items = array_map(function ($value) use ($asTitle) {
