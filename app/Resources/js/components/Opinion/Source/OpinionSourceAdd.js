@@ -14,24 +14,24 @@ type Props = {
 };
 
 type State = {
-  openModal: boolean,
+  showModal: boolean,
 };
 
 class OpinionSourceAdd extends React.Component<Props, State> {
-  state = { openModal: false };
+  state = { showModal: false };
 
   openModal = () => {
-    this.setState({ openModal: true });
+    this.setState({ showModal: true });
   };
 
   closeModal = () => {
-    this.setState({ openModal: false });
+    this.setState({ showModal: false });
   };
 
   render() {
     const { dispatch, sourceable } = this.props;
     const { step } = sourceable;
-    const { openModal } = this.state;
+    const { showModal } = this.state;
     const disabled = !sourceable.contribuable;
     return (
       <div>
@@ -46,12 +46,7 @@ class OpinionSourceAdd extends React.Component<Props, State> {
           }}
         />
         {step /* $FlowFixMe */ && (
-          <RequirementsFormModal
-            step={step}
-            reason={step.requirements.reason}
-            handleClose={this.closeModal}
-            show={openModal}
-          />
+          <RequirementsFormModal step={step} handleClose={this.closeModal} show={showModal} />
         )}
         {!disabled && <OpinionSourceFormModal sourceable={sourceable} source={null} />}
       </div>
@@ -66,12 +61,11 @@ export default createFragmentContainer(container, {
       id
       contribuable
       step {
-        ...RequirementsForm_step
-        id
         requirements {
           viewerMeetsTheRequirements
-          reason
         }
+        ...RequirementsForm_step
+        ...RequirementsModal
       }
       ...OpinionSourceFormModal_sourceable
     }

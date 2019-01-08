@@ -33,7 +33,7 @@ type Props = {|
 |};
 
 type LocalState = {
-  openModal: boolean,
+  showModal: boolean,
 };
 
 const onSubmit = (
@@ -86,28 +86,27 @@ const validate = ({ body }: FormValues) => {
 };
 
 export class ArgumentCreate extends React.Component<Props, LocalState> {
-  state = { openModal: false };
+  state = { showModal: false };
 
   openModal = () => {
-    this.setState({ openModal: true });
+    this.setState({ showModal: true });
   };
 
   closeModal = () => {
-    this.setState({ openModal: false });
+    this.setState({ showModal: false });
   };
 
   render() {
     const { user, argumentable, type, dispatch, form, submitting, error } = this.props;
-    const { openModal } = this.state;
+    const { showModal } = this.state;
     const disabled = !argumentable.contribuable || !user;
     return (
       <div className="opinion__body box">
         {argumentable.step /* $FlowFixMe */ && (
           <RequirementsFormModal
             step={argumentable.step}
-            reason={argumentable.step.requirements.reason}
             handleClose={this.closeModal}
-            show={openModal}
+            show={showModal}
           />
         )}
         <div className="opinion__data">
@@ -186,22 +185,20 @@ export default createFragmentContainer(container, {
       contribuable
       ... on Opinion {
         step {
-          ...RequirementsForm_step
-          id
           requirements {
             viewerMeetsTheRequirements
-            reason
           }
+          ...RequirementsForm_step
+          ...RequirementsModal
         }
       }
       ... on Version {
         step {
-          ...RequirementsForm_step
-          id
           requirements {
             viewerMeetsTheRequirements
-            reason
           }
+          ...RequirementsForm_step
+          ...RequirementsModal
         }
       }
     }

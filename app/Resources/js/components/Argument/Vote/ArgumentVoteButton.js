@@ -17,20 +17,20 @@ type Props = {
 };
 
 type State = {
-  openModal: boolean,
+  showModal: boolean,
 };
 
 export class ArgumentVoteButton extends React.Component<Props, State> {
   target: null;
 
-  state = { openModal: false };
+  state = { showModal: false };
 
   openModal = () => {
-    this.setState({ openModal: true });
+    this.setState({ showModal: true });
   };
 
   closeModal = () => {
-    this.setState({ openModal: false });
+    this.setState({ showModal: false });
   };
 
   checkIfUserHasRequirements = () => {};
@@ -82,16 +82,11 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
   render() {
     const { argument } = this.props;
     const { step } = argument;
-    const { openModal } = this.state;
+    const { showModal } = this.state;
     return (
       <LoginOverlay>
         {step /* $FlowFixMe */ && (
-          <RequirementsFormModal
-            step={step}
-            reason={step.requirements.reason}
-            handleClose={this.closeModal}
-            show={openModal}
-          />
+          <RequirementsFormModal step={step} handleClose={this.closeModal} show={showModal} />
         )}
         <Button
           ref={button => {
@@ -133,12 +128,11 @@ export default createFragmentContainer(
         isViewer @include(if: $isAuthenticated)
       }
       step {
-        ...RequirementsForm_step
-        id
         requirements {
           viewerMeetsTheRequirements
-          reason
         }
+        ...RequirementsForm_step
+        ...RequirementsModal
       }
       contribuable
       viewerHasVote @include(if: $isAuthenticated)

@@ -8,9 +8,7 @@ import { $refType, $fragmentRefs } from '../../../mocks';
 describe('<ArgumentVoteButton />', () => {
   const defaultStep = {
     $fragmentRefs,
-    id: 'Q29uc3VsdGF0aW9uOmNzdGVwMQ==',
     requirements: {
-      reason: 'Vous devez avoir un numéro de téléphone.',
       viewerMeetsTheRequirements: true,
     },
   };
