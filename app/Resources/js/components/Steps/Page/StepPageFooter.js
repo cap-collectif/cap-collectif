@@ -1,17 +1,17 @@
 // @flow
 import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
+import type { StepPageFooter_step } from './__generated__/StepPageFooter_step.graphql';
 
 type Props = {
-  step: {
-    footer: ?string,
-  },
+  step: StepPageFooter_step,
 };
 
 class StepPageFooter extends React.Component<Props> {
   render() {
     const { step } = this.props;
-    const footer = step.footer;
+    const { footer } = step;
     if (!footer) {
       return null;
     }
@@ -25,4 +25,11 @@ class StepPageFooter extends React.Component<Props> {
   }
 }
 
-export default StepPageFooter;
+export default createFragmentContainer(
+  StepPageFooter,
+  graphql`
+    fragment StepPageFooter_step on QuestionnaireStep {
+      footer
+    }
+  `,
+);

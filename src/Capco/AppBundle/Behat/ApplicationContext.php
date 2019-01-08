@@ -13,6 +13,7 @@ use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\NotifierFactory;
 use Behat\Mink\Driver\Selenium2Driver;
 use Symfony\Component\Process\Process;
+use FOS\HttpCache\UserContext\UserContext;
 use WebDriver\Exception\ElementNotVisible;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminTrait;

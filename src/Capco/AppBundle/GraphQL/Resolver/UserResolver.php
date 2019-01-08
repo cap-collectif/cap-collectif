@@ -58,13 +58,13 @@ class UserResolver implements ResolverInterface
         );
     }
 
-    public function resolveEmail($object): ?string
+    public function resolveEmail(User $user): ?string
     {
-        if (0 === strpos($object->getEmail(), 'twitter_')) {
+        if (0 === strpos($user->getEmail(), 'twitter_')) {
             return null;
         }
 
-        return $object->getEmail();
+        return $user->getEmail();
     }
 
     public function resolveCreatedAt($object): \DateTime
@@ -128,11 +128,9 @@ class UserResolver implements ResolverInterface
 
     public function contributionsToDeleteCount($object): int
     {
-        $count = $this->deleteAccountMutation->hardDeleteUserContributionsInActiveSteps(
+        return $this->deleteAccountMutation->hardDeleteUserContributionsInActiveSteps(
             $object,
             true
         );
-
-        return $count;
     }
 }

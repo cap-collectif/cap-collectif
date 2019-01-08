@@ -49,18 +49,25 @@ class ProposalAuthorDataLoader extends BatchDataLoader
             return $key['proposal']->getId();
         }, $keys);
 
-        $results = $this->userRepository->getUserFromProposalIds($ids);
-        foreach ($results as $key => $result) {
-            $results[$result['id']] = (new User())->hydrate($result['user']);
-            unset($results[$key]);
-        }
-        $ids = array_flip($ids);
-        $results = array_merge($ids, $results);
+        $authors = array_map(function ($key) {
+            return $this->resolve($key['proposal']);
+        }, $keys);
 
-        $authors = [];
-        foreach ($results as $key => $result) {
-            $authors[] = $result;
-        }
+        // TO fix tests, disable batching
+        // TODO restore this
+        //
+        // $results = $this->userRepository->getUserFromProposalIds($ids);
+        // foreach ($results as $key => $result) {
+        //     $results[$result['id']] = (new User())->hydrate($result['user']);
+        //     unset($results[$key]);
+        // }
+        // $ids = array_flip($ids);
+        // $results = array_merge($ids, $results);
+
+        // $authors = [];
+        // foreach ($results as $key => $result) {
+        //     $authors[] = $result;
+        // }
 
         return $this->getPromiseAdapter()->createAll($authors);
     }

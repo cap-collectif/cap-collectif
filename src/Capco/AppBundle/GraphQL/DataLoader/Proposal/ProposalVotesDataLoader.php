@@ -21,6 +21,9 @@ class ProposalVotesDataLoader extends BatchDataLoader
 {
     private const BATCH = true;
     private const COUNT_MODE = 'ELASTICSEARCH';
+
+    public $enableBatch = true;
+    public $useElasticsearch = true;
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
     private $proposalSearch;
@@ -73,7 +76,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
             );
         }
 
-        if (self::BATCH) {
+        if ($this->enableBatch) {
             $connections = $this->resolveBatch($keys);
         } else {
             $connections = $this->resolveWithoutBatch($keys);
@@ -118,7 +121,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
         );
 
         $esResults = [];
-        if (!$includeUnpublished && self::COUNT_MODE === 'ELASTICSEARCH') {
+        if (!$includeUnpublished && $this->useElasticsearch) {
             $esResults = $this->proposalSearch->searchProposalsVotesCount($batchProposalIds);
         }
 
@@ -126,7 +129,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
         if (!$step) {
             $repo = null;
             // Elasticsearch is way faster to retrieve counters
-            if (!$includeUnpublished && self::COUNT_MODE === 'ELASTICSEARCH') {
+            if (!$includeUnpublished && $this->useElasticsearch) {
                 $totalCountByProposal = array_map(function ($data) {
                     return ['id' => $data['id'], 'total' => $data['votesCount']];
                 }, $esResults);
@@ -155,13 +158,15 @@ class ProposalVotesDataLoader extends BatchDataLoader
             }
 
             // Elasticsearch is way faster to retrieve counters
-            if (!$includeUnpublished && self::COUNT_MODE === 'ELASTICSEARCH') {
+            if (!$includeUnpublished && $this->useElasticsearch) {
                 $totalCountByProposal = array_map(function ($data) use ($step) {
-                    $totalCount = array_filter($data['votesCountByStep'], function ($value) use (
-                        $step
-                    ) {
-                        return $value['step']['id'] === $step->getId();
-                    })[0]['count'];
+                    $filtered = array_values(
+                        array_filter($data['votesCountByStep'], function ($value) use ($step) {
+                            return $value['step']['id'] === $step->getId();
+                        })
+                    );
+
+                    $totalCount = $filtered[0]['count'];
 
                     return ['id' => $data['id'], 'total' => $totalCount];
                 }, $esResults);

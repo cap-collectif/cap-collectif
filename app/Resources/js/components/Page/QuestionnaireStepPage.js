@@ -12,7 +12,6 @@ import { type QuestionnaireStepPageQueryResponse } from './__generated__/Questio
 import { Loader } from '../Ui/FeedbacksIndicators/Loader';
 
 type Props = {
-  step: Object,
   questionnaireId: ?string,
   isAuthenticated: boolean,
 };
@@ -28,12 +27,15 @@ const component = ({
   }
 
   if (props) {
-    if (props.questionnaire !== null) {
+    if (props.questionnaire) {
       return (
         <div>
+          {/* props.questionnaire.step && <StepPageHeader step={props.questionnaire.step} /> */}
           {/* $FlowFixMe $refType */}
           <UserReplies questionnaire={props.questionnaire} />
           <ReplyCreateFormWrapper questionnaire={props.questionnaire} />
+          {/* $FlowFixMe $refType */}
+          {props.questionnaire.step && <StepPageFooter step={props.questionnaire.step} />}
         </div>
       );
     }
@@ -44,17 +46,22 @@ const component = ({
 
 export class QuestionnaireStepPage extends React.Component<Props> {
   render() {
-    const { questionnaireId, step, isAuthenticated } = this.props;
+    const { questionnaireId, isAuthenticated } = this.props;
 
     return (
       <div>
-        <StepPageHeader step={step} />
         {questionnaireId ? (
           <QueryRenderer
             environment={environment}
             query={graphql`
               query QuestionnaireStepPageQuery($id: ID!, $isAuthenticated: Boolean!) {
                 questionnaire: node(id: $id) {
+                  ... on Questionnaire {
+                    step {
+                      ...StepPageFooter_step
+                      footer
+                    }
+                  }
                   ...ReplyCreateFormWrapper_questionnaire
                     @arguments(isAuthenticated: $isAuthenticated)
                   ...UserReplies_questionnaire @arguments(isAuthenticated: $isAuthenticated)
@@ -68,17 +75,13 @@ export class QuestionnaireStepPage extends React.Component<Props> {
             render={component}
           />
         ) : null}
-        <StepPageFooter step={step} />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: GlobalState, props: Props) => ({
+const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: state.user.user !== null,
-  step:
-    state.project.currentProjectById &&
-    state.project.projectsById[state.project.currentProjectById].stepsById[props.step.id],
 });
 
 export default connect(mapStateToProps)(QuestionnaireStepPage);
