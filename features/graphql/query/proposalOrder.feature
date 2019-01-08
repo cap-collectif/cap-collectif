@@ -1,4 +1,4 @@
-@proposals @dev
+@proposals
 Feature: Proposal Order By
 
 @elasticsearch
@@ -28,52 +28,46 @@ Scenario: GraphQL client want to order proposals by COMMENTS
   Then the JSON response should match:
   """
   {
-     "data": {
-        "proposalForm": {
-           "proposals": {
+     "data":{
+        "proposalForm":{
+           "proposals":{
               "edges":[
                  {
-                  "node": {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-                    "commentsCount": 20
-                  }
-                },
-                {
-                  "node": {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWwzNQ==",
-                    "commentsCount": 7
-                  }
-                },
-                {
-                  "node": {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
-                    "commentsCount": 0
-                  }
-                },
-                {
-                  "node": {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
-                    "commentsCount": 0
-                  }
-                },
-                {
-                  "node": {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
-                    "commentsCount": 0
-                  }
-                },
-                {
-                  "node": {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
-                    "commentsCount": 0
-                  }
-                },
-                {
-                  "node": {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWw0",
-                    "commentsCount": 0
-                  }
-                }
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwx",
+                       "commentsCount":20
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+                       "commentsCount":0
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
+                       "commentsCount":0
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
+                       "commentsCount":0
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWwz",
+                       "commentsCount":0
+                    }
+                 },
+                 {
+                    "node":{
+                       "id":"UHJvcG9zYWw6cHJvcG9zYWw0",
+                       "commentsCount":0
+                    }
+                 }
               ]
            }
         }

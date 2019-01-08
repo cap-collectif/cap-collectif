@@ -69,6 +69,6 @@ class DeleteProposalMutation implements MutationInterface
 
         $this->dataLoader->invalidate($proposalForm);
 
-        return ['proposal' => $proposal, 'viewer' => $user, 'step' => $proposal->getStep()];
+        return ['proposalId' => $proposalId, 'viewer' => $user, 'step' => $proposal->getStep()];
     }
 }
