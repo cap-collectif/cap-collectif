@@ -137,3 +137,25 @@ Capco\AppBundle\Entity\Source:
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
     link: http://www.google.fr
+  source42:
+    id: 'source42'
+    title: Ma source Admin
+    body: blabla
+    author: '@user1'
+    opinion: '@opinion1'
+    category: '@Category2'
+    publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
+    link: http://www.google.fr
+  source43:
+    id: 'source43'
+    title: Ma source Admin avec vote
+    body: blabla
+    author: '@user1'
+    opinion: '@opinion1'
+    category: '@Category2'
+    publishedAt: <(new \DateTime('2016-03-01'))>
+    createdAt: <(new \DateTime('2016-03-01'))>
+    updatedAt: <(new \DateTime('2016-03-01'))>
+    link: http://www.google.fr

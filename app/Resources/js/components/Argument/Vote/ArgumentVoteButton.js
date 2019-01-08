@@ -91,35 +91,37 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
     const { step } = argument;
     const { showModal } = this.state;
     return (
-      <LoginOverlay>
+      <div>
         {step /* $FlowFixMe */ && (
           <RequirementsFormModal step={step} handleClose={this.closeModal} show={showModal} />
         )}
-        <Button
-          ref={button => {
-            this.target = button;
-          }}
-          disabled={!argument.contribuable || argument.author.isViewer}
-          bsStyle={argument.viewerHasVote ? 'danger' : 'success'}
-          className={`argument__btn--vote${argument.viewerHasVote ? '' : ' btn--outline'}`}
-          bsSize="xsmall"
-          onClick={argument.viewerHasVote ? this.deleteVote : this.vote}>
-          {argument.viewerHasVote ? (
-            <span>
-              <FormattedMessage id="vote.cancel" />
-            </span>
-          ) : (
-            <span>
-              <i className="cap cap-hand-like-2" /> {<FormattedMessage id="vote.ok" />}
-            </span>
-          )}
-          {/* $FlowFixMe */}
-          <UnpublishedTooltip
-            target={() => ReactDOM.findDOMNode(this.target)}
-            publishable={argument.viewerVote || null}
-          />
-        </Button>
-      </LoginOverlay>
+        <LoginOverlay>
+          <Button
+            ref={button => {
+              this.target = button;
+            }}
+            disabled={!argument.contribuable || argument.author.isViewer}
+            bsStyle={argument.viewerHasVote ? 'danger' : 'success'}
+            className={`argument__btn--vote${argument.viewerHasVote ? '' : ' btn--outline'}`}
+            bsSize="xsmall"
+            onClick={argument.viewerHasVote ? this.deleteVote : this.vote}>
+            {argument.viewerHasVote ? (
+              <span>
+                <FormattedMessage id="vote.cancel" />
+              </span>
+            ) : (
+              <span>
+                <i className="cap cap-hand-like-2" /> {<FormattedMessage id="vote.ok" />}
+              </span>
+            )}
+            {/* $FlowFixMe */}
+            <UnpublishedTooltip
+              target={() => ReactDOM.findDOMNode(this.target)}
+              publishable={argument.viewerVote || null}
+            />
+          </Button>
+        </LoginOverlay>
+      </div>
     );
   }
 }
@@ -136,7 +138,7 @@ export default createFragmentContainer(
       }
       step {
         requirements {
-          viewerMeetsTheRequirements
+          viewerMeetsTheRequirements @include(if: $isAuthenticated)
         }
         ...RequirementsForm_step
         ...RequirementsModal

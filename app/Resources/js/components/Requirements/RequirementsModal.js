@@ -18,7 +18,7 @@ type Props = {
   handleClose: () => void,
 };
 
-class RequirementsModal extends React.Component<Props> {
+export class RequirementsModal extends React.Component<Props> {
   render() {
     const { show, handleClose, step } = this.props;
 

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ArgumentVoteButton /> renders viewer has not voted 1`] = `
-<Connect(LoginOverlay)>
+<div>
   <ForwardRef(Relay(Connect(RequirementsModal)))
     handleClose={[Function]}
     show={false}
@@ -14,36 +14,38 @@ exports[`<ArgumentVoteButton /> renders viewer has not voted 1`] = `
       }
     }
   />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsSize="xsmall"
-    bsStyle="success"
-    className="argument__btn--vote btn--outline"
-    disabled={false}
-    onClick={[Function]}
-  >
-    <span>
-      <i
-        className="cap cap-hand-like-2"
+  <Connect(LoginOverlay)>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsSize="xsmall"
+      bsStyle="success"
+      className="argument__btn--vote btn--outline"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <span>
+        <i
+          className="cap cap-hand-like-2"
+        />
+         
+        <FormattedMessage
+          id="vote.ok"
+          values={Object {}}
+        />
+      </span>
+      <ForwardRef(Relay(UnpublishedTooltip))
+        publishable={null}
+        target={[Function]}
       />
-       
-      <FormattedMessage
-        id="vote.ok"
-        values={Object {}}
-      />
-    </span>
-    <ForwardRef(Relay(UnpublishedTooltip))
-      publishable={null}
-      target={[Function]}
-    />
-  </Button>
-</Connect(LoginOverlay)>
+    </Button>
+  </Connect(LoginOverlay)>
+</div>
 `;
 
 exports[`<ArgumentVoteButton /> renders viewer has voted 1`] = `
-<Connect(LoginOverlay)>
+<div>
   <ForwardRef(Relay(Connect(RequirementsModal)))
     handleClose={[Function]}
     show={false}
@@ -56,37 +58,39 @@ exports[`<ArgumentVoteButton /> renders viewer has voted 1`] = `
       }
     }
   />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsSize="xsmall"
-    bsStyle="danger"
-    className="argument__btn--vote"
-    disabled={false}
-    onClick={[Function]}
-  >
-    <span>
-      <FormattedMessage
-        id="vote.cancel"
-        values={Object {}}
-      />
-    </span>
-    <ForwardRef(Relay(UnpublishedTooltip))
-      publishable={
-        Object {
-          "$fragmentRefs": null,
-          "id": "vote1",
+  <Connect(LoginOverlay)>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsSize="xsmall"
+      bsStyle="danger"
+      className="argument__btn--vote"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <span>
+        <FormattedMessage
+          id="vote.cancel"
+          values={Object {}}
+        />
+      </span>
+      <ForwardRef(Relay(UnpublishedTooltip))
+        publishable={
+          Object {
+            "$fragmentRefs": null,
+            "id": "vote1",
+          }
         }
-      }
-      target={[Function]}
-    />
-  </Button>
-</Connect(LoginOverlay)>
+        target={[Function]}
+      />
+    </Button>
+  </Connect(LoginOverlay)>
+</div>
 `;
 
 exports[`<ArgumentVoteButton /> renders when viewer is author 1`] = `
-<Connect(LoginOverlay)>
+<div>
   <ForwardRef(Relay(Connect(RequirementsModal)))
     handleClose={[Function]}
     show={false}
@@ -99,30 +103,32 @@ exports[`<ArgumentVoteButton /> renders when viewer is author 1`] = `
       }
     }
   />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsSize="xsmall"
-    bsStyle="success"
-    className="argument__btn--vote btn--outline"
-    disabled={true}
-    onClick={[Function]}
-  >
-    <span>
-      <i
-        className="cap cap-hand-like-2"
+  <Connect(LoginOverlay)>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsSize="xsmall"
+      bsStyle="success"
+      className="argument__btn--vote btn--outline"
+      disabled={true}
+      onClick={[Function]}
+    >
+      <span>
+        <i
+          className="cap cap-hand-like-2"
+        />
+         
+        <FormattedMessage
+          id="vote.ok"
+          values={Object {}}
+        />
+      </span>
+      <ForwardRef(Relay(UnpublishedTooltip))
+        publishable={null}
+        target={[Function]}
       />
-       
-      <FormattedMessage
-        id="vote.ok"
-        values={Object {}}
-      />
-    </span>
-    <ForwardRef(Relay(UnpublishedTooltip))
-      publishable={null}
-      target={[Function]}
-    />
-  </Button>
-</Connect(LoginOverlay)>
+    </Button>
+  </Connect(LoginOverlay)>
+</div>
 `;
