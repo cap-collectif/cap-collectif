@@ -30,7 +30,8 @@ const component = ({
     if (props.questionnaire) {
       return (
         <div>
-          {/* props.questionnaire.step && <StepPageHeader step={props.questionnaire.step} /> */}
+          {/* $FlowFixMe $refType */}
+          {props.questionnaire.step && <StepPageHeader step={props.questionnaire.step} />}
           {/* $FlowFixMe $refType */}
           <UserReplies questionnaire={props.questionnaire} />
           <ReplyCreateFormWrapper questionnaire={props.questionnaire} />
@@ -59,7 +60,7 @@ export class QuestionnaireStepPage extends React.Component<Props> {
                   ... on Questionnaire {
                     step {
                       ...StepPageFooter_step
-                      footer
+                      ...StepPageHeader_step
                     }
                   }
                   ...ReplyCreateFormWrapper_questionnaire

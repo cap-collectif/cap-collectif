@@ -1,15 +1,17 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import RemainingTime from '../../Utils/RemainingTime';
 import DatesInterval from '../../Utils/DatesInterval';
 import StepInfos from './StepInfos';
+import { type StepPageHeader_step } from './__generated__/StepPageHeader_step.graphql';
 
 type Props = {
-  step: Object,
+  step: StepPageHeader_step,
 };
 
-export class StepPageHeader extends React.Component<Props> {
+class StepPageHeader extends React.Component<Props> {
   stepIsParticipative() {
     const { step } = this.props;
 
@@ -43,13 +45,13 @@ export class StepPageHeader extends React.Component<Props> {
           {step.type !== 'questionnaire' && (
             <div className="d-ib">
               <i className="cap cap-business-chart-2-1" />{' '}
-              <a href={step._links.stats}>
+              {/*<a href={step._links.stats}>
                 <FormattedMessage id="project.show.meta.info.stats" />
-              </a>
+          </a>*/}
             </div>
           )}
         </div>
-        {step.type === 'selection' && step.voteThreshold > 0 && (
+        {step.type === 'selection' && step.voteThreshold && step.voteThreshold > 0 && (
           <h4 style={{ marginBottom: '20px' }}>
             <i className="cap cap-hand-like-2-1" style={{ fontSize: '22px', color: '#377bb5' }} />{' '}
             <FormattedMessage
@@ -60,10 +62,27 @@ export class StepPageHeader extends React.Component<Props> {
             />
           </h4>
         )}
+        }
         <StepInfos step={step} />
       </div>
     );
   }
 }
 
-export default StepPageHeader;
+export default createFragmentContainer(
+  StepPageHeader,
+  graphql`
+    fragment StepPageHeader_step on Step {
+      ... on SelectionStep {
+        voteThreshold
+        votable
+      }
+      status
+      title
+      timeless
+      startAt
+      endAt
+      type
+    }
+  `,
+);

@@ -16,6 +16,7 @@ import type { FeatureToggles, State } from '../../types';
 import type {
   ProposalStepPageQueryResponse,
   ProposalStepPageQueryVariables,
+  StepPageHeader_step,
 } from './__generated__/ProposalStepPageQuery.graphql';
 import config from '../../config';
 
@@ -24,7 +25,7 @@ type OwnProps = {|
 |};
 
 type Props = {|
-  step: { id: string },
+  step: StepPageHeader_step,
   filters: Object,
   order: ?string,
   terms: ?string,
@@ -104,6 +105,7 @@ export class ProposalStepPage extends React.Component<Props> {
                     }
                   }
                   kind
+                  ...StepPageHeader_step
                   ...ProposalListFilters_step
                   ...ProposalListView_step @arguments(count: $count)
                   ...UnpublishedProposalListView_step @arguments(isAuthenticated: $isAuthenticated)

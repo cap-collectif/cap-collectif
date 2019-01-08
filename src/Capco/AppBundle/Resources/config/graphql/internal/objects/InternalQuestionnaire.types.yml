@@ -8,7 +8,7 @@ InternalQuestionnaire:
     name: Questionnaire
     interfaces: [Node]
     fields:
-      step: 
+      step:
         type: 'QuestionnaireStep'
       anonymousAllowed:
         type: 'Boolean!'
