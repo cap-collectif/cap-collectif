@@ -136,6 +136,7 @@ class AddProposalVoteMutation implements MutationInterface
         $errors = $this->validator->validate($vote);
         foreach ($errors as $error) {
             $this->logger->error((string) $error->getMessage());
+
             throw new UserError((string) $error->getMessage());
         }
 

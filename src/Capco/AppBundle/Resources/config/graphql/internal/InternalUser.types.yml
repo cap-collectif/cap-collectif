@@ -23,7 +23,7 @@ InternalUser:
         type: 'Boolean!'
         description: 'Whether or not this user is a vip.'
       slug:
-        type: 'String'
+        type: 'String!'
         description: "The user's slug (unique)."
       email:
         type: 'String'

@@ -57,10 +57,6 @@ class GlobalIdResolver
 
         // We try to decode the global id
         $decodeGlobalId = self::isGlobalId($uuidOrGlobalId);
-        $this->container->get('logger')->info(str_repeat('*', 150));
-        $this->container->get('logger')->info('GlobalIdResolver : ');
-        $this->container->get('logger')->debug(json_encode($decodeGlobalId));
-        $this->container->get('logger')->debug(json_encode($uuidOrGlobalId));
 
         if (\is_array($decodeGlobalId)) {
             // Good news, it's a GraphQL Global id !
@@ -92,7 +88,6 @@ class GlobalIdResolver
                     break;
                 case 'MapToken':
                     $node = $this->container->get(MapTokenRepository::class)->find($uuid);
-
 
                     break;
                 case 'Requirement':

@@ -21,10 +21,10 @@ class FollowProposalMutation implements MutationInterface
     private $followerRepository;
     private $viewerFollowDataLoader;
     private $viewerFollowingConfigDataLoader;
+    private $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,
-        ProposalRepository $proposalRepository,
         FollowerRepository $followerRepository,
         ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader,
         ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader,

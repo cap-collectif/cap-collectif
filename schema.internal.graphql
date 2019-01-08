@@ -5887,7 +5887,7 @@ type User implements Node & UniformResourceLocatable {
   vip: Boolean!
 
   # The user's slug (unique).
-  slug: String
+  slug: String!
 
   # The user's email.
   email: String
