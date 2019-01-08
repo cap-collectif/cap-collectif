@@ -72,6 +72,7 @@ services:
     arguments:
       $cachePrefix: ProposalCurrentVotableStepDataloader
       $cacheTtl: 60
+      $debug: '%kernel.debug%'
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader:
     autowire: true

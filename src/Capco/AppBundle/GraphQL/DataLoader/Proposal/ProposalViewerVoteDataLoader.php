@@ -2,18 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 
 class ProposalViewerVoteDataLoader extends BatchDataLoader
@@ -30,7 +29,8 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         AbstractStepRepository $abstractStepRepository,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -42,7 +42,8 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 
@@ -76,10 +77,11 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
         ];
     }
 
-    private function resolve(Proposal $proposal, string $stepId, User $user): ?Connection
+    private function resolve(Proposal $proposal, string $stepId, User $user): ?AbstractVote
     {
         $step = $this->abstractStepRepository->find($stepId);
 
+        // TODO setup batching here
         if ($step instanceof CollectStep) {
             return $this->proposalCollectVoteRepository->getByProposalAndStepAndUser(
                 $proposal,

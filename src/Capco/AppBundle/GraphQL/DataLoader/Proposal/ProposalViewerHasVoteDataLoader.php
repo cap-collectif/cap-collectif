@@ -6,7 +6,6 @@ use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -29,7 +28,8 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         AbstractStepRepository $abstractStepRepository,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -41,7 +41,8 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 
@@ -53,6 +54,8 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
     public function all(array $keys)
     {
         $connections = [];
+
+        // TODO setup batching here
 
         foreach ($keys as $key) {
             $connections[] = $this->resolve($key['proposal'], $key['stepId'], $key['user']);
