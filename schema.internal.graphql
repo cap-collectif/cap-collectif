@@ -2600,6 +2600,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection
+  step: Consultation!
 
   # The sources related to the sourceable.
   sources(
@@ -2706,7 +2707,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # true if the contribution is pinned.
   pinned: Boolean!
-  step: Consultation!
 
   # The viewer vote.
   viewerVote: OpinionVote
@@ -5294,6 +5294,7 @@ type SourceVoteEdge {
 interface Sourceable {
   id: ID!
   contribuable: Boolean!
+  step: Consultation!
 
   # The sources related to the sourceable.
   sources(
@@ -6234,6 +6235,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   # The URL to this resource.
   url: URI!
   contribuable: Boolean!
+  step: Consultation!
 
   # The sources related to the sourceable.
   sources(
@@ -6361,7 +6363,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   # Explenation.
   comment: String
-  step: Consultation!
   votes(
     # Returns the elements in the list that come after the specified cursor.
     after: String
