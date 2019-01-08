@@ -33,13 +33,22 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
     this.setState({ showModal: false });
   };
 
-  checkIfUserHasRequirements = () => {};
+  checkIfUserHasRequirements = (): boolean => {
+    const { argument } = this.props;
+    const { step } = argument;
+
+    const userHasNotRequirements =
+      step && step.requirements && !step.requirements.viewerMeetsTheRequirements;
+
+    if (userHasNotRequirements) {
+      this.openModal();
+    }
+    return userHasNotRequirements;
+  };
 
   vote = () => {
     const { argument } = this.props;
-    const { step } = argument;
-    if (step && step.requirements && !step.requirements.viewerMeetsTheRequirements) {
-      this.openModal();
+    if (this.checkIfUserHasRequirements()) {
       return;
     }
     AddArgumentVoteMutation.commit({ input: { argumentId: argument.id } })
@@ -59,9 +68,7 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
 
   deleteVote = () => {
     const { argument } = this.props;
-    const { step } = argument;
-    if (step && step.requirements && !step.requirements.viewerMeetsTheRequirements) {
-      this.openModal();
+    if (this.checkIfUserHasRequirements()) {
       return;
     }
     RemoveArgumentVoteMutation.commit({ input: { argumentId: argument.id } })
