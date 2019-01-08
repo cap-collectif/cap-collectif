@@ -164,6 +164,20 @@ class Project implements IndexableInterface
     /**
      * @var int
      *
+     * @ORM\Column(name="participants_count", type="integer")
+     */
+    private $participantsCount = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="votes_count", type="integer")
+     */
+    private $votesCount = 0;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="opinions_ranking_threshold", type="integer", nullable=true)
      */
     private $opinionsRankingThreshold;
@@ -578,6 +592,38 @@ class Project implements IndexableInterface
     /**
      * @return int
      */
+    public function getParticipantsCount()
+    {
+        return $this->participantsCount;
+    }
+
+    /**
+     * @param int $participantsCount
+     */
+    public function setParticipantsCount($participantsCount)
+    {
+        $this->participantsCount = $participantsCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVotesCount()
+    {
+        return $this->votesCount;
+    }
+
+    /**
+     * @param int $votesCount
+     */
+    public function setVotesCount($votesCount)
+    {
+        $this->votesCount = $votesCount;
+    }
+
+    /**
+     * @return int
+     */
     public function getOpinionsRankingThreshold()
     {
         return $this->opinionsRankingThreshold;
@@ -685,6 +731,21 @@ class Project implements IndexableInterface
                 $count +=
                     $step->getStep()->getOpinionCount() +
                     $step->getStep()->getTrashedOpinionCount();
+            }
+        }
+
+        return $count;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalProposalsCount()
+    {
+        $count = 0;
+        foreach ($this->steps as $step) {
+            if ($step->getStep()->isCollectStep()) {
+                $count += $step->getStep()->getProposalsCount();
             }
         }
 

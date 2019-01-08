@@ -11,17 +11,10 @@ import type { State as EventState, EventAction } from './redux/modules/event';
 
 export type Exact<T> = T;
 export type Uuid = string;
-export type Uri = string;
 export type VoteValue = -1 | 0 | 1;
 export type Opinion = { id: Uuid };
 export type Version = { id: Uuid, parent: Object };
 export type OpinionAndVersion = Opinion | Version;
-
-export type MediaFromAPI = {|
-  +id: Uuid,
-  +name: string,
-  +url: Uri,
-|};
 
 export type FeatureToggles = {
   blog: boolean,

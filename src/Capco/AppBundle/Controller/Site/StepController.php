@@ -3,17 +3,17 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Helper\ProjectHelper;
-use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
+use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Resolver\EventResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
@@ -39,10 +39,7 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        return [
-            'project' => $project,
-            'currentStep' => $step,
-        ];
+        return ['project' => $project, 'currentStep' => $step];
     }
 
     /**
@@ -109,6 +106,7 @@ class StepController extends Controller
             'nbPosts' => $nbPosts,
             'contributors' => $contributorsList,
             'showVotes' => $showVotes,
+            'anonymousCount' => $contributorsConnection->anonymousCount,
         ];
     }
 
@@ -251,11 +249,7 @@ class StepController extends Controller
             'json'
         );
 
-        return [
-            'project' => $project,
-            'currentStep' => $step,
-            'props' => $props,
-        ];
+        return ['project' => $project, 'currentStep' => $step, 'props' => $props];
     }
 
     /**
@@ -309,11 +303,7 @@ class StepController extends Controller
             ]
         );
 
-        return [
-            'project' => $project,
-            'currentStep' => $step,
-            'props' => $props,
-        ];
+        return ['project' => $project, 'currentStep' => $step, 'props' => $props];
     }
 
     /**
@@ -328,11 +318,7 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
-        return [
-            'project' => $project,
-            'currentStep' => $step,
-            'proposalForm' => null,
-        ];
+        return ['project' => $project, 'currentStep' => $step];
     }
 
     /**
@@ -364,11 +350,7 @@ class StepController extends Controller
             'json'
         );
 
-        return [
-            'project' => $project,
-            'currentStep' => $step,
-            'props' => $props,
-        ];
+        return ['project' => $project, 'currentStep' => $step, 'props' => $props];
     }
 
     /**
@@ -404,10 +386,6 @@ class StepController extends Controller
             'groups' => ['ConsultationSteps', 'Steps', 'UserVotes'],
         ]);
 
-        return [
-            'project' => $project,
-            'currentStep' => $currentStep,
-            'stepProps' => $stepProps,
-        ];
+        return ['project' => $project, 'currentStep' => $currentStep, 'stepProps' => $stepProps];
     }
 }

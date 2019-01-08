@@ -1,7 +1,0 @@
-limenius_react:
-  default_rendering: 'both'
-  serverside_rendering:
-    mode: 'external_server'
-    fail_loud: false # Fix warnings then set to true in dev
-    trace: false
-    server_socket_path: 'unix:///var/node_ssr.sock'

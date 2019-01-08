@@ -28,12 +28,14 @@ services:
     public: true
 
   Capco\AppBundle\Resolver\ContributionResolver:
+    class: Capco\AppBundle\Resolver\ContributionResolver
     public: true
 
   Capco\AppBundle\Resolver\EventResolver:
     public: true
 
   Capco\AppBundle\Resolver\HighlightedContentResolver:
+    class: Capco\AppBundle\Resolver\HighlightedContentResolver
     public: true
 
   Capco\AppBundle\Manager\MenuItemResolver:

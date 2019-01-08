@@ -599,42 +599,6 @@ type ChangeEventPayload {
   clientMutationId: String
 }
 
-input ChangeMapProviderTokenInput {
-  # The name of the provider the new token will be set
-  provider: MapTokenProvider!
-
-  # The new public token
-  publicToken: String
-
-  # The new secret token
-  secretToken: String
-  clientMutationId: String
-}
-
-type ChangeMapProviderTokenPayload {
-  # The newly map token
-  mapToken: MapToken
-  clientMutationId: String
-}
-
-input ChangeMapStyleInput {
-  # The ID of the map token to modify the style
-  mapTokenId: ID!
-
-  # The new style owner
-  styleOwner: String!
-
-  # The new style ID
-  styleId: ID!
-  clientMutationId: String
-}
-
-type ChangeMapStylePayload {
-  # The newly map token
-  mapToken: MapToken
-  clientMutationId: String
-}
-
 input ChangeProposalContentInput {
   # The proposal id
   id: ID!
@@ -2047,28 +2011,6 @@ scalar HTML
 # A string containing an IP address.
 scalar IP
 
-input InternalChangeSiteFaviconInput {
-  # The media id to associate for the website favicon
-  mediaId: ID!
-  clientMutationId: String
-}
-
-type InternalChangeSiteFaviconPayload {
-  # The newly updated site image favicon
-  siteFavicon: SiteImage!
-  clientMutationId: String
-}
-
-input InternalRemoveSiteFaviconInput {
-  clientMutationId: String
-}
-
-type InternalRemoveSiteFaviconPayload {
-  # The newly updated site image favicon
-  siteFavicon: SiteImage!
-  clientMutationId: String
-}
-
 # A string containing JSON code.
 scalar JSON
 
@@ -2147,78 +2089,6 @@ input LogicJumpInput {
 
   # A collection of conditions that you have to fulfill for displaying the destination question
   conditions: [LogicJumpConditionInput]
-}
-
-# A map token used for connecting external services with our maps
-type MapToken implements Node {
-  # The ID of an object
-  id: ID!
-
-  # Expose Primary Key, do not use it, except for testing purpose.
-  _id: ID
-
-  # The public token
-  publicToken: String!
-
-  # The secret token
-  secretToken: String
-
-  # The corresponding provider in which belongs the token
-  provider: MapTokenProvider
-
-  # The style id associated to this map token (available only if a style is applied)
-  styleId: ID
-
-  # The style owner associated to this map token (available only if a style is applied)
-  styleOwner: String
-
-  # The available styles associated to this map token
-  styles(
-    # Filter the styles by its visibility
-    visibility: MapTokenStyleVisibility
-  ): [MapTokenStyle]
-  createdAt: DateTime!
-  updatedAt: DateTime
-}
-
-# The provider for a map token
-enum MapTokenProvider {
-  # Used for Mapbox service provider
-  MAPBOX
-}
-
-# A map token style
-type MapTokenStyle {
-  id: ID!
-
-  # The name of the style
-  name: String!
-  createdAt: DateTime!
-  updatedAt: DateTime
-
-  # The version of the style
-  version: Int!
-
-  # The preview url of the style
-  previewUrl: URI!
-
-  # Does the style is the current one applied to the whole website?
-  isCurrent: Boolean!
-
-  # The owner of the style
-  owner: String!
-
-  # The visibility of the style
-  visibility: MapTokenStyleVisibility!
-}
-
-# The visibility of a style for a map token
-enum MapTokenStyleVisibility {
-  # The style is public
-  PUBLIC
-
-  # The style is private
-  PRIVATE
 }
 
 # A media
@@ -2406,10 +2276,6 @@ enum MultipleChoiceQuestionValidationRulesTypes {
 type Mutation {
   addEvent(input: AddEventInput!): AddEventPayload
   changeEvent(input: ChangeEventInput!): ChangeEventPayload
-  changeMapProviderToken(input: ChangeMapProviderTokenInput!): ChangeMapProviderTokenPayload
-  changeMapStyle(input: ChangeMapStyleInput!): ChangeMapStylePayload
-  removeSiteFavicon(input: InternalRemoveSiteFaviconInput!): InternalRemoveSiteFaviconPayload
-  changeSiteFavicon(input: InternalChangeSiteFaviconInput!): InternalChangeSiteFaviconPayload
   addComment(input: AddCommentInput!): AddCommentPayload
   addSourceVote(input: AddSourceVoteInput!): AddSourceVotePayload
   addCommentVote(input: AddCommentVoteInput!): AddCommentVotePayload
@@ -3093,8 +2959,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   author: User!
   video: String
   cover: Media
+  participantsCount: Int!
   contributionsCount: Int!
-  votes: VoteConnection!
+  votesCount: Int!
   hasParticipativeStep: Boolean!
   links: ProjectLinks!
   type: ProjectType
@@ -3992,18 +3859,6 @@ type Query {
     # If non-null, filters events with the given string to look for.
     search: String
   ): EventConnection!
-
-  # Get the available map tokens
-  mapTokens: [MapToken!]!
-
-  # Search a particular map token by its provider
-  mapToken(
-    # The map provider
-    provider: MapTokenProvider!
-  ): MapToken
-
-  # Get the current favicon
-  siteFavicon: SiteImage!
 
   # Get the current registration form
   registrationForm: RegistrationForm
@@ -5076,31 +4931,6 @@ type SimpleQuestion implements Question {
 
   # The associated logic jumps to this question.
   jumps: [LogicJump]
-}
-
-# A site image
-type SiteImage {
-  # The creation date
-  createdAt: DateTime!
-
-  # The updated date
-  updatedAt: DateTime
-  id: ID!
-
-  # A unique key to distinguish site image
-  keyname: String!
-
-  # Does the site image is currently enabled?
-  isEnabled: Boolean!
-
-  # The position of the site image
-  position: Int!
-
-  # The category of the site image
-  category: String!
-
-  # The associated media of the site image
-  media: Media
 }
 
 # A source

@@ -17,12 +17,13 @@ Project:
       cover:
         type: 'Media'
         resolve: '@=value.getCover()'
+      participantsCount:
+        type: 'Int!'
       contributionsCount:
         type: 'Int!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", [value])'
-      votes:
-        type: 'VoteConnection!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotesResolver", [value])'
+      votesCount:
+        type: 'Int!'
       hasParticipativeStep:
         type: Boolean!
         resolve: '@=value.hasParticipativeStep()'

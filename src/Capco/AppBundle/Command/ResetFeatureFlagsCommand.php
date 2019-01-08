@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Toggle\Manager;
@@ -64,9 +63,9 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('developer_documentation');
         $toggleManager->deactivate('login_openid');
         $toggleManager->activate('consultation_plan');
-        $toggleManager->activate('display_map');
+        $toggleManager->deactivate('display_map');
 
-        if ('prod' == $this->getContainer()->getParameter('kernel.environment')) {
+        if ($this->getContainer()->getParameter('kernel.environment') == 'prod') {
             $toggleManager->deactivate('registration');
             $toggleManager->deactivate('login_facebook');
             $toggleManager->deactivate('login_gplus');

@@ -1,14 +1,14 @@
 <?php
-
 namespace Capco\AppBundle\Command;
 
 use Doctrine\ORM\EntityManager;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Console\Input\InputOption;
 use Capco\AppBundle\Resolver\ContributionResolver;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotesResolver;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepContributorResolver;
 
 class RecalculateCountersCommand extends ContainerAwareCommand
 {
@@ -37,8 +37,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $this->entityManager = $container->get('doctrine')->getManager();
         $contributionResolver = $container->get(ContributionResolver::class);
         $this->force = $input->getOption('force');
-
-        $projectVotesResolver = $container->get(ProjectVotesResolver::class);
 
         // ****************************** Opinion counters **********************************************
 
@@ -307,11 +305,50 @@ class RecalculateCountersCommand extends ContainerAwareCommand
                         $cs->getId() .
                         '\''
                 );
-                $votes = $projectVotesResolver->countStepVotes($cs);
+                $votes = $contributionResolver->countStepVotes($cs);
                 $this->executeQuery(
                     'UPDATE CapcoAppBundle:Steps\ConsultationStep cs
                     set cs.votesCount = ' .
                         $votes .
+                        '
+                    where cs.id = \'' .
+                        $cs->getId() .
+                        '\''
+                );
+            }
+        }
+
+        // ****************************** Collect step counters **************************************
+
+        $this->executeQuery(
+            'UPDATE CapcoAppBundle:Steps\CollectStep cs set cs.proposalsCount = (
+          select count(DISTINCT p.id)
+          from CapcoAppBundle:Proposal p
+          INNER JOIN CapcoAppBundle:ProposalForm pf WITH p.proposalForm = pf
+          where pf.step = cs AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.published = 1
+          group by pf.step
+        )'
+        );
+
+        $this->executeQuery(
+            'UPDATE CapcoAppBundle:Steps\CollectStep ss set ss.votesCount = (
+          select count(DISTINCT pv.id)
+          from CapcoAppBundle:ProposalCollectVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
+          where pv.collectStep = ss AND pv.published = 1 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.published = 1
+          group by pv.collectStep
+        )'
+        );
+
+        $collectSteps = $container->get('capco.collect_step.repository')->findAll();
+        foreach ($collectSteps as $cs) {
+            if ($cs->isOpen() || $this->force) {
+                $connection = $container
+                    ->get(StepContributorResolver::class)
+                    ->__invoke($cs, new Argument(['first' => 0]));
+                $this->executeQuery(
+                    'UPDATE CapcoAppBundle:Steps\CollectStep cs
+                    set cs.contributorsCount = ' .
+                        $connection->totalCount .
                         '
                     where cs.id = \'' .
                         $cs->getId() .
@@ -349,6 +386,14 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         }
 
         // ****************************** Selection steps counters **************************************
+        $this->executeQuery(
+            'UPDATE CapcoAppBundle:Steps\SelectionStep ss set ss.votesCount = (
+          select count(DISTINCT pv.id)
+          from CapcoAppBundle:ProposalSelectionVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
+          where pv.selectionStep = ss AND pv.published = 1 AND p.draft = 0 AND p.trashedAt IS NULL AND p.deletedAt IS NULL AND p.published = 1
+          group by pv.selectionStep
+        )'
+        );
 
         $selectionSteps = $container->get('capco.selection_step.repository')->findAll();
         foreach ($selectionSteps as $ss) {

@@ -20,7 +20,10 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
       <option
         value=""
       >
-        global.select_themes
+        <FormattedMessage
+          id="global.select_themes"
+          values={Object {}}
+        />
       </option>
       <option
         key="1"
@@ -44,7 +47,10 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
       <option
         value=""
       >
-        global.select_categories
+        <FormattedMessage
+          id="global.select_categories"
+          values={Object {}}
+        />
       </option>
       <option
         key="1"
@@ -100,7 +106,10 @@ exports[`<ProjectStatsFilters /> should render only categories filter 1`] = `
       <option
         value=""
       >
-        global.select_categories
+        <FormattedMessage
+          id="global.select_categories"
+          values={Object {}}
+        />
       </option>
       <option
         key="1"

@@ -1,6 +1,7 @@
 #*/2 * * * * /usr/bin/timeout 1m php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters
 #1-59/2 * * * * /usr/bin/timeout 1m php -d memory_limit=512M /var/www/bin/console capco:compute:counters
 #*/5 * * * * /usr/bin/timeout 4m php -d memory_limit=512M /var/www/bin/console capco:compute:rankings
+#1-59/2 * * * * /usr/bin/timeout 1m php -d memory_limit=512M /var/www/bin/console capco:compute:projects-counters
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire
 #* * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:users

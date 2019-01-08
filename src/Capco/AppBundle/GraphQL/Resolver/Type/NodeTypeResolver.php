@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Group;
-use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -149,9 +148,6 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof Requirement) {
             return $this->requirementTypeResolver->__invoke($node);
-        }
-        if ($node instanceof MapToken) {
-            return $this->typeResolver->resolve('MapToken');
         }
 
         throw new UserError('Could not resolve type of Node.');

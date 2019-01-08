@@ -13,9 +13,9 @@ type Props = {
 class ProjectPreviewCounters extends React.Component<Props> {
   getNbCounters = () => {
     const { project } = this.props;
-    const { votes } = project;
+    const { votesCount } = project;
     let nb = 2;
-    nb += votes.totalCount ? 1 : 0;
+    nb += votesCount ? 1 : 0;
     return nb;
   };
 
@@ -30,12 +30,12 @@ class ProjectPreviewCounters extends React.Component<Props> {
           icon="cap-baloon-1"
         />
         <ProjectPreviewCounter
-          value={project.votes.totalCount}
+          value={project.votesCount}
           label="project.preview.counters.votes"
           icon="cap-hand-like-2-1"
         />
         <ProjectPreviewCounter
-          value={project.contributors.totalCount + project.contributors.anonymousCount}
+          value={project.participantsCount}
           label="project.preview.counters.contributors"
           showZero
           icon="cap-user-2-1"
@@ -53,14 +53,9 @@ export default createFragmentContainer(ProjectPreviewCounters, {
   project: graphql`
     fragment ProjectPreviewCounters_project on Project {
       id
-      contributors {
-        totalCount
-        anonymousCount
-      }
-      votes {
-        totalCount
-      }
+      participantsCount
       contributionsCount
+      votesCount
       ...ProjectRestrictedAccessFragment_project
     }
   `,

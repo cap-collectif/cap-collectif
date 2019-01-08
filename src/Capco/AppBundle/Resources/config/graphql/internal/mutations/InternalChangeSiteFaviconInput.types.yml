@@ -1,7 +1,0 @@
-InternalChangeSiteFaviconInput:
-  type: relay-mutation-input
-  config:
-    fields:
-      mediaId:
-        type: 'ID!'
-        description: 'The media id to associate for the website favicon'

@@ -413,12 +413,3 @@ services:
     public: true
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:FooterSocialNetwork']
-
-  Capco\AppBundle\Repository\MapTokenRepository:
-    public: true
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:MapToken']
-  Capco\MediaBundle\Repository\MediaRepository:
-    public: true
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoMediaBundle:Media']
