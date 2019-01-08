@@ -2,16 +2,13 @@
 
 exports[`<ArgumentVoteButton /> renders viewer has not voted 1`] = `
 <Connect(LoginOverlay)>
-  <RequirementsModal
+  <ForwardRef(Relay(Connect(RequirementsModal)))
     handleClose={[Function]}
-    reason="Vous devez avoir un numéro de téléphone."
     show={false}
     step={
       Object {
         "$fragmentRefs": null,
-        "id": "Q29uc3VsdGF0aW9uOmNzdGVwMQ==",
         "requirements": Object {
-          "reason": "Vous devez avoir un numéro de téléphone.",
           "viewerMeetsTheRequirements": true,
         },
       }
@@ -47,16 +44,13 @@ exports[`<ArgumentVoteButton /> renders viewer has not voted 1`] = `
 
 exports[`<ArgumentVoteButton /> renders viewer has voted 1`] = `
 <Connect(LoginOverlay)>
-  <RequirementsModal
+  <ForwardRef(Relay(Connect(RequirementsModal)))
     handleClose={[Function]}
-    reason="Vous devez avoir un numéro de téléphone."
     show={false}
     step={
       Object {
         "$fragmentRefs": null,
-        "id": "Q29uc3VsdGF0aW9uOmNzdGVwMQ==",
         "requirements": Object {
-          "reason": "Vous devez avoir un numéro de téléphone.",
           "viewerMeetsTheRequirements": true,
         },
       }
@@ -93,16 +87,13 @@ exports[`<ArgumentVoteButton /> renders viewer has voted 1`] = `
 
 exports[`<ArgumentVoteButton /> renders when viewer is author 1`] = `
 <Connect(LoginOverlay)>
-  <RequirementsModal
+  <ForwardRef(Relay(Connect(RequirementsModal)))
     handleClose={[Function]}
-    reason="Vous devez avoir un numéro de téléphone."
     show={false}
     step={
       Object {
         "$fragmentRefs": null,
-        "id": "Q29uc3VsdGF0aW9uOmNzdGVwMQ==",
         "requirements": Object {
-          "reason": "Vous devez avoir un numéro de téléphone.",
           "viewerMeetsTheRequirements": true,
         },
       }

@@ -12,16 +12,13 @@ exports[`<OpinionVotesButton /> should not render a button when value is 1 and v
 
 exports[`<OpinionVotesButton /> should render a green button when value is 1 and vote type is both 1`] = `
 <div>
-  <RequirementsModal
+  <ForwardRef(Relay(Connect(RequirementsModal)))
     handleClose={[Function]}
-    reason="On recolte les données"
     show={false}
     step={
       Object {
         "$fragmentRefs": null,
-        "id": "1",
         "requirements": Object {
-          "reason": "On recolte les données",
           "viewerMeetsTheRequirements": true,
         },
       }
@@ -61,16 +58,13 @@ exports[`<OpinionVotesButton /> should render a green button when value is 1 and
 
 exports[`<OpinionVotesButton /> should render a red button when value is -1 and vote type is both 1`] = `
 <div>
-  <RequirementsModal
+  <ForwardRef(Relay(Connect(RequirementsModal)))
     handleClose={[Function]}
-    reason="On recolte les données"
     show={false}
     step={
       Object {
         "$fragmentRefs": null,
-        "id": "1",
         "requirements": Object {
-          "reason": "On recolte les données",
           "viewerMeetsTheRequirements": true,
         },
       }
@@ -108,16 +102,13 @@ exports[`<OpinionVotesButton /> should render a red button when value is -1 and 
 
 exports[`<OpinionVotesButton /> should render an orange button when value is 0 and vote type is both 1`] = `
 <div>
-  <RequirementsModal
+  <ForwardRef(Relay(Connect(RequirementsModal)))
     handleClose={[Function]}
-    reason="On recolte les données"
     show={false}
     step={
       Object {
         "$fragmentRefs": null,
-        "id": "1",
         "requirements": Object {
-          "reason": "On recolte les données",
           "viewerMeetsTheRequirements": true,
         },
       }
