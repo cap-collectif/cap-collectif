@@ -45,14 +45,8 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
         if (\in_array('Elasticsearch', $groups)) {
             return $data;
         }
-        $proposalsCount = 0;
-        $proposalPromise = $this->collectStepProposalCountResolver
-            ->__invoke($object)
-            ->then(function ($value) use (&$proposalsCount) {
-                $proposalsCount += $value;
-            });
 
-        $this->adapter->await($proposalPromise);
+        $proposalsCount = $this->collectStepProposalCountResolver->__invoke($object);
 
         $contributorsCount = 0;
         $contributorPromise = $this->collectStepContributorCountResolver

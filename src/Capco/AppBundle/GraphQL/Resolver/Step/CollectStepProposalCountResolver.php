@@ -3,32 +3,45 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepProposalCountDataLoader;
-use GraphQL\Executor\Promise\Promise;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Psr\Log\LoggerInterface;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 
 class CollectStepProposalCountResolver implements ResolverInterface
 {
-    private $collectStepCountProposalDataLoader;
-    private $logger;
+    private $dataloader;
+    private $adapter;
 
     public function __construct(
-        LoggerInterface $logger,
-        CollectStepProposalCountDataLoader $collectStepCountProposalDataLoader
+        PromiseAdapterInterface $adapter,
+        ProposalFormProposalsDataLoader $dataloader
     ) {
-        $this->collectStepCountProposalDataLoader = $collectStepCountProposalDataLoader;
-        $this->logger = $logger;
+        $this->dataloader = $dataloader;
+        $this->adapter = $adapter;
     }
 
-    public function __invoke(CollectStep $collectStep): Promise
+    // This is a helper not a pure GraphQL resolver
+    public function __invoke(CollectStep $step): int
     {
-        try {
-            return $this->collectStepCountProposalDataLoader->load(['collectStep' => $collectStep]);
-        } catch (\RuntimeException $exception) {
-            $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+        $count = 0;
+        $args = new Argument([
+            'first' => 0,
+            'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'ASC'],
+        ]);
 
-            throw new \RuntimeException($exception->getMessage());
-        }
+        $promise = $this->dataloader
+            ->load([
+                'form' => $step->getProposalForm(),
+                'args' => $args,
+                'viewer' => null,
+                'request' => null,
+            ])
+            ->then(function ($connection) use (&$count) {
+                $count = $connection->totalCount;
+            });
+        $this->adapter->await($promise);
+
+        return $count;
     }
 }

@@ -4,31 +4,27 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalviewerFollowDataLoader;
-use GraphQL\Executor\Promise\Promise;
 
 class ViewerFollowProposalResolver implements ResolverInterface
 {
+    private $userRepository;
     private $logger;
-    private $proposalviewerFollowDataLoader;
 
-    public function __construct(
-        LoggerInterface $logger,
-        ProposalviewerFollowDataLoader $proposalviewerFollowDataLoader
-    ) {
+    public function __construct(UserRepository $userRepository, LoggerInterface $logger)
+    {
+        $this->userRepository = $userRepository;
         $this->logger = $logger;
-        $this->proposalviewerFollowDataLoader = $proposalviewerFollowDataLoader;
     }
 
-    public function __invoke(Proposal $proposal, User $viewer): Promise
+    public function __invoke(Proposal $proposal, User $viewer): bool
     {
         try {
-            return $this->proposalviewerFollowDataLoader->load(compact('proposal', 'viewer'));
+            return $this->userRepository->isViewerFollowingProposal($proposal, $viewer);
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-
             throw new \RuntimeException('Find following proposal by user failed');
         }
     }
