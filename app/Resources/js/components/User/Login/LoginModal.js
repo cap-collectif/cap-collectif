@@ -29,7 +29,7 @@ export class LoginModal extends React.Component<Props> {
         aria-labelledby="contained-modal-title-lg">
         <form id="login-form" onSubmit={onSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg">
+            <Modal.Title id="contained-modal-title-lg" componentClass="h1">
               {<FormattedMessage id="global.login" />}
             </Modal.Title>
           </Modal.Header>
