@@ -21,6 +21,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *        @Index(name="selectionstep_voter_idx", columns={"voter_id", "selection_step_id"}),
  *        @Index(name="proposal_selectionstep_idx", columns={"proposal_id", "selection_step_id"}),
  *        @Index(name="proposal_collectstep_idx", columns={"proposal_id", "collect_step_id"}),
+ *        @Index(name="proposal_collectstep_published_idx", columns={"proposal_id", "collect_step_id", "published", "voteType"}),
  *   },
  *   uniqueConstraints={
  *        @UniqueConstraint(

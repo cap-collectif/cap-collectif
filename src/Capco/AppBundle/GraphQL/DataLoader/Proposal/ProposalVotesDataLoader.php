@@ -6,10 +6,14 @@ use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 
 class ProposalVotesDataLoader extends BatchDataLoader
@@ -61,6 +65,29 @@ class ProposalVotesDataLoader extends BatchDataLoader
             );
         }
 
+        $batch = true;
+
+        if ($batch) {
+            $connections = $this->resolveBatch($keys);
+        } else {
+            $connections = $this->resolveWithoutBatch($keys);
+        }
+
+        return $this->getPromiseAdapter()->createAll($connections);
+    }
+
+    protected function serializeKey($key): array
+    {
+        return [
+            'proposalId' => $key['proposal']->getId(),
+            'stepId' => isset($key['step']) ? $key['step']->getId() : null,
+            'args' => $key['args']->getRawArguments(),
+            'includeUnpublished' => $key['includeUnpublished'],
+        ];
+    }
+
+    private function resolveBatch($keys): array
+    {
         $connections = [];
 
         // We must group proposals by step
@@ -158,16 +185,107 @@ class ProposalVotesDataLoader extends BatchDataLoader
             array_keys($keys)
         );
 
-        return $this->getPromiseAdapter()->createAll($connections);
+        return $connections;
     }
 
-    protected function serializeKey($key): array
+    private function resolveWithoutBatch($keys): array
     {
-        return [
-            'proposalId' => $key['proposal']->getId(),
-            'stepId' => isset($key['step']) ? $key['step']->getId() : null,
-            'args' => $key['args']->getRawArguments(),
-            'includeUnpublished' => $key['includeUnpublished'],
-        ];
+        $connections = [];
+        foreach ($keys as $key) {
+            $connections[] = $this->resolve(
+                $key['proposal'],
+                $key['args'],
+                $key['includeUnpublished'],
+                $key['step'] ?? null
+            );
+        }
+
+        return $connections;
+    }
+
+    private function resolve(
+        Proposal $proposal,
+        Argument $args,
+        bool $includeUnpublished,
+        ?AbstractStep $step = null
+    ): Connection {
+        $field = $args->offsetGet('orderBy')['field'];
+        $direction = $args->offsetGet('orderBy')['direction'];
+        if ($step) {
+            if ($step instanceof SelectionStep) {
+                $paginator = new Paginator(function (int $offset, int $limit) use (
+                    $field,
+                    $proposal,
+                    $step,
+                    $includeUnpublished,
+                    $direction
+                ) {
+                    return $this->proposalSelectionVoteRepository
+                        ->getByProposalAndStep(
+                            $proposal,
+                            $step,
+                            $limit,
+                            $offset,
+                            $field,
+                            $direction,
+                            $includeUnpublished
+                        )
+                        ->getIterator()
+                        ->getArrayCopy();
+                });
+                $totalCount = $this->proposalSelectionVoteRepository->countVotesByProposalAndStep(
+                    $proposal,
+                    $step,
+                    $includeUnpublished
+                );
+
+                return $paginator->auto($args, $totalCount);
+            }
+            if ($step instanceof CollectStep) {
+                $paginator = new Paginator(function (int $offset, int $limit) use (
+                    $field,
+                    $proposal,
+                    $step,
+                    $includeUnpublished,
+                    $direction
+                ) {
+                    return $this->proposalCollectVoteRepository
+                        ->getByProposalAndStep(
+                            $proposal,
+                            $step,
+                            $limit,
+                            $offset,
+                            $field,
+                            $direction,
+                            $includeUnpublished
+                        )
+                        ->getIterator()
+                        ->getArrayCopy();
+                });
+                $totalCount = $this->proposalCollectVoteRepository->countVotesByProposalAndStep(
+                    $proposal,
+                    $step,
+                    $includeUnpublished
+                );
+
+                return $paginator->auto($args, $totalCount);
+            }
+
+            throw new \RuntimeException('Unknown step type.');
+        }
+        $paginator = new Paginator(function (int $offset, int $limit) {
+            return [];
+        });
+        $totalCount = 0;
+        $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
+            $proposal,
+            $includeUnpublished
+        );
+        $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal(
+            $proposal,
+            $includeUnpublished
+        );
+
+        return $paginator->auto($args, $totalCount);
     }
 }

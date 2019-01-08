@@ -2,11 +2,12 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Types\Type;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -204,20 +205,26 @@ class ProposalCollectVoteRepository extends EntityRepository
         CollectStep $step,
         bool $includeUnpublished
     ): array {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('proposal.id, COUNT(pv.id) as total')
-            ->andWhere('pv.collectStep = :step')
-            ->andWhere('pv.proposal IN (:ids)')
-            ->leftJoin('pv.proposal', 'proposal')
-            ->groupBy('pv.proposal')
-            ->setParameter('ids', $ids)
-            ->setParameter('step', $step);
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('id', 'id');
+        $rsm->addScalarResult('total', 'total');
+        // TODO includeUnpublished
+        $query = $this->_em
+            ->createNativeQuery(
+                "SELECT v.proposal_id as id, COUNT(v.id) as total 
+              FROM votes v
+              WHERE v.collect_step_id = :collect_step_id
+                AND v.proposal_id IN (:ids)
+                AND v.published = 1
+                AND v.voteType IN ('proposalCollect') 
+              GROUP BY v.proposal_id
+          ",
+                $rsm
+            )
+            ->setParameter('collect_step_id', $step->getId())
+            ->setParameter('ids', $ids);
 
-        if (!$includeUnpublished) {
-            $qb->andWhere('pv.published = true');
-        }
-
-        return $qb->getQuery()->getResult();
+        return $query->getArrayResult();
     }
 
     public function countVotesByProposalAndStep(
