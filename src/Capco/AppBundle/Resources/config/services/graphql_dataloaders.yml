@@ -71,14 +71,14 @@ services:
     autowire: true
     arguments:
       $cachePrefix: ProposalViewerVoteDataLoader
-      $cacheTtl: 120
+      $cacheTtl: 1
       $debug: '%kernel.debug%'
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader:
     autowire: true
     arguments:
       $cachePrefix: ProposalViewerHasVoteDataLoader
-      $cacheTtl: 120
+      $cacheTtl: 1
       $debug: '%kernel.debug%'
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalviewerFollowDataLoader:
