@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -6,6 +7,8 @@ use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
@@ -31,6 +34,8 @@ class AddProposalVoteMutation implements MutationInterface
     private $proposalVotesDataLoader;
     private $proposalCollectVote;
     private $proposalSelectionVoteRepository;
+    private $proposalViewerVoteDataLoader;
+    private $proposalViewerHasVoteDataLoader;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -41,7 +46,9 @@ class AddProposalVoteMutation implements MutationInterface
         StepRequirementsResolver $resolver,
         ProposalVotesDataLoader $proposalVotesDataLoader,
         ProposalCollectVoteRepository $proposalCollectVote,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
+        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader
     ) {
         $this->em = $em;
         $this->validator = $validator;
@@ -52,6 +59,8 @@ class AddProposalVoteMutation implements MutationInterface
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
         $this->proposalCollectVote = $proposalCollectVote;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
+        $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
     }
 
     public function __invoke(Argument $input, User $user, RequestStack $request): array
@@ -114,6 +123,7 @@ class AddProposalVoteMutation implements MutationInterface
         $errors = $this->validator->validate($vote);
         foreach ($errors as $error) {
             $this->logger->error((string) $error->getMessage());
+
             throw new UserError((string) $error->getMessage());
         }
 
@@ -122,6 +132,8 @@ class AddProposalVoteMutation implements MutationInterface
         try {
             $this->em->flush();
             $this->proposalVotesDataLoader->invalidate($proposal);
+            $this->proposalViewerVoteDataLoader->invalidate($proposal);
+            $this->proposalViewerHasVoteDataLoader->invalidate($proposal);
         } catch (\Exception $e) {
             // Let's assume it's a Unique Exception
             throw new UserError('proposal.vote.already_voted');

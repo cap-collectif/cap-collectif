@@ -1,0 +1,11 @@
+# Stof\DoctrineExtensionBundle configuration
+stof_doctrine_extensions:
+  default_locale: '%locale%'
+  orm:
+    default:
+      timestampable: true
+      translatable: true
+      sluggable: true
+      softdeleteable: true
+      loggable: true
+      tree: true

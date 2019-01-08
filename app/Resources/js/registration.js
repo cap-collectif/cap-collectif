@@ -60,8 +60,10 @@ import ArgumentListApp from './startup/ArgumentListApp';
 import VoteListApp from './startup/VoteListApp';
 import EventApp from './startup/EventApp';
 import ProjectDistrictAdminApp from './startup/ProjectDistrictAdminApp';
+import SiteFaviconAdminPageApp from './startup/SiteFaviconAdminPageApp';
 
 import appStore from './stores/AppStore';
+import MapAdminPageApp from './startup/MapAdminPageApp';
 
 if (process.env.NODE_ENV === 'development') {
   if (new URLSearchParams(window.location.search).get('axe')) {
@@ -130,6 +132,7 @@ ReactOnRails.register({
   ProposalListApp,
   ProposalsUserVotesPageApp,
   ShareButtonDropdownApp,
+  SiteFaviconAdminPageApp,
   ProposalFormAdminPageApp,
   QuestionnaireAdminPageApp,
   QuestionnaireCreateButtonApp,
@@ -139,6 +142,7 @@ ReactOnRails.register({
   EditProfileApp,
   CookieApp,
   UserAdminPageApp,
+  MapAdminPageApp,
   ProjectRestrictedAccessAlertApp,
   ProjectRestrictedAccessApp,
   ArgumentListApp,

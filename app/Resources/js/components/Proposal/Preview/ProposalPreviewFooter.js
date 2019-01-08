@@ -44,20 +44,19 @@ export class ProposalPreviewFooter extends React.Component<Props> {
             </div>
           </div>
         )}
-        {showVotes &&
-          proposal.allVotesOnStep && (
-            <div className="card__counter card__counter-votes">
-              <div className="card__counter__value">{proposal.allVotesOnStep.totalCount}</div>
-              <div>
-                <FormattedMessage
-                  id="proposal.vote.count_no_nb"
-                  values={{
-                    count: proposal.allVotesOnStep.totalCount,
-                  }}
-                />
-              </div>
+        {showVotes && proposal.allVotesOnStep && (
+          <div className="card__counter card__counter-votes">
+            <div className="card__counter__value">{proposal.allVotesOnStep.totalCount}</div>
+            <div>
+              <FormattedMessage
+                id="proposal.vote.count_no_nb"
+                values={{
+                  count: proposal.allVotesOnStep.totalCount,
+                }}
+              />
             </div>
-          )}
+          </div>
+        )}
       </div>
     );
   }

@@ -1,0 +1,12 @@
+httplug:
+  clients:
+    default:
+      factory: 'httplug.factory.curl'
+      http_methods_client: true
+    hwi:
+      factory: 'httplug.factory.guzzle6'
+      config:
+        timeout: 10
+        verify_peer: false
+        max_redirects: 1
+        ignore_errors: false

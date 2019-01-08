@@ -27,3 +27,7 @@ services:
   Capco\AppBundle\Command\CreateCsvFromUsersCommand:
     arguments:
       $projectRootDir: '%kernel.project_dir%'
+
+  Capco\AppBundle\Command\GenerateMapProviderPublicToken:
+    arguments:
+      $mapboxSecretKey: '%mapbox_secret_key%'

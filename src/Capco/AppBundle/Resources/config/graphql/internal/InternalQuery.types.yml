@@ -8,6 +8,22 @@ InternalQuery:
     fields:
       viewer:
         type: 'InternalUser!'
+      mapTokens:
+        type: '[MapToken!]!'
+        description: 'Get the available map tokens'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokensResolver")'
+      mapToken:
+        type: 'MapToken'
+        description: 'Search a particular map token by its provider'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokenResolver", [args])'
+        args:
+          provider:
+            type: 'MapTokenProvider!'
+            description: 'The map provider'
+      siteFavicon:
+        type: 'SiteImage!'
+        description: 'Get the current favicon'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteFaviconQueryResolver")'
       registrationForm:
         type: 'InternalRegistrationForm'
         description: 'Get the current registration form'

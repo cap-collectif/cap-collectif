@@ -1,0 +1,29 @@
+MapTokenStyle:
+  type: object
+  config:
+    description: 'A map token style'
+    fields:
+      id:
+        type: 'ID!'
+      name:
+        type: 'String!'
+        description: 'The name of the style'
+      createdAt:
+        type: 'DateTime!'
+      updatedAt:
+        type: 'DateTime'
+      version:
+        type: 'Int!'
+        description: 'The version of the style'
+      previewUrl:
+        type: 'URI!'
+        description: 'The preview url of the style'
+      isCurrent:
+        type: 'Boolean!'
+        description: 'Does the style is the current one applied to the whole website?'
+      owner:
+        type: 'String!'
+        description: 'The owner of the style'
+      visibility:
+        type: 'MapTokenStyleVisibility!'
+        description: 'The visibility of the style'

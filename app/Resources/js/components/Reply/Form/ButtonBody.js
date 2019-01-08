@@ -64,7 +64,7 @@ class ButtonBody extends React.Component<Props, State> {
     }
 
     return (
-      <div className="opinion__text">
+      <div className="opinion__text mb-15">
         <Linkify properties={{ className: 'external-link' }}>
           <WYSIWYGRender value={this.generateText()} />
         </Linkify>

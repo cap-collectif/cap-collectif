@@ -27,6 +27,15 @@ type Props = {
   shieldEnabled: boolean,
 };
 
+export type MapTokens = {
+  +[provider: string]: {
+    +styleId: string,
+    +styleOwner: string,
+    +publicToken: string,
+    +initialPublicToken: string,
+  },
+};
+
 export type State = {
   +showLoginModal: boolean,
   +displayChartModal: boolean,
@@ -34,6 +43,7 @@ export type State = {
   +isSubmittingAccountForm: boolean,
   +showConfirmPasswordModal: boolean,
   +confirmationEmailResent: boolean,
+  +mapTokens: MapTokens,
   +registration_form: {
     +bottomTextDisplayed: boolean,
     +topTextDisplayed: boolean,
@@ -124,6 +134,16 @@ const initialState: State = {
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
   user: null,
+  mapTokens: {
+    MAPBOX: {
+      initialPublicToken:
+        '***REMOVED***',
+      publicToken:
+        '***REMOVED***',
+      styleOwner: 'capcollectif',
+      styleId: '***REMOVED***',
+    },
+  },
   registration_form: {
     hasQuestions: false,
     bottomText: '',

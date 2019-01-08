@@ -5,6 +5,8 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -23,6 +25,8 @@ class RemoveProposalVoteMutation implements MutationInterface
     private $proposalVotesDataLoader;
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
+    private $proposalViewerVoteDataLoader;
+    private $proposalViewerHasVoteDataLoader;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -30,7 +34,9 @@ class RemoveProposalVoteMutation implements MutationInterface
         AbstractStepRepository $stepRepo,
         ProposalVotesDataLoader $proposalVotesDataLoader,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
+        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader
     ) {
         $this->em = $em;
         $this->stepRepo = $stepRepo;
@@ -38,6 +44,8 @@ class RemoveProposalVoteMutation implements MutationInterface
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
+        $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -81,6 +89,8 @@ class RemoveProposalVoteMutation implements MutationInterface
         $this->em->remove($vote);
         $this->em->flush();
         $this->proposalVotesDataLoader->invalidate($proposal);
+        $this->proposalViewerVoteDataLoader->invalidate($proposal);
+        $this->proposalViewerHasVoteDataLoader->invalidate($proposal);
 
         return ['proposal' => $proposal, 'step' => $step, 'viewer' => $user];
     }

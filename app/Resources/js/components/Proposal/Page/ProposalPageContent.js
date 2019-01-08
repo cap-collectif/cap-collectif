@@ -20,6 +20,8 @@ import type { ProposalPageContent_proposal } from './__generated__/ProposalPageC
 import type { ProposalPageContent_viewer } from './__generated__/ProposalPageContent_viewer.graphql';
 import type { ProposalPageContent_step } from './__generated__/ProposalPageContent_step.graphql';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
+import type { GlobalState } from '../../../types';
+import type { MapTokens } from '../../../redux/modules/user';
 
 let L;
 
@@ -27,6 +29,7 @@ type Props = {
   viewer: ?ProposalPageContent_viewer,
   step: ?ProposalPageContent_step,
   proposal: ProposalPageContent_proposal,
+  mapTokens: MapTokens,
   className: string,
   dispatch: Function,
 };
@@ -37,7 +40,9 @@ export class ProposalPageContent extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, step, className, dispatch, viewer } = this.props;
+    const { proposal, step, className, dispatch, viewer, mapTokens } = this.props;
+    const { publicToken, styleId, styleOwner } = mapTokens.MAPBOX;
+
     const classes = {
       proposal__content: true,
       [className]: true,
@@ -110,9 +115,7 @@ export class ProposalPageContent extends React.Component<Props> {
               }}>
               <TileLayer
                 attribution='&copy; <a href"https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> <a href"https://www.mapbox.com/map-feedback/#/-74.5/40/10">Improve this map</a>'
-                url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${
-                  config.mapboxApiKey
-                }`}
+                url={`https://api.mapbox.com/styles/v1/${styleOwner}/${styleId}/tiles/256/{z}/{x}/{y}?access_token=${publicToken}`}
               />
               <Marker
                 position={[address[0].geometry.location.lat, address[0].geometry.location.lng]}
@@ -164,7 +167,11 @@ export class ProposalPageContent extends React.Component<Props> {
   }
 }
 
-const container = connect()(ProposalPageContent);
+const mapStateToProps = (state: GlobalState) => ({
+  mapTokens: state.user.mapTokens,
+});
+
+const container = connect(mapStateToProps)(ProposalPageContent);
 
 export default createFragmentContainer(container, {
   step: graphql`

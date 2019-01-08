@@ -367,7 +367,11 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
           <a
             href="google.com"
           >
-            admin
+            <span
+              className="ellipsis"
+            >
+              admin
+            </span>
           </a>
         </div>
       </td>
@@ -431,7 +435,11 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
           <a
             href="google.com"
           >
-            admin2
+            <span
+              className="ellipsis"
+            >
+              admin2
+            </span>
           </a>
         </div>
       </td>

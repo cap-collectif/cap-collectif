@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\CreatableInterface;
@@ -255,15 +256,20 @@ class Reporting implements CreatableInterface
     {
         if (null !== $this->Opinion) {
             return $this->Opinion;
-        } elseif (null !== $this->Source) {
+        }
+        if (null !== $this->Source) {
             return $this->Source;
-        } elseif (null !== $this->Argument) {
+        }
+        if (null !== $this->Argument) {
             return $this->Argument;
-        } elseif (null !== $this->Comment) {
+        }
+        if (null !== $this->Comment) {
             return $this->Comment;
-        } elseif (null !== $this->opinionVersion) {
+        }
+        if (null !== $this->opinionVersion) {
             return $this->opinionVersion;
-        } elseif (null !== $this->proposal) {
+        }
+        if (null !== $this->proposal) {
             return $this->proposal;
         }
     }

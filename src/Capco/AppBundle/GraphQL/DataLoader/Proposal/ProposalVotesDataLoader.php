@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -23,12 +23,13 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisCache $cache,
+        RedisTagCache $cache,
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -38,26 +39,158 @@ class ProposalVotesDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 
     public function invalidate(Proposal $proposal): void
     {
-        foreach ($this->getCacheKeys() as $cacheKey) {
-            $decoded = $this->getDecodedKeyFromKey($cacheKey);
-            if (false !== strpos($decoded, $proposal->getId())) {
-                $this->cache->deleteItem($cacheKey);
-                $this->clear($cacheKey);
-                $this->logger->info('Invalidated cache for proposal ' . $proposal->getId());
-            }
-        }
+        // TODO
+        $this->invalidateAll();
     }
 
     public function all(array $keys)
     {
+        if ($this->debug) {
+            $this->logger->info(
+                __METHOD__ .
+                    'called for keys : ' .
+                    var_export(
+                        array_map(function ($key) {
+                            return $this->serializeKey($key);
+                        }, $keys),
+                        true
+                    )
+            );
+        }
+
+        $batch = true;
+
+        if ($batch) {
+            $connections = $this->resolveBatch($keys);
+        } else {
+            $connections = $this->resolveWithoutBatch($keys);
+        }
+
+        return $this->getPromiseAdapter()->createAll($connections);
+    }
+
+    protected function serializeKey($key): array
+    {
+        return [
+            'proposalId' => $key['proposal']->getId(),
+            'stepId' => isset($key['step']) ? $key['step']->getId() : null,
+            'args' => $key['args']->getRawArguments(),
+            'includeUnpublished' => $key['includeUnpublished'],
+        ];
+    }
+
+    private function resolveBatch($keys): array
+    {
         $connections = [];
 
+        // We must group proposals by step
+        $steps = array_unique(
+            array_map(function ($key) {
+                return $key['step'] ?? null;
+            }, $keys)
+        );
+
+        // We can now batch by step and includeUnpublished
+        // Not working right now
+        $step = $steps[0];
+        $includeUnpublished = $keys[0]['includeUnpublished'];
+
+        $batchProposalIds = array_map(
+            function ($key) {
+                return $key['proposal']->getId();
+            },
+            array_filter($keys, function ($value) use ($step) {
+                return ($value['step'] ?? null) === $step;
+            })
+        );
+
+        // If no step
+        if (!$step) {
+            $repo = null;
+            $totalCountByProposal = array_map(function ($proposalId) use ($includeUnpublished) {
+                $totalCount = 0;
+                $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
+                    $proposalId,
+                    $includeUnpublished
+                );
+                $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal(
+                    $proposalId,
+                    $includeUnpublished
+                );
+
+                return ['id' => $proposalId, 'total' => $totalCount];
+            }, $batchProposalIds);
+        } else {
+            if ($step instanceof CollectStep) {
+                $repo = $this->proposalCollectVoteRepository;
+            } else {
+                $repo = $this->proposalSelectionVoteRepository;
+            }
+            $totalCountByProposal = $repo->countVotesByProposalIdsAndStep(
+                $batchProposalIds,
+                $step,
+                $includeUnpublished
+            );
+        }
+
+        $connections = array_map(
+            function ($key, $index) use ($totalCountByProposal, $repo, $step, $includeUnpublished) {
+                $proposal = $key['proposal'];
+
+                $paginator = new Paginator(function (int $offset, int $limit) use (
+                    $proposal,
+                    $repo,
+                    $key,
+                    $step,
+                    $includeUnpublished
+                ) {
+                    if (!$repo || (0 === $offset && 0 === $limit)) {
+                        return [];
+                    }
+
+                    $field = $key['args']->offsetGet('orderBy')['field'];
+                    $direction = $key['args']->offsetGet('orderBy')['direction'];
+
+                    return $repo
+                        ->getByProposalAndStep(
+                            $proposal,
+                            $step,
+                            $limit,
+                            $offset,
+                            $field,
+                            $direction,
+                            $includeUnpublished
+                        )
+                        ->getIterator()
+                        ->getArrayCopy();
+                });
+
+                $found = array_values(
+                    array_filter($totalCountByProposal, function ($value) use ($proposal) {
+                        return $value['id'] === $proposal->getId();
+                    })
+                );
+                $totalCount = isset($found[0]) ? $found[0]['total'] : 0;
+
+                return $paginator->auto($key['args'], (int) $totalCount);
+            },
+            $keys,
+            array_keys($keys)
+        );
+
+        return $connections;
+    }
+
+    private function resolveWithoutBatch($keys): array
+    {
+        $connections = [];
         foreach ($keys as $key) {
             $connections[] = $this->resolve(
                 $key['proposal'],
@@ -67,17 +200,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
             );
         }
 
-        return $this->getPromiseAdapter()->createAll($connections);
-    }
-
-    protected function serializeKey($key)
-    {
-        return [
-            'proposalId' => $key['proposal']->getId(),
-            'stepId' => isset($key['step']) ? $key['step']->getId() : null,
-            'args' => $key['args']->getRawArguments(),
-            'includeUnpublished' => $key['includeUnpublished'],
-        ];
+        return $connections;
     }
 
     private function resolve(
@@ -88,7 +211,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
     ): Connection {
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
-
         if ($step) {
             if ($step instanceof SelectionStep) {
                 $paginator = new Paginator(function (int $offset, int $limit) use (
@@ -111,7 +233,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
                         ->getIterator()
                         ->getArrayCopy();
                 });
-
                 $totalCount = $this->proposalSelectionVoteRepository->countVotesByProposalAndStep(
                     $proposal,
                     $step,
@@ -141,7 +262,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
                         ->getIterator()
                         ->getArrayCopy();
                 });
-
                 $totalCount = $this->proposalCollectVoteRepository->countVotesByProposalAndStep(
                     $proposal,
                     $step,
@@ -153,7 +273,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
             throw new \RuntimeException('Unknown step type.');
         }
-
         $paginator = new Paginator(function (int $offset, int $limit) {
             return [];
         });

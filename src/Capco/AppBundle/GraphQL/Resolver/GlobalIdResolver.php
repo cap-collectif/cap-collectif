@@ -14,6 +14,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Repository\MapTokenRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
@@ -86,6 +87,11 @@ class GlobalIdResolver
                     $node = $this->container
                         ->get('capco.consultation_step.repository')
                         ->find($uuid);
+
+                    break;
+                case 'MapToken':
+                    $node = $this->container->get(MapTokenRepository::class)->find($uuid);
+
 
                     break;
                 case 'Requirement':

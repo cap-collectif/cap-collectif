@@ -82,6 +82,96 @@ liip_imagine:
       filters:
         thumbnail: { size: [100, 70], mode: outbound }
 
+    favicon_16:
+      quality: 70
+      filters:
+        thumbnail: { size: [16, 16], mode: inbound }
+
+    favicon_32:
+      quality: 70
+      filters:
+        thumbnail: { size: [32, 32], mode: inbound }
+
+    favicon_36:
+      quality: 70
+      filters:
+        thumbnail: { size: [36, 36], mode: inbound }
+
+    favicon_48:
+      quality: 70
+      filters:
+        thumbnail: { size: [48, 48], mode: inbound }
+
+    favicon_57:
+      quality: 70
+      filters:
+        thumbnail: { size: [57, 57], mode: inbound }
+
+    favicon_60:
+      quality: 70
+      filters:
+        thumbnail: { size: [60, 60], mode: inbound }
+
+    favicon_70:
+      quality: 70
+      filters:
+        thumbnail: { size: [70, 70], mode: inbound }
+
+    favicon_72:
+      quality: 70
+      filters:
+        thumbnail: { size: [72, 72], mode: inbound }
+
+    favicon_76:
+      quality: 70
+      filters:
+        thumbnail: { size: [76, 76], mode: inbound }
+
+    favicon_96:
+      quality: 70
+      filters:
+        thumbnail: { size: [96, 96], mode: inbound }
+
+    favicon_114:
+      quality: 70
+      filters:
+        thumbnail: { size: [114, 114], mode: inbound }
+
+    favicon_120:
+      quality: 70
+      filters:
+        thumbnail: { size: [120, 120], mode: inbound }
+
+    favicon_144:
+      quality: 70
+      filters:
+        thumbnail: { size: [144, 144], mode: inbound }
+
+    favicon_150:
+      quality: 70
+      filters:
+        thumbnail: { size: [150, 150], mode: inbound }
+
+    favicon_152:
+      quality: 70
+      filters:
+        thumbnail: { size: [152, 152], mode: inbound }
+
+    favicon_180:
+      quality: 70
+      filters:
+        thumbnail: { size: [180, 180], mode: inbound }
+
+    favicon_192:
+      quality: 70
+      filters:
+        thumbnail: { size: [192, 192], mode: inbound }
+
+    favicon_310:
+      quality: 70
+      filters:
+        thumbnail: { size: [310, 310], mode: inbound }
+
     default_socialIcon:
       quality: 70
       filters:

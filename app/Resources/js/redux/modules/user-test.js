@@ -18,6 +18,16 @@ const initialState: State = {
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
+  mapTokens: {
+    MAPBOX: {
+      initialPublicToken:
+        '***REMOVED***',
+      publicToken:
+        '***REMOVED***',
+      styleOwner: 'capcollectif',
+      styleId: '***REMOVED***',
+    },
+  },
   registration_form: {
     hasQuestions: false,
     bottomTextDisplayed: false,

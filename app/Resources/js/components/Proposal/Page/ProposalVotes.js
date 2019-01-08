@@ -40,14 +40,14 @@ export class ProposalVotes extends React.Component<Props, State> {
       <div>
         {proposal.votes.edges && votesCount !== 0 ? (
           <div className={classNames({ proposal__votes: true })}>
-            <h2>
+            <h3 className="mb-20">
               <FormattedMessage
                 id="proposal.vote.count"
                 values={{
                   num: votesCount,
                 }}
               />
-            </h2>
+            </h3>
             <Row>
               {proposal.votes.edges.filter(Boolean).map((edge, key) => (
                 // $FlowFixMe $refType
@@ -71,7 +71,9 @@ export class ProposalVotes extends React.Component<Props, State> {
                   this.setState({ loading: false });
                 });
               }}>
-              <FormattedMessage id="proposal.vote.show_more" />
+              <FormattedMessage
+                id={this.state.loading ? 'global.loading' : 'proposal.vote.show_more'}
+              />
             </button>
           </div>
         )}

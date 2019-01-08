@@ -2,11 +2,12 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Types\Type;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -74,7 +75,7 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function countByAuthorAndProject(User $author, Project $project): int
     {
         return $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv)')
+            ->select('COUNT(DISTINCT pv.id)')
             ->andWhere('pv.user = :author')
             ->andWhere('pv.published = true')
             ->leftJoin('pv.proposal', 'proposal')
@@ -95,7 +96,7 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function countByAuthorAndStep(User $author, CollectStep $step): int
     {
         return $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv)')
+            ->select('COUNT(DISTINCT pv.id)')
             ->andWhere('pv.collectStep = :step')
             ->andWhere('pv.user = :author')
             ->leftJoin('pv.proposal', 'proposal')
@@ -199,6 +200,33 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function countVotesByProposalIdsAndStep(
+        array $ids,
+        CollectStep $step,
+        bool $includeUnpublished
+    ): array {
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('id', 'id');
+        $rsm->addScalarResult('total', 'total');
+        // TODO includeUnpublished
+        $query = $this->_em
+            ->createNativeQuery(
+                "SELECT v.proposal_id as id, COUNT(v.id) as total 
+              FROM votes v
+              WHERE v.collect_step_id = :collect_step_id
+                AND v.proposal_id IN (:ids)
+                AND v.published = 1
+                AND v.voteType IN ('proposalCollect') 
+              GROUP BY v.proposal_id
+          ",
+                $rsm
+            )
+            ->setParameter('collect_step_id', $step->getId())
+            ->setParameter('ids', $ids);
+
+        return $query->getArrayResult();
+    }
+
     public function countVotesByProposalAndStep(
         Proposal $proposal,
         CollectStep $step,
@@ -218,12 +246,12 @@ class ProposalCollectVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countVotesByProposal(Proposal $proposal, bool $includeUnpublished): int
+    public function countVotesByProposal(string $proposalId, bool $includeUnpublished): int
     {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposalId);
 
         if (!$includeUnpublished) {
             $qb->andWhere('pv.published = true');
@@ -319,10 +347,14 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function countPublishedCollectVoteByStep(CollectStep $step): int
     {
         return $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv)')
+            ->select('COUNT(DISTINCT pv.id)')
             ->andWhere('pv.collectStep = :step')
-            ->leftJoin('pv.proposal', 'proposal')
+            ->innerJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('pv.published = 1')
+            ->andWhere('proposal.draft = 0')
+            ->andWhere('proposal.trashedAt IS NULL')
+            ->andWhere('proposal.published = 1')
             ->setParameter('step', $step)
             ->getQuery()
             ->getSingleScalarResult();

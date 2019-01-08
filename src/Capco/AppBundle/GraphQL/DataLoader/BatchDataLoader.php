@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader;
 
-use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Cache\RedisTagCache;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\DataLoader\DataLoader;
 use Overblog\DataLoader\Option;
@@ -17,19 +17,22 @@ abstract class BatchDataLoader extends DataLoader
     protected $cachePrefix;
     protected $cacheDriver;
     protected $cacheTtl;
+    protected $debug;
 
     public function __construct(
         callable $batchFunction,
         PromiseAdapterInterface $promiseFactory,
         LoggerInterface $logger,
-        RedisCache $cache,
+        RedisTagCache $cache,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->cachePrefix = $cachePrefix;
         $this->cache = $cache;
         $this->logger = $logger;
         $this->cacheTtl = $cacheTtl;
+        $this->debug = $debug;
         $options = new Option([
             'cacheKeyFn' => function ($key) {
                 $serializedKey = $this->serializeKey($key);
@@ -57,7 +60,7 @@ abstract class BatchDataLoader extends DataLoader
 
     public function invalidateAll(): void
     {
-        $this->cache->deleteItems($this->getCacheKeys());
+        $this->cache->invalidateTags([$this->cachePrefix]);
     }
 
     /**
@@ -68,7 +71,7 @@ abstract class BatchDataLoader extends DataLoader
      *
      * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
      *
-     * @return mixed
+     * @return Promise
      *
      * @see DataLoader
      *
@@ -77,39 +80,42 @@ abstract class BatchDataLoader extends DataLoader
     public function load($key)
     {
         $cacheKey = $this->getCacheKeyFromKey($key);
-        $cacheItem = $this->cache->getItem($cacheKey)->expiresAfter($this->cacheTtl);
-        $this->logger->info(__METHOD__);
+        $cacheItem = $this->cache->getItem($cacheKey);
+
         if (!$cacheItem->isHit()) {
-            $this->logger->info('Cache MISS for: ' . var_export($this->serializeKey($key), true));
+            if ($this->debug) {
+                $this->logger->info(
+                    'Cache MISS for: ' . var_export($this->serializeKey($key), true)
+                );
+            }
 
             $promise = parent::load($key);
             if ($promise instanceof Promise) {
                 $promise->then(function ($value) use ($key, $cacheItem) {
                     $this->prime($key, $value);
 
-                    $cacheItem->set($value);
+                    $cacheItem
+                        ->set($value)
+                        ->expiresAfter($this->cacheTtl)
+                        ->tag($this->getCacheTag($key))
+                        ->tag($this->cachePrefix);
+
                     $this->cache->save($cacheItem);
-                    $this->logger->info('Saved key into cache');
+
+                    if ($this->debug) {
+                        $this->logger->info('Saved key into cache with value : ');
+                    }
                 });
             }
 
             return $promise;
         }
-        $this->logger->info('Cache HIT for: ' . var_export($this->serializeKey($key), true));
+
+        if ($this->debug) {
+            $this->logger->info('Cache HIT for: ' . var_export($this->serializeKey($key), true));
+        }
 
         return $this->getPromiseAdapter()->createFulfilled($cacheItem->get());
-    }
-
-    protected function getCacheKeys(): array
-    {
-        return $this->cache->getKeysByPattern('*' . $this->cachePrefix . '*');
-    }
-
-    protected function getDecodedKeyFromKey(string $key): string
-    {
-        $replace = str_replace(['-[', ']-', $this->cachePrefix], '', $key);
-
-        return base64_decode($replace);
     }
 
     /**
@@ -120,4 +126,16 @@ abstract class BatchDataLoader extends DataLoader
      * @return array|string
      */
     abstract protected function serializeKey($key);
+
+    /**
+     * The getCacheTag function is used to set tags on cache item.
+     *
+     * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
+     *
+     * @return array
+     */
+    protected function getCacheTag($key): array
+    {
+        return [];
+    }
 }

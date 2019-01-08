@@ -1,9 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Loader /> renders Loader 1`] = `
-<Loader__Container>
+<Loader__Container
+  inline={false}
+>
   <__styled-spinkit__Circle
-    color="#333"
+    color="#333333"
+    size={40}
+  />
+</Loader__Container>
+`;
+
+exports[`<Loader /> renders Loader with a color and a small size 1`] = `
+<Loader__Container
+  inline={false}
+>
+  <__styled-spinkit__Circle
+    color="white"
+    size={20}
+  />
+</Loader__Container>
+`;
+
+exports[`<Loader /> renders Loader with a white color 1`] = `
+<Loader__Container
+  inline={false}
+>
+  <__styled-spinkit__Circle
+    color="white"
     size={40}
   />
 </Loader__Container>
@@ -28,6 +52,17 @@ exports[`<Loader /> renders LoaderContainer 1`] = `
 <div
   className="c0"
 />
+`;
+
+exports[`<Loader /> renders an inline Loader 1`] = `
+<Loader__Container
+  inline={true}
+>
+  <__styled-spinkit__Circle
+    color="#333333"
+    size={40}
+  />
+</Loader__Container>
 `;
 
 exports[`<Loader /> renders nothing 1`] = `""`;

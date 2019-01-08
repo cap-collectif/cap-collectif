@@ -2,25 +2,81 @@ services:
   Overblog\PromiseAdapter\PromiseAdapterInterface:
     alias: overblog_dataloader.webonyx_graphql_sync_promise_adapter
 
+  ############ Proposals #############
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader:
     autowire: true
     arguments:
       $cachePrefix: ProposalVotesDataLoader
-      $cacheTtl: 60
+      $cacheTtl: 1
+      $debug: '%kernel.debug%'
 
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProposalLikersDataLoader
+      $cacheTtl: 1
+      $debug: '%kernel.debug%'
+
+  ########### Commentable #############
   Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader:
     autowire: true
     arguments:
       $cachePrefix: CommentableCommentsDataLoader
       $cacheTtl: 60
+      $debug: '%kernel.debug%'
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalProgressStepDataLoader:
     autowire: true
     arguments:
       $cachePrefix: ProposalProgressStepDataLoader
+      $cacheTtl: 1
+      $debug: '%kernel.debug%'
 
   Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader:
     autowire: true
     arguments:
       $cachePrefix: ProposalFormProposalsDataLoader
-      $cacheTtl: 60
+      $cacheTtl: 1
+      $debug: '%kernel.debug%'
+
+  Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCountDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: CollectStepContributorCountDataLoader
+      $cacheTtl: 120
+      $debug: '%kernel.debug%'
+
+  Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: StepVotesCountDataLoader
+      $cacheTtl: 120
+      $debug: '%kernel.debug%'
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProposalAuthorDataLoader
+      $cacheTtl: 240
+      $debug: '%kernel.debug%'
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataloader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProposalCurrentVotableStepDataloader
+      $cacheTtl: 120
+      $debug: '%kernel.debug%'
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProposalViewerVoteDataLoader
+      $cacheTtl: 120
+      $debug: '%kernel.debug%'
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: ProposalViewerHasVoteDataLoader
+      $cacheTtl: 120
+      $debug: '%kernel.debug%'

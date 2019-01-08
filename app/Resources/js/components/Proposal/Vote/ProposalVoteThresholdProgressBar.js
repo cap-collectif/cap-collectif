@@ -56,7 +56,7 @@ export default createFragmentContainer(ProposalVoteThresholdProgressBar, {
   proposal: graphql`
     fragment ProposalVoteThresholdProgressBar_proposal on Proposal {
       id
-      votes(stepId: $stepId) {
+      votes(stepId: $stepId, first: 0) {
         totalCount
       }
     }

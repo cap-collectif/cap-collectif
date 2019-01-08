@@ -3,21 +3,21 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataloader;
 
 class ProposalCurrentVotableStepResolver implements ResolverInterface
 {
-    private $voteResolver;
+    private $dataloader;
 
-    public function __construct(ProposalStepVotesResolver $voteResolver)
+    public function __construct(ProposalCurrentVotableStepDataloader $dataloader)
     {
-        $this->voteResolver = $voteResolver;
+        $this->dataloader = $dataloader;
     }
 
-    public function __invoke(Proposal $proposal): ?AbstractStep
+    public function __invoke(Proposal $proposal): Promise
     {
-        return $this->voteResolver->getFirstVotableStepForProposal($proposal);
+        return $this->dataloader->load(compact('proposal'));
     }
 }
