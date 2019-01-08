@@ -29,6 +29,7 @@ class ProjectProposalsResolver implements ResolverInterface
             $args = new Arg(['first' => 0]);
         }
 
+        // Setup dataloader here instead
         $totalCount = $this->getProjectProposalsCount($project);
 
         $paginator = new Paginator(function (int $offset, int $limit) {
@@ -44,12 +45,7 @@ class ProjectProposalsResolver implements ResolverInterface
         foreach ($project->getSteps() as $pStep) {
             $step = $pStep->getStep();
             if ($step->isCollectStep()) {
-                $promise = $this->collectStepResolver
-                    ->__invoke($step)
-                    ->then(function ($value) use (&$count) {
-                        $count += $value;
-                    });
-                $this->adapter->await($promise);
+                $count += $this->collectStepResolver->__invoke($step);
             }
         }
 

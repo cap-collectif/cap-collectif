@@ -71,7 +71,9 @@ export class ProposalVotes extends React.Component<Props, State> {
                   this.setState({ loading: false });
                 });
               }}>
-              <FormattedMessage id="proposal.vote.show_more" />
+              <FormattedMessage
+                id={this.state.loading ? 'global.loading' : 'proposal.vote.show_more'}
+              />
             </button>
           </div>
         )}

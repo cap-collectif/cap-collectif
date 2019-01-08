@@ -2,17 +2,9 @@
 
 namespace Capco\AppBundle\Command\Nantes;
 
-use Capco\AppBundle\Entity\NewsletterSubscription;
-use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Manager\MediaManager;
-use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Entity\UserType;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
-use Faker\Factory;
-use Faker\Generator;
 use Gedmo\Sluggable\SluggableListener;
 use Gedmo\Timestampable\TimestampableListener;
 use League\Csv\Reader;
@@ -26,7 +18,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class NantesImportUsersCommand extends ContainerAwareCommand
 {
-    protected const USERS_BATCH_SIZE = 500;
+    protected const USERS_BATCH_SIZE = 25;
 
     protected const USERS_FILE = 'utilisateurs.csv';
 
@@ -123,68 +115,71 @@ class NantesImportUsersCommand extends ContainerAwareCommand
                 '' === $userRow['cnmEmail'] || !$userRow['cnmEmail']
                     ? 'test@mail' . $key . '.com'
                     : $userRow['cnmEmail'];
-            $user /* for test only, because datas samples were corrupted
+            $userExist = $this->em->getRepository(User::class)->findOneByEmail($email);
+            if (!$userExist) {
+                $user /* for test only, because datas samples were corrupted
                 ->setEmailCanonical($userRow['cnmEmail'] . '@mail' . $key . '.com')
                 ->setEmail($userRow['cnmEmail'] . '@mail' . $key . '.com')
                 */ = (new User())
-                ->setFirstname($firstName)
-                ->setLastname($lastName)
-                ->setUsername($userRow['nickName'] ?? $key)
-                ->setPassword('')
-                ->setOpenId($userRow['id'])
-                ->setEmailCanonical($email)
-                ->setEmail($email)
-                ->setEnabled(true)
-                ->setCreatedAt(new \DateTime($userRow['createdDate']))
-                ->setDateOfBirth(new \DateTime($userRow['j:birthDate']));
-            //Waiting for users files
-            try {
-                $filePath =
-                    $this->getContainer()->getParameter('kernel.root_dir') . '/../nantesCo/users';
-                if ('' !== $userRow['pictures']) {
-                    $file = $filePath . $userRow['pictures'];
-                    if (file_exists($file)) {
-                        $extension = '.' . explode('/', mime_content_type($file))[1];
-                        rename(
-                            $filePath . $userRow['pictures'],
-                            $filePath . $userRow['pictures'] . $extension
-                        );
-                        $file = $filePath . $userRow['pictures'] . $extension;
-                    } else {
-                        if (file_exists($file . '.jpg')) {
-                            $file = $file . '.jpg';
-                        } elseif (file_exists($file . '.jpeg')) {
-                            $file = $file . '.jpeg';
-                        } elseif (file_exists($file . '.png')) {
-                            $file = $file . '.png';
+                    ->setFirstname($firstName)
+                    ->setLastname($lastName)
+                    ->setUsername($userRow['nickName'] ?? $key)
+                    ->setPassword('')
+                    ->setOpenId($userRow['id'])
+                    ->setEmailCanonical($email)
+                    ->setEmail($email)
+                    ->setEnabled(true)
+                    ->setCreatedAt(new \DateTime($userRow['createdDate']))
+                    ->setDateOfBirth(new \DateTime($userRow['j:birthDate']));
+                //Waiting for users files
+                try {
+                    $filePath =
+                        $this->getContainer()->getParameter('kernel.root_dir') .
+                        '/../nantesCo/users';
+                    if ('' !== $userRow['pictures']) {
+                        $file = $filePath . $userRow['pictures'];
+                        if (file_exists($file)) {
+                            $extension = '.' . explode('/', mime_content_type($file))[1];
+                            rename(
+                                $filePath . $userRow['pictures'],
+                                $filePath . $userRow['pictures'] . $extension
+                            );
+                            $file = $filePath . $userRow['pictures'] . $extension;
+                        } else {
+                            if (file_exists($file . '.jpg')) {
+                                $file = $file . '.jpg';
+                            } elseif (file_exists($file . '.jpeg')) {
+                                $file = $file . '.jpeg';
+                            } elseif (file_exists($file . '.png')) {
+                                $file = $file . '.png';
+                            }
                         }
+                        $avatar = $this->getContainer()
+                            ->get(MediaManager::class)
+                            ->createImageFromPath($file);
+                        $user->setMedia($avatar);
                     }
-                    $avatar = $this->getContainer()
-                        ->get(MediaManager::class)
-                        ->createImageFromPath($file);
-                    $user->setMedia($avatar);
+                } catch (\Exception $exception) {
+                    $output->writeln(
+                        '<info>' . $file . '</info> not found. Set default image instead...'
+                    );
                 }
-            } catch (\Exception $exception) {
-                $output->writeln(
-                    '<info>' .
-                        $userRow['pictures'] .
-                        '</info> not found. Set default image instead...'
-                );
+                $this->em->persist($user);
+                if (0 === $count % self::USERS_BATCH_SIZE) {
+                    $this->em->flush();
+                    $this->em->clear();
+                }
+                //$this->printMemoryUsage($output);
+                $progress->advance();
+                ++$count;
+            } else {
+                $progress->advance();
+                ++$count;
             }
-            $this->em->persist($user);
-            if (0 === $count % self::USERS_BATCH_SIZE) {
-                $this->em->flush();
-                $this->em->clear(User::class);
-                //$this->em->clear(Media::class);
-                $this->printMemoryUsage($output);
-            }
-            $progress->advance();
-            ++$count;
         }
         unset($count);
         $this->em->flush();
-        $this->em->clear(User::class);
-        $this->em->clear(Media::class);
+        $this->em->clear();
         $progress->finish();
         $this->enableListeners($output);
         $output->writeln('<info>Successfully imported users...</info>');

@@ -353,10 +353,25 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('proposal.draft = 0')
             ->andWhere('proposal.trashedAt IS NULL')
             ->andWhere('proposal.published = 1')
-            ->groupBy('pv.selectionStep')
             ->setParameter('step', $step)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function getByProposalIdsAndStepAndUser(
+        array $ids,
+        SelectionStep $step,
+        User $author
+    ): array {
+        return $this->createQueryBuilder('pv')
+            ->andWhere('pv.user = :author')
+            ->andWhere('pv.selectionStep = :step')
+            ->andWhere('pv.proposal IN (:ids)')
+            ->setParameter('author', $author)
+            ->setParameter('step', $step)
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
     }
 
     private function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
