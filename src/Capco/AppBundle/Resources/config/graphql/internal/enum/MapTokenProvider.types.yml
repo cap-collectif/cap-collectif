@@ -1,8 +1,0 @@
-MapTokenProvider:
-  type: enum
-  config:
-    description: 'The provider for a map token'
-    values:
-      MAPBOX:
-        value: '@=constant("Capco\\AppBundle\\Enum\\MapProviderEnum::MAPBOX")'
-        description: 'Used for Mapbox service provider'

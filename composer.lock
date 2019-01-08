@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b1378177eb757cba28d3c531e261231",
+    "content-hash": "5b2c835e0e662d126741da04a8570d62",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1493,12 +1493,12 @@
             "version": "v2.6.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/orm.git",
+                "url": "https://github.com/doctrine/doctrine2.git",
                 "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "reference": "d2b4dd71d2a276edd65d0c170375b445f8a4a4a8",
                 "shasum": ""
             },
@@ -4624,59 +4624,6 @@
                 "http client"
             ],
             "time": "2018-03-19T10:34:40+00:00"
-        },
-        {
-            "name": "ksubileau/color-thief-php",
-            "version": "v1.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ksubileau/color-thief-php.git",
-                "reference": "fc2acefacbd037f68cf61bcc62b30ac1bb16ed59"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ksubileau/color-thief-php/zipball/fc2acefacbd037f68cf61bcc62b30ac1bb16ed59",
-                "reference": "fc2acefacbd037f68cf61bcc62b30ac1bb16ed59",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.13",
-                "phpunit/phpunit": "~4.8|~5.7"
-            },
-            "suggest": {
-                "ext-gd": "to use the GD image adapter.",
-                "ext-gmagick": "to use the Gmagick image adapter.",
-                "ext-imagick": "to use the Imagick image adapter."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ColorThief\\": "lib/ColorThief"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "CC-BY-2.5"
-            ],
-            "authors": [
-                {
-                    "name": "Kevin Subileau",
-                    "homepage": "http://www.kevinsubileau.fr"
-                }
-            ],
-            "description": "Grabs the dominant color or a representative color palette from an image.",
-            "homepage": "http://www.kevinsubileau.fr/projets/color-thief-php",
-            "keywords": [
-                "color",
-                "dominant",
-                "palette",
-                "php",
-                "thief"
-            ],
-            "time": "2018-10-27T18:57:38+00:00"
         },
         {
             "name": "league/csv",

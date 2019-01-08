@@ -30,9 +30,7 @@
         <section class="section--custom">
             <div class="container">
                 <h2>{{ 'user.profile.show.projects' | trans({}, 'CapcoAppBundle') }}</h2>
-                <div class="row">
-                    {% include '@CapcoUser/Profile/projects.html.twig' %}
-                </div>
+                {% include '@CapcoUser/Profile/projects.html.twig' %}
             </div>
         </section>
     {% endif %}

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
-use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -114,7 +113,7 @@ class SiteImage
      *
      * @return mixed
      */
-    public function getMedia(): ?Media
+    public function getMedia()
     {
         return $this->media;
     }

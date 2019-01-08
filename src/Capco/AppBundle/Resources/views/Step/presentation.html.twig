@@ -61,14 +61,10 @@
         </div>
     {% endif %}
 
-    {% set contributorsConnection = projectContributorsResolver.__invoke(project) %}
-    {% set contributorsCount = contributorsConnection.totalCount + contributorsConnection.anonymousCount %}
-    {% set anonymousCount = contributorsConnection.anonymousCount %}
-
     <div class="block">
         <h2 class="h2">{{ 'step.presentation.contributors.title'|trans({}, 'CapcoAppBundle') }}
             <span class="small excerpt">
-                {{ contributorsCount }}
+                {{ project.participantsCount }}
                 {% if anonymousCount > 0 %}
                     {% transchoice anonymousCount with {'%count%': anonymousCount} from 'CapcoAppBundle' %}
                     project.show.contributors.anonymous

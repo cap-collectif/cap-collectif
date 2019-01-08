@@ -39,6 +39,7 @@ class ReportForm extends React.Component<Props> {
           <option value={1}>{intl.formatMessage({ id: 'reporting.status.offending' })}</option>
           <option value={2}>{intl.formatMessage({ id: 'reporting.status.spam' })}</option>
           <option value={3}>{intl.formatMessage({ id: 'reporting.status.error' })}</option>
+          <option value={4}>{intl.formatMessage({ id: 'reporting.status.off_topic' })}</option>
         </Field>
         <Field
           id="reportBody"

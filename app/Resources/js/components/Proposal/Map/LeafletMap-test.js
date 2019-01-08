@@ -14,16 +14,6 @@ describe('<LeafletMap />', () => {
     dispatch: jest.fn(),
     stepId: 'step1',
     stepType: 'collect',
-    mapTokens: {
-      MAPBOX: {
-        initialPublicToken:
-          '***REMOVED***',
-        publicToken:
-          '***REMOVED***',
-        styleOwner: 'capcollectif',
-        styleId: '***REMOVED***',
-      },
-    },
   };
 
   const markers = {

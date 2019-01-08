@@ -3,10 +3,6 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepContributorCountResolver;
-use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
@@ -17,23 +13,10 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
     use SerializerAwareTrait;
 
     private $normalizer;
-    private $collectStepProposalCountResolver;
-    private $collectStepContributorCountResolver;
-    private $adapter;
-    private $logger;
 
-    public function __construct(
-        ObjectNormalizer $normalizer,
-        CollectStepProposalCountResolver $collectStepProposalCountResolver,
-        CollectStepContributorCountResolver $collectStepContributorCountResolver,
-        PromiseAdapterInterface $adapter,
-        LoggerInterface $logger
-    ) {
+    public function __construct(ObjectNormalizer $normalizer)
+    {
         $this->normalizer = $normalizer;
-        $this->collectStepProposalCountResolver = $collectStepProposalCountResolver;
-        $this->collectStepContributorCountResolver = $collectStepContributorCountResolver;
-        $this->adapter = $adapter;
-        $this->logger = $logger;
     }
 
     public function normalize($object, $format = null, array $context = [])
@@ -46,20 +29,9 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
             return $data;
         }
 
-        $proposalsCount = $this->collectStepProposalCountResolver->__invoke($object);
-
-        $contributorsCount = 0;
-        $contributorPromise = $this->collectStepContributorCountResolver
-            ->__invoke($object)
-            ->then(function ($value) use (&$contributorsCount) {
-                $contributorsCount += $value;
-            });
-
-        $this->adapter->await($contributorPromise);
-
         $counters = [
-            'proposals' => $proposalsCount,
-            'contributors' => $contributorsCount,
+            'proposals' => $object->getProposalsCount(),
+            'contributors' => $object->getContributorsCount(),
         ];
 
         $remainingTime = $object->getRemainingTime();

@@ -7,7 +7,6 @@ import type { ProposalListView_viewer } from './__generated__/ProposalListView_v
 import Loader from '../../Ui/FeedbacksIndicators/Loader';
 import type { GlobalState } from '../../../types';
 import ProposalListViewPaginated from './ProposalListViewPaginated';
-import { graphqlError } from '../../../createRelayEnvironment';
 
 type Filters = {|
   categories?: string,
@@ -76,13 +75,11 @@ type Props = {
 };
 type State = {
   isRefetching: boolean,
-  hasRefetchError: boolean,
 };
 
 export class ProposalListView extends React.Component<Props, State> {
   state = {
     isRefetching: false,
-    hasRefetchError: false,
   };
 
   componentDidUpdate(prevProps: Props) {
@@ -96,7 +93,7 @@ export class ProposalListView extends React.Component<Props, State> {
   }
 
   _refetch = () => {
-    this.setState({ isRefetching: true, hasRefetchError: false });
+    this.setState({ isRefetching: true });
 
     const refetchVariables = fragmentVariables => ({
       ...queryVariables(this.props.filters, this.props.order),
@@ -109,10 +106,7 @@ export class ProposalListView extends React.Component<Props, State> {
     this.props.relay.refetch(
       refetchVariables,
       null,
-      (error: ?Error) => {
-        if (error) {
-          this.setState({ hasRefetchError: true });
-        }
+      () => {
         this.setState({ isRefetching: false });
       },
       { force: true },
@@ -124,10 +118,6 @@ export class ProposalListView extends React.Component<Props, State> {
 
     if (!visible) {
       return null;
-    }
-
-    if (this.state.hasRefetchError) {
-      return graphqlError;
     }
 
     if (this.state.isRefetching) {

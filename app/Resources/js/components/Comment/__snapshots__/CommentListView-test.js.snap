@@ -15,9 +15,6 @@ exports[`<CommentListView /> should render correctly 1`] = `
 
 exports[`<CommentListView /> should render correctly when refecting 1`] = `
 <Loader
-  color="#333333"
-  inline={false}
   show={true}
-  size={40}
 />
 `;

@@ -2,25 +2,25 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Commentable;
 
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Repository\EventCommentRepository;
+use Capco\AppBundle\Repository\PostCommentRepository;
+use Capco\AppBundle\Repository\ProposalCommentRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\PostComment;
-use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\Entity\EventComment;
-use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Model\CommentableInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Capco\AppBundle\Repository\PostCommentRepository;
-use Capco\AppBundle\Repository\EventCommentRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Repository\ProposalCommentRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
 
 class CommentableCommentsDataLoader extends BatchDataLoader
 {
@@ -30,14 +30,13 @@ class CommentableCommentsDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisTagCache $cache,
+        RedisCache $cache,
         LoggerInterface $logger,
         ProposalCommentRepository $proposalCommentRepository,
         EventCommentRepository $eventCommentRepository,
         PostCommentRepository $postCommentRepository,
         string $cachePrefix,
-        int $cacheTtl,
-        bool $debug
+        int $cacheTtl = RedisCache::ONE_MINUTE
     ) {
         $this->proposalCommentRepository = $proposalCommentRepository;
         $this->eventCommentRepository = $eventCommentRepository;
@@ -48,32 +47,35 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl,
-            $debug
+            $cacheTtl
         );
     }
 
     public function invalidate(string $commentId): void
     {
-        // TODO
-        $this->invalidateAll();
+        foreach ($this->getCacheKeys() as $cacheKey) {
+            $decoded = $this->getDecodedKeyFromKey($cacheKey);
+            if (false !== strpos($decoded, $commentId)) {
+                $this->cache->deleteItem($cacheKey);
+                $this->clear($cacheKey);
+                $this->logger->info('Invalidated cache for commentable ' . $commentId);
+            }
+        }
     }
 
     public function all(array $keys)
     {
-        $results = [];
+        $connections = [];
 
         foreach ($keys as $key) {
-            if ($this->debug) {
-                $this->logger->info(
-                    __METHOD__ . ' called with ' . var_export($this->serializeKey($key), true)
-                );
-            }
+            $this->logger->info(
+                __METHOD__ . ' called with ' . var_export($this->serializeKey($key), true)
+            );
 
-            $results[] = $this->resolve($key['commentable'], $key['args'], $key['viewer']);
+            $connections[] = $this->resolve($key['commentable'], $key['args'], $key['viewer']);
         }
 
-        return $this->getPromiseAdapter()->createAll($results);
+        return $this->getPromiseAdapter()->createAll($connections);
     }
 
     public function resolve(CommentableInterface $commentable, Argument $args, $viewer): Connection
@@ -88,9 +90,6 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             $viewer,
             $args
         ) {
-            if (0 === $offset && 0 === $limit) {
-                return [];
-            }
             list($field, $direction) = [
                 $args->offsetGet('orderBy')['field'],
                 $args->offsetGet('orderBy')['direction'],
@@ -116,8 +115,12 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         return $connection;
     }
 
-    protected function serializeKey($key): array
+    protected function serializeKey($key)
     {
+        if (\is_string($key)) {
+            return $key;
+        }
+
         return [
             'commentableId' => $key['commentable']->getId(),
             'isAdmin' => $key['viewer'] ? $key['viewer']->isAdmin() : false,

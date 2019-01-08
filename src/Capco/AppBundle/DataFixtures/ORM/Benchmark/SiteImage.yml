@@ -1,6 +1,0 @@
-Capco\AppBundle\Entity\SiteImage:
-  SiteImageSiteFavicon:
-    keyname: favicon
-    category: global
-    isEnabled: true
-    position: 1

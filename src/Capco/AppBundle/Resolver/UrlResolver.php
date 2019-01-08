@@ -47,24 +47,26 @@ class UrlResolver
         $this->container = $container;
     }
 
-    public function getMediaUrl(Media $media, ?Arg $args = null): string
+    public function getMediaUrl(Media $media, Arg $args): string
     {
         if (!$media) {
             return '';
         }
 
-        $format = $args ? $args['format'] ?? 'reference' : 'reference';
+        $format = $args['format'] ?? 'reference';
         $provider = $this->container->get($media->getProviderName());
         $path = '';
         if ('reference' === $format) {
             $path = '/media';
         }
 
-        return $this->scheme .
+        return (
+            $this->scheme .
             '://' .
             $this->host .
             $path .
-            $provider->generatePublicUrl($media, $format);
+            $provider->generatePublicUrl($media, $format)
+        );
     }
 
     public function generateOpinionOrProposalRoute($object, $absolute)
@@ -204,15 +206,19 @@ class UrlResolver
         }
 
         if ($object instanceof Argument && $object->getParent() && $object->getId()) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) .
+            return (
+                $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) .
                 '#arg-' .
-                $object->getId();
+                $object->getId()
+            );
         }
 
         if ($object instanceof Source && $object->getParent() && $object->getId()) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) .
+            return (
+                $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) .
                 '#source-' .
-                $object->getId();
+                $object->getId()
+            );
         }
 
         if ($object instanceof AbstractStep) {
@@ -228,9 +234,11 @@ class UrlResolver
         }
 
         if ($object instanceof Comment && $object->getRelatedObject()) {
-            return $this->getObjectUrl($object->getRelatedObject(), $absolute) .
+            return (
+                $this->getObjectUrl($object->getRelatedObject(), $absolute) .
                 '#comment_' .
-                $object->getId();
+                $object->getId()
+            );
         }
 
         if ($object instanceof Reporting && $object->getRelated()) {
@@ -255,7 +263,7 @@ class UrlResolver
                 : null;
         }
 
-        if (false !== ($url = $this->generateOpinionOrProposalRoute($object, $absolute))) {
+        if (false !== $url = $this->generateOpinionOrProposalRoute($object, $absolute)) {
             return $url;
         }
 
@@ -285,7 +293,7 @@ class UrlResolver
             );
         }
 
-        if (false !== ($url = $this->generateOpinionOrProposalRoute($object, $absolute))) {
+        if (false !== $url = $this->generateOpinionOrProposalRoute($object, $absolute)) {
             return $url;
         }
     }

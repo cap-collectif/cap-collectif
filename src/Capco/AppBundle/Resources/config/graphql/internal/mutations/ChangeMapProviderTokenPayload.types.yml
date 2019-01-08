@@ -1,7 +1,0 @@
-ChangeMapProviderTokenPayload:
-  type: relay-mutation-payload
-  config:
-    fields:
-      mapToken:
-        type: 'MapToken'
-        description: 'The newly map token'

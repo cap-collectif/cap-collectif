@@ -6,7 +6,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
     className="box-header"
   >
     <h3
-      className="box-title mb-20"
+      className="box-title"
     >
       <FormattedMessage
         id="proposal.follower.count"
@@ -59,7 +59,6 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
   >
     <button
       className="text-center btn btn-secondary"
-      disabled={false}
       onClick={[Function]}
     >
       <FormattedMessage
@@ -77,7 +76,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with u
     className="box-header"
   >
     <h3
-      className="box-title mb-20"
+      className="box-title"
     >
       <FormattedMessage
         id="proposal.follower.count"
@@ -134,7 +133,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower withou
     className="box-header"
   >
     <h3
-      className="box-title mb-20"
+      className="box-title"
     >
       <FormattedMessage
         id="proposal.follower.count"

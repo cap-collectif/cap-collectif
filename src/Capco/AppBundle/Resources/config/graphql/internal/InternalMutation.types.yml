@@ -5,34 +5,6 @@ InternalMutation:
   config:
     name: Mutation
     fields:
-      changeMapProviderToken:
-        access: "@=hasRole('ROLE_ADMIN')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: ChangeMapProviderTokenInput
-          payloadType: ChangeMapProviderTokenPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeMapProviderTokenMutation", [value])'
-      changeMapStyle:
-        access: "@=hasRole('ROLE_ADMIN')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: ChangeMapStyleInput
-          payloadType: ChangeMapStylePayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeMapStyleMutation", [value])'
-      removeSiteFavicon:
-        access: "@=hasRole('ROLE_ADMIN')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: InternalRemoveSiteFaviconInput
-          payloadType: InternalRemoveSiteFaviconPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveSiteFaviconMutation")'
-      changeSiteFavicon:
-        access: "@=hasRole('ROLE_ADMIN')"
-        builder: 'Relay::Mutation'
-        builderConfig:
-          inputType: InternalChangeSiteFaviconInput
-          payloadType: InternalChangeSiteFaviconPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeSiteFaviconMutation", [value])'
       addEvent:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'

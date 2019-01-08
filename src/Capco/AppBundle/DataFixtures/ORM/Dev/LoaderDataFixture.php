@@ -97,7 +97,6 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/BorderStyle.yml',
             __DIR__ . '/BackgroundStyle.yml',
             __DIR__ . '/ProjectDistrict.yml',
-            __DIR__ . '/MapToken.yml',
         ];
     }
 }

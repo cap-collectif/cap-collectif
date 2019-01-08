@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Input from '../../Form/Input';
@@ -16,7 +16,6 @@ type Props = {
   onCategoryChange: Function,
   showThemes: boolean,
   showDistricts: boolean,
-  intl: IntlShape,
 };
 
 export class ProjectStatsFilters extends React.Component<Props> {
@@ -31,7 +30,6 @@ export class ProjectStatsFilters extends React.Component<Props> {
       themes,
       showThemes,
       showDistricts,
-      intl,
     } = this.props;
     if (!showFilters) {
       return null;
@@ -58,7 +56,9 @@ export class ProjectStatsFilters extends React.Component<Props> {
         {showThemesFilter && (
           <Col xs={12} md={colWidth}>
             <Input id="stats-filter-themes" type="select" ref="themes" onChange={onThemeChange}>
-              <option value="">{intl.formatMessage({ id: 'global.select_themes' })}</option>
+              <option value="">
+                <FormattedMessage id="global.select_themes" />
+              </option>
               {themes.map(theme => (
                 <option key={theme.id} value={theme.id}>
                   {theme.title}
@@ -70,7 +70,9 @@ export class ProjectStatsFilters extends React.Component<Props> {
         {showCategoriesFilter && (
           <Col xs={12} md={colWidth}>
             <Input id="stats-filter-categories" type="select" onChange={onCategoryChange}>
-              <option value="">{intl.formatMessage({ id: 'global.select_categories' })}</option>
+              <option value="">
+                <FormattedMessage id="global.select_categories" />
+              </option>
               {categories.map(category => (
                 <option key={category.id} value={category.id}>
                   {category.name}
@@ -107,6 +109,6 @@ const mapStateToProps = (state: State, props: Props) => ({
   showDistricts: state.default.features.districts && props.showDistricts,
 });
 
-const container = connect(mapStateToProps)(injectIntl(ProjectStatsFilters));
+const container = connect(mapStateToProps)(ProjectStatsFilters);
 
 export default container;

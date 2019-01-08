@@ -31,4 +31,9 @@ trait VoteThresholdTrait
     {
         return $this->getVoteThreshold() > 0;
     }
+
+    public function isThresholdReached(): bool
+    {
+        return $this->getVotesCount() >= $this->getVoteThreshold();
+    }
 }

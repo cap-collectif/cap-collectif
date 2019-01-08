@@ -12,29 +12,21 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalviewerFollowDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigurationDataLoader;
 
 class FollowProposalMutation implements MutationInterface
 {
     private $em;
     private $proposalRepository;
     private $followerRepository;
-    private $viewerFollowDataLoader;
-    private $viewerFollowingConfigDataLoader;
 
     public function __construct(
         EntityManagerInterface $em,
         ProposalRepository $proposalRepository,
-        FollowerRepository $followerRepository,
-        ProposalviewerFollowDataLoader $viewerFollowDataLoader,
-        ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader
+        FollowerRepository $followerRepository
     ) {
         $this->em = $em;
         $this->proposalRepository = $proposalRepository;
         $this->followerRepository = $followerRepository;
-        $this->viewerFollowDataLoader = $viewerFollowDataLoader;
-        $this->viewerFollowingConfigDataLoader = $viewerFollowingConfigDataLoader;
     }
 
     /**
@@ -59,8 +51,6 @@ class FollowProposalMutation implements MutationInterface
         $totalCount = $this->followerRepository->countFollowersOfProposal($proposal);
 
         $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $user);
-        $this->viewerFollowDataLoader->invalidate($proposal);
-        $this->viewerFollowingConfigDataLoader->invalidate($proposal);
 
         return ['proposal' => $proposal, 'follower' => $user, 'followerEdge' => $edge];
     }

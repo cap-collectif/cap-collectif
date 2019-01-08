@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Elastica\Index;
 use Swarrot\Broker\Message;
 use Psr\Log\LoggerInterface;
@@ -35,14 +34,10 @@ class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
     private $logger;
-    private $proposalLikersDataLoader;
 
-    public function __construct(
-        LoggerInterface $logger,
-        ProposalLikersDataLoader $proposalLikersDataLoader
-    ) {
+    public function __construct(LoggerInterface $logger)
+    {
         $this->logger = $logger;
-        $this->proposalLikersDataLoader = $proposalLikersDataLoader;
     }
 
     public function changeNotation(Argument $input)
@@ -62,7 +57,6 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         $em->flush();
-        $this->proposalLikersDataLoader->invalidate($proposal);
 
         return ['proposal' => $proposal];
     }
