@@ -364,6 +364,7 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   viewerHasVote: Boolean!
   viewerVote: ArgumentVote
   contribuable: Boolean!
+  step: Consultation!
 }
 
 # A connection to a list of items.

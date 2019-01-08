@@ -10,16 +10,38 @@ import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import type { ArgumentVoteButton_argument } from './__generated__/ArgumentVoteButton_argument.graphql';
+import RequirementsFormModal from '../../Requirements/RequirementsModal';
 
 type Props = {
   argument: ArgumentVoteButton_argument,
 };
 
-export class ArgumentVoteButton extends React.Component<Props> {
+type State = {
+  openModal: boolean,
+};
+
+export class ArgumentVoteButton extends React.Component<Props, State> {
   target: null;
+
+  state = { openModal: false };
+
+  openModal = () => {
+    this.setState({ openModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ openModal: false });
+  };
+
+  checkIfUserHasRequirements = () => {};
 
   vote = () => {
     const { argument } = this.props;
+    const { step } = argument;
+    if (step && step.requirements && !step.requirements.viewerMeetsTheRequirements) {
+      this.openModal();
+      return;
+    }
     AddArgumentVoteMutation.commit({ input: { argumentId: argument.id } })
       .then(() => {
         FluxDispatcher.dispatch({
@@ -37,6 +59,11 @@ export class ArgumentVoteButton extends React.Component<Props> {
 
   deleteVote = () => {
     const { argument } = this.props;
+    const { step } = argument;
+    if (step && step.requirements && !step.requirements.viewerMeetsTheRequirements) {
+      this.openModal();
+      return;
+    }
     RemoveArgumentVoteMutation.commit({ input: { argumentId: argument.id } })
       .then(() => {
         FluxDispatcher.dispatch({
@@ -54,8 +81,18 @@ export class ArgumentVoteButton extends React.Component<Props> {
 
   render() {
     const { argument } = this.props;
+    const { step } = argument;
+    const { openModal } = this.state;
     return (
       <LoginOverlay>
+        {step /* $FlowFixMe */ && (
+          <RequirementsFormModal
+            step={step}
+            reason={step.requirements.reason}
+            handleClose={this.closeModal}
+            show={openModal}
+          />
+        )}
         <Button
           ref={button => {
             this.target = button;
@@ -94,6 +131,14 @@ export default createFragmentContainer(
       author {
         slug
         isViewer @include(if: $isAuthenticated)
+      }
+      step {
+        ...RequirementsForm_step
+        id
+        requirements {
+          viewerMeetsTheRequirements
+          reason
+        }
       }
       contribuable
       viewerHasVote @include(if: $isAuthenticated)

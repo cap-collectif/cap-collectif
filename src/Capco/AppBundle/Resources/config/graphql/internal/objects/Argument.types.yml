@@ -52,3 +52,5 @@ Argument:
       contribuable:
         type: 'Boolean!'
         resolve: '@=value.canContribute()'
+      step:
+        type: 'InternalConsultation!'
