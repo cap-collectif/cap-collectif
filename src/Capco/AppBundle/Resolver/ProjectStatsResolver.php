@@ -15,6 +15,7 @@ use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\UserBundle\Repository\UserTypeRepository;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class ProjectStatsResolver
 {
@@ -27,6 +28,7 @@ class ProjectStatsResolver
     protected $proposalRepo;
     protected $proposalSelectionVoteRepo;
     protected $collectStepProposalCountResolver;
+    protected $adapter;
 
     public function __construct(
         SelectionStepRepository $selectionStepRepo,
@@ -37,7 +39,8 @@ class ProjectStatsResolver
         UserTypeRepository $userTypeRepo,
         ProposalRepository $proposalRepo,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepo,
-        CollectStepProposalCountResolver $collectStepProposalCountResolver
+        CollectStepProposalCountResolver $collectStepProposalCountResolver,
+        PromiseAdapterInterface $adapter
     ) {
         $this->selectionStepRepo = $selectionStepRepo;
         $this->collectStepRepo = $collectStepRepo;
@@ -48,6 +51,7 @@ class ProjectStatsResolver
         $this->proposalRepo = $proposalRepo;
         $this->proposalSelectionVoteRepo = $proposalSelectionVoteRepo;
         $this->collectStepProposalCountResolver = $collectStepProposalCountResolver;
+        $this->adapter = $adapter;
     }
 
     public function getStepsWithStatsForProject(Project $project)
@@ -109,7 +113,13 @@ class ProjectStatsResolver
         $data = [];
         $count = 0;
         if ('collect' === $step->getType()) {
-            $count = $this->collectStepProposalCountResolver->__invoke($step);
+            $promise = $this->collectStepProposalCountResolver
+                ->__invoke($step)
+                ->then(function ($value) use (&$count) {
+                    $count = $value;
+                });
+
+            $this->adapter->await($promise);
         }
 
         switch ($key) {
@@ -149,7 +159,13 @@ class ProjectStatsResolver
             case 'costs':
                 if ('collect' === $step->getType()) {
                     $data['values'] = $this->getProposalsWithCostsForStep($step, $limit);
-                    $data['total'] = $this->collectStepProposalCountResolver->__invoke($step);
+                    $promise = $this->collectStepProposalCountResolver
+                        ->__invoke($step)
+                        ->then(function ($value) use (&$data) {
+                            $data['total'] = $value;
+                        });
+
+                    $this->adapter->await($promise);
                 }
 
                 break;

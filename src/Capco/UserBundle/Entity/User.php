@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
@@ -48,7 +49,7 @@ class User extends BaseUser implements
 
     protected $locked = false;
 
-    protected $gender = null;
+    protected $gender;
 
     /**
      * @var int
@@ -231,15 +232,15 @@ class User extends BaseUser implements
 
     protected $vip = false;
 
-    protected $newEmailToConfirm = null;
-    protected $newEmailConfirmationToken = null;
+    protected $newEmailToConfirm;
+    protected $newEmailConfirmationToken;
 
-    protected $emailConfirmationSentAt = null;
+    protected $emailConfirmationSentAt;
 
-    protected $deletedAccountAt = null;
+    protected $deletedAccountAt;
 
-    protected $smsConfirmationSentAt = null;
-    protected $smsConfirmationCode = null;
+    protected $smsConfirmationSentAt;
+    protected $smsConfirmationCode;
     protected $phoneConfirmed = false;
 
     protected $remindedAccountConfirmationAfter24Hours = false;
@@ -263,7 +264,7 @@ class User extends BaseUser implements
 
     private $userGroups;
 
-    private $resetPasswordToken = null;
+    private $resetPasswordToken;
 
     public function __construct($encoder = null)
     {
@@ -283,6 +284,24 @@ class User extends BaseUser implements
         $this->followingContributions = new ArrayCollection();
         $this->notificationsConfiguration = new UserNotificationsConfiguration();
         $this->archives = new ArrayCollection();
+    }
+
+    public function hydrate(array $data)
+    {
+        foreach ($data as $key => $value) {
+            $setter = 'set' . ucfirst($key);
+            if ('id' === $key) {
+                $this->id = $value;
+
+                continue;
+            }
+
+            if (method_exists($this, $setter) && null !== $value) {
+                $this->$setter($value);
+            }
+        }
+
+        return $this;
     }
 
     public function setSamlAttributes(string $idp, array $attributes)
@@ -381,8 +400,8 @@ class User extends BaseUser implements
         }
     }
 
-    /*  http://symfony.com/doc/2.8/security/entity_provider.html#understanding-serialize-and-how-a-user-is-saved-in-the-session  */
-    /*  We check the account is not deleted in case of the user has multiple accounts sessions and just deleted his account */
+    // http://symfony.com/doc/2.8/security/entity_provider.html#understanding-serialize-and-how-a-user-is-saved-in-the-session
+    // We check the account is not deleted in case of the user has multiple accounts sessions and just deleted his account
     public function isEqualTo(RealUserInterface $user)
     {
         return $user instanceof self &&
@@ -1369,7 +1388,7 @@ class User extends BaseUser implements
     }
 
     /**
-     * https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730
+     * https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730.
      */
     public function getUserGroupIds(): array
     {
@@ -1493,7 +1512,7 @@ class User extends BaseUser implements
     }
 
     /**
-     * We overide sonata's BaseUser hook
+     * We overide sonata's BaseUser hook.
      *
      * Hook on pre-persist operations.
      */

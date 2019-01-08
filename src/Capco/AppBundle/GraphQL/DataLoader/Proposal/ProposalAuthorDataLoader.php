@@ -6,18 +6,23 @@ use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
 
 class ProposalAuthorDataLoader extends BatchDataLoader
 {
+    private $userRepository;
+
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
+        UserRepository $userRepository,
         RedisTagCache $cache,
         LoggerInterface $logger,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug
+        bool $debug,
+        bool $enableCache
     ) {
         parent::__construct(
             [$this, 'all'],
@@ -26,8 +31,11 @@ class ProposalAuthorDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug
+            $debug,
+            $enableCache
         );
+
+        $this->userRepository = $userRepository;
     }
 
     public function invalidate(Proposal $proposal): void
@@ -37,14 +45,24 @@ class ProposalAuthorDataLoader extends BatchDataLoader
 
     public function all(array $keys)
     {
-        $results = [];
+        $ids = array_map(function ($key) {
+            return $key['proposal']->getId();
+        }, $keys);
 
-        foreach ($keys as $key) {
-            // Need batching here
-            $results[] = $this->resolve($key['proposal']);
+        $results = $this->userRepository->getUserFromProposalIds($ids);
+        foreach ($results as $key => $result) {
+            $results[$result['id']] = (new User())->hydrate($result['user']);
+            unset($results[$key]);
+        }
+        $ids = array_flip($ids);
+        $results = array_merge($ids, $results);
+
+        $authors = [];
+        foreach ($results as $key => $result) {
+            $authors[] = $result;
         }
 
-        return $this->getPromiseAdapter()->createAll($results);
+        return $this->getPromiseAdapter()->createAll($authors);
     }
 
     protected function serializeKey($key)

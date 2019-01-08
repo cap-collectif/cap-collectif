@@ -40,8 +40,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="proposal", uniqueConstraints={
  *    @ORM\UniqueConstraint(columns={ "proposal_form_id", "reference"}),
  * }, indexes={
- *     @ORM\Index(name="idx_author", columns={"id", "author_id"}),
- *     @ORM\Index(name="idx_proposal_published", columns={"id", "published", "deleted_at", "is_draft", "trashed_at"})
+ *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
  * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
  * @ORM\HasLifecycleCallbacks()

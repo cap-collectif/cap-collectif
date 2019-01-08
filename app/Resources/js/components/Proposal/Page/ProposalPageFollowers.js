@@ -8,20 +8,13 @@ import type { ProposalPageFollowers_proposal } from './__generated__/ProposalPag
 import { graphqlError } from '../../../createRelayEnvironment';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 
-type State = {|
-  loading: boolean,
-|};
 type Props = {|
   proposal: ProposalPageFollowers_proposal,
   relay: RelayPaginationProp,
   pageAdmin: boolean,
 |};
 
-export class ProposalPageFollowers extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  };
-
+export class ProposalPageFollowers extends React.Component<Props> {
   render() {
     const { proposal, relay, pageAdmin } = this.props;
     if (!proposal.followers || !proposal.followers.edges) {
@@ -56,15 +49,11 @@ export class ProposalPageFollowers extends React.Component<Props, State> {
         {relay.hasMore() && (
           <div className="text-center">
             <button
-              disabled={this.state.loading}
               onClick={() => {
-                this.setState({ loading: true });
-                relay.loadMore(PROPOSAL_FOLLOWERS_TO_SHOW, () => {
-                  this.setState({ loading: false });
-                });
+                relay.loadMore(PROPOSAL_FOLLOWERS_TO_SHOW);
               }}
               className="text-center btn btn-secondary">
-              <FormattedMessage id={this.state.loading ? 'global.loading' : 'see-more-followers'} />
+              <FormattedMessage id="see-more-followers" />
             </button>
           </div>
         )}

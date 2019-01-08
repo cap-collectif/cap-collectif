@@ -2,8 +2,17 @@
 
 namespace Capco\AppBundle\Command\Nantes;
 
+use Capco\AppBundle\Entity\NewsletterSubscription;
+use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\Manager\MediaManager;
+use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Entity\UserType;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
+use Faker\Factory;
+use Faker\Generator;
 use Gedmo\Sluggable\SluggableListener;
 use Gedmo\Timestampable\TimestampableListener;
 use League\Csv\Reader;
@@ -107,22 +116,21 @@ class NantesResetOpenIdCommand extends ContainerAwareCommand
             $userInDb = $this->em
                 ->getRepository(User::class)
                 ->findOneBy(['openId' => $userRow['id']]);
-            if ($userInDb) {
-                $userInDb->setOpenId($userRow['cnmid']);
-                $this->em->persist($userInDb);
-                if (0 === $count % self::USERS_BATCH_SIZE) {
-                    $this->em->flush();
-                    $this->em->clear(User::class);
-                    $this->printMemoryUsage($output);
-                }
-                $progress->advance();
-                ++$count;
+            $userInDb->setOpenId($userRow['cnmid']);
+            $this->em->persist($userInDb);
+            if (0 === $count % self::USERS_BATCH_SIZE) {
+                $this->em->flush();
+                $this->em->clear(User::class);
+                $this->printMemoryUsage($output);
             }
+            $progress->advance();
+            ++$count;
         }
         unset($count);
         $this->em->flush();
         $this->em->clear(User::class);
         $progress->finish();
+        $this->enableListeners($output);
         $output->writeln('<info>Successfully reseted Users OpenId...</info>');
     }
 

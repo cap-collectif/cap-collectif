@@ -353,6 +353,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('proposal.draft = 0')
             ->andWhere('proposal.trashedAt IS NULL')
             ->andWhere('proposal.published = 1')
+            ->groupBy('pv.selectionStep')
             ->setParameter('step', $step)
             ->getQuery()
             ->getSingleScalarResult();

@@ -106,7 +106,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         ProposalForm $form,
         Arg $args,
         $viewer,
-        ?RequestStack $request
+        RequestStack $request
     ): Connection {
         $totalCount = 0;
         $filters = [];
@@ -220,7 +220,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             if ($viewer instanceof User) {
                 // sprintf with %u is here in order to avoid negative int.
                 $seed = sprintf('%u', crc32($viewer->getId()));
-            } elseif ($request && $request->getCurrentRequest()) {
+            } elseif ($request->getCurrentRequest()) {
                 // sprintf with %u is here in order to avoid negative int.
                 $seed = sprintf('%u', ip2long($request->getCurrentRequest()->getClientIp()));
             } else {

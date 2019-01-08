@@ -25,19 +25,6 @@ class ProposalCollectVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getByProposalIdsAndStepAndUser(array $ids, CollectStep $step, User $author)
-    {
-        return $this->createQueryBuilder('pv')
-            ->andWhere('pv.user = :author')
-            ->andWhere('pv.collectStep = :step')
-            ->andWhere('pv.proposal IN (:ids)')
-            ->setParameter('author', $author)
-            ->setParameter('step', $step)
-            ->setParameter('ids', $ids)
-            ->getQuery()
-            ->getResult();
-    }
-
     public function getByProposalAndStepAndUser(
         Proposal $proposal,
         CollectStep $step,
@@ -368,6 +355,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->andWhere('proposal.draft = 0')
             ->andWhere('proposal.trashedAt IS NULL')
             ->andWhere('proposal.published = 1')
+            ->groupBy('pv.collectStep')
             ->setParameter('step', $step)
             ->getQuery()
             ->getSingleScalarResult();

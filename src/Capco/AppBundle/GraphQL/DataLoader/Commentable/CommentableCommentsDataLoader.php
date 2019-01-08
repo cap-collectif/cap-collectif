@@ -64,11 +64,9 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         $results = [];
 
         foreach ($keys as $key) {
-            if ($this->debug) {
-                $this->logger->info(
-                    __METHOD__ . ' called with ' . var_export($this->serializeKey($key), true)
-                );
-            }
+            $this->logger->info(
+                __METHOD__ . ' called with ' . var_export($this->serializeKey($key), true)
+            );
 
             $results[] = $this->resolve($key['commentable'], $key['args'], $key['viewer']);
         }
@@ -116,8 +114,12 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         return $connection;
     }
 
-    protected function serializeKey($key): array
+    protected function serializeKey($key)
     {
+        if (\is_string($key)) {
+            return $key;
+        }
+
         return [
             'commentableId' => $key['commentable']->getId(),
             'isAdmin' => $key['viewer'] ? $key['viewer']->isAdmin() : false,
