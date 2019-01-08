@@ -188,6 +188,7 @@ export class ProposalStepPage extends React.Component<Props> {
                   {/* $FlowFixMe $refType */}
                   <ProposalListView
                     step={props.step}
+                    count={count}
                     viewer={props.viewer || null}
                     view={selectedViewByStep === 'mosaic' ? 'mosaic' : 'table'}
                     visible={selectedViewByStep === 'mosaic' || selectedViewByStep === 'table'}
