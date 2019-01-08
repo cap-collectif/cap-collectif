@@ -10,5 +10,5 @@ translation:
   configs:
     app:
       dirs: ['%kernel.project_dir%/src']
-      output_dir: '%kernel.project_dir%%/translations'
+      output_dir: '%kernel.project_dir%/translations'
       remote_storage: ['php_translation.adapter.loco']
