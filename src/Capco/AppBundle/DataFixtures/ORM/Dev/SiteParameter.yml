@@ -114,7 +114,12 @@ Capco\AppBundle\Entity\SiteParameter:
     value: 06 10 20 30 40
     position: 630
     type: 7
-
+  SiteParameter100:
+    keyname: proposal.pagination
+    category: pages.projects
+    value: 20
+    position: 700
+    type: 2
   SiteParameter24:
     keyname: projects.pagination
     category: pages.projects

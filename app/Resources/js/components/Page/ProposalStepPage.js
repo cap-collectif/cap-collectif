@@ -22,10 +22,12 @@ import config from '../../config';
 
 type OwnProps = {|
   stepId: string,
+  count: number,
 |};
 
 type Props = {|
-  step: StepPageHeader_step,
+  count: number,
+  step: { id: string },
   filters: Object,
   order: ?string,
   terms: ?string,
@@ -46,7 +48,7 @@ export class ProposalStepPage extends React.Component<Props> {
   }
 
   render() {
-    const { step, isAuthenticated, selectedViewByStep, features } = this.props;
+    const { count, step, isAuthenticated, selectedViewByStep, features } = this.props;
 
     return (
       <div className="proposal__step-page">
@@ -121,7 +123,7 @@ export class ProposalStepPage extends React.Component<Props> {
             ({
               stepId: step.id,
               isAuthenticated,
-              count: config.isMobile ? 25 : 50,
+              count: config.isMobile ? 10 : count,
               cursor: null,
               ...this.initialRenderVars,
               isMapDisplay: features.display_map,
