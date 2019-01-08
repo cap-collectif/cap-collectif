@@ -239,12 +239,12 @@ class ProposalCollectVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countVotesByProposal(Proposal $proposal, bool $includeUnpublished): int
+    public function countVotesByProposal(string $proposalId, bool $includeUnpublished): int
     {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposalId);
 
         if (!$includeUnpublished) {
             $qb->andWhere('pv.published = true');

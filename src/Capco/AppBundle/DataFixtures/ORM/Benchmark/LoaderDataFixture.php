@@ -10,6 +10,7 @@ class LoaderDataFixture extends AbstractLoader
     {
         return [
             __DIR__ . '/UserType.yml',
+            __DIR__ . '/MapToken.yml',
             __DIR__ . '/User.yml',
             __DIR__ . '/MenuItem.yml',
             __DIR__ . '/FooterSocialNetwork.yml',

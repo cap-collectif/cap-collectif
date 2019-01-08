@@ -192,12 +192,12 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function countVotesByProposal(Proposal $proposal, bool $includeUnpublished): int
+    public function countVotesByProposal(string $proposalId, bool $includeUnpublished): int
     {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposalId);
 
         if (!$includeUnpublished) {
             $qb->andWhere('pv.published = true');
@@ -232,6 +232,27 @@ class ProposalSelectionVoteRepository extends EntityRepository
         $qb->setMaxResults($litmit)->setFirstResult($offset);
 
         return new Paginator($qb);
+    }
+
+    public function countVotesByProposalIdsAndStep(
+        array $ids,
+        SelectionStep $step,
+        bool $includeUnpublished
+    ): array {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('proposal.id, COUNT(pv.id) as total')
+            ->andWhere('pv.selectionStep = :step')
+            ->andWhere('pv.proposal IN (:ids)')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->groupBy('pv.proposal')
+            ->setParameter('ids', $ids)
+            ->setParameter('step', $step);
+
+        if (!$includeUnpublished) {
+            $qb->andWhere('pv.published = true');
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     public function countVotesByProposalAndStep(

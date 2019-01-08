@@ -66,13 +66,13 @@ class ProposalVotesDataLoader extends BatchDataLoader
         // We must group proposals by step
         $steps = array_unique(
             array_map(function ($key) {
-                return $key['step'] ? $key['step'] : null;
+                return $key['step'] ?? null;
             }, $keys)
         );
 
         // We can now batch by step and includeUnpublished
         // Not working right now
-        $step = $keys[0]['step'];
+        $step = $steps[0];
         $includeUnpublished = $keys[0]['includeUnpublished'];
 
         $batchProposalIds = array_map(
@@ -80,24 +80,41 @@ class ProposalVotesDataLoader extends BatchDataLoader
                 return $key['proposal']->getId();
             },
             array_filter($keys, function ($value) use ($step) {
-                return $value['step'] === $step;
+                return ($value['step'] ?? null) === $step;
             })
         );
 
-        if ($step instanceof CollectStep) {
-            $repo = $this->proposalCollectVoteRepository;
+        // If no step
+        if (!$step) {
+            $repo = null;
+            $totalCountByProposal = array_map(function ($proposalId) use ($includeUnpublished) {
+                $totalCount = 0;
+                $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
+                    $proposalId,
+                    $includeUnpublished
+                );
+                $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal(
+                    $proposalId,
+                    $includeUnpublished
+                );
+
+                return ['id' => $proposalId, 'total' => $totalCount];
+            }, $batchProposalIds);
         } else {
-            $repo = $this->proposalSelectionVoteRepository;
+            if ($step instanceof CollectStep) {
+                $repo = $this->proposalCollectVoteRepository;
+            } else {
+                $repo = $this->proposalSelectionVoteRepository;
+            }
+            $totalCountByProposal = $repo->countVotesByProposalIdsAndStep(
+                $batchProposalIds,
+                $step,
+                $includeUnpublished
+            );
         }
 
-        $totalCountByStep = $repo->countVotesByProposalIdsAndStep(
-            $batchProposalIds,
-            $step,
-            $includeUnpublished
-        );
-
         $connections = array_map(
-            function ($key, $index) use ($totalCountByStep, $repo, $step, $includeUnpublished) {
+            function ($key, $index) use ($totalCountByProposal, $repo, $step, $includeUnpublished) {
                 $proposal = $key['proposal'];
 
                 $paginator = new Paginator(function (int $offset, int $limit) use (
@@ -107,7 +124,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                     $step,
                     $includeUnpublished
                 ) {
-                    if (0 === $offset && 0 === $limit) {
+                    if (!$repo || (0 === $offset && 0 === $limit)) {
                         return [];
                     }
 
@@ -129,7 +146,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                 });
 
                 $found = array_values(
-                    array_filter($totalCountByStep, function ($value) use ($proposal) {
+                    array_filter($totalCountByProposal, function ($value) use ($proposal) {
                         return $value['id'] === $proposal->getId();
                     })
                 );

@@ -21,11 +21,12 @@ class ProposalRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('p');
         $qb
-            ->addSelect('theme', 'district', 'category', 'likers')
+            ->addSelect('theme', 'district', 'category', 'likers', 'evaluation')
             ->leftJoin('p.theme', 'theme')
             ->leftJoin('p.district', 'district')
             ->leftJoin('p.category', 'category')
             ->leftJoin('p.likers', 'likers')
+            ->leftJoin('p.proposalEvaluation', 'evaluation')
             ->where('p.id IN (:ids)')
             ->setParameter('ids', $ids);
 
