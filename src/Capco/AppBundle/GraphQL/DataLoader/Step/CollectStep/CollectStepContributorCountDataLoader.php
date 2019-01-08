@@ -20,7 +20,8 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         StepContributorResolver $stepContributorResolver,
         string $cachePrefix,
-        int $cacheTtl
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->stepContributorResolver = $stepContributorResolver;
         parent::__construct(
@@ -29,7 +30,8 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 

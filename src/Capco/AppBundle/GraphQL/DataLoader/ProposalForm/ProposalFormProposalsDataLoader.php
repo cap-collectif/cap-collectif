@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\DataLoader\ProposalForm;
 
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Search\ProposalSearch;
@@ -29,7 +28,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         ProposalRepository $proposalRepo,
         ProposalSearch $proposalSearch,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->proposalRepo = $proposalRepo;
         $this->proposalSearch = $proposalSearch;
@@ -39,7 +39,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 
@@ -50,6 +51,19 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 
     public function all(array $keys)
     {
+        if ($this->debug) {
+            $this->logger->info(
+                __METHOD__ .
+                    'called for keys : ' .
+                    var_export(
+                        array_map(function ($key) {
+                            return $this->serializeKey($key);
+                        }, $keys),
+                        true
+                    )
+            );
+        }
+
         $connections = [];
 
         foreach ($keys as $key) {

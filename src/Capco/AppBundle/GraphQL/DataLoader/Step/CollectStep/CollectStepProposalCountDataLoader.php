@@ -19,7 +19,8 @@ class CollectStepProposalCountDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         ProposalRepository $proposalRepository,
         string $cachePrefix,
-        int $cacheTtl
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->proposalRepository = $proposalRepository;
         parent::__construct(
@@ -28,7 +29,8 @@ class CollectStepProposalCountDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 

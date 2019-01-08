@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader;
 
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Cache\RedisTagCache;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\DataLoader\DataLoader;
@@ -18,6 +17,7 @@ abstract class BatchDataLoader extends DataLoader
     protected $cachePrefix;
     protected $cacheDriver;
     protected $cacheTtl;
+    protected $debug;
 
     public function __construct(
         callable $batchFunction,
@@ -25,12 +25,14 @@ abstract class BatchDataLoader extends DataLoader
         LoggerInterface $logger,
         RedisTagCache $cache,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->cachePrefix = $cachePrefix;
         $this->cache = $cache;
         $this->logger = $logger;
         $this->cacheTtl = $cacheTtl;
+        $this->debug = $debug;
         $options = new Option([
             'cacheKeyFn' => function ($key) {
                 $serializedKey = $this->serializeKey($key);
@@ -69,7 +71,7 @@ abstract class BatchDataLoader extends DataLoader
      *
      * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
      *
-     * @return mixed
+     * @return Promise
      *
      * @see DataLoader
      *
@@ -80,8 +82,12 @@ abstract class BatchDataLoader extends DataLoader
         $cacheKey = $this->getCacheKeyFromKey($key);
         $cacheItem = $this->cache->getItem($cacheKey);
 
-        // if (!$cacheItem->isHit()) {
-            $this->logger->info('Cache MISS for: ' . var_export($this->serializeKey($key), true));
+        if (!$cacheItem->isHit()) {
+            if ($this->debug) {
+                $this->logger->info(
+                    'Cache MISS for: ' . var_export($this->serializeKey($key), true)
+                );
+            }
 
             $promise = parent::load($key);
             if ($promise instanceof Promise) {
@@ -95,22 +101,21 @@ abstract class BatchDataLoader extends DataLoader
                         ->tag($this->cachePrefix);
 
                     $this->cache->save($cacheItem);
-                    $this->logger->info('Saved key into cache');
+
+                    if ($this->debug) {
+                        $this->logger->info('Saved key into cache with value : ');
+                    }
                 });
             }
 
             return $promise;
-        // }
-        $this->logger->info('Cache HIT for: ' . var_export($this->serializeKey($key), true));
+        }
+
+        if ($this->debug) {
+            $this->logger->info('Cache HIT for: ' . var_export($this->serializeKey($key), true));
+        }
 
         return $this->getPromiseAdapter()->createFulfilled($cacheItem->get());
-    }
-
-    protected function getDecodedKeyFromKey(string $key): string
-    {
-        $replace = str_replace(['-[', ']-', $this->cachePrefix], '', $key);
-
-        return base64_decode($replace);
     }
 
     /**

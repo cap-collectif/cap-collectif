@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Doctrine\Common\Collections\Collection;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
@@ -17,7 +16,8 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
         RedisTagCache $cache,
         LoggerInterface $logger,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         parent::__construct(
             [$this, 'all'],
@@ -25,7 +25,8 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 

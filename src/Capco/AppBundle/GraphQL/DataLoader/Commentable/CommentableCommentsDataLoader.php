@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\EventComment;
@@ -37,7 +36,8 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         EventCommentRepository $eventCommentRepository,
         PostCommentRepository $postCommentRepository,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->proposalCommentRepository = $proposalCommentRepository;
         $this->eventCommentRepository = $eventCommentRepository;
@@ -48,7 +48,8 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 
@@ -60,17 +61,17 @@ class CommentableCommentsDataLoader extends BatchDataLoader
 
     public function all(array $keys)
     {
-        $connections = [];
+        $results = [];
 
         foreach ($keys as $key) {
             $this->logger->info(
                 __METHOD__ . ' called with ' . var_export($this->serializeKey($key), true)
             );
 
-            $connections[] = $this->resolve($key['commentable'], $key['args'], $key['viewer']);
+            $results[] = $this->resolve($key['commentable'], $key['args'], $key['viewer']);
         }
 
-        return $this->getPromiseAdapter()->createAll($connections);
+        return $this->getPromiseAdapter()->createAll($results);
     }
 
     public function resolve(CommentableInterface $commentable, Argument $args, $viewer): Connection
@@ -85,6 +86,9 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             $viewer,
             $args
         ) {
+            if (0 === $offset && 0 === $limit) {
+                return [];
+            }
             list($field, $direction) = [
                 $args->offsetGet('orderBy')['field'],
                 $args->offsetGet('orderBy')['direction'],

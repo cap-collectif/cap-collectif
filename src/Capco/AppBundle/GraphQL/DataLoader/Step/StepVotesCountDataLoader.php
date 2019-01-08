@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -25,7 +24,8 @@ class StepVotesCountDataLoader extends BatchDataLoader
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -35,7 +35,8 @@ class StepVotesCountDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 

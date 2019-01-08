@@ -20,7 +20,8 @@ class ProposalCurrentVotableStepDataloader extends BatchDataLoader
         LoggerInterface $logger,
         ProposalStepVotesResolver $resolver,
         string $cachePrefix,
-        int $cacheTtl
+        int $cacheTtl,
+        bool $debug
     ) {
         $this->resolver = $resolver;
         parent::__construct(
@@ -29,7 +30,8 @@ class ProposalCurrentVotableStepDataloader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 

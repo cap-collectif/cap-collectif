@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\UserBundle\Entity\User;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
@@ -17,7 +16,8 @@ class ProposalAuthorDataLoader extends BatchDataLoader
         RedisTagCache $cache,
         LoggerInterface $logger,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         parent::__construct(
             [$this, 'all'],
@@ -25,7 +25,8 @@ class ProposalAuthorDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 

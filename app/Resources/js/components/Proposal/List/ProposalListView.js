@@ -76,6 +76,7 @@ type Props = {
 };
 type State = {
   isRefetching: boolean,
+  hasRefetchError: boolean,
 };
 
 export class ProposalListView extends React.Component<Props, State> {
