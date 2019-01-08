@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Cache\RedisTagCache;
 use Doctrine\Common\Collections\Collection;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
@@ -13,10 +13,11 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
 {
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisCache $cache,
+        RedisTagCache $cache,
         LoggerInterface $logger,
         string $cachePrefix,
-        int $cacheTtl = RedisCache::ONE_MINUTE
+        int $cacheTtl,
+        bool $debug
     ) {
         parent::__construct(
             [$this, 'all'],
@@ -24,29 +25,22 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
             $logger,
             $cache,
             $cachePrefix,
-            $cacheTtl
+            $cacheTtl,
+            $debug
         );
     }
 
-    /**
-     * Not used at the moment.
-     */
-    // public function invalidate(Proposal $proposal): void
-    // {
-    //     foreach ($this->getCacheKeys() as $cacheKey) {
-    //         $decoded = $this->getDecodedKeyFromKey($cacheKey);
-    //         if (false !== strpos($decoded, $proposal->getId())) {
-    //             $this->cache->deleteItem($cacheKey);
-    //             $this->clear($cacheKey);
-    //             $this->logger->info('Invalidated cache for proposal ' . $proposal->getId());
-    //         }
-    //     }
-    // }
+    public function invalidate(Proposal $proposal): void
+    {
+        // TODO
+        $this->invalidateAll();
+    }
 
     public function all(array $keys)
     {
         $connections = [];
 
+        // TODO add some batching here
         foreach ($keys as $key) {
             $connections[] = $this->resolve($key);
         }

@@ -37,6 +37,16 @@ describe('<ProposalPageContent />', () => {
       usingCategories: false,
     },
     categories: [],
+    mapTokens: {
+      MAPBOX: {
+        initialPublicToken:
+          '***REMOVED***',
+        publicToken:
+          '***REMOVED***',
+        styleOwner: 'capcollectif',
+        styleId: '***REMOVED***',
+      },
+    },
     className: '',
     step: null,
     viewer: null,

@@ -227,15 +227,10 @@ class ProjectAdmin extends CapcoAdmin
                 ->get('security.authorization_checker')
                 ->isGranted('ROLE_SUPER_ADMIN')
         ) {
-            $formMapper
-                ->add('externalLink', null, [
-                    'label' => 'admin.fields.project.externalLink',
-                    'required' => false,
-                ])
-                ->add('participantsCount', null, [
-                    'label' => 'admin.fields.project.participantsCount',
-                ])
-                ->add('votesCount', null, ['label' => 'admin.fields.project.votesCount']);
+            $formMapper->add('externalLink', null, [
+                'label' => 'admin.fields.project.externalLink',
+                'required' => false,
+            ]);
         }
 
         $formMapper

@@ -83,3 +83,8 @@ Capco\AppBundle\Entity\SiteImage:
     isSocialNetworkThumbnail: true
     isEnabled: false
     position: 13
+  SiteImageSiteFavicon:
+    keyname: favicon
+    category: global
+    isEnabled: true
+    position: 1

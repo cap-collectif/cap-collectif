@@ -20,7 +20,16 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
 {
     use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
 
-    public static $sort = ['old', 'last', 'votes', 'least-votes', 'comments', 'random', 'expensive', 'cheap'];
+    public static $sort = [
+        'old',
+        'last',
+        'votes',
+        'least-votes',
+        'comments',
+        'random',
+        'expensive',
+        'cheap',
+    ];
 
     public static $sortLabels = [
         'comments' => 'step.sort.comments',
@@ -37,16 +46,6 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist"})
      */
     private $proposalForm;
-
-    /**
-     * @ORM\Column(name="proposals_count", type="integer", nullable=false)
-     */
-    private $proposalsCount = 0;
-
-    /**
-     * @ORM\Column(name="contributors_count", type="integer", nullable=false)
-     */
-    private $contributorsCount = 0;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist", "remove"})
@@ -69,30 +68,6 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
     {
         parent::__construct();
         $this->requirements = new ArrayCollection();
-    }
-
-    public function getProposalsCount(): int
-    {
-        return $this->proposalsCount ?? 0;
-    }
-
-    public function setProposalsCount(int $proposalsCount): self
-    {
-        $this->proposalsCount = $proposalsCount;
-
-        return $this;
-    }
-
-    public function getContributorsCount(): int
-    {
-        return $this->contributorsCount ?? 0;
-    }
-
-    public function setContributorsCount(int $contributorsCount): self
-    {
-        $this->contributorsCount = $contributorsCount;
-
-        return $this;
     }
 
     public function getDefaultStatus()

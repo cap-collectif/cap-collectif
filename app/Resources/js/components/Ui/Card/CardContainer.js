@@ -42,6 +42,7 @@ export const CardContainer = styled.div`
 
     &__infos {
       flex: 1 0 auto;
+      word-wrap: break-word;
     }
   }
 

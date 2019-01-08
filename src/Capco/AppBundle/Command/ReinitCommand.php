@@ -183,7 +183,6 @@ class ReinitCommand extends ContainerAwareCommand
             [
                 'capco:compute:users-counters' => ['--force' => true],
                 'capco:compute:counters' => ['--force' => true],
-                'capco:compute:projects-counters' => [],
                 'capco:compute:rankings' => [],
             ],
             $output

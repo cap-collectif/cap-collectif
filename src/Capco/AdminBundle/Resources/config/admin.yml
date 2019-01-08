@@ -230,6 +230,19 @@ services:
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
 
+  capco_admin.admin.map:
+    class: Capco\AdminBundle\Admin\MapTokenAdmin
+    arguments: [~, Capco\AppBundle\Entity\MapToken, SonataAdminBundle:CRUD]
+    tags:
+      - {
+          name: sonata.admin,
+          manager_type: orm,
+          group: admin.group.parameters,
+          label: admin-settings-map,
+        }
+    calls:
+      - [setTranslationDomain, [CapcoAppBundle]]
+
   capco_admin.admin.project_district:
     class: Capco\AdminBundle\Admin\ProjectDistrictAdmin
     arguments: [~, Capco\AppBundle\Entity\District\ProjectDistrict, SonataAdminBundle:CRUD]
@@ -258,7 +271,13 @@ services:
 
   capco_admin.admin.opinion_type:
     class: Capco\AdminBundle\Admin\OpinionTypeAdmin
-    arguments: [~, Capco\AppBundle\Entity\OpinionType, CapcoAdminBundle:OpinionType, '@security.token_storage']
+    arguments:
+      [
+        ~,
+        Capco\AppBundle\Entity\OpinionType,
+        CapcoAdminBundle:OpinionType,
+        '@security.token_storage',
+      ]
     tags:
       - {
           name: sonata.admin,
@@ -377,6 +396,12 @@ services:
         }
     calls:
       - [setTranslationDomain, [CapcoAppBundle]]
+
+  capco_admin.admin.site_favicon:
+    class: Capco\AdminBundle\Admin\SiteFaviconAdmin
+    arguments: [~, ~, CapcoAdminBundle:SiteFavicon]
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: website-icon }
 
   capco_admin.admin.category:
     class: Capco\AdminBundle\Admin\CategoryAdmin

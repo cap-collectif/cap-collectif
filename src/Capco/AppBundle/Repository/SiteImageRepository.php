@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\SiteImage;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -9,6 +10,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class SiteImageRepository extends EntityRepository
 {
+    public function getSiteFavicon(): ?SiteImage
+    {
+        $qb = $this->createQueryBuilder('si');
+
+        return $qb
+            ->andWhere($qb->expr()->eq('si.keyname', ':keyname'))
+            ->setParameter('keyname', 'favicon')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function getValuesIfEnabled()
     {
         return $this->getEntityManager()

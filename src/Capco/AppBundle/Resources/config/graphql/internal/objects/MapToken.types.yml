@@ -1,0 +1,40 @@
+MapToken:
+  type: object
+  inherits:
+    - Node
+    - InternalPrimaryKey
+  config:
+    interfaces: [Node]
+    description: 'A map token used for connecting external services with our maps'
+    fields:
+      id:
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: MapToken
+      publicToken:
+        type: 'String!'
+        description: 'The public token'
+      secretToken:
+        type: 'String'
+        description: 'The secret token'
+      provider:
+        type: 'MapTokenProvider'
+        description: 'The corresponding provider in which belongs the token'
+      styleId:
+        type: 'ID'
+        description: 'The style id associated to this map token (available only if a style is applied)'
+      styleOwner:
+        type: 'String'
+        description: 'The style owner associated to this map token (available only if a style is applied)'
+      styles:
+        type: '[MapTokenStyle]'
+        description: 'The available styles associated to this map token'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MapToken\\MapTokenStylesResolver", [args, value])'
+        args:
+          visibility:
+            type: 'MapTokenStyleVisibility'
+            description: 'Filter the styles by its visibility'
+      createdAt:
+        type: 'DateTime!'
+      updatedAt:
+        type: 'DateTime'

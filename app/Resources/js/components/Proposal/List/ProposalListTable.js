@@ -275,9 +275,11 @@ export class ProposalListTable extends React.Component<Props, State> {
                 defaultAvatar={null}
               />
               {value.url ? (
-                <a href={value.url}>{value.displayName}</a>
+                <a href={value.url}>
+                  <span className="ellipsis">{value.displayName}</span>
+                </a>
               ) : (
-                <span>{value.displayName}</span>
+                <span className="ellipsis">{value.displayName}</span>
               )}
             </div>
           </td>
