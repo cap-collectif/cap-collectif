@@ -12,9 +12,28 @@ type Props = {
   siteName: ?string,
 };
 
-class Navbar extends React.Component<Props> {
+type State = {
+  expanded: boolean,
+};
+
+class Navbar extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      expanded: false,
+    };
+  }
+
+  getAriaExpanded = expanded => {
+    this.setState({
+      expanded: !expanded,
+    });
+  };
+
   render() {
     const { logo, intl, items, siteName } = this.props;
+    const { expanded } = this.state;
 
     const navbarLgSize = (
       <Nav id="navbar-content" className="visible-lg-block">
@@ -117,7 +136,10 @@ class Navbar extends React.Component<Props> {
               </a>
             </Navigation.Brand>
           )}
-          <Navigation.Toggle />
+          <Navigation.Toggle
+            aria-expanded={expanded}
+            onClick={() => this.getAriaExpanded(expanded)}
+          />
         </Navigation.Header>
         <nav role="navigation">
           <Navigation.Collapse>
