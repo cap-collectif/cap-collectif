@@ -200,14 +200,12 @@ class ProfileController extends Controller
         $sources = $this->get('capco.source.repository')->getByUser($user);
         $comments = $this->get('capco.comment.repository')->getByUser($user);
         $votes = $this->get('capco.abstract_vote.repository')->getPublicVotesByUser($user);
-        $eventsCount = $this->getEventsCount($user);
 
         return array_merge(
             [
                 'user' => $user,
                 'projectsProps' => $projectsProps,
                 'projectsCount' => $projectsCount,
-                'eventsCount' => $eventsCount,
                 'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
                 'versions' => $versions,
                 'arguments' => $arguments,
@@ -234,13 +232,11 @@ class ProfileController extends Controller
             'groups' => ['Projects', 'Steps', 'ThemeDetails'],
         ]);
         $projectsCount = \count($projectsRaw);
-        $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'projectsProps' => $projectsProps,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -259,13 +255,11 @@ class ProfileController extends Controller
         );
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
-        $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -287,13 +281,11 @@ class ProfileController extends Controller
     public function showProposalsAction(User $user)
     {
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
-        $eventsCount = $this->getEventsCount($user);
 
         return array_merge(
             [
                 'user' => $user,
                 'projectsCount' => $projectsCount,
-                'eventsCount' => $eventsCount,
             ],
             $this->getProposalsProps($user)
         );
@@ -313,15 +305,8 @@ class ProfileController extends Controller
             'author' => $user,
             'private' => false,
         ]);
-        $projectsCount = $this->getProjectsCount($user, $this->getUser());
-        $eventsCount = $this->getEventsCount($user);
 
-        return [
-            'user' => $user,
-            'replies' => $replies,
-            'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
-        ];
+        return ['user' => $user, 'replies' => $replies];
     }
 
     /**
@@ -333,14 +318,12 @@ class ProfileController extends Controller
         $arguments = $this->get('capco.argument.repository')->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
-        $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'arguments' => $arguments,
             'argumentsLabels' => Argument::$argumentTypesLabels,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -353,13 +336,11 @@ class ProfileController extends Controller
         $sources = $this->get('capco.source.repository')->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
-        $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'sources' => $sources,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -372,13 +353,11 @@ class ProfileController extends Controller
         $comments = $this->get('capco.comment.repository')->getByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
-        $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'comments' => $comments,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -391,29 +370,11 @@ class ProfileController extends Controller
         $votes = $this->get('capco.abstract_vote.repository')->getPublicVotesByUser($user);
 
         $projectsCount = $this->getProjectsCount($user, $this->getUser());
-        $eventsCount = $this->getEventsCount($user);
 
         return [
             'user' => $user,
             'votes' => $votes,
             'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
-        ];
-    }
-
-    /**
-     * @Route("/{slug}/events", name="capco_user_profile_show_events", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserEvents.html.twig")
-     */
-    public function showEventsAction(User $user)
-    {
-        $projectsCount = $this->getProjectsCount($user, $this->getUser());
-        $eventsCount = $this->getEventsCount($user);
-
-        return [
-            'user' => $user,
-            'projectsCount' => $projectsCount,
-            'eventsCount' => $eventsCount,
         ];
     }
 
@@ -471,10 +432,5 @@ class ProfileController extends Controller
         $projectsRaw = $this->get(ProjectRepository::class)->getByUser($user, $loggedUser);
 
         return \count($projectsRaw);
-    }
-
-    private function getEventsCount(User $user): int
-    {
-        return $this->get('capco.event.repository')->countAllByUser($user);
     }
 }
