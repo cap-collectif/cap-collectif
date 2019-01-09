@@ -1,53 +1,59 @@
+{% set stepId = currentStep.id %}
+{% if currentStep.type == 'collect' %}
+    {% set stepId = stepId|toGlobalId('CollectStep') %}
+{% elseif currentStep.type == 'selection' %}
+    {% set stepId = stepId|toGlobalId('SelectionStep') %}
+{% endif %}
+
 {% set state = {
-  'default': {
-    'themes': themes_list(),
-    'images': {
-        'avatar': media_public_url(null|capco_default_avatar, 'default_avatar'),
+    'default': {
+        'themes': themes_list(),
+        'images': {
+            'avatar': media_public_url(null|capco_default_avatar, 'default_avatar'),
+        },
+        'features': features_list(),
+        'userTypes': user_type_list()|default([]),
+        'parameters': site_parameters_list(),
     },
-    'features': features_list(),
-    'userTypes': user_type_list()|default([]),
-    'parameters': site_parameters_list(),
-  },
-  'user': {
-    'mapTokens': capco_map_tokens(),
-    'registration_form': registration_form_serialize(),
-    'user': app.user
-      ? {
-        'id': app.user.id|toGlobalId('User'),
-        'username': app.user.username,
-        'isEmailConfirmed': app.user.isEmailConfirmed,
-        'isPhoneConfirmed': app.user.isPhoneConfirmed,
-        'phone': app.user.phone,
-        'isAdmin': app.user.isAdmin,
-        'isEvaluer': app.user.isEvaluer,
-        'email': app.user.email,
-        'newEmailToConfirm': app.user.newEmailToConfirm,
-        'media': app.user.media
+    'user': {
+        'mapTokens': capco_map_tokens(),
+        'registration_form': registration_form_serialize(),
+        'user': app.user
         ? {
-            'url': media_public_url(app.user.media, 'default_avatar')
-          }
+            'id': app.user.id|toGlobalId('User'),
+            'username': app.user.username,
+            'isEmailConfirmed': app.user.isEmailConfirmed,
+            'isPhoneConfirmed': app.user.isPhoneConfirmed,
+            'phone': app.user.phone,
+            'isAdmin': app.user.isAdmin,
+            'isEvaluer': app.user.isEvaluer,
+            'email': app.user.email,
+            'newEmailToConfirm': app.user.newEmailToConfirm,
+            'media': app.user.media
+            ? {
+                'url': media_public_url(app.user.media, 'default_avatar')
+            }
+            : null,
+            'displayName': app.user.username,
+            'uniqueId': app.user.slug,
+            'roles': app.user.roles,
+        }
         : null,
-        'displayName': app.user.username,
-        'uniqueId': app.user.slug,
-        'roles': app.user.roles,
-      }
-    : null,
-  },
-  'project': {
-    'showConsultationPlanById': {},
-    'selectedActiveItems': [],
+    },
+    'project': {
+        'showConsultationPlanById': {},
+        'selectedActiveItems': [],
 
-    'currentProjectStepById': currentStep.id|default(null),
-    'currentProjectById': project.id|default(null),
-    'projectsById': list_projectsById(),
+        'currentProjectStepById': stepId,
+        'currentProjectById': project.id|default(null),
+        'projectsById': list_projectsById(),
 
-    'limit': projectReducerData.limit|default(null),
-    'orderBy': projectReducerData.orderBy|default(null),
-    'term': projectReducerData.term|default(null),
-    'type': projectReducerData.type|default(null),
-    'theme': projectReducerData.theme|default(null)
-  },
-}
-%}
+        'limit': projectReducerData.limit|default(null),
+        'orderBy': projectReducerData.orderBy|default(null),
+        'term': projectReducerData.term|default(null),
+        'type': projectReducerData.type|default(null),
+        'theme': projectReducerData.theme|default(null)
+    },
+} %}
 {% set state = state|merge(data is defined ? data : {}) %}
 {{ redux_store('appStore', state) }}
