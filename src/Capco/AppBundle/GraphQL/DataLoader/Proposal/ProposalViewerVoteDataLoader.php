@@ -27,7 +27,8 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
         AbstractStepRepository $abstractStepRepository,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug
+        bool $debug,
+        bool $enableCache
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -40,7 +41,8 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug
+            $debug,
+            $enableCache
         );
     }
 

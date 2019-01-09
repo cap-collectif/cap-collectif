@@ -21,7 +21,8 @@ class ProposalCurrentVotableStepDataloader extends BatchDataLoader
         ProposalStepVotesResolver $resolver,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug
+        bool $debug,
+        bool $enableCache
     ) {
         $this->resolver = $resolver;
         parent::__construct(
@@ -31,7 +32,8 @@ class ProposalCurrentVotableStepDataloader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug
+            $debug,
+            $enableCache
         );
     }
 

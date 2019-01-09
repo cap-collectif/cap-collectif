@@ -41,10 +41,6 @@ class ProjectVotesResolver implements ResolverInterface
             return [];
         });
 
-        foreach ($project->getSteps() as $pas) {
-            $totalCount += $this->countStepVotes($pas->getStep());
-        }
-
         return $paginator->auto($args, $totalCount);
     }
 
