@@ -42,14 +42,6 @@ class StepPageHeader extends React.Component<Props> {
               <i className="cap cap-hourglass-1" /> <RemainingTime endAt={step.endAt} />
             </div>
           )}
-          {step.type !== 'questionnaire' && (
-            <div className="d-ib">
-              <i className="cap cap-business-chart-2-1" />{' '}
-              {/* <a href={step._links.stats}>
-                <FormattedMessage id="project.show.meta.info.stats" />
-          </a> */}
-            </div>
-          )}
         </div>
         {step.type === 'selection' && step.voteThreshold && step.voteThreshold > 0 && (
           <h4 style={{ marginBottom: '20px' }}>
