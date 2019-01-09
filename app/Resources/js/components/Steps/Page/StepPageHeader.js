@@ -62,8 +62,7 @@ class StepPageHeader extends React.Component<Props> {
             />
           </h4>
         )}
-        }
-        <StepInfos step={step} />
+        {/* <StepInfos step={step} /> */}
       </div>
     );
   }
@@ -77,6 +76,7 @@ export default createFragmentContainer(
         voteThreshold
         votable
       }
+      body
       status
       title
       timeless
