@@ -45,9 +45,9 @@ class StepPageHeader extends React.Component<Props> {
           {step.type !== 'questionnaire' && (
             <div className="d-ib">
               <i className="cap cap-business-chart-2-1" />{' '}
-              {/*<a href={step._links.stats}>
+              {/* <a href={step._links.stats}>
                 <FormattedMessage id="project.show.meta.info.stats" />
-          </a>*/}
+          </a> */}
             </div>
           )}
         </div>
@@ -62,7 +62,7 @@ class StepPageHeader extends React.Component<Props> {
             />
           </h4>
         )}
-        {/* <StepInfos step={step} /> */}
+        <StepInfos step={step} />
       </div>
     );
   }
@@ -76,6 +76,7 @@ export default createFragmentContainer(
         voteThreshold
         votable
       }
+      id
       body
       status
       title

@@ -18,8 +18,7 @@ type Props = {
 class StepInfos extends React.Component<Props> {
   render() {
     const { step } = this.props;
-
-    return (
+    return step.id ? (
       <CardContainer>
         <QueryRenderer
           environment={environment}
@@ -58,7 +57,7 @@ class StepInfos extends React.Component<Props> {
           }}
         />
       </CardContainer>
-    );
+    ) : null;
   }
 }
 

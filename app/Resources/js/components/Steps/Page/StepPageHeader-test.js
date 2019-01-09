@@ -8,6 +8,7 @@ import { $refType } from '../../../mocks';
 describe('<StepPageHeader />', () => {
   const defaultStep = {
     $refType,
+    id: '1',
     title: 'I am a title',
     body: 'I am a body',
     startAt: '',
