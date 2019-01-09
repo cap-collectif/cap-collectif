@@ -90,16 +90,6 @@ Capco\AppBundle\Entity\MenuItem:
     menu: 1
     associatedFeatures: [calendar]
 
-  MenuItem13:
-    title: Confidentialité
-    link: confidentialite
-    isEnabled: 1
-    isDeletable: 0
-    isFullyModifiable: 0
-    position: 8
-    parent: null
-    menu: 2
-
   MenuItem14:
     title: Liste des inscrits
     link: members
