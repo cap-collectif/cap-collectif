@@ -184,7 +184,10 @@ class ProposalMutation implements ContainerAwareInterface
         $selection->setStatus($status);
         $em->flush();
 
-        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
+        $proposal = $this->globalIdResolver->resolve(
+            \is_array($proposalId) ? $proposalId['id'] : $proposalId,
+            $user
+        );
 
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
@@ -211,7 +214,10 @@ class ProposalMutation implements ContainerAwareInterface
         $em->remove($selection);
         $em->flush();
 
-        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
+        $proposal = $this->globalIdResolver->resolve(
+            \is_array($proposalId) ? $proposalId['id'] : $proposalId,
+            $user
+        );
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
@@ -244,8 +250,8 @@ class ProposalMutation implements ContainerAwareInterface
             $selectionStatus = $this->container->get('capco.status.repository')->find($statusId);
         }
 
-        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
-        $step = $this->globalIdResolver->resolve($stepId, $user);
+        $proposal = $this->globalIdResolver->resolve($proposalId['id'], $user);
+        $step = $this->globalIdResolver->resolve($stepId['id'], $user);
         $selection = new Selection();
         $selection->setSelectionStep($step);
         $selection->setStatus($selectionStatus);

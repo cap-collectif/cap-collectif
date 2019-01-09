@@ -60,7 +60,7 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
   }
   """
   Then the queue associated to "proposal_update" producer has messages below:
-  | 0 | {"proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy"} |
+  | 0 | {"proposalId": "proposal2"} |
 
 @database
 Scenario: GraphQL client wants to edit his proposal
