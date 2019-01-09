@@ -87,6 +87,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
     {
         return [
             'proposalId' => $key['proposal']->getId(),
+            // ?TODO? toGlobalId
             'stepId' => isset($key['step']) ? $key['step']->getId() : null,
             'args' => $key['args']->getRawArguments(),
             'includeUnpublished' => $key['includeUnpublished'],

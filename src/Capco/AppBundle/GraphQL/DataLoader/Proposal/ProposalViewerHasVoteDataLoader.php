@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
@@ -12,12 +15,15 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 {
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
     private $abstractStepRepository;
+    private $globalIdResolver;
+    private $tokenStorage;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -26,6 +32,8 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         AbstractStepRepository $abstractStepRepository,
+        GlobalIdResolver $globalIdResolver,
+        TokenStorageInterface $tokenStorage,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -34,6 +42,8 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->abstractStepRepository = $abstractStepRepository;
+        $this->globalIdResolver = $globalIdResolver;
+        $this->tokenStorage = $tokenStorage;
 
         parent::__construct(
             [$this, 'all'],
@@ -66,7 +76,6 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
                     )
             );
         }
-
         $stepId = $keys[0]['stepId'];
         $user = $keys[0]['user'];
         $step = $this->abstractStepRepository->find($stepId);
