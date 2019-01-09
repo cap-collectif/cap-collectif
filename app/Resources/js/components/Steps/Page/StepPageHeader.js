@@ -62,6 +62,7 @@ class StepPageHeader extends React.Component<Props> {
             />
           </h4>
         )}
+        {/* $FlowFixMe $refType */}
         <StepInfos step={step} />
       </div>
     );
@@ -72,12 +73,11 @@ export default createFragmentContainer(
   StepPageHeader,
   graphql`
     fragment StepPageHeader_step on Step {
+      ...StepInfos_step
       ... on SelectionStep {
         voteThreshold
         votable
       }
-      id
-      body
       status
       title
       timeless

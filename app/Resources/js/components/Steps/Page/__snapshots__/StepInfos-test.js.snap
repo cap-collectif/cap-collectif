@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<StepInfos /> should render correcty 1`] = `""`;
+exports[`<StepInfos /> should render correcty 1`] = `
+<ContainerConstructor
+  componentRef={null}
+  step={
+    Object {
+      "$refType": null,
+      "body": "Coucou",
+    }
+  }
+/>
+`;

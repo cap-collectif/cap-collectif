@@ -3,14 +3,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import StepPageHeader from './StepPageHeader';
-import { $refType } from '../../../mocks';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<StepPageHeader />', () => {
   const defaultStep = {
     $refType,
-    id: '1',
+    $fragmentRefs,
     title: 'I am a title',
-    body: 'I am a body',
     startAt: '',
     endAt: '',
     status: 'OPENED',

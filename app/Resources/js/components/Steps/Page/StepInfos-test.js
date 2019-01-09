@@ -3,9 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import StepInfos from './StepInfos';
+import { $refType } from '../../../mocks';
 
 describe('<StepInfos />', () => {
   const step = {
+    $refType,
     body: 'Coucou',
   };
 

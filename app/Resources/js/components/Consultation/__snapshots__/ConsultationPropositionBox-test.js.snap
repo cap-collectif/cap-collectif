@@ -58,18 +58,6 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
         />
       </div>
     </div>
-    <StepInfos
-      step={
-        Object {
-          "endAt": "2014-09-27T00:00:00+0200",
-          "id": "stepId",
-          "startAt": "2014-08-14T00:00:00+0200",
-          "status": "OPENED",
-          "timeless": false,
-          "title": "stepTitle",
-        }
-      }
-    />
     <ReactRelayQueryRenderer
       environment={
         RelayModernEnvironment {
@@ -174,18 +162,6 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
         />
       </div>
     </div>
-    <StepInfos
-      step={
-        Object {
-          "endAt": "2014-09-27T00:00:00+0200",
-          "id": "stepId",
-          "startAt": "2014-08-14T00:00:00+0200",
-          "status": "OPENED",
-          "timeless": false,
-          "title": "stepTitle",
-        }
-      }
-    />
     <ReactRelayQueryRenderer
       environment={
         RelayModernEnvironment {

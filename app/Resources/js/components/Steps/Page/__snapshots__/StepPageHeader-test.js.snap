@@ -5,10 +5,9 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
   componentRef={null}
   step={
     Object {
+      "$fragmentRefs": null,
       "$refType": null,
-      "body": "I am a body",
       "endAt": "",
-      "id": "1",
       "startAt": "",
       "status": "OPENED",
       "timeless": false,
@@ -24,10 +23,9 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
   componentRef={null}
   step={
     Object {
+      "$fragmentRefs": null,
       "$refType": null,
-      "body": "I am a body",
       "endAt": "",
-      "id": "1",
       "startAt": "",
       "status": "OPENED",
       "timeless": false,
@@ -43,10 +41,9 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
   componentRef={null}
   step={
     Object {
+      "$fragmentRefs": null,
       "$refType": null,
-      "body": "I am a body",
       "endAt": "",
-      "id": "1",
       "startAt": "",
       "status": "OPENED",
       "timeless": false,
