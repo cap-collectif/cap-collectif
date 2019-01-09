@@ -16,11 +16,6 @@ describe('<StepPageHeader />', () => {
     timeless: false,
     type: 'consultation',
   };
-  /*
-    _links: {
-      stats: 'https://www.test.com',
-    },
-    */
 
   it('should render correctly a consultationStep', () => {
     const wrapper = shallow(<StepPageHeader step={defaultStep} />);
