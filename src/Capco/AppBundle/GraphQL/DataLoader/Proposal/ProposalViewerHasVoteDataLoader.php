@@ -3,10 +3,12 @@
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
@@ -51,43 +53,15 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 
     public function all(array $keys)
     {
-        if ($this->debug) {
-            $this->logger->info(
-                __METHOD__ .
-                    'called for keys : ' .
-                    var_export(
-                        array_map(function ($key) {
-                            return $this->serializeKey($key);
-                        }, $keys),
-                        true
-                    )
-            );
+        $connections = [];
+
+        // TODO setup batching here
+
+        foreach ($keys as $key) {
+            $connections[] = $this->resolve($key['proposal'], $key['stepId'], $key['user']);
         }
 
-        $stepId = $keys[0]['stepId'];
-        $user = $keys[0]['user'];
-        $step = $this->abstractStepRepository->find($stepId);
-
-        $batchProposalIds = array_map(function ($key) {
-            return $key['proposal']->getId();
-        }, $keys);
-
-        $repo = null;
-        if ($step instanceof CollectStep) {
-            $repo = $this->proposalCollectVoteRepository;
-        } else {
-            $repo = $this->proposalSelectionVoteRepository;
-        }
-        $votes = $repo->getByProposalIdsAndStepAndUser($batchProposalIds, $step, $user);
-        $results = array_map(function ($key) use ($votes) {
-            $found = array_filter($votes, function ($vote) use ($key) {
-                return $vote->getProposal()->getId() === $key['proposal']->getId();
-            });
-
-            return isset($found[0]) ? true : false;
-        }, $keys);
-
-        return $this->getPromiseAdapter()->createAll($results);
+        return $this->getPromiseAdapter()->createAll($connections);
     }
 
     protected function getCacheTag($key): array
@@ -102,5 +76,29 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
             'stepId' => $key['stepId'],
             'user' => $key['user']->getId(),
         ];
+    }
+
+    private function resolve(Proposal $proposal, string $stepId, User $user): bool
+    {
+        $step = $this->abstractStepRepository->find($stepId);
+
+        if ($step instanceof CollectStep) {
+            return null !==
+                $this->proposalCollectVoteRepository->getByProposalAndStepAndUser(
+                    $proposal,
+                    $step,
+                    $user
+                );
+        }
+        if ($step instanceof SelectionStep) {
+            return null !==
+                $this->proposalSelectionVoteRepository->getByProposalAndStepAndUser(
+                    $proposal,
+                    $step,
+                    $user
+                );
+        }
+
+        return false;
     }
 }

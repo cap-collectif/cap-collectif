@@ -15,11 +15,15 @@ use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Search\ProposalSearch;
 
 class ProposalVotesDataLoader extends BatchDataLoader
 {
+    private const BATCH = true;
+    private const COUNT_MODE = 'ELASTICSEARCH';
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
+    private $proposalSearch;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -27,12 +31,15 @@ class ProposalVotesDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalSearch $proposalSearch,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug
+        bool $debug,
+        bool $enableCache
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $this->proposalSearch = $proposalSearch;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -40,7 +47,8 @@ class ProposalVotesDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug
+            $debug,
+            $enableCache
         );
     }
 
@@ -65,9 +73,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
             );
         }
 
-        $batch = true;
-
-        if ($batch) {
+        if (self::BATCH) {
             $connections = $this->resolveBatch($keys);
         } else {
             $connections = $this->resolveWithoutBatch($keys);
@@ -111,33 +117,63 @@ class ProposalVotesDataLoader extends BatchDataLoader
             })
         );
 
+        $esResults = [];
+        if (!$includeUnpublished && self::COUNT_MODE === 'ELASTICSEARCH') {
+            $esResults = $this->proposalSearch->searchProposalsVotesCount($batchProposalIds);
+        }
+
         // If no step
         if (!$step) {
             $repo = null;
-            $totalCountByProposal = array_map(function ($proposalId) use ($includeUnpublished) {
-                $totalCount = 0;
-                $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
-                    $proposalId,
-                    $includeUnpublished
-                );
-                $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal(
-                    $proposalId,
-                    $includeUnpublished
-                );
+            // Elasticsearch is way faster to retrieve counters
+            if (!$includeUnpublished && self::COUNT_MODE === 'ELASTICSEARCH') {
+                $totalCountByProposal = array_map(function ($data) {
+                    return ['id' => $data['id'], 'total' => $data['votesCount']];
+                }, $esResults);
+            }
+            // Fallback to MySQL
+            else {
+                $totalCountByProposal = array_map(function ($proposalId) use ($includeUnpublished) {
+                    $totalCount = 0;
+                    $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
+                        $proposalId,
+                        $includeUnpublished
+                    );
+                    $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal(
+                        $proposalId,
+                        $includeUnpublished
+                    );
 
-                return ['id' => $proposalId, 'total' => $totalCount];
-            }, $batchProposalIds);
+                    return ['id' => $proposalId, 'total' => $totalCount];
+                }, $batchProposalIds);
+            }
         } else {
             if ($step instanceof CollectStep) {
                 $repo = $this->proposalCollectVoteRepository;
             } else {
                 $repo = $this->proposalSelectionVoteRepository;
             }
-            $totalCountByProposal = $repo->countVotesByProposalIdsAndStep(
-                $batchProposalIds,
-                $step,
-                $includeUnpublished
-            );
+
+            // Elasticsearch is way faster to retrieve counters
+            if (!$includeUnpublished && self::COUNT_MODE === 'ELASTICSEARCH') {
+                $totalCountByProposal = array_map(function ($data) use ($step) {
+                    $totalCount = array_filter($data['votesCountByStep'], function ($value) use (
+                        $step
+                    ) {
+                        return $value['step']['id'] === $step->getId();
+                    })[0]['count'];
+
+                    return ['id' => $data['id'], 'total' => $totalCount];
+                }, $esResults);
+            }
+            // Fallback to MySQL
+            else {
+                $totalCountByProposal = $repo->countVotesByProposalIdsAndStep(
+                    $batchProposalIds,
+                    $step,
+                    $includeUnpublished
+                );
+            }
         }
 
         $connections = array_map(

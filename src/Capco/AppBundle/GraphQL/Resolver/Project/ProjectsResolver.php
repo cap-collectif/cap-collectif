@@ -33,27 +33,29 @@ class ProjectsResolver implements ResolverInterface
                 $user,
                 &$totalCount
             ) {
+
                 $term = $args->offsetExists('term') ? $args->offsetGet('term') : null;
+
+                $limit = $args->offsetExists('count') ?$args->offsetGet('count') : 50;
+
                 $order = $args->offsetExists('orderBy') ? $args->offsetGet('orderBy') : null;
 
                 $results = $this->projectSearch->searchProjects(
-                    0,
-                    1000,
+                    $offset,
+                    $limit,
                     $order,
                     $term,
                     $this->getFilters($args)
                 );
-                $allResults = [];
-
+                $result = [];
                 /** @var Project $project */
                 foreach ($results['projects'] as $project) {
-                    if ($project instanceof Project && $project->canDisplay($user)) {
-                        $allResults[] = $project;
+                    if($project instanceof Project && $project->canDisplay($user)) {
+                        $result[] = $project;
                     }
                 }
-                $totalCount = \count($allResults);
-
-                return \array_slice($allResults, $offset, $limit);
+                $totalCount = count($result);
+                return $result;
             });
             $connection = $paginator->auto($args, $totalCount);
             $connection->totalCount = $totalCount;
