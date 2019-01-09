@@ -994,7 +994,7 @@ class Project implements IndexableInterface
      */
     protected function viewerCanSee($viewer = null): bool
     {
-        if (ProjectVisibilityMode::VISIBILITY_PUBLIC === $this->getVisibility()) {
+        if ($this->isPublic()) {
             return true;
         }
 

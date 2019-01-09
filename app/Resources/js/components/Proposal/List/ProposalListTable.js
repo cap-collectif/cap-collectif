@@ -269,17 +269,17 @@ export class ProposalListTable extends React.Component<Props, State> {
       if (keyName === 'author' && value) {
         return (
           <td key={key}>
-            <div className="d-flex align-items-center text-ellipsis">
+            <div className="d-flex align-items-center">
               <UserAvatar
                 user={{ username: value.displayName, media: value.media, _links: {} }}
                 defaultAvatar={null}
               />
               {value.url ? (
                 <a href={value.url}>
-                  <span>{value.displayName}</span>
+                  <span className="ellipsis">{value.displayName}</span>
                 </a>
               ) : (
-                <span>{value.displayName}</span>
+                <span className="ellipsis">{value.displayName}</span>
               )}
             </div>
           </td>
