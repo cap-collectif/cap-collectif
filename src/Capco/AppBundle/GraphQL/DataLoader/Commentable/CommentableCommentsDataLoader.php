@@ -37,8 +37,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         PostCommentRepository $postCommentRepository,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug,
-        bool $enableCache
+        bool $debug
     ) {
         $this->proposalCommentRepository = $proposalCommentRepository;
         $this->eventCommentRepository = $eventCommentRepository;
@@ -50,8 +49,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug,
-            $enableCache
+            $debug
         );
     }
 

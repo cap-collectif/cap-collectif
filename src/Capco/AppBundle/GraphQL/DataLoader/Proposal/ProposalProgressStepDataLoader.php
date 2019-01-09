@@ -17,8 +17,7 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug,
-        bool $enableCache
+        bool $debug
     ) {
         parent::__construct(
             [$this, 'all'],
@@ -27,8 +26,7 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug,
-            $enableCache
+            $debug
         );
     }
 

@@ -135,19 +135,6 @@ class ProposalSearch extends Search
         return $order;
     }
 
-    public function searchProposalsVotesCount(array $ids): array
-    {
-        $idsQuery = new Query\Ids();
-        $idsQuery->setIds($ids);
-        $query = new Query($idsQuery);
-        $query->setSource(['id', 'votesCountByStep', 'votesCount'])->setSize(\count($ids));
-        $resultSet = $this->index->getType($this->type)->search($query);
-
-        return array_map(function (Result $result) {
-            return $result->getData();
-        }, $resultSet->getResults());
-    }
-
     private function getSort(string $order, string $stepId): array
     {
         switch ($order) {

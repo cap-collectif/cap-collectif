@@ -16,8 +16,7 @@ class ProposalLikersDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug,
-        bool $enableCache
+        bool $debug
     ) {
         parent::__construct(
             [$this, 'all'],
@@ -26,8 +25,7 @@ class ProposalLikersDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug,
-            $enableCache
+            $debug
         );
     }
 

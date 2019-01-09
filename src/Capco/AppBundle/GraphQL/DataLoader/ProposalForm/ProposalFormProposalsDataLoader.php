@@ -29,8 +29,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         ProposalSearch $proposalSearch,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug,
-        bool $enableCache
+        bool $debug
     ) {
         $this->proposalRepo = $proposalRepo;
         $this->proposalSearch = $proposalSearch;
@@ -41,8 +40,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug,
-            $enableCache
+            $debug
         );
     }
 
@@ -246,7 +244,6 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         $connection = $paginator->auto($args, $totalCount);
         $connection->totalCount = $totalCount;
 
-        // TODO this is too slow
         $countFusions = $this->proposalRepo->countFusionsByProposalForm($form);
         $connection->{'fusionCount'} = $countFusions;
 

@@ -52,24 +52,20 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
             );
 
             $stepCounter = [];
-            $totalCount = 0;
             foreach ($collectVotesCount as $stepId => $value) {
                 $stepCounter[] = [
                     'step' => ['id' => $stepId],
                     'count' => $value,
                 ];
-                $totalCount += $value;
             }
             foreach ($selectionVotesCount as $stepId => $value) {
                 $stepCounter[] = [
                     'step' => ['id' => $stepId],
                     'count' => $value,
                 ];
-                $totalCount += $value;
             }
 
             $data['votesCountByStep'] = $stepCounter;
-            $data['votesCount'] = $totalCount;
 
             $args = new Argument([
                 'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
