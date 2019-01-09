@@ -352,7 +352,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         key="3"
       >
         <div
-          className="d-flex align-items-center"
+          className="d-flex align-items-center text-ellipsis"
         >
           <Connect(UserAvatar)
             defaultAvatar={null}
@@ -367,9 +367,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
           <a
             href="google.com"
           >
-            <span
-              className="ellipsis"
-            >
+            <span>
               admin
             </span>
           </a>
@@ -420,7 +418,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         key="3"
       >
         <div
-          className="d-flex align-items-center"
+          className="d-flex align-items-center text-ellipsis"
         >
           <Connect(UserAvatar)
             defaultAvatar={null}
@@ -435,9 +433,7 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
           <a
             href="google.com"
           >
-            <span
-              className="ellipsis"
-            >
+            <span>
               admin2
             </span>
           </a>
