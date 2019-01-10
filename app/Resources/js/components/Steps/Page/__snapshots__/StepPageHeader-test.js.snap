@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
+<ContainerConstructor
+  componentRef={null}
+  step={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "endAt": "",
+      "startAt": "",
+      "status": "OPENED",
+      "timeless": false,
+      "title": "I am a title",
+      "type": "consultation",
+    }
+  }
+/>
+`;
+
+exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
+<ContainerConstructor
+  componentRef={null}
+  step={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "endAt": "",
+      "startAt": "",
+      "status": "OPENED",
+      "timeless": false,
+      "title": "I am a title",
+      "type": "questionnaire",
+    }
+  }
+/>
+`;
+
+exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
+<ContainerConstructor
+  componentRef={null}
+  step={
+    Object {
+      "$fragmentRefs": null,
+      "$refType": null,
+      "endAt": "",
+      "startAt": "",
+      "status": "OPENED",
+      "timeless": false,
+      "title": "I am a title",
+      "type": "selection",
+      "votable": true,
+      "voteThreshold": 1,
+    }
+  }
+/>
+`;

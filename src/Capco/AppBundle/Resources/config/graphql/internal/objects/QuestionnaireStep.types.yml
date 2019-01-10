@@ -4,6 +4,8 @@ QuestionnaireStep:
   config:
     interfaces: [Node, Step]
     fields:
+      footer:
+        type: String
       kind:
         resolve: 'questionnaire'
       contributors:

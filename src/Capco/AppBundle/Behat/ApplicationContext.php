@@ -12,6 +12,7 @@ use Behat\Gherkin\Node\TableNode;
 use Capco\AppBundle\Toggle\Manager;
 use Joli\JoliNotif\NotifierFactory;
 use Behat\Mink\Driver\Selenium2Driver;
+use Capco\AppBundle\Behat\UserContext;
 use Symfony\Component\Process\Process;
 use WebDriver\Exception\ElementNotVisible;
 use Behat\Testwork\Tester\Result\TestResult;
