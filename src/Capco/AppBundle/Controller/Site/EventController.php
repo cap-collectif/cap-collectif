@@ -11,6 +11,7 @@ use Capco\AppBundle\Helper\EventHelper;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\EventResolver;
 use Capco\AppBundle\Search\EventSearch;
+use Capco\AppBundle\SiteParameter\Resolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -76,6 +77,8 @@ class EventController extends Controller
             'years' => $groupedEvents,
             'form' => $form->createView(),
             'archivedEventsNb' => $archivedEvents['count'],
+            'eventPageTitle' => $this->get(Resolver::class)->getValue('events.jumbotron.title'),
+            'eventPageBody' => $this->get(Resolver::class)->getValue('events.content.body'),
         ];
     }
 

@@ -6,16 +6,15 @@ import EventPageHeader_query from './__generated__/EventPageHeader_query.graphql
 
 type Props = {
   query: EventPageHeader_query,
+  eventPageTitle: ?string,
 };
 
 export class EventPageHeader extends React.Component<Props> {
   render() {
-    const { query } = this.props;
+    const { query, eventPageTitle } = this.props;
     return (
       <div className="container text-center">
-        <h1>
-          <FormattedMessage id="events-list" />
-        </h1>
+        <h1>{eventPageTitle || <FormattedMessage id="events-list" />}</h1>
         <FormattedMessage id="number-of-events" values={{ num: query.events.totalCount }} />
       </div>
     );

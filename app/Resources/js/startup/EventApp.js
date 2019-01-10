@@ -5,10 +5,10 @@ import ReactOnRails from 'react-on-rails';
 import IntlProvider from './IntlProvider';
 import EventPage from '../components/Event/EventPage';
 
-export default () => (
+export default (props: Object) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <EventPage />
+      <EventPage {...props} />
     </IntlProvider>
   </Provider>
 );

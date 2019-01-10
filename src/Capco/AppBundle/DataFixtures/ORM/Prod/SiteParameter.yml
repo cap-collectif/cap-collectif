@@ -217,13 +217,6 @@ Capco\AppBundle\Entity\SiteParameter:
     value: Évènements
     position: 301
     type: 0
-  SiteParameterEventContent:
-    keyname: events.jumbotron.body
-    category: pages.events
-    value: |
-      Retrouvez ici les évènements à venir
-    position: 302
-    type: 1
   SiteParameterEventContentPage:
     keyname: events.content.body
     category: pages.events

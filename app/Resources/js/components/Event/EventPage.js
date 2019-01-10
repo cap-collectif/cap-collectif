@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { FormattedHTMLMessage } from 'react-intl';
 import Loader from '../Ui/FeedbacksIndicators/Loader';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import type {
@@ -13,7 +14,10 @@ import EventListFilters from './List/EventListFilters';
 import EventRefetch from './List/EventRefetch';
 import EventPageHeader from './EventPageHeader';
 
-type Props = {};
+type Props = {
+  eventPageTitle: ?string,
+  eventPageBody: ?string,
+};
 
 export class EventPage extends React.Component<Props> {
   render() {
@@ -68,7 +72,12 @@ export class EventPage extends React.Component<Props> {
               return (
                 <div>
                   <section className="jumbotron--bg-1 ">
-                    <EventPageHeader query={props} />
+                    <EventPageHeader query={props} eventPageTitle={this.props.eventPageTitle} />
+                  </section>
+                  <section className="section--custom">
+                    <div className="container">
+                      <FormattedHTMLMessage id={this.props.eventPageBody} />
+                    </div>
                   </section>
                   <section className="section--custom">
                     <div className="container">

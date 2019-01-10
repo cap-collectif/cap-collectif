@@ -27,7 +27,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('EventApp') }}
+    {{ react_render_component('EventApp', { 'props': { 'eventPageTitle': eventPageTitle, 'eventPageBody': eventPageBody }} ) }}
 
     <section class="section--custom">
         <div class="container appendices__container">
