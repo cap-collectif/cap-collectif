@@ -96,8 +96,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
     private function resolveBatch($keys): array
     {
-        $connections = [];
-
         // We must group proposals by step
         $steps = array_unique(
             array_map(function ($key) {
@@ -150,10 +148,19 @@ class ProposalVotesDataLoader extends BatchDataLoader
                 }, $batchProposalIds);
             }
         } else {
+            $repo = null;
             if ($step instanceof CollectStep) {
                 $repo = $this->proposalCollectVoteRepository;
-            } else {
+            } elseif ($step instanceof SelectionStep) {
                 $repo = $this->proposalSelectionVoteRepository;
+            } else {
+                $this->logger->error('Please provide a Collect or Selection step');
+
+                return $this->getPromiseAdapter()->createAll(
+                    array_map(function ($key) {
+                        return null;
+                    }, $keys)
+                );
             }
 
             // Elasticsearch is way faster to retrieve counters

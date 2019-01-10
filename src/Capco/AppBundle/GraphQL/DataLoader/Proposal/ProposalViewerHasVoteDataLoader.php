@@ -2,15 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Repository\AbstractStepRepository;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
@@ -21,7 +18,6 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 {
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
-    private $abstractStepRepository;
     private $globalIdResolver;
     private $tokenStorage;
 
@@ -31,7 +27,6 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        AbstractStepRepository $abstractStepRepository,
         GlobalIdResolver $globalIdResolver,
         TokenStorageInterface $tokenStorage,
         string $cachePrefix,
@@ -41,7 +36,6 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->abstractStepRepository = $abstractStepRepository;
         $this->globalIdResolver = $globalIdResolver;
         $this->tokenStorage = $tokenStorage;
 
@@ -78,7 +72,10 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         }
         $stepId = $keys[0]['stepId'];
         $user = $keys[0]['user'];
-        $step = $this->abstractStepRepository->find($stepId);
+        $step = $this->globalIdResolver->resolve(
+            $stepId,
+            $this->tokenStorage->getToken()->getUser()
+        );
 
         if (!$step) {
             $this->logger->error('Please provide a valid stepId');
