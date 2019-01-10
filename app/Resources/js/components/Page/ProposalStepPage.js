@@ -50,7 +50,6 @@ export class ProposalStepPage extends React.Component<Props> {
 
     return (
       <div className="proposal__step-page">
-        <StepPageHeader step={step} />
         <QueryRenderer
           environment={environment}
           query={graphql`
@@ -160,6 +159,8 @@ export class ProposalStepPage extends React.Component<Props> {
               }
               return (
                 <div id="proposal__step-page-rendered">
+                  {/* $FlowFixMe $refType */}
+                  <StepPageHeader step={props.step} />
                   {isAuthenticated &&
                     // $FlowFixMe $refType
                     props.step.kind === 'collect' && <DraftProposalList step={props.step} />}

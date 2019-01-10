@@ -30,17 +30,19 @@ class CollectStepProposalCountResolver implements ResolverInterface
             'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'ASC'],
         ]);
 
-        $promise = $this->dataloader
-            ->load([
-                'form' => $step->getProposalForm(),
-                'args' => $args,
-                'viewer' => null,
-                'request' => null,
-            ])
-            ->then(function ($connection) use (&$count) {
-                $count = $connection->totalCount;
-            });
-        $this->adapter->await($promise);
+        if ($step->getProposalForm()) {
+            $promise = $this->dataloader
+                ->load([
+                    'form' => $step->getProposalForm(),
+                    'args' => $args,
+                    'viewer' => null,
+                    'request' => null,
+                ])
+                ->then(function ($connection) use (&$count) {
+                    $count = $connection->totalCount;
+                });
+            $this->adapter->await($promise);
+        }
 
         return $count;
     }
