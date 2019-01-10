@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { Modal } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
+import { Modal, Panel, Label } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
@@ -13,6 +14,7 @@ import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modul
 import type { State } from '../../../types';
 import type { OpinionSourceFormModal_source } from './__generated__/OpinionSourceFormModal_source.graphql';
 import type { OpinionSourceFormModal_sourceable } from './__generated__/OpinionSourceFormModal_sourceable.graphql';
+import RequirementsForm from '../../Requirements/RequirementsForm';
 
 type RelayProps = {|
   source: ?OpinionSourceFormModal_source,
@@ -29,6 +31,7 @@ type Props = {|
 class OpinionSourceFormModal extends React.Component<Props> {
   render() {
     const { submitting, sourceable, source, show, dispatch } = this.props;
+    const { step } = sourceable;
     const action = source ? 'update' : 'create';
     return (
       <Modal
@@ -48,6 +51,24 @@ class OpinionSourceFormModal extends React.Component<Props> {
         </Modal.Header>
         <Modal.Body>
           <OpinionSourceFormInfos action={action} />
+          {step && step.requirements.totalCount > 0 && (
+            <Panel id="required-conditions" bsStyle="primary">
+              <Panel.Heading>
+                <FormattedMessage id="requirements" />{' '}
+                {step.requirements.viewerMeetsTheRequirements && (
+                  <Label bsStyle="primary">
+                    <FormattedMessage id="filled" />
+                  </Label>
+                )}
+              </Panel.Heading>
+              {!step.requirements.viewerMeetsTheRequirements && (
+                <Panel.Body>
+                  <p>{step.requirements.reason}</p>
+                  <RequirementsForm step={step} stepId={step.id} />
+                </Panel.Body>
+              )}
+            </Panel>
+          )}
           <OpinionSourceForm sourceable={sourceable} source={source} />
         </Modal.Body>
         <Modal.Footer>
@@ -95,6 +116,15 @@ export default createFragmentContainer(container, {
     fragment OpinionSourceFormModal_sourceable on Sourceable {
       id
       ...OpinionSourceForm_sourceable
+      step {
+        id
+        ...RequirementsForm_step
+        requirements {
+          viewerMeetsTheRequirements
+          reason
+          totalCount
+        }
+      }
     }
   `,
 });
