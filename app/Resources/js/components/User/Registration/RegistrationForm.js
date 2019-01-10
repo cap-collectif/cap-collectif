@@ -30,12 +30,22 @@ type Props = {|
   dispatch: Dispatch,
 |};
 
-const getCustomFieldsErrors = (values: Object, props: Object) =>
+type FormValues = {
+  username: string,
+  email: string,
+  plainPassword: string,
+  charte: string,
+  captcha: boolean,
+  responses: Array<Object>,
+  questions: Array<Object>,
+};
+
+const getCustomFieldsErrors = (values: FormValues, props: Props) =>
   values.questions && values.responses
     ? validateResponses(values.questions, values.responses, '', props.intl).responses
     : [];
 
-export const validate = (values: Object, props: Object) => {
+export const validate = (values: FormValues, props: Props) => {
   const errors = {};
 
   if (!values.username || values.username.length < 2) {
@@ -61,10 +71,7 @@ export const validate = (values: Object, props: Object) => {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
 
-  return {
-    ...errors,
-    responses: getCustomFieldsErrors(values, props),
-  };
+  return { ...errors, responses: getCustomFieldsErrors(values, props) };
 };
 
 export const form = 'registration-form';
