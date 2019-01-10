@@ -21,7 +21,8 @@ class ProposalviewerFollowDataLoader extends BatchDataLoader
         UserRepository $userRepository,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug
+        bool $debug,
+        bool $enableCache
     ) {
         $this->userRepository = $userRepository;
         parent::__construct(
@@ -31,7 +32,8 @@ class ProposalviewerFollowDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug
+            $debug,
+            $enableCache
         );
     }
 

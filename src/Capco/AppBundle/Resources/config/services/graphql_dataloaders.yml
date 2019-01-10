@@ -88,7 +88,7 @@ services:
       $cachePrefix: ProposalViewerVoteDataLoader
       $cacheTtl: 60
       $debug: '%kernel.debug%'
-      $enableCache: true
+      $enableCache: false
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader:
     autowire: true
@@ -96,6 +96,7 @@ services:
       $cachePrefix: ProposalViewerHasVoteDataLoader
       $cacheTtl: 60
       $debug: '%kernel.debug%'
+      $enableCache: false
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalviewerFollowDataLoader:
     autowire: true
@@ -103,6 +104,7 @@ services:
       $cachePrefix: ProposalviewerFollowDataLoader
       $cacheTtl: 60
       $debug: '%kernel.debug%'
+      $enableCache: false
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigurationDataLoader:
     autowire: true
