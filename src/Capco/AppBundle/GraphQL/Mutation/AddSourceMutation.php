@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Psr\Log\LoggerInterface;
@@ -19,6 +20,7 @@ use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddSourceMutation implements MutationInterface
 {
@@ -29,6 +31,7 @@ class AddSourceMutation implements MutationInterface
     private $redisStorage;
     private $sourceRepo;
     private $logger;
+    private $stepRequirementsResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -37,7 +40,8 @@ class AddSourceMutation implements MutationInterface
         OpinionVersionRepository $versionRepo,
         RedisStorageHelper $redisStorage,
         SourceRepository $sourceRepo,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        StepRequirementsResolver $stepRequirementsResolver
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -46,6 +50,7 @@ class AddSourceMutation implements MutationInterface
         $this->redisStorage = $redisStorage;
         $this->sourceRepo = $sourceRepo;
         $this->logger = $logger;
+        $this->stepRequirementsResolver = $stepRequirementsResolver;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -77,6 +82,18 @@ class AddSourceMutation implements MutationInterface
             $error = ['message' => 'Can\'t add an source to non-sourceable.'];
 
             return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
+        }
+
+        $step = $sourceable->getStep();
+
+        if (
+            $step &&
+            !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($viewer, $step)
+        ) {
+            $this->logger->error('You dont meets all the requirements.');
+            $error = ['message' => 'You dont meets all the requirements.'];
+
+            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
         $source = (new Source())->setType(Source::LINK)->setAuthor($viewer);

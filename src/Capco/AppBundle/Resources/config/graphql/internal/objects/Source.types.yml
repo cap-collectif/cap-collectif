@@ -21,6 +21,8 @@ Source:
       - EditableContribution
       - UniformResourceLocatable
     fields:
+      step:
+        type: 'InternalConsultation!'
       createdAt:
         type: 'DateTime!'
         description: 'Identifies the date and time when the object was created.'

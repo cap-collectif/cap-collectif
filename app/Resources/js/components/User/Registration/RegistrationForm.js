@@ -10,6 +10,7 @@ import { register as onSubmit, displayChartModal } from '../../../redux/modules/
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
 import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
+import { validateResponses } from '../../../utils/responsesHelper';
 
 type Props = {|
   ...FormProps,
@@ -29,8 +30,14 @@ type Props = {|
   dispatch: Dispatch,
 |};
 
+const getCustomFieldsErrors = (values: Object, props: Object) =>
+  values.questions && values.responses
+    ? validateResponses(values.questions, values.responses, '', props.intl).responses
+    : [];
+
 export const validate = (values: Object, props: Object) => {
   const errors = {};
+
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
   }
@@ -53,7 +60,11 @@ export const validate = (values: Object, props: Object) => {
   ) {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
-  return errors;
+
+  return {
+    ...errors,
+    responses: getCustomFieldsErrors(values, props),
+  };
 };
 
 export const form = 'registration-form';
