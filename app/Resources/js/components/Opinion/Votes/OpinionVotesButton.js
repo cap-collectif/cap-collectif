@@ -48,13 +48,13 @@ type Props = {
 
 type State = {
   isLoading: boolean,
-  openModal: boolean,
+  showModal: boolean,
 };
 
 export class OpinionVotesButton extends React.Component<Props, State> {
   static defaultProps = { style: {} };
 
-  state = { isLoading: false, openModal: false };
+  state = { isLoading: false, showModal: false };
 
   target = null;
 
@@ -161,16 +161,16 @@ export class OpinionVotesButton extends React.Component<Props, State> {
   };
 
   openModal = () => {
-    this.setState({ openModal: true });
+    this.setState({ showModal: true });
   };
 
   closeModal = () => {
-    this.setState({ openModal: false });
+    this.setState({ showModal: false });
   };
 
   render() {
     const { opinion, value, style } = this.props;
-    const { isLoading, openModal } = this.state;
+    const { isLoading, showModal } = this.state;
     if (
       !this.voteIsEnabled() ||
       (opinion.__typename !== 'Opinion' && opinion.__typename !== 'Version')
@@ -185,9 +185,8 @@ export class OpinionVotesButton extends React.Component<Props, State> {
         {opinion.step /* $FlowFixMe */ && (
           <RequirementsFormModal
             step={opinion.step}
-            reason={opinion.step.requirements.reason}
             handleClose={this.closeModal}
-            show={openModal}
+            show={showModal}
           />
         )}
         <LoginOverlay>
@@ -229,12 +228,11 @@ export default createFragmentContainer(OpinionVotesButton, {
         id
         contribuable
         step {
-          id
-          ...RequirementsForm_step
           requirements {
-            reason
             viewerMeetsTheRequirements
           }
+          ...RequirementsForm_step
+          ...RequirementsModal_step
         }
         section {
           voteWidgetType
@@ -249,12 +247,11 @@ export default createFragmentContainer(OpinionVotesButton, {
         id
         contribuable
         step {
-          id
-          ...RequirementsForm_step
           requirements {
-            reason
             viewerMeetsTheRequirements
           }
+          ...RequirementsForm_step
+          ...RequirementsModal_step
         }
         section {
           voteWidgetType
