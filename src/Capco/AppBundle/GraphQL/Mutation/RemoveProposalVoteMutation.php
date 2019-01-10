@@ -16,7 +16,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Elasticsearch\Indexer;
 
 class RemoveProposalVoteMutation implements MutationInterface
 {
@@ -28,7 +27,6 @@ class RemoveProposalVoteMutation implements MutationInterface
     private $proposalSelectionVoteRepository;
     private $proposalViewerVoteDataLoader;
     private $proposalViewerHasVoteDataLoader;
-    private $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -38,8 +36,7 @@ class RemoveProposalVoteMutation implements MutationInterface
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
-        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
-        Indexer $indexer
+        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader
     ) {
         $this->em = $em;
         $this->stepRepo = $stepRepo;
@@ -49,7 +46,6 @@ class RemoveProposalVoteMutation implements MutationInterface
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
-        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -95,9 +91,6 @@ class RemoveProposalVoteMutation implements MutationInterface
         $this->proposalVotesDataLoader->invalidate($proposal);
         $this->proposalViewerVoteDataLoader->invalidate($proposal);
         $this->proposalViewerHasVoteDataLoader->invalidate($proposal);
-
-        // Synchronously index for mutation payload
-        $this->proposalVotesDataLoader->useElasticsearch = false;
 
         return ['proposal' => $proposal, 'step' => $step, 'viewer' => $user];
     }

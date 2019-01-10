@@ -61,7 +61,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 RUN wget https://packagecloud.io/gpg.key -O- -q | apt-key add - && \
     echo "deb http://packages.blackfire.io/debian any main" | tee /etc/apt/sources.list.d/blackfire.list && \
     apt-get update && \
-    apt-get install -y --allow-unauthenticated blackfire-agent blackfire-php && \
+    apt-get install -y blackfire-agent blackfire-php && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
     mkdir -p /var/run/blackfire && \

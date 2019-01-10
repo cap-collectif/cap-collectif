@@ -7,7 +7,6 @@ use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
@@ -28,8 +27,7 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         AbstractStepRepository $abstractStepRepository,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug,
-        bool $enableCache
+        bool $debug
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -42,8 +40,7 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug,
-            $enableCache
+            $debug
         );
     }
 
@@ -71,34 +68,16 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         $user = $keys[0]['user'];
         $step = $this->abstractStepRepository->find($stepId);
 
-        if (!$step) {
-            $this->logger->error('Please provide a valid stepId');
-
-            return $this->getPromiseAdapter()->createAll(
-                array_map(function ($key) {
-                    return false;
-                }, $keys)
-            );
-        }
-        $repo = null;
-        if ($step instanceof CollectStep) {
-            $repo = $this->proposalCollectVoteRepository;
-        } elseif ($step instanceof SelectionStep) {
-            $repo = $this->proposalSelectionVoteRepository;
-        } else {
-            $this->logger->error('Please provide a Collect or Selection step');
-
-            return $this->getPromiseAdapter()->createAll(
-                array_map(function ($key) {
-                    return false;
-                }, $keys)
-            );
-        }
-
         $batchProposalIds = array_map(function ($key) {
             return $key['proposal']->getId();
         }, $keys);
 
+        $repo = null;
+        if ($step instanceof CollectStep) {
+            $repo = $this->proposalCollectVoteRepository;
+        } else {
+            $repo = $this->proposalSelectionVoteRepository;
+        }
         $votes = $repo->getByProposalIdsAndStepAndUser($batchProposalIds, $step, $user);
         $results = array_map(function ($key) use ($votes) {
             $found = array_filter($votes, function ($vote) use ($key) {

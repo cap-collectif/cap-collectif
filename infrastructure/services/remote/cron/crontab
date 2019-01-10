@@ -7,6 +7,9 @@
 # Recalculate rankings
 */5 * * * * /usr/bin/timeout 4m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:rankings --env=prod
 
+# Reindex Elasticsearch from scratch
+0 7 * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=2048M /var/www/bin/console capco:es:populate --env=prod
+
 # Recalculate the counters from scratch
 0 4 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --force --env=prod
 0 5 * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:counters --force --env=prod

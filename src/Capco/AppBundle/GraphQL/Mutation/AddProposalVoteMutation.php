@@ -22,7 +22,6 @@ use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Capco\AppBundle\Elasticsearch\Indexer;
 
 class AddProposalVoteMutation implements MutationInterface
 {
@@ -37,7 +36,6 @@ class AddProposalVoteMutation implements MutationInterface
     private $proposalSelectionVoteRepository;
     private $proposalViewerVoteDataLoader;
     private $proposalViewerHasVoteDataLoader;
-    private $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -50,8 +48,7 @@ class AddProposalVoteMutation implements MutationInterface
         ProposalCollectVoteRepository $proposalCollectVote,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
-        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
-        Indexer $indexer
+        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader
     ) {
         $this->em = $em;
         $this->validator = $validator;
@@ -64,7 +61,6 @@ class AddProposalVoteMutation implements MutationInterface
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
-        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $input, User $user, RequestStack $request): array
@@ -142,9 +138,6 @@ class AddProposalVoteMutation implements MutationInterface
             // Let's assume it's a Unique Exception
             throw new UserError('proposal.vote.already_voted');
         }
-
-        // Synchronously index for mutation payload
-        $this->proposalVotesDataLoader->useElasticsearch = false;
 
         return ['vote' => $vote, 'viewer' => $user];
     }
