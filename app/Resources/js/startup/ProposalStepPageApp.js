@@ -7,7 +7,6 @@ import ProposalStepPage from '../components/Page/ProposalStepPage';
 
 type Props = {|
   stepId: string,
-  count: number,
 |};
 
 const mainNode = (props: Props) => {
@@ -16,7 +15,6 @@ const mainNode = (props: Props) => {
   return (
     <Provider store={store}>
       <IntlProvider>
-        {/* $FlowFixMe  */}
         <ProposalStepPage {...props} />
       </IntlProvider>
     </Provider>

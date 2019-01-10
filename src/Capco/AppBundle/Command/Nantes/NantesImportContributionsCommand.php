@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
+use Capco\AppBundle\Publishable\DoctrineListener;
 use Capco\UserBundle\Entity\User;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
@@ -218,6 +219,8 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
             $progress = new ProgressBar($output, \count($proposals));
             $count = 1;
             foreach ($proposals as $proposal) {
+                $date = \date_parse($proposal['createdDate']);
+                $date = new \DateTime($date['year'] . '-' . $date['month'] . '-' . $date['day']);
                 $author = $this->em->getRepository(User::class)->findOneBy([
                     'openId' => $proposal['userUuid'],
                 ]);
@@ -229,10 +232,10 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
                                 $proposal['videoLink'] .
                                 '">Vidéo</a>'
                             : $proposal['description'];
-                    $proposal = (new Proposal()) //$proposal['lastPublishedDate']
+                    $proposal = (new Proposal())
                         ->setTitle('Contribution n° ' . $count)
                         ->setAuthor($author)
-                        ->setPublishedAt(new \DateTime())
+                        ->setPublishedAt($date)
                         ->setUpdatedAt(new \DateTime())
                         ->setProposalForm($step->getProposalForm())
                         ->setReference($count)
@@ -289,6 +292,10 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
             foreach ($listeners as $key => $listener) {
                 if ($listener instanceof ReferenceEventListener) {
                     $this->em->getEventManager()->removeEventListener(['preFlush'], $listener);
+                    $output->writeln('Disabled <info>' . \get_class($listener) . '</info>');
+                }
+                if ($listener instanceof DoctrineListener) {
+                    $this->em->getEventManager()->removeEventListener(['prePersist'], $listener);
                     $output->writeln('Disabled <info>' . \get_class($listener) . '</info>');
                 }
             }

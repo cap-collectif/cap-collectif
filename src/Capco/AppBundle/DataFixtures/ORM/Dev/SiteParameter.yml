@@ -114,6 +114,7 @@ Capco\AppBundle\Entity\SiteParameter:
     value: 06 10 20 30 40
     position: 630
     type: 7
+
   SiteParameter24:
     keyname: projects.pagination
     category: pages.projects
@@ -434,9 +435,3 @@ Capco\AppBundle\Entity\SiteParameter:
     position: 3
     type: 3
     helpText: reserved-for-ad-scripts  script-desactivatable-by-user
-  SiteParameterProposalPagination:
-    keyname: proposal.pagination
-    category: settings.performance
-    value: 50
-    position: 1
-    type: 2
