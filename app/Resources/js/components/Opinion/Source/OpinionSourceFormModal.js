@@ -32,7 +32,9 @@ class OpinionSourceFormModal extends React.Component<Props> {
   render() {
     const { submitting, sourceable, source, show, dispatch } = this.props;
     const { step } = sourceable;
+    const disabled = step.requirements && !step.requirements.viewerMeetsTheRequirements;
     const action = source ? 'update' : 'create';
+
     return (
       <Modal
         animation={false}
@@ -85,6 +87,7 @@ class OpinionSourceFormModal extends React.Component<Props> {
             id={`confirm-opinion-source-${action}`}
             label={action === 'create' ? 'global.publish' : 'global.edit'}
             isSubmitting={submitting}
+            disabled={disabled}
             onSubmit={() => {
               dispatch(submit(formName));
             }}
