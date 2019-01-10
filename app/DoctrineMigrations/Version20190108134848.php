@@ -26,6 +26,7 @@ class Version20190108134848 extends AbstractMigration
             'type' => 2,
             'created_at' => $date,
             'updated_at' => $date,
+            'is_enabled' => 1,
         ]);
     }
 
