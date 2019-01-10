@@ -1,35 +1,28 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
 import WYSIWYGRender from '../../Form/WYSIWYGRender';
-import type { StepPageFooter_step } from './__generated__/StepPageFooter_step.graphql';
 
 type Props = {
-  step: StepPageFooter_step,
+  step: {
+    footer: ?string,
+  },
 };
 
 class StepPageFooter extends React.Component<Props> {
   render() {
     const { step } = this.props;
-    const { footer } = step;
+    const footer = step.footer;
     if (!footer) {
       return null;
     }
     return (
       <div>
-        <div className="block block--bordered mt-10 p-15">
-          <WYSIWYGRender value={footer} />
+        <div className="block block--bordered" style={{ marginTop: 30 }}>
+          <WYSIWYGRender className="p-10" value={footer} />
         </div>
       </div>
     );
   }
 }
 
-export default createFragmentContainer(
-  StepPageFooter,
-  graphql`
-    fragment StepPageFooter_step on QuestionnaireStep {
-      footer
-    }
-  `,
-);
+export default StepPageFooter;

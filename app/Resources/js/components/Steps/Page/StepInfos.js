@@ -1,33 +1,65 @@
 // @flow
 import React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { Row } from 'react-bootstrap';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
 import StepText from './StepText';
 import { CardContainer } from '../../Ui/Card/CardContainer';
-import type { StepInfos_step } from './__generated__/StepInfos_step.graphql';
+import Loader from '../../Ui/FeedbacksIndicators/Loader';
+import type {
+  StepInfosQueryResponse,
+  StepInfosQueryVariables,
+} from './__generated__/StepInfosQuery.graphql';
 
 type Props = {
-  step: StepInfos_step,
+  step: Object,
 };
 
 class StepInfos extends React.Component<Props> {
   render() {
     const { step } = this.props;
-    const { body } = step;
-    return body ? (
+
+    return (
       <CardContainer>
-        <div className="card__body">
-          <StepText text={body} />
-        </div>
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query StepInfosQuery($stepId: ID!) {
+              step: node(id: $stepId) {
+                ... on Step {
+                  body
+                }
+              }
+            }
+          `}
+          variables={
+            ({
+              stepId: step.id,
+            }: StepInfosQueryVariables)
+          }
+          render={({ error, props }: { props: ?StepInfosQueryResponse } & ReadyState) => {
+            if (error) {
+              return graphqlError;
+            }
+
+            if (props && props.step) {
+              const { body } = props.step;
+              return (
+                <div className="card__body">
+                  <StepText text={body} />
+                </div>
+              );
+            }
+            return (
+              <Row>
+                <Loader />
+              </Row>
+            );
+          }}
+        />
       </CardContainer>
-    ) : null;
+    );
   }
 }
 
-export default createFragmentContainer(
-  StepInfos,
-  graphql`
-    fragment StepInfos_step on Step {
-      body
-    }
-  `,
-);
+export default StepInfos;

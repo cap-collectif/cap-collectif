@@ -4250,7 +4250,6 @@ type Questionnaire implements Node {
 
   # Expose Primary Key, do not use it, except for testing purpose.
   _id: ID
-  step: QuestionnaireStep
   anonymousAllowed: Boolean!
   description: String
   multipleRepliesAllowed: Boolean!
@@ -4302,7 +4301,6 @@ type QuestionnaireStep implements Node & Step {
 
   # The introduction text of the step.
   body: HTML
-  footer: String
 
   # A list of contributor associated with the step.
   contributors(
