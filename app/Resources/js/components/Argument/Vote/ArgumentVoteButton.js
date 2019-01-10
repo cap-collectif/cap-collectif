@@ -10,47 +10,16 @@ import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip';
 import type { ArgumentVoteButton_argument } from './__generated__/ArgumentVoteButton_argument.graphql';
-import RequirementsFormModal from '../../Requirements/RequirementsModal';
 
 type Props = {
   argument: ArgumentVoteButton_argument,
 };
 
-type State = {
-  showModal: boolean,
-};
-
-export class ArgumentVoteButton extends React.Component<Props, State> {
+export class ArgumentVoteButton extends React.Component<Props> {
   target: null;
-
-  state = { showModal: false };
-
-  openModal = () => {
-    this.setState({ showModal: true });
-  };
-
-  closeModal = () => {
-    this.setState({ showModal: false });
-  };
-
-  checkIfUserHasRequirements = (): boolean => {
-    const { argument } = this.props;
-    const { step } = argument;
-
-    const userHasNotRequirements =
-      step && step.requirements && !step.requirements.viewerMeetsTheRequirements;
-
-    if (userHasNotRequirements) {
-      this.openModal();
-    }
-    return userHasNotRequirements;
-  };
 
   vote = () => {
     const { argument } = this.props;
-    if (this.checkIfUserHasRequirements()) {
-      return;
-    }
     AddArgumentVoteMutation.commit({ input: { argumentId: argument.id } })
       .then(() => {
         FluxDispatcher.dispatch({
@@ -68,9 +37,6 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
 
   deleteVote = () => {
     const { argument } = this.props;
-    if (this.checkIfUserHasRequirements()) {
-      return;
-    }
     RemoveArgumentVoteMutation.commit({ input: { argumentId: argument.id } })
       .then(() => {
         FluxDispatcher.dispatch({
@@ -88,40 +54,33 @@ export class ArgumentVoteButton extends React.Component<Props, State> {
 
   render() {
     const { argument } = this.props;
-    const { step } = argument;
-    const { showModal } = this.state;
     return (
-      <div>
-        {step /* $FlowFixMe */ && (
-          <RequirementsFormModal step={step} handleClose={this.closeModal} show={showModal} />
-        )}
-        <LoginOverlay>
-          <Button
-            ref={button => {
-              this.target = button;
-            }}
-            disabled={!argument.contribuable || argument.author.isViewer}
-            bsStyle={argument.viewerHasVote ? 'danger' : 'success'}
-            className={`argument__btn--vote${argument.viewerHasVote ? '' : ' btn--outline'}`}
-            bsSize="xsmall"
-            onClick={argument.viewerHasVote ? this.deleteVote : this.vote}>
-            {argument.viewerHasVote ? (
-              <span>
-                <FormattedMessage id="vote.cancel" />
-              </span>
-            ) : (
-              <span>
-                <i className="cap cap-hand-like-2" /> {<FormattedMessage id="vote.ok" />}
-              </span>
-            )}
-            {/* $FlowFixMe */}
-            <UnpublishedTooltip
-              target={() => ReactDOM.findDOMNode(this.target)}
-              publishable={argument.viewerVote || null}
-            />
-          </Button>
-        </LoginOverlay>
-      </div>
+      <LoginOverlay>
+        <Button
+          ref={button => {
+            this.target = button;
+          }}
+          disabled={!argument.contribuable || argument.author.isViewer}
+          bsStyle={argument.viewerHasVote ? 'danger' : 'success'}
+          className={`argument__btn--vote${argument.viewerHasVote ? '' : ' btn--outline'}`}
+          bsSize="xsmall"
+          onClick={argument.viewerHasVote ? this.deleteVote : this.vote}>
+          {argument.viewerHasVote ? (
+            <span>
+              <FormattedMessage id="vote.cancel" />
+            </span>
+          ) : (
+            <span>
+              <i className="cap cap-hand-like-2" /> {<FormattedMessage id="vote.ok" />}
+            </span>
+          )}
+          {/* $FlowFixMe */}
+          <UnpublishedTooltip
+            target={() => ReactDOM.findDOMNode(this.target)}
+            publishable={argument.viewerVote || null}
+          />
+        </Button>
+      </LoginOverlay>
     );
   }
 }
@@ -135,13 +94,6 @@ export default createFragmentContainer(
       author {
         slug
         isViewer @include(if: $isAuthenticated)
-      }
-      step {
-        requirements {
-          viewerMeetsTheRequirements @include(if: $isAuthenticated)
-        }
-        ...RequirementsForm_step
-        ...RequirementsModal_step
       }
       contribuable
       viewerHasVote @include(if: $isAuthenticated)

@@ -216,21 +216,3 @@ Capco\AppBundle\Entity\Argument:
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
     publishedAt: <(new \DateTime('2016-03-01'))>
-  argument251:
-    id: 'argument251'
-    Opinion: '@opinion1'
-    type: 0
-    Author: '@user<numberBetween(1, 5)>'
-    body: Coucou, je suis un bel argument !
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
-  argument252:
-    id: 'argument252'
-    Opinion: '@opinion1'
-    type: 0
-    Author: '@user<numberBetween(1, 5)>'
-    body: Coucou, je suis un bel argument !
-    publishedAt: <(new \DateTime('2015-01-01'))>
-    createdAt: <(new \DateTime('2015-01-01'))>
-    updatedAt: <(new \DateTime('2017-01-01'))>
