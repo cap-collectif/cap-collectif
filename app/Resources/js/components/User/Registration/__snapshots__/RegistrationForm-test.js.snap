@@ -147,18 +147,6 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   </Field>
   <Field
     component={[Function]}
-    id="consent-internal-communication"
-    labelClassName="font-weight-normal"
-    name="consentInternalCommunication"
-    type="checkbox"
-  >
-    <FormattedMessage
-      id="receive-news-and-results-of-the-consultations"
-      values={Object {}}
-    />
-  </Field>
-  <Field
-    component={[Function]}
     id="consent-external-communication"
     labelClassName="font-weight-normal"
     name="consentExternalCommunication"
@@ -270,18 +258,6 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
           </a>,
         }
       }
-    />
-  </Field>
-  <Field
-    component={[Function]}
-    id="consent-internal-communication"
-    labelClassName="font-weight-normal"
-    name="consentInternalCommunication"
-    type="checkbox"
-  >
-    <FormattedMessage
-      id="receive-news-and-results-of-the-consultations"
-      values={Object {}}
     />
   </Field>
   <Field
@@ -438,18 +414,6 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   </Field>
   <Field
     component={[Function]}
-    id="consent-internal-communication"
-    labelClassName="font-weight-normal"
-    name="consentInternalCommunication"
-    type="checkbox"
-  >
-    <FormattedMessage
-      id="receive-news-and-results-of-the-consultations"
-      values={Object {}}
-    />
-  </Field>
-  <Field
-    component={[Function]}
     id="consent-external-communication"
     labelClassName="font-weight-normal"
     name="consentExternalCommunication"
@@ -586,18 +550,6 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
           </a>,
         }
       }
-    />
-  </Field>
-  <Field
-    component={[Function]}
-    id="consent-internal-communication"
-    labelClassName="font-weight-normal"
-    name="consentInternalCommunication"
-    type="checkbox"
-  >
-    <FormattedMessage
-      id="receive-news-and-results-of-the-consultations"
-      values={Object {}}
     />
   </Field>
   <Field

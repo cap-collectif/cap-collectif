@@ -20,7 +20,6 @@ type Props = {|
   addZipcodeField: boolean,
   addCaptchaField: boolean,
   addConsentExternalCommunicationField: boolean,
-  addConsentInternalCommunicationField: boolean,
   userTypes: Array<Object>,
   cguLink: string,
   cguName: string,
@@ -71,7 +70,6 @@ export class RegistrationForm extends React.Component<Props> {
       addZipcodeField,
       addUserTypeField,
       addConsentExternalCommunicationField,
-      addConsentInternalCommunicationField,
       userTypes,
       handleSubmit,
       addCaptchaField,
@@ -235,16 +233,6 @@ export class RegistrationForm extends React.Component<Props> {
           labelClassName="font-weight-normal"
           children={chartLinkComponent}
         />
-        {addConsentInternalCommunicationField && (
-          <Field
-            id="consent-internal-communication"
-            name="consentInternalCommunication"
-            component={renderComponent}
-            type="checkbox"
-            labelClassName="font-weight-normal"
-            children={<FormattedMessage id="receive-news-and-results-of-the-consultations" />}
-          />
-        )}
         {addConsentExternalCommunicationField && (
           <Field
             id="consent-external-communication"
@@ -276,7 +264,6 @@ const mapStateToProps = (state: State) => ({
   addUserTypeField: state.default.features.user_type,
   addZipcodeField: state.default.features.zipcode_at_register,
   addConsentExternalCommunicationField: state.default.features.consent_external_communication,
-  addConsentInternalCommunicationField: state.default.features.consent_internal_communication,
   userTypes: state.default.userTypes,
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],

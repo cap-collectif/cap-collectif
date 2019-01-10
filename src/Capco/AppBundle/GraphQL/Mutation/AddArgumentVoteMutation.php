@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
@@ -13,6 +14,7 @@ use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddArgumentVoteMutation implements MutationInterface
 {
@@ -20,17 +22,20 @@ class AddArgumentVoteMutation implements MutationInterface
     private $argumentRepo;
     private $argumentVoteRepo;
     private $redisStorageHelper;
+    private $stepRequirementsResolver;
 
     public function __construct(
         EntityManagerInterface $em,
         ArgumentRepository $argumentRepo,
         ArgumentVoteRepository $argumentVoteRepo,
-        RedisStorageHelper $redisStorageHelper
+        RedisStorageHelper $redisStorageHelper,
+        StepRequirementsResolver $stepRequirementsResolver
     ) {
         $this->em = $em;
         $this->argumentRepo = $argumentRepo;
         $this->argumentVoteRepo = $argumentVoteRepo;
         $this->redisStorageHelper = $redisStorageHelper;
+        $this->stepRequirementsResolver = $stepRequirementsResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -53,6 +58,15 @@ class AddArgumentVoteMutation implements MutationInterface
 
         if ($previousVote) {
             throw new UserError('Already voted.');
+        }
+
+        $step = $argument->getStep();
+
+        if (
+            $step &&
+            !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($viewer, $step)
+        ) {
+            throw new UserError('You dont meets all the requirements.');
         }
 
         $vote = (new ArgumentVote())->setArgument($argument)->setUser($viewer);

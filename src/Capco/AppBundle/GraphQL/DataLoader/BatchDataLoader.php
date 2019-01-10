@@ -82,8 +82,13 @@ abstract class BatchDataLoader extends DataLoader
      */
     public function load($key)
     {
-        $cacheKey = $this->getCacheKeyFromKey($key);
-        $cacheItem = $this->cache->getItem($cacheKey);
+        $cacheItem = null;
+        $result = null;
+
+        if ($this->enableCache) {
+            $cacheKey = $this->getCacheKeyFromKey($key);
+            $cacheItem = $this->cache->getItem($cacheKey);
+        }
 
         if (!$this->enableCache || !$cacheItem->isHit()) {
             if ($this->debug) {
@@ -94,16 +99,19 @@ abstract class BatchDataLoader extends DataLoader
 
             $promise = parent::load($key);
             if ($promise instanceof Promise) {
-                $promise->then(function ($value) use ($key, $cacheItem) {
+                $promise->then(function ($value) use ($key, &$result, $cacheItem) {
                     $this->prime($key, $value);
 
-                    $cacheItem
-                        ->set($value)
-                        ->expiresAfter($this->cacheTtl)
-                        ->tag($this->getCacheTag($key))
-                        ->tag($this->cachePrefix);
-
-                    $this->cache->save($cacheItem);
+                    if ($this->enableCache) {
+                        $cacheItem
+                            ->set($value)
+                            ->expiresAfter($this->cacheTtl)
+                            ->tag($this->getCacheTag($key))
+                            ->tag($this->cachePrefix);
+                        $this->cache->save($cacheItem);
+                    } else {
+                        $result = $value;
+                    }
 
                     if ($this->debug) {
                         $this->logger->info('Saved key into cache with value : ');
@@ -118,7 +126,11 @@ abstract class BatchDataLoader extends DataLoader
             $this->logger->info('Cache HIT for: ' . var_export($this->serializeKey($key), true));
         }
 
-        return $this->getPromiseAdapter()->createFulfilled($cacheItem->get());
+        if ($this->enableCache) {
+            return $this->getPromiseAdapter()->createFulfilled($cacheItem->get());
+        }
+
+        return $this->getPromiseAdapter()->createFulfilled($result);
     }
 
     /**

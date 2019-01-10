@@ -11,7 +11,6 @@ describe('<RegistrationForm />', () => {
     addZipcodeField: false,
     addCaptchaField: true,
     addConsentExternalCommunicationField: true,
-    addConsentInternalCommunicationField: true,
     handleSubmit: jest.fn(),
     userTypes: [],
     ...formMock,

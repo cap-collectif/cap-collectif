@@ -23,6 +23,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 class AddProposalVoteMutation implements MutationInterface
 {
@@ -138,8 +139,7 @@ class AddProposalVoteMutation implements MutationInterface
             $this->proposalVotesDataLoader->invalidate($proposal);
             $this->proposalViewerVoteDataLoader->invalidate($proposal);
             $this->proposalViewerHasVoteDataLoader->invalidate($proposal);
-        } catch (\Exception $e) {
-            // Let's assume it's a Unique Exception
+        } catch (UniqueConstraintViolationException $e) {
             throw new UserError('proposal.vote.already_voted');
         }
 
