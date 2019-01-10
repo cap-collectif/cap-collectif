@@ -1,21 +1,25 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Alert } from 'react-bootstrap';
 import RequirementsForm from './RequirementsForm';
-import type { RequirementsModal_step } from './__generated__/RequirementsModal_step.graphql';
 
 type Props = {
   show: boolean,
-  step: RequirementsModal_step,
+  step: {|
+    +id: string,
+    +requirements: {|
+      +reason: ?string,
+      +viewerMeetsTheRequirements: boolean,
+    |},
+  |},
+  reason: ?string,
   handleClose: () => void,
 };
 
-export class RequirementsModal extends React.Component<Props> {
+export default class RequirementsModal extends React.Component<Props> {
   render() {
-    const { show, handleClose, step } = this.props;
+    const { show, handleClose, step, reason } = this.props;
 
     return (
       <Modal
@@ -38,7 +42,7 @@ export class RequirementsModal extends React.Component<Props> {
 
           <div className="row">
             <div className="col-xs-12">
-              <p>{step.requirements.reason}</p>
+              <p>{reason}</p>
             </div>
             <RequirementsForm stepId={step.id} step={step} />
           </div>
@@ -47,18 +51,3 @@ export class RequirementsModal extends React.Component<Props> {
     );
   }
 }
-
-const container = connect()(RequirementsModal);
-export default createFragmentContainer(
-  container,
-  graphql`
-    fragment RequirementsModal_step on Consultation {
-      ...RequirementsForm_step
-      id
-      requirements {
-        viewerMeetsTheRequirements
-        reason
-      }
-    }
-  `,
-);

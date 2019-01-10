@@ -12,7 +12,9 @@ import {
 
 const defaultStep = {
   $fragmentRefs,
+  id: '1',
   requirements: {
+    reason: 'On recolte les données',
     viewerMeetsTheRequirements: true,
   },
 };

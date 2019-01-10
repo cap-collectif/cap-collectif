@@ -7,11 +7,3 @@ Capco\AppBundle\Entity\SourceVote:
     Source: '@source35'
     user: '@user<numberBetween(1, 3)>'
     publishedAt: <(new \DateTime('yesterday'))>
-  sourceVote3:
-    Source: '@source43'
-    user: '@user519'
-    publishedAt: <(new \DateTime('yesterday'))>
-  sourceVote4:
-    Source: '@source43'
-    user: '@user5'
-    publishedAt: <(new \DateTime('yesterday'))>
