@@ -19,7 +19,7 @@ class Version20190108134848 extends AbstractMigration
     {
         $date = (new \DateTime())->format('Y-m-d H:i:s');
         $this->connection->insert('site_parameter', [
-            'keyname' => 'snproposal.paginationalytical-tracking-scripts-on-all-pages',
+            'keyname' => 'proposal.pagination',
             'value' => 50,
             'position' => 1,
             'category' => 'settings.performance',
