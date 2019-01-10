@@ -5166,6 +5166,7 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
+  step: Consultation!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!

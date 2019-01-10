@@ -232,7 +232,7 @@ export default createFragmentContainer(OpinionVotesButton, {
             viewerMeetsTheRequirements
           }
           ...RequirementsForm_step
-          ...RequirementsModal
+          ...RequirementsModal_step
         }
         section {
           voteWidgetType
@@ -251,7 +251,7 @@ export default createFragmentContainer(OpinionVotesButton, {
             viewerMeetsTheRequirements
           }
           ...RequirementsForm_step
-          ...RequirementsModal
+          ...RequirementsModal_step
         }
         section {
           voteWidgetType

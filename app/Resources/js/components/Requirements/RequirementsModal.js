@@ -5,16 +5,11 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Alert } from 'react-bootstrap';
 import RequirementsForm from './RequirementsForm';
+import type { RequirementsModal_step } from './__generated__/RequirementsModal_step.graphql';
 
 type Props = {
   show: boolean,
-  step: {|
-    +id: string,
-    +requirements: {|
-      +reason: ?string,
-      +viewerMeetsTheRequirements: boolean,
-    |},
-  |},
+  step: RequirementsModal_step,
   handleClose: () => void,
 };
 
@@ -57,7 +52,7 @@ const container = connect()(RequirementsModal);
 export default createFragmentContainer(
   container,
   graphql`
-    fragment RequirementsModal on Consultation {
+    fragment RequirementsModal_step on Consultation {
       ...RequirementsForm_step
       id
       requirements {

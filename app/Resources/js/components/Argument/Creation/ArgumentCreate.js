@@ -189,7 +189,7 @@ export default createFragmentContainer(container, {
             viewerMeetsTheRequirements
           }
           ...RequirementsForm_step
-          ...RequirementsModal
+          ...RequirementsModal_step
         }
       }
       ... on Version {
@@ -198,7 +198,7 @@ export default createFragmentContainer(container, {
             viewerMeetsTheRequirements
           }
           ...RequirementsForm_step
-          ...RequirementsModal
+          ...RequirementsModal_step
         }
       }
     }
