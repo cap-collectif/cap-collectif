@@ -45,6 +45,7 @@ export const features = {
   members_list: false,
   captcha: false,
   consent_external_communication: false,
+  consent_internal_communication: false,
   newsletter: false,
   profiles: false,
   projects_form: false,

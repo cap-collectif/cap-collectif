@@ -160,6 +160,10 @@ InternalUser:
         type: 'Boolean!'
         description: 'Is user accepted the external communication during the registration.'
         access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+      consentInternalCommunication:
+        type: 'Boolean!'
+        description: 'Is user accepted the internal communication during the registration.'
+        access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
       followingProposals:
         type: 'ProposalConnection!'
         resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalsFollowedByUserResolver", [value, args])'
