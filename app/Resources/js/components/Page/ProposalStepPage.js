@@ -22,12 +22,10 @@ import config from '../../config';
 
 type OwnProps = {|
   stepId: string,
-  count: number,
 |};
 
 type Props = {|
-  count: number,
-  step: { id: string },
+  step: StepPageHeader_step,
   filters: Object,
   order: ?string,
   terms: ?string,
@@ -48,10 +46,11 @@ export class ProposalStepPage extends React.Component<Props> {
   }
 
   render() {
-    const { count, step, isAuthenticated, selectedViewByStep, features } = this.props;
+    const { step, isAuthenticated, selectedViewByStep, features } = this.props;
 
     return (
       <div className="proposal__step-page">
+        <StepPageHeader step={step} />
         <QueryRenderer
           environment={environment}
           query={graphql`
@@ -123,7 +122,7 @@ export class ProposalStepPage extends React.Component<Props> {
             ({
               stepId: step.id,
               isAuthenticated,
-              count: config.isMobile ? 10 : count,
+              count: config.isMobile ? 25 : 50,
               cursor: null,
               ...this.initialRenderVars,
               isMapDisplay: features.display_map,
@@ -161,8 +160,6 @@ export class ProposalStepPage extends React.Component<Props> {
               }
               return (
                 <div id="proposal__step-page-rendered">
-                  {/* $FlowFixMe $refType */}
-                  <StepPageHeader step={props.step} />
                   {isAuthenticated &&
                     // $FlowFixMe $refType
                     props.step.kind === 'collect' && <DraftProposalList step={props.step} />}
@@ -188,7 +185,6 @@ export class ProposalStepPage extends React.Component<Props> {
                   {/* $FlowFixMe $refType */}
                   <ProposalListView
                     step={props.step}
-                    count={count}
                     viewer={props.viewer || null}
                     view={selectedViewByStep === 'mosaic' ? 'mosaic' : 'table'}
                     visible={selectedViewByStep === 'mosaic' || selectedViewByStep === 'table'}
