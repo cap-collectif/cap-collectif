@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -25,6 +26,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
     private $proposalSearch;
+    private $globalIdResolver;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -33,6 +35,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalSearch $proposalSearch,
+        GlobalIdResolver $globalIdResolver,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -41,6 +44,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalSearch = $proposalSearch;
+        $this->globalIdResolver = $globalIdResolver;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -135,11 +139,11 @@ class ProposalVotesDataLoader extends BatchDataLoader
             else {
                 $totalCountByProposal = array_map(function ($proposalId) use ($includeUnpublished) {
                     $totalCount = 0;
-                    $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
+                    $totalCount += $this->proposalCollectVoteRepository->countVotesByProposalId(
                         $proposalId,
                         $includeUnpublished
                     );
-                    $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal(
+                    $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposalId(
                         $proposalId,
                         $includeUnpublished
                     );
@@ -258,6 +262,8 @@ class ProposalVotesDataLoader extends BatchDataLoader
     ): Connection {
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
+        $totalCount = 0;
+
         if ($step) {
             if ($step instanceof SelectionStep) {
                 $paginator = new Paginator(function (int $offset, int $limit) use (
@@ -323,7 +329,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
         $paginator = new Paginator(function (int $offset, int $limit) {
             return [];
         });
-        $totalCount = 0;
         $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
             $proposal,
             $includeUnpublished
