@@ -42,7 +42,8 @@ type FormValues = {
 
 const getCustomFieldsErrors = (values: FormValues, props: Props) =>
   values.questions && values.responses
-    ? validateResponses(values.questions, values.responses, '', props.intl).responses
+    ? // TODO: remove this parameter from the function or create a specific traduction key
+      validateResponses(values.questions, values.responses, 'reply', props.intl).responses
     : [];
 
 export const validate = (values: FormValues, props: Props) => {
