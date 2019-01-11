@@ -16,16 +16,16 @@ import type { FeatureToggles, State } from '../../types';
 import type {
   ProposalStepPageQueryResponse,
   ProposalStepPageQueryVariables,
+  StepPageHeader_step,
 } from './__generated__/ProposalStepPageQuery.graphql';
 import config from '../../config';
 
 type OwnProps = {|
   stepId: string,
-  count: number,
 |};
 
 type Props = {|
-  ...OwnProps,
+  step: StepPageHeader_step,
   filters: Object,
   order: ?string,
   terms: ?string,
@@ -46,7 +46,7 @@ export class ProposalStepPage extends React.Component<Props> {
   }
 
   render() {
-    const { count, stepId, isAuthenticated, selectedViewByStep, features } = this.props;
+    const { step, isAuthenticated, selectedViewByStep, features } = this.props;
 
     return (
       <div className="proposal__step-page">
@@ -119,9 +119,9 @@ export class ProposalStepPage extends React.Component<Props> {
           `}
           variables={
             ({
-              stepId,
+              stepId: step.id,
               isAuthenticated,
-              count: config.isMobile ? 10 : count,
+              count: config.isMobile ? 25 : 50,
               cursor: null,
               ...this.initialRenderVars,
               isMapDisplay: features.display_map,
@@ -133,12 +133,10 @@ export class ProposalStepPage extends React.Component<Props> {
             }
 
             if (props) {
-              const step = props.step;
-
-              if (!step) {
+              if (!props.step) {
                 return graphqlError;
               }
-              const { form } = step;
+              const { form } = props.step;
               if (!form) return;
 
               let geoJsons = [];
@@ -162,19 +160,19 @@ export class ProposalStepPage extends React.Component<Props> {
               return (
                 <div id="proposal__step-page-rendered">
                   {/* $FlowFixMe $refType */}
-                  <StepPageHeader step={step} />
+                  <StepPageHeader step={props.step} />
                   {isAuthenticated &&
                     // $FlowFixMe $refType
-                    step.kind === 'collect' && <DraftProposalList step={step} />}
+                    props.step.kind === 'collect' && <DraftProposalList step={props.step} />}
                   {isAuthenticated && (
                     // $FlowFixMe $refType
-                    <UnpublishedProposalListView step={step} viewer={props.viewer} />
+                    <UnpublishedProposalListView step={props.step} viewer={props.viewer} />
                   )}
                   {/* $FlowFixMe $refType */}
-                  <ProposalStepPageHeader step={step} />
+                  <ProposalStepPageHeader step={props.step} />
                   {/* $FlowFixMe please use mapDispatchToProps */}
-                  <ProposalListFilters step={step} />
-                  {step && !step.private && features.display_map ? (
+                  <ProposalListFilters step={props.step} />
+                  {props.step && !props.step.private && features.display_map ? (
                     /* $FlowFixMe please use mapDispatchToProps */
                     <LeafletMap
                       geoJsons={geoJsons}
@@ -187,8 +185,7 @@ export class ProposalStepPage extends React.Component<Props> {
                   ) : null}
                   {/* $FlowFixMe $refType */}
                   <ProposalListView
-                    step={step}
-                    count={count}
+                    step={props.step}
                     viewer={props.viewer || null}
                     view={selectedViewByStep === 'mosaic' ? 'mosaic' : 'table'}
                     visible={selectedViewByStep === 'mosaic' || selectedViewByStep === 'table'}
@@ -208,13 +205,16 @@ export class ProposalStepPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: State, props: OwnProps) => ({
+  stepId: undefined,
   isAuthenticated: state.user.user !== null,
   filters: state.proposal.filters || {},
   terms: state.proposal.terms,
   order: state.proposal.order,
+  step:
+    state.project.currentProjectById &&
+    state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],
   selectedViewByStep: state.proposal.selectedViewByStep || 'mosaic',
   features: state.default.features,
 });
-
-export default connect<Props, State, _>(mapStateToProps)(ProposalStepPage);
+export default connect(mapStateToProps)(ProposalStepPage);

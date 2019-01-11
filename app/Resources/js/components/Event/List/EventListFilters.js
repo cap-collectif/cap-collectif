@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
-import { Button, Row, Col } from 'react-bootstrap';
+import { Button, Row, Col, Popover } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { reduxForm, Field, formValueSelector, type FormProps } from 'redux-form';
 import select from '../../Form/Select';
@@ -115,15 +115,17 @@ export class EventListFilters extends React.Component<Props> {
     }
 
     const popoverBottom = (
-      <div>
-        <form>
-          {filters.map((filter, index) => (
-            <Col key={index} className="mt-5">
-              <div>{filter}</div>
-            </Col>
-          ))}
-        </form>
-      </div>
+      <Popover id="popover-positioned-bottom" className="w-260">
+        <div>
+          <form>
+            {filters.map((filter, index) => (
+              <Col key={index} className="mt-5">
+                <div>{filter}</div>
+              </Col>
+            ))}
+          </form>
+        </div>
+      </Popover>
     );
 
     const filterCount = () => {

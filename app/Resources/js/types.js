@@ -28,7 +28,6 @@ export type FeatureToggles = {
   calendar: boolean,
   captcha: boolean,
   consent_external_communication: boolean,
-  consent_internal_communication: boolean,
   login_facebook: boolean,
   login_gplus: boolean,
   login_saml: boolean,
@@ -61,7 +60,6 @@ export type FeatureToggle =
   | 'calendar'
   | 'captcha'
   | 'consent_external_communication'
-  | 'consent_internal_communication'
   | 'restrict_registration_via_email_domain'
   | 'login_facebook'
   | 'login_gplus'

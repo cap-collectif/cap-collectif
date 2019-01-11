@@ -12,28 +12,9 @@ type Props = {
   siteName: ?string,
 };
 
-type State = {
-  expanded: boolean,
-};
-
-class Navbar extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      expanded: false,
-    };
-  }
-
-  getAriaExpanded = expanded => {
-    this.setState({
-      expanded: !expanded,
-    });
-  };
-
+class Navbar extends React.Component<Props> {
   render() {
     const { logo, intl, items, siteName } = this.props;
-    const { expanded } = this.state;
 
     const navbarLgSize = (
       <Nav id="navbar-content" className="visible-lg-block">
@@ -107,11 +88,7 @@ class Navbar extends React.Component<Props, State> {
     );
 
     return (
-      <Navigation
-        componentClass="div"
-        id="main-navbar"
-        className="navbar navbar-default navbar-fixed-top"
-        role="navigation">
+      <Navigation id="main-navbar" className="navbar navbar-default navbar-fixed-top" role="navigation">
         <div className="skip-links js-skip-links" role="banner">
           <div className="skip-links-container">
             <ul className="skip-links-list clearfix">
@@ -136,20 +113,15 @@ class Navbar extends React.Component<Props, State> {
               </a>
             </Navigation.Brand>
           )}
-          <Navigation.Toggle
-            aria-expanded={expanded}
-            onClick={() => this.getAriaExpanded(expanded)}
-          />
+          <Navigation.Toggle />
         </Navigation.Header>
-        <nav role="navigation">
-          <Navigation.Collapse>
-            {navbarLgSize}
-            {navbarMdSize}
-            {navbarSmSize}
-            {navbarXsSize}
-            <NavbarRight />
-          </Navigation.Collapse>
-        </nav>
+        <Navigation.Collapse>
+          {navbarLgSize}
+          {navbarMdSize}
+          {navbarSmSize}
+          {navbarXsSize}
+          <NavbarRight />
+        </Navigation.Collapse>
       </Navigation>
     );
   }

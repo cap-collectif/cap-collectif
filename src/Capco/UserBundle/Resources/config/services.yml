@@ -55,19 +55,6 @@ services:
   drupal.encoder:
     class: Capco\UserBundle\Security\DrupalEncoder
 
-  # We override default security services:
-  security.authentication.success_handler:
-    class: Capco\UserBundle\Handler\AuthenticationSuccessHandler
-    autowire: true
-    tags:
-      - { name: 'monolog.logger', channel: 'security' }
-
-  security.authentication.failure_handler:
-    class: Capco\UserBundle\Handler\AuthenticationFailureHandler
-    arguments: ['@http_kernel', '@security.http_utils', {}, '@logger']
-    tags:
-      - { name: 'monolog.logger', channel: 'security' }
-
   Capco\UserBundle\Authenticator\SamlAuthenticator:
     arguments:
       $samlIdp: '%simplesamlphp.sp%'

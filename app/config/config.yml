@@ -34,7 +34,6 @@ parameters:
   database_name: '%env(SYMFONY_DATABASE_NAME)%'
   database_user: '%env(SYMFONY_DATABASE_USER)%'
   database_password: '%env(SYMFONY_DATABASE_PASSWORD)%'
-  rabbitmq_host: '%env(SYMFONY_RABBITMQ_HOST)%'
   rabbitmq_login: '%env(SYMFONY_RABBITMQ_LOGIN)%'
   rabbitmq_password: '%env(SYMFONY_RABBITMQ_PASSWORD)%'
   saml_sp: '%env(SYMFONY_SAML_SP)%'
@@ -83,7 +82,6 @@ parameters:
   env(SYMFONY_DATABASE_NAME): symfony
   env(SYMFONY_DATABASE_USER): root
   env(SYMFONY_DATABASE_PASSWORD): ~
-  env(SYMFONY_RABBITMQ_HOST): 127.0.0.1
   env(SYMFONY_RABBITMQ_LOGIN): guest
   env(SYMFONY_RABBITMQ_PASSWORD): guest
   env(SYMFONY_SAML_SP): oda

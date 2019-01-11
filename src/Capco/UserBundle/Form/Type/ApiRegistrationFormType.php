@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
@@ -43,7 +42,6 @@ class ApiRegistrationFormType extends AbstractType
         }
 
         $builder
-            ->add('consentInternalCommunication', CheckboxType::class, ['required' => false])
             ->add('consentExternalCommunication', CheckboxType::class, ['required' => false])
             ->add('responses', PolyCollectionType::class, [
                 'allow_add' => true,

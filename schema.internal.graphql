@@ -5962,9 +5962,6 @@ type User implements Node & UniformResourceLocatable {
   # Is user accepted the external communication during the registration.
   consentExternalCommunication: Boolean!
 
-  # Is user accepted the internal communication during the registration.
-  consentInternalCommunication: Boolean!
-
   # Array of proposals followed by current user.
   followingProposals(
     # Ordering options for followers returning from the connection

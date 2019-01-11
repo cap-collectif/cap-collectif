@@ -3,7 +3,7 @@ swarrot:
   default_connection: rabbitmq
   connections:
     rabbitmq:
-      host: '%rabbitmq_host%'
+      host: 127.0.0.1
       port: 5672
       login: '%rabbitmq_login%'
       password: '%rabbitmq_password%'

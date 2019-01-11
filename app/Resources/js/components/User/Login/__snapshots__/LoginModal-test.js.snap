@@ -39,7 +39,7 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
     >
       <ModalTitle
         bsClass="modal-title"
-        componentClass="h1"
+        componentClass="h4"
         id="contained-modal-title-lg"
       >
         <FormattedMessage
