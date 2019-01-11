@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Behat\Traits;
 
 use Behat\Gherkin\Node\TableNode;
 use FilesystemIterator;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PHPUnit\Framework\Assert;
 
 trait ProposalStepsTrait
@@ -1258,6 +1259,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalFollowButton(string $proposalId)
     {
+        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
         $page = $this->getCurrentPage();
         $page->clickFollowButton($proposalId);
         $this->iWait(2);
@@ -1268,6 +1270,7 @@ trait ProposalStepsTrait
      */
     public function iClickOnFollow(string $choice, string $proposalId)
     {
+        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
         $page = $this->getCurrentPage();
         $page->clickFollowChoice($choice, $proposalId);
     }
@@ -1275,28 +1278,31 @@ trait ProposalStepsTrait
     /**
      * @When I should see minimal checked on :proposalId
      */
-    public function iShouldSeeAdvancementCheckedOnProposal(string $proposalid)
+    public function iShouldSeeAdvancementCheckedOnProposal(string $proposalId)
     {
+        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
         $page = $this->getCurrentPage();
-        $page->followMinimalIsChecked($proposalid);
+        $page->followMinimalIsChecked($proposalId);
     }
 
     /**
      * @When I should see follow essential checked on :proposalId
      */
-    public function iShouldSeeFollowAdvancementAndCommentCheckedOnProposal(string $proposalid)
+    public function iShouldSeeFollowAdvancementAndCommentCheckedOnProposal(string $proposalId)
     {
+        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
         $page = $this->getCurrentPage();
-        $page->followEssentialIsChecked($proposalid);
+        $page->followEssentialIsChecked($proposalId);
     }
 
     /**
      * @When I should see follow all activities checked on :proposalId
      */
-    public function iShouldSeeFollowAllActivitiesCheckedOnProposal(string $proposalid)
+    public function iShouldSeeFollowAllActivitiesCheckedOnProposal(string $proposalId)
     {
+        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
         $page = $this->getCurrentPage();
-        $page->followAllIsChecked($proposalid);
+        $page->followAllIsChecked($proposalId);
     }
 
     /**
@@ -1304,6 +1310,8 @@ trait ProposalStepsTrait
      */
     public function iClickTheProposalUnfollowButton(string $proposalId)
     {
+        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
+
         $page = $this->getCurrentPage();
         $page->clickUnfollowButton($proposalId);
         $this->iWait(2);

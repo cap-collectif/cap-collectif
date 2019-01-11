@@ -7,7 +7,7 @@ Scenario: Logged, I want to follow a proposal and change the type of following
   And I go to a proposal
   When I click the proposal follow button on "proposal2"
   And I wait 2 seconds
-  Then I should see a "#proposal-follow-btn-proposal2" element
+  Then I should see a "#proposal-follow-btn-UHJvcG9zYWw6cHJvcG9zYWwy" element
   And I should see a ".dropdown-menu" element
   And I wait 2 seconds
   And I should see minimal checked on "proposal2"
