@@ -364,7 +364,6 @@ type Argument implements Node & Publishable & Contribution & Reportable & Trasha
   viewerHasVote: Boolean!
   viewerVote: ArgumentVote
   contribuable: Boolean!
-  step: Consultation!
 }
 
 # A connection to a list of items.
@@ -2601,7 +2600,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection
-  step: Consultation!
 
   # The sources related to the sourceable.
   sources(
@@ -2708,6 +2706,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # true if the contribution is pinned.
   pinned: Boolean!
+  step: Consultation!
 
   # The viewer vote.
   viewerVote: OpinionVote
@@ -5166,7 +5165,6 @@ type Source implements Node & Publishable & Contribution & Reportable & Trashabl
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
-  step: Consultation!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -5296,7 +5294,6 @@ type SourceVoteEdge {
 interface Sourceable {
   id: ID!
   contribuable: Boolean!
-  step: Consultation!
 
   # The sources related to the sourceable.
   sources(
@@ -5962,6 +5959,9 @@ type User implements Node & UniformResourceLocatable {
   # Is user accepted the external communication during the registration.
   consentExternalCommunication: Boolean!
 
+  # Is user accepted the internal communication during the registration.
+  consentInternalCommunication: Boolean!
+
   # Array of proposals followed by current user.
   followingProposals(
     # Ordering options for followers returning from the connection
@@ -6237,7 +6237,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   # The URL to this resource.
   url: URI!
   contribuable: Boolean!
-  step: Consultation!
 
   # The sources related to the sourceable.
   sources(
@@ -6365,6 +6364,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
 
   # Explenation.
   comment: String
+  step: Consultation!
   votes(
     # Returns the elements in the list that come after the specified cursor.
     after: String

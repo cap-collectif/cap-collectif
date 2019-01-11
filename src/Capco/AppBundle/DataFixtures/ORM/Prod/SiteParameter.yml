@@ -32,7 +32,8 @@ Capco\AppBundle\Entity\SiteParameter:
   SiteParameter8:
     keyname: footer.text.body
     category: pages.footer
-    value: Ce site participatif a été réalisé grâce à la plateforme innovante de participation <a href="http://www.cap-collectif.com">Cap Collectif</a>, selon les principes de la <a href="http://fr.wikipedia.org/wiki/Gouvernement_ouvert">démocratie ouverte</a>.
+    value:
+      Ce site participatif a été réalisé grâce à la plateforme innovante de participation <a alt="Cap Collectif" href="http://www.cap-collectif.com">Cap Collectif</a>, selon les principes de la <a href="http://fr.wikipedia.org/wiki/Gouvernement_ouvert" alt="Wikipédia - Démocratie ouverte">démocratie ouverte</a>.
     position: 210
     type: 1
   SiteParameter99:
@@ -431,9 +432,3 @@ Capco\AppBundle\Entity\SiteParameter:
     position: 3
     type: 3
     helpText: reserved-for-ad-scripts  script-desactivatable-by-user
-  SiteParameterProposalPagination:
-    keyname: proposal.pagination
-    category: settings.performance
-    value: 50
-    position: 1
-    type: 2

@@ -65,7 +65,7 @@ export class RegistrationModal extends React.Component<Props> {
           aria-labelledby="contained-modal-title-lg"
           enforceFocus={false}>
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-lg" componentClass="h1">
+            <Modal.Title id="contained-modal-title-lg">
               {<FormattedMessage id="charter" />}
             </Modal.Title>
           </Modal.Header>
@@ -88,7 +88,7 @@ export class RegistrationModal extends React.Component<Props> {
         aria-labelledby="contained-modal-title-lg"
         enforceFocus={false}>
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg" componentClass="h1">
+          <Modal.Title id="contained-modal-title-lg">
             {<FormattedMessage id="global.register" />}
           </Modal.Title>
         </Modal.Header>

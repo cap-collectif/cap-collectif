@@ -10,7 +10,6 @@ import { register as onSubmit, displayChartModal } from '../../../redux/modules/
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
 import ModalRegistrationFormQuestions from './ModalRegistrationFormQuestions';
-import { validateResponses } from '../../../utils/responsesHelper';
 
 type Props = {|
   ...FormProps,
@@ -21,6 +20,7 @@ type Props = {|
   addZipcodeField: boolean,
   addCaptchaField: boolean,
   addConsentExternalCommunicationField: boolean,
+  addConsentInternalCommunicationField: boolean,
   userTypes: Array<Object>,
   cguLink: string,
   cguName: string,
@@ -30,25 +30,8 @@ type Props = {|
   dispatch: Dispatch,
 |};
 
-type FormValues = {
-  username: string,
-  email: string,
-  plainPassword: string,
-  charte: string,
-  captcha: boolean,
-  responses: Array<Object>,
-  questions: Array<Object>,
-};
-
-const getCustomFieldsErrors = (values: FormValues, props: Props) =>
-  values.questions && values.responses
-    ? // TODO: remove this parameter from the function or create a specific traduction key
-      validateResponses(values.questions, values.responses, 'reply', props.intl).responses
-    : [];
-
-export const validate = (values: FormValues, props: Props) => {
+export const validate = (values: Object, props: Object) => {
   const errors = {};
-
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
   }
@@ -71,8 +54,7 @@ export const validate = (values: FormValues, props: Props) => {
   ) {
     errors.captcha = 'registration.constraints.captcha.invalid';
   }
-
-  return { ...errors, responses: getCustomFieldsErrors(values, props) };
+  return errors;
 };
 
 export const form = 'registration-form';
@@ -89,6 +71,7 @@ export class RegistrationForm extends React.Component<Props> {
       addZipcodeField,
       addUserTypeField,
       addConsentExternalCommunicationField,
+      addConsentInternalCommunicationField,
       userTypes,
       handleSubmit,
       addCaptchaField,
@@ -252,6 +235,16 @@ export class RegistrationForm extends React.Component<Props> {
           labelClassName="font-weight-normal"
           children={chartLinkComponent}
         />
+        {addConsentInternalCommunicationField && (
+          <Field
+            id="consent-internal-communication"
+            name="consentInternalCommunication"
+            component={renderComponent}
+            type="checkbox"
+            labelClassName="font-weight-normal"
+            children={<FormattedMessage id="receive-news-and-results-of-the-consultations" />}
+          />
+        )}
         {addConsentExternalCommunicationField && (
           <Field
             id="consent-external-communication"
@@ -283,6 +276,7 @@ const mapStateToProps = (state: State) => ({
   addUserTypeField: state.default.features.user_type,
   addZipcodeField: state.default.features.zipcode_at_register,
   addConsentExternalCommunicationField: state.default.features.consent_external_communication,
+  addConsentInternalCommunicationField: state.default.features.consent_internal_communication,
   userTypes: state.default.userTypes,
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],

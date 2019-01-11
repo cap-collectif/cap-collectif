@@ -147,9 +147,7 @@ class ReactBootstrapInput extends React.Component<Props> {
       props.placeholder = intl.formatMessage({ id: props.placeholder });
     }
 
-    const ariaDescribedBy = `${props.id ? `${props.id}-error` : ''} ${
-      props.help && props.id ? `${props.id}-help` : ''
-    }`;
+    const ariaDescribedBy = `${props.id ? props.id : ''}-error`;
     const ariaInvalid = !!errors;
 
     if (type === 'editor') {
@@ -427,15 +425,11 @@ class ReactBootstrapInput extends React.Component<Props> {
           choices={this.props.choices}
           helpPrint={helpPrint}
         />
-        {props.help && (
-          <HelpBlock id={`${props.help && props.id ? `${props.id}-help` : ''}`}>
-            {props.help}
-          </HelpBlock>
-        )}
+        {props.help && <HelpBlock>{props.help}</HelpBlock>}
         {props.description && <ButtonBody body={props.description || ''} />}
         {this.renderInputGroup(props)}
         {props.errors && (
-          <span className="error-block hidden-print" id={`${props.id ? `${props.id}-error` : ''}`}>
+          <span className="error-block hidden-print" id={`${props.id ? props.id : ''}-error`}>
             {props.errors}
           </span>
         )}

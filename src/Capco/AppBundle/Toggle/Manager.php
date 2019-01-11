@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Toggle;
 
 use Qandidate\Toggle\ContextFactory;
@@ -42,6 +43,7 @@ class Manager
         'login_openid',
         'consultation_plan',
         'display_map',
+        'consent_internal_communication',
     ];
 
     protected $context;

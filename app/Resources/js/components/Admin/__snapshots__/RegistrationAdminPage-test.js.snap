@@ -210,6 +210,23 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
     <span>
       <strong>
         <FormattedMessage
+          id="request-consent-to-receive-information-related-to-the-platform"
+          values={Object {}}
+        />
+      </strong>
+    </span>
+  </div>
+  <div
+    className="d-flex align-items-center mb-15 mt-15"
+  >
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <span>
+      <strong>
+        <FormattedMessage
           id="registration.enable_consent_external_communication.title"
           values={Object {}}
         />
@@ -463,6 +480,23 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       variables={Object {}}
     />
   </Well>
+  <div
+    className="d-flex align-items-center mb-15 mt-15"
+  >
+    <Toggle
+      checked={false}
+      icons={true}
+      onChange={[Function]}
+    />
+    <span>
+      <strong>
+        <FormattedMessage
+          id="request-consent-to-receive-information-related-to-the-platform"
+          values={Object {}}
+        />
+      </strong>
+    </span>
+  </div>
   <div
     className="d-flex align-items-center mb-15 mt-15"
   >

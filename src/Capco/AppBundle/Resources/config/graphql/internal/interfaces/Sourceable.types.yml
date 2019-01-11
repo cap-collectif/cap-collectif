@@ -8,8 +8,6 @@ Sourceable:
         type: 'ID!'
       contribuable:
         type: 'Boolean!'
-      step:
-        type: 'InternalConsultation!'
       sources:
         description: 'The sources related to the sourceable.'
         type: 'SourceConnection!'

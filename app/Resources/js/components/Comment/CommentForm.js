@@ -136,7 +136,7 @@ export class CommentForm extends React.Component<Props, State> {
   };
 
   renderAnonymous() {
-    const { user, submitting, pristine, invalid, intl } = this.props;
+    const { user, submitting, pristine, invalid } = this.props;
 
     if (!user) {
       return (
@@ -170,18 +170,16 @@ export class CommentForm extends React.Component<Props, State> {
               <Field
                 type="text"
                 name="authorName"
-                id="authorName"
                 component={renderComponent}
-                label={intl.formatMessage({ id: 'global.fullname' })}
-                help={intl.formatMessage({ id: 'comment.public_name' })}
+                label={<FormattedMessage id="global.fullname" />}
+                help={<FormattedMessage id="comment.public_name" />}
               />
               <Field
                 type="email"
                 name="authorEmail"
-                id="authorEmail"
                 component={renderComponent}
-                label={intl.formatMessage({ id: 'global.hidden_email' })}
-                help={intl.formatMessage({ id: 'comment.email_info' })}
+                label={<FormattedMessage id="global.hidden_email" />}
+                help={<FormattedMessage id="comment.email_info" />}
               />
               <Button
                 disabled={pristine || invalid || submitting}

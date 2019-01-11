@@ -94,17 +94,35 @@ exports[`<CommentForm /> should render correctly 1`] = `
               </p>
               <Field
                 component={[Function]}
-                help="comment.public_name"
-                id="authorName"
-                label="global.fullname"
+                help={
+                  <FormattedMessage
+                    id="comment.public_name"
+                    values={Object {}}
+                  />
+                }
+                label={
+                  <FormattedMessage
+                    id="global.fullname"
+                    values={Object {}}
+                  />
+                }
                 name="authorName"
                 type="text"
               />
               <Field
                 component={[Function]}
-                help="comment.email_info"
-                id="authorEmail"
-                label="global.hidden_email"
+                help={
+                  <FormattedMessage
+                    id="comment.email_info"
+                    values={Object {}}
+                  />
+                }
+                label={
+                  <FormattedMessage
+                    id="global.hidden_email"
+                    values={Object {}}
+                  />
+                }
                 name="authorEmail"
                 type="email"
               />
