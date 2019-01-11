@@ -198,6 +198,7 @@ Scenario: Logged in user wants to vote for an argument on a version then delete 
 Scenario: Logged in user wants to vote for his own argument on a version
   Given I am logged in as user
   And I go to a version
+  And I wait 1 seconds
   Then the argument vote button should be disabled
 
 @security
