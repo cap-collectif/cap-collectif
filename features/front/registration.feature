@@ -69,21 +69,3 @@ Scenario: Anonymous wants to register with the consent of external communication
   And I press "global.register"
   Then I wait 6 seconds
   Then I can see I am logged in as "Naruto42"
-
-@database
-Scenario: Anonymous wants to register with the consent of internal communication
-  Given feature "registration" is enabled
-  Given feature "consent_internal_communication" is enabled
-  And I visited "home page"
-  When I press "global.registration"
-  And I fill in the following:
-  | username             | Naruto42             |
-  | email                | naruto42@gmail.com   |
-  | password             | narutoisthebest      |
-  | responses[0].value   | plop                 |
-  And I select "Sangohan" from "responses[2].value"
-  And I check "charte"
-  And I check "consentInternalCommunication"
-  And I press "global.register"
-  Then I wait 6 seconds
-  Then I can see I am logged in as "Naruto42"

@@ -139,20 +139,6 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <div className="d-flex align-items-center mb-15 mt-15">
           <Toggle
             icons
-            checked={features.consent_internal_communication}
-            onChange={() =>
-              onToggle('consent_internal_communication', !features.consent_internal_communication)
-            }
-          />
-          <span>
-            <strong>
-              <FormattedMessage id="request-consent-to-receive-information-related-to-the-platform" />
-            </strong>
-          </span>
-        </div>
-        <div className="d-flex align-items-center mb-15 mt-15">
-          <Toggle
-            icons
             checked={features.consent_external_communication}
             onChange={() =>
               onToggle('consent_external_communication', !features.consent_external_communication)

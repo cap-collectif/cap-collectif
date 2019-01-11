@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Model;
 
 interface Sourceable
@@ -14,4 +15,6 @@ interface Sourceable
     public function getOpinionType();
 
     public function incrementSourcesCount();
+
+    public function getStep();
 }
