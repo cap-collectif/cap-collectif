@@ -109,7 +109,6 @@ class ProposalResolver implements ResolverInterface
 
         $proposals = $this->proposalRepository->findBy([
             'draft' => true,
-            'deletedAt' => null,
             'author' => $user,
             'proposalForm' => $proposalForm,
         ]);

@@ -64,7 +64,7 @@ class CookieMonster {
   };
 
   onDocumentScroll = (event: Event) => {
-    if (window.location.pathname === '/confidentialite') {
+    if (window.location.pathname === '/cookies-management') {
       return;
     }
 
@@ -114,7 +114,7 @@ class CookieMonster {
       this.considerFullConsent();
       return;
     }
-    if (window.location.pathname === '/confidentialite' && target.id !== 'main-navbar') {
+    if (window.location.pathname === '/cookies-management' && target.id !== 'main-navbar') {
       return;
     }
 

@@ -9,6 +9,7 @@ describe('<ShieldPage />', () => {
     onSubmit: jest.fn(),
     submitting: false,
     chartBody: 'Super charte !!',
+    loginWithOpenId: false,
   };
 
   it('renders with registration enabled', () => {

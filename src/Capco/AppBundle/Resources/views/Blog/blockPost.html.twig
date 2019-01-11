@@ -24,7 +24,7 @@
         </a>
     {%  endif %}
     <div class="media-body">
-        <h2 class="media-title" style="font-size: 24px"><a href="{{ path('app_blog_show', {'slug': post.slug}) }}" alt="{{ post.title }}">{{ post.title | jolitypo() }}</a></h2>
+        <h2 class="media-title" style="font-size: 24px"><a href="{{ path('app_blog_show', {'slug': post.slug}) }}">{{ post.title | jolitypo() }}</a></h2>
         <p class="excerpt  media--news__meta">
             {% for theme in post.themes %}
                 <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}"><span class="label label-default">{{ theme.title }}</span></a>
