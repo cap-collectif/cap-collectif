@@ -36,10 +36,10 @@ services:
       $debug: '%kernel.debug%'
       $enableCache: false
 
-  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalStatusDataloader:
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalStatusDataLoader:
     autowire: true
     arguments:
-      $cachePrefix: ProposalStatusDataloader
+      $cachePrefix: ProposalStatusDataLoader
       $cacheTtl: 60
       $debug: '%kernel.debug%'
       $enableCache: false
@@ -74,10 +74,10 @@ services:
       $debug: '%kernel.debug%'
       $enableCache: false
 
-  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataloader:
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader:
     autowire: true
     arguments:
-      $cachePrefix: ProposalCurrentVotableStepDataloader
+      $cachePrefix: ProposalCurrentVotableStepDataLoader
       $cacheTtl: 120
       $debug: '%kernel.debug%'
       $enableCache: false

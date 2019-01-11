@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Capco\AppBundle\GraphQL\Dataloader\Proposal;
+namespace spec\Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;

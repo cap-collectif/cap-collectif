@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataloader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
 
 class ProposalController extends Controller
 {
@@ -67,7 +67,7 @@ class ProposalController extends Controller
                 ? $request->headers->get('referer')
                 : $urlResolver->getStepUrl($collectStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
-        $votableStep = $this->get(ProposalCurrentVotableStepDataloader::class)->resolve($proposal);
+        $votableStep = $this->get(ProposalCurrentVotableStepDataLoader::class)->resolve($proposal);
         $currentVotableStepId = $votableStep ? $votableStep->getId() : null;
 
         return [
