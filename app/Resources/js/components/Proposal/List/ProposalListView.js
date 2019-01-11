@@ -73,6 +73,7 @@ type Props = {
   viewer: ?ProposalListView_viewer,
   visible: boolean,
   view: 'mosaic' | 'table',
+  count: number,
 };
 type State = {
   isRefetching: boolean,
@@ -120,7 +121,7 @@ export class ProposalListView extends React.Component<Props, State> {
   };
 
   render() {
-    const { visible, step, viewer, view } = this.props;
+    const { visible, step, viewer, view, count } = this.props;
 
     if (!visible) {
       return null;
@@ -135,7 +136,7 @@ export class ProposalListView extends React.Component<Props, State> {
     }
 
     // $FlowFixMe
-    return <ProposalListViewPaginated step={step} viewer={viewer} view={view} />;
+    return <ProposalListViewPaginated count={count} step={step} viewer={viewer} view={view} />;
   }
 }
 

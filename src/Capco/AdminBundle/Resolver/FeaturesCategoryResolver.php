@@ -25,6 +25,7 @@ class FeaturesCategoryResolver
         'pages.charter' => ['conditions' => [], 'features' => []],
         'pages.shield' => ['conditions' => [], 'features' => ['shield_mode']],
         'settings.global' => ['conditions' => [], 'features' => []],
+        'settings.performance' => ['conditions' => [], 'features' => []],
         'settings.modules' => [
             'conditions' => [],
             'features' => [
@@ -92,10 +93,12 @@ class FeaturesCategoryResolver
                     $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')
                 ) {
                     $toggles[$feature] = $this->manager->isActive($feature);
+
                     continue;
                 }
                 if ('display_map' !== $feature) {
                     $toggles[$feature] = $this->manager->isActive($feature);
+
                     continue;
                 }
             }
