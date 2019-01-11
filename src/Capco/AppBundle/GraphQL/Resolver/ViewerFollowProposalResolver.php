@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalviewerFollowDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoader;
 use GraphQL\Executor\Promise\Promise;
 
 class ViewerFollowProposalResolver implements ResolverInterface
@@ -16,7 +16,7 @@ class ViewerFollowProposalResolver implements ResolverInterface
 
     public function __construct(
         LoggerInterface $logger,
-        ProposalviewerFollowDataLoader $proposalviewerFollowDataLoader
+        ProposalViewerIsFollowingDataLoader $proposalviewerFollowDataLoader
     ) {
         $this->logger = $logger;
         $this->proposalviewerFollowDataLoader = $proposalviewerFollowDataLoader;

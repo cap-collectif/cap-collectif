@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalviewerFollowDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigurationDataLoader;
 
 class UnfollowProposalMutation implements MutationInterface
@@ -26,7 +26,7 @@ class UnfollowProposalMutation implements MutationInterface
         EntityManagerInterface $em,
         ProposalRepository $proposalRepository,
         FollowerRepository $followerRepository,
-        ProposalviewerFollowDataLoader $viewerFollowDataLoader,
+        ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader,
         ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader
     ) {
         $this->em = $em;

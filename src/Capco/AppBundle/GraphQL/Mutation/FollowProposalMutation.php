@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalviewerFollowDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigurationDataLoader;
 
 class FollowProposalMutation implements MutationInterface
@@ -27,7 +27,7 @@ class FollowProposalMutation implements MutationInterface
         EntityManagerInterface $em,
         ProposalRepository $proposalRepository,
         FollowerRepository $followerRepository,
-        ProposalviewerFollowDataLoader $viewerFollowDataLoader,
+        ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader,
         ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader
     ) {
         $this->em = $em;
