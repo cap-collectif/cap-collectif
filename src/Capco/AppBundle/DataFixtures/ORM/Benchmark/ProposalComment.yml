@@ -6,3 +6,31 @@ Capco\AppBundle\Entity\ProposalComment:
     body: <text(300)>
     createdAt: '<dateTimeBetween("-2 days", "now")>'
     publishedAt: <(new \DateTime())>
+  proposal2Comment{1..1000}:
+    id: 'proposal2Comment<current()>'
+    proposal: '@proposal<numberBetween(101, 200)>'
+    Author: '@voter<current()>'
+    body: <text(300)>
+    createdAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: <(new \DateTime())>
+  proposal3Comment{1..1000}:
+    id: 'proposal3Comment<current()>'
+    proposal: '@proposal<numberBetween(201, 300)>'
+    Author: '@voter<current()>'
+    body: <text(300)>
+    createdAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: <(new \DateTime())>
+  proposal4Comment{1..1000}:
+    id: 'proposal4Comment<current()>'
+    proposal: '@proposal<numberBetween(301, 400)>'
+    Author: '@voter<current()>'
+    body: <text(300)>
+    createdAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: <(new \DateTime())>
+  proposal5Comment{1..1000}:
+    id: 'proposal5Comment<current()>'
+    proposal: '@proposal<numberBetween(401, 500)>'
+    Author: '@voter<current()>'
+    body: <text(300)>
+    createdAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: <(new \DateTime())>

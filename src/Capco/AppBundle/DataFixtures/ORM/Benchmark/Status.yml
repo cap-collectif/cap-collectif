@@ -1,0 +1,13 @@
+Capco\AppBundle\Entity\Status:
+  status1:
+    id: status1
+    name: En cours
+    position: 0
+    step: '@collectstep1'
+    color: info
+  status2:
+    id: status2
+    name: Approuvé
+    position: 1
+    step: '@collectstep1'
+    color: success

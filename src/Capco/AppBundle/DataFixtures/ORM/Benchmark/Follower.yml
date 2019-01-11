@@ -1,7 +1,27 @@
 Capco\AppBundle\Entity\Follower:
   # Proposal
   followerProposal1{1..500}:
-    proposal: '@proposal1'
+    proposal: '@proposal<numberBetween(1, 100)>'
     user: '@voter<current()>'
     followedAt: <dateTimeBetween('-50 days', 'now')>
     notifiedOf: 'ALL'
+  followerProposal2{1..500}:
+    proposal: '@proposal<numberBetween(101, 200)>'
+    user: '@voter<current()>'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 'ESSENTIAL'
+  followerProposal3{1..500}:
+    proposal: '@proposal<numberBetween(201, 300)>'
+    user: '@voter<current()>'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 'ESSENTIAL'
+  followerProposal4{1..500}:
+    proposal: '@proposal<numberBetween(301, 400)>'
+    user: '@voter<current()>'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 'ALL'
+  followerProposal5{1..500}:
+    proposal: '@proposal<numberBetween(401, 500)>'
+    user: '@voter<current()>'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 'MINIMAL'

@@ -38,6 +38,8 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/MultipleChoiceQuestion.yml',
             __DIR__ . '/QuestionnaireAbstractQuestion.yml',
             __DIR__ . '/QuestionChoice.yml',
+            __DIR__ . '/ProposalCategory.yml',
+            __DIR__ . '/Status.yml',
             __DIR__ . '/Proposal.yml',
             __DIR__ . '/Reply.yml',
             // __DIR__ . '/Post.yml',

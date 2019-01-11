@@ -1,0 +1,17 @@
+Capco\AppBundle\Entity\ProposalCategory:
+  pCategory1:
+    id: pCategory1
+    name: Catégorie 1
+    form: '@proposalForm1'
+  pCategory2:
+    id: pCategory2
+    name: Catégorie 2
+    form: '@proposalForm1'
+  pCategory3:
+    id: pCategory3
+    name: Catégorie 3
+    form: '@proposalForm1'
+  pCategory4:
+    id: pCategory4
+    name: Catégorie 4
+    form: '@proposalForm1'

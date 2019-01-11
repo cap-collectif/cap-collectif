@@ -58,6 +58,13 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
 
         $this->populateElasticsearch($output);
 
+        $this->getContainer()
+            ->get('doctrine')
+            ->getManager()
+            ->clear();
+
+        $this->recalculateCounters($output);
+
         $output->writeln('Load benchmark data completed');
     }
 
@@ -97,6 +104,18 @@ class LoadBenchmarkDataCommand extends ContainerAwareCommand
         $this->runCommands(
             [
                 'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
+            ],
+            $output
+        );
+    }
+
+    protected function recalculateCounters(OutputInterface $output)
+    {
+        $this->runCommands(
+            [
+                'capco:compute:users-counters' => ['--force' => true],
+                'capco:compute:counters' => ['--force' => true],
+                'capco:compute:rankings' => [],
             ],
             $output
         );
