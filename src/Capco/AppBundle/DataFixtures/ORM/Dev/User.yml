@@ -214,6 +214,7 @@ Capco\UserBundle\Entity\User:
     email: user_not_confirmed@test.com
     userType: '@UserType1'
     plainPassword: user_not_confirmed
+    phone: '+33628353289'
     roles:
       - 'ROLE_USER'
     media: null
