@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command\Nantes;
 
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -25,6 +26,7 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
     protected const CONCERTATION_FILE = 'concertations.csv';
     protected const DEMARCHE_FILE = 'demarches.csv';
     protected const CONTRIBUTION_FILE = 'contributions.csv';
+    protected const ACTUALITY_FILE = 'actualites.csv';
 
     protected const CONCERTATION_HEADER = [
         'id',
@@ -64,6 +66,22 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
         'lastPublishedDate',
     ];
 
+    protected const ACTUALITY_HEADER = [
+        'id',
+        'subtitle',
+        'catchphrase',
+        'description',
+        'rate',
+        'thumbnail',
+        'image',
+        'userUuid',
+        'districtUuid',
+        'concertationUuid',
+        'files',
+        'createdAt',
+        'lastPublishedDate',
+    ];
+
     protected const PROJECTS = [
         self::DEMARCHE_FILE => self::DEMARCHE_HEADER,
         self::CONCERTATION_FILE => self::CONCERTATION_HEADER,
@@ -74,6 +92,7 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
 
     protected $projects = [];
     protected $proposals = [];
+    protected $actualities = [];
 
     public function slugify($text)
     {
@@ -116,6 +135,7 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
             ->getConnection()
             ->getConfiguration()
             ->setSQLLogger(null);
+        $this->actualities = $this->createActualities();
         $this->proposals = $this->createProposals();
     }
 
@@ -159,6 +179,7 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
                     $this->projects[$row['id']] = $projects[0];
                     $collectStep->setProposalForm($proposalForm);
                 }
+                $this->importActualities($output, $row['id'], $projects[0]->getId());
                 $this->importProposals($output, $row['id'], $projects[0]->getId());
             } elseif (\count($projects) > 1) {
                 foreach ($projects as $k => $project) {
@@ -174,6 +195,7 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
                             $this->projects[$row['id']] = $realProject;
                             $collectStep->setProposalForm($proposalForm);
                         }
+                        $this->importActualities($output, $row['id'], $realProject->getId());
                         $this->importProposals($output, $row['id'], $realProject->getId());
                         $alreadyDone[] = $slug;
                     }
@@ -255,6 +277,7 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
                 $progress->advance();
                 ++$count;
             }
+            $this->em->flush();
             $progress->finish();
             $output->writeln("\n<info>Successfully imported proposals.</info>");
         } else {
@@ -284,6 +307,75 @@ class NantesImportContributionsCommand extends ContainerAwareCommand
         $output->writeln('<info>Successfully added "' . $formName . '" form.</info>');
 
         return $proposalForm;
+    }
+
+    protected function createActualities(): array
+    {
+        $csv = Reader::createFromPath(__DIR__ . '/' . self::ACTUALITY_FILE);
+        $csv->setDelimiter(';');
+        $iterator = $csv->setOffset(1)->fetchAssoc(self::ACTUALITY_HEADER);
+        $actualities = [];
+        foreach ($iterator as $item) {
+            $actualities[] = $item;
+        }
+        $actualities = $this->arrayGroupBy($actualities, function ($i) {
+            return $i['concertationUuid'];
+        });
+
+        return $actualities;
+    }
+
+    protected function importActualities(
+        OutputInterface $output,
+        string $oldProjectId,
+        string $projectId
+    ): void {
+        $project = $this->em->getRepository(Project::class)->find($projectId);
+        if ($project && isset($this->actualities[$oldProjectId])) {
+            $output->writeln(
+                "\n<info>Importing actualities for project \"" .
+                    $project->getTitle() .
+                    '"...</info>'
+            );
+            $actualities = $this->actualities[$oldProjectId];
+            $progress = new ProgressBar($output, \count($actualities));
+            $count = 1;
+            foreach ($actualities as $actuality) {
+                $author = $this->em->getRepository(User::class)->findOneBy([
+                    'email' => 'dialogue@nantesmetropole.fr',
+                ]);
+                $date = \date_parse($actuality['lastPublishedDate']);
+                $date = new \DateTime($date['year'] . '-' . $date['month'] . '-' . $date['day']);
+                if ($author) {
+                    $actu = (new Post())
+                        ->setTitle(html_entity_decode($actuality['subtitle']))
+                        ->addAuthor($author)
+                        ->setPublishedAt($date)
+                        ->setIsPublished(true)
+                        ->addProject($project)
+                        ->setBody(
+                            html_entity_decode(
+                                $actuality['catchphrase'] . ' ' . $actuality['description']
+                            )
+                        );
+
+                    $this->em->persist($actu);
+                    if (0 === $count % self::PROPOSAL_BATCH_SIZE) {
+                        $this->printMemoryUsage($output);
+                        $this->em->flush();
+                    }
+                    $progress->advance();
+                    ++$count;
+                }
+            }
+            $this->em->flush();
+            $progress->finish();
+            $output->writeln("\n<info>Successfully imported actualities.</info>");
+        } else {
+            $output->writeln(
+                "\n<info>No actualities found for project \"" . $project->getTitle() . '"</info>'
+            );
+        }
     }
 
     private function disableListeners(OutputInterface $output): void
