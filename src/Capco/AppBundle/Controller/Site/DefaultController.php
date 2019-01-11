@@ -82,7 +82,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/confidentialite", name="app_confidentialite")
+     * @Route("/cookies-management", name="app_confidentialite")
      * @Template("CapcoAppBundle:Default:confidentialite.html.twig")
      */
     public function confidentialiteAction(Request $request)

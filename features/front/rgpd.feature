@@ -24,29 +24,29 @@ Scenario: An anonymous wants to show cookie page
   Given I visited "home page" with cookies not accepted
   And I should see "performance-cookies-alert"
   Then I follow "cookies-setting"
-  And I should be redirected to "/confidentialite"
+  And I should be redirected to "/cookies-management"
   When I click the "#main" element
   Then I should see "performance-cookies-alert"
 
 Scenario: An anonymous wants to toggle cookies performance
-  Given I visited "confidentialite page" with cookies not accepted
+  Given I visited "cookies page" with cookies not accepted
   And I should not see "step.vote_type.disabled"
   Then I toggle performance cookies
   And I should see "step.vote_type.disabled"
   And I should not see "performance-cookies-alert"
   Then I go to a proposal with lot of comments
-  And I visited "confidentialite page" with cookies not accepted
+  And I visited "cookies page" with cookies not accepted
   And I should see "step.vote_type.disabled"
   And I should not see "performance-cookies-alert"
 
 Scenario: An anonymous wants to toggle cookies advertising
-  Given I visited "confidentialite page" with cookies not accepted
+  Given I visited "cookies page" with cookies not accepted
   And I should not see "step.vote_type.disabled"
   Then I toggle advertising cookies
   And I should see "step.vote_type.disabled"
   And I should not see "performance-cookies-alert"
   Then I go to a proposal with lot of comments
-  And I visited "confidentialite page" with cookies not accepted
+  And I visited "cookies page" with cookies not accepted
   And I should see "step.vote_type.disabled"
   And I should not see "performance-cookies-alert"
 
@@ -55,7 +55,7 @@ Scenario: An anonymous accept cookies then should have one created
   And I should not see a cookie named "hasFullConsent"
   And I should see "performance-cookies-alert"
   Then I follow "cookies-setting"
-  And I should be redirected to "/confidentialite"
+  And I should be redirected to "/cookies-management"
   And I click on button "#cookie-consent"
   Then I should not see "performance-cookies-alert"
   Then I should see a cookie named "hasFullConsent"
@@ -65,6 +65,6 @@ Scenario: An anonymous accept cookies then change is mind and the cookies should
   And I should not see "performance-cookies-alert"
   And I should see a cookie named "hasFullConsent"
   And I create a cookie named "_pk_id.2733"
-  And I visited "confidentialite page"
+  And I visited "cookies page"
   And I toggle performance cookies
   Then I should not see a cookie named "_pk_id.2733"

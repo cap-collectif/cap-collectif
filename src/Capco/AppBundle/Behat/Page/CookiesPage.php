@@ -1,17 +1,13 @@
 <?php
+
 namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
-class ConfidentialitePage extends Page
+class CookiesPage extends Page
 {
     use PageTrait;
-
-    /**
-     * @var string
-     */
-    protected $path = '/confidentialite';
 
     public $elements = [
         'toggle performance' =>
@@ -19,6 +15,11 @@ class ConfidentialitePage extends Page
         'toggle advertising' =>
             '#cookies-advertising > div > div > div.react-toggle > div.react-toggle-track',
     ];
+
+    /**
+     * @var string
+     */
+    protected $path = '/cookies-management';
 
     public function togglePerformance()
     {
