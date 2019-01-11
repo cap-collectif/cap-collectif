@@ -29,7 +29,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('ProposalPageApp', {'props': {'currentVotableStepId': currentVotableStepId, 'proposalId': proposal.id|toGlobalId('Proposal'), 'currentStepId': currentStep.id|toGlobalId('CollectStep') }}) }}
+    {{ react_render_component('ProposalPageApp', {'props': {'currentVotableStepId': currentVotableStepId, 'proposalId': proposal.id|toGlobalId('Proposal') }}) }}
 {% endblock %}
 
 {% block javascripts %}

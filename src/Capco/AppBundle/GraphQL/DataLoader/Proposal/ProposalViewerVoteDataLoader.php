@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Psr\Log\LoggerInterface;
@@ -20,6 +21,7 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
     private $proposalSelectionVoteRepository;
     private $globalIdResolver;
     private $tokenStorage;
+    private $batch = false;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -69,6 +71,23 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
                         true
                     )
             );
+        }
+
+        if (!$this->batch) {
+            $results = [];
+            foreach ($keys as $key) {
+                $this->logger->info(
+                    __METHOD__ . ' called with ' . json_encode($this->serializeKey($key))
+                );
+
+                $results[] = $this->resolveWithoutbatching(
+                    $key['proposal'],
+                    $key['stepId'],
+                    $key['user']
+                );
+            }
+
+            return $this->getPromiseAdapter()->createAll($results);
         }
 
         $stepId = $keys[0]['stepId'];
@@ -133,5 +152,30 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
             'stepId' => $key['stepId'],
             'user' => $key['user']->getId(),
         ];
+    }
+
+    private function resolveWithoutbatching(
+        Proposal $proposal,
+        string $stepId,
+        $user
+    ): ?AbstractVote {
+        $step = $this->globalIdResolver->resolve($stepId, $user);
+
+        if ($step instanceof CollectStep) {
+            return $this->proposalCollectVoteRepository->getByProposalAndStepAndUser(
+                $proposal,
+                $step,
+                $user
+            );
+        }
+        if ($step instanceof SelectionStep) {
+            return $this->proposalSelectionVoteRepository->getByProposalAndStepAndUser(
+                $proposal,
+                $step,
+                $user
+            );
+        }
+
+        return null;
     }
 }

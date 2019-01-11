@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 {
+    public $batch = false;
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
     private $globalIdResolver;
@@ -70,6 +71,24 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
                     )
             );
         }
+
+        if (false == $this->batch) {
+            $results = [];
+            foreach ($keys as $key) {
+                $this->logger->info(
+                    __METHOD__ . ' called with ' . json_encode($this->serializeKey($key))
+                );
+
+                $results[] = $this->resolveWithourBatch(
+                    $key['proposal'],
+                    $key['stepId'],
+                    $key['user']
+                );
+            }
+
+            return $this->getPromiseAdapter()->createAll($results);
+        }
+
         $stepId = $keys[0]['stepId'];
         $user = $keys[0]['user'];
         $step = $this->globalIdResolver->resolve(
@@ -131,5 +150,29 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
             'stepId' => $key['stepId'],
             'user' => $key['user']->getId(),
         ];
+    }
+
+    private function resolveWithourBatch(Proposal $proposal, string $stepId, $user): bool
+    {
+        $step = $this->globalIdResolver->resolve($stepId, $user);
+
+        if ($step instanceof CollectStep) {
+            return null !==
+                $this->proposalCollectVoteRepository->getByProposalAndStepAndUser(
+                    $proposal,
+                    $step,
+                    $user
+                );
+        }
+        if ($step instanceof SelectionStep) {
+            return null !==
+                $this->proposalSelectionVoteRepository->getByProposalAndStepAndUser(
+                    $proposal,
+                    $step,
+                    $user
+                );
+        }
+
+        return false;
     }
 }

@@ -1067,7 +1067,10 @@ trait ProposalStepsTrait
     {
         $this->getSession()
             ->getPage()
-            ->find('css', '#proposal2-proposal-vote__private .form-group .react-toggle')
+            ->find(
+                'css',
+                '#UHJvcG9zYWw6cHJvcG9zYWwy-proposal-vote__private .form-group .react-toggle'
+            )
             ->click();
     }
 
@@ -1108,8 +1111,9 @@ trait ProposalStepsTrait
      */
     public function theProposalVoteButtonMustBeDisabled(string $id = null)
     {
-        $id = $id ?: $this->getProposalId();
-        $this->getSession()->wait(2000, "$('" . $id . "').length > 0");
+        $id = GlobalId::toGlobalId('Proposal', $id) ?: $this->getProposalId();
+
+        $this->getSession()->wait(2000, "$('${id}').length > 0");
 
         $button = $this->getCurrentPage()->getVoteButton($id);
         Assert::assertTrue(
@@ -1143,7 +1147,7 @@ trait ProposalStepsTrait
     public function iShouldSeeTheProposalVoteLimitedTooltip()
     {
         $this->assertElementContainsText(
-            '#vote-tooltip-proposal-proposal18',
+            '#vote-tooltip-proposal-UHJvcG9zYWw6cHJvcG9zYWwxOA==',
             'proposal.vote.popover.limit_reached_title'
         );
     }
@@ -1154,7 +1158,7 @@ trait ProposalStepsTrait
     public function iShouldSeeTheProposalVoteTooltip()
     {
         $this->assertElementContainsText(
-            '#vote-tooltip-proposal-proposal8',
+            '#vote-tooltip-proposal-UHJvcG9zYWw6cHJvcG9zYWw4',
             'proposal.vote.popover.not_enough_credits_text'
         );
     }
@@ -1559,19 +1563,19 @@ trait ProposalStepsTrait
     protected function getProposalId(): string
     {
         if ($this->proposalPageIsOpen() || $this->selectionStepWithSimpleVoteIsOpen()) {
-            return 'proposal2';
+            return 'UHJvcG9zYWw6cHJvcG9zYWwy';
         }
         if (
             $this->proposalPageWithBudgetVoteIsOpen() ||
             $this->selectionStepWithBudgetVoteIsOpen()
         ) {
-            return 'proposal8';
+            return 'UHJvcG9zYWw6cHJvcG9zYWw4';
         }
         if ($this->selectionStepNotYetOpenIsOpen() || $this->proposalNotYetVotablePageIsOpen()) {
-            return 'proposal10';
+            return 'UHJvcG9zYWw6cHJvcG9zYWwxMA==';
         }
         if ($this->selectionStepClosedIsOpen() || $this->proposalNotVotableAnymoreIsOpen()) {
-            return 'proposal11';
+            return 'UHJvcG9zYWw6cHJvcG9zYWwxMQ==';
         }
 
         throw new \Exception('Unknown proposalId');

@@ -87,6 +87,7 @@ class AddProposalVoteMutation implements MutationInterface
         if (!$step) {
             throw new UserError('Unknown step with id: ' . $input->offsetGet('stepId'));
         }
+
         /** @var AbstractStep $step */
         if (!$this->resolver->viewerMeetsTheRequirementsResolver($user, $step)) {
             throw new UserError('You dont meets all the requirements.');

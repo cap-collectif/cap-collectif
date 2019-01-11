@@ -11,7 +11,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\MapTokenRepository;
@@ -177,7 +176,7 @@ class GlobalIdResolver
             $error = "Could not resolve node with uuid ${uuid}";
             $this->logger->warning($error);
 
-            throw new UserError($error);
+            return null;
         }
 
         return $this->viewerCanSee($node, $user) ? $node : null;

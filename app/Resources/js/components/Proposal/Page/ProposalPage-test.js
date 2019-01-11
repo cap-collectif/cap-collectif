@@ -22,7 +22,6 @@ describe('<ProposalPage />', () => {
   };
 
   const proposalId = '41';
-  const currentStepId = 'collectStep2';
 
   it('should render a proposal page', () => {
     const wrapper = shallow(
@@ -30,7 +29,6 @@ describe('<ProposalPage />', () => {
         {...props}
         isAuthenticated
         currentVotableStepId={null}
-        currentStepId={currentStepId}
         proposalId={proposalId}
       />,
     );

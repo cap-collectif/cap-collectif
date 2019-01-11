@@ -62,7 +62,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         "hasVotableStep": false,
         "isAuthenticated": true,
         "proposalId": "41",
-        "stepId": "collectStep2",
+        "stepId": "",
       }
     }
   />

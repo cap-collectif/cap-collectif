@@ -14,7 +14,6 @@ import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.gr
 
 type Props = {
   proposalId: string,
-  currentStepId: ?string,
   currentVotableStepId: ?string,
   features: FeatureToggles,
   isAuthenticated: boolean,
@@ -22,7 +21,7 @@ type Props = {
 
 export class ProposalPage extends React.Component<Props> {
   render() {
-    const { proposalId, features, currentStepId } = this.props;
+    const { proposalId, features } = this.props;
     return (
       <div>
         <QueryRenderer
@@ -55,7 +54,7 @@ export class ProposalPage extends React.Component<Props> {
           variables={{
             proposalId,
             hasVotableStep: !!this.props.currentVotableStepId,
-            stepId: currentStepId || '',
+            stepId: this.props.currentVotableStepId || '',
             count: PROPOSAL_FOLLOWERS_TO_SHOW,
             cursor: null,
             isAuthenticated: this.props.isAuthenticated,
