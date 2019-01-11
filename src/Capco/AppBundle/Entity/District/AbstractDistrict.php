@@ -145,11 +145,6 @@ abstract class AbstractDistrict implements IndexableInterface
         return true;
     }
 
-    public static function getElasticsearchPriority(): int
-    {
-        return 3;
-    }
-
     public static function getElasticsearchTypeName(): string
     {
         return 'district';

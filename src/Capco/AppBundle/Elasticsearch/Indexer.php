@@ -72,13 +72,7 @@ class Indexer
     {
         $classes = $this->getClassesToIndex();
 
-        $classesOrdered = array_values($classes);
-        usort($classesOrdered, function ($a, $b) {
-            return \call_user_func($a . '::getElasticsearchPriority') >
-                \call_user_func($b . '::getElasticsearchPriority');
-        });
-
-        foreach ($classesOrdered as $class) {
+        foreach ($classes as $class) {
             $repository = $this->em->getRepository($class);
 
             $query = $repository->createQueryBuilder('a')->getQuery();

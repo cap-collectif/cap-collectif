@@ -417,11 +417,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this->isPublished() && $this->getProject() && $this->getProject()->isIndexable();
     }
 
-    public static function getElasticsearchPriority(): int
-    {
-        return 3;
-    }
-
     public static function getElasticsearchTypeName(): string
     {
         return 'opinionVersion';

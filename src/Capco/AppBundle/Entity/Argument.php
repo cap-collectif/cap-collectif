@@ -294,11 +294,6 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         return $this->isPublished() && $this->getProject() && $this->getProject()->isIndexable();
     }
 
-    public static function getElasticsearchPriority(): int
-    {
-        return 10;
-    }
-
     public static function getElasticsearchTypeName(): string
     {
         return 'argument';

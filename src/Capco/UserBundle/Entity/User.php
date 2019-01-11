@@ -1458,11 +1458,6 @@ class User extends BaseUser implements
         return $this->isEnabled();
     }
 
-    public static function getElasticsearchPriority(): int
-    {
-        return 100;
-    }
-
     public static function getElasticsearchTypeName(): string
     {
         return 'user';

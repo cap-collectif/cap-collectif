@@ -345,11 +345,6 @@ abstract class Comment implements
         return $this->isPublished();
     }
 
-    public static function getElasticsearchPriority(): int
-    {
-        return 5;
-    }
-
     public static function getElasticsearchTypeName(): string
     {
         return 'comment';

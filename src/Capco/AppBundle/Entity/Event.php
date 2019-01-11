@@ -460,11 +460,6 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         return $this->isEnabled();
     }
 
-    public static function getElasticsearchPriority(): int
-    {
-        return 2;
-    }
-
     public static function getElasticsearchTypeName(): string
     {
         return 'event';
