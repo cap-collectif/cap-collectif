@@ -8,20 +8,6 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 
 class SelectionStepRepository extends AbstractStepRepository
 {
-    public function getVotableStepsForProposal(Proposal $proposal)
-    {
-        $qb = $this->getEnabledQueryBuilder();
-        $expr = $qb->expr();
-        $qb->leftJoin('ss.projectAbstractStep', 'pas')
-            ->where('ss.id in (:ids)')
-            ->andWhere($expr->neq('ss.voteType', SelectionStep::VOTE_TYPE_DISABLED))
-            ->setParameter('ids', $proposal->getSelectionStepsIds())
-            ->orderBy('pas.position')
-        ;
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function getVotableStepsForProject(Project $project, bool $asArray = false): iterable
     {
         $qb = $this->getEnabledQueryBuilder();

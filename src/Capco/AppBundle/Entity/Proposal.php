@@ -316,12 +316,12 @@ class Proposal implements
         return $this;
     }
 
-    public function getStatus()
+    public function getStatus(): ?Status
     {
         return $this->status;
     }
 
-    public function setStatus(Status $status = null): self
+    public function setStatus(?Status $status = null): self
     {
         $this->status = $status;
 
@@ -638,6 +638,9 @@ class Proposal implements
 
     public function getSelectionStepsIds(): array
     {
+        // TODO remove me
+        return [];
+
         $ids = array_filter(
             array_map(function ($value) {
                 return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;

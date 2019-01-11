@@ -83,24 +83,6 @@ class ProposalStepVotesResolver extends AbstractExtension
         return $creditsLeftByStepId;
     }
 
-    public function getVotableStepsForProposal(Proposal $proposal)
-    {
-        $votableSteps = new ArrayCollection();
-        $collectStep = $proposal->getProposalForm()->getStep();
-        if ($collectStep->isVotable()) {
-            $votableSteps->add($collectStep);
-        }
-        $selectionSteps = $this
-          ->selectionStepRepository
-          ->getVotableStepsForProposal($proposal)
-        ;
-        foreach ($selectionSteps as $step) {
-            $votableSteps->add($step);
-        }
-
-        return $votableSteps;
-    }
-
     public function getVotableStepsForProject(Project $project)
     {
         $collection = $this
@@ -132,7 +114,8 @@ class ProposalStepVotesResolver extends AbstractExtension
 
     public function getFirstVotableStepForProposal(Proposal $proposal): ?AbstractStep
     {
-        $votableSteps = $this->getVotableStepsForProposal($proposal);
+        $votableSteps = ProposalVotableStepsResolver->_invoke($proposal);
+
         $firstVotableStep = null;
         foreach ($votableSteps as $step) {
             if ($step->isOpen()) {
