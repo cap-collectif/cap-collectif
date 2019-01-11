@@ -31,6 +31,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
 
   render() {
     const { step, dirty, submitting, dispatch } = this.props;
+    const { votesRanking } = step;
     const keyTradProjectCount = step.form.isProposalForm ? 'project.votes.nb' : 'count-questions';
 
     if (!step.viewerVotes) {
@@ -59,7 +60,11 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
         )}
         <div>
           <h3 className="d-ib mr-10 mb-10">
-            <FormattedMessage id="vote-modal-title" />
+            {votesRanking ? (
+              <FormattedMessage id="modal-ranking" />
+            ) : (
+              <FormattedMessage id="vote-modal-title" />
+            )}
           </h3>
           <h4 className="excerpt d-ib">
             <FormattedMessage
@@ -113,6 +118,7 @@ export default createFragmentContainer(container, {
       votesHelpText
       open
       url
+      votesRanking
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         totalCount
         ...ProposalsUserVotesTable_votes
