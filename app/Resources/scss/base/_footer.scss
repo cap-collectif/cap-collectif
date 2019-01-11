@@ -51,7 +51,7 @@
         color: set-link-text-color($brand-color-2);
 
         .container {
-            padding: 15px 30px;
+            padding: 0 30px 15px;
 
             @media (max-width: $screen-xs-max) {
                 padding: 0 15px;
@@ -64,8 +64,9 @@
 
             li {
                 @include inline-block();
-                margin-bottom: 10px;
+                height: 45px;
                 color: set-link-text-color($brand-color-2);
+                line-height: 45px;
 
                 & a {
                     padding: 0 5px;

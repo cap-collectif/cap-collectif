@@ -4,7 +4,7 @@
             <div class="col-xs-12  col-sm-12  col-md-12  col-lg-12  footer__body">
                 {% set footer_title = capco_site_parameter_value('footer.text.title') %}
                 {% if null != footer_title %}
-                    <h2 class="h4">{{ footer_title }}</h2>
+                    <h4 class="h4">{{ footer_title }}</h4>
                 {% endif %}
                 {% set footer_body = capco_site_parameter_value('footer.text.body') %}
                 {% if null != footer_body %}
@@ -42,11 +42,6 @@
                         {% if not loop.last %} |{% endif %}
                     </li>
                 {% endfor %}
-                <li>
-                    <a href="{{ path('app_confidentialite') }}">
-                        {{ 'cookies-management'|trans({}, 'CapcoAppBundle') }}
-                    </a>
-                </li>
             </ul>
             <div class="capco-powered">
                 <p>
