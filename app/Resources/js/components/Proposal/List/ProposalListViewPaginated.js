@@ -13,7 +13,6 @@ type Props = {
   step: ProposalListViewPaginated_step,
   view: 'mosaic' | 'table',
   viewer: ?ProposalListViewPaginated_viewer,
-  count: number,
 };
 type State = {
   loading: boolean,
@@ -25,7 +24,7 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
   };
 
   render() {
-    const { step, viewer, relay, view, count } = this.props;
+    const { step, viewer, relay, view } = this.props;
     return (
       <div>
         <VisibilityBox enabled={step.private || false}>
@@ -44,11 +43,11 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
               disabled={this.state.loading}
               onClick={() => {
                 this.setState({ loading: true });
-                relay.loadMore(count, () => {
+                relay.loadMore(50, () => {
                   this.setState({ loading: false });
                 });
               }}>
-              <FormattedMessage id={this.state.loading ? 'global.loading' : 'see-more-proposals'} />
+              <FormattedMessage id="see-more-proposals" />
             </Button>
           )}
         </div>
