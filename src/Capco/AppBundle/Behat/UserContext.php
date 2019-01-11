@@ -278,7 +278,9 @@ class UserContext extends DefaultContext
     {
         $user = $this->getService(UserManager::class)->findUserByEmail($email);
         if (!$user) {
-            throw new \RuntimeException('Could not find user associated with email:' . $email);
+            throw new \RuntimeException(
+                'Could not find user associated with username:' . $username
+            );
         }
 
         // We create a new server session

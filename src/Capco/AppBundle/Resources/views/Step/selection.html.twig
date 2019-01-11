@@ -35,7 +35,7 @@
         </div>
     {% endif %}
 
-    {{ react_render_component('ProposalStepPageApp', { 'props': { stepId: currentStep.id } }) }}
+    {{ react_render_component('ProposalStepPageApp', { 'props': { stepId: currentStep.id, count: capco_site_parameter_value('proposal.pagination') * 1 } }) }}
 {% endblock %}
 
 {% block javascripts %}

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Elastica\Index;
 use Elastica\Query;
@@ -10,7 +9,6 @@ use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
 use Capco\AppBundle\Entity\Event;
-use Psr\Log\LoggerInterface;
 
 class EventSearch extends Search
 {
@@ -42,7 +40,7 @@ class EventSearch extends Search
     public function searchEvents(
         int $offset,
         int $limit,
-        ?string $order = null,
+        ?string $order,
         $terms,
         array $providedFilters
     ): array {
@@ -65,6 +63,7 @@ class EventSearch extends Search
                     $dateBoolQuery->addShould($endDateIsNullQuery);
                     $boolQuery->addMust($dateBoolQuery);
                     $boolQuery->addMust(new Query\Range('startAt', ['lt' => 'now/d']));
+
                     break;
                 // FUTURE and current
                 case self::LAST:
@@ -72,6 +71,7 @@ class EventSearch extends Search
                     $dateBoolQuery->addShould(new Query\Range('startAt', ['gte' => 'now/d']));
                     $dateBoolQuery->addShould(new Query\Range('endAt', ['gte' => 'now/d']));
                     $boolQuery->addMust($dateBoolQuery);
+
                     break;
                 // FUTURE and PASSED
                 default:
@@ -91,6 +91,8 @@ class EventSearch extends Search
         } else {
             $query = new Query($boolQuery);
             if ($order) {
+                $query->setSort($this->getSort($order));
+            } else {
                 $query->setSort($this->getSort($order));
             }
         }
@@ -136,17 +138,21 @@ class EventSearch extends Search
             case self::OLD:
                 $sortField = 'endAt';
                 $sortOrder = 'desc';
+
                 break;
             case self::LAST:
                 $sortField = 'startAt';
-                $sortOrder = 'desc';
+                $sortOrder = 'asc';
+
                 break;
             case 'slug':
                 $sortField = 'slug';
                 $sortOrder = 'desc';
+
                 break;
             default:
-                throw new \RuntimeException("Unknow order: $order");
+                throw new \RuntimeException("Unknow order: ${order}");
+
                 break;
         }
 

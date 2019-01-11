@@ -22,7 +22,7 @@ export type DefaultAction =
   | ShowUpdateFieldModalAction
   | HideUpdateFieldModalAction
   | HideNewFieldModalAction;
-export type State = {
+export type State = {|
   +showNewFieldModal: boolean,
   +themes: Array<Object>,
   +images: ?{
@@ -32,7 +32,7 @@ export type State = {
   +userTypes: Array<Object>,
   +parameters: Object,
   +updatingRegistrationFieldModal: ?number,
-};
+|};
 
 export const features = {
   login_saml: false,
