@@ -80,6 +80,7 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
                 }, $keys)
             );
         }
+
         $repo = null;
         if ($step instanceof CollectStep) {
             $repo = $this->proposalCollectVoteRepository;
@@ -101,9 +102,11 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
 
         $votes = $repo->getByProposalIdsAndStepAndUser($batchProposalIds, $step, $user);
         $results = array_map(function ($key) use ($votes) {
-            $found = array_filter($votes, function ($vote) use ($key) {
-                return $vote->getProposal()->getId() === $key['proposal']->getId();
-            });
+            $found = array_values(
+                array_filter($votes, function ($vote) use ($key) {
+                    return $vote->getProposal()->getId() === $key['proposal']->getId();
+                })
+            );
 
             return $found[0] ?? null;
         }, $keys);

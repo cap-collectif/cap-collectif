@@ -101,9 +101,11 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 
         $votes = $repo->getByProposalIdsAndStepAndUser($batchProposalIds, $step, $user);
         $results = array_map(function ($key) use ($votes) {
-            $found = array_filter($votes, function ($vote) use ($key) {
-                return $vote->getProposal()->getId() === $key['proposal']->getId();
-            });
+            $found = array_values(
+                array_filter($votes, function ($vote) use ($key) {
+                    return $vote->getProposal()->getId() === $key['proposal']->getId();
+                })
+            );
 
             return isset($found[0]) ? true : false;
         }, $keys);
