@@ -261,6 +261,7 @@ class User extends BaseUser implements
     private $profilePageIndexed = true;
 
     private $consentExternalCommunication = false;
+    private $consentInternalCommunication = false;
 
     private $userGroups;
 
@@ -1378,6 +1379,18 @@ class User extends BaseUser implements
     public function setConsentExternalCommunication(bool $consentExternalCommunication): self
     {
         $this->consentExternalCommunication = $consentExternalCommunication;
+
+        return $this;
+    }
+
+    public function isConsentInternalCommunication(): bool
+    {
+        return $this->consentInternalCommunication;
+    }
+
+    public function setConsentInternalCommunication(bool $consentInternalCommunication): self
+    {
+        $this->consentInternalCommunication = $consentInternalCommunication;
 
         return $this;
     }
