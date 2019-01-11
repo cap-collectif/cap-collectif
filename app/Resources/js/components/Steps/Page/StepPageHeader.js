@@ -26,6 +26,7 @@ class StepPageHeader extends React.Component<Props> {
 
   render() {
     const { step } = this.props;
+
     return (
       <div>
         <h2 className="h2">{step.title}</h2>
@@ -42,7 +43,7 @@ class StepPageHeader extends React.Component<Props> {
             </div>
           )}
         </div>
-        {step.type === 'selection' && step.voteThreshold && step.voteThreshold > 0 ? (
+        {step.type === 'selection' && step.voteThreshold && step.voteThreshold > 0 && (
           <h4 style={{ marginBottom: '20px' }}>
             <i className="cap cap-hand-like-2-1" style={{ fontSize: '22px', color: '#377bb5' }} />{' '}
             <FormattedMessage
@@ -52,7 +53,7 @@ class StepPageHeader extends React.Component<Props> {
               }}
             />
           </h4>
-        ) : null}
+        )}
         {/* $FlowFixMe $refType */}
         <StepInfos step={step} />
       </div>
