@@ -359,7 +359,7 @@ class Post implements CommentableInterface, IndexableInterface
             $now = new \DateTime();
         }
 
-        return $this->isPublished && ($now > $this->publishedAt);
+        return $this->isPublished && $now > $this->publishedAt;
     }
 
     /**
@@ -553,6 +553,11 @@ class Post implements CommentableInterface, IndexableInterface
     public function isIndexable(): bool
     {
         return $this->getIsPublished();
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 5;
     }
 
     public static function getElasticsearchTypeName(): string

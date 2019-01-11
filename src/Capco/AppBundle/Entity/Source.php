@@ -367,6 +367,11 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
         return $this->isPublished();
     }
 
+    public static function getElasticsearchPriority(): int
+    {
+        return 10;
+    }
+
     public static function getElasticsearchTypeName(): string
     {
         return 'source';

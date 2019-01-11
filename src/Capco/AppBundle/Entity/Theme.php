@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
@@ -455,17 +456,15 @@ class Theme implements IndexableInterface
     public function getBodyExcerpt($nb = 100)
     {
         $excerpt = substr($this->body, 0, $nb);
-        $excerpt = $excerpt . '...';
 
-        return $excerpt;
+        return $excerpt . '...';
     }
 
     public function getTeaserExcerpt($nb = 100)
     {
         $excerpt = substr($this->teaser, 0, $nb);
-        $excerpt = $excerpt . '...';
 
-        return $excerpt;
+        return $excerpt . '...';
     }
 
     public function canContribute()
@@ -480,7 +479,7 @@ class Theme implements IndexableInterface
 
     public function countEnabledProjects()
     {
-        /** TODO manage access projects with visibility */
+        // TODO manage access projects with visibility
         return $this->countPublicProject();
     }
 
@@ -533,6 +532,11 @@ class Theme implements IndexableInterface
     public function isIndexable(): bool
     {
         return $this->getIsEnabled();
+    }
+
+    public static function getElasticsearchPriority(): int
+    {
+        return 8;
     }
 
     public static function getElasticsearchTypeName(): string

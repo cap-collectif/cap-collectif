@@ -138,17 +138,16 @@ class Reply implements Publishable, Contribution, VoteContribution
         return false;
     }
 
-    /**
-     * The Elasticsearch Type name. Must exists in `src/Capco/AppBundle/Elasticsearch/mapping.yml`.
-     */
+    public static function getElasticsearchPriority(): int
+    {
+        return 10;
+    }
+
     public static function getElasticsearchTypeName(): string
     {
         return 'reply';
     }
 
-    /**
-     * The JMS Serializer serialization groups.
-     */
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch'];

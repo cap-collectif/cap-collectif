@@ -905,6 +905,11 @@ class Project implements IndexableInterface
         return true;
     }
 
+    public static function getElasticsearchPriority(): int
+    {
+        return 1;
+    }
+
     public static function getElasticsearchTypeName(): string
     {
         return 'project';
