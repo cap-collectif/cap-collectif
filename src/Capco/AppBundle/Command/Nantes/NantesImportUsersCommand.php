@@ -173,6 +173,12 @@ class NantesImportUsersCommand extends ContainerAwareCommand
                 $progress->advance();
                 ++$count;
             } else {
+                if ($userExist && !$userExist->getOpenId()) {
+                    $userExist->setOpenId($userRow['id']);
+                    $output->writeln(
+                        '<info>' . $userExist->getEmail() . '</info> already exist on the prod.'
+                    );
+                }
                 $progress->advance();
                 ++$count;
             }
