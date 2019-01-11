@@ -94,9 +94,9 @@ services:
     autowire: true
     arguments:
       $cachePrefix: ProposalViewerHasVoteDataLoader
-      $cacheTtl: 60
+      $cacheTtl: 120
       $debug: '%kernel.debug%'
-      $enableCache: false
+      $enableCache: true
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalviewerFollowDataLoader:
     autowire: true
