@@ -30,7 +30,7 @@ class ProposalVotesResolver implements ResolverInterface
         $this->globalIdResolver = $globalIdResolver;
     }
 
-    public function __invoke(Proposal $proposal, Argument $args, \ArrayObject $context, User $user)
+    public function __invoke(Proposal $proposal, Argument $args, \ArrayObject $context, $user)
     {
         $includeUnpublished =
             true === $args->offsetGet('includeUnpublished') &&

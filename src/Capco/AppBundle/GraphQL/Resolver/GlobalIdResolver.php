@@ -18,16 +18,19 @@ use Capco\AppBundle\Repository\MapTokenRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GlobalIdResolver
 {
     private $container;
+    private $logger;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, LoggerInterface $logger)
     {
         $this->container = $container;
+        $this->logger = $logger;
     }
 
     public function resolveMultiple(array $array, $user): array
@@ -43,6 +46,10 @@ class GlobalIdResolver
     public function resolve(string $uuidOrGlobalId, $userOrAnon)
     {
         $user = null;
+        if (empty($uuidOrGlobalId)) {
+            $this->logger->debug(json_encode($uuidOrGlobalId));
+        }
+
         if ($userOrAnon instanceof User) {
             $user = $userOrAnon;
         }
@@ -112,7 +119,7 @@ class GlobalIdResolver
 
             if (!$node) {
                 $error = 'Could not resolve node with globalId ' . $uuid;
-                $this->container->get('logger')->warning($error);
+                $this->logger->warning($error);
 
                 return null;
             }
@@ -168,7 +175,7 @@ class GlobalIdResolver
 
         if (!$node) {
             $error = "Could not resolve node with uuid ${uuid}";
-            $this->container->get('logger')->warning($error);
+            $this->logger->warning($error);
 
             throw new UserError($error);
         }

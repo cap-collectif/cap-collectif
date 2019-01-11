@@ -31,6 +31,7 @@ class RemoveProposalVoteMutation implements MutationInterface
     private $proposalViewerVoteDataLoader;
     private $proposalViewerHasVoteDataLoader;
     private $viewerProposalVotesDataLoader;
+    private $globalIdResolver;
     private $indexer;
 
     public function __construct(
