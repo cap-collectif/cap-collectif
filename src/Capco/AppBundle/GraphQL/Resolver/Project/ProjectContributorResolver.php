@@ -41,14 +41,14 @@ class ProjectContributorResolver implements ResolverInterface
         }
 
         $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount, $project) {
-            $value = $this->userSearch->getContributorByProject($project, $offset, $limit);
-            $contributors = $value['results'];
-            $totalCount = $value['totalCount'];
+            try {
+                $value = $this->userSearch->getContributorByProject($project, $offset, $limit);
+                $contributors = $value['results'];
+                $totalCount = $value['totalCount'];
 
                 return $contributors;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-
                 $totalCount = 0;
 
                 return [];
