@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Form\ContactType;
 use Capco\AppBundle\SiteParameter\Resolver;
-use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,19 +16,6 @@ class DefaultController extends Controller
      */
     public function loginAction(Request $request)
     {
-        if (
-            $this->get(Manager::class)->isActive('shield_mode') &&
-            !$this->getUser()->isEmailConfirmed()
-        ) {
-            $this->get('security.token_storage')->setToken(null);
-            $request->getSession()->invalidate();
-
-            return $this->json([
-                'success' => false,
-                'reason' => 'please-confirm-your-email-address-to-login',
-            ]);
-        }
-
         return $this->json([
             'success' => true,
         ]);

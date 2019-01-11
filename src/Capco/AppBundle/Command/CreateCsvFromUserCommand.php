@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
@@ -62,7 +63,6 @@ class CreateCsvFromUserCommand extends Command
         /** @var User $user */
         $user = $this->userRepository->find($userId);
         $userId = GlobalId::toGlobalId('User', $userId);
-
         $datas = $this->requestDatas($userId);
         foreach ($datas as $key => $value) {
             $this->createCsv($userId, $value, $key);
@@ -114,7 +114,7 @@ class CreateCsvFromUserCommand extends Command
     {
         $hash = sha1($userId . time());
 
-        return "$hash.zip";
+        return "${hash}.zip";
     }
 
     protected function getZipPathForUser(string $userId): string
@@ -189,7 +189,7 @@ class CreateCsvFromUserCommand extends Command
             $rows = $this->getCleanArrayForRowInsert($votes, $header, true);
         } else {
             foreach ($header as $value) {
-                $value = Arr::path($data, "data.node.$value") ?? '';
+                $value = Arr::path($data, "data.node.${value}") ?? '';
                 $rows[] = $value;
             }
         }
@@ -204,7 +204,7 @@ class CreateCsvFromUserCommand extends Command
 
         if ($header) {
             $this->createZipArchive($this->getZipPathForUser($userId), [
-                ["$type.csv" => $this->getPath()],
+                ["${type}.csv" => $this->getPath()],
             ]);
         }
     }
@@ -295,17 +295,17 @@ class CreateCsvFromUserCommand extends Command
             $item = str_replace('data_node_', '', $item);
 
             if ('medias' === $type) {
-                $item = str_replace('medias.', '', $item);
+                $item = str_replace('medias_', '', $item);
             } elseif ('groups' === $type) {
-                $item = str_replace('groups.edges.node.', '', $item);
+                $item = str_replace('groups_edges_node_', '', $item);
             } elseif ('reports' === $type) {
-                $item = str_replace('reports.edges.node.', '', $item);
+                $item = str_replace('reports_edges_node_', '', $item);
             } elseif ('events' === $type) {
-                $item = str_replace('events.edges.node.', '', $item);
+                $item = str_replace('events_edges_node_', '', $item);
             } elseif ('votes' === $type) {
-                $item = str_replace('votes.edges.node.', '', $item);
+                $item = str_replace('votes_edges_node_', '', $item);
             } else {
-                $item = str_replace('contributions.edges.node.', '', $item);
+                $item = str_replace('contributions_edges_node_', '', $item);
             }
 
             return $item;

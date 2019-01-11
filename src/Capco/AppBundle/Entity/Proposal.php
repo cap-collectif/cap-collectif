@@ -1011,6 +1011,11 @@ class Proposal implements
         return $this->isPublished() && !$this->isDraft() && !$this->isDeleted();
     }
 
+    public static function getElasticsearchPriority(): int
+    {
+        return 3;
+    }
+
     public static function getElasticsearchTypeName(): string
     {
         return 'proposal';
