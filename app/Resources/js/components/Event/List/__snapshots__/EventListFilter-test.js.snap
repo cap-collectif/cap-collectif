@@ -16,86 +16,79 @@ exports[`<EventListFilters /> renders correctly 1`] = `
     <FiltersContainer
       filterCount={2}
       overlay={
-        <Popover
-          bsClass="popover"
-          className="w-260"
-          id="popover-positioned-bottom"
-          placement="right"
-        >
-          <div>
-            <form>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <div
-                    className="d-flex justify-content-end"
+        <div>
+          <form>
+            <Col
+              bsClass="col"
+              className="mt-5"
+              componentClass="div"
+            >
+              <div>
+                <div
+                  className="d-flex justify-content-end"
+                >
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="default"
+                    className="btn--outline btn-dark-gray"
+                    disabled={false}
+                    onClick={[MockFunction]}
                   >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="btn--outline btn-dark-gray"
-                      disabled={false}
-                      onClick={[MockFunction]}
-                    >
-                      <FormattedMessage
-                        id="reset-filters"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </div>
+                    <FormattedMessage
+                      id="reset-filters"
+                      values={Object {}}
+                    />
+                  </Button>
                 </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <Field
-                    clearable={true}
-                    component={[Function]}
-                    id="event-theme"
-                    name="theme"
-                    options={
-                      Array [
-                        Object {
-                          "label": "Le gouter c'est la vie",
-                          "value": "theme-1",
-                        },
-                        Object {
-                          "label": "Theme 2",
-                          "value": "theme-2",
-                        },
-                      ]
-                    }
-                    placeholder="type-theme"
-                  />
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <Field
-                    clearable={true}
-                    component={[Function]}
-                    id="project"
-                    name="project"
-                    options={Array []}
-                    placeholder="type-project"
-                  />
-                </div>
-              </Col>
-            </form>
-          </div>
-        </Popover>
+              </div>
+            </Col>
+            <Col
+              bsClass="col"
+              className="mt-5"
+              componentClass="div"
+            >
+              <div>
+                <Field
+                  clearable={true}
+                  component={[Function]}
+                  id="event-theme"
+                  name="theme"
+                  options={
+                    Array [
+                      Object {
+                        "label": "Le gouter c'est la vie",
+                        "value": "theme-1",
+                      },
+                      Object {
+                        "label": "Theme 2",
+                        "value": "theme-2",
+                      },
+                    ]
+                  }
+                  placeholder="type-theme"
+                />
+              </div>
+            </Col>
+            <Col
+              bsClass="col"
+              className="mt-5"
+              componentClass="div"
+            >
+              <div>
+                <Field
+                  clearable={true}
+                  component={[Function]}
+                  id="project"
+                  name="project"
+                  options={Array []}
+                  placeholder="type-project"
+                />
+              </div>
+            </Col>
+          </form>
+        </div>
       }
       type="event"
     />
@@ -142,43 +135,36 @@ exports[`<EventListFilters /> renders correctly without filters 1`] = `
     <FiltersContainer
       filterCount={2}
       overlay={
-        <Popover
-          bsClass="popover"
-          className="w-260"
-          id="popover-positioned-bottom"
-          placement="right"
-        >
-          <div>
-            <form>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <div
-                    className="d-flex justify-content-end"
+        <div>
+          <form>
+            <Col
+              bsClass="col"
+              className="mt-5"
+              componentClass="div"
+            >
+              <div>
+                <div
+                  className="d-flex justify-content-end"
+                >
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="default"
+                    className="btn--outline btn-dark-gray"
+                    disabled={false}
+                    onClick={[MockFunction]}
                   >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="btn--outline btn-dark-gray"
-                      disabled={false}
-                      onClick={[MockFunction]}
-                    >
-                      <FormattedMessage
-                        id="reset-filters"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </div>
+                    <FormattedMessage
+                      id="reset-filters"
+                      values={Object {}}
+                    />
+                  </Button>
                 </div>
-              </Col>
-            </form>
-          </div>
-        </Popover>
+              </div>
+            </Col>
+          </form>
+        </div>
       }
       type="event"
     />
