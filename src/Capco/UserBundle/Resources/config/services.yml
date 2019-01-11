@@ -11,9 +11,6 @@ services:
   Capco\UserBundle\Form\:
     resource: '%kernel.root_dir%/../src/Capco/UserBundle/Form/*'
 
-  Capco\UserBundle\Handler\:
-    resource: '%kernel.root_dir%/../src/Capco/UserBundle/Handler/*'
-
   Capco\UserBundle\Listener\:
     resource: '%kernel.root_dir%/../src/Capco/UserBundle/Listener/*'
 
