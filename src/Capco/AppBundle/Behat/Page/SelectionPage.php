@@ -20,20 +20,22 @@ class SelectionPage extends Page
             'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwy',
         'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwy' =>
             '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counter-comments .card__counter__value',
-        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMA' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA==',
+        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
+            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA==']",
         'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counter-votes .card__counter__value',
+            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counter-votes .card__counter__value'",
         'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMA',
+            "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMA'",
         'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counter-comments .card__counter__value',
-        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMQ' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ==',
+            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counter-comments .card__counter__value'",
+        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
+            "#[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ=='",
         'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counter-votes .card__counter__value',
+            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counter-votes .card__counter__value'",
         'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
             'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMQ',
         'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counter-comments .card__counter__value',
+            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counter-comments .card__counter__value'",
         'proposal preview UHJvcG9zYWw6cHJvcG9zYWw4' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4',
         'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWw4' =>
             '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counter-votes .card__counter__value',
@@ -47,9 +49,9 @@ class SelectionPage extends Page
         'selected sorting option' => '#proposal-sorting option[selected]',
         'proposal vote form submit button' => '#confirm-proposal-vote',
         'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxOA==' =>
-            'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxOA==',
+            "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxOA==']",
         'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxNw==' =>
-            'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxNw==',
+            "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxNw==']",
     ];
 
     public function sortByDate()

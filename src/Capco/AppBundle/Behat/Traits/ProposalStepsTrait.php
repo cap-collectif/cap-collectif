@@ -1111,11 +1111,12 @@ trait ProposalStepsTrait
      */
     public function theProposalVoteButtonMustBeDisabled(string $id = null)
     {
-        $id = GlobalId::toGlobalId('Proposal', $id) ?: $this->getProposalId();
+        $id = $id ? GlobalId::toGlobalId('Proposal', $id) : $this->getProposalId();
 
-        $this->getSession()->wait(2000, "$('${id}').length > 0");
-
+        $search = "[id='proposal-${id}']";
+        $this->getSession()->wait(2000, '$("' . $search . '").length > 0');
         $button = $this->getCurrentPage()->getVoteButton($id);
+
         Assert::assertTrue(
             $button->hasClass('disabled') || $button->hasAttribute('disabled'),
             'The proposal vote button is not disabled neither it has class "disabled".'
@@ -1133,7 +1134,8 @@ trait ProposalStepsTrait
             : '"proposal vote button" element is not present on the page';
 
         try {
-            $this->getSession()->wait(2000, "$('" . $id . "').length > 0");
+            $search = "[id='proposal-${id}']";
+            $this->getSession()->wait(2000, '$("' . $search . '").length > 0');
 
             $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
         } catch (\Exception $e) {
