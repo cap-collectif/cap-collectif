@@ -29,8 +29,12 @@ class ProposalRepository extends EntityRepository
                 'district',
                 'category',
                 'likers',
-                'proposalEvaluation'
+                'proposalEvaluation',
+                'proposalForm',
+                'step'
             )
+            ->leftJoin('p.proposalForm', 'proposalForm')
+            ->leftJoin('proposalForm.step', 'step')
             ->leftJoin('p.author', 'author')
             ->leftJoin('p.status', 'status')
             ->leftJoin('p.theme', 'theme')

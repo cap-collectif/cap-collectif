@@ -19,11 +19,9 @@ use Capco\AppBundle\Search\ProposalSearch;
 
 class ProposalVotesDataLoader extends BatchDataLoader
 {
-    private const BATCH = true;
-    private const COUNT_MODE = 'ELASTICSEARCH';
-
     public $enableBatch = true;
-    public $useElasticsearch = true;
+    public $useElasticsearch = false;
+
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
     private $proposalSearch;

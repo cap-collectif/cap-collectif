@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Entity\Steps\CollectStep as StepsCollectStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\Publishable;
@@ -411,7 +411,7 @@ class Proposal implements
         return $this;
     }
 
-    public function getStep(): ?StepsCollectStep
+    public function getStep(): ?CollectStep
     {
         return $this->proposalForm ? $this->proposalForm->getStep() : null;
     }
