@@ -11,7 +11,7 @@ use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver;
 
-class ProposalCurrentVotableStepDataloader extends BatchDataLoader
+class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
 {
     private $resolver;
     private $stepRepo;

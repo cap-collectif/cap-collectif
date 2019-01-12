@@ -15,7 +15,7 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 
-class ProposalStatusDataloader extends BatchDataLoader
+class ProposalStatusDataLoader extends BatchDataLoader
 {
     private $stepRepo;
 
