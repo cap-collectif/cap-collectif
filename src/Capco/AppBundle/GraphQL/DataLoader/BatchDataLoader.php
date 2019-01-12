@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader;
 
-use Capco\AppBundle\Cache\RedisTagCache;
-use GraphQL\Executor\Promise\Promise;
-use Overblog\DataLoader\DataLoader;
-use Overblog\DataLoader\Option;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
+use Overblog\DataLoader\Option;
+use Overblog\DataLoader\DataLoader;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 
 abstract class BatchDataLoader extends DataLoader
 {
@@ -24,7 +25,7 @@ abstract class BatchDataLoader extends DataLoader
         callable $batchFunction,
         PromiseAdapterInterface $promiseFactory,
         LoggerInterface $logger,
-        RedisTagCache $cache,
+        AdapterInterface $cache,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -63,7 +64,9 @@ abstract class BatchDataLoader extends DataLoader
 
     public function invalidateAll(): void
     {
-        $this->cache->invalidateTags([$this->cachePrefix]);
+        if ($this->cache instanceof TagAwareAdapterInterface) {
+            $this->cache->invalidateTags([$this->cachePrefix]);
+        }
     }
 
     /**
@@ -93,7 +96,9 @@ abstract class BatchDataLoader extends DataLoader
         if (!$this->enableCache || !$cacheItem->isHit()) {
             if ($this->debug) {
                 $this->logger->info(
-                    __METHOD__ . ' Cache MISS for: ' . var_export($this->serializeKey($key), true)
+                    \get_class($this) .
+                        ' Cache MISS for: ' .
+                        var_export($this->serializeKey($key), true)
                 );
             }
 
@@ -104,10 +109,14 @@ abstract class BatchDataLoader extends DataLoader
 
                     if ($this->enableCache) {
                         $cacheItem
-                            ->set($value)
-                            ->expiresAfter($this->cacheTtl)
-                            ->tag($this->getCacheTag($key))
-                            ->tag($this->cachePrefix);
+                            ->set($this->normalizeValue($value))
+                            ->expiresAfter($this->cacheTtl);
+                        if ($this->cache instanceof TagAwareAdapterInterface) {
+                            $cacheItem->tag(
+                                array_merge($this->getCacheTag($key), [$this->cachePrefix])
+                            );
+                        }
+
                         $this->cache->save($cacheItem);
                     } else {
                         $result = $value;
@@ -124,12 +133,14 @@ abstract class BatchDataLoader extends DataLoader
 
         if ($this->debug) {
             $this->logger->info(
-                __METHOD__ . 'Cache HIT for: ' . var_export($this->serializeKey($key), true)
+                \get_class($this) . 'Cache HIT for: ' . var_export($this->serializeKey($key), true)
             );
         }
 
         if ($this->enableCache) {
-            return $this->getPromiseAdapter()->createFulfilled($cacheItem->get());
+            $value = $this->denormalizeValue($cacheItem->get());
+
+            return $this->getPromiseAdapter()->createFulfilled($value);
         }
 
         return $this->getPromiseAdapter()->createFulfilled($result);
@@ -154,5 +165,15 @@ abstract class BatchDataLoader extends DataLoader
     protected function getCacheTag($key): array
     {
         return [];
+    }
+
+    protected function normalizeValue($value)
+    {
+        return $value;
+    }
+
+    protected function denormalizeValue($value)
+    {
+        return $value;
     }
 }

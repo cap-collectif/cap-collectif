@@ -4,27 +4,31 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver;
 
 class ProposalCurrentVotableStepDataloader extends BatchDataLoader
 {
     private $resolver;
+    private $stepRepo;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisTagCache $cache,
+        RedisCache $cache,
         LoggerInterface $logger,
         ProposalVotableStepsResolver $resolver,
+        AbstractStepRepository $stepRepo,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
         bool $enableCache
     ) {
         $this->resolver = $resolver;
+        $this->stepRepo = $stepRepo;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -40,7 +44,7 @@ class ProposalCurrentVotableStepDataloader extends BatchDataLoader
     public function invalidate(Proposal $proposal): void
     {
         // TODO
-        $this->invalidateAll();
+        // $this->invalidateAll();
     }
 
     public function all(array $keys)
@@ -88,6 +92,24 @@ class ProposalCurrentVotableStepDataloader extends BatchDataLoader
         }
 
         return $firstVotableStep;
+    }
+
+    protected function normalizeValue($value)
+    {
+        if ($value instanceof AbstractStep) {
+            return $value->getId();
+        }
+
+        return $value;
+    }
+
+    protected function denormalizeValue($value)
+    {
+        if ($value) {
+            return $this->stepRepo->getByIdWithCache($value);
+        }
+
+        return $value;
     }
 
     protected function serializeKey($key): array

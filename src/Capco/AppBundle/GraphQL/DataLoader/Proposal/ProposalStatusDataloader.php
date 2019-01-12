@@ -5,8 +5,8 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Selection;
-use Capco\AppBundle\Cache\RedisTagCache;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -21,7 +21,7 @@ class ProposalStatusDataloader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisTagCache $cache,
+        RedisCache $cache,
         LoggerInterface $logger,
         AbstractStepRepository $stepRepo,
         string $cachePrefix,

@@ -5,12 +5,6 @@ framework:
   validation:
     cache: validator.mapping.cache.doctrine.apc
 
-doctrine:
-  orm:
-    metadata_cache_driver: apcu
-    query_cache_driver: apcu
-    result_cache_driver: apcu
-
 sentry:
   dsn: '%sentry_dsn%'
   options:

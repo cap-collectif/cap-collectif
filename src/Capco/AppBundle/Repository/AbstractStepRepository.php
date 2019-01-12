@@ -3,12 +3,23 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 
-/**
- * AbstractStepRepository.
- */
 class AbstractStepRepository extends EntityRepository
 {
+    public function getByIdWithCache(string $id): ?AbstractStep
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->andWhere('s.id = :id')
+            ->setParameter('id', $id);
+
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->useResultCache(true, 60)
+            ->getOneOrNullResult();
+    }
+
     /**
      * Get steps by project.
      *
@@ -24,12 +35,9 @@ class AbstractStepRepository extends EntityRepository
             ->leftJoin('pas.project', 'p')
             ->andWhere('p.slug = :project')
             ->setParameter('project', $slug)
-            ->addOrderBy('pas.position', 'ASC')
-        ;
+            ->addOrderBy('pas.position', 'ASC');
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     protected function getIsEnabledQueryBuilder()

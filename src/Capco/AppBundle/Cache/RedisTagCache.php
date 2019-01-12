@@ -8,7 +8,7 @@ class RedisTagCache extends TagAwareAdapter
 {
     public function __construct(RedisCache $cache)
     {
-        // Adapter for cached items, then for tags
-        parent::__construct($cache, $cache);
+        // When only one adapter is used, items and tags are all stored in the same place
+        parent::__construct($cache);
     }
 }
