@@ -968,9 +968,6 @@ class Proposal implements
 
     public function getProposalEvaluation(): ?ProposalEvaluation
     {
-        // TODO remove me
-        return null;
-
         return $this->proposalEvaluation;
     }
 
