@@ -640,7 +640,6 @@ class Proposal implements
     {
         // TODO remove me
         return [];
-
         $ids = array_filter(
             array_map(function ($value) {
                 return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 
 class SelectionStepRepository extends AbstractStepRepository
@@ -17,8 +16,7 @@ class SelectionStepRepository extends AbstractStepRepository
             ->andWhere($expr->neq('ss.voteType', SelectionStep::$VOTE_TYPE_DISABLED))
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
-            ->orderBy('pas.position')
-        ;
+            ->orderBy('pas.position');
 
         $query = $qb->getQuery();
 
@@ -27,8 +25,6 @@ class SelectionStepRepository extends AbstractStepRepository
 
     private function getEnabledQueryBuilder()
     {
-        return $this->createQueryBuilder('ss')
-            ->where('ss.isEnabled = 1')
-        ;
+        return $this->createQueryBuilder('ss')->where('ss.isEnabled = 1');
     }
 }

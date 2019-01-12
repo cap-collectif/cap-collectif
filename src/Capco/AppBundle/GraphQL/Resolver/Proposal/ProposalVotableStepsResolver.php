@@ -11,7 +11,6 @@ class ProposalVotableStepsResolver implements ResolverInterface
     {
         // TODO remove me
         return [];
-
         $result = [];
         $collect = $proposal->getStep();
         if ($collect && $collect->isVotable()) {

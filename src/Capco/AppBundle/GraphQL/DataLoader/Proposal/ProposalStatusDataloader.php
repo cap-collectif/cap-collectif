@@ -15,7 +15,7 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 
-class ProposalStatusDataLoader extends BatchDataLoader
+class ProposalStatusDataloader extends BatchDataLoader
 {
     private $stepRepo;
 
@@ -103,7 +103,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
         if ($args->offsetExists('step') && $args->offsetGet('step')) {
             $stepId = $args->offsetGet('step');
             $step = $this->stepRepo->find($stepId);
-            
+
             if ($step instanceof CollectStep) {
                 return $proposal->getStatus();
             }
@@ -116,6 +116,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
                     }
                 }
             }
+
             throw new UserError('Unknown step');
         }
 

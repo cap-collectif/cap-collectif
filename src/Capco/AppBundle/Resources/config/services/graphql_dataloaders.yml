@@ -121,7 +121,7 @@ services:
       $cacheTtl: 60
       $debug: '%kernel.debug%'
       $enableCache: false
-  
+
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalStatusDataLoader:
     autowire: true
     arguments:
