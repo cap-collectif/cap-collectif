@@ -29,7 +29,7 @@ class ProjectProposalsResolver implements ResolverInterface
             $args = new Arg(['first' => 0]);
         }
 
-        // Setup dataloader here instead
+        // Setup dataLoader here instead
         $totalCount = $this->getProjectProposalsCount($project);
 
         $paginator = new Paginator(function (int $offset, int $limit) {

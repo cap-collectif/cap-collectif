@@ -12,16 +12,16 @@ use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoa
 
 class ProposalFormProposalsResolver implements ResolverInterface
 {
-    private $dataloader;
+    private $dataLoader;
 
-    public function __construct(ProposalFormProposalsDataLoader $dataloader)
+    public function __construct(ProposalFormProposalsDataLoader $dataLoader)
     {
-        $this->dataloader = $dataloader;
+        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(ProposalForm $form, Arg $args, $viewer, RequestStack $request): Promise
     {
-        return $this->dataloader->load(compact('form', 'args', 'viewer', 'request'));
+        return $this->dataLoader->load(compact('form', 'args', 'viewer', 'request'));
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string

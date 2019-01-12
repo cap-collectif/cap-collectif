@@ -20,7 +20,7 @@ class DeleteProposalMutation implements MutationInterface
     private $redisHelper;
     private $publisher;
     private $indexer;
-    private $dataloader;
+    private $dataLoader;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -28,14 +28,14 @@ class DeleteProposalMutation implements MutationInterface
         RedisStorageHelper $redisHelper,
         Publisher $publisher,
         Indexer $indexer,
-        ProposalFormProposalsDataLoader $dataloader
+        ProposalFormProposalsDataLoader $dataLoader
     ) {
         $this->em = $em;
         $this->proposalRepo = $proposalRepo;
         $this->redisHelper = $redisHelper;
         $this->publisher = $publisher;
         $this->indexer = $indexer;
-        $this->dataloader = $dataloader;
+        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(string $proposalId, User $user): array
@@ -67,7 +67,7 @@ class DeleteProposalMutation implements MutationInterface
         $this->indexer->remove(\get_class($proposal), $proposal->getId());
         $this->indexer->finishBulk();
 
-        $this->dataloader->invalidate($proposalForm);
+        $this->dataLoader->invalidate($proposalForm);
 
         return ['proposal' => $proposal, 'viewer' => $user, 'step' => $proposal->getStep()];
     }

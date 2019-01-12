@@ -9,15 +9,15 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLo
 
 class ProposalCurrentVotableStepResolver implements ResolverInterface
 {
-    private $dataloader;
+    private $dataLoader;
 
-    public function __construct(ProposalCurrentVotableStepDataLoader $dataloader)
+    public function __construct(ProposalCurrentVotableStepDataLoader $dataLoader)
     {
-        $this->dataloader = $dataloader;
+        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(Proposal $proposal): Promise
     {
-        return $this->dataloader->load(compact('proposal'));
+        return $this->dataLoader->load(compact('proposal'));
     }
 }

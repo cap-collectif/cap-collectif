@@ -10,15 +10,15 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalStatusDataLoader;
 
 class ProposalStatusResolver implements ResolverInterface
 {
-    private $dataloader;
+    private $dataLoader;
 
-    public function __construct(ProposalStatusDataLoader $dataloader)
+    public function __construct(ProposalStatusDataLoader $dataLoader)
     {
-        $this->dataloader = $dataloader;
+        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(Proposal $proposal, Argument $args): Promise
     {
-        return $this->dataloader->load(compact('proposal', 'args'));
+        return $this->dataLoader->load(compact('proposal', 'args'));
     }
 }

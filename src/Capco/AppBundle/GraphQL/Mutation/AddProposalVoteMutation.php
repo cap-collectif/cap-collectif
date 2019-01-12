@@ -39,7 +39,7 @@ class AddProposalVoteMutation implements MutationInterface
     private $proposalSelectionVoteRepository;
     private $proposalViewerVoteDataLoader;
     private $proposalViewerHasVoteDataLoader;
-    private $viewerProposalVotesDataloader;
+    private $viewerProposalVotesDataLoader;
     private $indexer;
 
     public function __construct(
@@ -54,7 +54,7 @@ class AddProposalVoteMutation implements MutationInterface
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
-        ViewerProposalVotesDataLoader $viewerProposalVotesDataloader,
+        ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
         Indexer $indexer
     ) {
         $this->em = $em;
@@ -69,7 +69,7 @@ class AddProposalVoteMutation implements MutationInterface
         $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
         $this->indexer = $indexer;
-        $this->viewerProposalVotesDataloader = $viewerProposalVotesDataloader;
+        $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
     }
 
     public function __invoke(Argument $input, User $user, RequestStack $request): array
@@ -143,7 +143,7 @@ class AddProposalVoteMutation implements MutationInterface
             $this->proposalVotesDataLoader->invalidate($proposal);
             $this->proposalViewerVoteDataLoader->invalidate($proposal);
             $this->proposalViewerHasVoteDataLoader->invalidate($proposal);
-            $this->viewerProposalVotesDataloader->invalidate($user);
+            $this->viewerProposalVotesDataLoader->invalidate($user);
         } catch (UniqueConstraintViolationException $e) {
             throw new UserError('proposal.vote.already_voted');
         }

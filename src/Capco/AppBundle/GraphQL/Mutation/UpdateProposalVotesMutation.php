@@ -22,14 +22,14 @@ class UpdateProposalVotesMutation implements MutationInterface
     private $proposalSelectionVoteRepository;
     private $stepRepo;
     private $logger;
-    private $viewerProposalVotesDataloader;
+    private $viewerProposalVotesDataLoader;
 
     public function __construct(
         EntityManagerInterface $em,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         AbstractStepRepository $stepRepo,
-        ViewerProposalVotesDataLoader $viewerProposalVotesDataloader,
+        ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
         LoggerInterface $logger
     ) {
         $this->em = $em;
@@ -37,7 +37,7 @@ class UpdateProposalVotesMutation implements MutationInterface
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->stepRepo = $stepRepo;
         $this->logger = $logger;
-        $this->viewerProposalVotesDataloader = $viewerProposalVotesDataloader;
+        $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -84,7 +84,7 @@ class UpdateProposalVotesMutation implements MutationInterface
 
         $this->em->flush();
 
-        $this->viewerProposalVotesDataloader->invalidate($user);
+        $this->viewerProposalVotesDataLoader->invalidate($user);
 
         return ['step' => $step, 'viewer' => $user];
     }
