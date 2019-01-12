@@ -2,17 +2,18 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 
 class UpdateProposalVotesMutation implements MutationInterface
 {
@@ -21,12 +22,14 @@ class UpdateProposalVotesMutation implements MutationInterface
     private $proposalSelectionVoteRepository;
     private $stepRepo;
     private $logger;
+    private $viewerProposalVotesDataloader;
 
     public function __construct(
         EntityManagerInterface $em,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         AbstractStepRepository $stepRepo,
+        ViewerProposalVotesDataLoader $viewerProposalVotesDataloader,
         LoggerInterface $logger
     ) {
         $this->em = $em;
@@ -34,6 +37,7 @@ class UpdateProposalVotesMutation implements MutationInterface
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->stepRepo = $stepRepo;
         $this->logger = $logger;
+        $this->viewerProposalVotesDataloader = $viewerProposalVotesDataloader;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -80,7 +84,7 @@ class UpdateProposalVotesMutation implements MutationInterface
 
         $this->em->flush();
 
-        // TODO invalidate cache
+        $this->viewerProposalVotesDataloader->invalidate($user);
 
         return ['step' => $step, 'viewer' => $user];
     }
