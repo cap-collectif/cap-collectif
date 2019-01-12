@@ -11,7 +11,7 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Entity\Status;
 
-class ProposalStatusDataloader extends BatchDataLoader
+class ProposalStatusDataLoader extends BatchDataLoader
 {
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
