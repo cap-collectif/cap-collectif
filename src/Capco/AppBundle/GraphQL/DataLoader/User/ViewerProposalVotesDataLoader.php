@@ -136,6 +136,18 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         return $connection;
     }
 
+    protected function normalizeValue($value)
+    {
+        // TODO we can do better here
+        return $value;
+    }
+
+    protected function denormalizeValue($value)
+    {
+        // TODO we can do better here
+        return $value;
+    }
+
     protected function serializeKey($key)
     {
         return [
