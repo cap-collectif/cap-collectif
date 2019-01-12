@@ -2,57 +2,26 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
+use GraphQL\Executor\Promise\Promise;
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
-use Psr\Log\LoggerInterface;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 
 class ViewerStepVotesResolver implements ResolverInterface
 {
     private $dataLoader;
-    private $logger;
-    private $promiseAdapter;
 
-    public function __construct(
-        ViewerProposalVotesDataLoader $dataLoader,
-        LoggerInterface $logger,
-        PromiseAdapterInterface $promiseAdapter
-    ) {
+    public function __construct(ViewerProposalVotesDataLoader $dataLoader)
+    {
         $this->dataLoader = $dataLoader;
-        $this->logger = $logger;
-        $this->promiseAdapter = $promiseAdapter;
     }
 
-    public function __invoke(AbstractStep $step, User $user, Argument $args): Connection
+    public function __invoke(AbstractStep $step, User $user, Argument $args): Promise
     {
-        try {
-            $args->offsetSet('stepId', $step->getId());
+        $args->offsetSet('stepId', $step->getId());
 
-            $promise = $this->dataLoader->load(compact('user', 'args'));
-            $connection = null;
-            $promise->then(function ($value) use (&$connection) {
-                return $connection = $value;
-            });
-
-            $this->promiseAdapter->await($promise);
-
-            if (!$connection) {
-                $connection = ConnectionBuilder::connectionFromArray([], $args);
-                $connection->totalCount = 0;
-
-                return $connection;
-            }
-
-            return $connection;
-        } catch (\RuntimeException $exception) {
-            $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-
-            throw new \RuntimeException($exception->getMessage());
-        }
+        return $this->dataLoader->load(compact('user', 'args'));
     }
 }

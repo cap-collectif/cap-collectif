@@ -44,14 +44,23 @@ class ProposalViewerFollowingConfigurationDataLoader extends BatchDataLoader
 
     public function all(array $keys)
     {
-        $connections = [];
+        $user = $keys[0]['viewer'];
+        $batchProposalIds = array_map(function ($key) {
+            return $key['proposal']->getId();
+        }, $keys);
 
-        // TODO add some batching here
-        foreach ($keys as $key) {
-            $connections[] = $this->resolve($key['proposal'], $key['viewer']);
-        }
+        $followers = $this->followerRepository->getByProposalIdsAndUser($batchProposalIds, $user);
+        $results = array_map(function ($key) use ($followers) {
+            $found = array_values(
+                array_filter($followers, function ($follower) use ($key) {
+                    return $follower->getProposal()->getId() === $key['proposal']->getId();
+                })
+            );
 
-        return $this->getPromiseAdapter()->createAll($connections);
+            return isset($found[0]) ? $found[0]->getNotifiedOf() : null;
+        }, $keys);
+
+        return $this->getPromiseAdapter()->createAll($results);
     }
 
     protected function serializeKey($key): array

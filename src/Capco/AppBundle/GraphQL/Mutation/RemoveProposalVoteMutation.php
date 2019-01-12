@@ -2,21 +2,22 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 
 class RemoveProposalVoteMutation implements MutationInterface
 {
@@ -28,6 +29,7 @@ class RemoveProposalVoteMutation implements MutationInterface
     private $proposalSelectionVoteRepository;
     private $proposalViewerVoteDataLoader;
     private $proposalViewerHasVoteDataLoader;
+    private $viewerProposalVotesDataloader;
     private $indexer;
 
     public function __construct(
@@ -39,6 +41,7 @@ class RemoveProposalVoteMutation implements MutationInterface
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
+        ViewerProposalVotesDataLoader $viewerProposalVotesDataloader,
         Indexer $indexer
     ) {
         $this->em = $em;
@@ -50,6 +53,7 @@ class RemoveProposalVoteMutation implements MutationInterface
         $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
         $this->indexer = $indexer;
+        $this->viewerProposalVotesDataloader = $viewerProposalVotesDataloader;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -95,6 +99,7 @@ class RemoveProposalVoteMutation implements MutationInterface
         $this->proposalVotesDataLoader->invalidate($proposal);
         $this->proposalViewerVoteDataLoader->invalidate($proposal);
         $this->proposalViewerHasVoteDataLoader->invalidate($proposal);
+        $this->viewerProposalVotesDataloader->invalidate($user);
 
         // Synchronously index for mutation payload
         $this->proposalVotesDataLoader->useElasticsearch = false;

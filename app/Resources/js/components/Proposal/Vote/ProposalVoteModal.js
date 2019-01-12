@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import { Modal, Panel, Label } from 'react-bootstrap';
-import { submit, isInvalid } from 'redux-form';
+import { submit, isPristine, isInvalid } from 'redux-form';
 import { connect } from 'react-redux';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { closeVoteModal, vote } from '../../../redux/modules/proposal';
-import ProposalsUserVotesTable from '../../Project/Votes/ProposalsUserVotesTable';
+import ProposalsUserVotesTable, { getFormName } from '../../Project/Votes/ProposalsUserVotesTable';
 import environment from '../../../createRelayEnvironment';
 import type { GlobalState, Dispatch } from '../../../types';
 import RequirementsForm, { formName } from '../../Requirements/RequirementsForm';
@@ -28,6 +28,7 @@ type Props = ParentProps & {
   showModal: boolean,
   isSubmitting: boolean,
   invalid: boolean,
+  pristine: boolean,
   viewerIsConfirmedByEmail: boolean,
 };
 
@@ -49,11 +50,11 @@ export class ProposalVoteModal extends React.Component<Props, State> {
   }
 
   onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) => {
-    const { dispatch, step, proposal } = this.props;
+    const { pristine, dispatch, step, proposal } = this.props;
 
     const tmpVote = values.votes.filter(v => v.id === null)[0];
 
-    // First we add the vote, then we update/reorder
+    // First we add the vote
     return vote(dispatch, step.id, proposal.id, !tmpVote.public).then(data => {
       if (
         !data ||
@@ -65,6 +66,15 @@ export class ProposalVoteModal extends React.Component<Props, State> {
         return;
       }
       tmpVote.id = data.addProposalVote.vote.id;
+
+      // If the user didn't reorder
+      // or update any vote privacy
+      // we are clean
+      if (!step.votesRanking && pristine) {
+        return true;
+      }
+
+      // Otherwise we update/reorder votes
       return UpdateProposalVotesMutation.commit({
         input: {
           step: step.id,
@@ -242,6 +252,7 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => ({
     state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id
   ),
   isSubmitting: !!state.proposal.isVoting,
+  pristine: isPristine(getFormName(props.step))(state),
   invalid: isInvalid(formName)(state),
   viewerIsConfirmedByEmail: state.user.user && state.user.user.isEmailConfirmed,
 });

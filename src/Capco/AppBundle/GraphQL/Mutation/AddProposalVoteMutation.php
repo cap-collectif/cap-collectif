@@ -2,28 +2,29 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\ProposalCollectVote;
-use Capco\AppBundle\Entity\ProposalSelectionVote;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
-use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\ProposalCollectVote;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 
 class AddProposalVoteMutation implements MutationInterface
 {
@@ -38,6 +39,7 @@ class AddProposalVoteMutation implements MutationInterface
     private $proposalSelectionVoteRepository;
     private $proposalViewerVoteDataLoader;
     private $proposalViewerHasVoteDataLoader;
+    private $viewerProposalVotesDataloader;
     private $indexer;
 
     public function __construct(
@@ -52,6 +54,7 @@ class AddProposalVoteMutation implements MutationInterface
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
+        ViewerProposalVotesDataLoader $viewerProposalVotesDataloader,
         Indexer $indexer
     ) {
         $this->em = $em;
@@ -66,6 +69,7 @@ class AddProposalVoteMutation implements MutationInterface
         $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
         $this->indexer = $indexer;
+        $this->viewerProposalVotesDataloader = $viewerProposalVotesDataloader;
     }
 
     public function __invoke(Argument $input, User $user, RequestStack $request): array
@@ -139,6 +143,7 @@ class AddProposalVoteMutation implements MutationInterface
             $this->proposalVotesDataLoader->invalidate($proposal);
             $this->proposalViewerVoteDataLoader->invalidate($proposal);
             $this->proposalViewerHasVoteDataLoader->invalidate($proposal);
+            $this->viewerProposalVotesDataloader->invalidate($user);
         } catch (UniqueConstraintViolationException $e) {
             throw new UserError('proposal.vote.already_voted');
         }

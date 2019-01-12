@@ -78,7 +78,7 @@ services:
     autowire: true
     arguments:
       $cachePrefix: ProposalCurrentVotableStepDataLoader
-      $cacheTtl: 120
+      $cacheTtl: 600
       $debug: '%kernel.debug%'
       $enableCache: true
 
@@ -94,7 +94,7 @@ services:
     autowire: true
     arguments:
       $cachePrefix: ProposalViewerHasVoteDataLoader
-      $cacheTtl: 120
+      $cacheTtl: 600
       $debug: '%kernel.debug%'
       $enableCache: true
 
@@ -102,7 +102,7 @@ services:
     autowire: true
     arguments:
       $cachePrefix: ProposalViewerIsFollowingDataLoader
-      $cacheTtl: 120
+      $cacheTtl: 600
       $debug: '%kernel.debug%'
       $enableCache: true
 
@@ -118,14 +118,6 @@ services:
     autowire: true
     arguments:
       $cachePrefix: ViewerProposalVotes
-      $cacheTtl: 60
+      $cacheTtl: 600
       $debug: '%kernel.debug%'
-      $enableCache: false
-
-  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalStatusDataLoader:
-    autowire: true
-    arguments:
-      $cachePrefix: ProposalStatusDataLoader
-      $cacheTtl: 60
-      $debug: '%kernel.debug%'
-      $enableCache: false
+      $enableCache: true

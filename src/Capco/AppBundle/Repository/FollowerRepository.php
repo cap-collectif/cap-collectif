@@ -18,6 +18,7 @@ class FollowerRepository extends EntityRepository
             ->setParameter('user', $user)
             ->setParameter('ids', $ids)
             ->getQuery()
+            ->useQueryCache(true)
             ->getResult();
     }
 

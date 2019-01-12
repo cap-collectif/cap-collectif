@@ -290,8 +290,10 @@ const form = reduxForm({
   enableReinitialize: true,
 })(ProposalsUserVotesTable);
 
+export const getFormName = (step: { +id: string }) => `proposal-user-vote-form-step-${step.id}`;
+
 const mapStateToProps = (state: State, props: RelayProps) => ({
-  form: `proposal-user-vote-form-step-${props.step.id}`,
+  form: getFormName(props.step),
   initialValues: {
     votes:
       props.votes.edges &&

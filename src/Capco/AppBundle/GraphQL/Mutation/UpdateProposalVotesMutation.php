@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -46,19 +47,13 @@ class UpdateProposalVotesMutation implements MutationInterface
         $votesInput = $input->offsetGet('votes');
 
         if ($step instanceof SelectionStep) {
-            $votes = $this->proposalSelectionVoteRepository->getByAuthorAndStep(
-                $user,
-                $step,
-                -1,
-                0
-            )->getIterator();
+            $votes = $this->proposalSelectionVoteRepository
+                ->getByAuthorAndStep($user, $step, -1, 0)
+                ->getIterator();
         } elseif ($step instanceof CollectStep) {
-            $votes = $this->proposalCollectVoteRepository->getByAuthorAndStep(
-                $user,
-                $step,
-                -1,
-                0
-            )->getIterator();
+            $votes = $this->proposalCollectVoteRepository
+                ->getByAuthorAndStep($user, $step, -1, 0)
+                ->getIterator();
         } else {
             throw new UserError(sprintf('Not good step with id "%s"', $stepId));
         }
@@ -84,6 +79,8 @@ class UpdateProposalVotesMutation implements MutationInterface
         }
 
         $this->em->flush();
+
+        // TODO invalidate cache
 
         return ['step' => $step, 'viewer' => $user];
     }

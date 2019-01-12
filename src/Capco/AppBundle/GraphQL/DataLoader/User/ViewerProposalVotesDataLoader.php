@@ -61,7 +61,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     public function invalidate(User $user): void
     {
         // TODO
-        $this->cache->invalidateAll();
+        $this->invalidateAll();
     }
 
     public function all(array $keys)
@@ -81,10 +81,6 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
 
         $connections = [];
         foreach ($keys as $key) {
-            $this->logger->info(
-                __METHOD__ . ' called with ' . json_encode($this->serializeKey($key))
-            );
-
             $connections[] = $this->resolve($key['user'], $key['args']);
         }
 

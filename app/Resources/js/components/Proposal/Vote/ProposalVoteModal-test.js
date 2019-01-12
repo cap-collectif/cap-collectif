@@ -39,6 +39,7 @@ describe('<ProposalVoteModal />', () => {
         viewerIsConfirmedByEmail
         isSubmitting={false}
         invalid={false}
+        pristine
         proposal={proposal}
         step={step}
         dispatch={jest.fn()}
@@ -61,6 +62,7 @@ describe('<ProposalVoteModal />', () => {
         viewerIsConfirmedByEmail
         isSubmitting={false}
         invalid={false}
+        pristine
         proposal={proposal}
         step={questionStepForm}
         dispatch={jest.fn()}

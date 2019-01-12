@@ -29,7 +29,7 @@ class ProposalRepository extends EntityRepository
                 'district',
                 'category',
                 'likers',
-                'evaluation'
+                'proposalEvaluation'
             )
             ->leftJoin('p.author', 'author')
             ->leftJoin('p.status', 'status')
@@ -38,7 +38,7 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('p.category', 'category')
             ->leftJoin('p.likers', 'likers')
             ->leftJoin('p.progressSteps', 'progressSteps')
-            ->leftJoin('p.proposalEvaluation', 'evaluation')
+            ->leftJoin('p.proposalEvaluation', 'proposalEvaluation')
             ->where('p.id IN (:ids)')
             ->setParameter('ids', $ids);
 

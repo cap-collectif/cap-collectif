@@ -966,8 +966,11 @@ class Proposal implements
         return $this->getStatus();
     }
 
-    public function getProposalEvaluation()
+    public function getProposalEvaluation(): ?ProposalEvaluation
     {
+        // TODO remove me
+        return null;
+
         return $this->proposalEvaluation;
     }
 
