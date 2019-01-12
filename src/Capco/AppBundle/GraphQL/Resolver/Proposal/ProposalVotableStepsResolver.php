@@ -9,8 +9,6 @@ class ProposalVotableStepsResolver implements ResolverInterface
 {
     public function __invoke(Proposal $proposal): iterable
     {
-        // TODO remove me
-        return [];
         $result = [];
         $collect = $proposal->getStep();
         if ($collect && $collect->isVotable()) {

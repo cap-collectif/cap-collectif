@@ -8,7 +8,7 @@ use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver;
 
 class ProposalCurrentVotableStepDataloader extends BatchDataLoader
 {
@@ -18,7 +18,7 @@ class ProposalCurrentVotableStepDataloader extends BatchDataLoader
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        ProposalStepVotesResolver $resolver,
+        ProposalVotableStepsResolver $resolver,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -58,7 +58,36 @@ class ProposalCurrentVotableStepDataloader extends BatchDataLoader
 
     public function resolve(Proposal $proposal): ?AbstractStep
     {
-        return $this->resolver->getFirstVotableStepForProposal($proposal);
+        $votableSteps = $this->resolver->__invoke($proposal);
+
+        $firstVotableStep = null;
+        foreach ($votableSteps as $step) {
+            if ($step->isOpen()) {
+                $firstVotableStep = $step;
+
+                break;
+            }
+        }
+        if (!$firstVotableStep) {
+            foreach ($votableSteps as $step) {
+                if ($step->isFuture()) {
+                    $firstVotableStep = $step;
+
+                    break;
+                }
+            }
+        }
+        if (!$firstVotableStep) {
+            foreach ($votableSteps as $step) {
+                if ($step->isClosed()) {
+                    $firstVotableStep = $step;
+
+                    break;
+                }
+            }
+        }
+
+        return $firstVotableStep;
     }
 
     protected function serializeKey($key): array

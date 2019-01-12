@@ -93,7 +93,7 @@ abstract class BatchDataLoader extends DataLoader
         if (!$this->enableCache || !$cacheItem->isHit()) {
             if ($this->debug) {
                 $this->logger->info(
-                    'Cache MISS for: ' . var_export($this->serializeKey($key), true)
+                    __METHOD__ . ' Cache MISS for: ' . var_export($this->serializeKey($key), true)
                 );
             }
 
@@ -123,7 +123,9 @@ abstract class BatchDataLoader extends DataLoader
         }
 
         if ($this->debug) {
-            $this->logger->info('Cache HIT for: ' . var_export($this->serializeKey($key), true));
+            $this->logger->info(
+                __METHOD__ . 'Cache HIT for: ' . var_export($this->serializeKey($key), true)
+            );
         }
 
         if ($this->enableCache) {
