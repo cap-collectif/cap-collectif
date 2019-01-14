@@ -31,7 +31,7 @@ Scenario: Admin wants to get votes for a proposal in a selection step
       }
     }",
     "variables": {
-      "selectionStepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+      "selectionStepId": "selectionstep1",
       "count": 3
     }
   }
@@ -41,7 +41,7 @@ Scenario: Admin wants to get votes for a proposal in a selection step
   {
     "data": {
         "selectionStep": {
-            "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+            "id": "selectionstep1",
             "proposals": {
                 "totalCount": 3,
                 "edges": [
@@ -95,7 +95,7 @@ Scenario: Admin wants to get votes for a question in a selection step
       }
     }",
     "variables": {
-      "selectionStepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25RdWVzdGlvblN0ZXBWb3RlQ2xhc3NlbWVudA==",
+      "selectionStepId": "selectionQuestionStepVoteClassement",
       "count": 3
     }
   }
@@ -105,13 +105,13 @@ Scenario: Admin wants to get votes for a question in a selection step
   {
      "data":{
         "selectionStep":{
-           "id":"U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25RdWVzdGlvblN0ZXBWb3RlQ2xhc3NlbWVudA==",
+           "id":"selectionQuestionStepVoteClassement",
            "proposals":{
               "totalCount":1,
               "edges":[
                  {
                     "node":{
-                       "id":"UHJvcG9zYWw6cXVlc3Rpb24x",
+                       "id":"question1",
                        "votes":{
                           "totalCount":1,
                           "edges":[

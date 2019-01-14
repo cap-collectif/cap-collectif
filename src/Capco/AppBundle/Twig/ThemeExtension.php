@@ -6,7 +6,6 @@ use Capco\AppBundle\Helper\StepHelper;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Serializer\SerializerInterface;
 use Capco\AppBundle\Cache\RedisCache;
@@ -79,7 +78,7 @@ class ThemeExtension extends \Twig_Extension
                     }
 
                     $stepData = [
-                        'id' => $this->getStepId($realStep),
+                        'id' => $realStep->getId(),
                         'title' => $realStep->getTitle(),
                         'label' => $realStep->getLabel(),
                         'slug' => $realStep->getSlug(),
@@ -123,8 +122,9 @@ class ThemeExtension extends \Twig_Extension
                         ],
                     ];
                     $projectStepsData[] = $stepData;
-                    $projectStepsByIdData[$stepData['id']] = $stepData;
+                    $projectStepsByIdData[$realStep->getId()] = $stepData;
                 }
+
                 $projectSerialized = $this->serializer->serialize($project, 'json', [
                     'groups' => [
                         'Projects',
@@ -168,12 +168,5 @@ class ThemeExtension extends \Twig_Extension
         }
 
         return $cachedItem->get();
-    }
-
-    private function getStepId($step): string
-    {
-        return \in_array($step->getType(), ['collect', 'selection'])
-            ? GlobalId::toGlobalId(ucfirst($step->getType()) . 'Step', $step->getId())
-            : $step->getId();
     }
 }

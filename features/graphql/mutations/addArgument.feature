@@ -93,7 +93,7 @@ Scenario: User wants to add an argument on an opinion without requirements
     "data": {
       "addArgument": {
         "argument": null,
-        "userErrors": [{"message":"You dont meets all the requirements."}]
+        "userErrors": [{"message":"You dont meets all the requirements. "}]
       }
     }
   }

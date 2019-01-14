@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Elastica\Index;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Swarrot\Broker\Message;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
@@ -37,25 +36,22 @@ class ProposalMutation implements ContainerAwareInterface
     use ContainerAwareTrait;
     private $logger;
     private $proposalLikersDataLoader;
-    private $globalIdResolver;
 
     public function __construct(
         LoggerInterface $logger,
-        ProposalLikersDataLoader $proposalLikersDataLoader,
-        GlobalIdResolver $globalidResolver
+        ProposalLikersDataLoader $proposalLikersDataLoader
     ) {
         $this->logger = $logger;
         $this->proposalLikersDataLoader = $proposalLikersDataLoader;
-        $this->globalIdResolver = $globalidResolver;
     }
 
-    public function changeNotation(Argument $input, $user)
+    public function changeNotation(Argument $input)
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
 
         $values = $input->getRawArguments();
-        $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
+        $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
         unset($values['proposalId']); // This only useful to retrieve the proposal
 
         $form = $formFactory->create(ProposalNotationType::class, $proposal);
@@ -71,14 +67,13 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeEvaluers(Argument $input, $user)
+    public function changeEvaluers(Argument $input)
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
 
         $values = $input->getRawArguments();
-        $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
-
+        $proposal = $this->container->get('capco.proposal.repository')->find($values['proposalId']);
         unset($values['proposalId']);
 
         $form = $formFactory->create(ProposalEvaluersType::class, $proposal);
@@ -93,10 +88,10 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeFollowers(string $proposalId, $user)
+    public function changeFollowers(string $proposalId, User $user)
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
+        $proposal = $this->getProposal($proposalId);
 
         if (!$proposal) {
             throw new UserError('Cant find the proposal');
@@ -108,14 +103,13 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeProgressSteps(Argument $input, $user): array
+    public function changeProgressSteps(Argument $input): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
 
         $values = $input->getRawArguments();
-        /** @var Proposal $proposal */
-        $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
+        $proposal = $this->getProposal($values['proposalId']);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $values['proposalId']));
         }
@@ -133,11 +127,11 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeCollectStatus(string $proposalId, $user, string $statusId = null): array
+    public function changeCollectStatus(string $proposalId, string $statusId = null): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
 
-        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
+        $proposal = $this->getProposal($proposalId);
         if (!$proposal) {
             throw new UserError('Cant find the proposal');
         }
@@ -161,15 +155,13 @@ class ProposalMutation implements ContainerAwareInterface
     public function changeSelectionStatus(
         string $proposalId,
         string $stepId,
-        $user,
         string $statusId = null
     ): array {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $proposalId = GlobalIdResolver::getDecodedId($proposalId);
-        $stepId = GlobalIdResolver::getDecodedId($stepId);
+
         $selection = $this->container->get('capco.selection.repository')->findOneBy([
-            'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
+            'proposal' => $proposalId,
+            'selectionStep' => $stepId,
         ]);
 
         if (!$selection) {
@@ -184,10 +176,7 @@ class ProposalMutation implements ContainerAwareInterface
         $selection->setStatus($status);
         $em->flush();
 
-        $proposal = $this->globalIdResolver->resolve(
-            \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-            $user
-        );
+        $proposal = $this->getProposal($proposalId);
 
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
@@ -197,15 +186,12 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function unselectProposal(string $proposalId, string $stepId, $user): array
+    public function unselectProposal(string $proposalId, string $stepId): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $proposalId = GlobalIdResolver::getDecodedId($proposalId);
-        $stepId = GlobalIdResolver::getDecodedId($stepId);
-
         $selection = $this->container->get('capco.selection.repository')->findOneBy([
-            'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
+            'proposal' => $proposalId,
+            'selectionStep' => $stepId,
         ]);
 
         if (!$selection) {
@@ -214,10 +200,8 @@ class ProposalMutation implements ContainerAwareInterface
         $em->remove($selection);
         $em->flush();
 
-        $proposal = $this->globalIdResolver->resolve(
-            \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-            $user
-        );
+        $proposal = $this->getProposal($proposalId);
+
         // Synchronously index
         $indexer = $this->container->get(Indexer::class);
         $indexer->index(\get_class($proposal), $proposal->getId());
@@ -229,16 +213,13 @@ class ProposalMutation implements ContainerAwareInterface
     public function selectProposal(
         string $proposalId,
         string $stepId,
-        User $user,
         string $statusId = null
     ): array {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $proposalId = GlobalIdResolver::getDecodedId($proposalId);
-        $stepId = GlobalIdResolver::getDecodedId($stepId);
 
         $selection = $this->container->get('capco.selection.repository')->findOneBy([
-            'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
-            'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
+            'proposal' => $proposalId,
+            'selectionStep' => $stepId,
         ]);
         if ($selection) {
             throw new UserError('Already selected');
@@ -250,8 +231,9 @@ class ProposalMutation implements ContainerAwareInterface
             $selectionStatus = $this->container->get('capco.status.repository')->find($statusId);
         }
 
-        $proposal = $this->globalIdResolver->resolve($proposalId['id'], $user);
-        $step = $this->globalIdResolver->resolve($stepId['id'], $user);
+        $proposal = $this->getProposal($proposalId);
+        $step = $this->container->get('capco.selection_step.repository')->find($stepId);
+
         $selection = new Selection();
         $selection->setSelectionStep($step);
         $selection->setStatus($selectionStatus);
@@ -268,14 +250,14 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changePublicationStatus(Argument $values, $user): array
+    public function changePublicationStatus(Argument $values, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         if ($user && $user->isAdmin() && $em->getFilters()->isEnabled('softdeleted')) {
             // If user is an admin, we allow to retrieve deleted proposal
             $em->getFilters()->disable('softdeleted');
         }
-        $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
+        $proposal = $this->getProposal($values['proposalId']);
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $values['proposalId']));
         }
@@ -324,7 +306,7 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function create(Argument $input, $user): array
+    public function create(Argument $input, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
@@ -405,13 +387,14 @@ class ProposalMutation implements ContainerAwareInterface
         return ['proposal' => $proposal];
     }
 
-    public function changeContent(Argument $input, $user): array
+    public function changeContent(Argument $input, User $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $formFactory = $this->container->get('form.factory');
+        $proposalRepo = $this->container->get('capco.proposal.repository');
 
         $values = $input->getRawArguments();
-        $proposal = $this->globalIdResolver->resolve($values['id'], $user);
+        $proposal = $proposalRepo->find($values['id']);
         // Save the previous draft status to send the good notif.
         $wasDraft = $proposal->isDraft();
 
@@ -549,5 +532,10 @@ class ProposalMutation implements ContainerAwareInterface
         if (!empty($errors)) {
             throw new UserErrors($errors);
         }
+    }
+
+    private function getProposal(string $proposalId): Proposal
+    {
+        return $this->container->get('capco.proposal.repository')->find($proposalId);
     }
 }

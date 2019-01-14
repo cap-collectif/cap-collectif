@@ -49,6 +49,7 @@ class ProjectContributorResolver implements ResolverInterface
                 return $contributors;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
                 $totalCount = 0;
 
                 return [];

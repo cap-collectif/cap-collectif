@@ -5,7 +5,6 @@ Capco\UserBundle\Entity\User:
     firstname: Laurent
     lastname: Brunet
     email: lbrunet@jolicode.com
-    phone: '+3300000000'
     userType: '@UserType1'
     plainPassword: toto
     roles:

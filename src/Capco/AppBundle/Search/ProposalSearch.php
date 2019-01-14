@@ -75,13 +75,13 @@ class ProposalSearch extends Search
             ->setFrom($offset)
             ->setSize($limit);
         $resultSet = $this->index->getType($this->type)->search($query);
-        $ids = array_map(function (Result $result) {
-            return $result->getData()['id'];
-        }, $resultSet->getResults());
-        $proposals = $this->getHydratedResults($ids);
 
         return [
-            'proposals' => $proposals,
+            'proposals' => $this->getHydratedResults(
+                array_map(function (Result $result) {
+                    return $result->getData()['id'];
+                }, $resultSet->getResults())
+            ),
             'count' => $resultSet->getTotalHits(),
         ];
     }

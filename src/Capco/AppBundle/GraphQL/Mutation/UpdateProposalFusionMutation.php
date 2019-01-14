@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Form\ProposalFusionType;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -14,26 +14,26 @@ class UpdateProposalFusionMutation implements MutationInterface
 {
     private $em;
     private $formFactory;
-    private $globalIdResolver;
+    private $proposalRepo;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactory $formFactory,
-        GlobalIdResolver $globalIdResolver
+        ProposalRepository $proposalRepo
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
-        $this->globalIdResolver = $globalIdResolver;
+        $this->proposalRepo = $proposalRepo;
     }
 
-    public function __invoke(Argument $input, $user): array
+    public function __invoke(Argument $input): array
     {
         $proposalIds = $input->getRawArguments()['fromProposals'];
         $proposalId = $input->getRawArguments()['proposalId'];
 
-        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
+        $proposal = $this->proposalRepo->find($proposalId);
         if (!$proposal) {
-            throw new UserError("Unknown proposal to merge with id: ${proposalId}");
+            throw new UserError('Unknown proposal to merge with id: ' . $proposalId);
         }
 
         $beforeChildProposalIds = $proposal->getChildConnections()->map(function ($entity) {
@@ -41,22 +41,20 @@ class UpdateProposalFusionMutation implements MutationInterface
         });
 
         $proposalForm = $proposal->getProposalForm();
-        $proposalUuids = [];
         foreach ($proposalIds as $key => $id) {
-            $child = $this->globalIdResolver->resolve($id, $user);
+            $child = $this->proposalRepo->find($id);
             if (!$child) {
-                throw new UserError("Unknown proposal to merge with globalId: ${id}");
+                throw new UserError('Unknown proposal to merge with id: ' . $id);
             }
             if ($child->getProposalForm() !== $proposalForm) {
                 throw new UserError('All proposals to merge should have the same proposalForm.');
             }
-            $proposalUuids[] = $child->getId();
         }
 
         $form = $this->formFactory->create(ProposalFusionType::class, $proposal, [
             'proposalForm' => $proposalForm,
         ]);
-        $form->submit(['childConnections' => $proposalUuids], false);
+        $form->submit(['childConnections' => $proposalIds], false);
 
         if (!$form->isValid()) {
             throw new UserError('Invalid data.');
@@ -74,7 +72,7 @@ class UpdateProposalFusionMutation implements MutationInterface
         });
         $removedMergedFrom = [];
         foreach ($removedMergedFromIds as $id) {
-            $removedMergedFrom[] = $this->globalIdResolver->resolve($id, $user);
+            $removedMergedFrom[] = $this->proposalRepo->find($id);
         }
 
         return ['proposal' => $proposal, 'removedMergedFrom' => $removedMergedFrom];

@@ -34,7 +34,7 @@ Scenario: Admin wants to get the related content of the first proposal
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx"
+      "proposalId": "proposal1"
     }
   }
   """
@@ -43,7 +43,7 @@ Scenario: Admin wants to get the related content of the first proposal
   {
     "data": {
       "proposal": {
-        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        "id": "proposal1",
         "news": {
           "edges": [
             {
@@ -58,7 +58,7 @@ Scenario: Admin wants to get the related content of the first proposal
                     "id": "theme2"
                   },
                   {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
+                    "id": "proposal1"
                   },
                   @...@
                 ]
@@ -99,7 +99,7 @@ Scenario: Admin wants to get only themes on the related content of the first pro
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx"
+      "proposalId": "proposal1"
     }
   }
   """
@@ -108,7 +108,7 @@ Scenario: Admin wants to get only themes on the related content of the first pro
   {
     "data": {
       "proposal": {
-        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        "id": "proposal1",
         "news": {
           "edges": [
             {
@@ -161,7 +161,7 @@ Scenario: Admin wants to get only proposals on the related content of a blog pos
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx"
+      "proposalId": "proposal1"
     }
   }
   """
@@ -170,7 +170,7 @@ Scenario: Admin wants to get only proposals on the related content of a blog pos
   {
     "data": {
       "proposal": {
-        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        "id": "proposal1",
         "news": {
           "edges": [
             {
@@ -181,7 +181,7 @@ Scenario: Admin wants to get only proposals on the related content of a blog pos
                   {},
                   {},
                   {
-                    "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
+                    "id": "proposal1"
                   },
                   @...@
                 ]

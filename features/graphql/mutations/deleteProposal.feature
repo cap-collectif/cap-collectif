@@ -15,7 +15,7 @@ Scenario: Anonymous GraphQL client can not delete a proposal
     }",
     "variables": {
       "input": {
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx2"
+        "proposalId": "proposal12"
       }
     }
   }
@@ -49,7 +49,7 @@ Scenario: User GraphQL client can delete his proposal
     }",
     "variables": {
       "input": {
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMg=="
+        "proposalId": "proposal12"
       }
     }
   }
@@ -60,7 +60,7 @@ Scenario: User GraphQL client can delete his proposal
     "data": {
       "deleteProposal": {
         "proposal": {
-          "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
+          "id": "proposal12",
           "deletedAt": "@string@.isDateTime()"
         }
       }
@@ -68,7 +68,7 @@ Scenario: User GraphQL client can delete his proposal
   }
   """
   And the queue associated to "proposal_delete" producer has messages below:
-  | 0 | {"proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMg=="} |
+  | 0 | {"proposalId": "proposal12"} |
 
 @database
 Scenario: GraphQL client wants delete a proposal
@@ -85,7 +85,7 @@ Scenario: GraphQL client wants delete a proposal
     }",
     "variables": {
       "input": {
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw4"
+        "proposalId": "proposal8"
       }
     }
   }

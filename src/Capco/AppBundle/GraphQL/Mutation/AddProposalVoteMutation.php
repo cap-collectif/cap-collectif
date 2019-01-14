@@ -12,9 +12,8 @@ use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -42,7 +41,6 @@ class AddProposalVoteMutation implements MutationInterface
     private $proposalViewerHasVoteDataLoader;
     private $viewerProposalVotesDataLoader;
     private $indexer;
-    private $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -57,8 +55,7 @@ class AddProposalVoteMutation implements MutationInterface
         ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
-        Indexer $indexer,
-        GlobalIdResolver $globalIdResolver
+        Indexer $indexer
     ) {
         $this->em = $em;
         $this->validator = $validator;
@@ -73,13 +70,12 @@ class AddProposalVoteMutation implements MutationInterface
         $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
         $this->indexer = $indexer;
         $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
-        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $input, User $user, RequestStack $request): array
     {
-        $proposal = $this->globalIdResolver->resolve($input->offsetGet('proposalId'), $user);
-        $step = $this->globalIdResolver->resolve($input->offsetGet('stepId'), $user);
+        $proposal = $this->proposalRepo->find($input->offsetGet('proposalId'));
+        $step = $this->stepRepo->find($input->offsetGet('stepId'));
 
         if (!$proposal) {
             throw new UserError('Unknown proposal with id: ' . $input->offsetGet('proposalId'));
@@ -88,7 +84,6 @@ class AddProposalVoteMutation implements MutationInterface
             throw new UserError('Unknown step with id: ' . $input->offsetGet('stepId'));
         }
 
-        /** @var AbstractStep $step */
         if (!$this->resolver->viewerMeetsTheRequirementsResolver($user, $step)) {
             throw new UserError('You dont meets all the requirements.');
         }

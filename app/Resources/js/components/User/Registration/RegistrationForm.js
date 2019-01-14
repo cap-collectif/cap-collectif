@@ -1,12 +1,11 @@
 // @flow
 import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, reduxForm, type FormProps, formValueSelector } from 'redux-form';
 import { isEmail } from '../../../services/Validator';
 import type { Dispatch, State } from '../../../types';
-import { baseUrl } from '../../../config';
 import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import renderComponent from '../../Form/Field';
@@ -21,7 +20,6 @@ type Props = {|
   addUserTypeField: boolean,
   addZipcodeField: boolean,
   addCaptchaField: boolean,
-  privacyPolicyRequired: boolean,
   addConsentExternalCommunicationField: boolean,
   addConsentInternalCommunicationField: boolean,
   userTypes: Array<Object>,
@@ -98,18 +96,8 @@ export class RegistrationForm extends React.Component<Props> {
       addCaptchaField,
       organizationName,
       shieldEnabled,
-      privacyPolicyRequired,
       dispatch,
     } = this.props;
-
-    const privacyPolicyComponent = privacyPolicyRequired ? (
-      <FormattedHTMLMessage
-        id="and-the-privacy-policy"
-        values={{
-          url: `${baseUrl}/politique-de-confidentialite`,
-        }}
-      />
-    ) : null;
 
     const chartLinkComponent = shieldEnabled ? (
       <FormattedMessage
@@ -264,11 +252,7 @@ export class RegistrationForm extends React.Component<Props> {
           ariaRequired
           type="checkbox"
           labelClassName="font-weight-normal"
-          children={
-            <span>
-              {chartLinkComponent} {privacyPolicyComponent}
-            </span>
-          }
+          children={chartLinkComponent}
         />
         {addConsentInternalCommunicationField && (
           <Field
@@ -317,7 +301,6 @@ const mapStateToProps = (state: State) => ({
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
   shieldEnabled: state.default.features.shield_mode,
-  privacyPolicyRequired: state.default.features.privacy_policy,
   responses: formValueSelector(form)(state, 'responses'),
   initialValues: {
     responses: [],

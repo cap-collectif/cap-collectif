@@ -78,48 +78,33 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
       }
     }",
     "variables": {
-      "collectStep": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx"
+      "collectStep": "collectstep1"
     }
   }
   """
   Then the JSON response should match:
   """
-{
-   "data":{
-      "collectStep":{
-         "contributors":{
-            "totalCount":4,
-            "anonymousCount":0,
-            "pageInfo":{
-               "hasNextPage":false,
-               "endCursor":"YXJyYXljb25uZWN0aW9uOjM="
-            },
-            "edges":[
-               {
-                  "node":{
-                     "_id":"user5"
-                  }
-               },
-               {
-                  "node":{
-                     "_id":"user502"
-                  }
-               },
-               {
-                  "node":{
-                     "_id":"user7"
-                  }
-               },
-               {
-                  "node":{
-                     "_id":"userAdmin"
-                  }
-               }
-            ]
-         }
+  {
+    "data": {
+      "collectStep": {
+        "contributors": {
+          "totalCount": 5,
+          "anonymousCount": 0,
+          "pageInfo": {
+            "hasNextPage": false,
+            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+          },
+          "edges": [
+            { "node": {"_id":"user5"} },
+            { "node": {"_id":"user502"} },
+            { "node": {"_id":"user508"} },
+            { "node": {"_id":"user7"} },
+            { "node": {"_id":"userAdmin"} }
+          ]
+        }
       }
-   }
-}
+    }
+  }
   """
 
 @elasticsearch
@@ -146,7 +131,7 @@ Scenario: GraphQL client want to get the list of contributors of a selectionStep
       }
     }",
     "variables": {
-      "selectionStep": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ=="
+      "selectionStep": "selectionstep1"
     }
   }
   """

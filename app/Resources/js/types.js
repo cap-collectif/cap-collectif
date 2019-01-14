@@ -33,7 +33,6 @@ export type FeatureToggles = {
   login_gplus: boolean,
   login_saml: boolean,
   login_paris: boolean,
-  privacy_policy: boolean,
   login_openid: boolean,
   members_list: boolean,
   newsletter: boolean,
@@ -70,7 +69,6 @@ export type FeatureToggle =
   | 'login_paris'
   | 'members_list'
   | 'newsletter'
-  | 'privacy_policy'
   | 'profiles'
   | 'projects_form'
   | 'project_trash'

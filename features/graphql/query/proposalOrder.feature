@@ -28,46 +28,52 @@ Scenario: GraphQL client want to order proposals by COMMENTS
   Then the JSON response should match:
   """
   {
-     "data":{
-        "proposalForm":{
-           "proposals":{
+     "data": {
+        "proposalForm": {
+           "proposals": {
               "edges":[
                  {
-                    "node":{
-                       "id":"UHJvcG9zYWw6cHJvcG9zYWwx",
-                       "commentsCount":20
-                    }
-                 },
-                 {
-                    "node":{
-                       "id":"UHJvcG9zYWw6cHJvcG9zYWwxMA==",
-                       "commentsCount":0
-                    }
-                 },
-                 {
-                    "node":{
-                       "id":"UHJvcG9zYWw6cHJvcG9zYWwxMQ==",
-                       "commentsCount":0
-                    }
-                 },
-                 {
-                    "node":{
-                       "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
-                       "commentsCount":0
-                    }
-                 },
-                 {
-                    "node":{
-                       "id":"UHJvcG9zYWw6cHJvcG9zYWwz",
-                       "commentsCount":0
-                    }
-                 },
-                 {
-                    "node":{
-                       "id":"UHJvcG9zYWw6cHJvcG9zYWw0",
-                       "commentsCount":0
-                    }
-                 }
+                  "node": {
+                    "id": "proposal1",
+                    "commentsCount": 20
+                  }
+                },
+                {
+                  "node": {
+                    "id": "proposal35",
+                    "commentsCount": 7
+                  }
+                },
+                {
+                  "node": {
+                    "id": "proposal10",
+                    "commentsCount": 0
+                  }
+                },
+                {
+                  "node": {
+                    "id": "proposal11",
+                    "commentsCount": 0
+                  }
+                },
+                {
+                  "node": {
+                    "id": "proposal2",
+                    "commentsCount": 0
+                  }
+                },
+                {
+                  "node": {
+                    "id": "proposal3",
+                    "commentsCount": 0
+                  }
+                },
+                {
+                  "node": {
+                    "id": "proposal4",
+                    "commentsCount": 0
+                  }
+                }
               ]
            }
         }

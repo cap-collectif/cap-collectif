@@ -14,7 +14,6 @@ services:
   global_id_resolver:
     class: Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver
     autowire: true
-    public: true
     tags:
       - { name: overblog_graphql.resolver, alias: 'query_node', method: 'resolve' }
       - { name: overblog_graphql.resolver, alias: 'query_nodes', method: 'resolveMultiple' }

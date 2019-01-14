@@ -1,29 +1,27 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
-
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class SelectionStepsController extends FOSRestController
 {
     /**
      * @Get("/selection_step/{selectionStepId}/markers")
+     * @ParamConverter("step", options={"mapping": {"selectionStepId": "id"}})
      * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
      */
-    public function getProposalsMarkerByCollectStepAction(string $selectionStepId)
+    public function getProposalsMarkerByCollectStepAction(SelectionStep $step)
     {
-        $step = $this->get('global_id_resolver')->resolve($selectionStepId, $this->getUser());
         $proposalRepository = $this->get('capco.proposal.repository');
         $results = $proposalRepository->getProposalMarkersForSelectionStep($step);
         $router = $this->get('router');
-
         return array_map(function ($proposal) use ($step, $router) {
             $location =
                 \is_array($proposal['address']) ?:
                 \GuzzleHttp\json_decode($proposal['address'], true);
-
             return [
                 'id' => $proposal['id'],
                 'title' => $proposal['title'],
