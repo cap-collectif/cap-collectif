@@ -118,7 +118,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
             if ($step instanceof SelectionStep) {
                 /** @var Selection $selection */
                 foreach ($proposal->getSelections() as $selection) {
-                    if ($selection->getStep()->getId() === $stepId) {
+                    if ($selection->getStep()->getId() === $step->getId()) {
                         return $selection->getStatus();
                     }
                 }
