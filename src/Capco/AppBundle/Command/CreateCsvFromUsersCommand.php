@@ -45,7 +45,6 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         'phoneConfirmationSentAt' => 'phoneConfirmationSentAt',
         'userType.name' => 'userType.name',
         'consentExternalCommunication' => 'consentExternalCommunication',
-        'consentInternalCommunication' => 'consentInternalCommunication',
         'gender' => 'gender',
         'firstname' => 'firstname',
         'lastname' => 'lastname',
@@ -92,7 +91,6 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         'phoneConfirmationSentAt',
         'userType.name',
         'consentExternalCommunication',
-        'consentInternalCommunication',
         'gender',
         'firstname',
         'lastname',
@@ -261,7 +259,6 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
           }
         }
         consentExternalCommunication
-        consentInternalCommunication
         gender
         firstname
         lastname
