@@ -131,19 +131,30 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
     name="charte"
     type="checkbox"
   >
-    <FormattedMessage
-      id="registration.charte"
-      values={
-        Object {
-          "link": <a
-            className="external-link"
-            href="/charte"
-          >
-            la charte
-          </a>,
+    <span>
+      <FormattedMessage
+        id="registration.charte"
+        values={
+          Object {
+            "link": <a
+              className="external-link"
+              href="/charte"
+            >
+              la charte
+            </a>,
+          }
         }
-      }
-    />
+      />
+       
+      <FormattedHTMLMessage
+        id="and-the-privacy-policy"
+        values={
+          Object {
+            "url": "http://localhost/politique-de-confidentialite",
+          }
+        }
+      />
+    </span>
   </Field>
   <Field
     component={[Function]}
@@ -258,19 +269,30 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     name="charte"
     type="checkbox"
   >
-    <FormattedMessage
-      id="registration.charte"
-      values={
-        Object {
-          "link": <a
-            className="external-link"
-            href="/charte"
-          >
-            la charte
-          </a>,
+    <span>
+      <FormattedMessage
+        id="registration.charte"
+        values={
+          Object {
+            "link": <a
+              className="external-link"
+              href="/charte"
+            >
+              la charte
+            </a>,
+          }
         }
-      }
-    />
+      />
+       
+      <FormattedHTMLMessage
+        id="and-the-privacy-policy"
+        values={
+          Object {
+            "url": "http://localhost/politique-de-confidentialite",
+          }
+        }
+      />
+    </span>
   </Field>
   <Field
     component={[Function]}
@@ -422,19 +444,30 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
     name="charte"
     type="checkbox"
   >
-    <FormattedMessage
-      id="registration.charte"
-      values={
-        Object {
-          "link": <a
-            className="external-link"
-            href="/charte"
-          >
-            la charte
-          </a>,
+    <span>
+      <FormattedMessage
+        id="registration.charte"
+        values={
+          Object {
+            "link": <a
+              className="external-link"
+              href="/charte"
+            >
+              la charte
+            </a>,
+          }
         }
-      }
-    />
+      />
+       
+      <FormattedHTMLMessage
+        id="and-the-privacy-policy"
+        values={
+          Object {
+            "url": "http://localhost/politique-de-confidentialite",
+          }
+        }
+      />
+    </span>
   </Field>
   <Field
     component={[Function]}
@@ -574,19 +607,30 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
     name="charte"
     type="checkbox"
   >
-    <FormattedMessage
-      id="registration.charte"
-      values={
-        Object {
-          "link": <a
-            className="external-link"
-            href="/charte"
-          >
-            la charte
-          </a>,
+    <span>
+      <FormattedMessage
+        id="registration.charte"
+        values={
+          Object {
+            "link": <a
+              className="external-link"
+              href="/charte"
+            >
+              la charte
+            </a>,
+          }
         }
-      }
-    />
+      />
+       
+      <FormattedHTMLMessage
+        id="and-the-privacy-policy"
+        values={
+          Object {
+            "url": "http://localhost/politique-de-confidentialite",
+          }
+        }
+      />
+    </span>
   </Field>
   <Field
     component={[Function]}
