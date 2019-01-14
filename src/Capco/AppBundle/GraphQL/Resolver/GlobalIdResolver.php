@@ -62,7 +62,7 @@ class GlobalIdResolver
         }
 
         // We try to decode the global id
-        $decodeGlobalId = self::isGlobalId($uuidOrGlobalId);
+        $decodeGlobalId = self::getDecodedId($uuidOrGlobalId);
 
         if (\is_array($decodeGlobalId)) {
             // Good news, it's a GraphQL Global id !
@@ -182,7 +182,7 @@ class GlobalIdResolver
         return $this->viewerCanSee($node, $user) ? $node : null;
     }
 
-    public static function isGlobalId(string $uuidOrGlobalId)
+    public static function getDecodedId(string $uuidOrGlobalId)
     {
         // We try to decode the global id
         $decodeGlobalId = GlobalId::fromGlobalId($uuidOrGlobalId);

@@ -165,8 +165,8 @@ class ProposalMutation implements ContainerAwareInterface
         string $statusId = null
     ): array {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $proposalId = GlobalIdResolver::isGlobalId($proposalId);
-        $stepId = GlobalIdResolver::isGlobalId($stepId);
+        $proposalId = GlobalIdResolver::getDecodedId($proposalId);
+        $stepId = GlobalIdResolver::getDecodedId($stepId);
         $selection = $this->container->get('capco.selection.repository')->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
             'selectionStep' => \is_array($stepId) ? $stepId['id'] : $stepId,
@@ -200,8 +200,8 @@ class ProposalMutation implements ContainerAwareInterface
     public function unselectProposal(string $proposalId, string $stepId, $user): array
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $proposalId = GlobalIdResolver::isGlobalId($proposalId);
-        $stepId = GlobalIdResolver::isGlobalId($stepId);
+        $proposalId = GlobalIdResolver::getDecodedId($proposalId);
+        $stepId = GlobalIdResolver::getDecodedId($stepId);
 
         $selection = $this->container->get('capco.selection.repository')->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
@@ -233,8 +233,8 @@ class ProposalMutation implements ContainerAwareInterface
         string $statusId = null
     ): array {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $proposalId = GlobalIdResolver::isGlobalId($proposalId);
-        $stepId = GlobalIdResolver::isGlobalId($stepId);
+        $proposalId = GlobalIdResolver::getDecodedId($proposalId);
+        $stepId = GlobalIdResolver::getDecodedId($stepId);
 
         $selection = $this->container->get('capco.selection.repository')->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
