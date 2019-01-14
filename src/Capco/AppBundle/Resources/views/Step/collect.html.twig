@@ -46,7 +46,7 @@
             </p>
         </div>
     {% else %}
-        {{ react_render_component('ProposalStepPageApp', { 'props': { 'stepId': currentStep.id|toGlobalId('CollectStep'), count: capco_site_parameter_value('proposal.pagination') * 1 } }) }}
+        {{ react_render_component('ProposalStepPageApp', { 'props': { stepId: currentStep.id, count: capco_site_parameter_value('proposal.pagination') * 1 } }) }}
     {% endif %}
 
 {% endblock %}

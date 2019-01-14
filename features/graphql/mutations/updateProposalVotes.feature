@@ -21,7 +21,7 @@ Scenario: Logged in API client wants to delete everything
     }",
     "variables": {
       "input": {
-        "step": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
+        "step": "selectionstep8",
         "votes": []
       }
     }
@@ -33,7 +33,7 @@ Scenario: Logged in API client wants to delete everything
     "data": {
       "updateProposalVotes": {
         "step": {
-          "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
+          "id": "selectionstep8",
           "viewerVotes": {
             "totalCount": 0
           }
@@ -69,7 +69,7 @@ Scenario: Logged in API client wants to delete everything
     }",
     "variables": {
       "input": {
-        "step": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
+        "step": "selectionstep8",
         "votes": [
           { "id": "1053", "anonymous": true }
         ]
@@ -83,7 +83,7 @@ Scenario: Logged in API client wants to delete everything
     "data": {
       "updateProposalVotes": {
         "step": {
-          "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
+          "id": "selectionstep8",
           "viewerVotes": {
             "totalCount": 1,
             "edges": [
@@ -126,7 +126,7 @@ Scenario: Logged in API client wants to reorder his votes
     }",
     "variables": {
       "input": {
-        "step": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
+        "step": "collectstepVoteClassement",
         "votes": [
           { "id": "2051", "anonymous": false },
           { "id": "2053", "anonymous": false },
@@ -142,7 +142,7 @@ Scenario: Logged in API client wants to reorder his votes
     "data": {
       "updateProposalVotes": {
         "step": {
-          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
+          "id": "collectstepVoteClassement",
           "viewerVotes": {
             "totalCount": 3,
             "edges": [
@@ -194,7 +194,7 @@ Scenario: Logged in API client wants to reorder his votes on question
     }",
     "variables": {
       "input": {
-        "step": "Q29sbGVjdFN0ZXA6Y29sbGVjdFF1ZXN0aW9uVm90ZUF2ZWNDbGFzc2VtZW50",
+        "step": "collectQuestionVoteAvecClassement",
         "votes": [
           { "id": "2054", "anonymous": false },
           { "id": "2055", "anonymous": false }
@@ -209,7 +209,7 @@ Scenario: Logged in API client wants to reorder his votes on question
     "data": {
       "updateProposalVotes": {
         "step": {
-          "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdFF1ZXN0aW9uVm90ZUF2ZWNDbGFzc2VtZW50",
+          "id": "collectQuestionVoteAvecClassement",
           "viewerVotes": {
             "totalCount": 2,
             "edges": [

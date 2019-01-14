@@ -92,13 +92,13 @@ Scenario: User wants to see questions in a question step
               "edges":[
                  {
                     "node":{
-                       "id":"UHJvcG9zYWw6cXVlc3Rpb24x",
+                       "id":"question1",
                        "published":true
                     }
                  },
                  {
                     "node":{
-                       "id":"UHJvcG9zYWw6cXVlc3Rpb24y",
+                       "id":"question2",
                        "published":true
                     }
                  }

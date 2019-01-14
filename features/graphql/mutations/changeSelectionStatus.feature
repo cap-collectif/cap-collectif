@@ -23,8 +23,8 @@ Scenario: GraphQL client wants to update proposal status
     }",
     "variables": {
       "input": {
-            "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
-            "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "stepId": "selectionstep1",
+            "proposalId": "proposal3",
             "statusId": "status1"
           }
         }
@@ -37,7 +37,7 @@ Scenario: GraphQL client wants to update proposal status
       "changeSelectionStatus": {
         "proposal": {
           "selections": [{
-            "step": { "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==" },
+            "step": { "id": "selectionstep1" },
             "status": { "id": "status1" }
           }]
         }
@@ -64,8 +64,8 @@ Scenario: GraphQL client wants to update proposal status
     }",
     "variables": {
       "input": {
-        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwz",
+        "stepId": "selectionstep1",
+        "proposalId": "proposal3",
         "statusId": null
       }
     }
@@ -78,7 +78,7 @@ Scenario: GraphQL client wants to update proposal status
       "changeSelectionStatus": {
         "proposal": {
           "selections": [{
-            "step": { "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==" },
+            "step": { "id": "selectionstep1" },
             "status": null
           }]
         }

@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\DataLoader\User;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
@@ -27,7 +26,6 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     private $abstractStepRepository;
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
-    private $globalIdResolver;
     private $helper;
 
     public function __construct(
@@ -38,7 +36,6 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalStepVotesResolver $helper,
-        GlobalIdResolver $globalIdResolver,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -46,7 +43,6 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     ) {
         $this->abstractStepRepository = $repository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->globalIdResolver = $globalIdResolver;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->helper = $helper;
 
@@ -64,8 +60,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
 
     public function invalidate(User $user): void
     {
-        // TODO
-        $this->invalidateAll();
+        $this->cache->invalidateTags([$user->getId()]);
     }
 
     public function all(array $keys)
@@ -152,6 +147,11 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         return $value;
     }
 
+    protected function getCacheTag($key): array
+    {
+        return [$key['user']->getId()];
+    }
+
     protected function serializeKey($key)
     {
         return [
@@ -163,7 +163,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     private function resolve(User $user, Argument $args): Connection
     {
         try {
-            $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $user);
+            $step = $this->abstractStepRepository->find($args->offsetGet('stepId'));
 
             if (!$step) {
                 $connection = ConnectionBuilder::connectionFromArray([], $args);

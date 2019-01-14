@@ -97,6 +97,8 @@ class ProjectController extends Controller
             );
         }
 
+        $em = $this->getDoctrine()->getManager();
+
         $opinions = $this->get('capco.opinion.repository')->getTrashedByProject($project);
         $versions = $this->get('capco.opinion_version.repository')->getTrashedByProject($project);
         $arguments = $this->get('capco.argument.repository')->getTrashedByProject($project);

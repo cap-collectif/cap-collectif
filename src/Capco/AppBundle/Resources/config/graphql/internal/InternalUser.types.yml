@@ -23,7 +23,7 @@ InternalUser:
         type: 'Boolean!'
         description: 'Whether or not this user is a vip.'
       slug:
-        type: 'String!'
+        type: 'String'
         description: "The user's slug (unique)."
       email:
         type: 'String'
@@ -217,7 +217,7 @@ InternalUser:
       proposalVotes:
         type: 'ProposalVoteConnection!'
         argsBuilder: 'Relay::Connection'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerProposalVotesResolver", [value, args, context, getUser()])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerProposalVotesResolver", [value, args, context])'
         args:
           first:
             type: 'Int'

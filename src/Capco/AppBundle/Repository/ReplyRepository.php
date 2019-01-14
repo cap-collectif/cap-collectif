@@ -107,7 +107,7 @@ class ReplyRepository extends EntityRepository
             ->setParameter(
                 'steps',
                 array_filter($project->getRealSteps(), function ($step) {
-                    return $step instanceof QuestionnaireStep;
+                    return $step->isCollectStep() || $step->isSelectionStep();
                 })
             )
             ->setParameter('author', $author);

@@ -176,7 +176,7 @@ Scenario: Author of a proposal wants to delete it
   And I go to a proposal
   When I click the delete proposal button
   And I confirm proposal deletion
-  And I wait 3 seconds
+  And I wait 2 seconds
   And I should not see my proposal anymore
   And there should be 5 proposals
 

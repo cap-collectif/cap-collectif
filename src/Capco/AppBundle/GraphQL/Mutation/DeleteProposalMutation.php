@@ -2,9 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,46 +9,43 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 
 class DeleteProposalMutation implements MutationInterface
 {
     private $em;
+    private $proposalRepo;
     private $redisHelper;
     private $publisher;
     private $indexer;
-    private $dataloader;
-    private $globalIdResolver;
-    private $logger;
+    private $dataLoader;
 
     public function __construct(
         EntityManagerInterface $em,
+        ProposalRepository $proposalRepo,
         RedisStorageHelper $redisHelper,
         Publisher $publisher,
         Indexer $indexer,
-        ProposalFormProposalsDataLoader $dataloader,
-        GlobalIdResolver $globalIdResolver,
-        LoggerInterface $logger
+        ProposalFormProposalsDataLoader $dataLoader
     ) {
         $this->em = $em;
+        $this->proposalRepo = $proposalRepo;
         $this->redisHelper = $redisHelper;
         $this->publisher = $publisher;
         $this->indexer = $indexer;
-        $this->dataloader = $dataloader;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->logger = $logger;
+        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(string $proposalId, User $user): array
     {
-        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
-        if (!$proposal || !$proposal instanceof Proposal) {
+        $proposal = $this->proposalRepo->find($proposalId);
+        if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalId));
         }
 
         $proposalForm = $proposal->getProposalForm();
-        $step = $proposalForm->getStep();
 
         $author = $proposal->getAuthor();
 
@@ -64,7 +58,7 @@ class DeleteProposalMutation implements MutationInterface
             'proposal.delete',
             new Message(
                 json_encode([
-                    'proposalId' => $proposalId,
+                    'proposalId' => $proposal->getId(),
                 ])
             )
         );
@@ -73,8 +67,8 @@ class DeleteProposalMutation implements MutationInterface
         $this->indexer->remove(\get_class($proposal), $proposal->getId());
         $this->indexer->finishBulk();
 
-        $this->dataloader->invalidate($proposalForm);
+        $this->dataLoader->invalidate($proposalForm);
 
-        return ['proposal' => $proposal, 'viewer' => $user, 'step' => $step];
+        return ['proposal' => $proposal, 'viewer' => $user, 'step' => $proposal->getStep()];
     }
 }

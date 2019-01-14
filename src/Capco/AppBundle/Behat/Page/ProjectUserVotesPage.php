@@ -45,7 +45,6 @@ class ProjectUserVotesPage extends Page
     public function deleteProposalVote($proposalId)
     {
         $element = $proposalId . '-delete';
-        $element = "[id='${element}']";
 
         return $this->find('css', $element)->click();
     }

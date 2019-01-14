@@ -36,7 +36,7 @@ Scenario: Logged in API client wants to remove a vote for an comment
                  "totalCount": 0
               }
            },
-           "deletedVoteId":"Q29tbWVudFZvdGU6NTAwMTI="
+           "deletedVoteId":"Q29tbWVudFZvdGU6NTAwMTE="
         }
      }
   }

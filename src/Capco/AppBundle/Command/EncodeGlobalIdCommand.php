@@ -21,16 +21,7 @@ class EncodeGlobalIdCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $availableTypes = [
-            'Questionnaire',
-            'User',
-            'Consultation',
-            'Event',
-            'Requirement',
-            'Proposal',
-            'CollectStep',
-            'SelectionStep',
-        ];
+        $availableTypes = ['Questionnaire', 'User', 'Consultation', 'Event', 'Requirement'];
         $type = $input->getArgument('type');
         if (!\in_array($type, $availableTypes)) {
             $output->writeln('<comment>Unknown type : ' . $type . '</comment>');
