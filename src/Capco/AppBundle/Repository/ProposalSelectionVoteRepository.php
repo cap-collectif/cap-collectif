@@ -192,22 +192,12 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function countVotesByProposal(Proposal $proposal, bool $includeUnpublished): int
+    public function countVotesByProposal($proposalId, bool $includeUnpublished): int
     {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id)')
-            ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal);
-
-        if (!$includeUnpublished) {
-            $qb->andWhere('pv.published = true');
+        if (!\is_string($proposalId) && $proposalId instanceof Proposal) {
+            $proposalId = $proposalId->getId();
         }
 
-        return (int) $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function countVotesByProposalId(string $proposalId, bool $includeUnpublished): int
-    {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->leftJoin('pv.proposal', 'p')

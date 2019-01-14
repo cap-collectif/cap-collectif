@@ -139,11 +139,11 @@ class ProposalVotesDataLoader extends BatchDataLoader
             else {
                 $totalCountByProposal = array_map(function ($proposalId) use ($includeUnpublished) {
                     $totalCount = 0;
-                    $totalCount += $this->proposalCollectVoteRepository->countVotesByProposalId(
+                    $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
                         $proposalId,
                         $includeUnpublished
                     );
-                    $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposalId(
+                    $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal(
                         $proposalId,
                         $includeUnpublished
                     );
@@ -326,9 +326,11 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
             throw new \RuntimeException('Unknown step type.');
         }
+
         $paginator = new Paginator(function (int $offset, int $limit) {
             return [];
         });
+
         $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
             $proposal,
             $includeUnpublished
