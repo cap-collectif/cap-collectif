@@ -26,6 +26,6 @@ class CollectStepProposalResolver implements ResolverInterface
     ): Promise {
         $form = $collectStep->getProposalForm();
 
-        return $this->dataLoader->__invoke(compact('form', 'args', 'viewer', 'request'));
+        return $this->dataLoader->load(compact('form', 'args', 'viewer', 'request'));
     }
 }

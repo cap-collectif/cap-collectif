@@ -90,6 +90,9 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $logger->warning("Could not resolve node with uuid ${id}")->shouldBeCalled();
         $container->get(Argument::any())->willReturn($repository);
         $this->beConstructedWith($container, $logger);
-        $this->resolve($id, null)->shouldReturn(null);
+        $this->shouldThrow(new UserError("Could not resolve node with uuid ${id}"))->during(
+            'resolve',
+            [$id, null]
+        );
     }
 }

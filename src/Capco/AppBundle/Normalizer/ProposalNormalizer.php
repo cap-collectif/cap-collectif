@@ -38,43 +38,44 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
 
     public function normalize($object, $format = null, array $context = [])
     {
-            $selectionVotesCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
-                $object
-            );
+        $data = $this->normalizer->normalize($object, $format, $context);
+        $selectionVotesCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
+            $object
+        );
 
-            $collectVotesCount = $this->proposalCollectVoteRepository->getCountsByProposalGroupedByStepsId(
-                $object
-            );
+        $collectVotesCount = $this->proposalCollectVoteRepository->getCountsByProposalGroupedByStepsId(
+            $object
+        );
 
-            $stepCounter = [];
-            $totalCount = 0;
-            foreach ($collectVotesCount as $stepId => $value) {
-                $stepCounter[] = [
-                    'step' => ['id' => $stepId],
-                    'count' => $value,
-                ];
-                $totalCount += $value;
-            }
-            foreach ($selectionVotesCount as $stepId => $value) {
-                $stepCounter[] = [
-                    'step' => ['id' => $stepId],
-                    'count' => $value,
-                ];
-                $totalCount += $value;
-            }
+        $stepCounter = [];
+        $totalCount = 0;
+        foreach ($collectVotesCount as $stepId => $value) {
+            $stepCounter[] = [
+                'step' => ['id' => $stepId],
+                'count' => $value,
+            ];
+            $totalCount += $value;
+        }
+        foreach ($selectionVotesCount as $stepId => $value) {
+            $stepCounter[] = [
+                'step' => ['id' => $stepId],
+                'count' => $value,
+            ];
+            $totalCount += $value;
+        }
 
-            $data['votesCountByStep'] = $stepCounter;
-            $data['votesCount'] = $totalCount;
+        $data['votesCountByStep'] = $stepCounter;
+        $data['votesCount'] = $totalCount;
 
-            $args = new Argument([
-                'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
-                'first' => 0,
-            ]);
-            $commentsConnection = $this->commentableCommentsDataLoader->resolve(
-                $object,
-                $args,
-                $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null
-            );
+        $args = new Argument([
+            'orderBy' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+            'first' => 0,
+        ]);
+        $commentsConnection = $this->commentableCommentsDataLoader->resolve(
+            $object,
+            $args,
+            $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null
+        );
 
             $data['commentsCount'] = $commentsConnection->{'totalCountWithAnswers'};
 
