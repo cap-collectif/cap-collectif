@@ -7,23 +7,25 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
+use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 
 class CollectStepProposalResolver implements ResolverInterface
 {
-    private $resolver;
+    private $dataLoader;
 
-    public function __construct(ProposalFormProposalsResolver $resolver)
+    public function __construct(ProposalFormProposalsDataLoader $dataLoader)
     {
-        $this->resolver = $resolver;
+        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(
         CollectStep $collectStep,
         Argument $args,
-        $user,
+        $viewer,
         RequestStack $request
     ): Promise {
-        return $this->resolver->__invoke($collectStep->getProposalForm(), $args, $user, $request);
+        $form = $collectStep->getProposalForm();
+
+        return $this->dataLoader->__invoke(compact('form', 'args', 'viewer', 'request'));
     }
 }
