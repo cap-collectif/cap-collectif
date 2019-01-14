@@ -23,6 +23,7 @@ describe('<RegistrationForm />', () => {
     organizationName: 'Cap Collectif',
     dispatch: jest.fn(),
     shieldEnabled: false,
+    privacyPolicyRequired: true,
   };
 
   it('renders a form with inputs and a captcha', () => {

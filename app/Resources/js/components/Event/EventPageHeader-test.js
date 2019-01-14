@@ -13,7 +13,7 @@ describe('<EventPageHeader />', () => {
       },
       $refType,
     },
-    eventPageTitle: '<p>Titre personnalisé</p>',
+    eventPageTitle: 'Titre personnalisé',
   };
 
   it('renders correcty', () => {

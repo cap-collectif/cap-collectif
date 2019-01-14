@@ -60,7 +60,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
 
     public function invalidate(User $user): void
     {
-        $this->cache->invalidateTags([$user->getId()]);
+        // TODO
+        $this->invalidateAll();
     }
 
     public function all(array $keys)
@@ -145,11 +146,6 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     {
         // TODO we can do better here
         return $value;
-    }
-
-    protected function getCacheTag($key): array
-    {
-        return [$key['user']->getId()];
     }
 
     protected function serializeKey($key)
