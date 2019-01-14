@@ -222,7 +222,7 @@ class CreateCsvFromUserCommand extends Command
             foreach ($header as $columnKey => $columnName) {
                 if ($isNode) {
                     if (
-                        false !== strpos($columnName, 'responses.') &&
+                        false !== strpos($columnName, 'responses_') &&
                         false === $responsesInserted
                     ) {
                         $responsesDatas = $this->handleMultipleResponsesForQuestions(
@@ -235,9 +235,9 @@ class CreateCsvFromUserCommand extends Command
                         $rowCounter = $responsesDatas['counter'];
                         $responsesInserted = true;
                     }
-                    $cellData = Arr::path($content['node'], $columnName);
+                    $cellData = Arr::path($content['node'], $columnName, null, '_');
                 } else {
-                    $cellData = Arr::path($content, $columnName);
+                    $cellData = Arr::path($content, $columnName, null, '_');
                 }
 
                 if (!\is_array($cellData)) {
