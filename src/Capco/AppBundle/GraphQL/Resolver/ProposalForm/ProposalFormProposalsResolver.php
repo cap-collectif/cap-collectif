@@ -23,4 +23,42 @@ class ProposalFormProposalsResolver implements ResolverInterface
     {
         return $this->dataLoader->load(compact('form', 'args', 'viewer', 'request'));
     }
+
+    public static function findOrderFromFieldAndDirection(string $field, string $direction): string
+    {
+        $order = 'random';
+
+        switch ($field) {
+            case 'VOTES':
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'least-votes';
+                } else {
+                    $order = 'votes';
+                }
+
+                break;
+            case 'PUBLISHED_AT':
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'old';
+                } else {
+                    $order = 'last';
+                }
+
+                break;
+            case 'COMMENTS':
+                $order = 'comments';
+
+                break;
+            case 'COST':
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'cheap';
+                } else {
+                    $order = 'expensive';
+                }
+
+                break;
+        }
+
+        return $order;
+    }
 }

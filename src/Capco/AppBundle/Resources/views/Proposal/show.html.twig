@@ -9,7 +9,7 @@
         'description': proposal.body|striptags|truncate(250, true),
         'image':       image,
         'url':         url('app_project_show_proposal', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'proposalSlug': proposal.slug})
-        } only %}
+    } only %}
 {% endblock %}
 
 
@@ -20,19 +20,20 @@
 {% block jumbotron %}{% endblock %}
 
 {% block reduxStore %}
-  {% set initialState = {
-    'proposal': {
-      'referer': referer,
-    }
-  } %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
+    {% set initialState = {
+        'proposal': {
+            'referer': referer,
+        }
+    } %}
+    {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('ProposalPageApp', {'props': {'currentVotableStepId': currentVotableStepId, 'proposalId': proposal.id }}) }}
+    {{ react_render_component('ProposalPageApp', {'props': {'currentVotableStepId': currentVotableStepId, 'proposalId': proposal.id|toGlobalId('Proposal') }}) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>
 {% endblock %}

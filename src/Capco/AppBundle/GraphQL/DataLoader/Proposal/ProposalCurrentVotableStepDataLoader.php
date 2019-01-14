@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
+use Capco\AppBundle\Cache\RedisTagCache;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -18,7 +18,7 @@ class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        RedisCache $cache,
+        RedisTagCache $cache,
         LoggerInterface $logger,
         ProposalVotableStepsResolver $resolver,
         AbstractStepRepository $stepRepo,
@@ -43,8 +43,7 @@ class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
 
     public function invalidate(Proposal $proposal): void
     {
-        // TODO
-        // $this->invalidateAll();
+        $this->cache->invalidateTags([$proposal->getId()]);
     }
 
     public function all(array $keys)
@@ -110,6 +109,11 @@ class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
         }
 
         return $value;
+    }
+
+    protected function getCacheTag($key): array
+    {
+        return [$key['proposal']->getId()];
     }
 
     protected function serializeKey($key): array

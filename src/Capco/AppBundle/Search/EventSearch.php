@@ -90,9 +90,7 @@ class EventSearch extends Search
             $query = $this->getRandomSortedQuery($boolQuery);
         } else {
             $query = new Query($boolQuery);
-            if ($order) {
-                $query->setSort($this->getSort($order));
-            } else {
+            if (null !== $order) {
                 $query->setSort($this->getSort($order));
             }
         }
@@ -132,7 +130,7 @@ class EventSearch extends Search
         );
     }
 
-    private function getSort(string $order): array
+    private function getSort($order): array
     {
         switch ($order) {
             case self::OLD:

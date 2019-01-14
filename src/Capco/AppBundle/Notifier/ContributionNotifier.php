@@ -13,8 +13,12 @@ final class ContributionNotifier extends BaseNotifier
 {
     protected $urlResolver;
 
-    public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver, UrlResolver $urlResolver)
-    {
+    public function __construct(
+        MailerService $mailer,
+        Resolver $siteParams,
+        UserResolver $userResolver,
+        UrlResolver $urlResolver
+    ) {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->urlResolver = $urlResolver;
     }
@@ -25,7 +29,7 @@ final class ContributionNotifier extends BaseNotifier
             $this->mailer->sendMessage(
                 ContributionModerationMessage::create(
                     $contribution,
-                    $this->urlResolver->getTrashedObjectUrl($contribution, true),
+                    $this->urlResolver->getAdminObjectUrl($contribution, true),
                     $contribution->getAuthor()->getEmail()
                 )
             );

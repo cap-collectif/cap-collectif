@@ -16,8 +16,8 @@ Scenario: Logged in API client wants to vote for a proposal in a step with vote 
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep8",
-        "proposalId": "proposal17"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxNw=="
       }
     }
   }
@@ -54,8 +54,8 @@ Scenario: Logged in API client without all requirements wants to vote for a prop
     }",
     "variables": {
       "input": {
-        "stepId": "collectstepVoteClassement",
-        "proposalId": "proposal24"
+        "stepId": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwyNA=="
       }
     }
   }
@@ -92,8 +92,8 @@ Scenario: Logged in API client wants to vote for a question in a step with requi
     }",
     "variables": {
       "input": {
-        "stepId": "selectionQuestionStepVoteClassement",
-        "proposalId": "question1"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25RdWVzdGlvblN0ZXBWb3RlQ2xhc3NlbWVudA==",
+        "proposalId": "UHJvcG9zYWw6cXVlc3Rpb24x"
       }
     }
   }
@@ -133,8 +133,8 @@ Scenario: Logged in API client wants to vote for a proposal
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep1",
-        "proposalId": "proposal2"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy"
       }
     }
   }
@@ -148,7 +148,7 @@ Scenario: Logged in API client wants to vote for a proposal
           "id": @string@,
           "published": true,
           "proposal": {
-            "id": "proposal2"
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
           },
           "author": {
             "_id": "user5"
@@ -181,8 +181,8 @@ Scenario: Logged in API client wants to vote for a proposal anonymously
     "variables": {
       "input": {
         "anonymously": true,
-        "stepId": "selectionstep1",
-        "proposalId": "proposal2"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy"
       }
     }
   }
@@ -195,7 +195,7 @@ Scenario: Logged in API client wants to vote for a proposal anonymously
         "vote": {
           "id": @string@,
           "proposal": {
-            "id": "proposal2"
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
           },
           "author": null
         }
@@ -219,8 +219,8 @@ Scenario: Logged in API client wants to vote several times for a proposal in a s
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep1",
-        "proposalId": "proposal2"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy"
       }
     }
   }
@@ -257,8 +257,8 @@ Scenario: Logged in API client wants to vote for a proposal in a wrong selection
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep1",
-        "proposalId": "proposal13"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMw=="
       }
     }
   }
@@ -295,8 +295,8 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep2",
-        "proposalId": "proposal2"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMg==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy"
       }
     }
   }
@@ -333,8 +333,8 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep3",
-        "proposalId": "proposal11"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMw==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
       }
     }
   }
@@ -371,8 +371,8 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep4",
-        "proposalId": "proposal8"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwNA==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw4"
       }
     }
   }

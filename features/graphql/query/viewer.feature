@@ -108,13 +108,13 @@ Scenario: GraphQL client wants to get list of proposals followed by the current 
             {
               "cursor": @string@,
               "node": {
-                "id": "proposal1"
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
               }
             },
             {
               "cursor": @string@,
               "node": {
-                "id": "proposal2"
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
               }
             }
           ]

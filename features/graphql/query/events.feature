@@ -80,27 +80,27 @@ Scenario: GraphQL client wants to list current and future events
            "edges":[
               {
                  "node":{
-                    "_id":"evenementFutureSansDateDeFin"
+                    "_id":"event7"
                  }
               },
               {
                  "node":{
-                    "_id":"event4"
+                    "_id":"event9"
                  }
               },
               {
                  "node":{
-                    "_id":"event3"
+                    "_id":"event10"
+                 }
+              },
+              {
+                 "node":{
+                    "_id":"event8"
                  }
               },
               {
                  "node":{
                     "_id":"event1"
-                 }
-              },
-              {
-                 "node":{
-                    "_id":"event6"
                  }
               }
            ]
@@ -127,30 +127,30 @@ Scenario: GraphQL client wants to list passed events
   """
   Then the JSON response should match:
   """
-{
-   "data":{
-      "events":{
-         "totalCount":3,
-         "edges":[
-            {
-               "node":{
-                  "_id":"evenementPasseSansDateDeFin"
-               }
-            },
-            {
-               "node":{
-                  "_id":"evenementSansDateDeFin"
-               }
-            },
-            {
-               "node":{
-                  "_id":"event5"
-               }
-            }
-         ]
-      }
-   }
-}
+  {
+     "data":{
+        "events":{
+           "totalCount":3,
+           "edges":[
+              {
+                 "node":{
+                    "_id":"event5"
+                 }
+              },
+              {
+                 "node":{
+                    "_id":"evenementPasseSansDateDeFin"
+                 }
+              },
+              {
+                 "node":{
+                    "_id":"evenementSansDateDeFin"
+                 }
+              }
+           ]
+        }
+     }
+  }
   """
 
 Scenario: GraphQL client wants to list event in project
@@ -252,54 +252,54 @@ Scenario: GraphQL client wants to list events with theme2
   """
   Then the JSON response should match:
   """
-{
-   "data":{
-      "events":{
-         "totalCount":3,
-         "edges":[
-            {
-               "node":{
-                  "_id":"evenementPasseSansDateDeFin",
-                  "themes":[
-                     {
-                        "id":"theme1"
-                     },
-                     {
-                        "id":"theme2"
-                     }
-                  ]
-               }
-            },
-            {
-               "node":{
-                  "_id":"event1",
-                  "themes":[
-                     {
-                        "id":"theme1"
-                     },
-                     {
-                        "id":"theme2"
-                     }
-                  ]
-               }
-            },
-            {
-               "node":{
-                  "_id":"event2",
-                  "themes":[
-                     {
-                        "id":"theme1"
-                     },
-                     {
-                        "id":"theme2"
-                     }
-                  ]
-               }
-            }
-         ]
-      }
-   }
-}
+  {
+     "data":{
+        "events":{
+           "totalCount":3,
+           "edges":[
+              {
+                 "node":{
+                    "_id":"evenementPasseSansDateDeFin",
+                    "themes":[
+                       {
+                          "id":"theme1"
+                       },
+                       {
+                          "id":"theme2"
+                       }
+                    ]
+                 }
+              },
+              {
+                 "node":{
+                    "_id":"event1",
+                    "themes":[
+                       {
+                          "id":"theme1"
+                       },
+                       {
+                          "id":"theme2"
+                       }
+                    ]
+                 }
+              },
+              {
+                 "node":{
+                    "_id":"event2",
+                    "themes":[
+                       {
+                          "id":"theme1"
+                       },
+                       {
+                          "id":"theme2"
+                       }
+                    ]
+                 }
+              }
+           ]
+        }
+     }
+  }
   """
 
 Scenario: GraphQL client wants to list events with a search

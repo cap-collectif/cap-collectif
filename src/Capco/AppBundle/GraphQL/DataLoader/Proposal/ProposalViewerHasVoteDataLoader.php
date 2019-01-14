@@ -2,22 +2,25 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 {
+    public $batch = false;
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
-    private $abstractStepRepository;
+    private $globalIdResolver;
+    private $tokenStorage;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -25,7 +28,8 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        AbstractStepRepository $abstractStepRepository,
+        GlobalIdResolver $globalIdResolver,
+        TokenStorageInterface $tokenStorage,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -33,7 +37,8 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->abstractStepRepository = $abstractStepRepository;
+        $this->globalIdResolver = $globalIdResolver;
+        $this->tokenStorage = $tokenStorage;
 
         parent::__construct(
             [$this, 'all'],
@@ -67,9 +72,29 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
             );
         }
 
+        if (false == $this->batch) {
+            $results = [];
+            foreach ($keys as $key) {
+                $this->logger->info(
+                    __METHOD__ . ' called with ' . json_encode($this->serializeKey($key))
+                );
+
+                $results[] = $this->resolveWithourBatch(
+                    $key['proposal'],
+                    $key['stepId'],
+                    $key['user']
+                );
+            }
+
+            return $this->getPromiseAdapter()->createAll($results);
+        }
+
         $stepId = $keys[0]['stepId'];
         $user = $keys[0]['user'];
-        $step = $this->abstractStepRepository->find($stepId);
+        $step = $this->globalIdResolver->resolve(
+            $stepId,
+            $this->tokenStorage->getToken()->getUser()
+        );
 
         if (!$step) {
             $this->logger->error('Please provide a valid stepId');
@@ -125,5 +150,29 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
             'stepId' => $key['stepId'],
             'user' => $key['user']->getId(),
         ];
+    }
+
+    private function resolveWithourBatch(Proposal $proposal, string $stepId, $user): bool
+    {
+        $step = $this->globalIdResolver->resolve($stepId, $user);
+
+        if ($step instanceof CollectStep) {
+            return null !==
+                $this->proposalCollectVoteRepository->getByProposalAndStepAndUser(
+                    $proposal,
+                    $step,
+                    $user
+                );
+        }
+        if ($step instanceof SelectionStep) {
+            return null !==
+                $this->proposalSelectionVoteRepository->getByProposalAndStepAndUser(
+                    $proposal,
+                    $step,
+                    $user
+                );
+        }
+
+        return false;
     }
 }

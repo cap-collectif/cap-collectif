@@ -32,7 +32,7 @@ Scenario: GraphQL client wants to add a draft proposal
     "data": {
       "createProposal": {
         "proposal": {
-          "id": @uuid@,
+          "id": @string@,
           "title": "Acheter un sauna pour Capco",
           "publicationStatus": "DRAFT"
         }
@@ -41,7 +41,7 @@ Scenario: GraphQL client wants to add a draft proposal
   }
   """
   Then the queue associated to "proposal_create" producer has messages below:
-  | 0 | {"proposalId": "@uuid@"} |
+  | 0 | {"proposalId": "@string@"} |
 
 @database @elasticsearch
 Scenario: GraphQL client wants to create a proposal
@@ -98,7 +98,7 @@ Scenario: GraphQL client wants to create a proposal
     "data": {
       "createProposal": {
         "proposal": {
-          "id": @uuid@,
+          "id": @string@,
           "published": true,
           "title": "Acheter un sauna pour Capco",
           "publicationStatus": "PUBLISHED"
@@ -162,7 +162,7 @@ Scenario: Admin should be notified if GraphQL client create a proposal in a noti
     "data": {
       "createProposal": {
         "proposal": {
-          "id": @uuid@,
+          "id": @string@,
           "title": "Les DOP à la madeleine sont-ils nocifs ?",
           "publicationStatus": "PUBLISHED"
         }
@@ -171,7 +171,7 @@ Scenario: Admin should be notified if GraphQL client create a proposal in a noti
   }
   """
   Then the queue associated to "proposal_create" producer has messages below:
-  | 0 | {"proposalId": "@uuid@"} |
+  | 0 | {"proposalId": "@string@"} |
 
 @security
 Scenario: GraphQL client wants to create a proposal out of the zone

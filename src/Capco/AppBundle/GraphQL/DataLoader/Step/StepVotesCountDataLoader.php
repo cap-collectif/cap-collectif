@@ -25,7 +25,8 @@ class StepVotesCountDataLoader extends BatchDataLoader
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug
+        bool $debug,
+        bool $enableCache
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -36,14 +37,14 @@ class StepVotesCountDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug
+            $debug,
+            $enableCache
         );
     }
 
     public function invalidate(AbstractStep $step): void
     {
-        // TODO
-        $this->invalidateAll();
+        $this->cache->invalidateTags([$step->getId()]);
     }
 
     public function all(array $keys)
@@ -57,14 +58,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
-    protected function serializeKey($key): array
-    {
-        return [
-            'stepId' => $key['step']->getId(),
-        ];
-    }
-
-    private function resolve(AbstractStep $step): int
+    public function resolve(AbstractStep $step): int
     {
         if ($step instanceof CollectStep) {
             return $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep($step);
@@ -75,5 +69,17 @@ class StepVotesCountDataLoader extends BatchDataLoader
         }
 
         throw new \RuntimeException('Access denied');
+    }
+
+    protected function getCacheTag($key): array
+    {
+        return [$key['step']->getId()];
+    }
+
+    protected function serializeKey($key): array
+    {
+        return [
+            'stepId' => $key['step']->getId(),
+        ];
     }
 }
