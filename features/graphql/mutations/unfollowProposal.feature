@@ -16,7 +16,7 @@ Scenario: GraphQL client wants to unfollow a proposal with current user and chec
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal1"
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx"
       }
     }
   }
@@ -27,7 +27,7 @@ Scenario: GraphQL client wants to unfollow a proposal with current user and chec
     "data": {
       "unfollowProposal": {
         "proposal": {
-          "id": "proposal1"
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
         }
       }
     }
@@ -64,7 +64,7 @@ Scenario: GraphQL client wants to unfollow a proposal with current user and chec
             {
               "cursor": @string@,
               "node": {
-                "id": "proposal2"
+                "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
               }
             }
           ]

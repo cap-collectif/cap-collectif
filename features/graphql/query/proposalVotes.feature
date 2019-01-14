@@ -22,8 +22,8 @@ Scenario: User want to see unpublished votes on proposals
       }
     }",
     "variables": {
-      "proposalId": "proposal1",
-      "stepId": "selectionstep8",
+      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA==",
       "first": 50,
       "includeUnpublished": true
     }

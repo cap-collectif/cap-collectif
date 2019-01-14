@@ -26,7 +26,7 @@ Scenario: Admin wants to update the evaluation of a proposal
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal2",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "version": 1,
         "responses": [
            {
@@ -63,7 +63,7 @@ Scenario: Admin wants to update the evaluation of a proposal
     "data": {
       "changeProposalEvaluation": {
         "proposal": {
-          "id": "proposal2",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "evaluation": {
             "responses": [
             {
@@ -127,7 +127,7 @@ Scenario: Admin wants to update the evaluation of a proposal and the version sho
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal2",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "version": 1,
         "responses": [
            {
@@ -164,7 +164,7 @@ Scenario: Admin wants to update the evaluation of a proposal and the version sho
     "data": {
       "changeProposalEvaluation": {
         "proposal": {
-          "id": "proposal2",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "evaluation": {
             "version": 2,
             "responses": [
@@ -229,7 +229,7 @@ Scenario: Admin should be prompted to refresh page if someone has already modifi
   }",
   "variables": {
     "input": {
-      "proposalId": "proposal2",
+      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy",
       "version": 1,
       "responses": [
          {
@@ -266,7 +266,7 @@ Scenario: Admin should be prompted to refresh page if someone has already modifi
   "data": {
     "changeProposalEvaluation": {
       "proposal": {
-        "id": "proposal2",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "evaluation": {
           "version": 2,
           "responses": [
@@ -327,7 +327,7 @@ Scenario: Admin should be prompted to refresh page if someone has already modifi
   }",
   "variables": {
     "input": {
-      "proposalId": "proposal2",
+      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy",
       "version": 1,
       "responses": [
          {
@@ -404,7 +404,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal2",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "version": 1,
         "responses": [
         {
@@ -422,7 +422,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal
     "data": {
       "changeProposalEvaluation": {
         "proposal": {
-          "id": "proposal2",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "evaluation": {
             "responses": [
               {
@@ -464,7 +464,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal and the version s
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal2",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "version": 1,
         "responses": [
         {
@@ -482,7 +482,7 @@ Scenario: Evaluer wants to update the evaluation of a proposal and the version s
     "data": {
       "changeProposalEvaluation": {
         "proposal": {
-          "id": "proposal2",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "evaluation": {
             "version": 2,
             "responses": [
@@ -525,7 +525,7 @@ Scenario: Evaluer should be prompted to refresh page if someone has already modi
   }",
   "variables": {
     "input": {
-      "proposalId": "proposal2",
+      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy",
       "version": 1,
       "responses": [
          {
@@ -562,7 +562,7 @@ Scenario: Evaluer should be prompted to refresh page if someone has already modi
   "data": {
     "changeProposalEvaluation": {
       "proposal": {
-        "id": "proposal2",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "evaluation": {
           "version": 2,
           "responses": [
@@ -620,7 +620,7 @@ Scenario: Evaluer should be prompted to refresh page if someone has already modi
   }",
   "variables": {
     "input": {
-      "proposalId": "proposal2",
+      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy",
       "version": 1,
       "responses": [
          {
@@ -697,7 +697,7 @@ Scenario: Non evaluer wants to update the evaluation of a proposal
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal2",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "version": 1,
         "responses": []
       }
@@ -706,5 +706,5 @@ Scenario: Non evaluer wants to update the evaluation of a proposal
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"You are not an evaluer of proposal with id proposal2","category":@string@,"locations":[{"line":1,"column":55}],"path":["changeProposalEvaluation"]}],"data":{"changeProposalEvaluation":null}}
+  {"errors":[{"message":"You are not an evaluer of proposal with id UHJvcG9zYWw6cHJvcG9zYWwy","category":@string@,"locations":[{"line":1,"column":55}],"path":["changeProposalEvaluation"]}],"data":{"changeProposalEvaluation":null}}
   """

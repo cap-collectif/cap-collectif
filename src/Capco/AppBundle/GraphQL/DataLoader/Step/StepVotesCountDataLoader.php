@@ -25,7 +25,8 @@ class StepVotesCountDataLoader extends BatchDataLoader
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug
+        bool $debug,
+        bool $enableCache
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -36,13 +37,15 @@ class StepVotesCountDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug
+            $debug,
+            $enableCache
         );
     }
 
     public function invalidate(AbstractStep $step): void
     {
-        $this->cache->invalidateTags([$step->getId()]);
+        // TODO
+        $this->invalidateAll();
     }
 
     public function all(array $keys)
@@ -67,11 +70,6 @@ class StepVotesCountDataLoader extends BatchDataLoader
         }
 
         throw new \RuntimeException('Access denied');
-    }
-
-    protected function getCacheTag($key): array
-    {
-        return [$key['step']->getId()];
     }
 
     protected function serializeKey($key): array

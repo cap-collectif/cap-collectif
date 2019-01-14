@@ -34,7 +34,7 @@ Scenario: Admin wants to get the related content of the first proposal
       }
     }",
     "variables": {
-      "proposalId": "proposal1"
+      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx"
     }
   }
   """
@@ -43,7 +43,7 @@ Scenario: Admin wants to get the related content of the first proposal
   {
     "data": {
       "proposal": {
-        "id": "proposal1",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "news": {
           "edges": [
             {
@@ -58,7 +58,7 @@ Scenario: Admin wants to get the related content of the first proposal
                     "id": "theme2"
                   },
                   {
-                    "id": "proposal1"
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
                   },
                   @...@
                 ]
@@ -99,7 +99,7 @@ Scenario: Admin wants to get only themes on the related content of the first pro
       }
     }",
     "variables": {
-      "proposalId": "proposal1"
+      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx"
     }
   }
   """
@@ -108,7 +108,7 @@ Scenario: Admin wants to get only themes on the related content of the first pro
   {
     "data": {
       "proposal": {
-        "id": "proposal1",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "news": {
           "edges": [
             {
@@ -161,7 +161,7 @@ Scenario: Admin wants to get only proposals on the related content of a blog pos
       }
     }",
     "variables": {
-      "proposalId": "proposal1"
+      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx"
     }
   }
   """
@@ -170,7 +170,7 @@ Scenario: Admin wants to get only proposals on the related content of a blog pos
   {
     "data": {
       "proposal": {
-        "id": "proposal1",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "news": {
           "edges": [
             {
@@ -181,7 +181,7 @@ Scenario: Admin wants to get only proposals on the related content of a blog pos
                   {},
                   {},
                   {
-                    "id": "proposal1"
+                    "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
                   },
                   @...@
                 ]

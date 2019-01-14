@@ -2,21 +2,21 @@
 
 namespace Capco\AppBundle\Helper;
 
-use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
 
 class ProposalHelper
 {
-    protected $proposalRepository;
+    protected $globalIdResolver;
 
-    public function __construct(ProposalRepository $proposalRepository)
+    public function __construct(GlobalIdResolver $globalIdResolver)
     {
-        $this->proposalRepository = $proposalRepository;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function isAuthor(string $proposalId, User $user): bool
     {
-        $proposal = $this->proposalRepository->find($proposalId);
+        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
 
         return $proposal && $proposal->getAuthor() === $user;
     }

@@ -11,23 +11,25 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\MapTokenRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GlobalIdResolver
 {
     private $container;
+    private $logger;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, LoggerInterface $logger)
     {
         $this->container = $container;
+        $this->logger = $logger;
     }
 
     public function resolveMultiple(array $array, $user): array
@@ -43,6 +45,10 @@ class GlobalIdResolver
     public function resolve(string $uuidOrGlobalId, $userOrAnon)
     {
         $user = null;
+        if (empty($uuidOrGlobalId)) {
+            $this->logger->debug(json_encode($uuidOrGlobalId));
+        }
+
         if ($userOrAnon instanceof User) {
             $user = $userOrAnon;
         }
@@ -56,12 +62,9 @@ class GlobalIdResolver
         }
 
         // We try to decode the global id
-        $decodeGlobalId = GlobalId::fromGlobalId($uuidOrGlobalId);
+        $decodeGlobalId = self::getDecodedId($uuidOrGlobalId);
 
-        if (
-            isset($decodeGlobalId['type'], $decodeGlobalId['id']) &&
-            null !== $decodeGlobalId['id']
-        ) {
+        if (\is_array($decodeGlobalId)) {
             // Good news, it's a GraphQL Global id !
             $uuid = $decodeGlobalId['id'];
             $node = null;
@@ -92,10 +95,21 @@ class GlobalIdResolver
                 case 'MapToken':
                     $node = $this->container->get(MapTokenRepository::class)->find($uuid);
 
-
                     break;
                 case 'Requirement':
                     $node = $this->container->get(RequirementRepository::class)->find($uuid);
+
+                    break;
+                case 'CollectStep':
+                    $node = $this->container->get('capco.collect_step.repository')->find($uuid);
+
+                    break;
+                case 'SelectionStep':
+                    $node = $this->container->get('capco.selection_step.repository')->find($uuid);
+
+                    break;
+                case 'Proposal':
+                    $node = $this->container->get('capco.proposal.repository')->find($uuid);
 
                     break;
                 default:
@@ -103,8 +117,8 @@ class GlobalIdResolver
             }
 
             if (!$node) {
-                $error = 'Could not resolve node with id ' . $uuid;
-                $this->container->get('logger')->warning($error);
+                $error = 'Could not resolve node with globalId ' . $uuid;
+                $this->logger->warning($error);
 
                 return null;
             }
@@ -159,13 +173,27 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $error = 'Could not resolve node with id ' . $uuid;
-            $this->container->get('logger')->warning($error);
+            $error = "Could not resolve node with uuid ${uuid}";
+            $this->logger->warning($error);
 
-            throw new UserError($error);
+            return null;
         }
 
         return $this->viewerCanSee($node, $user) ? $node : null;
+    }
+
+    public static function getDecodedId(string $uuidOrGlobalId)
+    {
+        // We try to decode the global id
+        $decodeGlobalId = GlobalId::fromGlobalId($uuidOrGlobalId);
+        if (
+            isset($decodeGlobalId['type'], $decodeGlobalId['id']) &&
+            null !== $decodeGlobalId['id']
+        ) {
+            return $decodeGlobalId;
+        }
+
+        return $uuidOrGlobalId;
     }
 
     public function resolveByModerationToken(string $token): ModerableInterface
@@ -187,7 +215,7 @@ class GlobalIdResolver
         if (!$node) {
             $this->container
                 ->get('logger')
-                ->warn(__METHOD__ . ' : Unknown moderation_token: ' . $token);
+                ->warning(__METHOD__ . ' : Unknown moderation_token: ' . $token);
 
             throw new NotFoundHttpException();
         }

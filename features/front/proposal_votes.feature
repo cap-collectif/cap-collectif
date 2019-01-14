@@ -141,7 +141,7 @@ Scenario: Logged in user wants to reorder my vote for a project
   Given I am logged in as user
   When I got to the votes details page of project with requirements
   And I wait 2 seconds
-  Then I reorder my vote with "#vote-stepcollectstepVoteClassement-proposalproposal24" take place of proposal up
+  Then I reorder my vote with "[id='vote-stepQ29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==-proposalUHJvcG9zYWw6cHJvcG9zYWwyNA==']" take place of proposal up
   And I wait 2 seconds
   Then I click on button "#confirm-update-votes"
 
@@ -151,7 +151,7 @@ Scenario: Logged in user wants to set a vote as anonymous
   When I got to the votes details page of project with requirements
   And I wait 1 seconds
   And I should not see "admin.fields.idea_vote.private"
-  Then I toggle vote access of proposal "#proposal26-proposal-vote__private"
+  Then I toggle vote access of proposal "[id='UHJvcG9zYWw6cHJvcG9zYWwyNg==-proposal-vote__private']"
   And I wait 1 seconds
   And I should see "admin.fields.idea_vote.private"
   Then I click on button "#confirm-update-votes"
@@ -165,7 +165,7 @@ Scenario: Logged in user wants to delete a vote
   Given I am logged in as user
   When I got to the votes details page of project with requirements
   And I should see "Proposition 3"
-  Then I delete a vote of a proposal "#proposal26-proposal-vote__private"
+  Then I delete a vote of a proposal "UHJvcG9zYWw6cHJvcG9zYWwyNg==-proposal-vote__private"
   And I wait 1 seconds
   And I should see "are-you-sure-you-want-to-delete-this-vote"
   Then I press "btn-delete"
