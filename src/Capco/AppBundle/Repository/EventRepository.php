@@ -223,6 +223,16 @@ class EventRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function getEventsEnabledByIds(array $ids)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.enabled = true')
+            ->andWhere('e.id IN (:ids)')
+            ->setParameter(':ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('e')->andWhere('e.enabled = true');
