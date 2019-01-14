@@ -280,21 +280,21 @@ InternalMutation:
         builderConfig:
           inputType: UpdateProposalFusionInput
           payloadType: UpdateProposalFusionPayload
-          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalFusionMutation", [value])'
+          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalFusionMutation", [value , getUser()])'
       changeProposalNotation:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: ChangeProposalNotationInput
           payloadType: ChangeProposalNotationPayload
-          mutateAndGetPayload: "@=mutation('changeProposalNotation', [value])"
+          mutateAndGetPayload: "@=mutation('changeProposalNotation', [value, getUser()])"
       changeProposalEvaluers:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: ChangeProposalEvaluersInput
           payloadType: ChangeProposalEvaluersPayload
-          mutateAndGetPayload: "@=mutation('changeProposalEvaluers', [value])"
+          mutateAndGetPayload: "@=mutation('changeProposalEvaluers', [value,getUser()])"
       followProposal:
         access: "@=hasRole('ROLE_USER')"
         builder: 'Relay::Mutation'
@@ -343,35 +343,35 @@ InternalMutation:
         builderConfig:
           inputType: SelectProposalInput
           payloadType: SelectProposalPayload
-          mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId'], value['statusId']])"
+          mutateAndGetPayload: "@=mutation('selectProposal', [value['proposalId'], value['stepId'], getUser(), value['statusId']])"
       unselectProposal:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: UnselectProposalInput
           payloadType: UnselectProposalPayload
-          mutateAndGetPayload: "@=mutation('unselectProposal', [value['proposalId'], value['stepId']])"
+          mutateAndGetPayload: "@=mutation('unselectProposal', [value['proposalId'], value['stepId'], getUser()])"
       changeSelectionStatus:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: ChangeSelectionStatusInput
           payloadType: ChangeSelectionStatusPayload
-          mutateAndGetPayload: "@=mutation('changeSelectionStatus', [ value['proposalId'], value['stepId'], value['statusId'] ])"
+          mutateAndGetPayload: "@=mutation('changeSelectionStatus', [ value['proposalId'], value['stepId'], getUser(), value['statusId'] ])"
       changeCollectStatus:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: ChangeCollectStatusInput
           payloadType: ChangeCollectStatusPayload
-          mutateAndGetPayload: "@=mutation('changeCollectStatus', [value['proposalId'], value['statusId'] ])"
+          mutateAndGetPayload: "@=mutation('changeCollectStatus', [value['proposalId'], getUser(), value['statusId'] ])"
       changeProposalProgressSteps:
         access: "@=hasRole('ROLE_ADMIN')"
         builder: 'Relay::Mutation'
         builderConfig:
           inputType: ChangeProposalProgressStepsInput
           payloadType: ChangeProposalProgressStepsPayload
-          mutateAndGetPayload: "@=mutation('changeProgressSteps', [value])"
+          mutateAndGetPayload: "@=mutation('changeProgressSteps', [value, getUser()])"
       deleteProposal:
         access: '@=hasRole("ROLE_SUPER_ADMIN") or (hasRole("ROLE_USER") and service("Capco\\AppBundle\\Helper\\ProposalHelper").isAuthor(args["input"]["proposalId"], getUser()))'
         builder: 'Relay::Mutation'

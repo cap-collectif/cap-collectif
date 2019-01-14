@@ -45,6 +45,7 @@ class StepContributorResolver implements ResolverInterface
                 return $contributors;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
                 throw new \RuntimeException('Find contributors failed.');
             }
         });

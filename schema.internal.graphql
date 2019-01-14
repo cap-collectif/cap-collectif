@@ -916,6 +916,21 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
   ): ProposalConnection
+
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -944,21 +959,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     orderBy: ProposalVotesOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm!
-
-  # The requirements to vote on this step.
-  requirements(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): RequirementConnection!
   private: Boolean!
 
   # A list of contributor associated with the step.
@@ -3779,6 +3779,21 @@ interface ProposalStep {
     # Returns the last `n` elements from the list.
     last: Int
   ): ProposalConnection
+
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -4956,6 +4971,21 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     # Returns the last `n` elements from the list.
     last: Int
   ): ProposalConnection
+
+  # The requirements to vote on this step.
+  requirements(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): RequirementConnection!
   project: Project
   votesLimit: Int
   budget: Int
@@ -4984,21 +5014,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     orderBy: ProposalVotesOrder = {direction: DESC}
   ): ProposalVoteConnection!
   form: ProposalForm!
-
-  # The requirements to vote on this step.
-  requirements(
-    # Returns the elements in the list that come after the specified cursor.
-    after: String
-
-    # Returns the first `n` elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified cursor.
-    before: String
-
-    # Returns the last `n` elements from the list.
-    last: Int
-  ): RequirementConnection!
   position: Int!
 
   # Only one selection step inside a project can have realisation steps, true if this one
@@ -5887,7 +5902,7 @@ type User implements Node & UniformResourceLocatable {
   vip: Boolean!
 
   # The user's slug (unique).
-  slug: String
+  slug: String!
 
   # The user's email.
   email: String

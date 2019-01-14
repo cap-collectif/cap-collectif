@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ReportingType;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,29 +9,30 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class ProposalsController extends FOSRestController
 {
     /**
      * @Get("/proposals/{proposalId}/selections")
-     * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
      * @View(serializerGroups={"Statuses", "SelectionStepId"})
      */
-    public function getProposalSelectionsAction(Proposal $proposal)
+    public function getProposalSelectionsAction(string $proposalId)
     {
+        $proposal = $this->get('global_id_resolver')->resolve($proposalId, $this->getUser());
+
         return $proposal->getSelections();
     }
 
     /**
-     * @Post("/proposals/{proposal_id}/reports")
-     * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
+     * @Post("/proposals/{proposalId}/reports")
      * @View(statusCode=201, serializerGroups={"Default"})
      */
-    public function postProposalReportAction(Request $request, Proposal $proposal)
+    public function postProposalReportAction(Request $request, string $proposalId)
     {
         $viewer = $this->getUser();
+        $proposal = $this->get('global_id_resolver')->resolve($proposalId, $this->getUser());
+
         if (!$viewer || 'anon.' === $viewer || $viewer === $proposal->getAuthor()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }

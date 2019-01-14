@@ -23,7 +23,7 @@ Scenario: User wants to add a comment on a proposal
     }",
     "variables": {
       "input": {
-        "commentableId": "proposal1",
+        "commentableId": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "body": "Tololo"
       }
     }
@@ -72,7 +72,7 @@ Scenario: Anonymous wants to add a comment on a blog post
     }",
     "variables": {
       "input": {
-        "commentableId": "proposal1",
+        "commentableId": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "body": "Je suis un super contenu",
         "authorName": "Je suis anonyme",
         "authorEmail": "anonyme@cap-collectif.com"

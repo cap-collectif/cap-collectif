@@ -4,44 +4,62 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ProposalEvaluation;
 use Capco\AppBundle\Form\ProposalEvaluationType;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Helper\ResponsesFormatter;
+use Capco\AppBundle\Repository\ProposalEvaluationRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\LockMode;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Form\FormFactory;
 
-class ProposalEvaluationMutation implements ContainerAwareInterface
+class ProposalEvaluationMutation
 {
-    use ContainerAwareTrait;
+    private $entityManager;
+    private $responsesFormatter;
+    private $proposalEvaluationRepository;
+    private $formFactory;
+    private $proposalRepository;
+    private $globalIdResolver;
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        ResponsesFormatter $responsesFormatter,
+        ProposalEvaluationRepository $proposalEvaluationRepository,
+        FormFactory $formFactory,
+        ProposalRepository $proposalRepository,
+        GlobalIdResolver $globalIdResolver
+    ) {
+        $this->entityManager = $entityManager;
+        $this->responsesFormatter = $responsesFormatter;
+        $this->proposalEvaluationRepository = $proposalEvaluationRepository;
+        $this->formFactory = $formFactory;
+        $this->proposalRepository = $proposalRepository;
+        $this->globalIdResolver = $globalIdResolver;
+    }
 
     public function changeProposalEvaluation(Argument $input, User $user): array
     {
         $arguments = $input->getRawArguments();
         $version = $arguments['version'];
 
-        $om = $this->container->get('doctrine.orm.default_entity_manager');
-
-        $formFactory = $this->container->get('form.factory');
-        $proposalRepo = $this->container->get('capco.proposal.repository');
-
-        $proposal = $proposalRepo->find($arguments['proposalId']);
+        $proposal = $this->globalIdResolver->resolve($arguments['proposalId'], $user);
 
         if (!$proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $arguments['proposalId']));
         }
 
-        $isEvaluer = $proposalRepo->isViewerAnEvaluer($proposal, $user);
+        $isEvaluer = $this->proposalRepository->isViewerAnEvaluer($proposal, $user);
         if (!$isEvaluer && !$user->isAdmin()) {
             throw new UserError(
                 sprintf('You are not an evaluer of proposal with id %s', $arguments['proposalId'])
             );
         }
         unset($arguments['proposalId']);
-        $proposalEvaluation = $this->container->get(
-            'capco.proposal_evaluation.repository'
-        )->findOneBy([
+        $proposalEvaluation = $this->proposalEvaluationRepository->findOneBy([
             'proposal' => $proposal,
         ]);
 
@@ -50,19 +68,17 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
             $proposalEvaluation->setProposal($proposal);
         } else {
             try {
-                $om->lock($proposalEvaluation, LockMode::OPTIMISTIC, $version);
+                $this->entityManager->lock($proposalEvaluation, LockMode::OPTIMISTIC, $version);
             } catch (OptimisticLockException $e) {
                 throw new UserError('The proposal was modified. Please refresh the page.', 409);
             }
         }
 
         if (isset($arguments['responses'])) {
-            $arguments['responses'] = $this->container->get(
-                'Capco\AppBundle\Helper\ResponsesFormatter'
-            )->format($arguments['responses']);
+            $arguments['responses'] = $this->responsesFormatter->format($arguments['responses']);
         }
 
-        $form = $formFactory->create(ProposalEvaluationType::class, $proposalEvaluation);
+        $form = $this->formFactory->create(ProposalEvaluationType::class, $proposalEvaluation);
 
         unset($arguments['version']);
         $form->submit($arguments, false);
@@ -72,10 +88,10 @@ class ProposalEvaluationMutation implements ContainerAwareInterface
         }
 
         $proposalEvaluation->setUpdatedAt(new \DateTime());
-        $om->persist($proposalEvaluation);
+        $this->entityManager->persist($proposalEvaluation);
 
         try {
-            $om->flush();
+            $this->entityManager->flush();
         } catch (\Exception $e) {
             throw new UserError('Error during the flush :' . $e->getMessage());
         }

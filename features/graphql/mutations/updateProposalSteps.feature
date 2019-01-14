@@ -22,7 +22,7 @@ Scenario: Admin should be able to create and delete a proposal step in admin
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal1",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "progressSteps": [
           {
             "title": "test",
@@ -40,7 +40,7 @@ Scenario: Admin should be able to create and delete a proposal step in admin
     "data": {
       "changeProposalProgressSteps": {
         "proposal": {
-          "id": "proposal1",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
           "progressSteps": [
             {
               "id": @string@ ,
@@ -72,7 +72,7 @@ Scenario: Admin should be able to create and delete a proposal step in admin
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal1",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "progressSteps": []
       }
     }
@@ -80,14 +80,14 @@ Scenario: Admin should be able to create and delete a proposal step in admin
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "changeProposalProgressSteps": {
-        "proposal": {
-          "id": "proposal1",
-          "progressSteps": []
-        }
+{
+   "data":{
+      "changeProposalProgressSteps":{
+         "proposal":{
+            "id":"UHJvcG9zYWw6cHJvcG9zYWwx",
+            "progressSteps":[]
+         }
       }
-    }
-  }
+   }
+}
   """

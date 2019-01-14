@@ -17,7 +17,7 @@ Scenario: GraphQL client wants to update follow a proposal with current user
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal1",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
         "notifiedOf": "MINIMAL"
       }
     }
@@ -29,7 +29,7 @@ Scenario: GraphQL client wants to update follow a proposal with current user
     "data": {
       "updateFollowProposal": {
         "proposal": {
-          "id": "proposal1",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
           "viewerFollowingConfiguration": "MINIMAL"
         }
       }
