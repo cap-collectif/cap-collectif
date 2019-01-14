@@ -3,7 +3,7 @@ snc_redis:
     default:
       type: predis
       alias: default
-      dsn: redis://%redis_host%
+      dsn: 'redis://%redis_host%'
       logging: '%kernel.debug%'
   session:
     client: default
