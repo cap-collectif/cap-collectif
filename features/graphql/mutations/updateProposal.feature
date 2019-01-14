@@ -177,23 +177,57 @@ Scenario: GraphQL client wants to edit his proposal
   Then the JSON response should match:
   """
   {
-    "data": {
-      "changeProposalContent": {
-        "proposal": {
-          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
-          "title": "New title",
-          "body": "New body",
-          "publicationStatus": "PUBLISHED",
-          "responses": [
-            { "question": {"id":"1"}, "value": "New reponse-1" },
-            { "question": {"id":"3"}, "value": "New reponse-3" },
-            { "question": {"id":"11"}, "medias": [{"id": "media1"}, {"id": "media2"}] },
-            { "question": {"id":"12"}, "medias": []},
-            { "question": {"id":"303"}, "value": null}
-          ]
+     "data":{
+        "changeProposalContent":{
+           "proposal":{
+              "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
+              "title":"New title",
+              "body":"New body",
+              "publicationStatus":"PUBLISHED",
+              "responses":[
+                 {
+                    "question":{
+                       "id":"303"
+                    },
+                    "value":null
+                 },
+                 {
+                    "question":{
+                       "id":"1"
+                    },
+                    "value":"New reponse-1"
+                 },
+                 {
+                    "question":{
+                       "id":"3"
+                    },
+                    "value":"New reponse-3"
+                 },
+                 {
+                    "question":{
+                       "id":"11"
+                    },
+                    "medias":[
+                       {
+                          "id":"media1"
+                       },
+                       {
+                          "id":"media2"
+                       }
+                    ]
+                 },
+                 {
+                    "question":{
+                       "id":"12"
+                    },
+                    "medias":[
+
+                    ]
+                 }
+              ]
+           }
         }
-      }
-    }
+     }
   }
   """
 
@@ -272,26 +306,67 @@ Scenario: Super Admin GraphQL client wants to update a proposal
   Then the JSON response should match:
   """
   {
-    "data": {
-      "changeProposalContent":{
-        "proposal":{
-          "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
-          "title":"NewTitle",
-          "body":"NewBody",
-          "author":{"_id":"user5"},
-          "theme":{"id":"theme1"},
-          "district":{"id":"district2"},
-          "category":{"id":"pCategory2"},
-          "responses":[
-            {"question":{"id":"1"},"value":"reponse-1"},
-            {"question":{"id":"3"},"value":"reponse-3"},
-            {"question":{"id":"12"},"medias":[{"id":"media1"}]},
-            {"question":{"id":"11"},"medias":[{"id":"media1"}]},
-            {"question":{"id":"303"},"value": null}
-          ]
+     "data":{
+        "changeProposalContent":{
+           "proposal":{
+              "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
+              "title":"NewTitle",
+              "body":"NewBody",
+              "author":{
+                 "_id":"user5"
+              },
+              "theme":{
+                 "id":"theme1"
+              },
+              "district":{
+                 "id":"district2"
+              },
+              "category":{
+                 "id":"pCategory2"
+              },
+              "responses":[
+                 {
+                    "question":{
+                       "id":"303"
+                    },
+                    "value":null
+                 },
+                 {
+                    "question":{
+                       "id":"1"
+                    },
+                    "value":"reponse-1"
+                 },
+                 {
+                    "question":{
+                       "id":"3"
+                    },
+                    "value":"reponse-3"
+                 },
+                 {
+                    "question":{
+                       "id":"11"
+                    },
+                    "medias":[
+                       {
+                          "id":"media1"
+                       }
+                    ]
+                 },
+                 {
+                    "question":{
+                       "id":"12"
+                    },
+                    "medias":[
+                       {
+                          "id":"media1"
+                       }
+                    ]
+                 }
+              ]
+           }
         }
-      }
-    }
+     }
   }
   """
 
