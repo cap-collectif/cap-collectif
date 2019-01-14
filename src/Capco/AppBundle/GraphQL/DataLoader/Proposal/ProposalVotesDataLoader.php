@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisTagCache;
@@ -26,7 +25,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
     private $proposalSearch;
-    private $globalIdResolver;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -35,7 +33,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ProposalSearch $proposalSearch,
-        GlobalIdResolver $globalIdResolver,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -44,7 +41,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalSearch = $proposalSearch;
-        $this->globalIdResolver = $globalIdResolver;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -91,7 +87,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
     {
         return [
             'proposalId' => $key['proposal']->getId(),
-            // ?TODO? toGlobalId
             'stepId' => isset($key['step']) ? $key['step']->getId() : null,
             'args' => $key['args']->getRawArguments(),
             'includeUnpublished' => $key['includeUnpublished'],
@@ -100,6 +95,8 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
     private function resolveBatch($keys): array
     {
+        $connections = [];
+
         // We must group proposals by step
         $steps = array_unique(
             array_map(function ($key) {
@@ -152,19 +149,10 @@ class ProposalVotesDataLoader extends BatchDataLoader
                 }, $batchProposalIds);
             }
         } else {
-            $repo = null;
             if ($step instanceof CollectStep) {
                 $repo = $this->proposalCollectVoteRepository;
-            } elseif ($step instanceof SelectionStep) {
-                $repo = $this->proposalSelectionVoteRepository;
             } else {
-                $this->logger->error('Please provide a Collect or Selection step');
-
-                return $this->getPromiseAdapter()->createAll(
-                    array_map(function ($key) {
-                        return null;
-                    }, $keys)
-                );
+                $repo = $this->proposalSelectionVoteRepository;
             }
 
             // Elasticsearch is way faster to retrieve counters
@@ -262,8 +250,6 @@ class ProposalVotesDataLoader extends BatchDataLoader
     ): Connection {
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
-        $totalCount = 0;
-
         if ($step) {
             if ($step instanceof SelectionStep) {
                 $paginator = new Paginator(function (int $offset, int $limit) use (
@@ -326,11 +312,10 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
             throw new \RuntimeException('Unknown step type.');
         }
-
         $paginator = new Paginator(function (int $offset, int $limit) {
             return [];
         });
-
+        $totalCount = 0;
         $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
             $proposal,
             $includeUnpublished

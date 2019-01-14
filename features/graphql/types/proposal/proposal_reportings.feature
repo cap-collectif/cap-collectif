@@ -24,7 +24,7 @@ Scenario: Admin wants to get reportings for a proposal
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx"
+      "proposalId": "proposal1"
     }
   }
   """
@@ -33,7 +33,7 @@ Scenario: Admin wants to get reportings for a proposal
   {
     "data": {
         "proposal": {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+            "id": "proposal1",
             "reportings": {
                 "totalCount": 1,
                 "edges": [

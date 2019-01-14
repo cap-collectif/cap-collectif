@@ -20,7 +20,7 @@ Scenario: Anonymous wants to get comments from commentables
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "proposalId": "proposal1",
       "eventId": "RXZlbnQ6ZXZlbnQx",
       "postId": "UG9zdDox"
     }

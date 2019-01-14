@@ -58,7 +58,6 @@ services:
       $cachePrefix: CollectStepContributorCountDataLoader
       $cacheTtl: 120
       $debug: '%kernel.debug%'
-      $enableCache: false
 
   Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader:
     autowire: true
@@ -66,7 +65,6 @@ services:
       $cachePrefix: StepVotesCountDataLoader
       $cacheTtl: 120
       $debug: '%kernel.debug%'
-      $enableCache: false
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader:
     autowire: true

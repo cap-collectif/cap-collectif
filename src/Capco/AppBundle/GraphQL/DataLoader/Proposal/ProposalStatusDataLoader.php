@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Proposal;
@@ -13,27 +12,24 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProposalStatusDataLoader extends BatchDataLoader
 {
-    private $globalIdResolver;
-    private $tokenStorage;
+    private $stepRepo;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisCache $cache,
         LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver,
-        TokenStorageInterface $tokenStorage,
+        AbstractStepRepository $stepRepo,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
         bool $enableCache
     ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->tokenStorage = $tokenStorage;
+        $this->stepRepo = $stepRepo;
         parent::__construct(
             [$this, 'all'],
             $promiseFactory,
@@ -106,10 +102,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
     {
         if ($args->offsetExists('step') && $args->offsetGet('step')) {
             $stepId = $args->offsetGet('step');
-            $step = $this->globalIdResolver->resolve(
-                $stepId,
-                $this->tokenStorage->getToken()->getUser()
-            );
+            $step = $this->stepRepo->find($stepId);
 
             if ($step instanceof CollectStep) {
                 return $proposal->getStatus();
@@ -118,7 +111,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
             if ($step instanceof SelectionStep) {
                 /** @var Selection $selection */
                 foreach ($proposal->getSelections() as $selection) {
-                    if ($selection->getStep()->getId() === $step->getId()) {
+                    if ($selection->getStep()->getId() === $stepId) {
                         return $selection->getStatus();
                     }
                 }

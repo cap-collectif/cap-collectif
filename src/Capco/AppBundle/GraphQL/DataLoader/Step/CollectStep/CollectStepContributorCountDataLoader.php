@@ -21,8 +21,7 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
         StepContributorResolver $stepContributorResolver,
         string $cachePrefix,
         int $cacheTtl,
-        bool $debug,
-        bool $enableCache
+        bool $debug
     ) {
         $this->stepContributorResolver = $stepContributorResolver;
         parent::__construct(
@@ -32,14 +31,14 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
             $cache,
             $cachePrefix,
             $cacheTtl,
-            $debug,
-            $enableCache
+            $debug
         );
     }
 
     public function invalidate(CollectStep $collectStep): void
     {
-        $this->cache->invalidateTags([$collectStep->getId()]);
+        // TODO
+        $this->invalidateAll();
     }
 
     public function all(array $keys)
@@ -51,11 +50,6 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
         }
 
         return $this->getPromiseAdapter()->createAll($connections);
-    }
-
-    protected function getCacheTag($key): array
-    {
-        return [$key['collectStep']->getId()];
     }
 
     protected function serializeKey($key): array

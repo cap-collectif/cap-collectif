@@ -16,6 +16,7 @@ use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -75,6 +76,28 @@ class StepController extends Controller
             new Argument(['first' => 10])
         );
 
+        $contributorsList =
+            $contributorsConnection->totalCount >
+            0
+            // @var User $user
+                ? array_merge(
+                    ...array_map(function (Edge $edge) {
+                        $user = $edge->node;
+
+                        return [
+                            $user->getId() => [
+                                'user' => $user,
+                                'sources' => $user->getSourcesCount(),
+                                'arguments' => $user->getArgumentsCount(),
+                                'opinions' => $user->getOpinionsCount(),
+                                'contributions' => $user->getContributionsCount(),
+                                'votes' => $user->getVotesCount(),
+                            ],
+                        ];
+                    }, $contributorsConnection->edges)
+                )
+                : [];
+
         $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
 
         return [
@@ -84,6 +107,7 @@ class StepController extends Controller
             'posts' => $posts,
             'nbEvents' => $nbEvents,
             'nbPosts' => $nbPosts,
+            'contributors' => $contributorsList,
             'showVotes' => $showVotes,
         ];
     }

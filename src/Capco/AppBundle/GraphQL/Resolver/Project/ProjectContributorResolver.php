@@ -2,40 +2,35 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Search\UserSearch;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Resolver\ContributionResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Search\UserSearch;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Psr\Log\LoggerInterface;
 
 class ProjectContributorResolver implements ResolverInterface
 {
-    public $useElasticsearch = false;
     private $userSearch;
     private $logger;
     private $proposalSelectionVoteRepository;
     private $proposalCollectVoteRepository;
-    private $contributionsResolver;
 
     public function __construct(
         UserSearch $userSearch,
         LoggerInterface $logger,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ContributionResolver $contributionsResolver
+        ProposalCollectVoteRepository $proposalCollectVoteRepository
     ) {
         $this->userSearch = $userSearch;
         $this->logger = $logger;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->contributionsResolver = $contributionsResolver;
     }
 
     public function __invoke(Project $project, ?Arg $args = null): Connection
@@ -46,17 +41,19 @@ class ProjectContributorResolver implements ResolverInterface
         }
 
         $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount, $project) {
-            if ($this->useElasticsearch) {
+            try {
                 $value = $this->userSearch->getContributorByProject($project, $offset, $limit);
                 $contributors = $value['results'];
                 $totalCount = $value['totalCount'];
 
                 return $contributors;
-            }
-            $contributors = $this->contributionsResolver->getProjectContributorsOrdered($project);
-            $totalCount = \count($contributors);
+            } catch (\RuntimeException $exception) {
+                $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
-            return [];
+                $totalCount = 0;
+
+                return [];
+            }
         });
 
         $connection = $paginator->auto($args, $totalCount);

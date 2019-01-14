@@ -19,7 +19,7 @@ Scenario: GraphQL client wants to trash a proposal
       "input": {
         "publicationStatus": "TRASHED",
         "trashedReason": "POPO",
-        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx"
+        "proposalId": "proposal1"
       }
     }
   }

@@ -4,27 +4,21 @@
 {% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
 
 {% block reduxStore %}
-    {% include '@CapcoApp/redux_store.html.twig' with {'project': project} %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'project': project} %}
 {% endblock %}
 
 {% block mainContent %}
 
     {% if showVotesWidget %}
-        {% set votableStep = proposal is defined ? proposal|current_votable_step : currentStep %}
-        {% set stepId = votableStep.id %}
-        {% if votableStep.type == 'collect' %}
-            {% set stepId = stepId|toGlobalId('CollectStep') %}
-        {% elseif votableStep.type == 'selection' %}
-            {% set stepId = stepId|toGlobalId('SelectionStep') %}
-        {% endif %}
-
-        {{ react_render_component('ProposalVoteBasketWidgetApp', {
-            'props': {
-                'stepId': stepId,
-                'image': media_public_url(capco_site_image_media('image.votes_bar'), 'default_small'),
-                'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
-            },
-        }) }}
+      {% set votableStep = proposal is defined ? proposal|current_votable_step : currentStep %}
+      {{ react_render_component('ProposalVoteBasketWidgetApp', {
+          'props': {
+            'stepId': votableStep.id,
+            'image': media_public_url(capco_site_image_media('image.votes_bar'), 'default_small'),
+            'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
+          },
+          })
+      }}
     {% endif %}
 
     {% if project.isPublic == false %}
@@ -32,7 +26,7 @@
             'props': {
                 'projectId': project.id,
             },
-        }) }}
+        })}}
     {% endif %}
 
     {{ parent() }}

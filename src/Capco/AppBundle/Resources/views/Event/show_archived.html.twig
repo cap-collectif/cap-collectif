@@ -21,11 +21,22 @@
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
         <div class="container">
             <h1>{{ 'event.archived'|trans({}, 'CapcoAppBundle') }}</h1>
+            {% if null != jumbotron_body %}
+                {{ jumbotron_body|raw }}
+            {% endif %}
         </div>
     </div>
 {% endblock %}
 
 {% block body %}
+
+    <section class="section--custom">
+        <div class="container">
+            {% if null != content_body %}
+                {{ content_body|raw }}
+            {% endif %}
+        </div>
+    </section>
 
     <section class="section--custom">
         <div class="container">

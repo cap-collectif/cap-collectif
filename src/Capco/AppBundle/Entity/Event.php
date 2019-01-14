@@ -482,12 +482,10 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
 
     public function getFullAddress(): string
     {
-        $address = !empty($this->getAddress()) ? $this->getAddress() . ', ' : '';
-        $address .= !empty($this->getZipCode()) ?  $this->getZipCode() . ', ' : '';
-        $address .= !empty($this->getCity()) ? $this->getCity() : '';
+        $address = $this->getAddress();
+        $address .= !empty($this->getZipCode()) ? ', ' . $this->getZipCode() : '';
+        $address .= !empty($this->getCity()) ? ', ' . $this->getCity() : '';
 
-        $address = rtrim($address, ', ');
-
-        return ltrim(trim($address), ' ,');
+        return $address;
     }
 }

@@ -46,39 +46,46 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
-        $contributionsCountByProject = [];
-        $contributionsCountByStep = [];
-        foreach ($this->projectRepository->findAll() as $project) {
-            $count = $this->contributionProjectResolver->__invoke(
-                $object,
-                $project,
-                new Argument([
-                    'first' => 0,
-                ])
-            )->totalCount;
-            $contributionsCountByProject[] = [
-                'project' => ['id' => $project->getId()],
-                'count' => $count,
-            ];
-            foreach ($project->getRealSteps() as $step) {
-                $contributionsCountByStep[] = [
-                    'step' => ['id' => $step->getId()],
-                    'count' =>
-                        0 === $count
-                            ? 0
-                            : $this->contributionStepResolver->__invoke(
-                                $object,
-                                $step,
-                                new Argument([
-                                    'first' => 0,
-                                ])
-                            )->totalCount,
+        if (
+            \in_array('Elasticsearch', $groups, true) &&
+            !\in_array('ElasticsearchProposal', $groups, true)
+        ) {
+            $contributionsCountByProject = [];
+            $contributionsCountByStep = [];
+            foreach ($this->projectRepository->findAll() as $project) {
+                $count = $this->contributionProjectResolver->__invoke(
+                    $object,
+                    $project,
+                    new Argument([
+                        'first' => 0,
+                    ])
+                )->totalCount;
+                $contributionsCountByProject[] = [
+                    'project' => ['id' => $project->getId()],
+                    'count' => $count,
                 ];
+                foreach ($project->getRealSteps() as $step) {
+                    $contributionsCountByStep[] = [
+                        'step' => ['id' => $step->getId()],
+                        'count' =>
+                            0 === $count
+                                ? 0
+                                : $this->contributionStepResolver->__invoke(
+                                    $object,
+                                    $step,
+                                    new Argument([
+                                        'first' => 0,
+                                    ])
+                                )->totalCount,
+                    ];
+                }
             }
-        }
 
-        $data['contributionsCountByProject'] = $contributionsCountByProject;
-        $data['contributionsCountByStep'] = $contributionsCountByStep;
+            $data['contributionsCountByProject'] = $contributionsCountByProject;
+            $data['contributionsCountByStep'] = $contributionsCountByStep;
+
+            return $data;
+        }
 
         $links = [
             'settings' => $this->router->generate('capco_profile_edit', [], true),

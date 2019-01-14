@@ -19,22 +19,21 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class GlobalIdResolverSpec extends ObjectBehavior
 {
-    public function it_is_initializable(ContainerInterface $container, LoggerInterface $logger)
+    public function it_is_initializable(ContainerInterface $container)
     {
-        $this->beConstructedWith($container, $logger);
+        $this->beConstructedWith($container);
         $this->shouldHaveType(GlobalIdResolver::class);
     }
 
     public function it_can_resolve_a_global_id(
         ContainerInterface $container,
-        LoggerInterface $logger,
         EventRepository $eventRepo,
         Event $event
     ) {
         $event->canDisplay(null)->willReturn(true);
         $eventRepo->find('event1')->willReturn($event);
         $container->get('capco.event.repository')->willReturn($eventRepo);
-        $this->beConstructedWith($container, $logger);
+        $this->beConstructedWith($container);
         $globalId = GlobalId::toGlobalId('Event', 'event1');
 
         $this->resolve($globalId, null)->shouldReturn($event);
@@ -42,13 +41,12 @@ class GlobalIdResolverSpec extends ObjectBehavior
 
     public function it_can_resolve_a_requirement(
         ContainerInterface $container,
-        LoggerInterface $logger,
         RequirementRepository $repository,
         Requirement $requirement
     ) {
         $repository->find('requirement1')->willReturn($requirement);
         $container->get(RequirementRepository::class)->willReturn($repository);
-        $this->beConstructedWith($container, $logger);
+        $this->beConstructedWith($container);
         $globalId = GlobalId::toGlobalId('Requirement', 'requirement1');
 
         $this->resolve($globalId, null)->shouldReturn($requirement);
@@ -61,14 +59,14 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $id = 'Unknoownnnn1';
         $globalId = GlobalId::toGlobalId('Unknoownnnn', $id);
 
-        $logger->warning('Could not resolve node with globalId ' . $id)->shouldBeCalled();
-        $this->beConstructedWith($container, $logger);
+        $logger->warning('Could not resolve node with id ' . $id)->shouldBeCalled();
+        $container->get('logger')->willReturn($logger);
+        $this->beConstructedWith($container);
         $this->resolve($globalId, null)->shouldReturn(null);
     }
 
     public function it_can_resolve_an_uuid(
         ContainerInterface $container,
-        LoggerInterface $logger,
         OpinionRepository $opinionRepo,
         Opinion $opinion
     ) {
@@ -76,7 +74,7 @@ class GlobalIdResolverSpec extends ObjectBehavior
         $opinionRepo->find($uuid)->willReturn($opinion);
         $container->get('capco.opinion.repository')->willReturn($opinionRepo);
 
-        $this->beConstructedWith($container, $logger);
+        $this->beConstructedWith($container);
         $this->resolve($uuid, null)->shouldReturn($opinion);
     }
 
@@ -87,10 +85,11 @@ class GlobalIdResolverSpec extends ObjectBehavior
     ) {
         $id = 'Unknoownnnn1';
         $repository->find($id)->willReturn(null);
-        $logger->warning("Could not resolve node with uuid ${id}")->shouldBeCalled();
+        $logger->warning('Could not resolve node with id ' . $id)->shouldBeCalled();
         $container->get(Argument::any())->willReturn($repository);
-        $this->beConstructedWith($container, $logger);
-        $this->shouldThrow(new UserError("Could not resolve node with uuid ${id}"))->during(
+        $container->get('logger')->willReturn($logger);
+        $this->beConstructedWith($container);
+        $this->shouldThrow(new UserError('Could not resolve node with id Unknoownnnn1'))->during(
             'resolve',
             [$id, null]
         );

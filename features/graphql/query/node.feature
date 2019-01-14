@@ -49,7 +49,7 @@ Scenario: GraphQL client want to get a node of all available types
     }",
     "variables": {
       "opinionId": "opinion1",
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "proposalId": "proposal1",
       "projectId": "project1",
       "groupId": "group1",
       "proposalFormId": "proposalForm1",
@@ -109,7 +109,7 @@ Scenario: Admin GraphQL client want to get nodes from a restricted project
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwzNA==",
+      "proposalId": "proposal34",
       "projectId": "ProjectAccessibleForMeOnlyByAdmin"
     }
   }
@@ -145,7 +145,7 @@ Scenario: Anonymous GraphQL client want to get nodes from a private project
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwzNA==",
+      "proposalId": "proposal34",
       "projectId": "ProjectAccessibleForMeOnlyByAdmin"
     }
   }
@@ -178,7 +178,7 @@ Scenario: Not allowed GraphQL client want to get nodes from a private project
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwzNA==",
+      "proposalId": "proposal34",
       "projectId": "ProjectAccessibleForMeOnlyByAdmin"
     }
   }
@@ -211,7 +211,7 @@ Scenario: Super Admin GraphQL client want to get nodes from a private project
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwzNA==",
+      "proposalId": "proposal34",
       "projectId": "ProjectAccessibleForMeOnlyByAdmin"
     }
   }

@@ -22,7 +22,7 @@ Scenario: GraphQL client wants to get list of users who following a proposal
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
+      "proposalId": "proposal10",
       "count": 32,
       "cursor": null
     }
@@ -88,13 +88,13 @@ Scenario: GraphQL client wants to get list of proposals followed by the current 
             {
               "cursor": @string@,
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwx"
+                "id": "proposal1"
               }
             },
             {
               "cursor": @string@,
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
+                "id": "proposal2"
               }
             }
           ]
@@ -131,7 +131,7 @@ Scenario: I'm on a proposal and GraphQL want to know the total number of proposa
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "proposalId": "proposal1",
       "count": 32,
       "cursor": null
     }
@@ -142,7 +142,7 @@ Scenario: I'm on a proposal and GraphQL want to know the total number of proposa
   {
     "data": {
       "proposal": {
-        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        "id": "proposal1",
         "followers": {
           "edges": [
             {
@@ -191,7 +191,7 @@ Scenario: I'm on qqa proposal and I want to load 32 followers from a cursor
       }
     }",
     "variables": {
-      "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "proposalId": "proposal1",
       "count": 32,
       "cursor": "YXJyYXljb25uZWN0aW9uOjMx"
     }
@@ -202,7 +202,7 @@ Scenario: I'm on qqa proposal and I want to load 32 followers from a cursor
   {
     "data": {
       "proposal": {
-        "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+        "id": "proposal1",
         "followers": {
           "edges": [
             {

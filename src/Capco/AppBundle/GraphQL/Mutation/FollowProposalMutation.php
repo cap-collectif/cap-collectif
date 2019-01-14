@@ -4,8 +4,8 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\FollowerRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -18,23 +18,23 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigura
 class FollowProposalMutation implements MutationInterface
 {
     private $em;
+    private $proposalRepository;
     private $followerRepository;
     private $viewerFollowDataLoader;
     private $viewerFollowingConfigDataLoader;
-    private $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,
+        ProposalRepository $proposalRepository,
         FollowerRepository $followerRepository,
         ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader,
-        ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader,
-        GlobalIdResolver $globalIdResolver
+        ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader
     ) {
         $this->em = $em;
+        $this->proposalRepository = $proposalRepository;
         $this->followerRepository = $followerRepository;
         $this->viewerFollowDataLoader = $viewerFollowDataLoader;
         $this->viewerFollowingConfigDataLoader = $viewerFollowingConfigDataLoader;
-        $this->globalIdResolver = $globalIdResolver;
     }
 
     /**
@@ -43,7 +43,7 @@ class FollowProposalMutation implements MutationInterface
     public function __invoke(string $proposalId, string $notifiedOf, User $user): array
     {
         /** @var Proposal $proposal */
-        $proposal = $this->globalIdResolver->resolve($proposalId, $user);
+        $proposal = $this->proposalRepository->find($proposalId);
 
         if (!$proposal) {
             throw new UserError('Cant find the proposal');

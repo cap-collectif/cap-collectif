@@ -44,10 +44,20 @@
     </script>
     {{ parent() }}
     {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
+    {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
+    
     <script type="text/javascript">
 
         window.executeAnalyticScript = function(){
             {% if null != analytic_js %}
+              var script = document.createElement("script");
+              script.innerHTML = '{{ analytic_js|e("js") }}';
+              document.body.appendChild(script);
+            {% endif %}
+        };
+
+        window.executeAdsScript = function(){
+            {% if null != ads_js %}
               var script = document.createElement("script");
               script.innerHTML = '{{ analytic_js|e("js") }}';
               document.body.appendChild(script);
