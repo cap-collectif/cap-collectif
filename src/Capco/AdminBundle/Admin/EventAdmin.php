@@ -267,6 +267,14 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.country',
                 'required' => false,
             ])
+            ->add('lat', null, [
+                'label' => 'admin.fields.event.lat',
+                'required' => false,
+            ])
+            ->add('lng', null, [
+                'label' => 'admin.fields.event.lng',
+                'required' => false,
+            ])
             ->end();
         $formMapper
             ->with('admin.fields.page.advanced')
