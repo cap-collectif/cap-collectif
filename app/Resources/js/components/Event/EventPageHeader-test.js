@@ -20,4 +20,13 @@ describe('<EventPageHeader />', () => {
     const wrapper = shallow(<EventPageHeader {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('renders correctly without title', () => {
+    const noTitle = {
+      ...props,
+      eventPageTitle: '',
+    };
+    const wrapper = shallow(<EventPageHeader {...noTitle} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
