@@ -37,8 +37,7 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
 
     public function invalidate(CollectStep $collectStep): void
     {
-        // TODO
-        $this->invalidateAll();
+        $this->cache->invalidateTags([$collectStep->getId()]);
     }
 
     public function all(array $keys)
@@ -50,6 +49,11 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
         }
 
         return $this->getPromiseAdapter()->createAll($connections);
+    }
+
+    protected function getCacheTag($key): array
+    {
+        return [$key['collectStep']->getId()];
     }
 
     protected function serializeKey($key): array
