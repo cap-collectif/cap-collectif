@@ -32,6 +32,7 @@ class FeaturesCategoryResolver
                 'blog',
                 'calendar',
                 'consultation_plan',
+                'privacy_policy',
                 'display_map',
                 'versions',
                 'themes',

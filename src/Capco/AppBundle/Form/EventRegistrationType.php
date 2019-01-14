@@ -26,25 +26,23 @@ class EventRegistrationType extends AbstractType
     {
         if ($options['registered']) {
             $builder->add('submit', SubmitType::class, [
-              'label' => 'event_registration.unsubscribe',
-              'attr' => ['class' => 'btn  btn-danger  btn-block'],
+                'label' => 'event_registration.unsubscribe',
+                'attr' => ['class' => 'btn  btn-danger  btn-block'],
             ]);
 
             return;
         }
 
-        if (null !== $this->user || !\is_object($this->user)) {
+        if (null !== $this->user && \is_object($this->user)) {
             $builder
-              ->add('private', null, [
-                  'required' => false,
-                  'label' => 'event_registration.create.private',
-              ])
-              ->add('submit',
-                  SubmitType::class, [
-                  'label' => 'event_registration.create.register',
-                  'attr' => ['class' => 'btn btn-success btn-block'],
-              ])
-            ;
+                ->add('private', null, [
+                    'required' => false,
+                    'label' => 'event_registration.create.private',
+                ])
+                ->add('submit', SubmitType::class, [
+                    'label' => 'event_registration.create.register',
+                    'attr' => ['class' => 'btn btn-success btn-block'],
+                ]);
 
             return;
         }
@@ -60,12 +58,10 @@ class EventRegistrationType extends AbstractType
                 'required' => false,
                 'label' => 'event_registration.create.private',
             ])
-            ->add('submit',
-                SubmitType::class, [
-                  'label' => 'event_registration.create.submit',
-                  'attr' => ['class' => 'btn  btn-success  btn-block'],
-            ])
-        ;
+            ->add('submit', SubmitType::class, [
+                'label' => 'event_registration.create.submit',
+                'attr' => ['class' => 'btn  btn-success  btn-block'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -19,7 +19,7 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
     }",
     "variables": {
       "input": {
-        "id": "proposal2",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "title": "Achetez un DOP à la madeleine",
         "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
         "responses": [
@@ -50,7 +50,7 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
     "data": {
       "changeProposalContent": {
         "proposal": {
-          "id": "proposal2",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "title": "Achetez un DOP à la madeleine",
           "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
           "publicationStatus": "PUBLISHED"
@@ -80,7 +80,7 @@ Scenario: GraphQL client wants to edit his proposal
     }",
     "variables": {
       "input": {
-        "id": "proposal2",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "title": "Acheter un sauna par personne pour Capco",
         "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit",
         "responses": [
@@ -111,7 +111,7 @@ Scenario: GraphQL client wants to edit his proposal
     "data": {
       "changeProposalContent": {
         "proposal": {
-          "id": "proposal2",
+          "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
           "title": "Acheter un sauna par personne pour Capco",
           "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit",
           "publicationStatus": "PUBLISHED"
@@ -148,7 +148,7 @@ Scenario: GraphQL client wants to edit his proposal
     }",
     "variables": {
       "input": {
-        "id": "proposal2",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "title": "New title",
         "body": "New body",
         "category": "pCategory3",
@@ -177,23 +177,57 @@ Scenario: GraphQL client wants to edit his proposal
   Then the JSON response should match:
   """
   {
-    "data": {
-      "changeProposalContent": {
-        "proposal": {
-          "id": "proposal2",
-          "title": "New title",
-          "body": "New body",
-          "publicationStatus": "PUBLISHED",
-          "responses": [
-            { "question": {"id":"1"}, "value": "New reponse-1" },
-            { "question": {"id":"3"}, "value": "New reponse-3" },
-            { "question": {"id":"11"}, "medias": [{"id": "media1"}, {"id": "media2"}] },
-            { "question": {"id":"12"}, "medias": []},
-            { "question": {"id":"303"}, "value": null}
-          ]
+     "data":{
+        "changeProposalContent":{
+           "proposal":{
+              "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
+              "title":"New title",
+              "body":"New body",
+              "publicationStatus":"PUBLISHED",
+              "responses":[
+                 {
+                    "question":{
+                       "id":"303"
+                    },
+                    "value":null
+                 },
+                 {
+                    "question":{
+                       "id":"1"
+                    },
+                    "value":"New reponse-1"
+                 },
+                 {
+                    "question":{
+                       "id":"3"
+                    },
+                    "value":"New reponse-3"
+                 },
+                 {
+                    "question":{
+                       "id":"11"
+                    },
+                    "medias":[
+                       {
+                          "id":"media1"
+                       },
+                       {
+                          "id":"media2"
+                       }
+                    ]
+                 },
+                 {
+                    "question":{
+                       "id":"12"
+                    },
+                    "medias":[
+
+                    ]
+                 }
+              ]
+           }
         }
-      }
-    }
+     }
   }
   """
 
@@ -264,7 +298,7 @@ Scenario: Super Admin GraphQL client wants to update a proposal
             "medias": ["media1"]
           }
         ],
-        "id": "proposal2"
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy"
       }
     }
   }
@@ -272,26 +306,67 @@ Scenario: Super Admin GraphQL client wants to update a proposal
   Then the JSON response should match:
   """
   {
-    "data": {
-      "changeProposalContent":{
-        "proposal":{
-          "id":"proposal2",
-          "title":"NewTitle",
-          "body":"NewBody",
-          "author":{"_id":"user5"},
-          "theme":{"id":"theme1"},
-          "district":{"id":"district2"},
-          "category":{"id":"pCategory2"},
-          "responses":[
-            {"question":{"id":"1"},"value":"reponse-1"},
-            {"question":{"id":"3"},"value":"reponse-3"},
-            {"question":{"id":"12"},"medias":[{"id":"media1"}]},
-            {"question":{"id":"11"},"medias":[{"id":"media1"}]},
-            {"question":{"id":"303"},"value": null}
-          ]
+     "data":{
+        "changeProposalContent":{
+           "proposal":{
+              "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
+              "title":"NewTitle",
+              "body":"NewBody",
+              "author":{
+                 "_id":"user5"
+              },
+              "theme":{
+                 "id":"theme1"
+              },
+              "district":{
+                 "id":"district2"
+              },
+              "category":{
+                 "id":"pCategory2"
+              },
+              "responses":[
+                 {
+                    "question":{
+                       "id":"303"
+                    },
+                    "value":null
+                 },
+                 {
+                    "question":{
+                       "id":"1"
+                    },
+                    "value":"reponse-1"
+                 },
+                 {
+                    "question":{
+                       "id":"3"
+                    },
+                    "value":"reponse-3"
+                 },
+                 {
+                    "question":{
+                       "id":"11"
+                    },
+                    "medias":[
+                       {
+                          "id":"media1"
+                       }
+                    ]
+                 },
+                 {
+                    "question":{
+                       "id":"12"
+                    },
+                    "medias":[
+                       {
+                          "id":"media1"
+                       }
+                    ]
+                 }
+              ]
+           }
         }
-      }
-    }
+     }
   }
   """
 
@@ -313,7 +388,7 @@ Scenario: GraphQL client wants to edit his proposal without required response
     }",
     "variables": {
       "input": {
-        "id": "proposal2",
+        "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
         "responses": [
           {
             "question": "1",

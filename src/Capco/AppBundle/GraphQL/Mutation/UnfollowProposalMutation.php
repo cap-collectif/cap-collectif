@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
@@ -21,19 +22,22 @@ class UnfollowProposalMutation implements MutationInterface
     private $followerRepository;
     private $viewerFollowDataLoader;
     private $viewerFollowingConfigDataLoader;
+    private $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,
         ProposalRepository $proposalRepository,
         FollowerRepository $followerRepository,
         ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader,
-        ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader
+        ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader,
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->em = $em;
         $this->proposalRepository = $proposalRepository;
         $this->followerRepository = $followerRepository;
         $this->viewerFollowDataLoader = $viewerFollowDataLoader;
         $this->viewerFollowingConfigDataLoader = $viewerFollowingConfigDataLoader;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $args, User $user): array
@@ -41,14 +45,14 @@ class UnfollowProposalMutation implements MutationInterface
         $proposal = '';
         if (isset($args['proposalId'])) {
             /** @var Proposal $proposal */
-            $proposal = $this->proposalRepository->find($args['proposalId']);
+            $proposal = $this->globalIdResolver->resolve($args['proposalId'], $user);
             $this->unfollowAProposal($proposal, $user);
         }
 
         if (isset($args['idsProposal'])) {
             foreach ($args['idsProposal'] as $proposalId) {
                 /** @var Proposal $proposal */
-                $proposal = $this->proposalRepository->find($proposalId);
+                $proposal = $this->globalIdResolver->resolve($proposalId, $user);
                 $this->unfollowAProposal($proposal, $user);
             }
         }

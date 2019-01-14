@@ -240,7 +240,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->setParameter('collect_step_id', $step->getId())
             ->setParameter('ids', $ids);
 
-        return $query->getArrayResult();
+        return $query->getResult();
     }
 
     public function countVotesByProposalAndStep(
@@ -262,11 +262,16 @@ class ProposalCollectVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function countVotesByProposal(string $proposalId, bool $includeUnpublished): int
+    public function countVotesByProposal($proposalId, bool $includeUnpublished): int
     {
+        if (!\is_string($proposalId) && $proposalId instanceof Proposal) {
+            $proposalId = $proposalId->getId();
+        }
+
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
-            ->andWhere('pv.proposal = :proposal')
+            ->leftJoin('pv.proposal', 'p')
+            ->andWhere('p.id = :proposal')
             ->setParameter('proposal', $proposalId);
 
         if (!$includeUnpublished) {

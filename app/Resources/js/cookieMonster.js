@@ -157,7 +157,7 @@ class CookieMonster {
       }
     } else if (type === 'adCookieConsentValue') {
       if (value) {
-        this.executeAdScript();
+        // do something; waiting for instruction
       }
     }
   };
@@ -189,10 +189,6 @@ class CookieMonster {
 
   executeAnalyticScript() {
     window.executeAnalyticScript();
-  }
-
-  executeAdsScript() {
-    window.executeAdsScript();
   }
 }
 

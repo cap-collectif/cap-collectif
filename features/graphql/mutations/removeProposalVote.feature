@@ -16,8 +16,8 @@ Scenario: Logged in API client wants to remove a vote but has not voted
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep1",
-        "proposalId": "proposal2"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwy"
       }
     }
   }
@@ -54,8 +54,8 @@ Scenario: Logged in API client wants to remove a vote but has not voted
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep3",
-        "proposalId": "proposal11"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMw==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWwxMQ=="
       }
     }
   }
@@ -92,8 +92,8 @@ Scenario: Logged in API client wants to remove a vote
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep4",
-        "proposalId": "proposal7"
+        "stepId": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwNA==",
+        "proposalId": "UHJvcG9zYWw6cHJvcG9zYWw3"
       }
     }
   }
@@ -104,7 +104,7 @@ Scenario: Logged in API client wants to remove a vote
     "data": {
       "removeProposalVote": {
         "proposal": {
-          "id": "proposal7"
+          "id": "UHJvcG9zYWw6cHJvcG9zYWw3"
         }
       }
     }
