@@ -57,7 +57,14 @@ class StepVotesCountDataLoader extends BatchDataLoader
         return $this->getPromiseAdapter()->createAll($connections);
     }
 
-    public function resolve(AbstractStep $step): int
+    protected function serializeKey($key): array
+    {
+        return [
+            'stepId' => $key['step']->getId(),
+        ];
+    }
+
+    private function resolve(AbstractStep $step): int
     {
         if ($step instanceof CollectStep) {
             return $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep($step);
@@ -68,12 +75,5 @@ class StepVotesCountDataLoader extends BatchDataLoader
         }
 
         throw new \RuntimeException('Access denied');
-    }
-
-    protected function serializeKey($key): array
-    {
-        return [
-            'stepId' => $key['step']->getId(),
-        ];
     }
 }
